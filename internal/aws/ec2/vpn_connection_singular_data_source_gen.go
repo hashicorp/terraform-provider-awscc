@@ -70,11 +70,11 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The type of IPv4 address assigned to the outside interface of the customer gateway device.\n Valid values: ``PrivateIpv4`` | ``PublicIpv4``\n Default: ``PublicIpv4``",
+		//	  "description": "The type of IP address assigned to the outside interface of the customer gateway device.\n Valid values: ``PrivateIpv4`` | ``PublicIpv4`` | ``Ipv6``\n Default: ``PublicIpv4``",
 		//	  "type": "string"
 		//	}
 		"outside_ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of IPv4 address assigned to the outside interface of the customer gateway device.\n Valid values: ``PrivateIpv4`` | ``PublicIpv4``\n Default: ``PublicIpv4``",
+			Description: "The type of IP address assigned to the outside interface of the customer gateway device.\n Valid values: ``PrivateIpv4`` | ``PublicIpv4`` | ``Ipv6``\n Default: ``PublicIpv4``",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RemoteIpv4NetworkCidr

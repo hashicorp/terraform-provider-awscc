@@ -292,6 +292,138 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "An array of key-value pairs to apply to this resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: TemplateProviderDetails
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of template providers associated with the project.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Details about the template provider for the SageMaker project.",
+		//	    "oneOf": [
+		//	      {
+		//	        "required": [
+		//	          "CfnTemplateProviderDetail"
+		//	        ]
+		//	      }
+		//	    ],
+		//	    "properties": {
+		//	      "CfnTemplateProviderDetail": {
+		//	        "additionalProperties": false,
+		//	        "description": "CloudFormation template provider details for a SageMaker project.",
+		//	        "properties": {
+		//	          "Parameters": {
+		//	            "description": "A list of parameters used in the CloudFormation template.",
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Key": {
+		//	                  "description": "The key of the parameter.",
+		//	                  "maxLength": 255,
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                },
+		//	                "Value": {
+		//	                  "description": "The value of the parameter.",
+		//	                  "maxLength": 4096,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Key",
+		//	                "Value"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "maxItems": 180,
+		//	            "minItems": 0,
+		//	            "type": "array"
+		//	          },
+		//	          "RoleARN": {
+		//	            "description": "The Amazon Resource Name (ARN) of the IAM role used by the template provider.",
+		//	            "maxLength": 2048,
+		//	            "minLength": 20,
+		//	            "pattern": "arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+",
+		//	            "type": "string"
+		//	          },
+		//	          "TemplateName": {
+		//	            "description": "The name of the template used for the project.",
+		//	            "maxLength": 32,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "TemplateURL": {
+		//	            "description": "The URL of the CloudFormation template.",
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "TemplateName",
+		//	          "TemplateURL"
+		//	        ],
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 1,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"template_provider_details": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CfnTemplateProviderDetail
+					"cfn_template_provider_detail": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Parameters
+							"parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Key
+										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The key of the parameter.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The value of the parameter.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "A list of parameters used in the CloudFormation template.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: RoleARN
+							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) of the IAM role used by the template provider.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TemplateName
+							"template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the template used for the project.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TemplateURL
+							"template_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The URL of the CloudFormation template.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "CloudFormation template provider details for a SageMaker project.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of template providers associated with the project.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -309,8 +441,10 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Project").WithTerraformTypeName("awscc_sagemaker_project")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"cfn_template_provider_detail":       "CfnTemplateProviderDetail",
 		"creation_time":                      "CreationTime",
 		"key":                                "Key",
+		"parameters":                         "Parameters",
 		"path_id":                            "PathId",
 		"product_id":                         "ProductId",
 		"project_arn":                        "ProjectArn",
@@ -322,9 +456,13 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"provisioned_product_status_message": "ProvisionedProductStatusMessage",
 		"provisioning_artifact_id":           "ProvisioningArtifactId",
 		"provisioning_parameters":            "ProvisioningParameters",
+		"role_arn":                           "RoleARN",
 		"service_catalog_provisioned_product_details": "ServiceCatalogProvisionedProductDetails",
 		"service_catalog_provisioning_details":        "ServiceCatalogProvisioningDetails",
 		"tags":                                        "Tags",
+		"template_name":                               "TemplateName",
+		"template_provider_details":                   "TemplateProviderDetails",
+		"template_url":                                "TemplateURL",
 		"value":                                       "Value",
 	})
 

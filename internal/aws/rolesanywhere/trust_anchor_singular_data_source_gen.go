@@ -122,8 +122,7 @@ func trustAnchorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "SourceType": {
 		//	      "enum": [
 		//	        "AWS_ACM_PCA",
-		//	        "CERTIFICATE_BUNDLE",
-		//	        "SELF_SIGNED_REPOSITORY"
+		//	        "CERTIFICATE_BUNDLE"
 		//	      ],
 		//	      "type": "string"
 		//	    }

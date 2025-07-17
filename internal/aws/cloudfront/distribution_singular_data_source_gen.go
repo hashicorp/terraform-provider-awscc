@@ -853,6 +853,10 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	            },
 		//	            "type": "object"
 		//	          },
+		//	          "ResponseCompletionTimeout": {
+		//	            "description": "",
+		//	            "type": "integer"
+		//	          },
 		//	          "S3OriginConfig": {
 		//	            "additionalProperties": false,
 		//	            "description": "Use this type to specify an origin that is an Amazon S3 bucket that is not configured with static website hosting. To specify any other type of origin, including an Amazon S3 bucket that is configured with static website hosting, use the ``CustomOriginConfig`` type instead.",
@@ -861,6 +865,11 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	                "default": "",
 		//	                "description": "If you're using origin access control (OAC) instead of origin access identity, specify an empty ``OriginAccessIdentity`` element. For more information, see [Restricting access to an](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-origin.html) in the *Amazon CloudFront Developer Guide*.\n  The CloudFront origin access identity to associate with the origin. Use an origin access identity to configure the origin so that viewers can *only* access objects in an Amazon S3 bucket through CloudFront. The format of the value is:\n  ``origin-access-identity/cloudfront/ID-of-origin-access-identity`` \n The ``ID-of-origin-access-identity`` is the value that CloudFront returned in the ``ID`` element when you created the origin access identity.\n If you want viewers to be able to access objects using either the CloudFront URL or the Amazon S3 URL, specify an empty ``OriginAccessIdentity`` element.\n To delete the origin access identity from an existing distribution, update the distribution configuration and include an empty ``OriginAccessIdentity`` element.\n To replace the origin access identity, update the distribution configuration and specify the new origin access identity.\n For more information about the origin access identity, see [Serving Private Content through CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html) in the *Amazon CloudFront Developer Guide*.",
 		//	                "type": "string"
+		//	              },
+		//	              "OriginReadTimeout": {
+		//	                "default": 30,
+		//	                "description": "",
+		//	                "type": "integer"
 		//	              }
 		//	            },
 		//	            "type": "object"
@@ -1767,12 +1776,22 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 								Description: "CloudFront Origin Shield. Using Origin Shield can help reduce the load on your origin.\n For more information, see [Using Origin Shield](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html) in the *Amazon CloudFront Developer Guide*.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
+							// Property: ResponseCompletionTimeout
+							"response_completion_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 							// Property: S3OriginConfig
 							"s3_origin_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: OriginAccessIdentity
 									"origin_access_identity": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "If you're using origin access control (OAC) instead of origin access identity, specify an empty ``OriginAccessIdentity`` element. For more information, see [Restricting access to an](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-origin.html) in the *Amazon CloudFront Developer Guide*.\n  The CloudFront origin access identity to associate with the origin. Use an origin access identity to configure the origin so that viewers can *only* access objects in an Amazon S3 bucket through CloudFront. The format of the value is:\n  ``origin-access-identity/cloudfront/ID-of-origin-access-identity`` \n The ``ID-of-origin-access-identity`` is the value that CloudFront returned in the ``ID`` element when you created the origin access identity.\n If you want viewers to be able to access objects using either the CloudFront URL or the Amazon S3 URL, specify an empty ``OriginAccessIdentity`` element.\n To delete the origin access identity from an existing distribution, update the distribution configuration and include an empty ``OriginAccessIdentity`` element.\n To replace the origin access identity, update the distribution configuration and specify the new origin access identity.\n For more information about the origin access identity, see [Serving Private Content through CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html) in the *Amazon CloudFront Developer Guide*.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: OriginReadTimeout
+									"origin_read_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
@@ -2115,6 +2134,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"realtime_log_config_arn":         "RealtimeLogConfigArn",
 		"required":                        "Required",
 		"response_code":                   "ResponseCode",
+		"response_completion_timeout":     "ResponseCompletionTimeout",
 		"response_headers_policy_id":      "ResponseHeadersPolicyId",
 		"response_page_path":              "ResponsePagePath",
 		"restriction_type":                "RestrictionType",

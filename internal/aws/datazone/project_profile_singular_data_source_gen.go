@@ -97,6 +97,231 @@ func projectProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		"domain_unit_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: EnvironmentConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "AwsAccount": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "AwsAccountId": {
+		//	            "pattern": "^\\d{12}$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "AwsAccountId"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "AwsRegion": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "RegionName": {
+		//	            "maxLength": 16,
+		//	            "minLength": 4,
+		//	            "pattern": "^[a-z]{2}-?(iso|gov)?-{1}[a-z]*-{1}[0-9]$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "RegionName"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "ConfigurationParameters": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "ParameterOverrides": {
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "IsEditable": {
+		//	                  "type": "boolean"
+		//	                },
+		//	                "Name": {
+		//	                  "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$",
+		//	                  "type": "string"
+		//	                },
+		//	                "Value": {
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array"
+		//	          },
+		//	          "ResolvedParameters": {
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "IsEditable": {
+		//	                  "type": "boolean"
+		//	                },
+		//	                "Name": {
+		//	                  "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$",
+		//	                  "type": "string"
+		//	                },
+		//	                "Value": {
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array"
+		//	          },
+		//	          "SsmPath": {
+		//	            "maxLength": 2048,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "DeploymentMode": {
+		//	        "enum": [
+		//	          "ON_CREATE",
+		//	          "ON_DEMAND"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "DeploymentOrder": {
+		//	        "maximum": 16,
+		//	        "minimum": 0,
+		//	        "type": "number"
+		//	      },
+		//	      "Description": {
+		//	        "maxLength": 2048,
+		//	        "type": "string"
+		//	      },
+		//	      "EnvironmentBlueprintId": {
+		//	        "pattern": "^[a-zA-Z0-9_-]{1,36}$",
+		//	        "type": "string"
+		//	      },
+		//	      "Id": {
+		//	        "pattern": "^[a-zA-Z0-9_-]{1,36}$",
+		//	        "type": "string"
+		//	      },
+		//	      "Name": {
+		//	        "maxLength": 64,
+		//	        "minLength": 1,
+		//	        "pattern": "^[\\w -]+$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "AwsRegion",
+		//	      "EnvironmentBlueprintId",
+		//	      "Name"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"environment_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AwsAccount
+					"aws_account": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AwsAccountId
+							"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: AwsRegion
+					"aws_region": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: RegionName
+							"region_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: ConfigurationParameters
+					"configuration_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ParameterOverrides
+							"parameter_overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: IsEditable
+										"is_editable": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ResolvedParameters
+							"resolved_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: IsEditable
+										"is_editable": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: SsmPath
+							"ssm_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: DeploymentMode
+					"deployment_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: DeploymentOrder
+					"deployment_order": schema.Float64Attribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: EnvironmentBlueprintId
+					"environment_blueprint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -170,18 +395,33 @@ func projectProfileDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::ProjectProfile").WithTerraformTypeName("awscc_datazone_project_profile")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"created_at":             "CreatedAt",
-		"created_by":             "CreatedBy",
-		"description":            "Description",
-		"domain_id":              "DomainId",
-		"domain_identifier":      "DomainIdentifier",
-		"domain_unit_id":         "DomainUnitId",
-		"domain_unit_identifier": "DomainUnitIdentifier",
-		"identifier":             "Identifier",
-		"last_updated_at":        "LastUpdatedAt",
-		"name":                   "Name",
-		"project_profile_id":     "Id",
-		"status":                 "Status",
+		"aws_account":                "AwsAccount",
+		"aws_account_id":             "AwsAccountId",
+		"aws_region":                 "AwsRegion",
+		"configuration_parameters":   "ConfigurationParameters",
+		"created_at":                 "CreatedAt",
+		"created_by":                 "CreatedBy",
+		"deployment_mode":            "DeploymentMode",
+		"deployment_order":           "DeploymentOrder",
+		"description":                "Description",
+		"domain_id":                  "DomainId",
+		"domain_identifier":          "DomainIdentifier",
+		"domain_unit_id":             "DomainUnitId",
+		"domain_unit_identifier":     "DomainUnitIdentifier",
+		"environment_blueprint_id":   "EnvironmentBlueprintId",
+		"environment_configurations": "EnvironmentConfigurations",
+		"id":                         "Id",
+		"identifier":                 "Identifier",
+		"is_editable":                "IsEditable",
+		"last_updated_at":            "LastUpdatedAt",
+		"name":                       "Name",
+		"parameter_overrides":        "ParameterOverrides",
+		"project_profile_id":         "Id",
+		"region_name":                "RegionName",
+		"resolved_parameters":        "ResolvedParameters",
+		"ssm_path":                   "SsmPath",
+		"status":                     "Status",
+		"value":                      "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

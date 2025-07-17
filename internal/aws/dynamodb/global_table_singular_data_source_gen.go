@@ -351,6 +351,36 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END NESTED OBJECT*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: GlobalTableWitnesses
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Region": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 1,
+		//	  "minItems": 1,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"global_table_witnesses": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Region
+					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: KeySchema
 		// CloudFormation resource type schema:
 		//
@@ -498,6 +528,19 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: MultiRegionConsistency
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "EVENTUAL",
+		//	    "STRONG"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"multi_region_consistency": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Replicas
@@ -1371,6 +1414,7 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"disable_scale_in":                     "DisableScaleIn",
 		"enabled":                              "Enabled",
 		"global_secondary_indexes":             "GlobalSecondaryIndexes",
+		"global_table_witnesses":               "GlobalTableWitnesses",
 		"index_name":                           "IndexName",
 		"key":                                  "Key",
 		"key_schema":                           "KeySchema",
@@ -1382,6 +1426,7 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"max_read_request_units":               "MaxReadRequestUnits",
 		"max_write_request_units":              "MaxWriteRequestUnits",
 		"min_capacity":                         "MinCapacity",
+		"multi_region_consistency":             "MultiRegionConsistency",
 		"non_key_attributes":                   "NonKeyAttributes",
 		"point_in_time_recovery_enabled":       "PointInTimeRecoveryEnabled",
 		"point_in_time_recovery_specification": "PointInTimeRecoverySpecification",

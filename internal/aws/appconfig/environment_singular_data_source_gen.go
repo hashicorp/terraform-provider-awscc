@@ -99,7 +99,6 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "description": "ARN of an AWS Identity and Access Management (IAM) role for AWS AppConfig to monitor AlarmArn.",
 		//	        "maxLength": 2048,
 		//	        "minLength": 20,
-		//	        "pattern": "^((arn):(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):(iam)::\\d{12}:role[/].*)$",
 		//	        "relationshipRef": {
 		//	          "propertyPath": "/properties/Arn",
 		//	          "typeName": "AWS::IAM::Role"

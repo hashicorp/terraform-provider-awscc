@@ -6404,9 +6404,9 @@ resource_schema "aws_mpa_approval_team" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::MPA::ApprovalTeam"
   suppression_reason                       = ""
-  suppress_plural_data_source_generation   = false
+  suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
-  suppress_singular_data_source_generation = false
+  suppress_singular_data_source_generation = true
 }
 resource_schema "aws_mpa_identity_source" {
   cloudformation_schema_path               = ""
