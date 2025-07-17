@@ -182,7 +182,7 @@ func writeChangelog(originalContent string, changes []string) string {
 		resource := parts[0]
 		changeType := parts[1]
 
-		if parts[0] != "" || parts[1] != "" {
+		if parts[0] == "" || parts[1] == "" {
 			log.Printf("Processing change: %s - %s\n", resource, changeType)
 			continue
 		}
