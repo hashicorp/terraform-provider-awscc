@@ -19,10 +19,10 @@ import (
 func CheckAWSEnv() error {
 	// List of required AWS environment variables for CloudFormation API access
 	requiredVars := []string{
-		"AWS_DEFAULT_REGION",
-		"AWS_ACCESS_KEY_ID",
-		"AWS_SECRET_ACCESS_KEY",
-		"AWS_SESSION_TOKEN",
+		"AWS_REGION",
+		"aws-access-key-id",
+		"aws-secret-access-key",
+		"update-schema-session",
 	}
 
 	// Verify all required variables are set
@@ -34,8 +34,8 @@ func CheckAWSEnv() error {
 	}
 
 	// Ensure AWS region is set to the expected value for CloudFormation schema access
-	if os.Getenv("AWS_DEFAULT_REGION") != AWSRegion {
-		return fmt.Errorf("AWS_DEFAULT_REGION must be set to %s", AWSRegion)
+	if os.Getenv("AWS_REGION") != AWSRegion {
+		return fmt.Errorf("AWS_REGION must be set to %s", AWSRegion)
 	}
 
 	return nil
