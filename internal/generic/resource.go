@@ -16,8 +16,10 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/identityschema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
@@ -195,6 +197,14 @@ func resourceWithConfigValidators(vs ...resource.ConfigValidator) ResourceOption
 	}
 }
 
+func resourceWithPrimaryIdentifier(vs ...string) ResourceOptionsFunc {
+	return func(o *genericResource) error {
+		o.primaryIdentifier = vs
+
+		return nil
+	}
+}
+
 // ResourceOptions is a type alias for a slice of resource type functional options.
 type ResourceOptions []ResourceOptionsFunc
 
@@ -278,6 +288,10 @@ func (opts ResourceOptions) WithConfigValidators(vs ...resource.ConfigValidator)
 	return append(opts, resourceWithConfigValidators(vs...))
 }
 
+func (opts ResourceOptions) WithPrimaryIdentifier(v ...string) ResourceOptions {
+	return append(opts, resourceWithPrimaryIdentifier(v...))
+}
+
 // NewResource returns a new Resource from the specified varidaic list of functional options.
 // It's public as it's called from generated code.
 func NewResource(_ context.Context, optFns ...ResourceOptionsFunc) (resource.Resource, error) {
@@ -315,6 +329,7 @@ type genericResource struct {
 	deleteTimeout           time.Duration              // Maximum wait time for resource deletion
 	configValidators        []resource.ConfigValidator // Required attributes validators
 	provider                tfcloudcontrol.Provider
+	primaryIdentifier       []string
 }
 
 var (
@@ -425,6 +440,20 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 		return
 	}
 
+	// set resource identity
+	for _, v := range r.primaryIdentifier {
+		var out types.String
+		response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v), &out)...)
+		if response.Diagnostics.HasError() {
+			return
+		}
+
+		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(v), out.ValueString())...)
+		if response.Diagnostics.HasError() {
+			return
+		}
+	}
+
 	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
 		"value": hclog.Fmt("%v", response.State.Raw),
 	})
@@ -499,6 +528,20 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 		response.Diagnostics.Append(ResourceIdentifierNotSetDiag(err))
 
 		return
+	}
+
+	// set resource identity
+	for _, v := range r.primaryIdentifier {
+		var out types.String
+		response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v), &out)...)
+		if response.Diagnostics.HasError() {
+			return
+		}
+
+		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(v), out.ValueString())...)
+		if response.Diagnostics.HasError() {
+			return
+		}
 	}
 
 	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
@@ -661,16 +704,48 @@ func (r *genericResource) Delete(ctx context.Context, request resource.DeleteReq
 	traceExit(ctx, "Resource.Delete")
 }
 
+func (r *genericResource) IdentitySchema(_ context.Context, _ resource.IdentitySchemaRequest, response *resource.IdentitySchemaResponse) {
+	identitySchemaAttributes := make(map[string]identityschema.Attribute)
+	for _, v := range r.primaryIdentifier {
+		identitySchemaAttributes[v] = identityschema.StringAttribute{
+			RequiredForImport: true,
+		}
+	}
+
+	response.IdentitySchema = identityschema.Schema{
+		Attributes: identitySchemaAttributes,
+	}
+}
+
 func (r *genericResource) ImportState(ctx context.Context, request resource.ImportStateRequest, response *resource.ImportStateResponse) {
 	ctx = r.bootstrapContext(ctx)
 
 	traceEntry(ctx, "Resource.ImportState")
 
-	tflog.Debug(ctx, "Request.ID", map[string]interface{}{
-		"value": hclog.Fmt("%v", request.ID),
-	})
+	if request.ID != "" {
+		tflog.Debug(ctx, "Request.ID", map[string]interface{}{
+			"value": hclog.Fmt("%v", request.ID),
+		})
 
-	resource.ImportStatePassthroughID(ctx, idAttributePath, request, response)
+		resource.ImportStatePassthroughID(ctx, idAttributePath, request, response)
+
+		traceExit(ctx, "Resource.ImportState")
+		return
+	}
+
+	var identifier []string
+	for _, v := range r.primaryIdentifier {
+		var out types.String
+		response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(v), &out)...)
+		if response.Diagnostics.HasError() {
+			return
+		}
+
+		identifier = append(identifier, out.ValueString())
+	}
+
+	id := strings.Join(identifier, "|")
+	response.Diagnostics.Append(response.State.SetAttribute(ctx, idAttributePath, &id)...)
 
 	traceExit(ctx, "Resource.ImportState")
 }
