@@ -80,12 +80,11 @@ func diffSchemas(newSchemas *allschemas.AvailableSchemas, lastSchemas *allschema
 				newResource.SuppressPluralDataSourceGeneration != lastSchemas.Resources[lastResourceIndex].SuppressPluralDataSourceGeneration ||
 				newResource.ResourceTypeName != lastSchemas.Resources[lastResourceIndex].ResourceTypeName {
 				changedOrNewResources = append(changedOrNewResources, newResource)
-				*changes = append(*changes, fmt.Sprintf("%s - Changed Resource", newResource.CloudFormationTypeName))
 			}
 		} else {
 			// New resource
 			changedOrNewResources = append(changedOrNewResources, newResource)
-			*changes = append(*changes, fmt.Sprintf("%s - New Resource", newResource.CloudFormationTypeName))
+			*changes = append(*changes, fmt.Sprintf("%s - New Resource", newResource.ResourceTypeName))
 
 		}
 	}
@@ -115,23 +114,16 @@ func diffSchemas(newSchemas *allschemas.AvailableSchemas, lastSchemas *allschema
 
 	for _, resource := range changedOrNewResources {
 		if existingResourceIndex, exists := existingResourcesMap[resource.CloudFormationTypeName]; exists {
-			changed := false
 			// Update existing resource
 			curr := existingAllSchemas.Resources[existingResourceIndex]
 			if curr.CloudFormationTypeName != resource.CloudFormationTypeName {
 				existingAllSchemas.Resources[existingResourceIndex].CloudFormationTypeName = resource.CloudFormationTypeName
-				changed = true
 			}
 			if curr.ResourceTypeName != resource.ResourceTypeName {
 				existingAllSchemas.Resources[existingResourceIndex].ResourceTypeName = resource.ResourceTypeName
-				changed = true
 			}
 			if curr.SuppressPluralDataSourceGeneration != resource.SuppressPluralDataSourceGeneration {
 				existingAllSchemas.Resources[existingResourceIndex].SuppressPluralDataSourceGeneration = resource.SuppressPluralDataSourceGeneration
-				changed = true
-			}
-			if changed {
-				*changes = append(*changes, fmt.Sprintf("%s - update", resource.CloudFormationTypeName))
 			}
 		} else {
 			tempResource := &allschemas.ResourceAllSchema{

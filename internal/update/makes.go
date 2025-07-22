@@ -379,24 +379,12 @@ func normalizeNames(cfTypeName string, tfTypeName string) (string, string) {
 
 func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHubConfig, new bool, buildType string, changes *[]string, filePaths *UpdateFilePaths, allSchemas *allschemas.AllSchemas) error {
 
-	log.Println("Suppressing resource:", cfTypeName)
-	switch buildType {
-	case BuildTypeSingularDataSources:
-		*changes = append(*changes, fmt.Sprintf("%s - New Single Data Source Suppression", cfTypeName))
-	case BuildTypePluralDataSources:
-		*changes = append(*changes, fmt.Sprintf("%s - New Plural Data Source Suppression", cfTypeName))
+	// Create a GitHub issue for the schema error
+	issueURL, err := createIssue(ctx, cfTypeName, schemaError, config, filePaths.RepositoryLink)
+	if err != nil {
+		log.Printf("Warning: Failed to create GitHub issue: %v", err)
+		issueURL = "" // Use empty string if issue creation fails
 	}
-
-	// Store the change data as a string for later use
-
-	/*
-		issueURL, err := createIssue(ctx, cfTypeName, schemaError, config, filePaths.RepositoryLink)
-		if err != nil {
-			log.Printf("Warning: Failed to create GitHub issue: %v", err)
-			issueURL = "" // Use empty string if issue creation fails
-		}
-	*/
-	var issueURL = ""
 
 	// Add to all_schemas.hcl
 	if buildType != BuildTypeSchemas || new {
@@ -448,7 +436,7 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHu
 		}
 	}
 
-	err := writeSchemasToHCLFile(allSchemas, filePaths.AllSchemasHCL)
+	err = writeSchemasToHCLFile(allSchemas, filePaths.AllSchemasHCL)
 	if err != nil {
 		return fmt.Errorf("failed to write schemas to HCL file: %w", err)
 	}
