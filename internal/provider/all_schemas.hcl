@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1168 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1197 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -29,6 +29,10 @@ resource_schema "aws_acmpca_certificate_authority_activation" {
 resource_schema "aws_acmpca_permission" {
   cloudformation_type_name               = "AWS::ACMPCA::Permission"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_aiops_investigation_group" {
+  cloudformation_type_name = "AWS::AIOps::InvestigationGroup"
 }
 
 resource_schema "aws_aps_rule_groups_namespace" {
@@ -1865,6 +1869,18 @@ resource_schema "aws_ec2_subnet_route_table_association" {
   cloudformation_type_name = "AWS::EC2::SubnetRouteTableAssociation"
 }
 
+resource_schema "aws_ec2_traffic_mirror_filter" {
+  cloudformation_type_name = "AWS::EC2::TrafficMirrorFilter"
+}
+
+resource_schema "aws_ec2_traffic_mirror_filter_rule" {
+  cloudformation_type_name = "AWS::EC2::TrafficMirrorFilterRule"
+}
+
+resource_schema "aws_ec2_traffic_mirror_target" {
+  cloudformation_type_name = "AWS::EC2::TrafficMirrorTarget"
+}
+
 resource_schema "aws_ec2_transit_gateway" {
   cloudformation_type_name = "AWS::EC2::TransitGateway"
 }
@@ -2183,22 +2199,15 @@ resource_schema "aws_elasticbeanstalk_environment" {
 
 resource_schema "aws_elasticloadbalancingv2_listener" {
   cloudformation_type_name               = "AWS::ElasticLoadBalancingV2::Listener"
-  suppress_plural_data_source_generation = true
 
   # Suppression Reason: error creating write-only attribute path (/properties/DefaultActions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1521
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_elasticloadbalancingv2_listener_rule" {
   cloudformation_type_name               = "AWS::ElasticLoadBalancingV2::ListenerRule"
-  suppress_plural_data_source_generation = true
-
   # Suppression Reason:  error creating write-only attribute path (/properties/Actions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1521
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_elasticloadbalancingv2_load_balancer" {
@@ -2267,12 +2276,9 @@ resource_schema "aws_events_archive" {
 
 resource_schema "aws_events_connection" {
   cloudformation_type_name = "AWS::Events::Connection"
-
   # Suppression Update: the latest schema refer `Password` with type string.
   # Historical suppression Reason: error creating write-only attribute path (/definitions/BasicAuthParameters/Password): expected "properties" for the second property path segment, got: "definitions"
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1521
-  suppress_resource_generation             = false
-  suppress_singular_data_source_generation = false
 }
 
 resource_schema "aws_events_endpoint" {
@@ -2338,6 +2344,10 @@ resource_schema "aws_fms_resource_set" {
 
 resource_schema "aws_fsx_data_repository_association" {
   cloudformation_type_name = "AWS::FSx::DataRepositoryAssociation"
+}
+
+resource_schema "aws_fsx_s3_access_point_attachment" {
+  cloudformation_type_name = "AWS::FSx::S3AccessPointAttachment"
 }
 
 resource_schema "aws_finspace_environment" {
@@ -3069,6 +3079,10 @@ resource_schema "aws_kinesis_stream" {
   cloudformation_type_name = "AWS::Kinesis::Stream"
 }
 
+resource_schema "aws_kinesis_stream_consumer" {
+  cloudformation_type_name = "AWS::Kinesis::StreamConsumer"
+}
+
 resource_schema "aws_kinesisanalyticsv2_application" {
   cloudformation_type_name = "AWS::KinesisAnalyticsV2::Application"
 }
@@ -3353,6 +3367,20 @@ resource_schema "aws_m2_environment" {
   cloudformation_type_name = "AWS::M2::Environment"
 }
 
+resource_schema "aws_mpa_approval_team" {
+  cloudformation_type_name = "AWS::MPA::ApprovalTeam"
+
+  # Suppression Reason: Policies is of unsupported type: set of ""
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1510
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_mpa_identity_source" {
+  cloudformation_type_name = "AWS::MPA::IdentitySource"
+}
+
 resource_schema "aws_msk_batch_scram_secret" {
   cloudformation_type_name               = "AWS::MSK::BatchScramSecret"
   suppress_plural_data_source_generation = true
@@ -3600,6 +3628,10 @@ resource_schema "aws_neptune_db_cluster_parameter_group" {
   cloudformation_type_name = "AWS::Neptune::DBClusterParameterGroup"
 }
 
+resource_schema "aws_neptune_db_instance" {
+  cloudformation_type_name = "AWS::Neptune::DBInstance"
+}
+
 resource_schema "aws_neptune_db_parameter_group" {
   cloudformation_type_name = "AWS::Neptune::DBParameterGroup"
 }
@@ -3770,6 +3802,22 @@ resource_schema "aws_notifications_notification_hub" {
 
 resource_schema "aws_notificationscontacts_email_contact" {
   cloudformation_type_name = "AWS::NotificationsContacts::EmailContact"
+}
+
+resource_schema "aws_odb_cloud_autonomous_vm_cluster" {
+  cloudformation_type_name = "AWS::ODB::CloudAutonomousVmCluster"
+}
+
+resource_schema "aws_odb_cloud_exadata_infrastructure" {
+  cloudformation_type_name = "AWS::ODB::CloudExadataInfrastructure"
+}
+
+resource_schema "aws_odb_cloud_vm_cluster" {
+  cloudformation_type_name = "AWS::ODB::CloudVmCluster"
+}
+
+resource_schema "aws_odb_odb_network" {
+  cloudformation_type_name = "AWS::ODB::OdbNetwork"
 }
 
 resource_schema "aws_osis_pipeline" {
@@ -4218,6 +4266,10 @@ resource_schema "aws_redshiftserverless_namespace" {
   cloudformation_type_name = "AWS::RedshiftServerless::Namespace"
 }
 
+resource_schema "aws_redshiftserverless_snapshot" {
+  cloudformation_type_name = "AWS::RedshiftServerless::Snapshot"
+}
+
 resource_schema "aws_redshiftserverless_workgroup" {
   cloudformation_type_name = "AWS::RedshiftServerless::Workgroup"
 }
@@ -4519,6 +4571,16 @@ resource_schema "aws_s3outposts_bucket_policy" {
 
 resource_schema "aws_s3outposts_endpoint" {
   cloudformation_type_name = "AWS::S3Outposts::Endpoint"
+}
+
+resource_schema "aws_s3tables_namespace" {
+  cloudformation_type_name               = "AWS::S3Tables::Namespace"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_s3tables_table" {
+  cloudformation_type_name               = "AWS::S3Tables::Table"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_s3tables_table_bucket" {
@@ -4848,6 +4910,10 @@ resource_schema "aws_secretsmanager_secret_target_attachment" {
   cloudformation_type_name = "AWS::SecretsManager::SecretTargetAttachment"
 }
 
+resource_schema "aws_securityhub_aggregator_v2" {
+  cloudformation_type_name = "AWS::SecurityHub::AggregatorV2"
+}
+
 resource_schema "aws_securityhub_automation_rule" {
   cloudformation_type_name = "AWS::SecurityHub::AutomationRule"
 
@@ -4857,6 +4923,10 @@ resource_schema "aws_securityhub_automation_rule" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_securityhub_automation_rule_v2" {
+  cloudformation_type_name = "AWS::SecurityHub::AutomationRuleV2"
 }
 
 resource_schema "aws_securityhub_configuration_policy" {
@@ -4873,6 +4943,10 @@ resource_schema "aws_securityhub_finding_aggregator" {
 
 resource_schema "aws_securityhub_hub" {
   cloudformation_type_name = "AWS::SecurityHub::Hub"
+}
+
+resource_schema "aws_securityhub_hub_v2" {
+  cloudformation_type_name = "AWS::SecurityHub::HubV2"
 }
 
 resource_schema "aws_securityhub_insight" {
@@ -5263,6 +5337,18 @@ resource_schema "aws_workspaces_connection_alias" {
 
 resource_schema "aws_workspaces_workspaces_pool" {
   cloudformation_type_name = "AWS::WorkSpaces::WorkspacesPool"
+}
+
+resource_schema "aws_workspacesinstances_volume" {
+  cloudformation_type_name = "AWS::WorkspacesInstances::Volume"
+}
+
+resource_schema "aws_workspacesinstances_volume_association" {
+  cloudformation_type_name = "AWS::WorkspacesInstances::VolumeAssociation"
+}
+
+resource_schema "aws_workspacesinstances_workspace_instance" {
+  cloudformation_type_name = "AWS::WorkspacesInstances::WorkspaceInstance"
 }
 
 resource_schema "aws_workspacesthinclient_environment" {

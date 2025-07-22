@@ -95,18 +95,18 @@ Read-Only:
 
 Read-Only:
 
-- `access_configs` (Attributes List) An array of access configuration objects that tell Lambda how to authenticate with your schema registry. (see [below for nested schema](#nestedatt--amazon_managed_kafka_event_source_config--schema_registry_config--access_configs))
-- `event_record_format` (String) The record format that Lambda delivers to your function after schema validation.
-- `schema_registry_uri` (String) The URI for your schema registry. The correct URI format depends on the type of schema registry you're using.
-- `schema_validation_configs` (Attributes List) An array of schema validation configuration objects, which tell Lambda the message attributes you want to validate and filter using your schema registry. (see [below for nested schema](#nestedatt--amazon_managed_kafka_event_source_config--schema_registry_config--schema_validation_configs))
+- `access_configs` (Attributes List) (see [below for nested schema](#nestedatt--amazon_managed_kafka_event_source_config--schema_registry_config--access_configs))
+- `event_record_format` (String)
+- `schema_registry_uri` (String)
+- `schema_validation_configs` (Attributes List) (see [below for nested schema](#nestedatt--amazon_managed_kafka_event_source_config--schema_registry_config--schema_validation_configs))
 
 <a id="nestedatt--amazon_managed_kafka_event_source_config--schema_registry_config--access_configs"></a>
 ### Nested Schema for `amazon_managed_kafka_event_source_config.schema_registry_config.access_configs`
 
 Read-Only:
 
-- `type` (String) The type of authentication Lambda uses to access your schema registry.
-- `uri` (String) The URI of the secret (Secrets Manager secret ARN) to authenticate with your schema registry.
+- `type` (String)
+- `uri` (String)
 
 
 <a id="nestedatt--amazon_managed_kafka_event_source_config--schema_registry_config--schema_validation_configs"></a>
@@ -114,7 +114,7 @@ Read-Only:
 
 Read-Only:
 
-- `attribute` (String) The attribute you want your schema registry to validate and filter for.
+- `attribute` (String)
 
 
 
@@ -217,18 +217,18 @@ Read-Only:
 
 Read-Only:
 
-- `access_configs` (Attributes List) An array of access configuration objects that tell Lambda how to authenticate with your schema registry. (see [below for nested schema](#nestedatt--self_managed_kafka_event_source_config--schema_registry_config--access_configs))
-- `event_record_format` (String) The record format that Lambda delivers to your function after schema validation.
-- `schema_registry_uri` (String) The URI for your schema registry. The correct URI format depends on the type of schema registry you're using.
-- `schema_validation_configs` (Attributes List) An array of schema validation configuration objects, which tell Lambda the message attributes you want to validate and filter using your schema registry. (see [below for nested schema](#nestedatt--self_managed_kafka_event_source_config--schema_registry_config--schema_validation_configs))
+- `access_configs` (Attributes List) (see [below for nested schema](#nestedatt--self_managed_kafka_event_source_config--schema_registry_config--access_configs))
+- `event_record_format` (String)
+- `schema_registry_uri` (String)
+- `schema_validation_configs` (Attributes List) (see [below for nested schema](#nestedatt--self_managed_kafka_event_source_config--schema_registry_config--schema_validation_configs))
 
 <a id="nestedatt--self_managed_kafka_event_source_config--schema_registry_config--access_configs"></a>
 ### Nested Schema for `self_managed_kafka_event_source_config.schema_registry_config.access_configs`
 
 Read-Only:
 
-- `type` (String) The type of authentication Lambda uses to access your schema registry.
-- `uri` (String) The URI of the secret (Secrets Manager secret ARN) to authenticate with your schema registry.
+- `type` (String)
+- `uri` (String)
 
 
 <a id="nestedatt--self_managed_kafka_event_source_config--schema_registry_config--schema_validation_configs"></a>
@@ -236,7 +236,7 @@ Read-Only:
 
 Read-Only:
 
-- `attribute` (String) The attribute you want your schema registry to validate and filter for.
+- `attribute` (String)
 
 
 

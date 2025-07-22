@@ -35,7 +35,9 @@
   "primaryIdentifier": [
     "/properties/ResolverRuleAssociationId"
   ],
-  "taggable": false,
+  "tagging": {
+    "taggable": false
+  },
   "handlers": {
     "create": {
       "permissions": [

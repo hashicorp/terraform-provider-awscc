@@ -26,7 +26,7 @@ Create an AWS Secrets Manager secret
 
 ```terraform
 resource "awscc_secretsmanager_secret" "example" {
-  name = "example"
+  name        = "example"
   description = "this is a user-provided description of the secret"
 }
 ```
@@ -40,9 +40,9 @@ resource "awscc_secretsmanager_secret" "example_replica" {
 
   replica_regions = [{
     region = "ap-southeast-1"
-  },
-  {
-    region = "ap-southeast-2"
+    },
+    {
+      region = "ap-southeast-2"
   }]
 }
 ```
@@ -120,6 +120,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_secretsmanager_secret.example
+  id = "id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_secretsmanager_secret.example "id"

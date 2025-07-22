@@ -91,7 +91,7 @@ data "aws_caller_identity" "current" {}
 
 resource "awscc_logs_log_group" "example" {
   log_group_name = "my-log-group"
-  
+
   data_protection_policy = jsonencode({
     "Name" : "data-protection-policy",
     "Description" : "test description",
@@ -101,7 +101,7 @@ resource "awscc_logs_log_group" "example" {
         "Sid" : "audit-policy test",
         "DataIdentifier" : [
           "arn:aws:dataprotection::aws:data-identifier/EmailAddress",
-          "arn:aws:dataprotection::aws:data-identifier/DriversLicense-US"  
+          "arn:aws:dataprotection::aws:data-identifier/DriversLicense-US"
         ],
         "Operation" : {
           "Audit" : {
@@ -172,6 +172,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_logs_log_group.example
+  id = "log_group_name"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_logs_log_group.example "log_group_name"

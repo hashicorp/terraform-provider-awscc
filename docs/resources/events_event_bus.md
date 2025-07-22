@@ -25,7 +25,7 @@ The following example creates a partner event bus, note that the [event source m
 
 ```terraform
 resource "awscc_events_event_bus" "sample_partner_event_bus" {
-  name = "aws.partner/examplepartner.com/example-eqrry6br"
+  name              = "aws.partner/examplepartner.com/example-eqrry6br"
   event_source_name = "aws.partner/examplepartner.com/example-eqrry6br"
 }
 ```
@@ -70,6 +70,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_events_event_bus.example
+  id = "name"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_events_event_bus.example "name"

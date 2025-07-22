@@ -21,9 +21,9 @@ Creates a Neptune Graph with 16GB provisioned memory, vector search capability w
 ```terraform
 # Create Neptune Graph
 resource "awscc_neptunegraph_graph" "example" {
-  graph_name           = "example-graph-test-20250102"
-  provisioned_memory   = 16
-  deletion_protection  = false
+  graph_name          = "example-graph-test-20250102"
+  provisioned_memory  = 16
+  deletion_protection = false
   public_connectivity = false
   replica_count       = 1
 
@@ -102,6 +102,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_neptunegraph_graph.example
+  id = "graph_id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_neptunegraph_graph.example "graph_id"

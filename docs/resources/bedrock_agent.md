@@ -52,27 +52,27 @@ resource "awscc_bedrock_agent" "example" {
 }
 
 variable "bucket_name" {
-  type    = string
+  type = string
 }
 
 variable "bucket_object_key" {
-  type    = string
+  type = string
 }
 
 variable "agent_role_arn" {
-  type    = string
+  type = string
 }
 
 variable "knowledge_base_id" {
-  type    = string
+  type = string
 }
 
 variable "kms_key_arn" {
-  type    = string
+  type = string
 }
 
 variable "lambda_arn" {
-  type    = string
+  type = string
 }
 ```
 
@@ -297,6 +297,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_bedrock_agent.example
+  id = "agent_id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_bedrock_agent.example "agent_id"

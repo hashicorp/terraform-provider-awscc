@@ -14,7 +14,7 @@ Resource Type definition for AWS::EC2::EgressOnlyInternetGateway
 To create ec2 egress only internet_gateway
 ```terraform
 resource "awscc_ec2_vpc" "example" {
-  cidr_block  = "10.1.0.0/16"
+  cidr_block = "10.1.0.0/16"
 }
 
 resource "awscc_ec2_egress_only_internet_gateway" "example" {
@@ -49,6 +49,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_ec2_egress_only_internet_gateway.example
+  id = "id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_ec2_egress_only_internet_gateway.example "id"

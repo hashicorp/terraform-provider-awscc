@@ -78,7 +78,7 @@ resource "awscc_iam_role" "image_builder_role" {
 # Create instance profile
 resource "awscc_iam_instance_profile" "image_builder_profile" {
   instance_profile_name = "ImageBuilderInstanceProfile"
-  roles                = [awscc_iam_role.image_builder_role.role_name]
+  roles                 = [awscc_iam_role.image_builder_role.role_name]
 }
 
 # Create VPC resources
@@ -140,7 +140,7 @@ resource "awscc_imagebuilder_infrastructure_configuration" "example" {
   tags = [{
     key   = "Environment"
     value = "Test"
-  }, {
+    }, {
     key   = "Modified By"
     value = "AWSCC"
   }]
@@ -214,6 +214,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_imagebuilder_infrastructure_configuration.example
+  id = "arn"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_imagebuilder_infrastructure_configuration.example "arn"

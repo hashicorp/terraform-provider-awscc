@@ -22,7 +22,7 @@ Creates an enabled Macie session with findings published every fifteen minutes t
 # Create Macie Session
 resource "awscc_macie_session" "example" {
   finding_publishing_frequency = "FIFTEEN_MINUTES"
-  status                      = "ENABLED"
+  status                       = "ENABLED"
 }
 ```
 
@@ -44,6 +44,17 @@ resource "awscc_macie_session" "example" {
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_macie_session.example
+  id = "aws_account_id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_macie_session.example "aws_account_id"

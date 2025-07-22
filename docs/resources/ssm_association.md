@@ -25,7 +25,7 @@ data "aws_caller_identity" "current" {}
 
 # Create an AWS SSM Association for running AWS-RunPowerShellScript
 resource "awscc_ssm_association" "example" {
-  name = "AWS-RunPowerShellScript"
+  name             = "AWS-RunPowerShellScript"
   association_name = "example-powershell-association"
 
   targets = [{
@@ -47,8 +47,8 @@ resource "awscc_ssm_association" "example" {
     }
   }
 
-  max_concurrency = "50%"
-  max_errors      = "25%"
+  max_concurrency     = "50%"
+  max_errors          = "25%"
   compliance_severity = "MEDIUM"
 }
 
@@ -168,6 +168,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_ssm_association.example
+  id = "association_id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_ssm_association.example "association_id"

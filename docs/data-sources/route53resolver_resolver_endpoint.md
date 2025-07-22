@@ -24,7 +24,8 @@ Data Source schema for AWS::Route53Resolver::ResolverEndpoint
 - `arn` (String) The Amazon Resource Name (ARN) of the resolver endpoint, such as arn:aws:route53resolver:us-east-1:123456789012:resolver-endpoint/resolver-endpoint-a1bzhi.
 - `direction` (String) Indicates whether the Resolver endpoint allows inbound or outbound DNS queries:
 - INBOUND: allows DNS queries to your VPC from your network 
-- OUTBOUND: allows DNS queries from your VPC to your network
+- OUTBOUND: allows DNS queries from your VPC to your network 
+- INBOUND_DELEGATION: allows DNS queries to your VPC from your network with authoritative answers from private hosted zones
 - `host_vpc_id` (String) The ID of the VPC that you want to create the resolver endpoint in.
 - `ip_address_count` (String) The number of IP addresses that the resolver endpoint can use for DNS queries.
 - `ip_addresses` (Attributes List) The subnets and IP addresses in your VPC that DNS queries originate from (for outbound endpoints) or that you forward DNS queries to (for inbound endpoints). The subnet ID uniquely identifies a VPC. (see [below for nested schema](#nestedatt--ip_addresses))

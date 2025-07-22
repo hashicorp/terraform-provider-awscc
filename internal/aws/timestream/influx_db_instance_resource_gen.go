@@ -56,7 +56,6 @@ func influxDBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
-				int64planmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Arn
@@ -127,7 +126,8 @@ func influxDBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "db.influx.4xlarge",
 		//	    "db.influx.8xlarge",
 		//	    "db.influx.12xlarge",
-		//	    "db.influx.16xlarge"
+		//	    "db.influx.16xlarge",
+		//	    "db.influx.24xlarge"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -145,6 +145,7 @@ func influxDBInstanceResource(ctx context.Context) (resource.Resource, error) {
 					"db.influx.8xlarge",
 					"db.influx.12xlarge",
 					"db.influx.16xlarge",
+					"db.influx.24xlarge",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -198,7 +199,6 @@ func influxDBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DeploymentType

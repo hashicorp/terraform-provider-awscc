@@ -44,7 +44,13 @@ Optional:
 - `create_shared_folders` (String)
 - `create_spice_dataset` (String)
 - `export_to_csv` (String)
+- `export_to_csv_in_scheduled_reports` (String)
 - `export_to_excel` (String)
+- `export_to_excel_in_scheduled_reports` (String)
+- `export_to_pdf` (String)
+- `export_to_pdf_in_scheduled_reports` (String)
+- `include_content_in_scheduled_reports_email` (String)
+- `print_reports` (String)
 - `rename_shared_folders` (String)
 - `share_analyses` (String)
 - `share_dashboards` (String)
@@ -65,6 +71,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_quicksight_custom_permissions.example
+  id = "aws_account_id|custom_permissions_name"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_quicksight_custom_permissions.example "aws_account_id|custom_permissions_name"

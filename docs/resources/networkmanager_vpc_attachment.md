@@ -162,7 +162,9 @@ resource "awscc_networkmanager_vpc_attachment" "example" {
 Optional:
 
 - `appliance_mode_support` (Boolean) Indicates whether to enable ApplianceModeSupport Support for Vpc Attachment. Valid Values: true | false
+- `dns_support` (Boolean) Indicates whether to enable private DNS Support for Vpc Attachment. Valid Values: true | false
 - `ipv_6_support` (Boolean) Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable
+- `security_group_referencing_support` (Boolean) Indicates whether to enable Security Group Referencing Support for Vpc Attachment. Valid Values: true | false
 
 
 <a id="nestedatt--proposed_network_function_group_change"></a>
@@ -214,6 +216,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_networkmanager_vpc_attachment.example
+  id = "attachment_id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_networkmanager_vpc_attachment.example "attachment_id"

@@ -1,6 +1,6 @@
 resource "awscc_efs_mount_target" "main" {
-  file_system_id = awscc_efs_file_system.main.id
-  subnet_id      = awscc_ec2_subnet.main.id
+  file_system_id  = awscc_efs_file_system.main.id
+  subnet_id       = awscc_ec2_subnet.main.id
   security_groups = ["sg-xxxxxx"]
 }
 

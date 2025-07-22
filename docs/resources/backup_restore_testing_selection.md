@@ -30,7 +30,7 @@ resource "awscc_backup_restore_testing_plan" "example" {
     recovery_point_arn = "${aws_backup_vault.test.arn}/recovery-point/test-recovery-point"
     recovery_point_filters = [
       {
-        created_after = "2024-01-01T00:00:00Z"
+        created_after        = "2024-01-01T00:00:00Z"
         recovery_point_types = ["SNAPSHOT"]
       }
     ]
@@ -40,9 +40,9 @@ resource "awscc_backup_restore_testing_plan" "example" {
 
 resource "awscc_backup_restore_testing_selection" "example" {
   restore_testing_selection_name = "example-restore-testing-selection"
-  restore_testing_plan_name     = awscc_backup_restore_testing_plan.example.restore_testing_plan_name
-  protected_resource_type       = "EC2"
-  iam_role_arn                 = aws_iam_role.example.arn
+  restore_testing_plan_name      = awscc_backup_restore_testing_plan.example.restore_testing_plan_name
+  protected_resource_type        = "EC2"
+  iam_role_arn                   = aws_iam_role.example.arn
 }
 
 # IAM role for AWS Backup restore testing
@@ -154,6 +154,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_backup_restore_testing_selection.example
+  id = "restore_testing_plan_name|restore_testing_selection_name"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_backup_restore_testing_selection.example "restore_testing_plan_name|restore_testing_selection_name"

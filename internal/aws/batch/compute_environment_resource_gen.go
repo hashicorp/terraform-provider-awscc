@@ -8,6 +8,7 @@ package batch
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
@@ -144,6 +145,13 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		//	                "type": "array",
 		//	                "uniqueItems": false
 		//	              },
+		//	              "UserdataType": {
+		//	                "enum": [
+		//	                  "EKS_BOOTSTRAP_SH",
+		//	                  "EKS_NODEADM"
+		//	                ],
+		//	                "type": "string"
+		//	              },
 		//	              "Version": {
 		//	                "type": "string"
 		//	              }
@@ -152,6 +160,13 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		//	          },
 		//	          "type": "array",
 		//	          "uniqueItems": false
+		//	        },
+		//	        "UserdataType": {
+		//	          "enum": [
+		//	            "EKS_BOOTSTRAP_SH",
+		//	            "EKS_NODEADM"
+		//	          ],
+		//	          "type": "string"
 		//	        },
 		//	        "Version": {
 		//	          "type": "string"
@@ -361,6 +376,20 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
+									// Property: UserdataType
+									"userdata_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"EKS_BOOTSTRAP_SH",
+												"EKS_NODEADM",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
 									// Property: Version
 									"version": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Optional: true,
@@ -376,6 +405,20 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: UserdataType
+						"userdata_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"EKS_BOOTSTRAP_SH",
+									"EKS_NODEADM",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Version
@@ -750,6 +793,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		"unmanagedv_cpus":                "UnmanagedvCpus",
 		"update_policy":                  "UpdatePolicy",
 		"update_to_latest_image_version": "UpdateToLatestImageVersion",
+		"userdata_type":                  "UserdataType",
 		"version":                        "Version",
 	})
 

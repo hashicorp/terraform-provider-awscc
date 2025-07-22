@@ -162,6 +162,7 @@ Optional:
 Optional:
 
 - `all_channels_subtypes` (Attributes) Communication limits (see [below for nested schema](#nestedatt--communication_limits_override--all_channels_subtypes))
+- `instance_limits_handling` (String) Enumeration of Instance Limits handling in a Campaign
 
 <a id="nestedatt--communication_limits_override--all_channels_subtypes"></a>
 ### Nested Schema for `communication_limits_override.all_channels_subtypes`
@@ -399,6 +400,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_connectcampaignsv2_campaign.example
+  id = "arn"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_connectcampaignsv2_campaign.example "arn"

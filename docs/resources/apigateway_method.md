@@ -113,7 +113,7 @@ resource "awscc_apigateway_method" "terraform_apigateway_method" {
   rest_api_id = awscc_apigateway_rest_api.terraform_apigateway_rest_api.id
   resource_id = awscc_apigateway_rest_api.terraform_apigateway_rest_api.root_resource_id
 
-  method_responses = [{ status_code = "200", response_models = { "application/json": "Empty"} , response_parameters = {"method.response.header.Content-Type" = false}}]
+  method_responses = [{ status_code = "200", response_models = { "application/json" : "Empty" }, response_parameters = { "method.response.header.Content-Type" = false } }]
 
   depends_on = [awscc_apigateway_rest_api.terraform_apigateway_rest_api]
 }
@@ -191,6 +191,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_apigateway_method.example
+  id = "rest_api_id|resource_id|http_method"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_apigateway_method.example "rest_api_id|resource_id|http_method"

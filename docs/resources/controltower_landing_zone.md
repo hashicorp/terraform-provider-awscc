@@ -13,35 +13,35 @@ Definition of AWS::ControlTower::LandingZone Resource Type
 Creates a new landing zone. Please make sure you have completed the pre-requisites as described in [here](https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-prereques.html) before you proceed. Change the placeholder value below with your own account id. Find additional example of the manifest [here](https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch.html).
 
 ```terraform
-resource awscc_controltower_landing_zone "this" {
+resource "awscc_controltower_landing_zone" "this" {
   manifest = jsonencode({
-      "governedRegions": toset(["us-west-2","us-east-1"]),
-      "organizationStructure": {
-          "security": {
-              "name": "Core"
-          },
-          "sandbox": {
-              "name": "Sandbox"
-          }
+    "governedRegions" : toset(["us-west-2", "us-east-1"]),
+    "organizationStructure" : {
+      "security" : {
+        "name" : "Core"
       },
-      "centralizedLogging": {
-            "accountId": "YOUR_LOG_ARCHIVE_ACCOUNT_ID",
-            "configurations": {
-                "loggingBucket": {
-                    "retentionDays": "60"
-                },
-                "accessLoggingBucket": {
-                    "retentionDays": "60"
-                },
-            },
-            "enabled": true
-      },
-      "securityRoles": {
-            "accountId": "YOUR_AUDIT_ACCOUNT_ID"
-      },
-      "accessManagement": {
-            "enabled": true
+      "sandbox" : {
+        "name" : "Sandbox"
       }
+    },
+    "centralizedLogging" : {
+      "accountId" : "YOUR_LOG_ARCHIVE_ACCOUNT_ID",
+      "configurations" : {
+        "loggingBucket" : {
+          "retentionDays" : "60"
+        },
+        "accessLoggingBucket" : {
+          "retentionDays" : "60"
+        },
+      },
+      "enabled" : true
+    },
+    "securityRoles" : {
+      "accountId" : "YOUR_AUDIT_ACCOUNT_ID"
+    },
+    "accessManagement" : {
+      "enabled" : true
+    }
     }
   )
   version = "3.3"
@@ -80,6 +80,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_controltower_landing_zone.example
+  id = "landing_zone_identifier"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_controltower_landing_zone.example "landing_zone_identifier"

@@ -66,8 +66,8 @@ resource "awscc_ec2_vpc_endpoint" "example" {
 
 resource "awscc_ec2_vpc_endpoint_connection_notification" "example" {
   connection_notification_arn = awscc_sns_topic.notification.topic_arn
-  vpc_endpoint_id            = awscc_ec2_vpc_endpoint.example.id
-  connection_events          = ["Accept", "Reject"]
+  vpc_endpoint_id             = awscc_ec2_vpc_endpoint.example.id
+  connection_events           = ["Accept", "Reject"]
 }
 ```
 
@@ -92,6 +92,17 @@ resource "awscc_ec2_vpc_endpoint_connection_notification" "example" {
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_ec2_vpc_endpoint_connection_notification.example
+  id = "vpc_endpoint_connection_notification_id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_ec2_vpc_endpoint_connection_notification.example "vpc_endpoint_connection_notification_id"

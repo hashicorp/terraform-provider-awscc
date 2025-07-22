@@ -22,6 +22,7 @@ Data Source schema for AWS::Route53Resolver::ResolverRule
 ### Read-Only
 
 - `arn` (String) The Amazon Resource Name (ARN) of the resolver rule.
+- `delegation_record` (String) The name server domain for queries to be delegated to if a query matches the delegation record.
 - `domain_name` (String) DNS queries for this domain name are forwarded to the IP addresses that are specified in TargetIps
 - `name` (String) The name for the Resolver rule
 - `resolver_endpoint_id` (String) The ID of the endpoint that the rule is associated with.

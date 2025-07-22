@@ -47,7 +47,7 @@ resource "awscc_medialive_cloudwatch_alarm_template" "example" {
   tags = [{
     key   = "Modified By"
     value = "AWSCC"
-  }, {
+    }, {
     key   = "Environment"
     value = "Test"
   }]
@@ -89,6 +89,17 @@ resource "awscc_medialive_cloudwatch_alarm_template" "example" {
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_medialive_cloudwatch_alarm_template.example
+  id = "identifier"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_medialive_cloudwatch_alarm_template.example "identifier"

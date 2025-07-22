@@ -22,8 +22,8 @@ resource "awscc_ecs_cluster_capacity_provider_associations" "example" {
 
   default_capacity_provider_strategy = [{
     capacity_provider = "FARGATE"
-    base = 1
-    weight = 100
+    base              = 1
+    weight            = 100
 
   }]
 }
@@ -87,6 +87,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_ecs_cluster_capacity_provider_associations.example
+  id = "cluster"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_ecs_cluster_capacity_provider_associations.example "cluster"

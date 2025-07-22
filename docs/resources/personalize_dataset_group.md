@@ -24,46 +24,46 @@ resource "awscc_personalize_dataset_group" "personalize_dataset_group" {
 Creation of custom Amazon Personalize dataset group with interactions, users and items datasets with their custom schema 
 ```terraform
 resource "awscc_personalize_dataset_group" "personalize_dataset_group" {
-    name = "TestPresonalizeDatasetGroup"
+  name = "TestPresonalizeDatasetGroup"
 }
 
-resource "awscc_personalize_schema" "interactions_schema"{
-    name = "interactions_dataset_schema"
-    schema = "{\n \"type\": \"record\",\n \"namespace\": \"com.amazonaws.personalize.schema\",\n \"name\": \"Interactions\",\n \"fields\": [\n { \"name\": \"USER_ID\", \"type\": \"string\" },\n { \"name\": \"ITEM_ID\", \"type\": \"string\" },\n { \"name\": \"TIMESTAMP\", \"type\": \"long\" }\n ]\n }"
+resource "awscc_personalize_schema" "interactions_schema" {
+  name   = "interactions_dataset_schema"
+  schema = "{\n \"type\": \"record\",\n \"namespace\": \"com.amazonaws.personalize.schema\",\n \"name\": \"Interactions\",\n \"fields\": [\n { \"name\": \"USER_ID\", \"type\": \"string\" },\n { \"name\": \"ITEM_ID\", \"type\": \"string\" },\n { \"name\": \"TIMESTAMP\", \"type\": \"long\" }\n ]\n }"
 }
 
-resource "awscc_personalize_dataset" "dataset_interactions"{
-    dataset_group_arn = awscc_personalize_dataset_group.personalize_dataset_group.dataset_group_arn
-    dataset_type = "Interactions"
-    name = "Interactions_Dataset"
-    schema_arn = awscc_personalize_schema.interactions_schema.schema_arn
-    depends_on = [awscc_personalize_dataset_group.personalize_dataset_group, awscc_personalize_schema.interactions_schema]
+resource "awscc_personalize_dataset" "dataset_interactions" {
+  dataset_group_arn = awscc_personalize_dataset_group.personalize_dataset_group.dataset_group_arn
+  dataset_type      = "Interactions"
+  name              = "Interactions_Dataset"
+  schema_arn        = awscc_personalize_schema.interactions_schema.schema_arn
+  depends_on        = [awscc_personalize_dataset_group.personalize_dataset_group, awscc_personalize_schema.interactions_schema]
 }
 
-resource "awscc_personalize_schema" "users_schema"{
-    name = "users_dataset_schema"
-    schema = "{\n \"type\": \"record\",\n \"namespace\": \"com.amazonaws.personalize.schema\",\n \"name\": \"Users\",\n \"fields\": [\n { \"name\": \"USER_ID\", \"type\": \"string\" },\n { \"name\": \"AGE\", \"type\": \"int\" },\n { \"name\": \"GENDER\", \"type\": \"string\",\"categorical\": true }\n ]\n }"
+resource "awscc_personalize_schema" "users_schema" {
+  name   = "users_dataset_schema"
+  schema = "{\n \"type\": \"record\",\n \"namespace\": \"com.amazonaws.personalize.schema\",\n \"name\": \"Users\",\n \"fields\": [\n { \"name\": \"USER_ID\", \"type\": \"string\" },\n { \"name\": \"AGE\", \"type\": \"int\" },\n { \"name\": \"GENDER\", \"type\": \"string\",\"categorical\": true }\n ]\n }"
 }
 
-resource "awscc_personalize_dataset" "dataset_users"{
-    dataset_group_arn = awscc_personalize_dataset_group.personalize_dataset_group.dataset_group_arn
-    dataset_type = "Users"
-    name = "Users_Dataset"
-    schema_arn = awscc_personalize_schema.users_schema.schema_arn
-    depends_on = [awscc_personalize_dataset_group.personalize_dataset_group, awscc_personalize_schema.users_schema]
+resource "awscc_personalize_dataset" "dataset_users" {
+  dataset_group_arn = awscc_personalize_dataset_group.personalize_dataset_group.dataset_group_arn
+  dataset_type      = "Users"
+  name              = "Users_Dataset"
+  schema_arn        = awscc_personalize_schema.users_schema.schema_arn
+  depends_on        = [awscc_personalize_dataset_group.personalize_dataset_group, awscc_personalize_schema.users_schema]
 }
 
-resource "awscc_personalize_schema" "items_schema"{
-    name = "items_dataset_schema"
-    schema = "{\n \"type\": \"record\",\n \"namespace\": \"com.amazonaws.personalize.schema\",\n \"name\": \"Items\",\n \"fields\": [\n { \"name\": \"ITEM_ID\", \"type\": \"string\" },\n { \"name\": \"GENRES\", \"type\": [\"null\", \"string\" ], \"categorical\": true},\n { \"name\": \"DESCRIPTION\", \"type\": [\"null\", \"string\" ], \"textual\": true }\n ]\n }"
+resource "awscc_personalize_schema" "items_schema" {
+  name   = "items_dataset_schema"
+  schema = "{\n \"type\": \"record\",\n \"namespace\": \"com.amazonaws.personalize.schema\",\n \"name\": \"Items\",\n \"fields\": [\n { \"name\": \"ITEM_ID\", \"type\": \"string\" },\n { \"name\": \"GENRES\", \"type\": [\"null\", \"string\" ], \"categorical\": true},\n { \"name\": \"DESCRIPTION\", \"type\": [\"null\", \"string\" ], \"textual\": true }\n ]\n }"
 }
 
-resource "awscc_personalize_dataset" "dataset_items"{
-    dataset_group_arn = awscc_personalize_dataset_group.personalize_dataset_group.dataset_group_arn
-    dataset_type = "Items"
-    name = "Items_Dataset"
-    schema_arn = awscc_personalize_schema.items_schema.schema_arn
-    depends_on = [awscc_personalize_dataset_group.personalize_dataset_group, awscc_personalize_schema.items_schema]
+resource "awscc_personalize_dataset" "dataset_items" {
+  dataset_group_arn = awscc_personalize_dataset_group.personalize_dataset_group.dataset_group_arn
+  dataset_type      = "Items"
+  name              = "Items_Dataset"
+  schema_arn        = awscc_personalize_schema.items_schema.schema_arn
+  depends_on        = [awscc_personalize_dataset_group.personalize_dataset_group, awscc_personalize_schema.items_schema]
 }
 ```
 
@@ -88,6 +88,17 @@ resource "awscc_personalize_dataset" "dataset_items"{
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_personalize_dataset_group.example
+  id = "dataset_group_arn"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_personalize_dataset_group.example "dataset_group_arn"

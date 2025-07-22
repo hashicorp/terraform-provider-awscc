@@ -40,7 +40,7 @@ resource "awscc_eks_pod_identity_association" "pod_identity_association_s3_reado
   cluster_name    = var.cluster_name
   namespace       = var.namespace
   service_account = var.serviceaccount
-  role_arn        = awscc_iam_role.pod_identity_role.arn  # like: arn:aws:iam::xxxxxxxxxxxx:role/role1
+  role_arn        = awscc_iam_role.pod_identity_role.arn # like: arn:aws:iam::xxxxxxxxxxxx:role/role1
 }
 
 variable "cluster_name" {
@@ -90,6 +90,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_eks_pod_identity_association.example
+  id = "association_arn"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_eks_pod_identity_association.example "association_arn"

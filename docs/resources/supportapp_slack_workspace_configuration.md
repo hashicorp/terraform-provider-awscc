@@ -14,7 +14,7 @@ An AWS Support App resource that creates, updates, lists, and deletes Slack work
 ### First Example
 To create a slack workspace confifiguration for an AWS account in AWS Support App 
 ```terraform
-resource "awscc_supportapp_slack_workspace_configuration" "slack_workspace_example" { 
+resource "awscc_supportapp_slack_workspace_configuration" "slack_workspace_example" {
   team_id = "team_id_from_slack" # Replace with the actual team ID from Slack
   # Other configuration parameters...
 }
@@ -39,6 +39,17 @@ resource "awscc_supportapp_slack_workspace_configuration" "slack_workspace_examp
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_supportapp_slack_workspace_configuration.example
+  id = "team_id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_supportapp_slack_workspace_configuration.example "team_id"

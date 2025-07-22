@@ -49,6 +49,7 @@ resource "awscc_route53resolver_resolver_rule" "example" {
 
 ### Optional
 
+- `delegation_record` (String) The name server domain for queries to be delegated to if a query matches the delegation record.
 - `domain_name` (String) DNS queries for this domain name are forwarded to the IP addresses that are specified in TargetIps
 - `name` (String) The name for the Resolver rule
 - `resolver_endpoint_id` (String) The ID of the endpoint that the rule is associated with.
@@ -84,6 +85,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_route53resolver_resolver_rule.example
+  id = "resolver_rule_id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_route53resolver_resolver_rule.example "resolver_rule_id"

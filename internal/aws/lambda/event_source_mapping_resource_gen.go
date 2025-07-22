@@ -56,13 +56,13 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 		//	      "description": "",
 		//	      "properties": {
 		//	        "AccessConfigs": {
-		//	          "description": "An array of access configuration objects that tell Lambda how to authenticate with your schema registry.",
+		//	          "description": "",
 		//	          "items": {
 		//	            "additionalProperties": false,
 		//	            "description": "",
 		//	            "properties": {
 		//	              "Type": {
-		//	                "description": "The type of authentication Lambda uses to access your schema registry.",
+		//	                "description": "",
 		//	                "enum": [
 		//	                  "BASIC_AUTH",
 		//	                  "CLIENT_CERTIFICATE_TLS_AUTH",
@@ -71,7 +71,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 		//	                "type": "string"
 		//	              },
 		//	              "URI": {
-		//	                "description": "The URI of the secret (Secrets Manager secret ARN) to authenticate with your schema registry.",
+		//	                "description": "",
 		//	                "maxLength": 10000,
 		//	                "minLength": 1,
 		//	                "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?(-iso([a-z])?)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
@@ -85,7 +85,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 		//	          "uniqueItems": true
 		//	        },
 		//	        "EventRecordFormat": {
-		//	          "description": "The record format that Lambda delivers to your function after schema validation.",
+		//	          "description": "",
 		//	          "enum": [
 		//	            "JSON",
 		//	            "SOURCE"
@@ -93,20 +93,20 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 		//	          "type": "string"
 		//	        },
 		//	        "SchemaRegistryURI": {
-		//	          "description": "The URI for your schema registry. The correct URI format depends on the type of schema registry you're using.",
+		//	          "description": "",
 		//	          "maxLength": 10000,
 		//	          "minLength": 1,
 		//	          "pattern": "[a-zA-Z0-9-/*:_+=.@-]*",
 		//	          "type": "string"
 		//	        },
 		//	        "SchemaValidationConfigs": {
-		//	          "description": "An array of schema validation configuration objects, which tell Lambda the message attributes you want to validate and filter using your schema registry.",
+		//	          "description": "",
 		//	          "items": {
 		//	            "additionalProperties": false,
 		//	            "description": "",
 		//	            "properties": {
 		//	              "Attribute": {
-		//	                "description": "The attribute you want your schema registry to validate and filter for.",
+		//	                "description": "",
 		//	                "enum": [
 		//	                  "KEY",
 		//	                  "VALUE"
@@ -151,7 +151,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Type
 									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The type of authentication Lambda uses to access your schema registry.",
+										Description: "",
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
@@ -167,7 +167,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 									}, /*END ATTRIBUTE*/
 									// Property: URI
 									"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The URI of the secret (Secrets Manager secret ARN) to authenticate with your schema registry.",
+										Description: "",
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
@@ -180,7 +180,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Description: "An array of access configuration objects that tell Lambda how to authenticate with your schema registry.",
+							Description: "",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
@@ -193,7 +193,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 						}, /*END ATTRIBUTE*/
 						// Property: EventRecordFormat
 						"event_record_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The record format that Lambda delivers to your function after schema validation.",
+							Description: "",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
@@ -208,7 +208,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 						}, /*END ATTRIBUTE*/
 						// Property: SchemaRegistryURI
 						"schema_registry_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The URI for your schema registry. The correct URI format depends on the type of schema registry you're using.",
+							Description: "",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
@@ -225,7 +225,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Attribute
 									"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The attribute you want your schema registry to validate and filter for.",
+										Description: "",
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
@@ -240,7 +240,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Description: "An array of schema validation configuration objects, which tell Lambda the message attributes you want to validate and filter using your schema registry.",
+							Description: "",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
@@ -1004,13 +1004,13 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 		//	      "description": "",
 		//	      "properties": {
 		//	        "AccessConfigs": {
-		//	          "description": "An array of access configuration objects that tell Lambda how to authenticate with your schema registry.",
+		//	          "description": "",
 		//	          "items": {
 		//	            "additionalProperties": false,
 		//	            "description": "",
 		//	            "properties": {
 		//	              "Type": {
-		//	                "description": "The type of authentication Lambda uses to access your schema registry.",
+		//	                "description": "",
 		//	                "enum": [
 		//	                  "BASIC_AUTH",
 		//	                  "CLIENT_CERTIFICATE_TLS_AUTH",
@@ -1019,7 +1019,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 		//	                "type": "string"
 		//	              },
 		//	              "URI": {
-		//	                "description": "The URI of the secret (Secrets Manager secret ARN) to authenticate with your schema registry.",
+		//	                "description": "",
 		//	                "maxLength": 10000,
 		//	                "minLength": 1,
 		//	                "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?(-iso([a-z])?)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
@@ -1033,7 +1033,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 		//	          "uniqueItems": true
 		//	        },
 		//	        "EventRecordFormat": {
-		//	          "description": "The record format that Lambda delivers to your function after schema validation.",
+		//	          "description": "",
 		//	          "enum": [
 		//	            "JSON",
 		//	            "SOURCE"
@@ -1041,20 +1041,20 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 		//	          "type": "string"
 		//	        },
 		//	        "SchemaRegistryURI": {
-		//	          "description": "The URI for your schema registry. The correct URI format depends on the type of schema registry you're using.",
+		//	          "description": "",
 		//	          "maxLength": 10000,
 		//	          "minLength": 1,
 		//	          "pattern": "[a-zA-Z0-9-/*:_+=.@-]*",
 		//	          "type": "string"
 		//	        },
 		//	        "SchemaValidationConfigs": {
-		//	          "description": "An array of schema validation configuration objects, which tell Lambda the message attributes you want to validate and filter using your schema registry.",
+		//	          "description": "",
 		//	          "items": {
 		//	            "additionalProperties": false,
 		//	            "description": "",
 		//	            "properties": {
 		//	              "Attribute": {
-		//	                "description": "The attribute you want your schema registry to validate and filter for.",
+		//	                "description": "",
 		//	                "enum": [
 		//	                  "KEY",
 		//	                  "VALUE"
@@ -1099,7 +1099,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Type
 									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The type of authentication Lambda uses to access your schema registry.",
+										Description: "",
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
@@ -1115,7 +1115,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 									}, /*END ATTRIBUTE*/
 									// Property: URI
 									"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The URI of the secret (Secrets Manager secret ARN) to authenticate with your schema registry.",
+										Description: "",
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
@@ -1128,7 +1128,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Description: "An array of access configuration objects that tell Lambda how to authenticate with your schema registry.",
+							Description: "",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
@@ -1141,7 +1141,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 						}, /*END ATTRIBUTE*/
 						// Property: EventRecordFormat
 						"event_record_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The record format that Lambda delivers to your function after schema validation.",
+							Description: "",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
@@ -1156,7 +1156,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 						}, /*END ATTRIBUTE*/
 						// Property: SchemaRegistryURI
 						"schema_registry_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The URI for your schema registry. The correct URI format depends on the type of schema registry you're using.",
+							Description: "",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
@@ -1173,7 +1173,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Attribute
 									"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The attribute you want your schema registry to validate and filter for.",
+										Description: "",
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
@@ -1188,7 +1188,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Description: "An array of schema validation configuration objects, which tell Lambda the message attributes you want to validate and filter using your schema registry.",
+							Description: "",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/

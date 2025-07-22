@@ -773,6 +773,51 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: JobConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "BuildComputeType": {
+		//	      "enum": [
+		//	        "STANDARD_8GB",
+		//	        "LARGE_16GB",
+		//	        "XLARGE_72GB"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "BuildComputeType"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"job_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BuildComputeType
+				"build_compute_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"STANDARD_8GB",
+							"LARGE_16GB",
+							"XLARGE_72GB",
+						),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -944,6 +989,7 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 		"auto_branch_creation_config":   "AutoBranchCreationConfig",
 		"auto_branch_creation_patterns": "AutoBranchCreationPatterns",
 		"basic_auth_config":             "BasicAuthConfig",
+		"build_compute_type":            "BuildComputeType",
 		"build_spec":                    "BuildSpec",
 		"cache_config":                  "CacheConfig",
 		"compute_role_arn":              "ComputeRoleArn",
@@ -961,6 +1007,7 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 		"environment_variables":         "EnvironmentVariables",
 		"framework":                     "Framework",
 		"iam_service_role":              "IAMServiceRole",
+		"job_config":                    "JobConfig",
 		"key":                           "Key",
 		"name":                          "Name",
 		"oauth_token":                   "OauthToken",

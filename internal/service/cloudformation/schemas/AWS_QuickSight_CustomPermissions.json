@@ -11,6 +11,12 @@
         "ExportToExcel": {
           "$ref": "#/definitions/CapabilityState"
         },
+        "ExportToPdf": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "PrintReports": {
+          "$ref": "#/definitions/CapabilityState"
+        },
         "CreateAndUpdateThemes": {
           "$ref": "#/definitions/CapabilityState"
         },
@@ -54,6 +60,18 @@
           "$ref": "#/definitions/CapabilityState"
         },
         "CreateSPICEDataset": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ExportToPdfInScheduledReports": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ExportToCsvInScheduledReports": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ExportToExcelInScheduledReports": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "IncludeContentInScheduledReportsEmail": {
           "$ref": "#/definitions/CapabilityState"
         }
       },

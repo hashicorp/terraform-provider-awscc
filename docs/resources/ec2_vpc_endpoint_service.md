@@ -42,10 +42,10 @@ resource "awscc_ec2_subnet" "example" {
 
 # Create Network Load Balancer
 resource "awscc_elasticloadbalancingv2_load_balancer" "example" {
-  name               = "example-nlb"
-  scheme            = "internal"
-  type              = "network"
-  subnets           = [awscc_ec2_subnet.example.id]
+  name    = "example-nlb"
+  scheme  = "internal"
+  type    = "network"
+  subnets = [awscc_ec2_subnet.example.id]
   tags = [{
     key   = "Modified By"
     value = "AWSCC"
@@ -91,6 +91,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_ec2_vpc_endpoint_service.example
+  id = "service_id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_ec2_vpc_endpoint_service.example "service_id"

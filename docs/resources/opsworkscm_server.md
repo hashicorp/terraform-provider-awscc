@@ -38,6 +38,7 @@ Resource Type definition for AWS::OpsWorksCM::Server
 - `preferred_backup_window` (String)
 - `preferred_maintenance_window` (String)
 - `security_group_ids` (List of String)
+- `server_name` (String)
 - `subnet_ids` (List of String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
@@ -47,7 +48,6 @@ Resource Type definition for AWS::OpsWorksCM::Server
 - `endpoint` (String)
 - `id` (String) Uniquely identifies the resource.
 - `server_id` (String)
-- `server_name` (String)
 
 <a id="nestedatt--engine_attributes"></a>
 ### Nested Schema for `engine_attributes`
@@ -69,6 +69,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_opsworkscm_server.example
+  id = "id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_opsworkscm_server.example "id"

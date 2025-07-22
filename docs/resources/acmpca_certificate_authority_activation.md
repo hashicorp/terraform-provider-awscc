@@ -170,7 +170,7 @@ resource "awscc_acmpca_certificate" "root_ca" {
   certificate_authority_arn   = awscc_acmpca_certificate_authority.example.arn
   certificate_signing_request = awscc_acmpca_certificate_authority.example.certificate_signing_request
   signing_algorithm           = "SHA256WITHRSA"
-  template_arn               = "arn:aws:acm-pca:::template/RootCACertificate/V1"
+  template_arn                = "arn:aws:acm-pca:::template/RootCACertificate/V1"
   validity = {
     type  = "YEARS"
     value = 10
@@ -181,7 +181,7 @@ resource "awscc_acmpca_certificate" "root_ca" {
 resource "awscc_acmpca_certificate_authority_activation" "example" {
   certificate               = awscc_acmpca_certificate.root_ca.certificate
   certificate_authority_arn = awscc_acmpca_certificate_authority.example.arn
-  status                   = "ACTIVE"
+  status                    = "ACTIVE"
 }
 ```
 
@@ -206,6 +206,17 @@ resource "awscc_acmpca_certificate_authority_activation" "example" {
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_acmpca_certificate_authority_activation.example
+  id = "certificate_authority_arn"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_acmpca_certificate_authority_activation.example "certificate_authority_arn"

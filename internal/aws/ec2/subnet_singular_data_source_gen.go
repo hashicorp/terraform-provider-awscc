@@ -56,6 +56,31 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The AZ ID of the subnet.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: BlockPublicAccessStates
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "InternetGatewayBlockMode": {
+		//	      "description": "The mode of VPC BPA. Options here are off, block-bidirectional, block-ingress ",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"block_public_access_states": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InternetGatewayBlockMode
+				"internet_gateway_block_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The mode of VPC BPA. Options here are off, block-bidirectional, block-ingress ",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -175,11 +200,11 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Indicates whether instances launched in this subnet receive a public IPv4 address. The default value is ``false``.\n  AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).",
+		//	  "description": "Indicates whether instances launched in this subnet receive a public IPv4 address. The default value is ``false``.\n AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).",
 		//	  "type": "boolean"
 		//	}
 		"map_public_ip_on_launch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether instances launched in this subnet receive a public IPv4 address. The default value is ``false``.\n  AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).",
+			Description: "Indicates whether instances launched in this subnet receive a public IPv4 address. The default value is ``false``.\n AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkAclAssociationId
@@ -328,12 +353,14 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"assign_ipv_6_address_on_creation":     "AssignIpv6AddressOnCreation",
 		"availability_zone":                    "AvailabilityZone",
 		"availability_zone_id":                 "AvailabilityZoneId",
+		"block_public_access_states":           "BlockPublicAccessStates",
 		"cidr_block":                           "CidrBlock",
 		"enable_dns_64":                        "EnableDns64",
 		"enable_lni_at_device_index":           "EnableLniAtDeviceIndex",
 		"enable_resource_name_dns_a_record":    "EnableResourceNameDnsARecord",
 		"enable_resource_name_dns_aaaa_record": "EnableResourceNameDnsAAAARecord",
 		"hostname_type":                        "HostnameType",
+		"internet_gateway_block_mode":          "InternetGatewayBlockMode",
 		"ipv_4_ipam_pool_id":                   "Ipv4IpamPoolId",
 		"ipv_4_netmask_length":                 "Ipv4NetmaskLength",
 		"ipv_6_cidr_block":                     "Ipv6CidrBlock",

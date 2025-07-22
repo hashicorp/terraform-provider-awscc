@@ -1,59 +1,83 @@
-## 1.46.0 (July 17, 2025)
+## 1.49.0 (July 10, 2025)
 
 FEATURES:
 
-* **New Resource:** `AWS::AIOps::InvestigationGroup`
-* **New Resource:** `AWS::AIOps::InvestigationGroup`
-* **New Resource:** `AWS::Billing::BillingView`
-* **New Resource:** `AWS::Billing::BillingView`
-* **New Resource:** `AWS::EC2::TrafficMirrorFilter`
-* **New Resource:** `AWS::EC2::TrafficMirrorFilter`
-* **New Resource:** `AWS::EC2::TrafficMirrorFilterRule`
-* **New Resource:** `AWS::EC2::TrafficMirrorFilterRule`
-* **New Resource:** `AWS::EC2::TrafficMirrorTarget`
-* **New Resource:** `AWS::EC2::TrafficMirrorTarget`
-* **New Resource:** `AWS::FSx::S3AccessPointAttachment`
-* **New Resource:** `AWS::FSx::S3AccessPointAttachment`
-* **New Resource:** `AWS::Kinesis::StreamConsumer`
-* **New Resource:** `AWS::Kinesis::StreamConsumer`
-* **New Resource:** `AWS::MPA::ApprovalTeam`
-* **New Resource:** `AWS::MPA::ApprovalTeam`
-* **New Resource:** `AWS::MPA::IdentitySource`
-* **New Resource:** `AWS::MPA::IdentitySource`
-* **New Resource:** `AWS::Neptune::DBInstance`
-* **New Resource:** `AWS::Neptune::DBInstance`
-* **New Resource:** `AWS::ODB::CloudAutonomousVmCluster`
-* **New Resource:** `AWS::ODB::CloudAutonomousVmCluster`
-* **New Resource:** `AWS::ODB::CloudExadataInfrastructure`
-* **New Resource:** `AWS::ODB::CloudExadataInfrastructure`
-* **New Resource:** `AWS::ODB::CloudVmCluster`
-* **New Resource:** `AWS::ODB::CloudVmCluster`
-* **New Resource:** `AWS::ODB::OdbNetwork`
-* **New Resource:** `AWS::ODB::OdbNetwork`
-* **New Resource:** `AWS::RedshiftServerless::Snapshot`
-* **New Resource:** `AWS::RedshiftServerless::Snapshot`
-* **New Resource:** `AWS::S3Tables::Namespace`
-* **New Resource:** `AWS::S3Tables::Namespace`
-* **New Resource:** `AWS::S3Tables::Table`
-* **New Resource:** `AWS::S3Tables::Table`
-* **New Resource:** `AWS::S3Tables::TablePolicy`
-* **New Resource:** `AWS::S3Tables::TablePolicy`
-* **New Resource:** `AWS::SecurityHub::AggregatorV2`
-* **New Resource:** `AWS::SecurityHub::AggregatorV2`
-* **New Resource:** `AWS::SecurityHub::AutomationRuleV2`
-* **New Resource:** `AWS::SecurityHub::AutomationRuleV2`
-* **New Resource:** `AWS::SecurityHub::HubV2`
-* **New Resource:** `AWS::SecurityHub::HubV2`
-* **New Resource:** `AWS::Wisdom::QuickResponse`
-* **New Resource:** `AWS::Wisdom::QuickResponse`
-* **New Resource:** `AWS::WorkspacesInstances::Volume`
-* **New Resource:** `AWS::WorkspacesInstances::Volume`
-* **New Resource:** `AWS::WorkspacesInstances::VolumeAssociation`
-* **New Resource:** `AWS::WorkspacesInstances::VolumeAssociation`
-* **New Resource:** `AWS::WorkspacesInstances::WorkspaceInstance`
-* **New Resource:** `AWS::WorkspacesInstances::WorkspaceInstance`
-* **Suppressed Resource:** `aws_mpa_approval_team`
-* **Suppressed Resource:** `aws_mpa_approval_team`
+* **New Data Source:** `awscc_ec2_traffic_mirror_target`
+* **New Data Source:** `awscc_ec2_traffic_mirror_targets`
+* **New Data Source:** `awscc_s3tables_table`
+* **New Resource:** `awscc_ec2_traffic_mirror_target`
+* **New Resource:** `awscc_s3tables_table`
+
+## 1.48.0 (July 2, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_ec2_traffic_mirror_filter_rule`
+* **New Data Source:** `awscc_ec2_traffic_mirror_filter_rules`
+* **New Data Source:** `awscc_kinesis_stream_consumer`
+* **New Data Source:** `awscc_kinesis_stream_consumers`
+* **New Data Source:** `awscc_neptune_db_instance`
+* **New Data Source:** `awscc_neptune_db_instances`
+* **New Data Source:** `awscc_odb_cloud_autonomous_vm_cluster`
+* **New Data Source:** `awscc_odb_cloud_autonomous_vm_clusters`
+* **New Data Source:** `awscc_odb_cloud_exadata_infrastructure`
+* **New Data Source:** `awscc_odb_cloud_exadata_infrastructures`
+* **New Data Source:** `awscc_odb_cloud_vm_cluster`
+* **New Data Source:** `awscc_odb_cloud_vm_clusters`
+* **New Data Source:** `awscc_odb_odb_network`
+* **New Data Source:** `awscc_odb_odb_networks`
+* **New Data Source:** `awscc_redshiftserverless_snapshot`
+* **New Data Source:** `awscc_redshiftserverless_snapshots`
+* **New Resource:** `awscc_ec2_traffic_mirror_filter_rule`
+* **New Resource:** `awscc_kinesis_stream_consumer`
+* **New Resource:** `awscc_neptune_db_instance`
+* **New Resource:** `awscc_odb_cloud_autonomous_vm_cluster`
+* **New Resource:** `awscc_odb_cloud_exadata_infrastructure`
+* **New Resource:** `awscc_odb_cloud_vm_cluster`
+* **New Resource:** `awscc_odb_odb_network`
+* **New Resource:** `awscc_redshiftserverless_snapshot`
+
+## 1.47.0 (June 26, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_aiops_investigation_group`
+* **New Data Source:** `awscc_aiops_investigation_groups`
+* **New Data Source:** `awscc_fsx_s3_access_point_attachment`
+* **New Data Source:** `awscc_fsx_s3_access_point_attachments`
+* **New Data Source:** `awscc_s3tables_namespace`
+* **New Data Source:** `awscc_workspacesinstances_volume`
+* **New Data Source:** `awscc_workspacesinstances_volume_association`
+* **New Data Source:** `awscc_workspacesinstances_volume_associations`
+* **New Data Source:** `awscc_workspacesinstances_volumes`
+* **New Data Source:** `awscc_workspacesinstances_workspace_instance`
+* **New Data Source:** `awscc_workspacesinstances_workspace_instances`
+* **New Resource:** `awscc_aiops_investigation_group`
+* **New Resource:** `awscc_fsx_s3_access_point_attachment`
+* **New Resource:** `awscc_s3tables_namespace`
+* **New Resource:** `awscc_workspacesinstances_volume`
+* **New Resource:** `awscc_workspacesinstances_volume_association`
+* **New Resource:** `awscc_workspacesinstances_workspace_instance`
+
+## 1.46.0 (June 19, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_ec2_traffic_mirror_filter`
+* **New Data Source:** `awscc_ec2_traffic_mirror_filters`
+* **New Data Source:** `awscc_mpa_identity_source`
+* **New Data Source:** `awscc_mpa_identity_sources`
+* **New Data Source:** `awscc_securityhub_aggregator_v2`
+* **New Data Source:** `awscc_securityhub_aggregator_v2s`
+* **New Data Source:** `awscc_securityhub_automation_rule_v2`
+* **New Data Source:** `awscc_securityhub_automation_rule_v2s`
+* **New Data Source:** `awscc_securityhub_hub_v2`
+* **New Data Source:** `awscc_securityhub_hub_v2s`
+* **New Resource:** `awscc_ec2_traffic_mirror_filter`
+* **New Resource:** `awscc_mpa_identity_source`
+* **New Resource:** `awscc_securityhub_aggregator_v2`
+* **New Resource:** `awscc_securityhub_automation_rule_v2`
+* **New Resource:** `awscc_securityhub_hub_v2`
 
 ## 1.45.0 (June 12, 2025)
 

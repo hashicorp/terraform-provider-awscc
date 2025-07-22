@@ -184,6 +184,7 @@ resource "awscc_amplify_app" "example" {
 - `enable_branch_auto_deletion` (Boolean)
 - `environment_variables` (Attributes List) (see [below for nested schema](#nestedatt--environment_variables))
 - `iam_service_role` (String)
+- `job_config` (Attributes) (see [below for nested schema](#nestedatt--job_config))
 - `oauth_token` (String)
 - `platform` (String)
 - `repository` (String)
@@ -272,6 +273,14 @@ Optional:
 - `value` (String)
 
 
+<a id="nestedatt--job_config"></a>
+### Nested Schema for `job_config`
+
+Optional:
+
+- `build_compute_type` (String)
+
+
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
@@ -283,6 +292,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_amplify_app.example
+  id = "arn"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_amplify_app.example "arn"

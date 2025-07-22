@@ -25,7 +25,6 @@ var (
 type FileData struct {
 	Resource   string
 	Identifier []string
-	Path       string
 }
 
 func usage() {
@@ -60,7 +59,7 @@ func main() {
 	g := NewGenerator()
 
 	for _, v := range data {
-		if err := g.GenerateExample(v.Resource, v.Path, v.Identifier); err != nil {
+		if err := g.GenerateExample(v.Resource, v.Identifier); err != nil {
 			g.Fatalf("error generating Terraform %s import example: %s", v.Resource, err)
 		}
 	}
@@ -76,29 +75,60 @@ func NewGenerator() *Generator {
 	}
 }
 
-func (g *Generator) GenerateExample(resourceName, filename string, identifier []string) error {
+func (g *Generator) GenerateExample(resourceName string, identifier []string) error {
 	g.Infof("generating Terraform import code for %[1]q ", resourceName)
 	templateData := &TemplateData{
 		ResourceType: resourceName,
-		Identifier:   "<resource ID>",
+		Identifier:   formatIdentifier(identifier),
 	}
 
+	directory := fmt.Sprintf("./examples/resources/%s", resourceName)
+	for _, v := range filesData {
+		if err := createFile(g, v.filename(directory), v.templateBody, templateData); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func formatIdentifier(identifier []string) string {
 	if len(identifier) != 0 {
 		var out []string
 		for _, i := range identifier {
 			out = append(out, toSnake(i))
 		}
 
-		templateData.Identifier = fmt.Sprintf("\"%s\"", strings.Join(out, "|"))
+		return fmt.Sprintf("\"%s\"", strings.Join(out, "|"))
 	}
 
+	return "<resource ID>"
+}
+
+type fileData struct {
+	filename     func(string) string
+	templateBody string
+}
+
+var filesData = []fileData{
+	{
+		filename:     func(directory string) string { return fmt.Sprintf("%s/import.sh", directory) },
+		templateBody: importExampleTemplateBody,
+	},
+	{
+		filename:     func(directory string) string { return fmt.Sprintf("%s/import-by-string-id.tf", directory) },
+		templateBody: importExampleTemplateByStringIDBody,
+	},
+}
+
+func createFile(g *Generator, filename, templateBody string, templateData *TemplateData) error {
 	d := g.NewUnformattedFileDestination(filename)
 
 	if err := d.CreateDirectories(); err != nil {
 		return err
 	}
 
-	if err := d.WriteTemplate("resource", importExampleTemplateBody, templateData); err != nil {
+	if err := d.WriteTemplate("resource", templateBody, templateData); err != nil {
 		return err
 	}
 
@@ -124,3 +154,8 @@ type TemplateData struct {
 }
 
 var importExampleTemplateBody = `$ terraform import {{ .ResourceType }}.example {{ .Identifier }}`
+
+var importExampleTemplateByStringIDBody = `import {
+  to = {{ .ResourceType }}.example
+  id = {{ .Identifier }}
+}`

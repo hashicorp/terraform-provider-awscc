@@ -48,10 +48,10 @@ resource "aws_s3_object" "layer" {
 }
 
 resource "aws_lambda_layer_version" "example" {
-  layer_name          = "example-layer"
-  description         = "Example Layer created for layer version permission test"
-  compatible_runtimes = ["nodejs18.x"]
-  filename            = data.archive_file.layer.output_path
+  layer_name               = "example-layer"
+  description              = "Example Layer created for layer version permission test"
+  compatible_runtimes      = ["nodejs18.x"]
+  filename                 = data.archive_file.layer.output_path
   compatible_architectures = ["x86_64"]
 }
 
@@ -59,7 +59,7 @@ resource "awscc_lambda_layer_version_permission" "example" {
   action            = "lambda:GetLayerVersion"
   layer_version_arn = aws_lambda_layer_version.example.arn
   principal         = "*"
-  organization_id = "o-xxxxxxxxxx"
+  organization_id   = "o-xxxxxxxxxx"
 }
 ```
 
@@ -84,6 +84,17 @@ resource "awscc_lambda_layer_version_permission" "example" {
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_lambda_layer_version_permission.example
+  id = "id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_lambda_layer_version_permission.example "id"

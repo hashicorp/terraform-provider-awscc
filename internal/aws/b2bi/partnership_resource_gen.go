@@ -10,11 +10,13 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -62,6 +64,43 @@ func partnershipResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "InboundEdi": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "X12": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "AcknowledgmentOptions": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "FunctionalAcknowledgment": {
+		//	                  "enum": [
+		//	                    "DO_NOT_GENERATE",
+		//	                    "GENERATE_ALL_SEGMENTS",
+		//	                    "GENERATE_WITHOUT_TRANSACTION_SET_RESPONSE_LOOP"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "TechnicalAcknowledgment": {
+		//	                  "enum": [
+		//	                    "DO_NOT_GENERATE",
+		//	                    "GENERATE_ALL_SEGMENTS"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "FunctionalAcknowledgment",
+		//	                "TechnicalAcknowledgment"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "OutboundEdi": {
 		//	      "properties": {
 		//	        "X12": {
@@ -70,6 +109,27 @@ func partnershipResource(ctx context.Context) (resource.Resource, error) {
 		//	            "Common": {
 		//	              "additionalProperties": false,
 		//	              "properties": {
+		//	                "ControlNumbers": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "StartingFunctionalGroupControlNumber": {
+		//	                      "maximum": 999999999,
+		//	                      "minimum": 1,
+		//	                      "type": "number"
+		//	                    },
+		//	                    "StartingInterchangeControlNumber": {
+		//	                      "maximum": 999999999,
+		//	                      "minimum": 1,
+		//	                      "type": "number"
+		//	                    },
+		//	                    "StartingTransactionSetControlNumber": {
+		//	                      "maximum": 999999999,
+		//	                      "minimum": 1,
+		//	                      "type": "number"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
 		//	                "Delimiters": {
 		//	                  "additionalProperties": false,
 		//	                  "properties": {
@@ -117,6 +177,14 @@ func partnershipResource(ctx context.Context) (resource.Resource, error) {
 		//	                    }
 		//	                  },
 		//	                  "type": "object"
+		//	                },
+		//	                "Gs05TimeFormat": {
+		//	                  "enum": [
+		//	                    "HHMM",
+		//	                    "HHMMSS",
+		//	                    "HHMMSSDD"
+		//	                  ],
+		//	                  "type": "string"
 		//	                },
 		//	                "InterchangeControlHeaders": {
 		//	                  "additionalProperties": false,
@@ -170,6 +238,32 @@ func partnershipResource(ctx context.Context) (resource.Resource, error) {
 		//	                }
 		//	              },
 		//	              "type": "object"
+		//	            },
+		//	            "WrapOptions": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "LineLength": {
+		//	                  "minimum": 1,
+		//	                  "type": "number"
+		//	                },
+		//	                "LineTerminator": {
+		//	                  "enum": [
+		//	                    "CRLF",
+		//	                    "LF",
+		//	                    "CR"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "WrapBy": {
+		//	                  "enum": [
+		//	                    "SEGMENT",
+		//	                    "ONE_LINE",
+		//	                    "LINE_LENGTH"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
 		//	            }
 		//	          },
 		//	          "type": "object"
@@ -182,6 +276,67 @@ func partnershipResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"capability_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InboundEdi
+				"inbound_edi": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: X12
+						"x12": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AcknowledgmentOptions
+								"acknowledgment_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: FunctionalAcknowledgment
+										"functional_acknowledgment": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"DO_NOT_GENERATE",
+													"GENERATE_ALL_SEGMENTS",
+													"GENERATE_WITHOUT_TRANSACTION_SET_RESPONSE_LOOP",
+												),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: TechnicalAcknowledgment
+										"technical_acknowledgment": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"DO_NOT_GENERATE",
+													"GENERATE_ALL_SEGMENTS",
+												),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: OutboundEdi
 				"outbound_edi": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -191,6 +346,49 @@ func partnershipResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Common
 								"common": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ControlNumbers
+										"control_numbers": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: StartingFunctionalGroupControlNumber
+												"starting_functional_group_control_number": schema.Float64Attribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.Float64{ /*START VALIDATORS*/
+														float64validator.Between(1.000000, 999999999.000000),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+														float64planmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: StartingInterchangeControlNumber
+												"starting_interchange_control_number": schema.Float64Attribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.Float64{ /*START VALIDATORS*/
+														float64validator.Between(1.000000, 999999999.000000),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+														float64planmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: StartingTransactionSetControlNumber
+												"starting_transaction_set_control_number": schema.Float64Attribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.Float64{ /*START VALIDATORS*/
+														float64validator.Between(1.000000, 999999999.000000),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+														float64planmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
 										// Property: Delimiters
 										"delimiters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -281,6 +479,21 @@ func partnershipResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Gs05TimeFormat
+										"gs_05_time_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"HHMM",
+													"HHMMSS",
+													"HHMMSSDD",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: InterchangeControlHeaders
@@ -382,6 +595,57 @@ func partnershipResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: WrapOptions
+								"wrap_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: LineLength
+										"line_length": schema.Float64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.Float64{ /*START VALIDATORS*/
+												float64validator.AtLeast(1.000000),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+												float64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: LineTerminator
+										"line_terminator": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"CRLF",
+													"LF",
+													"CR",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: WrapBy
+										"wrap_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"SEGMENT",
+													"ONE_LINE",
+													"LINE_LENGTH",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -645,6 +909,7 @@ func partnershipResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::B2BI::Partnership").WithTerraformTypeName("awscc_b2bi_partnership")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"acknowledgment_options":        "AcknowledgmentOptions",
 		"acknowledgment_requested_code": "AcknowledgmentRequestedCode",
 		"application_receiver_code":     "ApplicationReceiverCode",
 		"application_sender_code":       "ApplicationSenderCode",
@@ -652,13 +917,19 @@ func partnershipResource(ctx context.Context) (resource.Resource, error) {
 		"capability_options":            "CapabilityOptions",
 		"common":                        "Common",
 		"component_separator":           "ComponentSeparator",
+		"control_numbers":               "ControlNumbers",
 		"created_at":                    "CreatedAt",
 		"data_element_separator":        "DataElementSeparator",
 		"delimiters":                    "Delimiters",
 		"email":                         "Email",
+		"functional_acknowledgment":     "FunctionalAcknowledgment",
 		"functional_group_headers":      "FunctionalGroupHeaders",
+		"gs_05_time_format":             "Gs05TimeFormat",
+		"inbound_edi":                   "InboundEdi",
 		"interchange_control_headers":   "InterchangeControlHeaders",
 		"key":                           "Key",
+		"line_length":                   "LineLength",
+		"line_terminator":               "LineTerminator",
 		"modified_at":                   "ModifiedAt",
 		"name":                          "Name",
 		"outbound_edi":                  "OutboundEdi",
@@ -673,12 +944,18 @@ func partnershipResource(ctx context.Context) (resource.Resource, error) {
 		"segment_terminator":            "SegmentTerminator",
 		"sender_id":                     "SenderId",
 		"sender_id_qualifier":           "SenderIdQualifier",
-		"tags":                          "Tags",
-		"trading_partner_id":            "TradingPartnerId",
-		"usage_indicator_code":          "UsageIndicatorCode",
-		"validate_edi":                  "ValidateEdi",
-		"value":                         "Value",
-		"x12":                           "X12",
+		"starting_functional_group_control_number": "StartingFunctionalGroupControlNumber",
+		"starting_interchange_control_number":      "StartingInterchangeControlNumber",
+		"starting_transaction_set_control_number":  "StartingTransactionSetControlNumber",
+		"tags":                     "Tags",
+		"technical_acknowledgment": "TechnicalAcknowledgment",
+		"trading_partner_id":       "TradingPartnerId",
+		"usage_indicator_code":     "UsageIndicatorCode",
+		"validate_edi":             "ValidateEdi",
+		"value":                    "Value",
+		"wrap_by":                  "WrapBy",
+		"wrap_options":             "WrapOptions",
+		"x12":                      "X12",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

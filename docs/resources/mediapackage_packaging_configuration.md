@@ -48,7 +48,7 @@ resource "awscc_mediapackage_packaging_group" "example" {
 # Then create the packaging configuration
 resource "awscc_mediapackage_packaging_configuration" "example" {
   packaging_configuration_id = "example-packaging-config"
-  packaging_group_id        = awscc_mediapackage_packaging_group.example.id
+  packaging_group_id         = awscc_mediapackage_packaging_group.example.id
 
   # Example using DASH package configuration
   dash_package = {
@@ -365,6 +365,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_mediapackage_packaging_configuration.example
+  id = "id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_mediapackage_packaging_configuration.example "id"

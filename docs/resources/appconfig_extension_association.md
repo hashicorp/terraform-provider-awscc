@@ -46,7 +46,7 @@ resource "awscc_appconfig_environment" "example" {
 # Create AppConfig Extension Association using AWS Lambda pre-built extension
 resource "awscc_appconfig_extension_association" "example" {
   extension_identifier = "arn:aws:appconfig:${data.aws_region.current.name}:aws:lambda:1"
-  resource_identifier = "arn:aws:appconfig:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:application/${awscc_appconfig_application.example.id}/environment/${awscc_appconfig_environment.example.id}"
+  resource_identifier  = "arn:aws:appconfig:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:application/${awscc_appconfig_application.example.id}/environment/${awscc_appconfig_environment.example.id}"
   parameters = {
     "FunctionARN" = "arn:aws:lambda:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:function:example-function"
   }
@@ -87,6 +87,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_appconfig_extension_association.example
+  id = "id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_appconfig_extension_association.example "id"

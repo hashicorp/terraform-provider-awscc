@@ -23,7 +23,7 @@ Creates a DataZone group profile by assigning a group to a specific domain with 
 resource "awscc_datazone_group_profile" "example" {
   domain_identifier = "dzd_example123"
   group_identifier  = "example-group"
-  status           = "ASSIGNED"
+  status            = "ASSIGNED"
 }
 ```
 
@@ -49,6 +49,17 @@ resource "awscc_datazone_group_profile" "example" {
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_datazone_group_profile.example
+  id = "domain_id|id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_datazone_group_profile.example "domain_id|id"

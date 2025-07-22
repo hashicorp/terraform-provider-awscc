@@ -1,0 +1,1 @@
+$ terraform import awscc_workspacesinstances_workspace_instance.example "workspace_instance_id"

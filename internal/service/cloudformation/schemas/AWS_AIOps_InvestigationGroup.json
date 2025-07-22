@@ -1,0 +1,262 @@
+{
+  "typeName": "AWS::AIOps::InvestigationGroup",
+  "description": "Definition of AWS::AIOps::InvestigationGroup Resource Type",
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "required": [
+    "Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/CreatedBy",
+    "/properties/CreatedAt",
+    "/properties/LastModifiedBy",
+    "/properties/LastModifiedAt",
+    "/properties/Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/RetentionInDays"
+  ],
+  "definitions": {
+    "RoleArn": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 20,
+      "description": "The Investigation Role's ARN."
+    },
+    "StringWithPatternAndLengthLimits": {
+      "type": "string",
+      "maxLength": 512,
+      "minLength": 1,
+      "description": "User friendly name for resources."
+    },
+    "Timestamp": {
+      "type": "string",
+      "description": "The timestamp value."
+    },
+    "InvestigationGroupArn": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 20,
+      "description": "The Investigation Group's ARN."
+    },
+    "ChatbotNotificationChannel": {
+      "type": "object",
+      "properties": {
+        "SNSTopicArn": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 20
+        },
+        "ChatConfigurationArns": {
+          "type": "array",
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "CrossAccountConfiguration": {
+      "type": "object",
+      "properties": {
+        "SourceRoleArn": {
+          "$ref": "#/definitions/RoleArn"
+        }
+      },
+      "additionalProperties": false
+    },
+    "EncryptionConfigMap": {
+      "type": "object",
+      "properties": {
+        "EncryptionConfigurationType": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "KmsKeyId": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "Value": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "RoleArn": {
+      "$ref": "#/definitions/RoleArn"
+    },
+    "Name": {
+      "$ref": "#/definitions/StringWithPatternAndLengthLimits"
+    },
+    "CreatedBy": {
+      "$ref": "#/definitions/StringWithPatternAndLengthLimits"
+    },
+    "CreatedAt": {
+      "$ref": "#/definitions/Timestamp"
+    },
+    "LastModifiedBy": {
+      "$ref": "#/definitions/StringWithPatternAndLengthLimits"
+    },
+    "LastModifiedAt": {
+      "$ref": "#/definitions/StringWithPatternAndLengthLimits"
+    },
+    "Arn": {
+      "$ref": "#/definitions/InvestigationGroupArn"
+    },
+    "RetentionInDays": {
+      "type": "integer",
+      "description": "The number of days to retain the investigation group"
+    },
+    "EncryptionConfig": {
+      "$ref": "#/definitions/EncryptionConfigMap"
+    },
+    "InvestigationGroupPolicy": {
+      "type": "string",
+      "description": "Investigation Group policy"
+    },
+    "IsCloudTrailEventHistoryEnabled": {
+      "type": "boolean",
+      "description": "Flag to enable cloud trail history"
+    },
+    "TagKeyBoundaries": {
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "type": "string",
+        "maxLength": 200,
+        "minLength": 1
+      }
+    },
+    "ChatbotNotificationChannels": {
+      "description": "An array of key-value pairs of notification channels to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/ChatbotNotificationChannel"
+      }
+    },
+    "CrossAccountConfigurations": {
+      "description": "An array of cross account configurations.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/CrossAccountConfiguration"
+      }
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "aiops:TagResource",
+      "aiops:UntagResource",
+      "aiops:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "aiops:CreateInvestigationGroup",
+        "aiops:GetInvestigationGroup",
+        "aiops:GetInvestigationGroupPolicy",
+        "aiops:PutInvestigationGroupPolicy",
+        "aiops:TagResource",
+        "aiops:ListTagsForResource",
+        "iam:PassRole",
+        "kms:DescribeKey",
+        "kms:ListAliases",
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:GenerateDataKey"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "aiops:GetInvestigationGroup",
+        "aiops:GetInvestigationGroupPolicy",
+        "aiops:ListTagsForResource",
+        "kms:DescribeKey",
+        "kms:ListAliases",
+        "kms:Decrypt",
+        "kms:Encrypt"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "aiops:GetInvestigationGroup",
+        "aiops:UpdateInvestigationGroup",
+        "aiops:GetInvestigationGroupPolicy",
+        "aiops:PutInvestigationGroupPolicy",
+        "aiops:DeleteInvestigationGroupPolicy",
+        "aiops:TagResource",
+        "aiops:UntagResource",
+        "aiops:ListTagsForResource",
+        "iam:PassRole",
+        "kms:DescribeKey",
+        "kms:ListAliases",
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:GenerateDataKey"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "aiops:DeleteInvestigationGroup",
+        "aiops:GetInvestigationGroup",
+        "aiops:DeleteInvestigationGroupPolicy",
+        "aiops:GetInvestigationGroupPolicy",
+        "aiops:UntagResource",
+        "kms:DescribeKey",
+        "kms:ListAliases"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "aiops:ListInvestigationGroups",
+        "kms:DescribeKey",
+        "kms:ListAliases"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

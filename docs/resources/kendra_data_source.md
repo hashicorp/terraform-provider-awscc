@@ -52,8 +52,8 @@ resource "awscc_iam_role" "kendra_index_role" {
     ]
   })
   description = "IAM role for Kendra Index"
-  path       = "/"
-  role_name  = "kendra-index-role"
+  path        = "/"
+  role_name   = "kendra-index-role"
 
   policies = [
     {
@@ -128,8 +128,8 @@ resource "awscc_iam_role" "kendra_datasource_role" {
     ]
   })
   description = "IAM role for Kendra Data Source"
-  path       = "/"
-  role_name  = "kendra-datasource-role"
+  path        = "/"
+  role_name   = "kendra-datasource-role"
 
   policies = [
     {
@@ -342,6 +342,7 @@ Optional:
 - `salesforce_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration))
 - `service_now_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--service_now_configuration))
 - `share_point_configuration` (Attributes) SharePoint configuration (see [below for nested schema](#nestedatt--data_source_configuration--share_point_configuration))
+- `template_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--template_configuration))
 - `web_crawler_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--web_crawler_configuration))
 - `work_docs_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--work_docs_configuration))
 
@@ -850,6 +851,14 @@ Optional:
 
 
 
+<a id="nestedatt--data_source_configuration--template_configuration"></a>
+### Nested Schema for `data_source_configuration.template_configuration`
+
+Optional:
+
+- `template` (String)
+
+
 <a id="nestedatt--data_source_configuration--web_crawler_configuration"></a>
 ### Nested Schema for `data_source_configuration.web_crawler_configuration`
 
@@ -955,6 +964,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_kendra_data_source.example
+  id = "id|index_id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_kendra_data_source.example "id|index_id"

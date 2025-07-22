@@ -95,8 +95,8 @@ resource "awscc_fis_experiment_template" "example" {
 resource "awscc_fis_target_account_configuration" "example" {
   account_id             = data.aws_caller_identity.current.account_id
   experiment_template_id = awscc_fis_experiment_template.example.id
-  role_arn              = awscc_iam_role.fis_role.arn
-  description           = "Example FIS target account configuration"
+  role_arn               = awscc_iam_role.fis_role.arn
+  description            = "Example FIS target account configuration"
 }
 ```
 
@@ -120,6 +120,17 @@ resource "awscc_fis_target_account_configuration" "example" {
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_fis_target_account_configuration.example
+  id = "experiment_template_id|account_id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_fis_target_account_configuration.example "experiment_template_id|account_id"

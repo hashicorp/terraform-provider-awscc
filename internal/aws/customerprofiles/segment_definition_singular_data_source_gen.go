@@ -1402,6 +1402,39 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	                      ],
 		//	                      "type": "object"
 		//	                    },
+		//	                    "ProfileType": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Specifies profile type based criteria for a segment.",
+		//	                      "properties": {
+		//	                        "DimensionType": {
+		//	                          "description": "The type of segment dimension to use for a profile type dimension.",
+		//	                          "enum": [
+		//	                            "INCLUSIVE",
+		//	                            "EXCLUSIVE"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Values": {
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "description": "The type of profile.",
+		//	                            "enum": [
+		//	                              "ACCOUNT_PROFILE",
+		//	                              "PROFILE"
+		//	                            ],
+		//	                            "type": "string"
+		//	                          },
+		//	                          "maxItems": 1,
+		//	                          "minItems": 1,
+		//	                          "type": "array"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "DimensionType",
+		//	                        "Values"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
 		//	                    "ShippingAddress": {
 		//	                      "additionalProperties": false,
 		//	                      "description": "The address based criteria for the segment.",
@@ -2347,6 +2380,23 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 													Description: "Specifies profile based criteria for a segment.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
+												// Property: ProfileType
+												"profile_type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: DimensionType
+														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The type of segment dimension to use for a profile type dimension.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Values
+														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Specifies profile type based criteria for a segment.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
 												// Property: ShippingAddress
 												"shipping_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -2606,6 +2656,7 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 		"phone_number":            "PhoneNumber",
 		"postal_code":             "PostalCode",
 		"profile_attributes":      "ProfileAttributes",
+		"profile_type":            "ProfileType",
 		"province":                "Province",
 		"range":                   "Range",
 		"segment_definition_arn":  "SegmentDefinitionArn",

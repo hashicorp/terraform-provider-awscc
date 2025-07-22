@@ -31,7 +31,7 @@ resource "awscc_autoscaling_auto_scaling_group" "example" {
     launch_template_id = awscc_ec2_launch_template.example.id
   }
 
-  desired_capacity    = "1"
+  desired_capacity = "1"
   vpc_zone_identifier = [
     "subnetIdAz1",
     "subnetIdAz2",
@@ -92,8 +92,8 @@ resource "awscc_autoscaling_auto_scaling_group" "example" {
     launch_template_id = awscc_ec2_launch_template.example.id
   }
 
-  desired_capacity    = "1"
-  
+  desired_capacity = "1"
+
   vpc_zone_identifier = [
     "subnetIdAz1",
     "subnetIdAz2",
@@ -703,6 +703,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_autoscaling_auto_scaling_group.example
+  id = "auto_scaling_group_name"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_autoscaling_auto_scaling_group.example "auto_scaling_group_name"

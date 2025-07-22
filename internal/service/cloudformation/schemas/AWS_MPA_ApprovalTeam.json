@@ -1,0 +1,240 @@
+{
+  "typeName": "AWS::MPA::ApprovalTeam",
+  "description": "Resource Type definition for AWS::MPA::ApprovalTeam.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "Timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "MofNApprovalStrategy": {
+      "type": "object",
+      "properties": {
+        "MinApprovalsRequired": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "MinApprovalsRequired"
+      ]
+    },
+    "ApprovalStrategy": {
+      "type": "object",
+      "properties": {
+        "MofN": {
+          "$ref": "#/definitions/MofNApprovalStrategy"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "MofN"
+      ]
+    },
+    "Approver": {
+      "type": "object",
+      "properties": {
+        "PrimaryIdentityId": {
+          "type": "string"
+        },
+        "PrimaryIdentitySourceArn": {
+          "type": "string"
+        },
+        "ApproverId": {
+          "type": "string"
+        },
+        "ResponseTime": {
+          "$ref": "#/definitions/Timestamp"
+        },
+        "PrimaryIdentityStatus": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "PrimaryIdentityId",
+        "PrimaryIdentitySourceArn"
+      ]
+    },
+    "Policy": {
+      "properties": {
+        "PolicyArn": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "PolicyArn"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "properties": {
+    "ApprovalStrategy": {
+      "$ref": "#/definitions/ApprovalStrategy"
+    },
+    "Approvers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Approver"
+      },
+      "minItems": 1,
+      "insertionOrder": false,
+      "uniqueItems": true
+    },
+    "Tags": {
+      "$ref": "#/definitions/Tags"
+    },
+    "Policies": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Policy"
+      },
+      "minItems": 1,
+      "insertionOrder": false,
+      "uniqueItems": true
+    },
+    "Name": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "string"
+    },
+    "Arn": {
+      "type": "string"
+    },
+    "VersionId": {
+      "type": "string"
+    },
+    "UpdateSessionArn": {
+      "type": "string"
+    },
+    "CreationTime": {
+      "$ref": "#/definitions/Timestamp"
+    },
+    "LastUpdateTime": {
+      "$ref": "#/definitions/Timestamp"
+    },
+    "NumberOfApprovers": {
+      "type": "integer"
+    },
+    "Status": {
+      "type": "string"
+    },
+    "StatusCode": {
+      "type": "string"
+    },
+    "StatusMessage": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "mpa:TagResource",
+      "mpa:ListTagsForResource",
+      "mpa:UntagResource"
+    ]
+  },
+  "required": [
+    "ApprovalStrategy",
+    "Approvers",
+    "Policies",
+    "Name",
+    "Description"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/VersionId",
+    "/properties/NumberOfApprovers",
+    "/properties/Approvers/*/ApproverId",
+    "/properties/Approvers/*/ResponseTime",
+    "/properties/Approvers/*/PrimaryIdentityStatus",
+    "/properties/UpdateSessionArn",
+    "/properties/CreationTime",
+    "/properties/LastUpdateTime",
+    "/properties/Status",
+    "/properties/StatusCode",
+    "/properties/StatusMessage"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/Policies",
+    "/properties/Policies/*/PolicyArn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "mpa:CreateApprovalTeam",
+        "mpa:TagResource",
+        "mpa:GetApprovalTeam",
+        "mpa:ListTagsForResource"
+      ],
+      "timeoutInMinutes": 2160
+    },
+    "read": {
+      "permissions": [
+        "mpa:GetApprovalTeam",
+        "mpa:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "mpa:GetApprovalTeam",
+        "mpa:UpdateApprovalTeam",
+        "mpa:TagResource",
+        "mpa:ListTagsForResource",
+        "mpa:UntagResource"
+      ],
+      "timeoutInMinutes": 2160
+    },
+    "delete": {
+      "permissions": [
+        "mpa:StartActiveApprovalTeamDeletion",
+        "mpa:DeleteInactiveApprovalTeamVersion",
+        "mpa:GetApprovalTeam",
+        "mpa:UntagResource"
+      ],
+      "timeoutInMinutes": 2160
+    },
+    "list": {
+      "permissions": [
+        "mpa:ListApprovalTeams",
+        "mpa:ListTagsForResource"
+      ]
+    }
+  }
+}

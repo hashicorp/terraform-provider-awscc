@@ -115,8 +115,7 @@
       },
       "required": [
         "AccountId",
-        "DisplayName",
-        "MemberAbilities"
+        "DisplayName"
       ],
       "additionalProperties": false
     },
@@ -302,8 +301,6 @@
   },
   "required": [
     "CreatorDisplayName",
-    "CreatorMemberAbilities",
-    "Members",
     "Name",
     "Description",
     "QueryLogStatus"

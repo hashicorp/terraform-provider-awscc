@@ -14,7 +14,7 @@ The AWS::GameLift::GameSessionQueue resource creates an Amazon GameLift (GameLif
 To use awscc_gamelift_game_session_queue to create a GameLift Game Session Queue:
 ```terraform
 resource "awscc_gamelift_game_session_queue" "example" {
-  name             = "ExampleQueue"
+  name               = "ExampleQueue"
   timeout_in_seconds = 600
 
   destinations = [
@@ -94,6 +94,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_gamelift_game_session_queue.example
+  id = "name"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_gamelift_game_session_queue.example "name"

@@ -3,7 +3,7 @@ resource "awscc_apigatewayv2_api" "example_api" {
   protocol_type              = "WEBSOCKET"
   route_selection_expression = "$request.body.action"
   tags = {
-    key = "Modified By"
+    key   = "Modified By"
     value = "AWSCC"
   }
 }

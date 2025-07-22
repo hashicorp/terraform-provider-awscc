@@ -36,8 +36,8 @@ resource "aws_s3_bucket_policy" "allow_elb_access" {
     Version = "2012-10-17"
     Statement = [
       {
-        Sid       = "AllowELBService"
-        Effect    = "Allow"
+        Sid    = "AllowELBService"
+        Effect = "Allow"
         Principal = {
           Service = "elasticloadbalancing.amazonaws.com"
         }
@@ -120,6 +120,17 @@ Read-Only:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_elasticloadbalancingv2_trust_store_revocation.example
+  id = "revocation_id|trust_store_arn"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_elasticloadbalancingv2_trust_store_revocation.example "revocation_id|trust_store_arn"

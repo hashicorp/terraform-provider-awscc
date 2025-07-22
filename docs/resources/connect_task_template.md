@@ -22,8 +22,8 @@ Create an Amazon Connect task template with customizable fields including requir
 # Create an Amazon Connect instance
 resource "awscc_connect_instance" "example" {
   identity_management_type = "CONNECT_MANAGED"
-  instance_alias          = "task-template-example"
-  
+  instance_alias           = "task-template-example"
+
   attributes = {
     inbound_calls  = true
     outbound_calls = true
@@ -245,6 +245,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_connect_task_template.example
+  id = "arn"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_connect_task_template.example "arn"

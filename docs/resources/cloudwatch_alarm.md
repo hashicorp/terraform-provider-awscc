@@ -21,28 +21,28 @@ This example creates an alarm that is based on an anomaly detector.
 
 ```terraform
 resource "awscc_cloudwatch_alarm" "lambda_invocations_alarm" {
-  alarm_name = "LambdaInvocationsAlarm"
+  alarm_name          = "LambdaInvocationsAlarm"
   comparison_operator = "LessThanLowerOrGreaterThanUpperThreshold"
-  evaluation_periods = 1
+  evaluation_periods  = 1
 
   metrics = [{
     expression = "ANOMALY_DETECTION_BAND(m1, 2)"
-    id = "ad1"
-  },
-  {
-    id = "m1"
-    metric_stat = {
-      metric = {
-        metric_name = "Invocations"
-        namespace = "AWS/Lambda"
+    id         = "ad1"
+    },
+    {
+      id = "m1"
+      metric_stat = {
+        metric = {
+          metric_name = "Invocations"
+          namespace   = "AWS/Lambda"
+        }
+        period = 86400
+        stat   = "Sum"
       }
-      period = 86400
-      stat = "Sum"
-    }
   }]
 
   threshold_metric_id = "ad1"
-  treat_missing_data = "breaching"
+  treat_missing_data  = "breaching"
 }
 ```
 
@@ -169,6 +169,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_cloudwatch_alarm.example
+  id = "alarm_name"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_cloudwatch_alarm.example "alarm_name"

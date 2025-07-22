@@ -24,16 +24,16 @@ data "aws_iam_policy_document" "fleet_assume_role" {
   statement {
     actions = ["sts:AssumeRole"]
     principals {
-      type = "Service"
+      type        = "Service"
       identifiers = ["gamelift.amazonaws.com"]
     }
   }
 }
 
 resource "awscc_iam_role" "fleet_role" {
-  role_name = "gamelift-fleet-role"
+  role_name                   = "gamelift-fleet-role"
   assume_role_policy_document = data.aws_iam_policy_document.fleet_assume_role.json
-  description               = "IAM role for GameLift Fleet"
+  description                 = "IAM role for GameLift Fleet"
   policies = [{
     policy_name = "fleet-policy"
     policy_document = jsonencode({
@@ -68,7 +68,7 @@ resource "awscc_gamelift_container_fleet" "example" {
   description    = "Example GameLift Container Fleet"
 
   instance_type = "c5.large"
-  billing_type = "ON_DEMAND"
+  billing_type  = "ON_DEMAND"
 
   tags = [{
     key   = "Modified By"
@@ -180,6 +180,7 @@ Optional:
 Optional:
 
 - `log_destination` (String) Configures the service that provides logs.
+- `log_group_arn` (String) If log destination is CLOUDWATCH, logs are sent to the specified log group in Amazon CloudWatch.
 - `s3_bucket_name` (String) The name of the S3 bucket to pull logs from if S3 is the LogDestination
 
 
@@ -226,6 +227,17 @@ Read-Only:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_gamelift_container_fleet.example
+  id = "fleet_id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_gamelift_container_fleet.example "fleet_id"

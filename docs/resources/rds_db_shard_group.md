@@ -124,10 +124,10 @@ resource "awscc_rds_db_shard_group" "example" {
 
 ### Optional
 
-- `compute_redundancy` (Number) Specifies whether to create standby DB shard groups for the DB shard group. Valid values are the following:
-  +  0 - Creates a DB shard group without a standby DB shard group. This is the default value.
-  +  1 - Creates a DB shard group with a standby DB shard group in a different Availability Zone (AZ).
-  +  2 - Creates a DB shard group with two standby DB shard groups in two different AZs.
+- `compute_redundancy` (Number) Specifies whether to create standby standby DB data access shard for the DB shard group. Valid values are the following:
+  +  0 - Creates a DB shard group without a standby DB data access shard. This is the default value.
+  +  1 - Creates a DB shard group with a standby DB data access shard in a different Availability Zone (AZ).
+  +  2 - Creates a DB shard group with two standby DB data access shard in two different AZs.
 - `db_shard_group_identifier` (String) The name of the DB shard group.
 - `min_acu` (Number) The minimum capacity of the DB shard group in Aurora capacity units (ACUs).
 - `publicly_accessible` (Boolean) Specifies whether the DB shard group is publicly accessible.
@@ -160,6 +160,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_rds_db_shard_group.example
+  id = "db_shard_group_identifier"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_rds_db_shard_group.example "db_shard_group_identifier"

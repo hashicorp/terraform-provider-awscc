@@ -165,14 +165,16 @@
         "cloudfront:GetDistributionTenant",
         "cloudfront:GetManagedCertificateDetails",
         "cloudfront:TagResource",
-        "cloudfront:VerifyDnsConfiguration"
+        "cloudfront:VerifyDnsConfiguration",
+        "wafv2:GetWebACL"
       ]
     },
     "delete": {
       "permissions": [
         "cloudfront:DeleteDistributionTenant",
         "cloudfront:UpdateDistributionTenant",
-        "cloudfront:GetDistributionTenant"
+        "cloudfront:GetDistributionTenant",
+        "wafv2:GetWebACL"
       ]
     },
     "list": {
@@ -197,7 +199,8 @@
         "cloudfront:ListTagsForResource",
         "cloudfront:TagResource",
         "cloudfront:UntagResource",
-        "cloudfront:VerifyDnsConfiguration"
+        "cloudfront:VerifyDnsConfiguration",
+        "wafv2:GetWebACL"
       ]
     }
   },

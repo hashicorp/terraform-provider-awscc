@@ -17,7 +17,7 @@ resource "awscc_ec2_placement_group" "web" {
   strategy = "cluster"
   tags = [
     {
-      key =  "Modified By"
+      key   = "Modified By"
       value = "AWSCC"
     }
   ]
@@ -27,11 +27,11 @@ resource "awscc_ec2_placement_group" "web" {
 To create partition ec2 placement group with tags
 ```terraform
 resource "awscc_ec2_placement_group" "web" {
-  strategy = "partition"
+  strategy        = "partition"
   partition_count = 2
   tags = [
     {
-      key =  "Modified By"
+      key   = "Modified By"
       value = "AWSCC"
     }
   ]
@@ -41,11 +41,11 @@ resource "awscc_ec2_placement_group" "web" {
 To create spread ec2 placement group with tags
 ```terraform
 resource "awscc_ec2_placement_group" "web" {
-  strategy = "spread"
+  strategy     = "spread"
   spread_level = "host"
   tags = [
     {
-      key =  "Modified By"
+      key   = "Modified By"
       value = "AWSCC"
     }
   ]
@@ -78,6 +78,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_ec2_placement_group.example
+  id = "group_name"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_ec2_placement_group.example "group_name"

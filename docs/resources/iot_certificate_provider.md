@@ -121,7 +121,7 @@ data "archive_file" "lambda_zip" {
 # IoT Certificate Provider
 resource "awscc_iot_certificate_provider" "example" {
   certificate_provider_name      = "example-provider"
-  lambda_function_arn           = aws_lambda_function.cert_provider.arn
+  lambda_function_arn            = aws_lambda_function.cert_provider.arn
   account_default_for_operations = ["CreateCertificateFromCsr"]
 
   tags = [{
@@ -160,6 +160,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_iot_certificate_provider.example
+  id = "certificate_provider_name"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_iot_certificate_provider.example "certificate_provider_name"

@@ -53,7 +53,7 @@ resource "awscc_ec2_subnet" "msk_subnet_2" {
 # Security Group for MSK
 resource "awscc_ec2_security_group" "msk_sg" {
   group_description = "Security group for MSK cluster"
-  vpc_id           = awscc_ec2_vpc.msk_vpc.id
+  vpc_id            = awscc_ec2_vpc.msk_vpc.id
   security_group_ingress = [
     {
       ip_protocol = "tcp"
@@ -414,6 +414,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_msk_cluster.example
+  id = "arn"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_msk_cluster.example "arn"

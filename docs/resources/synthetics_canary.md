@@ -109,6 +109,7 @@ Optional:
 
 - `active_tracing` (Boolean) Enable active tracing if set to true
 - `environment_variables` (Map of String) Environment variable key-value pairs.
+- `ephemeral_storage` (Number) Provide ephemeralStorage available for canary in MB
 - `memory_in_mb` (Number) Provide maximum memory available for canary in MB
 - `timeout_in_seconds` (Number) Provide maximum canary timeout per run in seconds
 
@@ -153,6 +154,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_synthetics_canary.example
+  id = "name"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_synthetics_canary.example "name"

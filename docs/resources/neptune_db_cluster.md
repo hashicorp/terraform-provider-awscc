@@ -27,7 +27,7 @@ resource "awscc_neptune_db_cluster" "default" {
   storage_encrypted              = true
   # Use ARN from awscc_kms_key to avoid drift due to short id
   # Reference : https://github.com/hashicorp/terraform-provider-awscc/issues/1735
-  kms_key_id                     = awscc_kms_key.example.arn
+  kms_key_id = awscc_kms_key.example.arn
 
   tags = [{
     key   = "Modified By"
@@ -136,6 +136,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_neptune_db_cluster.example
+  id = "db_cluster_identifier"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_neptune_db_cluster.example "db_cluster_identifier"

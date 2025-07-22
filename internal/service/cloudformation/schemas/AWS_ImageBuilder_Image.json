@@ -7,7 +7,7 @@
     ],
     "taggable": true,
     "tagOnCreate": true,
-    "tagUpdatable": false,
+    "tagUpdatable": true,
     "tagProperty": "/properties/Tags",
     "cloudFormationSystemTags": true
   },
@@ -53,6 +53,12 @@
       ],
       "timeoutInMinutes": 720
     },
+    "update": {
+      "permissions": [
+        "imagebuilder:TagResource",
+        "imagebuilder:UntagResource"
+      ]
+    },
     "list": {
       "permissions": [
         "imagebuilder:ListImages",
@@ -94,8 +100,7 @@
     "/properties/DistributionConfigurationArn",
     "/properties/ImageTestsConfiguration",
     "/properties/ImageScanningConfiguration",
-    "/properties/EnhancedImageMetadataEnabled",
-    "/properties/Tags"
+    "/properties/EnhancedImageMetadataEnabled"
   ],
   "additionalProperties": false,
   "primaryIdentifier": [

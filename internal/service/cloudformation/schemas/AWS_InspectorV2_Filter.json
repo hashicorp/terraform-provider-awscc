@@ -3,6 +3,16 @@
   "description": "Inspector Filter resource schema",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-inspector.git",
   "definitions": {
+    "FilterTagMap": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "pattern": "^.{1,255}$"
+        }
+      },
+      "additionalProperties": false
+    },
     "StringComparison": {
       "type": "string",
       "enum": [
@@ -156,10 +166,16 @@
         "Epoch": {
           "$ref": "#/definitions/NumberFilter"
         },
+        "FilePath": {
+          "$ref": "#/definitions/StringFilter"
+        },
         "Name": {
           "$ref": "#/definitions/StringFilter"
         },
         "Release": {
+          "$ref": "#/definitions/StringFilter"
+        },
+        "SourceLambdaLayerArn": {
           "$ref": "#/definitions/StringFilter"
         },
         "SourceLayerHash": {
@@ -186,6 +202,15 @@
         "AwsAccountId": {
           "$ref": "#/definitions/StringFilterList"
         },
+        "CodeVulnerabilityDetectorName": {
+          "$ref": "#/definitions/StringFilterList"
+        },
+        "CodeVulnerabilityDetectorTags": {
+          "$ref": "#/definitions/StringFilterList"
+        },
+        "CodeVulnerabilityFilePath": {
+          "$ref": "#/definitions/StringFilterList"
+        },
         "ComponentId": {
           "$ref": "#/definitions/StringFilterList"
         },
@@ -207,9 +232,6 @@
         "EcrImageHash": {
           "$ref": "#/definitions/StringFilterList"
         },
-        "EcrImageTags": {
-          "$ref": "#/definitions/StringFilterList"
-        },
         "EcrImagePushedAt": {
           "$ref": "#/definitions/DateFilterList"
         },
@@ -217,6 +239,15 @@
           "$ref": "#/definitions/StringFilterList"
         },
         "EcrImageRepositoryName": {
+          "$ref": "#/definitions/StringFilterList"
+        },
+        "EcrImageTags": {
+          "$ref": "#/definitions/StringFilterList"
+        },
+        "EpssScore": {
+          "$ref": "#/definitions/NumberFilterList"
+        },
+        "ExploitAvailable": {
           "$ref": "#/definitions/StringFilterList"
         },
         "FindingArn": {
@@ -231,8 +262,26 @@
         "FirstObservedAt": {
           "$ref": "#/definitions/DateFilterList"
         },
+        "FixAvailable": {
+          "$ref": "#/definitions/StringFilterList"
+        },
         "InspectorScore": {
           "$ref": "#/definitions/NumberFilterList"
+        },
+        "LambdaFunctionExecutionRoleArn": {
+          "$ref": "#/definitions/StringFilterList"
+        },
+        "LambdaFunctionLastModifiedAt": {
+          "$ref": "#/definitions/DateFilterList"
+        },
+        "LambdaFunctionLayers": {
+          "$ref": "#/definitions/StringFilterList"
+        },
+        "LambdaFunctionName": {
+          "$ref": "#/definitions/StringFilterList"
+        },
+        "LambdaFunctionRuntime": {
+          "$ref": "#/definitions/StringFilterList"
         },
         "LastObservedAt": {
           "$ref": "#/definitions/DateFilterList"
@@ -322,10 +371,21 @@
       "type": "string",
       "maxLength": 128,
       "minLength": 1
+    },
+    "Tags": {
+      "$ref": "#/definitions/FilterTagMap"
     }
   },
   "tagging": {
-    "taggable": false
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "inspector2:TagResource",
+      "inspector2:UntagResource"
+    ]
   },
   "required": [
     "Name",
@@ -343,18 +403,23 @@
     "create": {
       "permissions": [
         "inspector2:CreateFilter",
-        "inspector2:ListFilters"
+        "inspector2:ListFilters",
+        "inspector2:TagResource"
       ]
     },
     "read": {
       "permissions": [
-        "inspector2:ListFilters"
+        "inspector2:ListFilters",
+        "inspector2:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
         "inspector2:ListFilters",
-        "inspector2:UpdateFilter"
+        "inspector2:UpdateFilter",
+        "inspector2:TagResource",
+        "inspector2:UntagResource",
+        "inspector2:ListTagsForResource"
       ]
     },
     "delete": {

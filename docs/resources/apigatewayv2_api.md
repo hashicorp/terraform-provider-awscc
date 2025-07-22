@@ -19,7 +19,7 @@ resource "awscc_apigatewayv2_api" "example_api" {
   protocol_type              = "WEBSOCKET"
   route_selection_expression = "$request.body.action"
   tags = {
-    key = "Modified By"
+    key   = "Modified By"
     value = "AWSCC"
   }
 }
@@ -94,6 +94,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_apigatewayv2_api.example
+  id = "api_id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_apigatewayv2_api.example "api_id"

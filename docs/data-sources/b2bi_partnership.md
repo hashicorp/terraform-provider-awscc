@@ -39,7 +39,33 @@ Data Source schema for AWS::B2BI::Partnership
 
 Read-Only:
 
+- `inbound_edi` (Attributes) (see [below for nested schema](#nestedatt--capability_options--inbound_edi))
 - `outbound_edi` (Attributes) (see [below for nested schema](#nestedatt--capability_options--outbound_edi))
+
+<a id="nestedatt--capability_options--inbound_edi"></a>
+### Nested Schema for `capability_options.inbound_edi`
+
+Read-Only:
+
+- `x12` (Attributes) (see [below for nested schema](#nestedatt--capability_options--inbound_edi--x12))
+
+<a id="nestedatt--capability_options--inbound_edi--x12"></a>
+### Nested Schema for `capability_options.inbound_edi.x12`
+
+Read-Only:
+
+- `acknowledgment_options` (Attributes) (see [below for nested schema](#nestedatt--capability_options--inbound_edi--x12--acknowledgment_options))
+
+<a id="nestedatt--capability_options--inbound_edi--x12--acknowledgment_options"></a>
+### Nested Schema for `capability_options.inbound_edi.x12.acknowledgment_options`
+
+Read-Only:
+
+- `functional_acknowledgment` (String)
+- `technical_acknowledgment` (String)
+
+
+
 
 <a id="nestedatt--capability_options--outbound_edi"></a>
 ### Nested Schema for `capability_options.outbound_edi`
@@ -54,16 +80,29 @@ Read-Only:
 Read-Only:
 
 - `common` (Attributes) (see [below for nested schema](#nestedatt--capability_options--outbound_edi--x12--common))
+- `wrap_options` (Attributes) (see [below for nested schema](#nestedatt--capability_options--outbound_edi--x12--wrap_options))
 
 <a id="nestedatt--capability_options--outbound_edi--x12--common"></a>
 ### Nested Schema for `capability_options.outbound_edi.x12.common`
 
 Read-Only:
 
+- `control_numbers` (Attributes) (see [below for nested schema](#nestedatt--capability_options--outbound_edi--x12--common--control_numbers))
 - `delimiters` (Attributes) (see [below for nested schema](#nestedatt--capability_options--outbound_edi--x12--common--delimiters))
 - `functional_group_headers` (Attributes) (see [below for nested schema](#nestedatt--capability_options--outbound_edi--x12--common--functional_group_headers))
+- `gs_05_time_format` (String)
 - `interchange_control_headers` (Attributes) (see [below for nested schema](#nestedatt--capability_options--outbound_edi--x12--common--interchange_control_headers))
 - `validate_edi` (Boolean)
+
+<a id="nestedatt--capability_options--outbound_edi--x12--common--control_numbers"></a>
+### Nested Schema for `capability_options.outbound_edi.x12.common.control_numbers`
+
+Read-Only:
+
+- `starting_functional_group_control_number` (Number)
+- `starting_interchange_control_number` (Number)
+- `starting_transaction_set_control_number` (Number)
+
 
 <a id="nestedatt--capability_options--outbound_edi--x12--common--delimiters"></a>
 ### Nested Schema for `capability_options.outbound_edi.x12.common.delimiters`
@@ -98,6 +137,16 @@ Read-Only:
 - `sender_id_qualifier` (String)
 - `usage_indicator_code` (String)
 
+
+
+<a id="nestedatt--capability_options--outbound_edi--x12--wrap_options"></a>
+### Nested Schema for `capability_options.outbound_edi.x12.wrap_options`
+
+Read-Only:
+
+- `line_length` (Number)
+- `line_terminator` (String)
+- `wrap_by` (String)
 
 
 

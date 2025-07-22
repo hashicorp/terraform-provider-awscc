@@ -8,7 +8,7 @@ resource "awscc_iam_group_policy" "example" {
       {
         Effect = "Allow"
         Action = [
-          "s3:ListBucket"]
+        "s3:ListBucket"]
         Resource = "arn:aws:s3:::my_bucket_name"
       }
     ]

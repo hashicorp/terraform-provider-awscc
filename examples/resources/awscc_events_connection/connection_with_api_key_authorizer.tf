@@ -1,6 +1,6 @@
 resource "awscc_events_connection" "pagerduty_connection" {
-  name                = "pagerduty-connection"
-  authorization_type  = "API_KEY"
+  name               = "pagerduty-connection"
+  authorization_type = "API_KEY"
 
   auth_parameters = {
     api_key_auth_parameters = {

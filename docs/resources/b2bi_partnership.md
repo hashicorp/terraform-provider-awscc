@@ -42,7 +42,33 @@ Definition of AWS::B2BI::Partnership Resource Type
 
 Optional:
 
+- `inbound_edi` (Attributes) (see [below for nested schema](#nestedatt--capability_options--inbound_edi))
 - `outbound_edi` (Attributes) (see [below for nested schema](#nestedatt--capability_options--outbound_edi))
+
+<a id="nestedatt--capability_options--inbound_edi"></a>
+### Nested Schema for `capability_options.inbound_edi`
+
+Optional:
+
+- `x12` (Attributes) (see [below for nested schema](#nestedatt--capability_options--inbound_edi--x12))
+
+<a id="nestedatt--capability_options--inbound_edi--x12"></a>
+### Nested Schema for `capability_options.inbound_edi.x12`
+
+Optional:
+
+- `acknowledgment_options` (Attributes) (see [below for nested schema](#nestedatt--capability_options--inbound_edi--x12--acknowledgment_options))
+
+<a id="nestedatt--capability_options--inbound_edi--x12--acknowledgment_options"></a>
+### Nested Schema for `capability_options.inbound_edi.x12.acknowledgment_options`
+
+Optional:
+
+- `functional_acknowledgment` (String)
+- `technical_acknowledgment` (String)
+
+
+
 
 <a id="nestedatt--capability_options--outbound_edi"></a>
 ### Nested Schema for `capability_options.outbound_edi`
@@ -57,16 +83,29 @@ Optional:
 Optional:
 
 - `common` (Attributes) (see [below for nested schema](#nestedatt--capability_options--outbound_edi--x12--common))
+- `wrap_options` (Attributes) (see [below for nested schema](#nestedatt--capability_options--outbound_edi--x12--wrap_options))
 
 <a id="nestedatt--capability_options--outbound_edi--x12--common"></a>
 ### Nested Schema for `capability_options.outbound_edi.x12.common`
 
 Optional:
 
+- `control_numbers` (Attributes) (see [below for nested schema](#nestedatt--capability_options--outbound_edi--x12--common--control_numbers))
 - `delimiters` (Attributes) (see [below for nested schema](#nestedatt--capability_options--outbound_edi--x12--common--delimiters))
 - `functional_group_headers` (Attributes) (see [below for nested schema](#nestedatt--capability_options--outbound_edi--x12--common--functional_group_headers))
+- `gs_05_time_format` (String)
 - `interchange_control_headers` (Attributes) (see [below for nested schema](#nestedatt--capability_options--outbound_edi--x12--common--interchange_control_headers))
 - `validate_edi` (Boolean)
+
+<a id="nestedatt--capability_options--outbound_edi--x12--common--control_numbers"></a>
+### Nested Schema for `capability_options.outbound_edi.x12.common.control_numbers`
+
+Optional:
+
+- `starting_functional_group_control_number` (Number)
+- `starting_interchange_control_number` (Number)
+- `starting_transaction_set_control_number` (Number)
+
 
 <a id="nestedatt--capability_options--outbound_edi--x12--common--delimiters"></a>
 ### Nested Schema for `capability_options.outbound_edi.x12.common.delimiters`
@@ -103,6 +142,16 @@ Optional:
 
 
 
+<a id="nestedatt--capability_options--outbound_edi--x12--wrap_options"></a>
+### Nested Schema for `capability_options.outbound_edi.x12.wrap_options`
+
+Optional:
+
+- `line_length` (Number)
+- `line_terminator` (String)
+- `wrap_by` (String)
+
+
 
 
 
@@ -117,6 +166,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_b2bi_partnership.example
+  id = "partnership_id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_b2bi_partnership.example "partnership_id"

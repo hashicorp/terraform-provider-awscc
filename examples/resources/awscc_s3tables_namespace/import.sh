@@ -1,0 +1,1 @@
+$ terraform import awscc_s3tables_namespace.example "table_bucket_arn|namespace"

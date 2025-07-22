@@ -19,130 +19,130 @@ resource "awscc_verifiedpermissions_policy_store" "example" {
   }
   schema = {
     cedar_json = jsonencode({
-      "PhotoApp": {
-        "commonTypes": {
-          "PersonType": {
-            "type": "Record",
-            "attributes": {
-              "age": {
-                "type": "Long"
+      "PhotoApp" : {
+        "commonTypes" : {
+          "PersonType" : {
+            "type" : "Record",
+            "attributes" : {
+              "age" : {
+                "type" : "Long"
               },
-              "name": {
-                "type": "String"
+              "name" : {
+                "type" : "String"
               }
             }
           },
-          "ContextType": {
-            "type": "Record",
-            "attributes": {
-              "ip": {
-                "type": "Extension",
-                "name": "ipaddr",
-                "required": false
+          "ContextType" : {
+            "type" : "Record",
+            "attributes" : {
+              "ip" : {
+                "type" : "Extension",
+                "name" : "ipaddr",
+                "required" : false
               },
-              "authenticated": {
-                "type": "Boolean",
-                "required": true
+              "authenticated" : {
+                "type" : "Boolean",
+                "required" : true
               }
             }
           }
         },
-        "entityTypes": {
-          "User": {
-            "shape": {
-              "type": "Record",
-              "attributes": {
-                "userId": {
-                  "type": "String"
+        "entityTypes" : {
+          "User" : {
+            "shape" : {
+              "type" : "Record",
+              "attributes" : {
+                "userId" : {
+                  "type" : "String"
                 },
-                "personInformation": {
-                  "type": "PersonType"
+                "personInformation" : {
+                  "type" : "PersonType"
                 }
               }
             },
-            "memberOfTypes": [
+            "memberOfTypes" : [
               "UserGroup"
             ]
           },
-          "UserGroup": {
-            "shape": {
-              "type": "Record",
-              "attributes": {}
+          "UserGroup" : {
+            "shape" : {
+              "type" : "Record",
+              "attributes" : {}
             }
           },
-          "Photo": {
-            "shape": {
-              "type": "Record",
-              "attributes": {
-                "account": {
-                  "type": "Entity",
-                  "name": "Account",
-                  "required": true
+          "Photo" : {
+            "shape" : {
+              "type" : "Record",
+              "attributes" : {
+                "account" : {
+                  "type" : "Entity",
+                  "name" : "Account",
+                  "required" : true
                 },
-                "private": {
-                  "type": "Boolean",
-                  "required": true
+                "private" : {
+                  "type" : "Boolean",
+                  "required" : true
                 }
               }
             },
-            "memberOfTypes": [
+            "memberOfTypes" : [
               "Album",
               "Account"
             ]
           },
-          "Album": {
-            "shape": {
-              "type": "Record",
-              "attributes": {}
+          "Album" : {
+            "shape" : {
+              "type" : "Record",
+              "attributes" : {}
             }
           },
-          "Account": {
-            "shape": {
-              "type": "Record",
-              "attributes": {}
+          "Account" : {
+            "shape" : {
+              "type" : "Record",
+              "attributes" : {}
             }
           }
         },
-        "actions": {
-          "viewPhoto": {
-            "appliesTo": {
-              "principalTypes": [
+        "actions" : {
+          "viewPhoto" : {
+            "appliesTo" : {
+              "principalTypes" : [
                 "User",
                 "UserGroup"
               ],
-              "resourceTypes": [
+              "resourceTypes" : [
                 "Photo"
               ],
-              "context": {
-                "type": "ContextType"
+              "context" : {
+                "type" : "ContextType"
               }
             }
           },
-          "createPhoto": {
-            "appliesTo": {
-              "principalTypes": [
+          "createPhoto" : {
+            "appliesTo" : {
+              "principalTypes" : [
                 "User",
                 "UserGroup"
               ],
-              "resourceTypes": [
+              "resourceTypes" : [
                 "Photo"
               ],
-              "context": {
-                "type": "ContextType"
+              "context" : {
+                "type" : "ContextType"
               }
             }
           },
-          "listPhotos": {
-            "appliesTo": {
-              "principalTypes": [
+          "listPhotos" : {
+            "appliesTo" : {
+              "principalTypes" : [
                 "User",
                 "UserGroup"
               ],
-              "resourceTypes": [
+              "resourceTypes" : [
                 "Photo"
               ],
-              "context": {
-                "type": "ContextType"
+              "context" : {
+                "type" : "ContextType"
               }
             }
           }
@@ -209,6 +209,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_verifiedpermissions_policy_store.example
+  id = "policy_store_id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_verifiedpermissions_policy_store.example "policy_store_id"

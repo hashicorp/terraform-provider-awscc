@@ -63,7 +63,7 @@ resource "awscc_gamelift_matchmaking_rule_set" "example" {
 }
 
 resource "awscc_gamelift_game_session_queue" "example" {
-  name             = "ExampleQueue"
+  name               = "ExampleQueue"
   timeout_in_seconds = 600
 
   destinations = [
@@ -75,10 +75,10 @@ resource "awscc_gamelift_game_session_queue" "example" {
 }
 
 resource "awscc_gamelift_matchmaking_configuration" "example" {
-  name             = "ExampleRuleSet"
-  acceptance_required = false
+  name                    = "ExampleRuleSet"
+  acceptance_required     = false
   request_timeout_seconds = 60
-  rule_set_name = awscc_gamelift_matchmaking_rule_set.example.id
+  rule_set_name           = awscc_gamelift_matchmaking_rule_set.example.id
 
   flex_match_mode = "WITH_QUEUE" // valid values are "WITH_QUEUE" or "STANDALONE"
   game_session_queue_arns = [
@@ -139,6 +139,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_gamelift_matchmaking_configuration.example
+  id = "name"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_gamelift_matchmaking_configuration.example "name"

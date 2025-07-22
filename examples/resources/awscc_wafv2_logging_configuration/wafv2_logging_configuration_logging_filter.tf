@@ -12,7 +12,7 @@ resource "awscc_wafv2_logging_configuration" "awscc_waf_logging_filter" {
           action = "BLOCK"
         }
       }]
-      
+
       requirement = "MEETS_ANY"
     }]
   }

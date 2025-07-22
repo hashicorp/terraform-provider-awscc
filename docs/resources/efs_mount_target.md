@@ -15,8 +15,8 @@ The ``AWS::EFS::MountTarget`` resource is an Amazon EFS resource that creates a 
 To use `awscc_efs_mount_target` with `awscc_efs_file_system`:
 ```terraform
 resource "awscc_efs_mount_target" "main" {
-  file_system_id = awscc_efs_file_system.main.id
-  subnet_id      = awscc_ec2_subnet.main.id
+  file_system_id  = awscc_efs_file_system.main.id
+  subnet_id       = awscc_ec2_subnet.main.id
   security_groups = ["sg-xxxxxx"]
 }
 
@@ -71,6 +71,17 @@ resource "awscc_ec2_subnet" "main" {
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_efs_mount_target.example
+  id = "id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_efs_mount_target.example "id"

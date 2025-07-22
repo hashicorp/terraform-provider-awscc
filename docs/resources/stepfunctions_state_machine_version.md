@@ -53,7 +53,7 @@ resource "awscc_stepfunctions_state_machine" "sfn_stepmachine" {
 }
 
 resource "awscc_stepfunctions_state_machine_version" "version" {
-  description = "State machine version description"
+  description       = "State machine version description"
   state_machine_arn = awscc_stepfunctions_state_machine.sfn_stepmachine.arn
 }
 ```
@@ -78,6 +78,17 @@ resource "awscc_stepfunctions_state_machine_version" "version" {
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_stepfunctions_state_machine_version.example
+  id = "arn"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_stepfunctions_state_machine_version.example "arn"

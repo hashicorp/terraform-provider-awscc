@@ -110,7 +110,7 @@ resource "awscc_networkmanager_connect_attachment" "example" {
 # Create Connect Peer
 resource "awscc_networkmanager_connect_peer" "example" {
   connect_attachment_id = awscc_networkmanager_connect_attachment.example.attachment_id
-  peer_address         = "10.0.0.1"
+  peer_address          = "10.0.0.1"
   bgp_options = {
     peer_asn = 65000
   }
@@ -191,6 +191,17 @@ Read-Only:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_networkmanager_connect_peer.example
+  id = "connect_peer_id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_networkmanager_connect_peer.example "connect_peer_id"

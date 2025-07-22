@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -71,6 +72,93 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Findings filter criteria.",
 		//	  "properties": {
 		//	    "AwsAccountId": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "CodeVulnerabilityDetectorName": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "CodeVulnerabilityDetectorTags": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "CodeVulnerabilityFilePath": {
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
@@ -409,6 +497,53 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "minItems": 1,
 		//	      "type": "array"
 		//	    },
+		//	    "EpssScore": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "LowerInclusive": {
+		//	            "type": "number"
+		//	          },
+		//	          "UpperInclusive": {
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "ExploitAvailable": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
 		//	    "FindingArn": {
 		//	      "insertionOrder": false,
 		//	      "items": {
@@ -516,6 +651,35 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "minItems": 1,
 		//	      "type": "array"
 		//	    },
+		//	    "FixAvailable": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
 		//	    "InspectorScore": {
 		//	      "insertionOrder": false,
 		//	      "items": {
@@ -528,6 +692,142 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "number"
 		//	          }
 		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "LambdaFunctionExecutionRoleArn": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "LambdaFunctionLastModifiedAt": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "EndInclusive": {
+		//	            "format": "int64",
+		//	            "type": "integer"
+		//	          },
+		//	          "StartInclusive": {
+		//	            "format": "int64",
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "LambdaFunctionLayers": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "LambdaFunctionName": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "LambdaFunctionRuntime": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
 		//	        "type": "object"
 		//	      },
 		//	      "maxItems": 10,
@@ -928,6 +1228,29 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            },
 		//	            "type": "object"
 		//	          },
+		//	          "FilePath": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Comparison": {
+		//	                "enum": [
+		//	                  "EQUALS",
+		//	                  "PREFIX",
+		//	                  "NOT_EQUALS"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Value": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Comparison",
+		//	              "Value"
+		//	            ],
+		//	            "type": "object"
+		//	          },
 		//	          "Name": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
@@ -952,6 +1275,29 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "object"
 		//	          },
 		//	          "Release": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Comparison": {
+		//	                "enum": [
+		//	                  "EQUALS",
+		//	                  "PREFIX",
+		//	                  "NOT_EQUALS"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Value": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Comparison",
+		//	              "Value"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "SourceLambdaLayerArn": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
 		//	              "Comparison": {
@@ -1034,6 +1380,54 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AwsAccountId
 				"aws_account_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CodeVulnerabilityDetectorName
+				"code_vulnerability_detector_name": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CodeVulnerabilityDetectorTags
+				"code_vulnerability_detector_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CodeVulnerabilityFilePath
+				"code_vulnerability_file_path": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Comparison
@@ -1224,6 +1618,38 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END NESTED OBJECT*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: EpssScore
+				"epss_score": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: LowerInclusive
+							"lower_inclusive": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: UpperInclusive
+							"upper_inclusive": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExploitAvailable
+				"exploit_available": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: FindingArn
 				"finding_arn": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -1288,6 +1714,22 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END NESTED OBJECT*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: FixAvailable
+				"fix_available": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: InspectorScore
 				"inspector_score": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -1298,6 +1740,86 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: UpperInclusive
 							"upper_inclusive": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LambdaFunctionExecutionRoleArn
+				"lambda_function_execution_role_arn": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LambdaFunctionLastModifiedAt
+				"lambda_function_last_modified_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: EndInclusive
+							"end_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: StartInclusive
+							"start_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LambdaFunctionLayers
+				"lambda_function_layers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LambdaFunctionName
+				"lambda_function_name": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LambdaFunctionRuntime
+				"lambda_function_runtime": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -1548,6 +2070,20 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END SCHEMA*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
+							// Property: FilePath
+							"file_path": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Comparison
+									"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
 							// Property: Name
 							"name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1564,6 +2100,20 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Release
 							"release": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Comparison
+									"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: SourceLambdaLayerArn
+							"source_lambda_layer_arn": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Comparison
 									"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1625,6 +2175,24 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Findings filter name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "pattern": "^.{1,255}$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -1642,55 +2210,69 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::InspectorV2::Filter").WithTerraformTypeName("awscc_inspectorv2_filter")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"architecture":              "Architecture",
-		"arn":                       "Arn",
-		"aws_account_id":            "AwsAccountId",
-		"begin_inclusive":           "BeginInclusive",
-		"comparison":                "Comparison",
-		"component_id":              "ComponentId",
-		"component_type":            "ComponentType",
-		"description":               "Description",
-		"ec_2_instance_image_id":    "Ec2InstanceImageId",
-		"ec_2_instance_subnet_id":   "Ec2InstanceSubnetId",
-		"ec_2_instance_vpc_id":      "Ec2InstanceVpcId",
-		"ecr_image_architecture":    "EcrImageArchitecture",
-		"ecr_image_hash":            "EcrImageHash",
-		"ecr_image_pushed_at":       "EcrImagePushedAt",
-		"ecr_image_registry":        "EcrImageRegistry",
-		"ecr_image_repository_name": "EcrImageRepositoryName",
-		"ecr_image_tags":            "EcrImageTags",
-		"end_inclusive":             "EndInclusive",
-		"epoch":                     "Epoch",
-		"filter_action":             "FilterAction",
-		"filter_criteria":           "FilterCriteria",
-		"finding_arn":               "FindingArn",
-		"finding_status":            "FindingStatus",
-		"finding_type":              "FindingType",
-		"first_observed_at":         "FirstObservedAt",
-		"inspector_score":           "InspectorScore",
-		"key":                       "Key",
-		"last_observed_at":          "LastObservedAt",
-		"lower_inclusive":           "LowerInclusive",
-		"name":                      "Name",
-		"network_protocol":          "NetworkProtocol",
-		"port_range":                "PortRange",
-		"related_vulnerabilities":   "RelatedVulnerabilities",
-		"release":                   "Release",
-		"resource_id":               "ResourceId",
-		"resource_tags":             "ResourceTags",
-		"resource_type":             "ResourceType",
-		"severity":                  "Severity",
-		"source_layer_hash":         "SourceLayerHash",
-		"start_inclusive":           "StartInclusive",
-		"title":                     "Title",
-		"updated_at":                "UpdatedAt",
-		"upper_inclusive":           "UpperInclusive",
-		"value":                     "Value",
-		"vendor_severity":           "VendorSeverity",
-		"version":                   "Version",
-		"vulnerability_id":          "VulnerabilityId",
-		"vulnerability_source":      "VulnerabilitySource",
-		"vulnerable_packages":       "VulnerablePackages",
+		"architecture":                       "Architecture",
+		"arn":                                "Arn",
+		"aws_account_id":                     "AwsAccountId",
+		"begin_inclusive":                    "BeginInclusive",
+		"code_vulnerability_detector_name":   "CodeVulnerabilityDetectorName",
+		"code_vulnerability_detector_tags":   "CodeVulnerabilityDetectorTags",
+		"code_vulnerability_file_path":       "CodeVulnerabilityFilePath",
+		"comparison":                         "Comparison",
+		"component_id":                       "ComponentId",
+		"component_type":                     "ComponentType",
+		"description":                        "Description",
+		"ec_2_instance_image_id":             "Ec2InstanceImageId",
+		"ec_2_instance_subnet_id":            "Ec2InstanceSubnetId",
+		"ec_2_instance_vpc_id":               "Ec2InstanceVpcId",
+		"ecr_image_architecture":             "EcrImageArchitecture",
+		"ecr_image_hash":                     "EcrImageHash",
+		"ecr_image_pushed_at":                "EcrImagePushedAt",
+		"ecr_image_registry":                 "EcrImageRegistry",
+		"ecr_image_repository_name":          "EcrImageRepositoryName",
+		"ecr_image_tags":                     "EcrImageTags",
+		"end_inclusive":                      "EndInclusive",
+		"epoch":                              "Epoch",
+		"epss_score":                         "EpssScore",
+		"exploit_available":                  "ExploitAvailable",
+		"file_path":                          "FilePath",
+		"filter_action":                      "FilterAction",
+		"filter_criteria":                    "FilterCriteria",
+		"finding_arn":                        "FindingArn",
+		"finding_status":                     "FindingStatus",
+		"finding_type":                       "FindingType",
+		"first_observed_at":                  "FirstObservedAt",
+		"fix_available":                      "FixAvailable",
+		"inspector_score":                    "InspectorScore",
+		"key":                                "Key",
+		"lambda_function_execution_role_arn": "LambdaFunctionExecutionRoleArn",
+		"lambda_function_last_modified_at":   "LambdaFunctionLastModifiedAt",
+		"lambda_function_layers":             "LambdaFunctionLayers",
+		"lambda_function_name":               "LambdaFunctionName",
+		"lambda_function_runtime":            "LambdaFunctionRuntime",
+		"last_observed_at":                   "LastObservedAt",
+		"lower_inclusive":                    "LowerInclusive",
+		"name":                               "Name",
+		"network_protocol":                   "NetworkProtocol",
+		"port_range":                         "PortRange",
+		"related_vulnerabilities":            "RelatedVulnerabilities",
+		"release":                            "Release",
+		"resource_id":                        "ResourceId",
+		"resource_tags":                      "ResourceTags",
+		"resource_type":                      "ResourceType",
+		"severity":                           "Severity",
+		"source_lambda_layer_arn":            "SourceLambdaLayerArn",
+		"source_layer_hash":                  "SourceLayerHash",
+		"start_inclusive":                    "StartInclusive",
+		"tags":                               "Tags",
+		"title":                              "Title",
+		"updated_at":                         "UpdatedAt",
+		"upper_inclusive":                    "UpperInclusive",
+		"value":                              "Value",
+		"vendor_severity":                    "VendorSeverity",
+		"version":                            "Version",
+		"vulnerability_id":                   "VulnerabilityId",
+		"vulnerability_source":               "VulnerabilitySource",
+		"vulnerable_packages":                "VulnerablePackages",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -738,6 +738,14 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	        }
 		//	      },
 		//	      "type": "object"
+		//	    },
+		//	    "InstanceLimitsHandling": {
+		//	      "description": "Enumeration of Instance Limits handling in a Campaign",
+		//	      "enum": [
+		//	        "OPT_IN",
+		//	        "OPT_OUT"
+		//	      ],
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -806,6 +814,21 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: InstanceLimitsHandling
+				"instance_limits_handling": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Enumeration of Instance Limits handling in a Campaign",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"OPT_IN",
+							"OPT_OUT",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -2095,6 +2118,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"end_time":                          "EndTime",
 		"event_trigger":                     "EventTrigger",
 		"frequency":                         "Frequency",
+		"instance_limits_handling":          "InstanceLimitsHandling",
 		"key":                               "Key",
 		"local_time_zone_config":            "LocalTimeZoneConfig",
 		"local_time_zone_detection":         "LocalTimeZoneDetection",

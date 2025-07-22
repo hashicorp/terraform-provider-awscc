@@ -91,8 +91,33 @@ Optional:
 
 Optional:
 
+- `advanced_options` (Attributes) (see [below for nested schema](#nestedatt--input_conversion--advanced_options))
 - `format_options` (Attributes) (see [below for nested schema](#nestedatt--input_conversion--format_options))
 - `from_format` (String)
+
+<a id="nestedatt--input_conversion--advanced_options"></a>
+### Nested Schema for `input_conversion.advanced_options`
+
+Optional:
+
+- `x12` (Attributes) (see [below for nested schema](#nestedatt--input_conversion--advanced_options--x12))
+
+<a id="nestedatt--input_conversion--advanced_options--x12"></a>
+### Nested Schema for `input_conversion.advanced_options.x12`
+
+Optional:
+
+- `split_options` (Attributes) (see [below for nested schema](#nestedatt--input_conversion--advanced_options--x12--split_options))
+
+<a id="nestedatt--input_conversion--advanced_options--x12--split_options"></a>
+### Nested Schema for `input_conversion.advanced_options.x12.split_options`
+
+Optional:
+
+- `split_by` (String)
+
+
+
 
 <a id="nestedatt--input_conversion--format_options"></a>
 ### Nested Schema for `input_conversion.format_options`
@@ -176,6 +201,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_b2bi_transformer.example
+  id = "transformer_id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_b2bi_transformer.example "transformer_id"

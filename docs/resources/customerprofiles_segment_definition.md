@@ -166,6 +166,7 @@ Optional:
 - `party_type_string` (Attributes) Specifies profile based criteria for a segment. (see [below for nested schema](#nestedatt--segment_groups--groups--dimensions--profile_attributes--party_type_string))
 - `personal_email_address` (Attributes) Specifies profile based criteria for a segment. (see [below for nested schema](#nestedatt--segment_groups--groups--dimensions--profile_attributes--personal_email_address))
 - `phone_number` (Attributes) Specifies profile based criteria for a segment. (see [below for nested schema](#nestedatt--segment_groups--groups--dimensions--profile_attributes--phone_number))
+- `profile_type` (Attributes) Specifies profile type based criteria for a segment. (see [below for nested schema](#nestedatt--segment_groups--groups--dimensions--profile_attributes--profile_type))
 - `shipping_address` (Attributes) The address based criteria for the segment. (see [below for nested schema](#nestedatt--segment_groups--groups--dimensions--profile_attributes--shipping_address))
 
 <a id="nestedatt--segment_groups--groups--dimensions--profile_attributes--account_number"></a>
@@ -522,6 +523,15 @@ Optional:
 - `values` (List of String)
 
 
+<a id="nestedatt--segment_groups--groups--dimensions--profile_attributes--profile_type"></a>
+### Nested Schema for `segment_groups.groups.dimensions.profile_attributes.profile_type`
+
+Optional:
+
+- `dimension_type` (String) The type of segment dimension to use for a profile type dimension.
+- `values` (List of String)
+
+
 <a id="nestedatt--segment_groups--groups--dimensions--profile_attributes--shipping_address"></a>
 ### Nested Schema for `segment_groups.groups.dimensions.profile_attributes.shipping_address`
 
@@ -612,6 +622,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_customerprofiles_segment_definition.example
+  id = "domain_name|segment_definition_name"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_customerprofiles_segment_definition.example "domain_name|segment_definition_name"

@@ -22,11 +22,11 @@ Creates a Database Migration Service (DMS) task that performs full-load migratio
 # Create a new DMS migration task
 resource "awscc_dms_data_migration_task" "example" {
   replication_task_identifier = "test-dms-task"
-  source_endpoint_arn        = "arn:aws:dms:us-west-2:123456789012:endpoint:ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-  target_endpoint_arn        = "arn:aws:dms:us-west-2:123456789012:endpoint:ZYXWVUTSRQPONMLKJIHGFEDCBA"
-  replication_instance_arn   = "arn:aws:dms:us-west-2:123456789012:rep:ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-  migration_type            = "full-load"
-  table_mappings           = jsonencode({
+  source_endpoint_arn         = "arn:aws:dms:us-west-2:123456789012:endpoint:ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  target_endpoint_arn         = "arn:aws:dms:us-west-2:123456789012:endpoint:ZYXWVUTSRQPONMLKJIHGFEDCBA"
+  replication_instance_arn    = "arn:aws:dms:us-west-2:123456789012:rep:ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  migration_type              = "full-load"
+  table_mappings = jsonencode({
     rules = [
       {
         rule-type = "selection"
@@ -103,6 +103,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_dms_data_migration.example
+  id = "data_migration_arn"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_dms_data_migration.example "data_migration_arn"

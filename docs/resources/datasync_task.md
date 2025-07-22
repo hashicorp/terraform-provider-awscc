@@ -139,7 +139,7 @@ resource "awscc_datasync_task" "example" {
 
   options = {
     verify_mode            = "ONLY_FILES_TRANSFERRED"
-    overwrite_mode        = "ALWAYS"
+    overwrite_mode         = "ALWAYS"
     atime                  = "BEST_EFFORT"
     mtime                  = "PRESERVE"
     uid                    = "NONE"
@@ -350,6 +350,17 @@ Optional:
 ## Import
 
 Import is supported using the following syntax:
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_datasync_task.example
+  id = "task_arn"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
 $ terraform import awscc_datasync_task.example "task_arn"
