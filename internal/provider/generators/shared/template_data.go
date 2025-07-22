@@ -39,16 +39,12 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 	}
 
 	resourceName := fmt.Sprintf("%s_%s_%s\n", org, svc, res)
-	cwd, err := os.Getwd()
+	_, err = os.Getwd()
 	if err != nil {
-		fmt.Println("Warning: could not get current working directory:", err)
 		ui.Warn(fmt.Sprintf("Failed to get current working directory: %s", err))
-	} else {
-		fmt.Println("Current working directory:", cwd)
 	}
 	if writeErr := os.WriteFile("last_resource.txt", []byte(resourceName), FilePermission); writeErr != nil {
 		// Log but don't fail if writing debug file fails
-		fmt.Println("Warning: could not write last_resource.txt file:", writeErr)
 		ui.Warn(fmt.Sprintf("Failed to write to last_resource.txt: %s", writeErr))
 	}
 
