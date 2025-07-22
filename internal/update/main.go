@@ -191,7 +191,7 @@ func run() error {
 
 	// Step 3: Validate resources and handle suppressions
 	// Since we've disabled validation in diffSchemas, we perform validation here
-	err = validateResources(ctx, currAllSchemas, config, filePaths)
+	err = validateResources(ctx, currAllSchemas, config)
 	if err != nil {
 		return fmt.Errorf("failed to validate resources: %w", err)
 	}
@@ -394,7 +394,7 @@ func GetAcceptanceTestResults() string {
 //   - filePaths: Configuration containing repository information
 //
 // Returns an error if validation fails for any resource.
-func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchemas, config *GitHubConfig, filePaths *UpdateFilePaths) error {
+func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchemas, config *GitHubConfig) error {
 	for i := range currAllSchemas.Resources {
 		// Check if the resource type can be provisioned via CloudFormation
 		flag, err := validateResourceType(ctx, currAllSchemas.Resources[i].CloudFormationTypeName)

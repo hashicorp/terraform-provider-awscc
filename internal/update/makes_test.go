@@ -292,10 +292,9 @@ func TestHandleStackOverflowError(t *testing.T) {
 				Resources: []allschemas.ResourceAllSchema{},
 			}
 
-			changes := []string{}
 			isNewMap := map[string]bool{}
 
-			err := handleStackOverflowError(ctx, "stack overflow error", config, currentSchemas, BuildTypeSchemas, &changes, filePaths, isNewMap)
+			err := handleStackOverflowError(ctx, "stack overflow error", config, currentSchemas, BuildTypeSchemas, filePaths, isNewMap)
 
 			if test.expectError {
 				if err == nil {
@@ -441,10 +440,9 @@ func TestHandleAWSColonError(t *testing.T) {
 				Resources: []allschemas.ResourceAllSchema{},
 			}
 
-			changes := []string{}
 			isNewMap := map[string]bool{}
 
-			err := handleAWSColonError(ctx, test.errorLine, config, currentSchemas, BuildTypeSchemas, &changes, filePaths, isNewMap)
+			err := handleAWSColonError(ctx, test.errorLine, config, currentSchemas, BuildTypeSchemas, filePaths, isNewMap)
 
 			if test.expectError {
 				if err == nil {

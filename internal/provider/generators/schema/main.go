@@ -59,6 +59,7 @@ var (
 	generatedCodeRoot = flag.String("generated-code-root", "", "directory root for generated resource code")
 	importPathRoot    = flag.String("import-path-root", "", "import path root for generated resource code; required")
 	packageName       = flag.String("package", "", "override package name for generated code")
+	initialTimer      = 5
 )
 
 func usage() {
@@ -234,7 +235,7 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 	var singularDataSources, pluralDataSources []*DataSourceData
 
 	for _, schema := range d.config.ResourceSchemas {
-		cfResourceSchemaFilename, cfResourceTypeName, err := d.ResourceSchema(schema, 5)
+		cfResourceSchemaFilename, cfResourceTypeName, err := d.ResourceSchema(schema, initialTimer)
 
 		if err != nil {
 			d.ui.Warn(fmt.Sprintf("error loading CloudFormation Resource Provider Schema for %s: %s", schema.ResourceTypeName, err))

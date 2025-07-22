@@ -125,7 +125,7 @@ func processErrorLine(ctx context.Context, errorLine string, config *GitHubConfi
 
 	// Dispatch to appropriate error handler based on error pattern
 	if strings.Contains(errorLine, "stack overflow") {
-		if err := handleStackOverflowError(ctx, errorLine, config, currentSchemas, buildType, changes, filePaths, isNewMap); err != nil {
+		if err := handleStackOverflowError(ctx, errorLine, config, currentSchemas, buildType, filePaths, isNewMap); err != nil {
 			return fmt.Errorf("failed to handle stack overflow error: %w", err)
 		}
 	} else if strings.Contains(errorLine, "AWS_") {
@@ -133,15 +133,15 @@ func processErrorLine(ctx context.Context, errorLine string, config *GitHubConfi
 			return fmt.Errorf("failed to handle AWS_ error: %w", err)
 		}
 	} else if strings.Contains(errorLine, "AWS::") {
-		if err := handleAWSColonError(ctx, errorLine, config, currentSchemas, buildType, changes, filePaths, isNewMap); err != nil {
+		if err := handleAWSColonError(ctx, errorLine, config, currentSchemas, buildType, filePaths, isNewMap); err != nil {
 			return fmt.Errorf("failed to handle AWS:: error: %w", err)
 		}
 	} else if strings.Contains(errorLine, "aws_") {
-		if err := handleAWS_UnderscoreError(ctx, errorLine, config, currentSchemas, buildType, changes, filePaths, isNewMap); err != nil {
+		if err := handleAWS_UnderscoreError(ctx, errorLine, config, currentSchemas, buildType, filePaths, isNewMap); err != nil {
 			return fmt.Errorf("failed to handle aws_ error: %w", err)
 		}
 	} else if strings.Contains(errorLine, "awscc_") {
-		if err := handleAWSCC_Error(ctx, errorLine, config, currentSchemas, buildType, changes, filePaths, isNewMap); err != nil {
+		if err := handleAWSCC_Error(ctx, errorLine, config, currentSchemas, buildType, filePaths, isNewMap); err != nil {
 			return fmt.Errorf("failed to handle awscc_ error: %w", err)
 		}
 	} else if strings.Contains(errorLine, "StatusCode: 403,") {
@@ -171,7 +171,7 @@ func processErrorLine(ctx context.Context, errorLine string, config *GitHubConfi
 
 // handleStackOverflowError processes stack overflow errors by extracting the resource name
 // from the last processed resource file and applying suppression.
-func handleStackOverflowError(ctx context.Context, errorLine string, config *GitHubConfig, currentSchemas *allschemas.AllSchemas, buildType string, changes *[]string, filePaths *UpdateFilePaths, isNewMap map[string]bool) error {
+func handleStackOverflowError(ctx context.Context, errorLine string, config *GitHubConfig, currentSchemas *allschemas.AllSchemas, buildType string, filePaths *UpdateFilePaths, isNewMap map[string]bool) error {
 	log.Println("Detected stack overflow error, attempting to extract resource name from logs.")
 
 	// Extract resource name from the last resource tracking file
@@ -195,7 +195,7 @@ func handleStackOverflowError(ctx context.Context, errorLine string, config *Git
 
 	// Apply suppression for the problematic resource
 	new := isNew(resourceName, isNewMap)
-	err = suppress(ctx, resourceName, errorLine, config, new, buildType, changes, filePaths, currentSchemas)
+	err = suppress(ctx, resourceName, errorLine, config, new, buildType, filePaths, currentSchemas)
 	log.Printf("Suppression result: %v", err)
 	return err
 }
@@ -220,12 +220,12 @@ func handleAWS_Error(ctx context.Context, errorLine string, config *GitHubConfig
 
 	new := isNew(resourceName, isNewMap)
 	print(resourceName, new, buildType, changes, filePaths, currentSchemas)
-	return suppress(ctx, resourceName, errorLine, config, new, buildType, changes, filePaths, currentSchemas)
+	return suppress(ctx, resourceName, errorLine, config, new, buildType, filePaths, currentSchemas)
 }
 
 // handleAWSColonError processes errors related to AWS CloudFormation type descriptions.
 // It handles cases where CloudFormation types are not found or are no longer available.
-func handleAWSColonError(ctx context.Context, errorLine string, config *GitHubConfig, currentSchemas *allschemas.AllSchemas, buildType string, changes *[]string, filePaths *UpdateFilePaths, isNewMap map[string]bool) error {
+func handleAWSColonError(ctx context.Context, errorLine string, config *GitHubConfig, currentSchemas *allschemas.AllSchemas, buildType string, filePaths *UpdateFilePaths, isNewMap map[string]bool) error {
 	// Parse error lines containing AWS:: type references
 	/* Example: error loading CloudFormation Resource Provider Schema for aws_datasync_storage_system:
 	   describing CloudFormation type: operation error CloudFormation: DescribeType,
@@ -255,10 +255,10 @@ func handleAWSColonError(ctx context.Context, errorLine string, config *GitHubCo
 		return fmt.Errorf("failed to extract resource name from 404 error line: %s", errorLine)
 	}
 	new := isNew(resourceName, isNewMap)
-	return suppress(ctx, resourceName, errorLine, config, new, buildType, changes, filePaths, currentSchemas)
+	return suppress(ctx, resourceName, errorLine, config, new, buildType, filePaths, currentSchemas)
 }
 
-func handleAWS_UnderscoreError(ctx context.Context, errorLine string, config *GitHubConfig, currentSchemas *allschemas.AllSchemas, buildType string, changes *[]string, filePaths *UpdateFilePaths, isNewMap map[string]bool) error {
+func handleAWS_UnderscoreError(ctx context.Context, errorLine string, config *GitHubConfig, currentSchemas *allschemas.AllSchemas, buildType string, filePaths *UpdateFilePaths, isNewMap map[string]bool) error {
 	var resourceName string
 	/*
 		Example error: "error loading CloudFormation Resource Provider Schema for aws_nimblestudio_studio: describing CloudFormation type: operation error CloudFormation: DescribeType, exceeded maximum number of attempts, 3, https response error StatusCode: 400, ..."
@@ -286,10 +286,10 @@ func handleAWS_UnderscoreError(ctx context.Context, errorLine string, config *Gi
 		return fmt.Errorf("failed to extract resource name from 400 error line: %s", errorLine)
 	}
 	new := isNew(resourceName, isNewMap)
-	return suppress(ctx, resourceName, errorLine, config, new, buildType, changes, filePaths, currentSchemas)
+	return suppress(ctx, resourceName, errorLine, config, new, buildType, filePaths, currentSchemas)
 }
 
-func handleAWSCC_Error(ctx context.Context, errorLine string, config *GitHubConfig, currentSchemas *allschemas.AllSchemas, buildType string, changes *[]string, filePaths *UpdateFilePaths, isNewMap map[string]bool) error {
+func handleAWSCC_Error(ctx context.Context, errorLine string, config *GitHubConfig, currentSchemas *allschemas.AllSchemas, buildType string, filePaths *UpdateFilePaths, isNewMap map[string]bool) error {
 	// Example error: "error loading CloudFormation Resource Provider Schema for awscc_aws
 	words := strings.Split(errorLine, " ")
 	var foundWord string
@@ -344,7 +344,7 @@ func handleAWSCC_Error(ctx context.Context, errorLine string, config *GitHubConf
 	if resourceName == "" {
 		return fmt.Errorf("failed to extract resource name from error line: %s", errorLine)
 	}
-	return suppress(ctx, resourceName, errorLine, config, true, buildType, changes, filePaths, currentSchemas)
+	return suppress(ctx, resourceName, errorLine, config, true, buildType, filePaths, currentSchemas)
 }
 
 // handleStatusCode403Error processes HTTP 403 (Forbidden) errors.
@@ -377,8 +377,7 @@ func normalizeNames(cfTypeName string, tfTypeName string) (string, string) {
 	return normalize(cfTypeName), normalize(tfTypeName)
 }
 
-func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHubConfig, new bool, buildType string, changes *[]string, filePaths *UpdateFilePaths, allSchemas *allschemas.AllSchemas) error {
-
+func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHubConfig, new bool, buildType string, filePaths *UpdateFilePaths, allSchemas *allschemas.AllSchemas) error {
 	// Create a GitHub issue for the schema error
 	issueURL, err := createIssue(ctx, cfTypeName, schemaError, config, filePaths.RepositoryLink)
 	if err != nil {

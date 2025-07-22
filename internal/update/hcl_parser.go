@@ -85,7 +85,6 @@ func diffSchemas(newSchemas *allschemas.AvailableSchemas, lastSchemas *allschema
 			// New resource
 			changedOrNewResources = append(changedOrNewResources, newResource)
 			*changes = append(*changes, fmt.Sprintf("%s - New Resource", newResource.ResourceTypeName))
-
 		}
 	}
 
@@ -202,7 +201,7 @@ func validateResourceType(ctx context.Context, resourceType string) (bool, error
 	res, err := conn.DescribeType(ctx, input)
 	if err != nil {
 		// If we can't describe the type, assume it's valid to avoid blocking everything
-		return true, nil
+		return true, err
 	}
 
 	// Check if the resource is marked as non-provisionable
