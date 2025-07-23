@@ -731,7 +731,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 						e.printf("ElementType:types.MapType{ElemType:types.StringType},\n")
 					case cfschema.PropertyTypeArray:
 						if nestedPatternProperty.Items == nil {
-							return features, unsupportedTypeError(path, "key-value map of map of array with no items")
+							return features, unsupportedTypeError(path, "key-value map of map of array with nil items")
 						}
 						itemType := nestedPatternProperty.Items.Type.String()
 						if aggregateType(nestedPatternProperty) == aggregateSet {

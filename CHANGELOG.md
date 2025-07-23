@@ -1,3 +1,10 @@
+## 1.50.0 (July 24, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_accessanalyzer_analyzer`
+* **New Resource:** `awscc_accessanalyzer_analyzer`
+
 ## 1.49.0 (July 10, 2025)
 
 FEATURES:
@@ -7,11 +14,6 @@ FEATURES:
 * **New Data Source:** `awscc_s3tables_table`
 * **New Resource:** `awscc_ec2_traffic_mirror_target`
 * **New Resource:** `awscc_s3tables_table`
-
-FEATURES:
-
-* **New Data Source:** `awscc_accessanalyzer_analyzer`
-* **New Resource:** `awscc_accessanalyzer_analyzer`
 
 ## 1.48.0 (July 2, 2025)
 
