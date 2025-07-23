@@ -27,7 +27,7 @@ resource "awscc_mediapackage_packaging_group" "example" {
 # Then create the packaging configuration
 resource "awscc_mediapackage_packaging_configuration" "example" {
   packaging_configuration_id = "example-packaging-config"
-  packaging_group_id        = awscc_mediapackage_packaging_group.example.id
+  packaging_group_id         = awscc_mediapackage_packaging_group.example.id
 
   # Example using DASH package configuration
   dash_package = {

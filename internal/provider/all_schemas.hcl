@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1187 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1197 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -238,12 +238,6 @@ resource_schema "aws_apigatewayv2_domain_name" {
 
 resource_schema "aws_apigatewayv2_integration" {
   cloudformation_type_name = "AWS::ApiGatewayV2::Integration"
-
-  # Suppression Reason: ResponseParameters is of unsupported type: key-value map of list of object.
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/1968
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_apigatewayv2_integration_response" {
@@ -298,12 +292,6 @@ resource_schema "aws_appconfig_environment" {
 
 resource_schema "aws_appconfig_extension" {
   cloudformation_type_name = "AWS::AppConfig::Extension"
-
-  # Suppression Reason: Actions is of unsupported type: key-value map of set of object.
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/1508
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_appconfig_extension_association" {
@@ -338,12 +326,6 @@ resource_schema "aws_appintegrations_application" {
 
 resource_schema "aws_appintegrations_data_integration" {
   cloudformation_type_name = "AWS::AppIntegrations::DataIntegration"
-
-  # Suppression Reason: ObjectConfiguration is of unsupported type: key-value map of key-value map.
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/1509
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_appintegrations_event_integration" {
@@ -542,12 +524,6 @@ resource_schema "aws_b2bi_transformer" {
 
 resource_schema "aws_bcmdataexports_export" {
   cloudformation_type_name = "AWS::BCMDataExports::Export"
-
-  # Suppression Reason: Export/DataQuery/TableConfigurations is of unsupported type: key-value map of key-value map.
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/1509
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_backup_backup_plan" {
@@ -1877,6 +1853,10 @@ resource_schema "aws_ec2_traffic_mirror_filter_rule" {
   cloudformation_type_name = "AWS::EC2::TrafficMirrorFilterRule"
 }
 
+resource_schema "aws_ec2_traffic_mirror_target" {
+  cloudformation_type_name = "AWS::EC2::TrafficMirrorTarget"
+}
+
 resource_schema "aws_ec2_transit_gateway" {
   cloudformation_type_name = "AWS::EC2::TransitGateway"
 }
@@ -2195,22 +2175,15 @@ resource_schema "aws_elasticbeanstalk_environment" {
 
 resource_schema "aws_elasticloadbalancingv2_listener" {
   cloudformation_type_name               = "AWS::ElasticLoadBalancingV2::Listener"
-  suppress_plural_data_source_generation = true
 
   # Suppression Reason: error creating write-only attribute path (/properties/DefaultActions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1521
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_elasticloadbalancingv2_listener_rule" {
   cloudformation_type_name               = "AWS::ElasticLoadBalancingV2::ListenerRule"
-  suppress_plural_data_source_generation = true
-
   # Suppression Reason:  error creating write-only attribute path (/properties/Actions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1521
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_elasticloadbalancingv2_load_balancer" {
@@ -2279,12 +2252,9 @@ resource_schema "aws_events_archive" {
 
 resource_schema "aws_events_connection" {
   cloudformation_type_name = "AWS::Events::Connection"
-
   # Suppression Update: the latest schema refer `Password` with type string.
   # Historical suppression Reason: error creating write-only attribute path (/definitions/BasicAuthParameters/Password): expected "properties" for the second property path segment, got: "definitions"
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1521
-  suppress_resource_generation             = false
-  suppress_singular_data_source_generation = false
 }
 
 resource_schema "aws_events_endpoint" {
@@ -4575,6 +4545,11 @@ resource_schema "aws_s3outposts_endpoint" {
 
 resource_schema "aws_s3tables_namespace" {
   cloudformation_type_name               = "AWS::S3Tables::Namespace"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_s3tables_table" {
+  cloudformation_type_name               = "AWS::S3Tables::Table"
   suppress_plural_data_source_generation = true
 }
 

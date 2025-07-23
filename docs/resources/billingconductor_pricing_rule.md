@@ -15,8 +15,8 @@ A markup/discount that is defined for a specific set of services that can later 
 This example to create pricing rule using global scope
 ```terraform
 resource "awscc_billingconductor_pricing_rule" "example" {
-  name                = "Markup10percent"
-  
+  name = "Markup10percent"
+
   scope               = "GLOBAL"
   type                = "MARKUP"
   modifier_percentage = 10
@@ -56,10 +56,10 @@ resource "awscc_billingconductor_pricing_rule" "example_service" {
 This example enable free-tier
 ```terraform
 resource "awscc_billingconductor_pricing_rule" "example_tiering" {
-  name        = "EnableFreeTiering"
-  
-  scope       = "GLOBAL"
-  type        = "TIERING"
+  name = "EnableFreeTiering"
+
+  scope = "GLOBAL"
+  type  = "TIERING"
 
   tiering = {
     free_tier = {
@@ -82,8 +82,8 @@ resource "awscc_billingconductor_pricing_rule" "example_tiering" {
 This example create using billing entity scope to markup when marketplace is in use.
 ```terraform
 resource "awscc_billingconductor_pricing_rule" "example_billing_entity" {
-  name                = "MarketplaceDiscount"
-  
+  name = "MarketplaceDiscount"
+
   scope               = "BILLING_ENTITY"
   billing_entity      = "AWS Marketplace"
   type                = "MARKUP"

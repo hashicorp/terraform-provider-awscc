@@ -47,8 +47,8 @@ resource "awscc_iam_role" "batch_job_role" {
 # Create the batch job definition
 resource "awscc_batch_job_definition" "example" {
   job_definition_name = "example-job-definition"
-  type               = "container"
-  
+  type                = "container"
+
   container_properties = jsonencode({
     command = ["echo", "Hello, World!"]
     image   = "amazonlinux:2"

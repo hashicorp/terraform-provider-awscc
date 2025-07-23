@@ -103,7 +103,43 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "ExportToCsvInScheduledReports": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "ExportToExcel": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ExportToExcelInScheduledReports": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ExportToPdf": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ExportToPdfInScheduledReports": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "IncludeContentInScheduledReportsEmail": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "PrintReports": {
 		//	      "enum": [
 		//	        "DENY"
 		//	      ],
@@ -192,8 +228,32 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"export_to_csv": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: ExportToCsvInScheduledReports
+				"export_to_csv_in_scheduled_reports": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: ExportToExcel
 				"export_to_excel": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExportToExcelInScheduledReports
+				"export_to_excel_in_scheduled_reports": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExportToPdf
+				"export_to_pdf": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ExportToPdfInScheduledReports
+				"export_to_pdf_in_scheduled_reports": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: IncludeContentInScheduledReportsEmail
+				"include_content_in_scheduled_reports_email": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PrintReports
+				"print_reports": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: RenameSharedFolders
@@ -308,26 +368,32 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		"arn":            "Arn",
 		"aws_account_id": "AwsAccountId",
 		"capabilities":   "Capabilities",
-		"create_and_update_dashboard_email_reports": "CreateAndUpdateDashboardEmailReports",
-		"create_and_update_data_sources":            "CreateAndUpdateDataSources",
-		"create_and_update_datasets":                "CreateAndUpdateDatasets",
-		"create_and_update_themes":                  "CreateAndUpdateThemes",
-		"create_and_update_threshold_alerts":        "CreateAndUpdateThresholdAlerts",
-		"create_shared_folders":                     "CreateSharedFolders",
-		"create_spice_dataset":                      "CreateSPICEDataset",
-		"custom_permissions_name":                   "CustomPermissionsName",
-		"export_to_csv":                             "ExportToCsv",
-		"export_to_excel":                           "ExportToExcel",
-		"key":                                       "Key",
-		"rename_shared_folders":                     "RenameSharedFolders",
-		"share_analyses":                            "ShareAnalyses",
-		"share_dashboards":                          "ShareDashboards",
-		"share_data_sources":                        "ShareDataSources",
-		"share_datasets":                            "ShareDatasets",
-		"subscribe_dashboard_email_reports":         "SubscribeDashboardEmailReports",
-		"tags":                                      "Tags",
-		"value":                                     "Value",
-		"view_account_spice_capacity":               "ViewAccountSPICECapacity",
+		"create_and_update_dashboard_email_reports":  "CreateAndUpdateDashboardEmailReports",
+		"create_and_update_data_sources":             "CreateAndUpdateDataSources",
+		"create_and_update_datasets":                 "CreateAndUpdateDatasets",
+		"create_and_update_themes":                   "CreateAndUpdateThemes",
+		"create_and_update_threshold_alerts":         "CreateAndUpdateThresholdAlerts",
+		"create_shared_folders":                      "CreateSharedFolders",
+		"create_spice_dataset":                       "CreateSPICEDataset",
+		"custom_permissions_name":                    "CustomPermissionsName",
+		"export_to_csv":                              "ExportToCsv",
+		"export_to_csv_in_scheduled_reports":         "ExportToCsvInScheduledReports",
+		"export_to_excel":                            "ExportToExcel",
+		"export_to_excel_in_scheduled_reports":       "ExportToExcelInScheduledReports",
+		"export_to_pdf":                              "ExportToPdf",
+		"export_to_pdf_in_scheduled_reports":         "ExportToPdfInScheduledReports",
+		"include_content_in_scheduled_reports_email": "IncludeContentInScheduledReportsEmail",
+		"key":                               "Key",
+		"print_reports":                     "PrintReports",
+		"rename_shared_folders":             "RenameSharedFolders",
+		"share_analyses":                    "ShareAnalyses",
+		"share_dashboards":                  "ShareDashboards",
+		"share_data_sources":                "ShareDataSources",
+		"share_datasets":                    "ShareDatasets",
+		"subscribe_dashboard_email_reports": "SubscribeDashboardEmailReports",
+		"tags":                              "Tags",
+		"value":                             "Value",
+		"view_account_spice_capacity":       "ViewAccountSPICECapacity",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

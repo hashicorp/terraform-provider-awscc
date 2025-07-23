@@ -31,7 +31,7 @@ resource "awscc_autoscaling_auto_scaling_group" "example" {
     launch_template_id = awscc_ec2_launch_template.example.id
   }
 
-  desired_capacity    = "1"
+  desired_capacity = "1"
   vpc_zone_identifier = [
     "subnetIdAz1",
     "subnetIdAz2",
@@ -92,8 +92,8 @@ resource "awscc_autoscaling_auto_scaling_group" "example" {
     launch_template_id = awscc_ec2_launch_template.example.id
   }
 
-  desired_capacity    = "1"
-  
+  desired_capacity = "1"
+
   vpc_zone_identifier = [
     "subnetIdAz1",
     "subnetIdAz2",

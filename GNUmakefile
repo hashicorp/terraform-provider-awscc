@@ -64,12 +64,15 @@ tools: prereq-go ## Install tools
 	cd tools && $(GO_VER) install github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
 	cd tools && $(GO_VER) install golang.org/x/tools/cmd/goimports@latest
 
-docs-all: docs-import docs ## Generate all documentation
+docs-all: docs-import docs-fmt docs ## Generate all documentation
 
 docs: prereq-go ## Generate documentation
 	rm -f docs/data-sources/*.md
 	rm -f docs/resources/*.md
 	@tfplugindocs generate
+
+docs-fmt: prereq-go
+	cd examples/resources/ && terraform fmt -recursive
 
 docs-import: prereq-go ## Generate import documentation
 	$(GO_VER) run internal/provider/generators/import-examples/main.go -file=internal/provider/import_examples_gen.json
@@ -83,3 +86,6 @@ prereq-go: # If $(GO_VER) is not installed, install it
 		$(GO_VER) download ; \
 		echo "make: $(GO_VER) ready" ; \
 	fi
+update: prereq-go ## Update Schema
+	echo "==> Updating Schema..."
+	$(GO_VER) run $$(find internal/update -name "*.go" -not -name "*_test.go")

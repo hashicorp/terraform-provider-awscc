@@ -40,7 +40,7 @@ resource "awscc_eks_pod_identity_association" "pod_identity_association_s3_reado
   cluster_name    = var.cluster_name
   namespace       = var.namespace
   service_account = var.serviceaccount
-  role_arn        = awscc_iam_role.pod_identity_role.arn  # like: arn:aws:iam::xxxxxxxxxxxx:role/role1
+  role_arn        = awscc_iam_role.pod_identity_role.arn # like: arn:aws:iam::xxxxxxxxxxxx:role/role1
 }
 
 variable "cluster_name" {

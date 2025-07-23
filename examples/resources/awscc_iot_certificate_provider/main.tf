@@ -100,7 +100,7 @@ data "archive_file" "lambda_zip" {
 # IoT Certificate Provider
 resource "awscc_iot_certificate_provider" "example" {
   certificate_provider_name      = "example-provider"
-  lambda_function_arn           = aws_lambda_function.cert_provider.arn
+  lambda_function_arn            = aws_lambda_function.cert_provider.arn
   account_default_for_operations = ["CreateCertificateFromCsr"]
 
   tags = [{

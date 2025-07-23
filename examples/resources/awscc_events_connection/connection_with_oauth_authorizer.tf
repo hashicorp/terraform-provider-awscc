@@ -1,6 +1,6 @@
 resource "awscc_events_connection" "auth0_connection" {
-  name                = "auth0-connection"
-  authorization_type  = "OAUTH_CLIENT_CREDENTIALS"
+  name               = "auth0-connection"
+  authorization_type = "OAUTH_CLIENT_CREDENTIALS"
 
   auth_parameters = {
     o_auth_parameters = {
@@ -15,7 +15,7 @@ resource "awscc_events_connection" "auth0_connection" {
       o_auth_http_parameters = {
         body_parameters = [
           {
-            key = "audience",
+            key   = "audience",
             value = "my-auth0-identifier"
           }
         ]

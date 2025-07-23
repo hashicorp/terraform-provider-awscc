@@ -1,0 +1,1 @@
+$ terraform import awscc_apigatewayv2_integration.example "api_id|integration_id"
