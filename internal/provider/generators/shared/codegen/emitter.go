@@ -657,6 +657,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 				if len(patternProperty.PatternProperties) > 0 {
 					return features, unsupportedTypeError(path, "key-value map of key-value map")
 				}
+
 				if len(patternProperty.Properties) == 0 {
 					return features, unsupportedTypeError(path, "key-value map of undefined schema")
 				}

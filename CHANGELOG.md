@@ -1,5 +1,10 @@
 ## 1.49.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_accessanalyzer_analyzer`
+* **New Resource:** `awscc_accessanalyzer_analyzer`
+
 ## 1.48.0 (July 2, 2025)
 
 FEATURES:
