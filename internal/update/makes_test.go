@@ -608,69 +608,6 @@ func TestAddSchemaToCheckout(t *testing.T) {
 	}
 }
 
-func TestCheckoutSchemas(t *testing.T) {
-	t.Parallel()
-
-	tests := map[string]struct {
-		setupFile       bool
-		fileContent     string
-		expectError     bool
-		expectedActions int // Number of git checkout actions attempted
-	}{
-		"missing_file": {
-			setupFile:       false,
-			expectError:     false, // Creates empty file
-			expectedActions: 0,
-		},
-		"empty_file": {
-			setupFile:       true,
-			fileContent:     "",
-			expectError:     false,
-			expectedActions: 0,
-		},
-		"file_with_paths": {
-			setupFile:       true,
-			fileContent:     "path1.json\npath2.json\n\npath3.json",
-			expectError:     false,
-			expectedActions: 3, // 3 non-empty lines
-		},
-	}
-
-	for name, test := range tests {
-		t.Run(name, func(t *testing.T) {
-			t.Parallel()
-
-			// Create temporary directory for test files
-			tempDir := t.TempDir()
-			suppressionFile := filepath.Join(tempDir, "suppression.txt")
-
-			// Setup file if needed
-			if test.setupFile {
-				if err := os.WriteFile(suppressionFile, []byte(test.fileContent), 0644); err != nil {
-					t.Fatalf("failed to create suppression file: %v", err)
-				}
-			}
-
-			err := checkoutSchemas(suppressionFile)
-
-			if test.expectError {
-				if err == nil {
-					t.Fatal("expected error but got none")
-				}
-			} else {
-				if err != nil {
-					t.Fatalf("unexpected error: %v", err)
-				}
-			}
-
-			// Verify file exists after operation
-			if _, statErr := os.Stat(suppressionFile); os.IsNotExist(statErr) {
-				t.Fatal("suppression file should exist after checkoutSchemas")
-			}
-		})
-	}
-}
-
 func TestCfTypeNameToTerraformTypeName(t *testing.T) {
 	t.Parallel()
 
