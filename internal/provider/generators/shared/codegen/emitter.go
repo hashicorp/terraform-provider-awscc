@@ -457,6 +457,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 						planModifiers = append(planModifiers, "generic.Multiset()")
 					}
 				}
+
 			default:
 				return features, unsupportedTypeError(path, fmt.Sprintf("list of %s", itemType))
 			}
