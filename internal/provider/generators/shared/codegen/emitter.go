@@ -453,6 +453,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 					case aggregateOrderedSet:
 						validators = append(validators, "listvalidator.UniqueValues()")
 						features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
+
 					case aggregateMultiset:
 						planModifiers = append(planModifiers, "generic.Multiset()")
 					}
