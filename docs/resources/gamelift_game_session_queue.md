@@ -14,7 +14,7 @@ The AWS::GameLift::GameSessionQueue resource creates an Amazon GameLift (GameLif
 To use awscc_gamelift_game_session_queue to create a GameLift Game Session Queue:
 ```terraform
 resource "awscc_gamelift_game_session_queue" "example" {
-  name             = "ExampleQueue"
+  name               = "ExampleQueue"
   timeout_in_seconds = 600
 
   destinations = [

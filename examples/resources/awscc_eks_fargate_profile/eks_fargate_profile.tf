@@ -12,5 +12,5 @@ resource "awscc_eks_fargate_profile" "example" {
       key   = "Managed By"
       value = "AWSCC"
     }
-  ]  
+  ]
 }

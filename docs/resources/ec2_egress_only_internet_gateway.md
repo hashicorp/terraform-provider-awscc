@@ -14,7 +14,7 @@ Resource Type definition for AWS::EC2::EgressOnlyInternetGateway
 To create ec2 egress only internet_gateway
 ```terraform
 resource "awscc_ec2_vpc" "example" {
-  cidr_block  = "10.1.0.0/16"
+  cidr_block = "10.1.0.0/16"
 }
 
 resource "awscc_ec2_egress_only_internet_gateway" "example" {

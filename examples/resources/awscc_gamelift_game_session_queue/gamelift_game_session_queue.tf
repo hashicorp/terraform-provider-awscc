@@ -1,5 +1,5 @@
 resource "awscc_gamelift_game_session_queue" "example" {
-  name             = "ExampleQueue"
+  name               = "ExampleQueue"
   timeout_in_seconds = 600
 
   destinations = [

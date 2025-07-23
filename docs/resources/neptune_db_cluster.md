@@ -27,7 +27,7 @@ resource "awscc_neptune_db_cluster" "default" {
   storage_encrypted              = true
   # Use ARN from awscc_kms_key to avoid drift due to short id
   # Reference : https://github.com/hashicorp/terraform-provider-awscc/issues/1735
-  kms_key_id                     = awscc_kms_key.example.arn
+  kms_key_id = awscc_kms_key.example.arn
 
   tags = [{
     key   = "Modified By"

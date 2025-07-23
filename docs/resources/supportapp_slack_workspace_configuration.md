@@ -14,7 +14,7 @@ An AWS Support App resource that creates, updates, lists, and deletes Slack work
 ### First Example
 To create a slack workspace confifiguration for an AWS account in AWS Support App 
 ```terraform
-resource "awscc_supportapp_slack_workspace_configuration" "slack_workspace_example" { 
+resource "awscc_supportapp_slack_workspace_configuration" "slack_workspace_example" {
   team_id = "team_id_from_slack" # Replace with the actual team ID from Slack
   # Other configuration parameters...
 }

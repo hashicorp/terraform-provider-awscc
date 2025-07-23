@@ -55,34 +55,39 @@ resource "awscc_iam_role" "example" {
       }
     ]
   })
-  policies = [{
-    policy_name = "qbusiness_policy"
-    policy_document = jsonencode({
-      Version = "2012-10-17"
-      Statement = [
+  policies = [
+    {
+      policy_name = "qbusiness_policy"
+      policy_document = jsonencode({
+        Version = "2012-10-17"
+        Statement = [
+          {
+            Sid    = "QBusinessConversationPermission"
+            Effect = "Allow"
+            Action = [
+              "qbusiness:Chat",
+              "qbusiness:ChatSync",
+              "qbusiness:ListMessages",
+              "qbusiness:ListConversations",
+              "qbusiness:DeleteConversation",
+              "qbusiness:PutFeedback",
+              "qbusiness:GetWebExperience",
+              "qbusiness:GetApplication",
+              "qbusiness:ListPlugins",
+              "qbusiness:GetChatControlsConfiguration"
+            ]
+            Resource = awscc_qbusiness_application.example.application_arn
+          }
+        ]
+      })
+      tags = [
         {
-          Sid = "QBusinessConversationPermission"
-          Effect = "Allow"
-          Action = [
-            "qbusiness:Chat",
-            "qbusiness:ChatSync",
-            "qbusiness:ListMessages",
-            "qbusiness:ListConversations",
-            "qbusiness:DeleteConversation",
-            "qbusiness:PutFeedback",
-            "qbusiness:GetWebExperience",
-            "qbusiness:GetApplication",
-            "qbusiness:ListPlugins",
-            "qbusiness:GetChatControlsConfiguration"
-          ]
-          Resource = awscc_qbusiness_application.example.application_arn
+          key   = "Modified By"
+          value = "AWSCC"
         }
       ]
-    })
-  tags = [{
-    key   = "Modified By"
-    value = "AWSCC"
-  }]
+    }
+  ]
 }
 
 data "aws_caller_identity" "current" {}

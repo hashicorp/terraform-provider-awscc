@@ -31,7 +31,7 @@ data "aws_guardduty_detector" "current" {}
 # Create an S3 bucket for the threat intel list
 resource "awscc_s3_bucket" "threat_intel" {
   bucket_name = "threat-intel-set-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
-  
+
   public_access_block_configuration = {
     block_public_acls       = true
     block_public_policy     = true
@@ -49,7 +49,7 @@ resource "awscc_s3_bucket" "threat_intel" {
 resource "aws_s3_object" "threat_intel_list" {
   bucket  = "threat-intel-set-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
   key     = "threat-intel.txt"
-  content = "8.8.8.8\n8.8.4.4"  # Sample IPs for demonstration
+  content = "8.8.8.8\n8.8.4.4" # Sample IPs for demonstration
 }
 
 # Create GuardDuty ThreatIntelSet
@@ -86,7 +86,7 @@ data "aws_iam_policy_document" "allow_guardduty" {
 
 # Attach the bucket policy
 resource "awscc_s3_bucket_policy" "allow_guardduty" {
-  bucket = awscc_s3_bucket.threat_intel.id
+  bucket          = awscc_s3_bucket.threat_intel.id
   policy_document = data.aws_iam_policy_document.allow_guardduty.json
 }
 ```

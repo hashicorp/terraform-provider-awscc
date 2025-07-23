@@ -1,0 +1,272 @@
+{
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "handlers": {
+    "read": {
+      "permissions": [
+        "s3tables:GetTable",
+        "s3tables:GetTableMaintenanceConfiguration"
+      ]
+    },
+    "create": {
+      "permissions": [
+        "s3tables:CreateTable",
+        "s3tables:PutTableData",
+        "s3tables:GetTable",
+        "s3tables:PutTableMaintenanceConfiguration"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "s3tables:GetTable",
+        "s3tables:RenameTable",
+        "s3tables:PutTableMaintenanceConfiguration"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "s3tables:ListTables",
+        "s3tables:ListTableBuckets",
+        "s3tables:ListNamespaces"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "TableBucketARN": {
+            "examples": [
+              "arn:aws:s3tables:us-west-2:123456789012:bucket/mytablebucket"
+            ],
+            "description": "The Amazon Resource Name (ARN) of the specified table bucket.",
+            "type": "string"
+          },
+          "Namespace": {
+            "description": "The namespace that the table belongs to.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TableBucketARN"
+        ]
+      }
+    },
+    "delete": {
+      "permissions": [
+        "s3tables:GetTable",
+        "s3tables:DeleteTable"
+      ]
+    }
+  },
+  "typeName": "AWS::S3Tables::Table",
+  "readOnlyProperties": [
+    "/properties/TableARN",
+    "/properties/WarehouseLocation",
+    "/properties/VersionToken"
+  ],
+  "description": "Resource Type definition for AWS::S3Tables::Table",
+  "writeOnlyProperties": [
+    "/properties/IcebergMetadata",
+    "/properties/WithoutMetadata"
+  ],
+  "createOnlyProperties": [
+    "/properties/TableBucketARN",
+    "/properties/OpenTableFormat",
+    "/properties/IcebergMetadata",
+    "/properties/WithoutMetadata"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/TableARN"
+  ],
+  "definitions": {
+    "WithoutMetadata": {
+      "description": "Indicates that you don't want to specify a schema for the table. This property is mutually exclusive to 'IcebergMetadata', and its only possible value is 'Yes'.",
+      "type": "string",
+      "enum": [
+        "Yes"
+      ]
+    },
+    "Compaction": {
+      "description": "Settings governing the Compaction maintenance action. Contains details about the compaction settings for an Iceberg table.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Status": {
+          "description": "Indicates whether the Compaction maintenance action is enabled.",
+          "type": "string",
+          "enum": [
+            "enabled",
+            "disabled"
+          ]
+        },
+        "TargetFileSizeMB": {
+          "description": "The target file size for the table in MB.",
+          "type": "integer",
+          "minimum": 64
+        }
+      }
+    },
+    "Namespace": {
+      "description": "The namespace that the table belongs to.",
+      "type": "string"
+    },
+    "SchemaField": {
+      "description": "Contains details about the schema for an Iceberg table",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Type": {
+          "description": "The field type",
+          "type": "string"
+        },
+        "Required": {
+          "description": "A Boolean value that specifies whether values are required for each row in this field",
+          "type": "boolean"
+        },
+        "Name": {
+          "description": "The name of the field",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name",
+        "Type"
+      ]
+    },
+    "TableName": {
+      "description": "The name for the table.",
+      "type": "string"
+    },
+    "TableBucketARN": {
+      "examples": [
+        "arn:aws:s3tables:us-west-2:123456789012:bucket/mytablebucket"
+      ],
+      "description": "The Amazon Resource Name (ARN) of the specified table bucket.",
+      "type": "string"
+    },
+    "IcebergSchema": {
+      "description": "Contains details about the schema for an Iceberg table",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "SchemaFieldList": {
+          "$ref": "#/definitions/SchemaFieldList"
+        }
+      },
+      "required": [
+        "SchemaFieldList"
+      ]
+    },
+    "SchemaFieldList": {
+      "description": "Contains details about the schema for an Iceberg table",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/SchemaField"
+      }
+    },
+    "VersionToken": {
+      "description": "The version token of the table",
+      "type": "string"
+    },
+    "TableARN": {
+      "examples": [
+        "arn:aws:s3tables:us-west-2:123456789012:bucket/mytablebucket/table/813aadd1-a378-4d0f-8467-e3247306f309"
+      ],
+      "description": "The Amazon Resource Name (ARN) of the specified table.",
+      "type": "string"
+    },
+    "OpenTableFormat": {
+      "description": "Format of the table.",
+      "type": "string",
+      "enum": [
+        "ICEBERG"
+      ]
+    },
+    "IcebergMetadata": {
+      "description": "Contains details about the metadata for an Iceberg table.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "IcebergSchema": {
+          "$ref": "#/definitions/IcebergSchema"
+        }
+      },
+      "required": [
+        "IcebergSchema"
+      ]
+    },
+    "WarehouseLocation": {
+      "description": "The warehouse location of the table.",
+      "type": "string"
+    },
+    "SnapshotManagement": {
+      "description": "Contains details about the snapshot management settings for an Iceberg table. A snapshot is expired when it exceeds MinSnapshotsToKeep and MaxSnapshotAgeHours.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Status": {
+          "description": "Indicates whether the SnapshotManagement maintenance action is enabled.",
+          "type": "string",
+          "enum": [
+            "enabled",
+            "disabled"
+          ]
+        },
+        "MinSnapshotsToKeep": {
+          "description": "The minimum number of snapshots to keep.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "MaxSnapshotAgeHours": {
+          "description": "The maximum age of a snapshot before it can be expired.",
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  },
+  "required": [
+    "TableBucketARN",
+    "Namespace",
+    "TableName",
+    "OpenTableFormat"
+  ],
+  "properties": {
+    "WithoutMetadata": {
+      "$ref": "#/definitions/WithoutMetadata"
+    },
+    "Compaction": {
+      "$ref": "#/definitions/Compaction"
+    },
+    "Namespace": {
+      "$ref": "#/definitions/Namespace"
+    },
+    "TableName": {
+      "$ref": "#/definitions/TableName"
+    },
+    "TableBucketARN": {
+      "$ref": "#/definitions/TableBucketARN"
+    },
+    "VersionToken": {
+      "$ref": "#/definitions/VersionToken"
+    },
+    "TableARN": {
+      "$ref": "#/definitions/TableARN"
+    },
+    "OpenTableFormat": {
+      "$ref": "#/definitions/OpenTableFormat"
+    },
+    "IcebergMetadata": {
+      "$ref": "#/definitions/IcebergMetadata"
+    },
+    "WarehouseLocation": {
+      "$ref": "#/definitions/WarehouseLocation"
+    },
+    "SnapshotManagement": {
+      "$ref": "#/definitions/SnapshotManagement"
+    }
+  }
+}

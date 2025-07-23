@@ -25,7 +25,7 @@ The following example creates a partner event bus, note that the [event source m
 
 ```terraform
 resource "awscc_events_event_bus" "sample_partner_event_bus" {
-  name = "aws.partner/examplepartner.com/example-eqrry6br"
+  name              = "aws.partner/examplepartner.com/example-eqrry6br"
   event_source_name = "aws.partner/examplepartner.com/example-eqrry6br"
 }
 ```

@@ -21,9 +21,9 @@ Creates a Neptune Graph with 16GB provisioned memory, vector search capability w
 ```terraform
 # Create Neptune Graph
 resource "awscc_neptunegraph_graph" "example" {
-  graph_name           = "example-graph-test-20250102"
-  provisioned_memory   = 16
-  deletion_protection  = false
+  graph_name          = "example-graph-test-20250102"
+  provisioned_memory  = 16
+  deletion_protection = false
   public_connectivity = false
   replica_count       = 1
 

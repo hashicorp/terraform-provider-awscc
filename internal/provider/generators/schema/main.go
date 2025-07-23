@@ -15,6 +15,7 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
@@ -47,6 +48,7 @@ type ResourceSchema struct {
 	CloudFormationSchemaPath             string `hcl:"cloudformation_schema_path,optional"`
 	CloudFormationTypeName               string `hcl:"cloudformation_type_name"`
 	ResourceTypeName                     string `hcl:"resource_type_name,label"`
+	SuppressionReason                    string `hcl:"suppression_reason,optional"`
 	SuppressPluralDataSourceGeneration   bool   `hcl:"suppress_plural_data_source_generation,optional"`
 	SuppressResourceGeneration           bool   `hcl:"suppress_resource_generation,optional"`
 	SuppressSingularDataSourceGeneration bool   `hcl:"suppress_singular_data_source_generation,optional"`
@@ -57,6 +59,7 @@ var (
 	generatedCodeRoot = flag.String("generated-code-root", "", "directory root for generated resource code")
 	importPathRoot    = flag.String("import-path-root", "", "import path root for generated resource code; required")
 	packageName       = flag.String("package", "", "override package name for generated code")
+	initialTimer      = 5
 )
 
 func usage() {
@@ -232,7 +235,7 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 	var singularDataSources, pluralDataSources []*DataSourceData
 
 	for _, schema := range d.config.ResourceSchemas {
-		cfResourceSchemaFilename, cfResourceTypeName, err := d.ResourceSchema(schema)
+		cfResourceSchemaFilename, cfResourceTypeName, err := d.ResourceSchema(schema, initialTimer)
 
 		if err != nil {
 			d.ui.Warn(fmt.Sprintf("error loading CloudFormation Resource Provider Schema for %s: %s", schema.ResourceTypeName, err))
@@ -310,7 +313,10 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 }
 
 // ResourceSchema returns the local resource schema file name and type name.
-func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, error) {
+func (d *Downloader) ResourceSchema(schema ResourceSchema, timer int) (string, string, error) {
+	if timer > 300 {
+		return "", "", fmt.Errorf("timeout exceeded while downloading CloudFormation Resource Provider Schema for %s", schema.CloudFormationTypeName)
+	}
 	resourceSchemaFilename := schema.CloudFormationSchemaPath
 	if resourceSchemaFilename == "" {
 		filename := fmt.Sprintf("%s.json", schema.CloudFormationTypeName)
@@ -331,6 +337,15 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 			TypeName: aws.String(schema.CloudFormationTypeName),
 		}
 		output, err := d.client.DescribeType(context.TODO(), input)
+
+		if err != nil {
+			if strings.Contains(err.Error(), "api error Throttling: Rate exceeded") {
+				d.ui.Warn("API rate limit exceeded. Retrying after a short delay...")
+				timer *= 2 // Exponential backoff
+				time.Sleep(time.Duration(timer) * time.Second)
+				return d.ResourceSchema(schema, timer) // Retry with increased timer
+			}
+		}
 
 		if err != nil {
 			return "", "", fmt.Errorf("describing CloudFormation type: %w", err)

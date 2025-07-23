@@ -6,6 +6,7 @@ package shared
 import (
 	"bytes"
 	"fmt"
+	"os"
 	"strings"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
@@ -18,6 +19,7 @@ import (
 const (
 	DataSourceType = "DataSource"
 	ResourceType   = "Resource"
+	FilePermission = 0600
 )
 
 // GenerateTemplateData generates the template body from the Resource
@@ -32,9 +34,18 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 
 	cfTypeName := *resource.CfResource.TypeName
 	org, svc, res, err := naming.ParseCloudFormationTypeName(cfTypeName)
-
 	if err != nil {
 		return nil, fmt.Errorf("incorrect format for CloudFormation Resource Provider Schema type name: %s", cfTypeName)
+	}
+
+	resourceName := fmt.Sprintf("%s_%s_%s\n", org, svc, res)
+	_, err = os.Getwd()
+	if err != nil {
+		ui.Warn(fmt.Sprintf("Failed to get current working directory: %s", err))
+	}
+	if writeErr := os.WriteFile("last_resource.txt", []byte(resourceName), FilePermission); writeErr != nil {
+		// Log but don't fail if writing debug file fails
+		ui.Warn(fmt.Sprintf("Failed to write to last_resource.txt: %s", writeErr))
 	}
 
 	// e.g. "logGroupResource" or "logGroupDataSource"

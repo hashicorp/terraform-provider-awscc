@@ -2,7 +2,7 @@ data "aws_caller_identity" "current" {}
 
 resource "awscc_logs_log_group" "example" {
   log_group_name = "my-log-group"
-  
+
   data_protection_policy = jsonencode({
     "Name" : "data-protection-policy",
     "Description" : "test description",
@@ -12,7 +12,7 @@ resource "awscc_logs_log_group" "example" {
         "Sid" : "audit-policy test",
         "DataIdentifier" : [
           "arn:aws:dataprotection::aws:data-identifier/EmailAddress",
-          "arn:aws:dataprotection::aws:data-identifier/DriversLicense-US"  
+          "arn:aws:dataprotection::aws:data-identifier/DriversLicense-US"
         ],
         "Operation" : {
           "Audit" : {

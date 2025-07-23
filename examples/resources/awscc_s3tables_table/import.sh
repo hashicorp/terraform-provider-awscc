@@ -1,0 +1,1 @@
+$ terraform import awscc_s3tables_table.example "table_arn"

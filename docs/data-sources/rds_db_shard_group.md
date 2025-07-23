@@ -21,10 +21,10 @@ Data Source schema for AWS::RDS::DBShardGroup
 
 ### Read-Only
 
-- `compute_redundancy` (Number) Specifies whether to create standby DB shard groups for the DB shard group. Valid values are the following:
-  +  0 - Creates a DB shard group without a standby DB shard group. This is the default value.
-  +  1 - Creates a DB shard group with a standby DB shard group in a different Availability Zone (AZ).
-  +  2 - Creates a DB shard group with two standby DB shard groups in two different AZs.
+- `compute_redundancy` (Number) Specifies whether to create standby standby DB data access shard for the DB shard group. Valid values are the following:
+  +  0 - Creates a DB shard group without a standby DB data access shard. This is the default value.
+  +  1 - Creates a DB shard group with a standby DB data access shard in a different Availability Zone (AZ).
+  +  2 - Creates a DB shard group with two standby DB data access shard in two different AZs.
 - `db_cluster_identifier` (String) The name of the primary DB cluster for the DB shard group.
 - `db_shard_group_identifier` (String) The name of the DB shard group.
 - `db_shard_group_resource_id` (String)
