@@ -168,6 +168,10 @@
         "identifier": ["DomainName"]
     },
     {
+        "resource": "awscc_apigatewayv2_integration",
+        "identifier": ["ApiId","IntegrationId"]
+    },
+    {
         "resource": "awscc_apigatewayv2_integration_response",
         "identifier": ["ApiId","IntegrationId","IntegrationResponseId"]
     },
@@ -210,6 +214,10 @@
     {
         "resource": "awscc_appconfig_environment",
         "identifier": ["ApplicationId","EnvironmentId"]
+    },
+    {
+        "resource": "awscc_appconfig_extension",
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_appconfig_extension_association",

@@ -569,6 +569,55 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 						e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
 						e.printf("ElementType:types.SetType{ElemType:types.StringType},\n")
 
+					case cfschema.PropertyTypeObject:
+						if nestedPatternProperties := patternProperty.Items.PatternProperties; len(nestedPatternProperties) > 0 {
+							return features, unsupportedTypeError(path, "key-value map of key-value map")
+						}
+						if len(patternProperty.Items.Properties) == 0 {
+							return features, unsupportedTypeError(path, "key-value map with empty pattern properties")
+						}
+
+						var nestedPatternProperty *cfschema.Property
+
+						for _, v := range patternProperty.Items.Properties {
+							nestedPatternProperty = v
+							break
+						}
+
+						if nestedPatternProperty == nil {
+							return features, unsupportedTypeError(path, "key-value map with empty pattern properties")
+						}
+						if len(nestedPatternProperty.PatternProperties) > 0 {
+							return features, unsupportedTypeError(path, "key-value map of key-value map")
+						}
+
+						e.printf("schema.MapNestedAttribute{/*START ATTRIBUTE*/\n")
+						e.printf("NestedObject: schema.NestedAttributeObject{/*START NESTED OBJECT*/\n")
+						e.printf("Attributes:")
+
+						f, err := e.emitSchema(
+							tfType,
+							attributeNameMap,
+							parent{
+								computedAndOptional: computedAndOptional,
+								computedOnly:        computedOnly,
+								path:                path,
+								reqd:                nestedPatternProperty.Items,
+							},
+							patternProperty.Items.Properties)
+						if err != nil {
+							return features, err
+						}
+						features = features.LogicalOr(f)
+						e.printf(",\n")
+						e.printf("}/*END NESTED OBJECT*/,\n")
+
+						if v, err := setLengthValidator(path, patternProperty); err != nil {
+							return features, err
+						} else if v != "" {
+							validators = append(validators, v)
+							features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "setvalidator")
+						}
 					default:
 						return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of set of %s", itemType))
 					}
