@@ -61,6 +61,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_appflow_connector_profile -cfschema ../service/cloudformation/schemas/AWS_AppFlow_ConnectorProfile.json -package appflow -- ../aws/appflow/connector_profile_resource_gen.go ../aws/appflow/connector_profile_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_appflow_flow -cfschema ../service/cloudformation/schemas/AWS_AppFlow_Flow.json -package appflow -- ../aws/appflow/flow_resource_gen.go ../aws/appflow/flow_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_appintegrations_application -cfschema ../service/cloudformation/schemas/AWS_AppIntegrations_Application.json -package appintegrations -- ../aws/appintegrations/application_resource_gen.go ../aws/appintegrations/application_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_appintegrations_data_integration -cfschema ../service/cloudformation/schemas/AWS_AppIntegrations_DataIntegration.json -package appintegrations -- ../aws/appintegrations/data_integration_resource_gen.go ../aws/appintegrations/data_integration_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_appintegrations_event_integration -cfschema ../service/cloudformation/schemas/AWS_AppIntegrations_EventIntegration.json -package appintegrations -- ../aws/appintegrations/event_integration_resource_gen.go ../aws/appintegrations/event_integration_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_apprunner_auto_scaling_configuration -cfschema ../service/cloudformation/schemas/AWS_AppRunner_AutoScalingConfiguration.json -package apprunner -- ../aws/apprunner/auto_scaling_configuration_resource_gen.go ../aws/apprunner/auto_scaling_configuration_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_apprunner_observability_configuration -cfschema ../service/cloudformation/schemas/AWS_AppRunner_ObservabilityConfiguration.json -package apprunner -- ../aws/apprunner/observability_configuration_resource_gen.go ../aws/apprunner/observability_configuration_resource_gen_test.go
@@ -106,6 +107,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_b2bi_partnership -cfschema ../service/cloudformation/schemas/AWS_B2BI_Partnership.json -package b2bi -- ../aws/b2bi/partnership_resource_gen.go ../aws/b2bi/partnership_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_b2bi_profile -cfschema ../service/cloudformation/schemas/AWS_B2BI_Profile.json -package b2bi -- ../aws/b2bi/profile_resource_gen.go ../aws/b2bi/profile_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_b2bi_transformer -cfschema ../service/cloudformation/schemas/AWS_B2BI_Transformer.json -package b2bi -- ../aws/b2bi/transformer_resource_gen.go ../aws/b2bi/transformer_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_bcmdataexports_export -cfschema ../service/cloudformation/schemas/AWS_BCMDataExports_Export.json -package bcmdataexports -- ../aws/bcmdataexports/export_resource_gen.go ../aws/bcmdataexports/export_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_backup_backup_plan -cfschema ../service/cloudformation/schemas/AWS_Backup_BackupPlan.json -package backup -- ../aws/backup/backup_plan_resource_gen.go ../aws/backup/backup_plan_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_backup_backup_selection -cfschema ../service/cloudformation/schemas/AWS_Backup_BackupSelection.json -package backup -- ../aws/backup/backup_selection_resource_gen.go ../aws/backup/backup_selection_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_backup_backup_vault -cfschema ../service/cloudformation/schemas/AWS_Backup_BackupVault.json -package backup -- ../aws/backup/backup_vault_resource_gen.go ../aws/backup/backup_vault_resource_gen_test.go
@@ -1205,6 +1207,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/backup"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/backupgateway"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/batch"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/bcmdataexports"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/bedrock"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/billingconductor"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/budgets"

@@ -601,46 +601,111 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 
 			case cfschema.PropertyTypeObject:
 				if len(patternProperty.PatternProperties) > 0 {
-					return features, unsupportedTypeError(path, "key-value map of key-value map")
-				}
+					// Map of Maps
 
-				if len(patternProperty.Properties) == 0 {
+					var nestedPatternProperty *cfschema.Property
+					for _, v := range patternProperty.PatternProperties {
+						nestedPatternProperty = v
+						break
+					}
+
+					if nestedPatternProperty == nil {
+						return features, unsupportedTypeError(path, "key-value map with empty pattern properties")
+					}
+
+					switch nestedPatternProperty.Type.String() {
+					case cfschema.PropertyTypeBoolean:
+						e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+						e.printf("ElementType:types.MapType{ElemType:types.BoolType},\n")
+					case cfschema.PropertyTypeInteger:
+						e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+						e.printf("ElementType:types.MapType{ElemType:types.Int64Type},\n")
+					case cfschema.PropertyTypeNumber:
+						e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+						e.printf("ElementType:types.MapType{ElemType:types.Float64Type},\n")
+					case cfschema.PropertyTypeString:
+						e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+						e.printf("ElementType:types.MapType{ElemType:types.StringType},\n")
+					case cfschema.PropertyTypeArray:
+						if nestedPatternProperty.Items == nil {
+							return features, unsupportedTypeError(path, "key-value map of map of array with no items")
+						}
+						itemType := nestedPatternProperty.Items.Type.String()
+						if aggregateType(nestedPatternProperty) == aggregateSet {
+							switch itemType {
+							case cfschema.PropertyTypeBoolean:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.SetType{ElemType:types.BoolType}},\n")
+							case cfschema.PropertyTypeInteger:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.SetType{ElemType:types.Int64Type}},\n")
+							case cfschema.PropertyTypeNumber:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.SetType{ElemType:types.Float64Type}},\n")
+							case cfschema.PropertyTypeString:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.SetType{ElemType:types.StringType}},\n")
+							default:
+								return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of map of set of %s", itemType))
+							}
+						} else {
+							switch itemType {
+							case cfschema.PropertyTypeBoolean:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.ListType{ElemType:types.BoolType}},\n")
+							case cfschema.PropertyTypeInteger:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.ListType{ElemType:types.Int64Type}},\n")
+							case cfschema.PropertyTypeNumber:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.ListType{ElemType:types.Float64Type}},\n")
+							case cfschema.PropertyTypeString:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.ListType{ElemType:types.StringType}},\n")
+							default:
+								return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of map of list of %s", itemType))
+							}
+						}
+					default:
+						return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of map of %s", nestedPatternProperty.Type.String()))
+					}
+					features.UsesFrameworkTypes = true
+				} else if len(patternProperty.Properties) == 0 {
 					return features, unsupportedTypeError(path, "key-value map of undefined schema")
-				}
+				} else {
+					e.printf("schema.MapNestedAttribute{/*START ATTRIBUTE*/\n")
+					e.printf("NestedObject: schema.NestedAttributeObject{/*START NESTED OBJECT*/\n")
+					e.printf("Attributes:")
 
-				e.printf("schema.MapNestedAttribute{/*START ATTRIBUTE*/\n")
-				e.printf("NestedObject: schema.NestedAttributeObject{/*START NESTED OBJECT*/\n")
-				e.printf("Attributes:")
+					f, err := e.emitSchema(
+						tfType,
+						attributeNameMap,
+						parent{
+							computedAndOptional: computedAndOptional,
+							computedOnly:        computedOnly,
+							path:                path,
+							reqd:                property.Items,
+						},
+						patternProperty.Properties)
 
-				f, err := e.emitSchema(
-					tfType,
-					attributeNameMap,
-					parent{
-						computedAndOptional: computedAndOptional,
-						computedOnly:        computedOnly,
-						path:                path,
-						reqd:                property.Items,
-					},
-					patternProperty.Properties)
-
-				if err != nil {
-					return features, err
-				}
-
-				features = features.LogicalOr(f)
-
-				if !e.IsDataSource {
-					if patternProperty.MinItems != nil {
-						return features, fmt.Errorf("%s has unsupported MinItems", strings.Join(path, "/"))
+					if err != nil {
+						return features, err
 					}
-					if patternProperty.MaxItems != nil {
-						return features, fmt.Errorf("%s has unsupported MaxItems", strings.Join(path, "/"))
+
+					features = features.LogicalOr(f)
+
+					if !e.IsDataSource {
+						if patternProperty.MinItems != nil {
+							return features, fmt.Errorf("%s has unsupported MinItems", strings.Join(path, "/"))
+						}
+						if patternProperty.MaxItems != nil {
+							return features, fmt.Errorf("%s has unsupported MaxItems", strings.Join(path, "/"))
+						}
 					}
+
+					e.printf(",\n")
+					e.printf("}/*END NESTED OBJECT*/,\n")
 				}
-
-				e.printf(",\n")
-				e.printf("}/*END NESTED OBJECT*/,\n")
-
 			default:
 				return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of %s", propertyType))
 			}
