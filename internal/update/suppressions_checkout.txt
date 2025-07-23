@@ -1,4 +1,3 @@
-internal/service/cloudformation/schemas/AWS_AccessAnalyzer_Analyzer.json
 internal/service/cloudformation/schemas/AWS_AppFlow_ConnectorProfile.json
 internal/service/cloudformation/schemas/AWS_Bedrock_FlowVersion.json
 internal/service/cloudformation/schemas/AWS_ControlTower_EnabledControl.json
@@ -19,6 +18,5 @@ internal/service/cloudformation/schemas/AWS_QuickSight_Analysis.json
 internal/service/cloudformation/schemas/AWS_QuickSight_Dashboard.json
 internal/service/cloudformation/schemas/AWS_QuickSight_DataSet.json
 internal/service/cloudformation/schemas/AWS_QuickSight_Template.json
-
 internal/service/cloudformation/schemas/AWS_S3_Bucket.json
 internal/service/cloudformation/schemas/AWS_StepFunctions_StateMachine.json

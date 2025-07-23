@@ -8,6 +8,8 @@ FEATURES:
 * **New Data Source:** `awscc_scheduler_schedules`
 * **New Resource:** `awscc_omics_annotation_store`
 * **New Resource:** `awscc_scheduler_schedule`
+* **New Data Source:** `awscc_accessanalyzer_analyzer`
+* **New Resource:** `awscc_accessanalyzer_analyzer`
 
 ## 1.49.0 (July 10, 2025)
 
