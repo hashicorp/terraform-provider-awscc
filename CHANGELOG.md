@@ -1,3 +1,14 @@
+## 1.50.0 (July 24, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_omics_annotation_store`
+* **New Data Source:** `awscc_omics_annotation_stores`
+* **New Data Source:** `awscc_scheduler_schedule`
+* **New Data Source:** `awscc_scheduler_schedules`
+* **New Resource:** `awscc_omics_annotation_store`
+* **New Resource:** `awscc_scheduler_schedule`
+
 ## 1.49.0 (July 10, 2025)
 
 FEATURES:
@@ -7,15 +18,6 @@ FEATURES:
 * **New Data Source:** `awscc_s3tables_table`
 * **New Resource:** `awscc_ec2_traffic_mirror_target`
 * **New Resource:** `awscc_s3tables_table`
-
-FEATURES:
-
-* **New Resource:** `awscc_omics_annotation_store`
-* **New Resource:** `awscc_scheduler_schedule`
-* **New Data Source:** `awscc_omics_annotation_store`
-* **New Data Source:** `awscc_omics_annotation_stores`
-* **New Data Source:** `awscc_scheduler_schedule`
-* **New Data Source:** `awscc_scheduler_schedules`
 
 ## 1.48.0 (July 2, 2025)
 
