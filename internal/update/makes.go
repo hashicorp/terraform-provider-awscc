@@ -154,9 +154,7 @@ func processErrorLine(ctx context.Context, errorLine string, config *GitHubConfi
 		// Skip empty lines
 		return nil
 	} else {
-		if err := handleUnhandledError(errorLine); err != nil {
-			return fmt.Errorf("failed to handle unhandled error: %w", err)
-		}
+		return fmt.Errorf("failed to handle unhandled error: %w", errorLine)
 	}
 
 	// For data source builds, regenerate schemas to ensure consistency
