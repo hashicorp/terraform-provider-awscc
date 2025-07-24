@@ -124,7 +124,9 @@ func processErrorLine(ctx context.Context, errorLine string, config *GitHubConfi
 	log.Printf("Found an entry in the error log: %s during make %s \n", errorLine, buildType)
 
 	// Dispatch to appropriate error handler based on error pattern
-	if strings.Contains(errorLine, "stack overflow") {
+	if strings.Contains(errorLine, "no EC2 IMDS role found") {
+		return fmt.Errorf("no EC2 IMDS role found, aborting process")
+	} else if strings.Contains(errorLine, "stack overflow") {
 		if err := handleStackOverflowError(ctx, errorLine, config, currentSchemas, buildType, filePaths, isNewMap); err != nil {
 			return fmt.Errorf("failed to handle stack overflow error: %w", err)
 		}

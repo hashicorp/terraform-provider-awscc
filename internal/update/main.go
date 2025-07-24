@@ -191,7 +191,7 @@ func run() error {
 
 	// Step 3: Validate resources and handle suppressions
 	// Since we've disabled validation in diffSchemas, we perform validation here
-	err = validateResources(ctx, currAllSchemas, config)
+	err = validateResources(ctx, currAllSchemas, config, filePaths)
 	if err != nil {
 		return fmt.Errorf("failed to validate resources: %w", err)
 	}
@@ -394,7 +394,7 @@ func GetAcceptanceTestResults() string {
 //   - filePaths: Configuration containing repository information
 //
 // Returns an error if validation fails for any resource.
-func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchemas, config *GitHubConfig) error {
+func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchemas, config *GitHubConfig, filePaths *UpdateFilePaths) error {
 	for i := range currAllSchemas.Resources {
 		// Check if the resource type can be provisioned via CloudFormation
 		flag, err := validateResourceType(ctx, currAllSchemas.Resources[i].CloudFormationTypeName)
@@ -408,19 +408,12 @@ func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchema
 
 			// Create GitHub issue for tracking if client is available
 			if config != nil && config.Client != nil {
-				/*
-					_, err := createIssue(ctx, currAllSchemas.Resources[i].CloudFormationTypeName, "Resource is not provisionable", config, filePaths.RepositoryLink)
-					if err != nil {
-						tflog.Warn(ctx, "Failed to create GitHub issue", map[string]interface{}{
-							"resource": currAllSchemas.Resources[i].CloudFormationTypeName,
-							"error":    err.Error(),
-						})
-					}
-				*/
+				_, err := createIssue(ctx, currAllSchemas.Resources[i].CloudFormationTypeName, "Resource is not provisionable", config, filePaths.RepositoryLink)
+				if err != nil {
+					log.Printf("Warning: Failed to create GitHub issue: %v", err)
+				}
 			} else {
-				tflog.Info(ctx, "Skipping GitHub issue creation (no client)", map[string]interface{}{
-					"resource": currAllSchemas.Resources[i].CloudFormationTypeName,
-				})
+				log.Printf("Warning: Failed to create GitHub issue: %v", err)
 			}
 		}
 	}
