@@ -475,22 +475,6 @@ func TestHandleStatusCode403Error(t *testing.T) {
 	}
 }
 
-func TestHandleUnhandledError(t *testing.T) {
-	t.Parallel()
-
-	errorLine := "some random unhandled error"
-	err := handleUnhandledError(errorLine)
-
-	if err == nil {
-		t.Fatal("expected error but got none")
-	}
-
-	expectedErrorString := "unhandled schema error: " + errorLine
-	if err.Error() != expectedErrorString {
-		t.Fatalf("expected error %q, but got: %v", expectedErrorString, err)
-	}
-}
-
 func TestNormalizeNames(t *testing.T) {
 	t.Parallel()
 

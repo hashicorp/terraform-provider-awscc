@@ -154,7 +154,7 @@ func processErrorLine(ctx context.Context, errorLine string, config *GitHubConfi
 		// Skip empty lines
 		return nil
 	} else {
-		return fmt.Errorf("failed to handle unhandled error: %w", errorLine)
+		return fmt.Errorf("failed to handle unhandled error: %s", errorLine)
 	}
 
 	// For data source builds, regenerate schemas to ensure consistency
@@ -351,12 +351,6 @@ func handleAWSCC_Error(ctx context.Context, errorLine string, config *GitHubConf
 // These typically indicate authentication or permission issues with AWS API access.
 func handleStatusCode403Error() error {
 	return fmt.Errorf("authentication failed: no valid AWS credentials")
-}
-
-// handleUnhandledError processes error lines that don't match any known patterns.
-// It logs the error for debugging and returns a formatted error message.
-func handleUnhandledError(errorLine string) error {
-	return fmt.Errorf("unhandled schema error: %s", errorLine)
 }
 
 // normalizeNames normalizes CloudFormation and Terraform type names for comparison.
