@@ -16,6 +16,7 @@ jobs:
           go-version-file: 'go.mod'
 
       - name: creds
+        id: creds
         uses: aws-actions/configure-aws-credentials@v4.1.0
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
