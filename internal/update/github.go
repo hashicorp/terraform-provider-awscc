@@ -42,7 +42,7 @@ type GitHubConfig struct {
 //   - date: Current date string for use in commit messages and branch names
 //
 // Returns a configured GitHubConfig ready for use in API operations and any setup errors.
-func NewGitHubConfig(ctx context.Context, repositoryLink string, date string) (*GitHubConfig, error) {
+func NewGitHubConfig(repositoryLink string, date string) (*GitHubConfig, error) {
 	// Validate required environment variables
 	err := checkGithubToken()
 	if err != nil {
