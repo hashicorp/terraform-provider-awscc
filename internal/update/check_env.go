@@ -20,9 +20,9 @@ func CheckAWSEnv() error {
 	// List of required AWS environment variables for CloudFormation API access
 	requiredVars := []string{
 		"AWS_REGION",
-		"aws-access-key-id",
-		"aws-secret-access-key",
-		"update-schema-session",
+		"AWS_ACCESS_KEY_ID",
+		"AWS_SECRET_ACCESS_KEY",
+		"AWS_SESSION_TOKEN",
 	}
 
 	// Verify all required variables are set
