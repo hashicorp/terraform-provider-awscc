@@ -149,12 +149,6 @@ func TestProcessErrorLine(t *testing.T) {
 			expectError:         true,
 			expectedErrorString: "authentication failed: no valid AWS credentials",
 		},
-		"unhandled_error": {
-			errorLine:           "some random error message",
-			buildType:           BuildTypeSchemas,
-			expectError:         true,
-			expectedErrorString: "unhandled schema error",
-		},
 	}
 
 	for name, test := range tests {

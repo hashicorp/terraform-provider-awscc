@@ -18,24 +18,14 @@ func TestMakeChangelog(t *testing.T) {
 		t.Fatalf("Failed to create test directory: %v", err)
 	}
 	t.Logf("Test directory created successfully")
-	// Copy the original CHANGELOG.md to the test directory
-	originalChangelog := filepath.Join("..", "..", "CHANGELOG.md")
+	// Create a minimal independent CHANGELOG.md for testing
 	testChangelog := filepath.Join(testDir, "CHANGELOG.md")
-
-	t.Logf("Source changelog: %s", originalChangelog)
-	t.Logf("Target changelog: %s", testChangelog)
-
-	originalContent, err := os.ReadFile(originalChangelog)
+	initialChangelog := []byte("## 1.49.0 (Unreleased)\n")
+	err = os.WriteFile(testChangelog, initialChangelog, 0644)
 	if err != nil {
-		t.Fatalf("Failed to read original CHANGELOG.md: %v", err)
+		t.Fatalf("Failed to create test CHANGELOG.md: %v", err)
 	}
-	t.Logf("Read original changelog, size: %d bytes", len(originalContent))
-
-	err = os.WriteFile(testChangelog, originalContent, 0644)
-	if err != nil {
-		t.Fatalf("Failed to copy CHANGELOG.md to test directory: %v", err)
-	}
-	t.Logf("Copied changelog to test directory successfully")
+	t.Logf("Created independent test changelog successfully")
 
 	// Create a test AllSchemasHCL file with sample data
 	testAllSchemasHCL := filepath.Join(testDir, "allschemas.hcl")

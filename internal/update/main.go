@@ -107,7 +107,7 @@ func run() error {
 
 	// Initialize GitHub configuration with all GitHub-related setup
 	currentDate := GetCurrentDate()
-	config, err := NewGitHubConfig(filePaths.RepositoryLink, currentDate)
+	config, err := NewGitHubConfig(ctx, filePaths.RepositoryLink, currentDate)
 	if err != nil {
 		return fmt.Errorf("failed to initialize GitHub configuration: %w", err)
 	}
