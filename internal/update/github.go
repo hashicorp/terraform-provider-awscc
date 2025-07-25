@@ -61,12 +61,12 @@ func NewGitHubConfig(repositoryLink string, date string) (*GitHubConfig, error) 
 	config := &GitHubConfig{
 		Client:      client,
 		CurrentDate: date,
-		RepoOwner:   DefaultRepoOwner,
-		RepoName:    DefaultRepoName,
+		RepoOwner:   "ThomasZalewski",
+		RepoName:    "terraform-provider-awscc-forkGHA",
 	}
 
 	// Extract owner and repository name from the repository link if provided
-	if repositoryLink != "" {
+	if repositoryLink != "" && RepoOwner == nil && RepoName == nil{
 		parts := strings.Split(strings.TrimPrefix(repositoryLink, GitHubURLPrefix), "/")
 		if len(parts) >= 2 {
 			config.RepoOwner = parts[0]
