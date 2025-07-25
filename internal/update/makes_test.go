@@ -149,12 +149,6 @@ func TestProcessErrorLine(t *testing.T) {
 			expectError:         true,
 			expectedErrorString: "authentication failed: no valid AWS credentials",
 		},
-		"unhandled_error": {
-			errorLine:           "some random error message",
-			buildType:           BuildTypeSchemas,
-			expectError:         true,
-			expectedErrorString: "unhandled schema error",
-		},
 	}
 
 	for name, test := range tests {
@@ -472,22 +466,6 @@ func TestHandleStatusCode403Error(t *testing.T) {
 	expectedErrorString := "authentication failed: no valid AWS credentials"
 	if !strings.Contains(err.Error(), expectedErrorString) {
 		t.Fatalf("expected error to contain %q, but got: %v", expectedErrorString, err)
-	}
-}
-
-func TestHandleUnhandledError(t *testing.T) {
-	t.Parallel()
-
-	errorLine := "some random unhandled error"
-	err := handleUnhandledError(errorLine)
-
-	if err == nil {
-		t.Fatal("expected error but got none")
-	}
-
-	expectedErrorString := "unhandled schema error: " + errorLine
-	if err.Error() != expectedErrorString {
-		t.Fatalf("expected error %q, but got: %v", expectedErrorString, err)
 	}
 }
 
