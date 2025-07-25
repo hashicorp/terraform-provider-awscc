@@ -3810,6 +3810,12 @@ resource_schema "aws_oam_sink" {
 
 resource_schema "aws_omics_annotation_store" {
   cloudformation_type_name = "AWS::Omics::AnnotationStore"
+
+  # Suppression Reason: StoreOptions/TsvStoreOptions/Schema is of unsupported type: list of key-value map.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1517
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_omics_reference_store" {
@@ -4852,6 +4858,12 @@ resource_schema "aws_sagemaker_user_profile" {
 
 resource_schema "aws_scheduler_schedule" {
   cloudformation_type_name = "AWS::Scheduler::Schedule"
+
+  # Suppression Reason: Target/EcsParameters/Tags is of unsupported type: list of key-value map.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1517
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_scheduler_schedule_group" {
