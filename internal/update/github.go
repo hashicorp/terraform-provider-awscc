@@ -66,7 +66,7 @@ func NewGitHubConfig(repositoryLink string, date string) (*GitHubConfig, error) 
 	}
 
 	// Extract owner and repository name from the repository link if provided
-	if repositoryLink != "" && RepoOwner == nil && RepoName == nil{
+	if repositoryLink != "" && config.RepoOwner == "" && config.RepoName == "" {
 		parts := strings.Split(strings.TrimPrefix(repositoryLink, GitHubURLPrefix), "/")
 		if len(parts) >= 2 {
 			config.RepoOwner = parts[0]
