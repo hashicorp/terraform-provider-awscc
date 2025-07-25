@@ -267,6 +267,13 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "Configuration for an SFTP connector.",
 		//	  "properties": {
+		//	    "MaxConcurrentConnections": {
+		//	      "default": 1,
+		//	      "description": "Specifies the number of active connections that your connector can establish with the remote server at the same time.",
+		//	      "maximum": 5,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
 		//	    "TrustedHostKeys": {
 		//	      "description": "List of public host keys, for the external server to which you are connecting.",
 		//	      "insertionOrder": false,
@@ -291,6 +298,11 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"sftp_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxConcurrentConnections
+				"max_concurrent_connections": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the number of active connections that your connector can establish with the remote server at the same time.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: TrustedHostKeys
 				"trusted_host_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
@@ -396,6 +408,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key":                                 "Key",
 		"local_profile_id":                    "LocalProfileId",
 		"logging_role":                        "LoggingRole",
+		"max_concurrent_connections":          "MaxConcurrentConnections",
 		"mdn_response":                        "MdnResponse",
 		"mdn_signing_algorithm":               "MdnSigningAlgorithm",
 		"message_subject":                     "MessageSubject",
