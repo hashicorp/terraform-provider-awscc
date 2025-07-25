@@ -81,6 +81,7 @@ func NewGitHubConfig(repositoryLink string, date string) (*GitHubConfig, error) 
 }
 
 func checkGithubToken() error {
+	return nil
 	// GitHub token validation is currently disabled to allow development without GitHub integration
 	githubToken := os.Getenv("GITHUB_TOKEN")
 	if githubToken == "" {
