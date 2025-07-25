@@ -273,11 +273,16 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ProductId
 				"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Service Catalog product identifier.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthAtMost(100),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
+						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ProvisioningArtifactId
 				"provisioning_artifact_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -335,9 +340,11 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Input ServiceCatalog Provisioning Details",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.RequiresReplace(),
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -416,6 +423,197 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TemplateProviderDetails
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of template providers associated with the project.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Details about the template provider for the SageMaker project.",
+		//	    "oneOf": [
+		//	      {
+		//	        "required": [
+		//	          "CfnTemplateProviderDetail"
+		//	        ]
+		//	      }
+		//	    ],
+		//	    "properties": {
+		//	      "CfnTemplateProviderDetail": {
+		//	        "additionalProperties": false,
+		//	        "description": "CloudFormation template provider details for a SageMaker project.",
+		//	        "properties": {
+		//	          "Parameters": {
+		//	            "description": "A list of parameters used in the CloudFormation template.",
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Key": {
+		//	                  "description": "The key of the parameter.",
+		//	                  "maxLength": 255,
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                },
+		//	                "Value": {
+		//	                  "description": "The value of the parameter.",
+		//	                  "maxLength": 4096,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Key",
+		//	                "Value"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "maxItems": 180,
+		//	            "minItems": 0,
+		//	            "type": "array"
+		//	          },
+		//	          "RoleARN": {
+		//	            "description": "The Amazon Resource Name (ARN) of the IAM role used by the template provider.",
+		//	            "maxLength": 2048,
+		//	            "minLength": 20,
+		//	            "pattern": "arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+",
+		//	            "type": "string"
+		//	          },
+		//	          "TemplateName": {
+		//	            "description": "The name of the template used for the project.",
+		//	            "maxLength": 32,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "TemplateURL": {
+		//	            "description": "The URL of the CloudFormation template.",
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "TemplateName",
+		//	          "TemplateURL"
+		//	        ],
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 1,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"template_provider_details": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CfnTemplateProviderDetail
+					"cfn_template_provider_detail": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Parameters
+							"parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Key
+										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The key of the parameter.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(1, 255),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The value of the parameter.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtMost(4096),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "A list of parameters used in the CloudFormation template.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.SizeBetween(0, 180),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: RoleARN
+							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) of the IAM role used by the template provider.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(20, 2048),
+									stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: TemplateName
+							"template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the template used for the project.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 32),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: TemplateURL
+							"template_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The URL of the CloudFormation template.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "CloudFormation template provider details for a SageMaker project.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of template providers associated with the project.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -438,8 +636,10 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Project").WithTerraformTypeName("awscc_sagemaker_project")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"cfn_template_provider_detail":       "CfnTemplateProviderDetail",
 		"creation_time":                      "CreationTime",
 		"key":                                "Key",
+		"parameters":                         "Parameters",
 		"path_id":                            "PathId",
 		"product_id":                         "ProductId",
 		"project_arn":                        "ProjectArn",
@@ -451,9 +651,13 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		"provisioned_product_status_message": "ProvisionedProductStatusMessage",
 		"provisioning_artifact_id":           "ProvisioningArtifactId",
 		"provisioning_parameters":            "ProvisioningParameters",
+		"role_arn":                           "RoleARN",
 		"service_catalog_provisioned_product_details": "ServiceCatalogProvisionedProductDetails",
 		"service_catalog_provisioning_details":        "ServiceCatalogProvisioningDetails",
 		"tags":                                        "Tags",
+		"template_name":                               "TemplateName",
+		"template_provider_details":                   "TemplateProviderDetails",
+		"template_url":                                "TemplateURL",
 		"value":                                       "Value",
 	})
 
