@@ -379,11 +379,14 @@ func normalizeNames(cfTypeName string, tfTypeName string) (string, string) {
 
 func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHubConfig, new bool, buildType string, filePaths *UpdateFilePaths, allSchemas *allschemas.AllSchemas) error {
 	// Create a GitHub issue for the schema error
+	/*
 	issueURL, err := createIssue(ctx, cfTypeName, schemaError, config, filePaths.RepositoryLink)
 	if err != nil {
 		log.Printf("Warning: Failed to create GitHub issue: %v", err)
 		issueURL = "" // Use empty string if issue creation fails
 	}
+	*/
+	issueURL := ""
 
 	// Add to all_schemas.hcl
 	if buildType != BuildTypeSchemas || new {
