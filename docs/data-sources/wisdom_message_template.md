@@ -29,6 +29,7 @@ Data Source schema for AWS::Wisdom::MessageTemplate
 - `knowledge_base_arn` (String) The Amazon Resource Name (ARN) of the knowledge base to which the message template belongs.
 - `language` (String) The language code value for the language in which the message template is written. The supported language codes include de_DE, en_US, es_ES, fr_FR, id_ID, it_IT, ja_JP, ko_KR, pt_BR, zh_CN, zh_TW
 - `message_template_arn` (String) The Amazon Resource Name (ARN) of the message template.
+- `message_template_attachments` (Attributes List) List of message template attachments (see [below for nested schema](#nestedatt--message_template_attachments))
 - `message_template_content_sha_256` (String) The content SHA256 of the message template.
 - `message_template_id` (String) The unique identifier of the message template.
 - `name` (String) The name of the message template.
@@ -229,6 +230,16 @@ Read-Only:
 
 - `criteria` (String) The criteria used for grouping Amazon Q in Connect users.
 - `values` (List of String) The list of values that define different groups of Amazon Q in Connect users.
+
+
+<a id="nestedatt--message_template_attachments"></a>
+### Nested Schema for `message_template_attachments`
+
+Read-Only:
+
+- `attachment_id` (String)
+- `attachment_name` (String) The name of the attachment file being uploaded. The name should include the file extension.
+- `s3_presigned_url` (String) The S3 Presigned URL for the attachment file. When generating the PreSignedUrl, please ensure that the expires-in time is set to 30 minutes. The URL can be generated through the AWS Console or through the AWS CLI (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html).
 
 
 <a id="nestedatt--tags"></a>
