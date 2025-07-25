@@ -70,8 +70,8 @@ const (
 	FilePermission = 0600
 
 	// GitHub repository configuration
-	DefaultRepoOwner = "hashicorp"
-	DefaultRepoName  = "terraform-provider-awscc"
+	DefaultRepoOwner = "ThomasZalewski"
+	DefaultRepoName  = "terraform-provider-awscc-forkGHA"
 	GitHubURLPrefix  = "https://github.com/"
 
 	// AWS configuration
