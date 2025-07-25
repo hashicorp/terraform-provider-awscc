@@ -43,8 +43,18 @@ type GitHubConfig struct {
 //
 // Returns a configured GitHubConfig ready for use in API operations and any setup errors.
 func NewGitHubConfig(repositoryLink string, date string) (*GitHubConfig, error) {
+
+	// Comment out if locall running
+	err := exec.Command("git", "config", "--global", "user.email", "you@example.com").Run()
+	if err != nil {
+		return nil, err
+	}
+	err = exec.Command("git", "config", "--global", "user.name", "Your Name").Run()
+	if err != nil {
+		return nil, err
+	}
 	// Validate required environment variables
-	err := checkGithubToken()
+	err = checkGithubToken()
 	if err != nil {
 		return nil, fmt.Errorf("github token check failed: %w", err)
 	}
