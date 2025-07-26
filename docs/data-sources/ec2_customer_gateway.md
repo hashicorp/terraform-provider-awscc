@@ -29,7 +29,7 @@ Data Source schema for AWS::EC2::CustomerGateway
 - `certificate_arn` (String) The Amazon Resource Name (ARN) for the customer gateway certificate.
 - `customer_gateway_id` (String)
 - `device_name` (String) The name of customer gateway device.
-- `ip_address` (String) IPv4 address for the customer gateway device's outside interface. The address must be static. If ``OutsideIpAddressType`` in your VPN connection options is set to ``PrivateIpv4``, you can use an RFC6598 or RFC1918 private IPv4 address. If ``OutsideIpAddressType`` is set to ``PublicIpv4``, you can use a public IPv4 address.
+- `ip_address` (String) The IP address for the customer gateway device's outside interface. The address must be static. If ``OutsideIpAddressType`` in your VPN connection options is set to ``PrivateIpv4``, you can use an RFC6598 or RFC1918 private IPv4 address. If ``OutsideIpAddressType`` is set to ``Ipv6``, you can use an IPv6 address.
 - `tags` (Attributes List) One or more tags for the customer gateway. (see [below for nested schema](#nestedatt--tags))
 - `type` (String) The type of VPN connection that this customer gateway supports (``ipsec.1``).
 

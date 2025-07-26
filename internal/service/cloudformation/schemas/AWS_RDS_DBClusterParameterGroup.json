@@ -91,7 +91,6 @@
       "permissions": [
         "rds:DescribeDBClusterParameterGroups",
         "rds:DescribeDBClusterParameters",
-        "rds:DescribeEngineDefaultClusterParameters",
         "rds:ListTagsForResource"
       ]
     },

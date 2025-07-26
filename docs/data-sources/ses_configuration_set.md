@@ -26,6 +26,7 @@ Data Source schema for AWS::SES::ConfigurationSet
 - `reputation_options` (Attributes) An object that defines whether or not Amazon SES collects reputation metrics for the emails that you send that use the configuration set. (see [below for nested schema](#nestedatt--reputation_options))
 - `sending_options` (Attributes) An object that defines whether or not Amazon SES can send email that you send using the configuration set. (see [below for nested schema](#nestedatt--sending_options))
 - `suppression_options` (Attributes) An object that contains information about the suppression list preferences for your account. (see [below for nested schema](#nestedatt--suppression_options))
+- `tags` (Attributes List) The tags (keys and values) associated with the contact list. (see [below for nested schema](#nestedatt--tags))
 - `tracking_options` (Attributes) An object that defines the open and click tracking options for emails that you send using the configuration set. (see [below for nested schema](#nestedatt--tracking_options))
 - `vdm_options` (Attributes) An object that contains Virtual Deliverability Manager (VDM) settings for this configuration set. (see [below for nested schema](#nestedatt--vdm_options))
 
@@ -61,6 +62,15 @@ Read-Only:
 Read-Only:
 
 - `suppressed_reasons` (List of String) A list that contains the reasons that email addresses are automatically added to the suppression list for your account.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--tracking_options"></a>

@@ -33,10 +33,19 @@ resource "awscc_ses_dedicated_ip_pool" "example" {
 
 - `pool_name` (String) The name of the dedicated IP pool.
 - `scaling_mode` (String) Specifies whether the dedicated IP pool is managed or not. The default value is STANDARD.
+- `tags` (Attributes List) The tags (keys and values) associated with the dedicated IP pool. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

@@ -145,10 +145,6 @@ func hostedZoneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "properties": {
 		//	    "CloudWatchLogsLogGroupArn": {
 		//	      "description": "The Amazon Resource Name (ARN) of the CloudWatch Logs log group that Amazon Route 53 is publishing logs to.",
-		//	      "relationshipRef": {
-		//	        "propertyPath": "/properties/Arn",
-		//	        "typeName": "AWS::Logs::LogGroup"
-		//	      },
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -180,10 +176,6 @@ func hostedZoneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "properties": {
 		//	      "VPCId": {
 		//	        "description": "*Private hosted zones only:* The ID of an Amazon VPC.\n  For public hosted zones, omit ``VPCs``, ``VPCId``, and ``VPCRegion``.",
-		//	        "relationshipRef": {
-		//	          "propertyPath": "/properties/VpcId",
-		//	          "typeName": "AWS::EC2::VPC"
-		//	        },
 		//	        "type": "string"
 		//	      },
 		//	      "VPCRegion": {

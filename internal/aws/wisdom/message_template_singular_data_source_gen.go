@@ -1162,6 +1162,62 @@ func messageTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 			Description: "The Amazon Resource Name (ARN) of the message template.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: MessageTemplateAttachments
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of message template attachments",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "",
+		//	    "properties": {
+		//	      "AttachmentId": {
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "AttachmentName": {
+		//	        "description": "The name of the attachment file being uploaded. The name should include the file extension.",
+		//	        "maxLength": 255,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "S3PresignedUrl": {
+		//	        "description": "The S3 Presigned URL for the attachment file. When generating the PreSignedUrl, please ensure that the expires-in time is set to 30 minutes. The URL can be generated through the AWS Console or through the AWS CLI (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html). ",
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "AttachmentName",
+		//	      "S3PresignedUrl"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"message_template_attachments": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AttachmentId
+					"attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: AttachmentName
+					"attachment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the attachment file being uploaded. The name should include the file extension.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: S3PresignedUrl
+					"s3_presigned_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The S3 Presigned URL for the attachment file. When generating the PreSignedUrl, please ensure that the expires-in time is set to 30 minutes. The URL can be generated through the AWS Console or through the AWS CLI (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html). ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of message template attachments",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MessageTemplateContentSha256
 		// CloudFormation resource type schema:
 		//
@@ -1277,6 +1333,8 @@ func messageTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		"address_3":                        "Address3",
 		"address_4":                        "Address4",
 		"agent_attributes":                 "AgentAttributes",
+		"attachment_id":                    "AttachmentId",
+		"attachment_name":                  "AttachmentName",
 		"billing_address_1":                "BillingAddress1",
 		"billing_address_2":                "BillingAddress2",
 		"billing_address_3":                "BillingAddress3",
@@ -1327,6 +1385,7 @@ func messageTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		"mailing_province":                 "MailingProvince",
 		"mailing_state":                    "MailingState",
 		"message_template_arn":             "MessageTemplateArn",
+		"message_template_attachments":     "MessageTemplateAttachments",
 		"message_template_content_sha_256": "MessageTemplateContentSha256",
 		"message_template_id":              "MessageTemplateId",
 		"middle_name":                      "MiddleName",
@@ -1339,6 +1398,7 @@ func messageTemplateDataSource(ctx context.Context) (datasource.DataSource, erro
 		"profile_arn":                      "ProfileARN",
 		"profile_id":                       "ProfileId",
 		"province":                         "Province",
+		"s3_presigned_url":                 "S3PresignedUrl",
 		"shipping_address_1":               "ShippingAddress1",
 		"shipping_address_2":               "ShippingAddress2",
 		"shipping_address_3":               "ShippingAddress3",

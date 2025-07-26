@@ -363,7 +363,6 @@ func eventSubscriptionResource(ctx context.Context) (resource.Resource, error) {
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -405,11 +404,6 @@ func eventSubscriptionResource(ctx context.Context) (resource.Resource, error) {
 		"value":                      "Value",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/Tags",
-		"/properties/Tags/*/Key",
-		"/properties/Tags/*/Value",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

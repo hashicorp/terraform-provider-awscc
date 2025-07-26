@@ -24,6 +24,7 @@
       "type": "array",
       "maxItems": 50,
       "uniqueItems": true,
+      "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
       }

@@ -43,6 +43,7 @@ resource "awscc_events_event_bus" "sample_partner_event_bus" {
 - `description` (String) The description of the event bus.
 - `event_source_name` (String) If you are creating a partner event bus, this specifies the partner event source that the new event bus will be matched with.
 - `kms_key_identifier` (String) Kms Key Identifier used to encrypt events at rest in the event bus.
+- `log_config` (Attributes) The logging configuration settings for vended logs. (see [below for nested schema](#nestedatt--log_config))
 - `policy` (String) A JSON string that describes the permission policy statement for the event bus.
 - `tags` (Attributes List) Any tags assigned to the event bus. (see [below for nested schema](#nestedatt--tags))
 
@@ -57,6 +58,15 @@ resource "awscc_events_event_bus" "sample_partner_event_bus" {
 Optional:
 
 - `arn` (String)
+
+
+<a id="nestedatt--log_config"></a>
+### Nested Schema for `log_config`
+
+Optional:
+
+- `include_detail` (String) Configures whether or not to include event detail, input transformer details, target properties, and target input in the applicable log messages.
+- `level` (String) Configures the log level of the EventBus and determines which log messages are sent to Ingestion Hub for delivery.
 
 
 <a id="nestedatt--tags"></a>

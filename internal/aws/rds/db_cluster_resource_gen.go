@@ -199,11 +199,11 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies the scalability mode of the Aurora DB cluster. When set to ``limitless``, the cluster operates as an Aurora Limitless Database, allowing you to create a DB shard group for horizontal scaling (sharding) capabilities. When set to ``standard`` (the default), the cluster uses normal DB instance creation.",
+		//	  "description": "Specifies the scalability mode of the Aurora DB cluster. When set to ``limitless``, the cluster operates as an Aurora Limitless Database, allowing you to create a DB shard group for horizontal scaling (sharding) capabilities. When set to ``standard`` (the default), the cluster uses normal DB instance creation.\n *Important:* Automated backup retention isn't supported with Aurora Limitless Database clusters. If you set this property to ``limitless``, you cannot set ``DeleteAutomatedBackups`` to ``false``. To create a backup, use manual snapshots instead.",
 		//	  "type": "string"
 		//	}
 		"cluster_scalability_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the scalability mode of the Aurora DB cluster. When set to ``limitless``, the cluster operates as an Aurora Limitless Database, allowing you to create a DB shard group for horizontal scaling (sharding) capabilities. When set to ``standard`` (the default), the cluster uses normal DB instance creation.",
+			Description: "Specifies the scalability mode of the Aurora DB cluster. When set to ``limitless``, the cluster operates as an Aurora Limitless Database, allowing you to create a DB shard group for horizontal scaling (sharding) capabilities. When set to ``standard`` (the default), the cluster uses normal DB instance creation.\n *Important:* Automated backup retention isn't supported with Aurora Limitless Database clusters. If you set this property to ``limitless``, you cannot set ``DeleteAutomatedBackups`` to ``false``. To create a backup, use manual snapshots instead.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -386,6 +386,22 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DeleteAutomatedBackups
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether to remove automated backups immediately after the DB cluster is deleted. This parameter isn't case-sensitive. The default is to remove automated backups immediately after the DB cluster is deleted, unless the AWS Backup policy specifies a point-in-time restore rule.",
+		//	  "type": "boolean"
+		//	}
+		"delete_automated_backups": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to remove automated backups immediately after the DB cluster is deleted. This parameter isn't case-sensitive. The default is to remove automated backups immediately after the DB cluster is deleted, unless the AWS Backup policy specifies a point-in-time restore rule.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// DeleteAutomatedBackups is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DeletionProtection
 		// CloudFormation resource type schema:
@@ -1169,11 +1185,11 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "When restoring a DB cluster to a point in time, the identifier of the source DB cluster from which to restore.\n Constraints:\n  +  Must match the identifier of an existing DBCluster.\n  \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+		//	  "description": "When restoring a DB cluster to a point in time, the identifier of the source DB cluster from which to restore.\n Constraints:\n  +  Must match the identifier of an existing DBCluster.\n  +  Cannot be specified if ``SourceDbClusterResourceId`` is specified. You must specify either ``SourceDBClusterIdentifier`` or ``SourceDbClusterResourceId``, but not both.\n  \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
 		"source_db_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "When restoring a DB cluster to a point in time, the identifier of the source DB cluster from which to restore.\n Constraints:\n  +  Must match the identifier of an existing DBCluster.\n  \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Description: "When restoring a DB cluster to a point in time, the identifier of the source DB cluster from which to restore.\n Constraints:\n  +  Must match the identifier of an existing DBCluster.\n  +  Cannot be specified if ``SourceDbClusterResourceId`` is specified. You must specify either ``SourceDBClusterIdentifier`` or ``SourceDbClusterResourceId``, but not both.\n  \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1398,6 +1414,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		"db_instance_parameter_group_name":      "DBInstanceParameterGroupName",
 		"db_subnet_group_name":                  "DBSubnetGroupName",
 		"db_system_id":                          "DBSystemId",
+		"delete_automated_backups":              "DeleteAutomatedBackups",
 		"deletion_protection":                   "DeletionProtection",
 		"domain":                                "Domain",
 		"domain_iam_role_name":                  "DomainIAMRoleName",
@@ -1458,6 +1475,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ClusterScalabilityType",
 		"/properties/DBInstanceParameterGroupName",
+		"/properties/DeleteAutomatedBackups",
 		"/properties/MasterUserPassword",
 		"/properties/RestoreToTime",
 		"/properties/RestoreType",

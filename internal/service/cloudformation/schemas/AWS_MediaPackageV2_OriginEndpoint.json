@@ -29,12 +29,120 @@
         "CMAF"
       ]
     },
+    "DashBaseUrl": {
+      "type": "object",
+      "description": "<p>The base URLs to use for retrieving segments. You can specify multiple locations and indicate the priority and weight for when each should be used, for use in mutli-CDN workflows.</p>",
+      "properties": {
+        "Url": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 1,
+          "description": "<p>A source location for segments.</p>"
+        },
+        "ServiceLocation": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 1,
+          "description": "<p>The name of the source location.</p>"
+        },
+        "DvbPriority": {
+          "type": "integer",
+          "maximum": 15000,
+          "minimum": 1,
+          "description": "<p>For use with DVB-DASH profiles only. The priority of this location for servings segments. The lower the number, the higher the priority.</p>"
+        },
+        "DvbWeight": {
+          "type": "integer",
+          "maximum": 15000,
+          "minimum": 1,
+          "description": "<p>For use with DVB-DASH profiles only. The weighting for source locations that have the same priority. </p>"
+        }
+      },
+      "required": [
+        "Url"
+      ],
+      "additionalProperties": false
+    },
+    "DashCompactness": {
+      "type": "string",
+      "enum": [
+        "STANDARD",
+        "NONE"
+      ]
+    },
     "DashDrmSignaling": {
       "type": "string",
       "enum": [
         "INDIVIDUAL",
         "REFERENCED"
       ]
+    },
+    "DashDvbFontDownload": {
+      "type": "object",
+      "description": "<p>For use with DVB-DASH profiles only. The settings for font downloads that you want Elemental MediaPackage to pass through to the manifest.</p>",
+      "properties": {
+        "Url": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 1,
+          "description": "<p>The URL for downloading fonts for subtitles.</p>"
+        },
+        "MimeType": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_/-]*[a-zA-Z0-9]$",
+          "description": "<p>The <code>mimeType</code> of the resource that's at the font download URL.</p> <p>For information about font MIME types, see the <a href=\"https://dvb.org/wp-content/uploads/2021/06/A168r4_MPEG-DASH-Profile-for-Transport-of-ISO-BMFF-Based-DVB-Services_Draft-ts_103-285-v140_November_2021.pdf\">MPEG-DASH Profile for Transport of ISO BMFF Based DVB Services over IP Based Networks</a> document. </p>"
+        },
+        "FontFamily": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1,
+          "description": "<p>The <code>fontFamily</code> name for subtitles, as described in <a href=\"https://tech.ebu.ch/publications/tech3380\">EBU-TT-D Subtitling Distribution Format</a>. </p>"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DashDvbMetricsReporting": {
+      "type": "object",
+      "description": "<p>For use with DVB-DASH profiles only. The settings for error reporting from the playback device that you want Elemental MediaPackage to pass through to the manifest.</p>",
+      "properties": {
+        "ReportingUrl": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 1,
+          "description": "<p>The URL where playback devices send error reports.</p>"
+        },
+        "Probability": {
+          "type": "integer",
+          "maximum": 1000,
+          "minimum": 1,
+          "description": "<p>The number of playback devices per 1000 that will send error reports to the reporting URL. This represents the probability that a playback device will be a reporting player for this session.</p>"
+        }
+      },
+      "required": [
+        "ReportingUrl"
+      ],
+      "additionalProperties": false
+    },
+    "DashDvbSettings": {
+      "type": "object",
+      "description": "<p>For endpoints that use the DVB-DASH profile only. The font download and error reporting information that you want MediaPackage to pass through to the manifest.</p>",
+      "properties": {
+        "FontDownload": {
+          "$ref": "#/definitions/DashDvbFontDownload"
+        },
+        "ErrorMetrics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DashDvbMetricsReporting"
+          },
+          "maxItems": 20,
+          "minItems": 0,
+          "description": "<p>Playback device error reporting settings.</p>"
+        }
+      },
+      "additionalProperties": false
     },
     "DashPeriodTrigger": {
       "type": "string",
@@ -46,10 +154,84 @@
         "NONE"
       ]
     },
+    "DashProfile": {
+      "type": "string",
+      "enum": [
+        "DVB_DASH"
+      ]
+    },
+    "DashProgramInformation": {
+      "type": "object",
+      "description": "<p>Details about the content that you want MediaPackage to pass through in the manifest to the playback device.</p>",
+      "properties": {
+        "Title": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 1,
+          "description": "<p>The title for the manifest.</p>"
+        },
+        "Source": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 1,
+          "description": "<p>Information about the content provider.</p>"
+        },
+        "Copyright": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 1,
+          "description": "<p>A copyright statement about the content.</p>"
+        },
+        "LanguageCode": {
+          "type": "string",
+          "maxLength": 5,
+          "minLength": 2,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*[a-zA-Z0-9]$",
+          "description": "<p>The language code for this manifest.</p>"
+        },
+        "MoreInformationUrl": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 1,
+          "description": "<p>An absolute URL that contains more information about this content.</p>"
+        }
+      },
+      "additionalProperties": false
+    },
     "DashSegmentTemplateFormat": {
       "type": "string",
       "enum": [
         "NUMBER_WITH_TIMELINE"
+      ]
+    },
+    "DashSubtitleConfiguration": {
+      "type": "object",
+      "description": "<p>The configuration for DASH subtitles.</p>",
+      "properties": {
+        "TtmlConfiguration": {
+          "$ref": "#/definitions/DashTtmlConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DashTtmlConfiguration": {
+      "type": "object",
+      "description": "<p>The settings for TTML subtitles.</p>",
+      "properties": {
+        "TtmlProfile": {
+          "$ref": "#/definitions/DashTtmlProfile"
+        }
+      },
+      "required": [
+        "TtmlProfile"
+      ],
+      "additionalProperties": false
+    },
+    "DashTtmlProfile": {
+      "type": "string",
+      "enum": [
+        "IMSC_1",
+        "EBU_TT_D_101"
       ]
     },
     "DashUtcTiming": {
@@ -105,7 +287,7 @@
           "type": "integer",
           "maximum": 31536000,
           "minimum": 300,
-          "description": "<p>The frequency (in seconds) of key changes for live workflows, in which content is streamed real time. The service retrieves content keys before the live content begins streaming, and then retrieves them as needed over the lifetime of the workflow. By default, key rotation is set to 300 seconds (5 minutes), the minimum rotation interval, which is equivalent to setting it to 300. If you don't enter an interval, content keys aren't rotated.</p>\n         <p>The following example setting causes the service to rotate keys every thirty minutes: <code>1800</code>\n         </p>"
+          "description": "<p>The frequency (in seconds) of key changes for live workflows, in which content is streamed real time. The service retrieves content keys before the live content begins streaming, and then retrieves them as needed over the lifetime of the workflow. By default, key rotation is set to 300 seconds (5 minutes), the minimum rotation interval, which is equivalent to setting it to 300. If you don't enter an interval, content keys aren't rotated.</p> <p>The following example setting causes the service to rotate keys every thirty minutes: <code>1800</code> </p>"
         },
         "SpekeKeyProvider": {
           "$ref": "#/definitions/SpekeKeyProvider"
@@ -199,7 +381,7 @@
           "items": {
             "$ref": "#/definitions/EndpointErrorCondition"
           },
-          "description": "<p>The failover conditions for the endpoint. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STALE_MANIFEST</code> - The manifest stalled and there are no new segments or parts.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INCOMPLETE_MANIFEST</code> - There is a gap in the manifest.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MISSING_DRM_KEY</code> - Key rotation is enabled but we're unable to fetch the key for the current key period.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SLATE_INPUT</code> - The segments which contain slate content are considered to be missing content.</p>\n            </li>\n         </ul>"
+          "description": "<p>The failover conditions for the endpoint. The options are:</p> <ul> <li> <p> <code>STALE_MANIFEST</code> - The manifest stalled and there are no new segments or parts.</p> </li> <li> <p> <code>INCOMPLETE_MANIFEST</code> - There is a gap in the manifest.</p> </li> <li> <p> <code>MISSING_DRM_KEY</code> - Key rotation is enabled but we're unable to fetch the key for the current key period.</p> </li> <li> <p> <code>SLATE_INPUT</code> - The segments which contain slate content are considered to be missing content.</p> </li> </ul>"
         }
       },
       "additionalProperties": false
@@ -244,7 +426,7 @@
           },
           "maxItems": 100,
           "minItems": 0,
-          "description": "<p>A list of triggers that controls when AWS Elemental MediaPackage separates the MPEG-DASH manifest into multiple periods. Leave this value empty to indicate that the manifest is contained all in one period.\n         For more information about periods in the DASH manifest, see <a href=\"https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html\">Multi-period DASH in AWS Elemental MediaPackage</a>.</p>"
+          "description": "<p>A list of triggers that controls when AWS Elemental MediaPackage separates the MPEG-DASH manifest into multiple periods. Leave this value empty to indicate that the manifest is contained all in one period. For more information about periods in the DASH manifest, see <a href=\"https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html\">Multi-period DASH in AWS Elemental MediaPackage</a>.</p>"
         },
         "ScteDash": {
           "$ref": "#/definitions/ScteDash"
@@ -254,6 +436,36 @@
         },
         "UtcTiming": {
           "$ref": "#/definitions/DashUtcTiming"
+        },
+        "Profiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DashProfile"
+          },
+          "maxItems": 5,
+          "minItems": 0,
+          "description": "<p>The profile that the output is compliant with.</p>"
+        },
+        "BaseUrls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DashBaseUrl"
+          },
+          "maxItems": 20,
+          "minItems": 0,
+          "description": "<p>The base URL to use for retrieving segments.</p>"
+        },
+        "ProgramInformation": {
+          "$ref": "#/definitions/DashProgramInformation"
+        },
+        "DvbSettings": {
+          "$ref": "#/definitions/DashDvbSettings"
+        },
+        "Compactness": {
+          "$ref": "#/definitions/DashCompactness"
+        },
+        "SubtitleConfiguration": {
+          "$ref": "#/definitions/DashSubtitleConfiguration"
         }
       },
       "required": [
@@ -289,7 +501,7 @@
         },
         "ProgramDateTimeIntervalSeconds": {
           "type": "integer",
-          "description": "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval,\n         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest.\n         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.</p>\n         <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>"
+          "description": "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.</p> <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>"
         },
         "ScteHls": {
           "$ref": "#/definitions/ScteHls"
@@ -302,7 +514,7 @@
         },
         "UrlEncodeChildManifest": {
           "type": "boolean",
-          "description": "<p>When enabled, MediaPackage URL-encodes the query string for API requests for HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol.\n         For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>"
+          "description": "<p>When enabled, MediaPackage URL-encodes the query string for API requests for HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>"
         }
       },
       "required": [
@@ -338,7 +550,7 @@
         },
         "ProgramDateTimeIntervalSeconds": {
           "type": "integer",
-          "description": "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval,\n         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest.\n         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.</p>\n         <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>"
+          "description": "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.</p> <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>"
         },
         "ScteHls": {
           "$ref": "#/definitions/ScteHls"
@@ -351,7 +563,7 @@
         },
         "UrlEncodeChildManifest": {
           "type": "boolean",
-          "description": "<p>When enabled, MediaPackage URL-encodes the query string for API requests for LL-HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol.\n         For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>"
+          "description": "<p>When enabled, MediaPackage URL-encodes the query string for API requests for LL-HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>"
         }
       },
       "required": [
@@ -484,7 +696,7 @@
           "maxLength": 256,
           "minLength": 1,
           "pattern": "^[0-9a-zA-Z_-]+$",
-          "description": "<p>The unique identifier for the content. The service sends this to the key server to identify the current endpoint. How unique you make this depends on how fine-grained you want access controls to be. The service does not permit you to use the same ID for two simultaneous encryption processes. The resource ID is also known as the content ID.</p>\n         <p>The following example shows a resource ID: <code>MovieNight20171126093045</code>\n         </p>"
+          "description": "<p>The unique identifier for the content. The service sends this to the key server to identify the current endpoint. How unique you make this depends on how fine-grained you want access controls to be. The service does not permit you to use the same ID for two simultaneous encryption processes. The resource ID is also known as the content ID.</p> <p>The following example shows a resource ID: <code>MovieNight20171126093045</code> </p>"
         },
         "DrmSystems": {
           "type": "array",
@@ -499,13 +711,13 @@
           "type": "string",
           "maxLength": 2048,
           "minLength": 1,
-          "description": "<p>The ARN for the IAM role granted by the key provider that provides access to the key provider API. This role must have a trust policy that allows MediaPackage to assume the role, and it must have a sufficient permissions policy to allow access to the specific key retrieval URL. Get this from your DRM solution provider.</p>\n         <p>Valid format: <code>arn:aws:iam::{accountID}:role/{name}</code>. The following example shows a role ARN: <code>arn:aws:iam::444455556666:role/SpekeAccess</code>\n         </p>"
+          "description": "<p>The ARN for the IAM role granted by the key provider that provides access to the key provider API. This role must have a trust policy that allows MediaPackage to assume the role, and it must have a sufficient permissions policy to allow access to the specific key retrieval URL. Get this from your DRM solution provider.</p> <p>Valid format: <code>arn:aws:iam::{accountID}:role/{name}</code>. The following example shows a role ARN: <code>arn:aws:iam::444455556666:role/SpekeAccess</code> </p>"
         },
         "Url": {
           "type": "string",
           "maxLength": 1024,
           "minLength": 1,
-          "description": "<p>The URL of the API Gateway proxy that you set up to talk to your key server. The API Gateway proxy must reside in the same AWS Region as MediaPackage and must start with https://.</p>\n         <p>The following example shows a URL: <code>https://1wm2dx1f33.execute-api.us-west-2.amazonaws.com/SpekeSample/copyProtection</code>\n         </p>"
+          "description": "<p>The URL of the API Gateway proxy that you set up to talk to your key server. The API Gateway proxy must reside in the same AWS Region as MediaPackage and must start with https://.</p> <p>The following example shows a URL: <code>https://1wm2dx1f33.execute-api.us-west-2.amazonaws.com/SpekeSample/copyProtection</code> </p>"
         }
       },
       "required": [

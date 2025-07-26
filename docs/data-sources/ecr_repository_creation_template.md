@@ -26,7 +26,7 @@ Data Source schema for AWS::ECR::RepositoryCreationTemplate
 - `custom_role_arn` (String) The ARN of the role to be assumed by Amazon ECR. Amazon ECR will assume your supplied role when the customRoleArn is specified. When this field isn't specified, Amazon ECR will use the service-linked role for the repository creation template.
 - `description` (String) The description associated with the repository creation template.
 - `encryption_configuration` (Attributes) The encryption configuration associated with the repository creation template. (see [below for nested schema](#nestedatt--encryption_configuration))
-- `image_tag_mutability` (String) The tag mutability setting for the repository. If this parameter is omitted, the default setting of MUTABLE will be used which will allow image tags to be overwritten. If IMMUTABLE is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.
+- `image_tag_mutability` (String) The tag mutability setting for the repository. If this parameter is omitted, the default setting of ``MUTABLE`` will be used which will allow image tags to be overwritten. If ``IMMUTABLE`` is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.
 - `lifecycle_policy` (String) The lifecycle policy to use for repositories created using the template.
 - `prefix` (String) The repository namespace prefix associated with the repository creation template.
 - `repository_policy` (String) The repository policy to apply to repositories created using the template. A repository policy is a permissions policy associated with a repository to control access permissions.

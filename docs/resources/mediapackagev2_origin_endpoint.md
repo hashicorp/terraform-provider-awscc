@@ -104,18 +104,62 @@ resource "awscc_mediapackagev2_origin_endpoint" "example" {
 
 Optional:
 
+- `base_urls` (Attributes List) <p>The base URL to use for retrieving segments.</p> (see [below for nested schema](#nestedatt--dash_manifests--base_urls))
+- `compactness` (String)
 - `drm_signaling` (String)
+- `dvb_settings` (Attributes) <p>For endpoints that use the DVB-DASH profile only. The font download and error reporting information that you want MediaPackage to pass through to the manifest.</p> (see [below for nested schema](#nestedatt--dash_manifests--dvb_settings))
 - `filter_configuration` (Attributes) <p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p> (see [below for nested schema](#nestedatt--dash_manifests--filter_configuration))
 - `manifest_name` (String) <p>A short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. </p>
 - `manifest_window_seconds` (Number) <p>The total duration (in seconds) of the manifest's content.</p>
 - `min_buffer_time_seconds` (Number) <p>Minimum amount of content (in seconds) that a player must keep available in the buffer.</p>
 - `min_update_period_seconds` (Number) <p>Minimum amount of time (in seconds) that the player should wait before requesting updates to the manifest.</p>
-- `period_triggers` (List of String) <p>A list of triggers that controls when AWS Elemental MediaPackage separates the MPEG-DASH manifest into multiple periods. Leave this value empty to indicate that the manifest is contained all in one period.
-         For more information about periods in the DASH manifest, see <a href="https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html">Multi-period DASH in AWS Elemental MediaPackage</a>.</p>
+- `period_triggers` (List of String) <p>A list of triggers that controls when AWS Elemental MediaPackage separates the MPEG-DASH manifest into multiple periods. Leave this value empty to indicate that the manifest is contained all in one period. For more information about periods in the DASH manifest, see <a href="https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html">Multi-period DASH in AWS Elemental MediaPackage</a>.</p>
+- `profiles` (List of String) <p>The profile that the output is compliant with.</p>
+- `program_information` (Attributes) <p>Details about the content that you want MediaPackage to pass through in the manifest to the playback device.</p> (see [below for nested schema](#nestedatt--dash_manifests--program_information))
 - `scte_dash` (Attributes) <p>The SCTE configuration.</p> (see [below for nested schema](#nestedatt--dash_manifests--scte_dash))
 - `segment_template_format` (String)
+- `subtitle_configuration` (Attributes) <p>The configuration for DASH subtitles.</p> (see [below for nested schema](#nestedatt--dash_manifests--subtitle_configuration))
 - `suggested_presentation_delay_seconds` (Number) <p>The amount of time (in seconds) that the player should be from the end of the manifest.</p>
 - `utc_timing` (Attributes) <p>Determines the type of UTC timing included in the DASH Media Presentation Description (MPD).</p> (see [below for nested schema](#nestedatt--dash_manifests--utc_timing))
+
+<a id="nestedatt--dash_manifests--base_urls"></a>
+### Nested Schema for `dash_manifests.base_urls`
+
+Optional:
+
+- `dvb_priority` (Number) <p>For use with DVB-DASH profiles only. The priority of this location for servings segments. The lower the number, the higher the priority.</p>
+- `dvb_weight` (Number) <p>For use with DVB-DASH profiles only. The weighting for source locations that have the same priority. </p>
+- `service_location` (String) <p>The name of the source location.</p>
+- `url` (String) <p>A source location for segments.</p>
+
+
+<a id="nestedatt--dash_manifests--dvb_settings"></a>
+### Nested Schema for `dash_manifests.dvb_settings`
+
+Optional:
+
+- `error_metrics` (Attributes List) <p>Playback device error reporting settings.</p> (see [below for nested schema](#nestedatt--dash_manifests--dvb_settings--error_metrics))
+- `font_download` (Attributes) <p>For use with DVB-DASH profiles only. The settings for font downloads that you want Elemental MediaPackage to pass through to the manifest.</p> (see [below for nested schema](#nestedatt--dash_manifests--dvb_settings--font_download))
+
+<a id="nestedatt--dash_manifests--dvb_settings--error_metrics"></a>
+### Nested Schema for `dash_manifests.dvb_settings.error_metrics`
+
+Optional:
+
+- `probability` (Number) <p>The number of playback devices per 1000 that will send error reports to the reporting URL. This represents the probability that a playback device will be a reporting player for this session.</p>
+- `reporting_url` (String) <p>The URL where playback devices send error reports.</p>
+
+
+<a id="nestedatt--dash_manifests--dvb_settings--font_download"></a>
+### Nested Schema for `dash_manifests.dvb_settings.font_download`
+
+Optional:
+
+- `font_family` (String) <p>The <code>fontFamily</code> name for subtitles, as described in <a href="https://tech.ebu.ch/publications/tech3380">EBU-TT-D Subtitling Distribution Format</a>. </p>
+- `mime_type` (String) <p>The <code>mimeType</code> of the resource that's at the font download URL.</p> <p>For information about font MIME types, see the <a href="https://dvb.org/wp-content/uploads/2021/06/A168r4_MPEG-DASH-Profile-for-Transport-of-ISO-BMFF-Based-DVB-Services_Draft-ts_103-285-v140_November_2021.pdf">MPEG-DASH Profile for Transport of ISO BMFF Based DVB Services over IP Based Networks</a> document. </p>
+- `url` (String) <p>The URL for downloading fonts for subtitles.</p>
+
+
 
 <a id="nestedatt--dash_manifests--filter_configuration"></a>
 ### Nested Schema for `dash_manifests.filter_configuration`
@@ -129,12 +173,40 @@ Optional:
 - `time_delay_seconds` (Number) <p>Optionally specify the time delay for all of your manifest egress requests. Enter a value that is smaller than your endpoint's startover window. When you include time delay, note that you cannot use time delay query parameters for this manifest's endpoint URL.</p>
 
 
+<a id="nestedatt--dash_manifests--program_information"></a>
+### Nested Schema for `dash_manifests.program_information`
+
+Optional:
+
+- `copyright` (String) <p>A copyright statement about the content.</p>
+- `language_code` (String) <p>The language code for this manifest.</p>
+- `more_information_url` (String) <p>An absolute URL that contains more information about this content.</p>
+- `source` (String) <p>Information about the content provider.</p>
+- `title` (String) <p>The title for the manifest.</p>
+
+
 <a id="nestedatt--dash_manifests--scte_dash"></a>
 ### Nested Schema for `dash_manifests.scte_dash`
 
 Optional:
 
 - `ad_marker_dash` (String)
+
+
+<a id="nestedatt--dash_manifests--subtitle_configuration"></a>
+### Nested Schema for `dash_manifests.subtitle_configuration`
+
+Optional:
+
+- `ttml_configuration` (Attributes) <p>The settings for TTML subtitles.</p> (see [below for nested schema](#nestedatt--dash_manifests--subtitle_configuration--ttml_configuration))
+
+<a id="nestedatt--dash_manifests--subtitle_configuration--ttml_configuration"></a>
+### Nested Schema for `dash_manifests.subtitle_configuration.ttml_configuration`
+
+Optional:
+
+- `ttml_profile` (String)
+
 
 
 <a id="nestedatt--dash_manifests--utc_timing"></a>
@@ -152,25 +224,7 @@ Optional:
 
 Optional:
 
-- `endpoint_error_conditions` (List of String) <p>The failover conditions for the endpoint. The options are:</p>
-         <ul>
-            <li>
-               <p>
-                  <code>STALE_MANIFEST</code> - The manifest stalled and there are no new segments or parts.</p>
-            </li>
-            <li>
-               <p>
-                  <code>INCOMPLETE_MANIFEST</code> - There is a gap in the manifest.</p>
-            </li>
-            <li>
-               <p>
-                  <code>MISSING_DRM_KEY</code> - Key rotation is enabled but we're unable to fetch the key for the current key period.</p>
-            </li>
-            <li>
-               <p>
-                  <code>SLATE_INPUT</code> - The segments which contain slate content are considered to be missing content.</p>
-            </li>
-         </ul>
+- `endpoint_error_conditions` (List of String) <p>The failover conditions for the endpoint. The options are:</p> <ul> <li> <p> <code>STALE_MANIFEST</code> - The manifest stalled and there are no new segments or parts.</p> </li> <li> <p> <code>INCOMPLETE_MANIFEST</code> - There is a gap in the manifest.</p> </li> <li> <p> <code>MISSING_DRM_KEY</code> - Key rotation is enabled but we're unable to fetch the key for the current key period.</p> </li> <li> <p> <code>SLATE_INPUT</code> - The segments which contain slate content are considered to be missing content.</p> </li> </ul>
 
 
 <a id="nestedatt--hls_manifests"></a>
@@ -182,15 +236,11 @@ Optional:
 - `filter_configuration` (Attributes) <p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p> (see [below for nested schema](#nestedatt--hls_manifests--filter_configuration))
 - `manifest_name` (String) <p>A short short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can't use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.</p>
 - `manifest_window_seconds` (Number) <p>The total duration (in seconds) of the manifest's content.</p>
-- `program_date_time_interval_seconds` (Number) <p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval,
-         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest.
-         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.</p>
-         <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>
+- `program_date_time_interval_seconds` (Number) <p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.</p> <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>
 - `scte_hls` (Attributes) <p>The SCTE configuration.</p> (see [below for nested schema](#nestedatt--hls_manifests--scte_hls))
 - `start_tag` (Attributes) <p>To insert an EXT-X-START tag in your HLS playlist, specify a StartTag configuration object with a valid TimeOffset. When you do, you can also optionally specify whether to include a PRECISE value in the EXT-X-START tag.</p> (see [below for nested schema](#nestedatt--hls_manifests--start_tag))
 - `url` (String) <p>The egress domain URL for stream delivery from MediaPackage.</p>
-- `url_encode_child_manifest` (Boolean) <p>When enabled, MediaPackage URL-encodes the query string for API requests for HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol.
-         For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>
+- `url_encode_child_manifest` (Boolean) <p>When enabled, MediaPackage URL-encodes the query string for API requests for HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>
 
 <a id="nestedatt--hls_manifests--filter_configuration"></a>
 ### Nested Schema for `hls_manifests.filter_configuration`
@@ -231,15 +281,11 @@ Optional:
 - `filter_configuration` (Attributes) <p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p> (see [below for nested schema](#nestedatt--low_latency_hls_manifests--filter_configuration))
 - `manifest_name` (String) <p>A short short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can't use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.</p>
 - `manifest_window_seconds` (Number) <p>The total duration (in seconds) of the manifest's content.</p>
-- `program_date_time_interval_seconds` (Number) <p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval,
-         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest.
-         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.</p>
-         <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>
+- `program_date_time_interval_seconds` (Number) <p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.</p> <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>
 - `scte_hls` (Attributes) <p>The SCTE configuration.</p> (see [below for nested schema](#nestedatt--low_latency_hls_manifests--scte_hls))
 - `start_tag` (Attributes) <p>To insert an EXT-X-START tag in your HLS playlist, specify a StartTag configuration object with a valid TimeOffset. When you do, you can also optionally specify whether to include a PRECISE value in the EXT-X-START tag.</p> (see [below for nested schema](#nestedatt--low_latency_hls_manifests--start_tag))
 - `url` (String) <p>The egress domain URL for stream delivery from MediaPackage.</p>
-- `url_encode_child_manifest` (Boolean) <p>When enabled, MediaPackage URL-encodes the query string for API requests for LL-HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol.
-         For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>
+- `url_encode_child_manifest` (Boolean) <p>When enabled, MediaPackage URL-encodes the query string for API requests for LL-HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>
 
 <a id="nestedatt--low_latency_hls_manifests--filter_configuration"></a>
 ### Nested Schema for `low_latency_hls_manifests.filter_configuration`
@@ -291,9 +337,7 @@ Optional:
 
 - `constant_initialization_vector` (String) <p>A 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting content. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).</p>
 - `encryption_method` (Attributes) <p>The encryption type.</p> (see [below for nested schema](#nestedatt--segment--encryption--encryption_method))
-- `key_rotation_interval_seconds` (Number) <p>The frequency (in seconds) of key changes for live workflows, in which content is streamed real time. The service retrieves content keys before the live content begins streaming, and then retrieves them as needed over the lifetime of the workflow. By default, key rotation is set to 300 seconds (5 minutes), the minimum rotation interval, which is equivalent to setting it to 300. If you don't enter an interval, content keys aren't rotated.</p>
-         <p>The following example setting causes the service to rotate keys every thirty minutes: <code>1800</code>
-         </p>
+- `key_rotation_interval_seconds` (Number) <p>The frequency (in seconds) of key changes for live workflows, in which content is streamed real time. The service retrieves content keys before the live content begins streaming, and then retrieves them as needed over the lifetime of the workflow. By default, key rotation is set to 300 seconds (5 minutes), the minimum rotation interval, which is equivalent to setting it to 300. If you don't enter an interval, content keys aren't rotated.</p> <p>The following example setting causes the service to rotate keys every thirty minutes: <code>1800</code> </p>
 - `speke_key_provider` (Attributes) <p>The parameters for the SPEKE key provider.</p> (see [below for nested schema](#nestedatt--segment--encryption--speke_key_provider))
 
 <a id="nestedatt--segment--encryption--encryption_method"></a>
@@ -312,15 +356,9 @@ Optional:
 
 - `drm_systems` (List of String) <p>The DRM solution provider you're using to protect your content during distribution.</p>
 - `encryption_contract_configuration` (Attributes) <p>Configure one or more content encryption keys for your endpoints that use SPEKE Version 2.0. The encryption contract defines which content keys are used to encrypt the audio and video tracks in your stream. To configure the encryption contract, specify which audio and video encryption presets to use.</p> (see [below for nested schema](#nestedatt--segment--encryption--speke_key_provider--encryption_contract_configuration))
-- `resource_id` (String) <p>The unique identifier for the content. The service sends this to the key server to identify the current endpoint. How unique you make this depends on how fine-grained you want access controls to be. The service does not permit you to use the same ID for two simultaneous encryption processes. The resource ID is also known as the content ID.</p>
-         <p>The following example shows a resource ID: <code>MovieNight20171126093045</code>
-         </p>
-- `role_arn` (String) <p>The ARN for the IAM role granted by the key provider that provides access to the key provider API. This role must have a trust policy that allows MediaPackage to assume the role, and it must have a sufficient permissions policy to allow access to the specific key retrieval URL. Get this from your DRM solution provider.</p>
-         <p>Valid format: <code>arn:aws:iam::{accountID}:role/{name}</code>. The following example shows a role ARN: <code>arn:aws:iam::444455556666:role/SpekeAccess</code>
-         </p>
-- `url` (String) <p>The URL of the API Gateway proxy that you set up to talk to your key server. The API Gateway proxy must reside in the same AWS Region as MediaPackage and must start with https://.</p>
-         <p>The following example shows a URL: <code>https://1wm2dx1f33.execute-api.us-west-2.amazonaws.com/SpekeSample/copyProtection</code>
-         </p>
+- `resource_id` (String) <p>The unique identifier for the content. The service sends this to the key server to identify the current endpoint. How unique you make this depends on how fine-grained you want access controls to be. The service does not permit you to use the same ID for two simultaneous encryption processes. The resource ID is also known as the content ID.</p> <p>The following example shows a resource ID: <code>MovieNight20171126093045</code> </p>
+- `role_arn` (String) <p>The ARN for the IAM role granted by the key provider that provides access to the key provider API. This role must have a trust policy that allows MediaPackage to assume the role, and it must have a sufficient permissions policy to allow access to the specific key retrieval URL. Get this from your DRM solution provider.</p> <p>Valid format: <code>arn:aws:iam::{accountID}:role/{name}</code>. The following example shows a role ARN: <code>arn:aws:iam::444455556666:role/SpekeAccess</code> </p>
+- `url` (String) <p>The URL of the API Gateway proxy that you set up to talk to your key server. The API Gateway proxy must reside in the same AWS Region as MediaPackage and must start with https://.</p> <p>The following example shows a URL: <code>https://1wm2dx1f33.execute-api.us-west-2.amazonaws.com/SpekeSample/copyProtection</code> </p>
 
 <a id="nestedatt--segment--encryption--speke_key_provider--encryption_contract_configuration"></a>
 ### Nested Schema for `segment.encryption.speke_key_provider.encryption_contract_configuration`

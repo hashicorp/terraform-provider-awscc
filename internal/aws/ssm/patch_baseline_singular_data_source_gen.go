@@ -235,6 +235,21 @@ func patchBaselineDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: AvailableSecurityUpdatesComplianceStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The compliance status for vendor recommended security updates that are not approved by this patch baseline.",
+		//	  "enum": [
+		//	    "NON_COMPLIANT",
+		//	    "COMPLIANT"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"available_security_updates_compliance_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The compliance status for vendor recommended security updates that are not approved by this patch baseline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultBaseline
 		// CloudFormation resource type schema:
 		//
@@ -575,33 +590,34 @@ func patchBaselineDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithCloudFormationTypeName("AWS::SSM::PatchBaseline").WithTerraformTypeName("awscc_ssm_patch_baseline")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"approval_rules":                       "ApprovalRules",
-		"approve_after_days":                   "ApproveAfterDays",
-		"approve_until_date":                   "ApproveUntilDate",
-		"approved_patches":                     "ApprovedPatches",
-		"approved_patches_compliance_level":    "ApprovedPatchesComplianceLevel",
-		"approved_patches_enable_non_security": "ApprovedPatchesEnableNonSecurity",
-		"compliance_level":                     "ComplianceLevel",
-		"configuration":                        "Configuration",
-		"default_baseline":                     "DefaultBaseline",
-		"description":                          "Description",
-		"enable_non_security":                  "EnableNonSecurity",
-		"global_filters":                       "GlobalFilters",
-		"key":                                  "Key",
-		"name":                                 "Name",
-		"operating_system":                     "OperatingSystem",
-		"patch_baseline_id":                    "Id",
-		"patch_filter_group":                   "PatchFilterGroup",
-		"patch_filters":                        "PatchFilters",
-		"patch_groups":                         "PatchGroups",
-		"patch_rules":                          "PatchRules",
-		"products":                             "Products",
-		"rejected_patches":                     "RejectedPatches",
-		"rejected_patches_action":              "RejectedPatchesAction",
-		"sources":                              "Sources",
-		"tags":                                 "Tags",
-		"value":                                "Value",
-		"values":                               "Values",
+		"approval_rules":                               "ApprovalRules",
+		"approve_after_days":                           "ApproveAfterDays",
+		"approve_until_date":                           "ApproveUntilDate",
+		"approved_patches":                             "ApprovedPatches",
+		"approved_patches_compliance_level":            "ApprovedPatchesComplianceLevel",
+		"approved_patches_enable_non_security":         "ApprovedPatchesEnableNonSecurity",
+		"available_security_updates_compliance_status": "AvailableSecurityUpdatesComplianceStatus",
+		"compliance_level":                             "ComplianceLevel",
+		"configuration":                                "Configuration",
+		"default_baseline":                             "DefaultBaseline",
+		"description":                                  "Description",
+		"enable_non_security":                          "EnableNonSecurity",
+		"global_filters":                               "GlobalFilters",
+		"key":                                          "Key",
+		"name":                                         "Name",
+		"operating_system":                             "OperatingSystem",
+		"patch_baseline_id":                            "Id",
+		"patch_filter_group":                           "PatchFilterGroup",
+		"patch_filters":                                "PatchFilters",
+		"patch_groups":                                 "PatchGroups",
+		"patch_rules":                                  "PatchRules",
+		"products":                                     "Products",
+		"rejected_patches":                             "RejectedPatches",
+		"rejected_patches_action":                      "RejectedPatchesAction",
+		"sources":                                      "Sources",
+		"tags":                                         "Tags",
+		"value":                                        "Value",
+		"values":                                       "Values",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

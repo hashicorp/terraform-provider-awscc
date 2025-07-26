@@ -126,21 +126,12 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "Amazon Resource Name (ARN) of the Amazon CloudWatch alarm.",
 		//	        "maxLength": 2048,
 		//	        "minLength": 1,
-		//	        "relationshipRef": {
-		//	          "propertyPath": "/properties/Arn",
-		//	          "typeName": "AWS::CloudWatch::Alarm"
-		//	        },
 		//	        "type": "string"
 		//	      },
 		//	      "AlarmRoleArn": {
 		//	        "description": "ARN of an AWS Identity and Access Management (IAM) role for AWS AppConfig to monitor AlarmArn.",
 		//	        "maxLength": 2048,
 		//	        "minLength": 20,
-		//	        "pattern": "^((arn):(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):(iam)::\\d{12}:role[/].*)$",
-		//	        "relationshipRef": {
-		//	          "propertyPath": "/properties/Arn",
-		//	          "typeName": "AWS::IAM::Role"
-		//	        },
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -176,7 +167,6 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(20, 2048),
-							stringvalidator.RegexMatches(regexp.MustCompile("^((arn):(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):(iam)::\\d{12}:role[/].*)$"), ""),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),

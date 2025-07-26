@@ -3,6 +3,26 @@
   "description": "Resource schema for AWS::SES::ConfigurationSet.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ses.git",
   "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
     "TrackingOptions": {
       "description": "An object that defines the open and click tracking options for emails that you send using the configuration set.",
       "type": "object",
@@ -149,6 +169,16 @@
     },
     "VdmOptions": {
       "$ref": "#/definitions/VdmOptions"
+    },
+    "Tags": {
+      "description": "The tags (keys and values) associated with the contact list.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 50
     }
   },
   "createOnlyProperties": [
@@ -157,12 +187,27 @@
   "primaryIdentifier": [
     "/properties/Name"
   ],
-  "taggable": false,
   "additionalProperties": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ses:TagResource",
+      "ses:UntagResource",
+      "ses:ListTagsForResource"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
-        "ses:CreateConfigurationSet"
+        "ses:CreateConfigurationSet",
+        "ses:UntagResource",
+        "ses:TagResource",
+        "ses:DescribeConfigurationSet",
+        "ses:GetConfigurationSet"
       ]
     },
     "read": {
@@ -178,7 +223,10 @@
         "ses:PutConfigurationSetReputationOptions",
         "ses:PutConfigurationSetSendingOptions",
         "ses:PutConfigurationSetSuppressionOptions",
-        "ses:PutConfigurationSetVdmOptions"
+        "ses:PutConfigurationSetVdmOptions",
+        "ses:DescribeConfigurationSet",
+        "ses:UntagResource",
+        "ses:TagResource"
       ]
     },
     "delete": {

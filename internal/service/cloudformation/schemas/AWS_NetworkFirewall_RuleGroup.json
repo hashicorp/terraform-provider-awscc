@@ -691,7 +691,8 @@
         "network-firewall:TagResource",
         "network-firewall:ListRuleGroups",
         "iam:CreateServiceLinkedRole",
-        "ec2:GetManagedPrefixListEntries"
+        "ec2:GetManagedPrefixListEntries",
+        "ec2:DescribeManagedPrefixLists"
       ]
     },
     "read": {
@@ -707,7 +708,8 @@
         "network-firewall:TagResource",
         "network-firewall:UntagResource",
         "iam:CreateServiceLinkedRole",
-        "ec2:GetManagedPrefixListEntries"
+        "ec2:GetManagedPrefixListEntries",
+        "ec2:DescribeManagedPrefixLists"
       ]
     },
     "delete": {

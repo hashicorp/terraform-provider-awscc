@@ -309,7 +309,7 @@
       "type": "object",
       "properties": {
         "Enabled": {
-          "description": "Auto Evaluation enablement status.",
+          "description": "",
           "type": "boolean"
         }
       }

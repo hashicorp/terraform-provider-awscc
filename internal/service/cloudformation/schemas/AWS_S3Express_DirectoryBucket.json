@@ -41,6 +41,14 @@
     "LifecycleConfiguration": {
       "$ref": "#/definitions/LifecycleConfiguration",
       "description": "Lifecycle rules that define how Amazon S3 Express manages objects during their lifetime."
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     }
   },
   "definitions": {
@@ -188,6 +196,28 @@
       "required": [
         "DaysAfterInitiation"
       ]
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": ""
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
     }
   },
   "createOnlyProperties": [
@@ -203,10 +233,15 @@
     "/properties/AvailabilityZoneName"
   ],
   "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "s3express:TagResource",
+      "s3express:UntagResource"
+    ]
   },
   "required": [
     "LocationName",
@@ -220,7 +255,8 @@
         "s3express:CreateBucket",
         "s3express:ListAllMyDirectoryBuckets",
         "s3express:PutEncryptionConfiguration",
-        "s3express:PutLifecycleConfiguration"
+        "s3express:PutLifecycleConfiguration",
+        "s3express:TagResource"
       ]
     },
     "read": {
@@ -228,7 +264,8 @@
         "s3express:ListAllMyDirectoryBuckets",
         "ec2:DescribeAvailabilityZones",
         "s3express:GetEncryptionConfiguration",
-        "s3express:GetLifecycleConfiguration"
+        "s3express:GetLifecycleConfiguration",
+        "s3express:ListTagsForResource"
       ]
     },
     "update": {
@@ -236,7 +273,9 @@
         "kms:GenerateDataKey",
         "kms:Decrypt",
         "s3express:PutEncryptionConfiguration",
-        "s3express:PutLifecycleConfiguration"
+        "s3express:PutLifecycleConfiguration",
+        "s3express:TagResource",
+        "s3express:UntagResource"
       ]
     },
     "delete": {

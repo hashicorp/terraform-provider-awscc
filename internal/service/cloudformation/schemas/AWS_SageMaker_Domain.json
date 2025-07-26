@@ -653,6 +653,9 @@
         },
         "FSxLustreFileSystemConfig": {
           "$ref": "#/definitions/FSxLustreFileSystemConfig"
+        },
+        "S3FileSystemConfig": {
+          "$ref": "#/definitions/S3FileSystemConfig"
         }
       }
     },
@@ -697,6 +700,23 @@
       "required": [
         "FileSystemId"
       ]
+    },
+    "S3FileSystemConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MountPath": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 1024
+        },
+        "S3Uri": {
+          "type": "string",
+          "pattern": "(s3)://([^/]+)/?(.*)",
+          "minLength": 0,
+          "maxLength": 1024
+        }
+      }
     },
     "CustomImage": {
       "type": "object",
@@ -889,6 +909,11 @@
           "minLength": 1,
           "maxLength": 100,
           "pattern": "[\\w\\.-]+$"
+        },
+        "SingleSignOnApplicationArn": {
+          "type": "string",
+          "description": "The ARN of the DataZone application managed by SageMaker Unified Studio in the AWS IAM Identity Center.",
+          "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::[0-9]+:application\/[a-zA-Z0-9-_.]+\/apl-[a-zA-Z0-9]+$"
         }
       }
     },
@@ -1247,9 +1272,7 @@
   "required": [
     "AuthMode",
     "DefaultUserSettings",
-    "DomainName",
-    "SubnetIds",
-    "VpcId"
+    "DomainName"
   ],
   "createOnlyProperties": [
     "/properties/AuthMode",

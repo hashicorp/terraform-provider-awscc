@@ -95,7 +95,14 @@ Data Source schema for AWS::RDS::DBInstance
  Constraints:
   +  Must be a value from 0 to 35
   +  Can't be set to 0 if the DB instance is a source to read replicas
-- `backup_target` (String)
+- `backup_target` (String) The location for storing automated backups and manual snapshots.
+ Valid Values:
+  +  ``local`` (Dedicated Local Zone)
+  +  ``outposts`` (AWS Outposts)
+  +  ``region`` (AWS-Region)
+  
+ Default: ``region``
+ For more information, see [Working with Amazon RDS on Outposts](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in the *Amazon RDS User Guide*.
 - `ca_certificate_identifier` (String) The identifier of the CA certificate for this DB instance.
  For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.
 - `certificate_details` (Attributes) The details of the DB instance?s server certificate.
@@ -138,6 +145,7 @@ Data Source schema for AWS::RDS::DBInstance
 - `db_instance_identifier` (String) A name for the DB instance. If you specify a name, AWS CloudFormation converts it to lowercase. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the DB instance. For more information, see [Name Type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).
  For information about constraints that apply to DB instance identifiers, see [Naming constraints in Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html#RDS_Limits.Constraints) in the *Amazon RDS User Guide*.
   If you specify a name, you can't perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.
+- `db_instance_status` (String)
 - `db_name` (String) The meaning of this parameter differs according to the database engine you use.
   If you specify the ``DBSnapshotIdentifier`` property, this property only applies to RDS for Oracle.
    *Amazon Aurora* 
@@ -335,12 +343,14 @@ Data Source schema for AWS::RDS::DBInstance
  See [Oracle Database Engine Release Notes](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html) in the *Amazon RDS User Guide.*
   *PostgreSQL* 
  See [Supported PostgreSQL Database Versions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions) in the *Amazon RDS User Guide.*
+- `instance_create_time` (String)
 - `iops` (Number) The number of I/O operations per second (IOPS) that the database provisions. The value must be equal to or greater than 1000. 
  If you specify this property, you must follow the range of allowed ratios of your requested IOPS rate to the amount of storage that you allocate (IOPS to allocated storage). For example, you can provision an Oracle database instance with 1000 IOPS and 200 GiB of storage (a ratio of 5:1), or specify 2000 IOPS with 200 GiB of storage (a ratio of 10:1). For more information, see [Amazon RDS Provisioned IOPS Storage to Improve Performance](https://docs.aws.amazon.com/AmazonRDS/latest/DeveloperGuide/CHAP_Storage.html#USER_PIOPS) in the *Amazon RDS User Guide*.
   If you specify ``io1`` for the ``StorageType`` property, then you must also specify the ``Iops`` property.
   Constraints:
   +  For RDS for Db2, MariaDB, MySQL, Oracle, and PostgreSQL - Must be a multiple between .5 and 50 of the storage amount for the DB instance.
   +  For RDS for SQL Server - Must be a multiple between 1 and 50 of the storage amount for the DB instance.
+- `is_storage_config_upgrade_available` (Boolean)
 - `kms_key_id` (String) The ARN of the AWS KMS key that's used to encrypt the DB instance, such as ``arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef``. If you enable the StorageEncrypted property but don't specify this property, AWS CloudFormation uses the default KMS key. If you specify this property, you must set the StorageEncrypted property to true. 
  If you specify the ``SourceDBInstanceIdentifier`` or ``SourceDbiResourceId`` property, don't specify this property. The value is inherited from the source DB instance, and if the DB instance is encrypted, the specified ``KmsKeyId`` property is used. However, if the source DB instance is in a different AWS Region, you must specify a KMS key ID.
  If you specify the ``SourceDBInstanceAutomatedBackupsArn`` property, don't specify this property. The value is inherited from the source DB instance automated backup, and if the automated backup is encrypted, the specified ``KmsKeyId`` property is used.
@@ -349,6 +359,7 @@ Data Source schema for AWS::RDS::DBInstance
  If you specify ``DBSecurityGroups``, AWS CloudFormation ignores this property. To specify both a security group and this property, you must use a VPC security group. For more information about Amazon RDS and VPC, see [Using Amazon RDS with Amazon VPC](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html) in the *Amazon RDS User Guide*.
   *Amazon Aurora* 
  Not applicable. The KMS key identifier is managed by the DB cluster.
+- `latest_restorable_time` (String)
 - `license_model` (String) License model information for this DB instance.
   Valid Values:
   +  Aurora MySQL - ``general-public-license``
@@ -361,6 +372,12 @@ Data Source schema for AWS::RDS::DBInstance
   +  RDS for PostgreSQL - ``postgresql-license``
   
   If you've specified ``DBSecurityGroups`` and then you update the license model, AWS CloudFormation replaces the underlying DB instance. This will incur some interruptions to database availability.
+- `listener_endpoint` (Attributes) This data type represents the information you need to connect to an Amazon RDS DB instance. This data type is used as a response element in the following actions:
+  +   ``CreateDBInstance`` 
+  +   ``DescribeDBInstances`` 
+  +   ``DeleteDBInstance`` 
+  
+ For the data structure that represents Amazon Aurora DB cluster endpoints, see ``DBClusterEndpoint``. (see [below for nested schema](#nestedatt--listener_endpoint))
 - `manage_master_user_password` (Boolean) Specifies whether to manage the master user password with AWS Secrets Manager.
  For more information, see [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html) in the *Amazon RDS User Guide.*
  Constraints:
@@ -435,9 +452,7 @@ Data Source schema for AWS::RDS::DBInstance
  If ``MonitoringInterval`` is set to a value other than ``0``, then you must supply a ``MonitoringRoleArn`` value.
  This setting doesn't apply to RDS Custom DB instances.
 - `multi_az` (Boolean) Specifies whether the DB instance is a Multi-AZ deployment. You can't set the ``AvailabilityZone`` parameter if the DB instance is a Multi-AZ deployment.
- This setting doesn't apply to the following DB instances:
-  +  Amazon Aurora (DB instance Availability Zones (AZs) are managed by the DB cluster.)
-  +  RDS Custom
+ This setting doesn't apply to Amazon Aurora because the DB instance Availability Zones (AZs) are managed by the DB cluster.
 - `nchar_character_set_name` (String) The name of the NCHAR character set for the Oracle DB instance.
  This setting doesn't apply to RDS Custom DB instances.
 - `network_type` (String) The network type of the DB instance.
@@ -497,6 +512,8 @@ Data Source schema for AWS::RDS::DBInstance
  Valid Values: ``0 - 15``
 - `publicly_accessible` (Boolean) Indicates whether the DB instance is an internet-facing instance. If you specify true, AWS CloudFormation creates an instance with a publicly resolvable DNS name, which resolves to a public IP address. If you specify false, AWS CloudFormation creates an internal instance with a DNS name that resolves to a private IP address. 
  The default behavior value depends on your VPC setup and the database subnet group. For more information, see the ``PubliclyAccessible`` parameter in the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) in the *Amazon RDS API Reference*.
+- `read_replica_db_cluster_identifiers` (List of String)
+- `read_replica_db_instance_identifiers` (List of String)
 - `replica_mode` (String) The open mode of an Oracle read replica. For more information, see [Working with Oracle Read Replicas for Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html) in the *Amazon RDS User Guide*.
  This setting is only supported in RDS for Oracle.
  Default: ``open-read-only``
@@ -583,6 +600,16 @@ Read-Only:
 
 <a id="nestedatt--endpoint"></a>
 ### Nested Schema for `endpoint`
+
+Read-Only:
+
+- `address` (String) Specifies the DNS address of the DB instance.
+- `hosted_zone_id` (String) Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
+- `port` (String) Specifies the port that the database engine is listening on.
+
+
+<a id="nestedatt--listener_endpoint"></a>
+### Nested Schema for `listener_endpoint`
 
 Read-Only:
 

@@ -69,6 +69,17 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "\u003cp\u003eParameters for Amazon Athena.\u003c/p\u003e",
 		//	        "properties": {
+		//	          "IdentityCenterConfiguration": {
+		//	            "additionalProperties": false,
+		//	            "description": "\u003cp\u003eThe parameters for an IAM Identity Center configuration.\u003c/p\u003e",
+		//	            "properties": {
+		//	              "EnableIdentityPropagation": {
+		//	                "description": "\u003cp\u003eA Boolean option that controls whether Trusted Identity Propagation should be used.\u003c/p\u003e",
+		//	                "type": "boolean"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
 		//	          "RoleArn": {
 		//	            "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use \u003ccode\u003eRoleArn\u003c/code\u003e to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.\u003c/p\u003e",
 		//	            "maxLength": 2048,
@@ -261,6 +272,10 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "maximum": 65535,
 		//	            "minimum": 1,
 		//	            "type": "number"
+		//	          },
+		//	          "UseServiceName": {
+		//	            "default": false,
+		//	            "type": "boolean"
 		//	          }
 		//	        },
 		//	        "required": [
@@ -802,6 +817,18 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: AthenaParameters
 					"athena_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: IdentityCenterConfiguration
+							"identity_center_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EnableIdentityPropagation
+									"enable_identity_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "<p>The parameters for an IAM Identity Center configuration.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 							// Property: RoleArn
 							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>",
@@ -943,6 +970,10 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Description: "<p>The port.</p>",
 								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: UseServiceName
+							"use_service_name": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "<p>The parameters for Oracle.</p>",
@@ -1411,6 +1442,17 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "additionalProperties": false,
 		//	                "description": "\u003cp\u003eParameters for Amazon Athena.\u003c/p\u003e",
 		//	                "properties": {
+		//	                  "IdentityCenterConfiguration": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "\u003cp\u003eThe parameters for an IAM Identity Center configuration.\u003c/p\u003e",
+		//	                    "properties": {
+		//	                      "EnableIdentityPropagation": {
+		//	                        "description": "\u003cp\u003eA Boolean option that controls whether Trusted Identity Propagation should be used.\u003c/p\u003e",
+		//	                        "type": "boolean"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
 		//	                  "RoleArn": {
 		//	                    "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use \u003ccode\u003eRoleArn\u003c/code\u003e to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.\u003c/p\u003e",
 		//	                    "maxLength": 2048,
@@ -1603,6 +1645,10 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    "maximum": 65535,
 		//	                    "minimum": 1,
 		//	                    "type": "number"
+		//	                  },
+		//	                  "UseServiceName": {
+		//	                    "default": false,
+		//	                    "type": "boolean"
 		//	                  }
 		//	                },
 		//	                "required": [
@@ -2184,6 +2230,18 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 									// Property: AthenaParameters
 									"athena_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: IdentityCenterConfiguration
+											"identity_center_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: EnableIdentityPropagation
+													"enable_identity_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Description: "<p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "<p>The parameters for an IAM Identity Center configuration.</p>",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
 											// Property: RoleArn
 											"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>",
@@ -2325,6 +2383,10 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 												Description: "<p>The port.</p>",
 												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: UseServiceName
+											"use_service_name": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>The parameters for Oracle.</p>",
@@ -2774,6 +2836,17 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "\u003cp\u003eParameters for Amazon Athena.\u003c/p\u003e",
 		//	      "properties": {
+		//	        "IdentityCenterConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "\u003cp\u003eThe parameters for an IAM Identity Center configuration.\u003c/p\u003e",
+		//	          "properties": {
+		//	            "EnableIdentityPropagation": {
+		//	              "description": "\u003cp\u003eA Boolean option that controls whether Trusted Identity Propagation should be used.\u003c/p\u003e",
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "RoleArn": {
 		//	          "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use \u003ccode\u003eRoleArn\u003c/code\u003e to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.\u003c/p\u003e",
 		//	          "maxLength": 2048,
@@ -2966,6 +3039,10 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "maximum": 65535,
 		//	          "minimum": 1,
 		//	          "type": "number"
+		//	        },
+		//	        "UseServiceName": {
+		//	          "default": false,
+		//	          "type": "boolean"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -3502,6 +3579,18 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: AthenaParameters
 				"athena_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IdentityCenterConfiguration
+						"identity_center_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EnableIdentityPropagation
+								"enable_identity_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "<p>The parameters for an IAM Identity Center configuration.</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: RoleArn
 						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>",
@@ -3643,6 +3732,10 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 							Description: "<p>The port.</p>",
 							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: UseServiceName
+						"use_service_name": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "<p>The parameters for Oracle.</p>",
@@ -4193,6 +4286,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "UPDATE_IN_PROGRESS",
 		//	    "UPDATE_SUCCESSFUL",
 		//	    "UPDATE_FAILED",
+		//	    "PENDING_UPDATE",
 		//	    "DELETED"
 		//	  ],
 		//	  "type": "string"
@@ -4275,13 +4369,16 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "ORACLE",
 		//	    "POSTGRESQL",
 		//	    "PRESTO",
+		//	    "QBUSINESS",
 		//	    "REDSHIFT",
 		//	    "S3",
 		//	    "S3_TABLES",
+		//	    "S3_KNOWLEDGE_BASE",
 		//	    "SALESFORCE",
 		//	    "SERVICENOW",
 		//	    "SNOWFLAKE",
 		//	    "SPARK",
+		//	    "SPICE",
 		//	    "SQLSERVER",
 		//	    "TERADATA",
 		//	    "TIMESTREAM",
@@ -4295,7 +4392,12 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "DOCUMENTDB",
 		//	    "APPFLOW",
 		//	    "IMPALA",
-		//	    "GLUE"
+		//	    "GLUE",
+		//	    "GOOGLE_DRIVE",
+		//	    "CONFLUENCE",
+		//	    "SHAREPOINT",
+		//	    "ONE_DRIVE",
+		//	    "WEB_CRAWLER"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -4418,6 +4520,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"token_provider_url":        "TokenProviderUrl",
 		"trino_parameters":          "TrinoParameters",
 		"type":                      "Type",
+		"use_service_name":          "UseServiceName",
 		"username":                  "Username",
 		"value":                     "Value",
 		"vpc_connection_arn":        "VpcConnectionArn",

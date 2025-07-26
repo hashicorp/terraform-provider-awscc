@@ -62,6 +62,7 @@ Read-Only:
 
 - `efs_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--default_space_settings--custom_file_system_configs--efs_file_system_config))
 - `fsx_lustre_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--default_space_settings--custom_file_system_configs--fsx_lustre_file_system_config))
+- `s3_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--default_space_settings--custom_file_system_configs--s3_file_system_config))
 
 <a id="nestedatt--default_space_settings--custom_file_system_configs--efs_file_system_config"></a>
 ### Nested Schema for `default_space_settings.custom_file_system_configs.efs_file_system_config`
@@ -79,6 +80,15 @@ Read-Only:
 
 - `file_system_id` (String)
 - `file_system_path` (String)
+
+
+<a id="nestedatt--default_space_settings--custom_file_system_configs--s3_file_system_config"></a>
+### Nested Schema for `default_space_settings.custom_file_system_configs.s3_file_system_config`
+
+Read-Only:
+
+- `mount_path` (String)
+- `s3_uri` (String)
 
 
 
@@ -302,6 +312,7 @@ Read-Only:
 
 - `efs_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--default_user_settings--custom_file_system_configs--efs_file_system_config))
 - `fsx_lustre_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--default_user_settings--custom_file_system_configs--fsx_lustre_file_system_config))
+- `s3_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--default_user_settings--custom_file_system_configs--s3_file_system_config))
 
 <a id="nestedatt--default_user_settings--custom_file_system_configs--efs_file_system_config"></a>
 ### Nested Schema for `default_user_settings.custom_file_system_configs.efs_file_system_config`
@@ -319,6 +330,15 @@ Read-Only:
 
 - `file_system_id` (String)
 - `file_system_path` (String)
+
+
+<a id="nestedatt--default_user_settings--custom_file_system_configs--s3_file_system_config"></a>
+### Nested Schema for `default_user_settings.custom_file_system_configs.s3_file_system_config`
+
+Read-Only:
+
+- `mount_path` (String)
+- `s3_uri` (String)
 
 
 
@@ -583,6 +603,7 @@ Read-Only:
 - `environment_id` (String) The ID of the environment that Amazon SageMaker Unified Studio associates with the domain.
 - `project_id` (String) The ID of the Amazon SageMaker Unified Studio project that corresponds to the domain.
 - `project_s3_path` (String) The location where Amazon S3 stores temporary execution data and other artifacts for the project that corresponds to the domain.
+- `single_sign_on_application_arn` (String) The ARN of the DataZone application managed by SageMaker Unified Studio in the AWS IAM Identity Center.
 - `studio_web_portal_access` (String) Sets whether you can access the domain in Amazon SageMaker Studio:
 
 ENABLED

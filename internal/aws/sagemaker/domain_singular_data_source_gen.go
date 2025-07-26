@@ -120,6 +120,23 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "FileSystemId"
 		//	            ],
 		//	            "type": "object"
+		//	          },
+		//	          "S3FileSystemConfig": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "MountPath": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 0,
+		//	                "type": "string"
+		//	              },
+		//	              "S3Uri": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 0,
+		//	                "pattern": "(s3)://([^/]+)/?(.*)",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -718,6 +735,20 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END SCHEMA*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
+							// Property: S3FileSystemConfig
+							"s3_file_system_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MountPath
+									"mount_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: S3Uri
+									"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Computed: true,
@@ -1247,6 +1278,23 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "required": [
 		//	              "FileSystemId"
 		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "S3FileSystemConfig": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "MountPath": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 0,
+		//	                "type": "string"
+		//	              },
+		//	              "S3Uri": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 0,
+		//	                "pattern": "(s3)://([^/]+)/?(.*)",
+		//	                "type": "string"
+		//	              }
+		//	            },
 		//	            "type": "object"
 		//	          }
 		//	        },
@@ -2415,6 +2463,20 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END SCHEMA*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
+							// Property: S3FileSystemConfig
+							"s3_file_system_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MountPath
+									"mount_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: S3Uri
+									"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Computed: true,
@@ -3098,6 +3160,11 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "pattern": "[\\w\\.-]+$",
 		//	          "type": "string"
 		//	        },
+		//	        "SingleSignOnApplicationArn": {
+		//	          "description": "The ARN of the DataZone application managed by SageMaker Unified Studio in the AWS IAM Identity Center.",
+		//	          "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::[0-9]+:application/[a-zA-Z0-9-_.]+/apl-[a-zA-Z0-9]+$",
+		//	          "type": "string"
+		//	        },
 		//	        "StudioWebPortalAccess": {
 		//	          "description": "Sets whether you can access the domain in Amazon SageMaker Studio:\n\nENABLED\nYou can access the domain in Amazon SageMaker Studio. If you migrate the domain to Amazon SageMaker Unified Studio, you can access it in both studio interfaces.\nDISABLED\nYou can't access the domain in Amazon SageMaker Studio. If you migrate the domain to Amazon SageMaker Unified Studio, you can access it only in that studio interface.\n",
 		//	          "enum": [
@@ -3222,6 +3289,11 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 						// Property: ProjectS3Path
 						"project_s3_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The location where Amazon S3 stores temporary execution data and other artifacts for the project that corresponds to the domain.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SingleSignOnApplicationArn
+						"single_sign_on_application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the DataZone application managed by SageMaker Unified Studio in the AWS IAM Identity Center.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: StudioWebPortalAccess
@@ -3481,6 +3553,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"max_idle_timeout_in_minutes":                    "MaxIdleTimeoutInMinutes",
 		"maximum_ebs_volume_size_in_gb":                  "MaximumEbsVolumeSizeInGb",
 		"min_idle_timeout_in_minutes":                    "MinIdleTimeoutInMinutes",
+		"mount_path":                                     "MountPath",
 		"notebook_output_option":                         "NotebookOutputOption",
 		"project_id":                                     "ProjectId",
 		"project_s3_path":                                "ProjectS3Path",
@@ -3490,8 +3563,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"r_studio_server_pro_app_settings":               "RStudioServerProAppSettings",
 		"r_studio_server_pro_domain_settings":            "RStudioServerProDomainSettings",
 		"repository_url":                                 "RepositoryUrl",
+		"s3_file_system_config":                          "S3FileSystemConfig",
 		"s3_kms_key_id":                                  "S3KmsKeyId",
 		"s3_output_path":                                 "S3OutputPath",
+		"s3_uri":                                         "S3Uri",
 		"sage_maker_image_arn":                           "SageMakerImageArn",
 		"sage_maker_image_name":                          "SageMakerImageName",
 		"sage_maker_image_version_arn":                   "SageMakerImageVersionArn",

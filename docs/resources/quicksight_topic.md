@@ -23,6 +23,7 @@ Definition of the AWS::QuickSight::Topic Resource Type.
 - `description` (String)
 - `folder_arns` (List of String)
 - `name` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `topic_id` (String)
 - `user_experience_version` (String)
 
@@ -429,6 +430,17 @@ Optional:
 - `sub_type_name` (String)
 - `type_name` (String)
 - `type_parameters` (Map of String)
+
+
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) <p>Tag key.</p>
+- `value` (String) <p>Tag value.</p>
 
 ## Import
 

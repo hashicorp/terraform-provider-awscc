@@ -28,6 +28,7 @@ Definition of AWS::Wisdom::MessageTemplate Resource Type
 - `description` (String) The description of the message template.
 - `grouping_configuration` (Attributes) The configuration information of the user groups that the message template is accessible to. (see [below for nested schema](#nestedatt--grouping_configuration))
 - `language` (String) The language code value for the language in which the message template is written. The supported language codes include de_DE, en_US, es_ES, fr_FR, id_ID, it_IT, ja_JP, ko_KR, pt_BR, zh_CN, zh_TW
+- `message_template_attachments` (Attributes List) List of message template attachments (see [below for nested schema](#nestedatt--message_template_attachments))
 - `tags` (Attributes Set) The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -232,6 +233,16 @@ Optional:
 
 - `criteria` (String) The criteria used for grouping Amazon Q in Connect users.
 - `values` (List of String) The list of values that define different groups of Amazon Q in Connect users.
+
+
+<a id="nestedatt--message_template_attachments"></a>
+### Nested Schema for `message_template_attachments`
+
+Optional:
+
+- `attachment_id` (String)
+- `attachment_name` (String) The name of the attachment file being uploaded. The name should include the file extension.
+- `s3_presigned_url` (String) The S3 Presigned URL for the attachment file. When generating the PreSignedUrl, please ensure that the expires-in time is set to 30 minutes. The URL can be generated through the AWS Console or through the AWS CLI (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html).
 
 
 <a id="nestedatt--tags"></a>

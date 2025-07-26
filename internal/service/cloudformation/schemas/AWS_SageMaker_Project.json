@@ -97,6 +97,88 @@
         "Value"
       ],
       "additionalProperties": false
+    },
+    "TemplateProviderDetail": {
+      "description": "Details about the template provider for the SageMaker project.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "CfnTemplateProviderDetail": {
+          "$ref": "#/definitions/CfnTemplateProviderDetail"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "CfnTemplateProviderDetail"
+          ]
+        }
+      ]
+    },
+    "CfnTemplateProviderDetail": {
+      "description": "CloudFormation template provider details for a SageMaker project.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Parameters": {
+          "$ref": "#/definitions/CfnStackParameters"
+        },
+        "RoleARN": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the IAM role used by the template provider.",
+          "minLength": 20,
+          "maxLength": 2048,
+          "pattern": "arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+"
+        },
+        "TemplateName": {
+          "type": "string",
+          "description": "The name of the template used for the project.",
+          "minLength": 1,
+          "maxLength": 32,
+          "pattern": ""
+        },
+        "TemplateURL": {
+          "type": "string",
+          "description": "The URL of the CloudFormation template.",
+          "minLength": 1,
+          "maxLength": 1024,
+          "pattern": ""
+        }
+      },
+      "required": [
+        "TemplateName",
+        "TemplateURL"
+      ]
+    },
+    "CfnStackParameters": {
+      "type": "array",
+      "description": "A list of parameters used in the CloudFormation template.",
+      "minItems": 0,
+      "maxItems": 180,
+      "items": {
+        "$ref": "#/definitions/CfnStackParameter"
+      }
+    },
+    "CfnStackParameter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key of the parameter.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value of the parameter.",
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
     }
   },
   "properties": {
@@ -163,6 +245,16 @@
       },
       "additionalProperties": false
     },
+    "TemplateProviderDetails": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "description": "An array of template providers associated with the project.",
+      "items": {
+        "$ref": "#/definitions/TemplateProviderDetail"
+      },
+      "insertionOrder": true
+    },
     "ProjectStatus": {
       "description": "The status of a project.",
       "type": "string",
@@ -179,8 +271,19 @@
   },
   "additionalProperties": false,
   "required": [
-    "ProjectName",
-    "ServiceCatalogProvisioningDetails"
+    "ProjectName"
+  ],
+  "oneOf": [
+    {
+      "required": [
+        "ServiceCatalogProvisioningDetails"
+      ]
+    },
+    {
+      "required": [
+        "TemplateProviderDetails"
+      ]
+    }
   ],
   "tagging": {
     "taggable": true,
@@ -204,6 +307,7 @@
     "/properties/ProjectName",
     "/properties/ProjectDescription",
     "/properties/ServiceCatalogProvisioningDetails",
+    "/properties/TemplateProviderDetails",
     "/properties/Tags"
   ],
   "primaryIdentifier": [
@@ -220,7 +324,11 @@
         "servicecatalog:DescribeProvisioningArtifact",
         "servicecatalog:ProvisionProduct",
         "servicecatalog:DescribeProvisionedProduct",
-        "servicecatalog:TerminateProvisionedProduct"
+        "servicecatalog:TerminateProvisionedProduct",
+        "cloudformation:DescribeStacks",
+        "cloudformation:CreateStack",
+        "iam:PassRole",
+        "s3:GetObject"
       ]
     },
     "read": {
@@ -242,7 +350,9 @@
         "sagemaker:DeleteProject",
         "sagemaker:DescribeProject",
         "servicecatalog:TerminateProvisionedProduct",
-        "servicecatalog:DescribeRecord"
+        "servicecatalog:DescribeRecord",
+        "cloudformation:DescribeStacks",
+        "cloudformation:DeleteStack"
       ]
     },
     "list": {

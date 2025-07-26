@@ -132,6 +132,8 @@ Optional:
 - `jupyter_lab_app_settings` (Attributes) The JupyterLab app settings. (see [below for nested schema](#nestedatt--space_settings--jupyter_lab_app_settings))
 - `jupyter_server_app_settings` (Attributes) The Jupyter server's app settings. (see [below for nested schema](#nestedatt--space_settings--jupyter_server_app_settings))
 - `kernel_gateway_app_settings` (Attributes) The kernel gateway app settings. (see [below for nested schema](#nestedatt--space_settings--kernel_gateway_app_settings))
+- `remote_access` (String) This is a flag used to indicate if remote access is enabled.
+- `space_managed_resources` (String) This is a flag used to indicate if space managed resources needs to be created.
 - `space_storage_settings` (Attributes) Default storage settings for a space. (see [below for nested schema](#nestedatt--space_settings--space_storage_settings))
 
 <a id="nestedatt--space_settings--code_editor_app_settings"></a>
@@ -177,6 +179,7 @@ Optional:
 
 - `efs_file_system` (Attributes) (see [below for nested schema](#nestedatt--space_settings--custom_file_systems--efs_file_system))
 - `fsx_lustre_file_system` (Attributes) (see [below for nested schema](#nestedatt--space_settings--custom_file_systems--fsx_lustre_file_system))
+- `s3_file_system` (Attributes) (see [below for nested schema](#nestedatt--space_settings--custom_file_systems--s3_file_system))
 
 <a id="nestedatt--space_settings--custom_file_systems--efs_file_system"></a>
 ### Nested Schema for `space_settings.custom_file_systems.efs_file_system`
@@ -192,6 +195,14 @@ Optional:
 Optional:
 
 - `file_system_id` (String)
+
+
+<a id="nestedatt--space_settings--custom_file_systems--s3_file_system"></a>
+### Nested Schema for `space_settings.custom_file_systems.s3_file_system`
+
+Optional:
+
+- `s3_uri` (String)
 
 
 

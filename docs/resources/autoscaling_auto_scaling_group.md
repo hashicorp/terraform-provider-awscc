@@ -201,7 +201,7 @@ data "aws_ami" "amazon_linux" {
  For an example template snippet, see [Configure Amazon EC2 Auto Scaling resources](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-ec2-auto-scaling.html).
  For more information, see [Get Amazon SNS notifications when your Auto Scaling group scales](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ASGettingNotifications.html) in the *Amazon EC2 Auto Scaling User Guide*. (see [below for nested schema](#nestedatt--notification_configuration))
 - `notification_configurations` (Attributes List) Configures an Auto Scaling group to send notifications when specified events take place. (see [below for nested schema](#nestedatt--notification_configurations))
-- `placement_group` (String) The name of the placement group into which to launch your instances. For more information, see [Placement groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in the *Amazon EC2 User Guide for Linux Instances*.
+- `placement_group` (String) The name of the placement group into which to launch your instances. For more information, see [Placement groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in the *Amazon EC2 User Guide*.
   A *cluster* placement group is a logical grouping of instances within a single Availability Zone. You cannot specify multiple Availability Zones and a cluster placement group.
 - `service_linked_role_arn` (String) The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to call other AWS service on your behalf. By default, Amazon EC2 Auto Scaling uses a service-linked role named ``AWSServiceRoleForAutoScaling``, which it creates if it does not exist. For more information, see [Service-linked roles](https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html) in the *Amazon EC2 Auto Scaling User Guide*.
 - `skip_zonal_shift_validation` (Boolean)
@@ -226,8 +226,8 @@ data "aws_ami" "amazon_linux" {
 Optional:
 
 - `capacity_distribution_strategy` (String) If launches fail in an Availability Zone, the following strategies are available. The default is ``balanced-best-effort``. 
-  +   ``balanced-only`` - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.
-  +   ``balanced-best-effort`` - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.
+  +  ``balanced-only`` - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.
+  +  ``balanced-best-effort`` - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.
 
 
 <a id="nestedatt--availability_zone_impairment_policy"></a>
@@ -245,10 +245,10 @@ Optional:
 Optional:
 
 - `capacity_reservation_preference` (String) The capacity reservation preference. The following options are available: 
-  +   ``capacity-reservations-only`` - Auto Scaling will only launch instances into a Capacity Reservation or Capacity Reservation resource group. If capacity isn't available, instances will fail to launch.
-  +   ``capacity-reservations-first`` - Auto Scaling will try to launch instances into a Capacity Reservation or Capacity Reservation resource group first. If capacity isn't available, instances will run in On-Demand capacity.
-  +   ``none`` - Auto Scaling will not launch instances into a Capacity Reservation. Instances will run in On-Demand capacity. 
-  +   ``default`` - Auto Scaling uses the Capacity Reservation preference from your launch template or an open Capacity Reservation.
+  +  ``capacity-reservations-only`` - Auto Scaling will only launch instances into a Capacity Reservation or Capacity Reservation resource group. If capacity isn't available, instances will fail to launch.
+  +  ``capacity-reservations-first`` - Auto Scaling will try to launch instances into a Capacity Reservation or Capacity Reservation resource group first. If capacity isn't available, instances will run in On-Demand capacity.
+  +  ``none`` - Auto Scaling will not launch instances into a Capacity Reservation. Instances will run in On-Demand capacity. 
+  +  ``default`` - Auto Scaling uses the Capacity Reservation preference from your launch template or an open Capacity Reservation.
 - `capacity_reservation_target` (Attributes) Describes a target Capacity Reservation or Capacity Reservation resource group. (see [below for nested schema](#nestedatt--capacity_reservation_specification--capacity_reservation_target))
 
 <a id="nestedatt--capacity_reservation_specification--capacity_reservation_target"></a>
@@ -399,7 +399,7 @@ Optional:
 - `instance_requirements` (Attributes) The instance requirements. Amazon EC2 Auto Scaling uses your specified requirements to identify instance types. Then, it uses your On-Demand and Spot allocation strategies to launch instances from these instance types.
  You can specify up to four separate sets of instance requirements per Auto Scaling group. This is useful for provisioning instances from different Amazon Machine Images (AMIs) in the same Auto Scaling group. To do this, create the AMIs and create a new launch template for each AMI. Then, create a compatible set of instance requirements for each launch template. 
   If you specify ``InstanceRequirements``, you can't specify ``InstanceType``. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements))
-- `instance_type` (String) The instance type, such as ``m3.xlarge``. You must specify an instance type that is supported in your requested Region and Availability Zones. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide for Linux Instances*.
+- `instance_type` (String) The instance type, such as ``m3.xlarge``. You must specify an instance type that is supported in your requested Region and Availability Zones. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide*.
  You can specify up to 40 instance types per Auto Scaling group.
 - `launch_template_specification` (Attributes) Provides a launch template for the specified instance type or set of instance requirements. For example, some instance types might require a launch template with a different AMI. If not provided, Amazon EC2 Auto Scaling uses the launch template that's specified in the ``LaunchTemplate`` definition. For more information, see [Specifying a different launch template for an instance type](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups-launch-template-overrides.html) in the *Amazon EC2 Auto Scaling User Guide*. 
  You can specify up to 20 launch templates per Auto Scaling group. The launch templates specified in the overrides and in the ``LaunchTemplate`` definition count towards this limit. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--launch_template_specification))
@@ -447,15 +447,16 @@ Optional:
   Default: All instance types
 - `bare_metal` (String) Indicates whether bare metal instance types are included, excluded, or required.
  Default: ``excluded``
-- `baseline_ebs_bandwidth_mbps` (Attributes) The minimum and maximum baseline bandwidth performance for an instance type, in Mbps. For more information, see [Amazon EBS–optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the *Amazon EC2 User Guide for Linux Instances*.
+- `baseline_ebs_bandwidth_mbps` (Attributes) The minimum and maximum baseline bandwidth performance for an instance type, in Mbps. For more information, see [Amazon EBS–optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the *Amazon EC2 User Guide*.
  Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--baseline_ebs_bandwidth_mbps))
 - `baseline_performance_factors` (Attributes) The baseline performance factors for the instance requirements. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--baseline_performance_factors))
-- `burstable_performance` (String) Indicates whether burstable performance instance types are included, excluded, or required. For more information, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide for Linux Instances*.
+- `burstable_performance` (String) Indicates whether burstable performance instance types are included, excluded, or required. For more information, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide*.
  Default: ``excluded``
 - `cpu_manufacturers` (Set of String) Lists which specific CPU manufacturers to include.
   +  For instance types with Intel CPUs, specify ``intel``.
   +  For instance types with AMD CPUs, specify ``amd``.
   +  For instance types with AWS CPUs, specify ``amazon-web-services``.
+  +  For instance types with Apple CPUs, specify ``apple``.
   
   Don't confuse the CPU hardware manufacturer with the CPU hardware architecture. Instances will be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you specify in your launch template. 
   Default: Any manufacturer
@@ -464,11 +465,11 @@ Optional:
   If you specify ``ExcludedInstanceTypes``, you can't specify ``AllowedInstanceTypes``.
   Default: No excluded instance types
 - `instance_generations` (Set of String) Indicates whether current or previous generation instance types are included.
-  +  For current generation instance types, specify ``current``. The current generation includes EC2 instance types currently recommended for use. This typically includes the latest two to three generations in each instance family. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide for Linux Instances*.
+  +  For current generation instance types, specify ``current``. The current generation includes EC2 instance types currently recommended for use. This typically includes the latest two to three generations in each instance family. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide*.
   +  For previous generation instance types, specify ``previous``.
   
  Default: Any current or previous generation
-- `local_storage` (String) Indicates whether instance types with instance store volumes are included, excluded, or required. For more information, see [Amazon EC2 instance store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in the *Amazon EC2 User Guide for Linux Instances*.
+- `local_storage` (String) Indicates whether instance types with instance store volumes are included, excluded, or required. For more information, see [Amazon EC2 instance store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in the *Amazon EC2 User Guide*.
  Default: ``included``
 - `local_storage_types` (Set of String) Indicates the type of local storage that is required.
   +  For instance types with hard disk drive (HDD) storage, specify ``hdd``.
@@ -644,7 +645,7 @@ Optional:
 Optional:
 
 - `notification_types` (List of String) A list of event types that send a notification. Event types can include any of the following types. 
-  *Allowed values*:
+ *Allowed values*:
   +   ``autoscaling:EC2_INSTANCE_LAUNCH`` 
   +   ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR`` 
   +   ``autoscaling:EC2_INSTANCE_TERMINATE`` 
@@ -659,7 +660,7 @@ Optional:
 Optional:
 
 - `notification_types` (List of String) A list of event types that send a notification. Event types can include any of the following types. 
-  *Allowed values*:
+ *Allowed values*:
   +   ``autoscaling:EC2_INSTANCE_LAUNCH`` 
   +   ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR`` 
   +   ``autoscaling:EC2_INSTANCE_TERMINATE`` 
@@ -686,17 +687,17 @@ Optional:
 - `identifier` (String) Identifies the traffic source.
  For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.
  For example: 
-  +  Application Load Balancer ARN: ``arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/1234567890123456`` 
-  +  Classic Load Balancer name: ``my-classic-load-balancer`` 
-  +  VPC Lattice ARN: ``arn:aws:vpc-lattice:us-west-2:123456789012:targetgroup/tg-1234567890123456`` 
+  +  Application Load Balancer ARN: ``arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/1234567890123456``
+  +  Classic Load Balancer name: ``my-classic-load-balancer``
+  +  VPC Lattice ARN: ``arn:aws:vpc-lattice:us-west-2:123456789012:targetgroup/tg-1234567890123456``
   
  To get the ARN of a target group for a Application Load Balancer, Gateway Load Balancer, or Network Load Balancer, or the name of a Classic Load Balancer, use the Elastic Load Balancing [DescribeTargetGroups](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html) and [DescribeLoadBalancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html) API operations.
  To get the ARN of a target group for VPC Lattice, use the VPC Lattice [GetTargetGroup](https://docs.aws.amazon.com/vpc-lattice/latest/APIReference/API_GetTargetGroup.html) API operation.
 - `type` (String) Provides additional context for the value of ``Identifier``.
  The following lists the valid values:
-  +   ``elb`` if ``Identifier`` is the name of a Classic Load Balancer.
-  +   ``elbv2`` if ``Identifier`` is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.
-  +   ``vpc-lattice`` if ``Identifier`` is the ARN of a VPC Lattice target group.
+  +  ``elb`` if ``Identifier`` is the name of a Classic Load Balancer.
+  +  ``elbv2`` if ``Identifier`` is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.
+  +  ``vpc-lattice`` if ``Identifier`` is the ARN of a VPC Lattice target group.
   
  Required if the identifier is the name of a Classic Load Balancer.
 

@@ -318,6 +318,34 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "Tags": {
+		//	      "description": "An array of key-value pairs to apply to the CDC stream resource",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A key-value pair to apply to the resource",
+		//	        "properties": {
+		//	          "Key": {
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Value",
+		//	          "Key"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 50,
+		//	      "minItems": 0,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
 		//	    "ViewType": {
 		//	      "default": "NEW_AND_OLD_IMAGES",
 		//	      "description": "Specifies what data should be captured in the change data stream",
@@ -340,6 +368,23 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: Status
 				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Indicates whether CDC is enabled or disabled for the table",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Tags
+				"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Key
+							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "An array of key-value pairs to apply to the CDC stream resource",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ViewType

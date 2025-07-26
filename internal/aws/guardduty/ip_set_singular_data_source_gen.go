@@ -42,6 +42,15 @@ func iPSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"detector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ExpectedBucketOwner
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"expected_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Format
 		// CloudFormation resource type schema:
 		//
@@ -141,15 +150,16 @@ func iPSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::GuardDuty::IPSet").WithTerraformTypeName("awscc_guardduty_ip_set")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"activate":    "Activate",
-		"detector_id": "DetectorId",
-		"format":      "Format",
-		"ip_set_id":   "Id",
-		"key":         "Key",
-		"location":    "Location",
-		"name":        "Name",
-		"tags":        "Tags",
-		"value":       "Value",
+		"activate":              "Activate",
+		"detector_id":           "DetectorId",
+		"expected_bucket_owner": "ExpectedBucketOwner",
+		"format":                "Format",
+		"ip_set_id":             "Id",
+		"key":                   "Key",
+		"location":              "Location",
+		"name":                  "Name",
+		"tags":                  "Tags",
+		"value":                 "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

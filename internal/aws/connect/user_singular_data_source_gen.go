@@ -313,8 +313,8 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "Level": {
 		//	        "description": "The level of the proficiency. The valid values are 1, 2, 3, 4 and 5.",
-		//	        "maximum": 5.0,
-		//	        "minimum": 1.0,
+		//	        "maximum": 5,
+		//	        "minimum": 1,
 		//	        "type": "number"
 		//	      }
 		//	    },

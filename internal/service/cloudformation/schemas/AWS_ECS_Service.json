@@ -11,26 +11,6 @@
     "tagProperty": "/properties/Tags",
     "cloudFormationSystemTags": false
   },
-  "typeName": "AWS::ECS::Service",
-  "readOnlyProperties": [
-    "/properties/ServiceArn",
-    "/properties/Name"
-  ],
-  "description": "The ``AWS::ECS::Service`` resource creates an Amazon Elastic Container Service (Amazon ECS) service that runs and maintains the requested number of tasks and associated load balancers.\n  The stack update fails if you change any properties that require replacement and at least one ECS Service Connect ``ServiceConnectConfiguration`` property is configured. This is because AWS CloudFormation creates the replacement service first, but each ``ServiceConnectService`` must have a name that is unique in the namespace.\n   Starting April 15, 2023, AWS; will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, ECS, or EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. \n   On June 12, 2025, Amazon ECS launched support for updating capacity provider configuration for ECS services. With this launch, ECS also aligned the CFN update behavior for ``CapacityProviderStrategy`` parameter with the standard practice. For more information, see [adds support for updating capacity provider configuration for ECS services](https://docs.aws.amazon.com/about-aws/whats-new/2025/05/amazon-ecs-capacity-provider-configuration-ecs/). Previously ECS ignored the ``CapacityProviderStrategy`` property if it was set to an empty list for example, ``[]`` in CFN, because updating capacity provider configuration was not supported. Now, with support for capacity provider updates, customers can remove capacity providers from a service by passing an empty list. When you specify an empty list (``[]``) for the ``CapacityProviderStrategy`` property in your CFN template, ECS will remove any capacity providers associated with the service, as follows:\n  +  For services created with a capacity provider strategy after the launch:\n  +  If there's a cluster default strategy set, the service will revert to using that default strategy.\n  +  If no cluster default strategy exists, you will receive the following error:\n No launch type to fall back to for empty capacity provider strategy. Your service was not created with a launch type.\n  \n  +  For services created with a capacity provider strategy prior to the launch:\n  +  If ``CapacityProviderStrategy`` had ``FARGATE_SPOT`` or ``FARGATE`` capacity providers, the launch type will be updated to ``FARGATE`` and the capacity provider will be removed.\n  +  If the strategy included Auto Scaling group capacity providers, the service will revert to EC2 launch type, and the Auto Scaling group capacity providers will not be used.\n  \n  \n Recommended Actions\n If you are currently using ``CapacityProviderStrategy: []`` in your CFN templates, you should take one of the following actions:\n  +  If you do not intend to update the Capacity Provider Strategy:\n  +  Remove the ``CapacityProviderStrategy`` property entirely from your CFN template\n  +  Alternatively, use ``!Ref ::NoValue`` for the ``CapacityProviderStrategy`` property in your template\n  \n  +  If you intend to maintain or update the Capacity Provider Strategy, specify the actual Capacity Provider Strategy for the service in your CFN template.\n  \n If your CFN template had an empty list ([]) for ``CapacityProviderStrategy`` prior to the aforementioned launch on June 12, and you are using the same template with ``CapacityProviderStrategy: []``, you might encounter the following error:\n  Invalid request provided: When switching from launch type to capacity provider strategy on an existing service, or making a change to a capacity provider strategy on a service that is already using one, you must force a new deployment. (Service: Ecs, Status Code: 400, Request ID: xxx) (SDK Attempt Count: 1)\" (RequestToken: xxx HandlerErrorCode: InvalidRequest) \n Note that CFN automatically initiates a new deployment when it detects a parameter change, but customers cannot choose to force a deployment through CFN. This is an invalid input scenario that requires one of the remediation actions listed above.\n If you are experiencing active production issues related to this change, contact AWS Support or your Technical Account Manager.",
-  "createOnlyProperties": [
-    "/properties/Cluster",
-    "/properties/LaunchType",
-    "/properties/Role",
-    "/properties/SchedulingStrategy",
-    "/properties/ServiceName"
-  ],
-  "primaryIdentifier": [
-    "/properties/ServiceArn",
-    "/properties/Cluster"
-  ],
-  "conditionalCreateOnlyProperties": [
-    "/properties/DeploymentController"
-  ],
   "propertyTransform": {
     "/properties/TaskDefinition": "TaskDefinition $OR $join([\"arn:(aws)[-]{0,1}[a-z]{0,3}[-]{0,1}[a-z]{0,3}:ecs:[a-z0-9-]+:[0-9]{12}:task-definition/\", $contains(TaskDefinition,\":\")?TaskDefinition:$join([TaskDefinition, \":[0-9]+\"])])",
     "/properties/Role": "Role $OR $join([\"arn:(aws)[-]{0,1}[a-z]{0,3}[-]{0,1}[a-z]{0,3}:iam::[0-9]{12}[:]role/{1}\", Role])"
@@ -50,7 +30,7 @@
         "iam:PassRole",
         "ecs:TagResource"
       ],
-      "timeoutInMinutes": 180
+      "timeoutInMinutes": 2160
     },
     "update": {
       "permissions": [
@@ -63,7 +43,7 @@
         "ecs:UntagResource",
         "ecs:UpdateService"
       ],
-      "timeoutInMinutes": 180
+      "timeoutInMinutes": 2160
     },
     "list": {
       "permissions": [
@@ -80,11 +60,28 @@
       "timeoutInMinutes": 30
     }
   },
+  "typeName": "AWS::ECS::Service",
+  "readOnlyProperties": [
+    "/properties/ServiceArn",
+    "/properties/Name"
+  ],
+  "description": "The ``AWS::ECS::Service`` resource creates an Amazon Elastic Container Service (Amazon ECS) service that runs and maintains the requested number of tasks and associated load balancers.\n  The stack update fails if you change any properties that require replacement and at least one ECS Service Connect ``ServiceConnectConfiguration`` property is configured. This is because AWS CloudFormation creates the replacement service first, but each ``ServiceConnectService`` must have a name that is unique in the namespace.\n   Starting April 15, 2023, AWS; will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, ECS, or EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. \n   On June 12, 2025, Amazon ECS launched support for updating capacity provider configuration for ECS services. With this launch, ECS also aligned the CFN update behavior for ``CapacityProviderStrategy`` parameter with the standard practice. For more information, see [adds support for updating capacity provider configuration for ECS services](https://docs.aws.amazon.com/about-aws/whats-new/2025/05/amazon-ecs-capacity-provider-configuration-ecs/). Previously ECS ignored the ``CapacityProviderStrategy`` property if it was set to an empty list for example, ``[]`` in CFN, because updating capacity provider configuration was not supported. Now, with support for capacity provider updates, customers can remove capacity providers from a service by passing an empty list. When you specify an empty list (``[]``) for the ``CapacityProviderStrategy`` property in your CFN template, ECS will remove any capacity providers associated with the service, as follows:\n  +  For services created with a capacity provider strategy after the launch:\n  +  If there's a cluster default strategy set, the service will revert to using that default strategy.\n  +  If no cluster default strategy exists, you will receive the following error:\n No launch type to fall back to for empty capacity provider strategy. Your service was not created with a launch type.\n  \n  +  For services created with a capacity provider strategy prior to the launch:\n  +  If ``CapacityProviderStrategy`` had ``FARGATE_SPOT`` or ``FARGATE`` capacity providers, the launch type will be updated to ``FARGATE`` and the capacity provider will be removed.\n  +  If the strategy included Auto Scaling group capacity providers, the service will revert to EC2 launch type, and the Auto Scaling group capacity providers will not be used.\n  \n  \n Recommended Actions\n If you are currently using ``CapacityProviderStrategy: []`` in your CFN templates, you should take one of the following actions:\n  +  If you do not intend to update the Capacity Provider Strategy:\n  +  Remove the ``CapacityProviderStrategy`` property entirely from your CFN template\n  +  Alternatively, use ``!Ref ::NoValue`` for the ``CapacityProviderStrategy`` property in your template\n  \n  +  If you intend to maintain or update the Capacity Provider Strategy, specify the actual Capacity Provider Strategy for the service in your CFN template.\n  \n If your CFN template had an empty list ([]) for ``CapacityProviderStrategy`` prior to the aforementioned launch on June 12, and you are using the same template with ``CapacityProviderStrategy: []``, you might encounter the following error:\n  Invalid request provided: When switching from launch type to capacity provider strategy on an existing service, or making a change to a capacity provider strategy on a service that is already using one, you must force a new deployment. (Service: Ecs, Status Code: 400, Request ID: xxx) (SDK Attempt Count: 1)\" (RequestToken: xxx HandlerErrorCode: InvalidRequest) \n Note that CFN automatically initiates a new deployment when it detects a parameter change, but customers cannot choose to force a deployment through CFN. This is an invalid input scenario that requires one of the remediation actions listed above.\n If you are experiencing active production issues related to this change, contact AWS Support or your Technical Account Manager.",
   "writeOnlyProperties": [
     "/properties/ServiceConnectConfiguration",
     "/properties/VolumeConfigurations"
   ],
+  "createOnlyProperties": [
+    "/properties/Cluster",
+    "/properties/LaunchType",
+    "/properties/Role",
+    "/properties/SchedulingStrategy",
+    "/properties/ServiceName"
+  ],
   "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/ServiceArn",
+    "/properties/Cluster"
+  ],
   "definitions": {
     "TimeoutConfiguration": {
       "description": "An object that represents the timeout configurations for Service Connect.\n  If ``idleTimeout`` is set to a time that is less than ``perRequestTimeout``, the connection will close when the ``idleTimeout`` is reached and not the ``perRequestTimeout``.",
@@ -188,6 +185,35 @@
         }
       }
     },
+    "ServiceConnectTestTrafficRules": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Header": {
+          "$ref": "#/definitions/ServiceConnectTestTrafficRulesHeader"
+        }
+      },
+      "required": [
+        "Header"
+      ]
+    },
+    "ServiceConnectTestTrafficRulesHeader": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "$ref": "#/definitions/ServiceConnectTestTrafficRulesHeaderValue"
+        },
+        "Name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name"
+      ]
+    },
     "ServiceConnectClientAlias": {
       "description": "Each alias (\"endpoint\") is a fully-qualified name and port number that other tasks (\"clients\") can use to connect to this service.\n Each name and port mapping must be unique within the namespace.\n Tasks that run in a namespace can use short names to connect to services in the namespace. Tasks can connect to services across all of the clusters in the namespace. Tasks connect through a managed proxy container that collects logs and metrics for increased visibility. Only the tasks that Amazon ECS services create are supported with Service Connect. For more information, see [Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.",
       "additionalProperties": false,
@@ -196,6 +222,10 @@
         "DnsName": {
           "description": "The ``dnsName`` is the name that you use in the applications of client tasks to connect to this service. The name must be a valid DNS name but doesn't need to be fully-qualified. The name can include up to 127 characters. The name can include lowercase letters, numbers, underscores (_), hyphens (-), and periods (.). The name can't start with a hyphen.\n If this parameter isn't specified, the default value of ``discoveryName.namespace`` is used. If the ``discoveryName`` isn't specified, the port mapping name from the task definition is used in ``portName.namespace``.\n To avoid changing your applications in client Amazon ECS services, set this to the same name that the client application uses by default. For example, a few common names are ``database``, ``db``, or the lowercase name of a database, such as ``mysql`` or ``redis``. For more information, see [Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.",
           "type": "string"
+        },
+        "TestTrafficRules": {
+          "description": "",
+          "$ref": "#/definitions/ServiceConnectTestTrafficRules"
         },
         "Port": {
           "description": "The listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.\n To avoid changing your applications in client Amazon ECS services, set this to the same port that the client application uses by default. For more information, see [Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.",
@@ -234,6 +264,19 @@
           "$ref": "#/definitions/AwsVpcConfiguration"
         }
       }
+    },
+    "ServiceConnectTestTrafficRulesHeaderValue": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Exact": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Exact"
+      ]
     },
     "DeploymentCircuitBreaker": {
       "description": "The deployment circuit breaker can only be used for services using the rolling update (``ECS``) deployment type.\n  The *deployment circuit breaker* determines whether a service deployment will fail if the service can't reach a steady state. If it is turned on, a service deployment will transition to a failed state and stop launching new tasks. You can also configure Amazon ECS to roll back your service to the last completed deployment after a failure. For more information, see [Rolling update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html) in the *Amazon Elastic Container Service Developer Guide*.\n For more information about API failure reasons, see [API failure reasons](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html) in the *Amazon Elastic Container Service Developer Guide*.",
@@ -282,6 +325,28 @@
           }
         }
       }
+    },
+    "AdvancedConfiguration": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "TestListenerRule": {
+          "type": "string"
+        },
+        "AlternateTargetGroupArn": {
+          "type": "string"
+        },
+        "ProductionListenerRule": {
+          "type": "string"
+        },
+        "RoleArn": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "AlternateTargetGroupArn"
+      ]
     },
     "CapacityProviderStrategyItem": {
       "description": "The details of a capacity provider strategy. A capacity provider strategy can be set when using the ``RunTask`` or ``CreateService`` APIs or as the default capacity provider strategy for a cluster with the ``CreateCluster`` API.\n Only capacity providers that are already associated with a cluster and have an ``ACTIVE`` or ``UPDATING`` status can be used in a capacity provider strategy. The ``PutClusterCapacityProviders`` API is used to associate a capacity provider with a cluster.\n If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created. New Auto Scaling group capacity providers can be created with the ``CreateCapacityProvider`` API operation.\n To use an FARGATElong capacity provider, specify either the ``FARGATE`` or ``FARGATE_SPOT`` capacity providers. The FARGATElong capacity providers are available to all accounts and only need to be associated with a cluster to be used in a capacity provider strategy.",
@@ -349,6 +414,10 @@
         "ContainerPort": {
           "description": "The port on the container to associate with the load balancer. This port must correspond to a ``containerPort`` in the task definition the tasks in the service are using. For tasks that use the EC2 launch type, the container instance they're launched on must allow ingress traffic on the ``hostPort`` of the port mapping.",
           "type": "integer"
+        },
+        "AdvancedConfiguration": {
+          "description": "",
+          "$ref": "#/definitions/AdvancedConfiguration"
         }
       }
     },
@@ -401,6 +470,40 @@
       },
       "required": [
         "IssuerCertificateAuthority"
+      ]
+    },
+    "DeploymentLifecycleHook": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "LifecycleStages": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "RECONCILE_SERVICE",
+              "PRE_SCALE_UP",
+              "POST_SCALE_UP",
+              "TEST_TRAFFIC_SHIFT",
+              "POST_TEST_TRAFFIC_SHIFT",
+              "PRODUCTION_TRAFFIC_SHIFT",
+              "POST_PRODUCTION_TRAFFIC_SHIFT"
+            ]
+          }
+        },
+        "HookTargetArn": {
+          "type": "string"
+        },
+        "RoleArn": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "HookTargetArn",
+        "RoleArn",
+        "LifecycleStages"
       ]
     },
     "DeploymentController": {
@@ -591,9 +694,30 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
+        "BakeTimeInMinutes": {
+          "maximum": 1440,
+          "description": "",
+          "type": "integer",
+          "minimum": 0
+        },
+        "LifecycleHooks": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentLifecycleHook"
+          }
+        },
         "Alarms": {
           "description": "Information about the CloudWatch alarms.",
           "$ref": "#/definitions/DeploymentAlarms"
+        },
+        "Strategy": {
+          "description": "",
+          "type": "string",
+          "enum": [
+            "ROLLING",
+            "BLUE_GREEN"
+          ]
         },
         "DeploymentCircuitBreaker": {
           "description": "The deployment circuit breaker can only be used for services using the rolling update (``ECS``) deployment type.\n  The *deployment circuit breaker* determines whether a service deployment will fail if the service can't reach a steady state. If you use the deployment circuit breaker, a service deployment will transition to a failed state and stop launching new tasks. If you use the rollback option, when a service deployment fails, the service is rolled back to the last deployment that completed successfully. For more information, see [Rolling update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html) in the *Amazon Elastic Container Service Developer Guide*",

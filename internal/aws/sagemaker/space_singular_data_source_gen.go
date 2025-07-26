@@ -269,6 +269,18 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "FileSystemId"
 		//	            ],
 		//	            "type": "object"
+		//	          },
+		//	          "S3FileSystem": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "S3Uri": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 0,
+		//	                "pattern": "(s3)://([^/]+)/?(.*)",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -680,6 +692,22 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "RemoteAccess": {
+		//	      "description": "This is a flag used to indicate if remote access is enabled.",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SpaceManagedResources": {
+		//	      "description": "This is a flag used to indicate if space managed resources needs to be created.",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "SpaceStorageSettings": {
 		//	      "additionalProperties": false,
 		//	      "description": "Default storage settings for a space.",
@@ -781,6 +809,16 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: FileSystemId
 									"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: S3FileSystem
+							"s3_file_system": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: S3Uri
+									"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Computed: true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
@@ -957,6 +995,16 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "The kernel gateway app settings.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: RemoteAccess
+				"remote_access": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "This is a flag used to indicate if remote access is enabled.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SpaceManagedResources
+				"space_managed_resources": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "This is a flag used to indicate if space managed resources needs to be created.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: SpaceStorageSettings
 				"space_storage_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1108,12 +1156,16 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"lifecycle_config_arns":        "LifecycleConfigArns",
 		"owner_user_profile_name":      "OwnerUserProfileName",
 		"ownership_settings":           "OwnershipSettings",
+		"remote_access":                "RemoteAccess",
 		"repository_url":               "RepositoryUrl",
+		"s3_file_system":               "S3FileSystem",
+		"s3_uri":                       "S3Uri",
 		"sage_maker_image_arn":         "SageMakerImageArn",
 		"sage_maker_image_version_arn": "SageMakerImageVersionArn",
 		"sharing_type":                 "SharingType",
 		"space_arn":                    "SpaceArn",
 		"space_display_name":           "SpaceDisplayName",
+		"space_managed_resources":      "SpaceManagedResources",
 		"space_name":                   "SpaceName",
 		"space_settings":               "SpaceSettings",
 		"space_sharing_settings":       "SpaceSharingSettings",

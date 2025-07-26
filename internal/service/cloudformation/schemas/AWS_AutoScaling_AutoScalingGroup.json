@@ -294,7 +294,7 @@
       }
     },
     "LaunchTemplate": {
-      "description": "Use this structure to specify the launch templates and instance types (overrides) for a mixed instances policy.\n  ``LaunchTemplate`` is a property of the [AWS::AutoScaling::AutoScalingGroup MixedInstancesPolicy](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-mixedinstancespolicy.html) property type.",
+      "description": "Use this structure to specify the launch templates and instance types (overrides) for a mixed instances policy.\n ``LaunchTemplate`` is a property of the [AWS::AutoScaling::AutoScalingGroup MixedInstancesPolicy](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-mixedinstancespolicy.html) property type.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
@@ -317,7 +317,7 @@
       ]
     },
     "LaunchTemplateOverrides": {
-      "description": "Use this structure to let Amazon EC2 Auto Scaling do the following when the Auto Scaling group has a mixed instances policy:\n  +  Override the instance type that is specified in the launch template.\n  +  Use multiple instance types.\n  \n Specify the instance types that you want, or define your instance requirements instead and let Amazon EC2 Auto Scaling provision the available instance types that meet your requirements. This can provide Amazon EC2 Auto Scaling with a larger selection of instance types to choose from when fulfilling Spot and On-Demand capacities. You can view which instance types are matched before you apply the instance requirements to your Auto Scaling group.\n After you define your instance requirements, you don't have to keep updating these settings to get new EC2 instance types automatically. Amazon EC2 Auto Scaling uses the instance requirements of the Auto Scaling group to determine whether a new EC2 instance type can be used.\n  ``LaunchTemplateOverrides`` is a property of the [AWS::AutoScaling::AutoScalingGroup LaunchTemplate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplate.html) property type.",
+      "description": "Use this structure to let Amazon EC2 Auto Scaling do the following when the Auto Scaling group has a mixed instances policy:\n  +  Override the instance type that is specified in the launch template.\n  +  Use multiple instance types.\n  \n Specify the instance types that you want, or define your instance requirements instead and let Amazon EC2 Auto Scaling provision the available instance types that meet your requirements. This can provide Amazon EC2 Auto Scaling with a larger selection of instance types to choose from when fulfilling Spot and On-Demand capacities. You can view which instance types are matched before you apply the instance requirements to your Auto Scaling group.\n After you define your instance requirements, you don't have to keep updating these settings to get new EC2 instance types automatically. Amazon EC2 Auto Scaling uses the instance requirements of the Auto Scaling group to determine whether a new EC2 instance type can be used.\n ``LaunchTemplateOverrides`` is a property of the [AWS::AutoScaling::AutoScalingGroup LaunchTemplate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplate.html) property type.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
@@ -334,7 +334,7 @@
           "$ref": "#/definitions/InstanceRequirements"
         },
         "InstanceType": {
-          "description": "The instance type, such as ``m3.xlarge``. You must specify an instance type that is supported in your requested Region and Availability Zones. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide for Linux Instances*.\n You can specify up to 40 instance types per Auto Scaling group.",
+          "description": "The instance type, such as ``m3.xlarge``. You must specify an instance type that is supported in your requested Region and Availability Zones. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide*.\n You can specify up to 40 instance types per Auto Scaling group.",
           "type": "string"
         }
       }
@@ -351,7 +351,7 @@
       }
     },
     "MixedInstancesPolicy": {
-      "description": "Use this structure to launch multiple instance types and On-Demand Instances and Spot Instances within a single Auto Scaling group.\n A mixed instances policy contains information that Amazon EC2 Auto Scaling can use to launch instances and help optimize your costs. For more information, see [Auto Scaling groups with multiple instance types and purchase options](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html) in the *Amazon EC2 Auto Scaling User Guide*.\n You can create a mixed instances policy for new and existing Auto Scaling groups. You must use a launch template to configure the policy. You cannot use a launch configuration.\n There are key differences between Spot Instances and On-Demand Instances:\n  +  The price for Spot Instances varies based on demand\n  +  Amazon EC2 can terminate an individual Spot Instance as the availability of, or price for, Spot Instances changes\n  \n When a Spot Instance is terminated, Amazon EC2 Auto Scaling group attempts to launch a replacement instance to maintain the desired capacity for the group. \n  ``MixedInstancesPolicy`` is a property of the [AWS::AutoScaling::AutoScalingGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html) resource.",
+      "description": "Use this structure to launch multiple instance types and On-Demand Instances and Spot Instances within a single Auto Scaling group.\n A mixed instances policy contains information that Amazon EC2 Auto Scaling can use to launch instances and help optimize your costs. For more information, see [Auto Scaling groups with multiple instance types and purchase options](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html) in the *Amazon EC2 Auto Scaling User Guide*.\n You can create a mixed instances policy for new and existing Auto Scaling groups. You must use a launch template to configure the policy. You cannot use a launch configuration.\n There are key differences between Spot Instances and On-Demand Instances:\n  +  The price for Spot Instances varies based on demand\n  +  Amazon EC2 can terminate an individual Spot Instance as the availability of, or price for, Spot Instances changes\n  \n When a Spot Instance is terminated, Amazon EC2 Auto Scaling group attempts to launch a replacement instance to maintain the desired capacity for the group. \n ``MixedInstancesPolicy`` is a property of the [AWS::AutoScaling::AutoScalingGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html) resource.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
@@ -409,7 +409,7 @@
       ]
     },
     "LaunchTemplateSpecification": {
-      "description": "Specifies a launch template to use when provisioning EC2 instances for an Auto Scaling group.\n You must specify the following:\n  +  The ID or the name of the launch template, but not both.\n  +  The version of the launch template.\n  \n  ``LaunchTemplateSpecification`` is property of the [AWS::AutoScaling::AutoScalingGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html) resource. It is also a property of the [AWS::AutoScaling::AutoScalingGroup LaunchTemplate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplate.html) and [AWS::AutoScaling::AutoScalingGroup LaunchTemplateOverrides](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplateoverrides.html) property types.\n For information about creating a launch template, see [AWS::EC2::LaunchTemplate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html) and [Create a launch template for an Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html) in the *Amazon EC2 Auto Scaling User Guide*.\n For examples of launch templates, see [Create launch templates](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-ec2-launch-templates.html).",
+      "description": "Specifies a launch template to use when provisioning EC2 instances for an Auto Scaling group.\n You must specify the following:\n  +  The ID or the name of the launch template, but not both.\n  +  The version of the launch template.\n  \n ``LaunchTemplateSpecification`` is property of the [AWS::AutoScaling::AutoScalingGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html) resource. It is also a property of the [AWS::AutoScaling::AutoScalingGroup LaunchTemplate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplate.html) and [AWS::AutoScaling::AutoScalingGroup LaunchTemplateOverrides](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplateoverrides.html) property types.\n For information about creating a launch template, see [AWS::EC2::LaunchTemplate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html) and [Create a launch template for an Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html) in the *Amazon EC2 Auto Scaling User Guide*.\n For examples of launch templates, see [Create launch templates](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-ec2-launch-templates.html).",
       "additionalProperties": false,
       "type": "object",
       "properties": {
@@ -431,7 +431,7 @@
       ]
     },
     "InstancesDistribution": {
-      "description": "Use this structure to specify the distribution of On-Demand Instances and Spot Instances and the allocation strategies used to fulfill On-Demand and Spot capacities for a mixed instances policy.\n For more information, see [Auto Scaling groups with multiple instance types and purchase options](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html) in the *Amazon EC2 Auto Scaling User Guide*.\n  ``InstancesDistribution`` is a property of the [AWS::AutoScaling::AutoScalingGroup MixedInstancesPolicy](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-mixedinstancespolicy.html) property type.",
+      "description": "Use this structure to specify the distribution of On-Demand Instances and Spot Instances and the allocation strategies used to fulfill On-Demand and Spot capacities for a mixed instances policy.\n For more information, see [Auto Scaling groups with multiple instance types and purchase options](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html) in the *Amazon EC2 Auto Scaling User Guide*.\n ``InstancesDistribution`` is a property of the [AWS::AutoScaling::AutoScalingGroup MixedInstancesPolicy](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-mixedinstancespolicy.html) property type.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
@@ -482,7 +482,7 @@
       "type": "object",
       "properties": {
         "CapacityDistributionStrategy": {
-          "description": "If launches fail in an Availability Zone, the following strategies are available. The default is ``balanced-best-effort``. \n  +   ``balanced-only`` - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.\n  +   ``balanced-best-effort`` - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.",
+          "description": "If launches fail in an Availability Zone, the following strategies are available. The default is ``balanced-best-effort``. \n  +  ``balanced-only`` - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.\n  +  ``balanced-best-effort`` - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.",
           "type": "string",
           "enum": [
             "balanced-best-effort",
@@ -508,7 +508,7 @@
         },
         "NotificationTypes": {
           "uniqueItems": false,
-          "description": "A list of event types that send a notification. Event types can include any of the following types. \n  *Allowed values*:\n  +   ``autoscaling:EC2_INSTANCE_LAUNCH`` \n  +   ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR`` \n  +   ``autoscaling:TEST_NOTIFICATION``",
+          "description": "A list of event types that send a notification. Event types can include any of the following types. \n *Allowed values*:\n  +   ``autoscaling:EC2_INSTANCE_LAUNCH`` \n  +   ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR`` \n  +   ``autoscaling:TEST_NOTIFICATION``",
           "insertionOrder": false,
           "type": "array",
           "items": {
@@ -621,11 +621,11 @@
       "type": "object",
       "properties": {
         "Type": {
-          "description": "Provides additional context for the value of ``Identifier``.\n The following lists the valid values:\n  +   ``elb`` if ``Identifier`` is the name of a Classic Load Balancer.\n  +   ``elbv2`` if ``Identifier`` is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.\n  +   ``vpc-lattice`` if ``Identifier`` is the ARN of a VPC Lattice target group.\n  \n Required if the identifier is the name of a Classic Load Balancer.",
+          "description": "Provides additional context for the value of ``Identifier``.\n The following lists the valid values:\n  +  ``elb`` if ``Identifier`` is the name of a Classic Load Balancer.\n  +  ``elbv2`` if ``Identifier`` is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.\n  +  ``vpc-lattice`` if ``Identifier`` is the ARN of a VPC Lattice target group.\n  \n Required if the identifier is the name of a Classic Load Balancer.",
           "type": "string"
         },
         "Identifier": {
-          "description": "Identifies the traffic source.\n For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.\n For example: \n  +  Application Load Balancer ARN: ``arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/1234567890123456`` \n  +  Classic Load Balancer name: ``my-classic-load-balancer`` \n  +  VPC Lattice ARN: ``arn:aws:vpc-lattice:us-west-2:123456789012:targetgroup/tg-1234567890123456`` \n  \n To get the ARN of a target group for a Application Load Balancer, Gateway Load Balancer, or Network Load Balancer, or the name of a Classic Load Balancer, use the Elastic Load Balancing [DescribeTargetGroups](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html) and [DescribeLoadBalancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html) API operations.\n To get the ARN of a target group for VPC Lattice, use the VPC Lattice [GetTargetGroup](https://docs.aws.amazon.com/vpc-lattice/latest/APIReference/API_GetTargetGroup.html) API operation.",
+          "description": "Identifies the traffic source.\n For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.\n For example: \n  +  Application Load Balancer ARN: ``arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/1234567890123456``\n  +  Classic Load Balancer name: ``my-classic-load-balancer``\n  +  VPC Lattice ARN: ``arn:aws:vpc-lattice:us-west-2:123456789012:targetgroup/tg-1234567890123456``\n  \n To get the ARN of a target group for a Application Load Balancer, Gateway Load Balancer, or Network Load Balancer, or the name of a Classic Load Balancer, use the Elastic Load Balancing [DescribeTargetGroups](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html) and [DescribeLoadBalancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html) API operations.\n To get the ARN of a target group for VPC Lattice, use the VPC Lattice [GetTargetGroup](https://docs.aws.amazon.com/vpc-lattice/latest/APIReference/API_GetTargetGroup.html) API operation.",
           "type": "string"
         }
       },
@@ -635,13 +635,13 @@
       ]
     },
     "InstanceRequirements": {
-      "description": "The attributes for the instance types for a mixed instances policy. Amazon EC2 Auto Scaling uses your specified requirements to identify instance types. Then, it uses your On-Demand and Spot allocation strategies to launch instances from these instance types.\n When you specify multiple attributes, you get instance types that satisfy all of the specified attributes. If you specify multiple values for an attribute, you get instance types that satisfy any of the specified values.\n To limit the list of instance types from which Amazon EC2 Auto Scaling can identify matching instance types, you can use one of the following parameters, but not both in the same request:\n  +   ``AllowedInstanceTypes`` - The instance types to include in the list. All other instance types are ignored, even if they match your specified attributes.\n  +   ``ExcludedInstanceTypes`` - The instance types to exclude from the list, even if they match your specified attributes.\n  \n  You must specify ``VCpuCount`` and ``MemoryMiB``. All other attributes are optional. Any unspecified optional attribute is set to its default.\n  For an example template, see [Configure Amazon EC2 Auto Scaling resources](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-ec2-auto-scaling.html).\n For more information, see [Creating an Auto Scaling group using attribute-based instance type selection](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html) in the *Amazon EC2 Auto Scaling User Guide*. For help determining which instance types match your attributes before you apply them to your Auto Scaling group, see [Preview instance types with specified attributes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html#ec2fleet-get-instance-types-from-instance-requirements) in the *Amazon EC2 User Guide for Linux Instances*.\n  ``InstanceRequirements`` is a property of the ``LaunchTemplateOverrides`` property of the [AWS::AutoScaling::AutoScalingGroup LaunchTemplate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplate.html) property type.",
+      "description": "The attributes for the instance types for a mixed instances policy. Amazon EC2 Auto Scaling uses your specified requirements to identify instance types. Then, it uses your On-Demand and Spot allocation strategies to launch instances from these instance types.\n When you specify multiple attributes, you get instance types that satisfy all of the specified attributes. If you specify multiple values for an attribute, you get instance types that satisfy any of the specified values.\n To limit the list of instance types from which Amazon EC2 Auto Scaling can identify matching instance types, you can use one of the following parameters, but not both in the same request:\n  +  ``AllowedInstanceTypes`` - The instance types to include in the list. All other instance types are ignored, even if they match your specified attributes.\n  +  ``ExcludedInstanceTypes`` - The instance types to exclude from the list, even if they match your specified attributes.\n  \n  You must specify ``VCpuCount`` and ``MemoryMiB``. All other attributes are optional. Any unspecified optional attribute is set to its default.\n  For an example template, see [Configure Amazon EC2 Auto Scaling resources](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-ec2-auto-scaling.html).\n For more information, see [Creating an Auto Scaling group using attribute-based instance type selection](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html) in the *Amazon EC2 Auto Scaling User Guide*. For help determining which instance types match your attributes before you apply them to your Auto Scaling group, see [Preview instance types with specified attributes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html#ec2fleet-get-instance-types-from-instance-requirements) in the *Amazon EC2 User Guide for Linux Instances*.\n ``InstanceRequirements`` is a property of the ``LaunchTemplateOverrides`` property of the [AWS::AutoScaling::AutoScalingGroup LaunchTemplate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplate.html) property type.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "InstanceGenerations": {
           "uniqueItems": true,
-          "description": "Indicates whether current or previous generation instance types are included.\n  +  For current generation instance types, specify ``current``. The current generation includes EC2 instance types currently recommended for use. This typically includes the latest two to three generations in each instance family. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide for Linux Instances*.\n  +  For previous generation instance types, specify ``previous``.\n  \n Default: Any current or previous generation",
+          "description": "Indicates whether current or previous generation instance types are included.\n  +  For current generation instance types, specify ``current``. The current generation includes EC2 instance types currently recommended for use. This typically includes the latest two to three generations in each instance family. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide*.\n  +  For previous generation instance types, specify ``previous``.\n  \n Default: Any current or previous generation",
           "insertionOrder": false,
           "type": "array",
           "items": {
@@ -675,12 +675,12 @@
           "$ref": "#/definitions/VCpuCountRequest"
         },
         "LocalStorage": {
-          "description": "Indicates whether instance types with instance store volumes are included, excluded, or required. For more information, see [Amazon EC2 instance store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in the *Amazon EC2 User Guide for Linux Instances*.\n Default: ``included``",
+          "description": "Indicates whether instance types with instance store volumes are included, excluded, or required. For more information, see [Amazon EC2 instance store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in the *Amazon EC2 User Guide*.\n Default: ``included``",
           "type": "string"
         },
         "CpuManufacturers": {
           "uniqueItems": true,
-          "description": "Lists which specific CPU manufacturers to include.\n  +  For instance types with Intel CPUs, specify ``intel``.\n  +  For instance types with AMD CPUs, specify ``amd``.\n  +  For instance types with AWS CPUs, specify ``amazon-web-services``.\n  \n  Don't confuse the CPU hardware manufacturer with the CPU hardware architecture. Instances will be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you specify in your launch template. \n  Default: Any manufacturer",
+          "description": "Lists which specific CPU manufacturers to include.\n  +  For instance types with Intel CPUs, specify ``intel``.\n  +  For instance types with AMD CPUs, specify ``amd``.\n  +  For instance types with AWS CPUs, specify ``amazon-web-services``.\n  +  For instance types with Apple CPUs, specify ``apple``.\n  \n  Don't confuse the CPU hardware manufacturer with the CPU hardware architecture. Instances will be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you specify in your launch template. \n  Default: Any manufacturer",
           "insertionOrder": false,
           "type": "array",
           "items": {
@@ -751,7 +751,7 @@
           "$ref": "#/definitions/BaselinePerformanceFactorsRequest"
         },
         "BaselineEbsBandwidthMbps": {
-          "description": "The minimum and maximum baseline bandwidth performance for an instance type, in Mbps. For more information, see [Amazon EBS\u2013optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the *Amazon EC2 User Guide for Linux Instances*.\n Default: No minimum or maximum limits",
+          "description": "The minimum and maximum baseline bandwidth performance for an instance type, in Mbps. For more information, see [Amazon EBS\u2013optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the *Amazon EC2 User Guide*.\n Default: No minimum or maximum limits",
           "$ref": "#/definitions/BaselineEbsBandwidthMbpsRequest"
         },
         "SpotMaxPricePercentageOverLowestPrice": {
@@ -772,7 +772,7 @@
           "$ref": "#/definitions/AcceleratorTotalMemoryMiBRequest"
         },
         "BurstablePerformance": {
-          "description": "Indicates whether burstable performance instance types are included, excluded, or required. For more information, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide for Linux Instances*.\n Default: ``excluded``",
+          "description": "Indicates whether burstable performance instance types are included, excluded, or required. For more information, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide*.\n Default: ``excluded``",
           "type": "string"
         },
         "TotalLocalStorageGB": {
@@ -806,7 +806,7 @@
       "type": "object",
       "properties": {
         "CapacityReservationPreference": {
-          "description": "The capacity reservation preference. The following options are available: \n  +   ``capacity-reservations-only`` - Auto Scaling will only launch instances into a Capacity Reservation or Capacity Reservation resource group. If capacity isn't available, instances will fail to launch.\n  +   ``capacity-reservations-first`` - Auto Scaling will try to launch instances into a Capacity Reservation or Capacity Reservation resource group first. If capacity isn't available, instances will run in On-Demand capacity.\n  +   ``none`` - Auto Scaling will not launch instances into a Capacity Reservation. Instances will run in On-Demand capacity. \n  +   ``default`` - Auto Scaling uses the Capacity Reservation preference from your launch template or an open Capacity Reservation.",
+          "description": "The capacity reservation preference. The following options are available: \n  +  ``capacity-reservations-only`` - Auto Scaling will only launch instances into a Capacity Reservation or Capacity Reservation resource group. If capacity isn't available, instances will fail to launch.\n  +  ``capacity-reservations-first`` - Auto Scaling will try to launch instances into a Capacity Reservation or Capacity Reservation resource group first. If capacity isn't available, instances will run in On-Demand capacity.\n  +  ``none`` - Auto Scaling will not launch instances into a Capacity Reservation. Instances will run in On-Demand capacity. \n  +  ``default`` - Auto Scaling uses the Capacity Reservation preference from your launch template or an open Capacity Reservation.",
           "type": "string"
         },
         "CapacityReservationTarget": {
@@ -823,7 +823,7 @@
     "LifecycleHookSpecificationList": {
       "uniqueItems": false,
       "description": "One or more lifecycle hooks to add to the Auto Scaling group before instances are launched.",
-      "insertionOrder": true,
+      "insertionOrder": false,
       "type": "array",
       "items": {
         "$ref": "#/definitions/LifecycleHookSpecification"
@@ -1001,7 +1001,7 @@
       "type": "string"
     },
     "PlacementGroup": {
-      "description": "The name of the placement group into which to launch your instances. For more information, see [Placement groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in the *Amazon EC2 User Guide for Linux Instances*.\n  A *cluster* placement group is a logical grouping of instances within a single Availability Zone. You cannot specify multiple Availability Zones and a cluster placement group.",
+      "description": "The name of the placement group into which to launch your instances. For more information, see [Placement groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in the *Amazon EC2 User Guide*.\n  A *cluster* placement group is a logical grouping of instances within a single Availability Zone. You cannot specify multiple Availability Zones and a cluster placement group.",
       "type": "string"
     },
     "CapacityReservationSpecification": {

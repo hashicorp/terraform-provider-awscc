@@ -29,6 +29,7 @@ Data Source schema for AWS::Transfer::Server
 - `endpoint_type` (String)
 - `identity_provider_details` (Attributes) (see [below for nested schema](#nestedatt--identity_provider_details))
 - `identity_provider_type` (String)
+- `ip_address_type` (String)
 - `logging_role` (String)
 - `post_authentication_login_banner` (String)
 - `pre_authentication_login_banner` (String)

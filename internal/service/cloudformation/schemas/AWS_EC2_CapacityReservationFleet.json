@@ -2,7 +2,17 @@
   "typeName": "AWS::EC2::CapacityReservationFleet",
   "description": "Resource Type definition for AWS::EC2::CapacityReservationFleet",
   "additionalProperties": false,
-  "taggable": true,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/TagSpecifications",
+    "permissions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags"
+    ]
+  },
   "properties": {
     "AllocationStrategy": {
       "type": "string"

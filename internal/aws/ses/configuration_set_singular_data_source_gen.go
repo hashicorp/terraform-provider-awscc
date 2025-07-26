@@ -164,6 +164,52 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "An object that contains information about the suppression list preferences for your account.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The tags (keys and values) associated with the contact list.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags (keys and values) associated with the contact list.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TrackingOptions
 		// CloudFormation resource type schema:
 		//
@@ -292,6 +338,7 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		"engagement_metrics":         "EngagementMetrics",
 		"guardian_options":           "GuardianOptions",
 		"https_policy":               "HttpsPolicy",
+		"key":                        "Key",
 		"max_delivery_seconds":       "MaxDeliverySeconds",
 		"name":                       "Name",
 		"optimized_shared_delivery":  "OptimizedSharedDelivery",
@@ -302,8 +349,10 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		"sending_pool_name":          "SendingPoolName",
 		"suppressed_reasons":         "SuppressedReasons",
 		"suppression_options":        "SuppressionOptions",
+		"tags":                       "Tags",
 		"tls_policy":                 "TlsPolicy",
 		"tracking_options":           "TrackingOptions",
+		"value":                      "Value",
 		"vdm_options":                "VdmOptions",
 	})
 

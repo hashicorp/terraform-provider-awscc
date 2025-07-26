@@ -39,6 +39,9 @@
       "minLength": 1,
       "maxLength": 300
     },
+    "ExpectedBucketOwner": {
+      "type": "string"
+    },
     "Tags": {
       "type": "array",
       "insertionOrder": false,

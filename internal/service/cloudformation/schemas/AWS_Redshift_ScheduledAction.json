@@ -95,34 +95,18 @@
       "type": "object",
       "properties": {
         "NodeType": {
-          "relationshipRef": {
-            "typeName": "AWS::Redshift::Cluster",
-            "propertyPath": "/properties/NodeType"
-          },
           "type": "string"
         },
         "NumberOfNodes": {
-          "relationshipRef": {
-            "typeName": "AWS::Redshift::Cluster",
-            "propertyPath": "/properties/NumberOfNodes"
-          },
           "type": "integer"
         },
         "ClusterType": {
-          "relationshipRef": {
-            "typeName": "AWS::Redshift::Cluster",
-            "propertyPath": "/properties/ClusterType"
-          },
           "type": "string"
         },
         "Classic": {
           "type": "boolean"
         },
         "ClusterIdentifier": {
-          "relationshipRef": {
-            "typeName": "AWS::Redshift::Cluster",
-            "propertyPath": "/properties/ClusterIdentifier"
-          },
           "type": "string"
         }
       },
@@ -136,10 +120,6 @@
       "type": "object",
       "properties": {
         "ClusterIdentifier": {
-          "relationshipRef": {
-            "typeName": "AWS::Redshift::Cluster",
-            "propertyPath": "/properties/ClusterIdentifier"
-          },
           "type": "string"
         }
       },
@@ -153,10 +133,6 @@
       "type": "object",
       "properties": {
         "ClusterIdentifier": {
-          "relationshipRef": {
-            "typeName": "AWS::Redshift::Cluster",
-            "propertyPath": "/properties/ClusterIdentifier"
-          },
           "type": "string"
         }
       },

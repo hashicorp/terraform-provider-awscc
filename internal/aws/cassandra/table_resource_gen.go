@@ -480,6 +480,34 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "Tags": {
+		//	      "description": "An array of key-value pairs to apply to the CDC stream resource",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A key-value pair to apply to the resource",
+		//	        "properties": {
+		//	          "Key": {
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Value",
+		//	          "Key"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 50,
+		//	      "minItems": 0,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
 		//	    "ViewType": {
 		//	      "default": "NEW_AND_OLD_IMAGES",
 		//	      "description": "Specifies what data should be captured in the change data stream",
@@ -513,6 +541,47 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Tags
+				"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Key
+							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 128),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 256),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "An array of key-value pairs to apply to the CDC stream resource",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(0, 50),
+						listvalidator.UniqueValues(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ViewType

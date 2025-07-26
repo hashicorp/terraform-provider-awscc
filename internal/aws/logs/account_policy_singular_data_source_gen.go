@@ -70,7 +70,8 @@ func accountPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	    "DATA_PROTECTION_POLICY",
 		//	    "SUBSCRIPTION_FILTER_POLICY",
 		//	    "FIELD_INDEX_POLICY",
-		//	    "TRANSFORMER_POLICY"
+		//	    "TRANSFORMER_POLICY",
+		//	    "METRIC_EXTRACTION_POLICY"
 		//	  ],
 		//	  "type": "string"
 		//	}

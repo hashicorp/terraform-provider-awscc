@@ -129,7 +129,17 @@ Read-Only:
 Read-Only:
 
 - `status` (String) Indicates whether CDC is enabled or disabled for the table
+- `tags` (Attributes List) An array of key-value pairs to apply to the CDC stream resource (see [below for nested schema](#nestedatt--cdc_specification--tags))
 - `view_type` (String) Specifies what data should be captured in the change data stream
+
+<a id="nestedatt--cdc_specification--tags"></a>
+### Nested Schema for `cdc_specification.tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
+
 
 
 <a id="nestedatt--clustering_key_columns"></a>

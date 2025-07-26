@@ -130,6 +130,14 @@
       "description": "A set of global filters used to include patches in the baseline.",
       "$ref": "#/definitions/PatchFilterGroup"
     },
+    "AvailableSecurityUpdatesComplianceStatus": {
+      "description": "The compliance status for vendor recommended security updates that are not approved by this patch baseline.",
+      "type": "string",
+      "enum": [
+        "NON_COMPLIANT",
+        "COMPLIANT"
+      ]
+    },
     "Tags": {
       "description": "Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways.",
       "type": "array",

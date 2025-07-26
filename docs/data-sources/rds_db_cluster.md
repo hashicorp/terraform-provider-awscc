@@ -43,6 +43,7 @@ Data Source schema for AWS::RDS::DBCluster
   
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
 - `cluster_scalability_type` (String) Specifies the scalability mode of the Aurora DB cluster. When set to ``limitless``, the cluster operates as an Aurora Limitless Database, allowing you to create a DB shard group for horizontal scaling (sharding) capabilities. When set to ``standard`` (the default), the cluster uses normal DB instance creation.
+ *Important:* Automated backup retention isn't supported with Aurora Limitless Database clusters. If you set this property to ``limitless``, you cannot set ``DeleteAutomatedBackups`` to ``false``. To create a backup, use manual snapshots instead.
 - `copy_tags_to_snapshot` (Boolean) A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
 - `database_insights_mode` (String) The mode of Database Insights to enable for the DB cluster.
@@ -81,6 +82,7 @@ Data Source schema for AWS::RDS::DBCluster
  If you are restoring a DB cluster to a point in time with ``RestoreType`` set to ``copy-on-write``, and don't specify a DB subnet group name, then the DB cluster is restored with a default DB subnet group.
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
 - `db_system_id` (String) Reserved for future use.
+- `delete_automated_backups` (Boolean) Specifies whether to remove automated backups immediately after the DB cluster is deleted. This parameter isn't case-sensitive. The default is to remove automated backups immediately after the DB cluster is deleted, unless the AWS Backup policy specifies a point-in-time restore rule.
 - `deletion_protection` (Boolean) A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
 - `domain` (String) Indicates the directory ID of the Active Directory to create the DB cluster.
@@ -298,6 +300,7 @@ Data Source schema for AWS::RDS::DBCluster
 - `source_db_cluster_identifier` (String) When restoring a DB cluster to a point in time, the identifier of the source DB cluster from which to restore.
  Constraints:
   +  Must match the identifier of an existing DBCluster.
+  +  Cannot be specified if ``SourceDbClusterResourceId`` is specified. You must specify either ``SourceDBClusterIdentifier`` or ``SourceDbClusterResourceId``, but not both.
   
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
 - `source_region` (String) The AWS Region which contains the source DB cluster when replicating a DB cluster. For example, ``us-east-1``. 

@@ -123,10 +123,6 @@ func multiRegionAccessPointDataSource(ctx context.Context) (datasource.DataSourc
 		//	        "maxLength": 63,
 		//	        "minLength": 3,
 		//	        "pattern": "^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$",
-		//	        "relationshipRef": {
-		//	          "propertyPath": "/properties/BucketName",
-		//	          "typeName": "AWS::S3::Bucket"
-		//	        },
 		//	        "type": "string"
 		//	      },
 		//	      "BucketAccountId": {

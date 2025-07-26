@@ -241,6 +241,52 @@ func emailIdentityDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "Used to enable or disable the custom Mail-From domain configuration for an email identity.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The tags (keys and values) associated with the email identity.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags (keys and values) associated with the email identity.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -274,10 +320,13 @@ func emailIdentityDataSource(ctx context.Context) (datasource.DataSource, error)
 		"email_forwarding_enabled":     "EmailForwardingEnabled",
 		"email_identity":               "EmailIdentity",
 		"feedback_attributes":          "FeedbackAttributes",
+		"key":                          "Key",
 		"mail_from_attributes":         "MailFromAttributes",
 		"mail_from_domain":             "MailFromDomain",
 		"next_signing_key_length":      "NextSigningKeyLength",
 		"signing_enabled":              "SigningEnabled",
+		"tags":                         "Tags",
+		"value":                        "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

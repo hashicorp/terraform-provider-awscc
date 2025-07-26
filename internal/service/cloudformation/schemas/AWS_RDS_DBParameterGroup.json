@@ -89,7 +89,6 @@
       "permissions": [
         "rds:DescribeDBParameterGroups",
         "rds:DescribeDBParameters",
-        "rds:DescribeEngineDefaultParameters",
         "rds:ListTagsForResource"
       ]
     },

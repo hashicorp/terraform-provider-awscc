@@ -387,6 +387,23 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "FileSystemId"
 		//	            ],
 		//	            "type": "object"
+		//	          },
+		//	          "S3FileSystemConfig": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "MountPath": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 0,
+		//	                "type": "string"
+		//	              },
+		//	              "S3Uri": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 0,
+		//	                "pattern": "(s3)://([^/]+)/?(.*)",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -1413,6 +1430,20 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END SCHEMA*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
+							// Property: S3FileSystemConfig
+							"s3_file_system_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MountPath
+									"mount_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: S3Uri
+									"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Computed: true,
@@ -1838,11 +1869,14 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"max_idle_timeout_in_minutes":             "MaxIdleTimeoutInMinutes",
 		"maximum_ebs_volume_size_in_gb":           "MaximumEbsVolumeSizeInGb",
 		"min_idle_timeout_in_minutes":             "MinIdleTimeoutInMinutes",
+		"mount_path":                              "MountPath",
 		"notebook_output_option":                  "NotebookOutputOption",
 		"r_studio_server_pro_app_settings":        "RStudioServerProAppSettings",
 		"repository_url":                          "RepositoryUrl",
+		"s3_file_system_config":                   "S3FileSystemConfig",
 		"s3_kms_key_id":                           "S3KmsKeyId",
 		"s3_output_path":                          "S3OutputPath",
+		"s3_uri":                                  "S3Uri",
 		"sage_maker_image_arn":                    "SageMakerImageArn",
 		"sage_maker_image_name":                   "SageMakerImageName",
 		"sage_maker_image_version_arn":            "SageMakerImageVersionArn",

@@ -985,6 +985,8 @@ Read-Only:
 - `role_arn` (String)
 - `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--iceberg_destination_configuration--s3_configuration))
 - `s_3_backup_mode` (String)
+- `schema_evolution_configuration` (Attributes) (see [below for nested schema](#nestedatt--iceberg_destination_configuration--schema_evolution_configuration))
+- `table_creation_configuration` (Attributes) (see [below for nested schema](#nestedatt--iceberg_destination_configuration--table_creation_configuration))
 
 <a id="nestedatt--iceberg_destination_configuration--buffering_hints"></a>
 ### Nested Schema for `iceberg_destination_configuration.buffering_hints`
@@ -1001,6 +1003,7 @@ Read-Only:
 Read-Only:
 
 - `catalog_arn` (String)
+- `warehouse_location` (String)
 
 
 <a id="nestedatt--iceberg_destination_configuration--cloudwatch_logging_options"></a>
@@ -1020,8 +1023,25 @@ Read-Only:
 
 - `destination_database_name` (String)
 - `destination_table_name` (String)
+- `partition_spec` (Attributes) (see [below for nested schema](#nestedatt--iceberg_destination_configuration--destination_table_configuration_list--partition_spec))
 - `s3_error_output_prefix` (String)
 - `unique_keys` (List of String)
+
+<a id="nestedatt--iceberg_destination_configuration--destination_table_configuration_list--partition_spec"></a>
+### Nested Schema for `iceberg_destination_configuration.destination_table_configuration_list.partition_spec`
+
+Read-Only:
+
+- `identity` (Attributes List) (see [below for nested schema](#nestedatt--iceberg_destination_configuration--destination_table_configuration_list--partition_spec--identity))
+
+<a id="nestedatt--iceberg_destination_configuration--destination_table_configuration_list--partition_spec--identity"></a>
+### Nested Schema for `iceberg_destination_configuration.destination_table_configuration_list.partition_spec.identity`
+
+Read-Only:
+
+- `source_name` (String)
+
+
 
 
 <a id="nestedatt--iceberg_destination_configuration--processing_configuration"></a>
@@ -1108,6 +1128,22 @@ Read-Only:
 - `awskms_key_arn` (String)
 
 
+
+
+<a id="nestedatt--iceberg_destination_configuration--schema_evolution_configuration"></a>
+### Nested Schema for `iceberg_destination_configuration.schema_evolution_configuration`
+
+Read-Only:
+
+- `enabled` (Boolean)
+
+
+<a id="nestedatt--iceberg_destination_configuration--table_creation_configuration"></a>
+### Nested Schema for `iceberg_destination_configuration.table_creation_configuration`
+
+Read-Only:
+
+- `enabled` (Boolean)
 
 
 

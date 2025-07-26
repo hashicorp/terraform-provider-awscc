@@ -299,6 +299,51 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 			Description: "Specifies the Zone ID of the Availability Zone or Local Zone where the directory bucket will be created. An example Availability Zone ID value is 'use1-az5'.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -326,6 +371,7 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		"days_after_initiation":                "DaysAfterInitiation",
 		"expiration_in_days":                   "ExpirationInDays",
 		"id":                                   "Id",
+		"key":                                  "Key",
 		"kms_master_key_id":                    "KMSMasterKeyID",
 		"lifecycle_configuration":              "LifecycleConfiguration",
 		"location_name":                        "LocationName",
@@ -337,6 +383,8 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		"server_side_encryption_configuration": "ServerSideEncryptionConfiguration",
 		"sse_algorithm":                        "SSEAlgorithm",
 		"status":                               "Status",
+		"tags":                                 "Tags",
+		"value":                                "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

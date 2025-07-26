@@ -534,10 +534,6 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "BucketName": {
-		//	      "relationshipRef": {
-		//	        "propertyPath": "/properties/BucketName",
-		//	        "typeName": "AWS::S3::Bucket"
-		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "LogDestinationType": {

@@ -30,6 +30,7 @@ Data Source schema for AWS::SageMaker::Project
 - `service_catalog_provisioned_product_details` (Attributes) Provisioned ServiceCatalog  Details (see [below for nested schema](#nestedatt--service_catalog_provisioned_product_details))
 - `service_catalog_provisioning_details` (Attributes) Input ServiceCatalog Provisioning Details (see [below for nested schema](#nestedatt--service_catalog_provisioning_details))
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `template_provider_details` (Attributes List) An array of template providers associated with the project. (see [below for nested schema](#nestedatt--template_provider_details))
 
 <a id="nestedatt--service_catalog_provisioned_product_details"></a>
 ### Nested Schema for `service_catalog_provisioned_product_details`
@@ -67,3 +68,29 @@ Read-Only:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+
+<a id="nestedatt--template_provider_details"></a>
+### Nested Schema for `template_provider_details`
+
+Read-Only:
+
+- `cfn_template_provider_detail` (Attributes) CloudFormation template provider details for a SageMaker project. (see [below for nested schema](#nestedatt--template_provider_details--cfn_template_provider_detail))
+
+<a id="nestedatt--template_provider_details--cfn_template_provider_detail"></a>
+### Nested Schema for `template_provider_details.cfn_template_provider_detail`
+
+Read-Only:
+
+- `parameters` (Attributes List) A list of parameters used in the CloudFormation template. (see [below for nested schema](#nestedatt--template_provider_details--cfn_template_provider_detail--parameters))
+- `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role used by the template provider.
+- `template_name` (String) The name of the template used for the project.
+- `template_url` (String) The URL of the CloudFormation template.
+
+<a id="nestedatt--template_provider_details--cfn_template_provider_detail--parameters"></a>
+### Nested Schema for `template_provider_details.cfn_template_provider_detail.parameters`
+
+Read-Only:
+
+- `key` (String) The key of the parameter.
+- `value` (String) The value of the parameter.

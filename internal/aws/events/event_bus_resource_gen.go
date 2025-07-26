@@ -8,6 +8,7 @@ package events
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
@@ -117,6 +118,76 @@ func eventBusResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LogConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The logging configuration settings for vended logs.",
+		//	  "properties": {
+		//	    "IncludeDetail": {
+		//	      "description": "Configures whether or not to include event detail, input transformer details, target properties, and target input in the applicable log messages.",
+		//	      "enum": [
+		//	        "FULL",
+		//	        "NONE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Level": {
+		//	      "description": "Configures the log level of the EventBus and determines which log messages are sent to Ingestion Hub for delivery.",
+		//	      "enum": [
+		//	        "INFO",
+		//	        "ERROR",
+		//	        "TRACE",
+		//	        "OFF"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"log_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IncludeDetail
+				"include_detail": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Configures whether or not to include event detail, input transformer details, target properties, and target input in the applicable log messages.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"FULL",
+							"NONE",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Level
+				"level": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Configures the log level of the EventBus and determines which log messages are sent to Ingestion Hub for delivery.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"INFO",
+							"ERROR",
+							"TRACE",
+							"OFF",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The logging configuration settings for vended logs.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -232,8 +303,11 @@ func eventBusResource(ctx context.Context) (resource.Resource, error) {
 		"dead_letter_config": "DeadLetterConfig",
 		"description":        "Description",
 		"event_source_name":  "EventSourceName",
+		"include_detail":     "IncludeDetail",
 		"key":                "Key",
 		"kms_key_identifier": "KmsKeyIdentifier",
+		"level":              "Level",
+		"log_config":         "LogConfig",
 		"name":               "Name",
 		"policy":             "Policy",
 		"tags":               "Tags",

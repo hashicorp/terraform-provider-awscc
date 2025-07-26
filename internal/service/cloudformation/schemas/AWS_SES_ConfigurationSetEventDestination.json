@@ -158,7 +158,9 @@
     }
   },
   "additionalProperties": false,
-  "taggable": false,
+  "tagging": {
+    "taggable": false
+  },
   "required": [
     "ConfigurationSetName",
     "EventDestination"
@@ -192,6 +194,22 @@
       ]
     },
     "read": {
+      "permissions": [
+        "ses:GetConfigurationSetEventDestinations",
+        "ses:DescribeConfigurationSet"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "ConfigurationSetName": {
+            "$ref": "resource-schema.json#/properties/ConfigurationSetName"
+          }
+        },
+        "required": [
+          "ConfigurationSetName"
+        ]
+      },
       "permissions": [
         "ses:GetConfigurationSetEventDestinations",
         "ses:DescribeConfigurationSet"

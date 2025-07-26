@@ -85,22 +85,13 @@
       "type": "object",
       "properties": {
         "AlarmArn": {
-          "relationshipRef": {
-            "typeName": "AWS::CloudWatch::Alarm",
-            "propertyPath": "/properties/Arn"
-          },
           "minLength": 1,
           "description": "Amazon Resource Name (ARN) of the Amazon CloudWatch alarm.",
           "type": "string",
           "maxLength": 2048
         },
         "AlarmRoleArn": {
-          "relationshipRef": {
-            "typeName": "AWS::IAM::Role",
-            "propertyPath": "/properties/Arn"
-          },
           "minLength": 20,
-          "pattern": "^((arn):(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):(iam)::\\d{12}:role[/].*)$",
           "description": "ARN of an AWS Identity and Access Management (IAM) role for AWS AppConfig to monitor AlarmArn.",
           "type": "string",
           "maxLength": 2048

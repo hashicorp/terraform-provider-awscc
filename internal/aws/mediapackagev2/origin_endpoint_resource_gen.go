@@ -149,12 +149,120 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	    "additionalProperties": false,
 		//	    "description": "\u003cp\u003eRetrieve the DASH manifest configuration.\u003c/p\u003e",
 		//	    "properties": {
+		//	      "BaseUrls": {
+		//	        "description": "\u003cp\u003eThe base URL to use for retrieving segments.\u003c/p\u003e",
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "\u003cp\u003eThe base URLs to use for retrieving segments. You can specify multiple locations and indicate the priority and weight for when each should be used, for use in mutli-CDN workflows.\u003c/p\u003e",
+		//	          "properties": {
+		//	            "DvbPriority": {
+		//	              "description": "\u003cp\u003eFor use with DVB-DASH profiles only. The priority of this location for servings segments. The lower the number, the higher the priority.\u003c/p\u003e",
+		//	              "maximum": 15000,
+		//	              "minimum": 1,
+		//	              "type": "integer"
+		//	            },
+		//	            "DvbWeight": {
+		//	              "description": "\u003cp\u003eFor use with DVB-DASH profiles only. The weighting for source locations that have the same priority. \u003c/p\u003e",
+		//	              "maximum": 15000,
+		//	              "minimum": 1,
+		//	              "type": "integer"
+		//	            },
+		//	            "ServiceLocation": {
+		//	              "description": "\u003cp\u003eThe name of the source location.\u003c/p\u003e",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "Url": {
+		//	              "description": "\u003cp\u003eA source location for segments.\u003c/p\u003e",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Url"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "maxItems": 20,
+		//	        "minItems": 0,
+		//	        "type": "array"
+		//	      },
+		//	      "Compactness": {
+		//	        "enum": [
+		//	          "STANDARD",
+		//	          "NONE"
+		//	        ],
+		//	        "type": "string"
+		//	      },
 		//	      "DrmSignaling": {
 		//	        "enum": [
 		//	          "INDIVIDUAL",
 		//	          "REFERENCED"
 		//	        ],
 		//	        "type": "string"
+		//	      },
+		//	      "DvbSettings": {
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eFor endpoints that use the DVB-DASH profile only. The font download and error reporting information that you want MediaPackage to pass through to the manifest.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "ErrorMetrics": {
+		//	            "description": "\u003cp\u003ePlayback device error reporting settings.\u003c/p\u003e",
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "\u003cp\u003eFor use with DVB-DASH profiles only. The settings for error reporting from the playback device that you want Elemental MediaPackage to pass through to the manifest.\u003c/p\u003e",
+		//	              "properties": {
+		//	                "Probability": {
+		//	                  "description": "\u003cp\u003eThe number of playback devices per 1000 that will send error reports to the reporting URL. This represents the probability that a playback device will be a reporting player for this session.\u003c/p\u003e",
+		//	                  "maximum": 1000,
+		//	                  "minimum": 1,
+		//	                  "type": "integer"
+		//	                },
+		//	                "ReportingUrl": {
+		//	                  "description": "\u003cp\u003eThe URL where playback devices send error reports.\u003c/p\u003e",
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ReportingUrl"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "maxItems": 20,
+		//	            "minItems": 0,
+		//	            "type": "array"
+		//	          },
+		//	          "FontDownload": {
+		//	            "additionalProperties": false,
+		//	            "description": "\u003cp\u003eFor use with DVB-DASH profiles only. The settings for font downloads that you want Elemental MediaPackage to pass through to the manifest.\u003c/p\u003e",
+		//	            "properties": {
+		//	              "FontFamily": {
+		//	                "description": "\u003cp\u003eThe \u003ccode\u003efontFamily\u003c/code\u003e name for subtitles, as described in \u003ca href=\"https://tech.ebu.ch/publications/tech3380\"\u003eEBU-TT-D Subtitling Distribution Format\u003c/a\u003e. \u003c/p\u003e",
+		//	                "maxLength": 256,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "MimeType": {
+		//	                "description": "\u003cp\u003eThe \u003ccode\u003emimeType\u003c/code\u003e of the resource that's at the font download URL.\u003c/p\u003e \u003cp\u003eFor information about font MIME types, see the \u003ca href=\"https://dvb.org/wp-content/uploads/2021/06/A168r4_MPEG-DASH-Profile-for-Transport-of-ISO-BMFF-Based-DVB-Services_Draft-ts_103-285-v140_November_2021.pdf\"\u003eMPEG-DASH Profile for Transport of ISO BMFF Based DVB Services over IP Based Networks\u003c/a\u003e document. \u003c/p\u003e",
+		//	                "maxLength": 256,
+		//	                "minLength": 1,
+		//	                "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_/-]*[a-zA-Z0-9]$",
+		//	                "type": "string"
+		//	              },
+		//	              "Url": {
+		//	                "description": "\u003cp\u003eThe URL for downloading fonts for subtitles.\u003c/p\u003e",
+		//	                "maxLength": 2048,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
 		//	      },
 		//	      "FilterConfiguration": {
 		//	        "additionalProperties": false,
@@ -210,7 +318,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "integer"
 		//	      },
 		//	      "PeriodTriggers": {
-		//	        "description": "\u003cp\u003eA list of triggers that controls when AWS Elemental MediaPackage separates the MPEG-DASH manifest into multiple periods. Leave this value empty to indicate that the manifest is contained all in one period.\n         For more information about periods in the DASH manifest, see \u003ca href=\"https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html\"\u003eMulti-period DASH in AWS Elemental MediaPackage\u003c/a\u003e.\u003c/p\u003e",
+		//	        "description": "\u003cp\u003eA list of triggers that controls when AWS Elemental MediaPackage separates the MPEG-DASH manifest into multiple periods. Leave this value empty to indicate that the manifest is contained all in one period. For more information about periods in the DASH manifest, see \u003ca href=\"https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html\"\u003eMulti-period DASH in AWS Elemental MediaPackage\u003c/a\u003e.\u003c/p\u003e",
 		//	        "items": {
 		//	          "enum": [
 		//	            "AVAILS",
@@ -224,6 +332,56 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	        "maxItems": 100,
 		//	        "minItems": 0,
 		//	        "type": "array"
+		//	      },
+		//	      "Profiles": {
+		//	        "description": "\u003cp\u003eThe profile that the output is compliant with.\u003c/p\u003e",
+		//	        "items": {
+		//	          "enum": [
+		//	            "DVB_DASH"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 5,
+		//	        "minItems": 0,
+		//	        "type": "array"
+		//	      },
+		//	      "ProgramInformation": {
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eDetails about the content that you want MediaPackage to pass through in the manifest to the playback device.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Copyright": {
+		//	            "description": "\u003cp\u003eA copyright statement about the content.\u003c/p\u003e",
+		//	            "maxLength": 2048,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "LanguageCode": {
+		//	            "description": "\u003cp\u003eThe language code for this manifest.\u003c/p\u003e",
+		//	            "maxLength": 5,
+		//	            "minLength": 2,
+		//	            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*[a-zA-Z0-9]$",
+		//	            "type": "string"
+		//	          },
+		//	          "MoreInformationUrl": {
+		//	            "description": "\u003cp\u003eAn absolute URL that contains more information about this content.\u003c/p\u003e",
+		//	            "maxLength": 2048,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Source": {
+		//	            "description": "\u003cp\u003eInformation about the content provider.\u003c/p\u003e",
+		//	            "maxLength": 2048,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Title": {
+		//	            "description": "\u003cp\u003eThe title for the manifest.\u003c/p\u003e",
+		//	            "maxLength": 2048,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
 		//	      },
 		//	      "ScteDash": {
 		//	        "additionalProperties": false,
@@ -244,6 +402,30 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	          "NUMBER_WITH_TIMELINE"
 		//	        ],
 		//	        "type": "string"
+		//	      },
+		//	      "SubtitleConfiguration": {
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eThe configuration for DASH subtitles.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "TtmlConfiguration": {
+		//	            "additionalProperties": false,
+		//	            "description": "\u003cp\u003eThe settings for TTML subtitles.\u003c/p\u003e",
+		//	            "properties": {
+		//	              "TtmlProfile": {
+		//	                "enum": [
+		//	                  "IMSC_1",
+		//	                  "EBU_TT_D_101"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "TtmlProfile"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
 		//	      },
 		//	      "SuggestedPresentationDelaySeconds": {
 		//	        "description": "\u003cp\u003eThe amount of time (in seconds) that the player should be from the end of the manifest.\u003c/p\u003e",
@@ -282,6 +464,85 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"dash_manifests": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: BaseUrls
+					"base_urls": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DvbPriority
+								"dvb_priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "<p>For use with DVB-DASH profiles only. The priority of this location for servings segments. The lower the number, the higher the priority.</p>",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(1, 15000),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: DvbWeight
+								"dvb_weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "<p>For use with DVB-DASH profiles only. The weighting for source locations that have the same priority. </p>",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(1, 15000),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ServiceLocation
+								"service_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The name of the source location.</p>",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Url
+								"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>A source location for segments.</p>",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "<p>The base URL to use for retrieving segments.</p>",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.SizeBetween(0, 20),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Compactness
+					"compactness": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"STANDARD",
+								"NONE",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: DrmSignaling
 					"drm_signaling": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
@@ -294,6 +555,106 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: DvbSettings
+					"dvb_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ErrorMetrics
+							"error_metrics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Probability
+										"probability": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "<p>The number of playback devices per 1000 that will send error reports to the reporting URL. This represents the probability that a playback device will be a reporting player for this session.</p>",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(1, 1000),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ReportingUrl
+										"reporting_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The URL where playback devices send error reports.</p>",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(1, 2048),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "<p>Playback device error reporting settings.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.SizeBetween(0, 20),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: FontDownload
+							"font_download": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: FontFamily
+									"font_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>The <code>fontFamily</code> name for subtitles, as described in <a href=\"https://tech.ebu.ch/publications/tech3380\">EBU-TT-D Subtitling Distribution Format</a>. </p>",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 256),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: MimeType
+									"mime_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>The <code>mimeType</code> of the resource that's at the font download URL.</p> <p>For information about font MIME types, see the <a href=\"https://dvb.org/wp-content/uploads/2021/06/A168r4_MPEG-DASH-Profile-for-Transport-of-ISO-BMFF-Based-DVB-Services_Draft-ts_103-285-v140_November_2021.pdf\">MPEG-DASH Profile for Transport of ISO BMFF Based DVB Services over IP Based Networks</a> document. </p>",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 256),
+											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9_/-]*[a-zA-Z0-9]$"), ""),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Url
+									"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>The URL for downloading fonts for subtitles.</p>",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 2048),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "<p>For use with DVB-DASH profiles only. The settings for font downloads that you want Elemental MediaPackage to pass through to the manifest.</p>",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>For endpoints that use the DVB-DASH profile only. The font download and error reporting information that you want MediaPackage to pass through to the manifest.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: FilterConfiguration
@@ -405,7 +766,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 					// Property: PeriodTriggers
 					"period_triggers": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "<p>A list of triggers that controls when AWS Elemental MediaPackage separates the MPEG-DASH manifest into multiple periods. Leave this value empty to indicate that the manifest is contained all in one period.\n         For more information about periods in the DASH manifest, see <a href=\"https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html\">Multi-period DASH in AWS Elemental MediaPackage</a>.</p>",
+						Description: "<p>A list of triggers that controls when AWS Elemental MediaPackage separates the MPEG-DASH manifest into multiple periods. Leave this value empty to indicate that the manifest is contained all in one period. For more information about periods in the DASH manifest, see <a href=\"https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html\">Multi-period DASH in AWS Elemental MediaPackage</a>.</p>",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.List{ /*START VALIDATORS*/
@@ -422,6 +783,96 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Profiles
+					"profiles": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "<p>The profile that the output is compliant with.</p>",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.SizeBetween(0, 5),
+							listvalidator.ValueStringsAre(
+								stringvalidator.OneOf(
+									"DVB_DASH",
+								),
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ProgramInformation
+					"program_information": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Copyright
+							"copyright": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>A copyright statement about the content.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 2048),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: LanguageCode
+							"language_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The language code for this manifest.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(2, 5),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9_-]*[a-zA-Z0-9]$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: MoreInformationUrl
+							"more_information_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>An absolute URL that contains more information about this content.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 2048),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Source
+							"source": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Information about the content provider.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 2048),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Title
+							"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The title for the manifest.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 2048),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Details about the content that you want MediaPackage to pass through in the manifest to the playback device.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ScteDash
@@ -460,6 +911,43 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SubtitleConfiguration
+					"subtitle_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: TtmlConfiguration
+							"ttml_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: TtmlProfile
+									"ttml_profile": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"IMSC_1",
+												"EBU_TT_D_101",
+											),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "<p>The settings for TTML subtitles.</p>",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>The configuration for DASH subtitles.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: SuggestedPresentationDelaySeconds
@@ -547,7 +1035,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "\u003cp\u003eThe failover settings for the endpoint.\u003c/p\u003e",
 		//	  "properties": {
 		//	    "EndpointErrorConditions": {
-		//	      "description": "\u003cp\u003eThe failover conditions for the endpoint. The options are:\u003c/p\u003e\n         \u003cul\u003e\n            \u003cli\u003e\n               \u003cp\u003e\n                  \u003ccode\u003eSTALE_MANIFEST\u003c/code\u003e - The manifest stalled and there are no new segments or parts.\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n               \u003cp\u003e\n                  \u003ccode\u003eINCOMPLETE_MANIFEST\u003c/code\u003e - There is a gap in the manifest.\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n               \u003cp\u003e\n                  \u003ccode\u003eMISSING_DRM_KEY\u003c/code\u003e - Key rotation is enabled but we're unable to fetch the key for the current key period.\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n               \u003cp\u003e\n                  \u003ccode\u003eSLATE_INPUT\u003c/code\u003e - The segments which contain slate content are considered to be missing content.\u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
+		//	      "description": "\u003cp\u003eThe failover conditions for the endpoint. The options are:\u003c/p\u003e \u003cul\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eSTALE_MANIFEST\u003c/code\u003e - The manifest stalled and there are no new segments or parts.\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eINCOMPLETE_MANIFEST\u003c/code\u003e - There is a gap in the manifest.\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eMISSING_DRM_KEY\u003c/code\u003e - Key rotation is enabled but we're unable to fetch the key for the current key period.\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003e \u003ccode\u003eSLATE_INPUT\u003c/code\u003e - The segments which contain slate content are considered to be missing content.\u003c/p\u003e \u003c/li\u003e \u003c/ul\u003e",
 		//	      "items": {
 		//	        "enum": [
 		//	          "STALE_MANIFEST",
@@ -567,7 +1055,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 				// Property: EndpointErrorConditions
 				"endpoint_error_conditions": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "<p>The failover conditions for the endpoint. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STALE_MANIFEST</code> - The manifest stalled and there are no new segments or parts.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INCOMPLETE_MANIFEST</code> - There is a gap in the manifest.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MISSING_DRM_KEY</code> - Key rotation is enabled but we're unable to fetch the key for the current key period.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SLATE_INPUT</code> - The segments which contain slate content are considered to be missing content.</p>\n            </li>\n         </ul>",
+					Description: "<p>The failover conditions for the endpoint. The options are:</p> <ul> <li> <p> <code>STALE_MANIFEST</code> - The manifest stalled and there are no new segments or parts.</p> </li> <li> <p> <code>INCOMPLETE_MANIFEST</code> - There is a gap in the manifest.</p> </li> <li> <p> <code>MISSING_DRM_KEY</code> - Key rotation is enabled but we're unable to fetch the key for the current key period.</p> </li> <li> <p> <code>SLATE_INPUT</code> - The segments which contain slate content are considered to be missing content.</p> </li> </ul>",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
@@ -670,7 +1158,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "integer"
 		//	      },
 		//	      "ProgramDateTimeIntervalSeconds": {
-		//	        "description": "\u003cp\u003eInserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval,\n         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest.\n         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.\u003c/p\u003e\n         \u003cp\u003eIrrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.\u003c/p\u003e",
+		//	        "description": "\u003cp\u003eInserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.\u003c/p\u003e \u003cp\u003eIrrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.\u003c/p\u003e",
 		//	        "type": "integer"
 		//	      },
 		//	      "ScteHls": {
@@ -709,7 +1197,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "UrlEncodeChildManifest": {
-		//	        "description": "\u003cp\u003eWhen enabled, MediaPackage URL-encodes the query string for API requests for HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol.\n         For more information, see \u003ca href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\"\u003eAmazon Web Services Signature Version 4 for API requests\u003c/a\u003e in \u003ci\u003eIdentity and Access Management User Guide\u003c/i\u003e.\u003c/p\u003e",
+		//	        "description": "\u003cp\u003eWhen enabled, MediaPackage URL-encodes the query string for API requests for HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see \u003ca href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\"\u003eAmazon Web Services Signature Version 4 for API requests\u003c/a\u003e in \u003ci\u003eIdentity and Access Management User Guide\u003c/i\u003e.\u003c/p\u003e",
 		//	        "type": "boolean"
 		//	      }
 		//	    },
@@ -826,7 +1314,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ProgramDateTimeIntervalSeconds
 					"program_date_time_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval,\n         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest.\n         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.</p>\n         <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>",
+						Description: "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.</p> <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -900,7 +1388,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: UrlEncodeChildManifest
 					"url_encode_child_manifest": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>When enabled, MediaPackage URL-encodes the query string for API requests for HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol.\n         For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>",
+						Description: "<p>When enabled, MediaPackage URL-encodes the query string for API requests for HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -994,7 +1482,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "integer"
 		//	      },
 		//	      "ProgramDateTimeIntervalSeconds": {
-		//	        "description": "\u003cp\u003eInserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval,\n         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest.\n         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.\u003c/p\u003e\n         \u003cp\u003eIrrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.\u003c/p\u003e",
+		//	        "description": "\u003cp\u003eInserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.\u003c/p\u003e \u003cp\u003eIrrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.\u003c/p\u003e",
 		//	        "type": "integer"
 		//	      },
 		//	      "ScteHls": {
@@ -1033,7 +1521,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "UrlEncodeChildManifest": {
-		//	        "description": "\u003cp\u003eWhen enabled, MediaPackage URL-encodes the query string for API requests for LL-HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol.\n         For more information, see \u003ca href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\"\u003eAmazon Web Services Signature Version 4 for API requests\u003c/a\u003e in \u003ci\u003eIdentity and Access Management User Guide\u003c/i\u003e.\u003c/p\u003e",
+		//	        "description": "\u003cp\u003eWhen enabled, MediaPackage URL-encodes the query string for API requests for LL-HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see \u003ca href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\"\u003eAmazon Web Services Signature Version 4 for API requests\u003c/a\u003e in \u003ci\u003eIdentity and Access Management User Guide\u003c/i\u003e.\u003c/p\u003e",
 		//	        "type": "boolean"
 		//	      }
 		//	    },
@@ -1150,7 +1638,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ProgramDateTimeIntervalSeconds
 					"program_date_time_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval,\n         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest.\n         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.</p>\n         <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>",
+						Description: "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.</p> <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1224,7 +1712,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: UrlEncodeChildManifest
 					"url_encode_child_manifest": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>When enabled, MediaPackage URL-encodes the query string for API requests for LL-HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol.\n         For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>",
+						Description: "<p>When enabled, MediaPackage URL-encodes the query string for API requests for LL-HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1315,7 +1803,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "object"
 		//	        },
 		//	        "KeyRotationIntervalSeconds": {
-		//	          "description": "\u003cp\u003eThe frequency (in seconds) of key changes for live workflows, in which content is streamed real time. The service retrieves content keys before the live content begins streaming, and then retrieves them as needed over the lifetime of the workflow. By default, key rotation is set to 300 seconds (5 minutes), the minimum rotation interval, which is equivalent to setting it to 300. If you don't enter an interval, content keys aren't rotated.\u003c/p\u003e\n         \u003cp\u003eThe following example setting causes the service to rotate keys every thirty minutes: \u003ccode\u003e1800\u003c/code\u003e\n         \u003c/p\u003e",
+		//	          "description": "\u003cp\u003eThe frequency (in seconds) of key changes for live workflows, in which content is streamed real time. The service retrieves content keys before the live content begins streaming, and then retrieves them as needed over the lifetime of the workflow. By default, key rotation is set to 300 seconds (5 minutes), the minimum rotation interval, which is equivalent to setting it to 300. If you don't enter an interval, content keys aren't rotated.\u003c/p\u003e \u003cp\u003eThe following example setting causes the service to rotate keys every thirty minutes: \u003ccode\u003e1800\u003c/code\u003e \u003c/p\u003e",
 		//	          "maximum": 31536000,
 		//	          "minimum": 300,
 		//	          "type": "integer"
@@ -1377,20 +1865,20 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	              "type": "object"
 		//	            },
 		//	            "ResourceId": {
-		//	              "description": "\u003cp\u003eThe unique identifier for the content. The service sends this to the key server to identify the current endpoint. How unique you make this depends on how fine-grained you want access controls to be. The service does not permit you to use the same ID for two simultaneous encryption processes. The resource ID is also known as the content ID.\u003c/p\u003e\n         \u003cp\u003eThe following example shows a resource ID: \u003ccode\u003eMovieNight20171126093045\u003c/code\u003e\n         \u003c/p\u003e",
+		//	              "description": "\u003cp\u003eThe unique identifier for the content. The service sends this to the key server to identify the current endpoint. How unique you make this depends on how fine-grained you want access controls to be. The service does not permit you to use the same ID for two simultaneous encryption processes. The resource ID is also known as the content ID.\u003c/p\u003e \u003cp\u003eThe following example shows a resource ID: \u003ccode\u003eMovieNight20171126093045\u003c/code\u003e \u003c/p\u003e",
 		//	              "maxLength": 256,
 		//	              "minLength": 1,
 		//	              "pattern": "^[0-9a-zA-Z_-]+$",
 		//	              "type": "string"
 		//	            },
 		//	            "RoleArn": {
-		//	              "description": "\u003cp\u003eThe ARN for the IAM role granted by the key provider that provides access to the key provider API. This role must have a trust policy that allows MediaPackage to assume the role, and it must have a sufficient permissions policy to allow access to the specific key retrieval URL. Get this from your DRM solution provider.\u003c/p\u003e\n         \u003cp\u003eValid format: \u003ccode\u003earn:aws:iam::{accountID}:role/{name}\u003c/code\u003e. The following example shows a role ARN: \u003ccode\u003earn:aws:iam::444455556666:role/SpekeAccess\u003c/code\u003e\n         \u003c/p\u003e",
+		//	              "description": "\u003cp\u003eThe ARN for the IAM role granted by the key provider that provides access to the key provider API. This role must have a trust policy that allows MediaPackage to assume the role, and it must have a sufficient permissions policy to allow access to the specific key retrieval URL. Get this from your DRM solution provider.\u003c/p\u003e \u003cp\u003eValid format: \u003ccode\u003earn:aws:iam::{accountID}:role/{name}\u003c/code\u003e. The following example shows a role ARN: \u003ccode\u003earn:aws:iam::444455556666:role/SpekeAccess\u003c/code\u003e \u003c/p\u003e",
 		//	              "maxLength": 2048,
 		//	              "minLength": 1,
 		//	              "type": "string"
 		//	            },
 		//	            "Url": {
-		//	              "description": "\u003cp\u003eThe URL of the API Gateway proxy that you set up to talk to your key server. The API Gateway proxy must reside in the same AWS Region as MediaPackage and must start with https://.\u003c/p\u003e\n         \u003cp\u003eThe following example shows a URL: \u003ccode\u003ehttps://1wm2dx1f33.execute-api.us-west-2.amazonaws.com/SpekeSample/copyProtection\u003c/code\u003e\n         \u003c/p\u003e",
+		//	              "description": "\u003cp\u003eThe URL of the API Gateway proxy that you set up to talk to your key server. The API Gateway proxy must reside in the same AWS Region as MediaPackage and must start with https://.\u003c/p\u003e \u003cp\u003eThe following example shows a URL: \u003ccode\u003ehttps://1wm2dx1f33.execute-api.us-west-2.amazonaws.com/SpekeSample/copyProtection\u003c/code\u003e \u003c/p\u003e",
 		//	              "maxLength": 1024,
 		//	              "minLength": 1,
 		//	              "type": "string"
@@ -1529,7 +2017,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: KeyRotationIntervalSeconds
 						"key_rotation_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "<p>The frequency (in seconds) of key changes for live workflows, in which content is streamed real time. The service retrieves content keys before the live content begins streaming, and then retrieves them as needed over the lifetime of the workflow. By default, key rotation is set to 300 seconds (5 minutes), the minimum rotation interval, which is equivalent to setting it to 300. If you don't enter an interval, content keys aren't rotated.</p>\n         <p>The following example setting causes the service to rotate keys every thirty minutes: <code>1800</code>\n         </p>",
+							Description: "<p>The frequency (in seconds) of key changes for live workflows, in which content is streamed real time. The service retrieves content keys before the live content begins streaming, and then retrieves them as needed over the lifetime of the workflow. By default, key rotation is set to 300 seconds (5 minutes), the minimum rotation interval, which is equivalent to setting it to 300. If you don't enter an interval, content keys aren't rotated.</p> <p>The following example setting causes the service to rotate keys every thirty minutes: <code>1800</code> </p>",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -1622,7 +2110,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: ResourceId
 								"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "<p>The unique identifier for the content. The service sends this to the key server to identify the current endpoint. How unique you make this depends on how fine-grained you want access controls to be. The service does not permit you to use the same ID for two simultaneous encryption processes. The resource ID is also known as the content ID.</p>\n         <p>The following example shows a resource ID: <code>MovieNight20171126093045</code>\n         </p>",
+									Description: "<p>The unique identifier for the content. The service sends this to the key server to identify the current endpoint. How unique you make this depends on how fine-grained you want access controls to be. The service does not permit you to use the same ID for two simultaneous encryption processes. The resource ID is also known as the content ID.</p> <p>The following example shows a resource ID: <code>MovieNight20171126093045</code> </p>",
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
@@ -1636,7 +2124,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: RoleArn
 								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "<p>The ARN for the IAM role granted by the key provider that provides access to the key provider API. This role must have a trust policy that allows MediaPackage to assume the role, and it must have a sufficient permissions policy to allow access to the specific key retrieval URL. Get this from your DRM solution provider.</p>\n         <p>Valid format: <code>arn:aws:iam::{accountID}:role/{name}</code>. The following example shows a role ARN: <code>arn:aws:iam::444455556666:role/SpekeAccess</code>\n         </p>",
+									Description: "<p>The ARN for the IAM role granted by the key provider that provides access to the key provider API. This role must have a trust policy that allows MediaPackage to assume the role, and it must have a sufficient permissions policy to allow access to the specific key retrieval URL. Get this from your DRM solution provider.</p> <p>Valid format: <code>arn:aws:iam::{accountID}:role/{name}</code>. The following example shows a role ARN: <code>arn:aws:iam::444455556666:role/SpekeAccess</code> </p>",
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
@@ -1649,7 +2137,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Url
 								"url": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "<p>The URL of the API Gateway proxy that you set up to talk to your key server. The API Gateway proxy must reside in the same AWS Region as MediaPackage and must start with https://.</p>\n         <p>The following example shows a URL: <code>https://1wm2dx1f33.execute-api.us-west-2.amazonaws.com/SpekeSample/copyProtection</code>\n         </p>",
+									Description: "<p>The URL of the API Gateway proxy that you set up to talk to your key server. The API Gateway proxy must reside in the same AWS Region as MediaPackage and must start with https://.</p> <p>The following example shows a URL: <code>https://1wm2dx1f33.execute-api.us-west-2.amazonaws.com/SpekeSample/copyProtection</code> </p>",
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
@@ -1868,45 +2356,61 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"ad_marker_dash":                       "AdMarkerDash",
 		"ad_marker_hls":                        "AdMarkerHls",
 		"arn":                                  "Arn",
+		"base_urls":                            "BaseUrls",
 		"channel_group_name":                   "ChannelGroupName",
 		"channel_name":                         "ChannelName",
 		"child_manifest_name":                  "ChildManifestName",
 		"clip_start_time":                      "ClipStartTime",
 		"cmaf_encryption_method":               "CmafEncryptionMethod",
+		"compactness":                          "Compactness",
 		"constant_initialization_vector":       "ConstantInitializationVector",
 		"container_type":                       "ContainerType",
+		"copyright":                            "Copyright",
 		"created_at":                           "CreatedAt",
 		"dash_manifest_urls":                   "DashManifestUrls",
 		"dash_manifests":                       "DashManifests",
 		"description":                          "Description",
 		"drm_signaling":                        "DrmSignaling",
 		"drm_systems":                          "DrmSystems",
+		"dvb_priority":                         "DvbPriority",
+		"dvb_settings":                         "DvbSettings",
+		"dvb_weight":                           "DvbWeight",
 		"encryption":                           "Encryption",
 		"encryption_contract_configuration":    "EncryptionContractConfiguration",
 		"encryption_method":                    "EncryptionMethod",
 		"end":                                  "End",
 		"endpoint_error_conditions":            "EndpointErrorConditions",
+		"error_metrics":                        "ErrorMetrics",
 		"filter_configuration":                 "FilterConfiguration",
+		"font_download":                        "FontDownload",
+		"font_family":                          "FontFamily",
 		"force_endpoint_error_configuration":   "ForceEndpointErrorConfiguration",
 		"hls_manifest_urls":                    "HlsManifestUrls",
 		"hls_manifests":                        "HlsManifests",
 		"include_iframe_only_streams":          "IncludeIframeOnlyStreams",
 		"key":                                  "Key",
 		"key_rotation_interval_seconds":        "KeyRotationIntervalSeconds",
+		"language_code":                        "LanguageCode",
 		"low_latency_hls_manifest_urls":        "LowLatencyHlsManifestUrls",
 		"low_latency_hls_manifests":            "LowLatencyHlsManifests",
 		"manifest_filter":                      "ManifestFilter",
 		"manifest_name":                        "ManifestName",
 		"manifest_window_seconds":              "ManifestWindowSeconds",
+		"mime_type":                            "MimeType",
 		"min_buffer_time_seconds":              "MinBufferTimeSeconds",
 		"min_update_period_seconds":            "MinUpdatePeriodSeconds",
 		"modified_at":                          "ModifiedAt",
+		"more_information_url":                 "MoreInformationUrl",
 		"origin_endpoint_name":                 "OriginEndpointName",
 		"period_triggers":                      "PeriodTriggers",
 		"precise":                              "Precise",
 		"preset_speke_20_audio":                "PresetSpeke20Audio",
 		"preset_speke_20_video":                "PresetSpeke20Video",
+		"probability":                          "Probability",
+		"profiles":                             "Profiles",
 		"program_date_time_interval_seconds":   "ProgramDateTimeIntervalSeconds",
+		"program_information":                  "ProgramInformation",
+		"reporting_url":                        "ReportingUrl",
 		"resource_id":                          "ResourceId",
 		"role_arn":                             "RoleArn",
 		"scte":                                 "Scte",
@@ -1917,19 +2421,25 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"segment_duration_seconds":             "SegmentDurationSeconds",
 		"segment_name":                         "SegmentName",
 		"segment_template_format":              "SegmentTemplateFormat",
+		"service_location":                     "ServiceLocation",
+		"source":                               "Source",
 		"speke_key_provider":                   "SpekeKeyProvider",
 		"start":                                "Start",
 		"start_tag":                            "StartTag",
 		"startover_window_seconds":             "StartoverWindowSeconds",
+		"subtitle_configuration":               "SubtitleConfiguration",
 		"suggested_presentation_delay_seconds": "SuggestedPresentationDelaySeconds",
 		"tags":                                 "Tags",
 		"time_delay_seconds":                   "TimeDelaySeconds",
 		"time_offset":                          "TimeOffset",
 		"timing_mode":                          "TimingMode",
 		"timing_source":                        "TimingSource",
+		"title":                                "Title",
 		"ts_encryption_method":                 "TsEncryptionMethod",
 		"ts_include_dvb_subtitles":             "TsIncludeDvbSubtitles",
 		"ts_use_audio_rendition_group":         "TsUseAudioRenditionGroup",
+		"ttml_configuration":                   "TtmlConfiguration",
+		"ttml_profile":                         "TtmlProfile",
 		"url":                                  "Url",
 		"url_encode_child_manifest":            "UrlEncodeChildManifest",
 		"utc_timing":                           "UtcTiming",

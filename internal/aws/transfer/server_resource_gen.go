@@ -382,6 +382,29 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// IdentityProviderType is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: IpAddressType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "IPV4",
+		//	    "DUALSTACK"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"IPV4",
+					"DUALSTACK",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LoggingRole
 		// CloudFormation resource type schema:
 		//
@@ -976,6 +999,7 @@ func serverResource(ctx context.Context) (resource.Resource, error) {
 		"identity_provider_details":                "IdentityProviderDetails",
 		"identity_provider_type":                   "IdentityProviderType",
 		"invocation_role":                          "InvocationRole",
+		"ip_address_type":                          "IpAddressType",
 		"key":                                      "Key",
 		"logging_role":                             "LoggingRole",
 		"on_partial_upload":                        "OnPartialUpload",

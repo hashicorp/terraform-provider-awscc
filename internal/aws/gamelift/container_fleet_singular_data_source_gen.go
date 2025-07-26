@@ -410,7 +410,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "description": "Current resource capacity settings in a specified fleet or location. The location value might refer to a fleet's remote location or its home Region.",
 		//	        "properties": {
 		//	          "DesiredEC2Instances": {
-		//	            "description": "The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.",
+		//	            "description": "The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits. If any auto-scaling policy is defined for the container fleet, the desired instance will only be applied once during fleet creation and will be ignored in updates to avoid conflicts with auto-scaling. During updates with any auto-scaling policy defined, if current desired instance is lower than the new MinSize, it will be increased to the new MinSize; if current desired instance is larger than the new MaxSize, it will be decreased to the new MaxSize.",
 		//	            "minimum": 0,
 		//	            "type": "integer"
 		//	          },
@@ -465,7 +465,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: DesiredEC2Instances
 							"desired_ec2_instances": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.",
+								Description: "The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits. If any auto-scaling policy is defined for the container fleet, the desired instance will only be applied once during fleet creation and will be ignored in updates to avoid conflicts with auto-scaling. During updates with any auto-scaling policy defined, if current desired instance is lower than the new MinSize, it will be increased to the new MinSize; if current desired instance is larger than the new MaxSize, it will be decreased to the new MaxSize.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: MaxSize

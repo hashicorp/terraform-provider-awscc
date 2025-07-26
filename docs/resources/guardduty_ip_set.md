@@ -83,6 +83,7 @@ resource "awscc_guardduty_ip_set" "example" {
 
 - `activate` (Boolean)
 - `detector_id` (String)
+- `expected_bucket_owner` (String)
 - `name` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 

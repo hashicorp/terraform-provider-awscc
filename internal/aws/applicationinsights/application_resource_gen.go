@@ -291,7 +291,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	                    },
 		//	                    "LogType": {
 		//	                      "description": "The log type decides the log patterns against which Application Insights analyzes the log.",
-		//	                      "pattern": "^[A-Z][[A-Z]_]*$",
+		//	                      "pattern": "^[A-Z][A-Z_]*$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "PatternSet": {
@@ -519,7 +519,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	                          },
 		//	                          "LogType": {
 		//	                            "description": "The log type decides the log patterns against which Application Insights analyzes the log.",
-		//	                            "pattern": "^[A-Z][[A-Z]_]*$",
+		//	                            "pattern": "^[A-Z][A-Z_]*$",
 		//	                            "type": "string"
 		//	                          },
 		//	                          "PatternSet": {
@@ -810,7 +810,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	                    },
 		//	                    "LogType": {
 		//	                      "description": "The log type decides the log patterns against which Application Insights analyzes the log.",
-		//	                      "pattern": "^[A-Z][[A-Z]_]*$",
+		//	                      "pattern": "^[A-Z][A-Z_]*$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "PatternSet": {
@@ -1038,7 +1038,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	                          },
 		//	                          "LogType": {
 		//	                            "description": "The log type decides the log patterns against which Application Insights analyzes the log.",
-		//	                            "pattern": "^[A-Z][[A-Z]_]*$",
+		//	                            "pattern": "^[A-Z][A-Z_]*$",
 		//	                            "type": "string"
 		//	                          },
 		//	                          "PatternSet": {
@@ -1179,7 +1179,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "Tier": {
 		//	        "description": "The tier of the application component.",
-		//	        "pattern": "^[A-Z][[A-Z]_]*$",
+		//	        "pattern": "^[A-Z][A-Z_]*$",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -1489,7 +1489,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 													Optional:    true,
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z][[A-Z]_]*$"), ""),
+														stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z][A-Z_]*$"), ""),
 														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1826,7 +1826,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 																Optional:    true,
 																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
-																	stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z][[A-Z]_]*$"), ""),
+																	stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z][A-Z_]*$"), ""),
 																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2285,7 +2285,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 													Optional:    true,
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z][[A-Z]_]*$"), ""),
+														stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z][A-Z_]*$"), ""),
 														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2622,7 +2622,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 																Optional:    true,
 																Computed:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
-																	stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z][[A-Z]_]*$"), ""),
+																	stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z][A-Z_]*$"), ""),
 																	fwvalidators.NotNullString(),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2836,7 +2836,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z][[A-Z]_]*$"), ""),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z][A-Z_]*$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3283,7 +3283,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource schema for AWS::ApplicationInsights::Application",
+		Description: "Resource Type definition for AWS::ApplicationInsights::Application",
 		Version:     1,
 		Attributes:  attributes,
 	}

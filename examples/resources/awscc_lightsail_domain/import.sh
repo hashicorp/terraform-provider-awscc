@@ -1,0 +1,1 @@
+$ terraform import awscc_lightsail_domain.example "domain_name"

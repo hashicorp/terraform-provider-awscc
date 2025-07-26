@@ -9,11 +9,14 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -412,6 +415,13 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "Configuration for an SFTP connector.",
 		//	  "properties": {
+		//	    "MaxConcurrentConnections": {
+		//	      "default": 1,
+		//	      "description": "Specifies the number of active connections that your connector can establish with the remote server at the same time.",
+		//	      "maximum": 5,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
 		//	    "TrustedHostKeys": {
 		//	      "description": "List of public host keys, for the external server to which you are connecting.",
 		//	      "insertionOrder": false,
@@ -436,6 +446,19 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"sftp_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxConcurrentConnections
+				"max_concurrent_connections": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the number of active connections that your connector can establish with the remote server at the same time.",
+					Optional:    true,
+					Computed:    true,
+					Default:     int64default.StaticInt64(1),
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(1, 5),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: TrustedHostKeys
 				"trusted_host_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
@@ -594,6 +617,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		"key":                                 "Key",
 		"local_profile_id":                    "LocalProfileId",
 		"logging_role":                        "LoggingRole",
+		"max_concurrent_connections":          "MaxConcurrentConnections",
 		"mdn_response":                        "MdnResponse",
 		"mdn_signing_algorithm":               "MdnSigningAlgorithm",
 		"message_subject":                     "MessageSubject",

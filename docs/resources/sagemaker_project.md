@@ -18,13 +18,14 @@ Resource Type definition for AWS::SageMaker::Project
 ### Required
 
 - `project_name` (String) The name of the project.
-- `service_catalog_provisioning_details` (Attributes) Input ServiceCatalog Provisioning Details (see [below for nested schema](#nestedatt--service_catalog_provisioning_details))
 
 ### Optional
 
 - `project_description` (String) The description of the project.
 - `service_catalog_provisioned_product_details` (Attributes) Provisioned ServiceCatalog  Details (see [below for nested schema](#nestedatt--service_catalog_provisioned_product_details))
+- `service_catalog_provisioning_details` (Attributes) Input ServiceCatalog Provisioning Details (see [below for nested schema](#nestedatt--service_catalog_provisioning_details))
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `template_provider_details` (Attributes List) An array of template providers associated with the project. (see [below for nested schema](#nestedatt--template_provider_details))
 
 ### Read-Only
 
@@ -34,16 +35,22 @@ Resource Type definition for AWS::SageMaker::Project
 - `project_id` (String) Project Id.
 - `project_status` (String) The status of a project.
 
+<a id="nestedatt--service_catalog_provisioned_product_details"></a>
+### Nested Schema for `service_catalog_provisioned_product_details`
+
+Optional:
+
+- `provisioned_product_id` (String) The identifier of the provisioning artifact (also known as a version).
+- `provisioned_product_status_message` (String) Provisioned Product Status Message
+
+
 <a id="nestedatt--service_catalog_provisioning_details"></a>
 ### Nested Schema for `service_catalog_provisioning_details`
-
-Required:
-
-- `product_id` (String) Service Catalog product identifier.
 
 Optional:
 
 - `path_id` (String) The path identifier of the product.
+- `product_id` (String) Service Catalog product identifier.
 - `provisioning_artifact_id` (String) The identifier of the provisioning artifact (also known as a version).
 - `provisioning_parameters` (Attributes List) Parameters specified by the administrator that are required for provisioning the product. (see [below for nested schema](#nestedatt--service_catalog_provisioning_details--provisioning_parameters))
 
@@ -57,15 +64,6 @@ Optional:
 
 
 
-<a id="nestedatt--service_catalog_provisioned_product_details"></a>
-### Nested Schema for `service_catalog_provisioned_product_details`
-
-Optional:
-
-- `provisioned_product_id` (String) The identifier of the provisioning artifact (also known as a version).
-- `provisioned_product_status_message` (String) Provisioned Product Status Message
-
-
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
@@ -73,6 +71,32 @@ Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+
+<a id="nestedatt--template_provider_details"></a>
+### Nested Schema for `template_provider_details`
+
+Optional:
+
+- `cfn_template_provider_detail` (Attributes) CloudFormation template provider details for a SageMaker project. (see [below for nested schema](#nestedatt--template_provider_details--cfn_template_provider_detail))
+
+<a id="nestedatt--template_provider_details--cfn_template_provider_detail"></a>
+### Nested Schema for `template_provider_details.cfn_template_provider_detail`
+
+Optional:
+
+- `parameters` (Attributes List) A list of parameters used in the CloudFormation template. (see [below for nested schema](#nestedatt--template_provider_details--cfn_template_provider_detail--parameters))
+- `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role used by the template provider.
+- `template_name` (String) The name of the template used for the project.
+- `template_url` (String) The URL of the CloudFormation template.
+
+<a id="nestedatt--template_provider_details--cfn_template_provider_detail--parameters"></a>
+### Nested Schema for `template_provider_details.cfn_template_provider_detail.parameters`
+
+Optional:
+
+- `key` (String) The key of the parameter.
+- `value` (String) The value of the parameter.
 
 ## Import
 

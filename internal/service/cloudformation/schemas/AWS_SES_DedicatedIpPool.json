@@ -2,6 +2,28 @@
   "typeName": "AWS::SES::DedicatedIpPool",
   "description": "Resource Type definition for AWS::SES::DedicatedIpPool",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ses.git",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
   "properties": {
     "PoolName": {
       "type": "string",
@@ -12,6 +34,16 @@
       "type": "string",
       "description": "Specifies whether the dedicated IP pool is managed or not. The default value is STANDARD.",
       "pattern": "^(STANDARD|MANAGED)$"
+    },
+    "Tags": {
+      "description": "The tags (keys and values) associated with the dedicated IP pool.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 50
     }
   },
   "additionalProperties": false,
@@ -24,24 +56,42 @@
   "primaryIdentifier": [
     "/properties/PoolName"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ses:TagResource",
+      "ses:UntagResource",
+      "ses:ListTagsForResource"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
         "ses:CreateDedicatedIpPool",
         "ses:GetDedicatedIpPool",
-        "ses:GetDedicatedIps"
+        "ses:GetDedicatedIps",
+        "ses:TagResource",
+        "ses:UntagResource"
       ]
     },
     "read": {
       "permissions": [
         "ses:GetDedicatedIpPool",
-        "ses:GetDedicatedIps"
+        "ses:GetDedicatedIps",
+        "ses:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
         "ses:PutDedicatedIpPoolScalingAttributes",
-        "ses:GetDedicatedIpPool"
+        "ses:GetDedicatedIpPool",
+        "ses:TagResource",
+        "ses:UntagResource",
+        "ses:ListTagsForResource"
       ]
     },
     "delete": {

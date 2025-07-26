@@ -88,7 +88,8 @@ func accountPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	    "DATA_PROTECTION_POLICY",
 		//	    "SUBSCRIPTION_FILTER_POLICY",
 		//	    "FIELD_INDEX_POLICY",
-		//	    "TRANSFORMER_POLICY"
+		//	    "TRANSFORMER_POLICY",
+		//	    "METRIC_EXTRACTION_POLICY"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -101,6 +102,7 @@ func accountPolicyResource(ctx context.Context) (resource.Resource, error) {
 					"SUBSCRIPTION_FILTER_POLICY",
 					"FIELD_INDEX_POLICY",
 					"TRANSFORMER_POLICY",
+					"METRIC_EXTRACTION_POLICY",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
