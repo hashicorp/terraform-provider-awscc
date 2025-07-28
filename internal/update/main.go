@@ -399,7 +399,7 @@ func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchema
 	for i := range currAllSchemas.Resources {
 		// Check if the resource type can be provisioned via CloudFormation
 		flag, err := validateResourceType(ctx, currAllSchemas.Resources[i].CloudFormationTypeName)
-		if err != nil {
+		if err != nil && !strings.Contains(err.Error(), "TypeNotFoundException") {
 			if strings.Contains(err.Error(), "api error Throttling: Rate exceeded") {
 				log.Printf("Throttling error encountered, retrying in %d seconds...", timer)
 				time.Sleep(time.Duration(timer) * time.Second)
