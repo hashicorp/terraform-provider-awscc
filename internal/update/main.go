@@ -419,7 +419,7 @@ func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchema
 			}
 			return fmt.Errorf("failed to check if resource %s is provisionable: %w", currAllSchemas.Resources[i].CloudFormationTypeName, err)
 		}
-
+		timer = 5 // Reset timer on successful check
 		// Suppress resources that are not provisionable
 		if !flag {
 			currAllSchemas.Resources[i].SuppressResourceGeneration = true
