@@ -117,7 +117,7 @@ func run() error {
 
 	// Run make tools for tool dependencies
 	log.Printf("Running make tools")
-	err = execCommand("make", " ", "tools")
+	err = execCommand("make", "tools")
 	if err != nil {
 		return fmt.Errorf("failed to run 'make tools': %w", err)
 	}
