@@ -1,3 +1,6 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 // Package main provides functionality for building and processing Terraform provider components.
 // This file contains make build orchestration and error handling for schema generation,
 // resource creation, and data source generation.
