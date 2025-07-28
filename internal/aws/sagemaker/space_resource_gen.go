@@ -316,6 +316,18 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 		//	              "FileSystemId"
 		//	            ],
 		//	            "type": "object"
+		//	          },
+		//	          "S3FileSystem": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "S3Uri": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 0,
+		//	                "pattern": "(s3)://([^/]+)/?(.*)",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -727,6 +739,22 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "RemoteAccess": {
+		//	      "description": "This is a flag used to indicate if remote access is enabled.",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SpaceManagedResources": {
+		//	      "description": "This is a flag used to indicate if space managed resources needs to be created.",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "SpaceStorageSettings": {
 		//	      "additionalProperties": false,
 		//	      "description": "Default storage settings for a space.",
@@ -980,6 +1008,28 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 											stringvalidator.LengthBetween(11, 21),
 											stringvalidator.RegexMatches(regexp.MustCompile("^(fs-[0-9a-f]{8,})$"), ""),
 											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: S3FileSystem
+							"s3_file_system": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: S3Uri
+									"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(0, 1024),
+											stringvalidator.RegexMatches(regexp.MustCompile("(s3)://([^/]+)/?(.*)"), ""),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
@@ -1564,6 +1614,36 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: RemoteAccess
+				"remote_access": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "This is a flag used to indicate if remote access is enabled.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ENABLED",
+							"DISABLED",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SpaceManagedResources
+				"space_managed_resources": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "This is a flag used to indicate if space managed resources needs to be created.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ENABLED",
+							"DISABLED",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: SpaceStorageSettings
 				"space_storage_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1783,12 +1863,16 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 		"lifecycle_config_arns":        "LifecycleConfigArns",
 		"owner_user_profile_name":      "OwnerUserProfileName",
 		"ownership_settings":           "OwnershipSettings",
+		"remote_access":                "RemoteAccess",
 		"repository_url":               "RepositoryUrl",
+		"s3_file_system":               "S3FileSystem",
+		"s3_uri":                       "S3Uri",
 		"sage_maker_image_arn":         "SageMakerImageArn",
 		"sage_maker_image_version_arn": "SageMakerImageVersionArn",
 		"sharing_type":                 "SharingType",
 		"space_arn":                    "SpaceArn",
 		"space_display_name":           "SpaceDisplayName",
+		"space_managed_resources":      "SpaceManagedResources",
 		"space_name":                   "SpaceName",
 		"space_settings":               "SpaceSettings",
 		"space_sharing_settings":       "SpaceSharingSettings",

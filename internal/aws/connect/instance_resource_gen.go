@@ -69,8 +69,28 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "Boolean flag which enables EARLY_MEDIA on an instance.",
 		//	      "type": "boolean"
 		//	    },
+		//	    "EnhancedChatMonitoring": {
+		//	      "description": "Boolean flag which enables ENHANCED_CHAT_MONITORING on an instance.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "EnhancedContactMonitoring": {
+		//	      "description": "Boolean flag which enables ENHANCED_CONTACT_MONITORING on an instance.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "HighVolumeOutBound": {
+		//	      "description": "Boolean flag which enables HIGH_VOLUME_OUTBOUND on an instance.",
+		//	      "type": "boolean"
+		//	    },
 		//	    "InboundCalls": {
 		//	      "description": "Mandatory element which enables inbound calls on new instance.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "MultiPartyChatConference": {
+		//	      "description": "Boolean flag which enables MULTI_PARTY_CHAT_CONFERENCE on an instance.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "MultiPartyConference": {
+		//	      "description": "Boolean flag which enables MULTI_PARTY_CONFERENCE on an instance.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "OutboundCalls": {
@@ -126,10 +146,55 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: EnhancedChatMonitoring
+				"enhanced_chat_monitoring": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Boolean flag which enables ENHANCED_CHAT_MONITORING on an instance.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EnhancedContactMonitoring
+				"enhanced_contact_monitoring": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Boolean flag which enables ENHANCED_CONTACT_MONITORING on an instance.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: HighVolumeOutBound
+				"high_volume_out_bound": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Boolean flag which enables HIGH_VOLUME_OUTBOUND on an instance.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: InboundCalls
 				"inbound_calls": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Mandatory element which enables inbound calls on new instance.",
 					Required:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MultiPartyChatConference
+				"multi_party_chat_conference": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Boolean flag which enables MULTI_PARTY_CHAT_CONFERENCE on an instance.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MultiPartyConference
+				"multi_party_conference": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Boolean flag which enables MULTI_PARTY_CONFERENCE on an instance.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: OutboundCalls
 				"outbound_calls": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -376,25 +441,30 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::Instance").WithTerraformTypeName("awscc_connect_instance")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                      "Arn",
-		"attributes":               "Attributes",
-		"auto_resolve_best_voices": "AutoResolveBestVoices",
-		"contact_lens":             "ContactLens",
-		"contactflow_logs":         "ContactflowLogs",
-		"created_time":             "CreatedTime",
-		"directory_id":             "DirectoryId",
-		"early_media":              "EarlyMedia",
-		"identity_management_type": "IdentityManagementType",
-		"inbound_calls":            "InboundCalls",
-		"instance_alias":           "InstanceAlias",
-		"instance_id":              "Id",
-		"instance_status":          "InstanceStatus",
-		"key":                      "Key",
-		"outbound_calls":           "OutboundCalls",
-		"service_role":             "ServiceRole",
-		"tags":                     "Tags",
-		"use_custom_tts_voices":    "UseCustomTTSVoices",
-		"value":                    "Value",
+		"arn":                         "Arn",
+		"attributes":                  "Attributes",
+		"auto_resolve_best_voices":    "AutoResolveBestVoices",
+		"contact_lens":                "ContactLens",
+		"contactflow_logs":            "ContactflowLogs",
+		"created_time":                "CreatedTime",
+		"directory_id":                "DirectoryId",
+		"early_media":                 "EarlyMedia",
+		"enhanced_chat_monitoring":    "EnhancedChatMonitoring",
+		"enhanced_contact_monitoring": "EnhancedContactMonitoring",
+		"high_volume_out_bound":       "HighVolumeOutBound",
+		"identity_management_type":    "IdentityManagementType",
+		"inbound_calls":               "InboundCalls",
+		"instance_alias":              "InstanceAlias",
+		"instance_id":                 "Id",
+		"instance_status":             "InstanceStatus",
+		"key":                         "Key",
+		"multi_party_chat_conference": "MultiPartyChatConference",
+		"multi_party_conference":      "MultiPartyConference",
+		"outbound_calls":              "OutboundCalls",
+		"service_role":                "ServiceRole",
+		"tags":                        "Tags",
+		"use_custom_tts_voices":       "UseCustomTTSVoices",
+		"value":                       "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

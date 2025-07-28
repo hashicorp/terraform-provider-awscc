@@ -3,12 +3,12 @@
 page_title: "awscc_redshift_cluster_subnet_group Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Specifies an Amazon Redshift subnet group.
+  Resource Type definition for AWS::Redshift::ClusterSubnetGroup. Specifies an Amazon Redshift subnet group.
 ---
 
 # awscc_redshift_cluster_subnet_group (Resource)
 
-Specifies an Amazon Redshift subnet group.
+Resource Type definition for AWS::Redshift::ClusterSubnetGroup. Specifies an Amazon Redshift subnet group.
 
 
 

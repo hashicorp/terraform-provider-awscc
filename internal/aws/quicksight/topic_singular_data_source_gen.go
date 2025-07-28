@@ -1954,6 +1954,54 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "\u003cp\u003eThe key or keys of the key-value pairs for the resource tag or tags assigned to the\n            resource.\u003c/p\u003e",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "\u003cp\u003eTag key.\u003c/p\u003e",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "\u003cp\u003eTag value.\u003c/p\u003e",
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 200,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>Tag key.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>Tag value.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TopicId
 		// CloudFormation resource type schema:
 		//
@@ -2058,6 +2106,7 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"inclusive":                        "Inclusive",
 		"inverse":                          "Inverse",
 		"is_included_in_topic":             "IsIncludedInTopic",
+		"key":                              "Key",
 		"maximum":                          "Maximum",
 		"metric":                           "Metric",
 		"minimum":                          "Minimum",
@@ -2085,6 +2134,7 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"sub_type_name":                    "SubTypeName",
 		"suffix":                           "Suffix",
 		"synonyms":                         "Synonyms",
+		"tags":                             "Tags",
 		"time_granularity":                 "TimeGranularity",
 		"topic_id":                         "TopicId",
 		"treat_undefined_specified_values": "TreatUndefinedSpecifiedValues",
@@ -2097,6 +2147,7 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"use_grouping":                     "UseGrouping",
 		"use_ordering":                     "UseOrdering",
 		"user_experience_version":          "UserExperienceVersion",
+		"value":                            "Value",
 		"value_list":                       "ValueList",
 	})
 

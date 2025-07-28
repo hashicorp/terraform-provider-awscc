@@ -53,7 +53,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The instance capacity distribution across Availability Zones.",
 		//	  "properties": {
 		//	    "CapacityDistributionStrategy": {
-		//	      "description": "If launches fail in an Availability Zone, the following strategies are available. The default is ``balanced-best-effort``. \n  +   ``balanced-only`` - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.\n  +   ``balanced-best-effort`` - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.",
+		//	      "description": "If launches fail in an Availability Zone, the following strategies are available. The default is ``balanced-best-effort``. \n  +  ``balanced-only`` - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.\n  +  ``balanced-best-effort`` - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.",
 		//	      "enum": [
 		//	        "balanced-best-effort",
 		//	        "balanced-only"
@@ -67,7 +67,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CapacityDistributionStrategy
 				"capacity_distribution_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "If launches fail in an Availability Zone, the following strategies are available. The default is ``balanced-best-effort``. \n  +   ``balanced-only`` - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.\n  +   ``balanced-best-effort`` - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.",
+					Description: "If launches fail in an Availability Zone, the following strategies are available. The default is ``balanced-best-effort``. \n  +  ``balanced-only`` - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.\n  +  ``balanced-best-effort`` - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -152,7 +152,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The capacity reservation specification.",
 		//	  "properties": {
 		//	    "CapacityReservationPreference": {
-		//	      "description": "The capacity reservation preference. The following options are available: \n  +   ``capacity-reservations-only`` - Auto Scaling will only launch instances into a Capacity Reservation or Capacity Reservation resource group. If capacity isn't available, instances will fail to launch.\n  +   ``capacity-reservations-first`` - Auto Scaling will try to launch instances into a Capacity Reservation or Capacity Reservation resource group first. If capacity isn't available, instances will run in On-Demand capacity.\n  +   ``none`` - Auto Scaling will not launch instances into a Capacity Reservation. Instances will run in On-Demand capacity. \n  +   ``default`` - Auto Scaling uses the Capacity Reservation preference from your launch template or an open Capacity Reservation.",
+		//	      "description": "The capacity reservation preference. The following options are available: \n  +  ``capacity-reservations-only`` - Auto Scaling will only launch instances into a Capacity Reservation or Capacity Reservation resource group. If capacity isn't available, instances will fail to launch.\n  +  ``capacity-reservations-first`` - Auto Scaling will try to launch instances into a Capacity Reservation or Capacity Reservation resource group first. If capacity isn't available, instances will run in On-Demand capacity.\n  +  ``none`` - Auto Scaling will not launch instances into a Capacity Reservation. Instances will run in On-Demand capacity. \n  +  ``default`` - Auto Scaling uses the Capacity Reservation preference from your launch template or an open Capacity Reservation.",
 		//	      "type": "string"
 		//	    },
 		//	    "CapacityReservationTarget": {
@@ -190,7 +190,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CapacityReservationPreference
 				"capacity_reservation_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The capacity reservation preference. The following options are available: \n  +   ``capacity-reservations-only`` - Auto Scaling will only launch instances into a Capacity Reservation or Capacity Reservation resource group. If capacity isn't available, instances will fail to launch.\n  +   ``capacity-reservations-first`` - Auto Scaling will try to launch instances into a Capacity Reservation or Capacity Reservation resource group first. If capacity isn't available, instances will run in On-Demand capacity.\n  +   ``none`` - Auto Scaling will not launch instances into a Capacity Reservation. Instances will run in On-Demand capacity. \n  +   ``default`` - Auto Scaling uses the Capacity Reservation preference from your launch template or an open Capacity Reservation.",
+					Description: "The capacity reservation preference. The following options are available: \n  +  ``capacity-reservations-only`` - Auto Scaling will only launch instances into a Capacity Reservation or Capacity Reservation resource group. If capacity isn't available, instances will fail to launch.\n  +  ``capacity-reservations-first`` - Auto Scaling will try to launch instances into a Capacity Reservation or Capacity Reservation resource group first. If capacity isn't available, instances will run in On-Demand capacity.\n  +  ``none`` - Auto Scaling will not launch instances into a Capacity Reservation. Instances will run in On-Demand capacity. \n  +  ``default`` - Auto Scaling uses the Capacity Reservation preference from your launch template or an open Capacity Reservation.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: CapacityReservationTarget
@@ -401,7 +401,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//
 		//	{
 		//	  "description": "One or more lifecycle hooks to add to the Auto Scaling group before instances are launched.",
-		//	  "insertionOrder": true,
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "``LifecycleHookSpecification`` specifies a lifecycle hook for the ``LifecycleHookSpecificationList`` property of the [AWS::AutoScaling::AutoScalingGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html) resource. A lifecycle hook specifies actions to perform when Amazon EC2 Auto Scaling launches or terminates instances. \n For more information, see [Amazon EC2 Auto Scaling lifecycle hooks](https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html) in the *Amazon EC2 Auto Scaling User Guide*. You can find a sample template snippet in the [Examples](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-as-lifecyclehook.html#aws-resource-as-lifecyclehook--examples) section of the ``AWS::AutoScaling::LifecycleHook`` resource.",
@@ -659,7 +659,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	          "insertionOrder": true,
 		//	          "items": {
 		//	            "additionalProperties": false,
-		//	            "description": "Use this structure to let Amazon EC2 Auto Scaling do the following when the Auto Scaling group has a mixed instances policy:\n  +  Override the instance type that is specified in the launch template.\n  +  Use multiple instance types.\n  \n Specify the instance types that you want, or define your instance requirements instead and let Amazon EC2 Auto Scaling provision the available instance types that meet your requirements. This can provide Amazon EC2 Auto Scaling with a larger selection of instance types to choose from when fulfilling Spot and On-Demand capacities. You can view which instance types are matched before you apply the instance requirements to your Auto Scaling group.\n After you define your instance requirements, you don't have to keep updating these settings to get new EC2 instance types automatically. Amazon EC2 Auto Scaling uses the instance requirements of the Auto Scaling group to determine whether a new EC2 instance type can be used.\n  ``LaunchTemplateOverrides`` is a property of the [AWS::AutoScaling::AutoScalingGroup LaunchTemplate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplate.html) property type.",
+		//	            "description": "Use this structure to let Amazon EC2 Auto Scaling do the following when the Auto Scaling group has a mixed instances policy:\n  +  Override the instance type that is specified in the launch template.\n  +  Use multiple instance types.\n  \n Specify the instance types that you want, or define your instance requirements instead and let Amazon EC2 Auto Scaling provision the available instance types that meet your requirements. This can provide Amazon EC2 Auto Scaling with a larger selection of instance types to choose from when fulfilling Spot and On-Demand capacities. You can view which instance types are matched before you apply the instance requirements to your Auto Scaling group.\n After you define your instance requirements, you don't have to keep updating these settings to get new EC2 instance types automatically. Amazon EC2 Auto Scaling uses the instance requirements of the Auto Scaling group to determine whether a new EC2 instance type can be used.\n ``LaunchTemplateOverrides`` is a property of the [AWS::AutoScaling::AutoScalingGroup LaunchTemplate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplate.html) property type.",
 		//	            "properties": {
 		//	              "InstanceRequirements": {
 		//	                "additionalProperties": false,
@@ -737,7 +737,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	                  },
 		//	                  "BaselineEbsBandwidthMbps": {
 		//	                    "additionalProperties": false,
-		//	                    "description": "The minimum and maximum baseline bandwidth performance for an instance type, in Mbps. For more information, see [Amazon EBS–optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the *Amazon EC2 User Guide for Linux Instances*.\n Default: No minimum or maximum limits",
+		//	                    "description": "The minimum and maximum baseline bandwidth performance for an instance type, in Mbps. For more information, see [Amazon EBS–optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the *Amazon EC2 User Guide*.\n Default: No minimum or maximum limits",
 		//	                    "properties": {
 		//	                      "Max": {
 		//	                        "description": "The maximum value in Mbps.",
@@ -782,11 +782,11 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	                    "type": "object"
 		//	                  },
 		//	                  "BurstablePerformance": {
-		//	                    "description": "Indicates whether burstable performance instance types are included, excluded, or required. For more information, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide for Linux Instances*.\n Default: ``excluded``",
+		//	                    "description": "Indicates whether burstable performance instance types are included, excluded, or required. For more information, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide*.\n Default: ``excluded``",
 		//	                    "type": "string"
 		//	                  },
 		//	                  "CpuManufacturers": {
-		//	                    "description": "Lists which specific CPU manufacturers to include.\n  +  For instance types with Intel CPUs, specify ``intel``.\n  +  For instance types with AMD CPUs, specify ``amd``.\n  +  For instance types with AWS CPUs, specify ``amazon-web-services``.\n  \n  Don't confuse the CPU hardware manufacturer with the CPU hardware architecture. Instances will be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you specify in your launch template. \n  Default: Any manufacturer",
+		//	                    "description": "Lists which specific CPU manufacturers to include.\n  +  For instance types with Intel CPUs, specify ``intel``.\n  +  For instance types with AMD CPUs, specify ``amd``.\n  +  For instance types with AWS CPUs, specify ``amazon-web-services``.\n  +  For instance types with Apple CPUs, specify ``apple``.\n  \n  Don't confuse the CPU hardware manufacturer with the CPU hardware architecture. Instances will be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you specify in your launch template. \n  Default: Any manufacturer",
 		//	                    "insertionOrder": false,
 		//	                    "items": {
 		//	                      "type": "string"
@@ -804,7 +804,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	                    "uniqueItems": true
 		//	                  },
 		//	                  "InstanceGenerations": {
-		//	                    "description": "Indicates whether current or previous generation instance types are included.\n  +  For current generation instance types, specify ``current``. The current generation includes EC2 instance types currently recommended for use. This typically includes the latest two to three generations in each instance family. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide for Linux Instances*.\n  +  For previous generation instance types, specify ``previous``.\n  \n Default: Any current or previous generation",
+		//	                    "description": "Indicates whether current or previous generation instance types are included.\n  +  For current generation instance types, specify ``current``. The current generation includes EC2 instance types currently recommended for use. This typically includes the latest two to three generations in each instance family. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide*.\n  +  For previous generation instance types, specify ``previous``.\n  \n Default: Any current or previous generation",
 		//	                    "insertionOrder": false,
 		//	                    "items": {
 		//	                      "type": "string"
@@ -813,7 +813,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	                    "uniqueItems": true
 		//	                  },
 		//	                  "LocalStorage": {
-		//	                    "description": "Indicates whether instance types with instance store volumes are included, excluded, or required. For more information, see [Amazon EC2 instance store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in the *Amazon EC2 User Guide for Linux Instances*.\n Default: ``included``",
+		//	                    "description": "Indicates whether instance types with instance store volumes are included, excluded, or required. For more information, see [Amazon EC2 instance store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in the *Amazon EC2 User Guide*.\n Default: ``included``",
 		//	                    "type": "string"
 		//	                  },
 		//	                  "LocalStorageTypes": {
@@ -939,7 +939,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	                "type": "object"
 		//	              },
 		//	              "InstanceType": {
-		//	                "description": "The instance type, such as ``m3.xlarge``. You must specify an instance type that is supported in your requested Region and Availability Zones. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide for Linux Instances*.\n You can specify up to 40 instance types per Auto Scaling group.",
+		//	                "description": "The instance type, such as ``m3.xlarge``. You must specify an instance type that is supported in your requested Region and Availability Zones. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide*.\n You can specify up to 40 instance types per Auto Scaling group.",
 		//	                "type": "string"
 		//	              },
 		//	              "LaunchTemplateSpecification": {
@@ -1134,7 +1134,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 														Computed:    true,
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
-												Description: "The minimum and maximum baseline bandwidth performance for an instance type, in Mbps. For more information, see [Amazon EBS–optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the *Amazon EC2 User Guide for Linux Instances*.\n Default: No minimum or maximum limits",
+												Description: "The minimum and maximum baseline bandwidth performance for an instance type, in Mbps. For more information, see [Amazon EBS–optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the *Amazon EC2 User Guide*.\n Default: No minimum or maximum limits",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: BaselinePerformanceFactors
@@ -1167,13 +1167,13 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 											}, /*END ATTRIBUTE*/
 											// Property: BurstablePerformance
 											"burstable_performance": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Indicates whether burstable performance instance types are included, excluded, or required. For more information, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide for Linux Instances*.\n Default: ``excluded``",
+												Description: "Indicates whether burstable performance instance types are included, excluded, or required. For more information, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide*.\n Default: ``excluded``",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: CpuManufacturers
 											"cpu_manufacturers": schema.SetAttribute{ /*START ATTRIBUTE*/
 												ElementType: types.StringType,
-												Description: "Lists which specific CPU manufacturers to include.\n  +  For instance types with Intel CPUs, specify ``intel``.\n  +  For instance types with AMD CPUs, specify ``amd``.\n  +  For instance types with AWS CPUs, specify ``amazon-web-services``.\n  \n  Don't confuse the CPU hardware manufacturer with the CPU hardware architecture. Instances will be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you specify in your launch template. \n  Default: Any manufacturer",
+												Description: "Lists which specific CPU manufacturers to include.\n  +  For instance types with Intel CPUs, specify ``intel``.\n  +  For instance types with AMD CPUs, specify ``amd``.\n  +  For instance types with AWS CPUs, specify ``amazon-web-services``.\n  +  For instance types with Apple CPUs, specify ``apple``.\n  \n  Don't confuse the CPU hardware manufacturer with the CPU hardware architecture. Instances will be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you specify in your launch template. \n  Default: Any manufacturer",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: ExcludedInstanceTypes
@@ -1185,12 +1185,12 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 											// Property: InstanceGenerations
 											"instance_generations": schema.SetAttribute{ /*START ATTRIBUTE*/
 												ElementType: types.StringType,
-												Description: "Indicates whether current or previous generation instance types are included.\n  +  For current generation instance types, specify ``current``. The current generation includes EC2 instance types currently recommended for use. This typically includes the latest two to three generations in each instance family. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide for Linux Instances*.\n  +  For previous generation instance types, specify ``previous``.\n  \n Default: Any current or previous generation",
+												Description: "Indicates whether current or previous generation instance types are included.\n  +  For current generation instance types, specify ``current``. The current generation includes EC2 instance types currently recommended for use. This typically includes the latest two to three generations in each instance family. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide*.\n  +  For previous generation instance types, specify ``previous``.\n  \n Default: Any current or previous generation",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: LocalStorage
 											"local_storage": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Indicates whether instance types with instance store volumes are included, excluded, or required. For more information, see [Amazon EC2 instance store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in the *Amazon EC2 User Guide for Linux Instances*.\n Default: ``included``",
+												Description: "Indicates whether instance types with instance store volumes are included, excluded, or required. For more information, see [Amazon EC2 instance store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in the *Amazon EC2 User Guide*.\n Default: ``included``",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: LocalStorageTypes
@@ -1327,7 +1327,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 									}, /*END ATTRIBUTE*/
 									// Property: InstanceType
 									"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The instance type, such as ``m3.xlarge``. You must specify an instance type that is supported in your requested Region and Availability Zones. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide for Linux Instances*.\n You can specify up to 40 instance types per Auto Scaling group.",
+										Description: "The instance type, such as ``m3.xlarge``. You must specify an instance type that is supported in your requested Region and Availability Zones. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide*.\n You can specify up to 40 instance types per Auto Scaling group.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: LaunchTemplateSpecification
@@ -1389,7 +1389,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "A structure that specifies an Amazon SNS notification configuration for the ``NotificationConfigurations`` property of the [AWS::AutoScaling::AutoScalingGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html) resource.\n For an example template snippet, see [Configure Amazon EC2 Auto Scaling resources](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-ec2-auto-scaling.html).\n For more information, see [Get Amazon SNS notifications when your Auto Scaling group scales](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ASGettingNotifications.html) in the *Amazon EC2 Auto Scaling User Guide*.",
 		//	  "properties": {
 		//	    "NotificationTypes": {
-		//	      "description": "A list of event types that send a notification. Event types can include any of the following types. \n  *Allowed values*:\n  +   ``autoscaling:EC2_INSTANCE_LAUNCH`` \n  +   ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR`` \n  +   ``autoscaling:TEST_NOTIFICATION``",
+		//	      "description": "A list of event types that send a notification. Event types can include any of the following types. \n *Allowed values*:\n  +   ``autoscaling:EC2_INSTANCE_LAUNCH`` \n  +   ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR`` \n  +   ``autoscaling:TEST_NOTIFICATION``",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -1415,7 +1415,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 				// Property: NotificationTypes
 				"notification_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "A list of event types that send a notification. Event types can include any of the following types. \n  *Allowed values*:\n  +   ``autoscaling:EC2_INSTANCE_LAUNCH`` \n  +   ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR`` \n  +   ``autoscaling:TEST_NOTIFICATION``",
+					Description: "A list of event types that send a notification. Event types can include any of the following types. \n *Allowed values*:\n  +   ``autoscaling:EC2_INSTANCE_LAUNCH`` \n  +   ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR`` \n  +   ``autoscaling:TEST_NOTIFICATION``",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TopicARN
@@ -1438,7 +1438,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	    "description": "A structure that specifies an Amazon SNS notification configuration for the ``NotificationConfigurations`` property of the [AWS::AutoScaling::AutoScalingGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html) resource.\n For an example template snippet, see [Configure Amazon EC2 Auto Scaling resources](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-ec2-auto-scaling.html).\n For more information, see [Get Amazon SNS notifications when your Auto Scaling group scales](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ASGettingNotifications.html) in the *Amazon EC2 Auto Scaling User Guide*.",
 		//	    "properties": {
 		//	      "NotificationTypes": {
-		//	        "description": "A list of event types that send a notification. Event types can include any of the following types. \n  *Allowed values*:\n  +   ``autoscaling:EC2_INSTANCE_LAUNCH`` \n  +   ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR`` \n  +   ``autoscaling:TEST_NOTIFICATION``",
+		//	        "description": "A list of event types that send a notification. Event types can include any of the following types. \n *Allowed values*:\n  +   ``autoscaling:EC2_INSTANCE_LAUNCH`` \n  +   ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR`` \n  +   ``autoscaling:TEST_NOTIFICATION``",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -1468,7 +1468,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 					// Property: NotificationTypes
 					"notification_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "A list of event types that send a notification. Event types can include any of the following types. \n  *Allowed values*:\n  +   ``autoscaling:EC2_INSTANCE_LAUNCH`` \n  +   ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR`` \n  +   ``autoscaling:TEST_NOTIFICATION``",
+						Description: "A list of event types that send a notification. Event types can include any of the following types. \n *Allowed values*:\n  +   ``autoscaling:EC2_INSTANCE_LAUNCH`` \n  +   ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR`` \n  +   ``autoscaling:TEST_NOTIFICATION``",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TopicARN
@@ -1485,11 +1485,11 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of the placement group into which to launch your instances. For more information, see [Placement groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in the *Amazon EC2 User Guide for Linux Instances*.\n  A *cluster* placement group is a logical grouping of instances within a single Availability Zone. You cannot specify multiple Availability Zones and a cluster placement group.",
+		//	  "description": "The name of the placement group into which to launch your instances. For more information, see [Placement groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in the *Amazon EC2 User Guide*.\n  A *cluster* placement group is a logical grouping of instances within a single Availability Zone. You cannot specify multiple Availability Zones and a cluster placement group.",
 		//	  "type": "string"
 		//	}
 		"placement_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the placement group into which to launch your instances. For more information, see [Placement groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in the *Amazon EC2 User Guide for Linux Instances*.\n  A *cluster* placement group is a logical grouping of instances within a single Availability Zone. You cannot specify multiple Availability Zones and a cluster placement group.",
+			Description: "The name of the placement group into which to launch your instances. For more information, see [Placement groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in the *Amazon EC2 User Guide*.\n  A *cluster* placement group is a logical grouping of instances within a single Availability Zone. You cannot specify multiple Availability Zones and a cluster placement group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceLinkedRoleARN
@@ -1614,11 +1614,11 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	    "description": "Identifying information for a traffic source.",
 		//	    "properties": {
 		//	      "Identifier": {
-		//	        "description": "Identifies the traffic source.\n For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.\n For example: \n  +  Application Load Balancer ARN: ``arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/1234567890123456`` \n  +  Classic Load Balancer name: ``my-classic-load-balancer`` \n  +  VPC Lattice ARN: ``arn:aws:vpc-lattice:us-west-2:123456789012:targetgroup/tg-1234567890123456`` \n  \n To get the ARN of a target group for a Application Load Balancer, Gateway Load Balancer, or Network Load Balancer, or the name of a Classic Load Balancer, use the Elastic Load Balancing [DescribeTargetGroups](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html) and [DescribeLoadBalancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html) API operations.\n To get the ARN of a target group for VPC Lattice, use the VPC Lattice [GetTargetGroup](https://docs.aws.amazon.com/vpc-lattice/latest/APIReference/API_GetTargetGroup.html) API operation.",
+		//	        "description": "Identifies the traffic source.\n For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.\n For example: \n  +  Application Load Balancer ARN: ``arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/1234567890123456``\n  +  Classic Load Balancer name: ``my-classic-load-balancer``\n  +  VPC Lattice ARN: ``arn:aws:vpc-lattice:us-west-2:123456789012:targetgroup/tg-1234567890123456``\n  \n To get the ARN of a target group for a Application Load Balancer, Gateway Load Balancer, or Network Load Balancer, or the name of a Classic Load Balancer, use the Elastic Load Balancing [DescribeTargetGroups](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html) and [DescribeLoadBalancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html) API operations.\n To get the ARN of a target group for VPC Lattice, use the VPC Lattice [GetTargetGroup](https://docs.aws.amazon.com/vpc-lattice/latest/APIReference/API_GetTargetGroup.html) API operation.",
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
-		//	        "description": "Provides additional context for the value of ``Identifier``.\n The following lists the valid values:\n  +   ``elb`` if ``Identifier`` is the name of a Classic Load Balancer.\n  +   ``elbv2`` if ``Identifier`` is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.\n  +   ``vpc-lattice`` if ``Identifier`` is the ARN of a VPC Lattice target group.\n  \n Required if the identifier is the name of a Classic Load Balancer.",
+		//	        "description": "Provides additional context for the value of ``Identifier``.\n The following lists the valid values:\n  +  ``elb`` if ``Identifier`` is the name of a Classic Load Balancer.\n  +  ``elbv2`` if ``Identifier`` is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.\n  +  ``vpc-lattice`` if ``Identifier`` is the ARN of a VPC Lattice target group.\n  \n Required if the identifier is the name of a Classic Load Balancer.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -1636,12 +1636,12 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Identifier
 					"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Identifies the traffic source.\n For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.\n For example: \n  +  Application Load Balancer ARN: ``arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/1234567890123456`` \n  +  Classic Load Balancer name: ``my-classic-load-balancer`` \n  +  VPC Lattice ARN: ``arn:aws:vpc-lattice:us-west-2:123456789012:targetgroup/tg-1234567890123456`` \n  \n To get the ARN of a target group for a Application Load Balancer, Gateway Load Balancer, or Network Load Balancer, or the name of a Classic Load Balancer, use the Elastic Load Balancing [DescribeTargetGroups](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html) and [DescribeLoadBalancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html) API operations.\n To get the ARN of a target group for VPC Lattice, use the VPC Lattice [GetTargetGroup](https://docs.aws.amazon.com/vpc-lattice/latest/APIReference/API_GetTargetGroup.html) API operation.",
+						Description: "Identifies the traffic source.\n For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.\n For example: \n  +  Application Load Balancer ARN: ``arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/1234567890123456``\n  +  Classic Load Balancer name: ``my-classic-load-balancer``\n  +  VPC Lattice ARN: ``arn:aws:vpc-lattice:us-west-2:123456789012:targetgroup/tg-1234567890123456``\n  \n To get the ARN of a target group for a Application Load Balancer, Gateway Load Balancer, or Network Load Balancer, or the name of a Classic Load Balancer, use the Elastic Load Balancing [DescribeTargetGroups](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html) and [DescribeLoadBalancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html) API operations.\n To get the ARN of a target group for VPC Lattice, use the VPC Lattice [GetTargetGroup](https://docs.aws.amazon.com/vpc-lattice/latest/APIReference/API_GetTargetGroup.html) API operation.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Provides additional context for the value of ``Identifier``.\n The following lists the valid values:\n  +   ``elb`` if ``Identifier`` is the name of a Classic Load Balancer.\n  +   ``elbv2`` if ``Identifier`` is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.\n  +   ``vpc-lattice`` if ``Identifier`` is the ARN of a VPC Lattice target group.\n  \n Required if the identifier is the name of a Classic Load Balancer.",
+						Description: "Provides additional context for the value of ``Identifier``.\n The following lists the valid values:\n  +  ``elb`` if ``Identifier`` is the name of a Classic Load Balancer.\n  +  ``elbv2`` if ``Identifier`` is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.\n  +  ``vpc-lattice`` if ``Identifier`` is the ARN of a VPC Lattice target group.\n  \n Required if the identifier is the name of a Classic Load Balancer.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/

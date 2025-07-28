@@ -241,6 +241,19 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"identity_provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: IpAddressType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "IPV4",
+		//	    "DUALSTACK"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: LoggingRole
 		// CloudFormation resource type schema:
 		//
@@ -627,6 +640,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"identity_provider_details":                "IdentityProviderDetails",
 		"identity_provider_type":                   "IdentityProviderType",
 		"invocation_role":                          "InvocationRole",
+		"ip_address_type":                          "IpAddressType",
 		"key":                                      "Key",
 		"logging_role":                             "LoggingRole",
 		"on_partial_upload":                        "OnPartialUpload",
