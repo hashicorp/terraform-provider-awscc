@@ -389,7 +389,7 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHu
 	issueURL := ""
 
 	// Add to all_schemas.hcl
-	if buildType != BuildTypeSchemas || new {
+	if buildType != BuildTypeSchemas || new || strings.Contains(schemaError, "TypeNotFoundException") {
 		tfTypeName, err := cfTypeNameToTerraformTypeName(cfTypeName)
 		log.Printf("Converting CloudFormation type name to Terraform type name: %s -> %s", cfTypeName, tfTypeName)
 		if tfTypeName == "" && cfTypeName != "" {
