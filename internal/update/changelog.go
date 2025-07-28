@@ -1,3 +1,6 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 // Package main provides changelog generation and management functionality.
 // This file handles creating and updating changelog entries for new resources,
 // data sources, and schema changes in the Terraform provider.

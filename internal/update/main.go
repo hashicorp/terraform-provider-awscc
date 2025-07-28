@@ -1,3 +1,6 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 // Package main provides tools for updating AWS CloudFormation schemas and Terraform resources.
 // It automates the process of fetching new schemas, generating resources and data sources,
 // running tests, and creating pull requests with the changes.
