@@ -115,6 +115,13 @@ func run() error {
 	// Create a unique branch name for this update run
 	branchName := fmt.Sprintf(BranchNameFormat, rand.Intn(BranchNameMaxRandom))
 
+	// Run make tools for tool dependencies
+	log.Printf("Running make tools")
+	err = execCommand("make", " ", "tools")
+	if err != nil {
+		return fmt.Errorf("failed to run 'make tools': %w", err)
+	}
+
 	// Track which resources are new for suppression logic
 	isNewMap := make(map[string]bool)
 
@@ -245,19 +252,22 @@ func run() error {
 
 	// Step 5: Build and test the provider
 	// Validate the provider builds successfully
+	log.Printf("Building provider with 'make %s'...", MakeBuildCmd)
 	err = execCommand("make", MakeBuildCmd)
 	if err != nil {
 		return fmt.Errorf("failed to build provider: %w", err)
 	}
 
 	// Run acceptance tests and capture output for PR description
+	log.Printf("Running acceptance tests with 'make %s'...", MakeTestAccCmd)
 	AcceptanceTestResults, err = RunAcceptanceTests()
 	if err != nil {
 		log.Printf("Warning: Acceptance tests had issues: %v", err)
 		// We continue even if there are test failures to include results in PR
 	}
 
-	// Generate updated documentation
+	// Generate updated documentation]
+	log.Printf("Generating documentation with 'make %s'...", MakeDocsAllCmd)
 	err = execCommand("make", MakeDocsAllCmd)
 	if err != nil {
 		return fmt.Errorf("failed to generate documentation: %w", err)
