@@ -130,6 +130,13 @@ func run() error {
 		return fmt.Errorf("failed to create and checkout branch %s: %w", branchName, err)
 	}
 
+	// Generate updated documentation]
+	log.Printf("Generating documentation with 'make %s'...", MakeDocsAllCmd)
+	err = execCommand("make", MakeDocsAllCmd)
+	if err != nil {
+		return fmt.Errorf("failed to generate documentation: %w", err)
+	}
+
 	// Remove existing CloudFormation schema files to start fresh
 	matches, err := filepath.Glob(filePaths.AwsSchemas)
 	if err != nil {
@@ -264,13 +271,6 @@ func run() error {
 	if err != nil {
 		log.Printf("Warning: Acceptance tests had issues: %v", err)
 		// We continue even if there are test failures to include results in PR
-	}
-
-	// Generate updated documentation]
-	log.Printf("Generating documentation with 'make %s'...", MakeDocsAllCmd)
-	err = execCommand("make", MakeDocsAllCmd)
-	if err != nil {
-		return fmt.Errorf("failed to generate documentation: %w", err)
 	}
 
 	// Commit documentation changes
