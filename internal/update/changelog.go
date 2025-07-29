@@ -327,8 +327,11 @@ func updateVersionFile(filePaths *UpdateFilePaths) error {
 	if versionNumber > 999 {
 		return fmt.Errorf("version number %d exceeds maximum allowed value", versionNumber)
 	}
-	newVersionStr := fmt.Sprintf("c\n%d.%d.%d", versionNumber, versionNumber, 0)
+	versionNumberStr := strconv.Itoa(versionNumber)
+
+	newVersionStr := fmt.Sprintf("c\n%s.%s.%d", versionStr[0], versionNumberStr, 0)
 	log.Printf("Updating version file %s to new version: %s\n", filePaths.Version, newVersionStr)
+	fmt.Println(newVersionStr)
 	if err := os.WriteFile(filePaths.Version, []byte(newVersionStr), 0644); err != nil {
 		return fmt.Errorf("failed to write new version to %s: %w", filePaths.Version, err)
 	}
