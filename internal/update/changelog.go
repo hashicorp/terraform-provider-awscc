@@ -46,7 +46,7 @@ func generateDataSourceChanges(changes []string, filePaths *UpdateFilePaths) ([]
 	// Create lookup map for quick resource schema access by CloudFormation type name
 	cfTypeToResource := make(map[string]allschemas.ResourceAllSchema)
 	for _, resource := range allSchemas.Resources {
-		cfTypeToResource[resource.CloudFormationTypeName] = resource
+		cfTypeToResource[resource.ResourceTypeName] = resource
 	}
 
 	// Process each change and generate corresponding data source entries
@@ -90,8 +90,6 @@ func generateDataSourceChanges(changes []string, filePaths *UpdateFilePaths) ([]
 			} else {
 				log.Printf("  Singular data source suppressed for %s\n", resource)
 			}
-		} else {
-			newChanges = append(newChanges, change)
 		}
 	}
 
@@ -306,4 +304,34 @@ func parseAndIncrementVersion(changelogContent string) (string, error) {
 
 	// If no version found, start with a default
 	return "1.48.0", fmt.Errorf("no version found in changelog, using default")
+}
+
+func updateVersionFile(filePaths *UpdateFilePaths) error {
+	// 1.49.1
+	versionBytes, err := os.ReadFile(filePaths.Version)
+	if err != nil {
+		return fmt.Errorf("failed to read version file %s: %w", filePaths.Version, err)
+	}
+	versionStr := strings.Split(strings.TrimSpace(string(versionBytes)), ".")
+	if len(versionStr) == 0 || versionStr[0] == "" {
+		return fmt.Errorf("version file %s is empty", filePaths.Version)
+	}
+	// Example: parse versionStr as needed, e.g., "1.49.1"
+	// versionNumber := int(versionStr) // This line likely needs to be replaced with proper parsing logic
+
+	versionNumber, err := strconv.Atoi(versionStr[1])
+	if err != nil {
+		return fmt.Errorf("failed to parse version number from %s: %w", filePaths.Version, err)
+	}
+	versionNumber++ // Increment the version number
+	if versionNumber > 999 {
+		return fmt.Errorf("version number %d exceeds maximum allowed value", versionNumber)
+	}
+	newVersionStr := fmt.Sprintf("c\n%d.%d.%d", versionNumber, versionNumber, 0)
+	log.Printf("Updating version file %s to new version: %s\n", filePaths.Version, newVersionStr)
+	if err := os.WriteFile(filePaths.Version, []byte(newVersionStr), 0644); err != nil {
+		return fmt.Errorf("failed to write new version to %s: %w", filePaths.Version, err)
+	}
+	log.Printf("Successfully updated version file %s to %s\n", filePaths.Version, newVersionStr)
+	return nil
 }

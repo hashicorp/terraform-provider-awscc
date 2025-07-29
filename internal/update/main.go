@@ -115,6 +115,12 @@ func run() error {
 	// Create a unique branch name for this update run
 	branchName := fmt.Sprintf(BranchNameFormat, rand.Intn(BranchNameMaxRandom))
 
+	//Update version file
+	err = updateVersionFile(filePaths)
+	if err != nil {
+		return fmt.Errorf("failed to update version file: %w", err)
+	}
+
 	// Run make tools for tool dependencies
 	log.Printf("Running make tools")
 	err = execCommand("make", "tools")
@@ -383,6 +389,7 @@ type UpdateFilePaths struct {
 	LastResource             string `hcl:"lastresource"`               // Path to file tracking last processed resource
 	CloudFormationSchemasDir string `hcl:"cloudformation_schemas_dir"` // Directory for CloudFormation schemas
 	RepositoryLink           string `hcl:"repository_link"`            // GitHub repository URL
+	Version                  string `hcl:"version_file"`               // Version file path
 }
 
 // GetAcceptanceTestResults returns the captured acceptance test results.
