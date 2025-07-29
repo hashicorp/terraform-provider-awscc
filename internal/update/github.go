@@ -1,5 +1,6 @@
-// Package main provides GitHub integration functionality for creating pull requests
-// and managing repository interactions during the schema update process.
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 package main
 
 import (
