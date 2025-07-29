@@ -421,6 +421,7 @@ func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchema
 				log.Printf("throttling error encountered, retrying in %d seconds", timer)
 				for timer < 90 {
 					flag, err = validateResourceType(ctx, currAllSchemas.Resources[i].CloudFormationTypeName)
+					flag = flag
 					if err != nil && strings.Contains(err.Error(), "api error Throttling: Rate exceeded") {
 						log.Printf("throttling error encountered, retrying in %d seconds", timer)
 						time.Sleep(time.Duration(timer) * time.Second)
@@ -432,9 +433,9 @@ func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchema
 			}
 			return fmt.Errorf("failed to check if resource %s is provisionable: %w", currAllSchemas.Resources[i].CloudFormationTypeName, err)
 		}
-		timer = 5 // Reset timer on successful check
+		timer = 1 // Reset timer on successful check
 		// Suppress resources that are not provisionable
-		if !flag {
+		if !flag || strings.Contains(err.Error(), "TypeNotFoundException") {
 			currAllSchemas.Resources[i].SuppressResourceGeneration = true
 
 			// Create GitHub issue for tracking if client is available
