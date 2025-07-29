@@ -1,6 +1,6 @@
-// Package main provides HCL parsing and CloudFormation schema processing functionality.
-// This file contains utilities for parsing HCL configuration files, comparing schemas
-// between runs, and validating CloudFormation resource types.
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 package main
 
 import (

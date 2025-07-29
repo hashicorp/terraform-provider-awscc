@@ -1,6 +1,6 @@
-// Package main provides functionality for building and processing Terraform provider components.
-// This file contains make build orchestration and error handling for schema generation,
-// resource creation, and data source generation.
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 package main
 
 import (
@@ -379,19 +379,17 @@ func normalizeNames(cfTypeName string, tfTypeName string) (string, string) {
 
 func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHubConfig, new bool, buildType string, filePaths *UpdateFilePaths, allSchemas *allschemas.AllSchemas) error {
 	// Create a GitHub issue for the schema error
-	/*
-		issueURL, err := createIssue(ctx, cfTypeName, schemaError, config, filePaths.RepositoryLink)
-		if err != nil {
-			log.Printf("Warning: Failed to create GitHub issue: %v", err)
-			issueURL = "" // Use empty string if issue creation fails
-		}
-	*/
-	issueURL := ""
+
+	issueURL, err := createIssue(ctx, cfTypeName, schemaError, config, filePaths.RepositoryLink)
+	if err != nil {
+		log.Printf("Warning: Failed to create GitHub issue: %v", err)
+		issueURL = "" // Use empty string if issue creation fails
+	}
 
 	// Add to all_schemas.hcl
+	log.Println("Suppressing schema generation for", cfTypeName, "with error:", schemaError, "issue URL:", issueURL)
 	if buildType != BuildTypeSchemas || new || strings.Contains(schemaError, "TypeNotFoundException") {
 		tfTypeName, err := cfTypeNameToTerraformTypeName(cfTypeName)
-		log.Printf("Converting CloudFormation type name to Terraform type name: %s -> %s", cfTypeName, tfTypeName)
 		if tfTypeName == "" && cfTypeName != "" {
 			err = nil
 			tfTypeName = strings.ReplaceAll(cfTypeName, "::", "_")
@@ -438,7 +436,7 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHu
 		}
 	}
 
-	err := writeSchemasToHCLFile(allSchemas, filePaths.AllSchemasHCL)
+	err = writeSchemasToHCLFile(allSchemas, filePaths.AllSchemasHCL)
 	if err != nil {
 		return fmt.Errorf("failed to write schemas to HCL file: %w", err)
 	}

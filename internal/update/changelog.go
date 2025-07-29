@@ -1,6 +1,6 @@
-// Package main provides changelog generation and management functionality.
-// This file handles creating and updating changelog entries for new resources,
-// data sources, and schema changes in the Terraform provider.
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 package main
 
 import (
@@ -260,7 +260,7 @@ func updateVersionFile(filePaths *UpdateFilePaths) error {
 
 	newVersionStr := fmt.Sprintf("%s.%s.%d", versionStr[0], versionNumberStr, 0)
 	log.Printf("Updating version file %s to new version: %s\n", filePaths.Version, newVersionStr)
-	if err := os.WriteFile(filePaths.Version, []byte(newVersionStr), 0644); err != nil {
+	if err := os.WriteFile(filePaths.Version, []byte(newVersionStr), changelogFileMode); err != nil {
 		return fmt.Errorf("failed to write new version to %s: %w", filePaths.Version, err)
 	}
 	log.Printf("Successfully updated version file %s to %s\n", filePaths.Version, newVersionStr)

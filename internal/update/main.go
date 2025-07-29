@@ -1,6 +1,6 @@
-// Package main provides tools for updating AWS CloudFormation schemas and Terraform resources.
-// It automates the process of fetching new schemas, generating resources and data sources,
-// running tests, and creating pull requests with the changes.
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 package main
 
 import (
@@ -412,17 +412,23 @@ func GetAcceptanceTestResults() string {
 //
 // Returns an error if validation fails for any resource.
 func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchemas, config *GitHubConfig, filePaths *UpdateFilePaths) error {
-	timer := 5
+	timer := 1
 	for i := range currAllSchemas.Resources {
 		// Check if the resource type can be provisioned via CloudFormation
 		flag, err := validateResourceType(ctx, currAllSchemas.Resources[i].CloudFormationTypeName)
 		if err != nil && !strings.Contains(err.Error(), "TypeNotFoundException") {
 			if strings.Contains(err.Error(), "api error Throttling: Rate exceeded") {
-				log.Printf("Throttling error encountered, retrying in %d seconds...", timer)
-				time.Sleep(time.Duration(timer) * time.Second)
-				timer *= 2 // Exponential backoff
-				i--        // Retry the same resource
-				continue
+				log.Printf("throttling error encountered, retrying in %d seconds", timer)
+				for timer < 90 {
+					flag, err = validateResourceType(ctx, currAllSchemas.Resources[i].CloudFormationTypeName)
+					if err != nil && strings.Contains(err.Error(), "api error Throttling: Rate exceeded") {
+						log.Printf("throttling error encountered, retrying in %d seconds", timer)
+						time.Sleep(time.Duration(timer) * time.Second)
+						timer *= 2
+					} else {
+						break
+					}
+				}
 			}
 			return fmt.Errorf("failed to check if resource %s is provisionable: %w", currAllSchemas.Resources[i].CloudFormationTypeName, err)
 		}
@@ -433,15 +439,13 @@ func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchema
 
 			// Create GitHub issue for tracking if client is available
 			if config != nil && config.Client != nil {
-				_, err := createIssue(ctx, currAllSchemas.Resources[i].CloudFormationTypeName, "Resource is not provisionable", config, filePaths.RepositoryLink)
+				_, err := createIssue(ctx, currAllSchemas.Resources[i].CloudFormationTypeName, "resource is not provisionable", config, filePaths.RepositoryLink)
 				if err != nil {
-					log.Printf("Failed to create GitHub issue for resource %s: %v", currAllSchemas.Resources[i].CloudFormationTypeName, err)
-					log.Printf("Please create an issue manually for resource %s not being provisionable", currAllSchemas.Resources[i].CloudFormationTypeName)
+					log.Printf("failed to create GitHub issue for resource %s: %v", currAllSchemas.Resources[i].CloudFormationTypeName, err)
+					log.Printf("please create an issue manually for resource %s not being provisionable", currAllSchemas.Resources[i].CloudFormationTypeName)
 				}
 			} else {
-				tflog.Info(ctx, "Skipping GitHub issue creation (no client)", map[string]interface{}{
-					"resource": currAllSchemas.Resources[i].CloudFormationTypeName,
-				})
+				log.Printf("skipping GitHub issue creation for resource %s (no client available)", currAllSchemas.Resources[i].CloudFormationTypeName)
 			}
 		}
 	}

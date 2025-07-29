@@ -43,8 +43,7 @@ type GitHubConfig struct {
 //
 // Returns a configured GitHubConfig ready for use in API operations and any setup errors.
 func NewGitHubConfig(repositoryLink string, date string) (*GitHubConfig, error) {
-
-	// Comment out if locall running
+	// Comment out if locally running
 	err := exec.Command("git", "config", "--global", "user.email", "update-schemas@github.com").Run()
 	if err != nil {
 		return nil, err
@@ -65,6 +64,7 @@ func NewGitHubConfig(repositoryLink string, date string) (*GitHubConfig, error) 
 		client = github.NewClient(nil).WithAuthToken(githubToken)
 	} else {
 		// Use nil client for development/testing when no token is provided
+		log.Println("No GITHUB_TOKEN provided, using nil client for development/testing")
 		client = nil
 	}
 
@@ -91,7 +91,6 @@ func NewGitHubConfig(repositoryLink string, date string) (*GitHubConfig, error) 
 }
 
 func checkGithubToken() error {
-	return nil
 	// GitHub token validation is currently disabled to allow development without GitHub integration
 	githubToken := os.Getenv("GITHUB_TOKEN")
 	if githubToken == "" {
@@ -120,7 +119,7 @@ func createPullRequest(ctx context.Context, config *GitHubConfig, changes *[]str
 	repoOwner := config.RepoOwner
 	repoName := config.RepoName
 	client := config.Client
-	currentData := config.CurrentDate
+	currentDate := config.CurrentDate
 
 	// Override repository details if specified in filepaths configuration
 	if filepaths.RepositoryLink != "" {
@@ -132,7 +131,7 @@ func createPullRequest(ctx context.Context, config *GitHubConfig, changes *[]str
 	}
 
 	// Construct pull request title with current date
-	prTitle := fmt.Sprintf("Schema Updates for %s", currentData)
+	prTitle := fmt.Sprintf("Schema Updates for %s", currentDate)
 
 	// Build PR body with changes section
 	prBody := "## Changes\n\n"
@@ -188,7 +187,6 @@ func createPullRequest(ctx context.Context, config *GitHubConfig, changes *[]str
 }
 
 func createIssue(ctx context.Context, resource string, error string, config *GitHubConfig, repositoryLink string) (string, error) {
-	return "", nil
 	// Return empty values when running in test environment
 	if isRunningInTest() {
 		return "", nil
