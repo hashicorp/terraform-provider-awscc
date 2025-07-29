@@ -45,11 +45,11 @@ type GitHubConfig struct {
 func NewGitHubConfig(repositoryLink string, date string) (*GitHubConfig, error) {
 
 	// Comment out if locall running
-	err := exec.Command("git", "config", "--global", "user.email", "you@example.com").Run()
+	err := exec.Command("git", "config", "--global", "user.email", "update-schemas@github.com").Run()
 	if err != nil {
 		return nil, err
 	}
-	err = exec.Command("git", "config", "--global", "user.name", "Your Name").Run()
+	err = exec.Command("git", "config", "--global", "user.name", "GHA").Run()
 	if err != nil {
 		return nil, err
 	}
