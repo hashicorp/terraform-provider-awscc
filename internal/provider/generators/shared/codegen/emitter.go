@@ -446,9 +446,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 				}
 				features.UsesFrameworkTypes = true
 			case cfschema.PropertyTypeObject:
-				if len(property.Items.Properties) == 0 {
-					return features, unsupportedTypeError(path, "list of undefined schema")
-				} else if len(property.Items.PatternProperties) > 0 {
+				if len(property.Items.PatternProperties) > 0 {
 					// List of map
 					var nestedPatternProperty *cfschema.Property
 					for _, v := range property.Items.PatternProperties {
@@ -470,6 +468,8 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 					default:
 						return features, unsupportedTypeError(path, fmt.Sprintf("list of key-value map of %s", nestedPatternProperty.Type.String()))
 					}
+				} else if len(property.Items.Properties) == 0 {
+					return features, unsupportedTypeError(path, "list of undefined schema")
 				} else {
 					e.printf("schema.ListNestedAttribute{/*START ATTRIBUTE*/\n")
 					e.printf("NestedObject: schema.NestedAttributeObject{/*START NESTED OBJECT*/\n")
