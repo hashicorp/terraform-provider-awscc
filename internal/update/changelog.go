@@ -307,7 +307,7 @@ func parseAndIncrementVersion(changelogContent string) (string, error) {
 }
 
 func updateVersionFile(filePaths *UpdateFilePaths) error {
-	// 1.49.1
+	// 1.49.1 -> 1.50.0
 	versionBytes, err := os.ReadFile(filePaths.Version)
 	if err != nil {
 		return fmt.Errorf("failed to read version file %s: %w", filePaths.Version, err)
@@ -316,8 +316,6 @@ func updateVersionFile(filePaths *UpdateFilePaths) error {
 	if len(versionStr) == 0 || versionStr[0] == "" {
 		return fmt.Errorf("version file %s is empty", filePaths.Version)
 	}
-	// Example: parse versionStr as needed, e.g., "1.49.1"
-	// versionNumber := int(versionStr) // This line likely needs to be replaced with proper parsing logic
 
 	versionNumber, err := strconv.Atoi(versionStr[1])
 	if err != nil {
@@ -329,9 +327,8 @@ func updateVersionFile(filePaths *UpdateFilePaths) error {
 	}
 	versionNumberStr := strconv.Itoa(versionNumber)
 
-	newVersionStr := fmt.Sprintf("c\n%s.%s.%d", versionStr[0], versionNumberStr, 0)
+	newVersionStr := fmt.Sprintf("\n%s.%s.%d", versionStr[0], versionNumberStr, 0)
 	log.Printf("Updating version file %s to new version: %s\n", filePaths.Version, newVersionStr)
-	fmt.Println(newVersionStr)
 	if err := os.WriteFile(filePaths.Version, []byte(newVersionStr), 0644); err != nil {
 		return fmt.Errorf("failed to write new version to %s: %w", filePaths.Version, err)
 	}
