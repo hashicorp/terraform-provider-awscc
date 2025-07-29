@@ -75,23 +75,23 @@ func generateDataSourceChanges(changes []string, filePaths *UpdateFilePaths) ([]
 			// Generate plural data source entry if not suppressed
 			if !resourceSchema.SuppressPluralDataSourceGeneration {
 				plural := naming.Pluralize(resource)
-				pluralChange := fmt.Sprintf("%s - New Plural Data Source", plural)
+				pluralChange := fmt.Sprintf("* **New Data Source:** '%s'", plural)
 				newChanges = append(newChanges, pluralChange)
-				log.Printf("  Added plural data source: %s\n", pluralChange)
+				log.Printf("Added plural data source: %s\n", pluralChange)
 			} else {
-				log.Printf("  Plural data source suppressed for %s\n", resource)
+				log.Printf("Plural data source suppressed for %s\n", resource)
 			}
 
 			// Generate singular data source entry if not suppressed
 			if !resourceSchema.SuppressSingularDataSourceGeneration {
-				singularChange := fmt.Sprintf("%s - New Singular Data Source", resource)
+				singularChange := fmt.Sprintf("* **New Data Source:** '%s'", resource)
 				newChanges = append(newChanges, singularChange)
-				log.Printf("  Added singular data source: %s\n", singularChange)
+				log.Printf("Added singular data source: %s\n", singularChange)
 			} else {
-				log.Printf("  Singular data source suppressed for %s\n", resource)
+				log.Printf("Singular data source suppressed for %s\n", resource)
 			}
 		} else {
-			log.Printf("  Resource %s not found in schema map\n", resource)
+			log.Printf("Resource %s not found in schema map\n", resource)
 		}
 	}
 
