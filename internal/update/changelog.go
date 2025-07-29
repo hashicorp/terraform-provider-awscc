@@ -62,8 +62,8 @@ func generateDataSourceChanges(changes []string, filePaths *UpdateFilePaths) ([]
 			continue
 		}
 
-		message := parts[0]
-		resource := parts[1]
+		resource := parts[0]
+		message := parts[1]
 
 		log.Printf("  Resource: %s, Message: %s\n", resource, message)
 
@@ -90,6 +90,8 @@ func generateDataSourceChanges(changes []string, filePaths *UpdateFilePaths) ([]
 			} else {
 				log.Printf("  Singular data source suppressed for %s\n", resource)
 			}
+		} else {
+			log.Printf("  Resource %s not found in schema map\n", resource)
 		}
 	}
 
@@ -161,83 +163,12 @@ func writeChangelog(originalContent string, changes []string) string {
 		return originalContent
 	}
 
-	// Sort changes by type
-	var (
-		newResources   []string
-		newDataSources []string
-		suppressions   []string
-	)
-
-	log.Println("Categorizing changes:")
-	// Categorize changes
-	for _, change := range changes {
-		parts := strings.SplitN(change, " - ", changelogSplitParts)
-		if len(parts) != changelogSplitParts {
-			log.Printf("  Skipping malformed change: %s\n", change)
-			continue
-		}
-
-		resource := parts[0]
-		changeType := parts[1]
-
-		if parts[0] == "" || parts[1] == "" {
-			log.Printf("Processing change: %s - %s\n", resource, changeType)
-			continue
-		}
-
-		log.Printf("  Processing: %s -> %s\n", resource, changeType)
-
-		switch changeType {
-		case "New Resource":
-			newResources = append(newResources, resource)
-		case "New Singular Data Source", "New Plural Data Source":
-			newDataSources = append(newDataSources, resource)
-		default:
-			if strings.Contains(changeType, "Suppression") {
-				suppressions = append(suppressions, resource)
-			}
-		}
-	}
-
-	// Sort each category alphabetically
-	sort.Strings(newResources)
-	sort.Strings(newDataSources)
-	sort.Strings(suppressions)
-
-	log.Printf("After sorting - Data Sources: %d, Resources: %d, Suppressions: %d\n", len(newDataSources), len(newResources), len(suppressions))
-
-	// Build the new changelog entries
-	var newEntries []string
-
-	// Add data sources first
-	for _, ds := range newDataSources {
-		entry := fmt.Sprintf("* **New Data Source:** `%s`", ds)
-		newEntries = append(newEntries, entry)
-		log.Printf("  Added data source entry: %s\n", entry)
-	}
-
-	// Add resources
-	for _, res := range newResources {
-		entry := fmt.Sprintf("* **New Resource:** `%s`", res)
-		newEntries = append(newEntries, entry)
-		log.Printf("  Added resource entry: %s\n", entry)
-	}
-
-	for _, sup := range suppressions {
-		log.Printf("  Tracked suppression: %s\n", sup)
-		entry := fmt.Sprintf("* **Suppressed Resource:** `%s`", sup)
-		newEntries = append(newEntries, entry)
-	}
-
-	if len(newEntries) == 0 {
-		log.Println("No valid entries to add, returning original content")
-		return originalContent
-	}
-
-	log.Printf("Total entries to add: %d\n", len(newEntries))
+	sort.Slice(changes, func(i, j int) bool {
+		return changes[i] < changes[j]
+	})
 
 	// Parse and increment version
-	newVersion, err := parseAndIncrementVersion(originalContent)
+	newVersion, err := parseAndIncrementChangelogVersion(originalContent)
 	if err != nil {
 		log.Printf("Warning: %v\n", err)
 	}
@@ -253,7 +184,7 @@ func writeChangelog(originalContent string, changes []string) string {
 	newSection = append(newSection, "")
 	newSection = append(newSection, "FEATURES:")
 	newSection = append(newSection, "")
-	newSection = append(newSection, newEntries...)
+	newSection = append(newSection, changes...)
 	newSection = append(newSection, "")
 
 	// Add the new section to the top of the changelog
@@ -266,8 +197,8 @@ func writeChangelog(originalContent string, changes []string) string {
 	return strings.Join(result, "\n")
 }
 
-// parseAndIncrementVersion finds the latest version in changelog content and increments the minor version
-func parseAndIncrementVersion(changelogContent string) (string, error) {
+// parseAndIncrementChangelogVersion finds the latest version in changelog content and increments the minor version
+func parseAndIncrementChangelogVersion(changelogContent string) (string, error) {
 	lines := strings.Split(changelogContent, "\n")
 
 	for _, line := range lines {
@@ -327,7 +258,7 @@ func updateVersionFile(filePaths *UpdateFilePaths) error {
 	}
 	versionNumberStr := strconv.Itoa(versionNumber)
 
-	newVersionStr := fmt.Sprintf("\n%s.%s.%d", versionStr[0], versionNumberStr, 0)
+	newVersionStr := fmt.Sprintf("%s.%s.%d", versionStr[0], versionNumberStr, 0)
 	log.Printf("Updating version file %s to new version: %s\n", filePaths.Version, newVersionStr)
 	if err := os.WriteFile(filePaths.Version, []byte(newVersionStr), 0644); err != nil {
 		return fmt.Errorf("failed to write new version to %s: %w", filePaths.Version, err)
