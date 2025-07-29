@@ -756,8 +756,15 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 	if computed && !parentComputedOnly {
 		// Computed.
 		// If our parent is Computed-only (and hence we are) then we don't need our own plan modifier.
-		planModifiers = append(planModifiers, fmt.Sprintf("%s.UseStateForUnknown()", fwPlanModifierPackage))
-		features.FrameworkPlanModifierPackages = append(features.FrameworkPlanModifierPackages, fwPlanModifierPackage)
+		
+		if computedAndOptional {
+			// Optional+Computed attributes: Use custom modifier to prevent false drift detection
+			planModifiers = append(planModifiers, fmt.Sprintf("generic.CustomUseStateForUnknown%s()", fwPlanModifierType))
+		} else {
+			// Read-only computed attributes: Use framework modifier (existing behavior)
+			planModifiers = append(planModifiers, fmt.Sprintf("%s.UseStateForUnknown()", fwPlanModifierPackage))
+			features.FrameworkPlanModifierPackages = append(features.FrameworkPlanModifierPackages, fwPlanModifierPackage)
+		}
 	}
 
 	if createOnly {
