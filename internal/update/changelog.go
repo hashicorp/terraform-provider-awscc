@@ -75,7 +75,7 @@ func generateDataSourceChanges(changes []string, filePaths *UpdateFilePaths) ([]
 			// Generate plural data source entry if not suppressed
 			if !resourceSchema.SuppressPluralDataSourceGeneration {
 				plural := naming.Pluralize(resource)
-				pluralChange := fmt.Sprintf("* **New Data Source:** '%s'", plural)
+				pluralChange := fmt.Sprintf("* **New Data Source:** `%s`", plural)
 				newChanges = append(newChanges, pluralChange)
 				log.Printf("Added plural data source: %s\n", pluralChange)
 			} else {
@@ -84,7 +84,7 @@ func generateDataSourceChanges(changes []string, filePaths *UpdateFilePaths) ([]
 
 			// Generate singular data source entry if not suppressed
 			if !resourceSchema.SuppressSingularDataSourceGeneration {
-				singularChange := fmt.Sprintf("* **New Data Source:** '%s'", resource)
+				singularChange := fmt.Sprintf("* **New Data Source:** `%s`", resource)
 				newChanges = append(newChanges, singularChange)
 				log.Printf("Added singular data source: %s\n", singularChange)
 			} else {

@@ -84,7 +84,7 @@ func diffSchemas(newSchemas *allschemas.AvailableSchemas, lastSchemas *allschema
 		} else {
 			// New resource
 			changedOrNewResources = append(changedOrNewResources, newResource)
-			*changes = append(*changes, fmt.Sprintf("%s - New Resource", newResource.ResourceTypeName))
+			*changes = append(*changes, fmt.Sprintf("* **New Resource** `%s`", newResource.ResourceTypeName))
 		}
 	}
 
