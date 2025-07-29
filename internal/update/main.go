@@ -206,7 +206,8 @@ func run() error {
 	// Since we've disabled validation in diffSchemas, we perform validation here
 	err = validateResources(ctx, currAllSchemas, config, filePaths)
 	if err != nil {
-		return fmt.Errorf("failed to validate resources: %w", err)
+		log.Println(fmt.Errorf("failed to validate resources: %w", err))
+		log.Println("continuing with schema update despite validation errors. please review the logs for details.")
 	}
 
 	// Commit the new schema changes
@@ -412,40 +413,38 @@ func GetAcceptanceTestResults() string {
 //
 // Returns an error if validation fails for any resource.
 func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchemas, config *GitHubConfig, filePaths *UpdateFilePaths) error {
-	timer := 1
-	for i := range currAllSchemas.Resources {
+	timer := 2
+	for i := 0; i < len(currAllSchemas.Resources); i++ {
 		// Check if the resource type can be provisioned via CloudFormation
 		flag, err := validateResourceType(ctx, currAllSchemas.Resources[i].CloudFormationTypeName)
 		if err != nil && !strings.Contains(err.Error(), "TypeNotFoundException") {
 			if strings.Contains(err.Error(), "api error Throttling: Rate exceeded") {
-				log.Printf("throttling error encountered, retrying in %d seconds", timer)
-				for timer < 90 {
-					flag, err = validateResourceType(ctx, currAllSchemas.Resources[i].CloudFormationTypeName)
-					if err != nil && strings.Contains(err.Error(), "api error Throttling: Rate exceeded") {
-						log.Printf("throttling error encountered, retrying in %d seconds", timer)
-						time.Sleep(time.Duration(timer) * time.Second)
-						timer *= 2
-					} else {
-						break
-					}
-				}
+				log.Printf("Throttling error encountered, retrying in %d seconds...", timer)
+				time.Sleep(time.Duration(timer) * time.Second)
+				timer *= 2
+				i-- // Retry the same resource
+				continue
 			}
 			return fmt.Errorf("failed to check if resource %s is provisionable: %w", currAllSchemas.Resources[i].CloudFormationTypeName, err)
 		}
-		timer = 1 // Reset timer on successful check
+
+		timer = 2
+
 		// Suppress resources that are not provisionable
 		if !flag || (err != nil && strings.Contains(err.Error(), "TypeNotFoundException")) {
 			currAllSchemas.Resources[i].SuppressResourceGeneration = true
 
 			// Create GitHub issue for tracking if client is available
 			if config != nil && config.Client != nil {
-				_, err := createIssue(ctx, currAllSchemas.Resources[i].CloudFormationTypeName, "resource is not provisionable", config, filePaths.RepositoryLink)
+				_, err := createIssue(ctx, currAllSchemas.Resources[i].CloudFormationTypeName, "Resource is not provisionable", config, filePaths.RepositoryLink)
 				if err != nil {
-					log.Printf("failed to create GitHub issue for resource %s: %v", currAllSchemas.Resources[i].CloudFormationTypeName, err)
-					log.Printf("please create an issue manually for resource %s not being provisionable", currAllSchemas.Resources[i].CloudFormationTypeName)
+					log.Printf("Failed to create GitHub issue for resource %s: %v", currAllSchemas.Resources[i].CloudFormationTypeName, err)
+					log.Printf("Please create an issue manually for resource %s not being provisionable", currAllSchemas.Resources[i].CloudFormationTypeName)
 				}
 			} else {
-				log.Printf("skipping GitHub issue creation for resource %s (no client available)", currAllSchemas.Resources[i].CloudFormationTypeName)
+				tflog.Info(ctx, "Skipping GitHub issue creation (no client)", map[string]interface{}{
+					"resource": currAllSchemas.Resources[i].CloudFormationTypeName,
+				})
 			}
 		}
 	}
