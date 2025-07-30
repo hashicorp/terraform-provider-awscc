@@ -475,39 +475,40 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 					e.printf("NestedObject: schema.NestedAttributeObject{/*START NESTED OBJECT*/\n")
 					e.printf("Attributes:")
 
-				f, err := e.emitSchema(
-					tfType,
-					attributeNameMap,
-					parent{
-						computedAndOptional: computedAndOptional,
-						computedOnly:        computedOnly,
-						path:                path,
-						reqd:                property.Items,
-					},
-					property.Items.Properties)
+					f, err := e.emitSchema(
+						tfType,
+						attributeNameMap,
+						parent{
+							computedAndOptional: computedAndOptional,
+							computedOnly:        computedOnly,
+							path:                path,
+							reqd:                property.Items,
+						},
+						property.Items.Properties)
 
-				if err != nil {
-					return features, err
-				}
+					if err != nil {
+						return features, err
+					}
 
-				features = features.LogicalOr(f)
+					features = features.LogicalOr(f)
 
-				e.printf(",\n")
-				e.printf("}/*END NESTED OBJECT*/,\n")
+					e.printf(",\n")
+					e.printf("}/*END NESTED OBJECT*/,\n")
 
-				if v, err := listLengthValidator(path, property); err != nil {
-					return features, err
-				} else if v != "" {
-					validators = append(validators, v)
-					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
-				}
+					if v, err := listLengthValidator(path, property); err != nil {
+						return features, err
+					} else if v != "" {
+						validators = append(validators, v)
+						features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
+					}
 
-				switch arrayType {
-				case aggregateOrderedSet:
-					validators = append(validators, "listvalidator.UniqueValues()")
-					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
-				case aggregateMultiset:
-					planModifiers = append(planModifiers, "generic.Multiset()")
+					switch arrayType {
+					case aggregateOrderedSet:
+						validators = append(validators, "listvalidator.UniqueValues()")
+						features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
+					case aggregateMultiset:
+						planModifiers = append(planModifiers, "generic.Multiset()")
+					}
 				}
 
 			default:
