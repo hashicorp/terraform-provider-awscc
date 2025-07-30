@@ -20,7 +20,6 @@ import (
 
 // AcceptanceTestResults stores the output of acceptance tests for inclusion in pull request descriptions.
 // This global variable is populated by RunAcceptanceTests and used when creating pull requests.
-var AcceptanceTestResults string
 
 // Constants for file paths, patterns, and configuration values used throughout the update process.
 const (
@@ -111,14 +110,6 @@ func run() error {
 	if err != nil {
 		return fmt.Errorf("failed to initialize GitHub configuration: %w", err)
 	}
-
-	log.Printf("Running acceptance tests with 'make %s'...", MakeTestAccCmd)
-	AcceptanceTestResults, err = RunAcceptanceTests()
-	if err != nil {
-		log.Printf("Warning: Acceptance tests had issues: %v", err)
-		// We continue even if there are test failures to include results in PR
-	}
-	fmt.Printf("AcceptanceTestResults: %v\n", AcceptanceTestResults)
 
 	// Create a unique branch name for this update run
 	branchName := fmt.Sprintf(BranchNameFormat, rand.Intn(BranchNameMaxRandom))
@@ -318,6 +309,13 @@ func run() error {
 		return fmt.Errorf("failed to commit changelog: %w", err)
 	}
 
+	log.Printf("Running acceptance tests with 'make %s'...", MakeTestAccCmd)
+	AcceptanceTestResults, err := RunAcceptanceTests()
+	if err != nil {
+		log.Printf("Warning: Acceptance tests had issues: %v", err)
+		// We continue even if there are test failures to include results in PR
+	}
+
 	_, err = submitOnGit(config, &changes, filePaths, AcceptanceTestResults, config.RepoOwner, config.RepoName, branchName)
 	if err != nil {
 		return fmt.Errorf("failed to submit PR: %w", err)
@@ -393,14 +391,6 @@ type UpdateFilePaths struct {
 	CloudFormationSchemasDir string `hcl:"cloudformation_schemas_dir"` // Directory for CloudFormation schemas
 	RepositoryLink           string `hcl:"repository_link"`            // GitHub repository URL
 	Version                  string `hcl:"version_file"`               // Version file path
-}
-
-// GetAcceptanceTestResults returns the captured acceptance test results.
-// This function provides access to the global test results variable that is
-// populated during the test execution phase and used in pull request descriptions.
-// If no tests have been run yet, it returns an empty string.
-func GetAcceptanceTestResults() string {
-	return AcceptanceTestResults
 }
 
 // validateResources checks if each resource in the schema is provisionable through CloudFormation.
