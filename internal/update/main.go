@@ -15,6 +15,7 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-log/tflog"
+	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 	allschemas "github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/allschemas"
 )
 
@@ -405,9 +406,10 @@ type UpdateFilePaths struct {
 //
 // Returns an error if validation fails for any resource.
 func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchemas, config *GitHubConfig, filePaths *UpdateFilePaths) error {
+	isSuppressed := parseCheckoutList(filePaths)
 	timer := 2
 	for i := 0; i < len(currAllSchemas.Resources); i++ {
-		if currAllSchemas.Resources[i].SuppressResourceGeneration {
+		if currAllSchemas.Resources[i].SuppressResourceGeneration || isSuppressed[currAllSchemas.Resources[i].ResourceTypeName] {
 			log.Printf("Skipping validation for suppressed resource %s", currAllSchemas.Resources[i].CloudFormationTypeName)
 			continue
 		}
@@ -446,4 +448,26 @@ func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchema
 		}
 	}
 	return nil
+}
+
+func parseCheckoutList(filePaths *UpdateFilePaths) map[string]bool {
+	result := make(map[string]bool)
+	data, err := os.ReadFile(filePaths.SuppressionCheckout)
+	if err != nil {
+		log.Printf("Failed to read suppression checkout file: %v", err)
+		return result
+	}
+	lines := strings.Split(string(data), "\n")
+	for _, line := range lines {
+		line = strings.TrimSpace(line)
+		if line != "" {
+			// ex: internal/service/cloudformation/schemas/AWS_CustomerProfiles_Domain.json
+			base := filepath.Base(line)
+			resource := strings.TrimSuffix(base, filepath.Ext(base))
+			resource = strings.TrimSuffix(resource, ".json")
+			resource = naming.CloudFormationPropertyToTerraformAttribute(resource)
+			result[resource] = true
+		}
+	}
+	return result
 }

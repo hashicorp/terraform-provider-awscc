@@ -771,3 +771,25 @@ func TestIsLetter(t *testing.T) {
 		})
 	}
 }
+
+func TestParseCheckoutList(t *testing.T) {
+	tmpFile, err := os.CreateTemp("", "suppression_checkout_*.txt")
+	if err != nil {
+		t.Fatalf("Failed to create temp file: %v", err)
+	}
+	defer os.Remove(tmpFile.Name())
+
+	content := "internal/service/cloudformation/schemas/AWS_CustomerProfiles_Domain.json\n"
+	if _, err := tmpFile.WriteString(content); err != nil {
+		t.Fatalf("Failed to write to temp file: %v", err)
+	}
+	tmpFile.Close()
+
+	filePaths := &UpdateFilePaths{SuppressionCheckout: tmpFile.Name()}
+	result := parseCheckoutList(filePaths)
+
+	fmt.Println(result)
+	if !result["AWS_CustomerProfiles_Domain"] {
+		t.Errorf("Expected AWS_CustomerProfiles_Domain in result")
+	}
+}
