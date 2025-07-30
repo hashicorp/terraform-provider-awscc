@@ -121,13 +121,6 @@ func run() error {
 		// We continue even if there are test failures to include results in PR
 	}
 
-	currAllSchemas, err := parseSchemaToStruct(filePaths.AllSchemasHCL, allschemas.AllSchemas{})
-	err = validateResources(ctx, currAllSchemas, config, filePaths)
-	if err != nil {
-		log.Println(fmt.Errorf("failed to validate resources: %w", err))
-		log.Println("continuing with schema update despite validation errors. please review the logs for details.")
-	}
-
 	//Update version file
 	err = updateVersionFile(filePaths)
 	if err != nil {
@@ -164,7 +157,7 @@ func run() error {
 	if err := checkoutSchemas(filePaths.SuppressionCheckout); err != nil && strings.Contains(err.Error(), "not found") {
 		return fmt.Errorf("failed to checkout schemas: %w", err)
 	}
-	currAllSchemas, err = parseSchemaToStruct(filePaths.AllSchemasHCL, allschemas.AllSchemas{})
+	currAllSchemas, err := parseSchemaToStruct(filePaths.AllSchemasHCL, allschemas.AllSchemas{})
 	if err != nil {
 		return fmt.Errorf("failed to parse current schemas: %w", err)
 	}
@@ -216,7 +209,11 @@ func run() error {
 	}
 
 	// Step 3: Validate resources and handle suppressions
-	// Since we've disabled validation in diffSchemas, we perform validation here
+	err = validateResources(ctx, currAllSchemas, config, filePaths)
+	if err != nil {
+		log.Println(fmt.Errorf("failed to validate resources: %w", err))
+		log.Println("continuing with schema update despite validation errors. please review the logs for details.")
+	}
 
 	// Commit the new schema changes
 	if err := execGit("add", "-A"); err != nil {
@@ -409,7 +406,6 @@ type UpdateFilePaths struct {
 func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchemas, config *GitHubConfig, filePaths *UpdateFilePaths) error {
 	isSuppressed := parseCheckoutList(filePaths)
 	timer := 2
-	fmt.Printf("isSuppressed: %v\n", isSuppressed)
 	for i := 0; i < len(currAllSchemas.Resources); i++ {
 		if currAllSchemas.Resources[i].SuppressResourceGeneration || isSuppressed[currAllSchemas.Resources[i].CloudFormationTypeName] {
 			log.Printf("Skipping validation for suppressed resource %s", currAllSchemas.Resources[i].CloudFormationTypeName)

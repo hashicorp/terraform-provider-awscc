@@ -6,6 +6,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -803,7 +804,7 @@ func TestConvertJSONResourceToTerraformTypeName(t *testing.T) {
 
 	for _, test := range tests {
 		result := convertJSONResourceToCloudFormationTypeName(test.input)
-		fmt.Printf("Input: %s, Output: %s\n", test.input, result)
+		log.Printf("Input: %s, Output: %s\n", test.input, result)
 		if test.expected != "" && result != test.expected {
 			t.Errorf("convertJSONResourceToTerraformTypeName(%q) = %q; want %q", test.input, result, test.expected)
 		}
