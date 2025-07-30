@@ -16,12 +16,7 @@ import (
 	allschemas "github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/allschemas"
 )
 
-const (
-	// changelogSplitParts represents the expected number of parts when splitting a change entry by " - "
-	changelogSplitParts = 2
-	// changelogFileMode represents the file permissions for CHANGELOG.md (readable by all, writable by owner)
-	changelogFileMode = 0644
-)
+const changelogFileMode = 0644
 
 // generateDataSourceChanges expands resource changes to include corresponding data source entries.
 // For each new resource, it automatically generates entries for both singular and plural data sources,
