@@ -407,6 +407,10 @@ type UpdateFilePaths struct {
 func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchemas, config *GitHubConfig, filePaths *UpdateFilePaths) error {
 	timer := 2
 	for i := 0; i < len(currAllSchemas.Resources); i++ {
+		if currAllSchemas.Resources[i].SuppressResourceGeneration {
+			log.Printf("Skipping validation for suppressed resource %s", currAllSchemas.Resources[i].CloudFormationTypeName)
+			continue
+		}
 		// Check if the resource type can be provisioned via CloudFormation
 		flag, err := validateResourceType(ctx, currAllSchemas.Resources[i].CloudFormationTypeName)
 		if err != nil && !strings.Contains(err.Error(), "TypeNotFoundException") {
