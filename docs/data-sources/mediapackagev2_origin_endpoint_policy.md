@@ -21,7 +21,16 @@ Data Source schema for AWS::MediaPackageV2::OriginEndpointPolicy
 
 ### Read-Only
 
+- `cdn_auth_configuration` (Attributes) (see [below for nested schema](#nestedatt--cdn_auth_configuration))
 - `channel_group_name` (String)
 - `channel_name` (String)
 - `origin_endpoint_name` (String)
 - `policy` (String)
+
+<a id="nestedatt--cdn_auth_configuration"></a>
+### Nested Schema for `cdn_auth_configuration`
+
+Read-Only:
+
+- `cdn_identifier_secret_arns` (List of String)
+- `secrets_role_arn` (String)
