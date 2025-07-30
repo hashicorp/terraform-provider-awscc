@@ -792,3 +792,20 @@ func TestParseCheckoutList(t *testing.T) {
 		t.Errorf("Expected aws_customer_profiles_domain in result")
 	}
 }
+
+func TestConvertJSONResourceToTerraformTypeName(t *testing.T) {
+	tests := []struct {
+		input    string
+		expected string // expected output, update as needed for your naming logic
+	}{
+		{"internal/service/cloudformation/schemas/AWS_NimbleStudio_StreamingImage.json", "AWS::NimbleStudio::StreamingImage"},
+	}
+
+	for _, test := range tests {
+		result := convertJSONResourceToCloudFormationTypeName(test.input)
+		fmt.Printf("Input: %s, Output: %s\n", test.input, result)
+		if test.expected != "" && result != test.expected {
+			t.Errorf("convertJSONResourceToTerraformTypeName(%q) = %q; want %q", test.input, result, test.expected)
+		}
+	}
+}
