@@ -231,8 +231,7 @@
     "AppImageConfigName"
   ],
   "createOnlyProperties": [
-    "/properties/AppImageConfigName",
-    "/properties/Tags"
+    "/properties/AppImageConfigName"
   ],
   "readOnlyProperties": [
     "/properties/AppImageConfigArn"
@@ -284,7 +283,7 @@
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
-    "tagUpdatable": false,
+    "tagUpdatable": true,
     "cloudFormationSystemTags": false,
     "tagProperty": "/properties/Tags",
     "permissions": [

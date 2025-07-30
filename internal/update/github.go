@@ -1,3 +1,6 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 // Package main provides GitHub integration functionality for creating pull requests
 // and managing repository interactions during the schema update process.
 package main
@@ -42,12 +45,11 @@ type GitHubConfig struct {
 //   - date: Current date string for use in commit messages and branch names
 //
 // Returns a configured GitHubConfig ready for use in API operations and any setup errors.
-func NewGitHubConfig(ctx context.Context, repositoryLink string, date string) (*GitHubConfig, error) {
+func NewGitHubConfig(repositoryLink string, date string) (*GitHubConfig, error) {
 	// Validate required environment variables
-	err := checkEnv(ctx)
+	err := checkGithubToken()
 	if err != nil {
-		log.Println("Environment variable check failed:")
-		return nil, fmt.Errorf("environment variable check failed: %w", err)
+		return nil, fmt.Errorf("github token check failed: %w", err)
 	}
 
 	// Create GitHub client with authentication token
@@ -79,6 +81,19 @@ func NewGitHubConfig(ctx context.Context, repositoryLink string, date string) (*
 	config.Repository = config.RepoOwner + "/" + config.RepoName
 
 	return config, nil
+}
+
+func checkGithubToken() error {
+	// GitHub token validation is currently disabled to allow development without GitHub integration
+	githubToken := os.Getenv("GITHUB_TOKEN")
+	if githubToken == "" {
+		return fmt.Errorf("GITHUB_TOKEN environment variable is not set")
+	}
+	if len(githubToken) < 40 {
+		return fmt.Errorf("GITHUB_TOKEN must be at least 40 characters long")
+	}
+
+	return nil
 }
 
 // createPullRequest creates a new pull request on GitHub with the provided changes and test results.

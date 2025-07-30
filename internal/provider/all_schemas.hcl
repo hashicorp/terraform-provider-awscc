@@ -654,6 +654,10 @@ resource_schema "aws_bedrock_prompt_version" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_billing_billing_view" {
+  cloudformation_type_name = "AWS::Billing::BillingView"
+}
+
 resource_schema "aws_billingconductor_billing_group" {
   cloudformation_type_name = "AWS::BillingConductor::BillingGroup"
 }
@@ -1853,6 +1857,10 @@ resource_schema "aws_ec2_traffic_mirror_filter_rule" {
   cloudformation_type_name = "AWS::EC2::TrafficMirrorFilterRule"
 }
 
+resource_schema "aws_ec2_traffic_mirror_session" {
+  cloudformation_type_name = "AWS::EC2::TrafficMirrorSession"
+}
+
 resource_schema "aws_ec2_traffic_mirror_target" {
   cloudformation_type_name = "AWS::EC2::TrafficMirrorTarget"
 }
@@ -2174,14 +2182,14 @@ resource_schema "aws_elasticbeanstalk_environment" {
 }
 
 resource_schema "aws_elasticloadbalancingv2_listener" {
-  cloudformation_type_name               = "AWS::ElasticLoadBalancingV2::Listener"
+  cloudformation_type_name = "AWS::ElasticLoadBalancingV2::Listener"
 
   # Suppression Reason: error creating write-only attribute path (/properties/DefaultActions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1521
 }
 
 resource_schema "aws_elasticloadbalancingv2_listener_rule" {
-  cloudformation_type_name               = "AWS::ElasticLoadBalancingV2::ListenerRule"
+  cloudformation_type_name = "AWS::ElasticLoadBalancingV2::ListenerRule"
   # Suppression Reason:  error creating write-only attribute path (/properties/Actions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1521
 }
@@ -3201,6 +3209,10 @@ resource_schema "aws_lightsail_distribution" {
   cloudformation_type_name = "AWS::Lightsail::Distribution"
 }
 
+resource_schema "aws_lightsail_domain" {
+  cloudformation_type_name = "AWS::Lightsail::Domain"
+}
+
 resource_schema "aws_lightsail_instance" {
   cloudformation_type_name = "AWS::Lightsail::Instance"
 }
@@ -3810,6 +3822,12 @@ resource_schema "aws_oam_sink" {
 
 resource_schema "aws_omics_annotation_store" {
   cloudformation_type_name = "AWS::Omics::AnnotationStore"
+
+  # Suppression Reason: StoreOptions/TsvStoreOptions/Schema is of unsupported type: list of key-value map.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1517
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_omics_reference_store" {
@@ -4561,6 +4579,11 @@ resource_schema "aws_s3tables_table_bucket_policy" {
   cloudformation_type_name = "AWS::S3Tables::TableBucketPolicy"
 }
 
+resource_schema "aws_s3tables_table_policy" {
+  cloudformation_type_name               = "AWS::S3Tables::TablePolicy"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_ses_configuration_set" {
   cloudformation_type_name = "AWS::SES::ConfigurationSet"
 }
@@ -4852,6 +4875,12 @@ resource_schema "aws_sagemaker_user_profile" {
 
 resource_schema "aws_scheduler_schedule" {
   cloudformation_type_name = "AWS::Scheduler::Schedule"
+
+  # Suppression Reason: Target/EcsParameters/Tags is of unsupported type: list of key-value map.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1517
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_scheduler_schedule_group" {
@@ -5291,6 +5320,11 @@ resource_schema "aws_wisdom_message_template" {
 
 resource_schema "aws_wisdom_message_template_version" {
   cloudformation_type_name               = "AWS::Wisdom::MessageTemplateVersion"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_wisdom_quick_response" {
+  cloudformation_type_name               = "AWS::Wisdom::QuickResponse"
   suppress_plural_data_source_generation = true
 }
 

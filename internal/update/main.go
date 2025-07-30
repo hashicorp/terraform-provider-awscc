@@ -1,3 +1,6 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 // Package main provides tools for updating AWS CloudFormation schemas and Terraform resources.
 // It automates the process of fetching new schemas, generating resources and data sources,
 // running tests, and creating pull requests with the changes.
@@ -107,7 +110,7 @@ func run() error {
 
 	// Initialize GitHub configuration with all GitHub-related setup
 	currentDate := GetCurrentDate()
-	config, err := NewGitHubConfig(ctx, filePaths.RepositoryLink, currentDate)
+	config, err := NewGitHubConfig(filePaths.RepositoryLink, currentDate)
 	if err != nil {
 		return fmt.Errorf("failed to initialize GitHub configuration: %w", err)
 	}

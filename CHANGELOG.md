@@ -1,15 +1,24 @@
-## 1.50.0 (July 24, 2025)
+## 1.51.0 (Unreleased)
+
+## 1.50.0 (July 28, 2025)
 
 FEATURES:
 
-* **New Data Source:** `awscc_omics_annotation_store`
-* **New Data Source:** `awscc_omics_annotation_stores`
-* **New Data Source:** `awscc_scheduler_schedule`
-* **New Data Source:** `awscc_scheduler_schedules`
-* **New Resource:** `awscc_omics_annotation_store`
-* **New Resource:** `awscc_scheduler_schedule`
 * **New Data Source:** `awscc_accessanalyzer_analyzer`
+* **New Data Source:** `awscc_billing_billing_view`
+* **New Data Source:** `awscc_billing_billing_views`
+* **New Data Source:** `awscc_ec2_traffic_mirror_session`
+* **New Data Source:** `awscc_ec2_traffic_mirror_sessions`
+* **New Data Source:** `awscc_lightsail_domain`
+* **New Data Source:** `awscc_lightsail_domains`
+* **New Data Source:** `awscc_s3tables_table_policy`
+* **New Data Source:** `awscc_wisdom_quick_response`
 * **New Resource:** `awscc_accessanalyzer_analyzer`
+* **New Resource:** `awscc_billing_billing_view`
+* **New Resource:** `awscc_ec2_traffic_mirror_session`
+* **New Resource:** `awscc_lightsail_domain`
+* **New Resource:** `awscc_s3tables_table_policy`
+* **New Resource:** `awscc_wisdom_quick_response`
 
 ## 1.49.0 (July 10, 2025)
 

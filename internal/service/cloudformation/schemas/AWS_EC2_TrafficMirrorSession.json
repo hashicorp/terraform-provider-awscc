@@ -1,0 +1,140 @@
+{
+  "typeName": "AWS::EC2::TrafficMirrorSession",
+  "description": "Resource schema for AWS::EC2::TrafficMirrorSession",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ec2-tm.git",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a traffic mirror session resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
+    "TrafficMirrorSessionField": {
+      "type": "string",
+      "enum": [
+        "packet-length",
+        "description",
+        "virtual-network-id"
+      ]
+    }
+  },
+  "properties": {
+    "Id": {
+      "description": "The ID of a Traffic Mirror session.",
+      "type": "string"
+    },
+    "NetworkInterfaceId": {
+      "description": "The ID of the source network interface.",
+      "type": "string"
+    },
+    "TrafficMirrorTargetId": {
+      "description": "The ID of a Traffic Mirror target.",
+      "type": "string"
+    },
+    "TrafficMirrorFilterId": {
+      "description": "The ID of a Traffic Mirror filter.",
+      "type": "string"
+    },
+    "PacketLength": {
+      "description": "The number of bytes in each packet to mirror.",
+      "type": "integer"
+    },
+    "SessionNumber": {
+      "description": "The session number determines the order in which sessions are evaluated when an interface is used by multiple sessions. The first session with a matching filter is the one that mirrors the packets.",
+      "type": "integer"
+    },
+    "VirtualNetworkId": {
+      "description": "The VXLAN ID for the Traffic Mirror session.",
+      "type": "integer"
+    },
+    "Description": {
+      "description": "The description of the Traffic Mirror session.",
+      "type": "string"
+    },
+    "OwnerId": {
+      "description": "The ID of the account that owns the Traffic Mirror session.",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "The tags assigned to the Traffic Mirror session.",
+      "type": "array",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags"
+    ]
+  },
+  "additionalProperties": false,
+  "required": [
+    "NetworkInterfaceId",
+    "TrafficMirrorFilterId",
+    "SessionNumber",
+    "TrafficMirrorTargetId"
+  ],
+  "readOnlyProperties": [
+    "/properties/Id"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ec2:CreateTrafficMirrorSession",
+        "ec2:DescribeTrafficMirrorSessions",
+        "ec2:CreateTags",
+        "ec2:DescribeTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ec2:DescribeTrafficMirrorSessions",
+        "ec2:DescribeTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ec2:ModifyTrafficMirrorSession",
+        "ec2:CreateTags",
+        "ec2:DeleteTags",
+        "ec2:DescribeTrafficMirrorSessions",
+        "ec2:DescribeTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:DeleteTrafficMirrorSession",
+        "ec2:DeleteTags"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:DescribeTrafficMirrorSessions",
+        "ec2:DescribeTags"
+      ]
+    }
+  }
+}

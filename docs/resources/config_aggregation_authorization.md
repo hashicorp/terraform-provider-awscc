@@ -47,7 +47,7 @@ resource "awscc_config_aggregation_authorization" "example" {
 
 ### Optional
 
-- `tags` (Attributes List) The tags for the AggregationAuthorization. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) The tags for the AggregationAuthorization. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

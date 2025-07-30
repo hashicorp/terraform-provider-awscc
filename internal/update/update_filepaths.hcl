@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 run_makes_resource_log = "internal/provider/logs.txt"
 run_makes_output = "internal/update/run_makes_output.txt"
 run_makes_errors = "internal/update/makes_error.txt"

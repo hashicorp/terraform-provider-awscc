@@ -3,12 +3,12 @@
 page_title: "awscc_applicationinsights_application Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource schema for AWS::ApplicationInsights::Application
+  Resource Type definition for AWS::ApplicationInsights::Application
 ---
 
 # awscc_applicationinsights_application (Resource)
 
-Resource schema for AWS::ApplicationInsights::Application
+Resource Type definition for AWS::ApplicationInsights::Application
 
 ## Example Usage
 

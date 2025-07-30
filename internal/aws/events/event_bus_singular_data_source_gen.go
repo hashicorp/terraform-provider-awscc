@@ -89,6 +89,50 @@ func eventBusDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Kms Key Identifier used to encrypt events at rest in the event bus.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LogConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The logging configuration settings for vended logs.",
+		//	  "properties": {
+		//	    "IncludeDetail": {
+		//	      "description": "Configures whether or not to include event detail, input transformer details, target properties, and target input in the applicable log messages.",
+		//	      "enum": [
+		//	        "FULL",
+		//	        "NONE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Level": {
+		//	      "description": "Configures the log level of the EventBus and determines which log messages are sent to Ingestion Hub for delivery.",
+		//	      "enum": [
+		//	        "INFO",
+		//	        "ERROR",
+		//	        "TRACE",
+		//	        "OFF"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"log_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IncludeDetail
+				"include_detail": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Configures whether or not to include event detail, input transformer details, target properties, and target input in the applicable log messages.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Level
+				"level": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Configures the log level of the EventBus and determines which log messages are sent to Ingestion Hub for delivery.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The logging configuration settings for vended logs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -172,8 +216,11 @@ func eventBusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"dead_letter_config": "DeadLetterConfig",
 		"description":        "Description",
 		"event_source_name":  "EventSourceName",
+		"include_detail":     "IncludeDetail",
 		"key":                "Key",
 		"kms_key_identifier": "KmsKeyIdentifier",
+		"level":              "Level",
+		"log_config":         "LogConfig",
 		"name":               "Name",
 		"policy":             "Policy",
 		"tags":               "Tags",

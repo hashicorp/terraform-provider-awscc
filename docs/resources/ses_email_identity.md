@@ -44,6 +44,7 @@ resource "awscc_ses_email_identity" "example" {
 - `dkim_signing_attributes` (Attributes) If your request includes this object, Amazon SES configures the identity to use Bring Your Own DKIM (BYODKIM) for DKIM authentication purposes, or, configures the key length to be used for Easy DKIM. (see [below for nested schema](#nestedatt--dkim_signing_attributes))
 - `feedback_attributes` (Attributes) Used to enable or disable feedback forwarding for an identity. (see [below for nested schema](#nestedatt--feedback_attributes))
 - `mail_from_attributes` (Attributes) Used to enable or disable the custom Mail-From domain configuration for an email identity. (see [below for nested schema](#nestedatt--mail_from_attributes))
+- `tags` (Attributes List) The tags (keys and values) associated with the email identity. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -96,6 +97,15 @@ Optional:
 
 - `behavior_on_mx_failure` (String) The action to take if the required MX record isn't found when you send an email. When you set this value to UseDefaultValue , the mail is sent using amazonses.com as the MAIL FROM domain. When you set this value to RejectMessage , the Amazon SES API v2 returns a MailFromDomainNotVerified error, and doesn't attempt to deliver the email.
 - `mail_from_domain` (String) The custom MAIL FROM domain that you want the verified identity to use
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

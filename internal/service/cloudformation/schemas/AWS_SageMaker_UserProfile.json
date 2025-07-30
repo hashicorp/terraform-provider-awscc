@@ -509,6 +509,9 @@
         },
         "FSxLustreFileSystemConfig": {
           "$ref": "#/definitions/FSxLustreFileSystemConfig"
+        },
+        "S3FileSystemConfig": {
+          "$ref": "#/definitions/S3FileSystemConfig"
         }
       }
     },
@@ -553,6 +556,23 @@
       "required": [
         "FileSystemId"
       ]
+    },
+    "S3FileSystemConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MountPath": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 1024
+        },
+        "S3Uri": {
+          "type": "string",
+          "pattern": "(s3)://([^/]+)/?(.*)",
+          "minLength": 0,
+          "maxLength": 1024
+        }
+      }
     },
     "CustomImage": {
       "type": "object",

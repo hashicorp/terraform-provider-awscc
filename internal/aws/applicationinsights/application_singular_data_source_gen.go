@@ -264,7 +264,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    },
 		//	                    "LogType": {
 		//	                      "description": "The log type decides the log patterns against which Application Insights analyzes the log.",
-		//	                      "pattern": "^[A-Z][[A-Z]_]*$",
+		//	                      "pattern": "^[A-Z][A-Z_]*$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "PatternSet": {
@@ -492,7 +492,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                          },
 		//	                          "LogType": {
 		//	                            "description": "The log type decides the log patterns against which Application Insights analyzes the log.",
-		//	                            "pattern": "^[A-Z][[A-Z]_]*$",
+		//	                            "pattern": "^[A-Z][A-Z_]*$",
 		//	                            "type": "string"
 		//	                          },
 		//	                          "PatternSet": {
@@ -783,7 +783,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    },
 		//	                    "LogType": {
 		//	                      "description": "The log type decides the log patterns against which Application Insights analyzes the log.",
-		//	                      "pattern": "^[A-Z][[A-Z]_]*$",
+		//	                      "pattern": "^[A-Z][A-Z_]*$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "PatternSet": {
@@ -1011,7 +1011,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                          },
 		//	                          "LogType": {
 		//	                            "description": "The log type decides the log patterns against which Application Insights analyzes the log.",
-		//	                            "pattern": "^[A-Z][[A-Z]_]*$",
+		//	                            "pattern": "^[A-Z][A-Z_]*$",
 		//	                            "type": "string"
 		//	                          },
 		//	                          "PatternSet": {
@@ -1152,7 +1152,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "Tier": {
 		//	        "description": "The tier of the application component.",
-		//	        "pattern": "^[A-Z][[A-Z]_]*$",
+		//	        "pattern": "^[A-Z][A-Z_]*$",
 		//	        "type": "string"
 		//	      }
 		//	    },

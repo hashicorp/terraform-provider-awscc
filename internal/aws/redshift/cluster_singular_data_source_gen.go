@@ -393,10 +393,6 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "BucketName": {
-		//	      "relationshipRef": {
-		//	        "propertyPath": "/properties/BucketName",
-		//	        "typeName": "AWS::S3::Bucket"
-		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "LogDestinationType": {

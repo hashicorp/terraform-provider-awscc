@@ -1,1 +1,0 @@
-$ terraform import awscc_omics_annotation_store.example "name"

@@ -83,6 +83,17 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "\u003cp\u003eParameters for Amazon Athena.\u003c/p\u003e",
 		//	        "properties": {
+		//	          "IdentityCenterConfiguration": {
+		//	            "additionalProperties": false,
+		//	            "description": "\u003cp\u003eThe parameters for an IAM Identity Center configuration.\u003c/p\u003e",
+		//	            "properties": {
+		//	              "EnableIdentityPropagation": {
+		//	                "description": "\u003cp\u003eA Boolean option that controls whether Trusted Identity Propagation should be used.\u003c/p\u003e",
+		//	                "type": "boolean"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
 		//	          "RoleArn": {
 		//	            "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use \u003ccode\u003eRoleArn\u003c/code\u003e to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.\u003c/p\u003e",
 		//	            "maxLength": 2048,
@@ -275,6 +286,10 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	            "maximum": 65535,
 		//	            "minimum": 1,
 		//	            "type": "number"
+		//	          },
+		//	          "UseServiceName": {
+		//	            "default": false,
+		//	            "type": "boolean"
 		//	          }
 		//	        },
 		//	        "required": [
@@ -840,6 +855,26 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					// Property: AthenaParameters
 					"athena_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: IdentityCenterConfiguration
+							"identity_center_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EnableIdentityPropagation
+									"enable_identity_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "<p>The parameters for an IAM Identity Center configuration.</p>",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: RoleArn
 							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>",
@@ -1162,6 +1197,15 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: UseServiceName
+							"use_service_name": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Default:  booldefault.StaticBool(false),
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -2123,6 +2167,17 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "additionalProperties": false,
 		//	                "description": "\u003cp\u003eParameters for Amazon Athena.\u003c/p\u003e",
 		//	                "properties": {
+		//	                  "IdentityCenterConfiguration": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "\u003cp\u003eThe parameters for an IAM Identity Center configuration.\u003c/p\u003e",
+		//	                    "properties": {
+		//	                      "EnableIdentityPropagation": {
+		//	                        "description": "\u003cp\u003eA Boolean option that controls whether Trusted Identity Propagation should be used.\u003c/p\u003e",
+		//	                        "type": "boolean"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
 		//	                  "RoleArn": {
 		//	                    "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use \u003ccode\u003eRoleArn\u003c/code\u003e to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.\u003c/p\u003e",
 		//	                    "maxLength": 2048,
@@ -2315,6 +2370,10 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "maximum": 65535,
 		//	                    "minimum": 1,
 		//	                    "type": "number"
+		//	                  },
+		//	                  "UseServiceName": {
+		//	                    "default": false,
+		//	                    "type": "boolean"
 		//	                  }
 		//	                },
 		//	                "required": [
@@ -2927,6 +2986,26 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									// Property: AthenaParameters
 									"athena_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: IdentityCenterConfiguration
+											"identity_center_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: EnableIdentityPropagation
+													"enable_identity_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Description: "<p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+															boolplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "<p>The parameters for an IAM Identity Center configuration.</p>",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
 											// Property: RoleArn
 											"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>",
@@ -3249,6 +3328,15 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 													float64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: UseServiceName
+											"use_service_name": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Default:  booldefault.StaticBool(false),
+												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+													boolplanmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
@@ -4214,6 +4302,17 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "\u003cp\u003eParameters for Amazon Athena.\u003c/p\u003e",
 		//	      "properties": {
+		//	        "IdentityCenterConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "\u003cp\u003eThe parameters for an IAM Identity Center configuration.\u003c/p\u003e",
+		//	          "properties": {
+		//	            "EnableIdentityPropagation": {
+		//	              "description": "\u003cp\u003eA Boolean option that controls whether Trusted Identity Propagation should be used.\u003c/p\u003e",
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "RoleArn": {
 		//	          "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use \u003ccode\u003eRoleArn\u003c/code\u003e to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.\u003c/p\u003e",
 		//	          "maxLength": 2048,
@@ -4406,6 +4505,10 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "maximum": 65535,
 		//	          "minimum": 1,
 		//	          "type": "number"
+		//	        },
+		//	        "UseServiceName": {
+		//	          "default": false,
+		//	          "type": "boolean"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -4966,6 +5069,26 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: AthenaParameters
 				"athena_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IdentityCenterConfiguration
+						"identity_center_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EnableIdentityPropagation
+								"enable_identity_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "<p>The parameters for an IAM Identity Center configuration.</p>",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: RoleArn
 						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>",
@@ -5288,6 +5411,15 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: UseServiceName
+						"use_service_name": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Default:  booldefault.StaticBool(false),
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -6387,6 +6519,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "UPDATE_IN_PROGRESS",
 		//	    "UPDATE_SUCCESSFUL",
 		//	    "UPDATE_FAILED",
+		//	    "PENDING_UPDATE",
 		//	    "DELETED"
 		//	  ],
 		//	  "type": "string"
@@ -6495,13 +6628,16 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "ORACLE",
 		//	    "POSTGRESQL",
 		//	    "PRESTO",
+		//	    "QBUSINESS",
 		//	    "REDSHIFT",
 		//	    "S3",
 		//	    "S3_TABLES",
+		//	    "S3_KNOWLEDGE_BASE",
 		//	    "SALESFORCE",
 		//	    "SERVICENOW",
 		//	    "SNOWFLAKE",
 		//	    "SPARK",
+		//	    "SPICE",
 		//	    "SQLSERVER",
 		//	    "TERADATA",
 		//	    "TIMESTREAM",
@@ -6515,7 +6651,12 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "DOCUMENTDB",
 		//	    "APPFLOW",
 		//	    "IMPALA",
-		//	    "GLUE"
+		//	    "GLUE",
+		//	    "GOOGLE_DRIVE",
+		//	    "CONFLUENCE",
+		//	    "SHAREPOINT",
+		//	    "ONE_DRIVE",
+		//	    "WEB_CRAWLER"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -6545,13 +6686,16 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					"ORACLE",
 					"POSTGRESQL",
 					"PRESTO",
+					"QBUSINESS",
 					"REDSHIFT",
 					"S3",
 					"S3_TABLES",
+					"S3_KNOWLEDGE_BASE",
 					"SALESFORCE",
 					"SERVICENOW",
 					"SNOWFLAKE",
 					"SPARK",
+					"SPICE",
 					"SQLSERVER",
 					"TERADATA",
 					"TIMESTREAM",
@@ -6566,6 +6710,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					"APPFLOW",
 					"IMPALA",
 					"GLUE",
+					"GOOGLE_DRIVE",
+					"CONFLUENCE",
+					"SHAREPOINT",
+					"ONE_DRIVE",
+					"WEB_CRAWLER",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -6704,6 +6853,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"token_provider_url":        "TokenProviderUrl",
 		"trino_parameters":          "TrinoParameters",
 		"type":                      "Type",
+		"use_service_name":          "UseServiceName",
 		"username":                  "Username",
 		"value":                     "Value",
 		"vpc_connection_arn":        "VpcConnectionArn",
