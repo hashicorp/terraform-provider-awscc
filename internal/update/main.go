@@ -428,11 +428,12 @@ func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchema
 
 			// Create GitHub issue for tracking if client is available
 			if config != nil && config.Client != nil {
-				_, err := createIssue(ctx, currAllSchemas.Resources[i].CloudFormationTypeName, "Resource is not provisionable", config, filePaths.RepositoryLink)
+				link, err := createIssue(ctx, currAllSchemas.Resources[i].CloudFormationTypeName, "Resource is not provisionable", config, filePaths.RepositoryLink)
 				if err != nil {
 					log.Printf("Failed to create GitHub issue for resource %s: %v", currAllSchemas.Resources[i].CloudFormationTypeName, err)
 					log.Printf("Please create an issue manually for resource %s not being provisionable", currAllSchemas.Resources[i].CloudFormationTypeName)
 				}
+				log.Printf("Created GitHub issue for resource %s: %s", currAllSchemas.Resources[i].CloudFormationTypeName, link)
 			} else {
 				tflog.Info(ctx, "Skipping GitHub issue creation (no client)", map[string]interface{}{
 					"resource": currAllSchemas.Resources[i].CloudFormationTypeName,
