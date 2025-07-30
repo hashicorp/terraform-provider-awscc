@@ -72,8 +72,8 @@ func NewGitHubConfig(repositoryLink string, date string) (*GitHubConfig, error) 
 	config := &GitHubConfig{
 		Client:      client,
 		CurrentDate: date,
-		RepoOwner:   "ThomasZalewski",
-		RepoName:    "terraform-provider-awscc-forkGHA",
+		RepoOwner:   DefaultRepoOwner,
+		RepoName:    DefaultRepoName,
 	}
 
 	// Extract owner and repository name from the repository link if provided
