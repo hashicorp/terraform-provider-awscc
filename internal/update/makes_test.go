@@ -788,8 +788,7 @@ func TestParseCheckoutList(t *testing.T) {
 	filePaths := &UpdateFilePaths{SuppressionCheckout: tmpFile.Name()}
 	result := parseCheckoutList(filePaths)
 
-	fmt.Println(result)
-	if !result["AWS_CustomerProfiles_Domain"] {
-		t.Errorf("Expected AWS_CustomerProfiles_Domain in result")
+	if !result["aws_customer_profiles_domain"] {
+		t.Errorf("Expected aws_customer_profiles_domain in result")
 	}
 }
