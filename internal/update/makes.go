@@ -124,7 +124,9 @@ func processErrorLine(ctx context.Context, errorLine string, config *GitHubConfi
 	log.Printf("Found an entry in the error log: %s during make %s \n", errorLine, buildType)
 
 	// Dispatch to appropriate error handler based on error pattern
-	if strings.Contains(errorLine, "stack overflow") {
+	if strings.Contains(errorLine, "StatusCode: 403,") {
+		return fmt.Errorf("failed to handle StatusCode 403 error: %s", errorLine)
+	} else if strings.Contains(errorLine, "stack overflow") {
 		if err := handleStackOverflowError(ctx, errorLine, config, currentSchemas, buildType, filePaths, isNewMap); err != nil {
 			return fmt.Errorf("failed to handle stack overflow error: %w", err)
 		}
@@ -144,17 +146,10 @@ func processErrorLine(ctx context.Context, errorLine string, config *GitHubConfi
 		if err := handleAWSCC_Error(ctx, errorLine, config, currentSchemas, buildType, filePaths, isNewMap); err != nil {
 			return fmt.Errorf("failed to handle awscc_ error: %w", err)
 		}
-	} else if strings.Contains(errorLine, "StatusCode: 403,") {
-		if err := handleStatusCode403Error(); err != nil {
-			return fmt.Errorf("failed to handle StatusCode 403 error: %w", err)
-		}
-	} else if errorLine == "" {
-		// Skip empty lines
+	} else if errorLine == "" || strings.TrimSpace(errorLine) == "" {
 		return nil
 	} else {
-		if err := handleUnhandledError(errorLine); err != nil {
-			return fmt.Errorf("failed to handle unhandled error: %w", err)
-		}
+		return fmt.Errorf("failed to handle unhandled error: %s", errorLine)
 	}
 
 	// For data source builds, regenerate schemas to ensure consistency
@@ -345,18 +340,6 @@ func handleAWSCC_Error(ctx context.Context, errorLine string, config *GitHubConf
 		return fmt.Errorf("failed to extract resource name from error line: %s", errorLine)
 	}
 	return suppress(ctx, resourceName, errorLine, config, true, buildType, filePaths, currentSchemas)
-}
-
-// handleStatusCode403Error processes HTTP 403 (Forbidden) errors.
-// These typically indicate authentication or permission issues with AWS API access.
-func handleStatusCode403Error() error {
-	return fmt.Errorf("authentication failed: no valid AWS credentials")
-}
-
-// handleUnhandledError processes error lines that don't match any known patterns.
-// It logs the error for debugging and returns a formatted error message.
-func handleUnhandledError(errorLine string) error {
-	return fmt.Errorf("unhandled schema error: %s", errorLine)
 }
 
 // normalizeNames normalizes CloudFormation and Terraform type names for comparison.
