@@ -296,7 +296,7 @@ func run() error {
 	config.CurrentDate = GetCurrentDate()
 
 	// Update the changelog with the changes
-	err = makeChangelog(&changes, filePaths)
+	fullChanges, err := makeChangelog(&changes, filePaths)
 	if err != nil {
 		return fmt.Errorf("failed to update changelog: %w", err)
 	}
@@ -316,7 +316,7 @@ func run() error {
 		// We continue even if there are test failures to include results in PR
 	}
 
-	_, err = submitOnGit(config, &changes, filePaths, AcceptanceTestResults, config.RepoOwner, config.RepoName, branchName)
+	_, err = submitOnGit(config, fullChanges, filePaths, AcceptanceTestResults, config.RepoOwner, config.RepoName, branchName)
 	if err != nil {
 		return fmt.Errorf("failed to submit PR: %w", err)
 	}

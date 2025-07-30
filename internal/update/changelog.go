@@ -54,18 +54,26 @@ func generateDataSourceChanges(changes []string, filePaths *UpdateFilePaths) ([]
 	for _, change := range changes {
 		log.Printf("Processing change: %s\n", change)
 
-		// Parse change entry format: "Description - Message"
-		parts := strings.SplitN(change, " - ", changelogSplitParts)
-		if len(parts) != changelogSplitParts {
-			log.Printf("  Skipping malformed change: %s\n", change)
+		var resource string
+		// Only support "* **New Resource** `ResourceTypeName`" format
+		if strings.HasPrefix(change, "* **New Resource** `") && strings.HasSuffix(change, "`") {
+			// Extract ResourceTypeName from between backticks
+			start := strings.Index(change, "`") + 1
+			end := strings.LastIndex(change, "`")
+			if start > 0 && end > start {
+				resource = change[start:end]
+			} else {
+				log.Printf("  Skipping malformed new resource entry: %s\n", change)
+				newChanges = append(newChanges, change)
+				continue
+			}
+		} else {
+			log.Printf("  Skipping unsupported change format: %s\n", change)
 			newChanges = append(newChanges, change)
 			continue
 		}
 
-		resource := parts[0]
-		message := parts[1]
-
-		log.Printf("  Resource: %s, Message: %s\n", resource, message)
+		log.Printf("  Resource: %s\n", resource)
 
 		// Always include the original resource change
 		newChanges = append(newChanges, change)
@@ -107,27 +115,27 @@ func generateDataSourceChanges(changes []string, filePaths *UpdateFilePaths) ([]
 //   - filePaths: Configuration containing file paths (currently unused but kept for consistency)
 //
 // Returns an error if changelog processing or file operations fail.
-func makeChangelog(changes *[]string, filePaths *UpdateFilePaths) error {
+func makeChangelog(changes *[]string, filePaths *UpdateFilePaths) (*[]string, error) {
 	// Check if there are any changes to process
 	if len(*changes) == 0 {
-		return fmt.Errorf("no changes provided to changelog - cannot generate changelog entry")
+		return changes, fmt.Errorf("no changes provided to changelog - cannot generate changelog entry")
 	}
 
 	// Generate additional entries for data sources based on resource changes
 	newChanges, err := generateDataSourceChanges(*changes, filePaths)
 	if err != nil {
-		return fmt.Errorf("failed to generate data source changes: %w", err)
+		return changes, fmt.Errorf("failed to generate data source changes: %w", err)
 	}
 
 	// Check if after processing there are still no valid changes
 	if len(newChanges) == 0 {
-		return fmt.Errorf("no valid changes found after processing - cannot generate changelog entry")
+		return changes, fmt.Errorf("no valid changes found after processing - cannot generate changelog entry")
 	}
 
 	// Read the current changelog content
 	originalContent, err := os.ReadFile("CHANGELOG.md")
 	if err != nil {
-		return fmt.Errorf("failed to read CHANGELOG.md: %w", err)
+		return &newChanges, fmt.Errorf("failed to read CHANGELOG.md: %w", err)
 	}
 
 	// Generate the new changelog content
@@ -135,22 +143,22 @@ func makeChangelog(changes *[]string, filePaths *UpdateFilePaths) error {
 
 	// Check if the content actually changed (writeChangelog returns original if no entries)
 	if newContent == string(originalContent) {
-		return fmt.Errorf("no valid changelog entries generated - cannot update changelog")
+		return &newChanges, fmt.Errorf("no valid changelog entries generated - cannot update changelog")
 	}
 
 	// Open the file in truncate mode and write the updated content
 	file, err := os.OpenFile("CHANGELOG.md", os.O_WRONLY|os.O_TRUNC, changelogFileMode)
 	if err != nil {
-		return fmt.Errorf("failed to open CHANGELOG.md for writing: %w", err)
+		return &newChanges, fmt.Errorf("failed to open CHANGELOG.md for writing: %w", err)
 	}
 	defer file.Close()
 
 	_, err = file.WriteString(newContent)
 	if err != nil {
-		return fmt.Errorf("failed to write to CHANGELOG.md: %w", err)
+		return &newChanges, fmt.Errorf("failed to write to CHANGELOG.md: %w", err)
 	}
 
-	return nil
+	return &newChanges, nil
 }
 
 // writeChangelog updates the existing changelog content with new changes

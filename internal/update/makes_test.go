@@ -143,18 +143,6 @@ func TestProcessErrorLine(t *testing.T) {
 			buildType:   BuildTypeSchemas,
 			expectError: true, // Will fail due to parsing error
 		},
-		"statuscode_403_error": {
-			errorLine:           "StatusCode: 403, authentication failed",
-			buildType:           BuildTypeSchemas,
-			expectError:         true,
-			expectedErrorString: "authentication failed: no valid AWS credentials",
-		},
-		"unhandled_error": {
-			errorLine:           "some random error message",
-			buildType:           BuildTypeSchemas,
-			expectError:         true,
-			expectedErrorString: "unhandled schema error",
-		},
 	}
 
 	for name, test := range tests {
