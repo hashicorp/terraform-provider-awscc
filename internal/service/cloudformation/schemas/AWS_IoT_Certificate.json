@@ -74,25 +74,29 @@
         "iot:CreateCertificateFromCsr",
         "iot:RegisterCertificate",
         "iot:RegisterCertificateWithoutCA",
-        "iot:DescribeCertificate"
+        "iot:DescribeCertificate",
+        "kms:Decrypt"
       ]
     },
     "read": {
       "permissions": [
-        "iot:DescribeCertificate"
+        "iot:DescribeCertificate",
+        "kms:Decrypt"
       ]
     },
     "update": {
       "permissions": [
         "iot:UpdateCertificate",
-        "iot:DescribeCertificate"
+        "iot:DescribeCertificate",
+        "kms:Decrypt"
       ]
     },
     "delete": {
       "permissions": [
         "iot:DeleteCertificate",
         "iot:UpdateCertificate",
-        "iot:DescribeCertificate"
+        "iot:DescribeCertificate",
+        "kms:Decrypt"
       ]
     },
     "list": {

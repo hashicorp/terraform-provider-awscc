@@ -109,13 +109,15 @@
         "iot:CreateProvisioningTemplate",
         "iot:DescribeProvisioningTemplate",
         "iot:TagResource",
-        "iot:ListTagsForResource"
+        "iot:ListTagsForResource",
+        "kms:Decrypt"
       ]
     },
     "read": {
       "permissions": [
         "iot:DescribeProvisioningTemplate",
-        "iot:ListTagsForResource"
+        "iot:ListTagsForResource",
+        "kms:Decrypt"
       ]
     },
     "update": {
@@ -129,13 +131,15 @@
         "iot:DescribeProvisioningTemplate",
         "iot:TagResource",
         "iot:UntagResource",
-        "iot:ListTagsForResource"
+        "iot:ListTagsForResource",
+        "kms:Decrypt"
       ]
     },
     "delete": {
       "permissions": [
         "iot:DeleteProvisioningTemplate",
-        "iot:DescribeProvisioningTemplate"
+        "iot:DescribeProvisioningTemplate",
+        "kms:Decrypt"
       ]
     },
     "list": {

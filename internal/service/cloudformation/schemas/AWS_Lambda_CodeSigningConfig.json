@@ -139,7 +139,6 @@
     "update": {
       "permissions": [
         "lambda:UpdateCodeSigningConfig",
-        "lambda:ListTags",
         "lambda:TagResource",
         "lambda:UntagResource"
       ]

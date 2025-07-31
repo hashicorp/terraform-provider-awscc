@@ -102,13 +102,15 @@
         "iot:CreateCertificateProvider",
         "iot:DescribeCertificateProvider",
         "iot:TagResource",
-        "iot:ListTagsForResource"
+        "iot:ListTagsForResource",
+        "kms:Decrypt"
       ]
     },
     "read": {
       "permissions": [
         "iot:DescribeCertificateProvider",
-        "iot:ListTagsForResource"
+        "iot:ListTagsForResource",
+        "kms:Decrypt"
       ]
     },
     "update": {
@@ -117,13 +119,15 @@
         "iot:DescribeCertificateProvider",
         "iot:TagResource",
         "iot:UntagResource",
-        "iot:ListTagsForResource"
+        "iot:ListTagsForResource",
+        "kms:Decrypt"
       ]
     },
     "delete": {
       "permissions": [
         "iot:DeleteCertificateProvider",
-        "iot:DescribeCertificateProvider"
+        "iot:DescribeCertificateProvider",
+        "kms:Decrypt"
       ]
     },
     "list": {

@@ -640,6 +640,11 @@
       ]
     }
   },
+  "required": [
+    "KeySchema",
+    "AttributeDefinitions",
+    "Replicas"
+  ],
   "properties": {
     "MultiRegionConsistency": {
       "type": "string",
@@ -734,10 +739,5 @@
     "TimeToLiveSpecification": {
       "$ref": "#/definitions/TimeToLiveSpecification"
     }
-  },
-  "required": [
-    "KeySchema",
-    "AttributeDefinitions",
-    "Replicas"
-  ]
+  }
 }
