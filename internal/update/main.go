@@ -428,7 +428,10 @@ func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchema
 
 		// Suppress resources that are not provisionable
 		if !flag || (err != nil && strings.Contains(err.Error(), "TypeNotFoundException")) {
-			currAllSchemas.Resources[i].SuppressResourceGeneration = true
+			err := addSchemaToCheckout(currAllSchemas.Resources[i].CloudFormationTypeName, filePaths)
+			if err != nil {
+				return fmt.Errorf("failed to add resource to checkout file: %w", err)
+			}
 
 			// Create GitHub issue for tracking if client is available
 			if config != nil && config.Client != nil {
