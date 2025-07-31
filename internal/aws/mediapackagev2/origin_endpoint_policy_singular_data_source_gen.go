@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -22,6 +23,48 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::MediaPackageV2::OriginEndpointPolicy resource.
 func originEndpointPolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CdnAuthConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "CdnIdentifierSecretArns": {
+		//	      "items": {
+		//	        "maxLength": 2048,
+		//	        "minLength": 20,
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 100,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "SecretsRoleArn": {
+		//	      "maxLength": 2048,
+		//	      "minLength": 20,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "CdnIdentifierSecretArns",
+		//	    "SecretsRoleArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"cdn_auth_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CdnIdentifierSecretArns
+				"cdn_identifier_secret_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsRoleArn
+				"secrets_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ChannelGroupName
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +127,13 @@ func originEndpointPolicyDataSource(ctx context.Context) (datasource.DataSource,
 	opts = opts.WithCloudFormationTypeName("AWS::MediaPackageV2::OriginEndpointPolicy").WithTerraformTypeName("awscc_mediapackagev2_origin_endpoint_policy")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"channel_group_name":   "ChannelGroupName",
-		"channel_name":         "ChannelName",
-		"origin_endpoint_name": "OriginEndpointName",
-		"policy":               "Policy",
+		"cdn_auth_configuration":     "CdnAuthConfiguration",
+		"cdn_identifier_secret_arns": "CdnIdentifierSecretArns",
+		"channel_group_name":         "ChannelGroupName",
+		"channel_name":               "ChannelName",
+		"origin_endpoint_name":       "OriginEndpointName",
+		"policy":                     "Policy",
+		"secrets_role_arn":           "SecretsRoleArn",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

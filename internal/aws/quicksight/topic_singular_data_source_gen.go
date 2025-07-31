@@ -67,6 +67,32 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Model for configuration of a Topic",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CustomInstructions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "CustomInstructionsString": {
+		//	      "maxLength": 5000,
+		//	      "minLength": 0,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "CustomInstructionsString"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"custom_instructions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomInstructionsString
+				"custom_instructions_string": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataSets
 		// CloudFormation resource type schema:
 		//
@@ -2071,6 +2097,8 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"constant":                         "Constant",
 		"constant_type":                    "ConstantType",
 		"currency_symbol":                  "CurrencySymbol",
+		"custom_instructions":              "CustomInstructions",
+		"custom_instructions_string":       "CustomInstructionsString",
 		"data_aggregation":                 "DataAggregation",
 		"data_sets":                        "DataSets",
 		"dataset_arn":                      "DatasetArn",
