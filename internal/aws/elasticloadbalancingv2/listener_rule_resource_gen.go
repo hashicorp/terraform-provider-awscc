@@ -203,7 +203,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	            "description": "Information about the target group stickiness for a rule.",
 		//	            "properties": {
 		//	              "DurationSeconds": {
-		//	                "description": "The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days).",
+		//	                "description": "The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.",
 		//	                "type": "integer"
 		//	              },
 		//	              "Enabled": {
@@ -574,7 +574,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: DurationSeconds
 									"duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days).",
+										Description: "The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -752,7 +752,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "Information for a host header condition. Specify only when ``Field`` is ``host-header``.",
 		//	        "properties": {
 		//	          "Values": {
-		//	            "description": "The host names. The maximum size of each name is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).\n If you specify multiple strings, the condition is satisfied if one of the strings matches the host name.",
+		//	            "description": "The host names. The maximum size of each name is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). You must include at least one \".\" character. You can include only alphabetical characters after the final \".\" character.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the host name.",
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "type": "string"
@@ -892,7 +892,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Values
 							"values": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "The host names. The maximum size of each name is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).\n If you specify multiple strings, the condition is satisfied if one of the strings matches the host name.",
+								Description: "The host names. The maximum size of each name is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). You must include at least one \".\" character. You can include only alphabetical characters after the final \".\" character.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the host name.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/

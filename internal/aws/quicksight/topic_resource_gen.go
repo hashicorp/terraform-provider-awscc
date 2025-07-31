@@ -101,6 +101,44 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: CustomInstructions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "CustomInstructionsString": {
+		//	      "maxLength": 5000,
+		//	      "minLength": 0,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "CustomInstructionsString"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"custom_instructions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomInstructionsString
+				"custom_instructions_string": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(0, 5000),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DataSets
 		// CloudFormation resource type schema:
 		//
@@ -3368,6 +3406,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		"constant":                         "Constant",
 		"constant_type":                    "ConstantType",
 		"currency_symbol":                  "CurrencySymbol",
+		"custom_instructions":              "CustomInstructions",
+		"custom_instructions_string":       "CustomInstructionsString",
 		"data_aggregation":                 "DataAggregation",
 		"data_sets":                        "DataSets",
 		"dataset_arn":                      "DatasetArn",

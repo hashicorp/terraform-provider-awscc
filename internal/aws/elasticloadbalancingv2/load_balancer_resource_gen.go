@@ -138,7 +138,7 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "arrayType": "AttributeList",
-		//	  "description": "The load balancer attributes.",
+		//	  "description": "The load balancer attributes. Attributes that you do not modify retain their current values.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -181,7 +181,7 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "The load balancer attributes.",
+			Description: "The load balancer attributes. Attributes that you do not modify retain their current values.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
