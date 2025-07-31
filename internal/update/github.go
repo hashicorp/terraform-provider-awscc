@@ -49,7 +49,7 @@ func NewGitHubConfig(repositoryLink string, date string) (*GitHubConfig, error) 
 	if err != nil {
 		return nil, err
 	}
-	err = exec.Command("git", "config", "--global", "user.name", "GHA").Run()
+	err = exec.Command("git", "config", "--global", "user.name", "update-schemas workflow").Run()
 	if err != nil {
 		return nil, err
 	}
