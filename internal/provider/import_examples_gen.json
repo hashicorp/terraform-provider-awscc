@@ -488,6 +488,10 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_batch_service_environment",
+        "identifier": ["ServiceEnvironmentArn"]
+    },
+    {
         "resource": "awscc_bedrock_agent",
         "identifier": ["AgentId"]
     },
@@ -4274,6 +4278,10 @@
     {
         "resource": "awscc_sagemaker_pipeline",
         "identifier": ["PipelineName"]
+    },
+    {
+        "resource": "awscc_sagemaker_processing_job",
+        "identifier": ["ProcessingJobArn"]
     },
     {
         "resource": "awscc_sagemaker_project",
