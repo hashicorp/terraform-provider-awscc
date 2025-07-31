@@ -97,6 +97,7 @@ func makeBuild(ctx context.Context, config *GitHubConfig, currentSchemas *allsch
 			err := processErrorLine(ctx, errorLine, config, currentSchemas, buildType, changes, filePaths, isNewMap)
 			if err != nil {
 				log.Printf("Error processing line: %v", err)
+				return fmt.Errorf("failed to process error line: %w. manual intervention is needed to complete release", err)
 			}
 		}
 
