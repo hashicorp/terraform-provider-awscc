@@ -138,10 +138,6 @@
       "type": "object",
       "properties": {
         "TargetGroupArn": {
-          "relationshipRef": {
-            "typeName": "AWS::ElasticLoadBalancingV2::TargetGroup",
-            "propertyPath": "/properties/TargetGroupArn"
-          },
           "description": "The Amazon Resource Name (ARN) of the target group.",
           "type": "string"
         },
@@ -161,10 +157,6 @@
           "type": "integer"
         },
         "TargetGroupArn": {
-          "relationshipRef": {
-            "typeName": "AWS::ElasticLoadBalancingV2::TargetGroup",
-            "propertyPath": "/properties/TargetGroupArn"
-          },
           "description": "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to one or more target groups, use ``ForwardConfig`` instead.",
           "type": "string"
         },
@@ -225,10 +217,6 @@
           "type": "string"
         },
         "UserPoolDomain": {
-          "relationshipRef": {
-            "typeName": "AWS::Cognito::UserPoolDomain",
-            "propertyPath": "/properties/Id"
-          },
           "description": "The domain prefix or fully-qualified domain name of the Amazon Cognito user pool.",
           "type": "string"
         },
@@ -245,10 +233,6 @@
           "type": "string"
         },
         "UserPoolArn": {
-          "relationshipRef": {
-            "typeName": "AWS::Cognito::UserPool",
-            "propertyPath": "/properties/Arn"
-          },
           "description": "The Amazon Resource Name (ARN) of the Amazon Cognito user pool.",
           "type": "string"
         },

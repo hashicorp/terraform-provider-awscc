@@ -174,11 +174,11 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The location for storing automated backups and manual snapshots.\n Valid Values:\n  +  ``local`` (Dedicated Local Zone)\n  +  ``outposts`` (AWS Outposts)\n  +  ``region`` (AWS-Region)\n  \n Default: ``region``\n For more information, see [Working with Amazon RDS on Outposts](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in the *Amazon RDS User Guide*.",
 		//	  "type": "string"
 		//	}
 		"backup_target": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The location for storing automated backups and manual snapshots.\n Valid Values:\n  +  ``local`` (Dedicated Local Zone)\n  +  ``outposts`` (AWS Outposts)\n  +  ``region`` (AWS-Region)\n  \n Default: ``region``\n For more information, see [Working with Amazon RDS on Outposts](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in the *Amazon RDS User Guide*.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CACertificateIdentifier
@@ -328,6 +328,17 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"db_instance_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A name for the DB instance. If you specify a name, AWS CloudFormation converts it to lowercase. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the DB instance. For more information, see [Name Type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).\n For information about constraints that apply to DB instance identifiers, see [Naming constraints in Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html#RDS_Limits.Constraints) in the *Amazon RDS User Guide*.\n  If you specify a name, you can't perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: DBInstanceStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"db_instance_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DBName
@@ -639,6 +650,19 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The version number of the database engine to use.\n For a list of valid engine versions, use the ``DescribeDBEngineVersions`` action.\n The following are the database engines and links to information about the major and minor versions that are available with Amazon RDS. Not every database engine is available for every AWS Region.\n  *Amazon Aurora* \n Not applicable. The version number of the database engine to be used by the DB instance is managed by the DB cluster.\n  *Db2* \n See [Amazon RDS for Db2](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Db2.html#Db2.Concepts.VersionMgmt) in the *Amazon RDS User Guide.*\n  *MariaDB* \n See [MariaDB on Amazon RDS Versions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt) in the *Amazon RDS User Guide.*\n  *Microsoft SQL Server* \n See [Microsoft SQL Server Versions on Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport) in the *Amazon RDS User Guide.*\n  *MySQL* \n See [MySQL on Amazon RDS Versions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt) in the *Amazon RDS User Guide.*\n  *Oracle* \n See [Oracle Database Engine Release Notes](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html) in the *Amazon RDS User Guide.*\n  *PostgreSQL* \n See [Supported PostgreSQL Database Versions](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions) in the *Amazon RDS User Guide.*",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: InstanceCreateTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"instance_create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Iops
 		// CloudFormation resource type schema:
 		//
@@ -648,6 +672,17 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The number of I/O operations per second (IOPS) that the database provisions. The value must be equal to or greater than 1000. \n If you specify this property, you must follow the range of allowed ratios of your requested IOPS rate to the amount of storage that you allocate (IOPS to allocated storage). For example, you can provision an Oracle database instance with 1000 IOPS and 200 GiB of storage (a ratio of 5:1), or specify 2000 IOPS with 200 GiB of storage (a ratio of 10:1). For more information, see [Amazon RDS Provisioned IOPS Storage to Improve Performance](https://docs.aws.amazon.com/AmazonRDS/latest/DeveloperGuide/CHAP_Storage.html#USER_PIOPS) in the *Amazon RDS User Guide*.\n  If you specify ``io1`` for the ``StorageType`` property, then you must also specify the ``Iops`` property.\n  Constraints:\n  +  For RDS for Db2, MariaDB, MySQL, Oracle, and PostgreSQL - Must be a multiple between .5 and 50 of the storage amount for the DB instance.\n  +  For RDS for SQL Server - Must be a multiple between 1 and 50 of the storage amount for the DB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: IsStorageConfigUpgradeAvailable
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "boolean"
+		//	}
+		"is_storage_config_upgrade_available": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
@@ -661,6 +696,19 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The ARN of the AWS KMS key that's used to encrypt the DB instance, such as ``arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef``. If you enable the StorageEncrypted property but don't specify this property, AWS CloudFormation uses the default KMS key. If you specify this property, you must set the StorageEncrypted property to true. \n If you specify the ``SourceDBInstanceIdentifier`` or ``SourceDbiResourceId`` property, don't specify this property. The value is inherited from the source DB instance, and if the DB instance is encrypted, the specified ``KmsKeyId`` property is used. However, if the source DB instance is in a different AWS Region, you must specify a KMS key ID.\n If you specify the ``SourceDBInstanceAutomatedBackupsArn`` property, don't specify this property. The value is inherited from the source DB instance automated backup, and if the automated backup is encrypted, the specified ``KmsKeyId`` property is used.\n If you create an encrypted read replica in a different AWS Region, then you must specify a KMS key for the destination AWS Region. KMS encryption keys are specific to the region that they're created in, and you can't use encryption keys from one region in another region.\n If you specify the ``DBSnapshotIdentifier`` property, don't specify this property. The ``StorageEncrypted`` property value is inherited from the snapshot. If the DB instance is encrypted, the specified ``KmsKeyId`` property is also inherited from the snapshot.\n If you specify ``DBSecurityGroups``, AWS CloudFormation ignores this property. To specify both a security group and this property, you must use a VPC security group. For more information about Amazon RDS and VPC, see [Using Amazon RDS with Amazon VPC](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html) in the *Amazon RDS User Guide*.\n  *Amazon Aurora* \n Not applicable. The KMS key identifier is managed by the DB cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LatestRestorableTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"latest_restorable_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LicenseModel
 		// CloudFormation resource type schema:
 		//
@@ -670,6 +718,49 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"license_model": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "License model information for this DB instance.\n  Valid Values:\n  +  Aurora MySQL - ``general-public-license``\n  +  Aurora PostgreSQL - ``postgresql-license``\n  +  RDS for Db2 - ``bring-your-own-license``. For more information about RDS for Db2 licensing, see [](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html) in the *Amazon RDS User Guide.*\n  +  RDS for MariaDB - ``general-public-license``\n  +  RDS for Microsoft SQL Server - ``license-included``\n  +  RDS for MySQL - ``general-public-license``\n  +  RDS for Oracle - ``bring-your-own-license`` or ``license-included``\n  +  RDS for PostgreSQL - ``postgresql-license``\n  \n  If you've specified ``DBSecurityGroups`` and then you update the license model, AWS CloudFormation replaces the underlying DB instance. This will incur some interruptions to database availability.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ListenerEndpoint
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "This data type represents the information you need to connect to an Amazon RDS DB instance. This data type is used as a response element in the following actions:\n  +   ``CreateDBInstance`` \n  +   ``DescribeDBInstances`` \n  +   ``DeleteDBInstance`` \n  \n For the data structure that represents Amazon Aurora DB cluster endpoints, see ``DBClusterEndpoint``.",
+		//	  "properties": {
+		//	    "Address": {
+		//	      "description": "Specifies the DNS address of the DB instance.",
+		//	      "type": "string"
+		//	    },
+		//	    "HostedZoneId": {
+		//	      "description": "Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.",
+		//	      "type": "string"
+		//	    },
+		//	    "Port": {
+		//	      "description": "Specifies the port that the database engine is listening on.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"listener_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Address
+				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the DNS address of the DB instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HostedZoneId
+				"hosted_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the port that the database engine is listening on.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "This data type represents the information you need to connect to an Amazon RDS DB instance. This data type is used as a response element in the following actions:\n  +   ``CreateDBInstance`` \n  +   ``DescribeDBInstances`` \n  +   ``DeleteDBInstance`` \n  \n For the data structure that represents Amazon Aurora DB cluster endpoints, see ``DBClusterEndpoint``.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ManageMasterUserPassword
@@ -779,11 +870,11 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies whether the DB instance is a Multi-AZ deployment. You can't set the ``AvailabilityZone`` parameter if the DB instance is a Multi-AZ deployment.\n This setting doesn't apply to the following DB instances:\n  +  Amazon Aurora (DB instance Availability Zones (AZs) are managed by the DB cluster.)\n  +  RDS Custom",
+		//	  "description": "Specifies whether the DB instance is a Multi-AZ deployment. You can't set the ``AvailabilityZone`` parameter if the DB instance is a Multi-AZ deployment.\n This setting doesn't apply to Amazon Aurora because the DB instance Availability Zones (AZs) are managed by the DB cluster.",
 		//	  "type": "boolean"
 		//	}
 		"multi_az": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether the DB instance is a Multi-AZ deployment. You can't set the ``AvailabilityZone`` parameter if the DB instance is a Multi-AZ deployment.\n This setting doesn't apply to the following DB instances:\n  +  Amazon Aurora (DB instance Availability Zones (AZs) are managed by the DB cluster.)\n  +  RDS Custom",
+			Description: "Specifies whether the DB instance is a Multi-AZ deployment. You can't set the ``AvailabilityZone`` parameter if the DB instance is a Multi-AZ deployment.\n This setting doesn't apply to Amazon Aurora because the DB instance Availability Zones (AZs) are managed by the DB cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NcharCharacterSetName
@@ -940,6 +1031,36 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates whether the DB instance is an internet-facing instance. If you specify true, AWS CloudFormation creates an instance with a publicly resolvable DNS name, which resolves to a public IP address. If you specify false, AWS CloudFormation creates an internal instance with a DNS name that resolves to a private IP address. \n The default behavior value depends on your VPC setup and the database subnet group. For more information, see the ``PubliclyAccessible`` parameter in the [CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html) in the *Amazon RDS API Reference*.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ReadReplicaDBClusterIdentifiers
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"read_replica_db_cluster_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ReadReplicaDBInstanceIdentifiers
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"read_replica_db_instance_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ReplicaMode
@@ -1216,6 +1337,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"db_instance_arn":                               "DBInstanceArn",
 		"db_instance_class":                             "DBInstanceClass",
 		"db_instance_identifier":                        "DBInstanceIdentifier",
+		"db_instance_status":                            "DBInstanceStatus",
 		"db_name":                                       "DBName",
 		"db_parameter_group_name":                       "DBParameterGroupName",
 		"db_security_groups":                            "DBSecurityGroups",
@@ -1241,10 +1363,14 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"engine_version":                                "EngineVersion",
 		"feature_name":                                  "FeatureName",
 		"hosted_zone_id":                                "HostedZoneId",
+		"instance_create_time":                          "InstanceCreateTime",
 		"iops":                                          "Iops",
+		"is_storage_config_upgrade_available":           "IsStorageConfigUpgradeAvailable",
 		"key":                                           "Key",
 		"kms_key_id":                                    "KmsKeyId",
+		"latest_restorable_time":                        "LatestRestorableTime",
 		"license_model":                                 "LicenseModel",
+		"listener_endpoint":                             "ListenerEndpoint",
 		"manage_master_user_password":                   "ManageMasterUserPassword",
 		"master_user_password":                          "MasterUserPassword",
 		"master_user_secret":                            "MasterUserSecret",
@@ -1265,6 +1391,8 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"processor_features":                            "ProcessorFeatures",
 		"promotion_tier":                                "PromotionTier",
 		"publicly_accessible":                           "PubliclyAccessible",
+		"read_replica_db_cluster_identifiers":           "ReadReplicaDBClusterIdentifiers",
+		"read_replica_db_instance_identifiers":          "ReadReplicaDBInstanceIdentifiers",
 		"replica_mode":                                  "ReplicaMode",
 		"restore_time":                                  "RestoreTime",
 		"role_arn":                                      "RoleArn",

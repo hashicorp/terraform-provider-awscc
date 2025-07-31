@@ -130,7 +130,7 @@ func repositoryCreationTemplateDataSource(ctx context.Context) (datasource.DataS
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The tag mutability setting for the repository. If this parameter is omitted, the default setting of MUTABLE will be used which will allow image tags to be overwritten. If IMMUTABLE is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.",
+		//	  "description": "The tag mutability setting for the repository. If this parameter is omitted, the default setting of ``MUTABLE`` will be used which will allow image tags to be overwritten. If ``IMMUTABLE`` is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.",
 		//	  "enum": [
 		//	    "MUTABLE",
 		//	    "IMMUTABLE"
@@ -138,7 +138,7 @@ func repositoryCreationTemplateDataSource(ctx context.Context) (datasource.DataS
 		//	  "type": "string"
 		//	}
 		"image_tag_mutability": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The tag mutability setting for the repository. If this parameter is omitted, the default setting of MUTABLE will be used which will allow image tags to be overwritten. If IMMUTABLE is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.",
+			Description: "The tag mutability setting for the repository. If this parameter is omitted, the default setting of ``MUTABLE`` will be used which will allow image tags to be overwritten. If ``IMMUTABLE`` is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LifecyclePolicy

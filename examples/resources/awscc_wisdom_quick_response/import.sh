@@ -1,0 +1,1 @@
+$ terraform import awscc_wisdom_quick_response.example "quick_response_arn"

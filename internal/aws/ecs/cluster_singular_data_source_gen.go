@@ -113,10 +113,6 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "properties": {
 		//	        "KmsKeyId": {
 		//	          "description": "Specify an KMSlong key ID to encrypt the data between the local client and the container.",
-		//	          "relationshipRef": {
-		//	            "propertyPath": "/properties/Arn",
-		//	            "typeName": "AWS::KMS::Key"
-		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "LogConfiguration": {
@@ -129,10 +125,6 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            },
 		//	            "CloudWatchLogGroupName": {
 		//	              "description": "The name of the CloudWatch log group to send logs to.\n  The CloudWatch log group must already be created.",
-		//	              "relationshipRef": {
-		//	                "propertyPath": "/properties/LogGroupName",
-		//	                "typeName": "AWS::Logs::LogGroup"
-		//	              },
 		//	              "type": "string"
 		//	            },
 		//	            "S3BucketName": {
@@ -262,10 +254,6 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "CapacityProvider": {
 		//	        "description": "The short name of the capacity provider.",
-		//	        "relationshipRef": {
-		//	          "propertyPath": "/properties/Name",
-		//	          "typeName": "AWS::ECS::CapacityProvider"
-		//	        },
 		//	        "type": "string"
 		//	      },
 		//	      "Weight": {

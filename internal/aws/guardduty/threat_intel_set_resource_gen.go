@@ -62,6 +62,19 @@ func threatIntelSetResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ExpectedBucketOwner
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"expected_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Format
 		// CloudFormation resource type schema:
 		//
@@ -201,15 +214,16 @@ func threatIntelSetResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::GuardDuty::ThreatIntelSet").WithTerraformTypeName("awscc_guardduty_threat_intel_set")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"activate":            "Activate",
-		"detector_id":         "DetectorId",
-		"format":              "Format",
-		"key":                 "Key",
-		"location":            "Location",
-		"name":                "Name",
-		"tags":                "Tags",
-		"threat_intel_set_id": "Id",
-		"value":               "Value",
+		"activate":              "Activate",
+		"detector_id":           "DetectorId",
+		"expected_bucket_owner": "ExpectedBucketOwner",
+		"format":                "Format",
+		"key":                   "Key",
+		"location":              "Location",
+		"name":                  "Name",
+		"tags":                  "Tags",
+		"threat_intel_set_id":   "Id",
+		"value":                 "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
