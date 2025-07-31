@@ -1,4 +1,13 @@
-## 1.51.0 (Unreleased)
+## 1.51.0 (July 31, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_batch_service_environment`
+* **New Data Source:** `awscc_batch_service_environments`
+* **New Data Source:** `awscc_sagemaker_processing_job`
+* **New Data Source:** `awscc_sagemaker_processing_jobs`
+* **New Resource:** `awscc_batch_service_environment`
+* **New Resource:** `awscc_sagemaker_processing_job`
 
 ## 1.50.0 (July 28, 2025)
 
