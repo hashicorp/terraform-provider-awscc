@@ -3360,6 +3360,10 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_omics_annotation_store",
+        "identifier": ["Name"]
+    },
+    {
         "resource": "awscc_omics_reference_store",
         "identifier": ["ReferenceStoreId"]
     },
@@ -4290,6 +4294,10 @@
     {
         "resource": "awscc_sagemaker_user_profile",
         "identifier": ["UserProfileName","DomainId"]
+    },
+    {
+        "resource": "awscc_scheduler_schedule",
+        "identifier": ["Name"]
     },
     {
         "resource": "awscc_scheduler_schedule_group",

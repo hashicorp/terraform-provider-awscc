@@ -1,0 +1,1 @@
+$ terraform import awscc_scheduler_schedule.example "name"
