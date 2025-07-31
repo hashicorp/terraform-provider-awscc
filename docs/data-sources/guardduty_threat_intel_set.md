@@ -23,6 +23,7 @@ Data Source schema for AWS::GuardDuty::ThreatIntelSet
 
 - `activate` (Boolean)
 - `detector_id` (String)
+- `expected_bucket_owner` (String)
 - `format` (String)
 - `location` (String)
 - `name` (String)

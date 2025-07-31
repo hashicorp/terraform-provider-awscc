@@ -249,10 +249,6 @@ func storageLensDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            },
 		//	            "Arn": {
 		//	              "description": "The ARN of the bucket to which Amazon S3 Storage Lens exports will be placed.",
-		//	              "relationshipRef": {
-		//	                "propertyPath": "/properties/Arn",
-		//	                "typeName": "AWS::S3::Bucket"
-		//	              },
 		//	              "type": "string"
 		//	            },
 		//	            "Encryption": {

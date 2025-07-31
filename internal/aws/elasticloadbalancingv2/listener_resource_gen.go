@@ -140,10 +140,6 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	          },
 		//	          "UserPoolArn": {
 		//	            "description": "The Amazon Resource Name (ARN) of the Amazon Cognito user pool.",
-		//	            "relationshipRef": {
-		//	              "propertyPath": "/properties/Arn",
-		//	              "typeName": "AWS::Cognito::UserPool"
-		//	            },
 		//	            "type": "string"
 		//	          },
 		//	          "UserPoolClientId": {
@@ -156,10 +152,6 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	          },
 		//	          "UserPoolDomain": {
 		//	            "description": "The domain prefix or fully-qualified domain name of the Amazon Cognito user pool.",
-		//	            "relationshipRef": {
-		//	              "propertyPath": "/properties/Id",
-		//	              "typeName": "AWS::Cognito::UserPoolDomain"
-		//	            },
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -298,10 +290,6 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	              "properties": {
 		//	                "TargetGroupArn": {
 		//	                  "description": "The Amazon Resource Name (ARN) of the target group.",
-		//	                  "relationshipRef": {
-		//	                    "propertyPath": "/properties/TargetGroupArn",
-		//	                    "typeName": "AWS::ElasticLoadBalancingV2::TargetGroup"
-		//	                  },
 		//	                  "type": "string"
 		//	                },
 		//	                "Weight": {
@@ -357,10 +345,6 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "TargetGroupArn": {
 		//	        "description": "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to one or more target groups, use ``ForwardConfig`` instead.",
-		//	        "relationshipRef": {
-		//	          "propertyPath": "/properties/TargetGroupArn",
-		//	          "typeName": "AWS::ElasticLoadBalancingV2::TargetGroup"
-		//	        },
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {

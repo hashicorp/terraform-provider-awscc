@@ -99,8 +99,17 @@ Read-Only:
 
 Read-Only:
 
+- `identity_center_configuration` (Attributes) <p>The parameters for an IAM Identity Center configuration.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--athena_parameters--identity_center_configuration))
 - `role_arn` (String) <p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>
 - `work_group` (String) <p>The workgroup that Amazon Athena uses.</p>
+
+<a id="nestedatt--alternate_data_source_parameters--athena_parameters--identity_center_configuration"></a>
+### Nested Schema for `alternate_data_source_parameters.athena_parameters.identity_center_configuration`
+
+Read-Only:
+
+- `enable_identity_propagation` (Boolean) <p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>
+
 
 
 <a id="nestedatt--alternate_data_source_parameters--aurora_parameters"></a>
@@ -161,6 +170,7 @@ Read-Only:
 - `database` (String) <p>The database.</p>
 - `host` (String) <p>An Oracle host.</p>
 - `port` (Number) <p>The port.</p>
+- `use_service_name` (Boolean)
 
 
 <a id="nestedatt--alternate_data_source_parameters--postgre_sql_parameters"></a>
@@ -427,8 +437,17 @@ Read-Only:
 
 Read-Only:
 
+- `identity_center_configuration` (Attributes) <p>The parameters for an IAM Identity Center configuration.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--athena_parameters--identity_center_configuration))
 - `role_arn` (String) <p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>
 - `work_group` (String) <p>The workgroup that Amazon Athena uses.</p>
+
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--athena_parameters--identity_center_configuration"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.athena_parameters.identity_center_configuration`
+
+Read-Only:
+
+- `enable_identity_propagation` (Boolean) <p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>
+
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_parameters"></a>
@@ -489,6 +508,7 @@ Read-Only:
 - `database` (String) <p>The database.</p>
 - `host` (String) <p>An Oracle host.</p>
 - `port` (Number) <p>The port.</p>
+- `use_service_name` (Boolean)
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--postgre_sql_parameters"></a>
@@ -728,8 +748,17 @@ Read-Only:
 
 Read-Only:
 
+- `identity_center_configuration` (Attributes) <p>The parameters for an IAM Identity Center configuration.</p> (see [below for nested schema](#nestedatt--data_source_parameters--athena_parameters--identity_center_configuration))
 - `role_arn` (String) <p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>
 - `work_group` (String) <p>The workgroup that Amazon Athena uses.</p>
+
+<a id="nestedatt--data_source_parameters--athena_parameters--identity_center_configuration"></a>
+### Nested Schema for `data_source_parameters.athena_parameters.identity_center_configuration`
+
+Read-Only:
+
+- `enable_identity_propagation` (Boolean) <p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>
+
 
 
 <a id="nestedatt--data_source_parameters--aurora_parameters"></a>
@@ -790,6 +819,7 @@ Read-Only:
 - `database` (String) <p>The database.</p>
 - `host` (String) <p>An Oracle host.</p>
 - `port` (Number) <p>The port.</p>
+- `use_service_name` (Boolean)
 
 
 <a id="nestedatt--data_source_parameters--postgre_sql_parameters"></a>

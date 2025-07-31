@@ -59,9 +59,9 @@
       "maxItems": 100
     },
     "UserArn": {
-      "description": "The Amazon Resource Name (ARN) of the user.",
+      "description": "The Amazon Resource Name (ARN) of the user or a dynamic recipient string starting with '$.'.",
       "type": "string",
-      "pattern": "^$|arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent/[-a-zA-Z0-9]*$"
+      "pattern": "^$|arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent/[-a-zA-Z0-9]*$|^\\$\\..+$"
     },
     "NotificationRecipientType": {
       "description": "The type of notification recipient.",

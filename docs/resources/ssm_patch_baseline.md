@@ -85,6 +85,7 @@ resource "awscc_ssm_patch_baseline" "windows_baseline" {
 - `approved_patches` (List of String) A list of explicitly approved patches for the baseline.
 - `approved_patches_compliance_level` (String) Defines the compliance level for approved patches. This means that if an approved patch is reported as missing, this is the severity of the compliance violation. The default value is UNSPECIFIED.
 - `approved_patches_enable_non_security` (Boolean) Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.
+- `available_security_updates_compliance_status` (String) The compliance status for vendor recommended security updates that are not approved by this patch baseline.
 - `default_baseline` (Boolean) Set the baseline as default baseline. Only registering to default patch baseline is allowed.
 - `description` (String) The description of the patch baseline.
 - `global_filters` (Attributes) A set of global filters used to include patches in the baseline. (see [below for nested schema](#nestedatt--global_filters))
