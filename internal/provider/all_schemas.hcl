@@ -582,6 +582,10 @@ resource_schema "aws_batch_scheduling_policy" {
   cloudformation_type_name = "AWS::Batch::SchedulingPolicy"
 }
 
+resource_schema "aws_batch_service_environment" {
+  cloudformation_type_name = "AWS::Batch::ServiceEnvironment"
+}
+
 resource_schema "aws_bedrock_agent" {
   cloudformation_type_name = "AWS::Bedrock::Agent"
 }
@@ -2916,6 +2920,16 @@ resource_schema "aws_iotsitewise_asset_model" {
   cloudformation_type_name = "AWS::IoTSiteWise::AssetModel"
 }
 
+resource_schema "aws_iotsitewise_computation_model" {
+  cloudformation_type_name = "AWS::IoTSiteWise::ComputationModel"
+
+  # Stack overflow
+  # Ref: https://github.com/hashicorp/terraform-provider-awscc/issues/2737
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_iotsitewise_dashboard" {
   cloudformation_type_name = "AWS::IoTSiteWise::Dashboard"
 }
@@ -4855,6 +4869,10 @@ resource_schema "aws_sagemaker_partner_app" {
 
 resource_schema "aws_sagemaker_pipeline" {
   cloudformation_type_name = "AWS::SageMaker::Pipeline"
+}
+
+resource_schema "aws_sagemaker_processing_job" {
+  cloudformation_type_name = "AWS::SageMaker::ProcessingJob"
 }
 
 resource_schema "aws_sagemaker_project" {

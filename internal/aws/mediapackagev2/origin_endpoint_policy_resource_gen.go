@@ -9,14 +9,19 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -27,6 +32,71 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::MediaPackageV2::OriginEndpointPolicy resource.
 func originEndpointPolicyResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CdnAuthConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "CdnIdentifierSecretArns": {
+		//	      "items": {
+		//	        "maxLength": 2048,
+		//	        "minLength": 20,
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 100,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "SecretsRoleArn": {
+		//	      "maxLength": 2048,
+		//	      "minLength": 20,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "CdnIdentifierSecretArns",
+		//	    "SecretsRoleArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"cdn_auth_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CdnIdentifierSecretArns
+				"cdn_identifier_secret_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 100),
+						listvalidator.ValueStringsAre(
+							stringvalidator.LengthBetween(20, 2048),
+						),
+						fwvalidators.NotNullList(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsRoleArn
+				"secrets_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(20, 2048),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ChannelGroupName
 		// CloudFormation resource type schema:
 		//
@@ -115,10 +185,13 @@ func originEndpointPolicyResource(ctx context.Context) (resource.Resource, error
 	opts = opts.WithCloudFormationTypeName("AWS::MediaPackageV2::OriginEndpointPolicy").WithTerraformTypeName("awscc_mediapackagev2_origin_endpoint_policy")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"channel_group_name":   "ChannelGroupName",
-		"channel_name":         "ChannelName",
-		"origin_endpoint_name": "OriginEndpointName",
-		"policy":               "Policy",
+		"cdn_auth_configuration":     "CdnAuthConfiguration",
+		"cdn_identifier_secret_arns": "CdnIdentifierSecretArns",
+		"channel_group_name":         "ChannelGroupName",
+		"channel_name":               "ChannelName",
+		"origin_endpoint_name":       "OriginEndpointName",
+		"policy":                     "Policy",
+		"secrets_role_arn":           "SecretsRoleArn",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

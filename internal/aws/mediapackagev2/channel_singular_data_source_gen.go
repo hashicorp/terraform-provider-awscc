@@ -148,6 +148,11 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "MQCSInputSwitching": {
 		//	      "description": "\u003cp\u003eWhen true, AWS Elemental MediaPackage performs input switching based on the MQCS. Default is true. This setting is valid only when \u003ccode\u003eInputType\u003c/code\u003e is \u003ccode\u003eCMAF\u003c/code\u003e.\u003c/p\u003e",
 		//	      "type": "boolean"
+		//	    },
+		//	    "PreferredInput": {
+		//	      "maximum": 2,
+		//	      "minimum": 1,
+		//	      "type": "integer"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -158,6 +163,10 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 				"mqcs_input_switching": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>When true, AWS Elemental MediaPackage performs input switching based on the MQCS. Default is true. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>",
 					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PreferredInput
+				"preferred_input": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "<p>The configuration for input switching based on the media quality confidence score (MQCS) as provided from AWS Elemental MediaLive.</p>",
@@ -279,6 +288,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"modified_at":                 "ModifiedAt",
 		"mqcs_input_switching":        "MQCSInputSwitching",
 		"output_header_configuration": "OutputHeaderConfiguration",
+		"preferred_input":             "PreferredInput",
 		"publish_mqcs":                "PublishMQCS",
 		"tags":                        "Tags",
 		"url":                         "Url",

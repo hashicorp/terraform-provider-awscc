@@ -24,7 +24,7 @@
     },
     "LoadBalancerAttributes": {
       "type": "array",
-      "description": "The load balancer attributes.",
+      "description": "The load balancer attributes. Attributes that you do not modify retain their current values.",
       "uniqueItems": true,
       "insertionOrder": false,
       "arrayType": "AttributeList",

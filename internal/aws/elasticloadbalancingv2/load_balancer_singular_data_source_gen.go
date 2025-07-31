@@ -105,7 +105,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "arrayType": "AttributeList",
-		//	  "description": "The load balancer attributes.",
+		//	  "description": "The load balancer attributes. Attributes that you do not modify retain their current values.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -140,7 +140,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "The load balancer attributes.",
+			Description: "The load balancer attributes. Attributes that you do not modify retain their current values.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancerFullName

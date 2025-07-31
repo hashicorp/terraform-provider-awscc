@@ -76,9 +76,9 @@ resource "awscc_cloudwatch_alarm" "lambda_invocations_alarm" {
 - `namespace` (String) The namespace of the metric associated with the alarm. This is required for an alarm based on a metric. For an alarm based on a math expression, you can't specify ``Namespace`` and you use ``Metrics`` instead.
  For a list of namespaces for metrics from AWS services, see [Services That Publish Metrics.](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html)
 - `ok_actions` (List of String) The actions to execute when this alarm transitions to the ``OK`` state from any other state. Each action is specified as an Amazon Resource Name (ARN).
-- `period` (Number) The period, in seconds, over which the statistic is applied. This is required for an alarm based on a metric. Valid values are 10, 30, 60, and any multiple of 60.
+- `period` (Number) The period, in seconds, over which the statistic is applied. This is required for an alarm based on a metric. Valid values are 10, 20, 30, 60, and any multiple of 60.
  For an alarm based on a math expression, you can't specify ``Period``, and instead you use the ``Metrics`` parameter.
-  *Minimum:* 10
+ *Minimum:* 10
 - `statistic` (String) The statistic for the metric associated with the alarm, other than percentile. For percentile statistics, use ``ExtendedStatistic``.
  For an alarm based on a metric, you must specify either ``Statistic`` or ``ExtendedStatistic`` but not both.
  For an alarm based on a math expression, you can't specify ``Statistic``. Instead, you use ``Metrics``.
@@ -117,7 +117,7 @@ Optional:
 - `label` (String) A human-readable label for this metric or expression. This is especially useful if this is an expression, so that you know what the value represents. If the metric or expression is shown in a CW dashboard widget, the label is shown. If ``Label`` is omitted, CW generates a default.
 - `metric_stat` (Attributes) The metric to be returned, along with statistics, period, and units. Use this parameter only if this object is retrieving a metric and not performing a math expression on returned data.
  Within one MetricDataQuery object, you must specify either ``Expression`` or ``MetricStat`` but not both. (see [below for nested schema](#nestedatt--metrics--metric_stat))
-- `period` (Number) The granularity, in seconds, of the returned data points. For metrics with regular resolution, a period can be as short as one minute (60 seconds) and must be a multiple of 60. For high-resolution metrics that are collected at intervals of less than one minute, the period can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution metrics are those metrics stored by a ``PutMetricData`` operation that includes a ``StorageResolution of 1 second``.
+- `period` (Number) The granularity, in seconds, of the returned data points. For metrics with regular resolution, a period can be as short as one minute (60 seconds) and must be a multiple of 60. For high-resolution metrics that are collected at intervals of less than one minute, the period can be 1, 5, 10, 20, 30, 60, or any multiple of 60. High-resolution metrics are those metrics stored by a ``PutMetricData`` operation that includes a ``StorageResolution of 1 second``.
 - `return_data` (Boolean) This option indicates whether to return the timestamps and raw data values of this metric.
  When you create an alarm based on a metric math expression, specify ``True`` for this value for only the one math expression that the alarm is based on. You must specify ``False`` for ``ReturnData`` for all the other metrics and expressions used in the alarm.
  This field is required.
@@ -128,7 +128,7 @@ Optional:
 Optional:
 
 - `metric` (Attributes) The metric to return, including the metric name, namespace, and dimensions. (see [below for nested schema](#nestedatt--metrics--metric_stat--metric))
-- `period` (Number) The granularity, in seconds, of the returned data points. For metrics with regular resolution, a period can be as short as one minute (60 seconds) and must be a multiple of 60. For high-resolution metrics that are collected at intervals of less than one minute, the period can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution metrics are those metrics stored by a ``PutMetricData`` call that includes a ``StorageResolution`` of 1 second.
+- `period` (Number) The granularity, in seconds, of the returned data points. For metrics with regular resolution, a period can be as short as one minute (60 seconds) and must be a multiple of 60. For high-resolution metrics that are collected at intervals of less than one minute, the period can be 1, 5, 10, 20, 30, 60, or any multiple of 60. High-resolution metrics are those metrics stored by a ``PutMetricData`` call that includes a ``StorageResolution`` of 1 second.
  If the ``StartTime`` parameter specifies a time stamp that is greater than 3 hours ago, you must specify the period as follows or no data points in that time range is returned:
   +  Start time between 3 hours and 15 days ago - Use a multiple of 60 seconds (1 minute).
   +  Start time between 15 and 63 days ago - Use a multiple of 300 seconds (5 minutes).
