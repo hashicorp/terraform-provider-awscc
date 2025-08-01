@@ -1,8 +1,5 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
-
-// Package main provides GitHub integration functionality for creating pull requests
-// and managing repository interactions during the schema update process.
 package main
 
 import (
@@ -46,8 +43,17 @@ type GitHubConfig struct {
 //
 // Returns a configured GitHubConfig ready for use in API operations and any setup errors.
 func NewGitHubConfig(repositoryLink string, date string) (*GitHubConfig, error) {
+	// Comment out if locally running
+	err := exec.Command("git", "config", "--global", "user.email", "update-schemas@github.com").Run()
+	if err != nil {
+		return nil, err
+	}
+	err = exec.Command("git", "config", "--global", "user.name", "update-schemas workflow").Run()
+	if err != nil {
+		return nil, err
+	}
 	// Validate required environment variables
-	err := checkGithubToken()
+	err = checkGithubToken()
 	if err != nil {
 		return nil, fmt.Errorf("github token check failed: %w", err)
 	}
@@ -58,6 +64,7 @@ func NewGitHubConfig(repositoryLink string, date string) (*GitHubConfig, error) 
 		client = github.NewClient(nil).WithAuthToken(githubToken)
 	} else {
 		// Use nil client for development/testing when no token is provided
+		log.Println("No GITHUB_TOKEN provided, using nil client for development/testing")
 		client = nil
 	}
 
@@ -69,7 +76,7 @@ func NewGitHubConfig(repositoryLink string, date string) (*GitHubConfig, error) 
 	}
 
 	// Extract owner and repository name from the repository link if provided
-	if repositoryLink != "" {
+	if repositoryLink != "" && config.RepoOwner == "" && config.RepoName == "" {
 		parts := strings.Split(strings.TrimPrefix(repositoryLink, GitHubURLPrefix), "/")
 		if len(parts) >= 2 {
 			config.RepoOwner = parts[0]
@@ -112,7 +119,7 @@ func createPullRequest(ctx context.Context, config *GitHubConfig, changes *[]str
 	repoOwner := config.RepoOwner
 	repoName := config.RepoName
 	client := config.Client
-	currentData := config.CurrentDate
+	currentDate := config.CurrentDate
 
 	// Override repository details if specified in filepaths configuration
 	if filepaths.RepositoryLink != "" {
@@ -124,7 +131,7 @@ func createPullRequest(ctx context.Context, config *GitHubConfig, changes *[]str
 	}
 
 	// Construct pull request title with current date
-	prTitle := fmt.Sprintf("Schema Updates for %s", currentData)
+	prTitle := fmt.Sprintf("Schema Updates for %s", currentDate)
 
 	// Build PR body with changes section
 	prBody := "## Changes\n\n"
@@ -408,7 +415,7 @@ func createFormattedIssue(description, affectedResources string) string {
 * Please vote on this issue by adding a 👍 [reaction](https://blog.github.com/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/) to the original issue to help the community and maintainers prioritize this request
 * Please do not leave "+1" or other comments that do not add relevant new information or questions, they generate extra noise for issue followers and do not help prioritize the request
 * If you are interested in working on this issue or have submitted a pull request, please leave a comment
-* The resources and data sources in this provider are generated from the CloudFormation schema, so they can only support the actions that the underlying schema supports. For this reason submitted bugs should be limited to defects in the generation and runtime code of the provider. Customizing behavior of the resource, or noting a gap in behavior are not valid bugs and should be submitted as enhancements to AWS via the CloudFormation Open Coverage Roadmap.
+* The resources and data sources in this providerf are generated from the CloudFormation schema, so they can only support the actions that the underlying schema supports. For this reason submitted bugs should be limited to defects in the generation and runtime code of the provider. Customizing behavior of the resource, or noting a gap in behavior are not valid bugs and should be submitted as enhancements to AWS via the CloudFormation Open Coverage Roadmap.
 
 <!--- Thank you for keeping this note for the community --->
 

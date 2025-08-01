@@ -33,5 +33,6 @@ website/vendor
 # Keep windows files with windows line endings
 *.winfile eol=crlf
 
-# Schema update automation
+# Update Schema Package Exclusions
+internal/update/makes_error.txt
 last_resource.txt

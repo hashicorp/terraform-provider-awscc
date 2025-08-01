@@ -89,7 +89,7 @@ func TestDiffSchemas(t *testing.T) {
 					},
 				},
 			},
-			expectedChanges:   map[string]bool{"aws_ec2_instance - New Resource": true},
+			expectedChanges:   map[string]bool{"* **New Resource** `aws_ec2_instance`": true},
 			expectChanges:     true,
 			expectedResources: 2,
 		},
@@ -174,7 +174,7 @@ func TestDiffSchemas(t *testing.T) {
 				},
 			},
 			expectedChanges: map[string]bool{
-				"aws_ec2_instance - New Resource": true,
+				"* **New Resource** `aws_ec2_instance`": true,
 			},
 			expectChanges:     true,
 			expectedResources: 3,

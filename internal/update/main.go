@@ -1,9 +1,5 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
-
-// Package main provides tools for updating AWS CloudFormation schemas and Terraform resources.
-// It automates the process of fetching new schemas, generating resources and data sources,
-// running tests, and creating pull requests with the changes.
 package main
 
 import (
@@ -23,7 +19,6 @@ import (
 
 // AcceptanceTestResults stores the output of acceptance tests for inclusion in pull request descriptions.
 // This global variable is populated by RunAcceptanceTests and used when creating pull requests.
-var AcceptanceTestResults string
 
 // Constants for file paths, patterns, and configuration values used throughout the update process.
 const (
@@ -73,7 +68,7 @@ const (
 	FilePermission = 0600
 
 	// GitHub repository configuration
-	DefaultRepoOwner = "hashicorp"
+	DefaultRepoOwner = "HashiCorp"
 	DefaultRepoName  = "terraform-provider-awscc"
 	GitHubURLPrefix  = "https://github.com/"
 
@@ -117,6 +112,26 @@ func run() error {
 
 	// Create a unique branch name for this update run
 	branchName := fmt.Sprintf(BranchNameFormat, rand.Intn(BranchNameMaxRandom))
+
+	log.Printf("Running acceptance tests with 'make %s'...", MakeTestAccCmd)
+	AcceptanceTestResults, err := RunAcceptanceTests()
+	if err != nil {
+		log.Printf("Warning: Acceptance tests had issues: %v", err)
+		// We continue even if there are test failures to include results in PR
+	}
+
+	//Update version file
+	err = updateVersionFile(filePaths)
+	if err != nil {
+		return fmt.Errorf("failed to update version file: %w", err)
+	}
+
+	// Run make tools for tool dependencies
+	log.Printf("Running make tools")
+	err = execCommand("make", "tools")
+	if err != nil {
+		return fmt.Errorf("failed to run 'make tools': %w", err)
+	}
 
 	// Track which resources are new for suppression logic
 	isNewMap := make(map[string]bool)
@@ -193,10 +208,10 @@ func run() error {
 	}
 
 	// Step 3: Validate resources and handle suppressions
-	// Since we've disabled validation in diffSchemas, we perform validation here
-	err = validateResources(ctx, currAllSchemas, config)
+	err = validateResources(ctx, currAllSchemas, config, filePaths)
 	if err != nil {
-		return fmt.Errorf("failed to validate resources: %w", err)
+		log.Println(fmt.Errorf("failed to validate resources: %w", err))
+		log.Println("continuing with schema update despite validation errors. please review the logs for details.")
 	}
 
 	// Commit the new schema changes
@@ -248,23 +263,20 @@ func run() error {
 
 	// Step 5: Build and test the provider
 	// Validate the provider builds successfully
+	log.Printf("Building provider with 'make %s'...", MakeBuildCmd)
 	err = execCommand("make", MakeBuildCmd)
 	if err != nil {
 		return fmt.Errorf("failed to build provider: %w", err)
 	}
 
-	// Run acceptance tests and capture output for PR description
-	AcceptanceTestResults, err = RunAcceptanceTests()
-	if err != nil {
-		log.Printf("Warning: Acceptance tests had issues: %v", err)
-		// We continue even if there are test failures to include results in PR
-	}
-
-	// Generate updated documentation
+	// Generate updated documentation]
+	log.Printf("Generating documentation with 'make %s'...", MakeDocsAllCmd)
 	err = execCommand("make", MakeDocsAllCmd)
 	if err != nil {
 		return fmt.Errorf("failed to generate documentation: %w", err)
 	}
+
+	// Run acceptance tests and capture output for PR description
 
 	// Commit documentation changes
 	err = execGit("add", "-A")
@@ -289,7 +301,7 @@ func run() error {
 	config.CurrentDate = GetCurrentDate()
 
 	// Update the changelog with the changes
-	err = makeChangelog(&changes, filePaths)
+	fullChanges, err := makeChangelog(&changes, filePaths)
 	if err != nil {
 		return fmt.Errorf("failed to update changelog: %w", err)
 	}
@@ -302,7 +314,7 @@ func run() error {
 		return fmt.Errorf("failed to commit changelog: %w", err)
 	}
 
-	_, err = submitOnGit(config, &changes, filePaths, AcceptanceTestResults, config.RepoOwner, config.RepoName, branchName)
+	_, err = submitOnGit(config, fullChanges, filePaths, AcceptanceTestResults, config.RepoOwner, config.RepoName, branchName)
 	if err != nil {
 		return fmt.Errorf("failed to submit PR: %w", err)
 	}
@@ -376,14 +388,7 @@ type UpdateFilePaths struct {
 	LastResource             string `hcl:"lastresource"`               // Path to file tracking last processed resource
 	CloudFormationSchemasDir string `hcl:"cloudformation_schemas_dir"` // Directory for CloudFormation schemas
 	RepositoryLink           string `hcl:"repository_link"`            // GitHub repository URL
-}
-
-// GetAcceptanceTestResults returns the captured acceptance test results.
-// This function provides access to the global test results variable that is
-// populated during the test execution phase and used in pull request descriptions.
-// If no tests have been run yet, it returns an empty string.
-func GetAcceptanceTestResults() string {
-	return AcceptanceTestResults
+	Version                  string `hcl:"version_file"`               // Version file path
 }
 
 // validateResources checks if each resource in the schema is provisionable through CloudFormation.
@@ -397,29 +402,44 @@ func GetAcceptanceTestResults() string {
 //   - filePaths: Configuration containing repository information
 //
 // Returns an error if validation fails for any resource.
-func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchemas, config *GitHubConfig) error {
-	for i := range currAllSchemas.Resources {
+func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchemas, config *GitHubConfig, filePaths *UpdateFilePaths) error {
+	isSuppressed := parseCheckoutList(filePaths)
+	timer := 2
+	for i := 0; i < len(currAllSchemas.Resources); i++ {
+		if currAllSchemas.Resources[i].SuppressResourceGeneration || isSuppressed[currAllSchemas.Resources[i].CloudFormationTypeName] {
+			log.Printf("Skipping validation for suppressed resource %s", currAllSchemas.Resources[i].CloudFormationTypeName)
+			continue
+		}
 		// Check if the resource type can be provisioned via CloudFormation
 		flag, err := validateResourceType(ctx, currAllSchemas.Resources[i].CloudFormationTypeName)
-		if err != nil {
+		if err != nil && !strings.Contains(err.Error(), "TypeNotFoundException") {
+			if strings.Contains(err.Error(), "api error Throttling: Rate exceeded") {
+				log.Printf("Throttling error encountered, retrying in %d seconds...", timer)
+				time.Sleep(time.Duration(timer) * time.Second)
+				timer *= 2
+				i-- // Retry the same resource
+				continue
+			}
 			return fmt.Errorf("failed to check if resource %s is provisionable: %w", currAllSchemas.Resources[i].CloudFormationTypeName, err)
 		}
 
+		timer = 2
+
 		// Suppress resources that are not provisionable
-		if !flag {
-			currAllSchemas.Resources[i].SuppressResourceGeneration = true
+		if !flag || (err != nil && strings.Contains(err.Error(), "TypeNotFoundException")) {
+			err := addSchemaToCheckout(currAllSchemas.Resources[i].CloudFormationTypeName, filePaths)
+			if err != nil {
+				return fmt.Errorf("failed to add resource to checkout file: %w", err)
+			}
 
 			// Create GitHub issue for tracking if client is available
 			if config != nil && config.Client != nil {
-				/*
-					_, err := createIssue(ctx, currAllSchemas.Resources[i].CloudFormationTypeName, "Resource is not provisionable", config, filePaths.RepositoryLink)
-					if err != nil {
-						tflog.Warn(ctx, "Failed to create GitHub issue", map[string]interface{}{
-							"resource": currAllSchemas.Resources[i].CloudFormationTypeName,
-							"error":    err.Error(),
-						})
-					}
-				*/
+				link, err := createIssue(ctx, currAllSchemas.Resources[i].CloudFormationTypeName, "Resource is not provisionable", config, filePaths.RepositoryLink)
+				if err != nil {
+					log.Printf("Failed to create GitHub issue for resource %s: %v", currAllSchemas.Resources[i].CloudFormationTypeName, err)
+					log.Printf("Please create an issue manually for resource %s not being provisionable", currAllSchemas.Resources[i].CloudFormationTypeName)
+				}
+				log.Printf("Created GitHub issue for resource %s: %s", currAllSchemas.Resources[i].CloudFormationTypeName, link)
 			} else {
 				tflog.Info(ctx, "Skipping GitHub issue creation (no client)", map[string]interface{}{
 					"resource": currAllSchemas.Resources[i].CloudFormationTypeName,
@@ -428,4 +448,31 @@ func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchema
 		}
 	}
 	return nil
+}
+
+func parseCheckoutList(filePaths *UpdateFilePaths) map[string]bool {
+	result := make(map[string]bool)
+	data, err := os.ReadFile(filePaths.SuppressionCheckout)
+	if err != nil {
+		log.Printf("Failed to read suppression checkout file: %v", err)
+		return result
+	}
+	lines := strings.Split(string(data), "\n")
+	for _, line := range lines {
+		line = strings.TrimSpace(line)
+		if line != "" {
+			resource := convertJSONResourceToCloudFormationTypeName(line)
+			result[resource] = true
+		}
+	}
+	return result
+}
+
+func convertJSONResourceToCloudFormationTypeName(line string) string {
+	// Convert JSON resource name to Terraform type name
+	base := filepath.Base(line)
+	resource := strings.TrimSuffix(base, filepath.Ext(base))
+	resource = strings.TrimSuffix(resource, ".json")
+	resource = strings.ReplaceAll(resource, "_", "::")
+	return resource
 }
