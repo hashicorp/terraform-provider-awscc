@@ -11,6 +11,10 @@ FEATURES:
 * **New Resource:** `awscc_batch_service_environment`
 * **New Resource:** `awscc_sagemaker_processing_job`
 
+BUG FIXES:
+
+* provider: Preseve known `null` values in state when a `UseStateForUnknown` plan modifier is used. ([#2726](https://github.com/hashicorp/terraform-provider-awscc/pull/2726))
+
 ## 1.50.0 (July 28, 2025)
 
 FEATURES:
