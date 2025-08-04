@@ -1,4 +1,4 @@
-## 1.52.0 (Aug 8, 2025)
+## 1.52.0 (Unreleased)
 
 FEATURES:
 
