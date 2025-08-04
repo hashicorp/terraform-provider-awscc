@@ -1,0 +1,1 @@
+$ terraform import awscc_sagemaker_processing_job.example "processing_job_arn"

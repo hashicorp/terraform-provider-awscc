@@ -57,6 +57,29 @@
       ],
       "description": "Information about an AWS Identity and Access Management (IAM) role that is associated with a DB instance."
     },
+    "DBInstanceStatusInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Message": {
+          "type": "string",
+          "description": "Details of the error if there is an error for the instance. If the instance isn't in an error state, this value is blank."
+        },
+        "Normal": {
+          "type": "boolean",
+          "description": "Indicates whether the instance is operating normally (TRUE) or is in an error state (FALSE)."
+        },
+        "Status": {
+          "type": "string",
+          "description": "The status of the DB instance. For a StatusType of read replica, the values can be replicating, replication stop point set, replication stop point reached, error, stopped, or terminated."
+        },
+        "StatusType": {
+          "type": "string",
+          "description": "The status type of the DB instance."
+        }
+      },
+      "description": ""
+    },
     "ProcessorFeature": {
       "type": "object",
       "additionalProperties": false,
@@ -147,6 +170,10 @@
       "type": "integer",
       "minimum": 1,
       "description": "The retention period for automated backups in a different AWS Region. Use this parameter to set a unique retention period that only applies to cross-Region automated backups. To enable automated backups in a different Region, specify a positive value for the ``AutomaticBackupReplicationRegion`` parameter. \n If not specified, this parameter defaults to the value of the ``BackupRetentionPeriod`` parameter. The maximum allowed value is 35."
+    },
+    "AutomaticRestartTime": {
+      "type": "string",
+      "description": ""
     },
     "AvailabilityZone": {
       "type": "string",
@@ -395,6 +422,10 @@
       "type": "string",
       "description": "Indicates that the DB instance should be associated with the specified option group.\n Permanent options, such as the TDE option for Oracle Advanced Security TDE, can't be removed from an option group. Also, that option group can't be removed from a DB instance once it is associated with a DB instance."
     },
+    "PercentProgress": {
+      "type": "string",
+      "description": ""
+    },
     "PerformanceInsightsKMSKeyId": {
       "type": "string",
       "description": "The AWS KMS key identifier for encryption of Performance Insights data.\n The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n If you do not specify a value for ``PerformanceInsightsKMSKeyId``, then Amazon RDS uses your default KMS key. There is a default KMS key for your AWS account. Your AWS account has a different default KMS key for each AWS Region.\n For information about enabling Performance Insights, see [EnablePerformanceInsights](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-enableperformanceinsights)."
@@ -455,6 +486,14 @@
       "type": "string",
       "format": "date-time"
     },
+    "ResumeFullAutomationModeTime": {
+      "type": "string",
+      "description": ""
+    },
+    "SecondaryAvailabilityZone": {
+      "type": "string",
+      "description": ""
+    },
     "SourceDBClusterIdentifier": {
       "description": "The identifier of the Multi-AZ DB cluster that will act as the source for the read replica. Each DB cluster can have up to 15 read replicas.\n Constraints:\n  +  Must be the identifier of an existing Multi-AZ DB cluster.\n  +  Can't be specified if the ``SourceDBInstanceIdentifier`` parameter is also specified.\n  +  The specified DB cluster must have automatic backups enabled, that is, its backup retention period must be greater than 0.\n  +  The source DB cluster must be in the same AWS-Region as the read replica. Cross-Region replication isn't supported.",
       "type": "string"
@@ -474,6 +513,13 @@
     "SourceRegion": {
       "type": "string",
       "description": "The ID of the region that contains the source DB instance for the read replica."
+    },
+    "StatusInfos": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/DBInstanceStatusInfo"
+      },
+      "description": ""
     },
     "StorageEncrypted": {
       "type": "boolean",
@@ -608,6 +654,7 @@
     "/properties/ApplyImmediately"
   ],
   "readOnlyProperties": [
+    "/properties/AutomaticRestartTime",
     "/properties/CertificateDetails",
     "/properties/CertificateDetails/CAIdentifier",
     "/properties/CertificateDetails/ValidTill",
@@ -626,8 +673,12 @@
     "/properties/ListenerEndpoint/Port",
     "/properties/ListenerEndpoint/HostedZoneId",
     "/properties/MasterUserSecret/SecretArn",
+    "/properties/PercentProgress",
     "/properties/ReadReplicaDBClusterIdentifiers",
-    "/properties/ReadReplicaDBInstanceIdentifiers"
+    "/properties/ReadReplicaDBInstanceIdentifiers",
+    "/properties/ResumeFullAutomationModeTime",
+    "/properties/SecondaryAvailabilityZone",
+    "/properties/StatusInfo"
   ],
   "primaryIdentifier": [
     "/properties/DBInstanceIdentifier"

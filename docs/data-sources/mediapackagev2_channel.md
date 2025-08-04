@@ -49,6 +49,7 @@ Read-Only:
 Read-Only:
 
 - `mqcs_input_switching` (Boolean) <p>When true, AWS Elemental MediaPackage performs input switching based on the MQCS. Default is true. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
+- `preferred_input` (Number)
 
 
 <a id="nestedatt--output_header_configuration"></a>

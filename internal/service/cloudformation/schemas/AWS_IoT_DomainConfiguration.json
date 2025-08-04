@@ -240,13 +240,15 @@
         "iot:DescribeDomainConfiguration",
         "iot:TagResource",
         "iot:ListTagsForResource",
-        "acm:GetCertificate"
+        "acm:GetCertificate",
+        "kms:Decrypt"
       ]
     },
     "read": {
       "permissions": [
         "iot:DescribeDomainConfiguration",
-        "iot:ListTagsForResource"
+        "iot:ListTagsForResource",
+        "kms:Decrypt"
       ]
     },
     "update": {
@@ -255,14 +257,16 @@
         "iot:DescribeDomainConfiguration",
         "iot:ListTagsForResource",
         "iot:TagResource",
-        "iot:UntagResource"
+        "iot:UntagResource",
+        "kms:Decrypt"
       ]
     },
     "delete": {
       "permissions": [
         "iot:DescribeDomainConfiguration",
         "iot:DeleteDomainConfiguration",
-        "iot:UpdateDomainConfiguration"
+        "iot:UpdateDomainConfiguration",
+        "kms:Decrypt"
       ]
     },
     "list": {

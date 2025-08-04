@@ -24,6 +24,11 @@
         "MQCSInputSwitching": {
           "type": "boolean",
           "description": "<p>When true, AWS Elemental MediaPackage performs input switching based on the MQCS. Default is true. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>"
+        },
+        "PreferredInput": {
+          "type": "integer",
+          "maximum": 2,
+          "minimum": 1
         }
       },
       "additionalProperties": false
@@ -105,14 +110,14 @@
       "description": "<p>The date and time the channel was modified.</p>",
       "format": "date-time"
     },
+    "OutputHeaderConfiguration": {
+      "$ref": "#/definitions/OutputHeaderConfiguration"
+    },
     "IngestEndpointUrls": {
       "type": "array",
       "items": {
         "type": "string"
       }
-    },
-    "OutputHeaderConfiguration": {
-      "$ref": "#/definitions/OutputHeaderConfiguration"
     },
     "Tags": {
       "type": "array",

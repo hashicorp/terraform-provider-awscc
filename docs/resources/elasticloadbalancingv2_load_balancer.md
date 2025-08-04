@@ -161,7 +161,7 @@ resource "awscc_elasticloadbalancingv2_load_balancer" "example" {
  Application Load Balancer authentication supports IPv4 addresses only when connecting to an Identity Provider (IdP) or Amazon Cognito endpoint. Without a public IPv4 address the load balancer can't complete the authentication process, resulting in HTTP 500 errors.
  [Network Load Balancers and Gateway Load Balancers] The possible values are ``ipv4`` (IPv4 addresses) and ``dualstack`` (IPv4 and IPv6 addresses).
 - `ipv_4_ipam_pool_id` (String) The ID of the IPv4 IPAM pool.
-- `load_balancer_attributes` (Attributes Set) The load balancer attributes. (see [below for nested schema](#nestedatt--load_balancer_attributes))
+- `load_balancer_attributes` (Attributes Set) The load balancer attributes. Attributes that you do not modify retain their current values. (see [below for nested schema](#nestedatt--load_balancer_attributes))
 - `minimum_load_balancer_capacity` (Attributes) The minimum capacity for a load balancer. (see [below for nested schema](#nestedatt--minimum_load_balancer_capacity))
 - `name` (String) The name of the load balancer. This name must be unique per region per account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, must not begin or end with a hyphen, and must not begin with "internal-".
  If you don't specify a name, AWS CloudFormation generates a unique physical ID for the load balancer. If you specify a name, you cannot perform updates that require replacement of this resource, but you can perform other updates. To replace the resource, specify a new name.

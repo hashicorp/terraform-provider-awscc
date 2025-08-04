@@ -10,10 +10,12 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -189,6 +191,11 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		//	    "MQCSInputSwitching": {
 		//	      "description": "\u003cp\u003eWhen true, AWS Elemental MediaPackage performs input switching based on the MQCS. Default is true. This setting is valid only when \u003ccode\u003eInputType\u003c/code\u003e is \u003ccode\u003eCMAF\u003c/code\u003e.\u003c/p\u003e",
 		//	      "type": "boolean"
+		//	    },
+		//	    "PreferredInput": {
+		//	      "maximum": 2,
+		//	      "minimum": 1,
+		//	      "type": "integer"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -202,6 +209,17 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PreferredInput
+				"preferred_input": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(1, 2),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -368,6 +386,7 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		"modified_at":                 "ModifiedAt",
 		"mqcs_input_switching":        "MQCSInputSwitching",
 		"output_header_configuration": "OutputHeaderConfiguration",
+		"preferred_input":             "PreferredInput",
 		"publish_mqcs":                "PublishMQCS",
 		"tags":                        "Tags",
 		"url":                         "Url",

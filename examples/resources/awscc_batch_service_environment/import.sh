@@ -1,0 +1,1 @@
+$ terraform import awscc_batch_service_environment.example "service_environment_arn"

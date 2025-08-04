@@ -126,6 +126,9 @@
         "RuleBasedProperties": {
           "$ref": "#/definitions/RuleBasedProperties"
         },
+        "RuleConditionProperties": {
+          "$ref": "#/definitions/RuleConditionProperties"
+        },
         "ProviderProperties": {
           "$ref": "#/definitions/ProviderProperties"
         }
@@ -178,6 +181,36 @@
         "AttributeMatchingModel",
         "Rules"
       ],
+      "additionalProperties": false
+    },
+    "RuleConditionProperties": {
+      "type": "object",
+      "properties": {
+        "Rules": {
+          "type": "array",
+          "insertionOrder": false,
+          "minItems": 1,
+          "maxItems": 15,
+          "items": {
+            "$ref": "#/definitions/RuleCondition"
+          }
+        }
+      },
+      "required": [
+        "Rules"
+      ],
+      "additionalProperties": false
+    },
+    "RuleCondition": {
+      "type": "object",
+      "properties": {
+        "RuleName": {
+          "$ref": "#/definitions/AttributeName"
+        },
+        "Condition": {
+          "type": "string"
+        }
+      },
       "additionalProperties": false
     },
     "Rule": {

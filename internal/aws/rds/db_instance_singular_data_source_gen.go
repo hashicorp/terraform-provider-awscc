@@ -147,6 +147,17 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The retention period for automated backups in a different AWS Region. Use this parameter to set a unique retention period that only applies to cross-Region automated backups. To enable automated backups in a different Region, specify a positive value for the ``AutomaticBackupReplicationRegion`` parameter. \n If not specified, this parameter defaults to the value of the ``BackupRetentionPeriod`` parameter. The maximum allowed value is 35.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: AutomaticRestartTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"automatic_restart_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -910,6 +921,17 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Indicates that the DB instance should be associated with the specified option group.\n Permanent options, such as the TDE option for Oracle Advanced Security TDE, can't be removed from an option group. Also, that option group can't be removed from a DB instance once it is associated with a DB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: PercentProgress
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"percent_progress": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PerformanceInsightsKMSKeyId
 		// CloudFormation resource type schema:
 		//
@@ -1087,6 +1109,28 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The date and time to restore from. This parameter applies to point-in-time recovery. For more information, see [Restoring a DB instance to a specified time](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html) in the in the *Amazon RDS User Guide*.\n Constraints:\n  +  Must be a time in Universal Coordinated Time (UTC) format.\n  +  Must be before the latest restorable time for the DB instance.\n  +  Can't be specified if the ``UseLatestRestorableTime`` parameter is enabled.\n  \n Example: ``2009-09-07T23:45:00Z``",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ResumeFullAutomationModeTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"resume_full_automation_mode_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SecondaryAvailabilityZone
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"secondary_availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceDBClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -1140,6 +1184,64 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"source_region": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the region that contains the source DB instance for the read replica.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: StatusInfos
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "",
+		//	    "properties": {
+		//	      "Message": {
+		//	        "description": "Details of the error if there is an error for the instance. If the instance isn't in an error state, this value is blank.",
+		//	        "type": "string"
+		//	      },
+		//	      "Normal": {
+		//	        "description": "Indicates whether the instance is operating normally (TRUE) or is in an error state (FALSE).",
+		//	        "type": "boolean"
+		//	      },
+		//	      "Status": {
+		//	        "description": "The status of the DB instance. For a StatusType of read replica, the values can be replicating, replication stop point set, replication stop point reached, error, stopped, or terminated.",
+		//	        "type": "string"
+		//	      },
+		//	      "StatusType": {
+		//	        "description": "The status type of the DB instance.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"status_infos": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Message
+					"message": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Details of the error if there is an error for the instance. If the instance isn't in an error state, this value is blank.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Normal
+					"normal": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Indicates whether the instance is operating normally (TRUE) or is in an error state (FALSE).",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The status of the DB instance. For a StatusType of read replica, the values can be replicating, replication stop point set, replication stop point reached, error, stopped, or terminated.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StatusType
+					"status_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The status type of the DB instance.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StorageEncrypted
@@ -1321,6 +1423,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"automatic_backup_replication_kms_key_id":       "AutomaticBackupReplicationKmsKeyId",
 		"automatic_backup_replication_region":           "AutomaticBackupReplicationRegion",
 		"automatic_backup_replication_retention_period": "AutomaticBackupReplicationRetentionPeriod",
+		"automatic_restart_time":                        "AutomaticRestartTime",
 		"availability_zone":                             "AvailabilityZone",
 		"backup_retention_period":                       "BackupRetentionPeriod",
 		"backup_target":                                 "BackupTarget",
@@ -1376,13 +1479,16 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"master_user_secret":                            "MasterUserSecret",
 		"master_username":                               "MasterUsername",
 		"max_allocated_storage":                         "MaxAllocatedStorage",
+		"message":                                       "Message",
 		"monitoring_interval":                           "MonitoringInterval",
 		"monitoring_role_arn":                           "MonitoringRoleArn",
 		"multi_az":                                      "MultiAZ",
 		"name":                                          "Name",
 		"nchar_character_set_name":                      "NcharCharacterSetName",
 		"network_type":                                  "NetworkType",
+		"normal":                                        "Normal",
 		"option_group_name":                             "OptionGroupName",
+		"percent_progress":                              "PercentProgress",
 		"performance_insights_kms_key_id":               "PerformanceInsightsKMSKeyId",
 		"performance_insights_retention_period":         "PerformanceInsightsRetentionPeriod",
 		"port":                                          "Port",
@@ -1395,13 +1501,18 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"read_replica_db_instance_identifiers":          "ReadReplicaDBInstanceIdentifiers",
 		"replica_mode":                                  "ReplicaMode",
 		"restore_time":                                  "RestoreTime",
+		"resume_full_automation_mode_time":              "ResumeFullAutomationModeTime",
 		"role_arn":                                      "RoleArn",
+		"secondary_availability_zone":                   "SecondaryAvailabilityZone",
 		"secret_arn":                                    "SecretArn",
 		"source_db_cluster_identifier":                  "SourceDBClusterIdentifier",
 		"source_db_instance_automated_backups_arn":      "SourceDBInstanceAutomatedBackupsArn",
 		"source_db_instance_identifier":                 "SourceDBInstanceIdentifier",
 		"source_dbi_resource_id":                        "SourceDbiResourceId",
 		"source_region":                                 "SourceRegion",
+		"status":                                        "Status",
+		"status_infos":                                  "StatusInfos",
+		"status_type":                                   "StatusType",
 		"storage_encrypted":                             "StorageEncrypted",
 		"storage_throughput":                            "StorageThroughput",
 		"storage_type":                                  "StorageType",

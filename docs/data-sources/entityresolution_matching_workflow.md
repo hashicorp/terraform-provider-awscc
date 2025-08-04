@@ -79,6 +79,7 @@ Read-Only:
 - `provider_properties` (Attributes) (see [below for nested schema](#nestedatt--resolution_techniques--provider_properties))
 - `resolution_type` (String)
 - `rule_based_properties` (Attributes) (see [below for nested schema](#nestedatt--resolution_techniques--rule_based_properties))
+- `rule_condition_properties` (Attributes) (see [below for nested schema](#nestedatt--resolution_techniques--rule_condition_properties))
 
 <a id="nestedatt--resolution_techniques--provider_properties"></a>
 ### Nested Schema for `resolution_techniques.provider_properties`
@@ -113,6 +114,23 @@ Read-Only:
 Read-Only:
 
 - `matching_keys` (List of String)
+- `rule_name` (String)
+
+
+
+<a id="nestedatt--resolution_techniques--rule_condition_properties"></a>
+### Nested Schema for `resolution_techniques.rule_condition_properties`
+
+Read-Only:
+
+- `rules` (Attributes List) (see [below for nested schema](#nestedatt--resolution_techniques--rule_condition_properties--rules))
+
+<a id="nestedatt--resolution_techniques--rule_condition_properties--rules"></a>
+### Nested Schema for `resolution_techniques.rule_condition_properties.rules`
+
+Read-Only:
+
+- `condition` (String)
 - `rule_name` (String)
 
 

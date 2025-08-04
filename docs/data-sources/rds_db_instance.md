@@ -80,6 +80,7 @@ Data Source schema for AWS::RDS::DBInstance
 - `automatic_backup_replication_region` (String) The AWS-Region associated with the automated backup.
 - `automatic_backup_replication_retention_period` (Number) The retention period for automated backups in a different AWS Region. Use this parameter to set a unique retention period that only applies to cross-Region automated backups. To enable automated backups in a different Region, specify a positive value for the ``AutomaticBackupReplicationRegion`` parameter. 
  If not specified, this parameter defaults to the value of the ``BackupRetentionPeriod`` parameter. The maximum allowed value is 35.
+- `automatic_restart_time` (String)
 - `availability_zone` (String) The Availability Zone (AZ) where the database will be created. For information on AWS-Regions and Availability Zones, see [Regions and Availability Zones](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html).
  For Amazon Aurora, each Aurora DB cluster hosts copies of its storage in three separate Availability Zones. Specify one of these Availability Zones. Aurora automatically chooses an appropriate Availability Zone if you don't specify one.
  Default: A random, system-chosen Availability Zone in the endpoint's AWS-Region.
@@ -464,6 +465,7 @@ Data Source schema for AWS::RDS::DBInstance
  For more information, see [Working with a DB instance in a VPC](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html) in the *Amazon RDS User Guide.*
 - `option_group_name` (String) Indicates that the DB instance should be associated with the specified option group.
  Permanent options, such as the TDE option for Oracle Advanced Security TDE, can't be removed from an option group. Also, that option group can't be removed from a DB instance once it is associated with a DB instance.
+- `percent_progress` (String)
 - `performance_insights_kms_key_id` (String) The AWS KMS key identifier for encryption of Performance Insights data.
  The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
  If you do not specify a value for ``PerformanceInsightsKMSKeyId``, then Amazon RDS uses your default KMS key. There is a default KMS key for your AWS account. Your AWS account has a different default KMS key for each AWS Region.
@@ -525,6 +527,8 @@ Data Source schema for AWS::RDS::DBInstance
   +  Can't be specified if the ``UseLatestRestorableTime`` parameter is enabled.
   
  Example: ``2009-09-07T23:45:00Z``
+- `resume_full_automation_mode_time` (String)
+- `secondary_availability_zone` (String)
 - `source_db_cluster_identifier` (String) The identifier of the Multi-AZ DB cluster that will act as the source for the read replica. Each DB cluster can have up to 15 read replicas.
  Constraints:
   +  Must be the identifier of an existing Multi-AZ DB cluster.
@@ -545,6 +549,7 @@ Data Source schema for AWS::RDS::DBInstance
   +  For DB instances in Amazon Aurora clusters, don't specify this property. Amazon RDS automatically assigns writer and reader DB instances.
 - `source_dbi_resource_id` (String) The resource ID of the source DB instance from which to restore.
 - `source_region` (String) The ID of the region that contains the source DB instance for the read replica.
+- `status_infos` (Attributes List) (see [below for nested schema](#nestedatt--status_infos))
 - `storage_encrypted` (Boolean) A value that indicates whether the DB instance is encrypted. By default, it isn't encrypted.
  If you specify the ``KmsKeyId`` property, then you must enable encryption.
  If you specify the ``SourceDBInstanceIdentifier`` or ``SourceDbiResourceId`` property, don't specify this property. The value is inherited from the source DB instance, and if the DB instance is encrypted, the specified ``KmsKeyId`` property is used.
@@ -634,6 +639,17 @@ Read-Only:
 
 - `name` (String) The name of the processor feature. Valid names are ``coreCount`` and ``threadsPerCore``.
 - `value` (String) The value of a processor feature.
+
+
+<a id="nestedatt--status_infos"></a>
+### Nested Schema for `status_infos`
+
+Read-Only:
+
+- `message` (String) Details of the error if there is an error for the instance. If the instance isn't in an error state, this value is blank.
+- `normal` (Boolean) Indicates whether the instance is operating normally (TRUE) or is in an error state (FALSE).
+- `status` (String) The status of the DB instance. For a StatusType of read replica, the values can be replicating, replication stop point set, replication stop point reached, error, stopped, or terminated.
+- `status_type` (String) The status type of the DB instance.
 
 
 <a id="nestedatt--tags"></a>

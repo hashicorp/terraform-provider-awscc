@@ -23,17 +23,18 @@ Data Source schema for AWS::ElasticLoadBalancingV2::Listener
 
 - `alpn_policy` (List of String) [TLS listener] The name of the Application-Layer Protocol Negotiation (ALPN) policy.
 - `certificates` (Attributes List) The default SSL server certificate for a secure listener. You must provide exactly one certificate if the listener protocol is HTTPS or TLS.
+ For an HTTPS listener, update requires some interruptions. For a TLS listener, update requires no interruption.
  To create a certificate list for a secure listener, use [AWS::ElasticLoadBalancingV2::ListenerCertificate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenercertificate.html). (see [below for nested schema](#nestedatt--certificates))
 - `default_actions` (Attributes List) The actions for the default rule. You cannot define a condition for a default rule.
  To create additional rules for an Application Load Balancer, use [AWS::ElasticLoadBalancingV2::ListenerRule](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenerrule.html). (see [below for nested schema](#nestedatt--default_actions))
 - `listener_arn` (String)
-- `listener_attributes` (Attributes Set) The listener attributes. (see [below for nested schema](#nestedatt--listener_attributes))
+- `listener_attributes` (Attributes Set) The listener attributes. Attributes that you do not modify retain their current values. (see [below for nested schema](#nestedatt--listener_attributes))
 - `load_balancer_arn` (String) The Amazon Resource Name (ARN) of the load balancer.
 - `mutual_authentication` (Attributes) The mutual authentication configuration information. (see [below for nested schema](#nestedatt--mutual_authentication))
 - `port` (Number) The port on which the load balancer is listening. You can't specify a port for a Gateway Load Balancer.
 - `protocol` (String) The protocol for connections from clients to the load balancer. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocols are TCP, TLS, UDP, and TCP_UDP. You can’t specify the UDP or TCP_UDP protocol if dual-stack mode is enabled. You can't specify a protocol for a Gateway Load Balancer.
 - `ssl_policy` (String) [HTTPS and TLS listeners] The security policy that defines which protocols and ciphers are supported. For more information, see [Security policies](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/describe-ssl-policies.html) in the *Application Load Balancers Guide* and [Security policies](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/describe-ssl-policies.html) in the *Network Load Balancers Guide*.
- Updating the security policy can result in interruptions if the load balancer is handling a high volume of traffic. To decrease the possibility of an interruption if your load balancer is handling a high volume of traffic, create an additional load balancer or request an LCU reservation.
+ [HTTPS listeners] Updating the security policy can result in interruptions if the load balancer is handling a high volume of traffic. To decrease the possibility of an interruption if your load balancer is handling a high volume of traffic, create an additional load balancer or request an LCU reservation.
 
 <a id="nestedatt--certificates"></a>
 ### Nested Schema for `certificates`
@@ -123,7 +124,7 @@ Read-Only:
 
 Read-Only:
 
-- `duration_seconds` (Number) The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days).
+- `duration_seconds` (Number) The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.
 - `enabled` (Boolean) Indicates whether target group stickiness is enabled.
 
 
