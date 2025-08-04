@@ -69,8 +69,8 @@ docs-all: docs-import docs-fmt docs ## Generate all documentation
 docs: prereq-go ## Generate documentation
 	rm -f docs/data-sources/*.md
 	rm -f docs/resources/*.md
-	@tfplugindocs generate
-
+	@tfplugindocs generate --provider-name "terraform-provider-awscc"
+	
 docs-fmt: prereq-go
 	cd examples/resources/ && terraform fmt -recursive
 

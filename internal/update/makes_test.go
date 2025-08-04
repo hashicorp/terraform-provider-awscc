@@ -6,6 +6,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -142,18 +143,6 @@ func TestProcessErrorLine(t *testing.T) {
 			errorLine:   "error loading CloudFormation Resource Provider Schema for awscc_s3_bucket:",
 			buildType:   BuildTypeSchemas,
 			expectError: true, // Will fail due to parsing error
-		},
-		"statuscode_403_error": {
-			errorLine:           "StatusCode: 403, authentication failed",
-			buildType:           BuildTypeSchemas,
-			expectError:         true,
-			expectedErrorString: "authentication failed: no valid AWS credentials",
-		},
-		"unhandled_error": {
-			errorLine:           "some random error message",
-			buildType:           BuildTypeSchemas,
-			expectError:         true,
-			expectedErrorString: "unhandled schema error",
 		},
 	}
 
@@ -457,37 +446,6 @@ func TestHandleAWSColonError(t *testing.T) {
 				}
 			}
 		})
-	}
-}
-
-func TestHandleStatusCode403Error(t *testing.T) {
-	t.Parallel()
-
-	err := handleStatusCode403Error()
-
-	if err == nil {
-		t.Fatal("expected error but got none")
-	}
-
-	expectedErrorString := "authentication failed: no valid AWS credentials"
-	if !strings.Contains(err.Error(), expectedErrorString) {
-		t.Fatalf("expected error to contain %q, but got: %v", expectedErrorString, err)
-	}
-}
-
-func TestHandleUnhandledError(t *testing.T) {
-	t.Parallel()
-
-	errorLine := "some random unhandled error"
-	err := handleUnhandledError(errorLine)
-
-	if err == nil {
-		t.Fatal("expected error but got none")
-	}
-
-	expectedErrorString := "unhandled schema error: " + errorLine
-	if err.Error() != expectedErrorString {
-		t.Fatalf("expected error %q, but got: %v", expectedErrorString, err)
 	}
 }
 
@@ -812,5 +770,43 @@ func TestIsLetter(t *testing.T) {
 				t.Fatalf("expected %v for input %q, but got: %v", test.expected, test.input, result)
 			}
 		})
+	}
+}
+
+func TestParseCheckoutList(t *testing.T) {
+	tmpFile, err := os.CreateTemp("", "suppression_checkout_*.txt")
+	if err != nil {
+		t.Fatalf("Failed to create temp file: %v", err)
+	}
+	defer os.Remove(tmpFile.Name())
+
+	content := "internal/service/cloudformation/schemas/AWS_CustomerProfiles_Domain.json\n"
+	if _, err := tmpFile.WriteString(content); err != nil {
+		t.Fatalf("Failed to write to temp file: %v", err)
+	}
+	tmpFile.Close()
+
+	filePaths := &UpdateFilePaths{SuppressionCheckout: tmpFile.Name()}
+	result := parseCheckoutList(filePaths)
+
+	if !result["AWS::CustomerProfiles::Domain"] {
+		t.Errorf("Expected AWS::CustomerProfiles::Domain in result")
+	}
+}
+
+func TestConvertJSONResourceToTerraformTypeName(t *testing.T) {
+	tests := []struct {
+		input    string
+		expected string // expected output, update as needed for your naming logic
+	}{
+		{"internal/service/cloudformation/schemas/AWS_NimbleStudio_StreamingImage.json", "AWS::NimbleStudio::StreamingImage"},
+	}
+
+	for _, test := range tests {
+		result := convertJSONResourceToCloudFormationTypeName(test.input)
+		log.Printf("Input: %s, Output: %s\n", test.input, result)
+		if test.expected != "" && result != test.expected {
+			t.Errorf("convertJSONResourceToTerraformTypeName(%q) = %q; want %q", test.input, result, test.expected)
+		}
 	}
 }

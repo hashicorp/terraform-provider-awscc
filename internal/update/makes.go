@@ -1,9 +1,5 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
-
-// Package main provides functionality for building and processing Terraform provider components.
-// This file contains make build orchestration and error handling for schema generation,
-// resource creation, and data source generation.
 package main
 
 import (
@@ -100,6 +96,7 @@ func makeBuild(ctx context.Context, config *GitHubConfig, currentSchemas *allsch
 			err := processErrorLine(ctx, errorLine, config, currentSchemas, buildType, changes, filePaths, isNewMap)
 			if err != nil {
 				log.Printf("Error processing line: %v", err)
+				return fmt.Errorf("failed to process error line: %w. manual intervention is needed to complete release", err)
 			}
 		}
 
@@ -127,7 +124,9 @@ func processErrorLine(ctx context.Context, errorLine string, config *GitHubConfi
 	log.Printf("Found an entry in the error log: %s during make %s \n", errorLine, buildType)
 
 	// Dispatch to appropriate error handler based on error pattern
-	if strings.Contains(errorLine, "stack overflow") {
+	if strings.Contains(errorLine, "StatusCode: 403,") {
+		return fmt.Errorf("failed to handle StatusCode 403 error: %s", errorLine)
+	} else if strings.Contains(errorLine, "stack overflow") {
 		if err := handleStackOverflowError(ctx, errorLine, config, currentSchemas, buildType, filePaths, isNewMap); err != nil {
 			return fmt.Errorf("failed to handle stack overflow error: %w", err)
 		}
@@ -147,17 +146,10 @@ func processErrorLine(ctx context.Context, errorLine string, config *GitHubConfi
 		if err := handleAWSCC_Error(ctx, errorLine, config, currentSchemas, buildType, filePaths, isNewMap); err != nil {
 			return fmt.Errorf("failed to handle awscc_ error: %w", err)
 		}
-	} else if strings.Contains(errorLine, "StatusCode: 403,") {
-		if err := handleStatusCode403Error(); err != nil {
-			return fmt.Errorf("failed to handle StatusCode 403 error: %w", err)
-		}
-	} else if errorLine == "" {
-		// Skip empty lines
+	} else if errorLine == "" || strings.TrimSpace(errorLine) == "" {
 		return nil
 	} else {
-		if err := handleUnhandledError(errorLine); err != nil {
-			return fmt.Errorf("failed to handle unhandled error: %w", err)
-		}
+		return fmt.Errorf("failed to handle unhandled error: %s", errorLine)
 	}
 
 	// For data source builds, regenerate schemas to ensure consistency
@@ -350,18 +342,6 @@ func handleAWSCC_Error(ctx context.Context, errorLine string, config *GitHubConf
 	return suppress(ctx, resourceName, errorLine, config, true, buildType, filePaths, currentSchemas)
 }
 
-// handleStatusCode403Error processes HTTP 403 (Forbidden) errors.
-// These typically indicate authentication or permission issues with AWS API access.
-func handleStatusCode403Error() error {
-	return fmt.Errorf("authentication failed: no valid AWS credentials")
-}
-
-// handleUnhandledError processes error lines that don't match any known patterns.
-// It logs the error for debugging and returns a formatted error message.
-func handleUnhandledError(errorLine string) error {
-	return fmt.Errorf("unhandled schema error: %s", errorLine)
-}
-
 // normalizeNames normalizes CloudFormation and Terraform type names for comparison.
 // It removes separators and converts to lowercase to enable case-insensitive matching.
 //
@@ -382,6 +362,7 @@ func normalizeNames(cfTypeName string, tfTypeName string) (string, string) {
 
 func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHubConfig, new bool, buildType string, filePaths *UpdateFilePaths, allSchemas *allschemas.AllSchemas) error {
 	// Create a GitHub issue for the schema error
+
 	issueURL, err := createIssue(ctx, cfTypeName, schemaError, config, filePaths.RepositoryLink)
 	if err != nil {
 		log.Printf("Warning: Failed to create GitHub issue: %v", err)
@@ -389,9 +370,9 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHu
 	}
 
 	// Add to all_schemas.hcl
-	if buildType != BuildTypeSchemas || new {
+	log.Println("Suppressing schema generation for", cfTypeName, "with error:", schemaError, "issue URL:", issueURL)
+	if buildType != BuildTypeSchemas || new || strings.Contains(schemaError, "TypeNotFoundException") {
 		tfTypeName, err := cfTypeNameToTerraformTypeName(cfTypeName)
-		log.Printf("Converting CloudFormation type name to Terraform type name: %s -> %s", cfTypeName, tfTypeName)
 		if tfTypeName == "" && cfTypeName != "" {
 			err = nil
 			tfTypeName = strings.ReplaceAll(cfTypeName, "::", "_")

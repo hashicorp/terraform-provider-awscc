@@ -1,9 +1,6 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-// Package main provides HCL parsing and CloudFormation schema processing functionality.
-// This file contains utilities for parsing HCL configuration files, comparing schemas
-// between runs, and validating CloudFormation resource types.
 package main
 
 import (
@@ -87,7 +84,7 @@ func diffSchemas(newSchemas *allschemas.AvailableSchemas, lastSchemas *allschema
 		} else {
 			// New resource
 			changedOrNewResources = append(changedOrNewResources, newResource)
-			*changes = append(*changes, fmt.Sprintf("%s - New Resource", newResource.ResourceTypeName))
+			*changes = append(*changes, fmt.Sprintf("* **New Resource** `%s`", newResource.ResourceTypeName))
 		}
 	}
 
