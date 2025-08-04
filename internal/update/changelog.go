@@ -234,7 +234,6 @@ func parseAndIncrementChangelogVersion(changelogContent string) (string, error) 
 		}
 	}
 
-	// If no version found, start with a default
 	return "1.48.0", fmt.Errorf("no version found in changelog, using default")
 }
 
@@ -253,7 +252,7 @@ func updateVersionFile(filePaths *UpdateFilePaths) error {
 	if err != nil {
 		return fmt.Errorf("failed to parse version number from %s: %w", filePaths.Version, err)
 	}
-	versionNumber++ // Increment the version number
+	versionNumber++ // increment the version number
 	if versionNumber > 999 {
 		return fmt.Errorf("version number %d exceeds maximum allowed value", versionNumber)
 	}
@@ -261,6 +260,7 @@ func updateVersionFile(filePaths *UpdateFilePaths) error {
 
 	newVersionStr := fmt.Sprintf("%s.%s.%d", versionStr[0], versionNumberStr, 0)
 	log.Printf("Updating version file %s to new version: %s\n", filePaths.Version, newVersionStr)
+	newVersionStr += "\n Manually check this version before committing to ensure it matches the latest changes."
 	if err := os.WriteFile(filePaths.Version, []byte(newVersionStr), changelogFileMode); err != nil {
 		return fmt.Errorf("failed to write new version to %s: %w", filePaths.Version, err)
 	}
