@@ -1,3 +1,15 @@
+## 1.53.0 (August 6, 2025)
+
+FEATURES:
+
+* **New Data Source:** `aws_ec2_transit_gateway_connect_peer`
+* **New Data Source:** `aws_ec2_transit_gateway_connect_peers`
+* **New Data Source:** `aws_workspacesweb_session_logger`
+* **New Data Source:** `aws_workspacesweb_session_loggers`
+* **New Resource** `aws_arcregionswitch_plan`
+* **New Resource** `aws_ec2_transit_gateway_connect_peer`
+* **New Resource** `aws_workspacesweb_session_logger`
+
 ## 1.52.0 (Unreleased)
 
 FEATURES:
