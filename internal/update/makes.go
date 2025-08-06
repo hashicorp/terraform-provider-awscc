@@ -371,7 +371,7 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHu
 
 	// Add to all_schemas.hcl
 	log.Println("Suppressing schema generation for", cfTypeName, "with error:", schemaError, "issue URL:", issueURL)
-	if buildType != BuildTypeSchemas || new || strings.Contains(schemaError, "TypeNotFoundException") {
+	if buildType != BuildTypeSchemas || new {
 		tfTypeName, err := cfTypeNameToTerraformTypeName(cfTypeName)
 		if tfTypeName == "" && cfTypeName != "" {
 			err = nil
