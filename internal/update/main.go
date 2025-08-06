@@ -113,13 +113,6 @@ func run() error {
 	// Create a unique branch name for this update run
 	branchName := fmt.Sprintf(BranchNameFormat, rand.Intn(BranchNameMaxRandom))
 
-	log.Printf("Running acceptance tests with 'make %s'...", MakeTestAccCmd)
-	AcceptanceTestResults, err := RunAcceptanceTests()
-	if err != nil {
-		log.Printf("Warning: Acceptance tests had issues: %v", err)
-		// We continue even if there are test failures to include results in PR
-	}
-
 	//Update version file
 	err = updateVersionFile(filePaths)
 	if err != nil {
@@ -277,6 +270,12 @@ func run() error {
 	}
 
 	// Run acceptance tests and capture output for PR description
+	log.Printf("Running acceptance tests with 'make %s'...", MakeTestAccCmd)
+	AcceptanceTestResults, err := RunAcceptanceTests()
+	if err != nil {
+		log.Printf("Warning: Acceptance tests had issues: %v", err)
+		// We continue even if there are test failures to include results in PR
+	}
 
 	// Commit documentation changes
 	err = execGit("add", "-A")
