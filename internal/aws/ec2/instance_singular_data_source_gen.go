@@ -274,7 +274,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Type": {
-		//	        "description": "The type of Elastic Graphics accelerator.",
+		//	        "description": "The type of Elastic Graphics accelerator. Amazon Elastic Graphics is no longer available.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -291,7 +291,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of Elastic Graphics accelerator.",
+						Description: "The type of Elastic Graphics accelerator. Amazon Elastic Graphics is no longer available.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -309,12 +309,12 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Count": {
-		//	        "description": "The number of elastic inference accelerators to attach to the instance.",
+		//	        "description": "The number of elastic inference accelerators to attach to the instance. Amazon Elastic Inference is no longer available.",
 		//	        "minimum": 0,
 		//	        "type": "integer"
 		//	      },
 		//	      "Type": {
-		//	        "description": "The type of elastic inference accelerator.",
+		//	        "description": "The type of elastic inference accelerator. Amazon Elastic Inference is no longer available.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -331,12 +331,12 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Count
 					"count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The number of elastic inference accelerators to attach to the instance.",
+						Description: "The number of elastic inference accelerators to attach to the instance. Amazon Elastic Inference is no longer available.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of elastic inference accelerator.",
+						Description: "The type of elastic inference accelerator. Amazon Elastic Inference is no longer available.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/

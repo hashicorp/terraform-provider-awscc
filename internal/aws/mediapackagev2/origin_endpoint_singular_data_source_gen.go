@@ -1201,6 +1201,10 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "additionalProperties": false,
 		//	      "description": "\u003cp\u003eThe parameters for encrypting content.\u003c/p\u003e",
 		//	      "properties": {
+		//	        "CmafExcludeSegmentDrmMetadata": {
+		//	          "description": "\u003cp\u003eExcludes SEIG and SGPD boxes from segment metadata in CMAF containers.\u003c/p\u003e \u003cp\u003eWhen set to \u003ccode\u003etrue\u003c/code\u003e, MediaPackage omits these DRM metadata boxes from CMAF segments, which can improve compatibility with certain devices and players that don't support these boxes.\u003c/p\u003e \u003cp\u003eImportant considerations:\u003c/p\u003e \u003cul\u003e \u003cli\u003e \u003cp\u003eThis setting only affects CMAF container formats\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003eKey rotation can still be handled through media playlist signaling\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003ePSSH and TENC boxes remain unaffected\u003c/p\u003e \u003c/li\u003e \u003cli\u003e \u003cp\u003eDefault behavior is preserved when this setting is disabled\u003c/p\u003e \u003c/li\u003e \u003c/ul\u003e \u003cp\u003eValid values: \u003ccode\u003etrue\u003c/code\u003e | \u003ccode\u003efalse\u003c/code\u003e \u003c/p\u003e \u003cp\u003eDefault: \u003ccode\u003efalse\u003c/code\u003e \u003c/p\u003e",
+		//	          "type": "boolean"
+		//	        },
 		//	        "ConstantInitializationVector": {
 		//	          "description": "\u003cp\u003eA 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting content. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).\u003c/p\u003e",
 		//	          "maxLength": 32,
@@ -1387,6 +1391,11 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 				// Property: Encryption
 				"encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CmafExcludeSegmentDrmMetadata
+						"cmaf_exclude_segment_drm_metadata": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Excludes SEIG and SGPD boxes from segment metadata in CMAF containers.</p> <p>When set to <code>true</code>, MediaPackage omits these DRM metadata boxes from CMAF segments, which can improve compatibility with certain devices and players that don't support these boxes.</p> <p>Important considerations:</p> <ul> <li> <p>This setting only affects CMAF container formats</p> </li> <li> <p>Key rotation can still be handled through media playlist signaling</p> </li> <li> <p>PSSH and TENC boxes remain unaffected</p> </li> <li> <p>Default behavior is preserved when this setting is disabled</p> </li> </ul> <p>Valid values: <code>true</code> | <code>false</code> </p> <p>Default: <code>false</code> </p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: ConstantInitializationVector
 						"constant_initialization_vector": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>A 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting content. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).</p>",
@@ -1574,6 +1583,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		"child_manifest_name":                  "ChildManifestName",
 		"clip_start_time":                      "ClipStartTime",
 		"cmaf_encryption_method":               "CmafEncryptionMethod",
+		"cmaf_exclude_segment_drm_metadata":    "CmafExcludeSegmentDrmMetadata",
 		"compactness":                          "Compactness",
 		"constant_initialization_vector":       "ConstantInitializationVector",
 		"container_type":                       "ContainerType",
