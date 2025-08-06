@@ -200,6 +200,14 @@
         "HTTP_HOST"
       ]
     },
+    "SummaryRuleOption": {
+      "type": "string",
+      "enum": [
+        "SID",
+        "MSG",
+        "METADATA"
+      ]
+    },
     "GeneratedRulesType": {
       "type": "string",
       "enum": [
@@ -638,6 +646,20 @@
     },
     "Capacity": {
       "type": "integer"
+    },
+    "SummaryConfiguration": {
+      "type": "object",
+      "properties": {
+        "RuleOptions": {
+          "type": "array",
+          "insertionOrder": true,
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/SummaryRuleOption"
+          }
+        }
+      },
+      "additionalProperties": false
     },
     "Description": {
       "type": "string",

@@ -105,6 +105,37 @@
     "EmptyOnDelete": {
       "type": "boolean",
       "description": "If true, deleting the repository force deletes the contents of the repository. Without a force delete, you can only delete empty repositories."
+    },
+    "ImageTagMutabilityExclusionFilter": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "ImageTagMutabilityExclusionFilterType": {
+          "$ref": "#/definitions/ImageTagMutabilityExclusionFilterType"
+        },
+        "ImageTagMutabilityExclusionFilterValue": {
+          "$ref": "#/definitions/ImageTagMutabilityExclusionFilterValue"
+        }
+      },
+      "required": [
+        "ImageTagMutabilityExclusionFilterType",
+        "ImageTagMutabilityExclusionFilterValue"
+      ],
+      "additionalProperties": false
+    },
+    "ImageTagMutabilityExclusionFilterType": {
+      "type": "string",
+      "description": "Specifies the type of filter to use for excluding image tags from the repository's mutability setting.",
+      "enum": [
+        "WILDCARD"
+      ]
+    },
+    "ImageTagMutabilityExclusionFilterValue": {
+      "type": "string",
+      "description": "The value to use when filtering image tags.",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[0-9a-zA-Z._*-]{1,128}"
     }
   },
   "properties": {
@@ -153,8 +184,20 @@
       "description": "The tag mutability setting for the repository. If this parameter is omitted, the default setting of ``MUTABLE`` will be used which will allow image tags to be overwritten. If ``IMMUTABLE`` is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.",
       "enum": [
         "MUTABLE",
-        "IMMUTABLE"
+        "IMMUTABLE",
+        "MUTABLE_WITH_EXCLUSION",
+        "IMMUTABLE_WITH_EXCLUSION"
       ]
+    },
+    "ImageTagMutabilityExclusionFilters": {
+      "type": "array",
+      "description": "",
+      "minItems": 1,
+      "maxItems": 5,
+      "insertionOrder": true,
+      "items": {
+        "$ref": "#/definitions/ImageTagMutabilityExclusionFilter"
+      }
     },
     "ImageScanningConfiguration": {
       "$ref": "#/definitions/ImageScanningConfiguration",
