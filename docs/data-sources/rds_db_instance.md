@@ -549,7 +549,7 @@ Data Source schema for AWS::RDS::DBInstance
   +  For DB instances in Amazon Aurora clusters, don't specify this property. Amazon RDS automatically assigns writer and reader DB instances.
 - `source_dbi_resource_id` (String) The resource ID of the source DB instance from which to restore.
 - `source_region` (String) The ID of the region that contains the source DB instance for the read replica.
-- `status_infos` (Attributes List) (see [below for nested schema](#nestedatt--status_infos))
+- `status_infos` (Attributes List) The status of a read replica. If the DB instance isn't a read replica, the value is blank. (see [below for nested schema](#nestedatt--status_infos))
 - `storage_encrypted` (Boolean) A value that indicates whether the DB instance is encrypted. By default, it isn't encrypted.
  If you specify the ``KmsKeyId`` property, then you must enable encryption.
  If you specify the ``SourceDBInstanceIdentifier`` or ``SourceDbiResourceId`` property, don't specify this property. The value is inherited from the source DB instance, and if the DB instance is encrypted, the specified ``KmsKeyId`` property is used.
@@ -649,7 +649,7 @@ Read-Only:
 - `message` (String) Details of the error if there is an error for the instance. If the instance isn't in an error state, this value is blank.
 - `normal` (Boolean) Indicates whether the instance is operating normally (TRUE) or is in an error state (FALSE).
 - `status` (String) The status of the DB instance. For a StatusType of read replica, the values can be replicating, replication stop point set, replication stop point reached, error, stopped, or terminated.
-- `status_type` (String) The status type of the DB instance.
+- `status_type` (String) This value is currently "read replication."
 
 
 <a id="nestedatt--tags"></a>

@@ -38,6 +38,7 @@ Data Source schema for AWS::WorkSpacesWeb::Portal
 - `portal_status` (String)
 - `renderer_type` (String)
 - `service_provider_saml_metadata` (String)
+- `session_logger_arn` (String)
 - `status_reason` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `trust_store_arn` (String)

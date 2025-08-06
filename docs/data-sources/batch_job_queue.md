@@ -24,9 +24,11 @@ Data Source schema for AWS::Batch::JobQueue
 - `compute_environment_order` (Attributes List) (see [below for nested schema](#nestedatt--compute_environment_order))
 - `job_queue_arn` (String)
 - `job_queue_name` (String)
+- `job_queue_type` (String)
 - `job_state_time_limit_actions` (Attributes List) (see [below for nested schema](#nestedatt--job_state_time_limit_actions))
 - `priority` (Number)
 - `scheduling_policy_arn` (String)
+- `service_environment_order` (Attributes List) (see [below for nested schema](#nestedatt--service_environment_order))
 - `state` (String)
 - `tags` (Map of String) A key-value pair to associate with a resource.
 
@@ -48,3 +50,12 @@ Read-Only:
 - `max_time_seconds` (Number)
 - `reason` (String)
 - `state` (String)
+
+
+<a id="nestedatt--service_environment_order"></a>
+### Nested Schema for `service_environment_order`
+
+Read-Only:
+
+- `order` (Number)
+- `service_environment` (String)
