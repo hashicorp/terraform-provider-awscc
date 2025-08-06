@@ -61,15 +61,33 @@ func jobQueueResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ComputeEnvironment
 					"compute_environment": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Order
 					"order": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							fwvalidators.NotNullInt64(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Required: true,
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: JobQueueArn
 		// CloudFormation resource type schema:
@@ -103,6 +121,20 @@ func jobQueueResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: JobQueueType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"job_queue_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: JobStateTimeLimitActions
 		// CloudFormation resource type schema:
 		//
@@ -113,7 +145,8 @@ func jobQueueResource(ctx context.Context) (resource.Resource, error) {
 		//	    "properties": {
 		//	      "Action": {
 		//	        "enum": [
-		//	          "CANCEL"
+		//	          "CANCEL",
+		//	          "TERMINATE"
 		//	        ],
 		//	        "type": "string"
 		//	      },
@@ -153,6 +186,7 @@ func jobQueueResource(ctx context.Context) (resource.Resource, error) {
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"CANCEL",
+								"TERMINATE",
 							),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -233,6 +267,63 @@ func jobQueueResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ServiceEnvironmentOrder
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Order": {
+		//	        "type": "integer"
+		//	      },
+		//	      "ServiceEnvironment": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "ServiceEnvironment",
+		//	      "Order"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"service_environment_order": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Order
+					"order": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							fwvalidators.NotNullInt64(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ServiceEnvironment
+					"service_environment": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -307,12 +398,15 @@ func jobQueueResource(ctx context.Context) (resource.Resource, error) {
 		"compute_environment_order":    "ComputeEnvironmentOrder",
 		"job_queue_arn":                "JobQueueArn",
 		"job_queue_name":               "JobQueueName",
+		"job_queue_type":               "JobQueueType",
 		"job_state_time_limit_actions": "JobStateTimeLimitActions",
 		"max_time_seconds":             "MaxTimeSeconds",
 		"order":                        "Order",
 		"priority":                     "Priority",
 		"reason":                       "Reason",
 		"scheduling_policy_arn":        "SchedulingPolicyArn",
+		"service_environment":          "ServiceEnvironment",
+		"service_environment_order":    "ServiceEnvironmentOrder",
 		"state":                        "State",
 		"tags":                         "Tags",
 	})

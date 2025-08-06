@@ -749,7 +749,7 @@ resource_schema "aws_arcregionswitch_plan" {
   cloudformation_type_name                 = "AWS::ARCRegionSwitch::Plan"
   suppression_reason                       = ""
   suppress_plural_data_source_generation   = false
-  suppress_resource_generation             = false
+  suppress_resource_generation             = true
   suppress_singular_data_source_generation = false
 }
 resource_schema "aws_arczonalshift_autoshift_observer_notification_status" {

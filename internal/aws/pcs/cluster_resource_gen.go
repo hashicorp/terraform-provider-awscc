@@ -59,6 +59,10 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	    "additionalProperties": false,
 		//	    "description": "An endpoint available for interaction with the scheduler.",
 		//	    "properties": {
+		//	      "Ipv6Address": {
+		//	        "description": "The endpoint's IPv6 address.",
+		//	        "type": "string"
+		//	      },
 		//	      "Port": {
 		//	        "description": "The endpoint's connection port number.",
 		//	        "type": "string"
@@ -92,6 +96,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"endpoints": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Ipv6Address
+					"ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The endpoint's IPv6 address.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: Port
 					"port": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The endpoint's connection port number.",
@@ -204,6 +213,15 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "The networking configuration for the cluster's control plane.",
 		//	  "properties": {
+		//	    "NetworkType": {
+		//	      "description": "The IP of the cluster (IPV4 or IPV6)",
+		//	      "enum": [
+		//	        "IPV4",
+		//	        "IPV6"
+		//	      ],
+		//	      "insertionOrder": false,
+		//	      "type": "string"
+		//	    },
 		//	    "SecurityGroupIds": {
 		//	      "description": "The list of security group IDs associated with the Elastic Network Interface (ENI) created in subnets.",
 		//	      "insertionOrder": false,
@@ -227,6 +245,21 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"networking": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: NetworkType
+				"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The IP of the cluster (IPV4 or IPV6)",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"IPV4",
+							"IPV6",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
@@ -625,9 +658,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"default_purge_time_in_days":      "DefaultPurgeTimeInDays",
 		"endpoints":                       "Endpoints",
 		"error_info":                      "ErrorInfo",
+		"ipv_6_address":                   "Ipv6Address",
 		"message":                         "Message",
 		"mode":                            "Mode",
 		"name":                            "Name",
+		"network_type":                    "NetworkType",
 		"networking":                      "Networking",
 		"parameter_name":                  "ParameterName",
 		"parameter_value":                 "ParameterValue",
