@@ -1,5 +1,14 @@
 ## 1.52.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_omics_annotation_store`
+* **New Data Source:** `awscc_omics_annotation_stores`
+* **New Data Source:** `awscc_scheduler_schedule`
+* **New Data Source:** `awscc_scheduler_schedules`
+* **New Resource:** `awscc_omics_annotation_store`
+* **New Resource:** `awscc_scheduler_schedule`
+
 ## 1.51.0 (July 31, 2025)
 
 FEATURES:
