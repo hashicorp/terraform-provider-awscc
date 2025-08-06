@@ -83,6 +83,15 @@ func jobQueueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"job_queue_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: JobQueueType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"job_queue_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: JobStateTimeLimitActions
 		// CloudFormation resource type schema:
 		//
@@ -93,7 +102,8 @@ func jobQueueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "properties": {
 		//	      "Action": {
 		//	        "enum": [
-		//	          "CANCEL"
+		//	          "CANCEL",
+		//	          "TERMINATE"
 		//	        ],
 		//	        "type": "string"
 		//	      },
@@ -167,6 +177,45 @@ func jobQueueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"scheduling_policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ServiceEnvironmentOrder
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Order": {
+		//	        "type": "integer"
+		//	      },
+		//	      "ServiceEnvironment": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "ServiceEnvironment",
+		//	      "Order"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"service_environment_order": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Order
+					"order": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: ServiceEnvironment
+					"service_environment": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -221,12 +270,15 @@ func jobQueueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"compute_environment_order":    "ComputeEnvironmentOrder",
 		"job_queue_arn":                "JobQueueArn",
 		"job_queue_name":               "JobQueueName",
+		"job_queue_type":               "JobQueueType",
 		"job_state_time_limit_actions": "JobStateTimeLimitActions",
 		"max_time_seconds":             "MaxTimeSeconds",
 		"order":                        "Order",
 		"priority":                     "Priority",
 		"reason":                       "Reason",
 		"scheduling_policy_arn":        "SchedulingPolicyArn",
+		"service_environment":          "ServiceEnvironment",
+		"service_environment_order":    "ServiceEnvironmentOrder",
 		"state":                        "State",
 		"tags":                         "Tags",
 	})
