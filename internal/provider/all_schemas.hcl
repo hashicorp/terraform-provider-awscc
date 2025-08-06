@@ -3929,6 +3929,9 @@ resource_schema "aws_opensearchservice_domain" {
 
 resource_schema "aws_opsworkscm_server" {
   cloudformation_type_name = "AWS::OpsWorksCM::Server"
+
+  # Resource suppressions. Schema not found during refresh.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/2070
 }
 
 resource_schema "aws_organizations_account" {
