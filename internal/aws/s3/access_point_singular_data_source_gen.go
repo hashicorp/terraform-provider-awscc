@@ -166,6 +166,49 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The PublicAccessBlock configuration that you want to apply to this Access Point. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status 'The Meaning of Public' in the Amazon Simple Storage Service Developer Guide.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An arbitrary set of tags (key-value pairs) for this S3 Access Point.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An arbitrary set of tags (key-value pairs) for this S3 Access Point.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -216,11 +259,14 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"bucket":                            "Bucket",
 		"bucket_account_id":                 "BucketAccountId",
 		"ignore_public_acls":                "IgnorePublicAcls",
+		"key":                               "Key",
 		"name":                              "Name",
 		"network_origin":                    "NetworkOrigin",
 		"policy":                            "Policy",
 		"public_access_block_configuration": "PublicAccessBlockConfiguration",
 		"restrict_public_buckets":           "RestrictPublicBuckets",
+		"tags":                              "Tags",
+		"value":                             "Value",
 		"vpc_configuration":                 "VpcConfiguration",
 		"vpc_id":                            "VpcId",
 	})

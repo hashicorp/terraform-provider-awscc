@@ -219,21 +219,21 @@ func repositoryCreationTemplateResource(ctx context.Context) (resource.Resource,
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "Defines the image tag mutability exclusion filters to apply when creating repositories from this template. These filters specify which image tags can override the repository's default image tag mutability setting.",
 		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "",
+		//	    "description": "Overrides the default image tag mutability setting of the repository for image tags that match the specified filters.",
 		//	    "properties": {
 		//	      "ImageTagMutabilityExclusionFilterType": {
-		//	        "description": "Specifies the type of filter to use for excluding image tags from the repository's mutability setting.",
+		//	        "description": "",
 		//	        "enum": [
 		//	          "WILDCARD"
 		//	        ],
 		//	        "type": "string"
 		//	      },
 		//	      "ImageTagMutabilityExclusionFilterValue": {
-		//	        "description": "The value to use when filtering image tags.",
+		//	        "description": "",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "pattern": "^[0-9a-zA-Z._*-]{1,128}",
@@ -255,7 +255,7 @@ func repositoryCreationTemplateResource(ctx context.Context) (resource.Resource,
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ImageTagMutabilityExclusionFilterType
 					"image_tag_mutability_exclusion_filter_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Specifies the type of filter to use for excluding image tags from the repository's mutability setting.",
+						Description: "",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -270,7 +270,7 @@ func repositoryCreationTemplateResource(ctx context.Context) (resource.Resource,
 					}, /*END ATTRIBUTE*/
 					// Property: ImageTagMutabilityExclusionFilterValue
 					"image_tag_mutability_exclusion_filter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value to use when filtering image tags.",
+						Description: "",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -284,7 +284,7 @@ func repositoryCreationTemplateResource(ctx context.Context) (resource.Resource,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "",
+			Description: "Defines the image tag mutability exclusion filters to apply when creating repositories from this template. These filters specify which image tags can override the repository's default image tag mutability setting.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/

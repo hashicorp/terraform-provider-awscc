@@ -208,6 +208,29 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The state of the deployment.",
+		//	  "enum": [
+		//	    "BAKING",
+		//	    "VALIDATING",
+		//	    "DEPLOYING",
+		//	    "COMPLETE",
+		//	    "ROLLING_BACK",
+		//	    "ROLLED_BACK",
+		//	    "REVERTED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the deployment.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -298,6 +321,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 		"kms_key_identifier":           "KmsKeyIdentifier",
 		"parameter_name":               "ParameterName",
 		"parameter_value":              "ParameterValue",
+		"state":                        "State",
 		"tags":                         "Tags",
 		"value":                        "Value",
 	})

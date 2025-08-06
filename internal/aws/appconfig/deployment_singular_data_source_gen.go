@@ -152,6 +152,26 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The AWS Key Management Service key identifier (key ID, key alias, or key ARN) provided when the resource was created or updated.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The state of the deployment.",
+		//	  "enum": [
+		//	    "BAKING",
+		//	    "VALIDATING",
+		//	    "DEPLOYING",
+		//	    "COMPLETE",
+		//	    "ROLLING_BACK",
+		//	    "ROLLED_BACK",
+		//	    "REVERTED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the deployment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -224,6 +244,7 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kms_key_identifier":           "KmsKeyIdentifier",
 		"parameter_name":               "ParameterName",
 		"parameter_value":              "ParameterValue",
+		"state":                        "State",
 		"tags":                         "Tags",
 		"value":                        "Value",
 	})

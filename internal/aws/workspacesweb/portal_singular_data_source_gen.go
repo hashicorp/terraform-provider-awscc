@@ -239,6 +239,18 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"service_provider_saml_metadata": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: SessionLoggerArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\\/[a-fA-F0-9\\-]{36})+$",
+		//	  "type": "string"
+		//	}
+		"session_logger_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: StatusReason
 		// CloudFormation resource type schema:
 		//
@@ -368,6 +380,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"portal_status":                    "PortalStatus",
 		"renderer_type":                    "RendererType",
 		"service_provider_saml_metadata":   "ServiceProviderSamlMetadata",
+		"session_logger_arn":               "SessionLoggerArn",
 		"status_reason":                    "StatusReason",
 		"tags":                             "Tags",
 		"trust_store_arn":                  "TrustStoreArn",

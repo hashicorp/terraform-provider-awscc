@@ -71,6 +71,28 @@
           }
         }
       }
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": ""
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
     }
   },
   "properties": {
@@ -123,6 +145,14 @@
       "examples": [
         "arn:aws:s3express:us-west-2:123456789012:accesspoint/my-accesspoint--usw2-az1--xa-s3"
       ]
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     }
   },
   "required": [
@@ -148,14 +178,16 @@
         "s3express:PutAccessPointPolicy",
         "s3express:GetAccessPoint",
         "s3express:PutAccessPointScope",
-        "s3express:GetAccessPointScope"
+        "s3express:GetAccessPointScope",
+        "s3express:TagResource"
       ]
     },
     "read": {
       "permissions": [
         "s3express:GetAccessPoint",
         "s3express:GetAccessPointPolicy",
-        "s3express:GetAccessPointScope"
+        "s3express:GetAccessPointScope",
+        "s3express:ListTagsForResource"
       ]
     },
     "update": {
@@ -163,7 +195,13 @@
         "s3express:PutAccessPointPolicy",
         "s3express:DeleteAccessPointPolicy",
         "s3express:PutAccessPointScope",
-        "s3express:DeleteAccessPointScope"
+        "s3express:DeleteAccessPointScope",
+        "s3express:TagResource",
+        "s3express:UntagResource",
+        "s3express:GetAccessPoint",
+        "s3express:GetAccessPointPolicy",
+        "s3express:GetAccessPointScope",
+        "s3express:ListTagsForResource"
       ]
     },
     "delete": {
@@ -180,7 +218,15 @@
     }
   },
   "tagging": {
-    "taggable": false
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "s3express:TagResource",
+      "s3express:UntagResource"
+    ]
   },
   "additionalProperties": false
 }

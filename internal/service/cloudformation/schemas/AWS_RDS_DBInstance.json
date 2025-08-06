@@ -75,10 +75,10 @@
         },
         "StatusType": {
           "type": "string",
-          "description": "The status type of the DB instance."
+          "description": "This value is currently \"read replication.\""
         }
       },
-      "description": ""
+      "description": "Provides a list of status information for a DB instance."
     },
     "ProcessorFeature": {
       "type": "object",
@@ -519,7 +519,7 @@
       "items": {
         "$ref": "#/definitions/DBInstanceStatusInfo"
       },
-      "description": ""
+      "description": "The status of a read replica. If the DB instance isn't a read replica, the value is blank."
     },
     "StorageEncrypted": {
       "type": "boolean",

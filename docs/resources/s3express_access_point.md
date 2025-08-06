@@ -83,6 +83,7 @@ resource "awscc_s3express_access_point" "example" {
 - `policy` (String) The Access Point Policy you want to apply to this access point.
 - `public_access_block_configuration` (Attributes) The PublicAccessBlock configuration that you want to apply to this Access Point. (see [below for nested schema](#nestedatt--public_access_block_configuration))
 - `scope` (Attributes) For directory buckets, you can ?lter access control to speci?c pre?xes, API operations, or a combination of both. (see [below for nested schema](#nestedatt--scope))
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 - `vpc_configuration` (Attributes) If you include this field, Amazon S3 restricts access to this Access Point to requests from the specified Virtual Private Cloud (VPC). (see [below for nested schema](#nestedatt--vpc_configuration))
 
 ### Read-Only
@@ -114,6 +115,15 @@ Optional:
 
 - `permissions` (List of String) You can include one or more API operations as permissions
 - `prefixes` (List of String) You can specify any amount of pre?xes, but the total length of characters of all pre?xes must be less than 256 bytes in size.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--vpc_configuration"></a>

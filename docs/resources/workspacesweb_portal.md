@@ -47,6 +47,7 @@ resource "awscc_workspacesweb_portal" "example" {
 - `ip_access_settings_arn` (String)
 - `max_concurrent_sessions` (Number)
 - `network_settings_arn` (String)
+- `session_logger_arn` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `trust_store_arn` (String)
 - `user_access_logging_settings_arn` (String)

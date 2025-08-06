@@ -70,7 +70,8 @@
     "/properties/CreationTime",
     "/properties/ClusterStatus",
     "/properties/FailureMessage",
-    "/properties/InstanceGroups/*/CurrentCount"
+    "/properties/InstanceGroups/*/CurrentCount",
+    "/properties/RestrictedInstanceGroups/*/CurrentCount"
   ],
   "description": "Resource Type definition for AWS::SageMaker::Cluster",
   "additionalIdentifiers": [
@@ -86,7 +87,12 @@
     "/properties/InstanceGroups/*/ExecutionRole",
     "/properties/InstanceGroups/*/InstanceGroupName",
     "/properties/InstanceGroups/*/InstanceType",
-    "/properties/InstanceGroups/*/ThreadsPerCore"
+    "/properties/InstanceGroups/*/ThreadsPerCore",
+    "/properties/RestrictedInstanceGroups/*/OverrideVpcConfig",
+    "/properties/RestrictedInstanceGroups/*/ExecutionRole",
+    "/properties/RestrictedInstanceGroups/*/InstanceGroupName",
+    "/properties/RestrictedInstanceGroups/*/InstanceType",
+    "/properties/RestrictedInstanceGroups/*/ThreadsPerCore"
   ],
   "additionalProperties": false,
   "primaryIdentifier": [
@@ -165,6 +171,16 @@
         "Subnets"
       ]
     },
+    "EnvironmentConfig": {
+      "description": "The configuration for the restricted instance groups (RIG) environment.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "FSxLustreConfig": {
+          "$ref": "#/definitions/FSxLustreConfig"
+        }
+      }
+    },
     "InstanceGroupName": {
       "minLength": 1,
       "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
@@ -179,6 +195,15 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/ClusterInstanceGroup"
+      }
+    },
+    "ClusterRestrictedInstanceGroupsList": {
+      "minItems": 1,
+      "description": "The restricted instance groups of the SageMaker HyperPod cluster.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ClusterRestrictedInstanceGroup"
       }
     },
     "Orchestrator": {
@@ -206,6 +231,64 @@
           "minimum": 1
         }
       }
+    },
+    "ClusterRestrictedInstanceGroup": {
+      "description": "Details of a restricted instance group in a SageMaker HyperPod cluster.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "OverrideVpcConfig": {
+          "$ref": "#/definitions/VpcConfig"
+        },
+        "InstanceCount": {
+          "description": "The number of instances you specified to add to the restricted instance group of a SageMaker HyperPod cluster.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "OnStartDeepHealthChecks": {
+          "$ref": "#/definitions/OnStartDeepHealthChecks"
+        },
+        "EnvironmentConfig": {
+          "$ref": "#/definitions/EnvironmentConfig"
+        },
+        "InstanceGroupName": {
+          "$ref": "#/definitions/InstanceGroupName"
+        },
+        "InstanceStorageConfigs": {
+          "$ref": "#/definitions/ClusterInstanceStorageConfigs"
+        },
+        "CurrentCount": {
+          "description": "The number of instances that are currently in the restricted instance group of a SageMaker HyperPod cluster.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "TrainingPlanArn": {
+          "minLength": 50,
+          "pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*$",
+          "description": "The Amazon Resource Name (ARN) of the training plan to use for this cluster restricted instance group. For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see CreateTrainingPlan.",
+          "type": "string",
+          "maxLength": 2048
+        },
+        "InstanceType": {
+          "$ref": "#/definitions/InstanceType"
+        },
+        "ThreadsPerCore": {
+          "description": "The number you specified to TreadsPerCore in CreateCluster for enabling or disabling multithreading. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading.",
+          "maximum": 2,
+          "type": "integer",
+          "minimum": 1
+        },
+        "ExecutionRole": {
+          "$ref": "#/definitions/ExecutionRole"
+        }
+      },
+      "required": [
+        "ExecutionRole",
+        "InstanceCount",
+        "InstanceGroupName",
+        "InstanceType",
+        "EnvironmentConfig"
+      ]
     },
     "ClusterLifeCycleConfig": {
       "description": "The lifecycle configuration for a SageMaker HyperPod cluster.",
@@ -268,6 +351,13 @@
         },
         "LifeCycleConfig": {
           "$ref": "#/definitions/ClusterLifeCycleConfig"
+        },
+        "TrainingPlanArn": {
+          "minLength": 50,
+          "pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*$",
+          "description": "The Amazon Resource Name (ARN) of the training plan to use for this cluster instance group. For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see CreateTrainingPlan.",
+          "type": "string",
+          "maxLength": 2048
         },
         "InstanceType": {
           "$ref": "#/definitions/InstanceType"
@@ -334,11 +424,32 @@
       "description": "The execution role for the instance group to assume.",
       "type": "string",
       "maxLength": 2048
+    },
+    "FSxLustreConfig": {
+      "description": "Configuration settings for an Amazon FSx for Lustre file system to be used with the cluster.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "SizeInGiB": {
+          "description": "The storage capacity of the FSx for Lustre file system, specified in gibibytes (GiB).",
+          "maximum": 100800,
+          "type": "integer",
+          "minimum": 1200
+        },
+        "PerUnitStorageThroughput": {
+          "description": "The throughput capacity of the FSx for Lustre file system, measured in MB/s per TiB of storage.",
+          "maximum": 1000,
+          "type": "integer",
+          "minimum": 125
+        }
+      },
+      "required": [
+        "SizeInGiB",
+        "PerUnitStorageThroughput"
+      ]
     }
   },
-  "required": [
-    "InstanceGroups"
-  ],
+  "required": [],
   "properties": {
     "ClusterArn": {
       "pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:cluster/[a-z0-9]{12}$",
@@ -370,6 +481,9 @@
       "description": "The name of the HyperPod Cluster.",
       "type": "string",
       "maxLength": 63
+    },
+    "RestrictedInstanceGroups": {
+      "$ref": "#/definitions/ClusterRestrictedInstanceGroupsList"
     },
     "FailureMessage": {
       "description": "The failure message of the HyperPod Cluster.",

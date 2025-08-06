@@ -81,7 +81,7 @@ func configurationProfileDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The Amazon Resource Name of the AWS Key Management Service key to encrypt new configuration data versions in the AWS AppConfig hosted configuration store. This attribute is only used for hosted configuration types. To encrypt data managed in other configuration stores, see the documentation for how to specify an AWS KMS key for that particular service.",
 		//	  "maxLength": 2048,
 		//	  "minLength": 20,
-		//	  "pattern": "arn:(aws[a-zA-Z-]*)?:[a-z]+:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:[a-zA-Z0-9-_/:.]+",
+		//	  "pattern": "arn:(aws[a-zA-Z-]*)?:[a-z]+:((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1})?:(\\d{12})?:[a-zA-Z0-9-_/:.]+",
 		//	  "type": "string"
 		//	}
 		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -93,7 +93,7 @@ func configurationProfileDataSource(ctx context.Context) (datasource.DataSource,
 		//
 		//	{
 		//	  "description": "The AWS Key Management Service key identifier (key ID, key alias, or key ARN) provided when the resource was created or updated.",
-		//	  "pattern": "^[\\da-f]{8}-[\\da-f]{4}-[\\da-f]{4}-[\\da-f]{4}-[\\da-f]{12}|alias/[a-zA-Z0-9/_-]{1,250}|arn:aws[a-zA-Z-]*:kms:[a-z]{2}(-gov|-iso(b?))?-[a-z]+-\\d{1}:\\d{12}:(key/[0-9a-f-]{36}|alias/[a-zA-Z0-9/_-]{1,250})$",
+		//	  "pattern": "^[\\da-f]{8}-[\\da-f]{4}-[\\da-f]{4}-[\\da-f]{4}-[\\da-f]{12}|alias/[a-zA-Z0-9/_-]{1,250}|arn:aws[a-zA-Z-]*:kms:((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1})?:(key/[0-9a-f-]{36}|alias/[a-zA-Z0-9/_-]{1,250})$",
 		//	  "type": "string"
 		//	}
 		"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -133,7 +133,7 @@ func configurationProfileDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The ARN of an IAM role with permission to access the configuration at the specified LocationUri.",
 		//	  "maxLength": 2048,
 		//	  "minLength": 20,
-		//	  "pattern": "^((arn):(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):(iam)::\\d{12}:role[/].*)$",
+		//	  "pattern": "^((arn):(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov|aws-eusc):(iam)::\\d{12}:role[/].*)$",
 		//	  "type": "string"
 		//	}
 		"retrieval_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

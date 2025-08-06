@@ -186,6 +186,9 @@
         },
         "Override": {
           "$ref": "#/definitions/StatefulRuleGroupOverride"
+        },
+        "DeepThreatInspection": {
+          "type": "boolean"
         }
       },
       "required": [

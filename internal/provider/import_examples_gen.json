@@ -1604,6 +1604,10 @@
         "identifier": ["TransitGatewayAttachmentId"]
     },
     {
+        "resource": "awscc_ec2_transit_gateway_connect_peer",
+        "identifier": ["TransitGatewayConnectPeerId"]
+    },
+    {
         "resource": "awscc_ec2_transit_gateway_multicast_domain",
         "identifier": ["TransitGatewayMulticastDomainId"]
     },
@@ -1838,6 +1842,10 @@
     {
         "resource": "awscc_emr_wal_workspace",
         "identifier": ["WALWorkspaceName"]
+    },
+    {
+        "resource": "awscc_workspacesweb_session_logger",
+        "identifier": ["SessionLoggerArn"]
     },
     {
         "resource": "awscc_emrcontainers_virtual_cluster",

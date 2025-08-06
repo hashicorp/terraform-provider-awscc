@@ -2,7 +2,18 @@
   "typeName": "AWS::IoT::FleetMetric",
   "description": "An aggregated metric of certain devices in your fleet",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-iot.git",
-  "taggable": true,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "iot:TagResource",
+      "iot:UntagResource",
+      "iot:ListTagsForResource"
+    ]
+  },
   "definitions": {
     "Tag": {
       "description": "A key-value pair to associate with a resource",

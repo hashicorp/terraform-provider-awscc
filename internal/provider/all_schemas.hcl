@@ -48,6 +48,16 @@ resource_schema "aws_aps_workspace" {
   cloudformation_type_name = "AWS::APS::Workspace"
 }
 
+resource_schema "aws_arcregionswitch_plan" {
+  cloudformation_type_name = "AWS::ARCRegionSwitch::Plan"
+
+  # Suppression Reason: Configuration/JobConfiguration is of unsupported type: key-value map of list objects
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/2070
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_arczonalshift_autoshift_observer_notification_status" {
   cloudformation_type_name = "AWS::ARCZonalShift::AutoshiftObserverNotificationStatus"
 }
@@ -1881,6 +1891,10 @@ resource_schema "aws_ec2_transit_gateway_connect" {
   cloudformation_type_name = "AWS::EC2::TransitGatewayConnect"
 }
 
+resource_schema "aws_ec2_transit_gateway_connect_peer" {
+  cloudformation_type_name = "AWS::EC2::TransitGatewayConnectPeer"
+}
+
 resource_schema "aws_ec2_transit_gateway_multicast_domain" {
   cloudformation_type_name = "AWS::EC2::TransitGatewayMulticastDomain"
 }
@@ -2130,6 +2144,10 @@ resource_schema "aws_emr_studio_session_mapping" {
 
 resource_schema "aws_emr_wal_workspace" {
   cloudformation_type_name = "AWS::EMR::WALWorkspace"
+}
+
+resource_schema "aws_workspacesweb_session_logger" {
+  cloudformation_type_name = "AWS::WorkSpacesWeb::SessionLogger"
 }
 
 resource_schema "aws_emrcontainers_virtual_cluster" {
@@ -3911,6 +3929,9 @@ resource_schema "aws_opensearchservice_domain" {
 
 resource_schema "aws_opsworkscm_server" {
   cloudformation_type_name = "AWS::OpsWorksCM::Server"
+
+  # Resource suppressions. Schema not found during refresh.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/2070
 }
 
 resource_schema "aws_organizations_account" {
