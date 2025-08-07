@@ -69,10 +69,14 @@ func generateDataSourceChanges(changes []string, filePaths *UpdateFilePaths) ([]
 
 		log.Printf("  Resource: %s\n", resource)
 
-		// Always include the original resource change
-		newChanges = append(newChanges, change)
 		// Generate data source entries if the resource exists in schemas and isn't suppressed
 		if resourceSchema, exists := cfTypeToResource[resource]; exists {
+			if !resourceSchema.SuppressResourceGeneration {
+				log.Printf("  Found resource schema for %s\n", resource)
+				newChanges = append(newChanges, change)
+			} else {
+				log.Printf("  Resource generation suppressed for %s\n", resource)
+			}
 			// Generate plural data source entry if not suppressed
 			if !resourceSchema.SuppressPluralDataSourceGeneration {
 				plural := naming.Pluralize(resource)
