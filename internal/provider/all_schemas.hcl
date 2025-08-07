@@ -93,7 +93,7 @@ resource_schema "aws_amplify_domain" {
 resource_schema "aws_amplifyuibuilder_component" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::AmplifyUIBuilder::Component"
-  suppression_reason                       = "Suppression Reason:Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95"
+  suppression_reason                       = "Recursive Attribute Definitions:https://github.com/hashicorp/terraform-provider-awscc/issues/95"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -101,7 +101,7 @@ resource_schema "aws_amplifyuibuilder_component" {
 resource_schema "aws_amplifyuibuilder_form" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::AmplifyUIBuilder::Form"
-  suppression_reason                       = "Suppression Reason:Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95"
+  suppression_reason                       = "Attribute Definitions:https://github.com/hashicorp/terraform-provider-awscc/issues/95"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -109,7 +109,7 @@ resource_schema "aws_amplifyuibuilder_form" {
 resource_schema "aws_amplifyuibuilder_theme" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::AmplifyUIBuilder::Theme"
-  suppression_reason                       = "Suppression Reason:Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95"
+  suppression_reason                       = "Recursive Attribute Definitions:https://github.com/hashicorp/terraform-provider-awscc/issues/95"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
