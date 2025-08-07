@@ -168,6 +168,16 @@ func writeSchemasToHCLFile(schema interface{}, filePath string) error {
 	if _, err := file.Write(hclFile.Bytes()); err != nil {
 		return fmt.Errorf("failed to write HCL to file %s: %w", filePath, err)
 	}
+	data, err := os.ReadFile(filePath)
+	if err != nil {
+		return fmt.Errorf("failed to read back written file %s: %w", filePath, err)
+	}
+	copyright_header := "// Copyright (c) HashiCorp, Inc.\n// SPDX-License-Identifier: MPL-2.0\n\n"
+	updatedData := append([]byte(copyright_header), data...)
+	err = os.WriteFile(filePath, updatedData, 0644)
+	if err != nil {
+		return fmt.Errorf("failed to prepend copyright header to file %s: %w", filePath, err)
+	}
 
 	log.Printf("Successfully wrote schema to %s\n", filePath)
 	return nil

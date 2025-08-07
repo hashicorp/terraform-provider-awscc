@@ -436,3 +436,39 @@ func TestDiffSchemasFileOperations(t *testing.T) {
 		}
 	})
 }
+
+func TestWriteSchemasToHCLFile(t *testing.T) {
+	t.Run("write_valid_schema", func(t *testing.T) {
+		tempDir := t.TempDir()
+		filePath := filepath.Join(tempDir, "test_schema.hcl")
+
+		schema := &allschemas.AllSchemas{
+			Resources: []allschemas.ResourceAllSchema{
+				{
+					CloudFormationTypeName: "AWS::S3::Bucket",
+					ResourceTypeName:       "aws_s3_bucket",
+				},
+			},
+		}
+
+		err := writeSchemasToHCLFile(schema, filePath)
+		if err != nil {
+			t.Fatalf("unexpected error: %v", err)
+		}
+
+		// Verify file was created and contains expected content
+		content, err := os.ReadFile(filePath)
+		if err != nil {
+			t.Fatalf("failed to read written file: %v", err)
+		}
+
+		contentStr := string(content)
+		if !strings.Contains(contentStr, "Copyright (c) HashiCorp, Inc.") {
+			t.Error("expected copyright header")
+		}
+		if !strings.Contains(contentStr, `resource_schema "aws_s3_bucket" {`) {
+			t.Error("expected S3 bucket resource")
+		}
+	})
+
+}
