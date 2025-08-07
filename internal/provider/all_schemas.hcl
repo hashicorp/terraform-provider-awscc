@@ -91,7 +91,7 @@ resource_schema "aws_amplify_domain" {
 resource_schema "aws_amplifyuibuilder_component" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::AmplifyUIBuilder::Component"
-  suppression_reason                       = ""
+  suppression_reason                       = "Suppression Reason:Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -99,7 +99,7 @@ resource_schema "aws_amplifyuibuilder_component" {
 resource_schema "aws_amplifyuibuilder_form" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::AmplifyUIBuilder::Form"
-  suppression_reason                       = ""
+  suppression_reason                       = "Suppression Reason:Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -107,7 +107,7 @@ resource_schema "aws_amplifyuibuilder_form" {
 resource_schema "aws_amplifyuibuilder_theme" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::AmplifyUIBuilder::Theme"
-  suppression_reason                       = ""
+  suppression_reason                       = "Suppression Reason:Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -459,7 +459,7 @@ resource_schema "aws_appflow_connector" {
 resource_schema "aws_appflow_connector_profile" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::AppFlow::ConnectorProfile"
-  suppression_reason                       = ""
+  suppression_reason                       = "isSandboxEnvironment overwrites IsSandboxEnvironment for Terraform attribute is_sandbox_environment:https://github.com/hashicorp/terraform-provider-awscc/issues/1526"
   suppress_plural_data_source_generation   = false
   suppress_resource_generation             = false
   suppress_singular_data_source_generation = false
@@ -747,7 +747,7 @@ resource_schema "aws_aps_workspace" {
 resource_schema "aws_arcregionswitch_plan" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::ARCRegionSwitch::Plan"
-  suppression_reason                       = ""
+  suppression_reason                       = "Configuration/JobConfiguration is of unsupported type: key-value map of list objects:https://github.com/hashicorp/terraform-provider-awscc/issues/2070"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -1075,7 +1075,7 @@ resource_schema "aws_bedrock_data_source" {
 resource_schema "aws_bedrock_flow" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::Bedrock::Flow"
-  suppression_reason                       = ""
+  suppression_reason                       = "DefinitionSubstitutions is of unsupported type: key-value map of .:https://github.com/hashicorp/terraform-provider-awscc/issues/1907"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -1315,7 +1315,7 @@ resource_schema "aws_cleanrooms_id_mapping_table" {
 resource_schema "aws_cleanrooms_id_namespace_association" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::CleanRooms::IdNamespaceAssociation"
-  suppression_reason                       = ""
+  suppression_reason                       = "InputReferenceProperties/IdMappingWorkflowsSupported is of unsupported type: list of undefined schema:https://github.com/hashicorp/terraform-provider-awscc/issues/1933"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -1827,7 +1827,7 @@ resource_schema "aws_cognito_managed_login_branding" {
 resource_schema "aws_cognito_user_pool" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::Cognito::UserPool"
-  suppression_reason                       = ""
+  suppression_reason                       = "SmsMessage overwrites SMSMessage for Terraform attribute sms_message:https://github.com/hashicorp/terraform-provider-awscc/issues/1520"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -2019,7 +2019,7 @@ resource_schema "aws_connect_email_address" {
 resource_schema "aws_connect_evaluation_form" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::Connect::EvaluationForm"
-  suppression_reason                       = ""
+  suppression_reason                       = "Recursive Attribute Definitions:https://github.com/hashicorp/terraform-provider-awscc/issues/95"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -2203,7 +2203,7 @@ resource_schema "aws_connectcampaignsv2_campaign" {
 resource_schema "aws_controltower_enabled_baseline" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::ControlTower::EnabledBaseline"
-  suppression_reason                       = ""
+  suppression_reason                       = "Properties with anyOf indicator:https://github.com/hashicorp/terraform-provider-awscc/issues/98"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -2211,7 +2211,7 @@ resource_schema "aws_controltower_enabled_baseline" {
 resource_schema "aws_controltower_enabled_control" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::ControlTower::EnabledControl"
-  suppression_reason                       = ""
+  suppression_reason                       = "Parameters/Value is of unsupported type: .https://github.com/hashicorp/terraform-provider-awscc/issues/1527"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = false
   suppress_singular_data_source_generation = false
@@ -2219,7 +2219,7 @@ resource_schema "aws_controltower_enabled_control" {
 resource_schema "aws_controltower_landing_zone" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::ControlTower::LandingZone"
-  suppression_reason                       = ""
+  suppression_reason                       = "Manifest is of unsupported type: .:https://github.com/hashicorp/terraform-provider-awscc/issues/1519"
   suppress_plural_data_source_generation   = false
   suppress_resource_generation             = false
   suppress_singular_data_source_generation = false
@@ -2315,7 +2315,7 @@ resource_schema "aws_databrew_project" {
 resource_schema "aws_databrew_recipe" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::DataBrew::Recipe"
-  suppression_reason                       = ""
+  suppression_reason                       = "Properties with anyOf indicator:https://github.com/hashicorp/terraform-provider-awscc/issues/98"
   suppress_plural_data_source_generation   = false
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -2987,7 +2987,7 @@ resource_schema "aws_ec2_key_pair" {
 resource_schema "aws_ec2_launch_template" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::EC2::LaunchTemplate"
-  suppression_reason                       = ""
+  suppression_reason                       = "Object has no key 'NetworkPerformanceOptions':https://github.com/hashicorp/terraform-provider-awscc/issues/2133"
   suppress_plural_data_source_generation   = false
   suppress_resource_generation             = false
   suppress_singular_data_source_generation = false
@@ -3043,7 +3043,7 @@ resource_schema "aws_ec2_network_acl" {
 resource_schema "aws_ec2_network_insights_access_scope" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::EC2::NetworkInsightsAccessScope"
-  suppression_reason                       = ""
+  suppression_reason                       = "DestinationCidr overwrites destinationCidr for Terraform attribute destination_cidr.:https://github.com/hashicorp/terraform-provider-awscc/issues/1529"
   suppress_plural_data_source_generation   = false
   suppress_resource_generation             = false
   suppress_singular_data_source_generation = false
@@ -3827,7 +3827,7 @@ resource_schema "aws_elasticbeanstalk_environment" {
 resource_schema "aws_elasticloadbalancingv2_listener" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::ElasticLoadBalancingV2::Listener"
-  suppression_reason                       = ""
+  suppression_reason                       = "error creating write-only attribute path (/properties/DefaultActions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*":https://github.com/hashicorp/terraform-provider-awscc/issues/1521"
   suppress_plural_data_source_generation   = false
   suppress_resource_generation             = false
   suppress_singular_data_source_generation = false
@@ -3835,7 +3835,7 @@ resource_schema "aws_elasticloadbalancingv2_listener" {
 resource_schema "aws_elasticloadbalancingv2_listener_rule" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::ElasticLoadBalancingV2::ListenerRule"
-  suppression_reason                       = ""
+  suppression_reason                       = "error creating write-only attribute path (/properties/Actions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*":https://github.com/hashicorp/terraform-provider-awscc/issues/1521"
   suppress_plural_data_source_generation   = false
   suppress_resource_generation             = false
   suppress_singular_data_source_generation = false
@@ -3923,7 +3923,7 @@ resource_schema "aws_emrcontainers_virtual_cluster" {
 resource_schema "aws_emrserverless_application" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::EMRServerless::Application"
-  suppression_reason                       = ""
+  suppression_reason                       = "Recursive Attribute Definitions:https://github.com/hashicorp/terraform-provider-awscc/issues/95"
   suppress_plural_data_source_generation   = false
   suppress_resource_generation             = false
   suppress_singular_data_source_generation = false
@@ -3987,7 +3987,7 @@ resource_schema "aws_events_archive" {
 resource_schema "aws_events_connection" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::Events::Connection"
-  suppression_reason                       = ""
+  suppression_reason                       = "Historical suppression Reason: error creating write-only attribute path (/definitions/BasicAuthParameters/Password): expected properties for the second property path segment, got: definitions:https://github.com/hashicorp/terraform-provider-awscc/issues/1521"
   suppress_plural_data_source_generation   = false
   suppress_resource_generation             = false
   suppress_singular_data_source_generation = false
@@ -5099,7 +5099,7 @@ resource_schema "aws_iotfleetwise_campaign" {
 resource_schema "aws_iotfleetwise_decoder_manifest" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::IoTFleetWise::DecoderManifest"
-  suppression_reason                       = ""
+  suppression_reason                       = "NetworkInterfaces is of unsupported type: list of "":https://github.com/hashicorp/terraform-provider-awscc/issues/1515"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -5171,7 +5171,7 @@ resource_schema "aws_iotsitewise_asset_model" {
 resource_schema "aws_iotsitewise_computation_model" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::IoTSiteWise::ComputationModel"
-  suppression_reason                       = ""
+  suppression_reason                       = "Stack overflow:Ref: https://github.com/hashicorp/terraform-provider-awscc/issues/2737"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -5227,7 +5227,7 @@ resource_schema "aws_iottwinmaker_component_type" {
 resource_schema "aws_iottwinmaker_entity" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::IoTTwinMaker::Entity"
-  suppression_reason                       = ""
+  suppression_reason                       = "Suppression Reason:Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -5699,7 +5699,7 @@ resource_schema "aws_launchwizard_deployment" {
 resource_schema "aws_lex_bot" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::Lex::Bot"
-  suppression_reason                       = ""
+  suppression_reason                       = "Recursive Attribute Definitions:https://github.com/hashicorp/terraform-provider-awscc/issues/95"
   suppress_plural_data_source_generation   = false
   suppress_resource_generation             = false
   suppress_singular_data_source_generation = false
@@ -6011,7 +6011,7 @@ resource_schema "aws_logs_subscription_filter" {
 resource_schema "aws_logs_transformer" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::Logs::Transformer"
-  suppression_reason                       = ""
+  suppression_reason                       = "TransformerConfig/Csv/Columns is of unsupported type: list of "":https://github.com/hashicorp/terraform-provider-awscc/issues/1515"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -6379,7 +6379,7 @@ resource_schema "aws_mediatailor_live_source" {
 resource_schema "aws_mediatailor_playback_configuration" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::MediaTailor::PlaybackConfiguration"
-  suppression_reason                       = ""
+  suppression_reason                       = "Suppression Reason: ConfigurationAliases is of unsupported type: "":https://github.com/hashicorp/terraform-provider-awscc/issues/1506"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -6451,7 +6451,7 @@ resource_schema "aws_memorydb_user" {
 resource_schema "aws_mpa_approval_team" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::MPA::ApprovalTeam"
-  suppression_reason                       = ""
+  suppression_reason                       = "Suppression Reason: Policies is of unsupported type: set of "":https://github.com/hashicorp/terraform-provider-awscc/issues/1510"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -6755,7 +6755,7 @@ resource_schema "aws_networkmanager_vpc_attachment" {
 resource_schema "aws_nimblestudio_launch_profile" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::NimbleStudio::LaunchProfile"
-  suppression_reason                       = ""
+  suppression_reason                       = "TypeNotFoundException during schema refresh"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = false
   suppress_singular_data_source_generation = false
@@ -6763,7 +6763,7 @@ resource_schema "aws_nimblestudio_launch_profile" {
 resource_schema "aws_nimblestudio_streaming_image" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::NimbleStudio::StreamingImage"
-  suppression_reason                       = ""
+  suppression_reason                       = "TypeNotFoundException during schema refresh"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = false
   suppress_singular_data_source_generation = false
@@ -6771,7 +6771,7 @@ resource_schema "aws_nimblestudio_streaming_image" {
 resource_schema "aws_nimblestudio_studio" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::NimbleStudio::Studio"
-  suppression_reason                       = ""
+  suppression_reason                       = "TypeNotFoundException during schema refresh"
   suppress_plural_data_source_generation   = false
   suppress_resource_generation             = false
   suppress_singular_data_source_generation = false
@@ -6779,7 +6779,7 @@ resource_schema "aws_nimblestudio_studio" {
 resource_schema "aws_nimblestudio_studio_component" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::NimbleStudio::StudioComponent"
-  suppression_reason                       = ""
+  suppression_reason                       = "TypeNotFoundException during schema refresh"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = false
   suppress_singular_data_source_generation = false
@@ -6963,7 +6963,7 @@ resource_schema "aws_opensearchserverless_collection" {
 resource_schema "aws_opensearchserverless_index" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::OpenSearchServerless::Index"
-  suppression_reason                       = ""
+  suppression_reason                       = "Recursive Attribute Definitions:https://github.com/hashicorp/terraform-provider-awscc/issues/95"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -7019,7 +7019,7 @@ resource_schema "aws_opensearchservice_domain" {
 resource_schema "aws_opsworkscm_server" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::OpsWorksCM::Server"
-  suppression_reason                       = ""
+  suppression_reason                       = "Schema not found during refresh:https://github.com/hashicorp/terraform-provider-awscc/issues/2070"
   suppress_plural_data_source_generation   = false
   suppress_resource_generation             = false
   suppress_singular_data_source_generation = false
@@ -7275,7 +7275,7 @@ resource_schema "aws_qbusiness_application" {
 resource_schema "aws_qbusiness_data_accessor" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::QBusiness::DataAccessor"
-  suppression_reason                       = ""
+  suppression_reason                       = "stack overflow:https://github.com/hashicorp/terraform-provider-awscc/issues/2134"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -7355,7 +7355,7 @@ resource_schema "aws_quicksight_custom_permissions" {
 resource_schema "aws_quicksight_dashboard" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::QuickSight::Dashboard"
-  suppression_reason                       = ""
+  suppression_reason                       = "internal compiler error: NewBulk too big:https://github.com/hashicorp/terraform-provider-awscc/issues/1531"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = false
   suppress_singular_data_source_generation = false
@@ -7363,7 +7363,7 @@ resource_schema "aws_quicksight_dashboard" {
 resource_schema "aws_quicksight_data_set" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::QuickSight::DataSet"
-  suppression_reason                       = ""
+  suppression_reason                       = "internal compiler error: NewBulk too big:https://github.com/hashicorp/terraform-provider-awscc/issues/1531"
   suppress_plural_data_source_generation   = false
   suppress_resource_generation             = false
   suppress_singular_data_source_generation = false
@@ -7395,7 +7395,7 @@ resource_schema "aws_quicksight_refresh_schedule" {
 resource_schema "aws_quicksight_template" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::QuickSight::Template"
-  suppression_reason                       = ""
+  suppression_reason                       = "internal compiler error: NewBulk too big:https://github.com/hashicorp/terraform-provider-awscc/issues/1531"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = false
   suppress_singular_data_source_generation = false
@@ -8387,7 +8387,7 @@ resource_schema "aws_sagemaker_model_bias_job_definition" {
 resource_schema "aws_sagemaker_model_card" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::SageMaker::ModelCard"
-  suppression_reason                       = ""
+  suppression_reason                       = "Properties with anyOf indicator Content/EvaluationDetails/MetricGroups/MetricData is of unsupported type: list of "":https://github.com/hashicorp/terraform-provider-awscc/issues/98"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -8547,7 +8547,7 @@ resource_schema "aws_securityhub_aggregator_v2" {
 resource_schema "aws_securityhub_automation_rule" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::SecurityHub::AutomationRule"
-  suppression_reason                       = ""
+  suppression_reason                       = "Properties with anyOf indicator:https://github.com/hashicorp/terraform-provider-awscc/issues/98"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -8667,7 +8667,7 @@ resource_schema "aws_securitylake_data_lake" {
 resource_schema "aws_securitylake_subscriber" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::SecurityLake::Subscriber"
-  suppression_reason                       = ""
+  suppression_reason                       = "Sources is of unsupported type: list of "":https://github.com/hashicorp/terraform-provider-awscc/issues/1515"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -9123,7 +9123,7 @@ resource_schema "aws_stepfunctions_activity" {
 resource_schema "aws_stepfunctions_state_machine" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::StepFunctions::StateMachine"
-  suppression_reason                       = ""
+  suppression_reason                       = "DefinitionSubstitutions is of unsupported type: key-value map of .:https://github.com/hashicorp/terraform-provider-awscc/issues/1530"
   suppress_plural_data_source_generation   = false
   suppress_resource_generation             = false
   suppress_singular_data_source_generation = false
@@ -9267,7 +9267,7 @@ resource_schema "aws_transfer_server" {
 resource_schema "aws_transfer_user" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::Transfer::User"
-  suppression_reason                       = ""
+  suppression_reason                       = "PosixProfile/SecondaryGids is of unsupported type for list item validation: number:Ref: https://github.com/hashicorp/terraform-provider-awscc/issues/2095"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -9459,7 +9459,7 @@ resource_schema "aws_wafv2_regex_pattern_set" {
 resource_schema "aws_wafv2_rule_group" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::WAFv2::RuleGroup"
-  suppression_reason                       = ""
+  suppression_reason                       = "Recursive Attribute Definitions:https://github.com/hashicorp/terraform-provider-awscc/issues/95"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -9467,7 +9467,7 @@ resource_schema "aws_wafv2_rule_group" {
 resource_schema "aws_wafv2_web_acl" {
   cloudformation_schema_path               = ""
   cloudformation_type_name                 = "AWS::WAFv2::WebACL"
-  suppression_reason                       = ""
+  suppression_reason                       = "Recursive Attribute Definitions:https://github.com/hashicorp/terraform-provider-awscc/issues/95"
   suppress_plural_data_source_generation   = true
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
