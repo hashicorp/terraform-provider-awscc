@@ -264,7 +264,6 @@ func updateVersionFile(filePaths *UpdateFilePaths) error {
 
 	newVersionStr := fmt.Sprintf("%s.%s.%d", versionStr[0], versionNumberStr, 0)
 	log.Printf("Updating version file %s to new version: %s\n", filePaths.Version, newVersionStr)
-	newVersionStr += "\n Manually check this version before committing to ensure it matches the latest changes."
 	if err := os.WriteFile(filePaths.Version, []byte(newVersionStr), changelogFileMode); err != nil {
 		return fmt.Errorf("failed to write new version to %s: %w", filePaths.Version, err)
 	}

@@ -405,7 +405,6 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHu
 				} else {
 					allSchemas.Resources[i].SuppressionReason = fmt.Sprintf("%s, %s:%s", allSchemas.Resources[i].SuppressionReason, schemaError, issueURL)
 				}
-
 			}
 		}
 	} else {

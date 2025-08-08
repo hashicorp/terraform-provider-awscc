@@ -9,6 +9,7 @@ import (
 	"log"
 	"os"
 	"sort"
+	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
@@ -221,4 +222,29 @@ func validateResourceType(ctx context.Context, resourceType string) (bool, error
 
 	log.Printf("Resource type %s is valid.\n", resourceType)
 	return true, nil
+}
+
+// trimAllSchemas removes lines with default values from the allSchemas HCL file.
+func trimAllSchemas(filePaths *UpdateFilePaths) error {
+	content, err := os.ReadFile(filePaths.AllSchemasHCL)
+	if err != nil {
+		return err
+	}
+
+	lines := strings.Split(string(content), "\n")
+	var filteredLines []string
+
+	for _, line := range lines {
+		// Remove lines that contain "" or false
+		if strings.Contains(line, `""`) || strings.Contains(line, "false") {
+			continue
+		}
+		filteredLines = append(filteredLines, line)
+	}
+
+	err = os.WriteFile(filePaths.AllSchemasHCL, []byte(strings.Join(filteredLines, "\n")), 0644)
+	if err != nil {
+		return err
+	}
+	return nil
 }

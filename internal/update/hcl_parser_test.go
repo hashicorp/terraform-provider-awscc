@@ -4,6 +4,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -470,5 +471,52 @@ func TestWriteSchemasToHCLFile(t *testing.T) {
 			t.Error("expected S3 bucket resource")
 		}
 	})
+}
 
+func TestTrimAllSchemas_RemovesDefaultEntries(t *testing.T) {
+	tempFile, err := os.CreateTemp("", "allschemas-*.hcl")
+	if err != nil {
+		t.Fatalf("failed to create temp file: %v", err)
+	}
+	defer os.Remove(tempFile.Name())
+
+	input :=
+		`resource "foo" {
+		name = "bar"
+	}
+
+	resource "baz" {
+		value = ""
+	}
+
+	resource "qux" {
+		enabled = false
+	}`
+	fmt.Printf("\"hello\": %v\n", "hello")
+	if _, err := tempFile.WriteString(input); err != nil {
+		t.Fatalf("failed to write to temp file: %v", err)
+	}
+	tempFile.Close()
+
+	filePaths := &UpdateFilePaths{AllSchemasHCL: tempFile.Name()}
+	err = trimAllSchemas(filePaths)
+	if err != nil {
+		t.Fatalf("trimAllSchemas failed: %v", err)
+	}
+
+	outputBytes, err := os.ReadFile(tempFile.Name())
+	if err != nil {
+		t.Fatalf("failed to read output file: %v", err)
+	}
+	output := string(outputBytes)
+	fmt.Printf("output: %v\n", output)
+	if strings.Contains(output, "value = \"\"") {
+		t.Errorf("expected section with value = \"\" to be removed")
+	}
+	if strings.Contains(output, "enabled = false") {
+		t.Errorf("expected section with enabled = false to be removed")
+	}
+	if !strings.Contains(output, "name = \"bar\"") {
+		t.Errorf("expected section with name = \"bar\" to remain")
+	}
 }

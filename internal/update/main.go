@@ -269,6 +269,11 @@ func run() error {
 		return fmt.Errorf("failed to generate documentation: %w", err)
 	}
 
+	err = trimAllSchemas(filePaths)
+	if err != nil {
+		return fmt.Errorf("failed to trim allSchemas.hcl: %w", err)
+	}
+
 	// Run acceptance tests and capture output for PR description
 	log.Printf("Running acceptance tests with 'make %s'...", MakeTestAccCmd)
 	AcceptanceTestResults, err := RunAcceptanceTests()
