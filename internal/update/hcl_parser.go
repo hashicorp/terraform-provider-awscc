@@ -21,6 +21,8 @@ import (
 	allschemas "github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/allschemas"
 )
 
+const filePerm = 0o644
+
 // parseSchemaToStruct is a generic function that parses HCL files into Go structs.
 // It reads the specified HCL file and unmarshals its contents into the provided schema type.
 //
@@ -175,7 +177,7 @@ func writeSchemasToHCLFile(schema interface{}, filePath string) error {
 	}
 	copyright_header := "// Copyright (c) HashiCorp, Inc.\n// SPDX-License-Identifier: MPL-2.0\n\n"
 	updatedData := append([]byte(copyright_header), data...)
-	err = os.WriteFile(filePath, updatedData, 0644)
+	err = os.WriteFile(filePath, updatedData, filePerm)
 	if err != nil {
 		return fmt.Errorf("failed to prepend copyright header to file %s: %w", filePath, err)
 	}
@@ -242,7 +244,7 @@ func trimAllSchemas(filePaths *UpdateFilePaths) error {
 		filteredLines = append(filteredLines, line)
 	}
 
-	err = os.WriteFile(filePaths.AllSchemasHCL, []byte(strings.Join(filteredLines, "\n")), 0644)
+	err = os.WriteFile(filePaths.AllSchemasHCL, []byte(strings.Join(filteredLines, "\n")), filePerm)
 	if err != nil {
 		return err
 	}
