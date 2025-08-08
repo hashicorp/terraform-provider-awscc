@@ -74,3 +74,27 @@ func TestParseAndIncrementChangelogVersion_Valid(t *testing.T) {
 		t.Errorf("expected version 1.48.0, got %s", version)
 	}
 }
+
+func TestUpdateVersionFile(t *testing.T) {
+	tempDir := t.TempDir()
+	versionPath := filepath.Join(tempDir, "VERSION")
+
+	// Write an initial version file
+	if err := os.WriteFile(versionPath, []byte("1.49.1"), 0644); err != nil {
+		t.Fatalf("failed to write version file: %v", err)
+	}
+
+	filePaths := &UpdateFilePaths{Version: versionPath}
+	if err := updateVersionFile(filePaths); err != nil {
+		t.Fatalf("updateVersionFile failed: %v", err)
+	}
+
+	// Read back the version file
+	updated, err := os.ReadFile(versionPath)
+	if err != nil {
+		t.Fatalf("failed to read updated version file: %v", err)
+	}
+	if string(updated) != "1.50.0" {
+		t.Errorf("expected version to be incremented to 1.50.0, got %q", string(updated))
+	}
+}

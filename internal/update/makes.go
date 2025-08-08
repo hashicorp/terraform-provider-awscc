@@ -399,12 +399,11 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHu
 				case BuildTypePluralDataSources:
 					allSchemas.Resources[i].SuppressPluralDataSourceGeneration = true
 					log.Printf("Suppressing plural data source generation for %s", allSchemas.Resources[i].CloudFormationTypeName)
-				default:
-					if allSchemas.Resources[i].SuppressionReason == "" {
-						allSchemas.Resources[i].SuppressionReason = fmt.Sprintf("%s %s", schemaError, issueURL)
-					} else {
-						allSchemas.Resources[i].SuppressionReason = fmt.Sprintf("%s, %s", allSchemas.Resources[i].SuppressionReason, schemaError)
-					}
+				}
+				if allSchemas.Resources[i].SuppressionReason == "" {
+					allSchemas.Resources[i].SuppressionReason = fmt.Sprintf("%s:%s", schemaError, issueURL)
+				} else {
+					allSchemas.Resources[i].SuppressionReason = fmt.Sprintf("%s, %s:%s", allSchemas.Resources[i].SuppressionReason, schemaError, issueURL)
 				}
 			}
 		}
@@ -416,6 +415,15 @@ func suppress(ctx context.Context, cfTypeName, schemaError string, config *GitHu
 				return fmt.Errorf("failed to add resource to checkout file: %w", err)
 			}
 			return nil
+		}
+		for i := range allSchemas.Resources {
+			if allSchemas.Resources[i].CloudFormationTypeName == cfTypeName {
+				if allSchemas.Resources[i].SuppressionReason == "" {
+					allSchemas.Resources[i].SuppressionReason = fmt.Sprintf("%s:%s", schemaError, issueURL)
+				} else {
+					allSchemas.Resources[i].SuppressionReason = fmt.Sprintf("%s, %s:%s", allSchemas.Resources[i].SuppressionReason, schemaError, issueURL)
+				}
+			}
 		}
 	}
 

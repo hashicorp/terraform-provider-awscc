@@ -9,6 +9,7 @@ import (
 	"log"
 	"os"
 	"sort"
+	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
@@ -19,6 +20,8 @@ import (
 	"github.com/hashicorp/hcl/v2/hclwrite"
 	allschemas "github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/allschemas"
 )
+
+const filePerm = 0o644
 
 // parseSchemaToStruct is a generic function that parses HCL files into Go structs.
 // It reads the specified HCL file and unmarshals its contents into the provided schema type.
@@ -168,6 +171,16 @@ func writeSchemasToHCLFile(schema interface{}, filePath string) error {
 	if _, err := file.Write(hclFile.Bytes()); err != nil {
 		return fmt.Errorf("failed to write HCL to file %s: %w", filePath, err)
 	}
+	data, err := os.ReadFile(filePath)
+	if err != nil {
+		return fmt.Errorf("failed to read back written file %s: %w", filePath, err)
+	}
+	copyright_header := "// Copyright (c) HashiCorp, Inc.\n// SPDX-License-Identifier: MPL-2.0\n\n"
+	updatedData := append([]byte(copyright_header), data...)
+	err = os.WriteFile(filePath, updatedData, filePerm)
+	if err != nil {
+		return fmt.Errorf("failed to prepend copyright header to file %s: %w", filePath, err)
+	}
 
 	log.Printf("Successfully wrote schema to %s\n", filePath)
 	return nil
@@ -211,4 +224,29 @@ func validateResourceType(ctx context.Context, resourceType string) (bool, error
 
 	log.Printf("Resource type %s is valid.\n", resourceType)
 	return true, nil
+}
+
+// trimAllSchemas removes lines with default values from the allSchemas HCL file.
+func trimAllSchemas(filePaths *UpdateFilePaths) error {
+	content, err := os.ReadFile(filePaths.AllSchemasHCL)
+	if err != nil {
+		return err
+	}
+
+	lines := strings.Split(string(content), "\n")
+	var filteredLines []string
+
+	for _, line := range lines {
+		// Remove lines that contain "" or false
+		if strings.Contains(line, `""`) || strings.Contains(line, "false") {
+			continue
+		}
+		filteredLines = append(filteredLines, line)
+	}
+
+	err = os.WriteFile(filePaths.AllSchemasHCL, []byte(strings.Join(filteredLines, "\n")), filePerm)
+	if err != nil {
+		return err
+	}
+	return nil
 }

@@ -269,6 +269,11 @@ func run() error {
 		return fmt.Errorf("failed to generate documentation: %w", err)
 	}
 
+	err = trimAllSchemas(filePaths)
+	if err != nil {
+		return fmt.Errorf("failed to trim allSchemas.hcl: %w", err)
+	}
+
 	// Run acceptance tests and capture output for PR description
 	log.Printf("Running acceptance tests with 'make %s'...", MakeTestAccCmd)
 	AcceptanceTestResults, err := RunAcceptanceTests()
@@ -426,6 +431,7 @@ func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchema
 
 		// Suppress resources that are not provisionable
 		if !flag || (err != nil && strings.Contains(err.Error(), "TypeNotFoundException")) {
+			log.Printf("Resource %s is not provisionable via CloudFormation, marking for suppression via checkout", currAllSchemas.Resources[i].CloudFormationTypeName)
 			err := addSchemaToCheckout(currAllSchemas.Resources[i].CloudFormationTypeName, filePaths)
 			if err != nil {
 				return fmt.Errorf("failed to add resource to checkout file: %w", err)
