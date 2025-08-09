@@ -208,6 +208,51 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "For directory buckets, you can ?lter access control to speci?c pre?xes, API operations, or a combination of both.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -257,6 +302,7 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"bucket":                            "Bucket",
 		"bucket_account_id":                 "BucketAccountId",
 		"ignore_public_acls":                "IgnorePublicAcls",
+		"key":                               "Key",
 		"name":                              "Name",
 		"network_origin":                    "NetworkOrigin",
 		"permissions":                       "Permissions",
@@ -265,6 +311,8 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"public_access_block_configuration": "PublicAccessBlockConfiguration",
 		"restrict_public_buckets":           "RestrictPublicBuckets",
 		"scope":                             "Scope",
+		"tags":                              "Tags",
+		"value":                             "Value",
 		"vpc_configuration":                 "VpcConfiguration",
 		"vpc_id":                            "VpcId",
 	})

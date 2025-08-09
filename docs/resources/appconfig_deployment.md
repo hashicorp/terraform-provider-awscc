@@ -34,6 +34,7 @@ Resource Type definition for AWS::AppConfig::Deployment
 
 - `deployment_number` (String) The sequence number of the deployment.
 - `id` (String) Uniquely identifies the resource.
+- `state` (String) The state of the deployment.
 
 <a id="nestedatt--dynamic_extension_parameters"></a>
 ### Nested Schema for `dynamic_extension_parameters`

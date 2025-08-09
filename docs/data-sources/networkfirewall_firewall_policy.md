@@ -82,6 +82,7 @@ Read-Only:
 
 Read-Only:
 
+- `deep_threat_inspection` (Boolean)
 - `override` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--stateful_rule_group_references--override))
 - `priority` (Number)
 - `resource_arn` (String) A resource ARN.

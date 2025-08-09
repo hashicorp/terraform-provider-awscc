@@ -24,14 +24,38 @@
     "SchemaJson": {
       "type": "string"
     },
+    "SchemaCedarFormat": {
+      "type": "string"
+    },
     "SchemaDefinition": {
-      "type": "object",
-      "properties": {
-        "CedarJson": {
-          "$ref": "#/definitions/SchemaJson"
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "CedarJson",
+          "properties": {
+            "CedarJson": {
+              "$ref": "#/definitions/SchemaJson"
+            }
+          },
+          "required": [
+            "CedarJson"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "CedarFormat",
+          "properties": {
+            "CedarFormat": {
+              "$ref": "#/definitions/SchemaCedarFormat"
+            }
+          },
+          "required": [
+            "CedarFormat"
+          ],
+          "additionalProperties": false
         }
-      },
-      "additionalProperties": false
+      ]
     },
     "DeletionMode": {
       "type": "string",

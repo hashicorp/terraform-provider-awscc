@@ -1190,10 +1190,10 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The status of a read replica. If the DB instance isn't a read replica, the value is blank.",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "",
+		//	    "description": "Provides a list of status information for a DB instance.",
 		//	    "properties": {
 		//	      "Message": {
 		//	        "description": "Details of the error if there is an error for the instance. If the instance isn't in an error state, this value is blank.",
@@ -1208,7 +1208,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "StatusType": {
-		//	        "description": "The status type of the DB instance.",
+		//	        "description": "This value is currently \"read replication.\"",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -1236,12 +1236,12 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: StatusType
 					"status_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The status type of the DB instance.",
+						Description: "This value is currently \"read replication.\"",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "",
+			Description: "The status of a read replica. If the DB instance isn't a read replica, the value is blank.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StorageEncrypted

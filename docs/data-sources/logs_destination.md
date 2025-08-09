@@ -25,4 +25,13 @@ Data Source schema for AWS::Logs::Destination
 - `destination_name` (String) The name of the destination resource
 - `destination_policy` (String) An IAM policy document that governs which AWS accounts can create subscription filters against this destination.
 - `role_arn` (String) The ARN of an IAM role that permits CloudWatch Logs to send data to the specified AWS resource
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `target_arn` (String) The ARN of the physical target where the log events are delivered (for example, a Kinesis stream)
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, - and @.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, - and @.

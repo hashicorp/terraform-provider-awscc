@@ -27,6 +27,7 @@ Data Source schema for AWS::NetworkFirewall::RuleGroup
 - `rule_group_arn` (String) A resource ARN.
 - `rule_group_id` (String)
 - `rule_group_name` (String)
+- `summary_configuration` (Attributes) (see [below for nested schema](#nestedatt--summary_configuration))
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 - `type` (String)
 
@@ -257,6 +258,14 @@ Read-Only:
 
 - `rule_order` (String)
 
+
+
+<a id="nestedatt--summary_configuration"></a>
+### Nested Schema for `summary_configuration`
+
+Read-Only:
+
+- `rule_options` (List of String)
 
 
 <a id="nestedatt--tags"></a>

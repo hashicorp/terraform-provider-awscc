@@ -29,6 +29,7 @@ Data Source schema for AWS::SageMaker::Cluster
 - `instance_groups` (Attributes List) The instance groups of the SageMaker HyperPod cluster. (see [below for nested schema](#nestedatt--instance_groups))
 - `node_recovery` (String) If node auto-recovery is set to true, faulty nodes will be replaced or rebooted when a failure is detected. If set to false, nodes will be labelled when a fault is detected.
 - `orchestrator` (Attributes) Specifies parameter(s) specific to the orchestrator, e.g. specify the EKS cluster. (see [below for nested schema](#nestedatt--orchestrator))
+- `restricted_instance_groups` (Attributes List) The restricted instance groups of the SageMaker HyperPod cluster. (see [below for nested schema](#nestedatt--restricted_instance_groups))
 - `tags` (Attributes Set) Custom tags for managing the SageMaker HyperPod cluster as an AWS resource. You can add tags to your cluster in the same way you add them in other AWS services that support tagging. (see [below for nested schema](#nestedatt--tags))
 - `vpc_config` (Attributes) Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC. (see [below for nested schema](#nestedatt--vpc_config))
 
@@ -47,6 +48,7 @@ Read-Only:
 - `on_start_deep_health_checks` (List of String) Nodes will undergo advanced stress test to detect and replace faulty instances, based on the type of deep health check(s) passed in.
 - `override_vpc_config` (Attributes) Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC. (see [below for nested schema](#nestedatt--instance_groups--override_vpc_config))
 - `threads_per_core` (Number) The number you specified to TreadsPerCore in CreateCluster for enabling or disabling multithreading. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading.
+- `training_plan_arn` (String) The Amazon Resource Name (ARN) of the training plan to use for this cluster instance group. For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see CreateTrainingPlan.
 
 <a id="nestedatt--instance_groups--instance_storage_configs"></a>
 ### Nested Schema for `instance_groups.instance_storage_configs`
@@ -96,6 +98,66 @@ Read-Only:
 Read-Only:
 
 - `cluster_arn` (String) The ARN of the EKS cluster, such as arn:aws:eks:us-west-2:123456789012:cluster/my-eks-cluster
+
+
+
+<a id="nestedatt--restricted_instance_groups"></a>
+### Nested Schema for `restricted_instance_groups`
+
+Read-Only:
+
+- `current_count` (Number) The number of instances that are currently in the restricted instance group of a SageMaker HyperPod cluster.
+- `environment_config` (Attributes) The configuration for the restricted instance groups (RIG) environment. (see [below for nested schema](#nestedatt--restricted_instance_groups--environment_config))
+- `execution_role` (String) The execution role for the instance group to assume.
+- `instance_count` (Number) The number of instances you specified to add to the restricted instance group of a SageMaker HyperPod cluster.
+- `instance_group_name` (String) The name of the instance group of a SageMaker HyperPod cluster.
+- `instance_storage_configs` (Attributes List) The instance storage configuration for the instance group. (see [below for nested schema](#nestedatt--restricted_instance_groups--instance_storage_configs))
+- `instance_type` (String) The instance type of the instance group of a SageMaker HyperPod cluster.
+- `on_start_deep_health_checks` (List of String) Nodes will undergo advanced stress test to detect and replace faulty instances, based on the type of deep health check(s) passed in.
+- `override_vpc_config` (Attributes) Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC. (see [below for nested schema](#nestedatt--restricted_instance_groups--override_vpc_config))
+- `threads_per_core` (Number) The number you specified to TreadsPerCore in CreateCluster for enabling or disabling multithreading. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading.
+- `training_plan_arn` (String) The Amazon Resource Name (ARN) of the training plan to use for this cluster restricted instance group. For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see CreateTrainingPlan.
+
+<a id="nestedatt--restricted_instance_groups--environment_config"></a>
+### Nested Schema for `restricted_instance_groups.environment_config`
+
+Read-Only:
+
+- `fsx_lustre_config` (Attributes) Configuration settings for an Amazon FSx for Lustre file system to be used with the cluster. (see [below for nested schema](#nestedatt--restricted_instance_groups--environment_config--fsx_lustre_config))
+
+<a id="nestedatt--restricted_instance_groups--environment_config--fsx_lustre_config"></a>
+### Nested Schema for `restricted_instance_groups.environment_config.fsx_lustre_config`
+
+Read-Only:
+
+- `per_unit_storage_throughput` (Number) The throughput capacity of the FSx for Lustre file system, measured in MB/s per TiB of storage.
+- `size_in_gi_b` (Number) The storage capacity of the FSx for Lustre file system, specified in gibibytes (GiB).
+
+
+
+<a id="nestedatt--restricted_instance_groups--instance_storage_configs"></a>
+### Nested Schema for `restricted_instance_groups.instance_storage_configs`
+
+Read-Only:
+
+- `ebs_volume_config` (Attributes) Defines the configuration for attaching additional Amazon Elastic Block Store (EBS) volumes to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker. (see [below for nested schema](#nestedatt--restricted_instance_groups--instance_storage_configs--ebs_volume_config))
+
+<a id="nestedatt--restricted_instance_groups--instance_storage_configs--ebs_volume_config"></a>
+### Nested Schema for `restricted_instance_groups.instance_storage_configs.ebs_volume_config`
+
+Read-Only:
+
+- `volume_size_in_gb` (Number) The size in gigabytes (GB) of the additional EBS volume to be attached to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.
+
+
+
+<a id="nestedatt--restricted_instance_groups--override_vpc_config"></a>
+### Nested Schema for `restricted_instance_groups.override_vpc_config`
+
+Read-Only:
+
+- `security_group_ids` (List of String) The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.
+- `subnets` (List of String) The ID of the subnets in the VPC to which you want to connect your training job or model.
 
 
 

@@ -63,14 +63,12 @@
   "handlers": {
     "read": {
       "permissions": [
-        "ec2:DescribeElasticGpus",
         "ec2:DescribeNetworkInterfaces",
         "ec2:DescribeVolumes",
         "ec2:DescribeInstances",
         "ec2:DescribeInstanceAttribute",
         "ec2:DescribeInstanceCreditSpecifications",
         "ec2:DescribeLaunchTemplates",
-        "elastic-inference:DescribeAccelerators",
         "ssm:DescribeAssociation",
         "ssm:ListAssociations"
       ]
@@ -79,7 +77,6 @@
       "permissions": [
         "iam:PassRole",
         "ec2:ModifyPrivateDnsNameOptions",
-        "ec2:DescribeElasticGpus",
         "ec2:DescribeNetworkInterfaces",
         "ec2:DescribeVolumes",
         "ec2:RunInstances",
@@ -104,7 +101,6 @@
         "ec2:CreateTags",
         "ec2:ReplaceIamInstanceProfileAssociation",
         "ec2:StartInstances",
-        "elastic-inference:DescribeAccelerators",
         "ssm:CreateAssociation",
         "ssm:DescribeAssociation",
         "ssm:ListAssociations"
@@ -112,7 +108,6 @@
     },
     "update": {
       "permissions": [
-        "ec2:DescribeElasticGpus",
         "ec2:ModifyPrivateDnsNameOptions",
         "ec2:DescribeNetworkInterfaces",
         "ec2:AssociateIamInstanceProfile",
@@ -140,7 +135,6 @@
         "ec2:StartInstances",
         "ec2:StopInstances",
         "ec2:UnmonitorInstances",
-        "elastic-inference:DescribeAccelerators",
         "ssm:CreateAssociation",
         "ssm:DeleteAssociation",
         "ssm:DescribeAssociation",
@@ -156,14 +150,12 @@
       "permissions": [
         "ec2:DescribeInstances",
         "ec2:TerminateInstances",
-        "ec2:DescribeElasticGpus",
         "ec2:DescribeNetworkInterfaces",
         "ec2:DescribeVolumes",
         "ec2:DescribeInstances",
         "ec2:DescribeInstanceAttribute",
         "ec2:DescribeInstanceCreditSpecifications",
         "ec2:DescribeLaunchTemplates",
-        "elastic-inference:DescribeAccelerators",
         "ssm:DescribeAssociation",
         "ssm:ListAssociations"
       ]
@@ -276,7 +268,7 @@
       "type": "object",
       "properties": {
         "Type": {
-          "description": "The type of Elastic Graphics accelerator.",
+          "description": "The type of Elastic Graphics accelerator. Amazon Elastic Graphics is no longer available.",
           "type": "string"
         }
       },
@@ -403,11 +395,11 @@
       "type": "object",
       "properties": {
         "Type": {
-          "description": "The type of elastic inference accelerator.",
+          "description": "The type of elastic inference accelerator. Amazon Elastic Inference is no longer available.",
           "type": "string"
         },
         "Count": {
-          "description": "The number of elastic inference accelerators to attach to the instance.",
+          "description": "The number of elastic inference accelerators to attach to the instance. Amazon Elastic Inference is no longer available.",
           "type": "integer",
           "minimum": 0
         }

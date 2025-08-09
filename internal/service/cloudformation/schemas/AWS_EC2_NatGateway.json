@@ -83,11 +83,30 @@
         "Value",
         "Key"
       ]
+    },
+    "AvailabilityZoneAddress": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "AvailabilityZone": {
+          "type": "string"
+        },
+        "AllocationIds": {
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "AvailabilityZone",
+        "AllocationIds"
+      ]
     }
   },
-  "required": [
-    "SubnetId"
-  ],
   "properties": {
     "SecondaryAllocationIds": {
       "uniqueItems": true,
@@ -102,19 +121,6 @@
       "description": "The private IPv4 address to assign to the NAT gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.",
       "type": "string"
     },
-    "ConnectivityType": {
-      "description": "Indicates whether the NAT gateway supports public or private connectivity. The default is public connectivity.",
-      "type": "string"
-    },
-    "SecondaryPrivateIpAddresses": {
-      "uniqueItems": true,
-      "description": "Secondary private IPv4 addresses. For more information about secondary addresses, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating) in the *Amazon Virtual Private Cloud User Guide*.\n ``SecondaryPrivateIpAddressCount`` and ``SecondaryPrivateIpAddresses`` cannot be set at the same time.",
-      "insertionOrder": true,
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
     "SecondaryPrivateIpAddressCount": {
       "description": "[Private NAT gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT gateway. For more information about secondary addresses, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating) in the *Amazon Virtual Private Cloud User Guide*.\n ``SecondaryPrivateIpAddressCount`` and ``SecondaryPrivateIpAddresses`` cannot be set at the same time.",
       "type": "integer",
@@ -127,6 +133,19 @@
     "SubnetId": {
       "description": "The ID of the subnet in which the NAT gateway is located.",
       "type": "string"
+    },
+    "ConnectivityType": {
+      "description": "Indicates whether the NAT gateway supports public or private connectivity. The default is public connectivity.",
+      "type": "string"
+    },
+    "SecondaryPrivateIpAddresses": {
+      "uniqueItems": true,
+      "description": "Secondary private IPv4 addresses. For more information about secondary addresses, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating) in the *Amazon Virtual Private Cloud User Guide*.\n ``SecondaryPrivateIpAddressCount`` and ``SecondaryPrivateIpAddresses`` cannot be set at the same time.",
+      "insertionOrder": true,
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
     "NatGatewayId": {
       "description": "",

@@ -23,6 +23,48 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::NetworkFirewall::Firewall resource.
 func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AvailabilityZoneChangeProtection
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"availability_zone_change_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: AvailabilityZoneMappings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "AvailabilityZone": {
+		//	        "description": "A AvailabilityZone",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "AvailabilityZone"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"availability_zone_mappings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AvailabilityZone
+					"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A AvailabilityZone",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeleteProtection
 		// CloudFormation resource type schema:
 		//
@@ -171,7 +213,6 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "minItems": 1,
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
@@ -235,6 +276,17 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END NESTED OBJECT*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: TransitGatewayId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 128,
+		//	  "pattern": "^tgw-[0-9a-z]+$",
+		//	  "type": "string"
+		//	}
+		"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -264,23 +316,27 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkFirewall::Firewall").WithTerraformTypeName("awscc_networkfirewall_firewall")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"delete_protection":                 "DeleteProtection",
-		"description":                       "Description",
-		"enabled_analysis_types":            "EnabledAnalysisTypes",
-		"endpoint_ids":                      "EndpointIds",
-		"firewall_arn":                      "FirewallArn",
-		"firewall_id":                       "FirewallId",
-		"firewall_name":                     "FirewallName",
-		"firewall_policy_arn":               "FirewallPolicyArn",
-		"firewall_policy_change_protection": "FirewallPolicyChangeProtection",
-		"ip_address_type":                   "IPAddressType",
-		"key":                               "Key",
-		"subnet_change_protection":          "SubnetChangeProtection",
-		"subnet_id":                         "SubnetId",
-		"subnet_mappings":                   "SubnetMappings",
-		"tags":                              "Tags",
-		"value":                             "Value",
-		"vpc_id":                            "VpcId",
+		"availability_zone":                   "AvailabilityZone",
+		"availability_zone_change_protection": "AvailabilityZoneChangeProtection",
+		"availability_zone_mappings":          "AvailabilityZoneMappings",
+		"delete_protection":                   "DeleteProtection",
+		"description":                         "Description",
+		"enabled_analysis_types":              "EnabledAnalysisTypes",
+		"endpoint_ids":                        "EndpointIds",
+		"firewall_arn":                        "FirewallArn",
+		"firewall_id":                         "FirewallId",
+		"firewall_name":                       "FirewallName",
+		"firewall_policy_arn":                 "FirewallPolicyArn",
+		"firewall_policy_change_protection":   "FirewallPolicyChangeProtection",
+		"ip_address_type":                     "IPAddressType",
+		"key":                                 "Key",
+		"subnet_change_protection":            "SubnetChangeProtection",
+		"subnet_id":                           "SubnetId",
+		"subnet_mappings":                     "SubnetMappings",
+		"tags":                                "Tags",
+		"transit_gateway_id":                  "TransitGatewayId",
+		"value":                               "Value",
+		"vpc_id":                              "VpcId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

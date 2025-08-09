@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
@@ -135,6 +136,9 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	      "items": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
+		//	          "DeepThreatInspection": {
+		//	            "type": "boolean"
+		//	          },
 		//	          "Override": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
@@ -394,6 +398,14 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 				"stateful_rule_group_references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DeepThreatInspection
+							"deep_threat_inspection": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Override
 							"override": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -733,6 +745,7 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"action":                             "Action",
 		"action_definition":                  "ActionDefinition",
 		"action_name":                        "ActionName",
+		"deep_threat_inspection":             "DeepThreatInspection",
 		"definition":                         "Definition",
 		"description":                        "Description",
 		"dimensions":                         "Dimensions",
