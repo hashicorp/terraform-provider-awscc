@@ -75,7 +75,9 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithCloudFormationTypeName("{{ .CloudFormationTypeName }}").WithTerraformTypeName("{{ .TerraformTypeName }}")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithPrimaryIdentifier({{range $index, $value := .PrimaryIdentifier}} {{- if $index}},{{- end}}"{{ $value }}"{{- end}})
+{{- if .PrimaryIdentifier }}
+    opts = opts.WithPrimaryIdentifier({{range $index, $value := .PrimaryIdentifier}} {{- if $index}},{{- end}}"{{ $value }}"{{- end}})
+{{- end }}
 	opts = opts.WithAttributeNameMap(map[string]string{
 {{- range $key, $value := .AttributeNameMap }}
 		"{{ $key }}": "{{ $value }}",
