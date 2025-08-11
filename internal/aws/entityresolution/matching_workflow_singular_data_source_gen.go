@@ -325,6 +325,36 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 		//	        "Rules"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "RuleConditionProperties": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Rules": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Condition": {
+		//	                "type": "string"
+		//	              },
+		//	              "RuleName": {
+		//	                "maxLength": 255,
+		//	                "minLength": 0,
+		//	                "pattern": "^[a-zA-Z_0-9- \\t]*$",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 15,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Rules"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -383,6 +413,28 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 									"matching_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
 										ElementType: types.StringType,
 										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: RuleName
+									"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RuleConditionProperties
+				"rule_condition_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Rules
+						"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Condition
+									"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
 									}, /*END ATTRIBUTE*/
 									// Property: RuleName
 									"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -514,6 +566,7 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"apply_normalization":               "ApplyNormalization",
 		"attribute_matching_model":          "AttributeMatchingModel",
+		"condition":                         "Condition",
 		"created_at":                        "CreatedAt",
 		"description":                       "Description",
 		"hashed":                            "Hashed",
@@ -538,6 +591,7 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 		"resolution_type":                   "ResolutionType",
 		"role_arn":                          "RoleArn",
 		"rule_based_properties":             "RuleBasedProperties",
+		"rule_condition_properties":         "RuleConditionProperties",
 		"rule_name":                         "RuleName",
 		"rules":                             "Rules",
 		"schema_arn":                        "SchemaArn",

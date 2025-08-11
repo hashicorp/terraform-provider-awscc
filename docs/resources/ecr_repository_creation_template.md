@@ -113,7 +113,8 @@ resource "awscc_ecr_repository_creation_template" "example" {
 - `custom_role_arn` (String) The ARN of the role to be assumed by Amazon ECR. Amazon ECR will assume your supplied role when the customRoleArn is specified. When this field isn't specified, Amazon ECR will use the service-linked role for the repository creation template.
 - `description` (String) The description associated with the repository creation template.
 - `encryption_configuration` (Attributes) The encryption configuration associated with the repository creation template. (see [below for nested schema](#nestedatt--encryption_configuration))
-- `image_tag_mutability` (String) The tag mutability setting for the repository. If this parameter is omitted, the default setting of MUTABLE will be used which will allow image tags to be overwritten. If IMMUTABLE is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.
+- `image_tag_mutability` (String) The tag mutability setting for the repository. If this parameter is omitted, the default setting of ``MUTABLE`` will be used which will allow image tags to be overwritten. If ``IMMUTABLE`` is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.
+- `image_tag_mutability_exclusion_filters` (Attributes List) (see [below for nested schema](#nestedatt--image_tag_mutability_exclusion_filters))
 - `lifecycle_policy` (String) The lifecycle policy to use for repositories created using the template.
 - `repository_policy` (String) The repository policy to apply to repositories created using the template. A repository policy is a permissions policy associated with a repository to control access permissions.
 - `resource_tags` (Attributes Set) The metadata to apply to the repository to help you categorize and organize. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters. (see [below for nested schema](#nestedatt--resource_tags))
@@ -135,6 +136,15 @@ Optional:
  If you use the ``AES256`` encryption type, Amazon ECR uses server-side encryption with Amazon S3-managed encryption keys which encrypts the images in the repository using an AES256 encryption algorithm.
  For more information, see [Amazon ECR encryption at rest](https://docs.aws.amazon.com/AmazonECR/latest/userguide/encryption-at-rest.html) in the *Amazon Elastic Container Registry User Guide*.
 - `kms_key` (String) If you use the ``KMS`` encryption type, specify the KMS key to use for encryption. The alias, key ID, or full ARN of the KMS key can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed KMS key for Amazon ECR will be used.
+
+
+<a id="nestedatt--image_tag_mutability_exclusion_filters"></a>
+### Nested Schema for `image_tag_mutability_exclusion_filters`
+
+Optional:
+
+- `image_tag_mutability_exclusion_filter_type` (String) Specifies the type of filter to use for excluding image tags from the repository's mutability setting.
+- `image_tag_mutability_exclusion_filter_value` (String) The value to use when filtering image tags.
 
 
 <a id="nestedatt--resource_tags"></a>

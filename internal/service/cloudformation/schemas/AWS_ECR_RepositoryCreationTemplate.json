@@ -66,6 +66,31 @@
         "REPLICATION",
         "PULL_THROUGH_CACHE"
       ]
+    },
+    "ImageTagMutabilityExclusionFilter": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "ImageTagMutabilityExclusionFilterType": {
+          "type": "string",
+          "description": "Specifies the type of filter to use for excluding image tags from the repository's mutability setting.",
+          "enum": [
+            "WILDCARD"
+          ]
+        },
+        "ImageTagMutabilityExclusionFilterValue": {
+          "type": "string",
+          "description": "The value to use when filtering image tags.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[0-9a-zA-Z._*-]{1,128}"
+        }
+      },
+      "required": [
+        "ImageTagMutabilityExclusionFilterType",
+        "ImageTagMutabilityExclusionFilterValue"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -84,11 +109,23 @@
     },
     "ImageTagMutability": {
       "type": "string",
-      "description": "The tag mutability setting for the repository. If this parameter is omitted, the default setting of MUTABLE will be used which will allow image tags to be overwritten. If IMMUTABLE is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.",
+      "description": "The tag mutability setting for the repository. If this parameter is omitted, the default setting of ``MUTABLE`` will be used which will allow image tags to be overwritten. If ``IMMUTABLE`` is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.",
       "enum": [
         "MUTABLE",
-        "IMMUTABLE"
+        "IMMUTABLE",
+        "IMMUTABLE_WITH_EXCLUSION",
+        "MUTABLE_WITH_EXCLUSION"
       ]
+    },
+    "ImageTagMutabilityExclusionFilters": {
+      "type": "array",
+      "description": "",
+      "minItems": 1,
+      "maxItems": 5,
+      "insertionOrder": true,
+      "items": {
+        "$ref": "#/definitions/ImageTagMutabilityExclusionFilter"
+      }
     },
     "RepositoryPolicy": {
       "type": "string",

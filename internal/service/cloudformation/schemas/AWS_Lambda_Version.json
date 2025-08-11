@@ -1,52 +1,94 @@
 {
-  "typeName": "AWS::Lambda::Version",
-  "description": "Resource Type definition for AWS::Lambda::Version",
-  "additionalProperties": false,
-  "properties": {
-    "FunctionArn": {
-      "type": "string",
-      "description": "The ARN of the version.",
-      "pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "propertyTransform": {
+    "/properties/FunctionName": "$split(FunctionName, \":\")[-1] $OR FunctionName"
+  },
+  "handlers": {
+    "read": {
+      "permissions": [
+        "lambda:GetFunctionConfiguration",
+        "lambda:GetProvisionedConcurrencyConfig",
+        "lambda:GetRuntimeManagementConfig",
+        "lambda:GetFunctionScalingConfig"
+      ]
     },
-    "Version": {
-      "type": "string",
-      "description": "The version number."
+    "create": {
+      "permissions": [
+        "lambda:PublishVersion",
+        "lambda:GetFunctionConfiguration",
+        "lambda:PutProvisionedConcurrencyConfig",
+        "lambda:GetProvisionedConcurrencyConfig",
+        "lambda:PutRuntimeManagementConfig",
+        "lambda:GetRuntimeManagementConfig",
+        "lambda:PutFunctionScalingConfig",
+        "lambda:GetCapacityProvider"
+      ],
+      "timeoutInMinutes": 180
     },
-    "CodeSha256": {
-      "type": "string",
-      "description": "Only publish a version if the hash value matches the value that's specified. Use this option to avoid publishing a version if the function code has changed since you last updated it. Updates are not supported for this property."
+    "update": {
+      "permissions": [
+        "lambda:GetFunctionConfiguration",
+        "lambda:PutFunctionScalingConfig",
+        "lambda:GetCapacityProvider"
+      ]
     },
-    "Description": {
-      "type": "string",
-      "description": "A description for the version to override the description in the function configuration. Updates are not supported for this property.",
-      "minLength": 0,
-      "maxLength": 256
+    "list": {
+      "permissions": [
+        "lambda:ListVersionsByFunction"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "FunctionName": {
+            "minLength": 1,
+            "pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
+            "description": "The name of the Lambda function, version, or alias.",
+            "type": "string",
+            "maxLength": 140
+          }
+        },
+        "required": [
+          "FunctionName"
+        ]
+      }
     },
-    "FunctionName": {
-      "type": "string",
-      "description": "The name of the Lambda function.",
-      "minLength": 1,
-      "maxLength": 140,
-      "pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"
-    },
-    "ProvisionedConcurrencyConfig": {
-      "description": "Specifies a provisioned concurrency configuration for a function's version. Updates are not supported for this property.",
-      "$ref": "#/definitions/ProvisionedConcurrencyConfiguration"
-    },
-    "RuntimePolicy": {
-      "description": "Specifies the runtime management configuration of a function. Displays runtimeVersionArn only for Manual.",
-      "$ref": "#/definitions/RuntimePolicy"
+    "delete": {
+      "permissions": [
+        "lambda:GetFunctionConfiguration",
+        "lambda:DeleteFunction"
+      ]
     }
   },
+  "typeName": "AWS::Lambda::Version",
+  "readOnlyProperties": [
+    "/properties/Version",
+    "/properties/FunctionArn"
+  ],
+  "description": "Resource Type definition for AWS::Lambda::Version",
+  "createOnlyProperties": [
+    "/properties/FunctionName",
+    "/properties/Description",
+    "/properties/CodeSha256",
+    "/properties/ProvisionedConcurrencyConfig",
+    "/properties/RuntimePolicy"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/FunctionArn"
+  ],
   "definitions": {
     "ProvisionedConcurrencyConfiguration": {
-      "type": "object",
       "description": "A provisioned concurrency configuration for a function's version.",
       "additionalProperties": false,
+      "type": "object",
       "properties": {
         "ProvisionedConcurrentExecutions": {
-          "type": "integer",
-          "description": "The amount of provisioned concurrency to allocate for the version."
+          "description": "The amount of provisioned concurrency to allocate for the version.",
+          "type": "integer"
         }
       },
       "required": [
@@ -54,20 +96,20 @@
       ]
     },
     "RuntimePolicy": {
-      "type": "object",
       "description": "Runtime Management Config of a function.",
       "additionalProperties": false,
+      "type": "object",
       "properties": {
-        "RuntimeVersionArn": {
-          "type": "string",
-          "description": "The ARN of the runtime the function is configured to use. If the runtime update mode is manual, the ARN is returned, otherwise null is returned.",
-          "minLength": 26,
-          "maxLength": 2048,
-          "pattern": "^arn:(aws[a-zA-Z-]*):lambda:[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}::runtime:.+$"
-        },
         "UpdateRuntimeOn": {
+          "description": "The runtime update mode.",
+          "type": "string"
+        },
+        "RuntimeVersionArn": {
+          "minLength": 26,
+          "pattern": "^arn:(aws[a-zA-Z-]*):lambda:[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}::runtime:.+$",
+          "description": "The ARN of the runtime the function is configured to use. If the runtime update mode is manual, the ARN is returned, otherwise null is returned.",
           "type": "string",
-          "description": "The runtime update mode."
+          "maxLength": 2048
         }
       },
       "required": [
@@ -78,72 +120,40 @@
   "required": [
     "FunctionName"
   ],
-  "readOnlyProperties": [
-    "/properties/Version",
-    "/properties/FunctionArn"
-  ],
-  "createOnlyProperties": [
-    "/properties/FunctionName",
-    "/properties/Description",
-    "/properties/CodeSha256",
-    "/properties/ProvisionedConcurrencyConfig",
-    "/properties/RuntimePolicy"
-  ],
-  "primaryIdentifier": [
-    "/properties/FunctionArn"
-  ],
-  "propertyTransform": {
-    "/properties/FunctionName": "$split(FunctionName, \":\")[-1] $OR FunctionName"
-  },
-  "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false
-  },
-  "handlers": {
-    "create": {
-      "permissions": [
-        "lambda:PublishVersion",
-        "lambda:GetFunctionConfiguration",
-        "lambda:PutProvisionedConcurrencyConfig",
-        "lambda:GetProvisionedConcurrencyConfig",
-        "lambda:PutRuntimeManagementConfig",
-        "lambda:GetRuntimeManagementConfig"
-      ],
-      "timeoutInMinutes": 180
+  "properties": {
+    "FunctionArn": {
+      "pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST(\\.PUBLISHED)?|[a-zA-Z0-9-_]+))?$",
+      "description": "The ARN of the version.",
+      "type": "string"
     },
-    "read": {
-      "permissions": [
-        "lambda:GetFunctionConfiguration",
-        "lambda:GetProvisionedConcurrencyConfig",
-        "lambda:GetRuntimeManagementConfig"
-      ]
+    "FunctionName": {
+      "minLength": 1,
+      "pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
+      "description": "The name of the Lambda function.",
+      "type": "string",
+      "maxLength": 140
     },
-    "delete": {
-      "permissions": [
-        "lambda:GetFunctionConfiguration",
-        "lambda:DeleteFunction"
-      ]
+    "ProvisionedConcurrencyConfig": {
+      "description": "Specifies a provisioned concurrency configuration for a function's version. Updates are not supported for this property.",
+      "$ref": "#/definitions/ProvisionedConcurrencyConfiguration"
     },
-    "list": {
-      "handlerSchema": {
-        "properties": {
-          "FunctionName": {
-            "description": "The name of the Lambda function, version, or alias.",
-            "type": "string",
-            "pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
-            "minLength": 1,
-            "maxLength": 140
-          }
-        },
-        "required": [
-          "FunctionName"
-        ]
-      },
-      "permissions": [
-        "lambda:ListVersionsByFunction"
-      ]
+    "Description": {
+      "minLength": 0,
+      "description": "A description for the version to override the description in the function configuration. Updates are not supported for this property.",
+      "type": "string",
+      "maxLength": 256
+    },
+    "RuntimePolicy": {
+      "description": "Specifies the runtime management configuration of a function. Displays runtimeVersionArn only for Manual.",
+      "$ref": "#/definitions/RuntimePolicy"
+    },
+    "Version": {
+      "description": "The version number.",
+      "type": "string"
+    },
+    "CodeSha256": {
+      "description": "Only publish a version if the hash value matches the value that's specified. Use this option to avoid publishing a version if the function code has changed since you last updated it. Updates are not supported for this property.",
+      "type": "string"
     }
   }
 }

@@ -219,7 +219,14 @@ resource "awscc_rds_db_instance" "this" {
  Constraints:
   +  Must be a value from 0 to 35
   +  Can't be set to 0 if the DB instance is a source to read replicas
-- `backup_target` (String)
+- `backup_target` (String) The location for storing automated backups and manual snapshots.
+ Valid Values:
+  +  ``local`` (Dedicated Local Zone)
+  +  ``outposts`` (AWS Outposts)
+  +  ``region`` (AWS-Region)
+  
+ Default: ``region``
+ For more information, see [Working with Amazon RDS on Outposts](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in the *Amazon RDS User Guide*.
 - `ca_certificate_identifier` (String) The identifier of the CA certificate for this DB instance.
  For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.
 - `certificate_rotation_restart` (Boolean) Specifies whether the DB instance is restarted when you rotate your SSL/TLS certificate.
@@ -549,9 +556,7 @@ resource "awscc_rds_db_instance" "this" {
  If ``MonitoringInterval`` is set to a value other than ``0``, then you must supply a ``MonitoringRoleArn`` value.
  This setting doesn't apply to RDS Custom DB instances.
 - `multi_az` (Boolean) Specifies whether the DB instance is a Multi-AZ deployment. You can't set the ``AvailabilityZone`` parameter if the DB instance is a Multi-AZ deployment.
- This setting doesn't apply to the following DB instances:
-  +  Amazon Aurora (DB instance Availability Zones (AZs) are managed by the DB cluster.)
-  +  RDS Custom
+ This setting doesn't apply to Amazon Aurora because the DB instance Availability Zones (AZs) are managed by the DB cluster.
 - `nchar_character_set_name` (String) The name of the NCHAR character set for the Oracle DB instance.
  This setting doesn't apply to RDS Custom DB instances.
 - `network_type` (String) The network type of the DB instance.
@@ -642,6 +647,7 @@ resource "awscc_rds_db_instance" "this" {
   +  For DB instances in Amazon Aurora clusters, don't specify this property. Amazon RDS automatically assigns writer and reader DB instances.
 - `source_dbi_resource_id` (String) The resource ID of the source DB instance from which to restore.
 - `source_region` (String) The ID of the region that contains the source DB instance for the read replica.
+- `status_infos` (Attributes List) (see [below for nested schema](#nestedatt--status_infos))
 - `storage_encrypted` (Boolean) A value that indicates whether the DB instance is encrypted. By default, it isn't encrypted.
  If you specify the ``KmsKeyId`` property, then you must enable encryption.
  If you specify the ``SourceDBInstanceIdentifier`` or ``SourceDbiResourceId`` property, don't specify this property. The value is inherited from the source DB instance, and if the DB instance is encrypted, the specified ``KmsKeyId`` property is used.
@@ -679,9 +685,11 @@ resource "awscc_rds_db_instance" "this" {
 
 ### Read-Only
 
+- `automatic_restart_time` (String)
 - `certificate_details` (Attributes) The details of the DB instance?s server certificate.
  For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*. (see [below for nested schema](#nestedatt--certificate_details))
 - `db_instance_arn` (String)
+- `db_instance_status` (String)
 - `dbi_resource_id` (String)
 - `endpoint` (Attributes) This data type represents the information you need to connect to an Amazon RDS DB instance. This data type is used as a response element in the following actions:
   +   ``CreateDBInstance`` 
@@ -690,6 +698,20 @@ resource "awscc_rds_db_instance" "this" {
   
  For the data structure that represents Amazon Aurora DB cluster endpoints, see ``DBClusterEndpoint``. (see [below for nested schema](#nestedatt--endpoint))
 - `id` (String) Uniquely identifies the resource.
+- `instance_create_time` (String)
+- `is_storage_config_upgrade_available` (Boolean)
+- `latest_restorable_time` (String)
+- `listener_endpoint` (Attributes) This data type represents the information you need to connect to an Amazon RDS DB instance. This data type is used as a response element in the following actions:
+  +   ``CreateDBInstance`` 
+  +   ``DescribeDBInstances`` 
+  +   ``DeleteDBInstance`` 
+  
+ For the data structure that represents Amazon Aurora DB cluster endpoints, see ``DBClusterEndpoint``. (see [below for nested schema](#nestedatt--listener_endpoint))
+- `percent_progress` (String)
+- `read_replica_db_cluster_identifiers` (List of String)
+- `read_replica_db_instance_identifiers` (List of String)
+- `resume_full_automation_mode_time` (String)
+- `secondary_availability_zone` (String)
 
 <a id="nestedatt--associated_roles"></a>
 ### Nested Schema for `associated_roles`
@@ -721,6 +743,17 @@ Optional:
 - `value` (String) The value of a processor feature.
 
 
+<a id="nestedatt--status_infos"></a>
+### Nested Schema for `status_infos`
+
+Optional:
+
+- `message` (String) Details of the error if there is an error for the instance. If the instance isn't in an error state, this value is blank.
+- `normal` (Boolean) Indicates whether the instance is operating normally (TRUE) or is in an error state (FALSE).
+- `status` (String) The status of the DB instance. For a StatusType of read replica, the values can be replicating, replication stop point set, replication stop point reached, error, stopped, or terminated.
+- `status_type` (String) The status type of the DB instance.
+
+
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
@@ -741,6 +774,16 @@ Read-Only:
 
 <a id="nestedatt--endpoint"></a>
 ### Nested Schema for `endpoint`
+
+Read-Only:
+
+- `address` (String) Specifies the DNS address of the DB instance.
+- `hosted_zone_id` (String) Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
+- `port` (String) Specifies the port that the database engine is listening on.
+
+
+<a id="nestedatt--listener_endpoint"></a>
+### Nested Schema for `listener_endpoint`
 
 Read-Only:
 

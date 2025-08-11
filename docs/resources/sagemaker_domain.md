@@ -130,8 +130,6 @@ resource "awscc_sagemaker_app_image_config" "example" {
 - `auth_mode` (String) The mode of authentication that members use to access the domain.
 - `default_user_settings` (Attributes) The default user settings. (see [below for nested schema](#nestedatt--default_user_settings))
 - `domain_name` (String) A name for the domain.
-- `subnet_ids` (List of String) The VPC subnets that Studio uses for communication.
-- `vpc_id` (String) The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
 
 ### Optional
 
@@ -140,8 +138,10 @@ resource "awscc_sagemaker_app_image_config" "example" {
 - `default_space_settings` (Attributes) The default space settings. (see [below for nested schema](#nestedatt--default_space_settings))
 - `domain_settings` (Attributes) A collection of Domain settings. (see [below for nested schema](#nestedatt--domain_settings))
 - `kms_key_id` (String) SageMaker uses AWS KMS to encrypt the EFS volume attached to the domain with an AWS managed customer master key (CMK) by default.
+- `subnet_ids` (List of String) The VPC subnets that Studio uses for communication.
 - `tag_propagation` (String) Indicates whether the tags added to Domain, User Profile and Space entity is propagated to all SageMaker resources.
 - `tags` (Attributes List) A list of tags to apply to the user profile. (see [below for nested schema](#nestedatt--tags))
+- `vpc_id` (String) The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
 
 ### Read-Only
 
@@ -238,6 +238,7 @@ Optional:
 
 - `efs_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--default_user_settings--custom_file_system_configs--efs_file_system_config))
 - `fsx_lustre_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--default_user_settings--custom_file_system_configs--fsx_lustre_file_system_config))
+- `s3_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--default_user_settings--custom_file_system_configs--s3_file_system_config))
 
 <a id="nestedatt--default_user_settings--custom_file_system_configs--efs_file_system_config"></a>
 ### Nested Schema for `default_user_settings.custom_file_system_configs.efs_file_system_config`
@@ -255,6 +256,15 @@ Optional:
 
 - `file_system_id` (String)
 - `file_system_path` (String)
+
+
+<a id="nestedatt--default_user_settings--custom_file_system_configs--s3_file_system_config"></a>
+### Nested Schema for `default_user_settings.custom_file_system_configs.s3_file_system_config`
+
+Optional:
+
+- `mount_path` (String)
+- `s3_uri` (String)
 
 
 
@@ -487,6 +497,7 @@ Optional:
 
 - `efs_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--default_space_settings--custom_file_system_configs--efs_file_system_config))
 - `fsx_lustre_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--default_space_settings--custom_file_system_configs--fsx_lustre_file_system_config))
+- `s3_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--default_space_settings--custom_file_system_configs--s3_file_system_config))
 
 <a id="nestedatt--default_space_settings--custom_file_system_configs--efs_file_system_config"></a>
 ### Nested Schema for `default_space_settings.custom_file_system_configs.efs_file_system_config`
@@ -504,6 +515,15 @@ Optional:
 
 - `file_system_id` (String)
 - `file_system_path` (String)
+
+
+<a id="nestedatt--default_space_settings--custom_file_system_configs--s3_file_system_config"></a>
+### Nested Schema for `default_space_settings.custom_file_system_configs.s3_file_system_config`
+
+Optional:
+
+- `mount_path` (String)
+- `s3_uri` (String)
 
 
 
@@ -699,6 +719,7 @@ Optional:
 - `environment_id` (String) The ID of the environment that Amazon SageMaker Unified Studio associates with the domain.
 - `project_id` (String) The ID of the Amazon SageMaker Unified Studio project that corresponds to the domain.
 - `project_s3_path` (String) The location where Amazon S3 stores temporary execution data and other artifacts for the project that corresponds to the domain.
+- `single_sign_on_application_arn` (String) The ARN of the DataZone application managed by SageMaker Unified Studio in the AWS IAM Identity Center.
 - `studio_web_portal_access` (String) Sets whether you can access the domain in Amazon SageMaker Studio:
 
 ENABLED

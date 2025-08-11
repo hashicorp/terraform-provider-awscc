@@ -110,6 +110,14 @@
           "$ref": "#/definitions/SpaceStorageSettings",
           "description": "Default storage settings for a space."
         },
+        "SpaceManagedResources": {
+          "$ref": "#/definitions/SpaceManagedResources",
+          "description": "This is a flag used to indicate if space managed resources needs to be created."
+        },
+        "RemoteAccess": {
+          "$ref": "#/definitions/RemoteAccess",
+          "description": "This is a flag used to indicate if remote access is enabled."
+        },
         "AppType": {
           "$ref": "#/definitions/AppType"
         },
@@ -148,6 +156,9 @@
         },
         "FSxLustreFileSystem": {
           "$ref": "#/definitions/FSxLustreFileSystem"
+        },
+        "S3FileSystem": {
+          "$ref": "#/definitions/S3FileSystem"
         }
       }
     },
@@ -180,6 +191,18 @@
       "required": [
         "FileSystemId"
       ]
+    },
+    "S3FileSystem": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "S3Uri": {
+          "type": "string",
+          "pattern": "(s3)://([^/]+)/?(.*)",
+          "minLength": 0,
+          "maxLength": 1024
+        }
+      }
     },
     "SpaceJupyterLabAppSettings": {
       "type": "object",
@@ -281,6 +304,22 @@
           "$ref": "#/definitions/EbsStorageSettings"
         }
       }
+    },
+    "SpaceManagedResources": {
+      "type": "string",
+      "description": "The flag to enable/disable creation of space managed resources.",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "RemoteAccess": {
+      "type": "string",
+      "description": "The flag to enable/disable remote access for a space.",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
     },
     "EbsStorageSettings": {
       "type": "object",

@@ -34,6 +34,7 @@ resource "awscc_s3express_directory_bucket" "example" {
 - `bucket_encryption` (Attributes) Specifies default encryption for a bucket using server-side encryption with Amazon S3 managed keys (SSE-S3) or AWS KMS keys (SSE-KMS). (see [below for nested schema](#nestedatt--bucket_encryption))
 - `bucket_name` (String) Specifies a name for the bucket. The bucket name must contain only lowercase letters, numbers, and hyphens (-). A directory bucket name must be unique in the chosen Availability Zone or Local Zone. The bucket name must also follow the format 'bucket_base_name--zone_id--x-s3'. The zone_id can be the ID of an Availability Zone or a Local Zone. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.
 - `lifecycle_configuration` (Attributes) Lifecycle rules that define how Amazon S3 Express manages objects during their lifetime. (see [below for nested schema](#nestedatt--lifecycle_configuration))
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -93,6 +94,17 @@ Optional:
 Optional:
 
 - `days_after_initiation` (Number) Specifies the number of days after which Amazon S3 aborts an incomplete multipart upload.
+
+
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

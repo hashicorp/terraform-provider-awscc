@@ -48,7 +48,7 @@ resource "awscc_accessanalyzer_analyzer" "this" {
 
 ### Required
 
-- `type` (String) The type of the analyzer, must be one of ACCOUNT, ORGANIZATION, ACCOUNT_UNUSED_ACCESS or ORGANIZATION_UNUSED_ACCESS
+- `type` (String) The type of the analyzer, must be one of ACCOUNT, ORGANIZATION, ACCOUNT_INTERNAL_ACCESS, ORGANIZATION_INTERNAL_ACCESS, ACCOUNT_UNUSED_ACCESS and ORGANIZATION_UNUSED_ACCESS
 
 ### Optional
 
@@ -67,14 +67,67 @@ resource "awscc_accessanalyzer_analyzer" "this" {
 
 Optional:
 
+- `internal_access_configuration` (Attributes) Specifies the configuration of an internal access analyzer for an AWS organization or account. This configuration determines how the analyzer evaluates internal access within your AWS environment. (see [below for nested schema](#nestedatt--analyzer_configuration--internal_access_configuration))
 - `unused_access_configuration` (Attributes) The Configuration for Unused Access Analyzer (see [below for nested schema](#nestedatt--analyzer_configuration--unused_access_configuration))
+
+<a id="nestedatt--analyzer_configuration--internal_access_configuration"></a>
+### Nested Schema for `analyzer_configuration.internal_access_configuration`
+
+Optional:
+
+- `internal_access_analysis_rule` (Attributes) Contains information about analysis rules for the internal access analyzer. Analysis rules determine which entities will generate findings based on the criteria you define when you create the rule. (see [below for nested schema](#nestedatt--analyzer_configuration--internal_access_configuration--internal_access_analysis_rule))
+
+<a id="nestedatt--analyzer_configuration--internal_access_configuration--internal_access_analysis_rule"></a>
+### Nested Schema for `analyzer_configuration.internal_access_configuration.internal_access_analysis_rule`
+
+Optional:
+
+- `inclusions` (Attributes List) A list of rules for the internal access analyzer containing criteria to include in analysis. Only resources that meet the rule criteria will generate findings. (see [below for nested schema](#nestedatt--analyzer_configuration--internal_access_configuration--internal_access_analysis_rule--inclusions))
+
+<a id="nestedatt--analyzer_configuration--internal_access_configuration--internal_access_analysis_rule--inclusions"></a>
+### Nested Schema for `analyzer_configuration.internal_access_configuration.internal_access_analysis_rule.inclusions`
+
+Optional:
+
+- `account_ids` (List of String) A list of AWS account IDs to apply to the internal access analysis rule criteria. Account IDs can only be applied to the analysis rule criteria for organization-level analyzers and cannot include the organization owner account.
+- `resource_arns` (List of String) A list of resource ARNs to apply to the internal access analysis rule criteria. The analyzer will only generate findings for resources that match these ARNs.
+- `resource_types` (List of String) A list of resource types to apply to the internal access analysis rule criteria. The analyzer will only generate findings for resources of these types.
+
+
+
 
 <a id="nestedatt--analyzer_configuration--unused_access_configuration"></a>
 ### Nested Schema for `analyzer_configuration.unused_access_configuration`
 
 Optional:
 
-- `unused_access_age` (Number) The specified access age in days for which to generate findings for unused access. For example, if you specify 90 days, the analyzer will generate findings for IAM entities within the accounts of the selected organization for any access that hasn't been used in 90 or more days since the analyzer's last scan. You can choose a value between 1 and 180 days.
+- `analysis_rule` (Attributes) Contains information about rules for the analyzer. (see [below for nested schema](#nestedatt--analyzer_configuration--unused_access_configuration--analysis_rule))
+- `unused_access_age` (Number) The specified access age in days for which to generate findings for unused access. For example, if you specify 90 days, the analyzer will generate findings for IAM entities within the accounts of the selected organization for any access that hasn't been used in 90 or more days since the analyzer's last scan. You can choose a value between 1 and 365 days.
+
+<a id="nestedatt--analyzer_configuration--unused_access_configuration--analysis_rule"></a>
+### Nested Schema for `analyzer_configuration.unused_access_configuration.analysis_rule`
+
+Optional:
+
+- `exclusions` (Attributes List) A list of rules for the analyzer containing criteria to exclude from analysis. Entities that meet the rule criteria will not generate findings. (see [below for nested schema](#nestedatt--analyzer_configuration--unused_access_configuration--analysis_rule--exclusions))
+
+<a id="nestedatt--analyzer_configuration--unused_access_configuration--analysis_rule--exclusions"></a>
+### Nested Schema for `analyzer_configuration.unused_access_configuration.analysis_rule.exclusions`
+
+Optional:
+
+- `account_ids` (List of String) A list of AWS account IDs to apply to the analysis rule criteria. The accounts cannot include the organization analyzer owner account. Account IDs can only be applied to the analysis rule criteria for organization-level analyzers.
+- `resource_tags` (Attributes List) An array of key-value pairs to match for your resources. You can use the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+For the tag key, you can specify a value that is 1 to 128 characters in length and cannot be prefixed with aws:.
+
+For the tag value, you can specify a value that is 0 to 256 characters in length. If the specified tag value is 0 characters, the rule is applied to all principals with the specified tag key. (see [below for nested schema](#nestedatt--analyzer_configuration--unused_access_configuration--analysis_rule--exclusions--resource_tags))
+
+<a id="nestedatt--analyzer_configuration--unused_access_configuration--analysis_rule--exclusions--resource_tags"></a>
+### Nested Schema for `analyzer_configuration.unused_access_configuration.analysis_rule.exclusions.resource_tags`
+
+
+
 
 
 
@@ -105,7 +158,7 @@ Optional:
 Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

@@ -390,53 +390,125 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 				}
 
 				validatorsGenerator = stringValidators
+			case cfschema.PropertyTypeArray:
+				if aggregateType(property.Items) == aggregateSet {
+					switch nestedItemType := property.Items.Items.Type.String(); nestedItemType {
+					case cfschema.PropertyTypeBoolean:
+						elementType = "types.ListType{ElemType:types.BoolType}"
+					case cfschema.PropertyTypeInteger:
+						elementType = "types.ListType{ElemType:types.Int64Type}"
+					case cfschema.PropertyTypeNumber:
+						elementType = "types.ListType{ElemType:types.Float64Type}"
+					case cfschema.PropertyTypeString:
+						elementType = "types.ListType{ElemType:types.StringType}"
+					case cfschema.PropertyTypeObject:
+						if len(property.Items.Items.PatternProperties) > 0 {
+							return features, unsupportedTypeError(path, "array of set of key-value map")
+						}
+						if len(property.Items.Items.Properties) == 0 {
+							return features, unsupportedTypeError(path, "list of undefined schema")
+						}
 
+						var nestednestedProperty *cfschema.Property
+						for _, value := range property.Items.Items.Properties {
+							nestednestedProperty = value
+							break
+						}
+						if nestednestedProperty == nil {
+							return features, unsupportedTypeError(path, "list of set of undefined schema")
+						}
+						e.printf("schema.ListNestedAttribute{/*START ATTRIBUTE*/\n")
+						e.printf("NestedObject: schema.NestedAttributeObject{/*START NESTED OBJECT*/\n")
+						e.printf("Attributes:")
+						f, err := e.emitSchema(
+							tfType,
+							attributeNameMap,
+							parent{
+								computedAndOptional: computedAndOptional,
+								computedOnly:        computedOnly,
+								path:                path,
+								reqd:                nestednestedProperty.Items,
+							},
+							nestednestedProperty.Properties)
+						if err != nil {
+							return features, err
+						}
+						features = features.LogicalOr(f)
+						e.printf(",\n")
+						e.printf("}/*END NESTED OBJECT*/,\n")
+
+					default:
+						return features, unsupportedTypeError(path, fmt.Sprintf("list of set of %s", nestedItemType))
+					}
+					features.UsesFrameworkTypes = true
+				} else {
+					return features, unsupportedTypeError(path, fmt.Sprintf("list of array of %s", itemType))
+				}
+				features.UsesFrameworkTypes = true
 			case cfschema.PropertyTypeObject:
 				if len(property.Items.PatternProperties) > 0 {
-					return features, unsupportedTypeError(path, "list of key-value map")
-				}
-
-				if len(property.Items.Properties) == 0 {
+					// List of map
+					var nestedPatternProperty *cfschema.Property
+					for _, v := range property.Items.PatternProperties {
+						nestedPatternProperty = v
+						break
+					}
+					if nestedPatternProperty == nil {
+						return features, unsupportedTypeError(path, "list of key-value map with no pattern")
+					}
+					switch nestedPatternProperty.Type.String() {
+					case cfschema.PropertyTypeBoolean:
+						elementType = "types.ListType{ElemType: types.BoolType}"
+					case cfschema.PropertyTypeInteger:
+						elementType = "types.ListType{ElemType: types.Int64Type}"
+					case cfschema.PropertyTypeNumber:
+						elementType = "types.ListType{ElemType: types.Float64Type}"
+					case cfschema.PropertyTypeString:
+						elementType = "types.ListType{ElemType: types.StringType}"
+					default:
+						return features, unsupportedTypeError(path, fmt.Sprintf("list of key-value map of %s", nestedPatternProperty.Type.String()))
+					}
+				} else if len(property.Items.Properties) == 0 {
 					return features, unsupportedTypeError(path, "list of undefined schema")
-				}
+				} else {
+					e.printf("schema.ListNestedAttribute{/*START ATTRIBUTE*/\n")
+					e.printf("NestedObject: schema.NestedAttributeObject{/*START NESTED OBJECT*/\n")
+					e.printf("Attributes:")
 
-				e.printf("schema.ListNestedAttribute{/*START ATTRIBUTE*/\n")
-				e.printf("NestedObject: schema.NestedAttributeObject{/*START NESTED OBJECT*/\n")
-				e.printf("Attributes:")
+					f, err := e.emitSchema(
+						tfType,
+						attributeNameMap,
+						parent{
+							computedAndOptional: computedAndOptional,
+							computedOnly:        computedOnly,
+							path:                path,
+							reqd:                property.Items,
+						},
+						property.Items.Properties)
 
-				f, err := e.emitSchema(
-					tfType,
-					attributeNameMap,
-					parent{
-						computedAndOptional: computedAndOptional,
-						computedOnly:        computedOnly,
-						path:                path,
-						reqd:                property.Items,
-					},
-					property.Items.Properties)
+					if err != nil {
+						return features, err
+					}
 
-				if err != nil {
-					return features, err
-				}
+					features = features.LogicalOr(f)
 
-				features = features.LogicalOr(f)
+					e.printf(",\n")
+					e.printf("}/*END NESTED OBJECT*/,\n")
 
-				e.printf(",\n")
-				e.printf("}/*END NESTED OBJECT*/,\n")
+					if v, err := listLengthValidator(path, property); err != nil {
+						return features, err
+					} else if v != "" {
+						validators = append(validators, v)
+						features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
+					}
 
-				if v, err := listLengthValidator(path, property); err != nil {
-					return features, err
-				} else if v != "" {
-					validators = append(validators, v)
-					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
-				}
-
-				switch arrayType {
-				case aggregateOrderedSet:
-					validators = append(validators, "listvalidator.UniqueValues()")
-					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
-				case aggregateMultiset:
-					planModifiers = append(planModifiers, "generic.Multiset()")
+					switch arrayType {
+					case aggregateOrderedSet:
+						validators = append(validators, "listvalidator.UniqueValues()")
+						features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
+					case aggregateMultiset:
+						planModifiers = append(planModifiers, "generic.Multiset()")
+					}
 				}
 
 			default:
@@ -569,6 +641,55 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 						e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
 						e.printf("ElementType:types.SetType{ElemType:types.StringType},\n")
 
+					case cfschema.PropertyTypeObject:
+						if nestedPatternProperties := patternProperty.Items.PatternProperties; len(nestedPatternProperties) > 0 {
+							return features, unsupportedTypeError(path, "key-value map of key-value map")
+						}
+						if len(patternProperty.Items.Properties) == 0 {
+							return features, unsupportedTypeError(path, "key-value map with empty pattern properties")
+						}
+
+						var nestedPatternProperty *cfschema.Property
+
+						for _, v := range patternProperty.Items.Properties {
+							nestedPatternProperty = v
+							break
+						}
+
+						if nestedPatternProperty == nil {
+							return features, unsupportedTypeError(path, "key-value map with empty pattern properties")
+						}
+						if len(nestedPatternProperty.PatternProperties) > 0 {
+							return features, unsupportedTypeError(path, "key-value map of key-value map")
+						}
+
+						e.printf("schema.MapNestedAttribute{/*START ATTRIBUTE*/\n")
+						e.printf("NestedObject: schema.NestedAttributeObject{/*START NESTED OBJECT*/\n")
+						e.printf("Attributes:")
+
+						f, err := e.emitSchema(
+							tfType,
+							attributeNameMap,
+							parent{
+								computedAndOptional: computedAndOptional,
+								computedOnly:        computedOnly,
+								path:                path,
+								reqd:                nestedPatternProperty.Items,
+							},
+							patternProperty.Items.Properties)
+						if err != nil {
+							return features, err
+						}
+						features = features.LogicalOr(f)
+						e.printf(",\n")
+						e.printf("}/*END NESTED OBJECT*/,\n")
+
+						if v, err := setLengthValidator(path, patternProperty); err != nil {
+							return features, err
+						} else if v != "" {
+							validators = append(validators, v)
+							features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "setvalidator")
+						}
 					default:
 						return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of set of %s", itemType))
 					}
@@ -601,50 +722,114 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 
 			case cfschema.PropertyTypeObject:
 				if len(patternProperty.PatternProperties) > 0 {
-					return features, unsupportedTypeError(path, "key-value map of key-value map")
-				}
+					// Map of Maps
 
-				if len(patternProperty.Properties) == 0 {
+					var nestedPatternProperty *cfschema.Property
+					for _, v := range patternProperty.PatternProperties {
+						nestedPatternProperty = v
+						break
+					}
+
+					if nestedPatternProperty == nil {
+						return features, unsupportedTypeError(path, "key-value map with empty pattern properties")
+					}
+
+					switch nestedPatternProperty.Type.String() {
+					case cfschema.PropertyTypeBoolean:
+						e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+						e.printf("ElementType:types.MapType{ElemType:types.BoolType},\n")
+					case cfschema.PropertyTypeInteger:
+						e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+						e.printf("ElementType:types.MapType{ElemType:types.Int64Type},\n")
+					case cfschema.PropertyTypeNumber:
+						e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+						e.printf("ElementType:types.MapType{ElemType:types.Float64Type},\n")
+					case cfschema.PropertyTypeString:
+						e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+						e.printf("ElementType:types.MapType{ElemType:types.StringType},\n")
+					case cfschema.PropertyTypeArray:
+						if nestedPatternProperty.Items == nil {
+							return features, unsupportedTypeError(path, "key-value map of map of array with nil items")
+						}
+						itemType := nestedPatternProperty.Items.Type.String()
+						if aggregateType(nestedPatternProperty) == aggregateSet {
+							switch itemType {
+							case cfschema.PropertyTypeBoolean:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.SetType{ElemType:types.BoolType}},\n")
+							case cfschema.PropertyTypeInteger:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.SetType{ElemType:types.Int64Type}},\n")
+							case cfschema.PropertyTypeNumber:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.SetType{ElemType:types.Float64Type}},\n")
+							case cfschema.PropertyTypeString:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.SetType{ElemType:types.StringType}},\n")
+							default:
+								return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of map of set of %s", itemType))
+							}
+						} else {
+							switch itemType {
+							case cfschema.PropertyTypeBoolean:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.ListType{ElemType:types.BoolType}},\n")
+							case cfschema.PropertyTypeInteger:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.ListType{ElemType:types.Int64Type}},\n")
+							case cfschema.PropertyTypeNumber:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.ListType{ElemType:types.Float64Type}},\n")
+							case cfschema.PropertyTypeString:
+								e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
+								e.printf("ElementType:types.MapType{ElemType:types.ListType{ElemType:types.StringType}},\n")
+							default:
+								return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of map of list of %s", itemType))
+							}
+						}
+					default:
+						return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of map of %s", nestedPatternProperty.Type.String()))
+					}
+					features.UsesFrameworkTypes = true
+				} else if len(patternProperty.Properties) == 0 {
 					return features, unsupportedTypeError(path, "key-value map of undefined schema")
-				}
+				} else {
+					e.printf("schema.MapNestedAttribute{/*START ATTRIBUTE*/\n")
+					e.printf("NestedObject: schema.NestedAttributeObject{/*START NESTED OBJECT*/\n")
+					e.printf("Attributes:")
 
-				e.printf("schema.MapNestedAttribute{/*START ATTRIBUTE*/\n")
-				e.printf("NestedObject: schema.NestedAttributeObject{/*START NESTED OBJECT*/\n")
-				e.printf("Attributes:")
+					f, err := e.emitSchema(
+						tfType,
+						attributeNameMap,
+						parent{
+							computedAndOptional: computedAndOptional,
+							computedOnly:        computedOnly,
+							path:                path,
+							reqd:                property.Items,
+						},
+						patternProperty.Properties)
 
-				f, err := e.emitSchema(
-					tfType,
-					attributeNameMap,
-					parent{
-						computedAndOptional: computedAndOptional,
-						computedOnly:        computedOnly,
-						path:                path,
-						reqd:                property.Items,
-					},
-					patternProperty.Properties)
-
-				if err != nil {
-					return features, err
-				}
-
-				features = features.LogicalOr(f)
-
-				if !e.IsDataSource {
-					if patternProperty.MinItems != nil {
-						return features, fmt.Errorf("%s has unsupported MinItems", strings.Join(path, "/"))
+					if err != nil {
+						return features, err
 					}
-					if patternProperty.MaxItems != nil {
-						return features, fmt.Errorf("%s has unsupported MaxItems", strings.Join(path, "/"))
+
+					features = features.LogicalOr(f)
+
+					if !e.IsDataSource {
+						if patternProperty.MinItems != nil {
+							return features, fmt.Errorf("%s has unsupported MinItems", strings.Join(path, "/"))
+						}
+						if patternProperty.MaxItems != nil {
+							return features, fmt.Errorf("%s has unsupported MaxItems", strings.Join(path, "/"))
+						}
 					}
+
+					e.printf(",\n")
+					e.printf("}/*END NESTED OBJECT*/,\n")
 				}
-
-				e.printf(",\n")
-				e.printf("}/*END NESTED OBJECT*/,\n")
-
 			default:
 				return features, unsupportedTypeError(path, fmt.Sprintf("key-value map of %s", propertyType))
 			}
-
 			for _, pattern := range patterns[1:] {
 				e.printf("// Pattern %q ignored.\n", pattern)
 			}

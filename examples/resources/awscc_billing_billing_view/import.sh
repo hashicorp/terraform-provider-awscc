@@ -1,0 +1,1 @@
+$ terraform import awscc_billing_billing_view.example "arn"

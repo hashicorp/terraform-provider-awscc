@@ -19,10 +19,12 @@ Definition of the AWS::QuickSight::Topic Resource Type.
 
 - `aws_account_id` (String)
 - `config_options` (Attributes) Model for configuration of a Topic (see [below for nested schema](#nestedatt--config_options))
+- `custom_instructions` (Attributes) (see [below for nested schema](#nestedatt--custom_instructions))
 - `data_sets` (Attributes List) (see [below for nested schema](#nestedatt--data_sets))
 - `description` (String)
 - `folder_arns` (List of String)
 - `name` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `topic_id` (String)
 - `user_experience_version` (String)
 
@@ -37,6 +39,14 @@ Definition of the AWS::QuickSight::Topic Resource Type.
 Optional:
 
 - `q_business_insights_enabled` (Boolean)
+
+
+<a id="nestedatt--custom_instructions"></a>
+### Nested Schema for `custom_instructions`
+
+Optional:
+
+- `custom_instructions_string` (String)
 
 
 <a id="nestedatt--data_sets"></a>
@@ -429,6 +439,17 @@ Optional:
 - `sub_type_name` (String)
 - `type_name` (String)
 - `type_parameters` (Map of String)
+
+
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) <p>Tag key.</p>
+- `value` (String) <p>Tag value.</p>
 
 ## Import
 

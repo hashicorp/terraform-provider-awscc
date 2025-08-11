@@ -238,12 +238,6 @@ resource_schema "aws_apigatewayv2_domain_name" {
 
 resource_schema "aws_apigatewayv2_integration" {
   cloudformation_type_name = "AWS::ApiGatewayV2::Integration"
-
-  # Suppression Reason: ResponseParameters is of unsupported type: key-value map of list of object.
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/1968
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_apigatewayv2_integration_response" {
@@ -298,12 +292,6 @@ resource_schema "aws_appconfig_environment" {
 
 resource_schema "aws_appconfig_extension" {
   cloudformation_type_name = "AWS::AppConfig::Extension"
-
-  # Suppression Reason: Actions is of unsupported type: key-value map of set of object.
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/1508
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_appconfig_extension_association" {
@@ -338,12 +326,6 @@ resource_schema "aws_appintegrations_application" {
 
 resource_schema "aws_appintegrations_data_integration" {
   cloudformation_type_name = "AWS::AppIntegrations::DataIntegration"
-
-  # Suppression Reason: ObjectConfiguration is of unsupported type: key-value map of key-value map.
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/1509
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_appintegrations_event_integration" {
@@ -542,12 +524,6 @@ resource_schema "aws_b2bi_transformer" {
 
 resource_schema "aws_bcmdataexports_export" {
   cloudformation_type_name = "AWS::BCMDataExports::Export"
-
-  # Suppression Reason: Export/DataQuery/TableConfigurations is of unsupported type: key-value map of key-value map.
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/1509
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_backup_backup_plan" {
@@ -604,6 +580,10 @@ resource_schema "aws_batch_job_queue" {
 
 resource_schema "aws_batch_scheduling_policy" {
   cloudformation_type_name = "AWS::Batch::SchedulingPolicy"
+}
+
+resource_schema "aws_batch_service_environment" {
+  cloudformation_type_name = "AWS::Batch::ServiceEnvironment"
 }
 
 resource_schema "aws_bedrock_agent" {
@@ -676,6 +656,10 @@ resource_schema "aws_bedrock_prompt" {
 resource_schema "aws_bedrock_prompt_version" {
   cloudformation_type_name               = "AWS::Bedrock::PromptVersion"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_billing_billing_view" {
+  cloudformation_type_name = "AWS::Billing::BillingView"
 }
 
 resource_schema "aws_billingconductor_billing_group" {
@@ -1877,6 +1861,10 @@ resource_schema "aws_ec2_traffic_mirror_filter_rule" {
   cloudformation_type_name = "AWS::EC2::TrafficMirrorFilterRule"
 }
 
+resource_schema "aws_ec2_traffic_mirror_session" {
+  cloudformation_type_name = "AWS::EC2::TrafficMirrorSession"
+}
+
 resource_schema "aws_ec2_traffic_mirror_target" {
   cloudformation_type_name = "AWS::EC2::TrafficMirrorTarget"
 }
@@ -2198,14 +2186,14 @@ resource_schema "aws_elasticbeanstalk_environment" {
 }
 
 resource_schema "aws_elasticloadbalancingv2_listener" {
-  cloudformation_type_name               = "AWS::ElasticLoadBalancingV2::Listener"
+  cloudformation_type_name = "AWS::ElasticLoadBalancingV2::Listener"
 
   # Suppression Reason: error creating write-only attribute path (/properties/DefaultActions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1521
 }
 
 resource_schema "aws_elasticloadbalancingv2_listener_rule" {
-  cloudformation_type_name               = "AWS::ElasticLoadBalancingV2::ListenerRule"
+  cloudformation_type_name = "AWS::ElasticLoadBalancingV2::ListenerRule"
   # Suppression Reason:  error creating write-only attribute path (/properties/Actions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1521
 }
@@ -2932,6 +2920,16 @@ resource_schema "aws_iotsitewise_asset_model" {
   cloudformation_type_name = "AWS::IoTSiteWise::AssetModel"
 }
 
+resource_schema "aws_iotsitewise_computation_model" {
+  cloudformation_type_name = "AWS::IoTSiteWise::ComputationModel"
+
+  # Stack overflow
+  # Ref: https://github.com/hashicorp/terraform-provider-awscc/issues/2737
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_iotsitewise_dashboard" {
   cloudformation_type_name = "AWS::IoTSiteWise::Dashboard"
 }
@@ -3223,6 +3221,10 @@ resource_schema "aws_lightsail_disk" {
 
 resource_schema "aws_lightsail_distribution" {
   cloudformation_type_name = "AWS::Lightsail::Distribution"
+}
+
+resource_schema "aws_lightsail_domain" {
+  cloudformation_type_name = "AWS::Lightsail::Domain"
 }
 
 resource_schema "aws_lightsail_instance" {
@@ -3834,12 +3836,6 @@ resource_schema "aws_oam_sink" {
 
 resource_schema "aws_omics_annotation_store" {
   cloudformation_type_name = "AWS::Omics::AnnotationStore"
-
-  # Suppression Reason: StoreOptions/TsvStoreOptions/Schema is of unsupported type: list of key-value map.
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/1517
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_omics_reference_store" {
@@ -4591,6 +4587,11 @@ resource_schema "aws_s3tables_table_bucket_policy" {
   cloudformation_type_name = "AWS::S3Tables::TableBucketPolicy"
 }
 
+resource_schema "aws_s3tables_table_policy" {
+  cloudformation_type_name               = "AWS::S3Tables::TablePolicy"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_ses_configuration_set" {
   cloudformation_type_name = "AWS::SES::ConfigurationSet"
 }
@@ -4864,6 +4865,10 @@ resource_schema "aws_sagemaker_pipeline" {
   cloudformation_type_name = "AWS::SageMaker::Pipeline"
 }
 
+resource_schema "aws_sagemaker_processing_job" {
+  cloudformation_type_name = "AWS::SageMaker::ProcessingJob"
+}
+
 resource_schema "aws_sagemaker_project" {
   cloudformation_type_name = "AWS::SageMaker::Project"
 }
@@ -4882,12 +4887,6 @@ resource_schema "aws_sagemaker_user_profile" {
 
 resource_schema "aws_scheduler_schedule" {
   cloudformation_type_name = "AWS::Scheduler::Schedule"
-
-  # Suppression Reason: Target/EcsParameters/Tags is of unsupported type: list of key-value map.
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/1517
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_scheduler_schedule_group" {
@@ -5330,6 +5329,11 @@ resource_schema "aws_wisdom_message_template_version" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_wisdom_quick_response" {
+  cloudformation_type_name               = "AWS::Wisdom::QuickResponse"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_workspaces_connection_alias" {
   cloudformation_type_name               = "AWS::WorkSpaces::ConnectionAlias"
   suppress_plural_data_source_generation = true
@@ -5407,4 +5411,3 @@ resource_schema "aws_xray_sampling_rule" {
 resource_schema "aws_xray_transaction_search_config" {
   cloudformation_type_name = "AWS::XRay::TransactionSearchConfig"
 }
-

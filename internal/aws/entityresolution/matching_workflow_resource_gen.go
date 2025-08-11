@@ -412,6 +412,36 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		//	        "Rules"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "RuleConditionProperties": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Rules": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Condition": {
+		//	                "type": "string"
+		//	              },
+		//	              "RuleName": {
+		//	                "maxLength": 255,
+		//	                "minLength": 0,
+		//	                "pattern": "^[a-zA-Z_0-9- \\t]*$",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 15,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Rules"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -550,6 +580,53 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 											stringvalidator.LengthBetween(0, 255),
 											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z_0-9- \\t]*$"), ""),
 											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 15),
+								fwvalidators.NotNullList(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RuleConditionProperties
+				"rule_condition_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Rules
+						"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Condition
+									"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: RuleName
+									"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(0, 255),
+											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z_0-9- \\t]*$"), ""),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
@@ -738,6 +815,7 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"apply_normalization":               "ApplyNormalization",
 		"attribute_matching_model":          "AttributeMatchingModel",
+		"condition":                         "Condition",
 		"created_at":                        "CreatedAt",
 		"description":                       "Description",
 		"hashed":                            "Hashed",
@@ -762,6 +840,7 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		"resolution_type":                   "ResolutionType",
 		"role_arn":                          "RoleArn",
 		"rule_based_properties":             "RuleBasedProperties",
+		"rule_condition_properties":         "RuleConditionProperties",
 		"rule_name":                         "RuleName",
 		"rules":                             "Rules",
 		"schema_arn":                        "SchemaArn",

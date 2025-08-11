@@ -40,9 +40,39 @@
     },
     "DkimDNSTokenValue3": {
       "type": "string"
+    },
+    "Tags": {
+      "description": "The tags (keys and values) associated with the email identity.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 50
     }
   },
   "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
     "DkimSigningAttributes": {
       "type": "object",
       "additionalProperties": false,
@@ -134,6 +164,17 @@
     "/properties/DkimSigningAttributes/DomainSigningSelector",
     "/properties/DkimSigningAttributes/DomainSigningPrivateKey"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ses:TagResource",
+      "ses:UntagResource"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -141,7 +182,9 @@
         "ses:PutEmailIdentityMailFromAttributes",
         "ses:PutEmailIdentityFeedbackAttributes",
         "ses:PutEmailIdentityDkimAttributes",
-        "ses:GetEmailIdentity"
+        "ses:GetEmailIdentity",
+        "ses:TagResource",
+        "ses:UntagResource"
       ]
     },
     "read": {
@@ -156,7 +199,9 @@
         "ses:PutEmailIdentityConfigurationSetAttributes",
         "ses:PutEmailIdentityDkimSigningAttributes",
         "ses:PutEmailIdentityDkimAttributes",
-        "ses:GetEmailIdentity"
+        "ses:GetEmailIdentity",
+        "ses:TagResource",
+        "ses:UntagResource"
       ]
     },
     "delete": {
@@ -171,4 +216,3 @@
     }
   }
 }
-

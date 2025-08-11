@@ -101,8 +101,10 @@ Read-Only:
 Read-Only:
 
 - `alarms` (Attributes) Information about the CloudWatch alarms. (see [below for nested schema](#nestedatt--deployment_configuration--alarms))
+- `bake_time_in_minutes` (Number)
 - `deployment_circuit_breaker` (Attributes) The deployment circuit breaker can only be used for services using the rolling update (``ECS``) deployment type.
   The *deployment circuit breaker* determines whether a service deployment will fail if the service can't reach a steady state. If you use the deployment circuit breaker, a service deployment will transition to a failed state and stop launching new tasks. If you use the rollback option, when a service deployment fails, the service is rolled back to the last deployment that completed successfully. For more information, see [Rolling update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html) in the *Amazon Elastic Container Service Developer Guide* (see [below for nested schema](#nestedatt--deployment_configuration--deployment_circuit_breaker))
+- `lifecycle_hooks` (Attributes List) (see [below for nested schema](#nestedatt--deployment_configuration--lifecycle_hooks))
 - `maximum_percent` (Number) If a service is using the rolling update (``ECS``) deployment type, the ``maximumPercent`` parameter represents an upper limit on the number of your service's tasks that are allowed in the ``RUNNING`` or ``PENDING`` state during a deployment, as a percentage of the ``desiredCount`` (rounded down to the nearest integer). This parameter enables you to define the deployment batch size. For example, if your service is using the ``REPLICA`` service scheduler and has a ``desiredCount`` of four tasks and a ``maximumPercent`` value of 200%, the scheduler may start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default ``maximumPercent`` value for a service using the ``REPLICA`` service scheduler is 200%.
  The Amazon ECS scheduler uses this parameter to replace unhealthy tasks by starting replacement tasks first and then stopping the unhealthy tasks, as long as cluster resources for starting replacement tasks are available. For more information about how the scheduler replaces unhealthy tasks, see [Amazon ECS services](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html).
  If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types, and tasks in the service use the EC2 launch type, the *maximum percent* value is set to the default value. The *maximum percent* value is used to define the upper limit on the number of the tasks in the service that remain in the ``RUNNING`` state while the container instances are in the ``DRAINING`` state.
@@ -124,6 +126,7 @@ Read-Only:
  If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and is running tasks that use the EC2 launch type, the *minimum healthy percent* value is set to the default value. The *minimum healthy percent* value is used to define the lower limit on the number of the tasks in the service that remain in the ``RUNNING`` state while the container instances are in the ``DRAINING`` state.
   You can't specify a custom ``minimumHealthyPercent`` value for a service that uses either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and has tasks that use the EC2 launch type.
   If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and is running tasks that use the Fargate launch type, the minimum healthy percent value is not used, although it is returned when describing your service.
+- `strategy` (String)
 
 <a id="nestedatt--deployment_configuration--alarms"></a>
 ### Nested Schema for `deployment_configuration.alarms`
@@ -144,6 +147,16 @@ Read-Only:
 - `rollback` (Boolean) Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is on, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
 
 
+<a id="nestedatt--deployment_configuration--lifecycle_hooks"></a>
+### Nested Schema for `deployment_configuration.lifecycle_hooks`
+
+Read-Only:
+
+- `hook_target_arn` (String)
+- `lifecycle_stages` (List of String)
+- `role_arn` (String)
+
+
 
 <a id="nestedatt--deployment_controller"></a>
 ### Nested Schema for `deployment_controller`
@@ -159,6 +172,7 @@ Read-Only:
 
 Read-Only:
 
+- `advanced_configuration` (Attributes) (see [below for nested schema](#nestedatt--load_balancers--advanced_configuration))
 - `container_name` (String) The name of the container (as it appears in a container definition) to associate with the load balancer.
  You need to specify the container name when configuring the target group for an Amazon ECS load balancer.
 - `container_port` (Number) The port on the container to associate with the load balancer. This port must correspond to a ``containerPort`` in the task definition the tasks in the service are using. For tasks that use the EC2 launch type, the container instance they're launched on must allow ingress traffic on the ``hostPort`` of the port mapping.
@@ -169,6 +183,17 @@ Read-Only:
  For services using the ``ECS`` deployment controller, you can specify one or multiple target groups. For more information, see [Registering multiple target groups with a service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html) in the *Amazon Elastic Container Service Developer Guide*.
  For services using the ``CODE_DEPLOY`` deployment controller, you're required to define two target groups for the load balancer. For more information, see [Blue/green deployment with CodeDeploy](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html) in the *Amazon Elastic Container Service Developer Guide*.
   If your service's task definition uses the ``awsvpc`` network mode, you must choose ``ip`` as the target type, not ``instance``. Do this when creating your target groups because tasks that use the ``awsvpc`` network mode are associated with an elastic network interface, not an Amazon EC2 instance. This network mode is required for the Fargate launch type.
+
+<a id="nestedatt--load_balancers--advanced_configuration"></a>
+### Nested Schema for `load_balancers.advanced_configuration`
+
+Read-Only:
+
+- `alternate_target_group_arn` (String)
+- `production_listener_rule` (String)
+- `role_arn` (String)
+- `test_listener_rule` (String)
+
 
 
 <a id="nestedatt--network_configuration"></a>
@@ -298,6 +323,32 @@ Read-Only:
  To avoid changing your applications in client Amazon ECS services, set this to the same name that the client application uses by default. For example, a few common names are ``database``, ``db``, or the lowercase name of a database, such as ``mysql`` or ``redis``. For more information, see [Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.
 - `port` (Number) The listening port number for the Service Connect proxy. This port is available inside of all of the tasks within the same namespace.
  To avoid changing your applications in client Amazon ECS services, set this to the same port that the client application uses by default. For more information, see [Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.
+- `test_traffic_rules` (Attributes) (see [below for nested schema](#nestedatt--service_connect_configuration--services--client_aliases--test_traffic_rules))
+
+<a id="nestedatt--service_connect_configuration--services--client_aliases--test_traffic_rules"></a>
+### Nested Schema for `service_connect_configuration.services.client_aliases.test_traffic_rules`
+
+Read-Only:
+
+- `header` (Attributes) (see [below for nested schema](#nestedatt--service_connect_configuration--services--client_aliases--test_traffic_rules--header))
+
+<a id="nestedatt--service_connect_configuration--services--client_aliases--test_traffic_rules--header"></a>
+### Nested Schema for `service_connect_configuration.services.client_aliases.test_traffic_rules.header`
+
+Read-Only:
+
+- `name` (String)
+- `value` (Attributes) (see [below for nested schema](#nestedatt--service_connect_configuration--services--client_aliases--test_traffic_rules--header--value))
+
+<a id="nestedatt--service_connect_configuration--services--client_aliases--test_traffic_rules--header--value"></a>
+### Nested Schema for `service_connect_configuration.services.client_aliases.test_traffic_rules.header.value`
+
+Read-Only:
+
+- `exact` (String)
+
+
+
 
 
 <a id="nestedatt--service_connect_configuration--services--timeout"></a>

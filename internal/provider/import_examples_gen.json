@@ -168,6 +168,10 @@
         "identifier": ["DomainName"]
     },
     {
+        "resource": "awscc_apigatewayv2_integration",
+        "identifier": ["ApiId","IntegrationId"]
+    },
+    {
         "resource": "awscc_apigatewayv2_integration_response",
         "identifier": ["ApiId","IntegrationId","IntegrationResponseId"]
     },
@@ -212,6 +216,10 @@
         "identifier": ["ApplicationId","EnvironmentId"]
     },
     {
+        "resource": "awscc_appconfig_extension",
+        "identifier": ["Id"]
+    },
+    {
         "resource": "awscc_appconfig_extension_association",
         "identifier": ["Id"]
     },
@@ -234,6 +242,10 @@
     {
         "resource": "awscc_appintegrations_application",
         "identifier": ["ApplicationArn"]
+    },
+    {
+        "resource": "awscc_appintegrations_data_integration",
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_appintegrations_event_integration",
@@ -416,6 +428,10 @@
         "identifier": ["TransformerId"]
     },
     {
+        "resource": "awscc_bcmdataexports_export",
+        "identifier": ["ExportArn"]
+    },
+    {
         "resource": "awscc_backup_backup_plan",
         "identifier": ["BackupPlanId"]
     },
@@ -472,6 +488,10 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_batch_service_environment",
+        "identifier": ["ServiceEnvironmentArn"]
+    },
+    {
         "resource": "awscc_bedrock_agent",
         "identifier": ["AgentId"]
     },
@@ -525,6 +545,10 @@
     },
     {
         "resource": "awscc_bedrock_prompt_version",
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_billing_billing_view",
         "identifier": ["Arn"]
     },
     {
@@ -1558,6 +1582,10 @@
     {
         "resource": "awscc_ec2_traffic_mirror_filter_rule",
         "identifier": ["TrafficMirrorFilterRuleId"]
+    },
+    {
+        "resource": "awscc_ec2_traffic_mirror_session",
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_ec2_traffic_mirror_target",
@@ -2800,6 +2828,10 @@
         "identifier": ["DistributionName"]
     },
     {
+        "resource": "awscc_lightsail_domain",
+        "identifier": ["DomainName"]
+    },
+    {
         "resource": "awscc_lightsail_instance",
         "identifier": ["InstanceName"]
     },
@@ -3330,6 +3362,10 @@
     {
         "resource": "awscc_oam_sink",
         "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_omics_annotation_store",
+        "identifier": ["Name"]
     },
     {
         "resource": "awscc_omics_reference_store",
@@ -3992,6 +4028,10 @@
         "identifier": ["TableBucketARN"]
     },
     {
+        "resource": "awscc_s3tables_table_policy",
+        "identifier": ["TableARN"]
+    },
+    {
         "resource": "awscc_ses_configuration_set",
         "identifier": ["Name"]
     },
@@ -4244,6 +4284,10 @@
         "identifier": ["PipelineName"]
     },
     {
+        "resource": "awscc_sagemaker_processing_job",
+        "identifier": ["ProcessingJobArn"]
+    },
+    {
         "resource": "awscc_sagemaker_project",
         "identifier": ["ProjectArn"]
     },
@@ -4258,6 +4302,10 @@
     {
         "resource": "awscc_sagemaker_user_profile",
         "identifier": ["UserProfileName","DomainId"]
+    },
+    {
+        "resource": "awscc_scheduler_schedule",
+        "identifier": ["Name"]
     },
     {
         "resource": "awscc_scheduler_schedule_group",
@@ -4614,6 +4662,10 @@
     {
         "resource": "awscc_wisdom_message_template_version",
         "identifier": ["MessageTemplateVersionArn"]
+    },
+    {
+        "resource": "awscc_wisdom_quick_response",
+        "identifier": ["QuickResponseArn"]
     },
     {
         "resource": "awscc_workspaces_connection_alias",

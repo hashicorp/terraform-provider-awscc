@@ -32,7 +32,7 @@ Data Source schema for AWS::ElasticLoadBalancingV2::LoadBalancer
  [Network Load Balancers and Gateway Load Balancers] The possible values are ``ipv4`` (IPv4 addresses) and ``dualstack`` (IPv4 and IPv6 addresses).
 - `ipv_4_ipam_pool_id` (String) The ID of the IPv4 IPAM pool.
 - `load_balancer_arn` (String)
-- `load_balancer_attributes` (Attributes Set) The load balancer attributes. (see [below for nested schema](#nestedatt--load_balancer_attributes))
+- `load_balancer_attributes` (Attributes Set) The load balancer attributes. Attributes that you do not modify retain their current values. (see [below for nested schema](#nestedatt--load_balancer_attributes))
 - `load_balancer_full_name` (String)
 - `load_balancer_name` (String)
 - `minimum_load_balancer_capacity` (Attributes) The minimum capacity for a load balancer. (see [below for nested schema](#nestedatt--minimum_load_balancer_capacity))

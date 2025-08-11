@@ -214,6 +214,20 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: AutomaticRestartTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"automatic_restart_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -252,11 +266,11 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The location for storing automated backups and manual snapshots.\n Valid Values:\n  +  ``local`` (Dedicated Local Zone)\n  +  ``outposts`` (AWS Outposts)\n  +  ``region`` (AWS-Region)\n  \n Default: ``region``\n For more information, see [Working with Amazon RDS on Outposts](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in the *Amazon RDS User Guide*.",
 		//	  "type": "string"
 		//	}
 		"backup_target": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The location for storing automated backups and manual snapshots.\n Valid Values:\n  +  ``local`` (Dedicated Local Zone)\n  +  ``outposts`` (AWS Outposts)\n  +  ``region`` (AWS-Region)\n  \n Default: ``region``\n For more information, see [Working with Amazon RDS on Outposts](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in the *Amazon RDS User Guide*.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -462,6 +476,20 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DBInstanceStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"db_instance_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DBName
@@ -875,6 +903,22 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: InstanceCreateTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"instance_create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Iops
 		// CloudFormation resource type schema:
 		//
@@ -888,6 +932,20 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IsStorageConfigUpgradeAvailable
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "boolean"
+		//	}
+		"is_storage_config_upgrade_available": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
@@ -906,6 +964,22 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: LatestRestorableTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"latest_restorable_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LicenseModel
 		// CloudFormation resource type schema:
 		//
@@ -919,6 +993,52 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ListenerEndpoint
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "This data type represents the information you need to connect to an Amazon RDS DB instance. This data type is used as a response element in the following actions:\n  +   ``CreateDBInstance`` \n  +   ``DescribeDBInstances`` \n  +   ``DeleteDBInstance`` \n  \n For the data structure that represents Amazon Aurora DB cluster endpoints, see ``DBClusterEndpoint``.",
+		//	  "properties": {
+		//	    "Address": {
+		//	      "description": "Specifies the DNS address of the DB instance.",
+		//	      "type": "string"
+		//	    },
+		//	    "HostedZoneId": {
+		//	      "description": "Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.",
+		//	      "type": "string"
+		//	    },
+		//	    "Port": {
+		//	      "description": "Specifies the port that the database engine is listening on.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"listener_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Address
+				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the DNS address of the DB instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HostedZoneId
+				"hosted_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the port that the database engine is listening on.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "This data type represents the information you need to connect to an Amazon RDS DB instance. This data type is used as a response element in the following actions:\n  +   ``CreateDBInstance`` \n  +   ``DescribeDBInstances`` \n  +   ``DeleteDBInstance`` \n  \n For the data structure that represents Amazon Aurora DB cluster endpoints, see ``DBClusterEndpoint``.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ManageMasterUserPassword
@@ -1069,11 +1189,11 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies whether the DB instance is a Multi-AZ deployment. You can't set the ``AvailabilityZone`` parameter if the DB instance is a Multi-AZ deployment.\n This setting doesn't apply to the following DB instances:\n  +  Amazon Aurora (DB instance Availability Zones (AZs) are managed by the DB cluster.)\n  +  RDS Custom",
+		//	  "description": "Specifies whether the DB instance is a Multi-AZ deployment. You can't set the ``AvailabilityZone`` parameter if the DB instance is a Multi-AZ deployment.\n This setting doesn't apply to Amazon Aurora because the DB instance Availability Zones (AZs) are managed by the DB cluster.",
 		//	  "type": "boolean"
 		//	}
 		"multi_az": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether the DB instance is a Multi-AZ deployment. You can't set the ``AvailabilityZone`` parameter if the DB instance is a Multi-AZ deployment.\n This setting doesn't apply to the following DB instances:\n  +  Amazon Aurora (DB instance Availability Zones (AZs) are managed by the DB cluster.)\n  +  RDS Custom",
+			Description: "Specifies whether the DB instance is a Multi-AZ deployment. You can't set the ``AvailabilityZone`` parameter if the DB instance is a Multi-AZ deployment.\n This setting doesn't apply to Amazon Aurora because the DB instance Availability Zones (AZs) are managed by the DB cluster.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1121,6 +1241,20 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"option_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates that the DB instance should be associated with the specified option group.\n Permanent options, such as the TDE option for Oracle Advanced Security TDE, can't be removed from an option group. Also, that option group can't be removed from a DB instance once it is associated with a DB instance.",
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PercentProgress
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"percent_progress": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1301,6 +1435,42 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ReadReplicaDBClusterIdentifiers
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"read_replica_db_cluster_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "",
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ReadReplicaDBInstanceIdentifiers
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"read_replica_db_instance_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "",
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ReplicaMode
 		// CloudFormation resource type schema:
 		//
@@ -1333,6 +1503,34 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// RestoreTime is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: ResumeFullAutomationModeTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"resume_full_automation_mode_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SecondaryAvailabilityZone
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"secondary_availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SourceDBClusterIdentifier
 		// CloudFormation resource type schema:
@@ -1413,6 +1611,84 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// SourceRegion is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: StatusInfos
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "",
+		//	    "properties": {
+		//	      "Message": {
+		//	        "description": "Details of the error if there is an error for the instance. If the instance isn't in an error state, this value is blank.",
+		//	        "type": "string"
+		//	      },
+		//	      "Normal": {
+		//	        "description": "Indicates whether the instance is operating normally (TRUE) or is in an error state (FALSE).",
+		//	        "type": "boolean"
+		//	      },
+		//	      "Status": {
+		//	        "description": "The status of the DB instance. For a StatusType of read replica, the values can be replicating, replication stop point set, replication stop point reached, error, stopped, or terminated.",
+		//	        "type": "string"
+		//	      },
+		//	      "StatusType": {
+		//	        "description": "The status type of the DB instance.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"status_infos": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Message
+					"message": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Details of the error if there is an error for the instance. If the instance isn't in an error state, this value is blank.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Normal
+					"normal": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Indicates whether the instance is operating normally (TRUE) or is in an error state (FALSE).",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+							boolplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The status of the DB instance. For a StatusType of read replica, the values can be replicating, replication stop point set, replication stop point reached, error, stopped, or terminated.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: StatusType
+					"status_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The status type of the DB instance.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: StorageEncrypted
 		// CloudFormation resource type schema:
@@ -1662,6 +1938,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"automatic_backup_replication_kms_key_id":       "AutomaticBackupReplicationKmsKeyId",
 		"automatic_backup_replication_region":           "AutomaticBackupReplicationRegion",
 		"automatic_backup_replication_retention_period": "AutomaticBackupReplicationRetentionPeriod",
+		"automatic_restart_time":                        "AutomaticRestartTime",
 		"availability_zone":                             "AvailabilityZone",
 		"backup_retention_period":                       "BackupRetentionPeriod",
 		"backup_target":                                 "BackupTarget",
@@ -1678,6 +1955,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"db_instance_arn":                               "DBInstanceArn",
 		"db_instance_class":                             "DBInstanceClass",
 		"db_instance_identifier":                        "DBInstanceIdentifier",
+		"db_instance_status":                            "DBInstanceStatus",
 		"db_name":                                       "DBName",
 		"db_parameter_group_name":                       "DBParameterGroupName",
 		"db_security_groups":                            "DBSecurityGroups",
@@ -1703,22 +1981,29 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"engine_version":                                "EngineVersion",
 		"feature_name":                                  "FeatureName",
 		"hosted_zone_id":                                "HostedZoneId",
+		"instance_create_time":                          "InstanceCreateTime",
 		"iops":                                          "Iops",
+		"is_storage_config_upgrade_available":           "IsStorageConfigUpgradeAvailable",
 		"key":                                           "Key",
 		"kms_key_id":                                    "KmsKeyId",
+		"latest_restorable_time":                        "LatestRestorableTime",
 		"license_model":                                 "LicenseModel",
+		"listener_endpoint":                             "ListenerEndpoint",
 		"manage_master_user_password":                   "ManageMasterUserPassword",
 		"master_user_password":                          "MasterUserPassword",
 		"master_user_secret":                            "MasterUserSecret",
 		"master_username":                               "MasterUsername",
 		"max_allocated_storage":                         "MaxAllocatedStorage",
+		"message":                                       "Message",
 		"monitoring_interval":                           "MonitoringInterval",
 		"monitoring_role_arn":                           "MonitoringRoleArn",
 		"multi_az":                                      "MultiAZ",
 		"name":                                          "Name",
 		"nchar_character_set_name":                      "NcharCharacterSetName",
 		"network_type":                                  "NetworkType",
+		"normal":                                        "Normal",
 		"option_group_name":                             "OptionGroupName",
+		"percent_progress":                              "PercentProgress",
 		"performance_insights_kms_key_id":               "PerformanceInsightsKMSKeyId",
 		"performance_insights_retention_period":         "PerformanceInsightsRetentionPeriod",
 		"port":                                          "Port",
@@ -1727,15 +2012,22 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"processor_features":                            "ProcessorFeatures",
 		"promotion_tier":                                "PromotionTier",
 		"publicly_accessible":                           "PubliclyAccessible",
+		"read_replica_db_cluster_identifiers":           "ReadReplicaDBClusterIdentifiers",
+		"read_replica_db_instance_identifiers":          "ReadReplicaDBInstanceIdentifiers",
 		"replica_mode":                                  "ReplicaMode",
 		"restore_time":                                  "RestoreTime",
+		"resume_full_automation_mode_time":              "ResumeFullAutomationModeTime",
 		"role_arn":                                      "RoleArn",
+		"secondary_availability_zone":                   "SecondaryAvailabilityZone",
 		"secret_arn":                                    "SecretArn",
 		"source_db_cluster_identifier":                  "SourceDBClusterIdentifier",
 		"source_db_instance_automated_backups_arn":      "SourceDBInstanceAutomatedBackupsArn",
 		"source_db_instance_identifier":                 "SourceDBInstanceIdentifier",
 		"source_dbi_resource_id":                        "SourceDbiResourceId",
 		"source_region":                                 "SourceRegion",
+		"status":                                        "Status",
+		"status_infos":                                  "StatusInfos",
+		"status_type":                                   "StatusType",
 		"storage_encrypted":                             "StorageEncrypted",
 		"storage_throughput":                            "StorageThroughput",
 		"storage_type":                                  "StorageType",

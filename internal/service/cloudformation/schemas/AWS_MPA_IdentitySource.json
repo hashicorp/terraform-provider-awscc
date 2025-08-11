@@ -139,7 +139,8 @@
         "sso:PutApplicationAssignmentConfiguration",
         "sso:PutApplicationGrant",
         "sso:PutApplicationAuthenticationMethod",
-        "sso:PutApplicationAccessScope"
+        "sso:PutApplicationAccessScope",
+        "kms:Decrypt"
       ]
     },
     "read": {
@@ -161,7 +162,8 @@
         "mpa:DeleteIdentitySource",
         "mpa:GetIdentitySource",
         "mpa:UntagResource",
-        "sso:DeleteApplication"
+        "sso:DeleteApplication",
+        "kms:Decrypt"
       ]
     },
     "list": {

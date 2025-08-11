@@ -9,10 +9,12 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -188,25 +190,108 @@ func repositoryCreationTemplateResource(ctx context.Context) (resource.Resource,
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The tag mutability setting for the repository. If this parameter is omitted, the default setting of MUTABLE will be used which will allow image tags to be overwritten. If IMMUTABLE is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.",
+		//	  "description": "The tag mutability setting for the repository. If this parameter is omitted, the default setting of ``MUTABLE`` will be used which will allow image tags to be overwritten. If ``IMMUTABLE`` is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.",
 		//	  "enum": [
 		//	    "MUTABLE",
-		//	    "IMMUTABLE"
+		//	    "IMMUTABLE",
+		//	    "IMMUTABLE_WITH_EXCLUSION",
+		//	    "MUTABLE_WITH_EXCLUSION"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"image_tag_mutability": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The tag mutability setting for the repository. If this parameter is omitted, the default setting of MUTABLE will be used which will allow image tags to be overwritten. If IMMUTABLE is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.",
+			Description: "The tag mutability setting for the repository. If this parameter is omitted, the default setting of ``MUTABLE`` will be used which will allow image tags to be overwritten. If ``IMMUTABLE`` is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"MUTABLE",
 					"IMMUTABLE",
+					"IMMUTABLE_WITH_EXCLUSION",
+					"MUTABLE_WITH_EXCLUSION",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ImageTagMutabilityExclusionFilters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "",
+		//	    "properties": {
+		//	      "ImageTagMutabilityExclusionFilterType": {
+		//	        "description": "Specifies the type of filter to use for excluding image tags from the repository's mutability setting.",
+		//	        "enum": [
+		//	          "WILDCARD"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "ImageTagMutabilityExclusionFilterValue": {
+		//	        "description": "The value to use when filtering image tags.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "^[0-9a-zA-Z._*-]{1,128}",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "ImageTagMutabilityExclusionFilterType",
+		//	      "ImageTagMutabilityExclusionFilterValue"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 5,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"image_tag_mutability_exclusion_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ImageTagMutabilityExclusionFilterType
+					"image_tag_mutability_exclusion_filter_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies the type of filter to use for excluding image tags from the repository's mutability setting.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"WILDCARD",
+							),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ImageTagMutabilityExclusionFilterValue
+					"image_tag_mutability_exclusion_filter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value to use when filtering image tags.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z._*-]{1,128}"), ""),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 5),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: LifecyclePolicy
@@ -382,14 +467,17 @@ func repositoryCreationTemplateResource(ctx context.Context) (resource.Resource,
 		"encryption_configuration": "EncryptionConfiguration",
 		"encryption_type":          "EncryptionType",
 		"image_tag_mutability":     "ImageTagMutability",
-		"key":                      "Key",
-		"kms_key":                  "KmsKey",
-		"lifecycle_policy":         "LifecyclePolicy",
-		"prefix":                   "Prefix",
-		"repository_policy":        "RepositoryPolicy",
-		"resource_tags":            "ResourceTags",
-		"updated_at":               "UpdatedAt",
-		"value":                    "Value",
+		"image_tag_mutability_exclusion_filter_type":  "ImageTagMutabilityExclusionFilterType",
+		"image_tag_mutability_exclusion_filter_value": "ImageTagMutabilityExclusionFilterValue",
+		"image_tag_mutability_exclusion_filters":      "ImageTagMutabilityExclusionFilters",
+		"key":                                         "Key",
+		"kms_key":                                     "KmsKey",
+		"lifecycle_policy":                            "LifecyclePolicy",
+		"prefix":                                      "Prefix",
+		"repository_policy":                           "RepositoryPolicy",
+		"resource_tags":                               "ResourceTags",
+		"updated_at":                                  "UpdatedAt",
+		"value":                                       "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

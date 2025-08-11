@@ -70,10 +70,6 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "properties": {
 		//	    "Bucket": {
 		//	      "description": "The name of the S3 bucket where the OpenAPI file is stored.",
-		//	      "relationshipRef": {
-		//	        "propertyPath": "/properties/BucketName",
-		//	        "typeName": "AWS::S3::Bucket"
-		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "ETag": {
