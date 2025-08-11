@@ -72,7 +72,8 @@ docs: prereq-go ## Generate documentation
 	@tfplugindocs generate --provider-name "terraform-provider-awscc"
 
 docs-fmt: prereq-go
-	cd examples/resources/ && terraform fmt -recursive
+	cd examples/resources/
+	terraform fmt -recursive
 
 docs-import: prereq-go ## Generate import documentation
 	$(GO_VER) run internal/provider/generators/import-examples/main.go -file=internal/provider/import_examples_gen.json
@@ -86,7 +87,7 @@ prereq-go: # If $(GO_VER) is not installed, install it
 		$(GO_VER) download ; \
 		echo "make: $(GO_VER) ready" ; \
 	fi
-	
+
 update: prereq-go ## Update Schema
 	echo "==> Updating Schema..."
 	$(GO_VER) run $$(find internal/update -name "*.go" -not -name "*_test.go")
