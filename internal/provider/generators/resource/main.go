@@ -82,7 +82,7 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 	primaryIdentifier := make([]identity.Identifier, len(templateData.PrimaryIdentifier))
 	for i, v := range templateData.PrimaryIdentifier {
 		primaryIdentifier[i] = identity.Identifier{
-			Name:        toSnake(strings.TrimPrefix(v.Name, "/properties/")),
+			Name:        toSnake(v.Name),
 			Description: v.Description,
 		}
 	}

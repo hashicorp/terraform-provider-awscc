@@ -545,9 +545,8 @@ func (g *Generator) GenerateResourceImportExamples(packageName, filename string,
 		}
 
 		var temp []string
-		for _, v := range tmplData.PrimaryIdentifier {
-			out := strings.TrimPrefix(v.Name, "/properties/")
-			temp = append(temp, out)
+		for _, value := range tmplData.PrimaryIdentifier {
+			temp = append(temp, value.Name)
 		}
 		r.Identifier = temp
 		importsTemplateData.Resources = append(importsTemplateData.Resources, r)
