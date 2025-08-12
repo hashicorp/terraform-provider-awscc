@@ -334,6 +334,7 @@ func environmentProfileResource(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::EnvironmentProfile").WithTerraformTypeName("awscc_datazone_environment_profile")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier("domain_id", "id")
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"aws_account_id":                   "AwsAccountId",
 		"aws_account_region":               "AwsAccountRegion",
