@@ -1,9 +1,6 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-//go:build ignore
-// +build ignore
-
 package main
 
 import (
@@ -81,10 +78,9 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 		return err
 	}
 
-	var primaryIdentifier []string
-	for _, v := range templateData.PrimaryIdentifier {
-		out := strings.TrimPrefix(v, "/properties/")
-		primaryIdentifier = append(primaryIdentifier, toSnake(out))
+	primaryIdentifier := make(map[string]string)
+	for key, value := range templateData.PrimaryIdentifier {
+		primaryIdentifier[toSnake(strings.TrimPrefix(key, "/properties/"))] = strings.Split(value, ".")[0]
 	}
 	templateData.PrimaryIdentifier = primaryIdentifier
 

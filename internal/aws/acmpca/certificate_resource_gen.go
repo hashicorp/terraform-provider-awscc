@@ -1404,7 +1404,10 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::ACMPCA::Certificate").WithTerraformTypeName("awscc_acmpca_certificate")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithPrimaryIdentifier("arn", "certificate_authority_arn")
+	opts = opts.WithPrimaryIdentifier(map[string]string{
+		"arn":                       ``,
+		"certificate_authority_arn": `The Amazon Resource Name (ARN) for the private CA issues the certificate`,
+	})
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"api_passthrough":                      "ApiPassthrough",
 		"arn":                                  "Arn",

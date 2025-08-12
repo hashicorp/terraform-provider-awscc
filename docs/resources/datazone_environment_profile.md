@@ -82,8 +82,8 @@ import {
 
 #### Required
 
-- `domain_id` (String)
-- `id` (String)
+- `domain_id` (String) The ID of the Amazon DataZone domain in which this environment profile is created
+- `id` (String) The ID of this Amazon DataZone environment profile
 
 In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
 

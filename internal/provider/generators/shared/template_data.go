@@ -130,9 +130,16 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 		templateData.WriteOnlyPropertyPaths = append(templateData.WriteOnlyPropertyPaths, string(path))
 	}
 
+	output := make(map[string]string)
 	for _, path := range resource.CfResource.PrimaryIdentifier {
-		templateData.PrimaryIdentifier = append(templateData.PrimaryIdentifier, string(path))
+		output[string(path)] = ""
+		if v, ok := resource.CfResource.Properties[strings.TrimPrefix(string(path), "/properties/")]; ok {
+			if v.Description != nil {
+				output[string(path)] = *v.Description
+			}
+		}
 	}
+	templateData.PrimaryIdentifier = output
 
 	if v, ok := resource.CfResource.Handlers[cfschema.HandlerTypeCreate]; ok {
 		templateData.CreateTimeoutInMinutes = v.TimeoutInMinutes
@@ -172,7 +179,7 @@ type TemplateData struct {
 	ImportInternalValidators      bool
 	ImportRegexp                  bool
 	PackageName                   string
-	PrimaryIdentifier             []string
+	PrimaryIdentifier             map[string]string
 	RootPropertiesSchema          string
 	SchemaDescription             string
 	SchemaVersion                 int64

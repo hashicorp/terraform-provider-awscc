@@ -1199,7 +1199,7 @@ import {
 
 #### Required
 
-- `bucket_name` (String)
+- `bucket_name` (String) A name for the bucket
 
 In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
 

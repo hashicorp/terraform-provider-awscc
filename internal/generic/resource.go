@@ -197,7 +197,7 @@ func resourceWithConfigValidators(vs ...resource.ConfigValidator) ResourceOption
 	}
 }
 
-func resourceWithPrimaryIdentifier(vs ...string) ResourceOptionsFunc {
+func resourceWithPrimaryIdentifier(vs map[string]string) ResourceOptionsFunc {
 	return func(o *genericResource) error {
 		o.primaryIdentifier = vs
 
@@ -288,8 +288,8 @@ func (opts ResourceOptions) WithConfigValidators(vs ...resource.ConfigValidator)
 	return append(opts, resourceWithConfigValidators(vs...))
 }
 
-func (opts ResourceOptions) WithPrimaryIdentifier(v ...string) ResourceOptions {
-	return append(opts, resourceWithPrimaryIdentifier(v...))
+func (opts ResourceOptions) WithPrimaryIdentifier(v map[string]string) ResourceOptions {
+	return append(opts, resourceWithPrimaryIdentifier(v))
 }
 
 // NewResource returns a new Resource from the specified varidaic list of functional options.
@@ -329,7 +329,7 @@ type genericResource struct {
 	deleteTimeout           time.Duration              // Maximum wait time for resource deletion
 	configValidators        []resource.ConfigValidator // Required attributes validators
 	provider                tfcloudcontrol.Provider
-	primaryIdentifier       []string
+	primaryIdentifier       map[string]string
 }
 
 var (
@@ -706,9 +706,10 @@ func (r *genericResource) Delete(ctx context.Context, request resource.DeleteReq
 
 func (r *genericResource) IdentitySchema(_ context.Context, _ resource.IdentitySchemaRequest, response *resource.IdentitySchemaResponse) {
 	identitySchemaAttributes := make(map[string]identityschema.Attribute)
-	for _, v := range r.primaryIdentifier {
-		identitySchemaAttributes[v] = identityschema.StringAttribute{
+	for id, description := range r.primaryIdentifier {
+		identitySchemaAttributes[id] = identityschema.StringAttribute{
 			RequiredForImport: true,
+			Description:       description,
 		}
 	}
 
