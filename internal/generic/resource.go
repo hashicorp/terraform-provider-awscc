@@ -23,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
@@ -197,7 +198,7 @@ func resourceWithConfigValidators(vs ...resource.ConfigValidator) ResourceOption
 	}
 }
 
-func resourceWithPrimaryIdentifier(vs map[string]string) ResourceOptionsFunc {
+func resourceWithPrimaryIdentifier(vs ...identity.Identifier) ResourceOptionsFunc {
 	return func(o *genericResource) error {
 		o.primaryIdentifier = vs
 
@@ -288,8 +289,8 @@ func (opts ResourceOptions) WithConfigValidators(vs ...resource.ConfigValidator)
 	return append(opts, resourceWithConfigValidators(vs...))
 }
 
-func (opts ResourceOptions) WithPrimaryIdentifier(v map[string]string) ResourceOptions {
-	return append(opts, resourceWithPrimaryIdentifier(v))
+func (opts ResourceOptions) WithPrimaryIdentifier(v ...identity.Identifier) ResourceOptions {
+	return append(opts, resourceWithPrimaryIdentifier(v...))
 }
 
 // NewResource returns a new Resource from the specified varidaic list of functional options.
@@ -329,7 +330,7 @@ type genericResource struct {
 	deleteTimeout           time.Duration              // Maximum wait time for resource deletion
 	configValidators        []resource.ConfigValidator // Required attributes validators
 	provider                tfcloudcontrol.Provider
-	primaryIdentifier       map[string]string
+	primaryIdentifier       []identity.Identifier
 }
 
 var (
@@ -441,14 +442,14 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 	}
 
 	// set resource identity
-	for key := range r.primaryIdentifier {
+	for _, v := range r.primaryIdentifier {
 		var out types.String
-		response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(key), &out)...)
+		response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v.Name), &out)...)
 		if response.Diagnostics.HasError() {
 			return
 		}
 
-		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(key), out.ValueString())...)
+		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(v.Name), out.ValueString())...)
 		if response.Diagnostics.HasError() {
 			return
 		}
@@ -531,14 +532,14 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 	}
 
 	// set resource identity
-	for key := range r.primaryIdentifier {
+	for _, v := range r.primaryIdentifier {
 		var out types.String
-		response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(key), &out)...)
+		response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v.Name), &out)...)
 		if response.Diagnostics.HasError() {
 			return
 		}
 
-		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(key), out.ValueString())...)
+		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(v.Name), out.ValueString())...)
 		if response.Diagnostics.HasError() {
 			return
 		}
@@ -706,10 +707,10 @@ func (r *genericResource) Delete(ctx context.Context, request resource.DeleteReq
 
 func (r *genericResource) IdentitySchema(_ context.Context, _ resource.IdentitySchemaRequest, response *resource.IdentitySchemaResponse) {
 	identitySchemaAttributes := make(map[string]identityschema.Attribute)
-	for id, description := range r.primaryIdentifier {
-		identitySchemaAttributes[id] = identityschema.StringAttribute{
+	for _, v := range r.primaryIdentifier {
+		identitySchemaAttributes[v.Name] = identityschema.StringAttribute{
 			RequiredForImport: true,
-			Description:       description,
+			Description:       v.Description,
 		}
 	}
 
@@ -735,9 +736,9 @@ func (r *genericResource) ImportState(ctx context.Context, request resource.Impo
 	}
 
 	var identifier []string
-	for key := range r.primaryIdentifier {
+	for _, v := range r.primaryIdentifier {
 		var out types.String
-		response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(key), &out)...)
+		response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(v.Name), &out)...)
 		if response.Diagnostics.HasError() {
 			return
 		}

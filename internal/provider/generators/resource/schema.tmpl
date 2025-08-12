@@ -43,6 +43,9 @@ import (
 	{{- if .ImportInternalValidators }}
     fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
     {{- end}}
+    {{- if .PrimaryIdentifier }}
+    "github.com/hashicorp/terraform-provider-awscc/internal/identity"
+    {{- end}}
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -76,11 +79,14 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (resource.Resource, error) 
 	opts = opts.WithCloudFormationTypeName("{{ .CloudFormationTypeName }}").WithTerraformTypeName("{{ .TerraformTypeName }}")
 	opts = opts.WithTerraformSchema(schema)
 {{- if .PrimaryIdentifier }}
-    opts = opts.WithPrimaryIdentifier(map[string]string{
-    {{- range $key, $value := .PrimaryIdentifier}}
-    "{{ $key }}": `{{ $value }}`,
+    opts = opts.WithPrimaryIdentifier({{range $index, $value := .PrimaryIdentifier}} {{- if $index}},{{- end}}
+    identity.Identifier{
+    Name: "{{ $value.Name }}",
+    {{- if $value.Description }}
+    Description: "{{ $value.Description }}",
     {{- end}}
-    })
+    }
+    {{- end}})
 {{- end }}
 	opts = opts.WithAttributeNameMap(map[string]string{
 {{- range $key, $value := .AttributeNameMap }}

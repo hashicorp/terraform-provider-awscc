@@ -11,6 +11,7 @@ import (
 	"regexp"
 	"strings"
 
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/common"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
 )
@@ -78,9 +79,12 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 		return err
 	}
 
-	primaryIdentifier := make(map[string]string)
-	for key, value := range templateData.PrimaryIdentifier {
-		primaryIdentifier[toSnake(strings.TrimPrefix(key, "/properties/"))] = strings.Split(value, ".")[0]
+	primaryIdentifier := make([]identity.Identifier, len(templateData.PrimaryIdentifier))
+	for i, v := range templateData.PrimaryIdentifier {
+		primaryIdentifier[i] = identity.Identifier{
+			Name:        toSnake(strings.TrimPrefix(v.Name, "/properties/")),
+			Description: v.Description,
+		}
 	}
 	templateData.PrimaryIdentifier = primaryIdentifier
 

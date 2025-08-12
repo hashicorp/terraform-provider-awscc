@@ -11,6 +11,7 @@ import (
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	"github.com/hashicorp/cli"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared/codegen"
 	tfslices "github.com/hashicorp/terraform-provider-awscc/internal/slices"
@@ -130,14 +131,17 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 		templateData.WriteOnlyPropertyPaths = append(templateData.WriteOnlyPropertyPaths, string(path))
 	}
 
-	output := make(map[string]string)
+	var output []identity.Identifier
 	for _, path := range resource.CfResource.PrimaryIdentifier {
-		output[string(path)] = ""
+		id := identity.Identifier{
+			Name: string(path),
+		}
 		if v, ok := resource.CfResource.Properties[strings.TrimPrefix(string(path), "/properties/")]; ok {
 			if v.Description != nil {
-				output[string(path)] = *v.Description
+				id.Description = strings.Split(*v.Description, ".")[0]
 			}
 		}
+		output = append(output, id)
 	}
 	templateData.PrimaryIdentifier = output
 
@@ -179,7 +183,7 @@ type TemplateData struct {
 	ImportInternalValidators      bool
 	ImportRegexp                  bool
 	PackageName                   string
-	PrimaryIdentifier             map[string]string
+	PrimaryIdentifier             []identity.Identifier
 	RootPropertiesSchema          string
 	SchemaDescription             string
 	SchemaVersion                 int64
