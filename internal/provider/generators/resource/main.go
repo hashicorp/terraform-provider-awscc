@@ -8,10 +8,9 @@ import (
 	"flag"
 	"fmt"
 	"os"
-	"regexp"
-	"strings"
 
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
+	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/common"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
 )
@@ -82,7 +81,7 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 	primaryIdentifier := make([]identity.Identifier, len(templateData.PrimaryIdentifier))
 	for i, v := range templateData.PrimaryIdentifier {
 		primaryIdentifier[i] = identity.Identifier{
-			Name:        toSnake(v.Name),
+			Name:        naming.SnakeCase(v.Name),
 			Description: v.Description,
 		}
 	}
@@ -128,12 +127,3 @@ var resourceSchemaTemplateBody string
 //
 //go:embed tests.tmpl
 var acceptanceTestsTemplateBody string
-
-func toSnake(s string) string {
-	snake := matchFirstCap.ReplaceAllString(s, "${1}_${2}")
-	snake = matchAllCap.ReplaceAllString(snake, "${1}_${2}")
-	return strings.ToLower(snake)
-}
-
-var matchFirstCap = regexp.MustCompile("(.)([A-Z][a-z]+)")
-var matchAllCap = regexp.MustCompile("([a-z0-9])([A-Z])")
