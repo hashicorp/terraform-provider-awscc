@@ -441,14 +441,14 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 	}
 
 	// set resource identity
-	for _, v := range r.primaryIdentifier {
+	for key := range r.primaryIdentifier {
 		var out types.String
-		response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v), &out)...)
+		response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(key), &out)...)
 		if response.Diagnostics.HasError() {
 			return
 		}
 
-		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(v), out.ValueString())...)
+		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(key), out.ValueString())...)
 		if response.Diagnostics.HasError() {
 			return
 		}
@@ -531,14 +531,14 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 	}
 
 	// set resource identity
-	for _, v := range r.primaryIdentifier {
+	for key := range r.primaryIdentifier {
 		var out types.String
-		response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v), &out)...)
+		response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(key), &out)...)
 		if response.Diagnostics.HasError() {
 			return
 		}
 
-		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(v), out.ValueString())...)
+		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(key), out.ValueString())...)
 		if response.Diagnostics.HasError() {
 			return
 		}
@@ -735,9 +735,9 @@ func (r *genericResource) ImportState(ctx context.Context, request resource.Impo
 	}
 
 	var identifier []string
-	for _, v := range r.primaryIdentifier {
+	for key := range r.primaryIdentifier {
 		var out types.String
-		response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(v), &out)...)
+		response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(key), &out)...)
 		if response.Diagnostics.HasError() {
 			return
 		}
