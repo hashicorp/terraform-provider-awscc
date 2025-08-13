@@ -344,6 +344,7 @@ func environmentProfileResource(ctx context.Context) (resource.Resource, error) 
 			Name:        "id",
 			Description: "The ID of this Amazon DataZone environment profile",
 		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"aws_account_id":                   "AwsAccountId",
 		"aws_account_region":               "AwsAccountRegion",

@@ -1413,6 +1413,7 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 			Name:        "certificate_authority_arn",
 			Description: "The Amazon Resource Name (ARN) for the private CA issues the certificate",
 		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"api_passthrough":                      "ApiPassthrough",
 		"arn":                                  "Arn",

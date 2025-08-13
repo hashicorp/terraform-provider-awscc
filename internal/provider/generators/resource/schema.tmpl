@@ -87,7 +87,7 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (resource.Resource, error) 
     {{- end}}
     }
     {{- end}})
-{{- end }}
+{{ end }}
 	opts = opts.WithAttributeNameMap(map[string]string{
 {{- range $key, $value := .AttributeNameMap }}
 		"{{ $key }}": "{{ $value }}",

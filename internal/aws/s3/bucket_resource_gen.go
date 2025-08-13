@@ -4538,6 +4538,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 			Name:        "bucket_name",
 			Description: "A name for the bucket",
 		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"abort_incomplete_multipart_upload":      "AbortIncompleteMultipartUpload",
 		"accelerate_configuration":               "AccelerateConfiguration",
