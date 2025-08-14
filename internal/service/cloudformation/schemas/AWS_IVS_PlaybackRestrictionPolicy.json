@@ -78,10 +78,6 @@
     }
   },
   "additionalProperties": false,
-  "required": [
-    "AllowedCountries",
-    "AllowedOrigins"
-  ],
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,

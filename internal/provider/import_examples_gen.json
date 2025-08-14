@@ -3424,10 +3424,6 @@
         "identifier": ["DomainName"]
     },
     {
-        "resource": "awscc_opsworkscm_server",
-        "identifier": ["Id"]
-    },
-    {
         "resource": "awscc_organizations_account",
         "identifier": ["AccountId"]
     },

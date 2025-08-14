@@ -71,45 +71,50 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "elasticache:AddTagsToResource",
+      "elasticache:RemoveTagsFromResource",
+      "elasticache:ListTagsForResource"
+    ]
   },
   "handlers": {
     "create": {
       "permissions": [
-        "ElastiCache:CreateCacheParameterGroup",
-        "ElastiCache:DescribeCacheParameterGroups",
-        "ElastiCache:AddTagsToResource",
-        "ElastiCache:ModifyCacheParameterGroup",
+        "elasticache:CreateCacheParameterGroup",
+        "elasticache:DescribeCacheParameterGroups",
+        "elasticache:AddTagsToResource",
+        "elasticache:ModifyCacheParameterGroup",
         "iam:CreateServiceLinkedRole",
         "iam:PutRolePolicy"
       ]
     },
     "read": {
       "permissions": [
-        "ElastiCache:DescribeCacheParameterGroups",
-        "ElastiCache:DescribeCacheParameters",
-        "ElastiCache:ListTagsForResource"
+        "elasticache:DescribeCacheParameterGroups",
+        "elasticache:DescribeCacheParameters",
+        "elasticache:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
-        "ElastiCache:ModifyCacheParameterGroup",
-        "ElastiCache:DescribeCacheParameterGroups",
-        "ElastiCache:DescribeCacheParameters",
-        "ElastiCache:DescribeEngineDefaultParameters",
-        "ElastiCache:AddTagsToResource",
-        "ElastiCache:RemoveTagsFromResource"
+        "elasticache:ModifyCacheParameterGroup",
+        "elasticache:DescribeCacheParameterGroups",
+        "elasticache:DescribeCacheParameters",
+        "elasticache:DescribeEngineDefaultParameters",
+        "elasticache:AddTagsToResource",
+        "elasticache:RemoveTagsFromResource"
       ]
     },
     "delete": {
       "permissions": [
-        "ElastiCache:DescribeCacheParameterGroups",
-        "ElastiCache:DeleteCacheParameterGroup"
+        "elasticache:DescribeCacheParameterGroups",
+        "elasticache:DeleteCacheParameterGroup"
       ]
     },
     "list": {
       "permissions": [
-        "ElastiCache:DescribeCacheParameterGroups"
+        "elasticache:DescribeCacheParameterGroups"
       ]
     }
   }

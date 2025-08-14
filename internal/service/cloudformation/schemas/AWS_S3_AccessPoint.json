@@ -39,6 +39,25 @@
     "Arn": {
       "description": "the Amazon Resource Name (ARN) of the specified accesspoint.",
       "type": "string"
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
     }
   },
   "properties": {
@@ -94,6 +113,14 @@
       "examples": [
         "arn:aws:s3:us-west-2:123456789012:accesspoint/test"
       ]
+    },
+    "Tags": {
+      "description": "An arbitrary set of tags (key-value pairs) for this S3 Access Point.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "type": "array"
     }
   },
   "required": [
@@ -119,13 +146,15 @@
         "s3:CreateAccessPoint",
         "s3:PutAccessPointPolicy",
         "s3:GetAccessPoint",
-        "s3:PutAccessPointPublicAccessBlock"
+        "s3:PutAccessPointPublicAccessBlock",
+        "s3:TagResource"
       ]
     },
     "read": {
       "permissions": [
         "s3:GetAccessPoint",
-        "s3:GetAccessPointPolicy"
+        "s3:GetAccessPointPolicy",
+        "s3:ListTagsForResource"
       ]
     },
     "update": {
@@ -134,7 +163,9 @@
         "s3:PutAccessPointPublicAccessBlock",
         "s3:DeleteAccessPointPolicy",
         "s3:GetAccessPoint",
-        "s3:GetAccessPointPolicy"
+        "s3:GetAccessPointPolicy",
+        "s3:TagResource",
+        "s3:UntagResource"
       ]
     },
     "delete": {
@@ -150,7 +181,16 @@
     }
   },
   "tagging": {
-    "taggable": false
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "s3:TagResource",
+      "s3:UntagResource",
+      "s3:ListTagsForResource"
+    ]
   },
   "additionalProperties": false
 }
