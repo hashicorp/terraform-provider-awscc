@@ -1,13 +1,28 @@
-## 1.52.0 (Unreleased)
+## 1.52.0 (August 14, 2025)
 
 FEATURES:
 
+* **New Data Source:** `awscc_ec2_ip_pool_route_table_association`
+* **New Data Source:** `awscc_ec2_ip_pool_route_table_associations`
+* **New Data Source:** `awscc_ec2_transit_gateway_connect_peer`
+* **New Data Source:** `awscc_ec2_transit_gateway_connect_peers`
+* **New Data Source:** `awscc_observabilityadmin_organization_telemetry_rule`
+* **New Data Source:** `awscc_observabilityadmin_organization_telemetry_rules`
+* **New Data Source:** `awscc_observabilityadmin_telemetry_rule`
+* **New Data Source:** `awscc_observabilityadmin_telemetry_rules`
 * **New Data Source:** `awscc_omics_annotation_store`
 * **New Data Source:** `awscc_omics_annotation_stores`
 * **New Data Source:** `awscc_scheduler_schedule`
 * **New Data Source:** `awscc_scheduler_schedules`
+* **New Data Source:** `awscc_workspacesweb_session_logger`
+* **New Data Source:** `awscc_workspacesweb_session_loggers`
+* **New Resource:** `awscc_ec2_ip_pool_route_table_association`
+* **New Resource:** `awscc_ec2_transit_gateway_connect_peer`
+* **New Resource:** `awscc_observabilityadmin_organization_telemetry_rule`
+* **New Resource:** `awscc_observabilityadmin_telemetry_rule`
 * **New Resource:** `awscc_omics_annotation_store`
 * **New Resource:** `awscc_scheduler_schedule`
+* **New Resource:** `awscc_workspacesweb_session_logger`
 
 ## 1.51.0 (July 31, 2025)
 
