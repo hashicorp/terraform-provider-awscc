@@ -35,10 +35,16 @@ const (
 // providerData is returned from the provider's Configure method and
 // is passed to each resource and data source in their Configure methods.
 type providerData struct {
+	accountID   string
 	ccAPIClient *cloudcontrol.Client
 	logger      baselogging.Logger
+	partitionID string
 	region      string
 	roleARN     string
+}
+
+func (p *providerData) AccountID(_ context.Context) string {
+	return p.accountID
 }
 
 func (p *providerData) CloudControlAPIClient(_ context.Context) *cloudcontrol.Client {
@@ -47,6 +53,10 @@ func (p *providerData) CloudControlAPIClient(_ context.Context) *cloudcontrol.Cl
 
 func (p *providerData) Region(_ context.Context) string {
 	return p.region
+}
+
+func (p *providerData) PartitionID(_ context.Context) string {
+	return p.partitionID
 }
 
 func (p *providerData) RegisterLogger(ctx context.Context) context.Context {
@@ -557,9 +567,21 @@ func newProviderData(ctx context.Context, c *configModel) (*providerData, diag.D
 		}
 	})
 
+	accountID, partitionID, awsDiags := awsbase.GetAwsAccountIDAndPartition(ctx, cfg, &awsbaseConfig)
+	for _, d := range awsDiags {
+		switch d.Severity() {
+		case basediag.SeverityWarning:
+			diags = append(diags, diag.NewWarningDiagnostic(d.Summary(), d.Detail()))
+		case basediag.SeverityError:
+			diags = append(diags, diag.NewErrorDiagnostic(d.Summary(), d.Detail()))
+		}
+	}
+
 	providerData := &providerData{
+		accountID:   accountID,
 		ccAPIClient: ccAPIClient,
 		logger:      logger,
+		partitionID: partitionID,
 		region:      cfg.Region,
 		roleARN:     c.RoleARN.ValueString(),
 	}

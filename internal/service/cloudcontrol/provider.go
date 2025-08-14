@@ -12,8 +12,12 @@ import (
 // Provider is the interface implemented by AWS Cloud Control API client providers.
 // It's role is similar to terraform-aws-provider's 'conns.AWSClient'.
 type Provider interface {
+	AccountID(ctx context.Context) string
+
 	// CloudControlApiClient returns an AWS Cloud Control API client.
 	CloudControlAPIClient(context.Context) *cloudcontrol.Client
+
+	PartitionID(ctx context.Context) string
 
 	// Region returns an AWS Cloud Control API client's region
 	Region(ctx context.Context) string

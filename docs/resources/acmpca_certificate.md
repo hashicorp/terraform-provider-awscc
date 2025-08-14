@@ -294,6 +294,10 @@ import {
 - `arn` (String)
 - `certificate_authority_arn` (String) The Amazon Resource Name (ARN) for the private CA issues the certificate
 
+#### Optional
+
+- `account_id` (String) The ID of the AWS account
+
 In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
 
 ```terraform

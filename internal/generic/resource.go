@@ -330,7 +330,7 @@ type genericResource struct {
 	deleteTimeout           time.Duration              // Maximum wait time for resource deletion
 	configValidators        []resource.ConfigValidator // Required attributes validators
 	provider                tfcloudcontrol.Provider
-	primaryIdentifier       []identity.Identifier
+	primaryIdentifier       identity.Identifiers
 }
 
 var (
@@ -455,6 +455,11 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 		}
 	}
 
+	response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameAccountID), r.provider.AccountID(ctx))...)
+	if response.Diagnostics.HasError() {
+		return
+	}
+
 	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
 		"value": hclog.Fmt("%v", response.State.Raw),
 	})
@@ -543,6 +548,11 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 		if response.Diagnostics.HasError() {
 			return
 		}
+	}
+
+	response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameAccountID), r.provider.AccountID(ctx))...)
+	if response.Diagnostics.HasError() {
+		return
 	}
 
 	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
@@ -706,12 +716,23 @@ func (r *genericResource) Delete(ctx context.Context, request resource.DeleteReq
 }
 
 func (r *genericResource) IdentitySchema(_ context.Context, _ resource.IdentitySchemaRequest, response *resource.IdentitySchemaResponse) {
+	// add accountID identity
+	pi := r.primaryIdentifier.AddAccountID()
+
 	identitySchemaAttributes := make(map[string]identityschema.Attribute)
-	for _, v := range r.primaryIdentifier {
-		identitySchemaAttributes[v.Name] = identityschema.StringAttribute{
-			RequiredForImport: true,
-			Description:       v.Description,
+	for _, v := range pi {
+		ident := identityschema.StringAttribute{
+			Description: v.Description,
 		}
+
+		switch v.OptionalForImport {
+		case true:
+			ident.OptionalForImport = true
+		default:
+			ident.RequiredForImport = true
+		}
+
+		identitySchemaAttributes[v.Name] = ident
 	}
 
 	response.IdentitySchema = identityschema.Schema{

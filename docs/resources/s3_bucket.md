@@ -1201,6 +1201,10 @@ import {
 
 - `bucket_name` (String) A name for the bucket
 
+#### Optional
+
+- `account_id` (String) The ID of the AWS account
+
 In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
 
 ```terraform
