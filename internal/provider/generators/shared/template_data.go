@@ -11,6 +11,7 @@ import (
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	"github.com/hashicorp/cli"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared/codegen"
 	tfslices "github.com/hashicorp/terraform-provider-awscc/internal/slices"
@@ -130,9 +131,20 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 		templateData.WriteOnlyPropertyPaths = append(templateData.WriteOnlyPropertyPaths, string(path))
 	}
 
+	var identifiers []identity.Identifier
 	for _, path := range resource.CfResource.PrimaryIdentifier {
-		templateData.PrimaryIdentifier = append(templateData.PrimaryIdentifier, string(path))
+		id := strings.TrimPrefix(string(path), "/properties/")
+		identifier := identity.Identifier{
+			Name: id,
+		}
+		if v, ok := resource.CfResource.Properties[id]; ok {
+			if v.Description != nil {
+				identifier.Description = strings.Split(*v.Description, ".")[0]
+			}
+		}
+		identifiers = append(identifiers, identifier)
 	}
+	templateData.PrimaryIdentifier = identifiers
 
 	if v, ok := resource.CfResource.Handlers[cfschema.HandlerTypeCreate]; ok {
 		templateData.CreateTimeoutInMinutes = v.TimeoutInMinutes
@@ -172,7 +184,7 @@ type TemplateData struct {
 	ImportInternalValidators      bool
 	ImportRegexp                  bool
 	PackageName                   string
-	PrimaryIdentifier             []string
+	PrimaryIdentifier             []identity.Identifier
 	RootPropertiesSchema          string
 	SchemaDescription             string
 	SchemaVersion                 int64

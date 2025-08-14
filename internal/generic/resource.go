@@ -16,11 +16,14 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/identityschema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
@@ -195,6 +198,14 @@ func resourceWithConfigValidators(vs ...resource.ConfigValidator) ResourceOption
 	}
 }
 
+func resourceWithPrimaryIdentifier(vs ...identity.Identifier) ResourceOptionsFunc {
+	return func(o *genericResource) error {
+		o.primaryIdentifier = vs
+
+		return nil
+	}
+}
+
 // ResourceOptions is a type alias for a slice of resource type functional options.
 type ResourceOptions []ResourceOptionsFunc
 
@@ -278,6 +289,10 @@ func (opts ResourceOptions) WithConfigValidators(vs ...resource.ConfigValidator)
 	return append(opts, resourceWithConfigValidators(vs...))
 }
 
+func (opts ResourceOptions) WithPrimaryIdentifier(v ...identity.Identifier) ResourceOptions {
+	return append(opts, resourceWithPrimaryIdentifier(v...))
+}
+
 // NewResource returns a new Resource from the specified varidaic list of functional options.
 // It's public as it's called from generated code.
 func NewResource(_ context.Context, optFns ...ResourceOptionsFunc) (resource.Resource, error) {
@@ -315,6 +330,7 @@ type genericResource struct {
 	deleteTimeout           time.Duration              // Maximum wait time for resource deletion
 	configValidators        []resource.ConfigValidator // Required attributes validators
 	provider                tfcloudcontrol.Provider
+	primaryIdentifier       identity.Identifiers
 }
 
 var (
@@ -425,6 +441,25 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 		return
 	}
 
+	// set resource identity
+	for _, v := range r.primaryIdentifier {
+		var out types.String
+		response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v.Name), &out)...)
+		if response.Diagnostics.HasError() {
+			return
+		}
+
+		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(v.Name), out.ValueString())...)
+		if response.Diagnostics.HasError() {
+			return
+		}
+	}
+
+	response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameAccountID), r.provider.AccountID(ctx))...)
+	if response.Diagnostics.HasError() {
+		return
+	}
+
 	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
 		"value": hclog.Fmt("%v", response.State.Raw),
 	})
@@ -498,6 +533,25 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 	if err := r.setId(ctx, id, &response.State); err != nil {
 		response.Diagnostics.Append(ResourceIdentifierNotSetDiag(err))
 
+		return
+	}
+
+	// set resource identity
+	for _, v := range r.primaryIdentifier {
+		var out types.String
+		response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v.Name), &out)...)
+		if response.Diagnostics.HasError() {
+			return
+		}
+
+		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(v.Name), out.ValueString())...)
+		if response.Diagnostics.HasError() {
+			return
+		}
+	}
+
+	response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameAccountID), r.provider.AccountID(ctx))...)
+	if response.Diagnostics.HasError() {
 		return
 	}
 
@@ -661,16 +715,60 @@ func (r *genericResource) Delete(ctx context.Context, request resource.DeleteReq
 	traceExit(ctx, "Resource.Delete")
 }
 
+func (r *genericResource) IdentitySchema(_ context.Context, _ resource.IdentitySchemaRequest, response *resource.IdentitySchemaResponse) {
+	// add accountID identity
+	pi := r.primaryIdentifier.AddAccountID()
+
+	identitySchemaAttributes := make(map[string]identityschema.Attribute)
+	for _, v := range pi {
+		ident := identityschema.StringAttribute{
+			Description: v.Description,
+		}
+
+		switch v.OptionalForImport {
+		case true:
+			ident.OptionalForImport = true
+		default:
+			ident.RequiredForImport = true
+		}
+
+		identitySchemaAttributes[v.Name] = ident
+	}
+
+	response.IdentitySchema = identityschema.Schema{
+		Attributes: identitySchemaAttributes,
+	}
+}
+
 func (r *genericResource) ImportState(ctx context.Context, request resource.ImportStateRequest, response *resource.ImportStateResponse) {
 	ctx = r.bootstrapContext(ctx)
 
 	traceEntry(ctx, "Resource.ImportState")
 
-	tflog.Debug(ctx, "Request.ID", map[string]interface{}{
-		"value": hclog.Fmt("%v", request.ID),
-	})
+	if request.ID != "" {
+		tflog.Debug(ctx, "Request.ID", map[string]interface{}{
+			"value": hclog.Fmt("%v", request.ID),
+		})
 
-	resource.ImportStatePassthroughID(ctx, idAttributePath, request, response)
+		resource.ImportStatePassthroughID(ctx, idAttributePath, request, response)
+
+		traceExit(ctx, "Resource.ImportState")
+		return
+	}
+
+	var identifier []string
+	for _, v := range r.primaryIdentifier {
+		var out types.String
+		response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(v.Name), &out)...)
+		if response.Diagnostics.HasError() {
+			return
+		}
+
+		identifier = append(identifier, out.ValueString())
+	}
+
+	id := strings.Join(identifier, "|")
+	response.Diagnostics.Append(response.State.SetAttribute(ctx, idAttributePath, &id)...)
 
 	traceExit(ctx, "Resource.ImportState")
 }
