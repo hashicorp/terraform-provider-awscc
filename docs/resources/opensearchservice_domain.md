@@ -56,6 +56,7 @@ Optional:
 
 - `anonymous_auth_enabled` (Boolean)
 - `enabled` (Boolean)
+- `iam_federation_options` (Attributes) (see [below for nested schema](#nestedatt--advanced_security_options--iam_federation_options))
 - `internal_user_database_enabled` (Boolean)
 - `jwt_options` (Attributes) (see [below for nested schema](#nestedatt--advanced_security_options--jwt_options))
 - `master_user_options` (Attributes) (see [below for nested schema](#nestedatt--advanced_security_options--master_user_options))
@@ -64,6 +65,16 @@ Optional:
 Read-Only:
 
 - `anonymous_auth_disable_date` (String)
+
+<a id="nestedatt--advanced_security_options--iam_federation_options"></a>
+### Nested Schema for `advanced_security_options.iam_federation_options`
+
+Optional:
+
+- `enabled` (Boolean)
+- `roles_key` (String)
+- `subject_key` (String)
+
 
 <a id="nestedatt--advanced_security_options--jwt_options"></a>
 ### Nested Schema for `advanced_security_options.jwt_options`

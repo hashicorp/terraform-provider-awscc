@@ -151,6 +151,7 @@ resource "awscc_pcs_cluster" "example" {
 
 Optional:
 
+- `network_type` (String) The IP of the cluster (IPV4 or IPV6)
 - `security_group_ids` (List of String) The list of security group IDs associated with the Elastic Network Interface (ENI) created in subnets.
 - `subnet_ids` (List of String) The list of subnet IDs where AWS PCS creates an Elastic Network Interface (ENI) to enable communication between managed controllers and AWS PCS resources. The subnet must have an available IP address, cannot reside in AWS Outposts, AWS Wavelength, or an AWS Local Zone. AWS PCS currently supports only 1 subnet in this list.
 
@@ -207,6 +208,7 @@ Optional:
 
 Read-Only:
 
+- `ipv_6_address` (String) The endpoint's IPv6 address.
 - `port` (String) The endpoint's connection port number.
 - `private_ip_address` (String) The endpoint's private IP address.
 - `public_ip_address` (String) The endpoint's public IP address.

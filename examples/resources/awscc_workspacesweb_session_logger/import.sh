@@ -1,0 +1,1 @@
+$ terraform import awscc_workspacesweb_session_logger.example "session_logger_arn"

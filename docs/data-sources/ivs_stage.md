@@ -32,8 +32,45 @@ Data Source schema for AWS::IVS::Stage
 
 Read-Only:
 
+- `hls_configuration` (Attributes) HLS configuration object for individual participant recording. (see [below for nested schema](#nestedatt--auto_participant_recording_configuration--hls_configuration))
 - `media_types` (Set of String) Types of media to be recorded. Default: AUDIO_VIDEO.
+- `recording_reconnect_window_seconds` (Number) If a stage publisher disconnects and then reconnects within the specified interval, the multiple recordings will be considered a single recording and merged together. The default value is 0, which disables merging.
 - `storage_configuration_arn` (String) ARN of the StorageConfiguration resource to use for individual participant recording.
+- `thumbnail_configuration` (Attributes) A complex type that allows you to enable/disable the recording of thumbnails for individual participant recording and modify the interval at which thumbnails are generated for the live session. (see [below for nested schema](#nestedatt--auto_participant_recording_configuration--thumbnail_configuration))
+
+<a id="nestedatt--auto_participant_recording_configuration--hls_configuration"></a>
+### Nested Schema for `auto_participant_recording_configuration.hls_configuration`
+
+Read-Only:
+
+- `participant_recording_hls_configuration` (Attributes) An object representing a configuration of participant HLS recordings for individual participant recording. (see [below for nested schema](#nestedatt--auto_participant_recording_configuration--hls_configuration--participant_recording_hls_configuration))
+
+<a id="nestedatt--auto_participant_recording_configuration--hls_configuration--participant_recording_hls_configuration"></a>
+### Nested Schema for `auto_participant_recording_configuration.hls_configuration.participant_recording_hls_configuration`
+
+Read-Only:
+
+- `target_segment_duration_seconds` (Number) Defines the target duration for recorded segments generated when recording a stage participant. Segments may have durations longer than the specified value when needed to ensure each segment begins with a keyframe. Default: 6.
+
+
+
+<a id="nestedatt--auto_participant_recording_configuration--thumbnail_configuration"></a>
+### Nested Schema for `auto_participant_recording_configuration.thumbnail_configuration`
+
+Read-Only:
+
+- `participant_thumbnail_configuration` (Attributes) An object representing a configuration of thumbnails for recorded video from an individual participant. (see [below for nested schema](#nestedatt--auto_participant_recording_configuration--thumbnail_configuration--participant_thumbnail_configuration))
+
+<a id="nestedatt--auto_participant_recording_configuration--thumbnail_configuration--participant_thumbnail_configuration"></a>
+### Nested Schema for `auto_participant_recording_configuration.thumbnail_configuration.participant_thumbnail_configuration`
+
+Read-Only:
+
+- `recording_mode` (String) Thumbnail recording mode. Default: DISABLED.
+- `storage` (Set of String) Indicates the format in which thumbnails are recorded. SEQUENTIAL records all generated thumbnails in a serial manner, to the media/thumbnails/high directory. LATEST saves the latest thumbnail in media/latest_thumbnail/high/thumb.jpg and overwrites it at the interval specified by targetIntervalSeconds. You can enable both SEQUENTIAL and LATEST. Default: SEQUENTIAL.
+- `target_interval_seconds` (Number) The targeted thumbnail-generation interval in seconds. This is configurable only if recordingMode is INTERVAL. Default: 60.
+
+
 
 
 <a id="nestedatt--tags"></a>
