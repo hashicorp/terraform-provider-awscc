@@ -387,7 +387,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Type": {
-		//	        "description": "The type of Elastic Graphics accelerator.",
+		//	        "description": "The type of Elastic Graphics accelerator. Amazon Elastic Graphics is no longer available.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -404,7 +404,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of Elastic Graphics accelerator.",
+						Description: "The type of Elastic Graphics accelerator. Amazon Elastic Graphics is no longer available.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -435,12 +435,12 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Count": {
-		//	        "description": "The number of elastic inference accelerators to attach to the instance.",
+		//	        "description": "The number of elastic inference accelerators to attach to the instance. Amazon Elastic Inference is no longer available.",
 		//	        "minimum": 0,
 		//	        "type": "integer"
 		//	      },
 		//	      "Type": {
-		//	        "description": "The type of elastic inference accelerator.",
+		//	        "description": "The type of elastic inference accelerator. Amazon Elastic Inference is no longer available.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -457,7 +457,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Count
 					"count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The number of elastic inference accelerators to attach to the instance.",
+						Description: "The number of elastic inference accelerators to attach to the instance. Amazon Elastic Inference is no longer available.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Int64{ /*START VALIDATORS*/
@@ -469,7 +469,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of elastic inference accelerator.",
+						Description: "The type of elastic inference accelerator. Amazon Elastic Inference is no longer available.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/

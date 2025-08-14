@@ -58,6 +58,27 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "Configuration object for individual participant recording, to attach to the new stage.",
 		//	  "properties": {
+		//	    "HlsConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "HLS configuration object for individual participant recording.",
+		//	      "properties": {
+		//	        "ParticipantRecordingHlsConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "An object representing a configuration of participant HLS recordings for individual participant recording.",
+		//	          "properties": {
+		//	            "TargetSegmentDurationSeconds": {
+		//	              "default": 6,
+		//	              "description": "Defines the target duration for recorded segments generated when recording a stage participant. Segments may have durations longer than the specified value when needed to ensure each segment begins with a keyframe. Default: 6.",
+		//	              "maximum": 10,
+		//	              "minimum": 2,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "MediaTypes": {
 		//	      "default": [
 		//	        "AUDIO_VIDEO"
@@ -76,12 +97,67 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "array",
 		//	      "uniqueItems": true
 		//	    },
+		//	    "RecordingReconnectWindowSeconds": {
+		//	      "default": 0,
+		//	      "description": "If a stage publisher disconnects and then reconnects within the specified interval, the multiple recordings will be considered a single recording and merged together. The default value is 0, which disables merging.",
+		//	      "maximum": 300,
+		//	      "minimum": 0,
+		//	      "type": "integer"
+		//	    },
 		//	    "StorageConfigurationArn": {
 		//	      "description": "ARN of the StorageConfiguration resource to use for individual participant recording.",
 		//	      "maxLength": 128,
 		//	      "minLength": 0,
 		//	      "pattern": "^$|^arn:aws:ivs:[a-z0-9-]+:[0-9]+:storage-configuration/[a-zA-Z0-9-]+$",
 		//	      "type": "string"
+		//	    },
+		//	    "ThumbnailConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "A complex type that allows you to enable/disable the recording of thumbnails for individual participant recording and modify the interval at which thumbnails are generated for the live session.",
+		//	      "properties": {
+		//	        "ParticipantThumbnailConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "An object representing a configuration of thumbnails for recorded video from an individual participant.",
+		//	          "properties": {
+		//	            "RecordingMode": {
+		//	              "default": "INTERVAL",
+		//	              "description": "Thumbnail recording mode. Default: DISABLED.",
+		//	              "enum": [
+		//	                "INTERVAL",
+		//	                "DISABLED"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "Storage": {
+		//	              "default": [
+		//	                "SEQUENTIAL"
+		//	              ],
+		//	              "description": "Indicates the format in which thumbnails are recorded. SEQUENTIAL records all generated thumbnails in a serial manner, to the media/thumbnails/high directory. LATEST saves the latest thumbnail in media/latest_thumbnail/high/thumb.jpg and overwrites it at the interval specified by targetIntervalSeconds. You can enable both SEQUENTIAL and LATEST. Default: SEQUENTIAL.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "enum": [
+		//	                  "SEQUENTIAL",
+		//	                  "LATEST"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 2,
+		//	              "minItems": 0,
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            },
+		//	            "TargetIntervalSeconds": {
+		//	              "default": 60,
+		//	              "description": "The targeted thumbnail-generation interval in seconds. This is configurable only if recordingMode is INTERVAL. Default: 60.",
+		//	              "maximum": 86400,
+		//	              "minimum": 1,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -91,15 +167,69 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"auto_participant_recording_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: HlsConfiguration
+				"hls_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ParticipantRecordingHlsConfiguration
+						"participant_recording_hls_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: TargetSegmentDurationSeconds
+								"target_segment_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Defines the target duration for recorded segments generated when recording a stage participant. Segments may have durations longer than the specified value when needed to ensure each segment begins with a keyframe. Default: 6.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "An object representing a configuration of participant HLS recordings for individual participant recording.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "HLS configuration object for individual participant recording.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: MediaTypes
 				"media_types": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
 					Description: "Types of media to be recorded. Default: AUDIO_VIDEO.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: RecordingReconnectWindowSeconds
+				"recording_reconnect_window_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "If a stage publisher disconnects and then reconnects within the specified interval, the multiple recordings will be considered a single recording and merged together. The default value is 0, which disables merging.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: StorageConfigurationArn
 				"storage_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "ARN of the StorageConfiguration resource to use for individual participant recording.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ThumbnailConfiguration
+				"thumbnail_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ParticipantThumbnailConfiguration
+						"participant_thumbnail_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: RecordingMode
+								"recording_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Thumbnail recording mode. Default: DISABLED.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Storage
+								"storage": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Indicates the format in which thumbnails are recorded. SEQUENTIAL records all generated thumbnails in a serial manner, to the media/thumbnails/high directory. LATEST saves the latest thumbnail in media/latest_thumbnail/high/thumb.jpg and overwrites it at the interval specified by targetIntervalSeconds. You can enable both SEQUENTIAL and LATEST. Default: SEQUENTIAL.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: TargetIntervalSeconds
+								"target_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The targeted thumbnail-generation interval in seconds. This is configurable only if recordingMode is INTERVAL. Default: 60.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "An object representing a configuration of thumbnails for recorded video from an individual participant.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A complex type that allows you to enable/disable the recording of thumbnails for individual participant recording and modify the interval at which thumbnails are generated for the live session.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -190,12 +320,21 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"active_session_id": "ActiveSessionId",
 		"arn":               "Arn",
 		"auto_participant_recording_configuration": "AutoParticipantRecordingConfiguration",
-		"key":                       "Key",
-		"media_types":               "MediaTypes",
-		"name":                      "Name",
-		"storage_configuration_arn": "StorageConfigurationArn",
-		"tags":                      "Tags",
-		"value":                     "Value",
+		"hls_configuration":                        "HlsConfiguration",
+		"key":                                      "Key",
+		"media_types":                              "MediaTypes",
+		"name":                                     "Name",
+		"participant_recording_hls_configuration": "ParticipantRecordingHlsConfiguration",
+		"participant_thumbnail_configuration":     "ParticipantThumbnailConfiguration",
+		"recording_mode":                          "RecordingMode",
+		"recording_reconnect_window_seconds":      "RecordingReconnectWindowSeconds",
+		"storage":                                 "Storage",
+		"storage_configuration_arn":               "StorageConfigurationArn",
+		"tags":                                    "Tags",
+		"target_interval_seconds":                 "TargetIntervalSeconds",
+		"target_segment_duration_seconds":         "TargetSegmentDurationSeconds",
+		"thumbnail_configuration":                 "ThumbnailConfiguration",
+		"value":                                   "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

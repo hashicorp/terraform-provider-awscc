@@ -54,6 +54,7 @@ Read-Only:
 - `after_contact_work_time_limit` (Number) The After Call Work (ACW) timeout setting, in seconds.
 - `auto_accept` (Boolean) The Auto accept setting.
 - `desk_phone_number` (String) The phone number for the user's desk phone.
+- `persistent_connection` (Boolean) The Persistent Connection setting.
 - `phone_type` (String) The phone type.
 
 

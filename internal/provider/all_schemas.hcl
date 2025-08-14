@@ -48,6 +48,13 @@ resource_schema "aws_aps_workspace" {
   cloudformation_type_name = "AWS::APS::Workspace"
 }
 
+resource_schema "aws_arcregionswitch_plan" {
+  cloudformation_type_name                 = "AWS::ARCRegionSwitch::Plan"
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_arczonalshift_autoshift_observer_notification_status" {
   cloudformation_type_name = "AWS::ARCZonalShift::AutoshiftObserverNotificationStatus"
 }
@@ -1664,6 +1671,10 @@ resource_schema "aws_ec2_host" {
   cloudformation_type_name = "AWS::EC2::Host"
 }
 
+resource_schema "aws_ec2_ip_pool_route_table_association" {
+  cloudformation_type_name = "AWS::EC2::IpPoolRouteTableAssociation"
+}
+
 resource_schema "aws_ec2_ipam" {
   cloudformation_type_name = "AWS::EC2::IPAM"
 }
@@ -1879,6 +1890,10 @@ resource_schema "aws_ec2_transit_gateway_attachment" {
 
 resource_schema "aws_ec2_transit_gateway_connect" {
   cloudformation_type_name = "AWS::EC2::TransitGatewayConnect"
+}
+
+resource_schema "aws_ec2_transit_gateway_connect_peer" {
+  cloudformation_type_name = "AWS::EC2::TransitGatewayConnectPeer"
 }
 
 resource_schema "aws_ec2_transit_gateway_multicast_domain" {
@@ -3806,6 +3821,14 @@ resource_schema "aws_notificationscontacts_email_contact" {
   cloudformation_type_name = "AWS::NotificationsContacts::EmailContact"
 }
 
+resource_schema "aws_observabilityadmin_organization_telemetry_rule" {
+  cloudformation_type_name = "AWS::ObservabilityAdmin::OrganizationTelemetryRule"
+}
+
+resource_schema "aws_observabilityadmin_telemetry_rule" {
+  cloudformation_type_name = "AWS::ObservabilityAdmin::TelemetryRule"
+}
+
 resource_schema "aws_odb_cloud_autonomous_vm_cluster" {
   cloudformation_type_name = "AWS::ODB::CloudAutonomousVmCluster"
 }
@@ -5382,6 +5405,10 @@ resource_schema "aws_workspacesweb_network_settings" {
 
 resource_schema "aws_workspacesweb_portal" {
   cloudformation_type_name = "AWS::WorkSpacesWeb::Portal"
+}
+
+resource_schema "aws_workspacesweb_session_logger" {
+  cloudformation_type_name = "AWS::WorkSpacesWeb::SessionLogger"
 }
 
 resource_schema "aws_workspacesweb_trust_store" {

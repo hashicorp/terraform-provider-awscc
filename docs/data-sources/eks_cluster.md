@@ -28,6 +28,7 @@ Data Source schema for AWS::EKS::Cluster
 - `cluster_id` (String) The unique ID given to your cluster.
 - `cluster_security_group_id` (String) The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control plane to data plane communication.
 - `compute_config` (Attributes) Todo: add description (see [below for nested schema](#nestedatt--compute_config))
+- `deletion_protection` (Boolean) Set this value to true to enable deletion protection for the cluster.
 - `encryption_config` (Attributes List) (see [below for nested schema](#nestedatt--encryption_config))
 - `encryption_config_key_arn` (String) Amazon Resource Name (ARN) or alias of the customer master key (CMK).
 - `endpoint` (String) The endpoint for your Kubernetes API server, such as https://5E1D0CEXAMPLEA591B746AFC5AB30262.yl4.us-west-2.eks.amazonaws.com.

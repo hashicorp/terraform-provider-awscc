@@ -126,8 +126,10 @@ func policyStoreResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "CedarFormat": {
+		//	      "type": "string"
+		//	    },
 		//	    "CedarJson": {
 		//	      "type": "string"
 		//	    }
@@ -136,6 +138,14 @@ func policyStoreResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CedarFormat
+				"cedar_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: CedarJson
 				"cedar_json": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
@@ -268,6 +278,7 @@ func policyStoreResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                 "Arn",
+		"cedar_format":        "CedarFormat",
 		"cedar_json":          "CedarJson",
 		"deletion_protection": "DeletionProtection",
 		"description":         "Description",

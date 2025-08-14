@@ -103,6 +103,34 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    }
 		//	  ],
 		//	  "properties": {
+		//	    "Dependencies": {
+		//	      "description": "List of Lambda layers to attach to the canary",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Reference": {
+		//	            "description": "ARN of the Lambda layer",
+		//	            "maxLength": 140,
+		//	            "minLength": 1,
+		//	            "pattern": "arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+",
+		//	            "type": "string"
+		//	          },
+		//	          "Type": {
+		//	            "description": "Type of dependency",
+		//	            "enum": [
+		//	              "LambdaLayer"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Reference"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 1,
+		//	      "type": "array"
+		//	    },
 		//	    "Handler": {
 		//	      "type": "string"
 		//	    },
@@ -129,6 +157,25 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Dependencies
+				"dependencies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Reference
+							"reference": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "ARN of the Lambda layer",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Type of dependency",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "List of Lambda layers to attach to the canary",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: Handler
 				"handler": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -633,46 +680,49 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"canary_id":            "Id",
 		"code":                 "Code",
 		"delete_lambda_resources_on_canary_deletion": "DeleteLambdaResourcesOnCanaryDeletion",
-		"dry_run_and_update":                         "DryRunAndUpdate",
-		"duration_in_seconds":                        "DurationInSeconds",
-		"encryption_mode":                            "EncryptionMode",
-		"environment_variables":                      "EnvironmentVariables",
-		"ephemeral_storage":                          "EphemeralStorage",
-		"execution_role_arn":                         "ExecutionRoleArn",
-		"expression":                                 "Expression",
-		"failure_retention_period":                   "FailureRetentionPeriod",
-		"handler":                                    "Handler",
-		"ignore_coordinates":                         "IgnoreCoordinates",
-		"ipv_6_allowed_for_dual_stack":               "Ipv6AllowedForDualStack",
-		"key":                                        "Key",
-		"kms_key_arn":                                "KmsKeyArn",
-		"max_retries":                                "MaxRetries",
-		"memory_in_mb":                               "MemoryInMB",
-		"name":                                       "Name",
-		"provisioned_resource_cleanup":               "ProvisionedResourceCleanup",
-		"resources_to_replicate_tags":                "ResourcesToReplicateTags",
-		"retry_config":                               "RetryConfig",
-		"run_config":                                 "RunConfig",
-		"runtime_version":                            "RuntimeVersion",
-		"s3_bucket":                                  "S3Bucket",
-		"s3_encryption":                              "S3Encryption",
-		"s3_key":                                     "S3Key",
-		"s3_object_version":                          "S3ObjectVersion",
-		"schedule":                                   "Schedule",
-		"screenshot_name":                            "ScreenshotName",
-		"script":                                     "Script",
-		"security_group_ids":                         "SecurityGroupIds",
-		"source_location_arn":                        "SourceLocationArn",
-		"start_canary_after_creation":                "StartCanaryAfterCreation",
-		"state":                                      "State",
-		"subnet_ids":                                 "SubnetIds",
-		"success_retention_period":                   "SuccessRetentionPeriod",
-		"tags":                                       "Tags",
-		"timeout_in_seconds":                         "TimeoutInSeconds",
-		"value":                                      "Value",
-		"visual_reference":                           "VisualReference",
-		"vpc_config":                                 "VPCConfig",
-		"vpc_id":                                     "VpcId",
+		"dependencies":                 "Dependencies",
+		"dry_run_and_update":           "DryRunAndUpdate",
+		"duration_in_seconds":          "DurationInSeconds",
+		"encryption_mode":              "EncryptionMode",
+		"environment_variables":        "EnvironmentVariables",
+		"ephemeral_storage":            "EphemeralStorage",
+		"execution_role_arn":           "ExecutionRoleArn",
+		"expression":                   "Expression",
+		"failure_retention_period":     "FailureRetentionPeriod",
+		"handler":                      "Handler",
+		"ignore_coordinates":           "IgnoreCoordinates",
+		"ipv_6_allowed_for_dual_stack": "Ipv6AllowedForDualStack",
+		"key":                          "Key",
+		"kms_key_arn":                  "KmsKeyArn",
+		"max_retries":                  "MaxRetries",
+		"memory_in_mb":                 "MemoryInMB",
+		"name":                         "Name",
+		"provisioned_resource_cleanup": "ProvisionedResourceCleanup",
+		"reference":                    "Reference",
+		"resources_to_replicate_tags":  "ResourcesToReplicateTags",
+		"retry_config":                 "RetryConfig",
+		"run_config":                   "RunConfig",
+		"runtime_version":              "RuntimeVersion",
+		"s3_bucket":                    "S3Bucket",
+		"s3_encryption":                "S3Encryption",
+		"s3_key":                       "S3Key",
+		"s3_object_version":            "S3ObjectVersion",
+		"schedule":                     "Schedule",
+		"screenshot_name":              "ScreenshotName",
+		"script":                       "Script",
+		"security_group_ids":           "SecurityGroupIds",
+		"source_location_arn":          "SourceLocationArn",
+		"start_canary_after_creation":  "StartCanaryAfterCreation",
+		"state":                        "State",
+		"subnet_ids":                   "SubnetIds",
+		"success_retention_period":     "SuccessRetentionPeriod",
+		"tags":                         "Tags",
+		"timeout_in_seconds":           "TimeoutInSeconds",
+		"type":                         "Type",
+		"value":                        "Value",
+		"visual_reference":             "VisualReference",
+		"vpc_config":                   "VPCConfig",
+		"vpc_id":                       "VpcId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

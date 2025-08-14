@@ -62,6 +62,51 @@
       "pattern": "^[a-zA-Z0-9\\/\\._\\-\\*]+$",
       "minLength": 1,
       "maxLength": 255
+    },
+    "ContactHandling": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Scope": {
+          "type": "string",
+          "enum": [
+            "CROSS_CONTACTS",
+            "PER_CONTACT"
+          ]
+        }
+      },
+      "required": [
+        "Scope"
+      ]
+    },
+    "ApplicationConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ContactHandling": {
+          "$ref": "#/definitions/ContactHandling"
+        }
+      }
+    },
+    "IframeConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Allow": {
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "Sandbox": {
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "properties": {
@@ -130,6 +175,23 @@
       },
       "minItems": 0,
       "maxItems": 200
+    },
+    "IsService": {
+      "description": "Indicates if the application is a service",
+      "type": "boolean",
+      "default": false
+    },
+    "InitializationTimeout": {
+      "description": "The initialization timeout in milliseconds. Required when IsService is true.",
+      "type": "integer"
+    },
+    "ApplicationConfig": {
+      "description": "The application configuration. Cannot be used when IsService is true.",
+      "$ref": "#/definitions/ApplicationConfig"
+    },
+    "IframeConfig": {
+      "description": "The iframe configuration",
+      "$ref": "#/definitions/IframeConfig"
     }
   },
   "additionalProperties": false,

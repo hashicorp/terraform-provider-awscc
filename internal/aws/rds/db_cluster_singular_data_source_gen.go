@@ -855,6 +855,17 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "When restoring a DB cluster to a point in time, the identifier of the source DB cluster from which to restore.\n Constraints:\n  +  Must match the identifier of an existing DBCluster.\n  +  Cannot be specified if ``SourceDbClusterResourceId`` is specified. You must specify either ``SourceDBClusterIdentifier`` or ``SourceDbClusterResourceId``, but not both.\n  \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SourceDbClusterResourceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The resource ID of the source DB cluster from which to restore.",
+		//	  "type": "string"
+		//	}
+		"source_db_cluster_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The resource ID of the source DB cluster from which to restore.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceRegion
 		// CloudFormation resource type schema:
 		//
@@ -1060,6 +1071,7 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"serverless_v2_scaling_configuration":   "ServerlessV2ScalingConfiguration",
 		"snapshot_identifier":                   "SnapshotIdentifier",
 		"source_db_cluster_identifier":          "SourceDBClusterIdentifier",
+		"source_db_cluster_resource_id":         "SourceDbClusterResourceId",
 		"source_region":                         "SourceRegion",
 		"storage_encrypted":                     "StorageEncrypted",
 		"storage_throughput":                    "StorageThroughput",

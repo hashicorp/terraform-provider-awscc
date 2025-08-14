@@ -76,6 +76,7 @@ resource "awscc_networkfirewall_rule_group" "example" {
 
 - `description` (String)
 - `rule_group` (Attributes) (see [below for nested schema](#nestedatt--rule_group))
+- `summary_configuration` (Attributes) (see [below for nested schema](#nestedatt--summary_configuration))
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -311,6 +312,14 @@ Optional:
 
 - `rule_order` (String)
 
+
+
+<a id="nestedatt--summary_configuration"></a>
+### Nested Schema for `summary_configuration`
+
+Optional:
+
+- `rule_options` (List of String)
 
 
 <a id="nestedatt--tags"></a>

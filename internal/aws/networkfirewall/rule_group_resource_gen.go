@@ -1396,6 +1396,55 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: SummaryConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "RuleOptions": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "enum": [
+		//	          "SID",
+		//	          "MSG",
+		//	          "METADATA"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"summary_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RuleOptions
+				"rule_options": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
+								"SID",
+								"MSG",
+								"METADATA",
+							),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1559,6 +1608,7 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		"stateful_rules":                     "StatefulRules",
 		"stateless_rules":                    "StatelessRules",
 		"stateless_rules_and_custom_actions": "StatelessRulesAndCustomActions",
+		"summary_configuration":              "SummaryConfiguration",
 		"tags":                               "Tags",
 		"target_types":                       "TargetTypes",
 		"targets":                            "Targets",

@@ -153,6 +153,10 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "description": "The phone number for the user's desk phone.",
 		//	      "type": "string"
 		//	    },
+		//	    "PersistentConnection": {
+		//	      "description": "The Persistent Connection setting.",
+		//	      "type": "boolean"
+		//	    },
 		//	    "PhoneType": {
 		//	      "description": "The phone type.",
 		//	      "enum": [
@@ -182,6 +186,11 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: DeskPhoneNumber
 				"desk_phone_number": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The phone number for the user's desk phone.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PersistentConnection
+				"persistent_connection": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "The Persistent Connection setting.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PhoneType
@@ -313,8 +322,8 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "Level": {
 		//	        "description": "The level of the proficiency. The valid values are 1, 2, 3, 4 and 5.",
-		//	        "maximum": 5,
-		//	        "minimum": 1,
+		//	        "maximum": 5.0,
+		//	        "minimum": 1.0,
 		//	        "type": "number"
 		//	      }
 		//	    },
@@ -397,6 +406,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"level":                         "Level",
 		"mobile":                        "Mobile",
 		"password":                      "Password",
+		"persistent_connection":         "PersistentConnection",
 		"phone_config":                  "PhoneConfig",
 		"phone_type":                    "PhoneType",
 		"routing_profile_arn":           "RoutingProfileArn",

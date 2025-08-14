@@ -114,6 +114,13 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	        "type": "string"
 		//	      },
+		//	      "ImageId": {
+		//	        "description": "AMI Id to be used for launching EC2 instances - HyperPodPublicAmiId or CustomAmiId",
+		//	        "maxLength": 21,
+		//	        "minLength": 12,
+		//	        "pattern": "^ami-[0-9a-fA-F]{8,17}|default$",
+		//	        "type": "string"
+		//	      },
 		//	      "InstanceCount": {
 		//	        "description": "The number of instances you specified to add to the instance group of a SageMaker HyperPod cluster.",
 		//	        "minimum": 0,
@@ -232,6 +239,13 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "maximum": 2,
 		//	        "minimum": 1,
 		//	        "type": "integer"
+		//	      },
+		//	      "TrainingPlanArn": {
+		//	        "description": "The Amazon Resource Name (ARN) of the training plan to use for this cluster instance group. For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see CreateTrainingPlan.",
+		//	        "maxLength": 2048,
+		//	        "minLength": 50,
+		//	        "pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*$",
+		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -257,6 +271,11 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: ExecutionRole
 					"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The execution role for the instance group to assume.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ImageId
+					"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "AMI Id to be used for launching EC2 instances - HyperPodPublicAmiId or CustomAmiId",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: InstanceCount
@@ -342,9 +361,28 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Description: "The number you specified to TreadsPerCore in CreateCluster for enabling or disabling multithreading. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: TrainingPlanArn
+					"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the training plan to use for this cluster instance group. For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see CreateTrainingPlan.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "The instance groups of the SageMaker HyperPod cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: NodeProvisioningMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Determines the scaling strategy for the SageMaker HyperPod cluster. When set to 'Continuous', enables continuous scaling which dynamically manages node provisioning. If the parameter is omitted, uses the standard scaling approach in previous release.",
+		//	  "enum": [
+		//	    "Continuous"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"node_provisioning_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Determines the scaling strategy for the SageMaker HyperPod cluster. When set to 'Continuous', enables continuous scaling which dynamically manages node provisioning. If the parameter is omitted, uses the standard scaling approach in previous release.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NodeRecovery
@@ -405,6 +443,286 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Specifies parameter(s) specific to the orchestrator, e.g. specify the EKS cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: RestrictedInstanceGroups
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The restricted instance groups of the SageMaker HyperPod cluster.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Details of a restricted instance group in a SageMaker HyperPod cluster.",
+		//	    "properties": {
+		//	      "CurrentCount": {
+		//	        "description": "The number of instances that are currently in the restricted instance group of a SageMaker HyperPod cluster.",
+		//	        "minimum": 0,
+		//	        "type": "integer"
+		//	      },
+		//	      "EnvironmentConfig": {
+		//	        "additionalProperties": false,
+		//	        "description": "The configuration for the restricted instance groups (RIG) environment.",
+		//	        "properties": {
+		//	          "FSxLustreConfig": {
+		//	            "additionalProperties": false,
+		//	            "description": "Configuration settings for an Amazon FSx for Lustre file system to be used with the cluster.",
+		//	            "properties": {
+		//	              "PerUnitStorageThroughput": {
+		//	                "description": "The throughput capacity of the FSx for Lustre file system, measured in MB/s per TiB of storage.",
+		//	                "maximum": 1000,
+		//	                "minimum": 125,
+		//	                "type": "integer"
+		//	              },
+		//	              "SizeInGiB": {
+		//	                "description": "The storage capacity of the FSx for Lustre file system, specified in gibibytes (GiB).",
+		//	                "maximum": 100800,
+		//	                "minimum": 1200,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "SizeInGiB",
+		//	              "PerUnitStorageThroughput"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "ExecutionRole": {
+		//	        "description": "The execution role for the instance group to assume.",
+		//	        "maxLength": 2048,
+		//	        "minLength": 20,
+		//	        "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
+		//	        "type": "string"
+		//	      },
+		//	      "InstanceCount": {
+		//	        "description": "The number of instances you specified to add to the restricted instance group of a SageMaker HyperPod cluster.",
+		//	        "minimum": 0,
+		//	        "type": "integer"
+		//	      },
+		//	      "InstanceGroupName": {
+		//	        "description": "The name of the instance group of a SageMaker HyperPod cluster.",
+		//	        "maxLength": 63,
+		//	        "minLength": 1,
+		//	        "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+		//	        "type": "string"
+		//	      },
+		//	      "InstanceStorageConfigs": {
+		//	        "description": "The instance storage configuration for the instance group.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "description": "Defines the configuration for attaching additional storage to the instances in the SageMaker HyperPod cluster instance group.",
+		//	          "properties": {
+		//	            "EbsVolumeConfig": {
+		//	              "additionalProperties": false,
+		//	              "description": "Defines the configuration for attaching additional Amazon Elastic Block Store (EBS) volumes to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.",
+		//	              "properties": {
+		//	                "VolumeSizeInGB": {
+		//	                  "description": "The size in gigabytes (GB) of the additional EBS volume to be attached to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.",
+		//	                  "maximum": 16384,
+		//	                  "minimum": 1,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "maxItems": 1,
+		//	        "type": "array"
+		//	      },
+		//	      "InstanceType": {
+		//	        "description": "The instance type of the instance group of a SageMaker HyperPod cluster.",
+		//	        "type": "string"
+		//	      },
+		//	      "OnStartDeepHealthChecks": {
+		//	        "description": "Nodes will undergo advanced stress test to detect and replace faulty instances, based on the type of deep health check(s) passed in.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "description": "The type of deep health check(s) to be performed on the instances in the SageMaker HyperPod cluster instance group.",
+		//	          "enum": [
+		//	            "InstanceStress",
+		//	            "InstanceConnectivity"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "OverrideVpcConfig": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC.",
+		//	        "properties": {
+		//	          "SecurityGroupIds": {
+		//	            "description": "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "maxLength": 32,
+		//	              "pattern": "[-0-9a-zA-Z]+",
+		//	              "type": "string"
+		//	            },
+		//	            "maxItems": 5,
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          },
+		//	          "Subnets": {
+		//	            "description": "The ID of the subnets in the VPC to which you want to connect your training job or model.",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "maxLength": 32,
+		//	              "pattern": "[-0-9a-zA-Z]+",
+		//	              "type": "string"
+		//	            },
+		//	            "maxItems": 16,
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "SecurityGroupIds",
+		//	          "Subnets"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "ThreadsPerCore": {
+		//	        "description": "The number you specified to TreadsPerCore in CreateCluster for enabling or disabling multithreading. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading.",
+		//	        "maximum": 2,
+		//	        "minimum": 1,
+		//	        "type": "integer"
+		//	      },
+		//	      "TrainingPlanArn": {
+		//	        "description": "The Amazon Resource Name (ARN) of the training plan to use for this cluster restricted instance group. For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see CreateTrainingPlan.",
+		//	        "maxLength": 2048,
+		//	        "minLength": 50,
+		//	        "pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "ExecutionRole",
+		//	      "InstanceCount",
+		//	      "InstanceGroupName",
+		//	      "InstanceType",
+		//	      "EnvironmentConfig"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"restricted_instance_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CurrentCount
+					"current_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The number of instances that are currently in the restricted instance group of a SageMaker HyperPod cluster.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: EnvironmentConfig
+					"environment_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: FSxLustreConfig
+							"fsx_lustre_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: PerUnitStorageThroughput
+									"per_unit_storage_throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The throughput capacity of the FSx for Lustre file system, measured in MB/s per TiB of storage.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: SizeInGiB
+									"size_in_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The storage capacity of the FSx for Lustre file system, specified in gibibytes (GiB).",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Configuration settings for an Amazon FSx for Lustre file system to be used with the cluster.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The configuration for the restricted instance groups (RIG) environment.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ExecutionRole
+					"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The execution role for the instance group to assume.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: InstanceCount
+					"instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The number of instances you specified to add to the restricted instance group of a SageMaker HyperPod cluster.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: InstanceGroupName
+					"instance_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the instance group of a SageMaker HyperPod cluster.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: InstanceStorageConfigs
+					"instance_storage_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EbsVolumeConfig
+								"ebs_volume_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: VolumeSizeInGB
+										"volume_size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The size in gigabytes (GB) of the additional EBS volume to be attached to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Defines the configuration for attaching additional Amazon Elastic Block Store (EBS) volumes to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "The instance storage configuration for the instance group.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: InstanceType
+					"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The instance type of the instance group of a SageMaker HyperPod cluster.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: OnStartDeepHealthChecks
+					"on_start_deep_health_checks": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "Nodes will undergo advanced stress test to detect and replace faulty instances, based on the type of deep health check(s) passed in.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: OverrideVpcConfig
+					"override_vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: SecurityGroupIds
+							"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Subnets
+							"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The ID of the subnets in the VPC to which you want to connect your training job or model.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ThreadsPerCore
+					"threads_per_core": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The number you specified to TreadsPerCore in CreateCluster for enabling or disabling multithreading. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: TrainingPlanArn
+					"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the training plan to use for this cluster restricted instance group. For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see CreateTrainingPlan.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The restricted instance groups of the SageMaker HyperPod cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -540,8 +858,11 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"current_count":               "CurrentCount",
 		"ebs_volume_config":           "EbsVolumeConfig",
 		"eks":                         "Eks",
+		"environment_config":          "EnvironmentConfig",
 		"execution_role":              "ExecutionRole",
 		"failure_message":             "FailureMessage",
+		"fsx_lustre_config":           "FSxLustreConfig",
+		"image_id":                    "ImageId",
 		"instance_count":              "InstanceCount",
 		"instance_group_name":         "InstanceGroupName",
 		"instance_groups":             "InstanceGroups",
@@ -549,16 +870,21 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"instance_type":               "InstanceType",
 		"key":                         "Key",
 		"life_cycle_config":           "LifeCycleConfig",
+		"node_provisioning_mode":      "NodeProvisioningMode",
 		"node_recovery":               "NodeRecovery",
 		"on_create":                   "OnCreate",
 		"on_start_deep_health_checks": "OnStartDeepHealthChecks",
 		"orchestrator":                "Orchestrator",
 		"override_vpc_config":         "OverrideVpcConfig",
+		"per_unit_storage_throughput": "PerUnitStorageThroughput",
+		"restricted_instance_groups":  "RestrictedInstanceGroups",
 		"security_group_ids":          "SecurityGroupIds",
+		"size_in_gi_b":                "SizeInGiB",
 		"source_s3_uri":               "SourceS3Uri",
 		"subnets":                     "Subnets",
 		"tags":                        "Tags",
 		"threads_per_core":            "ThreadsPerCore",
+		"training_plan_arn":           "TrainingPlanArn",
 		"value":                       "Value",
 		"volume_size_in_gb":           "VolumeSizeInGB",
 		"vpc_config":                  "VpcConfig",

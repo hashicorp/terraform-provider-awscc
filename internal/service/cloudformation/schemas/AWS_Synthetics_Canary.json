@@ -138,6 +138,14 @@
         },
         "SourceLocationArn": {
           "type": "string"
+        },
+        "Dependencies": {
+          "type": "array",
+          "description": "List of Lambda layers to attach to the canary",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/Dependency"
+          }
         }
       },
       "required": [
@@ -155,6 +163,29 @@
             "Script"
           ]
         }
+      ]
+    },
+    "Dependency": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Type": {
+          "type": "string",
+          "enum": [
+            "LambdaLayer"
+          ],
+          "description": "Type of dependency"
+        },
+        "Reference": {
+          "type": "string",
+          "description": "ARN of the Lambda layer",
+          "pattern": "arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+",
+          "minLength": 1,
+          "maxLength": 140
+        }
+      },
+      "required": [
+        "Reference"
       ]
     },
     "Tag": {

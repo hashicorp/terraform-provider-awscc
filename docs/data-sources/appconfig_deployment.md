@@ -30,6 +30,7 @@ Data Source schema for AWS::AppConfig::Deployment
 - `dynamic_extension_parameters` (Attributes List) (see [below for nested schema](#nestedatt--dynamic_extension_parameters))
 - `environment_id` (String) The environment ID.
 - `kms_key_identifier` (String) The AWS Key Management Service key identifier (key ID, key alias, or key ARN) provided when the resource was created or updated.
+- `state` (String) The state of the deployment.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--dynamic_extension_parameters"></a>

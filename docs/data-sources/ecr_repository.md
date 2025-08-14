@@ -26,6 +26,7 @@ Data Source schema for AWS::ECR::Repository
 - `encryption_configuration` (Attributes) The encryption configuration for the repository. This determines how the contents of your repository are encrypted at rest. (see [below for nested schema](#nestedatt--encryption_configuration))
 - `image_scanning_configuration` (Attributes) The image scanning configuration for the repository. This determines whether images are scanned for known vulnerabilities after being pushed to the repository. (see [below for nested schema](#nestedatt--image_scanning_configuration))
 - `image_tag_mutability` (String) The tag mutability setting for the repository. If this parameter is omitted, the default setting of ``MUTABLE`` will be used which will allow image tags to be overwritten. If ``IMMUTABLE`` is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.
+- `image_tag_mutability_exclusion_filters` (Attributes List) The image tag mutability exclusion filters associated with the repository. These filters specify which image tags can override the repository's default image tag mutability setting. (see [below for nested schema](#nestedatt--image_tag_mutability_exclusion_filters))
 - `lifecycle_policy` (Attributes) Creates or updates a lifecycle policy. For information about lifecycle policy syntax, see [Lifecycle policy template](https://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html). (see [below for nested schema](#nestedatt--lifecycle_policy))
 - `repository_name` (String) The name to use for the repository. The repository name may be specified on its own (such as ``nginx-web-app``) or it can be prepended with a namespace to group the repository into a category (such as ``project-a/nginx-web-app``). If you don't specify a name, CFNlong generates a unique physical ID and uses that ID for the repository name. For more information, see [Name type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).
  The repository name must start with a letter and can only contain lowercase letters, numbers, hyphens, underscores, and forward slashes.
@@ -53,6 +54,15 @@ Read-Only:
 Read-Only:
 
 - `scan_on_push` (Boolean) The setting that determines whether images are scanned after being pushed to a repository. If set to ``true``, images will be scanned after being pushed. If this parameter is not specified, it will default to ``false`` and images will not be scanned unless a scan is manually started.
+
+
+<a id="nestedatt--image_tag_mutability_exclusion_filters"></a>
+### Nested Schema for `image_tag_mutability_exclusion_filters`
+
+Read-Only:
+
+- `image_tag_mutability_exclusion_filter_type` (String) Specifies the type of filter to use for excluding image tags from the repository's mutability setting.
+- `image_tag_mutability_exclusion_filter_value` (String) The value to use when filtering image tags.
 
 
 <a id="nestedatt--lifecycle_policy"></a>

@@ -23,6 +23,7 @@
       "permissions": [
         "ec2:CreateVpc",
         "ec2:DescribeVpcs",
+        "ec2:DescribeVpcAttribute",
         "ec2:ModifyVpcAttribute",
         "ec2:CreateTags"
       ]
@@ -31,6 +32,7 @@
       "permissions": [
         "ec2:CreateTags",
         "ec2:ModifyVpcAttribute",
+        "ec2:DescribeVpcAttribute",
         "ec2:DeleteTags",
         "ec2:ModifyVpcTenancy"
       ]

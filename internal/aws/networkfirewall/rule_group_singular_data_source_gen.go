@@ -923,6 +923,38 @@ func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"rule_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: SummaryConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "RuleOptions": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "enum": [
+		//	          "SID",
+		//	          "MSG",
+		//	          "METADATA"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"summary_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RuleOptions
+				"rule_options": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1050,6 +1082,7 @@ func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"stateful_rules":                     "StatefulRules",
 		"stateless_rules":                    "StatelessRules",
 		"stateless_rules_and_custom_actions": "StatelessRulesAndCustomActions",
+		"summary_configuration":              "SummaryConfiguration",
 		"tags":                               "Tags",
 		"target_types":                       "TargetTypes",
 		"targets":                            "Targets",

@@ -52,6 +52,7 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "The type of authentication the proxy uses for connections from clients.",
 		//	        "enum": [
 		//	          "MYSQL_NATIVE_PASSWORD",
+		//	          "MYSQL_CACHING_SHA2_PASSWORD",
 		//	          "POSTGRES_SCRAM_SHA_256",
 		//	          "POSTGRES_MD5",
 		//	          "SQL_SERVER_AUTHENTICATION"
@@ -106,6 +107,7 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"MYSQL_NATIVE_PASSWORD",
+								"MYSQL_CACHING_SHA2_PASSWORD",
 								"POSTGRES_SCRAM_SHA_256",
 								"POSTGRES_MD5",
 								"SQL_SERVER_AUTHENTICATION",

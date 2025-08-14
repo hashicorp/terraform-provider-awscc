@@ -154,6 +154,17 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Todo: add description",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DeletionProtection
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Set this value to true to enable deletion protection for the cluster.",
+		//	  "type": "boolean"
+		//	}
+		"deletion_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Set this value to true to enable deletion protection for the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EncryptionConfig
 		// CloudFormation resource type schema:
 		//
@@ -862,6 +873,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"compute_config":                              "ComputeConfig",
 		"control_plane_instance_type":                 "ControlPlaneInstanceType",
 		"control_plane_placement":                     "ControlPlanePlacement",
+		"deletion_protection":                         "DeletionProtection",
 		"elastic_load_balancing":                      "ElasticLoadBalancing",
 		"enabled":                                     "Enabled",
 		"enabled_types":                               "EnabledTypes",

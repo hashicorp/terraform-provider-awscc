@@ -386,6 +386,10 @@
           "type": "boolean"
         }
       }
+    },
+    "DeletionProtection": {
+      "description": "Set this value to true to enable deletion protection for the cluster.",
+      "type": "boolean"
     }
   },
   "properties": {
@@ -484,6 +488,10 @@
     },
     "BootstrapSelfManagedAddons": {
       "description": "Set this value to false to avoid creating the default networking add-ons when the cluster is created.",
+      "type": "boolean"
+    },
+    "DeletionProtection": {
+      "description": "Set this value to true to enable deletion protection for the cluster.",
       "type": "boolean"
     },
     "ZonalShiftConfig": {

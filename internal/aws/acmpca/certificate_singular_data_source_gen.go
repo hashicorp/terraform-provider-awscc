@@ -88,7 +88,7 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "description": "Contains a sequence of one or more X.509 extensions, each of which consists of an object identifier (OID), a base64-encoded value, and the critical flag. For more information, see the [Global OID reference database.](https://docs.aws.amazon.com/https://oidref.com/2.5.29)",
 		//	          "items": {
 		//	            "additionalProperties": false,
-		//	            "description": "Specifies the X.509 extension information for a certificate.\n Extensions present in ``CustomExtensions`` follow the ``ApiPassthrough`` [template rules](https://docs.aws.amazon.com/privateca/latest/userguide/UsingTemplates.html#template-order-of-operations).",
+		//	            "description": "Specifies the X.509 extension information for a certificate.\n Extensions present in ``CustomExtensions`` follow the ``ApiPassthrough``[template rules](https://docs.aws.amazon.com/privateca/latest/userguide/UsingTemplates.html#template-order-of-operations).",
 		//	            "properties": {
 		//	              "Critical": {
 		//	                "description": "Specifies the critical flag of the X.509 extension.",

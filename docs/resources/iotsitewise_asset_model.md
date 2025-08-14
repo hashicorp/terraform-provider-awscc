@@ -79,7 +79,8 @@ resource "awscc_iotsitewise_asset_model" "wind_turbine" {
 - `asset_model_external_id` (String) The external ID of the asset model.
 - `asset_model_hierarchies` (Attributes List) The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. You can specify up to 10 hierarchies per asset model. (see [below for nested schema](#nestedatt--asset_model_hierarchies))
 - `asset_model_properties` (Attributes List) The property definitions of the asset model. You can specify up to 200 properties per asset model. (see [below for nested schema](#nestedatt--asset_model_properties))
-- `asset_model_type` (String) The type of the asset model (ASSET_MODEL OR COMPONENT_MODEL)
+- `asset_model_type` (String) The type of the asset model (ASSET_MODEL OR COMPONENT_MODEL or INTERFACE)
+- `enforced_asset_model_interface_relationships` (Attributes List) a list of asset model and interface relationships (see [below for nested schema](#nestedatt--enforced_asset_model_interface_relationships))
 - `tags` (Attributes List) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -377,6 +378,25 @@ Optional:
 
 
 
+
+
+
+<a id="nestedatt--enforced_asset_model_interface_relationships"></a>
+### Nested Schema for `enforced_asset_model_interface_relationships`
+
+Optional:
+
+- `interface_asset_model_id` (String) The ID of the interface that is enforced to the asset model
+- `property_mappings` (Attributes List) Contains information about enforced interface property and asset model property (see [below for nested schema](#nestedatt--enforced_asset_model_interface_relationships--property_mappings))
+
+<a id="nestedatt--enforced_asset_model_interface_relationships--property_mappings"></a>
+### Nested Schema for `enforced_asset_model_interface_relationships.property_mappings`
+
+Optional:
+
+- `asset_model_property_external_id` (String) The external ID of the enforced asset model property
+- `asset_model_property_logical_id` (String) The logical ID of the enforced asset model property
+- `interface_asset_model_property_external_id` (String) The external ID of the enforced interface property
 
 
 

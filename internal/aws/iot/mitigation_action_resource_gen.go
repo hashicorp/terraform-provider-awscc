@@ -108,7 +108,7 @@ func mitigationActionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "RoleArnForLogging": {
 		//	          "description": " The ARN of the IAM role used for logging.",
 		//	          "maxLength": 2048,
-		//	          "minLength": 20,
+		//	          "minLength": 11,
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -125,7 +125,7 @@ func mitigationActionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "TopicArn": {
 		//	          "description": "The ARN of the topic to which you want to publish the findings.",
 		//	          "maxLength": 2048,
-		//	          "minLength": 20,
+		//	          "minLength": 11,
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -255,7 +255,7 @@ func mitigationActionResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(20, 2048),
+								stringvalidator.LengthBetween(11, 2048),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -279,7 +279,7 @@ func mitigationActionResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(20, 2048),
+								stringvalidator.LengthBetween(11, 2048),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -156,7 +156,12 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "codepipeline:TagResource",
+      "codepipeline:UntagResource",
+      "codepipeline:ListTagsForResource"
+    ]
   },
   "required": [
     "Category",

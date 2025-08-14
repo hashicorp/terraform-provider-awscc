@@ -331,6 +331,7 @@ resource "awscc_rds_db_cluster" "example_db_cluster" {
   +  Cannot be specified if ``SourceDbClusterResourceId`` is specified. You must specify either ``SourceDBClusterIdentifier`` or ``SourceDbClusterResourceId``, but not both.
   
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
+- `source_db_cluster_resource_id` (String) The resource ID of the source DB cluster from which to restore.
 - `source_region` (String) The AWS Region which contains the source DB cluster when replicating a DB cluster. For example, ``us-east-1``. 
  Valid for: Aurora DB clusters only
 - `storage_encrypted` (Boolean) Indicates whether the DB cluster is encrypted.

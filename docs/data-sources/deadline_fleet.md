@@ -162,6 +162,7 @@ Read-Only:
 - `instance_capabilities` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities))
 - `instance_market_options` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_market_options))
 - `storage_profile_id` (String)
+- `vpc_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--vpc_configuration))
 
 <a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities"></a>
 ### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities`
@@ -260,6 +261,14 @@ Read-Only:
 Read-Only:
 
 - `type` (String)
+
+
+<a id="nestedatt--configuration--service_managed_ec_2--vpc_configuration"></a>
+### Nested Schema for `configuration.service_managed_ec_2.vpc_configuration`
+
+Read-Only:
+
+- `resource_configuration_arns` (List of String)
 
 
 

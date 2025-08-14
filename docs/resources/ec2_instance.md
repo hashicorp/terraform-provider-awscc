@@ -222,7 +222,7 @@ Optional:
 
 Optional:
 
-- `type` (String) The type of Elastic Graphics accelerator.
+- `type` (String) The type of Elastic Graphics accelerator. Amazon Elastic Graphics is no longer available.
 
 
 <a id="nestedatt--elastic_inference_accelerators"></a>
@@ -230,8 +230,8 @@ Optional:
 
 Optional:
 
-- `count` (Number) The number of elastic inference accelerators to attach to the instance.
-- `type` (String) The type of elastic inference accelerator.
+- `count` (Number) The number of elastic inference accelerators to attach to the instance. Amazon Elastic Inference is no longer available.
+- `type` (String) The type of elastic inference accelerator. Amazon Elastic Inference is no longer available.
 
 
 <a id="nestedatt--enclave_options"></a>
