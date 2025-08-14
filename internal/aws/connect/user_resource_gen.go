@@ -214,6 +214,10 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "The phone number for the user's desk phone.",
 		//	      "type": "string"
 		//	    },
+		//	    "PersistentConnection": {
+		//	      "description": "The Persistent Connection setting.",
+		//	      "type": "boolean"
+		//	    },
 		//	    "PhoneType": {
 		//	      "description": "The phone type.",
 		//	      "enum": [
@@ -258,6 +262,15 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PersistentConnection
+				"persistent_connection": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "The Persistent Connection setting.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: PhoneType
@@ -430,8 +443,8 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "Level": {
 		//	        "description": "The level of the proficiency. The valid values are 1, 2, 3, 4 and 5.",
-		//	        "maximum": 5,
-		//	        "minimum": 1,
+		//	        "maximum": 5.0,
+		//	        "minimum": 1.0,
 		//	        "type": "number"
 		//	      }
 		//	    },
@@ -552,6 +565,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		"level":                         "Level",
 		"mobile":                        "Mobile",
 		"password":                      "Password",
+		"persistent_connection":         "PersistentConnection",
 		"phone_config":                  "PhoneConfig",
 		"phone_type":                    "PhoneType",
 		"routing_profile_arn":           "RoutingProfileArn",

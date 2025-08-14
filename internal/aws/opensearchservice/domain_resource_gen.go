@@ -86,6 +86,21 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	    "Enabled": {
 		//	      "type": "boolean"
 		//	    },
+		//	    "IAMFederationOptions": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "RolesKey": {
+		//	          "type": "string"
+		//	        },
+		//	        "SubjectKey": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "InternalUserDatabaseEnabled": {
 		//	      "type": "boolean"
 		//	    },
@@ -190,6 +205,40 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: IAMFederationOptions
+				"iam_federation_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: RolesKey
+						"roles_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SubjectKey
+						"subject_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: InternalUserDatabaseEnabled
@@ -1645,6 +1694,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"engine_version":                  "EngineVersion",
 		"entity_id":                       "EntityId",
 		"hours":                           "Hours",
+		"iam_federation_options":          "IAMFederationOptions",
 		"identity_center_application_arn": "IdentityCenterApplicationARN",
 		"identity_center_instance_arn":    "IdentityCenterInstanceARN",
 		"identity_center_options":         "IdentityCenterOptions",

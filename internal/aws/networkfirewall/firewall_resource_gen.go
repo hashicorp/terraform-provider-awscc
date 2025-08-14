@@ -10,7 +10,6 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
-	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -34,6 +33,63 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::NetworkFirewall::Firewall resource.
 func firewallResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AvailabilityZoneChangeProtection
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"availability_zone_change_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AvailabilityZoneMappings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "AvailabilityZone": {
+		//	        "description": "A AvailabilityZone",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "AvailabilityZone"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"availability_zone_mappings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AvailabilityZone
+					"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A AvailabilityZone",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DeleteProtection
 		// CloudFormation resource type schema:
 		//
@@ -236,7 +292,6 @@ func firewallResource(ctx context.Context) (resource.Resource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "minItems": 1,
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
@@ -255,14 +310,22 @@ func firewallResource(ctx context.Context) (resource.Resource, error) {
 					// Property: SubnetId
 					"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A SubnetId.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Required: true,
-			Validators: []validator.Set{ /*START VALIDATORS*/
-				setvalidator.SizeAtLeast(1),
-			}, /*END VALIDATORS*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -327,6 +390,25 @@ func firewallResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TransitGatewayId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 128,
+		//	  "pattern": "^tgw-[0-9a-z]+$",
+		//	  "type": "string"
+		//	}
+		"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(128),
+				stringvalidator.RegexMatches(regexp.MustCompile("^tgw-[0-9a-z]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -337,13 +419,15 @@ func firewallResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Optional: true,
+			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^vpc-[0-9a-f]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -368,23 +452,27 @@ func firewallResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkFirewall::Firewall").WithTerraformTypeName("awscc_networkfirewall_firewall")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"delete_protection":                 "DeleteProtection",
-		"description":                       "Description",
-		"enabled_analysis_types":            "EnabledAnalysisTypes",
-		"endpoint_ids":                      "EndpointIds",
-		"firewall_arn":                      "FirewallArn",
-		"firewall_id":                       "FirewallId",
-		"firewall_name":                     "FirewallName",
-		"firewall_policy_arn":               "FirewallPolicyArn",
-		"firewall_policy_change_protection": "FirewallPolicyChangeProtection",
-		"ip_address_type":                   "IPAddressType",
-		"key":                               "Key",
-		"subnet_change_protection":          "SubnetChangeProtection",
-		"subnet_id":                         "SubnetId",
-		"subnet_mappings":                   "SubnetMappings",
-		"tags":                              "Tags",
-		"value":                             "Value",
-		"vpc_id":                            "VpcId",
+		"availability_zone":                   "AvailabilityZone",
+		"availability_zone_change_protection": "AvailabilityZoneChangeProtection",
+		"availability_zone_mappings":          "AvailabilityZoneMappings",
+		"delete_protection":                   "DeleteProtection",
+		"description":                         "Description",
+		"enabled_analysis_types":              "EnabledAnalysisTypes",
+		"endpoint_ids":                        "EndpointIds",
+		"firewall_arn":                        "FirewallArn",
+		"firewall_id":                         "FirewallId",
+		"firewall_name":                       "FirewallName",
+		"firewall_policy_arn":                 "FirewallPolicyArn",
+		"firewall_policy_change_protection":   "FirewallPolicyChangeProtection",
+		"ip_address_type":                     "IPAddressType",
+		"key":                                 "Key",
+		"subnet_change_protection":            "SubnetChangeProtection",
+		"subnet_id":                           "SubnetId",
+		"subnet_mappings":                     "SubnetMappings",
+		"tags":                                "Tags",
+		"transit_gateway_id":                  "TransitGatewayId",
+		"value":                               "Value",
+		"vpc_id":                              "VpcId",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

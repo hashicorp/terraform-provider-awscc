@@ -1198,6 +1198,23 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// SourceDBClusterIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: SourceDbClusterResourceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The resource ID of the source DB cluster from which to restore.",
+		//	  "type": "string"
+		//	}
+		"source_db_cluster_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The resource ID of the source DB cluster from which to restore.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// SourceDbClusterResourceId is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: SourceRegion
 		// CloudFormation resource type schema:
 		//
@@ -1461,6 +1478,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		"serverless_v2_scaling_configuration":   "ServerlessV2ScalingConfiguration",
 		"snapshot_identifier":                   "SnapshotIdentifier",
 		"source_db_cluster_identifier":          "SourceDBClusterIdentifier",
+		"source_db_cluster_resource_id":         "SourceDbClusterResourceId",
 		"source_region":                         "SourceRegion",
 		"storage_encrypted":                     "StorageEncrypted",
 		"storage_throughput":                    "StorageThroughput",
@@ -1481,6 +1499,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/RestoreType",
 		"/properties/SnapshotIdentifier",
 		"/properties/SourceDBClusterIdentifier",
+		"/properties/SourceDbClusterResourceId",
 		"/properties/SourceRegion",
 		"/properties/UseLatestRestorableTime",
 	})

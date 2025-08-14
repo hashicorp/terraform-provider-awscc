@@ -1619,7 +1619,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "",
+		//	    "description": "Provides a list of status information for a DB instance.",
 		//	    "properties": {
 		//	      "Message": {
 		//	        "description": "Details of the error if there is an error for the instance. If the instance isn't in an error state, this value is blank.",
@@ -1634,7 +1634,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "StatusType": {
-		//	        "description": "The status type of the DB instance.",
+		//	        "description": "This value is currently \"read replication.\"",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -1648,43 +1648,26 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Message
 					"message": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Details of the error if there is an error for the instance. If the instance isn't in an error state, this value is blank.",
-						Optional:    true,
 						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Normal
 					"normal": schema.BoolAttribute{ /*START ATTRIBUTE*/
 						Description: "Indicates whether the instance is operating normally (TRUE) or is in an error state (FALSE).",
-						Optional:    true,
 						Computed:    true,
-						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-							boolplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The status of the DB instance. For a StatusType of read replica, the values can be replicating, replication stop point set, replication stop point reached, error, stopped, or terminated.",
-						Optional:    true,
 						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: StatusType
 					"status_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The status type of the DB instance.",
-						Optional:    true,
+						Description: "This value is currently \"read replication.\"",
 						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
