@@ -89,7 +89,7 @@ func mitigationActionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	        "RoleArnForLogging": {
 		//	          "description": " The ARN of the IAM role used for logging.",
 		//	          "maxLength": 2048,
-		//	          "minLength": 20,
+		//	          "minLength": 11,
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -106,7 +106,7 @@ func mitigationActionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	        "TopicArn": {
 		//	          "description": "The ARN of the topic to which you want to publish the findings.",
 		//	          "maxLength": 2048,
-		//	          "minLength": 20,
+		//	          "minLength": 11,
 		//	          "type": "string"
 		//	        }
 		//	      },

@@ -37,6 +37,48 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Amazon Resource Name (ARN) of the application.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ApplicationConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The application configuration. Cannot be used when IsService is true.",
+		//	  "properties": {
+		//	    "ContactHandling": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Scope": {
+		//	          "enum": [
+		//	            "CROSS_CONTACTS",
+		//	            "PER_CONTACT"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Scope"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"application_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ContactHandling
+				"contact_handling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Scope
+						"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The application configuration. Cannot be used when IsService is true.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationSourceConfig
 		// CloudFormation resource type schema:
 		//
@@ -123,6 +165,69 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The id of the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: IframeConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The iframe configuration",
+		//	  "properties": {
+		//	    "Allow": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "Sandbox": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"iframe_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Allow
+				"allow": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Sandbox
+				"sandbox": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The iframe configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: InitializationTimeout
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The initialization timeout in milliseconds. Required when IsService is true.",
+		//	  "type": "integer"
+		//	}
+		"initialization_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The initialization timeout in milliseconds. Required when IsService is true.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: IsService
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": false,
+		//	  "description": "Indicates if the application is a service",
+		//	  "type": "boolean"
+		//	}
+		"is_service": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates if the application is a service",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -243,16 +348,24 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_url":                "AccessUrl",
+		"allow":                     "Allow",
 		"application_arn":           "ApplicationArn",
+		"application_config":        "ApplicationConfig",
 		"application_id":            "Id",
 		"application_source_config": "ApplicationSourceConfig",
 		"approved_origins":          "ApprovedOrigins",
+		"contact_handling":          "ContactHandling",
 		"description":               "Description",
 		"external_url_config":       "ExternalUrlConfig",
+		"iframe_config":             "IframeConfig",
+		"initialization_timeout":    "InitializationTimeout",
+		"is_service":                "IsService",
 		"key":                       "Key",
 		"name":                      "Name",
 		"namespace":                 "Namespace",
 		"permissions":               "Permissions",
+		"sandbox":                   "Sandbox",
+		"scope":                     "Scope",
 		"tags":                      "Tags",
 		"value":                     "Value",
 	})

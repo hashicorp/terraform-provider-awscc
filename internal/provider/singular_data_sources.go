@@ -10,7 +10,6 @@
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_aps_rule_groups_namespace -cfschema ../service/cloudformation/schemas/AWS_APS_RuleGroupsNamespace.json -package aps ../aws/aps/rule_groups_namespace_singular_data_source_gen.go ../aws/aps/rule_groups_namespace_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_aps_scraper -cfschema ../service/cloudformation/schemas/AWS_APS_Scraper.json -package aps ../aws/aps/scraper_singular_data_source_gen.go ../aws/aps/scraper_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_aps_workspace -cfschema ../service/cloudformation/schemas/AWS_APS_Workspace.json -package aps ../aws/aps/workspace_singular_data_source_gen.go ../aws/aps/workspace_singular_data_source_gen_test.go
-//go:generate go run generators/singular-data-source/main.go -data-source awscc_arcregionswitch_plan -cfschema ../service/cloudformation/schemas/AWS_ARCRegionSwitch_Plan.json -package arcregionswitch ../aws/arcregionswitch/plan_singular_data_source_gen.go ../aws/arcregionswitch/plan_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_arczonalshift_autoshift_observer_notification_status -cfschema ../service/cloudformation/schemas/AWS_ARCZonalShift_AutoshiftObserverNotificationStatus.json -package arczonalshift ../aws/arczonalshift/autoshift_observer_notification_status_singular_data_source_gen.go ../aws/arczonalshift/autoshift_observer_notification_status_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_arczonalshift_zonal_autoshift_configuration -cfschema ../service/cloudformation/schemas/AWS_ARCZonalShift_ZonalAutoshiftConfiguration.json -package arczonalshift ../aws/arczonalshift/zonal_autoshift_configuration_singular_data_source_gen.go ../aws/arczonalshift/zonal_autoshift_configuration_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_accessanalyzer_analyzer -cfschema ../service/cloudformation/schemas/AWS_AccessAnalyzer_Analyzer.json -package accessanalyzer ../aws/accessanalyzer/analyzer_singular_data_source_gen.go ../aws/accessanalyzer/analyzer_singular_data_source_gen_test.go
@@ -1215,7 +1214,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/appsync"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/apptest"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/aps"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/arcregionswitch"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/arczonalshift"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/athena"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/auditmanager"

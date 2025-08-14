@@ -6,7 +6,6 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_aiops_investigation_groups -cftype AWS::AIOps::InvestigationGroup -package aiops ../aws/aiops/investigation_group_plural_data_source_gen.go ../aws/aiops/investigation_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_aps_scrapers -cftype AWS::APS::Scraper -package aps ../aws/aps/scraper_plural_data_source_gen.go ../aws/aps/scraper_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_aps_workspaces -cftype AWS::APS::Workspace -package aps ../aws/aps/workspace_plural_data_source_gen.go ../aws/aps/workspace_plural_data_source_gen_test.go
-//go:generate go run generators/plural-data-source/main.go -data-source awscc_arcregionswitch_plans -cftype AWS::ARCRegionSwitch::Plan -package arcregionswitch ../aws/arcregionswitch/plan_plural_data_source_gen.go ../aws/arcregionswitch/plan_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_arczonalshift_autoshift_observer_notification_statuses -cftype AWS::ARCZonalShift::AutoshiftObserverNotificationStatus -package arczonalshift ../aws/arczonalshift/autoshift_observer_notification_status_plural_data_source_gen.go ../aws/arczonalshift/autoshift_observer_notification_status_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_arczonalshift_zonal_autoshift_configurations -cftype AWS::ARCZonalShift::ZonalAutoshiftConfiguration -package arczonalshift ../aws/arczonalshift/zonal_autoshift_configuration_plural_data_source_gen.go ../aws/arczonalshift/zonal_autoshift_configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_accessanalyzer_analyzers -cftype AWS::AccessAnalyzer::Analyzer -package accessanalyzer ../aws/accessanalyzer/analyzer_plural_data_source_gen.go ../aws/accessanalyzer/analyzer_plural_data_source_gen_test.go
@@ -932,7 +931,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/appsync"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/apptest"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/aps"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/arcregionswitch"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/arczonalshift"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/athena"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/auditmanager"

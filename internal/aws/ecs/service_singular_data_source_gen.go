@@ -27,7 +27,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "default": "DISABLED",
+		//	  "default": "ENABLED",
 		//	  "description": "Indicates whether to use Availability Zone rebalancing for the service.\n For more information, see [Balancing an Amazon ECS service across Availability Zones](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html) in the *Amazon Elastic Container Service Developer Guide*.",
 		//	  "enum": [
 		//	    "ENABLED",
@@ -134,7 +134,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "BakeTimeInMinutes": {
-		//	      "description": "",
+		//	      "description": "The duration when both blue and green service revisions are running simultaneously after the production traffic has shifted.\n The following rules apply when you don't specify a value:\n  +  For rolling deployments, the value is set to 3 hours (180 minutes).\n  +  When you use an external deployment controller (``EXTERNAL``), or the ACD blue/green deployment controller (``CODE_DEPLOY``), the value is set to 3 hours (180 minutes).\n  +  For all other cases, the value is set to 36 hours (2160 minutes).",
 		//	      "maximum": 1440,
 		//	      "minimum": 0,
 		//	      "type": "integer"
@@ -159,15 +159,17 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "LifecycleHooks": {
-		//	      "description": "",
+		//	      "description": "An array of deployment lifecycle hook objects to run custom logic at specific stages of the deployment lifecycle.",
 		//	      "items": {
 		//	        "additionalProperties": false,
-		//	        "description": "",
+		//	        "description": "A deployment lifecycle hook runs custom logic at specific stages of the deployment process. Currently, you can use Lambda functions as hook targets.\n For more information, see [Lifecycle hooks for Amazon ECS service deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-lifecycle-hooks.html) in the *Amazon Elastic Container Service Developer Guide*.",
 		//	        "properties": {
 		//	          "HookTargetArn": {
+		//	            "description": "The Amazon Resource Name (ARN) of the hook target. Currently, only Lambda function ARNs are supported.\n You must provide this parameter when configuring a deployment lifecycle hook.",
 		//	            "type": "string"
 		//	          },
 		//	          "LifecycleStages": {
+		//	            "description": "The lifecycle stages at which to run the hook. Choose from these valid values:\n  +  RECONCILE_SERVICE\n The reconciliation stage that only happens when you start a new service deployment with more than 1 service revision in an ACTIVE state.\n You can use a lifecycle hook for this stage.\n  +  PRE_SCALE_UP\n The green service revision has not started. The blue service revision is handling 100% of the production traffic. There is no test traffic.\n You can use a lifecycle hook for this stage.\n  +  POST_SCALE_UP\n The green service revision has started. The blue service revision is handling 100% of the production traffic. There is no test traffic.\n You can use a lifecycle hook for this stage.\n  +  TEST_TRAFFIC_SHIFT\n The blue and green service revisions are running. The blue service revision handles 100% of the production traffic. The green service revision is migrating from 0% to 100% of test traffic.\n You can use a lifecycle hook for this stage.\n  +  POST_TEST_TRAFFIC_SHIFT\n The test traffic shift is complete. The green service revision handles 100% of the test traffic.\n You can use a lifecycle hook for this stage.\n  +  PRODUCTION_TRAFFIC_SHIFT\n Production traffic is shifting to the green service revision. The green service revision is migrating from 0% to 100% of production traffic.\n You can use a lifecycle hook for this stage.\n  +  POST_PRODUCTION_TRAFFIC_SHIFT\n The production traffic shift is complete.\n You can use a lifecycle hook for this stage.\n  \n You must provide this parameter when configuring a deployment lifecycle hook.",
 		//	            "items": {
 		//	              "enum": [
 		//	                "RECONCILE_SERVICE",
@@ -184,6 +186,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "array"
 		//	          },
 		//	          "RoleArn": {
+		//	            "description": "The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS permission to call Lambda functions on your behalf.\n For more information, see [Permissions required for Lambda functions in Amazon ECS blue/green deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-permissions.html) in the *Amazon Elastic Container Service Developer Guide*.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -205,7 +208,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "integer"
 		//	    },
 		//	    "Strategy": {
-		//	      "description": "",
+		//	      "description": "The deployment strategy for the service. Choose from these valid values:\n  +  ``ROLLING`` - When you create a service which uses the rolling update (``ROLLING``) deployment strategy, the Amazon ECS service scheduler replaces the currently running tasks with new tasks. The number of tasks that Amazon ECS adds or removes from the service during a rolling update is controlled by the service deployment configuration.\n  +  ``BLUE_GREEN`` - A blue/green deployment strategy (``BLUE_GREEN``) is a release methodology that reduces downtime and risk by running two identical production environments called blue and green. With Amazon ECS blue/green deployments, you can validate new service revisions before directing production traffic to them. This approach provides a safer way to deploy changes with the ability to quickly roll back if needed.",
 		//	      "enum": [
 		//	        "ROLLING",
 		//	        "BLUE_GREEN"
@@ -242,7 +245,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: BakeTimeInMinutes
 				"bake_time_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "",
+					Description: "The duration when both blue and green service revisions are running simultaneously after the production traffic has shifted.\n The following rules apply when you don't specify a value:\n  +  For rolling deployments, the value is set to 3 hours (180 minutes).\n  +  When you use an external deployment controller (``EXTERNAL``), or the ACD blue/green deployment controller (``CODE_DEPLOY``), the value is set to 3 hours (180 minutes).\n  +  For all other cases, the value is set to 36 hours (2160 minutes).",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: DeploymentCircuitBreaker
@@ -268,20 +271,23 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: HookTargetArn
 							"hook_target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The Amazon Resource Name (ARN) of the hook target. Currently, only Lambda function ARNs are supported.\n You must provide this parameter when configuring a deployment lifecycle hook.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: LifecycleStages
 							"lifecycle_stages": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
+								Description: "The lifecycle stages at which to run the hook. Choose from these valid values:\n  +  RECONCILE_SERVICE\n The reconciliation stage that only happens when you start a new service deployment with more than 1 service revision in an ACTIVE state.\n You can use a lifecycle hook for this stage.\n  +  PRE_SCALE_UP\n The green service revision has not started. The blue service revision is handling 100% of the production traffic. There is no test traffic.\n You can use a lifecycle hook for this stage.\n  +  POST_SCALE_UP\n The green service revision has started. The blue service revision is handling 100% of the production traffic. There is no test traffic.\n You can use a lifecycle hook for this stage.\n  +  TEST_TRAFFIC_SHIFT\n The blue and green service revisions are running. The blue service revision handles 100% of the production traffic. The green service revision is migrating from 0% to 100% of test traffic.\n You can use a lifecycle hook for this stage.\n  +  POST_TEST_TRAFFIC_SHIFT\n The test traffic shift is complete. The green service revision handles 100% of the test traffic.\n You can use a lifecycle hook for this stage.\n  +  PRODUCTION_TRAFFIC_SHIFT\n Production traffic is shifting to the green service revision. The green service revision is migrating from 0% to 100% of production traffic.\n You can use a lifecycle hook for this stage.\n  +  POST_PRODUCTION_TRAFFIC_SHIFT\n The production traffic shift is complete.\n You can use a lifecycle hook for this stage.\n  \n You must provide this parameter when configuring a deployment lifecycle hook.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: RoleArn
 							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS permission to call Lambda functions on your behalf.\n For more information, see [Permissions required for Lambda functions in Amazon ECS blue/green deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-permissions.html) in the *Amazon Elastic Container Service Developer Guide*.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "",
+					Description: "An array of deployment lifecycle hook objects to run custom logic at specific stages of the deployment lifecycle.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: MaximumPercent
@@ -296,7 +302,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Strategy
 				"strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
+					Description: "The deployment strategy for the service. Choose from these valid values:\n  +  ``ROLLING`` - When you create a service which uses the rolling update (``ROLLING``) deployment strategy, the Amazon ECS service scheduler replaces the currently running tasks with new tasks. The number of tasks that Amazon ECS adds or removes from the service during a rolling update is controlled by the service deployment configuration.\n  +  ``BLUE_GREEN`` - A blue/green deployment strategy (``BLUE_GREEN``) is a release methodology that reduces downtime and risk by running two identical production environments called blue and green. With Amazon ECS blue/green deployments, you can validate new service revisions before directing production traffic to them. This approach provides a safer way to deploy changes with the ability to quickly roll back if needed.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -308,10 +314,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The deployment controller to use for the service. If no deployment controller is specified, the default value of ``ECS`` is used.",
+		//	  "description": "The deployment controller to use for the service.",
 		//	  "properties": {
 		//	    "Type": {
-		//	      "description": "The deployment controller type to use. There are three deployment controller types available:\n  + ECS The rolling update (ECS) deployment type involves replacing the current running version of the container with the latest version. The number of containers Amazon ECS adds or removes from the service during a rolling update is controlled by adjusting the minimum and maximum number of healthy tasks allowed during a service deployment, as specified in the DeploymentConfiguration. + CODE_DEPLOY The blue/green (CODE_DEPLOY) deployment type uses the blue/green deployment model powered by , which allows you to verify a new deployment of a service before sending production traffic to it. + EXTERNAL The external (EXTERNAL) deployment type enables you to use any third-party deployment controller for full control over the deployment process for an Amazon ECS service.",
+		//	      "description": "The deployment controller type to use.\n The deployment controller is the mechanism that determines how tasks are deployed for your service. The valid options are:\n  +  ECS\n When you create a service which uses the ``ECS`` deployment controller, you can choose between the following deployment strategies:\n  +  ``ROLLING``: When you create a service which uses the *rolling update* (``ROLLING``) deployment strategy, the ECS service scheduler replaces the currently running tasks with new tasks. The number of tasks that ECS adds or removes from the service during a rolling update is controlled by the service deployment configuration. \n Rolling update deployments are best suited for the following scenarios:\n  +  Gradual service updates: You need to update your service incrementally without taking the entire service offline at once.\n  +  Limited resource requirements: You want to avoid the additional resource costs of running two complete environments simultaneously (as required by blue/green deployments).\n  +  Acceptable deployment time: Your application can tolerate a longer deployment process, as rolling updates replace tasks one by one.\n  +  No need for instant roll back: Your service can tolerate a rollback process that takes minutes rather than seconds.\n  +  Simple deployment process: You prefer a straightforward deployment approach without the complexity of managing multiple environments, target groups, and listeners.\n  +  No load balancer requirement: Your service doesn't use or require a load balancer, ALB, NLB, or Service Connect (which are required for blue/green deployments).\n  +  Stateful applications: Your application maintains state that makes it difficult to run two parallel environments.\n  +  Cost sensitivity: You want to minimize deployment costs by not running duplicate environments during deployment.\n  \n Rolling updates are the default deployment strategy for services and provide a balance between deployment safety and resource efficiency for many common application scenarios.\n  +  ``BLUE_GREEN``: A *blue/green* deployment strategy (``BLUE_GREEN``) is a release methodology that reduces downtime and risk by running two identical production environments called blue and green. With ECS blue/green deployments, you can validate new service revisions before directing production traffic to them. This approach provides a safer way to deploy changes with the ability to quickly roll back if needed.\n ECS blue/green deployments are best suited for the following scenarios:\n  +  Service validation: When you need to validate new service revisions before directing production traffic to them\n  +  Zero downtime: When your service requires zero-downtime deployments\n  +  Instant roll back: When you need the ability to quickly roll back if issues are detected\n  +  Load balancer requirement: When your service uses ALB, NLB, or Service Connect\n  \n  \n  +  External\n Use a third-party deployment controller.\n  +  Blue/green deployment (powered by ACD)\n ACD installs an updated version of the application as a new replacement task set and reroutes production traffic from the original application task set to the replacement task set. The original task set is terminated after a successful deployment. Use this deployment controller to verify a new deployment of a service before sending production traffic to it.\n  \n When updating the deployment controller for a service, consider the following depending on the type of migration you're performing.\n  +  If you have a template that contains the ``EXTERNAL`` deployment controller information as well as ``TaskSet`` and ``PrimaryTaskSet`` resources, and you remove the task set resources from the template when updating from ``EXTERNAL`` to ``ECS``, the ``DescribeTaskSet`` and ``DeleteTaskSet`` API calls will return a 400 error after the deployment controller is updated to ``ECS``. This results in a delete failure on the task set resources, even though the stack transitions to ``UPDATE_COMPLETE`` status. For more information, see [Resource removed from stack but not deleted](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-resource-removed-not-deleted) in the CFNlong User Guide. To fix this issue, delete the task sets directly using the ECS``DeleteTaskSet`` API. For more information about how to delete a task set, see [DeleteTaskSet](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteTaskSet.html) in the ECSlong API Reference.\n  +  If you're migrating from ``CODE_DEPLOY`` to ``ECS`` with a new task definition and CFN performs a rollback operation, the ECS``UpdateService`` request fails with the following error:\n Resource handler returned message: \"Invalid request provided: Unable to update task definition on services with a CODE_DEPLOY deployment controller. \n  +  After a successful migration from ``ECS`` to ``EXTERNAL`` deployment controller, you need to manually remove the ``ACTIVE`` task set, because ECS no longer manages the deployment. For information about how to delete a task set, see [DeleteTaskSet](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteTaskSet.html) in the ECSlong API Reference.",
 		//	      "enum": [
 		//	        "CODE_DEPLOY",
 		//	        "ECS",
@@ -326,11 +332,11 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Type
 				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The deployment controller type to use. There are three deployment controller types available:\n  + ECS The rolling update (ECS) deployment type involves replacing the current running version of the container with the latest version. The number of containers Amazon ECS adds or removes from the service during a rolling update is controlled by adjusting the minimum and maximum number of healthy tasks allowed during a service deployment, as specified in the DeploymentConfiguration. + CODE_DEPLOY The blue/green (CODE_DEPLOY) deployment type uses the blue/green deployment model powered by , which allows you to verify a new deployment of a service before sending production traffic to it. + EXTERNAL The external (EXTERNAL) deployment type enables you to use any third-party deployment controller for full control over the deployment process for an Amazon ECS service.",
+					Description: "The deployment controller type to use.\n The deployment controller is the mechanism that determines how tasks are deployed for your service. The valid options are:\n  +  ECS\n When you create a service which uses the ``ECS`` deployment controller, you can choose between the following deployment strategies:\n  +  ``ROLLING``: When you create a service which uses the *rolling update* (``ROLLING``) deployment strategy, the ECS service scheduler replaces the currently running tasks with new tasks. The number of tasks that ECS adds or removes from the service during a rolling update is controlled by the service deployment configuration. \n Rolling update deployments are best suited for the following scenarios:\n  +  Gradual service updates: You need to update your service incrementally without taking the entire service offline at once.\n  +  Limited resource requirements: You want to avoid the additional resource costs of running two complete environments simultaneously (as required by blue/green deployments).\n  +  Acceptable deployment time: Your application can tolerate a longer deployment process, as rolling updates replace tasks one by one.\n  +  No need for instant roll back: Your service can tolerate a rollback process that takes minutes rather than seconds.\n  +  Simple deployment process: You prefer a straightforward deployment approach without the complexity of managing multiple environments, target groups, and listeners.\n  +  No load balancer requirement: Your service doesn't use or require a load balancer, ALB, NLB, or Service Connect (which are required for blue/green deployments).\n  +  Stateful applications: Your application maintains state that makes it difficult to run two parallel environments.\n  +  Cost sensitivity: You want to minimize deployment costs by not running duplicate environments during deployment.\n  \n Rolling updates are the default deployment strategy for services and provide a balance between deployment safety and resource efficiency for many common application scenarios.\n  +  ``BLUE_GREEN``: A *blue/green* deployment strategy (``BLUE_GREEN``) is a release methodology that reduces downtime and risk by running two identical production environments called blue and green. With ECS blue/green deployments, you can validate new service revisions before directing production traffic to them. This approach provides a safer way to deploy changes with the ability to quickly roll back if needed.\n ECS blue/green deployments are best suited for the following scenarios:\n  +  Service validation: When you need to validate new service revisions before directing production traffic to them\n  +  Zero downtime: When your service requires zero-downtime deployments\n  +  Instant roll back: When you need the ability to quickly roll back if issues are detected\n  +  Load balancer requirement: When your service uses ALB, NLB, or Service Connect\n  \n  \n  +  External\n Use a third-party deployment controller.\n  +  Blue/green deployment (powered by ACD)\n ACD installs an updated version of the application as a new replacement task set and reroutes production traffic from the original application task set to the replacement task set. The original task set is terminated after a successful deployment. Use this deployment controller to verify a new deployment of a service before sending production traffic to it.\n  \n When updating the deployment controller for a service, consider the following depending on the type of migration you're performing.\n  +  If you have a template that contains the ``EXTERNAL`` deployment controller information as well as ``TaskSet`` and ``PrimaryTaskSet`` resources, and you remove the task set resources from the template when updating from ``EXTERNAL`` to ``ECS``, the ``DescribeTaskSet`` and ``DeleteTaskSet`` API calls will return a 400 error after the deployment controller is updated to ``ECS``. This results in a delete failure on the task set resources, even though the stack transitions to ``UPDATE_COMPLETE`` status. For more information, see [Resource removed from stack but not deleted](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-resource-removed-not-deleted) in the CFNlong User Guide. To fix this issue, delete the task sets directly using the ECS``DeleteTaskSet`` API. For more information about how to delete a task set, see [DeleteTaskSet](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteTaskSet.html) in the ECSlong API Reference.\n  +  If you're migrating from ``CODE_DEPLOY`` to ``ECS`` with a new task definition and CFN performs a rollback operation, the ECS``UpdateService`` request fails with the following error:\n Resource handler returned message: \"Invalid request provided: Unable to update task definition on services with a CODE_DEPLOY deployment controller. \n  +  After a successful migration from ``ECS`` to ``EXTERNAL`` deployment controller, you need to manually remove the ``ACTIVE`` task set, because ECS no longer manages the deployment. For information about how to delete a task set, see [DeleteTaskSet](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteTaskSet.html) in the ECSlong API Reference.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The deployment controller to use for the service. If no deployment controller is specified, the default value of ``ECS`` is used.",
+			Description: "The deployment controller to use for the service.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DesiredCount
@@ -348,11 +354,11 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies whether to turn on Amazon ECS managed tags for the tasks within the service. For more information, see [Tagging your Amazon ECS resources](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html) in the *Amazon Elastic Container Service Developer Guide*.\n When you use Amazon ECS managed tags, you need to set the ``propagateTags`` request parameter.",
+		//	  "description": "Specifies whether to turn on Amazon ECS managed tags for the tasks within the service. For more information, see [Tagging your Amazon ECS resources](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html) in the *Amazon Elastic Container Service Developer Guide*.\n When you use Amazon ECS managed tags, you must set the ``propagateTags`` request parameter.",
 		//	  "type": "boolean"
 		//	}
 		"enable_ecs_managed_tags": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether to turn on Amazon ECS managed tags for the tasks within the service. For more information, see [Tagging your Amazon ECS resources](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html) in the *Amazon Elastic Container Service Developer Guide*.\n When you use Amazon ECS managed tags, you need to set the ``propagateTags`` request parameter.",
+			Description: "Specifies whether to turn on Amazon ECS managed tags for the tasks within the service. For more information, see [Tagging your Amazon ECS resources](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html) in the *Amazon Elastic Container Service Developer Guide*.\n When you use Amazon ECS managed tags, you must set the ``propagateTags`` request parameter.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableExecuteCommand
@@ -404,18 +410,22 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "properties": {
 		//	      "AdvancedConfiguration": {
 		//	        "additionalProperties": false,
-		//	        "description": "",
+		//	        "description": "The advanced settings for the load balancer used in blue/green deployments. Specify the alternate target group, listener rules, and IAM role required for traffic shifting during blue/green deployments.",
 		//	        "properties": {
 		//	          "AlternateTargetGroupArn": {
+		//	            "description": "The Amazon Resource Name (ARN) of the alternate target group for Amazon ECS blue/green deployments.",
 		//	            "type": "string"
 		//	          },
 		//	          "ProductionListenerRule": {
+		//	            "description": "The Amazon Resource Name (ARN) that that identifies the production listener rule (in the case of an Application Load Balancer) or listener (in the case for an Network Load Balancer) for routing production traffic.",
 		//	            "type": "string"
 		//	          },
 		//	          "RoleArn": {
+		//	            "description": "The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS permission to call the Elastic Load Balancing APIs for you.",
 		//	            "type": "string"
 		//	          },
 		//	          "TestListenerRule": {
+		//	            "description": "The Amazon Resource Name (ARN) that identifies ) that identifies the test listener rule (in the case of an Application Load Balancer) or listener (in the case for an Network Load Balancer) for routing test traffic.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -453,22 +463,26 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: AlternateTargetGroupArn
 							"alternate_target_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The Amazon Resource Name (ARN) of the alternate target group for Amazon ECS blue/green deployments.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: ProductionListenerRule
 							"production_listener_rule": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The Amazon Resource Name (ARN) that that identifies the production listener rule (in the case of an Application Load Balancer) or listener (in the case for an Network Load Balancer) for routing production traffic.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: RoleArn
 							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS permission to call the Elastic Load Balancing APIs for you.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: TestListenerRule
 							"test_listener_rule": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The Amazon Resource Name (ARN) that identifies ) that identifies the test listener rule (in the case of an Application Load Balancer) or listener (in the case for an Network Load Balancer) for routing test traffic.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "",
+						Description: "The advanced settings for the load balancer used in blue/green deployments. Specify the alternate target group, listener rules, and IAM role required for traffic shifting during blue/green deployments.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ContainerName
@@ -819,13 +833,14 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                },
 		//	                "TestTrafficRules": {
 		//	                  "additionalProperties": false,
-		//	                  "description": "",
+		//	                  "description": "The configuration for test traffic routing rules used during blue/green deployments with Amazon ECS Service Connect. This allows you to route a portion of traffic to the new service revision of your service for testing before shifting all production traffic.",
 		//	                  "properties": {
 		//	                    "Header": {
 		//	                      "additionalProperties": false,
-		//	                      "description": "",
+		//	                      "description": "The HTTP header-based routing rules that determine which requests should be routed to the new service version during blue/green deployment testing. These rules provide fine-grained control over test traffic routing based on request headers.",
 		//	                      "properties": {
 		//	                        "Name": {
+		//	                          "description": "",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "Value": {
@@ -833,6 +848,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                          "description": "",
 		//	                          "properties": {
 		//	                            "Exact": {
+		//	                              "description": "",
 		//	                              "type": "string"
 		//	                            }
 		//	                          },
@@ -1007,25 +1023,27 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: Name
 														"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Computed: true,
+															Description: "",
+															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: Value
 														"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 																// Property: Exact
 																"exact": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Computed: true,
+																	Description: "",
+																	Computed:    true,
 																}, /*END ATTRIBUTE*/
 															}, /*END SCHEMA*/
 															Description: "",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
-													Description: "",
+													Description: "The HTTP header-based routing rules that determine which requests should be routed to the new service version during blue/green deployment testing. These rules provide fine-grained control over test traffic routing based on request headers.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
-											Description: "",
+											Description: "The configuration for test traffic routing rules used during blue/green deployments with Amazon ECS Service Connect. This allows you to route a portion of traffic to the new service revision of your service for testing before shifting all production traffic.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/

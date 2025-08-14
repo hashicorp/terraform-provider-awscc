@@ -49,8 +49,10 @@ resource_schema "aws_aps_workspace" {
 }
 
 resource_schema "aws_arcregionswitch_plan" {
-  cloudformation_type_name     = "AWS::ARCRegionSwitch::Plan"
-  suppress_resource_generation = true
+  cloudformation_type_name                 = "AWS::ARCRegionSwitch::Plan"
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_arczonalshift_autoshift_observer_notification_status" {

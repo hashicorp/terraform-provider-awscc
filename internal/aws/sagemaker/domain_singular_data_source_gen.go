@@ -3160,11 +3160,6 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "pattern": "[\\w\\.-]+$",
 		//	          "type": "string"
 		//	        },
-		//	        "SingleSignOnApplicationArn": {
-		//	          "description": "The ARN of the DataZone application managed by SageMaker Unified Studio in the AWS IAM Identity Center.",
-		//	          "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::[0-9]+:application/[a-zA-Z0-9-_.]+/apl-[a-zA-Z0-9]+$",
-		//	          "type": "string"
-		//	        },
 		//	        "StudioWebPortalAccess": {
 		//	          "description": "Sets whether you can access the domain in Amazon SageMaker Studio:\n\nENABLED\nYou can access the domain in Amazon SageMaker Studio. If you migrate the domain to Amazon SageMaker Unified Studio, you can access it in both studio interfaces.\nDISABLED\nYou can't access the domain in Amazon SageMaker Studio. If you migrate the domain to Amazon SageMaker Unified Studio, you can access it only in that studio interface.\n",
 		//	          "enum": [
@@ -3289,11 +3284,6 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 						// Property: ProjectS3Path
 						"project_s3_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The location where Amazon S3 stores temporary execution data and other artifacts for the project that corresponds to the domain.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SingleSignOnApplicationArn
-						"single_sign_on_application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the DataZone application managed by SageMaker Unified Studio in the AWS IAM Identity Center.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: StudioWebPortalAccess
