@@ -1,0 +1,225 @@
+{
+  "typeName": "AWS::ObservabilityAdmin::TelemetryRule",
+  "description": "The AWS::ObservabilityAdmin::TelemetryRule resource defines a CloudWatch Observability Admin Telemetry Rule.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "observabilityadmin:TagResource",
+      "observabilityadmin:UntagResource",
+      "observabilityadmin:ListTagsForResource"
+    ]
+  },
+  "definitions": {
+    "ResourceType": {
+      "description": "Resource Type associated with the Telemetry Rule",
+      "type": "string",
+      "enum": [
+        "AWS::EC2::VPC"
+      ]
+    },
+    "TelemetryType": {
+      "description": "Telemetry Type associated with the Telemetry Rule",
+      "type": "string",
+      "enum": [
+        "Logs"
+      ]
+    },
+    "Scope": {
+      "description": "Selection Criteria on scope level for rule application",
+      "type": "string"
+    },
+    "SelectionCriteria": {
+      "description": "Selection Criteria on resource level for rule application",
+      "type": "string"
+    },
+    "DestinationType": {
+      "description": "Type of telemetry destination",
+      "type": "string",
+      "enum": [
+        "cloud-watch-logs"
+      ]
+    },
+    "DestinationPattern": {
+      "description": "Pattern for telemetry data destination",
+      "type": "string"
+    },
+    "RetentionInDays": {
+      "description": "Number of days to retain the telemetry data in the specified destination",
+      "type": "integer"
+    },
+    "VPCFlowLogParameters": {
+      "description": "Telemetry parameters for VPC Flow logs",
+      "type": "object",
+      "properties": {
+        "LogFormat": {
+          "description": "The fields to include in the flow log record. If you omit this parameter, the flow log is created using the default format.",
+          "type": "string"
+        },
+        "TrafficType": {
+          "description": "The type of traffic captured for the flow log. Default is ALL",
+          "type": "string"
+        },
+        "MaxAggregationInterval": {
+          "description": "The maximum interval of time, in seconds, during which a flow of packets is captured and aggregated into a flow log record. Default is 600s.",
+          "type": "integer"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "TelemetryDestinationConfiguration": {
+      "description": "The destination configuration for telemetry data",
+      "type": "object",
+      "properties": {
+        "DestinationType": {
+          "$ref": "#/definitions/DestinationType"
+        },
+        "DestinationPattern": {
+          "$ref": "#/definitions/DestinationPattern"
+        },
+        "RetentionInDays": {
+          "$ref": "#/definitions/RetentionInDays"
+        },
+        "VPCFlowLogParameters": {
+          "$ref": "#/definitions/VPCFlowLogParameters"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "TelemetryRule": {
+      "description": "The telemetry rule",
+      "type": "object",
+      "properties": {
+        "ResourceType": {
+          "$ref": "#/definitions/ResourceType"
+        },
+        "TelemetryType": {
+          "$ref": "#/definitions/TelemetryType"
+        },
+        "DestinationConfiguration": {
+          "$ref": "#/definitions/TelemetryDestinationConfiguration"
+        },
+        "SelectionCriteria": {
+          "$ref": "#/definitions/SelectionCriteria"
+        }
+      },
+      "required": [
+        "ResourceType",
+        "TelemetryType"
+      ],
+      "additionalProperties": false
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "RuleName": {
+      "description": "The name of the telemetry rule",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[0-9A-Za-z-]+$"
+    },
+    "Rule": {
+      "$ref": "#/definitions/TelemetryRule"
+    },
+    "RuleArn": {
+      "description": "The arn of the telemetry rule",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1011,
+      "pattern": "^arn:aws([a-z0-9\\-]+)?:([a-zA-Z0-9\\-]+):([a-z0-9\\-]+)?:([0-9]{12})?:(.+)$"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "RuleName",
+    "Rule"
+  ],
+  "createOnlyProperties": [
+    "/properties/RuleName"
+  ],
+  "readOnlyProperties": [
+    "/properties/RuleArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/RuleArn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "observabilityadmin:CreateTelemetryRule",
+        "observabilityadmin:GetTelemetryRule",
+        "observabilityadmin:TagResource",
+        "observabilityadmin:ListTagsForResource",
+        "observabilityadmin:GetTelemetryEvaluationStatus",
+        "iam:CreateServiceLinkedRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "observabilityadmin:GetTelemetryRule",
+        "observabilityadmin:ListTagsForResource",
+        "observabilityadmin:GetTelemetryEvaluationStatus"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "observabilityadmin:UpdateTelemetryRule",
+        "observabilityadmin:GetTelemetryRule",
+        "observabilityadmin:TagResource",
+        "observabilityadmin:UntagResource",
+        "observabilityadmin:ListTagsForResource",
+        "observabilityadmin:GetTelemetryEvaluationStatus"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "observabilityadmin:DeleteTelemetryRule",
+        "observabilityadmin:GetTelemetryEvaluationStatus"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "observabilityadmin:ListTelemetryRules",
+        "observabilityadmin:GetTelemetryEvaluationStatus"
+      ]
+    }
+  }
+}

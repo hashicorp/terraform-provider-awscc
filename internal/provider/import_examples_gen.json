@@ -1400,6 +1400,10 @@
         "identifier": ["HostId"]
     },
     {
+        "resource": "awscc_ec2_ip_pool_route_table_association",
+        "identifier": ["AssociationId"]
+    },
+    {
         "resource": "awscc_ec2_ipam",
         "identifier": ["IpamId"]
     },
@@ -1602,6 +1606,10 @@
     {
         "resource": "awscc_ec2_transit_gateway_connect",
         "identifier": ["TransitGatewayAttachmentId"]
+    },
+    {
+        "resource": "awscc_ec2_transit_gateway_connect_peer",
+        "identifier": ["TransitGatewayConnectPeerId"]
     },
     {
         "resource": "awscc_ec2_transit_gateway_multicast_domain",
@@ -3336,6 +3344,14 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_observabilityadmin_organization_telemetry_rule",
+        "identifier": ["RuleArn"]
+    },
+    {
+        "resource": "awscc_observabilityadmin_telemetry_rule",
+        "identifier": ["RuleArn"]
+    },
+    {
         "resource": "awscc_odb_cloud_autonomous_vm_cluster",
         "identifier": ["CloudAutonomousVmClusterArn"]
     },
@@ -4710,6 +4726,10 @@
     {
         "resource": "awscc_workspacesweb_portal",
         "identifier": ["PortalArn"]
+    },
+    {
+        "resource": "awscc_workspacesweb_session_logger",
+        "identifier": ["SessionLoggerArn"]
     },
     {
         "resource": "awscc_workspacesweb_trust_store",
