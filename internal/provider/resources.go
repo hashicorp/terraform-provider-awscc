@@ -862,6 +862,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_opensearchserverless_vpc_endpoint -cfschema ../service/cloudformation/schemas/AWS_OpenSearchServerless_VpcEndpoint.json -package opensearchserverless -- ../aws/opensearchserverless/vpc_endpoint_resource_gen.go ../aws/opensearchserverless/vpc_endpoint_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_opensearchservice_application -cfschema ../service/cloudformation/schemas/AWS_OpenSearchService_Application.json -package opensearchservice -- ../aws/opensearchservice/application_resource_gen.go ../aws/opensearchservice/application_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_opensearchservice_domain -cfschema ../service/cloudformation/schemas/AWS_OpenSearchService_Domain.json -package opensearchservice -- ../aws/opensearchservice/domain_resource_gen.go ../aws/opensearchservice/domain_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_opsworkscm_server -cfschema ../service/cloudformation/schemas/AWS_OpsWorksCM_Server.json -package opsworkscm -- ../aws/opsworkscm/server_resource_gen.go ../aws/opsworkscm/server_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_organizations_account -cfschema ../service/cloudformation/schemas/AWS_Organizations_Account.json -package organizations -- ../aws/organizations/account_resource_gen.go ../aws/organizations/account_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_organizations_organization -cfschema ../service/cloudformation/schemas/AWS_Organizations_Organization.json -package organizations -- ../aws/organizations/organization_resource_gen.go ../aws/organizations/organization_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_organizations_organizational_unit -cfschema ../service/cloudformation/schemas/AWS_Organizations_OrganizationalUnit.json -package organizations -- ../aws/organizations/organizational_unit_resource_gen.go ../aws/organizations/organizational_unit_resource_gen_test.go
@@ -1360,6 +1361,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/omics"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/opensearchserverless"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/opensearchservice"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/opsworkscm"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/organizations"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/osis"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/panorama"

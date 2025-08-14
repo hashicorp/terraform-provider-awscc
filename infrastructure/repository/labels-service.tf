@@ -158,6 +158,7 @@ locals {
     "omics",
     "opensearchserverless",
     "opensearchservice",
+    "opsworksscm",
     "organizations",
     "osis",
     "panorama",

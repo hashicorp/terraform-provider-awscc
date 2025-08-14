@@ -3932,6 +3932,10 @@ resource_schema "aws_opensearchservice_domain" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_opsworkscm_server" {
+  cloudformation_type_name = "AWS::OpsWorksCM::Server"
+}
+
 resource_schema "aws_organizations_account" {
   cloudformation_type_name = "AWS::Organizations::Account"
 }

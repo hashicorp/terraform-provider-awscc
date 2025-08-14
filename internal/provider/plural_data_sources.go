@@ -654,6 +654,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_opensearchserverless_collections -cftype AWS::OpenSearchServerless::Collection -package opensearchserverless ../aws/opensearchserverless/collection_plural_data_source_gen.go ../aws/opensearchserverless/collection_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_opensearchserverless_vpc_endpoints -cftype AWS::OpenSearchServerless::VpcEndpoint -package opensearchserverless ../aws/opensearchserverless/vpc_endpoint_plural_data_source_gen.go ../aws/opensearchserverless/vpc_endpoint_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_opensearchservice_applications -cftype AWS::OpenSearchService::Application -package opensearchservice ../aws/opensearchservice/application_plural_data_source_gen.go ../aws/opensearchservice/application_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_opsworkscm_servers -cftype AWS::OpsWorksCM::Server -package opsworkscm ../aws/opsworkscm/server_plural_data_source_gen.go ../aws/opsworkscm/server_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_organizations_accounts -cftype AWS::Organizations::Account -package organizations ../aws/organizations/account_plural_data_source_gen.go ../aws/organizations/account_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_organizations_organizations -cftype AWS::Organizations::Organization -package organizations ../aws/organizations/organization_plural_data_source_gen.go ../aws/organizations/organization_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_organizations_resource_policies -cftype AWS::Organizations::ResourcePolicy -package organizations ../aws/organizations/resource_policy_plural_data_source_gen.go ../aws/organizations/resource_policy_plural_data_source_gen_test.go
@@ -1072,6 +1073,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/omics"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/opensearchserverless"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/opensearchservice"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/opsworkscm"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/organizations"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/osis"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/panorama"
