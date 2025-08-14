@@ -2,7 +2,6 @@
 
 FEATURES:
 
-* Due to [OpsWorks EOL](https://docs.aws.amazon.com/opsworks/latest/userguide/welcome.html), the `awscc_opsworkscm_server` resource and data sources have been removed
 * **New Data Source:** `awscc_ec2_ip_pool_route_table_association`
 * **New Data Source:** `awscc_ec2_ip_pool_route_table_associations`
 * **New Data Source:** `awscc_ec2_transit_gateway_connect_peer`
