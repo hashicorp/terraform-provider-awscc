@@ -4,7 +4,8 @@
 package identity
 
 const (
-	NameAccountID string = "account_id"
+	NameAccountID = "account_id"
+	NamesRegion   = "region"
 )
 
 // Identifier represents a generic identifier with a name and an optional description.
@@ -24,10 +25,10 @@ func (a Identifiers) AddAccountID() Identifiers {
 	})
 }
 
-func (a Identifiers) AddRegionID(optional bool) Identifiers {
+func (a Identifiers) AddRegionID() Identifiers {
 	return append(a, Identifier{
-		Name:              "region",
+		Name:              NamesRegion,
 		Description:       "The AWS region where the resource is located",
-		OptionalForImport: optional,
+		OptionalForImport: true,
 	})
 }

@@ -331,6 +331,7 @@ type genericResource struct {
 	configValidators        []resource.ConfigValidator // Required attributes validators
 	provider                tfcloudcontrol.Provider
 	primaryIdentifier       identity.Identifiers
+	isGlobal                bool
 }
 
 var (
@@ -718,6 +719,10 @@ func (r *genericResource) Delete(ctx context.Context, request resource.DeleteReq
 func (r *genericResource) IdentitySchema(_ context.Context, _ resource.IdentitySchemaRequest, response *resource.IdentitySchemaResponse) {
 	// add accountID identity
 	pi := r.primaryIdentifier.AddAccountID()
+
+	if !r.isGlobal {
+		pi = pi.AddRegionID()
+	}
 
 	identitySchemaAttributes := make(map[string]identityschema.Attribute)
 	for _, v := range pi {

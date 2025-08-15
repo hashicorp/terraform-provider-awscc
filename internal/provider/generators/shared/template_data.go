@@ -191,6 +191,8 @@ type TemplateData struct {
 	TerraformTypeName             string
 	UpdateTimeoutInMinutes        int
 	WriteOnlyPropertyPaths        []string
+
+	IsGlobal bool
 }
 
 type Resource struct {

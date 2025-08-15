@@ -78,6 +78,7 @@ import {
 #### Optional
 
 - `account_id` (String) The ID of the AWS account
+- `region` (String) The AWS region where the resource is located
 
 In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
 

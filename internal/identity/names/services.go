@@ -1,6 +1,11 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 package names
 
 import (
+	"strings"
+
 	"github.com/hashicorp/hcl/v2/hclsimple"
 )
 
@@ -19,12 +24,21 @@ type Resource struct {
 	HasMutableIdentity bool   `hcl:"has_mutable_identity,optional"`
 }
 
-func ParseServicesFile() (*Config, error) {
+func ParseServicesFile(filename string) (Config, error) {
 	var config Config
-	err := hclsimple.DecodeFile("services.hcl", nil, &config)
+	err := hclsimple.DecodeFile(filename, nil, &config)
 	if err != nil {
-		return nil, err
+		return Config{}, err
 	}
 
-	return &config, nil
+	return config, nil
+}
+
+func GetServiceName(s string) string {
+	parts := strings.Split(s, "::")
+	if len(parts) > 1 {
+		return strings.ToLower(parts[1])
+	}
+
+	return ""
 }
