@@ -119,10 +119,10 @@ var filesData = []fileData{
 		filename:     func(directory string) string { return fmt.Sprintf("%s/import-by-string-id.tf", directory) },
 		templateBody: importExampleTemplateByStringIDBody,
 	},
-	//{
-	//	filename:     func(directory string) string { return fmt.Sprintf("%s/import-by-identity.tf", directory) },
-	//	templateBody: importExampleTemplateByIdentity,
-	//},
+	{
+		filename:     func(directory string) string { return fmt.Sprintf("%s/import-by-identity.tf", directory) },
+		templateBody: importExampleTemplateByIdentity,
+	},
 }
 
 func createFile(g *Generator, filename, templateBody string, templateData *TemplateData) error {
