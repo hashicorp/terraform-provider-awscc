@@ -478,7 +478,7 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 	}
 
 	if !r.isGlobal {
-		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NamesRegion), r.provider.Region(ctx))...)
+		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameRegion), r.provider.Region(ctx))...)
 		if response.Diagnostics.HasError() {
 			return
 		}
@@ -582,7 +582,7 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 	}
 
 	if !r.isGlobal {
-		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NamesRegion), r.provider.Region(ctx))...)
+		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameRegion), r.provider.Region(ctx))...)
 		if response.Diagnostics.HasError() {
 			return
 		}
@@ -806,18 +806,19 @@ func (r *genericResource) ImportState(ctx context.Context, request resource.Impo
 		}
 	}
 
-	var region types.String
-	response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(identity.NamesRegion), &region)...)
+	var accountID types.String
+	response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(identity.NameAccountID), &accountID)...)
 	if response.Diagnostics.HasError() {
 		return
 	}
 
-	if !region.IsNull() {
-		if region.ValueString() != r.provider.Region(ctx) {
+	if !accountID.IsNull() {
+		if accountID.ValueString() != r.provider.AccountID(ctx) {
 			response.Diagnostics.AddError(
-				"Import region mismatch",
-				fmt.Sprintf("Identity region must match the current region of the provider: %s", r.provider.Region(ctx)),
+				"Import account_id mismatch",
+				fmt.Sprintf("Identity account_id must match the current account_id of the provider: %s", r.provider.AccountID(ctx)),
 			)
+			return
 		}
 	}
 
