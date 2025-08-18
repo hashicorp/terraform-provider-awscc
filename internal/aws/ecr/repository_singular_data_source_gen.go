@@ -120,12 +120,67 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The tag mutability setting for the repository. If this parameter is omitted, the default setting of ``MUTABLE`` will be used which will allow image tags to be overwritten. If ``IMMUTABLE`` is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.",
 		//	  "enum": [
 		//	    "MUTABLE",
-		//	    "IMMUTABLE"
+		//	    "IMMUTABLE",
+		//	    "MUTABLE_WITH_EXCLUSION",
+		//	    "IMMUTABLE_WITH_EXCLUSION"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"image_tag_mutability": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The tag mutability setting for the repository. If this parameter is omitted, the default setting of ``MUTABLE`` will be used which will allow image tags to be overwritten. If ``IMMUTABLE`` is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ImageTagMutabilityExclusionFilters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The image tag mutability exclusion filters associated with the repository. These filters specify which image tags can override the repository's default image tag mutability setting.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Overrides the default image tag mutability setting of the repository for image tags that match the specified filters.",
+		//	    "properties": {
+		//	      "ImageTagMutabilityExclusionFilterType": {
+		//	        "description": "Specifies the type of filter to use for excluding image tags from the repository's mutability setting.",
+		//	        "enum": [
+		//	          "WILDCARD"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "ImageTagMutabilityExclusionFilterValue": {
+		//	        "description": "The value to use when filtering image tags.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "^[0-9a-zA-Z._*-]{1,128}",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "ImageTagMutabilityExclusionFilterType",
+		//	      "ImageTagMutabilityExclusionFilterValue"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 5,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"image_tag_mutability_exclusion_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ImageTagMutabilityExclusionFilterType
+					"image_tag_mutability_exclusion_filter_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies the type of filter to use for excluding image tags from the repository's mutability setting.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ImageTagMutabilityExclusionFilterValue
+					"image_tag_mutability_exclusion_filter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value to use when filtering image tags.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The image tag mutability exclusion filters associated with the repository. These filters specify which image tags can override the repository's default image tag mutability setting.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LifecyclePolicy
@@ -277,17 +332,20 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"encryption_type":              "EncryptionType",
 		"image_scanning_configuration": "ImageScanningConfiguration",
 		"image_tag_mutability":         "ImageTagMutability",
-		"key":                          "Key",
-		"kms_key":                      "KmsKey",
-		"lifecycle_policy":             "LifecyclePolicy",
-		"lifecycle_policy_text":        "LifecyclePolicyText",
-		"registry_id":                  "RegistryId",
-		"repository_name":              "RepositoryName",
-		"repository_policy_text":       "RepositoryPolicyText",
-		"repository_uri":               "RepositoryUri",
-		"scan_on_push":                 "ScanOnPush",
-		"tags":                         "Tags",
-		"value":                        "Value",
+		"image_tag_mutability_exclusion_filter_type":  "ImageTagMutabilityExclusionFilterType",
+		"image_tag_mutability_exclusion_filter_value": "ImageTagMutabilityExclusionFilterValue",
+		"image_tag_mutability_exclusion_filters":      "ImageTagMutabilityExclusionFilters",
+		"key":                                         "Key",
+		"kms_key":                                     "KmsKey",
+		"lifecycle_policy":                            "LifecyclePolicy",
+		"lifecycle_policy_text":                       "LifecyclePolicyText",
+		"registry_id":                                 "RegistryId",
+		"repository_name":                             "RepositoryName",
+		"repository_policy_text":                      "RepositoryPolicyText",
+		"repository_uri":                              "RepositoryUri",
+		"scan_on_push":                                "ScanOnPush",
+		"tags":                                        "Tags",
+		"value":                                       "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

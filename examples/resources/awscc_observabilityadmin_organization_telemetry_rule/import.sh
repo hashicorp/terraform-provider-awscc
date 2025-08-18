@@ -1,0 +1,1 @@
+$ terraform import awscc_observabilityadmin_organization_telemetry_rule.example "rule_arn"

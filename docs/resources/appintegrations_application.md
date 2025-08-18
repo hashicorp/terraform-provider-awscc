@@ -53,6 +53,10 @@ resource "awscc_appintegrations_application" "example" {
 
 ### Optional
 
+- `application_config` (Attributes) The application configuration. Cannot be used when IsService is true. (see [below for nested schema](#nestedatt--application_config))
+- `iframe_config` (Attributes) The iframe configuration (see [below for nested schema](#nestedatt--iframe_config))
+- `initialization_timeout` (Number) The initialization timeout in milliseconds. Required when IsService is true.
+- `is_service` (Boolean) Indicates if the application is a service
 - `permissions` (List of String) The configuration of events or requests that the application has access to.
 - `tags` (Attributes List) The tags (keys and values) associated with the application. (see [below for nested schema](#nestedatt--tags))
 
@@ -80,6 +84,31 @@ Optional:
 
 - `approved_origins` (List of String)
 
+
+
+<a id="nestedatt--application_config"></a>
+### Nested Schema for `application_config`
+
+Optional:
+
+- `contact_handling` (Attributes) (see [below for nested schema](#nestedatt--application_config--contact_handling))
+
+<a id="nestedatt--application_config--contact_handling"></a>
+### Nested Schema for `application_config.contact_handling`
+
+Optional:
+
+- `scope` (String)
+
+
+
+<a id="nestedatt--iframe_config"></a>
+### Nested Schema for `iframe_config`
+
+Optional:
+
+- `allow` (List of String)
+- `sandbox` (List of String)
 
 
 <a id="nestedatt--tags"></a>

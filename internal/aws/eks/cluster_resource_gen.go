@@ -218,6 +218,21 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DeletionProtection
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Set this value to true to enable deletion protection for the cluster.",
+		//	  "type": "boolean"
+		//	}
+		"deletion_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Set this value to true to enable deletion protection for the cluster.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EncryptionConfig
 		// CloudFormation resource type schema:
 		//
@@ -1180,6 +1195,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"compute_config":                              "ComputeConfig",
 		"control_plane_instance_type":                 "ControlPlaneInstanceType",
 		"control_plane_placement":                     "ControlPlanePlacement",
+		"deletion_protection":                         "DeletionProtection",
 		"elastic_load_balancing":                      "ElasticLoadBalancing",
 		"enabled":                                     "Enabled",
 		"enabled_types":                               "EnabledTypes",

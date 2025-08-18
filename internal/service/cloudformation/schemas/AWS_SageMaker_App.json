@@ -194,7 +194,6 @@
     "/properties/AppType",
     "/properties/DomainId",
     "/properties/UserProfileName",
-    "/properties/Tags",
     "/properties/ResourceSpec"
   ],
   "primaryIdentifier": [
@@ -223,6 +222,14 @@
         "sagemaker:ListTags"
       ]
     },
+    "update": {
+      "permissions": [
+        "sagemaker:DescribeApp",
+        "sagemaker:AddTags",
+        "sagemaker:DeleteTags",
+        "sagemaker:ListTags"
+      ]
+    },
     "delete": {
       "permissions": [
         "sagemaker:DeleteApp",
@@ -241,7 +248,7 @@
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
-    "tagUpdatable": false,
+    "tagUpdatable": true,
     "cloudFormationSystemTags": false,
     "tagProperty": "/properties/Tags",
     "permissions": [

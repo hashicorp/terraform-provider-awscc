@@ -1390,11 +1390,94 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The type of the asset model (ASSET_MODEL OR COMPONENT_MODEL)",
+		//	  "description": "The type of the asset model (ASSET_MODEL OR COMPONENT_MODEL or INTERFACE)",
 		//	  "type": "string"
 		//	}
 		"asset_model_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the asset model (ASSET_MODEL OR COMPONENT_MODEL)",
+			Description: "The type of the asset model (ASSET_MODEL OR COMPONENT_MODEL or INTERFACE)",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EnforcedAssetModelInterfaceRelationships
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "a list of asset model and interface relationships",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Contains information about enforced interface hierarchy and asset model hierarchy",
+		//	    "properties": {
+		//	      "InterfaceAssetModelId": {
+		//	        "description": "The ID of the interface that is enforced to the asset model",
+		//	        "type": "string"
+		//	      },
+		//	      "PropertyMappings": {
+		//	        "description": "Contains information about enforced interface property and asset model property",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "Contains information about enforced interface property and asset model property",
+		//	          "properties": {
+		//	            "AssetModelPropertyExternalId": {
+		//	              "description": "The external ID of the enforced asset model property",
+		//	              "type": "string"
+		//	            },
+		//	            "AssetModelPropertyLogicalId": {
+		//	              "description": "The logical ID of the enforced asset model property",
+		//	              "type": "string"
+		//	            },
+		//	            "InterfaceAssetModelPropertyExternalId": {
+		//	              "description": "The external ID of the enforced interface property",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "InterfaceAssetModelPropertyExternalId"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"enforced_asset_model_interface_relationships": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: InterfaceAssetModelId
+					"interface_asset_model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID of the interface that is enforced to the asset model",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: PropertyMappings
+					"property_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AssetModelPropertyExternalId
+								"asset_model_property_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The external ID of the enforced asset model property",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: AssetModelPropertyLogicalId
+								"asset_model_property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The logical ID of the enforced asset model property",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: InterfaceAssetModelPropertyExternalId
+								"interface_asset_model_property_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The external ID of the enforced interface property",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "Contains information about enforced interface property and asset model property",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "a list of asset model and interface relationships",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -1454,40 +1537,46 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::AssetModel").WithTerraformTypeName("awscc_iotsitewise_asset_model")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"asset_model_arn":              "AssetModelArn",
-		"asset_model_composite_models": "AssetModelCompositeModels",
-		"asset_model_description":      "AssetModelDescription",
-		"asset_model_external_id":      "AssetModelExternalId",
-		"asset_model_hierarchies":      "AssetModelHierarchies",
-		"asset_model_id":               "AssetModelId",
-		"asset_model_name":             "AssetModelName",
-		"asset_model_properties":       "AssetModelProperties",
-		"asset_model_type":             "AssetModelType",
-		"attribute":                    "Attribute",
-		"child_asset_model_id":         "ChildAssetModelId",
-		"composed_asset_model_id":      "ComposedAssetModelId",
-		"composite_model_properties":   "CompositeModelProperties",
-		"data_type":                    "DataType",
-		"data_type_spec":               "DataTypeSpec",
-		"default_value":                "DefaultValue",
-		"description":                  "Description",
-		"expression":                   "Expression",
-		"external_id":                  "ExternalId",
-		"hierarchy_external_id":        "HierarchyExternalId",
-		"hierarchy_id":                 "HierarchyId",
-		"hierarchy_logical_id":         "HierarchyLogicalId",
-		"id":                           "Id",
-		"interval":                     "Interval",
-		"key":                          "Key",
-		"logical_id":                   "LogicalId",
-		"metric":                       "Metric",
-		"name":                         "Name",
-		"offset":                       "Offset",
+		"asset_model_arn":                              "AssetModelArn",
+		"asset_model_composite_models":                 "AssetModelCompositeModels",
+		"asset_model_description":                      "AssetModelDescription",
+		"asset_model_external_id":                      "AssetModelExternalId",
+		"asset_model_hierarchies":                      "AssetModelHierarchies",
+		"asset_model_id":                               "AssetModelId",
+		"asset_model_name":                             "AssetModelName",
+		"asset_model_properties":                       "AssetModelProperties",
+		"asset_model_property_external_id":             "AssetModelPropertyExternalId",
+		"asset_model_property_logical_id":              "AssetModelPropertyLogicalId",
+		"asset_model_type":                             "AssetModelType",
+		"attribute":                                    "Attribute",
+		"child_asset_model_id":                         "ChildAssetModelId",
+		"composed_asset_model_id":                      "ComposedAssetModelId",
+		"composite_model_properties":                   "CompositeModelProperties",
+		"data_type":                                    "DataType",
+		"data_type_spec":                               "DataTypeSpec",
+		"default_value":                                "DefaultValue",
+		"description":                                  "Description",
+		"enforced_asset_model_interface_relationships": "EnforcedAssetModelInterfaceRelationships",
+		"expression":                                   "Expression",
+		"external_id":                                  "ExternalId",
+		"hierarchy_external_id":                        "HierarchyExternalId",
+		"hierarchy_id":                                 "HierarchyId",
+		"hierarchy_logical_id":                         "HierarchyLogicalId",
+		"id":                                           "Id",
+		"interface_asset_model_id":                     "InterfaceAssetModelId",
+		"interface_asset_model_property_external_id":   "InterfaceAssetModelPropertyExternalId",
+		"interval":                                     "Interval",
+		"key":                                          "Key",
+		"logical_id":                                   "LogicalId",
+		"metric":                                       "Metric",
+		"name":                                         "Name",
+		"offset":                                       "Offset",
 		"parent_asset_model_composite_model_external_id": "ParentAssetModelCompositeModelExternalId",
 		"path":                 "Path",
 		"property_external_id": "PropertyExternalId",
 		"property_id":          "PropertyId",
 		"property_logical_id":  "PropertyLogicalId",
+		"property_mappings":    "PropertyMappings",
 		"property_path":        "PropertyPath",
 		"tags":                 "Tags",
 		"transform":            "Transform",

@@ -54,6 +54,84 @@
           "default": [
             "AUDIO_VIDEO"
           ]
+        },
+        "HlsConfiguration": {
+          "description": "HLS configuration object for individual participant recording.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ParticipantRecordingHlsConfiguration": {
+              "description": "An object representing a configuration of participant HLS recordings for individual participant recording.",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "TargetSegmentDurationSeconds": {
+                  "description": "Defines the target duration for recorded segments generated when recording a stage participant. Segments may have durations longer than the specified value when needed to ensure each segment begins with a keyframe. Default: 6.",
+                  "type": "integer",
+                  "minimum": 2,
+                  "maximum": 10,
+                  "default": 6
+                }
+              }
+            }
+          },
+          "required": []
+        },
+        "RecordingReconnectWindowSeconds": {
+          "description": "If a stage publisher disconnects and then reconnects within the specified interval, the multiple recordings will be considered a single recording and merged together. The default value is 0, which disables merging.",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 300,
+          "default": 0
+        },
+        "ThumbnailConfiguration": {
+          "description": "A complex type that allows you to enable/disable the recording of thumbnails for individual participant recording and modify the interval at which thumbnails are generated for the live session.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ParticipantThumbnailConfiguration": {
+              "description": "An object representing a configuration of thumbnails for recorded video from an individual participant.",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "RecordingMode": {
+                  "description": "Thumbnail recording mode. Default: DISABLED.",
+                  "type": "string",
+                  "enum": [
+                    "INTERVAL",
+                    "DISABLED"
+                  ],
+                  "default": "INTERVAL"
+                },
+                "Storage": {
+                  "description": "Indicates the format in which thumbnails are recorded. SEQUENTIAL records all generated thumbnails in a serial manner, to the media/thumbnails/high directory. LATEST saves the latest thumbnail in media/latest_thumbnail/high/thumb.jpg and overwrites it at the interval specified by targetIntervalSeconds. You can enable both SEQUENTIAL and LATEST. Default: SEQUENTIAL.",
+                  "type": "array",
+                  "minItems": 0,
+                  "maxItems": 2,
+                  "uniqueItems": true,
+                  "insertionOrder": false,
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "SEQUENTIAL",
+                      "LATEST"
+                    ]
+                  },
+                  "default": [
+                    "SEQUENTIAL"
+                  ]
+                },
+                "TargetIntervalSeconds": {
+                  "description": "The targeted thumbnail-generation interval in seconds. This is configurable only if recordingMode is INTERVAL. Default: 60.",
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 86400,
+                  "default": 60
+                }
+              }
+            }
+          },
+          "required": []
         }
       },
       "required": [

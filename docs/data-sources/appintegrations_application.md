@@ -22,13 +22,33 @@ Data Source schema for AWS::AppIntegrations::Application
 ### Read-Only
 
 - `application_arn` (String) The Amazon Resource Name (ARN) of the application.
+- `application_config` (Attributes) The application configuration. Cannot be used when IsService is true. (see [below for nested schema](#nestedatt--application_config))
 - `application_id` (String) The id of the application.
 - `application_source_config` (Attributes) Application source config (see [below for nested schema](#nestedatt--application_source_config))
 - `description` (String) The application description.
+- `iframe_config` (Attributes) The iframe configuration (see [below for nested schema](#nestedatt--iframe_config))
+- `initialization_timeout` (Number) The initialization timeout in milliseconds. Required when IsService is true.
+- `is_service` (Boolean) Indicates if the application is a service
 - `name` (String) The name of the application.
 - `namespace` (String) The namespace of the application.
 - `permissions` (List of String) The configuration of events or requests that the application has access to.
 - `tags` (Attributes List) The tags (keys and values) associated with the application. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--application_config"></a>
+### Nested Schema for `application_config`
+
+Read-Only:
+
+- `contact_handling` (Attributes) (see [below for nested schema](#nestedatt--application_config--contact_handling))
+
+<a id="nestedatt--application_config--contact_handling"></a>
+### Nested Schema for `application_config.contact_handling`
+
+Read-Only:
+
+- `scope` (String)
+
+
 
 <a id="nestedatt--application_source_config"></a>
 ### Nested Schema for `application_source_config`
@@ -45,6 +65,15 @@ Read-Only:
 - `access_url` (String)
 - `approved_origins` (List of String)
 
+
+
+<a id="nestedatt--iframe_config"></a>
+### Nested Schema for `iframe_config`
+
+Read-Only:
+
+- `allow` (List of String)
+- `sandbox` (List of String)
 
 
 <a id="nestedatt--tags"></a>

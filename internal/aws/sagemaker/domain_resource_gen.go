@@ -5084,11 +5084,6 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	          "pattern": "[\\w\\.-]+$",
 		//	          "type": "string"
 		//	        },
-		//	        "SingleSignOnApplicationArn": {
-		//	          "description": "The ARN of the DataZone application managed by SageMaker Unified Studio in the AWS IAM Identity Center.",
-		//	          "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::[0-9]+:application/[a-zA-Z0-9-_.]+/apl-[a-zA-Z0-9]+$",
-		//	          "type": "string"
-		//	        },
 		//	        "StudioWebPortalAccess": {
 		//	          "description": "Sets whether you can access the domain in Amazon SageMaker Studio:\n\nENABLED\nYou can access the domain in Amazon SageMaker Studio. If you migrate the domain to Amazon SageMaker Unified Studio, you can access it in both studio interfaces.\nDISABLED\nYou can't access the domain in Amazon SageMaker Studio. If you migrate the domain to Amazon SageMaker Unified Studio, you can access it only in that studio interface.\n",
 		//	          "enum": [
@@ -5431,18 +5426,6 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 100),
 								stringvalidator.RegexMatches(regexp.MustCompile("[\\w\\.-]+$"), ""),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: SingleSignOnApplicationArn
-						"single_sign_on_application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the DataZone application managed by SageMaker Unified Studio in the AWS IAM Identity Center.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::[0-9]+:application/[a-zA-Z0-9-_.]+/apl-[a-zA-Z0-9]+$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),

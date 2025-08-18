@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_transit_gateway_connect_peer.example "transit_gateway_connect_peer_id"

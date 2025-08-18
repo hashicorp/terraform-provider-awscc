@@ -374,6 +374,9 @@
         "InstanceMarketOptions": {
           "$ref": "#/definitions/ServiceManagedEc2InstanceMarketOptions"
         },
+        "VpcConfiguration": {
+          "$ref": "#/definitions/VpcConfiguration"
+        },
         "StorageProfileId": {
           "type": "string",
           "pattern": "^sp-[0-9a-f]{32}$"
@@ -516,6 +519,20 @@
         "Min"
       ],
       "additionalProperties": false
+    },
+    "VpcConfiguration": {
+      "type": "object",
+      "properties": {
+        "ResourceConfigurationArns": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 2048,
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -624,7 +641,13 @@
         "identitystore:ListGroupMembershipsForMember",
         "logs:CreateLogGroup",
         "deadline:TagResource",
-        "deadline:ListTagsForResource"
+        "deadline:ListTagsForResource",
+        "vpc-lattice:GetResourceGateway",
+        "vpc-lattice:GetResourceConfiguration",
+        "ec2:CreateVpcEndpoint",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeVpcs"
       ]
     },
     "read": {
@@ -642,7 +665,13 @@
         "identitystore:ListGroupMembershipsForMember",
         "deadline:TagResource",
         "deadline:UntagResource",
-        "deadline:ListTagsForResource"
+        "deadline:ListTagsForResource",
+        "vpc-lattice:GetResourceGateway",
+        "vpc-lattice:GetResourceConfiguration",
+        "ec2:CreateVpcEndpoint",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeVpcs"
       ]
     },
     "delete": {

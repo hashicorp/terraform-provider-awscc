@@ -257,6 +257,21 @@
         }
       }
     },
+    "IAMFederationOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        },
+        "RolesKey": {
+          "type": "string"
+        },
+        "SubjectKey": {
+          "type": "string"
+        }
+      }
+    },
     "AdvancedSecurityOptionsInput": {
       "type": "object",
       "additionalProperties": false,
@@ -278,6 +293,9 @@
         },
         "JWTOptions": {
           "$ref": "#/definitions/JWTOptions"
+        },
+        "IAMFederationOptions": {
+          "$ref": "#/definitions/IAMFederationOptions"
         },
         "AnonymousAuthDisableDate": {
           "type": "string"
@@ -582,6 +600,9 @@
     "IdentityCenterOptions": {
       "$ref": "#/definitions/IdentityCenterOptions"
     }
+  },
+  "propertyTransform": {
+    "/properties/EncryptionAtRestOptions/KmsKeyId": "$split(EncryptionAtRestOptions.KmsKeyId, \"/\")[-1] $OR EncryptionAtRestOptions.KmsKeyId"
   },
   "tagging": {
     "taggable": true,

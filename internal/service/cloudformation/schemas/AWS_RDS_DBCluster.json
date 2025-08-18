@@ -254,6 +254,10 @@
       "description": "When restoring a DB cluster to a point in time, the identifier of the source DB cluster from which to restore.\n Constraints:\n  +  Must match the identifier of an existing DBCluster.\n  +  Cannot be specified if ``SourceDbClusterResourceId`` is specified. You must specify either ``SourceDBClusterIdentifier`` or ``SourceDbClusterResourceId``, but not both.\n  \n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
       "type": "string"
     },
+    "SourceDbClusterResourceId": {
+      "description": "The resource ID of the source DB cluster from which to restore.",
+      "type": "string"
+    },
     "SourceRegion": {
       "description": "The AWS Region which contains the source DB cluster when replicating a DB cluster. For example, ``us-east-1``. \n Valid for: Aurora DB clusters only",
       "type": "string"
@@ -468,6 +472,7 @@
     "/properties/RestoreType",
     "/properties/SnapshotIdentifier",
     "/properties/SourceDBClusterIdentifier",
+    "/properties/SourceDbClusterResourceId",
     "/properties/SourceRegion",
     "/properties/StorageEncrypted",
     "/properties/UseLatestRestorableTime"
@@ -489,6 +494,7 @@
     "/properties/RestoreType",
     "/properties/SnapshotIdentifier",
     "/properties/SourceDBClusterIdentifier",
+    "/properties/SourceDbClusterResourceId",
     "/properties/SourceRegion",
     "/properties/UseLatestRestorableTime"
   ],
@@ -502,6 +508,7 @@
         "rds:CreateDBCluster",
         "rds:CreateDBInstance",
         "rds:DescribeDBClusters",
+        "rds:DescribeDBClusterAutomatedBackups",
         "rds:DescribeDBClusterSnapshots",
         "rds:DescribeDBSnapshots",
         "rds:DescribeEvents",

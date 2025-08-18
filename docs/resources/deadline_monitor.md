@@ -22,6 +22,10 @@ Definition of AWS::Deadline::Monitor Resource Type
 - `role_arn` (String)
 - `subdomain` (String)
 
+### Optional
+
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+
 ### Read-Only
 
 - `arn` (String)
@@ -29,6 +33,14 @@ Definition of AWS::Deadline::Monitor Resource Type
 - `identity_center_application_arn` (String)
 - `monitor_id` (String)
 - `url` (String)
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

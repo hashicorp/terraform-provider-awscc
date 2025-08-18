@@ -64,12 +64,22 @@ Read-Only:
 
 Read-Only:
 
+- `dependencies` (Attributes List) List of Lambda layers to attach to the canary (see [below for nested schema](#nestedatt--code--dependencies))
 - `handler` (String)
 - `s3_bucket` (String)
 - `s3_key` (String)
 - `s3_object_version` (String)
 - `script` (String)
 - `source_location_arn` (String)
+
+<a id="nestedatt--code--dependencies"></a>
+### Nested Schema for `code.dependencies`
+
+Read-Only:
+
+- `reference` (String) ARN of the Lambda layer
+- `type` (String) Type of dependency
+
 
 
 <a id="nestedatt--run_config"></a>

@@ -647,7 +647,6 @@ resource "awscc_rds_db_instance" "this" {
   +  For DB instances in Amazon Aurora clusters, don't specify this property. Amazon RDS automatically assigns writer and reader DB instances.
 - `source_dbi_resource_id` (String) The resource ID of the source DB instance from which to restore.
 - `source_region` (String) The ID of the region that contains the source DB instance for the read replica.
-- `status_infos` (Attributes List) (see [below for nested schema](#nestedatt--status_infos))
 - `storage_encrypted` (Boolean) A value that indicates whether the DB instance is encrypted. By default, it isn't encrypted.
  If you specify the ``KmsKeyId`` property, then you must enable encryption.
  If you specify the ``SourceDBInstanceIdentifier`` or ``SourceDbiResourceId`` property, don't specify this property. The value is inherited from the source DB instance, and if the DB instance is encrypted, the specified ``KmsKeyId`` property is used.
@@ -712,6 +711,7 @@ resource "awscc_rds_db_instance" "this" {
 - `read_replica_db_instance_identifiers` (List of String)
 - `resume_full_automation_mode_time` (String)
 - `secondary_availability_zone` (String)
+- `status_infos` (Attributes List) (see [below for nested schema](#nestedatt--status_infos))
 
 <a id="nestedatt--associated_roles"></a>
 ### Nested Schema for `associated_roles`
@@ -741,17 +741,6 @@ Optional:
 
 - `name` (String) The name of the processor feature. Valid names are ``coreCount`` and ``threadsPerCore``.
 - `value` (String) The value of a processor feature.
-
-
-<a id="nestedatt--status_infos"></a>
-### Nested Schema for `status_infos`
-
-Optional:
-
-- `message` (String) Details of the error if there is an error for the instance. If the instance isn't in an error state, this value is blank.
-- `normal` (Boolean) Indicates whether the instance is operating normally (TRUE) or is in an error state (FALSE).
-- `status` (String) The status of the DB instance. For a StatusType of read replica, the values can be replicating, replication stop point set, replication stop point reached, error, stopped, or terminated.
-- `status_type` (String) The status type of the DB instance.
 
 
 <a id="nestedatt--tags"></a>
@@ -790,6 +779,17 @@ Read-Only:
 - `address` (String) Specifies the DNS address of the DB instance.
 - `hosted_zone_id` (String) Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
 - `port` (String) Specifies the port that the database engine is listening on.
+
+
+<a id="nestedatt--status_infos"></a>
+### Nested Schema for `status_infos`
+
+Read-Only:
+
+- `message` (String) Details of the error if there is an error for the instance. If the instance isn't in an error state, this value is blank.
+- `normal` (Boolean) Indicates whether the instance is operating normally (TRUE) or is in an error state (FALSE).
+- `status` (String) The status of the DB instance. For a StatusType of read replica, the values can be replicating, replication stop point set, replication stop point reached, error, stopped, or terminated.
+- `status_type` (String) This value is currently "read replication."
 
 ## Import
 

@@ -66,6 +66,21 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "Enabled": {
 		//	      "type": "boolean"
 		//	    },
+		//	    "IAMFederationOptions": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "RolesKey": {
+		//	          "type": "string"
+		//	        },
+		//	        "SubjectKey": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "InternalUserDatabaseEnabled": {
 		//	      "type": "boolean"
 		//	    },
@@ -159,6 +174,24 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: IAMFederationOptions
+				"iam_federation_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RolesKey
+						"roles_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SubjectKey
+						"subject_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: InternalUserDatabaseEnabled
@@ -1159,6 +1192,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"engine_version":                  "EngineVersion",
 		"entity_id":                       "EntityId",
 		"hours":                           "Hours",
+		"iam_federation_options":          "IAMFederationOptions",
 		"identity_center_application_arn": "IdentityCenterApplicationARN",
 		"identity_center_instance_arn":    "IdentityCenterInstanceARN",
 		"identity_center_options":         "IdentityCenterOptions",

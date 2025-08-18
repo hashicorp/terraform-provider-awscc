@@ -54,6 +54,7 @@ Required:
 
 Optional:
 
+- `dependencies` (Attributes List) List of Lambda layers to attach to the canary (see [below for nested schema](#nestedatt--code--dependencies))
 - `s3_bucket` (String)
 - `s3_key` (String)
 - `s3_object_version` (String)
@@ -62,6 +63,15 @@ Optional:
 Read-Only:
 
 - `source_location_arn` (String)
+
+<a id="nestedatt--code--dependencies"></a>
+### Nested Schema for `code.dependencies`
+
+Optional:
+
+- `reference` (String) ARN of the Lambda layer
+- `type` (String) Type of dependency
+
 
 
 <a id="nestedatt--schedule"></a>

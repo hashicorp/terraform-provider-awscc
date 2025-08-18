@@ -1,0 +1,289 @@
+{
+  "typeName": "AWS::WorkSpacesWeb::SessionLogger",
+  "description": "Definition of AWS::WorkSpacesWeb::SessionLogger Resource Type",
+  "definitions": {
+    "EncryptionContextMap": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 131072,
+          "minLength": 0,
+          "pattern": "^[\\s\\S]*$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Event": {
+      "type": "string",
+      "enum": [
+        "WebsiteInteract",
+        "FileDownloadFromSecureBrowserToRemoteDisk",
+        "FileTransferFromRemoteToLocalDisk",
+        "FileTransferFromLocalToRemoteDisk",
+        "FileUploadFromRemoteDiskToSecureBrowser",
+        "ContentPasteToWebsite",
+        "ContentTransferFromLocalToRemoteClipboard",
+        "ContentCopyFromWebsite",
+        "UrlLoad",
+        "TabOpen",
+        "TabClose",
+        "PrintJobSubmit",
+        "SessionConnect",
+        "SessionStart",
+        "SessionDisconnect",
+        "SessionEnd",
+        "UrlBlockByContentFilter"
+      ]
+    },
+    "EventFilter": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "All",
+          "properties": {
+            "All": {
+              "$ref": "#/definitions/Unit"
+            }
+          },
+          "required": [
+            "All"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Include",
+          "properties": {
+            "Include": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Event"
+              },
+              "maxItems": 100,
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "Include"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FolderStructure": {
+      "type": "string",
+      "enum": [
+        "Flat",
+        "NestedByDate"
+      ]
+    },
+    "LogConfiguration": {
+      "type": "object",
+      "properties": {
+        "S3": {
+          "$ref": "#/definitions/S3LogConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "LogFileFormat": {
+      "type": "string",
+      "enum": [
+        "JSONLines",
+        "Json"
+      ]
+    },
+    "S3LogConfiguration": {
+      "type": "object",
+      "properties": {
+        "Bucket": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"
+        },
+        "KeyPrefix": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^[\\d\\w\\-_/!().*']+$"
+        },
+        "BucketOwner": {
+          "type": "string",
+          "pattern": "^[0-9]{12}$"
+        },
+        "LogFileFormat": {
+          "$ref": "#/definitions/LogFileFormat"
+        },
+        "FolderStructure": {
+          "$ref": "#/definitions/FolderStructure"
+        }
+      },
+      "required": [
+        "Bucket",
+        "FolderStructure",
+        "LogFileFormat"
+      ],
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+        },
+        "Value": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 0,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "Unit": {
+      "type": "object",
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "AdditionalEncryptionContext": {
+      "$ref": "#/definitions/EncryptionContextMap"
+    },
+    "AssociatedPortalArns": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 2048,
+        "minLength": 20,
+        "pattern": "^arn:[\\w+=\\/,.@-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\\/[a-fA-F0-9\\-]{36})+$"
+      }
+    },
+    "CreationDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "CustomerManagedKey": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 20,
+      "pattern": "^arn:[\\w+=\\/,.@-]+:kms:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:key\\/[a-zA-Z0-9-]+$"
+    },
+    "DisplayName": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[ _\\-\\d\\w]+$"
+    },
+    "EventFilter": {
+      "$ref": "#/definitions/EventFilter"
+    },
+    "LogConfiguration": {
+      "$ref": "#/definitions/LogConfiguration"
+    },
+    "SessionLoggerArn": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 20,
+      "pattern": "^arn:[\\w+=\\/,.@-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\\/[a-fA-F0-9\\-]{36})+$"
+    },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 200,
+      "minItems": 0,
+      "insertionOrder": false
+    }
+  },
+  "required": [
+    "EventFilter",
+    "LogConfiguration"
+  ],
+  "readOnlyProperties": [
+    "/properties/AssociatedPortalArns",
+    "/properties/CreationDate",
+    "/properties/SessionLoggerArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/AdditionalEncryptionContext",
+    "/properties/CustomerManagedKey"
+  ],
+  "primaryIdentifier": [
+    "/properties/SessionLoggerArn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "workspaces-web:CreateSessionLogger",
+        "workspaces-web:GetSessionLogger",
+        "workspaces-web:ListSessionLoggers",
+        "workspaces-web:ListTagsForResource",
+        "workspaces-web:TagResource",
+        "s3:PutObject",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey",
+        "kms:Decrypt",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncryptTo",
+        "kms:ReEncryptFrom"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "workspaces-web:GetSessionLogger",
+        "workspaces-web:ListTagsForResource",
+        "kms:Decrypt"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "workspaces-web:UpdateSessionLogger",
+        "workspaces-web:GetSessionLogger",
+        "workspaces-web:ListSessionLoggers",
+        "workspaces-web:TagResource",
+        "workspaces-web:UntagResource",
+        "workspaces-web:ListTagsForResource",
+        "s3:PutObject",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "workspaces-web:GetSessionLogger",
+        "workspaces-web:DeleteSessionLogger",
+        "kms:Decrypt"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "workspaces-web:ListSessionLoggers",
+        "kms:Decrypt"
+      ]
+    }
+  },
+  "tagging": {
+    "cloudFormationSystemTags": false,
+    "permissions": [
+      "workspaces-web:ListTagsForResource",
+      "workspaces-web:TagResource",
+      "workspaces-web:UntagResource"
+    ],
+    "tagOnCreate": true,
+    "tagProperty": "/properties/Tags",
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "additionalProperties": false
+}

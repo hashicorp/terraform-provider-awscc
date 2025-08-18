@@ -609,6 +609,20 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		//	        "StorageProfileId": {
 		//	          "pattern": "^sp-[0-9a-f]{32}$",
 		//	          "type": "string"
+		//	        },
+		//	        "VpcConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ResourceConfigurationArns": {
+		//	              "items": {
+		//	                "maxLength": 2048,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -1371,6 +1385,30 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: VpcConfiguration
+						"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ResourceConfigurationArns
+								"resource_configuration_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.ValueStringsAre(
+											stringvalidator.LengthBetween(1, 2048),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
 					Computed: true,
@@ -1707,6 +1745,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		"mode":                          "Mode",
 		"name":                          "Name",
 		"os_family":                     "OsFamily",
+		"resource_configuration_arns":   "ResourceConfigurationArns",
 		"role_arn":                      "RoleArn",
 		"root_ebs_volume":               "RootEbsVolume",
 		"runtime":                       "Runtime",
@@ -1724,6 +1763,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		"v_cpu_count":                   "VCpuCount",
 		"value":                         "Value",
 		"values":                        "Values",
+		"vpc_configuration":             "VpcConfiguration",
 		"worker_capabilities":           "WorkerCapabilities",
 		"worker_count":                  "WorkerCount",
 	})

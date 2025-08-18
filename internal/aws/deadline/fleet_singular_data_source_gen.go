@@ -587,6 +587,20 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "StorageProfileId": {
 		//	          "pattern": "^sp-[0-9a-f]{32}$",
 		//	          "type": "string"
+		//	        },
+		//	        "VpcConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ResourceConfigurationArns": {
+		//	              "items": {
+		//	                "maxLength": 2048,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -890,6 +904,17 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 						"storage_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
+						// Property: VpcConfiguration
+						"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ResourceConfigurationArns
+								"resource_configuration_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
@@ -1134,6 +1159,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"mode":                          "Mode",
 		"name":                          "Name",
 		"os_family":                     "OsFamily",
+		"resource_configuration_arns":   "ResourceConfigurationArns",
 		"role_arn":                      "RoleArn",
 		"root_ebs_volume":               "RootEbsVolume",
 		"runtime":                       "Runtime",
@@ -1151,6 +1177,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"v_cpu_count":                   "VCpuCount",
 		"value":                         "Value",
 		"values":                        "Values",
+		"vpc_configuration":             "VpcConfiguration",
 		"worker_capabilities":           "WorkerCapabilities",
 		"worker_count":                  "WorkerCount",
 	})

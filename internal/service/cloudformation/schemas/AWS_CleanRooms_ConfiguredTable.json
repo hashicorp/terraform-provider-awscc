@@ -674,10 +674,6 @@
     "/properties/Arn",
     "/properties/ConfiguredTableIdentifier"
   ],
-  "createOnlyProperties": [
-    "/properties/AllowedColumns",
-    "/properties/TableReference"
-  ],
   "primaryIdentifier": [
     "/properties/ConfiguredTableIdentifier"
   ],
@@ -726,6 +722,8 @@
     "update": {
       "permissions": [
         "cleanrooms:UpdateConfiguredTable",
+        "cleanrooms:UpdateConfiguredTableReference",
+        "cleanrooms:UpdateConfiguredTableAllowedColumns",
         "cleanrooms:GetConfiguredTable",
         "cleanrooms:CreateConfiguredTableAnalysisRule",
         "cleanrooms:UpdateConfiguredTableAnalysisRule",

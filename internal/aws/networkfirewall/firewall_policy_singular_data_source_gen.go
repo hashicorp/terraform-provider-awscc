@@ -114,6 +114,9 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "items": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
+		//	          "DeepThreatInspection": {
+		//	            "type": "boolean"
+		//	          },
 		//	          "Override": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
@@ -315,6 +318,10 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 				"stateful_rule_group_references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DeepThreatInspection
+							"deep_threat_inspection": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
 							// Property: Override
 							"override": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -512,6 +519,7 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		"action":                             "Action",
 		"action_definition":                  "ActionDefinition",
 		"action_name":                        "ActionName",
+		"deep_threat_inspection":             "DeepThreatInspection",
 		"definition":                         "Definition",
 		"description":                        "Description",
 		"dimensions":                         "Dimensions",

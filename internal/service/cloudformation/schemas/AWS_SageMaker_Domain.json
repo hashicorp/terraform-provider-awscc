@@ -909,11 +909,6 @@
           "minLength": 1,
           "maxLength": 100,
           "pattern": "[\\w\\.-]+$"
-        },
-        "SingleSignOnApplicationArn": {
-          "type": "string",
-          "description": "The ARN of the DataZone application managed by SageMaker Unified Studio in the AWS IAM Identity Center.",
-          "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::[0-9]+:application\/[a-zA-Z0-9-_.]+\/apl-[a-zA-Z0-9]+$"
         }
       }
     },
