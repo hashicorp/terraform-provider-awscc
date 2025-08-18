@@ -95,6 +95,14 @@ func resourceWithTerraformTypeName(v string) ResourceOptionsFunc {
 	}
 }
 
+func resourceIsGlobalResourceType(v bool) ResourceOptionsFunc {
+	return func(o *genericResource) error {
+		o.isGlobal = v
+
+		return nil
+	}
+}
+
 // resourceIsImmutableType is a helper function to construct functional options
 // that set a resource type's immutability flag.
 // If multiple resourceIsImmutableType calls are made, the last call overrides
@@ -241,6 +249,10 @@ func (opts ResourceOptions) WithTerraformTypeName(v string) ResourceOptions {
 	return append(opts, resourceWithTerraformTypeName(v))
 }
 
+func (opts ResourceOptions) IsGlobalResourceType(v bool) ResourceOptions {
+	return append(opts, resourceIsGlobalResourceType(v))
+}
+
 // IsImmutableType is a helper function to construct functional options
 // that set a resource type's Terraform immutability flag, append that function to the
 // current slice of functional options and return the new slice of options.
@@ -289,6 +301,8 @@ func (opts ResourceOptions) WithConfigValidators(vs ...resource.ConfigValidator)
 	return append(opts, resourceWithConfigValidators(vs...))
 }
 
+// WithPrimaryIdentifier is a helper function to construct functional options
+// that set the primary identifiers for the resource.
 func (opts ResourceOptions) WithPrimaryIdentifier(v ...identity.Identifier) ResourceOptions {
 	return append(opts, resourceWithPrimaryIdentifier(v...))
 }

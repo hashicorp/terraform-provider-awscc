@@ -88,6 +88,9 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (resource.Resource, error) 
     }
     {{- end}})
 {{ end }}
+{{- if .IsGlobal }}
+    opts = opts.IsGlobalResourceType(true)
+{{- end }}
 	opts = opts.WithAttributeNameMap(map[string]string{
 {{- range $key, $value := .AttributeNameMap }}
 		"{{ $key }}": "{{ $value }}",

@@ -11,10 +11,8 @@ import (
 	"flag"
 	"fmt"
 	"os"
-	"slices"
 
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
-	identitynames "github.com/hashicorp/terraform-provider-awscc/internal/identity/names"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/common"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
@@ -81,24 +79,6 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 
 	if err != nil {
 		return err
-	}
-
-	services, err := identitynames.ParseServicesFile("../identity/names/services.hcl")
-	if err != nil {
-		return err
-	}
-
-	serviceName := identitynames.GetServiceName(templateData.CloudFormationTypeName)
-	if serviceName != "" {
-		t := slices.IndexFunc(services.Services, func(s identitynames.Service) bool {
-			return s.ServiceName == serviceName
-		})
-
-		if t != -1 {
-			if services.Services[t].IsGlobal {
-				templateData.IsGlobal = true
-			}
-		}
 	}
 
 	primaryIdentifier := make([]identity.Identifier, len(templateData.PrimaryIdentifier))

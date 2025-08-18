@@ -7,11 +7,13 @@ import (
 	"bytes"
 	"fmt"
 	"os"
+	"slices"
 	"strings"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	"github.com/hashicorp/cli"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
+	identitynames "github.com/hashicorp/terraform-provider-awscc/internal/identity/names"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared/codegen"
 	tfslices "github.com/hashicorp/terraform-provider-awscc/internal/slices"
@@ -160,6 +162,27 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 	templateData.FrameworkPlanModifierPackages = []string{"stringplanmodifier"} // For the 'id' attribute.
 	templateData.FrameworkPlanModifierPackages = tfslices.AppendUnique(templateData.FrameworkPlanModifierPackages, codeFeatures.FrameworkPlanModifierPackages...)
 	templateData.FrameworkValidatorsPackages = tfslices.AppendUnique(templateData.FrameworkValidatorsPackages, codeFeatures.FrameworkValidatorsPackages...)
+
+	// add global flag for resources only
+	if resType == ResourceType {
+		services, err := identitynames.ParseServicesFile("../identity/names/services.hcl")
+		if err != nil {
+			return nil, err
+		}
+
+		serviceName := identitynames.GetServiceName(templateData.CloudFormationTypeName)
+		if serviceName != "" {
+			t := slices.IndexFunc(services.Services, func(s identitynames.Service) bool {
+				return s.ServiceName == serviceName
+			})
+
+			if t != -1 {
+				if services.Services[t].IsGlobal {
+					templateData.IsGlobal = true
+				}
+			}
+		}
+	}
 
 	return templateData, nil
 }

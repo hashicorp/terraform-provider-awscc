@@ -188,6 +188,7 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the group to create",
 		})
 
+	opts = opts.IsGlobalResourceType(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                 "Arn",
 		"group_name":          "GroupName",
