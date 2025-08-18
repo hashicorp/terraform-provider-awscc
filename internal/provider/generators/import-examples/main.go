@@ -161,5 +161,6 @@ var (
   identity = { {{ $parts := Split .Identifier "|" }} {{ range $part := $parts }}
 {{ $part }} = "{{ $part }}" {{ end }}
   }
-}`
+}
+`
 )
