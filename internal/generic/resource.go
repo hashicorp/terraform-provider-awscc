@@ -458,21 +458,30 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 
 	// set resource identity
 	for _, v := range r.primaryIdentifier {
-		var out types.String
-		response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v.Name), &out)...)
-		if response.Diagnostics.HasError() {
-			return
-		}
+		if !v.OptionalForImport {
+			var out types.String
+			response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v.Name), &out)...)
+			if response.Diagnostics.HasError() {
+				return
+			}
 
-		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(v.Name), out.ValueString())...)
-		if response.Diagnostics.HasError() {
-			return
+			response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(v.Name), out.ValueString())...)
+			if response.Diagnostics.HasError() {
+				return
+			}
 		}
 	}
 
 	response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameAccountID), r.provider.AccountID(ctx))...)
 	if response.Diagnostics.HasError() {
 		return
+	}
+
+	if !r.isGlobal {
+		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NamesRegion), r.provider.Region(ctx))...)
+		if response.Diagnostics.HasError() {
+			return
+		}
 	}
 
 	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
@@ -553,21 +562,30 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 
 	// set resource identity
 	for _, v := range r.primaryIdentifier {
-		var out types.String
-		response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v.Name), &out)...)
-		if response.Diagnostics.HasError() {
-			return
-		}
+		if !v.OptionalForImport {
+			var out types.String
+			response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v.Name), &out)...)
+			if response.Diagnostics.HasError() {
+				return
+			}
 
-		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(v.Name), out.ValueString())...)
-		if response.Diagnostics.HasError() {
-			return
+			response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(v.Name), out.ValueString())...)
+			if response.Diagnostics.HasError() {
+				return
+			}
 		}
 	}
 
 	response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameAccountID), r.provider.AccountID(ctx))...)
 	if response.Diagnostics.HasError() {
 		return
+	}
+
+	if !r.isGlobal {
+		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NamesRegion), r.provider.Region(ctx))...)
+		if response.Diagnostics.HasError() {
+			return
+		}
 	}
 
 	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
@@ -777,13 +795,30 @@ func (r *genericResource) ImportState(ctx context.Context, request resource.Impo
 
 	var identifier []string
 	for _, v := range r.primaryIdentifier {
-		var out types.String
-		response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(v.Name), &out)...)
-		if response.Diagnostics.HasError() {
-			return
-		}
+		if !v.OptionalForImport {
+			var out types.String
+			response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(v.Name), &out)...)
+			if response.Diagnostics.HasError() {
+				return
+			}
 
-		identifier = append(identifier, out.ValueString())
+			identifier = append(identifier, out.ValueString())
+		}
+	}
+
+	var region types.String
+	response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(identity.NamesRegion), &region)...)
+	if response.Diagnostics.HasError() {
+		return
+	}
+
+	if !region.IsNull() {
+		if region.ValueString() != r.provider.Region(ctx) {
+			response.Diagnostics.AddError(
+				"Import region mismatch",
+				fmt.Sprintf("Identity region must match the current region of the provider: %s", r.provider.Region(ctx)),
+			)
+		}
 	}
 
 	id := strings.Join(identifier, "|")
