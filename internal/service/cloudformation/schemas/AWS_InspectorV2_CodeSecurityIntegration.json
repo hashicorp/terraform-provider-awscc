@@ -1,0 +1,239 @@
+{
+  "typeName": "AWS::InspectorV2::CodeSecurityIntegration",
+  "description": "Inspector CodeSecurityIntegration resource schema",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-inspector.git",
+  "definitions": {
+    "TagMap": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "pattern": "^.{1,255}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "IntegrationType": {
+      "type": "string",
+      "enum": [
+        "GITLAB_SELF_MANAGED",
+        "GITHUB"
+      ]
+    },
+    "IntegrationStatus": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "IN_PROGRESS",
+        "ACTIVE",
+        "INACTIVE",
+        "DISABLING"
+      ]
+    },
+    "CreateGitLabSelfManagedIntegrationDetail": {
+      "type": "object",
+      "required": [
+        "instanceUrl",
+        "accessToken"
+      ],
+      "properties": {
+        "instanceUrl": {
+          "type": "string",
+          "pattern": ""
+        },
+        "accessToken": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CreateDetails": {
+      "type": "object",
+      "properties": {
+        "gitlabSelfManaged": {
+          "$ref": "#/definitions/CreateGitLabSelfManagedIntegrationDetail"
+        }
+      },
+      "required": [
+        "gitlabSelfManaged"
+      ],
+      "additionalProperties": false
+    },
+    "UpdateGitLabSelfManagedIntegrationDetail": {
+      "type": "object",
+      "required": [
+        "authCode"
+      ],
+      "properties": {
+        "authCode": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        }
+      },
+      "additionalProperties": false
+    },
+    "UpdateGitHubIntegrationDetail": {
+      "type": "object",
+      "required": [
+        "code",
+        "installationId"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "installationId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        }
+      },
+      "additionalProperties": false
+    },
+    "UpdateDetails": {
+      "type": "object",
+      "properties": {
+        "gitlabSelfManaged": {
+          "$ref": "#/definitions/UpdateGitLabSelfManagedIntegrationDetail"
+        },
+        "github": {
+          "$ref": "#/definitions/UpdateGitHubIntegrationDetail"
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "required": [
+            "gitlabSelfManaged"
+          ]
+        },
+        {
+          "required": [
+            "github"
+          ]
+        }
+      ]
+    }
+  },
+  "properties": {
+    "Name": {
+      "description": "Code Security Integration name",
+      "type": "string",
+      "maxLength": 60,
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9-_$:.]*$"
+    },
+    "Type": {
+      "description": "Integration Type",
+      "$ref": "#/definitions/IntegrationType"
+    },
+    "CreateIntegrationDetails": {
+      "description": "Create Integration Details",
+      "$ref": "#/definitions/CreateDetails"
+    },
+    "UpdateIntegrationDetails": {
+      "description": "Update Integration Details",
+      "$ref": "#/definitions/UpdateDetails"
+    },
+    "Status": {
+      "description": "Integration Status",
+      "$ref": "#/definitions/IntegrationStatus"
+    },
+    "StatusReason": {
+      "description": "Reason for the current status",
+      "type": "string"
+    },
+    "Arn": {
+      "description": "Code Security Integration ARN",
+      "type": "string",
+      "pattern": "^arn:(aws[a-zA-Z-]*)?:inspector2:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:codesecurity-integration/[a-f0-9-]{36}$"
+    },
+    "AuthorizationUrl": {
+      "description": "Authorization URL for OAuth flow",
+      "type": "string",
+      "pattern": ""
+    },
+    "CreatedAt": {
+      "description": "Creation timestamp",
+      "type": "string",
+      "format": "date-time"
+    },
+    "LastUpdatedAt": {
+      "description": "Last update timestamp",
+      "type": "string",
+      "format": "date-time"
+    },
+    "Tags": {
+      "$ref": "#/definitions/TagMap"
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "inspector2:TagResource",
+      "inspector2:UntagResource"
+    ]
+  },
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Status",
+    "/properties/StatusReason",
+    "/properties/AuthorizationUrl",
+    "/properties/CreatedAt",
+    "/properties/LastUpdatedAt"
+  ],
+  "writeOnlyProperties": [
+    "/properties/CreateIntegrationDetails",
+    "/properties/UpdateIntegrationDetails"
+  ],
+  "createOnlyProperties": [
+    "/properties/CreateIntegrationDetails",
+    "/properties/Tags"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "inspector2:CreateCodeSecurityIntegration",
+        "inspector2:GetCodeSecurityIntegration",
+        "inspector2:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "inspector2:GetCodeSecurityIntegration",
+        "inspector2:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "inspector2:UpdateCodeSecurityIntegration",
+        "inspector2:GetCodeSecurityIntegration",
+        "inspector2:ListTagsForResource",
+        "inspector2:TagResource",
+        "inspector2:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "inspector2:DeleteCodeSecurityIntegration",
+        "inspector2:GetCodeSecurityIntegration"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "inspector2:ListCodeSecurityIntegrations"
+      ]
+    }
+  }
+}
