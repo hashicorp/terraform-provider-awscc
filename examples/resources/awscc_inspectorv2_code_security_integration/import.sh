@@ -1,0 +1,1 @@
+$ terraform import awscc_inspectorv2_code_security_integration.example "arn"

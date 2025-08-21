@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1197 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1225 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -33,6 +33,10 @@ resource_schema "aws_acmpca_permission" {
 
 resource_schema "aws_aiops_investigation_group" {
   cloudformation_type_name = "AWS::AIOps::InvestigationGroup"
+}
+
+resource_schema "aws_aps_resource_policy" {
+  cloudformation_type_name = "AWS::APS::ResourcePolicy"
 }
 
 resource_schema "aws_aps_rule_groups_namespace" {
@@ -987,6 +991,10 @@ resource_schema "aws_codepipeline_custom_action_type" {
 
 resource_schema "aws_codepipeline_pipeline" {
   cloudformation_type_name = "AWS::CodePipeline::Pipeline"
+}
+
+resource_schema "aws_codepipeline_webhook" {
+  cloudformation_type_name = "AWS::CodePipeline::Webhook"
 }
 
 resource_schema "aws_codestarconnections_connection" {
@@ -2550,8 +2558,16 @@ resource_schema "aws_guardduty_publishing_destination" {
   cloudformation_type_name = "AWS::GuardDuty::PublishingDestination"
 }
 
+resource_schema "aws_guardduty_threat_entity_set" {
+  cloudformation_type_name = "AWS::GuardDuty::ThreatEntitySet"
+}
+
 resource_schema "aws_guardduty_threat_intel_set" {
   cloudformation_type_name = "AWS::GuardDuty::ThreatIntelSet"
+}
+
+resource_schema "aws_guardduty_trusted_entity_set" {
+  cloudformation_type_name = "AWS::GuardDuty::TrustedEntitySet"
 }
 
 resource_schema "aws_healthimaging_datastore" {
@@ -2731,6 +2747,14 @@ resource_schema "aws_inspector_resource_group" {
 
 resource_schema "aws_inspectorv2_cis_scan_configuration" {
   cloudformation_type_name = "AWS::InspectorV2::CisScanConfiguration"
+}
+
+resource_schema "aws_inspectorv2_code_security_integration" {
+  cloudformation_type_name = "AWS::InspectorV2::CodeSecurityIntegration"
+}
+
+resource_schema "aws_inspectorv2_code_security_scan_configuration" {
+  cloudformation_type_name = "AWS::InspectorV2::CodeSecurityScanConfiguration"
 }
 
 resource_schema "aws_inspectorv2_filter" {

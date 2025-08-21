@@ -63,7 +63,7 @@ func predefinedAttributeDataSource(ctx context.Context) (datasource.DataSource, 
 		//
 		//	{
 		//	  "description": "The name of the predefined attribute.",
-		//	  "maxLength": 64,
+		//	  "maxLength": 100,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
@@ -83,11 +83,11 @@ func predefinedAttributeDataSource(ctx context.Context) (datasource.DataSource, 
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "description": "Textual or numeric value that describes an attribute.",
-		//	        "maxLength": 64,
+		//	        "maxLength": 100,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
-		//	      "maxItems": 128,
+		//	      "maxItems": 500,
 		//	      "minItems": 1,
 		//	      "type": "array"
 		//	    }

@@ -574,7 +574,8 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "Type": {
 		//	              "enum": [
 		//	                "on-demand",
-		//	                "spot"
+		//	                "spot",
+		//	                "wait-and-save"
 		//	              ],
 		//	              "type": "string"
 		//	            }
@@ -1042,11 +1043,21 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "CREATE_IN_PROGRESS",
 		//	    "UPDATE_IN_PROGRESS",
 		//	    "CREATE_FAILED",
-		//	    "UPDATE_FAILED"
+		//	    "UPDATE_FAILED",
+		//	    "SUSPENDED"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: StatusMessage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -1169,6 +1180,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"service_managed_ec_2":          "ServiceManagedEc2",
 		"size_gi_b":                     "SizeGiB",
 		"status":                        "Status",
+		"status_message":                "StatusMessage",
 		"storage_profile_id":            "StorageProfileId",
 		"tag_propagation_mode":          "TagPropagationMode",
 		"tags":                          "Tags",

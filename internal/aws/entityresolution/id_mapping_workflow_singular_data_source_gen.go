@@ -47,6 +47,33 @@ func idMappingWorkflowDataSource(ctx context.Context) (datasource.DataSource, er
 			Description: "The description of the IdMappingWorkflow",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: IdMappingIncrementalRunConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "IncrementalRunType": {
+		//	      "enum": [
+		//	        "ON_DEMAND"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "IncrementalRunType"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"id_mapping_incremental_run_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IncrementalRunType
+				"incremental_run_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdMappingTechniques
 		// CloudFormation resource type schema:
 		//
@@ -454,8 +481,10 @@ func idMappingWorkflowDataSource(ctx context.Context) (datasource.DataSource, er
 		"attribute_matching_model":          "AttributeMatchingModel",
 		"created_at":                        "CreatedAt",
 		"description":                       "Description",
+		"id_mapping_incremental_run_config": "IdMappingIncrementalRunConfig",
 		"id_mapping_techniques":             "IdMappingTechniques",
 		"id_mapping_type":                   "IdMappingType",
+		"incremental_run_type":              "IncrementalRunType",
 		"input_source_arn":                  "InputSourceARN",
 		"input_source_config":               "InputSourceConfig",
 		"intermediate_s3_path":              "IntermediateS3Path",

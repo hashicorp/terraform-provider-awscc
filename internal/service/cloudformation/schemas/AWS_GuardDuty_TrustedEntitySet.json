@@ -1,0 +1,162 @@
+{
+  "typeName": "AWS::GuardDuty::TrustedEntitySet",
+  "description": "Resource Type definition for AWS::GuardDuty::TrustedEntitySet",
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "guardduty:TagResource",
+      "guardduty:UntagResource",
+      "guardduty:ListTagsForResource"
+    ]
+  },
+  "properties": {
+    "Id": {
+      "type": "string"
+    },
+    "Format": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    },
+    "Activate": {
+      "type": "boolean"
+    },
+    "Status": {
+      "type": "string",
+      "enum": [
+        "INACTIVE",
+        "ACTIVATING",
+        "ACTIVE",
+        "DEACTIVATING",
+        "ERROR",
+        "DELETE_PENDING",
+        "DELETED"
+      ]
+    },
+    "CreatedAt": {
+      "type": "string"
+    },
+    "UpdatedAt": {
+      "type": "string"
+    },
+    "ErrorDetails": {
+      "type": "string"
+    },
+    "DetectorId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32
+    },
+    "Name": {
+      "type": "string"
+    },
+    "Location": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    },
+    "ExpectedBucketOwner": {
+      "type": "string"
+    },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/TagItem"
+      }
+    }
+  },
+  "definitions": {
+    "TagItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "required": [
+    "Format",
+    "Location"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id",
+    "/properties/DetectorId"
+  ],
+  "readOnlyProperties": [
+    "/properties/Id",
+    "/properties/Status",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/ErrorDetails"
+  ],
+  "createOnlyProperties": [
+    "/properties/Format",
+    "/properties/DetectorId"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Activate"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "guardduty:CreateTrustedEntitySet",
+        "guardduty:GetTrustedEntitySet",
+        "guardduty:TagResource",
+        "s3:GetObject"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "guardduty:GetTrustedEntitySet"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "guardduty:ListDetectors",
+        "guardduty:ListTrustedEntitySets",
+        "guardduty:DeleteTrustedEntitySet",
+        "guardduty:GetTrustedEntitySet"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "guardduty:UpdateTrustedEntitySet",
+        "guardduty:GetTrustedEntitySet",
+        "guardduty:ListTrustedEntitySets",
+        "guardduty:TagResource",
+        "guardduty:UntagResource",
+        "s3:GetObject"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "DetectorId": {
+            "type": "string"
+          }
+        }
+      },
+      "permissions": [
+        "guardduty:ListTrustedEntitySets"
+      ]
+    }
+  }
+}

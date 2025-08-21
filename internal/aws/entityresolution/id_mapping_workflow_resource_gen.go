@@ -69,6 +69,47 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: IdMappingIncrementalRunConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "IncrementalRunType": {
+		//	      "enum": [
+		//	        "ON_DEMAND"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "IncrementalRunType"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"id_mapping_incremental_run_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IncrementalRunType
+				"incremental_run_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ON_DEMAND",
+						),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IdMappingTechniques
 		// CloudFormation resource type schema:
 		//
@@ -672,8 +713,10 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		"attribute_matching_model":          "AttributeMatchingModel",
 		"created_at":                        "CreatedAt",
 		"description":                       "Description",
+		"id_mapping_incremental_run_config": "IdMappingIncrementalRunConfig",
 		"id_mapping_techniques":             "IdMappingTechniques",
 		"id_mapping_type":                   "IdMappingType",
+		"incremental_run_type":              "IncrementalRunType",
 		"input_source_arn":                  "InputSourceARN",
 		"input_source_config":               "InputSourceConfig",
 		"intermediate_s3_path":              "IntermediateS3Path",

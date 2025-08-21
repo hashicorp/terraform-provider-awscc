@@ -40,7 +40,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "default": "ENABLED",
+		//	  "default": "DISABLED",
 		//	  "description": "Indicates whether to use Availability Zone rebalancing for the service.\n For more information, see [Balancing an Amazon ECS service across Availability Zones](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html) in the *Amazon Elastic Container Service Developer Guide*.",
 		//	  "enum": [
 		//	    "ENABLED",
@@ -52,7 +52,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Indicates whether to use Availability Zone rebalancing for the service.\n For more information, see [Balancing an Amazon ECS service across Availability Zones](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html) in the *Amazon Elastic Container Service Developer Guide*.",
 			Optional:    true,
 			Computed:    true,
-			Default:     stringdefault.StaticString("ENABLED"),
+			Default:     stringdefault.StaticString("DISABLED"),
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"ENABLED",

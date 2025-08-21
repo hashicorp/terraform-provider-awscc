@@ -27,7 +27,6 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "default": "",
 		//	  "description": "ID of the active session within the stage.",
 		//	  "maxLength": 128,
 		//	  "minLength": 0,

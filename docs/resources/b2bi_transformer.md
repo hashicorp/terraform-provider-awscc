@@ -108,6 +108,7 @@ Optional:
 Optional:
 
 - `split_options` (Attributes) (see [below for nested schema](#nestedatt--input_conversion--advanced_options--x12--split_options))
+- `validation_options` (Attributes) (see [below for nested schema](#nestedatt--input_conversion--advanced_options--x12--validation_options))
 
 <a id="nestedatt--input_conversion--advanced_options--x12--split_options"></a>
 ### Nested Schema for `input_conversion.advanced_options.x12.split_options`
@@ -115,6 +116,53 @@ Optional:
 Optional:
 
 - `split_by` (String)
+
+
+<a id="nestedatt--input_conversion--advanced_options--x12--validation_options"></a>
+### Nested Schema for `input_conversion.advanced_options.x12.validation_options`
+
+Optional:
+
+- `validation_rules` (Attributes List) (see [below for nested schema](#nestedatt--input_conversion--advanced_options--x12--validation_options--validation_rules))
+
+<a id="nestedatt--input_conversion--advanced_options--x12--validation_options--validation_rules"></a>
+### Nested Schema for `input_conversion.advanced_options.x12.validation_options.validation_rules`
+
+Optional:
+
+- `code_list_validation_rule` (Attributes) (see [below for nested schema](#nestedatt--input_conversion--advanced_options--x12--validation_options--validation_rules--code_list_validation_rule))
+- `element_length_validation_rule` (Attributes) (see [below for nested schema](#nestedatt--input_conversion--advanced_options--x12--validation_options--validation_rules--element_length_validation_rule))
+- `element_requirement_validation_rule` (Attributes) (see [below for nested schema](#nestedatt--input_conversion--advanced_options--x12--validation_options--validation_rules--element_requirement_validation_rule))
+
+<a id="nestedatt--input_conversion--advanced_options--x12--validation_options--validation_rules--code_list_validation_rule"></a>
+### Nested Schema for `input_conversion.advanced_options.x12.validation_options.validation_rules.code_list_validation_rule`
+
+Optional:
+
+- `codes_to_add` (List of String)
+- `codes_to_remove` (List of String)
+- `element_id` (String)
+
+
+<a id="nestedatt--input_conversion--advanced_options--x12--validation_options--validation_rules--element_length_validation_rule"></a>
+### Nested Schema for `input_conversion.advanced_options.x12.validation_options.validation_rules.element_length_validation_rule`
+
+Optional:
+
+- `element_id` (String)
+- `max_length` (Number)
+- `min_length` (Number)
+
+
+<a id="nestedatt--input_conversion--advanced_options--x12--validation_options--validation_rules--element_requirement_validation_rule"></a>
+### Nested Schema for `input_conversion.advanced_options.x12.validation_options.validation_rules.element_requirement_validation_rule`
+
+Optional:
+
+- `element_position` (String)
+- `requirement` (String)
+
+
 
 
 
@@ -151,8 +199,81 @@ Optional:
 
 Optional:
 
+- `advanced_options` (Attributes) (see [below for nested schema](#nestedatt--output_conversion--advanced_options))
 - `format_options` (Attributes) (see [below for nested schema](#nestedatt--output_conversion--format_options))
 - `to_format` (String)
+
+<a id="nestedatt--output_conversion--advanced_options"></a>
+### Nested Schema for `output_conversion.advanced_options`
+
+Optional:
+
+- `x12` (Attributes) (see [below for nested schema](#nestedatt--output_conversion--advanced_options--x12))
+
+<a id="nestedatt--output_conversion--advanced_options--x12"></a>
+### Nested Schema for `output_conversion.advanced_options.x12`
+
+Optional:
+
+- `split_options` (Attributes) (see [below for nested schema](#nestedatt--output_conversion--advanced_options--x12--split_options))
+- `validation_options` (Attributes) (see [below for nested schema](#nestedatt--output_conversion--advanced_options--x12--validation_options))
+
+<a id="nestedatt--output_conversion--advanced_options--x12--split_options"></a>
+### Nested Schema for `output_conversion.advanced_options.x12.split_options`
+
+Optional:
+
+- `split_by` (String)
+
+
+<a id="nestedatt--output_conversion--advanced_options--x12--validation_options"></a>
+### Nested Schema for `output_conversion.advanced_options.x12.validation_options`
+
+Optional:
+
+- `validation_rules` (Attributes List) (see [below for nested schema](#nestedatt--output_conversion--advanced_options--x12--validation_options--validation_rules))
+
+<a id="nestedatt--output_conversion--advanced_options--x12--validation_options--validation_rules"></a>
+### Nested Schema for `output_conversion.advanced_options.x12.validation_options.validation_rules`
+
+Optional:
+
+- `code_list_validation_rule` (Attributes) (see [below for nested schema](#nestedatt--output_conversion--advanced_options--x12--validation_options--validation_rules--code_list_validation_rule))
+- `element_length_validation_rule` (Attributes) (see [below for nested schema](#nestedatt--output_conversion--advanced_options--x12--validation_options--validation_rules--element_length_validation_rule))
+- `element_requirement_validation_rule` (Attributes) (see [below for nested schema](#nestedatt--output_conversion--advanced_options--x12--validation_options--validation_rules--element_requirement_validation_rule))
+
+<a id="nestedatt--output_conversion--advanced_options--x12--validation_options--validation_rules--code_list_validation_rule"></a>
+### Nested Schema for `output_conversion.advanced_options.x12.validation_options.validation_rules.code_list_validation_rule`
+
+Optional:
+
+- `codes_to_add` (List of String)
+- `codes_to_remove` (List of String)
+- `element_id` (String)
+
+
+<a id="nestedatt--output_conversion--advanced_options--x12--validation_options--validation_rules--element_length_validation_rule"></a>
+### Nested Schema for `output_conversion.advanced_options.x12.validation_options.validation_rules.element_length_validation_rule`
+
+Optional:
+
+- `element_id` (String)
+- `max_length` (Number)
+- `min_length` (Number)
+
+
+<a id="nestedatt--output_conversion--advanced_options--x12--validation_options--validation_rules--element_requirement_validation_rule"></a>
+### Nested Schema for `output_conversion.advanced_options.x12.validation_options.validation_rules.element_requirement_validation_rule`
+
+Optional:
+
+- `element_position` (String)
+- `requirement` (String)
+
+
+
+
+
 
 <a id="nestedatt--output_conversion--format_options"></a>
 ### Nested Schema for `output_conversion.format_options`

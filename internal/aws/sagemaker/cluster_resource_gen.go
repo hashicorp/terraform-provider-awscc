@@ -268,6 +268,110 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	        ],
 		//	        "type": "object"
 		//	      },
+		//	      "ScheduledUpdateConfig": {
+		//	        "additionalProperties": false,
+		//	        "description": "The configuration object of the schedule that SageMaker follows when updating the AMI.",
+		//	        "properties": {
+		//	          "DeploymentConfig": {
+		//	            "additionalProperties": false,
+		//	            "description": "The configuration to use when updating the AMI versions.",
+		//	            "properties": {
+		//	              "AutoRollbackConfiguration": {
+		//	                "description": "An array that contains the alarms that SageMaker monitors to know whether to roll back the AMI update.",
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "The details of the alarm to monitor during the AMI update.",
+		//	                  "properties": {
+		//	                    "AlarmName": {
+		//	                      "description": "The name of the alarm.",
+		//	                      "maxLength": 256,
+		//	                      "minLength": 1,
+		//	                      "pattern": "",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "AlarmName"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "RollingUpdatePolicy": {
+		//	                "additionalProperties": false,
+		//	                "description": "The policy that SageMaker uses when updating the AMI versions of the cluster.",
+		//	                "properties": {
+		//	                  "MaximumBatchSize": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "The configuration of the size measurements of the AMI update. Using this configuration, you can specify whether SageMaker should update your instance group by an amount or percentage of instances.",
+		//	                    "properties": {
+		//	                      "Type": {
+		//	                        "description": "Specifies whether SageMaker should process the update by amount or percentage of instances.",
+		//	                        "pattern": "INSTANCE_COUNT|CAPACITY_PERCENTAGE",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Value": {
+		//	                        "description": "Specifies the amount or percentage of instances SageMaker updates at a time.",
+		//	                        "minimum": 1,
+		//	                        "type": "integer"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Type",
+		//	                      "Value"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "RollbackMaximumBatchSize": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "The configuration of the size measurements of the AMI update. Using this configuration, you can specify whether SageMaker should update your instance group by an amount or percentage of instances.",
+		//	                    "properties": {
+		//	                      "Type": {
+		//	                        "description": "Specifies whether SageMaker should process the update by amount or percentage of instances.",
+		//	                        "pattern": "INSTANCE_COUNT|CAPACITY_PERCENTAGE",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Value": {
+		//	                        "description": "Specifies the amount or percentage of instances SageMaker updates at a time.",
+		//	                        "minimum": 1,
+		//	                        "type": "integer"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Type",
+		//	                      "Value"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "MaximumBatchSize"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "WaitIntervalInSeconds": {
+		//	                "description": "The duration in seconds that SageMaker waits before updating more instances in the cluster.",
+		//	                "maximum": 3600,
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "ScheduleExpression": {
+		//	            "description": "A cron expression that specifies the schedule that SageMaker follows when updating the AMI.",
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "pattern": "cron\\((?:[0-5][0-9]|[0-9]|) (?:[01][0-9]|2[0-3]|[0-9]) (?:[1-9]|0[1-9]|[12][0-9]|3[01]|\\?) (?:[1-9]|0[1-9]|1[0-2]|\\*|\\*/(?:[1-9]|1[0-2])|) (?:MON|TUE|WED|THU|FRI|SAT|SUN|[1-7]|\\?|L|(?:[1-7]#[1-5])|(?:[1-7]L)) (?:20[2-9][0-9]|\\*|)\\)",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "ScheduleExpression"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "ThreadsPerCore": {
 		//	        "description": "The number you specified to TreadsPerCore in CreateCluster for enabling or disabling multithreading. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading.",
 		//	        "maximum": 2,
@@ -519,6 +623,169 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ScheduledUpdateConfig
+					"scheduled_update_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DeploymentConfig
+							"deployment_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AutoRollbackConfiguration
+									"auto_rollback_configuration": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AlarmName
+												"alarm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The name of the alarm.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthBetween(1, 256),
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "An array that contains the alarms that SageMaker monitors to know whether to roll back the AMI update.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											generic.Multiset(),
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: RollingUpdatePolicy
+									"rolling_update_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: MaximumBatchSize
+											"maximum_batch_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Type
+													"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Specifies whether SageMaker should process the update by amount or percentage of instances.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.RegexMatches(regexp.MustCompile("INSTANCE_COUNT|CAPACITY_PERCENTAGE"), ""),
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Value
+													"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Description: "Specifies the amount or percentage of instances SageMaker updates at a time.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.Int64{ /*START VALIDATORS*/
+															int64validator.AtLeast(1),
+															fwvalidators.NotNullInt64(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+															int64planmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "The configuration of the size measurements of the AMI update. Using this configuration, you can specify whether SageMaker should update your instance group by an amount or percentage of instances.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: RollbackMaximumBatchSize
+											"rollback_maximum_batch_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Type
+													"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Specifies whether SageMaker should process the update by amount or percentage of instances.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.RegexMatches(regexp.MustCompile("INSTANCE_COUNT|CAPACITY_PERCENTAGE"), ""),
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Value
+													"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Description: "Specifies the amount or percentage of instances SageMaker updates at a time.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.Int64{ /*START VALIDATORS*/
+															int64validator.AtLeast(1),
+															fwvalidators.NotNullInt64(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+															int64planmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "The configuration of the size measurements of the AMI update. Using this configuration, you can specify whether SageMaker should update your instance group by an amount or percentage of instances.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The policy that SageMaker uses when updating the AMI versions of the cluster.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: WaitIntervalInSeconds
+									"wait_interval_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The duration in seconds that SageMaker waits before updating more instances in the cluster.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											int64validator.Between(0, 3600),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The configuration to use when updating the AMI versions.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ScheduleExpression
+							"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A cron expression that specifies the schedule that SageMaker follows when updating the AMI.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 256),
+									stringvalidator.RegexMatches(regexp.MustCompile("cron\\((?:[0-5][0-9]|[0-9]|) (?:[01][0-9]|2[0-3]|[0-9]) (?:[1-9]|0[1-9]|[12][0-9]|3[01]|\\?) (?:[1-9]|0[1-9]|1[0-2]|\\*|\\*/(?:[1-9]|1[0-2])|) (?:MON|TUE|WED|THU|FRI|SAT|SUN|[1-7]|\\?|L|(?:[1-7]#[1-5])|(?:[1-7]L)) (?:20[2-9][0-9]|\\*|)\\)"), ""),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The configuration object of the schedule that SageMaker follows when updating the AMI.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1294,11 +1561,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Cluster").WithTerraformTypeName("awscc_sagemaker_cluster")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"alarm_name":                  "AlarmName",
+		"auto_rollback_configuration": "AutoRollbackConfiguration",
 		"cluster_arn":                 "ClusterArn",
 		"cluster_name":                "ClusterName",
 		"cluster_status":              "ClusterStatus",
 		"creation_time":               "CreationTime",
 		"current_count":               "CurrentCount",
+		"deployment_config":           "DeploymentConfig",
 		"ebs_volume_config":           "EbsVolumeConfig",
 		"eks":                         "Eks",
 		"environment_config":          "EnvironmentConfig",
@@ -1313,6 +1583,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"instance_type":               "InstanceType",
 		"key":                         "Key",
 		"life_cycle_config":           "LifeCycleConfig",
+		"maximum_batch_size":          "MaximumBatchSize",
 		"node_provisioning_mode":      "NodeProvisioningMode",
 		"node_recovery":               "NodeRecovery",
 		"on_create":                   "OnCreate",
@@ -1321,6 +1592,10 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"override_vpc_config":         "OverrideVpcConfig",
 		"per_unit_storage_throughput": "PerUnitStorageThroughput",
 		"restricted_instance_groups":  "RestrictedInstanceGroups",
+		"rollback_maximum_batch_size": "RollbackMaximumBatchSize",
+		"rolling_update_policy":       "RollingUpdatePolicy",
+		"schedule_expression":         "ScheduleExpression",
+		"scheduled_update_config":     "ScheduledUpdateConfig",
 		"security_group_ids":          "SecurityGroupIds",
 		"size_in_gi_b":                "SizeInGiB",
 		"source_s3_uri":               "SourceS3Uri",
@@ -1328,9 +1603,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                        "Tags",
 		"threads_per_core":            "ThreadsPerCore",
 		"training_plan_arn":           "TrainingPlanArn",
+		"type":                        "Type",
 		"value":                       "Value",
 		"volume_size_in_gb":           "VolumeSizeInGB",
 		"vpc_config":                  "VpcConfig",
+		"wait_interval_in_seconds":    "WaitIntervalInSeconds",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(720).WithDeleteTimeoutInMinutes(720)

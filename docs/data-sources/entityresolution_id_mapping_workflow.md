@@ -23,6 +23,7 @@ Data Source schema for AWS::EntityResolution::IdMappingWorkflow
 
 - `created_at` (String) The time of this IdMappingWorkflow got created
 - `description` (String) The description of the IdMappingWorkflow
+- `id_mapping_incremental_run_config` (Attributes) (see [below for nested schema](#nestedatt--id_mapping_incremental_run_config))
 - `id_mapping_techniques` (Attributes) (see [below for nested schema](#nestedatt--id_mapping_techniques))
 - `input_source_config` (Attributes List) (see [below for nested schema](#nestedatt--input_source_config))
 - `output_source_config` (Attributes List) (see [below for nested schema](#nestedatt--output_source_config))
@@ -31,6 +32,14 @@ Data Source schema for AWS::EntityResolution::IdMappingWorkflow
 - `updated_at` (String) The time of this IdMappingWorkflow got last updated at
 - `workflow_arn` (String) The default IdMappingWorkflow arn
 - `workflow_name` (String) The name of the IdMappingWorkflow
+
+<a id="nestedatt--id_mapping_incremental_run_config"></a>
+### Nested Schema for `id_mapping_incremental_run_config`
+
+Read-Only:
+
+- `incremental_run_type` (String)
+
 
 <a id="nestedatt--id_mapping_techniques"></a>
 ### Nested Schema for `id_mapping_techniques`

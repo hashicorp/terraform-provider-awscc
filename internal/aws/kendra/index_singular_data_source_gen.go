@@ -85,6 +85,7 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Document metadata configurations",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
@@ -118,6 +119,7 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "ValueImportanceItems": {
+		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "additionalProperties": false,
 		//	              "properties": {
@@ -338,6 +340,7 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Tags for labeling the index",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "A label for tagging Kendra resources",
@@ -399,6 +402,7 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {

@@ -82,7 +82,7 @@ func dataMigrationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The property describes the settings for the data migration.",
 		//	  "properties": {
 		//	    "CloudwatchLogsEnabled": {
-		//	      "description": "The property specifies whether to enable the Cloudwatch log.",
+		//	      "description": "The property specifies whether to enable the CloudWatch log.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "NumberOfJobs": {
@@ -102,7 +102,7 @@ func dataMigrationDataSource(ctx context.Context) (datasource.DataSource, error)
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CloudwatchLogsEnabled
 				"cloudwatch_logs_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "The property specifies whether to enable the Cloudwatch log.",
+					Description: "The property specifies whether to enable the CloudWatch log.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: NumberOfJobs

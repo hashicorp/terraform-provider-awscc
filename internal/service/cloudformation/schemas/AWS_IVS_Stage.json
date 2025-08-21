@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::IVS::Stage",
-  "description": "Resource Definition for type AWS::IVS::Stage.",
+  "description": "Resource Type definition for AWS::IVS::Stage.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
   "definitions": {
     "Tag": {
@@ -170,7 +170,6 @@
     "ActiveSessionId": {
       "description": "ID of the active session within the stage.",
       "type": "string",
-      "default": "",
       "minLength": 0,
       "maxLength": 128
     }
