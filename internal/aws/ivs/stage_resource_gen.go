@@ -41,7 +41,6 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "default": "",
 		//	  "description": "ID of the active session within the stage.",
 		//	  "maxLength": 128,
 		//	  "minLength": 0,
@@ -50,7 +49,6 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		"active_session_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ID of the active session within the stage.",
 			Computed:    true,
-			Default:     stringdefault.StaticString(""),
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -460,7 +458,7 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Definition for type AWS::IVS::Stage.",
+		Description: "Resource Type definition for AWS::IVS::Stage.",
 		Version:     1,
 		Attributes:  attributes,
 	}

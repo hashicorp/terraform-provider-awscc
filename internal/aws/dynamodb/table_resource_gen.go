@@ -140,6 +140,14 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	    "Enabled": {
 		//	      "description": "Indicates whether CloudWatch Contributor Insights are to be enabled (true) or disabled (false).",
 		//	      "type": "boolean"
+		//	    },
+		//	    "Mode": {
+		//	      "description": "",
+		//	      "enum": [
+		//	        "ACCESSED_AND_THROTTLED_KEYS",
+		//	        "THROTTLED_KEYS"
+		//	      ],
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -159,6 +167,21 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Mode
+				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ACCESSED_AND_THROTTLED_KEYS",
+							"THROTTLED_KEYS",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -200,6 +223,14 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	          "Enabled": {
 		//	            "description": "Indicates whether CloudWatch Contributor Insights are to be enabled (true) or disabled (false).",
 		//	            "type": "boolean"
+		//	          },
+		//	          "Mode": {
+		//	            "description": "",
+		//	            "enum": [
+		//	              "ACCESSED_AND_THROTTLED_KEYS",
+		//	              "THROTTLED_KEYS"
+		//	            ],
+		//	            "type": "string"
 		//	          }
 		//	        },
 		//	        "required": [
@@ -346,6 +377,21 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Mode
+							"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"ACCESSED_AND_THROTTLED_KEYS",
+										"THROTTLED_KEYS",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -1608,6 +1654,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		"local_secondary_indexes":              "LocalSecondaryIndexes",
 		"max_read_request_units":               "MaxReadRequestUnits",
 		"max_write_request_units":              "MaxWriteRequestUnits",
+		"mode":                                 "Mode",
 		"non_key_attributes":                   "NonKeyAttributes",
 		"on_demand_throughput":                 "OnDemandThroughput",
 		"point_in_time_recovery_enabled":       "PointInTimeRecoveryEnabled",

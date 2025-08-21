@@ -127,6 +127,7 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Document metadata configurations",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
@@ -160,6 +161,7 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "ValueImportanceItems": {
+		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "additionalProperties": false,
 		//	              "properties": {
@@ -312,6 +314,7 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
 									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -390,6 +393,7 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.SizeAtMost(500),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -510,6 +514,7 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Tags for labeling the index",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "A label for tagging Kendra resources",
@@ -574,6 +579,7 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.SizeAtMost(200),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -604,6 +610,7 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
@@ -820,6 +827,7 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.SizeAtMost(1),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

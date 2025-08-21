@@ -10,15 +10,18 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
@@ -858,6 +861,95 @@ func transformerResource(ctx context.Context) (resource.Resource, error) {
 		//	                }
 		//	              },
 		//	              "type": "object"
+		//	            },
+		//	            "ValidationOptions": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "ValidationRules": {
+		//	                  "items": {
+		//	                    "properties": {
+		//	                      "CodeListValidationRule": {
+		//	                        "additionalProperties": false,
+		//	                        "properties": {
+		//	                          "CodesToAdd": {
+		//	                            "items": {
+		//	                              "type": "string"
+		//	                            },
+		//	                            "type": "array"
+		//	                          },
+		//	                          "CodesToRemove": {
+		//	                            "items": {
+		//	                              "type": "string"
+		//	                            },
+		//	                            "type": "array"
+		//	                          },
+		//	                          "ElementId": {
+		//	                            "maxLength": 4,
+		//	                            "minLength": 4,
+		//	                            "pattern": "^[0-9]{4}$",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "ElementId"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "ElementLengthValidationRule": {
+		//	                        "additionalProperties": false,
+		//	                        "properties": {
+		//	                          "ElementId": {
+		//	                            "maxLength": 4,
+		//	                            "minLength": 4,
+		//	                            "pattern": "^[0-9]{4}$",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "MaxLength": {
+		//	                            "maximum": 1000000,
+		//	                            "minimum": 1,
+		//	                            "type": "number"
+		//	                          },
+		//	                          "MinLength": {
+		//	                            "maximum": 1000000,
+		//	                            "minimum": 1,
+		//	                            "type": "number"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "ElementId",
+		//	                          "MaxLength",
+		//	                          "MinLength"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "ElementRequirementValidationRule": {
+		//	                        "additionalProperties": false,
+		//	                        "properties": {
+		//	                          "ElementPosition": {
+		//	                            "pattern": "^[a-zA-Z0-9]+(?:-\\d{2})(?:-\\d{2})?$",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Requirement": {
+		//	                            "enum": [
+		//	                              "OPTIONAL",
+		//	                              "MANDATORY"
+		//	                            ],
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "ElementPosition",
+		//	                          "Requirement"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "type": "object"
 		//	            }
 		//	          },
 		//	          "type": "object"
@@ -1269,6 +1361,153 @@ func transformerResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ValidationOptions
+								"validation_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ValidationRules
+										"validation_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: CodeListValidationRule
+													"code_list_validation_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: CodesToAdd
+															"codes_to_add": schema.ListAttribute{ /*START ATTRIBUTE*/
+																ElementType: types.StringType,
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: CodesToRemove
+															"codes_to_remove": schema.ListAttribute{ /*START ATTRIBUTE*/
+																ElementType: types.StringType,
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: ElementId
+															"element_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Optional: true,
+																Computed: true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.LengthBetween(4, 4),
+																	stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{4}$"), ""),
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Optional: true,
+														Computed: true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: ElementLengthValidationRule
+													"element_length_validation_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: ElementId
+															"element_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Optional: true,
+																Computed: true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.LengthBetween(4, 4),
+																	stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{4}$"), ""),
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: MaxLength
+															"max_length": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																Optional: true,
+																Computed: true,
+																Validators: []validator.Float64{ /*START VALIDATORS*/
+																	float64validator.Between(1.000000, 1000000.000000),
+																	fwvalidators.NotNullFloat64(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+																	float64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: MinLength
+															"min_length": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																Optional: true,
+																Computed: true,
+																Validators: []validator.Float64{ /*START VALIDATORS*/
+																	float64validator.Between(1.000000, 1000000.000000),
+																	fwvalidators.NotNullFloat64(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+																	float64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Optional: true,
+														Computed: true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: ElementRequirementValidationRule
+													"element_requirement_validation_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: ElementPosition
+															"element_position": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Optional: true,
+																Computed: true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]+(?:-\\d{2})(?:-\\d{2})?$"), ""),
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Requirement
+															"requirement": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Optional: true,
+																Computed: true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.OneOf(
+																		"OPTIONAL",
+																		"MANDATORY",
+																	),
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Optional: true,
+														Computed: true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -1820,6 +2059,120 @@ func transformerResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "AdvancedOptions": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "X12": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "SplitOptions": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "SplitBy": {
+		//	                  "enum": [
+		//	                    "NONE",
+		//	                    "TRANSACTION"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "ValidationOptions": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "ValidationRules": {
+		//	                  "items": {
+		//	                    "properties": {
+		//	                      "CodeListValidationRule": {
+		//	                        "additionalProperties": false,
+		//	                        "properties": {
+		//	                          "CodesToAdd": {
+		//	                            "items": {
+		//	                              "type": "string"
+		//	                            },
+		//	                            "type": "array"
+		//	                          },
+		//	                          "CodesToRemove": {
+		//	                            "items": {
+		//	                              "type": "string"
+		//	                            },
+		//	                            "type": "array"
+		//	                          },
+		//	                          "ElementId": {
+		//	                            "maxLength": 4,
+		//	                            "minLength": 4,
+		//	                            "pattern": "^[0-9]{4}$",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "ElementId"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "ElementLengthValidationRule": {
+		//	                        "additionalProperties": false,
+		//	                        "properties": {
+		//	                          "ElementId": {
+		//	                            "maxLength": 4,
+		//	                            "minLength": 4,
+		//	                            "pattern": "^[0-9]{4}$",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "MaxLength": {
+		//	                            "maximum": 1000000,
+		//	                            "minimum": 1,
+		//	                            "type": "number"
+		//	                          },
+		//	                          "MinLength": {
+		//	                            "maximum": 1000000,
+		//	                            "minimum": 1,
+		//	                            "type": "number"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "ElementId",
+		//	                          "MaxLength",
+		//	                          "MinLength"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "ElementRequirementValidationRule": {
+		//	                        "additionalProperties": false,
+		//	                        "properties": {
+		//	                          "ElementPosition": {
+		//	                            "pattern": "^[a-zA-Z0-9]+(?:-\\d{2})(?:-\\d{2})?$",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Requirement": {
+		//	                            "enum": [
+		//	                              "OPTIONAL",
+		//	                              "MANDATORY"
+		//	                            ],
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "ElementPosition",
+		//	                          "Requirement"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "FormatOptions": {
 		//	      "properties": {
 		//	        "X12": {
@@ -2203,6 +2556,197 @@ func transformerResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"output_conversion": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AdvancedOptions
+				"advanced_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: X12
+						"x12": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SplitOptions
+								"split_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: SplitBy
+										"split_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"NONE",
+													"TRANSACTION",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ValidationOptions
+								"validation_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ValidationRules
+										"validation_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: CodeListValidationRule
+													"code_list_validation_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: CodesToAdd
+															"codes_to_add": schema.ListAttribute{ /*START ATTRIBUTE*/
+																ElementType: types.StringType,
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: CodesToRemove
+															"codes_to_remove": schema.ListAttribute{ /*START ATTRIBUTE*/
+																ElementType: types.StringType,
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: ElementId
+															"element_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Optional: true,
+																Computed: true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.LengthBetween(4, 4),
+																	stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{4}$"), ""),
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Optional: true,
+														Computed: true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: ElementLengthValidationRule
+													"element_length_validation_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: ElementId
+															"element_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Optional: true,
+																Computed: true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.LengthBetween(4, 4),
+																	stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{4}$"), ""),
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: MaxLength
+															"max_length": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																Optional: true,
+																Computed: true,
+																Validators: []validator.Float64{ /*START VALIDATORS*/
+																	float64validator.Between(1.000000, 1000000.000000),
+																	fwvalidators.NotNullFloat64(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+																	float64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: MinLength
+															"min_length": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																Optional: true,
+																Computed: true,
+																Validators: []validator.Float64{ /*START VALIDATORS*/
+																	float64validator.Between(1.000000, 1000000.000000),
+																	fwvalidators.NotNullFloat64(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+																	float64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Optional: true,
+														Computed: true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: ElementRequirementValidationRule
+													"element_requirement_validation_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: ElementPosition
+															"element_position": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Optional: true,
+																Computed: true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]+(?:-\\d{2})(?:-\\d{2})?$"), ""),
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Requirement
+															"requirement": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Optional: true,
+																Computed: true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.OneOf(
+																		"OPTIONAL",
+																		"MANDATORY",
+																	),
+																	fwvalidators.NotNullString(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Optional: true,
+														Computed: true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: FormatOptions
 				"format_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -2867,39 +3411,51 @@ func transformerResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::B2BI::Transformer").WithTerraformTypeName("awscc_b2bi_transformer")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"advanced_options":  "AdvancedOptions",
-		"bucket_name":       "BucketName",
-		"created_at":        "CreatedAt",
-		"edi_type":          "EdiType",
-		"file_format":       "FileFormat",
-		"format_options":    "FormatOptions",
-		"from_format":       "FromFormat",
-		"input":             "Input",
-		"input_conversion":  "InputConversion",
-		"key":               "Key",
-		"keys":              "Keys",
-		"mapping":           "Mapping",
-		"mapping_template":  "MappingTemplate",
-		"modified_at":       "ModifiedAt",
-		"name":              "Name",
-		"output":            "Output",
-		"output_conversion": "OutputConversion",
-		"sample_document":   "SampleDocument",
-		"sample_documents":  "SampleDocuments",
-		"split_by":          "SplitBy",
-		"split_options":     "SplitOptions",
-		"status":            "Status",
-		"tags":              "Tags",
-		"template":          "Template",
-		"template_language": "TemplateLanguage",
-		"to_format":         "ToFormat",
-		"transaction_set":   "TransactionSet",
-		"transformer_arn":   "TransformerArn",
-		"transformer_id":    "TransformerId",
-		"value":             "Value",
-		"version":           "Version",
-		"x12":               "X12",
-		"x12_details":       "X12Details",
+		"advanced_options":                    "AdvancedOptions",
+		"bucket_name":                         "BucketName",
+		"code_list_validation_rule":           "CodeListValidationRule",
+		"codes_to_add":                        "CodesToAdd",
+		"codes_to_remove":                     "CodesToRemove",
+		"created_at":                          "CreatedAt",
+		"edi_type":                            "EdiType",
+		"element_id":                          "ElementId",
+		"element_length_validation_rule":      "ElementLengthValidationRule",
+		"element_position":                    "ElementPosition",
+		"element_requirement_validation_rule": "ElementRequirementValidationRule",
+		"file_format":                         "FileFormat",
+		"format_options":                      "FormatOptions",
+		"from_format":                         "FromFormat",
+		"input":                               "Input",
+		"input_conversion":                    "InputConversion",
+		"key":                                 "Key",
+		"keys":                                "Keys",
+		"mapping":                             "Mapping",
+		"mapping_template":                    "MappingTemplate",
+		"max_length":                          "MaxLength",
+		"min_length":                          "MinLength",
+		"modified_at":                         "ModifiedAt",
+		"name":                                "Name",
+		"output":                              "Output",
+		"output_conversion":                   "OutputConversion",
+		"requirement":                         "Requirement",
+		"sample_document":                     "SampleDocument",
+		"sample_documents":                    "SampleDocuments",
+		"split_by":                            "SplitBy",
+		"split_options":                       "SplitOptions",
+		"status":                              "Status",
+		"tags":                                "Tags",
+		"template":                            "Template",
+		"template_language":                   "TemplateLanguage",
+		"to_format":                           "ToFormat",
+		"transaction_set":                     "TransactionSet",
+		"transformer_arn":                     "TransformerArn",
+		"transformer_id":                      "TransformerId",
+		"validation_options":                  "ValidationOptions",
+		"validation_rules":                    "ValidationRules",
+		"value":                               "Value",
+		"version":                             "Version",
+		"x12":                                 "X12",
+		"x12_details":                         "X12Details",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

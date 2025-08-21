@@ -110,6 +110,31 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "ApplicationEncryptionConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Describes whether customer managed key is enabled and key details for customer data encryption",
+		//	      "properties": {
+		//	        "KeyId": {
+		//	          "description": "KMS KeyId. Can be either key uuid or full key arn or key alias arn or short key alias",
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "pattern": "^(?:arn:.*:kms:.*:.*:(?:key\\/.*|alias\\/.*)|alias\\/.*|(?i)[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$",
+		//	          "type": "string"
+		//	        },
+		//	        "KeyType": {
+		//	          "description": "Specifies whether application data is encrypted using service key: AWS_OWNED_KEY or customer key: CUSTOMER_MANAGED_KEY",
+		//	          "enum": [
+		//	            "AWS_OWNED_KEY",
+		//	            "CUSTOMER_MANAGED_KEY"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "KeyType"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "ApplicationSnapshotConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "description": "Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.",
@@ -833,6 +858,46 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The code location and type parameters for a Flink-based Kinesis Data Analytics application.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ApplicationEncryptionConfiguration
+				"application_encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: KeyId
+						"key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "KMS KeyId. Can be either key uuid or full key arn or key alias arn or short key alias",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("^(?:arn:.*:kms:.*:.*:(?:key\\/.*|alias\\/.*)|alias\\/.*|(?i)[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: KeyType
+						"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether application data is encrypted using service key: AWS_OWNED_KEY or customer key: CUSTOMER_MANAGED_KEY",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"AWS_OWNED_KEY",
+									"CUSTOMER_MANAGED_KEY",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Describes whether customer managed key is enabled and key details for customer data encryption",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2147,6 +2212,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"application_code_configuration":            "ApplicationCodeConfiguration",
 		"application_configuration":                 "ApplicationConfiguration",
 		"application_description":                   "ApplicationDescription",
+		"application_encryption_configuration":      "ApplicationEncryptionConfiguration",
 		"application_maintenance_configuration":     "ApplicationMaintenanceConfiguration",
 		"application_maintenance_window_start_time": "ApplicationMaintenanceWindowStartTime",
 		"application_mode":                          "ApplicationMode",
@@ -2185,6 +2251,8 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"inputs":                                    "Inputs",
 		"json_mapping_parameters":                   "JSONMappingParameters",
 		"key":                                       "Key",
+		"key_id":                                    "KeyId",
+		"key_type":                                  "KeyType",
 		"kinesis_firehose_input":                    "KinesisFirehoseInput",
 		"kinesis_streams_input":                     "KinesisStreamsInput",
 		"log_level":                                 "LogLevel",
