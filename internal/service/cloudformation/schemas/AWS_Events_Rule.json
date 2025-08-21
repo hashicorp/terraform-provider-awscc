@@ -1,13 +1,23 @@
 {
   "tagging": {
-    "taggable": false
+    "permissions": [
+      "events:UntagResource",
+      "events:TagResource",
+      "events:ListTagsForResource"
+    ],
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": true
   },
   "handlers": {
     "read": {
       "permissions": [
         "iam:PassRole",
         "events:DescribeRule",
-        "events:ListTargetsByRule"
+        "events:ListTargetsByRule",
+        "events:ListTagsForResource"
       ]
     },
     "create": {
@@ -15,7 +25,8 @@
         "iam:PassRole",
         "events:DescribeRule",
         "events:PutRule",
-        "events:PutTargets"
+        "events:PutTargets",
+        "events:TagResource"
       ]
     },
     "update": {
@@ -24,7 +35,9 @@
         "events:DescribeRule",
         "events:PutRule",
         "events:RemoveTargets",
-        "events:PutTargets"
+        "events:PutTargets",
+        "events:UntagResource",
+        "events:TagResource"
       ]
     },
     "list": {
@@ -577,6 +590,15 @@
     "RoleArn": {
       "description": "The Amazon Resource Name (ARN) of the role that is used for target invocation.",
       "type": "string"
+    },
+    "Tags": {
+      "uniqueItems": false,
+      "description": "Any tags assigned to the event rule.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     },
     "Name": {
       "description": "The name of the rule.",

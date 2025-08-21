@@ -211,5 +211,15 @@
       ]
     }
   },
-  "taggable": true
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": false,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/HealthCheckTags",
+    "permissions": [
+      "route53:ChangeTagsForResource",
+      "route53:ListTagsForResource"
+    ]
+  }
 }

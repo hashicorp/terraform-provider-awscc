@@ -43,7 +43,7 @@
       "properties": {
         "CloudwatchLogsEnabled": {
           "type": "boolean",
-          "description": "The property specifies whether to enable the Cloudwatch log."
+          "description": "The property specifies whether to enable the CloudWatch log."
         },
         "NumberOfJobs": {
           "type": "integer",

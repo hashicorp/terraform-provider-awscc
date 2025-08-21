@@ -110,6 +110,21 @@
         }
       }
     },
+    "TargetGroupTuple": {
+      "description": "Information about how traffic will be distributed between multiple target groups in a forward rule.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "TargetGroupArn": {
+          "description": "The Amazon Resource Name (ARN) of the target group.",
+          "type": "string"
+        },
+        "Weight": {
+          "description": "The weight. The range is 0 to 999.",
+          "type": "integer"
+        }
+      }
+    },
     "FixedResponseConfig": {
       "description": "Specifies information required when returning a custom HTTP response.",
       "additionalProperties": false,
@@ -131,21 +146,6 @@
       "required": [
         "StatusCode"
       ]
-    },
-    "TargetGroupTuple": {
-      "description": "Information about how traffic will be distributed between multiple target groups in a forward rule.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "TargetGroupArn": {
-          "description": "The Amazon Resource Name (ARN) of the target group.",
-          "type": "string"
-        },
-        "Weight": {
-          "description": "The weight. The range is 0 to 999.",
-          "type": "integer"
-        }
-      }
     },
     "Action": {
       "description": "Specifies an action for a listener rule.",
