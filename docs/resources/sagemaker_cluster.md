@@ -152,6 +152,7 @@ Optional:
 - `life_cycle_config` (Attributes) The lifecycle configuration for a SageMaker HyperPod cluster. (see [below for nested schema](#nestedatt--instance_groups--life_cycle_config))
 - `on_start_deep_health_checks` (List of String) Nodes will undergo advanced stress test to detect and replace faulty instances, based on the type of deep health check(s) passed in.
 - `override_vpc_config` (Attributes) Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC. (see [below for nested schema](#nestedatt--instance_groups--override_vpc_config))
+- `scheduled_update_config` (Attributes) The configuration object of the schedule that SageMaker follows when updating the AMI. (see [below for nested schema](#nestedatt--instance_groups--scheduled_update_config))
 - `threads_per_core` (Number) The number you specified to TreadsPerCore in CreateCluster for enabling or disabling multithreading. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading.
 - `training_plan_arn` (String) The Amazon Resource Name (ARN) of the training plan to use for this cluster instance group. For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see CreateTrainingPlan.
 
@@ -187,6 +188,60 @@ Optional:
 
 - `security_group_ids` (List of String) The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.
 - `subnets` (List of String) The ID of the subnets in the VPC to which you want to connect your training job or model.
+
+
+<a id="nestedatt--instance_groups--scheduled_update_config"></a>
+### Nested Schema for `instance_groups.scheduled_update_config`
+
+Optional:
+
+- `deployment_config` (Attributes) The configuration to use when updating the AMI versions. (see [below for nested schema](#nestedatt--instance_groups--scheduled_update_config--deployment_config))
+- `schedule_expression` (String) A cron expression that specifies the schedule that SageMaker follows when updating the AMI.
+
+<a id="nestedatt--instance_groups--scheduled_update_config--deployment_config"></a>
+### Nested Schema for `instance_groups.scheduled_update_config.deployment_config`
+
+Optional:
+
+- `auto_rollback_configuration` (Attributes List) An array that contains the alarms that SageMaker monitors to know whether to roll back the AMI update. (see [below for nested schema](#nestedatt--instance_groups--scheduled_update_config--deployment_config--auto_rollback_configuration))
+- `rolling_update_policy` (Attributes) The policy that SageMaker uses when updating the AMI versions of the cluster. (see [below for nested schema](#nestedatt--instance_groups--scheduled_update_config--deployment_config--rolling_update_policy))
+- `wait_interval_in_seconds` (Number) The duration in seconds that SageMaker waits before updating more instances in the cluster.
+
+<a id="nestedatt--instance_groups--scheduled_update_config--deployment_config--auto_rollback_configuration"></a>
+### Nested Schema for `instance_groups.scheduled_update_config.deployment_config.auto_rollback_configuration`
+
+Optional:
+
+- `alarm_name` (String) The name of the alarm.
+
+
+<a id="nestedatt--instance_groups--scheduled_update_config--deployment_config--rolling_update_policy"></a>
+### Nested Schema for `instance_groups.scheduled_update_config.deployment_config.rolling_update_policy`
+
+Optional:
+
+- `maximum_batch_size` (Attributes) The configuration of the size measurements of the AMI update. Using this configuration, you can specify whether SageMaker should update your instance group by an amount or percentage of instances. (see [below for nested schema](#nestedatt--instance_groups--scheduled_update_config--deployment_config--rolling_update_policy--maximum_batch_size))
+- `rollback_maximum_batch_size` (Attributes) The configuration of the size measurements of the AMI update. Using this configuration, you can specify whether SageMaker should update your instance group by an amount or percentage of instances. (see [below for nested schema](#nestedatt--instance_groups--scheduled_update_config--deployment_config--rolling_update_policy--rollback_maximum_batch_size))
+
+<a id="nestedatt--instance_groups--scheduled_update_config--deployment_config--rolling_update_policy--maximum_batch_size"></a>
+### Nested Schema for `instance_groups.scheduled_update_config.deployment_config.rolling_update_policy.maximum_batch_size`
+
+Optional:
+
+- `type` (String) Specifies whether SageMaker should process the update by amount or percentage of instances.
+- `value` (Number) Specifies the amount or percentage of instances SageMaker updates at a time.
+
+
+<a id="nestedatt--instance_groups--scheduled_update_config--deployment_config--rolling_update_policy--rollback_maximum_batch_size"></a>
+### Nested Schema for `instance_groups.scheduled_update_config.deployment_config.rolling_update_policy.rollback_maximum_batch_size`
+
+Optional:
+
+- `type` (String) Specifies whether SageMaker should process the update by amount or percentage of instances.
+- `value` (Number) Specifies the amount or percentage of instances SageMaker updates at a time.
+
+
+
 
 
 

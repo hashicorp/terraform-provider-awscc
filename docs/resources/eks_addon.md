@@ -272,6 +272,7 @@ variable "cluster_name" {
 
 - `addon_version` (String) Version of Addon
 - `configuration_values` (String) The configuration values to use with the add-on
+- `namespace_config` (Attributes) The custom namespace configuration to use with the add-on (see [below for nested schema](#nestedatt--namespace_config))
 - `pod_identity_associations` (Attributes Set) An array of pod identities to apply to this add-on. (see [below for nested schema](#nestedatt--pod_identity_associations))
 - `preserve_on_delete` (Boolean) PreserveOnDelete parameter value
 - `resolve_conflicts` (String) Resolve parameter value conflicts
@@ -282,6 +283,14 @@ variable "cluster_name" {
 
 - `arn` (String) Amazon Resource Name (ARN) of the add-on
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--namespace_config"></a>
+### Nested Schema for `namespace_config`
+
+Optional:
+
+- `namespace` (String) The custom namespace for creating the add-on
+
 
 <a id="nestedatt--pod_identity_associations"></a>
 ### Nested Schema for `pod_identity_associations`

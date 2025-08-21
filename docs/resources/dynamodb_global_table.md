@@ -162,6 +162,7 @@ Optional:
 Optional:
 
 - `enabled` (Boolean)
+- `mode` (String)
 
 
 <a id="nestedatt--replicas--global_secondary_indexes"></a>
@@ -180,6 +181,7 @@ Optional:
 Optional:
 
 - `enabled` (Boolean)
+- `mode` (String)
 
 
 <a id="nestedatt--replicas--global_secondary_indexes--read_on_demand_throughput_settings"></a>

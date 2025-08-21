@@ -25,6 +25,7 @@ IdMappingWorkflow defined in AWS Entity Resolution service
 ### Optional
 
 - `description` (String) The description of the IdMappingWorkflow
+- `id_mapping_incremental_run_config` (Attributes) (see [below for nested schema](#nestedatt--id_mapping_incremental_run_config))
 - `output_source_config` (Attributes List) (see [below for nested schema](#nestedatt--output_source_config))
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
@@ -94,6 +95,14 @@ Optional:
 
 - `schema_arn` (String) The SchemaMapping arn associated with the Schema
 - `type` (String)
+
+
+<a id="nestedatt--id_mapping_incremental_run_config"></a>
+### Nested Schema for `id_mapping_incremental_run_config`
+
+Optional:
+
+- `incremental_run_type` (String)
 
 
 <a id="nestedatt--output_source_config"></a>

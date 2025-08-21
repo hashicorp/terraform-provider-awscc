@@ -76,7 +76,7 @@ resource "awscc_dms_data_migration_task" "example" {
 
 Optional:
 
-- `cloudwatch_logs_enabled` (Boolean) The property specifies whether to enable the Cloudwatch log.
+- `cloudwatch_logs_enabled` (Boolean) The property specifies whether to enable the CloudWatch log.
 - `number_of_jobs` (Number) The number of parallel jobs that trigger parallel threads to unload the tables from the source, and then load them to the target.
 - `selection_rules` (String) The property specifies the rules of selecting objects for data migration.
 
