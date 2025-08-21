@@ -101,6 +101,14 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "Enabled": {
 		//	      "description": "Indicates whether CloudWatch Contributor Insights are to be enabled (true) or disabled (false).",
 		//	      "type": "boolean"
+		//	    },
+		//	    "Mode": {
+		//	      "description": "",
+		//	      "enum": [
+		//	        "ACCESSED_AND_THROTTLED_KEYS",
+		//	        "THROTTLED_KEYS"
+		//	      ],
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -113,6 +121,11 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Indicates whether CloudWatch Contributor Insights are to be enabled (true) or disabled (false).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Mode
+				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -146,6 +159,14 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "Enabled": {
 		//	            "description": "Indicates whether CloudWatch Contributor Insights are to be enabled (true) or disabled (false).",
 		//	            "type": "boolean"
+		//	          },
+		//	          "Mode": {
+		//	            "description": "",
+		//	            "enum": [
+		//	              "ACCESSED_AND_THROTTLED_KEYS",
+		//	              "THROTTLED_KEYS"
+		//	            ],
+		//	            "type": "string"
 		//	          }
 		//	        },
 		//	        "required": [
@@ -285,6 +306,11 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 							// Property: Enabled
 							"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 								Description: "Indicates whether CloudWatch Contributor Insights are to be enabled (true) or disabled (false).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Mode
+							"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -1143,6 +1169,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"local_secondary_indexes":              "LocalSecondaryIndexes",
 		"max_read_request_units":               "MaxReadRequestUnits",
 		"max_write_request_units":              "MaxWriteRequestUnits",
+		"mode":                                 "Mode",
 		"non_key_attributes":                   "NonKeyAttributes",
 		"on_demand_throughput":                 "OnDemandThroughput",
 		"point_in_time_recovery_enabled":       "PointInTimeRecoveryEnabled",

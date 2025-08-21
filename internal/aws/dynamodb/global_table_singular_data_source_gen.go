@@ -556,6 +556,13 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "properties": {
 		//	          "Enabled": {
 		//	            "type": "boolean"
+		//	          },
+		//	          "Mode": {
+		//	            "enum": [
+		//	              "ACCESSED_AND_THROTTLED_KEYS",
+		//	              "THROTTLED_KEYS"
+		//	            ],
+		//	            "type": "string"
 		//	          }
 		//	        },
 		//	        "required": [
@@ -576,6 +583,13 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "properties": {
 		//	                "Enabled": {
 		//	                  "type": "boolean"
+		//	                },
+		//	                "Mode": {
+		//	                  "enum": [
+		//	                    "ACCESSED_AND_THROTTLED_KEYS",
+		//	                    "THROTTLED_KEYS"
+		//	                  ],
+		//	                  "type": "string"
 		//	                }
 		//	              },
 		//	              "required": [
@@ -861,6 +875,10 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 							"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
+							// Property: Mode
+							"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
@@ -877,6 +895,10 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Enabled
 										"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Mode
+										"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Computed: true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -1422,6 +1444,7 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"max_read_request_units":               "MaxReadRequestUnits",
 		"max_write_request_units":              "MaxWriteRequestUnits",
 		"min_capacity":                         "MinCapacity",
+		"mode":                                 "Mode",
 		"multi_region_consistency":             "MultiRegionConsistency",
 		"non_key_attributes":                   "NonKeyAttributes",
 		"point_in_time_recovery_enabled":       "PointInTimeRecoveryEnabled",
