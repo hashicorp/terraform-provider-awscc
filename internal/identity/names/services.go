@@ -24,14 +24,14 @@ type Resource struct {
 	HasMutableIdentity bool   `hcl:"has_mutable_identity,optional"`
 }
 
-func ParseServicesFile(filename string) (Config, error) {
+func ParseServicesFile(filename string) (*Config, error) {
 	var config Config
 	err := hclsimple.DecodeFile(filename, nil, &config)
 	if err != nil {
-		return Config{}, err
+		return nil, err
 	}
 
-	return config, nil
+	return &config, nil
 }
 
 func GetServiceName(s string) string {

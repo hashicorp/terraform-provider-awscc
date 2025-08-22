@@ -170,22 +170,24 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 			return nil, err
 		}
 
-		serviceName := identitynames.GetServiceName(templateData.CloudFormationTypeName)
-		if serviceName != "" {
-			t := slices.IndexFunc(services.Services, func(s identitynames.Service) bool {
-				return s.ServiceName == serviceName
-			})
+		if services != nil {
+			serviceName := identitynames.GetServiceName(templateData.CloudFormationTypeName)
+			if serviceName != "" {
+				t := slices.IndexFunc(services.Services, func(s identitynames.Service) bool {
+					return s.ServiceName == serviceName
+				})
 
-			if t != -1 {
-				templateData.IsGlobal = services.Services[t].IsGlobal
+				if t != -1 {
+					templateData.IsGlobal = services.Services[t].IsGlobal
 
-				if s := services.Services[t].Resources; s != nil {
-					t := slices.IndexFunc(s, func(r identitynames.Resource) bool {
-						return r.TFResourceName == templateData.TerraformTypeName
-					})
+					if s := services.Services[t].Resources; s != nil {
+						t := slices.IndexFunc(s, func(r identitynames.Resource) bool {
+							return r.TFResourceName == templateData.TerraformTypeName
+						})
 
-					if t != -1 {
-						templateData.HasMutableIdentity = s[t].HasMutableIdentity
+						if t != -1 {
+							templateData.HasMutableIdentity = s[t].HasMutableIdentity
+						}
 					}
 				}
 			}
