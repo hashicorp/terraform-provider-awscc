@@ -12,23 +12,21 @@ const (
 type Identifier struct {
 	Name              string
 	Description       string
-	OptionalForImport bool
+	RequiredForImport bool
 }
 
 type Identifiers []Identifier
 
 func (a Identifiers) AddAccountID() Identifiers {
 	return append(a, Identifier{
-		Name:              NameAccountID,
-		Description:       "The ID of the AWS account",
-		OptionalForImport: true,
+		Name:        NameAccountID,
+		Description: "The ID of the AWS account",
 	})
 }
 
 func (a Identifiers) AddRegionID() Identifiers {
 	return append(a, Identifier{
-		Name:              NameRegion,
-		Description:       "The AWS region where the resource is located",
-		OptionalForImport: true,
+		Name:        NameRegion,
+		Description: "The AWS region where the resource is located",
 	})
 }

@@ -4535,8 +4535,9 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
-			Name:        "bucket_name",
-			Description: "A name for the bucket",
+			Name:              "bucket_name",
+			Description:       "A name for the bucket",
+			RequiredForImport: true,
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{

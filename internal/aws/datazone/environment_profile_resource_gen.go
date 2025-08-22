@@ -337,12 +337,14 @@ func environmentProfileResource(ctx context.Context) (resource.Resource, error) 
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
-			Name:        "domain_id",
-			Description: "The ID of the Amazon DataZone domain in which this environment profile is created",
+			Name:              "domain_id",
+			Description:       "The ID of the Amazon DataZone domain in which this environment profile is created",
+			RequiredForImport: true,
 		},
 		identity.Identifier{
-			Name:        "id",
-			Description: "The ID of this Amazon DataZone environment profile",
+			Name:              "id",
+			Description:       "The ID of this Amazon DataZone environment profile",
+			RequiredForImport: true,
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{

@@ -59,6 +59,14 @@ func resourceWithAttributeNameMap(v map[string]string) ResourceOptionsFunc {
 	}
 }
 
+func resourceHasMutableIdentity(v bool) ResourceOptionsFunc {
+	return func(o *genericResource) error {
+		o.hasMutableIdentity = v
+
+		return nil
+	}
+}
+
 // resourceWithCloudFormationTypeName is a helper function to construct functional options
 // that set a resource type's CloudFormation type name.
 // If multiple resourceWithCloudFormationTypeName calls are made, the last call overrides
@@ -217,6 +225,10 @@ func resourceWithPrimaryIdentifier(vs ...identity.Identifier) ResourceOptionsFun
 // ResourceOptions is a type alias for a slice of resource type functional options.
 type ResourceOptions []ResourceOptionsFunc
 
+func (opts ResourceOptions) HasMutableIdentity(v bool) ResourceOptions {
+	return append(opts, resourceHasMutableIdentity(v))
+}
+
 // WithAttributeNameMap is a helper function to construct functional options
 // that set a resource type's attribute name map, append that function to the
 // current slice of functional options and return the new slice of options.
@@ -345,7 +357,9 @@ type genericResource struct {
 	configValidators        []resource.ConfigValidator // Required attributes validators
 	provider                tfcloudcontrol.Provider
 	primaryIdentifier       identity.Identifiers
-	isGlobal                bool
+
+	isGlobal           bool
+	hasMutableIdentity bool
 }
 
 var (
@@ -356,6 +370,10 @@ var (
 
 func (r *genericResource) Metadata(_ context.Context, request resource.MetadataRequest, response *resource.MetadataResponse) {
 	response.TypeName = r.tfTypeName
+
+	if r.hasMutableIdentity {
+		response.ResourceBehavior.MutableIdentity = true
+	}
 }
 
 func (r *genericResource) Schema(_ context.Context, request resource.SchemaRequest, response *resource.SchemaResponse) {
@@ -458,7 +476,7 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 
 	// set resource identity
 	for _, v := range r.primaryIdentifier {
-		if !v.OptionalForImport {
+		if v.RequiredForImport {
 			var out types.String
 			response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v.Name), &out)...)
 			if response.Diagnostics.HasError() {
@@ -562,7 +580,7 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 
 	// set resource identity
 	for _, v := range r.primaryIdentifier {
-		if !v.OptionalForImport {
+		if v.RequiredForImport {
 			var out types.String
 			response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v.Name), &out)...)
 			if response.Diagnostics.HasError() {
@@ -762,11 +780,11 @@ func (r *genericResource) IdentitySchema(_ context.Context, _ resource.IdentityS
 			Description: v.Description,
 		}
 
-		switch v.OptionalForImport {
+		switch v.RequiredForImport {
 		case true:
-			ident.OptionalForImport = true
-		default:
 			ident.RequiredForImport = true
+		default:
+			ident.OptionalForImport = true
 		}
 
 		identitySchemaAttributes[v.Name] = ident
@@ -795,7 +813,7 @@ func (r *genericResource) ImportState(ctx context.Context, request resource.Impo
 
 	var identifier []string
 	for _, v := range r.primaryIdentifier {
-		if !v.OptionalForImport {
+		if v.RequiredForImport {
 			var out types.String
 			response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(v.Name), &out)...)
 			if response.Diagnostics.HasError() {

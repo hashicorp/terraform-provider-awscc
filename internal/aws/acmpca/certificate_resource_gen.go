@@ -1407,11 +1407,13 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
-			Name: "arn",
+			Name:              "arn",
+			RequiredForImport: true,
 		},
 		identity.Identifier{
-			Name:        "certificate_authority_arn",
-			Description: "The Amazon Resource Name (ARN) for the private CA issues the certificate",
+			Name:              "certificate_authority_arn",
+			Description:       "The Amazon Resource Name (ARN) for the private CA issues the certificate",
+			RequiredForImport: true,
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{

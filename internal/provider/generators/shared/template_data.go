@@ -177,8 +177,16 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 			})
 
 			if t != -1 {
-				if services.Services[t].IsGlobal {
-					templateData.IsGlobal = true
+				templateData.IsGlobal = services.Services[t].IsGlobal
+
+				if s := services.Services[t].Resources; s != nil {
+					t := slices.IndexFunc(s, func(r identitynames.Resource) bool {
+						return r.TFResourceName == templateData.TerraformTypeName
+					})
+
+					if t != -1 {
+						templateData.HasMutableIdentity = s[t].HasMutableIdentity
+					}
 				}
 			}
 		}
@@ -215,7 +223,8 @@ type TemplateData struct {
 	UpdateTimeoutInMinutes        int
 	WriteOnlyPropertyPaths        []string
 
-	IsGlobal bool
+	IsGlobal           bool
+	HasMutableIdentity bool
 }
 
 type Resource struct {

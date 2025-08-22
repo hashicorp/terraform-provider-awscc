@@ -184,8 +184,9 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
-			Name:        "group_name",
-			Description: "The name of the group to create",
+			Name:              "group_name",
+			Description:       "The name of the group to create",
+			RequiredForImport: true,
 		})
 
 	opts = opts.IsGlobalResourceType(true)
