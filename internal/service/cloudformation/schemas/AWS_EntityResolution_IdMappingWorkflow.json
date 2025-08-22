@@ -159,6 +159,21 @@
       "description": "The default IdMappingWorkflow arn",
       "type": "string"
     },
+    "IdMappingIncrementalRunConfig": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "IncrementalRunType": {
+          "type": "string",
+          "enum": [
+            "ON_DEMAND"
+          ]
+        }
+      },
+      "required": [
+        "IncrementalRunType"
+      ]
+    },
     "UpdatedAt": {
       "description": "The time of this IdMappingWorkflow got last updated at",
       "type": "string"
@@ -339,6 +354,9 @@
       "items": {
         "$ref": "#/definitions/IdMappingWorkflowOutputSource"
       }
+    },
+    "IdMappingIncrementalRunConfig": {
+      "$ref": "#/definitions/IdMappingIncrementalRunConfig"
     },
     "WorkflowArn": {
       "$ref": "#/definitions/IdMappingWorkflowArn"

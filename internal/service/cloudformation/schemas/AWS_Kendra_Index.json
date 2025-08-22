@@ -47,6 +47,7 @@
     "TagList": {
       "description": "List of tags",
       "type": "array",
+      "insertionOrder": false,
       "maxItems": 200,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -96,6 +97,7 @@
     },
     "ValueImportanceItems": {
       "type": "array",
+      "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/ValueImportanceItem"
       }
@@ -173,6 +175,7 @@
     },
     "DocumentMetadataConfigurationList": {
       "type": "array",
+      "insertionOrder": false,
       "maxItems": 500,
       "items": {
         "$ref": "#/definitions/DocumentMetadataConfiguration"
@@ -334,6 +337,7 @@
     },
     "UserTokenConfigurationList": {
       "type": "array",
+      "insertionOrder": false,
       "maxItems": 1,
       "items": {
         "$ref": "#/definitions/UserTokenConfiguration"
@@ -396,7 +400,9 @@
         "kendra:UpdateIndex",
         "kendra:ListTagsForResource",
         "iam:PassRole",
-        "kendra:TagResource"
+        "kendra:TagResource",
+        "kms:DescribeKey",
+        "kms:CreateGrant"
       ],
       "timeoutInMinutes": 240
     },
@@ -420,7 +426,8 @@
     "delete": {
       "permissions": [
         "kendra:DescribeIndex",
-        "kendra:DeleteIndex"
+        "kendra:DeleteIndex",
+        "kms:RetireGrant"
       ],
       "timeoutInMinutes": 720
     },

@@ -1,4 +1,27 @@
-## 1.53.0 (Unreleased)
+## 1.54.0 (Unreleased)
+
+## 1.53.0 (August 21, 2025)
+
+FEATURES
+
+* **New Data Source:** `awscc_aps_resource_policy`
+* **New Data Source:** `awscc_aps_resource_policies`
+* **New Data Source:** `awscc_codepipeline_webhook`
+* **New Data Source:** `awscc_codepipeline_webhooks`
+* **New Data Source:** `awscc_guardduty_threat_entity_set`
+* **New Data Source:** `awscc_guardduty_threat_entity_sets`
+* **New Data Source:** `awscc_guardduty_trusted_entity_set`
+* **New Data Source:** `awscc_guardduty_trusted_entity_sets`
+* **New Data Source:** `awscc_inspectorv2_code_security_integration`
+* **New Data Source:** `awscc_inspectorv2_code_security_integrations`
+* **New Data Source:** `awscc_inspectorv2_code_security_scan_configuration`
+* **New Data Source:** `awscc_inspectorv2_code_security_scan_configurations`
+* **New Resource:** `aws_aps_resource_policy`
+* **New Resource:** `aws_codepipeline_webhook`
+* **New Resource:** `aws_guardduty_threat_entity_set`
+* **New Resource:** `aws_guardduty_trusted_entity_set`
+* **New Resource:** `aws_inspectorv2_code_security_integration`
+* **New Resource:** `aws_inspectorv2_code_security_scan_configuration`
 
 ## 1.52.0 (August 14, 2025)
 

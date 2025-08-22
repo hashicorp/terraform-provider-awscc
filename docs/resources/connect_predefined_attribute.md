@@ -41,6 +41,9 @@ resource "awscc_connect_predefined_attribute" "example" {
 
 - `instance_arn` (String) The identifier of the Amazon Connect instance.
 - `name` (String) The name of the predefined attribute.
+
+### Optional
+
 - `values` (Attributes) The values of a predefined attribute. (see [below for nested schema](#nestedatt--values))
 
 ### Read-Only

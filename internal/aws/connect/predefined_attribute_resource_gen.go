@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -83,7 +84,7 @@ func predefinedAttributeResource(ctx context.Context) (resource.Resource, error)
 		//
 		//	{
 		//	  "description": "The name of the predefined attribute.",
-		//	  "maxLength": 64,
+		//	  "maxLength": 100,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
@@ -91,7 +92,7 @@ func predefinedAttributeResource(ctx context.Context) (resource.Resource, error)
 			Description: "The name of the predefined attribute.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.LengthBetween(1, 100),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -109,11 +110,11 @@ func predefinedAttributeResource(ctx context.Context) (resource.Resource, error)
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "description": "Textual or numeric value that describes an attribute.",
-		//	        "maxLength": 64,
+		//	        "maxLength": 100,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
-		//	      "maxItems": 128,
+		//	      "maxItems": 500,
 		//	      "minItems": 1,
 		//	      "type": "array"
 		//	    }
@@ -129,9 +130,9 @@ func predefinedAttributeResource(ctx context.Context) (resource.Resource, error)
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(1, 128),
+						listvalidator.SizeBetween(1, 500),
 						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(1, 64),
+							stringvalidator.LengthBetween(1, 100),
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -141,7 +142,11 @@ func predefinedAttributeResource(ctx context.Context) (resource.Resource, error)
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The values of a predefined attribute.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

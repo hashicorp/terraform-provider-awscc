@@ -81,6 +81,34 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The configuration values to use with the add-on",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: NamespaceConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The custom namespace configuration to use with the add-on",
+		//	  "properties": {
+		//	    "Namespace": {
+		//	      "description": "The custom namespace for creating the add-on",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Namespace"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"namespace_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Namespace
+				"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The custom namespace for creating the add-on",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The custom namespace configuration to use with the add-on",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PodIdentityAssociations
 		// CloudFormation resource type schema:
 		//
@@ -241,6 +269,8 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"cluster_name":              "ClusterName",
 		"configuration_values":      "ConfigurationValues",
 		"key":                       "Key",
+		"namespace":                 "Namespace",
+		"namespace_config":          "NamespaceConfig",
 		"pod_identity_associations": "PodIdentityAssociations",
 		"preserve_on_delete":        "PreserveOnDelete",
 		"resolve_conflicts":         "ResolveConflicts",

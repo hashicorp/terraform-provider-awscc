@@ -126,6 +126,7 @@ resource "awscc_deadline_fleet" "example" {
 - `fleet_id` (String)
 - `id` (String) Uniquely identifies the resource.
 - `status` (String)
+- `status_message` (String)
 - `worker_count` (Number)
 
 <a id="nestedatt--configuration"></a>

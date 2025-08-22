@@ -1,0 +1,1 @@
+$ terraform import awscc_guardduty_threat_entity_set.example "id|detector_id"

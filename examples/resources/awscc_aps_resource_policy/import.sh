@@ -1,0 +1,1 @@
+$ terraform import awscc_aps_resource_policy.example "workspace_arn"

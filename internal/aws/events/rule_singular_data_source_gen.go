@@ -116,6 +116,43 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The state of the rule.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Any tags assigned to the event rule.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Any tags assigned to the event rule.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Targets
 		// CloudFormation resource type schema:
 		//
@@ -991,6 +1028,7 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"statement_name":                 "StatementName",
 		"subnets":                        "Subnets",
 		"tag_list":                       "TagList",
+		"tags":                           "Tags",
 		"targets":                        "Targets",
 		"task_count":                     "TaskCount",
 		"task_definition_arn":            "TaskDefinitionArn",

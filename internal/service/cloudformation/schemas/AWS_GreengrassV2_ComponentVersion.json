@@ -336,6 +336,11 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "greengrass:TagResource",
+      "greengrass:UntagResource",
+      "greengrass:ListTagsForResource"
+    ]
   }
 }

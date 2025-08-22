@@ -33,6 +33,7 @@ Data Source schema for AWS::Deadline::Fleet
 - `min_worker_count` (Number)
 - `role_arn` (String)
 - `status` (String)
+- `status_message` (String)
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `worker_count` (Number)
 

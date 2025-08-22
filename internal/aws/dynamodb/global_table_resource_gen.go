@@ -815,6 +815,13 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	        "properties": {
 		//	          "Enabled": {
 		//	            "type": "boolean"
+		//	          },
+		//	          "Mode": {
+		//	            "enum": [
+		//	              "ACCESSED_AND_THROTTLED_KEYS",
+		//	              "THROTTLED_KEYS"
+		//	            ],
+		//	            "type": "string"
 		//	          }
 		//	        },
 		//	        "required": [
@@ -835,6 +842,13 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	              "properties": {
 		//	                "Enabled": {
 		//	                  "type": "boolean"
+		//	                },
+		//	                "Mode": {
+		//	                  "enum": [
+		//	                    "ACCESSED_AND_THROTTLED_KEYS",
+		//	                    "THROTTLED_KEYS"
+		//	                  ],
+		//	                  "type": "string"
 		//	                }
 		//	              },
 		//	              "required": [
@@ -1127,6 +1141,20 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 									boolplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
+							// Property: Mode
+							"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"ACCESSED_AND_THROTTLED_KEYS",
+										"THROTTLED_KEYS",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Optional: true,
 						Computed: true,
@@ -1158,6 +1186,20 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Mode
+										"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"ACCESSED_AND_THROTTLED_KEYS",
+													"THROTTLED_KEYS",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -2132,6 +2174,7 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		"max_read_request_units":               "MaxReadRequestUnits",
 		"max_write_request_units":              "MaxWriteRequestUnits",
 		"min_capacity":                         "MinCapacity",
+		"mode":                                 "Mode",
 		"multi_region_consistency":             "MultiRegionConsistency",
 		"non_key_attributes":                   "NonKeyAttributes",
 		"point_in_time_recovery_enabled":       "PointInTimeRecoveryEnabled",

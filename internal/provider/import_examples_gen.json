@@ -20,6 +20,10 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_aps_resource_policy",
+        "identifier": ["WorkspaceArn"]
+    },
+    {
         "resource": "awscc_aps_rule_groups_namespace",
         "identifier": ["Arn"]
     },
@@ -850,6 +854,10 @@
     {
         "resource": "awscc_codepipeline_pipeline",
         "identifier": ["Name"]
+    },
+    {
+        "resource": "awscc_codepipeline_webhook",
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_codestarconnections_connection",
@@ -2216,7 +2224,15 @@
         "identifier": ["DetectorId","Id"]
     },
     {
+        "resource": "awscc_guardduty_threat_entity_set",
+        "identifier": ["Id","DetectorId"]
+    },
+    {
         "resource": "awscc_guardduty_threat_intel_set",
+        "identifier": ["Id","DetectorId"]
+    },
+    {
+        "resource": "awscc_guardduty_trusted_entity_set",
         "identifier": ["Id","DetectorId"]
     },
     {
@@ -2385,6 +2401,14 @@
     },
     {
         "resource": "awscc_inspectorv2_cis_scan_configuration",
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_inspectorv2_code_security_integration",
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_inspectorv2_code_security_scan_configuration",
         "identifier": ["Arn"]
     },
     {

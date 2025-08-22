@@ -82,6 +82,7 @@ Read-Only:
 Read-Only:
 
 - `enabled` (Boolean) Indicates whether CloudWatch Contributor Insights are to be enabled (true) or disabled (false).
+- `mode` (String)
 
 
 <a id="nestedatt--global_secondary_indexes"></a>
@@ -109,6 +110,7 @@ Read-Only:
 Read-Only:
 
 - `enabled` (Boolean) Indicates whether CloudWatch Contributor Insights are to be enabled (true) or disabled (false).
+- `mode` (String)
 
 
 <a id="nestedatt--global_secondary_indexes--key_schema"></a>

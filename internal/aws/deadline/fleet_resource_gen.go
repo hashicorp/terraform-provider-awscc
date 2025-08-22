@@ -596,7 +596,8 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		//	            "Type": {
 		//	              "enum": [
 		//	                "on-demand",
-		//	                "spot"
+		//	                "spot",
+		//	                "wait-and-save"
 		//	              ],
 		//	              "type": "string"
 		//	            }
@@ -1357,6 +1358,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 										stringvalidator.OneOf(
 											"on-demand",
 											"spot",
+											"wait-and-save",
 										),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -1594,11 +1596,24 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		//	    "CREATE_IN_PROGRESS",
 		//	    "UPDATE_IN_PROGRESS",
 		//	    "CREATE_FAILED",
-		//	    "UPDATE_FAILED"
+		//	    "UPDATE_FAILED",
+		//	    "SUSPENDED"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: StatusMessage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1755,6 +1770,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		"service_managed_ec_2":          "ServiceManagedEc2",
 		"size_gi_b":                     "SizeGiB",
 		"status":                        "Status",
+		"status_message":                "StatusMessage",
 		"storage_profile_id":            "StorageProfileId",
 		"tag_propagation_mode":          "TagPropagationMode",
 		"tags":                          "Tags",

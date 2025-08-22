@@ -40,6 +40,7 @@ Creates an Amazon Kinesis Data Analytics application. For information about crea
 Optional:
 
 - `application_code_configuration` (Attributes) The code location and type parameters for a Flink-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--application_code_configuration))
+- `application_encryption_configuration` (Attributes) Describes whether customer managed key is enabled and key details for customer data encryption (see [below for nested schema](#nestedatt--application_configuration--application_encryption_configuration))
 - `application_snapshot_configuration` (Attributes) Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--application_snapshot_configuration))
 - `application_system_rollback_configuration` (Attributes) Describes whether system initiated rollbacks are enabled for a Flink-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--application_system_rollback_configuration))
 - `environment_properties` (Attributes) Describes execution properties for a Flink-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--environment_properties))
@@ -75,6 +76,15 @@ Optional:
 - `object_version` (String) The version of the object containing the application code.
 
 
+
+
+<a id="nestedatt--application_configuration--application_encryption_configuration"></a>
+### Nested Schema for `application_configuration.application_encryption_configuration`
+
+Optional:
+
+- `key_id` (String) KMS KeyId. Can be either key uuid or full key arn or key alias arn or short key alias
+- `key_type` (String) Specifies whether application data is encrypted using service key: AWS_OWNED_KEY or customer key: CUSTOMER_MANAGED_KEY
 
 
 <a id="nestedatt--application_configuration--application_snapshot_configuration"></a>

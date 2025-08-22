@@ -121,6 +121,9 @@
       "description": ""
     }
   },
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
   "readOnlyProperties": [
     "/properties/FunctionARN",
     "/properties/FunctionMetadata/FunctionARN",

@@ -29,8 +29,18 @@ Data Source schema for AWS::Events::Rule
 - `role_arn` (String) The Amazon Resource Name (ARN) of the role that is used for target invocation.
 - `schedule_expression` (String) The scheduling expression. For example, "cron(0 20 * * ? *)", "rate(5 minutes)". For more information, see Creating an Amazon EventBridge rule that runs on a schedule.
 - `state` (String) The state of the rule.
+- `tags` (Attributes List) Any tags assigned to the event rule. (see [below for nested schema](#nestedatt--tags))
 - `targets` (Attributes Set) Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule.
 Targets are the resources that are invoked when a rule is triggered. (see [below for nested schema](#nestedatt--targets))
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
+
 
 <a id="nestedatt--targets"></a>
 ### Nested Schema for `targets`
