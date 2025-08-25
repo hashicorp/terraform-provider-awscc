@@ -20,7 +20,7 @@ type Service struct {
 }
 
 type Resource struct {
-	TFResourceName     string `hcl:"tf_resource_name"`
+	TFResourceName     string `hcl:",label"`
 	HasMutableIdentity bool   `hcl:"has_mutable_identity,optional"`
 }
 

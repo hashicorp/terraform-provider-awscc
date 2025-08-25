@@ -1,6 +1,21 @@
 # This file defines services that exist in AWS.
 # Services are inserted into this file when an exception to the normal identity generator process is necessary.
 
+## example service definition with all available options
+
+# service "example" {
+#   is_global = true
+#
+#   # resource is a repeatable block
+#   resource "awscc_example_thing2" {
+#     has_mutable_identity = true
+#   }
+#
+#   resource "awscc_example_thing1" {
+#      has_mutable_identity = true
+#   }
+# }
+
 service "bcmdataexports" {
   is_global = true
 }
