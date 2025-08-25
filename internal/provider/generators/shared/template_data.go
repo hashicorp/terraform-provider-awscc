@@ -7,10 +7,13 @@ import (
 	"bytes"
 	"fmt"
 	"os"
+	"slices"
 	"strings"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	"github.com/hashicorp/cli"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
+	identitynames "github.com/hashicorp/terraform-provider-awscc/internal/identity/names"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared/codegen"
 	tfslices "github.com/hashicorp/terraform-provider-awscc/internal/slices"
@@ -130,9 +133,20 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 		templateData.WriteOnlyPropertyPaths = append(templateData.WriteOnlyPropertyPaths, string(path))
 	}
 
+	var identifiers []identity.Identifier
 	for _, path := range resource.CfResource.PrimaryIdentifier {
-		templateData.PrimaryIdentifier = append(templateData.PrimaryIdentifier, string(path))
+		id := strings.TrimPrefix(string(path), "/properties/")
+		identifier := identity.Identifier{
+			Name: id,
+		}
+		if v, ok := resource.CfResource.Properties[id]; ok {
+			if v.Description != nil {
+				identifier.Description = strings.Split(*v.Description, ".")[0]
+			}
+		}
+		identifiers = append(identifiers, identifier)
 	}
+	templateData.PrimaryIdentifier = identifiers
 
 	if v, ok := resource.CfResource.Handlers[cfschema.HandlerTypeCreate]; ok {
 		templateData.CreateTimeoutInMinutes = v.TimeoutInMinutes
@@ -148,6 +162,37 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 	templateData.FrameworkPlanModifierPackages = []string{"stringplanmodifier"} // For the 'id' attribute.
 	templateData.FrameworkPlanModifierPackages = tfslices.AppendUnique(templateData.FrameworkPlanModifierPackages, codeFeatures.FrameworkPlanModifierPackages...)
 	templateData.FrameworkValidatorsPackages = tfslices.AppendUnique(templateData.FrameworkValidatorsPackages, codeFeatures.FrameworkValidatorsPackages...)
+
+	// add global flag for resources only
+	if resType == ResourceType {
+		services, err := identitynames.ParseServicesFile("../identity/names/services.hcl")
+		if err != nil {
+			return nil, err
+		}
+
+		if services != nil {
+			serviceName := identitynames.GetServiceName(templateData.CloudFormationTypeName)
+			if serviceName != "" {
+				t := slices.IndexFunc(services.Services, func(s identitynames.Service) bool {
+					return s.ServiceName == serviceName
+				})
+
+				if t != -1 {
+					templateData.IsGlobal = services.Services[t].IsGlobal
+
+					if s := services.Services[t].Resources; s != nil {
+						t := slices.IndexFunc(s, func(r identitynames.Resource) bool {
+							return r.TFResourceName == templateData.TerraformTypeName
+						})
+
+						if t != -1 {
+							templateData.HasMutableIdentity = s[t].HasMutableIdentity
+						}
+					}
+				}
+			}
+		}
+	}
 
 	return templateData, nil
 }
@@ -172,13 +217,16 @@ type TemplateData struct {
 	ImportInternalValidators      bool
 	ImportRegexp                  bool
 	PackageName                   string
-	PrimaryIdentifier             []string
+	PrimaryIdentifier             []identity.Identifier
 	RootPropertiesSchema          string
 	SchemaDescription             string
 	SchemaVersion                 int64
 	TerraformTypeName             string
 	UpdateTimeoutInMinutes        int
 	WriteOnlyPropertyPaths        []string
+
+	IsGlobal           bool
+	HasMutableIdentity bool
 }
 
 type Resource struct {
