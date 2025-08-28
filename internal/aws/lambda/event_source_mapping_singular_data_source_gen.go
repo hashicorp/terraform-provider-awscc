@@ -39,16 +39,16 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	    },
 		//	    "SchemaRegistryConfig": {
 		//	      "additionalProperties": false,
-		//	      "description": "",
+		//	      "description": "Specific configuration settings for a Kafka schema registry.",
 		//	      "properties": {
 		//	        "AccessConfigs": {
-		//	          "description": "",
+		//	          "description": "An array of access configuration objects that tell Lambda how to authenticate with your schema registry.",
 		//	          "items": {
 		//	            "additionalProperties": false,
-		//	            "description": "",
+		//	            "description": "Specific access configuration settings that tell Lambda how to authenticate with your schema registry.\n If you're working with an GLU schema registry, don't provide authentication details in this object. Instead, ensure that your execution role has the required permissions for Lambda to access your cluster.\n If you're working with a Confluent schema registry, choose the authentication method in the ``Type`` field, and provide the ASMlong secret ARN in the ``URI`` field.",
 		//	            "properties": {
 		//	              "Type": {
-		//	                "description": "",
+		//	                "description": "The type of authentication Lambda uses to access your schema registry.",
 		//	                "enum": [
 		//	                  "BASIC_AUTH",
 		//	                  "CLIENT_CERTIFICATE_TLS_AUTH",
@@ -57,10 +57,10 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	                "type": "string"
 		//	              },
 		//	              "URI": {
-		//	                "description": "",
+		//	                "description": "The URI of the secret (Secrets Manager secret ARN) to authenticate with your schema registry.",
 		//	                "maxLength": 10000,
 		//	                "minLength": 1,
-		//	                "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?(-iso([a-z])?)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
+		//	                "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -71,7 +71,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	          "uniqueItems": true
 		//	        },
 		//	        "EventRecordFormat": {
-		//	          "description": "",
+		//	          "description": "The record format that Lambda delivers to your function after schema validation.\n  +  Choose ``JSON`` to have Lambda deliver the record to your function as a standard JSON object.\n  +  Choose ``SOURCE`` to have Lambda deliver the record to your function in its original source format. Lambda removes all schema metadata, such as the schema ID, before sending the record to your function.",
 		//	          "enum": [
 		//	            "JSON",
 		//	            "SOURCE"
@@ -79,20 +79,20 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	          "type": "string"
 		//	        },
 		//	        "SchemaRegistryURI": {
-		//	          "description": "",
+		//	          "description": "The URI for your schema registry. The correct URI format depends on the type of schema registry you're using.\n  +  For GLU schema registries, use the ARN of the registry.\n  +  For Confluent schema registries, use the URL of the registry.",
 		//	          "maxLength": 10000,
 		//	          "minLength": 1,
 		//	          "pattern": "[a-zA-Z0-9-/*:_+=.@-]*",
 		//	          "type": "string"
 		//	        },
 		//	        "SchemaValidationConfigs": {
-		//	          "description": "",
+		//	          "description": "An array of schema validation configuration objects, which tell Lambda the message attributes you want to validate and filter using your schema registry.",
 		//	          "items": {
 		//	            "additionalProperties": false,
-		//	            "description": "",
+		//	            "description": "Specific schema validation configuration settings that tell Lambda the message attributes you want to validate and filter using your schema registry.",
 		//	            "properties": {
 		//	              "Attribute": {
-		//	                "description": "",
+		//	                "description": "The attributes you want your schema registry to validate and filter for. If you selected ``JSON`` as the ``EventRecordFormat``, Lambda also deserializes the selected message attributes.",
 		//	                "enum": [
 		//	                  "KEY",
 		//	                  "VALUE"
@@ -129,27 +129,27 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Type
 									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "",
+										Description: "The type of authentication Lambda uses to access your schema registry.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: URI
 									"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "",
+										Description: "The URI of the secret (Secrets Manager secret ARN) to authenticate with your schema registry.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Description: "",
+							Description: "An array of access configuration objects that tell Lambda how to authenticate with your schema registry.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: EventRecordFormat
 						"event_record_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "",
+							Description: "The record format that Lambda delivers to your function after schema validation.\n  +  Choose ``JSON`` to have Lambda deliver the record to your function as a standard JSON object.\n  +  Choose ``SOURCE`` to have Lambda deliver the record to your function in its original source format. Lambda removes all schema metadata, such as the schema ID, before sending the record to your function.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: SchemaRegistryURI
 						"schema_registry_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "",
+							Description: "The URI for your schema registry. The correct URI format depends on the type of schema registry you're using.\n  +  For GLU schema registries, use the ARN of the registry.\n  +  For Confluent schema registries, use the URL of the registry.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: SchemaValidationConfigs
@@ -158,16 +158,16 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Attribute
 									"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "",
+										Description: "The attributes you want your schema registry to validate and filter for. If you selected ``JSON`` as the ``EventRecordFormat``, Lambda also deserializes the selected message attributes.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Description: "",
+							Description: "An array of schema validation configuration objects, which tell Lambda the message attributes you want to validate and filter using your schema registry.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "",
+					Description: "Specific configuration settings for a Kafka schema registry.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -213,7 +213,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	          "description": "The Amazon Resource Name (ARN) of the destination resource.\n To retain records of unsuccessful [asynchronous invocations](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations), you can configure an Amazon SNS topic, Amazon SQS queue, Amazon S3 bucket, Lambda function, or Amazon EventBridge event bus as the destination.\n To retain records of failed invocations from [Kinesis](https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html), [DynamoDB](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html), [self-managed Kafka](https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-smaa-onfailure-destination) or [Amazon MSK](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-onfailure-destination), you can configure an Amazon SNS topic, Amazon SQS queue, or Amazon S3 bucket as the destination.",
 		//	          "maxLength": 1024,
 		//	          "minLength": 12,
-		//	          "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?(-iso([a-z])?)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
+		//	          "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -309,7 +309,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The Amazon Resource Name (ARN) of the event source.\n  +  *Amazon Kinesis* ? The ARN of the data stream or a stream consumer.\n  +  *Amazon DynamoDB Streams* ? The ARN of the stream.\n  +  *Amazon Simple Queue Service* ? The ARN of the queue.\n  +  *Amazon Managed Streaming for Apache Kafka* ? The ARN of the cluster or the ARN of the VPC connection (for [cross-account event source mappings](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc)).\n  +  *Amazon MQ* ? The ARN of the broker.\n  +  *Amazon DocumentDB* ? The ARN of the DocumentDB change stream.",
 		//	  "maxLength": 1024,
 		//	  "minLength": 12,
-		//	  "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?(-iso([a-z])?)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
+		//	  "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
 		//	  "type": "string"
 		//	}
 		"event_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -323,7 +323,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "",
 		//	  "maxLength": 120,
 		//	  "minLength": 85,
-		//	  "pattern": "arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:event-source-mapping:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
+		//	  "pattern": "arn:(aws[a-zA-Z-]*)?:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:event-source-mapping:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
 		//	  "type": "string"
 		//	}
 		"event_source_mapping_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -388,7 +388,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The name or ARN of the Lambda function.\n  **Name formats**\n +  *Function name* ? ``MyFunction``.\n  +  *Function ARN* ? ``arn:aws:lambda:us-west-2:123456789012:function:MyFunction``.\n  +  *Version or Alias ARN* ? ``arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD``.\n  +  *Partial ARN* ? ``123456789012:function:MyFunction``.\n  \n The length constraint applies only to the full ARN. If you specify only the function name, it's limited to 64 characters in length.",
 		//	  "maxLength": 140,
 		//	  "minLength": 1,
-		//	  "pattern": "(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?(-iso([a-z])?)?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?",
+		//	  "pattern": "(arn:(aws[a-zA-Z-]*)?:lambda:)?((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?",
 		//	  "type": "string"
 		//	}
 		"function_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -683,16 +683,16 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	    },
 		//	    "SchemaRegistryConfig": {
 		//	      "additionalProperties": false,
-		//	      "description": "",
+		//	      "description": "Specific configuration settings for a Kafka schema registry.",
 		//	      "properties": {
 		//	        "AccessConfigs": {
-		//	          "description": "",
+		//	          "description": "An array of access configuration objects that tell Lambda how to authenticate with your schema registry.",
 		//	          "items": {
 		//	            "additionalProperties": false,
-		//	            "description": "",
+		//	            "description": "Specific access configuration settings that tell Lambda how to authenticate with your schema registry.\n If you're working with an GLU schema registry, don't provide authentication details in this object. Instead, ensure that your execution role has the required permissions for Lambda to access your cluster.\n If you're working with a Confluent schema registry, choose the authentication method in the ``Type`` field, and provide the ASMlong secret ARN in the ``URI`` field.",
 		//	            "properties": {
 		//	              "Type": {
-		//	                "description": "",
+		//	                "description": "The type of authentication Lambda uses to access your schema registry.",
 		//	                "enum": [
 		//	                  "BASIC_AUTH",
 		//	                  "CLIENT_CERTIFICATE_TLS_AUTH",
@@ -701,10 +701,10 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	                "type": "string"
 		//	              },
 		//	              "URI": {
-		//	                "description": "",
+		//	                "description": "The URI of the secret (Secrets Manager secret ARN) to authenticate with your schema registry.",
 		//	                "maxLength": 10000,
 		//	                "minLength": 1,
-		//	                "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?(-iso([a-z])?)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
+		//	                "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -715,7 +715,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	          "uniqueItems": true
 		//	        },
 		//	        "EventRecordFormat": {
-		//	          "description": "",
+		//	          "description": "The record format that Lambda delivers to your function after schema validation.\n  +  Choose ``JSON`` to have Lambda deliver the record to your function as a standard JSON object.\n  +  Choose ``SOURCE`` to have Lambda deliver the record to your function in its original source format. Lambda removes all schema metadata, such as the schema ID, before sending the record to your function.",
 		//	          "enum": [
 		//	            "JSON",
 		//	            "SOURCE"
@@ -723,20 +723,20 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	          "type": "string"
 		//	        },
 		//	        "SchemaRegistryURI": {
-		//	          "description": "",
+		//	          "description": "The URI for your schema registry. The correct URI format depends on the type of schema registry you're using.\n  +  For GLU schema registries, use the ARN of the registry.\n  +  For Confluent schema registries, use the URL of the registry.",
 		//	          "maxLength": 10000,
 		//	          "minLength": 1,
 		//	          "pattern": "[a-zA-Z0-9-/*:_+=.@-]*",
 		//	          "type": "string"
 		//	        },
 		//	        "SchemaValidationConfigs": {
-		//	          "description": "",
+		//	          "description": "An array of schema validation configuration objects, which tell Lambda the message attributes you want to validate and filter using your schema registry.",
 		//	          "items": {
 		//	            "additionalProperties": false,
-		//	            "description": "",
+		//	            "description": "Specific schema validation configuration settings that tell Lambda the message attributes you want to validate and filter using your schema registry.",
 		//	            "properties": {
 		//	              "Attribute": {
-		//	                "description": "",
+		//	                "description": "The attributes you want your schema registry to validate and filter for. If you selected ``JSON`` as the ``EventRecordFormat``, Lambda also deserializes the selected message attributes.",
 		//	                "enum": [
 		//	                  "KEY",
 		//	                  "VALUE"
@@ -773,27 +773,27 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Type
 									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "",
+										Description: "The type of authentication Lambda uses to access your schema registry.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: URI
 									"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "",
+										Description: "The URI of the secret (Secrets Manager secret ARN) to authenticate with your schema registry.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Description: "",
+							Description: "An array of access configuration objects that tell Lambda how to authenticate with your schema registry.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: EventRecordFormat
 						"event_record_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "",
+							Description: "The record format that Lambda delivers to your function after schema validation.\n  +  Choose ``JSON`` to have Lambda deliver the record to your function as a standard JSON object.\n  +  Choose ``SOURCE`` to have Lambda deliver the record to your function in its original source format. Lambda removes all schema metadata, such as the schema ID, before sending the record to your function.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: SchemaRegistryURI
 						"schema_registry_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "",
+							Description: "The URI for your schema registry. The correct URI format depends on the type of schema registry you're using.\n  +  For GLU schema registries, use the ARN of the registry.\n  +  For Confluent schema registries, use the URL of the registry.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: SchemaValidationConfigs
@@ -802,16 +802,16 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Attribute
 									"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "",
+										Description: "The attributes you want your schema registry to validate and filter for. If you selected ``JSON`` as the ``EventRecordFormat``, Lambda also deserializes the selected message attributes.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Description: "",
+							Description: "An array of schema validation configuration objects, which tell Lambda the message attributes you want to validate and filter using your schema registry.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "",
+					Description: "Specific configuration settings for a Kafka schema registry.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/

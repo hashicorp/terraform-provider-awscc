@@ -877,6 +877,7 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "UPDATE_IN_PROGRESS",
 		//	        "UPDATE_SUCCESSFUL",
 		//	        "UPDATE_FAILED",
+		//	        "PENDING_UPDATE",
 		//	        "DELETED"
 		//	      ],
 		//	      "type": "string"

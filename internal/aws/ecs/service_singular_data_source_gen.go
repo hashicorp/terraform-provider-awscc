@@ -372,6 +372,42 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Determines whether the execute command functionality is turned on for the service. If ``true``, the execute command functionality is turned on for all containers in tasks as part of the service.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ForceNewDeployment
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "EnableForceNewDeployment": {
+		//	      "type": "boolean"
+		//	    },
+		//	    "ForceNewDeploymentNonce": {
+		//	      "$comment": "A time-varying value that has at most a negligible chance of repeating; for example, a random value that is generated anew for each use, a time-stamp, a sequence number, or some combination of these.",
+		//	      "maxLength": 255,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "EnableForceNewDeployment"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"force_new_deployment": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnableForceNewDeployment
+				"enable_force_new_deployment": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ForceNewDeploymentNonce
+				"force_new_deployment_nonce": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HealthCheckGracePeriodSeconds
 		// CloudFormation resource type schema:
 		//
@@ -1561,12 +1597,15 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"enable":                            "Enable",
 		"enable_ecs_managed_tags":           "EnableECSManagedTags",
 		"enable_execute_command":            "EnableExecuteCommand",
+		"enable_force_new_deployment":       "EnableForceNewDeployment",
 		"enabled":                           "Enabled",
 		"encrypted":                         "Encrypted",
 		"exact":                             "Exact",
 		"expression":                        "Expression",
 		"field":                             "Field",
 		"filesystem_type":                   "FilesystemType",
+		"force_new_deployment":              "ForceNewDeployment",
+		"force_new_deployment_nonce":        "ForceNewDeploymentNonce",
 		"header":                            "Header",
 		"health_check_grace_period_seconds": "HealthCheckGracePeriodSeconds",
 		"hook_target_arn":                   "HookTargetArn",
