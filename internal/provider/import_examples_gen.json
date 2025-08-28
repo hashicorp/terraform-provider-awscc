@@ -1252,6 +1252,10 @@
         "identifier": ["DomainIdentifier","EntityType","EntityIdentifier","OwnerType","OwnerIdentifier"]
     },
     {
+        "resource": "awscc_datazone_policy_grant",
+        "identifier": ["DomainIdentifier","GrantId","EntityIdentifier","EntityType","PolicyType"]
+    },
+    {
         "resource": "awscc_datazone_project",
         "identifier": ["DomainId","Id"]
     },
@@ -2462,6 +2466,10 @@
     {
         "resource": "awscc_iot_domain_configuration",
         "identifier": ["DomainConfigurationName"]
+    },
+    {
+        "resource": "awscc_iot_encryption_configuration",
+        "identifier": ["AccountId"]
     },
     {
         "resource": "awscc_iot_fleet_metric",
@@ -4442,6 +4450,10 @@
     {
         "resource": "awscc_servicecatalog_service_action_association",
         "identifier": ["ProductId","ProvisioningArtifactId","ServiceActionId"]
+    },
+    {
+        "resource": "awscc_servicecatalog_tag_option",
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_servicecatalogappregistry_application",
