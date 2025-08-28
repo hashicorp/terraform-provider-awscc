@@ -36,6 +36,7 @@ Data Source schema for AWS::ECS::Service
 - `enable_ecs_managed_tags` (Boolean) Specifies whether to turn on Amazon ECS managed tags for the tasks within the service. For more information, see [Tagging your Amazon ECS resources](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html) in the *Amazon Elastic Container Service Developer Guide*.
  When you use Amazon ECS managed tags, you must set the ``propagateTags`` request parameter.
 - `enable_execute_command` (Boolean) Determines whether the execute command functionality is turned on for the service. If ``true``, the execute command functionality is turned on for all containers in tasks as part of the service.
+- `force_new_deployment` (Attributes) (see [below for nested schema](#nestedatt--force_new_deployment))
 - `health_check_grace_period_seconds` (Number) The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after a task has first started. If you don't specify a health check grace period value, the default value of ``0`` is used. If you don't use any of the health checks, then ``healthCheckGracePeriodSeconds`` is unused.
  If your service's tasks take a while to start and respond to health checks, you can specify a health check grace period of up to 2,147,483,647 seconds (about 69 years). During that time, the Amazon ECS service scheduler ignores health check status. This grace period can prevent the service scheduler from marking tasks as unhealthy and stopping them before they have time to come up.
 - `launch_type` (String) The launch type on which to run your service. For more information, see [Amazon ECS Launch Types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer Guide*.
@@ -228,6 +229,15 @@ Read-Only:
   +  If you're migrating from ``CODE_DEPLOY`` to ``ECS`` with a new task definition and CFN performs a rollback operation, the ECS``UpdateService`` request fails with the following error:
  Resource handler returned message: "Invalid request provided: Unable to update task definition on services with a CODE_DEPLOY deployment controller. 
   +  After a successful migration from ``ECS`` to ``EXTERNAL`` deployment controller, you need to manually remove the ``ACTIVE`` task set, because ECS no longer manages the deployment. For information about how to delete a task set, see [DeleteTaskSet](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteTaskSet.html) in the ECSlong API Reference.
+
+
+<a id="nestedatt--force_new_deployment"></a>
+### Nested Schema for `force_new_deployment`
+
+Read-Only:
+
+- `enable_force_new_deployment` (Boolean)
+- `force_new_deployment_nonce` (String)
 
 
 <a id="nestedatt--load_balancers"></a>

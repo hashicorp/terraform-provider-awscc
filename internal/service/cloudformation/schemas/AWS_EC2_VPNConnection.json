@@ -30,6 +30,7 @@
     "/properties/StaticRoutesOnly",
     "/properties/TransportTransitGatewayAttachmentId",
     "/properties/TunnelInsideIpVersion",
+    "/properties/PreSharedKeyStorage",
     "/properties/VpnTunnelOptionsSpecifications"
   ],
   "primaryIdentifier": [
@@ -72,6 +73,7 @@
     }
   },
   "writeOnlyProperties": [
+    "/properties/PreSharedKeyStorage",
     "/properties/VpnTunnelOptionsSpecifications/*/PreSharedKey"
   ],
   "additionalProperties": false,
@@ -455,6 +457,14 @@
     "VpnGatewayId": {
       "description": "The ID of the virtual private gateway at the AWS side of the VPN connection.\n You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.",
       "type": "string"
+    },
+    "PreSharedKeyStorage": {
+      "description": "",
+      "type": "string",
+      "enum": [
+        "Standard",
+        "SecretsManager"
+      ]
     },
     "TransportTransitGatewayAttachmentId": {
       "description": "The transit gateway attachment ID to use for the VPN tunnel.\n Required if ``OutsideIpAddressType`` is set to ``PrivateIpv4``.",

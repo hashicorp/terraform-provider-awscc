@@ -1164,6 +1164,7 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 		//	        "UPDATE_IN_PROGRESS",
 		//	        "UPDATE_SUCCESSFUL",
 		//	        "UPDATE_FAILED",
+		//	        "PENDING_UPDATE",
 		//	        "DELETED"
 		//	      ],
 		//	      "type": "string"

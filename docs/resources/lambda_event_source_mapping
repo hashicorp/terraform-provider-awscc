@@ -124,25 +124,29 @@ resource "awscc_lambda_permission" "example" {
 Optional:
 
 - `consumer_group_id` (String) The identifier for the Kafka consumer group to join. The consumer group ID must be unique among all your Kafka event sources. After creating a Kafka event source mapping with the consumer group ID specified, you cannot update this value. For more information, see [Customizable consumer group ID](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-consumer-group-id).
-- `schema_registry_config` (Attributes) (see [below for nested schema](#nestedatt--amazon_managed_kafka_event_source_config--schema_registry_config))
+- `schema_registry_config` (Attributes) Specific configuration settings for a Kafka schema registry. (see [below for nested schema](#nestedatt--amazon_managed_kafka_event_source_config--schema_registry_config))
 
 <a id="nestedatt--amazon_managed_kafka_event_source_config--schema_registry_config"></a>
 ### Nested Schema for `amazon_managed_kafka_event_source_config.schema_registry_config`
 
 Optional:
 
-- `access_configs` (Attributes List) (see [below for nested schema](#nestedatt--amazon_managed_kafka_event_source_config--schema_registry_config--access_configs))
-- `event_record_format` (String)
-- `schema_registry_uri` (String)
-- `schema_validation_configs` (Attributes List) (see [below for nested schema](#nestedatt--amazon_managed_kafka_event_source_config--schema_registry_config--schema_validation_configs))
+- `access_configs` (Attributes List) An array of access configuration objects that tell Lambda how to authenticate with your schema registry. (see [below for nested schema](#nestedatt--amazon_managed_kafka_event_source_config--schema_registry_config--access_configs))
+- `event_record_format` (String) The record format that Lambda delivers to your function after schema validation.
+  +  Choose ``JSON`` to have Lambda deliver the record to your function as a standard JSON object.
+  +  Choose ``SOURCE`` to have Lambda deliver the record to your function in its original source format. Lambda removes all schema metadata, such as the schema ID, before sending the record to your function.
+- `schema_registry_uri` (String) The URI for your schema registry. The correct URI format depends on the type of schema registry you're using.
+  +  For GLU schema registries, use the ARN of the registry.
+  +  For Confluent schema registries, use the URL of the registry.
+- `schema_validation_configs` (Attributes List) An array of schema validation configuration objects, which tell Lambda the message attributes you want to validate and filter using your schema registry. (see [below for nested schema](#nestedatt--amazon_managed_kafka_event_source_config--schema_registry_config--schema_validation_configs))
 
 <a id="nestedatt--amazon_managed_kafka_event_source_config--schema_registry_config--access_configs"></a>
 ### Nested Schema for `amazon_managed_kafka_event_source_config.schema_registry_config.access_configs`
 
 Optional:
 
-- `type` (String)
-- `uri` (String)
+- `type` (String) The type of authentication Lambda uses to access your schema registry.
+- `uri` (String) The URI of the secret (Secrets Manager secret ARN) to authenticate with your schema registry.
 
 
 <a id="nestedatt--amazon_managed_kafka_event_source_config--schema_registry_config--schema_validation_configs"></a>
@@ -150,7 +154,7 @@ Optional:
 
 Optional:
 
-- `attribute` (String)
+- `attribute` (String) The attributes you want your schema registry to validate and filter for. If you selected ``JSON`` as the ``EventRecordFormat``, Lambda also deserializes the selected message attributes.
 
 
 
@@ -246,25 +250,29 @@ Optional:
 Optional:
 
 - `consumer_group_id` (String) The identifier for the Kafka consumer group to join. The consumer group ID must be unique among all your Kafka event sources. After creating a Kafka event source mapping with the consumer group ID specified, you cannot update this value. For more information, see [Customizable consumer group ID](https://docs.aws.amazon.com/lambda/latest/dg/with-kafka-process.html#services-smaa-topic-add).
-- `schema_registry_config` (Attributes) (see [below for nested schema](#nestedatt--self_managed_kafka_event_source_config--schema_registry_config))
+- `schema_registry_config` (Attributes) Specific configuration settings for a Kafka schema registry. (see [below for nested schema](#nestedatt--self_managed_kafka_event_source_config--schema_registry_config))
 
 <a id="nestedatt--self_managed_kafka_event_source_config--schema_registry_config"></a>
 ### Nested Schema for `self_managed_kafka_event_source_config.schema_registry_config`
 
 Optional:
 
-- `access_configs` (Attributes List) (see [below for nested schema](#nestedatt--self_managed_kafka_event_source_config--schema_registry_config--access_configs))
-- `event_record_format` (String)
-- `schema_registry_uri` (String)
-- `schema_validation_configs` (Attributes List) (see [below for nested schema](#nestedatt--self_managed_kafka_event_source_config--schema_registry_config--schema_validation_configs))
+- `access_configs` (Attributes List) An array of access configuration objects that tell Lambda how to authenticate with your schema registry. (see [below for nested schema](#nestedatt--self_managed_kafka_event_source_config--schema_registry_config--access_configs))
+- `event_record_format` (String) The record format that Lambda delivers to your function after schema validation.
+  +  Choose ``JSON`` to have Lambda deliver the record to your function as a standard JSON object.
+  +  Choose ``SOURCE`` to have Lambda deliver the record to your function in its original source format. Lambda removes all schema metadata, such as the schema ID, before sending the record to your function.
+- `schema_registry_uri` (String) The URI for your schema registry. The correct URI format depends on the type of schema registry you're using.
+  +  For GLU schema registries, use the ARN of the registry.
+  +  For Confluent schema registries, use the URL of the registry.
+- `schema_validation_configs` (Attributes List) An array of schema validation configuration objects, which tell Lambda the message attributes you want to validate and filter using your schema registry. (see [below for nested schema](#nestedatt--self_managed_kafka_event_source_config--schema_registry_config--schema_validation_configs))
 
 <a id="nestedatt--self_managed_kafka_event_source_config--schema_registry_config--access_configs"></a>
 ### Nested Schema for `self_managed_kafka_event_source_config.schema_registry_config.access_configs`
 
 Optional:
 
-- `type` (String)
-- `uri` (String)
+- `type` (String) The type of authentication Lambda uses to access your schema registry.
+- `uri` (String) The URI of the secret (Secrets Manager secret ARN) to authenticate with your schema registry.
 
 
 <a id="nestedatt--self_managed_kafka_event_source_config--schema_registry_config--schema_validation_configs"></a>
@@ -272,7 +280,7 @@ Optional:
 
 Optional:
 
-- `attribute` (String)
+- `attribute` (String) The attributes you want your schema registry to validate and filter for. If you selected ``JSON`` as the ``EventRecordFormat``, Lambda also deserializes the selected message attributes.
 
 
 

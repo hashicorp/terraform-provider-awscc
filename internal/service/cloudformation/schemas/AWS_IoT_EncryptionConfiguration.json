@@ -1,0 +1,107 @@
+{
+  "typeName": "AWS::IoT::EncryptionConfiguration",
+  "description": "Resource Type definition for AWS::IoT::EncryptionConfiguration",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "definitions": {},
+  "properties": {
+    "AccountId": {
+      "type": "string"
+    },
+    "EncryptionType": {
+      "type": "string",
+      "enum": [
+        "CUSTOMER_MANAGED_KMS_KEY",
+        "AWS_OWNED_KMS_KEY"
+      ]
+    },
+    "KmsAccessRoleArn": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 2048
+    },
+    "KmsKeyArn": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 2048
+    },
+    "ConfigurationDetails": {
+      "type": "object",
+      "properties": {
+        "ConfigurationStatus": {
+          "type": "string",
+          "enum": [
+            "HEALTHY",
+            "UNHEALTHY"
+          ]
+        },
+        "ErrorCode": {
+          "type": "string"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "LastModifiedDate": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "EncryptionType"
+  ],
+  "readOnlyProperties": [
+    "/properties/AccountId",
+    "/properties/ConfigurationDetails",
+    "/properties/LastModifiedDate"
+  ],
+  "primaryIdentifier": [
+    "/properties/AccountId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "iot:UpdateEncryptionConfiguration",
+        "iot:DescribeEncryptionConfiguration",
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "iot:DescribeEncryptionConfiguration"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "iot:UpdateEncryptionConfiguration",
+        "iot:DescribeEncryptionConfiguration",
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "iam:PassRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "iot:UpdateEncryptionConfiguration",
+        "iot:DescribeEncryptionConfiguration",
+        "kms:Decrypt"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "iot:DescribeEncryptionConfiguration"
+      ]
+    }
+  }
+}

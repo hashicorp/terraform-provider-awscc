@@ -139,7 +139,6 @@ func parameterResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 				mapplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tier
 		// CloudFormation resource type schema:
@@ -235,7 +234,6 @@ func parameterResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/Tags",
 		"/properties/Description",
 		"/properties/Tier",
 		"/properties/AllowedPattern",

@@ -1,0 +1,1 @@
+$ terraform import awscc_datazone_policy_grant.example "domain_identifier|grant_id|entity_identifier|entity_type|policy_type"

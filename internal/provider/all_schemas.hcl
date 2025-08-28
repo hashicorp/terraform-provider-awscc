@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1225 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1220 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -1510,6 +1510,10 @@ resource_schema "aws_datazone_owner" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_datazone_policy_grant" {
+  cloudformation_type_name = "AWS::DataZone::PolicyGrant"
+}
+
 resource_schema "aws_datazone_project" {
   cloudformation_type_name               = "AWS::DataZone::Project"
   suppress_plural_data_source_generation = true
@@ -2807,6 +2811,10 @@ resource_schema "aws_iot_dimension" {
 
 resource_schema "aws_iot_domain_configuration" {
   cloudformation_type_name = "AWS::IoT::DomainConfiguration"
+}
+
+resource_schema "aws_iot_encryption_configuration" {
+  cloudformation_type_name = "AWS::IoT::EncryptionConfiguration"
 }
 
 resource_schema "aws_iot_fleet_metric" {
@@ -5053,6 +5061,10 @@ resource_schema "aws_servicecatalog_service_action" {
 resource_schema "aws_servicecatalog_service_action_association" {
   cloudformation_type_name               = "AWS::ServiceCatalog::ServiceActionAssociation"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_servicecatalog_tag_option" {
+  cloudformation_type_name = "AWS::ServiceCatalog::TagOption"
 }
 
 resource_schema "aws_servicecatalogappregistry_application" {

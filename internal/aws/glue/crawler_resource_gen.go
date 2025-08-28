@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -411,6 +412,14 @@ func crawlerResource(ctx context.Context) (resource.Resource, error) {
 		//	          "Path": {
 		//	            "description": "The name of the DynamoDB table to crawl.",
 		//	            "type": "string"
+		//	          },
+		//	          "ScanAll": {
+		//	            "description": "Indicates whether to scan all the records, or to sample rows from the table. Scanning all the records can take a long time when the table is not a high throughput table. A value of true means to scan all records, while a value of false means to sample the records. If no value is specified, the value defaults to true.",
+		//	            "type": "boolean"
+		//	          },
+		//	          "ScanRate": {
+		//	            "description": "The percentage of the configured read capacity units to use by the AWS Glue crawler. Read capacity units is a term defined by DynamoDB, and is a numeric value that acts as rate limiter for the number of reads that can be performed on that table per second.\n\nThe valid values are null or a value between 0.1 to 1.5. A null value is used when user does not provide a value, and defaults to 0.5 of the configured Read Capacity Unit (for provisioned tables), or 0.25 of the max configured Read Capacity Unit (for tables using on-demand mode).",
+		//	            "type": "number"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -711,6 +720,24 @@ func crawlerResource(ctx context.Context) (resource.Resource, error) {
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ScanAll
+							"scan_all": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Indicates whether to scan all the records, or to sample rows from the table. Scanning all the records can take a long time when the table is not a high throughput table. A value of true means to scan all records, while a value of false means to sample the records. If no value is specified, the value defaults to true.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ScanRate
+							"scan_rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "The percentage of the configured read capacity units to use by the AWS Glue crawler. Read capacity units is a term defined by DynamoDB, and is a numeric value that acts as rate limiter for the number of reads that can be performed on that table per second.\n\nThe valid values are null or a value between 0.1 to 1.5. A null value is used when user does not provide a value, and defaults to 0.5 of the configured Read Capacity Unit (for provisioned tables), or 0.25 of the max configured Read Capacity Unit (for tables using on-demand mode).",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -1031,6 +1058,8 @@ func crawlerResource(ctx context.Context) (resource.Resource, error) {
 		"role":                           "Role",
 		"s3_targets":                     "S3Targets",
 		"sample_size":                    "SampleSize",
+		"scan_all":                       "ScanAll",
+		"scan_rate":                      "ScanRate",
 		"schedule":                       "Schedule",
 		"schedule_expression":            "ScheduleExpression",
 		"schema_change_policy":           "SchemaChangePolicy",

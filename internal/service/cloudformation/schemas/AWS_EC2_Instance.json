@@ -54,10 +54,10 @@
     "/properties/KernelId",
     "/properties/PrivateDnsNameOptions",
     "/properties/RamdiskId",
-    "/properties/SecurityGroupIds",
     "/properties/Tenancy",
     "/properties/UserData",
-    "/properties/BlockDeviceMappings"
+    "/properties/BlockDeviceMappings",
+    "/properties/SecurityGroupIds"
   ],
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ec2.git",
   "handlers": {
@@ -810,7 +810,7 @@
     },
     "ElasticGpuSpecifications": {
       "uniqueItems": false,
-      "description": "An elastic GPU to associate with the instance.",
+      "description": "An elastic GPU to associate with the instance. Amazon Elastic Graphics is no longer available.",
       "insertionOrder": false,
       "type": "array",
       "items": {
@@ -819,7 +819,7 @@
     },
     "ElasticInferenceAccelerators": {
       "uniqueItems": false,
-      "description": "An elastic inference accelerator to associate with the instance.",
+      "description": "An elastic inference accelerator to associate with the instance. Amazon Elastic Inference is no longer available.",
       "insertionOrder": false,
       "type": "array",
       "items": {

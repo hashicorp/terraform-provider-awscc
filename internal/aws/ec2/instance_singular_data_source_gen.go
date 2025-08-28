@@ -268,7 +268,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An elastic GPU to associate with the instance.",
+		//	  "description": "An elastic GPU to associate with the instance. Amazon Elastic Graphics is no longer available.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -296,14 +296,14 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "An elastic GPU to associate with the instance.",
+			Description: "An elastic GPU to associate with the instance. Amazon Elastic Graphics is no longer available.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ElasticInferenceAccelerators
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An elastic inference accelerator to associate with the instance.",
+		//	  "description": "An elastic inference accelerator to associate with the instance. Amazon Elastic Inference is no longer available.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -341,7 +341,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "An elastic inference accelerator to associate with the instance.",
+			Description: "An elastic inference accelerator to associate with the instance. Amazon Elastic Inference is no longer available.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnclaveOptions

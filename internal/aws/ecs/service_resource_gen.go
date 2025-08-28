@@ -553,6 +553,61 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ForceNewDeployment
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "EnableForceNewDeployment": {
+		//	      "type": "boolean"
+		//	    },
+		//	    "ForceNewDeploymentNonce": {
+		//	      "$comment": "A time-varying value that has at most a negligible chance of repeating; for example, a random value that is generated anew for each use, a time-stamp, a sequence number, or some combination of these.",
+		//	      "maxLength": 255,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "EnableForceNewDeployment"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"force_new_deployment": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnableForceNewDeployment
+				"enable_force_new_deployment": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Bool{ /*START VALIDATORS*/
+						fwvalidators.NotNullBool(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ForceNewDeploymentNonce
+				"force_new_deployment_nonce": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 255),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ForceNewDeployment is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: HealthCheckGracePeriodSeconds
 		// CloudFormation resource type schema:
 		//
@@ -2213,12 +2268,15 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"enable":                            "Enable",
 		"enable_ecs_managed_tags":           "EnableECSManagedTags",
 		"enable_execute_command":            "EnableExecuteCommand",
+		"enable_force_new_deployment":       "EnableForceNewDeployment",
 		"enabled":                           "Enabled",
 		"encrypted":                         "Encrypted",
 		"exact":                             "Exact",
 		"expression":                        "Expression",
 		"field":                             "Field",
 		"filesystem_type":                   "FilesystemType",
+		"force_new_deployment":              "ForceNewDeployment",
+		"force_new_deployment_nonce":        "ForceNewDeploymentNonce",
 		"header":                            "Header",
 		"health_check_grace_period_seconds": "HealthCheckGracePeriodSeconds",
 		"hook_target_arn":                   "HookTargetArn",
@@ -2290,6 +2348,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ServiceConnectConfiguration",
 		"/properties/VolumeConfigurations",
+		"/properties/ForceNewDeployment",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(2160).WithDeleteTimeoutInMinutes(30)
 
