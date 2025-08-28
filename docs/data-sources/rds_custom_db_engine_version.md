@@ -30,8 +30,8 @@ Data Source schema for AWS::RDS::CustomDBEngineVersion
   +   ``custom-oracle-ee`` 
   +   ``custom-oracle-ee-cdb``
 - `engine_version` (String) The name of your CEV. The name format is ``major version.customized_string``. For example, a valid CEV name is ``19.my_cev1``. This setting is required for RDS Custom for Oracle, but optional for Amazon RDS. The combination of ``Engine`` and ``EngineVersion`` is unique per customer per Region.
-  *Constraints:* Minimum length is 1. Maximum length is 60.
-  *Pattern:* ``^[a-z0-9_.-]{1,60$``}
+ *Constraints:* Minimum length is 1. Maximum length is 60.
+ *Pattern:*``^[a-z0-9_.-]{1,60$``}
 - `image_id` (String) A value that indicates the ID of the AMI.
 - `kms_key_id` (String) The AWS KMS key identifier for an encrypted CEV. A symmetric encryption KMS key is required for RDS Custom, but optional for Amazon RDS.
  If you have an existing symmetric encryption KMS key in your account, you can use it with RDS Custom. No further action is necessary. If you don't already have a symmetric encryption KMS key in your account, follow the instructions in [Creating a symmetric encryption KMS key](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html#create-symmetric-cmk) in the *Key Management Service Developer Guide*.

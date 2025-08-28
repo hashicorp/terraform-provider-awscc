@@ -1,0 +1,1 @@
+$ terraform import awscc_servicecatalog_tag_option.example "id"

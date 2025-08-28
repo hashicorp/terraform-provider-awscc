@@ -130,8 +130,8 @@ resource "awscc_ec2_instance" "example" {
 - `credit_specification` (Attributes) The credit option for CPU usage of the burstable performance instance. Valid values are standard and unlimited. (see [below for nested schema](#nestedatt--credit_specification))
 - `disable_api_termination` (Boolean) If you set this parameter to true, you can't terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can.
 - `ebs_optimized` (Boolean) Indicates whether the instance is optimized for Amazon EBS I/O.
-- `elastic_gpu_specifications` (Attributes List) An elastic GPU to associate with the instance. (see [below for nested schema](#nestedatt--elastic_gpu_specifications))
-- `elastic_inference_accelerators` (Attributes List) An elastic inference accelerator to associate with the instance. (see [below for nested schema](#nestedatt--elastic_inference_accelerators))
+- `elastic_gpu_specifications` (Attributes List) An elastic GPU to associate with the instance. Amazon Elastic Graphics is no longer available. (see [below for nested schema](#nestedatt--elastic_gpu_specifications))
+- `elastic_inference_accelerators` (Attributes List) An elastic inference accelerator to associate with the instance. Amazon Elastic Inference is no longer available. (see [below for nested schema](#nestedatt--elastic_inference_accelerators))
 - `enclave_options` (Attributes) Indicates whether the instance is enabled for AWS Nitro Enclaves. (see [below for nested schema](#nestedatt--enclave_options))
 - `hibernation_options` (Attributes) Indicates whether an instance is enabled for hibernation. (see [below for nested schema](#nestedatt--hibernation_options))
 - `host_id` (String) If you specify host for the Affinity property, the ID of a dedicated host that the instance is associated with. If you don't specify an ID, Amazon EC2 launches the instance onto any available, compatible dedicated host in your account.

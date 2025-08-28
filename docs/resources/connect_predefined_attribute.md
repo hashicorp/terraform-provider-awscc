@@ -44,6 +44,8 @@ resource "awscc_connect_predefined_attribute" "example" {
 
 ### Optional
 
+- `attribute_configuration` (Attributes) Custom metadata associated to a Predefined attribute that controls how the attribute behaves when used by upstream services. (see [below for nested schema](#nestedatt--attribute_configuration))
+- `purposes` (List of String) The assigned purposes of the predefined attribute.
 - `values` (Attributes) The values of a predefined attribute. (see [below for nested schema](#nestedatt--values))
 
 ### Read-Only
@@ -51,6 +53,15 @@ resource "awscc_connect_predefined_attribute" "example" {
 - `id` (String) Uniquely identifies the resource.
 - `last_modified_region` (String) Last modified region.
 - `last_modified_time` (Number) Last modified time.
+
+<a id="nestedatt--attribute_configuration"></a>
+### Nested Schema for `attribute_configuration`
+
+Optional:
+
+- `enable_value_validation_on_association` (Boolean) Enables customers to enforce strict validation on the specific values that this predefined attribute can hold.
+- `is_read_only` (Boolean) Allows the predefined attribute to show up and be managed in the Amazon Connect UI.
+
 
 <a id="nestedatt--values"></a>
 ### Nested Schema for `values`
