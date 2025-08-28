@@ -163,6 +163,7 @@
         "mpa:GetIdentitySource",
         "mpa:UntagResource",
         "sso:DeleteApplication",
+        "sso:ListInstances",
         "kms:Decrypt"
       ]
     },

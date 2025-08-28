@@ -203,7 +203,12 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "s3:TagResource",
+      "s3:UntagResource",
+      "s3:ListTagsForResource"
+    ]
   },
   "readOnlyProperties": [
     "/properties/StorageLensGroupArn"

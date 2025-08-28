@@ -68,7 +68,8 @@
   "description": "The ``AWS::ECS::Service`` resource creates an Amazon Elastic Container Service (Amazon ECS) service that runs and maintains the requested number of tasks and associated load balancers.\n  The stack update fails if you change any properties that require replacement and at least one ECS Service Connect ``ServiceConnectConfiguration`` property is configured. This is because AWS CloudFormation creates the replacement service first, but each ``ServiceConnectService`` must have a name that is unique in the namespace.\n   Starting April 15, 2023, AWS; will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, ECS, or EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. \n   On June 12, 2025, Amazon ECS launched support for updating capacity provider configuration for ECS services. With this launch, ECS also aligned the CFN update behavior for ``CapacityProviderStrategy`` parameter with the standard practice. For more information, see [adds support for updating capacity provider configuration for ECS services](https://docs.aws.amazon.com/about-aws/whats-new/2025/05/amazon-ecs-capacity-provider-configuration-ecs/). Previously ECS ignored the ``CapacityProviderStrategy`` property if it was set to an empty list for example, ``[]`` in CFN, because updating capacity provider configuration was not supported. Now, with support for capacity provider updates, customers can remove capacity providers from a service by passing an empty list. When you specify an empty list (``[]``) for the ``CapacityProviderStrategy`` property in your CFN template, ECS will remove any capacity providers associated with the service, as follows:\n  +  For services created with a capacity provider strategy after the launch:\n  +  If there's a cluster default strategy set, the service will revert to using that default strategy.\n  +  If no cluster default strategy exists, you will receive the following error:\n No launch type to fall back to for empty capacity provider strategy. Your service was not created with a launch type.\n  \n  +  For services created with a capacity provider strategy prior to the launch:\n  +  If ``CapacityProviderStrategy`` had ``FARGATE_SPOT`` or ``FARGATE`` capacity providers, the launch type will be updated to ``FARGATE`` and the capacity provider will be removed.\n  +  If the strategy included Auto Scaling group capacity providers, the service will revert to EC2 launch type, and the Auto Scaling group capacity providers will not be used.\n  \n  \n Recommended Actions\n If you are currently using ``CapacityProviderStrategy: []`` in your CFN templates, you should take one of the following actions:\n  +  If you do not intend to update the Capacity Provider Strategy:\n  +  Remove the ``CapacityProviderStrategy`` property entirely from your CFN template\n  +  Alternatively, use ``!Ref ::NoValue`` for the ``CapacityProviderStrategy`` property in your template\n  \n  +  If you intend to maintain or update the Capacity Provider Strategy, specify the actual Capacity Provider Strategy for the service in your CFN template.\n  \n If your CFN template had an empty list ([]) for ``CapacityProviderStrategy`` prior to the aforementioned launch on June 12, and you are using the same template with ``CapacityProviderStrategy: []``, you might encounter the following error:\n  Invalid request provided: When switching from launch type to capacity provider strategy on an existing service, or making a change to a capacity provider strategy on a service that is already using one, you must force a new deployment. (Service: Ecs, Status Code: 400, Request ID: xxx) (SDK Attempt Count: 1)\" (RequestToken: xxx HandlerErrorCode: InvalidRequest) \n Note that CFN automatically initiates a new deployment when it detects a parameter change, but customers cannot choose to force a deployment through CFN. This is an invalid input scenario that requires one of the remediation actions listed above.\n If you are experiencing active production issues related to this change, contact AWS Support or your Technical Account Manager.",
   "writeOnlyProperties": [
     "/properties/ServiceConnectConfiguration",
-    "/properties/VolumeConfigurations"
+    "/properties/VolumeConfigurations",
+    "/properties/ForceNewDeployment"
   ],
   "createOnlyProperties": [
     "/properties/Cluster",
@@ -372,6 +373,25 @@
         "Weight": {
           "description": "The *weight* value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The ``weight`` value is taken into consideration after the ``base`` value, if defined, is satisfied.\n If no ``weight`` value is specified, the default value of ``0`` is used. When multiple capacity providers are specified within a capacity provider strategy, at least one of the capacity providers must have a weight value greater than zero and any capacity providers with a weight of ``0`` can't be used to place tasks. If you specify multiple capacity providers in a strategy that all have a weight of ``0``, any ``RunTask`` or ``CreateService`` actions using the capacity provider strategy will fail.\n An example scenario for using weights is defining a strategy that contains two capacity providers and both have a weight of ``1``, then when the ``base`` is satisfied, the tasks will be split evenly across the two capacity providers. Using that same logic, if you specify a weight of ``1`` for *capacityProviderA* and a weight of ``4`` for *capacityProviderB*, then for every one task that's run using *capacityProviderA*, four tasks would use *capacityProviderB*.",
           "type": "integer"
+        }
+      }
+    },
+    "ForceNewDeployment": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "EnableForceNewDeployment"
+      ],
+      "properties": {
+        "EnableForceNewDeployment": {
+          "type": "boolean"
+        },
+        "ForceNewDeploymentNonce": {
+          "minLength": 1,
+          "$comment": "A time-varying value that has at most a negligible chance of repeating; for example, a random value that is generated anew for each use, a time-stamp, a sequence number, or some combination of these.",
+          "type": "string",
+          "maxLength": 255
         }
       }
     },
@@ -868,6 +888,10 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "ForceNewDeployment": {
+      "description": "",
+      "$ref": "#/definitions/ForceNewDeployment"
     },
     "HealthCheckGracePeriodSeconds": {
       "description": "The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after a task has first started. If you don't specify a health check grace period value, the default value of ``0`` is used. If you don't use any of the health checks, then ``healthCheckGracePeriodSeconds`` is unused.\n If your service's tasks take a while to start and respond to health checks, you can specify a health check grace period of up to 2,147,483,647 seconds (about 69 years). During that time, the Amazon ECS service scheduler ignores health check status. This grace period can prevent the service scheduler from marking tasks as unhealthy and stopping them before they have time to come up.",
