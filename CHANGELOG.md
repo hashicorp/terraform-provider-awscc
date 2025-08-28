@@ -1,8 +1,20 @@
 ## 1.54.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_datazone_policy_grant`
+* **New Data Source:** `awscc_datazone_policy_grants`
+* **New Data Source:** `awscc_iot_encryption_configuration`
+* **New Data Source:** `awscc_iot_encryption_configurations`
+* **New Data Source:** `awscc_servicecatalog_tag_option`
+* **New Data Source:** `awscc_servicecatalog_tag_options`
+* **New Resource:** `awscc_datazone_policy_grant`
+* **New Resource:** `awscc_iot_encryption_configuration`
+* **New Resource:** `awscc_servicecatalog_tag_option`
+
 ## 1.53.0 (August 21, 2025)
 
-FEATURES
+FEATURES:
 
 * **New Data Source:** `awscc_aps_resource_policy`
 * **New Data Source:** `awscc_aps_resource_policies`
