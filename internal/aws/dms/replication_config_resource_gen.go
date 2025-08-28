@@ -230,6 +230,7 @@ func replicationConfigResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// ResourceIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SourceEndpointArn
 		// CloudFormation resource type schema:
@@ -402,6 +403,9 @@ func replicationConfigResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_security_group_ids":        "VpcSecurityGroupIds",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/ResourceIdentifier",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

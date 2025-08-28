@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -32,6 +33,52 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::Connect::PredefinedAttribute resource.
 func predefinedAttributeResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AttributeConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Custom metadata associated to a Predefined attribute that controls how the attribute behaves when used by upstream services.",
+		//	  "properties": {
+		//	    "EnableValueValidationOnAssociation": {
+		//	      "description": "Enables customers to enforce strict validation on the specific values that this predefined attribute can hold.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "IsReadOnly": {
+		//	      "description": "Allows the predefined attribute to show up and be managed in the Amazon Connect UI.",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"attribute_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnableValueValidationOnAssociation
+				"enable_value_validation_on_association": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Enables customers to enforce strict validation on the specific values that this predefined attribute can hold.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: IsReadOnly
+				"is_read_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Allows the predefined attribute to show up and be managed in the Amazon Connect UI.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Custom metadata associated to a Predefined attribute that controls how the attribute behaves when used by upstream services.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -96,6 +143,38 @@ func predefinedAttributeResource(ctx context.Context) (resource.Resource, error)
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Purposes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The assigned purposes of the predefined attribute.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "A label allowing customers to categorize a predefined attribute.",
+		//	    "maxLength": 100,
+		//	    "minLength": 1,
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"purposes": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The assigned purposes of the predefined attribute.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 10),
+				listvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(1, 100),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Values
@@ -170,12 +249,16 @@ func predefinedAttributeResource(ctx context.Context) (resource.Resource, error)
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::PredefinedAttribute").WithTerraformTypeName("awscc_connect_predefined_attribute")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"instance_arn":         "InstanceArn",
-		"last_modified_region": "LastModifiedRegion",
-		"last_modified_time":   "LastModifiedTime",
-		"name":                 "Name",
-		"string_list":          "StringList",
-		"values":               "Values",
+		"attribute_configuration":                "AttributeConfiguration",
+		"enable_value_validation_on_association": "EnableValueValidationOnAssociation",
+		"instance_arn":                           "InstanceArn",
+		"is_read_only":                           "IsReadOnly",
+		"last_modified_region":                   "LastModifiedRegion",
+		"last_modified_time":                     "LastModifiedTime",
+		"name":                                   "Name",
+		"purposes":                               "Purposes",
+		"string_list":                            "StringList",
+		"values":                                 "Values",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
