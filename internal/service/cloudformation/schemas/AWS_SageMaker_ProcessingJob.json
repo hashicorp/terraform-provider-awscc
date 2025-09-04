@@ -12,7 +12,7 @@
           "type": "array",
           "uniqueItems": false,
           "insertionOrder": false,
-          "minItems": 1,
+          "minItems": 0,
           "maxItems": 100,
           "items": {
             "type": "string",
@@ -26,7 +26,7 @@
           "type": "array",
           "uniqueItems": false,
           "insertionOrder": false,
-          "minItems": 1,
+          "minItems": 0,
           "maxItems": 100,
           "items": {
             "type": "string",
@@ -103,7 +103,7 @@
           "type": "array",
           "uniqueItems": false,
           "insertionOrder": false,
-          "minItems": 1,
+          "minItems": 0,
           "maxItems": 5,
           "items": {
             "type": "string",
@@ -117,7 +117,7 @@
           "type": "array",
           "uniqueItems": false,
           "insertionOrder": false,
-          "minItems": 1,
+          "minItems": 0,
           "maxItems": 16,
           "items": {
             "type": "string",
@@ -894,6 +894,18 @@
   "handlers": {
     "create": {
       "permissions": [
+        "ec2:CreateNetworkInterface",
+        "ec2:CreateNetworkInterfacePermission",
+        "ec2:DeleteNetworkInterface",
+        "ec2:DeleteNetworkInterfacePermission",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeDhcpOptions",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
+        "kms:CreateGrant",
+        "kms:Decrypt",
+        "kms:DescribeKey",
         "sagemaker:CreateProcessingJob",
         "sagemaker:DescribeProcessingJob",
         "sagemaker:AddTags",
@@ -909,6 +921,12 @@
     },
     "delete": {
       "permissions": [
+        "ec2:DeleteNetworkInterface",
+        "ec2:DeleteNetworkInterfacePermission",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
         "sagemaker:StopProcessingJob",
         "sagemaker:DescribeProcessingJob",
         "sagemaker:ListTags",

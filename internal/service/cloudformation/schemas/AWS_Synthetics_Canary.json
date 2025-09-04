@@ -95,6 +95,24 @@
     "DryRunAndUpdate": {
       "description": "Setting to control if UpdateCanary will perform a DryRun and validate it is PASSING before performing the Update. Default is FALSE.",
       "type": "boolean"
+    },
+    "BrowserConfigs": {
+      "description": "List of browser configurations for the canary",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 2,
+      "items": {
+        "$ref": "#/definitions/BrowserConfig"
+      }
+    },
+    "VisualReferences": {
+      "description": "List of visual references for the canary",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 2,
+      "items": {
+        "$ref": "#/definitions/VisualReference"
+      }
     }
   },
   "definitions": {
@@ -286,6 +304,9 @@
           "items": {
             "$ref": "#/definitions/BaseScreenshot"
           }
+        },
+        "BrowserType": {
+          "$ref": "#/definitions/BrowserType"
         }
       },
       "required": [
@@ -354,6 +375,25 @@
       },
       "required": [
         "MaxRetries"
+      ]
+    },
+    "BrowserConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "BrowserType": {
+          "$ref": "#/definitions/BrowserType"
+        }
+      },
+      "required": [
+        "BrowserType"
+      ]
+    },
+    "BrowserType": {
+      "type": "string",
+      "enum": [
+        "CHROME",
+        "FIREFOX"
       ]
     }
   },
@@ -483,9 +523,11 @@
     "/properties/ResourcesToReplicateTags",
     "/properties/RunConfig/EnvironmentVariables",
     "/properties/VisualReference",
+    "/properties/VisualReferences",
     "/properties/DryRunAndUpdate"
   ],
   "deprecatedProperties": [
-    "/properties/DeleteLambdaResourcesOnCanaryDeletion"
+    "/properties/DeleteLambdaResourcesOnCanaryDeletion",
+    "/properties/VisualReference"
   ]
 }
