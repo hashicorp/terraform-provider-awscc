@@ -37,11 +37,11 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the Availability Zone in which to create the volume. For example, ``us-east-1a``.",
+		//	  "description": "The ID of the Availability Zone in which to create the volume. For example, ``us-east-1a``.\n Either ``AvailabilityZone`` or ``AvailabilityZoneId`` must be specified, but not both.",
 		//	  "type": "string"
 		//	}
 		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Availability Zone in which to create the volume. For example, ``us-east-1a``.",
+			Description: "The ID of the Availability Zone in which to create the volume. For example, ``us-east-1a``.\n Either ``AvailabilityZone`` or ``AvailabilityZoneId`` must be specified, but not both.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Encrypted
