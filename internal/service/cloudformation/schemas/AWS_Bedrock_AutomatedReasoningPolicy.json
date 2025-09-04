@@ -1,0 +1,346 @@
+{
+  "typeName": "AWS::Bedrock::AutomatedReasoningPolicy",
+  "description": "Definition of AWS::Bedrock::AutomatedReasoningPolicy Resource Type",
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/PolicyArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/Version",
+    "/properties/PolicyId",
+    "/properties/PolicyArn",
+    "/properties/DefinitionHash",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "definitions": {
+    "Name": {
+      "type": "string",
+      "pattern": "^[0-9a-zA-Z-_ ]+$",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "Description": {
+      "type": "string",
+      "pattern": "^[\\s\\S]+$",
+      "maxLength": 1024
+    },
+    "PolicyDefinitionRule": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "pattern": "^[A-Z][0-9A-Z]{11}$",
+          "minLength": 12,
+          "maxLength": 12,
+          "description": "A unique id within the PolicyDefinition"
+        },
+        "Expression": {
+          "type": "string",
+          "pattern": "^[\\s\\S]+$",
+          "maxLength": 2048,
+          "description": "The SMT expression for this rule"
+        },
+        "AlternateExpression": {
+          "type": "string",
+          "pattern": "^[\\s\\S]+$",
+          "maxLength": 2048,
+          "description": "An alternate expression for this rule"
+        }
+      },
+      "required": [
+        "Id",
+        "Expression"
+      ],
+      "additionalProperties": false
+    },
+    "PolicyDefinitionRuleList": {
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/PolicyDefinitionRule"
+      },
+      "maxItems": 500
+    },
+    "PolicyDefinitionTypeValue": {
+      "type": "object",
+      "properties": {
+        "Value": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_]+$",
+          "minLength": 1,
+          "maxLength": 64,
+          "description": "The value of the type value."
+        },
+        "Description": {
+          "type": "string",
+          "pattern": "^[\\s\\S]+$",
+          "maxLength": 1024,
+          "description": "A natural language description of the type's value."
+        }
+      },
+      "required": [
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "PolicyDefinitionTypeValueList": {
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/PolicyDefinitionTypeValue"
+      },
+      "minItems": 1,
+      "maxItems": 50
+    },
+    "PolicyDefinitionType": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_]+$",
+          "minLength": 1,
+          "maxLength": 64,
+          "description": "A name for this type."
+        },
+        "Description": {
+          "type": "string",
+          "pattern": "^[\\s\\S]+$",
+          "maxLength": 1024,
+          "description": "A natural language description of this type."
+        },
+        "Values": {
+          "$ref": "#/definitions/PolicyDefinitionTypeValueList",
+          "description": "A list of valid values for this type."
+        }
+      },
+      "required": [
+        "Name",
+        "Values"
+      ],
+      "additionalProperties": false
+    },
+    "PolicyDefinitionTypeList": {
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/PolicyDefinitionType"
+      },
+      "maxItems": 50
+    },
+    "PolicyDefinitionVariable": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_]+$",
+          "minLength": 1,
+          "maxLength": 64,
+          "description": "A name from this variable."
+        },
+        "Type": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_]+$",
+          "minLength": 1,
+          "maxLength": 64,
+          "description": "A type for this variable."
+        },
+        "Description": {
+          "type": "string",
+          "pattern": "^[\\s\\S]+$",
+          "maxLength": 1024,
+          "description": "A natural language description of this variable."
+        }
+      },
+      "required": [
+        "Name",
+        "Type",
+        "Description"
+      ],
+      "additionalProperties": false
+    },
+    "PolicyDefinitionVariableList": {
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/PolicyDefinitionVariable"
+      },
+      "maxItems": 200
+    },
+    "PolicyDefinition": {
+      "type": "object",
+      "properties": {
+        "Version": {
+          "type": "string",
+          "description": "The policy format version."
+        },
+        "Types": {
+          "$ref": "#/definitions/PolicyDefinitionTypeList",
+          "description": "The types definition block of an AutomatedReasoningPolicyDefinition."
+        },
+        "Rules": {
+          "$ref": "#/definitions/PolicyDefinitionRuleList",
+          "description": "The rules definition block of an AutomatedReasoningPolicyDefinition."
+        },
+        "Variables": {
+          "$ref": "#/definitions/PolicyDefinitionVariableList",
+          "description": "The variables definition block of an AutomatedReasoningPolicyDefinition."
+        }
+      },
+      "additionalProperties": false
+    },
+    "PolicyArn": {
+      "type": "string",
+      "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:automated-reasoning-policy\\/[a-z0-9]{12}$",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "Version": {
+      "type": "string",
+      "pattern": "^(([1-9][0-9]{0,11})|(DRAFT))$",
+      "description": "Version of the policy that was created. This will always be `DRAFT`"
+    },
+    "DefinitionHash": {
+      "type": "string",
+      "pattern": "^[0-9a-z]{128}$",
+      "minLength": 128,
+      "maxLength": 128,
+      "description": "The hash for this version"
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time this policy was created"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time this policy was last updated"
+    },
+    "PolicyId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]{12}$",
+      "minLength": 1,
+      "maxLength": 2048,
+      "description": "The id of the policy"
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of the key/value pair for a tag",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+          "description": "Tag Key"
+        },
+        "Value": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 0,
+          "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+          "description": "Tag Value"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "Tags": {
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "properties": {
+    "Name": {
+      "$ref": "#/definitions/Name"
+    },
+    "Description": {
+      "$ref": "#/definitions/Description"
+    },
+    "PolicyDefinition": {
+      "$ref": "#/definitions/PolicyDefinition"
+    },
+    "PolicyArn": {
+      "$ref": "#/definitions/PolicyArn"
+    },
+    "Version": {
+      "$ref": "#/definitions/Version"
+    },
+    "DefinitionHash": {
+      "$ref": "#/definitions/DefinitionHash"
+    },
+    "CreatedAt": {
+      "$ref": "#/definitions/CreatedAt"
+    },
+    "UpdatedAt": {
+      "$ref": "#/definitions/UpdatedAt"
+    },
+    "PolicyId": {
+      "$ref": "#/definitions/PolicyId"
+    },
+    "Tags": {
+      "$ref": "#/definitions/Tags"
+    }
+  },
+  "required": [
+    "Name"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bedrock:CreateAutomatedReasoningPolicy",
+        "bedrock:GetAutomatedReasoningPolicy",
+        "bedrock:ExportAutomatedReasoningPolicyVersion",
+        "bedrock:TagResource",
+        "bedrock:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bedrock:GetAutomatedReasoningPolicy",
+        "bedrock:ExportAutomatedReasoningPolicyVersion",
+        "bedrock:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bedrock:UpdateAutomatedReasoningPolicy",
+        "bedrock:GetAutomatedReasoningPolicy",
+        "bedrock:ExportAutomatedReasoningPolicyVersion",
+        "bedrock:ListTagsForResource",
+        "bedrock:TagResource",
+        "bedrock:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bedrock:DeleteAutomatedReasoningPolicy",
+        "bedrock:GetAutomatedReasoningPolicy"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bedrock:ListAutomatedReasoningPolicies"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "bedrock:TagResource",
+      "bedrock:ListTagsForResource",
+      "bedrock:UntagResource"
+    ]
+  }
+}
