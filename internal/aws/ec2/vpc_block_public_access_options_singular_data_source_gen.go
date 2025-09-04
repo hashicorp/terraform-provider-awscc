@@ -33,6 +33,17 @@ func vPCBlockPublicAccessOptionsDataSource(ctx context.Context) (datasource.Data
 			Description: "The identifier for the specified AWS account.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ExclusionsAllowed
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Determines if exclusions are allowed. If you have enabled VPC BPA at the Organization level, exclusions may be not-allowed. Otherwise, they are allowed.",
+		//	  "type": "string"
+		//	}
+		"exclusions_allowed": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Determines if exclusions are allowed. If you have enabled VPC BPA at the Organization level, exclusions may be not-allowed. Otherwise, they are allowed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InternetGatewayBlockMode
 		// CloudFormation resource type schema:
 		//
@@ -66,6 +77,7 @@ func vPCBlockPublicAccessOptionsDataSource(ctx context.Context) (datasource.Data
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_id":                  "AccountId",
+		"exclusions_allowed":          "ExclusionsAllowed",
 		"internet_gateway_block_mode": "InternetGatewayBlockMode",
 	})
 

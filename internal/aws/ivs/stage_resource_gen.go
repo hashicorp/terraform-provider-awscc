@@ -139,7 +139,7 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "An object representing a configuration of thumbnails for recorded video from an individual participant.",
 		//	          "properties": {
 		//	            "RecordingMode": {
-		//	              "default": "INTERVAL",
+		//	              "default": "DISABLED",
 		//	              "description": "Thumbnail recording mode. Default: DISABLED.",
 		//	              "enum": [
 		//	                "INTERVAL",
@@ -281,7 +281,7 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 									Description: "Thumbnail recording mode. Default: DISABLED.",
 									Optional:    true,
 									Computed:    true,
-									Default:     stringdefault.StaticString("INTERVAL"),
+									Default:     stringdefault.StaticString("DISABLED"),
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"INTERVAL",

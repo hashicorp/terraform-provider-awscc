@@ -381,7 +381,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An elastic GPU to associate with the instance.",
+		//	  "description": "An elastic GPU to associate with the instance. Amazon Elastic Graphics is no longer available.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -416,7 +416,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "An elastic GPU to associate with the instance.",
+			Description: "An elastic GPU to associate with the instance. Amazon Elastic Graphics is no longer available.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -429,7 +429,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An elastic inference accelerator to associate with the instance.",
+		//	  "description": "An elastic inference accelerator to associate with the instance. Amazon Elastic Inference is no longer available.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -481,7 +481,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "An elastic inference accelerator to associate with the instance.",
+			Description: "An elastic inference accelerator to associate with the instance. Amazon Elastic Inference is no longer available.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

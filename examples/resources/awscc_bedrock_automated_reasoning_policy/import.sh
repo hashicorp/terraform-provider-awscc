@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrock_automated_reasoning_policy.example "policy_arn"

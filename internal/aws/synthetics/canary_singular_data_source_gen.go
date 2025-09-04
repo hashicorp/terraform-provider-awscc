@@ -83,6 +83,43 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Provide the s3 bucket output location for test results",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: BrowserConfigs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of browser configurations for the canary",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "BrowserType": {
+		//	        "enum": [
+		//	          "CHROME",
+		//	          "FIREFOX"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "BrowserType"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 2,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"browser_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: BrowserType
+					"browser_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of browser configurations for the canary",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Code
 		// CloudFormation resource type schema:
 		//
@@ -617,6 +654,13 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "type": "array"
+		//	    },
+		//	    "BrowserType": {
+		//	      "enum": [
+		//	        "CHROME",
+		//	        "FIREFOX"
+		//	      ],
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -651,8 +695,102 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "List of screenshots used as base reference for visual testing",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: BrowserType
+				"browser_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Visual reference configuration for visual testing",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: VisualReferences
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of visual references for the canary",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "BaseCanaryRunId": {
+		//	        "description": "Canary run id to be used as base reference for visual testing",
+		//	        "type": "string"
+		//	      },
+		//	      "BaseScreenshots": {
+		//	        "description": "List of screenshots used as base reference for visual testing",
+		//	        "items": {
+		//	          "properties": {
+		//	            "IgnoreCoordinates": {
+		//	              "description": "List of coordinates of rectangles to be ignored during visual testing",
+		//	              "items": {
+		//	                "description": "Coordinates of a rectangle to be ignored during visual testing",
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "ScreenshotName": {
+		//	              "description": "Name of the screenshot to be used as base reference for visual testing",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ScreenshotName"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "BrowserType": {
+		//	        "enum": [
+		//	          "CHROME",
+		//	          "FIREFOX"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "BaseCanaryRunId"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 2,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"visual_references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: BaseCanaryRunId
+					"base_canary_run_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Canary run id to be used as base reference for visual testing",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BaseScreenshots
+					"base_screenshots": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IgnoreCoordinates
+								"ignore_coordinates": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "List of coordinates of rectangles to be ignored during visual testing",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ScreenshotName
+								"screenshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Name of the screenshot to be used as base reference for visual testing",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "List of screenshots used as base reference for visual testing",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BrowserType
+					"browser_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of visual references for the canary",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -677,6 +815,8 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"artifact_s3_location": "ArtifactS3Location",
 		"base_canary_run_id":   "BaseCanaryRunId",
 		"base_screenshots":     "BaseScreenshots",
+		"browser_configs":      "BrowserConfigs",
+		"browser_type":         "BrowserType",
 		"canary_id":            "Id",
 		"code":                 "Code",
 		"delete_lambda_resources_on_canary_deletion": "DeleteLambdaResourcesOnCanaryDeletion",
@@ -721,6 +861,7 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"type":                         "Type",
 		"value":                        "Value",
 		"visual_reference":             "VisualReference",
+		"visual_references":            "VisualReferences",
 		"vpc_config":                   "VPCConfig",
 		"vpc_id":                       "VpcId",
 	})

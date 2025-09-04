@@ -1,8 +1,35 @@
-## 1.54.0 (Unreleased)
+## 1.56.0 (Unreleased)
+
+## 1.55.0 (September 4, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_bedrock_automated_reasoning_policies`
+* **New Data Source:** `awscc_bedrock_automated_reasoning_policy`
+* **New Data Source:** `awscc_bedrock_automated_reasoning_policy_version`
+* **New Data Source:** `awscc_bedrock_automated_reasoning_policy_versions`
+* **New Data Source:** `awscc_notifications_organizational_unit_association`
+* **New Resource:** `awscc_bedrock_automated_reasoning_policy`
+* **New Resource:** `awscc_bedrock_automated_reasoning_policy_version`
+* **New Resource:** `awscc_notifications_organizational_unit_association`
+
+## 1.54.0 (August 28, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_datazone_policy_grant`
+* **New Data Source:** `awscc_datazone_policy_grants`
+* **New Data Source:** `awscc_iot_encryption_configuration`
+* **New Data Source:** `awscc_iot_encryption_configurations`
+* **New Data Source:** `awscc_servicecatalog_tag_option`
+* **New Data Source:** `awscc_servicecatalog_tag_options`
+* **New Resource:** `awscc_datazone_policy_grant`
+* **New Resource:** `awscc_iot_encryption_configuration`
+* **New Resource:** `awscc_servicecatalog_tag_option`
 
 ## 1.53.0 (August 21, 2025)
 
-FEATURES
+FEATURES:
 
 * **New Data Source:** `awscc_aps_resource_policy`
 * **New Data Source:** `awscc_aps_resource_policies`

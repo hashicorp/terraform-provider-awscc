@@ -508,6 +508,14 @@
         "identifier": ["InferenceProfileIdentifier"]
     },
     {
+        "resource": "awscc_bedrock_automated_reasoning_policy",
+        "identifier": ["PolicyArn"]
+    },
+    {
+        "resource": "awscc_bedrock_automated_reasoning_policy_version",
+        "identifier": ["PolicyArn","Version"]
+    },
+    {
         "resource": "awscc_bedrock_blueprint",
         "identifier": ["BlueprintArn"]
     },
@@ -1250,6 +1258,10 @@
     {
         "resource": "awscc_datazone_owner",
         "identifier": ["DomainIdentifier","EntityType","EntityIdentifier","OwnerType","OwnerIdentifier"]
+    },
+    {
+        "resource": "awscc_datazone_policy_grant",
+        "identifier": ["DomainIdentifier","GrantId","EntityIdentifier","EntityType","PolicyType"]
     },
     {
         "resource": "awscc_datazone_project",
@@ -2464,6 +2476,10 @@
         "identifier": ["DomainConfigurationName"]
     },
     {
+        "resource": "awscc_iot_encryption_configuration",
+        "identifier": ["AccountId"]
+    },
+    {
         "resource": "awscc_iot_fleet_metric",
         "identifier": ["MetricName"]
     },
@@ -3362,6 +3378,10 @@
     {
         "resource": "awscc_notifications_notification_hub",
         "identifier": ["Region"]
+    },
+    {
+        "resource": "awscc_notifications_organizational_unit_association",
+        "identifier": ["NotificationConfigurationArn","OrganizationalUnitId"]
     },
     {
         "resource": "awscc_notificationscontacts_email_contact",
@@ -4442,6 +4462,10 @@
     {
         "resource": "awscc_servicecatalog_service_action_association",
         "identifier": ["ProductId","ProvisioningArtifactId","ServiceActionId"]
+    },
+    {
+        "resource": "awscc_servicecatalog_tag_option",
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_servicecatalogappregistry_application",

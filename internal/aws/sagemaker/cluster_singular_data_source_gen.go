@@ -117,7 +117,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "ImageId": {
 		//	        "description": "AMI Id to be used for launching EC2 instances - HyperPodPublicAmiId or CustomAmiId",
 		//	        "maxLength": 21,
-		//	        "minLength": 12,
+		//	        "minLength": 7,
 		//	        "pattern": "^ami-[0-9a-fA-F]{8,17}|default$",
 		//	        "type": "string"
 		//	      },

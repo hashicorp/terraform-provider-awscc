@@ -1,0 +1,68 @@
+{
+  "typeName": "AWS::ServiceCatalog::TagOption",
+  "description": "Resource type definition for AWS::ServiceCatalog::TagOption",
+  "additionalProperties": false,
+  "properties": {
+    "Id": {
+      "type": "string",
+      "description": "The TagOption identifier."
+    },
+    "Active": {
+      "type": "boolean",
+      "description": "The TagOption active state."
+    },
+    "Value": {
+      "type": "string",
+      "description": "The TagOption value."
+    },
+    "Key": {
+      "type": "string",
+      "description": "The TagOption key."
+    }
+  },
+  "tagging": {
+    "taggable": false
+  },
+  "required": [
+    "Value",
+    "Key"
+  ],
+  "createOnlyProperties": [
+    "/properties/Value",
+    "/properties/Key"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "readOnlyProperties": [
+    "/properties/Id"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "servicecatalog:CreateTagOption"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "servicecatalog:DescribeTagOption"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "servicecatalog:UpdateTagOption",
+        "servicecatalog:DescribeTagOption"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "servicecatalog:DeleteTagOption"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "servicecatalog:ListTagOptions"
+      ]
+    }
+  }
+}

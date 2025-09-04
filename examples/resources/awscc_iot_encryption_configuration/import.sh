@@ -1,0 +1,1 @@
+$ terraform import awscc_iot_encryption_configuration.example "account_id"

@@ -250,8 +250,7 @@
   ],
   "createOnlyProperties": [
     "/properties/ProjectProfileId",
-    "/properties/DomainIdentifier",
-    "/properties/DomainUnitId"
+    "/properties/DomainIdentifier"
   ],
   "additionalIdentifiers": [
     [

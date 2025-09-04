@@ -110,6 +110,33 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: PreSharedKeyStorage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "enum": [
+		//	    "Standard",
+		//	    "SecretsManager"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"pre_shared_key_storage": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"Standard",
+					"SecretsManager",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// PreSharedKeyStorage is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: RemoteIpv4NetworkCidr
 		// CloudFormation resource type schema:
 		//
@@ -1090,6 +1117,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		"phase_2_integrity_algorithms":            "Phase2IntegrityAlgorithms",
 		"phase_2_lifetime_seconds":                "Phase2LifetimeSeconds",
 		"pre_shared_key":                          "PreSharedKey",
+		"pre_shared_key_storage":                  "PreSharedKeyStorage",
 		"rekey_fuzz_percentage":                   "RekeyFuzzPercentage",
 		"rekey_margin_time_seconds":               "RekeyMarginTimeSeconds",
 		"remote_ipv_4_network_cidr":               "RemoteIpv4NetworkCidr",
@@ -1111,6 +1139,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/PreSharedKeyStorage",
 		"/properties/VpnTunnelOptionsSpecifications/*/PreSharedKey",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

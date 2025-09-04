@@ -77,6 +77,21 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "The type of IP address assigned to the outside interface of the customer gateway device.\n Valid values: ``PrivateIpv4`` | ``PublicIpv4`` | ``Ipv6``\n Default: ``PublicIpv4``",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: PreSharedKeyStorage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "enum": [
+		//	    "Standard",
+		//	    "SecretsManager"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"pre_shared_key_storage": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RemoteIpv4NetworkCidr
 		// CloudFormation resource type schema:
 		//
@@ -747,6 +762,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"phase_2_integrity_algorithms":            "Phase2IntegrityAlgorithms",
 		"phase_2_lifetime_seconds":                "Phase2LifetimeSeconds",
 		"pre_shared_key":                          "PreSharedKey",
+		"pre_shared_key_storage":                  "PreSharedKeyStorage",
 		"rekey_fuzz_percentage":                   "RekeyFuzzPercentage",
 		"rekey_margin_time_seconds":               "RekeyMarginTimeSeconds",
 		"remote_ipv_4_network_cidr":               "RemoteIpv4NetworkCidr",

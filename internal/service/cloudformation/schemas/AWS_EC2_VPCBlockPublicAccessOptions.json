@@ -20,6 +20,10 @@
     "AccountId": {
       "type": "string",
       "description": "The identifier for the specified AWS account."
+    },
+    "ExclusionsAllowed": {
+      "type": "string",
+      "description": "Determines if exclusions are allowed. If you have enabled VPC BPA at the Organization level, exclusions may be not-allowed. Otherwise, they are allowed."
     }
   },
   "additionalProperties": false,
@@ -27,7 +31,8 @@
     "InternetGatewayBlockMode"
   ],
   "readOnlyProperties": [
-    "/properties/AccountId"
+    "/properties/AccountId",
+    "/properties/ExclusionsAllowed"
   ],
   "primaryIdentifier": [
     "/properties/AccountId"

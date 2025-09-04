@@ -129,6 +129,9 @@
   "readOnlyProperties": [
     "/properties/ReplicationConfigArn"
   ],
+  "writeOnlyProperties": [
+    "/properties/ResourceIdentifier"
+  ],
   "primaryIdentifier": [
     "/properties/ReplicationConfigArn"
   ],
