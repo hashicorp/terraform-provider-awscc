@@ -40,7 +40,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 100,
-		//	      "minItems": 1,
+		//	      "minItems": 0,
 		//	      "type": "array",
 		//	      "uniqueItems": false
 		//	    },
@@ -54,7 +54,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 100,
-		//	      "minItems": 1,
+		//	      "minItems": 0,
 		//	      "type": "array",
 		//	      "uniqueItems": false
 		//	    },
@@ -279,7 +279,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 5,
-		//	          "minItems": 1,
+		//	          "minItems": 0,
 		//	          "type": "array",
 		//	          "uniqueItems": false
 		//	        },
@@ -293,7 +293,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 16,
-		//	          "minItems": 1,
+		//	          "minItems": 0,
 		//	          "type": "array",
 		//	          "uniqueItems": false
 		//	        }

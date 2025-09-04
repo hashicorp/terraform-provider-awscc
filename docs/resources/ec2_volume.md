@@ -50,6 +50,7 @@ resource "awscc_ec2_volume" "example" {
 ### Required
 
 - `availability_zone` (String) The ID of the Availability Zone in which to create the volume. For example, ``us-east-1a``.
+ Either ``AvailabilityZone`` or ``AvailabilityZoneId`` must be specified, but not both.
 
 ### Optional
 

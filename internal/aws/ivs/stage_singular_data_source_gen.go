@@ -119,7 +119,7 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "description": "An object representing a configuration of thumbnails for recorded video from an individual participant.",
 		//	          "properties": {
 		//	            "RecordingMode": {
-		//	              "default": "INTERVAL",
+		//	              "default": "DISABLED",
 		//	              "description": "Thumbnail recording mode. Default: DISABLED.",
 		//	              "enum": [
 		//	                "INTERVAL",

@@ -114,6 +114,61 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.RegexMatches(regexp.MustCompile("^(s3|S3)://"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
+		// Property: BrowserConfigs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of browser configurations for the canary",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "BrowserType": {
+		//	        "enum": [
+		//	          "CHROME",
+		//	          "FIREFOX"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "BrowserType"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 2,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"browser_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: BrowserType
+					"browser_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"CHROME",
+								"FIREFOX",
+							),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of browser configurations for the canary",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 2),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Code
 		// CloudFormation resource type schema:
 		//
@@ -840,6 +895,13 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "type": "array"
+		//	    },
+		//	    "BrowserType": {
+		//	      "enum": [
+		//	        "CHROME",
+		//	        "FIREFOX"
+		//	      ],
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -896,6 +958,20 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: BrowserType
+				"browser_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"CHROME",
+							"FIREFOX",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Visual reference configuration for visual testing",
 			Optional:    true,
@@ -904,6 +980,136 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// VisualReference is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: VisualReferences
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of visual references for the canary",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "BaseCanaryRunId": {
+		//	        "description": "Canary run id to be used as base reference for visual testing",
+		//	        "type": "string"
+		//	      },
+		//	      "BaseScreenshots": {
+		//	        "description": "List of screenshots used as base reference for visual testing",
+		//	        "items": {
+		//	          "properties": {
+		//	            "IgnoreCoordinates": {
+		//	              "description": "List of coordinates of rectangles to be ignored during visual testing",
+		//	              "items": {
+		//	                "description": "Coordinates of a rectangle to be ignored during visual testing",
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "ScreenshotName": {
+		//	              "description": "Name of the screenshot to be used as base reference for visual testing",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ScreenshotName"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "BrowserType": {
+		//	        "enum": [
+		//	          "CHROME",
+		//	          "FIREFOX"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "BaseCanaryRunId"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 2,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"visual_references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: BaseCanaryRunId
+					"base_canary_run_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Canary run id to be used as base reference for visual testing",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: BaseScreenshots
+					"base_screenshots": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IgnoreCoordinates
+								"ignore_coordinates": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "List of coordinates of rectangles to be ignored during visual testing",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ScreenshotName
+								"screenshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Name of the screenshot to be used as base reference for visual testing",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "List of screenshots used as base reference for visual testing",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: BrowserType
+					"browser_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"CHROME",
+								"FIREFOX",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of visual references for the canary",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 2),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// VisualReferences is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -932,6 +1138,8 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		"artifact_s3_location": "ArtifactS3Location",
 		"base_canary_run_id":   "BaseCanaryRunId",
 		"base_screenshots":     "BaseScreenshots",
+		"browser_configs":      "BrowserConfigs",
+		"browser_type":         "BrowserType",
 		"canary_id":            "Id",
 		"code":                 "Code",
 		"delete_lambda_resources_on_canary_deletion": "DeleteLambdaResourcesOnCanaryDeletion",
@@ -976,6 +1184,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		"type":                         "Type",
 		"value":                        "Value",
 		"visual_reference":             "VisualReference",
+		"visual_references":            "VisualReferences",
 		"vpc_config":                   "VPCConfig",
 		"vpc_id":                       "VpcId",
 	})
@@ -990,6 +1199,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/ResourcesToReplicateTags",
 		"/properties/RunConfig/EnvironmentVariables",
 		"/properties/VisualReference",
+		"/properties/VisualReferences",
 		"/properties/DryRunAndUpdate",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

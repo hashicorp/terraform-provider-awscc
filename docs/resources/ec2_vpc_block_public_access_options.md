@@ -36,6 +36,7 @@ resource "awscc_ec2_vpc_block_public_access_options" "example" {
 ### Read-Only
 
 - `account_id` (String) The identifier for the specified AWS account.
+- `exclusions_allowed` (String) Determines if exclusions are allowed. If you have enabled VPC BPA at the Organization level, exclusions may be not-allowed. Otherwise, they are allowed.
 - `id` (String) Uniquely identifies the resource.
 
 ## Import

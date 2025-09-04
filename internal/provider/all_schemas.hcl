@@ -610,6 +610,14 @@ resource_schema "aws_bedrock_application_inference_profile" {
   cloudformation_type_name = "AWS::Bedrock::ApplicationInferenceProfile"
 }
 
+resource_schema "aws_bedrock_automated_reasoning_policy" {
+  cloudformation_type_name = "AWS::Bedrock::AutomatedReasoningPolicy"
+}
+
+resource_schema "aws_bedrock_automated_reasoning_policy_version" {
+  cloudformation_type_name = "AWS::Bedrock::AutomatedReasoningPolicyVersion"
+}
+
 resource_schema "aws_bedrock_blueprint" {
   cloudformation_type_name = "AWS::Bedrock::Blueprint"
 }
@@ -3847,6 +3855,11 @@ resource_schema "aws_notifications_notification_configuration" {
 
 resource_schema "aws_notifications_notification_hub" {
   cloudformation_type_name = "AWS::Notifications::NotificationHub"
+}
+
+resource_schema "aws_notifications_organizational_unit_association" {
+  cloudformation_type_name               = "AWS::Notifications::OrganizationalUnitAssociation"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_notificationscontacts_email_contact" {

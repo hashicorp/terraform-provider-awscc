@@ -27,6 +27,7 @@ Resource Type definition for AWS::Synthetics::Canary
 ### Optional
 
 - `artifact_config` (Attributes) Provide artifact configuration (see [below for nested schema](#nestedatt--artifact_config))
+- `browser_configs` (Attributes List) List of browser configurations for the canary (see [below for nested schema](#nestedatt--browser_configs))
 - `delete_lambda_resources_on_canary_deletion` (Boolean) Deletes associated lambda resources created by Synthetics if set to True. Default is False
 - `dry_run_and_update` (Boolean) Setting to control if UpdateCanary will perform a DryRun and validate it is PASSING before performing the Update. Default is FALSE.
 - `failure_retention_period` (Number) Retention period of failed canary runs represented in number of days
@@ -37,6 +38,7 @@ Resource Type definition for AWS::Synthetics::Canary
 - `success_retention_period` (Number) Retention period of successful canary runs represented in number of days
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `visual_reference` (Attributes) Visual reference configuration for visual testing (see [below for nested schema](#nestedatt--visual_reference))
+- `visual_references` (Attributes List) List of visual references for the canary (see [below for nested schema](#nestedatt--visual_references))
 - `vpc_config` (Attributes) Provide VPC Configuration if enabled. (see [below for nested schema](#nestedatt--vpc_config))
 
 ### Read-Only
@@ -112,6 +114,14 @@ Optional:
 
 
 
+<a id="nestedatt--browser_configs"></a>
+### Nested Schema for `browser_configs`
+
+Optional:
+
+- `browser_type` (String)
+
+
 <a id="nestedatt--run_config"></a>
 ### Nested Schema for `run_config`
 
@@ -140,9 +150,29 @@ Optional:
 
 - `base_canary_run_id` (String) Canary run id to be used as base reference for visual testing
 - `base_screenshots` (Attributes List) List of screenshots used as base reference for visual testing (see [below for nested schema](#nestedatt--visual_reference--base_screenshots))
+- `browser_type` (String)
 
 <a id="nestedatt--visual_reference--base_screenshots"></a>
 ### Nested Schema for `visual_reference.base_screenshots`
+
+Optional:
+
+- `ignore_coordinates` (List of String) List of coordinates of rectangles to be ignored during visual testing
+- `screenshot_name` (String) Name of the screenshot to be used as base reference for visual testing
+
+
+
+<a id="nestedatt--visual_references"></a>
+### Nested Schema for `visual_references`
+
+Optional:
+
+- `base_canary_run_id` (String) Canary run id to be used as base reference for visual testing
+- `base_screenshots` (Attributes List) List of screenshots used as base reference for visual testing (see [below for nested schema](#nestedatt--visual_references--base_screenshots))
+- `browser_type` (String)
+
+<a id="nestedatt--visual_references--base_screenshots"></a>
+### Nested Schema for `visual_references.base_screenshots`
 
 Optional:
 
