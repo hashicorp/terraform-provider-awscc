@@ -824,8 +824,9 @@ func (r *genericResource) ImportState(ctx context.Context, request resource.Impo
 		}
 	}
 
-	var accountID types.String
+	var accountID, region types.String
 	response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(identity.NameAccountID), &accountID)...)
+	response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(identity.NameRegion), &region)...)
 	if response.Diagnostics.HasError() {
 		return
 	}
@@ -835,6 +836,16 @@ func (r *genericResource) ImportState(ctx context.Context, request resource.Impo
 			response.Diagnostics.AddError(
 				"Import account_id mismatch",
 				fmt.Sprintf("Identity account_id must match the current account_id of the provider: %s", r.provider.AccountID(ctx)),
+			)
+			return
+		}
+	}
+
+	if !region.IsNull() {
+		if region.ValueString() != r.provider.Region(ctx) {
+			response.Diagnostics.AddError(
+				"Import region mismatch",
+				fmt.Sprintf("Identity region must match the current region of the provider: %s", r.provider.Region(ctx)),
 			)
 			return
 		}
