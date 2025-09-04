@@ -53,7 +53,7 @@ func processingJobResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 100,
-		//	      "minItems": 1,
+		//	      "minItems": 0,
 		//	      "type": "array",
 		//	      "uniqueItems": false
 		//	    },
@@ -67,7 +67,7 @@ func processingJobResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 100,
-		//	      "minItems": 1,
+		//	      "minItems": 0,
 		//	      "type": "array",
 		//	      "uniqueItems": false
 		//	    },
@@ -93,7 +93,7 @@ func processingJobResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(1, 100),
+						listvalidator.SizeBetween(0, 100),
 						listvalidator.ValueStringsAre(
 							stringvalidator.LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
@@ -111,7 +111,7 @@ func processingJobResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(1, 100),
+						listvalidator.SizeBetween(0, 100),
 						listvalidator.ValueStringsAre(
 							stringvalidator.LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
@@ -383,7 +383,7 @@ func processingJobResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 5,
-		//	          "minItems": 1,
+		//	          "minItems": 0,
 		//	          "type": "array",
 		//	          "uniqueItems": false
 		//	        },
@@ -397,7 +397,7 @@ func processingJobResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 16,
-		//	          "minItems": 1,
+		//	          "minItems": 0,
 		//	          "type": "array",
 		//	          "uniqueItems": false
 		//	        }
@@ -441,7 +441,7 @@ func processingJobResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(1, 5),
+								listvalidator.SizeBetween(0, 5),
 								listvalidator.ValueStringsAre(
 									stringvalidator.LengthBetween(0, 32),
 									stringvalidator.RegexMatches(regexp.MustCompile("[-0-9a-zA-Z]+"), ""),
@@ -460,7 +460,7 @@ func processingJobResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(1, 16),
+								listvalidator.SizeBetween(0, 16),
 								listvalidator.ValueStringsAre(
 									stringvalidator.LengthBetween(0, 32),
 									stringvalidator.RegexMatches(regexp.MustCompile("[-0-9a-zA-Z]+"), ""),

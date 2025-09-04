@@ -151,7 +151,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	      "ImageId": {
 		//	        "description": "AMI Id to be used for launching EC2 instances - HyperPodPublicAmiId or CustomAmiId",
 		//	        "maxLength": 21,
-		//	        "minLength": 12,
+		//	        "minLength": 7,
 		//	        "pattern": "^ami-[0-9a-fA-F]{8,17}|default$",
 		//	        "type": "string"
 		//	      },
@@ -433,7 +433,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(12, 21),
+							stringvalidator.LengthBetween(7, 21),
 							stringvalidator.RegexMatches(regexp.MustCompile("^ami-[0-9a-fA-F]{8,17}|default$"), ""),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
