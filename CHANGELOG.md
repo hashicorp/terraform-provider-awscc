@@ -1,4 +1,15 @@
-## 1.55.0 (Unreleased)
+## 1.55.0 (September 4, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_bedrock_automated_reasoning_policies`
+* **New Data Source:** `awscc_bedrock_automated_reasoning_policy`
+* **New Data Source:** `awscc_bedrock_automated_reasoning_policy_version`
+* **New Data Source:** `awscc_bedrock_automated_reasoning_policy_versions`
+* **New Data Source:** `awscc_notifications_organizational_unit_association`
+* **New Resource:** `awscc_bedrock_automated_reasoning_policy`
+* **New Resource:** `awscc_bedrock_automated_reasoning_policy_version`
+* **New Resource:** `awscc_notifications_organizational_unit_association`
 
 ## 1.54.0 (August 28, 2025)
 

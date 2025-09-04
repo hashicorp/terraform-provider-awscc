@@ -1,0 +1,1 @@
+$ terraform import awscc_notifications_organizational_unit_association.example "notification_configuration_arn|organizational_unit_id"
