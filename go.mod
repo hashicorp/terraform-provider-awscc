@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.31.6
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.18.6
 	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.28.2
-	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.65.2
+	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.66.0
 	github.com/google/go-cmp v0.7.0
 	github.com/google/go-github/v72 v72.0.0
 	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.23.0
