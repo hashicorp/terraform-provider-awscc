@@ -17,6 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -203,6 +204,18 @@ func typeResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Cassandra::Type").WithTerraformTypeName("awscc_cassandra_type")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "keyspace_name",
+			Description:       "Name of the Keyspace which contains the User-Defined Type",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "type_name",
+			Description:       "Name of the User-Defined Type",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"direct_parent_types":     "DirectParentTypes",
 		"direct_referring_tables": "DirectReferringTables",

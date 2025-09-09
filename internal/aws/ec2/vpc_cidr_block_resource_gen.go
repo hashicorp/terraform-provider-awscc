@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -251,6 +252,18 @@ func vPCCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPCCidrBlock").WithTerraformTypeName("awscc_ec2_vpc_cidr_block")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "id",
+			Description:       "The Id of the VPC associated CIDR Block",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "vpc_id",
+			Description:       "The ID of the VPC",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"amazon_provided_ipv_6_cidr_block":      "AmazonProvidedIpv6CidrBlock",
 		"cidr_block":                            "CidrBlock",

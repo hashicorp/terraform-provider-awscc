@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -89,6 +90,18 @@ func masterResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::GuardDuty::Master").WithTerraformTypeName("awscc_guardduty_master")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "detector_id",
+			Description:       "Unique ID of the detector of the GuardDuty member account",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "master_id",
+			Description:       "ID of the account used as the master account",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"detector_id":   "DetectorId",
 		"invitation_id": "InvitationId",

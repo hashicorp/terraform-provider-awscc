@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -175,6 +176,18 @@ func loadBalancerTlsCertificateResource(ctx context.Context) (resource.Resource,
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lightsail::LoadBalancerTlsCertificate").WithTerraformTypeName("awscc_lightsail_load_balancer_tls_certificate")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "certificate_name",
+			Description:       "The SSL/TLS certificate name",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "load_balancer_name",
+			Description:       "The name of your load balancer",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"certificate_alternative_names":     "CertificateAlternativeNames",
 		"certificate_domain_name":           "CertificateDomainName",

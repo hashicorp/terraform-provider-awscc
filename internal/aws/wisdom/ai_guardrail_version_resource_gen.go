@@ -17,6 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -146,6 +147,20 @@ func aIGuardrailVersionResource(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithCloudFormationTypeName("AWS::Wisdom::AIGuardrailVersion").WithTerraformTypeName("awscc_wisdom_ai_guardrail_version")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "assistant_id",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "ai_guardrail_id",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "version_number",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"ai_guardrail_arn":        "AIGuardrailArn",
 		"ai_guardrail_id":         "AIGuardrailId",

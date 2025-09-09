@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -152,6 +153,13 @@ func aggregatorV2Resource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::SecurityHub::AggregatorV2").WithTerraformTypeName("awscc_securityhub_aggregator_v2")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "aggregator_v2_arn",
+			Description:       "The ARN of the AggregatorV2 being created and assigned as the unique identifier",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"aggregation_region":  "AggregationRegion",
 		"aggregator_v2_arn":   "AggregatorV2Arn",

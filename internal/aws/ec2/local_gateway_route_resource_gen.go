@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -135,6 +136,18 @@ func localGatewayRouteResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::LocalGatewayRoute").WithTerraformTypeName("awscc_ec2_local_gateway_route")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "destination_cidr_block",
+			Description:       "The CIDR block used for destination matches",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "local_gateway_route_table_id",
+			Description:       "The ID of the local gateway route table",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"destination_cidr_block":                   "DestinationCidrBlock",
 		"local_gateway_route_table_id":             "LocalGatewayRouteTableId",

@@ -21,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/defaults"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -458,6 +459,18 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSO::PermissionSet").WithTerraformTypeName("awscc_sso_permission_set")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "instance_arn",
+			Description:       "The sso instance arn that the permission set is owned",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "permission_set_arn",
+			Description:       "The permission set that the policy will be attached to",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"customer_managed_policy_reference":  "CustomerManagedPolicyReference",
 		"customer_managed_policy_references": "CustomerManagedPolicyReferences",

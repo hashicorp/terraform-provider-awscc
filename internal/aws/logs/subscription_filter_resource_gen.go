@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -155,6 +156,18 @@ func subscriptionFilterResource(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::SubscriptionFilter").WithTerraformTypeName("awscc_logs_subscription_filter")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "filter_name",
+			Description:       "The name of the subscription filter",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "log_group_name",
+			Description:       "The log group to associate with the subscription filter",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"apply_on_transformed_logs": "ApplyOnTransformedLogs",
 		"destination_arn":           "DestinationArn",

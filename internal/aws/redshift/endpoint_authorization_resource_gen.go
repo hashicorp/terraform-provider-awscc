@@ -21,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -258,6 +259,18 @@ func endpointAuthorizationResource(ctx context.Context) (resource.Resource, erro
 
 	opts = opts.WithCloudFormationTypeName("AWS::Redshift::EndpointAuthorization").WithTerraformTypeName("awscc_redshift_endpoint_authorization")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "cluster_identifier",
+			Description:       "The cluster identifier",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "account",
+			Description:       "The target AWS account ID to grant or revoke access for",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account":            "Account",
 		"allowed_all_vp_cs":  "AllowedAllVPCs",

@@ -17,6 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -192,6 +193,31 @@ func ownerResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::Owner").WithTerraformTypeName("awscc_datazone_owner")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "domain_identifier",
+			Description:       "The ID of the domain in which you want to add the entity owner",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "entity_type",
+			Description:       "The type of an entity",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "entity_identifier",
+			Description:       "The ID of the entity to which you want to add an owner",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "owner_type",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "owner_identifier",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"domain_identifier": "DomainIdentifier",
 		"entity_identifier": "EntityIdentifier",

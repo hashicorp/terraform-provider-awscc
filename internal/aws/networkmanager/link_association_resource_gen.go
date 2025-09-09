@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -87,6 +88,24 @@ func linkAssociationResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::LinkAssociation").WithTerraformTypeName("awscc_networkmanager_link_association")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "global_network_id",
+			Description:       "The ID of the global network",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "device_id",
+			Description:       "The ID of the device",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "link_id",
+			Description:       "The ID of the link",
+			RequiredForImport: true,
+		})
+
+	opts = opts.IsGlobalResourceType(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"device_id":         "DeviceId",
 		"global_network_id": "GlobalNetworkId",

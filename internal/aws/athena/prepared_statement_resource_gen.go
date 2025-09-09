@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -121,6 +122,18 @@ func preparedStatementResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Athena::PreparedStatement").WithTerraformTypeName("awscc_athena_prepared_statement")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "statement_name",
+			Description:       "The name of the prepared statement",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "work_group",
+			Description:       "The name of the workgroup to which the prepared statement belongs",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"description":     "Description",
 		"query_statement": "QueryStatement",

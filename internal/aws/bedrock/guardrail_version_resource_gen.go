@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -137,6 +138,18 @@ func guardrailVersionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Bedrock::GuardrailVersion").WithTerraformTypeName("awscc_bedrock_guardrail_version")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "guardrail_id",
+			Description:       "Unique id for the guardrail",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "version",
+			Description:       "Guardrail version",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"description":          "Description",
 		"guardrail_arn":        "GuardrailArn",

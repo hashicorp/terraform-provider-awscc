@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -73,6 +74,18 @@ func vPNConnectionRouteResource(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPNConnectionRoute").WithTerraformTypeName("awscc_ec2_vpn_connection_route")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "destination_cidr_block",
+			Description:       "The CIDR block associated with the local subnet of the customer network",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "vpn_connection_id",
+			Description:       "The ID of the VPN connection",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"destination_cidr_block": "DestinationCidrBlock",
 		"vpn_connection_id":      "VpnConnectionId",

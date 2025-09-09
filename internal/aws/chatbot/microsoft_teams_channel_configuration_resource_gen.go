@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -354,6 +355,13 @@ func microsoftTeamsChannelConfigurationResource(ctx context.Context) (resource.R
 
 	opts = opts.WithCloudFormationTypeName("AWS::Chatbot::MicrosoftTeamsChannelConfiguration").WithTerraformTypeName("awscc_chatbot_microsoft_teams_channel_configuration")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "arn",
+			Description:       "Amazon Resource Name (ARN) of the configuration",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                         "Arn",
 		"configuration_name":          "ConfigurationName",

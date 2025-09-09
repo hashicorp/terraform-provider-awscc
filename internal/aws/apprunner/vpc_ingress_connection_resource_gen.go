@@ -17,6 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -235,6 +236,13 @@ func vpcIngressConnectionResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppRunner::VpcIngressConnection").WithTerraformTypeName("awscc_apprunner_vpc_ingress_connection")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "vpc_ingress_connection_arn",
+			Description:       "The Amazon Resource Name (ARN) of the VpcIngressConnection",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"domain_name":                 "DomainName",
 		"ingress_vpc_configuration":   "IngressVpcConfiguration",

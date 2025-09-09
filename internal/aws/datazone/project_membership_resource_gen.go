@@ -17,6 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -146,6 +147,24 @@ func projectMembershipResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::ProjectMembership").WithTerraformTypeName("awscc_datazone_project_membership")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "domain_identifier",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "member_identifier",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "member_identifier_type",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "project_identifier",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"designation":        "Designation",
 		"domain_identifier":  "DomainIdentifier",

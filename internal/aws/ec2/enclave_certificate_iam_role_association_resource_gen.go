@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -132,6 +133,18 @@ func enclaveCertificateIamRoleAssociationResource(ctx context.Context) (resource
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::EnclaveCertificateIamRoleAssociation").WithTerraformTypeName("awscc_ec2_enclave_certificate_iam_role_association")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "certificate_arn",
+			Description:       "The Amazon Resource Name (ARN) of the ACM certificate with which to associate the IAM role",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "role_arn",
+			Description:       "The Amazon Resource Name (ARN) of the IAM role to associate with the ACM certificate",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"certificate_arn":            "CertificateArn",
 		"certificate_s3_bucket_name": "CertificateS3BucketName",

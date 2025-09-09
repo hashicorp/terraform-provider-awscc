@@ -23,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -363,6 +364,16 @@ func environmentBlueprintConfigurationResource(ctx context.Context) (resource.Re
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::EnvironmentBlueprintConfiguration").WithTerraformTypeName("awscc_datazone_environment_blueprint_configuration")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "domain_id",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "environment_blueprint_id",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"created_at":                                 "CreatedAt",
 		"domain_id":                                  "DomainId",

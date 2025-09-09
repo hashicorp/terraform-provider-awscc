@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -90,6 +91,16 @@ func servicePrincipalNameResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::PCAConnectorAD::ServicePrincipalName").WithTerraformTypeName("awscc_pcaconnectorad_service_principal_name")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "connector_arn",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "directory_registration_arn",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"connector_arn":              "ConnectorArn",
 		"directory_registration_arn": "DirectoryRegistrationArn",

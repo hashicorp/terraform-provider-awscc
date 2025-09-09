@@ -25,6 +25,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -641,6 +642,18 @@ func eventTriggerResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::CustomerProfiles::EventTrigger").WithTerraformTypeName("awscc_customerprofiles_event_trigger")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "domain_name",
+			Description:       "The unique name of the domain",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "event_trigger_name",
+			Description:       "The unique name of the event trigger",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"comparison_operator":         "ComparisonOperator",
 		"created_at":                  "CreatedAt",

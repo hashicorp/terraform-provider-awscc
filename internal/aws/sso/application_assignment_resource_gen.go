@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -114,6 +115,23 @@ func applicationAssignmentResource(ctx context.Context) (resource.Resource, erro
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSO::ApplicationAssignment").WithTerraformTypeName("awscc_sso_application_assignment")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "application_arn",
+			Description:       "The ARN of the application",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "principal_type",
+			Description:       "The entity type for which the assignment will be created",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "principal_id",
+			Description:       "An identifier for an object in IAM Identity Center, such as a user or group",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"application_arn": "ApplicationArn",
 		"principal_id":    "PrincipalId",

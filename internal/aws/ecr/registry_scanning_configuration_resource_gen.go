@@ -17,6 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -202,6 +203,13 @@ func registryScanningConfigurationResource(ctx context.Context) (resource.Resour
 
 	opts = opts.WithCloudFormationTypeName("AWS::ECR::RegistryScanningConfiguration").WithTerraformTypeName("awscc_ecr_registry_scanning_configuration")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "registry_id",
+			Description:       "The registry id",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"filter":             "Filter",
 		"filter_type":        "FilterType",

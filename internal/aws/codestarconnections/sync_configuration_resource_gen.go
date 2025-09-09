@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -229,6 +230,18 @@ func syncConfigurationResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::CodeStarConnections::SyncConfiguration").WithTerraformTypeName("awscc_codestarconnections_sync_configuration")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "resource_name",
+			Description:       "The name of the resource that is being synchronized to the repository",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "sync_type",
+			Description:       "The type of resource synchronization service that is to be configured, for example, CFN_STACK_SYNC",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"branch":                     "Branch",
 		"config_file":                "ConfigFile",

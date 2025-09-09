@@ -21,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -371,6 +372,18 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::MetricFilter").WithTerraformTypeName("awscc_logs_metric_filter")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "log_group_name",
+			Description:       "The name of an existing log group that you want to associate with this metric filter",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "filter_name",
+			Description:       "The name of the metric filter",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"apply_on_transformed_logs": "ApplyOnTransformedLogs",
 		"default_value":             "DefaultValue",

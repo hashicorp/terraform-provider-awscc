@@ -26,6 +26,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -4105,6 +4106,18 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::CustomerProfiles::SegmentDefinition").WithTerraformTypeName("awscc_customerprofiles_segment_definition")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "domain_name",
+			Description:       "The unique name of the domain",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "segment_definition_name",
+			Description:       "The unique name of the segment definition",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_number":          "AccountNumber",
 		"additional_information":  "AdditionalInformation",

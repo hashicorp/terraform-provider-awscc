@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -232,6 +233,18 @@ func eventInvokeConfigResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lambda::EventInvokeConfig").WithTerraformTypeName("awscc_lambda_event_invoke_config")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "function_name",
+			Description:       "The name of the Lambda function",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "qualifier",
+			Description:       "The identifier of a version or alias",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"destination":                  "Destination",
 		"destination_config":           "DestinationConfig",

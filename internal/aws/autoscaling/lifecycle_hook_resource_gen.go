@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -174,6 +175,18 @@ func lifecycleHookResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::AutoScaling::LifecycleHook").WithTerraformTypeName("awscc_autoscaling_lifecycle_hook")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "auto_scaling_group_name",
+			Description:       "The name of the Auto Scaling group for the lifecycle hook",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "lifecycle_hook_name",
+			Description:       "The name of the lifecycle hook",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"auto_scaling_group_name": "AutoScalingGroupName",
 		"default_result":          "DefaultResult",

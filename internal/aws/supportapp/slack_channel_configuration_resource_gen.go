@@ -17,6 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -199,6 +200,18 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 
 	opts = opts.WithCloudFormationTypeName("AWS::SupportApp::SlackChannelConfiguration").WithTerraformTypeName("awscc_supportapp_slack_channel_configuration")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "team_id",
+			Description:       "The team ID in Slack, which uniquely identifies a workspace",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "channel_id",
+			Description:       "The channel ID in Slack, which identifies a channel within a workspace",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"channel_id":                           "ChannelId",
 		"channel_name":                         "ChannelName",

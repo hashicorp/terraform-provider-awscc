@@ -17,6 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -361,6 +362,23 @@ func identityProviderConfigResource(ctx context.Context) (resource.Resource, err
 
 	opts = opts.WithCloudFormationTypeName("AWS::EKS::IdentityProviderConfig").WithTerraformTypeName("awscc_eks_identity_provider_config")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "identity_provider_config_name",
+			Description:       "The name of the OIDC provider configuration",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "cluster_name",
+			Description:       "The name of the identity provider configuration",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "type",
+			Description:       "The type of the identity provider configuration",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"client_id":                     "ClientId",
 		"cluster_name":                  "ClusterName",

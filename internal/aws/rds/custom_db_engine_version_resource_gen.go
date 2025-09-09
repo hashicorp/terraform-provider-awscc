@@ -18,6 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -356,6 +357,18 @@ func customDBEngineVersionResource(ctx context.Context) (resource.Resource, erro
 
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::CustomDBEngineVersion").WithTerraformTypeName("awscc_rds_custom_db_engine_version")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "engine",
+			Description:       "The database engine to use for your custom engine version (CEV)",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "engine_version",
+			Description:       "The name of your CEV",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"database_installation_files_s3_bucket_name": "DatabaseInstallationFilesS3BucketName",
 		"database_installation_files_s3_prefix":      "DatabaseInstallationFilesS3Prefix",

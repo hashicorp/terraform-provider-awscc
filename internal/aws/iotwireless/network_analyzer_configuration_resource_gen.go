@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -296,6 +297,13 @@ func networkAnalyzerConfigurationResource(ctx context.Context) (resource.Resourc
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::NetworkAnalyzerConfiguration").WithTerraformTypeName("awscc_iotwireless_network_analyzer_configuration")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "name",
+			Description:       "Name of the network analyzer configuration",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                        "Arn",
 		"description":                "Description",

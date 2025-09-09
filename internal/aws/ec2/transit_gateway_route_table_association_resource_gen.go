@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -73,6 +74,18 @@ func transitGatewayRouteTableAssociationResource(ctx context.Context) (resource.
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayRouteTableAssociation").WithTerraformTypeName("awscc_ec2_transit_gateway_route_table_association")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "transit_gateway_route_table_id",
+			Description:       "The ID of transit gateway route table",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "transit_gateway_attachment_id",
+			Description:       "The ID of transit gateway attachment",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"transit_gateway_attachment_id":  "TransitGatewayAttachmentId",
 		"transit_gateway_route_table_id": "TransitGatewayRouteTableId",

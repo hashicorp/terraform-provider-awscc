@@ -23,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -822,6 +823,29 @@ func policyGrantResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::PolicyGrant").WithTerraformTypeName("awscc_datazone_policy_grant")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "domain_identifier",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "grant_id",
+			Description:       "The unique identifier of the policy grant returned by the AddPolicyGrant API",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "entity_identifier",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "entity_type",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "policy_type",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"add_to_project_member_pool":          "AddToProjectMemberPool",
 		"all_domain_units_grant_filter":       "AllDomainUnitsGrantFilter",

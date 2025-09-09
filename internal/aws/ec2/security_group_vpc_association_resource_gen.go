@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -124,6 +125,18 @@ func securityGroupVpcAssociationResource(ctx context.Context) (resource.Resource
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::SecurityGroupVpcAssociation").WithTerraformTypeName("awscc_ec2_security_group_vpc_association")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "group_id",
+			Description:       "The group ID of the specified security group",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "vpc_id",
+			Description:       "The ID of the VPC in the security group vpc association",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"group_id":     "GroupId",
 		"state":        "State",

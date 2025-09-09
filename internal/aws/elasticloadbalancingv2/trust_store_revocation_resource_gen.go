@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -206,6 +207,18 @@ func trustStoreRevocationResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::ElasticLoadBalancingV2::TrustStoreRevocation").WithTerraformTypeName("awscc_elasticloadbalancingv2_trust_store_revocation")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "revocation_id",
+			Description:       "The ID associated with the revocation",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "trust_store_arn",
+			Description:       "The Amazon Resource Name (ARN) of the trust store",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"number_of_revoked_entries": "NumberOfRevokedEntries",
 		"revocation_contents":       "RevocationContents",

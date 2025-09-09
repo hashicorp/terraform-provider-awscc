@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -179,6 +180,18 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::AutoScaling::ScheduledAction").WithTerraformTypeName("awscc_autoscaling_scheduled_action")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "scheduled_action_name",
+			Description:       "Auto-generated unique identifier",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "auto_scaling_group_name",
+			Description:       "The name of the Auto Scaling group",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"auto_scaling_group_name": "AutoScalingGroupName",
 		"desired_capacity":        "DesiredCapacity",

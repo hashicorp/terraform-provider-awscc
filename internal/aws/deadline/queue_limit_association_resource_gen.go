@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -96,6 +97,20 @@ func queueLimitAssociationResource(ctx context.Context) (resource.Resource, erro
 
 	opts = opts.WithCloudFormationTypeName("AWS::Deadline::QueueLimitAssociation").WithTerraformTypeName("awscc_deadline_queue_limit_association")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "farm_id",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "limit_id",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "queue_id",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"farm_id":  "FarmId",
 		"limit_id": "LimitId",

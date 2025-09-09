@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -379,6 +380,23 @@ func subscriptionTargetResource(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::SubscriptionTarget").WithTerraformTypeName("awscc_datazone_subscription_target")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "domain_id",
+			Description:       "The ID of the Amazon DataZone domain in which subscription target is created",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "environment_id",
+			Description:       "The ID of the environment in which subscription target is created",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "id",
+			Description:       "The ID of the subscription target",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"applicable_asset_types":     "ApplicableAssetTypes",
 		"authorized_principals":      "AuthorizedPrincipals",

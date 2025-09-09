@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -81,6 +82,20 @@ func applicationEntitlementAssociationResource(ctx context.Context) (resource.Re
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppStream::ApplicationEntitlementAssociation").WithTerraformTypeName("awscc_appstream_application_entitlement_association")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "stack_name",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "entitlement_name",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "application_identifier",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"application_identifier": "ApplicationIdentifier",
 		"entitlement_name":       "EntitlementName",
