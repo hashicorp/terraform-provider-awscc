@@ -1037,7 +1037,7 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
-			Name:              "storage_lens_configuration/_id",
+			Name:              "storage_lens_configuration_id",
 			RequiredForImport: true,
 		})
 

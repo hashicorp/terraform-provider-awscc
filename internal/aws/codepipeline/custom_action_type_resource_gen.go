@@ -466,8 +466,7 @@ func customActionTypeResource(ctx context.Context) (resource.Resource, error) {
 			RequiredForImport: true,
 		},
 		identity.Identifier{
-			Name:              "provider",
-			Description:       "The provider of the service used in the custom action, such as AWS CodeDeploy",
+			Name:              "provider_id",
 			RequiredForImport: true,
 		},
 		identity.Identifier{

@@ -1,0 +1,6 @@
+import {
+  to = awscc_datasync_storage_system.example
+  identity = {
+    id = "id"
+  }
+}

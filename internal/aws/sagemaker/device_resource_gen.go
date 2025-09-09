@@ -226,7 +226,7 @@ func deviceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
-			Name:              "device/_device_name",
+			Name:              "device_device_name",
 			RequiredForImport: true,
 		})
 

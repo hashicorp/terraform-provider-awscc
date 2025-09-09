@@ -136,9 +136,18 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 	var identifiers []identity.Identifier
 	for _, path := range resource.CfResource.PrimaryIdentifier {
 		id := strings.TrimPrefix(string(path), "/properties/")
-		identifier := identity.Identifier{
-			Name: id,
+
+		pID := strings.Split(id, "/")
+		identifier := identity.Identifier{}
+		if len(pID) != 1 {
+			id = strings.Join(pID, "")
 		}
+
+		if id == "Provider" {
+			id = fmt.Sprintf("%sId", id)
+		}
+		identifier.Name = id
+
 		if v, ok := resource.CfResource.Properties[id]; ok {
 			if v.Description != nil {
 				identifier.Description = strings.Split(*v.Description, ".")[0]

@@ -1,0 +1,6 @@
+import {
+  to = awscc_iotwireless_network_analyzer_configuration.example
+  identity = {
+    name = "name"
+  }
+}

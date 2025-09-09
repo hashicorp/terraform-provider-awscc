@@ -335,7 +335,7 @@ func refreshScheduleResource(ctx context.Context) (resource.Resource, error) {
 			RequiredForImport: true,
 		},
 		identity.Identifier{
-			Name:              "schedule/_schedule_id",
+			Name:              "schedule_schedule_id",
 			RequiredForImport: true,
 		})
 
