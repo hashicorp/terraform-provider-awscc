@@ -20,13 +20,13 @@ type Identifiers []Identifier
 func (a Identifiers) AddAccountID() Identifiers {
 	return append(a, Identifier{
 		Name:        NameAccountID,
-		Description: "The ID of the AWS account",
+		Description: "AWS Account where this resource is managed",
 	})
 }
 
 func (a Identifiers) AddRegionID() Identifiers {
 	return append(a, Identifier{
 		Name:        NameRegion,
-		Description: "The AWS region where the resource is located",
+		Description: "Region where this resource is managed",
 	})
 }
