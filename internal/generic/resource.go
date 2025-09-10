@@ -475,7 +475,12 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 	}
 
 	// set resource identity
-	for _, v := range r.primaryIdentifier {
+	pi := r.primaryIdentifier.AddAccountID()
+	if !r.isGlobal {
+		pi = pi.AddRegionID()
+	}
+
+	for _, v := range pi {
 		if v.RequiredForImport {
 			var out types.String
 			response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v.Name), &out)...)
@@ -487,18 +492,19 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 			if response.Diagnostics.HasError() {
 				return
 			}
-		}
-	}
-
-	response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameAccountID), r.provider.AccountID(ctx))...)
-	if response.Diagnostics.HasError() {
-		return
-	}
-
-	if !r.isGlobal {
-		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameRegion), r.provider.Region(ctx))...)
-		if response.Diagnostics.HasError() {
-			return
+		} else {
+			switch v.Name {
+			case identity.NameAccountID:
+				response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameAccountID), r.provider.AccountID(ctx))...)
+				if response.Diagnostics.HasError() {
+					return
+				}
+			case identity.NameRegion:
+				response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameRegion), r.provider.Region(ctx))...)
+				if response.Diagnostics.HasError() {
+					return
+				}
+			}
 		}
 	}
 
@@ -579,7 +585,12 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 	}
 
 	// set resource identity
-	for _, v := range r.primaryIdentifier {
+	pi := r.primaryIdentifier.AddAccountID()
+	if !r.isGlobal {
+		pi = pi.AddRegionID()
+	}
+
+	for _, v := range pi {
 		if v.RequiredForImport {
 			var out types.String
 			response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v.Name), &out)...)
@@ -591,18 +602,19 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 			if response.Diagnostics.HasError() {
 				return
 			}
-		}
-	}
-
-	response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameAccountID), r.provider.AccountID(ctx))...)
-	if response.Diagnostics.HasError() {
-		return
-	}
-
-	if !r.isGlobal {
-		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameRegion), r.provider.Region(ctx))...)
-		if response.Diagnostics.HasError() {
-			return
+		} else {
+			switch v.Name {
+			case identity.NameAccountID:
+				response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameAccountID), r.provider.AccountID(ctx))...)
+				if response.Diagnostics.HasError() {
+					return
+				}
+			case identity.NameRegion:
+				response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameRegion), r.provider.Region(ctx))...)
+				if response.Diagnostics.HasError() {
+					return
+				}
+			}
 		}
 	}
 
@@ -811,8 +823,15 @@ func (r *genericResource) ImportState(ctx context.Context, request resource.Impo
 		return
 	}
 
+	// add accountID identity
+	pi := r.primaryIdentifier.AddAccountID()
+	if !r.isGlobal {
+		pi = pi.AddRegionID()
+	}
+
 	var identifier []string
-	for _, v := range r.primaryIdentifier {
+	var accountID, region types.String
+	for _, v := range pi {
 		if v.RequiredForImport {
 			var out types.String
 			response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(v.Name), &out)...)
@@ -821,14 +840,20 @@ func (r *genericResource) ImportState(ctx context.Context, request resource.Impo
 			}
 
 			identifier = append(identifier, out.ValueString())
+		} else {
+			switch v.Name {
+			case identity.NameAccountID:
+				response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(identity.NameAccountID), &accountID)...)
+				if response.Diagnostics.HasError() {
+					return
+				}
+			case identity.NameRegion:
+				response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(identity.NameRegion), &region)...)
+				if response.Diagnostics.HasError() {
+					return
+				}
+			}
 		}
-	}
-
-	var accountID, region types.String
-	response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(identity.NameAccountID), &accountID)...)
-	response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(identity.NameRegion), &region)...)
-	if response.Diagnostics.HasError() {
-		return
 	}
 
 	if !accountID.IsNull() {
