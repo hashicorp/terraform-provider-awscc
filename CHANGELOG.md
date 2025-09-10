@@ -1,5 +1,9 @@
 ## 1.56.0 (Unreleased)
 
+FEATURES:
+
+* provider: Add [Resource Identity](https://developer.hashicorp.com/terraform/plugin/framework/resources/identity) support. ([#2373](https://github.com/hashicorp/terraform-provider-awscc/pull/2373))
+
 ## 1.55.0 (September 4, 2025)
 
 FEATURES:
