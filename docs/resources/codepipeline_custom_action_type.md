@@ -155,9 +155,9 @@ In Terraform v1.12.0 and later, the [`import` block](https://developer.hashicorp
 import {
   to = awscc_codepipeline_custom_action_type.example
   identity = {
-    category    = "category"
-    provider_id = "provider_id"
-    version     = "version"
+    category      = "category"
+    provider_name = "provider_name"
+    version       = "version"
   }
 }
 ```
@@ -168,7 +168,7 @@ import {
 #### Required
 
 - `category` (String) The category of the custom action, such as a build action or a test action
-- `provider_id` (String)
+- `provider_name` (String)
 - `version` (String) The version identifier of the custom action
 
 #### Optional
@@ -181,12 +181,12 @@ In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.
 ```terraform
 import {
   to = awscc_codepipeline_custom_action_type.example
-  id = "category|provider_id|version"
+  id = "category|provider_name|version"
 }
 ```
 
 The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
-$ terraform import awscc_codepipeline_custom_action_type.example "category|provider_id|version"
+$ terraform import awscc_codepipeline_custom_action_type.example "category|provider_name|version"
 ```

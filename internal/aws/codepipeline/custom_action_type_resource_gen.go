@@ -466,7 +466,7 @@ func customActionTypeResource(ctx context.Context) (resource.Resource, error) {
 			RequiredForImport: true,
 		},
 		identity.Identifier{
-			Name:              "provider_id",
+			Name:              "provider_name",
 			RequiredForImport: true,
 		},
 		identity.Identifier{
