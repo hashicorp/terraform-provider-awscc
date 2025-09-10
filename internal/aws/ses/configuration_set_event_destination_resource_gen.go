@@ -20,6 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -388,6 +389,12 @@ func configurationSetEventDestinationResource(ctx context.Context) (resource.Res
 
 	opts = opts.WithCloudFormationTypeName("AWS::SES::ConfigurationSetEventDestination").WithTerraformTypeName("awscc_ses_configuration_set_event_destination")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "id",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"cloudwatch_destination":                 "CloudWatchDestination",
 		"configuration_set_event_destination_id": "Id",

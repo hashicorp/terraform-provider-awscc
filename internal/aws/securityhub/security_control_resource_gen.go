@@ -23,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -356,6 +357,13 @@ func securityControlResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::SecurityHub::SecurityControl").WithTerraformTypeName("awscc_securityhub_security_control")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "security_control_id",
+			Description:       "The unique identifier of a security control across standards",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"boolean":              "Boolean",
 		"double":               "Double",

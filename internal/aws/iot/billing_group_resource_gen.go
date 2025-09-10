@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -207,6 +208,12 @@ func billingGroupResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::BillingGroup").WithTerraformTypeName("awscc_iot_billing_group")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "billing_group_name",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                       "Arn",
 		"billing_group_description": "BillingGroupDescription",

@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -82,6 +83,16 @@ func userPoolUICustomizationAttachmentResource(ctx context.Context) (resource.Re
 
 	opts = opts.WithCloudFormationTypeName("AWS::Cognito::UserPoolUICustomizationAttachment").WithTerraformTypeName("awscc_cognito_user_pool_ui_customization_attachment")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "user_pool_id",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "client_id",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"client_id":    "ClientId",
 		"css":          "CSS",

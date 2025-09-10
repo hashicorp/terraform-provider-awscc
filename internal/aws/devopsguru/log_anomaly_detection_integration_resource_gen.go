@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -60,6 +61,13 @@ func logAnomalyDetectionIntegrationResource(ctx context.Context) (resource.Resou
 
 	opts = opts.WithCloudFormationTypeName("AWS::DevOpsGuru::LogAnomalyDetectionIntegration").WithTerraformTypeName("awscc_devopsguru_log_anomaly_detection_integration")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "account_id",
+			Description:       "User account id, used as the primary identifier for the resource",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_id": "AccountId",
 	})

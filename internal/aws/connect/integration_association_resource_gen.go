@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -129,6 +130,23 @@ func integrationAssociationResource(ctx context.Context) (resource.Resource, err
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::IntegrationAssociation").WithTerraformTypeName("awscc_connect_integration_association")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "instance_id",
+			Description:       "Amazon Connect instance identifier",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "integration_type",
+			Description:       "Specifies the integration type to be associated with the instance",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "integration_arn",
+			Description:       "ARN of Integration being associated with the instance",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"instance_id":                "InstanceId",
 		"integration_arn":            "IntegrationArn",

@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -75,6 +76,13 @@ func securityConfigurationResource(ctx context.Context) (resource.Resource, erro
 
 	opts = opts.WithCloudFormationTypeName("AWS::EMR::SecurityConfiguration").WithTerraformTypeName("awscc_emr_security_configuration")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "name",
+			Description:       "The name of the security configuration",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"name":                   "Name",
 		"security_configuration": "SecurityConfiguration",

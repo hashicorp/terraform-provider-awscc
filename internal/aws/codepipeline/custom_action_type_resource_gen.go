@@ -18,6 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -458,6 +459,22 @@ func customActionTypeResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::CodePipeline::CustomActionType").WithTerraformTypeName("awscc_codepipeline_custom_action_type")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "category",
+			Description:       "The category of the custom action, such as a build action or a test action",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "provider_id",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "version",
+			Description:       "The version identifier of the custom action",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"category":                      "Category",
 		"configuration_properties":      "ConfigurationProperties",

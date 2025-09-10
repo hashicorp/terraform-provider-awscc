@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -84,6 +85,19 @@ func organizationalUnitAssociationResource(ctx context.Context) (resource.Resour
 
 	opts = opts.WithCloudFormationTypeName("AWS::Notifications::OrganizationalUnitAssociation").WithTerraformTypeName("awscc_notifications_organizational_unit_association")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "notification_configuration_arn",
+			Description:       "ARN identifier of the NotificationConfiguration",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "organizational_unit_id",
+			Description:       "The ID of the organizational unit",
+			RequiredForImport: true,
+		})
+
+	opts = opts.IsGlobalResourceType(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"notification_configuration_arn": "NotificationConfigurationArn",
 		"organizational_unit_id":         "OrganizationalUnitId",

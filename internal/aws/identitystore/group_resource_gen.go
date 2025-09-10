@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -126,6 +127,18 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::IdentityStore::Group").WithTerraformTypeName("awscc_identitystore_group")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "group_id",
+			Description:       "The unique identifier for a group in the identity store",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "identity_store_id",
+			Description:       "The globally unique identifier for the identity store",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"description":       "Description",
 		"display_name":      "DisplayName",

@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -1835,6 +1836,18 @@ func spaceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Space").WithTerraformTypeName("awscc_sagemaker_space")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "domain_id",
+			Description:       "The ID of the associated Domain",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "space_name",
+			Description:       "A name for the Space",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"app_image_config_name":        "AppImageConfigName",
 		"app_lifecycle_management":     "AppLifecycleManagement",

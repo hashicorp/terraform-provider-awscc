@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -98,6 +99,18 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSM::ResourcePolicy").WithTerraformTypeName("awscc_ssm_resource_policy")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "policy_id",
+			Description:       "An unique identifier within the policies of a resource",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "resource_arn",
+			Description:       "Arn of OpsItemGroup etc",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"policy":       "Policy",
 		"policy_hash":  "PolicyHash",

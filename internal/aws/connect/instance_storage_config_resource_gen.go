@@ -18,6 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -464,6 +465,23 @@ func instanceStorageConfigResource(ctx context.Context) (resource.Resource, erro
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::InstanceStorageConfig").WithTerraformTypeName("awscc_connect_instance_storage_config")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "instance_arn",
+			Description:       "Connect Instance ID with which the storage config will be associated",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "association_id",
+			Description:       "An associationID is automatically generated when a storage config is associated with an instance",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "resource_type",
+			Description:       "Specifies the type of storage resource available for the instance",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"association_id":              "AssociationId",
 		"bucket_name":                 "BucketName",

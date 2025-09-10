@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -129,6 +130,23 @@ func transitGatewayMulticastDomainAssociationResource(ctx context.Context) (reso
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayMulticastDomainAssociation").WithTerraformTypeName("awscc_ec2_transit_gateway_multicast_domain_association")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "transit_gateway_multicast_domain_id",
+			Description:       "The ID of the transit gateway multicast domain",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "transit_gateway_attachment_id",
+			Description:       "The ID of the transit gateway attachment",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "subnet_id",
+			Description:       "The IDs of the subnets to associate with the transit gateway multicast domain",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"resource_id":                         "ResourceId",
 		"resource_type":                       "ResourceType",

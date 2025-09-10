@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -278,6 +279,16 @@ func restoreTestingSelectionResource(ctx context.Context) (resource.Resource, er
 
 	opts = opts.WithCloudFormationTypeName("AWS::Backup::RestoreTestingSelection").WithTerraformTypeName("awscc_backup_restore_testing_selection")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "restore_testing_plan_name",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "restore_testing_selection_name",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"iam_role_arn":                   "IamRoleArn",
 		"key":                            "Key",

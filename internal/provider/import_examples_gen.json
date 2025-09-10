@@ -857,7 +857,7 @@
     },
     {
         "resource": "awscc_codepipeline_custom_action_type",
-        "identifier": ["Category","Provider","Version"]
+        "identifier": ["Category","ProviderId","Version"]
     },
     {
         "resource": "awscc_codepipeline_pipeline",
@@ -3661,7 +3661,7 @@
     },
     {
         "resource": "awscc_quicksight_refresh_schedule",
-        "identifier": ["AwsAccountId","DataSetId","Schedule/ScheduleId"]
+        "identifier": ["AwsAccountId","DataSetId","ScheduleScheduleId"]
     },
     {
         "resource": "awscc_quicksight_template",
@@ -4029,7 +4029,7 @@
     },
     {
         "resource": "awscc_s3_storage_lens",
-        "identifier": ["StorageLensConfiguration/Id"]
+        "identifier": ["StorageLensConfigurationId"]
     },
     {
         "resource": "awscc_s3_storage_lens_group",
@@ -4273,7 +4273,7 @@
     },
     {
         "resource": "awscc_sagemaker_device",
-        "identifier": ["Device/DeviceName"]
+        "identifier": ["DeviceDeviceName"]
     },
     {
         "resource": "awscc_sagemaker_device_fleet",

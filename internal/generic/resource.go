@@ -16,11 +16,14 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/identityschema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
@@ -51,6 +54,14 @@ func resourceWithAttributeNameMap(v map[string]string) ResourceOptionsFunc {
 
 		o.tfToCfNameMap = v
 		o.cfToTfNameMap = cfToTfNameMap
+
+		return nil
+	}
+}
+
+func resourceHasMutableIdentity(v bool) ResourceOptionsFunc {
+	return func(o *genericResource) error {
+		o.hasMutableIdentity = v
 
 		return nil
 	}
@@ -87,6 +98,14 @@ func resourceWithTerraformSchema(v schema.Schema) ResourceOptionsFunc {
 func resourceWithTerraformTypeName(v string) ResourceOptionsFunc {
 	return func(o *genericResource) error {
 		o.tfTypeName = v
+
+		return nil
+	}
+}
+
+func resourceIsGlobalResourceType(v bool) ResourceOptionsFunc {
+	return func(o *genericResource) error {
+		o.isGlobal = v
 
 		return nil
 	}
@@ -195,8 +214,20 @@ func resourceWithConfigValidators(vs ...resource.ConfigValidator) ResourceOption
 	}
 }
 
+func resourceWithPrimaryIdentifier(vs ...identity.Identifier) ResourceOptionsFunc {
+	return func(o *genericResource) error {
+		o.primaryIdentifier = vs
+
+		return nil
+	}
+}
+
 // ResourceOptions is a type alias for a slice of resource type functional options.
 type ResourceOptions []ResourceOptionsFunc
+
+func (opts ResourceOptions) HasMutableIdentity(v bool) ResourceOptions {
+	return append(opts, resourceHasMutableIdentity(v))
+}
 
 // WithAttributeNameMap is a helper function to construct functional options
 // that set a resource type's attribute name map, append that function to the
@@ -228,6 +259,10 @@ func (opts ResourceOptions) WithTerraformSchema(v schema.Schema) ResourceOptions
 // It is intended to be chained with other similar helper functions in a builder pattern.
 func (opts ResourceOptions) WithTerraformTypeName(v string) ResourceOptions {
 	return append(opts, resourceWithTerraformTypeName(v))
+}
+
+func (opts ResourceOptions) IsGlobalResourceType(v bool) ResourceOptions {
+	return append(opts, resourceIsGlobalResourceType(v))
 }
 
 // IsImmutableType is a helper function to construct functional options
@@ -278,6 +313,12 @@ func (opts ResourceOptions) WithConfigValidators(vs ...resource.ConfigValidator)
 	return append(opts, resourceWithConfigValidators(vs...))
 }
 
+// WithPrimaryIdentifier is a helper function to construct functional options
+// that set the primary identifiers for the resource.
+func (opts ResourceOptions) WithPrimaryIdentifier(v ...identity.Identifier) ResourceOptions {
+	return append(opts, resourceWithPrimaryIdentifier(v...))
+}
+
 // NewResource returns a new Resource from the specified varidaic list of functional options.
 // It's public as it's called from generated code.
 func NewResource(_ context.Context, optFns ...ResourceOptionsFunc) (resource.Resource, error) {
@@ -315,6 +356,10 @@ type genericResource struct {
 	deleteTimeout           time.Duration              // Maximum wait time for resource deletion
 	configValidators        []resource.ConfigValidator // Required attributes validators
 	provider                tfcloudcontrol.Provider
+	primaryIdentifier       identity.Identifiers
+
+	isGlobal           bool
+	hasMutableIdentity bool
 }
 
 var (
@@ -325,6 +370,10 @@ var (
 
 func (r *genericResource) Metadata(_ context.Context, request resource.MetadataRequest, response *resource.MetadataResponse) {
 	response.TypeName = r.tfTypeName
+
+	if r.hasMutableIdentity {
+		response.ResourceBehavior.MutableIdentity = true
+	}
 }
 
 func (r *genericResource) Schema(_ context.Context, request resource.SchemaRequest, response *resource.SchemaResponse) {
@@ -425,6 +474,40 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 		return
 	}
 
+	// set resource identity
+	pi := r.primaryIdentifier.AddAccountID()
+	if !r.isGlobal {
+		pi = pi.AddRegionID()
+	}
+
+	for _, v := range pi {
+		if v.RequiredForImport {
+			var out types.String
+			response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v.Name), &out)...)
+			if response.Diagnostics.HasError() {
+				return
+			}
+
+			response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(v.Name), out.ValueString())...)
+			if response.Diagnostics.HasError() {
+				return
+			}
+		} else {
+			switch v.Name {
+			case identity.NameAccountID:
+				response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameAccountID), r.provider.AccountID(ctx))...)
+				if response.Diagnostics.HasError() {
+					return
+				}
+			case identity.NameRegion:
+				response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameRegion), r.provider.Region(ctx))...)
+				if response.Diagnostics.HasError() {
+					return
+				}
+			}
+		}
+	}
+
 	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
 		"value": hclog.Fmt("%v", response.State.Raw),
 	})
@@ -499,6 +582,40 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 		response.Diagnostics.Append(ResourceIdentifierNotSetDiag(err))
 
 		return
+	}
+
+	// set resource identity
+	pi := r.primaryIdentifier.AddAccountID()
+	if !r.isGlobal {
+		pi = pi.AddRegionID()
+	}
+
+	for _, v := range pi {
+		if v.RequiredForImport {
+			var out types.String
+			response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v.Name), &out)...)
+			if response.Diagnostics.HasError() {
+				return
+			}
+
+			response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(v.Name), out.ValueString())...)
+			if response.Diagnostics.HasError() {
+				return
+			}
+		} else {
+			switch v.Name {
+			case identity.NameAccountID:
+				response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameAccountID), r.provider.AccountID(ctx))...)
+				if response.Diagnostics.HasError() {
+					return
+				}
+			case identity.NameRegion:
+				response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameRegion), r.provider.Region(ctx))...)
+				if response.Diagnostics.HasError() {
+					return
+				}
+			}
+		}
 	}
 
 	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
@@ -661,16 +778,106 @@ func (r *genericResource) Delete(ctx context.Context, request resource.DeleteReq
 	traceExit(ctx, "Resource.Delete")
 }
 
+func (r *genericResource) IdentitySchema(_ context.Context, _ resource.IdentitySchemaRequest, response *resource.IdentitySchemaResponse) {
+	// add accountID identity
+	pi := r.primaryIdentifier.AddAccountID()
+
+	if !r.isGlobal {
+		pi = pi.AddRegionID()
+	}
+
+	identitySchemaAttributes := make(map[string]identityschema.Attribute)
+	for _, v := range pi {
+		ident := identityschema.StringAttribute{
+			Description: v.Description,
+		}
+
+		switch v.RequiredForImport {
+		case true:
+			ident.RequiredForImport = true
+		default:
+			ident.OptionalForImport = true
+		}
+
+		identitySchemaAttributes[v.Name] = ident
+	}
+
+	response.IdentitySchema = identityschema.Schema{
+		Attributes: identitySchemaAttributes,
+	}
+}
+
 func (r *genericResource) ImportState(ctx context.Context, request resource.ImportStateRequest, response *resource.ImportStateResponse) {
 	ctx = r.bootstrapContext(ctx)
 
 	traceEntry(ctx, "Resource.ImportState")
 
-	tflog.Debug(ctx, "Request.ID", map[string]interface{}{
-		"value": hclog.Fmt("%v", request.ID),
-	})
+	if request.ID != "" {
+		tflog.Debug(ctx, "Request.ID", map[string]interface{}{
+			"value": hclog.Fmt("%v", request.ID),
+		})
 
-	resource.ImportStatePassthroughID(ctx, idAttributePath, request, response)
+		resource.ImportStatePassthroughID(ctx, idAttributePath, request, response)
+
+		traceExit(ctx, "Resource.ImportState")
+		return
+	}
+
+	// add accountID identity
+	pi := r.primaryIdentifier.AddAccountID()
+	if !r.isGlobal {
+		pi = pi.AddRegionID()
+	}
+
+	var identifier []string
+	var accountID, region types.String
+	for _, v := range pi {
+		if v.RequiredForImport {
+			var out types.String
+			response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(v.Name), &out)...)
+			if response.Diagnostics.HasError() {
+				return
+			}
+
+			identifier = append(identifier, out.ValueString())
+		} else {
+			switch v.Name {
+			case identity.NameAccountID:
+				response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(identity.NameAccountID), &accountID)...)
+				if response.Diagnostics.HasError() {
+					return
+				}
+			case identity.NameRegion:
+				response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(identity.NameRegion), &region)...)
+				if response.Diagnostics.HasError() {
+					return
+				}
+			}
+		}
+	}
+
+	if !accountID.IsNull() {
+		if accountID.ValueString() != r.provider.AccountID(ctx) {
+			response.Diagnostics.AddError(
+				"Import account_id mismatch",
+				fmt.Sprintf("Identity account_id must match the current account_id of the provider: %s", r.provider.AccountID(ctx)),
+			)
+			return
+		}
+	}
+
+	if !region.IsNull() {
+		if region.ValueString() != r.provider.Region(ctx) {
+			response.Diagnostics.AddError(
+				"Import region mismatch",
+				fmt.Sprintf("Identity region must match the current region of the provider: %s", r.provider.Region(ctx)),
+			)
+			return
+		}
+	}
+
+	id := strings.Join(identifier, "|")
+	response.Diagnostics.Append(response.State.SetAttribute(ctx, idAttributePath, &id)...)
 
 	traceExit(ctx, "Resource.ImportState")
 }

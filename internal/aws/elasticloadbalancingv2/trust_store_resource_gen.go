@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -215,6 +216,13 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::ElasticLoadBalancingV2::TrustStore").WithTerraformTypeName("awscc_elasticloadbalancingv2_trust_store")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "trust_store_arn",
+			Description:       "The Amazon Resource Name (ARN) of the trust store",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"ca_certificates_bundle_s3_bucket":         "CaCertificatesBundleS3Bucket",
 		"ca_certificates_bundle_s3_key":            "CaCertificatesBundleS3Key",

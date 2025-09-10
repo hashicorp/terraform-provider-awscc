@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -103,6 +104,18 @@ func vPCGatewayAttachmentResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPCGatewayAttachment").WithTerraformTypeName("awscc_ec2_vpc_gateway_attachment")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "attachment_type",
+			Description:       "Used to identify if this resource is an Internet Gateway or Vpn Gateway Attachment ",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "vpc_id",
+			Description:       "The ID of the VPC",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"attachment_type":     "AttachmentType",
 		"internet_gateway_id": "InternetGatewayId",

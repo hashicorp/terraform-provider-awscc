@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -89,6 +90,18 @@ func volumeAttachmentResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VolumeAttachment").WithTerraformTypeName("awscc_ec2_volume_attachment")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "volume_id",
+			Description:       "The ID of the Amazon EBS volume",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "instance_id",
+			Description:       "The ID of the instance to which the volume attaches",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"device":      "Device",
 		"instance_id": "InstanceId",

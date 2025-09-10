@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -239,6 +240,13 @@ func trafficDistributionGroupResource(ctx context.Context) (resource.Resource, e
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::TrafficDistributionGroup").WithTerraformTypeName("awscc_connect_traffic_distribution_group")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "traffic_distribution_group_arn",
+			Description:       "The identifier of the traffic distribution group",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"description":                    "Description",
 		"instance_arn":                   "InstanceArn",

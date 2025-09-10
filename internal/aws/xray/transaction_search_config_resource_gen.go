@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -83,6 +84,13 @@ func transactionSearchConfigResource(ctx context.Context) (resource.Resource, er
 
 	opts = opts.WithCloudFormationTypeName("AWS::XRay::TransactionSearchConfig").WithTerraformTypeName("awscc_xray_transaction_search_config")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "account_id",
+			Description:       "User account id, used as the primary identifier for the resource",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_id":          "AccountId",
 		"indexing_percentage": "IndexingPercentage",

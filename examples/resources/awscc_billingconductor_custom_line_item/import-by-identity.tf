@@ -1,0 +1,6 @@
+import {
+  to = awscc_billingconductor_custom_line_item.example
+  identity = {
+    arn = "arn"
+  }
+}

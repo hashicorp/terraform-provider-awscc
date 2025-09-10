@@ -18,6 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -284,6 +285,18 @@ func automatedReasoningPolicyVersionResource(ctx context.Context) (resource.Reso
 
 	opts = opts.WithCloudFormationTypeName("AWS::Bedrock::AutomatedReasoningPolicyVersion").WithTerraformTypeName("awscc_bedrock_automated_reasoning_policy_version")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "policy_arn",
+			Description:       "Arn of the policy ",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "version",
+			Description:       "The version of the policy",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"created_at":                   "CreatedAt",
 		"definition_hash":              "DefinitionHash",

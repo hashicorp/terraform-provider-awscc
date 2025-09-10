@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -94,6 +95,19 @@ func managedNotificationAccountContactAssociationResource(ctx context.Context) (
 
 	opts = opts.WithCloudFormationTypeName("AWS::Notifications::ManagedNotificationAccountContactAssociation").WithTerraformTypeName("awscc_notifications_managed_notification_account_contact_association")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "managed_notification_configuration_arn",
+			Description:       "The managed notification configuration ARN, against which the account contact association will be created",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "contact_identifier",
+			Description:       "This unique identifier for Contact",
+			RequiredForImport: true,
+		})
+
+	opts = opts.IsGlobalResourceType(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"contact_identifier":                     "ContactIdentifier",
 		"managed_notification_configuration_arn": "ManagedNotificationConfigurationArn",

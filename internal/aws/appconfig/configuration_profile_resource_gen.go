@@ -18,6 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -372,6 +373,18 @@ func configurationProfileResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppConfig::ConfigurationProfile").WithTerraformTypeName("awscc_appconfig_configuration_profile")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "application_id",
+			Description:       "The application ID",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "configuration_profile_id",
+			Description:       "The configuration profile ID",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"application_id":            "ApplicationId",
 		"configuration_profile_id":  "ConfigurationProfileId",

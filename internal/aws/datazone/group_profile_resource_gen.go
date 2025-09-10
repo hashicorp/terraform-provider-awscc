@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -158,6 +159,18 @@ func groupProfileResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::GroupProfile").WithTerraformTypeName("awscc_datazone_group_profile")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "domain_id",
+			Description:       "The identifier of the Amazon DataZone domain in which the group profile is created",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "id",
+			Description:       "The ID of the Amazon DataZone group profile",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"domain_id":         "DomainId",
 		"domain_identifier": "DomainIdentifier",

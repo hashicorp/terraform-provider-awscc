@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -696,6 +697,18 @@ func calculatedAttributeDefinitionResource(ctx context.Context) (resource.Resour
 
 	opts = opts.WithCloudFormationTypeName("AWS::CustomerProfiles::CalculatedAttributeDefinition").WithTerraformTypeName("awscc_customerprofiles_calculated_attribute_definition")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "domain_name",
+			Description:       "The unique name of the domain",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "calculated_attribute_name",
+			Description:       "The unique name of the calculated attribute",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"attribute_details":         "AttributeDetails",
 		"attributes":                "Attributes",

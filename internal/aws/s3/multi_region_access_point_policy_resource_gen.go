@@ -18,6 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -118,6 +119,13 @@ func multiRegionAccessPointPolicyResource(ctx context.Context) (resource.Resourc
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3::MultiRegionAccessPointPolicy").WithTerraformTypeName("awscc_s3_multi_region_access_point_policy")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "mrap_name",
+			Description:       "The name of the Multi Region Access Point to apply policy",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"is_public":     "IsPublic",
 		"mrap_name":     "MrapName",

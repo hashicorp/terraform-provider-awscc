@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -105,6 +106,18 @@ func securityKeyResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::SecurityKey").WithTerraformTypeName("awscc_connect_security_key")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "instance_id",
+			Description:       "Amazon Connect instance identifier",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "association_id",
+			Description:       "An associationID is automatically generated when a storage config is associated with an instance",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"association_id": "AssociationId",
 		"instance_id":    "InstanceId",

@@ -12,9 +12,9 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"regexp"
 	"strings"
 
+	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/common"
 )
 
@@ -96,7 +96,7 @@ func formatIdentifier(identifier []string) string {
 	if len(identifier) != 0 {
 		var out []string
 		for _, i := range identifier {
-			out = append(out, toSnake(i))
+			out = append(out, naming.SnakeCase(i))
 		}
 
 		return fmt.Sprintf("\"%s\"", strings.Join(out, "|"))
@@ -119,6 +119,10 @@ var filesData = []fileData{
 		filename:     func(directory string) string { return fmt.Sprintf("%s/import-by-string-id.tf", directory) },
 		templateBody: importExampleTemplateByStringIDBody,
 	},
+	{
+		filename:     func(directory string) string { return fmt.Sprintf("%s/import-by-identity.tf", directory) },
+		templateBody: importExampleTemplateByIdentity,
+	},
 }
 
 func createFile(g *Generator, filename, templateBody string, templateData *TemplateData) error {
@@ -139,23 +143,24 @@ func createFile(g *Generator, filename, templateBody string, templateData *Templ
 	return nil
 }
 
-func toSnake(s string) string {
-	snake := matchFirstCap.ReplaceAllString(s, "${1}_${2}")
-	snake = matchAllCap.ReplaceAllString(snake, "${1}_${2}")
-	return strings.ToLower(snake)
-}
-
-var matchFirstCap = regexp.MustCompile("(.)([A-Z][a-z]+)")
-var matchAllCap = regexp.MustCompile("([a-z0-9])([A-Z])")
-
 type TemplateData struct {
 	ResourceType string
 	Identifier   string
 }
 
-var importExampleTemplateBody = `$ terraform import {{ .ResourceType }}.example {{ .Identifier }}`
+var (
+	importExampleTemplateBody = `$ terraform import {{ .ResourceType }}.example {{ .Identifier }}`
 
-var importExampleTemplateByStringIDBody = `import {
+	importExampleTemplateByStringIDBody = `import {
   to = {{ .ResourceType }}.example
   id = {{ .Identifier }}
 }`
+
+	importExampleTemplateByIdentity = `import {
+  to = {{ .ResourceType }}.example
+  identity = { {{ $parts := Split .Identifier "|" }} {{ range $part := $parts }}
+{{ $part }} = "{{ $part }}" {{ end }}
+  }
+}
+`
+)

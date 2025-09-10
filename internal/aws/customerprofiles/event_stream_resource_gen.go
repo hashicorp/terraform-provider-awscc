@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -284,6 +285,18 @@ func eventStreamResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::CustomerProfiles::EventStream").WithTerraformTypeName("awscc_customerprofiles_event_stream")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "domain_name",
+			Description:       "The unique name of the domain",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "event_stream_name",
+			Description:       "The name of the event stream",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"created_at":          "CreatedAt",
 		"destination_details": "DestinationDetails",

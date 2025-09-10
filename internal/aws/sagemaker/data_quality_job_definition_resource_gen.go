@@ -24,6 +24,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -1262,6 +1263,13 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::DataQualityJobDefinition").WithTerraformTypeName("awscc_sagemaker_data_quality_job_definition")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "job_definition_arn",
+			Description:       "The Amazon Resource Name (ARN) of job definition",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"baselining_job_name":                       "BaseliningJobName",
 		"batch_transform_input":                     "BatchTransformInput",

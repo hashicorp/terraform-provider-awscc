@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -106,6 +107,18 @@ func transitGatewayRouteResource(ctx context.Context) (resource.Resource, error)
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayRoute").WithTerraformTypeName("awscc_ec2_transit_gateway_route")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "transit_gateway_route_table_id",
+			Description:       "The ID of transit gateway route table",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "destination_cidr_block",
+			Description:       "The CIDR range used for destination matches",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"blackhole":                      "Blackhole",
 		"destination_cidr_block":         "DestinationCidrBlock",

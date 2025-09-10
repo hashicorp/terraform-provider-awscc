@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -73,6 +74,18 @@ func vPCDHCPOptionsAssociationResource(ctx context.Context) (resource.Resource, 
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPCDHCPOptionsAssociation").WithTerraformTypeName("awscc_ec2_vpcdhcp_options_association")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "dhcp_options_id",
+			Description:       "The ID of the DHCP options set, or default to associate no DHCP options with the VPC",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "vpc_id",
+			Description:       "The ID of the VPC",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"dhcp_options_id": "DhcpOptionsId",
 		"vpc_id":          "VpcId",

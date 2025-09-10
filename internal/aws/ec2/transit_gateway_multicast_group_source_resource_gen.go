@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -186,6 +187,23 @@ func transitGatewayMulticastGroupSourceResource(ctx context.Context) (resource.R
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayMulticastGroupSource").WithTerraformTypeName("awscc_ec2_transit_gateway_multicast_group_source")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "transit_gateway_multicast_domain_id",
+			Description:       "The ID of the transit gateway multicast domain",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "group_ip_address",
+			Description:       "The IP address assigned to the transit gateway multicast group",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "network_interface_id",
+			Description:       "The ID of the transit gateway attachment",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"group_ip_address":                    "GroupIpAddress",
 		"group_member":                        "GroupMember",

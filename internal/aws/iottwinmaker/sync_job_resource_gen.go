@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -204,6 +205,18 @@ func syncJobResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTTwinMaker::SyncJob").WithTerraformTypeName("awscc_iottwinmaker_sync_job")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "workspace_id",
+			Description:       "The ID of the workspace",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "sync_source",
+			Description:       "The source of the SyncJob",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                "Arn",
 		"creation_date_time": "CreationDateTime",

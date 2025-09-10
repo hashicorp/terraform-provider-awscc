@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -128,6 +129,23 @@ func volumeAssociationResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::WorkspacesInstances::VolumeAssociation").WithTerraformTypeName("awscc_workspacesinstances_volume_association")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "workspace_instance_id",
+			Description:       "ID of the workspace instance to associate with the volume",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "volume_id",
+			Description:       "ID of the volume to attach to the workspace instance",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "device",
+			Description:       "The device name for the volume attachment",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"device":                "Device",
 		"disassociate_mode":     "DisassociateMode",

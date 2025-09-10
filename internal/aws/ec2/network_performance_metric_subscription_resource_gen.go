@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -101,6 +102,28 @@ func networkPerformanceMetricSubscriptionResource(ctx context.Context) (resource
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkPerformanceMetricSubscription").WithTerraformTypeName("awscc_ec2_network_performance_metric_subscription")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "source",
+			Description:       "The starting Region or Availability Zone for metric to subscribe to",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "destination",
+			Description:       "The target Region or Availability Zone for the metric to subscribe to",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "metric",
+			Description:       "The metric type to subscribe to",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "statistic",
+			Description:       "The statistic to subscribe to",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"destination": "Destination",
 		"metric":      "Metric",

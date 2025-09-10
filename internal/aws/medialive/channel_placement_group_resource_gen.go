@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -219,6 +220,18 @@ func channelPlacementGroupResource(ctx context.Context) (resource.Resource, erro
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaLive::ChannelPlacementGroup").WithTerraformTypeName("awscc_medialive_channel_placement_group")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "id",
+			Description:       "Unique internal identifier",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "cluster_id",
+			Description:       "The ID of the cluster the node is on",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                        "Arn",
 		"channel_placement_group_id": "Id",

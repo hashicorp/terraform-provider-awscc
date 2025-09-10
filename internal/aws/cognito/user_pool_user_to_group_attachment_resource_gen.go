@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -81,6 +82,20 @@ func userPoolUserToGroupAttachmentResource(ctx context.Context) (resource.Resour
 
 	opts = opts.WithCloudFormationTypeName("AWS::Cognito::UserPoolUserToGroupAttachment").WithTerraformTypeName("awscc_cognito_user_pool_user_to_group_attachment")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "user_pool_id",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "group_name",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "username",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"group_name":   "GroupName",
 		"user_pool_id": "UserPoolId",

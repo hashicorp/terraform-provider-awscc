@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -122,6 +123,23 @@ func studioSessionMappingResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::EMR::StudioSessionMapping").WithTerraformTypeName("awscc_emr_studio_session_mapping")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "studio_id",
+			Description:       "The ID of the Amazon EMR Studio to which the user or group will be mapped",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "identity_type",
+			Description:       "Specifies whether the identity to map to the Studio is a user or a group",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "identity_name",
+			Description:       "The name of the user or group",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"identity_name":      "IdentityName",
 		"identity_type":      "IdentityType",

@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -224,6 +225,18 @@ func publishingDestinationResource(ctx context.Context) (resource.Resource, erro
 
 	opts = opts.WithCloudFormationTypeName("AWS::GuardDuty::PublishingDestination").WithTerraformTypeName("awscc_guardduty_publishing_destination")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "detector_id",
+			Description:       "The ID of the GuardDuty detector associated with the publishing destination",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "id",
+			Description:       "The ID of the publishing destination",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"destination_arn":                    "DestinationArn",
 		"destination_properties":             "DestinationProperties",

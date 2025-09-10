@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -217,6 +218,13 @@ func autoScalingConfigurationResource(ctx context.Context) (resource.Resource, e
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppRunner::AutoScalingConfiguration").WithTerraformTypeName("awscc_apprunner_auto_scaling_configuration")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "auto_scaling_configuration_arn",
+			Description:       "The Amazon Resource Name (ARN) of this auto scaling configuration",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"auto_scaling_configuration_arn":      "AutoScalingConfigurationArn",
 		"auto_scaling_configuration_name":     "AutoScalingConfigurationName",

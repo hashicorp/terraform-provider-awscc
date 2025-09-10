@@ -12,6 +12,8 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
+	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/common"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
 )
@@ -78,6 +80,15 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 	if err != nil {
 		return err
 	}
+
+	primaryIdentifier := make([]identity.Identifier, len(templateData.PrimaryIdentifier))
+	for i, v := range templateData.PrimaryIdentifier {
+		primaryIdentifier[i] = identity.Identifier{
+			Name:        naming.SnakeCase(v.Name),
+			Description: v.Description,
+		}
+	}
+	templateData.PrimaryIdentifier = primaryIdentifier
 
 	d := g.NewGoFileDestination(schemaFilename)
 

@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -248,6 +249,18 @@ func predefinedAttributeResource(ctx context.Context) (resource.Resource, error)
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::PredefinedAttribute").WithTerraformTypeName("awscc_connect_predefined_attribute")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "instance_arn",
+			Description:       "The identifier of the Amazon Connect instance",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "name",
+			Description:       "The name of the predefined attribute",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"attribute_configuration":                "AttributeConfiguration",
 		"enable_value_validation_on_association": "EnableValueValidationOnAssociation",

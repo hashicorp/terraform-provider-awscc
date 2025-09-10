@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -113,6 +114,18 @@ func targetAccountConfigurationResource(ctx context.Context) (resource.Resource,
 
 	opts = opts.WithCloudFormationTypeName("AWS::FIS::TargetAccountConfiguration").WithTerraformTypeName("awscc_fis_target_account_configuration")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "experiment_template_id",
+			Description:       "The ID of the experiment template",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "account_id",
+			Description:       "The AWS account ID of the target account",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_id":             "AccountId",
 		"description":            "Description",

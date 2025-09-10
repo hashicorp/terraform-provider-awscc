@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -98,6 +99,16 @@ func identityPoolPrincipalTagResource(ctx context.Context) (resource.Resource, e
 
 	opts = opts.WithCloudFormationTypeName("AWS::Cognito::IdentityPoolPrincipalTag").WithTerraformTypeName("awscc_cognito_identity_pool_principal_tag")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "identity_pool_id",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "identity_provider_name",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"identity_pool_id":       "IdentityPoolId",
 		"identity_provider_name": "IdentityProviderName",

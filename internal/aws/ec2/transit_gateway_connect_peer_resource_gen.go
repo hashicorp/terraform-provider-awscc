@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -299,6 +300,13 @@ func transitGatewayConnectPeerResource(ctx context.Context) (resource.Resource, 
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayConnectPeer").WithTerraformTypeName("awscc_ec2_transit_gateway_connect_peer")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "transit_gateway_connect_peer_id",
+			Description:       "The ID of the Connect peer",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"bgp_configurations":              "BgpConfigurations",
 		"bgp_status":                      "BgpStatus",

@@ -23,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -759,6 +760,13 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::ODB::CloudVmCluster").WithTerraformTypeName("awscc_odb_cloud_vm_cluster")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "cloud_vm_cluster_arn",
+			Description:       "The Amazon Resource Name (ARN) of the VM cluster",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"cloud_exadata_infrastructure_id": "CloudExadataInfrastructureId",
 		"cloud_vm_cluster_arn":            "CloudVmClusterArn",

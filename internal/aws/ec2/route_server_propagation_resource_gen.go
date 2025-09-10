@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -73,6 +74,18 @@ func routeServerPropagationResource(ctx context.Context) (resource.Resource, err
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::RouteServerPropagation").WithTerraformTypeName("awscc_ec2_route_server_propagation")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "route_server_id",
+			Description:       "Route Server ID",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "route_table_id",
+			Description:       "Route Table ID",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"route_server_id": "RouteServerId",
 		"route_table_id":  "RouteTableId",

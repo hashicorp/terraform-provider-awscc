@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -121,6 +122,23 @@ func iPAMAllocationResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::IPAMAllocation").WithTerraformTypeName("awscc_ec2_ipam_allocation")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "ipam_pool_id",
+			Description:       "Id of the IPAM Pool",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "ipam_pool_allocation_id",
+			Description:       "Id of the allocation",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "cidr",
+			Description:       "Represents an IPAM custom allocation of a single IPv4 or IPv6 CIDR",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"cidr":                    "Cidr",
 		"description":             "Description",

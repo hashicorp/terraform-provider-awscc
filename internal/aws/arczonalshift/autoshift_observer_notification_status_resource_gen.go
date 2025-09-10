@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -99,6 +100,18 @@ func autoshiftObserverNotificationStatusResource(ctx context.Context) (resource.
 
 	opts = opts.WithCloudFormationTypeName("AWS::ARCZonalShift::AutoshiftObserverNotificationStatus").WithTerraformTypeName("awscc_arczonalshift_autoshift_observer_notification_status")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "account_id",
+			Description:       "User account id, used as part of the primary identifier for the resource",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "region",
+			Description:       "Region, used as part of the primary identifier for the resource",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_id": "AccountId",
 		"region":     "Region",

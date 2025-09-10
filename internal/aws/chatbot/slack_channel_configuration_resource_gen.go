@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -311,6 +312,13 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 
 	opts = opts.WithCloudFormationTypeName("AWS::Chatbot::SlackChannelConfiguration").WithTerraformTypeName("awscc_chatbot_slack_channel_configuration")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "arn",
+			Description:       "Amazon Resource Name (ARN) of the configuration",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                         "Arn",
 		"configuration_name":          "ConfigurationName",

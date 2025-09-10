@@ -20,6 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -486,6 +487,28 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::App").WithTerraformTypeName("awscc_sagemaker_app")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "app_name",
+			Description:       "The name of the app",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "app_type",
+			Description:       "The type of app",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "domain_id",
+			Description:       "The domain ID",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "user_profile_name",
+			Description:       "The user profile name",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"app_arn":                       "AppArn",
 		"app_name":                      "AppName",

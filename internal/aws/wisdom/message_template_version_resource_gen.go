@@ -17,6 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -116,6 +117,13 @@ func messageTemplateVersionResource(ctx context.Context) (resource.Resource, err
 
 	opts = opts.WithCloudFormationTypeName("AWS::Wisdom::MessageTemplateVersion").WithTerraformTypeName("awscc_wisdom_message_template_version")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "message_template_version_arn",
+			Description:       "The unqualified Amazon Resource Name (ARN) of the message template version",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"message_template_arn":             "MessageTemplateArn",
 		"message_template_content_sha_256": "MessageTemplateContentSha256",

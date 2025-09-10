@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -343,6 +344,18 @@ func accessEntryResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EKS::AccessEntry").WithTerraformTypeName("awscc_eks_access_entry")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "principal_arn",
+			Description:       "The principal ARN that the access entry is created for",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "cluster_name",
+			Description:       "The cluster that the access entry is created for",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_entry_arn":  "AccessEntryArn",
 		"access_policies":   "AccessPolicies",

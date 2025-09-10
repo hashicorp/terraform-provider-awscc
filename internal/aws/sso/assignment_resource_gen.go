@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -175,6 +176,38 @@ func assignmentResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSO::Assignment").WithTerraformTypeName("awscc_sso_assignment")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "instance_arn",
+			Description:       "The sso instance that the permission set is owned",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "target_id",
+			Description:       "The account id to be provisioned",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "target_type",
+			Description:       "The type of resource to be provsioned to, only aws account now",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "permission_set_arn",
+			Description:       "The permission set that the assignemt will be assigned",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "principal_type",
+			Description:       "The assignee's type, user/group",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "principal_id",
+			Description:       "The assignee's identifier, user id/group id",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"instance_arn":       "InstanceArn",
 		"permission_set_arn": "PermissionSetArn",

@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -177,6 +178,22 @@ func routeResponseResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGatewayV2::RouteResponse").WithTerraformTypeName("awscc_apigatewayv2_route_response")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "api_id",
+			Description:       "The API identifier",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "route_id",
+			Description:       "The route ID",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "route_response_id",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"api_id":                     "ApiId",
 		"model_selection_expression": "ModelSelectionExpression",

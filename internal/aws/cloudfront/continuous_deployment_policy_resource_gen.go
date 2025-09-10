@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -514,6 +515,13 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::ContinuousDeploymentPolicy").WithTerraformTypeName("awscc_cloudfront_continuous_deployment_policy")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "id",
+			RequiredForImport: true,
+		})
+
+	opts = opts.IsGlobalResourceType(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"continuous_deployment_policy_config": "ContinuousDeploymentPolicyConfig",
 		"continuous_deployment_policy_id":     "Id",

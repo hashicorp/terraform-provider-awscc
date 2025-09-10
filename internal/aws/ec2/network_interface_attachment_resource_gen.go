@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -183,6 +184,12 @@ func networkInterfaceAttachmentResource(ctx context.Context) (resource.Resource,
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkInterfaceAttachment").WithTerraformTypeName("awscc_ec2_network_interface_attachment")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "attachment_id",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"attachment_id":             "AttachmentId",
 		"delete_on_termination":     "DeleteOnTermination",

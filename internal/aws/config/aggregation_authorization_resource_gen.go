@@ -18,6 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -176,6 +177,18 @@ func aggregationAuthorizationResource(ctx context.Context) (resource.Resource, e
 
 	opts = opts.WithCloudFormationTypeName("AWS::Config::AggregationAuthorization").WithTerraformTypeName("awscc_config_aggregation_authorization")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "authorized_account_id",
+			Description:       "The 12-digit account ID of the account authorized to aggregate data",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "authorized_aws_region",
+			Description:       "The region authorized to collect aggregated data",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"aggregation_authorization_arn": "AggregationAuthorizationArn",
 		"authorized_account_id":         "AuthorizedAccountId",

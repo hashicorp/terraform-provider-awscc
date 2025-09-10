@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -139,6 +140,16 @@ func userPoolIdentityProviderResource(ctx context.Context) (resource.Resource, e
 
 	opts = opts.WithCloudFormationTypeName("AWS::Cognito::UserPoolIdentityProvider").WithTerraformTypeName("awscc_cognito_user_pool_identity_provider")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "user_pool_id",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "provider_name",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"attribute_mapping": "AttributeMapping",
 		"idp_identifiers":   "IdpIdentifiers",

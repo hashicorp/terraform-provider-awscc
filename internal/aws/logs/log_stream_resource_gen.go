@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -75,6 +76,18 @@ func logStreamResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::LogStream").WithTerraformTypeName("awscc_logs_log_stream")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "log_group_name",
+			Description:       "The name of the log group where the log stream is created",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "log_stream_name",
+			Description:       "The name of the log stream",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"log_group_name":  "LogGroupName",
 		"log_stream_name": "LogStreamName",

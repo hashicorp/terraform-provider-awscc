@@ -20,6 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -255,6 +256,28 @@ func dataCellsFilterResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::LakeFormation::DataCellsFilter").WithTerraformTypeName("awscc_lakeformation_data_cells_filter")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "table_catalog_id",
+			Description:       "The Catalog Id of the Table on which to create a Data Cells Filter",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "database_name",
+			Description:       "The name of the Database that the Table resides in",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "table_name",
+			Description:       "The name of the Table to create a Data Cells Filter for",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "name",
+			Description:       "The desired name of the Data Cells Filter",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"all_rows_wildcard":     "AllRowsWildcard",
 		"column_names":          "ColumnNames",

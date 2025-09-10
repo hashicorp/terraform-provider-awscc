@@ -18,6 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -532,6 +533,14 @@ func directConnectGatewayAttachmentResource(ctx context.Context) (resource.Resou
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::DirectConnectGatewayAttachment").WithTerraformTypeName("awscc_networkmanager_direct_connect_gateway_attachment")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "attachment_id",
+			Description:       "Id of the attachment",
+			RequiredForImport: true,
+		})
+
+	opts = opts.IsGlobalResourceType(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"attachment_id":                          "AttachmentId",
 		"attachment_policy_rule_number":          "AttachmentPolicyRuleNumber",

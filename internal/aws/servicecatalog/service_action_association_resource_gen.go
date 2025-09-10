@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -101,6 +102,20 @@ func serviceActionAssociationResource(ctx context.Context) (resource.Resource, e
 
 	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalog::ServiceActionAssociation").WithTerraformTypeName("awscc_servicecatalog_service_action_association")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "product_id",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "provisioning_artifact_id",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "service_action_id",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"product_id":               "ProductId",
 		"provisioning_artifact_id": "ProvisioningArtifactId",

@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -164,6 +165,16 @@ func templateGroupAccessControlEntryResource(ctx context.Context) (resource.Reso
 
 	opts = opts.WithCloudFormationTypeName("AWS::PCAConnectorAD::TemplateGroupAccessControlEntry").WithTerraformTypeName("awscc_pcaconnectorad_template_group_access_control_entry")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "group_security_identifier",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "template_arn",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_rights":             "AccessRights",
 		"auto_enroll":               "AutoEnroll",

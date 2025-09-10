@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -130,6 +131,18 @@ func flowVpcInterfaceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::FlowVpcInterface").WithTerraformTypeName("awscc_mediaconnect_flow_vpc_interface")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "flow_arn",
+			Description:       "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "name",
+			Description:       "Immutable and has to be a unique against other VpcInterfaces in this Flow",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"flow_arn":              "FlowArn",
 		"name":                  "Name",

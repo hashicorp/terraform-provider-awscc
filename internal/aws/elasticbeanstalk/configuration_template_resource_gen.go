@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -291,6 +292,18 @@ func configurationTemplateResource(ctx context.Context) (resource.Resource, erro
 
 	opts = opts.WithCloudFormationTypeName("AWS::ElasticBeanstalk::ConfigurationTemplate").WithTerraformTypeName("awscc_elasticbeanstalk_configuration_template")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "application_name",
+			Description:       "The name of the Elastic Beanstalk application to associate with this configuration template",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "template_name",
+			Description:       "The name of the configuration template",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"application_name":     "ApplicationName",
 		"description":          "Description",

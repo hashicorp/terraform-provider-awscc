@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -73,6 +74,19 @@ func transitGatewayRegistrationResource(ctx context.Context) (resource.Resource,
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::TransitGatewayRegistration").WithTerraformTypeName("awscc_networkmanager_transit_gateway_registration")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "global_network_id",
+			Description:       "The ID of the global network",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "transit_gateway_arn",
+			Description:       "The Amazon Resource Name (ARN) of the transit gateway",
+			RequiredForImport: true,
+		})
+
+	opts = opts.IsGlobalResourceType(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"global_network_id":   "GlobalNetworkId",
 		"transit_gateway_arn": "TransitGatewayArn",

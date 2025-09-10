@@ -20,6 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -394,6 +395,18 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::Project").WithTerraformTypeName("awscc_datazone_project")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "domain_id",
+			Description:       "The identifier of the Amazon DataZone domain in which the project was created",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "id",
+			Description:       "The ID of the Amazon DataZone project",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"created_at":                     "CreatedAt",
 		"created_by":                     "CreatedBy",

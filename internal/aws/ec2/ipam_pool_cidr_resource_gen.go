@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -120,6 +121,18 @@ func iPAMPoolCidrResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::IPAMPoolCidr").WithTerraformTypeName("awscc_ec2_ipam_pool_cidr")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "ipam_pool_id",
+			Description:       "Id of the IPAM Pool",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "ipam_pool_cidr_id",
+			Description:       "Id of the IPAM Pool Cidr",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"cidr":              "Cidr",
 		"ipam_pool_cidr_id": "IpamPoolCidrId",

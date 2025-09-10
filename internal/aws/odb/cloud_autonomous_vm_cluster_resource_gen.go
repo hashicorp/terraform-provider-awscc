@@ -23,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -966,6 +967,13 @@ func cloudAutonomousVmClusterResource(ctx context.Context) (resource.Resource, e
 
 	opts = opts.WithCloudFormationTypeName("AWS::ODB::CloudAutonomousVmCluster").WithTerraformTypeName("awscc_odb_cloud_autonomous_vm_cluster")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "cloud_autonomous_vm_cluster_arn",
+			Description:       "The Amazon Resource Name (ARN) for the Autonomous VM cluster",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"autonomous_data_storage_percentage":             "AutonomousDataStoragePercentage",
 		"autonomous_data_storage_size_in_t_bs":           "AutonomousDataStorageSizeInTBs",

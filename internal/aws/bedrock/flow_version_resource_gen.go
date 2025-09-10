@@ -20,6 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -1280,6 +1281,18 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Bedrock::FlowVersion").WithTerraformTypeName("awscc_bedrock_flow_version")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "flow_arn",
+			Description:       "Arn representation of the Flow",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "version",
+			Description:       "Numerical Version",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"agent":                       "Agent",
 		"agent_alias_arn":             "AgentAliasArn",

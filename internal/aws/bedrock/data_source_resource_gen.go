@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -2543,6 +2544,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Bedrock::DataSource").WithTerraformTypeName("awscc_bedrock_data_source")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "knowledge_base_id",
+			Description:       "The unique identifier of the knowledge base to which to add the data source",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "data_source_id",
+			Description:       "Identifier for a resource",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"auth_type":                              "AuthType",
 		"bedrock_data_automation_configuration":  "BedrockDataAutomationConfiguration",

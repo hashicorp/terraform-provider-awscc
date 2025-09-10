@@ -1,1 +1,1 @@
-$ terraform import awscc_sagemaker_device.example "device/_device_name"
+$ terraform import awscc_sagemaker_device.example "device_device_name"

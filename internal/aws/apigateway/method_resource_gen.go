@@ -23,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -723,6 +724,20 @@ func methodResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::Method").WithTerraformTypeName("awscc_apigateway_method")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "rest_api_id",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "resource_id",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "http_method",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"api_key_required":        "ApiKeyRequired",
 		"authorization_scopes":    "AuthorizationScopes",

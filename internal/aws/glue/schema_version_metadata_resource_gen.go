@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -104,6 +105,23 @@ func schemaVersionMetadataResource(ctx context.Context) (resource.Resource, erro
 
 	opts = opts.WithCloudFormationTypeName("AWS::Glue::SchemaVersionMetadata").WithTerraformTypeName("awscc_glue_schema_version_metadata")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "schema_version_id",
+			Description:       "Represents the version ID associated with the schema version",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "key",
+			Description:       "Metadata key",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "value",
+			Description:       "Metadata value",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"key":               "Key",
 		"schema_version_id": "SchemaVersionId",

@@ -20,6 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
@@ -428,6 +429,18 @@ func tagAssociationResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::LakeFormation::TagAssociation").WithTerraformTypeName("awscc_lakeformation_tag_association")
 	opts = opts.WithTerraformSchema(schema)
+	opts = opts.WithPrimaryIdentifier(
+		identity.Identifier{
+			Name:              "resource_identifier",
+			Description:       "Unique string identifying the resource",
+			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "tags_identifier",
+			Description:       "Unique string identifying the resource's tags",
+			RequiredForImport: true,
+		})
+
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"catalog":             "Catalog",
 		"catalog_id":          "CatalogId",
