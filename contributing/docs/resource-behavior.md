@@ -9,7 +9,7 @@ We assume some familiarity with user-facing Terraform concepts like configuratio
 ### Terraform Resources
 
 Resources describe infrastructure objects such as virtual networks or compute instances.
-By declaring a [Terraform resource block](https://developer.hashicorp.com/terraform/language/resources/syntax) and [applying that configuration](https://developer.hashicorp.com/terraform/language/resources/behavior), Terraform manages the lifecycle of the underlying infrastructure object so as to make its settings match the configuration.
+By declaring a [Terraform resource block](https://developer.hashicorp.com/terraform/language/block/resource) and [applying that configuration](https://developer.hashicorp.com/terraform/language/resources#apply-the-configuration), Terraform manages the lifecycle of the underlying infrastructure object so as to make its settings match the configuration.
 
 Resource blocks declare a resource of a specific type with a specific local name. The local name is used solely to refer to that resource within its own [module](https://developer.hashicorp.com/terraform/language/modules), having no meaning outside the module's scope. For example
 
@@ -64,9 +64,9 @@ The _shape_ of a resource defines the names, types and behaviors of its fields. 
 A Terraform attribute's name is obtained by snake casing the corresponding CloudFormation property's name. For example a property named `GlobalReplicationGroupDescription` corresponds to an attribute named `global_replication_group_description`.
 
 > [!NOTE]
-> If a top-level attribute's name is one of the Terraform _meta-arguments_ [`count`](https://developer.hashicorp.com/terraform/language/meta-arguments/count), [`depends_on`](https://developer.hashicorp.com/terraform/language/meta-arguments/depends_on), [`for_each`](https://developer.hashicorp.com/terraform/language/meta-arguments/for_each), or [`lifecycle`](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle) then generation of the Terraform resource (and data sources) is suppressed.
+> If a top-level attribute's name is one of the Terraform _meta-arguments_ [`count`](https://developer.hashicorp.com/terraform/language/meta-arguments#count), [`depends_on`](https://developer.hashicorp.com/terraform/language/meta-arguments#depends_on), [`for_each`](https://developer.hashicorp.com/terraform/language/meta-arguments#for_each), or [`lifecycle`](https://developer.hashicorp.com/terraform/language/meta-arguments#lifecycle) then generation of the Terraform resource (and data sources) is suppressed.
 >
-> If a top-level attribute's name is [`provider`](https://developer.hashicorp.com/terraform/language/meta-arguments/resource-provider) it is renamed to `provider_name`.
+> If a top-level attribute's name is [`provider`](https://developer.hashicorp.com/terraform/language/meta-arguments#provider) it is renamed to `provider_name`.
 
 #### Attribute Types
 
