@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- [Terraform](https://www.terraform.io/downloads.html) 1.0.11+ (to run acceptance tests)
+- [Terraform](https://developer.hashicorp.com/terraform/install) 1.0.11+ (to run acceptance tests)
 - [Go](https://golang.org/doc/install) 1.22 (to build the provider plugin)
 
 ## Quick Start
@@ -54,7 +54,7 @@ $ make testacc
 
 ## Using the Provider
 
-[Development overrides for provider developers](https://www.terraform.io/docs/cli/config/config-file.html#development-overrides-for-provider-developers) can be leveraged in order to use the provider built from source.
+[Development overrides for provider developers](https://developer.hashicorp.com/terraform/cli/config/config-file#development-overrides-for-provider-developers) can be leveraged in order to use the provider built from source.
 
 To do this, populate a Terraform CLI configuration file (`~/.terraformrc` for all platforms other than Windows; `terraform.rc` in the `%APPDATA%` directory when using Windows) with at least the following options:
 
