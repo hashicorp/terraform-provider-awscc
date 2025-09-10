@@ -857,7 +857,7 @@
     },
     {
         "resource": "awscc_codepipeline_custom_action_type",
-        "identifier": ["Category","ProviderId","Version"]
+        "identifier": ["Category","ProviderName","Version"]
     },
     {
         "resource": "awscc_codepipeline_pipeline",

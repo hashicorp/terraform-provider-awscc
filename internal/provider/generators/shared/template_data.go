@@ -143,8 +143,9 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 			id = strings.Join(pID, "")
 		}
 
+		// if identifier ls "Provider", rename to "ProviderName" to avoid conflict with provider keyword
 		if id == "Provider" {
-			id = fmt.Sprintf("%sId", id)
+			id = fmt.Sprintf("%sName", id)
 		}
 		identifier.Name = id
 
