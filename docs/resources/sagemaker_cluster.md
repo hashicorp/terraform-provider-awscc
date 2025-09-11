@@ -120,7 +120,9 @@ data "aws_partition" "current" {}
 
 ### Optional
 
+- `auto_scaling` (Attributes) Configuration for cluster auto-scaling (see [below for nested schema](#nestedatt--auto_scaling))
 - `cluster_name` (String) The name of the HyperPod Cluster.
+- `cluster_role` (String) The cluster role for the autoscaler to assume.
 - `instance_groups` (Attributes List) The instance groups of the SageMaker HyperPod cluster. (see [below for nested schema](#nestedatt--instance_groups))
 - `node_provisioning_mode` (String) Determines the scaling strategy for the SageMaker HyperPod cluster. When set to 'Continuous', enables continuous scaling which dynamically manages node provisioning. If the parameter is omitted, uses the standard scaling approach in previous release.
 - `node_recovery` (String) If node auto-recovery is set to true, faulty nodes will be replaced or rebooted when a failure is detected. If set to false, nodes will be labelled when a fault is detected.
@@ -136,6 +138,15 @@ data "aws_partition" "current" {}
 - `creation_time` (String) The time at which the HyperPod cluster was created.
 - `failure_message` (String) The failure message of the HyperPod Cluster.
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--auto_scaling"></a>
+### Nested Schema for `auto_scaling`
+
+Optional:
+
+- `auto_scaler_type` (String) The type of auto-scaler to use
+- `mode` (String) The auto-scaling mode for the cluster
+
 
 <a id="nestedatt--instance_groups"></a>
 ### Nested Schema for `instance_groups`
@@ -168,6 +179,8 @@ Optional:
 
 Optional:
 
+- `root_volume` (Boolean)
+- `volume_kms_key_id` (String)
 - `volume_size_in_gb` (Number) The size in gigabytes (GB) of the additional EBS volume to be attached to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.
 
 
@@ -307,6 +320,8 @@ Optional:
 
 Optional:
 
+- `root_volume` (Boolean)
+- `volume_kms_key_id` (String)
 - `volume_size_in_gb` (Number) The size in gigabytes (GB) of the additional EBS volume to be attached to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.
 
 

@@ -41,16 +41,21 @@ Read-Only:
 Read-Only:
 
 - `block_device_mappings` (Attributes List) (see [below for nested schema](#nestedatt--managed_instance--block_device_mappings))
+- `capacity_reservation_specification` (Attributes) (see [below for nested schema](#nestedatt--managed_instance--capacity_reservation_specification))
 - `cpu_options` (Attributes) (see [below for nested schema](#nestedatt--managed_instance--cpu_options))
 - `credit_specification` (Attributes) (see [below for nested schema](#nestedatt--managed_instance--credit_specification))
 - `disable_api_stop` (Boolean)
 - `ebs_optimized` (Boolean)
+- `enable_primary_ipv_6` (Boolean)
 - `enclave_options` (Attributes) (see [below for nested schema](#nestedatt--managed_instance--enclave_options))
 - `hibernation_options` (Attributes) (see [below for nested schema](#nestedatt--managed_instance--hibernation_options))
 - `iam_instance_profile` (Attributes) (see [below for nested schema](#nestedatt--managed_instance--iam_instance_profile))
 - `image_id` (String)
+- `instance_market_options` (Attributes) (see [below for nested schema](#nestedatt--managed_instance--instance_market_options))
 - `instance_type` (String)
+- `ipv_6_address_count` (Number)
 - `key_name` (String)
+- `license_specifications` (Attributes List) (see [below for nested schema](#nestedatt--managed_instance--license_specifications))
 - `maintenance_options` (Attributes) (see [below for nested schema](#nestedatt--managed_instance--maintenance_options))
 - `metadata_options` (Attributes) (see [below for nested schema](#nestedatt--managed_instance--metadata_options))
 - `monitoring` (Attributes) (see [below for nested schema](#nestedatt--managed_instance--monitoring))
@@ -58,6 +63,7 @@ Read-Only:
 - `network_performance_options` (Attributes) (see [below for nested schema](#nestedatt--managed_instance--network_performance_options))
 - `placement` (Attributes) (see [below for nested schema](#nestedatt--managed_instance--placement))
 - `private_dns_name_options` (Attributes) (see [below for nested schema](#nestedatt--managed_instance--private_dns_name_options))
+- `subnet_id` (String)
 - `tag_specifications` (Attributes List) (see [below for nested schema](#nestedatt--managed_instance--tag_specifications))
 - `user_data` (String)
 
@@ -82,6 +88,24 @@ Read-Only:
 - `throughput` (Number)
 - `volume_size` (Number)
 - `volume_type` (String)
+
+
+
+<a id="nestedatt--managed_instance--capacity_reservation_specification"></a>
+### Nested Schema for `managed_instance.capacity_reservation_specification`
+
+Read-Only:
+
+- `capacity_reservation_preference` (String)
+- `capacity_reservation_target` (Attributes) (see [below for nested schema](#nestedatt--managed_instance--capacity_reservation_specification--capacity_reservation_target))
+
+<a id="nestedatt--managed_instance--capacity_reservation_specification--capacity_reservation_target"></a>
+### Nested Schema for `managed_instance.capacity_reservation_specification.capacity_reservation_target`
+
+Read-Only:
+
+- `capacity_reservation_id` (String)
+- `capacity_reservation_resource_group_arn` (String)
 
 
 
@@ -123,7 +147,36 @@ Read-Only:
 
 Read-Only:
 
+- `arn` (String)
 - `name` (String)
+
+
+<a id="nestedatt--managed_instance--instance_market_options"></a>
+### Nested Schema for `managed_instance.instance_market_options`
+
+Read-Only:
+
+- `market_type` (String)
+- `spot_options` (Attributes) (see [below for nested schema](#nestedatt--managed_instance--instance_market_options--spot_options))
+
+<a id="nestedatt--managed_instance--instance_market_options--spot_options"></a>
+### Nested Schema for `managed_instance.instance_market_options.spot_options`
+
+Read-Only:
+
+- `instance_interruption_behavior` (String)
+- `max_price` (String)
+- `spot_instance_type` (String)
+- `valid_until_utc` (String)
+
+
+
+<a id="nestedatt--managed_instance--license_specifications"></a>
+### Nested Schema for `managed_instance.license_specifications`
+
+Read-Only:
+
+- `license_configuration_arn` (String)
 
 
 <a id="nestedatt--managed_instance--maintenance_options"></a>
@@ -179,7 +232,9 @@ Read-Only:
 Read-Only:
 
 - `availability_zone` (String)
+- `group_id` (String)
 - `group_name` (String)
+- `partition_number` (Number)
 - `tenancy` (String)
 
 

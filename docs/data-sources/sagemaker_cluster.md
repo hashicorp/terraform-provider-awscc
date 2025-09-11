@@ -21,8 +21,10 @@ Data Source schema for AWS::SageMaker::Cluster
 
 ### Read-Only
 
+- `auto_scaling` (Attributes) Configuration for cluster auto-scaling (see [below for nested schema](#nestedatt--auto_scaling))
 - `cluster_arn` (String) The Amazon Resource Name (ARN) of the HyperPod Cluster.
 - `cluster_name` (String) The name of the HyperPod Cluster.
+- `cluster_role` (String) The cluster role for the autoscaler to assume.
 - `cluster_status` (String) The status of the HyperPod Cluster.
 - `creation_time` (String) The time at which the HyperPod cluster was created.
 - `failure_message` (String) The failure message of the HyperPod Cluster.
@@ -33,6 +35,15 @@ Data Source schema for AWS::SageMaker::Cluster
 - `restricted_instance_groups` (Attributes List) The restricted instance groups of the SageMaker HyperPod cluster. (see [below for nested schema](#nestedatt--restricted_instance_groups))
 - `tags` (Attributes Set) Custom tags for managing the SageMaker HyperPod cluster as an AWS resource. You can add tags to your cluster in the same way you add them in other AWS services that support tagging. (see [below for nested schema](#nestedatt--tags))
 - `vpc_config` (Attributes) Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC. (see [below for nested schema](#nestedatt--vpc_config))
+
+<a id="nestedatt--auto_scaling"></a>
+### Nested Schema for `auto_scaling`
+
+Read-Only:
+
+- `auto_scaler_type` (String) The type of auto-scaler to use
+- `mode` (String) The auto-scaling mode for the cluster
+
 
 <a id="nestedatt--instance_groups"></a>
 ### Nested Schema for `instance_groups`
@@ -65,6 +76,8 @@ Read-Only:
 
 Read-Only:
 
+- `root_volume` (Boolean)
+- `volume_kms_key_id` (String)
 - `volume_size_in_gb` (Number) The size in gigabytes (GB) of the additional EBS volume to be attached to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.
 
 
@@ -204,6 +217,8 @@ Read-Only:
 
 Read-Only:
 
+- `root_volume` (Boolean)
+- `volume_kms_key_id` (String)
 - `volume_size_in_gb` (Number) The size in gigabytes (GB) of the additional EBS volume to be attached to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.
 
 

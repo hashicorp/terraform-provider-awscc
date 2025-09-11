@@ -1,0 +1,1 @@
+$ terraform import awscc_smsvoice_sender_id.example "iso_country_code|sender_id"

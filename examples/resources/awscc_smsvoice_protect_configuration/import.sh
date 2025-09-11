@@ -1,0 +1,1 @@
+$ terraform import awscc_smsvoice_protect_configuration.example "protect_configuration_id"
