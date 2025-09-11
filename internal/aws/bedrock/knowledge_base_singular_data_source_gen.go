@@ -1064,7 +1064,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        "DomainArn": {
 		//	          "description": "The Amazon Resource Name (ARN) of the OpenSearch domain.",
 		//	          "maxLength": 2048,
-		//	          "pattern": "^arn:aws(|-cn|-us-gov|-iso):es:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:domain/[a-z][a-z0-9-]{3,28}$",
+		//	          "pattern": "^arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:es:([a-z]{2,}-){2,}\\d:\\d{12}:domain/[a-z][a-z0-9-]{3,28}$",
 		//	          "type": "string"
 		//	        },
 		//	        "DomainEndpoint": {

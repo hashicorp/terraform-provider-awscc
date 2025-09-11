@@ -108,6 +108,34 @@ func workspaceInstanceDataSource(ctx context.Context) (datasource.DataSource, er
 		//	      },
 		//	      "type": "array"
 		//	    },
+		//	    "CapacityReservationSpecification": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CapacityReservationPreference": {
+		//	          "enum": [
+		//	            "capacity-reservations-only",
+		//	            "open",
+		//	            "none"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "CapacityReservationTarget": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "CapacityReservationId": {
+		//	              "maxLength": 128,
+		//	              "type": "string"
+		//	            },
+		//	            "CapacityReservationResourceGroupArn": {
+		//	              "pattern": "^arn:.*",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "CpuOptions": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -141,6 +169,9 @@ func workspaceInstanceDataSource(ctx context.Context) (datasource.DataSource, er
 		//	    "EbsOptimized": {
 		//	      "type": "boolean"
 		//	    },
+		//	    "EnablePrimaryIpv6": {
+		//	      "type": "boolean"
+		//	    },
 		//	    "EnclaveOptions": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -162,6 +193,11 @@ func workspaceInstanceDataSource(ctx context.Context) (datasource.DataSource, er
 		//	    "IamInstanceProfile": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "Arn": {
+		//	          "maxLength": 2048,
+		//	          "pattern": "^arn:.*",
+		//	          "type": "string"
+		//	        },
 		//	        "Name": {
 		//	          "maxLength": 64,
 		//	          "type": "string"
@@ -173,13 +209,71 @@ func workspaceInstanceDataSource(ctx context.Context) (datasource.DataSource, er
 		//	      "pattern": "^ami-[0-9a-zA-Z]{1,63}$",
 		//	      "type": "string"
 		//	    },
+		//	    "InstanceMarketOptions": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "MarketType": {
+		//	          "enum": [
+		//	            "spot",
+		//	            "capacity-block"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "SpotOptions": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "InstanceInterruptionBehavior": {
+		//	              "enum": [
+		//	                "hibernate",
+		//	                "stop"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "MaxPrice": {
+		//	              "maxLength": 64,
+		//	              "type": "string"
+		//	            },
+		//	            "SpotInstanceType": {
+		//	              "enum": [
+		//	                "one-time",
+		//	                "persistent"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "ValidUntilUtc": {
+		//	              "maxLength": 64,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "InstanceType": {
 		//	      "pattern": "^([a-z0-9-]+)\\.([a-z0-9]+)$",
 		//	      "type": "string"
 		//	    },
+		//	    "Ipv6AddressCount": {
+		//	      "minimum": 0,
+		//	      "type": "integer"
+		//	    },
 		//	    "KeyName": {
 		//	      "maxLength": 64,
 		//	      "type": "string"
+		//	    },
+		//	    "LicenseSpecifications": {
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "LicenseConfigurationArn": {
+		//	            "pattern": "^arn:.*",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
 		//	    },
 		//	    "MaintenanceOptions": {
 		//	      "additionalProperties": false,
@@ -292,9 +386,16 @@ func workspaceInstanceDataSource(ctx context.Context) (datasource.DataSource, er
 		//	          "pattern": "^[a-z]{2}-[a-z]+-\\d[a-z](-[a-z0-9]+)?$",
 		//	          "type": "string"
 		//	        },
+		//	        "GroupId": {
+		//	          "pattern": "^pg-[0-9a-zA-Z]{1,63}$",
+		//	          "type": "string"
+		//	        },
 		//	        "GroupName": {
 		//	          "maxLength": 255,
 		//	          "type": "string"
+		//	        },
+		//	        "PartitionNumber": {
+		//	          "type": "integer"
 		//	        },
 		//	        "Tenancy": {
 		//	          "enum": [
@@ -325,6 +426,10 @@ func workspaceInstanceDataSource(ctx context.Context) (datasource.DataSource, er
 		//	        }
 		//	      },
 		//	      "type": "object"
+		//	    },
+		//	    "SubnetId": {
+		//	      "pattern": "^subnet-[0-9a-zA-Z]{1,63}$",
+		//	      "type": "string"
 		//	    },
 		//	    "TagSpecifications": {
 		//	      "items": {
@@ -430,6 +535,30 @@ func workspaceInstanceDataSource(ctx context.Context) (datasource.DataSource, er
 					}, /*END NESTED OBJECT*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: CapacityReservationSpecification
+				"capacity_reservation_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CapacityReservationPreference
+						"capacity_reservation_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: CapacityReservationTarget
+						"capacity_reservation_target": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CapacityReservationId
+								"capacity_reservation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: CapacityReservationResourceGroupArn
+								"capacity_reservation_resource_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: CpuOptions
 				"cpu_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -462,6 +591,10 @@ func workspaceInstanceDataSource(ctx context.Context) (datasource.DataSource, er
 				"ebs_optimized": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: EnablePrimaryIpv6
+				"enable_primary_ipv_6": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: EnclaveOptions
 				"enclave_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -485,6 +618,10 @@ func workspaceInstanceDataSource(ctx context.Context) (datasource.DataSource, er
 				// Property: IamInstanceProfile
 				"iam_instance_profile": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Arn
+						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
@@ -496,12 +633,60 @@ func workspaceInstanceDataSource(ctx context.Context) (datasource.DataSource, er
 				"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: InstanceMarketOptions
+				"instance_market_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MarketType
+						"market_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SpotOptions
+						"spot_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceInterruptionBehavior
+								"instance_interruption_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: MaxPrice
+								"max_price": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: SpotInstanceType
+								"spot_instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ValidUntilUtc
+								"valid_until_utc": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: InstanceType
 				"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: Ipv6AddressCount
+				"ipv_6_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: KeyName
 				"key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LicenseSpecifications
+				"license_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: LicenseConfigurationArn
+							"license_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: MaintenanceOptions
@@ -592,8 +777,16 @@ func workspaceInstanceDataSource(ctx context.Context) (datasource.DataSource, er
 						"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
+						// Property: GroupId
+						"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: GroupName
 						"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: PartitionNumber
+						"partition_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: Tenancy
@@ -619,6 +812,10 @@ func workspaceInstanceDataSource(ctx context.Context) (datasource.DataSource, er
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SubnetId
+				"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: TagSpecifications
@@ -744,68 +941,87 @@ func workspaceInstanceDataSource(ctx context.Context) (datasource.DataSource, er
 	opts = opts.WithCloudFormationTypeName("AWS::WorkspacesInstances::WorkspaceInstance").WithTerraformTypeName("awscc_workspacesinstances_workspace_instance")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"auto_recovery":                        "AutoRecovery",
-		"availability_zone":                    "AvailabilityZone",
-		"bandwidth_weighting":                  "BandwidthWeighting",
-		"block_device_mappings":                "BlockDeviceMappings",
-		"configured":                           "Configured",
-		"core_count":                           "CoreCount",
-		"cpu_credits":                          "CpuCredits",
-		"cpu_options":                          "CpuOptions",
-		"credit_specification":                 "CreditSpecification",
-		"description":                          "Description",
-		"device_index":                         "DeviceIndex",
-		"device_name":                          "DeviceName",
-		"disable_api_stop":                     "DisableApiStop",
-		"ebs":                                  "Ebs",
-		"ebs_optimized":                        "EbsOptimized",
-		"ec2_managed_instance":                 "EC2ManagedInstance",
-		"enable_resource_name_dns_a_record":    "EnableResourceNameDnsARecord",
-		"enable_resource_name_dns_aaaa_record": "EnableResourceNameDnsAAAARecord",
-		"enabled":                              "Enabled",
-		"enclave_options":                      "EnclaveOptions",
-		"encrypted":                            "Encrypted",
-		"group_name":                           "GroupName",
-		"groups":                               "Groups",
-		"hibernation_options":                  "HibernationOptions",
-		"hostname_type":                        "HostnameType",
-		"http_endpoint":                        "HttpEndpoint",
-		"http_protocol_ipv_6":                  "HttpProtocolIpv6",
-		"http_put_response_hop_limit":          "HttpPutResponseHopLimit",
-		"http_tokens":                          "HttpTokens",
-		"iam_instance_profile":                 "IamInstanceProfile",
-		"image_id":                             "ImageId",
-		"instance_id":                          "InstanceId",
-		"instance_metadata_tags":               "InstanceMetadataTags",
-		"instance_type":                        "InstanceType",
-		"iops":                                 "Iops",
-		"key":                                  "Key",
-		"key_name":                             "KeyName",
-		"kms_key_id":                           "KmsKeyId",
-		"maintenance_options":                  "MaintenanceOptions",
-		"managed_instance":                     "ManagedInstance",
-		"metadata_options":                     "MetadataOptions",
-		"monitoring":                           "Monitoring",
-		"name":                                 "Name",
-		"network_interfaces":                   "NetworkInterfaces",
-		"network_performance_options":          "NetworkPerformanceOptions",
-		"no_device":                            "NoDevice",
-		"placement":                            "Placement",
-		"private_dns_name_options":             "PrivateDnsNameOptions",
-		"provision_state":                      "ProvisionState",
-		"resource_type":                        "ResourceType",
-		"subnet_id":                            "SubnetId",
-		"tag_specifications":                   "TagSpecifications",
-		"tags":                                 "Tags",
-		"tenancy":                              "Tenancy",
-		"threads_per_core":                     "ThreadsPerCore",
-		"throughput":                           "Throughput",
-		"user_data":                            "UserData",
-		"value":                                "Value",
-		"virtual_name":                         "VirtualName",
-		"volume_size":                          "VolumeSize",
-		"volume_type":                          "VolumeType",
-		"workspace_instance_id":                "WorkspaceInstanceId",
+		"arn":                                     "Arn",
+		"auto_recovery":                           "AutoRecovery",
+		"availability_zone":                       "AvailabilityZone",
+		"bandwidth_weighting":                     "BandwidthWeighting",
+		"block_device_mappings":                   "BlockDeviceMappings",
+		"capacity_reservation_id":                 "CapacityReservationId",
+		"capacity_reservation_preference":         "CapacityReservationPreference",
+		"capacity_reservation_resource_group_arn": "CapacityReservationResourceGroupArn",
+		"capacity_reservation_specification":      "CapacityReservationSpecification",
+		"capacity_reservation_target":             "CapacityReservationTarget",
+		"configured":                              "Configured",
+		"core_count":                              "CoreCount",
+		"cpu_credits":                             "CpuCredits",
+		"cpu_options":                             "CpuOptions",
+		"credit_specification":                    "CreditSpecification",
+		"description":                             "Description",
+		"device_index":                            "DeviceIndex",
+		"device_name":                             "DeviceName",
+		"disable_api_stop":                        "DisableApiStop",
+		"ebs":                                     "Ebs",
+		"ebs_optimized":                           "EbsOptimized",
+		"ec2_managed_instance":                    "EC2ManagedInstance",
+		"enable_primary_ipv_6":                    "EnablePrimaryIpv6",
+		"enable_resource_name_dns_a_record":       "EnableResourceNameDnsARecord",
+		"enable_resource_name_dns_aaaa_record":    "EnableResourceNameDnsAAAARecord",
+		"enabled":                                 "Enabled",
+		"enclave_options":                         "EnclaveOptions",
+		"encrypted":                               "Encrypted",
+		"group_id":                                "GroupId",
+		"group_name":                              "GroupName",
+		"groups":                                  "Groups",
+		"hibernation_options":                     "HibernationOptions",
+		"hostname_type":                           "HostnameType",
+		"http_endpoint":                           "HttpEndpoint",
+		"http_protocol_ipv_6":                     "HttpProtocolIpv6",
+		"http_put_response_hop_limit":             "HttpPutResponseHopLimit",
+		"http_tokens":                             "HttpTokens",
+		"iam_instance_profile":                    "IamInstanceProfile",
+		"image_id":                                "ImageId",
+		"instance_id":                             "InstanceId",
+		"instance_interruption_behavior":          "InstanceInterruptionBehavior",
+		"instance_market_options":                 "InstanceMarketOptions",
+		"instance_metadata_tags":                  "InstanceMetadataTags",
+		"instance_type":                           "InstanceType",
+		"iops":                                    "Iops",
+		"ipv_6_address_count":                     "Ipv6AddressCount",
+		"key":                                     "Key",
+		"key_name":                                "KeyName",
+		"kms_key_id":                              "KmsKeyId",
+		"license_configuration_arn":               "LicenseConfigurationArn",
+		"license_specifications":                  "LicenseSpecifications",
+		"maintenance_options":                     "MaintenanceOptions",
+		"managed_instance":                        "ManagedInstance",
+		"market_type":                             "MarketType",
+		"max_price":                               "MaxPrice",
+		"metadata_options":                        "MetadataOptions",
+		"monitoring":                              "Monitoring",
+		"name":                                    "Name",
+		"network_interfaces":                      "NetworkInterfaces",
+		"network_performance_options":             "NetworkPerformanceOptions",
+		"no_device":                               "NoDevice",
+		"partition_number":                        "PartitionNumber",
+		"placement":                               "Placement",
+		"private_dns_name_options":                "PrivateDnsNameOptions",
+		"provision_state":                         "ProvisionState",
+		"resource_type":                           "ResourceType",
+		"spot_instance_type":                      "SpotInstanceType",
+		"spot_options":                            "SpotOptions",
+		"subnet_id":                               "SubnetId",
+		"tag_specifications":                      "TagSpecifications",
+		"tags":                                    "Tags",
+		"tenancy":                                 "Tenancy",
+		"threads_per_core":                        "ThreadsPerCore",
+		"throughput":                              "Throughput",
+		"user_data":                               "UserData",
+		"valid_until_utc":                         "ValidUntilUtc",
+		"value":                                   "Value",
+		"virtual_name":                            "VirtualName",
+		"volume_size":                             "VolumeSize",
+		"volume_type":                             "VolumeType",
+		"workspace_instance_id":                   "WorkspaceInstanceId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

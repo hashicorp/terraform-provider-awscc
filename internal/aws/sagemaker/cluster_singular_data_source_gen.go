@@ -23,6 +23,51 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::SageMaker::Cluster resource.
 func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AutoScaling
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for cluster auto-scaling",
+		//	  "properties": {
+		//	    "AutoScalerType": {
+		//	      "default": "Karpenter",
+		//	      "description": "The type of auto-scaler to use",
+		//	      "enum": [
+		//	        "Karpenter"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Mode": {
+		//	      "description": "The auto-scaling mode for the cluster",
+		//	      "enum": [
+		//	        "Enable",
+		//	        "Disable"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Mode"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"auto_scaling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoScalerType
+				"auto_scaler_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of auto-scaler to use",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Mode
+				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The auto-scaling mode for the cluster",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for cluster auto-scaling",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterArn
 		// CloudFormation resource type schema:
 		//
@@ -48,6 +93,20 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the HyperPod Cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ClusterRole
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The cluster role for the autoscaler to assume.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
+		//	  "type": "string"
+		//	}
+		"cluster_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The cluster role for the autoscaler to assume.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ClusterStatus
@@ -143,6 +202,15 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "additionalProperties": false,
 		//	              "description": "Defines the configuration for attaching additional Amazon Elastic Block Store (EBS) volumes to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.",
 		//	              "properties": {
+		//	                "RootVolume": {
+		//	                  "type": "boolean"
+		//	                },
+		//	                "VolumeKmsKeyId": {
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 0,
+		//	                  "pattern": "^[a-zA-Z0-9:/_-]*$",
+		//	                  "type": "string"
+		//	                },
 		//	                "VolumeSizeInGB": {
 		//	                  "description": "The size in gigabytes (GB) of the additional EBS volume to be attached to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.",
 		//	                  "maximum": 16384,
@@ -399,6 +467,14 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 								// Property: EbsVolumeConfig
 								"ebs_volume_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: RootVolume
+										"root_volume": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: VolumeKmsKeyId
+										"volume_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
 										// Property: VolumeSizeInGB
 										"volume_size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Description: "The size in gigabytes (GB) of the additional EBS volume to be attached to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.",
@@ -702,6 +778,15 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "additionalProperties": false,
 		//	              "description": "Defines the configuration for attaching additional Amazon Elastic Block Store (EBS) volumes to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.",
 		//	              "properties": {
+		//	                "RootVolume": {
+		//	                  "type": "boolean"
+		//	                },
+		//	                "VolumeKmsKeyId": {
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 0,
+		//	                  "pattern": "^[a-zA-Z0-9:/_-]*$",
+		//	                  "type": "string"
+		//	                },
 		//	                "VolumeSizeInGB": {
 		//	                  "description": "The size in gigabytes (GB) of the additional EBS volume to be attached to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.",
 		//	                  "maximum": 16384,
@@ -849,6 +934,14 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 								// Property: EbsVolumeConfig
 								"ebs_volume_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: RootVolume
+										"root_volume": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: VolumeKmsKeyId
+										"volume_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
 										// Property: VolumeSizeInGB
 										"volume_size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Description: "The size in gigabytes (GB) of the additional EBS volume to be attached to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.",
@@ -1036,8 +1129,11 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"alarm_name":                  "AlarmName",
 		"auto_rollback_configuration": "AutoRollbackConfiguration",
+		"auto_scaler_type":            "AutoScalerType",
+		"auto_scaling":                "AutoScaling",
 		"cluster_arn":                 "ClusterArn",
 		"cluster_name":                "ClusterName",
+		"cluster_role":                "ClusterRole",
 		"cluster_status":              "ClusterStatus",
 		"creation_time":               "CreationTime",
 		"current_count":               "CurrentCount",
@@ -1057,6 +1153,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key":                         "Key",
 		"life_cycle_config":           "LifeCycleConfig",
 		"maximum_batch_size":          "MaximumBatchSize",
+		"mode":                        "Mode",
 		"node_provisioning_mode":      "NodeProvisioningMode",
 		"node_recovery":               "NodeRecovery",
 		"on_create":                   "OnCreate",
@@ -1067,6 +1164,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"restricted_instance_groups":  "RestrictedInstanceGroups",
 		"rollback_maximum_batch_size": "RollbackMaximumBatchSize",
 		"rolling_update_policy":       "RollingUpdatePolicy",
+		"root_volume":                 "RootVolume",
 		"schedule_expression":         "ScheduleExpression",
 		"scheduled_update_config":     "ScheduledUpdateConfig",
 		"security_group_ids":          "SecurityGroupIds",
@@ -1078,6 +1176,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"training_plan_arn":           "TrainingPlanArn",
 		"type":                        "Type",
 		"value":                       "Value",
+		"volume_kms_key_id":           "VolumeKmsKeyId",
 		"volume_size_in_gb":           "VolumeSizeInGB",
 		"vpc_config":                  "VpcConfig",
 		"wait_interval_in_seconds":    "WaitIntervalInSeconds",
