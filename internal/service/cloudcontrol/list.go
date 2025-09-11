@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
-	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
 func ListResourcesByTypeName(ctx context.Context, conn *cloudcontrol.Client, roleARN, typeName string) ([]types.ResourceDescription, error) {
@@ -35,10 +34,6 @@ func ListResourcesByTypeName(ctx context.Context, conn *cloudcontrol.Client, rol
 		}
 
 		resourceDescriptions = append(resourceDescriptions, page.ResourceDescriptions...)
-	}
-
-	if len(resourceDescriptions) == 0 {
-		return nil, &tfresource.NotFoundError{Message: "Empty result"}
 	}
 
 	return resourceDescriptions, nil
