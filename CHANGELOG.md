@@ -3,7 +3,6 @@
 FEATURES:
 
 * provider: Add [Resource Identity](https://developer.hashicorp.com/terraform/plugin/framework/resources/identity) support. ([#2373](https://github.com/hashicorp/terraform-provider-awscc/pull/2373))
-
 * **New Data Source:** `awscc_smsvoice_configuration_set`
 * **New Data Source:** `awscc_smsvoice_configuration_sets`
 * **New Data Source:** `awscc_smsvoice_opt_out_list`
