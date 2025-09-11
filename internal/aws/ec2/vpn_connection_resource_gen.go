@@ -115,7 +115,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "Describes the storage location for an instance store-backed AMI.",
 		//	  "enum": [
 		//	    "Standard",
 		//	    "SecretsManager"
@@ -123,7 +123,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"pre_shared_key_storage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "Describes the storage location for an instance store-backed AMI.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/

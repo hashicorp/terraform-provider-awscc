@@ -33,7 +33,13 @@
         "eks:DeleteAccessEntry",
         "eks:AssociateAccessPolicy",
         "iam:CreateServiceLinkedRole",
-        "iam:PassRole"
+        "iam:PassRole",
+        "kms:DescribeKey",
+        "kms:CreateGrant",
+        "ec2:DescribeImages",
+        "ec2:DescribeSnapshots",
+        "ec2:ModifyImageAttribute",
+        "ec2:ModifySnapshotAttribute"
       ],
       "timeoutInMinutes": 720
     },
@@ -51,9 +57,16 @@
         "eks:DescribeCluster",
         "eks:CreateAccessEntry",
         "eks:DeleteAccessEntry",
+        "eks:AssociateAccessPolicy",
         "iam:PassRole",
+        "kms:DescribeKey",
+        "kms:CreateGrant",
         "sagemaker:BatchAddClusterNodes",
-        "sagemaker:BatchDeleteClusterNodes"
+        "sagemaker:BatchDeleteClusterNodes",
+        "ec2:DescribeImages",
+        "ec2:DescribeSnapshots",
+        "ec2:ModifyImageAttribute",
+        "ec2:ModifySnapshotAttribute"
       ],
       "timeoutInMinutes": 720
     },
@@ -375,6 +388,15 @@
           "maximum": 16384,
           "type": "integer",
           "minimum": 1
+        },
+        "VolumeKmsKeyId": {
+          "minLength": 0,
+          "pattern": "^[a-zA-Z0-9:/_-]*$",
+          "type": "string",
+          "maxLength": 2048
+        },
+        "RootVolume": {
+          "type": "boolean"
         }
       }
     },
@@ -472,6 +494,32 @@
         "InstanceGroupName",
         "InstanceType",
         "LifeCycleConfig"
+      ]
+    },
+    "ClusterAutoScalingConfig": {
+      "description": "Configuration for cluster auto-scaling",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Mode": {
+          "description": "The auto-scaling mode for the cluster",
+          "type": "string",
+          "enum": [
+            "Enable",
+            "Disable"
+          ]
+        },
+        "AutoScalerType": {
+          "default": "Karpenter",
+          "description": "The type of auto-scaler to use",
+          "type": "string",
+          "enum": [
+            "Karpenter"
+          ]
+        }
+      },
+      "required": [
+        "Mode"
       ]
     },
     "ScheduledUpdateConfig": {
@@ -590,6 +638,22 @@
         "None"
       ]
     },
+    "InstanceGroups": {
+      "$ref": "#/definitions/ClusterInstanceGroupsList"
+    },
+    "RestrictedInstanceGroups": {
+      "$ref": "#/definitions/ClusterRestrictedInstanceGroupsList"
+    },
+    "Orchestrator": {
+      "$ref": "#/definitions/Orchestrator"
+    },
+    "ClusterRole": {
+      "minLength": 20,
+      "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
+      "description": "The cluster role for the autoscaler to assume.",
+      "type": "string",
+      "maxLength": 2048
+    },
     "NodeProvisioningMode": {
       "description": "Determines the scaling strategy for the SageMaker HyperPod cluster. When set to 'Continuous', enables continuous scaling which dynamically manages node provisioning. If the parameter is omitted, uses the standard scaling approach in previous release.",
       "type": "string",
@@ -601,9 +665,6 @@
       "description": "The time at which the HyperPod cluster was created.",
       "type": "string"
     },
-    "InstanceGroups": {
-      "$ref": "#/definitions/ClusterInstanceGroupsList"
-    },
     "ClusterName": {
       "minLength": 1,
       "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
@@ -611,15 +672,12 @@
       "type": "string",
       "maxLength": 63
     },
-    "RestrictedInstanceGroups": {
-      "$ref": "#/definitions/ClusterRestrictedInstanceGroupsList"
-    },
     "FailureMessage": {
       "description": "The failure message of the HyperPod Cluster.",
       "type": "string"
     },
-    "Orchestrator": {
-      "$ref": "#/definitions/Orchestrator"
+    "AutoScaling": {
+      "$ref": "#/definitions/ClusterAutoScalingConfig"
     },
     "ClusterStatus": {
       "description": "The status of the HyperPod Cluster.",

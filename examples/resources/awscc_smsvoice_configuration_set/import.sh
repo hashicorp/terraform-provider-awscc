@@ -1,0 +1,1 @@
+$ terraform import awscc_smsvoice_configuration_set.example "configuration_set_name"

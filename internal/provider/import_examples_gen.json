@@ -4152,6 +4152,34 @@
         "identifier": ["VdmAttributesResourceId"]
     },
     {
+        "resource": "awscc_smsvoice_configuration_set",
+        "identifier": ["ConfigurationSetName"]
+    },
+    {
+        "resource": "awscc_smsvoice_opt_out_list",
+        "identifier": ["OptOutListName"]
+    },
+    {
+        "resource": "awscc_smsvoice_phone_number",
+        "identifier": ["PhoneNumberId"]
+    },
+    {
+        "resource": "awscc_smsvoice_pool",
+        "identifier": ["PoolId"]
+    },
+    {
+        "resource": "awscc_smsvoice_protect_configuration",
+        "identifier": ["ProtectConfigurationId"]
+    },
+    {
+        "resource": "awscc_smsvoice_resource_policy",
+        "identifier": ["ResourceArn"]
+    },
+    {
+        "resource": "awscc_smsvoice_sender_id",
+        "identifier": ["IsoCountryCode","SenderId"]
+    },
+    {
         "resource": "awscc_sns_subscription",
         "identifier": ["Arn"]
     },

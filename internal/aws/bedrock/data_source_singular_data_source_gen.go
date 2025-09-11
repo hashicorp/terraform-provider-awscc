@@ -194,7 +194,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "description": "The ARN of the bucket that contains the data source.",
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
-		//	          "pattern": "^arn:aws(|-cn|-us-gov):s3:::[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$",
+		//	          "pattern": "^arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:s3:::[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$",
 		//	          "type": "string"
 		//	        },
 		//	        "BucketOwnerAccountId": {
@@ -1110,7 +1110,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "description": "The ARN of the AWS KMS key used to encrypt the resource.",
 		//	      "maxLength": 2048,
 		//	      "minLength": 1,
-		//	      "pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
+		//	      "pattern": "^arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
 		//	      "type": "string"
 		//	    }
 		//	  },

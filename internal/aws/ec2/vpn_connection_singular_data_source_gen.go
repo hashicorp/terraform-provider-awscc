@@ -81,7 +81,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "Describes the storage location for an instance store-backed AMI.",
 		//	  "enum": [
 		//	    "Standard",
 		//	    "SecretsManager"
@@ -89,7 +89,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "string"
 		//	}
 		"pre_shared_key_storage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "Describes the storage location for an instance store-backed AMI.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RemoteIpv4NetworkCidr

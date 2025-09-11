@@ -1,0 +1,1 @@
+$ terraform import awscc_smsvoice_pool.example "pool_id"

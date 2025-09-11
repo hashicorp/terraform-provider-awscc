@@ -4722,6 +4722,34 @@ resource_schema "aws_ses_vdm_attributes" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_smsvoice_configuration_set" {
+  cloudformation_type_name = "AWS::SMSVOICE::ConfigurationSet"
+}
+
+resource_schema "aws_smsvoice_opt_out_list" {
+  cloudformation_type_name = "AWS::SMSVOICE::OptOutList"
+}
+
+resource_schema "aws_smsvoice_phone_number" {
+  cloudformation_type_name = "AWS::SMSVOICE::PhoneNumber"
+}
+
+resource_schema "aws_smsvoice_pool" {
+  cloudformation_type_name = "AWS::SMSVOICE::Pool"
+}
+
+resource_schema "aws_smsvoice_protect_configuration" {
+  cloudformation_type_name = "AWS::SMSVOICE::ProtectConfiguration"
+}
+
+resource_schema "aws_smsvoice_resource_policy" {
+  cloudformation_type_name = "AWS::SMSVOICE::ResourcePolicy"
+}
+
+resource_schema "aws_smsvoice_sender_id" {
+  cloudformation_type_name = "AWS::SMSVOICE::SenderId"
+}
+
 resource_schema "aws_sns_subscription" {
   cloudformation_type_name = "AWS::SNS::Subscription"
 }

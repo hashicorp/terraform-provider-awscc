@@ -1,6 +1,10 @@
 {
   "typeName": "AWS::AIOps::InvestigationGroup",
   "description": "Definition of AWS::AIOps::InvestigationGroup Resource Type",
+  "resourceLink": {
+    "templateUri": "/cloudwatch/home?region=${awsRegion}#/investigations/configuration",
+    "mappings": {}
+  },
   "primaryIdentifier": [
     "/properties/Arn"
   ],

@@ -459,7 +459,7 @@
       "type": "string"
     },
     "PreSharedKeyStorage": {
-      "description": "",
+      "description": "Describes the storage location for an instance store-backed AMI.",
       "type": "string",
       "enum": [
         "Standard",

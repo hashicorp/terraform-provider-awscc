@@ -158,6 +158,11 @@
     "IamInstanceProfileSpecification": {
       "type": "object",
       "properties": {
+        "Arn": {
+          "type": "string",
+          "pattern": "^arn:.*",
+          "maxLength": 2048
+        },
         "Name": {
           "type": "string",
           "maxLength": 64
@@ -184,10 +189,6 @@
     "SpotMarketOptions": {
       "type": "object",
       "properties": {
-        "BlockDurationMinutes": {
-          "type": "integer",
-          "minimum": 0
-        },
         "InstanceInterruptionBehavior": {
           "type": "string",
           "enum": [
@@ -208,7 +209,7 @@
         },
         "ValidUntilUtc": {
           "type": "string",
-          "format": "date-time"
+          "maxLength": 64
         }
       },
       "additionalProperties": false
@@ -413,9 +414,16 @@
           "type": "string",
           "pattern": "^[a-z]{2}-[a-z]+-\\d[a-z](-[a-z0-9]+)?$"
         },
+        "GroupId": {
+          "type": "string",
+          "pattern": "^pg-[0-9a-zA-Z]{1,63}$"
+        },
         "GroupName": {
           "type": "string",
           "maxLength": 255
+        },
+        "PartitionNumber": {
+          "type": "integer"
         },
         "Tenancy": {
           "type": "string",
@@ -489,6 +497,9 @@
             "$ref": "#/definitions/BlockDeviceMapping"
           }
         },
+        "CapacityReservationSpecification": {
+          "$ref": "#/definitions/CapacityReservationSpecification"
+        },
         "CpuOptions": {
           "$ref": "#/definitions/CpuOptionsRequest"
         },
@@ -499,6 +510,9 @@
           "type": "boolean"
         },
         "EbsOptimized": {
+          "type": "boolean"
+        },
+        "EnablePrimaryIpv6": {
           "type": "boolean"
         },
         "EnclaveOptions": {
@@ -514,13 +528,26 @@
           "type": "string",
           "pattern": "^ami-[0-9a-zA-Z]{1,63}$"
         },
+        "InstanceMarketOptions": {
+          "$ref": "#/definitions/InstanceMarketOptionsRequest"
+        },
         "InstanceType": {
           "type": "string",
           "pattern": "^([a-z0-9-]+)\\.([a-z0-9]+)$"
         },
+        "Ipv6AddressCount": {
+          "type": "integer",
+          "minimum": 0
+        },
         "KeyName": {
           "type": "string",
           "maxLength": 64
+        },
+        "LicenseSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LicenseConfigurationRequest"
+          }
         },
         "MaintenanceOptions": {
           "$ref": "#/definitions/InstanceMaintenanceOptionsRequest"
@@ -545,6 +572,10 @@
         },
         "PrivateDnsNameOptions": {
           "$ref": "#/definitions/PrivateDnsNameOptionsRequest"
+        },
+        "SubnetId": {
+          "type": "string",
+          "pattern": "^subnet-[0-9a-zA-Z]{1,63}$"
         },
         "TagSpecifications": {
           "type": "array",

@@ -794,6 +794,13 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ses_mail_manager_rule_sets -cftype AWS::SES::MailManagerRuleSet -package ses ../aws/ses/mail_manager_rule_set_plural_data_source_gen.go ../aws/ses/mail_manager_rule_set_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ses_mail_manager_traffic_policies -cftype AWS::SES::MailManagerTrafficPolicy -package ses ../aws/ses/mail_manager_traffic_policy_plural_data_source_gen.go ../aws/ses/mail_manager_traffic_policy_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ses_templates -cftype AWS::SES::Template -package ses ../aws/ses/template_plural_data_source_gen.go ../aws/ses/template_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_smsvoice_configuration_sets -cftype AWS::SMSVOICE::ConfigurationSet -package smsvoice ../aws/smsvoice/configuration_set_plural_data_source_gen.go ../aws/smsvoice/configuration_set_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_smsvoice_opt_out_lists -cftype AWS::SMSVOICE::OptOutList -package smsvoice ../aws/smsvoice/opt_out_list_plural_data_source_gen.go ../aws/smsvoice/opt_out_list_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_smsvoice_phone_numbers -cftype AWS::SMSVOICE::PhoneNumber -package smsvoice ../aws/smsvoice/phone_number_plural_data_source_gen.go ../aws/smsvoice/phone_number_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_smsvoice_pools -cftype AWS::SMSVOICE::Pool -package smsvoice ../aws/smsvoice/pool_plural_data_source_gen.go ../aws/smsvoice/pool_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_smsvoice_protect_configurations -cftype AWS::SMSVOICE::ProtectConfiguration -package smsvoice ../aws/smsvoice/protect_configuration_plural_data_source_gen.go ../aws/smsvoice/protect_configuration_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_smsvoice_resource_policies -cftype AWS::SMSVOICE::ResourcePolicy -package smsvoice ../aws/smsvoice/resource_policy_plural_data_source_gen.go ../aws/smsvoice/resource_policy_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_smsvoice_sender_ids -cftype AWS::SMSVOICE::SenderId -package smsvoice ../aws/smsvoice/sender_id_plural_data_source_gen.go ../aws/smsvoice/sender_id_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_sns_subscriptions -cftype AWS::SNS::Subscription -package sns ../aws/sns/subscription_plural_data_source_gen.go ../aws/sns/subscription_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_sns_topics -cftype AWS::SNS::Topic -package sns ../aws/sns/topic_plural_data_source_gen.go ../aws/sns/topic_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_sqs_queues -cftype AWS::SQS::Queue -package sqs ../aws/sqs/queue_plural_data_source_gen.go ../aws/sqs/queue_plural_data_source_gen_test.go
@@ -1132,6 +1139,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/shield"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/signer"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/simspaceweaver"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/smsvoice"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/sns"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/sqs"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssm"
