@@ -1,0 +1,191 @@
+{
+  "typeName": "AWS::SMSVOICE::ProtectConfiguration",
+  "description": "Resource Type definition for AWS::SMSVOICE::ProtectConfiguration",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resoource-providers-smsvoice.git",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "CountryRule": {
+      "type": "object",
+      "properties": {
+        "CountryCode": {
+          "description": "The two-letter ISO country code",
+          "type": "string",
+          "pattern": "^[A-Z]{2}$"
+        },
+        "ProtectStatus": {
+          "description": "The types of protection that can be used.",
+          "type": "string",
+          "enum": [
+            "ALLOW",
+            "BLOCK",
+            "MONITOR",
+            "FILTER"
+          ]
+        }
+      },
+      "required": [
+        "CountryCode",
+        "ProtectStatus"
+      ],
+      "additionalProperties": false
+    },
+    "CountryRuleSet": {
+      "type": "object",
+      "properties": {
+        "SMS": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CountryRule"
+          },
+          "uniqueItems": true,
+          "insertionOrder": false
+        },
+        "VOICE": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CountryRule"
+          },
+          "uniqueItems": true,
+          "insertionOrder": false
+        },
+        "MMS": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CountryRule"
+          },
+          "uniqueItems": true,
+          "insertionOrder": false
+        }
+      },
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "required": [
+            "SMS"
+          ]
+        },
+        {
+          "required": [
+            "VOICE"
+          ]
+        },
+        {
+          "required": [
+            "MMS"
+          ]
+        }
+      ]
+    }
+  },
+  "properties": {
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) of the protect configuration.",
+      "type": "string"
+    },
+    "ProtectConfigurationId": {
+      "description": "The unique identifier for the protect configuration.",
+      "type": "string"
+    },
+    "CountryRuleSet": {
+      "description": "An array of CountryRule containing the rules for the NumberCapability.",
+      "$ref": "#/definitions/CountryRuleSet"
+    },
+    "DeletionProtectionEnabled": {
+      "description": "When set to true deletion protection is enabled and protect configuration cannot be deleted. By default this is set to false.",
+      "type": "boolean"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/ProtectConfigurationId"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/ProtectConfigurationId"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "sms-voice:UntagResource",
+      "sms-voice:TagResource",
+      "sms-voice:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "sms-voice:CreateProtectConfiguration",
+        "sms-voice:UpdateProtectConfigurationCountryRuleSet",
+        "sms-voice:DescribeProtectConfigurations",
+        "sms-voice:GetProtectConfigurationCountryRuleSet",
+        "sms-voice:TagResource",
+        "sms-voice:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "sms-voice:DescribeProtectConfigurations",
+        "sms-voice:GetProtectConfigurationCountryRuleSet",
+        "sms-voice:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "sms-voice:DescribeProtectConfigurations",
+        "sms-voice:GetProtectConfigurationCountryRuleSet",
+        "sms-voice:UpdateProtectConfiguration",
+        "sms-voice:UpdateProtectConfigurationCountryRuleSet",
+        "sms-voice:UntagResource",
+        "sms-voice:TagResource",
+        "sms-voice:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "sms-voice:DeleteProtectConfiguration",
+        "sms-voice:DescribeProtectConfigurations"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "sms-voice:DescribeProtectConfigurations",
+        "sms-voice:GetProtectConfigurationCountryRuleSet"
+      ]
+    }
+  }
+}

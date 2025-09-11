@@ -1040,6 +1040,13 @@
 //go:generate go run generators/resource/main.go -resource awscc_ses_mail_manager_traffic_policy -cfschema ../service/cloudformation/schemas/AWS_SES_MailManagerTrafficPolicy.json -package ses -- ../aws/ses/mail_manager_traffic_policy_resource_gen.go ../aws/ses/mail_manager_traffic_policy_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ses_template -cfschema ../service/cloudformation/schemas/AWS_SES_Template.json -package ses -- ../aws/ses/template_resource_gen.go ../aws/ses/template_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ses_vdm_attributes -cfschema ../service/cloudformation/schemas/AWS_SES_VdmAttributes.json -package ses -- ../aws/ses/vdm_attributes_resource_gen.go ../aws/ses/vdm_attributes_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_smsvoice_configuration_set -cfschema ../service/cloudformation/schemas/AWS_SMSVOICE_ConfigurationSet.json -package smsvoice -- ../aws/smsvoice/configuration_set_resource_gen.go ../aws/smsvoice/configuration_set_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_smsvoice_opt_out_list -cfschema ../service/cloudformation/schemas/AWS_SMSVOICE_OptOutList.json -package smsvoice -- ../aws/smsvoice/opt_out_list_resource_gen.go ../aws/smsvoice/opt_out_list_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_smsvoice_phone_number -cfschema ../service/cloudformation/schemas/AWS_SMSVOICE_PhoneNumber.json -package smsvoice -- ../aws/smsvoice/phone_number_resource_gen.go ../aws/smsvoice/phone_number_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_smsvoice_pool -cfschema ../service/cloudformation/schemas/AWS_SMSVOICE_Pool.json -package smsvoice -- ../aws/smsvoice/pool_resource_gen.go ../aws/smsvoice/pool_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_smsvoice_protect_configuration -cfschema ../service/cloudformation/schemas/AWS_SMSVOICE_ProtectConfiguration.json -package smsvoice -- ../aws/smsvoice/protect_configuration_resource_gen.go ../aws/smsvoice/protect_configuration_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_smsvoice_resource_policy -cfschema ../service/cloudformation/schemas/AWS_SMSVOICE_ResourcePolicy.json -package smsvoice -- ../aws/smsvoice/resource_policy_resource_gen.go ../aws/smsvoice/resource_policy_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_smsvoice_sender_id -cfschema ../service/cloudformation/schemas/AWS_SMSVOICE_SenderId.json -package smsvoice -- ../aws/smsvoice/sender_id_resource_gen.go ../aws/smsvoice/sender_id_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_sns_subscription -cfschema ../service/cloudformation/schemas/AWS_SNS_Subscription.json -package sns -- ../aws/sns/subscription_resource_gen.go ../aws/sns/subscription_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_sns_topic -cfschema ../service/cloudformation/schemas/AWS_SNS_Topic.json -package sns -- ../aws/sns/topic_resource_gen.go ../aws/sns/topic_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_sns_topic_inline_policy -cfschema ../service/cloudformation/schemas/AWS_SNS_TopicInlinePolicy.json -package sns -- ../aws/sns/topic_inline_policy_resource_gen.go ../aws/sns/topic_inline_policy_resource_gen_test.go
@@ -1422,6 +1429,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/shield"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/signer"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/simspaceweaver"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/smsvoice"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/sns"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/sqs"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssm"

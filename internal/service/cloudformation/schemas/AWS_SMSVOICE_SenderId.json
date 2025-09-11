@@ -1,0 +1,124 @@
+{
+  "typeName": "AWS::SMSVOICE::SenderId",
+  "description": "Resource Type definition for AWS::SMSVOICE::SenderId",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resoource-providers-smsvoice.git",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) associated with the SenderId.",
+      "type": "string"
+    },
+    "IsoCountryCode": {
+      "description": "The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.",
+      "type": "string",
+      "pattern": "^[A-Z]{2}$"
+    },
+    "SenderId": {
+      "description": "The sender ID string to request.",
+      "type": "string",
+      "pattern": "^[A-Z0-9_-]+$"
+    },
+    "DeletionProtectionEnabled": {
+      "description": "When set to true the sender ID can't be deleted. By default this is set to false.",
+      "type": "boolean"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "IsoCountryCode",
+    "SenderId"
+  ],
+  "primaryIdentifier": [
+    "/properties/IsoCountryCode",
+    "/properties/SenderId"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/IsoCountryCode",
+    "/properties/SenderId"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "sms-voice:UntagResource",
+      "sms-voice:TagResource",
+      "sms-voice:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "sms-voice:RequestSenderId",
+        "sms-voice:DescribeSenderIds",
+        "sms-voice:UpdateSenderId",
+        "sms-voice:TagResource",
+        "sms-voice:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "sms-voice:DescribeSenderIds",
+        "sms-voice:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "sms-voice:DescribeSenderIds",
+        "sms-voice:UpdateSenderId",
+        "sms-voice:UntagResource",
+        "sms-voice:TagResource",
+        "sms-voice:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "sms-voice:ReleaseSenderId",
+        "sms-voice:DescribeSenderIds"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "sms-voice:DescribeSenderIds"
+      ]
+    }
+  }
+}
