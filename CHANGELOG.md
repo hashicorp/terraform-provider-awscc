@@ -4,6 +4,28 @@ FEATURES:
 
 * provider: Add [Resource Identity](https://developer.hashicorp.com/terraform/plugin/framework/resources/identity) support. ([#2373](https://github.com/hashicorp/terraform-provider-awscc/pull/2373))
 
+* **New Data Source:** `awscc_smsvoice_configuration_set`
+* **New Data Source:** `awscc_smsvoice_configuration_sets`
+* **New Data Source:** `awscc_smsvoice_opt_out_list`
+* **New Data Source:** `awscc_smsvoice_opt_out_lists`
+* **New Data Source:** `awscc_smsvoice_phone_number`
+* **New Data Source:** `awscc_smsvoice_phone_numbers`
+* **New Data Source:** `awscc_smsvoice_pool`
+* **New Data Source:** `awscc_smsvoice_pools`
+* **New Data Source:** `awscc_smsvoice_protect_configuration`
+* **New Data Source:** `awscc_smsvoice_protect_configurations`
+* **New Data Source:** `awscc_smsvoice_resource_policies`
+* **New Data Source:** `awscc_smsvoice_resource_policy`
+* **New Data Source:** `awscc_smsvoice_sender_id`
+* **New Data Source:** `awscc_smsvoice_sender_ids`
+* **New Resource:** `awscc_smsvoice_configuration_set`
+* **New Resource:** `awscc_smsvoice_opt_out_list`
+* **New Resource:** `awscc_smsvoice_phone_number`
+* **New Resource:** `awscc_smsvoice_pool`
+* **New Resource:** `awscc_smsvoice_protect_configuration`
+* **New Resource:** `awscc_smsvoice_resource_policy`
+* **New Resource:** `awscc_smsvoice_sender_id`
+
 ## 1.55.0 (September 4, 2025)
 
 FEATURES:
