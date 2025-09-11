@@ -580,30 +580,6 @@
         "failover"
       ]
     },
-    "HealthCheckIds": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "RecordNames": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "Regions": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "HostedZoneIds": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
     "KubernetesResourceType": {
       "type": "object",
       "properties": {
@@ -967,13 +943,37 @@
       },
       "additionalProperties": false
     },
-    "Route53HealthChecks": {
+    "HealthChecks": {
       "type": "array",
       "items": {
         "$ref": "#/definitions/HealthCheckState"
       },
       "maxItems": 2,
       "minItems": 2
+    },
+    "HealthCheckIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "HealthCheckRecordNames": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "HealthCheckRegions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "HostedZoneIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
   },
   "properties": {
@@ -1044,7 +1044,7 @@
       "type": "object",
       "patternProperties": {
         "": {
-          "$ref": "#/definitions/Route53HealthChecks"
+          "$ref": "#/definitions/HealthChecks"
         }
       },
       "additionalProperties": false
@@ -1056,10 +1056,10 @@
           "$ref": "#/definitions/HealthCheckIds"
         },
         "RecordNames": {
-          "$ref": "#/definitions/RecordNames"
+          "$ref": "#/definitions/HealthCheckRecordNames"
         },
         "Regions": {
-          "$ref": "#/definitions/Regions"
+          "$ref": "#/definitions/HealthCheckRegions"
         },
         "HostedZoneIds": {
           "$ref": "#/definitions/HostedZoneIds"

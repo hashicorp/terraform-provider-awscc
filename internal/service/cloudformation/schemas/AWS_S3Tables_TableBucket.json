@@ -118,6 +118,7 @@
         "s3tables:PutTableBucketEncryption",
         "s3tables:GetTableBucketMaintenanceConfiguration",
         "s3tables:GetTableBucketEncryption",
+        "s3tables:DeleteTableBucketEncryption",
         "s3tables:GetTableBucket",
         "kms:DescribeKey"
       ]
