@@ -127,6 +127,109 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: AutoScaling
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for autoscaling the SageMaker HyperPod cluster.",
+		//	  "properties": {
+		//	    "Mode": {
+		//	      "description": "The autoscaling mode for the cluster.",
+		//	      "enum": [
+		//	        "Enable",
+		//	        "Disable"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "AutoScalerType": {
+		//	      "description": "The type of autoscaler to use.",
+		//	      "enum": [
+		//	        "Karpenter"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Status": {
+		//	      "description": "The status of the autoscaling configuration.",
+		//	      "enum": [
+		//	        "InService",
+		//	        "Pending",
+		//	        "Failed"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"auto_scaling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Mode
+				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The autoscaling mode for the cluster.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"Enable",
+							"Disable",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AutoScalerType
+				"auto_scaler_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of autoscaler to use.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"Karpenter",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The status of the autoscaling configuration.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for autoscaling the SageMaker HyperPod cluster.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ClusterRole
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IAM role ARN for the cluster.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
+		//	  "type": "string"
+		//	}
+		"cluster_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IAM role ARN for the cluster.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceGroups
 		// CloudFormation resource type schema:
 		//
@@ -1571,7 +1674,12 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"alarm_name":                  "AlarmName",
 		"auto_rollback_configuration": "AutoRollbackConfiguration",
+		"auto_scaling":                "AutoScaling",
+		"auto_scaler_type":            "AutoScalerType",
+		"mode":                        "Mode",
+		"status":                      "Status",
 		"cluster_arn":                 "ClusterArn",
+		"cluster_role":                "ClusterRole",
 		"cluster_name":                "ClusterName",
 		"cluster_status":              "ClusterStatus",
 		"creation_time":               "CreationTime",
