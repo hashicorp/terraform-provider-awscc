@@ -1473,7 +1473,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	        "DomainArn": {
 		//	          "description": "The Amazon Resource Name (ARN) of the OpenSearch domain.",
 		//	          "maxLength": 2048,
-		//	          "pattern": "^arn:aws(|-cn|-us-gov|-iso):es:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:domain/[a-z][a-z0-9-]{3,28}$",
+		//	          "pattern": "^arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:es:([a-z]{2,}-){2,}\\d:\\d{12}:domain/[a-z][a-z0-9-]{3,28}$",
 		//	          "type": "string"
 		//	        },
 		//	        "DomainEndpoint": {
@@ -1972,7 +1972,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthAtMost(2048),
-								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(|-cn|-us-gov|-iso):es:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:domain/[a-z][a-z0-9-]{3,28}$"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:es:([a-z]{2,}-){2,}\\d:\\d{12}:domain/[a-z][a-z0-9-]{3,28}$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
