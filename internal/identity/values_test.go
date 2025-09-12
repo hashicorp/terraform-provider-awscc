@@ -4,6 +4,7 @@
 package identity
 
 import (
+	"context"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
@@ -49,7 +50,7 @@ func TestValueAsString(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
-			result := ValueAsString(nil, tt.input)
+			result := ValueAsString(context.TODO(), tt.input)
 			if result != tt.expected {
 				t.Fatalf("expected %q but got %q", tt.expected, result)
 			}
