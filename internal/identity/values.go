@@ -25,6 +25,8 @@ func ValueAsString(ctx context.Context, v attr.Value) string {
 		return fmt.Sprintf("%d", v.(types.Int64).ValueInt64())
 	case types.Int32Type:
 		return fmt.Sprintf("%d", v.(types.Int32).ValueInt32())
+	case types.NumberType:
+		return fmt.Sprintf("%v", v.(types.Number).ValueBigFloat())
 	case types.BoolType:
 		return fmt.Sprintf("%t", v.(types.Bool).ValueBool())
 	default:

@@ -5,6 +5,7 @@ package identity
 
 import (
 	"context"
+	"math/big"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
@@ -38,6 +39,11 @@ func TestValueAsString(t *testing.T) {
 			name:     "valid float64",
 			input:    types.Float64Value(3.14),
 			expected: "3.14",
+		},
+		{
+			name:     "valid number",
+			input:    types.NumberValue(big.NewFloat(3)),
+			expected: "3",
 		},
 		{
 			name:     "valid bool",
