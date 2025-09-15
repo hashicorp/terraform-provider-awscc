@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 # This file defines services that exist in AWS.
 # Services are inserted into this file when an exception to the normal identity generator process is necessary.
 
