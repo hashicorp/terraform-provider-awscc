@@ -480,32 +480,10 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 		pi = pi.AddRegionID()
 	}
 
-	for _, v := range pi {
-		if v.RequiredForImport {
-			var out types.String
-			response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v.Name), &out)...)
-			if response.Diagnostics.HasError() {
-				return
-			}
-
-			response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(v.Name), out.ValueString())...)
-			if response.Diagnostics.HasError() {
-				return
-			}
-		} else {
-			switch v.Name {
-			case identity.NameAccountID:
-				response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameAccountID), r.provider.AccountID(ctx))...)
-				if response.Diagnostics.HasError() {
-					return
-				}
-			case identity.NameRegion:
-				response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameRegion), r.provider.Region(ctx))...)
-				if response.Diagnostics.HasError() {
-					return
-				}
-			}
-		}
+	d := pi.SetIdentity(ctx, r.provider, &response.State, response.Identity)
+	response.Diagnostics.Append(d...)
+	if response.Diagnostics.HasError() {
+		return
 	}
 
 	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
@@ -590,32 +568,10 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 		pi = pi.AddRegionID()
 	}
 
-	for _, v := range pi {
-		if v.RequiredForImport {
-			var out types.String
-			response.Diagnostics.Append(response.State.GetAttribute(ctx, path.Root(v.Name), &out)...)
-			if response.Diagnostics.HasError() {
-				return
-			}
-
-			response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(v.Name), out.ValueString())...)
-			if response.Diagnostics.HasError() {
-				return
-			}
-		} else {
-			switch v.Name {
-			case identity.NameAccountID:
-				response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameAccountID), r.provider.AccountID(ctx))...)
-				if response.Diagnostics.HasError() {
-					return
-				}
-			case identity.NameRegion:
-				response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameRegion), r.provider.Region(ctx))...)
-				if response.Diagnostics.HasError() {
-					return
-				}
-			}
-		}
+	d := pi.SetIdentity(ctx, r.provider, &response.State, response.Identity)
+	response.Diagnostics.Append(d...)
+	if response.Diagnostics.HasError() {
+		return
 	}
 
 	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
