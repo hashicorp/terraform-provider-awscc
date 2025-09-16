@@ -418,6 +418,7 @@ func (p *ccProvider) Configure(ctx context.Context, request provider.ConfigureRe
 	p.providerData = providerData
 	response.DataSourceData = providerData
 	response.ResourceData = providerData
+	response.ListResourceData = providerData
 }
 
 func (p *ccProvider) Resources(ctx context.Context) []func() resource.Resource {
