@@ -480,8 +480,7 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 		pi = pi.AddRegionID()
 	}
 
-	d := pi.SetIdentity(ctx, r.provider, &response.State, response.Identity)
-	response.Diagnostics.Append(d...)
+	response.Diagnostics.Append(pi.SetIdentity(ctx, r.provider, &response.State, response.Identity)...)
 	if response.Diagnostics.HasError() {
 		return
 	}
@@ -568,8 +567,7 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 		pi = pi.AddRegionID()
 	}
 
-	d := pi.SetIdentity(ctx, r.provider, &response.State, response.Identity)
-	response.Diagnostics.Append(d...)
+	response.Diagnostics.Append(pi.SetIdentity(ctx, r.provider, &response.State, response.Identity)...)
 	if response.Diagnostics.HasError() {
 		return
 	}
