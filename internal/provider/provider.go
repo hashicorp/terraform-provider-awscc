@@ -17,6 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
+	"github.com/hashicorp/terraform-plugin-framework/list"
 	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/provider/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -465,6 +466,30 @@ func (p *ccProvider) DataSources(ctx context.Context) []func() datasource.DataSo
 	}
 
 	return dataSources
+}
+
+func (p *ccProvider) ListResources(ctx context.Context) []func() list.ListResource {
+	var diags diag.Diagnostics
+	listResources := make([]func() list.ListResource, 0)
+
+	for name, factory := range registry.ListResourceFactories() {
+		v, err := factory(ctx)
+
+		if err != nil {
+			diags.AddError(
+				"Error getting List Resource",
+				fmt.Sprintf("Error getting the %s List Resource, this is an error in the provider.\n%s\n", name, err),
+			)
+
+			continue
+		}
+
+		listResources = append(listResources, func() list.ListResource {
+			return v
+		})
+	}
+
+	return listResources
 }
 
 func newProviderData(ctx context.Context, c *configModel) (*providerData, diag.Diagnostics) {

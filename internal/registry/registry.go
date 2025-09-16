@@ -8,6 +8,7 @@ import (
 	"sync"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
+	"github.com/hashicorp/terraform-plugin-framework/list"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 )
 
@@ -18,6 +19,10 @@ var dataSourceRegistryMu sync.Mutex
 var resourceRegistrationClosed bool
 var resourceRegistry map[string]func(context.Context) (resource.Resource, error)
 var resourceRegistryMu sync.Mutex
+
+var listResourceRegistrationClosed bool
+var listResourceRegistry map[string]func(context.Context) (list.ListResource, error)
+var listResourceRegistryMu sync.Mutex
 
 // AddDataSourceFactory registers the specified data source type name and factory.
 func AddDataSourceFactory(name string, factory func(context.Context) (datasource.DataSource, error)) {
@@ -49,6 +54,20 @@ func AddResourceFactory(name string, factory func(context.Context) (resource.Res
 	resourceRegistry[name] = factory
 }
 
+func AddListResourceFactory(name string, factory func(context.Context) (list.ListResource, error)) {
+	listResourceRegistryMu.Lock()
+	defer listResourceRegistryMu.Unlock()
+
+	if listResourceRegistrationClosed {
+		panic("Resource registration is closed")
+	}
+
+	if listResourceRegistry == nil {
+		listResourceRegistry = make(map[string]func(context.Context) (list.ListResource, error))
+	}
+	listResourceRegistry[name] = factory
+}
+
 // DataSourceFactories returns the registered data source factories.
 // Data Source registration is closed.
 func DataSourceFactories() map[string]func(context.Context) (datasource.DataSource, error) {
@@ -69,4 +88,13 @@ func ResourceFactories() map[string]func(context.Context) (resource.Resource, er
 	resourceRegistrationClosed = true
 
 	return resourceRegistry
+}
+
+func ListResourceFactories() map[string]func(context.Context) (list.ListResource, error) {
+	listResourceRegistryMu.Lock()
+	defer listResourceRegistryMu.Unlock()
+
+	listResourceRegistrationClosed = true
+
+	return listResourceRegistry
 }
