@@ -294,14 +294,21 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 			continue
 		}
 
-		resources = append(resources, &ResourceData{
+		r := ResourceData{
 			CloudFormationTypeSchemaFile: cfResourceSchemaFilename,
 			GeneratedAccTestsFileName:    res + "_resource_gen_test",     // e.g. "log_group_resource_gen_test"
 			GeneratedCodeFileName:        res + "_resource_gen",          // e.g. "log_group_resource_gen"
 			GeneratedCodePackageName:     svc,                            // e.g. "logs"
 			GeneratedCodePathSuffix:      fmt.Sprintf("%s/%s", org, svc), // e.g. "aws/logs"
 			TerraformResourceType:        tfResourceTypeName,
-		})
+		}
+
+		// generate List resource if resource supports a plural data source
+		if !schema.SuppressPluralDataSourceGeneration {
+			r.GenerateListResource = true
+		}
+
+		resources = append(resources, &r)
 	}
 
 	dataSources := &DataSources{
@@ -406,6 +413,7 @@ type ResourceData struct {
 	GeneratedCodeFileName        string
 	GeneratedCodePackageName     string
 	GeneratedCodePathSuffix      string
+	GenerateListResource         bool
 	TerraformResourceType        string
 }
 
