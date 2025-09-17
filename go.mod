@@ -15,11 +15,11 @@ require (
 	github.com/hashicorp/cli v1.1.7
 	github.com/hashicorp/go-hclog v1.6.3
 	github.com/hashicorp/hcl/v2 v2.24.0
-	github.com/hashicorp/terraform-plugin-framework v1.16.0-beta.1.0.20250916190936-6af91641ed1e
+	github.com/hashicorp/terraform-plugin-framework v1.16.0
 	github.com/hashicorp/terraform-plugin-framework-jsontypes v0.2.0
 	github.com/hashicorp/terraform-plugin-framework-timetypes v0.5.0
 	github.com/hashicorp/terraform-plugin-framework-validators v0.18.0
-	github.com/hashicorp/terraform-plugin-go v0.29.0-beta.1.0.20250915194700-c3810b1245c0
+	github.com/hashicorp/terraform-plugin-go v0.29.0
 	github.com/hashicorp/terraform-plugin-log v0.9.0
 	github.com/hashicorp/terraform-plugin-testing v1.13.3
 	github.com/jinzhu/inflection v1.0.0
