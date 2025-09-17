@@ -1,9 +1,6 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-//go:build ignore
-// +build ignore
-
 package main
 
 import (
@@ -20,6 +17,7 @@ import (
 
 var (
 	cfTypeSchemaFile = flag.String("cfschema", "", "CloudFormation resource type schema file; required")
+	listResource     = flag.Bool("listresource", false, "generate a ListResource in addition to a Resource")
 	packageName      = flag.String("package", "", "override package name for generated code")
 	tfResourceType   = flag.String("resource", "", "Terraform resource type; required")
 )
@@ -52,7 +50,7 @@ func main() {
 
 	g := NewGenerator()
 
-	if err := g.Generate(destinationPackage, schemaFilename, acctestsFilename); err != nil {
+	if err := g.Generate(destinationPackage, schemaFilename, acctestsFilename, *listResource); err != nil {
 		g.Fatalf("error generating Terraform %s resource: %s", *tfResourceType, err)
 	}
 }
@@ -72,7 +70,7 @@ func NewGenerator() *Generator {
 }
 
 // Generate generates the resource's type factory into the specified file.
-func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename string) error {
+func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename string, generateListResource bool) error {
 	g.Infof("generating Terraform resource code for %[1]q from %[2]q into %[3]q and %[4]q", g.tfResourceType, g.cfTypeSchemaFile, schemaFilename, acctestsFilename)
 
 	templateData, err := shared.GenerateTemplateData(g.UI(), g.cfTypeSchemaFile, shared.ResourceType, g.tfResourceType, packageName)
@@ -89,6 +87,7 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 		}
 	}
 	templateData.PrimaryIdentifier = primaryIdentifier
+	templateData.GenerateListResource = generateListResource
 
 	d := g.NewGoFileDestination(schemaFilename)
 
