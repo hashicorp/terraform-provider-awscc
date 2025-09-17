@@ -26,20 +26,32 @@ type Identifier struct {
 
 type Identifiers []Identifier
 
-func (a Identifiers) AddAccountID() Identifiers {
+// AppendDefaults appends default identifiers based on whether the resource is global or regional.
+func (a Identifiers) AppendDefaults(isGlobal bool) Identifiers {
+	idSpec := a.appendAccountID()
+
+	if !isGlobal {
+		idSpec = idSpec.appendRegionID()
+	}
+
+	return idSpec
+}
+
+func (a Identifiers) appendAccountID() Identifiers {
 	return append(a, Identifier{
 		Name:        NameAccountID,
 		Description: "AWS Account where this resource is managed",
 	})
 }
 
-func (a Identifiers) AddRegionID() Identifiers {
+func (a Identifiers) appendRegionID() Identifiers {
 	return append(a, Identifier{
 		Name:        NameRegion,
 		Description: "Region where this resource is managed",
 	})
 }
 
+// IdentitySetter is an interface for setting identity attributes.
 type IdentitySetter interface {
 	GetAttribute(context.Context, path.Path, any) diag.Diagnostics
 	SetAttribute(context.Context, path.Path, any) diag.Diagnostics

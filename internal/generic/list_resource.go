@@ -25,6 +25,7 @@ import (
 
 var _ list.ListResource = &genericResource{}
 
+// NewListResource returns a new generic ListResource
 func NewListResource(resource func(context.Context) (resource.Resource, error)) func(context.Context) (list.ListResource, error) {
 	return func(ctx context.Context) (list.ListResource, error) {
 		res, err := resource(ctx)
@@ -118,10 +119,7 @@ func (r *genericResource) List(ctx context.Context, request list.ListRequest, st
 				return
 			}
 
-			pi := r.primaryIdentifier.AddAccountID()
-			if !r.isGlobal {
-				pi = pi.AddRegionID()
-			}
+			pi := r.primaryIdentifier.AppendDefaults(r.isGlobal)
 
 			result.Diagnostics.Append(pi.SetIdentity(ctx, r.provider, result.Resource, result.Identity)...)
 			if result.Diagnostics.HasError() {
