@@ -475,13 +475,9 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 	}
 
 	// set resource identity
-	pi := r.primaryIdentifier.AddAccountID()
-	if !r.isGlobal {
-		pi = pi.AddRegionID()
-	}
+	pi := r.primaryIdentifier.AppendDefaults(r.isGlobal)
 
-	d := pi.SetIdentity(ctx, r.provider, &response.State, response.Identity)
-	response.Diagnostics.Append(d...)
+	response.Diagnostics.Append(pi.SetIdentity(ctx, r.provider, &response.State, response.Identity)...)
 	if response.Diagnostics.HasError() {
 		return
 	}
@@ -563,13 +559,9 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 	}
 
 	// set resource identity
-	pi := r.primaryIdentifier.AddAccountID()
-	if !r.isGlobal {
-		pi = pi.AddRegionID()
-	}
+	pi := r.primaryIdentifier.AppendDefaults(r.isGlobal)
 
-	d := pi.SetIdentity(ctx, r.provider, &response.State, response.Identity)
-	response.Diagnostics.Append(d...)
+	response.Diagnostics.Append(pi.SetIdentity(ctx, r.provider, &response.State, response.Identity)...)
 	if response.Diagnostics.HasError() {
 		return
 	}
@@ -736,12 +728,7 @@ func (r *genericResource) Delete(ctx context.Context, request resource.DeleteReq
 
 func (r *genericResource) IdentitySchema(_ context.Context, _ resource.IdentitySchemaRequest, response *resource.IdentitySchemaResponse) {
 	// add accountID identity
-	pi := r.primaryIdentifier.AddAccountID()
-
-	if !r.isGlobal {
-		pi = pi.AddRegionID()
-	}
-
+	pi := r.primaryIdentifier.AppendDefaults(r.isGlobal)
 	identitySchemaAttributes := make(map[string]identityschema.Attribute)
 	for _, v := range pi {
 		ident := identityschema.StringAttribute{
@@ -780,11 +767,7 @@ func (r *genericResource) ImportState(ctx context.Context, request resource.Impo
 	}
 
 	// add accountID identity
-	pi := r.primaryIdentifier.AddAccountID()
-	if !r.isGlobal {
-		pi = pi.AddRegionID()
-	}
-
+	pi := r.primaryIdentifier.AppendDefaults(r.isGlobal)
 	var identifier []string
 	var accountID, region types.String
 	for _, v := range pi {
