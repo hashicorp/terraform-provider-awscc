@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_timestream_table", tableResource)
+	registry.AddListResourceFactory("awscc_timestream_table", generic.NewListResource(tableResource))
 }
 
 // tableResource returns the Terraform awscc_timestream_table resource.

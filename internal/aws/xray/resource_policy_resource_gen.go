@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_xray_resource_policy", resourcePolicyResource)
+	registry.AddListResourceFactory("awscc_xray_resource_policy", generic.NewListResource(resourcePolicyResource))
 }
 
 // resourcePolicyResource returns the Terraform awscc_xray_resource_policy resource.

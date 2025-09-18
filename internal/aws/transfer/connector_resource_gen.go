@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_transfer_connector", connectorResource)
+	registry.AddListResourceFactory("awscc_transfer_connector", generic.NewListResource(connectorResource))
 }
 
 // connectorResource returns the Terraform awscc_transfer_connector resource.

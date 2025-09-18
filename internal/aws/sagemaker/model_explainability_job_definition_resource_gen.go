@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_model_explainability_job_definition", modelExplainabilityJobDefinitionResource)
+	registry.AddListResourceFactory("awscc_sagemaker_model_explainability_job_definition", generic.NewListResource(modelExplainabilityJobDefinitionResource))
 }
 
 // modelExplainabilityJobDefinitionResource returns the Terraform awscc_sagemaker_model_explainability_job_definition resource.

@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_securityhub_policy_association", policyAssociationResource)
+	registry.AddListResourceFactory("awscc_securityhub_policy_association", generic.NewListResource(policyAssociationResource))
 }
 
 // policyAssociationResource returns the Terraform awscc_securityhub_policy_association resource.

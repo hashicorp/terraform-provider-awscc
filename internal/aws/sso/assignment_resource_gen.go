@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sso_assignment", assignmentResource)
+	registry.AddListResourceFactory("awscc_sso_assignment", generic.NewListResource(assignmentResource))
 }
 
 // assignmentResource returns the Terraform awscc_sso_assignment resource.

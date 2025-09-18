@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_dms_replication_config", replicationConfigResource)
+	registry.AddListResourceFactory("awscc_dms_replication_config", generic.NewListResource(replicationConfigResource))
 }
 
 // replicationConfigResource returns the Terraform awscc_dms_replication_config resource.

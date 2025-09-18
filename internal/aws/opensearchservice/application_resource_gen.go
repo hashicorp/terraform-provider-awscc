@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_opensearchservice_application", applicationResource)
+	registry.AddListResourceFactory("awscc_opensearchservice_application", generic.NewListResource(applicationResource))
 }
 
 // applicationResource returns the Terraform awscc_opensearchservice_application resource.

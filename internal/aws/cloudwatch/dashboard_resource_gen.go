@@ -19,6 +19,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudwatch_dashboard", dashboardResource)
+	registry.AddListResourceFactory("awscc_cloudwatch_dashboard", generic.NewListResource(dashboardResource))
 }
 
 // dashboardResource returns the Terraform awscc_cloudwatch_dashboard resource.

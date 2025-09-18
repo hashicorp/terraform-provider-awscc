@@ -33,6 +33,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudfront_distribution", distributionResource)
+	registry.AddListResourceFactory("awscc_cloudfront_distribution", generic.NewListResource(distributionResource))
 }
 
 // distributionResource returns the Terraform awscc_cloudfront_distribution resource.

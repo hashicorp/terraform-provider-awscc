@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_route53resolver_resolver_query_logging_config", resolverQueryLoggingConfigResource)
+	registry.AddListResourceFactory("awscc_route53resolver_resolver_query_logging_config", generic.NewListResource(resolverQueryLoggingConfigResource))
 }
 
 // resolverQueryLoggingConfigResource returns the Terraform awscc_route53resolver_resolver_query_logging_config resource.

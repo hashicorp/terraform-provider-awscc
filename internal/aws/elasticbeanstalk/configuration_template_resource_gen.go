@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_elasticbeanstalk_configuration_template", configurationTemplateResource)
+	registry.AddListResourceFactory("awscc_elasticbeanstalk_configuration_template", generic.NewListResource(configurationTemplateResource))
 }
 
 // configurationTemplateResource returns the Terraform awscc_elasticbeanstalk_configuration_template resource.

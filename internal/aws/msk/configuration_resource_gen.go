@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_msk_configuration", configurationResource)
+	registry.AddListResourceFactory("awscc_msk_configuration", generic.NewListResource(configurationResource))
 }
 
 // configurationResource returns the Terraform awscc_msk_configuration resource.

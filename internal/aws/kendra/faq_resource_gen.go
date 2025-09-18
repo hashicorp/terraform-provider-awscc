@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_kendra_faq", faqResource)
+	registry.AddListResourceFactory("awscc_kendra_faq", generic.NewListResource(faqResource))
 }
 
 // faqResource returns the Terraform awscc_kendra_faq resource.

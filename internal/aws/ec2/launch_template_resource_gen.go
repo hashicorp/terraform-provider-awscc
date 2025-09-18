@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_launch_template", launchTemplateResource)
+	registry.AddListResourceFactory("awscc_ec2_launch_template", generic.NewListResource(launchTemplateResource))
 }
 
 // launchTemplateResource returns the Terraform awscc_ec2_launch_template resource.

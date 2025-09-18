@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_resourcegroups_tag_sync_task", tagSyncTaskResource)
+	registry.AddListResourceFactory("awscc_resourcegroups_tag_sync_task", generic.NewListResource(tagSyncTaskResource))
 }
 
 // tagSyncTaskResource returns the Terraform awscc_resourcegroups_tag_sync_task resource.

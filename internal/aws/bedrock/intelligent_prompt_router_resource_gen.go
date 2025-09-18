@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_bedrock_intelligent_prompt_router", intelligentPromptRouterResource)
+	registry.AddListResourceFactory("awscc_bedrock_intelligent_prompt_router", generic.NewListResource(intelligentPromptRouterResource))
 }
 
 // intelligentPromptRouterResource returns the Terraform awscc_bedrock_intelligent_prompt_router resource.

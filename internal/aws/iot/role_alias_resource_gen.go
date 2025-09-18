@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iot_role_alias", roleAliasResource)
+	registry.AddListResourceFactory("awscc_iot_role_alias", generic.NewListResource(roleAliasResource))
 }
 
 // roleAliasResource returns the Terraform awscc_iot_role_alias resource.

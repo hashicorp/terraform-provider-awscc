@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_shield_proactive_engagement", proactiveEngagementResource)
+	registry.AddListResourceFactory("awscc_shield_proactive_engagement", generic.NewListResource(proactiveEngagementResource))
 }
 
 // proactiveEngagementResource returns the Terraform awscc_shield_proactive_engagement resource.

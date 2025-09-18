@@ -34,6 +34,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_applicationsignals_service_level_objective", serviceLevelObjectiveResource)
+	registry.AddListResourceFactory("awscc_applicationsignals_service_level_objective", generic.NewListResource(serviceLevelObjectiveResource))
 }
 
 // serviceLevelObjectiveResource returns the Terraform awscc_applicationsignals_service_level_objective resource.

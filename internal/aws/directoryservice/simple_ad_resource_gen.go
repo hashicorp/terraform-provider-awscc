@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_directoryservice_simple_ad", simpleADResource)
+	registry.AddListResourceFactory("awscc_directoryservice_simple_ad", generic.NewListResource(simpleADResource))
 }
 
 // simpleADResource returns the Terraform awscc_directoryservice_simple_ad resource.

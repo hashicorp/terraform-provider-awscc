@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_rds_global_cluster", globalClusterResource)
+	registry.AddListResourceFactory("awscc_rds_global_cluster", generic.NewListResource(globalClusterResource))
 }
 
 // globalClusterResource returns the Terraform awscc_rds_global_cluster resource.

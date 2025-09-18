@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_internetmonitor_monitor", monitorResource)
+	registry.AddListResourceFactory("awscc_internetmonitor_monitor", generic.NewListResource(monitorResource))
 }
 
 // monitorResource returns the Terraform awscc_internetmonitor_monitor resource.

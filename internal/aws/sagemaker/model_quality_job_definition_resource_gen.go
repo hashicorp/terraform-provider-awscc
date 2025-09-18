@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_model_quality_job_definition", modelQualityJobDefinitionResource)
+	registry.AddListResourceFactory("awscc_sagemaker_model_quality_job_definition", generic.NewListResource(modelQualityJobDefinitionResource))
 }
 
 // modelQualityJobDefinitionResource returns the Terraform awscc_sagemaker_model_quality_job_definition resource.

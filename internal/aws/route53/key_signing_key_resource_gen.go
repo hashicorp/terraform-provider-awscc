@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_route53_key_signing_key", keySigningKeyResource)
+	registry.AddListResourceFactory("awscc_route53_key_signing_key", generic.NewListResource(keySigningKeyResource))
 }
 
 // keySigningKeyResource returns the Terraform awscc_route53_key_signing_key resource.

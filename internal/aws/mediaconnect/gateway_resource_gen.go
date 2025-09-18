@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_mediaconnect_gateway", gatewayResource)
+	registry.AddListResourceFactory("awscc_mediaconnect_gateway", generic.NewListResource(gatewayResource))
 }
 
 // gatewayResource returns the Terraform awscc_mediaconnect_gateway resource.

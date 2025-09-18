@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ram_resource_share", resourceShareResource)
+	registry.AddListResourceFactory("awscc_ram_resource_share", generic.NewListResource(resourceShareResource))
 }
 
 // resourceShareResource returns the Terraform awscc_ram_resource_share resource.

@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_quicksight_vpc_connection", vPCConnectionResource)
+	registry.AddListResourceFactory("awscc_quicksight_vpc_connection", generic.NewListResource(vPCConnectionResource))
 }
 
 // vPCConnectionResource returns the Terraform awscc_quicksight_vpc_connection resource.

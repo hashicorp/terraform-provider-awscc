@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_location_tracker_consumer", trackerConsumerResource)
+	registry.AddListResourceFactory("awscc_location_tracker_consumer", generic.NewListResource(trackerConsumerResource))
 }
 
 // trackerConsumerResource returns the Terraform awscc_location_tracker_consumer resource.

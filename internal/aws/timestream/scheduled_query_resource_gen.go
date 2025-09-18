@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_timestream_scheduled_query", scheduledQueryResource)
+	registry.AddListResourceFactory("awscc_timestream_scheduled_query", generic.NewListResource(scheduledQueryResource))
 }
 
 // scheduledQueryResource returns the Terraform awscc_timestream_scheduled_query resource.

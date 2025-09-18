@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_apigateway_usage_plan", usagePlanResource)
+	registry.AddListResourceFactory("awscc_apigateway_usage_plan", generic.NewListResource(usagePlanResource))
 }
 
 // usagePlanResource returns the Terraform awscc_apigateway_usage_plan resource.

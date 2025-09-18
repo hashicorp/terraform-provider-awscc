@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_host", hostResource)
+	registry.AddListResourceFactory("awscc_ec2_host", generic.NewListResource(hostResource))
 }
 
 // hostResource returns the Terraform awscc_ec2_host resource.

@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_securitylake_aws_log_source", awsLogSourceResource)
+	registry.AddListResourceFactory("awscc_securitylake_aws_log_source", generic.NewListResource(awsLogSourceResource))
 }
 
 // awsLogSourceResource returns the Terraform awscc_securitylake_aws_log_source resource.

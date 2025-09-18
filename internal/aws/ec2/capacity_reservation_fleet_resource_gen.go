@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_capacity_reservation_fleet", capacityReservationFleetResource)
+	registry.AddListResourceFactory("awscc_ec2_capacity_reservation_fleet", generic.NewListResource(capacityReservationFleetResource))
 }
 
 // capacityReservationFleetResource returns the Terraform awscc_ec2_capacity_reservation_fleet resource.

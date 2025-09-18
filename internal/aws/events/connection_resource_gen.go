@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_events_connection", connectionResource)
+	registry.AddListResourceFactory("awscc_events_connection", generic.NewListResource(connectionResource))
 }
 
 // connectionResource returns the Terraform awscc_events_connection resource.

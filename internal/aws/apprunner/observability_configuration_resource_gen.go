@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_apprunner_observability_configuration", observabilityConfigurationResource)
+	registry.AddListResourceFactory("awscc_apprunner_observability_configuration", generic.NewListResource(observabilityConfigurationResource))
 }
 
 // observabilityConfigurationResource returns the Terraform awscc_apprunner_observability_configuration resource.

@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ses_mail_manager_ingress_point", mailManagerIngressPointResource)
+	registry.AddListResourceFactory("awscc_ses_mail_manager_ingress_point", generic.NewListResource(mailManagerIngressPointResource))
 }
 
 // mailManagerIngressPointResource returns the Terraform awscc_ses_mail_manager_ingress_point resource.

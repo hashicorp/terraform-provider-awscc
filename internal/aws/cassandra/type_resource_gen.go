@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cassandra_type", typeResource)
+	registry.AddListResourceFactory("awscc_cassandra_type", generic.NewListResource(typeResource))
 }
 
 // typeResource returns the Terraform awscc_cassandra_type resource.

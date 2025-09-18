@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudtrail_event_data_store", eventDataStoreResource)
+	registry.AddListResourceFactory("awscc_cloudtrail_event_data_store", generic.NewListResource(eventDataStoreResource))
 }
 
 // eventDataStoreResource returns the Terraform awscc_cloudtrail_event_data_store resource.

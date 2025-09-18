@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_macie_session", sessionResource)
+	registry.AddListResourceFactory("awscc_macie_session", generic.NewListResource(sessionResource))
 }
 
 // sessionResource returns the Terraform awscc_macie_session resource.

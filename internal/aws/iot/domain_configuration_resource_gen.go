@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iot_domain_configuration", domainConfigurationResource)
+	registry.AddListResourceFactory("awscc_iot_domain_configuration", generic.NewListResource(domainConfigurationResource))
 }
 
 // domainConfigurationResource returns the Terraform awscc_iot_domain_configuration resource.

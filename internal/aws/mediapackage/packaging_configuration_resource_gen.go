@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_mediapackage_packaging_configuration", packagingConfigurationResource)
+	registry.AddListResourceFactory("awscc_mediapackage_packaging_configuration", generic.NewListResource(packagingConfigurationResource))
 }
 
 // packagingConfigurationResource returns the Terraform awscc_mediapackage_packaging_configuration resource.

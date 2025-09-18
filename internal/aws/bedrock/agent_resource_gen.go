@@ -34,6 +34,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_bedrock_agent", agentResource)
+	registry.AddListResourceFactory("awscc_bedrock_agent", generic.NewListResource(agentResource))
 }
 
 // agentResource returns the Terraform awscc_bedrock_agent resource.

@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iot_software_package", softwarePackageResource)
+	registry.AddListResourceFactory("awscc_iot_software_package", generic.NewListResource(softwarePackageResource))
 }
 
 // softwarePackageResource returns the Terraform awscc_iot_software_package resource.

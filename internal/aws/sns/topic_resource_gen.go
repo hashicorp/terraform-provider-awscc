@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sns_topic", topicResource)
+	registry.AddListResourceFactory("awscc_sns_topic", generic.NewListResource(topicResource))
 }
 
 // topicResource returns the Terraform awscc_sns_topic resource.

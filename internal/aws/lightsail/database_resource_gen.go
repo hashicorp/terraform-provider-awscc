@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lightsail_database", databaseResource)
+	registry.AddListResourceFactory("awscc_lightsail_database", generic.NewListResource(databaseResource))
 }
 
 // databaseResource returns the Terraform awscc_lightsail_database resource.

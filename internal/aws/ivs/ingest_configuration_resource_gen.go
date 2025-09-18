@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ivs_ingest_configuration", ingestConfigurationResource)
+	registry.AddListResourceFactory("awscc_ivs_ingest_configuration", generic.NewListResource(ingestConfigurationResource))
 }
 
 // ingestConfigurationResource returns the Terraform awscc_ivs_ingest_configuration resource.

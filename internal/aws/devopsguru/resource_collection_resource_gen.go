@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_devopsguru_resource_collection", resourceCollectionResource)
+	registry.AddListResourceFactory("awscc_devopsguru_resource_collection", generic.NewListResource(resourceCollectionResource))
 }
 
 // resourceCollectionResource returns the Terraform awscc_devopsguru_resource_collection resource.

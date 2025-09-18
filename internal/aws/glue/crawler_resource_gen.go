@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_glue_crawler", crawlerResource)
+	registry.AddListResourceFactory("awscc_glue_crawler", generic.NewListResource(crawlerResource))
 }
 
 // crawlerResource returns the Terraform awscc_glue_crawler resource.

@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_kafkaconnect_connector", connectorResource)
+	registry.AddListResourceFactory("awscc_kafkaconnect_connector", generic.NewListResource(connectorResource))
 }
 
 // connectorResource returns the Terraform awscc_kafkaconnect_connector resource.

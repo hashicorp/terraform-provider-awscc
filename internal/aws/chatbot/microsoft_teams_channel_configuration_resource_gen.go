@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_chatbot_microsoft_teams_channel_configuration", microsoftTeamsChannelConfigurationResource)
+	registry.AddListResourceFactory("awscc_chatbot_microsoft_teams_channel_configuration", generic.NewListResource(microsoftTeamsChannelConfigurationResource))
 }
 
 // microsoftTeamsChannelConfigurationResource returns the Terraform awscc_chatbot_microsoft_teams_channel_configuration resource.

@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_batch_scheduling_policy", schedulingPolicyResource)
+	registry.AddListResourceFactory("awscc_batch_scheduling_policy", generic.NewListResource(schedulingPolicyResource))
 }
 
 // schedulingPolicyResource returns the Terraform awscc_batch_scheduling_policy resource.

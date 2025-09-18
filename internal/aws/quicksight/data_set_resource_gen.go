@@ -33,6 +33,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_quicksight_data_set", dataSetResource)
+	registry.AddListResourceFactory("awscc_quicksight_data_set", generic.NewListResource(dataSetResource))
 }
 
 // dataSetResource returns the Terraform awscc_quicksight_data_set resource.

@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_quicksight_folder", folderResource)
+	registry.AddListResourceFactory("awscc_quicksight_folder", generic.NewListResource(folderResource))
 }
 
 // folderResource returns the Terraform awscc_quicksight_folder resource.

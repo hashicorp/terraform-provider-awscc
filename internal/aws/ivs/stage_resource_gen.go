@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ivs_stage", stageResource)
+	registry.AddListResourceFactory("awscc_ivs_stage", generic.NewListResource(stageResource))
 }
 
 // stageResource returns the Terraform awscc_ivs_stage resource.

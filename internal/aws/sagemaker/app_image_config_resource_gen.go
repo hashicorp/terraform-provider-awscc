@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_app_image_config", appImageConfigResource)
+	registry.AddListResourceFactory("awscc_sagemaker_app_image_config", generic.NewListResource(appImageConfigResource))
 }
 
 // appImageConfigResource returns the Terraform awscc_sagemaker_app_image_config resource.

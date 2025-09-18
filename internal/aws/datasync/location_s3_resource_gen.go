@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_datasync_location_s3", locationS3Resource)
+	registry.AddListResourceFactory("awscc_datasync_location_s3", generic.NewListResource(locationS3Resource))
 }
 
 // locationS3Resource returns the Terraform awscc_datasync_location_s3 resource.

@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_detective_organization_admin", organizationAdminResource)
+	registry.AddListResourceFactory("awscc_detective_organization_admin", generic.NewListResource(organizationAdminResource))
 }
 
 // organizationAdminResource returns the Terraform awscc_detective_organization_admin resource.

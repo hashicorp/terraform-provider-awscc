@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotwireless_partner_account", partnerAccountResource)
+	registry.AddListResourceFactory("awscc_iotwireless_partner_account", generic.NewListResource(partnerAccountResource))
 }
 
 // partnerAccountResource returns the Terraform awscc_iotwireless_partner_account resource.

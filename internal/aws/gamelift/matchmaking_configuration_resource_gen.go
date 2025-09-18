@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_gamelift_matchmaking_configuration", matchmakingConfigurationResource)
+	registry.AddListResourceFactory("awscc_gamelift_matchmaking_configuration", generic.NewListResource(matchmakingConfigurationResource))
 }
 
 // matchmakingConfigurationResource returns the Terraform awscc_gamelift_matchmaking_configuration resource.

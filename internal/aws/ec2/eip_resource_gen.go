@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_eip", eIPResource)
+	registry.AddListResourceFactory("awscc_ec2_eip", generic.NewListResource(eIPResource))
 }
 
 // eIPResource returns the Terraform awscc_ec2_eip resource.

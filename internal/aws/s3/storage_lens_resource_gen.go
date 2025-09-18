@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_s3_storage_lens", storageLensResource)
+	registry.AddListResourceFactory("awscc_s3_storage_lens", generic.NewListResource(storageLensResource))
 }
 
 // storageLensResource returns the Terraform awscc_s3_storage_lens resource.

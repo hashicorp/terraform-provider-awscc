@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_route53recoveryreadiness_cell", cellResource)
+	registry.AddListResourceFactory("awscc_route53recoveryreadiness_cell", generic.NewListResource(cellResource))
 }
 
 // cellResource returns the Terraform awscc_route53recoveryreadiness_cell resource.

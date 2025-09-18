@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ssm_association", associationResource)
+	registry.AddListResourceFactory("awscc_ssm_association", generic.NewListResource(associationResource))
 }
 
 // associationResource returns the Terraform awscc_ssm_association resource.

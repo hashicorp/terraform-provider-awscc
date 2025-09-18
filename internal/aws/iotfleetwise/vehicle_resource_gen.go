@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotfleetwise_vehicle", vehicleResource)
+	registry.AddListResourceFactory("awscc_iotfleetwise_vehicle", generic.NewListResource(vehicleResource))
 }
 
 // vehicleResource returns the Terraform awscc_iotfleetwise_vehicle resource.

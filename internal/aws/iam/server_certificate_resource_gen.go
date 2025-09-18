@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iam_server_certificate", serverCertificateResource)
+	registry.AddListResourceFactory("awscc_iam_server_certificate", generic.NewListResource(serverCertificateResource))
 }
 
 // serverCertificateResource returns the Terraform awscc_iam_server_certificate resource.

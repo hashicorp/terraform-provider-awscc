@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_kendraranking_execution_plan", executionPlanResource)
+	registry.AddListResourceFactory("awscc_kendraranking_execution_plan", generic.NewListResource(executionPlanResource))
 }
 
 // executionPlanResource returns the Terraform awscc_kendraranking_execution_plan resource.

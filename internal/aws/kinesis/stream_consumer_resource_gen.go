@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_kinesis_stream_consumer", streamConsumerResource)
+	registry.AddListResourceFactory("awscc_kinesis_stream_consumer", generic.NewListResource(streamConsumerResource))
 }
 
 // streamConsumerResource returns the Terraform awscc_kinesis_stream_consumer resource.

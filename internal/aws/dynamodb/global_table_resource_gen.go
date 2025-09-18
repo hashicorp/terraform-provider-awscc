@@ -33,6 +33,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_dynamodb_global_table", globalTableResource)
+	registry.AddListResourceFactory("awscc_dynamodb_global_table", generic.NewListResource(globalTableResource))
 }
 
 // globalTableResource returns the Terraform awscc_dynamodb_global_table resource.

@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_flow_log", flowLogResource)
+	registry.AddListResourceFactory("awscc_ec2_flow_log", generic.NewListResource(flowLogResource))
 }
 
 // flowLogResource returns the Terraform awscc_ec2_flow_log resource.

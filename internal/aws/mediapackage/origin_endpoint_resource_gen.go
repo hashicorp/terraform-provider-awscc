@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_mediapackage_origin_endpoint", originEndpointResource)
+	registry.AddListResourceFactory("awscc_mediapackage_origin_endpoint", generic.NewListResource(originEndpointResource))
 }
 
 // originEndpointResource returns the Terraform awscc_mediapackage_origin_endpoint resource.

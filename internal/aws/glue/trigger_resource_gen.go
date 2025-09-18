@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_glue_trigger", triggerResource)
+	registry.AddListResourceFactory("awscc_glue_trigger", generic.NewListResource(triggerResource))
 }
 
 // triggerResource returns the Terraform awscc_glue_trigger resource.

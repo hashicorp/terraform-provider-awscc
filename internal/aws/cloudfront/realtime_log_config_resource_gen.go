@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudfront_realtime_log_config", realtimeLogConfigResource)
+	registry.AddListResourceFactory("awscc_cloudfront_realtime_log_config", generic.NewListResource(realtimeLogConfigResource))
 }
 
 // realtimeLogConfigResource returns the Terraform awscc_cloudfront_realtime_log_config resource.

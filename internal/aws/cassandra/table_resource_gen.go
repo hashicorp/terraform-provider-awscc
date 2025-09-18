@@ -33,6 +33,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cassandra_table", tableResource)
+	registry.AddListResourceFactory("awscc_cassandra_table", generic.NewListResource(tableResource))
 }
 
 // tableResource returns the Terraform awscc_cassandra_table resource.

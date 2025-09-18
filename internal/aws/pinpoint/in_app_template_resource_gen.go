@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_pinpoint_in_app_template", inAppTemplateResource)
+	registry.AddListResourceFactory("awscc_pinpoint_in_app_template", generic.NewListResource(inAppTemplateResource))
 }
 
 // inAppTemplateResource returns the Terraform awscc_pinpoint_in_app_template resource.

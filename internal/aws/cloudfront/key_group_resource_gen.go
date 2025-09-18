@@ -20,6 +20,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudfront_key_group", keyGroupResource)
+	registry.AddListResourceFactory("awscc_cloudfront_key_group", generic.NewListResource(keyGroupResource))
 }
 
 // keyGroupResource returns the Terraform awscc_cloudfront_key_group resource.

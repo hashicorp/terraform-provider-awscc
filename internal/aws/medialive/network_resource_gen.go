@@ -21,6 +21,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_medialive_network", networkResource)
+	registry.AddListResourceFactory("awscc_medialive_network", generic.NewListResource(networkResource))
 }
 
 // networkResource returns the Terraform awscc_medialive_network resource.

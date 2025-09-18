@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_kendra_index", indexResource)
+	registry.AddListResourceFactory("awscc_kendra_index", generic.NewListResource(indexResource))
 }
 
 // indexResource returns the Terraform awscc_kendra_index resource.

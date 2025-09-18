@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_networkmanager_vpc_attachment", vpcAttachmentResource)
+	registry.AddListResourceFactory("awscc_networkmanager_vpc_attachment", generic.NewListResource(vpcAttachmentResource))
 }
 
 // vpcAttachmentResource returns the Terraform awscc_networkmanager_vpc_attachment resource.

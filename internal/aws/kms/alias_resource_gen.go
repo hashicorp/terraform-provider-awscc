@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_kms_alias", aliasResource)
+	registry.AddListResourceFactory("awscc_kms_alias", generic.NewListResource(aliasResource))
 }
 
 // aliasResource returns the Terraform awscc_kms_alias resource.

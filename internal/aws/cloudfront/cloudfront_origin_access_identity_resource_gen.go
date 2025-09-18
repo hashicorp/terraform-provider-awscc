@@ -19,6 +19,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudfront_cloudfront_origin_access_identity", cloudFrontOriginAccessIdentityResource)
+	registry.AddListResourceFactory("awscc_cloudfront_cloudfront_origin_access_identity", generic.NewListResource(cloudFrontOriginAccessIdentityResource))
 }
 
 // cloudFrontOriginAccessIdentityResource returns the Terraform awscc_cloudfront_cloudfront_origin_access_identity resource.

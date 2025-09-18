@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_securityhub_configuration_policy", configurationPolicyResource)
+	registry.AddListResourceFactory("awscc_securityhub_configuration_policy", generic.NewListResource(configurationPolicyResource))
 }
 
 // configurationPolicyResource returns the Terraform awscc_securityhub_configuration_policy resource.

@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_codebuild_fleet", fleetResource)
+	registry.AddListResourceFactory("awscc_codebuild_fleet", generic.NewListResource(fleetResource))
 }
 
 // fleetResource returns the Terraform awscc_codebuild_fleet resource.

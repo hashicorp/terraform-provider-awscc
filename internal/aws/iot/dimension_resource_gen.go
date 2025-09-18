@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iot_dimension", dimensionResource)
+	registry.AddListResourceFactory("awscc_iot_dimension", generic.NewListResource(dimensionResource))
 }
 
 // dimensionResource returns the Terraform awscc_iot_dimension resource.

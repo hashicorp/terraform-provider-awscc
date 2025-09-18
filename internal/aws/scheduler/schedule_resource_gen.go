@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_scheduler_schedule", scheduleResource)
+	registry.AddListResourceFactory("awscc_scheduler_schedule", generic.NewListResource(scheduleResource))
 }
 
 // scheduleResource returns the Terraform awscc_scheduler_schedule resource.

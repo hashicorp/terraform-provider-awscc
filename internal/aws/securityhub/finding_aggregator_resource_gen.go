@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_securityhub_finding_aggregator", findingAggregatorResource)
+	registry.AddListResourceFactory("awscc_securityhub_finding_aggregator", generic.NewListResource(findingAggregatorResource))
 }
 
 // findingAggregatorResource returns the Terraform awscc_securityhub_finding_aggregator resource.

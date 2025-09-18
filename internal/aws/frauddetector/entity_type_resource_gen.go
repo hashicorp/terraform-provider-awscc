@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_frauddetector_entity_type", entityTypeResource)
+	registry.AddListResourceFactory("awscc_frauddetector_entity_type", generic.NewListResource(entityTypeResource))
 }
 
 // entityTypeResource returns the Terraform awscc_frauddetector_entity_type resource.

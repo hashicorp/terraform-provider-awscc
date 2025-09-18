@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_m2_environment", environmentResource)
+	registry.AddListResourceFactory("awscc_m2_environment", generic.NewListResource(environmentResource))
 }
 
 // environmentResource returns the Terraform awscc_m2_environment resource.

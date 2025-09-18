@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_dms_data_migration", dataMigrationResource)
+	registry.AddListResourceFactory("awscc_dms_data_migration", generic.NewListResource(dataMigrationResource))
 }
 
 // dataMigrationResource returns the Terraform awscc_dms_data_migration resource.

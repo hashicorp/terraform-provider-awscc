@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_glue_job", jobResource)
+	registry.AddListResourceFactory("awscc_glue_job", generic.NewListResource(jobResource))
 }
 
 // jobResource returns the Terraform awscc_glue_job resource.

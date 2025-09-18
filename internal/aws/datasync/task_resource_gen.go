@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_datasync_task", taskResource)
+	registry.AddListResourceFactory("awscc_datasync_task", generic.NewListResource(taskResource))
 }
 
 // taskResource returns the Terraform awscc_datasync_task resource.

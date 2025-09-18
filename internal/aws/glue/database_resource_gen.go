@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_glue_database", databaseResource)
+	registry.AddListResourceFactory("awscc_glue_database", generic.NewListResource(databaseResource))
 }
 
 // databaseResource returns the Terraform awscc_glue_database resource.

@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_kinesisanalyticsv2_application", applicationResource)
+	registry.AddListResourceFactory("awscc_kinesisanalyticsv2_application", generic.NewListResource(applicationResource))
 }
 
 // applicationResource returns the Terraform awscc_kinesisanalyticsv2_application resource.

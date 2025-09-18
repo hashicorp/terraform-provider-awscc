@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_monitoring_schedule", monitoringScheduleResource)
+	registry.AddListResourceFactory("awscc_sagemaker_monitoring_schedule", generic.NewListResource(monitoringScheduleResource))
 }
 
 // monitoringScheduleResource returns the Terraform awscc_sagemaker_monitoring_schedule resource.

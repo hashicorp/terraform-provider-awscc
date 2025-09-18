@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_model_bias_job_definition", modelBiasJobDefinitionResource)
+	registry.AddListResourceFactory("awscc_sagemaker_model_bias_job_definition", generic.NewListResource(modelBiasJobDefinitionResource))
 }
 
 // modelBiasJobDefinitionResource returns the Terraform awscc_sagemaker_model_bias_job_definition resource.

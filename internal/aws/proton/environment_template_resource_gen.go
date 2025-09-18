@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_proton_environment_template", environmentTemplateResource)
+	registry.AddListResourceFactory("awscc_proton_environment_template", generic.NewListResource(environmentTemplateResource))
 }
 
 // environmentTemplateResource returns the Terraform awscc_proton_environment_template resource.

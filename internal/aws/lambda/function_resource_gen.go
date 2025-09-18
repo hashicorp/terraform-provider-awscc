@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lambda_function", functionResource)
+	registry.AddListResourceFactory("awscc_lambda_function", generic.NewListResource(functionResource))
 }
 
 // functionResource returns the Terraform awscc_lambda_function resource.

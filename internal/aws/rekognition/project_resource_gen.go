@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_rekognition_project", projectResource)
+	registry.AddListResourceFactory("awscc_rekognition_project", generic.NewListResource(projectResource))
 }
 
 // projectResource returns the Terraform awscc_rekognition_project resource.

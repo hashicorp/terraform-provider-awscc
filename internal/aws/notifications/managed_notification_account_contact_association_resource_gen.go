@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_notifications_managed_notification_account_contact_association", managedNotificationAccountContactAssociationResource)
+	registry.AddListResourceFactory("awscc_notifications_managed_notification_account_contact_association", generic.NewListResource(managedNotificationAccountContactAssociationResource))
 }
 
 // managedNotificationAccountContactAssociationResource returns the Terraform awscc_notifications_managed_notification_account_contact_association resource.

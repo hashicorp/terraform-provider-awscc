@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotfleethub_application", applicationResource)
+	registry.AddListResourceFactory("awscc_iotfleethub_application", generic.NewListResource(applicationResource))
 }
 
 // applicationResource returns the Terraform awscc_iotfleethub_application resource.

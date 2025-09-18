@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_route_server_endpoint", routeServerEndpointResource)
+	registry.AddListResourceFactory("awscc_ec2_route_server_endpoint", generic.NewListResource(routeServerEndpointResource))
 }
 
 // routeServerEndpointResource returns the Terraform awscc_ec2_route_server_endpoint resource.

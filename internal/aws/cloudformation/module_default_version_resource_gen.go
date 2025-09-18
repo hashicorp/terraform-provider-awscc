@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudformation_module_default_version", moduleDefaultVersionResource)
+	registry.AddListResourceFactory("awscc_cloudformation_module_default_version", generic.NewListResource(moduleDefaultVersionResource))
 }
 
 // moduleDefaultVersionResource returns the Terraform awscc_cloudformation_module_default_version resource.

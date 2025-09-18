@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_xray_transaction_search_config", transactionSearchConfigResource)
+	registry.AddListResourceFactory("awscc_xray_transaction_search_config", generic.NewListResource(transactionSearchConfigResource))
 }
 
 // transactionSearchConfigResource returns the Terraform awscc_xray_transaction_search_config resource.

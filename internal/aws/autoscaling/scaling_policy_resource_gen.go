@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_autoscaling_scaling_policy", scalingPolicyResource)
+	registry.AddListResourceFactory("awscc_autoscaling_scaling_policy", generic.NewListResource(scalingPolicyResource))
 }
 
 // scalingPolicyResource returns the Terraform awscc_autoscaling_scaling_policy resource.

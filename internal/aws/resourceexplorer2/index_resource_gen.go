@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_resourceexplorer2_index", indexResource)
+	registry.AddListResourceFactory("awscc_resourceexplorer2_index", generic.NewListResource(indexResource))
 }
 
 // indexResource returns the Terraform awscc_resourceexplorer2_index resource.

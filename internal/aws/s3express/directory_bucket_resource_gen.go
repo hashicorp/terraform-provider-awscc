@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_s3express_directory_bucket", directoryBucketResource)
+	registry.AddListResourceFactory("awscc_s3express_directory_bucket", generic.NewListResource(directoryBucketResource))
 }
 
 // directoryBucketResource returns the Terraform awscc_s3express_directory_bucket resource.

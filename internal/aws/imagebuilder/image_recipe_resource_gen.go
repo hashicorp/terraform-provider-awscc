@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_imagebuilder_image_recipe", imageRecipeResource)
+	registry.AddListResourceFactory("awscc_imagebuilder_image_recipe", generic.NewListResource(imageRecipeResource))
 }
 
 // imageRecipeResource returns the Terraform awscc_imagebuilder_image_recipe resource.

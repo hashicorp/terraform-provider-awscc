@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cognito_identity_pool", identityPoolResource)
+	registry.AddListResourceFactory("awscc_cognito_identity_pool", generic.NewListResource(identityPoolResource))
 }
 
 // identityPoolResource returns the Terraform awscc_cognito_identity_pool resource.

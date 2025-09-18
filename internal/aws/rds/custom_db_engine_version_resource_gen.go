@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_rds_custom_db_engine_version", customDBEngineVersionResource)
+	registry.AddListResourceFactory("awscc_rds_custom_db_engine_version", generic.NewListResource(customDBEngineVersionResource))
 }
 
 // customDBEngineVersionResource returns the Terraform awscc_rds_custom_db_engine_version resource.

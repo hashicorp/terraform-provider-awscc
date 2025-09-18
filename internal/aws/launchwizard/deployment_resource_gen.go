@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_launchwizard_deployment", deploymentResource)
+	registry.AddListResourceFactory("awscc_launchwizard_deployment", generic.NewListResource(deploymentResource))
 }
 
 // deploymentResource returns the Terraform awscc_launchwizard_deployment resource.

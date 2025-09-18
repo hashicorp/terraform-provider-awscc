@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_inspector_assessment_template", assessmentTemplateResource)
+	registry.AddListResourceFactory("awscc_inspector_assessment_template", generic.NewListResource(assessmentTemplateResource))
 }
 
 // assessmentTemplateResource returns the Terraform awscc_inspector_assessment_template resource.

@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_image", imageResource)
+	registry.AddListResourceFactory("awscc_sagemaker_image", generic.NewListResource(imageResource))
 }
 
 // imageResource returns the Terraform awscc_sagemaker_image resource.

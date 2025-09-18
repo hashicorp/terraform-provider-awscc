@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sso_instance", instanceResource)
+	registry.AddListResourceFactory("awscc_sso_instance", generic.NewListResource(instanceResource))
 }
 
 // instanceResource returns the Terraform awscc_sso_instance resource.

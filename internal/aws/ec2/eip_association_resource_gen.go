@@ -19,6 +19,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_eip_association", eIPAssociationResource)
+	registry.AddListResourceFactory("awscc_ec2_eip_association", generic.NewListResource(eIPAssociationResource))
 }
 
 // eIPAssociationResource returns the Terraform awscc_ec2_eip_association resource.

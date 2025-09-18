@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ses_email_identity", emailIdentityResource)
+	registry.AddListResourceFactory("awscc_ses_email_identity", generic.NewListResource(emailIdentityResource))
 }
 
 // emailIdentityResource returns the Terraform awscc_ses_email_identity resource.

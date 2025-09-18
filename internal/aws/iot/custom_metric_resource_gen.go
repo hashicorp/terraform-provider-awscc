@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iot_custom_metric", customMetricResource)
+	registry.AddListResourceFactory("awscc_iot_custom_metric", generic.NewListResource(customMetricResource))
 }
 
 // customMetricResource returns the Terraform awscc_iot_custom_metric resource.

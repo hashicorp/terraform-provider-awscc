@@ -19,6 +19,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_network_performance_metric_subscription", networkPerformanceMetricSubscriptionResource)
+	registry.AddListResourceFactory("awscc_ec2_network_performance_metric_subscription", generic.NewListResource(networkPerformanceMetricSubscriptionResource))
 }
 
 // networkPerformanceMetricSubscriptionResource returns the Terraform awscc_ec2_network_performance_metric_subscription resource.

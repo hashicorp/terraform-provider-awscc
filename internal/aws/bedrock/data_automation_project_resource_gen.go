@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_bedrock_data_automation_project", dataAutomationProjectResource)
+	registry.AddListResourceFactory("awscc_bedrock_data_automation_project", generic.NewListResource(dataAutomationProjectResource))
 }
 
 // dataAutomationProjectResource returns the Terraform awscc_bedrock_data_automation_project resource.

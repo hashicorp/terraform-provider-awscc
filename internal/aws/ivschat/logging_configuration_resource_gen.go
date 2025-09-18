@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ivschat_logging_configuration", loggingConfigurationResource)
+	registry.AddListResourceFactory("awscc_ivschat_logging_configuration", generic.NewListResource(loggingConfigurationResource))
 }
 
 // loggingConfigurationResource returns the Terraform awscc_ivschat_logging_configuration resource.

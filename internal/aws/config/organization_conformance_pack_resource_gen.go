@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_config_organization_conformance_pack", organizationConformancePackResource)
+	registry.AddListResourceFactory("awscc_config_organization_conformance_pack", generic.NewListResource(organizationConformancePackResource))
 }
 
 // organizationConformancePackResource returns the Terraform awscc_config_organization_conformance_pack resource.

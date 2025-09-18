@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_detective_member_invitation", memberInvitationResource)
+	registry.AddListResourceFactory("awscc_detective_member_invitation", generic.NewListResource(memberInvitationResource))
 }
 
 // memberInvitationResource returns the Terraform awscc_detective_member_invitation resource.

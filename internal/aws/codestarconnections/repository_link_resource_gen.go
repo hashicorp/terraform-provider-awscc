@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_codestarconnections_repository_link", repositoryLinkResource)
+	registry.AddListResourceFactory("awscc_codestarconnections_repository_link", generic.NewListResource(repositoryLinkResource))
 }
 
 // repositoryLinkResource returns the Terraform awscc_codestarconnections_repository_link resource.

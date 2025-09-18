@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudfront_continuous_deployment_policy", continuousDeploymentPolicyResource)
+	registry.AddListResourceFactory("awscc_cloudfront_continuous_deployment_policy", generic.NewListResource(continuousDeploymentPolicyResource))
 }
 
 // continuousDeploymentPolicyResource returns the Terraform awscc_cloudfront_continuous_deployment_policy resource.

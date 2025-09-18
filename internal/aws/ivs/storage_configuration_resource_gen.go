@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ivs_storage_configuration", storageConfigurationResource)
+	registry.AddListResourceFactory("awscc_ivs_storage_configuration", generic.NewListResource(storageConfigurationResource))
 }
 
 // storageConfigurationResource returns the Terraform awscc_ivs_storage_configuration resource.

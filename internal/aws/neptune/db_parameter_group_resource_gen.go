@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_neptune_db_parameter_group", dBParameterGroupResource)
+	registry.AddListResourceFactory("awscc_neptune_db_parameter_group", generic.NewListResource(dBParameterGroupResource))
 }
 
 // dBParameterGroupResource returns the Terraform awscc_neptune_db_parameter_group resource.

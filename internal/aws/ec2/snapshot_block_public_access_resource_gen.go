@@ -21,6 +21,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_snapshot_block_public_access", snapshotBlockPublicAccessResource)
+	registry.AddListResourceFactory("awscc_ec2_snapshot_block_public_access", generic.NewListResource(snapshotBlockPublicAccessResource))
 }
 
 // snapshotBlockPublicAccessResource returns the Terraform awscc_ec2_snapshot_block_public_access resource.

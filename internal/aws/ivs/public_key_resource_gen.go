@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ivs_public_key", publicKeyResource)
+	registry.AddListResourceFactory("awscc_ivs_public_key", generic.NewListResource(publicKeyResource))
 }
 
 // publicKeyResource returns the Terraform awscc_ivs_public_key resource.

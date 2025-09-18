@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_acmpca_certificate_authority", certificateAuthorityResource)
+	registry.AddListResourceFactory("awscc_acmpca_certificate_authority", generic.NewListResource(certificateAuthorityResource))
 }
 
 // certificateAuthorityResource returns the Terraform awscc_acmpca_certificate_authority resource.

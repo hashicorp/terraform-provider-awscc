@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_datasync_location_fsx_open_zfs", locationFSxOpenZFSResource)
+	registry.AddListResourceFactory("awscc_datasync_location_fsx_open_zfs", generic.NewListResource(locationFSxOpenZFSResource))
 }
 
 // locationFSxOpenZFSResource returns the Terraform awscc_datasync_location_fsx_open_zfs resource.

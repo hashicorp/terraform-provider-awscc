@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_route53resolver_outpost_resolver", outpostResolverResource)
+	registry.AddListResourceFactory("awscc_route53resolver_outpost_resolver", generic.NewListResource(outpostResolverResource))
 }
 
 // outpostResolverResource returns the Terraform awscc_route53resolver_outpost_resolver resource.

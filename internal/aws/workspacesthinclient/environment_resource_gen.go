@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_workspacesthinclient_environment", environmentResource)
+	registry.AddListResourceFactory("awscc_workspacesthinclient_environment", generic.NewListResource(environmentResource))
 }
 
 // environmentResource returns the Terraform awscc_workspacesthinclient_environment resource.

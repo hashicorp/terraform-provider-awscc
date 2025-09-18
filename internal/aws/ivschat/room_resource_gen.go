@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ivschat_room", roomResource)
+	registry.AddListResourceFactory("awscc_ivschat_room", generic.NewListResource(roomResource))
 }
 
 // roomResource returns the Terraform awscc_ivschat_room resource.

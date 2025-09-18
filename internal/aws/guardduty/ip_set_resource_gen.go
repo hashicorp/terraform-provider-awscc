@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_guardduty_ip_set", iPSetResource)
+	registry.AddListResourceFactory("awscc_guardduty_ip_set", generic.NewListResource(iPSetResource))
 }
 
 // iPSetResource returns the Terraform awscc_guardduty_ip_set resource.

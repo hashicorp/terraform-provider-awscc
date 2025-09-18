@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_workspacesinstances_volume", volumeResource)
+	registry.AddListResourceFactory("awscc_workspacesinstances_volume", generic.NewListResource(volumeResource))
 }
 
 // volumeResource returns the Terraform awscc_workspacesinstances_volume resource.

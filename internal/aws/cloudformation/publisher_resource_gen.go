@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudformation_publisher", publisherResource)
+	registry.AddListResourceFactory("awscc_cloudformation_publisher", generic.NewListResource(publisherResource))
 }
 
 // publisherResource returns the Terraform awscc_cloudformation_publisher resource.

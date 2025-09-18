@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotwireless_device_profile", deviceProfileResource)
+	registry.AddListResourceFactory("awscc_iotwireless_device_profile", generic.NewListResource(deviceProfileResource))
 }
 
 // deviceProfileResource returns the Terraform awscc_iotwireless_device_profile resource.

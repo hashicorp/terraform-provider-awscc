@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_quicksight_topic", topicResource)
+	registry.AddListResourceFactory("awscc_quicksight_topic", generic.NewListResource(topicResource))
 }
 
 // topicResource returns the Terraform awscc_quicksight_topic resource.

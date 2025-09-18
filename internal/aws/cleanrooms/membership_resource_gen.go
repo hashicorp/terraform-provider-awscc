@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cleanrooms_membership", membershipResource)
+	registry.AddListResourceFactory("awscc_cleanrooms_membership", generic.NewListResource(membershipResource))
 }
 
 // membershipResource returns the Terraform awscc_cleanrooms_membership resource.

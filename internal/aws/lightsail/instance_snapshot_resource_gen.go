@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lightsail_instance_snapshot", instanceSnapshotResource)
+	registry.AddListResourceFactory("awscc_lightsail_instance_snapshot", generic.NewListResource(instanceSnapshotResource))
 }
 
 // instanceSnapshotResource returns the Terraform awscc_lightsail_instance_snapshot resource.

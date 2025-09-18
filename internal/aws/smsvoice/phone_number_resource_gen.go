@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_smsvoice_phone_number", phoneNumberResource)
+	registry.AddListResourceFactory("awscc_smsvoice_phone_number", generic.NewListResource(phoneNumberResource))
 }
 
 // phoneNumberResource returns the Terraform awscc_smsvoice_phone_number resource.

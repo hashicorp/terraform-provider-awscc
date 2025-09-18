@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_eventschemas_registry", registryResource)
+	registry.AddListResourceFactory("awscc_eventschemas_registry", generic.NewListResource(registryResource))
 }
 
 // registryResource returns the Terraform awscc_eventschemas_registry resource.

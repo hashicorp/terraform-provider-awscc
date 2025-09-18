@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iot_mitigation_action", mitigationActionResource)
+	registry.AddListResourceFactory("awscc_iot_mitigation_action", generic.NewListResource(mitigationActionResource))
 }
 
 // mitigationActionResource returns the Terraform awscc_iot_mitigation_action resource.

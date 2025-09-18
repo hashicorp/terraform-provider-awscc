@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_networkmanager_core_network", coreNetworkResource)
+	registry.AddListResourceFactory("awscc_networkmanager_core_network", generic.NewListResource(coreNetworkResource))
 }
 
 // coreNetworkResource returns the Terraform awscc_networkmanager_core_network resource.

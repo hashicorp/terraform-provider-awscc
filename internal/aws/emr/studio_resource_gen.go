@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_emr_studio", studioResource)
+	registry.AddListResourceFactory("awscc_emr_studio", generic.NewListResource(studioResource))
 }
 
 // studioResource returns the Terraform awscc_emr_studio resource.

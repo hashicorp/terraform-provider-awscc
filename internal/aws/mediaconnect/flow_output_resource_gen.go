@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_mediaconnect_flow_output", flowOutputResource)
+	registry.AddListResourceFactory("awscc_mediaconnect_flow_output", generic.NewListResource(flowOutputResource))
 }
 
 // flowOutputResource returns the Terraform awscc_mediaconnect_flow_output resource.

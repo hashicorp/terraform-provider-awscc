@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_location_geofence_collection", geofenceCollectionResource)
+	registry.AddListResourceFactory("awscc_location_geofence_collection", generic.NewListResource(geofenceCollectionResource))
 }
 
 // geofenceCollectionResource returns the Terraform awscc_location_geofence_collection resource.

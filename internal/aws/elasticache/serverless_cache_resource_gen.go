@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_elasticache_serverless_cache", serverlessCacheResource)
+	registry.AddListResourceFactory("awscc_elasticache_serverless_cache", generic.NewListResource(serverlessCacheResource))
 }
 
 // serverlessCacheResource returns the Terraform awscc_elasticache_serverless_cache resource.

@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_processing_job", processingJobResource)
+	registry.AddListResourceFactory("awscc_sagemaker_processing_job", generic.NewListResource(processingJobResource))
 }
 
 // processingJobResource returns the Terraform awscc_sagemaker_processing_job resource.

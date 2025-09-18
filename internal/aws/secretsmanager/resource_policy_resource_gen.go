@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_secretsmanager_resource_policy", resourcePolicyResource)
+	registry.AddListResourceFactory("awscc_secretsmanager_resource_policy", generic.NewListResource(resourcePolicyResource))
 }
 
 // resourcePolicyResource returns the Terraform awscc_secretsmanager_resource_policy resource.

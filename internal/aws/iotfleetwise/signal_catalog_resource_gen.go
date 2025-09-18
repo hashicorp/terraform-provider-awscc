@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotfleetwise_signal_catalog", signalCatalogResource)
+	registry.AddListResourceFactory("awscc_iotfleetwise_signal_catalog", generic.NewListResource(signalCatalogResource))
 }
 
 // signalCatalogResource returns the Terraform awscc_iotfleetwise_signal_catalog resource.

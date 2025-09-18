@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_appsync_api", apiResource)
+	registry.AddListResourceFactory("awscc_appsync_api", generic.NewListResource(apiResource))
 }
 
 // apiResource returns the Terraform awscc_appsync_api resource.

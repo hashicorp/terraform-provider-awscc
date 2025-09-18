@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_arczonalshift_zonal_autoshift_configuration", zonalAutoshiftConfigurationResource)
+	registry.AddListResourceFactory("awscc_arczonalshift_zonal_autoshift_configuration", generic.NewListResource(zonalAutoshiftConfigurationResource))
 }
 
 // zonalAutoshiftConfigurationResource returns the Terraform awscc_arczonalshift_zonal_autoshift_configuration resource.

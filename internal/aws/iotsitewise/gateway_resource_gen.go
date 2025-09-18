@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotsitewise_gateway", gatewayResource)
+	registry.AddListResourceFactory("awscc_iotsitewise_gateway", generic.NewListResource(gatewayResource))
 }
 
 // gatewayResource returns the Terraform awscc_iotsitewise_gateway resource.

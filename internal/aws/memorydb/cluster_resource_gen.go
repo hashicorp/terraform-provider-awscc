@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_memorydb_cluster", clusterResource)
+	registry.AddListResourceFactory("awscc_memorydb_cluster", generic.NewListResource(clusterResource))
 }
 
 // clusterResource returns the Terraform awscc_memorydb_cluster resource.

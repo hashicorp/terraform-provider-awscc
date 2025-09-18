@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_xray_sampling_rule", samplingRuleResource)
+	registry.AddListResourceFactory("awscc_xray_sampling_rule", generic.NewListResource(samplingRuleResource))
 }
 
 // samplingRuleResource returns the Terraform awscc_xray_sampling_rule resource.

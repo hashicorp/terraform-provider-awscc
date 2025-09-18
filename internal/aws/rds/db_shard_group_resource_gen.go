@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_rds_db_shard_group", dBShardGroupResource)
+	registry.AddListResourceFactory("awscc_rds_db_shard_group", generic.NewListResource(dBShardGroupResource))
 }
 
 // dBShardGroupResource returns the Terraform awscc_rds_db_shard_group resource.

@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotwireless_destination", destinationResource)
+	registry.AddListResourceFactory("awscc_iotwireless_destination", generic.NewListResource(destinationResource))
 }
 
 // destinationResource returns the Terraform awscc_iotwireless_destination resource.

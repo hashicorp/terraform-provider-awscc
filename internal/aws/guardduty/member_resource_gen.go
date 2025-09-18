@@ -20,6 +20,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_guardduty_member", memberResource)
+	registry.AddListResourceFactory("awscc_guardduty_member", generic.NewListResource(memberResource))
 }
 
 // memberResource returns the Terraform awscc_guardduty_member resource.

@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_entityresolution_schema_mapping", schemaMappingResource)
+	registry.AddListResourceFactory("awscc_entityresolution_schema_mapping", generic.NewListResource(schemaMappingResource))
 }
 
 // schemaMappingResource returns the Terraform awscc_entityresolution_schema_mapping resource.

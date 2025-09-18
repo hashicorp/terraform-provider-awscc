@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_rekognition_collection", collectionResource)
+	registry.AddListResourceFactory("awscc_rekognition_collection", generic.NewListResource(collectionResource))
 }
 
 // collectionResource returns the Terraform awscc_rekognition_collection resource.

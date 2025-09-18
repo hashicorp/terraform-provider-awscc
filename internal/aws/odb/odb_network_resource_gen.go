@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_odb_odb_network", odbNetworkResource)
+	registry.AddListResourceFactory("awscc_odb_odb_network", generic.NewListResource(odbNetworkResource))
 }
 
 // odbNetworkResource returns the Terraform awscc_odb_odb_network resource.

@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_workspacesweb_browser_settings", browserSettingsResource)
+	registry.AddListResourceFactory("awscc_workspacesweb_browser_settings", generic.NewListResource(browserSettingsResource))
 }
 
 // browserSettingsResource returns the Terraform awscc_workspacesweb_browser_settings resource.

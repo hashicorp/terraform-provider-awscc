@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_spot_fleet", spotFleetResource)
+	registry.AddListResourceFactory("awscc_ec2_spot_fleet", generic.NewListResource(spotFleetResource))
 }
 
 // spotFleetResource returns the Terraform awscc_ec2_spot_fleet resource.

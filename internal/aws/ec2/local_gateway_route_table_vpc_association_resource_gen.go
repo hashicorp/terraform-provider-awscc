@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_local_gateway_route_table_vpc_association", localGatewayRouteTableVPCAssociationResource)
+	registry.AddListResourceFactory("awscc_ec2_local_gateway_route_table_vpc_association", generic.NewListResource(localGatewayRouteTableVPCAssociationResource))
 }
 
 // localGatewayRouteTableVPCAssociationResource returns the Terraform awscc_ec2_local_gateway_route_table_vpc_association resource.

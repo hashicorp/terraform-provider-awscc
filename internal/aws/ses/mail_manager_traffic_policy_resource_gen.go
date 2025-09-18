@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ses_mail_manager_traffic_policy", mailManagerTrafficPolicyResource)
+	registry.AddListResourceFactory("awscc_ses_mail_manager_traffic_policy", generic.NewListResource(mailManagerTrafficPolicyResource))
 }
 
 // mailManagerTrafficPolicyResource returns the Terraform awscc_ses_mail_manager_traffic_policy resource.

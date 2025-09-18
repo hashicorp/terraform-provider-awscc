@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_globalaccelerator_endpoint_group", endpointGroupResource)
+	registry.AddListResourceFactory("awscc_globalaccelerator_endpoint_group", generic.NewListResource(endpointGroupResource))
 }
 
 // endpointGroupResource returns the Terraform awscc_globalaccelerator_endpoint_group resource.

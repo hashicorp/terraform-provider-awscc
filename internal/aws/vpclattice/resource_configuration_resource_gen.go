@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_vpclattice_resource_configuration", resourceConfigurationResource)
+	registry.AddListResourceFactory("awscc_vpclattice_resource_configuration", generic.NewListResource(resourceConfigurationResource))
 }
 
 // resourceConfigurationResource returns the Terraform awscc_vpclattice_resource_configuration resource.

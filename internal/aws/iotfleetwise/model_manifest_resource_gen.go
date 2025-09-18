@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotfleetwise_model_manifest", modelManifestResource)
+	registry.AddListResourceFactory("awscc_iotfleetwise_model_manifest", generic.NewListResource(modelManifestResource))
 }
 
 // modelManifestResource returns the Terraform awscc_iotfleetwise_model_manifest resource.

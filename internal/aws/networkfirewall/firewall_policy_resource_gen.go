@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_networkfirewall_firewall_policy", firewallPolicyResource)
+	registry.AddListResourceFactory("awscc_networkfirewall_firewall_policy", generic.NewListResource(firewallPolicyResource))
 }
 
 // firewallPolicyResource returns the Terraform awscc_networkfirewall_firewall_policy resource.

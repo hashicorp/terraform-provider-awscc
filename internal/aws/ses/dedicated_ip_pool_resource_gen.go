@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ses_dedicated_ip_pool", dedicatedIpPoolResource)
+	registry.AddListResourceFactory("awscc_ses_dedicated_ip_pool", generic.NewListResource(dedicatedIpPoolResource))
 }
 
 // dedicatedIpPoolResource returns the Terraform awscc_ses_dedicated_ip_pool resource.

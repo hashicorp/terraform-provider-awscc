@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_docdbelastic_cluster", clusterResource)
+	registry.AddListResourceFactory("awscc_docdbelastic_cluster", generic.NewListResource(clusterResource))
 }
 
 // clusterResource returns the Terraform awscc_docdbelastic_cluster resource.

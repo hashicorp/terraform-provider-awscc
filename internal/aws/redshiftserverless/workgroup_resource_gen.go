@@ -33,6 +33,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_redshiftserverless_workgroup", workgroupResource)
+	registry.AddListResourceFactory("awscc_redshiftserverless_workgroup", generic.NewListResource(workgroupResource))
 }
 
 // workgroupResource returns the Terraform awscc_redshiftserverless_workgroup resource.

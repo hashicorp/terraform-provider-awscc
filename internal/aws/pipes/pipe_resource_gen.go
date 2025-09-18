@@ -34,6 +34,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_pipes_pipe", pipeResource)
+	registry.AddListResourceFactory("awscc_pipes_pipe", generic.NewListResource(pipeResource))
 }
 
 // pipeResource returns the Terraform awscc_pipes_pipe resource.

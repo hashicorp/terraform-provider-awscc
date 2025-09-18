@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ivs_encoder_configuration", encoderConfigurationResource)
+	registry.AddListResourceFactory("awscc_ivs_encoder_configuration", generic.NewListResource(encoderConfigurationResource))
 }
 
 // encoderConfigurationResource returns the Terraform awscc_ivs_encoder_configuration resource.

@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_app", appResource)
+	registry.AddListResourceFactory("awscc_sagemaker_app", generic.NewListResource(appResource))
 }
 
 // appResource returns the Terraform awscc_sagemaker_app resource.

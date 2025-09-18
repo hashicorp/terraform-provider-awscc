@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_workspacesweb_user_settings", userSettingsResource)
+	registry.AddListResourceFactory("awscc_workspacesweb_user_settings", generic.NewListResource(userSettingsResource))
 }
 
 // userSettingsResource returns the Terraform awscc_workspacesweb_user_settings resource.

@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iam_managed_policy", managedPolicyResource)
+	registry.AddListResourceFactory("awscc_iam_managed_policy", generic.NewListResource(managedPolicyResource))
 }
 
 // managedPolicyResource returns the Terraform awscc_iam_managed_policy resource.

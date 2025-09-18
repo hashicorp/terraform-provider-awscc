@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_inference_experiment", inferenceExperimentResource)
+	registry.AddListResourceFactory("awscc_sagemaker_inference_experiment", generic.NewListResource(inferenceExperimentResource))
 }
 
 // inferenceExperimentResource returns the Terraform awscc_sagemaker_inference_experiment resource.

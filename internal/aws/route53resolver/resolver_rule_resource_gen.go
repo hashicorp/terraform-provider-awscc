@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_route53resolver_resolver_rule", resolverRuleResource)
+	registry.AddListResourceFactory("awscc_route53resolver_resolver_rule", generic.NewListResource(resolverRuleResource))
 }
 
 // resolverRuleResource returns the Terraform awscc_route53resolver_resolver_rule resource.

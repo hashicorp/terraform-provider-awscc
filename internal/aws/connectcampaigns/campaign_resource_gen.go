@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_connectcampaigns_campaign", campaignResource)
+	registry.AddListResourceFactory("awscc_connectcampaigns_campaign", generic.NewListResource(campaignResource))
 }
 
 // campaignResource returns the Terraform awscc_connectcampaigns_campaign resource.

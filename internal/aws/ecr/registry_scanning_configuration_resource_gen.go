@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ecr_registry_scanning_configuration", registryScanningConfigurationResource)
+	registry.AddListResourceFactory("awscc_ecr_registry_scanning_configuration", generic.NewListResource(registryScanningConfigurationResource))
 }
 
 // registryScanningConfigurationResource returns the Terraform awscc_ecr_registry_scanning_configuration resource.

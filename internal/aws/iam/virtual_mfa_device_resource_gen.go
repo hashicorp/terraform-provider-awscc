@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iam_virtual_mfa_device", virtualMFADeviceResource)
+	registry.AddListResourceFactory("awscc_iam_virtual_mfa_device", generic.NewListResource(virtualMFADeviceResource))
 }
 
 // virtualMFADeviceResource returns the Terraform awscc_iam_virtual_mfa_device resource.

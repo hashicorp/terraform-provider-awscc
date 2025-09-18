@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_apigatewayv2_domain_name", domainNameResource)
+	registry.AddListResourceFactory("awscc_apigatewayv2_domain_name", generic.NewListResource(domainNameResource))
 }
 
 // domainNameResource returns the Terraform awscc_apigatewayv2_domain_name resource.

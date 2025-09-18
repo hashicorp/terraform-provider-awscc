@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lightsail_container", containerResource)
+	registry.AddListResourceFactory("awscc_lightsail_container", generic.NewListResource(containerResource))
 }
 
 // containerResource returns the Terraform awscc_lightsail_container resource.

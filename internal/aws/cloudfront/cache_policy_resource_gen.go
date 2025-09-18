@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudfront_cache_policy", cachePolicyResource)
+	registry.AddListResourceFactory("awscc_cloudfront_cache_policy", generic.NewListResource(cachePolicyResource))
 }
 
 // cachePolicyResource returns the Terraform awscc_cloudfront_cache_policy resource.

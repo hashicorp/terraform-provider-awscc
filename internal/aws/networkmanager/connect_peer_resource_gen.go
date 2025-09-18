@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_networkmanager_connect_peer", connectPeerResource)
+	registry.AddListResourceFactory("awscc_networkmanager_connect_peer", generic.NewListResource(connectPeerResource))
 }
 
 // connectPeerResource returns the Terraform awscc_networkmanager_connect_peer resource.

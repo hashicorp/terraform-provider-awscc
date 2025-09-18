@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_kafkaconnect_custom_plugin", customPluginResource)
+	registry.AddListResourceFactory("awscc_kafkaconnect_custom_plugin", generic.NewListResource(customPluginResource))
 }
 
 // customPluginResource returns the Terraform awscc_kafkaconnect_custom_plugin resource.

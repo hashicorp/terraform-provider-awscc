@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_customer_gateway", customerGatewayResource)
+	registry.AddListResourceFactory("awscc_ec2_customer_gateway", generic.NewListResource(customerGatewayResource))
 }
 
 // customerGatewayResource returns the Terraform awscc_ec2_customer_gateway resource.

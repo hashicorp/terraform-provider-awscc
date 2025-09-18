@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ecs_cluster_capacity_provider_associations", clusterCapacityProviderAssociationsResource)
+	registry.AddListResourceFactory("awscc_ecs_cluster_capacity_provider_associations", generic.NewListResource(clusterCapacityProviderAssociationsResource))
 }
 
 // clusterCapacityProviderAssociationsResource returns the Terraform awscc_ecs_cluster_capacity_provider_associations resource.

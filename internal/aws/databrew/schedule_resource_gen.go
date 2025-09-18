@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_databrew_schedule", scheduleResource)
+	registry.AddListResourceFactory("awscc_databrew_schedule", generic.NewListResource(scheduleResource))
 }
 
 // scheduleResource returns the Terraform awscc_databrew_schedule resource.

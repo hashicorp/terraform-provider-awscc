@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_amazonmq_configuration", configurationResource)
+	registry.AddListResourceFactory("awscc_amazonmq_configuration", generic.NewListResource(configurationResource))
 }
 
 // configurationResource returns the Terraform awscc_amazonmq_configuration resource.

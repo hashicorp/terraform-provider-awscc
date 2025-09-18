@@ -21,6 +21,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_neptunegraph_private_graph_endpoint", privateGraphEndpointResource)
+	registry.AddListResourceFactory("awscc_neptunegraph_private_graph_endpoint", generic.NewListResource(privateGraphEndpointResource))
 }
 
 // privateGraphEndpointResource returns the Terraform awscc_neptunegraph_private_graph_endpoint resource.

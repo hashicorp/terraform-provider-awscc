@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_elasticbeanstalk_application", applicationResource)
+	registry.AddListResourceFactory("awscc_elasticbeanstalk_application", generic.NewListResource(applicationResource))
 }
 
 // applicationResource returns the Terraform awscc_elasticbeanstalk_application resource.

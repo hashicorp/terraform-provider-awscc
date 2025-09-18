@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_systemsmanagersap_application", applicationResource)
+	registry.AddListResourceFactory("awscc_systemsmanagersap_application", generic.NewListResource(applicationResource))
 }
 
 // applicationResource returns the Terraform awscc_systemsmanagersap_application resource.

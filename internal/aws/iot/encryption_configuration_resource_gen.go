@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iot_encryption_configuration", encryptionConfigurationResource)
+	registry.AddListResourceFactory("awscc_iot_encryption_configuration", generic.NewListResource(encryptionConfigurationResource))
 }
 
 // encryptionConfigurationResource returns the Terraform awscc_iot_encryption_configuration resource.

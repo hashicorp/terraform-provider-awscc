@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_ec2_fleet", eC2FleetResource)
+	registry.AddListResourceFactory("awscc_ec2_ec2_fleet", generic.NewListResource(eC2FleetResource))
 }
 
 // eC2FleetResource returns the Terraform awscc_ec2_ec2_fleet resource.

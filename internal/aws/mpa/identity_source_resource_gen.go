@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_mpa_identity_source", identitySourceResource)
+	registry.AddListResourceFactory("awscc_mpa_identity_source", generic.NewListResource(identitySourceResource))
 }
 
 // identitySourceResource returns the Terraform awscc_mpa_identity_source resource.

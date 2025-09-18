@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_msk_vpc_connection", vpcConnectionResource)
+	registry.AddListResourceFactory("awscc_msk_vpc_connection", generic.NewListResource(vpcConnectionResource))
 }
 
 // vpcConnectionResource returns the Terraform awscc_msk_vpc_connection resource.

@@ -19,6 +19,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudfront_public_key", publicKeyResource)
+	registry.AddListResourceFactory("awscc_cloudfront_public_key", generic.NewListResource(publicKeyResource))
 }
 
 // publicKeyResource returns the Terraform awscc_cloudfront_public_key resource.

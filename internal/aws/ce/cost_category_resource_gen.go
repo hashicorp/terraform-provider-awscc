@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ce_cost_category", costCategoryResource)
+	registry.AddListResourceFactory("awscc_ce_cost_category", generic.NewListResource(costCategoryResource))
 }
 
 // costCategoryResource returns the Terraform awscc_ce_cost_category resource.

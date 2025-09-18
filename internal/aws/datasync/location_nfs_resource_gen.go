@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_datasync_location_nfs", locationNFSResource)
+	registry.AddListResourceFactory("awscc_datasync_location_nfs", generic.NewListResource(locationNFSResource))
 }
 
 // locationNFSResource returns the Terraform awscc_datasync_location_nfs resource.

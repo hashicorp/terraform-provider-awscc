@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lightsail_load_balancer_tls_certificate", loadBalancerTlsCertificateResource)
+	registry.AddListResourceFactory("awscc_lightsail_load_balancer_tls_certificate", generic.NewListResource(loadBalancerTlsCertificateResource))
 }
 
 // loadBalancerTlsCertificateResource returns the Terraform awscc_lightsail_load_balancer_tls_certificate resource.

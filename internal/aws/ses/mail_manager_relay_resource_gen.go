@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ses_mail_manager_relay", mailManagerRelayResource)
+	registry.AddListResourceFactory("awscc_ses_mail_manager_relay", generic.NewListResource(mailManagerRelayResource))
 }
 
 // mailManagerRelayResource returns the Terraform awscc_ses_mail_manager_relay resource.

@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_connect_traffic_distribution_group", trafficDistributionGroupResource)
+	registry.AddListResourceFactory("awscc_connect_traffic_distribution_group", generic.NewListResource(trafficDistributionGroupResource))
 }
 
 // trafficDistributionGroupResource returns the Terraform awscc_connect_traffic_distribution_group resource.

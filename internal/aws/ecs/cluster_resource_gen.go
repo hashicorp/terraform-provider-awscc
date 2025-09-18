@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ecs_cluster", clusterResource)
+	registry.AddListResourceFactory("awscc_ecs_cluster", generic.NewListResource(clusterResource))
 }
 
 // clusterResource returns the Terraform awscc_ecs_cluster resource.

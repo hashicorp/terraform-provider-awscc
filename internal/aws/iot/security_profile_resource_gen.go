@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iot_security_profile", securityProfileResource)
+	registry.AddListResourceFactory("awscc_iot_security_profile", generic.NewListResource(securityProfileResource))
 }
 
 // securityProfileResource returns the Terraform awscc_iot_security_profile resource.

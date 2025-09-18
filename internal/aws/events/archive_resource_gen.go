@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_events_archive", archiveResource)
+	registry.AddListResourceFactory("awscc_events_archive", generic.NewListResource(archiveResource))
 }
 
 // archiveResource returns the Terraform awscc_events_archive resource.

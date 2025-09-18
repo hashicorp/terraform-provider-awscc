@@ -19,6 +19,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lambda_layer_version_permission", layerVersionPermissionResource)
+	registry.AddListResourceFactory("awscc_lambda_layer_version_permission", generic.NewListResource(layerVersionPermissionResource))
 }
 
 // layerVersionPermissionResource returns the Terraform awscc_lambda_layer_version_permission resource.

@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_datapipeline_pipeline", pipelineResource)
+	registry.AddListResourceFactory("awscc_datapipeline_pipeline", generic.NewListResource(pipelineResource))
 }
 
 // pipelineResource returns the Terraform awscc_datapipeline_pipeline resource.

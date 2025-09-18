@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ivs_channel", channelResource)
+	registry.AddListResourceFactory("awscc_ivs_channel", generic.NewListResource(channelResource))
 }
 
 // channelResource returns the Terraform awscc_ivs_channel resource.

@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_comprehend_flywheel", flywheelResource)
+	registry.AddListResourceFactory("awscc_comprehend_flywheel", generic.NewListResource(flywheelResource))
 }
 
 // flywheelResource returns the Terraform awscc_comprehend_flywheel resource.

@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_backupgateway_hypervisor", hypervisorResource)
+	registry.AddListResourceFactory("awscc_backupgateway_hypervisor", generic.NewListResource(hypervisorResource))
 }
 
 // hypervisorResource returns the Terraform awscc_backupgateway_hypervisor resource.

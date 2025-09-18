@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_imagebuilder_distribution_configuration", distributionConfigurationResource)
+	registry.AddListResourceFactory("awscc_imagebuilder_distribution_configuration", generic.NewListResource(distributionConfigurationResource))
 }
 
 // distributionConfigurationResource returns the Terraform awscc_imagebuilder_distribution_configuration resource.

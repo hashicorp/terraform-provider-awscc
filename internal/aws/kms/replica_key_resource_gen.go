@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_kms_replica_key", replicaKeyResource)
+	registry.AddListResourceFactory("awscc_kms_replica_key", generic.NewListResource(replicaKeyResource))
 }
 
 // replicaKeyResource returns the Terraform awscc_kms_replica_key resource.

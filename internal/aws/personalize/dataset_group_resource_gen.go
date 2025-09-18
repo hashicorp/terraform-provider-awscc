@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_personalize_dataset_group", datasetGroupResource)
+	registry.AddListResourceFactory("awscc_personalize_dataset_group", generic.NewListResource(datasetGroupResource))
 }
 
 // datasetGroupResource returns the Terraform awscc_personalize_dataset_group resource.

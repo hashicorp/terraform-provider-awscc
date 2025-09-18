@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotsitewise_portal", portalResource)
+	registry.AddListResourceFactory("awscc_iotsitewise_portal", generic.NewListResource(portalResource))
 }
 
 // portalResource returns the Terraform awscc_iotsitewise_portal resource.

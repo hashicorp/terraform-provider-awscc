@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_securityhub_security_control", securityControlResource)
+	registry.AddListResourceFactory("awscc_securityhub_security_control", generic.NewListResource(securityControlResource))
 }
 
 // securityControlResource returns the Terraform awscc_securityhub_security_control resource.

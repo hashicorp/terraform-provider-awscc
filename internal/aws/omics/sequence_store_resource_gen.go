@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_omics_sequence_store", sequenceStoreResource)
+	registry.AddListResourceFactory("awscc_omics_sequence_store", generic.NewListResource(sequenceStoreResource))
 }
 
 // sequenceStoreResource returns the Terraform awscc_omics_sequence_store resource.

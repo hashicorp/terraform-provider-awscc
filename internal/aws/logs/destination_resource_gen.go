@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_logs_destination", destinationResource)
+	registry.AddListResourceFactory("awscc_logs_destination", generic.NewListResource(destinationResource))
 }
 
 // destinationResource returns the Terraform awscc_logs_destination resource.

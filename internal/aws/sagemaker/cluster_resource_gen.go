@@ -33,6 +33,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_cluster", clusterResource)
+	registry.AddListResourceFactory("awscc_sagemaker_cluster", generic.NewListResource(clusterResource))
 }
 
 // clusterResource returns the Terraform awscc_sagemaker_cluster resource.

@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_networkfirewall_tls_inspection_configuration", tLSInspectionConfigurationResource)
+	registry.AddListResourceFactory("awscc_networkfirewall_tls_inspection_configuration", generic.NewListResource(tLSInspectionConfigurationResource))
 }
 
 // tLSInspectionConfigurationResource returns the Terraform awscc_networkfirewall_tls_inspection_configuration resource.

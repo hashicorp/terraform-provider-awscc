@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_mwaa_environment", environmentResource)
+	registry.AddListResourceFactory("awscc_mwaa_environment", generic.NewListResource(environmentResource))
 }
 
 // environmentResource returns the Terraform awscc_mwaa_environment resource.

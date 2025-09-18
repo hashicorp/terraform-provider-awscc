@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lightsail_instance", instanceResource)
+	registry.AddListResourceFactory("awscc_lightsail_instance", generic.NewListResource(instanceResource))
 }
 
 // instanceResource returns the Terraform awscc_lightsail_instance resource.

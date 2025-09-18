@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_elasticloadbalancingv2_listener", listenerResource)
+	registry.AddListResourceFactory("awscc_elasticloadbalancingv2_listener", generic.NewListResource(listenerResource))
 }
 
 // listenerResource returns the Terraform awscc_elasticloadbalancingv2_listener resource.

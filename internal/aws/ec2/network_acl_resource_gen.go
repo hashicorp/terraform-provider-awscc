@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_network_acl", networkAclResource)
+	registry.AddListResourceFactory("awscc_ec2_network_acl", generic.NewListResource(networkAclResource))
 }
 
 // networkAclResource returns the Terraform awscc_ec2_network_acl resource.

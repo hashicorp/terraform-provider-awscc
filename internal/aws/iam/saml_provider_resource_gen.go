@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iam_saml_provider", sAMLProviderResource)
+	registry.AddListResourceFactory("awscc_iam_saml_provider", generic.NewListResource(sAMLProviderResource))
 }
 
 // sAMLProviderResource returns the Terraform awscc_iam_saml_provider resource.

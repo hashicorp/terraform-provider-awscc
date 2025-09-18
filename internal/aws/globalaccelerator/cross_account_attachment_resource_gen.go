@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_globalaccelerator_cross_account_attachment", crossAccountAttachmentResource)
+	registry.AddListResourceFactory("awscc_globalaccelerator_cross_account_attachment", generic.NewListResource(crossAccountAttachmentResource))
 }
 
 // crossAccountAttachmentResource returns the Terraform awscc_globalaccelerator_cross_account_attachment resource.

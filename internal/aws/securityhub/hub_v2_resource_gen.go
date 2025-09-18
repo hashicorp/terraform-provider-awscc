@@ -21,6 +21,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_securityhub_hub_v2", hubV2Resource)
+	registry.AddListResourceFactory("awscc_securityhub_hub_v2", generic.NewListResource(hubV2Resource))
 }
 
 // hubV2Resource returns the Terraform awscc_securityhub_hub_v2 resource.

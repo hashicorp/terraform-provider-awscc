@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_verified_access_endpoint", verifiedAccessEndpointResource)
+	registry.AddListResourceFactory("awscc_ec2_verified_access_endpoint", generic.NewListResource(verifiedAccessEndpointResource))
 }
 
 // verifiedAccessEndpointResource returns the Terraform awscc_ec2_verified_access_endpoint resource.

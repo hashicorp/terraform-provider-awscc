@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iot_billing_group", billingGroupResource)
+	registry.AddListResourceFactory("awscc_iot_billing_group", generic.NewListResource(billingGroupResource))
 }
 
 // billingGroupResource returns the Terraform awscc_iot_billing_group resource.

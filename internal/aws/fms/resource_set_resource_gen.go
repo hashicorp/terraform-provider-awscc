@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_fms_resource_set", resourceSetResource)
+	registry.AddListResourceFactory("awscc_fms_resource_set", generic.NewListResource(resourceSetResource))
 }
 
 // resourceSetResource returns the Terraform awscc_fms_resource_set resource.

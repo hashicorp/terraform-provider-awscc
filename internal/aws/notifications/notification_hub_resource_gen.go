@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_notifications_notification_hub", notificationHubResource)
+	registry.AddListResourceFactory("awscc_notifications_notification_hub", generic.NewListResource(notificationHubResource))
 }
 
 // notificationHubResource returns the Terraform awscc_notifications_notification_hub resource.

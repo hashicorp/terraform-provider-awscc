@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotevents_detector_model", detectorModelResource)
+	registry.AddListResourceFactory("awscc_iotevents_detector_model", generic.NewListResource(detectorModelResource))
 }
 
 // detectorModelResource returns the Terraform awscc_iotevents_detector_model resource.

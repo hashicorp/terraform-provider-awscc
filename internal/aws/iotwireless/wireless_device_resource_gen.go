@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotwireless_wireless_device", wirelessDeviceResource)
+	registry.AddListResourceFactory("awscc_iotwireless_wireless_device", generic.NewListResource(wirelessDeviceResource))
 }
 
 // wirelessDeviceResource returns the Terraform awscc_iotwireless_wireless_device resource.

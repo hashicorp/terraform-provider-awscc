@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_supportapp_account_alias", accountAliasResource)
+	registry.AddListResourceFactory("awscc_supportapp_account_alias", generic.NewListResource(accountAliasResource))
 }
 
 // accountAliasResource returns the Terraform awscc_supportapp_account_alias resource.

@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lightsail_domain", domainResource)
+	registry.AddListResourceFactory("awscc_lightsail_domain", generic.NewListResource(domainResource))
 }
 
 // domainResource returns the Terraform awscc_lightsail_domain resource.

@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_frauddetector_event_type", eventTypeResource)
+	registry.AddListResourceFactory("awscc_frauddetector_event_type", generic.NewListResource(eventTypeResource))
 }
 
 // eventTypeResource returns the Terraform awscc_frauddetector_event_type resource.

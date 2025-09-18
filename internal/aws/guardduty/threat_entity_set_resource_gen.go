@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_guardduty_threat_entity_set", threatEntitySetResource)
+	registry.AddListResourceFactory("awscc_guardduty_threat_entity_set", generic.NewListResource(threatEntitySetResource))
 }
 
 // threatEntitySetResource returns the Terraform awscc_guardduty_threat_entity_set resource.

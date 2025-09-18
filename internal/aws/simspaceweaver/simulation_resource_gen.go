@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_simspaceweaver_simulation", simulationResource)
+	registry.AddListResourceFactory("awscc_simspaceweaver_simulation", generic.NewListResource(simulationResource))
 }
 
 // simulationResource returns the Terraform awscc_simspaceweaver_simulation resource.

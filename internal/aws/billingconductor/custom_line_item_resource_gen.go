@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_billingconductor_custom_line_item", customLineItemResource)
+	registry.AddListResourceFactory("awscc_billingconductor_custom_line_item", generic.NewListResource(customLineItemResource))
 }
 
 // customLineItemResource returns the Terraform awscc_billingconductor_custom_line_item resource.

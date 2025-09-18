@@ -34,6 +34,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_rds_db_cluster", dBClusterResource)
+	registry.AddListResourceFactory("awscc_rds_db_cluster", generic.NewListResource(dBClusterResource))
 }
 
 // dBClusterResource returns the Terraform awscc_rds_db_cluster resource.

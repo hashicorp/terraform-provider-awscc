@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_route53recoverycontrol_control_panel", controlPanelResource)
+	registry.AddListResourceFactory("awscc_route53recoverycontrol_control_panel", generic.NewListResource(controlPanelResource))
 }
 
 // controlPanelResource returns the Terraform awscc_route53recoverycontrol_control_panel resource.

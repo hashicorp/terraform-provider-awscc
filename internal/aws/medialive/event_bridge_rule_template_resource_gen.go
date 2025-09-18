@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_medialive_event_bridge_rule_template", eventBridgeRuleTemplateResource)
+	registry.AddListResourceFactory("awscc_medialive_event_bridge_rule_template", generic.NewListResource(eventBridgeRuleTemplateResource))
 }
 
 // eventBridgeRuleTemplateResource returns the Terraform awscc_medialive_event_bridge_rule_template resource.

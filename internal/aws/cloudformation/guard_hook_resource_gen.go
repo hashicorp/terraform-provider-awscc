@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudformation_guard_hook", guardHookResource)
+	registry.AddListResourceFactory("awscc_cloudformation_guard_hook", generic.NewListResource(guardHookResource))
 }
 
 // guardHookResource returns the Terraform awscc_cloudformation_guard_hook resource.

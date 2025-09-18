@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_paymentcryptography_key", keyResource)
+	registry.AddListResourceFactory("awscc_paymentcryptography_key", generic.NewListResource(keyResource))
 }
 
 // keyResource returns the Terraform awscc_paymentcryptography_key resource.

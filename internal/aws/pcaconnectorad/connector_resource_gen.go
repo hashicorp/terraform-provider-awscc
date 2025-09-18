@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_pcaconnectorad_connector", connectorResource)
+	registry.AddListResourceFactory("awscc_pcaconnectorad_connector", generic.NewListResource(connectorResource))
 }
 
 // connectorResource returns the Terraform awscc_pcaconnectorad_connector resource.

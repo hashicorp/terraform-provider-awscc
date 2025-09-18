@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_mediaconnect_bridge", bridgeResource)
+	registry.AddListResourceFactory("awscc_mediaconnect_bridge", generic.NewListResource(bridgeResource))
 }
 
 // bridgeResource returns the Terraform awscc_mediaconnect_bridge resource.

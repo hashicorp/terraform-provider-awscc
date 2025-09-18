@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_batch_job_definition", jobDefinitionResource)
+	registry.AddListResourceFactory("awscc_batch_job_definition", generic.NewListResource(jobDefinitionResource))
 }
 
 // jobDefinitionResource returns the Terraform awscc_batch_job_definition resource.

@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_route_server_peer", routeServerPeerResource)
+	registry.AddListResourceFactory("awscc_ec2_route_server_peer", generic.NewListResource(routeServerPeerResource))
 }
 
 // routeServerPeerResource returns the Terraform awscc_ec2_route_server_peer resource.

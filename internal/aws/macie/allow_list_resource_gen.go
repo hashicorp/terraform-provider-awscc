@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_macie_allow_list", allowListResource)
+	registry.AddListResourceFactory("awscc_macie_allow_list", generic.NewListResource(allowListResource))
 }
 
 // allowListResource returns the Terraform awscc_macie_allow_list resource.

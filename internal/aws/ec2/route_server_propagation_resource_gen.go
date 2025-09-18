@@ -19,6 +19,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_route_server_propagation", routeServerPropagationResource)
+	registry.AddListResourceFactory("awscc_ec2_route_server_propagation", generic.NewListResource(routeServerPropagationResource))
 }
 
 // routeServerPropagationResource returns the Terraform awscc_ec2_route_server_propagation resource.

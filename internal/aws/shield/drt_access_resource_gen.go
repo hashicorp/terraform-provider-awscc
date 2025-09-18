@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_shield_drt_access", dRTAccessResource)
+	registry.AddListResourceFactory("awscc_shield_drt_access", generic.NewListResource(dRTAccessResource))
 }
 
 // dRTAccessResource returns the Terraform awscc_shield_drt_access resource.

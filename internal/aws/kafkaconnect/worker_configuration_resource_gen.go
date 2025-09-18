@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_kafkaconnect_worker_configuration", workerConfigurationResource)
+	registry.AddListResourceFactory("awscc_kafkaconnect_worker_configuration", generic.NewListResource(workerConfigurationResource))
 }
 
 // workerConfigurationResource returns the Terraform awscc_kafkaconnect_worker_configuration resource.

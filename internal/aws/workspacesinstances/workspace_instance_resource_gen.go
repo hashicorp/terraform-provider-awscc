@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_workspacesinstances_workspace_instance", workspaceInstanceResource)
+	registry.AddListResourceFactory("awscc_workspacesinstances_workspace_instance", generic.NewListResource(workspaceInstanceResource))
 }
 
 // workspaceInstanceResource returns the Terraform awscc_workspacesinstances_workspace_instance resource.

@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_subnet", subnetResource)
+	registry.AddListResourceFactory("awscc_ec2_subnet", generic.NewListResource(subnetResource))
 }
 
 // subnetResource returns the Terraform awscc_ec2_subnet resource.

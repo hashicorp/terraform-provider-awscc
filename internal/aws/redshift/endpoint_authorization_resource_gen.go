@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_redshift_endpoint_authorization", endpointAuthorizationResource)
+	registry.AddListResourceFactory("awscc_redshift_endpoint_authorization", generic.NewListResource(endpointAuthorizationResource))
 }
 
 // endpointAuthorizationResource returns the Terraform awscc_redshift_endpoint_authorization resource.

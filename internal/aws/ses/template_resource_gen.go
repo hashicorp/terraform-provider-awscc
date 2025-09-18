@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ses_template", templateResource)
+	registry.AddListResourceFactory("awscc_ses_template", generic.NewListResource(templateResource))
 }
 
 // templateResource returns the Terraform awscc_ses_template resource.

@@ -19,6 +19,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_guardduty_master", masterResource)
+	registry.AddListResourceFactory("awscc_guardduty_master", generic.NewListResource(masterResource))
 }
 
 // masterResource returns the Terraform awscc_guardduty_master resource.

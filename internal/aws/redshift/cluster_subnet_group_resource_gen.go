@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_redshift_cluster_subnet_group", clusterSubnetGroupResource)
+	registry.AddListResourceFactory("awscc_redshift_cluster_subnet_group", generic.NewListResource(clusterSubnetGroupResource))
 }
 
 // clusterSubnetGroupResource returns the Terraform awscc_redshift_cluster_subnet_group resource.

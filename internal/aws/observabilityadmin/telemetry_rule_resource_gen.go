@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_observabilityadmin_telemetry_rule", telemetryRuleResource)
+	registry.AddListResourceFactory("awscc_observabilityadmin_telemetry_rule", generic.NewListResource(telemetryRuleResource))
 }
 
 // telemetryRuleResource returns the Terraform awscc_observabilityadmin_telemetry_rule resource.

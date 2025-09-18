@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_robomaker_robot_application", robotApplicationResource)
+	registry.AddListResourceFactory("awscc_robomaker_robot_application", generic.NewListResource(robotApplicationResource))
 }
 
 // robotApplicationResource returns the Terraform awscc_robomaker_robot_application resource.

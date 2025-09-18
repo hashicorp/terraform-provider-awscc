@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_eventschemas_discoverer", discovererResource)
+	registry.AddListResourceFactory("awscc_eventschemas_discoverer", generic.NewListResource(discovererResource))
 }
 
 // discovererResource returns the Terraform awscc_eventschemas_discoverer resource.

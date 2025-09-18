@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_kinesisfirehose_delivery_stream", deliveryStreamResource)
+	registry.AddListResourceFactory("awscc_kinesisfirehose_delivery_stream", generic.NewListResource(deliveryStreamResource))
 }
 
 // deliveryStreamResource returns the Terraform awscc_kinesisfirehose_delivery_stream resource.

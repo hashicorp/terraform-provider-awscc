@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_logs_metric_filter", metricFilterResource)
+	registry.AddListResourceFactory("awscc_logs_metric_filter", generic.NewListResource(metricFilterResource))
 }
 
 // metricFilterResource returns the Terraform awscc_logs_metric_filter resource.

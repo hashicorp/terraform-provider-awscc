@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_route53recoveryreadiness_recovery_group", recoveryGroupResource)
+	registry.AddListResourceFactory("awscc_route53recoveryreadiness_recovery_group", generic.NewListResource(recoveryGroupResource))
 }
 
 // recoveryGroupResource returns the Terraform awscc_route53recoveryreadiness_recovery_group resource.

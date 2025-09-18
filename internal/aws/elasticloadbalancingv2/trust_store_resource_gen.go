@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_elasticloadbalancingv2_trust_store", trustStoreResource)
+	registry.AddListResourceFactory("awscc_elasticloadbalancingv2_trust_store", generic.NewListResource(trustStoreResource))
 }
 
 // trustStoreResource returns the Terraform awscc_elasticloadbalancingv2_trust_store resource.

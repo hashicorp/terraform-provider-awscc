@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotfleetwise_state_template", stateTemplateResource)
+	registry.AddListResourceFactory("awscc_iotfleetwise_state_template", generic.NewListResource(stateTemplateResource))
 }
 
 // stateTemplateResource returns the Terraform awscc_iotfleetwise_state_template resource.

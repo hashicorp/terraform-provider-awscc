@@ -20,6 +20,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotsitewise_access_policy", accessPolicyResource)
+	registry.AddListResourceFactory("awscc_iotsitewise_access_policy", generic.NewListResource(accessPolicyResource))
 }
 
 // accessPolicyResource returns the Terraform awscc_iotsitewise_access_policy resource.

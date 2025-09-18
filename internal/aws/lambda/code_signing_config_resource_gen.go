@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lambda_code_signing_config", codeSigningConfigResource)
+	registry.AddListResourceFactory("awscc_lambda_code_signing_config", generic.NewListResource(codeSigningConfigResource))
 }
 
 // codeSigningConfigResource returns the Terraform awscc_lambda_code_signing_config resource.

@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ecr_replication_configuration", replicationConfigurationResource)
+	registry.AddListResourceFactory("awscc_ecr_replication_configuration", generic.NewListResource(replicationConfigurationResource))
 }
 
 // replicationConfigurationResource returns the Terraform awscc_ecr_replication_configuration resource.

@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_apprunner_auto_scaling_configuration", autoScalingConfigurationResource)
+	registry.AddListResourceFactory("awscc_apprunner_auto_scaling_configuration", generic.NewListResource(autoScalingConfigurationResource))
 }
 
 // autoScalingConfigurationResource returns the Terraform awscc_apprunner_auto_scaling_configuration resource.

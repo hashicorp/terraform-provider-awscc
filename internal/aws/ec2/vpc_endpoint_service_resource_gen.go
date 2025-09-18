@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_vpc_endpoint_service", vPCEndpointServiceResource)
+	registry.AddListResourceFactory("awscc_ec2_vpc_endpoint_service", generic.NewListResource(vPCEndpointServiceResource))
 }
 
 // vPCEndpointServiceResource returns the Terraform awscc_ec2_vpc_endpoint_service resource.

@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_forecast_dataset_group", datasetGroupResource)
+	registry.AddListResourceFactory("awscc_forecast_dataset_group", generic.NewListResource(datasetGroupResource))
 }
 
 // datasetGroupResource returns the Terraform awscc_forecast_dataset_group resource.

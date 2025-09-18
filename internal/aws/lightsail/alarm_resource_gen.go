@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lightsail_alarm", alarmResource)
+	registry.AddListResourceFactory("awscc_lightsail_alarm", generic.NewListResource(alarmResource))
 }
 
 // alarmResource returns the Terraform awscc_lightsail_alarm resource.

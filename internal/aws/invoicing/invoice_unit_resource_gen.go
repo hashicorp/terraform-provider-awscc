@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_invoicing_invoice_unit", invoiceUnitResource)
+	registry.AddListResourceFactory("awscc_invoicing_invoice_unit", generic.NewListResource(invoiceUnitResource))
 }
 
 // invoiceUnitResource returns the Terraform awscc_invoicing_invoice_unit resource.

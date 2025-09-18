@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_inspectorv2_code_security_integration", codeSecurityIntegrationResource)
+	registry.AddListResourceFactory("awscc_inspectorv2_code_security_integration", generic.NewListResource(codeSecurityIntegrationResource))
 }
 
 // codeSecurityIntegrationResource returns the Terraform awscc_inspectorv2_code_security_integration resource.

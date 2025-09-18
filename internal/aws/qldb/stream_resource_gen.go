@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_qldb_stream", streamResource)
+	registry.AddListResourceFactory("awscc_qldb_stream", generic.NewListResource(streamResource))
 }
 
 // streamResource returns the Terraform awscc_qldb_stream resource.

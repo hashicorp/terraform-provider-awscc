@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_redshift_event_subscription", eventSubscriptionResource)
+	registry.AddListResourceFactory("awscc_redshift_event_subscription", generic.NewListResource(eventSubscriptionResource))
 }
 
 // eventSubscriptionResource returns the Terraform awscc_redshift_event_subscription resource.

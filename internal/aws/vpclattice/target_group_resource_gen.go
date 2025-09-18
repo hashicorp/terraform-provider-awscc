@@ -33,6 +33,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_vpclattice_target_group", targetGroupResource)
+	registry.AddListResourceFactory("awscc_vpclattice_target_group", generic.NewListResource(targetGroupResource))
 }
 
 // targetGroupResource returns the Terraform awscc_vpclattice_target_group resource.

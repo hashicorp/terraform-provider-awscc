@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_vpc", vPCResource)
+	registry.AddListResourceFactory("awscc_ec2_vpc", generic.NewListResource(vPCResource))
 }
 
 // vPCResource returns the Terraform awscc_ec2_vpc resource.

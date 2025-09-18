@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lakeformation_data_cells_filter", dataCellsFilterResource)
+	registry.AddListResourceFactory("awscc_lakeformation_data_cells_filter", generic.NewListResource(dataCellsFilterResource))
 }
 
 // dataCellsFilterResource returns the Terraform awscc_lakeformation_data_cells_filter resource.

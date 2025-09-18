@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_kinesis_stream", streamResource)
+	registry.AddListResourceFactory("awscc_kinesis_stream", generic.NewListResource(streamResource))
 }
 
 // streamResource returns the Terraform awscc_kinesis_stream resource.

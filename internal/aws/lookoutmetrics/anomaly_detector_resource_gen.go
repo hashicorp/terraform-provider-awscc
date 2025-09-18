@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lookoutmetrics_anomaly_detector", anomalyDetectorResource)
+	registry.AddListResourceFactory("awscc_lookoutmetrics_anomaly_detector", generic.NewListResource(anomalyDetectorResource))
 }
 
 // anomalyDetectorResource returns the Terraform awscc_lookoutmetrics_anomaly_detector resource.

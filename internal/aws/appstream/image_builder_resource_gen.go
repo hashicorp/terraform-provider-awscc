@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_appstream_image_builder", imageBuilderResource)
+	registry.AddListResourceFactory("awscc_appstream_image_builder", generic.NewListResource(imageBuilderResource))
 }
 
 // imageBuilderResource returns the Terraform awscc_appstream_image_builder resource.

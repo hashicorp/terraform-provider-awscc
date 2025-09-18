@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_transit_gateway", transitGatewayResource)
+	registry.AddListResourceFactory("awscc_ec2_transit_gateway", generic.NewListResource(transitGatewayResource))
 }
 
 // transitGatewayResource returns the Terraform awscc_ec2_transit_gateway resource.

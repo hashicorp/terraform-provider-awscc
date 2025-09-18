@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_datasync_location_hdfs", locationHDFSResource)
+	registry.AddListResourceFactory("awscc_datasync_location_hdfs", generic.NewListResource(locationHDFSResource))
 }
 
 // locationHDFSResource returns the Terraform awscc_datasync_location_hdfs resource.

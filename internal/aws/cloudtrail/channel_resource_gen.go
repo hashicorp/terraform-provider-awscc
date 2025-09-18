@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudtrail_channel", channelResource)
+	registry.AddListResourceFactory("awscc_cloudtrail_channel", generic.NewListResource(channelResource))
 }
 
 // channelResource returns the Terraform awscc_cloudtrail_channel resource.

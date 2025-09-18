@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_guardduty_filter", filterResource)
+	registry.AddListResourceFactory("awscc_guardduty_filter", generic.NewListResource(filterResource))
 }
 
 // filterResource returns the Terraform awscc_guardduty_filter resource.

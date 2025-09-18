@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_gamelift_build", buildResource)
+	registry.AddListResourceFactory("awscc_gamelift_build", generic.NewListResource(buildResource))
 }
 
 // buildResource returns the Terraform awscc_gamelift_build resource.

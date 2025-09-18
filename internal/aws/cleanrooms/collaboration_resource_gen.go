@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cleanrooms_collaboration", collaborationResource)
+	registry.AddListResourceFactory("awscc_cleanrooms_collaboration", generic.NewListResource(collaborationResource))
 }
 
 // collaborationResource returns the Terraform awscc_cleanrooms_collaboration resource.

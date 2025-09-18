@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_vpc_block_public_access_exclusion", vPCBlockPublicAccessExclusionResource)
+	registry.AddListResourceFactory("awscc_ec2_vpc_block_public_access_exclusion", generic.NewListResource(vPCBlockPublicAccessExclusionResource))
 }
 
 // vPCBlockPublicAccessExclusionResource returns the Terraform awscc_ec2_vpc_block_public_access_exclusion resource.

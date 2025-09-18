@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_rds_db_instance", dBInstanceResource)
+	registry.AddListResourceFactory("awscc_rds_db_instance", generic.NewListResource(dBInstanceResource))
 }
 
 // dBInstanceResource returns the Terraform awscc_rds_db_instance resource.

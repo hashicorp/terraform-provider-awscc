@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotevents_input", inputResource)
+	registry.AddListResourceFactory("awscc_iotevents_input", generic.NewListResource(inputResource))
 }
 
 // inputResource returns the Terraform awscc_iotevents_input resource.

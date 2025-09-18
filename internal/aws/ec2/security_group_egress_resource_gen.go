@@ -20,6 +20,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_security_group_egress", securityGroupEgressResource)
+	registry.AddListResourceFactory("awscc_ec2_security_group_egress", generic.NewListResource(securityGroupEgressResource))
 }
 
 // securityGroupEgressResource returns the Terraform awscc_ec2_security_group_egress resource.

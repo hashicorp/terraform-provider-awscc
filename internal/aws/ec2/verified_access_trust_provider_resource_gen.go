@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_verified_access_trust_provider", verifiedAccessTrustProviderResource)
+	registry.AddListResourceFactory("awscc_ec2_verified_access_trust_provider", generic.NewListResource(verifiedAccessTrustProviderResource))
 }
 
 // verifiedAccessTrustProviderResource returns the Terraform awscc_ec2_verified_access_trust_provider resource.

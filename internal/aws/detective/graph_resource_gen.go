@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_detective_graph", graphResource)
+	registry.AddListResourceFactory("awscc_detective_graph", generic.NewListResource(graphResource))
 }
 
 // graphResource returns the Terraform awscc_detective_graph resource.

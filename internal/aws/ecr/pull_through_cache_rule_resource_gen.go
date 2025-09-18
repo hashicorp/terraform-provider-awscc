@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ecr_pull_through_cache_rule", pullThroughCacheRuleResource)
+	registry.AddListResourceFactory("awscc_ecr_pull_through_cache_rule", generic.NewListResource(pullThroughCacheRuleResource))
 }
 
 // pullThroughCacheRuleResource returns the Terraform awscc_ecr_pull_through_cache_rule resource.

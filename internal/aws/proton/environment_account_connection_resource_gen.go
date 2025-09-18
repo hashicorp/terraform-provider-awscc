@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_proton_environment_account_connection", environmentAccountConnectionResource)
+	registry.AddListResourceFactory("awscc_proton_environment_account_connection", generic.NewListResource(environmentAccountConnectionResource))
 }
 
 // environmentAccountConnectionResource returns the Terraform awscc_proton_environment_account_connection resource.

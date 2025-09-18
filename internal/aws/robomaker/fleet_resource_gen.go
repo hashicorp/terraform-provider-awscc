@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_robomaker_fleet", fleetResource)
+	registry.AddListResourceFactory("awscc_robomaker_fleet", generic.NewListResource(fleetResource))
 }
 
 // fleetResource returns the Terraform awscc_robomaker_fleet resource.

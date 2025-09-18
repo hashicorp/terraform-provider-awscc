@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lookoutmetrics_alert", alertResource)
+	registry.AddListResourceFactory("awscc_lookoutmetrics_alert", generic.NewListResource(alertResource))
 }
 
 // alertResource returns the Terraform awscc_lookoutmetrics_alert resource.

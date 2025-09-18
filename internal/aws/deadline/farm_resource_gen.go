@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_deadline_farm", farmResource)
+	registry.AddListResourceFactory("awscc_deadline_farm", generic.NewListResource(farmResource))
 }
 
 // farmResource returns the Terraform awscc_deadline_farm resource.

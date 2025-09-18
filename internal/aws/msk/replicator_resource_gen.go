@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_msk_replicator", replicatorResource)
+	registry.AddListResourceFactory("awscc_msk_replicator", generic.NewListResource(replicatorResource))
 }
 
 // replicatorResource returns the Terraform awscc_msk_replicator resource.

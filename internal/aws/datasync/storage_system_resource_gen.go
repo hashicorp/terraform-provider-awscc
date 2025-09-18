@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_datasync_storage_system", storageSystemResource)
+	registry.AddListResourceFactory("awscc_datasync_storage_system", generic.NewListResource(storageSystemResource))
 }
 
 // storageSystemResource returns the Terraform awscc_datasync_storage_system resource.

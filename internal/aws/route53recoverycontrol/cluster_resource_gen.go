@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_route53recoverycontrol_cluster", clusterResource)
+	registry.AddListResourceFactory("awscc_route53recoverycontrol_cluster", generic.NewListResource(clusterResource))
 }
 
 // clusterResource returns the Terraform awscc_route53recoverycontrol_cluster resource.

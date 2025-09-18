@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_databrew_job", jobResource)
+	registry.AddListResourceFactory("awscc_databrew_job", generic.NewListResource(jobResource))
 }
 
 // jobResource returns the Terraform awscc_databrew_job resource.

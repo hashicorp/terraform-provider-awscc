@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_fsx_data_repository_association", dataRepositoryAssociationResource)
+	registry.AddListResourceFactory("awscc_fsx_data_repository_association", generic.NewListResource(dataRepositoryAssociationResource))
 }
 
 // dataRepositoryAssociationResource returns the Terraform awscc_fsx_data_repository_association resource.

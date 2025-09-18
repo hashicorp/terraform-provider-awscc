@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_ipam_pool", iPAMPoolResource)
+	registry.AddListResourceFactory("awscc_ec2_ipam_pool", generic.NewListResource(iPAMPoolResource))
 }
 
 // iPAMPoolResource returns the Terraform awscc_ec2_ipam_pool resource.

@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_logs_log_anomaly_detector", logAnomalyDetectorResource)
+	registry.AddListResourceFactory("awscc_logs_log_anomaly_detector", generic.NewListResource(logAnomalyDetectorResource))
 }
 
 // logAnomalyDetectorResource returns the Terraform awscc_logs_log_anomaly_detector resource.

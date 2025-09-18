@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_placement_group", placementGroupResource)
+	registry.AddListResourceFactory("awscc_ec2_placement_group", generic.NewListResource(placementGroupResource))
 }
 
 // placementGroupResource returns the Terraform awscc_ec2_placement_group resource.

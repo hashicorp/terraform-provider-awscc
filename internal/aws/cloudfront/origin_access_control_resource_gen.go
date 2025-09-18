@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudfront_origin_access_control", originAccessControlResource)
+	registry.AddListResourceFactory("awscc_cloudfront_origin_access_control", generic.NewListResource(originAccessControlResource))
 }
 
 // originAccessControlResource returns the Terraform awscc_cloudfront_origin_access_control resource.

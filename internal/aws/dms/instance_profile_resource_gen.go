@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_dms_instance_profile", instanceProfileResource)
+	registry.AddListResourceFactory("awscc_dms_instance_profile", generic.NewListResource(instanceProfileResource))
 }
 
 // instanceProfileResource returns the Terraform awscc_dms_instance_profile resource.

@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_subnet_cidr_block", subnetCidrBlockResource)
+	registry.AddListResourceFactory("awscc_ec2_subnet_cidr_block", generic.NewListResource(subnetCidrBlockResource))
 }
 
 // subnetCidrBlockResource returns the Terraform awscc_ec2_subnet_cidr_block resource.

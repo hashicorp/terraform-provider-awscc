@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_batch_job_queue", jobQueueResource)
+	registry.AddListResourceFactory("awscc_batch_job_queue", generic.NewListResource(jobQueueResource))
 }
 
 // jobQueueResource returns the Terraform awscc_batch_job_queue resource.

@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ivs_playback_key_pair", playbackKeyPairResource)
+	registry.AddListResourceFactory("awscc_ivs_playback_key_pair", generic.NewListResource(playbackKeyPairResource))
 }
 
 // playbackKeyPairResource returns the Terraform awscc_ivs_playback_key_pair resource.

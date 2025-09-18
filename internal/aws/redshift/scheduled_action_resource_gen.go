@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_redshift_scheduled_action", scheduledActionResource)
+	registry.AddListResourceFactory("awscc_redshift_scheduled_action", generic.NewListResource(scheduledActionResource))
 }
 
 // scheduledActionResource returns the Terraform awscc_redshift_scheduled_action resource.

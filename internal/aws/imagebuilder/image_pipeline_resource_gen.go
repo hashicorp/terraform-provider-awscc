@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_imagebuilder_image_pipeline", imagePipelineResource)
+	registry.AddListResourceFactory("awscc_imagebuilder_image_pipeline", generic.NewListResource(imagePipelineResource))
 }
 
 // imagePipelineResource returns the Terraform awscc_imagebuilder_image_pipeline resource.

@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_vpclattice_service_network", serviceNetworkResource)
+	registry.AddListResourceFactory("awscc_vpclattice_service_network", generic.NewListResource(serviceNetworkResource))
 }
 
 // serviceNetworkResource returns the Terraform awscc_vpclattice_service_network resource.

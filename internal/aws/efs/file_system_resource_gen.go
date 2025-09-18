@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_efs_file_system", fileSystemResource)
+	registry.AddListResourceFactory("awscc_efs_file_system", generic.NewListResource(fileSystemResource))
 }
 
 // fileSystemResource returns the Terraform awscc_efs_file_system resource.

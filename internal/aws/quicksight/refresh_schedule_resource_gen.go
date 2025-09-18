@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_quicksight_refresh_schedule", refreshScheduleResource)
+	registry.AddListResourceFactory("awscc_quicksight_refresh_schedule", generic.NewListResource(refreshScheduleResource))
 }
 
 // refreshScheduleResource returns the Terraform awscc_quicksight_refresh_schedule resource.

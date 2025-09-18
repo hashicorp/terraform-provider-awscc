@@ -19,6 +19,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_security_group_vpc_association", securityGroupVpcAssociationResource)
+	registry.AddListResourceFactory("awscc_ec2_security_group_vpc_association", generic.NewListResource(securityGroupVpcAssociationResource))
 }
 
 // securityGroupVpcAssociationResource returns the Terraform awscc_ec2_security_group_vpc_association resource.

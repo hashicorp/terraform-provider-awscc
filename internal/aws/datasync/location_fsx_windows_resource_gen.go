@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_datasync_location_fsx_windows", locationFSxWindowsResource)
+	registry.AddListResourceFactory("awscc_datasync_location_fsx_windows", generic.NewListResource(locationFSxWindowsResource))
 }
 
 // locationFSxWindowsResource returns the Terraform awscc_datasync_location_fsx_windows resource.

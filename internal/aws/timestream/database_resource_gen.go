@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_timestream_database", databaseResource)
+	registry.AddListResourceFactory("awscc_timestream_database", generic.NewListResource(databaseResource))
 }
 
 // databaseResource returns the Terraform awscc_timestream_database resource.

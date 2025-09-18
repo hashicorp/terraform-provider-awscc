@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_medialive_signal_map", signalMapResource)
+	registry.AddListResourceFactory("awscc_medialive_signal_map", generic.NewListResource(signalMapResource))
 }
 
 // signalMapResource returns the Terraform awscc_medialive_signal_map resource.

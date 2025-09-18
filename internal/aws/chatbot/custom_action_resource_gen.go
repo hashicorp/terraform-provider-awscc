@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_chatbot_custom_action", customActionResource)
+	registry.AddListResourceFactory("awscc_chatbot_custom_action", generic.NewListResource(customActionResource))
 }
 
 // customActionResource returns the Terraform awscc_chatbot_custom_action resource.

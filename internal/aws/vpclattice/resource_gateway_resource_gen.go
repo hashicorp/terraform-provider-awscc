@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_vpclattice_resource_gateway", resourceGatewayResource)
+	registry.AddListResourceFactory("awscc_vpclattice_resource_gateway", generic.NewListResource(resourceGatewayResource))
 }
 
 // resourceGatewayResource returns the Terraform awscc_vpclattice_resource_gateway resource.

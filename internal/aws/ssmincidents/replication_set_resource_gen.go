@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ssmincidents_replication_set", replicationSetResource)
+	registry.AddListResourceFactory("awscc_ssmincidents_replication_set", generic.NewListResource(replicationSetResource))
 }
 
 // replicationSetResource returns the Terraform awscc_ssmincidents_replication_set resource.

@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_finspace_environment", environmentResource)
+	registry.AddListResourceFactory("awscc_finspace_environment", generic.NewListResource(environmentResource))
 }
 
 // environmentResource returns the Terraform awscc_finspace_environment resource.

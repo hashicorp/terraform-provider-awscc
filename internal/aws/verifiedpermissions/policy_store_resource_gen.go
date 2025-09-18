@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_verifiedpermissions_policy_store", policyStoreResource)
+	registry.AddListResourceFactory("awscc_verifiedpermissions_policy_store", generic.NewListResource(policyStoreResource))
 }
 
 // policyStoreResource returns the Terraform awscc_verifiedpermissions_policy_store resource.

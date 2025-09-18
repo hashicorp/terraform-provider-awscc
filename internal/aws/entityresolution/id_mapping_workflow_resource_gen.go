@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_entityresolution_id_mapping_workflow", idMappingWorkflowResource)
+	registry.AddListResourceFactory("awscc_entityresolution_id_mapping_workflow", generic.NewListResource(idMappingWorkflowResource))
 }
 
 // idMappingWorkflowResource returns the Terraform awscc_entityresolution_id_mapping_workflow resource.

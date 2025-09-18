@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_appconfig_application", applicationResource)
+	registry.AddListResourceFactory("awscc_appconfig_application", generic.NewListResource(applicationResource))
 }
 
 // applicationResource returns the Terraform awscc_appconfig_application resource.

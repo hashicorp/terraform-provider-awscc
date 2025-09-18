@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_groundstation_dataflow_endpoint_group", dataflowEndpointGroupResource)
+	registry.AddListResourceFactory("awscc_groundstation_dataflow_endpoint_group", generic.NewListResource(dataflowEndpointGroupResource))
 }
 
 // dataflowEndpointGroupResource returns the Terraform awscc_groundstation_dataflow_endpoint_group resource.

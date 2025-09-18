@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_apptest_test_case", testCaseResource)
+	registry.AddListResourceFactory("awscc_apptest_test_case", generic.NewListResource(testCaseResource))
 }
 
 // testCaseResource returns the Terraform awscc_apptest_test_case resource.

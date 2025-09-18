@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_codestarconnections_sync_configuration", syncConfigurationResource)
+	registry.AddListResourceFactory("awscc_codestarconnections_sync_configuration", generic.NewListResource(syncConfigurationResource))
 }
 
 // syncConfigurationResource returns the Terraform awscc_codestarconnections_sync_configuration resource.

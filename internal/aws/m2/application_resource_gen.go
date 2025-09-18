@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_m2_application", applicationResource)
+	registry.AddListResourceFactory("awscc_m2_application", generic.NewListResource(applicationResource))
 }
 
 // applicationResource returns the Terraform awscc_m2_application resource.

@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iam_user", userResource)
+	registry.AddListResourceFactory("awscc_iam_user", generic.NewListResource(userResource))
 }
 
 // userResource returns the Terraform awscc_iam_user resource.

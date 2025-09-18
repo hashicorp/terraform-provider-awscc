@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_volume", volumeResource)
+	registry.AddListResourceFactory("awscc_ec2_volume", generic.NewListResource(volumeResource))
 }
 
 // volumeResource returns the Terraform awscc_ec2_volume resource.

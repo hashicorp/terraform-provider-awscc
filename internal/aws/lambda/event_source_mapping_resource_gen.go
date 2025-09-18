@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lambda_event_source_mapping", eventSourceMappingResource)
+	registry.AddListResourceFactory("awscc_lambda_event_source_mapping", generic.NewListResource(eventSourceMappingResource))
 }
 
 // eventSourceMappingResource returns the Terraform awscc_lambda_event_source_mapping resource.

@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_stepfunctions_activity", activityResource)
+	registry.AddListResourceFactory("awscc_stepfunctions_activity", generic.NewListResource(activityResource))
 }
 
 // activityResource returns the Terraform awscc_stepfunctions_activity resource.

@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ecs_task_definition", taskDefinitionResource)
+	registry.AddListResourceFactory("awscc_ecs_task_definition", generic.NewListResource(taskDefinitionResource))
 }
 
 // taskDefinitionResource returns the Terraform awscc_ecs_task_definition resource.

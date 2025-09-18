@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ses_mail_manager_archive", mailManagerArchiveResource)
+	registry.AddListResourceFactory("awscc_ses_mail_manager_archive", generic.NewListResource(mailManagerArchiveResource))
 }
 
 // mailManagerArchiveResource returns the Terraform awscc_ses_mail_manager_archive resource.

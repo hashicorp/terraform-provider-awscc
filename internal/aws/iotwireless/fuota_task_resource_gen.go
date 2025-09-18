@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotwireless_fuota_task", fuotaTaskResource)
+	registry.AddListResourceFactory("awscc_iotwireless_fuota_task", generic.NewListResource(fuotaTaskResource))
 }
 
 // fuotaTaskResource returns the Terraform awscc_iotwireless_fuota_task resource.

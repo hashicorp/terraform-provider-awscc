@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_appconfig_deployment_strategy", deploymentStrategyResource)
+	registry.AddListResourceFactory("awscc_appconfig_deployment_strategy", generic.NewListResource(deploymentStrategyResource))
 }
 
 // deploymentStrategyResource returns the Terraform awscc_appconfig_deployment_strategy resource.

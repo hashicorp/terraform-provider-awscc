@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_gamelift_alias", aliasResource)
+	registry.AddListResourceFactory("awscc_gamelift_alias", generic.NewListResource(aliasResource))
 }
 
 // aliasResource returns the Terraform awscc_gamelift_alias resource.

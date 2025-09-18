@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_macie_custom_data_identifier", customDataIdentifierResource)
+	registry.AddListResourceFactory("awscc_macie_custom_data_identifier", generic.NewListResource(customDataIdentifierResource))
 }
 
 // customDataIdentifierResource returns the Terraform awscc_macie_custom_data_identifier resource.

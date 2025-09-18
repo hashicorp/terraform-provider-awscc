@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_nat_gateway", natGatewayResource)
+	registry.AddListResourceFactory("awscc_ec2_nat_gateway", generic.NewListResource(natGatewayResource))
 }
 
 // natGatewayResource returns the Terraform awscc_ec2_nat_gateway resource.

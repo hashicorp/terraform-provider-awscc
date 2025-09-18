@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_deadline_monitor", monitorResource)
+	registry.AddListResourceFactory("awscc_deadline_monitor", generic.NewListResource(monitorResource))
 }
 
 // monitorResource returns the Terraform awscc_deadline_monitor resource.

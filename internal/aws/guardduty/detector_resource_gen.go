@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_guardduty_detector", detectorResource)
+	registry.AddListResourceFactory("awscc_guardduty_detector", generic.NewListResource(detectorResource))
 }
 
 // detectorResource returns the Terraform awscc_guardduty_detector resource.

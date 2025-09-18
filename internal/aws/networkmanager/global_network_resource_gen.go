@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_networkmanager_global_network", globalNetworkResource)
+	registry.AddListResourceFactory("awscc_networkmanager_global_network", generic.NewListResource(globalNetworkResource))
 }
 
 // globalNetworkResource returns the Terraform awscc_networkmanager_global_network resource.

@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cassandra_keyspace", keyspaceResource)
+	registry.AddListResourceFactory("awscc_cassandra_keyspace", generic.NewListResource(keyspaceResource))
 }
 
 // keyspaceResource returns the Terraform awscc_cassandra_keyspace resource.

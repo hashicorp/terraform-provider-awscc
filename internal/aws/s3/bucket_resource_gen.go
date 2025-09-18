@@ -34,6 +34,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_s3_bucket", bucketResource)
+	registry.AddListResourceFactory("awscc_s3_bucket", generic.NewListResource(bucketResource))
 }
 
 // bucketResource returns the Terraform awscc_s3_bucket resource.

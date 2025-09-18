@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_elasticache_user_group", userGroupResource)
+	registry.AddListResourceFactory("awscc_elasticache_user_group", generic.NewListResource(userGroupResource))
 }
 
 // userGroupResource returns the Terraform awscc_elasticache_user_group resource.

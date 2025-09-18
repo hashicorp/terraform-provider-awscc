@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_odb_cloud_exadata_infrastructure", cloudExadataInfrastructureResource)
+	registry.AddListResourceFactory("awscc_odb_cloud_exadata_infrastructure", generic.NewListResource(cloudExadataInfrastructureResource))
 }
 
 // cloudExadataInfrastructureResource returns the Terraform awscc_odb_cloud_exadata_infrastructure resource.

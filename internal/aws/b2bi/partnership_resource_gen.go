@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_b2bi_partnership", partnershipResource)
+	registry.AddListResourceFactory("awscc_b2bi_partnership", generic.NewListResource(partnershipResource))
 }
 
 // partnershipResource returns the Terraform awscc_b2bi_partnership resource.

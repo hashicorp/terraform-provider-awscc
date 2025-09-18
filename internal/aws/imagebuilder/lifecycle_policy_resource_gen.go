@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_imagebuilder_lifecycle_policy", lifecyclePolicyResource)
+	registry.AddListResourceFactory("awscc_imagebuilder_lifecycle_policy", generic.NewListResource(lifecyclePolicyResource))
 }
 
 // lifecyclePolicyResource returns the Terraform awscc_imagebuilder_lifecycle_policy resource.

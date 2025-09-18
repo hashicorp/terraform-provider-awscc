@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_omics_workflow_version", workflowVersionResource)
+	registry.AddListResourceFactory("awscc_omics_workflow_version", generic.NewListResource(workflowVersionResource))
 }
 
 // workflowVersionResource returns the Terraform awscc_omics_workflow_version resource.

@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_transfer_profile", profileResource)
+	registry.AddListResourceFactory("awscc_transfer_profile", generic.NewListResource(profileResource))
 }
 
 // profileResource returns the Terraform awscc_transfer_profile resource.

@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_domain", domainResource)
+	registry.AddListResourceFactory("awscc_sagemaker_domain", generic.NewListResource(domainResource))
 }
 
 // domainResource returns the Terraform awscc_sagemaker_domain resource.

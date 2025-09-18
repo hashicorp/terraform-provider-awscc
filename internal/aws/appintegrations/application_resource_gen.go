@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_appintegrations_application", applicationResource)
+	registry.AddListResourceFactory("awscc_appintegrations_application", generic.NewListResource(applicationResource))
 }
 
 // applicationResource returns the Terraform awscc_appintegrations_application resource.

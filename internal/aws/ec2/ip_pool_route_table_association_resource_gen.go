@@ -19,6 +19,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_ip_pool_route_table_association", ipPoolRouteTableAssociationResource)
+	registry.AddListResourceFactory("awscc_ec2_ip_pool_route_table_association", generic.NewListResource(ipPoolRouteTableAssociationResource))
 }
 
 // ipPoolRouteTableAssociationResource returns the Terraform awscc_ec2_ip_pool_route_table_association resource.

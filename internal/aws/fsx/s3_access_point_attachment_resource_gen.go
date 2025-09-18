@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_fsx_s3_access_point_attachment", s3AccessPointAttachmentResource)
+	registry.AddListResourceFactory("awscc_fsx_s3_access_point_attachment", generic.NewListResource(s3AccessPointAttachmentResource))
 }
 
 // s3AccessPointAttachmentResource returns the Terraform awscc_fsx_s3_access_point_attachment resource.

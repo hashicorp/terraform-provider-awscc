@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_route53_dnssec", dNSSECResource)
+	registry.AddListResourceFactory("awscc_route53_dnssec", generic.NewListResource(dNSSECResource))
 }
 
 // dNSSECResource returns the Terraform awscc_route53_dnssec resource.

@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_config_aggregation_authorization", aggregationAuthorizationResource)
+	registry.AddListResourceFactory("awscc_config_aggregation_authorization", generic.NewListResource(aggregationAuthorizationResource))
 }
 
 // aggregationAuthorizationResource returns the Terraform awscc_config_aggregation_authorization resource.

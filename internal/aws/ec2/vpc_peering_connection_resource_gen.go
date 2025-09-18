@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_vpc_peering_connection", vPCPeeringConnectionResource)
+	registry.AddListResourceFactory("awscc_ec2_vpc_peering_connection", generic.NewListResource(vPCPeeringConnectionResource))
 }
 
 // vPCPeeringConnectionResource returns the Terraform awscc_ec2_vpc_peering_connection resource.

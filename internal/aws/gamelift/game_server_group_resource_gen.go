@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_gamelift_game_server_group", gameServerGroupResource)
+	registry.AddListResourceFactory("awscc_gamelift_game_server_group", generic.NewListResource(gameServerGroupResource))
 }
 
 // gameServerGroupResource returns the Terraform awscc_gamelift_game_server_group resource.

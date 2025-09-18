@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_memorydb_user", userResource)
+	registry.AddListResourceFactory("awscc_memorydb_user", generic.NewListResource(userResource))
 }
 
 // userResource returns the Terraform awscc_memorydb_user resource.

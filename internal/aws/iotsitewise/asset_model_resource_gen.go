@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotsitewise_asset_model", assetModelResource)
+	registry.AddListResourceFactory("awscc_iotsitewise_asset_model", generic.NewListResource(assetModelResource))
 }
 
 // assetModelResource returns the Terraform awscc_iotsitewise_asset_model resource.

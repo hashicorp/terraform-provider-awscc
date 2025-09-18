@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_grafana_workspace", workspaceResource)
+	registry.AddListResourceFactory("awscc_grafana_workspace", generic.NewListResource(workspaceResource))
 }
 
 // workspaceResource returns the Terraform awscc_grafana_workspace resource.

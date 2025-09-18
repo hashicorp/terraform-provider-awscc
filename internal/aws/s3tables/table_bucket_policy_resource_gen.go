@@ -19,6 +19,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_s3tables_table_bucket_policy", tableBucketPolicyResource)
+	registry.AddListResourceFactory("awscc_s3tables_table_bucket_policy", generic.NewListResource(tableBucketPolicyResource))
 }
 
 // tableBucketPolicyResource returns the Terraform awscc_s3tables_table_bucket_policy resource.

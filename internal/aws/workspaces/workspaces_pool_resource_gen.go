@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_workspaces_workspaces_pool", workspacesPoolResource)
+	registry.AddListResourceFactory("awscc_workspaces_workspaces_pool", generic.NewListResource(workspacesPoolResource))
 }
 
 // workspacesPoolResource returns the Terraform awscc_workspaces_workspaces_pool resource.

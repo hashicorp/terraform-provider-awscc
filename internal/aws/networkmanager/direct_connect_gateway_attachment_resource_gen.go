@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_networkmanager_direct_connect_gateway_attachment", directConnectGatewayAttachmentResource)
+	registry.AddListResourceFactory("awscc_networkmanager_direct_connect_gateway_attachment", generic.NewListResource(directConnectGatewayAttachmentResource))
 }
 
 // directConnectGatewayAttachmentResource returns the Terraform awscc_networkmanager_direct_connect_gateway_attachment resource.

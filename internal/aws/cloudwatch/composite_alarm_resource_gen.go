@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudwatch_composite_alarm", compositeAlarmResource)
+	registry.AddListResourceFactory("awscc_cloudwatch_composite_alarm", generic.NewListResource(compositeAlarmResource))
 }
 
 // compositeAlarmResource returns the Terraform awscc_cloudwatch_composite_alarm resource.

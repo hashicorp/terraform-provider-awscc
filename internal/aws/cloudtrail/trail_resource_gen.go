@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudtrail_trail", trailResource)
+	registry.AddListResourceFactory("awscc_cloudtrail_trail", generic.NewListResource(trailResource))
 }
 
 // trailResource returns the Terraform awscc_cloudtrail_trail resource.

@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_route53resolver_firewall_domain_list", firewallDomainListResource)
+	registry.AddListResourceFactory("awscc_route53resolver_firewall_domain_list", generic.NewListResource(firewallDomainListResource))
 }
 
 // firewallDomainListResource returns the Terraform awscc_route53resolver_firewall_domain_list resource.

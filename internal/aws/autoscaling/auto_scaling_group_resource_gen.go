@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_autoscaling_auto_scaling_group", autoScalingGroupResource)
+	registry.AddListResourceFactory("awscc_autoscaling_auto_scaling_group", generic.NewListResource(autoScalingGroupResource))
 }
 
 // autoScalingGroupResource returns the Terraform awscc_autoscaling_auto_scaling_group resource.

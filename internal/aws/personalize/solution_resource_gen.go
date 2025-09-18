@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_personalize_solution", solutionResource)
+	registry.AddListResourceFactory("awscc_personalize_solution", generic.NewListResource(solutionResource))
 }
 
 // solutionResource returns the Terraform awscc_personalize_solution resource.

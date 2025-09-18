@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_rds_db_proxy", dBProxyResource)
+	registry.AddListResourceFactory("awscc_rds_db_proxy", generic.NewListResource(dBProxyResource))
 }
 
 // dBProxyResource returns the Terraform awscc_rds_db_proxy resource.

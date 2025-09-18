@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_pcaconnectorad_directory_registration", directoryRegistrationResource)
+	registry.AddListResourceFactory("awscc_pcaconnectorad_directory_registration", generic.NewListResource(directoryRegistrationResource))
 }
 
 // directoryRegistrationResource returns the Terraform awscc_pcaconnectorad_directory_registration resource.

@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_transit_gateway_vpc_attachment", transitGatewayVpcAttachmentResource)
+	registry.AddListResourceFactory("awscc_ec2_transit_gateway_vpc_attachment", generic.NewListResource(transitGatewayVpcAttachmentResource))
 }
 
 // transitGatewayVpcAttachmentResource returns the Terraform awscc_ec2_transit_gateway_vpc_attachment resource.

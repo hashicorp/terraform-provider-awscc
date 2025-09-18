@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_voiceid_domain", domainResource)
+	registry.AddListResourceFactory("awscc_voiceid_domain", generic.NewListResource(domainResource))
 }
 
 // domainResource returns the Terraform awscc_voiceid_domain resource.

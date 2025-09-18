@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_codeconnections_connection", connectionResource)
+	registry.AddListResourceFactory("awscc_codeconnections_connection", generic.NewListResource(connectionResource))
 }
 
 // connectionResource returns the Terraform awscc_codeconnections_connection resource.

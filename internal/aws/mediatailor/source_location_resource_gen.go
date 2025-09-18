@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_mediatailor_source_location", sourceLocationResource)
+	registry.AddListResourceFactory("awscc_mediatailor_source_location", generic.NewListResource(sourceLocationResource))
 }
 
 // sourceLocationResource returns the Terraform awscc_mediatailor_source_location resource.
