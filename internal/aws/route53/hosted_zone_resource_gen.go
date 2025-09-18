@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_route53_hosted_zone", hostedZoneResource)
+	registry.AddListResourceFactory("awscc_route53_hosted_zone", generic.NewListResource(hostedZoneResource))
 }
 
 // hostedZoneResource returns the Terraform awscc_route53_hosted_zone resource.

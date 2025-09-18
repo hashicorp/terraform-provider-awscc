@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_workspacesinstances_volume_association", volumeAssociationResource)
+	registry.AddListResourceFactory("awscc_workspacesinstances_volume_association", generic.NewListResource(volumeAssociationResource))
 }
 
 // volumeAssociationResource returns the Terraform awscc_workspacesinstances_volume_association resource.

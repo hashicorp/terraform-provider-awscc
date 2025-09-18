@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_appsync_graph_ql_api", graphQLApiResource)
+	registry.AddListResourceFactory("awscc_appsync_graph_ql_api", generic.NewListResource(graphQLApiResource))
 }
 
 // graphQLApiResource returns the Terraform awscc_appsync_graph_ql_api resource.

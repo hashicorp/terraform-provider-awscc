@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_mediatailor_channel", channelResource)
+	registry.AddListResourceFactory("awscc_mediatailor_channel", generic.NewListResource(channelResource))
 }
 
 // channelResource returns the Terraform awscc_mediatailor_channel resource.

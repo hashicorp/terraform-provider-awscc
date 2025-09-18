@@ -33,6 +33,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iot_job_template", jobTemplateResource)
+	registry.AddListResourceFactory("awscc_iot_job_template", generic.NewListResource(jobTemplateResource))
 }
 
 // jobTemplateResource returns the Terraform awscc_iot_job_template resource.

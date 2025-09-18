@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_datazone_project_profile", projectProfileResource)
+	registry.AddListResourceFactory("awscc_datazone_project_profile", generic.NewListResource(projectProfileResource))
 }
 
 // projectProfileResource returns the Terraform awscc_datazone_project_profile resource.

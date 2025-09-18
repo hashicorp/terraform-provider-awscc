@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_connect_instance", instanceResource)
+	registry.AddListResourceFactory("awscc_connect_instance", generic.NewListResource(instanceResource))
 }
 
 // instanceResource returns the Terraform awscc_connect_instance resource.

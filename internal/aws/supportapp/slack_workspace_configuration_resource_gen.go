@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_supportapp_slack_workspace_configuration", slackWorkspaceConfigurationResource)
+	registry.AddListResourceFactory("awscc_supportapp_slack_workspace_configuration", generic.NewListResource(slackWorkspaceConfigurationResource))
 }
 
 // slackWorkspaceConfigurationResource returns the Terraform awscc_supportapp_slack_workspace_configuration resource.

@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ssmincidents_response_plan", responsePlanResource)
+	registry.AddListResourceFactory("awscc_ssmincidents_response_plan", generic.NewListResource(responsePlanResource))
 }
 
 // responsePlanResource returns the Terraform awscc_ssmincidents_response_plan resource.

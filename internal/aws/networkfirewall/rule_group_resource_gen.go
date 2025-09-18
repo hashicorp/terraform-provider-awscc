@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_networkfirewall_rule_group", ruleGroupResource)
+	registry.AddListResourceFactory("awscc_networkfirewall_rule_group", generic.NewListResource(ruleGroupResource))
 }
 
 // ruleGroupResource returns the Terraform awscc_networkfirewall_rule_group resource.

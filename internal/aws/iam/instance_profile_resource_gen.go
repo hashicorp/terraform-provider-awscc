@@ -20,6 +20,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iam_instance_profile", instanceProfileResource)
+	registry.AddListResourceFactory("awscc_iam_instance_profile", generic.NewListResource(instanceProfileResource))
 }
 
 // instanceProfileResource returns the Terraform awscc_iam_instance_profile resource.

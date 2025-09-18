@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_resiliencehub_resiliency_policy", resiliencyPolicyResource)
+	registry.AddListResourceFactory("awscc_resiliencehub_resiliency_policy", generic.NewListResource(resiliencyPolicyResource))
 }
 
 // resiliencyPolicyResource returns the Terraform awscc_resiliencehub_resiliency_policy resource.

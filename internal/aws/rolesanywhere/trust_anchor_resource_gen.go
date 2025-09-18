@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_rolesanywhere_trust_anchor", trustAnchorResource)
+	registry.AddListResourceFactory("awscc_rolesanywhere_trust_anchor", generic.NewListResource(trustAnchorResource))
 }
 
 // trustAnchorResource returns the Terraform awscc_rolesanywhere_trust_anchor resource.

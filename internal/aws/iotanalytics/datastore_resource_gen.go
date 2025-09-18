@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotanalytics_datastore", datastoreResource)
+	registry.AddListResourceFactory("awscc_iotanalytics_datastore", generic.NewListResource(datastoreResource))
 }
 
 // datastoreResource returns the Terraform awscc_iotanalytics_datastore resource.

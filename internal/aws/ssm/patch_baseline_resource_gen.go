@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ssm_patch_baseline", patchBaselineResource)
+	registry.AddListResourceFactory("awscc_ssm_patch_baseline", generic.NewListResource(patchBaselineResource))
 }
 
 // patchBaselineResource returns the Terraform awscc_ssm_patch_baseline resource.

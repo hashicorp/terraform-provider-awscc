@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_backup_framework", frameworkResource)
+	registry.AddListResourceFactory("awscc_backup_framework", generic.NewListResource(frameworkResource))
 }
 
 // frameworkResource returns the Terraform awscc_backup_framework resource.

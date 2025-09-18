@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_logs_query_definition", queryDefinitionResource)
+	registry.AddListResourceFactory("awscc_logs_query_definition", generic.NewListResource(queryDefinitionResource))
 }
 
 // queryDefinitionResource returns the Terraform awscc_logs_query_definition resource.

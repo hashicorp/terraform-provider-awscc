@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_network_insights_path", networkInsightsPathResource)
+	registry.AddListResourceFactory("awscc_ec2_network_insights_path", generic.NewListResource(networkInsightsPathResource))
 }
 
 // networkInsightsPathResource returns the Terraform awscc_ec2_network_insights_path resource.

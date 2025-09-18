@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotwireless_multicast_group", multicastGroupResource)
+	registry.AddListResourceFactory("awscc_iotwireless_multicast_group", generic.NewListResource(multicastGroupResource))
 }
 
 // multicastGroupResource returns the Terraform awscc_iotwireless_multicast_group resource.

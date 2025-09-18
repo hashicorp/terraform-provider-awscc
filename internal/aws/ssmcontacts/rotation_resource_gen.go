@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ssmcontacts_rotation", rotationResource)
+	registry.AddListResourceFactory("awscc_ssmcontacts_rotation", generic.NewListResource(rotationResource))
 }
 
 // rotationResource returns the Terraform awscc_ssmcontacts_rotation resource.

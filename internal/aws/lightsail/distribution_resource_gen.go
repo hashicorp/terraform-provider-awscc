@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lightsail_distribution", distributionResource)
+	registry.AddListResourceFactory("awscc_lightsail_distribution", generic.NewListResource(distributionResource))
 }
 
 // distributionResource returns the Terraform awscc_lightsail_distribution resource.

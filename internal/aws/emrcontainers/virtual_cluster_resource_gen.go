@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_emrcontainers_virtual_cluster", virtualClusterResource)
+	registry.AddListResourceFactory("awscc_emrcontainers_virtual_cluster", generic.NewListResource(virtualClusterResource))
 }
 
 // virtualClusterResource returns the Terraform awscc_emrcontainers_virtual_cluster resource.

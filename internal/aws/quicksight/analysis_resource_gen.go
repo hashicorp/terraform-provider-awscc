@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_quicksight_analysis", analysisResource)
+	registry.AddListResourceFactory("awscc_quicksight_analysis", generic.NewListResource(analysisResource))
 }
 
 // analysisResource returns the Terraform awscc_quicksight_analysis resource.

@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_dynamodb_table", tableResource)
+	registry.AddListResourceFactory("awscc_dynamodb_table", generic.NewListResource(tableResource))
 }
 
 // tableResource returns the Terraform awscc_dynamodb_table resource.

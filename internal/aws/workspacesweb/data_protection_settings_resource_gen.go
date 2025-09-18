@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_workspacesweb_data_protection_settings", dataProtectionSettingsResource)
+	registry.AddListResourceFactory("awscc_workspacesweb_data_protection_settings", generic.NewListResource(dataProtectionSettingsResource))
 }
 
 // dataProtectionSettingsResource returns the Terraform awscc_workspacesweb_data_protection_settings resource.

@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_datasync_location_fsx_lustre", locationFSxLustreResource)
+	registry.AddListResourceFactory("awscc_datasync_location_fsx_lustre", generic.NewListResource(locationFSxLustreResource))
 }
 
 // locationFSxLustreResource returns the Terraform awscc_datasync_location_fsx_lustre resource.

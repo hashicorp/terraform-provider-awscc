@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_bedrock_knowledge_base", knowledgeBaseResource)
+	registry.AddListResourceFactory("awscc_bedrock_knowledge_base", generic.NewListResource(knowledgeBaseResource))
 }
 
 // knowledgeBaseResource returns the Terraform awscc_bedrock_knowledge_base resource.

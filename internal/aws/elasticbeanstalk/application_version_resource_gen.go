@@ -20,6 +20,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_elasticbeanstalk_application_version", applicationVersionResource)
+	registry.AddListResourceFactory("awscc_elasticbeanstalk_application_version", generic.NewListResource(applicationVersionResource))
 }
 
 // applicationVersionResource returns the Terraform awscc_elasticbeanstalk_application_version resource.

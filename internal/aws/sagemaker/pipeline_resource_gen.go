@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_pipeline", pipelineResource)
+	registry.AddListResourceFactory("awscc_sagemaker_pipeline", generic.NewListResource(pipelineResource))
 }
 
 // pipelineResource returns the Terraform awscc_sagemaker_pipeline resource.

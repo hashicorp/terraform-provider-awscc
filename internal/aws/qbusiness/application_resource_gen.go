@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_qbusiness_application", applicationResource)
+	registry.AddListResourceFactory("awscc_qbusiness_application", generic.NewListResource(applicationResource))
 }
 
 // applicationResource returns the Terraform awscc_qbusiness_application resource.

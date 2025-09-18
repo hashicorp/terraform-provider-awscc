@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_events_endpoint", endpointResource)
+	registry.AddListResourceFactory("awscc_events_endpoint", generic.NewListResource(endpointResource))
 }
 
 // endpointResource returns the Terraform awscc_events_endpoint resource.

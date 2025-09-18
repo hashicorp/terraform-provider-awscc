@@ -21,6 +21,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_servicecatalog_service_action", serviceActionResource)
+	registry.AddListResourceFactory("awscc_servicecatalog_service_action", generic.NewListResource(serviceActionResource))
 }
 
 // serviceActionResource returns the Terraform awscc_servicecatalog_service_action resource.

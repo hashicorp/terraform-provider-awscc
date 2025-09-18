@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_route53resolver_firewall_rule_group_association", firewallRuleGroupAssociationResource)
+	registry.AddListResourceFactory("awscc_route53resolver_firewall_rule_group_association", generic.NewListResource(firewallRuleGroupAssociationResource))
 }
 
 // firewallRuleGroupAssociationResource returns the Terraform awscc_route53resolver_firewall_rule_group_association resource.

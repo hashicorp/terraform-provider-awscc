@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_omics_reference_store", referenceStoreResource)
+	registry.AddListResourceFactory("awscc_omics_reference_store", generic.NewListResource(referenceStoreResource))
 }
 
 // referenceStoreResource returns the Terraform awscc_omics_reference_store resource.

@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_ipam_scope", iPAMScopeResource)
+	registry.AddListResourceFactory("awscc_ec2_ipam_scope", generic.NewListResource(iPAMScopeResource))
 }
 
 // iPAMScopeResource returns the Terraform awscc_ec2_ipam_scope resource.

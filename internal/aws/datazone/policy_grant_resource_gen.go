@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_datazone_policy_grant", policyGrantResource)
+	registry.AddListResourceFactory("awscc_datazone_policy_grant", generic.NewListResource(policyGrantResource))
 }
 
 // policyGrantResource returns the Terraform awscc_datazone_policy_grant resource.

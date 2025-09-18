@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotsitewise_dashboard", dashboardResource)
+	registry.AddListResourceFactory("awscc_iotsitewise_dashboard", generic.NewListResource(dashboardResource))
 }
 
 // dashboardResource returns the Terraform awscc_iotsitewise_dashboard resource.

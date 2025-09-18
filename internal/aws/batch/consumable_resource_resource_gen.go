@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_batch_consumable_resource", consumableResourceResource)
+	registry.AddListResourceFactory("awscc_batch_consumable_resource", generic.NewListResource(consumableResourceResource))
 }
 
 // consumableResourceResource returns the Terraform awscc_batch_consumable_resource resource.

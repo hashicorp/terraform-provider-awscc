@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_logs_delivery", deliveryResource)
+	registry.AddListResourceFactory("awscc_logs_delivery", generic.NewListResource(deliveryResource))
 }
 
 // deliveryResource returns the Terraform awscc_logs_delivery resource.

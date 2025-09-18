@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_verified_access_group", verifiedAccessGroupResource)
+	registry.AddListResourceFactory("awscc_ec2_verified_access_group", generic.NewListResource(verifiedAccessGroupResource))
 }
 
 // verifiedAccessGroupResource returns the Terraform awscc_ec2_verified_access_group resource.

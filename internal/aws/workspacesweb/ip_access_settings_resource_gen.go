@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_workspacesweb_ip_access_settings", ipAccessSettingsResource)
+	registry.AddListResourceFactory("awscc_workspacesweb_ip_access_settings", generic.NewListResource(ipAccessSettingsResource))
 }
 
 // ipAccessSettingsResource returns the Terraform awscc_workspacesweb_ip_access_settings resource.

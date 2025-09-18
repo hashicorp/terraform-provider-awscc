@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_transit_gateway_multicast_domain", transitGatewayMulticastDomainResource)
+	registry.AddListResourceFactory("awscc_ec2_transit_gateway_multicast_domain", generic.NewListResource(transitGatewayMulticastDomainResource))
 }
 
 // transitGatewayMulticastDomainResource returns the Terraform awscc_ec2_transit_gateway_multicast_domain resource.

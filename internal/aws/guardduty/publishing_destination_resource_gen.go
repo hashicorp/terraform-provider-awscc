@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_guardduty_publishing_destination", publishingDestinationResource)
+	registry.AddListResourceFactory("awscc_guardduty_publishing_destination", generic.NewListResource(publishingDestinationResource))
 }
 
 // publishingDestinationResource returns the Terraform awscc_guardduty_publishing_destination resource.

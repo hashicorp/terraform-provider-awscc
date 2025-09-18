@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_athena_data_catalog", dataCatalogResource)
+	registry.AddListResourceFactory("awscc_athena_data_catalog", generic.NewListResource(dataCatalogResource))
 }
 
 // dataCatalogResource returns the Terraform awscc_athena_data_catalog resource.

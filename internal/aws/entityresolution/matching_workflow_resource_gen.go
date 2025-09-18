@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_entityresolution_matching_workflow", matchingWorkflowResource)
+	registry.AddListResourceFactory("awscc_entityresolution_matching_workflow", generic.NewListResource(matchingWorkflowResource))
 }
 
 // matchingWorkflowResource returns the Terraform awscc_entityresolution_matching_workflow resource.

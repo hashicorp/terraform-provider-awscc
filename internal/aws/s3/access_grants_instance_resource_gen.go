@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_s3_access_grants_instance", accessGrantsInstanceResource)
+	registry.AddListResourceFactory("awscc_s3_access_grants_instance", generic.NewListResource(accessGrantsInstanceResource))
 }
 
 // accessGrantsInstanceResource returns the Terraform awscc_s3_access_grants_instance resource.

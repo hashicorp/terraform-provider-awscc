@@ -19,6 +19,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_subnet_route_table_association", subnetRouteTableAssociationResource)
+	registry.AddListResourceFactory("awscc_ec2_subnet_route_table_association", generic.NewListResource(subnetRouteTableAssociationResource))
 }
 
 // subnetRouteTableAssociationResource returns the Terraform awscc_ec2_subnet_route_table_association resource.

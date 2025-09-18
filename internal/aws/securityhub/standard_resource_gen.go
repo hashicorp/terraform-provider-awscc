@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_securityhub_standard", standardResource)
+	registry.AddListResourceFactory("awscc_securityhub_standard", generic.NewListResource(standardResource))
 }
 
 // standardResource returns the Terraform awscc_securityhub_standard resource.

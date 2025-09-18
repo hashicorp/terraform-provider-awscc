@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lex_bot_alias", botAliasResource)
+	registry.AddListResourceFactory("awscc_lex_bot_alias", generic.NewListResource(botAliasResource))
 }
 
 // botAliasResource returns the Terraform awscc_lex_bot_alias resource.

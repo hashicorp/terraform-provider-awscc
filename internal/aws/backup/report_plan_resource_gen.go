@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_backup_report_plan", reportPlanResource)
+	registry.AddListResourceFactory("awscc_backup_report_plan", generic.NewListResource(reportPlanResource))
 }
 
 // reportPlanResource returns the Terraform awscc_backup_report_plan resource.

@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_paymentcryptography_alias", aliasResource)
+	registry.AddListResourceFactory("awscc_paymentcryptography_alias", generic.NewListResource(aliasResource))
 }
 
 // aliasResource returns the Terraform awscc_paymentcryptography_alias resource.

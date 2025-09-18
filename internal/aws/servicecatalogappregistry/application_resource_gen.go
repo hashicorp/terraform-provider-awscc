@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_servicecatalogappregistry_application", applicationResource)
+	registry.AddListResourceFactory("awscc_servicecatalogappregistry_application", generic.NewListResource(applicationResource))
 }
 
 // applicationResource returns the Terraform awscc_servicecatalogappregistry_application resource.

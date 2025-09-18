@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_instance", instanceResource)
+	registry.AddListResourceFactory("awscc_ec2_instance", generic.NewListResource(instanceResource))
 }
 
 // instanceResource returns the Terraform awscc_ec2_instance resource.

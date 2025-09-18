@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_enclave_certificate_iam_role_association", enclaveCertificateIamRoleAssociationResource)
+	registry.AddListResourceFactory("awscc_ec2_enclave_certificate_iam_role_association", generic.NewListResource(enclaveCertificateIamRoleAssociationResource))
 }
 
 // enclaveCertificateIamRoleAssociationResource returns the Terraform awscc_ec2_enclave_certificate_iam_role_association resource.

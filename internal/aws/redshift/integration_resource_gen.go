@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_redshift_integration", integrationResource)
+	registry.AddListResourceFactory("awscc_redshift_integration", generic.NewListResource(integrationResource))
 }
 
 // integrationResource returns the Terraform awscc_redshift_integration resource.

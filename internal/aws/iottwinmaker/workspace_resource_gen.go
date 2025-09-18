@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iottwinmaker_workspace", workspaceResource)
+	registry.AddListResourceFactory("awscc_iottwinmaker_workspace", generic.NewListResource(workspaceResource))
 }
 
 // workspaceResource returns the Terraform awscc_iottwinmaker_workspace resource.

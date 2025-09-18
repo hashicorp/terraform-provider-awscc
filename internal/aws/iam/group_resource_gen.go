@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iam_group", groupResource)
+	registry.AddListResourceFactory("awscc_iam_group", generic.NewListResource(groupResource))
 }
 
 // groupResource returns the Terraform awscc_iam_group resource.

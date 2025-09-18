@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lex_bot_version", botVersionResource)
+	registry.AddListResourceFactory("awscc_lex_bot_version", generic.NewListResource(botVersionResource))
 }
 
 // botVersionResource returns the Terraform awscc_lex_bot_version resource.

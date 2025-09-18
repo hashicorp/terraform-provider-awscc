@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_location_place_index", placeIndexResource)
+	registry.AddListResourceFactory("awscc_location_place_index", generic.NewListResource(placeIndexResource))
 }
 
 // placeIndexResource returns the Terraform awscc_location_place_index resource.

@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_datazone_domain", domainResource)
+	registry.AddListResourceFactory("awscc_datazone_domain", generic.NewListResource(domainResource))
 }
 
 // domainResource returns the Terraform awscc_datazone_domain resource.

@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_aiops_investigation_group", investigationGroupResource)
+	registry.AddListResourceFactory("awscc_aiops_investigation_group", generic.NewListResource(investigationGroupResource))
 }
 
 // investigationGroupResource returns the Terraform awscc_aiops_investigation_group resource.

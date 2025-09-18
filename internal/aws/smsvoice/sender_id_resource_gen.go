@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_smsvoice_sender_id", senderIdResource)
+	registry.AddListResourceFactory("awscc_smsvoice_sender_id", generic.NewListResource(senderIdResource))
 }
 
 // senderIdResource returns the Terraform awscc_smsvoice_sender_id resource.

@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_bedrock_prompt", promptResource)
+	registry.AddListResourceFactory("awscc_bedrock_prompt", generic.NewListResource(promptResource))
 }
 
 // promptResource returns the Terraform awscc_bedrock_prompt resource.

@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_databrew_project", projectResource)
+	registry.AddListResourceFactory("awscc_databrew_project", generic.NewListResource(projectResource))
 }
 
 // projectResource returns the Terraform awscc_databrew_project resource.

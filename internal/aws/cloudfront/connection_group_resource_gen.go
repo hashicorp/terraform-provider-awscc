@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudfront_connection_group", connectionGroupResource)
+	registry.AddListResourceFactory("awscc_cloudfront_connection_group", generic.NewListResource(connectionGroupResource))
 }
 
 // connectionGroupResource returns the Terraform awscc_cloudfront_connection_group resource.

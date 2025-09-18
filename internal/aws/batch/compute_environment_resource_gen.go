@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_batch_compute_environment", computeEnvironmentResource)
+	registry.AddListResourceFactory("awscc_batch_compute_environment", generic.NewListResource(computeEnvironmentResource))
 }
 
 // computeEnvironmentResource returns the Terraform awscc_batch_compute_environment resource.

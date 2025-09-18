@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_oam_sink", sinkResource)
+	registry.AddListResourceFactory("awscc_oam_sink", generic.NewListResource(sinkResource))
 }
 
 // sinkResource returns the Terraform awscc_oam_sink resource.

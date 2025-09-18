@@ -21,6 +21,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_mediaconnect_flow_vpc_interface", flowVpcInterfaceResource)
+	registry.AddListResourceFactory("awscc_mediaconnect_flow_vpc_interface", generic.NewListResource(flowVpcInterfaceResource))
 }
 
 // flowVpcInterfaceResource returns the Terraform awscc_mediaconnect_flow_vpc_interface resource.

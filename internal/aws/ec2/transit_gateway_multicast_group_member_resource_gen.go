@@ -20,6 +20,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_transit_gateway_multicast_group_member", transitGatewayMulticastGroupMemberResource)
+	registry.AddListResourceFactory("awscc_ec2_transit_gateway_multicast_group_member", generic.NewListResource(transitGatewayMulticastGroupMemberResource))
 }
 
 // transitGatewayMulticastGroupMemberResource returns the Terraform awscc_ec2_transit_gateway_multicast_group_member resource.

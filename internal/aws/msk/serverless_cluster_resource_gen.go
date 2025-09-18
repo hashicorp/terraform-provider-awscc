@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_msk_serverless_cluster", serverlessClusterResource)
+	registry.AddListResourceFactory("awscc_msk_serverless_cluster", generic.NewListResource(serverlessClusterResource))
 }
 
 // serverlessClusterResource returns the Terraform awscc_msk_serverless_cluster resource.

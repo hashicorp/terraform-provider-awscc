@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_glue_registry", registryResource)
+	registry.AddListResourceFactory("awscc_glue_registry", generic.NewListResource(registryResource))
 }
 
 // registryResource returns the Terraform awscc_glue_registry resource.

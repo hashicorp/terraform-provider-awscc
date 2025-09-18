@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_fms_notification_channel", notificationChannelResource)
+	registry.AddListResourceFactory("awscc_fms_notification_channel", generic.NewListResource(notificationChannelResource))
 }
 
 // notificationChannelResource returns the Terraform awscc_fms_notification_channel resource.

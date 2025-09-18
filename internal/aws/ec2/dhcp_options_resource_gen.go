@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_dhcp_options", dHCPOptionsResource)
+	registry.AddListResourceFactory("awscc_ec2_dhcp_options", generic.NewListResource(dHCPOptionsResource))
 }
 
 // dHCPOptionsResource returns the Terraform awscc_ec2_dhcp_options resource.

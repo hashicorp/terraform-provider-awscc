@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_egress_only_internet_gateway", egressOnlyInternetGatewayResource)
+	registry.AddListResourceFactory("awscc_ec2_egress_only_internet_gateway", generic.NewListResource(egressOnlyInternetGatewayResource))
 }
 
 // egressOnlyInternetGatewayResource returns the Terraform awscc_ec2_egress_only_internet_gateway resource.

@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_osis_pipeline", pipelineResource)
+	registry.AddListResourceFactory("awscc_osis_pipeline", generic.NewListResource(pipelineResource))
 }
 
 // pipelineResource returns the Terraform awscc_osis_pipeline resource.

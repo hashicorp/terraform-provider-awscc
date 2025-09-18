@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotwireless_wireless_device_import_task", wirelessDeviceImportTaskResource)
+	registry.AddListResourceFactory("awscc_iotwireless_wireless_device_import_task", generic.NewListResource(wirelessDeviceImportTaskResource))
 }
 
 // wirelessDeviceImportTaskResource returns the Terraform awscc_iotwireless_wireless_device_import_task resource.

@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_elasticache_user", userResource)
+	registry.AddListResourceFactory("awscc_elasticache_user", generic.NewListResource(userResource))
 }
 
 // userResource returns the Terraform awscc_elasticache_user resource.

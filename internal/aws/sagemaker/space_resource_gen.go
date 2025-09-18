@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_space", spaceResource)
+	registry.AddListResourceFactory("awscc_sagemaker_space", generic.NewListResource(spaceResource))
 }
 
 // spaceResource returns the Terraform awscc_sagemaker_space resource.

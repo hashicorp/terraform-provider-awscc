@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_omics_run_group", runGroupResource)
+	registry.AddListResourceFactory("awscc_omics_run_group", generic.NewListResource(runGroupResource))
 }
 
 // runGroupResource returns the Terraform awscc_omics_run_group resource.

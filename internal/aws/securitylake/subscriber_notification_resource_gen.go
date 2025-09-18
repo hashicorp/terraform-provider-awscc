@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_securitylake_subscriber_notification", subscriberNotificationResource)
+	registry.AddListResourceFactory("awscc_securitylake_subscriber_notification", generic.NewListResource(subscriberNotificationResource))
 }
 
 // subscriberNotificationResource returns the Terraform awscc_securitylake_subscriber_notification resource.

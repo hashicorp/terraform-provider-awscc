@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_elasticloadbalancingv2_target_group", targetGroupResource)
+	registry.AddListResourceFactory("awscc_elasticloadbalancingv2_target_group", generic.NewListResource(targetGroupResource))
 }
 
 // targetGroupResource returns the Terraform awscc_elasticloadbalancingv2_target_group resource.

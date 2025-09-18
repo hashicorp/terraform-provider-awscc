@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_autoscaling_lifecycle_hook", lifecycleHookResource)
+	registry.AddListResourceFactory("awscc_autoscaling_lifecycle_hook", generic.NewListResource(lifecycleHookResource))
 }
 
 // lifecycleHookResource returns the Terraform awscc_autoscaling_lifecycle_hook resource.

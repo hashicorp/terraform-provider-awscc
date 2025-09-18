@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_memorydb_multi_region_cluster", multiRegionClusterResource)
+	registry.AddListResourceFactory("awscc_memorydb_multi_region_cluster", generic.NewListResource(multiRegionClusterResource))
 }
 
 // multiRegionClusterResource returns the Terraform awscc_memorydb_multi_region_cluster resource.

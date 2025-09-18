@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_healthlake_fhir_datastore", fHIRDatastoreResource)
+	registry.AddListResourceFactory("awscc_healthlake_fhir_datastore", generic.NewListResource(fHIRDatastoreResource))
 }
 
 // fHIRDatastoreResource returns the Terraform awscc_healthlake_fhir_datastore resource.

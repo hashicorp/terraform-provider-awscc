@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_connect_security_key", securityKeyResource)
+	registry.AddListResourceFactory("awscc_connect_security_key", generic.NewListResource(securityKeyResource))
 }
 
 // securityKeyResource returns the Terraform awscc_connect_security_key resource.

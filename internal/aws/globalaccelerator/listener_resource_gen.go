@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_globalaccelerator_listener", listenerResource)
+	registry.AddListResourceFactory("awscc_globalaccelerator_listener", generic.NewListResource(listenerResource))
 }
 
 // listenerResource returns the Terraform awscc_globalaccelerator_listener resource.

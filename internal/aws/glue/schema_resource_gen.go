@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_glue_schema", schemaResource)
+	registry.AddListResourceFactory("awscc_glue_schema", generic.NewListResource(schemaResource))
 }
 
 // schemaResource returns the Terraform awscc_glue_schema resource.

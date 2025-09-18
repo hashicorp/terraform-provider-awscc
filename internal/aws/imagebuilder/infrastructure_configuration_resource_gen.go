@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_imagebuilder_infrastructure_configuration", infrastructureConfigurationResource)
+	registry.AddListResourceFactory("awscc_imagebuilder_infrastructure_configuration", generic.NewListResource(infrastructureConfigurationResource))
 }
 
 // infrastructureConfigurationResource returns the Terraform awscc_imagebuilder_infrastructure_configuration resource.

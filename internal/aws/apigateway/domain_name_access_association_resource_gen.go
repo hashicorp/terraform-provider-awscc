@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_apigateway_domain_name_access_association", domainNameAccessAssociationResource)
+	registry.AddListResourceFactory("awscc_apigateway_domain_name_access_association", generic.NewListResource(domainNameAccessAssociationResource))
 }
 
 // domainNameAccessAssociationResource returns the Terraform awscc_apigateway_domain_name_access_association resource.

@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_transfer_certificate", certificateResource)
+	registry.AddListResourceFactory("awscc_transfer_certificate", generic.NewListResource(certificateResource))
 }
 
 // certificateResource returns the Terraform awscc_transfer_certificate resource.

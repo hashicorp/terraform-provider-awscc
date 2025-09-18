@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_quicksight_custom_permissions", customPermissionsResource)
+	registry.AddListResourceFactory("awscc_quicksight_custom_permissions", generic.NewListResource(customPermissionsResource))
 }
 
 // customPermissionsResource returns the Terraform awscc_quicksight_custom_permissions resource.

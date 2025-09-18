@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_resiliencehub_app", appResource)
+	registry.AddListResourceFactory("awscc_resiliencehub_app", generic.NewListResource(appResource))
 }
 
 // appResource returns the Terraform awscc_resiliencehub_app resource.

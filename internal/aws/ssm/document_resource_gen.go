@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ssm_document", documentResource)
+	registry.AddListResourceFactory("awscc_ssm_document", generic.NewListResource(documentResource))
 }
 
 // documentResource returns the Terraform awscc_ssm_document resource.

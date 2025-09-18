@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iot_resource_specific_logging", resourceSpecificLoggingResource)
+	registry.AddListResourceFactory("awscc_iot_resource_specific_logging", generic.NewListResource(resourceSpecificLoggingResource))
 }
 
 // resourceSpecificLoggingResource returns the Terraform awscc_iot_resource_specific_logging resource.

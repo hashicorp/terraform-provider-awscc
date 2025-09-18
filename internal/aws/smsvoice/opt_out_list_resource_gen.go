@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_smsvoice_opt_out_list", optOutListResource)
+	registry.AddListResourceFactory("awscc_smsvoice_opt_out_list", generic.NewListResource(optOutListResource))
 }
 
 // optOutListResource returns the Terraform awscc_smsvoice_opt_out_list resource.

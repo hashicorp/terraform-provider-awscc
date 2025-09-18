@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_databrew_ruleset", rulesetResource)
+	registry.AddListResourceFactory("awscc_databrew_ruleset", generic.NewListResource(rulesetResource))
 }
 
 // rulesetResource returns the Terraform awscc_databrew_ruleset resource.

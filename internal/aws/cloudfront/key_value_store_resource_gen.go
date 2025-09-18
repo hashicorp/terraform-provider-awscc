@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudfront_key_value_store", keyValueStoreResource)
+	registry.AddListResourceFactory("awscc_cloudfront_key_value_store", generic.NewListResource(keyValueStoreResource))
 }
 
 // keyValueStoreResource returns the Terraform awscc_cloudfront_key_value_store resource.

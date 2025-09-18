@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iot_account_audit_configuration", accountAuditConfigurationResource)
+	registry.AddListResourceFactory("awscc_iot_account_audit_configuration", generic.NewListResource(accountAuditConfigurationResource))
 }
 
 // accountAuditConfigurationResource returns the Terraform awscc_iot_account_audit_configuration resource.

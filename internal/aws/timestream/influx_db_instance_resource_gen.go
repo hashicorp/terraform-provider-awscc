@@ -33,6 +33,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_timestream_influx_db_instance", influxDBInstanceResource)
+	registry.AddListResourceFactory("awscc_timestream_influx_db_instance", generic.NewListResource(influxDBInstanceResource))
 }
 
 // influxDBInstanceResource returns the Terraform awscc_timestream_influx_db_instance resource.

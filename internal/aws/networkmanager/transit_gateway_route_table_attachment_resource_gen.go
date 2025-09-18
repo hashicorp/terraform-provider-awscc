@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_networkmanager_transit_gateway_route_table_attachment", transitGatewayRouteTableAttachmentResource)
+	registry.AddListResourceFactory("awscc_networkmanager_transit_gateway_route_table_attachment", generic.NewListResource(transitGatewayRouteTableAttachmentResource))
 }
 
 // transitGatewayRouteTableAttachmentResource returns the Terraform awscc_networkmanager_transit_gateway_route_table_attachment resource.

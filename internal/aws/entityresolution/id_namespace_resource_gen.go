@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_entityresolution_id_namespace", idNamespaceResource)
+	registry.AddListResourceFactory("awscc_entityresolution_id_namespace", generic.NewListResource(idNamespaceResource))
 }
 
 // idNamespaceResource returns the Terraform awscc_entityresolution_id_namespace resource.

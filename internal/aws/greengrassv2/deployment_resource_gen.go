@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_greengrassv2_deployment", deploymentResource)
+	registry.AddListResourceFactory("awscc_greengrassv2_deployment", generic.NewListResource(deploymentResource))
 }
 
 // deploymentResource returns the Terraform awscc_greengrassv2_deployment resource.

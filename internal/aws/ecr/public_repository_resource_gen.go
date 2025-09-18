@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ecr_public_repository", publicRepositoryResource)
+	registry.AddListResourceFactory("awscc_ecr_public_repository", generic.NewListResource(publicRepositoryResource))
 }
 
 // publicRepositoryResource returns the Terraform awscc_ecr_public_repository resource.

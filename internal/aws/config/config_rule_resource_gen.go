@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_config_config_rule", configRuleResource)
+	registry.AddListResourceFactory("awscc_config_config_rule", generic.NewListResource(configRuleResource))
 }
 
 // configRuleResource returns the Terraform awscc_config_config_rule resource.

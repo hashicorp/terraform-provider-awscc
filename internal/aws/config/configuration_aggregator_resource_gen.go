@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_config_configuration_aggregator", configurationAggregatorResource)
+	registry.AddListResourceFactory("awscc_config_configuration_aggregator", generic.NewListResource(configurationAggregatorResource))
 }
 
 // configurationAggregatorResource returns the Terraform awscc_config_configuration_aggregator resource.

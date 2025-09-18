@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_omics_variant_store", variantStoreResource)
+	registry.AddListResourceFactory("awscc_omics_variant_store", generic.NewListResource(variantStoreResource))
 }
 
 // variantStoreResource returns the Terraform awscc_omics_variant_store resource.

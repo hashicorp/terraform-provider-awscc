@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_bedrock_application_inference_profile", applicationInferenceProfileResource)
+	registry.AddListResourceFactory("awscc_bedrock_application_inference_profile", generic.NewListResource(applicationInferenceProfileResource))
 }
 
 // applicationInferenceProfileResource returns the Terraform awscc_bedrock_application_inference_profile resource.

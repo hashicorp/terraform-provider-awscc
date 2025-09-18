@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_appintegrations_event_integration", eventIntegrationResource)
+	registry.AddListResourceFactory("awscc_appintegrations_event_integration", generic.NewListResource(eventIntegrationResource))
 }
 
 // eventIntegrationResource returns the Terraform awscc_appintegrations_event_integration resource.

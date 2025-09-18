@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotwireless_network_analyzer_configuration", networkAnalyzerConfigurationResource)
+	registry.AddListResourceFactory("awscc_iotwireless_network_analyzer_configuration", generic.NewListResource(networkAnalyzerConfigurationResource))
 }
 
 // networkAnalyzerConfigurationResource returns the Terraform awscc_iotwireless_network_analyzer_configuration resource.

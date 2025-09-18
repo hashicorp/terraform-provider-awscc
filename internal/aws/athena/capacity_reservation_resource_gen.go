@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_athena_capacity_reservation", capacityReservationResource)
+	registry.AddListResourceFactory("awscc_athena_capacity_reservation", generic.NewListResource(capacityReservationResource))
 }
 
 // capacityReservationResource returns the Terraform awscc_athena_capacity_reservation resource.

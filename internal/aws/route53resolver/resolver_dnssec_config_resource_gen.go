@@ -21,6 +21,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_route53resolver_resolver_dnssec_config", resolverDNSSECConfigResource)
+	registry.AddListResourceFactory("awscc_route53resolver_resolver_dnssec_config", generic.NewListResource(resolverDNSSECConfigResource))
 }
 
 // resolverDNSSECConfigResource returns the Terraform awscc_route53resolver_resolver_dnssec_config resource.

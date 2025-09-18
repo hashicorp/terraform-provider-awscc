@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_logs_integration", integrationResource)
+	registry.AddListResourceFactory("awscc_logs_integration", generic.NewListResource(integrationResource))
 }
 
 // integrationResource returns the Terraform awscc_logs_integration resource.

@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_securityhub_organization_configuration", organizationConfigurationResource)
+	registry.AddListResourceFactory("awscc_securityhub_organization_configuration", generic.NewListResource(organizationConfigurationResource))
 }
 
 // organizationConfigurationResource returns the Terraform awscc_securityhub_organization_configuration resource.

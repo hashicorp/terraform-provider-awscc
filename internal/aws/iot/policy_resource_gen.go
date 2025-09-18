@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iot_policy", policyResource)
+	registry.AddListResourceFactory("awscc_iot_policy", generic.NewListResource(policyResource))
 }
 
 // policyResource returns the Terraform awscc_iot_policy resource.

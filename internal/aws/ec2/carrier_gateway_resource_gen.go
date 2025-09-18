@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_carrier_gateway", carrierGatewayResource)
+	registry.AddListResourceFactory("awscc_ec2_carrier_gateway", generic.NewListResource(carrierGatewayResource))
 }
 
 // carrierGatewayResource returns the Terraform awscc_ec2_carrier_gateway resource.

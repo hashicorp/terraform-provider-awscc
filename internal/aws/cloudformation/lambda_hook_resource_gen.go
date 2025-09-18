@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudformation_lambda_hook", lambdaHookResource)
+	registry.AddListResourceFactory("awscc_cloudformation_lambda_hook", generic.NewListResource(lambdaHookResource))
 }
 
 // lambdaHookResource returns the Terraform awscc_cloudformation_lambda_hook resource.

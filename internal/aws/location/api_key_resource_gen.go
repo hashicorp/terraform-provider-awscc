@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_location_api_key", aPIKeyResource)
+	registry.AddListResourceFactory("awscc_location_api_key", generic.NewListResource(aPIKeyResource))
 }
 
 // aPIKeyResource returns the Terraform awscc_location_api_key resource.

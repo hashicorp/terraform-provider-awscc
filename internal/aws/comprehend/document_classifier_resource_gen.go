@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_comprehend_document_classifier", documentClassifierResource)
+	registry.AddListResourceFactory("awscc_comprehend_document_classifier", generic.NewListResource(documentClassifierResource))
 }
 
 // documentClassifierResource returns the Terraform awscc_comprehend_document_classifier resource.

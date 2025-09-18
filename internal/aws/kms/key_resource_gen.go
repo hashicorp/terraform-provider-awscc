@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_kms_key", keyResource)
+	registry.AddListResourceFactory("awscc_kms_key", generic.NewListResource(keyResource))
 }
 
 // keyResource returns the Terraform awscc_kms_key resource.

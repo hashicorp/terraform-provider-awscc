@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_rolesanywhere_profile", profileResource)
+	registry.AddListResourceFactory("awscc_rolesanywhere_profile", generic.NewListResource(profileResource))
 }
 
 // profileResource returns the Terraform awscc_rolesanywhere_profile resource.

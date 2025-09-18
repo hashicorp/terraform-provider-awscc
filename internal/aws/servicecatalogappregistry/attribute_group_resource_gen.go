@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_servicecatalogappregistry_attribute_group", attributeGroupResource)
+	registry.AddListResourceFactory("awscc_servicecatalogappregistry_attribute_group", generic.NewListResource(attributeGroupResource))
 }
 
 // attributeGroupResource returns the Terraform awscc_servicecatalogappregistry_attribute_group resource.

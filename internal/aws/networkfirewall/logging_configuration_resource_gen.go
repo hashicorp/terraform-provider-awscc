@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_networkfirewall_logging_configuration", loggingConfigurationResource)
+	registry.AddListResourceFactory("awscc_networkfirewall_logging_configuration", generic.NewListResource(loggingConfigurationResource))
 }
 
 // loggingConfigurationResource returns the Terraform awscc_networkfirewall_logging_configuration resource.

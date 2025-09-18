@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_workspacesweb_portal", portalResource)
+	registry.AddListResourceFactory("awscc_workspacesweb_portal", generic.NewListResource(portalResource))
 }
 
 // portalResource returns the Terraform awscc_workspacesweb_portal resource.

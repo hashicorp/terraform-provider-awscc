@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_smsvoice_resource_policy", resourcePolicyResource)
+	registry.AddListResourceFactory("awscc_smsvoice_resource_policy", generic.NewListResource(resourcePolicyResource))
 }
 
 // resourcePolicyResource returns the Terraform awscc_smsvoice_resource_policy resource.

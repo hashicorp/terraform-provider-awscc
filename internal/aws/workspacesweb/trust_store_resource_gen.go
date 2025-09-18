@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_workspacesweb_trust_store", trustStoreResource)
+	registry.AddListResourceFactory("awscc_workspacesweb_trust_store", generic.NewListResource(trustStoreResource))
 }
 
 // trustStoreResource returns the Terraform awscc_workspacesweb_trust_store resource.

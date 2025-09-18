@@ -20,6 +20,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_vpc_endpoint_connection_notification", vPCEndpointConnectionNotificationResource)
+	registry.AddListResourceFactory("awscc_ec2_vpc_endpoint_connection_notification", generic.NewListResource(vPCEndpointConnectionNotificationResource))
 }
 
 // vPCEndpointConnectionNotificationResource returns the Terraform awscc_ec2_vpc_endpoint_connection_notification resource.

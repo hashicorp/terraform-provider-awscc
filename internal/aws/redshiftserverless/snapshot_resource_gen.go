@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_redshiftserverless_snapshot", snapshotResource)
+	registry.AddListResourceFactory("awscc_redshiftserverless_snapshot", generic.NewListResource(snapshotResource))
 }
 
 // snapshotResource returns the Terraform awscc_redshiftserverless_snapshot resource.

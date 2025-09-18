@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_transfer_server", serverResource)
+	registry.AddListResourceFactory("awscc_transfer_server", generic.NewListResource(serverResource))
 }
 
 // serverResource returns the Terraform awscc_transfer_server resource.

@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cleanroomsml_training_dataset", trainingDatasetResource)
+	registry.AddListResourceFactory("awscc_cleanroomsml_training_dataset", generic.NewListResource(trainingDatasetResource))
 }
 
 // trainingDatasetResource returns the Terraform awscc_cleanroomsml_training_dataset resource.

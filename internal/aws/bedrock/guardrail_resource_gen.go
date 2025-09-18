@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_bedrock_guardrail", guardrailResource)
+	registry.AddListResourceFactory("awscc_bedrock_guardrail", generic.NewListResource(guardrailResource))
 }
 
 // guardrailResource returns the Terraform awscc_bedrock_guardrail resource.

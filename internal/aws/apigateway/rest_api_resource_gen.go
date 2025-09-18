@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_apigateway_rest_api", restApiResource)
+	registry.AddListResourceFactory("awscc_apigateway_rest_api", generic.NewListResource(restApiResource))
 }
 
 // restApiResource returns the Terraform awscc_apigateway_rest_api resource.

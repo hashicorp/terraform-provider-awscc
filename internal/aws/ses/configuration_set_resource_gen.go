@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ses_configuration_set", configurationSetResource)
+	registry.AddListResourceFactory("awscc_ses_configuration_set", generic.NewListResource(configurationSetResource))
 }
 
 // configurationSetResource returns the Terraform awscc_ses_configuration_set resource.

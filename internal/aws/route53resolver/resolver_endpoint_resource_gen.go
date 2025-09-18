@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_route53resolver_resolver_endpoint", resolverEndpointResource)
+	registry.AddListResourceFactory("awscc_route53resolver_resolver_endpoint", generic.NewListResource(resolverEndpointResource))
 }
 
 // resolverEndpointResource returns the Terraform awscc_route53resolver_resolver_endpoint resource.

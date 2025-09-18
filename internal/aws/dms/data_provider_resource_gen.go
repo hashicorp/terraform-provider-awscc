@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_dms_data_provider", dataProviderResource)
+	registry.AddListResourceFactory("awscc_dms_data_provider", generic.NewListResource(dataProviderResource))
 }
 
 // dataProviderResource returns the Terraform awscc_dms_data_provider resource.

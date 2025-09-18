@@ -52,6 +52,9 @@ import (
 
 func init() {
 	registry.AddResourceFactory("{{ .TerraformTypeName }}", {{ .FactoryFunctionName }})
+	{{- if .GenerateListResource }}
+	registry.AddListResourceFactory("{{ .TerraformTypeName }}", generic.NewListResource({{ .FactoryFunctionName }}))
+    {{- end}}
 }
 
 // {{ .FactoryFunctionName }} returns the Terraform {{ .TerraformTypeName }} resource.

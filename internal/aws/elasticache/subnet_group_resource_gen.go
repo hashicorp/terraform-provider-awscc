@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_elasticache_subnet_group", subnetGroupResource)
+	registry.AddListResourceFactory("awscc_elasticache_subnet_group", generic.NewListResource(subnetGroupResource))
 }
 
 // subnetGroupResource returns the Terraform awscc_elasticache_subnet_group resource.

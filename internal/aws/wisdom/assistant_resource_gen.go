@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_wisdom_assistant", assistantResource)
+	registry.AddListResourceFactory("awscc_wisdom_assistant", generic.NewListResource(assistantResource))
 }
 
 // assistantResource returns the Terraform awscc_wisdom_assistant resource.

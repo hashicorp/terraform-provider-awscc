@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_fis_experiment_template", experimentTemplateResource)
+	registry.AddListResourceFactory("awscc_fis_experiment_template", generic.NewListResource(experimentTemplateResource))
 }
 
 // experimentTemplateResource returns the Terraform awscc_fis_experiment_template resource.

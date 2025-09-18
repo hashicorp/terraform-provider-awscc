@@ -33,6 +33,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_appflow_flow", flowResource)
+	registry.AddListResourceFactory("awscc_appflow_flow", generic.NewListResource(flowResource))
 }
 
 // flowResource returns the Terraform awscc_appflow_flow resource.

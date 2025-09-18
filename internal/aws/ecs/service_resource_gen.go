@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ecs_service", serviceResource)
+	registry.AddListResourceFactory("awscc_ecs_service", generic.NewListResource(serviceResource))
 }
 
 // serviceResource returns the Terraform awscc_ecs_service resource.

@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_elasticbeanstalk_environment", environmentResource)
+	registry.AddListResourceFactory("awscc_elasticbeanstalk_environment", generic.NewListResource(environmentResource))
 }
 
 // environmentResource returns the Terraform awscc_elasticbeanstalk_environment resource.

@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_appconfig_extension", extensionResource)
+	registry.AddListResourceFactory("awscc_appconfig_extension", generic.NewListResource(extensionResource))
 }
 
 // extensionResource returns the Terraform awscc_appconfig_extension resource.

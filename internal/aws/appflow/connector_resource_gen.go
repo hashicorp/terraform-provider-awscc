@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_appflow_connector", connectorResource)
+	registry.AddListResourceFactory("awscc_appflow_connector", generic.NewListResource(connectorResource))
 }
 
 // connectorResource returns the Terraform awscc_appflow_connector resource.

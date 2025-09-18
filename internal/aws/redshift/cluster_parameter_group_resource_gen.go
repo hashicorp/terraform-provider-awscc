@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_redshift_cluster_parameter_group", clusterParameterGroupResource)
+	registry.AddListResourceFactory("awscc_redshift_cluster_parameter_group", generic.NewListResource(clusterParameterGroupResource))
 }
 
 // clusterParameterGroupResource returns the Terraform awscc_redshift_cluster_parameter_group resource.

@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sso_instance_access_control_attribute_configuration", instanceAccessControlAttributeConfigurationResource)
+	registry.AddListResourceFactory("awscc_sso_instance_access_control_attribute_configuration", generic.NewListResource(instanceAccessControlAttributeConfigurationResource))
 }
 
 // instanceAccessControlAttributeConfigurationResource returns the Terraform awscc_sso_instance_access_control_attribute_configuration resource.

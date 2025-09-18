@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_opsworkscm_server", serverResource)
+	registry.AddListResourceFactory("awscc_opsworkscm_server", generic.NewListResource(serverResource))
 }
 
 // serverResource returns the Terraform awscc_opsworkscm_server resource.

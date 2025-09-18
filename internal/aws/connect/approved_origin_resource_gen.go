@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_connect_approved_origin", approvedOriginResource)
+	registry.AddListResourceFactory("awscc_connect_approved_origin", generic.NewListResource(approvedOriginResource))
 }
 
 // approvedOriginResource returns the Terraform awscc_connect_approved_origin resource.

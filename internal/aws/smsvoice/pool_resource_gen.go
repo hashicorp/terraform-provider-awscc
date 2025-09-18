@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_smsvoice_pool", poolResource)
+	registry.AddListResourceFactory("awscc_smsvoice_pool", generic.NewListResource(poolResource))
 }
 
 // poolResource returns the Terraform awscc_smsvoice_pool resource.

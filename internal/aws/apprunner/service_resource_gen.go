@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_apprunner_service", serviceResource)
+	registry.AddListResourceFactory("awscc_apprunner_service", generic.NewListResource(serviceResource))
 }
 
 // serviceResource returns the Terraform awscc_apprunner_service resource.

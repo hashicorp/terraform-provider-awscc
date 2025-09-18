@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_gamelift_fleet", fleetResource)
+	registry.AddListResourceFactory("awscc_gamelift_fleet", generic.NewListResource(fleetResource))
 }
 
 // fleetResource returns the Terraform awscc_gamelift_fleet resource.

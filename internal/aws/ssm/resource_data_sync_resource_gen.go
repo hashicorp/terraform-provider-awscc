@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ssm_resource_data_sync", resourceDataSyncResource)
+	registry.AddListResourceFactory("awscc_ssm_resource_data_sync", generic.NewListResource(resourceDataSyncResource))
 }
 
 // resourceDataSyncResource returns the Terraform awscc_ssm_resource_data_sync resource.

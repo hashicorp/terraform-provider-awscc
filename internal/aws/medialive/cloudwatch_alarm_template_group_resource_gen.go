@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_medialive_cloudwatch_alarm_template_group", cloudWatchAlarmTemplateGroupResource)
+	registry.AddListResourceFactory("awscc_medialive_cloudwatch_alarm_template_group", generic.NewListResource(cloudWatchAlarmTemplateGroupResource))
 }
 
 // cloudWatchAlarmTemplateGroupResource returns the Terraform awscc_medialive_cloudwatch_alarm_template_group resource.

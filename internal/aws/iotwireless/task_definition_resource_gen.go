@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotwireless_task_definition", taskDefinitionResource)
+	registry.AddListResourceFactory("awscc_iotwireless_task_definition", generic.NewListResource(taskDefinitionResource))
 }
 
 // taskDefinitionResource returns the Terraform awscc_iotwireless_task_definition resource.

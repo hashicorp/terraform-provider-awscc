@@ -19,6 +19,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_emr_security_configuration", securityConfigurationResource)
+	registry.AddListResourceFactory("awscc_emr_security_configuration", generic.NewListResource(securityConfigurationResource))
 }
 
 // securityConfigurationResource returns the Terraform awscc_emr_security_configuration resource.

@@ -20,6 +20,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ecr_registry_policy", registryPolicyResource)
+	registry.AddListResourceFactory("awscc_ecr_registry_policy", generic.NewListResource(registryPolicyResource))
 }
 
 // registryPolicyResource returns the Terraform awscc_ecr_registry_policy resource.

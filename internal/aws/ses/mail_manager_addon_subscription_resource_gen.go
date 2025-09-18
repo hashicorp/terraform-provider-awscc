@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ses_mail_manager_addon_subscription", mailManagerAddonSubscriptionResource)
+	registry.AddListResourceFactory("awscc_ses_mail_manager_addon_subscription", generic.NewListResource(mailManagerAddonSubscriptionResource))
 }
 
 // mailManagerAddonSubscriptionResource returns the Terraform awscc_ses_mail_manager_addon_subscription resource.

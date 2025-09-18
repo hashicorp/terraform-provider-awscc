@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_gamelift_script", scriptResource)
+	registry.AddListResourceFactory("awscc_gamelift_script", generic.NewListResource(scriptResource))
 }
 
 // scriptResource returns the Terraform awscc_gamelift_script resource.

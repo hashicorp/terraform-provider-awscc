@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_evidently_segment", segmentResource)
+	registry.AddListResourceFactory("awscc_evidently_segment", generic.NewListResource(segmentResource))
 }
 
 // segmentResource returns the Terraform awscc_evidently_segment resource.

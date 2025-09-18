@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_b2bi_profile", profileResource)
+	registry.AddListResourceFactory("awscc_b2bi_profile", generic.NewListResource(profileResource))
 }
 
 // profileResource returns the Terraform awscc_b2bi_profile resource.

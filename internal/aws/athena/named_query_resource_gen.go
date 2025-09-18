@@ -21,6 +21,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_athena_named_query", namedQueryResource)
+	registry.AddListResourceFactory("awscc_athena_named_query", generic.NewListResource(namedQueryResource))
 }
 
 // namedQueryResource returns the Terraform awscc_athena_named_query resource.

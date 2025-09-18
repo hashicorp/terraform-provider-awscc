@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_resourceexplorer2_view", viewResource)
+	registry.AddListResourceFactory("awscc_resourceexplorer2_view", generic.NewListResource(viewResource))
 }
 
 // viewResource returns the Terraform awscc_resourceexplorer2_view resource.

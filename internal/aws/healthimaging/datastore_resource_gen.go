@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_healthimaging_datastore", datastoreResource)
+	registry.AddListResourceFactory("awscc_healthimaging_datastore", generic.NewListResource(datastoreResource))
 }
 
 // datastoreResource returns the Terraform awscc_healthimaging_datastore resource.

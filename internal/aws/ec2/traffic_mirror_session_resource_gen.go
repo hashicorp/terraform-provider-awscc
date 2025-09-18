@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_traffic_mirror_session", trafficMirrorSessionResource)
+	registry.AddListResourceFactory("awscc_ec2_traffic_mirror_session", generic.NewListResource(trafficMirrorSessionResource))
 }
 
 // trafficMirrorSessionResource returns the Terraform awscc_ec2_traffic_mirror_session resource.

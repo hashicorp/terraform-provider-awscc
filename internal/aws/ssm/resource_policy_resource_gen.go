@@ -19,6 +19,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ssm_resource_policy", resourcePolicyResource)
+	registry.AddListResourceFactory("awscc_ssm_resource_policy", generic.NewListResource(resourcePolicyResource))
 }
 
 // resourcePolicyResource returns the Terraform awscc_ssm_resource_policy resource.

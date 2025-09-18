@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_securityhub_automation_rule_v2", automationRuleV2Resource)
+	registry.AddListResourceFactory("awscc_securityhub_automation_rule_v2", generic.NewListResource(automationRuleV2Resource))
 }
 
 // automationRuleV2Resource returns the Terraform awscc_securityhub_automation_rule_v2 resource.

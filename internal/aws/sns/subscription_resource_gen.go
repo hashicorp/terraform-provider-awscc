@@ -20,6 +20,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sns_subscription", subscriptionResource)
+	registry.AddListResourceFactory("awscc_sns_subscription", generic.NewListResource(subscriptionResource))
 }
 
 // subscriptionResource returns the Terraform awscc_sns_subscription resource.

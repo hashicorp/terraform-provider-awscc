@@ -19,6 +19,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_secretsmanager_secret_target_attachment", secretTargetAttachmentResource)
+	registry.AddListResourceFactory("awscc_secretsmanager_secret_target_attachment", generic.NewListResource(secretTargetAttachmentResource))
 }
 
 // secretTargetAttachmentResource returns the Terraform awscc_secretsmanager_secret_target_attachment resource.

@@ -1,5 +1,13 @@
 ## 1.57.0 (Unreleased)
 
+NOTE:
+
+* provider: The List Resource feature is currently in beta. The interface and behavior may change as the feature evolves, and breaking changes are possible. It is offered as a technical preview without compatibility guarantees until Terraform 1.14 is generally available.
+
+FEATURES:
+
+* provider: Add `List` support. ([#2801](https://github.com/hashicorp/terraform-provider-awscc/pull/2801))
+
 ## 1.56.0 (September 11, 2025)
 
 FEATURES:

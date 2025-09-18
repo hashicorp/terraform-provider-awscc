@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_signer_profile_permission", profilePermissionResource)
+	registry.AddListResourceFactory("awscc_signer_profile_permission", generic.NewListResource(profilePermissionResource))
 }
 
 // profilePermissionResource returns the Terraform awscc_signer_profile_permission resource.

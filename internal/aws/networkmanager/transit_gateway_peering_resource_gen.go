@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_networkmanager_transit_gateway_peering", transitGatewayPeeringResource)
+	registry.AddListResourceFactory("awscc_networkmanager_transit_gateway_peering", generic.NewListResource(transitGatewayPeeringResource))
 }
 
 // transitGatewayPeeringResource returns the Terraform awscc_networkmanager_transit_gateway_peering resource.

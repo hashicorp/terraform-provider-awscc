@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_licensemanager_grant", grantResource)
+	registry.AddListResourceFactory("awscc_licensemanager_grant", generic.NewListResource(grantResource))
 }
 
 // grantResource returns the Terraform awscc_licensemanager_grant resource.

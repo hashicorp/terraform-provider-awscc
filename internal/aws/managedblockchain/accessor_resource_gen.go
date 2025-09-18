@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_managedblockchain_accessor", accessorResource)
+	registry.AddListResourceFactory("awscc_managedblockchain_accessor", generic.NewListResource(accessorResource))
 }
 
 // accessorResource returns the Terraform awscc_managedblockchain_accessor resource.

@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudtrail_dashboard", dashboardResource)
+	registry.AddListResourceFactory("awscc_cloudtrail_dashboard", generic.NewListResource(dashboardResource))
 }
 
 // dashboardResource returns the Terraform awscc_cloudtrail_dashboard resource.

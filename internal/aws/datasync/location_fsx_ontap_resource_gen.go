@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_datasync_location_fsx_ontap", locationFSxONTAPResource)
+	registry.AddListResourceFactory("awscc_datasync_location_fsx_ontap", generic.NewListResource(locationFSxONTAPResource))
 }
 
 // locationFSxONTAPResource returns the Terraform awscc_datasync_location_fsx_ontap resource.

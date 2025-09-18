@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_elasticache_parameter_group", parameterGroupResource)
+	registry.AddListResourceFactory("awscc_elasticache_parameter_group", generic.NewListResource(parameterGroupResource))
 }
 
 // parameterGroupResource returns the Terraform awscc_elasticache_parameter_group resource.

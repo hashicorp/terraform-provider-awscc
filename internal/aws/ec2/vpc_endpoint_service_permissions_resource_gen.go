@@ -21,6 +21,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_vpc_endpoint_service_permissions", vPCEndpointServicePermissionsResource)
+	registry.AddListResourceFactory("awscc_ec2_vpc_endpoint_service_permissions", generic.NewListResource(vPCEndpointServicePermissionsResource))
 }
 
 // vPCEndpointServicePermissionsResource returns the Terraform awscc_ec2_vpc_endpoint_service_permissions resource.

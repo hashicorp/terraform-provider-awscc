@@ -20,6 +20,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_servicecatalog_tag_option", tagOptionResource)
+	registry.AddListResourceFactory("awscc_servicecatalog_tag_option", generic.NewListResource(tagOptionResource))
 }
 
 // tagOptionResource returns the Terraform awscc_servicecatalog_tag_option resource.

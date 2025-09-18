@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_omics_annotation_store", annotationStoreResource)
+	registry.AddListResourceFactory("awscc_omics_annotation_store", generic.NewListResource(annotationStoreResource))
 }
 
 // annotationStoreResource returns the Terraform awscc_omics_annotation_store resource.

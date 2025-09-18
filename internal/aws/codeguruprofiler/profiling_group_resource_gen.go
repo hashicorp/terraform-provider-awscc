@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_codeguruprofiler_profiling_group", profilingGroupResource)
+	registry.AddListResourceFactory("awscc_codeguruprofiler_profiling_group", generic.NewListResource(profilingGroupResource))
 }
 
 // profilingGroupResource returns the Terraform awscc_codeguruprofiler_profiling_group resource.

@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_apigatewayv2_vpc_link", vpcLinkResource)
+	registry.AddListResourceFactory("awscc_apigatewayv2_vpc_link", generic.NewListResource(vpcLinkResource))
 }
 
 // vpcLinkResource returns the Terraform awscc_apigatewayv2_vpc_link resource.

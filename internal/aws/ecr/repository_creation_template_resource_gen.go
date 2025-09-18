@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ecr_repository_creation_template", repositoryCreationTemplateResource)
+	registry.AddListResourceFactory("awscc_ecr_repository_creation_template", generic.NewListResource(repositoryCreationTemplateResource))
 }
 
 // repositoryCreationTemplateResource returns the Terraform awscc_ecr_repository_creation_template resource.

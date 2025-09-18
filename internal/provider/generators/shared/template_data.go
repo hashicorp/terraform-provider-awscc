@@ -235,8 +235,9 @@ type TemplateData struct {
 	UpdateTimeoutInMinutes        int
 	WriteOnlyPropertyPaths        []string
 
-	IsGlobal           bool
-	HasMutableIdentity bool
+	IsGlobal             bool
+	HasMutableIdentity   bool
+	GenerateListResource bool
 }
 
 type Resource struct {

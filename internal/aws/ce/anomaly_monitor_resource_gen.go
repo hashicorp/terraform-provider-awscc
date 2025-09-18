@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ce_anomaly_monitor", anomalyMonitorResource)
+	registry.AddListResourceFactory("awscc_ce_anomaly_monitor", generic.NewListResource(anomalyMonitorResource))
 }
 
 // anomalyMonitorResource returns the Terraform awscc_ce_anomaly_monitor resource.

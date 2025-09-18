@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_opensearchserverless_vpc_endpoint", vpcEndpointResource)
+	registry.AddListResourceFactory("awscc_opensearchserverless_vpc_endpoint", generic.NewListResource(vpcEndpointResource))
 }
 
 // vpcEndpointResource returns the Terraform awscc_opensearchserverless_vpc_endpoint resource.

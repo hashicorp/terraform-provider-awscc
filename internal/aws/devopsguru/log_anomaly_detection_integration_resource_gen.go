@@ -19,6 +19,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_devopsguru_log_anomaly_detection_integration", logAnomalyDetectionIntegrationResource)
+	registry.AddListResourceFactory("awscc_devopsguru_log_anomaly_detection_integration", generic.NewListResource(logAnomalyDetectionIntegrationResource))
 }
 
 // logAnomalyDetectionIntegrationResource returns the Terraform awscc_devopsguru_log_anomaly_detection_integration resource.

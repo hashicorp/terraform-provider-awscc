@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudformation_type_activation", typeActivationResource)
+	registry.AddListResourceFactory("awscc_cloudformation_type_activation", generic.NewListResource(typeActivationResource))
 }
 
 // typeActivationResource returns the Terraform awscc_cloudformation_type_activation resource.

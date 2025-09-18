@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iam_role", roleResource)
+	registry.AddListResourceFactory("awscc_iam_role", generic.NewListResource(roleResource))
 }
 
 // roleResource returns the Terraform awscc_iam_role resource.

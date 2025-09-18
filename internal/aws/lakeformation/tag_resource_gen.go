@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lakeformation_tag", tagResource)
+	registry.AddListResourceFactory("awscc_lakeformation_tag", generic.NewListResource(tagResource))
 }
 
 // tagResource returns the Terraform awscc_lakeformation_tag resource.

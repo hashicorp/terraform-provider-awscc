@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_fms_policy", policyResource)
+	registry.AddListResourceFactory("awscc_fms_policy", generic.NewListResource(policyResource))
 }
 
 // policyResource returns the Terraform awscc_fms_policy resource.

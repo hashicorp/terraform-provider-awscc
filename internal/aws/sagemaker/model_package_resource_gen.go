@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_model_package", modelPackageResource)
+	registry.AddListResourceFactory("awscc_sagemaker_model_package", generic.NewListResource(modelPackageResource))
 }
 
 // modelPackageResource returns the Terraform awscc_sagemaker_model_package resource.

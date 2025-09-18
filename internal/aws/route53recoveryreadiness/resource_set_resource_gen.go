@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_route53recoveryreadiness_resource_set", resourceSetResource)
+	registry.AddListResourceFactory("awscc_route53recoveryreadiness_resource_set", generic.NewListResource(resourceSetResource))
 }
 
 // resourceSetResource returns the Terraform awscc_route53recoveryreadiness_resource_set resource.

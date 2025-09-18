@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_events_event_bus", eventBusResource)
+	registry.AddListResourceFactory("awscc_events_event_bus", generic.NewListResource(eventBusResource))
 }
 
 // eventBusResource returns the Terraform awscc_events_event_bus resource.

@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_codeartifact_repository", repositoryResource)
+	registry.AddListResourceFactory("awscc_codeartifact_repository", generic.NewListResource(repositoryResource))
 }
 
 // repositoryResource returns the Terraform awscc_codeartifact_repository resource.

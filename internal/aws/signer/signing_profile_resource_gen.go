@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_signer_signing_profile", signingProfileResource)
+	registry.AddListResourceFactory("awscc_signer_signing_profile", generic.NewListResource(signingProfileResource))
 }
 
 // signingProfileResource returns the Terraform awscc_signer_signing_profile resource.

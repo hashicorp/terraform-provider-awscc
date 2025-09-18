@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_securityhub_insight", insightResource)
+	registry.AddListResourceFactory("awscc_securityhub_insight", generic.NewListResource(insightResource))
 }
 
 // insightResource returns the Terraform awscc_securityhub_insight resource.

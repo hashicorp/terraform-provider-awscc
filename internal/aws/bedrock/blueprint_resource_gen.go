@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_bedrock_blueprint", blueprintResource)
+	registry.AddListResourceFactory("awscc_bedrock_blueprint", generic.NewListResource(blueprintResource))
 }
 
 // blueprintResource returns the Terraform awscc_bedrock_blueprint resource.

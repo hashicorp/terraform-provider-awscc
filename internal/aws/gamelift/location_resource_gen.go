@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_gamelift_location", locationResource)
+	registry.AddListResourceFactory("awscc_gamelift_location", generic.NewListResource(locationResource))
 }
 
 // locationResource returns the Terraform awscc_gamelift_location resource.

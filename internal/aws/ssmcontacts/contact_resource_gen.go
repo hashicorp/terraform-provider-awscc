@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ssmcontacts_contact", contactResource)
+	registry.AddListResourceFactory("awscc_ssmcontacts_contact", generic.NewListResource(contactResource))
 }
 
 // contactResource returns the Terraform awscc_ssmcontacts_contact resource.

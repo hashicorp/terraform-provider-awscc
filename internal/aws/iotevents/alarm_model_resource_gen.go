@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotevents_alarm_model", alarmModelResource)
+	registry.AddListResourceFactory("awscc_iotevents_alarm_model", generic.NewListResource(alarmModelResource))
 }
 
 // alarmModelResource returns the Terraform awscc_iotevents_alarm_model resource.

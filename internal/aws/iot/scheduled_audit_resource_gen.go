@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iot_scheduled_audit", scheduledAuditResource)
+	registry.AddListResourceFactory("awscc_iot_scheduled_audit", generic.NewListResource(scheduledAuditResource))
 }
 
 // scheduledAuditResource returns the Terraform awscc_iot_scheduled_audit resource.

@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lightsail_bucket", bucketResource)
+	registry.AddListResourceFactory("awscc_lightsail_bucket", generic.NewListResource(bucketResource))
 }
 
 // bucketResource returns the Terraform awscc_lightsail_bucket resource.

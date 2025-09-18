@@ -33,6 +33,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_rum_app_monitor", appMonitorResource)
+	registry.AddListResourceFactory("awscc_rum_app_monitor", generic.NewListResource(appMonitorResource))
 }
 
 // appMonitorResource returns the Terraform awscc_rum_app_monitor resource.

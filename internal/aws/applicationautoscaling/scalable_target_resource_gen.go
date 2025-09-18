@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_applicationautoscaling_scalable_target", scalableTargetResource)
+	registry.AddListResourceFactory("awscc_applicationautoscaling_scalable_target", generic.NewListResource(scalableTargetResource))
 }
 
 // scalableTargetResource returns the Terraform awscc_applicationautoscaling_scalable_target resource.

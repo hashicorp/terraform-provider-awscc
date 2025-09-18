@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_location_map", mapResource)
+	registry.AddListResourceFactory("awscc_location_map", generic.NewListResource(mapResource))
 }
 
 // mapResource returns the Terraform awscc_location_map resource.

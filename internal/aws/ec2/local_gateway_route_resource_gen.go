@@ -19,6 +19,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_local_gateway_route", localGatewayRouteResource)
+	registry.AddListResourceFactory("awscc_ec2_local_gateway_route", generic.NewListResource(localGatewayRouteResource))
 }
 
 // localGatewayRouteResource returns the Terraform awscc_ec2_local_gateway_route resource.

@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iam_oidc_provider", oIDCProviderResource)
+	registry.AddListResourceFactory("awscc_iam_oidc_provider", generic.NewListResource(oIDCProviderResource))
 }
 
 // oIDCProviderResource returns the Terraform awscc_iam_oidc_provider resource.

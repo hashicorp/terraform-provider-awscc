@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_codedeploy_deployment_config", deploymentConfigResource)
+	registry.AddListResourceFactory("awscc_codedeploy_deployment_config", generic.NewListResource(deploymentConfigResource))
 }
 
 // deploymentConfigResource returns the Terraform awscc_codedeploy_deployment_config resource.

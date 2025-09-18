@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_feature_group", featureGroupResource)
+	registry.AddListResourceFactory("awscc_sagemaker_feature_group", generic.NewListResource(featureGroupResource))
 }
 
 // featureGroupResource returns the Terraform awscc_sagemaker_feature_group resource.

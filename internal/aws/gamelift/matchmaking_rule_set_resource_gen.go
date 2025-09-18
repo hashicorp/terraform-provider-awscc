@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_gamelift_matchmaking_rule_set", matchmakingRuleSetResource)
+	registry.AddListResourceFactory("awscc_gamelift_matchmaking_rule_set", generic.NewListResource(matchmakingRuleSetResource))
 }
 
 // matchmakingRuleSetResource returns the Terraform awscc_gamelift_matchmaking_rule_set resource.

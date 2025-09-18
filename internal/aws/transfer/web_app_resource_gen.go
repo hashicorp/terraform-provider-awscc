@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_transfer_web_app", webAppResource)
+	registry.AddListResourceFactory("awscc_transfer_web_app", generic.NewListResource(webAppResource))
 }
 
 // webAppResource returns the Terraform awscc_transfer_web_app resource.

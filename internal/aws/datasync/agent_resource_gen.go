@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_datasync_agent", agentResource)
+	registry.AddListResourceFactory("awscc_datasync_agent", generic.NewListResource(agentResource))
 }
 
 // agentResource returns the Terraform awscc_datasync_agent resource.

@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_secretsmanager_secret", secretResource)
+	registry.AddListResourceFactory("awscc_secretsmanager_secret", generic.NewListResource(secretResource))
 }
 
 // secretResource returns the Terraform awscc_secretsmanager_secret resource.

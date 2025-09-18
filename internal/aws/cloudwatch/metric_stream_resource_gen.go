@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudwatch_metric_stream", metricStreamResource)
+	registry.AddListResourceFactory("awscc_cloudwatch_metric_stream", generic.NewListResource(metricStreamResource))
 }
 
 // metricStreamResource returns the Terraform awscc_cloudwatch_metric_stream resource.

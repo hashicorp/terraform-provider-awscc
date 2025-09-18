@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_redshiftserverless_namespace", namespaceResource)
+	registry.AddListResourceFactory("awscc_redshiftserverless_namespace", generic.NewListResource(namespaceResource))
 }
 
 // namespaceResource returns the Terraform awscc_redshiftserverless_namespace resource.

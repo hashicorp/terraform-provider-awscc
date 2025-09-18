@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_backup_backup_vault", backupVaultResource)
+	registry.AddListResourceFactory("awscc_backup_backup_vault", generic.NewListResource(backupVaultResource))
 }
 
 // backupVaultResource returns the Terraform awscc_backup_backup_vault resource.

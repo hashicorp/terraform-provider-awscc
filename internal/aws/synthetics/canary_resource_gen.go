@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_synthetics_canary", canaryResource)
+	registry.AddListResourceFactory("awscc_synthetics_canary", generic.NewListResource(canaryResource))
 }
 
 // canaryResource returns the Terraform awscc_synthetics_canary resource.

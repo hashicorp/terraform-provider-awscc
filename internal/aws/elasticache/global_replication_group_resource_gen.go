@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_elasticache_global_replication_group", globalReplicationGroupResource)
+	registry.AddListResourceFactory("awscc_elasticache_global_replication_group", generic.NewListResource(globalReplicationGroupResource))
 }
 
 // globalReplicationGroupResource returns the Terraform awscc_elasticache_global_replication_group resource.

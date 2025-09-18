@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_memorydb_acl", aCLResource)
+	registry.AddListResourceFactory("awscc_memorydb_acl", generic.NewListResource(aCLResource))
 }
 
 // aCLResource returns the Terraform awscc_memorydb_acl resource.

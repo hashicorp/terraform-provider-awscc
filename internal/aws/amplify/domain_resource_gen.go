@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_amplify_domain", domainResource)
+	registry.AddListResourceFactory("awscc_amplify_domain", generic.NewListResource(domainResource))
 }
 
 // domainResource returns the Terraform awscc_amplify_domain resource.

@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_dms_migration_project", migrationProjectResource)
+	registry.AddListResourceFactory("awscc_dms_migration_project", generic.NewListResource(migrationProjectResource))
 }
 
 // migrationProjectResource returns the Terraform awscc_dms_migration_project resource.

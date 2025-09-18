@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_frauddetector_variable", variableResource)
+	registry.AddListResourceFactory("awscc_frauddetector_variable", generic.NewListResource(variableResource))
 }
 
 // variableResource returns the Terraform awscc_frauddetector_variable resource.

@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_traffic_mirror_target", trafficMirrorTargetResource)
+	registry.AddListResourceFactory("awscc_ec2_traffic_mirror_target", generic.NewListResource(trafficMirrorTargetResource))
 }
 
 // trafficMirrorTargetResource returns the Terraform awscc_ec2_traffic_mirror_target resource.

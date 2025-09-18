@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_redshift_endpoint_access", endpointAccessResource)
+	registry.AddListResourceFactory("awscc_redshift_endpoint_access", generic.NewListResource(endpointAccessResource))
 }
 
 // endpointAccessResource returns the Terraform awscc_redshift_endpoint_access resource.

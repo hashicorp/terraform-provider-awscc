@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_elasticloadbalancingv2_load_balancer", loadBalancerResource)
+	registry.AddListResourceFactory("awscc_elasticloadbalancingv2_load_balancer", generic.NewListResource(loadBalancerResource))
 }
 
 // loadBalancerResource returns the Terraform awscc_elasticloadbalancingv2_load_balancer resource.

@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_notifications_notification_configuration", notificationConfigurationResource)
+	registry.AddListResourceFactory("awscc_notifications_notification_configuration", generic.NewListResource(notificationConfigurationResource))
 }
 
 // notificationConfigurationResource returns the Terraform awscc_notifications_notification_configuration resource.

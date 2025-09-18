@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_vpn_connection", vPNConnectionResource)
+	registry.AddListResourceFactory("awscc_ec2_vpn_connection", generic.NewListResource(vPNConnectionResource))
 }
 
 // vPNConnectionResource returns the Terraform awscc_ec2_vpn_connection resource.

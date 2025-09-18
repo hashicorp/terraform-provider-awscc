@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_codepipeline_custom_action_type", customActionTypeResource)
+	registry.AddListResourceFactory("awscc_codepipeline_custom_action_type", generic.NewListResource(customActionTypeResource))
 }
 
 // customActionTypeResource returns the Terraform awscc_codepipeline_custom_action_type resource.

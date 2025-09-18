@@ -19,6 +19,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_applicationsignals_discovery", discoveryResource)
+	registry.AddListResourceFactory("awscc_applicationsignals_discovery", generic.NewListResource(discoveryResource))
 }
 
 // discoveryResource returns the Terraform awscc_applicationsignals_discovery resource.

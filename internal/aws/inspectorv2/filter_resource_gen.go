@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_inspectorv2_filter", filterResource)
+	registry.AddListResourceFactory("awscc_inspectorv2_filter", generic.NewListResource(filterResource))
 }
 
 // filterResource returns the Terraform awscc_inspectorv2_filter resource.

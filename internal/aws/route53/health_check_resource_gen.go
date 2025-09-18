@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_route53_health_check", healthCheckResource)
+	registry.AddListResourceFactory("awscc_route53_health_check", generic.NewListResource(healthCheckResource))
 }
 
 // healthCheckResource returns the Terraform awscc_route53_health_check resource.

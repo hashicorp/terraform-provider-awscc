@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotanalytics_channel", channelResource)
+	registry.AddListResourceFactory("awscc_iotanalytics_channel", generic.NewListResource(channelResource))
 }
 
 // channelResource returns the Terraform awscc_iotanalytics_channel resource.

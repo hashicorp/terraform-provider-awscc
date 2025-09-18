@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_rds_db_subnet_group", dBSubnetGroupResource)
+	registry.AddListResourceFactory("awscc_rds_db_subnet_group", generic.NewListResource(dBSubnetGroupResource))
 }
 
 // dBSubnetGroupResource returns the Terraform awscc_rds_db_subnet_group resource.

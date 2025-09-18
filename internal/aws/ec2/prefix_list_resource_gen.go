@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_prefix_list", prefixListResource)
+	registry.AddListResourceFactory("awscc_ec2_prefix_list", generic.NewListResource(prefixListResource))
 }
 
 // prefixListResource returns the Terraform awscc_ec2_prefix_list resource.

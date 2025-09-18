@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_backup_logically_air_gapped_backup_vault", logicallyAirGappedBackupVaultResource)
+	registry.AddListResourceFactory("awscc_backup_logically_air_gapped_backup_vault", generic.NewListResource(logicallyAirGappedBackupVaultResource))
 }
 
 // logicallyAirGappedBackupVaultResource returns the Terraform awscc_backup_logically_air_gapped_backup_vault resource.

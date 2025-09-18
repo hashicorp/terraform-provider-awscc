@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_route53profiles_profile_association", profileAssociationResource)
+	registry.AddListResourceFactory("awscc_route53profiles_profile_association", generic.NewListResource(profileAssociationResource))
 }
 
 // profileAssociationResource returns the Terraform awscc_route53profiles_profile_association resource.

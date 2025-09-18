@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_gamelift_game_session_queue", gameSessionQueueResource)
+	registry.AddListResourceFactory("awscc_gamelift_game_session_queue", generic.NewListResource(gameSessionQueueResource))
 }
 
 // gameSessionQueueResource returns the Terraform awscc_gamelift_game_session_queue resource.

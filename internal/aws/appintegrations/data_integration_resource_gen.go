@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_appintegrations_data_integration", dataIntegrationResource)
+	registry.AddListResourceFactory("awscc_appintegrations_data_integration", generic.NewListResource(dataIntegrationResource))
 }
 
 // dataIntegrationResource returns the Terraform awscc_appintegrations_data_integration resource.

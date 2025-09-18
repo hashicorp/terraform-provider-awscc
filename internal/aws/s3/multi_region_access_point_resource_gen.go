@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_s3_multi_region_access_point", multiRegionAccessPointResource)
+	registry.AddListResourceFactory("awscc_s3_multi_region_access_point", generic.NewListResource(multiRegionAccessPointResource))
 }
 
 // multiRegionAccessPointResource returns the Terraform awscc_s3_multi_region_access_point resource.

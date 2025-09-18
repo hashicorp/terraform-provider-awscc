@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_emr_wal_workspace", wALWorkspaceResource)
+	registry.AddListResourceFactory("awscc_emr_wal_workspace", generic.NewListResource(wALWorkspaceResource))
 }
 
 // wALWorkspaceResource returns the Terraform awscc_emr_wal_workspace resource.

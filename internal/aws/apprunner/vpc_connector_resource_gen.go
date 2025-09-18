@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_apprunner_vpc_connector", vpcConnectorResource)
+	registry.AddListResourceFactory("awscc_apprunner_vpc_connector", generic.NewListResource(vpcConnectorResource))
 }
 
 // vpcConnectorResource returns the Terraform awscc_apprunner_vpc_connector resource.

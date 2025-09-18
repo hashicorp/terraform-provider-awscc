@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_traffic_mirror_filter", trafficMirrorFilterResource)
+	registry.AddListResourceFactory("awscc_ec2_traffic_mirror_filter", generic.NewListResource(trafficMirrorFilterResource))
 }
 
 // trafficMirrorFilterResource returns the Terraform awscc_ec2_traffic_mirror_filter resource.

@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_neptune_db_subnet_group", dBSubnetGroupResource)
+	registry.AddListResourceFactory("awscc_neptune_db_subnet_group", generic.NewListResource(dBSubnetGroupResource))
 }
 
 // dBSubnetGroupResource returns the Terraform awscc_neptune_db_subnet_group resource.

@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lookoutvision_project", projectResource)
+	registry.AddListResourceFactory("awscc_lookoutvision_project", generic.NewListResource(projectResource))
 }
 
 // projectResource returns the Terraform awscc_lookoutvision_project resource.

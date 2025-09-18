@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_instance_connect_endpoint", instanceConnectEndpointResource)
+	registry.AddListResourceFactory("awscc_ec2_instance_connect_endpoint", generic.NewListResource(instanceConnectEndpointResource))
 }
 
 // instanceConnectEndpointResource returns the Terraform awscc_ec2_instance_connect_endpoint resource.

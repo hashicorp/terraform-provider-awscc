@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ce_anomaly_subscription", anomalySubscriptionResource)
+	registry.AddListResourceFactory("awscc_ce_anomaly_subscription", generic.NewListResource(anomalySubscriptionResource))
 }
 
 // anomalySubscriptionResource returns the Terraform awscc_ce_anomaly_subscription resource.

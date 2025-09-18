@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_dsql_cluster", clusterResource)
+	registry.AddListResourceFactory("awscc_dsql_cluster", generic.NewListResource(clusterResource))
 }
 
 // clusterResource returns the Terraform awscc_dsql_cluster resource.

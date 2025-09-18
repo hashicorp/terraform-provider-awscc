@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotanalytics_dataset", datasetResource)
+	registry.AddListResourceFactory("awscc_iotanalytics_dataset", generic.NewListResource(datasetResource))
 }
 
 // datasetResource returns the Terraform awscc_iotanalytics_dataset resource.

@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_b2bi_capability", capabilityResource)
+	registry.AddListResourceFactory("awscc_b2bi_capability", generic.NewListResource(capabilityResource))
 }
 
 // capabilityResource returns the Terraform awscc_b2bi_capability resource.

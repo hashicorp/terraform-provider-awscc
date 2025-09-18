@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_apigateway_client_certificate", clientCertificateResource)
+	registry.AddListResourceFactory("awscc_apigateway_client_certificate", generic.NewListResource(clientCertificateResource))
 }
 
 // clientCertificateResource returns the Terraform awscc_apigateway_client_certificate resource.

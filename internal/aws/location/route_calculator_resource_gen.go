@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_location_route_calculator", routeCalculatorResource)
+	registry.AddListResourceFactory("awscc_location_route_calculator", generic.NewListResource(routeCalculatorResource))
 }
 
 // routeCalculatorResource returns the Terraform awscc_location_route_calculator resource.

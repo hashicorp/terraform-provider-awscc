@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_mlflow_tracking_server", mlflowTrackingServerResource)
+	registry.AddListResourceFactory("awscc_sagemaker_mlflow_tracking_server", generic.NewListResource(mlflowTrackingServerResource))
 }
 
 // mlflowTrackingServerResource returns the Terraform awscc_sagemaker_mlflow_tracking_server resource.

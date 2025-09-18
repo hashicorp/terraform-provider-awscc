@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iot_authorizer", authorizerResource)
+	registry.AddListResourceFactory("awscc_iot_authorizer", generic.NewListResource(authorizerResource))
 }
 
 // authorizerResource returns the Terraform awscc_iot_authorizer resource.

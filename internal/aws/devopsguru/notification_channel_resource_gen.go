@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_devopsguru_notification_channel", notificationChannelResource)
+	registry.AddListResourceFactory("awscc_devopsguru_notification_channel", generic.NewListResource(notificationChannelResource))
 }
 
 // notificationChannelResource returns the Terraform awscc_devopsguru_notification_channel resource.

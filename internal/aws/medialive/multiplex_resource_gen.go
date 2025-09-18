@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_medialive_multiplex", multiplexResource)
+	registry.AddListResourceFactory("awscc_medialive_multiplex", generic.NewListResource(multiplexResource))
 }
 
 // multiplexResource returns the Terraform awscc_medialive_multiplex resource.

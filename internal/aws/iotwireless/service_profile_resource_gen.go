@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotwireless_service_profile", serviceProfileResource)
+	registry.AddListResourceFactory("awscc_iotwireless_service_profile", generic.NewListResource(serviceProfileResource))
 }
 
 // serviceProfileResource returns the Terraform awscc_iotwireless_service_profile resource.

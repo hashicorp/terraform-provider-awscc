@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lightsail_load_balancer", loadBalancerResource)
+	registry.AddListResourceFactory("awscc_lightsail_load_balancer", generic.NewListResource(loadBalancerResource))
 }
 
 // loadBalancerResource returns the Terraform awscc_lightsail_load_balancer resource.

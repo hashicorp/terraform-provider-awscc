@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotcoredeviceadvisor_suite_definition", suiteDefinitionResource)
+	registry.AddListResourceFactory("awscc_iotcoredeviceadvisor_suite_definition", generic.NewListResource(suiteDefinitionResource))
 }
 
 // suiteDefinitionResource returns the Terraform awscc_iotcoredeviceadvisor_suite_definition resource.

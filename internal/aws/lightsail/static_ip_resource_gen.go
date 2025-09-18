@@ -20,6 +20,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lightsail_static_ip", staticIpResource)
+	registry.AddListResourceFactory("awscc_lightsail_static_ip", generic.NewListResource(staticIpResource))
 }
 
 // staticIpResource returns the Terraform awscc_lightsail_static_ip resource.

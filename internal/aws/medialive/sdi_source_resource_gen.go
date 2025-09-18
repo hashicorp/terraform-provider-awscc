@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_medialive_sdi_source", sdiSourceResource)
+	registry.AddListResourceFactory("awscc_medialive_sdi_source", generic.NewListResource(sdiSourceResource))
 }
 
 // sdiSourceResource returns the Terraform awscc_medialive_sdi_source resource.

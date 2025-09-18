@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_ipam_resource_discovery", iPAMResourceDiscoveryResource)
+	registry.AddListResourceFactory("awscc_ec2_ipam_resource_discovery", generic.NewListResource(iPAMResourceDiscoveryResource))
 }
 
 // iPAMResourceDiscoveryResource returns the Terraform awscc_ec2_ipam_resource_discovery resource.

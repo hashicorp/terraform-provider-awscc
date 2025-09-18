@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudfront_response_headers_policy", responseHeadersPolicyResource)
+	registry.AddListResourceFactory("awscc_cloudfront_response_headers_policy", generic.NewListResource(responseHeadersPolicyResource))
 }
 
 // responseHeadersPolicyResource returns the Terraform awscc_cloudfront_response_headers_policy resource.

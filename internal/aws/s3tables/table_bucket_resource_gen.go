@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_s3tables_table_bucket", tableBucketResource)
+	registry.AddListResourceFactory("awscc_s3tables_table_bucket", generic.NewListResource(tableBucketResource))
 }
 
 // tableBucketResource returns the Terraform awscc_s3tables_table_bucket resource.

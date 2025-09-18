@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_mediapackagev2_channel_group", channelGroupResource)
+	registry.AddListResourceFactory("awscc_mediapackagev2_channel_group", generic.NewListResource(channelGroupResource))
 }
 
 // channelGroupResource returns the Terraform awscc_mediapackagev2_channel_group resource.

@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_stepfunctions_state_machine", stateMachineResource)
+	registry.AddListResourceFactory("awscc_stepfunctions_state_machine", generic.NewListResource(stateMachineResource))
 }
 
 // stateMachineResource returns the Terraform awscc_stepfunctions_state_machine resource.

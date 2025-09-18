@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_network_interface", networkInterfaceResource)
+	registry.AddListResourceFactory("awscc_ec2_network_interface", generic.NewListResource(networkInterfaceResource))
 }
 
 // networkInterfaceResource returns the Terraform awscc_ec2_network_interface resource.

@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_mediapackage_packaging_group", packagingGroupResource)
+	registry.AddListResourceFactory("awscc_mediapackage_packaging_group", generic.NewListResource(packagingGroupResource))
 }
 
 // packagingGroupResource returns the Terraform awscc_mediapackage_packaging_group resource.

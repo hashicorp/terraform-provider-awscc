@@ -20,6 +20,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_autoscaling_scheduled_action", scheduledActionResource)
+	registry.AddListResourceFactory("awscc_autoscaling_scheduled_action", generic.NewListResource(scheduledActionResource))
 }
 
 // scheduledActionResource returns the Terraform awscc_autoscaling_scheduled_action resource.

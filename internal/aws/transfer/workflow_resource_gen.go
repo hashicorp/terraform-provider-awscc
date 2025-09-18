@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_transfer_workflow", workflowResource)
+	registry.AddListResourceFactory("awscc_transfer_workflow", generic.NewListResource(workflowResource))
 }
 
 // workflowResource returns the Terraform awscc_transfer_workflow resource.

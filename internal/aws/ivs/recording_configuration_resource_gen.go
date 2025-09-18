@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ivs_recording_configuration", recordingConfigurationResource)
+	registry.AddListResourceFactory("awscc_ivs_recording_configuration", generic.NewListResource(recordingConfigurationResource))
 }
 
 // recordingConfigurationResource returns the Terraform awscc_ivs_recording_configuration resource.

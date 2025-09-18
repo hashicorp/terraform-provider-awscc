@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_workspacesweb_user_access_logging_settings", userAccessLoggingSettingsResource)
+	registry.AddListResourceFactory("awscc_workspacesweb_user_access_logging_settings", generic.NewListResource(userAccessLoggingSettingsResource))
 }
 
 // userAccessLoggingSettingsResource returns the Terraform awscc_workspacesweb_user_access_logging_settings resource.

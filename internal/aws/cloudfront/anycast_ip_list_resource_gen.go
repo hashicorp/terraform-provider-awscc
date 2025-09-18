@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudfront_anycast_ip_list", anycastIpListResource)
+	registry.AddListResourceFactory("awscc_cloudfront_anycast_ip_list", generic.NewListResource(anycastIpListResource))
 }
 
 // anycastIpListResource returns the Terraform awscc_cloudfront_anycast_ip_list resource.

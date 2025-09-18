@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotwireless_wireless_gateway", wirelessGatewayResource)
+	registry.AddListResourceFactory("awscc_iotwireless_wireless_gateway", generic.NewListResource(wirelessGatewayResource))
 }
 
 // wirelessGatewayResource returns the Terraform awscc_iotwireless_wireless_gateway resource.

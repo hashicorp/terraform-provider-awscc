@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_b2bi_transformer", transformerResource)
+	registry.AddListResourceFactory("awscc_b2bi_transformer", generic.NewListResource(transformerResource))
 }
 
 // transformerResource returns the Terraform awscc_b2bi_transformer resource.

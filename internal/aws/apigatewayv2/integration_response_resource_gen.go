@@ -20,6 +20,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_apigatewayv2_integration_response", integrationResponseResource)
+	registry.AddListResourceFactory("awscc_apigatewayv2_integration_response", generic.NewListResource(integrationResponseResource))
 }
 
 // integrationResponseResource returns the Terraform awscc_apigatewayv2_integration_response resource.

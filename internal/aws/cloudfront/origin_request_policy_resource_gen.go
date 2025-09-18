@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudfront_origin_request_policy", originRequestPolicyResource)
+	registry.AddListResourceFactory("awscc_cloudfront_origin_request_policy", generic.NewListResource(originRequestPolicyResource))
 }
 
 // originRequestPolicyResource returns the Terraform awscc_cloudfront_origin_request_policy resource.

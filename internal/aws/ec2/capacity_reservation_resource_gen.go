@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_capacity_reservation", capacityReservationResource)
+	registry.AddListResourceFactory("awscc_ec2_capacity_reservation", generic.NewListResource(capacityReservationResource))
 }
 
 // capacityReservationResource returns the Terraform awscc_ec2_capacity_reservation resource.

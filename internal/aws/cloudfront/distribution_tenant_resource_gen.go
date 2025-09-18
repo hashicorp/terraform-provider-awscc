@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudfront_distribution_tenant", distributionTenantResource)
+	registry.AddListResourceFactory("awscc_cloudfront_distribution_tenant", generic.NewListResource(distributionTenantResource))
 }
 
 // distributionTenantResource returns the Terraform awscc_cloudfront_distribution_tenant resource.

@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_licensemanager_license", licenseResource)
+	registry.AddListResourceFactory("awscc_licensemanager_license", generic.NewListResource(licenseResource))
 }
 
 // licenseResource returns the Terraform awscc_licensemanager_license resource.

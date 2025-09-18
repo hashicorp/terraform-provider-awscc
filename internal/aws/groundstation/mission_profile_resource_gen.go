@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_groundstation_mission_profile", missionProfileResource)
+	registry.AddListResourceFactory("awscc_groundstation_mission_profile", generic.NewListResource(missionProfileResource))
 }
 
 // missionProfileResource returns the Terraform awscc_groundstation_mission_profile resource.

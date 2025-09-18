@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cur_report_definition", reportDefinitionResource)
+	registry.AddListResourceFactory("awscc_cur_report_definition", generic.NewListResource(reportDefinitionResource))
 }
 
 // reportDefinitionResource returns the Terraform awscc_cur_report_definition resource.

@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ssmquicksetup_configuration_manager", configurationManagerResource)
+	registry.AddListResourceFactory("awscc_ssmquicksetup_configuration_manager", generic.NewListResource(configurationManagerResource))
 }
 
 // configurationManagerResource returns the Terraform awscc_ssmquicksetup_configuration_manager resource.

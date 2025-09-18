@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ssm_parameter", parameterResource)
+	registry.AddListResourceFactory("awscc_ssm_parameter", generic.NewListResource(parameterResource))
 }
 
 // parameterResource returns the Terraform awscc_ssm_parameter resource.

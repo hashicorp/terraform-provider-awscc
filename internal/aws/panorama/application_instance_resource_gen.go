@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_panorama_application_instance", applicationInstanceResource)
+	registry.AddListResourceFactory("awscc_panorama_application_instance", generic.NewListResource(applicationInstanceResource))
 }
 
 // applicationInstanceResource returns the Terraform awscc_panorama_application_instance resource.

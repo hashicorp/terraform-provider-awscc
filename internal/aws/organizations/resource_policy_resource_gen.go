@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_organizations_resource_policy", resourcePolicyResource)
+	registry.AddListResourceFactory("awscc_organizations_resource_policy", generic.NewListResource(resourcePolicyResource))
 }
 
 // resourcePolicyResource returns the Terraform awscc_organizations_resource_policy resource.

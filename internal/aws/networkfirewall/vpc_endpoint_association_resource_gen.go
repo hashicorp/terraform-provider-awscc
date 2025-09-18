@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_networkfirewall_vpc_endpoint_association", vpcEndpointAssociationResource)
+	registry.AddListResourceFactory("awscc_networkfirewall_vpc_endpoint_association", generic.NewListResource(vpcEndpointAssociationResource))
 }
 
 // vpcEndpointAssociationResource returns the Terraform awscc_networkfirewall_vpc_endpoint_association resource.

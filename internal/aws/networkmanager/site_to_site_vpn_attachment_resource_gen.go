@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_networkmanager_site_to_site_vpn_attachment", siteToSiteVpnAttachmentResource)
+	registry.AddListResourceFactory("awscc_networkmanager_site_to_site_vpn_attachment", generic.NewListResource(siteToSiteVpnAttachmentResource))
 }
 
 // siteToSiteVpnAttachmentResource returns the Terraform awscc_networkmanager_site_to_site_vpn_attachment resource.

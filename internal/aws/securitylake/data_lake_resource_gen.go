@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_securitylake_data_lake", dataLakeResource)
+	registry.AddListResourceFactory("awscc_securitylake_data_lake", generic.NewListResource(dataLakeResource))
 }
 
 // dataLakeResource returns the Terraform awscc_securitylake_data_lake resource.

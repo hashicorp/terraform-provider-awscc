@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudformation_hook_type_config", hookTypeConfigResource)
+	registry.AddListResourceFactory("awscc_cloudformation_hook_type_config", generic.NewListResource(hookTypeConfigResource))
 }
 
 // hookTypeConfigResource returns the Terraform awscc_cloudformation_hook_type_config resource.

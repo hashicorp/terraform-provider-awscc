@@ -19,6 +19,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_s3express_bucket_policy", bucketPolicyResource)
+	registry.AddListResourceFactory("awscc_s3express_bucket_policy", generic.NewListResource(bucketPolicyResource))
 }
 
 // bucketPolicyResource returns the Terraform awscc_s3express_bucket_policy resource.

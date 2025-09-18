@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_codedeploy_application", applicationResource)
+	registry.AddListResourceFactory("awscc_codedeploy_application", generic.NewListResource(applicationResource))
 }
 
 // applicationResource returns the Terraform awscc_codedeploy_application resource.

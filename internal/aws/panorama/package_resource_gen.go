@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_panorama_package", packageResource)
+	registry.AddListResourceFactory("awscc_panorama_package", generic.NewListResource(packageResource))
 }
 
 // packageResource returns the Terraform awscc_panorama_package resource.

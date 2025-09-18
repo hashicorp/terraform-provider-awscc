@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_events_rule", ruleResource)
+	registry.AddListResourceFactory("awscc_events_rule", generic.NewListResource(ruleResource))
 }
 
 // ruleResource returns the Terraform awscc_events_rule resource.

@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_batch_service_environment", serviceEnvironmentResource)
+	registry.AddListResourceFactory("awscc_batch_service_environment", generic.NewListResource(serviceEnvironmentResource))
 }
 
 // serviceEnvironmentResource returns the Terraform awscc_batch_service_environment resource.

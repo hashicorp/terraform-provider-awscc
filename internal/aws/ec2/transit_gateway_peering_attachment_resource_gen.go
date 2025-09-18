@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_transit_gateway_peering_attachment", transitGatewayPeeringAttachmentResource)
+	registry.AddListResourceFactory("awscc_ec2_transit_gateway_peering_attachment", generic.NewListResource(transitGatewayPeeringAttachmentResource))
 }
 
 // transitGatewayPeeringAttachmentResource returns the Terraform awscc_ec2_transit_gateway_peering_attachment resource.

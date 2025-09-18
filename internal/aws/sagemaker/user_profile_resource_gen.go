@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_user_profile", userProfileResource)
+	registry.AddListResourceFactory("awscc_sagemaker_user_profile", generic.NewListResource(userProfileResource))
 }
 
 // userProfileResource returns the Terraform awscc_sagemaker_user_profile resource.

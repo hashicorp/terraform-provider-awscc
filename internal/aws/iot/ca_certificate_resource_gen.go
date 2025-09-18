@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iot_ca_certificate", cACertificateResource)
+	registry.AddListResourceFactory("awscc_iot_ca_certificate", generic.NewListResource(cACertificateResource))
 }
 
 // cACertificateResource returns the Terraform awscc_iot_ca_certificate resource.

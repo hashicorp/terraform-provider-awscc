@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_billing_billing_view", billingViewResource)
+	registry.AddListResourceFactory("awscc_billing_billing_view", generic.NewListResource(billingViewResource))
 }
 
 // billingViewResource returns the Terraform awscc_billing_billing_view resource.

@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lookoutequipment_inference_scheduler", inferenceSchedulerResource)
+	registry.AddListResourceFactory("awscc_lookoutequipment_inference_scheduler", generic.NewListResource(inferenceSchedulerResource))
 }
 
 // inferenceSchedulerResource returns the Terraform awscc_lookoutequipment_inference_scheduler resource.

@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_notificationscontacts_email_contact", emailContactResource)
+	registry.AddListResourceFactory("awscc_notificationscontacts_email_contact", generic.NewListResource(emailContactResource))
 }
 
 // emailContactResource returns the Terraform awscc_notificationscontacts_email_contact resource.

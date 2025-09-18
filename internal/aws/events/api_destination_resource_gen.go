@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_events_api_destination", apiDestinationResource)
+	registry.AddListResourceFactory("awscc_events_api_destination", generic.NewListResource(apiDestinationResource))
 }
 
 // apiDestinationResource returns the Terraform awscc_events_api_destination resource.

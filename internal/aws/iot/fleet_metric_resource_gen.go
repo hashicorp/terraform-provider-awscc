@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iot_fleet_metric", fleetMetricResource)
+	registry.AddListResourceFactory("awscc_iot_fleet_metric", generic.NewListResource(fleetMetricResource))
 }
 
 // fleetMetricResource returns the Terraform awscc_iot_fleet_metric resource.

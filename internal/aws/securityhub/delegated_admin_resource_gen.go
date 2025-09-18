@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_securityhub_delegated_admin", delegatedAdminResource)
+	registry.AddListResourceFactory("awscc_securityhub_delegated_admin", generic.NewListResource(delegatedAdminResource))
 }
 
 // delegatedAdminResource returns the Terraform awscc_securityhub_delegated_admin resource.

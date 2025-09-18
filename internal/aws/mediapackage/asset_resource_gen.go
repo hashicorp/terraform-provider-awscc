@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_mediapackage_asset", assetResource)
+	registry.AddListResourceFactory("awscc_mediapackage_asset", generic.NewListResource(assetResource))
 }
 
 // assetResource returns the Terraform awscc_mediapackage_asset resource.

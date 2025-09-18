@@ -21,6 +21,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_appstream_directory_config", directoryConfigResource)
+	registry.AddListResourceFactory("awscc_appstream_directory_config", generic.NewListResource(directoryConfigResource))
 }
 
 // directoryConfigResource returns the Terraform awscc_appstream_directory_config resource.

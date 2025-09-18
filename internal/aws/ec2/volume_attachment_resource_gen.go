@@ -19,6 +19,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_volume_attachment", volumeAttachmentResource)
+	registry.AddListResourceFactory("awscc_ec2_volume_attachment", generic.NewListResource(volumeAttachmentResource))
 }
 
 // volumeAttachmentResource returns the Terraform awscc_ec2_volume_attachment resource.

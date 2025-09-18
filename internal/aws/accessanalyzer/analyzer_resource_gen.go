@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_accessanalyzer_analyzer", analyzerResource)
+	registry.AddListResourceFactory("awscc_accessanalyzer_analyzer", generic.NewListResource(analyzerResource))
 }
 
 // analyzerResource returns the Terraform awscc_accessanalyzer_analyzer resource.

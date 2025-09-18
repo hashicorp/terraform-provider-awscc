@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_studio_lifecycle_config", studioLifecycleConfigResource)
+	registry.AddListResourceFactory("awscc_sagemaker_studio_lifecycle_config", generic.NewListResource(studioLifecycleConfigResource))
 }
 
 // studioLifecycleConfigResource returns the Terraform awscc_sagemaker_studio_lifecycle_config resource.

@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_apigateway_api_key", apiKeyResource)
+	registry.AddListResourceFactory("awscc_apigateway_api_key", generic.NewListResource(apiKeyResource))
 }
 
 // apiKeyResource returns the Terraform awscc_apigateway_api_key resource.

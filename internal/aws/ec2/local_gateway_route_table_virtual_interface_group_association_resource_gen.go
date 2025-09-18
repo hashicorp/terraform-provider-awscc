@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_local_gateway_route_table_virtual_interface_group_association", localGatewayRouteTableVirtualInterfaceGroupAssociationResource)
+	registry.AddListResourceFactory("awscc_ec2_local_gateway_route_table_virtual_interface_group_association", generic.NewListResource(localGatewayRouteTableVirtualInterfaceGroupAssociationResource))
 }
 
 // localGatewayRouteTableVirtualInterfaceGroupAssociationResource returns the Terraform awscc_ec2_local_gateway_route_table_virtual_interface_group_association resource.

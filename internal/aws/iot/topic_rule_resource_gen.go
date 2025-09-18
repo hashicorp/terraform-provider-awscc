@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iot_topic_rule", topicRuleResource)
+	registry.AddListResourceFactory("awscc_iot_topic_rule", generic.NewListResource(topicRuleResource))
 }
 
 // topicRuleResource returns the Terraform awscc_iot_topic_rule resource.

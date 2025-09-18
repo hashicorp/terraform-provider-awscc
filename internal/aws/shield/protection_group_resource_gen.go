@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_shield_protection_group", protectionGroupResource)
+	registry.AddListResourceFactory("awscc_shield_protection_group", generic.NewListResource(protectionGroupResource))
 }
 
 // protectionGroupResource returns the Terraform awscc_shield_protection_group resource.

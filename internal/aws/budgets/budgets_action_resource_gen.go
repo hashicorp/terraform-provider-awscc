@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_budgets_budgets_action", budgetsActionResource)
+	registry.AddListResourceFactory("awscc_budgets_budgets_action", generic.NewListResource(budgetsActionResource))
 }
 
 // budgetsActionResource returns the Terraform awscc_budgets_budgets_action resource.

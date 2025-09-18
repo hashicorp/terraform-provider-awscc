@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_rolesanywhere_crl", cRLResource)
+	registry.AddListResourceFactory("awscc_rolesanywhere_crl", generic.NewListResource(cRLResource))
 }
 
 // cRLResource returns the Terraform awscc_rolesanywhere_crl resource.

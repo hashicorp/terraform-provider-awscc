@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_personalize_schema", schemaResource)
+	registry.AddListResourceFactory("awscc_personalize_schema", generic.NewListResource(schemaResource))
 }
 
 // schemaResource returns the Terraform awscc_personalize_schema resource.

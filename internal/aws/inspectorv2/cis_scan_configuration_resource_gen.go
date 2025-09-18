@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_inspectorv2_cis_scan_configuration", cisScanConfigurationResource)
+	registry.AddListResourceFactory("awscc_inspectorv2_cis_scan_configuration", generic.NewListResource(cisScanConfigurationResource))
 }
 
 // cisScanConfigurationResource returns the Terraform awscc_inspectorv2_cis_scan_configuration resource.

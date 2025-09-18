@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_autoscaling_launch_configuration", launchConfigurationResource)
+	registry.AddListResourceFactory("awscc_autoscaling_launch_configuration", generic.NewListResource(launchConfigurationResource))
 }
 
 // launchConfigurationResource returns the Terraform awscc_autoscaling_launch_configuration resource.

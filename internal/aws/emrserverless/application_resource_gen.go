@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_emrserverless_application", applicationResource)
+	registry.AddListResourceFactory("awscc_emrserverless_application", generic.NewListResource(applicationResource))
 }
 
 // applicationResource returns the Terraform awscc_emrserverless_application resource.

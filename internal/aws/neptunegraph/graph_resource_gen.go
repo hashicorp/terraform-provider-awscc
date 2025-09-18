@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_neptunegraph_graph", graphResource)
+	registry.AddListResourceFactory("awscc_neptunegraph_graph", generic.NewListResource(graphResource))
 }
 
 // graphResource returns the Terraform awscc_neptunegraph_graph resource.

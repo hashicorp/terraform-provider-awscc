@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_codeartifact_domain", domainResource)
+	registry.AddListResourceFactory("awscc_codeartifact_domain", generic.NewListResource(domainResource))
 }
 
 // domainResource returns the Terraform awscc_codeartifact_domain resource.

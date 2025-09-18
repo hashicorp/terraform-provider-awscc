@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_networkmanager_connect_attachment", connectAttachmentResource)
+	registry.AddListResourceFactory("awscc_networkmanager_connect_attachment", generic.NewListResource(connectAttachmentResource))
 }
 
 // connectAttachmentResource returns the Terraform awscc_networkmanager_connect_attachment resource.

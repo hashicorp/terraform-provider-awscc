@@ -33,6 +33,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_kendra_data_source", dataSourceResource)
+	registry.AddListResourceFactory("awscc_kendra_data_source", generic.NewListResource(dataSourceResource))
 }
 
 // dataSourceResource returns the Terraform awscc_kendra_data_source resource.

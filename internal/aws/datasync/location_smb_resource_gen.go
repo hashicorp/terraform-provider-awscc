@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_datasync_location_smb", locationSMBResource)
+	registry.AddListResourceFactory("awscc_datasync_location_smb", generic.NewListResource(locationSMBResource))
 }
 
 // locationSMBResource returns the Terraform awscc_datasync_location_smb resource.

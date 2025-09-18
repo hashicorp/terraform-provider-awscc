@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_oam_link", linkResource)
+	registry.AddListResourceFactory("awscc_oam_link", generic.NewListResource(linkResource))
 }
 
 // linkResource returns the Terraform awscc_oam_link resource.

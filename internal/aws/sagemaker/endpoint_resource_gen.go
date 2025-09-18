@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_endpoint", endpointResource)
+	registry.AddListResourceFactory("awscc_sagemaker_endpoint", generic.NewListResource(endpointResource))
 }
 
 // endpointResource returns the Terraform awscc_sagemaker_endpoint resource.

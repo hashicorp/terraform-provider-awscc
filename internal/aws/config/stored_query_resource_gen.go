@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_config_stored_query", storedQueryResource)
+	registry.AddListResourceFactory("awscc_config_stored_query", generic.NewListResource(storedQueryResource))
 }
 
 // storedQueryResource returns the Terraform awscc_config_stored_query resource.

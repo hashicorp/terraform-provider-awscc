@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_rds_db_cluster_parameter_group", dBClusterParameterGroupResource)
+	registry.AddListResourceFactory("awscc_rds_db_cluster_parameter_group", generic.NewListResource(dBClusterParameterGroupResource))
 }
 
 // dBClusterParameterGroupResource returns the Terraform awscc_rds_db_cluster_parameter_group resource.

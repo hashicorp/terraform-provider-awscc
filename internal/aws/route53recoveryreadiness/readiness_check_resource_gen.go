@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_route53recoveryreadiness_readiness_check", readinessCheckResource)
+	registry.AddListResourceFactory("awscc_route53recoveryreadiness_readiness_check", generic.NewListResource(readinessCheckResource))
 }
 
 // readinessCheckResource returns the Terraform awscc_route53recoveryreadiness_readiness_check resource.

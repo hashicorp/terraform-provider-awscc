@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_mediaconnect_flow_entitlement", flowEntitlementResource)
+	registry.AddListResourceFactory("awscc_mediaconnect_flow_entitlement", generic.NewListResource(flowEntitlementResource))
 }
 
 // flowEntitlementResource returns the Terraform awscc_mediaconnect_flow_entitlement resource.

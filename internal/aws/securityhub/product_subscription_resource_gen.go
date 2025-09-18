@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_securityhub_product_subscription", productSubscriptionResource)
+	registry.AddListResourceFactory("awscc_securityhub_product_subscription", generic.NewListResource(productSubscriptionResource))
 }
 
 // productSubscriptionResource returns the Terraform awscc_securityhub_product_subscription resource.

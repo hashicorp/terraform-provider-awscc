@@ -32,6 +32,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudformation_stack_set", stackSetResource)
+	registry.AddListResourceFactory("awscc_cloudformation_stack_set", generic.NewListResource(stackSetResource))
 }
 
 // stackSetResource returns the Terraform awscc_cloudformation_stack_set resource.

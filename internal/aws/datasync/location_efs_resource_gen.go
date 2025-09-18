@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_datasync_location_efs", locationEFSResource)
+	registry.AddListResourceFactory("awscc_datasync_location_efs", generic.NewListResource(locationEFSResource))
 }
 
 // locationEFSResource returns the Terraform awscc_datasync_location_efs resource.

@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_secretsmanager_rotation_schedule", rotationScheduleResource)
+	registry.AddListResourceFactory("awscc_secretsmanager_rotation_schedule", generic.NewListResource(rotationScheduleResource))
 }
 
 // rotationScheduleResource returns the Terraform awscc_secretsmanager_rotation_schedule resource.

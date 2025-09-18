@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_codestarnotifications_notification_rule", notificationRuleResource)
+	registry.AddListResourceFactory("awscc_codestarnotifications_notification_rule", generic.NewListResource(notificationRuleResource))
 }
 
 // notificationRuleResource returns the Terraform awscc_codestarnotifications_notification_rule resource.

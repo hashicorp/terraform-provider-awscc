@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_supportapp_slack_channel_configuration", slackChannelConfigurationResource)
+	registry.AddListResourceFactory("awscc_supportapp_slack_channel_configuration", generic.NewListResource(slackChannelConfigurationResource))
 }
 
 // slackChannelConfigurationResource returns the Terraform awscc_supportapp_slack_channel_configuration resource.

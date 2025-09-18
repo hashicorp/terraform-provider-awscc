@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ivs_playback_restriction_policy", playbackRestrictionPolicyResource)
+	registry.AddListResourceFactory("awscc_ivs_playback_restriction_policy", generic.NewListResource(playbackRestrictionPolicyResource))
 }
 
 // playbackRestrictionPolicyResource returns the Terraform awscc_ivs_playback_restriction_policy resource.

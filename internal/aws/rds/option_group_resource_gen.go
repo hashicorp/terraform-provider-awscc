@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_rds_option_group", optionGroupResource)
+	registry.AddListResourceFactory("awscc_rds_option_group", generic.NewListResource(optionGroupResource))
 }
 
 // optionGroupResource returns the Terraform awscc_rds_option_group resource.

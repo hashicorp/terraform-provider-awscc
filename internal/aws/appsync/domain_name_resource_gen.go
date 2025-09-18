@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_appsync_domain_name", domainNameResource)
+	registry.AddListResourceFactory("awscc_appsync_domain_name", generic.NewListResource(domainNameResource))
 }
 
 // domainNameResource returns the Terraform awscc_appsync_domain_name resource.

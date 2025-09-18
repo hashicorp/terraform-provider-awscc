@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_emr_studio_session_mapping", studioSessionMappingResource)
+	registry.AddListResourceFactory("awscc_emr_studio_session_mapping", generic.NewListResource(studioSessionMappingResource))
 }
 
 // studioSessionMappingResource returns the Terraform awscc_emr_studio_session_mapping resource.

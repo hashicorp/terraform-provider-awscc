@@ -19,6 +19,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_subnet_network_acl_association", subnetNetworkAclAssociationResource)
+	registry.AddListResourceFactory("awscc_ec2_subnet_network_acl_association", generic.NewListResource(subnetNetworkAclAssociationResource))
 }
 
 // subnetNetworkAclAssociationResource returns the Terraform awscc_ec2_subnet_network_acl_association resource.

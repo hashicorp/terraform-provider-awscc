@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_guardduty_trusted_entity_set", trustedEntitySetResource)
+	registry.AddListResourceFactory("awscc_guardduty_trusted_entity_set", generic.NewListResource(trustedEntitySetResource))
 }
 
 // trustedEntitySetResource returns the Terraform awscc_guardduty_trusted_entity_set resource.

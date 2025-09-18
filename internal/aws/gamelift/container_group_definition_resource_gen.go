@@ -34,6 +34,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_gamelift_container_group_definition", containerGroupDefinitionResource)
+	registry.AddListResourceFactory("awscc_gamelift_container_group_definition", generic.NewListResource(containerGroupDefinitionResource))
 }
 
 // containerGroupDefinitionResource returns the Terraform awscc_gamelift_container_group_definition resource.

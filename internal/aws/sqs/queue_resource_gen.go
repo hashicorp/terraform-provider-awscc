@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sqs_queue", queueResource)
+	registry.AddListResourceFactory("awscc_sqs_queue", generic.NewListResource(queueResource))
 }
 
 // queueResource returns the Terraform awscc_sqs_queue resource.

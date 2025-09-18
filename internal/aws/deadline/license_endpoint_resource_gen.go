@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_deadline_license_endpoint", licenseEndpointResource)
+	registry.AddListResourceFactory("awscc_deadline_license_endpoint", generic.NewListResource(licenseEndpointResource))
 }
 
 // licenseEndpointResource returns the Terraform awscc_deadline_license_endpoint resource.

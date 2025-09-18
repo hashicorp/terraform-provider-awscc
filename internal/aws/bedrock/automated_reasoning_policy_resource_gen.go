@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_bedrock_automated_reasoning_policy", automatedReasoningPolicyResource)
+	registry.AddListResourceFactory("awscc_bedrock_automated_reasoning_policy", generic.NewListResource(automatedReasoningPolicyResource))
 }
 
 // automatedReasoningPolicyResource returns the Terraform awscc_bedrock_automated_reasoning_policy resource.

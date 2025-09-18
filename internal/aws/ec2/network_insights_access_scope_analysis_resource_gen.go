@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ec2_network_insights_access_scope_analysis", networkInsightsAccessScopeAnalysisResource)
+	registry.AddListResourceFactory("awscc_ec2_network_insights_access_scope_analysis", generic.NewListResource(networkInsightsAccessScopeAnalysisResource))
 }
 
 // networkInsightsAccessScopeAnalysisResource returns the Terraform awscc_ec2_network_insights_access_scope_analysis resource.

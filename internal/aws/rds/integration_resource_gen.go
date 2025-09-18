@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_rds_integration", integrationResource)
+	registry.AddListResourceFactory("awscc_rds_integration", generic.NewListResource(integrationResource))
 }
 
 // integrationResource returns the Terraform awscc_rds_integration resource.

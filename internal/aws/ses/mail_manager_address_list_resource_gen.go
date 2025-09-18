@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ses_mail_manager_address_list", mailManagerAddressListResource)
+	registry.AddListResourceFactory("awscc_ses_mail_manager_address_list", generic.NewListResource(mailManagerAddressListResource))
 }
 
 // mailManagerAddressListResource returns the Terraform awscc_ses_mail_manager_address_list resource.

@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_project", projectResource)
+	registry.AddListResourceFactory("awscc_sagemaker_project", generic.NewListResource(projectResource))
 }
 
 // projectResource returns the Terraform awscc_sagemaker_project resource.

@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_sso_permission_set", permissionSetResource)
+	registry.AddListResourceFactory("awscc_sso_permission_set", generic.NewListResource(permissionSetResource))
 }
 
 // permissionSetResource returns the Terraform awscc_sso_permission_set resource.

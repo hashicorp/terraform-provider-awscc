@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_codegurureviewer_repository_association", repositoryAssociationResource)
+	registry.AddListResourceFactory("awscc_codegurureviewer_repository_association", generic.NewListResource(repositoryAssociationResource))
 }
 
 // repositoryAssociationResource returns the Terraform awscc_codegurureviewer_repository_association resource.

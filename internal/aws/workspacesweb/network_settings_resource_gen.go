@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_workspacesweb_network_settings", networkSettingsResource)
+	registry.AddListResourceFactory("awscc_workspacesweb_network_settings", generic.NewListResource(networkSettingsResource))
 }
 
 // networkSettingsResource returns the Terraform awscc_workspacesweb_network_settings resource.

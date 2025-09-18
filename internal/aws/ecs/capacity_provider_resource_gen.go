@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ecs_capacity_provider", capacityProviderResource)
+	registry.AddListResourceFactory("awscc_ecs_capacity_provider", generic.NewListResource(capacityProviderResource))
 }
 
 // capacityProviderResource returns the Terraform awscc_ecs_capacity_provider resource.

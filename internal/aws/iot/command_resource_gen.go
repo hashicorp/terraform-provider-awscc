@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iot_command", commandResource)
+	registry.AddListResourceFactory("awscc_iot_command", generic.NewListResource(commandResource))
 }
 
 // commandResource returns the Terraform awscc_iot_command resource.

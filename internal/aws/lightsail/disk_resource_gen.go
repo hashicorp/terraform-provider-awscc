@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lightsail_disk", diskResource)
+	registry.AddListResourceFactory("awscc_lightsail_disk", generic.NewListResource(diskResource))
 }
 
 // diskResource returns the Terraform awscc_lightsail_disk resource.

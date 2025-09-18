@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_bcmdataexports_export", exportResource)
+	registry.AddListResourceFactory("awscc_bcmdataexports_export", generic.NewListResource(exportResource))
 }
 
 // exportResource returns the Terraform awscc_bcmdataexports_export resource.

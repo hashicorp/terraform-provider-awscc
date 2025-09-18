@@ -22,6 +22,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudformation_hook_default_version", hookDefaultVersionResource)
+	registry.AddListResourceFactory("awscc_cloudformation_hook_default_version", generic.NewListResource(hookDefaultVersionResource))
 }
 
 // hookDefaultVersionResource returns the Terraform awscc_cloudformation_hook_default_version resource.

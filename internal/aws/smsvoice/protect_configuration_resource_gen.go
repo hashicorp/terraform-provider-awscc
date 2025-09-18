@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_smsvoice_protect_configuration", protectConfigurationResource)
+	registry.AddListResourceFactory("awscc_smsvoice_protect_configuration", generic.NewListResource(protectConfigurationResource))
 }
 
 // protectConfigurationResource returns the Terraform awscc_smsvoice_protect_configuration resource.

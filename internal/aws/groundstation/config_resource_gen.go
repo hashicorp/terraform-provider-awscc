@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_groundstation_config", configResource)
+	registry.AddListResourceFactory("awscc_groundstation_config", generic.NewListResource(configResource))
 }
 
 // configResource returns the Terraform awscc_groundstation_config resource.

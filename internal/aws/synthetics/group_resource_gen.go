@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_synthetics_group", groupResource)
+	registry.AddListResourceFactory("awscc_synthetics_group", generic.NewListResource(groupResource))
 }
 
 // groupResource returns the Terraform awscc_synthetics_group resource.

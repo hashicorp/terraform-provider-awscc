@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_workspacesweb_session_logger", sessionLoggerResource)
+	registry.AddListResourceFactory("awscc_workspacesweb_session_logger", generic.NewListResource(sessionLoggerResource))
 }
 
 // sessionLoggerResource returns the Terraform awscc_workspacesweb_session_logger resource.

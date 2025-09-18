@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iotanalytics_pipeline", pipelineResource)
+	registry.AddListResourceFactory("awscc_iotanalytics_pipeline", generic.NewListResource(pipelineResource))
 }
 
 // pipelineResource returns the Terraform awscc_iotanalytics_pipeline resource.

@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_evs_environment", environmentResource)
+	registry.AddListResourceFactory("awscc_evs_environment", generic.NewListResource(environmentResource))
 }
 
 // environmentResource returns the Terraform awscc_evs_environment resource.

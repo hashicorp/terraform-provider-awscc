@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_opensearchserverless_collection", collectionResource)
+	registry.AddListResourceFactory("awscc_opensearchserverless_collection", generic.NewListResource(collectionResource))
 }
 
 // collectionResource returns the Terraform awscc_opensearchserverless_collection resource.

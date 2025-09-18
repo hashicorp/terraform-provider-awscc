@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_lightsail_certificate", certificateResource)
+	registry.AddListResourceFactory("awscc_lightsail_certificate", generic.NewListResource(certificateResource))
 }
 
 // certificateResource returns the Terraform awscc_lightsail_certificate resource.

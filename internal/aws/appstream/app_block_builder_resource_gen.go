@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_appstream_app_block_builder", appBlockBuilderResource)
+	registry.AddListResourceFactory("awscc_appstream_app_block_builder", generic.NewListResource(appBlockBuilderResource))
 }
 
 // appBlockBuilderResource returns the Terraform awscc_appstream_app_block_builder resource.

@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_apprunner_vpc_ingress_connection", vpcIngressConnectionResource)
+	registry.AddListResourceFactory("awscc_apprunner_vpc_ingress_connection", generic.NewListResource(vpcIngressConnectionResource))
 }
 
 // vpcIngressConnectionResource returns the Terraform awscc_apprunner_vpc_ingress_connection resource.

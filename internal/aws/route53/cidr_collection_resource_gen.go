@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_route53_cidr_collection", cidrCollectionResource)
+	registry.AddListResourceFactory("awscc_route53_cidr_collection", generic.NewListResource(cidrCollectionResource))
 }
 
 // cidrCollectionResource returns the Terraform awscc_route53_cidr_collection resource.

@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_codepipeline_webhook", webhookResource)
+	registry.AddListResourceFactory("awscc_codepipeline_webhook", generic.NewListResource(webhookResource))
 }
 
 // webhookResource returns the Terraform awscc_codepipeline_webhook resource.

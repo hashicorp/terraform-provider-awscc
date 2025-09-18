@@ -21,6 +21,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_arczonalshift_autoshift_observer_notification_status", autoshiftObserverNotificationStatusResource)
+	registry.AddListResourceFactory("awscc_arczonalshift_autoshift_observer_notification_status", generic.NewListResource(autoshiftObserverNotificationStatusResource))
 }
 
 // autoshiftObserverNotificationStatusResource returns the Terraform awscc_arczonalshift_autoshift_observer_notification_status resource.

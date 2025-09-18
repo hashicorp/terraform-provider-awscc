@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cleanrooms_configured_table", configuredTableResource)
+	registry.AddListResourceFactory("awscc_cleanrooms_configured_table", generic.NewListResource(configuredTableResource))
 }
 
 // configuredTableResource returns the Terraform awscc_cleanrooms_configured_table resource.

@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_logs_log_group", logGroupResource)
+	registry.AddListResourceFactory("awscc_logs_log_group", generic.NewListResource(logGroupResource))
 }
 
 // logGroupResource returns the Terraform awscc_logs_log_group resource.

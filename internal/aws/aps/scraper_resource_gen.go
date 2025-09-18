@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_aps_scraper", scraperResource)
+	registry.AddListResourceFactory("awscc_aps_scraper", generic.NewListResource(scraperResource))
 }
 
 // scraperResource returns the Terraform awscc_aps_scraper resource.

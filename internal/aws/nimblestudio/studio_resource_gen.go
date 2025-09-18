@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_nimblestudio_studio", studioResource)
+	registry.AddListResourceFactory("awscc_nimblestudio_studio", generic.NewListResource(studioResource))
 }
 
 // studioResource returns the Terraform awscc_nimblestudio_studio resource.

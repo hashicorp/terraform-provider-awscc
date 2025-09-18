@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_odb_cloud_vm_cluster", cloudVmClusterResource)
+	registry.AddListResourceFactory("awscc_odb_cloud_vm_cluster", generic.NewListResource(cloudVmClusterResource))
 }
 
 // cloudVmClusterResource returns the Terraform awscc_odb_cloud_vm_cluster resource.

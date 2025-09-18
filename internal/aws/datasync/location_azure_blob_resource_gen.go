@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_datasync_location_azure_blob", locationAzureBlobResource)
+	registry.AddListResourceFactory("awscc_datasync_location_azure_blob", generic.NewListResource(locationAzureBlobResource))
 }
 
 // locationAzureBlobResource returns the Terraform awscc_datasync_location_azure_blob resource.

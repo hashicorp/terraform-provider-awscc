@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_bedrock_automated_reasoning_policy_version", automatedReasoningPolicyVersionResource)
+	registry.AddListResourceFactory("awscc_bedrock_automated_reasoning_policy_version", generic.NewListResource(automatedReasoningPolicyVersionResource))
 }
 
 // automatedReasoningPolicyVersionResource returns the Terraform awscc_bedrock_automated_reasoning_policy_version resource.

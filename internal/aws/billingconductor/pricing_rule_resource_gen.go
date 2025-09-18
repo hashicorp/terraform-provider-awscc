@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_billingconductor_pricing_rule", pricingRuleResource)
+	registry.AddListResourceFactory("awscc_billingconductor_pricing_rule", generic.NewListResource(pricingRuleResource))
 }
 
 // pricingRuleResource returns the Terraform awscc_billingconductor_pricing_rule resource.

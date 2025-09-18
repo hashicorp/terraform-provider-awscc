@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_controltower_landing_zone", landingZoneResource)
+	registry.AddListResourceFactory("awscc_controltower_landing_zone", generic.NewListResource(landingZoneResource))
 }
 
 // landingZoneResource returns the Terraform awscc_controltower_landing_zone resource.

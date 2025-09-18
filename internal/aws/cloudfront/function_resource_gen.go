@@ -25,6 +25,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudfront_function", functionResource)
+	registry.AddListResourceFactory("awscc_cloudfront_function", generic.NewListResource(functionResource))
 }
 
 // functionResource returns the Terraform awscc_cloudfront_function resource.

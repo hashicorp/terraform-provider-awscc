@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_macie_findings_filter", findingsFilterResource)
+	registry.AddListResourceFactory("awscc_macie_findings_filter", generic.NewListResource(findingsFilterResource))
 }
 
 // findingsFilterResource returns the Terraform awscc_macie_findings_filter resource.

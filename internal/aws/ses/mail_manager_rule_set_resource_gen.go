@@ -29,6 +29,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_ses_mail_manager_rule_set", mailManagerRuleSetResource)
+	registry.AddListResourceFactory("awscc_ses_mail_manager_rule_set", generic.NewListResource(mailManagerRuleSetResource))
 }
 
 // mailManagerRuleSetResource returns the Terraform awscc_ses_mail_manager_rule_set resource.

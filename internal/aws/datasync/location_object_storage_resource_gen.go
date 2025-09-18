@@ -31,6 +31,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_datasync_location_object_storage", locationObjectStorageResource)
+	registry.AddListResourceFactory("awscc_datasync_location_object_storage", generic.NewListResource(locationObjectStorageResource))
 }
 
 // locationObjectStorageResource returns the Terraform awscc_datasync_location_object_storage resource.

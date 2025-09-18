@@ -27,6 +27,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_backup_restore_testing_plan", restoreTestingPlanResource)
+	registry.AddListResourceFactory("awscc_backup_restore_testing_plan", generic.NewListResource(restoreTestingPlanResource))
 }
 
 // restoreTestingPlanResource returns the Terraform awscc_backup_restore_testing_plan resource.

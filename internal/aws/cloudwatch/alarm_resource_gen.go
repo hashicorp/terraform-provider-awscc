@@ -30,6 +30,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudwatch_alarm", alarmResource)
+	registry.AddListResourceFactory("awscc_cloudwatch_alarm", generic.NewListResource(alarmResource))
 }
 
 // alarmResource returns the Terraform awscc_cloudwatch_alarm resource.

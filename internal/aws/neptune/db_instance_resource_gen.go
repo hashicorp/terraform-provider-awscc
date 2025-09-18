@@ -23,6 +23,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_neptune_db_instance", dBInstanceResource)
+	registry.AddListResourceFactory("awscc_neptune_db_instance", generic.NewListResource(dBInstanceResource))
 }
 
 // dBInstanceResource returns the Terraform awscc_neptune_db_instance resource.

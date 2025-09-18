@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_iot_provisioning_template", provisioningTemplateResource)
+	registry.AddListResourceFactory("awscc_iot_provisioning_template", generic.NewListResource(provisioningTemplateResource))
 }
 
 // provisioningTemplateResource returns the Terraform awscc_iot_provisioning_template resource.

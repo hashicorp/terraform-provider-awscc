@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_amplify_app", appResource)
+	registry.AddListResourceFactory("awscc_amplify_app", generic.NewListResource(appResource))
 }
 
 // appResource returns the Terraform awscc_amplify_app resource.

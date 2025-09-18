@@ -26,6 +26,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_memorydb_subnet_group", subnetGroupResource)
+	registry.AddListResourceFactory("awscc_memorydb_subnet_group", generic.NewListResource(subnetGroupResource))
 }
 
 // subnetGroupResource returns the Terraform awscc_memorydb_subnet_group resource.

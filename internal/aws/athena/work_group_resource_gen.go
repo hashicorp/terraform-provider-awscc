@@ -28,6 +28,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_athena_work_group", workGroupResource)
+	registry.AddListResourceFactory("awscc_athena_work_group", generic.NewListResource(workGroupResource))
 }
 
 // workGroupResource returns the Terraform awscc_athena_work_group resource.
