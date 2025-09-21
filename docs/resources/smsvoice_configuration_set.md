@@ -20,9 +20,9 @@ Create an SMS Voice configuration set for managing SMS and voice messaging setti
 ```terraform
 resource "awscc_smsvoice_configuration_set" "example" {
   configuration_set_name = "example-configuration-set"
-  
+
   message_feedback_enabled = true
-  
+
   tags = [
     {
       key   = "Environment"

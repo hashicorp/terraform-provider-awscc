@@ -21,9 +21,9 @@ Create an SMS sender ID for sending messages from a specific sender ID in suppor
 resource "awscc_smsvoice_sender_id" "example" {
   sender_id        = "MYCOMPANY"
   iso_country_code = "GB"
-  
+
   deletion_protection_enabled = false
-  
+
   tags = [
     {
       key   = "Environment"
@@ -34,11 +34,6 @@ resource "awscc_smsvoice_sender_id" "example" {
       value = "example-sender-id"
     }
   ]
-}
-
-output "sender_id_arn" {
-  description = "The ARN of the SMS sender ID"
-  value       = awscc_smsvoice_sender_id.example.arn
 }
 ```
 

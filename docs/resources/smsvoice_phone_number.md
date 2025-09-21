@@ -32,7 +32,7 @@ resource "awscc_smsvoice_phone_number" "example" {
       message = "Reply STOP to unsubscribe"
     }
   }
-  
+
   tags = [
     {
       key   = "Environment"
@@ -43,16 +43,6 @@ resource "awscc_smsvoice_phone_number" "example" {
       value = "example-phone-number"
     }
   ]
-}
-
-output "phone_number_id" {
-  description = "The phone number ID"
-  value       = awscc_smsvoice_phone_number.example.phone_number_id
-}
-
-output "phone_number" {
-  description = "The phone number"
-  value       = awscc_smsvoice_phone_number.example.phone_number
 }
 ```
 

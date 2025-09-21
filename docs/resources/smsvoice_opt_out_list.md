@@ -20,7 +20,7 @@ Create an SMS Voice Opt-Out List
 ```terraform
 resource "awscc_smsvoice_opt_out_list" "example" {
   opt_out_list_name = "example-opt-out-list"
-  
+
   tags = [
     {
       key   = "Environment"
@@ -31,11 +31,6 @@ resource "awscc_smsvoice_opt_out_list" "example" {
       value = "example-opt-out-list"
     }
   ]
-}
-
-output "opt_out_list_arn" {
-  description = "The ARN of the opt-out list"
-  value       = awscc_smsvoice_opt_out_list.example.arn
 }
 ```
 

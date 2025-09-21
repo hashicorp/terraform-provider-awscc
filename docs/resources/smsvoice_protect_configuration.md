@@ -25,15 +25,10 @@ resource "awscc_smsvoice_protect_configuration" "example" {
       value = "example-protect-config"
     },
     {
-      key   = "Environment" 
+      key   = "Environment"
       value = "example"
     }
   ]
-}
-
-output "protect_configuration_id" {
-  description = "The protect configuration ID"
-  value       = awscc_smsvoice_protect_configuration.example.protect_configuration_id
 }
 ```
 

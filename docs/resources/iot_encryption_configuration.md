@@ -88,18 +88,8 @@ resource "awscc_iam_role" "iot_encryption" {
 
 resource "awscc_iot_encryption_configuration" "example" {
   encryption_type     = "CUSTOMER_MANAGED_KMS_KEY"
-  kms_key_arn        = awscc_kms_key.iot_encryption.arn
+  kms_key_arn         = awscc_kms_key.iot_encryption.arn
   kms_access_role_arn = awscc_iam_role.iot_encryption.arn
-}
-
-output "iot_encryption_role_arn" {
-  description = "The IAM role ARN used for IoT encryption"
-  value       = awscc_iot_encryption_configuration.example.kms_access_role_arn
-}
-
-output "kms_key_arn" {
-  description = "The KMS key ARN used for IoT encryption"
-  value       = awscc_iot_encryption_configuration.example.kms_key_arn
 }
 ```
 
