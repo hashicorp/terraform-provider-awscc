@@ -379,6 +379,10 @@
       "$ref": "#/definitions/Endpoint",
       "description": ""
     },
+    "MasterUserAuthenticationType": {
+      "description": "",
+      "type": "string"
+    },
     "MasterUsername": {
       "type": "string",
       "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,127}$",
@@ -642,6 +646,7 @@
     "/properties/CertificateRotationRestart",
     "/properties/DBSnapshotIdentifier",
     "/properties/DeleteAutomatedBackups",
+    "/properties/MasterUserAuthenticationType",
     "/properties/MasterUserPassword",
     "/properties/RestoreTime",
     "/properties/SourceDBInstanceAutomatedBackupsArn",

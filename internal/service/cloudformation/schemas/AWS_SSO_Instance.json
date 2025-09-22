@@ -106,7 +106,8 @@
         "sso:TagResource",
         "iam:CreateServiceLinkedRole",
         "sso:TagInstance",
-        "sso:ListTagsForResource"
+        "sso:ListTagsForResource",
+        "identitystore:CreateIdentityStore"
       ]
     },
     "read": {
@@ -127,7 +128,8 @@
     },
     "delete": {
       "permissions": [
-        "sso:DeleteInstance"
+        "sso:DeleteInstance",
+        "identitystore:DeleteIdentityStore"
       ]
     },
     "list": {

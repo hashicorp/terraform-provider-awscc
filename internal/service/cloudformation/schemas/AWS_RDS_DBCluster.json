@@ -172,6 +172,10 @@
       "description": "The Amazon Resource Name (ARN) of the AWS KMS key that is used to encrypt the database instances in the DB cluster, such as ``arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef``. If you enable the ``StorageEncrypted`` property but don't specify this property, the default KMS key is used. If you specify this property, you must set the ``StorageEncrypted`` property to ``true``.\n If you specify the ``SnapshotIdentifier`` property, the ``StorageEncrypted`` property value is inherited from the snapshot, and if the DB cluster is encrypted, the specified ``KmsKeyId`` property is used.\n If you create a read replica of an encrypted DB cluster in another AWS Region, make sure to set ``KmsKeyId`` to a KMS key identifier that is valid in the destination AWS Region. This KMS key is used to encrypt the read replica in that AWS Region.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
       "type": "string"
     },
+    "MasterUserAuthenticationType": {
+      "description": "",
+      "type": "string"
+    },
     "MasterUsername": {
       "description": "The name of the master user for the DB cluster.\n  If you specify the ``SourceDBClusterIdentifier``, ``SnapshotIdentifier``, or ``GlobalClusterIdentifier`` property, don't specify this property. The value is inherited from the source DB cluster, the snapshot, or the primary DB cluster for the global database cluster, respectively.\n  Valid for: Aurora DB clusters and Multi-AZ DB clusters",
       "type": "string",
@@ -489,6 +493,7 @@
     "/properties/ClusterScalabilityType",
     "/properties/DBInstanceParameterGroupName",
     "/properties/DeleteAutomatedBackups",
+    "/properties/MasterUserAuthenticationType",
     "/properties/MasterUserPassword",
     "/properties/RestoreToTime",
     "/properties/RestoreType",

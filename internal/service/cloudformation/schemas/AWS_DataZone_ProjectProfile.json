@@ -177,11 +177,11 @@
     },
     "DomainId": {
       "type": "string",
-      "pattern": "^dzd[_][a-zA-Z0-9_-]{1,36}$"
+      "pattern": "^dzd[_-][a-zA-Z0-9_-]{1,36}$"
     },
     "DomainIdentifier": {
       "type": "string",
-      "pattern": "^dzd[_][a-zA-Z0-9_-]{1,36}$"
+      "pattern": "^dzd[_-][a-zA-Z0-9_-]{1,36}$"
     },
     "DomainUnitId": {
       "type": "string",

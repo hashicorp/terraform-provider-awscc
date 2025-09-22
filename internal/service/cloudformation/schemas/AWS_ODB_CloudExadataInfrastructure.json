@@ -34,6 +34,92 @@
           "description": "The email address of the contact."
         }
       }
+    },
+    "MaintenanceWindow": {
+      "description": "The scheduling details for the maintenance window. Patching and system updates take place during the maintenance window.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "CustomActionTimeoutInMins": {
+          "type": "integer",
+          "description": "The timeout duration for custom actions in minutes.",
+          "minimum": 15,
+          "maximum": 120
+        },
+        "DaysOfWeek": {
+          "type": "array",
+          "description": "The days of the week when maintenance can be performed.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "MONDAY",
+              "TUESDAY",
+              "WEDNESDAY",
+              "THURSDAY",
+              "FRIDAY",
+              "SATURDAY",
+              "SUNDAY"
+            ]
+          }
+        },
+        "HoursOfDay": {
+          "type": "array",
+          "description": "The hours of the day when maintenance can be performed.",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer"
+          }
+        },
+        "IsCustomActionTimeoutEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether custom action timeout is enabled."
+        },
+        "LeadTimeInWeeks": {
+          "type": "integer",
+          "description": "The lead time in weeks before the maintenance window.",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "Months": {
+          "type": "array",
+          "description": "The months when maintenance can be performed.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "JANUARY",
+              "FEBRUARY",
+              "MARCH",
+              "APRIL",
+              "MAY",
+              "JUNE",
+              "JULY",
+              "AUGUST",
+              "SEPTEMBER",
+              "OCTOBER",
+              "NOVEMBER",
+              "DECEMBER"
+            ]
+          }
+        },
+        "PatchingMode": {
+          "type": "string",
+          "description": "The patching mode for the maintenance window."
+        },
+        "Preference": {
+          "type": "string",
+          "description": "The preference for the maintenance window scheduling."
+        },
+        "WeeksOfMonth": {
+          "type": "array",
+          "description": "The weeks of the month when maintenance can be performed.",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
     }
   },
   "properties": {
@@ -68,6 +154,10 @@
     "CloudExadataInfrastructureId": {
       "type": "string",
       "description": "The unique identifier for the Exadata infrastructure."
+    },
+    "MaintenanceWindow": {
+      "$ref": "#/definitions/MaintenanceWindow",
+      "description": "The scheduling details for the maintenance window. Patching and system updates take place during the maintenance window."
     },
     "ComputeCount": {
       "type": "integer",
@@ -286,6 +376,7 @@
       ]
     }
   },
+  "replacementStrategy": "delete_then_create",
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,

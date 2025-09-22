@@ -41,7 +41,8 @@
         "dynamodb:DescribeContributorInsights",
         "dynamodb:DescribeKinesisStreamingDestination",
         "dynamodb:ListTagsOfResource",
-        "dynamodb:GetResourcePolicy"
+        "dynamodb:GetResourcePolicy",
+        "dynamodb:DescribeTimeToLive"
       ]
     },
     "create": {
@@ -64,6 +65,15 @@
         "dynamodb:UpdateTable",
         "dynamodb:GetResourcePolicy",
         "dynamodb:PutResourcePolicy",
+        "dynamodb:CreateTableReplica",
+        "dynamodb:Scan",
+        "dynamodb:Query",
+        "dynamodb:UpdateItem",
+        "dynamodb:PutItem",
+        "dynamodb:GetItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:AssociateTableReplica",
         "kinesis:DescribeStream",
         "kinesis:PutRecords",
         "iam:CreateServiceLinkedRole",
@@ -105,6 +115,16 @@
         "dynamodb:GetResourcePolicy",
         "dynamodb:PutResourcePolicy",
         "dynamodb:DeleteResourcePolicy",
+        "dynamodb:CreateTable",
+        "dynamodb:CreateTableReplica",
+        "dynamodb:Scan",
+        "dynamodb:Query",
+        "dynamodb:UpdateItem",
+        "dynamodb:PutItem",
+        "dynamodb:GetItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:AssociateTableReplica",
         "kinesis:DescribeStream",
         "kinesis:PutRecords",
         "iam:CreateServiceLinkedRole",
@@ -252,7 +272,7 @@
           "type": "string"
         },
         "ResourcePolicy": {
-          "description": "Creates or updates a resource-based policy document that contains the permissions for DDB resources, such as a table's streams. Resource-based policies let you define access permissions by specifying who has access to each resource, and the actions they are allowed to perform on each resource.\n In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html).",
+          "description": "Creates or updates a resource-based policy document that contains the permissions for DDB resources, such as a table's streams. Resource-based policies let you define access permissions by specifying who has access to each resource, and the actions they are allowed to perform on each resource.\n  When you remove the ``StreamSpecification`` property from the template, DynamoDB disables the stream but retains any attached resource policy until the stream is deleted after 24 hours. When you modify the ``StreamViewType`` property, DynamoDB creates a new stream and retains the old stream's resource policy. The old stream and its resource policy are deleted after the 24-hour retention period.\n  In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html).",
           "$ref": "#/definitions/ResourcePolicy"
         }
       },
@@ -261,12 +281,12 @@
       ]
     },
     "ContributorInsightsSpecification": {
-      "description": "The settings used to enable or disable CloudWatch Contributor Insights.",
+      "description": "Configures contributor insights settings for a table or one of its indexes.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "Mode": {
-          "description": "",
+          "description": "Specifies the CloudWatch Contributor Insights mode for a table. Valid values are ``ACCESSED_AND_THROTTLED_KEYS`` (tracks all access and throttled events) or ``THROTTLED_KEYS`` (tracks only throttled events). This setting determines what type of contributor insights data is collected for the table.",
           "type": "string",
           "enum": [
             "ACCESSED_AND_THROTTLED_KEYS",
@@ -461,7 +481,7 @@
           "$ref": "#/definitions/OnDemandThroughput"
         },
         "ContributorInsightsSpecification": {
-          "description": "The settings used to enable or disable CloudWatch Contributor Insights for the specified global secondary index.",
+          "description": "The settings used to specify whether to enable CloudWatch Contributor Insights for the global table and define which events to monitor.",
           "$ref": "#/definitions/ContributorInsightsSpecification"
         },
         "Projection": {
@@ -628,16 +648,24 @@
       "$ref": "#/definitions/KinesisStreamSpecification"
     },
     "StreamSpecification": {
-      "description": "The settings for the DDB table stream, which capture changes to items stored in the table.",
+      "description": "The settings for the DDB table stream, which captures changes to items stored in the table. Including this property in your CFNlong template automatically enables streaming.",
       "$ref": "#/definitions/StreamSpecification"
     },
     "ContributorInsightsSpecification": {
-      "description": "The settings used to enable or disable CloudWatch Contributor Insights for the specified table.",
+      "description": "The settings used to specify whether to enable CloudWatch Contributor Insights for the table and define which events to monitor.",
       "$ref": "#/definitions/ContributorInsightsSpecification"
     },
     "ImportSourceSpecification": {
       "description": "Specifies the properties of data being imported from the S3 bucket source to the\" table.\n  If you specify the ``ImportSourceSpecification`` property, and also specify either the ``StreamSpecification``, the ``TableClass`` property, the ``DeletionProtectionEnabled`` property, or the ``WarmThroughput`` property, the IAM entity creating/updating stack must have ``UpdateTable`` permission.",
       "$ref": "#/definitions/ImportSourceSpecification"
+    },
+    "GlobalTableSettingsReplicationMode": {
+      "description": "",
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
     },
     "PointInTimeRecoverySpecification": {
       "description": "The settings used to enable point in time recovery.",
@@ -663,10 +691,6 @@
         "$ref": "#/definitions/AttributeDefinition"
       }
     },
-    "BillingMode": {
-      "description": "Specify how you are charged for read and write throughput and how you manage capacity.\n Valid values include:\n  +  ``PAY_PER_REQUEST`` - We recommend using ``PAY_PER_REQUEST`` for most DynamoDB workloads. ``PAY_PER_REQUEST`` sets the billing mode to [On-demand capacity mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html). \n  +  ``PROVISIONED`` - We recommend using ``PROVISIONED`` for steady workloads with predictable growth where capacity requirements can be reliably forecasted. ``PROVISIONED`` sets the billing mode to [Provisioned capacity mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html).\n  \n If not specified, the default is ``PROVISIONED``.",
-      "type": "string"
-    },
     "GlobalSecondaryIndexes": {
       "uniqueItems": false,
       "description": "Global secondary indexes to be created on the table. You can create up to 20 global secondary indexes.\n  If you update a table to include a new global secondary index, CFNlong initiates the index creation and then proceeds with the stack update. CFNlong doesn't wait for the index to complete creation because the backfilling phase can take a long time, depending on the size of the table. You can't use the index or update the table until the index's status is ``ACTIVE``. You can track its status by using the DynamoDB [DescribeTable](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/describe-table.html) command.\n If you add or delete an index during an update, we recommend that you don't update any other resources. If your stack fails to update and is rolled back while adding a new index, you must manually delete the index. \n Updates are not supported. The following are exceptions:\n  +  If you update either the contributor insights specification or the provisioned throughput values of global secondary indexes, you can update the table without interruption.\n  +  You can delete or add one global secondary index without interruption. If you do both in the same update (for example, by changing the index's logical ID), the update fails.",
@@ -675,9 +699,21 @@
         "$ref": "#/definitions/GlobalSecondaryIndex"
       }
     },
+    "BillingMode": {
+      "description": "Specify how you are charged for read and write throughput and how you manage capacity.\n Valid values include:\n  +  ``PAY_PER_REQUEST`` - We recommend using ``PAY_PER_REQUEST`` for most DynamoDB workloads. ``PAY_PER_REQUEST`` sets the billing mode to [On-demand capacity mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html). \n  +  ``PROVISIONED`` - We recommend using ``PROVISIONED`` for steady workloads with predictable growth where capacity requirements can be reliably forecasted. ``PROVISIONED`` sets the billing mode to [Provisioned capacity mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html).\n  \n If not specified, the default is ``PROVISIONED``.",
+      "type": "string"
+    },
     "ResourcePolicy": {
       "description": "An AWS resource-based policy document in JSON format that will be attached to the table.\n When you attach a resource-based policy while creating a table, the policy application is *strongly consistent*.\n The maximum size supported for a resource-based policy document is 20 KB. DynamoDB counts whitespaces when calculating the size of a policy against this limit. For a full list of all considerations that apply for resource-based policies, see [Resource-based policy considerations](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html).\n  You need to specify the ``CreateTable`` and ``PutResourcePolicy`` IAM actions for authorizing a user to create a table with a resource-based policy.",
       "$ref": "#/definitions/ResourcePolicy"
+    },
+    "LocalSecondaryIndexes": {
+      "uniqueItems": false,
+      "description": "Local secondary indexes to be created on the table. You can create up to 5 local secondary indexes. Each index is scoped to a given hash key value. The size of each hash key can be up to 10 gigabytes.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/LocalSecondaryIndex"
+      }
     },
     "KeySchema": {
       "oneOf": [
@@ -693,14 +729,6 @@
         }
       ],
       "description": "Specifies the attributes that make up the primary key for the table. The attributes in the ``KeySchema`` property must also be defined in the ``AttributeDefinitions`` property."
-    },
-    "LocalSecondaryIndexes": {
-      "uniqueItems": false,
-      "description": "Local secondary indexes to be created on the table. You can create up to 5 local secondary indexes. Each index is scoped to a given hash key value. The size of each hash key can be up to 10 gigabytes.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/LocalSecondaryIndex"
-      }
     },
     "Arn": {
       "description": "",
