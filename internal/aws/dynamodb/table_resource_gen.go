@@ -137,14 +137,14 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The settings used to enable or disable CloudWatch Contributor Insights for the specified table.",
+		//	  "description": "The settings used to specify whether to enable CloudWatch Contributor Insights for the table and define which events to monitor.",
 		//	  "properties": {
 		//	    "Enabled": {
 		//	      "description": "Indicates whether CloudWatch Contributor Insights are to be enabled (true) or disabled (false).",
 		//	      "type": "boolean"
 		//	    },
 		//	    "Mode": {
-		//	      "description": "",
+		//	      "description": "Specifies the CloudWatch Contributor Insights mode for a table. Valid values are ``ACCESSED_AND_THROTTLED_KEYS`` (tracks all access and throttled events) or ``THROTTLED_KEYS`` (tracks only throttled events). This setting determines what type of contributor insights data is collected for the table.",
 		//	      "enum": [
 		//	        "ACCESSED_AND_THROTTLED_KEYS",
 		//	        "THROTTLED_KEYS"
@@ -173,7 +173,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Mode
 				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
+					Description: "Specifies the CloudWatch Contributor Insights mode for a table. Valid values are ``ACCESSED_AND_THROTTLED_KEYS`` (tracks all access and throttled events) or ``THROTTLED_KEYS`` (tracks only throttled events). This setting determines what type of contributor insights data is collected for the table.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -187,7 +187,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The settings used to enable or disable CloudWatch Contributor Insights for the specified table.",
+			Description: "The settings used to specify whether to enable CloudWatch Contributor Insights for the table and define which events to monitor.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -220,14 +220,14 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	    "properties": {
 		//	      "ContributorInsightsSpecification": {
 		//	        "additionalProperties": false,
-		//	        "description": "The settings used to enable or disable CloudWatch Contributor Insights for the specified global secondary index.",
+		//	        "description": "The settings used to specify whether to enable CloudWatch Contributor Insights for the global table and define which events to monitor.",
 		//	        "properties": {
 		//	          "Enabled": {
 		//	            "description": "Indicates whether CloudWatch Contributor Insights are to be enabled (true) or disabled (false).",
 		//	            "type": "boolean"
 		//	          },
 		//	          "Mode": {
-		//	            "description": "",
+		//	            "description": "Specifies the CloudWatch Contributor Insights mode for a table. Valid values are ``ACCESSED_AND_THROTTLED_KEYS`` (tracks all access and throttled events) or ``THROTTLED_KEYS`` (tracks only throttled events). This setting determines what type of contributor insights data is collected for the table.",
 		//	            "enum": [
 		//	              "ACCESSED_AND_THROTTLED_KEYS",
 		//	              "THROTTLED_KEYS"
@@ -383,7 +383,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Mode
 							"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "",
+								Description: "Specifies the CloudWatch Contributor Insights mode for a table. Valid values are ``ACCESSED_AND_THROTTLED_KEYS`` (tracks all access and throttled events) or ``THROTTLED_KEYS`` (tracks only throttled events). This setting determines what type of contributor insights data is collected for the table.",
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
@@ -397,7 +397,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "The settings used to enable or disable CloudWatch Contributor Insights for the specified global secondary index.",
+						Description: "The settings used to specify whether to enable CloudWatch Contributor Insights for the global table and define which events to monitor.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -602,6 +602,31 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: GlobalTableSettingsReplicationMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"global_table_settings_replication_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ImportSourceSpecification
@@ -1324,11 +1349,11 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The settings for the DDB table stream, which capture changes to items stored in the table.",
+		//	  "description": "The settings for the DDB table stream, which captures changes to items stored in the table. Including this property in your CFNlong template automatically enables streaming.",
 		//	  "properties": {
 		//	    "ResourcePolicy": {
 		//	      "additionalProperties": false,
-		//	      "description": "Creates or updates a resource-based policy document that contains the permissions for DDB resources, such as a table's streams. Resource-based policies let you define access permissions by specifying who has access to each resource, and the actions they are allowed to perform on each resource.\n In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html).",
+		//	      "description": "Creates or updates a resource-based policy document that contains the permissions for DDB resources, such as a table's streams. Resource-based policies let you define access permissions by specifying who has access to each resource, and the actions they are allowed to perform on each resource.\n  When you remove the ``StreamSpecification`` property from the template, DynamoDB disables the stream but retains any attached resource policy until the stream is deleted after 24 hours. When you modify the ``StreamViewType`` property, DynamoDB creates a new stream and retains the old stream's resource policy. The old stream and its resource policy are deleted after the 24-hour retention period.\n  In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html).",
 		//	      "properties": {
 		//	        "PolicyDocument": {
 		//	          "description": "A resource-based policy document that contains permissions to add to the specified DDB table, index, or both. In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html).",
@@ -1369,7 +1394,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Creates or updates a resource-based policy document that contains the permissions for DDB resources, such as a table's streams. Resource-based policies let you define access permissions by specifying who has access to each resource, and the actions they are allowed to perform on each resource.\n In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html).",
+					Description: "Creates or updates a resource-based policy document that contains the permissions for DDB resources, such as a table's streams. Resource-based policies let you define access permissions by specifying who has access to each resource, and the actions they are allowed to perform on each resource.\n  When you remove the ``StreamSpecification`` property from the template, DynamoDB disables the stream but retains any attached resource policy until the stream is deleted after 24 hours. When you modify the ``StreamViewType`` property, DynamoDB creates a new stream and retains the old stream's resource policy. The old stream and its resource policy are deleted after the 24-hour retention period.\n  In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html).",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1389,7 +1414,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The settings for the DDB table stream, which capture changes to items stored in the table.",
+			Description: "The settings for the DDB table stream, which captures changes to items stored in the table. Including this property in your CFNlong template automatically enables streaming.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1638,62 +1663,63 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"approximate_creation_date_time_precision": "ApproximateCreationDateTimePrecision",
-		"arn":                                  "Arn",
-		"attribute_definitions":                "AttributeDefinitions",
-		"attribute_name":                       "AttributeName",
-		"attribute_type":                       "AttributeType",
-		"billing_mode":                         "BillingMode",
-		"contributor_insights_specification":   "ContributorInsightsSpecification",
-		"csv":                                  "Csv",
-		"deletion_protection_enabled":          "DeletionProtectionEnabled",
-		"delimiter":                            "Delimiter",
-		"enabled":                              "Enabled",
-		"global_secondary_indexes":             "GlobalSecondaryIndexes",
-		"header_list":                          "HeaderList",
-		"import_source_specification":          "ImportSourceSpecification",
-		"index_name":                           "IndexName",
-		"input_compression_type":               "InputCompressionType",
-		"input_format":                         "InputFormat",
-		"input_format_options":                 "InputFormatOptions",
-		"key":                                  "Key",
-		"key_schema":                           "KeySchema",
-		"key_type":                             "KeyType",
-		"kinesis_stream_specification":         "KinesisStreamSpecification",
-		"kms_master_key_id":                    "KMSMasterKeyId",
-		"local_secondary_indexes":              "LocalSecondaryIndexes",
-		"max_read_request_units":               "MaxReadRequestUnits",
-		"max_write_request_units":              "MaxWriteRequestUnits",
-		"mode":                                 "Mode",
-		"non_key_attributes":                   "NonKeyAttributes",
-		"on_demand_throughput":                 "OnDemandThroughput",
-		"point_in_time_recovery_enabled":       "PointInTimeRecoveryEnabled",
-		"point_in_time_recovery_specification": "PointInTimeRecoverySpecification",
-		"policy_document":                      "PolicyDocument",
-		"projection":                           "Projection",
-		"projection_type":                      "ProjectionType",
-		"provisioned_throughput":               "ProvisionedThroughput",
-		"read_capacity_units":                  "ReadCapacityUnits",
-		"read_units_per_second":                "ReadUnitsPerSecond",
-		"recovery_period_in_days":              "RecoveryPeriodInDays",
-		"resource_policy":                      "ResourcePolicy",
-		"s3_bucket":                            "S3Bucket",
-		"s3_bucket_owner":                      "S3BucketOwner",
-		"s3_bucket_source":                     "S3BucketSource",
-		"s3_key_prefix":                        "S3KeyPrefix",
-		"sse_enabled":                          "SSEEnabled",
-		"sse_specification":                    "SSESpecification",
-		"sse_type":                             "SSEType",
-		"stream_arn":                           "StreamArn",
-		"stream_specification":                 "StreamSpecification",
-		"stream_view_type":                     "StreamViewType",
-		"table_class":                          "TableClass",
-		"table_name":                           "TableName",
-		"tags":                                 "Tags",
-		"time_to_live_specification":           "TimeToLiveSpecification",
-		"value":                                "Value",
-		"warm_throughput":                      "WarmThroughput",
-		"write_capacity_units":                 "WriteCapacityUnits",
-		"write_units_per_second":               "WriteUnitsPerSecond",
+		"arn":                                    "Arn",
+		"attribute_definitions":                  "AttributeDefinitions",
+		"attribute_name":                         "AttributeName",
+		"attribute_type":                         "AttributeType",
+		"billing_mode":                           "BillingMode",
+		"contributor_insights_specification":     "ContributorInsightsSpecification",
+		"csv":                                    "Csv",
+		"deletion_protection_enabled":            "DeletionProtectionEnabled",
+		"delimiter":                              "Delimiter",
+		"enabled":                                "Enabled",
+		"global_secondary_indexes":               "GlobalSecondaryIndexes",
+		"global_table_settings_replication_mode": "GlobalTableSettingsReplicationMode",
+		"header_list":                            "HeaderList",
+		"import_source_specification":            "ImportSourceSpecification",
+		"index_name":                             "IndexName",
+		"input_compression_type":                 "InputCompressionType",
+		"input_format":                           "InputFormat",
+		"input_format_options":                   "InputFormatOptions",
+		"key":                                    "Key",
+		"key_schema":                             "KeySchema",
+		"key_type":                               "KeyType",
+		"kinesis_stream_specification":           "KinesisStreamSpecification",
+		"kms_master_key_id":                      "KMSMasterKeyId",
+		"local_secondary_indexes":                "LocalSecondaryIndexes",
+		"max_read_request_units":                 "MaxReadRequestUnits",
+		"max_write_request_units":                "MaxWriteRequestUnits",
+		"mode":                                   "Mode",
+		"non_key_attributes":                     "NonKeyAttributes",
+		"on_demand_throughput":                   "OnDemandThroughput",
+		"point_in_time_recovery_enabled":         "PointInTimeRecoveryEnabled",
+		"point_in_time_recovery_specification":   "PointInTimeRecoverySpecification",
+		"policy_document":                        "PolicyDocument",
+		"projection":                             "Projection",
+		"projection_type":                        "ProjectionType",
+		"provisioned_throughput":                 "ProvisionedThroughput",
+		"read_capacity_units":                    "ReadCapacityUnits",
+		"read_units_per_second":                  "ReadUnitsPerSecond",
+		"recovery_period_in_days":                "RecoveryPeriodInDays",
+		"resource_policy":                        "ResourcePolicy",
+		"s3_bucket":                              "S3Bucket",
+		"s3_bucket_owner":                        "S3BucketOwner",
+		"s3_bucket_source":                       "S3BucketSource",
+		"s3_key_prefix":                          "S3KeyPrefix",
+		"sse_enabled":                            "SSEEnabled",
+		"sse_specification":                      "SSESpecification",
+		"sse_type":                               "SSEType",
+		"stream_arn":                             "StreamArn",
+		"stream_specification":                   "StreamSpecification",
+		"stream_view_type":                       "StreamViewType",
+		"table_class":                            "TableClass",
+		"table_name":                             "TableName",
+		"tags":                                   "Tags",
+		"time_to_live_specification":             "TimeToLiveSpecification",
+		"value":                                  "Value",
+		"warm_throughput":                        "WarmThroughput",
+		"write_capacity_units":                   "WriteCapacityUnits",
+		"write_units_per_second":                 "WriteUnitsPerSecond",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

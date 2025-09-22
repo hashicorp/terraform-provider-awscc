@@ -42,7 +42,7 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Scraper ARN.",
-		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:(af|ap|ca|eu|me|sa|us)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9]+:[0-9]+:scraper/s-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$",
+		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:scraper/s-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -191,6 +191,128 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"scraper_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Required to identify a specific scraper.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ScraperLoggingConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for scraper logging",
+		//	  "properties": {
+		//	    "LoggingDestination": {
+		//	      "additionalProperties": false,
+		//	      "description": "Destination for scraper logging",
+		//	      "properties": {
+		//	        "CloudWatchLogs": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a cloudwatch logs destination for scraper logging",
+		//	          "properties": {
+		//	            "LogGroupArn": {
+		//	              "description": "ARN of the CloudWatch log group",
+		//	              "maxLength": 512,
+		//	              "minLength": 0,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ScraperComponents": {
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Config": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Options": {
+		//	                "additionalProperties": false,
+		//	                "patternProperties": {
+		//	                  "": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Type": {
+		//	            "description": "Type of scraper component",
+		//	            "enum": [
+		//	              "SERVICE_DISCOVERY",
+		//	              "COLLECTOR",
+		//	              "EXPORTER"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Type"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ScraperComponents",
+		//	    "LoggingDestination"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"scraper_logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LoggingDestination
+				"logging_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CloudWatchLogs
+						"cloudwatch_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: LogGroupArn
+								"log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "ARN of the CloudWatch log group",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a cloudwatch logs destination for scraper logging",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Destination for scraper logging",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ScraperComponents
+				"scraper_components": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Config
+							"config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Options
+									"options":           // Pattern: ""
+									schema.MapAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Type of scraper component",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for scraper logging",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Source
@@ -343,26 +465,34 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::APS::Scraper").WithTerraformTypeName("awscc_aps_scraper")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"alias":                "Alias",
-		"amp_configuration":    "AmpConfiguration",
-		"arn":                  "Arn",
-		"cluster_arn":          "ClusterArn",
-		"configuration_blob":   "ConfigurationBlob",
-		"destination":          "Destination",
-		"eks_configuration":    "EksConfiguration",
-		"key":                  "Key",
-		"role_arn":             "RoleArn",
-		"role_configuration":   "RoleConfiguration",
-		"scrape_configuration": "ScrapeConfiguration",
-		"scraper_id":           "ScraperId",
-		"security_group_ids":   "SecurityGroupIds",
-		"source":               "Source",
-		"source_role_arn":      "SourceRoleArn",
-		"subnet_ids":           "SubnetIds",
-		"tags":                 "Tags",
-		"target_role_arn":      "TargetRoleArn",
-		"value":                "Value",
-		"workspace_arn":        "WorkspaceArn",
+		"alias":                         "Alias",
+		"amp_configuration":             "AmpConfiguration",
+		"arn":                           "Arn",
+		"cloudwatch_logs":               "CloudWatchLogs",
+		"cluster_arn":                   "ClusterArn",
+		"config":                        "Config",
+		"configuration_blob":            "ConfigurationBlob",
+		"destination":                   "Destination",
+		"eks_configuration":             "EksConfiguration",
+		"key":                           "Key",
+		"log_group_arn":                 "LogGroupArn",
+		"logging_destination":           "LoggingDestination",
+		"options":                       "Options",
+		"role_arn":                      "RoleArn",
+		"role_configuration":            "RoleConfiguration",
+		"scrape_configuration":          "ScrapeConfiguration",
+		"scraper_components":            "ScraperComponents",
+		"scraper_id":                    "ScraperId",
+		"scraper_logging_configuration": "ScraperLoggingConfiguration",
+		"security_group_ids":            "SecurityGroupIds",
+		"source":                        "Source",
+		"source_role_arn":               "SourceRoleArn",
+		"subnet_ids":                    "SubnetIds",
+		"tags":                          "Tags",
+		"target_role_arn":               "TargetRoleArn",
+		"type":                          "Type",
+		"value":                         "Value",
+		"workspace_arn":                 "WorkspaceArn",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

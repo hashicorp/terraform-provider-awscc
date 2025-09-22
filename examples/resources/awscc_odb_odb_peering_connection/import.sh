@@ -1,0 +1,1 @@
+$ terraform import awscc_odb_odb_peering_connection.example "odb_peering_connection_arn"

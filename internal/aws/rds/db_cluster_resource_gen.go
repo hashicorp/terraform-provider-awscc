@@ -699,6 +699,22 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: MasterUserAuthenticationType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"master_user_authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// MasterUserAuthenticationType is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: MasterUserPassword
 		// CloudFormation resource type schema:
 		//
@@ -1460,6 +1476,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		"key":                                   "Key",
 		"kms_key_id":                            "KmsKeyId",
 		"manage_master_user_password":           "ManageMasterUserPassword",
+		"master_user_authentication_type":       "MasterUserAuthenticationType",
 		"master_user_password":                  "MasterUserPassword",
 		"master_user_secret":                    "MasterUserSecret",
 		"master_username":                       "MasterUsername",
@@ -1503,6 +1520,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/ClusterScalabilityType",
 		"/properties/DBInstanceParameterGroupName",
 		"/properties/DeleteAutomatedBackups",
+		"/properties/MasterUserAuthenticationType",
 		"/properties/MasterUserPassword",
 		"/properties/RestoreToTime",
 		"/properties/RestoreType",

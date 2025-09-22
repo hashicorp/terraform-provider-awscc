@@ -10,6 +10,7 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -229,6 +230,304 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
 				int64planmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DbNodes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The DB nodes that are implicitly created and managed as part of this VM Cluster.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A DbNode is a virtual machine that hosts Oracle database instances and provides access to shared storage servers within a VM Cluster",
+		//	    "properties": {
+		//	      "BackupIpId": {
+		//	        "description": "The Oracle Cloud ID (OCID) of the backup IP address that's associated with the DB node.",
+		//	        "type": "string"
+		//	      },
+		//	      "BackupVnic2Id": {
+		//	        "description": "The OCID of the second backup virtual network interface card (VNIC) for the DB node.",
+		//	        "type": "string"
+		//	      },
+		//	      "CpuCoreCount": {
+		//	        "description": "The number of CPU cores enabled on the DB node.",
+		//	        "type": "integer"
+		//	      },
+		//	      "DbNodeArn": {
+		//	        "description": "The Amazon Resource Name (ARN) of the DB node.",
+		//	        "type": "string"
+		//	      },
+		//	      "DbNodeId": {
+		//	        "description": "The unique identifier of the DB node.",
+		//	        "type": "string"
+		//	      },
+		//	      "DbNodeStorageSizeInGBs": {
+		//	        "description": "The amount of local node storage, in gigabytes (GB), that's allocated on the DB node.",
+		//	        "type": "integer"
+		//	      },
+		//	      "DbServerId": {
+		//	        "description": "The unique identifier of the database server that's associated with the DB node.",
+		//	        "type": "string"
+		//	      },
+		//	      "DbSystemId": {
+		//	        "description": "The OCID of the DB system.",
+		//	        "type": "string"
+		//	      },
+		//	      "HostIpId": {
+		//	        "description": "The OCID of the host IP address that's associated with the DB node.",
+		//	        "type": "string"
+		//	      },
+		//	      "Hostname": {
+		//	        "description": "The host name for the DB node.",
+		//	        "type": "string"
+		//	      },
+		//	      "MemorySizeInGBs": {
+		//	        "description": "The amount of memory, in gigabytes (GB), that allocated on the DB node.",
+		//	        "type": "integer"
+		//	      },
+		//	      "Ocid": {
+		//	        "description": "The OCID of the DB node.",
+		//	        "type": "string"
+		//	      },
+		//	      "Status": {
+		//	        "description": "The current status of the DB node.",
+		//	        "type": "string"
+		//	      },
+		//	      "Tags": {
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "A key-value pair to associate with a resource.",
+		//	          "properties": {
+		//	            "Key": {
+		//	              "description": "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "Value": {
+		//	              "description": "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	              "maxLength": 256,
+		//	              "minLength": 0,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Key"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": false
+		//	      },
+		//	      "Vnic2Id": {
+		//	        "description": "The OCID of the second VNIC.",
+		//	        "type": "string"
+		//	      },
+		//	      "VnicId": {
+		//	        "description": "The OCID of the VNIC.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "DbServerId"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "minLength": 1,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"db_nodes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: BackupIpId
+					"backup_ip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Oracle Cloud ID (OCID) of the backup IP address that's associated with the DB node.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: BackupVnic2Id
+					"backup_vnic_2_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The OCID of the second backup virtual network interface card (VNIC) for the DB node.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: CpuCoreCount
+					"cpu_core_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The number of CPU cores enabled on the DB node.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: DbNodeArn
+					"db_node_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the DB node.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: DbNodeId
+					"db_node_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The unique identifier of the DB node.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: DbNodeStorageSizeInGBs
+					"db_node_storage_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The amount of local node storage, in gigabytes (GB), that's allocated on the DB node.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: DbServerId
+					"db_server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The unique identifier of the database server that's associated with the DB node.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: DbSystemId
+					"db_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The OCID of the DB system.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: HostIpId
+					"host_ip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The OCID of the host IP address that's associated with the DB node.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Hostname
+					"hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The host name for the DB node.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: MemorySizeInGBs
+					"memory_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The amount of memory, in gigabytes (GB), that allocated on the DB node.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Ocid
+					"ocid": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The OCID of the DB node.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The current status of the DB node.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Tags
+					"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 128),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(0, 256),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							generic.Multiset(),
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Vnic2Id
+					"vnic_2_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The OCID of the second VNIC.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: VnicId
+					"vnic_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The OCID of the VNIC.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The DB nodes that are implicitly created and managed as part of this VM Cluster.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DbServers
@@ -769,6 +1068,8 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"backup_ip_id":                    "BackupIpId",
+		"backup_vnic_2_id":                "BackupVnic2Id",
 		"cloud_exadata_infrastructure_id": "CloudExadataInfrastructureId",
 		"cloud_vm_cluster_arn":            "CloudVmClusterArn",
 		"cloud_vm_cluster_id":             "CloudVmClusterId",
@@ -777,12 +1078,18 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		"cpu_core_count":                  "CpuCoreCount",
 		"data_collection_options":         "DataCollectionOptions",
 		"data_storage_size_in_t_bs":       "DataStorageSizeInTBs",
+		"db_node_arn":                     "DbNodeArn",
+		"db_node_id":                      "DbNodeId",
 		"db_node_storage_size_in_g_bs":    "DbNodeStorageSizeInGBs",
+		"db_nodes":                        "DbNodes",
+		"db_server_id":                    "DbServerId",
 		"db_servers":                      "DbServers",
+		"db_system_id":                    "DbSystemId",
 		"disk_redundancy":                 "DiskRedundancy",
 		"display_name":                    "DisplayName",
 		"domain":                          "Domain",
 		"gi_version":                      "GiVersion",
+		"host_ip_id":                      "HostIpId",
 		"hostname":                        "Hostname",
 		"is_diagnostics_events_enabled":   "IsDiagnosticsEventsEnabled",
 		"is_health_monitoring_enabled":    "IsHealthMonitoringEnabled",
@@ -803,12 +1110,15 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		"scan_listener_port_tcp":          "ScanListenerPortTcp",
 		"shape":                           "Shape",
 		"ssh_public_keys":                 "SshPublicKeys",
+		"status":                          "Status",
 		"storage_size_in_g_bs":            "StorageSizeInGBs",
 		"system_version":                  "SystemVersion",
 		"tags":                            "Tags",
 		"time_zone":                       "TimeZone",
 		"value":                           "Value",
 		"vip_ids":                         "VipIds",
+		"vnic_2_id":                       "Vnic2Id",
+		"vnic_id":                         "VnicId",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

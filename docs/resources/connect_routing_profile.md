@@ -110,6 +110,7 @@ resource "awscc_connect_routing_profile" "example" {
 ### Optional
 
 - `agent_availability_timer` (String) Whether agents with this routing profile will have their routing order calculated based on longest idle time or time since their last inbound contact.
+- `manual_assignment_queue_configs` (Attributes List) The manual assignment queues to associate with this routing profile. (see [below for nested schema](#nestedatt--manual_assignment_queue_configs))
 - `queue_configs` (Attributes List) The queues to associate with this routing profile. (see [below for nested schema](#nestedatt--queue_configs))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
@@ -136,6 +137,23 @@ Optional:
 Optional:
 
 - `behavior_type` (String) Specifies the other channels that can be routed to an agent handling their current channel.
+
+
+
+<a id="nestedatt--manual_assignment_queue_configs"></a>
+### Nested Schema for `manual_assignment_queue_configs`
+
+Optional:
+
+- `queue_reference` (Attributes) Contains the channel and queue identifier for a routing profile. (see [below for nested schema](#nestedatt--manual_assignment_queue_configs--queue_reference))
+
+<a id="nestedatt--manual_assignment_queue_configs--queue_reference"></a>
+### Nested Schema for `manual_assignment_queue_configs.queue_reference`
+
+Optional:
+
+- `channel` (String) The channels that agents can handle in the Contact Control Panel (CCP).
+- `queue_arn` (String) The Amazon Resource Name (ARN) for the queue.
 
 
 

@@ -94,6 +94,9 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_bedrock_intelligent_prompt_routers -cftype AWS::Bedrock::IntelligentPromptRouter -package bedrock ../aws/bedrock/intelligent_prompt_router_plural_data_source_gen.go ../aws/bedrock/intelligent_prompt_router_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_bedrock_knowledge_bases -cftype AWS::Bedrock::KnowledgeBase -package bedrock ../aws/bedrock/knowledge_base_plural_data_source_gen.go ../aws/bedrock/knowledge_base_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_bedrock_prompts -cftype AWS::Bedrock::Prompt -package bedrock ../aws/bedrock/prompt_plural_data_source_gen.go ../aws/bedrock/prompt_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_bedrockagentcore_browser_customs -cftype AWS::BedrockAgentCore::BrowserCustom -package bedrockagentcore ../aws/bedrockagentcore/browser_custom_plural_data_source_gen.go ../aws/bedrockagentcore/browser_custom_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_bedrockagentcore_code_interpreter_customs -cftype AWS::BedrockAgentCore::CodeInterpreterCustom -package bedrockagentcore ../aws/bedrockagentcore/code_interpreter_custom_plural_data_source_gen.go ../aws/bedrockagentcore/code_interpreter_custom_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_bedrockagentcore_runtimes -cftype AWS::BedrockAgentCore::Runtime -package bedrockagentcore ../aws/bedrockagentcore/runtime_plural_data_source_gen.go ../aws/bedrockagentcore/runtime_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_billing_billing_views -cftype AWS::Billing::BillingView -package billing ../aws/billing/billing_view_plural_data_source_gen.go ../aws/billing/billing_view_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_billingconductor_billing_groups -cftype AWS::BillingConductor::BillingGroup -package billingconductor ../aws/billingconductor/billing_group_plural_data_source_gen.go ../aws/billingconductor/billing_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_billingconductor_custom_line_items -cftype AWS::BillingConductor::CustomLineItem -package billingconductor ../aws/billingconductor/custom_line_item_plural_data_source_gen.go ../aws/billingconductor/custom_line_item_plural_data_source_gen_test.go
@@ -651,6 +654,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_odb_cloud_exadata_infrastructures -cftype AWS::ODB::CloudExadataInfrastructure -package odb ../aws/odb/cloud_exadata_infrastructure_plural_data_source_gen.go ../aws/odb/cloud_exadata_infrastructure_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_odb_cloud_vm_clusters -cftype AWS::ODB::CloudVmCluster -package odb ../aws/odb/cloud_vm_cluster_plural_data_source_gen.go ../aws/odb/cloud_vm_cluster_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_odb_odb_networks -cftype AWS::ODB::OdbNetwork -package odb ../aws/odb/odb_network_plural_data_source_gen.go ../aws/odb/odb_network_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_odb_odb_peering_connections -cftype AWS::ODB::OdbPeeringConnection -package odb ../aws/odb/odb_peering_connection_plural_data_source_gen.go ../aws/odb/odb_peering_connection_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_osis_pipelines -cftype AWS::OSIS::Pipeline -package osis ../aws/osis/pipeline_plural_data_source_gen.go ../aws/osis/pipeline_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_oam_links -cftype AWS::Oam::Link -package oam ../aws/oam/link_plural_data_source_gen.go ../aws/oam/link_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_oam_sinks -cftype AWS::Oam::Sink -package oam ../aws/oam/sink_plural_data_source_gen.go ../aws/oam/sink_plural_data_source_gen_test.go
@@ -960,6 +964,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/batch"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/bcmdataexports"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/bedrock"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/bedrockagentcore"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/billing"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/billingconductor"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/budgets"

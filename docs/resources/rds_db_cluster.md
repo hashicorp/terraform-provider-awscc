@@ -205,6 +205,7 @@ resource "awscc_rds_db_cluster" "example_db_cluster" {
  Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
  Constraints:
   +  Can't manage the master user password with AWS Secrets Manager if ``MasterUserPassword`` is specified.
+- `master_user_authentication_type` (String)
 - `master_user_password` (String) The master password for the DB instance.
   If you specify the ``SourceDBClusterIdentifier``, ``SnapshotIdentifier``, or ``GlobalClusterIdentifier`` property, don't specify this property. The value is inherited from the source DB cluster, the snapshot, or the primary DB cluster for the global database cluster, respectively.
   Valid for: Aurora DB clusters and Multi-AZ DB clusters

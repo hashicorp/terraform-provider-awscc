@@ -56,7 +56,8 @@
       "description": "Config type for security config",
       "enum": [
         "saml",
-        "iamidentitycenter"
+        "iamidentitycenter",
+        "iamfederation"
       ]
     },
     "IamIdentityCenterInstanceArn": {
@@ -104,6 +105,21 @@
         "InstanceArn"
       ],
       "additionalProperties": false
+    },
+    "IamFederationConfigOptions": {
+      "type": "object",
+      "description": "Describe IAM federation options in form of key value map",
+      "properties": {
+        "GroupAttribute": {
+          "type": "string",
+          "description": "Group attribute for this IAM federation integration"
+        },
+        "UserAttribute": {
+          "type": "string",
+          "description": "User attribute for this IAM federation integration"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -131,6 +147,9 @@
     },
     "IamIdentityCenterOptions": {
       "$ref": "#/definitions/IamIdentityCenterConfigOptions"
+    },
+    "IamFederationOptions": {
+      "$ref": "#/definitions/IamFederationConfigOptions"
     },
     "Type": {
       "$ref": "#/definitions/SecurityConfigType"

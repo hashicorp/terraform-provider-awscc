@@ -59,7 +59,7 @@
     "/properties/Id",
     "/properties/Arn"
   ],
-  "description": "Creates a resource gateway for a service.",
+  "description": "Creates a resource gateway for a service. ",
   "additionalIdentifiers": [
     [
       "/properties/Id"
@@ -109,10 +109,6 @@
       "minLength": 5,
       "type": "string",
       "maxLength": 50
-    },
-    "Ipv4AddressesPerEni": {
-      "description": "The number of IPv4 addresses to allocate per ENI for the resource gateway",
-      "type": "integer"
     },
     "Id": {
       "minLength": 17,

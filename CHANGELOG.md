@@ -1,4 +1,4 @@
-## 1.57.0 (Unreleased)
+## 1.57.0 (September 22, 2025)
 
 NOTE:
 
@@ -7,6 +7,24 @@ NOTE:
 FEATURES:
 
 * provider: Add `List` support. ([#2801](https://github.com/hashicorp/terraform-provider-awscc/pull/2801))
+* **New Data Source:** `awscc_bedrockagentcore_browser_custom`
+* **New Data Source:** `awscc_bedrockagentcore_browser_customs`
+* **New Data Source:** `awscc_bedrockagentcore_code_interpreter_custom`
+* **New Data Source:** `awscc_bedrockagentcore_code_interpreter_customs`
+* **New Data Source:** `awscc_bedrockagentcore_runtime_endpoint`
+* **New Data Source:** `awscc_bedrockagentcore_runtime`
+* **New Data Source:** `awscc_bedrockagentcore_runtimes`
+* **New Data Source:** `awscc_odb_odb_peering_connection`
+* **New Data Source:** `awscc_odb_odb_peering_connections`
+* **New Data Source:** `awscc_servicecatalog_launch_template_constraint`
+* **New Data Source:** `awscc_servicecatalog_portfolio_product_association`
+* **New Resource:** `awscc_bedrockagentcore_browser_custom`
+* **New Resource:** `awscc_bedrockagentcore_code_interpreter_custom`
+* **New Resource:** `awscc_bedrockagentcore_runtime_endpoint`
+* **New Resource:** `awscc_bedrockagentcore_runtime`
+* **New Resource:** `awscc_odb_odb_peering_connection`
+* **New Resource:** `awscc_servicecatalog_launch_template_constraint`
+* **New Resource:** `awscc_servicecatalog_portfolio_product_association`
 
 ## 1.56.0 (September 11, 2025)
 

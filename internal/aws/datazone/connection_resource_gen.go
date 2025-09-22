@@ -164,7 +164,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The ID of the domain in which the connection is created.",
-		//	  "pattern": "^dzd[_][a-zA-Z0-9_-]{1,36}$",
+		//	  "pattern": "^dzd[_-][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
 		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -179,14 +179,14 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The identifier of the domain in which the connection is created.",
-		//	  "pattern": "^dzd[_][a-zA-Z0-9_-]{1,36}$",
+		//	  "pattern": "^dzd[_-][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
 		"domain_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the domain in which the connection is created.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^dzd[_][a-zA-Z0-9_-]{1,36}$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^dzd[_-][a-zA-Z0-9_-]{1,36}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

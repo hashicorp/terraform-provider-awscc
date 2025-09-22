@@ -1058,6 +1058,22 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: MasterUserAuthenticationType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"master_user_authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// MasterUserAuthenticationType is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: MasterUserPassword
 		// CloudFormation resource type schema:
 		//
@@ -1982,6 +1998,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"license_model":                                 "LicenseModel",
 		"listener_endpoint":                             "ListenerEndpoint",
 		"manage_master_user_password":                   "ManageMasterUserPassword",
+		"master_user_authentication_type":               "MasterUserAuthenticationType",
 		"master_user_password":                          "MasterUserPassword",
 		"master_user_secret":                            "MasterUserSecret",
 		"master_username":                               "MasterUsername",
@@ -2040,6 +2057,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/CertificateRotationRestart",
 		"/properties/DBSnapshotIdentifier",
 		"/properties/DeleteAutomatedBackups",
+		"/properties/MasterUserAuthenticationType",
 		"/properties/MasterUserPassword",
 		"/properties/RestoreTime",
 		"/properties/SourceDBInstanceAutomatedBackupsArn",

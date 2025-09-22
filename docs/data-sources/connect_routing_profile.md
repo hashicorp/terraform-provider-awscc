@@ -25,11 +25,29 @@ Data Source schema for AWS::Connect::RoutingProfile
 - `default_outbound_queue_arn` (String) The identifier of the default outbound queue for this routing profile.
 - `description` (String) The description of the routing profile.
 - `instance_arn` (String) The identifier of the Amazon Connect instance.
+- `manual_assignment_queue_configs` (Attributes List) The manual assignment queues to associate with this routing profile. (see [below for nested schema](#nestedatt--manual_assignment_queue_configs))
 - `media_concurrencies` (Attributes List) The channels agents can handle in the Contact Control Panel (CCP) for this routing profile. (see [below for nested schema](#nestedatt--media_concurrencies))
 - `name` (String) The name of the routing profile.
 - `queue_configs` (Attributes List) The queues to associate with this routing profile. (see [below for nested schema](#nestedatt--queue_configs))
 - `routing_profile_arn` (String) The Amazon Resource Name (ARN) of the routing profile.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--manual_assignment_queue_configs"></a>
+### Nested Schema for `manual_assignment_queue_configs`
+
+Read-Only:
+
+- `queue_reference` (Attributes) Contains the channel and queue identifier for a routing profile. (see [below for nested schema](#nestedatt--manual_assignment_queue_configs--queue_reference))
+
+<a id="nestedatt--manual_assignment_queue_configs--queue_reference"></a>
+### Nested Schema for `manual_assignment_queue_configs.queue_reference`
+
+Read-Only:
+
+- `channel` (String) The channels that agents can handle in the Contact Control Panel (CCP).
+- `queue_arn` (String) The Amazon Resource Name (ARN) for the queue.
+
+
 
 <a id="nestedatt--media_concurrencies"></a>
 ### Nested Schema for `media_concurrencies`

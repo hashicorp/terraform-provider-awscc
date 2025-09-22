@@ -38,6 +38,80 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::Bedrock::Guardrail resource.
 func guardrailResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AutomatedReasoningPolicyConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Optional configuration for integrating Automated Reasoning policies with the guardrail.",
+		//	  "properties": {
+		//	    "ConfidenceThreshold": {
+		//	      "description": "The confidence threshold for triggering guardrail actions based on Automated Reasoning policy violations.",
+		//	      "maximum": 1,
+		//	      "minimum": 0,
+		//	      "type": "number"
+		//	    },
+		//	    "Policies": {
+		//	      "description": "The list of Automated Reasoning policy ARNs to include in the guardrail configuration",
+		//	      "items": {
+		//	        "description": "The Amazon Resource Name (ARN) of the Automated Reasoning policy",
+		//	        "maxLength": 2048,
+		//	        "minLength": 15,
+		//	        "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:automated-reasoning-policy\\/[a-z0-9]{12}(:([1-9][0-9]{0,11}))?$",
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 2,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Policies"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"automated_reasoning_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConfidenceThreshold
+				"confidence_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The confidence threshold for triggering guardrail actions based on Automated Reasoning policy violations.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Float64{ /*START VALIDATORS*/
+						float64validator.Between(0.000000, 1.000000),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+						float64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Policies
+				"policies": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The list of Automated Reasoning policy ARNs to include in the guardrail configuration",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 2),
+						listvalidator.UniqueValues(),
+						listvalidator.ValueStringsAre(
+							stringvalidator.LengthBetween(15, 2048),
+							stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:automated-reasoning-policy\\/[a-z0-9]{12}(:([1-9][0-9]{0,11}))?$"), ""),
+						),
+						fwvalidators.NotNullList(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Optional configuration for integrating Automated Reasoning policies with the guardrail.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: BlockedInputMessaging
 		// CloudFormation resource type schema:
 		//
@@ -1796,8 +1870,10 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"action":                              "Action",
+		"automated_reasoning_policy_config":   "AutomatedReasoningPolicyConfig",
 		"blocked_input_messaging":             "BlockedInputMessaging",
 		"blocked_outputs_messaging":           "BlockedOutputsMessaging",
+		"confidence_threshold":                "ConfidenceThreshold",
 		"content_filters_tier_config":         "ContentFiltersTierConfig",
 		"content_policy_config":               "ContentPolicyConfig",
 		"contextual_grounding_policy_config":  "ContextualGroundingPolicyConfig",
@@ -1826,6 +1902,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 		"output_strength":                     "OutputStrength",
 		"pattern":                             "Pattern",
 		"pii_entities_config":                 "PiiEntitiesConfig",
+		"policies":                            "Policies",
 		"regexes_config":                      "RegexesConfig",
 		"sensitive_information_policy_config": "SensitiveInformationPolicyConfig",
 		"status":                              "Status",

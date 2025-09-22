@@ -35,7 +35,8 @@
     "create": {
       "permissions": [
         "networkmanager:RegisterTransitGateway",
-        "networkmanager:GetTransitGatewayRegistrations"
+        "networkmanager:GetTransitGatewayRegistrations",
+        "ec2:DescribeRegions"
       ],
       "timeoutInMinutes": 30
     },

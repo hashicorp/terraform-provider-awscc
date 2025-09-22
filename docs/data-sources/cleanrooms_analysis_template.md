@@ -27,6 +27,7 @@ Data Source schema for AWS::CleanRooms::AnalysisTemplate
 - `collaboration_arn` (String)
 - `collaboration_identifier` (String)
 - `description` (String)
+- `error_message_configuration` (Attributes) (see [below for nested schema](#nestedatt--error_message_configuration))
 - `format` (String)
 - `membership_arn` (String)
 - `membership_identifier` (String)
@@ -43,6 +44,14 @@ Read-Only:
 
 - `default_value` (String)
 - `name` (String)
+- `type` (String)
+
+
+<a id="nestedatt--error_message_configuration"></a>
+### Nested Schema for `error_message_configuration`
+
+Read-Only:
+
 - `type` (String)
 
 

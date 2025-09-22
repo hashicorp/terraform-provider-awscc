@@ -677,6 +677,23 @@ resource_schema "aws_bedrock_prompt_version" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_bedrockagentcore_browser_custom" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::BrowserCustom"
+}
+
+resource_schema "aws_bedrockagentcore_code_interpreter_custom" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::CodeInterpreterCustom"
+}
+
+resource_schema "aws_bedrockagentcore_runtime" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::Runtime"
+}
+
+resource_schema "aws_bedrockagentcore_runtime_endpoint" {
+  cloudformation_type_name               = "AWS::BedrockAgentCore::RuntimeEndpoint"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_billing_billing_view" {
   cloudformation_type_name = "AWS::Billing::BillingView"
 }
@@ -3890,6 +3907,10 @@ resource_schema "aws_odb_odb_network" {
   cloudformation_type_name = "AWS::ODB::OdbNetwork"
 }
 
+resource_schema "aws_odb_odb_peering_connection" {
+  cloudformation_type_name = "AWS::ODB::OdbPeeringConnection"
+}
+
 resource_schema "aws_osis_pipeline" {
   cloudformation_type_name = "AWS::OSIS::Pipeline"
 }
@@ -5092,6 +5113,16 @@ resource_schema "aws_securitylake_subscriber_notification" {
 
 resource_schema "aws_servicecatalog_cloudformation_provisioned_product" {
   cloudformation_type_name               = "AWS::ServiceCatalog::CloudFormationProvisionedProduct"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_servicecatalog_launch_template_constraint" {
+  cloudformation_type_name               = "AWS::ServiceCatalog::LaunchTemplateConstraint"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_servicecatalog_portfolio_product_association" {
+  cloudformation_type_name               = "AWS::ServiceCatalog::PortfolioProductAssociation"
   suppress_plural_data_source_generation = true
 }
 

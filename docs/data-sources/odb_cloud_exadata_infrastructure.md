@@ -38,6 +38,7 @@ Data Source schema for AWS::ODB::CloudExadataInfrastructure
 - `db_server_ids` (List of String) The list of database server identifiers for the Exadata infrastructure.
 - `db_server_version` (String) The software version of the database servers (dom0) in the Exadata infrastructure.
 - `display_name` (String) The user-friendly name for the Exadata infrastructure.
+- `maintenance_window` (Attributes) The scheduling details for the maintenance window. Patching and system updates take place during the maintenance window. (see [below for nested schema](#nestedatt--maintenance_window))
 - `max_cpu_count` (Number) The total number of CPU cores available on the Exadata infrastructure.
 - `max_data_storage_in_t_bs` (Number) The total amount of data disk group storage, in terabytes (TB), that's available on the Exadata infrastructure.
 - `max_db_node_storage_size_in_g_bs` (Number) The total amount of local node storage, in gigabytes (GB), that's available on the Exadata infrastructure.
@@ -59,6 +60,22 @@ Data Source schema for AWS::ODB::CloudExadataInfrastructure
 Read-Only:
 
 - `email` (String) The email address of the contact.
+
+
+<a id="nestedatt--maintenance_window"></a>
+### Nested Schema for `maintenance_window`
+
+Read-Only:
+
+- `custom_action_timeout_in_mins` (Number) The timeout duration for custom actions in minutes.
+- `days_of_week` (List of String) The days of the week when maintenance can be performed.
+- `hours_of_day` (List of Number) The hours of the day when maintenance can be performed.
+- `is_custom_action_timeout_enabled` (Boolean) Indicates whether custom action timeout is enabled.
+- `lead_time_in_weeks` (Number) The lead time in weeks before the maintenance window.
+- `months` (List of String) The months when maintenance can be performed.
+- `patching_mode` (String) The patching mode for the maintenance window.
+- `preference` (String) The preference for the maintenance window scheduling.
+- `weeks_of_month` (List of Number) The weeks of the month when maintenance can be performed.
 
 
 <a id="nestedatt--tags"></a>

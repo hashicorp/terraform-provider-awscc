@@ -7,16 +7,20 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "Value": {
-          "type": "string"
-        },
         "Key": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "Value": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 0
         }
       },
       "required": [
-        "Value",
-        "Key"
+        "Key",
+        "Value"
       ]
     }
   },

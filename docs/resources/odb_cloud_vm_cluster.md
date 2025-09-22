@@ -23,6 +23,7 @@ The AWS::ODB::CloudVmCluster resource creates a Cloud VM Cluster
 - `data_collection_options` (Attributes) The set of diagnostic collection options enabled for the VM cluster. (see [below for nested schema](#nestedatt--data_collection_options))
 - `data_storage_size_in_t_bs` (Number) The size of the data disk group, in terabytes (TB), that's allocated for the VM cluster.
 - `db_node_storage_size_in_g_bs` (Number) The amount of local node storage, in gigabytes (GB), that's allocated for the VM cluster.
+- `db_nodes` (Attributes List) The DB nodes that are implicitly created and managed as part of this VM Cluster. (see [below for nested schema](#nestedatt--db_nodes))
 - `db_servers` (List of String) The list of database servers for the VM cluster.
 - `display_name` (String) The user-friendly name for the VM cluster.
 - `gi_version` (String) The software version of the Oracle Grid Infrastructure (GI) for the VM cluster.
@@ -65,6 +66,38 @@ Optional:
 - `is_diagnostics_events_enabled` (Boolean) Indicates whether diagnostic collection is enabled for the VM cluster.
 - `is_health_monitoring_enabled` (Boolean) Indicates whether health monitoring is enabled for the VM cluster.
 - `is_incident_logs_enabled` (Boolean) Indicates whether incident logs are enabled for the cloud VM cluster.
+
+
+<a id="nestedatt--db_nodes"></a>
+### Nested Schema for `db_nodes`
+
+Optional:
+
+- `backup_ip_id` (String) The Oracle Cloud ID (OCID) of the backup IP address that's associated with the DB node.
+- `backup_vnic_2_id` (String) The OCID of the second backup virtual network interface card (VNIC) for the DB node.
+- `cpu_core_count` (Number) The number of CPU cores enabled on the DB node.
+- `db_node_arn` (String) The Amazon Resource Name (ARN) of the DB node.
+- `db_node_id` (String) The unique identifier of the DB node.
+- `db_node_storage_size_in_g_bs` (Number) The amount of local node storage, in gigabytes (GB), that's allocated on the DB node.
+- `db_server_id` (String) The unique identifier of the database server that's associated with the DB node.
+- `db_system_id` (String) The OCID of the DB system.
+- `host_ip_id` (String) The OCID of the host IP address that's associated with the DB node.
+- `hostname` (String) The host name for the DB node.
+- `memory_size_in_g_bs` (Number) The amount of memory, in gigabytes (GB), that allocated on the DB node.
+- `ocid` (String) The OCID of the DB node.
+- `status` (String) The current status of the DB node.
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--db_nodes--tags))
+- `vnic_2_id` (String) The OCID of the second VNIC.
+- `vnic_id` (String) The OCID of the VNIC.
+
+<a id="nestedatt--db_nodes--tags"></a>
+### Nested Schema for `db_nodes.tags`
+
+Optional:
+
+- `key` (String) The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and ".
+- `value` (String) The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
 
 
 <a id="nestedatt--tags"></a>

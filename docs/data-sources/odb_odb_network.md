@@ -25,15 +25,72 @@ Data Source schema for AWS::ODB::OdbNetwork
 - `availability_zone_id` (String) The AZ ID of the AZ where the ODB network is located.
 - `backup_subnet_cidr` (String) The CIDR range of the backup subnet in the ODB network.
 - `client_subnet_cidr` (String) The CIDR range of the client subnet in the ODB network.
+- `custom_domain_name` (String) The domain name to use for the resources in the ODB network.
 - `default_dns_prefix` (String) The DNS prefix to the default DNS domain name. The default DNS domain name is oraclevcn.com.
 - `delete_associated_resources` (Boolean) Specifies whether to delete associated OCI networking resources along with the ODB network.
 - `display_name` (String) The user-friendly name of the ODB network.
+- `managed_services` (Attributes) The managed services configuration for the ODB network. (see [below for nested schema](#nestedatt--managed_services))
 - `oci_network_anchor_id` (String) The unique identifier of the OCI network anchor for the ODB network.
 - `oci_resource_anchor_name` (String) The name of the OCI resource anchor that's associated with the ODB network.
 - `oci_vcn_url` (String) The URL for the VCN that's associated with the ODB network.
 - `odb_network_arn` (String) The Amazon Resource Name (ARN) of the ODB network.
 - `odb_network_id` (String) The unique identifier of the ODB network.
+- `s3_access` (String) Specifies the configuration for Amazon S3 access from the ODB network.
+- `s3_policy_document` (String) Specifies the endpoint policy for Amazon S3 access from the ODB network.
 - `tags` (Attributes List) Tags to assign to the Odb Network. (see [below for nested schema](#nestedatt--tags))
+- `zero_etl_access` (String) Specifies the configuration for Zero-ETL access from the ODB network.
+
+<a id="nestedatt--managed_services"></a>
+### Nested Schema for `managed_services`
+
+Read-Only:
+
+- `managed_s3_backup_access` (Attributes) The managed Amazon S3 backup access configuration. (see [below for nested schema](#nestedatt--managed_services--managed_s3_backup_access))
+- `managed_services_ipv_4_cidrs` (List of String) The IPv4 CIDR blocks for the managed services.
+- `resource_gateway_arn` (String) The Amazon Resource Name (ARN) of the resource gateway.
+- `s3_access` (Attributes) The Amazon S3 access configuration. (see [below for nested schema](#nestedatt--managed_services--s3_access))
+- `service_network_arn` (String) The Amazon Resource Name (ARN) of the service network.
+- `service_network_endpoint` (Attributes) The service network endpoint configuration. (see [below for nested schema](#nestedatt--managed_services--service_network_endpoint))
+- `zero_etl_access` (Attributes) The Zero-ETL access configuration. (see [below for nested schema](#nestedatt--managed_services--zero_etl_access))
+
+<a id="nestedatt--managed_services--managed_s3_backup_access"></a>
+### Nested Schema for `managed_services.managed_s3_backup_access`
+
+Read-Only:
+
+- `ipv_4_addresses` (List of String) The IPv4 addresses for the managed Amazon S3 backup access.
+- `status` (String) The status of the managed Amazon S3 backup access.
+
+
+<a id="nestedatt--managed_services--s3_access"></a>
+### Nested Schema for `managed_services.s3_access`
+
+Read-Only:
+
+- `domain_name` (String) The domain name for the Amazon S3 access.
+- `ipv_4_addresses` (List of String) The IPv4 addresses for the Amazon S3 access.
+- `s3_policy_document` (String) The endpoint policy for the Amazon S3 access.
+- `status` (String) The status of the Amazon S3 access.
+
+
+<a id="nestedatt--managed_services--service_network_endpoint"></a>
+### Nested Schema for `managed_services.service_network_endpoint`
+
+Read-Only:
+
+- `vpc_endpoint_id` (String) The identifier of the VPC endpoint.
+- `vpc_endpoint_type` (String) The type of the VPC endpoint.
+
+
+<a id="nestedatt--managed_services--zero_etl_access"></a>
+### Nested Schema for `managed_services.zero_etl_access`
+
+Read-Only:
+
+- `cidr` (String) The CIDR block for the Zero-ETL access.
+- `status` (String) The status of the Zero-ETL access.
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

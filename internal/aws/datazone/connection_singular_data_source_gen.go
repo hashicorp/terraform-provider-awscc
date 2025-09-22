@@ -104,7 +104,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The ID of the domain in which the connection is created.",
-		//	  "pattern": "^dzd[_][a-zA-Z0-9_-]{1,36}$",
+		//	  "pattern": "^dzd[_-][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
 		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -116,7 +116,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The identifier of the domain in which the connection is created.",
-		//	  "pattern": "^dzd[_][a-zA-Z0-9_-]{1,36}$",
+		//	  "pattern": "^dzd[_-][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
 		"domain_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/

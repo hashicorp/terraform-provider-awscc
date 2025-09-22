@@ -23,6 +23,7 @@ The AWS::ODB::CloudExadataInfrastructure resource creates an Exadata Infrastruct
 - `customer_contacts_to_send_to_oci` (Attributes List) The email addresses of contacts to receive notification from Oracle about maintenance updates for the Exadata infrastructure. (see [below for nested schema](#nestedatt--customer_contacts_to_send_to_oci))
 - `database_server_type` (String) The database server model type of the Exadata infrastructure. For the list of valid model names, use the ListDbSystemShapes operation.
 - `display_name` (String) The user-friendly name for the Exadata infrastructure.
+- `maintenance_window` (Attributes) The scheduling details for the maintenance window. Patching and system updates take place during the maintenance window. (see [below for nested schema](#nestedatt--maintenance_window))
 - `shape` (String) The model name of the Exadata infrastructure.
 - `storage_count` (Number) The number of storage servers that are activated for the Exadata infrastructure.
 - `storage_server_type` (String) The storage server model type of the Exadata infrastructure. For the list of valid model names, use the ListDbSystemShapes operation.
@@ -59,6 +60,22 @@ The AWS::ODB::CloudExadataInfrastructure resource creates an Exadata Infrastruct
 Optional:
 
 - `email` (String) The email address of the contact.
+
+
+<a id="nestedatt--maintenance_window"></a>
+### Nested Schema for `maintenance_window`
+
+Optional:
+
+- `custom_action_timeout_in_mins` (Number) The timeout duration for custom actions in minutes.
+- `days_of_week` (List of String) The days of the week when maintenance can be performed.
+- `hours_of_day` (List of Number) The hours of the day when maintenance can be performed.
+- `is_custom_action_timeout_enabled` (Boolean) Indicates whether custom action timeout is enabled.
+- `lead_time_in_weeks` (Number) The lead time in weeks before the maintenance window.
+- `months` (List of String) The months when maintenance can be performed.
+- `patching_mode` (String) The patching mode for the maintenance window.
+- `preference` (String) The preference for the maintenance window scheduling.
+- `weeks_of_month` (List of Number) The weeks of the month when maintenance can be performed.
 
 
 <a id="nestedatt--tags"></a>

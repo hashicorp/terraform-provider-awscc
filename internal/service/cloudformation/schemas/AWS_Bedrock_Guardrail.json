@@ -17,6 +17,36 @@
         "IMAGE"
       ]
     },
+    "AutomatedReasoningPolicyConfig": {
+      "type": "object",
+      "description": "Optional configuration for integrating Automated Reasoning policies with the guardrail.",
+      "properties": {
+        "ConfidenceThreshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "The confidence threshold for triggering guardrail actions based on Automated Reasoning policy violations."
+        },
+        "Policies": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 2048,
+            "minLength": 15,
+            "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:automated-reasoning-policy\\/[a-z0-9]{12}(:([1-9][0-9]{0,11}))?$",
+            "description": "The Amazon Resource Name (ARN) of the Automated Reasoning policy"
+          },
+          "uniqueItems": true,
+          "minItems": 1,
+          "maxItems": 2,
+          "description": "The list of Automated Reasoning policy ARNs to include in the guardrail configuration"
+        }
+      },
+      "required": [
+        "Policies"
+      ],
+      "additionalProperties": false
+    },
     "ContentFilterConfig": {
       "type": "object",
       "description": "Content filter config in content policy.",
@@ -588,6 +618,9 @@
       "maxLength": 500,
       "minLength": 1,
       "description": "Messaging for when violations are detected in text"
+    },
+    "AutomatedReasoningPolicyConfig": {
+      "$ref": "#/definitions/AutomatedReasoningPolicyConfig"
     },
     "ContentPolicyConfig": {
       "$ref": "#/definitions/ContentPolicyConfig"

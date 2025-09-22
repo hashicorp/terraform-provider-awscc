@@ -153,7 +153,7 @@ resource "awscc_dynamodb_table" "example" {
   +  ``PROVISIONED`` - We recommend using ``PROVISIONED`` for steady workloads with predictable growth where capacity requirements can be reliably forecasted. ``PROVISIONED`` sets the billing mode to [Provisioned capacity mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html).
   
  If not specified, the default is ``PROVISIONED``.
-- `contributor_insights_specification` (Attributes) The settings used to enable or disable CloudWatch Contributor Insights for the specified table. (see [below for nested schema](#nestedatt--contributor_insights_specification))
+- `contributor_insights_specification` (Attributes) The settings used to specify whether to enable CloudWatch Contributor Insights for the table and define which events to monitor. (see [below for nested schema](#nestedatt--contributor_insights_specification))
 - `deletion_protection_enabled` (Boolean) Determines if a table is protected from deletion. When enabled, the table cannot be deleted by any user or process. This setting is disabled by default. For more information, see [Using deletion protection](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.Basics.html#WorkingWithTables.Basics.DeletionProtection) in the *Developer Guide*.
 - `global_secondary_indexes` (Attributes List) Global secondary indexes to be created on the table. You can create up to 20 global secondary indexes.
   If you update a table to include a new global secondary index, CFNlong initiates the index creation and then proceeds with the stack update. CFNlong doesn't wait for the index to complete creation because the backfilling phase can take a long time, depending on the size of the table. You can't use the index or update the table until the index's status is ``ACTIVE``. You can track its status by using the DynamoDB [DescribeTable](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/describe-table.html) command.
@@ -161,6 +161,7 @@ resource "awscc_dynamodb_table" "example" {
  Updates are not supported. The following are exceptions:
   +  If you update either the contributor insights specification or the provisioned throughput values of global secondary indexes, you can update the table without interruption.
   +  You can delete or add one global secondary index without interruption. If you do both in the same update (for example, by changing the index's logical ID), the update fails. (see [below for nested schema](#nestedatt--global_secondary_indexes))
+- `global_table_settings_replication_mode` (String)
 - `import_source_specification` (Attributes) Specifies the properties of data being imported from the S3 bucket source to the" table.
   If you specify the ``ImportSourceSpecification`` property, and also specify either the ``StreamSpecification``, the ``TableClass`` property, the ``DeletionProtectionEnabled`` property, or the ``WarmThroughput`` property, the IAM entity creating/updating stack must have ``UpdateTable`` permission. (see [below for nested schema](#nestedatt--import_source_specification))
 - `kinesis_stream_specification` (Attributes) The Kinesis Data Streams configuration for the specified table. (see [below for nested schema](#nestedatt--kinesis_stream_specification))
@@ -174,7 +175,7 @@ resource "awscc_dynamodb_table" "example" {
  The maximum size supported for a resource-based policy document is 20 KB. DynamoDB counts whitespaces when calculating the size of a policy against this limit. For a full list of all considerations that apply for resource-based policies, see [Resource-based policy considerations](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html).
   You need to specify the ``CreateTable`` and ``PutResourcePolicy`` IAM actions for authorizing a user to create a table with a resource-based policy. (see [below for nested schema](#nestedatt--resource_policy))
 - `sse_specification` (Attributes) Specifies the settings to enable server-side encryption. (see [below for nested schema](#nestedatt--sse_specification))
-- `stream_specification` (Attributes) The settings for the DDB table stream, which capture changes to items stored in the table. (see [below for nested schema](#nestedatt--stream_specification))
+- `stream_specification` (Attributes) The settings for the DDB table stream, which captures changes to items stored in the table. Including this property in your CFNlong template automatically enables streaming. (see [below for nested schema](#nestedatt--stream_specification))
 - `table_class` (String) The table class of the new table. Valid values are ``STANDARD`` and ``STANDARD_INFREQUENT_ACCESS``.
 - `table_name` (String) A name for the table. If you don't specify a name, CFNlong generates a unique physical ID and uses that ID for the table name. For more information, see [Name Type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).
   If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.
@@ -208,7 +209,7 @@ Optional:
 Optional:
 
 - `enabled` (Boolean) Indicates whether CloudWatch Contributor Insights are to be enabled (true) or disabled (false).
-- `mode` (String)
+- `mode` (String) Specifies the CloudWatch Contributor Insights mode for a table. Valid values are ``ACCESSED_AND_THROTTLED_KEYS`` (tracks all access and throttled events) or ``THROTTLED_KEYS`` (tracks only throttled events). This setting determines what type of contributor insights data is collected for the table.
 
 
 <a id="nestedatt--global_secondary_indexes"></a>
@@ -216,7 +217,7 @@ Optional:
 
 Optional:
 
-- `contributor_insights_specification` (Attributes) The settings used to enable or disable CloudWatch Contributor Insights for the specified global secondary index. (see [below for nested schema](#nestedatt--global_secondary_indexes--contributor_insights_specification))
+- `contributor_insights_specification` (Attributes) The settings used to specify whether to enable CloudWatch Contributor Insights for the global table and define which events to monitor. (see [below for nested schema](#nestedatt--global_secondary_indexes--contributor_insights_specification))
 - `index_name` (String) The name of the global secondary index. The name must be unique among all other indexes on this table.
 - `key_schema` (Attributes List) The complete key schema for a global secondary index, which consists of one or more pairs of attribute names and key types:
   +  ``HASH`` - partition key
@@ -236,7 +237,7 @@ Optional:
 Optional:
 
 - `enabled` (Boolean) Indicates whether CloudWatch Contributor Insights are to be enabled (true) or disabled (false).
-- `mode` (String)
+- `mode` (String) Specifies the CloudWatch Contributor Insights mode for a table. Valid values are ``ACCESSED_AND_THROTTLED_KEYS`` (tracks all access and throttled events) or ``THROTTLED_KEYS`` (tracks only throttled events). This setting determines what type of contributor insights data is collected for the table.
 
 
 <a id="nestedatt--global_secondary_indexes--key_schema"></a>
@@ -448,7 +449,8 @@ Optional:
 Optional:
 
 - `resource_policy` (Attributes) Creates or updates a resource-based policy document that contains the permissions for DDB resources, such as a table's streams. Resource-based policies let you define access permissions by specifying who has access to each resource, and the actions they are allowed to perform on each resource.
- In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html). (see [below for nested schema](#nestedatt--stream_specification--resource_policy))
+  When you remove the ``StreamSpecification`` property from the template, DynamoDB disables the stream but retains any attached resource policy until the stream is deleted after 24 hours. When you modify the ``StreamViewType`` property, DynamoDB creates a new stream and retains the old stream's resource policy. The old stream and its resource policy are deleted after the 24-hour retention period.
+  In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html). (see [below for nested schema](#nestedatt--stream_specification--resource_policy))
 - `stream_view_type` (String) When an item in the table is modified, ``StreamViewType`` determines what information is written to the stream for this table. Valid values for ``StreamViewType`` are:
   +  ``KEYS_ONLY`` - Only the key attributes of the modified item are written to the stream.
   +  ``NEW_IMAGE`` - The entire item, as it appears after it was modified, is written to the stream.

@@ -451,9 +451,6 @@ func policyGrantResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "enum": [
-		//	    "DomainUnit",
-		//	    "EnvironmentBlueprintConfiguration",
-		//	    "EnvironmentProfile",
 		//	    "DOMAIN_UNIT",
 		//	    "ENVIRONMENT_BLUEPRINT_CONFIGURATION",
 		//	    "ENVIRONMENT_PROFILE",
@@ -465,9 +462,6 @@ func policyGrantResource(ctx context.Context) (resource.Resource, error) {
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
-					"DomainUnit",
-					"EnvironmentBlueprintConfiguration",
-					"EnvironmentProfile",
 					"DOMAIN_UNIT",
 					"ENVIRONMENT_BLUEPRINT_CONFIGURATION",
 					"ENVIRONMENT_PROFILE",
@@ -497,10 +491,42 @@ func policyGrantResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "enum": [
+		//	    "CREATE_DOMAIN_UNIT",
+		//	    "OVERRIDE_DOMAIN_UNIT_OWNERS",
+		//	    "ADD_TO_PROJECT_MEMBER_POOL",
+		//	    "OVERRIDE_PROJECT_OWNERS",
+		//	    "CREATE_GLOSSARY",
+		//	    "CREATE_FORM_TYPE",
+		//	    "CREATE_ASSET_TYPE",
+		//	    "CREATE_PROJECT",
+		//	    "CREATE_ENVIRONMENT_PROFILE",
+		//	    "DELEGATE_CREATE_ENVIRONMENT_PROFILE",
+		//	    "CREATE_ENVIRONMENT",
+		//	    "CREATE_ENVIRONMENT_FROM_BLUEPRINT",
+		//	    "CREATE_PROJECT_FROM_PROJECT_PROFILE"
+		//	  ],
 		//	  "type": "string"
 		//	}
 		"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"CREATE_DOMAIN_UNIT",
+					"OVERRIDE_DOMAIN_UNIT_OWNERS",
+					"ADD_TO_PROJECT_MEMBER_POOL",
+					"OVERRIDE_PROJECT_OWNERS",
+					"CREATE_GLOSSARY",
+					"CREATE_FORM_TYPE",
+					"CREATE_ASSET_TYPE",
+					"CREATE_PROJECT",
+					"CREATE_ENVIRONMENT_PROFILE",
+					"DELEGATE_CREATE_ENVIRONMENT_PROFILE",
+					"CREATE_ENVIRONMENT",
+					"CREATE_ENVIRONMENT_FROM_BLUEPRINT",
+					"CREATE_PROJECT_FROM_PROJECT_PROFILE",
+				),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/

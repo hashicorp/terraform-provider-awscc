@@ -57,6 +57,7 @@ resource "awscc_cleanrooms_collaboration" "example" {
 ### Optional
 
 - `analytics_engine` (String)
+- `auto_approved_change_types` (Set of String)
 - `creator_member_abilities` (Set of String)
 - `creator_ml_member_abilities` (Attributes) (see [below for nested schema](#nestedatt--creator_ml_member_abilities))
 - `creator_payment_configuration` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration))

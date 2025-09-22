@@ -234,6 +234,21 @@
         "Value",
         "Key"
       ]
+    },
+    "ErrorMessageConfiguration": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "type": "string",
+          "enum": [
+            "DETAILED"
+          ]
+        }
+      },
+      "required": [
+        "Type"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -310,6 +325,9 @@
         "SQL",
         "PYSPARK_1_0"
       ]
+    },
+    "ErrorMessageConfiguration": {
+      "$ref": "#/definitions/ErrorMessageConfiguration"
     }
   },
   "required": [
@@ -331,7 +349,8 @@
     "/properties/Source",
     "/properties/Format",
     "/properties/AnalysisParameters",
-    "/properties/Schema"
+    "/properties/Schema",
+    "/properties/ErrorMessageConfiguration"
   ],
   "primaryIdentifier": [
     "/properties/AnalysisTemplateIdentifier",

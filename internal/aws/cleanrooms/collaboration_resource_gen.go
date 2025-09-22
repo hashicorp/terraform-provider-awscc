@@ -73,6 +73,36 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: AutoApprovedChangeTypes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "enum": [
+		//	      "ADD_MEMBER"
+		//	    ],
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"auto_approved_change_types": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.ValueStringsAre(
+					stringvalidator.OneOf(
+						"ADD_MEMBER",
+					),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+				setplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CollaborationIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -943,6 +973,7 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		"allow_joins_on_columns_with_different_names": "AllowJoinsOnColumnsWithDifferentNames",
 		"analytics_engine":                            "AnalyticsEngine",
 		"arn":                                         "Arn",
+		"auto_approved_change_types":                  "AutoApprovedChangeTypes",
 		"collaboration_identifier":                    "CollaborationIdentifier",
 		"creator_display_name":                        "CreatorDisplayName",
 		"creator_member_abilities":                    "CreatorMemberAbilities",

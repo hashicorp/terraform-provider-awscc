@@ -115,6 +115,19 @@
         "QueueReference"
       ]
     },
+    "RoutingProfileManualAssignmentQueueConfig": {
+      "description": "Contains information about the manual assignment queue and channel",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "QueueReference": {
+          "$ref": "#/definitions/RoutingProfileQueueReference"
+        }
+      },
+      "required": [
+        "QueueReference"
+      ]
+    },
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
       "type": "object",
@@ -184,6 +197,16 @@
         "$ref": "#/definitions/RoutingProfileQueueConfig"
       }
     },
+    "ManualAssignmentQueueConfigs": {
+      "description": "The manual assignment queues to associate with this routing profile.",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/RoutingProfileManualAssignmentQueueConfig"
+      }
+    },
     "Tags": {
       "type": "array",
       "maxItems": 50,
@@ -220,7 +243,8 @@
     "read": {
       "permissions": [
         "connect:DescribeRoutingProfile",
-        "connect:ListRoutingProfileQueues"
+        "connect:ListRoutingProfileQueues",
+        "connect:ListRoutingProfileManualAssignmentQueues"
       ]
     },
     "delete": {
@@ -240,6 +264,7 @@
         "connect:TagResource",
         "connect:UntagResource",
         "connect:ListRoutingProfileQueues",
+        "connect:ListRoutingProfileManualAssignmentQueues",
         "connect:UpdateRoutingProfileAgentAvailabilityTimer"
       ]
     },
@@ -256,7 +281,8 @@
       },
       "permissions": [
         "connect:ListRoutingProfiles",
-        "connect:ListRoutingProfileQueues"
+        "connect:ListRoutingProfileQueues",
+        "connect:ListRoutingProfileManualAssignmentQueues"
       ]
     }
   },

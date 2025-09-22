@@ -422,6 +422,13 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "HcxNetworkAclId": {
+		//	      "pattern": "^acl-[a-zA-Z0-9_-]+$",
+		//	      "type": "string"
+		//	    },
+		//	    "IsHcxPublic": {
+		//	      "type": "boolean"
+		//	    },
 		//	    "NsxUpLink": {
 		//	      "properties": {
 		//	        "Cidr": {
@@ -609,6 +616,25 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: HcxNetworkAclId
+				"hcx_network_acl_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.RegexMatches(regexp.MustCompile("^acl-[a-zA-Z0-9_-]+$"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: IsHcxPublic
+				"is_hcx_public": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: NsxUpLink
@@ -1216,11 +1242,13 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"expansion_vlan_1":               "ExpansionVlan1",
 		"expansion_vlan_2":               "ExpansionVlan2",
 		"hcx":                            "Hcx",
+		"hcx_network_acl_id":             "HcxNetworkAclId",
 		"host_name":                      "HostName",
 		"hosts":                          "Hosts",
 		"impaired_since":                 "ImpairedSince",
 		"initial_vlans":                  "InitialVlans",
 		"instance_type":                  "InstanceType",
+		"is_hcx_public":                  "IsHcxPublic",
 		"key":                            "Key",
 		"key_name":                       "KeyName",
 		"kms_key_id":                     "KmsKeyId",

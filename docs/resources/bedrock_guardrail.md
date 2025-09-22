@@ -227,6 +227,7 @@ variable "kms_key_arn" {
 
 ### Optional
 
+- `automated_reasoning_policy_config` (Attributes) Optional configuration for integrating Automated Reasoning policies with the guardrail. (see [below for nested schema](#nestedatt--automated_reasoning_policy_config))
 - `content_policy_config` (Attributes) Content policy config for a guardrail. (see [below for nested schema](#nestedatt--content_policy_config))
 - `contextual_grounding_policy_config` (Attributes) Contextual grounding policy config for a guardrail. (see [below for nested schema](#nestedatt--contextual_grounding_policy_config))
 - `cross_region_config` (Attributes) The system-defined guardrail profile that you?re using with your guardrail (see [below for nested schema](#nestedatt--cross_region_config))
@@ -248,6 +249,15 @@ variable "kms_key_arn" {
 - `status_reasons` (List of String) List of status reasons
 - `updated_at` (String) Time Stamp
 - `version` (String) Guardrail version
+
+<a id="nestedatt--automated_reasoning_policy_config"></a>
+### Nested Schema for `automated_reasoning_policy_config`
+
+Optional:
+
+- `confidence_threshold` (Number) The confidence threshold for triggering guardrail actions based on Automated Reasoning policy violations.
+- `policies` (List of String) The list of Automated Reasoning policy ARNs to include in the guardrail configuration
+
 
 <a id="nestedatt--content_policy_config"></a>
 ### Nested Schema for `content_policy_config`

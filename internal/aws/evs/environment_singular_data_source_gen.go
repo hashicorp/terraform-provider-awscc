@@ -323,6 +323,13 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "HcxNetworkAclId": {
+		//	      "pattern": "^acl-[a-zA-Z0-9_-]+$",
+		//	      "type": "string"
+		//	    },
+		//	    "IsHcxPublic": {
+		//	      "type": "boolean"
+		//	    },
 		//	    "NsxUpLink": {
 		//	      "properties": {
 		//	        "Cidr": {
@@ -450,6 +457,14 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: HcxNetworkAclId
+				"hcx_network_acl_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: IsHcxPublic
+				"is_hcx_public": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: NsxUpLink
@@ -838,11 +853,13 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"expansion_vlan_1":               "ExpansionVlan1",
 		"expansion_vlan_2":               "ExpansionVlan2",
 		"hcx":                            "Hcx",
+		"hcx_network_acl_id":             "HcxNetworkAclId",
 		"host_name":                      "HostName",
 		"hosts":                          "Hosts",
 		"impaired_since":                 "ImpairedSince",
 		"initial_vlans":                  "InitialVlans",
 		"instance_type":                  "InstanceType",
+		"is_hcx_public":                  "IsHcxPublic",
 		"key":                            "Key",
 		"key_name":                       "KeyName",
 		"kms_key_id":                     "KmsKeyId",

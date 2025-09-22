@@ -560,6 +560,22 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_bedrockagentcore_browser_custom",
+        "identifier": ["BrowserId"]
+    },
+    {
+        "resource": "awscc_bedrockagentcore_code_interpreter_custom",
+        "identifier": ["CodeInterpreterId"]
+    },
+    {
+        "resource": "awscc_bedrockagentcore_runtime",
+        "identifier": ["AgentRuntimeId"]
+    },
+    {
+        "resource": "awscc_bedrockagentcore_runtime_endpoint",
+        "identifier": ["AgentRuntimeEndpointArn"]
+    },
+    {
         "resource": "awscc_billing_billing_view",
         "identifier": ["Arn"]
     },
@@ -3412,6 +3428,10 @@
         "identifier": ["OdbNetworkArn"]
     },
     {
+        "resource": "awscc_odb_odb_peering_connection",
+        "identifier": ["OdbPeeringConnectionArn"]
+    },
+    {
         "resource": "awscc_osis_pipeline",
         "identifier": ["PipelineArn"]
     },
@@ -4482,6 +4502,14 @@
     {
         "resource": "awscc_servicecatalog_cloudformation_provisioned_product",
         "identifier": ["ProvisionedProductId"]
+    },
+    {
+        "resource": "awscc_servicecatalog_launch_template_constraint",
+        "identifier": ["Id"]
+    },
+    {
+        "resource": "awscc_servicecatalog_portfolio_product_association",
+        "identifier": ["PortfolioId","ProductId"]
     },
     {
         "resource": "awscc_servicecatalog_service_action",

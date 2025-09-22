@@ -96,8 +96,7 @@
             }
           },
           "required": [
-            "Name",
-            "Engine"
+            "Name"
           ]
         },
         "Properties": {

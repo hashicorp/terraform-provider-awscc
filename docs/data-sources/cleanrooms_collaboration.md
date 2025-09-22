@@ -23,6 +23,7 @@ Data Source schema for AWS::CleanRooms::Collaboration
 
 - `analytics_engine` (String)
 - `arn` (String)
+- `auto_approved_change_types` (Set of String)
 - `collaboration_identifier` (String)
 - `creator_display_name` (String)
 - `creator_member_abilities` (Set of String)

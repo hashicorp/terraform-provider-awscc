@@ -175,6 +175,12 @@
         "ssm-contacts:GetContact",
         "ssm-contacts:AssociateContact"
       ]
+    },
+    "list": {
+      "permissions": [
+        "ssm-contacts:ListContacts",
+        "ssm-contacts:GetContact"
+      ]
     }
   }
 }

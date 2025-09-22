@@ -1,0 +1,153 @@
+{
+  "typeName": "AWS::ODB::OdbPeeringConnection",
+  "description": "Resource Type definition for AWS::ODB::OdbPeeringConnection.",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key"
+      ]
+    }
+  },
+  "properties": {
+    "DisplayName": {
+      "description": "The name of the ODB peering connection.",
+      "type": "string",
+      "pattern": "",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "OdbPeeringConnectionArn": {
+      "description": "The Amazon Resource Name (ARN) of the ODB peering connection.",
+      "type": "string"
+    },
+    "OdbPeeringConnectionId": {
+      "description": "The unique identifier of the ODB peering connection.",
+      "type": "string"
+    },
+    "OdbNetworkArn": {
+      "description": "The Amazon Resource Name (ARN) of the ODB network.",
+      "type": "string"
+    },
+    "OdbNetworkId": {
+      "description": "The unique identifier of the ODB network.",
+      "type": "string",
+      "pattern": "^(arn:(?:aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):[a-z0-9-]+:[a-z0-9-]*:[0-9]+:[a-z0-9-]+/[a-zA-Z0-9_~.-]{6,64}|[a-zA-Z0-9_~.-]{6,64})$",
+      "minLength": 6,
+      "maxLength": 2048
+    },
+    "PeerNetworkArn": {
+      "description": "The Amazon Resource Name (ARN) of the peer network.",
+      "type": "string"
+    },
+    "PeerNetworkId": {
+      "description": "The unique identifier of the peer network.",
+      "type": "string",
+      "pattern": "^(arn:(?:aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):[a-z0-9-]+:[a-z0-9-]*:[0-9]+:[a-z0-9-]+/[a-zA-Z0-9_~.-]{6,64}|[a-zA-Z0-9_~.-]{6,64})$",
+      "minLength": 6,
+      "maxLength": 2048
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags to assign to the Odb peering connection.",
+      "insertionOrder": false,
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/OdbPeeringConnectionArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/OdbPeeringConnectionArn",
+    "/properties/OdbPeeringConnectionId",
+    "/properties/OdbNetworkArn",
+    "/properties/PeerNetworkArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/OdbNetworkId",
+    "/properties/PeerNetworkId",
+    "/properties/DisplayName"
+  ],
+  "writeOnlyProperties": [
+    "/properties/OdbNetworkId",
+    "/properties/PeerNetworkId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "odb:CreateOdbPeeringConnection",
+        "odb:TagResource",
+        "iam:CreateServiceLinkedRole",
+        "ec2:DescribeVpcs",
+        "ec2:CreateOdbNetworkPeering",
+        "odb:GetOdbPeeringConnection",
+        "odb:ListTagsForResource",
+        "sts:GetCallerIdentity"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "odb:GetOdbPeeringConnection",
+        "odb:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "odb:GetOdbPeeringConnection",
+        "odb:TagResource",
+        "odb:UntagResource",
+        "odb:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "odb:DeleteOdbPeeringConnection",
+        "ec2:DescribeVpcs",
+        "ec2:DeleteOdbNetworkPeering",
+        "odb:GetOdbPeeringConnection",
+        "odb:UntagResource",
+        "odb:ListTagsForResource",
+        "sts:GetCallerIdentity"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "odb:ListOdbPeeringConnections",
+        "odb:ListTagsForResource"
+      ]
+    }
+  },
+  "replacementStrategy": "delete_then_create",
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "odb:TagResource",
+      "odb:UntagResource",
+      "odb:ListTagsForResource"
+    ]
+  }
+}

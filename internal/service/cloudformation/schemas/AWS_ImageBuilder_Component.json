@@ -1,100 +1,22 @@
 {
-  "typeName": "AWS::ImageBuilder::Component",
-  "description": "Resource schema for AWS::ImageBuilder::Component",
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-imagebuilder",
-  "properties": {
-    "Arn": {
-      "description": "The Amazon Resource Name (ARN) of the component.",
-      "type": "string"
-    },
-    "Name": {
-      "description": "The name of the component.",
-      "type": "string"
-    },
-    "Version": {
-      "description": "The version of the component.",
-      "type": "string"
-    },
-    "Description": {
-      "description": "The description of the component.",
-      "type": "string"
-    },
-    "ChangeDescription": {
-      "description": "The change description of the component.",
-      "type": "string"
-    },
-    "Type": {
-      "description": "The type of the component denotes whether the component is used to build the image or only to test it. ",
-      "type": "string",
-      "enum": [
-        "BUILD",
-        "TEST"
-      ]
-    },
-    "Platform": {
-      "description": "The platform of the component.",
-      "type": "string",
-      "enum": [
-        "Windows",
-        "Linux",
-        "macOS"
-      ]
-    },
-    "Data": {
-      "description": "The data of the component.",
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 16000
-    },
-    "KmsKeyId": {
-      "description": "The KMS key identifier used to encrypt the component.",
-      "type": "string"
-    },
-    "Encrypted": {
-      "description": "The encryption status of the component.",
-      "type": "boolean"
-    },
-    "Tags": {
-      "description": "The tags associated with the component.",
-      "type": "object",
-      "additionalProperties": false,
-      "patternProperties": {
-        "": {
-          "type": "string"
-        }
-      }
-    },
-    "Uri": {
-      "description": "The uri of the component.",
-      "type": "string"
-    },
-    "SupportedOsVersions": {
-      "description": "The operating system (OS) version supported by the component.",
-      "type": "array",
-      "insertionOrder": false,
-      "items": {
-        "type": "string"
-      }
-    }
+  "tagging": {
+    "permissions": [
+      "imagebuilder:TagResource",
+      "imagebuilder:UntagResource"
+    ],
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": true
   },
-  "additionalProperties": false,
-  "required": [
-    "Name",
-    "Platform",
-    "Version"
-  ],
-  "primaryIdentifier": [
-    "/properties/Arn"
-  ],
+  "typeName": "AWS::ImageBuilder::Component",
   "readOnlyProperties": [
     "/properties/Arn",
     "/properties/Type",
     "/properties/Encrypted"
   ],
-  "writeOnlyProperties": [
-    "/properties/Data",
-    "/properties/Uri"
-  ],
+  "description": "Resource schema for AWS::ImageBuilder::Component",
   "createOnlyProperties": [
     "/properties/Name",
     "/properties/Version",
@@ -106,18 +28,22 @@
     "/properties/KmsKeyId",
     "/properties/SupportedOsVersions"
   ],
-  "tagging": {
-    "taggable": true,
-    "tagOnCreate": true,
-    "tagUpdatable": true,
-    "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags",
-    "permissions": [
-      "imagebuilder:TagResource",
-      "imagebuilder:UntagResource"
-    ]
-  },
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "required": [
+    "Name",
+    "Platform",
+    "Version"
+  ],
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-imagebuilder",
   "handlers": {
+    "read": {
+      "permissions": [
+        "imagebuilder:GetComponent",
+        "kms:Decrypt"
+      ]
+    },
     "create": {
       "permissions": [
         "iam:CreateServiceLinkedRole",
@@ -142,19 +68,6 @@
         "imagebuilder:UntagResource"
       ]
     },
-    "read": {
-      "permissions": [
-        "imagebuilder:GetComponent",
-        "kms:Decrypt"
-      ]
-    },
-    "delete": {
-      "permissions": [
-        "imagebuilder:GetComponent",
-        "imagebuilder:UntagResource",
-        "imagebuilder:DeleteComponent"
-      ]
-    },
     "list": {
       "permissions": [
         "imagebuilder:ListComponents",
@@ -165,11 +78,96 @@
           "Arn": {
             "$ref": "resource-schema.json#/properties/Arn"
           }
-        },
-        "required": [
-          "Arn"
-        ]
+        }
       }
+    },
+    "delete": {
+      "permissions": [
+        "imagebuilder:GetComponent",
+        "imagebuilder:UntagResource",
+        "imagebuilder:DeleteComponent"
+      ]
+    }
+  },
+  "writeOnlyProperties": [
+    "/properties/Data",
+    "/properties/Uri"
+  ],
+  "additionalProperties": false,
+  "definitions": {},
+  "properties": {
+    "Description": {
+      "description": "The description of the component.",
+      "type": "string"
+    },
+    "SupportedOsVersions": {
+      "description": "The operating system (OS) version supported by the component.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "Platform": {
+      "description": "The platform of the component.",
+      "type": "string",
+      "enum": [
+        "Windows",
+        "Linux",
+        "macOS"
+      ]
+    },
+    "KmsKeyId": {
+      "description": "The KMS key identifier used to encrypt the component.",
+      "type": "string"
+    },
+    "Encrypted": {
+      "description": "The encryption status of the component.",
+      "type": "boolean"
+    },
+    "Data": {
+      "minLength": 1,
+      "description": "The data of the component.",
+      "type": "string",
+      "maxLength": 16000
+    },
+    "Uri": {
+      "description": "The uri of the component.",
+      "type": "string"
+    },
+    "Name": {
+      "description": "The name of the component.",
+      "type": "string"
+    },
+    "Type": {
+      "description": "The type of the component denotes whether the component is used to build the image or only to test it. ",
+      "type": "string",
+      "enum": [
+        "BUILD",
+        "TEST"
+      ]
+    },
+    "Version": {
+      "description": "The version of the component.",
+      "type": "string"
+    },
+    "ChangeDescription": {
+      "description": "The change description of the component.",
+      "type": "string"
+    },
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) of the component.",
+      "type": "string"
+    },
+    "Tags": {
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      },
+      "description": "The tags associated with the component.",
+      "additionalProperties": false,
+      "type": "object"
     }
   }
 }

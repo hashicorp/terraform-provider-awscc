@@ -377,7 +377,7 @@
       }
     },
     "ForceNewDeployment": {
-      "description": "",
+      "description": "Determines whether to force a new deployment of the service. By default, deployments aren't forced. You can use this option to start a new deployment with no service definition changes. For example, you can update a service's tasks to use a newer Docker image with the same image/tag combination (``my_image:latest``) or to roll Fargate tasks onto a newer platform version.",
       "additionalProperties": false,
       "type": "object",
       "required": [
@@ -385,12 +385,12 @@
       ],
       "properties": {
         "EnableForceNewDeployment": {
-          "description": "",
+          "description": "Determines whether to force a new deployment of the service. By default, deployments aren't forced. You can use this option to start a new deployment with no service definition changes. For example, you can update a service's tasks to use a newer Docker image with the same image/tag combination (``my_image:latest``) or to roll Fargate tasks onto a newer platform version.",
           "type": "boolean"
         },
         "ForceNewDeploymentNonce": {
           "minLength": 1,
-          "description": "",
+          "description": "When you change the``ForceNewDeploymentNonce`` value in your template, it signals ECS to start a new deployment even though no other service parameters have changed. The value must be a unique, time- varying value like a timestamp, random string, or sequence number. Use this property when you want to ensure your tasks pick up the latest version of a Docker image that uses the same tag but has been updated in the registry.",
           "$comment": "A time-varying value that has at most a negligible chance of repeating; for example, a random value that is generated anew for each use, a time-stamp, a sequence number, or some combination of these.",
           "type": "string",
           "maxLength": 255
@@ -527,6 +527,13 @@
         "HookTargetArn": {
           "description": "The Amazon Resource Name (ARN) of the hook target. Currently, only Lambda function ARNs are supported.\n You must provide this parameter when configuring a deployment lifecycle hook.",
           "type": "string"
+        },
+        "HookDetails": {
+          "description": "",
+          "type": [
+            "string",
+            "object"
+          ]
         },
         "RoleArn": {
           "description": "The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS permission to call Lambda functions on your behalf.\n For more information, see [Permissions required for Lambda functions in Amazon ECS blue/green deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-permissions.html) in the *Amazon Elastic Container Service Developer Guide*.",

@@ -26,6 +26,7 @@ Represents a stored analysis within a collaboration
 
 - `analysis_parameters` (Attributes List) The member who can query can provide this placeholder for a literal data value in an analysis template (see [below for nested schema](#nestedatt--analysis_parameters))
 - `description` (String)
+- `error_message_configuration` (Attributes) (see [below for nested schema](#nestedatt--error_message_configuration))
 - `schema` (Attributes) (see [below for nested schema](#nestedatt--schema))
 - `source_metadata` (Attributes) (see [below for nested schema](#nestedatt--source_metadata))
 - `tags` (Attributes List) An arbitrary set of tags (key-value pairs) for this cleanrooms analysis template. (see [below for nested schema](#nestedatt--tags))
@@ -99,6 +100,14 @@ Optional:
 
 - `default_value` (String)
 - `name` (String)
+- `type` (String)
+
+
+<a id="nestedatt--error_message_configuration"></a>
+### Nested Schema for `error_message_configuration`
+
+Optional:
+
 - `type` (String)
 
 

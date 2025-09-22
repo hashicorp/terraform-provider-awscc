@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrockagentcore_runtime.example "agent_runtime_id"

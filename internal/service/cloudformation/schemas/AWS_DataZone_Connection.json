@@ -759,12 +759,12 @@
     "DomainId": {
       "type": "string",
       "description": "The ID of the domain in which the connection is created.",
-      "pattern": "^dzd[_][a-zA-Z0-9_-]{1,36}$"
+      "pattern": "^dzd[_-][a-zA-Z0-9_-]{1,36}$"
     },
     "DomainIdentifier": {
       "type": "string",
       "description": "The identifier of the domain in which the connection is created.",
-      "pattern": "^dzd[_][a-zA-Z0-9_-]{1,36}$"
+      "pattern": "^dzd[_-][a-zA-Z0-9_-]{1,36}$"
     },
     "DomainUnitId": {
       "type": "string",

@@ -10,6 +10,20 @@
         "SPARK"
       ]
     },
+    "AutoApprovedChangeType": {
+      "type": "string",
+      "enum": [
+        "ADD_MEMBER"
+      ]
+    },
+    "AutoApprovedChangeTypeList": {
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AutoApprovedChangeType"
+      },
+      "uniqueItems": true
+    },
     "CollaborationJobLogStatus": {
       "type": "string",
       "enum": [
@@ -297,6 +311,9 @@
     },
     "CreatorPaymentConfiguration": {
       "$ref": "#/definitions/PaymentConfiguration"
+    },
+    "AutoApprovedChangeTypes": {
+      "$ref": "#/definitions/AutoApprovedChangeTypeList"
     }
   },
   "required": [
@@ -317,7 +334,8 @@
     "/properties/JobLogStatus",
     "/properties/QueryLogStatus",
     "/properties/Members",
-    "/properties/CreatorPaymentConfiguration"
+    "/properties/CreatorPaymentConfiguration",
+    "/properties/AutoApprovedChangeTypes"
   ],
   "primaryIdentifier": [
     "/properties/CollaborationIdentifier"

@@ -186,15 +186,19 @@ func microsoftTeamsChannelConfigurationResource(ctx context.Context) (resource.R
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
 		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Value",
-		//	      "Key"
+		//	      "Key",
+		//	      "Value"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -209,6 +213,7 @@ func microsoftTeamsChannelConfigurationResource(ctx context.Context) (resource.R
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -220,6 +225,7 @@ func microsoftTeamsChannelConfigurationResource(ctx context.Context) (resource.R
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
