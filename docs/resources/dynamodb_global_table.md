@@ -98,6 +98,8 @@ resource "awscc_dynamodb_global_table" "example" {
 
 - `billing_mode` (String)
 - `global_secondary_indexes` (Attributes Set) (see [below for nested schema](#nestedatt--global_secondary_indexes))
+- `global_table_settings_replication_mode` (String)
+- `global_table_source_arn` (String)
 - `global_table_witnesses` (Attributes Set) (see [below for nested schema](#nestedatt--global_table_witnesses))
 - `local_secondary_indexes` (Attributes Set) (see [below for nested schema](#nestedatt--local_secondary_indexes))
 - `multi_region_consistency` (String)

@@ -486,6 +486,7 @@ resource "awscc_rds_db_instance" "this" {
  For more information, see [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html) in the *Amazon RDS User Guide.*
  Constraints:
   +  Can't manage the master user password with AWS Secrets Manager if ``MasterUserPassword`` is specified.
+- `master_user_authentication_type` (String)
 - `master_user_password` (String) The password for the master user. The password can include any printable ASCII character except "/", """, or "@".
   *Amazon Aurora* 
  Not applicable. The password for the master user is managed by the DB cluster.

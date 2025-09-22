@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrockagentcore_runtime_endpoint.example "agent_runtime_endpoint_arn"

@@ -25,12 +25,13 @@ Data Source schema for AWS::Lambda::Permission
 - `event_source_token` (String) For Alexa Smart Home functions, a token that the invoker must supply.
 - `function_name` (String) The name or ARN of the Lambda function, version, or alias.
   **Name formats**
- +  *Function name* – ``my-function`` (name-only), ``my-function:v1`` (with alias).
-  +  *Function ARN* – ``arn:aws:lambda:us-west-2:123456789012:function:my-function``.
-  +  *Partial ARN* – ``123456789012:function:my-function``.
+ +  *Function name* ? ``my-function`` (name-only), ``my-function:v1`` (with alias).
+  +  *Function ARN* ? ``arn:aws:lambda:us-west-2:123456789012:function:my-function``.
+  +  *Partial ARN* ? ``123456789012:function:my-function``.
   
  You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
 - `function_url_auth_type` (String) The type of authentication that your function URL uses. Set to ``AWS_IAM`` if you want to restrict access to authenticated users only. Set to ``NONE`` if you want to bypass IAM authentication to create a public endpoint. For more information, see [Security and auth model for Lambda function URLs](https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html).
+- `invoked_via_function_url` (Boolean)
 - `permission_id` (String)
 - `principal` (String) The AWS-service, AWS-account, IAM user, or IAM role that invokes the function. If you specify a service, use ``SourceArn`` or ``SourceAccount`` to limit who can invoke the function through that service.
 - `principal_org_id` (String) The identifier for your organization in AOlong. Use this to grant permissions to all the AWS-accounts under this organization.

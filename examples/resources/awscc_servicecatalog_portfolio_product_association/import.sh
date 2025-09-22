@@ -1,0 +1,1 @@
+$ terraform import awscc_servicecatalog_portfolio_product_association.example "portfolio_id|product_id"

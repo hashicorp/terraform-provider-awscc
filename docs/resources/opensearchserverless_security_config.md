@@ -48,6 +48,7 @@ resource "awscc_opensearchserverless_security_config" "config" {
 ### Optional
 
 - `description` (String) Security config description
+- `iam_federation_options` (Attributes) Describe IAM federation options in form of key value map (see [below for nested schema](#nestedatt--iam_federation_options))
 - `iam_identity_center_options` (Attributes) Describes IAM Identity Center options for an OpenSearch Serverless security configuration in the form of a key-value map (see [below for nested schema](#nestedatt--iam_identity_center_options))
 - `name` (String) The friendly name of the security config
 - `saml_options` (Attributes) Describes saml options in form of key value map (see [below for nested schema](#nestedatt--saml_options))
@@ -57,6 +58,15 @@ resource "awscc_opensearchserverless_security_config" "config" {
 
 - `id` (String) Uniquely identifies the resource.
 - `security_config_id` (String) The identifier of the security config
+
+<a id="nestedatt--iam_federation_options"></a>
+### Nested Schema for `iam_federation_options`
+
+Optional:
+
+- `group_attribute` (String) Group attribute for this IAM federation integration
+- `user_attribute` (String) User attribute for this IAM federation integration
+
 
 <a id="nestedatt--iam_identity_center_options"></a>
 ### Nested Schema for `iam_identity_center_options`

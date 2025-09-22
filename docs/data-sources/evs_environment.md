@@ -91,6 +91,8 @@ Read-Only:
 - `expansion_vlan_1` (Attributes) (see [below for nested schema](#nestedatt--initial_vlans--expansion_vlan_1))
 - `expansion_vlan_2` (Attributes) (see [below for nested schema](#nestedatt--initial_vlans--expansion_vlan_2))
 - `hcx` (Attributes) (see [below for nested schema](#nestedatt--initial_vlans--hcx))
+- `hcx_network_acl_id` (String)
+- `is_hcx_public` (Boolean)
 - `nsx_up_link` (Attributes) (see [below for nested schema](#nestedatt--initial_vlans--nsx_up_link))
 - `v_motion` (Attributes) (see [below for nested schema](#nestedatt--initial_vlans--v_motion))
 - `v_san` (Attributes) (see [below for nested schema](#nestedatt--initial_vlans--v_san))

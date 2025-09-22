@@ -272,6 +272,7 @@ Optional:
 
 Optional:
 
+- `hook_details` (String)
 - `hook_target_arn` (String) The Amazon Resource Name (ARN) of the hook target. Currently, only Lambda function ARNs are supported.
  You must provide this parameter when configuring a deployment lifecycle hook.
 - `lifecycle_stages` (List of String) The lifecycle stages at which to run the hook. Choose from these valid values:
@@ -349,8 +350,8 @@ Optional:
 
 Optional:
 
-- `enable_force_new_deployment` (Boolean)
-- `force_new_deployment_nonce` (String)
+- `enable_force_new_deployment` (Boolean) Determines whether to force a new deployment of the service. By default, deployments aren't forced. You can use this option to start a new deployment with no service definition changes. For example, you can update a service's tasks to use a newer Docker image with the same image/tag combination (``my_image:latest``) or to roll Fargate tasks onto a newer platform version.
+- `force_new_deployment_nonce` (String) When you change the``ForceNewDeploymentNonce`` value in your template, it signals ECS to start a new deployment even though no other service parameters have changed. The value must be a unique, time- varying value like a timestamp, random string, or sequence number. Use this property when you want to ensure your tasks pick up the latest version of a Docker image that uses the same tag but has been updated in the registry.
 
 
 <a id="nestedatt--load_balancers"></a>

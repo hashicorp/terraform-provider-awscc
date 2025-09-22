@@ -25,6 +25,7 @@ Resource Type definition for AWS::APS::Scraper
 
 - `alias` (String) Scraper alias.
 - `role_configuration` (Attributes) Role configuration (see [below for nested schema](#nestedatt--role_configuration))
+- `scraper_logging_configuration` (Attributes) Configuration for scraper logging (see [below for nested schema](#nestedatt--scraper_logging_configuration))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -83,6 +84,48 @@ Optional:
 
 - `source_role_arn` (String) IAM Role in source account
 - `target_role_arn` (String) IAM Role in the target account
+
+
+<a id="nestedatt--scraper_logging_configuration"></a>
+### Nested Schema for `scraper_logging_configuration`
+
+Optional:
+
+- `logging_destination` (Attributes) Destination for scraper logging (see [below for nested schema](#nestedatt--scraper_logging_configuration--logging_destination))
+- `scraper_components` (Attributes List) (see [below for nested schema](#nestedatt--scraper_logging_configuration--scraper_components))
+
+<a id="nestedatt--scraper_logging_configuration--logging_destination"></a>
+### Nested Schema for `scraper_logging_configuration.logging_destination`
+
+Optional:
+
+- `cloudwatch_logs` (Attributes) Represents a cloudwatch logs destination for scraper logging (see [below for nested schema](#nestedatt--scraper_logging_configuration--logging_destination--cloudwatch_logs))
+
+<a id="nestedatt--scraper_logging_configuration--logging_destination--cloudwatch_logs"></a>
+### Nested Schema for `scraper_logging_configuration.logging_destination.cloudwatch_logs`
+
+Optional:
+
+- `log_group_arn` (String) ARN of the CloudWatch log group
+
+
+
+<a id="nestedatt--scraper_logging_configuration--scraper_components"></a>
+### Nested Schema for `scraper_logging_configuration.scraper_components`
+
+Optional:
+
+- `config` (Attributes) (see [below for nested schema](#nestedatt--scraper_logging_configuration--scraper_components--config))
+- `type` (String) Type of scraper component
+
+<a id="nestedatt--scraper_logging_configuration--scraper_components--config"></a>
+### Nested Schema for `scraper_logging_configuration.scraper_components.config`
+
+Optional:
+
+- `options` (Map of String)
+
+
 
 
 <a id="nestedatt--tags"></a>

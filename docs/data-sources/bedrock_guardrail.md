@@ -21,6 +21,7 @@ Data Source schema for AWS::Bedrock::Guardrail
 
 ### Read-Only
 
+- `automated_reasoning_policy_config` (Attributes) Optional configuration for integrating Automated Reasoning policies with the guardrail. (see [below for nested schema](#nestedatt--automated_reasoning_policy_config))
 - `blocked_input_messaging` (String) Messaging for when violations are detected in text
 - `blocked_outputs_messaging` (String) Messaging for when violations are detected in text
 - `content_policy_config` (Attributes) Content policy config for a guardrail. (see [below for nested schema](#nestedatt--content_policy_config))
@@ -41,6 +42,15 @@ Data Source schema for AWS::Bedrock::Guardrail
 - `updated_at` (String) Time Stamp
 - `version` (String) Guardrail version
 - `word_policy_config` (Attributes) Word policy config for a guardrail. (see [below for nested schema](#nestedatt--word_policy_config))
+
+<a id="nestedatt--automated_reasoning_policy_config"></a>
+### Nested Schema for `automated_reasoning_policy_config`
+
+Read-Only:
+
+- `confidence_threshold` (Number) The confidence threshold for triggering guardrail actions based on Automated Reasoning policy violations.
+- `policies` (List of String) The list of Automated Reasoning policy ARNs to include in the guardrail configuration
+
 
 <a id="nestedatt--content_policy_config"></a>
 ### Nested Schema for `content_policy_config`
