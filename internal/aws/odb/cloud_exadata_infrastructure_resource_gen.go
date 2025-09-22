@@ -9,12 +9,16 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -341,6 +345,235 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: MaintenanceWindow
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The scheduling details for the maintenance window. Patching and system updates take place during the maintenance window.",
+		//	  "properties": {
+		//	    "CustomActionTimeoutInMins": {
+		//	      "description": "The timeout duration for custom actions in minutes.",
+		//	      "maximum": 120,
+		//	      "minimum": 15,
+		//	      "type": "integer"
+		//	    },
+		//	    "DaysOfWeek": {
+		//	      "description": "The days of the week when maintenance can be performed.",
+		//	      "items": {
+		//	        "enum": [
+		//	          "MONDAY",
+		//	          "TUESDAY",
+		//	          "WEDNESDAY",
+		//	          "THURSDAY",
+		//	          "FRIDAY",
+		//	          "SATURDAY",
+		//	          "SUNDAY"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "HoursOfDay": {
+		//	      "description": "The hours of the day when maintenance can be performed.",
+		//	      "items": {
+		//	        "type": "integer"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "IsCustomActionTimeoutEnabled": {
+		//	      "description": "Indicates whether custom action timeout is enabled.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "LeadTimeInWeeks": {
+		//	      "description": "The lead time in weeks before the maintenance window.",
+		//	      "maximum": 4,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "Months": {
+		//	      "description": "The months when maintenance can be performed.",
+		//	      "items": {
+		//	        "enum": [
+		//	          "JANUARY",
+		//	          "FEBRUARY",
+		//	          "MARCH",
+		//	          "APRIL",
+		//	          "MAY",
+		//	          "JUNE",
+		//	          "JULY",
+		//	          "AUGUST",
+		//	          "SEPTEMBER",
+		//	          "OCTOBER",
+		//	          "NOVEMBER",
+		//	          "DECEMBER"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "PatchingMode": {
+		//	      "description": "The patching mode for the maintenance window.",
+		//	      "type": "string"
+		//	    },
+		//	    "Preference": {
+		//	      "description": "The preference for the maintenance window scheduling.",
+		//	      "type": "string"
+		//	    },
+		//	    "WeeksOfMonth": {
+		//	      "description": "The weeks of the month when maintenance can be performed.",
+		//	      "items": {
+		//	        "type": "integer"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"maintenance_window": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomActionTimeoutInMins
+				"custom_action_timeout_in_mins": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The timeout duration for custom actions in minutes.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(15, 120),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DaysOfWeek
+				"days_of_week": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The days of the week when maintenance can be performed.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.UniqueValues(),
+						listvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
+								"MONDAY",
+								"TUESDAY",
+								"WEDNESDAY",
+								"THURSDAY",
+								"FRIDAY",
+								"SATURDAY",
+								"SUNDAY",
+							),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: HoursOfDay
+				"hours_of_day": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.Int64Type,
+					Description: "The hours of the day when maintenance can be performed.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.UniqueValues(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: IsCustomActionTimeoutEnabled
+				"is_custom_action_timeout_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether custom action timeout is enabled.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: LeadTimeInWeeks
+				"lead_time_in_weeks": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The lead time in weeks before the maintenance window.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(1, 4),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Months
+				"months": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The months when maintenance can be performed.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.UniqueValues(),
+						listvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
+								"JANUARY",
+								"FEBRUARY",
+								"MARCH",
+								"APRIL",
+								"MAY",
+								"JUNE",
+								"JULY",
+								"AUGUST",
+								"SEPTEMBER",
+								"OCTOBER",
+								"NOVEMBER",
+								"DECEMBER",
+							),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PatchingMode
+				"patching_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The patching mode for the maintenance window.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Preference
+				"preference": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The preference for the maintenance window scheduling.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: WeeksOfMonth
+				"weeks_of_month": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.Int64Type,
+					Description: "The weeks of the month when maintenance can be performed.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.UniqueValues(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The scheduling details for the maintenance window. Patching and system updates take place during the maintenance window.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MaxCpuCount
 		// CloudFormation resource type schema:
 		//
@@ -651,23 +884,32 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		"compute_count":                    "ComputeCount",
 		"compute_model":                    "ComputeModel",
 		"cpu_count":                        "CpuCount",
+		"custom_action_timeout_in_mins":    "CustomActionTimeoutInMins",
 		"customer_contacts_to_send_to_oci": "CustomerContactsToSendToOCI",
 		"data_storage_size_in_t_bs":        "DataStorageSizeInTBs",
 		"database_server_type":             "DatabaseServerType",
+		"days_of_week":                     "DaysOfWeek",
 		"db_node_storage_size_in_g_bs":     "DbNodeStorageSizeInGBs",
 		"db_server_ids":                    "DbServerIds",
 		"db_server_version":                "DbServerVersion",
 		"display_name":                     "DisplayName",
 		"email":                            "Email",
+		"hours_of_day":                     "HoursOfDay",
+		"is_custom_action_timeout_enabled": "IsCustomActionTimeoutEnabled",
 		"key":                              "Key",
+		"lead_time_in_weeks":               "LeadTimeInWeeks",
+		"maintenance_window":               "MaintenanceWindow",
 		"max_cpu_count":                    "MaxCpuCount",
 		"max_data_storage_in_t_bs":         "MaxDataStorageInTBs",
 		"max_db_node_storage_size_in_g_bs": "MaxDbNodeStorageSizeInGBs",
 		"max_memory_in_g_bs":               "MaxMemoryInGBs",
 		"memory_size_in_g_bs":              "MemorySizeInGBs",
+		"months":                           "Months",
 		"oci_resource_anchor_name":         "OciResourceAnchorName",
 		"oci_url":                          "OciUrl",
 		"ocid":                             "Ocid",
+		"patching_mode":                    "PatchingMode",
+		"preference":                       "Preference",
 		"shape":                            "Shape",
 		"storage_count":                    "StorageCount",
 		"storage_server_type":              "StorageServerType",
@@ -675,6 +917,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		"tags":                             "Tags",
 		"total_storage_size_in_g_bs":       "TotalStorageSizeInGBs",
 		"value":                            "Value",
+		"weeks_of_month":                   "WeeksOfMonth",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(2160).WithDeleteTimeoutInMinutes(2160)

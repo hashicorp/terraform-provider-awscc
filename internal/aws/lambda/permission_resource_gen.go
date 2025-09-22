@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -76,14 +77,14 @@ func permissionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name or ARN of the Lambda function, version, or alias.\n  **Name formats**\n +  *Function name* – ``my-function`` (name-only), ``my-function:v1`` (with alias).\n  +  *Function ARN* – ``arn:aws:lambda:us-west-2:123456789012:function:my-function``.\n  +  *Partial ARN* – ``123456789012:function:my-function``.\n  \n You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.",
+		//	  "description": "The name or ARN of the Lambda function, version, or alias.\n  **Name formats**\n +  *Function name* ? ``my-function`` (name-only), ``my-function:v1`` (with alias).\n  +  *Function ARN* ? ``arn:aws:lambda:us-west-2:123456789012:function:my-function``.\n  +  *Partial ARN* ? ``123456789012:function:my-function``.\n  \n You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.",
 		//	  "maxLength": 140,
 		//	  "minLength": 1,
 		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
 		//	  "type": "string"
 		//	}
 		"function_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name or ARN of the Lambda function, version, or alias.\n  **Name formats**\n +  *Function name* – ``my-function`` (name-only), ``my-function:v1`` (with alias).\n  +  *Function ARN* – ``arn:aws:lambda:us-west-2:123456789012:function:my-function``.\n  +  *Partial ARN* – ``123456789012:function:my-function``.\n  \n You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.",
+			Description: "The name or ARN of the Lambda function, version, or alias.\n  **Name formats**\n +  *Function name* ? ``my-function`` (name-only), ``my-function:v1`` (with alias).\n  +  *Function ARN* ? ``arn:aws:lambda:us-west-2:123456789012:function:my-function``.\n  +  *Partial ARN* ? ``123456789012:function:my-function``.\n  \n You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 140),
@@ -134,6 +135,22 @@ func permissionResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: InvokedViaFunctionUrl
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "boolean"
+		//	}
+		"invoked_via_function_url": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Principal
@@ -259,15 +276,16 @@ func permissionResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"action":                 "Action",
-		"event_source_token":     "EventSourceToken",
-		"function_name":          "FunctionName",
-		"function_url_auth_type": "FunctionUrlAuthType",
-		"permission_id":          "Id",
-		"principal":              "Principal",
-		"principal_org_id":       "PrincipalOrgID",
-		"source_account":         "SourceAccount",
-		"source_arn":             "SourceArn",
+		"action":                   "Action",
+		"event_source_token":       "EventSourceToken",
+		"function_name":            "FunctionName",
+		"function_url_auth_type":   "FunctionUrlAuthType",
+		"invoked_via_function_url": "InvokedViaFunctionUrl",
+		"permission_id":            "Id",
+		"principal":                "Principal",
+		"principal_org_id":         "PrincipalOrgID",
+		"source_account":           "SourceAccount",
+		"source_arn":               "SourceArn",
 	})
 
 	opts = opts.IsImmutableType(true)

@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -33,11 +34,11 @@ func networkInterfaceAttachmentResource(ctx context.Context) (resource.Resource,
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The ID of the network interface attachment.",
 		//	  "type": "string"
 		//	}
 		"attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The ID of the network interface attachment.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -48,11 +49,11 @@ func networkInterfaceAttachmentResource(ctx context.Context) (resource.Resource,
 		//
 		//	{
 		//	  "default": true,
-		//	  "description": "Whether to delete the network interface when the instance terminates. By default, this value is set to ``true``.",
+		//	  "description": "Whether to delete the network interface when the instance terminates. By default, this value is set to true.",
 		//	  "type": "boolean"
 		//	}
 		"delete_on_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether to delete the network interface when the instance terminates. By default, this value is set to ``true``.",
+			Description: "Whether to delete the network interface when the instance terminates. By default, this value is set to true.",
 			Optional:    true,
 			Computed:    true,
 			Default:     booldefault.StaticBool(true),
@@ -64,14 +65,29 @@ func networkInterfaceAttachmentResource(ctx context.Context) (resource.Resource,
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The network interface's position in the attachment order. For example, the first attached network interface has a ``DeviceIndex`` of 0.",
+		//	  "description": "The network interface's position in the attachment order. For example, the first attached network interface has a DeviceIndex of 0.",
 		//	  "type": "string"
 		//	}
 		"device_index": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The network interface's position in the attachment order. For example, the first attached network interface has a ``DeviceIndex`` of 0.",
+			Description: "The network interface's position in the attachment order. For example, the first attached network interface has a DeviceIndex of 0.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EnaQueueCount
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The number of ENA queues to be created with the instance.",
+		//	  "type": "integer"
+		//	}
+		"ena_queue_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of ENA queues to be created with the instance.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: EnaSrdSpecification
@@ -79,15 +95,12 @@ func networkInterfaceAttachmentResource(ctx context.Context) (resource.Resource,
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Configures ENA Express for the network interface that this action attaches to the instance.",
 		//	  "properties": {
 		//	    "EnaSrdEnabled": {
-		//	      "description": "Indicates whether ENA Express is enabled for the network interface.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "EnaSrdUdpSpecification": {
 		//	      "additionalProperties": false,
-		//	      "description": "Configures ENA Express for UDP network traffic.",
 		//	      "properties": {
 		//	        "EnaSrdUdpEnabled": {
 		//	          "type": "boolean"
@@ -102,9 +115,8 @@ func networkInterfaceAttachmentResource(ctx context.Context) (resource.Resource,
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: EnaSrdEnabled
 				"ena_srd_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether ENA Express is enabled for the network interface.",
-					Optional:    true,
-					Computed:    true,
+					Optional: true,
+					Computed: true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -121,17 +133,15 @@ func networkInterfaceAttachmentResource(ctx context.Context) (resource.Resource,
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Configures ENA Express for UDP network traffic.",
-					Optional:    true,
-					Computed:    true,
+					Optional: true,
+					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Configures ENA Express for the network interface that this action attaches to the instance.",
-			Optional:    true,
-			Computed:    true,
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -176,7 +186,7 @@ func networkInterfaceAttachmentResource(ctx context.Context) (resource.Resource,
 	}
 
 	schema := schema.Schema{
-		Description: "Attaches an elastic network interface (ENI) to an Amazon EC2 instance. You can use this resource type to attach additional network interfaces to an instance without interruption.",
+		Description: "Resource Type definition for AWS::EC2::NetworkInterfaceAttachment",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -188,6 +198,7 @@ func networkInterfaceAttachmentResource(ctx context.Context) (resource.Resource,
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
 			Name:              "attachment_id",
+			Description:       "The ID of the network interface attachment",
 			RequiredForImport: true,
 		})
 
@@ -195,6 +206,7 @@ func networkInterfaceAttachmentResource(ctx context.Context) (resource.Resource,
 		"attachment_id":             "AttachmentId",
 		"delete_on_termination":     "DeleteOnTermination",
 		"device_index":              "DeviceIndex",
+		"ena_queue_count":           "EnaQueueCount",
 		"ena_srd_enabled":           "EnaSrdEnabled",
 		"ena_srd_specification":     "EnaSrdSpecification",
 		"ena_srd_udp_enabled":       "EnaSrdUdpEnabled",

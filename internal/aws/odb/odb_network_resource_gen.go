@@ -13,9 +13,11 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -115,6 +117,27 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: CustomDomainName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The domain name to use for the resources in the ODB network.",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"custom_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The domain name to use for the resources in the ODB network.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultDnsPrefix
 		// CloudFormation resource type schema:
 		//
@@ -172,7 +195,246 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ManagedServices
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The managed services configuration for the ODB network.",
+		//	  "properties": {
+		//	    "ManagedS3BackupAccess": {
+		//	      "additionalProperties": false,
+		//	      "description": "The managed Amazon S3 backup access configuration.",
+		//	      "properties": {
+		//	        "Ipv4Addresses": {
+		//	          "description": "The IPv4 addresses for the managed Amazon S3 backup access.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "Status": {
+		//	          "description": "The status of the managed Amazon S3 backup access.",
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "ENABLING",
+		//	            "DISABLED",
+		//	            "DISABLING"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ManagedServicesIpv4Cidrs": {
+		//	      "description": "The IPv4 CIDR blocks for the managed services.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
+		//	    "ResourceGatewayArn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the resource gateway.",
+		//	      "type": "string"
+		//	    },
+		//	    "S3Access": {
+		//	      "additionalProperties": false,
+		//	      "description": "The Amazon S3 access configuration.",
+		//	      "properties": {
+		//	        "DomainName": {
+		//	          "description": "The domain name for the Amazon S3 access.",
+		//	          "type": "string"
+		//	        },
+		//	        "Ipv4Addresses": {
+		//	          "description": "The IPv4 addresses for the Amazon S3 access.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "S3PolicyDocument": {
+		//	          "description": "The endpoint policy for the Amazon S3 access.",
+		//	          "type": "string"
+		//	        },
+		//	        "Status": {
+		//	          "description": "The status of the Amazon S3 access.",
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "ENABLING",
+		//	            "DISABLED",
+		//	            "DISABLING"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ServiceNetworkArn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the service network.",
+		//	      "type": "string"
+		//	    },
+		//	    "ServiceNetworkEndpoint": {
+		//	      "additionalProperties": false,
+		//	      "description": "The service network endpoint configuration.",
+		//	      "properties": {
+		//	        "VpcEndpointId": {
+		//	          "description": "The identifier of the VPC endpoint.",
+		//	          "type": "string"
+		//	        },
+		//	        "VpcEndpointType": {
+		//	          "description": "The type of the VPC endpoint.",
+		//	          "enum": [
+		//	            "SERVICENETWORK"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ZeroEtlAccess": {
+		//	      "additionalProperties": false,
+		//	      "description": "The Zero-ETL access configuration.",
+		//	      "properties": {
+		//	        "Cidr": {
+		//	          "description": "The CIDR block for the Zero-ETL access.",
+		//	          "type": "string"
+		//	        },
+		//	        "Status": {
+		//	          "description": "The status of the Zero-ETL access.",
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "ENABLING",
+		//	            "DISABLED",
+		//	            "DISABLING"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"managed_services": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ManagedS3BackupAccess
+				"managed_s3_backup_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Ipv4Addresses
+						"ipv_4_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The IPv4 addresses for the managed Amazon S3 backup access.",
+							Computed:    true,
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Status
+						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The status of the managed Amazon S3 backup access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The managed Amazon S3 backup access configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ManagedServicesIpv4Cidrs
+				"managed_services_ipv_4_cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The IPv4 CIDR blocks for the managed services.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceGatewayArn
+				"resource_gateway_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the resource gateway.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3Access
+				"s3_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DomainName
+						"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The domain name for the Amazon S3 access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Ipv4Addresses
+						"ipv_4_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The IPv4 addresses for the Amazon S3 access.",
+							Computed:    true,
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: S3PolicyDocument
+						"s3_policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The endpoint policy for the Amazon S3 access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Status
+						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The status of the Amazon S3 access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Amazon S3 access configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServiceNetworkArn
+				"service_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the service network.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServiceNetworkEndpoint
+				"service_network_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: VpcEndpointId
+						"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The identifier of the VPC endpoint.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: VpcEndpointType
+						"vpc_endpoint_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The type of the VPC endpoint.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The service network endpoint configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ZeroEtlAccess
+				"zero_etl_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Cidr
+						"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The CIDR block for the Zero-ETL access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Status
+						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The status of the Zero-ETL access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Zero-ETL access configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The managed services configuration for the ODB network.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: OciNetworkAnchorId
@@ -247,6 +509,48 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: S3Access
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the configuration for Amazon S3 access from the ODB network.",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"s3_access": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the configuration for Amazon S3 access from the ODB network.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// S3Access is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: S3PolicyDocument
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the endpoint policy for Amazon S3 access from the ODB network.",
+		//	  "type": "string"
+		//	}
+		"s3_policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the endpoint policy for Amazon S3 access from the ODB network.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// S3PolicyDocument is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -316,6 +620,32 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ZeroEtlAccess
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the configuration for Zero-ETL access from the ODB network.",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"zero_etl_access": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the configuration for Zero-ETL access from the ODB network.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ZeroEtlAccess is a write-only property.
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -345,26 +675,45 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"availability_zone":           "AvailabilityZone",
-		"availability_zone_id":        "AvailabilityZoneId",
-		"backup_subnet_cidr":          "BackupSubnetCidr",
-		"client_subnet_cidr":          "ClientSubnetCidr",
-		"default_dns_prefix":          "DefaultDnsPrefix",
-		"delete_associated_resources": "DeleteAssociatedResources",
-		"display_name":                "DisplayName",
-		"key":                         "Key",
-		"oci_network_anchor_id":       "OciNetworkAnchorId",
-		"oci_resource_anchor_name":    "OciResourceAnchorName",
-		"oci_vcn_url":                 "OciVcnUrl",
-		"odb_network_arn":             "OdbNetworkArn",
-		"odb_network_id":              "OdbNetworkId",
-		"tags":                        "Tags",
-		"value":                       "Value",
+		"availability_zone":            "AvailabilityZone",
+		"availability_zone_id":         "AvailabilityZoneId",
+		"backup_subnet_cidr":           "BackupSubnetCidr",
+		"cidr":                         "Cidr",
+		"client_subnet_cidr":           "ClientSubnetCidr",
+		"custom_domain_name":           "CustomDomainName",
+		"default_dns_prefix":           "DefaultDnsPrefix",
+		"delete_associated_resources":  "DeleteAssociatedResources",
+		"display_name":                 "DisplayName",
+		"domain_name":                  "DomainName",
+		"ipv_4_addresses":              "Ipv4Addresses",
+		"key":                          "Key",
+		"managed_s3_backup_access":     "ManagedS3BackupAccess",
+		"managed_services":             "ManagedServices",
+		"managed_services_ipv_4_cidrs": "ManagedServicesIpv4Cidrs",
+		"oci_network_anchor_id":        "OciNetworkAnchorId",
+		"oci_resource_anchor_name":     "OciResourceAnchorName",
+		"oci_vcn_url":                  "OciVcnUrl",
+		"odb_network_arn":              "OdbNetworkArn",
+		"odb_network_id":               "OdbNetworkId",
+		"resource_gateway_arn":         "ResourceGatewayArn",
+		"s3_access":                    "S3Access",
+		"s3_policy_document":           "S3PolicyDocument",
+		"service_network_arn":          "ServiceNetworkArn",
+		"service_network_endpoint":     "ServiceNetworkEndpoint",
+		"status":                       "Status",
+		"tags":                         "Tags",
+		"value":                        "Value",
+		"vpc_endpoint_id":              "VpcEndpointId",
+		"vpc_endpoint_type":            "VpcEndpointType",
+		"zero_etl_access":              "ZeroEtlAccess",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/DeleteAssociatedResources",
 		"/properties/DefaultDnsPrefix",
+		"/properties/S3Access",
+		"/properties/S3PolicyDocument",
+		"/properties/ZeroEtlAccess",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(2160).WithDeleteTimeoutInMinutes(2160)
 

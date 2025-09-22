@@ -51,6 +51,52 @@ func securityConfigResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: IamFederationOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Describe IAM federation options in form of key value map",
+		//	  "properties": {
+		//	    "GroupAttribute": {
+		//	      "description": "Group attribute for this IAM federation integration",
+		//	      "type": "string"
+		//	    },
+		//	    "UserAttribute": {
+		//	      "description": "User attribute for this IAM federation integration",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"iam_federation_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: GroupAttribute
+				"group_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Group attribute for this IAM federation integration",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UserAttribute
+				"user_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "User attribute for this IAM federation integration",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Describe IAM federation options in form of key value map",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IamIdentityCenterOptions
 		// CloudFormation resource type schema:
 		//
@@ -316,7 +362,8 @@ func securityConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Config type for security config",
 		//	  "enum": [
 		//	    "saml",
-		//	    "iamidentitycenter"
+		//	    "iamidentitycenter",
+		//	    "iamfederation"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -328,6 +375,7 @@ func securityConfigResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"saml",
 					"iamidentitycenter",
+					"iamfederation",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -369,6 +417,7 @@ func securityConfigResource(ctx context.Context) (resource.Resource, error) {
 		"application_name":                 "ApplicationName",
 		"description":                      "Description",
 		"group_attribute":                  "GroupAttribute",
+		"iam_federation_options":           "IamFederationOptions",
 		"iam_identity_center_options":      "IamIdentityCenterOptions",
 		"instance_arn":                     "InstanceArn",
 		"metadata":                         "Metadata",

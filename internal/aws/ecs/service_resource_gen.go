@@ -211,6 +211,10 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "A deployment lifecycle hook runs custom logic at specific stages of the deployment process. Currently, you can use Lambda functions as hook targets.\n For more information, see [Lifecycle hooks for Amazon ECS service deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-lifecycle-hooks.html) in the *Amazon Elastic Container Service Developer Guide*.",
 		//	        "properties": {
+		//	          "HookDetails": {
+		//	            "description": "",
+		//	            "type": "string"
+		//	          },
 		//	          "HookTargetArn": {
 		//	            "description": "The Amazon Resource Name (ARN) of the hook target. Currently, only Lambda function ARNs are supported.\n You must provide this parameter when configuring a deployment lifecycle hook.",
 		//	            "type": "string"
@@ -366,6 +370,15 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 				"lifecycle_hooks": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: HookDetails
+							"hook_details": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: HookTargetArn
 							"hook_target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The Amazon Resource Name (ARN) of the hook target. Currently, only Lambda function ARNs are supported.\n You must provide this parameter when configuring a deployment lifecycle hook.",
@@ -563,12 +576,12 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Determines whether to force a new deployment of the service. By default, deployments aren't forced. You can use this option to start a new deployment with no service definition changes. For example, you can update a service's tasks to use a newer Docker image with the same image/tag combination (``my_image:latest``) or to roll Fargate tasks onto a newer platform version.",
 		//	  "properties": {
 		//	    "EnableForceNewDeployment": {
-		//	      "description": "",
+		//	      "description": "Determines whether to force a new deployment of the service. By default, deployments aren't forced. You can use this option to start a new deployment with no service definition changes. For example, you can update a service's tasks to use a newer Docker image with the same image/tag combination (``my_image:latest``) or to roll Fargate tasks onto a newer platform version.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "ForceNewDeploymentNonce": {
 		//	      "$comment": "A time-varying value that has at most a negligible chance of repeating; for example, a random value that is generated anew for each use, a time-stamp, a sequence number, or some combination of these.",
-		//	      "description": "",
+		//	      "description": "When you change the``ForceNewDeploymentNonce`` value in your template, it signals ECS to start a new deployment even though no other service parameters have changed. The value must be a unique, time- varying value like a timestamp, random string, or sequence number. Use this property when you want to ensure your tasks pick up the latest version of a Docker image that uses the same tag but has been updated in the registry.",
 		//	      "maxLength": 255,
 		//	      "minLength": 1,
 		//	      "type": "string"
@@ -583,7 +596,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: EnableForceNewDeployment
 				"enable_force_new_deployment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "",
+					Description: "Determines whether to force a new deployment of the service. By default, deployments aren't forced. You can use this option to start a new deployment with no service definition changes. For example, you can update a service's tasks to use a newer Docker image with the same image/tag combination (``my_image:latest``) or to roll Fargate tasks onto a newer platform version.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Bool{ /*START VALIDATORS*/
@@ -595,7 +608,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ForceNewDeploymentNonce
 				"force_new_deployment_nonce": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
+					Description: "When you change the``ForceNewDeploymentNonce`` value in your template, it signals ECS to start a new deployment even though no other service parameters have changed. The value must be a unique, time- varying value like a timestamp, random string, or sequence number. Use this property when you want to ensure your tasks pick up the latest version of a Docker image that uses the same tag but has been updated in the registry.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -2296,6 +2309,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"force_new_deployment_nonce":        "ForceNewDeploymentNonce",
 		"header":                            "Header",
 		"health_check_grace_period_seconds": "HealthCheckGracePeriodSeconds",
+		"hook_details":                      "HookDetails",
 		"hook_target_arn":                   "HookTargetArn",
 		"idle_timeout_seconds":              "IdleTimeoutSeconds",
 		"ingress_port_override":             "IngressPortOverride",
