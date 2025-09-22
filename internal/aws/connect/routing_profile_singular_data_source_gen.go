@@ -74,6 +74,77 @@ func routingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "The identifier of the Amazon Connect instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ManualAssignmentQueueConfigs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The manual assignment queues to associate with this routing profile.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Contains information about the manual assignment queue and channel",
+		//	    "properties": {
+		//	      "QueueReference": {
+		//	        "additionalProperties": false,
+		//	        "description": "Contains the channel and queue identifier for a routing profile.",
+		//	        "properties": {
+		//	          "Channel": {
+		//	            "description": "The channels that agents can handle in the Contact Control Panel (CCP).",
+		//	            "enum": [
+		//	              "VOICE",
+		//	              "CHAT",
+		//	              "TASK",
+		//	              "EMAIL"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "QueueArn": {
+		//	            "description": "The Amazon Resource Name (ARN) for the queue.",
+		//	            "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/queue/[-a-zA-Z0-9]*$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Channel",
+		//	          "QueueArn"
+		//	        ],
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "QueueReference"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"manual_assignment_queue_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: QueueReference
+					"queue_reference": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Channel
+							"channel": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The channels that agents can handle in the Contact Control Panel (CCP).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: QueueArn
+							"queue_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) for the queue.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Contains the channel and queue identifier for a routing profile.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The manual assignment queues to associate with this routing profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MediaConcurrencies
 		// CloudFormation resource type schema:
 		//
@@ -344,25 +415,26 @@ func routingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::RoutingProfile").WithTerraformTypeName("awscc_connect_routing_profile")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"agent_availability_timer":   "AgentAvailabilityTimer",
-		"behavior_type":              "BehaviorType",
-		"channel":                    "Channel",
-		"concurrency":                "Concurrency",
-		"cross_channel_behavior":     "CrossChannelBehavior",
-		"default_outbound_queue_arn": "DefaultOutboundQueueArn",
-		"delay":                      "Delay",
-		"description":                "Description",
-		"instance_arn":               "InstanceArn",
-		"key":                        "Key",
-		"media_concurrencies":        "MediaConcurrencies",
-		"name":                       "Name",
-		"priority":                   "Priority",
-		"queue_arn":                  "QueueArn",
-		"queue_configs":              "QueueConfigs",
-		"queue_reference":            "QueueReference",
-		"routing_profile_arn":        "RoutingProfileArn",
-		"tags":                       "Tags",
-		"value":                      "Value",
+		"agent_availability_timer":        "AgentAvailabilityTimer",
+		"behavior_type":                   "BehaviorType",
+		"channel":                         "Channel",
+		"concurrency":                     "Concurrency",
+		"cross_channel_behavior":          "CrossChannelBehavior",
+		"default_outbound_queue_arn":      "DefaultOutboundQueueArn",
+		"delay":                           "Delay",
+		"description":                     "Description",
+		"instance_arn":                    "InstanceArn",
+		"key":                             "Key",
+		"manual_assignment_queue_configs": "ManualAssignmentQueueConfigs",
+		"media_concurrencies":             "MediaConcurrencies",
+		"name":                            "Name",
+		"priority":                        "Priority",
+		"queue_arn":                       "QueueArn",
+		"queue_configs":                   "QueueConfigs",
+		"queue_reference":                 "QueueReference",
+		"routing_profile_arn":             "RoutingProfileArn",
+		"tags":                            "Tags",
+		"value":                           "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

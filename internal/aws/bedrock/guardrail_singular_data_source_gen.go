@@ -24,6 +24,56 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::Bedrock::Guardrail resource.
 func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AutomatedReasoningPolicyConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Optional configuration for integrating Automated Reasoning policies with the guardrail.",
+		//	  "properties": {
+		//	    "ConfidenceThreshold": {
+		//	      "description": "The confidence threshold for triggering guardrail actions based on Automated Reasoning policy violations.",
+		//	      "maximum": 1,
+		//	      "minimum": 0,
+		//	      "type": "number"
+		//	    },
+		//	    "Policies": {
+		//	      "description": "The list of Automated Reasoning policy ARNs to include in the guardrail configuration",
+		//	      "items": {
+		//	        "description": "The Amazon Resource Name (ARN) of the Automated Reasoning policy",
+		//	        "maxLength": 2048,
+		//	        "minLength": 15,
+		//	        "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:automated-reasoning-policy\\/[a-z0-9]{12}(:([1-9][0-9]{0,11}))?$",
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 2,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Policies"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"automated_reasoning_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConfidenceThreshold
+				"confidence_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The confidence threshold for triggering guardrail actions based on Automated Reasoning policy violations.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Policies
+				"policies": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The list of Automated Reasoning policy ARNs to include in the guardrail configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Optional configuration for integrating Automated Reasoning policies with the guardrail.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BlockedInputMessaging
 		// CloudFormation resource type schema:
 		//
@@ -1169,8 +1219,10 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"action":                              "Action",
+		"automated_reasoning_policy_config":   "AutomatedReasoningPolicyConfig",
 		"blocked_input_messaging":             "BlockedInputMessaging",
 		"blocked_outputs_messaging":           "BlockedOutputsMessaging",
+		"confidence_threshold":                "ConfidenceThreshold",
 		"content_filters_tier_config":         "ContentFiltersTierConfig",
 		"content_policy_config":               "ContentPolicyConfig",
 		"contextual_grounding_policy_config":  "ContextualGroundingPolicyConfig",
@@ -1199,6 +1251,7 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"output_strength":                     "OutputStrength",
 		"pattern":                             "Pattern",
 		"pii_entities_config":                 "PiiEntitiesConfig",
+		"policies":                            "Policies",
 		"regexes_config":                      "RegexesConfig",
 		"sensitive_information_policy_config": "SensitiveInformationPolicyConfig",
 		"status":                              "Status",

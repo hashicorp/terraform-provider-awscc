@@ -785,6 +785,17 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Specifies whether to manage the master user password with AWS Secrets Manager.\n For more information, see [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html) in the *Amazon RDS User Guide.*\n Constraints:\n  +  Can't manage the master user password with AWS Secrets Manager if ``MasterUserPassword`` is specified.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: MasterUserAuthenticationType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"master_user_authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MasterUserPassword
 		// CloudFormation resource type schema:
 		//
@@ -1475,6 +1486,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"license_model":                                 "LicenseModel",
 		"listener_endpoint":                             "ListenerEndpoint",
 		"manage_master_user_password":                   "ManageMasterUserPassword",
+		"master_user_authentication_type":               "MasterUserAuthenticationType",
 		"master_user_password":                          "MasterUserPassword",
 		"master_user_secret":                            "MasterUserSecret",
 		"master_username":                               "MasterUsername",

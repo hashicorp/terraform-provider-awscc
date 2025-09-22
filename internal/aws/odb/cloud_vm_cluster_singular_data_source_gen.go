@@ -159,6 +159,214 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "The amount of local node storage, in gigabytes (GB), that's allocated for the VM cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DbNodes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The DB nodes that are implicitly created and managed as part of this VM Cluster.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A DbNode is a virtual machine that hosts Oracle database instances and provides access to shared storage servers within a VM Cluster",
+		//	    "properties": {
+		//	      "BackupIpId": {
+		//	        "description": "The Oracle Cloud ID (OCID) of the backup IP address that's associated with the DB node.",
+		//	        "type": "string"
+		//	      },
+		//	      "BackupVnic2Id": {
+		//	        "description": "The OCID of the second backup virtual network interface card (VNIC) for the DB node.",
+		//	        "type": "string"
+		//	      },
+		//	      "CpuCoreCount": {
+		//	        "description": "The number of CPU cores enabled on the DB node.",
+		//	        "type": "integer"
+		//	      },
+		//	      "DbNodeArn": {
+		//	        "description": "The Amazon Resource Name (ARN) of the DB node.",
+		//	        "type": "string"
+		//	      },
+		//	      "DbNodeId": {
+		//	        "description": "The unique identifier of the DB node.",
+		//	        "type": "string"
+		//	      },
+		//	      "DbNodeStorageSizeInGBs": {
+		//	        "description": "The amount of local node storage, in gigabytes (GB), that's allocated on the DB node.",
+		//	        "type": "integer"
+		//	      },
+		//	      "DbServerId": {
+		//	        "description": "The unique identifier of the database server that's associated with the DB node.",
+		//	        "type": "string"
+		//	      },
+		//	      "DbSystemId": {
+		//	        "description": "The OCID of the DB system.",
+		//	        "type": "string"
+		//	      },
+		//	      "HostIpId": {
+		//	        "description": "The OCID of the host IP address that's associated with the DB node.",
+		//	        "type": "string"
+		//	      },
+		//	      "Hostname": {
+		//	        "description": "The host name for the DB node.",
+		//	        "type": "string"
+		//	      },
+		//	      "MemorySizeInGBs": {
+		//	        "description": "The amount of memory, in gigabytes (GB), that allocated on the DB node.",
+		//	        "type": "integer"
+		//	      },
+		//	      "Ocid": {
+		//	        "description": "The OCID of the DB node.",
+		//	        "type": "string"
+		//	      },
+		//	      "Status": {
+		//	        "description": "The current status of the DB node.",
+		//	        "type": "string"
+		//	      },
+		//	      "Tags": {
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "A key-value pair to associate with a resource.",
+		//	          "properties": {
+		//	            "Key": {
+		//	              "description": "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "Value": {
+		//	              "description": "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	              "maxLength": 256,
+		//	              "minLength": 0,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Key"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": false
+		//	      },
+		//	      "Vnic2Id": {
+		//	        "description": "The OCID of the second VNIC.",
+		//	        "type": "string"
+		//	      },
+		//	      "VnicId": {
+		//	        "description": "The OCID of the VNIC.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "DbServerId"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "minLength": 1,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"db_nodes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: BackupIpId
+					"backup_ip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Oracle Cloud ID (OCID) of the backup IP address that's associated with the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: BackupVnic2Id
+					"backup_vnic_2_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The OCID of the second backup virtual network interface card (VNIC) for the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: CpuCoreCount
+					"cpu_core_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The number of CPU cores enabled on the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DbNodeArn
+					"db_node_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DbNodeId
+					"db_node_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The unique identifier of the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DbNodeStorageSizeInGBs
+					"db_node_storage_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The amount of local node storage, in gigabytes (GB), that's allocated on the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DbServerId
+					"db_server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The unique identifier of the database server that's associated with the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: DbSystemId
+					"db_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The OCID of the DB system.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: HostIpId
+					"host_ip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The OCID of the host IP address that's associated with the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Hostname
+					"hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The host name for the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MemorySizeInGBs
+					"memory_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The amount of memory, in gigabytes (GB), that allocated on the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Ocid
+					"ocid": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The OCID of the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The current status of the DB node.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Tags
+					"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Vnic2Id
+					"vnic_2_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The OCID of the second VNIC.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: VnicId
+					"vnic_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The OCID of the VNIC.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The DB nodes that are implicitly created and managed as part of this VM Cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DbServers
 		// CloudFormation resource type schema:
 		//
@@ -538,6 +746,8 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::ODB::CloudVmCluster").WithTerraformTypeName("awscc_odb_cloud_vm_cluster")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"backup_ip_id":                    "BackupIpId",
+		"backup_vnic_2_id":                "BackupVnic2Id",
 		"cloud_exadata_infrastructure_id": "CloudExadataInfrastructureId",
 		"cloud_vm_cluster_arn":            "CloudVmClusterArn",
 		"cloud_vm_cluster_id":             "CloudVmClusterId",
@@ -546,12 +756,18 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		"cpu_core_count":                  "CpuCoreCount",
 		"data_collection_options":         "DataCollectionOptions",
 		"data_storage_size_in_t_bs":       "DataStorageSizeInTBs",
+		"db_node_arn":                     "DbNodeArn",
+		"db_node_id":                      "DbNodeId",
 		"db_node_storage_size_in_g_bs":    "DbNodeStorageSizeInGBs",
+		"db_nodes":                        "DbNodes",
+		"db_server_id":                    "DbServerId",
 		"db_servers":                      "DbServers",
+		"db_system_id":                    "DbSystemId",
 		"disk_redundancy":                 "DiskRedundancy",
 		"display_name":                    "DisplayName",
 		"domain":                          "Domain",
 		"gi_version":                      "GiVersion",
+		"host_ip_id":                      "HostIpId",
 		"hostname":                        "Hostname",
 		"is_diagnostics_events_enabled":   "IsDiagnosticsEventsEnabled",
 		"is_health_monitoring_enabled":    "IsHealthMonitoringEnabled",
@@ -572,12 +788,15 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		"scan_listener_port_tcp":          "ScanListenerPortTcp",
 		"shape":                           "Shape",
 		"ssh_public_keys":                 "SshPublicKeys",
+		"status":                          "Status",
 		"storage_size_in_g_bs":            "StorageSizeInGBs",
 		"system_version":                  "SystemVersion",
 		"tags":                            "Tags",
 		"time_zone":                       "TimeZone",
 		"value":                           "Value",
 		"vip_ids":                         "VipIds",
+		"vnic_2_id":                       "Vnic2Id",
+		"vnic_id":                         "VnicId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

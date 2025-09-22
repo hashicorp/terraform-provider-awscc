@@ -35,6 +35,40 @@ func securityConfigDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "Security config description",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: IamFederationOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Describe IAM federation options in form of key value map",
+		//	  "properties": {
+		//	    "GroupAttribute": {
+		//	      "description": "Group attribute for this IAM federation integration",
+		//	      "type": "string"
+		//	    },
+		//	    "UserAttribute": {
+		//	      "description": "User attribute for this IAM federation integration",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"iam_federation_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: GroupAttribute
+				"group_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Group attribute for this IAM federation integration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserAttribute
+				"user_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "User attribute for this IAM federation integration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Describe IAM federation options in form of key value map",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IamIdentityCenterOptions
 		// CloudFormation resource type schema:
 		//
@@ -218,7 +252,8 @@ func securityConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Config type for security config",
 		//	  "enum": [
 		//	    "saml",
-		//	    "iamidentitycenter"
+		//	    "iamidentitycenter",
+		//	    "iamfederation"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -248,6 +283,7 @@ func securityConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		"application_name":                 "ApplicationName",
 		"description":                      "Description",
 		"group_attribute":                  "GroupAttribute",
+		"iam_federation_options":           "IamFederationOptions",
 		"iam_identity_center_options":      "IamIdentityCenterOptions",
 		"instance_arn":                     "InstanceArn",
 		"metadata":                         "Metadata",

@@ -162,6 +162,33 @@ func analysisTemplateDataSource(ctx context.Context) (datasource.DataSource, err
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ErrorMessageConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Type": {
+		//	      "enum": [
+		//	        "DETAILED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Type"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"error_message_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Format
 		// CloudFormation resource type schema:
 		//
@@ -535,6 +562,7 @@ func analysisTemplateDataSource(ctx context.Context) (datasource.DataSource, err
 		"description":                  "Description",
 		"entry_point":                  "EntryPoint",
 		"entry_point_hash":             "EntryPointHash",
+		"error_message_configuration":  "ErrorMessageConfiguration",
 		"format":                       "Format",
 		"key":                          "Key",
 		"location":                     "Location",

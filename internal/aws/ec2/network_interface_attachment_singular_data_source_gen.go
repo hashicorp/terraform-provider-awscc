@@ -26,11 +26,11 @@ func networkInterfaceAttachmentDataSource(ctx context.Context) (datasource.DataS
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The ID of the network interface attachment.",
 		//	  "type": "string"
 		//	}
 		"attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The ID of the network interface attachment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeleteOnTermination
@@ -38,22 +38,33 @@ func networkInterfaceAttachmentDataSource(ctx context.Context) (datasource.DataS
 		//
 		//	{
 		//	  "default": true,
-		//	  "description": "Whether to delete the network interface when the instance terminates. By default, this value is set to ``true``.",
+		//	  "description": "Whether to delete the network interface when the instance terminates. By default, this value is set to true.",
 		//	  "type": "boolean"
 		//	}
 		"delete_on_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether to delete the network interface when the instance terminates. By default, this value is set to ``true``.",
+			Description: "Whether to delete the network interface when the instance terminates. By default, this value is set to true.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeviceIndex
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The network interface's position in the attachment order. For example, the first attached network interface has a ``DeviceIndex`` of 0.",
+		//	  "description": "The network interface's position in the attachment order. For example, the first attached network interface has a DeviceIndex of 0.",
 		//	  "type": "string"
 		//	}
 		"device_index": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The network interface's position in the attachment order. For example, the first attached network interface has a ``DeviceIndex`` of 0.",
+			Description: "The network interface's position in the attachment order. For example, the first attached network interface has a DeviceIndex of 0.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EnaQueueCount
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The number of ENA queues to be created with the instance.",
+		//	  "type": "integer"
+		//	}
+		"ena_queue_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of ENA queues to be created with the instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnaSrdSpecification
@@ -61,15 +72,12 @@ func networkInterfaceAttachmentDataSource(ctx context.Context) (datasource.DataS
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Configures ENA Express for the network interface that this action attaches to the instance.",
 		//	  "properties": {
 		//	    "EnaSrdEnabled": {
-		//	      "description": "Indicates whether ENA Express is enabled for the network interface.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "EnaSrdUdpSpecification": {
 		//	      "additionalProperties": false,
-		//	      "description": "Configures ENA Express for UDP network traffic.",
 		//	      "properties": {
 		//	        "EnaSrdUdpEnabled": {
 		//	          "type": "boolean"
@@ -84,8 +92,7 @@ func networkInterfaceAttachmentDataSource(ctx context.Context) (datasource.DataS
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: EnaSrdEnabled
 				"ena_srd_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether ENA Express is enabled for the network interface.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: EnaSrdUdpSpecification
 				"ena_srd_udp_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -95,12 +102,10 @@ func networkInterfaceAttachmentDataSource(ctx context.Context) (datasource.DataS
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Configures ENA Express for UDP network traffic.",
-					Computed:    true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Configures ENA Express for the network interface that this action attaches to the instance.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// CloudFormation resource type schema:
@@ -144,6 +149,7 @@ func networkInterfaceAttachmentDataSource(ctx context.Context) (datasource.DataS
 		"attachment_id":             "AttachmentId",
 		"delete_on_termination":     "DeleteOnTermination",
 		"device_index":              "DeviceIndex",
+		"ena_queue_count":           "EnaQueueCount",
 		"ena_srd_enabled":           "EnaSrdEnabled",
 		"ena_srd_specification":     "EnaSrdSpecification",
 		"ena_srd_udp_enabled":       "EnaSrdUdpEnabled",

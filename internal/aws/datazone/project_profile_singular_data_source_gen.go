@@ -57,7 +57,7 @@ func projectProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "pattern": "^dzd[_][a-zA-Z0-9_-]{1,36}$",
+		//	  "pattern": "^dzd[_-][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
 		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -67,7 +67,7 @@ func projectProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "pattern": "^dzd[_][a-zA-Z0-9_-]{1,36}$",
+		//	  "pattern": "^dzd[_-][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
 		"domain_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
