@@ -1,0 +1,239 @@
+{
+  "typeName": "AWS::BedrockAgentCore::CodeInterpreterCustom",
+  "description": "Resource definition for AWS::BedrockAgentCore::CodeInterpreterCustom",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "CodeInterpreterId": {
+      "type": "string",
+      "pattern": "^(aws\\.codeinterpreter\\.v1|[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10})$",
+      "description": "The id of the code interpreter."
+    },
+    "CodeInterpreterArn": {
+      "type": "string",
+      "pattern": "^arn:(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:(aws|[0-9]{12}):code-interpreter(-custom)?/(aws\\.codeinterpreter\\.v1|[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10})$",
+      "description": "The ARN of a CodeInterpreter resource."
+    },
+    "CodeInterpreterNetworkMode": {
+      "type": "string",
+      "enum": [
+        "PUBLIC",
+        "SANDBOX"
+      ],
+      "description": "Network modes supported by code interpreter"
+    },
+    "CodeInterpreterNetworkConfiguration": {
+      "type": "object",
+      "properties": {
+        "NetworkMode": {
+          "$ref": "#/definitions/CodeInterpreterNetworkMode",
+          "default": "SANDBOX"
+        }
+      },
+      "required": [
+        "NetworkMode"
+      ],
+      "additionalProperties": false,
+      "description": "Network configuration for code interpreter"
+    },
+    "SandboxName": {
+      "type": "string",
+      "description": "The name of the sandbox."
+    },
+    "Description": {
+      "type": "string",
+      "description": "Description of the code interpreter."
+    },
+    "RoleArn": {
+      "type": "string",
+      "pattern": "^arn:aws(-[a-z]+)*:iam::[0-9]{12}:role/.+$",
+      "description": "The ARN of the IAM role."
+    },
+    "CodeInterpreterStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "CREATE_FAILED",
+        "READY",
+        "DELETING",
+        "DELETE_FAILED",
+        "DELETED"
+      ],
+      "description": "Status of Code interpreter"
+    },
+    "CodeInterpreterSummary": {
+      "type": "object",
+      "properties": {
+        "CodeInterpreterId": {
+          "$ref": "#/definitions/CodeInterpreterId"
+        },
+        "CodeInterpreterArn": {
+          "$ref": "#/definitions/CodeInterpreterArn"
+        },
+        "Name": {
+          "$ref": "#/definitions/SandboxName"
+        },
+        "Description": {
+          "$ref": "#/definitions/Description"
+        },
+        "Status": {
+          "$ref": "#/definitions/CodeInterpreterStatus"
+        },
+        "CreatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "LastUpdatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "CodeInterpreterId",
+        "CodeInterpreterArn",
+        "Status",
+        "CreatedAt"
+      ],
+      "additionalProperties": false,
+      "description": "Code Interpreter"
+    },
+    "CodeInterpreterSummaries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CodeInterpreterSummary"
+      },
+      "description": "List of code interpreters"
+    },
+    "TagsMap": {
+      "type": "object",
+      "description": "A map of tag keys and values",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 0,
+          "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+          "description": "Value of a tag"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "CodeInterpreterId": {
+      "$ref": "#/definitions/CodeInterpreterId",
+      "description": "The id of the code interpreter."
+    },
+    "CodeInterpreterArn": {
+      "$ref": "#/definitions/CodeInterpreterArn",
+      "description": "The ARN of a CodeInterpreter resource."
+    },
+    "Name": {
+      "$ref": "#/definitions/SandboxName",
+      "description": "The name of the code interpreter."
+    },
+    "Description": {
+      "$ref": "#/definitions/Description",
+      "description": "The description of the code interpreter."
+    },
+    "ExecutionRoleArn": {
+      "$ref": "#/definitions/RoleArn",
+      "description": "The ARN of the IAM role that the code interpreter uses to access resources."
+    },
+    "NetworkConfiguration": {
+      "$ref": "#/definitions/CodeInterpreterNetworkConfiguration",
+      "description": "Network configuration for code interpreter."
+    },
+    "Status": {
+      "$ref": "#/definitions/CodeInterpreterStatus",
+      "description": "Status of code interpreter."
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the code interpreter was created."
+    },
+    "LastUpdatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the code interpreter was last updated."
+    },
+    "Tags": {
+      "$ref": "#/definitions/TagsMap"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Name",
+    "NetworkConfiguration"
+  ],
+  "readOnlyProperties": [
+    "/properties/CodeInterpreterId",
+    "/properties/CodeInterpreterArn",
+    "/properties/Status",
+    "/properties/CreatedAt",
+    "/properties/LastUpdatedAt"
+  ],
+  "primaryIdentifier": [
+    "/properties/CodeInterpreterId"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/CodeInterpreterArn"
+    ]
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/Description",
+    "/properties/NetworkConfiguration",
+    "/properties/ExecutionRoleArn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bedrock-agentcore:CreateCodeInterpreter",
+        "bedrock-agentcore:GetCodeInterpreter",
+        "bedrock-agentcore:TagResource",
+        "bedrock-agentcore:ListTagsForResource",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bedrock-agentcore:GetCodeInterpreter",
+        "bedrock-agentcore:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bedrock-agentcore:GetCodeInterpreter",
+        "bedrock-agentcore:TagResource",
+        "bedrock-agentcore:UntagResource",
+        "bedrock-agentcore:ListTagsForResource",
+        "iam:PassRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bedrock-agentcore:GetCodeInterpreter",
+        "bedrock-agentcore:DeleteCodeInterpreter"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bedrock-agentcore:ListCodeInterpreters"
+      ]
+    }
+  },
+  "tagging": {
+    "cloudFormationSystemTags": false,
+    "tagOnCreate": true,
+    "tagProperty": "/properties/Tags",
+    "tagUpdatable": true,
+    "taggable": true,
+    "permissions": [
+      "bedrock-agentcore:TagResource",
+      "bedrock-agentcore:UntagResource",
+      "bedrock-agentcore:ListTagsForResource"
+    ]
+  }
+}

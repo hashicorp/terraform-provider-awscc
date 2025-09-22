@@ -1,0 +1,92 @@
+{
+  "typeName": "AWS::ServiceCatalog::LaunchTemplateConstraint",
+  "description": "Resource Type definition for AWS::ServiceCatalog::LaunchTemplateConstraint",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-servicecatalog/tree/master/aws-servicecatalog-launchtemplateconstraint.git",
+  "additionalProperties": false,
+  "properties": {
+    "Id": {
+      "type": "string",
+      "description": "Unique identifier for the constraint"
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the constraint."
+    },
+    "AcceptLanguage": {
+      "type": "string",
+      "description": "The language code."
+    },
+    "PortfolioId": {
+      "type": "string",
+      "description": "The portfolio identifier."
+    },
+    "ProductId": {
+      "type": "string",
+      "description": "The product identifier."
+    },
+    "Rules": {
+      "type": "string",
+      "description": "A json encoded string of the template constraint rules"
+    }
+  },
+  "tagging": {
+    "taggable": false
+  },
+  "required": [
+    "Rules",
+    "PortfolioId",
+    "ProductId"
+  ],
+  "createOnlyProperties": [
+    "/properties/PortfolioId",
+    "/properties/ProductId"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "writeOnlyProperties": [
+    "/properties/AcceptLanguage"
+  ],
+  "readOnlyProperties": [
+    "/properties/Id"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "servicecatalog:CreateConstraint",
+        "servicecatalog:DescribeConstraint"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "servicecatalog:DescribeConstraint"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "PortfolioId": {
+            "$ref": "resource-schema.json#/properties/PortfolioId"
+          }
+        },
+        "required": [
+          "PortfolioId"
+        ]
+      },
+      "permissions": [
+        "servicecatalog:ListConstraintsForPortfolio"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "servicecatalog:UpdateConstraint",
+        "servicecatalog:DescribeConstraint"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "servicecatalog:DeleteConstraint"
+      ]
+    }
+  }
+}
