@@ -11,6 +11,8 @@ Resource definition for AWS::BedrockAgentCore::BrowserCustom
 
 ## Example Usage
 
+~> **Note:** The network configuration example shown below is based on the currently supported network configuration and is expected to change based on General Availability of the service.
+
 ```terraform
 resource "random_id" "suffix" {
   byte_length = 4

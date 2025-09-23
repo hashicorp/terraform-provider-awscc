@@ -11,13 +11,13 @@ Resource definition for AWS::BedrockAgentCore::RuntimeEndpoint
 
 ## Example Usage
 
+~> **Note:** The network configuration example shown below is based on the currently supported network configuration and is expected to change based on General Availability of the service.
+
 ```terraform
-# Random suffix for unique resource names
 resource "random_id" "suffix" {
   byte_length = 4
 }
 
-# ECR repository for the agent runtime container
 resource "awscc_ecr_repository" "agent_runtime" {
   repository_name = "bedrock/agent-runtime-${random_id.suffix.hex}"
 
@@ -27,7 +27,6 @@ resource "awscc_ecr_repository" "agent_runtime" {
   }]
 }
 
-# IAM role for Agent Runtime
 resource "awscc_iam_role" "agent_runtime_role" {
   role_name = "bedrock-agent-runtime-role-${random_id.suffix.hex}"
   assume_role_policy_document = jsonencode({
@@ -49,7 +48,6 @@ resource "awscc_iam_role" "agent_runtime_role" {
   }]
 }
 
-# IAM policy for Agent Runtime
 resource "awscc_iam_role_policy" "agent_runtime_policy" {
   role_name   = awscc_iam_role.agent_runtime_role.role_name
   policy_name = "bedrock-agent-runtime-policy"
@@ -74,7 +72,6 @@ resource "awscc_iam_role_policy" "agent_runtime_policy" {
 }
 
 
-# Agent Runtime
 resource "awscc_bedrockagentcore_runtime" "example" {
   agent_runtime_name = "example_agent_runtime_${random_id.suffix.hex}"
   description        = "Example Bedrock Agent Runtime"
