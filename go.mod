@@ -118,8 +118,3 @@ require (
 	google.golang.org/grpc v1.75.1 // indirect
 	google.golang.org/protobuf v1.36.9 // indirect
 )
-
-// grahams fork
-// https://github.com/hashicorp/aws-sdk-go-base/tree/user-agent-from-context
-replace github.com/hashicorp/aws-sdk-go-base => ../aws-sdk-go-base
-
