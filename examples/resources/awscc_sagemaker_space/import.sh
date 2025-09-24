@@ -1,0 +1,1 @@
+$ terraform import awscc_sagemaker_space.example "domain_id|space_name"

@@ -26,5 +26,3 @@ Data Source schema for AWS::ServiceCatalogAppRegistry::ResourceAssociation
 - `resource` (String) The name or the Id of the Resource.
 - `resource_arn` (String)
 - `resource_type` (String) The type of the CFN Resource for now it's enum CFN_STACK.
-
-

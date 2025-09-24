@@ -1,0 +1,1 @@
+$ terraform import awscc_notifications_notification_configuration.example "arn"

@@ -27,6 +27,7 @@ Data Source schema for AWS::SSMIncidents::ResponsePlan
 - `display_name` (String) The display name of the response plan.
 - `engagements` (Set of String) The list of engagements to use.
 - `incident_template` (Attributes) The incident template configuration. (see [below for nested schema](#nestedatt--incident_template))
+- `integrations` (Attributes List) The list of integrations. (see [below for nested schema](#nestedatt--integrations))
 - `name` (String) The name of the response plan.
 - `tags` (Attributes Set) The tags to apply to the response plan. (see [below for nested schema](#nestedatt--tags))
 
@@ -92,9 +93,19 @@ Read-Only:
 
 - `dedupe_string` (String) The deduplication string.
 - `impact` (Number) The impact value.
+- `incident_tags` (Attributes Set) Tags that get applied to incidents created by the StartIncident API action. (see [below for nested schema](#nestedatt--incident_template--incident_tags))
 - `notification_targets` (Attributes List) The list of notification targets. (see [below for nested schema](#nestedatt--incident_template--notification_targets))
 - `summary` (String) The summary string.
 - `title` (String) The title string.
+
+<a id="nestedatt--incident_template--incident_tags"></a>
+### Nested Schema for `incident_template.incident_tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
+
 
 <a id="nestedatt--incident_template--notification_targets"></a>
 ### Nested Schema for `incident_template.notification_targets`
@@ -105,6 +116,32 @@ Read-Only:
 
 
 
+<a id="nestedatt--integrations"></a>
+### Nested Schema for `integrations`
+
+Read-Only:
+
+- `pager_duty_configuration` (Attributes) The pagerDuty configuration to use when starting the incident. (see [below for nested schema](#nestedatt--integrations--pager_duty_configuration))
+
+<a id="nestedatt--integrations--pager_duty_configuration"></a>
+### Nested Schema for `integrations.pager_duty_configuration`
+
+Read-Only:
+
+- `name` (String) The name of the pagerDuty configuration.
+- `pager_duty_incident_configuration` (Attributes) The pagerDuty incident configuration. (see [below for nested schema](#nestedatt--integrations--pager_duty_configuration--pager_duty_incident_configuration))
+- `secret_id` (String) The AWS secrets manager secretId storing the pagerDuty token.
+
+<a id="nestedatt--integrations--pager_duty_configuration--pager_duty_incident_configuration"></a>
+### Nested Schema for `integrations.pager_duty_configuration.pager_duty_incident_configuration`
+
+Read-Only:
+
+- `service_id` (String) The pagerDuty serviceId.
+
+
+
+
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
@@ -112,5 +149,3 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
-
-

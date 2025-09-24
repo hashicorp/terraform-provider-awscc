@@ -1,1 +1,1 @@
-$ terraform import awscc_networkmanager_customer_gateway_association.example <resource ID>
+$ terraform import awscc_networkmanager_customer_gateway_association.example "global_network_id|customer_gateway_arn"

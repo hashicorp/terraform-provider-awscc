@@ -1,0 +1,1 @@
+$ terraform import awscc_deadline_queue_limit_association.example "farm_id|limit_id|queue_id"

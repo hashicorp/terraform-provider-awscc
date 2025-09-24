@@ -3,12 +3,22 @@
 page_title: "awscc_lambda_event_source_mapping Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::Lambda::EventSourceMapping
+  The AWS::Lambda::EventSourceMapping resource creates a mapping between an event source and an LAMlong function. LAM reads items from the event source and triggers the function.
+  For details about each event source type, see the following topics. In particular, each of the topics describes the required and optional parameters for the specific event source.
+  Configuring a Dynamo DB stream as an event source https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemappingConfiguring a Kinesis stream as an event source https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemappingConfiguring an SQS queue as an event source https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsourceConfiguring an MQ broker as an event source https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemappingConfiguring MSK as an event source https://docs.aws.amazon.com/lambda/latest/dg/with-msk.htmlConfiguring Self-Managed Apache Kafka as an event source https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.htmlConfiguring Amazon DocumentDB as an event source https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html
 ---
 
 # awscc_lambda_event_source_mapping (Resource)
 
-Resource Type definition for AWS::Lambda::EventSourceMapping
+The ``AWS::Lambda::EventSourceMapping`` resource creates a mapping between an event source and an LAMlong function. LAM reads items from the event source and triggers the function.
+ For details about each event source type, see the following topics. In particular, each of the topics describes the required and optional parameters for the specific event source. 
+  +   [Configuring a Dynamo DB stream as an event source](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping) 
+  +   [Configuring a Kinesis stream as an event source](https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemapping) 
+  +   [Configuring an SQS queue as an event source](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsource) 
+  +   [Configuring an MQ broker as an event source](https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping) 
+  +   [Configuring MSK as an event source](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html) 
+  +   [Configuring Self-Managed Apache Kafka as an event source](https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html) 
+  +   [Configuring Amazon DocumentDB as an event source](https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html)
 
 
 
@@ -17,32 +27,114 @@ Resource Type definition for AWS::Lambda::EventSourceMapping
 
 ### Required
 
-- `function_name` (String) The name of the Lambda function.
+- `function_name` (String) The name or ARN of the Lambda function.
+  **Name formats**
+ +  *Function name* ? ``MyFunction``.
+  +  *Function ARN* ? ``arn:aws:lambda:us-west-2:123456789012:function:MyFunction``.
+  +  *Version or Alias ARN* ? ``arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD``.
+  +  *Partial ARN* ? ``123456789012:function:MyFunction``.
+  
+ The length constraint applies only to the full ARN. If you specify only the function name, it's limited to 64 characters in length.
 
 ### Optional
 
-- `batch_size` (Number) The maximum number of items to retrieve in a single batch.
-- `bisect_batch_on_function_error` (Boolean) (Streams) If the function returns an error, split the batch in two and retry.
-- `destination_config` (Attributes) (Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records. (see [below for nested schema](#nestedatt--destination_config))
-- `enabled` (Boolean) Disables the event source mapping to pause polling and invocation.
+- `amazon_managed_kafka_event_source_config` (Attributes) Specific configuration settings for an Amazon Managed Streaming for Apache Kafka (Amazon MSK) event source. (see [below for nested schema](#nestedatt--amazon_managed_kafka_event_source_config))
+- `batch_size` (Number) The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).
+  +  *Amazon Kinesis* ? Default 100. Max 10,000.
+  +  *Amazon DynamoDB Streams* ? Default 100. Max 10,000.
+  +  *Amazon Simple Queue Service* ? Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.
+  +  *Amazon Managed Streaming for Apache Kafka* ? Default 100. Max 10,000.
+  +  *Self-managed Apache Kafka* ? Default 100. Max 10,000.
+  +  *Amazon MQ (ActiveMQ and RabbitMQ)* ? Default 100. Max 10,000.
+  +  *DocumentDB* ? Default 100. Max 10,000.
+- `bisect_batch_on_function_error` (Boolean) (Kinesis and DynamoDB Streams only) If the function returns an error, split the batch in two and retry. The default value is false.
+  When using ``BisectBatchOnFunctionError``, check the ``BatchSize`` parameter in the ``OnFailure`` destination message's metadata. The ``BatchSize`` could be greater than 1 since LAM consolidates failed messages metadata when writing to the ``OnFailure`` destination.
+- `destination_config` (Attributes) (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka event sources only) A configuration object that specifies the destination of an event after Lambda processes it. (see [below for nested schema](#nestedatt--destination_config))
+- `document_db_event_source_config` (Attributes) Specific configuration settings for a DocumentDB event source. (see [below for nested schema](#nestedatt--document_db_event_source_config))
+- `enabled` (Boolean) When true, the event source mapping is active. When false, Lambda pauses polling and invocation.
+ Default: True
 - `event_source_arn` (String) The Amazon Resource Name (ARN) of the event source.
-- `filter_criteria` (Attributes) The filter criteria to control event filtering. (see [below for nested schema](#nestedatt--filter_criteria))
-- `function_response_types` (List of String) (Streams) A list of response types supported by the function.
-- `maximum_batching_window_in_seconds` (Number) (Streams) The maximum amount of time to gather records before invoking the function, in seconds.
-- `maximum_record_age_in_seconds` (Number) (Streams) The maximum age of a record that Lambda sends to a function for processing.
-- `maximum_retry_attempts` (Number) (Streams) The maximum number of times to retry when the function returns an error.
-- `parallelization_factor` (Number) (Streams) The number of batches to process from each shard concurrently.
-- `queues` (List of String) (ActiveMQ) A list of ActiveMQ queues.
-- `self_managed_event_source` (Attributes) Self-managed event source endpoints. (see [below for nested schema](#nestedatt--self_managed_event_source))
-- `source_access_configurations` (Attributes List) A list of SourceAccessConfiguration. (see [below for nested schema](#nestedatt--source_access_configurations))
-- `starting_position` (String) The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Streams sources.
-- `starting_position_timestamp` (Number) With StartingPosition set to AT_TIMESTAMP, the time from which to start reading, in Unix time seconds.
-- `topics` (List of String) (Kafka) A list of Kafka topics.
-- `tumbling_window_in_seconds` (Number) (Streams) Tumbling window (non-overlapping time window) duration to perform aggregations.
+  +  *Amazon Kinesis* ? The ARN of the data stream or a stream consumer.
+  +  *Amazon DynamoDB Streams* ? The ARN of the stream.
+  +  *Amazon Simple Queue Service* ? The ARN of the queue.
+  +  *Amazon Managed Streaming for Apache Kafka* ? The ARN of the cluster or the ARN of the VPC connection (for [cross-account event source mappings](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc)).
+  +  *Amazon MQ* ? The ARN of the broker.
+  +  *Amazon DocumentDB* ? The ARN of the DocumentDB change stream.
+- `filter_criteria` (Attributes) An object that defines the filter criteria that determine whether Lambda should process an event. For more information, see [Lambda event filtering](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html). (see [below for nested schema](#nestedatt--filter_criteria))
+- `function_response_types` (List of String) (Kinesis, DynamoDB Streams, and SQS) A list of current response type enums applied to the event source mapping.
+ Valid Values: ``ReportBatchItemFailures``
+- `kms_key_arn` (String) The ARN of the KMSlong (KMS) customer managed key that Lambda uses to encrypt your function's [filter criteria](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-basics).
+- `maximum_batching_window_in_seconds` (Number) The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function.
+ *Default (, , event sources)*: 0
+ *Default (, Kafka, , event sources)*: 500 ms
+ *Related setting:* For SQS event sources, when you set ``BatchSize`` to a value greater than 10, you must set ``MaximumBatchingWindowInSeconds`` to at least 1.
+- `maximum_record_age_in_seconds` (Number) (Kinesis and DynamoDB Streams only) Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. When the value is set to infinite, Lambda never discards old records.
+  The minimum valid value for maximum record age is 60s. Although values less than 60 and greater than -1 fall within the parameter's absolute range, they are not allowed
+- `maximum_retry_attempts` (Number) (Kinesis and DynamoDB Streams only) Discard records after the specified number of retries. The default value is -1, which sets the maximum number of retries to infinite. When MaximumRetryAttempts is infinite, Lambda retries failed records until the record expires in the event source.
+- `metrics_config` (Attributes) The metrics configuration for your event source. For more information, see [Event source mapping metrics](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics). (see [below for nested schema](#nestedatt--metrics_config))
+- `parallelization_factor` (Number) (Kinesis and DynamoDB Streams only) The number of batches to process concurrently from each shard. The default value is 1.
+- `provisioned_poller_config` (Attributes) (Amazon MSK and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see [provisioned mode](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode). (see [below for nested schema](#nestedatt--provisioned_poller_config))
+- `queues` (List of String) (Amazon MQ) The name of the Amazon MQ broker destination queue to consume.
+- `scaling_config` (Attributes) (Amazon SQS only) The scaling configuration for the event source. For more information, see [Configuring maximum concurrency for Amazon SQS event sources](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency). (see [below for nested schema](#nestedatt--scaling_config))
+- `self_managed_event_source` (Attributes) The self-managed Apache Kafka cluster for your event source. (see [below for nested schema](#nestedatt--self_managed_event_source))
+- `self_managed_kafka_event_source_config` (Attributes) Specific configuration settings for a self-managed Apache Kafka event source. (see [below for nested schema](#nestedatt--self_managed_kafka_event_source_config))
+- `source_access_configurations` (Attributes List) An array of the authentication protocol, VPC components, or virtual host to secure and define your event source. (see [below for nested schema](#nestedatt--source_access_configurations))
+- `starting_position` (String) The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB.
+  +  *LATEST* - Read only new records.
+  +  *TRIM_HORIZON* - Process all available records.
+  +  *AT_TIMESTAMP* - Specify a time from which to start reading records.
+- `starting_position_timestamp` (Number) With ``StartingPosition`` set to ``AT_TIMESTAMP``, the time from which to start reading, in Unix time seconds. ``StartingPositionTimestamp`` cannot be in the future.
+- `tags` (Attributes Set) A list of tags to add to the event source mapping.
+  You must have the ``lambda:TagResource``, ``lambda:UntagResource``, and ``lambda:ListTags`` permissions for your [principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html) to manage the CFN stack. If you don't have these permissions, there might be unexpected behavior with stack-level tags propagating to the resource during resource creation and update. (see [below for nested schema](#nestedatt--tags))
+- `topics` (List of String) The name of the Kafka topic.
+- `tumbling_window_in_seconds` (Number) (Kinesis and DynamoDB Streams only) The duration in seconds of a processing window for DynamoDB and Kinesis Streams event sources. A value of 0 seconds indicates no tumbling window.
 
 ### Read-Only
 
-- `id` (String) Event Source Mapping Identifier UUID.
+- `event_source_mapping_arn` (String)
+- `event_source_mapping_id` (String)
+- `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--amazon_managed_kafka_event_source_config"></a>
+### Nested Schema for `amazon_managed_kafka_event_source_config`
+
+Optional:
+
+- `consumer_group_id` (String) The identifier for the Kafka consumer group to join. The consumer group ID must be unique among all your Kafka event sources. After creating a Kafka event source mapping with the consumer group ID specified, you cannot update this value. For more information, see [Customizable consumer group ID](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-consumer-group-id).
+- `schema_registry_config` (Attributes) Specific configuration settings for a Kafka schema registry. (see [below for nested schema](#nestedatt--amazon_managed_kafka_event_source_config--schema_registry_config))
+
+<a id="nestedatt--amazon_managed_kafka_event_source_config--schema_registry_config"></a>
+### Nested Schema for `amazon_managed_kafka_event_source_config.schema_registry_config`
+
+Optional:
+
+- `access_configs` (Attributes List) An array of access configuration objects that tell Lambda how to authenticate with your schema registry. (see [below for nested schema](#nestedatt--amazon_managed_kafka_event_source_config--schema_registry_config--access_configs))
+- `event_record_format` (String) The record format that Lambda delivers to your function after schema validation.
+  +  Choose ``JSON`` to have Lambda deliver the record to your function as a standard JSON object.
+  +  Choose ``SOURCE`` to have Lambda deliver the record to your function in its original source format. Lambda removes all schema metadata, such as the schema ID, before sending the record to your function.
+- `schema_registry_uri` (String) The URI for your schema registry. The correct URI format depends on the type of schema registry you're using.
+  +  For GLU schema registries, use the ARN of the registry.
+  +  For Confluent schema registries, use the URL of the registry.
+- `schema_validation_configs` (Attributes List) An array of schema validation configuration objects, which tell Lambda the message attributes you want to validate and filter using your schema registry. (see [below for nested schema](#nestedatt--amazon_managed_kafka_event_source_config--schema_registry_config--schema_validation_configs))
+
+<a id="nestedatt--amazon_managed_kafka_event_source_config--schema_registry_config--access_configs"></a>
+### Nested Schema for `amazon_managed_kafka_event_source_config.schema_registry_config.access_configs`
+
+Optional:
+
+- `type` (String) The type of authentication Lambda uses to access your schema registry.
+- `uri` (String) The URI of the secret (Secrets Manager secret ARN) to authenticate with your schema registry.
+
+
+<a id="nestedatt--amazon_managed_kafka_event_source_config--schema_registry_config--schema_validation_configs"></a>
+### Nested Schema for `amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs`
+
+Optional:
+
+- `attribute` (String) The attributes you want your schema registry to validate and filter for. If you selected ``JSON`` as the ``EventRecordFormat``, Lambda also deserializes the selected message attributes.
+
+
+
 
 <a id="nestedatt--destination_config"></a>
 ### Nested Schema for `destination_config`
@@ -57,7 +149,19 @@ Optional:
 Optional:
 
 - `destination` (String) The Amazon Resource Name (ARN) of the destination resource.
+ To retain records of unsuccessful [asynchronous invocations](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations), you can configure an Amazon SNS topic, Amazon SQS queue, Amazon S3 bucket, Lambda function, or Amazon EventBridge event bus as the destination.
+ To retain records of failed invocations from [Kinesis](https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html), [DynamoDB](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html), [self-managed Kafka](https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-smaa-onfailure-destination) or [Amazon MSK](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-onfailure-destination), you can configure an Amazon SNS topic, Amazon SQS queue, or Amazon S3 bucket as the destination.
 
+
+
+<a id="nestedatt--document_db_event_source_config"></a>
+### Nested Schema for `document_db_event_source_config`
+
+Optional:
+
+- `collection_name` (String) The name of the collection to consume within the database. If you do not specify a collection, Lambda consumes all collections.
+- `database_name` (String) The name of the database to consume within the DocumentDB cluster.
+- `full_document` (String) Determines what DocumentDB sends to your event stream during document update operations. If set to UpdateLookup, DocumentDB sends a delta describing the changes, along with a copy of the entire document. Otherwise, DocumentDB sends only a partial document that contains the changes.
 
 
 <a id="nestedatt--filter_criteria"></a>
@@ -65,15 +169,40 @@ Optional:
 
 Optional:
 
-- `filters` (Attributes List) List of filters of this FilterCriteria (see [below for nested schema](#nestedatt--filter_criteria--filters))
+- `filters` (Attributes List) A list of filters. (see [below for nested schema](#nestedatt--filter_criteria--filters))
 
 <a id="nestedatt--filter_criteria--filters"></a>
 ### Nested Schema for `filter_criteria.filters`
 
 Optional:
 
-- `pattern` (String) The filter pattern that defines which events should be passed for invocations.
+- `pattern` (String) A filter pattern. For more information on the syntax of a filter pattern, see [Filter rule syntax](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-syntax).
 
+
+
+<a id="nestedatt--metrics_config"></a>
+### Nested Schema for `metrics_config`
+
+Optional:
+
+- `metrics` (List of String) The metrics you want your event source mapping to produce. Include ``EventCount`` to receive event source mapping metrics related to the number of events processed by your event source mapping. For more information about these metrics, see [Event source mapping metrics](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics).
+
+
+<a id="nestedatt--provisioned_poller_config"></a>
+### Nested Schema for `provisioned_poller_config`
+
+Optional:
+
+- `maximum_pollers` (Number) The maximum number of event pollers this event source can scale up to.
+- `minimum_pollers` (Number) The minimum number of event pollers this event source can scale down to.
+
+
+<a id="nestedatt--scaling_config"></a>
+### Nested Schema for `scaling_config`
+
+Optional:
+
+- `maximum_concurrency` (Number) Limits the number of concurrent instances that the SQS event source can invoke.
 
 
 <a id="nestedatt--self_managed_event_source"></a>
@@ -81,14 +210,55 @@ Optional:
 
 Optional:
 
-- `endpoints` (Attributes) The endpoints for a self-managed event source. (see [below for nested schema](#nestedatt--self_managed_event_source--endpoints))
+- `endpoints` (Attributes) The list of bootstrap servers for your Kafka brokers in the following format: ``"KafkaBootstrapServers": ["abc.xyz.com:xxxx","abc2.xyz.com:xxxx"]``. (see [below for nested schema](#nestedatt--self_managed_event_source--endpoints))
 
 <a id="nestedatt--self_managed_event_source--endpoints"></a>
 ### Nested Schema for `self_managed_event_source.endpoints`
 
 Optional:
 
-- `kafka_bootstrap_servers` (List of String) A list of Kafka server endpoints.
+- `kafka_bootstrap_servers` (List of String) The list of bootstrap servers for your Kafka brokers in the following format: ``"KafkaBootstrapServers": ["abc.xyz.com:xxxx","abc2.xyz.com:xxxx"]``.
+
+
+
+<a id="nestedatt--self_managed_kafka_event_source_config"></a>
+### Nested Schema for `self_managed_kafka_event_source_config`
+
+Optional:
+
+- `consumer_group_id` (String) The identifier for the Kafka consumer group to join. The consumer group ID must be unique among all your Kafka event sources. After creating a Kafka event source mapping with the consumer group ID specified, you cannot update this value. For more information, see [Customizable consumer group ID](https://docs.aws.amazon.com/lambda/latest/dg/with-kafka-process.html#services-smaa-topic-add).
+- `schema_registry_config` (Attributes) Specific configuration settings for a Kafka schema registry. (see [below for nested schema](#nestedatt--self_managed_kafka_event_source_config--schema_registry_config))
+
+<a id="nestedatt--self_managed_kafka_event_source_config--schema_registry_config"></a>
+### Nested Schema for `self_managed_kafka_event_source_config.schema_registry_config`
+
+Optional:
+
+- `access_configs` (Attributes List) An array of access configuration objects that tell Lambda how to authenticate with your schema registry. (see [below for nested schema](#nestedatt--self_managed_kafka_event_source_config--schema_registry_config--access_configs))
+- `event_record_format` (String) The record format that Lambda delivers to your function after schema validation.
+  +  Choose ``JSON`` to have Lambda deliver the record to your function as a standard JSON object.
+  +  Choose ``SOURCE`` to have Lambda deliver the record to your function in its original source format. Lambda removes all schema metadata, such as the schema ID, before sending the record to your function.
+- `schema_registry_uri` (String) The URI for your schema registry. The correct URI format depends on the type of schema registry you're using.
+  +  For GLU schema registries, use the ARN of the registry.
+  +  For Confluent schema registries, use the URL of the registry.
+- `schema_validation_configs` (Attributes List) An array of schema validation configuration objects, which tell Lambda the message attributes you want to validate and filter using your schema registry. (see [below for nested schema](#nestedatt--self_managed_kafka_event_source_config--schema_registry_config--schema_validation_configs))
+
+<a id="nestedatt--self_managed_kafka_event_source_config--schema_registry_config--access_configs"></a>
+### Nested Schema for `self_managed_kafka_event_source_config.schema_registry_config.access_configs`
+
+Optional:
+
+- `type` (String) The type of authentication Lambda uses to access your schema registry.
+- `uri` (String) The URI of the secret (Secrets Manager secret ARN) to authenticate with your schema registry.
+
+
+<a id="nestedatt--self_managed_kafka_event_source_config--schema_registry_config--schema_validation_configs"></a>
+### Nested Schema for `self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs`
+
+Optional:
+
+- `attribute` (String) The attributes you want your schema registry to validate and filter for. If you selected ``JSON`` as the ``EventRecordFormat``, Lambda also deserializes the selected message attributes.
+
 
 
 
@@ -97,13 +267,65 @@ Optional:
 
 Optional:
 
-- `type` (String) The type of source access configuration.
-- `uri` (String) The URI for the source access configuration resource.
+- `type` (String) The type of authentication protocol, VPC components, or virtual host for your event source. For example: ``"Type":"SASL_SCRAM_512_AUTH"``.
+  +  ``BASIC_AUTH`` ? (Amazon MQ) The ASMlong secret that stores your broker credentials.
+  +  ``BASIC_AUTH`` ? (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL/PLAIN authentication of your Apache Kafka brokers.
+  +  ``VPC_SUBNET`` ? (Self-managed Apache Kafka) The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your self-managed Apache Kafka cluster.
+  +  ``VPC_SECURITY_GROUP`` ? (Self-managed Apache Kafka) The VPC security group used to manage access to your self-managed Apache Kafka brokers.
+  +  ``SASL_SCRAM_256_AUTH`` ? (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your self-managed Apache Kafka brokers.
+  +  ``SASL_SCRAM_512_AUTH`` ? (Amazon MSK, Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.
+  +  ``VIRTUAL_HOST`` ?- (RabbitMQ) The name of the virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the event source. This property cannot be specified in an UpdateEventSourceMapping API call.
+  +  ``CLIENT_CERTIFICATE_TLS_AUTH`` ? (Amazon MSK, self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the certificate chain (X.509 PEM), private key (PKCS#8 PEM), and private key password (optional) used for mutual TLS authentication of your MSK/Apache Kafka brokers.
+  +  ``SERVER_ROOT_CA_CERTIFICATE`` ? (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the root CA certificate (X.509 PEM) used for TLS encryption of your Apache Kafka brokers.
+- `uri` (String) The value for your chosen configuration in ``Type``. For example: ``"URI": "arn:aws:secretsmanager:us-east-1:01234567890:secret:MyBrokerSecretName"``.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) The key for this tag.
+- `value` (String) The value for this tag.
 
 ## Import
 
 Import is supported using the following syntax:
 
+In Terraform v1.12.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `identity` attribute, for example:
+
+```terraform
+import {
+  to = awscc_lambda_event_source_mapping.example
+  identity = {
+    id = "id"
+  }
+}
+```
+
+<!-- schema generated by tfplugindocs -->
+### Identity Schema
+
+#### Required
+
+- `id` (String)
+
+#### Optional
+
+- `account_id` (String) AWS Account where this resource is managed
+- `region` (String) Region where this resource is managed
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_lambda_event_source_mapping.example
+  id = "id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
-$ terraform import awscc_lambda_event_source_mapping.example <resource ID>
+$ terraform import awscc_lambda_event_source_mapping.example "id"
 ```

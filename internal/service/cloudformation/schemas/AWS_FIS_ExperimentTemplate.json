@@ -35,6 +35,20 @@
         "Source"
       ]
     },
+    "CloudWatchDashboard": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "DashboardIdentifier": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        }
+      },
+      "required": [
+        "DashboardIdentifier"
+      ]
+    },
     "ExperimentTemplateStopConditionList": {
       "type": "array",
       "description": "One or more stop conditions.",
@@ -264,7 +278,7 @@
             "Prefix": {
               "type": "string",
               "minLength": 1,
-              "maxLength": 1024
+              "maxLength": 700
             }
           },
           "required": [
@@ -279,6 +293,83 @@
       "required": [
         "LogSchemaVersion"
       ]
+    },
+    "ExperimentTemplateExperimentOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AccountTargeting": {
+          "type": "string",
+          "description": "The account targeting setting for the experiment template.",
+          "enum": [
+            "multi-account",
+            "single-account"
+          ]
+        },
+        "EmptyTargetResolutionMode": {
+          "type": "string",
+          "description": "The target resolution failure mode for the experiment template.",
+          "enum": [
+            "fail",
+            "skip"
+          ]
+        }
+      }
+    },
+    "ExperimentTemplateExperimentReportConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "Outputs"
+      ],
+      "properties": {
+        "Outputs": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ExperimentReportS3Configuration": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "BucketName": {
+                  "type": "string",
+                  "minLength": 3,
+                  "maxLength": 63
+                },
+                "Prefix": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 256
+                }
+              },
+              "required": [
+                "BucketName"
+              ]
+            }
+          },
+          "required": [
+            "ExperimentReportS3Configuration"
+          ]
+        },
+        "DataSources": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "CloudWatchDashboards": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CloudWatchDashboard"
+              }
+            }
+          }
+        },
+        "PreExperimentDuration": {
+          "type": "string"
+        },
+        "PostExperimentDuration": {
+          "type": "string"
+        }
+      }
     },
     "RoleArn": {
       "type": "string",
@@ -317,6 +408,12 @@
         }
       },
       "additionalProperties": false
+    },
+    "ExperimentOptions": {
+      "$ref": "#/definitions/ExperimentTemplateExperimentOptions"
+    },
+    "ExperimentReportConfiguration": {
+      "$ref": "#/definitions/ExperimentTemplateExperimentReportConfiguration"
     }
   },
   "additionalProperties": false,
@@ -324,32 +421,49 @@
     "Description",
     "StopConditions",
     "Targets",
-    "RoleArn",
-    "Tags"
+    "RoleArn"
   ],
   "readOnlyProperties": [
     "/properties/Id"
   ],
   "createOnlyProperties": [
-    "/properties/Tags"
+    "/properties/ExperimentOptions/AccountTargeting"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "fis:TagResource",
+      "fis:UntagResource",
+      "fis:ListTagsForResource"
+    ]
+  },
   "primaryIdentifier": [
     "/properties/Id"
   ],
   "handlers": {
     "create": {
       "permissions": [
-        "fis:CreateExperimentTemplate"
+        "fis:CreateExperimentTemplate",
+        "fis:TagResource",
+        "iam:PassRole"
       ]
     },
     "read": {
       "permissions": [
-        "fis:GetExperimentTemplate"
+        "fis:GetExperimentTemplate",
+        "fis:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
-        "fis:UpdateExperimentTemplate"
+        "fis:UpdateExperimentTemplate",
+        "fis:TagResource",
+        "fis:UntagResource",
+        "iam:PassRole"
       ]
     },
     "delete": {
@@ -359,7 +473,8 @@
     },
     "list": {
       "permissions": [
-        "fis:ListExperimentTemplates"
+        "fis:ListExperimentTemplates",
+        "fis:ListTagsForResource"
       ]
     }
   }

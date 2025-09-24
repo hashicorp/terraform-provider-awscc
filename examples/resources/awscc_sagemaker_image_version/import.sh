@@ -1,1 +1,1 @@
-$ terraform import awscc_sagemaker_image_version.example <resource ID>
+$ terraform import awscc_sagemaker_image_version.example "image_version_arn"

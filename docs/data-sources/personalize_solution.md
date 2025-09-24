@@ -69,7 +69,7 @@ Read-Only:
 - `integer_hyper_parameter_ranges` (Attributes List) The integer hyperparameters and their ranges. (see [below for nested schema](#nestedatt--solution_config--hpo_config--algorithm_hyper_parameter_ranges--integer_hyper_parameter_ranges))
 
 <a id="nestedatt--solution_config--hpo_config--algorithm_hyper_parameter_ranges--categorical_hyper_parameter_ranges"></a>
-### Nested Schema for `solution_config.hpo_config.algorithm_hyper_parameter_ranges.integer_hyper_parameter_ranges`
+### Nested Schema for `solution_config.hpo_config.algorithm_hyper_parameter_ranges.categorical_hyper_parameter_ranges`
 
 Read-Only:
 
@@ -78,7 +78,7 @@ Read-Only:
 
 
 <a id="nestedatt--solution_config--hpo_config--algorithm_hyper_parameter_ranges--continuous_hyper_parameter_ranges"></a>
-### Nested Schema for `solution_config.hpo_config.algorithm_hyper_parameter_ranges.integer_hyper_parameter_ranges`
+### Nested Schema for `solution_config.hpo_config.algorithm_hyper_parameter_ranges.continuous_hyper_parameter_ranges`
 
 Read-Only:
 
@@ -115,5 +115,3 @@ Read-Only:
 
 - `max_number_of_training_jobs` (String) The maximum number of training jobs when you create a solution version. The maximum value for maxNumberOfTrainingJobs is 40.
 - `max_parallel_training_jobs` (String) The maximum number of parallel training jobs when you create a solution version. The maximum value for maxParallelTrainingJobs is 10.
-
-

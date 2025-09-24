@@ -1,0 +1,95 @@
+{
+  "typeName": "AWS::SecurityHub::HubV2",
+  "description": "The AWS::SecurityHub::HubV2 resource represents the implementation of the AWS Security Hub V2 service in your account. Only one hubv2 resource can created in each region in which you enable Security Hub V2.",
+  "sourceUrl": "https://placeholder.notreal",
+  "definitions": {
+    "Tags": {
+      "description": "A key-value pair to associate with the Security Hub V2 resource. You can specify a key that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "additionalProperties": false,
+      "maxProperties": 50
+    },
+    "ISO8601DateString": {
+      "type": "string",
+      "pattern": "^(\\d\\d\\d\\d)-([0][1-9]|[1][0-2])-([0][1-9]|[1-2](\\d)|[3][0-1])[T](?:([0-1](\\d)|[2][0-3]):[0-5](\\d):[0-5](\\d)|23:59:60)(?:\\.(\\d)+)?([Z]|[+-](\\d\\d)(:?(\\d\\d))?)$"
+    }
+  },
+  "properties": {
+    "HubV2Arn": {
+      "description": "The Amazon Resource Name of the Security Hub V2 resource.",
+      "type": "string",
+      "pattern": ""
+    },
+    "SubscribedAt": {
+      "$ref": "#/definitions/ISO8601DateString"
+    },
+    "Tags": {
+      "$ref": "#/definitions/Tags"
+    }
+  },
+  "replacementStrategy": "delete_then_create",
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/HubV2Arn"
+  ],
+  "readOnlyProperties": [
+    "/properties/HubV2Arn",
+    "/properties/SubscribedAt"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "securityhub:ListTagsForResource",
+      "securityhub:TagResource",
+      "securityhub:UntagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "securityhub:EnableSecurityHubV2",
+        "securityhub:DescribeSecurityHubV2",
+        "securityhub:TagResource",
+        "iam:CreateServiceLinkedRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "securityhub:DescribeSecurityHubV2",
+        "securityhub:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "securityhub:DescribeSecurityHubV2",
+        "securityhub:TagResource",
+        "securityhub:UntagResource",
+        "securityhub:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "securityhub:DescribeSecurityHubV2",
+        "securityhub:DisableSecurityHubV2"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "securityhub:DescribeSecurityHubV2",
+        "securityhub:ListTagsForResource"
+      ]
+    }
+  }
+}

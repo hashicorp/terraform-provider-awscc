@@ -40,5 +40,3 @@ Read-Only:
 Read-Only:
 
 - `source_bot_version` (String) The version of a bot.
-
-

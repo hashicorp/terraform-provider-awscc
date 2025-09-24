@@ -36,7 +36,8 @@
       "type": "string",
       "enum": [
         "RuleName",
-        "MqttTopic"
+        "MqttTopic",
+        "SnsTopic"
       ]
     },
     "Description": {
@@ -69,8 +70,7 @@
   "required": [
     "Name",
     "Expression",
-    "ExpressionType",
-    "RoleArn"
+    "ExpressionType"
   ],
   "readOnlyProperties": [
     "/properties/Arn"
@@ -81,13 +81,24 @@
   "primaryIdentifier": [
     "/properties/Name"
   ],
-  "taggable": true,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "iotwireless:TagResource",
+      "iotwireless:UntagResource",
+      "iotwireless:ListTagsForResource"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
+        "iam:PassRole",
         "iotwireless:CreateDestination",
-        "iotwireless:TagResource",
-        "iotwireless:ListTagsForResource"
+        "iotwireless:TagResource"
       ]
     },
     "read": {
@@ -98,9 +109,11 @@
     },
     "update": {
       "permissions": [
+        "iam:PassRole",
+        "iotwireless:GetDestination",
         "iotwireless:UpdateDestination",
         "iotwireless:UntagResource",
-        "iotwireless:ListTagsForResource"
+        "iotwireless:TagResource"
       ]
     },
     "delete": {

@@ -43,12 +43,180 @@ Read-Only:
 
 Read-Only:
 
+- `auto_mount_home_efs` (String) Indicates whether auto-mounting of an EFS volume is supported for the user profile.
+- `code_editor_app_settings` (Attributes) The CodeEditor app settings. (see [below for nested schema](#nestedatt--user_settings--code_editor_app_settings))
+- `custom_file_system_configs` (Attributes List) (see [below for nested schema](#nestedatt--user_settings--custom_file_system_configs))
+- `custom_posix_user_config` (Attributes) (see [below for nested schema](#nestedatt--user_settings--custom_posix_user_config))
+- `default_landing_uri` (String) Defines which Amazon SageMaker application users are directed to by default.
 - `execution_role` (String) The user profile Amazon Resource Name (ARN).
+- `jupyter_lab_app_settings` (Attributes) The JupyterLab app settings. (see [below for nested schema](#nestedatt--user_settings--jupyter_lab_app_settings))
 - `jupyter_server_app_settings` (Attributes) The Jupyter server's app settings. (see [below for nested schema](#nestedatt--user_settings--jupyter_server_app_settings))
 - `kernel_gateway_app_settings` (Attributes) The kernel gateway app settings. (see [below for nested schema](#nestedatt--user_settings--kernel_gateway_app_settings))
 - `r_studio_server_pro_app_settings` (Attributes) A collection of settings that configure user interaction with the RStudioServerPro app. (see [below for nested schema](#nestedatt--user_settings--r_studio_server_pro_app_settings))
 - `security_groups` (List of String) The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
 - `sharing_settings` (Attributes) The sharing settings. (see [below for nested schema](#nestedatt--user_settings--sharing_settings))
+- `space_storage_settings` (Attributes) Default storage settings for a space. (see [below for nested schema](#nestedatt--user_settings--space_storage_settings))
+- `studio_web_portal` (String) Indicates whether the Studio experience is available to users. If not, users cannot access Studio.
+- `studio_web_portal_settings` (Attributes) Studio settings. If these settings are applied on a user level, they take priority over the settings applied on a domain level. (see [below for nested schema](#nestedatt--user_settings--studio_web_portal_settings))
+
+<a id="nestedatt--user_settings--code_editor_app_settings"></a>
+### Nested Schema for `user_settings.code_editor_app_settings`
+
+Read-Only:
+
+- `app_lifecycle_management` (Attributes) (see [below for nested schema](#nestedatt--user_settings--code_editor_app_settings--app_lifecycle_management))
+- `built_in_lifecycle_config_arn` (String) The lifecycle configuration that runs before the default lifecycle configuration.
+- `custom_images` (Attributes List) A list of custom images for use for CodeEditor apps. (see [below for nested schema](#nestedatt--user_settings--code_editor_app_settings--custom_images))
+- `default_resource_spec` (Attributes) The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the CodeEditor app. (see [below for nested schema](#nestedatt--user_settings--code_editor_app_settings--default_resource_spec))
+- `lifecycle_config_arns` (List of String) A list of LifecycleConfigArns available for use with CodeEditor apps.
+
+<a id="nestedatt--user_settings--code_editor_app_settings--app_lifecycle_management"></a>
+### Nested Schema for `user_settings.code_editor_app_settings.app_lifecycle_management`
+
+Read-Only:
+
+- `idle_settings` (Attributes) (see [below for nested schema](#nestedatt--user_settings--code_editor_app_settings--app_lifecycle_management--idle_settings))
+
+<a id="nestedatt--user_settings--code_editor_app_settings--app_lifecycle_management--idle_settings"></a>
+### Nested Schema for `user_settings.code_editor_app_settings.app_lifecycle_management.idle_settings`
+
+Read-Only:
+
+- `idle_timeout_in_minutes` (Number) The idle timeout value set in minutes
+- `lifecycle_management` (String) A flag to enable/disable AppLifecycleManagement settings
+- `max_idle_timeout_in_minutes` (Number) The maximum idle timeout value set in minutes
+- `min_idle_timeout_in_minutes` (Number) The minimum idle timeout value set in minutes
+
+
+
+<a id="nestedatt--user_settings--code_editor_app_settings--custom_images"></a>
+### Nested Schema for `user_settings.code_editor_app_settings.custom_images`
+
+Read-Only:
+
+- `app_image_config_name` (String) The Name of the AppImageConfig.
+- `image_name` (String) The name of the CustomImage. Must be unique to your account.
+- `image_version_number` (Number) The version number of the CustomImage.
+
+
+<a id="nestedatt--user_settings--code_editor_app_settings--default_resource_spec"></a>
+### Nested Schema for `user_settings.code_editor_app_settings.default_resource_spec`
+
+Read-Only:
+
+- `instance_type` (String) The instance type that the image version runs on.
+- `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
+- `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
+- `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
+
+
+
+<a id="nestedatt--user_settings--custom_file_system_configs"></a>
+### Nested Schema for `user_settings.custom_file_system_configs`
+
+Read-Only:
+
+- `efs_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--user_settings--custom_file_system_configs--efs_file_system_config))
+- `fsx_lustre_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--user_settings--custom_file_system_configs--fsx_lustre_file_system_config))
+- `s3_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--user_settings--custom_file_system_configs--s3_file_system_config))
+
+<a id="nestedatt--user_settings--custom_file_system_configs--efs_file_system_config"></a>
+### Nested Schema for `user_settings.custom_file_system_configs.efs_file_system_config`
+
+Read-Only:
+
+- `file_system_id` (String)
+- `file_system_path` (String)
+
+
+<a id="nestedatt--user_settings--custom_file_system_configs--fsx_lustre_file_system_config"></a>
+### Nested Schema for `user_settings.custom_file_system_configs.fsx_lustre_file_system_config`
+
+Read-Only:
+
+- `file_system_id` (String)
+- `file_system_path` (String)
+
+
+<a id="nestedatt--user_settings--custom_file_system_configs--s3_file_system_config"></a>
+### Nested Schema for `user_settings.custom_file_system_configs.s3_file_system_config`
+
+Read-Only:
+
+- `mount_path` (String)
+- `s3_uri` (String)
+
+
+
+<a id="nestedatt--user_settings--custom_posix_user_config"></a>
+### Nested Schema for `user_settings.custom_posix_user_config`
+
+Read-Only:
+
+- `gid` (Number)
+- `uid` (Number)
+
+
+<a id="nestedatt--user_settings--jupyter_lab_app_settings"></a>
+### Nested Schema for `user_settings.jupyter_lab_app_settings`
+
+Read-Only:
+
+- `app_lifecycle_management` (Attributes) (see [below for nested schema](#nestedatt--user_settings--jupyter_lab_app_settings--app_lifecycle_management))
+- `built_in_lifecycle_config_arn` (String) The lifecycle configuration that runs before the default lifecycle configuration.
+- `code_repositories` (Attributes List) A list of CodeRepositories available for use with JupyterLab apps. (see [below for nested schema](#nestedatt--user_settings--jupyter_lab_app_settings--code_repositories))
+- `custom_images` (Attributes List) A list of custom images available for use for JupyterLab apps (see [below for nested schema](#nestedatt--user_settings--jupyter_lab_app_settings--custom_images))
+- `default_resource_spec` (Attributes) The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterLab app. (see [below for nested schema](#nestedatt--user_settings--jupyter_lab_app_settings--default_resource_spec))
+- `lifecycle_config_arns` (List of String) A list of LifecycleConfigArns available for use with JupyterLab apps.
+
+<a id="nestedatt--user_settings--jupyter_lab_app_settings--app_lifecycle_management"></a>
+### Nested Schema for `user_settings.jupyter_lab_app_settings.app_lifecycle_management`
+
+Read-Only:
+
+- `idle_settings` (Attributes) (see [below for nested schema](#nestedatt--user_settings--jupyter_lab_app_settings--app_lifecycle_management--idle_settings))
+
+<a id="nestedatt--user_settings--jupyter_lab_app_settings--app_lifecycle_management--idle_settings"></a>
+### Nested Schema for `user_settings.jupyter_lab_app_settings.app_lifecycle_management.idle_settings`
+
+Read-Only:
+
+- `idle_timeout_in_minutes` (Number) The idle timeout value set in minutes
+- `lifecycle_management` (String) A flag to enable/disable AppLifecycleManagement settings
+- `max_idle_timeout_in_minutes` (Number) The maximum idle timeout value set in minutes
+- `min_idle_timeout_in_minutes` (Number) The minimum idle timeout value set in minutes
+
+
+
+<a id="nestedatt--user_settings--jupyter_lab_app_settings--code_repositories"></a>
+### Nested Schema for `user_settings.jupyter_lab_app_settings.code_repositories`
+
+Read-Only:
+
+- `repository_url` (String) A CodeRepository (valid URL) to be used within Jupyter's Git extension.
+
+
+<a id="nestedatt--user_settings--jupyter_lab_app_settings--custom_images"></a>
+### Nested Schema for `user_settings.jupyter_lab_app_settings.custom_images`
+
+Read-Only:
+
+- `app_image_config_name` (String) The Name of the AppImageConfig.
+- `image_name` (String) The name of the CustomImage. Must be unique to your account.
+- `image_version_number` (Number) The version number of the CustomImage.
+
+
+<a id="nestedatt--user_settings--jupyter_lab_app_settings--default_resource_spec"></a>
+### Nested Schema for `user_settings.jupyter_lab_app_settings.default_resource_spec`
+
+Read-Only:
+
+- `instance_type` (String) The instance type that the image version runs on.
+- `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
+- `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
+- `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
+
+
 
 <a id="nestedatt--user_settings--jupyter_server_app_settings"></a>
 ### Nested Schema for `user_settings.jupyter_server_app_settings`
@@ -56,6 +224,7 @@ Read-Only:
 Read-Only:
 
 - `default_resource_spec` (Attributes) (see [below for nested schema](#nestedatt--user_settings--jupyter_server_app_settings--default_resource_spec))
+- `lifecycle_config_arns` (List of String) A list of LifecycleConfigArns available for use with JupyterServer apps.
 
 <a id="nestedatt--user_settings--jupyter_server_app_settings--default_resource_spec"></a>
 ### Nested Schema for `user_settings.jupyter_server_app_settings.default_resource_spec`
@@ -63,6 +232,7 @@ Read-Only:
 Read-Only:
 
 - `instance_type` (String) The instance type that the image version runs on.
+- `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
 - `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
 
@@ -75,6 +245,7 @@ Read-Only:
 
 - `custom_images` (Attributes List) A list of custom SageMaker images that are configured to run as a KernelGateway app. (see [below for nested schema](#nestedatt--user_settings--kernel_gateway_app_settings--custom_images))
 - `default_resource_spec` (Attributes) The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app. (see [below for nested schema](#nestedatt--user_settings--kernel_gateway_app_settings--default_resource_spec))
+- `lifecycle_config_arns` (List of String) A list of LifecycleConfigArns available for use with KernelGateway apps.
 
 <a id="nestedatt--user_settings--kernel_gateway_app_settings--custom_images"></a>
 ### Nested Schema for `user_settings.kernel_gateway_app_settings.custom_images`
@@ -92,6 +263,7 @@ Read-Only:
 Read-Only:
 
 - `instance_type` (String) The instance type that the image version runs on.
+- `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
 - `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
 
@@ -116,3 +288,37 @@ Read-Only:
 - `s3_output_path` (String) When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.
 
 
+<a id="nestedatt--user_settings--space_storage_settings"></a>
+### Nested Schema for `user_settings.space_storage_settings`
+
+Read-Only:
+
+- `default_ebs_storage_settings` (Attributes) Properties related to the Amazon Elastic Block Store volume. (see [below for nested schema](#nestedatt--user_settings--space_storage_settings--default_ebs_storage_settings))
+
+<a id="nestedatt--user_settings--space_storage_settings--default_ebs_storage_settings"></a>
+### Nested Schema for `user_settings.space_storage_settings.default_ebs_storage_settings`
+
+Read-Only:
+
+- `default_ebs_volume_size_in_gb` (Number) Default size of the Amazon EBS volume in Gb
+- `maximum_ebs_volume_size_in_gb` (Number) Maximum size of the Amazon EBS volume in Gb. Must be greater than or equal to the DefaultEbsVolumeSizeInGb.
+
+
+
+<a id="nestedatt--user_settings--studio_web_portal_settings"></a>
+### Nested Schema for `user_settings.studio_web_portal_settings`
+
+Read-Only:
+
+- `hidden_app_types` (Set of String) Applications supported in Studio that are hidden from the Studio left navigation pane.
+- `hidden_instance_types` (Set of String) The instance types you are hiding from the Studio user interface.
+- `hidden_ml_tools` (Set of String) The machine learning tools that are hidden from the Studio left navigation pane.
+- `hidden_sage_maker_image_version_aliases` (Attributes Set) The version aliases you are hiding from the Studio user interface. (see [below for nested schema](#nestedatt--user_settings--studio_web_portal_settings--hidden_sage_maker_image_version_aliases))
+
+<a id="nestedatt--user_settings--studio_web_portal_settings--hidden_sage_maker_image_version_aliases"></a>
+### Nested Schema for `user_settings.studio_web_portal_settings.hidden_sage_maker_image_version_aliases`
+
+Read-Only:
+
+- `sage_maker_image_name` (String) The SageMaker image name that you are hiding from the Studio user interface.
+- `version_aliases` (List of String)

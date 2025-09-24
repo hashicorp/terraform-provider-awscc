@@ -1,28 +1,31 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 package generic
 
 import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/attr"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
+	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-go/tftypes"
-	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
-// CopyValueAtPath copies the value at a specified path from source State to destination State.
-func CopyValueAtPath(ctx context.Context, dst, src *tfsdk.State, path *tftypes.AttributePath) error {
+// copyStateValueAtPath copies the value at a specified path from source State to destination State.
+func copyStateValueAtPath(ctx context.Context, dst, src *tfsdk.State, p path.Path) diag.Diagnostics {
+	var diags diag.Diagnostics
 	var val attr.Value
-	diags := src.GetAttribute(ctx, path, &val)
 
+	diags.Append(src.GetAttribute(ctx, p, &val)...)
 	if diags.HasError() {
-		return tfresource.DiagsError(diags)
+		return diags
 	}
 
-	diags = dst.SetAttribute(ctx, path, val)
-
+	diags.Append(dst.SetAttribute(ctx, p, val)...)
 	if diags.HasError() {
-		return tfresource.DiagsError(diags)
+		return diags
 	}
 
-	return nil
+	return diags
 }

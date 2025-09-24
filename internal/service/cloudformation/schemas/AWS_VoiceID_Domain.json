@@ -78,11 +78,6 @@
   "readOnlyProperties": [
     "/properties/DomainId"
   ],
-  "writeOnlyProperties": [
-    "/properties/Description",
-    "/properties/Name",
-    "/properties/ServerSideEncryptionConfiguration"
-  ],
   "primaryIdentifier": [
     "/properties/DomainId"
   ],
@@ -91,32 +86,54 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": true,
-    "tagProperty": "#/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "voiceid:TagResource",
+      "voiceid:UntagResource"
+    ]
   },
   "handlers": {
     "create": {
       "permissions": [
-        "voiceid:CreateDomain"
+        "voiceid:CreateDomain",
+        "voiceid:DescribeDomain",
+        "voiceid:TagResource",
+        "voiceid:ListTagsForResource",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:Decrypt"
       ]
     },
     "read": {
       "permissions": [
-        "voiceid:DescribeDomain"
+        "voiceid:DescribeDomain",
+        "voiceid:ListTagsForResource",
+        "kms:Decrypt"
       ]
     },
     "update": {
       "permissions": [
-        "voiceid:UpdateDomain"
+        "voiceid:DescribeDomain",
+        "voiceid:UpdateDomain",
+        "voiceid:TagResource",
+        "voiceid:UntagResource",
+        "voiceid:ListTagsForResource",
+        "kms:CreateGrant",
+        "kms:Decrypt",
+        "kms:DescribeKey"
       ]
     },
     "delete": {
       "permissions": [
-        "voiceid:DeleteDomain"
+        "voiceid:DeleteDomain",
+        "voiceid:DescribeDomain",
+        "kms:Decrypt"
       ]
     },
     "list": {
       "permissions": [
-        "voiceid:ListDomains"
+        "voiceid:ListDomains",
+        "kms:Decrypt"
       ]
     }
   },

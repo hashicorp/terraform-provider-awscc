@@ -1,0 +1,1 @@
+$ terraform import awscc_codepipeline_custom_action_type.example "category|provider_name|version"

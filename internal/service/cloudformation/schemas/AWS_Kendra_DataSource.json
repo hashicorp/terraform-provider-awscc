@@ -1259,7 +1259,7 @@
           "minimum": 1,
           "maximum": 65535
         },
-        "Credentials":{
+        "Credentials": {
           "$ref": "#/definitions/SecretArn"
         }
       },
@@ -1283,7 +1283,7 @@
           "minimum": 1,
           "maximum": 65535
         },
-        "Credentials":{
+        "Credentials": {
           "$ref": "#/definitions/SecretArn"
         }
       },
@@ -1384,6 +1384,18 @@
         "OrganizationId"
       ]
     },
+    "TemplateConfiguration": {
+      "type": "object",
+      "properties": {
+        "Template": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "Template"
+      ]
+    },
     "DataSourceConfiguration": {
       "type": "object",
       "properties": {
@@ -1416,6 +1428,9 @@
         },
         "WorkDocsConfiguration": {
           "$ref": "#/definitions/WorkDocsConfiguration"
+        },
+        "TemplateConfiguration": {
+          "$ref": "#/definitions/TemplateConfiguration"
         }
       },
       "additionalProperties": false,
@@ -1469,6 +1484,11 @@
           "required": [
             "WorkDocsConfiguration"
           ]
+        },
+        {
+          "required": [
+            "TemplateConfiguration"
+          ]
         }
       ]
     },
@@ -1492,7 +1512,8 @@
         "CONFLUENCE",
         "GOOGLEDRIVE",
         "WEBCRAWLER",
-        "WORKDOCS"
+        "WORKDOCS",
+        "TEMPLATE"
       ]
     },
     "Description": {
@@ -1500,6 +1521,13 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 1000
+    },
+    "LanguageCode": {
+      "description": "The code for a language.",
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 10,
+      "pattern": "[a-zA-Z-]*"
     },
     "RoleArn": {
       "description": "Role ARN",
@@ -1578,7 +1606,8 @@
         }
       },
       "required": [
-        "ConditionDocumentAttributeKey", "Operator"
+        "ConditionDocumentAttributeKey",
+        "Operator"
       ],
       "additionalProperties": false
     },
@@ -1666,7 +1695,8 @@
         }
       },
       "required": [
-        "LambdaArn", "S3Bucket"
+        "LambdaArn",
+        "S3Bucket"
       ],
       "additionalProperties": false
     },
@@ -1710,6 +1740,9 @@
     },
     "CustomDocumentEnrichmentConfiguration": {
       "$ref": "#/definitions/CustomDocumentEnrichmentConfiguration"
+    },
+    "LanguageCode": {
+      "$ref": "#/definitions/LanguageCode"
     }
   },
   "required": [
@@ -1756,6 +1789,18 @@
       ]
     }
   },
+  "tagging": {
+    "taggable": true,
+    "tagUpdatable": true,
+    "tagOnCreate": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "kendra:UntagResource",
+      "kendra:TagResource",
+      "kendra:ListTagsForResource"
+    ]
+  },
   "additionalProperties": false,
   "primaryIdentifier": [
     "/properties/Id",
@@ -1766,6 +1811,7 @@
     "/properties/Arn"
   ],
   "createOnlyProperties": [
-    "/properties/Type"
+    "/properties/Type",
+    "/properties/IndexId"
   ]
 }

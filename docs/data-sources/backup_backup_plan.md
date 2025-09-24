@@ -41,7 +41,7 @@ Read-Only:
 
 Read-Only:
 
-- `backup_options` (Map of String)
+- `backup_options` (String)
 - `resource_type` (String)
 
 
@@ -53,10 +53,12 @@ Read-Only:
 - `completion_window_minutes` (Number)
 - `copy_actions` (Attributes List) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule--copy_actions))
 - `enable_continuous_backup` (Boolean)
+- `index_actions` (Attributes List) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule--index_actions))
 - `lifecycle` (Attributes) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule--lifecycle))
 - `recovery_point_tags` (Map of String)
 - `rule_name` (String)
 - `schedule_expression` (String)
+- `schedule_expression_timezone` (String)
 - `start_window_minutes` (Number)
 - `target_backup_vault` (String)
 
@@ -75,7 +77,16 @@ Read-Only:
 
 - `delete_after_days` (Number)
 - `move_to_cold_storage_after_days` (Number)
+- `opt_in_to_archive_for_supported_resources` (Boolean)
 
+
+
+<a id="nestedatt--backup_plan--backup_plan_rule--index_actions"></a>
+### Nested Schema for `backup_plan.backup_plan_rule.index_actions`
+
+Read-Only:
+
+- `resource_types` (List of String)
 
 
 <a id="nestedatt--backup_plan--backup_plan_rule--lifecycle"></a>
@@ -85,5 +96,4 @@ Read-Only:
 
 - `delete_after_days` (Number)
 - `move_to_cold_storage_after_days` (Number)
-
-
+- `opt_in_to_archive_for_supported_resources` (Boolean)

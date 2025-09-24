@@ -1,0 +1,83 @@
+{
+  "typeName": "AWS::S3Tables::Namespace",
+  "description": "Resource Type definition for AWS::S3Tables::Namespace",
+  "properties": {
+    "TableBucketARN": {
+      "$ref": "#/definitions/TableBucketARN"
+    },
+    "Namespace": {
+      "$ref": "#/definitions/Namespace"
+    }
+  },
+  "definitions": {
+    "TableBucketARN": {
+      "description": "The Amazon Resource Name (ARN) of the specified table bucket.",
+      "type": "string",
+      "examples": [
+        "arn:aws:s3tables:us-west-2:123456789012:bucket/mytablebucket"
+      ]
+    },
+    "Namespace": {
+      "description": "A name for the namespace.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Namespace",
+    "TableBucketARN"
+  ],
+  "createOnlyProperties": [
+    "/properties/TableBucketARN",
+    "/properties/Namespace"
+  ],
+  "primaryIdentifier": [
+    "/properties/TableBucketARN",
+    "/properties/Namespace"
+  ],
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "s3tables:CreateNamespace"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "s3tables:GetNamespace"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "s3tables:DeleteNamespace"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "TableBucketARN": {
+            "description": "The Amazon Resource Name (ARN) of the specified table bucket.",
+            "type": "string",
+            "examples": [
+              "arn:aws:s3tables:us-west-2:123456789012:bucket/mytablebucket"
+            ]
+          }
+        },
+        "required": [
+          "TableBucketARN"
+        ]
+      },
+      "permissions": [
+        "s3tables:ListNamespaces",
+        "s3tables:ListTableBuckets"
+      ]
+    }
+  }
+}

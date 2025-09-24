@@ -114,6 +114,15 @@
         },
         "Cookies": {
           "$ref": "#/definitions/Cookies"
+        },
+        "JA3Fingerprint": {
+          "$ref": "#/definitions/JA3Fingerprint"
+        },
+        "JA4Fingerprint": {
+          "$ref": "#/definitions/JA4Fingerprint"
+        },
+        "UriFragment": {
+          "$ref": "#/definitions/UriFragment"
         }
       },
       "additionalProperties": false
@@ -262,12 +271,25 @@
         "Limit": {
           "$ref": "#/definitions/RateLimit"
         },
+        "EvaluationWindowSec": {
+          "$ref": "#/definitions/EvaluationWindowSec"
+        },
         "AggregateKeyType": {
           "type": "string",
           "enum": [
             "IP",
-            "FORWARDED_IP"
+            "FORWARDED_IP",
+            "CONSTANT",
+            "CUSTOM_KEYS"
           ]
+        },
+        "CustomKeys": {
+          "description": "Specifies the aggregate keys to use in a rate-base rule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RateBasedStatementCustomKey"
+          },
+          "maxItems": 5
         },
         "ScopeDownStatement": {
           "$ref": "#/definitions/Statement"
@@ -282,10 +304,231 @@
       ],
       "additionalProperties": false
     },
+    "RateBasedStatementCustomKey": {
+      "description": "Specifies a single custom aggregate key for a rate-base rule.",
+      "type": "object",
+      "properties": {
+        "Cookie": {
+          "$ref": "#/definitions/RateLimitCookie"
+        },
+        "ForwardedIP": {
+          "$ref": "#/definitions/RateLimitForwardedIP"
+        },
+        "Header": {
+          "$ref": "#/definitions/RateLimitHeader"
+        },
+        "HTTPMethod": {
+          "$ref": "#/definitions/RateLimitHTTPMethod"
+        },
+        "IP": {
+          "$ref": "#/definitions/RateLimitIP"
+        },
+        "LabelNamespace": {
+          "$ref": "#/definitions/RateLimitLabelNamespace"
+        },
+        "QueryArgument": {
+          "$ref": "#/definitions/RateLimitQueryArgument"
+        },
+        "QueryString": {
+          "$ref": "#/definitions/RateLimitQueryString"
+        },
+        "UriPath": {
+          "$ref": "#/definitions/RateLimitUriPath"
+        },
+        "JA3Fingerprint": {
+          "$ref": "#/definitions/RateLimitJA3Fingerprint"
+        },
+        "JA4Fingerprint": {
+          "$ref": "#/definitions/RateLimitJA4Fingerprint"
+        },
+        "ASN": {
+          "$ref": "#/definitions/RateLimitAsn"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RateLimitCookie": {
+      "description": "Specifies a cookie as an aggregate key for a rate-based rule.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "The name of the cookie to use.",
+          "type": "string",
+          "pattern": ".*\\S.*",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "TextTransformations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextTransformation"
+          }
+        }
+      },
+      "required": [
+        "Name",
+        "TextTransformations"
+      ],
+      "additionalProperties": false
+    },
+    "RateLimitForwardedIP": {
+      "description": "Specifies the first IP address in an HTTP header as an aggregate key for a rate-based rule.",
+      "type": "object"
+    },
+    "RateLimitHeader": {
+      "description": "Specifies a header as an aggregate key for a rate-based rule.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "The name of the header to use.",
+          "type": "string",
+          "pattern": ".*\\S.*",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "TextTransformations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextTransformation"
+          }
+        }
+      },
+      "required": [
+        "Name",
+        "TextTransformations"
+      ],
+      "additionalProperties": false
+    },
+    "RateLimitHTTPMethod": {
+      "description": "Specifies the request's HTTP method as an aggregate key for a rate-based rule.",
+      "type": "object"
+    },
+    "RateLimitIP": {
+      "description": "Specifies the IP address in the web request as an aggregate key for a rate-based rule.",
+      "type": "object"
+    },
+    "RateLimitLabelNamespace": {
+      "description": "Specifies a label namespace to use as an aggregate key for a rate-based rule.",
+      "type": "object",
+      "properties": {
+        "Namespace": {
+          "description": "The namespace to use for aggregation.",
+          "type": "string",
+          "pattern": ""
+        }
+      },
+      "required": [
+        "Namespace"
+      ],
+      "additionalProperties": false
+    },
+    "RateLimitQueryArgument": {
+      "description": "Specifies a query argument in the request as an aggregate key for a rate-based rule.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "The name of the query argument to use.",
+          "type": "string",
+          "pattern": ".*\\S.*",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "TextTransformations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextTransformation"
+          }
+        }
+      },
+      "required": [
+        "Name",
+        "TextTransformations"
+      ],
+      "additionalProperties": false
+    },
+    "RateLimitQueryString": {
+      "description": "Specifies the request's query string as an aggregate key for a rate-based rule.",
+      "type": "object",
+      "properties": {
+        "TextTransformations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextTransformation"
+          }
+        }
+      },
+      "required": [
+        "TextTransformations"
+      ],
+      "additionalProperties": false
+    },
+    "RateLimitUriPath": {
+      "description": "Specifies the request's URI Path as an aggregate key for a rate-based rule.",
+      "type": "object",
+      "properties": {
+        "TextTransformations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextTransformation"
+          }
+        }
+      },
+      "required": [
+        "TextTransformations"
+      ],
+      "additionalProperties": false
+    },
+    "RateLimitJA3Fingerprint": {
+      "description": "Specifies the request's JA3 fingerprint as an aggregate key for a rate-based rule.",
+      "type": "object",
+      "properties": {
+        "FallbackBehavior": {
+          "type": "string",
+          "enum": [
+            "MATCH",
+            "NO_MATCH"
+          ]
+        }
+      },
+      "required": [
+        "FallbackBehavior"
+      ],
+      "additionalProperties": false
+    },
+    "RateLimitJA4Fingerprint": {
+      "description": "Specifies the request's JA4 fingerprint as an aggregate key for a rate-based rule.",
+      "type": "object",
+      "properties": {
+        "FallbackBehavior": {
+          "type": "string",
+          "enum": [
+            "MATCH",
+            "NO_MATCH"
+          ]
+        }
+      },
+      "required": [
+        "FallbackBehavior"
+      ],
+      "additionalProperties": false
+    },
+    "RateLimitAsn": {
+      "description": "Specifies the request's ASN as an aggregate key for a rate-based rule.",
+      "type": "object"
+    },
     "RateLimit": {
       "type": "integer",
-      "minimum": 100,
+      "minimum": 10,
       "maximum": 2000000000
+    },
+    "EvaluationWindowSec": {
+      "type": "integer",
+      "enum": [
+        60,
+        120,
+        300,
+        600
+      ]
     },
     "RegexPatternSetReferenceStatement": {
       "type": "object",
@@ -395,6 +638,9 @@
         },
         "CaptchaConfig": {
           "$ref": "#/definitions/CaptchaConfig"
+        },
+        "ChallengeConfig": {
+          "$ref": "#/definitions/ChallengeConfig"
         }
       },
       "required": [
@@ -410,44 +656,69 @@
       "type": "object",
       "properties": {
         "Allow": {
-          "description": "Allow traffic towards application.",
-          "type": "object",
-          "properties": {
-            "CustomRequestHandling": {
-              "$ref": "#/definitions/CustomRequestHandling"
-            }
-          },
-          "additionalProperties": false
+          "$ref": "#/definitions/AllowAction"
         },
         "Block": {
-          "description": "Block traffic towards application.",
-          "type": "object",
-          "properties": {
-            "CustomResponse": {
-              "$ref": "#/definitions/CustomResponse"
-            }
-          },
-          "additionalProperties": false
+          "$ref": "#/definitions/BlockAction"
         },
         "Count": {
-          "description": "Count traffic towards application.",
-          "type": "object",
-          "properties": {
-            "CustomRequestHandling": {
-              "$ref": "#/definitions/CustomRequestHandling"
-            }
-          },
-          "additionalProperties": false
+          "$ref": "#/definitions/CountAction"
         },
         "Captcha": {
-          "description": "Checks valid token exists with request.",
-          "type": "object",
-          "properties": {
-            "CustomRequestHandling": {
-              "$ref": "#/definitions/CustomRequestHandling"
-            }
-          },
-          "additionalProperties": false
+          "$ref": "#/definitions/CaptchaAction"
+        },
+        "Challenge": {
+          "$ref": "#/definitions/ChallengeAction"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AllowAction": {
+      "description": "Allow traffic towards application.",
+      "type": "object",
+      "properties": {
+        "CustomRequestHandling": {
+          "$ref": "#/definitions/CustomRequestHandling"
+        }
+      },
+      "additionalProperties": false
+    },
+    "BlockAction": {
+      "description": "Block traffic towards application.",
+      "type": "object",
+      "properties": {
+        "CustomResponse": {
+          "$ref": "#/definitions/CustomResponse"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CountAction": {
+      "description": "Count traffic towards application.",
+      "type": "object",
+      "properties": {
+        "CustomRequestHandling": {
+          "$ref": "#/definitions/CustomRequestHandling"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CaptchaAction": {
+      "description": "Checks valid token exists with request.",
+      "type": "object",
+      "properties": {
+        "CustomRequestHandling": {
+          "$ref": "#/definitions/CustomRequestHandling"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ChallengeAction": {
+      "description": "Checks that the request has a valid token with an unexpired challenge timestamp and, if not, returns a browser challenge to the client.",
+      "type": "object",
+      "properties": {
+        "CustomRequestHandling": {
+          "$ref": "#/definitions/CustomRequestHandling"
         }
       },
       "additionalProperties": false
@@ -677,6 +948,9 @@
           "items": {
             "$ref": "#/definitions/TextTransformation"
           }
+        },
+        "SensitivityLevel": {
+          "$ref": "#/definitions/SensitivityLevel"
         }
       },
       "required": [
@@ -727,6 +1001,9 @@
         },
         "RegexMatchStatement": {
           "$ref": "#/definitions/RegexMatchStatement"
+        },
+        "AsnMatchStatement": {
+          "$ref": "#/definitions/AsnMatchStatement"
         }
       },
       "additionalProperties": false
@@ -917,7 +1194,24 @@
       ],
       "additionalProperties": false
     },
-    "CaptchaConfig" : {
+    "AsnMatchStatement": {
+      "type": "object",
+      "properties": {
+        "AsnList": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          }
+        },
+        "ForwardedIPConfig": {
+          "$ref": "#/definitions/ForwardedIPConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CaptchaConfig": {
       "type": "object",
       "properties": {
         "ImmunityTimeProperty": {
@@ -926,7 +1220,16 @@
       },
       "additionalProperties": false
     },
-    "ImmunityTimeProperty" : {
+    "ChallengeConfig": {
+      "type": "object",
+      "properties": {
+        "ImmunityTimeProperty": {
+          "$ref": "#/definitions/ImmunityTimeProperty"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ImmunityTimeProperty": {
       "type": "object",
       "properties": {
         "ImmunityTime": {
@@ -972,7 +1275,7 @@
       "additionalProperties": false
     },
     "Cookies": {
-      "description": "Includes headers of a web request.",
+      "description": "Includes cookies of a web request.",
       "type": "object",
       "properties": {
         "MatchPattern": {
@@ -1075,6 +1378,62 @@
         "MATCH",
         "NO_MATCH"
       ]
+    },
+    "SensitivityLevel": {
+      "description": "Sensitivity Level current only used for sqli match statements.",
+      "type": "string",
+      "enum": [
+        "LOW",
+        "HIGH"
+      ]
+    },
+    "JA3Fingerprint": {
+      "description": "Includes the JA3 fingerprint of a web request.",
+      "type": "object",
+      "properties": {
+        "FallbackBehavior": {
+          "type": "string",
+          "enum": [
+            "MATCH",
+            "NO_MATCH"
+          ]
+        }
+      },
+      "required": [
+        "FallbackBehavior"
+      ],
+      "additionalProperties": false
+    },
+    "JA4Fingerprint": {
+      "description": "Includes the JA4 fingerprint of a web request.",
+      "type": "object",
+      "properties": {
+        "FallbackBehavior": {
+          "type": "string",
+          "enum": [
+            "MATCH",
+            "NO_MATCH"
+          ]
+        }
+      },
+      "required": [
+        "FallbackBehavior"
+      ],
+      "additionalProperties": false
+    },
+    "UriFragment": {
+      "description": "The path component of the URI Fragment. This is the part of a web request that identifies a fragment uri, for example, /abcd#introduction",
+      "type": "object",
+      "properties": {
+        "FallbackBehavior": {
+          "type": "string",
+          "enum": [
+            "MATCH",
+            "NO_MATCH"
+          ]
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -1153,15 +1512,29 @@
     "/properties/Arn",
     "/properties/Id",
     "/properties/LabelNamespace",
-    "/properties/AvailableLabels",
-    "/properties/ConsumedLabels"
+    "/properties/AvailableLabels/*/Name",
+    "/properties/ConsumedLabels/*/Name"
   ],
   "additionalProperties": false,
+  "tagging": {
+    "cloudFormationSystemTags": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "wafv2:TagResource",
+      "wafv2:UntagResource",
+      "wafv2:ListTagsForResource"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
         "wafv2:CreateRuleGroup",
         "wafv2:GetRuleGroup",
+        "wafv2:TagResource",
+        "wafv2:UntagResource",
         "wafv2:ListTagsForResource"
       ]
     },
@@ -1179,6 +1552,8 @@
     },
     "update": {
       "permissions": [
+        "wafv2:TagResource",
+        "wafv2:UntagResource",
         "wafv2:UpdateRuleGroup",
         "wafv2:GetRuleGroup",
         "wafv2:ListTagsForResource"
@@ -1187,7 +1562,17 @@
     "list": {
       "permissions": [
         "wafv2:listRuleGroups"
-      ]
+      ],
+      "handlerSchema": {
+        "properties": {
+          "Scope": {
+            "$ref": "resource-schema.json#/properties/Scope"
+          }
+        },
+        "required": [
+          "Scope"
+        ]
+      }
     }
   }
 }

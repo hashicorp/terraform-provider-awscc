@@ -1,0 +1,62 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Bedrock Guardail with content policy configuration
+
+{{ tffile (printf "examples/resources/%s/bedrock_guardrail_content_policy.tf" .Name)}}
+
+### Bedrock Guardail with sensitive information policy configuration
+
+{{ tffile (printf "examples/resources/%s/bedrock_guardrail_sensitive_info.tf" .Name)}}
+
+### Bedrock Guardail with word policy configuration
+
+{{ tffile (printf "examples/resources/%s/bedrock_guardrail_word_policy.tf" .Name)}}
+
+### Bedrock Guardail with topic configuration
+
+{{ tffile (printf "examples/resources/%s/bedrock_guardrail_topic.tf" .Name)}}
+
+### Bedrock Guardail with all policy configurations and encyrption
+
+{{ tffile (printf "examples/resources/%s/bedrock_guardrail_complete.tf" .Name)}}
+
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if or .HasImport .HasImportIDConfig .HasImportIdentityConfig }}
+
+## Import
+
+Import is supported using the following syntax:
+{{- end }}
+{{- if .HasImportIdentityConfig }}
+
+In Terraform v1.12.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `identity` attribute, for example:
+
+{{tffile .ImportIdentityConfigFile }}
+
+{{ .IdentitySchemaMarkdown | trimspace }}
+{{- end }}
+{{- if .HasImportIDConfig }}
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+{{tffile .ImportIDConfigFile }}
+{{- end }}
+{{- if .HasImport }}
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
+{{codefile "shell" .ImportFile }}
+
+{{- end }}

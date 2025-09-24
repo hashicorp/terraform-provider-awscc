@@ -28,6 +28,7 @@ Data Source schema for AWS::EC2::IPAMPool
 - `allocation_resource_tags` (Attributes Set) When specified, an allocation will not be allowed unless a resource has a matching set of tags. (see [below for nested schema](#nestedatt--allocation_resource_tags))
 - `arn` (String) The Amazon Resource Name (ARN) of the IPAM Pool.
 - `auto_import` (Boolean) Determines what to do if IPAM discovers resources that haven't been assigned an allocation. If set to true, an allocation will be made automatically.
+- `aws_service` (String) Limits which service in Amazon Web Services that the pool can be used in.
 - `description` (String)
 - `ipam_arn` (String) The Amazon Resource Name (ARN) of the IPAM this pool is a part of.
 - `ipam_pool_id` (String) Id of the IPAM Pool.
@@ -37,8 +38,10 @@ Data Source schema for AWS::EC2::IPAMPool
 - `locale` (String) The region of this pool. If not set, this will default to "None" which will disable non-custom allocations. If the locale has been specified for the source pool, this value must match.
 - `pool_depth` (Number) The depth of this pool in the source pool hierarchy.
 - `provisioned_cidrs` (Attributes Set) A list of cidrs representing the address space available for allocation in this pool. (see [below for nested schema](#nestedatt--provisioned_cidrs))
+- `public_ip_source` (String) The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Default is `byoip`.
 - `publicly_advertisable` (Boolean) Determines whether or not address space from this pool is publicly advertised. Must be set if and only if the pool is IPv6.
 - `source_ipam_pool_id` (String) The Id of this pool's source. If set, all space provisioned in this pool must be free space provisioned in the parent pool.
+- `source_resource` (Attributes) The resource associated with this pool's space. Depending on the ResourceType, setting a SourceResource changes which space can be provisioned in this pool and which types of resources can receive allocations (see [below for nested schema](#nestedatt--source_resource))
 - `state` (String) The state of this pool. This can be one of the following values: "create-in-progress", "create-complete", "modify-in-progress", "modify-complete", "delete-in-progress", or "delete-complete"
 - `state_message` (String) An explanation of how the pool arrived at it current state.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
@@ -60,6 +63,17 @@ Read-Only:
 - `cidr` (String) Represents a single IPv4 or IPv6 CIDR
 
 
+<a id="nestedatt--source_resource"></a>
+### Nested Schema for `source_resource`
+
+Read-Only:
+
+- `resource_id` (String)
+- `resource_owner` (String)
+- `resource_region` (String)
+- `resource_type` (String)
+
+
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
@@ -67,5 +81,3 @@ Read-Only:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-
-

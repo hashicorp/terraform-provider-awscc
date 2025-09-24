@@ -21,7 +21,8 @@
         "DELETING",
         "DELETED",
         "UPDATE_FAILED",
-        "UNAVAILABLE"
+        "UNAVAILABLE",
+        "PENDING"
       ]
     },
     "UpdateStatus": {
@@ -174,6 +175,16 @@
       "description": "Minimum worker compute units.",
       "minimum": 1
     },
+    "MaxWebservers": {
+      "type": "integer",
+      "description": "Maximum webserver compute units.",
+      "minimum": 1
+    },
+    "MinWebservers": {
+      "type": "integer",
+      "description": "Minimum webserver compute units.",
+      "minimum": 1
+    },
     "Schedulers": {
       "type": "integer",
       "description": "Scheduler compute units.",
@@ -292,6 +303,9 @@
         },
         "Error": {
           "$ref": "#/definitions/UpdateError"
+        },
+        "WorkerReplacementStrategy": {
+          "$ref": "#/definitions/WorkerReplacementStrategy"
         }
       }
     },
@@ -323,6 +337,37 @@
       "enum": [
         "PRIVATE_ONLY",
         "PUBLIC_ONLY"
+      ]
+    },
+    "EndpointManagement": {
+      "type": "string",
+      "description": "Defines whether the VPC endpoints configured for the environment are created, and managed, by the customer or by Amazon MWAA.",
+      "enum": [
+        "CUSTOMER",
+        "SERVICE"
+      ]
+    },
+    "CeleryExecutorQueue": {
+      "type": "string",
+      "description": "The celery executor queue associated with the environment.",
+      "maxLength": 1224
+    },
+    "DatabaseVpcEndpointService": {
+      "type": "string",
+      "description": "The database VPC endpoint service name.",
+      "maxLength": 1224
+    },
+    "WebserverVpcEndpointService": {
+      "type": "string",
+      "description": "The webserver VPC endpoint service name, applicable if private webserver access mode selected.",
+      "maxLength": 1224
+    },
+    "WorkerReplacementStrategy": {
+      "type": "string",
+      "description": "The worker replacement strategy to use when updating the environment. Valid values: `FORCED`, `GRACEFUL`. FORCED means Apache Airflow workers will be stopped and replaced without waiting for tasks to complete before an update. GRACEFUL means Apache Airflow workers will be able to complete running tasks for up to 12 hours during an update before being stopped and replaced.",
+      "enum": [
+        "FORCED",
+        "GRACEFUL"
       ]
     }
   },
@@ -363,6 +408,12 @@
     "RequirementsS3ObjectVersion": {
       "$ref": "#/definitions/S3ObjectVersion"
     },
+    "StartupScriptS3Path": {
+      "$ref": "#/definitions/RelativePath"
+    },
+    "StartupScriptS3ObjectVersion": {
+      "$ref": "#/definitions/S3ObjectVersion"
+    },
     "AirflowConfigurationOptions": {
       "type": "object",
       "description": "Key/value pairs representing Airflow configuration variables.\n    Keys are prefixed by their section:\n\n    [core]\n    dags_folder={AIRFLOW_HOME}/dags\n\n    Would be represented as\n\n    \"core.dags_folder\": \"{AIRFLOW_HOME}/dags\""
@@ -375,6 +426,12 @@
     },
     "MinWorkers": {
       "$ref": "#/definitions/MinWorkers"
+    },
+    "MaxWebservers": {
+      "$ref": "#/definitions/MaxWebservers"
+    },
+    "MinWebservers": {
+      "$ref": "#/definitions/MinWebservers"
     },
     "Schedulers": {
       "$ref": "#/definitions/Schedulers"
@@ -394,6 +451,21 @@
     },
     "WebserverAccessMode": {
       "$ref": "#/definitions/WebserverAccessMode"
+    },
+    "EndpointManagement": {
+      "$ref": "#/definitions/EndpointManagement"
+    },
+    "CeleryExecutorQueue": {
+      "$ref": "#/definitions/CeleryExecutorQueue"
+    },
+    "DatabaseVpcEndpointService": {
+      "$ref": "#/definitions/DatabaseVpcEndpointService"
+    },
+    "WebserverVpcEndpointService": {
+      "$ref": "#/definitions/WebserverVpcEndpointService"
+    },
+    "WorkerReplacementStrategy": {
+      "$ref": "#/definitions/WorkerReplacementStrategy"
     }
   },
   "additionalProperties": false,
@@ -403,10 +475,14 @@
   "createOnlyProperties": [
     "/properties/Name",
     "/properties/KmsKey",
-    "/properties/NetworkConfiguration/SubnetIds"
+    "/properties/NetworkConfiguration/SubnetIds",
+    "/properties/EndpointManagement"
   ],
   "readOnlyProperties": [
     "/properties/Arn",
+    "/properties/CeleryExecutorQueue",
+    "/properties/DatabaseVpcEndpointService",
+    "/properties/WebserverVpcEndpointService",
     "/properties/WebserverUrl",
     "/properties/LoggingConfiguration/DagProcessingLogs/CloudWatchLogGroupArn",
     "/properties/LoggingConfiguration/SchedulerLogs/CloudWatchLogGroupArn",
@@ -414,14 +490,43 @@
     "/properties/LoggingConfiguration/WorkerLogs/CloudWatchLogGroupArn",
     "/properties/LoggingConfiguration/TaskLogs/CloudWatchLogGroupArn"
   ],
-  "taggable": true,
+  "writeOnlyProperties": [
+    "/properties/WorkerReplacementStrategy"
+  ],
   "primaryIdentifier": [
     "/properties/Name"
   ],
   "handlers": {
     "create": {
       "permissions": [
-        "airflow:CreateEnvironment"
+        "airflow:GetEnvironment",
+        "airflow:CreateEnvironment",
+        "airflow:TagResource",
+        "airflow:UntagResource",
+        "iam:PassRole",
+        "iam:ListRoles",
+        "iam:CreatePolicy",
+        "iam:AttachRolePolicy",
+        "iam:CreateRole",
+        "iam:CreateServiceLinkedRole",
+        "s3:GetBucketLocation",
+        "s3:ListAllMyBuckets",
+        "s3:ListBucket",
+        "s3:ListBucketVersions",
+        "s3:CreateBucket",
+        "s3:PutObject",
+        "s3:GetEncryptionConfiguration",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeRouteTables",
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:CreateSecurityGroup",
+        "ec2:CreateVpcEndpoint",
+        "ec2:CreateNetworkInterface",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:ListAliases"
       ],
       "timeoutInMinutes": 180
     },
@@ -432,14 +537,29 @@
     },
     "update": {
       "permissions": [
+        "airflow:GetEnvironment",
         "airflow:UpdateEnvironment",
         "airflow:TagResource",
-        "airflow:UntagResource"
+        "airflow:UntagResource",
+        "iam:PassRole",
+        "iam:ListRoles",
+        "iam:AttachRolePolicy",
+        "s3:GetBucketLocation",
+        "s3:ListBucket",
+        "s3:ListBucketVersions",
+        "s3:GetEncryptionConfiguration",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeRouteTables",
+        "kms:DescribeKey",
+        "kms:ListAliases"
       ],
-      "timeoutInMinutes": 480
+      "timeoutInMinutes": 900
     },
     "delete": {
       "permissions": [
+        "airflow:GetEnvironment",
         "airflow:DeleteEnvironment"
       ]
     },
@@ -448,5 +568,16 @@
         "airflow:ListEnvironments"
       ]
     }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "airflow:UntagResource",
+      "airflow:TagResource"
+    ]
   }
 }

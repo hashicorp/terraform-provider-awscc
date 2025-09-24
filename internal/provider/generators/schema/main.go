@@ -1,29 +1,32 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 package main
 
 import (
-	"bytes"
 	"context"
+	_ "embed"
 	"errors"
 	"flag"
 	"fmt"
-	"go/format"
 	"io"
-	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
 	"sort"
 	"strings"
-	"text/template"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
+	"github.com/hashicorp/cli"
 	"github.com/hashicorp/hcl/v2/hclsimple"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
-	"github.com/mitchellh/cli"
+	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/common"
+	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
 )
 
 type Config struct {
@@ -45,6 +48,7 @@ type ResourceSchema struct {
 	CloudFormationSchemaPath             string `hcl:"cloudformation_schema_path,optional"`
 	CloudFormationTypeName               string `hcl:"cloudformation_type_name"`
 	ResourceTypeName                     string `hcl:"resource_type_name,label"`
+	SuppressionReason                    string `hcl:"suppression_reason,optional"`
 	SuppressPluralDataSourceGeneration   bool   `hcl:"suppress_plural_data_source_generation,optional"`
 	SuppressResourceGeneration           bool   `hcl:"suppress_resource_generation,optional"`
 	SuppressSingularDataSourceGeneration bool   `hcl:"suppress_singular_data_source_generation,optional"`
@@ -55,6 +59,7 @@ var (
 	generatedCodeRoot = flag.String("generated-code-root", "", "directory root for generated resource code")
 	importPathRoot    = flag.String("import-path-root", "", "import path root for generated resource code; required")
 	packageName       = flag.String("package", "", "override package name for generated code")
+	initialTimer      = 5
 )
 
 func usage() {
@@ -83,79 +88,82 @@ func main() {
 	resourcesFilename := args[0]
 	singularDatasourcesFilename := args[1]
 	pluralDatasourcesFilename := args[2]
+	importExamplesFilename := args[3]
 
 	generatedCodeRootDirectoryName := "."
 	if *generatedCodeRoot != "" {
 		generatedCodeRootDirectoryName = *generatedCodeRoot
 	}
 
-	ui := &cli.BasicUi{
-		Reader:      os.Stdin,
-		Writer:      os.Stdout,
-		ErrorWriter: os.Stderr,
-	}
+	os.Exit(run(destinationPackage, generatedCodeRootDirectoryName, resourcesFilename, singularDatasourcesFilename, pluralDatasourcesFilename, importExamplesFilename))
+}
 
-	tempDirectory, err := ioutil.TempDir("", "*")
-
-	if err != nil {
-		ui.Error(fmt.Sprintf("error creating temporary directory: %s", err))
-		os.Exit(1)
-	}
-
-	defer os.RemoveAll(tempDirectory)
-
+func run(destinationPackage, generatedCodeRootDirectoryName, resourcesFilename, singularDatasourcesFilename, pluralDatasourcesFilename, importExamplesFilename string) int {
+	g := NewGenerator()
 	ctx := context.TODO()
 	cfg, err := config.LoadDefaultConfig(ctx)
 
 	if err != nil {
-		ui.Error(fmt.Sprintf("error loading AWS SDK config: %s", err))
-		os.Exit(1)
+		g.Errorf("error loading AWS SDK config: %s", err)
+		return 1
 	}
 
 	client := cloudformation.NewFromConfig(cfg)
 
+	tempDirectory, err := os.MkdirTemp("", "*")
+
+	if err != nil {
+		g.Errorf("error creating temporary directory: %s", err)
+		return 1
+	}
+
+	defer os.RemoveAll(tempDirectory)
+
 	downloader := &Downloader{
 		client:        client,
 		tempDirectory: tempDirectory,
-		ui:            ui,
+		ui:            g.UI(),
 	}
 
 	err = hclsimple.DecodeFile(*configFile, nil, &downloader.config)
 	if err != nil {
-		ui.Error(fmt.Sprintf("error loading configuration: %s", err))
-		os.Exit(1)
+		g.Errorf("error loading configuration: %s", err)
+		return 1
 	}
 
 	if err := downloader.MetaSchema(); err != nil {
-		ui.Error(fmt.Sprintf("error loading CloudFormation Resource Provider Definition Schema: %s", err))
-		os.Exit(1)
+		g.Errorf("error loading CloudFormation Resource Provider Definition Schema: %s", err)
+		return 1
 	}
 
 	resources, dataSources, err := downloader.Schemas()
 
 	if err != nil {
-		ui.Error(fmt.Sprintf("error processing CloudFormation Resource Provider Schemas: %s", err))
-		os.Exit(1)
+		g.Errorf("error processing CloudFormation Resource Provider Schemas: %s", err)
+		return 1
 	}
 
-	generator := &Generator{
-		ui: ui,
+	if err := g.GenerateResources(destinationPackage, resourcesFilename, generatedCodeRootDirectoryName, *importPathRoot, resources); err != nil {
+		g.Errorf("error generating Terraform resource generation instructions: %s", err)
+		return 1
 	}
 
-	if err := generator.GenerateResources(destinationPackage, resourcesFilename, generatedCodeRootDirectoryName, *importPathRoot, resources); err != nil {
-		ui.Error(fmt.Sprintf("error generating Terraform resource generation instructions: %s", err))
-		os.Exit(1)
+	if err := g.GenerateDataSources(destinationPackage, singularDatasourcesFilename, generatedCodeRootDirectoryName, *importPathRoot, dataSources.Singular); err != nil {
+		g.Errorf("error generating Terraform singular data-source generation instructions: %s", err)
+		return 1
 	}
 
-	if err := generator.GenerateDataSources(destinationPackage, singularDatasourcesFilename, generatedCodeRootDirectoryName, *importPathRoot, dataSources.Singular); err != nil {
-		ui.Error(fmt.Sprintf("error generating Terraform singular data-source generation instructions: %s", err))
-		os.Exit(1)
+	if err := g.GenerateDataSources(destinationPackage, pluralDatasourcesFilename, generatedCodeRootDirectoryName, *importPathRoot, dataSources.Plural); err != nil {
+		g.Errorf("error generating Terraform plural data-source generation instructions: %s", err)
+		return 1
 	}
 
-	if err := generator.GenerateDataSources(destinationPackage, pluralDatasourcesFilename, generatedCodeRootDirectoryName, *importPathRoot, dataSources.Plural); err != nil {
-		ui.Error(fmt.Sprintf("error generating Terraform plural data-source generation instructions: %s", err))
-		os.Exit(1)
+	if err := g.GenerateResourceImportExamples(destinationPackage, importExamplesFilename, resources); err != nil {
+		g.Errorf("error generating Terraform resource import examples generation instructions: %s", err)
+		return 1
 	}
+
+	return 0
 }
 
 var errCopyFileWithDir = errors.New("dir argument to CopyFile")
@@ -227,7 +235,7 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 	var singularDataSources, pluralDataSources []*DataSourceData
 
 	for _, schema := range d.config.ResourceSchemas {
-		cfResourceSchemaFilename, cfResourceTypeName, err := d.ResourceSchema(schema)
+		cfResourceSchemaFilename, cfResourceTypeName, err := d.ResourceSchema(schema, initialTimer)
 
 		if err != nil {
 			d.ui.Warn(fmt.Sprintf("error loading CloudFormation Resource Provider Schema for %s: %s", schema.ResourceTypeName, err))
@@ -286,14 +294,21 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 			continue
 		}
 
-		resources = append(resources, &ResourceData{
+		r := ResourceData{
 			CloudFormationTypeSchemaFile: cfResourceSchemaFilename,
 			GeneratedAccTestsFileName:    res + "_resource_gen_test",     // e.g. "log_group_resource_gen_test"
 			GeneratedCodeFileName:        res + "_resource_gen",          // e.g. "log_group_resource_gen"
 			GeneratedCodePackageName:     svc,                            // e.g. "logs"
 			GeneratedCodePathSuffix:      fmt.Sprintf("%s/%s", org, svc), // e.g. "aws/logs"
 			TerraformResourceType:        tfResourceTypeName,
-		})
+		}
+
+		// generate List resource if resource supports a plural data source
+		if !schema.SuppressPluralDataSourceGeneration {
+			r.GenerateListResource = true
+		}
+
+		resources = append(resources, &r)
 	}
 
 	dataSources := &DataSources{
@@ -305,7 +320,10 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 }
 
 // ResourceSchema returns the local resource schema file name and type name.
-func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, error) {
+func (d *Downloader) ResourceSchema(schema ResourceSchema, timer int) (string, string, error) {
+	if timer > 300 {
+		return "", "", fmt.Errorf("timeout exceeded while downloading CloudFormation Resource Provider Schema for %s", schema.CloudFormationTypeName)
+	}
 	resourceSchemaFilename := schema.CloudFormationSchemaPath
 	if resourceSchemaFilename == "" {
 		filename := fmt.Sprintf("%s.json", schema.CloudFormationTypeName)
@@ -328,6 +346,15 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 		output, err := d.client.DescribeType(context.TODO(), input)
 
 		if err != nil {
+			if strings.Contains(err.Error(), "api error Throttling: Rate exceeded") {
+				d.ui.Warn("API rate limit exceeded. Retrying after a short delay...")
+				timer *= 2 // Exponential backoff
+				time.Sleep(time.Duration(timer) * time.Second)
+				return d.ResourceSchema(schema, timer) // Retry with increased timer
+			}
+		}
+
+		if err != nil {
 			return "", "", fmt.Errorf("describing CloudFormation type: %w", err)
 		}
 
@@ -337,7 +364,7 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 			return "", "", fmt.Errorf("sanitizing schema: %w", err)
 		}
 
-		err = ioutil.WriteFile(dst, []byte(schema), 0644) //nolint:gomnd
+		err = os.WriteFile(dst, []byte(schema), 0644) //nolint:mnd
 
 		if err != nil {
 			return "", "", fmt.Errorf("writing schema to %q: %w", dst, err)
@@ -386,6 +413,7 @@ type ResourceData struct {
 	GeneratedCodeFileName        string
 	GeneratedCodePackageName     string
 	GeneratedCodePathSuffix      string
+	GenerateListResource         bool
 	TerraformResourceType        string
 }
 
@@ -399,17 +427,28 @@ type DataSourceData struct {
 	TerraformResourceType        string
 }
 
+type ResourceImportData struct {
+	ResourceName string
+	Identifier   []string
+}
+
 type DataSources struct {
 	Singular []*DataSourceData
 	Plural   []*DataSourceData
 }
 
 type Generator struct {
-	ui cli.Ui
+	*common.Generator
+}
+
+func NewGenerator() *Generator {
+	return &Generator{
+		Generator: common.NewGenerator(),
+	}
 }
 
 func (g *Generator) GenerateResources(packageName, filename, generatedCodeRootDirectoryName, importPathRoot string, resources []*ResourceData) error {
-	g.infof("generating Terraform resource generation instructions into %q", filename)
+	g.Infof("generating Terraform resource generation instructions into %q", filename)
 
 	importPaths := make(map[string]struct{}) // Set of strings.
 
@@ -427,7 +466,7 @@ func (g *Generator) GenerateResources(packageName, filename, generatedCodeRootDi
 
 	sort.Strings(importPathSuffixes)
 
-	templateData := TemplateData{
+	templateData := &TemplateData{
 		GeneratedCodeRootDirectoryName: generatedCodeRootDirectoryName,
 		ImportPathRoot:                 importPathRoot,
 		ImportPathSuffixes:             importPathSuffixes,
@@ -435,44 +474,25 @@ func (g *Generator) GenerateResources(packageName, filename, generatedCodeRootDi
 		Resources:                      resources,
 	}
 
-	tmpl, err := template.New("function").Parse(resourceTemplateBody)
+	d := g.NewGoFileDestination(filename)
 
-	if err != nil {
-		return fmt.Errorf("parsing function template: %w", err)
+	if err := d.CreateDirectories(); err != nil {
+		return err
 	}
 
-	var buffer bytes.Buffer
-	err = tmpl.Execute(&buffer, templateData)
-
-	if err != nil {
-		return fmt.Errorf("executing template: %w", err)
+	if err := d.WriteTemplate("resource", resourceTemplateBody, templateData); err != nil {
+		return err
 	}
 
-	generatedFileContents, err := format.Source(buffer.Bytes())
-
-	if err != nil {
-		return fmt.Errorf("formatting generated file: %w", err)
-	}
-
-	f, err := os.Create(filename)
-
-	if err != nil {
-		return fmt.Errorf("creating file (%s): %w", filename, err)
-	}
-
-	defer f.Close()
-
-	_, err = f.Write(generatedFileContents)
-
-	if err != nil {
-		return fmt.Errorf("writing to file (%s): %w", filename, err)
+	if err := d.Write(); err != nil {
+		return err
 	}
 
 	return nil
 }
 
 func (g *Generator) GenerateDataSources(packageName, filename, generatedCodeRootDirectoryName, importPathRoot string, dataSources []*DataSourceData) error {
-	g.infof("generating Terraform data-source generation instructions into %q", filename)
+	g.Infof("generating Terraform data-source generation instructions into %q", filename)
 
 	importPaths := make(map[string]struct{}) // Set of strings.
 
@@ -490,7 +510,7 @@ func (g *Generator) GenerateDataSources(packageName, filename, generatedCodeRoot
 
 	sort.Strings(importPathSuffixes)
 
-	templateData := TemplateData{
+	templateData := &TemplateData{
 		DataSources:                    dataSources,
 		GeneratedCodeRootDirectoryName: generatedCodeRootDirectoryName,
 		ImportPathRoot:                 importPathRoot,
@@ -498,77 +518,72 @@ func (g *Generator) GenerateDataSources(packageName, filename, generatedCodeRoot
 		PackageName:                    packageName,
 	}
 
-	tmpl, err := template.New("function").Parse(dataSourceTemplateBody)
+	d := g.NewGoFileDestination(filename)
 
-	if err != nil {
-		return fmt.Errorf("parsing function template: %w", err)
+	if err := d.CreateDirectories(); err != nil {
+		return err
 	}
 
-	var buffer bytes.Buffer
-	err = tmpl.Execute(&buffer, templateData)
-
-	if err != nil {
-		return fmt.Errorf("executing template: %w", err)
+	if err := d.WriteTemplate("data-source", dataSourceTemplateBody, templateData); err != nil {
+		return err
 	}
 
-	generatedFileContents, err := format.Source(buffer.Bytes())
-
-	if err != nil {
-		return fmt.Errorf("formatting generated file: %w", err)
-	}
-
-	f, err := os.Create(filename)
-
-	if err != nil {
-		return fmt.Errorf("creating file (%s): %w", filename, err)
-	}
-
-	defer f.Close()
-
-	_, err = f.Write(generatedFileContents)
-
-	if err != nil {
-		return fmt.Errorf("writing to file (%s): %w", filename, err)
+	if err := d.Write(); err != nil {
+		return err
 	}
 
 	return nil
 }
 
-func (g *Generator) infof(format string, a ...interface{}) {
-	g.ui.Info(fmt.Sprintf(format, a...))
+func (g *Generator) GenerateResourceImportExamples(packageName, filename string, resources []*ResourceData) error {
+	g.Infof("generating Terraform resource import examples generation instructions into %q", filename)
+
+	importsTemplateData := &ImportTemplateData{
+		PackageName: packageName,
+	}
+
+	for _, v := range resources {
+		tmplData, err := shared.GenerateTemplateData(g.UI(), v.CloudFormationTypeSchemaFile, shared.ResourceType, v.TerraformResourceType, v.GeneratedCodePackageName)
+		if err != nil {
+			return fmt.Errorf("%s: %w", v.CloudFormationTypeSchemaFile, err)
+		}
+
+		r := &ResourceImportData{
+			ResourceName: v.TerraformResourceType,
+		}
+
+		var temp []string
+		for _, value := range tmplData.PrimaryIdentifier {
+			temp = append(temp, value.Name)
+		}
+		r.Identifier = temp
+		importsTemplateData.Resources = append(importsTemplateData.Resources, r)
+	}
+	i := g.NewUnformattedFileDestination(filename)
+
+	if err := i.CreateDirectories(); err != nil {
+		return err
+	}
+
+	if err := i.WriteTemplate("imports", importsTemplateBody, importsTemplateData); err != nil {
+		return err
+	}
+
+	if err := i.Write(); err != nil {
+		return err
+	}
+
+	return nil
 }
 
-var resourceTemplateBody = `
-// Code generated by generators/schema/main.go; DO NOT EDIT.
+//go:embed resource.tmpl
+var resourceTemplateBody string
 
-{{- range .Resources }}
-//go:generate go run generators/resource/main.go -resource {{ .TerraformResourceType }} -cfschema {{ .CloudFormationTypeSchemaFile }} -package {{ .GeneratedCodePackageName }} -- {{ $.GeneratedCodeRootDirectoryName }}/{{ .GeneratedCodePathSuffix }}/{{ .GeneratedCodeFileName }}.go {{ $.GeneratedCodeRootDirectoryName }}/{{ .GeneratedCodePathSuffix }}/{{ .GeneratedAccTestsFileName }}.go
-{{- end }}
+//go:embed datasource.tmpl
+var dataSourceTemplateBody string
 
-package {{ .PackageName }}
-
-import (
-{{- range .ImportPathSuffixes }}
-	_ "{{ $.ImportPathRoot }}/{{ . }}"
-{{- end }}
-)
-`
-
-var dataSourceTemplateBody = `
-// Code generated by generators/schema/main.go; DO NOT EDIT.
-
-{{- range .DataSources }}
-{{ if .CloudFormationType }}//go:generate go run generators/plural-data-source/main.go -data-source {{ .TerraformResourceType }} -cftype {{ .CloudFormationType }} -package {{ .GeneratedCodePackageName }} {{ $.GeneratedCodeRootDirectoryName }}/{{ .GeneratedCodePathSuffix }}/{{ .GeneratedCodeFileName }}.go {{ $.GeneratedCodeRootDirectoryName }}/{{ .GeneratedCodePathSuffix }}/{{ .GeneratedAccTestsFileName }}.go{{ else }}//go:generate go run generators/singular-data-source/main.go -data-source {{ .TerraformResourceType }} -cfschema {{ .CloudFormationTypeSchemaFile }} -package {{ .GeneratedCodePackageName }} {{ $.GeneratedCodeRootDirectoryName }}/{{ .GeneratedCodePathSuffix }}/{{ .GeneratedCodeFileName }}.go {{ $.GeneratedCodeRootDirectoryName }}/{{ .GeneratedCodePathSuffix }}/{{ .GeneratedAccTestsFileName }}.go{{- end }}
-{{- end }}
-
-package {{ .PackageName }}
-
-import (
-{{- range .ImportPathSuffixes }}
-	_ "{{ $.ImportPathRoot }}/{{ . }}"
-{{- end }}
-)
-`
+//go:embed imports.tmpl
+var importsTemplateBody string
 
 type TemplateData struct {
 	DataSources                    []*DataSourceData
@@ -577,4 +592,9 @@ type TemplateData struct {
 	ImportPathSuffixes             []string
 	PackageName                    string
 	Resources                      []*ResourceData
+}
+
+type ImportTemplateData struct {
+	PackageName string
+	Resources   []*ResourceImportData
 }

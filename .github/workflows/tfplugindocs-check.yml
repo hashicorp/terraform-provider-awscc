@@ -8,7 +8,6 @@ on:
   pull_request:
     paths:
       - .github/workflows/tfplugindocs-check.yml
-      - .go-version
       - .golangci.yml
       - go.sum
       - GNUmakefile
@@ -22,24 +21,14 @@ jobs:
     name: tfplugindocs check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-
-      - id: go-version
-        uses: juliangruber/read-file-action@v1
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00 # v6.0.0
         with:
-          path: ./.go-version
-
-      - uses: actions/setup-go@v3
-        with:
-          # TODO: Replace with go-version-from-file when it is supported
-          # https://github.com/actions/setup-go/pull/62
-          go-version: ${{ steps.go-version.outputs.content }}
-
+          go-version-file: tools/go.mod
       - name: GOCACHE
         run: |
           echo "GOCACHE=$(go env GOCACHE)" >> $GITHUB_ENV
-
-      - uses: actions/cache@v3
+      - uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
         continue-on-error: true
         timeout-minutes: 2
         with:
@@ -47,14 +36,12 @@ jobs:
           # https://github.com/actions/setup-go/issues/54
           path: ${{ env.GOCACHE }}
           key: ${{ runner.os }}-GOCACHE-${{ hashFiles('go.sum') }}-${{ hashFiles('internal/**') }}
-
-      - uses: actions/cache@v3
+      - uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
         continue-on-error: true
         timeout-minutes: 2
         with:
           path: ~/go/pkg/mod
           key: ${{ runner.os }}-go-pkg-mod-${{ hashFiles('go.sum') }}
-
       - run: |
           make tools
           make docs

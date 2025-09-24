@@ -1,0 +1,204 @@
+{
+  "typeName": "AWS::InspectorV2::CodeSecurityScanConfiguration",
+  "description": "Inspector CodeSecurityScanConfiguration resource schema",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-inspector.git",
+  "definitions": {
+    "TagMap": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "pattern": "^.{1,255}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ConfigurationLevel": {
+      "type": "string",
+      "enum": [
+        "ORGANIZATION",
+        "ACCOUNT"
+      ]
+    },
+    "PeriodicScanFrequency": {
+      "type": "string",
+      "enum": [
+        "WEEKLY",
+        "MONTHLY",
+        "NEVER"
+      ]
+    },
+    "ContinuousIntegrationScanEvent": {
+      "type": "string",
+      "enum": [
+        "PULL_REQUEST",
+        "PUSH"
+      ]
+    },
+    "RuleSetCategory": {
+      "type": "string",
+      "enum": [
+        "SAST",
+        "IAC",
+        "SCA"
+      ]
+    },
+    "ProjectSelectionScope": {
+      "type": "string",
+      "enum": [
+        "ALL"
+      ]
+    },
+    "PeriodicScanConfiguration": {
+      "type": "object",
+      "properties": {
+        "frequency": {
+          "$ref": "#/definitions/PeriodicScanFrequency"
+        },
+        "frequencyExpression": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "ContinuousIntegrationScanConfiguration": {
+      "type": "object",
+      "required": [
+        "supportedEvents"
+      ],
+      "properties": {
+        "supportedEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContinuousIntegrationScanEvent"
+          },
+          "minItems": 1,
+          "maxItems": 2
+        }
+      },
+      "additionalProperties": false
+    },
+    "ScopeSettings": {
+      "type": "object",
+      "properties": {
+        "projectSelectionScope": {
+          "$ref": "#/definitions/ProjectSelectionScope"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CodeSecurityScanConfiguration": {
+      "type": "object",
+      "required": [
+        "ruleSetCategories"
+      ],
+      "properties": {
+        "periodicScanConfiguration": {
+          "$ref": "#/definitions/PeriodicScanConfiguration"
+        },
+        "continuousIntegrationScanConfiguration": {
+          "$ref": "#/definitions/ContinuousIntegrationScanConfiguration"
+        },
+        "ruleSetCategories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuleSetCategory"
+          },
+          "minItems": 1,
+          "maxItems": 3
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Name": {
+      "description": "Code Security Scan Configuration name",
+      "type": "string",
+      "maxLength": 60,
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9-_$:.]*$"
+    },
+    "Level": {
+      "description": "Configuration Level",
+      "$ref": "#/definitions/ConfigurationLevel"
+    },
+    "Configuration": {
+      "description": "Code Security Scan Configuration",
+      "$ref": "#/definitions/CodeSecurityScanConfiguration"
+    },
+    "ScopeSettings": {
+      "description": "Scope Settings",
+      "$ref": "#/definitions/ScopeSettings"
+    },
+    "Arn": {
+      "description": "Code Security Scan Configuration ARN",
+      "type": "string",
+      "pattern": "^arn:(aws[a-zA-Z-]*)?:inspector2:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:owner/(\\d{12}|o-[a-z0-9]{10,32})/codesecurity-configuration/[a-f0-9-]{36}$"
+    },
+    "Tags": {
+      "$ref": "#/definitions/TagMap"
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "inspector2:TagResource",
+      "inspector2:UntagResource"
+    ]
+  },
+  "readOnlyProperties": [
+    "/properties/Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/ScopeSettings",
+    "/properties/Level",
+    "/properties/Tags"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "inspector2:CreateCodeSecurityScanConfiguration",
+        "inspector2:GetCodeSecurityScanConfiguration",
+        "inspector2:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "inspector2:GetCodeSecurityScanConfiguration",
+        "inspector2:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "inspector2:UpdateCodeSecurityScanConfiguration",
+        "inspector2:GetCodeSecurityScanConfiguration",
+        "inspector2:TagResource",
+        "inspector2:UntagResource",
+        "inspector2:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "inspector2:DeleteCodeSecurityScanConfiguration",
+        "inspector2:GetCodeSecurityScanConfiguration"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "inspector2:ListCodeSecurityScanConfigurations"
+      ]
+    }
+  }
+}

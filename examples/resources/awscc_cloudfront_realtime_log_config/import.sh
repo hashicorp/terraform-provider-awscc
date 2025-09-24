@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudfront_realtime_log_config.example <resource ID>
+$ terraform import awscc_cloudfront_realtime_log_config.example "arn"

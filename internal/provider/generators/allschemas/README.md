@@ -1,4 +1,4 @@
-# All AWS Cloud Control API Schemas 
+# All AWS Cloud Control API Schemas
 
 Generate (to stdout) a sample configuration file for use with the [Schema Downloader](../schema/README.md) that lists all available AWS Cloud Control API schemas.
 

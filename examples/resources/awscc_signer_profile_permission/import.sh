@@ -1,1 +1,1 @@
-$ terraform import awscc_signer_profile_permission.example <resource ID>
+$ terraform import awscc_signer_profile_permission.example "statement_id|profile_name"

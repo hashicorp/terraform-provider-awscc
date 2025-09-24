@@ -605,17 +605,51 @@
       "items": {
         "$ref": "#/definitions/ObjectTypeMapping"
       }
+    },
+    "EventTriggerNames": {
+      "description": "A list of unique names for active event triggers associated with the integration.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-zA-Z0-9_-]+$",
+        "minLength": 1,
+        "maxLength": 64
+      },
+      "insertionOrder": false,
+      "minItems": 1,
+      "maxItems": 1
     }
   },
   "required": [
     "DomainName"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "profile:TagResource",
+      "profile:UntagResource",
+      "profile:ListTagsForResource"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
         "profile:GetIntegration",
         "profile:PutIntegration",
-        "appflow:CreateFlow"
+        "appflow:CreateFlow",
+        "app-integrations:CreateEventIntegrationAssociation",
+        "app-integrations:GetEventIntegration",
+        "connect:DescribeInstance",
+        "ds:DescribeDirectories",
+        "events:ListTargetsByRule",
+        "events:PutRule",
+        "events:PutTargets",
+        "events:PutEvents",
+        "profile:TagResource"
       ]
     },
     "read": {
@@ -626,18 +660,46 @@
     "delete": {
       "permissions": [
         "profile:DeleteIntegration",
-        "appflow:DeleteFlow"
+        "appflow:DeleteFlow",
+        "app-integrations:ListEventIntegrationAssociations",
+        "app-integrations:DeleteEventIntegrationAssociation",
+        "events:RemoveTargets",
+        "events:ListTargetsByRule",
+        "events:DeleteRule"
       ]
     },
     "update": {
       "permissions": [
         "profile:PutIntegration",
         "profile:GetIntegration",
+        "appflow:CreateFlow",
+        "app-integrations:GetEventIntegration",
+        "app-integrations:CreateEventIntegrationAssociation",
+        "app-integrations:ListEventIntegrationAssociations",
+        "app-integrations:DeleteEventIntegrationAssociation",
+        "events:ListTargetsByRule",
+        "events:RemoveTargets",
+        "events:DeleteRule",
+        "events:PutRule",
+        "events:PutTargets",
+        "events:PutEvents",
         "profile:UntagResource",
-        "profile:TagResource"
+        "profile:TagResource",
+        "connect:DescribeInstance",
+        "ds:DescribeDirectories"
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "DomainName": {
+            "$ref": "resource-schema.json#/properties/DomainName"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
       "permissions": [
         "profile:ListIntegrations"
       ]

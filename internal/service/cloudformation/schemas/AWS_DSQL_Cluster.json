@@ -1,0 +1,196 @@
+{
+  "typeName": "AWS::DSQL::Cluster",
+  "description": "Resource Type definition for AWS::DSQL::Cluster",
+  "definitions": {
+    "Tag": {
+      "description": "A map of key and value pairs to use to tag your cluster.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "DeletionProtectionEnabled": {
+      "description": "Whether deletion protection is enabled in this cluster.",
+      "type": "boolean"
+    },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "uniqueItems": false,
+      "insertionOrder": false
+    },
+    "ResourceArn": {
+      "description": "The Amazon Resource Name (ARN) for the cluster.",
+      "type": "string"
+    },
+    "Identifier": {
+      "description": "The ID of the created cluster.",
+      "type": "string"
+    },
+    "CreationTime": {
+      "description": "The time of when the cluster was created in ISO-8601 format.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "The status of the cluster.",
+      "type": "string"
+    },
+    "VpcEndpointServiceName": {
+      "description": "The VPC endpoint service name.",
+      "type": "string"
+    },
+    "MultiRegionProperties": {
+      "description": "The Multi-region properties associated to this cluster.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "WitnessRegion": {
+          "description": "The witness region in a multi-region cluster.",
+          "type": "string"
+        },
+        "Clusters": {
+          "type": "array",
+          "items": {
+            "description": "The cluster Amazon Resource Name (ARN) in a multi-region cluster.",
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "insertionOrder": false
+        }
+      }
+    },
+    "KmsEncryptionKey": {
+      "description": "The KMS key that encrypts data on the cluster.",
+      "type": "string"
+    },
+    "EncryptionDetails": {
+      "description": "The encryption configuration details for the cluster.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "EncryptionStatus": {
+          "description": "The status of encryption for the cluster.",
+          "type": "string"
+        },
+        "EncryptionType": {
+          "description": "The type of encryption that protects data in the cluster.",
+          "type": "string"
+        },
+        "KmsKeyArn": {
+          "description": "The Amazon Resource Name (ARN) of the KMS key that encrypts data in the cluster.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "dsql:UntagResource",
+      "dsql:TagResource",
+      "dsql:ListTagsForResource"
+    ]
+  },
+  "primaryIdentifier": [
+    "/properties/Identifier"
+  ],
+  "readOnlyProperties": [
+    "/properties/ResourceArn",
+    "/properties/Identifier",
+    "/properties/CreationTime",
+    "/properties/Status",
+    "/properties/VpcEndpointServiceName",
+    "/properties/EncryptionDetails"
+  ],
+  "writeOnlyProperties": [
+    "/properties/KmsEncryptionKey"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "dsql:CreateCluster",
+        "dsql:UpdateCluster",
+        "dsql:GetCluster",
+        "dsql:TagResource",
+        "dsql:GetVpcEndpointServiceName",
+        "dsql:ListTagsForResource",
+        "iam:CreateServiceLinkedRole",
+        "dsql:PutMultiRegionProperties",
+        "dsql:AddPeerCluster",
+        "dsql:PutWitnessRegion",
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:GenerateDataKey",
+        "kms:DescribeKey"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "dsql:GetCluster",
+        "dsql:GetVpcEndpointServiceName",
+        "dsql:ListTagsForResource",
+        "tag:GetTagKeys",
+        "tag:GetTagValues"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "dsql:UpdateCluster",
+        "dsql:GetCluster",
+        "dsql:UntagResource",
+        "dsql:TagResource",
+        "dsql:GetVpcEndpointServiceName",
+        "dsql:ListTagsForResource",
+        "dsql:PutMultiRegionProperties",
+        "dsql:PutWitnessRegion",
+        "dsql:AddPeerCluster",
+        "dsql:RemovePeerCluster",
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:GenerateDataKey",
+        "kms:DescribeKey"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "dsql:DeleteCluster",
+        "dsql:GetCluster",
+        "dsql:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "dsql:ListClusters",
+        "dsql:ListTagsForResource",
+        "tag:GetTagKeys",
+        "tag:GetTagValues"
+      ]
+    }
+  }
+}

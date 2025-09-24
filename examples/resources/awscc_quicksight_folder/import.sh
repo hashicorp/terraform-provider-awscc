@@ -1,0 +1,1 @@
+$ terraform import awscc_quicksight_folder.example "aws_account_id|folder_id"

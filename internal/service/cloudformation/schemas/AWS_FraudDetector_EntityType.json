@@ -81,7 +81,8 @@
       "permissions": [
         "frauddetector:GetEntityTypes",
         "frauddetector:PutEntityType",
-        "frauddetector:ListTagsForResource"
+        "frauddetector:ListTagsForResource",
+        "frauddetector:TagResource"
       ]
     },
     "read": {
@@ -111,5 +112,17 @@
         "frauddetector:ListTagsForResource"
       ]
     }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "frauddetector:ListTagsForResource",
+      "frauddetector:TagResource",
+      "frauddetector:UntagResource"
+    ]
   }
 }

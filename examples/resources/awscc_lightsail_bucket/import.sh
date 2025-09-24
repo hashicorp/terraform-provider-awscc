@@ -1,1 +1,1 @@
-$ terraform import awscc_lightsail_bucket.example <resource ID>
+$ terraform import awscc_lightsail_bucket.example "bucket_name"

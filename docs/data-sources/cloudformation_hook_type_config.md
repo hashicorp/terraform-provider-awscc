@@ -28,5 +28,3 @@ Data Source schema for AWS::CloudFormation::HookTypeConfig
 - `type_name` (String) The name of the type being registered.
 
 We recommend that type names adhere to the following pattern: company_or_organization::service::type.
-
-

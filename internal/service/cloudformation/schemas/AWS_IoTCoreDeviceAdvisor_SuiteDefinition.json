@@ -129,6 +129,18 @@
     }
   },
   "additionalProperties": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "iotdeviceadvisor:TagResource",
+      "iotdeviceadvisor:UntagResource",
+      "iot:ListTagsForResource"
+    ]
+  },
   "required": [
     "SuiteDefinitionConfiguration"
   ],
@@ -143,25 +155,45 @@
   "handlers": {
     "create": {
       "permissions": [
+        "iot:DescribeCertificate",
+        "iot:DescribeThing",
+        "iot:GetPolicy",
+        "iot:ListAttachedPolicies",
+        "iot:ListCertificates",
+        "iot:ListPrincipalPolicies",
+        "iot:ListThingPrincipals",
+        "iot:ListThings",
         "iotdeviceadvisor:CreateSuiteDefinition",
+        "iotdeviceadvisor:TagResource",
         "iam:PassRole"
       ]
     },
     "read": {
       "permissions": [
-        "iotdeviceadvisor:GetSuiteDefinition"
+        "iotdeviceadvisor:GetSuiteDefinition",
+        "iot:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
+        "iot:DescribeCertificate",
+        "iot:DescribeThing",
+        "iot:GetPolicy",
+        "iot:ListAttachedPolicies",
+        "iot:ListCertificates",
+        "iot:ListPrincipalPolicies",
+        "iot:ListThingPrincipals",
+        "iot:ListThings",
         "iotdeviceadvisor:UpdateSuiteDefinition",
         "iotdeviceadvisor:GetSuiteDefinition",
         "iotdeviceadvisor:UntagResource",
-        "iotdeviceadvisor:TagResource"
+        "iotdeviceadvisor:TagResource",
+        "iam:PassRole"
       ]
     },
     "delete": {
       "permissions": [
+        "iotdeviceadvisor:GetSuiteDefinition",
         "iotdeviceadvisor:DeleteSuiteDefinition"
       ]
     },

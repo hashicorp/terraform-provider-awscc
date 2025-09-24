@@ -84,6 +84,18 @@
       }
     }
   },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "mediapackage-vod:TagResource",
+      "mediapackage-vod:UntagResource",
+      "mediapackage-vod:ListTagsForResource"
+    ]
+  },
   "additionalProperties": false,
   "required": [
     "Id"
@@ -117,6 +129,7 @@
     },
     "update": {
       "permissions": [
+        "mediapackage-vod:DescribePackagingGroup",
         "mediapackage-vod:UpdatePackagingGroup",
         "mediapackage-vod:ConfigureLogs",
         "mediapackage-vod:TagResource",
@@ -131,6 +144,7 @@
     },
     "delete": {
       "permissions": [
+        "mediapackage-vod:DescribePackagingGroup",
         "mediapackage-vod:DeletePackagingGroup"
       ]
     }

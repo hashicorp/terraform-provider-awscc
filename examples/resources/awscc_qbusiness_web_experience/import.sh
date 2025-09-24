@@ -1,0 +1,1 @@
+$ terraform import awscc_qbusiness_web_experience.example "application_id|web_experience_id"

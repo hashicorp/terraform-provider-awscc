@@ -1,3 +1,6 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 package acctest
 
 import (
@@ -5,8 +8,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
+	fwprovider "github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-testing/helper/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/envvar"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider"
 )
 
@@ -23,7 +27,7 @@ type TestData struct {
 	// TerraformResourceType is the Terraform resource type, e.g. "aws_s3_bucket".
 	TerraformResourceType string
 
-	provider tfsdk.Provider
+	provider fwprovider.Provider
 }
 
 // EmptyConfig returns an empty (no attributes) Terraform configuration for the resource.
@@ -107,6 +111,11 @@ func (td *TestData) RandomName() string {
 // RandomAlphaString returns a new alphabetic random string of length `n`.
 func (td *TestData) RandomAlphaString(n int) string {
 	return acctest.RandStringFromCharSet(n, acctest.CharSetAlpha)
+}
+
+// Region returns the AWS Region in effect.
+func (td *TestData) Region() string {
+	return envvar.GetWithDefault(envvar.DefaultRegion, "us-west-2")
 }
 
 // NewTestData returns a new TestData structure.

@@ -2,7 +2,19 @@
   "typeName": "AWS::KafkaConnect::Connector",
   "description": "Resource Type definition for AWS::KafkaConnect::Connector",
   "additionalProperties": false,
-  "taggable": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "kafkaconnect:ListTagsForResource",
+      "kafkaconnect:UntagResource",
+      "kafkaconnect:TagResource",
+      "firehose:TagDeliveryStream"
+    ]
+  },
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-kafkaconnect.git",
   "properties": {
     "Capacity": {
@@ -65,6 +77,15 @@
       "type": "string",
       "pattern": "arn:(aws|aws-us-gov|aws-cn):iam:.*"
     },
+    "Tags": {
+      "description": "A collection of tags associated with a resource",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
     "WorkerConfiguration": {
       "$ref": "#/definitions/WorkerConfiguration"
     }
@@ -89,7 +110,7 @@
       ]
     },
     "AutoScaling": {
-      "description": "Details about auto scaling of a connector. ",
+      "description": "Details about auto scaling of a connector.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -368,6 +389,25 @@
         "CpuUtilizationPercentage"
       ]
     },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ],
+      "additionalProperties": false
+    },
     "Vpc": {
       "description": "Information about a VPC used with the connector.",
       "type": "object",
@@ -451,11 +491,16 @@
   "primaryIdentifier": [
     "/properties/ConnectorArn"
   ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ConnectorName"
+    ]
+  ],
   "readOnlyProperties": [
     "/properties/ConnectorArn"
   ],
+  "replacementStrategy": "delete_then_create",
   "createOnlyProperties": [
-    "/properties/ConnectorConfiguration",
     "/properties/ConnectorDescription",
     "/properties/ConnectorName",
     "/properties/KafkaCluster",
@@ -472,6 +517,8 @@
       "permissions": [
         "kafkaconnect:CreateConnector",
         "kafkaconnect:DescribeConnector",
+        "kafkaconnect:TagResource",
+        "kafkaconnect:ListTagsForResource",
         "iam:CreateServiceLinkedRole",
         "iam:PassRole",
         "ec2:CreateNetworkInterface",
@@ -491,7 +538,8 @@
     },
     "read": {
       "permissions": [
-        "kafkaconnect:DescribeConnector"
+        "kafkaconnect:DescribeConnector",
+        "kafkaconnect:ListTagsForResource"
       ]
     },
     "delete": {
@@ -507,6 +555,10 @@
       "permissions": [
         "kafkaconnect:UpdateConnector",
         "kafkaconnect:DescribeConnector",
+        "kafkaconnect:DescribeConnectorOperation",
+        "kafkaconnect:TagResource",
+        "kafkaconnect:ListTagsForResource",
+        "kafkaconnect:UntagResource",
         "iam:CreateServiceLinkedRole",
         "logs:UpdateLogDelivery",
         "logs:GetLogDelivery",

@@ -21,6 +21,7 @@ Data Source schema for AWS::ECS::TaskSet
 
 ### Read-Only
 
+- `capacity_provider_strategy` (Attributes List) (see [below for nested schema](#nestedatt--capacity_provider_strategy))
 - `cluster` (String) The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the task set in.
 - `external_id` (String) An optional non-unique tag that identifies this task set in external systems. If the task set is associated with a service discovery registry, the tasks in this task set will have the ECS_TASK_SET_EXTERNAL_ID AWS Cloud Map attribute set to the provided value.
 - `launch_type` (String) The launch type that new tasks in the task set will use. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html in the Amazon Elastic Container Service Developer Guide.
@@ -30,7 +31,19 @@ Data Source schema for AWS::ECS::TaskSet
 - `scale` (Attributes) A floating-point percentage of the desired number of tasks to place and keep running in the task set. (see [below for nested schema](#nestedatt--scale))
 - `service` (String) The short name or full Amazon Resource Name (ARN) of the service to create the task set in.
 - `service_registries` (Attributes List) The details of the service discovery registries to assign to this task set. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html. (see [below for nested schema](#nestedatt--service_registries))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `task_definition` (String) The short name or full Amazon Resource Name (ARN) of the task definition for the tasks in the task set to use.
+- `task_set_id` (String) The ID of the task set.
+
+<a id="nestedatt--capacity_provider_strategy"></a>
+### Nested Schema for `capacity_provider_strategy`
+
+Read-Only:
+
+- `base` (Number)
+- `capacity_provider` (String)
+- `weight` (Number)
+
 
 <a id="nestedatt--load_balancers"></a>
 ### Nested Schema for `load_balancers`
@@ -39,7 +52,6 @@ Read-Only:
 
 - `container_name` (String) The name of the container (as it appears in a container definition) to associate with the load balancer.
 - `container_port` (Number) The port on the container to associate with the load balancer. This port must correspond to a containerPort in the task definition the tasks in the service are using. For tasks that use the EC2 launch type, the container instance they are launched on must allow ingress traffic on the hostPort of the port mapping.
-- `load_balancer_name` (String) The name of the load balancer to associate with the Amazon ECS service or task set. A load balancer name is only specified when using a Classic Load Balancer. If you are using an Application Load Balancer or a Network Load Balancer this should be omitted.
 - `target_group_arn` (String) The full Amazon Resource Name (ARN) of the Elastic Load Balancing target group or groups associated with a service or task set. A target group ARN is only specified when using an Application Load Balancer or Network Load Balancer. If you are using a Classic Load Balancer this should be omitted. For services using the ECS deployment controller, you can specify one or multiple target groups. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html in the Amazon Elastic Container Service Developer Guide. For services using the CODE_DEPLOY deployment controller, you are required to define two target groups for the load balancer. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html in the Amazon Elastic Container Service Developer Guide. If your service's task definition uses the awsvpc network mode (which is required for the Fargate launch type), you must choose ip as the target type, not instance, when creating your target groups because tasks that use the awsvpc network mode are associated with an elastic network interface, not an Amazon EC2 instance.
 
 
@@ -81,3 +93,10 @@ Read-Only:
 - `registry_arn` (String) The Amazon Resource Name (ARN) of the service registry. The currently supported service registry is AWS Cloud Map. For more information, see https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html
 
 
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)

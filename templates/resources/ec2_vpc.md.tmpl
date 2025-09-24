@@ -1,0 +1,56 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Basic usage
+To create a VPC
+{{ tffile (printf "examples/resources/%s/ec2_vpc.tf" .Name)}}
+
+### Basic usage with tags
+To create a VPC with tags
+{{ tffile (printf "examples/resources/%s/ec2_vpc_tags.tf" .Name)}}
+
+### Advanced usage 
+To create a VPC with CIDR from AWS IPAM
+{{ tffile (printf "examples/resources/%s/ec2_vpc_ipam.tf" .Name)}}
+
+Create a VPC with Amazon provided IPV6 pool
+{{ tffile (printf "examples/resources/%s/ec2_vpc_ipv6.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if or .HasImport .HasImportIDConfig .HasImportIdentityConfig }}
+
+## Import
+
+Import is supported using the following syntax:
+{{- end }}
+{{- if .HasImportIdentityConfig }}
+
+In Terraform v1.12.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `identity` attribute, for example:
+
+{{tffile .ImportIdentityConfigFile }}
+
+{{ .IdentitySchemaMarkdown | trimspace }}
+{{- end }}
+{{- if .HasImportIDConfig }}
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+{{tffile .ImportIDConfigFile }}
+{{- end }}
+{{- if .HasImport }}
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
+{{codefile "shell" .ImportFile }}
+
+{{- end }}

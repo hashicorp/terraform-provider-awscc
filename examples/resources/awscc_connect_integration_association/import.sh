@@ -1,0 +1,1 @@
+$ terraform import awscc_connect_integration_association.example "instance_id|integration_type|integration_arn"

@@ -56,6 +56,12 @@
   "primaryIdentifier": [
     "/properties/ConfigurationArn"
   ],
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -78,7 +84,18 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "TypeName": {
+            "$ref": "resource-schema.json#/properties/TypeName"
+          },
+          "TypeArn": {
+            "$ref": "resource-schema.json#/properties/TypeArn"
+          }
+        }
+      },
       "permissions": [
+        "cloudformation:ListTypes",
         "cloudformation:BatchDescribeTypeConfigurations"
       ]
     }

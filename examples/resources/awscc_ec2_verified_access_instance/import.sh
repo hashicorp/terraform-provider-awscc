@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_verified_access_instance.example "verified_access_instance_id"

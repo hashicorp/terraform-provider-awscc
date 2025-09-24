@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_internet_gateway.example <resource ID>
+$ terraform import awscc_ec2_internet_gateway.example "internet_gateway_id"

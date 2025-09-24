@@ -23,6 +23,7 @@ Data Source schema for AWS::CustomerProfiles::Integration
 
 - `created_at` (String) The time of this integration got created
 - `domain_name` (String) The unique name of the domain.
+- `event_trigger_names` (List of String) A list of unique names for active event triggers associated with the integration.
 - `flow_definition` (Attributes) (see [below for nested schema](#nestedatt--flow_definition))
 - `last_updated_at` (String) The time of this integration got last updated at
 - `object_type_name` (String) The name of the ObjectType defined for the 3rd party data in Profile Service
@@ -72,7 +73,7 @@ Read-Only:
 - `zendesk` (Attributes) (see [below for nested schema](#nestedatt--flow_definition--source_flow_config--source_connector_properties--zendesk))
 
 <a id="nestedatt--flow_definition--source_flow_config--source_connector_properties--marketo"></a>
-### Nested Schema for `flow_definition.source_flow_config.source_connector_properties.zendesk`
+### Nested Schema for `flow_definition.source_flow_config.source_connector_properties.marketo`
 
 Read-Only:
 
@@ -80,7 +81,7 @@ Read-Only:
 
 
 <a id="nestedatt--flow_definition--source_flow_config--source_connector_properties--s3"></a>
-### Nested Schema for `flow_definition.source_flow_config.source_connector_properties.zendesk`
+### Nested Schema for `flow_definition.source_flow_config.source_connector_properties.s3`
 
 Read-Only:
 
@@ -89,7 +90,7 @@ Read-Only:
 
 
 <a id="nestedatt--flow_definition--source_flow_config--source_connector_properties--salesforce"></a>
-### Nested Schema for `flow_definition.source_flow_config.source_connector_properties.zendesk`
+### Nested Schema for `flow_definition.source_flow_config.source_connector_properties.salesforce`
 
 Read-Only:
 
@@ -99,7 +100,7 @@ Read-Only:
 
 
 <a id="nestedatt--flow_definition--source_flow_config--source_connector_properties--service_now"></a>
-### Nested Schema for `flow_definition.source_flow_config.source_connector_properties.zendesk`
+### Nested Schema for `flow_definition.source_flow_config.source_connector_properties.service_now`
 
 Read-Only:
 
@@ -197,5 +198,3 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
-
-

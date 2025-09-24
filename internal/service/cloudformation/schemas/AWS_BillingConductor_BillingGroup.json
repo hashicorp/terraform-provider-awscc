@@ -37,6 +37,9 @@
             "pattern": "[0-9]{12}"
           },
           "minItems": 1
+        },
+        "AutoAssociate": {
+          "type": "boolean"
         }
       },
       "required": [
@@ -124,7 +127,12 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "billingconductor:ListTagsForResource",
+      "billingconductor:TagResource",
+      "billingconductor:UntagResource"
+    ]
   },
   "required": [
     "Name",
@@ -151,8 +159,9 @@
       "permissions": [
         "billingconductor:CreateBillingGroup",
         "billingconductor:AssociateAccounts",
-        "billingconductor:ListBillingGroups"
-
+        "billingconductor:ListBillingGroups",
+        "billingconductor:TagResource",
+        "billingconductor:ListTagsForResource"
       ]
     },
     "read": {
@@ -186,7 +195,9 @@
     "delete": {
       "permissions": [
         "billingconductor:DeleteBillingGroup",
-        "billingconductor:ListBillingGroups"
+        "billingconductor:ListBillingGroups",
+        "billingconductor:UntagResource",
+        "billingconductor:UpdateBillingGroup"
       ]
     }
   }

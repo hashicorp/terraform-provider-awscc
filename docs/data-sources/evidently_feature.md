@@ -59,5 +59,3 @@ Read-Only:
 - `long_value` (Number)
 - `string_value` (String)
 - `variation_name` (String)
-
-

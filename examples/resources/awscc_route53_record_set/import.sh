@@ -1,0 +1,1 @@
+$ terraform import awscc_route53_record_set.example "id"

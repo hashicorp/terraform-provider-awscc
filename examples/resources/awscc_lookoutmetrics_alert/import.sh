@@ -1,1 +1,1 @@
-$ terraform import awscc_lookoutmetrics_alert.example <resource ID>
+$ terraform import awscc_lookoutmetrics_alert.example "arn"

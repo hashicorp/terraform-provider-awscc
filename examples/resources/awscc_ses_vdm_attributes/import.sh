@@ -1,0 +1,1 @@
+$ terraform import awscc_ses_vdm_attributes.example "vdm_attributes_resource_id"

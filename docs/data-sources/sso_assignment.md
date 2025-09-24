@@ -27,5 +27,3 @@ Data Source schema for AWS::SSO::Assignment
 - `principal_type` (String) The assignee's type, user/group
 - `target_id` (String) The account id to be provisioned.
 - `target_type` (String) The type of resource to be provsioned to, only aws account now
-
-

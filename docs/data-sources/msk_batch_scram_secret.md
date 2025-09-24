@@ -23,5 +23,3 @@ Data Source schema for AWS::MSK::BatchScramSecret
 
 - `cluster_arn` (String)
 - `secret_arn_list` (List of String)
-
-

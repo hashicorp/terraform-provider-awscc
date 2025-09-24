@@ -133,7 +133,7 @@ Read-Only:
 - `target_measure_name` (String) Target measure name to be used. If not provided, the target measure name by default would be MeasureName if provided, or SourceColumn otherwise.
 
 <a id="nestedatt--target_configuration--timestream_configuration--mixed_measure_mappings--multi_measure_attribute_mappings"></a>
-### Nested Schema for `target_configuration.timestream_configuration.mixed_measure_mappings.target_measure_name`
+### Nested Schema for `target_configuration.timestream_configuration.mixed_measure_mappings.multi_measure_attribute_mappings`
 
 Read-Only:
 
@@ -152,12 +152,10 @@ Read-Only:
 - `target_multi_measure_name` (String) Name of the target multi-measure in the derived table. Required if MeasureNameColumn is not provided. If MeasureNameColumn is provided then the value from that column will be used as the multi-measure name.
 
 <a id="nestedatt--target_configuration--timestream_configuration--multi_measure_mappings--multi_measure_attribute_mappings"></a>
-### Nested Schema for `target_configuration.timestream_configuration.multi_measure_mappings.target_multi_measure_name`
+### Nested Schema for `target_configuration.timestream_configuration.multi_measure_mappings.multi_measure_attribute_mappings`
 
 Read-Only:
 
 - `measure_value_type` (String) Value type of the measure value column to be read from the query result.
 - `source_column` (String) Source measure value column in the query result where the attribute value is to be read.
 - `target_multi_measure_attribute_name` (String) Custom name to be used for attribute name in derived table. If not provided, source column name would be used.
-
-

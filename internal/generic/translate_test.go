@@ -1,3 +1,6 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 package generic
 
 import (
@@ -5,6 +8,7 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 )
@@ -82,6 +86,9 @@ func TestTranslateToCloudControl(t *testing.T) {
 						"Flags": []interface{}{false, true, true},
 					},
 				},
+				"JsonString": map[string]interface{}{
+					"Key1": float64(42),
+				},
 			},
 		},
 	}
@@ -89,7 +96,7 @@ func TestTranslateToCloudControl(t *testing.T) {
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
 			translator := toCloudControl{tfToCfNameMap: testCase.TfToCfNameMap}
-			got, err := translator.AsRaw(context.TODO(), testCase.Plan.Raw)
+			got, err := translator.AsRaw(context.TODO(), testCase.Plan.Schema, testCase.Plan.Raw)
 
 			if err == nil && testCase.ExpectedError {
 				t.Fatalf("expected error")
@@ -111,7 +118,7 @@ func TestTranslateToCloudControl(t *testing.T) {
 func TestTranslateToTerraform(t *testing.T) {
 	testCases := []struct {
 		TestName      string
-		Schema        tfsdk.Schema
+		Schema        schema.Schema
 		CfToTfNameMap map[string]string
 		ResourceModel map[string]interface{}
 		ExpectedError bool
@@ -411,12 +418,16 @@ func TestTranslateToTerraform(t *testing.T) {
 						"Flags": []interface{}{false, true, true},
 					},
 				},
+				"JsonString": map[string]interface{}{
+					"Key1": float64(42),
+				},
 			},
 			ExpectedValue: tftypes.NewValue(tftypes.Object{
 				AttributeTypes: map[string]tftypes.Type{
 					"name":        tftypes.String,
 					"simple_map":  tftypes.Map{ElementType: tftypes.String},
 					"complex_map": tftypes.Map{ElementType: videoPortElementType},
+					"json_string": tftypes.String,
 				},
 			}, map[string]tftypes.Value{
 				"name": tftypes.NewValue(tftypes.String, "testing"),
@@ -426,7 +437,6 @@ func TestTranslateToTerraform(t *testing.T) {
 					"one": tftypes.NewValue(tftypes.String, "eno"),
 					"two": tftypes.NewValue(tftypes.String, "owt"),
 				}),
-
 				"complex_map": tftypes.NewValue(tftypes.Map{
 					ElementType: videoPortElementType,
 				}, map[string]tftypes.Value{
@@ -450,6 +460,7 @@ func TestTranslateToTerraform(t *testing.T) {
 						}),
 					}),
 				}),
+				"json_string": tftypes.NewValue(tftypes.String, `{"Key1":42}`),
 			}),
 		},
 	}

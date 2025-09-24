@@ -26,5 +26,3 @@ Data Source schema for AWS::ACMPCA::CertificateAuthorityActivation
 - `certificate_chain` (String) Certificate chain for the Certificate Authority certificate.
 - `complete_certificate_chain` (String) The complete certificate chain, including the Certificate Authority certificate.
 - `status` (String) The status of the Certificate Authority.
-
-

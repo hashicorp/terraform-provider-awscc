@@ -27,6 +27,7 @@ Data Source schema for AWS::NetworkFirewall::RuleGroup
 - `rule_group_arn` (String) A resource ARN.
 - `rule_group_id` (String)
 - `rule_group_name` (String)
+- `summary_configuration` (Attributes) (see [below for nested schema](#nestedatt--summary_configuration))
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 - `type` (String)
 
@@ -35,9 +36,26 @@ Data Source schema for AWS::NetworkFirewall::RuleGroup
 
 Read-Only:
 
+- `reference_sets` (Attributes) (see [below for nested schema](#nestedatt--rule_group--reference_sets))
 - `rule_variables` (Attributes) (see [below for nested schema](#nestedatt--rule_group--rule_variables))
 - `rules_source` (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source))
 - `stateful_rule_options` (Attributes) (see [below for nested schema](#nestedatt--rule_group--stateful_rule_options))
+
+<a id="nestedatt--rule_group--reference_sets"></a>
+### Nested Schema for `rule_group.reference_sets`
+
+Read-Only:
+
+- `ip_set_references` (Attributes Map) (see [below for nested schema](#nestedatt--rule_group--reference_sets--ip_set_references))
+
+<a id="nestedatt--rule_group--reference_sets--ip_set_references"></a>
+### Nested Schema for `rule_group.reference_sets.ip_set_references`
+
+Read-Only:
+
+- `reference_arn` (String) A resource ARN.
+
+
 
 <a id="nestedatt--rule_group--rule_variables"></a>
 ### Nested Schema for `rule_group.rule_variables`
@@ -94,7 +112,7 @@ Read-Only:
 - `rule_options` (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateful_rules--rule_options))
 
 <a id="nestedatt--rule_group--rules_source--stateful_rules--header"></a>
-### Nested Schema for `rule_group.rules_source.stateful_rules.rule_options`
+### Nested Schema for `rule_group.rules_source.stateful_rules.header`
 
 Read-Only:
 
@@ -125,29 +143,29 @@ Read-Only:
 - `stateless_rules` (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules))
 
 <a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--custom_actions"></a>
-### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules`
+### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions`
 
 Read-Only:
 
-- `action_definition` (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--action_definition))
+- `action_definition` (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--custom_actions--action_definition))
 - `action_name` (String)
 
-<a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--action_definition"></a>
-### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules.action_definition`
+<a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--custom_actions--action_definition"></a>
+### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions.action_definition`
 
 Read-Only:
 
-- `publish_metric_action` (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--action_definition--publish_metric_action))
+- `publish_metric_action` (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--custom_actions--action_definition--publish_metric_action))
 
-<a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--action_definition--publish_metric_action"></a>
-### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules.action_definition.publish_metric_action`
+<a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--custom_actions--action_definition--publish_metric_action"></a>
+### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions.action_definition.publish_metric_action`
 
 Read-Only:
 
-- `dimensions` (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--action_definition--publish_metric_action--dimensions))
+- `dimensions` (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--custom_actions--action_definition--publish_metric_action--dimensions))
 
-<a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--action_definition--publish_metric_action--dimensions"></a>
-### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules.action_definition.publish_metric_action.dimensions`
+<a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--custom_actions--action_definition--publish_metric_action--dimensions"></a>
+### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions.action_definition.publish_metric_action.dimensions`
 
 Read-Only:
 
@@ -186,7 +204,7 @@ Read-Only:
 - `tcp_flags` (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes--tcp_flags))
 
 <a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes--destination_ports"></a>
-### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules.rule_definition.match_attributes.tcp_flags`
+### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules.rule_definition.match_attributes.destination_ports`
 
 Read-Only:
 
@@ -195,7 +213,7 @@ Read-Only:
 
 
 <a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes--destinations"></a>
-### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules.rule_definition.match_attributes.tcp_flags`
+### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules.rule_definition.match_attributes.destinations`
 
 Read-Only:
 
@@ -203,7 +221,7 @@ Read-Only:
 
 
 <a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes--source_ports"></a>
-### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules.rule_definition.match_attributes.tcp_flags`
+### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules.rule_definition.match_attributes.source_ports`
 
 Read-Only:
 
@@ -212,7 +230,7 @@ Read-Only:
 
 
 <a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--rule_definition--match_attributes--sources"></a>
-### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules.rule_definition.match_attributes.tcp_flags`
+### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules.rule_definition.match_attributes.sources`
 
 Read-Only:
 
@@ -242,6 +260,14 @@ Read-Only:
 
 
 
+<a id="nestedatt--summary_configuration"></a>
+### Nested Schema for `summary_configuration`
+
+Read-Only:
+
+- `rule_options` (List of String)
+
+
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
@@ -249,5 +275,3 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
-
-

@@ -296,5 +296,3 @@ Read-Only:
 
 - `ruleset_arn` (String) Arn of the Ruleset
 - `validation_mode` (String)
-
-

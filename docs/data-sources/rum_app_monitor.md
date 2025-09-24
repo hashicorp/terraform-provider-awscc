@@ -22,9 +22,14 @@ Data Source schema for AWS::RUM::AppMonitor
 ### Read-Only
 
 - `app_monitor_configuration` (Attributes) AppMonitor configuration (see [below for nested schema](#nestedatt--app_monitor_configuration))
+- `app_monitor_id` (String) The unique ID of the new app monitor.
+- `custom_events` (Attributes) AppMonitor custom events configuration (see [below for nested schema](#nestedatt--custom_events))
 - `cw_log_enabled` (Boolean) Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM sends a copy of this telemetry data to CWLlong in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur CWLlong charges. If you omit this parameter, the default is false
-- `domain` (String) The top-level internet domain name for which your application has administrative authority.
+- `deobfuscation_configuration` (Attributes) A structure that contains the configuration for how an app monitor can deobfuscate stack traces. (see [below for nested schema](#nestedatt--deobfuscation_configuration))
+- `domain` (String) The top-level internet domain name for which your application has administrative authority. The CreateAppMonitor requires either the domain or the domain list.
+- `domain_list` (List of String) The top-level internet domain names for which your application has administrative authority. The CreateAppMonitor requires either the domain or the domain list.
 - `name` (String) A name for the app monitor
+- `resource_policy` (Attributes) A structure that defines resource policy attached to your app monitor. (see [below for nested schema](#nestedatt--resource_policy))
 - `tags` (Attributes Set) Assigns one or more tags (key-value pairs) to the app monitor. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters.You can associate as many as 50 tags with an app monitor. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--app_monitor_configuration"></a>
@@ -39,8 +44,125 @@ Read-Only:
 - `guest_role_arn` (String) The ARN of the guest IAM role that is attached to the identity pool that is used to authorize the sending of data to RUM.
 - `identity_pool_id` (String) The ID of the identity pool that is used to authorize the sending of data to RUM.
 - `included_pages` (List of String) If this app monitor is to collect data from only certain pages in your application, this structure lists those pages. You can't include both ExcludedPages and IncludedPages in the same operation.
+- `metric_destinations` (Attributes Set) An array of structures which define the destinations and the metrics that you want to send. (see [below for nested schema](#nestedatt--app_monitor_configuration--metric_destinations))
 - `session_sample_rate` (Number) Specifies the percentage of user sessions to use for RUM data collection. Choosing a higher percentage gives you more data but also incurs more costs. The number you specify is the percentage of user sessions that will be used. If you omit this parameter, the default of 10 is used.
 - `telemetries` (List of String) An array that lists the types of telemetry data that this app monitor is to collect.
+
+<a id="nestedatt--app_monitor_configuration--metric_destinations"></a>
+### Nested Schema for `app_monitor_configuration.metric_destinations`
+
+Read-Only:
+
+- `destination` (String) Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. If you specify Evidently, you must also specify the ARN of the Evidently experiment that is to be the destination and an IAM role that has permission to write to the experiment.
+- `destination_arn` (String) Use this parameter only if Destination is Evidently. This parameter specifies the ARN of the Evidently experiment that will receive the extended metrics.
+- `iam_role_arn` (String) This parameter is required if Destination is Evidently. If Destination is CloudWatch, do not use this parameter.
+
+This parameter specifies the ARN of an IAM role that RUM will assume to write to the Evidently experiment that you are sending metrics to. This role must have permission to write to that experiment.
+- `metric_definitions` (Attributes Set) An array of structures which define the metrics that you want to send. (see [below for nested schema](#nestedatt--app_monitor_configuration--metric_destinations--metric_definitions))
+
+<a id="nestedatt--app_monitor_configuration--metric_destinations--metric_definitions"></a>
+### Nested Schema for `app_monitor_configuration.metric_destinations.metric_definitions`
+
+Read-Only:
+
+- `dimension_keys` (Map of String) Use this field only if you are sending the metric to CloudWatch.
+
+This field is a map of field paths to dimension names. It defines the dimensions to associate with this metric in CloudWatch. For extended metrics, valid values for the entries in this field are the following:
+
+"metadata.pageId": "PageId"
+
+"metadata.browserName": "BrowserName"
+
+"metadata.deviceType": "DeviceType"
+
+"metadata.osName": "OSName"
+
+"metadata.countryCode": "CountryCode"
+
+"event_details.fileType": "FileType"
+
+All dimensions listed in this field must also be included in EventPattern.
+- `event_pattern` (String) The pattern that defines the metric, specified as a JSON object. RUM checks events that happen in a user's session against the pattern, and events that match the pattern are sent to the metric destination.
+
+When you define extended metrics, the metric definition is not valid if EventPattern is omitted.
+
+Example event patterns:
+
+'{ "event_type": ["com.amazon.rum.js_error_event"], "metadata": { "browserName": [ "Chrome", "Safari" ], } }'
+
+'{ "event_type": ["com.amazon.rum.performance_navigation_event"], "metadata": { "browserName": [ "Chrome", "Firefox" ] }, "event_details": { "duration": [{ "numeric": [ "<", 2000 ] }] } }'
+
+'{ "event_type": ["com.amazon.rum.performance_navigation_event"], "metadata": { "browserName": [ "Chrome", "Safari" ], "countryCode": [ "US" ] }, "event_details": { "duration": [{ "numeric": [ ">=", 2000, "<", 8000 ] }] } }'
+
+If the metrics destination' is CloudWatch and the event also matches a value in DimensionKeys, then the metric is published with the specified dimensions.
+- `name` (String) The name for the metric that is defined in this structure. For extended metrics, valid values are the following:
+
+PerformanceNavigationDuration
+
+PerformanceResourceDuration
+
+NavigationSatisfiedTransaction
+
+NavigationToleratedTransaction
+
+NavigationFrustratedTransaction
+
+WebVitalsCumulativeLayoutShift
+
+WebVitalsFirstInputDelay
+
+WebVitalsLargestContentfulPaint
+
+JsErrorCount
+
+HttpErrorCount
+
+SessionCount
+- `namespace` (String) The namespace used by CloudWatch Metrics for the metric that is defined in this structure
+- `unit_label` (String) The CloudWatch metric unit to use for this metric. If you omit this field, the metric is recorded with no unit.
+- `value_key` (String) The field within the event object that the metric value is sourced from.
+
+If you omit this field, a hardcoded value of 1 is pushed as the metric value. This is useful if you just want to count the number of events that the filter catches.
+
+If this metric is sent to Evidently, this field will be passed to Evidently raw and Evidently will handle data extraction from the event.
+
+
+
+
+<a id="nestedatt--custom_events"></a>
+### Nested Schema for `custom_events`
+
+Read-Only:
+
+- `status` (String) Indicates whether AppMonitor accepts custom events.
+
+
+<a id="nestedatt--deobfuscation_configuration"></a>
+### Nested Schema for `deobfuscation_configuration`
+
+Read-Only:
+
+- `java_script_source_maps` (Attributes) A structure that contains the configuration for how an app monitor can unminify JavaScript error stack traces using source maps. (see [below for nested schema](#nestedatt--deobfuscation_configuration--java_script_source_maps))
+
+<a id="nestedatt--deobfuscation_configuration--java_script_source_maps"></a>
+### Nested Schema for `deobfuscation_configuration.java_script_source_maps`
+
+Read-Only:
+
+- `s3_uri` (String) The S3Uri of the bucket or folder that stores the source map files. It is required if status is ENABLED.
+- `status` (String) Specifies whether JavaScript error stack traces should be unminified for this app monitor. The default is for JavaScript error stack trace unminification to be DISABLED
+
+
+
+<a id="nestedatt--resource_policy"></a>
+### Nested Schema for `resource_policy`
+
+Read-Only:
+
+- `policy_document` (String) The JSON to use as the resource policy. The document can be up to 4 KB in size.
+- `policy_revision_id` (String) A string value that you can use to conditionally update your policy. You can provide the revision ID of your existing policy to make mutating requests against that policy. 
+
+ When you assign a policy revision ID, then later requests about that policy will be rejected with an InvalidPolicyRevisionIdException error if they don't provide the correct current revision ID.
 
 
 <a id="nestedatt--tags"></a>
@@ -50,5 +172,3 @@ Read-Only:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-
-

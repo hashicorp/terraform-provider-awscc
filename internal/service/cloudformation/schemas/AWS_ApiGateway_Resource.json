@@ -1,51 +1,82 @@
 {
-    "typeName" : "AWS::ApiGateway::Resource",
-    "description" : "Resource Type definition for AWS::ApiGateway::Resource",
-    "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-apigateway.git",
-    "additionalProperties" : false,
-    "properties" : {
-        "ResourceId" : {
-            "description": "A unique primary identifier for a Resource",
-            "type" : "string"
-        },
-        "RestApiId" : {
-            "description": "The ID of the RestApi resource in which you want to create this resource..",
-            "type" : "string"
-        },
-        "ParentId" : {
-            "description": "The parent resource's identifier.",
-            "type" : "string"
-        },
-        "PathPart" : {
-            "description": "The last path segment for this resource.",
-            "type" : "string"
-        }
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-apigateway",
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "read": {
+      "permissions": [
+        "apigateway:GET"
+      ]
     },
-    "taggable": false,
-    "required" : [ "ParentId", "PathPart", "RestApiId" ],
-    "createOnlyProperties" : [ "/properties/PathPart", "/properties/ParentId", "/properties/RestApiId" ],
-    "primaryIdentifier" : [ "/properties/RestApiId", "/properties/ResourceId"],
-    "readOnlyProperties" : [ "/properties/ResourceId" ],
-    "handlers": {
-        "read": {
-            "permissions": [
-                "apigateway:GET"
-            ]
+    "create": {
+      "permissions": [
+        "apigateway:POST"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "apigateway:GET",
+        "apigateway:PATCH"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "apigateway:GET"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "RestApiId": {
+            "$ref": "resource-schema.json#/properties/RestApiId"
+          }
         },
-        "create": {
-            "permissions": [
-                "apigateway:POST"
-            ]
-        },
-        "delete": {
-            "permissions": [
-                "apigateway:DELETE"
-            ]
-        },
-        "list": {
-            "permissions": [
-                "apigateway:GET"
-            ]
-        }
+        "required": [
+          "RestApiId"
+        ]
+      }
+    },
+    "delete": {
+      "permissions": [
+        "apigateway:DELETE"
+      ]
     }
+  },
+  "typeName": "AWS::ApiGateway::Resource",
+  "readOnlyProperties": [
+    "/properties/ResourceId"
+  ],
+  "description": "The ``AWS::ApiGateway::Resource`` resource creates a resource in an API.",
+  "createOnlyProperties": [
+    "/properties/PathPart",
+    "/properties/ParentId",
+    "/properties/RestApiId"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/RestApiId",
+    "/properties/ResourceId"
+  ],
+  "properties": {
+    "ParentId": {
+      "description": "",
+      "type": "string"
+    },
+    "PathPart": {
+      "description": "",
+      "type": "string"
+    },
+    "ResourceId": {
+      "description": "",
+      "type": "string"
+    },
+    "RestApiId": {
+      "description": "",
+      "type": "string"
+    }
+  },
+  "required": [
+    "ParentId",
+    "PathPart",
+    "RestApiId"
+  ]
 }

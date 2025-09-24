@@ -1,0 +1,178 @@
+{
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-pcs.git",
+  "tagging": {
+    "permissions": [
+      "pcs:TagResource",
+      "pcs:ListTagsForResource",
+      "pcs:UntagResource"
+    ],
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": true
+  },
+  "handlers": {
+    "read": {
+      "permissions": [
+        "pcs:GetQueue",
+        "pcs:ListTagsForResource"
+      ]
+    },
+    "create": {
+      "permissions": [
+        "ec2:CreateNetworkInterface",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
+        "ec2:GetSecurityGroupsForVpc",
+        "iam:CreateServiceLinkedRole",
+        "secretsmanager:CreateSecret",
+        "secretsmanager:TagResource",
+        "pcs:CreateQueue",
+        "pcs:GetQueue",
+        "pcs:ListTagsForResource",
+        "pcs:TagResource"
+      ],
+      "timeoutInMinutes": 60
+    },
+    "update": {
+      "permissions": [
+        "pcs:GetQueue",
+        "pcs:UpdateQueue",
+        "pcs:ListTagsForResource",
+        "pcs:TagResource",
+        "pcs:UntagResource"
+      ],
+      "timeoutInMinutes": 60
+    },
+    "list": {
+      "permissions": [
+        "pcs:ListClusters",
+        "pcs:ListQueues"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "ClusterId": {
+            "$ref": "resource-schema.json#/properties/ClusterId"
+          }
+        },
+        "required": [
+          "ClusterId"
+        ]
+      }
+    },
+    "delete": {
+      "permissions": [
+        "pcs:DeleteQueue",
+        "pcs:GetQueue"
+      ],
+      "timeoutInMinutes": 60
+    }
+  },
+  "typeName": "AWS::PCS::Queue",
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/ErrorInfo",
+    "/properties/Id",
+    "/properties/Status"
+  ],
+  "description": "AWS::PCS::Queue resource creates an AWS PCS queue.",
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/ClusterId"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "definitions": {
+    "ErrorInfo": {
+      "description": "An error that occurred during resource provisioning.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Message": {
+          "description": "The detailed error information.",
+          "type": "string"
+        },
+        "Code": {
+          "description": "The short-form error code.",
+          "type": "string"
+        }
+      }
+    },
+    "ComputeNodeGroupConfiguration": {
+      "description": "The compute node group configuration for a queue.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ComputeNodeGroupId": {
+          "description": "The compute node group ID for the compute node group configuration.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": [
+    "ClusterId"
+  ],
+  "properties": {
+    "Status": {
+      "description": "The provisioning status of the queue. The provisioning status doesn't indicate the overall health of the queue.",
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "ACTIVE",
+        "UPDATING",
+        "DELETING",
+        "CREATE_FAILED",
+        "DELETE_FAILED",
+        "UPDATE_FAILED"
+      ]
+    },
+    "ClusterId": {
+      "description": "The ID of the cluster of the queue.",
+      "type": "string"
+    },
+    "ErrorInfo": {
+      "description": "The list of errors that occurred during queue provisioning.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ErrorInfo"
+      }
+    },
+    "ComputeNodeGroupConfigurations": {
+      "description": "The list of compute node group configurations associated with the queue. Queues assign jobs to associated compute node groups.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ComputeNodeGroupConfiguration"
+      }
+    },
+    "Id": {
+      "description": "The generated unique ID of the queue.",
+      "type": "string"
+    },
+    "Arn": {
+      "pattern": "^(.*?)",
+      "description": "The unique Amazon Resource Name (ARN) of the queue.",
+      "type": "string"
+    },
+    "Tags": {
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      },
+      "description": "1 or more tags added to the resource. Each tag consists of a tag key and tag value. The tag value is optional and can be an empty string.",
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "Name": {
+      "description": "The name that identifies the queue.",
+      "type": "string"
+    }
+  }
+}

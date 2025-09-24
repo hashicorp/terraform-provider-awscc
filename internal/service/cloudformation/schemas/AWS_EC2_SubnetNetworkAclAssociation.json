@@ -20,6 +20,7 @@
     "NetworkAclId",
     "SubnetId"
   ],
+  "replacementStrategy": "delete_then_create",
   "createOnlyProperties": [
     "/properties/SubnetId",
     "/properties/NetworkAclId"
@@ -30,7 +31,12 @@
   "readOnlyProperties": [
     "/properties/AssociationId"
   ],
-  "taggable": false,
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
   "handlers": {
     "create": {
       "permissions": [

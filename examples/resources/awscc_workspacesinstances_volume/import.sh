@@ -1,0 +1,1 @@
+$ terraform import awscc_workspacesinstances_volume.example "volume_id"

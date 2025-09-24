@@ -1,7 +1,7 @@
 {
   "typeName": "AWS::IoTTwinMaker::ComponentType",
   "description": "Resource schema for AWS::IoTTwinMaker::ComponentType",
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-iottwinmaker",
   "definitions": {
     "DateTimeFormat": {
       "type": "string",
@@ -10,6 +10,10 @@
     "ParentComponentType": {
       "type": "string",
       "pattern": "[a-zA-Z_\\.\\-0-9:]+"
+    },
+    "PropertyName": {
+      "type": "string",
+      "pattern": "[a-zA-Z_\\-0-9]+"
     },
     "RequiredProperty": {
       "type": "string",
@@ -267,6 +271,45 @@
       },
       "additionalProperties": false
     },
+    "PropertyGroup": {
+      "description": "An object that sets information about a property group.",
+      "type": "object",
+      "properties": {
+        "GroupType": {
+          "description": "The type of property group.",
+          "type": "string",
+          "enum": [
+            "TABULAR"
+          ]
+        },
+        "PropertyNames": {
+          "description": "The list of property names in the property group.",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/PropertyName"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "CompositeComponentType": {
+      "description": "An object that sets information about a composite component type.",
+      "type": "object",
+      "properties": {
+        "ComponentTypeId": {
+          "description": "The id of the composite component type.",
+          "type": "string",
+          "pattern": "[a-zA-Z_\\.\\-0-9:]+",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "additionalProperties": false
+    },
     "Status": {
       "type": "object",
       "properties": {
@@ -282,21 +325,32 @@
         },
         "Error": {
           "type": "object",
-          "properties": {
-            "Message": {
-              "type": "string",
-              "minLength": 0,
-              "maxLength": 2048
+          "anyOf": [
+            {
+              "description": "Empty Error object.",
+              "type": "object",
+              "additionalProperties": false
             },
-            "Code": {
-              "type": "string",
-              "enum": [
-                "VALIDATION_ERROR",
-                "INTERNAL_FAILURE"
-              ]
+            {
+              "description": "Error object with Message and Code.",
+              "type": "object",
+              "properties": {
+                "Message": {
+                  "type": "string",
+                  "minLength": 0,
+                  "maxLength": 2048
+                },
+                "Code": {
+                  "type": "string",
+                  "enum": [
+                    "VALIDATION_ERROR",
+                    "INTERNAL_FAILURE"
+                  ]
+                }
+              },
+              "additionalProperties": false
             }
-          },
-          "additionalProperties": false
+          ]
         }
       },
       "additionalProperties": false
@@ -345,7 +399,7 @@
       }
     },
     "IsSingleton": {
-      "description": "A Boolean value that specifies whether an entity can have more than one component of this type.\n\n",
+      "description": "A Boolean value that specifies whether an entity can have more than one component of this type.",
       "type": "boolean"
     },
     "PropertyDefinitions": {
@@ -354,6 +408,26 @@
       "patternProperties": {
         "": {
           "$ref": "#/definitions/PropertyDefinition"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PropertyGroups": {
+      "description": "An map of the property groups in the component type. Each property group's key must be unique to this map.",
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/PropertyGroup"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CompositeComponentTypes": {
+      "description": "An map of the composite component types in the component type. Each composite component type's key must be unique to this map.",
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/CompositeComponentType"
         }
       },
       "additionalProperties": false
@@ -405,7 +479,12 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "iottwinmaker:TagResource",
+      "iottwinmaker:UntagResource",
+      "iottwinmaker:ListTagsForResource"
+    ]
   },
   "required": [
     "WorkspaceId",
@@ -433,7 +512,8 @@
         "iottwinmaker:CreateComponentType",
         "iottwinmaker:GetComponentType",
         "iottwinmaker:GetWorkspace",
-        "iottwinmaker:ListTagsForResource"
+        "iottwinmaker:ListTagsForResource",
+        "iottwinmaker:TagResource"
       ]
     },
     "read": {
@@ -461,6 +541,17 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "WorkspaceId": {
+            "type": "string",
+            "$ref": "resource-schema.json#/properties/WorkspaceId"
+          }
+        },
+        "required": [
+          "WorkspaceId"
+        ]
+      },
       "permissions": [
         "iottwinmaker:GetComponentType",
         "iottwinmaker:GetWorkspace",

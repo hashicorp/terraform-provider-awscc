@@ -24,6 +24,8 @@ Data Source schema for AWS::IVS::RecordingConfiguration
 - `arn` (String) Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.
 - `destination_configuration` (Attributes) Recording Destination Configuration. (see [below for nested schema](#nestedatt--destination_configuration))
 - `name` (String) Recording Configuration Name.
+- `recording_reconnect_window_seconds` (Number) Recording Reconnect Window Seconds. (0 means disabled)
+- `rendition_configuration` (Attributes) Rendition Configuration describes which renditions should be recorded for a stream. (see [below for nested schema](#nestedatt--rendition_configuration))
 - `state` (String) Recording Configuration State.
 - `tags` (Attributes Set) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
 - `thumbnail_configuration` (Attributes) Recording Thumbnail Configuration. (see [below for nested schema](#nestedatt--thumbnail_configuration))
@@ -44,13 +46,22 @@ Read-Only:
 
 
 
+<a id="nestedatt--rendition_configuration"></a>
+### Nested Schema for `rendition_configuration`
+
+Read-Only:
+
+- `rendition_selection` (String) Resolution Selection indicates which set of renditions are recorded for a stream.
+- `renditions` (Set of String) Renditions indicates which renditions are recorded for a stream.
+
+
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 
 <a id="nestedatt--thumbnail_configuration"></a>
@@ -59,6 +70,6 @@ Read-Only:
 Read-Only:
 
 - `recording_mode` (String) Thumbnail Recording Mode, which determines whether thumbnails are recorded at an interval or are disabled.
-- `target_interval_seconds` (Number) Thumbnail recording Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.
-
-
+- `resolution` (String) Resolution indicates the desired resolution of recorded thumbnails.
+- `storage` (Set of String) Storage indicates the format in which thumbnails are recorded.
+- `target_interval_seconds` (Number) Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.

@@ -1,6 +1,7 @@
 {
   "typeName": "AWS::IoTTwinMaker::Entity",
   "description": "Resource schema for AWS::IoTTwinMaker::Entity",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-iottwinmaker",
   "definitions": {
     "DateTimeFormat": {
       "type": "string",
@@ -28,7 +29,7 @@
       "additionalProperties": false
     },
     "PropertyDefinitionConfiguration": {
-      "description": "An object that specifies information about a property.",
+      "description": "An object that specifies information about a property configuration.",
       "type": "object",
       "patternProperties": {
         "": {
@@ -164,59 +165,93 @@
       },
       "additionalProperties": false
     },
+    "Definition": {
+      "description": "An object that specifies information about a property definition.",
+      "type": "object",
+      "properties": {
+        "Configuration": {
+          "description": "An object that specifies information about a property configuration.",
+          "$ref": "#/definitions/PropertyDefinitionConfiguration"
+        },
+        "DataType": {
+          "description": "An object that contains information about the data type.",
+          "$ref": "#/definitions/DataType"
+        },
+        "DefaultValue": {
+          "description": "An object that contains the default value.",
+          "$ref": "#/definitions/DataValue"
+        },
+        "IsExternalId": {
+          "description": "A Boolean value that specifies whether the property ID comes from an external data store.",
+          "type": "boolean"
+        },
+        "IsFinal": {
+          "description": "A Boolean value that specifies whether the property definition can be updated.",
+          "type": "boolean"
+        },
+        "IsImported": {
+          "description": "A Boolean value that specifies whether the property definition is imported from an external data store.",
+          "type": "boolean"
+        },
+        "IsInherited": {
+          "description": "A Boolean value that specifies whether the property definition is inherited from a parent entity.",
+          "type": "boolean"
+        },
+        "IsRequiredInEntity": {
+          "description": "A Boolean value that specifies whether the property is required.",
+          "type": "boolean"
+        },
+        "IsStoredExternally": {
+          "description": "A Boolean value that specifies whether the property is stored externally.",
+          "type": "boolean"
+        },
+        "IsTimeSeries": {
+          "description": "A Boolean value that specifies whether the property consists of time series data.",
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
     "Property": {
+      "description": "An object that specifies information about a property.",
       "type": "object",
       "properties": {
         "Definition": {
-          "description": "An object that specifies information about a property.",
-          "type": "object",
-          "properties": {
-            "Configuration": {
-              "description": "An object that specifies information about a property.",
-              "$ref": "#/definitions/PropertyDefinitionConfiguration"
-            },
-            "DataType": {
-              "description": "An object that contains information about the data type.",
-              "$ref": "#/definitions/DataType"
-            },
-            "DefaultValue": {
-              "description": "An object that contains the default value.",
-              "$ref": "#/definitions/DataValue"
-            },
-            "IsExternalId": {
-              "description": "A Boolean value that specifies whether the property ID comes from an external data store.",
-              "type": "boolean"
-            },
-            "IsFinal": {
-              "description": "A Boolean value that specifies whether the property definition can be updated.",
-              "type": "boolean"
-            },
-            "IsImported": {
-              "description": "A Boolean value that specifies whether the property definition is imported from an external data store.",
-              "type": "boolean"
-            },
-            "IsInherited": {
-              "description": "A Boolean value that specifies whether the property definition is inherited from a parent entity.",
-              "type": "boolean"
-            },
-            "IsRequiredInEntity": {
-              "description": "A Boolean value that specifies whether the property is required.",
-              "type": "boolean"
-            },
-            "IsStoredExternally": {
-              "description": "A Boolean value that specifies whether the property is stored externally.",
-              "type": "boolean"
-            },
-            "IsTimeSeries": {
-              "description": "A Boolean value that specifies whether the property consists of time series data.",
-              "type": "boolean"
-            }
-          },
-          "additionalProperties": false
+          "description": "The definition of the property.",
+          "$ref": "#/definitions/Definition"
         },
         "Value": {
           "description": "The value of the property.",
           "$ref": "#/definitions/DataValue"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PropertyName": {
+      "type": "string",
+      "pattern": "[a-zA-Z_\\-0-9]+"
+    },
+    "PropertyGroup": {
+      "description": "An object that specifies information about a property group.",
+      "type": "object",
+      "properties": {
+        "GroupType": {
+          "description": "The type of property group.",
+          "type": "string",
+          "enum": [
+            "TABULAR"
+          ]
+        },
+        "PropertyNames": {
+          "description": "The list of property names in the property group.",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 256,
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/PropertyName"
+          }
         }
       },
       "additionalProperties": false
@@ -260,8 +295,75 @@
           },
           "additionalProperties": false
         },
+        "PropertyGroups": {
+          "description": "An object that maps strings to the property groups to set in the component type. Each string in the mapping must be unique to this object.",
+          "type": "object",
+          "patternProperties": {
+            "": {
+              "$ref": "#/definitions/PropertyGroup"
+            }
+          },
+          "additionalProperties": false
+        },
         "Status": {
           "description": "The current status of the entity.",
+          "$ref": "#/definitions/Status"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CompositeComponent": {
+      "type": "object",
+      "properties": {
+        "ComponentName": {
+          "description": "The name of the component.",
+          "type": "string",
+          "pattern": "[a-zA-Z_\\-0-9]+",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "ComponentPath": {
+          "description": "The path of the component.",
+          "type": "string",
+          "pattern": "[a-zA-Z_\\-0-9/]+",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "ComponentTypeId": {
+          "description": "The ID of the component type.",
+          "type": "string",
+          "pattern": "[a-zA-Z_\\-0-9]+",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "Description": {
+          "description": "The description of the component.",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 512
+        },
+        "Properties": {
+          "description": "An object that maps strings to the properties to set in the component type. Each string in the mapping must be unique to this object.",
+          "type": "object",
+          "patternProperties": {
+            "": {
+              "$ref": "#/definitions/Property"
+            }
+          },
+          "additionalProperties": false
+        },
+        "PropertyGroups": {
+          "description": "An object that maps strings to the property groups to set in the component type. Each string in the mapping must be unique to this object.",
+          "type": "object",
+          "patternProperties": {
+            "": {
+              "$ref": "#/definitions/PropertyGroup"
+            }
+          },
+          "additionalProperties": false
+        },
+        "Status": {
+          "description": "The current status of the component.",
           "$ref": "#/definitions/Status"
         }
       },
@@ -282,21 +384,32 @@
         },
         "Error": {
           "type": "object",
-          "properties": {
-            "Message": {
-              "type": "string",
-              "minLength": 0,
-              "maxLength": 2048
+          "anyOf": [
+            {
+              "description": "Empty Error object.",
+              "type": "object",
+              "additionalProperties": false
             },
-            "Code": {
-              "type": "string",
-              "enum": [
-                "VALIDATION_ERROR",
-                "INTERNAL_FAILURE"
-              ]
+            {
+              "description": "Error object with Message and Code.",
+              "type": "object",
+              "properties": {
+                "Message": {
+                  "type": "string",
+                  "minLength": 0,
+                  "maxLength": 2048
+                },
+                "Code": {
+                  "type": "string",
+                  "enum": [
+                    "VALIDATION_ERROR",
+                    "INTERNAL_FAILURE"
+                  ]
+                }
+              },
+              "additionalProperties": false
             }
-          },
-          "additionalProperties": false
+          ]
         }
       },
       "additionalProperties": false
@@ -381,6 +494,16 @@
         }
       },
       "additionalProperties": false
+    },
+    "CompositeComponents": {
+      "description": "A map that sets information about a composite component.",
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/CompositeComponent"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false,
@@ -389,7 +512,12 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "iottwinmaker:TagResource",
+      "iottwinmaker:UntagResource",
+      "iottwinmaker:ListTagsForResource"
+    ]
   },
   "required": [
     "WorkspaceId",
@@ -416,22 +544,30 @@
         "iottwinmaker:GetWorkspace",
         "iottwinmaker:CreateEntity",
         "iottwinmaker:GetEntity",
-        "iotsitewise:ListTagsForResource"
+        "iottwinmaker:ListComponents",
+        "iottwinmaker:ListProperties",
+        "iottwinmaker:ListTagsForResource",
+        "iottwinmaker:TagResource"
       ]
     },
     "read": {
       "permissions": [
-        "iottwinmaker:GetWorkspace",
         "iottwinmaker:GetComponentType",
         "iottwinmaker:GetEntity",
+        "iottwinmaker:ListComponents",
+        "iottwinmaker:ListProperties",
+        "iottwinmaker:GetWorkspace",
         "iottwinmaker:ListEntities",
         "iottwinmaker:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
-        "iottwinmaker:GetWorkspace",
         "iottwinmaker:GetComponentType",
+        "iottwinmaker:GetEntity",
+        "iottwinmaker:ListComponents",
+        "iottwinmaker:ListProperties",
+        "iottwinmaker:GetWorkspace",
         "iottwinmaker:ListTagsForResource",
         "iottwinmaker:TagResource",
         "iottwinmaker:UntagResource",
@@ -441,11 +577,23 @@
     },
     "delete": {
       "permissions": [
+        "iottwinmaker:GetEntity",
         "iottwinmaker:GetWorkspace",
         "iottwinmaker:DeleteEntity"
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "WorkspaceId": {
+            "type": "string",
+            "$ref": "resource-schema.json#/properties/WorkspaceId"
+          }
+        },
+        "required": [
+          "WorkspaceId"
+        ]
+      },
       "permissions": [
         "iottwinmaker:GetWorkspace",
         "iottwinmaker:ListTagsForResource",

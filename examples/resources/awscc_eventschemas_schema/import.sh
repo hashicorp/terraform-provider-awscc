@@ -1,0 +1,1 @@
+$ terraform import awscc_eventschemas_schema.example "schema_arn"

@@ -22,6 +22,7 @@ Data Source schema for AWS::SES::Template
 ### Read-Only
 
 - `template` (Attributes) The content of the email, composed of a subject line, an HTML part, and a text-only part (see [below for nested schema](#nestedatt--template))
+- `template_id` (String)
 
 <a id="nestedatt--template"></a>
 ### Nested Schema for `template`
@@ -32,5 +33,3 @@ Read-Only:
 - `subject_part` (String) The subject line of the email.
 - `template_name` (String) The name of the template.
 - `text_part` (String) The email body that is visible to recipients whose email clients do not display HTML content.
-
-

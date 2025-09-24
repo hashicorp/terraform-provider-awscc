@@ -81,6 +81,130 @@
         "Key",
         "Value"
       ]
+    },
+    "OverrideTimeSlice": {
+      "description": "The start time or end time for an an hours of operation override.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Hours": {
+          "type": "integer",
+          "description": "The hours.",
+          "minimum": 0,
+          "maximum": 23
+        },
+        "Minutes": {
+          "type": "integer",
+          "description": "The minutes.",
+          "minimum": 0,
+          "maximum": 59
+        }
+      },
+      "required": [
+        "Hours",
+        "Minutes"
+      ]
+    },
+    "HoursOfOperationOverrideConfig": {
+      "description": "Contains information about the hours of operation override.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Day": {
+          "type": "string",
+          "description": "The day that the hours of operation override applies to.",
+          "enum": [
+            "SUNDAY",
+            "MONDAY",
+            "TUESDAY",
+            "WEDNESDAY",
+            "THURSDAY",
+            "FRIDAY",
+            "SATURDAY"
+          ]
+        },
+        "StartTime": {
+          "description": "The new start time that your contact center opens for the overriden days.",
+          "$ref": "#/definitions/OverrideTimeSlice"
+        },
+        "EndTime": {
+          "description": "The new end time that your contact center closes for the overriden days.",
+          "$ref": "#/definitions/OverrideTimeSlice"
+        }
+      },
+      "required": [
+        "Day",
+        "StartTime",
+        "EndTime"
+      ]
+    },
+    "HoursOfOperationOverride": {
+      "description": "Overrides attached to the hours of operation.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "OverrideName": {
+          "$ref": "#/definitions/OverrideName"
+        },
+        "OverrideDescription": {
+          "$ref": "#/definitions/OverrideDescription"
+        },
+        "EffectiveFrom": {
+          "$ref": "#/definitions/EffectiveFrom"
+        },
+        "EffectiveTill": {
+          "$ref": "#/definitions/EffectiveTill"
+        },
+        "OverrideConfig": {
+          "$ref": "#/definitions/OverrideConfig"
+        },
+        "HoursOfOperationOverrideId": {
+          "$ref": "#/definitions/HoursOfOperationOverrideId"
+        }
+      },
+      "required": [
+        "OverrideName",
+        "EffectiveFrom",
+        "EffectiveTill",
+        "OverrideConfig"
+      ]
+    },
+    "OverrideName": {
+      "description": "The name of the hours of operation override.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 127
+    },
+    "OverrideDescription": {
+      "description": "The description of the hours of operation override.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 250
+    },
+    "EffectiveFrom": {
+      "description": "The date from which the hours of operation override would be effective.",
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "EffectiveTill": {
+      "description": "The date till which the hours of operation override would be effective.",
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "OverrideConfig": {
+      "description": "Configuration information for the hours of operation override: day, start time, and end time.",
+      "type": "array",
+      "maxItems": 100,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/HoursOfOperationOverrideConfig"
+      }
+    },
+    "HoursOfOperationOverrideId": {
+      "description": "The Resource Identifier for the hours of operation override.",
+      "type": "string",
+      "pattern": "^[-a-zA-Z0-9]*$"
     }
   },
   "properties": {
@@ -129,6 +253,15 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "HoursOfOperationOverrides": {
+      "description": "One or more hours of operation overrides assigned to an hour of operation.",
+      "type": "array",
+      "maxItems": 50,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/HoursOfOperationOverride"
+      }
     }
   },
   "required": [
@@ -141,12 +274,14 @@
     "create": {
       "permissions": [
         "connect:CreateHoursOfOperation",
-        "connect:TagResource"
+        "connect:TagResource",
+        "connect:CreateHoursOfOperationOverride"
       ]
     },
     "read": {
       "permissions": [
-        "connect:DescribeHoursOfOperation"
+        "connect:DescribeHoursOfOperation",
+        "connect:ListHoursOfOperationOverrides"
       ]
     },
     "delete": {
@@ -158,8 +293,27 @@
     "update": {
       "permissions": [
         "connect:UpdateHoursOfOperation",
+        "connect:CreateHoursOfOperationOverride",
+        "connect:UpdateHoursOfOperationOverride",
+        "connect:DeleteHoursOfOperationOverride",
+        "connect:ListHoursOfOperationOverrides",
         "connect:TagResource",
         "connect:UntagResource"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "InstanceArn": {
+            "$ref": "resource-schema.json#/properties/InstanceArn"
+          }
+        },
+        "required": [
+          "InstanceArn"
+        ]
+      },
+      "permissions": [
+        "connect:ListHoursOfOperations"
       ]
     }
   },
@@ -169,5 +323,16 @@
   ],
   "readOnlyProperties": [
     "/properties/HoursOfOperationArn"
-  ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "connect:TagResource",
+      "connect:UntagResource"
+    ]
+  }
 }

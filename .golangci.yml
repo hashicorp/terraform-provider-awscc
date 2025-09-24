@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 issues:
   max-per-linter: 0
   max-same-issues: 0
@@ -5,26 +8,26 @@ issues:
 linters:
   disable-all: true
   enable:
-    - deadcode
+    - asciicheck
     - errcheck
-    - errorlint
-    - goconst
+    - gocritic
     - gofmt
-    - gomnd
     - gosimple
     - govet
     - ineffassign
     - makezero
     - misspell
+    - mnd
     - nakedret
     - nilerr
     - nolintlint
     - staticcheck
-    - structcheck
+    - stylecheck
+    - typecheck
     - unconvert
-    - unused
     - unparam
-    - varcheck
+    - unused
+    - whitespace
 
 linters-settings:
   errcheck:
@@ -32,20 +35,32 @@ linters-settings:
     ignore: fmt:.*,github.com/hashicorp/terraform-plugin-framework/tfsdk:SetAttribute,fprintf
     # exclude-functions:
     #   - (*github.com/hashicorp/terraform-plugin-framework/tfsdk.State).SetAttribute
-  gomnd:
-    settings:
-      mnd:
-        checks:
-          - argument
-          - assign
-          - case
-          # - condition
-          - operation
-          - return
-        ignored-functions:
-          - os.Exit
-          - validate.StringLenAtMost
-          - validate.StringLenBetween
+  gocritic:
+    enabled-tags:
+      - diagnostic
+    disabled-tags:
+      - style
+      - performance
+      - experimental
+      - opinionated
+  mnd:
+    checks:
+      - argument
+      - assign
+      - case
+      # - condition
+      - operation
+      - return
+    ignored-functions:
+      - os.Exit
+      - stringvalidator.LengthAtMost
+      - stringvalidator.LengthBetween
+  nolintlint:
+    allow-unused: false
+    allow-no-explanation:
+      - mnd
+  stylecheck:
+    checks: ["all", "-ST1003"]
   unparam:
     check-exported: true
 

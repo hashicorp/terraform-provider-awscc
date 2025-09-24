@@ -112,7 +112,10 @@
               "UNIQUE",
               "SECONDARY",
               "LOOKUP_ONLY",
-              "NEW_ONLY"
+              "NEW_ONLY",
+              "ASSET",
+              "CASE",
+              "ORDER"
             ]
           }
         }
@@ -143,7 +146,7 @@
       "description": "Description of the profile object type.",
       "type": "string",
       "minLength": 1,
-      "maxLength": 1000
+      "maxLength": 10000
     },
     "EncryptionKey": {
       "description": "The default encryption key",
@@ -181,6 +184,12 @@
       "description": "The time of this integration got last updated at.",
       "type": "string"
     },
+    "SourceLastUpdatedTimestampFormat": {
+      "description": "The format of your sourceLastUpdatedTimestamp that was previously set up.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
     "Tags": {
       "description": "The tags (keys and values) associated with the integration.",
       "type": "array",
@@ -196,19 +205,44 @@
       "pattern": "^[a-zA-Z0-9_-]+$",
       "minLength": 1,
       "maxLength": 64
+    },
+    "MaxProfileObjectCount": {
+      "description": "The maximum number of profile objects for this object type",
+      "type": "integer",
+      "minimum": 1
+    },
+    "MaxAvailableProfileObjectCount": {
+      "description": "The maximum available number of profile objects",
+      "type": "integer",
+      "minimum": 0
     }
   },
   "additionalProperties": false,
   "required": [
-    "DomainName"
+    "DomainName",
+    "ObjectTypeName",
+    "Description"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "profile:TagResource",
+      "profile:UntagResource",
+      "profile:ListTagsForResource"
+    ]
+  },
   "createOnlyProperties": [
     "/properties/DomainName",
     "/properties/ObjectTypeName"
   ],
   "readOnlyProperties": [
     "/properties/LastUpdatedAt",
-    "/properties/CreatedAt"
+    "/properties/CreatedAt",
+    "/properties/MaxAvailableProfileObjectCount"
   ],
   "primaryIdentifier": [
     "/properties/DomainName",
@@ -218,12 +252,17 @@
     "create": {
       "permissions": [
         "profile:GetProfileObjectType",
-        "profile:PutProfileObjectType"
+        "profile:PutProfileObjectType",
+        "profile:TagResource",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
       ]
     },
     "read": {
       "permissions": [
-        "profile:GetProfileObjectType"
+        "profile:GetProfileObjectType",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
       ]
     },
     "update": {
@@ -231,7 +270,9 @@
         "profile:GetProfileObjectType",
         "profile:PutProfileObjectType",
         "profile:UntagResource",
-        "profile:TagResource"
+        "profile:TagResource",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
       ]
     },
     "delete": {
@@ -240,8 +281,20 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "DomainName": {
+            "$ref": "resource-schema.json#/properties/DomainName"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
       "permissions": [
-        "profile:ListProfileObjectTypes"
+        "profile:ListProfileObjectTypes",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
       ]
     }
   }

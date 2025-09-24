@@ -3,6 +3,9 @@
   "description": "Resource schema for AWS::MediaTailor::PlaybackConfiguration",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-mediatailor.git",
   "properties": {
+    "AdConditioningConfiguration": {
+      "$ref": "#/definitions/AdConditioningConfiguration"
+    },
     "AdDecisionServerUrl": {
       "description": "The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing you can provide a static VAST URL. The maximum length is 25,000 characters.",
       "type": "string"
@@ -26,6 +29,10 @@
     "DashConfiguration": {
       "description": "The configuration for DASH content.",
       "$ref": "#/definitions/DashConfiguration"
+    },
+    "InsertionMode": {
+      "description": "The setting that controls whether players can use stitched or guided ad insertion. The default, STITCHED_ONLY, forces all player sessions to use stitched (server-side) ad insertion. Choosing PLAYER_SELECT allows players to select either stitched or guided ad insertion at session-initialization time. The default for players that do not specify an insertion mode is stitched.",
+      "$ref": "#/definitions/InsertionMode"
     },
     "LivePreRollConfiguration": {
       "description": "The configuration for pre-roll ad insertion.",
@@ -53,6 +60,10 @@
     "HlsConfiguration": {
       "description": "The configuration for HLS content.",
       "$ref": "#/definitions/HlsConfiguration"
+    },
+    "LogConfiguration": {
+      "description": "The configuration that defines where AWS Elemental MediaTailor sends logs for the playback configuration.",
+      "$ref": "#/definitions/LogConfiguration"
     },
     "PlaybackConfigurationArn": {
       "description": "The Amazon Resource Name (ARN) for the playback configuration.",
@@ -85,22 +96,44 @@
     }
   },
   "definitions": {
+    "AdConditioningConfiguration": {
+      "type": "object",
+      "description": "<p>The setting that indicates what conditioning MediaTailor will perform on ads that the ad decision server (ADS) returns.</p>",
+      "properties": {
+        "StreamingMediaFileConditioning": {
+          "$ref": "#/definitions/StreamingMediaFileConditioning"
+        }
+      },
+      "required": [
+        "StreamingMediaFileConditioning"
+      ],
+      "additionalProperties": false
+    },
     "AvailSuppression": {
       "description": "The configuration for avail suppression, also known as ad suppression. For more information about ad suppression, see Ad Suppression (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html).",
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "Mode": {
-          "description": "Sets the ad suppression mode. By default, ad suppression is set to OFF and all ad breaks are filled with ads or slate. When Mode is set to BEHIND_LIVE_EDGE, ad suppression is active and MediaTailor won't fill ad breaks on or behind the ad suppression Value time in the manifest lookback window.",
+          "description": "Sets the ad suppression mode. By default, ad suppression is off and all ad breaks are filled with ads or slate. When Mode is set to BEHIND_LIVE_EDGE, ad suppression is active and MediaTailor won't fill ad breaks on or behind the ad suppression Value time in the manifest lookback window. When Mode is set to AFTER_LIVE_EDGE, ad suppression is active and MediaTailor won't fill ad breaks that are within the live edge plus the avail suppression value.",
           "type": "string",
           "enum": [
             "OFF",
-            "BEHIND_LIVE_EDGE"
+            "BEHIND_LIVE_EDGE",
+            "AFTER_LIVE_EDGE"
           ]
         },
         "Value": {
           "description": "A live edge offset time in HH:MM:SS. MediaTailor won't fill ad breaks on or behind this time in the manifest lookback window. If Value is set to 00:00:00, it is in sync with the live edge, and MediaTailor won't fill any ad breaks on or behind the live edge. If you set a Value time, MediaTailor won't fill any ad breaks on or behind this time in the manifest lookback window. For example, if you set 00:45:00, then MediaTailor will fill ad breaks that occur within 45 minutes behind the live edge, but won't fill ad breaks on or behind 45 minutes behind the live edge.",
           "type": "string"
+        },
+        "FillPolicy": {
+          "description": "Defines the policy to apply to the avail suppression mode. BEHIND_LIVE_EDGE will always use the full avail suppression policy. AFTER_LIVE_EDGE mode can be used to invoke partial ad break fills when a session starts mid-break. Valid values are FULL_AVAIL_ONLY and PARTIAL_AVAIL",
+          "type": "string",
+          "enum": [
+            "PARTIAL_AVAIL",
+            "FULL_AVAIL_ONLY"
+          ]
         }
       }
     },
@@ -166,6 +199,20 @@
         }
       }
     },
+    "StreamingMediaFileConditioning": {
+      "type": "string",
+      "enum": [
+        "TRANSCODE",
+        "NONE"
+      ]
+    },
+    "InsertionMode": {
+      "type": "string",
+      "enum": [
+        "STITCHED_ONLY",
+        "PLAYER_SELECT"
+      ]
+    },
     "LivePreRollConfiguration": {
       "description": "The configuration for pre-roll ad insertion.",
       "type": "object",
@@ -226,6 +273,69 @@
         "ManifestEndpointPrefix": {
           "description": "The URL that is used to initiate a playback session for devices that support Apple HLS. The session uses server-side reporting.",
           "type": "string"
+        }
+      }
+    },
+    "LogConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AdsInteractionLog": {
+          "description": "The event types that MediaTailor emits in logs for interactions with the ADS.",
+          "$ref": "#/definitions/AdsInteractionLog"
+        },
+        "EnabledLoggingStrategies": {
+          "description": "The method used for collecting logs from AWS Elemental MediaTailor. To configure MediaTailor to send logs directly to Amazon CloudWatch Logs, choose LEGACY_CLOUDWATCH. To configure MediaTailor to send logs to CloudWatch, which then vends the logs to your destination of choice, choose VENDED_LOGS. Supported destinations are CloudWatch Logs log group, Amazon S3 bucket, and Amazon Data Firehose stream. To use vended logs, you must configure the delivery destination in Amazon CloudWatch",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ManifestServiceInteractionLog": {
+          "description": "The event types that MediaTailor emits in logs for interactions with the origin server.",
+          "$ref": "#/definitions/ManifestServiceInteractionLog"
+        },
+        "PercentEnabled": {
+          "description": "The percentage of session logs that MediaTailor sends to your CloudWatch Logs account. For example, if your playback configuration has 1000 sessions and percentEnabled is set to 60, MediaTailor sends logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides at random which of the playback configuration sessions to send logs for. If you want to view logs for a specific session, you can use the debug log mode.",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "PercentEnabled"
+      ]
+    },
+    "AdsInteractionLog": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ExcludeEventTypes": {
+          "type": "array",
+          "description": "Indicates that MediaTailor won't emit the selected events in the logs for playback sessions that are initialized with this configuration.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "PublishOptInEventTypes": {
+          "type": "array",
+          "description": "Indicates that MediaTailor emits RAW_ADS_RESPONSE logs for playback sessions that are initialized with this configuration.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ManifestServiceInteractionLog": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ExcludeEventTypes": {
+          "type": "array",
+          "description": "Indicates that MediaTailor won't emit the selected events in the logs for playback sessions that are initialized with this configuration.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }

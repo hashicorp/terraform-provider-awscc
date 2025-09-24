@@ -1,0 +1,1 @@
+$ terraform import awscc_cloudfront_vpc_origin.example "id"

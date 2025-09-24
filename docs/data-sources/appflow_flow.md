@@ -25,7 +25,9 @@ Data Source schema for AWS::AppFlow::Flow
 - `destination_flow_config_list` (Attributes List) List of Destination connectors of the flow. (see [below for nested schema](#nestedatt--destination_flow_config_list))
 - `flow_arn` (String) ARN identifier of the flow.
 - `flow_name` (String) Name of the flow.
+- `flow_status` (String) Flow activation status for Scheduled- and Event-triggered flows
 - `kms_arn` (String) The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.
+- `metadata_catalog_config` (Attributes) Configurations of metadata catalog of the flow. (see [below for nested schema](#nestedatt--metadata_catalog_config))
 - `source_flow_config` (Attributes) Configurations of Source connector of the flow. (see [below for nested schema](#nestedatt--source_flow_config))
 - `tags` (Attributes List) List of Tags. (see [below for nested schema](#nestedatt--tags))
 - `tasks` (Attributes List) List of tasks for the flow. (see [below for nested schema](#nestedatt--tasks))
@@ -36,6 +38,7 @@ Data Source schema for AWS::AppFlow::Flow
 
 Read-Only:
 
+- `api_version` (String) The API version that the destination connector uses.
 - `connector_profile_name` (String) Name of destination connector profile
 - `connector_type` (String) Destination connector type
 - `destination_connector_properties` (Attributes) Destination connector details (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties))
@@ -45,6 +48,7 @@ Read-Only:
 
 Read-Only:
 
+- `custom_connector` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--custom_connector))
 - `event_bridge` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--event_bridge))
 - `lookout_metrics` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--lookout_metrics))
 - `marketo` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--marketo))
@@ -56,6 +60,28 @@ Read-Only:
 - `upsolver` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--upsolver))
 - `zendesk` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--zendesk))
 
+<a id="nestedatt--destination_flow_config_list--destination_connector_properties--custom_connector"></a>
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.custom_connector`
+
+Read-Only:
+
+- `custom_properties` (Map of String) A map for properties for custom connector.
+- `entity_name` (String)
+- `error_handling_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--custom_connector--error_handling_config))
+- `id_field_names` (List of String) List of fields used as ID when performing a write operation.
+- `write_operation_type` (String)
+
+<a id="nestedatt--destination_flow_config_list--destination_connector_properties--custom_connector--error_handling_config"></a>
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.custom_connector.error_handling_config`
+
+Read-Only:
+
+- `bucket_name` (String)
+- `bucket_prefix` (String)
+- `fail_on_first_error` (Boolean)
+
+
+
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--event_bridge"></a>
 ### Nested Schema for `destination_flow_config_list.destination_connector_properties.event_bridge`
 
@@ -65,7 +91,7 @@ Read-Only:
 - `object` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--event_bridge--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.event_bridge.object`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.event_bridge.error_handling_config`
 
 Read-Only:
 
@@ -92,7 +118,7 @@ Read-Only:
 - `object` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--marketo--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.marketo.object`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.marketo.error_handling_config`
 
 Read-Only:
 
@@ -113,7 +139,7 @@ Read-Only:
 - `object` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--redshift--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.redshift.object`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.redshift.error_handling_config`
 
 Read-Only:
 
@@ -140,6 +166,7 @@ Read-Only:
 - `aggregation_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--s3--s3_output_format_config--aggregation_config))
 - `file_type` (String)
 - `prefix_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--s3--s3_output_format_config--prefix_config))
+- `preserve_source_data_typing` (Boolean)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--s3--s3_output_format_config--aggregation_config"></a>
 ### Nested Schema for `destination_flow_config_list.destination_connector_properties.s3.s3_output_format_config.aggregation_config`
@@ -147,6 +174,7 @@ Read-Only:
 Read-Only:
 
 - `aggregation_type` (String)
+- `target_file_size` (Number)
 
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--s3--s3_output_format_config--prefix_config"></a>
@@ -154,6 +182,7 @@ Read-Only:
 
 Read-Only:
 
+- `path_prefix_hierarchy` (List of String)
 - `prefix_format` (String)
 - `prefix_type` (String)
 
@@ -165,13 +194,14 @@ Read-Only:
 
 Read-Only:
 
+- `data_transfer_api` (String)
 - `error_handling_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--salesforce--error_handling_config))
 - `id_field_names` (List of String) List of fields used as ID when performing a write operation.
 - `object` (String)
 - `write_operation_type` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--salesforce--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.salesforce.write_operation_type`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.salesforce.error_handling_config`
 
 Read-Only:
 
@@ -193,7 +223,7 @@ Read-Only:
 - `write_operation_type` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--sapo_data--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.sapo_data.write_operation_type`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.sapo_data.error_handling_config`
 
 Read-Only:
 
@@ -203,7 +233,7 @@ Read-Only:
 
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--sapo_data--success_response_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.sapo_data.write_operation_type`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.sapo_data.success_response_handling_config`
 
 Read-Only:
 
@@ -223,7 +253,7 @@ Read-Only:
 - `object` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--snowflake--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.snowflake.object`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.snowflake.error_handling_config`
 
 Read-Only:
 
@@ -257,6 +287,7 @@ Read-Only:
 Read-Only:
 
 - `aggregation_type` (String)
+- `target_file_size` (Number)
 
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--upsolver--s3_output_format_config--prefix_config"></a>
@@ -264,6 +295,7 @@ Read-Only:
 
 Read-Only:
 
+- `path_prefix_hierarchy` (List of String)
 - `prefix_format` (String)
 - `prefix_type` (String)
 
@@ -281,7 +313,7 @@ Read-Only:
 - `write_operation_type` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--zendesk--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.zendesk.write_operation_type`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.zendesk.error_handling_config`
 
 Read-Only:
 
@@ -293,11 +325,30 @@ Read-Only:
 
 
 
+<a id="nestedatt--metadata_catalog_config"></a>
+### Nested Schema for `metadata_catalog_config`
+
+Read-Only:
+
+- `glue_data_catalog` (Attributes) Configurations of glue data catalog of the flow. (see [below for nested schema](#nestedatt--metadata_catalog_config--glue_data_catalog))
+
+<a id="nestedatt--metadata_catalog_config--glue_data_catalog"></a>
+### Nested Schema for `metadata_catalog_config.glue_data_catalog`
+
+Read-Only:
+
+- `database_name` (String) A string containing the value for the tag
+- `role_arn` (String) A string containing the value for the tag
+- `table_prefix` (String) A string containing the value for the tag
+
+
+
 <a id="nestedatt--source_flow_config"></a>
 ### Nested Schema for `source_flow_config`
 
 Read-Only:
 
+- `api_version` (String) The API version that the destination connector uses.
 - `connector_profile_name` (String) Name of source connector profile
 - `connector_type` (String) Type of source connector
 - `incremental_pull_config` (Attributes) Configuration for scheduled incremental data pull (see [below for nested schema](#nestedatt--source_flow_config--incremental_pull_config))
@@ -317,11 +368,13 @@ Read-Only:
 Read-Only:
 
 - `amplitude` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--amplitude))
+- `custom_connector` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--custom_connector))
 - `datadog` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--datadog))
 - `dynatrace` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--dynatrace))
 - `google_analytics` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--google_analytics))
 - `infor_nexus` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--infor_nexus))
 - `marketo` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--marketo))
+- `pardot` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--pardot))
 - `s3` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--s3))
 - `salesforce` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--salesforce))
 - `sapo_data` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--sapo_data))
@@ -338,6 +391,25 @@ Read-Only:
 Read-Only:
 
 - `object` (String)
+
+
+<a id="nestedatt--source_flow_config--source_connector_properties--custom_connector"></a>
+### Nested Schema for `source_flow_config.source_connector_properties.custom_connector`
+
+Read-Only:
+
+- `custom_properties` (Map of String) A map for properties for custom connector.
+- `data_transfer_api` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--custom_connector--data_transfer_api))
+- `entity_name` (String)
+
+<a id="nestedatt--source_flow_config--source_connector_properties--custom_connector--data_transfer_api"></a>
+### Nested Schema for `source_flow_config.source_connector_properties.custom_connector.data_transfer_api`
+
+Read-Only:
+
+- `name` (String)
+- `type` (String)
+
 
 
 <a id="nestedatt--source_flow_config--source_connector_properties--datadog"></a>
@@ -380,6 +452,14 @@ Read-Only:
 - `object` (String)
 
 
+<a id="nestedatt--source_flow_config--source_connector_properties--pardot"></a>
+### Nested Schema for `source_flow_config.source_connector_properties.pardot`
+
+Read-Only:
+
+- `object` (String)
+
+
 <a id="nestedatt--source_flow_config--source_connector_properties--s3"></a>
 ### Nested Schema for `source_flow_config.source_connector_properties.s3`
 
@@ -403,6 +483,7 @@ Read-Only:
 
 Read-Only:
 
+- `data_transfer_api` (String)
 - `enable_dynamic_field_update` (Boolean)
 - `include_deleted_records` (Boolean)
 - `object` (String)
@@ -414,6 +495,24 @@ Read-Only:
 Read-Only:
 
 - `object_path` (String)
+- `pagination_config` (Attributes) SAP Source connector page size (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--sapo_data--pagination_config))
+- `parallelism_config` (Attributes) SAP Source connector parallelism factor (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--sapo_data--parallelism_config))
+
+<a id="nestedatt--source_flow_config--source_connector_properties--sapo_data--pagination_config"></a>
+### Nested Schema for `source_flow_config.source_connector_properties.sapo_data.pagination_config`
+
+Read-Only:
+
+- `max_page_size` (Number)
+
+
+<a id="nestedatt--source_flow_config--source_connector_properties--sapo_data--parallelism_config"></a>
+### Nested Schema for `source_flow_config.source_connector_properties.sapo_data.parallelism_config`
+
+Read-Only:
+
+- `max_parallelism` (Number)
+
 
 
 <a id="nestedatt--source_flow_config--source_connector_properties--service_now"></a>
@@ -496,11 +595,13 @@ Read-Only:
 Read-Only:
 
 - `amplitude` (String)
+- `custom_connector` (String)
 - `datadog` (String)
 - `dynatrace` (String)
 - `google_analytics` (String)
 - `infor_nexus` (String)
 - `marketo` (String)
+- `pardot` (String)
 - `s3` (String)
 - `salesforce` (String)
 - `sapo_data` (String)
@@ -536,10 +637,10 @@ Read-Only:
 Read-Only:
 
 - `data_pull_mode` (String)
+- `first_execution_from` (Number)
+- `flow_error_deactivation_threshold` (Number)
 - `schedule_end_time` (Number)
 - `schedule_expression` (String)
 - `schedule_offset` (Number)
 - `schedule_start_time` (Number)
 - `time_zone` (String)
-
-

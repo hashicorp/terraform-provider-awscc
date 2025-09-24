@@ -16,6 +16,12 @@
       "type": "string"
     }
   },
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
   "additionalProperties": false,
   "required": [
     "RouteTableId",
@@ -27,6 +33,7 @@
   "handlers": {
     "create": {
       "permissions": [
+        "ec2:DescribeRouteTables",
         "ec2:AssociateRouteTable"
       ]
     },

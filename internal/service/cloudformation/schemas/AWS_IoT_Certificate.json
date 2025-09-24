@@ -41,6 +41,12 @@
       "type": "string"
     }
   },
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
   "additionalProperties": false,
   "required": [
     "Status"
@@ -67,22 +73,30 @@
       "permissions": [
         "iot:CreateCertificateFromCsr",
         "iot:RegisterCertificate",
-        "iot:RegisterCertificateWithoutCA"
+        "iot:RegisterCertificateWithoutCA",
+        "iot:DescribeCertificate",
+        "kms:Decrypt"
       ]
     },
     "read": {
       "permissions": [
-        "iot:DescribeCertificate"
+        "iot:DescribeCertificate",
+        "kms:Decrypt"
       ]
     },
     "update": {
       "permissions": [
-        "iot:UpdateCertificate"
+        "iot:UpdateCertificate",
+        "iot:DescribeCertificate",
+        "kms:Decrypt"
       ]
     },
     "delete": {
       "permissions": [
-        "iot:DeleteCertificate"
+        "iot:DeleteCertificate",
+        "iot:UpdateCertificate",
+        "iot:DescribeCertificate",
+        "kms:Decrypt"
       ]
     },
     "list": {

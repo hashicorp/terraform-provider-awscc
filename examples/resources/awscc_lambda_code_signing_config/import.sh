@@ -1,1 +1,1 @@
-$ terraform import awscc_lambda_code_signing_config.example <resource ID>
+$ terraform import awscc_lambda_code_signing_config.example "code_signing_config_arn"

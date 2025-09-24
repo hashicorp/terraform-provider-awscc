@@ -61,6 +61,15 @@
     },
     "ConfigurationInfo": {
       "$ref": "#/definitions/ConfigurationInfo"
+    },
+    "StorageMode": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 6,
+      "enum": [
+        "LOCAL",
+        "TIERED"
+      ]
     }
   },
   "definitions": {
@@ -212,6 +221,15 @@
         }
       }
     },
+    "VpcConnectivity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ClientAuthentication": {
+          "$ref": "#/definitions/VpcConnectivityClientAuthentication"
+        }
+      }
+    },
     "ConfigurationInfo": {
       "type": "object",
       "additionalProperties": false,
@@ -309,8 +327,59 @@
       "properties": {
         "PublicAccess": {
           "$ref": "#/definitions/PublicAccess"
+        },
+        "VpcConnectivity": {
+          "$ref": "#/definitions/VpcConnectivity"
         }
       }
+    },
+    "VpcConnectivityTls": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Enabled"
+      ]
+    },
+    "VpcConnectivitySasl": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Scram": {
+          "$ref": "#/definitions/VpcConnectivityScram"
+        },
+        "Iam": {
+          "$ref": "#/definitions/VpcConnectivityIam"
+        }
+      }
+    },
+    "VpcConnectivityScram": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Enabled"
+      ]
+    },
+    "VpcConnectivityIam": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Enabled"
+      ]
     },
     "Tls": {
       "type": "object",
@@ -392,6 +461,18 @@
         }
       }
     },
+    "VpcConnectivityClientAuthentication": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Tls": {
+          "$ref": "#/definitions/VpcConnectivityTls"
+        },
+        "Sasl": {
+          "$ref": "#/definitions/VpcConnectivitySasl"
+        }
+      }
+    },
     "LoggingInfo": {
       "type": "object",
       "additionalProperties": false,
@@ -434,8 +515,7 @@
     "/properties/BrokerNodeGroupInfo/SecurityGroups",
     "/properties/EncryptionInfo/EncryptionAtRest",
     "/properties/EncryptionInfo/EncryptionInTransit/InCluster",
-    "/properties/ClusterName",
-    "/properties/Tags"
+    "/properties/ClusterName"
   ],
   "primaryIdentifier": [
     "/properties/Arn"
@@ -446,9 +526,14 @@
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
-    "tagUpdatable": false,
+    "tagUpdatable": true,
     "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "kafka:TagResource",
+      "kafka:UntagResource",
+      "kafka:ListTagsForResource"
+    ]
   },
   "handlers": {
     "create": {
@@ -462,17 +547,20 @@
         "kms:CreateGrant",
         "kms:DescribeKey",
         "kafka:CreateCluster",
+        "kafka:DescribeCluster",
         "kafka:TagResource",
         "logs:CreateLogDelivery",
         "logs:GetLogDelivery",
         "logs:UpdateLogDelivery",
         "logs:DeleteLogDelivery",
         "logs:ListLogDeliveries",
-        "S3:GetBucketPolicy",
+        "s3:GetBucketPolicy",
+        "s3:PutBucketPolicy",
         "logs:PutResourcePolicy",
         "logs:DescribeResourcePolicies",
         "logs:DescribeLogGroups",
-        "firehose:TagDeliveryStream"
+        "firehose:TagDeliveryStream",
+        "acm-pca:GetCertificateAuthorityCertificate"
       ],
       "timeoutInMinutes": 120
     },
@@ -484,9 +572,13 @@
         "kafka:UpdateBrokerType",
         "kafka:UpdateBrokerCount",
         "kafka:UpdateBrokerStorage",
+        "kafka:UpdateStorage",
         "kafka:UpdateSecurity",
         "kafka:UpdateConnectivity",
+        "kafka:DescribeCluster",
         "kafka:DescribeClusterOperation",
+        "kafka:TagResource",
+        "kafka:UntagResource",
         "ec2:DescribeSubnets",
         "ec2:DescribeVpcs",
         "ec2:DescribeSecurityGroups",
@@ -500,17 +592,19 @@
         "logs:UpdateLogDelivery",
         "logs:DeleteLogDelivery",
         "logs:ListLogDeliveries",
-        "S3:GetBucketPolicy",
+        "s3:GetBucketPolicy",
         "logs:PutResourcePolicy",
         "logs:DescribeResourcePolicies",
         "logs:DescribeLogGroups",
-        "firehose:TagDeliveryStream"
+        "firehose:TagDeliveryStream",
+        "acm-pca:GetCertificateAuthorityCertificate"
       ],
       "timeoutInMinutes": 720
     },
     "delete": {
       "permissions": [
-        "kafka:DeleteCluster"
+        "kafka:DeleteCluster",
+        "kafka:DescribeCluster"
       ],
       "timeoutInMinutes": 30
     },

@@ -45,5 +45,3 @@ Read-Only:
 
 - `log_level` (String)
 - `wireless_device_frame_info` (String)
-
-

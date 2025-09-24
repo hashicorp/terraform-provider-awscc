@@ -94,6 +94,23 @@
       ],
       "additionalProperties": false
     },
+    "RuleActionOverride": {
+      "description": "Action override for rules in the rule group.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "$ref": "#/definitions/EntityName"
+        },
+        "ActionToUse": {
+          "$ref": "#/definitions/RuleAction"
+        }
+      },
+      "required": [
+        "Name",
+        "ActionToUse"
+      ],
+      "additionalProperties": false
+    },
     "ExcludedRules": {
       "type": "array",
       "items": {
@@ -156,6 +173,15 @@
         },
         "Cookies": {
           "$ref": "#/definitions/Cookies"
+        },
+        "JA3Fingerprint": {
+          "$ref": "#/definitions/JA3Fingerprint"
+        },
+        "JA4Fingerprint": {
+          "$ref": "#/definitions/JA4Fingerprint"
+        },
+        "UriFragment": {
+          "$ref": "#/definitions/UriFragment"
         }
       },
       "additionalProperties": false
@@ -289,8 +315,15 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ManagedRuleGroupConfig"
+          }
+        },
+        "RuleActionOverrides": {
+          "description": "Action overrides for rules in the rule group.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuleActionOverride"
           },
-          "minItems": 1
+          "maxItems": 100
         }
       },
       "required": [
@@ -361,12 +394,25 @@
         "Limit": {
           "$ref": "#/definitions/RateLimit"
         },
+        "EvaluationWindowSec": {
+          "$ref": "#/definitions/EvaluationWindowSec"
+        },
         "AggregateKeyType": {
           "type": "string",
           "enum": [
+            "CONSTANT",
             "IP",
-            "FORWARDED_IP"
+            "FORWARDED_IP",
+            "CUSTOM_KEYS"
           ]
+        },
+        "CustomKeys": {
+          "description": "Specifies the aggregate keys to use in a rate-base rule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RateBasedStatementCustomKey"
+          },
+          "maxItems": 5
         },
         "ScopeDownStatement": {
           "$ref": "#/definitions/Statement"
@@ -381,10 +427,231 @@
       ],
       "additionalProperties": false
     },
+    "RateBasedStatementCustomKey": {
+      "description": "Specifies a single custom aggregate key for a rate-base rule.",
+      "type": "object",
+      "properties": {
+        "Cookie": {
+          "$ref": "#/definitions/RateLimitCookie"
+        },
+        "ForwardedIP": {
+          "$ref": "#/definitions/RateLimitForwardedIP"
+        },
+        "Header": {
+          "$ref": "#/definitions/RateLimitHeader"
+        },
+        "HTTPMethod": {
+          "$ref": "#/definitions/RateLimitHTTPMethod"
+        },
+        "IP": {
+          "$ref": "#/definitions/RateLimitIP"
+        },
+        "LabelNamespace": {
+          "$ref": "#/definitions/RateLimitLabelNamespace"
+        },
+        "QueryArgument": {
+          "$ref": "#/definitions/RateLimitQueryArgument"
+        },
+        "QueryString": {
+          "$ref": "#/definitions/RateLimitQueryString"
+        },
+        "UriPath": {
+          "$ref": "#/definitions/RateLimitUriPath"
+        },
+        "JA3Fingerprint": {
+          "$ref": "#/definitions/RateLimitJA3Fingerprint"
+        },
+        "JA4Fingerprint": {
+          "$ref": "#/definitions/RateLimitJA4Fingerprint"
+        },
+        "ASN": {
+          "$ref": "#/definitions/RateLimitAsn"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RateLimitCookie": {
+      "description": "Specifies a cookie as an aggregate key for a rate-based rule.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "The name of the cookie to use.",
+          "type": "string",
+          "pattern": ".*\\S.*",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "TextTransformations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextTransformation"
+          }
+        }
+      },
+      "required": [
+        "Name",
+        "TextTransformations"
+      ],
+      "additionalProperties": false
+    },
+    "RateLimitForwardedIP": {
+      "description": "Specifies the first IP address in an HTTP header as an aggregate key for a rate-based rule.",
+      "type": "object"
+    },
+    "RateLimitHeader": {
+      "description": "Specifies a header as an aggregate key for a rate-based rule.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "The name of the header to use.",
+          "type": "string",
+          "pattern": ".*\\S.*",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "TextTransformations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextTransformation"
+          }
+        }
+      },
+      "required": [
+        "Name",
+        "TextTransformations"
+      ],
+      "additionalProperties": false
+    },
+    "RateLimitHTTPMethod": {
+      "description": "Specifies the request's HTTP method as an aggregate key for a rate-based rule.",
+      "type": "object"
+    },
+    "RateLimitIP": {
+      "description": "Specifies the IP address in the web request as an aggregate key for a rate-based rule.",
+      "type": "object"
+    },
+    "RateLimitLabelNamespace": {
+      "description": "Specifies a label namespace to use as an aggregate key for a rate-based rule.",
+      "type": "object",
+      "properties": {
+        "Namespace": {
+          "description": "The namespace to use for aggregation.",
+          "type": "string",
+          "pattern": ""
+        }
+      },
+      "required": [
+        "Namespace"
+      ],
+      "additionalProperties": false
+    },
+    "RateLimitQueryArgument": {
+      "description": "Specifies a query argument in the request as an aggregate key for a rate-based rule.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "The name of the query argument to use.",
+          "type": "string",
+          "pattern": ".*\\S.*",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "TextTransformations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextTransformation"
+          }
+        }
+      },
+      "required": [
+        "Name",
+        "TextTransformations"
+      ],
+      "additionalProperties": false
+    },
+    "RateLimitQueryString": {
+      "description": "Specifies the request's query string as an aggregate key for a rate-based rule.",
+      "type": "object",
+      "properties": {
+        "TextTransformations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextTransformation"
+          }
+        }
+      },
+      "required": [
+        "TextTransformations"
+      ],
+      "additionalProperties": false
+    },
+    "RateLimitUriPath": {
+      "description": "Specifies the request's URI Path as an aggregate key for a rate-based rule.",
+      "type": "object",
+      "properties": {
+        "TextTransformations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextTransformation"
+          }
+        }
+      },
+      "required": [
+        "TextTransformations"
+      ],
+      "additionalProperties": false
+    },
+    "RateLimitJA3Fingerprint": {
+      "description": "Specifies the request's JA3 fingerprint as an aggregate key for a rate-based rule.",
+      "type": "object",
+      "properties": {
+        "FallbackBehavior": {
+          "type": "string",
+          "enum": [
+            "MATCH",
+            "NO_MATCH"
+          ]
+        }
+      },
+      "required": [
+        "FallbackBehavior"
+      ],
+      "additionalProperties": false
+    },
+    "RateLimitJA4Fingerprint": {
+      "description": "Specifies the request's JA4 fingerprint as an aggregate key for a rate-based rule.",
+      "type": "object",
+      "properties": {
+        "FallbackBehavior": {
+          "type": "string",
+          "enum": [
+            "MATCH",
+            "NO_MATCH"
+          ]
+        }
+      },
+      "required": [
+        "FallbackBehavior"
+      ],
+      "additionalProperties": false
+    },
+    "RateLimitAsn": {
+      "description": "Specifies the request's ASN as an aggregate key for a rate-based rule.",
+      "type": "object"
+    },
     "RateLimit": {
       "type": "integer",
-      "minimum": 100,
+      "minimum": 10,
       "maximum": 2000000000
+    },
+    "EvaluationWindowSec": {
+      "type": "integer",
+      "enum": [
+        60,
+        120,
+        300,
+        600
+      ]
     },
     "RegexPatternSetReferenceStatement": {
       "type": "object",
@@ -497,6 +764,9 @@
         },
         "CaptchaConfig": {
           "$ref": "#/definitions/CaptchaConfig"
+        },
+        "ChallengeConfig": {
+          "$ref": "#/definitions/ChallengeConfig"
         }
       },
       "required": [
@@ -529,6 +799,9 @@
         },
         "Captcha": {
           "$ref": "#/definitions/CaptchaAction"
+        },
+        "Challenge": {
+          "$ref": "#/definitions/ChallengeAction"
         }
       },
       "additionalProperties": false
@@ -555,6 +828,16 @@
     },
     "CaptchaAction": {
       "description": "Checks valid token exists with request.",
+      "type": "object",
+      "properties": {
+        "CustomRequestHandling": {
+          "$ref": "#/definitions/CustomRequestHandling"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ChallengeAction": {
+      "description": "Checks that the request has a valid token with an unexpired challenge timestamp and, if not, returns a browser challenge to the client.",
       "type": "object",
       "properties": {
         "CustomRequestHandling": {
@@ -706,6 +989,14 @@
           "items": {
             "$ref": "#/definitions/ExcludedRule"
           }
+        },
+        "RuleActionOverrides": {
+          "description": "Action overrides for rules in the rule group.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuleActionOverride"
+          },
+          "maxItems": 100
         }
       },
       "required": [
@@ -802,6 +1093,9 @@
           "items": {
             "$ref": "#/definitions/TextTransformation"
           }
+        },
+        "SensitivityLevel": {
+          "$ref": "#/definitions/SensitivityLevel"
         }
       },
       "required": [
@@ -858,6 +1152,9 @@
         },
         "RegexMatchStatement": {
           "$ref": "#/definitions/RegexMatchStatement"
+        },
+        "AsnMatchStatement": {
+          "$ref": "#/definitions/AsnMatchStatement"
         }
       },
       "additionalProperties": false
@@ -953,6 +1250,88 @@
       ],
       "additionalProperties": false
     },
+    "DataProtectionConfig": {
+      "type": "object",
+      "properties": {
+        "DataProtections": {
+          "$ref": "#/definitions/DataProtections"
+        }
+      },
+      "required": [
+        "DataProtections"
+      ],
+      "additionalProperties": false
+    },
+    "DataProtections": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/DataProtect"
+      },
+      "minItems": 1
+    },
+    "DataProtect": {
+      "type": "object",
+      "properties": {
+        "Field": {
+          "$ref": "#/definitions/FieldToProtect"
+        },
+        "Action": {
+          "$ref": "#/definitions/DataProtectionAction"
+        },
+        "ExcludeRuleMatchDetails": {
+          "type": "boolean"
+        },
+        "ExcludeRateBasedDetails": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Field",
+        "Action"
+      ],
+      "additionalProperties": false
+    },
+    "DataProtectionAction": {
+      "type": "string",
+      "enum": [
+        "SUBSTITUTION",
+        "HASH"
+      ]
+    },
+    "FieldToProtect": {
+      "description": "Field in log to protect.",
+      "type": "object",
+      "properties": {
+        "FieldType": {
+          "description": "Field type to protect",
+          "type": "string",
+          "enum": [
+            "SINGLE_HEADER",
+            "SINGLE_COOKIE",
+            "SINGLE_QUERY_ARGUMENT",
+            "QUERY_STRING",
+            "BODY"
+          ]
+        },
+        "FieldKeys": {
+          "description": "List of field keys to protect",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FieldToProtectKeyName"
+          }
+        }
+      },
+      "required": [
+        "FieldType"
+      ],
+      "additionalProperties": false
+    },
+    "FieldToProtectKeyName": {
+      "description": "Key of the field to protect.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
     "XssMatchStatement": {
       "description": "Xss Match Statement.",
       "type": "object",
@@ -1042,7 +1421,24 @@
       ],
       "additionalProperties": false
     },
-    "CaptchaConfig" : {
+    "AsnMatchStatement": {
+      "type": "object",
+      "properties": {
+        "AsnList": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967295
+          }
+        },
+        "ForwardedIPConfig": {
+          "$ref": "#/definitions/ForwardedIPConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CaptchaConfig": {
       "type": "object",
       "properties": {
         "ImmunityTimeProperty": {
@@ -1051,7 +1447,16 @@
       },
       "additionalProperties": false
     },
-    "ImmunityTimeProperty" : {
+    "ChallengeConfig": {
+      "type": "object",
+      "properties": {
+        "ImmunityTimeProperty": {
+          "$ref": "#/definitions/ImmunityTimeProperty"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ImmunityTimeProperty": {
       "type": "object",
       "properties": {
         "ImmunityTime": {
@@ -1087,11 +1492,459 @@
         },
         "PasswordField": {
           "$ref": "#/definitions/FieldIdentifier"
+        },
+        "AWSManagedRulesBotControlRuleSet": {
+          "$ref": "#/definitions/AWSManagedRulesBotControlRuleSet"
+        },
+        "AWSManagedRulesATPRuleSet": {
+          "$ref": "#/definitions/AWSManagedRulesATPRuleSet"
+        },
+        "AWSManagedRulesACFPRuleSet": {
+          "$ref": "#/definitions/AWSManagedRulesACFPRuleSet"
+        },
+        "AWSManagedRulesAntiDDoSRuleSet": {
+          "$ref": "#/definitions/AWSManagedRulesAntiDDoSRuleSet"
         }
       },
       "additionalProperties": false
     },
-    "FieldIdentifier" : {
+    "AWSManagedRulesBotControlRuleSet": {
+      "description": "Configures how to use the Bot Control managed rule group in the web ACL",
+      "type": "object",
+      "properties": {
+        "InspectionLevel": {
+          "type": "string",
+          "enum": [
+            "COMMON",
+            "TARGETED"
+          ]
+        },
+        "EnableMachineLearning": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "InspectionLevel"
+      ],
+      "additionalProperties": false
+    },
+    "AWSManagedRulesATPRuleSet": {
+      "description": "Configures how to use the Account Takeover Prevention managed rule group in the web ACL",
+      "type": "object",
+      "properties": {
+        "LoginPath": {
+          "type": "string"
+        },
+        "EnableRegexInPath": {
+          "type": "boolean"
+        },
+        "RequestInspection": {
+          "$ref": "#/definitions/RequestInspection"
+        },
+        "ResponseInspection": {
+          "$ref": "#/definitions/ResponseInspection"
+        }
+      },
+      "required": [
+        "LoginPath"
+      ],
+      "additionalProperties": false
+    },
+    "AWSManagedRulesACFPRuleSet": {
+      "description": "Configures how to use the Account creation fraud prevention managed rule group in the web ACL",
+      "type": "object",
+      "properties": {
+        "CreationPath": {
+          "type": "string"
+        },
+        "RegistrationPagePath": {
+          "type": "string"
+        },
+        "RequestInspection": {
+          "$ref": "#/definitions/RequestInspectionACFP"
+        },
+        "ResponseInspection": {
+          "$ref": "#/definitions/ResponseInspection"
+        },
+        "EnableRegexInPath": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "CreationPath",
+        "RegistrationPagePath",
+        "RequestInspection"
+      ],
+      "additionalProperties": false
+    },
+    "AWSManagedRulesAntiDDoSRuleSet": {
+      "description": "Configures how to use the AntiDDOS AWS managed rule group in the web ACL",
+      "type": "object",
+      "properties": {
+        "ClientSideActionConfig": {
+          "$ref": "#/definitions/ClientSideActionConfig"
+        },
+        "SensitivityToBlock": {
+          "$ref": "#/definitions/SensitivityToAct"
+        }
+      },
+      "required": [
+        "ClientSideActionConfig"
+      ],
+      "additionalProperties": false
+    },
+    "ClientSideActionConfig": {
+      "description": "Client side action config for AntiDDOS AMR.",
+      "type": "object",
+      "properties": {
+        "Challenge": {
+          "$ref": "#/definitions/ClientSideAction"
+        }
+      },
+      "required": [
+        "Challenge"
+      ],
+      "additionalProperties": false
+    },
+    "ClientSideAction": {
+      "description": "Client side action config for AntiDDOS AMR.",
+      "type": "object",
+      "properties": {
+        "UsageOfAction": {
+          "$ref": "#/definitions/UsageOfAction"
+        },
+        "Sensitivity": {
+          "$ref": "#/definitions/SensitivityToAct"
+        },
+        "ExemptUriRegularExpressions": {
+          "$ref": "#/definitions/RegularExpressionList"
+        }
+      },
+      "required": [
+        "UsageOfAction"
+      ],
+      "additionalProperties": false
+    },
+    "UsageOfAction": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "SensitivityToAct": {
+      "type": "string",
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH"
+      ]
+    },
+    "RegularExpressionList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Regex"
+      }
+    },
+    "Regex": {
+      "description": "Regex",
+      "type": "object",
+      "properties": {
+        "RegexString": {
+          "$ref": "#/definitions/RegexPatternString"
+        }
+      }
+    },
+    "RegexPatternString": {
+      "type": "string",
+      "maxLength": 512,
+      "minLength": 1
+    },
+    "RequestInspection": {
+      "description": "Configures the inspection of login requests",
+      "type": "object",
+      "properties": {
+        "PayloadType": {
+          "type": "string",
+          "enum": [
+            "JSON",
+            "FORM_ENCODED"
+          ]
+        },
+        "UsernameField": {
+          "$ref": "#/definitions/FieldIdentifier"
+        },
+        "PasswordField": {
+          "$ref": "#/definitions/FieldIdentifier"
+        }
+      },
+      "required": [
+        "PayloadType",
+        "UsernameField",
+        "PasswordField"
+      ],
+      "additionalProperties": false
+    },
+    "RequestInspectionACFP": {
+      "description": "Configures the inspection of sign-up requests",
+      "type": "object",
+      "properties": {
+        "PayloadType": {
+          "type": "string",
+          "enum": [
+            "JSON",
+            "FORM_ENCODED"
+          ]
+        },
+        "UsernameField": {
+          "$ref": "#/definitions/FieldIdentifier"
+        },
+        "PasswordField": {
+          "$ref": "#/definitions/FieldIdentifier"
+        },
+        "EmailField": {
+          "$ref": "#/definitions/FieldIdentifier"
+        },
+        "PhoneNumberFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PhoneNumberField"
+          }
+        },
+        "AddressFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AddressField"
+          }
+        }
+      },
+      "required": [
+        "PayloadType"
+      ],
+      "additionalProperties": false
+    },
+    "ResponseInspection": {
+      "description": "Configures the inspection of login responses",
+      "type": "object",
+      "properties": {
+        "StatusCode": {
+          "$ref": "#/definitions/ResponseInspectionStatusCode"
+        },
+        "Header": {
+          "$ref": "#/definitions/ResponseInspectionHeader"
+        },
+        "BodyContains": {
+          "$ref": "#/definitions/ResponseInspectionBodyContains"
+        },
+        "Json": {
+          "$ref": "#/definitions/ResponseInspectionJson"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ResponseInspectionStatusCode": {
+      "description": "Response status codes that indicate success or failure of a login request",
+      "type": "object",
+      "properties": {
+        "SuccessCodes": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minLength": 0,
+            "maxLength": 999
+          },
+          "minItems": 1,
+          "maxItems": 10
+        },
+        "FailureCodes": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minLength": 0,
+            "maxLength": 999
+          },
+          "minItems": 1,
+          "maxItems": 10
+        }
+      },
+      "required": [
+        "SuccessCodes",
+        "FailureCodes"
+      ],
+      "additionalProperties": false
+    },
+    "ResponseInspectionHeader": {
+      "description": "Response headers that indicate success or failure of a login request",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "pattern": ".*\\S.*",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "SuccessValues": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": ".*\\S.*",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "minItems": 1,
+          "maxItems": 3
+        },
+        "FailureValues": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": ".*\\S.*",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "minItems": 1,
+          "maxItems": 3
+        }
+      },
+      "required": [
+        "Name",
+        "SuccessValues",
+        "FailureValues"
+      ],
+      "additionalProperties": false
+    },
+    "ResponseInspectionBodyContains": {
+      "description": "Response body contents that indicate success or failure of a login request",
+      "type": "object",
+      "properties": {
+        "SuccessStrings": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": ".*\\S.*",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "minItems": 1,
+          "maxItems": 5
+        },
+        "FailureStrings": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": ".*\\S.*",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "minItems": 1,
+          "maxItems": 5
+        }
+      },
+      "required": [
+        "SuccessStrings",
+        "FailureStrings"
+      ],
+      "additionalProperties": false
+    },
+    "ResponseInspectionJson": {
+      "description": "Response JSON that indicate success or failure of a login request",
+      "type": "object",
+      "properties": {
+        "Identifier": {
+          "type": "string",
+          "pattern": ".*\\S.*",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "SuccessValues": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": ".*\\S.*",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "minItems": 1,
+          "maxItems": 5
+        },
+        "FailureValues": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": ".*\\S.*",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "minItems": 1,
+          "maxItems": 5
+        }
+      },
+      "required": [
+        "Identifier",
+        "SuccessValues",
+        "FailureValues"
+      ],
+      "additionalProperties": false
+    },
+    "TokenDomains": {
+      "description": "List of domains to accept in web request tokens, in addition to the domain of the protected resource.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[\\w\\.\\-/]+$",
+        "minLength": 1,
+        "maxLength": 253
+      }
+    },
+    "AssociationConfig": {
+      "description": "AssociationConfig for body inspection",
+      "type": "object",
+      "properties": {
+        "RequestBody": {
+          "$ref": "#/definitions/RequestBody"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RequestBody": {
+      "type": "object",
+      "description": "Map of AssociatedResourceType and RequestBodyAssociatedResourceTypeConfig",
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/RequestBodyAssociatedResourceTypeConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RequestBodyAssociatedResourceTypeConfig": {
+      "description": "Configures the inspection size in the request body.",
+      "type": "object",
+      "properties": {
+        "DefaultSizeInspectionLimit": {
+          "$ref": "#/definitions/SizeInspectionLimit"
+        }
+      },
+      "required": [
+        "DefaultSizeInspectionLimit"
+      ],
+      "additionalProperties": false
+    },
+    "SizeInspectionLimit": {
+      "type": "string",
+      "enum": [
+        "KB_16",
+        "KB_32",
+        "KB_48",
+        "KB_64"
+      ]
+    },
+    "PhoneNumberField": {
+      "$ref": "#/definitions/FieldIdentifier"
+    },
+    "AddressField": {
+      "$ref": "#/definitions/FieldIdentifier"
+    },
+    "FieldIdentifier": {
       "type": "object",
       "properties": {
         "Identifier": {
@@ -1128,7 +1981,7 @@
       "additionalProperties": false
     },
     "Cookies": {
-      "description": "Includes headers of a web request.",
+      "description": "Includes cookies of a web request.",
       "type": "object",
       "properties": {
         "MatchPattern": {
@@ -1231,6 +2084,79 @@
         "MATCH",
         "NO_MATCH"
       ]
+    },
+    "SensitivityLevel": {
+      "description": "Sensitivity Level current only used for sqli match statements.",
+      "type": "string",
+      "enum": [
+        "LOW",
+        "HIGH"
+      ]
+    },
+    "JA3Fingerprint": {
+      "description": "Includes the JA3 fingerprint of a web request.",
+      "type": "object",
+      "properties": {
+        "FallbackBehavior": {
+          "type": "string",
+          "enum": [
+            "MATCH",
+            "NO_MATCH"
+          ]
+        }
+      },
+      "required": [
+        "FallbackBehavior"
+      ],
+      "additionalProperties": false
+    },
+    "JA4Fingerprint": {
+      "description": "Includes the JA4 fingerprint of a web request.",
+      "type": "object",
+      "properties": {
+        "FallbackBehavior": {
+          "type": "string",
+          "enum": [
+            "MATCH",
+            "NO_MATCH"
+          ]
+        }
+      },
+      "required": [
+        "FallbackBehavior"
+      ],
+      "additionalProperties": false
+    },
+    "UriFragment": {
+      "description": "The path component of the URI Fragment. This is the part of a web request that identifies a fragment uri, for example, /abcd#introduction",
+      "type": "object",
+      "properties": {
+        "FallbackBehavior": {
+          "type": "string",
+          "enum": [
+            "MATCH",
+            "NO_MATCH"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "OnSourceDDoSProtectionConfig": {
+      "description": "Configures the options for on-source DDoS protection provided by supported resource type.",
+      "type": "object",
+      "properties": {
+        "ALBLowReputationMode": {
+          "type": "string",
+          "enum": [
+            "ACTIVE_UNDER_DDOS",
+            "ALWAYS_ON"
+          ]
+        }
+      },
+      "required": [
+        "ALBLowReputationMode"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -1266,6 +2192,10 @@
     "VisibilityConfig": {
       "$ref": "#/definitions/VisibilityConfig"
     },
+    "DataProtectionConfig": {
+      "description": "Collection of dataProtects.",
+      "$ref": "#/definitions/DataProtectionConfig"
+    },
     "Tags": {
       "type": "array",
       "items": {
@@ -1281,6 +2211,18 @@
     },
     "CaptchaConfig": {
       "$ref": "#/definitions/CaptchaConfig"
+    },
+    "ChallengeConfig": {
+      "$ref": "#/definitions/ChallengeConfig"
+    },
+    "TokenDomains": {
+      "$ref": "#/definitions/TokenDomains"
+    },
+    "AssociationConfig": {
+      "$ref": "#/definitions/AssociationConfig"
+    },
+    "OnSourceDDoSProtectionConfig": {
+      "$ref": "#/definitions/OnSourceDDoSProtectionConfig"
     }
   },
   "required": [
@@ -1304,12 +2246,26 @@
     "/properties/LabelNamespace"
   ],
   "additionalProperties": false,
+  "tagging": {
+    "cloudFormationSystemTags": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "wafv2:TagResource",
+      "wafv2:UntagResource",
+      "wafv2:ListTagsForResource"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
         "wafv2:CreateWebACL",
         "wafv2:GetWebACL",
-        "wafv2:ListTagsForResource"
+        "wafv2:ListTagsForResource",
+        "wafv2:TagResource",
+        "wafv2:UntagResource"
       ]
     },
     "delete": {
@@ -1328,13 +2284,25 @@
       "permissions": [
         "wafv2:UpdateWebACL",
         "wafv2:GetWebACL",
-        "wafv2:ListTagsForResource"
+        "wafv2:ListTagsForResource",
+        "wafv2:TagResource",
+        "wafv2:UntagResource"
       ]
     },
     "list": {
       "permissions": [
         "wafv2:listWebACLs"
-      ]
+      ],
+      "handlerSchema": {
+        "properties": {
+          "Scope": {
+            "$ref": "resource-schema.json#/properties/Scope"
+          }
+        },
+        "required": [
+          "Scope"
+        ]
+      }
     }
   }
 }

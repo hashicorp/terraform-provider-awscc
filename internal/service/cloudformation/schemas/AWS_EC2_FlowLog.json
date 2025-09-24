@@ -25,6 +25,10 @@
       "description": "The Flow Log ID",
       "type": "string"
     },
+    "DeliverCrossAccountRole": {
+      "description": "The ARN of the IAM role that allows Amazon EC2 to publish flow logs across accounts.",
+      "type": "string"
+    },
     "DeliverLogsPermissionArn": {
       "description": "The ARN for the IAM role that permits Amazon EC2 to publish flow logs to a CloudWatch Logs log group in your account. If you specify LogDestinationType as s3 or kinesis-data-firehose, do not specify DeliverLogsPermissionArn or LogGroupName.",
       "type": "string"
@@ -64,7 +68,9 @@
       "enum": [
         "NetworkInterface",
         "Subnet",
-        "VPC"
+        "VPC",
+        "TransitGateway",
+        "TransitGatewayAttachment"
       ]
     },
     "Tags": {
@@ -108,13 +114,13 @@
         "PerHourPartition"
       ]
     }
-   },
+  },
   "required": [
     "ResourceType",
-    "ResourceId",
-    "TrafficType"
+    "ResourceId"
   ],
   "createOnlyProperties": [
+    "/properties/DeliverCrossAccountRole",
     "/properties/DeliverLogsPermissionArn",
     "/properties/LogGroupName",
     "/properties/LogDestination",
@@ -129,6 +135,17 @@
   "readOnlyProperties": [
     "/properties/Id"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags"
+    ]
+  },
   "primaryIdentifier": [
     "/properties/Id"
   ],
@@ -136,6 +153,7 @@
     "create": {
       "permissions": [
         "ec2:CreateFlowLogs",
+        "ec2:DescribeFlowLogs",
         "ec2:CreateTags",
         "iam:PassRole",
         "logs:CreateLogDelivery",
@@ -158,6 +176,7 @@
     "delete": {
       "permissions": [
         "ec2:DeleteFlowLogs",
+        "ec2:DescribeFlowLogs",
         "logs:DeleteLogDelivery"
       ]
     },

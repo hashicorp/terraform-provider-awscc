@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_ip_pool_route_table_association.example "association_id"

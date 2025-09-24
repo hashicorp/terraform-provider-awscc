@@ -15,11 +15,28 @@
       "description": "An endpoint Id.",
       "type": "string"
     },
+    "AvailabilityZoneMapping": {
+      "type": "object",
+      "properties": {
+        "AvailabilityZone": {
+          "description": "A AvailabilityZone",
+          "type": "string"
+        }
+      },
+      "required": [
+        "AvailabilityZone"
+      ],
+      "additionalProperties": false
+    },
     "SubnetMapping": {
       "type": "object",
       "properties": {
         "SubnetId": {
           "description": "A SubnetId.",
+          "type": "string"
+        },
+        "IPAddressType": {
+          "description": "A IPAddressType",
           "type": "string"
         }
       },
@@ -27,6 +44,14 @@
         "SubnetId"
       ],
       "additionalProperties": false
+    },
+    "EnabledAnalysisType": {
+      "description": "An analysis type.",
+      "enum": [
+        "TLS_SNI",
+        "HTTP_HOST"
+      ],
+      "type": "string"
     },
     "Tag": {
       "type": "object",
@@ -76,11 +101,18 @@
     },
     "SubnetMappings": {
       "type": "array",
-      "minItems": 1,
       "insertionOrder": false,
       "uniqueItems": true,
       "items": {
         "$ref": "#/definitions/SubnetMapping"
+      }
+    },
+    "AvailabilityZoneMappings": {
+      "type": "array",
+      "insertionOrder": false,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/AvailabilityZoneMapping"
       }
     },
     "DeleteProtection": {
@@ -89,8 +121,16 @@
     "SubnetChangeProtection": {
       "type": "boolean"
     },
+    "AvailabilityZoneChangeProtection": {
+      "type": "boolean"
+    },
     "FirewallPolicyChangeProtection": {
       "type": "boolean"
+    },
+    "TransitGatewayId": {
+      "type": "string",
+      "maxLength": 128,
+      "pattern": "^tgw-[0-9a-z]+$"
     },
     "Description": {
       "type": "string",
@@ -99,9 +139,18 @@
     },
     "EndpointIds": {
       "type": "array",
+      "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/EndpointId"
       }
+    },
+    "EnabledAnalysisTypes": {
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/EnabledAnalysisType"
+      },
+      "description": "The types of analysis to enable for the firewall. Can be TLS_SNI, HTTP_HOST, or both."
     },
     "Tags": {
       "type": "array",
@@ -112,11 +161,21 @@
       }
     }
   },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "network-firewall:TagResource",
+      "network-firewall:UntagResource",
+      "network-firewall:ListTagsForResource"
+    ]
+  },
   "required": [
     "FirewallName",
-    "FirewallPolicyArn",
-    "VpcId",
-    "SubnetMappings"
+    "FirewallPolicyArn"
   ],
   "readOnlyProperties": [
     "/properties/FirewallArn",
@@ -137,16 +196,21 @@
         "ec2:DescribeVpcEndpoints",
         "ec2:DescribeSubnets",
         "ec2:DescribeVpcs",
+        "iam:CreateServiceLinkedRole",
         "network-firewall:CreateFirewall",
         "network-firewall:DescribeFirewallPolicy",
         "network-firewall:DescribeRuleGroup",
-        "network-firewall:TagResource"
+        "network-firewall:TagResource",
+        "network-firewall:AssociateSubnets",
+        "network-firewall:AssociateAvailabilityZones",
+        "network-firewall:AssociateFirewallPolicy",
+        "network-firewall:DescribeFirewall"
       ]
     },
     "read": {
       "permissions": [
         "network-firewall:DescribeFirewall",
-        "network-firewall:ListTagsForResources"
+        "network-firewall:ListTagsForResource"
       ]
     },
     "update": {
@@ -160,18 +224,24 @@
         "network-firewall:AssociateFirewallPolicy",
         "network-firewall:TagResource",
         "network-firewall:UntagResource",
-        "network-firewall:DescribeFirewall"
+        "network-firewall:DescribeFirewall",
+        "network-firewall:UpdateFirewallAnalysisSettings",
+        "network-firewall:DisassociateAvailabilityZones",
+        "network-firewall:AssociateAvailabilityZones",
+        "network-firewall:UpdateAvailabilityZoneChangeProtection"
       ]
     },
     "delete": {
       "permissions": [
         "ec2:DeleteVpcEndpoints",
+        "ec2:DescribeRouteTables",
         "logs:DescribeLogGroups",
         "logs:DescribeResourcePolicies",
         "logs:GetLogDelivery",
         "logs:ListLogDeliveries",
         "network-firewall:DeleteFirewall",
-        "network-firewall:UntagResource"
+        "network-firewall:UntagResource",
+        "network-firewall:DescribeFirewall"
       ]
     },
     "list": {

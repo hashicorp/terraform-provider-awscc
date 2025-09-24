@@ -21,10 +21,24 @@ Data Source schema for AWS::IAM::SAMLProvider
 
 ### Read-Only
 
+- `add_private_key` (String) The private key from your external identity provider
 - `arn` (String) Amazon Resource Name (ARN) of the SAML provider
+- `assertion_encryption_mode` (String) The encryption setting for the SAML provider
 - `name` (String)
+- `private_key_list` (Attributes List) (see [below for nested schema](#nestedatt--private_key_list))
+- `remove_private_key` (String) The Key ID of the private key to remove
 - `saml_metadata_document` (String)
+- `saml_provider_uuid` (String) The unique identifier assigned to the SAML provider
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--private_key_list"></a>
+### Nested Schema for `private_key_list`
+
+Read-Only:
+
+- `key_id` (String) The unique identifier for the SAML private key.
+- `timestamp` (String) The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time </a> format, when the private key was uploaded.
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
@@ -33,5 +47,3 @@ Read-Only:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-
-

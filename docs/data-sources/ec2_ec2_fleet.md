@@ -59,6 +59,7 @@ Read-Only:
 Read-Only:
 
 - `availability_zone` (String)
+- `block_device_mappings` (Attributes List) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--block_device_mappings))
 - `instance_requirements` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements))
 - `instance_type` (String)
 - `max_price` (String)
@@ -66,6 +67,31 @@ Read-Only:
 - `priority` (Number)
 - `subnet_id` (String)
 - `weighted_capacity` (Number)
+
+<a id="nestedatt--launch_template_configs--overrides--block_device_mappings"></a>
+### Nested Schema for `launch_template_configs.overrides.block_device_mappings`
+
+Read-Only:
+
+- `device_name` (String)
+- `ebs` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--block_device_mappings--ebs))
+- `no_device` (String)
+- `virtual_name` (String)
+
+<a id="nestedatt--launch_template_configs--overrides--block_device_mappings--ebs"></a>
+### Nested Schema for `launch_template_configs.overrides.block_device_mappings.ebs`
+
+Read-Only:
+
+- `delete_on_termination` (Boolean)
+- `encrypted` (Boolean)
+- `iops` (Number)
+- `kms_key_id` (String)
+- `snapshot_id` (String)
+- `volume_size` (Number)
+- `volume_type` (String)
+
+
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements"></a>
 ### Nested Schema for `launch_template_configs.overrides.instance_requirements`
@@ -77,16 +103,20 @@ Read-Only:
 - `accelerator_names` (List of String)
 - `accelerator_total_memory_mi_b` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--accelerator_total_memory_mi_b))
 - `accelerator_types` (List of String)
+- `allowed_instance_types` (List of String)
 - `bare_metal` (String)
 - `baseline_ebs_bandwidth_mbps` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--baseline_ebs_bandwidth_mbps))
+- `baseline_performance_factors` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--baseline_performance_factors))
 - `burstable_performance` (String)
 - `cpu_manufacturers` (List of String)
 - `excluded_instance_types` (List of String)
 - `instance_generations` (List of String)
 - `local_storage` (String)
 - `local_storage_types` (List of String)
+- `max_spot_price_as_percentage_of_optimal_on_demand_price` (Number)
 - `memory_gi_b_per_v_cpu` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--memory_gi_b_per_v_cpu))
 - `memory_mi_b` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--memory_mi_b))
+- `network_bandwidth_gbps` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--network_bandwidth_gbps))
 - `network_interface_count` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--network_interface_count))
 - `on_demand_max_price_percentage_over_lowest_price` (Number)
 - `require_hibernate_support` (Boolean)
@@ -95,7 +125,7 @@ Read-Only:
 - `v_cpu_count` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--v_cpu_count))
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--accelerator_count"></a>
-### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
+### Nested Schema for `launch_template_configs.overrides.instance_requirements.accelerator_count`
 
 Read-Only:
 
@@ -104,7 +134,7 @@ Read-Only:
 
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--accelerator_total_memory_mi_b"></a>
-### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
+### Nested Schema for `launch_template_configs.overrides.instance_requirements.accelerator_total_memory_mi_b`
 
 Read-Only:
 
@@ -113,7 +143,7 @@ Read-Only:
 
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--baseline_ebs_bandwidth_mbps"></a>
-### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
+### Nested Schema for `launch_template_configs.overrides.instance_requirements.baseline_ebs_bandwidth_mbps`
 
 Read-Only:
 
@@ -121,8 +151,32 @@ Read-Only:
 - `min` (Number)
 
 
+<a id="nestedatt--launch_template_configs--overrides--instance_requirements--baseline_performance_factors"></a>
+### Nested Schema for `launch_template_configs.overrides.instance_requirements.baseline_performance_factors`
+
+Read-Only:
+
+- `cpu` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--baseline_performance_factors--cpu))
+
+<a id="nestedatt--launch_template_configs--overrides--instance_requirements--baseline_performance_factors--cpu"></a>
+### Nested Schema for `launch_template_configs.overrides.instance_requirements.baseline_performance_factors.cpu`
+
+Read-Only:
+
+- `references` (Attributes List) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--baseline_performance_factors--cpu--references))
+
+<a id="nestedatt--launch_template_configs--overrides--instance_requirements--baseline_performance_factors--cpu--references"></a>
+### Nested Schema for `launch_template_configs.overrides.instance_requirements.baseline_performance_factors.cpu.references`
+
+Read-Only:
+
+- `instance_family` (String)
+
+
+
+
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--memory_gi_b_per_v_cpu"></a>
-### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
+### Nested Schema for `launch_template_configs.overrides.instance_requirements.memory_gi_b_per_v_cpu`
 
 Read-Only:
 
@@ -131,7 +185,16 @@ Read-Only:
 
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--memory_mi_b"></a>
-### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
+### Nested Schema for `launch_template_configs.overrides.instance_requirements.memory_mi_b`
+
+Read-Only:
+
+- `max` (Number)
+- `min` (Number)
+
+
+<a id="nestedatt--launch_template_configs--overrides--instance_requirements--network_bandwidth_gbps"></a>
+### Nested Schema for `launch_template_configs.overrides.instance_requirements.network_bandwidth_gbps`
 
 Read-Only:
 
@@ -140,7 +203,7 @@ Read-Only:
 
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--network_interface_count"></a>
-### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
+### Nested Schema for `launch_template_configs.overrides.instance_requirements.network_interface_count`
 
 Read-Only:
 
@@ -149,7 +212,7 @@ Read-Only:
 
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--total_local_storage_gb"></a>
-### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
+### Nested Schema for `launch_template_configs.overrides.instance_requirements.total_local_storage_gb`
 
 Read-Only:
 
@@ -265,5 +328,3 @@ Read-Only:
 - `spot_target_capacity` (Number)
 - `target_capacity_unit_type` (String)
 - `total_target_capacity` (Number)
-
-

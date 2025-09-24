@@ -1,0 +1,268 @@
+{
+  "typeName": "AWS::BedrockAgentCore::BrowserCustom",
+  "description": "Resource definition for AWS::BedrockAgentCore::BrowserCustom",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "BrowserId": {
+      "type": "string",
+      "pattern": "^(aws\\.browser\\.v1|[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10})$",
+      "description": "The id of the browser."
+    },
+    "BrowserArn": {
+      "type": "string",
+      "pattern": "^arn:(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:(aws|[0-9]{12}):browser(-custom)?/(aws\\.browser\\.v1|[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10})$",
+      "description": "The ARN of a Browser resource."
+    },
+    "BrowserNetworkMode": {
+      "type": "string",
+      "enum": [
+        "PUBLIC"
+      ],
+      "description": "Network modes supported by browser"
+    },
+    "BrowserNetworkConfiguration": {
+      "type": "object",
+      "properties": {
+        "NetworkMode": {
+          "$ref": "#/definitions/BrowserNetworkMode",
+          "default": "PUBLIC"
+        }
+      },
+      "required": [
+        "NetworkMode"
+      ],
+      "additionalProperties": false,
+      "description": "Network configuration for browser"
+    },
+    "RecordingConfig": {
+      "type": "object",
+      "properties": {
+        "Enabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "S3Location": {
+          "$ref": "#/definitions/S3Location"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Recording configuration for browser"
+    },
+    "S3Location": {
+      "type": "object",
+      "properties": {
+        "Bucket": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$"
+        },
+        "Prefix": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "Bucket",
+        "Prefix"
+      ],
+      "additionalProperties": false,
+      "description": "S3 Location Configuration"
+    },
+    "BrowserStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "CREATE_FAILED",
+        "READY",
+        "DELETING",
+        "DELETE_FAILED",
+        "DELETED"
+      ],
+      "description": "Status of browser"
+    },
+    "BrowserSummary": {
+      "type": "object",
+      "properties": {
+        "BrowserId": {
+          "$ref": "#/definitions/BrowserId"
+        },
+        "BrowserArn": {
+          "$ref": "#/definitions/BrowserArn"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "Status": {
+          "$ref": "#/definitions/BrowserStatus"
+        },
+        "CreatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "LastUpdatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "BrowserId",
+        "BrowserArn",
+        "Status",
+        "CreatedAt"
+      ],
+      "additionalProperties": false,
+      "description": "Browser"
+    },
+    "BrowserSummaries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/BrowserSummary"
+      },
+      "description": "List of browsers"
+    },
+    "RoleArn": {
+      "type": "string",
+      "pattern": "^arn:aws(-[a-z]+)*:iam::[0-9]{12}:role/.+$",
+      "description": "The Amazon Resource Name (ARN) of the IAM role."
+    },
+    "TagsMap": {
+      "type": "object",
+      "description": "A map of tag keys and values",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 0,
+          "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+          "description": "Value of a tag"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "BrowserId": {
+      "$ref": "#/definitions/BrowserId",
+      "description": "The id of the browser."
+    },
+    "BrowserArn": {
+      "$ref": "#/definitions/BrowserArn",
+      "description": "The ARN of a Browser resource."
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the browser."
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the browser."
+    },
+    "NetworkConfiguration": {
+      "$ref": "#/definitions/BrowserNetworkConfiguration",
+      "description": "Network configuration for browser."
+    },
+    "RecordingConfig": {
+      "$ref": "#/definitions/RecordingConfig",
+      "description": "Recording configuration for browser."
+    },
+    "ExecutionRoleArn": {
+      "$ref": "#/definitions/RoleArn",
+      "description": "The Amazon Resource Name (ARN) of the IAM role that the browser uses to access resources."
+    },
+    "Status": {
+      "$ref": "#/definitions/BrowserStatus",
+      "description": "Status of browser."
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the browser was created."
+    },
+    "LastUpdatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the browser was last updated."
+    },
+    "Tags": {
+      "$ref": "#/definitions/TagsMap"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Name",
+    "NetworkConfiguration"
+  ],
+  "readOnlyProperties": [
+    "/properties/BrowserId",
+    "/properties/BrowserArn",
+    "/properties/Status",
+    "/properties/CreatedAt",
+    "/properties/LastUpdatedAt"
+  ],
+  "primaryIdentifier": [
+    "/properties/BrowserId"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/BrowserArn"
+    ]
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/Description",
+    "/properties/NetworkConfiguration",
+    "/properties/RecordingConfig",
+    "/properties/ExecutionRoleArn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bedrock-agentcore:CreateBrowser",
+        "bedrock-agentcore:GetBrowser",
+        "bedrock-agentcore:TagResource",
+        "bedrock-agentcore:ListTagsForResource",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bedrock-agentcore:GetBrowser",
+        "bedrock-agentcore:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bedrock-agentcore:GetBrowser",
+        "bedrock-agentcore:TagResource",
+        "bedrock-agentcore:UntagResource",
+        "bedrock-agentcore:ListTagsForResource",
+        "iam:PassRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bedrock-agentcore:GetBrowser",
+        "bedrock-agentcore:DeleteBrowser"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bedrock-agentcore:ListBrowsers"
+      ]
+    }
+  },
+  "tagging": {
+    "cloudFormationSystemTags": false,
+    "tagOnCreate": true,
+    "tagProperty": "/properties/Tags",
+    "tagUpdatable": true,
+    "taggable": true,
+    "permissions": [
+      "bedrock-agentcore:TagResource",
+      "bedrock-agentcore:UntagResource",
+      "bedrock-agentcore:ListTagsForResource"
+    ]
+  }
+}

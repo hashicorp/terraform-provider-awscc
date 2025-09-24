@@ -1,1 +1,1 @@
-$ terraform import awscc_cassandra_keyspace.example <resource ID>
+$ terraform import awscc_cassandra_keyspace.example "keyspace_name"

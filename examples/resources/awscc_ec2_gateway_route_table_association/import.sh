@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_gateway_route_table_association.example <resource ID>
+$ terraform import awscc_ec2_gateway_route_table_association.example "gateway_id"

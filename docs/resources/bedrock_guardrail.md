@@ -1,0 +1,471 @@
+---
+page_title: "awscc_bedrock_guardrail Resource - terraform-provider-awscc"
+subcategory: ""
+description: |-
+  Definition of AWS::Bedrock::Guardrail Resource Type
+---
+
+# awscc_bedrock_guardrail (Resource)
+
+Definition of AWS::Bedrock::Guardrail Resource Type
+
+## Example Usage
+
+### Bedrock Guardail with content policy configuration
+
+```terraform
+resource "awscc_bedrock_guardrail" "example" {
+  name                      = "example_guardrail"
+  blocked_input_messaging   = "Blocked input"
+  blocked_outputs_messaging = "Blocked output"
+  description               = "Example guardrail"
+
+  content_policy_config = {
+    filters_config = [
+      {
+        input_strength  = "MEDIUM"
+        output_strength = "MEDIUM"
+        type            = "HATE"
+      },
+      {
+        input_strength  = "HIGH"
+        output_strength = "HIGH"
+        type            = "VIOLENCE"
+      }
+    ]
+  }
+
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
+
+}
+```
+
+### Bedrock Guardail with sensitive information policy configuration
+
+```terraform
+resource "awscc_bedrock_guardrail" "example" {
+  name                      = "example_guardrail"
+  blocked_input_messaging   = "Blocked input"
+  blocked_outputs_messaging = "Blocked output"
+  description               = "Example guardrail"
+
+  sensitive_information_policy_config = {
+    pii_entities_config = [
+      {
+        action = "BLOCK"
+        type   = "NAME"
+      },
+      {
+        action = "BLOCK"
+        type   = "DRIVER_ID"
+      },
+      {
+        action = "ANONYMIZE"
+        type   = "USERNAME"
+      },
+    ]
+    regexes_config = [{
+      action      = "BLOCK"
+      description = "example regex"
+      name        = "regex_example"
+      pattern     = "^\\d{3}-\\d{2}-\\d{4}$"
+    }]
+  }
+
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
+
+
+}
+```
+
+### Bedrock Guardail with word policy configuration
+
+```terraform
+resource "awscc_bedrock_guardrail" "example" {
+  name                      = "example_guardrail"
+  blocked_input_messaging   = "Blocked input"
+  blocked_outputs_messaging = "Blocked output"
+  description               = "Example guardrail"
+  word_policy_config = {
+    managed_word_lists_config = [{
+      type = "PROFANITY"
+    }]
+    words_config = [{
+      text = "HATE"
+    }]
+  }
+
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
+
+
+}
+```
+
+### Bedrock Guardail with topic configuration
+
+```terraform
+resource "awscc_bedrock_guardrail" "example" {
+  name                      = "example_guardrail"
+  blocked_input_messaging   = "Blocked input"
+  blocked_outputs_messaging = "Blocked output"
+  description               = "Example guardrail"
+
+  topic_policy_config = {
+    topics_config = [{
+      name       = "investment_topic"
+      examples   = ["Where should I invest my money ?"]
+      type       = "DENY"
+      definition = "Investment advice refers to inquiries, guidance, or recommendations regarding the management or allocation of funds or assets with the goal of generating returns ."
+    }]
+  }
+
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
+
+
+}
+```
+
+### Bedrock Guardail with all policy configurations and encyrption
+
+```terraform
+resource "awscc_bedrock_guardrail" "example" {
+  name                      = "example_guardrail"
+  blocked_input_messaging   = "Blocked input"
+  blocked_outputs_messaging = "Blocked output"
+  description               = "Example guardrail"
+
+  content_policy_config = {
+    filters_config = [
+      {
+        input_strength  = "MEDIUM"
+        output_strength = "MEDIUM"
+        type            = "HATE"
+      },
+      {
+        input_strength  = "HIGH"
+        output_strength = "HIGH"
+        type            = "VIOLENCE"
+      }
+    ]
+  }
+
+  sensitive_information_policy_config = {
+    pii_entities_config = [
+      {
+        action = "BLOCK"
+        type   = "NAME"
+      },
+      {
+        action = "BLOCK"
+        type   = "DRIVER_ID"
+      },
+      {
+        action = "ANONYMIZE"
+        type   = "USERNAME"
+      },
+    ]
+    regexes_config = [{
+      action      = "BLOCK"
+      description = "example regex"
+      name        = "regex_example"
+      pattern     = "^\\d{3}-\\d{2}-\\d{4}$"
+    }]
+  }
+  word_policy_config = {
+    managed_word_lists_config = [{
+      type = "PROFANITY"
+    }]
+    words_config = [{
+      text = "HATE"
+    }]
+  }
+
+  topic_policy_config = {
+    topics_config = [{
+      name       = "investment_topic"
+      examples   = ["Where should I invest my money ?"]
+      type       = "DENY"
+      definition = "Investment advice refers to inquiries, guidance, or recommendations regarding the management or allocation of funds or assets with the goal of generating returns ."
+    }]
+  }
+
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
+
+  kms_key_arn = var.kms_key_arn
+
+}
+
+variable "kms_key_arn" {
+  type = string
+}
+```
+
+
+<!-- schema generated by tfplugindocs -->
+## Schema
+
+### Required
+
+- `blocked_input_messaging` (String) Messaging for when violations are detected in text
+- `blocked_outputs_messaging` (String) Messaging for when violations are detected in text
+- `name` (String) Name of the guardrail
+
+### Optional
+
+- `automated_reasoning_policy_config` (Attributes) Optional configuration for integrating Automated Reasoning policies with the guardrail. (see [below for nested schema](#nestedatt--automated_reasoning_policy_config))
+- `content_policy_config` (Attributes) Content policy config for a guardrail. (see [below for nested schema](#nestedatt--content_policy_config))
+- `contextual_grounding_policy_config` (Attributes) Contextual grounding policy config for a guardrail. (see [below for nested schema](#nestedatt--contextual_grounding_policy_config))
+- `cross_region_config` (Attributes) The system-defined guardrail profile that you?re using with your guardrail (see [below for nested schema](#nestedatt--cross_region_config))
+- `description` (String) Description of the guardrail or its version
+- `kms_key_arn` (String) The KMS key with which the guardrail was encrypted at rest
+- `sensitive_information_policy_config` (Attributes) Sensitive information policy config for a guardrail. (see [below for nested schema](#nestedatt--sensitive_information_policy_config))
+- `tags` (Attributes List) List of Tags (see [below for nested schema](#nestedatt--tags))
+- `topic_policy_config` (Attributes) Topic policy config for a guardrail. (see [below for nested schema](#nestedatt--topic_policy_config))
+- `word_policy_config` (Attributes) Word policy config for a guardrail. (see [below for nested schema](#nestedatt--word_policy_config))
+
+### Read-Only
+
+- `created_at` (String) Time Stamp
+- `failure_recommendations` (List of String) List of failure recommendations
+- `guardrail_arn` (String) Arn representation for the guardrail
+- `guardrail_id` (String) Unique id for the guardrail
+- `id` (String) Uniquely identifies the resource.
+- `status` (String) Status of the guardrail
+- `status_reasons` (List of String) List of status reasons
+- `updated_at` (String) Time Stamp
+- `version` (String) Guardrail version
+
+<a id="nestedatt--automated_reasoning_policy_config"></a>
+### Nested Schema for `automated_reasoning_policy_config`
+
+Optional:
+
+- `confidence_threshold` (Number) The confidence threshold for triggering guardrail actions based on Automated Reasoning policy violations.
+- `policies` (List of String) The list of Automated Reasoning policy ARNs to include in the guardrail configuration
+
+
+<a id="nestedatt--content_policy_config"></a>
+### Nested Schema for `content_policy_config`
+
+Optional:
+
+- `content_filters_tier_config` (Attributes) Guardrail tier config for content policy (see [below for nested schema](#nestedatt--content_policy_config--content_filters_tier_config))
+- `filters_config` (Attributes List) List of content filter configs in content policy. (see [below for nested schema](#nestedatt--content_policy_config--filters_config))
+
+<a id="nestedatt--content_policy_config--content_filters_tier_config"></a>
+### Nested Schema for `content_policy_config.content_filters_tier_config`
+
+Optional:
+
+- `tier_name` (String) Tier name for tier configuration in content filters policy
+
+
+<a id="nestedatt--content_policy_config--filters_config"></a>
+### Nested Schema for `content_policy_config.filters_config`
+
+Optional:
+
+- `input_action` (String)
+- `input_enabled` (Boolean)
+- `input_modalities` (List of String) List of modalities
+- `input_strength` (String) Strength for filters
+- `output_action` (String)
+- `output_enabled` (Boolean)
+- `output_modalities` (List of String) List of modalities
+- `output_strength` (String) Strength for filters
+- `type` (String) Type of filter in content policy
+
+
+
+<a id="nestedatt--contextual_grounding_policy_config"></a>
+### Nested Schema for `contextual_grounding_policy_config`
+
+Optional:
+
+- `filters_config` (Attributes List) List of contextual grounding filter configs. (see [below for nested schema](#nestedatt--contextual_grounding_policy_config--filters_config))
+
+<a id="nestedatt--contextual_grounding_policy_config--filters_config"></a>
+### Nested Schema for `contextual_grounding_policy_config.filters_config`
+
+Optional:
+
+- `action` (String)
+- `enabled` (Boolean)
+- `threshold` (Number) The threshold for this filter.
+- `type` (String) Type of contextual grounding filter
+
+
+
+<a id="nestedatt--cross_region_config"></a>
+### Nested Schema for `cross_region_config`
+
+Optional:
+
+- `guardrail_profile_arn` (String) The Amazon Resource Name (ARN) of the guardrail profile
+
+
+<a id="nestedatt--sensitive_information_policy_config"></a>
+### Nested Schema for `sensitive_information_policy_config`
+
+Optional:
+
+- `pii_entities_config` (Attributes List) List of entities. (see [below for nested schema](#nestedatt--sensitive_information_policy_config--pii_entities_config))
+- `regexes_config` (Attributes List) List of regex. (see [below for nested schema](#nestedatt--sensitive_information_policy_config--regexes_config))
+
+<a id="nestedatt--sensitive_information_policy_config--pii_entities_config"></a>
+### Nested Schema for `sensitive_information_policy_config.pii_entities_config`
+
+Optional:
+
+- `action` (String) Options for sensitive information action.
+- `input_action` (String) Options for sensitive information action.
+- `input_enabled` (Boolean)
+- `output_action` (String) Options for sensitive information action.
+- `output_enabled` (Boolean)
+- `type` (String) The currently supported PII entities
+
+
+<a id="nestedatt--sensitive_information_policy_config--regexes_config"></a>
+### Nested Schema for `sensitive_information_policy_config.regexes_config`
+
+Optional:
+
+- `action` (String) Options for sensitive information action.
+- `description` (String) The regex description.
+- `input_action` (String) Options for sensitive information action.
+- `input_enabled` (Boolean)
+- `name` (String) The regex name.
+- `output_action` (String) Options for sensitive information action.
+- `output_enabled` (Boolean)
+- `pattern` (String) The regex pattern.
+
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) Tag Key
+- `value` (String) Tag Value
+
+
+<a id="nestedatt--topic_policy_config"></a>
+### Nested Schema for `topic_policy_config`
+
+Optional:
+
+- `topics_config` (Attributes List) List of topic configs in topic policy. (see [below for nested schema](#nestedatt--topic_policy_config--topics_config))
+- `topics_tier_config` (Attributes) Guardrail tier config for topic policy (see [below for nested schema](#nestedatt--topic_policy_config--topics_tier_config))
+
+<a id="nestedatt--topic_policy_config--topics_config"></a>
+### Nested Schema for `topic_policy_config.topics_config`
+
+Optional:
+
+- `definition` (String) Definition of topic in topic policy
+- `examples` (List of String) List of text examples
+- `input_action` (String)
+- `input_enabled` (Boolean)
+- `name` (String) Name of topic in topic policy
+- `output_action` (String)
+- `output_enabled` (Boolean)
+- `type` (String) Type of topic in a policy
+
+
+<a id="nestedatt--topic_policy_config--topics_tier_config"></a>
+### Nested Schema for `topic_policy_config.topics_tier_config`
+
+Optional:
+
+- `tier_name` (String) Tier name for tier configuration in topic policy
+
+
+
+<a id="nestedatt--word_policy_config"></a>
+### Nested Schema for `word_policy_config`
+
+Optional:
+
+- `managed_word_lists_config` (Attributes List) A config for the list of managed words. (see [below for nested schema](#nestedatt--word_policy_config--managed_word_lists_config))
+- `words_config` (Attributes List) List of custom word configs. (see [below for nested schema](#nestedatt--word_policy_config--words_config))
+
+<a id="nestedatt--word_policy_config--managed_word_lists_config"></a>
+### Nested Schema for `word_policy_config.managed_word_lists_config`
+
+Optional:
+
+- `input_action` (String)
+- `input_enabled` (Boolean)
+- `output_action` (String)
+- `output_enabled` (Boolean)
+- `type` (String) Options for managed words.
+
+
+<a id="nestedatt--word_policy_config--words_config"></a>
+### Nested Schema for `word_policy_config.words_config`
+
+Optional:
+
+- `input_action` (String)
+- `input_enabled` (Boolean)
+- `output_action` (String)
+- `output_enabled` (Boolean)
+- `text` (String) The custom word text.
+
+## Import
+
+Import is supported using the following syntax:
+
+In Terraform v1.12.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `identity` attribute, for example:
+
+```terraform
+import {
+  to = awscc_bedrock_guardrail.example
+  identity = {
+    guardrail_arn = "guardrail_arn"
+  }
+}
+```
+
+<!-- schema generated by tfplugindocs -->
+### Identity Schema
+
+#### Required
+
+- `guardrail_arn` (String) Arn representation for the guardrail
+
+#### Optional
+
+- `account_id` (String) AWS Account where this resource is managed
+- `region` (String) Region where this resource is managed
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_bedrock_guardrail.example
+  id = "guardrail_arn"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
+```shell
+$ terraform import awscc_bedrock_guardrail.example "guardrail_arn"
+```

@@ -4,8 +4,6 @@
 - [Branch Prefixes](#branch-prefixes)
 - [Common Review Items](#common-review-items)
     - [Go Coding Style](#go-coding-style)
-    - [Resource Contribution Guidelines](#resource-contribution-guidelines)
-- [Changelog Process](#changelog-process)
 
 We appreciate direct contributions to the provider codebase. Here's what to
 expect:
@@ -19,26 +17,24 @@ expect:
 
 ## Pull Request Lifecycle
 
-1. [Fork the GitHub repository](https://help.github.com/en/articles/fork-a-repo),
-   modify the code, and [create a pull request](https://help.github.com/en/articles/creating-a-pull-request-from-a-fork).
+1. [Fork the GitHub repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo),
+   modify the code, and [create a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork).
    You are welcome to submit your pull request for commentary or review before
-   it is fully completed by creating a [draft pull request](https://help.github.com/en/articles/about-pull-requests#draft-pull-requests)
+   it is fully completed by creating a [draft pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests#draft-pull-requests)
    or adding `[WIP]` to the beginning of the pull request title.
    Please include specific questions or items you'd like feedback on.
 
 1. Once you believe your pull request is ready to be reviewed, ensure the
-   pull request is not a draft pull request by [marking it ready for review](https://help.github.com/en/articles/changing-the-stage-of-a-pull-request)
+   pull request is not a draft pull request by [marking it ready for review](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request)
    or removing `[WIP]` from the pull request title if necessary, and a
-   maintainer will review it. Follow [the checklists below](#checklists-for-contribution)
-   to help ensure that your contribution can be easily reviewed and potentially
-   merged.
+   maintainer will review it.
 
 1. One of Terraform's provider team members will look over your contribution and
    either approve it or provide comments letting you know if there is anything
    left to do. We'll try give you the opportunity to make the required changes yourself, but in some cases we may perform the changes ourselves if it makes sense to (minor changes, or for urgent issues).  We do our best to keep up with the volume of PRs waiting for
    review, but it may take some time depending on the complexity of the work.
 
-1. Once all outstanding comments and checklist items have been addressed, your
+1. Once all outstanding comments have been addressed, your
    contribution will be merged! Merged PRs will be included in the next
    Terraform release.
 

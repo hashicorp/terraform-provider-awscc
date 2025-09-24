@@ -130,24 +130,42 @@
     "/properties/LoRaWAN/DrMin",
     "/properties/LoRaWAN/DrMax",
     "/properties/LoRaWAN/ChannelMask",
-    "/properties/LoRaWAN/PrAllowed",
     "/properties/LoRaWAN/HrAllowed",
-    "/properties/LoRaWAN/RaAllowed",
     "/properties/LoRaWAN/NwkGeoLoc",
     "/properties/LoRaWAN/TargetPer",
     "/properties/LoRaWAN/MinGwDiversity"
-
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/LoRaWAN"
   ],
   "primaryIdentifier": [
     "/properties/Id"
   ],
-  "taggable": true,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "iotwireless:TagResource",
+      "iotwireless:UntagResource",
+      "iotwireless:ListTagsForResource"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
         "iotwireless:CreateServiceProfile",
+        "iotwireless:TagResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "iotwireless:GetServiceProfile",
         "iotwireless:TagResource",
-        "iotwireless:ListTagsForResource"
+        "iotwireless:UntagResource"
       ]
     },
     "read": {

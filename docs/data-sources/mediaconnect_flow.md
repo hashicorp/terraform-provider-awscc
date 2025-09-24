@@ -22,11 +22,63 @@ Data Source schema for AWS::MediaConnect::Flow
 ### Read-Only
 
 - `availability_zone` (String) The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.
+- `egress_ip` (String) The IP address from which video will be sent to output destinations.
 - `flow_arn` (String) The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.
 - `flow_availability_zone` (String) The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.(ReadOnly)
+- `maintenance` (Attributes) The maintenance settings you want to use for the flow. (see [below for nested schema](#nestedatt--maintenance))
+- `media_streams` (Attributes List) The media streams associated with the flow. You can associate any of these media streams with sources and outputs on the flow. (see [below for nested schema](#nestedatt--media_streams))
 - `name` (String) The name of the flow.
 - `source` (Attributes) The source of the flow. (see [below for nested schema](#nestedatt--source))
 - `source_failover_config` (Attributes) The source failover config of the flow. (see [below for nested schema](#nestedatt--source_failover_config))
+- `source_monitoring_config` (Attributes) The source monitoring config of the flow. (see [below for nested schema](#nestedatt--source_monitoring_config))
+- `vpc_interfaces` (Attributes List) The VPC interfaces that you added to this flow. (see [below for nested schema](#nestedatt--vpc_interfaces))
+
+<a id="nestedatt--maintenance"></a>
+### Nested Schema for `maintenance`
+
+Read-Only:
+
+- `maintenance_day` (String) A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.
+- `maintenance_start_hour` (String) UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.
+
+
+<a id="nestedatt--media_streams"></a>
+### Nested Schema for `media_streams`
+
+Read-Only:
+
+- `attributes` (Attributes) Attributes that are related to the media stream. (see [below for nested schema](#nestedatt--media_streams--attributes))
+- `clock_rate` (Number) The sample rate for the stream. This value in measured in kHz.
+- `description` (String) A description that can help you quickly identify what your media stream is used for.
+- `fmt` (Number) The format type number (sometimes referred to as RTP payload type) of the media stream. MediaConnect assigns this value to the media stream. For ST 2110 JPEG XS outputs, you need to provide this value to the receiver.
+- `media_stream_id` (Number) A unique identifier for the media stream.
+- `media_stream_name` (String) A name that helps you distinguish one media stream from another.
+- `media_stream_type` (String) The type of media stream.
+- `video_format` (String) The resolution of the video.
+
+<a id="nestedatt--media_streams--attributes"></a>
+### Nested Schema for `media_streams.attributes`
+
+Read-Only:
+
+- `fmtp` (Attributes) A set of parameters that define the media stream. (see [below for nested schema](#nestedatt--media_streams--attributes--fmtp))
+- `lang` (String) The audio language, in a format that is recognized by the receiver.
+
+<a id="nestedatt--media_streams--attributes--fmtp"></a>
+### Nested Schema for `media_streams.attributes.fmtp`
+
+Read-Only:
+
+- `channel_order` (String) The format of the audio channel.
+- `colorimetry` (String) The format used for the representation of color.
+- `exact_framerate` (String) The frame rate for the video stream, in frames/second. For example: 60000/1001.
+- `par` (String) The pixel aspect ratio (PAR) of the video.
+- `range` (String) The encoding range of the video.
+- `scan_mode` (String) The type of compression that was used to smooth the video's appearance.
+- `tcs` (String) The transfer characteristic system (TCS) that is used in the video.
+
+
+
 
 <a id="nestedatt--source"></a>
 ### Nested Schema for `source`
@@ -36,15 +88,22 @@ Read-Only:
 - `decryption` (Attributes) The type of decryption that is used on the content ingested from this source. (see [below for nested schema](#nestedatt--source--decryption))
 - `description` (String) A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
 - `entitlement_arn` (String) The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.
+- `gateway_bridge_source` (Attributes) The source configuration for cloud flows receiving a stream from a bridge. (see [below for nested schema](#nestedatt--source--gateway_bridge_source))
 - `ingest_ip` (String) The IP address that the flow will be listening on for incoming content.
 - `ingest_port` (Number) The port that the flow will be listening on for incoming content.
 - `max_bitrate` (Number) The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
 - `max_latency` (Number) The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+- `max_sync_buffer` (Number) The size of the buffer (in milliseconds) to use to sync incoming source data.
+- `media_stream_source_configurations` (Attributes List) The media stream that is associated with the source, and the parameters for that association. (see [below for nested schema](#nestedatt--source--media_stream_source_configurations))
 - `min_latency` (Number) The minimum latency in milliseconds.
 - `name` (String) The name of the source.
-- `protocol` (String) The protocol that is used by the source or output.
+- `protocol` (String) The protocol that is used by the source.
+- `sender_control_port` (Number) The port that the flow uses to send outbound requests to initiate connection with the sender for fujitsu-qos protocol.
+- `sender_ip_address` (String) The IP address that the flow communicates with to initiate connection with the sender for fujitsu-qos protocol.
 - `source_arn` (String) The ARN of the source.
 - `source_ingest_port` (String) The port that the flow will be listening on for incoming content.(ReadOnly)
+- `source_listener_address` (String) Source IP or domain name for SRT-caller protocol.
+- `source_listener_port` (Number) Source port for SRT-caller protocol.
 - `stream_id` (String) The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
 - `vpc_interface_name` (String) The name of the VPC Interface this Source is configured with.
 - `whitelist_cidr` (String) The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
@@ -65,13 +124,133 @@ Read-Only:
 - `url` (String) The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
 
 
+<a id="nestedatt--source--gateway_bridge_source"></a>
+### Nested Schema for `source.gateway_bridge_source`
+
+Read-Only:
+
+- `bridge_arn` (String) The ARN of the bridge feeding this flow.
+- `vpc_interface_attachment` (Attributes) The name of the VPC interface attachment to use for this bridge source. (see [below for nested schema](#nestedatt--source--gateway_bridge_source--vpc_interface_attachment))
+
+<a id="nestedatt--source--gateway_bridge_source--vpc_interface_attachment"></a>
+### Nested Schema for `source.gateway_bridge_source.vpc_interface_attachment`
+
+Read-Only:
+
+- `vpc_interface_name` (String) The name of the VPC interface to use for this resource.
+
+
+
+<a id="nestedatt--source--media_stream_source_configurations"></a>
+### Nested Schema for `source.media_stream_source_configurations`
+
+Read-Only:
+
+- `encoding_name` (String) The format that was used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv.
+- `input_configurations` (Attributes List) The media streams that you want to associate with the source. (see [below for nested schema](#nestedatt--source--media_stream_source_configurations--input_configurations))
+- `media_stream_name` (String) A name that helps you distinguish one media stream from another.
+
+<a id="nestedatt--source--media_stream_source_configurations--input_configurations"></a>
+### Nested Schema for `source.media_stream_source_configurations.input_configurations`
+
+Read-Only:
+
+- `input_port` (Number) The port that the flow listens on for an incoming media stream.
+- `interface` (Attributes) The VPC interface where the media stream comes in from. (see [below for nested schema](#nestedatt--source--media_stream_source_configurations--input_configurations--interface))
+
+<a id="nestedatt--source--media_stream_source_configurations--input_configurations--interface"></a>
+### Nested Schema for `source.media_stream_source_configurations.input_configurations.interface`
+
+Read-Only:
+
+- `name` (String) The name of the VPC interface that you want to use for the media stream associated with the output.
+
+
+
+
 
 <a id="nestedatt--source_failover_config"></a>
 ### Nested Schema for `source_failover_config`
 
 Read-Only:
 
+- `failover_mode` (String) The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.
 - `recovery_window` (Number) Search window time to look for dash-7 packets
+- `source_priority` (Attributes) The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams. (see [below for nested schema](#nestedatt--source_failover_config--source_priority))
 - `state` (String)
 
+<a id="nestedatt--source_failover_config--source_priority"></a>
+### Nested Schema for `source_failover_config.source_priority`
 
+Read-Only:
+
+- `primary_source` (String) The name of the source you choose as the primary source for this flow.
+
+
+
+<a id="nestedatt--source_monitoring_config"></a>
+### Nested Schema for `source_monitoring_config`
+
+Read-Only:
+
+- `audio_monitoring_settings` (Attributes List) Contains the settings for audio stream metrics monitoring. (see [below for nested schema](#nestedatt--source_monitoring_config--audio_monitoring_settings))
+- `content_quality_analysis_state` (String) Indicates whether content quality analysis is enabled or disabled.
+- `thumbnail_state` (String) The state of thumbnail monitoring.
+- `video_monitoring_settings` (Attributes List) Contains the settings for video stream metrics monitoring. (see [below for nested schema](#nestedatt--source_monitoring_config--video_monitoring_settings))
+
+<a id="nestedatt--source_monitoring_config--audio_monitoring_settings"></a>
+### Nested Schema for `source_monitoring_config.audio_monitoring_settings`
+
+Read-Only:
+
+- `silent_audio` (Attributes) Configures settings for the SilentAudio metric. (see [below for nested schema](#nestedatt--source_monitoring_config--audio_monitoring_settings--silent_audio))
+
+<a id="nestedatt--source_monitoring_config--audio_monitoring_settings--silent_audio"></a>
+### Nested Schema for `source_monitoring_config.audio_monitoring_settings.silent_audio`
+
+Read-Only:
+
+- `state` (String) Indicates whether the SilentAudio metric is enabled or disabled.
+- `threshold_seconds` (Number) Specifies the number of consecutive seconds of silence that triggers an event or alert.
+
+
+
+<a id="nestedatt--source_monitoring_config--video_monitoring_settings"></a>
+### Nested Schema for `source_monitoring_config.video_monitoring_settings`
+
+Read-Only:
+
+- `black_frames` (Attributes) Configures settings for the BlackFrames metric. (see [below for nested schema](#nestedatt--source_monitoring_config--video_monitoring_settings--black_frames))
+- `frozen_frames` (Attributes) Configures settings for the FrozenFrames metric. (see [below for nested schema](#nestedatt--source_monitoring_config--video_monitoring_settings--frozen_frames))
+
+<a id="nestedatt--source_monitoring_config--video_monitoring_settings--black_frames"></a>
+### Nested Schema for `source_monitoring_config.video_monitoring_settings.black_frames`
+
+Read-Only:
+
+- `state` (String) Indicates whether the BlackFrames metric is enabled or disabled.
+- `threshold_seconds` (Number) Specifies the number of consecutive seconds of black frames that triggers an event or alert.
+
+
+<a id="nestedatt--source_monitoring_config--video_monitoring_settings--frozen_frames"></a>
+### Nested Schema for `source_monitoring_config.video_monitoring_settings.frozen_frames`
+
+Read-Only:
+
+- `state` (String) Indicates whether the FrozenFrames metric is enabled or disabled.
+- `threshold_seconds` (Number) Specifies the number of consecutive seconds of a static image that triggers an event or alert.
+
+
+
+
+<a id="nestedatt--vpc_interfaces"></a>
+### Nested Schema for `vpc_interfaces`
+
+Read-Only:
+
+- `name` (String) Immutable and has to be a unique against other VpcInterfaces in this Flow.
+- `network_interface_ids` (List of String) IDs of the network interfaces created in customer's account by MediaConnect.
+- `network_interface_type` (String) The type of network adapter that you want MediaConnect to use on this interface. If you don't set this value, it defaults to ENA.
+- `role_arn` (String) Role Arn MediaConnect can assume to create ENIs in customer's account.
+- `security_group_ids` (List of String) Security Group IDs to be used on ENI.
+- `subnet_id` (String) Subnet must be in the AZ of the Flow

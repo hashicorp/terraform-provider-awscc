@@ -64,15 +64,15 @@ Read-Only:
 - `tag` (Attributes) Specifies a tag used to identify a subset of objects for an Amazon S3Outposts bucket. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules--filter--tag))
 
 <a id="nestedatt--lifecycle_configuration--rules--filter--and_operator"></a>
-### Nested Schema for `lifecycle_configuration.rules.filter.tag`
+### Nested Schema for `lifecycle_configuration.rules.filter.and_operator`
 
 Read-Only:
 
 - `prefix` (String) Prefix identifies one or more objects to which the rule applies.
-- `tags` (Attributes Set) All of these tags must exist in the object's tag set in order for the rule to apply. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules--filter--tag--tags))
+- `tags` (Attributes Set) All of these tags must exist in the object's tag set in order for the rule to apply. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules--filter--and_operator--tags))
 
-<a id="nestedatt--lifecycle_configuration--rules--filter--tag--tags"></a>
-### Nested Schema for `lifecycle_configuration.rules.filter.tag.tags`
+<a id="nestedatt--lifecycle_configuration--rules--filter--and_operator--tags"></a>
+### Nested Schema for `lifecycle_configuration.rules.filter.and_operator.tags`
 
 Read-Only:
 
@@ -100,5 +100,3 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
-
-

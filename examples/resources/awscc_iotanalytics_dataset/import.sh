@@ -1,0 +1,1 @@
+$ terraform import awscc_iotanalytics_dataset.example "dataset_name"

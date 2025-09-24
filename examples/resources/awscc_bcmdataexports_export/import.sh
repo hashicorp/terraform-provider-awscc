@@ -1,0 +1,1 @@
+$ terraform import awscc_bcmdataexports_export.example "export_arn"

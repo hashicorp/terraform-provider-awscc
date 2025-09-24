@@ -19,5 +19,3 @@ Plural Data Source schema for AWS::WAFv2::LoggingConfiguration
 
 - `id` (String) Uniquely identifies the data source.
 - `ids` (Set of String) Set of Resource Identifiers.
-
-

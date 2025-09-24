@@ -21,10 +21,9 @@ Data Source schema for AWS::ApiGateway::Model
 
 ### Read-Only
 
-- `content_type` (String) The content type for the model.
-- `description` (String) A description that identifies this model.
-- `name` (String) A name for the model. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the model name.
-- `rest_api_id` (String) The ID of a REST API with which to associate this model.
-- `schema` (String) The schema to use to transform data to one or more output formats. Specify null ({}) if you don't want to specify a schema.
-
-
+- `content_type` (String)
+- `description` (String)
+- `name` (String) A name for the model. If you don't specify a name, CFN generates a unique physical ID and uses that ID for the model name. For more information, see [Name Type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).
+  If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.
+- `rest_api_id` (String)
+- `schema` (String)

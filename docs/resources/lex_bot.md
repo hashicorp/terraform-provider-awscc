@@ -35,7 +35,8 @@ Amazon Lex conversational bot performing automated tasks such as ordering a pizz
 ### Read-Only
 
 - `arn` (String)
-- `id` (String) Unique ID of resource
+- `bot_id` (String) Unique ID of resource
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--data_privacy"></a>
 ### Nested Schema for `data_privacy`
@@ -122,62 +123,62 @@ Optional:
 - `post_fulfillment_status_specification` (Attributes) Provides information for updating the user on the progress of fulfilling an intent. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification`
 
 Optional:
 
 - `active` (Boolean) Determines whether fulfillment updates are sent to the user. When this field is true, updates are sent.
-- `start_response` (Attributes) Provides settings for a message that is sent to the user when a fulfillment Lambda function starts running. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response))
+- `start_response` (Attributes) Provides settings for a message that is sent to the user when a fulfillment Lambda function starts running. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response))
 - `timeout_in_seconds` (Number) The length of time that the fulfillment Lambda function should run before it times out.
-- `update_response` (Attributes) Provides settings for a message that is sent periodically to the user while a fulfillment Lambda function is running. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response))
+- `update_response` (Attributes) Provides settings for a message that is sent periodically to the user while a fulfillment Lambda function is running. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response))
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.start_response`
 
 Optional:
 
 - `allow_interrupt` (Boolean) Determines whether the user can interrupt the start message while it is playing.
 - `delay_in_seconds` (Number) The delay between when the Lambda fulfillment function starts running and the start message is played. If the Lambda function returns before the delay is over, the start message isn't played.
-- `message_groups` (Attributes List) One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups))
+- `message_groups` (Attributes List) One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups))
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups`
-
-Optional:
-
-- `message` (Attributes) The primary message that Amazon Lex should send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--message))
-- `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations))
-
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups`
 
 Optional:
 
-- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--custom_payload))
-- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--image_response_card))
-- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--plain_text_message))
-- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--ssml_message))
+- `message` (Attributes) The primary message that Amazon Lex should send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--message))
+- `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--variations))
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--message"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups.message`
+
+Optional:
+
+- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--message--custom_payload))
+- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--message--image_response_card))
+- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--message--plain_text_message))
+- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--message--ssml_message))
+
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--message--custom_payload"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups.message.custom_payload`
 
 Optional:
 
 - `value` (String) The string that is sent to your application.
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--message--image_response_card"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups.message.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--ssml_message--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--message--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations.ssml_message.buttons`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--message--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups.message.image_response_card.buttons`
 
 Optional:
 
@@ -186,16 +187,16 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--message--plain_text_message"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups.message.plain_text_message`
 
 Optional:
 
 - `value` (String) The message to send to the user.
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--ssml_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--message--ssml_message"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups.message.ssml_message`
 
 Optional:
 
@@ -203,36 +204,36 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--variations"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups.variations`
 
 Optional:
 
-- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--custom_payload))
-- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--image_response_card))
-- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--plain_text_message))
-- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--ssml_message))
+- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--variations--custom_payload))
+- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--variations--image_response_card))
+- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--variations--plain_text_message))
+- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--variations--ssml_message))
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--variations--custom_payload"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups.variations.custom_payload`
 
 Optional:
 
 - `value` (String) The string that is sent to your application.
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--variations--image_response_card"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups.variations.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--ssml_message--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--variations--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations.ssml_message.buttons`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--variations--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups.variations.image_response_card.buttons`
 
 Optional:
 
@@ -241,16 +242,16 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--variations--plain_text_message"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups.variations.plain_text_message`
 
 Optional:
 
 - `value` (String) The message to send to the user.
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--ssml_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--start_response--message_groups--variations--ssml_message"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.start_response.message_groups.variations.ssml_message`
 
 Optional:
 
@@ -260,53 +261,53 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.update_response`
 
 Optional:
 
 - `allow_interrupt` (Boolean) Determines whether the user can interrupt an update message while it is playing.
 - `frequency_in_seconds` (Number) The frequency that a message is sent to the user. When the period ends, Amazon Lex chooses a message from the message groups and plays it to the user. If the fulfillment Lambda returns before the first period ends, an update message is not played to the user.
-- `message_groups` (Attributes List) One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups))
+- `message_groups` (Attributes List) One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups))
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups`
-
-Optional:
-
-- `message` (Attributes) The primary message that Amazon Lex should send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--message))
-- `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations))
-
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups`
 
 Optional:
 
-- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--custom_payload))
-- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--image_response_card))
-- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--plain_text_message))
-- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--ssml_message))
+- `message` (Attributes) The primary message that Amazon Lex should send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--message))
+- `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--variations))
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--message"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups.message`
+
+Optional:
+
+- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--message--custom_payload))
+- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--message--image_response_card))
+- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--message--plain_text_message))
+- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--message--ssml_message))
+
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--message--custom_payload"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups.message.custom_payload`
 
 Optional:
 
 - `value` (String) The string that is sent to your application.
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--message--image_response_card"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups.message.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--ssml_message--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--message--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations.ssml_message.buttons`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--message--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups.message.image_response_card.buttons`
 
 Optional:
 
@@ -315,16 +316,16 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--message--plain_text_message"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups.message.plain_text_message`
 
 Optional:
 
 - `value` (String) The message to send to the user.
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--ssml_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--message--ssml_message"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups.message.ssml_message`
 
 Optional:
 
@@ -332,36 +333,36 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--variations"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups.variations`
 
 Optional:
 
-- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--custom_payload))
-- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--image_response_card))
-- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--plain_text_message))
-- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--ssml_message))
+- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--variations--custom_payload))
+- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--variations--image_response_card))
+- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--variations--plain_text_message))
+- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--variations--ssml_message))
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--variations--custom_payload"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups.variations.custom_payload`
 
 Optional:
 
 - `value` (String) The string that is sent to your application.
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--variations--image_response_card"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups.variations.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--ssml_message--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--variations--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations.ssml_message.buttons`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--variations--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups.variations.image_response_card.buttons`
 
 Optional:
 
@@ -370,16 +371,16 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--variations--plain_text_message"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups.variations.plain_text_message`
 
 Optional:
 
 - `value` (String) The message to send to the user.
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--ssml_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification--update_response--message_groups--variations--ssml_message"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification.update_response.message_groups.variations.ssml_message`
 
 Optional:
 
@@ -416,35 +417,35 @@ Optional:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.message`
 
 Optional:
 
-- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--custom_payload))
-- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--image_response_card))
-- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--plain_text_message))
-- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--ssml_message))
+- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--message--custom_payload))
+- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--message--image_response_card))
+- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--message--plain_text_message))
+- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--message--ssml_message))
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--message--custom_payload"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.message.custom_payload`
 
 Optional:
 
 - `value` (String) The string that is sent to your application.
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--message--image_response_card"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.message.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--ssml_message--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--message--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.ssml_message.buttons`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--message--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.message.image_response_card.buttons`
 
 Optional:
 
@@ -453,16 +454,16 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--message--plain_text_message"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.message.plain_text_message`
 
 Optional:
 
 - `value` (String) The message to send to the user.
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--ssml_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--message--ssml_message"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.message.ssml_message`
 
 Optional:
 
@@ -481,7 +482,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.custom_payload`
 
 Optional:
 
@@ -489,17 +490,17 @@ Optional:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--ssml_message--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.ssml_message.buttons`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.image_response_card.buttons`
 
 Optional:
 
@@ -509,7 +510,7 @@ Optional:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.plain_text_message`
 
 Optional:
 
@@ -544,35 +545,35 @@ Optional:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.message`
 
 Optional:
 
-- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--custom_payload))
-- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--image_response_card))
-- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--plain_text_message))
-- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--ssml_message))
+- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--message--custom_payload))
+- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--message--image_response_card))
+- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--message--plain_text_message))
+- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--message--ssml_message))
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--message--custom_payload"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.message.custom_payload`
 
 Optional:
 
 - `value` (String) The string that is sent to your application.
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--message--image_response_card"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.message.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--ssml_message--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--message--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.ssml_message.buttons`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--message--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.message.image_response_card.buttons`
 
 Optional:
 
@@ -581,16 +582,16 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--message--plain_text_message"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.message.plain_text_message`
 
 Optional:
 
 - `value` (String) The message to send to the user.
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--ssml_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--message--ssml_message"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.message.ssml_message`
 
 Optional:
 
@@ -609,7 +610,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.custom_payload`
 
 Optional:
 
@@ -617,17 +618,17 @@ Optional:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--ssml_message--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.ssml_message.buttons`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.image_response_card.buttons`
 
 Optional:
 
@@ -637,7 +638,7 @@ Optional:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.plain_text_message`
 
 Optional:
 
@@ -672,35 +673,35 @@ Optional:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.message`
 
 Optional:
 
-- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--custom_payload))
-- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--image_response_card))
-- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--plain_text_message))
-- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--ssml_message))
+- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--message--custom_payload))
+- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--message--image_response_card))
+- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--message--plain_text_message))
+- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--message--ssml_message))
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--message--custom_payload"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.message.custom_payload`
 
 Optional:
 
 - `value` (String) The string that is sent to your application.
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--message--image_response_card"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.message.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--ssml_message--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--message--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.ssml_message.buttons`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--message--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.message.image_response_card.buttons`
 
 Optional:
 
@@ -709,16 +710,16 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--message--plain_text_message"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.message.plain_text_message`
 
 Optional:
 
 - `value` (String) The message to send to the user.
 
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--ssml_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--message--ssml_message"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.message.ssml_message`
 
 Optional:
 
@@ -737,7 +738,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.custom_payload`
 
 Optional:
 
@@ -745,17 +746,17 @@ Optional:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--ssml_message--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.ssml_message.buttons`
+<a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.image_response_card.buttons`
 
 Optional:
 
@@ -765,7 +766,7 @@ Optional:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.plain_text_message`
 
 Optional:
 
@@ -802,51 +803,51 @@ Optional:
 - `is_active` (Boolean)
 
 <a id="nestedatt--bot_locales--intents--intent_closing_setting--closing_response"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active`
+### Nested Schema for `bot_locales.intents.intent_closing_setting.closing_response`
 
 Optional:
 
 - `allow_interrupt` (Boolean) Indicates whether the user can interrupt a speech prompt from the bot.
-- `message_groups_list` (Attributes List) One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list))
+- `message_groups_list` (Attributes List) One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list))
 
-<a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list`
-
-Optional:
-
-- `message` (Attributes) The primary message that Amazon Lex should send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--message))
-- `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations))
-
-<a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--message"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations`
+<a id="nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list"></a>
+### Nested Schema for `bot_locales.intents.intent_closing_setting.closing_response.message_groups_list`
 
 Optional:
 
-- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--custom_payload))
-- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--image_response_card))
-- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--plain_text_message))
-- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--ssml_message))
+- `message` (Attributes) The primary message that Amazon Lex should send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--message))
+- `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--variations))
 
-<a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--message"></a>
+### Nested Schema for `bot_locales.intents.intent_closing_setting.closing_response.message_groups_list.message`
+
+Optional:
+
+- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--message--custom_payload))
+- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--message--image_response_card))
+- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--message--plain_text_message))
+- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--message--ssml_message))
+
+<a id="nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--message--custom_payload"></a>
+### Nested Schema for `bot_locales.intents.intent_closing_setting.closing_response.message_groups_list.message.custom_payload`
 
 Optional:
 
 - `value` (String) The string that is sent to your application.
 
 
-<a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--message--image_response_card"></a>
+### Nested Schema for `bot_locales.intents.intent_closing_setting.closing_response.message_groups_list.message.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--ssml_message--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--message--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message.title`
+<a id="nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--message--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.intent_closing_setting.closing_response.message_groups_list.message.image_response_card.buttons`
 
 Optional:
 
@@ -855,16 +856,16 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--message--plain_text_message"></a>
+### Nested Schema for `bot_locales.intents.intent_closing_setting.closing_response.message_groups_list.message.plain_text_message`
 
 Optional:
 
 - `value` (String) The message to send to the user.
 
 
-<a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--ssml_message"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--message--ssml_message"></a>
+### Nested Schema for `bot_locales.intents.intent_closing_setting.closing_response.message_groups_list.message.ssml_message`
 
 Optional:
 
@@ -872,36 +873,36 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations`
+<a id="nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--variations"></a>
+### Nested Schema for `bot_locales.intents.intent_closing_setting.closing_response.message_groups_list.variations`
 
 Optional:
 
-- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--custom_payload))
-- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--image_response_card))
-- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--plain_text_message))
-- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--ssml_message))
+- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--variations--custom_payload))
+- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--variations--image_response_card))
+- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--variations--plain_text_message))
+- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--variations--ssml_message))
 
-<a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--variations--custom_payload"></a>
+### Nested Schema for `bot_locales.intents.intent_closing_setting.closing_response.message_groups_list.variations.custom_payload`
 
 Optional:
 
 - `value` (String) The string that is sent to your application.
 
 
-<a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--variations--image_response_card"></a>
+### Nested Schema for `bot_locales.intents.intent_closing_setting.closing_response.message_groups_list.variations.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--ssml_message--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--variations--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message.title`
+<a id="nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--variations--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.intent_closing_setting.closing_response.message_groups_list.variations.image_response_card.buttons`
 
 Optional:
 
@@ -910,16 +911,16 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--variations--plain_text_message"></a>
+### Nested Schema for `bot_locales.intents.intent_closing_setting.closing_response.message_groups_list.variations.plain_text_message`
 
 Optional:
 
 - `value` (String) The message to send to the user.
 
 
-<a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--ssml_message"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--intent_closing_setting--closing_response--message_groups_list--variations--ssml_message"></a>
+### Nested Schema for `bot_locales.intents.intent_closing_setting.closing_response.message_groups_list.variations.ssml_message`
 
 Optional:
 
@@ -940,51 +941,51 @@ Optional:
 - `prompt_specification` (Attributes) Prompts the user to confirm the intent. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification))
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.declination_response`
 
 Optional:
 
 - `allow_interrupt` (Boolean) Indicates whether the user can interrupt a speech prompt from the bot.
-- `message_groups_list` (Attributes List) One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list))
+- `message_groups_list` (Attributes List) One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list))
 
-<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list`
-
-Optional:
-
-- `message` (Attributes) The primary message that Amazon Lex should send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--message))
-- `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations))
-
-<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--message"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations`
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.declination_response.message_groups_list`
 
 Optional:
 
-- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--custom_payload))
-- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--image_response_card))
-- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--plain_text_message))
-- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message))
+- `message` (Attributes) The primary message that Amazon Lex should send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--message))
+- `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--variations))
 
-<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--message"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.declination_response.message_groups_list.message`
+
+Optional:
+
+- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--message--custom_payload))
+- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--message--image_response_card))
+- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--message--plain_text_message))
+- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--message--ssml_message))
+
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--message--custom_payload"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.declination_response.message_groups_list.message.custom_payload`
 
 Optional:
 
 - `value` (String) The string that is sent to your application.
 
 
-<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--message--image_response_card"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.declination_response.message_groups_list.message.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--message--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message.title`
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--message--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.declination_response.message_groups_list.message.image_response_card.buttons`
 
 Optional:
 
@@ -993,16 +994,16 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--message--plain_text_message"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.declination_response.message_groups_list.message.plain_text_message`
 
 Optional:
 
 - `value` (String) The message to send to the user.
 
 
-<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--message--ssml_message"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.declination_response.message_groups_list.message.ssml_message`
 
 Optional:
 
@@ -1010,36 +1011,36 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations`
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--variations"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.declination_response.message_groups_list.variations`
 
 Optional:
 
-- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--custom_payload))
-- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--image_response_card))
-- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--plain_text_message))
-- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message))
+- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--variations--custom_payload))
+- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--variations--image_response_card))
+- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--variations--plain_text_message))
+- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--variations--ssml_message))
 
-<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--variations--custom_payload"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.declination_response.message_groups_list.variations.custom_payload`
 
 Optional:
 
 - `value` (String) The string that is sent to your application.
 
 
-<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--variations--image_response_card"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.declination_response.message_groups_list.variations.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--variations--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message.title`
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--variations--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.declination_response.message_groups_list.variations.image_response_card.buttons`
 
 Optional:
 
@@ -1048,16 +1049,16 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--variations--plain_text_message"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.declination_response.message_groups_list.variations.plain_text_message`
 
 Optional:
 
 - `value` (String) The message to send to the user.
 
 
-<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response--message_groups_list--variations--ssml_message"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.declination_response.message_groups_list.variations.ssml_message`
 
 Optional:
 
@@ -1075,6 +1076,8 @@ Optional:
 - `allow_interrupt` (Boolean) Indicates whether the user can interrupt a speech prompt from the bot.
 - `max_retries` (Number) The maximum number of times the bot tries to elicit a resonse from the user using this prompt.
 - `message_groups_list` (Attributes List) One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list))
+- `message_selection_strategy` (String) Indicates how a message is selected from a message group among retries.
+- `prompt_attempts_specification` (Attributes Map) Specifies the advanced settings on each attempt of the prompt. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--prompt_attempts_specification))
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list"></a>
 ### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list`
@@ -1085,35 +1088,35 @@ Optional:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations))
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--message"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.message`
 
 Optional:
 
-- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--custom_payload))
-- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--image_response_card))
-- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--plain_text_message))
-- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message))
+- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--message--custom_payload))
+- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--message--image_response_card))
+- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--message--plain_text_message))
+- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--message--ssml_message))
 
-<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--message--custom_payload"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.message.custom_payload`
 
 Optional:
 
 - `value` (String) The string that is sent to your application.
 
 
-<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--message--image_response_card"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.message.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--message--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message.title`
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--message--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.message.image_response_card.buttons`
 
 Optional:
 
@@ -1122,16 +1125,16 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--message--plain_text_message"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.message.plain_text_message`
 
 Optional:
 
 - `value` (String) The message to send to the user.
 
 
-<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--message--ssml_message"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.message.ssml_message`
 
 Optional:
 
@@ -1150,7 +1153,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.custom_payload`
 
 Optional:
 
@@ -1158,17 +1161,17 @@ Optional:
 
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message.title`
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.image_response_card.buttons`
 
 Optional:
 
@@ -1178,7 +1181,7 @@ Optional:
 
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.plain_text_message`
 
 Optional:
 
@@ -1192,6 +1195,64 @@ Optional:
 
 - `value` (String) The SSML text that defines the prompt.
 
+
+
+
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--prompt_attempts_specification"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.prompt_attempts_specification`
+
+Optional:
+
+- `allow_interrupt` (Boolean) Indicates whether the user can interrupt a speech prompt attempt from the bot.
+- `allowed_input_types` (Attributes) Specifies the allowed input types. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--prompt_attempts_specification--allowed_input_types))
+- `audio_and_dtmf_input_specification` (Attributes) Specifies the audio and DTMF input specification. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--prompt_attempts_specification--audio_and_dtmf_input_specification))
+- `text_input_specification` (Attributes) Specifies the text input specifications. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--prompt_attempts_specification--text_input_specification))
+
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--prompt_attempts_specification--allowed_input_types"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.prompt_attempts_specification.allowed_input_types`
+
+Optional:
+
+- `allow_audio_input` (Boolean) Indicates whether audio input is allowed.
+- `allow_dtmf_input` (Boolean) Indicates whether DTMF input is allowed.
+
+
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--prompt_attempts_specification--audio_and_dtmf_input_specification"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.prompt_attempts_specification.audio_and_dtmf_input_specification`
+
+Optional:
+
+- `audio_specification` (Attributes) Specifies the audio input specifications. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--prompt_attempts_specification--audio_and_dtmf_input_specification--audio_specification))
+- `dtmf_specification` (Attributes) Specifies the settings on DTMF input. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--prompt_attempts_specification--audio_and_dtmf_input_specification--dtmf_specification))
+- `start_timeout_ms` (Number) Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.
+
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--prompt_attempts_specification--audio_and_dtmf_input_specification--audio_specification"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.prompt_attempts_specification.audio_and_dtmf_input_specification.audio_specification`
+
+Optional:
+
+- `end_timeout_ms` (Number) Time for which a bot waits after the customer stops speaking to assume the utterance is finished.
+- `max_length_ms` (Number) Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.
+
+
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--prompt_attempts_specification--audio_and_dtmf_input_specification--dtmf_specification"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.prompt_attempts_specification.audio_and_dtmf_input_specification.dtmf_specification`
+
+Optional:
+
+- `deletion_character` (String) The DTMF character that clears the accumulated DTMF digits and immediately ends the input.
+- `end_character` (String) The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.
+- `end_timeout_ms` (Number) How long the bot should wait after the last DTMF character input before assuming that the input has concluded.
+- `max_length` (Number) The maximum number of DTMF digits allowed in an utterance.
+
+
+
+<a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--prompt_attempts_specification--text_input_specification"></a>
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.prompt_attempts_specification.text_input_specification`
+
+Optional:
+
+- `start_timeout_ms` (Number) Time for which a bot waits before re-prompting a customer for text input.
 
 
 
@@ -1247,7 +1308,7 @@ Optional:
 - `value_elicitation_setting` (Attributes) Settings that you can use for eliciting a slot value. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting))
 
 <a id="nestedatt--bot_locales--intents--slots--multiple_values_setting"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting`
+### Nested Schema for `bot_locales.intents.slots.multiple_values_setting`
 
 Optional:
 
@@ -1255,7 +1316,7 @@ Optional:
 
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting`
 
 Optional:
 
@@ -1297,6 +1358,8 @@ Optional:
 - `allow_interrupt` (Boolean) Indicates whether the user can interrupt a speech prompt from the bot.
 - `max_retries` (Number) The maximum number of times the bot tries to elicit a resonse from the user using this prompt.
 - `message_groups_list` (Attributes List) One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list))
+- `message_selection_strategy` (String) Indicates how a message is selected from a message group among retries.
+- `prompt_attempts_specification` (Attributes Map) Specifies the advanced settings on each attempt of the prompt. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification))
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list"></a>
 ### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list`
@@ -1307,35 +1370,35 @@ Optional:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations))
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.message`
 
 Optional:
 
-- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--custom_payload))
-- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--image_response_card))
-- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--plain_text_message))
-- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--ssml_message))
+- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--message--custom_payload))
+- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--message--image_response_card))
+- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--message--plain_text_message))
+- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--message--ssml_message))
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--message--custom_payload"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.message.custom_payload`
 
 Optional:
 
 - `value` (String) The string that is sent to your application.
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--message--image_response_card"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.message.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--ssml_message--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--message--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.ssml_message.buttons`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--message--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.message.image_response_card.buttons`
 
 Optional:
 
@@ -1344,16 +1407,16 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--message--plain_text_message"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.message.plain_text_message`
 
 Optional:
 
 - `value` (String) The message to send to the user.
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--ssml_message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--message--ssml_message"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.message.ssml_message`
 
 Optional:
 
@@ -1372,7 +1435,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.custom_payload`
 
 Optional:
 
@@ -1380,17 +1443,17 @@ Optional:
 
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--ssml_message--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.ssml_message.buttons`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.image_response_card.buttons`
 
 Optional:
 
@@ -1400,7 +1463,7 @@ Optional:
 
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list.variations.plain_text_message`
 
 Optional:
 
@@ -1414,6 +1477,64 @@ Optional:
 
 - `value` (String) The SSML text that defines the prompt.
 
+
+
+
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification`
+
+Optional:
+
+- `allow_interrupt` (Boolean) Indicates whether the user can interrupt a speech prompt attempt from the bot.
+- `allowed_input_types` (Attributes) Specifies the allowed input types. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--allowed_input_types))
+- `audio_and_dtmf_input_specification` (Attributes) Specifies the audio and DTMF input specification. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--audio_and_dtmf_input_specification))
+- `text_input_specification` (Attributes) Specifies the text input specifications. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--text_input_specification))
+
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--allowed_input_types"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.allowed_input_types`
+
+Optional:
+
+- `allow_audio_input` (Boolean) Indicates whether audio input is allowed.
+- `allow_dtmf_input` (Boolean) Indicates whether DTMF input is allowed.
+
+
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--audio_and_dtmf_input_specification"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.audio_and_dtmf_input_specification`
+
+Optional:
+
+- `audio_specification` (Attributes) Specifies the audio input specifications. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--audio_and_dtmf_input_specification--audio_specification))
+- `dtmf_specification` (Attributes) Specifies the settings on DTMF input. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--audio_and_dtmf_input_specification--dtmf_specification))
+- `start_timeout_ms` (Number) Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.
+
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--audio_and_dtmf_input_specification--audio_specification"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.audio_and_dtmf_input_specification.audio_specification`
+
+Optional:
+
+- `end_timeout_ms` (Number) Time for which a bot waits after the customer stops speaking to assume the utterance is finished.
+- `max_length_ms` (Number) Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.
+
+
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--audio_and_dtmf_input_specification--dtmf_specification"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.audio_and_dtmf_input_specification.dtmf_specification`
+
+Optional:
+
+- `deletion_character` (String) The DTMF character that clears the accumulated DTMF digits and immediately ends the input.
+- `end_character` (String) The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.
+- `end_timeout_ms` (Number) How long the bot should wait after the last DTMF character input before assuming that the input has concluded.
+- `max_length` (Number) The maximum number of DTMF digits allowed in an utterance.
+
+
+
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--text_input_specification"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.text_input_specification`
+
+Optional:
+
+- `start_timeout_ms` (Number) Time for which a bot waits before re-prompting a customer for text input.
 
 
 
@@ -1437,51 +1558,51 @@ Optional:
 - `waiting_response` (Attributes) The response that Amazon Lex sends to indicate that the bot is waiting for the conversation to continue. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response))
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.continue_response`
 
 Optional:
 
 - `allow_interrupt` (Boolean) Indicates whether the user can interrupt a speech prompt from the bot.
-- `message_groups_list` (Attributes List) One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list))
+- `message_groups_list` (Attributes List) One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list))
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list`
-
-Optional:
-
-- `message` (Attributes) The primary message that Amazon Lex should send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--message))
-- `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations))
-
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups_list`
 
 Optional:
 
-- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--custom_payload))
-- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--image_response_card))
-- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--plain_text_message))
-- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--ssml_message))
+- `message` (Attributes) The primary message that Amazon Lex should send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--message))
+- `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--variations))
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.custom_payload`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--message"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups_list.message`
+
+Optional:
+
+- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--message--custom_payload))
+- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--message--image_response_card))
+- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--message--plain_text_message))
+- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--message--ssml_message))
+
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--message--custom_payload"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups_list.message.custom_payload`
 
 Optional:
 
 - `value` (String) The string that is sent to your application.
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.image_response_card`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--message--image_response_card"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups_list.message.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--image_response_card--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--message--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--image_response_card--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.image_response_card.title`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--message--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups_list.message.image_response_card.buttons`
 
 Optional:
 
@@ -1490,16 +1611,16 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.plain_text_message`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--message--plain_text_message"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups_list.message.plain_text_message`
 
 Optional:
 
 - `value` (String) The message to send to the user.
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--ssml_message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--message--ssml_message"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups_list.message.ssml_message`
 
 Optional:
 
@@ -1507,36 +1628,36 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--variations"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups_list.variations`
 
 Optional:
 
-- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--custom_payload))
-- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--image_response_card))
-- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--plain_text_message))
-- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--ssml_message))
+- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--variations--custom_payload))
+- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--variations--image_response_card))
+- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--variations--plain_text_message))
+- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--variations--ssml_message))
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.custom_payload`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--variations--custom_payload"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups_list.variations.custom_payload`
 
 Optional:
 
 - `value` (String) The string that is sent to your application.
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.image_response_card`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--variations--image_response_card"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups_list.variations.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--image_response_card--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--variations--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--image_response_card--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.image_response_card.title`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--variations--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups_list.variations.image_response_card.buttons`
 
 Optional:
 
@@ -1545,16 +1666,16 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.plain_text_message`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--variations--plain_text_message"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups_list.variations.plain_text_message`
 
 Optional:
 
 - `value` (String) The message to send to the user.
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--ssml_message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response--message_groups_list--variations--ssml_message"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.continue_response.message_groups_list.variations.ssml_message`
 
 Optional:
 
@@ -1565,53 +1686,53 @@ Optional:
 
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.still_waiting_response`
 
 Optional:
 
 - `allow_interrupt` (Boolean) Indicates whether the user can interrupt a speech prompt from the bot.
 - `frequency_in_seconds` (Number) How often a message should be sent to the user in seconds.
-- `message_groups_list` (Attributes List) One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list))
+- `message_groups_list` (Attributes List) One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list))
 - `timeout_in_seconds` (Number) If Amazon Lex waits longer than this length of time in seconds for a response, it will stop sending messages.
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.timeout_in_seconds`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups_list`
 
 Optional:
 
-- `message` (Attributes) The primary message that Amazon Lex should send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--message))
-- `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations))
+- `message` (Attributes) The primary message that Amazon Lex should send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--message))
+- `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--variations))
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.timeout_in_seconds.variations`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--message"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups_list.message`
 
 Optional:
 
-- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations--custom_payload))
-- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations--image_response_card))
-- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations--plain_text_message))
-- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations--ssml_message))
+- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--message--custom_payload))
+- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--message--image_response_card))
+- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--message--plain_text_message))
+- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--message--ssml_message))
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.timeout_in_seconds.variations.custom_payload`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--message--custom_payload"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups_list.message.custom_payload`
 
 Optional:
 
 - `value` (String) The string that is sent to your application.
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.timeout_in_seconds.variations.image_response_card`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--message--image_response_card"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups_list.message.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations--image_response_card--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--message--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations--image_response_card--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.timeout_in_seconds.variations.image_response_card.title`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--message--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups_list.message.image_response_card.buttons`
 
 Optional:
 
@@ -1620,16 +1741,16 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.timeout_in_seconds.variations.plain_text_message`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--message--plain_text_message"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups_list.message.plain_text_message`
 
 Optional:
 
 - `value` (String) The message to send to the user.
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations--ssml_message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.timeout_in_seconds.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--message--ssml_message"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups_list.message.ssml_message`
 
 Optional:
 
@@ -1637,36 +1758,36 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.timeout_in_seconds.variations`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--variations"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups_list.variations`
 
 Optional:
 
-- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations--custom_payload))
-- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations--image_response_card))
-- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations--plain_text_message))
-- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations--ssml_message))
+- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--variations--custom_payload))
+- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--variations--image_response_card))
+- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--variations--plain_text_message))
+- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--variations--ssml_message))
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.timeout_in_seconds.variations.custom_payload`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--variations--custom_payload"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups_list.variations.custom_payload`
 
 Optional:
 
 - `value` (String) The string that is sent to your application.
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.timeout_in_seconds.variations.image_response_card`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--variations--image_response_card"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups_list.variations.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations--image_response_card--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--variations--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations--image_response_card--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.timeout_in_seconds.variations.image_response_card.title`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--variations--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups_list.variations.image_response_card.buttons`
 
 Optional:
 
@@ -1675,16 +1796,16 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.timeout_in_seconds.variations.plain_text_message`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--variations--plain_text_message"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups_list.variations.plain_text_message`
 
 Optional:
 
 - `value` (String) The message to send to the user.
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations--ssml_message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.timeout_in_seconds.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list--variations--ssml_message"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.still_waiting_response.message_groups_list.variations.ssml_message`
 
 Optional:
 
@@ -1711,35 +1832,35 @@ Optional:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations))
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.message`
 
 Optional:
 
-- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--custom_payload))
-- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--image_response_card))
-- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--plain_text_message))
-- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--ssml_message))
+- `custom_payload` (Attributes) A message in a custom format defined by the client application. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--message--custom_payload))
+- `image_response_card` (Attributes) A message that defines a response card that the client application can show to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--message--image_response_card))
+- `plain_text_message` (Attributes) A message in plain text format. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--message--plain_text_message))
+- `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--message--ssml_message))
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.custom_payload`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--message--custom_payload"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.message.custom_payload`
 
 Optional:
 
 - `value` (String) The string that is sent to your application.
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.image_response_card`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--message--image_response_card"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.message.image_response_card`
 
 Optional:
 
-- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--image_response_card--buttons))
+- `buttons` (Attributes List) A list of buttons that should be displayed on the response card. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--message--image_response_card--buttons))
 - `image_url` (String) The URL of an image to display on the response card.
 - `subtitle` (String) The subtitle to display on the response card.
 - `title` (String) The title to display on the response card.
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--image_response_card--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.image_response_card.title`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--message--image_response_card--buttons"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.message.image_response_card.buttons`
 
 Optional:
 
@@ -1748,16 +1869,16 @@ Optional:
 
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.plain_text_message`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--message--plain_text_message"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.message.plain_text_message`
 
 Optional:
 
 - `value` (String) The message to send to the user.
 
 
-<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--ssml_message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.ssml_message`
+<a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--message--ssml_message"></a>
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.message.ssml_message`
 
 Optional:
 
@@ -1794,7 +1915,7 @@ Optional:
 - `title` (String) The title to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--image_response_card--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.image_response_card.title`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.image_response_card.buttons`
 
 Optional:
 
@@ -1873,7 +1994,7 @@ Optional:
 - `synonyms` (Attributes List) Additional values related to the slot type entry. (see [below for nested schema](#nestedatt--bot_locales--slot_types--slot_type_values--synonyms))
 
 <a id="nestedatt--bot_locales--slot_types--slot_type_values--sample_value"></a>
-### Nested Schema for `bot_locales.slot_types.slot_type_values.synonyms`
+### Nested Schema for `bot_locales.slot_types.slot_type_values.sample_value`
 
 Optional:
 
@@ -1899,7 +2020,7 @@ Optional:
 - `resolution_strategy` (String)
 
 <a id="nestedatt--bot_locales--slot_types--value_selection_setting--advanced_recognition_setting"></a>
-### Nested Schema for `bot_locales.slot_types.value_selection_setting.resolution_strategy`
+### Nested Schema for `bot_locales.slot_types.value_selection_setting.advanced_recognition_setting`
 
 Optional:
 
@@ -1907,7 +2028,7 @@ Optional:
 
 
 <a id="nestedatt--bot_locales--slot_types--value_selection_setting--regex_filter"></a>
-### Nested Schema for `bot_locales.slot_types.value_selection_setting.resolution_strategy`
+### Nested Schema for `bot_locales.slot_types.value_selection_setting.regex_filter`
 
 Optional:
 
@@ -1921,6 +2042,7 @@ Optional:
 
 Optional:
 
+- `engine` (String) Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see the engine parameter of the SynthesizeSpeech operation in the Amazon Polly developer guide.
 - `voice_id` (String) The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user.
 
 
@@ -1961,14 +2083,14 @@ Optional:
 - `enabled` (Boolean) Whether the Lambda code hook is enabled
 
 <a id="nestedatt--test_bot_alias_settings--bot_alias_locale_settings--bot_alias_locale_setting--code_hook_specification"></a>
-### Nested Schema for `test_bot_alias_settings.bot_alias_locale_settings.bot_alias_locale_setting.enabled`
+### Nested Schema for `test_bot_alias_settings.bot_alias_locale_settings.bot_alias_locale_setting.code_hook_specification`
 
 Optional:
 
-- `lambda_code_hook` (Attributes) Contains information about code hooks that Amazon Lex calls during a conversation. (see [below for nested schema](#nestedatt--test_bot_alias_settings--bot_alias_locale_settings--bot_alias_locale_setting--enabled--lambda_code_hook))
+- `lambda_code_hook` (Attributes) Contains information about code hooks that Amazon Lex calls during a conversation. (see [below for nested schema](#nestedatt--test_bot_alias_settings--bot_alias_locale_settings--bot_alias_locale_setting--code_hook_specification--lambda_code_hook))
 
-<a id="nestedatt--test_bot_alias_settings--bot_alias_locale_settings--bot_alias_locale_setting--enabled--lambda_code_hook"></a>
-### Nested Schema for `test_bot_alias_settings.bot_alias_locale_settings.bot_alias_locale_setting.enabled.lambda_code_hook`
+<a id="nestedatt--test_bot_alias_settings--bot_alias_locale_settings--bot_alias_locale_setting--code_hook_specification--lambda_code_hook"></a>
+### Nested Schema for `test_bot_alias_settings.bot_alias_locale_settings.bot_alias_locale_setting.code_hook_specification.lambda_code_hook`
 
 Optional:
 
@@ -1996,14 +2118,14 @@ Optional:
 - `enabled` (Boolean)
 
 <a id="nestedatt--test_bot_alias_settings--conversation_log_settings--audio_log_settings--destination"></a>
-### Nested Schema for `test_bot_alias_settings.conversation_log_settings.audio_log_settings.enabled`
+### Nested Schema for `test_bot_alias_settings.conversation_log_settings.audio_log_settings.destination`
 
 Optional:
 
-- `s3_bucket` (Attributes) Specifies an Amazon S3 bucket for logging audio conversations (see [below for nested schema](#nestedatt--test_bot_alias_settings--conversation_log_settings--audio_log_settings--enabled--s3_bucket))
+- `s3_bucket` (Attributes) Specifies an Amazon S3 bucket for logging audio conversations (see [below for nested schema](#nestedatt--test_bot_alias_settings--conversation_log_settings--audio_log_settings--destination--s3_bucket))
 
-<a id="nestedatt--test_bot_alias_settings--conversation_log_settings--audio_log_settings--enabled--s3_bucket"></a>
-### Nested Schema for `test_bot_alias_settings.conversation_log_settings.audio_log_settings.enabled.s3_bucket`
+<a id="nestedatt--test_bot_alias_settings--conversation_log_settings--audio_log_settings--destination--s3_bucket"></a>
+### Nested Schema for `test_bot_alias_settings.conversation_log_settings.audio_log_settings.destination.s3_bucket`
 
 Optional:
 
@@ -2023,14 +2145,14 @@ Optional:
 - `enabled` (Boolean)
 
 <a id="nestedatt--test_bot_alias_settings--conversation_log_settings--text_log_settings--destination"></a>
-### Nested Schema for `test_bot_alias_settings.conversation_log_settings.text_log_settings.enabled`
+### Nested Schema for `test_bot_alias_settings.conversation_log_settings.text_log_settings.destination`
 
 Optional:
 
-- `cloudwatch` (Attributes) (see [below for nested schema](#nestedatt--test_bot_alias_settings--conversation_log_settings--text_log_settings--enabled--cloudwatch))
+- `cloudwatch` (Attributes) (see [below for nested schema](#nestedatt--test_bot_alias_settings--conversation_log_settings--text_log_settings--destination--cloudwatch))
 
-<a id="nestedatt--test_bot_alias_settings--conversation_log_settings--text_log_settings--enabled--cloudwatch"></a>
-### Nested Schema for `test_bot_alias_settings.conversation_log_settings.text_log_settings.enabled.cloudwatch`
+<a id="nestedatt--test_bot_alias_settings--conversation_log_settings--text_log_settings--destination--cloudwatch"></a>
+### Nested Schema for `test_bot_alias_settings.conversation_log_settings.text_log_settings.destination.cloudwatch`
 
 Optional:
 
@@ -2062,6 +2184,40 @@ Optional:
 
 Import is supported using the following syntax:
 
+In Terraform v1.12.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `identity` attribute, for example:
+
+```terraform
+import {
+  to = awscc_lex_bot.example
+  identity = {
+    id = "id"
+  }
+}
+```
+
+<!-- schema generated by tfplugindocs -->
+### Identity Schema
+
+#### Required
+
+- `id` (String) Unique ID of resource
+
+#### Optional
+
+- `account_id` (String) AWS Account where this resource is managed
+- `region` (String) Region where this resource is managed
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_lex_bot.example
+  id = "id"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
-$ terraform import awscc_lex_bot.example <resource ID>
+$ terraform import awscc_lex_bot.example "id"
 ```

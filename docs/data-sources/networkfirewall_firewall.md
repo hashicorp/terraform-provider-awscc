@@ -21,8 +21,11 @@ Data Source schema for AWS::NetworkFirewall::Firewall
 
 ### Read-Only
 
+- `availability_zone_change_protection` (Boolean)
+- `availability_zone_mappings` (Attributes Set) (see [below for nested schema](#nestedatt--availability_zone_mappings))
 - `delete_protection` (Boolean)
 - `description` (String)
+- `enabled_analysis_types` (List of String) The types of analysis to enable for the firewall. Can be TLS_SNI, HTTP_HOST, or both.
 - `endpoint_ids` (List of String)
 - `firewall_arn` (String) A resource ARN.
 - `firewall_id` (String)
@@ -32,13 +35,23 @@ Data Source schema for AWS::NetworkFirewall::Firewall
 - `subnet_change_protection` (Boolean)
 - `subnet_mappings` (Attributes Set) (see [below for nested schema](#nestedatt--subnet_mappings))
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `transit_gateway_id` (String)
 - `vpc_id` (String)
+
+<a id="nestedatt--availability_zone_mappings"></a>
+### Nested Schema for `availability_zone_mappings`
+
+Read-Only:
+
+- `availability_zone` (String) A AvailabilityZone
+
 
 <a id="nestedatt--subnet_mappings"></a>
 ### Nested Schema for `subnet_mappings`
 
 Read-Only:
 
+- `ip_address_type` (String) A IPAddressType
 - `subnet_id` (String) A SubnetId.
 
 
@@ -49,5 +62,3 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
-
-

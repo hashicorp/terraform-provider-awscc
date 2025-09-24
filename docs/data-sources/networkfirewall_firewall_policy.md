@@ -33,6 +33,7 @@ Data Source schema for AWS::NetworkFirewall::FirewallPolicy
 
 Read-Only:
 
+- `policy_variables` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--policy_variables))
 - `stateful_default_actions` (List of String)
 - `stateful_engine_options` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--stateful_engine_options))
 - `stateful_rule_group_references` (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateful_rule_group_references))
@@ -40,13 +41,40 @@ Read-Only:
 - `stateless_default_actions` (List of String)
 - `stateless_fragment_default_actions` (List of String)
 - `stateless_rule_group_references` (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateless_rule_group_references))
+- `tls_inspection_configuration_arn` (String) A resource ARN.
+
+<a id="nestedatt--firewall_policy--policy_variables"></a>
+### Nested Schema for `firewall_policy.policy_variables`
+
+Read-Only:
+
+- `rule_variables` (Attributes Map) (see [below for nested schema](#nestedatt--firewall_policy--policy_variables--rule_variables))
+
+<a id="nestedatt--firewall_policy--policy_variables--rule_variables"></a>
+### Nested Schema for `firewall_policy.policy_variables.rule_variables`
+
+Read-Only:
+
+- `definition` (List of String)
+
+
 
 <a id="nestedatt--firewall_policy--stateful_engine_options"></a>
 ### Nested Schema for `firewall_policy.stateful_engine_options`
 
 Read-Only:
 
+- `flow_timeouts` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--stateful_engine_options--flow_timeouts))
 - `rule_order` (String)
+- `stream_exception_policy` (String)
+
+<a id="nestedatt--firewall_policy--stateful_engine_options--flow_timeouts"></a>
+### Nested Schema for `firewall_policy.stateful_engine_options.flow_timeouts`
+
+Read-Only:
+
+- `tcp_idle_timeout_seconds` (Number)
+
 
 
 <a id="nestedatt--firewall_policy--stateful_rule_group_references"></a>
@@ -54,8 +82,18 @@ Read-Only:
 
 Read-Only:
 
+- `deep_threat_inspection` (Boolean)
+- `override` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--stateful_rule_group_references--override))
 - `priority` (Number)
 - `resource_arn` (String) A resource ARN.
+
+<a id="nestedatt--firewall_policy--stateful_rule_group_references--override"></a>
+### Nested Schema for `firewall_policy.stateful_rule_group_references.override`
+
+Read-Only:
+
+- `action` (String)
+
 
 
 <a id="nestedatt--firewall_policy--stateless_custom_actions"></a>
@@ -108,5 +146,3 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
-
-

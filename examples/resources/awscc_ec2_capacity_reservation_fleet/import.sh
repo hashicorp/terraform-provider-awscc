@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_capacity_reservation_fleet.example <resource ID>
+$ terraform import awscc_ec2_capacity_reservation_fleet.example "capacity_reservation_fleet_id"

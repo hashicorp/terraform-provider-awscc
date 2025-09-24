@@ -33,5 +33,3 @@ Read-Only:
 - `registry_name` (String) Name of the registry to identify where the Schema is located.
 - `schema_arn` (String) Amazon Resource Name for the Schema. This attribute can be used to uniquely represent the Schema.
 - `schema_name` (String) Name of the schema. This parameter requires RegistryName to be provided.
-
-

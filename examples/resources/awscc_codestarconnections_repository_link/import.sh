@@ -1,0 +1,1 @@
+$ terraform import awscc_codestarconnections_repository_link.example "repository_link_arn"

@@ -1,0 +1,1 @@
+$ terraform import awscc_connect_agent_status.example "agent_status_arn"

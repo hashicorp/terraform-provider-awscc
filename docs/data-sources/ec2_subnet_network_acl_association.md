@@ -24,5 +24,3 @@ Data Source schema for AWS::EC2::SubnetNetworkAclAssociation
 - `association_id` (String)
 - `network_acl_id` (String) The ID of the network ACL
 - `subnet_id` (String) The ID of the subnet
-
-

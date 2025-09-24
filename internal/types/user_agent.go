@@ -17,9 +17,9 @@ func (uap UserAgentProducts) UserAgentProducts() []awsbase.UserAgentProduct {
 	results := make([]awsbase.UserAgentProduct, len(uap))
 	for i, p := range uap {
 		results[i] = awsbase.UserAgentProduct{
-			Name:    p.ProductName.Value,
-			Version: p.ProductVersion.Value,
-			Comment: p.Comment.Value,
+			Name:    p.ProductName.ValueString(),
+			Version: p.ProductVersion.ValueString(),
+			Comment: p.Comment.ValueString(),
 		}
 	}
 	return results

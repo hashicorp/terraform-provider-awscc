@@ -49,6 +49,9 @@
     }
   },
   "additionalProperties": false,
+  "tagging": {
+    "taggable": false
+  },
   "required": [
     "Name",
     "StackName",

@@ -1,1 +1,1 @@
-$ terraform import awscc_iot_authorizer.example <resource ID>
+$ terraform import awscc_iot_authorizer.example "authorizer_name"

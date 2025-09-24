@@ -1,0 +1,1 @@
+$ terraform import awscc_mediaconnect_bridge.example "bridge_arn"

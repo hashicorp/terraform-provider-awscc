@@ -1,0 +1,203 @@
+{
+  "typeName": "AWS::RedshiftServerless::Snapshot",
+  "description": "Resource Type definition for AWS::RedshiftServerless::Snapshot Resource Type.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-redshift-serverless",
+  "definitions": {
+    "SnapshotStatus": {
+      "type": "string",
+      "enum": [
+        "AVAILABLE",
+        "CREATING",
+        "DELETED",
+        "CANCELLED",
+        "FAILED",
+        "COPYING"
+      ]
+    },
+    "Snapshot": {
+      "type": "object",
+      "properties": {
+        "NamespaceArn": {
+          "type": "string"
+        },
+        "NamespaceName": {
+          "type": "string",
+          "maxLength": 64,
+          "minLength": 3,
+          "pattern": "^[a-z0-9-]+$"
+        },
+        "SnapshotName": {
+          "type": "string",
+          "maxLength": 64,
+          "minLength": 3,
+          "pattern": "^[a-z0-9-]+$"
+        },
+        "SnapshotCreateTime": {
+          "type": "string"
+        },
+        "Status": {
+          "$ref": "#/definitions/SnapshotStatus"
+        },
+        "AdminUsername": {
+          "type": "string"
+        },
+        "KmsKeyId": {
+          "type": "string"
+        },
+        "OwnerAccount": {
+          "type": "string"
+        },
+        "RetentionPeriod": {
+          "type": "integer"
+        },
+        "SnapshotArn": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "Value": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 0
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "SnapshotName": {
+      "description": "The name of the snapshot.",
+      "type": "string",
+      "pattern": "",
+      "maxLength": 64,
+      "minLength": 3
+    },
+    "NamespaceName": {
+      "description": "The namespace the snapshot is associated with.",
+      "type": "string",
+      "pattern": "",
+      "maxLength": 64,
+      "minLength": 3
+    },
+    "OwnerAccount": {
+      "description": "The owner account of the snapshot.",
+      "type": "string"
+    },
+    "RetentionPeriod": {
+      "description": "The retention period of the snapshot.",
+      "type": "integer"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 200,
+      "minItems": 0
+    },
+    "Snapshot": {
+      "description": "Definition for snapshot resource",
+      "$ref": "#/definitions/Snapshot"
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "redshift-serverless:ListTagsForResource",
+      "redshift-serverless:TagResource",
+      "redshift-serverless:UntagResource"
+    ]
+  },
+  "required": [
+    "SnapshotName"
+  ],
+  "createOnlyProperties": [
+    "/properties/NamespaceName",
+    "/properties/SnapshotName",
+    "/properties/Tags",
+    "/properties/Tags/*/Key",
+    "/properties/Tags/*/Value"
+  ],
+  "readOnlyProperties": [
+    "/properties/Snapshot",
+    "/properties/OwnerAccount",
+    "/properties/Snapshot/SnapshotName",
+    "/properties/Snapshot/NamespaceName",
+    "/properties/Snapshot/NamespaceArn",
+    "/properties/Snapshot/SnapshotArn",
+    "/properties/Snapshot/SnapshotCreateTime",
+    "/properties/Snapshot/Status",
+    "/properties/Snapshot/AdminUsername",
+    "/properties/Snapshot/KmsKeyId",
+    "/properties/Snapshot/OwnerAccount",
+    "/properties/Snapshot/RetentionPeriod"
+  ],
+  "primaryIdentifier": [
+    "/properties/SnapshotName"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "redshift-serverless:CreateSnapshot",
+        "redshift-serverless:GetSnapshot",
+        "redshift-serverless:ListTagsForResource",
+        "redshift-serverless:TagResource",
+        "redshift-serverless:GetNamespace"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "redshift-serverless:GetSnapshot",
+        "redshift-serverless:ListTagsForResource",
+        "redshift-serverless:GetNamespace"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "redshift-serverless:UpdateSnapshot",
+        "redshift-serverless:GetSnapshot",
+        "redshift-serverless:ListTagsForResource",
+        "redshift-serverless:TagResource",
+        "redshift-serverless:UntagResource",
+        "redshift-serverless:GetNamespace"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "redshift-serverless:DeleteSnapshot",
+        "redshift-serverless:GetSnapshot",
+        "redshift-serverless:ListTagsForResource",
+        "redshift-serverless:UntagResource",
+        "redshift-serverless:GetNamespace"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "redshift-serverless:ListSnapshots",
+        "redshift-serverless:GetSnapshot",
+        "redshift-serverless:ListTagsForResource",
+        "redshift-serverless:GetNamespace"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,1 +1,1 @@
-$ terraform import awscc_databrew_schedule.example <resource ID>
+$ terraform import awscc_databrew_schedule.example "name"

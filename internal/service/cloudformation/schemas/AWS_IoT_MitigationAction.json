@@ -88,14 +88,15 @@
             "DEBUG",
             "INFO",
             "ERROR",
-            "WARN"
+            "WARN",
+            "UNSET_VALUE"
           ],
           "description": " Specifies which types of information are logged."
         },
         "RoleArnForLogging": {
           "description": " The ARN of the IAM role used for logging.",
           "type": "string",
-          "minLength": 20,
+          "minLength": 11,
           "maxLength": 2048
         }
       },
@@ -112,7 +113,7 @@
         "TopicArn": {
           "type": "string",
           "description": "The ARN of the topic to which you want to publish the findings.",
-          "minLength": 20,
+          "minLength": 11,
           "maxLength": 2048
         }
       },
@@ -128,7 +129,8 @@
         "TemplateName": {
           "type": "string",
           "enum": [
-            "BLANK_POLICY"
+            "BLANK_POLICY",
+            "UNSET_VALUE"
           ]
         }
       },
@@ -144,7 +146,8 @@
         "Action": {
           "type": "string",
           "enum": [
-            "DEACTIVATE"
+            "DEACTIVATE",
+            "UNSET_VALUE"
           ]
         }
       },
@@ -160,7 +163,8 @@
         "Action": {
           "type": "string",
           "enum": [
-            "DEACTIVATE"
+            "DEACTIVATE",
+            "UNSET_VALUE"
           ]
         }
       },
@@ -209,6 +213,18 @@
     "RoleArn",
     "ActionParams"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "iot:TagResource",
+      "iot:UntagResource",
+      "iot:ListTagsForResource"
+    ]
+  },
   "createOnlyProperties": [
     "/properties/ActionName"
   ],
@@ -220,6 +236,8 @@
     "create": {
       "permissions": [
         "iot:CreateMitigationAction",
+        "iot:DescribeMitigationAction",
+        "iot:TagResource",
         "iam:PassRole"
       ]
     },

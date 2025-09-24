@@ -19,7 +19,9 @@
     }
   },
   "additionalProperties": false,
-  "taggable": false,
+  "tagging": {
+    "taggable": false
+  },
   "primaryIdentifier": [
     "/properties/PolicyName"
   ],

@@ -1,10 +1,13 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 package ec2_test
 
 import (
 	"fmt"
 	"testing"
 
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
+	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
 	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
@@ -36,10 +39,7 @@ func TestAccAWSEC2VPC_CidrBlock(t *testing.T) {
 func testAccAWSEC2VPCCidrBlockConfig(td *acctest.TestData, rName, cidrBlock string) string {
 	return fmt.Sprintf(`
 resource %[1]q %[2]q {
-  cidr_block           = %[4]q
-  enable_dns_hostnames = false
-  enable_dns_support   = true
-  instance_tenancy     = "default"
+  cidr_block = %[4]q
 
   tags = [
     {

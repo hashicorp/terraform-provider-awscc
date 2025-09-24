@@ -14,7 +14,6 @@
     "Name": {
       "description": "A name for the saved query definition",
       "type": "string",
-      "pattern": "^([^:*\\/]+\\/?)*[^:*\\/]+$",
       "minLength": 1,
       "maxLength": 255
     },
@@ -38,6 +37,16 @@
       "type": "string",
       "minLength": 0,
       "maxLength": 256
+    },
+    "QueryLanguage": {
+      "description": "Query language of the query string. Possible values are CWLI, SQL, PPL, with CWLI being the default.",
+      "type": "string",
+      "enum": [
+        "CWLI",
+        "SQL",
+        "PPL"
+      ],
+      "default": "CWLI"
     }
   },
   "required": [
@@ -54,33 +63,31 @@
   "handlers": {
     "create": {
       "permissions": [
-        "logs:PutQueryDefinition",
-        "logs:DescribeQueryDefinition"
+        "logs:PutQueryDefinition"
       ]
     },
     "read": {
       "permissions": [
-        "logs:DescribeQueryDefinition"
+        "logs:DescribeQueryDefinitions"
       ]
     },
     "update": {
       "permissions": [
-        "logs:PutQueryDefinition",
-        "logs:DescribeQueryDefinition",
-        "logs:DeleteQueryDefinition"
+        "logs:PutQueryDefinition"
       ]
     },
     "delete": {
       "permissions": [
-        "logs:DescribeQueryDefinition",
         "logs:DeleteQueryDefinition"
       ]
     },
     "list": {
       "permissions": [
-        "logs:DescribeQueryDefinition"
+        "logs:DescribeQueryDefinitions"
       ]
     }
   },
-  "taggable": false
+  "tagging": {
+    "taggable": false
+  }
 }

@@ -28,6 +28,7 @@
       "type": "array",
       "description": "An Array of Feature Definition",
       "uniqueItems": false,
+      "insertionOrder": false,
       "minItems": 1,
       "maxItems": 2500,
       "items": {
@@ -43,6 +44,12 @@
         },
         "EnableOnlineStore": {
           "type": "boolean"
+        },
+        "StorageType": {
+          "$ref": "#/definitions/StorageType"
+        },
+        "TtlDuration": {
+          "$ref": "#/definitions/TtlDuration"
         }
       }
     },
@@ -58,9 +65,17 @@
         },
         "DataCatalogConfig": {
           "$ref": "#/definitions/DataCatalogConfig"
+        },
+        "TableFormat": {
+          "$ref": "#/definitions/TableFormat"
         }
       },
-      "required": ["S3StorageConfig"]
+      "required": [
+        "S3StorageConfig"
+      ]
+    },
+    "ThroughputConfig": {
+      "$ref": "#/definitions/ThroughputConfig"
     },
     "RoleArn": {
       "type": "string",
@@ -74,10 +89,19 @@
       "description": "Description about the FeatureGroup.",
       "maxLength": 128
     },
+    "CreationTime": {
+      "description": "A timestamp of FeatureGroup creation time.",
+      "type": "string"
+    },
+    "FeatureGroupStatus": {
+      "description": "The status of the feature group.",
+      "type": "string"
+    },
     "Tags": {
       "type": "array",
       "description": "An array of key-value pair to apply to this resource.",
       "uniqueItems": false,
+      "insertionOrder": false,
       "maxItems": 50,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -104,26 +128,64 @@
           ]
         }
       },
-      "required": ["FeatureName", "FeatureType"]
+      "required": [
+        "FeatureName",
+        "FeatureType"
+      ]
     },
     "KmsKeyId": {
-       "type": "string",
-       "maxLength": 2048
+      "type": "string",
+      "maxLength": 2048
+    },
+    "StorageType": {
+      "type": "string",
+      "enum": [
+        "Standard",
+        "InMemory"
+      ]
+    },
+    "TtlDuration": {
+      "type": "object",
+      "description": "TTL configuration of the feature group",
+      "additionalProperties": false,
+      "properties": {
+        "Unit": {
+          "$ref": "#/definitions/Unit"
+        },
+        "Value": {
+          "$ref": "#/definitions/Value"
+        }
+      }
+    },
+    "Unit": {
+      "type": "string",
+      "description": "Unit of ttl configuration",
+      "enum": [
+        "Seconds",
+        "Minutes",
+        "Hours",
+        "Days",
+        "Weeks"
+      ]
+    },
+    "Value": {
+      "type": "integer",
+      "description": "Value of ttl configuration"
     },
     "OnlineStoreSecurityConfig": {
-       "type": "object",
-       "additionalProperties": false,
-       "properties": {
-          "KmsKeyId": {
-            "$ref": "#/definitions/KmsKeyId"
-          }
-       }
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "KmsKeyId": {
+          "$ref": "#/definitions/KmsKeyId"
+        }
+      }
     },
     "S3StorageConfig": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-         "S3Uri": {
+        "S3Uri": {
           "type": "string",
           "maxLength": 1024,
           "pattern": "^(https|s3)://([^/]+)/?(.*)$"
@@ -132,7 +194,9 @@
           "$ref": "#/definitions/KmsKeyId"
         }
       },
-      "required": ["S3Uri"]
+      "required": [
+        "S3Uri"
+      ]
     },
     "DataCatalogConfig": {
       "type": "object",
@@ -157,11 +221,51 @@
           "pattern": ""
         }
       },
-      "required": ["TableName", "Catalog", "Database"]
+      "required": [
+        "TableName",
+        "Catalog",
+        "Database"
+      ]
+    },
+    "TableFormat": {
+      "type": "string",
+      "description": "Format for the offline store feature group. Iceberg is the optimal format for feature groups shared between offline and online stores.",
+      "enum": [
+        "Iceberg",
+        "Glue"
+      ]
+    },
+    "ThroughputMode": {
+      "type": "string",
+      "description": "Throughput mode configuration of the feature group",
+      "enum": [
+        "OnDemand",
+        "Provisioned"
+      ]
+    },
+    "ThroughputConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ThroughputMode": {
+          "$ref": "#/definitions/ThroughputMode"
+        },
+        "ProvisionedReadCapacityUnits": {
+          "type": "integer",
+          "description": "For provisioned feature groups with online store enabled, this indicates the read throughput you are billed for and can consume without throttling."
+        },
+        "ProvisionedWriteCapacityUnits": {
+          "type": "integer",
+          "description": "For provisioned feature groups, this indicates the write throughput you are billed for and can consume without throttling."
+        }
+      },
+      "required": [
+        "ThroughputMode"
+      ]
     },
     "Tag": {
       "type": "object",
-      "description" : "A key-value pair to associate with a resource.",
+      "description": "A key-value pair to associate with a resource.",
       "additionalProperties": false,
       "properties": {
         "Value": {
@@ -171,27 +275,36 @@
           "type": "string"
         }
       },
-      "required": ["Value", "Key"]
+      "required": [
+        "Value",
+        "Key"
+      ]
     }
   },
-  "required": ["FeatureGroupName", "RecordIdentifierFeatureName", "EventTimeFeatureName", "FeatureDefinitions"],
+  "required": [
+    "FeatureGroupName",
+    "RecordIdentifierFeatureName",
+    "EventTimeFeatureName",
+    "FeatureDefinitions"
+  ],
   "createOnlyProperties": [
     "/properties/FeatureGroupName",
     "/properties/RecordIdentifierFeatureName",
     "/properties/EventTimeFeatureName",
-    "/properties/FeatureDefinitions",
-    "/properties/OnlineStoreConfig",
+    "/properties/OnlineStoreConfig/SecurityConfig",
+    "/properties/OnlineStoreConfig/EnableOnlineStore",
+    "/properties/OnlineStoreConfig/StorageType",
     "/properties/OfflineStoreConfig",
     "/properties/RoleArn",
     "/properties/Description",
     "/properties/Tags"
   ],
-  "primaryIdentifier": ["/properties/FeatureGroupName"],
+  "primaryIdentifier": [
+    "/properties/FeatureGroupName"
+  ],
   "readOnlyProperties": [
     "/properties/CreationTime",
-    "/properties/FeatureGroupStatus",
-    "/properties/FailureReason",
-    "/properties/OfflineStoreStatus"
+    "/properties/FeatureGroupStatus"
   ],
   "handlers": {
     "create": {
@@ -204,12 +317,24 @@
         "glue:CreateDatabase",
         "glue:GetDatabase",
         "sagemaker:CreateFeatureGroup",
-        "sagemaker:DescribeFeatureGroup"
+        "sagemaker:DescribeFeatureGroup",
+        "sagemaker:AddTags",
+        "sagemaker:ListTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "sagemaker:UpdateFeatureGroup",
+        "sagemaker:DescribeFeatureGroup",
+        "sagemaker:AddTags",
+        "sagemaker:ListTags",
+        "sagemaker:DeleteTags"
       ]
     },
     "read": {
       "permissions": [
-        "sagemaker:DescribeFeatureGroup"
+        "sagemaker:DescribeFeatureGroup",
+        "sagemaker:ListTags"
       ]
     },
     "delete": {
@@ -223,5 +348,17 @@
         "sagemaker:ListFeatureGroups"
       ]
     }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "sagemaker:AddTags",
+      "sagemaker:ListTags",
+      "sagemaker:DeleteTags"
+    ]
   }
 }

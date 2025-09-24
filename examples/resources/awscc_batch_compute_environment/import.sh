@@ -1,1 +1,1 @@
-$ terraform import awscc_batch_compute_environment.example <resource ID>
+$ terraform import awscc_batch_compute_environment.example "compute_environment_arn"

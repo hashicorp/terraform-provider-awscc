@@ -1,1 +1,1 @@
-$ terraform import awscc_eventschemas_registry_policy.example <resource ID>
+$ terraform import awscc_eventschemas_registry_policy.example "id"

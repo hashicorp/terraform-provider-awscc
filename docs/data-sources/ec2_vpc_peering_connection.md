@@ -27,6 +27,7 @@ Data Source schema for AWS::EC2::VPCPeeringConnection
 - `peer_vpc_id` (String) The ID of the VPC with which you are creating the VPC peering connection. You must specify this parameter in the request.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `vpc_id` (String) The ID of the VPC.
+- `vpc_peering_connection_id` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
@@ -35,5 +36,3 @@ Read-Only:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-
-

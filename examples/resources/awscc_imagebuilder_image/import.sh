@@ -1,1 +1,1 @@
-$ terraform import awscc_imagebuilder_image.example <resource ID>
+$ terraform import awscc_imagebuilder_image.example "arn"

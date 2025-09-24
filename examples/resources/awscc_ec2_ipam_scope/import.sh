@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_ipam_scope.example <resource ID>
+$ terraform import awscc_ec2_ipam_scope.example "ipam_scope_id"

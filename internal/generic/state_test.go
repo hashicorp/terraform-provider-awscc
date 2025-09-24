@@ -1,3 +1,6 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 package generic
 
 import (
@@ -5,56 +8,50 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
+	"github.com/hashicorp/terraform-plugin-framework/path"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 )
 
-var testSimpleSchema = tfsdk.Schema{
-	Attributes: map[string]tfsdk.Attribute{
-		"arn": {
-			Type:     types.StringType,
+var testSimpleSchema = schema.Schema{
+	Attributes: map[string]schema.Attribute{
+		"arn": schema.StringAttribute{
 			Computed: true,
 		},
-		"identifier": {
-			Type:     types.StringType,
+		"identifier": schema.StringAttribute{
 			Computed: true,
 		},
-		"name": {
-			Type:     types.StringType,
+		"name": schema.StringAttribute{
 			Required: true,
 		},
-		"number": {
-			Type:     types.NumberType,
+		"number": schema.NumberAttribute{
 			Optional: true,
 		},
 	},
 }
 
-var testSimpleSchemaWithList = tfsdk.Schema{
-	Attributes: map[string]tfsdk.Attribute{
-		"arn": {
-			Type:     types.StringType,
+var testSimpleSchemaWithList = schema.Schema{
+	Attributes: map[string]schema.Attribute{
+		"arn": schema.StringAttribute{
 			Computed: true,
 		},
-		"identifier": {
-			Type:     types.StringType,
+		"identifier": schema.StringAttribute{
 			Computed: true,
 		},
-		"name": {
-			Type:     types.StringType,
+		"name": schema.StringAttribute{
 			Required: true,
 		},
-		"number": {
-			Type:     types.NumberType,
+		"number": schema.NumberAttribute{
 			Optional: true,
 		},
-		"ports": {
-			Type: types.ListType{
-				ElemType: types.NumberType,
-			},
-			Optional: true,
+		"ports": schema.ListAttribute{
+			ElementType: types.NumberType,
+			Optional:    true,
+			Computed:    true,
 		},
 	},
 }
@@ -68,79 +65,70 @@ var simpleCfToTfNameMap = map[string]string{
 }
 
 // Adapted from https://github.com/hashicorp/terraform-plugin-framework/blob/1a7927fec93459115be87f283dd1ee7941b30578/tfsdk/state_test.go.
-var testComplexSchema = tfsdk.Schema{
-	Attributes: map[string]tfsdk.Attribute{
-		"name": {
-			Type:     types.StringType,
+var testComplexSchema = schema.Schema{
+	Attributes: map[string]schema.Attribute{
+		"name": schema.StringAttribute{
 			Required: true,
 		},
-		"machine_type": {
-			Type:     types.StringType,
+		"machine_type": schema.StringAttribute{
 			Optional: true,
 		},
-		"ports": {
-			Type: types.ListType{
-				ElemType: types.NumberType,
-			},
-			Required: true,
+		"ports": schema.ListAttribute{
+			ElementType: types.NumberType,
+			Required:    true,
 		},
-		"tags": {
-			Type: types.SetType{
-				ElemType: types.StringType,
-			},
-			Required: true,
+		"tags": schema.SetAttribute{
+			ElementType: types.StringType,
+			Required:    true,
 		},
-		"disks": {
-			Attributes: tfsdk.ListNestedAttributes(map[string]tfsdk.Attribute{
-				"id": {
-					Type:     types.StringType,
-					Required: true,
+		"disks": schema.ListNestedAttribute{
+			NestedObject: schema.NestedAttributeObject{
+				Attributes: map[string]schema.Attribute{
+					"id": schema.StringAttribute{
+						Required: true,
+					},
+					"delete_with_instance": schema.BoolAttribute{
+						Optional: true,
+						Computed: true,
+					},
 				},
-				"delete_with_instance": {
-					Type:     types.BoolType,
-					Optional: true,
-				},
-			}, tfsdk.ListNestedAttributesOptions{}),
+			},
 			Optional: true,
 			Computed: true,
 		},
-		"boot_disk": {
-			Attributes: tfsdk.SingleNestedAttributes(map[string]tfsdk.Attribute{
-				"id": {
-					Type:     types.StringType,
+		"boot_disk": schema.SingleNestedAttribute{
+			Attributes: map[string]schema.Attribute{
+				"id": schema.StringAttribute{
 					Required: true,
 				},
-				"delete_with_instance": {
-					Type:     types.BoolType,
+				"delete_with_instance": schema.BoolAttribute{
 					Optional: true,
+					Computed: true,
 				},
-			}),
+			},
 		},
-		"scratch_disk": {
-			Type: types.ObjectType{
-				AttrTypes: map[string]attr.Type{
-					"interface": types.StringType,
+		"scratch_disk": schema.ObjectAttribute{
+			AttributeTypes: map[string]attr.Type{
+				"interface": types.StringType,
+			},
+			Optional: true,
+		},
+		"video_ports": schema.SetNestedAttribute{
+			NestedObject: schema.NestedAttributeObject{
+				Attributes: map[string]schema.Attribute{
+					"id": schema.NumberAttribute{
+						Required: true,
+					},
+					"flags": schema.ListAttribute{
+						ElementType: types.BoolType,
+						Optional:    true,
+						Computed:    true,
+					},
 				},
 			},
 			Optional: true,
 		},
-		"video_ports": {
-			Attributes: tfsdk.SetNestedAttributes(map[string]tfsdk.Attribute{
-				"id": {
-					Type:     types.NumberType,
-					Required: true,
-				},
-				"flags": {
-					Type: types.ListType{
-						ElemType: types.BoolType,
-					},
-					Optional: true,
-				},
-			}, tfsdk.SetNestedAttributesOptions{}),
-			Optional: true,
-		},
-		"identifier": {
-			Type:     types.StringType,
+		"identifier": schema.StringAttribute{
 			Computed: true,
 		},
 	},
@@ -185,12 +173,14 @@ func makeSimpleValueWithUnknowns() tftypes.Value {
 			"name":       tftypes.String,
 			"number":     tftypes.Number,
 			"identifier": tftypes.String,
+			"ports":      tftypes.List{ElementType: tftypes.Number},
 		},
 	}, map[string]tftypes.Value{
 		"arn":        tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
 		"name":       tftypes.NewValue(tftypes.String, "testing"),
 		"number":     tftypes.NewValue(tftypes.Number, 42),
 		"identifier": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+		"ports":      tftypes.NewValue(tftypes.List{ElementType: tftypes.Number}, tftypes.UnknownValue),
 	})
 }
 
@@ -209,6 +199,9 @@ func makeComplexValueWithUnknowns() tftypes.Value {
 				AttributeTypes: map[string]tftypes.Type{
 					"interface": tftypes.String,
 				},
+			},
+			"video_ports": tftypes.Set{
+				ElementType: videoPortElementType,
 			},
 			"identifier": tftypes.String,
 		},
@@ -237,19 +230,38 @@ func makeComplexValueWithUnknowns() tftypes.Value {
 			}),
 			tftypes.NewValue(diskElementType, map[string]tftypes.Value{
 				"id":                   tftypes.NewValue(tftypes.String, "disk1"),
-				"delete_with_instance": tftypes.NewValue(tftypes.Bool, false),
+				"delete_with_instance": tftypes.NewValue(tftypes.Bool, tftypes.UnknownValue),
 			}),
 		}),
 		"boot_disk": tftypes.NewValue(diskElementType, map[string]tftypes.Value{
 			"id":                   tftypes.NewValue(tftypes.String, "bootdisk"),
-			"delete_with_instance": tftypes.NewValue(tftypes.Bool, true),
+			"delete_with_instance": tftypes.NewValue(tftypes.Bool, tftypes.UnknownValue),
 		}),
 		"scratch_disk": tftypes.NewValue(tftypes.Object{
 			AttributeTypes: map[string]tftypes.Type{
 				"interface": tftypes.String,
 			},
 		}, map[string]tftypes.Value{
-			"interface": tftypes.NewValue(tftypes.String, "SCSI"),
+			"interface": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+		}),
+		"video_ports": tftypes.NewValue(tftypes.Set{
+			ElementType: videoPortElementType,
+		}, []tftypes.Value{
+			tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
+				"id": tftypes.NewValue(tftypes.Number, 1),
+				"flags": tftypes.NewValue(tftypes.List{
+					ElementType: tftypes.Bool,
+				}, []tftypes.Value{
+					tftypes.NewValue(tftypes.Bool, true),
+					tftypes.NewValue(tftypes.Bool, false),
+				}),
+			}),
+			tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
+				"id": tftypes.NewValue(tftypes.Number, -1),
+				"flags": tftypes.NewValue(tftypes.List{
+					ElementType: tftypes.Bool,
+				}, tftypes.UnknownValue),
+			}),
 		}),
 		"identifier": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
 	})
@@ -260,7 +272,7 @@ func TestCopyValueAtPath(t *testing.T) {
 		TestName      string
 		SrcState      tfsdk.State
 		DstState      tfsdk.State
-		Path          *tftypes.AttributePath
+		Path          path.Path
 		ExpectedError bool
 		ExpectedState tfsdk.State
 	}{
@@ -298,7 +310,7 @@ func TestCopyValueAtPath(t *testing.T) {
 				}),
 				Schema: testSimpleSchema,
 			},
-			Path: tftypes.NewAttributePath().WithAttributeName("number"),
+			Path: path.Root("number"),
 			ExpectedState: tfsdk.State{
 				Raw: tftypes.NewValue(tftypes.Object{
 					AttributeTypes: map[string]tftypes.Type{
@@ -350,7 +362,7 @@ func TestCopyValueAtPath(t *testing.T) {
 				}),
 				Schema: testSimpleSchema,
 			},
-			Path: tftypes.NewAttributePath().WithAttributeName("arn"),
+			Path: path.Root("arn"),
 			ExpectedState: tfsdk.State{
 				Raw: tftypes.NewValue(tftypes.Object{
 					AttributeTypes: map[string]tftypes.Type{
@@ -402,7 +414,7 @@ func TestCopyValueAtPath(t *testing.T) {
 				}),
 				Schema: testSimpleSchema,
 			},
-			Path: tftypes.NewAttributePath().WithAttributeName("arn"),
+			Path: path.Root("arn"),
 			ExpectedState: tfsdk.State{
 				Raw: tftypes.NewValue(tftypes.Object{
 					AttributeTypes: map[string]tftypes.Type{
@@ -454,24 +466,24 @@ func TestCopyValueAtPath(t *testing.T) {
 				}),
 				Schema: testSimpleSchema,
 			},
-			Path:          tftypes.NewAttributePath().WithAttributeName("height"),
+			Path:          path.Root("height"),
 			ExpectedError: true,
 		},
 	}
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
-			err := CopyValueAtPath(context.TODO(), &testCase.DstState, &testCase.SrcState, testCase.Path)
+			diags := copyStateValueAtPath(context.TODO(), &testCase.DstState, &testCase.SrcState, testCase.Path)
 
-			if err == nil && testCase.ExpectedError {
+			if !diags.HasError() && testCase.ExpectedError {
 				t.Fatalf("expected error from CopyValueAtPath")
 			}
 
-			if err != nil && !testCase.ExpectedError {
-				t.Fatalf("unexpected error from CopyValueAtPath: %s", err)
+			if diags.HasError() && !testCase.ExpectedError {
+				t.Fatalf("unexpected error from CopyValueAtPath: %s", diags)
 			}
 
-			if err == nil {
+			if !diags.HasError() {
 				if diff := cmp.Diff(testCase.DstState, testCase.ExpectedState); diff != "" {
 					t.Errorf("unexpected diff (+wanted, -got): %s", diff)
 				}
@@ -591,32 +603,32 @@ var complexTfToCfNameMap = map[string]string{
 	"tags":                 "Tags",
 }
 
-var testMapsSchema = tfsdk.Schema{
-	Attributes: map[string]tfsdk.Attribute{
-		"name": {
-			Type:     types.StringType,
+var testMapsSchema = schema.Schema{
+	Attributes: map[string]schema.Attribute{
+		"name": schema.StringAttribute{
 			Required: true,
 		},
-		"simple_map": {
-			Type: types.MapType{
-				ElemType: types.StringType,
+		"simple_map": schema.MapAttribute{
+			ElementType: types.StringType,
+			Optional:    true,
+		},
+		"complex_map": schema.MapNestedAttribute{
+			NestedObject: schema.NestedAttributeObject{
+				Attributes: map[string]schema.Attribute{
+					"id": schema.NumberAttribute{
+						Required: true,
+					},
+					"flags": schema.ListAttribute{
+						ElementType: types.BoolType,
+						Optional:    true,
+					},
+				},
 			},
 			Optional: true,
 		},
-		"complex_map": {
-			Attributes: tfsdk.MapNestedAttributes(map[string]tfsdk.Attribute{
-				"id": {
-					Type:     types.NumberType,
-					Required: true,
-				},
-				"flags": {
-					Type: types.ListType{
-						ElemType: types.BoolType,
-					},
-					Optional: true,
-				},
-			}, tfsdk.MapNestedAttributesOptions{}),
-			Optional: true,
+		"json_string": schema.StringAttribute{
+			CustomType: jsontypes.NormalizedType{},
+			Optional:   true,
 		},
 	},
 }
@@ -627,6 +639,7 @@ var mapsCfToTfNameMap = map[string]string{
 	"Name":       "name",
 	"SimpleMap":  "simple_map",
 	"ComplexMap": "complex_map",
+	"JsonString": "json_string",
 }
 
 func makeMapsTestPlan() tfsdk.Plan {
@@ -638,6 +651,7 @@ func makeMapsTestPlan() tfsdk.Plan {
 				"complex_map": tftypes.Map{
 					ElementType: videoPortElementType,
 				},
+				"json_string": tftypes.String,
 			},
 		}, map[string]tftypes.Value{
 			"name": tftypes.NewValue(tftypes.String, "testing"),
@@ -670,6 +684,7 @@ func makeMapsTestPlan() tfsdk.Plan {
 					}),
 				}),
 			}),
+			"json_string": tftypes.NewValue(tftypes.String, `{"Key1":42}`),
 		}),
 		Schema: testMapsSchema,
 	}
@@ -681,4 +696,5 @@ var mapsTfToCfNameMap = map[string]string{
 	"name":        "Name",
 	"simple_map":  "SimpleMap",
 	"complex_map": "ComplexMap",
+	"json_string": "JsonString",
 }

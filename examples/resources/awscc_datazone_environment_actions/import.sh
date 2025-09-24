@@ -1,0 +1,1 @@
+$ terraform import awscc_datazone_environment_actions.example "domain_id|environment_id|id"

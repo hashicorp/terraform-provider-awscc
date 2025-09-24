@@ -1,0 +1,1 @@
+$ terraform import awscc_iam_group_policy.example "policy_name|group_name"

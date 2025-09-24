@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_flow_log.example <resource ID>
+$ terraform import awscc_ec2_flow_log.example "id"

@@ -22,6 +22,7 @@ Data Source schema for AWS::Kinesis::Stream
 ### Read-Only
 
 - `arn` (String) The Amazon resource name (ARN) of the Kinesis stream
+- `desired_shard_level_metrics` (Set of String) The final list of shard-level metrics
 - `name` (String) The name of the Kinesis stream.
 - `retention_period_hours` (Number) The number of hours for the data records that are stored in shards to remain accessible.
 - `shard_count` (Number) The number of shards that the stream uses. Required when StreamMode = PROVISIONED is passed.
@@ -53,5 +54,3 @@ Read-Only:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-
-

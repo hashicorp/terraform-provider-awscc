@@ -24,8 +24,10 @@ Data Source schema for AWS::Kendra::DataSource
 - `arn` (String)
 - `custom_document_enrichment_configuration` (Attributes) (see [below for nested schema](#nestedatt--custom_document_enrichment_configuration))
 - `data_source_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration))
+- `data_source_id` (String) ID of data source
 - `description` (String) Description of data source
 - `index_id` (String) ID of Index
+- `language_code` (String) The code for a language.
 - `name` (String) Name of data source
 - `role_arn` (String) Role ARN
 - `schedule` (String) Schedule
@@ -61,7 +63,7 @@ Read-Only:
 - `operator` (String)
 
 <a id="nestedatt--custom_document_enrichment_configuration--inline_configurations--condition--condition_on_value"></a>
-### Nested Schema for `custom_document_enrichment_configuration.inline_configurations.condition.operator`
+### Nested Schema for `custom_document_enrichment_configuration.inline_configurations.condition.condition_on_value`
 
 Read-Only:
 
@@ -82,7 +84,7 @@ Read-Only:
 - `target_document_attribute_value_deletion` (Boolean)
 
 <a id="nestedatt--custom_document_enrichment_configuration--inline_configurations--target--target_document_attribute_value"></a>
-### Nested Schema for `custom_document_enrichment_configuration.inline_configurations.target.target_document_attribute_value_deletion`
+### Nested Schema for `custom_document_enrichment_configuration.inline_configurations.target.target_document_attribute_value`
 
 Read-Only:
 
@@ -113,7 +115,7 @@ Read-Only:
 - `operator` (String)
 
 <a id="nestedatt--custom_document_enrichment_configuration--post_extraction_hook_configuration--invocation_condition--condition_on_value"></a>
-### Nested Schema for `custom_document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.operator`
+### Nested Schema for `custom_document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition.condition_on_value`
 
 Read-Only:
 
@@ -144,7 +146,7 @@ Read-Only:
 - `operator` (String)
 
 <a id="nestedatt--custom_document_enrichment_configuration--pre_extraction_hook_configuration--invocation_condition--condition_on_value"></a>
-### Nested Schema for `custom_document_enrichment_configuration.pre_extraction_hook_configuration.invocation_condition.operator`
+### Nested Schema for `custom_document_enrichment_configuration.pre_extraction_hook_configuration.invocation_condition.condition_on_value`
 
 Read-Only:
 
@@ -170,6 +172,7 @@ Read-Only:
 - `salesforce_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration))
 - `service_now_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--service_now_configuration))
 - `share_point_configuration` (Attributes) SharePoint configuration (see [below for nested schema](#nestedatt--data_source_configuration--share_point_configuration))
+- `template_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--template_configuration))
 - `web_crawler_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--web_crawler_configuration))
 - `work_docs_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--work_docs_configuration))
 
@@ -198,7 +201,7 @@ Read-Only:
 - `crawl_attachments` (Boolean)
 
 <a id="nestedatt--data_source_configuration--confluence_configuration--attachment_configuration--attachment_field_mappings"></a>
-### Nested Schema for `data_source_configuration.confluence_configuration.attachment_configuration.crawl_attachments`
+### Nested Schema for `data_source_configuration.confluence_configuration.attachment_configuration.attachment_field_mappings`
 
 Read-Only:
 
@@ -469,7 +472,7 @@ Read-Only:
 - `include_filter_types` (List of String)
 
 <a id="nestedatt--data_source_configuration--salesforce_configuration--chatter_feed_configuration--field_mappings"></a>
-### Nested Schema for `data_source_configuration.salesforce_configuration.chatter_feed_configuration.include_filter_types`
+### Nested Schema for `data_source_configuration.salesforce_configuration.chatter_feed_configuration.field_mappings`
 
 Read-Only:
 
@@ -489,17 +492,17 @@ Read-Only:
 - `standard_knowledge_article_type_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--knowledge_article_configuration--standard_knowledge_article_type_configuration))
 
 <a id="nestedatt--data_source_configuration--salesforce_configuration--knowledge_article_configuration--custom_knowledge_article_type_configurations"></a>
-### Nested Schema for `data_source_configuration.salesforce_configuration.knowledge_article_configuration.standard_knowledge_article_type_configuration`
+### Nested Schema for `data_source_configuration.salesforce_configuration.knowledge_article_configuration.custom_knowledge_article_type_configurations`
 
 Read-Only:
 
 - `document_data_field_name` (String)
 - `document_title_field_name` (String)
-- `field_mappings` (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--knowledge_article_configuration--standard_knowledge_article_type_configuration--field_mappings))
+- `field_mappings` (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--knowledge_article_configuration--custom_knowledge_article_type_configurations--field_mappings))
 - `name` (String)
 
-<a id="nestedatt--data_source_configuration--salesforce_configuration--knowledge_article_configuration--standard_knowledge_article_type_configuration--field_mappings"></a>
-### Nested Schema for `data_source_configuration.salesforce_configuration.knowledge_article_configuration.standard_knowledge_article_type_configuration.field_mappings`
+<a id="nestedatt--data_source_configuration--salesforce_configuration--knowledge_article_configuration--custom_knowledge_article_type_configurations--field_mappings"></a>
+### Nested Schema for `data_source_configuration.salesforce_configuration.knowledge_article_configuration.custom_knowledge_article_type_configurations.field_mappings`
 
 Read-Only:
 
@@ -560,7 +563,7 @@ Read-Only:
 - `name` (String)
 
 <a id="nestedatt--data_source_configuration--salesforce_configuration--standard_object_configurations--field_mappings"></a>
-### Nested Schema for `data_source_configuration.salesforce_configuration.standard_object_configurations.name`
+### Nested Schema for `data_source_configuration.salesforce_configuration.standard_object_configurations.field_mappings`
 
 Read-Only:
 
@@ -597,7 +600,7 @@ Read-Only:
 - `include_attachment_file_patterns` (List of String)
 
 <a id="nestedatt--data_source_configuration--service_now_configuration--knowledge_article_configuration--field_mappings"></a>
-### Nested Schema for `data_source_configuration.service_now_configuration.knowledge_article_configuration.include_attachment_file_patterns`
+### Nested Schema for `data_source_configuration.service_now_configuration.knowledge_article_configuration.field_mappings`
 
 Read-Only:
 
@@ -620,7 +623,7 @@ Read-Only:
 - `include_attachment_file_patterns` (List of String)
 
 <a id="nestedatt--data_source_configuration--service_now_configuration--service_catalog_configuration--field_mappings"></a>
-### Nested Schema for `data_source_configuration.service_now_configuration.service_catalog_configuration.include_attachment_file_patterns`
+### Nested Schema for `data_source_configuration.service_now_configuration.service_catalog_configuration.field_mappings`
 
 Read-Only:
 
@@ -678,6 +681,14 @@ Read-Only:
 
 
 
+<a id="nestedatt--data_source_configuration--template_configuration"></a>
+### Nested Schema for `data_source_configuration.template_configuration`
+
+Read-Only:
+
+- `template` (String)
+
+
 <a id="nestedatt--data_source_configuration--web_crawler_configuration"></a>
 ### Nested Schema for `data_source_configuration.web_crawler_configuration`
 
@@ -730,7 +741,7 @@ Read-Only:
 - `site_maps_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--web_crawler_configuration--urls--site_maps_configuration))
 
 <a id="nestedatt--data_source_configuration--web_crawler_configuration--urls--seed_url_configuration"></a>
-### Nested Schema for `data_source_configuration.web_crawler_configuration.urls.site_maps_configuration`
+### Nested Schema for `data_source_configuration.web_crawler_configuration.urls.seed_url_configuration`
 
 Read-Only:
 
@@ -779,5 +790,3 @@ Read-Only:
 
 - `key` (String) A string used to identify this tag
 - `value` (String) A string containing the value for the tag
-
-

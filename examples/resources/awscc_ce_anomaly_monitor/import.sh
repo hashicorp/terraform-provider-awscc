@@ -1,1 +1,1 @@
-$ terraform import awscc_ce_anomaly_monitor.example <resource ID>
+$ terraform import awscc_ce_anomaly_monitor.example "monitor_arn"

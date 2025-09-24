@@ -81,7 +81,7 @@ Read-Only:
 - `statistics_resource` (Attributes) The baseline statistics resource for a monitoring job. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--baseline_config--statistics_resource))
 
 <a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--baseline_config--constraints_resource"></a>
-### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.baseline_config.statistics_resource`
+### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.baseline_config.constraints_resource`
 
 Read-Only:
 
@@ -114,7 +114,47 @@ Read-Only:
 
 Read-Only:
 
+- `batch_transform_input` (Attributes) The batch transform input for a monitoring job. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--batch_transform_input))
 - `endpoint_input` (Attributes) The endpoint for a monitoring job. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--endpoint_input))
+
+<a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--batch_transform_input"></a>
+### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_inputs.batch_transform_input`
+
+Read-Only:
+
+- `data_captured_destination_s3_uri` (String) A URI that identifies the Amazon S3 storage location where Batch Transform Job captures data.
+- `dataset_format` (Attributes) The dataset format of the data to monitor (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--batch_transform_input--dataset_format))
+- `exclude_features_attribute` (String) Indexes or names of the features to be excluded from analysis
+- `local_path` (String) Path to the filesystem where the endpoint data is available to the container.
+- `s3_data_distribution_type` (String) Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated
+- `s3_input_mode` (String) Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.
+
+<a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--batch_transform_input--dataset_format"></a>
+### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_inputs.batch_transform_input.dataset_format`
+
+Read-Only:
+
+- `csv` (Attributes) The CSV format (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--batch_transform_input--dataset_format--csv))
+- `json` (Attributes) The Json format (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--batch_transform_input--dataset_format--json))
+- `parquet` (Boolean) A flag indicating if the dataset format is Parquet
+
+<a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--batch_transform_input--dataset_format--csv"></a>
+### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_inputs.batch_transform_input.dataset_format.csv`
+
+Read-Only:
+
+- `header` (Boolean) A boolean flag indicating if given CSV has header
+
+
+<a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--batch_transform_input--dataset_format--json"></a>
+### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_inputs.batch_transform_input.dataset_format.json`
+
+Read-Only:
+
+- `line` (Boolean) A boolean flag indicating if it is JSON line format
+
+
+
 
 <a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--endpoint_input"></a>
 ### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_inputs.endpoint_input`
@@ -122,6 +162,7 @@ Read-Only:
 Read-Only:
 
 - `endpoint_name` (String) The name of the endpoint used to run the monitoring job.
+- `exclude_features_attribute` (String) Indexes or names of the features to be excluded from analysis
 - `local_path` (String) Path to the filesystem where the endpoint data is available to the container.
 - `s3_data_distribution_type` (String) Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated
 - `s3_input_mode` (String) Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.
@@ -207,7 +248,9 @@ Read-Only:
 
 Read-Only:
 
-- `schedule_expression` (String) A cron expression that describes details about the monitoring schedule.
+- `data_analysis_end_time` (String) Data Analysis end time, e.g. PT0H
+- `data_analysis_start_time` (String) Data Analysis start time, e.g. -PT1H
+- `schedule_expression` (String) A cron expression or 'NOW' that describes details about the monitoring schedule.
 
 
 
@@ -218,5 +261,3 @@ Read-Only:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-
-

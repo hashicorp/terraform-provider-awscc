@@ -27,7 +27,7 @@ Data Source schema for AWS::CloudFormation::TypeActivation
 - `logging_config` (Attributes) Specifies logging configuration information for a type. (see [below for nested schema](#nestedatt--logging_config))
 - `major_version` (String) The Major Version of the type you want to enable
 - `public_type_arn` (String) The Amazon Resource Number (ARN) assigned to the public extension upon publication
-- `publisher_id` (String) The publisher id assigned by CloudFormation for publishing in this region.
+- `publisher_id` (String) The reserved publisher id for this type, or the publisher id assigned by CloudFormation for publishing in this region.
 - `type` (String) The kind of extension
 - `type_name` (String) The name of the type being registered.
 
@@ -42,5 +42,3 @@ Read-Only:
 
 - `log_group_name` (String) The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.
 - `log_role_arn` (String) The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch logs.
-
-

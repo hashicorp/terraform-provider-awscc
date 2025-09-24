@@ -11,7 +11,19 @@ Use the Amazon Web Services (AWS) Cloud Control provider to interact with the ma
 
 Use the navigation to the left to read about the available resources.
 
-To learn the basics of Terraform using this provider, follow the hands-on [get started tutorials](https://learn.hashicorp.com/tutorials/terraform/aws-cloud-control?in=terraform/aws) on HashiCorp's Learn platform.
+To learn the basics of Terraform using this provider, follow the hands-on [get started tutorials](https://developer.hashicorp.com/terraform/tutorials/aws/aws-cloud-control) on HashiCorp's Developer pages.
+
+~> **NOTE:** The AWS Cloud Control provider requires the use of Terraform 1.0.7 or later.
+
+### Things to Know
+
+The Cloud Control provider resources and data sources are fully generated based on CloudFormation schema sourced from the CloudFormation registry.
+
+The providers resources and data sources are refreshed weekly (both enhancements and net-new resources) based on available updates in the CloudFormation registry in us-east-1 at the time of generation. If no updates are found, no release will be made.
+
+Some resources generation may be suppressed, and therefore unavailable in the provider despite being supported by CloudFormation. This is typically due to the provider being unable to handle certain aspects of that specific CloudFormation schema's structure. This list is maintained [here](https://github.com/hashicorp/terraform-provider-awscc/issues/156), and efforts are made by the provider team to maximize the number of supported resources.
+
+The CloudFormation schema upon which this provider relies on does not expose attribute defaults to Terraform in a consistent way. This means that early versions of this provider would encounter drift unexpectedly when practioners did not set a value for an attribute which had an default undeclared in the CloudFormation schema. In order to present a better overall experience we marked all optional values with the `Computed` schema behavior. This reduced the incidence of unenexpected drift but comes at a cost in that we are no longer able to detect drift to these values if no value is set by the practioner. Additionally computed values in sets are particularly problematic in relation to drift detection, and resources featuring this type can continue to display issues with unexpected drift.
 
 ## Example Usage
 
@@ -22,12 +34,12 @@ terraform {
   required_providers {
     awscc = {
       source  = "hashicorp/awscc"
-      version = "~> 0.1"
+      version = "~> 1.0"
     }
   }
 }
 
-# Configure the AWS Provider
+# Configure the AWS CC Provider
 provider "awscc" {
   region = "us-west-2"
 }
@@ -40,7 +52,7 @@ resource "awscc_logs_log_group" "example" {
 
 ## Authentication
 
-The AWS provider offers a flexible means of providing credentials for
+The AWS CC Provider offers a flexible means of providing credentials for
 authentication. The following methods are supported, in this order, and
 explained below:
 
@@ -57,7 +69,7 @@ configuration and risks secret leakage should this file ever be committed to a
 public version control system.
 
 Static credentials can be provided by adding an `access_key` and `secret_key`
-in-line in the AWS provider block:
+in-line in the AWS CC Provider block:
 
 Usage:
 
@@ -112,7 +124,7 @@ provider "awscc" {
 }
 ```
 
-Please note that the [AWS Go SDK](https://aws.amazon.com/sdk-for-go/), the underlying authentication handler used by the Terraform AWS Provider, does not support all AWS CLI features.
+Please note that the [AWS Go SDK](https://aws.amazon.com/sdk-for-go/), the underlying authentication handler used by the Terraform AWS CC Provider, does not support all AWS CLI features.
 
 ### CodeBuild, ECS, and EKS Roles
 
@@ -122,7 +134,7 @@ If you're running Terraform on EKS and have configured [IAM Roles for Service Ac
 
 ### Custom User-Agent Information
 
-By default, the underlying AWS client used by the Terraform AWS Provider creates requests with User-Agent headers including information about Terraform and AWS Go SDK versions.
+By default, the underlying AWS client used by the Terraform AWS CC Provider creates requests with User-Agent headers including information about Terraform and AWS Go SDK versions.
 To provide additional information in the User-Agent headers, set the User-Agent product or comment information using the `user_agent` argument.
 For example,
 
@@ -132,7 +144,7 @@ provider "awscc" {
     {
       product_name    = "example-module"
       product_version = "1.0"
-    }
+    },
     {
       product_name    = "BuildID"
       product_version = "1234"
@@ -178,18 +190,18 @@ provider "awscc" {
 }
 ```
 
-> **Hands-on:** Try the [Use AssumeRole to Provision AWS Resources Across Accounts](https://learn.hashicorp.com/tutorials/terraform/aws-assumerole) tutorial on HashiCorp Learn.
+> **Hands-on:** Try the [Use AssumeRole to Provision AWS Resources Across Accounts](https://developer.hashicorp.com/terraform/tutorials/aws/aws-assumerole) tutorial on HashiCorp Developer page.
 
 ### Assume Role Using Web Identity
 
 If provided with a role ARN and a token from a web identity provider,
-the AWS Provider will attempt to assume this role using the supplied credentials.
+the AWS CC Provider will attempt to assume this role using the supplied credentials.
 
 Usage:
 
 ```terraform
-provider "aws" {
-  assume_role {
+provider "awscc" {
+  assume_role_with_web_identity = {
     role_arn                = "arn:aws:iam::123456789012:role/ROLE_NAME"
     session_name            = "SESSION_NAME"
     web_identity_token_file = "/Users/tf_user/secrets/web-identity-token"
@@ -206,7 +218,7 @@ The profile is configured in a shared configuration file.
 For example:
 
 ```terraform
-provider "aws" {
+provider "awscc" {
   profile = "customprofile"
 }
 ```
@@ -224,29 +236,36 @@ credential_process = custom-process --username jdoe
 - `access_key` (String) This is the AWS access key. It must be provided, but it can also be sourced from the `AWS_ACCESS_KEY_ID` environment variable, or via a shared credentials file if `profile` is specified.
 - `assume_role` (Attributes) An `assume_role` block (documented below). Only one `assume_role` block may be in the configuration. (see [below for nested schema](#nestedatt--assume_role))
 - `assume_role_with_web_identity` (Attributes) An `assume_role_with_web_identity` block (documented below). Only one `assume_role_with_web_identity` block may be in the configuration. (see [below for nested schema](#nestedatt--assume_role_with_web_identity))
-- `http_proxy` (String) The address of an HTTP proxy to use when accessing the AWS API. Can also be configured using the `HTTP_PROXY` or `HTTPS_PROXY` environment variables.
+- `endpoints` (Attributes) An `endpoints` block (documented below). Only one `endpoints` block may be in the configuration. (see [below for nested schema](#nestedatt--endpoints))
+- `http_proxy` (String) URL of a proxy to use for HTTP requests when accessing the AWS API. Can also be set using the `HTTP_PROXY` or `http_proxy` environment variables.
+- `https_proxy` (String) URL of a proxy to use for HTTPS requests when accessing the AWS API. Can also be set using the `HTTPS_PROXY` or `https_proxy` environment variables.
 - `insecure` (Boolean) Explicitly allow the provider to perform "insecure" SSL requests. If not set, defaults to `false`.
 - `max_retries` (Number) The maximum number of times an AWS API request is retried on failure. If not set, defaults to 25.
+- `no_proxy` (String) Comma-separated list of hosts that should not use HTTP or HTTPS proxies. Can also be set using the `NO_PROXY` or `no_proxy` environment variables.
 - `profile` (String) This is the AWS profile name as set in the shared credentials file.
 - `region` (String) This is the AWS region. It must be provided, but it can also be sourced from the `AWS_DEFAULT_REGION` environment variables, via a shared config file, or from the EC2 Instance Metadata Service if used.
 - `role_arn` (String) Amazon Resource Name of the AWS CloudFormation service role that is used on your behalf to perform operations.
 - `secret_key` (String) This is the AWS secret key. It must be provided, but it can also be sourced from the `AWS_SECRET_ACCESS_KEY` environment variable, or via a shared credentials file if `profile` is specified.
 - `shared_config_files` (List of String) List of paths to shared config files. If not set, defaults to `~/.aws/config`.
 - `shared_credentials_files` (List of String) List of paths to shared credentials files. If not set, defaults to `~/.aws/credentials`.
-- `skip_medatadata_api_check` (Boolean) Skip the AWS Metadata API check. Useful for AWS API implementations that do not have a metadata API endpoint.  Setting to `true` prevents Terraform from authenticating via the Metadata API. You may need to use other authentication methods like static credentials, configuration variables, or environment variables.
+- `skip_medatadata_api_check` (Boolean, Deprecated) Skip the AWS Metadata API check. Useful for AWS API implementations that do not have a metadata API endpoint.  Setting to `true` prevents Terraform from authenticating via the Metadata API. You may need to use other authentication methods like static credentials, configuration variables, or environment variables.
+- `skip_metadata_api_check` (Boolean) Skip the AWS Metadata API check. Useful for AWS API implementations that do not have a metadata API endpoint.  Setting to `true` prevents Terraform from authenticating via the Metadata API. You may need to use other authentication methods like static credentials, configuration variables, or environment variables.
 - `token` (String) Session token for validating temporary credentials. Typically provided after successful identity federation or Multi-Factor Authentication (MFA) login. With MFA login, this is the session token provided afterward, not the 6 digit MFA code used to get temporary credentials.  It can also be sourced from the `AWS_SESSION_TOKEN` environment variable.
 - `user_agent` (Attributes List) Product details to append to User-Agent string in all AWS API calls. (see [below for nested schema](#nestedatt--user_agent))
 
 <a id="nestedatt--assume_role"></a>
 ### Nested Schema for `assume_role`
 
+Required:
+
+- `role_arn` (String) Amazon Resource Name (ARN) of the IAM Role to assume.
+
 Optional:
 
-- `duration` (String) Duration of the assume role session. You can provide a value from 15 minutes up to the maximum session duration setting for the role. A sequence of numbers with a unit suffix, "h" for hour, "m" for minute, and "s" for second. Default value is 1h0m0s
+- `duration` (String) The duration, between 15 minutes and 12 hours, of the role session. Valid time units are ns, us (or µs), ms, s, h, or m.
 - `external_id` (String) External identifier to use when assuming the role.
 - `policy` (String) IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.
 - `policy_arns` (List of String) Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.
-- `role_arn` (String) Amazon Resource Name (ARN) of the IAM Role to assume.
 - `session_name` (String) Session name to use when assuming the role.
 - `tags` (Map of String) Map of assume role session tags.
 - `transitive_tag_keys` (Set of String) Set of assume role session tag keys to pass to any subsequent sessions.
@@ -255,22 +274,39 @@ Optional:
 <a id="nestedatt--assume_role_with_web_identity"></a>
 ### Nested Schema for `assume_role_with_web_identity`
 
+Required:
+
+- `role_arn` (String) Amazon Resource Name (ARN) of the IAM Role to assume. Can also be set with the environment variable `AWS_ROLE_ARN`.
+
 Optional:
 
-- `duration` (String) Duration of the assume role session. You can provide a value from 15 minutes up to the maximum session duration setting for the role. A sequence of numbers with a unit suffix, "h" for hour, "m" for minute, and "s" for second. Default value is 1h0m0s
+- `duration` (String) The duration, between 15 minutes and 12 hours, of the role session. Valid time units are ns, us (or µs), ms, s, h, or m.
 - `policy` (String) IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.
 - `policy_arns` (List of String) Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.
-- `role_arn` (String) Amazon Resource Name (ARN) of the IAM Role to assume. Can also be set with the environment variable `AWS_ROLE_ARN`.
 - `session_name` (String) Session name to use when assuming the role. Can also be set with the environment variable `AWS_ROLE_SESSION_NAME`.
 - `web_identity_token` (String) The value of a web identity token from an OpenID Connect (OIDC) or OAuth provider. One of `web_identity_token` or `web_identity_token_file` is required.
 - `web_identity_token_file` (String) File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. Can also be set with the  environment variable`AWS_WEB_IDENTITY_TOKEN_FILE`. One of `web_identity_token_file` or `web_identity_token` is required.
 
 
+<a id="nestedatt--endpoints"></a>
+### Nested Schema for `endpoints`
+
+Optional:
+
+- `cloudcontrolapi` (String) Use this to override the default Cloud Control API service endpoint URL
+- `iam` (String) Use this to override the default IAM service endpoint URL
+- `sso` (String) Use this to override the default SSO service endpoint URL
+- `sts` (String) Use this to override the default STS service endpoint URL
+
+
 <a id="nestedatt--user_agent"></a>
 ### Nested Schema for `user_agent`
+
+Required:
+
+- `product_name` (String) Product name. At least one of `product_name` or `comment` must be set.
 
 Optional:
 
 - `comment` (String) User-Agent comment. At least one of `comment` or `product_name` must be set.
-- `product_name` (String) Product name. At least one of `product_name` or `comment` must be set.
 - `product_version` (String) Product version. Optional, and should only be set when `product_name` is set.

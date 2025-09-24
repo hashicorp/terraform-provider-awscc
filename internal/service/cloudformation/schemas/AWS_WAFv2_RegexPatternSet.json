@@ -80,11 +80,25 @@
     "/properties/Id"
   ],
   "additionalProperties": false,
+  "tagging": {
+    "cloudFormationSystemTags": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "taggable": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "wafv2:TagResource",
+      "wafv2:UntagResource",
+      "wafv2:ListTagsForResource"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
         "wafv2:CreateRegexPatternSet",
         "wafv2:GetRegexPatternSet",
+        "wafv2:TagResource",
+        "wafv2:UntagResource",
         "wafv2:ListTagsForResource"
       ]
     },
@@ -104,13 +118,25 @@
       "permissions": [
         "wafv2:UpdateRegexPatternSet",
         "wafv2:GetRegexPatternSet",
-        "wafv2:ListTagsForResource"
+        "wafv2:ListTagsForResource",
+        "wafv2:TagResource",
+        "wafv2:UntagResource"
       ]
     },
     "list": {
       "permissions": [
         "wafv2:listRegexPatternSets"
-      ]
+      ],
+      "handlerSchema": {
+        "properties": {
+          "Scope": {
+            "$ref": "resource-schema.json#/properties/Scope"
+          }
+        },
+        "required": [
+          "Scope"
+        ]
+      }
     }
   }
 }

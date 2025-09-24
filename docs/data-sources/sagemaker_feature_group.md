@@ -21,15 +21,18 @@ Data Source schema for AWS::SageMaker::FeatureGroup
 
 ### Read-Only
 
+- `creation_time` (String) A timestamp of FeatureGroup creation time.
 - `description` (String) Description about the FeatureGroup.
 - `event_time_feature_name` (String) The Event Time Feature Name.
 - `feature_definitions` (Attributes List) An Array of Feature Definition (see [below for nested schema](#nestedatt--feature_definitions))
 - `feature_group_name` (String) The Name of the FeatureGroup.
+- `feature_group_status` (String) The status of the feature group.
 - `offline_store_config` (Attributes) (see [below for nested schema](#nestedatt--offline_store_config))
 - `online_store_config` (Attributes) (see [below for nested schema](#nestedatt--online_store_config))
 - `record_identifier_feature_name` (String) The Record Identifier Feature Name.
 - `role_arn` (String) Role Arn
 - `tags` (Attributes List) An array of key-value pair to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `throughput_config` (Attributes) (see [below for nested schema](#nestedatt--throughput_config))
 
 <a id="nestedatt--feature_definitions"></a>
 ### Nested Schema for `feature_definitions`
@@ -48,6 +51,7 @@ Read-Only:
 - `data_catalog_config` (Attributes) (see [below for nested schema](#nestedatt--offline_store_config--data_catalog_config))
 - `disable_glue_table_creation` (Boolean)
 - `s3_storage_config` (Attributes) (see [below for nested schema](#nestedatt--offline_store_config--s3_storage_config))
+- `table_format` (String) Format for the offline store feature group. Iceberg is the optimal format for feature groups shared between offline and online stores.
 
 <a id="nestedatt--offline_store_config--data_catalog_config"></a>
 ### Nested Schema for `offline_store_config.data_catalog_config`
@@ -76,6 +80,8 @@ Read-Only:
 
 - `enable_online_store` (Boolean)
 - `security_config` (Attributes) (see [below for nested schema](#nestedatt--online_store_config--security_config))
+- `storage_type` (String)
+- `ttl_duration` (Attributes) TTL configuration of the feature group (see [below for nested schema](#nestedatt--online_store_config--ttl_duration))
 
 <a id="nestedatt--online_store_config--security_config"></a>
 ### Nested Schema for `online_store_config.security_config`
@@ -83,6 +89,15 @@ Read-Only:
 Read-Only:
 
 - `kms_key_id` (String)
+
+
+<a id="nestedatt--online_store_config--ttl_duration"></a>
+### Nested Schema for `online_store_config.ttl_duration`
+
+Read-Only:
+
+- `unit` (String) Unit of ttl configuration
+- `value` (Number) Value of ttl configuration
 
 
 
@@ -95,3 +110,11 @@ Read-Only:
 - `value` (String)
 
 
+<a id="nestedatt--throughput_config"></a>
+### Nested Schema for `throughput_config`
+
+Read-Only:
+
+- `provisioned_read_capacity_units` (Number) For provisioned feature groups with online store enabled, this indicates the read throughput you are billed for and can consume without throttling.
+- `provisioned_write_capacity_units` (Number) For provisioned feature groups, this indicates the write throughput you are billed for and can consume without throttling.
+- `throughput_mode` (String) Throughput mode configuration of the feature group

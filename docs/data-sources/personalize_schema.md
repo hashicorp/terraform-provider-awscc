@@ -25,5 +25,3 @@ Data Source schema for AWS::Personalize::Schema
 - `name` (String) Name for the schema.
 - `schema` (String) A schema in Avro JSON format.
 - `schema_arn` (String) Arn for the schema.
-
-

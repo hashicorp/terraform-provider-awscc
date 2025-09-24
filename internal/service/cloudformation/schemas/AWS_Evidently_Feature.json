@@ -57,7 +57,7 @@
       "insertionOrder": false,
       "uniqueItems": true,
       "minItems": 0,
-      "maxItems": 20
+      "maxItems": 2500
     },
     "Tags": {
       "description": "An array of key-value pairs to apply to this resource.",

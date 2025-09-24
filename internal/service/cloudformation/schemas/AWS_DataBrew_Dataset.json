@@ -2,7 +2,6 @@
   "typeName": "AWS::DataBrew::Dataset",
   "description": "Resource schema for AWS::DataBrew::Dataset.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-databrew.git",
-  "taggable": true,
   "properties": {
     "Name": {
       "description": "Dataset name",
@@ -12,7 +11,13 @@
     },
     "Format": {
       "description": "Dataset format",
-      "enum": ["CSV", "JSON", "PARQUET", "EXCEL", "ORC"],
+      "enum": [
+        "CSV",
+        "JSON",
+        "PARQUET",
+        "EXCEL",
+        "ORC"
+      ],
       "type": "string"
     },
     "FormatOptions": {
@@ -22,6 +27,15 @@
     "Input": {
       "description": "Input",
       "$ref": "#/definitions/Input"
+    },
+    "Source": {
+      "description": "Source type of the dataset",
+      "type": "string",
+      "enum": [
+        "S3",
+        "DATA-CATALOG",
+        "DATABASE"
+      ]
     },
     "PathOptions": {
       "description": "PathOptions",
@@ -74,10 +88,14 @@
       },
       "oneOf": [
         {
-          "required": ["SheetNames"]
+          "required": [
+            "SheetNames"
+          ]
         },
         {
-          "required": ["SheetIndexes"]
+          "required": [
+            "SheetIndexes"
+          ]
         }
       ],
       "additionalProperties": false
@@ -141,10 +159,15 @@
         },
         "Key": {
           "type": "string"
+        },
+        "BucketOwner": {
+          "$ref": "#/definitions/BucketOwner"
         }
       },
       "additionalProperties": false,
-      "required": ["Bucket"]
+      "required": [
+        "Bucket"
+      ]
     },
     "DataCatalogInputDefinition": {
       "type": "object",
@@ -187,7 +210,9 @@
         }
       },
       "additionalProperties": false,
-      "required": ["GlueConnectionName"]
+      "required": [
+        "GlueConnectionName"
+      ]
     },
     "Metadata": {
       "type": "object",
@@ -198,6 +223,12 @@
         }
       },
       "additionalProperties": false
+    },
+    "BucketOwner": {
+      "description": "Bucket owner",
+      "type": "string",
+      "minLength": 12,
+      "maxLength": 12
     },
     "PathOptions": {
       "description": "Path options for dataset",
@@ -228,17 +259,24 @@
         },
         "OrderedBy": {
           "description": "Ordered by",
-          "enum": ["LAST_MODIFIED_DATE"],
+          "enum": [
+            "LAST_MODIFIED_DATE"
+          ],
           "type": "string"
         },
         "Order": {
           "description": "Order",
-          "enum": ["ASCENDING", "DESCENDING"],
+          "enum": [
+            "ASCENDING",
+            "DESCENDING"
+          ],
           "type": "string"
         }
       },
       "additionalProperties": false,
-      "required": ["MaxFiles"]
+      "required": [
+        "MaxFiles"
+      ]
     },
     "PathParameter": {
       "description": "A key-value pair to associate dataset parameter name with its definition.",
@@ -252,7 +290,10 @@
         }
       },
       "additionalProperties": false,
-      "required": ["PathParameterName", "DatasetParameter"]
+      "required": [
+        "PathParameterName",
+        "DatasetParameter"
+      ]
     },
     "PathParameterName": {
       "description": "Parameter name",
@@ -268,7 +309,11 @@
         },
         "Type": {
           "description": "Parameter type",
-          "enum": ["String", "Number", "Datetime"],
+          "enum": [
+            "String",
+            "Number",
+            "Datetime"
+          ],
           "type": "string"
         },
         "DatetimeOptions": {
@@ -283,7 +328,10 @@
         }
       },
       "additionalProperties": false,
-      "required": ["Name", "Type"]
+      "required": [
+        "Name",
+        "Type"
+      ]
     },
     "DatetimeOptions": {
       "type": "object",
@@ -310,7 +358,9 @@
         }
       },
       "additionalProperties": false,
-      "required": ["Format"]
+      "required": [
+        "Format"
+      ]
     },
     "FilterExpression": {
       "type": "object",
@@ -331,7 +381,10 @@
         }
       },
       "additionalProperties": false,
-      "required": ["Expression", "ValuesMap"]
+      "required": [
+        "Expression",
+        "ValuesMap"
+      ]
     },
     "FilterValue": {
       "description": "A key-value pair to associate expression variable names with their values",
@@ -351,7 +404,10 @@
         }
       },
       "additionalProperties": false,
-      "required": ["ValueReference", "Value"]
+      "required": [
+        "ValueReference",
+        "Value"
+      ]
     },
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
@@ -369,17 +425,40 @@
         }
       },
       "additionalProperties": false,
-      "required": ["Value", "Key"]
+      "required": [
+        "Value",
+        "Key"
+      ]
     }
   },
   "additionalProperties": false,
-  "required": ["Name", "Input"],
-  "primaryIdentifier": ["/properties/Name"],
-  "createOnlyProperties": ["/properties/Name", "/properties/Tags"],
+  "required": [
+    "Name",
+    "Input"
+  ],
+  "primaryIdentifier": [
+    "/properties/Name"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "databrew:TagResource",
+      "databrew:UntagResource",
+      "databrew:ListTagsForResource"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
         "databrew:CreateDataset",
+        "databrew:DescribeDataset",
         "databrew:TagResource",
         "databrew:UntagResource",
         "glue:GetConnection",
@@ -390,19 +469,22 @@
     "read": {
       "permissions": [
         "databrew:DescribeDataset",
-        "databrew:ListTagsForResource",
         "iam:ListRoles"
       ]
     },
     "update": {
       "permissions": [
         "databrew:UpdateDataset",
+        "databrew:TagResource",
+        "databrew:UntagResource",
         "glue:GetConnection",
         "glue:GetTable"
       ]
     },
     "delete": {
-      "permissions": ["databrew:DeleteDataset"]
+      "permissions": [
+        "databrew:DeleteDataset"
+      ]
     },
     "list": {
       "permissions": [

@@ -1,0 +1,1 @@
+$ terraform import awscc_opsworkscm_server.example "id"

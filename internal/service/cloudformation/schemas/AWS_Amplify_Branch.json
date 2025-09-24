@@ -1,6 +1,7 @@
 {
   "typeName": "AWS::Amplify::Branch",
   "description": "The AWS::Amplify::Branch resource creates a new branch within an app.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-amplify",
   "additionalProperties": false,
   "properties": {
     "AppId": {
@@ -17,6 +18,9 @@
     "BasicAuthConfig": {
       "$ref": "#/definitions/BasicAuthConfig"
     },
+    "Backend": {
+      "$ref": "#/definitions/Backend"
+    },
     "BranchName": {
       "type": "string",
       "minLength": 1,
@@ -28,6 +32,12 @@
       "minLength": 1,
       "maxLength": 25000,
       "pattern": "(?s).+"
+    },
+    "ComputeRoleArn": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 1000,
+      "pattern": "(?s).*"
     },
     "Description": {
       "type": "string",
@@ -43,12 +53,20 @@
     "EnablePullRequestPreview": {
       "type": "boolean"
     },
+    "EnableSkewProtection": {
+      "type": "boolean"
+    },
     "EnvironmentVariables": {
       "type": "array",
       "uniqueItems": false,
       "items": {
         "$ref": "#/definitions/EnvironmentVariable"
       }
+    },
+    "Framework": {
+      "type": "string",
+      "maxLength": 255,
+      "pattern": "(?s).*"
     },
     "PullRequestEnvironmentName": {
       "type": "string",
@@ -74,6 +92,17 @@
     }
   },
   "definitions": {
+    "Backend": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "StackArn": {
+          "type": "string",
+          "minLength": 20,
+          "maxLength": 2048
+        }
+      }
+    },
     "EnvironmentVariable": {
       "type": "object",
       "additionalProperties": false,
@@ -158,9 +187,22 @@
   "writeOnlyProperties": [
     "/properties/BasicAuthConfig"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "amplify:TagResource",
+      "amplify:ListTagsForResource",
+      "amplify:UntagResource"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
+        "amplify:GetBranch",
         "amplify:CreateBranch",
         "amplify:TagResource",
         "codecommit:GetRepository",
@@ -177,6 +219,7 @@
     },
     "delete": {
       "permissions": [
+        "amplify:GetBranch",
         "amplify:DeleteBranch",
         "codecommit:GetRepository",
         "codecommit:GetRepositoryTriggers",
@@ -185,7 +228,18 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "AppId": {
+            "$ref": "resource-schema.json#/properties/AppId"
+          }
+        },
+        "required": [
+          "AppId"
+        ]
+      },
       "permissions": [
+        "amplify:GetBranch",
         "amplify:ListBranches",
         "amplify:ListTagsForResource",
         "iam:PassRole"
@@ -204,6 +258,7 @@
     },
     "update": {
       "permissions": [
+        "amplify:GetBranch",
         "amplify:UpdateBranch",
         "amplify:ListTagsForResource",
         "amplify:TagResource",

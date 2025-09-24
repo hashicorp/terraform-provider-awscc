@@ -1,7 +1,7 @@
 {
   "typeName": "AWS::GlobalAccelerator::EndpointGroup",
   "description": "Resource Type definition for AWS::GlobalAccelerator::EndpointGroup",
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-globalaccelerator",
   "definitions": {
     "EndpointConfiguration": {
       "description": "The configuration for a given endpoint",
@@ -9,6 +9,10 @@
       "properties": {
         "EndpointId": {
           "description": "Id of the endpoint. For Network/Application Load Balancer this value is the ARN.  For EIP, this value is the allocation ID.  For EC2 instances, this is the EC2 instance ID",
+          "type": "string"
+        },
+        "AttachmentArn": {
+          "description": "Attachment ARN that provides access control to the cross account endpoint. Not required for resources hosted in the same account as the endpoint group.",
           "type": "string"
         },
         "Weight": {
@@ -119,6 +123,9 @@
       }
     }
   },
+  "tagging": {
+    "taggable": false
+  },
   "required": [
     "ListenerArn",
     "EndpointGroupRegion"
@@ -126,6 +133,9 @@
   "createOnlyProperties": [
     "/properties/EndpointGroupRegion",
     "/properties/ListenerArn"
+  ],
+  "writeOnlyProperties": [
+    "/properties/EndpointConfigurations/*/AttachmentArn"
   ],
   "readOnlyProperties": [
     "/properties/EndpointGroupArn"
@@ -138,6 +148,7 @@
       "permissions": [
         "globalaccelerator:CreateEndpointGroup",
         "globalaccelerator:DescribeEndpointGroup",
+        "globalaccelerator:DescribeAccelerator",
         "globalaccelerator:DescribeListener",
         "globalaccelerator:ListAccelerators",
         "globalaccelerator:ListListeners"
@@ -152,7 +163,8 @@
       "permissions": [
         "globalaccelerator:UpdateEndpointGroup",
         "globalaccelerator:DescribeEndpointGroup",
-        "globalaccelerator:DescribeListener"
+        "globalaccelerator:DescribeListener",
+        "globalaccelerator:DescribeAccelerator"
       ]
     },
     "delete": {

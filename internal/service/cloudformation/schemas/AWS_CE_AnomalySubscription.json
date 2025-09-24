@@ -99,6 +99,10 @@
       "type": "number",
       "minimum": 0
     },
+    "ThresholdExpression": {
+      "description": "An Expression object in JSON String format used to specify the anomalies that you want to generate alerts for.",
+      "type": "string"
+    },
     "Frequency": {
       "description": "The frequency at which anomaly reports are sent over email. ",
       "type": "string",
@@ -123,7 +127,6 @@
   "required": [
     "MonitorArnList",
     "Subscribers",
-    "Threshold",
     "Frequency",
     "SubscriptionName"
   ],
@@ -147,7 +150,8 @@
     },
     "read": {
       "permissions": [
-        "ce:GetAnomalySubscriptions"
+        "ce:GetAnomalySubscriptions",
+        "ce:ListTagsForResource"
       ]
     },
     "update": {
@@ -165,5 +169,15 @@
         "ce:GetAnomalySubscriptions"
       ]
     }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/ResourceTags",
+    "permissions": [
+      "ce:ListTagsForResource"
+    ]
   }
 }

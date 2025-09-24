@@ -1,1 +1,1 @@
-$ terraform import awscc_route53_key_signing_key.example <resource ID>
+$ terraform import awscc_route53_key_signing_key.example "hosted_zone_id|name"

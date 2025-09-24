@@ -29,6 +29,18 @@
   "required": [
     "BackupPlan"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/BackupPlanTags",
+    "permissions": [
+      "backup:TagResource",
+      "backup:UntagResource",
+      "backup:ListTags"
+    ]
+  },
   "readOnlyProperties": [
     "/properties/BackupPlanId",
     "/properties/VersionId",
@@ -45,15 +57,17 @@
         "BackupPlanName": {
           "type": "string"
         },
-        "AdvancedBackupSettings" : {
-          "type" : "array",
-          "uniqueItems" : false,
-          "items" : {
-            "$ref" : "#/definitions/AdvancedBackupSettingResourceType"
+        "AdvancedBackupSettings": {
+          "type": "array",
+          "insertionOrder": true,
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/AdvancedBackupSettingResourceType"
           }
         },
         "BackupPlanRule": {
           "type": "array",
+          "insertionOrder": true,
           "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/BackupRuleResourceType"
@@ -84,6 +98,17 @@
         "ScheduleExpression": {
           "type": "string"
         },
+        "ScheduleExpressionTimezone": {
+          "type": "string"
+        },
+        "IndexActions": {
+          "type": "array",
+          "insertionOrder": true,
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/IndexActionsResourceType"
+          }
+        },
         "RecoveryPointTags": {
           "type": "object",
           "additionalProperties": false,
@@ -95,6 +120,7 @@
         },
         "CopyActions": {
           "type": "array",
+          "insertionOrder": true,
           "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/CopyActionResourceType"
@@ -112,18 +138,21 @@
         "RuleName"
       ]
     },
-    "AdvancedBackupSettingResourceType" : {
-      "type" : "object",
-      "additionalProperties" : false,
-      "properties" : {
-        "BackupOptions" : {
-          "type" : "object"
+    "AdvancedBackupSettingResourceType": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "BackupOptions": {
+          "type": "object"
         },
-        "ResourceType" : {
-          "type" : "string"
+        "ResourceType": {
+          "type": "string"
         }
       },
-      "required" : [ "BackupOptions", "ResourceType" ]
+      "required": [
+        "BackupOptions",
+        "ResourceType"
+      ]
     },
     "CopyActionResourceType": {
       "type": "object",
@@ -140,6 +169,26 @@
         "DestinationBackupVaultArn"
       ]
     },
+    "IndexActionsResourceType": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ResourceTypes": {
+          "$ref": "#/definitions/ResourceTypes"
+        }
+      }
+    },
+    "ResourceTypes": {
+      "type": "array",
+      "insertionOrder": true,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/ResourceType"
+      }
+    },
+    "ResourceType": {
+      "type": "string"
+    },
     "LifecycleResourceType": {
       "type": "object",
       "additionalProperties": false,
@@ -149,6 +198,9 @@
         },
         "DeleteAfterDays": {
           "type": "number"
+        },
+        "OptInToArchiveForSupportedResources": {
+          "type": "boolean"
         }
       }
     }
@@ -162,6 +214,8 @@
     },
     "create": {
       "permissions": [
+        "backup:GetBackupPlan",
+        "backup:TagResource",
         "backup:CreateBackupPlan"
       ]
     },
@@ -177,6 +231,11 @@
         "backup:ListTags",
         "backup:TagResource",
         "backup:UntagResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "backup:ListBackupPlans"
       ]
     }
   }

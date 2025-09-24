@@ -1,0 +1,1 @@
+$ terraform import awscc_ecr_registry_scanning_configuration.example "registry_id"

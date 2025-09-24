@@ -218,5 +218,3 @@ Read-Only:
 - `name` (String) <p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight
             console.</p>
 - `sheet_id` (String) <p>The unique identifier associated with a sheet.</p>
-
-

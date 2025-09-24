@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_network_insights_path.example <resource ID>
+$ terraform import awscc_ec2_network_insights_path.example "network_insights_path_id"

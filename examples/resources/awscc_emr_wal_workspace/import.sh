@@ -1,0 +1,1 @@
+$ terraform import awscc_emr_wal_workspace.example "wal_workspace_name"

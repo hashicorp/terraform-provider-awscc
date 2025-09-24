@@ -1,0 +1,1 @@
+$ terraform import awscc_securityhub_organization_configuration.example "organization_configuration_identifier"

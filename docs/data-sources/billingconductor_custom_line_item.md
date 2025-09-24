@@ -21,6 +21,7 @@ Data Source schema for AWS::BillingConductor::CustomLineItem
 
 ### Read-Only
 
+- `account_id` (String) The account which this custom line item will be charged to
 - `arn` (String) ARN
 - `association_size` (Number) Number of source values associated to this custom line item
 - `billing_group_arn` (String) Billing Group ARN
@@ -49,6 +50,7 @@ Read-Only:
 Read-Only:
 
 - `flat` (Attributes) (see [below for nested schema](#nestedatt--custom_line_item_charge_details--flat))
+- `line_item_filters` (Attributes Set) (see [below for nested schema](#nestedatt--custom_line_item_charge_details--line_item_filters))
 - `percentage` (Attributes) (see [below for nested schema](#nestedatt--custom_line_item_charge_details--percentage))
 - `type` (String)
 
@@ -58,6 +60,16 @@ Read-Only:
 Read-Only:
 
 - `charge_value` (Number)
+
+
+<a id="nestedatt--custom_line_item_charge_details--line_item_filters"></a>
+### Nested Schema for `custom_line_item_charge_details.line_item_filters`
+
+Read-Only:
+
+- `attribute` (String)
+- `match_option` (String)
+- `values` (Set of String)
 
 
 <a id="nestedatt--custom_line_item_charge_details--percentage"></a>
@@ -77,5 +89,3 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
-
-

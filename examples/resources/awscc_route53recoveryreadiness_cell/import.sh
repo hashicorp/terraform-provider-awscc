@@ -1,1 +1,1 @@
-$ terraform import awscc_route53recoveryreadiness_cell.example <resource ID>
+$ terraform import awscc_route53recoveryreadiness_cell.example "cell_name"

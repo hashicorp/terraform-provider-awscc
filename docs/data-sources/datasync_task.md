@@ -24,10 +24,9 @@ Data Source schema for AWS::DataSync::Task
 - `cloudwatch_log_group_arn` (String) The ARN of the Amazon CloudWatch log group that is used to monitor and log events in the task.
 - `destination_location_arn` (String) The ARN of an AWS storage resource's location.
 - `destination_network_interface_arns` (List of String) The Amazon Resource Names (ARNs) of the destination ENIs (Elastic Network Interfaces) that were created for your subnet.
-- `error_code` (String) Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.
-- `error_detail` (String) Detailed description of an error that was encountered during the task execution.
 - `excludes` (Attributes List) (see [below for nested schema](#nestedatt--excludes))
 - `includes` (Attributes List) (see [below for nested schema](#nestedatt--includes))
+- `manifest_config` (Attributes) Configures a manifest, which is a list of files or objects that you want DataSync to transfer. (see [below for nested schema](#nestedatt--manifest_config))
 - `name` (String) The name of a task. This value is a text reference that is used to identify the task in the console.
 - `options` (Attributes) Represents the options that are available to control the behavior of a StartTaskExecution operation. (see [below for nested schema](#nestedatt--options))
 - `schedule` (Attributes) Specifies the schedule you want your task to use for repeated executions. (see [below for nested schema](#nestedatt--schedule))
@@ -36,6 +35,8 @@ Data Source schema for AWS::DataSync::Task
 - `status` (String) The status of the task that was described.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `task_arn` (String) The ARN of the task.
+- `task_mode` (String) Specifies the task mode for the task.
+- `task_report_config` (Attributes) Specifies how you want to configure a task report, which provides detailed information about for your Datasync transfer. (see [below for nested schema](#nestedatt--task_report_config))
 
 <a id="nestedatt--excludes"></a>
 ### Nested Schema for `excludes`
@@ -53,6 +54,35 @@ Read-Only:
 
 - `filter_type` (String) The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.
 - `value` (String) A single filter string that consists of the patterns to include or exclude. The patterns are delimited by "|".
+
+
+<a id="nestedatt--manifest_config"></a>
+### Nested Schema for `manifest_config`
+
+Read-Only:
+
+- `action` (String) Specifies what DataSync uses the manifest for.
+- `format` (String) Specifies the file format of your manifest.
+- `source` (Attributes) Specifies the manifest that you want DataSync to use and where it's hosted. (see [below for nested schema](#nestedatt--manifest_config--source))
+
+<a id="nestedatt--manifest_config--source"></a>
+### Nested Schema for `manifest_config.source`
+
+Read-Only:
+
+- `s3` (Attributes) Specifies the S3 bucket where you're hosting the manifest that you want AWS DataSync to use. (see [below for nested schema](#nestedatt--manifest_config--source--s3))
+
+<a id="nestedatt--manifest_config--source--s3"></a>
+### Nested Schema for `manifest_config.source.s3`
+
+Read-Only:
+
+- `bucket_access_role_arn` (String) Specifies the AWS Identity and Access Management (IAM) role that allows DataSync to access your manifest.
+- `manifest_object_path` (String) Specifies the Amazon S3 object key of your manifest.
+- `manifest_object_version_id` (String) Specifies the object version ID of the manifest that you want DataSync to use.
+- `s3_bucket_arn` (String) Specifies the Amazon Resource Name (ARN) of the S3 bucket where you're hosting your manifest.
+
+
 
 
 <a id="nestedatt--options"></a>
@@ -83,6 +113,7 @@ Read-Only:
 Read-Only:
 
 - `schedule_expression` (String) A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location
+- `status` (String) Specifies status of a schedule.
 
 
 <a id="nestedatt--tags"></a>
@@ -94,3 +125,72 @@ Read-Only:
 - `value` (String) The value for an AWS resource tag.
 
 
+<a id="nestedatt--task_report_config"></a>
+### Nested Schema for `task_report_config`
+
+Read-Only:
+
+- `destination` (Attributes) Specifies where DataSync uploads your task report. (see [below for nested schema](#nestedatt--task_report_config--destination))
+- `object_version_ids` (String) Specifies whether your task report includes the new version of each object transferred into an S3 bucket, this only applies if you enable versioning on your bucket.
+- `output_type` (String) Specifies the type of task report that you want.
+- `overrides` (Attributes) Customizes the reporting level for aspects of your task report. For example, your report might generally only include errors, but you could specify that you want a list of successes and errors just for the files that Datasync attempted to delete in your destination location. (see [below for nested schema](#nestedatt--task_report_config--overrides))
+- `report_level` (String) Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.
+
+<a id="nestedatt--task_report_config--destination"></a>
+### Nested Schema for `task_report_config.destination`
+
+Read-Only:
+
+- `s3` (Attributes) Specifies the Amazon S3 bucket where DataSync uploads your task report. (see [below for nested schema](#nestedatt--task_report_config--destination--s3))
+
+<a id="nestedatt--task_report_config--destination--s3"></a>
+### Nested Schema for `task_report_config.destination.s3`
+
+Read-Only:
+
+- `bucket_access_role_arn` (String) Specifies the Amazon Resource Name (ARN) of the IAM policy that allows Datasync to upload a task report to your S3 bucket.
+- `s3_bucket_arn` (String) Specifies the ARN of the S3 bucket where Datasync uploads your report.
+- `subdirectory` (String) Specifies a bucket prefix for your report.
+
+
+
+<a id="nestedatt--task_report_config--overrides"></a>
+### Nested Schema for `task_report_config.overrides`
+
+Read-Only:
+
+- `deleted` (Attributes) Specifies the level of reporting for the files, objects, and directories that Datasync attempted to delete in your destination location. This only applies if you configure your task to delete data in the destination that isn't in the source. (see [below for nested schema](#nestedatt--task_report_config--overrides--deleted))
+- `skipped` (Attributes) Specifies the level of reporting for the files, objects, and directories that Datasync attempted to skip during your transfer. (see [below for nested schema](#nestedatt--task_report_config--overrides--skipped))
+- `transferred` (Attributes) Specifies the level of reporting for the files, objects, and directories that Datasync attempted to transfer. (see [below for nested schema](#nestedatt--task_report_config--overrides--transferred))
+- `verified` (Attributes) Specifies the level of reporting for the files, objects, and directories that Datasync attempted to verify at the end of your transfer. This only applies if you configure your task to verify data during and after the transfer (which Datasync does by default) (see [below for nested schema](#nestedatt--task_report_config--overrides--verified))
+
+<a id="nestedatt--task_report_config--overrides--deleted"></a>
+### Nested Schema for `task_report_config.overrides.deleted`
+
+Read-Only:
+
+- `report_level` (String) Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.
+
+
+<a id="nestedatt--task_report_config--overrides--skipped"></a>
+### Nested Schema for `task_report_config.overrides.skipped`
+
+Read-Only:
+
+- `report_level` (String) Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.
+
+
+<a id="nestedatt--task_report_config--overrides--transferred"></a>
+### Nested Schema for `task_report_config.overrides.transferred`
+
+Read-Only:
+
+- `report_level` (String) Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.
+
+
+<a id="nestedatt--task_report_config--overrides--verified"></a>
+### Nested Schema for `task_report_config.overrides.verified`
+
+Read-Only:
+
+- `report_level` (String) Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.

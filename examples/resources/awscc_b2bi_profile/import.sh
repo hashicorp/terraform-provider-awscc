@@ -1,0 +1,1 @@
+$ terraform import awscc_b2bi_profile.example "profile_id"

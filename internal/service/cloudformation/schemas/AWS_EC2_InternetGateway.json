@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::EC2::InternetGateway",
-  "description": "Resource Type definition for AWS::EC2::InternetGateway",
+  "description": "Allocates an internet gateway for use with a VPC. After creating the Internet gateway, you then attach it to a VPC.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
   "additionalProperties": false,
   "definitions": {
@@ -11,22 +11,25 @@
         "Key": {
           "type": "string",
           "minLength": 1,
-          "maxLength": 128
+          "maxLength": 128,
+          "description": "The tag key."
         },
         "Value": {
           "type": "string",
-          "maxLength": 256
+          "maxLength": 256,
+          "description": "The tag value."
         }
       },
       "required": [
         "Value",
         "Key"
-      ]
+      ],
+      "description": "Specifies a tag. For more information, see [Resource tags](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html)."
     }
   },
   "properties": {
     "InternetGatewayId": {
-      "description": "ID of internet gateway.",
+      "description": "",
       "type": "string"
     },
     "Tags": {
@@ -39,7 +42,17 @@
       }
     }
   },
-  "taggable": true,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags"
+    ]
+  },
   "readOnlyProperties": [
     "/properties/InternetGatewayId"
   ],
@@ -50,7 +63,8 @@
     "create": {
       "permissions": [
         "ec2:CreateInternetGateway",
-        "ec2:CreateTags"
+        "ec2:CreateTags",
+        "ec2:DescribeInternetGateways"
       ]
     },
     "read": {
@@ -60,13 +74,15 @@
     },
     "delete": {
       "permissions": [
-        "ec2:DeleteInternetGateway"
+        "ec2:DeleteInternetGateway",
+        "ec2:DescribeInternetGateways"
       ]
     },
     "update": {
       "permissions": [
         "ec2:DeleteTags",
-        "ec2:CreateTags"
+        "ec2:CreateTags",
+        "ec2:DescribeInternetGateways"
       ]
     },
     "list": {

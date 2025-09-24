@@ -1,1 +1,1 @@
-$ terraform import awscc_iam_role.example <resource ID>
+$ terraform import awscc_iam_role.example "role_name"

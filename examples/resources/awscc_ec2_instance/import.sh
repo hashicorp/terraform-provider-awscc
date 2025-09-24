@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_instance.example "instance_id"

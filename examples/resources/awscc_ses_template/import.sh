@@ -1,1 +1,1 @@
-$ terraform import awscc_ses_template.example <resource ID>
+$ terraform import awscc_ses_template.example "id"

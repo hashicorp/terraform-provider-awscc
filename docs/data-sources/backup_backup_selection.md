@@ -23,6 +23,7 @@ Data Source schema for AWS::Backup::BackupSelection
 
 - `backup_plan_id` (String)
 - `backup_selection` (Attributes) (see [below for nested schema](#nestedatt--backup_selection))
+- `backup_selection_id` (String)
 - `selection_id` (String)
 
 <a id="nestedatt--backup_selection"></a>
@@ -92,5 +93,3 @@ Read-Only:
 - `condition_key` (String)
 - `condition_type` (String)
 - `condition_value` (String)
-
-

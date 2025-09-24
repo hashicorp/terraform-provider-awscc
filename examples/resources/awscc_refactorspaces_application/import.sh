@@ -1,0 +1,1 @@
+$ terraform import awscc_refactorspaces_application.example "environment_identifier|application_identifier"

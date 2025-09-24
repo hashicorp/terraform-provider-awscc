@@ -25,5 +25,3 @@ Data Source schema for AWS::ACMPCA::Permission
 - `certificate_authority_arn` (String) The Amazon Resource Name (ARN) of the Private Certificate Authority that grants the permission.
 - `principal` (String) The AWS service or identity that receives the permission. At this time, the only valid principal is acm.amazonaws.com.
 - `source_account` (String) The ID of the calling account.
-
-

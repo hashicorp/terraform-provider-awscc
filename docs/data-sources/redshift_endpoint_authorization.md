@@ -33,5 +33,3 @@ Data Source schema for AWS::Redshift::EndpointAuthorization
 - `grantor` (String) The AWS account ID of the cluster owner.
 - `status` (String) The status of the authorization action.
 - `vpc_ids` (List of String) The virtual private cloud (VPC) identifiers to grant or revoke access to.
-
-

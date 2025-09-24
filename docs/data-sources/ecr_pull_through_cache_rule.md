@@ -21,7 +21,9 @@ Data Source schema for AWS::ECR::PullThroughCacheRule
 
 ### Read-Only
 
-- `ecr_repository_prefix` (String) The ECRRepositoryPrefix is a custom alias for upstream registry url.
-- `upstream_registry_url` (String) The upstreamRegistryUrl is the endpoint of upstream registry url of the public repository to be cached
-
-
+- `credential_arn` (String) The ARN of the Secrets Manager secret associated with the pull through cache rule.
+- `custom_role_arn` (String) The ARN of the IAM role associated with the pull through cache rule.
+- `ecr_repository_prefix` (String) The Amazon ECR repository prefix associated with the pull through cache rule.
+- `upstream_registry` (String) The name of the upstream source registry associated with the pull through cache rule.
+- `upstream_registry_url` (String) The upstream registry URL associated with the pull through cache rule.
+- `upstream_repository_prefix` (String) The upstream repository prefix associated with the pull through cache rule.

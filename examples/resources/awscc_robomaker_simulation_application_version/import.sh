@@ -1,1 +1,1 @@
-$ terraform import awscc_robomaker_simulation_application_version.example <resource ID>
+$ terraform import awscc_robomaker_simulation_application_version.example "arn"

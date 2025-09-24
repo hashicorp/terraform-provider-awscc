@@ -28,6 +28,7 @@ Data Source schema for AWS::Lightsail::Instance
 - `hardware` (Attributes) Hardware of the Instance. (see [below for nested schema](#nestedatt--hardware))
 - `instance_arn` (String)
 - `instance_name` (String) The names to use for your new Lightsail instance.
+- `ipv_6_addresses` (List of String) IPv6 addresses of the instance
 - `is_static_ip` (Boolean) Is the IP Address of the Instance is the static IP
 - `key_pair_name` (String) The name of your key pair.
 - `location` (Attributes) Location of a resource. (see [below for nested schema](#nestedatt--location))
@@ -143,5 +144,3 @@ Read-Only:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-
-

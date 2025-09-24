@@ -1,1 +1,1 @@
-$ terraform import awscc_rds_db_proxy.example <resource ID>
+$ terraform import awscc_rds_db_proxy.example "db_proxy_name"

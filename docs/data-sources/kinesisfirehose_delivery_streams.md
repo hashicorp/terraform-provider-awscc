@@ -19,5 +19,3 @@ Plural Data Source schema for AWS::KinesisFirehose::DeliveryStream
 
 - `id` (String) Uniquely identifies the data source.
 - `ids` (Set of String) Set of Resource Identifiers.
-
-

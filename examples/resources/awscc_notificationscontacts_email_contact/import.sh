@@ -1,0 +1,1 @@
+$ terraform import awscc_notificationscontacts_email_contact.example "arn"

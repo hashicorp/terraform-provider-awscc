@@ -1,1 +1,1 @@
-$ terraform import awscc_appintegrations_data_integration.example <resource ID>
+$ terraform import awscc_appintegrations_data_integration.example "id"

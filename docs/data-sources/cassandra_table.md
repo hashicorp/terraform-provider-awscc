@@ -21,7 +21,10 @@ Data Source schema for AWS::Cassandra::Table
 
 ### Read-Only
 
+- `auto_scaling_specifications` (Attributes) Represents the read and write settings used for AutoScaling. (see [below for nested schema](#nestedatt--auto_scaling_specifications))
 - `billing_mode` (Attributes) (see [below for nested schema](#nestedatt--billing_mode))
+- `cdc_specification` (Attributes) Represents the CDC configuration for the table (see [below for nested schema](#nestedatt--cdc_specification))
+- `client_side_timestamps_enabled` (Boolean) Indicates whether client side timestamps are enabled (true) or disabled (false) on the table. False by default, once it is enabled it cannot be disabled again.
 - `clustering_key_columns` (Attributes List) Clustering key columns of the table (see [below for nested schema](#nestedatt--clustering_key_columns))
 - `default_time_to_live` (Number) Default TTL (Time To Live) in seconds, where zero is disabled. If the value is greater than zero, TTL is enabled for the entire table and an expiration timestamp is added to each column.
 - `encryption_specification` (Attributes) Represents the settings used to enable server-side encryption (see [below for nested schema](#nestedatt--encryption_specification))
@@ -29,8 +32,78 @@ Data Source schema for AWS::Cassandra::Table
 - `partition_key_columns` (Attributes List) Partition key columns of the table (see [below for nested schema](#nestedatt--partition_key_columns))
 - `point_in_time_recovery_enabled` (Boolean) Indicates whether point in time recovery is enabled (true) or disabled (false) on the table
 - `regular_columns` (Attributes Set) Non-key columns of the table (see [below for nested schema](#nestedatt--regular_columns))
+- `replica_specifications` (Attributes List) (see [below for nested schema](#nestedatt--replica_specifications))
 - `table_name` (String) Name for Cassandra table
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--auto_scaling_specifications"></a>
+### Nested Schema for `auto_scaling_specifications`
+
+Read-Only:
+
+- `read_capacity_auto_scaling` (Attributes) Represents configuration for auto scaling. (see [below for nested schema](#nestedatt--auto_scaling_specifications--read_capacity_auto_scaling))
+- `write_capacity_auto_scaling` (Attributes) Represents configuration for auto scaling. (see [below for nested schema](#nestedatt--auto_scaling_specifications--write_capacity_auto_scaling))
+
+<a id="nestedatt--auto_scaling_specifications--read_capacity_auto_scaling"></a>
+### Nested Schema for `auto_scaling_specifications.read_capacity_auto_scaling`
+
+Read-Only:
+
+- `auto_scaling_disabled` (Boolean)
+- `maximum_units` (Number)
+- `minimum_units` (Number)
+- `scaling_policy` (Attributes) Represents scaling policy. (see [below for nested schema](#nestedatt--auto_scaling_specifications--read_capacity_auto_scaling--scaling_policy))
+
+<a id="nestedatt--auto_scaling_specifications--read_capacity_auto_scaling--scaling_policy"></a>
+### Nested Schema for `auto_scaling_specifications.read_capacity_auto_scaling.scaling_policy`
+
+Read-Only:
+
+- `target_tracking_scaling_policy_configuration` (Attributes) Represents configuration for target tracking scaling policy. (see [below for nested schema](#nestedatt--auto_scaling_specifications--read_capacity_auto_scaling--scaling_policy--target_tracking_scaling_policy_configuration))
+
+<a id="nestedatt--auto_scaling_specifications--read_capacity_auto_scaling--scaling_policy--target_tracking_scaling_policy_configuration"></a>
+### Nested Schema for `auto_scaling_specifications.read_capacity_auto_scaling.scaling_policy.target_tracking_scaling_policy_configuration`
+
+Read-Only:
+
+- `disable_scale_in` (Boolean)
+- `scale_in_cooldown` (Number)
+- `scale_out_cooldown` (Number)
+- `target_value` (Number)
+
+
+
+
+<a id="nestedatt--auto_scaling_specifications--write_capacity_auto_scaling"></a>
+### Nested Schema for `auto_scaling_specifications.write_capacity_auto_scaling`
+
+Read-Only:
+
+- `auto_scaling_disabled` (Boolean)
+- `maximum_units` (Number)
+- `minimum_units` (Number)
+- `scaling_policy` (Attributes) Represents scaling policy. (see [below for nested schema](#nestedatt--auto_scaling_specifications--write_capacity_auto_scaling--scaling_policy))
+
+<a id="nestedatt--auto_scaling_specifications--write_capacity_auto_scaling--scaling_policy"></a>
+### Nested Schema for `auto_scaling_specifications.write_capacity_auto_scaling.scaling_policy`
+
+Read-Only:
+
+- `target_tracking_scaling_policy_configuration` (Attributes) Represents configuration for target tracking scaling policy. (see [below for nested schema](#nestedatt--auto_scaling_specifications--write_capacity_auto_scaling--scaling_policy--target_tracking_scaling_policy_configuration))
+
+<a id="nestedatt--auto_scaling_specifications--write_capacity_auto_scaling--scaling_policy--target_tracking_scaling_policy_configuration"></a>
+### Nested Schema for `auto_scaling_specifications.write_capacity_auto_scaling.scaling_policy.target_tracking_scaling_policy_configuration`
+
+Read-Only:
+
+- `disable_scale_in` (Boolean)
+- `scale_in_cooldown` (Number)
+- `scale_out_cooldown` (Number)
+- `target_value` (Number)
+
+
+
+
 
 <a id="nestedatt--billing_mode"></a>
 ### Nested Schema for `billing_mode`
@@ -47,6 +120,25 @@ Read-Only:
 
 - `read_capacity_units` (Number)
 - `write_capacity_units` (Number)
+
+
+
+<a id="nestedatt--cdc_specification"></a>
+### Nested Schema for `cdc_specification`
+
+Read-Only:
+
+- `status` (String) Indicates whether CDC is enabled or disabled for the table
+- `tags` (Attributes List) An array of key-value pairs to apply to the CDC stream resource (see [below for nested schema](#nestedatt--cdc_specification--tags))
+- `view_type` (String) Specifies what data should be captured in the change data stream
+
+<a id="nestedatt--cdc_specification--tags"></a>
+### Nested Schema for `cdc_specification.tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
 
 
 
@@ -95,6 +187,46 @@ Read-Only:
 - `column_type` (String)
 
 
+<a id="nestedatt--replica_specifications"></a>
+### Nested Schema for `replica_specifications`
+
+Read-Only:
+
+- `read_capacity_auto_scaling` (Attributes) Represents configuration for auto scaling. (see [below for nested schema](#nestedatt--replica_specifications--read_capacity_auto_scaling))
+- `read_capacity_units` (Number)
+- `region` (String)
+
+<a id="nestedatt--replica_specifications--read_capacity_auto_scaling"></a>
+### Nested Schema for `replica_specifications.read_capacity_auto_scaling`
+
+Read-Only:
+
+- `auto_scaling_disabled` (Boolean)
+- `maximum_units` (Number)
+- `minimum_units` (Number)
+- `scaling_policy` (Attributes) Represents scaling policy. (see [below for nested schema](#nestedatt--replica_specifications--read_capacity_auto_scaling--scaling_policy))
+
+<a id="nestedatt--replica_specifications--read_capacity_auto_scaling--scaling_policy"></a>
+### Nested Schema for `replica_specifications.read_capacity_auto_scaling.scaling_policy`
+
+Read-Only:
+
+- `target_tracking_scaling_policy_configuration` (Attributes) Represents configuration for target tracking scaling policy. (see [below for nested schema](#nestedatt--replica_specifications--read_capacity_auto_scaling--scaling_policy--target_tracking_scaling_policy_configuration))
+
+<a id="nestedatt--replica_specifications--read_capacity_auto_scaling--scaling_policy--target_tracking_scaling_policy_configuration"></a>
+### Nested Schema for `replica_specifications.read_capacity_auto_scaling.scaling_policy.target_tracking_scaling_policy_configuration`
+
+Read-Only:
+
+- `disable_scale_in` (Boolean)
+- `scale_in_cooldown` (Number)
+- `scale_out_cooldown` (Number)
+- `target_value` (Number)
+
+
+
+
+
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
@@ -102,5 +234,3 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
-
-

@@ -1,7 +1,12 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 package cloudcontrol
 
 import (
 	"context"
+	"fmt"
+	"iter"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
@@ -15,6 +20,7 @@ func ListResourcesByTypeName(ctx context.Context, conn *cloudcontrol.Client, rol
 		"cfTypeName": typeName,
 	})
 
+	var resourceDescriptions []types.ResourceDescription
 	input := &cloudcontrol.ListResourcesInput{
 		TypeName: aws.String(typeName),
 	}
@@ -23,15 +29,45 @@ func ListResourcesByTypeName(ctx context.Context, conn *cloudcontrol.Client, rol
 		input.RoleArn = aws.String(roleARN)
 	}
 
-	output, err := conn.ListResources(ctx, input)
+	paginator := cloudcontrol.NewListResourcesPaginator(conn, input)
+	for paginator.HasMorePages() {
+		page, err := paginator.NextPage(ctx)
+		if err != nil {
+			return nil, err
+		}
 
-	if err != nil {
-		return nil, err
+		resourceDescriptions = append(resourceDescriptions, page.ResourceDescriptions...)
 	}
 
-	if output == nil {
+	if len(resourceDescriptions) == 0 {
 		return nil, &tfresource.NotFoundError{Message: "Empty result"}
 	}
 
-	return output.ResourceDescriptions, nil
+	return resourceDescriptions, nil
+}
+
+func StreamResourcesByTypeName(ctx context.Context, conn *cloudcontrol.Client, roleARN, typeName string) iter.Seq2[types.ResourceDescription, error] {
+	return func(yield func(types.ResourceDescription, error) bool) {
+		input := cloudcontrol.ListResourcesInput{
+			TypeName: aws.String(typeName),
+		}
+
+		if roleARN != "" {
+			input.RoleArn = aws.String(roleARN)
+		}
+		paginator := cloudcontrol.NewListResourcesPaginator(conn, &input)
+		for paginator.HasMorePages() {
+			page, err := paginator.NextPage(ctx)
+			if err != nil {
+				yield(types.ResourceDescription{}, fmt.Errorf("listing resources TypeName: (%s) %w", typeName, err))
+				return
+			}
+
+			for _, resourceDescription := range page.ResourceDescriptions {
+				if !yield(resourceDescription, nil) {
+					return
+				}
+			}
+		}
+	}
 }

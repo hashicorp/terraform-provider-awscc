@@ -21,7 +21,8 @@ Data Source schema for AWS::CloudFront::CloudFrontOriginAccessIdentity
 
 ### Read-Only
 
-- `cloudfront_origin_access_identity_config` (Attributes) (see [below for nested schema](#nestedatt--cloudfront_origin_access_identity_config))
+- `cloudfront_origin_access_identity_config` (Attributes) The current configuration information for the identity. (see [below for nested schema](#nestedatt--cloudfront_origin_access_identity_config))
+- `cloudfront_origin_access_identity_id` (String)
 - `s3_canonical_user_id` (String)
 
 <a id="nestedatt--cloudfront_origin_access_identity_config"></a>
@@ -29,6 +30,4 @@ Data Source schema for AWS::CloudFront::CloudFrontOriginAccessIdentity
 
 Read-Only:
 
-- `comment` (String)
-
-
+- `comment` (String) A comment to describe the origin access identity. The comment cannot be longer than 128 characters.

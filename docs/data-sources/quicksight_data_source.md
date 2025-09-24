@@ -40,13 +40,14 @@ Data Source schema for AWS::QuickSight::DataSource
             This is a variant type structure. For this structure to be valid, only one of the
             attributes can be non-null.</p> (see [below for nested schema](#nestedatt--data_source_parameters))
 - `error_info` (Attributes) <p>Error information for the data source creation or update.</p> (see [below for nested schema](#nestedatt--error_info))
+- `folder_arns` (List of String)
 - `last_updated_time` (String) <p>The last time that this data source was updated.</p>
-- `name` (String) <p>A display name for the data source.</p>
-- `permissions` (Attributes List) <p>A list of resource permissions on the data source.</p> (see [below for nested schema](#nestedatt--permissions))
-- `ssl_properties` (Attributes) <p>Secure Socket Layer (SSL) properties that apply when QuickSight connects to your
+- `name` (String)
+- `permissions` (Attributes List) (see [below for nested schema](#nestedatt--permissions))
+- `ssl_properties` (Attributes) <p>Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your
             underlying data source.</p> (see [below for nested schema](#nestedatt--ssl_properties))
 - `status` (String)
-- `tags` (Attributes List) <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the data source.</p> (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `type` (String)
 - `vpc_connection_properties` (Attributes) <p>VPC connection properties.</p> (see [below for nested schema](#nestedatt--vpc_connection_properties))
 
@@ -55,32 +56,34 @@ Data Source schema for AWS::QuickSight::DataSource
 
 Read-Only:
 
-- `amazon_elasticsearch_parameters` (Attributes) <p>Amazon Elasticsearch Service parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--amazon_elasticsearch_parameters))
-- `amazon_open_search_parameters` (Attributes) <p>Amazon OpenSearch Service parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--amazon_open_search_parameters))
-- `athena_parameters` (Attributes) <p>Amazon Athena parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--athena_parameters))
-- `aurora_parameters` (Attributes) <p>Amazon Aurora parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--aurora_parameters))
-- `aurora_postgre_sql_parameters` (Attributes) <p>Amazon Aurora with PostgreSQL compatibility parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--aurora_postgre_sql_parameters))
-- `maria_db_parameters` (Attributes) <p>MariaDB parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--maria_db_parameters))
-- `my_sql_parameters` (Attributes) <p>MySQL parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--my_sql_parameters))
-- `oracle_parameters` (Attributes) (see [below for nested schema](#nestedatt--alternate_data_source_parameters--oracle_parameters))
-- `postgre_sql_parameters` (Attributes) <p>PostgreSQL parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--postgre_sql_parameters))
-- `presto_parameters` (Attributes) <p>Presto parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--presto_parameters))
-- `rds_parameters` (Attributes) <p>Amazon RDS parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--rds_parameters))
-- `redshift_parameters` (Attributes) <p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if
-            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and
-            <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--redshift_parameters))
-- `s3_parameters` (Attributes) <p>S3 parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--s3_parameters))
-- `snowflake_parameters` (Attributes) <p>Snowflake parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--snowflake_parameters))
-- `spark_parameters` (Attributes) <p>Spark parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--spark_parameters))
-- `sql_server_parameters` (Attributes) <p>SQL Server parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--sql_server_parameters))
-- `teradata_parameters` (Attributes) <p>Teradata parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--teradata_parameters))
+- `amazon_elasticsearch_parameters` (Attributes) <p>The parameters for OpenSearch.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--amazon_elasticsearch_parameters))
+- `amazon_open_search_parameters` (Attributes) <p>The parameters for OpenSearch.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--amazon_open_search_parameters))
+- `athena_parameters` (Attributes) <p>Parameters for Amazon Athena.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--athena_parameters))
+- `aurora_parameters` (Attributes) <p>Parameters for Amazon Aurora.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--aurora_parameters))
+- `aurora_postgre_sql_parameters` (Attributes) <p>Parameters for Amazon Aurora PostgreSQL-Compatible Edition.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--aurora_postgre_sql_parameters))
+- `databricks_parameters` (Attributes) <p>The parameters that are required to connect to a Databricks data source.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--databricks_parameters))
+- `maria_db_parameters` (Attributes) <p>The parameters for MariaDB.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--maria_db_parameters))
+- `my_sql_parameters` (Attributes) <p>The parameters for MySQL.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--my_sql_parameters))
+- `oracle_parameters` (Attributes) <p>The parameters for Oracle.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--oracle_parameters))
+- `postgre_sql_parameters` (Attributes) <p>The parameters for PostgreSQL.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--postgre_sql_parameters))
+- `presto_parameters` (Attributes) <p>The parameters for Presto.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--presto_parameters))
+- `rds_parameters` (Attributes) <p>The parameters for Amazon RDS.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--rds_parameters))
+- `redshift_parameters` (Attributes) <p>The parameters for Amazon Redshift. The <code>ClusterId</code> field can be blank if
+            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--redshift_parameters))
+- `s3_parameters` (Attributes) <p>The parameters for S3.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--s3_parameters))
+- `snowflake_parameters` (Attributes) <p>The parameters for Snowflake.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--snowflake_parameters))
+- `spark_parameters` (Attributes) <p>The parameters for Spark.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--spark_parameters))
+- `sql_server_parameters` (Attributes) <p>The parameters for SQL Server.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--sql_server_parameters))
+- `starburst_parameters` (Attributes) <p>The parameters that are required to connect to a Starburst data source.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--starburst_parameters))
+- `teradata_parameters` (Attributes) <p>The parameters for Teradata.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--teradata_parameters))
+- `trino_parameters` (Attributes) <p>The parameters that are required to connect to a Trino data source.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--trino_parameters))
 
 <a id="nestedatt--alternate_data_source_parameters--amazon_elasticsearch_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.amazon_elasticsearch_parameters`
 
 Read-Only:
 
-- `domain` (String) <p>The Amazon Elasticsearch Service domain.</p>
+- `domain` (String) <p>The OpenSearch domain.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--amazon_open_search_parameters"></a>
@@ -88,7 +91,7 @@ Read-Only:
 
 Read-Only:
 
-- `domain` (String) <p>The Amazon OpenSearch Service domain.</p>
+- `domain` (String) <p>The OpenSearch domain.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--athena_parameters"></a>
@@ -96,7 +99,17 @@ Read-Only:
 
 Read-Only:
 
+- `identity_center_configuration` (Attributes) <p>The parameters for an IAM Identity Center configuration.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--athena_parameters--identity_center_configuration))
+- `role_arn` (String) <p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>
 - `work_group` (String) <p>The workgroup that Amazon Athena uses.</p>
+
+<a id="nestedatt--alternate_data_source_parameters--athena_parameters--identity_center_configuration"></a>
+### Nested Schema for `alternate_data_source_parameters.athena_parameters.identity_center_configuration`
+
+Read-Only:
+
+- `enable_identity_propagation` (Boolean) <p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>
+
 
 
 <a id="nestedatt--alternate_data_source_parameters--aurora_parameters"></a>
@@ -114,9 +127,19 @@ Read-Only:
 
 Read-Only:
 
-- `database` (String) <p>Database.</p>
-- `host` (String) <p>Host.</p>
-- `port` (Number) <p>Port.</p>
+- `database` (String) <p>The Amazon Aurora PostgreSQL database to connect to.</p>
+- `host` (String) <p>The Amazon Aurora PostgreSQL-Compatible host to connect to.</p>
+- `port` (Number) <p>The port that Amazon Aurora PostgreSQL is listening on.</p>
+
+
+<a id="nestedatt--alternate_data_source_parameters--databricks_parameters"></a>
+### Nested Schema for `alternate_data_source_parameters.databricks_parameters`
+
+Read-Only:
+
+- `host` (String) <p>The host name of the Databricks data source.</p>
+- `port` (Number) <p>The port for the Databricks data source.</p>
+- `sql_endpoint_path` (String) <p>The HTTP path of the Databricks data source.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--maria_db_parameters"></a>
@@ -144,9 +167,10 @@ Read-Only:
 
 Read-Only:
 
-- `database` (String)
-- `host` (String)
-- `port` (Number)
+- `database` (String) <p>The database.</p>
+- `host` (String) <p>An Oracle host.</p>
+- `port` (Number) <p>The port.</p>
+- `use_service_name` (Boolean)
 
 
 <a id="nestedatt--alternate_data_source_parameters--postgre_sql_parameters"></a>
@@ -187,7 +211,30 @@ Read-Only:
             provided.</p>
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>
+- `iam_parameters` (Attributes) <p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href="https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html">
+               <code>GetClusterCredentials</code>
+            </a>.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--redshift_parameters--iam_parameters))
+- `identity_center_configuration` (Attributes) <p>The parameters for an IAM Identity Center configuration.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--redshift_parameters--identity_center_configuration))
 - `port` (Number) <p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>
+
+<a id="nestedatt--alternate_data_source_parameters--redshift_parameters--iam_parameters"></a>
+### Nested Schema for `alternate_data_source_parameters.redshift_parameters.iam_parameters`
+
+Read-Only:
+
+- `auto_create_database_user` (Boolean) <p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>
+- `database_groups` (List of String) <p>A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>
+- `database_user` (String) <p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>
+- `role_arn` (String) <p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>
+
+
+<a id="nestedatt--alternate_data_source_parameters--redshift_parameters--identity_center_configuration"></a>
+### Nested Schema for `alternate_data_source_parameters.redshift_parameters.identity_center_configuration`
+
+Read-Only:
+
+- `enable_identity_propagation` (Boolean) <p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>
+
 
 
 <a id="nestedatt--alternate_data_source_parameters--s3_parameters"></a>
@@ -196,6 +243,7 @@ Read-Only:
 Read-Only:
 
 - `manifest_file_location` (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--s3_parameters--manifest_file_location))
+- `role_arn` (String) <p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.</p>
 
 <a id="nestedatt--alternate_data_source_parameters--s3_parameters--manifest_file_location"></a>
 ### Nested Schema for `alternate_data_source_parameters.s3_parameters.manifest_file_location`
@@ -212,9 +260,31 @@ Read-Only:
 
 Read-Only:
 
+- `authentication_type` (String)
 - `database` (String) <p>Database.</p>
+- `database_access_control_role` (String)
 - `host` (String) <p>Host.</p>
+- `o_auth_parameters` (Attributes) (see [below for nested schema](#nestedatt--alternate_data_source_parameters--snowflake_parameters--o_auth_parameters))
 - `warehouse` (String) <p>Warehouse.</p>
+
+<a id="nestedatt--alternate_data_source_parameters--snowflake_parameters--o_auth_parameters"></a>
+### Nested Schema for `alternate_data_source_parameters.snowflake_parameters.o_auth_parameters`
+
+Read-Only:
+
+- `identity_provider_resource_uri` (String)
+- `identity_provider_vpc_connection_properties` (Attributes) <p>VPC connection properties.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--snowflake_parameters--o_auth_parameters--identity_provider_vpc_connection_properties))
+- `o_auth_scope` (String)
+- `token_provider_url` (String)
+
+<a id="nestedatt--alternate_data_source_parameters--snowflake_parameters--o_auth_parameters--identity_provider_vpc_connection_properties"></a>
+### Nested Schema for `alternate_data_source_parameters.snowflake_parameters.o_auth_parameters.identity_provider_vpc_connection_properties`
+
+Read-Only:
+
+- `vpc_connection_arn` (String) <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
+
+
 
 
 <a id="nestedatt--alternate_data_source_parameters--spark_parameters"></a>
@@ -236,6 +306,39 @@ Read-Only:
 - `port` (Number) <p>Port.</p>
 
 
+<a id="nestedatt--alternate_data_source_parameters--starburst_parameters"></a>
+### Nested Schema for `alternate_data_source_parameters.starburst_parameters`
+
+Read-Only:
+
+- `authentication_type` (String)
+- `catalog` (String) <p>The catalog name for the Starburst data source.</p>
+- `database_access_control_role` (String)
+- `host` (String) <p>The host name of the Starburst data source.</p>
+- `o_auth_parameters` (Attributes) (see [below for nested schema](#nestedatt--alternate_data_source_parameters--starburst_parameters--o_auth_parameters))
+- `port` (Number) <p>The port for the Starburst data source.</p>
+- `product_type` (String)
+
+<a id="nestedatt--alternate_data_source_parameters--starburst_parameters--o_auth_parameters"></a>
+### Nested Schema for `alternate_data_source_parameters.starburst_parameters.o_auth_parameters`
+
+Read-Only:
+
+- `identity_provider_resource_uri` (String)
+- `identity_provider_vpc_connection_properties` (Attributes) <p>VPC connection properties.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--starburst_parameters--o_auth_parameters--identity_provider_vpc_connection_properties))
+- `o_auth_scope` (String)
+- `token_provider_url` (String)
+
+<a id="nestedatt--alternate_data_source_parameters--starburst_parameters--o_auth_parameters--identity_provider_vpc_connection_properties"></a>
+### Nested Schema for `alternate_data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_vpc_connection_properties`
+
+Read-Only:
+
+- `vpc_connection_arn` (String) <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
+
+
+
+
 <a id="nestedatt--alternate_data_source_parameters--teradata_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.teradata_parameters`
 
@@ -244,6 +347,16 @@ Read-Only:
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
 - `port` (Number) <p>Port.</p>
+
+
+<a id="nestedatt--alternate_data_source_parameters--trino_parameters"></a>
+### Nested Schema for `alternate_data_source_parameters.trino_parameters`
+
+Read-Only:
+
+- `catalog` (String) <p>The catalog name for the Trino data source.</p>
+- `host` (String) <p>The host name of the Trino data source.</p>
+- `port` (Number) <p>The port for the Trino data source.</p>
 
 
 
@@ -257,6 +370,7 @@ Read-Only:
             data source in the ARN is used as the credentials for the
             <code>DataSourceCredentials</code> structure.</p>
 - `credential_pair` (Attributes) <p>The combination of user name and password that are used as credentials.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair))
+- `secret_arn` (String) <p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>
 
 <a id="nestedatt--credentials--credential_pair"></a>
 ### Nested Schema for `credentials.credential_pair`
@@ -280,52 +394,64 @@ Read-Only:
 
 Read-Only:
 
-- `amazon_elasticsearch_parameters` (Attributes) <p>Amazon Elasticsearch Service parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_elasticsearch_parameters))
-- `amazon_open_search_parameters` (Attributes) <p>Amazon OpenSearch Service parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_open_search_parameters))
-- `athena_parameters` (Attributes) <p>Amazon Athena parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--athena_parameters))
-- `aurora_parameters` (Attributes) <p>Amazon Aurora parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_parameters))
-- `aurora_postgre_sql_parameters` (Attributes) <p>Amazon Aurora with PostgreSQL compatibility parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_postgre_sql_parameters))
-- `maria_db_parameters` (Attributes) <p>MariaDB parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--maria_db_parameters))
-- `my_sql_parameters` (Attributes) <p>MySQL parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--my_sql_parameters))
-- `oracle_parameters` (Attributes) (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--oracle_parameters))
-- `postgre_sql_parameters` (Attributes) <p>PostgreSQL parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--postgre_sql_parameters))
-- `presto_parameters` (Attributes) <p>Presto parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--presto_parameters))
-- `rds_parameters` (Attributes) <p>Amazon RDS parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--rds_parameters))
-- `redshift_parameters` (Attributes) <p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if
-            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and
-            <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters))
-- `s3_parameters` (Attributes) <p>S3 parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--s3_parameters))
-- `snowflake_parameters` (Attributes) <p>Snowflake parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--snowflake_parameters))
-- `spark_parameters` (Attributes) <p>Spark parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--spark_parameters))
-- `sql_server_parameters` (Attributes) <p>SQL Server parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--sql_server_parameters))
-- `teradata_parameters` (Attributes) <p>Teradata parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--teradata_parameters))
+- `amazon_elasticsearch_parameters` (Attributes) <p>The parameters for OpenSearch.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_elasticsearch_parameters))
+- `amazon_open_search_parameters` (Attributes) <p>The parameters for OpenSearch.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_open_search_parameters))
+- `athena_parameters` (Attributes) <p>Parameters for Amazon Athena.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--athena_parameters))
+- `aurora_parameters` (Attributes) <p>Parameters for Amazon Aurora.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_parameters))
+- `aurora_postgre_sql_parameters` (Attributes) <p>Parameters for Amazon Aurora PostgreSQL-Compatible Edition.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_postgre_sql_parameters))
+- `databricks_parameters` (Attributes) <p>The parameters that are required to connect to a Databricks data source.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--databricks_parameters))
+- `maria_db_parameters` (Attributes) <p>The parameters for MariaDB.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--maria_db_parameters))
+- `my_sql_parameters` (Attributes) <p>The parameters for MySQL.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--my_sql_parameters))
+- `oracle_parameters` (Attributes) <p>The parameters for Oracle.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--oracle_parameters))
+- `postgre_sql_parameters` (Attributes) <p>The parameters for PostgreSQL.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--postgre_sql_parameters))
+- `presto_parameters` (Attributes) <p>The parameters for Presto.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--presto_parameters))
+- `rds_parameters` (Attributes) <p>The parameters for Amazon RDS.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--rds_parameters))
+- `redshift_parameters` (Attributes) <p>The parameters for Amazon Redshift. The <code>ClusterId</code> field can be blank if
+            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters))
+- `s3_parameters` (Attributes) <p>The parameters for S3.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--s3_parameters))
+- `snowflake_parameters` (Attributes) <p>The parameters for Snowflake.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--snowflake_parameters))
+- `spark_parameters` (Attributes) <p>The parameters for Spark.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--spark_parameters))
+- `sql_server_parameters` (Attributes) <p>The parameters for SQL Server.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--sql_server_parameters))
+- `starburst_parameters` (Attributes) <p>The parameters that are required to connect to a Starburst data source.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--starburst_parameters))
+- `teradata_parameters` (Attributes) <p>The parameters for Teradata.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--teradata_parameters))
+- `trino_parameters` (Attributes) <p>The parameters that are required to connect to a Trino data source.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--trino_parameters))
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_elasticsearch_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.amazon_elasticsearch_parameters`
 
 Read-Only:
 
-- `domain` (String) <p>The Amazon Elasticsearch Service domain.</p>
+- `domain` (String) <p>The OpenSearch domain.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_open_search_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.amazon_open_search_parameters`
 
 Read-Only:
 
-- `domain` (String) <p>The Amazon OpenSearch Service domain.</p>
+- `domain` (String) <p>The OpenSearch domain.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--athena_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.athena_parameters`
 
 Read-Only:
 
+- `identity_center_configuration` (Attributes) <p>The parameters for an IAM Identity Center configuration.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--athena_parameters--identity_center_configuration))
+- `role_arn` (String) <p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>
 - `work_group` (String) <p>The workgroup that Amazon Athena uses.</p>
+
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--athena_parameters--identity_center_configuration"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.athena_parameters.identity_center_configuration`
+
+Read-Only:
+
+- `enable_identity_propagation` (Boolean) <p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>
+
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.aurora_parameters`
 
 Read-Only:
 
@@ -335,17 +461,27 @@ Read-Only:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_postgre_sql_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.aurora_postgre_sql_parameters`
 
 Read-Only:
 
-- `database` (String) <p>Database.</p>
-- `host` (String) <p>Host.</p>
-- `port` (Number) <p>Port.</p>
+- `database` (String) <p>The Amazon Aurora PostgreSQL database to connect to.</p>
+- `host` (String) <p>The Amazon Aurora PostgreSQL-Compatible host to connect to.</p>
+- `port` (Number) <p>The port that Amazon Aurora PostgreSQL is listening on.</p>
+
+
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--databricks_parameters"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.databricks_parameters`
+
+Read-Only:
+
+- `host` (String) <p>The host name of the Databricks data source.</p>
+- `port` (Number) <p>The port for the Databricks data source.</p>
+- `sql_endpoint_path` (String) <p>The HTTP path of the Databricks data source.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--maria_db_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.maria_db_parameters`
 
 Read-Only:
 
@@ -355,7 +491,7 @@ Read-Only:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--my_sql_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.my_sql_parameters`
 
 Read-Only:
 
@@ -365,17 +501,18 @@ Read-Only:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--oracle_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.oracle_parameters`
 
 Read-Only:
 
-- `database` (String)
-- `host` (String)
-- `port` (Number)
+- `database` (String) <p>The database.</p>
+- `host` (String) <p>An Oracle host.</p>
+- `port` (Number) <p>The port.</p>
+- `use_service_name` (Boolean)
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--postgre_sql_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.postgre_sql_parameters`
 
 Read-Only:
 
@@ -385,7 +522,7 @@ Read-Only:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--presto_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.presto_parameters`
 
 Read-Only:
 
@@ -395,7 +532,7 @@ Read-Only:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--rds_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.rds_parameters`
 
 Read-Only:
 
@@ -404,7 +541,7 @@ Read-Only:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.redshift_parameters`
 
 Read-Only:
 
@@ -412,18 +549,42 @@ Read-Only:
             provided.</p>
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>
+- `iam_parameters` (Attributes) <p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href="https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html">
+               <code>GetClusterCredentials</code>
+            </a>.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters--iam_parameters))
+- `identity_center_configuration` (Attributes) <p>The parameters for an IAM Identity Center configuration.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters--identity_center_configuration))
 - `port` (Number) <p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>
 
-
-<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--s3_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters--iam_parameters"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.redshift_parameters.iam_parameters`
 
 Read-Only:
 
-- `manifest_file_location` (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--teradata_parameters--manifest_file_location))
+- `auto_create_database_user` (Boolean) <p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>
+- `database_groups` (List of String) <p>A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>
+- `database_user` (String) <p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>
+- `role_arn` (String) <p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>
 
-<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--teradata_parameters--manifest_file_location"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters.manifest_file_location`
+
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters--identity_center_configuration"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.redshift_parameters.identity_center_configuration`
+
+Read-Only:
+
+- `enable_identity_propagation` (Boolean) <p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>
+
+
+
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--s3_parameters"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.s3_parameters`
+
+Read-Only:
+
+- `manifest_file_location` (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--s3_parameters--manifest_file_location))
+- `role_arn` (String) <p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.</p>
+
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--s3_parameters--manifest_file_location"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.s3_parameters.manifest_file_location`
 
 Read-Only:
 
@@ -433,17 +594,39 @@ Read-Only:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--snowflake_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.snowflake_parameters`
 
 Read-Only:
 
+- `authentication_type` (String)
 - `database` (String) <p>Database.</p>
+- `database_access_control_role` (String)
 - `host` (String) <p>Host.</p>
+- `o_auth_parameters` (Attributes) (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--snowflake_parameters--o_auth_parameters))
 - `warehouse` (String) <p>Warehouse.</p>
+
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--snowflake_parameters--o_auth_parameters"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.snowflake_parameters.o_auth_parameters`
+
+Read-Only:
+
+- `identity_provider_resource_uri` (String)
+- `identity_provider_vpc_connection_properties` (Attributes) <p>VPC connection properties.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--snowflake_parameters--o_auth_parameters--identity_provider_vpc_connection_properties))
+- `o_auth_scope` (String)
+- `token_provider_url` (String)
+
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--snowflake_parameters--o_auth_parameters--identity_provider_vpc_connection_properties"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.snowflake_parameters.o_auth_parameters.identity_provider_vpc_connection_properties`
+
+Read-Only:
+
+- `vpc_connection_arn` (String) <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
+
+
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--spark_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.spark_parameters`
 
 Read-Only:
 
@@ -452,13 +635,46 @@ Read-Only:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--sql_server_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.sql_server_parameters`
 
 Read-Only:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
 - `port` (Number) <p>Port.</p>
+
+
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--starburst_parameters"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.starburst_parameters`
+
+Read-Only:
+
+- `authentication_type` (String)
+- `catalog` (String) <p>The catalog name for the Starburst data source.</p>
+- `database_access_control_role` (String)
+- `host` (String) <p>The host name of the Starburst data source.</p>
+- `o_auth_parameters` (Attributes) (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--starburst_parameters--o_auth_parameters))
+- `port` (Number) <p>The port for the Starburst data source.</p>
+- `product_type` (String)
+
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--starburst_parameters--o_auth_parameters"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.starburst_parameters.o_auth_parameters`
+
+Read-Only:
+
+- `identity_provider_resource_uri` (String)
+- `identity_provider_vpc_connection_properties` (Attributes) <p>VPC connection properties.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--starburst_parameters--o_auth_parameters--identity_provider_vpc_connection_properties))
+- `o_auth_scope` (String)
+- `token_provider_url` (String)
+
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--starburst_parameters--o_auth_parameters--identity_provider_vpc_connection_properties"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_vpc_connection_properties`
+
+Read-Only:
+
+- `vpc_connection_arn` (String) <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
+
+
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--teradata_parameters"></a>
@@ -471,6 +687,16 @@ Read-Only:
 - `port` (Number) <p>Port.</p>
 
 
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--trino_parameters"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
+
+Read-Only:
+
+- `catalog` (String) <p>The catalog name for the Trino data source.</p>
+- `host` (String) <p>The host name of the Trino data source.</p>
+- `port` (Number) <p>The port for the Trino data source.</p>
+
+
 
 
 
@@ -479,32 +705,34 @@ Read-Only:
 
 Read-Only:
 
-- `amazon_elasticsearch_parameters` (Attributes) <p>Amazon Elasticsearch Service parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--amazon_elasticsearch_parameters))
-- `amazon_open_search_parameters` (Attributes) <p>Amazon OpenSearch Service parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--amazon_open_search_parameters))
-- `athena_parameters` (Attributes) <p>Amazon Athena parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--athena_parameters))
-- `aurora_parameters` (Attributes) <p>Amazon Aurora parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--aurora_parameters))
-- `aurora_postgre_sql_parameters` (Attributes) <p>Amazon Aurora with PostgreSQL compatibility parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--aurora_postgre_sql_parameters))
-- `maria_db_parameters` (Attributes) <p>MariaDB parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--maria_db_parameters))
-- `my_sql_parameters` (Attributes) <p>MySQL parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--my_sql_parameters))
-- `oracle_parameters` (Attributes) (see [below for nested schema](#nestedatt--data_source_parameters--oracle_parameters))
-- `postgre_sql_parameters` (Attributes) <p>PostgreSQL parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--postgre_sql_parameters))
-- `presto_parameters` (Attributes) <p>Presto parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--presto_parameters))
-- `rds_parameters` (Attributes) <p>Amazon RDS parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--rds_parameters))
-- `redshift_parameters` (Attributes) <p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if
-            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and
-            <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p> (see [below for nested schema](#nestedatt--data_source_parameters--redshift_parameters))
-- `s3_parameters` (Attributes) <p>S3 parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--s3_parameters))
-- `snowflake_parameters` (Attributes) <p>Snowflake parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--snowflake_parameters))
-- `spark_parameters` (Attributes) <p>Spark parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--spark_parameters))
-- `sql_server_parameters` (Attributes) <p>SQL Server parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--sql_server_parameters))
-- `teradata_parameters` (Attributes) <p>Teradata parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--teradata_parameters))
+- `amazon_elasticsearch_parameters` (Attributes) <p>The parameters for OpenSearch.</p> (see [below for nested schema](#nestedatt--data_source_parameters--amazon_elasticsearch_parameters))
+- `amazon_open_search_parameters` (Attributes) <p>The parameters for OpenSearch.</p> (see [below for nested schema](#nestedatt--data_source_parameters--amazon_open_search_parameters))
+- `athena_parameters` (Attributes) <p>Parameters for Amazon Athena.</p> (see [below for nested schema](#nestedatt--data_source_parameters--athena_parameters))
+- `aurora_parameters` (Attributes) <p>Parameters for Amazon Aurora.</p> (see [below for nested schema](#nestedatt--data_source_parameters--aurora_parameters))
+- `aurora_postgre_sql_parameters` (Attributes) <p>Parameters for Amazon Aurora PostgreSQL-Compatible Edition.</p> (see [below for nested schema](#nestedatt--data_source_parameters--aurora_postgre_sql_parameters))
+- `databricks_parameters` (Attributes) <p>The parameters that are required to connect to a Databricks data source.</p> (see [below for nested schema](#nestedatt--data_source_parameters--databricks_parameters))
+- `maria_db_parameters` (Attributes) <p>The parameters for MariaDB.</p> (see [below for nested schema](#nestedatt--data_source_parameters--maria_db_parameters))
+- `my_sql_parameters` (Attributes) <p>The parameters for MySQL.</p> (see [below for nested schema](#nestedatt--data_source_parameters--my_sql_parameters))
+- `oracle_parameters` (Attributes) <p>The parameters for Oracle.</p> (see [below for nested schema](#nestedatt--data_source_parameters--oracle_parameters))
+- `postgre_sql_parameters` (Attributes) <p>The parameters for PostgreSQL.</p> (see [below for nested schema](#nestedatt--data_source_parameters--postgre_sql_parameters))
+- `presto_parameters` (Attributes) <p>The parameters for Presto.</p> (see [below for nested schema](#nestedatt--data_source_parameters--presto_parameters))
+- `rds_parameters` (Attributes) <p>The parameters for Amazon RDS.</p> (see [below for nested schema](#nestedatt--data_source_parameters--rds_parameters))
+- `redshift_parameters` (Attributes) <p>The parameters for Amazon Redshift. The <code>ClusterId</code> field can be blank if
+            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p> (see [below for nested schema](#nestedatt--data_source_parameters--redshift_parameters))
+- `s3_parameters` (Attributes) <p>The parameters for S3.</p> (see [below for nested schema](#nestedatt--data_source_parameters--s3_parameters))
+- `snowflake_parameters` (Attributes) <p>The parameters for Snowflake.</p> (see [below for nested schema](#nestedatt--data_source_parameters--snowflake_parameters))
+- `spark_parameters` (Attributes) <p>The parameters for Spark.</p> (see [below for nested schema](#nestedatt--data_source_parameters--spark_parameters))
+- `sql_server_parameters` (Attributes) <p>The parameters for SQL Server.</p> (see [below for nested schema](#nestedatt--data_source_parameters--sql_server_parameters))
+- `starburst_parameters` (Attributes) <p>The parameters that are required to connect to a Starburst data source.</p> (see [below for nested schema](#nestedatt--data_source_parameters--starburst_parameters))
+- `teradata_parameters` (Attributes) <p>The parameters for Teradata.</p> (see [below for nested schema](#nestedatt--data_source_parameters--teradata_parameters))
+- `trino_parameters` (Attributes) <p>The parameters that are required to connect to a Trino data source.</p> (see [below for nested schema](#nestedatt--data_source_parameters--trino_parameters))
 
 <a id="nestedatt--data_source_parameters--amazon_elasticsearch_parameters"></a>
 ### Nested Schema for `data_source_parameters.amazon_elasticsearch_parameters`
 
 Read-Only:
 
-- `domain` (String) <p>The Amazon Elasticsearch Service domain.</p>
+- `domain` (String) <p>The OpenSearch domain.</p>
 
 
 <a id="nestedatt--data_source_parameters--amazon_open_search_parameters"></a>
@@ -512,7 +740,7 @@ Read-Only:
 
 Read-Only:
 
-- `domain` (String) <p>The Amazon OpenSearch Service domain.</p>
+- `domain` (String) <p>The OpenSearch domain.</p>
 
 
 <a id="nestedatt--data_source_parameters--athena_parameters"></a>
@@ -520,7 +748,17 @@ Read-Only:
 
 Read-Only:
 
+- `identity_center_configuration` (Attributes) <p>The parameters for an IAM Identity Center configuration.</p> (see [below for nested schema](#nestedatt--data_source_parameters--athena_parameters--identity_center_configuration))
+- `role_arn` (String) <p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>
 - `work_group` (String) <p>The workgroup that Amazon Athena uses.</p>
+
+<a id="nestedatt--data_source_parameters--athena_parameters--identity_center_configuration"></a>
+### Nested Schema for `data_source_parameters.athena_parameters.identity_center_configuration`
+
+Read-Only:
+
+- `enable_identity_propagation` (Boolean) <p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>
+
 
 
 <a id="nestedatt--data_source_parameters--aurora_parameters"></a>
@@ -538,9 +776,19 @@ Read-Only:
 
 Read-Only:
 
-- `database` (String) <p>Database.</p>
-- `host` (String) <p>Host.</p>
-- `port` (Number) <p>Port.</p>
+- `database` (String) <p>The Amazon Aurora PostgreSQL database to connect to.</p>
+- `host` (String) <p>The Amazon Aurora PostgreSQL-Compatible host to connect to.</p>
+- `port` (Number) <p>The port that Amazon Aurora PostgreSQL is listening on.</p>
+
+
+<a id="nestedatt--data_source_parameters--databricks_parameters"></a>
+### Nested Schema for `data_source_parameters.databricks_parameters`
+
+Read-Only:
+
+- `host` (String) <p>The host name of the Databricks data source.</p>
+- `port` (Number) <p>The port for the Databricks data source.</p>
+- `sql_endpoint_path` (String) <p>The HTTP path of the Databricks data source.</p>
 
 
 <a id="nestedatt--data_source_parameters--maria_db_parameters"></a>
@@ -568,9 +816,10 @@ Read-Only:
 
 Read-Only:
 
-- `database` (String)
-- `host` (String)
-- `port` (Number)
+- `database` (String) <p>The database.</p>
+- `host` (String) <p>An Oracle host.</p>
+- `port` (Number) <p>The port.</p>
+- `use_service_name` (Boolean)
 
 
 <a id="nestedatt--data_source_parameters--postgre_sql_parameters"></a>
@@ -611,7 +860,30 @@ Read-Only:
             provided.</p>
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>
+- `iam_parameters` (Attributes) <p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href="https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html">
+               <code>GetClusterCredentials</code>
+            </a>.</p> (see [below for nested schema](#nestedatt--data_source_parameters--redshift_parameters--iam_parameters))
+- `identity_center_configuration` (Attributes) <p>The parameters for an IAM Identity Center configuration.</p> (see [below for nested schema](#nestedatt--data_source_parameters--redshift_parameters--identity_center_configuration))
 - `port` (Number) <p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>
+
+<a id="nestedatt--data_source_parameters--redshift_parameters--iam_parameters"></a>
+### Nested Schema for `data_source_parameters.redshift_parameters.iam_parameters`
+
+Read-Only:
+
+- `auto_create_database_user` (Boolean) <p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>
+- `database_groups` (List of String) <p>A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>
+- `database_user` (String) <p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>
+- `role_arn` (String) <p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>
+
+
+<a id="nestedatt--data_source_parameters--redshift_parameters--identity_center_configuration"></a>
+### Nested Schema for `data_source_parameters.redshift_parameters.identity_center_configuration`
+
+Read-Only:
+
+- `enable_identity_propagation` (Boolean) <p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>
+
 
 
 <a id="nestedatt--data_source_parameters--s3_parameters"></a>
@@ -620,6 +892,7 @@ Read-Only:
 Read-Only:
 
 - `manifest_file_location` (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--data_source_parameters--s3_parameters--manifest_file_location))
+- `role_arn` (String) <p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.</p>
 
 <a id="nestedatt--data_source_parameters--s3_parameters--manifest_file_location"></a>
 ### Nested Schema for `data_source_parameters.s3_parameters.manifest_file_location`
@@ -636,9 +909,31 @@ Read-Only:
 
 Read-Only:
 
+- `authentication_type` (String)
 - `database` (String) <p>Database.</p>
+- `database_access_control_role` (String)
 - `host` (String) <p>Host.</p>
+- `o_auth_parameters` (Attributes) (see [below for nested schema](#nestedatt--data_source_parameters--snowflake_parameters--o_auth_parameters))
 - `warehouse` (String) <p>Warehouse.</p>
+
+<a id="nestedatt--data_source_parameters--snowflake_parameters--o_auth_parameters"></a>
+### Nested Schema for `data_source_parameters.snowflake_parameters.o_auth_parameters`
+
+Read-Only:
+
+- `identity_provider_resource_uri` (String)
+- `identity_provider_vpc_connection_properties` (Attributes) <p>VPC connection properties.</p> (see [below for nested schema](#nestedatt--data_source_parameters--snowflake_parameters--o_auth_parameters--identity_provider_vpc_connection_properties))
+- `o_auth_scope` (String)
+- `token_provider_url` (String)
+
+<a id="nestedatt--data_source_parameters--snowflake_parameters--o_auth_parameters--identity_provider_vpc_connection_properties"></a>
+### Nested Schema for `data_source_parameters.snowflake_parameters.o_auth_parameters.identity_provider_vpc_connection_properties`
+
+Read-Only:
+
+- `vpc_connection_arn` (String) <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
+
+
 
 
 <a id="nestedatt--data_source_parameters--spark_parameters"></a>
@@ -660,6 +955,39 @@ Read-Only:
 - `port` (Number) <p>Port.</p>
 
 
+<a id="nestedatt--data_source_parameters--starburst_parameters"></a>
+### Nested Schema for `data_source_parameters.starburst_parameters`
+
+Read-Only:
+
+- `authentication_type` (String)
+- `catalog` (String) <p>The catalog name for the Starburst data source.</p>
+- `database_access_control_role` (String)
+- `host` (String) <p>The host name of the Starburst data source.</p>
+- `o_auth_parameters` (Attributes) (see [below for nested schema](#nestedatt--data_source_parameters--starburst_parameters--o_auth_parameters))
+- `port` (Number) <p>The port for the Starburst data source.</p>
+- `product_type` (String)
+
+<a id="nestedatt--data_source_parameters--starburst_parameters--o_auth_parameters"></a>
+### Nested Schema for `data_source_parameters.starburst_parameters.o_auth_parameters`
+
+Read-Only:
+
+- `identity_provider_resource_uri` (String)
+- `identity_provider_vpc_connection_properties` (Attributes) <p>VPC connection properties.</p> (see [below for nested schema](#nestedatt--data_source_parameters--starburst_parameters--o_auth_parameters--identity_provider_vpc_connection_properties))
+- `o_auth_scope` (String)
+- `token_provider_url` (String)
+
+<a id="nestedatt--data_source_parameters--starburst_parameters--o_auth_parameters--identity_provider_vpc_connection_properties"></a>
+### Nested Schema for `data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_vpc_connection_properties`
+
+Read-Only:
+
+- `vpc_connection_arn` (String) <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
+
+
+
+
 <a id="nestedatt--data_source_parameters--teradata_parameters"></a>
 ### Nested Schema for `data_source_parameters.teradata_parameters`
 
@@ -668,6 +996,16 @@ Read-Only:
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
 - `port` (Number) <p>Port.</p>
+
+
+<a id="nestedatt--data_source_parameters--trino_parameters"></a>
+### Nested Schema for `data_source_parameters.trino_parameters`
+
+Read-Only:
+
+- `catalog` (String) <p>The catalog name for the Trino data source.</p>
+- `host` (String) <p>The host name of the Trino data source.</p>
+- `port` (Number) <p>The port for the Trino data source.</p>
 
 
 
@@ -688,19 +1026,20 @@ Read-Only:
 - `actions` (List of String) <p>The IAM action to grant or revoke permissions on.</p>
 - `principal` (String) <p>The Amazon Resource Name (ARN) of the principal. This can be one of the
             following:</p>
-        <ul>
+         <ul>
             <li>
-                <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>
+               <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>
             </li>
             <li>
-                <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>
+               <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>
             </li>
             <li>
-                <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight
-                    ARN. Use this option only to share resources (templates) across AWS accounts.
+               <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight
+                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.
                     (This is less common.) </p>
             </li>
          </ul>
+- `resource` (String)
 
 
 <a id="nestedatt--ssl_properties"></a>
@@ -726,5 +1065,3 @@ Read-Only:
 Read-Only:
 
 - `vpc_connection_arn` (String) <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
-
-

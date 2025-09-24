@@ -44,6 +44,18 @@
       "additionalProperties": false
     }
   },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "qldb:TagResource",
+      "qldb:UntagResource",
+      "qldb:ListTagsForResource"
+    ]
+  },
   "properties": {
     "LedgerName": {
       "type": "string"
@@ -106,6 +118,7 @@
   "handlers": {
     "create": {
       "permissions": [
+        "iam:PassRole",
         "qldb:StreamJournalToKinesis",
         "qldb:DescribeJournalKinesisStream"
       ]
@@ -118,7 +131,8 @@
     },
     "read": {
       "permissions": [
-        "qldb:DescribeJournalKinesisStream"
+        "qldb:DescribeJournalKinesisStream",
+        "qldb:ListTagsForResource"
       ]
     },
     "update": {
@@ -131,7 +145,17 @@
     "list": {
       "permissions": [
         "qldb:listJournalKinesisStreamsForLedger"
-      ]
+      ],
+      "handlerSchema": {
+        "properties": {
+          "LedgerName": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "LedgerName"
+        ]
+      }
     }
   }
 }

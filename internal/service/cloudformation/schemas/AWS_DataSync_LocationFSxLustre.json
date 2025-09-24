@@ -83,12 +83,16 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "datasync:TagResource",
+      "datasync:UntagResource",
+      "datasync:ListTagsForResource"
+    ]
   },
   "additionalProperties": false,
   "required": [
-    "SecurityGroupArns",
-    "FsxFilesystemArn"
+    "SecurityGroupArns"
   ],
   "readOnlyProperties": [
     "/properties/LocationArn",
@@ -103,8 +107,7 @@
   ],
   "createOnlyProperties": [
     "/properties/FsxFilesystemArn",
-    "/properties/SecurityGroupArns",
-    "/properties/Subdirectory"
+    "/properties/SecurityGroupArns"
   ],
   "handlers": {
     "create": {
@@ -112,6 +115,7 @@
         "datasync:CreateLocationFsxLustre",
         "datasync:DescribeLocationFsxLustre",
         "datasync:ListTagsForResource",
+        "datasync:TagResource",
         "fsx:DescribeFileSystems",
         "ec2:DescribeNetworkInterfaces",
         "ec2:DescribeSubnets",
@@ -128,8 +132,11 @@
       "permissions": [
         "datasync:DescribeLocationFsxLustre",
         "datasync:ListTagsForResource",
+        "datasync:UpdateLocationFsxLustre",
         "datasync:TagResource",
-        "datasync:UntagResource"
+        "datasync:UntagResource",
+        "fsx:DescribeFileSystems",
+        "ec2:DescribeNetworkInterfaces"
       ]
     },
     "delete": {

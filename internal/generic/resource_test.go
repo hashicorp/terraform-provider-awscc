@@ -1,9 +1,12 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 package generic
 
 import (
 	"testing"
 
-	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	"github.com/hashicorp/terraform-plugin-framework/path"
 )
 
 func TestPropertyPathToAttributePath(t *testing.T) {
@@ -11,7 +14,7 @@ func TestPropertyPathToAttributePath(t *testing.T) {
 		TestName      string
 		PropertyPath  string
 		ExpectedError bool
-		ExpectedValue *tftypes.AttributePath
+		ExpectedValue path.Path
 	}{
 		{
 			TestName:      "empty property path",
@@ -35,12 +38,12 @@ func TestPropertyPathToAttributePath(t *testing.T) {
 		{
 			TestName:      "one path segment",
 			PropertyPath:  "/properties/Tags",
-			ExpectedValue: tftypes.NewAttributePath().WithAttributeName("tags"),
+			ExpectedValue: path.Root("tags"),
 		},
 		{
 			TestName:      "two path segments",
 			PropertyPath:  "/properties/BasicAuthParameters/Password",
-			ExpectedValue: tftypes.NewAttributePath().WithAttributeName("basic_auth_parameters").WithAttributeName("password"),
+			ExpectedValue: path.Root("basic_auth_parameters").AtName("password"),
 		},
 		{
 			TestName:      "empty segment",
@@ -54,7 +57,7 @@ func TestPropertyPathToAttributePath(t *testing.T) {
 		},
 	}
 
-	rt := resourceType{
+	rt := genericResource{
 		cfToTfNameMap: map[string]string{
 			"BasicAuthParameters": "basic_auth_parameters",
 			"Password":            "password",
@@ -74,7 +77,7 @@ func TestPropertyPathToAttributePath(t *testing.T) {
 				t.Fatalf("unexpected error from propertyPathToAttributePath: %s", err)
 			}
 
-			if !attributePath.Equal(testCase.ExpectedValue) {
+			if err == nil && !attributePath.Equal(testCase.ExpectedValue) {
 				t.Errorf("got: %s, expected: %s", attributePath, testCase.ExpectedValue)
 			}
 		})

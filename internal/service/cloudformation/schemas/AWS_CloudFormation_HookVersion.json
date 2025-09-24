@@ -82,7 +82,6 @@
   "readOnlyProperties": [
     "/properties/Arn",
     "/properties/IsDefaultVersion",
-    "/properties/ProvisioningType",
     "/properties/Visibility",
     "/properties/VersionId",
     "/properties/TypeArn"
@@ -96,9 +95,16 @@
   "primaryIdentifier": [
     "/properties/Arn"
   ],
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
   "handlers": {
     "create": {
       "permissions": [
+        "cloudformation:DescribeType",
         "cloudformation:DescribeTypeRegistration",
         "cloudformation:RegisterType",
         "iam:PassRole",
@@ -119,8 +125,19 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "TypeName": {
+            "$ref": "resource-schema.json#/properties/TypeName"
+          },
+          "TypeArn": {
+            "$ref": "resource-schema.json#/properties/TypeArn"
+          }
+        }
+      },
       "permissions": [
-        "cloudformation:ListTypes"
+        "cloudformation:ListTypes",
+        "cloudformation:ListTypeVersions"
       ]
     }
   },

@@ -21,8 +21,12 @@
             "capacityOptimized",
             "capacityOptimizedPrioritized",
             "diversified",
-            "lowestPrice"
+            "lowestPrice",
+            "priceCapacityOptimized"
           ]
+        },
+        "Context": {
+          "type": "string"
         },
         "ExcessCapacityTerminationPolicy": {
           "type": "string",
@@ -104,8 +108,12 @@
         "ValidUntil": {
           "type": "string"
         },
-        "Context": {
-          "type": "string"
+        "TagSpecifications": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/SpotFleetTagSpecification"
+          }
         },
         "TargetCapacityUnitType": {
           "type": "string",
@@ -233,7 +241,7 @@
             "launch-before-terminate"
           ]
         },
-        "TerminationDelay" : {
+        "TerminationDelay": {
           "type": "integer"
         }
       }
@@ -640,12 +648,23 @@
             "enum": [
               "intel",
               "amd",
-              "amazon-web-services"
+              "amazon-web-services",
+              "apple"
             ]
           }
         },
         "MemoryGiBPerVCpu": {
           "$ref": "#/definitions/MemoryGiBPerVCpuRequest"
+        },
+        "AllowedInstanceTypes": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 30,
+            "pattern": "[a-zA-Z0-9\\.\\*]+"
+          }
         },
         "ExcludedInstanceTypes": {
           "type": "array",
@@ -674,6 +693,9 @@
         "OnDemandMaxPricePercentageOverLowestPrice": {
           "type": "integer"
         },
+        "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice": {
+          "type": "integer"
+        },
         "BareMetal": {
           "type": "string",
           "enum": [
@@ -692,6 +714,9 @@
         },
         "RequireHibernateSupport": {
           "type": "boolean"
+        },
+        "NetworkBandwidthGbps": {
+          "$ref": "#/definitions/NetworkBandwidthGbpsRequest"
         },
         "NetworkInterfaceCount": {
           "$ref": "#/definitions/NetworkInterfaceCountRequest"
@@ -742,9 +767,10 @@
           "items": {
             "type": "string",
             "enum": [
-              "nvidia",
-              "amd",
               "amazon-web-services",
+              "amd",
+              "habana",
+              "nvidia",
               "xilinx"
             ]
           }
@@ -755,20 +781,26 @@
           "items": {
             "type": "string",
             "enum": [
+              "a10g",
               "a100",
-              "v100",
+              "h100",
+              "inferentia",
+              "k520",
               "k80",
-              "t4",
               "m60",
               "radeon-pro-v520",
+              "t4",
+              "t4g",
               "vu9p",
-              "inferentia",
-              "k520"
+              "v100"
             ]
           }
         },
         "AcceleratorTotalMemoryMiB": {
           "$ref": "#/definitions/AcceleratorTotalMemoryMiBRequest"
+        },
+        "BaselinePerformanceFactors": {
+          "$ref": "#/definitions/BaselinePerformanceFactorsRequest"
         }
       }
     },
@@ -797,6 +829,18 @@
       }
     },
     "MemoryGiBPerVCpuRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Min": {
+          "type": "number"
+        },
+        "Max": {
+          "type": "number"
+        }
+      }
+    },
+    "NetworkBandwidthGbpsRequest": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -867,6 +911,37 @@
           "type": "integer"
         }
       }
+    },
+    "BaselinePerformanceFactorsRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Cpu": {
+          "$ref": "#/definitions/CpuPerformanceFactorRequest"
+        }
+      }
+    },
+    "CpuPerformanceFactorRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "References": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/PerformanceFactorReferenceRequest"
+          }
+        }
+      }
+    },
+    "PerformanceFactorReferenceRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "InstanceFamily": {
+          "type": "string"
+        }
+      }
     }
   },
   "required": [
@@ -887,6 +962,7 @@
     "/properties/SpotFleetRequestConfigData/SpotMaintenanceStrategies",
     "/properties/SpotFleetRequestConfigData/SpotMaxTotalPrice",
     "/properties/SpotFleetRequestConfigData/SpotPrice",
+    "/properties/SpotFleetRequestConfigData/TagSpecifications",
     "/properties/SpotFleetRequestConfigData/TerminateInstancesWithExpiration",
     "/properties/SpotFleetRequestConfigData/Type",
     "/properties/SpotFleetRequestConfigData/ValidFrom",
@@ -895,14 +971,21 @@
   "readOnlyProperties": [
     "/properties/Id"
   ],
+  "writeOnlyProperties": [
+    "/properties/SpotFleetRequestConfigData/TagSpecifications",
+    "/properties/SpotFleetRequestConfigData/LaunchSpecifications/*/NetworkInterfaces/*/Groups"
+  ],
   "primaryIdentifier": [
     "/properties/Id"
   ],
   "handlers": {
     "create": {
       "permissions": [
+        "iam:PassRole",
+        "ec2:CreateTags",
         "ec2:RequestSpotFleet",
-        "ec2:DescribeSpotFleetRequests"
+        "ec2:DescribeSpotFleetRequests",
+        "ec2:RunInstances"
       ]
     },
     "delete": {
@@ -927,5 +1010,8 @@
         "ec2:DescribeSpotFleetRequests"
       ]
     }
+  },
+  "tagging": {
+    "taggable": false
   }
 }

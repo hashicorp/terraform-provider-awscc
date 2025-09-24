@@ -97,8 +97,7 @@
     },
     "Fingerprint": {
       "description": "The fingerprint of the Sidewalk application server private key.",
-      "type": "string",
-      "pattern": "[a-fA-F0-9]{64}"
+      "type": "string"
     },
     "Arn": {
       "description": "PartnerAccount arn. Returned after successful create.",
@@ -118,7 +117,11 @@
   "additionalProperties": false,
   "readOnlyProperties": [
     "/properties/Arn",
-    "/properties/SidewalkResponse"
+    "/properties/Fingerprint"
+  ],
+  "writeOnlyProperties": [
+    "/properties/SidewalkUpdate",
+    "/properties/Sidewalk"
   ],
   "createOnlyProperties": [
     "/properties/PartnerAccountId"
@@ -126,13 +129,24 @@
   "primaryIdentifier": [
     "/properties/PartnerAccountId"
   ],
-  "taggable": true,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "iotwireless:TagResource",
+      "iotwireless:UntagResource",
+      "iotwireless:ListTagsForResource"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
         "iotwireless:AssociateAwsAccountWithPartnerAccount",
         "iotwireless:TagResource",
-        "iotwireless:ListTagsForResource"
+        "iotwireless:GetPartnerAccount"
       ]
     },
     "read": {
@@ -149,9 +163,12 @@
     },
     "update": {
       "permissions": [
+        "iotwireless:GetPartnerAccount",
+        "iotwireless:AssociateAwsAccountWithPartnerAccount",
         "iotwireless:UpdatePartnerAccount",
-        "iotwireless:UntagResource",
-        "iotwireless:ListTagsForResource"
+        "iotwireless:ListTagsForResource",
+        "iotwireless:TagResource",
+        "iotwireless:UntagResource"
       ]
     },
     "delete": {

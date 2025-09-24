@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_vpcdhcp_options_association.example "dhcp_options_id|vpc_id"

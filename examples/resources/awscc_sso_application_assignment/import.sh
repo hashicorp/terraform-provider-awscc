@@ -1,0 +1,1 @@
+$ terraform import awscc_sso_application_assignment.example "application_arn|principal_type|principal_id"

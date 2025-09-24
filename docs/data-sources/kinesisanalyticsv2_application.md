@@ -23,8 +23,10 @@ Data Source schema for AWS::KinesisAnalyticsV2::Application
 
 - `application_configuration` (Attributes) Use this parameter to configure the application. (see [below for nested schema](#nestedatt--application_configuration))
 - `application_description` (String) The description of the application.
+- `application_maintenance_configuration` (Attributes) Used to configure start of maintenance window. (see [below for nested schema](#nestedatt--application_maintenance_configuration))
 - `application_mode` (String) To create a Kinesis Data Analytics Studio notebook, you must set the mode to `INTERACTIVE`. However, for a Kinesis Data Analytics for Apache Flink application, the mode is optional.
 - `application_name` (String) The name of the application.
+- `run_configuration` (Attributes) Specifies run configuration (start parameters) of a Kinesis Data Analytics application. Evaluated on update for RUNNING applications an only. (see [below for nested schema](#nestedatt--run_configuration))
 - `runtime_environment` (String) The runtime environment for the application.
 - `service_execution_role` (String) Specifies the IAM role that the application uses to access external resources.
 - `tags` (Attributes List) A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. (see [below for nested schema](#nestedatt--tags))
@@ -35,10 +37,13 @@ Data Source schema for AWS::KinesisAnalyticsV2::Application
 Read-Only:
 
 - `application_code_configuration` (Attributes) The code location and type parameters for a Flink-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--application_code_configuration))
+- `application_encryption_configuration` (Attributes) Describes whether customer managed key is enabled and key details for customer data encryption (see [below for nested schema](#nestedatt--application_configuration--application_encryption_configuration))
 - `application_snapshot_configuration` (Attributes) Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--application_snapshot_configuration))
+- `application_system_rollback_configuration` (Attributes) Describes whether system initiated rollbacks are enabled for a Flink-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--application_system_rollback_configuration))
 - `environment_properties` (Attributes) Describes execution properties for a Flink-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--environment_properties))
 - `flink_application_configuration` (Attributes) The creation and update parameters for a Flink-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--flink_application_configuration))
 - `sql_application_configuration` (Attributes) The creation and update parameters for a SQL-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration))
+- `vpc_configurations` (Attributes List) The array of descriptions of VPC configurations available to the application. (see [below for nested schema](#nestedatt--application_configuration--vpc_configurations))
 - `zeppelin_application_configuration` (Attributes) The configuration parameters for a Kinesis Data Analytics Studio notebook. (see [below for nested schema](#nestedatt--application_configuration--zeppelin_application_configuration))
 
 <a id="nestedatt--application_configuration--application_code_configuration"></a>
@@ -59,7 +64,7 @@ Read-Only:
 - `zip_file_content` (String) The zip-format code for a Flink-based Kinesis Data Analytics application.
 
 <a id="nestedatt--application_configuration--application_code_configuration--code_content--s3_content_location"></a>
-### Nested Schema for `application_configuration.application_code_configuration.code_content.zip_file_content`
+### Nested Schema for `application_configuration.application_code_configuration.code_content.s3_content_location`
 
 Read-Only:
 
@@ -70,12 +75,29 @@ Read-Only:
 
 
 
+<a id="nestedatt--application_configuration--application_encryption_configuration"></a>
+### Nested Schema for `application_configuration.application_encryption_configuration`
+
+Read-Only:
+
+- `key_id` (String) KMS KeyId. Can be either key uuid or full key arn or key alias arn or short key alias
+- `key_type` (String) Specifies whether application data is encrypted using service key: AWS_OWNED_KEY or customer key: CUSTOMER_MANAGED_KEY
+
+
 <a id="nestedatt--application_configuration--application_snapshot_configuration"></a>
 ### Nested Schema for `application_configuration.application_snapshot_configuration`
 
 Read-Only:
 
 - `snapshots_enabled` (Boolean) Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.
+
+
+<a id="nestedatt--application_configuration--application_system_rollback_configuration"></a>
+### Nested Schema for `application_configuration.application_system_rollback_configuration`
+
+Read-Only:
+
+- `rollback_enabled` (Boolean) Describes whether system initiated rollbacks are enabled for a Flink-based Kinesis Data Analytics application.
 
 
 <a id="nestedatt--application_configuration--environment_properties"></a>
@@ -157,7 +179,7 @@ Read-Only:
 - `name_prefix` (String) The name prefix to use when creating an in-application stream. Suppose that you specify a prefix `"MyInApplicationStream"`. Kinesis Data Analytics then creates one or more (as per the InputParallelism count you specified) in-application streams with the names `"MyInApplicationStream_001"`, `"MyInApplicationStream_002"`, and so on.
 
 <a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_parallelism"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix`
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_parallelism`
 
 Read-Only:
 
@@ -165,14 +187,14 @@ Read-Only:
 
 
 <a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_processing_configuration"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix`
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_processing_configuration`
 
 Read-Only:
 
-- `input_lambda_processor` (Attributes) The InputLambdaProcessor that is used to preprocess the records in the stream before being processed by your application code. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--input_lambda_processor))
+- `input_lambda_processor` (Attributes) The InputLambdaProcessor that is used to preprocess the records in the stream before being processed by your application code. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_processing_configuration--input_lambda_processor))
 
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--input_lambda_processor"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix.input_lambda_processor`
+<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_processing_configuration--input_lambda_processor"></a>
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_processing_configuration.input_lambda_processor`
 
 Read-Only:
 
@@ -181,16 +203,16 @@ Read-Only:
 
 
 <a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix`
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema`
 
 Read-Only:
 
-- `record_columns` (Attributes List) A list of `RecordColumn` objects. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_columns))
+- `record_columns` (Attributes List) A list of `RecordColumn` objects. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_columns))
 - `record_encoding` (String) Specifies the encoding of the records in the streaming source. For example, UTF-8.
-- `record_format` (Attributes) Specifies the format of the records on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_format))
+- `record_format` (Attributes) Specifies the format of the records on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format))
 
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_columns"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix.record_columns`
+<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_columns"></a>
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema.record_columns`
 
 Read-Only:
 
@@ -199,24 +221,24 @@ Read-Only:
 - `sql_type` (String) The type of column created in the in-application input stream or reference table.
 
 
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_format"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix.record_format`
+<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format"></a>
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema.record_format`
 
 Read-Only:
 
-- `mapping_parameters` (Attributes) When you configure application input at the time of creating or updating an application, provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_format--mapping_parameters))
+- `mapping_parameters` (Attributes) When you configure application input at the time of creating or updating an application, provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters))
 - `record_format_type` (String) The type of record format.
 
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_format--mapping_parameters"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix.record_format.record_format_type`
+<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters"></a>
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema.record_format.mapping_parameters`
 
 Read-Only:
 
-- `csv_mapping_parameters` (Attributes) Provides additional mapping information when the record format uses delimiters (for example, CSV). (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_format--record_format_type--csv_mapping_parameters))
-- `json_mapping_parameters` (Attributes) Provides additional mapping information when JSON is the record format on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_format--record_format_type--json_mapping_parameters))
+- `csv_mapping_parameters` (Attributes) Provides additional mapping information when the record format uses delimiters (for example, CSV). (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters--csv_mapping_parameters))
+- `json_mapping_parameters` (Attributes) Provides additional mapping information when JSON is the record format on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters--json_mapping_parameters))
 
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_format--record_format_type--csv_mapping_parameters"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix.record_format.record_format_type.json_mapping_parameters`
+<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters--csv_mapping_parameters"></a>
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema.record_format.mapping_parameters.csv_mapping_parameters`
 
 Read-Only:
 
@@ -224,8 +246,8 @@ Read-Only:
 - `record_row_delimiter` (String) The row delimiter. For example, in a CSV format, '\n' is the typical row delimiter.
 
 
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_format--record_format_type--json_mapping_parameters"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix.record_format.record_format_type.json_mapping_parameters`
+<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters--json_mapping_parameters"></a>
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema.record_format.mapping_parameters.json_mapping_parameters`
 
 Read-Only:
 
@@ -236,7 +258,7 @@ Read-Only:
 
 
 <a id="nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_firehose_input"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix`
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.kinesis_firehose_input`
 
 Read-Only:
 
@@ -244,13 +266,22 @@ Read-Only:
 
 
 <a id="nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_streams_input"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix`
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.kinesis_streams_input`
 
 Read-Only:
 
 - `resource_arn` (String) The ARN of the input Kinesis data stream to read.
 
 
+
+
+<a id="nestedatt--application_configuration--vpc_configurations"></a>
+### Nested Schema for `application_configuration.vpc_configurations`
+
+Read-Only:
+
+- `security_group_ids` (List of String) The array of SecurityGroup IDs used by the VPC configuration.
+- `subnet_ids` (List of String) The array of Subnet IDs used by the VPC configuration.
 
 
 <a id="nestedatt--application_configuration--zeppelin_application_configuration"></a>
@@ -289,7 +320,7 @@ Read-Only:
 - `s3_content_location` (Attributes) The location of the custom artifacts. (see [below for nested schema](#nestedatt--application_configuration--zeppelin_application_configuration--custom_artifacts_configuration--s3_content_location))
 
 <a id="nestedatt--application_configuration--zeppelin_application_configuration--custom_artifacts_configuration--maven_reference"></a>
-### Nested Schema for `application_configuration.zeppelin_application_configuration.custom_artifacts_configuration.s3_content_location`
+### Nested Schema for `application_configuration.zeppelin_application_configuration.custom_artifacts_configuration.maven_reference`
 
 Read-Only:
 
@@ -336,6 +367,40 @@ Read-Only:
 
 
 
+<a id="nestedatt--application_maintenance_configuration"></a>
+### Nested Schema for `application_maintenance_configuration`
+
+Read-Only:
+
+- `application_maintenance_window_start_time` (String) The start time for the maintenance window.
+
+
+<a id="nestedatt--run_configuration"></a>
+### Nested Schema for `run_configuration`
+
+Read-Only:
+
+- `application_restore_configuration` (Attributes) Describes the restore behavior of a restarting application. (see [below for nested schema](#nestedatt--run_configuration--application_restore_configuration))
+- `flink_run_configuration` (Attributes) Describes the starting parameters for a Flink-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--run_configuration--flink_run_configuration))
+
+<a id="nestedatt--run_configuration--application_restore_configuration"></a>
+### Nested Schema for `run_configuration.application_restore_configuration`
+
+Read-Only:
+
+- `application_restore_type` (String) Specifies how the application should be restored.
+- `snapshot_name` (String) The identifier of an existing snapshot of application state to use to restart an application. The application uses this value if RESTORE_FROM_CUSTOM_SNAPSHOT is specified for the ApplicationRestoreType.
+
+
+<a id="nestedatt--run_configuration--flink_run_configuration"></a>
+### Nested Schema for `run_configuration.flink_run_configuration`
+
+Read-Only:
+
+- `allow_non_restored_state` (Boolean) When restoring from a snapshot, specifies whether the runtime is allowed to skip a state that cannot be mapped to the new program. Defaults to false. If you update your application without specifying this parameter, AllowNonRestoredState will be set to false, even if it was previously set to true.
+
+
+
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
@@ -343,5 +408,3 @@ Read-Only:
 
 - `key` (String) The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that's 0 to 256 characters in length.
-
-

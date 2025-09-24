@@ -1,0 +1,1 @@
+$ terraform import awscc_iotanalytics_channel.example "channel_name"

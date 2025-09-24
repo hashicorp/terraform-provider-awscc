@@ -1,0 +1,111 @@
+{
+  "typeName": "AWS::MediaPackageV2::OriginEndpointPolicy",
+  "description": "<p>Represents a resource policy that allows or denies access to an origin endpoint.</p>",
+  "definitions": {
+    "CdnAuthConfiguration": {
+      "type": "object",
+      "properties": {
+        "CdnIdentifierSecretArns": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 2048,
+            "minLength": 20
+          },
+          "maxItems": 100,
+          "minItems": 1
+        },
+        "SecretsRoleArn": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 20
+        }
+      },
+      "required": [
+        "CdnIdentifierSecretArns",
+        "SecretsRoleArn"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "CdnAuthConfiguration": {
+      "$ref": "#/definitions/CdnAuthConfiguration"
+    },
+    "ChannelGroupName": {
+      "type": "string",
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "ChannelName": {
+      "type": "string",
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "OriginEndpointName": {
+      "type": "string",
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "Policy": {
+      "type": [
+        "object",
+        "string"
+      ]
+    }
+  },
+  "required": [
+    "ChannelGroupName",
+    "ChannelName",
+    "OriginEndpointName",
+    "Policy"
+  ],
+  "createOnlyProperties": [
+    "/properties/ChannelGroupName",
+    "/properties/ChannelName",
+    "/properties/OriginEndpointName"
+  ],
+  "primaryIdentifier": [
+    "/properties/ChannelGroupName",
+    "/properties/ChannelName",
+    "/properties/OriginEndpointName"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "mediapackagev2:GetOriginEndpointPolicy",
+        "mediapackagev2:PutOriginEndpointPolicy",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "mediapackagev2:GetOriginEndpointPolicy"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "mediapackagev2:GetOriginEndpointPolicy",
+        "mediapackagev2:PutOriginEndpointPolicy",
+        "iam:PassRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "mediapackagev2:GetOriginEndpointPolicy",
+        "mediapackagev2:DeleteOriginEndpointPolicy"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-mediapackagev2",
+  "additionalProperties": false
+}

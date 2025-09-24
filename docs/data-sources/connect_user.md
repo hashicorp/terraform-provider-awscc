@@ -31,6 +31,7 @@ Data Source schema for AWS::Connect::User
 - `security_profile_arns` (Set of String) One or more security profile arns for the user
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
 - `user_arn` (String) The Amazon Resource Name (ARN) for the user.
+- `user_proficiencies` (Attributes List) One or more predefined attributes assigned to a user, with a level that indicates how skilled they are. (see [below for nested schema](#nestedatt--user_proficiencies))
 - `username` (String) The user name for the account.
 
 <a id="nestedatt--identity_info"></a>
@@ -41,6 +42,8 @@ Read-Only:
 - `email` (String) The email address. If you are using SAML for identity management and include this parameter, an error is returned.
 - `first_name` (String) The first name. This is required if you are using Amazon Connect or SAML for identity management.
 - `last_name` (String) The last name. This is required if you are using Amazon Connect or SAML for identity management.
+- `mobile` (String) The mobile phone number.
+- `secondary_email` (String) The secondary email address. If you provide a secondary email, the user receives email notifications -- other than password reset notifications -- to this email address instead of to their primary email address.
 
 
 <a id="nestedatt--phone_config"></a>
@@ -51,6 +54,7 @@ Read-Only:
 - `after_contact_work_time_limit` (Number) The After Call Work (ACW) timeout setting, in seconds.
 - `auto_accept` (Boolean) The Auto accept setting.
 - `desk_phone_number` (String) The phone number for the user's desk phone.
+- `persistent_connection` (Boolean) The Persistent Connection setting.
 - `phone_type` (String) The phone type.
 
 
@@ -63,3 +67,11 @@ Read-Only:
 - `value` (String) The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 
+<a id="nestedatt--user_proficiencies"></a>
+### Nested Schema for `user_proficiencies`
+
+Read-Only:
+
+- `attribute_name` (String) The name of user's proficiency. You must use name of predefined attribute present in the Amazon Connect instance.
+- `attribute_value` (String) The value of user's proficiency. You must use value of predefined attribute present in the Amazon Connect instance.
+- `level` (Number) The level of the proficiency. The valid values are 1, 2, 3, 4 and 5.

@@ -26,6 +26,7 @@ Data Source schema for AWS::CloudWatch::MetricStream
 - `exclude_filters` (Attributes List) Define which metrics will be not streamed. Metrics matched by multiple instances of MetricStreamFilter are joined with an OR operation by default. If both IncludeFilters and ExcludeFilters are omitted, all metrics in the account will be streamed. IncludeFilters and ExcludeFilters are mutually exclusive. Default to null. (see [below for nested schema](#nestedatt--exclude_filters))
 - `firehose_arn` (String) The ARN of the Kinesis Firehose where to stream the data.
 - `include_filters` (Attributes List) Define which metrics will be streamed. Metrics matched by multiple instances of MetricStreamFilter are joined with an OR operation by default. If both IncludeFilters and ExcludeFilters are omitted, all metrics in the account will be streamed. IncludeFilters and ExcludeFilters are mutually exclusive. Default to null. (see [below for nested schema](#nestedatt--include_filters))
+- `include_linked_accounts_metrics` (Boolean) If you are creating a metric stream in a monitoring account, specify true to include metrics from source accounts that are linked to this monitoring account, in the metric stream. The default is false.
 - `last_update_date` (String) The date of the last update of the metric stream.
 - `name` (String) Name of the metric stream.
 - `output_format` (String) The output format of the data streamed to the Kinesis Firehose.
@@ -39,6 +40,7 @@ Data Source schema for AWS::CloudWatch::MetricStream
 
 Read-Only:
 
+- `metric_names` (List of String) Only metrics with MetricNames matching these values will be streamed. Must be set together with Namespace.
 - `namespace` (String) Only metrics with Namespace matching this value will be streamed.
 
 
@@ -47,6 +49,7 @@ Read-Only:
 
 Read-Only:
 
+- `metric_names` (List of String) Only metrics with MetricNames matching these values will be streamed. Must be set together with Namespace.
 - `namespace` (String) Only metrics with Namespace matching this value will be streamed.
 
 
@@ -74,6 +77,4 @@ Read-Only:
 Read-Only:
 
 - `key` (String) A unique identifier for the tag.
-- `value` (String) An optional string, which you can use to describe or define the tag.
-
-
+- `value` (String) String which you can use to describe or define the tag.

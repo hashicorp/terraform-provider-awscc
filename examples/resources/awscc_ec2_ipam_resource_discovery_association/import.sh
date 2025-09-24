@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_ipam_resource_discovery_association.example "ipam_resource_discovery_association_id"

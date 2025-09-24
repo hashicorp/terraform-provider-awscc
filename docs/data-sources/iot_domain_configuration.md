@@ -21,16 +21,21 @@ Data Source schema for AWS::IoT::DomainConfiguration
 
 ### Read-Only
 
+- `application_protocol` (String)
 - `arn` (String)
+- `authentication_type` (String)
 - `authorizer_config` (Attributes) (see [below for nested schema](#nestedatt--authorizer_config))
+- `client_certificate_config` (Attributes) (see [below for nested schema](#nestedatt--client_certificate_config))
 - `domain_configuration_name` (String)
 - `domain_configuration_status` (String)
 - `domain_name` (String)
 - `domain_type` (String)
 - `server_certificate_arns` (List of String)
+- `server_certificate_config` (Attributes) (see [below for nested schema](#nestedatt--server_certificate_config))
 - `server_certificates` (Attributes List) (see [below for nested schema](#nestedatt--server_certificates))
 - `service_type` (String)
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `tls_config` (Attributes) (see [below for nested schema](#nestedatt--tls_config))
 - `validation_certificate_arn` (String)
 
 <a id="nestedatt--authorizer_config"></a>
@@ -40,6 +45,24 @@ Read-Only:
 
 - `allow_authorizer_override` (Boolean)
 - `default_authorizer_name` (String)
+
+
+<a id="nestedatt--client_certificate_config"></a>
+### Nested Schema for `client_certificate_config`
+
+Read-Only:
+
+- `client_certificate_callback_arn` (String)
+
+
+<a id="nestedatt--server_certificate_config"></a>
+### Nested Schema for `server_certificate_config`
+
+Read-Only:
+
+- `enable_ocsp_check` (Boolean)
+- `ocsp_authorized_responder_arn` (String)
+- `ocsp_lambda_arn` (String)
 
 
 <a id="nestedatt--server_certificates"></a>
@@ -61,3 +84,9 @@ Read-Only:
 - `value` (String)
 
 
+<a id="nestedatt--tls_config"></a>
+### Nested Schema for `tls_config`
+
+Read-Only:
+
+- `security_policy` (String)

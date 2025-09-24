@@ -51,5 +51,8 @@
         "schemas:GetResourcePolicy"
       ]
     }
+  },
+  "tagging": {
+    "taggable": false
   }
 }

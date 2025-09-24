@@ -23,26 +23,18 @@ Data Source schema for AWS::QuickSight::Theme
 
 - `arn` (String) <p>The Amazon Resource Name (ARN) of the theme.</p>
 - `aws_account_id` (String)
-- `base_theme_id` (String) <p>The ID of the theme that a custom theme will inherit from. All themes inherit from one of
-			the starting themes defined by Amazon QuickSight. For a list of the starting themes, use
-				<code>ListThemes</code> or choose <b>Themes</b> from
-			within a QuickSight analysis. </p>
+- `base_theme_id` (String)
 - `configuration` (Attributes) <p>The theme configuration. This configuration contains all of the display properties for
             a theme.</p> (see [below for nested schema](#nestedatt--configuration))
 - `created_time` (String) <p>The date and time that the theme was created.</p>
 - `last_updated_time` (String) <p>The date and time that the theme was last updated.</p>
-- `name` (String) <p>A display name for the theme.</p>
-- `permissions` (Attributes List) <p>A valid grouping of resource permissions to apply to the new theme.
-			</p> (see [below for nested schema](#nestedatt--permissions))
-- `tags` (Attributes List) <p>A map of the key-value pairs for the resource tag or tags that you want to add to the
-			resource.</p> (see [below for nested schema](#nestedatt--tags))
+- `name` (String)
+- `permissions` (Attributes List) (see [below for nested schema](#nestedatt--permissions))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `theme_id` (String)
 - `type` (String)
 - `version` (Attributes) <p>A version of a theme.</p> (see [below for nested schema](#nestedatt--version))
-- `version_description` (String) <p>A description of the first version of the theme that you're creating. Every time
-				<code>UpdateTheme</code> is called, a new version is created. Each version of the
-			theme has a description of the version in the <code>VersionDescription</code>
-			field.</p>
+- `version_description` (String)
 
 <a id="nestedatt--configuration"></a>
 ### Nested Schema for `configuration`
@@ -53,12 +45,12 @@ Read-Only:
             hexadecimal color code that consists of six alphanumerical characters, prefixed with
                 <code>#</code>, for example #37BFF5. </p> (see [below for nested schema](#nestedatt--configuration--data_color_palette))
 - `sheet` (Attributes) <p>The theme display options for sheets. </p> (see [below for nested schema](#nestedatt--configuration--sheet))
-- `typography` (Attributes) <p>The typeface for the theme.</p> (see [below for nested schema](#nestedatt--configuration--typography))
+- `typography` (Attributes) (see [below for nested schema](#nestedatt--configuration--typography))
 - `ui_color_palette` (Attributes) <p>The theme colors that apply to UI and to charts, excluding data colors. The colors
             description is a hexadecimal color code that consists of six alphanumerical characters,
             prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User
                 Guide.</i>
-        </p> (see [below for nested schema](#nestedatt--configuration--ui_color_palette))
+         </p> (see [below for nested schema](#nestedatt--configuration--ui_color_palette))
 
 <a id="nestedatt--configuration--data_color_palette"></a>
 ### Nested Schema for `configuration.data_color_palette`
@@ -104,7 +96,7 @@ Read-Only:
 - `margin` (Attributes) <p>The display options for margins around the outside edge of sheets.</p> (see [below for nested schema](#nestedatt--configuration--sheet--tile_layout--margin))
 
 <a id="nestedatt--configuration--sheet--tile_layout--gutter"></a>
-### Nested Schema for `configuration.sheet.tile_layout.margin`
+### Nested Schema for `configuration.sheet.tile_layout.gutter`
 
 Read-Only:
 
@@ -180,16 +172,16 @@ Read-Only:
 - `actions` (List of String) <p>The IAM action to grant or revoke permissions on.</p>
 - `principal` (String) <p>The Amazon Resource Name (ARN) of the principal. This can be one of the
             following:</p>
-        <ul>
+         <ul>
             <li>
-                <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>
+               <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>
             </li>
             <li>
-                <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>
+               <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>
             </li>
             <li>
-                <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight
-                    ARN. Use this option only to share resources (templates) across AWS accounts.
+               <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight
+                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.
                     (This is less common.) </p>
             </li>
          </ul>
@@ -211,7 +203,7 @@ Read-Only:
 
 - `arn` (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
 - `base_theme_id` (String) <p>The Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All
-            themes initially inherit from a default QuickSight theme.</p>
+            themes initially inherit from a default Amazon QuickSight theme.</p>
 - `configuration` (Attributes) <p>The theme configuration. This configuration contains all of the display properties for
             a theme.</p> (see [below for nested schema](#nestedatt--version--configuration))
 - `created_time` (String) <p>The date and time that this theme version was created.</p>
@@ -229,12 +221,12 @@ Read-Only:
             hexadecimal color code that consists of six alphanumerical characters, prefixed with
                 <code>#</code>, for example #37BFF5. </p> (see [below for nested schema](#nestedatt--version--configuration--data_color_palette))
 - `sheet` (Attributes) <p>The theme display options for sheets. </p> (see [below for nested schema](#nestedatt--version--configuration--sheet))
-- `typography` (Attributes) <p>The typeface for the theme.</p> (see [below for nested schema](#nestedatt--version--configuration--typography))
+- `typography` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--typography))
 - `ui_color_palette` (Attributes) <p>The theme colors that apply to UI and to charts, excluding data colors. The colors
             description is a hexadecimal color code that consists of six alphanumerical characters,
             prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User
                 Guide.</i>
-        </p> (see [below for nested schema](#nestedatt--version--configuration--ui_color_palette))
+         </p> (see [below for nested schema](#nestedatt--version--configuration--ui_color_palette))
 
 <a id="nestedatt--version--configuration--data_color_palette"></a>
 ### Nested Schema for `version.configuration.data_color_palette`
@@ -256,14 +248,14 @@ Read-Only:
 - `tile_layout` (Attributes) <p>The display options for the layout of tiles on a sheet.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile_layout))
 
 <a id="nestedatt--version--configuration--sheet--tile"></a>
-### Nested Schema for `version.configuration.sheet.tile_layout`
+### Nested Schema for `version.configuration.sheet.tile`
 
 Read-Only:
 
-- `border` (Attributes) <p>The display options for tile borders for visuals.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile_layout--border))
+- `border` (Attributes) <p>The display options for tile borders for visuals.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile--border))
 
-<a id="nestedatt--version--configuration--sheet--tile_layout--border"></a>
-### Nested Schema for `version.configuration.sheet.tile_layout.border`
+<a id="nestedatt--version--configuration--sheet--tile--border"></a>
+### Nested Schema for `version.configuration.sheet.tile.border`
 
 Read-Only:
 
@@ -355,5 +347,3 @@ Read-Only:
 
 - `message` (String) <p>The error message.</p>
 - `type` (String)
-
-

@@ -118,13 +118,16 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "datasync:TagResource",
+      "datasync:UntagResource",
+      "datasync:ListTagsForResource"
+    ]
   },
   "additionalProperties": false,
   "required": [
-    "OnPremConfig",
-    "ServerHostname",
-    "Subdirectory"
+    "OnPremConfig"
   ],
   "readOnlyProperties": [
     "/properties/LocationArn",
@@ -132,9 +135,6 @@
   ],
   "primaryIdentifier": [
     "/properties/LocationArn"
-  ],
-  "createOnlyProperties": [
-    "/properties/ServerHostname"
   ],
   "writeOnlyProperties": [
     "/properties/ServerHostname",
@@ -145,7 +145,8 @@
       "permissions": [
         "datasync:CreateLocationNfs",
         "datasync:DescribeLocationNfs",
-        "datasync:ListTagsForResource"
+        "datasync:ListTagsForResource",
+        "datasync:TagResource"
       ]
     },
     "read": {

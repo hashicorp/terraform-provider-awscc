@@ -26,5 +26,3 @@ Data Source schema for AWS::Lightsail::StaticIp
 - `is_attached` (Boolean) A Boolean value indicating whether the static IP is attached.
 - `static_ip_arn` (String)
 - `static_ip_name` (String) The name of the static IP address.
-
-

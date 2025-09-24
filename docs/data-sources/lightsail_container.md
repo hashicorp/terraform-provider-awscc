@@ -25,6 +25,8 @@ Data Source schema for AWS::Lightsail::Container
 - `container_service_deployment` (Attributes) Describes a container deployment configuration of an Amazon Lightsail container service. (see [below for nested schema](#nestedatt--container_service_deployment))
 - `is_disabled` (Boolean) A Boolean value to indicate whether the container service is disabled.
 - `power` (String) The power specification for the container service.
+- `principal_arn` (String) The principal ARN of the container service.
+- `private_registry_access` (Attributes) A Boolean value to indicate whether the container service has access to private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. (see [below for nested schema](#nestedatt--private_registry_access))
 - `public_domain_names` (Attributes Set) The public domain names to use with the container service, such as example.com and www.example.com. (see [below for nested schema](#nestedatt--public_domain_names))
 - `scale` (Number) The scale specification for the container service.
 - `service_name` (String) The name for the container service.
@@ -93,6 +95,23 @@ Read-Only:
 
 
 
+<a id="nestedatt--private_registry_access"></a>
+### Nested Schema for `private_registry_access`
+
+Read-Only:
+
+- `ecr_image_puller_role` (Attributes) An object to describe a request to activate or deactivate the role that you can use to grant an Amazon Lightsail container service access to Amazon Elastic Container Registry (Amazon ECR) private repositories. (see [below for nested schema](#nestedatt--private_registry_access--ecr_image_puller_role))
+
+<a id="nestedatt--private_registry_access--ecr_image_puller_role"></a>
+### Nested Schema for `private_registry_access.ecr_image_puller_role`
+
+Read-Only:
+
+- `is_active` (Boolean) A Boolean value that indicates whether to activate the role.
+- `principal_arn` (String) The Amazon Resource Name (ARN) of the role, if it is activated.
+
+
+
 <a id="nestedatt--public_domain_names"></a>
 ### Nested Schema for `public_domain_names`
 
@@ -109,5 +128,3 @@ Read-Only:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-
-

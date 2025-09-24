@@ -44,6 +44,9 @@
         "RuleVariables": {
           "$ref": "#/definitions/RuleVariables"
         },
+        "ReferenceSets": {
+          "$ref": "#/definitions/ReferenceSets"
+        },
         "RulesSource": {
           "$ref": "#/definitions/RulesSource"
         },
@@ -113,6 +116,30 @@
       "minLength": 1,
       "pattern": "^.*$"
     },
+    "ReferenceSets": {
+      "type": "object",
+      "properties": {
+        "IPSetReferences": {
+          "type": "object",
+          "patternProperties": {
+            "": {
+              "$ref": "#/definitions/IPSetReference"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "IPSetReference": {
+      "type": "object",
+      "properties": {
+        "ReferenceArn": {
+          "$ref": "#/definitions/ResourceArn"
+        }
+      },
+      "additionalProperties": false
+    },
     "RulesSource": {
       "type": "object",
       "properties": {
@@ -173,6 +200,14 @@
         "HTTP_HOST"
       ]
     },
+    "SummaryRuleOption": {
+      "type": "string",
+      "enum": [
+        "SID",
+        "MSG",
+        "METADATA"
+      ]
+    },
     "GeneratedRulesType": {
       "type": "string",
       "enum": [
@@ -188,7 +223,8 @@
           "enum": [
             "PASS",
             "DROP",
-            "ALERT"
+            "ALERT",
+            "REJECT"
           ]
         },
         "Header": {
@@ -611,6 +647,20 @@
     "Capacity": {
       "type": "integer"
     },
+    "SummaryConfiguration": {
+      "type": "object",
+      "properties": {
+        "RuleOptions": {
+          "type": "array",
+          "insertionOrder": true,
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/SummaryRuleOption"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
     "Description": {
       "type": "string",
       "minLength": 1,
@@ -625,6 +675,18 @@
         "$ref": "#/definitions/Tag"
       }
     }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "network-firewall:TagResource",
+      "network-firewall:UntagResource",
+      "network-firewall:ListTagsForResource"
+    ]
   },
   "required": [
     "Type",
@@ -648,7 +710,11 @@
       "permissions": [
         "network-firewall:CreateRuleGroup",
         "network-firewall:DescribeRuleGroup",
-        "network-firewall:TagResource"
+        "network-firewall:TagResource",
+        "network-firewall:ListRuleGroups",
+        "iam:CreateServiceLinkedRole",
+        "ec2:GetManagedPrefixListEntries",
+        "ec2:DescribeManagedPrefixLists"
       ]
     },
     "read": {
@@ -662,7 +728,10 @@
         "network-firewall:UpdateRuleGroup",
         "network-firewall:DescribeRuleGroup",
         "network-firewall:TagResource",
-        "network-firewall:UntagResource"
+        "network-firewall:UntagResource",
+        "iam:CreateServiceLinkedRole",
+        "ec2:GetManagedPrefixListEntries",
+        "ec2:DescribeManagedPrefixLists"
       ]
     },
     "delete": {

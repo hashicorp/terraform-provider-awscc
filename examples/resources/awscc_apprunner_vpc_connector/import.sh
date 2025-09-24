@@ -1,1 +1,1 @@
-$ terraform import awscc_apprunner_vpc_connector.example <resource ID>
+$ terraform import awscc_apprunner_vpc_connector.example "vpc_connector_arn"

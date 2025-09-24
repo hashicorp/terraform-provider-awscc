@@ -1,0 +1,1 @@
+$ terraform import awscc_datazone_connection.example "domain_id|connection_id"

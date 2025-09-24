@@ -33,6 +33,11 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "AutoEnableMembers": {
+      "type": "boolean",
+      "default": false,
+      "description": "Indicates whether to automatically enable new organization accounts as member accounts in the organization behavior graph."
     }
   },
   "additionalProperties": false,
@@ -42,34 +47,58 @@
   "primaryIdentifier": [
     "/properties/Arn"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "detective:UntagResource",
+      "detective:TagResource",
+      "detective:ListTagsForResource"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
-        "detective:CreateGraph"
+        "detective:CreateGraph",
+        "detective:ListGraphs",
+        "detective:TagResource",
+        "detective:UpdateOrganizationConfiguration",
+        "organizations:DescribeOrganization"
       ]
     },
     "update": {
       "permissions": [
+        "detective:ListGraphs",
         "detective:UntagResource",
         "detective:TagResource",
-        "detective:ListTagsForResource"
+        "detective:ListTagsForResource",
+        "detective:UpdateOrganizationConfiguration",
+        "organizations:DescribeOrganization"
       ]
     },
     "read": {
       "permissions": [
         "detective:ListGraphs",
-        "detective:ListTagsForResource"
+        "detective:ListTagsForResource",
+        "detective:DescribeOrganizationConfiguration",
+        "organizations:DescribeOrganization"
       ]
     },
     "delete": {
       "permissions": [
-        "detective:DeleteGraph"
+        "detective:DeleteGraph",
+        "detective:ListGraphs"
       ]
     },
     "list": {
       "permissions": [
         "detective:ListGraphs",
-        "detective:ListTagsForResource"
+        "detective:ListTagsForResource",
+        "detective:DescribeOrganizationConfiguration",
+        "organizations:DescribeOrganization"
       ]
     }
   }

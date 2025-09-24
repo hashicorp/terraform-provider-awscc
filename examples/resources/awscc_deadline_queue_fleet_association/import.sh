@@ -1,0 +1,1 @@
+$ terraform import awscc_deadline_queue_fleet_association.example "farm_id|fleet_id|queue_id"

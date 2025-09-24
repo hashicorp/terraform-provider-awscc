@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrockagentcore_code_interpreter_custom.example "code_interpreter_id"

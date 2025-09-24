@@ -23,15 +23,19 @@ Data Source schema for AWS::BillingConductor::PricingRule
 
 - `arn` (String) Pricing rule ARN
 - `associated_pricing_plan_count` (Number) The number of pricing plans associated with pricing rule
+- `billing_entity` (String) The seller of services provided by AWS, their affiliates, or third-party providers selling services via AWS Marketplaces. Supported billing entities are AWS, AWS Marketplace, and AISPL.
 - `creation_time` (Number) Creation timestamp in UNIX epoch time format
 - `description` (String) Pricing rule description
 - `last_modified_time` (Number) Latest modified timestamp in UNIX epoch time format
 - `modifier_percentage` (Number) Pricing rule modifier percentage
 - `name` (String) Pricing rule name
+- `operation` (String) The Operation which a SKU pricing rule is modifying
 - `scope` (String) A term used to categorize the granularity of a Pricing Rule.
 - `service` (String) The service which a pricing rule is applied on
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
-- `type` (String) One of MARKUP or DISCOUNT that describes the direction of the rate that is applied to a pricing plan.
+- `tiering` (Attributes) The set of tiering configurations for the pricing rule. (see [below for nested schema](#nestedatt--tiering))
+- `type` (String) One of MARKUP, DISCOUNT or TIERING that describes the behaviour of the pricing rule.
+- `usage_type` (String) The UsageType which a SKU pricing rule is modifying
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
@@ -42,3 +46,16 @@ Read-Only:
 - `value` (String)
 
 
+<a id="nestedatt--tiering"></a>
+### Nested Schema for `tiering`
+
+Read-Only:
+
+- `free_tier` (Attributes) The possible customizable free tier configurations. (see [below for nested schema](#nestedatt--tiering--free_tier))
+
+<a id="nestedatt--tiering--free_tier"></a>
+### Nested Schema for `tiering.free_tier`
+
+Read-Only:
+
+- `activated` (Boolean)

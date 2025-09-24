@@ -1,0 +1,1151 @@
+{
+  "typeName": "AWS::ARCRegionSwitch::Plan",
+  "description": "Represents a plan that specifies Regions, IAM roles, and workflows of logic required to perform the desired change to your multi-Region application",
+  "definitions": {
+    "AlarmCondition": {
+      "type": "string",
+      "enum": [
+        "red",
+        "green"
+      ]
+    },
+    "AlarmType": {
+      "type": "string",
+      "enum": [
+        "applicationHealth",
+        "trigger"
+      ]
+    },
+    "ArcRoutingControlConfiguration": {
+      "type": "object",
+      "properties": {
+        "TimeoutMinutes": {
+          "type": "number",
+          "default": 60,
+          "minimum": 1
+        },
+        "CrossAccountRole": {
+          "type": "string",
+          "pattern": "^arn:aws[a-zA-Z0-9-]*:iam::[0-9]{12}:role/.+$"
+        },
+        "ExternalId": {
+          "type": "string"
+        },
+        "RegionAndRoutingControls": {
+          "$ref": "#/definitions/RegionAndRoutingControls"
+        }
+      },
+      "required": [
+        "RegionAndRoutingControls"
+      ],
+      "additionalProperties": false
+    },
+    "ArcRoutingControlState": {
+      "type": "object",
+      "properties": {
+        "RoutingControlArn": {
+          "type": "string"
+        },
+        "State": {
+          "$ref": "#/definitions/RoutingControlStateChange"
+        }
+      },
+      "required": [
+        "RoutingControlArn",
+        "State"
+      ],
+      "additionalProperties": false
+    },
+    "Asg": {
+      "type": "object",
+      "properties": {
+        "CrossAccountRole": {
+          "type": "string",
+          "pattern": "^arn:aws[a-zA-Z0-9-]*:iam::[0-9]{12}:role/.+$"
+        },
+        "ExternalId": {
+          "type": "string"
+        },
+        "Arn": {
+          "type": "string",
+          "pattern": "^arn:aws:autoscaling:[a-z0-9-]+:\\d{12}:autoScalingGroup:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}:autoScalingGroupName/[\\S\\s]{1,255}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AssociatedAlarm": {
+      "type": "object",
+      "properties": {
+        "CrossAccountRole": {
+          "type": "string",
+          "pattern": "^arn:aws[a-zA-Z0-9-]*:iam::[0-9]{12}:role/.+$"
+        },
+        "ExternalId": {
+          "type": "string"
+        },
+        "ResourceIdentifier": {
+          "type": "string"
+        },
+        "AlarmType": {
+          "$ref": "#/definitions/AlarmType"
+        }
+      },
+      "required": [
+        "AlarmType",
+        "ResourceIdentifier"
+      ],
+      "additionalProperties": false
+    },
+    "AssociatedAlarmMap": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/AssociatedAlarm"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CustomActionLambdaConfiguration": {
+      "type": "object",
+      "properties": {
+        "TimeoutMinutes": {
+          "type": "number",
+          "default": 60,
+          "minimum": 1
+        },
+        "Lambdas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Lambdas"
+          },
+          "maxItems": 2,
+          "minItems": 1
+        },
+        "RetryIntervalMinutes": {
+          "type": "number"
+        },
+        "RegionToRun": {
+          "$ref": "#/definitions/RegionToRunIn"
+        },
+        "Ungraceful": {
+          "$ref": "#/definitions/LambdaUngraceful"
+        }
+      },
+      "required": [
+        "Lambdas",
+        "RegionToRun",
+        "RetryIntervalMinutes"
+      ],
+      "additionalProperties": false
+    },
+    "Ec2AsgCapacityIncreaseConfiguration": {
+      "type": "object",
+      "properties": {
+        "TimeoutMinutes": {
+          "type": "number",
+          "default": 60,
+          "minimum": 1
+        },
+        "Asgs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Asg"
+          },
+          "maxItems": 2,
+          "minItems": 2
+        },
+        "Ungraceful": {
+          "$ref": "#/definitions/Ec2Ungraceful"
+        },
+        "TargetPercent": {
+          "type": "number",
+          "default": 100
+        },
+        "CapacityMonitoringApproach": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Ec2AsgCapacityMonitoringApproach"
+            },
+            {
+              "default": "sampledMaxInLast24Hours"
+            }
+          ]
+        }
+      },
+      "required": [
+        "Asgs"
+      ],
+      "additionalProperties": false
+    },
+    "Ec2AsgCapacityMonitoringApproach": {
+      "type": "string",
+      "enum": [
+        "sampledMaxInLast24Hours",
+        "autoscalingMaxInLast24Hours"
+      ]
+    },
+    "Ec2Ungraceful": {
+      "type": "object",
+      "properties": {
+        "MinimumSuccessPercentage": {
+          "type": "number",
+          "maximum": 99,
+          "minimum": 0
+        }
+      },
+      "required": [
+        "MinimumSuccessPercentage"
+      ],
+      "additionalProperties": false
+    },
+    "EcsCapacityIncreaseConfiguration": {
+      "type": "object",
+      "properties": {
+        "TimeoutMinutes": {
+          "type": "number",
+          "default": 60,
+          "minimum": 1
+        },
+        "Services": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Service"
+          },
+          "maxItems": 2,
+          "minItems": 2
+        },
+        "Ungraceful": {
+          "$ref": "#/definitions/EcsUngraceful"
+        },
+        "TargetPercent": {
+          "type": "number",
+          "default": 100
+        },
+        "CapacityMonitoringApproach": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/EcsCapacityMonitoringApproach"
+            },
+            {
+              "default": "sampledMaxInLast24Hours"
+            }
+          ]
+        }
+      },
+      "required": [
+        "Services"
+      ],
+      "additionalProperties": false
+    },
+    "EcsCapacityMonitoringApproach": {
+      "type": "string",
+      "enum": [
+        "sampledMaxInLast24Hours",
+        "containerInsightsMaxInLast24Hours"
+      ]
+    },
+    "EcsUngraceful": {
+      "type": "object",
+      "properties": {
+        "MinimumSuccessPercentage": {
+          "type": "number",
+          "maximum": 99,
+          "minimum": 0
+        }
+      },
+      "required": [
+        "MinimumSuccessPercentage"
+      ],
+      "additionalProperties": false
+    },
+    "EksCapacityMonitoringApproach": {
+      "type": "string",
+      "enum": [
+        "sampledMaxInLast24Hours"
+      ]
+    },
+    "EksCluster": {
+      "type": "object",
+      "properties": {
+        "CrossAccountRole": {
+          "type": "string",
+          "pattern": "^arn:aws[a-zA-Z0-9-]*:iam::[0-9]{12}:role/.+$"
+        },
+        "ExternalId": {
+          "type": "string"
+        },
+        "ClusterArn": {
+          "type": "string",
+          "pattern": "^arn:aws[a-zA-Z-]*:eks:[a-z0-9-]+:\\d{12}:cluster/[a-zA-Z0-9][a-zA-Z0-9-_]{0,99}$"
+        }
+      },
+      "required": [
+        "ClusterArn"
+      ],
+      "additionalProperties": false
+    },
+    "EksResourceScalingConfiguration": {
+      "type": "object",
+      "properties": {
+        "TimeoutMinutes": {
+          "type": "number",
+          "default": 60,
+          "minimum": 1
+        },
+        "KubernetesResourceType": {
+          "$ref": "#/definitions/KubernetesResourceType"
+        },
+        "ScalingResources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KubernetesScalingApplication"
+          },
+          "minItems": 1
+        },
+        "EksClusters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EksCluster"
+          },
+          "minItems": 2
+        },
+        "Ungraceful": {
+          "$ref": "#/definitions/EksResourceScalingUngraceful"
+        },
+        "TargetPercent": {
+          "type": "number",
+          "default": 100,
+          "minimum": 1
+        },
+        "CapacityMonitoringApproach": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/EksCapacityMonitoringApproach"
+            },
+            {
+              "default": "sampledMaxInLast24Hours"
+            }
+          ]
+        }
+      },
+      "required": [
+        "KubernetesResourceType"
+      ],
+      "additionalProperties": false
+    },
+    "EksResourceScalingUngraceful": {
+      "type": "object",
+      "properties": {
+        "MinimumSuccessPercentage": {
+          "type": "number",
+          "maximum": 99,
+          "minimum": 0
+        }
+      },
+      "required": [
+        "MinimumSuccessPercentage"
+      ],
+      "additionalProperties": false
+    },
+    "ExecutionApprovalConfiguration": {
+      "type": "object",
+      "properties": {
+        "TimeoutMinutes": {
+          "type": "number",
+          "default": 60,
+          "minimum": 1
+        },
+        "ApprovalRole": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ApprovalRole"
+      ],
+      "additionalProperties": false
+    },
+    "ExecutionBlockConfiguration": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "CustomActionLambdaConfig",
+          "properties": {
+            "CustomActionLambdaConfig": {
+              "$ref": "#/definitions/CustomActionLambdaConfiguration"
+            }
+          },
+          "required": [
+            "CustomActionLambdaConfig"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Ec2AsgCapacityIncreaseConfig",
+          "properties": {
+            "Ec2AsgCapacityIncreaseConfig": {
+              "$ref": "#/definitions/Ec2AsgCapacityIncreaseConfiguration"
+            }
+          },
+          "required": [
+            "Ec2AsgCapacityIncreaseConfig"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "ExecutionApprovalConfig",
+          "properties": {
+            "ExecutionApprovalConfig": {
+              "$ref": "#/definitions/ExecutionApprovalConfiguration"
+            }
+          },
+          "required": [
+            "ExecutionApprovalConfig"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "ArcRoutingControlConfig",
+          "properties": {
+            "ArcRoutingControlConfig": {
+              "$ref": "#/definitions/ArcRoutingControlConfiguration"
+            }
+          },
+          "required": [
+            "ArcRoutingControlConfig"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "GlobalAuroraConfig",
+          "properties": {
+            "GlobalAuroraConfig": {
+              "$ref": "#/definitions/GlobalAuroraConfiguration"
+            }
+          },
+          "required": [
+            "GlobalAuroraConfig"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "ParallelConfig",
+          "properties": {
+            "ParallelConfig": {
+              "$ref": "#/definitions/ParallelExecutionBlockConfiguration"
+            }
+          },
+          "required": [
+            "ParallelConfig"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "RegionSwitchPlanConfig",
+          "properties": {
+            "RegionSwitchPlanConfig": {
+              "$ref": "#/definitions/RegionSwitchPlanConfiguration"
+            }
+          },
+          "required": [
+            "RegionSwitchPlanConfig"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "EcsCapacityIncreaseConfig",
+          "properties": {
+            "EcsCapacityIncreaseConfig": {
+              "$ref": "#/definitions/EcsCapacityIncreaseConfiguration"
+            }
+          },
+          "required": [
+            "EcsCapacityIncreaseConfig"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "EksResourceScalingConfig",
+          "properties": {
+            "EksResourceScalingConfig": {
+              "$ref": "#/definitions/EksResourceScalingConfiguration"
+            }
+          },
+          "required": [
+            "EksResourceScalingConfig"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Route53HealthCheckConfig",
+          "properties": {
+            "Route53HealthCheckConfig": {
+              "$ref": "#/definitions/Route53HealthCheckConfiguration"
+            }
+          },
+          "required": [
+            "Route53HealthCheckConfig"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ExecutionBlockType": {
+      "type": "string",
+      "enum": [
+        "CustomActionLambda",
+        "ManualApproval",
+        "AuroraGlobalDatabase",
+        "EC2AutoScaling",
+        "ARCRoutingControl",
+        "ARCRegionSwitchPlan",
+        "Parallel",
+        "ECSServiceScaling",
+        "EKSResourceScaling",
+        "Route53HealthCheck"
+      ]
+    },
+    "GlobalAuroraConfiguration": {
+      "type": "object",
+      "properties": {
+        "TimeoutMinutes": {
+          "type": "number",
+          "default": 60,
+          "minimum": 1
+        },
+        "CrossAccountRole": {
+          "type": "string",
+          "pattern": "^arn:aws[a-zA-Z0-9-]*:iam::[0-9]{12}:role/.+$"
+        },
+        "ExternalId": {
+          "type": "string"
+        },
+        "Behavior": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/GlobalAuroraDefaultBehavior"
+            },
+            {
+              "default": "switchoverOnly"
+            }
+          ]
+        },
+        "Ungraceful": {
+          "$ref": "#/definitions/GlobalAuroraUngraceful"
+        },
+        "GlobalClusterIdentifier": {
+          "type": "string"
+        },
+        "DatabaseClusterArns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "Behavior",
+        "DatabaseClusterArns",
+        "GlobalClusterIdentifier"
+      ],
+      "additionalProperties": false
+    },
+    "GlobalAuroraDefaultBehavior": {
+      "type": "string",
+      "enum": [
+        "switchoverOnly",
+        "failover"
+      ]
+    },
+    "GlobalAuroraUngraceful": {
+      "type": "object",
+      "properties": {
+        "Ungraceful": {
+          "$ref": "#/definitions/GlobalAuroraUngracefulBehavior"
+        }
+      },
+      "additionalProperties": false
+    },
+    "GlobalAuroraUngracefulBehavior": {
+      "type": "string",
+      "enum": [
+        "failover"
+      ]
+    },
+    "KubernetesResourceType": {
+      "type": "object",
+      "properties": {
+        "ApiVersion": {
+          "type": "string"
+        },
+        "Kind": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ApiVersion",
+        "Kind"
+      ],
+      "additionalProperties": false
+    },
+    "KubernetesScalingApplication": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/RegionalScalingResource"
+        }
+      },
+      "additionalProperties": false
+    },
+    "KubernetesScalingResource": {
+      "type": "object",
+      "properties": {
+        "Namespace": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,61}[a-z0-9]$"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "HpaName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name",
+        "Namespace"
+      ],
+      "additionalProperties": false
+    },
+    "LambdaUngraceful": {
+      "type": "object",
+      "properties": {
+        "Behavior": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/LambdaUngracefulBehavior"
+            },
+            {
+              "default": "skip"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "LambdaUngracefulBehavior": {
+      "type": "string",
+      "enum": [
+        "skip"
+      ]
+    },
+    "Lambdas": {
+      "type": "object",
+      "properties": {
+        "CrossAccountRole": {
+          "type": "string",
+          "pattern": "^arn:aws[a-zA-Z0-9-]*:iam::[0-9]{12}:role/.+$"
+        },
+        "ExternalId": {
+          "type": "string"
+        },
+        "Arn": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ParallelExecutionBlockConfiguration": {
+      "type": "object",
+      "properties": {
+        "Steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Step"
+          }
+        }
+      },
+      "required": [
+        "Steps"
+      ],
+      "additionalProperties": false
+    },
+    "RecoveryApproach": {
+      "type": "string",
+      "enum": [
+        "activeActive",
+        "activePassive"
+      ]
+    },
+    "RegionAndRoutingControls": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArcRoutingControlState"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "RegionSwitchPlanConfiguration": {
+      "type": "object",
+      "properties": {
+        "CrossAccountRole": {
+          "type": "string",
+          "pattern": "^arn:aws[a-zA-Z0-9-]*:iam::[0-9]{12}:role/.+$"
+        },
+        "ExternalId": {
+          "type": "string"
+        },
+        "Arn": {
+          "type": "string",
+          "pattern": "^arn:aws[a-zA-Z-]*:arc-region-switch::[0-9]{12}:plan/([a-zA-Z0-9](?:[a-zA-Z0-9-]{0,30}[a-zA-Z0-9])?):([a-z0-9]{6})$"
+        }
+      },
+      "required": [
+        "Arn"
+      ],
+      "additionalProperties": false
+    },
+    "RegionToRunIn": {
+      "type": "string",
+      "enum": [
+        "activatingRegion",
+        "deactivatingRegion"
+      ]
+    },
+    "RegionalScalingResource": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/KubernetesScalingResource"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Route53HealthCheckConfiguration": {
+      "type": "object",
+      "properties": {
+        "TimeoutMinutes": {
+          "type": "number",
+          "default": 60,
+          "minimum": 1
+        },
+        "CrossAccountRole": {
+          "type": "string",
+          "pattern": "^arn:aws[a-zA-Z0-9-]*:iam::[0-9]{12}:role/.+$"
+        },
+        "ExternalId": {
+          "type": "string"
+        },
+        "HostedZoneId": {
+          "type": "string",
+          "maxLength": 32,
+          "minLength": 1
+        },
+        "RecordName": {
+          "type": "string",
+          "maxLength": 1024,
+          "minLength": 1
+        },
+        "RecordSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Route53ResourceRecordSet"
+          }
+        }
+      },
+      "required": [
+        "HostedZoneId",
+        "RecordName"
+      ],
+      "additionalProperties": false
+    },
+    "Route53ResourceRecordSet": {
+      "type": "object",
+      "properties": {
+        "RecordSetIdentifier": {
+          "type": "string",
+          "maxLength": 1024,
+          "minLength": 1
+        },
+        "Region": {
+          "type": "string",
+          "pattern": "^[a-z]{2}-[a-z-]+-\\d+$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RoutingControlStateChange": {
+      "type": "string",
+      "enum": [
+        "On",
+        "Off"
+      ]
+    },
+    "Service": {
+      "type": "object",
+      "properties": {
+        "CrossAccountRole": {
+          "type": "string",
+          "pattern": "^arn:aws[a-zA-Z0-9-]*:iam::[0-9]{12}:role/.+$"
+        },
+        "ExternalId": {
+          "type": "string"
+        },
+        "ClusterArn": {
+          "type": "string",
+          "pattern": "^arn:aws:ecs:[a-z0-9-]+:\\d{12}:cluster/[a-zA-Z0-9_-]{1,255}$"
+        },
+        "ServiceArn": {
+          "type": "string",
+          "pattern": "^arn:aws:ecs:[a-z0-9-]+:\\d{12}:service/[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]{1,255}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Step": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "ExecutionBlockConfiguration": {
+          "$ref": "#/definitions/ExecutionBlockConfiguration"
+        },
+        "ExecutionBlockType": {
+          "$ref": "#/definitions/ExecutionBlockType"
+        }
+      },
+      "required": [
+        "ExecutionBlockConfiguration",
+        "ExecutionBlockType",
+        "Name"
+      ],
+      "additionalProperties": false
+    },
+    "Tags": {
+      "type": "object",
+      "maxProperties": 200,
+      "minProperties": 0,
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "Trigger": {
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string"
+        },
+        "TargetRegion": {
+          "type": "string",
+          "pattern": "^[a-z]{2}-[a-z-]+-\\d+$"
+        },
+        "Action": {
+          "$ref": "#/definitions/WorkflowTargetAction"
+        },
+        "Conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TriggerCondition"
+          },
+          "maxItems": 10,
+          "minItems": 1
+        },
+        "MinDelayMinutesBetweenExecutions": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "Action",
+        "Conditions",
+        "MinDelayMinutesBetweenExecutions",
+        "TargetRegion"
+      ],
+      "additionalProperties": false
+    },
+    "TriggerCondition": {
+      "type": "object",
+      "properties": {
+        "AssociatedAlarmName": {
+          "type": "string"
+        },
+        "Condition": {
+          "$ref": "#/definitions/AlarmCondition"
+        }
+      },
+      "required": [
+        "AssociatedAlarmName",
+        "Condition"
+      ],
+      "additionalProperties": false
+    },
+    "Workflow": {
+      "type": "object",
+      "properties": {
+        "Steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Step"
+          }
+        },
+        "WorkflowTargetAction": {
+          "$ref": "#/definitions/WorkflowTargetAction"
+        },
+        "WorkflowTargetRegion": {
+          "type": "string",
+          "pattern": "^[a-z]{2}-[a-z-]+-\\d+$"
+        },
+        "WorkflowDescription": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "WorkflowTargetAction"
+      ],
+      "additionalProperties": false
+    },
+    "WorkflowTargetAction": {
+      "type": "string",
+      "enum": [
+        "activate",
+        "deactivate"
+      ]
+    },
+    "HealthCheckState": {
+      "type": "object",
+      "properties": {
+        "HealthCheckId": {
+          "type": "string"
+        },
+        "Region": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "HealthChecks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/HealthCheckState"
+      },
+      "maxItems": 2,
+      "minItems": 2
+    },
+    "HealthCheckIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "HealthCheckRecordNames": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "HealthCheckRegions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "HostedZoneIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "pattern": "^arn:aws[a-zA-Z-]*:arc-region-switch::[0-9]{12}:plan/([a-zA-Z0-9](?:[a-zA-Z0-9-]{0,30}[a-zA-Z0-9])?):([a-z0-9]{6})$"
+    },
+    "AssociatedAlarms": {
+      "$ref": "#/definitions/AssociatedAlarmMap"
+    },
+    "Description": {
+      "type": "string"
+    },
+    "ExecutionRole": {
+      "type": "string",
+      "pattern": "^arn:aws[a-zA-Z0-9-]*:iam::[0-9]{12}:role/.+$"
+    },
+    "Name": {
+      "type": "string",
+      "maxLength": 32,
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,30}[a-zA-Z0-9])?$"
+    },
+    "Owner": {
+      "type": "string",
+      "pattern": "^\\d{12}$"
+    },
+    "PrimaryRegion": {
+      "type": "string",
+      "pattern": "^[a-z]{2}-[a-z-]+-\\d+$"
+    },
+    "RecoveryApproach": {
+      "$ref": "#/definitions/RecoveryApproach"
+    },
+    "RecoveryTimeObjectiveMinutes": {
+      "type": "number",
+      "maximum": 10080,
+      "minimum": 1
+    },
+    "Regions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z]{2}-[a-z-]+-\\d+$"
+      },
+      "maxItems": 2,
+      "minItems": 2
+    },
+    "Tags": {
+      "$ref": "#/definitions/Tags"
+    },
+    "Triggers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Trigger"
+      }
+    },
+    "Version": {
+      "type": "string"
+    },
+    "Workflows": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Workflow"
+      }
+    },
+    "HealthChecksForPlan": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/HealthChecks"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Route53HealthChecks": {
+      "type": "object",
+      "properties": {
+        "HealthCheckIds": {
+          "$ref": "#/definitions/HealthCheckIds"
+        },
+        "RecordNames": {
+          "$ref": "#/definitions/HealthCheckRecordNames"
+        },
+        "Regions": {
+          "$ref": "#/definitions/HealthCheckRegions"
+        },
+        "HostedZoneIds": {
+          "$ref": "#/definitions/HostedZoneIds"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "ExecutionRole",
+    "Name",
+    "RecoveryApproach",
+    "Regions",
+    "Workflows"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Owner",
+    "/properties/Version",
+    "/properties/HealthChecksForPlan",
+    "/properties/Route53HealthChecks"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/PrimaryRegion",
+    "/properties/RecoveryApproach",
+    "/properties/Regions"
+  ],
+  "deprecatedProperties": [
+    "/properties/HealthChecksForPlan"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "arc-region-switch:TagResource",
+      "arc-region-switch:UntagResource",
+      "arc-region-switch:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "arc-region-switch:CreatePlan",
+        "arc-region-switch:GetPlan",
+        "arc-region-switch:ListRoute53HealthChecks",
+        "arc-region-switch:ListTagsForResource",
+        "arc-region-switch:TagResource",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "arc-region-switch:GetPlan",
+        "arc-region-switch:ListRoute53HealthChecks",
+        "arc-region-switch:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "arc-region-switch:GetPlan",
+        "arc-region-switch:ListRoute53HealthChecks",
+        "arc-region-switch:ListTagsForResource",
+        "arc-region-switch:TagResource",
+        "arc-region-switch:UntagResource",
+        "arc-region-switch:UpdatePlan",
+        "iam:PassRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "arc-region-switch:DeletePlan",
+        "arc-region-switch:GetPlan"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "arc-region-switch:ListPlans"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

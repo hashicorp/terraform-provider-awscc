@@ -22,6 +22,32 @@
         "Key",
         "Value"
       ]
+    },
+    "EncryptionConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "KmsKeyId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "KmsDataKeyReusePeriodSeconds": {
+          "type": "integer",
+          "minimum": 60,
+          "maximum": 900
+        },
+        "Type": {
+          "type": "string",
+          "enum": [
+            "CUSTOMER_MANAGED_KMS_KEY",
+            "AWS_OWNED_KEY"
+          ]
+        }
+      },
+      "required": [
+        "Type"
+      ]
     }
   },
   "properties": {
@@ -42,6 +68,9 @@
       "items": {
         "$ref": "#/definitions/TagsEntry"
       }
+    },
+    "EncryptionConfiguration": {
+      "$ref": "#/definitions/EncryptionConfiguration"
     }
   },
   "additionalProperties": false,
@@ -50,7 +79,12 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "states:UntagResource",
+      "states:TagResource",
+      "states:ListTagsForResource"
+    ]
   },
   "required": [
     "Name"
@@ -62,12 +96,16 @@
     "/properties/Arn"
   ],
   "createOnlyProperties": [
-    "/properties/Name"
+    "/properties/Name",
+    "/properties/EncryptionConfiguration"
   ],
   "handlers": {
     "create": {
       "permissions": [
-        "states:CreateActivity"
+        "states:CreateActivity",
+        "states:DescribeActivity",
+        "states:TagResource",
+        "kms:DescribeKey"
       ]
     },
     "read": {
@@ -85,7 +123,13 @@
     },
     "delete": {
       "permissions": [
+        "states:DescribeActivity",
         "states:DeleteActivity"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "states:ListActivities"
       ]
     }
   }

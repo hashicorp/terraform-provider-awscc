@@ -1,1 +1,1 @@
-$ terraform import awscc_forecast_dataset.example <resource ID>
+$ terraform import awscc_forecast_dataset.example "arn"

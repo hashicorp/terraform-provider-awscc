@@ -84,6 +84,18 @@
       ]
     }
   },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "mediapackage-vod:TagResource",
+      "mediapackage-vod:UntagResource",
+      "mediapackage-vod:ListTagsForResource"
+    ]
+  },
   "additionalProperties": false,
   "required": [
     "Id",
@@ -94,16 +106,21 @@
   "readOnlyProperties": [
     "/properties/Arn",
     "/properties/CreatedAt",
-    "/properties/EgressEndpoints"
+    "/properties/EgressEndpoints/*/PackagingConfigurationId",
+    "/properties/EgressEndpoints/*/Url"
   ],
   "primaryIdentifier": [
     "/properties/Id"
+  ],
+  "createOnlyProperties": [
+    "/properties/Id",
+    "/properties/Tags"
   ],
   "handlers": {
     "create": {
       "permissions": [
         "mediapackage-vod:CreateAsset",
-        "mediapackage-vod:DescribePackagingGroup",
+        "mediapackage-vod:DescribeAsset",
         "mediapackage-vod:TagResource",
         "iam:PassRole"
       ]
@@ -115,6 +132,7 @@
     },
     "delete": {
       "permissions": [
+        "mediapackage-vod:DescribeAsset",
         "mediapackage-vod:DeleteAsset"
       ]
     },

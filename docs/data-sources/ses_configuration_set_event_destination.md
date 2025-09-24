@@ -21,6 +21,7 @@ Data Source schema for AWS::SES::ConfigurationSetEventDestination
 
 ### Read-Only
 
+- `configuration_set_event_destination_id` (String)
 - `configuration_set_name` (String) The name of the configuration set that contains the event destination.
 - `event_destination` (Attributes) The event destination object. (see [below for nested schema](#nestedatt--event_destination))
 
@@ -31,9 +32,11 @@ Read-Only:
 
 - `cloudwatch_destination` (Attributes) An object that contains the names, default values, and sources of the dimensions associated with an Amazon CloudWatch event destination. (see [below for nested schema](#nestedatt--event_destination--cloudwatch_destination))
 - `enabled` (Boolean) Sets whether Amazon SES publishes events to this destination when you send an email with the associated configuration set. Set to true to enable publishing to this destination; set to false to prevent publishing to this destination. The default value is false.
+- `event_bridge_destination` (Attributes) An object that contains Event bus ARN associated with the event bridge destination. (see [below for nested schema](#nestedatt--event_destination--event_bridge_destination))
 - `kinesis_firehose_destination` (Attributes) An object that contains the delivery stream ARN and the IAM role ARN associated with an Amazon Kinesis Firehose event destination. (see [below for nested schema](#nestedatt--event_destination--kinesis_firehose_destination))
-- `matching_event_types` (List of String) The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure.
+- `matching_event_types` (List of String) The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure, deliveryDelay, and subscription.
 - `name` (String) The name of the event destination set.
+- `sns_destination` (Attributes) An object that contains SNS topic ARN associated event destination. (see [below for nested schema](#nestedatt--event_destination--sns_destination))
 
 <a id="nestedatt--event_destination--cloudwatch_destination"></a>
 ### Nested Schema for `event_destination.cloudwatch_destination`
@@ -53,6 +56,14 @@ Read-Only:
 
 
 
+<a id="nestedatt--event_destination--event_bridge_destination"></a>
+### Nested Schema for `event_destination.event_bridge_destination`
+
+Read-Only:
+
+- `event_bus_arn` (String)
+
+
 <a id="nestedatt--event_destination--kinesis_firehose_destination"></a>
 ### Nested Schema for `event_destination.kinesis_firehose_destination`
 
@@ -62,3 +73,9 @@ Read-Only:
 - `iam_role_arn` (String) The ARN of the IAM role under which Amazon SES publishes email sending events to the Amazon Kinesis Firehose stream.
 
 
+<a id="nestedatt--event_destination--sns_destination"></a>
+### Nested Schema for `event_destination.sns_destination`
+
+Read-Only:
+
+- `topic_arn` (String)

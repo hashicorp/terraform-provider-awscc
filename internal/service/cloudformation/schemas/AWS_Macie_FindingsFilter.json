@@ -34,7 +34,8 @@
             "type": "string"
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "Criterion": {
       "description": "Map of filter criteria.",
@@ -43,7 +44,8 @@
         "": {
           "$ref": "#/definitions/CriterionAdditionalProperties"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "FindingCriteria": {
       "type": "object",
@@ -51,7 +53,8 @@
         "Criterion": {
           "$ref": "#/definitions/Criterion"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "FindingFilterAction": {
       "type": "string",
@@ -71,6 +74,25 @@
           "type": "string"
         }
       }
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The tag's key."
+        },
+        "Value": {
+          "type": "string",
+          "description": "The tag's value."
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -102,13 +124,25 @@
       "description": "Findings filter ARN.",
       "type": "string"
     },
-    "FindingsFilterListItems": {
-      "description": "Findings filters list.",
+    "Tags": {
+      "description": "A collection of tags associated with a resource",
       "type": "array",
+      "insertionOrder": false,
       "items": {
-        "$ref": "#/definitions/FindingsFilterListItem"
+        "$ref": "#/definitions/Tag"
       }
     }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "macie2:TagResource",
+      "macie2:UntagResource"
+    ]
   },
   "required": [
     "Name",
@@ -117,8 +151,7 @@
   "additionalProperties": false,
   "readOnlyProperties": [
     "/properties/Id",
-    "/properties/Arn",
-    "/properties/FindingsFilterListItems"
+    "/properties/Arn"
   ],
   "primaryIdentifier": [
     "/properties/Id"
@@ -135,7 +168,8 @@
     "create": {
       "permissions": [
         "macie2:GetFindingsFilter",
-        "macie2:CreateFindingsFilter"
+        "macie2:CreateFindingsFilter",
+        "macie2:TagResource"
       ]
     },
     "read": {
@@ -146,7 +180,9 @@
     "update": {
       "permissions": [
         "macie2:GetFindingsFilter",
-        "macie2:UpdateFindingsFilter"
+        "macie2:UpdateFindingsFilter",
+        "macie2:TagResource",
+        "macie2:UntagResource"
       ]
     },
     "delete": {

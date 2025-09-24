@@ -21,8 +21,19 @@ Data Source schema for AWS::Cassandra::Keyspace
 
 ### Read-Only
 
+- `client_side_timestamps_enabled` (Boolean) Indicates whether client-side timestamps are enabled (true) or disabled (false) for all tables in the keyspace. To add a Region to a single-Region keyspace with at least one table, the value must be set to true. After you enabled client-side timestamps for a table, you can?t disable it again.
 - `keyspace_name` (String) Name for Cassandra keyspace
+- `replication_specification` (Attributes) (see [below for nested schema](#nestedatt--replication_specification))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--replication_specification"></a>
+### Nested Schema for `replication_specification`
+
+Read-Only:
+
+- `region_list` (Set of String)
+- `replication_strategy` (String)
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
@@ -31,5 +42,3 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
-
-

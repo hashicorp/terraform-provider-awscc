@@ -24,17 +24,19 @@ Data Source schema for AWS::NetworkManager::ConnectAttachment
 - `attachment_id` (String) The ID of the attachment.
 - `attachment_policy_rule_number` (Number) The policy rule number associated with the attachment.
 - `attachment_type` (String) The type of attachment.
-- `core_network_arn` (String) The ARN of a core network for the VPC attachment.
+- `core_network_arn` (String) The ARN of a core network.
 - `core_network_id` (String) ID of the CoreNetwork that the attachment will be attached to.
 - `created_at` (String) Creation time of the attachment.
 - `edge_location` (String) Edge location of the attachment.
+- `network_function_group_name` (String) The name of the network function group attachment.
 - `options` (Attributes) Protocol options for connect attachment (see [below for nested schema](#nestedatt--options))
 - `owner_account_id` (String) The ID of the attachment account owner.
+- `proposed_network_function_group_change` (Attributes) The attachment to move from one network function group to another. (see [below for nested schema](#nestedatt--proposed_network_function_group_change))
 - `proposed_segment_change` (Attributes) The attachment to move from one segment to another. (see [below for nested schema](#nestedatt--proposed_segment_change))
 - `resource_arn` (String) The attachment resource ARN.
 - `segment_name` (String) The name of the segment attachment.
 - `state` (String) State of the attachment.
-- `tags` (Attributes List) Tags for the attachment. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) Tags for the attachment. (see [below for nested schema](#nestedatt--tags))
 - `transport_attachment_id` (String) Id of transport attachment
 - `updated_at` (String) Last update time of the attachment.
 
@@ -46,14 +48,33 @@ Read-Only:
 - `protocol` (String) Tunnel protocol for connect attachment
 
 
+<a id="nestedatt--proposed_network_function_group_change"></a>
+### Nested Schema for `proposed_network_function_group_change`
+
+Read-Only:
+
+- `attachment_policy_rule_number` (Number) The rule number in the policy document that applies to this change.
+- `network_function_group_name` (String) The name of the network function group to change.
+- `tags` (Attributes Set) The key-value tags that changed for the network function group. (see [below for nested schema](#nestedatt--proposed_network_function_group_change--tags))
+
+<a id="nestedatt--proposed_network_function_group_change--tags"></a>
+### Nested Schema for `proposed_network_function_group_change.tags`
+
+Read-Only:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+
+
 <a id="nestedatt--proposed_segment_change"></a>
 ### Nested Schema for `proposed_segment_change`
 
 Read-Only:
 
-- `attachment_policy_rule_number` (Number) New policy rule number of the attachment
-- `segment_name` (String) Proposed segment name
-- `tags` (Attributes List) Proposed tags for the Segment. (see [below for nested schema](#nestedatt--proposed_segment_change--tags))
+- `attachment_policy_rule_number` (Number) The rule number in the policy document that applies to this change.
+- `segment_name` (String) The name of the segment to change.
+- `tags` (Attributes Set) The list of key-value tags that changed for the segment. (see [below for nested schema](#nestedatt--proposed_segment_change--tags))
 
 <a id="nestedatt--proposed_segment_change--tags"></a>
 ### Nested Schema for `proposed_segment_change.tags`
@@ -72,5 +93,3 @@ Read-Only:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-
-

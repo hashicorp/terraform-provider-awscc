@@ -1,0 +1,1 @@
+$ terraform import awscc_notifications_managed_notification_account_contact_association.example "managed_notification_configuration_arn|contact_identifier"

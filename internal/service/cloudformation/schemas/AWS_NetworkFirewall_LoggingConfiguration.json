@@ -35,7 +35,8 @@
           "type": "string",
           "enum": [
             "ALERT",
-            "FLOW"
+            "FLOW",
+            "TLS"
           ]
         },
         "LogDestinationType": {
@@ -80,7 +81,13 @@
     },
     "LoggingConfiguration": {
       "$ref": "#/definitions/LoggingConfiguration"
+    },
+    "EnableMonitoringDashboard": {
+      "type": "boolean"
     }
+  },
+  "tagging": {
+    "taggable": false
   },
   "required": [
     "FirewallArn",
@@ -106,7 +113,8 @@
         "logs:DescribeLogGroups",
         "iam:CreateServiceLinkedRole",
         "firehose:TagDeliveryStream",
-        "network-firewall:UpdateLoggingConfiguration"
+        "network-firewall:UpdateLoggingConfiguration",
+        "network-firewall:DescribeLoggingConfiguration"
       ]
     },
     "read": {
@@ -130,7 +138,8 @@
         "logs:DescribeLogGroups",
         "iam:CreateServiceLinkedRole",
         "firehose:TagDeliveryStream",
-        "network-firewall:UpdateLoggingConfiguration"
+        "network-firewall:UpdateLoggingConfiguration",
+        "network-firewall:DescribeLoggingConfiguration"
       ]
     },
     "delete": {
@@ -138,13 +147,7 @@
         "logs:DeleteLogDelivery",
         "logs:ListLogDeliveries",
         "logs:GetLogDelivery",
-        "network-firewall:UpdateLoggingConfiguration"
-      ]
-    },
-    "list": {
-      "permissions": [
-        "logs:GetLogDelivery",
-        "logs:ListLogDeliveries",
+        "network-firewall:UpdateLoggingConfiguration",
         "network-firewall:DescribeLoggingConfiguration"
       ]
     }

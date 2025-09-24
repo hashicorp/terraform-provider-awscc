@@ -21,7 +21,7 @@ Data Source schema for AWS::MWAA::Environment
 
 ### Read-Only
 
-- `airflow_configuration_options` (Map of String) Key/value pairs representing Airflow configuration variables.
+- `airflow_configuration_options` (String) Key/value pairs representing Airflow configuration variables.
     Keys are prefixed by their section:
 
     [core]
@@ -32,7 +32,10 @@ Data Source schema for AWS::MWAA::Environment
     "core.dags_folder": "{AIRFLOW_HOME}/dags"
 - `airflow_version` (String) Version of airflow to deploy to the environment.
 - `arn` (String) ARN for the MWAA environment.
+- `celery_executor_queue` (String) The celery executor queue associated with the environment.
 - `dag_s3_path` (String) Represents an S3 prefix relative to the root of an S3 bucket.
+- `database_vpc_endpoint_service` (String) The database VPC endpoint service name.
+- `endpoint_management` (String) Defines whether the VPC endpoints configured for the environment are created, and managed, by the customer or by Amazon MWAA.
 - `environment_class` (String) Templated configuration for airflow processes and backing infrastructure.
 - `execution_role_arn` (String) IAM role to be used by tasks.
 - `kms_key` (String) The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for MWAA data encryption.
@@ -49,7 +52,9 @@ Data Source schema for AWS::MWAA::Environment
 
     AWS authenticates the CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, the action can appear to complete, but eventually fails.
 - `logging_configuration` (Attributes) Logging configuration for the environment. (see [below for nested schema](#nestedatt--logging_configuration))
+- `max_webservers` (Number) Maximum webserver compute units.
 - `max_workers` (Number) Maximum worker compute units.
+- `min_webservers` (Number) Minimum webserver compute units.
 - `min_workers` (Number) Minimum worker compute units.
 - `name` (String) Customer-defined identifier for the environment, unique per customer region.
 - `network_configuration` (Attributes) Configures the network resources of the environment. (see [below for nested schema](#nestedatt--network_configuration))
@@ -59,10 +64,14 @@ Data Source schema for AWS::MWAA::Environment
 - `requirements_s3_path` (String) Represents an S3 prefix relative to the root of an S3 bucket.
 - `schedulers` (Number) Scheduler compute units.
 - `source_bucket_arn` (String) ARN for the AWS S3 bucket to use as the source of DAGs and plugins for the environment.
-- `tags` (Map of String) A map of tags for the environment.
+- `startup_script_s3_object_version` (String) Represents an version ID for an S3 object.
+- `startup_script_s3_path` (String) Represents an S3 prefix relative to the root of an S3 bucket.
+- `tags` (String) A map of tags for the environment.
 - `webserver_access_mode` (String) Choice for mode of webserver access including over public internet or via private VPC endpoint.
 - `webserver_url` (String) Url endpoint for the environment's Airflow UI.
+- `webserver_vpc_endpoint_service` (String) The webserver VPC endpoint service name, applicable if private webserver access mode selected.
 - `weekly_maintenance_window_start` (String) Start time for the weekly maintenance window.
+- `worker_replacement_strategy` (String) The worker replacement strategy to use when updating the environment. Valid values: `FORCED`, `GRACEFUL`. FORCED means Apache Airflow workers will be stopped and replaced without waiting for tasks to complete before an update. GRACEFUL means Apache Airflow workers will be able to complete running tasks for up to 12 hours during an update before being stopped and replaced.
 
 <a id="nestedatt--logging_configuration"></a>
 ### Nested Schema for `logging_configuration`
@@ -133,5 +142,3 @@ Read-Only:
 
 - `security_group_ids` (List of String) A list of security groups to use for the environment.
 - `subnet_ids` (List of String) A list of subnets to use for the environment. These must be private subnets, in the same VPC, in two different availability zones.
-
-

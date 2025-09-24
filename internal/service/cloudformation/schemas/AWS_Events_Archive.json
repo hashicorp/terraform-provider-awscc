@@ -6,7 +6,8 @@
     "ArchiveName": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 48
+      "maxLength": 48,
+      "pattern": "[\\.\\-_A-Za-z0-9]+"
     },
     "SourceArn": {
       "type": "string"
@@ -18,18 +19,23 @@
       "type": "object"
     },
     "Arn": {
-      "type": "string"
+      "type": "string",
+      "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:.+\\/.+$"
     },
     "RetentionDays": {
       "type": "integer"
+    },
+    "KmsKeyIdentifier": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 0
     }
   },
   "required": [
     "SourceArn"
   ],
   "readOnlyProperties": [
-    "/properties/Arn",
-    "/properties/ArchiveName"
+    "/properties/Arn"
   ],
   "createOnlyProperties": [
     "/properties/ArchiveName",
@@ -38,11 +44,20 @@
   "primaryIdentifier": [
     "/properties/ArchiveName"
   ],
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
   "handlers": {
     "create": {
       "permissions": [
         "events:DescribeArchive",
-        "events:CreateArchive"
+        "events:CreateArchive",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
       ]
     },
     "delete": {
@@ -59,12 +74,18 @@
     "update": {
       "permissions": [
         "events:DescribeArchive",
-        "events:UpdateArchive"
+        "events:UpdateArchive",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey",
+        "kms:Decrypt",
+        "kms:ReEncryptTo",
+        "kms:ReEncryptFrom"
       ]
     },
     "read": {
       "permissions": [
-        "events:DescribeArchive"
+        "events:DescribeArchive",
+        "kms:Decrypt"
       ]
     }
   }

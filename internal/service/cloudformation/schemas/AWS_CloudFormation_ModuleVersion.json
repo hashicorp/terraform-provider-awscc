@@ -100,12 +100,6 @@
         "cloudformation:DeregisterType",
         "cloudformation:DescribeType"
       ]
-    },
-    "list": {
-      "permissions": [
-        "cloudformation:ListTypes",
-        "cloudformation:ListTypeVersions"
-      ]
     }
   },
   "additionalProperties": false

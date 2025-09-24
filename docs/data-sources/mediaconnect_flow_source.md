@@ -25,14 +25,20 @@ Data Source schema for AWS::MediaConnect::FlowSource
 - `description` (String) A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
 - `entitlement_arn` (String) The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.
 - `flow_arn` (String) The ARN of the flow.
+- `gateway_bridge_source` (Attributes) The source configuration for cloud flows receiving a stream from a bridge. (see [below for nested schema](#nestedatt--gateway_bridge_source))
 - `ingest_ip` (String) The IP address that the flow will be listening on for incoming content.
 - `ingest_port` (Number) The port that the flow will be listening on for incoming content.
 - `max_bitrate` (Number) The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
 - `max_latency` (Number) The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+- `min_latency` (Number) The minimum latency in milliseconds.
 - `name` (String) The name of the source.
 - `protocol` (String) The protocol that is used by the source.
+- `sender_control_port` (Number) The port that the flow uses to send outbound requests to initiate connection with the sender for fujitsu-qos protocol.
+- `sender_ip_address` (String) The IP address that the flow communicates with to initiate connection with the sender for fujitsu-qos protocol.
 - `source_arn` (String) The ARN of the source.
 - `source_ingest_port` (String) The port that the flow will be listening on for incoming content.(ReadOnly)
+- `source_listener_address` (String) Source IP or domain name for SRT-caller protocol.
+- `source_listener_port` (Number) Source port for SRT-caller protocol.
 - `stream_id` (String) The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
 - `vpc_interface_name` (String) The name of the VPC Interface this Source is configured with.
 - `whitelist_cidr` (String) The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
@@ -53,3 +59,17 @@ Read-Only:
 - `url` (String) The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
 
 
+<a id="nestedatt--gateway_bridge_source"></a>
+### Nested Schema for `gateway_bridge_source`
+
+Read-Only:
+
+- `bridge_arn` (String) The ARN of the bridge feeding this flow.
+- `vpc_interface_attachment` (Attributes) The name of the VPC interface attachment to use for this bridge source. (see [below for nested schema](#nestedatt--gateway_bridge_source--vpc_interface_attachment))
+
+<a id="nestedatt--gateway_bridge_source--vpc_interface_attachment"></a>
+### Nested Schema for `gateway_bridge_source.vpc_interface_attachment`
+
+Read-Only:
+
+- `vpc_interface_name` (String) The name of the VPC interface to use for this resource.

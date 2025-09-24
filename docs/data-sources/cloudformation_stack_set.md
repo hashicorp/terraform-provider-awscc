@@ -60,6 +60,7 @@ Read-Only:
 
 Read-Only:
 
+- `concurrency_mode` (String) Specifies how the concurrency level behaves during the operation execution.
 - `failure_tolerance_count` (Number)
 - `failure_tolerance_percentage` (Number)
 - `max_concurrent_count` (Number)
@@ -91,7 +92,9 @@ Read-Only:
 
 Read-Only:
 
+- `account_filter_type` (String) The filter type you want to apply on organizational units and accounts.
 - `accounts` (Set of String) AWS accounts that you want to create stack instances in the specified Region(s) for.
+- `accounts_url` (String) Returns the value of the AccountsUrl property.
 - `organizational_unit_ids` (Set of String) The organization root ID or organizational unit (OU) IDs to which StackSets deploys.
 
 
@@ -112,5 +115,3 @@ Read-Only:
 
 - `key` (String) A string used to identify this tag. You can specify a maximum of 127 characters for a tag key.
 - `value` (String) A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.
-
-

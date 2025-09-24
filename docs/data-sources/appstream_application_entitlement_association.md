@@ -24,5 +24,3 @@ Data Source schema for AWS::AppStream::ApplicationEntitlementAssociation
 - `application_identifier` (String)
 - `entitlement_name` (String)
 - `stack_name` (String)
-
-

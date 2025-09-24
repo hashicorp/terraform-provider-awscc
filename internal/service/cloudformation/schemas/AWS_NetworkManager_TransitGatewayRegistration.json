@@ -12,7 +12,12 @@
       "type": "string"
     }
   },
-  "taggable": false,
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
   "additionalProperties": false,
   "required": [
     "GlobalNetworkId",
@@ -29,8 +34,11 @@
   "handlers": {
     "create": {
       "permissions": [
-        "networkmanager:RegisterTransitGateway"
-      ]
+        "networkmanager:RegisterTransitGateway",
+        "networkmanager:GetTransitGatewayRegistrations",
+        "ec2:DescribeRegions"
+      ],
+      "timeoutInMinutes": 30
     },
     "read": {
       "permissions": [
@@ -38,14 +46,26 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "GlobalNetworkId": {
+            "$ref": "resource-schema.json#/properties/GlobalNetworkId"
+          }
+        },
+        "required": [
+          "GlobalNetworkId"
+        ]
+      },
       "permissions": [
         "networkmanager:GetTransitGatewayRegistrations"
       ]
     },
     "delete": {
       "permissions": [
-        "networkmanager:DeregisterTransitGateway"
-      ]
+        "networkmanager:DeregisterTransitGateway",
+        "networkmanager:GetTransitGatewayRegistrations"
+      ],
+      "timeoutInMinutes": 30
     }
   }
 }

@@ -57,5 +57,3 @@ Read-Only:
 
 - `health_url` (String)
 - `url` (String)
-
-

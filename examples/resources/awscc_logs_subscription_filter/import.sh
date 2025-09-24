@@ -1,0 +1,1 @@
+$ terraform import awscc_logs_subscription_filter.example "filter_name|log_group_name"

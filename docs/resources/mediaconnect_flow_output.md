@@ -27,8 +27,12 @@ Resource schema for AWS::MediaConnect::FlowOutput
 - `destination` (String) The address where you want to send the output.
 - `encryption` (Attributes) The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key). (see [below for nested schema](#nestedatt--encryption))
 - `max_latency` (Number) The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+- `media_stream_output_configurations` (Attributes List) The definition for each media stream that is associated with the output. (see [below for nested schema](#nestedatt--media_stream_output_configurations))
 - `min_latency` (Number) The minimum latency in milliseconds.
 - `name` (String) The name of the output. This value must be unique within the current flow.
+- `ndi_program_name` (String) A suffix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect uses the output name.
+- `ndi_speed_hq_quality` (Number) A quality setting for the NDI Speed HQ encoder.
+- `output_status` (String) An indication of whether the output should transmit data or not.
 - `port` (Number) The port to use when content is distributed to this output.
 - `remote_id` (String) The remote ID for the Zixi-pull stream.
 - `smoothing_latency` (Number) The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
@@ -51,6 +55,44 @@ Optional:
 - `secret_arn` (String) The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
 
 
+<a id="nestedatt--media_stream_output_configurations"></a>
+### Nested Schema for `media_stream_output_configurations`
+
+Optional:
+
+- `destination_configurations` (Attributes List) The media streams that you want to associate with the output. (see [below for nested schema](#nestedatt--media_stream_output_configurations--destination_configurations))
+- `encoding_name` (String) The format that will be used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video streams on sources or outputs that use the CDI protocol, set the encoding name to raw. For video streams on sources or outputs that use the ST 2110 JPEG XS protocol, set the encoding name to jxsv.
+- `encoding_parameters` (Attributes) A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source. (see [below for nested schema](#nestedatt--media_stream_output_configurations--encoding_parameters))
+- `media_stream_name` (String) A name that helps you distinguish one media stream from another.
+
+<a id="nestedatt--media_stream_output_configurations--destination_configurations"></a>
+### Nested Schema for `media_stream_output_configurations.destination_configurations`
+
+Optional:
+
+- `destination_ip` (String) The IP address where contents of the media stream will be sent.
+- `destination_port` (Number) The port to use when the content of the media stream is distributed to the output.
+- `interface` (Attributes) The VPC interface that is used for the media stream associated with the output. (see [below for nested schema](#nestedatt--media_stream_output_configurations--destination_configurations--interface))
+
+<a id="nestedatt--media_stream_output_configurations--destination_configurations--interface"></a>
+### Nested Schema for `media_stream_output_configurations.destination_configurations.interface`
+
+Optional:
+
+- `name` (String) The name of the VPC interface that you want to use for the media stream associated with the output.
+
+
+
+<a id="nestedatt--media_stream_output_configurations--encoding_parameters"></a>
+### Nested Schema for `media_stream_output_configurations.encoding_parameters`
+
+Optional:
+
+- `compression_factor` (Number) A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are in the range of 3.0 to 10.0, inclusive.
+- `encoder_profile` (String) A setting on the encoder that drives compression settings. This property only applies to video media streams associated with outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol.
+
+
+
 <a id="nestedatt--vpc_interface_attachment"></a>
 ### Nested Schema for `vpc_interface_attachment`
 
@@ -62,6 +104,40 @@ Optional:
 
 Import is supported using the following syntax:
 
+In Terraform v1.12.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `identity` attribute, for example:
+
+```terraform
+import {
+  to = awscc_mediaconnect_flow_output.example
+  identity = {
+    output_arn = "output_arn"
+  }
+}
+```
+
+<!-- schema generated by tfplugindocs -->
+### Identity Schema
+
+#### Required
+
+- `output_arn` (String) The ARN of the output
+
+#### Optional
+
+- `account_id` (String) AWS Account where this resource is managed
+- `region` (String) Region where this resource is managed
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_mediaconnect_flow_output.example
+  id = "output_arn"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
-$ terraform import awscc_mediaconnect_flow_output.example <resource ID>
+$ terraform import awscc_mediaconnect_flow_output.example "output_arn"
 ```

@@ -18,7 +18,59 @@
           "type": "integer"
         }
       },
-      "required": [ "ComputeEnvironment", "Order" ]
+      "required": [
+        "ComputeEnvironment",
+        "Order"
+      ]
+    },
+    "ServiceEnvironmentOrder": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ServiceEnvironment": {
+          "type": "string"
+        },
+        "Order": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "ServiceEnvironment",
+        "Order"
+      ]
+    },
+    "JobStateTimeLimitAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Action": {
+          "type": "string",
+          "enum": [
+            "CANCEL",
+            "TERMINATE"
+          ]
+        },
+        "MaxTimeSeconds": {
+          "type": "integer",
+          "minimum": 600,
+          "maximum": 86400
+        },
+        "Reason": {
+          "type": "string"
+        },
+        "State": {
+          "type": "string",
+          "enum": [
+            "RUNNABLE"
+          ]
+        }
+      },
+      "required": [
+        "Action",
+        "MaxTimeSeconds",
+        "Reason",
+        "State"
+      ]
     }
   },
   "properties": {
@@ -30,12 +82,31 @@
     "JobQueueArn": {
       "$ref": "#/definitions/ResourceArn"
     },
+    "JobQueueType": {
+      "type": "string"
+    },
     "ComputeEnvironmentOrder": {
       "type": "array",
       "insertionOrder": true,
       "uniqueItems": false,
       "items": {
         "$ref": "#/definitions/ComputeEnvironmentOrder"
+      }
+    },
+    "ServiceEnvironmentOrder": {
+      "type": "array",
+      "insertionOrder": true,
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/ServiceEnvironmentOrder"
+      }
+    },
+    "JobStateTimeLimitActions": {
+      "type": "array",
+      "insertionOrder": true,
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/JobStateTimeLimitAction"
       }
     },
     "Priority": {
@@ -69,41 +140,70 @@
     "tagOnCreate": true,
     "tagUpdatable": false,
     "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "Batch:TagResource",
+      "Batch:UntagResource"
+    ]
   },
-  "required": [ "ComputeEnvironmentOrder", "Priority" ],
-  "primaryIdentifier": [ "/properties/JobQueueArn" ],
-  "createOnlyProperties": [ "/properties/Tags", "/properties/JobQueueName" ],
-  "readOnlyProperties": [ "/properties/JobQueueArn" ],
+  "required": [
+    "Priority"
+  ],
+  "oneOf": [
+    {
+      "required": [
+        "ComputeEnvironmentOrder"
+      ]
+    },
+    {
+      "required": [
+        "ServiceEnvironmentOrder"
+      ]
+    }
+  ],
+  "primaryIdentifier": [
+    "/properties/JobQueueArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/Tags",
+    "/properties/JobQueueName",
+    "/properties/JobQueueType"
+  ],
+  "readOnlyProperties": [
+    "/properties/JobQueueArn"
+  ],
   "handlers": {
-      "create": {
-          "permissions": [
-              "Batch:CreateJobQueue",
-              "Batch:TagResource",
-              "Batch:DescribeJobQueues"
-          ]
-      },
-      "read": {
-          "permissions": [
-              "Batch:DescribeJobQueues"
-          ]
-      },
-      "update": {
-          "permissions": [
-              "Batch:UpdateJobQueue",
-              "Batch:TagResource",
-              "Batch:UnTagResource"
-          ]
-      },
-      "delete": {
-          "permissions": [
-              "Batch:DeleteJobQueue"
-          ]
-      },
-      "list": {
-          "permissions": [
-              "Batch:DescribeJobQueues"
-          ]
-      }
+    "create": {
+      "permissions": [
+        "Batch:CreateJobQueue",
+        "Batch:TagResource",
+        "Batch:DescribeJobQueues"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "Batch:DescribeJobQueues"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "Batch:DescribeJobQueues",
+        "Batch:UpdateJobQueue",
+        "Batch:TagResource",
+        "Batch:UnTagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "Batch:UpdateJobQueue",
+        "Batch:DescribeJobQueues",
+        "Batch:DeleteJobQueue"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "Batch:DescribeJobQueues"
+      ]
+    }
   }
 }

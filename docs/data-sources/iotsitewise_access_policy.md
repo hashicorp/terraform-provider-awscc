@@ -83,5 +83,3 @@ Read-Only:
 Read-Only:
 
 - `id` (String) The ID of the project.
-
-

@@ -1,7 +1,7 @@
 {
   "typeName": "AWS::GlobalAccelerator::Listener",
   "description": "Resource Type definition for AWS::GlobalAccelerator::Listener",
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-globalaccelerator",
   "definitions": {
     "Port": {
       "description": "A network port number",
@@ -61,6 +61,9 @@
       ]
     }
   },
+  "tagging": {
+    "taggable": false
+  },
   "required": [
     "AcceleratorArn",
     "PortRanges",
@@ -98,7 +101,8 @@
     "delete": {
       "permissions": [
         "globalaccelerator:DescribeListener",
-        "globalaccelerator:DeleteListener"
+        "globalaccelerator:DeleteListener",
+        "globalaccelerator:DescribeAccelerator"
       ]
     },
     "list": {

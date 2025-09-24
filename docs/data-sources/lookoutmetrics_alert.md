@@ -52,5 +52,3 @@ Read-Only:
 
 - `role_arn` (String) ARN of an IAM role that LookoutMetrics should assume to access the SNS topic.
 - `sns_topic_arn` (String) ARN of an SNS topic to send alert notifications to.
-
-

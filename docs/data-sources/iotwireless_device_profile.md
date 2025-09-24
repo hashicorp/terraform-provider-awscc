@@ -22,6 +22,7 @@ Data Source schema for AWS::IoTWireless::DeviceProfile
 ### Read-Only
 
 - `arn` (String) Service profile Arn. Returned after successful create.
+- `device_profile_id` (String) Service profile Id. Returned after successful create.
 - `lo_ra_wan` (Attributes) LoRaWANDeviceProfile supports all LoRa specific attributes for service profile for CreateDeviceProfile operation (see [below for nested schema](#nestedatt--lo_ra_wan))
 - `name` (String) Name of service profile
 - `tags` (Attributes Set) A list of key-value pairs that contain metadata for the device profile. (see [below for nested schema](#nestedatt--tags))
@@ -33,6 +34,7 @@ Read-Only:
 
 - `class_b_timeout` (Number)
 - `class_c_timeout` (Number)
+- `factory_preset_freqs_list` (List of Number)
 - `mac_version` (String)
 - `max_duty_cycle` (Number)
 - `max_eirp` (Number)
@@ -41,6 +43,10 @@ Read-Only:
 - `ping_slot_period` (Number)
 - `reg_params_revision` (String)
 - `rf_region` (String)
+- `rx_data_rate_2` (Number)
+- `rx_delay_1` (Number)
+- `rx_dr_offset_1` (Number)
+- `rx_freq_2` (Number)
 - `supports_32_bit_f_cnt` (Boolean)
 - `supports_class_b` (Boolean)
 - `supports_class_c` (Boolean)
@@ -54,5 +60,3 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
-
-

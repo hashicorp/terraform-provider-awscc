@@ -25,6 +25,7 @@ Resource Type definition for AWS::SageMaker::ModelQualityJobDefinition
 
 ### Optional
 
+- `endpoint_name` (String) The name of the endpoint used to run the monitoring job.
 - `job_definition_name` (String) The name of the job definition.
 - `model_quality_baseline_config` (Attributes) Baseline configuration used to validate that the data conforms to the specified constraints and statistics. (see [below for nested schema](#nestedatt--model_quality_baseline_config))
 - `network_config` (Attributes) Networking options for a job, such as network traffic encryption between containers, whether to allow inbound and outbound network calls to and from containers, and the VPC subnets and security groups to use for VPC-enabled jobs. (see [below for nested schema](#nestedatt--network_config))
@@ -51,8 +52,11 @@ Required:
 
 - `instance_count` (Number) The number of ML compute instances to use in the model monitoring job. For distributed processing jobs, specify a value greater than 1. The default value is 1.
 - `instance_type` (String) The ML compute instance type for the processing job.
-- `volume_kms_key_id` (String) The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the model monitoring job.
 - `volume_size_in_gb` (Number) The size of the ML storage volume, in gigabytes, that you want to provision. You must specify sufficient ML storage for your scenario.
+
+Optional:
+
+- `volume_kms_key_id` (String) The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the model monitoring job.
 
 
 
@@ -61,12 +65,15 @@ Required:
 
 Required:
 
+- `image_uri` (String) The container image to be run by the monitoring job.
+- `problem_type` (String) The status of the monitoring job.
+
+Optional:
+
 - `container_arguments` (List of String) An array of arguments for the container used to run the monitoring job.
 - `container_entrypoint` (List of String) Specifies the entrypoint for a container used to run the monitoring job.
 - `environment` (Map of String) Sets the environment variables in the Docker container
-- `image_uri` (String) The container image to be run by the monitoring job.
 - `post_analytics_processor_source_uri` (String) An Amazon S3 URI to a script that is called after analysis has been performed. Applicable only for the built-in (first party) containers.
-- `problem_type` (String) The status of the monitoring job.
 - `record_preprocessor_source_uri` (String) An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flatted json so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers
 
 
@@ -75,13 +82,68 @@ Required:
 
 Required:
 
-- `endpoint_input` (Attributes) The endpoint for a monitoring job. (see [below for nested schema](#nestedatt--model_quality_job_input--endpoint_input))
 - `ground_truth_s3_input` (Attributes) Ground truth input provided in S3 (see [below for nested schema](#nestedatt--model_quality_job_input--ground_truth_s3_input))
+
+Optional:
+
+- `batch_transform_input` (Attributes) The batch transform input for a monitoring job. (see [below for nested schema](#nestedatt--model_quality_job_input--batch_transform_input))
+- `endpoint_input` (Attributes) The endpoint for a monitoring job. (see [below for nested schema](#nestedatt--model_quality_job_input--endpoint_input))
+
+<a id="nestedatt--model_quality_job_input--ground_truth_s3_input"></a>
+### Nested Schema for `model_quality_job_input.ground_truth_s3_input`
+
+Required:
+
+- `s3_uri` (String) A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.
+
+
+<a id="nestedatt--model_quality_job_input--batch_transform_input"></a>
+### Nested Schema for `model_quality_job_input.batch_transform_input`
+
+Optional:
+
+- `data_captured_destination_s3_uri` (String) A URI that identifies the Amazon S3 storage location where Batch Transform Job captures data.
+- `dataset_format` (Attributes) The dataset format of the data to monitor (see [below for nested schema](#nestedatt--model_quality_job_input--batch_transform_input--dataset_format))
+- `end_time_offset` (String) Monitoring end time offset, e.g. PT0H
+- `inference_attribute` (String) Index or JSONpath to locate predicted label(s)
+- `local_path` (String) Path to the filesystem where the endpoint data is available to the container.
+- `probability_attribute` (String) Index or JSONpath to locate probabilities
+- `probability_threshold_attribute` (Number)
+- `s3_data_distribution_type` (String) Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated
+- `s3_input_mode` (String) Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.
+- `start_time_offset` (String) Monitoring start time offset, e.g. -PT1H
+
+<a id="nestedatt--model_quality_job_input--batch_transform_input--dataset_format"></a>
+### Nested Schema for `model_quality_job_input.batch_transform_input.dataset_format`
+
+Optional:
+
+- `csv` (Attributes) The CSV format (see [below for nested schema](#nestedatt--model_quality_job_input--batch_transform_input--dataset_format--csv))
+- `json` (Attributes) The Json format (see [below for nested schema](#nestedatt--model_quality_job_input--batch_transform_input--dataset_format--json))
+- `parquet` (Boolean) A flag indicating if the dataset format is Parquet
+
+<a id="nestedatt--model_quality_job_input--batch_transform_input--dataset_format--csv"></a>
+### Nested Schema for `model_quality_job_input.batch_transform_input.dataset_format.csv`
+
+Optional:
+
+- `header` (Boolean) A boolean flag indicating if given CSV has header
+
+
+<a id="nestedatt--model_quality_job_input--batch_transform_input--dataset_format--json"></a>
+### Nested Schema for `model_quality_job_input.batch_transform_input.dataset_format.json`
+
+Optional:
+
+- `line` (Boolean) A boolean flag indicating if it is JSON line format
+
+
+
 
 <a id="nestedatt--model_quality_job_input--endpoint_input"></a>
 ### Nested Schema for `model_quality_job_input.endpoint_input`
 
-Required:
+Optional:
 
 - `end_time_offset` (String) Monitoring end time offset, e.g. PT0H
 - `endpoint_name` (String) The name of the endpoint used to run the monitoring job.
@@ -94,22 +156,17 @@ Required:
 - `start_time_offset` (String) Monitoring start time offset, e.g. -PT1H
 
 
-<a id="nestedatt--model_quality_job_input--ground_truth_s3_input"></a>
-### Nested Schema for `model_quality_job_input.ground_truth_s3_input`
-
-Required:
-
-- `s3_uri` (String) A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.
-
-
 
 <a id="nestedatt--model_quality_job_output_config"></a>
 ### Nested Schema for `model_quality_job_output_config`
 
 Required:
 
-- `kms_key_id` (String) The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.
 - `monitoring_outputs` (Attributes List) Monitoring outputs for monitoring jobs. This is where the output of the periodic monitoring jobs is uploaded. (see [below for nested schema](#nestedatt--model_quality_job_output_config--monitoring_outputs))
+
+Optional:
+
+- `kms_key_id` (String) The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.
 
 <a id="nestedatt--model_quality_job_output_config--monitoring_outputs"></a>
 ### Nested Schema for `model_quality_job_output_config.monitoring_outputs`
@@ -124,8 +181,11 @@ Required:
 Required:
 
 - `local_path` (String) The local path to the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job. LocalPath is an absolute path for the output data.
-- `s3_upload_mode` (String) Whether to upload the results of the monitoring job continuously or after the job completes.
 - `s3_uri` (String) A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.
+
+Optional:
+
+- `s3_upload_mode` (String) Whether to upload the results of the monitoring job continuously or after the job completes.
 
 
 
@@ -186,6 +246,40 @@ Optional:
 
 Import is supported using the following syntax:
 
+In Terraform v1.12.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `identity` attribute, for example:
+
+```terraform
+import {
+  to = awscc_sagemaker_model_quality_job_definition.example
+  identity = {
+    job_definition_arn = "job_definition_arn"
+  }
+}
+```
+
+<!-- schema generated by tfplugindocs -->
+### Identity Schema
+
+#### Required
+
+- `job_definition_arn` (String) The Amazon Resource Name (ARN) of job definition
+
+#### Optional
+
+- `account_id` (String) AWS Account where this resource is managed
+- `region` (String) Region where this resource is managed
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+```terraform
+import {
+  to = awscc_sagemaker_model_quality_job_definition.example
+  id = "job_definition_arn"
+}
+```
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
-$ terraform import awscc_sagemaker_model_quality_job_definition.example <resource ID>
+$ terraform import awscc_sagemaker_model_quality_job_definition.example "job_definition_arn"
 ```

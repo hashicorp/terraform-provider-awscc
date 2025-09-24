@@ -1,6 +1,7 @@
 {
   "typeName": "AWS::IoTTwinMaker::Scene",
   "description": "Resource schema for AWS::IoTTwinMaker::Scene",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-iottwinmaker",
   "definitions": {
     "DateTimeFormat": {
       "type": "string",
@@ -75,6 +76,34 @@
         "maxLength": 256,
         "pattern": ".*"
       }
+    },
+    "SceneMetadata": {
+      "description": "A key-value pair of scene metadata for the scene.",
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 2048
+        }
+      },
+      "minLength": 0,
+      "maxLength": 50,
+      "additionalProperties": false
+    },
+    "GeneratedSceneMetadata": {
+      "description": "A key-value pair of generated scene metadata for the scene.",
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 2048
+        }
+      },
+      "minLength": 0,
+      "maxLength": 50,
+      "additionalProperties": false
     }
   },
   "additionalProperties": false,
@@ -83,7 +112,12 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "iottwinmaker:TagResource",
+      "iottwinmaker:UntagResource",
+      "iottwinmaker:ListTagsForResource"
+    ]
   },
   "required": [
     "WorkspaceId",
@@ -93,7 +127,8 @@
   "readOnlyProperties": [
     "/properties/Arn",
     "/properties/CreationDateTime",
-    "/properties/UpdateDateTime"
+    "/properties/UpdateDateTime",
+    "/properties/GeneratedSceneMetadata"
   ],
   "createOnlyProperties": [
     "/properties/SceneId",
@@ -107,7 +142,10 @@
     "create": {
       "permissions": [
         "iottwinmaker:CreateScene",
-        "iottwinmaker:GetWorkspace"
+        "iottwinmaker:GetScene",
+        "iottwinmaker:GetWorkspace",
+        "iottwinmaker:ListTagsForResource",
+        "iottwinmaker:TagResource"
       ]
     },
     "read": {
@@ -119,6 +157,7 @@
     },
     "update": {
       "permissions": [
+        "iottwinmaker:GetScene",
         "iottwinmaker:GetWorkspace",
         "iottwinmaker:ListTagsForResource",
         "iottwinmaker:TagResource",
@@ -129,10 +168,22 @@
     "delete": {
       "permissions": [
         "iottwinmaker:DeleteScene",
+        "iottwinmaker:GetScene",
         "iottwinmaker:GetWorkspace"
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "WorkspaceId": {
+            "type": "string",
+            "$ref": "resource-schema.json#/properties/WorkspaceId"
+          }
+        },
+        "required": [
+          "WorkspaceId"
+        ]
+      },
       "permissions": [
         "iottwinmaker:GetWorkspace",
         "iottwinmaker:ListTagsForResource",

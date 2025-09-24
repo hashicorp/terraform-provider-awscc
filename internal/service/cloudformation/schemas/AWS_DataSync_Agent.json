@@ -35,7 +35,7 @@
       "type": "string",
       "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
       "maxLength": 256,
-      "minLength": 1
+      "minLength": 0
     },
     "ActivationKey": {
       "description": "Activation key of the Agent.",
@@ -99,12 +99,15 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "datasync:TagResource",
+      "datasync:UntagResource",
+      "datasync:ListTagsForResource"
+    ]
   },
   "additionalProperties": false,
-  "required": [
-    "ActivationKey"
-  ],
+  "required": [],
   "readOnlyProperties": [
     "/properties/AgentArn",
     "/properties/EndpointType"
@@ -125,6 +128,9 @@
     "create": {
       "permissions": [
         "datasync:CreateAgent",
+        "datasync:TagResource",
+        "datasync:DescribeAgent",
+        "datasync:ListTagsForResource",
         "ec2:DescribeNetworkInterfaces",
         "ec2:DescribeSecurityGroups",
         "ec2:DescribeSubnets",

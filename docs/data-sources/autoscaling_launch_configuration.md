@@ -74,5 +74,3 @@ Read-Only:
 - `http_endpoint` (String) This parameter enables or disables the HTTP metadata endpoint on your instances.
 - `http_put_response_hop_limit` (Number) The desired HTTP PUT response hop limit for instance metadata requests.
 - `http_tokens` (String) The state of token usage for your instance metadata requests.
-
-

@@ -1,1 +1,1 @@
-$ terraform import awscc_ce_cost_category.example <resource ID>
+$ terraform import awscc_ce_cost_category.example "arn"

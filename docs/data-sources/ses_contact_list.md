@@ -44,5 +44,3 @@ Read-Only:
 - `description` (String) The description of the topic.
 - `display_name` (String) The display name of the topic.
 - `topic_name` (String) The name of the topic.
-
-

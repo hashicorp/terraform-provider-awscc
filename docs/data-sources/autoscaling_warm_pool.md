@@ -33,5 +33,3 @@ Data Source schema for AWS::AutoScaling::WarmPool
 Read-Only:
 
 - `reuse_on_scale_in` (Boolean)
-
-

@@ -1,0 +1,1 @@
+$ terraform import awscc_logs_log_anomaly_detector.example "anomaly_detector_arn"

@@ -33,6 +33,7 @@ Data Source schema for AWS::MSK::Cluster
 - `logging_info` (Attributes) (see [below for nested schema](#nestedatt--logging_info))
 - `number_of_broker_nodes` (Number)
 - `open_monitoring` (Attributes) (see [below for nested schema](#nestedatt--open_monitoring))
+- `storage_mode` (String)
 - `tags` (Map of String) A key-value pair to associate with a resource.
 
 <a id="nestedatt--broker_node_group_info"></a>
@@ -53,6 +54,7 @@ Read-Only:
 Read-Only:
 
 - `public_access` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--public_access))
+- `vpc_connectivity` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity))
 
 <a id="nestedatt--broker_node_group_info--connectivity_info--public_access"></a>
 ### Nested Schema for `broker_node_group_info.connectivity_info.public_access`
@@ -60,6 +62,56 @@ Read-Only:
 Read-Only:
 
 - `type` (String)
+
+
+<a id="nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity"></a>
+### Nested Schema for `broker_node_group_info.connectivity_info.vpc_connectivity`
+
+Read-Only:
+
+- `client_authentication` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication))
+
+<a id="nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication"></a>
+### Nested Schema for `broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication`
+
+Read-Only:
+
+- `sasl` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication--sasl))
+- `tls` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication--tls))
+
+<a id="nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication--sasl"></a>
+### Nested Schema for `broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl`
+
+Read-Only:
+
+- `iam` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication--sasl--iam))
+- `scram` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication--sasl--scram))
+
+<a id="nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication--sasl--iam"></a>
+### Nested Schema for `broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam`
+
+Read-Only:
+
+- `enabled` (Boolean)
+
+
+<a id="nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication--sasl--scram"></a>
+### Nested Schema for `broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram`
+
+Read-Only:
+
+- `enabled` (Boolean)
+
+
+
+<a id="nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication--tls"></a>
+### Nested Schema for `broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.tls`
+
+Read-Only:
+
+- `enabled` (Boolean)
+
+
 
 
 
@@ -79,7 +131,7 @@ Read-Only:
 - `volume_size` (Number)
 
 <a id="nestedatt--broker_node_group_info--storage_info--ebs_storage_info--provisioned_throughput"></a>
-### Nested Schema for `broker_node_group_info.storage_info.ebs_storage_info.volume_size`
+### Nested Schema for `broker_node_group_info.storage_info.ebs_storage_info.provisioned_throughput`
 
 Read-Only:
 
@@ -252,5 +304,3 @@ Read-Only:
 Read-Only:
 
 - `enabled_in_broker` (Boolean)
-
-

@@ -1,0 +1,1 @@
+$ terraform import awscc_securitylake_subscriber.example <resource ID>

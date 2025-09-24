@@ -1,1 +1,1 @@
-$ terraform import awscc_panorama_application_instance.example <resource ID>
+$ terraform import awscc_panorama_application_instance.example "application_instance_id"

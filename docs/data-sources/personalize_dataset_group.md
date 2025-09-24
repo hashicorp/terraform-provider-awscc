@@ -26,5 +26,3 @@ Data Source schema for AWS::Personalize::DatasetGroup
 - `kms_key_arn` (String) The Amazon Resource Name(ARN) of a AWS Key Management Service (KMS) key used to encrypt the datasets.
 - `name` (String) The name for the new dataset group.
 - `role_arn` (String) The ARN of the AWS Identity and Access Management (IAM) role that has permissions to access the AWS Key Management Service (KMS) key. Supplying an IAM role is only valid when also specifying a KMS key.
-
-

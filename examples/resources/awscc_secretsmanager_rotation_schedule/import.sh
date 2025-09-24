@@ -1,0 +1,1 @@
+$ terraform import awscc_secretsmanager_rotation_schedule.example "id"

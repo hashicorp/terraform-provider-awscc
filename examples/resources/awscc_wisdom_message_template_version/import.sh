@@ -1,0 +1,1 @@
+$ terraform import awscc_wisdom_message_template_version.example "message_template_version_arn"

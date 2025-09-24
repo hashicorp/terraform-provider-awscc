@@ -1,0 +1,1 @@
+$ terraform import awscc_eks_access_entry.example "principal_arn|cluster_name"

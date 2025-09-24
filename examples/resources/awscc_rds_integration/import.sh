@@ -1,0 +1,1 @@
+$ terraform import awscc_rds_integration.example "integration_arn"

@@ -1,0 +1,1 @@
+$ terraform import awscc_logs_integration.example "integration_name"

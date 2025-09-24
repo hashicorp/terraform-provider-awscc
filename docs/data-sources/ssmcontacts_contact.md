@@ -25,6 +25,7 @@ Data Source schema for AWS::SSMContacts::Contact
 - `arn` (String) The Amazon Resource Name (ARN) of the contact.
 - `display_name` (String) Name of the contact. String value with 3 to 256 characters. Only alphabetical, space, numeric characters, dash, or underscore allowed.
 - `plan` (Attributes List) The stages that an escalation plan or engagement plan engages contacts and contact methods in. (see [below for nested schema](#nestedatt--plan))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `type` (String) Contact type, which specify type of contact. Currently supported values: ?PERSONAL?, ?SHARED?, ?OTHER?.
 
 <a id="nestedatt--plan"></a>
@@ -33,6 +34,7 @@ Data Source schema for AWS::SSMContacts::Contact
 Read-Only:
 
 - `duration_in_minutes` (Number) The time to wait until beginning the next stage.
+- `rotation_ids` (List of String) List of Rotation Ids to associate with Contact
 - `targets` (Attributes List) The contacts or contact methods that the escalation plan or engagement plan is engaging. (see [below for nested schema](#nestedatt--plan--targets))
 
 <a id="nestedatt--plan--targets"></a>
@@ -61,3 +63,12 @@ Read-Only:
 - `is_essential` (Boolean) A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.
 
 
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) The key name of the tag
+- `value` (String) The value for the tag.

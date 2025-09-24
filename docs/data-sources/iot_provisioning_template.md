@@ -25,10 +25,11 @@ Data Source schema for AWS::IoT::ProvisioningTemplate
 - `enabled` (Boolean)
 - `pre_provisioning_hook` (Attributes) (see [below for nested schema](#nestedatt--pre_provisioning_hook))
 - `provisioning_role_arn` (String)
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 - `template_arn` (String)
 - `template_body` (String)
 - `template_name` (String)
+- `template_type` (String)
 
 <a id="nestedatt--pre_provisioning_hook"></a>
 ### Nested Schema for `pre_provisioning_hook`
@@ -46,5 +47,3 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
-
-

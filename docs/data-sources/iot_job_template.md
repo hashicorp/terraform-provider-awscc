@@ -24,12 +24,14 @@ Data Source schema for AWS::IoT::JobTemplate
 - `abort_config` (Attributes) The criteria that determine when and how a job abort takes place. (see [below for nested schema](#nestedatt--abort_config))
 - `arn` (String)
 - `description` (String) A description of the Job Template.
+- `destination_package_versions` (List of String)
 - `document` (String) The job document. Required if you don't specify a value for documentSource.
 - `document_source` (String) An S3 link to the job document to use in the template. Required if you don't specify a value for document.
 - `job_arn` (String) Optional for copying a JobTemplate from a pre-existing Job configuration.
 - `job_executions_retry_config` (Attributes) (see [below for nested schema](#nestedatt--job_executions_retry_config))
 - `job_executions_rollout_config` (Attributes) Allows you to create a staged rollout of a job. (see [below for nested schema](#nestedatt--job_executions_rollout_config))
 - `job_template_id` (String)
+- `maintenance_windows` (Attributes List) (see [below for nested schema](#nestedatt--maintenance_windows))
 - `presigned_url_config` (Attributes) Configuration for pre-signed S3 URLs. (see [below for nested schema](#nestedatt--presigned_url_config))
 - `tags` (Attributes Set) Metadata that can be used to manage the JobTemplate. (see [below for nested schema](#nestedatt--tags))
 - `timeout_config` (Attributes) Specifies the amount of time each device has to finish its execution of the job. (see [below for nested schema](#nestedatt--timeout_config))
@@ -98,6 +100,15 @@ Read-Only:
 
 
 
+<a id="nestedatt--maintenance_windows"></a>
+### Nested Schema for `maintenance_windows`
+
+Read-Only:
+
+- `duration_in_minutes` (Number)
+- `start_time` (String)
+
+
 <a id="nestedatt--presigned_url_config"></a>
 ### Nested Schema for `presigned_url_config`
 
@@ -122,5 +133,3 @@ Read-Only:
 Read-Only:
 
 - `in_progress_timeout_in_minutes` (Number) Specifies the amount of time, in minutes, this device has to finish execution of this job.
-
-

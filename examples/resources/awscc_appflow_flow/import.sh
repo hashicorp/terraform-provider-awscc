@@ -1,1 +1,1 @@
-$ terraform import awscc_appflow_flow.example <resource ID>
+$ terraform import awscc_appflow_flow.example "flow_name"

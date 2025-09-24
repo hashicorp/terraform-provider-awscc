@@ -29,6 +29,7 @@ Data Source schema for AWS::Budgets::BudgetsAction
 - `definition` (Attributes) (see [below for nested schema](#nestedatt--definition))
 - `execution_role_arn` (String)
 - `notification_type` (String)
+- `resource_tags` (Attributes List) (see [below for nested schema](#nestedatt--resource_tags))
 - `subscribers` (Attributes List) (see [below for nested schema](#nestedatt--subscribers))
 
 <a id="nestedatt--action_threshold"></a>
@@ -80,6 +81,15 @@ Read-Only:
 
 
 
+<a id="nestedatt--resource_tags"></a>
+### Nested Schema for `resource_tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
+
+
 <a id="nestedatt--subscribers"></a>
 ### Nested Schema for `subscribers`
 
@@ -87,5 +97,3 @@ Read-Only:
 
 - `address` (String)
 - `type` (String)
-
-

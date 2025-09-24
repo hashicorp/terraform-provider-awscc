@@ -1,0 +1,1 @@
+$ terraform import awscc_cognito_user_pool_identity_provider.example "user_pool_id|provider_name"

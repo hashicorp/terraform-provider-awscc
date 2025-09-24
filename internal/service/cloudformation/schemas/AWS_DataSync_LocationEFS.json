@@ -68,6 +68,26 @@
       "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$",
       "maxLength": 128
     },
+    "AccessPointArn": {
+      "description": "The Amazon Resource Name (ARN) for the Amazon EFS Access point that DataSync uses when accessing the EFS file system.",
+      "type": "string",
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]+:[0-9]{12}:access-point/fsap-[0-9a-f]{8,40}$",
+      "maxLength": 128
+    },
+    "FileSystemAccessRoleArn": {
+      "description": "The Amazon Resource Name (ARN) of the AWS IAM role that the DataSync will assume when mounting the EFS file system.",
+      "type": "string",
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$",
+      "maxLength": 128
+    },
+    "InTransitEncryption": {
+      "description": "Protocol that is used for encrypting the traffic exchanged between the DataSync Agent and the EFS file system.",
+      "type": "string",
+      "enum": [
+        "NONE",
+        "TLS1_2"
+      ]
+    },
     "Subdirectory": {
       "description": "A subdirectory in the location's path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination.",
       "type": "string",
@@ -103,11 +123,15 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "datasync:TagResource",
+      "datasync:UntagResource",
+      "datasync:ListTagsForResource"
+    ]
   },
   "required": [
-    "Ec2Config",
-    "EfsFilesystemArn"
+    "Ec2Config"
   ],
   "readOnlyProperties": [
     "/properties/LocationArn",
@@ -118,8 +142,7 @@
   ],
   "createOnlyProperties": [
     "/properties/Ec2Config",
-    "/properties/EfsFilesystemArn",
-    "/properties/Subdirectory"
+    "/properties/EfsFilesystemArn"
   ],
   "writeOnlyProperties": [
     "/properties/EfsFilesystemArn",
@@ -131,8 +154,11 @@
         "datasync:CreateLocationEfs",
         "datasync:DescribeLocationEfs",
         "datasync:ListTagsForResource",
+        "datasync:TagResource",
         "elasticfilesystem:DescribeFileSystems",
         "elasticfilesystem:DescribeMountTargets",
+        "elasticfilesystem:DescribeAccessPoints",
+        "iam:PassRole",
         "ec2:DescribeSubnets",
         "ec2:DescribeSecurityGroups"
       ]
@@ -145,10 +171,14 @@
     },
     "update": {
       "permissions": [
+        "datasync:UpdateLocationEfs",
         "datasync:DescribeLocationEfs",
         "datasync:ListTagsForResource",
         "datasync:TagResource",
-        "datasync:UntagResource"
+        "datasync:UntagResource",
+        "elasticfilesystem:DescribeFileSystems",
+        "elasticfilesystem:DescribeAccessPoints",
+        "iam:PassRole"
       ]
     },
     "delete": {

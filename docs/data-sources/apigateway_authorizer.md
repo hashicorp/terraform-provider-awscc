@@ -21,16 +21,14 @@ Data Source schema for AWS::ApiGateway::Authorizer
 
 ### Read-Only
 
-- `auth_type` (String) Optional customer-defined field, used in OpenAPI imports and exports without functional impact.
-- `authorizer_credentials` (String) Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer.
+- `auth_type` (String)
+- `authorizer_credentials` (String)
 - `authorizer_id` (String)
-- `authorizer_result_ttl_in_seconds` (Number) The TTL in seconds of cached authorizer results.
-- `authorizer_uri` (String) Specifies the authorizer's Uniform Resource Identifier (URI).
-- `identity_source` (String) The identity source for which authorization is requested.
-- `identity_validation_expression` (String) A validation expression for the incoming identity token.
-- `name` (String) The name of the authorizer.
-- `provider_ar_ns` (Set of String) A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer.
-- `rest_api_id` (String) The identifier of the API.
-- `type` (String) The authorizer type.
-
-
+- `authorizer_result_ttl_in_seconds` (Number)
+- `authorizer_uri` (String)
+- `identity_source` (String)
+- `identity_validation_expression` (String)
+- `name` (String)
+- `provider_ar_ns` (Set of String)
+- `rest_api_id` (String)
+- `type` (String)

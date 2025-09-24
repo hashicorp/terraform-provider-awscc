@@ -26,8 +26,11 @@ Data Source schema for AWS::GroundStation::MissionProfile
 - `contact_pre_pass_duration_seconds` (Number) Pre-pass time needed before the contact.
 - `dataflow_edges` (Attributes List) (see [below for nested schema](#nestedatt--dataflow_edges))
 - `minimum_viable_contact_duration_seconds` (Number) Visibilities with shorter duration than the specified minimum viable contact duration will be ignored when searching for available contacts.
+- `mission_profile_id` (String)
 - `name` (String) A name used to identify a mission profile.
 - `region` (String)
+- `streams_kms_key` (Attributes) The ARN of a KMS Key used for encrypting data during transmission from the source to destination locations. (see [below for nested schema](#nestedatt--streams_kms_key))
+- `streams_kms_role` (String) The ARN of the KMS Key or Alias Key role used to define permissions on KMS Key usage.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `tracking_config_arn` (String)
 
@@ -40,6 +43,16 @@ Read-Only:
 - `source` (String)
 
 
+<a id="nestedatt--streams_kms_key"></a>
+### Nested Schema for `streams_kms_key`
+
+Read-Only:
+
+- `kms_alias_arn` (String)
+- `kms_alias_name` (String)
+- `kms_key_arn` (String)
+
+
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
@@ -47,5 +60,3 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
-
-

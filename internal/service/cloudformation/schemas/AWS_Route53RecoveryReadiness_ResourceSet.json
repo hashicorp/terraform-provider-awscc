@@ -2,7 +2,6 @@
   "typeName": "AWS::Route53RecoveryReadiness::ResourceSet",
   "description": "Schema for the AWS Route53 Recovery Readiness ResourceSet Resource and API.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-route53-recovery-readiness.git",
-  "taggable": true,
   "definitions": {
     "Tag": {
       "type": "object",
@@ -12,12 +11,7 @@
           "type": "string"
         },
         "Value": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "maxItems": 50
-          },
-          "insertionOrder": false
+          "type": "string"
         }
       },
       "required": [
@@ -167,7 +161,6 @@
   },
   "additionalProperties": false,
   "required": [
-    "ResourceSetName",
     "ResourceSetType",
     "Resources"
   ],
@@ -187,12 +180,15 @@
         "route53-recovery-readiness:CreateResourceSet",
         "route53-recovery-readiness:GetResourceSet",
         "route53-recovery-readiness:GetRecoveryGroup",
-        "route53-recovery-readiness:GetCell"
+        "route53-recovery-readiness:GetCell",
+        "route53-recovery-readiness:ListTagsForResources",
+        "route53-recovery-readiness:TagResource"
       ]
     },
     "read": {
       "permissions": [
-        "route53-recovery-readiness:GetResourceSet"
+        "route53-recovery-readiness:GetResourceSet",
+        "route53-recovery-readiness:ListTagsForResources"
       ]
     },
     "update": {
@@ -200,7 +196,10 @@
         "route53-recovery-readiness:UpdateResourceSet",
         "route53-recovery-readiness:GetResourceSet",
         "route53-recovery-readiness:GetRecoveryGroup",
-        "route53-recovery-readiness:GetCell"
+        "route53-recovery-readiness:GetCell",
+        "route53-recovery-readiness:ListTagsForResources",
+        "route53-recovery-readiness:TagResource",
+        "route53-recovery-readiness:UntagResource"
       ]
     },
     "delete": {
@@ -214,5 +213,17 @@
         "route53-recovery-readiness:ListResourceSets"
       ]
     }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": false,
+    "permissions": [
+      "route53-recovery-readiness:TagResource",
+      "route53-recovery-readiness:UntagResource",
+      "route53-recovery-readiness:ListTagsForResource"
+    ]
   }
 }

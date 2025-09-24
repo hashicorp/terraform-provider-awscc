@@ -1,1 +1,1 @@
-$ terraform import awscc_rekognition_project.example <resource ID>
+$ terraform import awscc_rekognition_project.example "project_name"

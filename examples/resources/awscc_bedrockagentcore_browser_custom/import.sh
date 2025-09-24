@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrockagentcore_browser_custom.example "browser_id"

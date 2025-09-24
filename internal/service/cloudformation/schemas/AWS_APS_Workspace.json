@@ -1,117 +1,345 @@
 {
-    "typeName": "AWS::APS::Workspace",
-    "description": "Resource Type definition for AWS::APS::Workspace",
-    "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
-    "definitions": {
-        "Tag": {
-            "description": "A key-value pair to associate with a resource.",
-            "type": "object",
-            "properties": {
-                "Key": {
-                    "type": "string",
-                    "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-                    "minLength": 1,
-                    "maxLength": 128
-                },
-                "Value": {
-                    "type": "string",
-                    "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-                    "minLength": 0,
-                    "maxLength": 256
-                }
-            },
-            "required": [
-                "Key",
-                "Value"
-            ],
-            "additionalProperties": false
+  "typeName": "AWS::APS::Workspace",
+  "description": "Resource Type definition for AWS::APS::Workspace",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
         }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
     },
-    "properties": {
-        "WorkspaceId": {
-            "description": "Required to identify a specific APS Workspace.",
-            "type": "string",
-            "pattern": "",
-            "minLength": 1,
-            "maxLength": 100
-        },
-        "Alias": {
-            "description": "AMP Workspace alias.",
-            "type": "string",
-            "minLength": 0,
-            "maxLength": 100
-        },
-        "Arn": {
-            "description": "Workspace arn.",
-            "type": "string",
-            "pattern": "^arn:\b(aws|aws-us-gov|aws-cn)\b:aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$",
-            "minLength": 1,
-            "maxLength": 128
-        },
-        "AlertManagerDefinition":  {
-            "description": "The AMP Workspace alert manager definition data",
-            "type": "string"
-        },
-        "PrometheusEndpoint": {
-            "description": "AMP Workspace prometheus endpoint",
-            "type": "string"
-        },
-        "Tags": {
-            "description": "An array of key-value pairs to apply to this resource.",
-            "type": "array",
-            "uniqueItems": true,
-            "insertionOrder": false,
-            "items": {
-                "$ref": "#/definitions/Tag"
-            }
+    "LoggingConfiguration": {
+      "description": "Logging configuration",
+      "type": "object",
+      "properties": {
+        "LogGroupArn": {
+          "description": "CloudWatch log group ARN",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 512
         }
+      },
+      "additionalProperties": false
     },
-    "additionalProperties": false,
-    "required": [],
-    "readOnlyProperties": [
-        "/properties/WorkspaceId",
-        "/properties/Arn",
-        "/properties/PrometheusEndpoint"
-    ],
-    "taggable": true,
-    "primaryIdentifier": [
-        "/properties/Arn"
-    ],
-    "handlers": {
-        "create": {
-            "permissions": [
-                "aps:CreateWorkspace",
-                "aps:TagResource",
-                "aps:CreateAlertManagerDefinition"
-            ]
+    "Label": {
+      "description": "Series label",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$",
+          "description": "Name of the label",
+          "minLength": 1
         },
-        "read": {
-            "permissions": [
-                "aps:DescribeWorkspace",
-                "aps:ListTagsForResource",
-                "aps:DescribeAlertManagerDefinition"
-            ]
-        },
-        "update": {
-            "permissions": [
-                "aps:UpdateWorkspaceAlias",
-                "aps:TagResource",
-                "aps:UntagResource",
-                "aps:ListTagsForResource",
-                "aps:PutAlertManagerDefinition"
-            ]
-        },
-        "delete": {
-            "permissions": [
-                "aps:DeleteWorkspace",
-                "aps:DeleteAlertManagerDefinition"
-            ]
-        },
-        "list": {
-            "permissions": [
-                "aps:ListWorkspaces",
-                "aps:ListTagsForResource"
-            ]
+        "Value": {
+          "type": "string",
+          "description": "Value of the label",
+          "minLength": 1
         }
+      },
+      "required": [
+        "Name",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "LimitsPerLabelSetEntry": {
+      "description": "Limits that can be applied to a label set",
+      "type": "object",
+      "properties": {
+        "MaxSeries": {
+          "description": "The maximum number of active series that can be ingested for this label set",
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "LimitsPerLabelSet": {
+      "description": "Label set and its associated limits",
+      "type": "object",
+      "properties": {
+        "Limits": {
+          "$ref": "#/definitions/LimitsPerLabelSetEntry"
+        },
+        "LabelSet": {
+          "description": "An array of series labels",
+          "type": "array",
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Label"
+          },
+          "minItems": 0
+        }
+      },
+      "required": [
+        "Limits",
+        "LabelSet"
+      ],
+      "additionalProperties": false
+    },
+    "WorkspaceConfiguration": {
+      "description": "Workspace configuration",
+      "type": "object",
+      "properties": {
+        "RetentionPeriodInDays": {
+          "description": "How many days that metrics are retained in the workspace",
+          "type": "integer",
+          "minimum": 1
+        },
+        "LimitsPerLabelSets": {
+          "description": "An array of label set and associated limits",
+          "type": "array",
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/LimitsPerLabelSet"
+          },
+          "minItems": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "CloudWatchLogDestination": {
+      "description": "Represents a cloudwatch logs destination for query logging",
+      "type": "object",
+      "properties": {
+        "LogGroupArn": {
+          "description": "The ARN of the CloudWatch Logs log group",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 512
+        }
+      },
+      "required": [
+        "LogGroupArn"
+      ],
+      "additionalProperties": false
+    },
+    "LoggingFilter": {
+      "description": "Filters for logging",
+      "type": "object",
+      "properties": {
+        "QspThreshold": {
+          "description": "Query logs with QSP above this limit are vended",
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "QspThreshold"
+      ],
+      "additionalProperties": false
+    },
+    "LoggingDestination": {
+      "description": "Destinations for query logging",
+      "type": "object",
+      "properties": {
+        "CloudWatchLogs": {
+          "$ref": "#/definitions/CloudWatchLogDestination"
+        },
+        "Filters": {
+          "$ref": "#/definitions/LoggingFilter"
+        }
+      },
+      "required": [
+        "CloudWatchLogs",
+        "Filters"
+      ],
+      "additionalProperties": false
+    },
+    "QueryLoggingConfiguration": {
+      "description": "Query logging configuration",
+      "type": "object",
+      "properties": {
+        "Destinations": {
+          "description": "The destinations configuration for query logging",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoggingDestination"
+          },
+          "minItems": 1,
+          "maxItems": 1
+        }
+      },
+      "required": [
+        "Destinations"
+      ],
+      "additionalProperties": false
     }
+  },
+  "properties": {
+    "WorkspaceId": {
+      "description": "Required to identify a specific APS Workspace.",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{1,99}$",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "Alias": {
+      "description": "AMP Workspace alias.",
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 100
+    },
+    "Arn": {
+      "description": "Workspace arn.",
+      "type": "string",
+      "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "AlertManagerDefinition": {
+      "description": "The AMP Workspace alert manager definition data",
+      "type": "string"
+    },
+    "PrometheusEndpoint": {
+      "description": "AMP Workspace prometheus endpoint",
+      "type": "string"
+    },
+    "LoggingConfiguration": {
+      "$ref": "#/definitions/LoggingConfiguration"
+    },
+    "WorkspaceConfiguration": {
+      "$ref": "#/definitions/WorkspaceConfiguration"
+    },
+    "QueryLoggingConfiguration": {
+      "$ref": "#/definitions/QueryLoggingConfiguration"
+    },
+    "KmsKeyArn": {
+      "description": "KMS Key ARN used to encrypt and decrypt AMP workspace data.",
+      "type": "string",
+      "pattern": "^arn:aws[-a-z]*:kms:[-a-z0-9]+:[0-9]{12}:key\/.+$",
+      "minLength": 20,
+      "maxLength": 2048
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [],
+  "createOnlyProperties": [
+    "/properties/KmsKeyArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/WorkspaceId",
+    "/properties/Arn",
+    "/properties/PrometheusEndpoint"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "aps:TagResource",
+      "aps:UntagResource"
+    ]
+  },
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "aps:CreateWorkspace",
+        "aps:DescribeWorkspace",
+        "aps:TagResource",
+        "aps:CreateAlertManagerDefinition",
+        "aps:DescribeAlertManagerDefinition",
+        "aps:CreateLoggingConfiguration",
+        "aps:CreateQueryLoggingConfiguration",
+        "aps:DescribeWorkspaceConfiguration",
+        "aps:UpdateWorkspaceConfiguration",
+        "logs:CreateLogDelivery",
+        "logs:GetLogDelivery",
+        "logs:ListLogDeliveries",
+        "logs:PutResourcePolicy",
+        "kms:CreateGrant",
+        "kms:Decrypt",
+        "kms:GenerateDataKey"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "aps:DescribeWorkspace",
+        "aps:ListTagsForResource",
+        "aps:DescribeAlertManagerDefinition",
+        "aps:DescribeLoggingConfiguration",
+        "aps:DescribeQueryLoggingConfiguration",
+        "aps:DescribeWorkspaceConfiguration"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "aps:UpdateWorkspaceAlias",
+        "aps:DescribeWorkspace",
+        "aps:TagResource",
+        "aps:UntagResource",
+        "aps:ListTagsForResource",
+        "aps:CreateAlertManagerDefinition",
+        "aps:PutAlertManagerDefinition",
+        "aps:DeleteAlertManagerDefinition",
+        "aps:CreateLoggingConfiguration",
+        "aps:DescribeLoggingConfiguration",
+        "aps:UpdateLoggingConfiguration",
+        "aps:DeleteLoggingConfiguration",
+        "aps:DescribeWorkspaceConfiguration",
+        "aps:UpdateWorkspaceConfiguration",
+        "aps:CreateQueryLoggingConfiguration",
+        "aps:UpdateQueryLoggingConfiguration",
+        "aps:DeleteQueryLoggingConfiguration",
+        "aps:DescribeQueryLoggingConfiguration",
+        "logs:CreateLogDelivery",
+        "logs:GetLogDelivery",
+        "logs:UpdateLogDelivery",
+        "logs:ListLogDeliveries",
+        "logs:DeleteLogDelivery",
+        "logs:PutResourcePolicy"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "aps:DeleteWorkspace",
+        "aps:DescribeWorkspace",
+        "aps:DeleteAlertManagerDefinition",
+        "aps:DeleteLoggingConfiguration",
+        "aps:DeleteQueryLoggingConfiguration",
+        "logs:DeleteLogDelivery"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "aps:ListWorkspaces",
+        "aps:ListTagsForResource"
+      ]
+    }
+  }
 }

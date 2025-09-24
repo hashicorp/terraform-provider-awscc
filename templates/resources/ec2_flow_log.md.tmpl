@@ -1,0 +1,64 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### CloudWatch Loggging
+
+Creates a AWS VPC flow log with CloudWatch Logs as the destination.
+
+{{ tffile (printf "examples/resources/%s/cloudwatch.tf" .Name)}}
+
+### Amazon Data Firehose
+Creates a AWS VPC flow log with Amazon Data Firehose as the destination.
+
+{{ tffile (printf "examples/resources/%s/firehose.tf" .Name)}}
+
+### S3 Logging
+
+Creates a AWS VPC flow log with S3 as the destination.
+
+{{ tffile (printf "examples/resources/%s/s3.tf" .Name)}}
+
+### S3 Logging in Parquet Format
+
+Creates a AWS VPC flow log with S3 as the destination in Parquet file format.
+
+{{ tffile (printf "examples/resources/%s/s3_parquet.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if or .HasImport .HasImportIDConfig .HasImportIdentityConfig }}
+
+## Import
+
+Import is supported using the following syntax:
+{{- end }}
+{{- if .HasImportIdentityConfig }}
+
+In Terraform v1.12.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `identity` attribute, for example:
+
+{{tffile .ImportIdentityConfigFile }}
+
+{{ .IdentitySchemaMarkdown | trimspace }}
+{{- end }}
+{{- if .HasImportIDConfig }}
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+{{tffile .ImportIDConfigFile }}
+{{- end }}
+{{- if .HasImport }}
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
+{{codefile "shell" .ImportFile }}
+
+{{- end }}

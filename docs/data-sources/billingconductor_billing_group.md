@@ -39,6 +39,7 @@ Data Source schema for AWS::BillingConductor::BillingGroup
 
 Read-Only:
 
+- `auto_associate` (Boolean)
 - `linked_account_ids` (Set of String)
 
 
@@ -57,5 +58,3 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
-
-

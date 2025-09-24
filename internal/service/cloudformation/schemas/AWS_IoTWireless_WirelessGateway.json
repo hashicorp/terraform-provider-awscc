@@ -77,12 +77,11 @@
       "type": "string"
     },
     "ThingName": {
-      "description": "Thing Arn. If there is a Thing created, this can be returned with a Get call.",
+      "description": "Thing Name. If there is a Thing created, this can be returned with a Get call.",
       "type": "string"
     },
     "LastUplinkReceivedAt": {
       "description": "The date and time when the most recent uplink was received.",
-      "pattern": "",
       "type": "string"
     }
   },
@@ -91,20 +90,29 @@
     "LoRaWAN"
   ],
   "readOnlyProperties": [
-    "/properties/ThingName",
     "/properties/Id",
     "/properties/Arn"
   ],
   "primaryIdentifier": [
     "/properties/Id"
   ],
-  "taggable": true,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "iotwireless:TagResource",
+      "iotwireless:UntagResource",
+      "iotwireless:ListTagsForResource"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
         "iotwireless:CreateWirelessGateway",
-        "iotwireless:TagResource",
-        "iotwireless:ListTagsForResource"
+        "iotwireless:TagResource"
       ]
     },
     "read": {
@@ -115,14 +123,17 @@
     },
     "update": {
       "permissions": [
+        "iotwireless:GetWirelessGateway",
         "iotwireless:UpdateWirelessGateway",
-        "iotwireless:UntagResource",
-        "iotwireless:ListTagsForResource"
+        "iotwireless:AssociateWirelessGatewayWithThing",
+        "iotwireless:TagResource",
+        "iotwireless:UntagResource"
       ]
     },
     "delete": {
       "permissions": [
-        "iotwireless:DeleteWirelessGateway"
+        "iotwireless:DeleteWirelessGateway",
+        "iotwireless:DisassociateWirelessGatewayFromThing"
       ]
     },
     "list": {

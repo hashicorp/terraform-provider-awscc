@@ -86,12 +86,33 @@
         },
         "StatefulEngineOptions": {
           "$ref": "#/definitions/StatefulEngineOptions"
+        },
+        "PolicyVariables": {
+          "type": "object",
+          "properties": {
+            "RuleVariables": {
+              "$ref": "#/definitions/RuleVariables"
+            }
+          },
+          "additionalProperties": false
+        },
+        "TLSInspectionConfigurationArn": {
+          "$ref": "#/definitions/ResourceArn"
         }
       },
       "required": [
         "StatelessDefaultActions",
         "StatelessFragmentDefaultActions"
       ],
+      "additionalProperties": false
+    },
+    "RuleVariables": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/IPSet"
+        }
+      },
       "additionalProperties": false
     },
     "CustomAction": {
@@ -162,6 +183,12 @@
         },
         "Priority": {
           "$ref": "#/definitions/Priority"
+        },
+        "Override": {
+          "$ref": "#/definitions/StatefulRuleGroupOverride"
+        },
+        "DeepThreatInspection": {
+          "type": "boolean"
         }
       },
       "required": [
@@ -190,11 +217,59 @@
       "minimum": 1,
       "maximum": 65535
     },
+    "VariableDefinition": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^.*$"
+    },
+    "IPSet": {
+      "type": "object",
+      "properties": {
+        "Definition": {
+          "type": "array",
+          "insertionOrder": true,
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/VariableDefinition"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "StatefulRuleGroupOverride": {
+      "type": "object",
+      "properties": {
+        "Action": {
+          "$ref": "#/definitions/OverrideAction"
+        }
+      },
+      "additionalProperties": false
+    },
+    "OverrideAction": {
+      "type": "string",
+      "enum": [
+        "DROP_TO_ALERT"
+      ]
+    },
     "StatefulEngineOptions": {
       "type": "object",
       "properties": {
         "RuleOrder": {
           "$ref": "#/definitions/RuleOrder"
+        },
+        "StreamExceptionPolicy": {
+          "$ref": "#/definitions/StreamExceptionPolicy"
+        },
+        "FlowTimeouts": {
+          "type": "object",
+          "properties": {
+            "TcpIdleTimeoutSeconds": {
+              "type": "integer",
+              "minimum": 60,
+              "maximum": 6000
+            }
+          },
+          "additionalProperties": false
         }
       },
       "additionalProperties": false
@@ -204,6 +279,14 @@
       "enum": [
         "DEFAULT_ACTION_ORDER",
         "STRICT_ORDER"
+      ]
+    },
+    "StreamExceptionPolicy": {
+      "type": "string",
+      "enum": [
+        "DROP",
+        "CONTINUE",
+        "REJECT"
       ]
     }
   },
@@ -241,6 +324,18 @@
       }
     }
   },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "network-firewall:TagResource",
+      "network-firewall:UntagResource",
+      "network-firewall:ListTagsForResource"
+    ]
+  },
   "required": [
     "FirewallPolicyName",
     "FirewallPolicy"
@@ -260,7 +355,9 @@
       "permissions": [
         "network-firewall:CreateFirewallPolicy",
         "network-firewall:DescribeFirewallPolicy",
-        "network-firewall:TagResource"
+        "network-firewall:ListTLSInspectionConfigurations",
+        "network-firewall:TagResource",
+        "network-firewall:ListRuleGroups"
       ]
     },
     "read": {
@@ -274,7 +371,9 @@
         "network-firewall:UpdateFirewallPolicy",
         "network-firewall:DescribeFirewallPolicy",
         "network-firewall:TagResource",
-        "network-firewall:UntagResource"
+        "network-firewall:UntagResource",
+        "network-firewall:ListRuleGroups",
+        "network-firewall:ListTLSInspectionConfigurations"
       ]
     },
     "delete": {

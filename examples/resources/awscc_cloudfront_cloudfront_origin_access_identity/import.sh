@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudfront_cloudfront_origin_access_identity.example <resource ID>
+$ terraform import awscc_cloudfront_cloudfront_origin_access_identity.example "id"

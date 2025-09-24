@@ -27,11 +27,12 @@ Data Source schema for AWS::NetworkManager::CoreNetwork
 - `description` (String) The description of core network
 - `edges` (Attributes List) The edges within a core network. (see [below for nested schema](#nestedatt--edges))
 - `global_network_id` (String) The ID of the global network that your core network is a part of.
+- `network_function_groups` (Attributes List) The network function groups within a core network. (see [below for nested schema](#nestedatt--network_function_groups))
 - `owner_account` (String) Owner of the core network
-- `policy_document` (String) Live policy document for the core network
+- `policy_document` (String) Live policy document for the core network, you must provide PolicyDocument in Json Format
 - `segments` (Attributes List) The segments within a core network. (see [below for nested schema](#nestedatt--segments))
 - `state` (String) The state of core network
-- `tags` (Attributes List) The tags for the global network. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) The tags for the global network. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--edges"></a>
 ### Nested Schema for `edges`
@@ -41,6 +42,25 @@ Read-Only:
 - `asn` (Number) The ASN of a core network edge.
 - `edge_location` (String) The Region where a core network edge is located.
 - `inside_cidr_blocks` (List of String)
+
+
+<a id="nestedatt--network_function_groups"></a>
+### Nested Schema for `network_function_groups`
+
+Read-Only:
+
+- `edge_locations` (List of String)
+- `name` (String) Name of network function group
+- `segments` (Attributes) (see [below for nested schema](#nestedatt--network_function_groups--segments))
+
+<a id="nestedatt--network_function_groups--segments"></a>
+### Nested Schema for `network_function_groups.segments`
+
+Read-Only:
+
+- `send_to` (List of String)
+- `send_via` (List of String)
+
 
 
 <a id="nestedatt--segments"></a>
@@ -60,5 +80,3 @@ Read-Only:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-
-

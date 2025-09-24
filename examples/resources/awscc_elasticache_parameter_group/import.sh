@@ -1,0 +1,1 @@
+$ terraform import awscc_elasticache_parameter_group.example "cache_parameter_group_name"

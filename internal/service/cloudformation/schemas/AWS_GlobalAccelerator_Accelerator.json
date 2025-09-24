@@ -28,7 +28,7 @@
     },
     "IpAddress": {
       "pattern": "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$",
-      "description": "The IP addresses from BYOIP Prefix pool.",
+      "description": "An IPV4 address",
       "type": "string"
     }
   },
@@ -46,12 +46,13 @@
       "default": "IPV4",
       "enum": [
         "IPV4",
-        "IPV6"
+        "DUAL_STACK"
       ]
     },
     "IpAddresses": {
       "description": "The IP addresses from BYOIP Prefix pool.",
       "default": null,
+      "insertionOrder": true,
       "type": "array",
       "items": {
         "$ref": "#/definitions/IpAddress"
@@ -63,7 +64,28 @@
       "type": "boolean"
     },
     "DnsName": {
-      "description": "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IP addresses.",
+      "description": "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IPv4 addresses.",
+      "type": "string"
+    },
+    "Ipv4Addresses": {
+      "description": "The IPv4 addresses assigned to the accelerator.",
+      "insertionOrder": true,
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "Ipv6Addresses": {
+      "description": "The IPv6 addresses assigned if the accelerator is dualstack",
+      "default": null,
+      "insertionOrder": true,
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "DualStackDnsName": {
+      "description": "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IPv4 and IPv6 addresses.",
       "type": "string"
     },
     "AcceleratorArn": {
@@ -71,11 +93,19 @@
       "type": "string"
     },
     "Tags": {
+      "insertionOrder": true,
       "type": "array",
       "items": {
         "$ref": "#/definitions/Tag"
       }
     }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags"
   },
   "required": [
     "Name"
@@ -97,13 +127,15 @@
       "permissions": [
         "globalaccelerator:UpdateAccelerator",
         "globalaccelerator:TagResource",
-        "globalaccelerator:UntagResource"
+        "globalaccelerator:UntagResource",
+        "globalaccelerator:DescribeAccelerator"
       ]
     },
     "delete": {
       "permissions": [
         "globalaccelerator:UpdateAccelerator",
-        "globalaccelerator:DeleteAccelerator"
+        "globalaccelerator:DeleteAccelerator",
+        "globalaccelerator:DescribeAccelerator"
       ]
     },
     "list": {
@@ -114,7 +146,10 @@
   },
   "readOnlyProperties": [
     "/properties/AcceleratorArn",
-    "/properties/DnsName"
+    "/properties/DnsName",
+    "/properties/Ipv4Addresses",
+    "/properties/Ipv6Addresses",
+    "/properties/DualStackDnsName"
   ],
   "primaryIdentifier": [
     "/properties/AcceleratorArn"

@@ -44,5 +44,3 @@ Read-Only:
 - `role_arn` (String) The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
 - `secret_arn` (String) The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
 - `url` (String) The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
-
-

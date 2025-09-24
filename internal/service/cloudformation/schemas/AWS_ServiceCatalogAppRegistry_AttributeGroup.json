@@ -61,7 +61,18 @@
       "/properties/Name"
     ]
   ],
-  "taggable": true,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "servicecatalog:TagResource",
+      "servicecatalog:UntagResource",
+      "servicecatalog:ListTagsForResource"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -76,6 +87,7 @@
     },
     "update": {
       "permissions": [
+        "servicecatalog:GetAttributeGroup",
         "servicecatalog:UpdateAttributeGroup",
         "servicecatalog:ListTagsForResource",
         "servicecatalog:TagResource",

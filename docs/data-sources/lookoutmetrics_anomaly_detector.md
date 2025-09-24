@@ -148,15 +148,15 @@ Read-Only:
 - `templated_path_list` (List of String)
 
 <a id="nestedatt--metric_set_list--metric_source--s3_source_config--file_format_descriptor"></a>
-### Nested Schema for `metric_set_list.metric_source.s3_source_config.templated_path_list`
+### Nested Schema for `metric_set_list.metric_source.s3_source_config.file_format_descriptor`
 
 Read-Only:
 
-- `csv_format_descriptor` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--s3_source_config--templated_path_list--csv_format_descriptor))
-- `json_format_descriptor` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--s3_source_config--templated_path_list--json_format_descriptor))
+- `csv_format_descriptor` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--s3_source_config--file_format_descriptor--csv_format_descriptor))
+- `json_format_descriptor` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--s3_source_config--file_format_descriptor--json_format_descriptor))
 
-<a id="nestedatt--metric_set_list--metric_source--s3_source_config--templated_path_list--csv_format_descriptor"></a>
-### Nested Schema for `metric_set_list.metric_source.s3_source_config.templated_path_list.csv_format_descriptor`
+<a id="nestedatt--metric_set_list--metric_source--s3_source_config--file_format_descriptor--csv_format_descriptor"></a>
+### Nested Schema for `metric_set_list.metric_source.s3_source_config.file_format_descriptor.csv_format_descriptor`
 
 Read-Only:
 
@@ -168,8 +168,8 @@ Read-Only:
 - `quote_symbol` (String)
 
 
-<a id="nestedatt--metric_set_list--metric_source--s3_source_config--templated_path_list--json_format_descriptor"></a>
-### Nested Schema for `metric_set_list.metric_source.s3_source_config.templated_path_list.json_format_descriptor`
+<a id="nestedatt--metric_set_list--metric_source--s3_source_config--file_format_descriptor--json_format_descriptor"></a>
+### Nested Schema for `metric_set_list.metric_source.s3_source_config.file_format_descriptor.json_format_descriptor`
 
 Read-Only:
 
@@ -187,5 +187,3 @@ Read-Only:
 
 - `column_format` (String) A timestamp format for the timestamps in the dataset
 - `column_name` (String) Name of a column in the data.
-
-

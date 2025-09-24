@@ -1,1 +1,1 @@
-$ terraform import awscc_refactorspaces_environment.example <resource ID>
+$ terraform import awscc_refactorspaces_environment.example "environment_identifier"

@@ -1,0 +1,1 @@
+$ terraform import awscc_applicationsignals_discovery.example "account_id"

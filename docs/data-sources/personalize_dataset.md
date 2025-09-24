@@ -45,5 +45,3 @@ Read-Only:
 Read-Only:
 
 - `data_location` (String) The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored.
-
-

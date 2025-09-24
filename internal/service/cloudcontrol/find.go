@@ -1,14 +1,17 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 package cloudcontrol
 
 import (
 	"context"
-	"errors"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
+	"github.com/hashicorp/terraform-provider-awscc/internal/errs"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
@@ -29,7 +32,7 @@ func FindResourceByTypeNameAndID(ctx context.Context, conn *cloudcontrol.Client,
 
 	output, err := conn.GetResource(ctx, input)
 
-	if rnfe := (*types.ResourceNotFoundException)(nil); errors.As(err, &rnfe) {
+	if errs.IsA[*types.ResourceNotFoundException](err) {
 		return nil, &tfresource.NotFoundError{LastError: err}
 	}
 

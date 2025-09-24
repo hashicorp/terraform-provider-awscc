@@ -24,6 +24,7 @@ Data Source schema for AWS::Route53Resolver::FirewallRuleGroupAssociation
 - `arn` (String) Arn
 - `creation_time` (String) Rfc3339TimeString
 - `creator_request_id` (String) The id of the creator request.
+- `firewall_rule_group_association_id` (String) Id
 - `firewall_rule_group_id` (String) FirewallRuleGroupId
 - `managed_owner_name` (String) ServicePrincipal
 - `modification_time` (String) Rfc3339TimeString
@@ -42,5 +43,3 @@ Read-Only:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-
-

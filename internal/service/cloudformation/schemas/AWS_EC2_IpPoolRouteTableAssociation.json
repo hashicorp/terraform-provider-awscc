@@ -1,0 +1,64 @@
+{
+  "typeName": "AWS::EC2::IpPoolRouteTableAssociation",
+  "description": "Resource Type definition for AWS::EC2::IpPoolRouteTableAssociation",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ec2-ippoolroutetableassociation.git",
+  "additionalProperties": false,
+  "properties": {
+    "AssociationId": {
+      "description": "The route table association ID.",
+      "type": "string"
+    },
+    "PublicIpv4Pool": {
+      "description": "The ID of the public IPv4 pool.",
+      "type": "string"
+    },
+    "RouteTableId": {
+      "description": "The ID of the route table.",
+      "type": "string"
+    }
+  },
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "required": [
+    "PublicIpv4Pool",
+    "RouteTableId"
+  ],
+  "createOnlyProperties": [
+    "/properties/PublicIpv4Pool",
+    "/properties/RouteTableId"
+  ],
+  "readOnlyProperties": [
+    "/properties/AssociationId"
+  ],
+  "primaryIdentifier": [
+    "/properties/AssociationId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ec2:AssociateRouteTable",
+        "ec2:DescribeRouteTables"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ec2:DescribeRouteTables"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:DisassociateRouteTable",
+        "ec2:DescribeRouteTables"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:DescribeRouteTables"
+      ]
+    }
+  }
+}

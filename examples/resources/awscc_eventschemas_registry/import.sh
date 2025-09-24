@@ -1,0 +1,1 @@
+$ terraform import awscc_eventschemas_registry.example "registry_arn"

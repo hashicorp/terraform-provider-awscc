@@ -31,6 +31,7 @@ Data Source schema for AWS::ACMPCA::CertificateAuthority
 - `subject` (Attributes) Structure that contains X.500 distinguished name information for your CA. (see [below for nested schema](#nestedatt--subject))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `type` (String) The type of the certificate authority.
+- `usage_mode` (String) Usage mode of the ceritificate authority.
 
 <a id="nestedatt--csr_extensions"></a>
 ### Nested Schema for `csr_extensions`
@@ -79,13 +80,13 @@ Read-Only:
 - `uniform_resource_identifier` (String) String that contains X.509 UniformResourceIdentifier information.
 
 <a id="nestedatt--csr_extensions--subject_information_access--access_location--directory_name"></a>
-### Nested Schema for `csr_extensions.subject_information_access.access_location.uniform_resource_identifier`
+### Nested Schema for `csr_extensions.subject_information_access.access_location.directory_name`
 
 Read-Only:
 
 - `common_name` (String)
 - `country` (String)
-- `custom_attributes` (Attributes List) Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes. (see [below for nested schema](#nestedatt--csr_extensions--subject_information_access--access_location--uniform_resource_identifier--custom_attributes))
+- `custom_attributes` (Attributes List) Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes. (see [below for nested schema](#nestedatt--csr_extensions--subject_information_access--access_location--directory_name--custom_attributes))
 - `distinguished_name_qualifier` (String)
 - `generation_qualifier` (String)
 - `given_name` (String)
@@ -99,8 +100,8 @@ Read-Only:
 - `surname` (String)
 - `title` (String)
 
-<a id="nestedatt--csr_extensions--subject_information_access--access_location--uniform_resource_identifier--custom_attributes"></a>
-### Nested Schema for `csr_extensions.subject_information_access.access_location.uniform_resource_identifier.custom_attributes`
+<a id="nestedatt--csr_extensions--subject_information_access--access_location--directory_name--custom_attributes"></a>
+### Nested Schema for `csr_extensions.subject_information_access.access_location.directory_name.custom_attributes`
 
 Read-Only:
 
@@ -110,7 +111,7 @@ Read-Only:
 
 
 <a id="nestedatt--csr_extensions--subject_information_access--access_location--edi_party_name"></a>
-### Nested Schema for `csr_extensions.subject_information_access.access_location.uniform_resource_identifier`
+### Nested Schema for `csr_extensions.subject_information_access.access_location.edi_party_name`
 
 Read-Only:
 
@@ -119,7 +120,7 @@ Read-Only:
 
 
 <a id="nestedatt--csr_extensions--subject_information_access--access_location--other_name"></a>
-### Nested Schema for `csr_extensions.subject_information_access.access_location.uniform_resource_identifier`
+### Nested Schema for `csr_extensions.subject_information_access.access_location.other_name`
 
 Read-Only:
 
@@ -152,11 +153,22 @@ Read-Only:
 
 Read-Only:
 
+- `crl_distribution_point_extension_configuration` (Attributes) Configures the default behavior of the CRL Distribution Point extension for certificates issued by your certificate authority (see [below for nested schema](#nestedatt--revocation_configuration--crl_configuration--crl_distribution_point_extension_configuration))
+- `crl_type` (String)
 - `custom_cname` (String)
+- `custom_path` (String)
 - `enabled` (Boolean)
 - `expiration_in_days` (Number)
 - `s3_bucket_name` (String)
 - `s3_object_acl` (String)
+
+<a id="nestedatt--revocation_configuration--crl_configuration--crl_distribution_point_extension_configuration"></a>
+### Nested Schema for `revocation_configuration.crl_configuration.crl_distribution_point_extension_configuration`
+
+Read-Only:
+
+- `omit_extension` (Boolean)
+
 
 
 <a id="nestedatt--revocation_configuration--ocsp_configuration"></a>
@@ -207,5 +219,3 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
-
-

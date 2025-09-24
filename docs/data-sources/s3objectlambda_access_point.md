@@ -21,12 +21,22 @@ Data Source schema for AWS::S3ObjectLambda::AccessPoint
 
 ### Read-Only
 
+- `alias` (Attributes) (see [below for nested schema](#nestedatt--alias))
 - `arn` (String)
 - `creation_date` (String) The date and time when the Object lambda Access Point was created.
 - `name` (String) The name you want to assign to this Object lambda Access Point.
 - `object_lambda_configuration` (Attributes) The Object lambda Access Point Configuration that configures transformations to be applied on the objects on specified S3 Actions (see [below for nested schema](#nestedatt--object_lambda_configuration))
 - `policy_status` (Attributes) (see [below for nested schema](#nestedatt--policy_status))
 - `public_access_block_configuration` (Attributes) The PublicAccessBlock configuration that you want to apply to this Access Point. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status 'The Meaning of Public' in the Amazon Simple Storage Service Developer Guide. (see [below for nested schema](#nestedatt--public_access_block_configuration))
+
+<a id="nestedatt--alias"></a>
+### Nested Schema for `alias`
+
+Read-Only:
+
+- `status` (String) The status of the Object Lambda alias.
+- `value` (String) The value of the Object Lambda alias.
+
 
 <a id="nestedatt--object_lambda_configuration"></a>
 ### Nested Schema for `object_lambda_configuration`
@@ -87,5 +97,3 @@ Enabling this setting doesn't affect existing policies or ACLs.
 - `ignore_public_acls` (Boolean) Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.
 - `restrict_public_buckets` (Boolean) Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to TRUE restricts access to this bucket to only AWS services and authorized users within this account if the bucket has a public policy.
 Enabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.
-
-

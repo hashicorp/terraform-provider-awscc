@@ -1,0 +1,111 @@
+{
+  "typeName": "AWS::DataSync::StorageSystem",
+  "description": "Resource Type definition for AWS::DataSync::StorageSystem",
+  "additionalProperties": false,
+  "properties": {
+    "ConnectivityStatus": {
+      "type": "string"
+    },
+    "StorageSystemArn": {
+      "type": "string"
+    },
+    "ServerCredentials": {
+      "$ref": "#/definitions/ServerCredentials"
+    },
+    "SecretsManagerArn": {
+      "type": "string"
+    },
+    "ServerConfiguration": {
+      "$ref": "#/definitions/ServerConfiguration"
+    },
+    "CloudWatchLogGroupArn": {
+      "type": "string"
+    },
+    "SystemType": {
+      "type": "string"
+    },
+    "Id": {
+      "type": "string"
+    },
+    "AgentArns": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "Name": {
+      "type": "string"
+    }
+  },
+  "definitions": {
+    "ServerCredentials": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Username": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Username",
+        "Password"
+      ]
+    },
+    "ServerConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ServerHostname": {
+          "type": "string"
+        },
+        "ServerPort": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "ServerHostname"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Value": {
+          "type": "string"
+        },
+        "Key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    }
+  },
+  "required": [
+    "ServerConfiguration",
+    "SystemType",
+    "AgentArns"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "readOnlyProperties": [
+    "/properties/Id",
+    "/properties/StorageSystemArn",
+    "/properties/SecretsManagerArn",
+    "/properties/ConnectivityStatus"
+  ]
+}

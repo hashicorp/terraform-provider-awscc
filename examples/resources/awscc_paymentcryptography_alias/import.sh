@@ -1,0 +1,1 @@
+$ terraform import awscc_paymentcryptography_alias.example "alias_name"

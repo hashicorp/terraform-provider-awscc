@@ -1,0 +1,1 @@
+$ terraform import awscc_lakeformation_tag_association.example "resource_identifier|tags_identifier"

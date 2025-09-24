@@ -38,5 +38,3 @@ Read-Only:
 - `max_connections_percent` (Number) The maximum size of the connection pool for each target in a target group.
 - `max_idle_connections_percent` (Number) Controls how actively the proxy closes idle database connections in the connection pool.
 - `session_pinning_filters` (List of String) Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection.
-
-

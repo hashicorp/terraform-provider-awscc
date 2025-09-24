@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrock_intelligent_prompt_router.example "prompt_router_arn"

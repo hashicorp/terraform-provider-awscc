@@ -1,6 +1,7 @@
 {
   "typeName": "AWS::Amplify::App",
   "description": "The AWS::Amplify::App resource creates Apps in the Amplify Console. An App is a collection of branches.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-amplify",
   "additionalProperties": false,
   "properties": {
     "AccessToken": {
@@ -36,6 +37,15 @@
       "minLength": 1,
       "maxLength": 25000,
       "pattern": "(?s).+"
+    },
+    "CacheConfig": {
+      "$ref": "#/definitions/CacheConfig"
+    },
+    "ComputeRoleArn": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 1000,
+      "pattern": "(?s).*"
     },
     "CustomHeaders": {
       "type": "string",
@@ -87,6 +97,14 @@
       "maxLength": 1000,
       "pattern": "(?s).*"
     },
+    "Platform": {
+      "type": "string",
+      "enum": [
+        "WEB",
+        "WEB_DYNAMIC",
+        "WEB_COMPUTE"
+      ]
+    },
     "Repository": {
       "type": "string",
       "pattern": "(?s).*"
@@ -97,6 +115,9 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "JobConfig": {
+      "$ref": "#/definitions/JobConfig"
     }
   },
   "definitions": {
@@ -140,6 +161,11 @@
             "$ref": "#/definitions/EnvironmentVariable"
           }
         },
+        "Framework": {
+          "type": "string",
+          "maxLength": 255,
+          "pattern": "(?s).*"
+        },
         "PullRequestEnvironmentName": {
           "type": "string",
           "maxLength": 20,
@@ -175,6 +201,36 @@
           "maxLength": 255
         }
       }
+    },
+    "CacheConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Type": {
+          "type": "string",
+          "enum": [
+            "AMPLIFY_MANAGED",
+            "AMPLIFY_MANAGED_NO_COOKIES"
+          ]
+        }
+      }
+    },
+    "JobConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "BuildComputeType": {
+          "type": "string",
+          "enum": [
+            "STANDARD_8GB",
+            "LARGE_16GB",
+            "XLARGE_72GB"
+          ]
+        }
+      },
+      "required": [
+        "BuildComputeType"
+      ]
     },
     "CustomRule": {
       "type": "object",
@@ -271,9 +327,22 @@
     "/properties/OauthToken",
     "/properties/AutoBranchCreationConfig"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "amplify:TagResource",
+      "amplify:ListTagsForResource",
+      "amplify:UntagResource"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
+        "amplify:GetApp",
         "amplify:CreateApp",
         "amplify:TagResource",
         "codecommit:GetRepository",
@@ -286,15 +355,18 @@
     },
     "delete": {
       "permissions": [
+        "amplify:GetApp",
         "amplify:DeleteApp",
         "codecommit:GetRepository",
         "codecommit:GetRepositoryTriggers",
+        "codecommit:PutRepositoryTriggers",
         "sns:Unsubscribe",
         "iam:PassRole"
       ]
     },
     "list": {
       "permissions": [
+        "amplify:GetApp",
         "amplify:ListApps",
         "amplify:ListTagsForResource",
         "iam:PassRole"
@@ -311,6 +383,7 @@
     },
     "update": {
       "permissions": [
+        "amplify:GetApp",
         "amplify:UpdateApp",
         "amplify:ListTagsForResource",
         "amplify:TagResource",

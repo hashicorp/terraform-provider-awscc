@@ -1,0 +1,53 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Basic usage with IAM Role and Tags
+To use {{.Name}} for creating Amazon EKS cluster with a IAM role and tags
+{{ tffile (printf "examples/resources/%s/eks_cluster_basic.tf" .Name)}}
+
+### Enable Control Plane Logging in Amazon EKS
+To use {{.Name}} for creating Amazon EKS Cluster with control plane logging enabled
+{{ tffile (printf "examples/resources/%s/eks_cluster_controlplane_logging.tf" .Name)}}
+
+### Enable Secrets Encryption with KMS in Amazon EKS
+To use {{.Name}} for creating Amazon EKS Cluster with secrets encryption enabled using AWS KMS
+{{ tffile (printf "examples/resources/%s/eks_cluster_encrypt_kubernetes_secrets.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if or .HasImport .HasImportIDConfig .HasImportIdentityConfig }}
+
+## Import
+
+Import is supported using the following syntax:
+{{- end }}
+{{- if .HasImportIdentityConfig }}
+
+In Terraform v1.12.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `identity` attribute, for example:
+
+{{tffile .ImportIdentityConfigFile }}
+
+{{ .IdentitySchemaMarkdown | trimspace }}
+{{- end }}
+{{- if .HasImportIDConfig }}
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+{{tffile .ImportIDConfigFile }}
+{{- end }}
+{{- if .HasImport }}
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
+{{codefile "shell" .ImportFile }}
+
+{{- end }}

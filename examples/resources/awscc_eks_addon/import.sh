@@ -1,1 +1,1 @@
-$ terraform import awscc_eks_addon.example <resource ID>
+$ terraform import awscc_eks_addon.example "cluster_name|addon_name"

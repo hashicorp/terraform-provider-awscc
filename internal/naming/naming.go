@@ -1,3 +1,6 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 package naming
 
 import (
@@ -74,11 +77,21 @@ func CloudFormationPropertyToTerraformAttribute(propertyName string) string {
 	return attributeName.String()
 }
 
+func SnakeCase(s string) string {
+	var matchFirstCap = regexp.MustCompile("(.)([A-Z][a-z]+)")
+	var matchAllCap = regexp.MustCompile("([a-z0-9])([A-Z])")
+
+	snake := matchFirstCap.ReplaceAllString(s, "${1}_${2}")
+	snake = matchAllCap.ReplaceAllString(snake, "${1}_${2}")
+
+	return strings.ToLower(snake)
+}
+
 // Pluralize converts a name to its plural form.
 // The inflection package is used as a first attempt to pluralize names,
 // but exceptions to the rule are handled as follows:
-//  - '_plural' is appended to a name ending in 's' e.g. 'windows'
-//  - 's' is appended to a name ending in a number
+//   - '_plural' is appended to a name ending in 's' e.g. 'windows'
+//   - 's' is appended to a name ending in a number
 func Pluralize(name string) string {
 	if name == "" {
 		return name
@@ -145,9 +158,11 @@ func isCapitalLetter(ch byte) bool {
 func isCustomName(name string) bool {
 	re1 := regexp.MustCompile(`((e|hd|n|z)fs|(E|HD|N|Z)FS)$`)
 	re2 := regexp.MustCompile(`tions$`)
-	re3 := regexp.MustCompile(`(W|w)indows$`)
+	re3 := regexp.MustCompile(`issions$`)
+	re4 := regexp.MustCompile(`(W|w)indows$`)
+	re5 := regexp.MustCompile(`(S|s)ettings$`)
 
-	return re1.MatchString(name) || re2.MatchString(name) || re3.MatchString(name)
+	return re1.MatchString(name) || re2.MatchString(name) || re3.MatchString(name) || re4.MatchString(name) || re5.MatchString(name)
 }
 
 func isLowercaseLetter(ch byte) bool {

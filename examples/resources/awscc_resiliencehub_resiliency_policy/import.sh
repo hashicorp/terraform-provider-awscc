@@ -1,1 +1,1 @@
-$ terraform import awscc_resiliencehub_resiliency_policy.example <resource ID>
+$ terraform import awscc_resiliencehub_resiliency_policy.example "policy_arn"

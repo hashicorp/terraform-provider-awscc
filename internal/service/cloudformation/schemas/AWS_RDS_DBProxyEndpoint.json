@@ -101,9 +101,20 @@
   "createOnlyProperties": [
     "/properties/DBProxyName",
     "/properties/DBProxyEndpointName",
-    "/properties/VpcSubnetIds",
-    "/properties/TargetRole"
+    "/properties/VpcSubnetIds"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "rds:AddTagsToResource",
+      "rds:RemoveTagsFromResource",
+      "rds:ListTagsForResource"
+    ]
+  },
   "primaryIdentifier": [
     "/properties/DBProxyEndpointName"
   ],

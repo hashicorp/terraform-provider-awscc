@@ -30,5 +30,3 @@ Data Source schema for AWS::CertificateManager::Account
 Read-Only:
 
 - `days_before_expiry` (Number)
-
-

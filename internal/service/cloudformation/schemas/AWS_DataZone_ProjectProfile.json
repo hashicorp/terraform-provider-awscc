@@ -1,0 +1,290 @@
+{
+  "typeName": "AWS::DataZone::ProjectProfile",
+  "description": "Definition of AWS::DataZone::ProjectProfile Resource Type",
+  "definitions": {
+    "AwsAccount": {
+      "type": "object",
+      "properties": {
+        "AwsAccountId": {
+          "type": "string",
+          "pattern": "^\\d{12}$"
+        }
+      },
+      "required": [
+        "AwsAccountId"
+      ],
+      "additionalProperties": false
+    },
+    "DeploymentMode": {
+      "type": "string",
+      "enum": [
+        "ON_CREATE",
+        "ON_DEMAND"
+      ]
+    },
+    "DesignationConfiguration": {
+      "type": "object",
+      "properties": {
+        "DesignationId": {
+          "type": "string",
+          "maxLength": 36,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        }
+      },
+      "required": [
+        "DesignationId"
+      ],
+      "additionalProperties": false
+    },
+    "EnvironmentConfiguration": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[\\w -]+$"
+        },
+        "Id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]{1,36}$"
+        },
+        "EnvironmentBlueprintId": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]{1,36}$"
+        },
+        "Description": {
+          "type": "string",
+          "maxLength": 2048
+        },
+        "DeploymentMode": {
+          "$ref": "#/definitions/DeploymentMode"
+        },
+        "ConfigurationParameters": {
+          "$ref": "#/definitions/EnvironmentConfigurationParametersDetails"
+        },
+        "AwsAccount": {
+          "$ref": "#/definitions/AwsAccount"
+        },
+        "AwsRegion": {
+          "$ref": "#/definitions/Region"
+        },
+        "DeploymentOrder": {
+          "type": "number",
+          "maximum": 16,
+          "minimum": 0
+        }
+      },
+      "required": [
+        "AwsRegion",
+        "EnvironmentBlueprintId",
+        "Name"
+      ],
+      "additionalProperties": false
+    },
+    "EnvironmentConfigurationParameter": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+        },
+        "Value": {
+          "type": "string"
+        },
+        "IsEditable": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "EnvironmentConfigurationParametersDetails": {
+      "type": "object",
+      "properties": {
+        "SsmPath": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 1
+        },
+        "ParameterOverrides": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentConfigurationParameter"
+          }
+        },
+        "ResolvedParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentConfigurationParameter"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProjectScope": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[\\w -]+$"
+        },
+        "Policy": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name"
+      ],
+      "additionalProperties": false
+    },
+    "Region": {
+      "type": "object",
+      "properties": {
+        "RegionName": {
+          "type": "string",
+          "maxLength": 16,
+          "minLength": 4,
+          "pattern": "^[a-z]{2}-?(iso|gov)?-{1}[a-z]*-{1}[0-9]$"
+        }
+      },
+      "required": [
+        "RegionName"
+      ],
+      "additionalProperties": false
+    },
+    "Status": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    }
+  },
+  "properties": {
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "CreatedBy": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "string",
+      "maxLength": 2048
+    },
+    "DomainId": {
+      "type": "string",
+      "pattern": "^dzd[_-][a-zA-Z0-9_-]{1,36}$"
+    },
+    "DomainIdentifier": {
+      "type": "string",
+      "pattern": "^dzd[_-][a-zA-Z0-9_-]{1,36}$"
+    },
+    "DomainUnitId": {
+      "type": "string",
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^[a-z0-9_\\-]+$"
+    },
+    "DomainUnitIdentifier": {
+      "type": "string",
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^[a-z0-9_\\-]+$"
+    },
+    "EnvironmentConfigurations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/EnvironmentConfiguration"
+      }
+    },
+    "Id": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]{1,36}$"
+    },
+    "Identifier": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]{1,36}$"
+    },
+    "LastUpdatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Name": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[\\w -]+$"
+    },
+    "Status": {
+      "$ref": "#/definitions/Status"
+    }
+  },
+  "required": [
+    "Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/CreatedAt",
+    "/properties/CreatedBy",
+    "/properties/DomainId",
+    "/properties/DomainUnitId",
+    "/properties/Id",
+    "/properties/Identifier",
+    "/properties/LastUpdatedAt",
+    "/properties/EnvironmentConfigurations/*/Id",
+    "/properties/EnvironmentConfigurations/*/ConfigurationParameters/ResolvedParameters"
+  ],
+  "writeOnlyProperties": [
+    "/properties/DomainUnitIdentifier"
+  ],
+  "createOnlyProperties": [
+    "/properties/DomainIdentifier"
+  ],
+  "primaryIdentifier": [
+    "/properties/DomainIdentifier",
+    "/properties/Identifier"
+  ],
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "datazone:CreateProjectProfile",
+        "datazone:GetProjectProfile",
+        "ssm:GetParameter"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "datazone:GetProjectProfile",
+        "ssm:GetParameter"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "datazone:UpdateProjectProfile",
+        "datazone:GetProjectProfile",
+        "ssm:GetParameter"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "datazone:DeleteProjectProfile",
+        "datazone:GetProjectProfile"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "datazone:ListProjectProfiles"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

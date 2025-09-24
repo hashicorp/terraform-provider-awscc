@@ -28,6 +28,8 @@ Data Source schema for AWS::Amplify::App
 - `auto_branch_creation_config` (Attributes) (see [below for nested schema](#nestedatt--auto_branch_creation_config))
 - `basic_auth_config` (Attributes) (see [below for nested schema](#nestedatt--basic_auth_config))
 - `build_spec` (String)
+- `cache_config` (Attributes) (see [below for nested schema](#nestedatt--cache_config))
+- `compute_role_arn` (String)
 - `custom_headers` (String)
 - `custom_rules` (Attributes List) (see [below for nested schema](#nestedatt--custom_rules))
 - `default_domain` (String)
@@ -35,8 +37,10 @@ Data Source schema for AWS::Amplify::App
 - `enable_branch_auto_deletion` (Boolean)
 - `environment_variables` (Attributes List) (see [below for nested schema](#nestedatt--environment_variables))
 - `iam_service_role` (String)
+- `job_config` (Attributes) (see [below for nested schema](#nestedatt--job_config))
 - `name` (String)
 - `oauth_token` (String)
+- `platform` (String)
 - `repository` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
@@ -53,6 +57,7 @@ Read-Only:
 - `enable_performance_mode` (Boolean)
 - `enable_pull_request_preview` (Boolean)
 - `environment_variables` (Attributes List) (see [below for nested schema](#nestedatt--auto_branch_creation_config--environment_variables))
+- `framework` (String)
 - `pull_request_environment_name` (String)
 - `stage` (String)
 
@@ -86,6 +91,14 @@ Read-Only:
 - `username` (String)
 
 
+<a id="nestedatt--cache_config"></a>
+### Nested Schema for `cache_config`
+
+Read-Only:
+
+- `type` (String)
+
+
 <a id="nestedatt--custom_rules"></a>
 ### Nested Schema for `custom_rules`
 
@@ -106,6 +119,14 @@ Read-Only:
 - `value` (String)
 
 
+<a id="nestedatt--job_config"></a>
+### Nested Schema for `job_config`
+
+Read-Only:
+
+- `build_compute_type` (String)
+
+
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
@@ -113,5 +134,3 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
-
-

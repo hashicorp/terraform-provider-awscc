@@ -1,0 +1,459 @@
+{
+  "typeName": "AWS::ODB::CloudVmCluster",
+  "description": "The AWS::ODB::CloudVmCluster resource creates a Cloud VM Cluster",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key"
+      ]
+    },
+    "DataCollectionOptions": {
+      "description": "Information about the data collection options enabled for a VM cluster.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "IsDiagnosticsEventsEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether diagnostic collection is enabled for the VM cluster."
+        },
+        "IsHealthMonitoringEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether health monitoring is enabled for the VM cluster."
+        },
+        "IsIncidentLogsEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether incident logs are enabled for the cloud VM cluster."
+        }
+      }
+    },
+    "DbNode": {
+      "description": "A DbNode is a virtual machine that hosts Oracle database instances and provides access to shared storage servers within a VM Cluster",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "DbNodeId": {
+          "description": "The unique identifier of the DB node.",
+          "type": "string"
+        },
+        "DbNodeArn": {
+          "description": "The Amazon Resource Name (ARN) of the DB node.",
+          "type": "string"
+        },
+        "Status": {
+          "description": "The current status of the DB node.",
+          "type": "string"
+        },
+        "CpuCoreCount": {
+          "description": "The number of CPU cores enabled on the DB node.",
+          "type": "integer"
+        },
+        "MemorySizeInGBs": {
+          "description": "The amount of memory, in gigabytes (GB), that allocated on the DB node.",
+          "type": "integer"
+        },
+        "DbNodeStorageSizeInGBs": {
+          "description": "The amount of local node storage, in gigabytes (GB), that's allocated on the DB node.",
+          "type": "integer"
+        },
+        "Hostname": {
+          "description": "The host name for the DB node.",
+          "type": "string"
+        },
+        "DbServerId": {
+          "description": "The unique identifier of the database server that's associated with the DB node.",
+          "type": "string"
+        },
+        "Ocid": {
+          "description": "The OCID of the DB node.",
+          "type": "string"
+        },
+        "DbSystemId": {
+          "description": "The OCID of the DB system.",
+          "type": "string"
+        },
+        "BackupIpId": {
+          "description": "The Oracle Cloud ID (OCID) of the backup IP address that's associated with the DB node.",
+          "type": "string"
+        },
+        "BackupVnic2Id": {
+          "description": "The OCID of the second backup virtual network interface card (VNIC) for the DB node.",
+          "type": "string"
+        },
+        "VnicId": {
+          "description": "The OCID of the VNIC.",
+          "type": "string"
+        },
+        "Vnic2Id": {
+          "description": "The OCID of the second VNIC.",
+          "type": "string"
+        },
+        "HostIpId": {
+          "description": "The OCID of the host IP address that's associated with the DB node.",
+          "type": "string"
+        },
+        "Tags": {
+          "type": "array",
+          "insertionOrder": false,
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/Tag"
+          }
+        }
+      },
+      "required": [
+        "DbServerId"
+      ]
+    }
+  },
+  "properties": {
+    "CloudExadataInfrastructureId": {
+      "type": "string",
+      "description": "The unique identifier of the Exadata infrastructure that this VM cluster belongs to."
+    },
+    "CloudVmClusterArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the VM cluster."
+    },
+    "CloudVmClusterId": {
+      "type": "string",
+      "description": "The unique identifier of the VM cluster."
+    },
+    "ClusterName": {
+      "type": "string",
+      "description": "The name of the Grid Infrastructure (GI) cluster.",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$",
+      "minLength": 1,
+      "maxLength": 11
+    },
+    "ComputeModel": {
+      "type": "string",
+      "description": "The OCI model compute model used when you create or clone an instance: ECPU or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are based on the number of cores elastically allocated from a pool of compute and storage servers. An OCPU is a legacy physical measure of compute resources. OCPUs are based on the physical core of a processor with hyper-threading enabled."
+    },
+    "CpuCoreCount": {
+      "type": "integer",
+      "description": "The number of CPU cores enabled on the VM cluster.",
+      "minimum": 0,
+      "maximum": 368
+    },
+    "DataCollectionOptions": {
+      "$ref": "#/definitions/DataCollectionOptions",
+      "description": "The set of diagnostic collection options enabled for the VM cluster."
+    },
+    "DataStorageSizeInTBs": {
+      "type": "number",
+      "description": "The size of the data disk group, in terabytes (TB), that's allocated for the VM cluster."
+    },
+    "DbNodeStorageSizeInGBs": {
+      "type": "integer",
+      "description": "The amount of local node storage, in gigabytes (GB), that's allocated for the VM cluster."
+    },
+    "DisplayName": {
+      "type": "string",
+      "description": "The user-friendly name for the VM cluster.",
+      "pattern": "",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "DiskRedundancy": {
+      "type": "string",
+      "description": "The type of redundancy configured for the VM cluster. NORMAL is 2-way redundancy. HIGH is 3-way redundancy."
+    },
+    "Domain": {
+      "type": "string",
+      "description": "The domain of the VM cluster."
+    },
+    "GiVersion": {
+      "type": "string",
+      "description": "The software version of the Oracle Grid Infrastructure (GI) for the VM cluster.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "Hostname": {
+      "type": "string",
+      "description": "The host name for the VM cluster.",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$",
+      "minLength": 1,
+      "maxLength": 12
+    },
+    "IsLocalBackupEnabled": {
+      "type": "boolean",
+      "description": "Indicates whether database backups to local Exadata storage is enabled for the VM cluster."
+    },
+    "IsSparseDiskgroupEnabled": {
+      "type": "boolean",
+      "description": "Indicates whether the VM cluster is configured with a sparse disk group."
+    },
+    "LicenseModel": {
+      "type": "string",
+      "description": "The Oracle license model applied to the VM cluster.",
+      "enum": [
+        "BRING_YOUR_OWN_LICENSE",
+        "LICENSE_INCLUDED"
+      ]
+    },
+    "ListenerPort": {
+      "type": "integer",
+      "description": "The port number configured for the listener on the VM cluster."
+    },
+    "MemorySizeInGBs": {
+      "type": "integer",
+      "description": "The amount of memory, in gigabytes (GB), that's allocated for the VM cluster."
+    },
+    "NodeCount": {
+      "type": "integer",
+      "description": "The number of nodes in the VM cluster."
+    },
+    "OdbNetworkId": {
+      "type": "string",
+      "description": "The unique identifier of the ODB network for the VM cluster."
+    },
+    "Ocid": {
+      "type": "string",
+      "description": "The OCID of the VM cluster."
+    },
+    "OciResourceAnchorName": {
+      "type": "string",
+      "description": "The name of the OCI resource anchor for the VM cluster."
+    },
+    "OciUrl": {
+      "type": "string",
+      "description": "The HTTPS link to the VM cluster in OCI."
+    },
+    "ScanDnsName": {
+      "type": "string",
+      "description": "The FQDN of the DNS record for the Single Client Access Name (SCAN) IP addresses that are associated with the VM cluster."
+    },
+    "ScanIpIds": {
+      "type": "array",
+      "description": "The OCID of the SCAN IP addresses that are associated with the VM cluster.",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "ScanListenerPortTcp": {
+      "type": "integer",
+      "description": "Property description not available.",
+      "minimum": 1024,
+      "maximum": 8999
+    },
+    "Shape": {
+      "type": "string",
+      "description": "The hardware model name of the Exadata infrastructure that's running the VM cluster."
+    },
+    "SshPublicKeys": {
+      "type": "array",
+      "description": "The public key portion of one or more key pairs used for SSH access to the VM cluster.",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "StorageSizeInGBs": {
+      "type": "integer",
+      "description": "The amount of local node storage, in gigabytes (GB), that's allocated to the VM cluster."
+    },
+    "SystemVersion": {
+      "type": "string",
+      "description": "The operating system version of the image chosen for the VM cluster.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags to assign to the Vm Cluster.",
+      "insertionOrder": false,
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "TimeZone": {
+      "type": "string",
+      "description": "The time zone of the VM cluster.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "VipIds": {
+      "type": "array",
+      "description": "The virtual IP (VIP) addresses that are associated with the VM cluster. Oracle's Cluster Ready Services (CRS) creates and maintains one VIP address for each node in the VM cluster to enable failover. If one node fails, the VIP is reassigned to another active node in the cluster.",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "DbServers": {
+      "type": "array",
+      "description": "The list of database servers for the VM cluster.",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "DbNodes": {
+      "type": "array",
+      "description": "The DB nodes that are implicitly created and managed as part of this VM Cluster.",
+      "uniqueItems": true,
+      "insertionOrder": true,
+      "minLength": 1,
+      "items": {
+        "$ref": "#/definitions/DbNode"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "createOnlyProperties": [
+    "/properties/CloudExadataInfrastructureId",
+    "/properties/DataCollectionOptions",
+    "/properties/DataStorageSizeInTBs",
+    "/properties/DbNodeStorageSizeInGBs",
+    "/properties/OdbNetworkId",
+    "/properties/GiVersion",
+    "/properties/ClusterName",
+    "/properties/LicenseModel",
+    "/properties/Hostname",
+    "/properties/IsLocalBackupEnabled",
+    "/properties/IsSparseDiskgroupEnabled",
+    "/properties/SystemVersion",
+    "/properties/TimeZone",
+    "/properties/ScanListenerPortTcp",
+    "/properties/SshPublicKeys",
+    "/properties/CpuCoreCount",
+    "/properties/DisplayName",
+    "/properties/MemorySizeInGBs",
+    "/properties/DbServers",
+    "/properties/DbNodes/*/DbServerId"
+  ],
+  "conditionalCreateOnlyProperties": [
+    "/properties/DbNodes"
+  ],
+  "readOnlyProperties": [
+    "/properties/CloudVmClusterArn",
+    "/properties/CloudVmClusterId",
+    "/properties/ComputeModel",
+    "/properties/DiskRedundancy",
+    "/properties/Domain",
+    "/properties/ListenerPort",
+    "/properties/NodeCount",
+    "/properties/Ocid",
+    "/properties/OciResourceAnchorName",
+    "/properties/OciUrl",
+    "/properties/ScanDnsName",
+    "/properties/ScanIpIds",
+    "/properties/Shape",
+    "/properties/StorageSizeInGBs",
+    "/properties/VipIds",
+    "/properties/DbNodes/*/DbNodeId",
+    "/properties/DbNodes/*/Status",
+    "/properties/DbNodes/*/MemorySizeInGBs",
+    "/properties/DbNodes/*/DbNodeStorageSizeInGBs",
+    "/properties/DbNodes/*/CpuCoreCount",
+    "/properties/DbNodes/*/Hostname",
+    "/properties/DbNodes/*/DbNodeArn",
+    "/properties/DbNodes/*/Ocid",
+    "/properties/DbNodes/*/DbSystemId",
+    "/properties/DbNodes/*/BackupIpId",
+    "/properties/DbNodes/*/BackupVnic2Id",
+    "/properties/DbNodes/*/VnicId",
+    "/properties/DbNodes/*/Vnic2Id",
+    "/properties/DbNodes/*/HostIpId"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ScanListenerPortTcp"
+  ],
+  "primaryIdentifier": [
+    "/properties/CloudVmClusterArn"
+  ],
+  "propertyTransform": {
+    "/properties/CloudExadataInfrastructureId": "$split(CloudExadataInfrastructureId, \"cloud-exadata-infrastructure/\")[-1] $OR CloudExadataInfrastructureId",
+    "/properties/OdbNetworkId": "$split(OdbNetworkId, \"odb-network/\")[-1] $OR OdbNetworkId"
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "odb:CreateCloudVmCluster",
+        "odb:TagResource",
+        "odb:GetCloudVmCluster",
+        "odb:ListCloudVmClusters",
+        "odb:ListTagsForResource",
+        "sts:GetCallerIdentity",
+        "ec2:DescribeAvailabilityZones",
+        "odb:ListDbNodes",
+        "odb:GetDbNode",
+        "odb:CreateDbNode"
+      ],
+      "timeoutInMinutes": 2160
+    },
+    "read": {
+      "permissions": [
+        "odb:GetCloudVmCluster",
+        "odb:ListTagsForResource",
+        "odb:ListDbNodes",
+        "odb:GetDbNode",
+        "sts:GetCallerIdentity"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "odb:TagResource",
+        "odb:UntagResource",
+        "odb:GetCloudVmCluster",
+        "odb:ListCloudVmClusters",
+        "odb:ListTagsForResource",
+        "odb:ListDbNodes",
+        "odb:GetDbNode",
+        "sts:GetCallerIdentity"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "odb:DeleteCloudVmCluster",
+        "odb:GetCloudVmCluster",
+        "odb:ListCloudVmClusters",
+        "odb:ListTagsForResource",
+        "sts:GetCallerIdentity",
+        "odb:DeleteDbNode"
+      ],
+      "timeoutInMinutes": 2160
+    },
+    "list": {
+      "permissions": [
+        "odb:ListCloudVmClusters",
+        "odb:ListTagsForResource",
+        "odb:ListDbNodes",
+        "odb:GetDbNode",
+        "sts:GetCallerIdentity"
+      ]
+    }
+  },
+  "replacementStrategy": "delete_then_create",
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "odb:TagResource",
+      "odb:UntagResource",
+      "odb:ListTagsForResource"
+    ]
+  }
+}

@@ -1,1 +1,1 @@
-$ terraform import awscc_gamelift_fleet.example <resource ID>
+$ terraform import awscc_gamelift_fleet.example "fleet_id"

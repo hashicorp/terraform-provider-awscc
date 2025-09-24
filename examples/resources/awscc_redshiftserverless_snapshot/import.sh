@@ -1,0 +1,1 @@
+$ terraform import awscc_redshiftserverless_snapshot.example "snapshot_name"

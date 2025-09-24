@@ -1,1 +1,1 @@
-$ terraform import awscc_apigateway_resource.example <resource ID>
+$ terraform import awscc_apigateway_resource.example "rest_api_id|resource_id"

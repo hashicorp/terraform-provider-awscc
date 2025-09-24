@@ -22,12 +22,24 @@ Data Source schema for AWS::AppIntegrations::DataIntegration
 ### Read-Only
 
 - `data_integration_arn` (String) The Amazon Resource Name (ARN) of the data integration.
+- `data_integration_id` (String) The unique identifer of the data integration.
 - `description` (String) The data integration description.
+- `file_configuration` (Attributes) The configuration for what files should be pulled from the source. (see [below for nested schema](#nestedatt--file_configuration))
 - `kms_key` (String) The KMS key of the data integration.
 - `name` (String) The name of the data integration.
+- `object_configuration` (Map of Map of List of String) The configuration for what data should be pulled from the source.
 - `schedule_config` (Attributes) The name of the data and how often it should be pulled from the source. (see [below for nested schema](#nestedatt--schedule_config))
 - `source_uri` (String) The URI of the data source.
 - `tags` (Attributes List) The tags (keys and values) associated with the data integration. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--file_configuration"></a>
+### Nested Schema for `file_configuration`
+
+Read-Only:
+
+- `filters` (Map of List of String) Restrictions for what files should be pulled from the source.
+- `folders` (List of String) Identifiers for the source folders to pull all files from recursively.
+
 
 <a id="nestedatt--schedule_config"></a>
 ### Nested Schema for `schedule_config`
@@ -46,5 +58,3 @@ Read-Only:
 
 - `key` (String) A key to identify the tag.
 - `value` (String) Corresponding tag value for the key.
-
-

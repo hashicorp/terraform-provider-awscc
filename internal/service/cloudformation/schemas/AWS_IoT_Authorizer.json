@@ -61,12 +61,25 @@
     },
     "Tags": {
       "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
       }
     }
   },
-  "taggable": true,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "iot:ListTagsForResource",
+      "iot:TagResource",
+      "iot:UntagResource"
+    ]
+  },
   "additionalProperties": false,
   "required": [
     "AuthorizerFunctionArn"
@@ -84,22 +97,36 @@
   "handlers": {
     "create": {
       "permissions": [
-        "iot:CreateAuthorizer"
+        "iot:CreateAuthorizer",
+        "iot:DescribeAuthorizer",
+        "iot:TagResource",
+        "iot:ListTagsForResource",
+        "kms:Decrypt"
       ]
     },
     "read": {
       "permissions": [
-        "iot:DescribeAuthorizer"
+        "iot:DescribeAuthorizer",
+        "iot:ListTagsForResource",
+        "kms:Decrypt"
       ]
     },
     "update": {
       "permissions": [
-        "iot:UpdateAuthorizer"
+        "iot:UpdateAuthorizer",
+        "iot:DescribeAuthorizer",
+        "iot:TagResource",
+        "iot:UntagResource",
+        "iot:ListTagsForResource",
+        "kms:Decrypt"
       ]
     },
     "delete": {
       "permissions": [
-        "iot:DeleteAuthorizer"
+        "iot:UpdateAuthorizer",
+        "iot:DeleteAuthorizer",
+        "iot:DescribeAuthorizer",
+        "kms:Decrypt"
       ]
     },
     "list": {

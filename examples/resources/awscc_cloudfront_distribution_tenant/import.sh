@@ -1,0 +1,1 @@
+$ terraform import awscc_cloudfront_distribution_tenant.example "id"

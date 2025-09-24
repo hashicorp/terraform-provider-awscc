@@ -27,5 +27,3 @@ Data Source schema for AWS::SSMContacts::ContactChannel
 - `channel_type` (String) Device type, which specify notification channel. Currently supported values: ?SMS?, ?VOICE?, ?EMAIL?, ?CHATBOT.
 - `contact_id` (String) ARN of the contact resource
 - `defer_activation` (Boolean) If you want to activate the channel at a later time, you can choose to defer activation. SSM Incident Manager can't engage your contact channel until it has been activated.
-
-

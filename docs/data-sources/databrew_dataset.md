@@ -26,6 +26,7 @@ Data Source schema for AWS::DataBrew::Dataset
 - `input` (Attributes) Input (see [below for nested schema](#nestedatt--input))
 - `name` (String) Dataset name
 - `path_options` (Attributes) PathOptions (see [below for nested schema](#nestedatt--path_options))
+- `source` (String) Source type of the dataset
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--format_options"></a>
@@ -91,6 +92,7 @@ Read-Only:
 Read-Only:
 
 - `bucket` (String)
+- `bucket_owner` (String) Bucket owner
 - `key` (String)
 
 
@@ -111,6 +113,7 @@ Read-Only:
 Read-Only:
 
 - `bucket` (String)
+- `bucket_owner` (String) Bucket owner
 - `key` (String)
 
 
@@ -129,6 +132,7 @@ Read-Only:
 Read-Only:
 
 - `bucket` (String)
+- `bucket_owner` (String) Bucket owner
 - `key` (String)
 
 
@@ -190,7 +194,7 @@ Read-Only:
 - `type` (String) Parameter type
 
 <a id="nestedatt--path_options--parameters--dataset_parameter--datetime_options"></a>
-### Nested Schema for `path_options.parameters.dataset_parameter.type`
+### Nested Schema for `path_options.parameters.dataset_parameter.datetime_options`
 
 Read-Only:
 
@@ -200,15 +204,15 @@ Read-Only:
 
 
 <a id="nestedatt--path_options--parameters--dataset_parameter--filter"></a>
-### Nested Schema for `path_options.parameters.dataset_parameter.type`
+### Nested Schema for `path_options.parameters.dataset_parameter.filter`
 
 Read-Only:
 
 - `expression` (String) Filtering expression for a parameter
-- `values_map` (Attributes List) (see [below for nested schema](#nestedatt--path_options--parameters--dataset_parameter--type--values_map))
+- `values_map` (Attributes List) (see [below for nested schema](#nestedatt--path_options--parameters--dataset_parameter--filter--values_map))
 
-<a id="nestedatt--path_options--parameters--dataset_parameter--type--values_map"></a>
-### Nested Schema for `path_options.parameters.dataset_parameter.type.values_map`
+<a id="nestedatt--path_options--parameters--dataset_parameter--filter--values_map"></a>
+### Nested Schema for `path_options.parameters.dataset_parameter.filter.values_map`
 
 Read-Only:
 
@@ -227,5 +231,3 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
-
-

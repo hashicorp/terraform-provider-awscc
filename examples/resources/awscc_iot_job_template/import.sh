@@ -1,1 +1,1 @@
-$ terraform import awscc_iot_job_template.example <resource ID>
+$ terraform import awscc_iot_job_template.example "job_template_id"

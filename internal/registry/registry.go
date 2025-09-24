@@ -1,68 +1,100 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 package registry
 
 import (
 	"context"
 	"sync"
 
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource"
+	"github.com/hashicorp/terraform-plugin-framework/list"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
 )
 
-var dataSourceRegisrationClosed bool
-var dataSourceRegistry map[string]func(context.Context) (tfsdk.DataSourceType, error)
+var dataSourceRegistrationClosed bool
+var dataSourceRegistry map[string]func(context.Context) (datasource.DataSource, error)
 var dataSourceRegistryMu sync.Mutex
 
-var resourceRegisrationClosed bool
-var resourceRegistry map[string]func(context.Context) (tfsdk.ResourceType, error)
+var resourceRegistrationClosed bool
+var resourceRegistry map[string]func(context.Context) (resource.Resource, error)
 var resourceRegistryMu sync.Mutex
 
-// AddDataSourceTypeFactory registers the specified data source type name and factory.
-func AddDataSourceTypeFactory(name string, factory func(context.Context) (tfsdk.DataSourceType, error)) {
+var listResourceRegistrationClosed bool
+var listResourceRegistry map[string]func(context.Context) (list.ListResource, error)
+var listResourceRegistryMu sync.Mutex
+
+// AddDataSourceFactory registers the specified data source type name and factory.
+func AddDataSourceFactory(name string, factory func(context.Context) (datasource.DataSource, error)) {
 	dataSourceRegistryMu.Lock()
 	defer dataSourceRegistryMu.Unlock()
 
-	if dataSourceRegisrationClosed {
+	if dataSourceRegistrationClosed {
 		panic("Data Source registration is closed")
 	}
 
 	if dataSourceRegistry == nil {
-		dataSourceRegistry = make(map[string]func(context.Context) (tfsdk.DataSourceType, error))
+		dataSourceRegistry = make(map[string]func(context.Context) (datasource.DataSource, error))
 	}
 	dataSourceRegistry[name] = factory
 }
 
-// AddResourceTypeFactory registers the specified resource type name and factory.
-func AddResourceTypeFactory(name string, factory func(context.Context) (tfsdk.ResourceType, error)) {
+// AddResourceFactory registers the specified resource type name and factory.
+func AddResourceFactory(name string, factory func(context.Context) (resource.Resource, error)) {
 	resourceRegistryMu.Lock()
 	defer resourceRegistryMu.Unlock()
 
-	if resourceRegisrationClosed {
+	if resourceRegistrationClosed {
 		panic("Resource registration is closed")
 	}
 
 	if resourceRegistry == nil {
-		resourceRegistry = make(map[string]func(context.Context) (tfsdk.ResourceType, error))
+		resourceRegistry = make(map[string]func(context.Context) (resource.Resource, error))
 	}
 	resourceRegistry[name] = factory
 }
 
-// ResourceFactories returns the registered resource factories.
-// Resource registration is closed.
-func ResourceFactories() map[string]func(context.Context) (tfsdk.ResourceType, error) {
-	resourceRegistryMu.Lock()
-	defer resourceRegistryMu.Unlock()
+func AddListResourceFactory(name string, factory func(context.Context) (list.ListResource, error)) {
+	listResourceRegistryMu.Lock()
+	defer listResourceRegistryMu.Unlock()
 
-	resourceRegisrationClosed = true
+	if listResourceRegistrationClosed {
+		panic("Resource registration is closed")
+	}
 
-	return resourceRegistry
+	if listResourceRegistry == nil {
+		listResourceRegistry = make(map[string]func(context.Context) (list.ListResource, error))
+	}
+	listResourceRegistry[name] = factory
 }
 
 // DataSourceFactories returns the registered data source factories.
 // Data Source registration is closed.
-func DataSourceFactories() map[string]func(context.Context) (tfsdk.DataSourceType, error) {
+func DataSourceFactories() map[string]func(context.Context) (datasource.DataSource, error) {
 	dataSourceRegistryMu.Lock()
 	defer dataSourceRegistryMu.Unlock()
 
-	dataSourceRegisrationClosed = true
+	dataSourceRegistrationClosed = true
 
 	return dataSourceRegistry
+}
+
+// ResourceFactories returns the registered resource factories.
+// Resource registration is closed.
+func ResourceFactories() map[string]func(context.Context) (resource.Resource, error) {
+	resourceRegistryMu.Lock()
+	defer resourceRegistryMu.Unlock()
+
+	resourceRegistrationClosed = true
+
+	return resourceRegistry
+}
+
+func ListResourceFactories() map[string]func(context.Context) (list.ListResource, error) {
+	listResourceRegistryMu.Lock()
+	defer listResourceRegistryMu.Unlock()
+
+	listResourceRegistrationClosed = true
+
+	return listResourceRegistry
 }

@@ -24,5 +24,3 @@ Data Source schema for AWS::IoT::Logging
 - `account_id` (String) Your 12-digit account ID (used as the primary identifier for the CloudFormation resource).
 - `default_log_level` (String) The log level to use. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.
 - `role_arn` (String) The ARN of the role that allows IoT to write to Cloudwatch logs.
-
-

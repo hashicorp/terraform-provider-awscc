@@ -1,20 +1,23 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
 package generic
 
 import (
 	"fmt"
 
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 )
 
-// DataSourceTypeOptionsFunc is a type alias for a data source type functional option.
-type DataSourceTypeOptionsFunc func(*dataSourceType) error
+// DataSourceOptionsFunc is a type alias for a data source type functional option.
+type DataSourceOptionsFunc func(*genericDataSource) error
 
 // dataSourceWithAttributeNameMap is a helper function to construct functional options
 // that set a data source type's attribute name maps.
 // If multiple dataSourceWithAttributeNameMap calls are made, the last call overrides
 // the previous calls' values.
-func dataSourceWithAttributeNameMap(v map[string]string) DataSourceTypeOptionsFunc {
-	return func(o *dataSourceType) error {
+func dataSourceWithAttributeNameMap(v map[string]string) DataSourceOptionsFunc {
+	return func(o *genericDataSource) error {
 		if _, ok := v["id"]; !ok {
 			// Synthesize a mapping for the reserved top-level "id" attribute.
 			v["id"] = "ID"
@@ -40,8 +43,8 @@ func dataSourceWithAttributeNameMap(v map[string]string) DataSourceTypeOptionsFu
 // that set a resource type's CloudFormation type name.
 // If multiple dataSourceWithCloudFormationTypeName calls are made, the last call overrides
 // the previous calls' values.
-func dataSourceWithCloudFormationTypeName(v string) DataSourceTypeOptionsFunc {
-	return func(o *dataSourceType) error {
+func dataSourceWithCloudFormationTypeName(v string) DataSourceOptionsFunc {
+	return func(o *genericDataSource) error {
 		o.cfTypeName = v
 
 		return nil
@@ -52,8 +55,8 @@ func dataSourceWithCloudFormationTypeName(v string) DataSourceTypeOptionsFunc {
 // that set a resource type's Terraform schema.
 // If multiple dataSourceWithTerraformSchema calls are made, the last call overrides
 // the previous calls' values.
-func dataSourceWithTerraformSchema(v tfsdk.Schema) DataSourceTypeOptionsFunc {
-	return func(o *dataSourceType) error {
+func dataSourceWithTerraformSchema(v schema.Schema) DataSourceOptionsFunc {
+	return func(o *genericDataSource) error {
 		o.tfSchema = v
 
 		return nil
@@ -64,21 +67,21 @@ func dataSourceWithTerraformSchema(v tfsdk.Schema) DataSourceTypeOptionsFunc {
 // that set a resource type's Terraform type name.
 // If multiple dataSourceWithTerraformTypeName calls are made, the last call overrides
 // the previous calls' values.
-func dataSourceWithTerraformTypeName(v string) DataSourceTypeOptionsFunc {
-	return func(o *dataSourceType) error {
+func dataSourceWithTerraformTypeName(v string) DataSourceOptionsFunc {
+	return func(o *genericDataSource) error {
 		o.tfTypeName = v
 
 		return nil
 	}
 }
 
-type DataSourceTypeOptions []DataSourceTypeOptionsFunc
+type DataSourceOptions []DataSourceOptionsFunc
 
 // WithAttributeNameMap is a helper function to construct functional options
 // that set a resource type's attribute name map, append that function to the
 // current slice of functional options and return the new slice of options.
 // It is intended to be chained with other similar helper functions in a builder pattern.
-func (opts DataSourceTypeOptions) WithAttributeNameMap(v map[string]string) DataSourceTypeOptions {
+func (opts DataSourceOptions) WithAttributeNameMap(v map[string]string) DataSourceOptions {
 	return append(opts, dataSourceWithAttributeNameMap(v))
 }
 
@@ -86,7 +89,7 @@ func (opts DataSourceTypeOptions) WithAttributeNameMap(v map[string]string) Data
 // that set a resource type's CloudFormation type name, append that function to the
 // current slice of functional options and return the new slice of options.
 // It is intended to be chained with other similar helper functions in a builder pattern.
-func (opts DataSourceTypeOptions) WithCloudFormationTypeName(v string) DataSourceTypeOptions {
+func (opts DataSourceOptions) WithCloudFormationTypeName(v string) DataSourceOptions {
 	return append(opts, dataSourceWithCloudFormationTypeName(v))
 }
 
@@ -94,7 +97,7 @@ func (opts DataSourceTypeOptions) WithCloudFormationTypeName(v string) DataSourc
 // that set a resource type's Terraform schema, append that function to the
 // current slice of functional options and return the new slice of options.
 // It is intended to be chained with other similar helper functions in a builder pattern.
-func (opts DataSourceTypeOptions) WithTerraformSchema(v tfsdk.Schema) DataSourceTypeOptions {
+func (opts DataSourceOptions) WithTerraformSchema(v schema.Schema) DataSourceOptions {
 	return append(opts, dataSourceWithTerraformSchema(v))
 }
 
@@ -102,14 +105,13 @@ func (opts DataSourceTypeOptions) WithTerraformSchema(v tfsdk.Schema) DataSource
 // that set a resource type's Terraform type name, append that function to the
 // current slice of functional options and return the new slice of options.
 // It is intended to be chained with other similar helper functions in a builder pattern.
-func (opts DataSourceTypeOptions) WithTerraformTypeName(v string) DataSourceTypeOptions {
+func (opts DataSourceOptions) WithTerraformTypeName(v string) DataSourceOptions {
 	return append(opts, dataSourceWithTerraformTypeName(v))
 }
 
-// dataSourceType implements tfsdk.DataSourceType
-type dataSourceType struct {
+type genericDataSource struct {
 	cfToTfNameMap map[string]string // Map of CloudFormation property name to Terraform attribute name
 	cfTypeName    string            // CloudFormation type name for the resource type
-	tfSchema      tfsdk.Schema      // Terraform schema for the data source type
+	tfSchema      schema.Schema     // Terraform schema for the data source type
 	tfTypeName    string            // Terraform type name for data source type
 }

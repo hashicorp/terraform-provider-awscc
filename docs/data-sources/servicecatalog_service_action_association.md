@@ -24,5 +24,3 @@ Data Source schema for AWS::ServiceCatalog::ServiceActionAssociation
 - `product_id` (String)
 - `provisioning_artifact_id` (String)
 - `service_action_id` (String)
-
-

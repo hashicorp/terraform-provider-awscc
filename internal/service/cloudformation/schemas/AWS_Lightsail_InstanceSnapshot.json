@@ -1,0 +1,164 @@
+{
+  "typeName": "AWS::Lightsail::InstanceSnapshot",
+  "description": "Resource Type definition for AWS::Lightsail::InstanceSnapshot",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-lightsail.git",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "additionalProperties": false
+    },
+    "Location": {
+      "description": "The region name and Availability Zone where you created the snapshot.",
+      "type": "object",
+      "properties": {
+        "AvailabilityZone": {
+          "type": "string",
+          "description": "The Availability Zone. Follows the format us-east-2a (case-sensitive)."
+        },
+        "RegionName": {
+          "type": "string",
+          "description": "The AWS Region name."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "InstanceSnapshotName": {
+      "description": "The name of the snapshot.",
+      "type": "string"
+    },
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) of the snapshot.",
+      "type": "string"
+    },
+    "InstanceName": {
+      "description": "The instance from which the snapshot was created.",
+      "type": "string"
+    },
+    "ResourceType": {
+      "description": "The type of resource (usually InstanceSnapshot).",
+      "type": "string"
+    },
+    "State": {
+      "description": "The state the snapshot is in.",
+      "type": "string"
+    },
+    "FromInstanceName": {
+      "description": "The instance from which the snapshot was created.",
+      "type": "string"
+    },
+    "FromInstanceArn": {
+      "description": "The Amazon Resource Name (ARN) of the instance from which the snapshot was created.",
+      "type": "string"
+    },
+    "SizeInGb": {
+      "description": "The size in GB of the SSD",
+      "type": "integer"
+    },
+    "IsFromAutoSnapshot": {
+      "description": "A Boolean value indicating whether the snapshot was created from an automatic snapshot.",
+      "type": "boolean"
+    },
+    "SupportCode": {
+      "description": "Support code to help identify any issues",
+      "type": "string"
+    },
+    "Location": {
+      "$ref": "#/definitions/Location"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "InstanceSnapshotName",
+    "InstanceName"
+  ],
+  "primaryIdentifier": [
+    "/properties/InstanceSnapshotName"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/IsFromAutoSnapshot",
+    "/properties/Location",
+    "/properties/FromInstanceName",
+    "/properties/FromInstanceArn",
+    "/properties/ResourceType",
+    "/properties/SizeInGb",
+    "/properties/State",
+    "/properties/SupportCode"
+  ],
+  "createOnlyProperties": [
+    "/properties/InstanceSnapshotName",
+    "/properties/InstanceName"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "lightsail:CreateInstanceSnapshot",
+        "lightsail:GetInstanceSnapshot",
+        "lightsail:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "lightsail:GetInstanceSnapshot"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "lightsail:GetInstanceSnapshot",
+        "lightsail:TagResource",
+        "lightsail:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "lightsail:GetInstanceSnapshot",
+        "lightsail:DeleteInstanceSnapshot"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "lightsail:GetInstanceSnapshots"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "lightsail:TagResource",
+      "lightsail:UntagResource"
+    ]
+  }
+}
