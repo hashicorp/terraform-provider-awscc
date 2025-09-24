@@ -69,6 +69,10 @@ func (p *providerData) RoleARN(_ context.Context) string {
 	return p.roleARN
 }
 
+var _ provider.Provider = &ccProvider{}
+var _ provider.ProviderWithMetaSchema = &ccProvider{}
+var _ provider.ProviderWithListResources = &ccProvider{}
+
 type ccProvider struct {
 	providerData *providerData // Used in acceptance tests.
 }
