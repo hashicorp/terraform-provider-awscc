@@ -12,29 +12,35 @@ func TestUserAgentProducts(t *testing.T) {
 	t.Parallel()
 
 	simpleProduct := awsbase.UserAgentProduct{Name: "simple", Version: "t", Comment: "t"}
-	simpleAddProduct := userAgentProduct{ProductName: types.String{Value: simpleProduct.Name}, ProductVersion: types.String{Value: simpleProduct.Version}, Comment: types.String{Value: simpleProduct.Comment}}
+	simpleAddProduct := userAgentProduct{
+		ProductName:    types.StringValue(simpleProduct.Name),
+		ProductVersion: types.StringValue(simpleProduct.Version),
+		Comment:        types.StringValue(simpleProduct.Comment),
+	}
 	minimalProduct := awsbase.UserAgentProduct{Name: "minimal"}
-	minimalAddProduct := userAgentProduct{ProductName: types.String{Value: minimalProduct.Name}}
+	minimalAddProduct := userAgentProduct{
+		ProductName: types.StringValue(minimalProduct.Name),
+	}
 
 	testcases := map[string]struct {
-		addProducts UserAgentProducts
-		expected    []awsbase.UserAgentProduct
+		add      UserAgentProducts
+		expected []awsbase.UserAgentProduct
 	}{
-		"none_added": {
-			addProducts: []userAgentProduct{},
-			expected:    []awsbase.UserAgentProduct{},
+		"none": {
+			add:      []userAgentProduct{},
+			expected: []awsbase.UserAgentProduct{},
 		},
-		"simple_added": {
-			addProducts: []userAgentProduct{simpleAddProduct},
-			expected:    []awsbase.UserAgentProduct{simpleProduct},
+		"simple": {
+			add:      []userAgentProduct{simpleAddProduct},
+			expected: []awsbase.UserAgentProduct{simpleProduct},
 		},
-		"minimal_added": {
-			addProducts: []userAgentProduct{minimalAddProduct},
-			expected:    []awsbase.UserAgentProduct{minimalProduct},
+		"minimal": {
+			add:      []userAgentProduct{minimalAddProduct},
+			expected: []awsbase.UserAgentProduct{minimalProduct},
 		},
-		"both_added": {
-			addProducts: []userAgentProduct{simpleAddProduct, minimalAddProduct},
-			expected:    []awsbase.UserAgentProduct{simpleProduct, minimalProduct},
+		"both": {
+			add:      []userAgentProduct{simpleAddProduct, minimalAddProduct},
+			expected: []awsbase.UserAgentProduct{simpleProduct, minimalProduct},
 		},
 	}
 
@@ -42,7 +48,7 @@ func TestUserAgentProducts(t *testing.T) {
 		name, testcase := name, testcase
 
 		t.Run(name, func(t *testing.T) {
-			actual := testcase.addProducts.UserAgentProducts()
+			actual := testcase.add.UserAgentProducts()
 			if !cmp.Equal(testcase.expected, actual) {
 				t.Errorf("expected %q, got %q", testcase.expected, actual)
 			}
