@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	cctypes "github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
+	"github.com/hashicorp/aws-sdk-go-base/v2/useragent"
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -404,7 +405,7 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 	if metadata != nil {
 		var uap inttypes.UserAgentProducts
 		metadata.UserAgent.ElementsAs(ctx, &uap, false)
-		ctx = context.WithValue(ctx, "awsbase.ContextScopedUserAgent", uap.UserAgentProducts())
+		ctx = useragent.Context(ctx, uap.UserAgentProducts())
 	}
 
 	conn := r.provider.CloudControlAPIClient(ctx)
