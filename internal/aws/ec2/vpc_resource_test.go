@@ -36,6 +36,24 @@ func TestAccAWSEC2VPC_CidrBlock(t *testing.T) {
 	})
 }
 
+func TestAccAWSEC2VPC_providerMeta(t *testing.T) {
+	td := acctest.NewTestData(t, "AWS::EC2::VPC", "awscc_ec2_vpc", "test")
+
+	td.ResourceTest(t, []resource.TestStep{
+		{
+			Config: td.EmptyConfigWithProviderMeta(),
+			Check: resource.ComposeTestCheckFunc(
+				td.CheckExistsInAWS(),
+			),
+		},
+		{
+			ResourceName:      td.ResourceName,
+			ImportState:       true,
+			ImportStateVerify: true,
+		},
+	})
+}
+
 func testAccAWSEC2VPCCidrBlockConfig(td *acctest.TestData, rName, cidrBlock string) string {
 	return fmt.Sprintf(`
 resource %[1]q %[2]q {

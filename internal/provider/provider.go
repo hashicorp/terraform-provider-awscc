@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/list"
 	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/provider/metaschema"
 	"github.com/hashicorp/terraform-plugin-framework/provider/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -67,6 +68,10 @@ func (p *providerData) RegisterLogger(ctx context.Context) context.Context {
 func (p *providerData) RoleARN(_ context.Context) string {
 	return p.roleARN
 }
+
+var _ provider.Provider = &ccProvider{}
+var _ provider.ProviderWithMetaSchema = &ccProvider{}
+var _ provider.ProviderWithListResources = &ccProvider{}
 
 type ccProvider struct {
 	providerData *providerData // Used in acceptance tests.
@@ -284,6 +289,33 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 	}
 }
 
+func (p *ccProvider) MetaSchema(ctx context.Context, req provider.MetaSchemaRequest, resp *provider.MetaSchemaResponse) {
+	resp.Schema = metaschema.Schema{
+		Attributes: map[string]metaschema.Attribute{
+			"user_agent": metaschema.ListNestedAttribute{
+				NestedObject: metaschema.NestedAttributeObject{
+					Attributes: map[string]metaschema.Attribute{
+						"comment": metaschema.StringAttribute{
+							Description: "User-Agent comment. At least one of `comment` or `product_name` must be set.",
+							Optional:    true,
+						},
+						"product_name": metaschema.StringAttribute{
+							Description: "Product name. At least one of `product_name` or `comment` must be set.",
+							Required:    true,
+						},
+						"product_version": metaschema.StringAttribute{
+							Description: "Product version. Optional, and should only be set when `product_name` is set.",
+							Optional:    true,
+						},
+					},
+				},
+				Description: "Product details to append to User-Agent string in all AWS API calls.",
+				Optional:    true,
+			},
+		},
+	}
+}
+
 type configModel struct {
 	AccessKey                 types.String                   `tfsdk:"access_key"`
 	AssumeRole                *assumeRoleModel               `tfsdk:"assume_role"`
@@ -303,15 +335,9 @@ type configModel struct {
 	SkipMedatadataApiCheck    types.Bool                     `tfsdk:"skip_medatadata_api_check"`
 	SkipMetadataApiCheck      types.Bool                     `tfsdk:"skip_metadata_api_check"`
 	Token                     types.String                   `tfsdk:"token"`
-	UserAgent                 []userAgentProduct             `tfsdk:"user_agent"`
+	UserAgent                 cctypes.UserAgentProducts      `tfsdk:"user_agent"`
 
 	terraformVersion string
-}
-
-type userAgentProduct struct {
-	Comment        types.String `tfsdk:"comment"`
-	ProductName    types.String `tfsdk:"product_name"`
-	ProductVersion types.String `tfsdk:"product_version"`
 }
 
 type assumeRoleModel struct {
@@ -520,7 +546,8 @@ func newProviderData(ctx context.Context, c *configModel) (*providerData, diag.D
 			},
 		},
 	}
-	awsbaseConfig.UserAgent = userAgentProducts(c.UserAgent)
+
+	awsbaseConfig.UserAgent = c.UserAgent.UserAgentProducts()
 	if c.MaxRetries.IsNull() {
 		awsbaseConfig.MaxRetries = defaultMaxRetries
 	} else {
@@ -613,16 +640,4 @@ func newProviderData(ctx context.Context, c *configModel) (*providerData, diag.D
 	}
 
 	return providerData, diags
-}
-
-func userAgentProducts(products []userAgentProduct) []awsbase.UserAgentProduct {
-	results := make([]awsbase.UserAgentProduct, len(products))
-	for i, p := range products {
-		results[i] = awsbase.UserAgentProduct{
-			Name:    p.ProductName.ValueString(),
-			Version: p.ProductVersion.ValueString(),
-			Comment: p.Comment.ValueString(),
-		}
-	}
-	return results
 }

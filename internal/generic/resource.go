@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	cctypes "github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
+	"github.com/hashicorp/aws-sdk-go-base/v2/useragent"
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -26,6 +27,7 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
+	inttypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 // ResourceOptionsFunc is a type alias for a resource type functional option.
@@ -368,6 +370,10 @@ var (
 	idAttributePath = path.Root("id")
 )
 
+type providerMetaData struct {
+	UserAgent types.List `tfsdk:"user_agent"`
+}
+
 func (r *genericResource) Metadata(_ context.Context, request resource.MetadataRequest, response *resource.MetadataResponse) {
 	response.TypeName = r.tfTypeName
 
@@ -390,6 +396,17 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 	ctx = r.bootstrapContext(ctx)
 
 	traceEntry(ctx, "Resource.Create")
+
+	var metadata *providerMetaData
+	response.Diagnostics.Append(request.ProviderMeta.Get(ctx, &metadata)...)
+	if response.Diagnostics.HasError() {
+		return
+	}
+	if metadata != nil {
+		var uap inttypes.UserAgentProducts
+		metadata.UserAgent.ElementsAs(ctx, &uap, false)
+		ctx = useragent.Context(ctx, uap.UserAgentProducts())
+	}
 
 	conn := r.provider.CloudControlAPIClient(ctx)
 
