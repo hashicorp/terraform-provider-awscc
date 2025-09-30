@@ -937,7 +937,7 @@ func (r *genericResource) bootstrapContext(ctx context.Context) context.Context 
 	return r.provider.RegisterLogger(ctx)
 }
 
-// bootstrapContextWithProviderMeta is an extenion of bootstrapContext which
+// bootstrapContextWithProviderMeta is an extension of bootstrapContext which
 // also injects details from the provider_meta block into context
 func (r *genericResource) bootstrapContextWithProviderMeta(ctx context.Context, providerMeta tfsdk.Config, d *diag.Diagnostics) context.Context {
 	ctx = r.bootstrapContext(ctx)
