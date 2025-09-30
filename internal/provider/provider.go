@@ -26,7 +26,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/flex"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	inttypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 const (
@@ -101,7 +101,7 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 			"assume_role": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.StringAttribute{
-						CustomType:  cctypes.DurationType,
+						CustomType:  inttypes.DurationType,
 						Description: "The duration, between 15 minutes and 12 hours, of the role session. Valid time units are ns, us (or µs), ms, s, h, or m.",
 						Optional:    true,
 					},
@@ -115,12 +115,12 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 						Optional:    true,
 					},
 					"policy_arns": schema.ListAttribute{
-						ElementType: cctypes.ARNType,
+						ElementType: inttypes.ARNType,
 						Description: "Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.",
 						Optional:    true,
 					},
 					"role_arn": schema.StringAttribute{
-						CustomType:  cctypes.ARNType,
+						CustomType:  inttypes.ARNType,
 						Description: "Amazon Resource Name (ARN) of the IAM Role to assume.",
 						Required:    true,
 					},
@@ -145,7 +145,7 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 			"assume_role_with_web_identity": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.StringAttribute{
-						CustomType:  cctypes.DurationType,
+						CustomType:  inttypes.DurationType,
 						Description: "The duration, between 15 minutes and 12 hours, of the role session. Valid time units are ns, us (or µs), ms, s, h, or m.",
 						Optional:    true,
 					},
@@ -155,12 +155,12 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 						Optional:    true,
 					},
 					"policy_arns": schema.ListAttribute{
-						ElementType: cctypes.ARNType,
+						ElementType: inttypes.ARNType,
 						Description: "Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.",
 						Optional:    true,
 					},
 					"role_arn": schema.StringAttribute{
-						CustomType:  cctypes.ARNType,
+						CustomType:  inttypes.ARNType,
 						Description: "Amazon Resource Name (ARN) of the IAM Role to assume. Can also be set with the environment variable `AWS_ROLE_ARN`.",
 						Required:    true,
 					},
@@ -234,7 +234,7 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 				Optional:    true,
 			},
 			"role_arn": schema.StringAttribute{
-				CustomType:  cctypes.ARNType,
+				CustomType:  inttypes.ARNType,
 				Description: "Amazon Resource Name of the AWS CloudFormation service role that is used on your behalf to perform operations.",
 				Optional:    true,
 			},
@@ -328,27 +328,27 @@ type configModel struct {
 	NoProxy                   types.String                   `tfsdk:"no_proxy"`
 	Profile                   types.String                   `tfsdk:"profile"`
 	Region                    types.String                   `tfsdk:"region"`
-	RoleARN                   cctypes.ARN                    `tfsdk:"role_arn"`
+	RoleARN                   inttypes.ARN                   `tfsdk:"role_arn"`
 	SecretKey                 types.String                   `tfsdk:"secret_key"`
 	SharedConfigFiles         types.List                     `tfsdk:"shared_config_files"`
 	SharedCredentialsFiles    types.List                     `tfsdk:"shared_credentials_files"`
 	SkipMedatadataApiCheck    types.Bool                     `tfsdk:"skip_medatadata_api_check"`
 	SkipMetadataApiCheck      types.Bool                     `tfsdk:"skip_metadata_api_check"`
 	Token                     types.String                   `tfsdk:"token"`
-	UserAgent                 cctypes.UserAgentProducts      `tfsdk:"user_agent"`
+	UserAgent                 inttypes.UserAgentProducts     `tfsdk:"user_agent"`
 
 	terraformVersion string
 }
 
 type assumeRoleModel struct {
-	Duration          cctypes.Duration `tfsdk:"duration"`
-	ExternalID        types.String     `tfsdk:"external_id"`
-	Policy            jsontypes.Exact  `tfsdk:"policy"`
-	PolicyARNs        types.List       `tfsdk:"policy_arns"`
-	RoleARN           cctypes.ARN      `tfsdk:"role_arn"`
-	SessionName       types.String     `tfsdk:"session_name"`
-	Tags              types.Map        `tfsdk:"tags"`
-	TransitiveTagKeys types.Set        `tfsdk:"transitive_tag_keys"`
+	Duration          inttypes.Duration `tfsdk:"duration"`
+	ExternalID        types.String      `tfsdk:"external_id"`
+	Policy            jsontypes.Exact   `tfsdk:"policy"`
+	PolicyARNs        types.List        `tfsdk:"policy_arns"`
+	RoleARN           inttypes.ARN      `tfsdk:"role_arn"`
+	SessionName       types.String      `tfsdk:"session_name"`
+	Tags              types.Map         `tfsdk:"tags"`
+	TransitiveTagKeys types.Set         `tfsdk:"transitive_tag_keys"`
 }
 
 func (a assumeRoleModel) Config() awsbase.AssumeRole {
@@ -392,13 +392,13 @@ type endpointData struct {
 }
 
 type assumeRoleWithWebIdentityData struct {
-	Duration             cctypes.Duration `tfsdk:"duration"`
-	Policy               jsontypes.Exact  `tfsdk:"policy"`
-	PolicyARNs           types.List       `tfsdk:"policy_arns"`
-	RoleARN              cctypes.ARN      `tfsdk:"role_arn"`
-	SessionName          types.String     `tfsdk:"session_name"`
-	WebIdentityToken     types.String     `tfsdk:"web_identity_token"`
-	WebIdentityTokenFile types.String     `tfsdk:"web_identity_token_file"`
+	Duration             inttypes.Duration `tfsdk:"duration"`
+	Policy               jsontypes.Exact   `tfsdk:"policy"`
+	PolicyARNs           types.List        `tfsdk:"policy_arns"`
+	RoleARN              inttypes.ARN      `tfsdk:"role_arn"`
+	SessionName          types.String      `tfsdk:"session_name"`
+	WebIdentityToken     types.String      `tfsdk:"web_identity_token"`
+	WebIdentityTokenFile types.String      `tfsdk:"web_identity_token_file"`
 }
 
 func (a assumeRoleWithWebIdentityData) Config() *awsbase.AssumeRoleWithWebIdentity {
