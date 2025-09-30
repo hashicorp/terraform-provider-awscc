@@ -393,20 +393,12 @@ func (r *genericResource) Configure(_ context.Context, request resource.Configur
 }
 
 func (r *genericResource) Create(ctx context.Context, request resource.CreateRequest, response *resource.CreateResponse) {
-	ctx = r.bootstrapContext(ctx, bootstrapContextWithProviderMeta(request.ProviderMeta))
+	ctx = r.bootstrapContextWithProviderMeta(ctx, request.ProviderMeta, &response.Diagnostics)
+	if response.Diagnostics.HasError() {
+		return
+	}
 
 	traceEntry(ctx, "Resource.Create")
-
-	// var metadata *providerMetaData
-	// response.Diagnostics.Append(request.ProviderMeta.Get(ctx, &metadata)...)
-	// if response.Diagnostics.HasError() {
-	// 	return
-	// }
-	// if metadata != nil {
-	// 	var uap inttypes.UserAgentProducts
-	// 	metadata.UserAgent.ElementsAs(ctx, &uap, false)
-	// 	ctx = useragent.Context(ctx, uap.UserAgentProducts())
-	// }
 
 	conn := r.provider.CloudControlAPIClient(ctx)
 
@@ -507,7 +499,10 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 }
 
 func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest, response *resource.ReadResponse) {
-	ctx = r.bootstrapContext(ctx, bootstrapContextWithProviderMeta(request.ProviderMeta))
+	ctx = r.bootstrapContextWithProviderMeta(ctx, request.ProviderMeta, &response.Diagnostics)
+	if response.Diagnostics.HasError() {
+		return
+	}
 
 	traceEntry(ctx, "Resource.Read")
 
@@ -591,7 +586,10 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 }
 
 func (r *genericResource) Update(ctx context.Context, request resource.UpdateRequest, response *resource.UpdateResponse) {
-	ctx = r.bootstrapContext(ctx, bootstrapContextWithProviderMeta(request.ProviderMeta))
+	ctx = r.bootstrapContextWithProviderMeta(ctx, request.ProviderMeta, &response.Diagnostics)
+	if response.Diagnostics.HasError() {
+		return
+	}
 
 	traceEntry(ctx, "Resource.Update")
 
@@ -716,7 +714,10 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 }
 
 func (r *genericResource) Delete(ctx context.Context, request resource.DeleteRequest, response *resource.DeleteResponse) {
-	ctx = r.bootstrapContext(ctx, bootstrapContextWithProviderMeta(request.ProviderMeta))
+	ctx = r.bootstrapContextWithProviderMeta(ctx, request.ProviderMeta, &response.Diagnostics)
+	if response.Diagnostics.HasError() {
+		return
+	}
 
 	traceEntry(ctx, "Resource.Delete")
 
@@ -930,41 +931,27 @@ func (r *genericResource) populateUnknownValues(ctx context.Context, id string, 
 	return nil
 }
 
-// bootstrapContext injects the CloudFormation type name into logger contexts and
-// runs any configured functional options
-func (r *genericResource) bootstrapContext(ctx context.Context, optFn ...bootrapContextOptionsFunc) context.Context {
+// bootstrapContext injects the CloudFormation type name into logger contexts
+func (r *genericResource) bootstrapContext(ctx context.Context) context.Context {
 	ctx = tflog.SetField(ctx, LoggingKeyCFNType, r.cfTypeName)
-	ctx = r.provider.RegisterLogger(ctx)
+	return r.provider.RegisterLogger(ctx)
+}
 
-	for _, fn := range optFn {
-		ctx = fn(ctx)
+// bootstrapContextWithProviderMeta is an extenion of bootstrapContext which
+// also injects details from the provider_meta block into context
+func (r *genericResource) bootstrapContextWithProviderMeta(ctx context.Context, providerMeta tfsdk.Config, d *diag.Diagnostics) context.Context {
+	ctx = r.bootstrapContext(ctx)
+
+	var metadata *providerMetaData
+	d.Append(providerMeta.Get(ctx, &metadata)...)
+
+	if metadata != nil {
+		var uap inttypes.UserAgentProducts
+		d.Append(metadata.UserAgent.ElementsAs(ctx, &uap, false)...)
+		ctx = useragent.Context(ctx, uap.UserAgentProducts())
 	}
 
 	return ctx
-}
-
-type bootrapContextOptionsFunc func(ctx context.Context) context.Context
-
-// bootstrapContextWithProviderMeta injects details from the provider_meta block into context
-func bootstrapContextWithProviderMeta(providerMeta tfsdk.Config) bootrapContextOptionsFunc {
-	return func(ctx context.Context) context.Context {
-		var metadata *providerMetaData
-		var d diag.Diagnostics
-
-		// TODO: return diags
-		d.Append(providerMeta.Get(ctx, &metadata)...)
-		if d.HasError() {
-			panic("todo - implement diag handling")
-		}
-
-		if metadata != nil {
-			var uap inttypes.UserAgentProducts
-			metadata.UserAgent.ElementsAs(ctx, &uap, false)
-			ctx = useragent.Context(ctx, uap.UserAgentProducts())
-		}
-
-		return ctx
-	}
 }
 
 // propertyPathToAttributePath returns the AttributePath for the specified JSON Pointer property path.
