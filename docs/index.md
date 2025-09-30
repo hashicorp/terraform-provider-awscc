@@ -251,7 +251,7 @@ credential_process = custom-process --username jdoe
 - `skip_medatadata_api_check` (Boolean, Deprecated) Skip the AWS Metadata API check. Useful for AWS API implementations that do not have a metadata API endpoint.  Setting to `true` prevents Terraform from authenticating via the Metadata API. You may need to use other authentication methods like static credentials, configuration variables, or environment variables.
 - `skip_metadata_api_check` (Boolean) Skip the AWS Metadata API check. Useful for AWS API implementations that do not have a metadata API endpoint.  Setting to `true` prevents Terraform from authenticating via the Metadata API. You may need to use other authentication methods like static credentials, configuration variables, or environment variables.
 - `token` (String) Session token for validating temporary credentials. Typically provided after successful identity federation or Multi-Factor Authentication (MFA) login. With MFA login, this is the session token provided afterward, not the 6 digit MFA code used to get temporary credentials.  It can also be sourced from the `AWS_SESSION_TOKEN` environment variable.
-- `user_agent` (Attributes List) Product details to append to User-Agent string in all AWS API calls. (see [below for nested schema](#nestedatt--user_agent))
+- `user_agent` (Attributes List) Product details to append to the User-Agent string sent in all AWS API calls. (see [below for nested schema](#nestedatt--user_agent))
 
 <a id="nestedatt--assume_role"></a>
 ### Nested Schema for `assume_role`
