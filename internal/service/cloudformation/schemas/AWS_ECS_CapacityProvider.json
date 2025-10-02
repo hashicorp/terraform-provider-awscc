@@ -25,7 +25,10 @@
         "autoscaling:CreateOrUpdateTags",
         "ecs:CreateCapacityProvider",
         "ecs:DescribeCapacityProviders",
-        "ecs:TagResource"
+        "ecs:TagResource",
+        "ecs:PutClusterCapacityProviders",
+        "iam:CreateServiceLinkedRole",
+        "iam:PassRole"
       ]
     },
     "update": {
@@ -33,8 +36,10 @@
         "ecs:UpdateCapacityProvider",
         "ecs:DescribeCapacityProviders",
         "ecs:ListTagsForResource",
+        "ecs:PutClusterCapacityProviders",
         "ecs:TagResource",
-        "ecs:UntagResource"
+        "ecs:UntagResource",
+        "iam:PassRole"
       ]
     },
     "list": {
@@ -45,7 +50,8 @@
     "delete": {
       "permissions": [
         "ecs:DescribeCapacityProviders",
-        "ecs:DeleteCapacityProvider"
+        "ecs:DeleteCapacityProvider",
+        "ecs:PutClusterCapacityProviders"
       ]
     }
   },
@@ -53,7 +59,8 @@
   "description": "Resource Type definition for AWS::ECS::CapacityProvider.",
   "createOnlyProperties": [
     "/properties/AutoScalingGroupProvider/AutoScalingGroupArn",
-    "/properties/Name"
+    "/properties/Name",
+    "/properties/ClusterName"
   ],
   "additionalProperties": false,
   "primaryIdentifier": [
@@ -89,6 +96,298 @@
         "AutoScalingGroupArn"
       ]
     },
+    "AcceleratorCountRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Min": {
+          "type": "integer"
+        },
+        "Max": {
+          "type": "integer"
+        }
+      }
+    },
+    "MemoryGiBPerVCpuRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Min": {
+          "type": "number"
+        },
+        "Max": {
+          "type": "number"
+        }
+      }
+    },
+    "ManagedInstancesNetworkConfiguration": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "SecurityGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Subnets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "Subnets"
+      ]
+    },
+    "InstanceRequirementsRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "LocalStorageTypes": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "hdd",
+              "ssd"
+            ]
+          }
+        },
+        "InstanceGenerations": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "current",
+              "previous"
+            ]
+          }
+        },
+        "NetworkInterfaceCount": {
+          "$ref": "#/definitions/NetworkInterfaceCountRequest"
+        },
+        "MemoryGiBPerVCpu": {
+          "$ref": "#/definitions/MemoryGiBPerVCpuRequest"
+        },
+        "AcceleratorTypes": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "gpu",
+              "fpga",
+              "inference"
+            ]
+          }
+        },
+        "VCpuCount": {
+          "$ref": "#/definitions/VCpuCountRangeRequest"
+        },
+        "ExcludedInstanceTypes": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "minLength": 1,
+            "pattern": "[a-zA-Z0-9\\.\\*]+",
+            "type": "string",
+            "maxLength": 30
+          }
+        },
+        "AcceleratorManufacturers": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "amazon-web-services",
+              "amd",
+              "habana",
+              "nvidia",
+              "xilinx"
+            ]
+          }
+        },
+        "AllowedInstanceTypes": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "minLength": 1,
+            "pattern": "[a-zA-Z0-9\\.\\*]+",
+            "type": "string",
+            "maxLength": 30
+          }
+        },
+        "LocalStorage": {
+          "type": "string",
+          "enum": [
+            "included",
+            "required",
+            "excluded"
+          ]
+        },
+        "CpuManufacturers": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "intel",
+              "amd",
+              "amazon-web-services"
+            ]
+          }
+        },
+        "NetworkBandwidthGbps": {
+          "$ref": "#/definitions/NetworkBandwidthGbpsRequest"
+        },
+        "AcceleratorCount": {
+          "$ref": "#/definitions/AcceleratorCountRequest"
+        },
+        "BareMetal": {
+          "type": "string",
+          "enum": [
+            "included",
+            "required",
+            "excluded"
+          ]
+        },
+        "RequireHibernateSupport": {
+          "type": "boolean"
+        },
+        "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice": {
+          "type": "integer"
+        },
+        "SpotMaxPricePercentageOverLowestPrice": {
+          "type": "integer"
+        },
+        "BaselineEbsBandwidthMbps": {
+          "$ref": "#/definitions/BaselineEbsBandwidthMbpsRequest"
+        },
+        "OnDemandMaxPricePercentageOverLowestPrice": {
+          "type": "integer"
+        },
+        "AcceleratorNames": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "a10g",
+              "a100",
+              "h100",
+              "inferentia",
+              "k520",
+              "k80",
+              "m60",
+              "radeon-pro-v520",
+              "t4",
+              "t4g",
+              "vu9p",
+              "v100"
+            ]
+          }
+        },
+        "AcceleratorTotalMemoryMiB": {
+          "$ref": "#/definitions/AcceleratorTotalMemoryMiBRequest"
+        },
+        "BurstablePerformance": {
+          "type": "string",
+          "enum": [
+            "included",
+            "required",
+            "excluded"
+          ]
+        },
+        "MemoryMiB": {
+          "$ref": "#/definitions/MemoryMiBRequest"
+        },
+        "TotalLocalStorageGB": {
+          "$ref": "#/definitions/TotalLocalStorageGBRequest"
+        }
+      },
+      "required": [
+        "VCpuCount",
+        "MemoryMiB"
+      ]
+    },
+    "MemoryMiBRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Min": {
+          "type": "integer"
+        },
+        "Max": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "Min"
+      ]
+    },
+    "TotalLocalStorageGBRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Min": {
+          "type": "number"
+        },
+        "Max": {
+          "type": "number"
+        }
+      }
+    },
+    "ManagedInstancesMonitoringOptions": {
+      "type": "string",
+      "enum": [
+        "BASIC",
+        "DETAILED"
+      ]
+    },
+    "NetworkBandwidthGbpsRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Min": {
+          "type": "number"
+        },
+        "Max": {
+          "type": "number"
+        }
+      }
+    },
+    "VCpuCountRangeRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Min": {
+          "type": "integer"
+        },
+        "Max": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "Min"
+      ]
+    },
+    "BaselineEbsBandwidthMbpsRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Min": {
+          "type": "integer"
+        },
+        "Max": {
+          "type": "integer"
+        }
+      }
+    },
     "ManagedScaling": {
       "description": "The managed scaling settings for the Auto Scaling group capacity provider.",
       "additionalProperties": false,
@@ -115,6 +414,42 @@
         }
       }
     },
+    "NetworkInterfaceCountRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Min": {
+          "type": "integer"
+        },
+        "Max": {
+          "type": "integer"
+        }
+      }
+    },
+    "ManagedInstancesStorageConfiguration": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "StorageSizeGiB": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "StorageSizeGiB"
+      ]
+    },
+    "AcceleratorTotalMemoryMiBRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Min": {
+          "type": "integer"
+        },
+        "Max": {
+          "type": "integer"
+        }
+      }
+    },
     "Tag": {
       "additionalProperties": false,
       "type": "object",
@@ -128,11 +463,62 @@
           "type": "string"
         }
       }
+    },
+    "InstanceLaunchTemplate": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Ec2InstanceProfileArn": {
+          "type": "string"
+        },
+        "StorageConfiguration": {
+          "$ref": "#/definitions/ManagedInstancesStorageConfiguration"
+        },
+        "NetworkConfiguration": {
+          "$ref": "#/definitions/ManagedInstancesNetworkConfiguration"
+        },
+        "InstanceRequirements": {
+          "$ref": "#/definitions/InstanceRequirementsRequest"
+        },
+        "Monitoring": {
+          "$ref": "#/definitions/ManagedInstancesMonitoringOptions"
+        }
+      },
+      "required": [
+        "Ec2InstanceProfileArn",
+        "NetworkConfiguration"
+      ]
+    },
+    "ManagedInstancesProvider": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "InfrastructureRoleArn": {
+          "type": "string"
+        },
+        "PropagateTags": {
+          "type": "string",
+          "enum": [
+            "CAPACITY_PROVIDER",
+            "NONE"
+          ]
+        },
+        "InstanceLaunchTemplate": {
+          "$ref": "#/definitions/InstanceLaunchTemplate"
+        }
+      },
+      "required": [
+        "InfrastructureRoleArn",
+        "InstanceLaunchTemplate"
+      ]
     }
   },
   "properties": {
     "AutoScalingGroupProvider": {
       "$ref": "#/definitions/AutoScalingGroupProvider"
+    },
+    "ClusterName": {
+      "type": "string"
     },
     "Tags": {
       "type": "array",
@@ -142,6 +528,9 @@
     },
     "Name": {
       "type": "string"
+    },
+    "ManagedInstancesProvider": {
+      "$ref": "#/definitions/ManagedInstancesProvider"
     }
   }
 }

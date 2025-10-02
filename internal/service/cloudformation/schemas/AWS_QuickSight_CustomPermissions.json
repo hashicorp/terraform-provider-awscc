@@ -73,6 +73,12 @@
         },
         "IncludeContentInScheduledReportsEmail": {
           "$ref": "#/definitions/CapabilityState"
+        },
+        "Dashboard": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "Analysis": {
+          "$ref": "#/definitions/CapabilityState"
         }
       },
       "additionalProperties": false

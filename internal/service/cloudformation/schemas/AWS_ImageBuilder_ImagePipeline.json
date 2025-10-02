@@ -170,6 +170,10 @@
             "EXPRESSION_MATCH_ONLY",
             "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"
           ]
+        },
+        "AutoDisablePolicy": {
+          "description": "The auto-disable policy for the image pipeline.",
+          "$ref": "#/definitions/AutoDisablePolicy"
         }
       }
     },
@@ -203,6 +207,36 @@
           }
         },
         "Name": {
+          "type": "string"
+        }
+      }
+    },
+    "AutoDisablePolicy": {
+      "description": "The auto-disable policy configuration for the image pipeline.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "FailureCount": {
+          "description": "The number of consecutive failures after which the pipeline should be automatically disabled.",
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "FailureCount"
+      ]
+    },
+    "PipelineLoggingConfiguration": {
+      "description": "The logging configuration settings for the image pipeline.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "PipelineLogGroupName": {
+          "description": "The name of the log group for pipeline execution logs.",
+          "type": "string"
+        },
+        "ImageLogGroupName": {
+          "description": "The name of the log group for image build logs.",
           "type": "string"
         }
       }
@@ -256,6 +290,10 @@
     "Schedule": {
       "description": "The schedule of the image pipeline.",
       "$ref": "#/definitions/Schedule"
+    },
+    "LoggingConfiguration": {
+      "description": "The logging configuration settings for the image pipeline.",
+      "$ref": "#/definitions/PipelineLoggingConfiguration"
     },
     "ImageTestsConfiguration": {
       "description": "The image tests configuration of the image pipeline.",
