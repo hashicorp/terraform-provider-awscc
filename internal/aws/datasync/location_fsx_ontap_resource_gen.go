@@ -270,6 +270,7 @@ func locationFSxONTAPResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// Password is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: User
 						"user": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -300,7 +301,6 @@ func locationFSxONTAPResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// Protocol is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupArns
 		// CloudFormation resource type schema:
@@ -503,7 +503,7 @@ func locationFSxONTAPResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/Protocol",
+		"/properties/Protocol/SMB/Password",
 		"/properties/Subdirectory",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

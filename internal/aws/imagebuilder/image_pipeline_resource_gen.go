@@ -24,6 +24,7 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -287,6 +288,52 @@ func imagePipelineResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: LoggingConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The logging configuration settings for the image pipeline.",
+		//	  "properties": {
+		//	    "ImageLogGroupName": {
+		//	      "description": "The name of the log group for image build logs.",
+		//	      "type": "string"
+		//	    },
+		//	    "PipelineLogGroupName": {
+		//	      "description": "The name of the log group for pipeline execution logs.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ImageLogGroupName
+				"image_log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the log group for image build logs.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PipelineLogGroupName
+				"pipeline_log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the log group for pipeline execution logs.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The logging configuration settings for the image pipeline.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -310,6 +357,21 @@ func imagePipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "The schedule of the image pipeline.",
 		//	  "properties": {
+		//	    "AutoDisablePolicy": {
+		//	      "additionalProperties": false,
+		//	      "description": "The auto-disable policy for the image pipeline.",
+		//	      "properties": {
+		//	        "FailureCount": {
+		//	          "description": "The number of consecutive failures after which the pipeline should be automatically disabled.",
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "FailureCount"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "PipelineExecutionStartCondition": {
 		//	      "description": "The condition configures when the pipeline should trigger a new image build.",
 		//	      "enum": [
@@ -327,6 +389,30 @@ func imagePipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoDisablePolicy
+				"auto_disable_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: FailureCount
+						"failure_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The number of consecutive failures after which the pipeline should be automatically disabled.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.AtLeast(1),
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The auto-disable policy for the image pipeline.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: PipelineExecutionStartCondition
 				"pipeline_execution_start_condition": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The condition configures when the pipeline should trigger a new image build.",
@@ -567,6 +653,7 @@ func imagePipelineResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                                "Arn",
+		"auto_disable_policy":                "AutoDisablePolicy",
 		"container_recipe_arn":               "ContainerRecipeArn",
 		"container_tags":                     "ContainerTags",
 		"description":                        "Description",
@@ -574,17 +661,21 @@ func imagePipelineResource(ctx context.Context) (resource.Resource, error) {
 		"ecr_configuration":                  "EcrConfiguration",
 		"enhanced_image_metadata_enabled":    "EnhancedImageMetadataEnabled",
 		"execution_role":                     "ExecutionRole",
+		"failure_count":                      "FailureCount",
+		"image_log_group_name":               "ImageLogGroupName",
 		"image_recipe_arn":                   "ImageRecipeArn",
 		"image_scanning_configuration":       "ImageScanningConfiguration",
 		"image_scanning_enabled":             "ImageScanningEnabled",
 		"image_tests_configuration":          "ImageTestsConfiguration",
 		"image_tests_enabled":                "ImageTestsEnabled",
 		"infrastructure_configuration_arn":   "InfrastructureConfigurationArn",
+		"logging_configuration":              "LoggingConfiguration",
 		"name":                               "Name",
 		"on_failure":                         "OnFailure",
 		"parallel_group":                     "ParallelGroup",
 		"parameters":                         "Parameters",
 		"pipeline_execution_start_condition": "PipelineExecutionStartCondition",
+		"pipeline_log_group_name":            "PipelineLogGroupName",
 		"repository_name":                    "RepositoryName",
 		"schedule":                           "Schedule",
 		"schedule_expression":                "ScheduleExpression",

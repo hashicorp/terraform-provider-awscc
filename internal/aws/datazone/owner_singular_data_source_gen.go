@@ -122,6 +122,28 @@ func ownerDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The owner that you want to add to the entity.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: OwnerIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"owner_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: OwnerType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "USER",
+		//	    "GROUP"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"owner_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -145,6 +167,8 @@ func ownerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"group":             "Group",
 		"group_identifier":  "GroupIdentifier",
 		"owner":             "Owner",
+		"owner_identifier":  "OwnerIdentifier",
+		"owner_type":        "OwnerType",
 		"user":              "User",
 		"user_identifier":   "UserIdentifier",
 	})

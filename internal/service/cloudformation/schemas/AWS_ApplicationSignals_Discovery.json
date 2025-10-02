@@ -29,7 +29,8 @@
       "permissions": [
         "application-signals:StartDiscovery",
         "application-signals:ListServices",
-        "iam:CreateServiceLinkedRole"
+        "iam:CreateServiceLinkedRole",
+        "cloudtrail:CreateServiceLinkedChannel"
       ]
     },
     "read": {

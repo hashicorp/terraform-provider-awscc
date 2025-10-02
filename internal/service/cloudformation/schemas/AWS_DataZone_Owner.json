@@ -1,4 +1,147 @@
 {
+  "typeName": "AWS::DataZone::Owner",
+  "description": "A owner can set up authorization permissions on their resources.",
+  "definitions": {
+    "OwnerProperties": {
+      "type": "object",
+      "description": "The properties of a domain unit's owner.",
+      "oneOf": [
+        {
+          "properties": {
+            "Group": {
+              "$ref": "#/definitions/OwnerGroupProperties"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "User": {
+              "$ref": "#/definitions/OwnerUserProperties"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "OwnerGroupProperties": {
+      "type": "object",
+      "description": "The properties of the domain unit owners group.",
+      "properties": {
+        "GroupIdentifier": {
+          "type": "string",
+          "description": "The ID of the domain unit owners group.",
+          "pattern": "(^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$|[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r ]+)"
+        }
+      },
+      "additionalProperties": false
+    },
+    "OwnerUserProperties": {
+      "type": "object",
+      "description": "The properties of the owner user.",
+      "properties": {
+        "UserIdentifier": {
+          "type": "string",
+          "description": "The ID of the owner user.",
+          "pattern": "(^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$|^[a-zA-Z_0-9+=,.@-]+$|^arn:aws:iam::\\d{12}:.+$)"
+        }
+      },
+      "additionalProperties": false
+    },
+    "OwnerPropertiesOutput": {
+      "type": "object",
+      "description": "The ID of the domain unit owners group.",
+      "properties": {
+        "Group": {
+          "$ref": "#/definitions/OwnerGroupPropertiesOutput"
+        },
+        "User": {
+          "$ref": "#/definitions/OwnerUserPropertiesOutput"
+        }
+      },
+      "additionalProperties": false
+    },
+    "OwnerGroupPropertiesOutput": {
+      "type": "object",
+      "description": "The properties of the domain unit owners group.",
+      "properties": {
+        "GroupId": {
+          "type": "string",
+          "description": "The ID of the domain unit owners group."
+        }
+      },
+      "additionalProperties": false
+    },
+    "OwnerUserPropertiesOutput": {
+      "type": "object",
+      "description": "The properties of the owner user.",
+      "properties": {
+        "UserId": {
+          "type": "string",
+          "description": "The ID of the owner user."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "DomainIdentifier": {
+      "type": "string",
+      "description": "The ID of the domain in which you want to add the entity owner.",
+      "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$"
+    },
+    "EntityIdentifier": {
+      "type": "string",
+      "description": "The ID of the entity to which you want to add an owner."
+    },
+    "EntityType": {
+      "type": "string",
+      "description": "The type of an entity.",
+      "enum": [
+        "DOMAIN_UNIT"
+      ]
+    },
+    "Owner": {
+      "description": "The owner that you want to add to the entity.",
+      "$ref": "#/definitions/OwnerProperties"
+    },
+    "OwnerType": {
+      "type": "string",
+      "enum": [
+        "USER",
+        "GROUP"
+      ]
+    },
+    "OwnerIdentifier": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "DomainIdentifier",
+    "EntityIdentifier",
+    "EntityType",
+    "Owner"
+  ],
+  "readOnlyProperties": [
+    "/properties/OwnerType",
+    "/properties/OwnerIdentifier"
+  ],
+  "createOnlyProperties": [
+    "/properties/DomainIdentifier",
+    "/properties/EntityIdentifier",
+    "/properties/EntityType",
+    "/properties/Owner"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Owner"
+  ],
+  "primaryIdentifier": [
+    "/properties/DomainIdentifier",
+    "/properties/EntityType",
+    "/properties/EntityIdentifier",
+    "/properties/OwnerType",
+    "/properties/OwnerIdentifier"
+  ],
   "tagging": {
     "taggable": false,
     "tagOnCreate": false,
@@ -6,12 +149,6 @@
     "cloudFormationSystemTags": false
   },
   "handlers": {
-    "read": {
-      "permissions": [
-        "datazone:ListEntityOwners",
-        "iam:GetRole"
-      ]
-    },
     "create": {
       "permissions": [
         "datazone:AddEntityOwner",
@@ -21,36 +158,11 @@
         "iam:GetRole"
       ]
     },
-    "list": {
+    "read": {
       "permissions": [
         "datazone:ListEntityOwners",
         "iam:GetRole"
-      ],
-      "handlerSchema": {
-        "properties": {
-          "EntityType": {
-            "description": "The type of an entity.",
-            "type": "string",
-            "enum": [
-              "DOMAIN_UNIT"
-            ]
-          },
-          "EntityIdentifier": {
-            "description": "The ID of the entity to which you want to add an owner.",
-            "type": "string"
-          },
-          "DomainIdentifier": {
-            "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
-            "description": "The ID of the domain in which you want to add the entity owner.",
-            "type": "string"
-          }
-        },
-        "required": [
-          "DomainIdentifier",
-          "EntityType",
-          "EntityIdentifier"
-        ]
-      }
+      ]
     },
     "delete": {
       "permissions": [
@@ -58,136 +170,38 @@
         "datazone:GetUserProfile",
         "iam:GetRole"
       ]
-    }
-  },
-  "typeName": "AWS::DataZone::Owner",
-  "description": "A owner can set up authorization permissions on their resources.",
-  "writeOnlyProperties": [
-    "/properties/Owner"
-  ],
-  "createOnlyProperties": [
-    "/properties/DomainIdentifier",
-    "/properties/EntityIdentifier",
-    "/properties/EntityType",
-    "/properties/Owner"
-  ],
-  "additionalProperties": false,
-  "primaryIdentifier": [
-    "/properties/DomainIdentifier",
-    "/properties/EntityType",
-    "/properties/EntityIdentifier",
-    "/properties/OwnerType",
-    "/properties/OwnerIdentifier"
-  ],
-  "definitions": {
-    "OwnerUserPropertiesOutput": {
-      "description": "The properties of the owner user.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "UserId": {
-          "description": "The ID of the owner user.",
-          "type": "string"
-        }
-      }
     },
-    "OwnerUserProperties": {
-      "description": "The properties of the owner user.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "UserIdentifier": {
-          "pattern": "(^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$|^[a-zA-Z_0-9+=,.@-]+$|^arn:aws:iam::\\d{12}:.+$)",
-          "description": "The ID of the owner user.",
-          "type": "string"
-        }
-      }
-    },
-    "OwnerGroupPropertiesOutput": {
-      "description": "The properties of the domain unit owners group.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "GroupId": {
-          "description": "The ID of the domain unit owners group.",
-          "type": "string"
-        }
-      }
-    },
-    "OwnerGroupProperties": {
-      "description": "The properties of the domain unit owners group.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "GroupIdentifier": {
-          "pattern": "(^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$|[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r ]+)",
-          "description": "The ID of the domain unit owners group.",
-          "type": "string"
-        }
-      }
-    },
-    "OwnerPropertiesOutput": {
-      "description": "The ID of the domain unit owners group.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "Group": {
-          "$ref": "#/definitions/OwnerGroupPropertiesOutput"
-        },
-        "User": {
-          "$ref": "#/definitions/OwnerUserPropertiesOutput"
-        }
-      }
-    },
-    "OwnerProperties": {
-      "oneOf": [
-        {
-          "additionalProperties": false,
-          "properties": {
-            "Group": {
-              "$ref": "#/definitions/OwnerGroupProperties"
-            }
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "DomainIdentifier": {
+            "type": "string",
+            "description": "The ID of the domain in which you want to add the entity owner.",
+            "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$"
+          },
+          "EntityType": {
+            "type": "string",
+            "description": "The type of an entity.",
+            "enum": [
+              "DOMAIN_UNIT"
+            ]
+          },
+          "EntityIdentifier": {
+            "type": "string",
+            "description": "The ID of the entity to which you want to add an owner."
           }
         },
-        {
-          "additionalProperties": false,
-          "properties": {
-            "User": {
-              "$ref": "#/definitions/OwnerUserProperties"
-            }
-          }
-        }
-      ],
-      "description": "The properties of a domain unit's owner.",
-      "type": "object"
-    }
-  },
-  "required": [
-    "DomainIdentifier",
-    "EntityIdentifier",
-    "EntityType",
-    "Owner"
-  ],
-  "properties": {
-    "EntityType": {
-      "description": "The type of an entity.",
-      "type": "string",
-      "enum": [
-        "DOMAIN_UNIT"
+        "required": [
+          "DomainIdentifier",
+          "EntityType",
+          "EntityIdentifier"
+        ]
+      },
+      "permissions": [
+        "datazone:ListEntityOwners",
+        "iam:GetRole"
       ]
-    },
-    "Owner": {
-      "description": "The owner that you want to add to the entity.",
-      "$ref": "#/definitions/OwnerProperties"
-    },
-    "EntityIdentifier": {
-      "description": "The ID of the entity to which you want to add an owner.",
-      "type": "string"
-    },
-    "DomainIdentifier": {
-      "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
-      "description": "The ID of the domain in which you want to add the entity owner.",
-      "type": "string"
     }
-  }
+  },
+  "additionalProperties": false
 }

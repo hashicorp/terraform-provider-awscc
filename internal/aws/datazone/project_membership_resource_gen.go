@@ -110,6 +110,34 @@ func projectMembershipResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// Member is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: MemberIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"member_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MemberIdentifierType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "USER_IDENTIFIER",
+		//	    "GROUP_IDENTIFIER"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"member_identifier_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ProjectIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -166,12 +194,14 @@ func projectMembershipResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"designation":        "Designation",
-		"domain_identifier":  "DomainIdentifier",
-		"group_identifier":   "GroupIdentifier",
-		"member":             "Member",
-		"project_identifier": "ProjectIdentifier",
-		"user_identifier":    "UserIdentifier",
+		"designation":            "Designation",
+		"domain_identifier":      "DomainIdentifier",
+		"group_identifier":       "GroupIdentifier",
+		"member":                 "Member",
+		"member_identifier":      "MemberIdentifier",
+		"member_identifier_type": "MemberIdentifierType",
+		"project_identifier":     "ProjectIdentifier",
+		"user_identifier":        "UserIdentifier",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

@@ -22,6 +22,7 @@ Data Source schema for AWS::ImageBuilder::ImageRecipe
 ### Read-Only
 
 - `additional_instance_configuration` (Attributes) Specify additional settings and launch scripts for your build instances. (see [below for nested schema](#nestedatt--additional_instance_configuration))
+- `ami_tags` (Map of String) The tags to apply to the AMI created by this image recipe.
 - `arn` (String) The Amazon Resource Name (ARN) of the image recipe.
 - `block_device_mappings` (Attributes List) The block device mappings to apply when creating images from this recipe. (see [below for nested schema](#nestedatt--block_device_mappings))
 - `components` (Attributes List) The components of the image recipe. (see [below for nested schema](#nestedatt--components))

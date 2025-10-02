@@ -103,6 +103,34 @@ func dBProxyEndpointResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EndpointNetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.",
+		//	  "enum": [
+		//	    "IPV4",
+		//	    "IPV6",
+		//	    "DUAL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"endpoint_network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"IPV4",
+					"IPV6",
+					"DUAL",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IsDefault
 		// CloudFormation resource type schema:
 		//
@@ -299,6 +327,7 @@ func dBProxyEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"db_proxy_endpoint_name": "DBProxyEndpointName",
 		"db_proxy_name":          "DBProxyName",
 		"endpoint":               "Endpoint",
+		"endpoint_network_type":  "EndpointNetworkType",
 		"is_default":             "IsDefault",
 		"key":                    "Key",
 		"tags":                   "Tags",

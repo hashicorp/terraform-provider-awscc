@@ -120,6 +120,7 @@
     },
     "update": {
       "permissions": [
+        "mq:DescribeConfiguration",
         "mq:UpdateConfiguration",
         "mq:CreateTags",
         "mq:DeleteTags"

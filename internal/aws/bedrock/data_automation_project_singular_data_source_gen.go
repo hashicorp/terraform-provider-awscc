@@ -475,6 +475,50 @@ func dataAutomationProjectDataSource(ctx context.Context) (datasource.DataSource
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
+		//	                "TypeConfiguration": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Transcript": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "ChannelLabeling": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "State": {
+		//	                              "enum": [
+		//	                                "ENABLED",
+		//	                                "DISABLED"
+		//	                              ],
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "State"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        },
+		//	                        "SpeakerLabeling": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "State": {
+		//	                              "enum": [
+		//	                                "ENABLED",
+		//	                                "DISABLED"
+		//	                              ],
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "State"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
 		//	                "Types": {
 		//	                  "items": {
 		//	                    "enum": [
@@ -837,6 +881,38 @@ func dataAutomationProjectDataSource(ctx context.Context) (datasource.DataSource
 										"state": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Computed: true,
 										}, /*END ATTRIBUTE*/
+										// Property: TypeConfiguration
+										"type_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Transcript
+												"transcript": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: ChannelLabeling
+														"channel_labeling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: State
+																"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: SpeakerLabeling
+														"speaker_labeling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: State
+																"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
 										// Property: Types
 										"types": schema.ListAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
@@ -1136,6 +1212,7 @@ func dataAutomationProjectDataSource(ctx context.Context) (datasource.DataSource
 		"blueprints":                    "Blueprints",
 		"bounding_box":                  "BoundingBox",
 		"category":                      "Category",
+		"channel_labeling":              "ChannelLabeling",
 		"creation_time":                 "CreationTime",
 		"custom_output_configuration":   "CustomOutputConfiguration",
 		"document":                      "Document",
@@ -1159,12 +1236,15 @@ func dataAutomationProjectDataSource(ctx context.Context) (datasource.DataSource
 		"project_description":           "ProjectDescription",
 		"project_name":                  "ProjectName",
 		"project_stage":                 "ProjectStage",
+		"speaker_labeling":              "SpeakerLabeling",
 		"splitter":                      "Splitter",
 		"standard_output_configuration": "StandardOutputConfiguration",
 		"state":                         "State",
 		"status":                        "Status",
 		"tags":                          "Tags",
 		"text_format":                   "TextFormat",
+		"transcript":                    "Transcript",
+		"type_configuration":            "TypeConfiguration",
 		"types":                         "Types",
 		"value":                         "Value",
 		"video":                         "Video",

@@ -39,6 +39,54 @@
           "items": {
             "$ref": "#/definitions/AudioExtractionCategoryType"
           }
+        },
+        "TypeConfiguration": {
+          "$ref": "#/definitions/AudioExtractionCategoryTypeConfiguration"
+        }
+      },
+      "required": [
+        "State"
+      ],
+      "additionalProperties": false
+    },
+    "AudioExtractionCategoryTypeConfiguration": {
+      "type": "object",
+      "properties": {
+        "Transcript": {
+          "$ref": "#/definitions/TranscriptConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "TranscriptConfiguration": {
+      "type": "object",
+      "properties": {
+        "SpeakerLabeling": {
+          "$ref": "#/definitions/SpeakerLabelingConfiguration"
+        },
+        "ChannelLabeling": {
+          "$ref": "#/definitions/ChannelLabelingConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SpeakerLabelingConfiguration": {
+      "type": "object",
+      "properties": {
+        "State": {
+          "$ref": "#/definitions/State"
+        }
+      },
+      "required": [
+        "State"
+      ],
+      "additionalProperties": false
+    },
+    "ChannelLabelingConfiguration": {
+      "type": "object",
+      "properties": {
+        "State": {
+          "$ref": "#/definitions/State"
         }
       },
       "required": [

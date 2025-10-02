@@ -76,6 +76,12 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "Analysis": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "CreateAndUpdateDashboardEmailReports": {
 		//	      "enum": [
 		//	        "DENY"
@@ -113,6 +119,12 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "CreateSharedFolders": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Dashboard": {
 		//	      "enum": [
 		//	        "DENY"
 		//	      ],
@@ -226,6 +238,19 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: Analysis
+				"analysis": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: CreateAndUpdateDashboardEmailReports
 				"create_and_update_dashboard_email_reports": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
@@ -306,6 +331,19 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: CreateSharedFolders
 				"create_shared_folders": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Dashboard
+				"dashboard": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -642,6 +680,7 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"add_or_run_anomaly_detection_for_analyses": "AddOrRunAnomalyDetectionForAnalyses",
+		"analysis":       "Analysis",
 		"arn":            "Arn",
 		"aws_account_id": "AwsAccountId",
 		"capabilities":   "Capabilities",
@@ -653,6 +692,7 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		"create_shared_folders":                      "CreateSharedFolders",
 		"create_spice_dataset":                       "CreateSPICEDataset",
 		"custom_permissions_name":                    "CustomPermissionsName",
+		"dashboard":                                  "Dashboard",
 		"export_to_csv":                              "ExportToCsv",
 		"export_to_csv_in_scheduled_reports":         "ExportToCsvInScheduledReports",
 		"export_to_excel":                            "ExportToExcel",
