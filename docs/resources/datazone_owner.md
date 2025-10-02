@@ -25,6 +25,8 @@ A owner can set up authorization permissions on their resources.
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `owner_identifier` (String)
+- `owner_type` (String)
 
 <a id="nestedatt--owner"></a>
 ### Nested Schema for `owner`

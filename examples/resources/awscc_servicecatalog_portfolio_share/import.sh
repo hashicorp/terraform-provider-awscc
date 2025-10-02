@@ -1,0 +1,1 @@
+$ terraform import awscc_servicecatalog_portfolio_share.example "portfolio_id|account_id"

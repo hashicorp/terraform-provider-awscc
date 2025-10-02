@@ -41,6 +41,9 @@ Required:
 Optional:
 
 - `description` (String)
+
+Read-Only:
+
 - `export_arn` (String)
 
 <a id="nestedatt--export--data_query"></a>

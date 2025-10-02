@@ -25,6 +25,7 @@ Data Source schema for AWS::RDS::DBProxyEndpoint
 - `db_proxy_endpoint_name` (String) The identifier for the DB proxy endpoint. This name must be unique for all DB proxy endpoints owned by your AWS account in the specified AWS Region.
 - `db_proxy_name` (String) The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.
 - `endpoint` (String) The endpoint that you can use to connect to the DB proxy. You include the endpoint value in the connection string for a database client application.
+- `endpoint_network_type` (String) The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.
 - `is_default` (Boolean) A value that indicates whether this endpoint is the default endpoint for the associated DB proxy. Default DB proxy endpoints always have read/write capability. Other endpoints that you associate with the DB proxy can be either read/write or read-only.
 - `tags` (Attributes List) An optional set of key-value pairs to associate arbitrary data of your choosing with the DB proxy endpoint. (see [below for nested schema](#nestedatt--tags))
 - `target_role` (String) A value that indicates whether the DB proxy endpoint can be used for read/write or read-only operations.

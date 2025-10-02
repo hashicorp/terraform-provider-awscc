@@ -31,6 +31,7 @@ Data Source schema for AWS::ImageBuilder::ImagePipeline
 - `image_scanning_configuration` (Attributes) Contains settings for vulnerability scans. (see [below for nested schema](#nestedatt--image_scanning_configuration))
 - `image_tests_configuration` (Attributes) The image tests configuration of the image pipeline. (see [below for nested schema](#nestedatt--image_tests_configuration))
 - `infrastructure_configuration_arn` (String) The Amazon Resource Name (ARN) of the infrastructure configuration associated with this image pipeline.
+- `logging_configuration` (Attributes) The logging configuration settings for the image pipeline. (see [below for nested schema](#nestedatt--logging_configuration))
 - `name` (String) The name of the image pipeline.
 - `schedule` (Attributes) The schedule of the image pipeline. (see [below for nested schema](#nestedatt--schedule))
 - `status` (String) The status of the image pipeline.
@@ -64,13 +65,31 @@ Read-Only:
 - `timeout_minutes` (Number) The maximum time in minutes that tests are permitted to run.
 
 
+<a id="nestedatt--logging_configuration"></a>
+### Nested Schema for `logging_configuration`
+
+Read-Only:
+
+- `image_log_group_name` (String) The name of the log group for image build logs.
+- `pipeline_log_group_name` (String) The name of the log group for pipeline execution logs.
+
+
 <a id="nestedatt--schedule"></a>
 ### Nested Schema for `schedule`
 
 Read-Only:
 
+- `auto_disable_policy` (Attributes) The auto-disable policy for the image pipeline. (see [below for nested schema](#nestedatt--schedule--auto_disable_policy))
 - `pipeline_execution_start_condition` (String) The condition configures when the pipeline should trigger a new image build.
 - `schedule_expression` (String) The expression determines how often EC2 Image Builder evaluates your pipelineExecutionStartCondition.
+
+<a id="nestedatt--schedule--auto_disable_policy"></a>
+### Nested Schema for `schedule.auto_disable_policy`
+
+Read-Only:
+
+- `failure_count` (Number) The number of consecutive failures after which the pipeline should be automatically disabled.
+
 
 
 <a id="nestedatt--workflows"></a>

@@ -32,4 +32,13 @@ Data Source schema for AWS::CUR::ReportDefinition
 - `s3_bucket` (String) The S3 bucket where AWS delivers the report.
 - `s3_prefix` (String) The prefix that AWS adds to the report name when AWS delivers the report. Your prefix can't include spaces.
 - `s3_region` (String) The region of the S3 bucket that AWS delivers the report into.
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `time_unit` (String) The granularity of the line items in the report.
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)

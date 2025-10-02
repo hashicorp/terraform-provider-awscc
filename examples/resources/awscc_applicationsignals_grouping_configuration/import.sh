@@ -1,0 +1,1 @@
+$ terraform import awscc_applicationsignals_grouping_configuration.example "account_id"

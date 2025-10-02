@@ -96,7 +96,7 @@ Read-Only:
 
 Read-Only:
 
-- `desired_ec2_instances` (Number) The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.
+- `desired_ec2_instances` (Number) Defaults to MinSize if not defined. The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.
 - `max_size` (Number) The maximum value that is allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to "1". Once the fleet is active, you can change this value.
 - `min_size` (Number) The minimum value allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to "0". After the fleet is active, you can change this value.
 

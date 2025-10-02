@@ -102,10 +102,19 @@ resource "awscc_cur_report_definition" "example" {
 - `additional_artifacts` (List of String) A list of manifests that you want Amazon Web Services to create for this report.
 - `additional_schema_elements` (List of String) A list of strings that indicate additional content that Amazon Web Services includes in the report, such as individual resource IDs.
 - `billing_view_arn` (String) The Amazon resource name of the billing view. You can get this value by using the billing view service public APIs.
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

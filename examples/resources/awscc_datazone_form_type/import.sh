@@ -1,0 +1,1 @@
+$ terraform import awscc_datazone_form_type.example "domain_identifier|form_type_identifier"

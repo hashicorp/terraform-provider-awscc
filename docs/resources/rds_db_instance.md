@@ -486,7 +486,12 @@ resource "awscc_rds_db_instance" "this" {
  For more information, see [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html) in the *Amazon RDS User Guide.*
  Constraints:
   +  Can't manage the master user password with AWS Secrets Manager if ``MasterUserPassword`` is specified.
-- `master_user_authentication_type` (String)
+- `master_user_authentication_type` (String) Specifies the authentication type for the master user. With IAM master user authentication, you can configure the master DB user with IAM database authentication when you create a DB instance.
+ You can specify one of the following values:
+  +  ``password`` - Use standard database authentication with a password.
+  +  ``iam-db-auth`` - Use IAM database authentication for the master user.
+  
+ This option is only valid for RDS for MySQL, RDS for MariaDB, RDS for PostgreSQL, Aurora MySQL, and Aurora PostgreSQL engines.
 - `master_user_password` (String) The password for the master user. The password can include any printable ASCII character except "/", """, or "@".
   *Amazon Aurora* 
  Not applicable. The password for the master user is managed by the DB cluster.
