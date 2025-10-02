@@ -1,4 +1,4 @@
-## 1.58.0 (Unreleased)
+## 1.58.0 (October 2, 2025)
 
 FEATURES:
 
