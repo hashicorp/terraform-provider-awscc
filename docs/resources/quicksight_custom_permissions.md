@@ -36,6 +36,7 @@ Definition of the AWS::QuickSight::CustomPermissions Resource Type.
 Optional:
 
 - `add_or_run_anomaly_detection_for_analyses` (String)
+- `analysis` (String)
 - `create_and_update_dashboard_email_reports` (String)
 - `create_and_update_data_sources` (String)
 - `create_and_update_datasets` (String)
@@ -43,6 +44,7 @@ Optional:
 - `create_and_update_threshold_alerts` (String)
 - `create_shared_folders` (String)
 - `create_spice_dataset` (String)
+- `dashboard` (String)
 - `export_to_csv` (String)
 - `export_to_csv_in_scheduled_reports` (String)
 - `export_to_excel` (String)

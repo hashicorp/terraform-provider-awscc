@@ -25,6 +25,8 @@ Data Source schema for AWS::DataZone::Owner
 - `entity_identifier` (String) The ID of the entity to which you want to add an owner.
 - `entity_type` (String) The type of an entity.
 - `owner` (Attributes) The owner that you want to add to the entity. (see [below for nested schema](#nestedatt--owner))
+- `owner_identifier` (String)
+- `owner_type` (String)
 
 <a id="nestedatt--owner"></a>
 ### Nested Schema for `owner`

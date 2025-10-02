@@ -1062,11 +1062,11 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "Specifies the authentication type for the master user. With IAM master user authentication, you can configure the master DB user with IAM database authentication when you create a DB instance.\n You can specify one of the following values:\n  +  ``password`` - Use standard database authentication with a password.\n  +  ``iam-db-auth`` - Use IAM database authentication for the master user.\n  \n This option is only valid for RDS for MySQL, RDS for MariaDB, RDS for PostgreSQL, Aurora MySQL, and Aurora PostgreSQL engines.",
 		//	  "type": "string"
 		//	}
 		"master_user_authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "Specifies the authentication type for the master user. With IAM master user authentication, you can configure the master DB user with IAM database authentication when you create a DB instance.\n You can specify one of the following values:\n  +  ``password`` - Use standard database authentication with a password.\n  +  ``iam-db-auth`` - Use IAM database authentication for the master user.\n  \n This option is only valid for RDS for MySQL, RDS for MariaDB, RDS for PostgreSQL, Aurora MySQL, and Aurora PostgreSQL engines.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

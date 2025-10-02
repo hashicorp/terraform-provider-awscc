@@ -1,0 +1,155 @@
+{
+  "typeName": "AWS::DataZone::FormType",
+  "description": "Create and manage form types in Amazon Datazone",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-datazone.git",
+  "definitions": {
+    "Model": {
+      "type": "object",
+      "description": "Indicates the smithy model of the API.",
+      "properties": {
+        "Smithy": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100000
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "DomainIdentifier": {
+      "type": "string",
+      "description": "The ID of the Amazon DataZone domain in which this metadata form type is created.",
+      "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$"
+    },
+    "Model": {
+      "type": "object",
+      "description": "The model of this Amazon DataZone metadata form type.",
+      "$ref": "#/definitions/Model"
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of this Amazon DataZone metadata form type.",
+      "minLength": 0,
+      "maxLength": 2048
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of this Amazon DataZone metadata form type.",
+      "pattern": "",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "OwningProjectIdentifier": {
+      "type": "string",
+      "description": "The ID of the Amazon DataZone project that owns this metadata form type.",
+      "pattern": "^[a-zA-Z0-9_-]{1,36}$"
+    },
+    "DomainId": {
+      "type": "string",
+      "description": "The ID of the Amazon DataZone domain in which this metadata form type is created.",
+      "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$"
+    },
+    "OwningProjectId": {
+      "type": "string",
+      "description": "The ID of the project that owns this Amazon DataZone metadata form type.",
+      "pattern": "^[a-zA-Z0-9_-]{1,36}$"
+    },
+    "Revision": {
+      "type": "string",
+      "description": "The revision of this Amazon DataZone metadata form type.",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "FormTypeIdentifier": {
+      "type": "string",
+      "description": "The ID of this Amazon DataZone metadata form type.",
+      "pattern": "",
+      "minLength": 1,
+      "maxLength": 385
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of this Amazon DataZone metadata form type.",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp of when this Amazon DataZone metadata form type was created.",
+      "format": "date-time"
+    },
+    "CreatedBy": {
+      "type": "string",
+      "description": "The user who created this Amazon DataZone metadata form type.",
+      "pattern": "^[a-zA-Z0-9_-]{1,36}$"
+    }
+  },
+  "required": [
+    "DomainIdentifier",
+    "Model",
+    "Name",
+    "OwningProjectIdentifier"
+  ],
+  "readOnlyProperties": [
+    "/properties/DomainId",
+    "/properties/OwningProjectId",
+    "/properties/Revision",
+    "/properties/FormTypeIdentifier",
+    "/properties/CreatedAt",
+    "/properties/CreatedBy"
+  ],
+  "createOnlyProperties": [
+    "/properties/DomainIdentifier",
+    "/properties/Name"
+  ],
+  "conditionalCreateOnlyProperties": [
+    "/properties/Description",
+    "/properties/Model",
+    "/properties/Status",
+    "/properties/OwningProjectIdentifier"
+  ],
+  "primaryIdentifier": [
+    "/properties/DomainIdentifier",
+    "/properties/FormTypeIdentifier"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Name"
+    ]
+  ],
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "datazone:CreateFormType",
+        "datazone:GetFormType"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "datazone:GetFormType"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "datazone:CreateFormType",
+        "datazone:GetFormType"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "datazone:DeleteFormType",
+        "datazone:GetFormType"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

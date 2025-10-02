@@ -235,9 +235,6 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "AnswerSource": {
-          "description": ""
-        },
         "PropertyValue": {
           "description": "The property value of the automation.",
           "$ref": "#/definitions/NumericQuestionPropertyValueAutomation"

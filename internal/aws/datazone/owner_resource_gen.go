@@ -172,6 +172,34 @@ func ownerResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// Owner is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: OwnerIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"owner_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: OwnerType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "USER",
+		//	    "GROUP"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"owner_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -225,6 +253,8 @@ func ownerResource(ctx context.Context) (resource.Resource, error) {
 		"group":             "Group",
 		"group_identifier":  "GroupIdentifier",
 		"owner":             "Owner",
+		"owner_identifier":  "OwnerIdentifier",
+		"owner_type":        "OwnerType",
 		"user":              "User",
 		"user_identifier":   "UserIdentifier",
 	})

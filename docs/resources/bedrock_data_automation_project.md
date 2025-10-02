@@ -183,7 +183,41 @@ Optional:
 Optional:
 
 - `state` (String)
+- `type_configuration` (Attributes) (see [below for nested schema](#nestedatt--standard_output_configuration--audio--extraction--category--type_configuration))
 - `types` (List of String)
+
+<a id="nestedatt--standard_output_configuration--audio--extraction--category--type_configuration"></a>
+### Nested Schema for `standard_output_configuration.audio.extraction.category.type_configuration`
+
+Optional:
+
+- `transcript` (Attributes) (see [below for nested schema](#nestedatt--standard_output_configuration--audio--extraction--category--type_configuration--transcript))
+
+<a id="nestedatt--standard_output_configuration--audio--extraction--category--type_configuration--transcript"></a>
+### Nested Schema for `standard_output_configuration.audio.extraction.category.type_configuration.transcript`
+
+Optional:
+
+- `channel_labeling` (Attributes) (see [below for nested schema](#nestedatt--standard_output_configuration--audio--extraction--category--type_configuration--transcript--channel_labeling))
+- `speaker_labeling` (Attributes) (see [below for nested schema](#nestedatt--standard_output_configuration--audio--extraction--category--type_configuration--transcript--speaker_labeling))
+
+<a id="nestedatt--standard_output_configuration--audio--extraction--category--type_configuration--transcript--channel_labeling"></a>
+### Nested Schema for `standard_output_configuration.audio.extraction.category.type_configuration.transcript.channel_labeling`
+
+Optional:
+
+- `state` (String)
+
+
+<a id="nestedatt--standard_output_configuration--audio--extraction--category--type_configuration--transcript--speaker_labeling"></a>
+### Nested Schema for `standard_output_configuration.audio.extraction.category.type_configuration.transcript.speaker_labeling`
+
+Optional:
+
+- `state` (String)
+
+
+
 
 
 

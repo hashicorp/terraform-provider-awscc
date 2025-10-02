@@ -132,6 +132,17 @@
         "kms:CreateGrant"
       ]
     },
+    "delete": {
+      "permissions": [
+        "geo:DeleteGeofenceCollection",
+        "geo:DescribeGeofenceCollection"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "geo:ListGeofenceCollections"
+      ]
+    },
     "read": {
       "permissions": [
         "geo:DescribeGeofenceCollection",
@@ -147,17 +158,6 @@
         "kms:DescribeKey",
         "kms:CreateGrant",
         "geo:UpdateGeofenceCollection"
-      ]
-    },
-    "delete": {
-      "permissions": [
-        "geo:DeleteGeofenceCollection",
-        "geo:DescribeGeofenceCollection"
-      ]
-    },
-    "list": {
-      "permissions": [
-        "geo:ListGeofenceCollections"
       ]
     }
   },

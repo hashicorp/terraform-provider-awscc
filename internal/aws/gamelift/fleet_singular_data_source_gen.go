@@ -324,7 +324,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "description": "Current resource capacity settings in a specified fleet or location. The location value might refer to a fleet's remote location or its home Region.",
 		//	        "properties": {
 		//	          "DesiredEC2Instances": {
-		//	            "description": "The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.",
+		//	            "description": "Defaults to MinSize if not defined. The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.",
 		//	            "minimum": 0,
 		//	            "type": "integer"
 		//	          },
@@ -340,7 +340,6 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          }
 		//	        },
 		//	        "required": [
-		//	          "DesiredEC2Instances",
 		//	          "MinSize",
 		//	          "MaxSize"
 		//	        ],
@@ -368,7 +367,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: DesiredEC2Instances
 							"desired_ec2_instances": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.",
+								Description: "Defaults to MinSize if not defined. The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: MaxSize

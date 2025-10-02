@@ -30,7 +30,7 @@ Data Source schema for AWS::PCS::ComputeNodeGroup
 - `iam_instance_profile_arn` (String) The Amazon Resource Name (ARN) of the IAM instance profile used to pass an IAM role when launching EC2 instances. The role contained in your instance profile must have pcs:RegisterComputeNodeGroupInstance permissions attached to provision instances correctly.
 - `instance_configs` (Attributes List) A list of EC2 instance configurations that AWS PCS can provision in the compute node group. (see [below for nested schema](#nestedatt--instance_configs))
 - `name` (String) The name that identifies the compute node group.
-- `purchase_option` (String) Specifies how EC2 instances are purchased on your behalf. AWS PCS supports On-Demand and Spot instances. For more information, see Instance purchasing options in the Amazon Elastic Compute Cloud User Guide. If you don't provide this option, it defaults to On-Demand.
+- `purchase_option` (String) Specifies how EC2 instances are purchased on your behalf. AWS PCS supports On-Demand, Spot and Capacity Block instances. For more information, see Instance purchasing options in the Amazon Elastic Compute Cloud User Guide. If you don't provide this option, it defaults to On-Demand.
 - `scaling_configuration` (Attributes) Specifies the boundaries of the compute node group auto scaling. (see [below for nested schema](#nestedatt--scaling_configuration))
 - `slurm_configuration` (Attributes) Additional options related to the Slurm scheduler. (see [below for nested schema](#nestedatt--slurm_configuration))
 - `spot_options` (Attributes) Additional configuration when you specify SPOT as the purchase option. (see [below for nested schema](#nestedatt--spot_options))

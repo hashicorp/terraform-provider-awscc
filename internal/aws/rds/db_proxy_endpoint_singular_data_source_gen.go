@@ -73,6 +73,22 @@ func dBProxyEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 			Description: "The endpoint that you can use to connect to the DB proxy. You include the endpoint value in the connection string for a database client application.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EndpointNetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.",
+		//	  "enum": [
+		//	    "IPV4",
+		//	    "IPV6",
+		//	    "DUAL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"endpoint_network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IsDefault
 		// CloudFormation resource type schema:
 		//
@@ -205,6 +221,7 @@ func dBProxyEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		"db_proxy_endpoint_name": "DBProxyEndpointName",
 		"db_proxy_name":          "DBProxyName",
 		"endpoint":               "Endpoint",
+		"endpoint_network_type":  "EndpointNetworkType",
 		"is_default":             "IsDefault",
 		"key":                    "Key",
 		"tags":                   "Tags",

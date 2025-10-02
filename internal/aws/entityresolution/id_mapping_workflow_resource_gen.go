@@ -125,6 +125,9 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "NormalizationVersion": {
+		//	      "type": "string"
+		//	    },
 		//	    "ProviderProperties": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -245,6 +248,15 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: NormalizationVersion
+				"normalization_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// NormalizationVersion is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ProviderProperties
 				"provider_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -733,6 +745,7 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		"key":                               "Key",
 		"kms_arn":                           "KMSArn",
 		"matching_keys":                     "MatchingKeys",
+		"normalization_version":             "NormalizationVersion",
 		"output_s3_path":                    "OutputS3Path",
 		"output_source_config":              "OutputSourceConfig",
 		"provider_configuration":            "ProviderConfiguration",

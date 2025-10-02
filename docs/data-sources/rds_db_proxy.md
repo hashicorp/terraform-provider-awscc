@@ -25,12 +25,15 @@ Data Source schema for AWS::RDS::DBProxy
 - `db_proxy_arn` (String) The Amazon Resource Name (ARN) for the proxy.
 - `db_proxy_name` (String) The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.
 - `debug_logging` (Boolean) Whether the proxy includes detailed information about SQL statements in its logs.
+- `default_auth_scheme` (String) The default authentication scheme that the proxy uses for client connections to the proxy and connections from the proxy to the underlying database.
 - `endpoint` (String) The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.
+- `endpoint_network_type` (String) The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.
 - `engine_family` (String) The kinds of databases that the proxy can connect to.
 - `idle_client_timeout` (Number) The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it.
 - `require_tls` (Boolean) A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy.
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.
 - `tags` (Attributes List) An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy. (see [below for nested schema](#nestedatt--tags))
+- `target_connection_network_type` (String) The network type that the proxy uses to connect to the target database. The network type determines the IP version that the proxy uses for connections to the database.
 - `vpc_id` (String) VPC ID to associate with the new DB proxy.
 - `vpc_security_group_ids` (List of String) VPC security group IDs to associate with the new proxy.
 - `vpc_subnet_ids` (List of String) VPC subnet IDs to associate with the new proxy.

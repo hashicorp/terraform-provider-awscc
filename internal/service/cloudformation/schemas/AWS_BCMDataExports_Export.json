@@ -46,7 +46,7 @@
           "type": "string",
           "maxLength": 2048,
           "minLength": 20,
-          "pattern": "^arn:aws[-a-z0-9]*:[-a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$"
+          "pattern": "^arn:aws[-a-z0-9]*:(bcm-data-exports):[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$"
         },
         "Name": {
           "type": "string",
@@ -207,7 +207,7 @@
       "patternProperties": {
         "": {
           "type": "string",
-          "maxLength": 1024,
+          "maxLength": 16384,
           "minLength": 0,
           "pattern": "^[\\S\\s]*$"
         }
@@ -223,7 +223,7 @@
       "type": "string",
       "maxLength": 2048,
       "minLength": 20,
-      "pattern": "^arn:aws[-a-z0-9]*:[-a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$"
+      "pattern": "^arn:aws[-a-z0-9]*:(bcm-data-exports):[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$"
     },
     "Tags": {
       "type": "array",
@@ -238,7 +238,8 @@
     "Export"
   ],
   "readOnlyProperties": [
-    "/properties/ExportArn"
+    "/properties/ExportArn",
+    "/properties/Export/ExportArn"
   ],
   "primaryIdentifier": [
     "/properties/ExportArn"
@@ -290,12 +291,12 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags",
     "permissions": [
       "bcm-data-exports:ListTagsForResource",
       "bcm-data-exports:TagResource",
       "bcm-data-exports:UntagResource"
-    ]
+    ],
+    "tagProperty": "/properties/Tags"
   },
   "additionalProperties": false
 }

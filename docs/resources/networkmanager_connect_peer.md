@@ -148,6 +148,7 @@ resource "awscc_networkmanager_connect_peer" "example" {
 - `created_at` (String) Connect peer creation time.
 - `edge_location` (String) The Connect peer Regions where edges are located.
 - `id` (String) Uniquely identifies the resource.
+- `last_modification_errors` (List of String) Errors from the last modification of the connect peer.
 - `state` (String) State of the connect peer.
 
 <a id="nestedatt--bgp_options"></a>

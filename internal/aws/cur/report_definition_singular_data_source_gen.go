@@ -191,6 +191,49 @@ func reportDefinitionDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "The region of the S3 bucket that AWS delivers the report into.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 100,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TimeUnit
 		// CloudFormation resource type schema:
 		//
@@ -229,13 +272,16 @@ func reportDefinitionDataSource(ctx context.Context) (datasource.DataSource, err
 		"billing_view_arn":           "BillingViewArn",
 		"compression":                "Compression",
 		"format":                     "Format",
+		"key":                        "Key",
 		"refresh_closed_reports":     "RefreshClosedReports",
 		"report_name":                "ReportName",
 		"report_versioning":          "ReportVersioning",
 		"s3_bucket":                  "S3Bucket",
 		"s3_prefix":                  "S3Prefix",
 		"s3_region":                  "S3Region",
+		"tags":                       "Tags",
 		"time_unit":                  "TimeUnit",
+		"value":                      "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

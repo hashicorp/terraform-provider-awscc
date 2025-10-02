@@ -47,6 +47,16 @@
       "description": "Specify additional settings and launch scripts for your build instances.",
       "$ref": "#/definitions/AdditionalInstanceConfiguration"
     },
+    "AmiTags": {
+      "description": "The tags to apply to the AMI created by this image recipe.",
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      }
+    },
     "Tags": {
       "description": "The tags of the image recipe.",
       "type": "object",

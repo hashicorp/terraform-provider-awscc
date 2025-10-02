@@ -147,6 +147,9 @@
             "PROVIDER",
             "RULE_BASED"
           ]
+        },
+        "NormalizationVersion": {
+          "type": "string"
         }
       }
     },

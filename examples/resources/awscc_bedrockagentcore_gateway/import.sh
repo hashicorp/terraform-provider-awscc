@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrockagentcore_gateway.example "gateway_identifier"

@@ -124,6 +124,17 @@
         "geo:UntagResource"
       ]
     },
+    "delete": {
+      "permissions": [
+        "geo:DeleteRouteCalculator",
+        "geo:DescribeRouteCalculator"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "geo:ListRouteCalculators"
+      ]
+    },
     "read": {
       "permissions": [
         "geo:DescribeRouteCalculator"
@@ -136,17 +147,6 @@
         "geo:TagResource",
         "geo:UntagResource",
         "geo:UpdateRouteCalculator"
-      ]
-    },
-    "delete": {
-      "permissions": [
-        "geo:DeleteRouteCalculator",
-        "geo:DescribeRouteCalculator"
-      ]
-    },
-    "list": {
-      "permissions": [
-        "geo:ListRouteCalculators"
       ]
     }
   },

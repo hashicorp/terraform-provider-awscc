@@ -501,7 +501,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "Current resource capacity settings in a specified fleet or location. The location value might refer to a fleet's remote location or its home Region.",
 		//	        "properties": {
 		//	          "DesiredEC2Instances": {
-		//	            "description": "The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.",
+		//	            "description": "Defaults to MinSize if not defined. The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.",
 		//	            "minimum": 0,
 		//	            "type": "integer"
 		//	          },
@@ -517,7 +517,6 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		//	          }
 		//	        },
 		//	        "required": [
-		//	          "DesiredEC2Instances",
 		//	          "MinSize",
 		//	          "MaxSize"
 		//	        ],
@@ -554,12 +553,11 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: DesiredEC2Instances
 							"desired_ec2_instances": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.",
+								Description: "Defaults to MinSize if not defined. The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.",
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.Int64{ /*START VALIDATORS*/
 									int64validator.AtLeast(0),
-									fwvalidators.NotNullInt64(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
