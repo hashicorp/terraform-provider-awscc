@@ -1,0 +1,597 @@
+{
+  "typeName": "AWS::AmazonMQ::Broker",
+  "description": "Resource type definition for AWS::AmazonMQ::Broker",
+  "additionalProperties": false,
+  "properties": {
+    "Id": {
+      "type": "string"
+    },
+    "Arn": {
+      "type": "string",
+      "pattern": "^arn:.*"
+    },
+    "BrokerName": {
+      "type": "string",
+      "pattern": "^[0-9A-Za-z_-]{1,50}$"
+    },
+    "EngineType": {
+      "type": "string",
+      "anyOf": [
+        {
+          "enum": [
+            "ACTIVEMQ",
+            "RABBITMQ"
+          ],
+          "type": "string"
+        },
+        {
+          "pattern": "^[Aa][Cc][Tt][Ii][Vv][Ee][Mm][Qq]$"
+        },
+        {
+          "pattern": "^[Rr][Aa][Bb][Bb][Ii][Tt][Mm][Qq]$"
+        }
+      ]
+    },
+    "EngineVersion": {
+      "description": "The version specified to use. See also EngineVersionCurrent.",
+      "type": "string"
+    },
+    "EngineVersionCurrent": {
+      "description": "The version in use. This may have more precision than the specified EngineVersion.",
+      "type": "string"
+    },
+    "DeploymentMode": {
+      "type": "string",
+      "anyOf": [
+        {
+          "enum": [
+            "SINGLE_INSTANCE",
+            "ACTIVE_STANDBY_MULTI_AZ",
+            "CLUSTER_MULTI_AZ"
+          ],
+          "type": "string"
+        },
+        {
+          "pattern": "^[Ss][Ii][Nn][Gg][Ll][Ee]_[Ii][Nn][Ss][Tt][Aa][Nn][Cc][Ee]$"
+        },
+        {
+          "pattern": "^[Aa][Cc][Tt][Ii][Vv][Ee]_[Ss][Tt][Aa][Nn][Dd][Bb][Yy][__][Mm][Uu][Ll][Tt][Ii]_[Aa][Zz]$"
+        },
+        {
+          "pattern": "^[Cc][Ll][Uu][Ss][Tt][Ee][Rr]_[Mm][Uu][Ll][Tt][Ii][__][Aa][Zz]$"
+        }
+      ]
+    },
+    "HostInstanceType": {
+      "type": "string"
+    },
+    "PubliclyAccessible": {
+      "type": "boolean"
+    },
+    "AuthenticationStrategy": {
+      "type": "string",
+      "anyOf": [
+        {
+          "enum": [
+            "SIMPLE",
+            "LDAP"
+          ],
+          "type": "string"
+        },
+        {
+          "pattern": "^[Ss][Ii][Mm][Pp][Ll][Ee]$"
+        },
+        {
+          "pattern": "^[Ll][Dd][Aa][Pp]$"
+        }
+      ]
+    },
+    "LdapServerMetadata": {
+      "$ref": "#/definitions/LdapServerMetadata"
+    },
+    "StorageType": {
+      "type": "string",
+      "anyOf": [
+        {
+          "enum": [
+            "EBS",
+            "EFS"
+          ],
+          "type": "string"
+        },
+        {
+          "pattern": "^[Ee]([Bb]|[Ff])[Ss]$"
+        }
+      ]
+    },
+    "EncryptionOptions": {
+      "$ref": "#/definitions/EncryptionOptions"
+    },
+    "Configuration": {
+      "description": "The intended configuration (ID and revision) to be set when creating or updating.\nThis property is write-only so that applications of a ConfigurationAssociation do not cause drift.\n",
+      "$ref": "#/definitions/ConfigurationId"
+    },
+    "ConfigurationRevision": {
+      "description": "The revision of the current actual configuration.",
+      "type": "string"
+    },
+    "ConfigurationId": {
+      "description": "The ID of the current actual configuration.",
+      "type": "string"
+    },
+    "DataReplicationMode": {
+      "type": "string",
+      "anyOf": [
+        {
+          "enum": [
+            "NONE",
+            "CRDR"
+          ],
+          "type": "string"
+        },
+        {
+          "pattern": "^[Nn][Oo][Nn][Ee]$"
+        },
+        {
+          "pattern": "^[Cc][Rr][Dd][Rr]$"
+        }
+      ]
+    },
+    "DataReplicationPrimaryBrokerArn": {
+      "description": "The ARN of the primary broker that is used to replicate data from in a data replication pair when creating a replica.\nThis field is only used at creation-time. Changes to it subsequently are ignored by CloudFormation.\nInformation on the current primary is available on the DataReplicationMetadata object returned by the API.\n",
+      "type": "string",
+      "pattern": "^arn:.*"
+    },
+    "MaintenanceWindowStartTime": {
+      "$ref": "#/definitions/MaintenanceWindow"
+    },
+    "AutoMinorVersionUpgrade": {
+      "type": "boolean"
+    },
+    "Users": {
+      "description": "Users to configure on the broker. \nFor RabbitMQ, this should be one user, created when the broker is created, and changes thereafter are ignored.\nFor ActiveMQ, changes to anything but Password are detected and will trigger an update,\nbut changes to Password cannot be detected so updates to Password may not take effect unless there is some other change.\n",
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/User"
+      },
+      "insertionOrder": false
+    },
+    "StompEndpoints": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      },
+      "insertionOrder": false
+    },
+    "MqttEndpoints": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      },
+      "insertionOrder": false
+    },
+    "AmqpEndpoints": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      },
+      "insertionOrder": false
+    },
+    "ConsoleURLs": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      },
+      "insertionOrder": false
+    },
+    "WssEndpoints": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      },
+      "insertionOrder": false
+    },
+    "OpenWireEndpoints": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      },
+      "insertionOrder": false
+    },
+    "Logs": {
+      "$ref": "#/definitions/LogList"
+    },
+    "SecurityGroups": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      },
+      "insertionOrder": false,
+      "minItems": 1,
+      "maxItems": 5
+    },
+    "SubnetIds": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      },
+      "insertionOrder": false
+    },
+    "IpAddresses": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      },
+      "insertionOrder": false
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/TagsEntry"
+      },
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "LogList": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Audit": {
+          "type": "boolean"
+        },
+        "General": {
+          "type": "boolean"
+        }
+      }
+    },
+    "LdapServerMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Hosts": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string"
+          },
+          "insertionOrder": true
+        },
+        "UserRoleName": {
+          "type": "string"
+        },
+        "UserSearchMatching": {
+          "type": "string"
+        },
+        "RoleName": {
+          "type": "string"
+        },
+        "UserBase": {
+          "type": "string"
+        },
+        "UserSearchSubtree": {
+          "type": "boolean"
+        },
+        "RoleSearchMatching": {
+          "type": "string"
+        },
+        "ServiceAccountUsername": {
+          "type": "string"
+        },
+        "RoleBase": {
+          "type": "string"
+        },
+        "ServiceAccountPassword": {
+          "type": "string"
+        },
+        "RoleSearchSubtree": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Hosts",
+        "UserSearchMatching",
+        "UserBase",
+        "RoleSearchMatching",
+        "ServiceAccountUsername",
+        "RoleBase"
+      ]
+    },
+    "User": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ReplicationUser": {
+          "type": "boolean"
+        },
+        "ConsoleAccess": {
+          "type": "boolean"
+        },
+        "Username": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.~-]{2,100}$"
+        },
+        "Groups": {
+          "type": "array",
+          "uniqueItems": false,
+          "maxItems": 20,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9._~-]{2,100}$"
+          },
+          "insertionOrder": false
+        },
+        "Password": {
+          "type": "string",
+          "minLength": 12,
+          "pattern": "^[^,:=]+$"
+        }
+      },
+      "required": [
+        "Username",
+        "Password"
+      ]
+    },
+    "MaintenanceWindow": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "DayOfWeek": {
+          "description": "_Allowed Values_: <code>MONDAY</code> | <code>TUESDAY</code> | <code>WEDNESDAY</code> | <code>THURSDAY</code> | <code>FRIDAY</code> | <code>SATURDAY</code> | <code>SUNDAY</code>\n",
+          "type": "string",
+          "anyOf": [
+            {
+              "enum": [
+                "MONDAY",
+                "TUESDAY",
+                "WEDNESDAY",
+                "THURSDAY",
+                "FRIDAY",
+                "SATURDAY",
+                "SUNDAY"
+              ],
+              "type": "string"
+            },
+            {
+              "pattern": "^[Mm][Oo][Nn][Dd][Aa][Yy]$"
+            },
+            {
+              "pattern": "^[Tt][Uu][Ee][Ss][Dd][Aa][Yy]$"
+            },
+            {
+              "pattern": "^[Ww][Ee][Dd][Nn][Ee][Ss][Dd][Aa][Yy]$"
+            },
+            {
+              "pattern": "^[Tt][Hh][Uu][Rr][Ss][Dd][Aa][Yy]$"
+            },
+            {
+              "pattern": "^[Ff][Rr][Ii][Dd][Aa][Yy]$"
+            },
+            {
+              "pattern": "^[Ss][Aa][Tt][Uu][Rr][Dd][Aa][Yy]$"
+            },
+            {
+              "pattern": "^[Ss][Uu][Nn][Dd][Aa][Yy]$"
+            }
+          ]
+        },
+        "TimeOfDay": {
+          "description": "The time, in 24-hour format, and use only numbers separated by a colon, HH:MM or HH:MM:SS. Example: 13:05.\nWhen writing YAML this may need to be quoted to prevent a timestamp being read and converted to a number of minutes or seconds.\n",
+          "type": "string",
+          "pattern": "^[0-9]{1,2}:[0-9]{2}(:[0-9]{2})?$"
+        },
+        "TimeZone": {
+          "description": "The time zone, UTC by default, in either the Country/City format, or the UTC offset format.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "DayOfWeek",
+        "TimeOfDay",
+        "TimeZone"
+      ]
+    },
+    "EncryptionOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "KmsKeyId": {
+          "description": "The customer master key (CMK) to use for the A KMS (KMS). \nThis key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.\nThe Key ARN is recommended so that drift can be detected,\nbut a key ID or key alias will also be accepted for API compatibility reasons.\n",
+          "type": "string"
+        },
+        "UseAwsOwnedKey": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "UseAwsOwnedKey"
+      ]
+    },
+    "ConfigurationId": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Revision": {
+          "type": "integer"
+        },
+        "Id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Revision",
+        "Id"
+      ]
+    },
+    "TagsEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "required": [
+    "BrokerName",
+    "EngineType",
+    "DeploymentMode",
+    "HostInstanceType",
+    "PubliclyAccessible"
+  ],
+  "createOnlyProperties": [
+    "/properties/BrokerName",
+    "/properties/StorageType",
+    "/properties/DeploymentMode",
+    "/properties/EngineType",
+    "/properties/SubnetIds",
+    "/properties/AuthenticationStrategy",
+    "/properties/EncryptionOptions",
+    "/properties/PubliclyAccessible"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "readOnlyProperties": [
+    "/properties/Id",
+    "/properties/Arn",
+    "/properties/EngineVersionCurrent",
+    "/properties/IpAddresses",
+    "/properties/MqttEndpoints",
+    "/properties/OpenWireEndpoints",
+    "/properties/ConfigurationId",
+    "/properties/ConfigurationRevision",
+    "/properties/StompEndpoints",
+    "/properties/WssEndpoints",
+    "/properties/AmqpEndpoints",
+    "/properties/ConsoleURLs"
+  ],
+  "writeOnlyProperties": [
+    "/properties/EngineVersion",
+    "/properties/Users",
+    "/properties/LdapServerMetadata/ServiceAccountPassword",
+    "/properties/DataReplicationPrimaryBrokerArn",
+    "/properties/Configuration"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "mq:CreateTags",
+      "mq:DeleteTags"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "mq:CreateBroker",
+        "mq:CreateReplicaBroker",
+        "mq:DescribeBroker",
+        "mq:CreateTags",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "ec2:CreateNetworkInterface",
+        "ec2:CreateNetworkInterfacePermission",
+        "ec2:CreateSecurityGroup",
+        "ec2:CreateVpcEndpoint",
+        "ec2:DescribeInternetGateways",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeNetworkInterfacePermissions",
+        "ec2:DescribeRouteTables",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeVpcEndpoints",
+        "ec2:ModifyNetworkInterfaceAttribute",
+        "iam:CreateServiceLinkedRole",
+        "route53:AssociateVPCWithHostedZone",
+        "ec2:DeleteNetworkInterface",
+        "ec2:DeleteNetworkInterfacePermission",
+        "ec2:DeleteVpcEndpoints",
+        "ec2:DetachNetworkInterface"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "mq:DescribeBroker"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "mq:DescribeBroker",
+        "mq:UpdateBroker",
+        "mq:RebootBroker",
+        "mq:DescribeUser",
+        "mq:CreateUser",
+        "mq:UpdateUser",
+        "mq:DeleteUser",
+        "mq:CreateTags",
+        "mq:DeleteTags",
+        "ec2:CreateNetworkInterface",
+        "ec2:CreateNetworkInterfacePermission",
+        "ec2:CreateSecurityGroup",
+        "ec2:CreateVpcEndpoint",
+        "ec2:DeleteNetworkInterface",
+        "ec2:DeleteNetworkInterfacePermission",
+        "ec2:DeleteVpcEndpoints",
+        "ec2:DetachNetworkInterface",
+        "ec2:DescribeInternetGateways",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DescribeNetworkInterfacePermissions",
+        "ec2:DescribeRouteTables",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeVpcEndpoints",
+        "ec2:ModifyNetworkInterfaceAttribute",
+        "iam:CreateServiceLinkedRole",
+        "route53:AssociateVPCWithHostedZone"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "mq:DeleteBroker",
+        "mq:DescribeBroker",
+        "ec2:DeleteNetworkInterface",
+        "ec2:DeleteNetworkInterfacePermission",
+        "ec2:DeleteVpcEndpoints",
+        "ec2:DetachNetworkInterface"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "mq:ListBrokers"
+      ]
+    }
+  },
+  "propertyTransform": {
+    "/properties/StorageType": "$uppercase(StorageType)",
+    "/properties/DataReplicationMode": "$uppercase(DataReplicationMode)",
+    "/properties/EngineType": "$uppercase(EngineType)",
+    "/properties/AuthenticationStrategy": "$uppercase(AuthenticationStrategy)",
+    "/properties/DeploymentMode": "$uppercase(DeploymentMode)",
+    "/properties/MaintenanceWindowStartTime/DayOfWeek": "$uppercase(MaintenanceWindowStartTime.DayOfWeek)"
+  }
+}

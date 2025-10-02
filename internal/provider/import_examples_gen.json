@@ -48,6 +48,10 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_amazonmq_broker",
+        "identifier": ["Id"]
+    },
+    {
         "resource": "awscc_amazonmq_configuration",
         "identifier": ["Id"]
     },
@@ -364,6 +368,10 @@
         "identifier": ["AccountId"]
     },
     {
+        "resource": "awscc_applicationsignals_grouping_configuration",
+        "identifier": ["AccountId"]
+    },
+    {
         "resource": "awscc_applicationsignals_service_level_objective",
         "identifier": ["Arn"]
     },
@@ -566,6 +574,10 @@
     {
         "resource": "awscc_bedrockagentcore_code_interpreter_custom",
         "identifier": ["CodeInterpreterId"]
+    },
+    {
+        "resource": "awscc_bedrockagentcore_gateway",
+        "identifier": ["GatewayIdentifier"]
     },
     {
         "resource": "awscc_bedrockagentcore_runtime",
@@ -1268,6 +1280,10 @@
         "identifier": ["DomainId","Id"]
     },
     {
+        "resource": "awscc_datazone_form_type",
+        "identifier": ["DomainIdentifier","FormTypeIdentifier"]
+    },
+    {
         "resource": "awscc_datazone_group_profile",
         "identifier": ["DomainId","Id"]
     },
@@ -1502,6 +1518,14 @@
     {
         "resource": "awscc_ec2_local_gateway_route_table_virtual_interface_group_association",
         "identifier": ["LocalGatewayRouteTableVirtualInterfaceGroupAssociationId"]
+    },
+    {
+        "resource": "awscc_ec2_local_gateway_virtual_interface",
+        "identifier": ["LocalGatewayVirtualInterfaceId"]
+    },
+    {
+        "resource": "awscc_ec2_local_gateway_virtual_interface_group",
+        "identifier": ["LocalGatewayVirtualInterfaceGroupId"]
     },
     {
         "resource": "awscc_ec2_nat_gateway",
@@ -4510,6 +4534,10 @@
     {
         "resource": "awscc_servicecatalog_portfolio_product_association",
         "identifier": ["PortfolioId","ProductId"]
+    },
+    {
+        "resource": "awscc_servicecatalog_portfolio_share",
+        "identifier": ["PortfolioId","AccountId"]
     },
     {
         "resource": "awscc_servicecatalog_service_action",
