@@ -57,6 +57,7 @@
     },
     {
         "resource": "awscc_amazonmq_broker",
+        "generateListResource": true,
         "identifier": ["Id"]
     },
     {
@@ -420,6 +421,7 @@
     },
     {
         "resource": "awscc_applicationsignals_grouping_configuration",
+        "generateListResource": true,
         "identifier": ["AccountId"]
     },
     {
@@ -671,6 +673,7 @@
     },
     {
         "resource": "awscc_bedrockagentcore_gateway",
+        "generateListResource": true,
         "identifier": ["GatewayIdentifier"]
     },
     {
@@ -1772,10 +1775,12 @@
     },
     {
         "resource": "awscc_ec2_local_gateway_virtual_interface",
+        "generateListResource": true,
         "identifier": ["LocalGatewayVirtualInterfaceId"]
     },
     {
         "resource": "awscc_ec2_local_gateway_virtual_interface_group",
+        "generateListResource": true,
         "identifier": ["LocalGatewayVirtualInterfaceGroupId"]
     },
     {
