@@ -6,6 +6,7 @@ package acctest
 import (
 	"fmt"
 	"os"
+	"strings"
 	"testing"
 
 	fwprovider "github.com/hashicorp/terraform-plugin-framework/provider"
@@ -46,28 +47,6 @@ provider "awscc" {
 `, role) + config
 	}
 	return config
-}
-
-// EmptyConfigWithProviderMeta injects a provider_meta block into the base EmptyConfig.
-func (td *TestData) EmptyConfigWithProviderMeta() string {
-	return td.EmptyConfig() + `
-terraform {
-	provider_meta "awscc" {
-		user_agent = [
-		  {
-			product_name    = "my-test-module"
-			product_version = "0.0.1"
-			comment         = "testing user-agent comment"
-		  },
-		  {
-			product_name    = "other-test-module"
-			product_version = "0.0.2"
-			comment         = "second user agent"
-		  }
-		]
-	}
-}
-`
 }
 
 // DataSourceWithEmptyResourceConfig returns a Terraform configuration for the data source and its respective resource.
@@ -123,4 +102,37 @@ func NewTestData(_ *testing.T, cfResourceType, tfResourceType, resourceLabel str
 	}
 
 	return data
+}
+
+// WithProviderMeta returns a terraform block with provider_meta configured
+func WithProviderMeta() string {
+	return `
+terraform {
+  provider_meta "awscc" {
+    user_agent = [
+      {
+        name    = "my-test-module"
+        version = "0.0.1"
+        comment = "testing user-agent comment"
+      },
+      {
+        name    = "other-test-module"
+        version = "0.0.2"
+        comment = "second user agent"
+      }
+    ]
+  }
+}
+`
+}
+
+// ConfigCompose can be called to concatenate multiple strings to build test configurations
+func ConfigCompose(config ...string) string {
+	var str strings.Builder
+
+	for _, conf := range config {
+		str.WriteString(conf)
+	}
+
+	return str.String()
 }
