@@ -156,12 +156,14 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "The authorization mechanism that the proxy uses.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtLeast(1),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DBProxyArn
@@ -213,6 +215,31 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DefaultAuthScheme
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The default authentication scheme that the proxy uses for client connections to the proxy and connections from the proxy to the underlying database.",
+		//	  "enum": [
+		//	    "IAM_AUTH",
+		//	    "NONE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"default_auth_scheme": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The default authentication scheme that the proxy uses for client connections to the proxy and connections from the proxy to the underlying database.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"IAM_AUTH",
+					"NONE",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -225,6 +252,34 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EndpointNetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.",
+		//	  "enum": [
+		//	    "IPV4",
+		//	    "IPV6",
+		//	    "DUAL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"endpoint_network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"IPV4",
+					"IPV6",
+					"DUAL",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: EngineFamily
@@ -355,6 +410,32 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TargetConnectionNetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The network type that the proxy uses to connect to the target database. The network type determines the IP version that the proxy uses for connections to the database.",
+		//	  "enum": [
+		//	    "IPV4",
+		//	    "IPV6"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"target_connection_network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The network type that the proxy uses to connect to the target database. The network type determines the IP version that the proxy uses for connections to the database.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"IPV4",
+					"IPV6",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -447,26 +528,29 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"auth":                      "Auth",
-		"auth_scheme":               "AuthScheme",
-		"client_password_auth_type": "ClientPasswordAuthType",
-		"db_proxy_arn":              "DBProxyArn",
-		"db_proxy_name":             "DBProxyName",
-		"debug_logging":             "DebugLogging",
-		"description":               "Description",
-		"endpoint":                  "Endpoint",
-		"engine_family":             "EngineFamily",
-		"iam_auth":                  "IAMAuth",
-		"idle_client_timeout":       "IdleClientTimeout",
-		"key":                       "Key",
-		"require_tls":               "RequireTLS",
-		"role_arn":                  "RoleArn",
-		"secret_arn":                "SecretArn",
-		"tags":                      "Tags",
-		"value":                     "Value",
-		"vpc_id":                    "VpcId",
-		"vpc_security_group_ids":    "VpcSecurityGroupIds",
-		"vpc_subnet_ids":            "VpcSubnetIds",
+		"auth":                           "Auth",
+		"auth_scheme":                    "AuthScheme",
+		"client_password_auth_type":      "ClientPasswordAuthType",
+		"db_proxy_arn":                   "DBProxyArn",
+		"db_proxy_name":                  "DBProxyName",
+		"debug_logging":                  "DebugLogging",
+		"default_auth_scheme":            "DefaultAuthScheme",
+		"description":                    "Description",
+		"endpoint":                       "Endpoint",
+		"endpoint_network_type":          "EndpointNetworkType",
+		"engine_family":                  "EngineFamily",
+		"iam_auth":                       "IAMAuth",
+		"idle_client_timeout":            "IdleClientTimeout",
+		"key":                            "Key",
+		"require_tls":                    "RequireTLS",
+		"role_arn":                       "RoleArn",
+		"secret_arn":                     "SecretArn",
+		"tags":                           "Tags",
+		"target_connection_network_type": "TargetConnectionNetworkType",
+		"value":                          "Value",
+		"vpc_id":                         "VpcId",
+		"vpc_security_group_ids":         "VpcSecurityGroupIds",
+		"vpc_subnet_ids":                 "VpcSubnetIds",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
