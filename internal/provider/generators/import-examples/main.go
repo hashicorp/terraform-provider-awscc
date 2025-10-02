@@ -134,7 +134,7 @@ var resourceFilesData = []fileData{
 }
 
 var listResourceFilesData = fileData{
-	filename:     func(directory string) string { return fmt.Sprintf("%s/list.tfquery.hcl", directory) },
+	filename:     func(directory string) string { return fmt.Sprintf("%s/list-resource.tfquery.hcl", directory) },
 	templateBody: importExampleListResourceBody,
 }
 
