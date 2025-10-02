@@ -3,12 +3,12 @@
 page_title: "awscc_amazonmq_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::AmazonMQ::Configuration resource type.
 ---
 
 # awscc_amazonmq_configuration (List Resource)
 
-
+List all resources for `AWS::AmazonMQ::Configuration` resource type.
 
 ## Example Usage
 

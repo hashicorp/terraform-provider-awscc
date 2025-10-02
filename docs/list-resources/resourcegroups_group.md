@@ -3,12 +3,12 @@
 page_title: "awscc_resourcegroups_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ResourceGroups::Group resource type.
 ---
 
 # awscc_resourcegroups_group (List Resource)
 
-
+List all resources for `AWS::ResourceGroups::Group` resource type.
 
 ## Example Usage
 

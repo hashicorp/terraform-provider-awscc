@@ -3,12 +3,12 @@
 page_title: "awscc_b2bi_transformer List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::B2BI::Transformer resource type.
 ---
 
 # awscc_b2bi_transformer (List Resource)
 
-
+List all resources for `AWS::B2BI::Transformer` resource type.
 
 ## Example Usage
 

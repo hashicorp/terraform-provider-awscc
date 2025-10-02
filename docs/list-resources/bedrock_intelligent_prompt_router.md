@@ -3,12 +3,12 @@
 page_title: "awscc_bedrock_intelligent_prompt_router List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Bedrock::IntelligentPromptRouter resource type.
 ---
 
 # awscc_bedrock_intelligent_prompt_router (List Resource)
 
-
+List all resources for `AWS::Bedrock::IntelligentPromptRouter` resource type.
 
 ## Example Usage
 

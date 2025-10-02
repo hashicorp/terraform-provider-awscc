@@ -3,12 +3,12 @@
 page_title: "awscc_codestarconnections_repository_link List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CodeStarConnections::RepositoryLink resource type.
 ---
 
 # awscc_codestarconnections_repository_link (List Resource)
 
-
+List all resources for `AWS::CodeStarConnections::RepositoryLink` resource type.
 
 ## Example Usage
 

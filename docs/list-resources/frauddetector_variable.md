@@ -3,12 +3,12 @@
 page_title: "awscc_frauddetector_variable List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::FraudDetector::Variable resource type.
 ---
 
 # awscc_frauddetector_variable (List Resource)
 
-
+List all resources for `AWS::FraudDetector::Variable` resource type.
 
 ## Example Usage
 

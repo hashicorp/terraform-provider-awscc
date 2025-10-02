@@ -3,12 +3,12 @@
 page_title: "awscc_memorydb_multi_region_cluster List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MemoryDB::MultiRegionCluster resource type.
 ---
 
 # awscc_memorydb_multi_region_cluster (List Resource)
 
-
+List all resources for `AWS::MemoryDB::MultiRegionCluster` resource type.
 
 ## Example Usage
 

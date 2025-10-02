@@ -3,12 +3,12 @@
 page_title: "awscc_kinesis_stream List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Kinesis::Stream resource type.
 ---
 
 # awscc_kinesis_stream (List Resource)
 
-
+List all resources for `AWS::Kinesis::Stream` resource type.
 
 ## Example Usage
 

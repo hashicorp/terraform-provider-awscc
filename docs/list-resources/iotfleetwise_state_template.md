@@ -3,12 +3,12 @@
 page_title: "awscc_iotfleetwise_state_template List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTFleetWise::StateTemplate resource type.
 ---
 
 # awscc_iotfleetwise_state_template (List Resource)
 
-
+List all resources for `AWS::IoTFleetWise::StateTemplate` resource type.
 
 ## Example Usage
 

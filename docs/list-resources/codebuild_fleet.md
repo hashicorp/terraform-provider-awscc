@@ -3,12 +3,12 @@
 page_title: "awscc_codebuild_fleet List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CodeBuild::Fleet resource type.
 ---
 
 # awscc_codebuild_fleet (List Resource)
 
-
+List all resources for `AWS::CodeBuild::Fleet` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_sagemaker_cluster List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SageMaker::Cluster resource type.
 ---
 
 # awscc_sagemaker_cluster (List Resource)
 
-
+List all resources for `AWS::SageMaker::Cluster` resource type.
 
 ## Example Usage
 

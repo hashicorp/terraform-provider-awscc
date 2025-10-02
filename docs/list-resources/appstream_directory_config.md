@@ -3,12 +3,12 @@
 page_title: "awscc_appstream_directory_config List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::AppStream::DirectoryConfig resource type.
 ---
 
 # awscc_appstream_directory_config (List Resource)
 
-
+List all resources for `AWS::AppStream::DirectoryConfig` resource type.
 
 ## Example Usage
 

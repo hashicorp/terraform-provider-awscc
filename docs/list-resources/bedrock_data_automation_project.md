@@ -3,12 +3,12 @@
 page_title: "awscc_bedrock_data_automation_project List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Bedrock::DataAutomationProject resource type.
 ---
 
 # awscc_bedrock_data_automation_project (List Resource)
 
-
+List all resources for `AWS::Bedrock::DataAutomationProject` resource type.
 
 ## Example Usage
 

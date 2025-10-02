@@ -3,12 +3,12 @@
 page_title: "awscc_gamelift_alias List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::GameLift::Alias resource type.
 ---
 
 # awscc_gamelift_alias (List Resource)
 
-
+List all resources for `AWS::GameLift::Alias` resource type.
 
 ## Example Usage
 

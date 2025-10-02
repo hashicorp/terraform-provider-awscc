@@ -3,12 +3,12 @@
 page_title: "awscc_config_configuration_aggregator List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Config::ConfigurationAggregator resource type.
 ---
 
 # awscc_config_configuration_aggregator (List Resource)
 
-
+List all resources for `AWS::Config::ConfigurationAggregator` resource type.
 
 ## Example Usage
 

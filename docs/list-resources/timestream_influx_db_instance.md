@@ -3,12 +3,12 @@
 page_title: "awscc_timestream_influx_db_instance List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Timestream::InfluxDBInstance resource type.
 ---
 
 # awscc_timestream_influx_db_instance (List Resource)
 
-
+List all resources for `AWS::Timestream::InfluxDBInstance` resource type.
 
 ## Example Usage
 

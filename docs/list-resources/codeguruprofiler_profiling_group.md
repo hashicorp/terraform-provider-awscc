@@ -3,12 +3,12 @@
 page_title: "awscc_codeguruprofiler_profiling_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CodeGuruProfiler::ProfilingGroup resource type.
 ---
 
 # awscc_codeguruprofiler_profiling_group (List Resource)
 
-
+List all resources for `AWS::CodeGuruProfiler::ProfilingGroup` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_securityhub_product_subscription List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SecurityHub::ProductSubscription resource type.
 ---
 
 # awscc_securityhub_product_subscription (List Resource)
 
-
+List all resources for `AWS::SecurityHub::ProductSubscription` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_lightsail_domain List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Lightsail::Domain resource type.
 ---
 
 # awscc_lightsail_domain (List Resource)
 
-
+List all resources for `AWS::Lightsail::Domain` resource type.
 
 ## Example Usage
 

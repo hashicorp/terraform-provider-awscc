@@ -3,12 +3,12 @@
 page_title: "awscc_cleanroomsml_training_dataset List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CleanRoomsML::TrainingDataset resource type.
 ---
 
 # awscc_cleanroomsml_training_dataset (List Resource)
 
-
+List all resources for `AWS::CleanRoomsML::TrainingDataset` resource type.
 
 ## Example Usage
 

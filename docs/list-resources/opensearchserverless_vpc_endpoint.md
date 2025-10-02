@@ -3,12 +3,12 @@
 page_title: "awscc_opensearchserverless_vpc_endpoint List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::OpenSearchServerless::VpcEndpoint resource type.
 ---
 
 # awscc_opensearchserverless_vpc_endpoint (List Resource)
 
-
+List all resources for `AWS::OpenSearchServerless::VpcEndpoint` resource type.
 
 ## Example Usage
 

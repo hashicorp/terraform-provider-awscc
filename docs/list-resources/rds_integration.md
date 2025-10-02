@@ -3,12 +3,12 @@
 page_title: "awscc_rds_integration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::RDS::Integration resource type.
 ---
 
 # awscc_rds_integration (List Resource)
 
-
+List all resources for `AWS::RDS::Integration` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_aps_resource_policy List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::APS::ResourcePolicy resource type.
 ---
 
 # awscc_aps_resource_policy (List Resource)
 
-
+List all resources for `AWS::APS::ResourcePolicy` resource type.
 
 ## Example Usage
 

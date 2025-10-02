@@ -3,12 +3,12 @@
 page_title: "awscc_applicationinsights_application List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ApplicationInsights::Application resource type.
 ---
 
 # awscc_applicationinsights_application (List Resource)
 
-
+List all resources for `AWS::ApplicationInsights::Application` resource type.
 
 ## Example Usage
 

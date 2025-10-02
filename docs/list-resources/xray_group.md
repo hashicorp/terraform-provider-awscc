@@ -3,12 +3,12 @@
 page_title: "awscc_xray_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::XRay::Group resource type.
 ---
 
 # awscc_xray_group (List Resource)
 
-
+List all resources for `AWS::XRay::Group` resource type.
 
 ## Example Usage
 

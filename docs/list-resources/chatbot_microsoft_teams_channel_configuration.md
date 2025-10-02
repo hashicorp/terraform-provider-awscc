@@ -3,12 +3,12 @@
 page_title: "awscc_chatbot_microsoft_teams_channel_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Chatbot::MicrosoftTeamsChannelConfiguration resource type.
 ---
 
 # awscc_chatbot_microsoft_teams_channel_configuration (List Resource)
 
-
+List all resources for `AWS::Chatbot::MicrosoftTeamsChannelConfiguration` resource type.
 
 ## Example Usage
 

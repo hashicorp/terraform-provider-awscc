@@ -3,12 +3,12 @@
 page_title: "awscc_appintegrations_event_integration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::AppIntegrations::EventIntegration resource type.
 ---
 
 # awscc_appintegrations_event_integration (List Resource)
 
-
+List all resources for `AWS::AppIntegrations::EventIntegration` resource type.
 
 ## Example Usage
 

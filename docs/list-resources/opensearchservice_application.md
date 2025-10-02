@@ -3,12 +3,12 @@
 page_title: "awscc_opensearchservice_application List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::OpenSearchService::Application resource type.
 ---
 
 # awscc_opensearchservice_application (List Resource)
 
-
+List all resources for `AWS::OpenSearchService::Application` resource type.
 
 ## Example Usage
 

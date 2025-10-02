@@ -3,12 +3,12 @@
 page_title: "awscc_cloudtrail_event_data_store List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudTrail::EventDataStore resource type.
 ---
 
 # awscc_cloudtrail_event_data_store (List Resource)
 
-
+List all resources for `AWS::CloudTrail::EventDataStore` resource type.
 
 ## Example Usage
 

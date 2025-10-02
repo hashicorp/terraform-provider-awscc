@@ -3,12 +3,12 @@
 page_title: "awscc_fms_resource_set List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::FMS::ResourceSet resource type.
 ---
 
 # awscc_fms_resource_set (List Resource)
 
-
+List all resources for `AWS::FMS::ResourceSet` resource type.
 
 ## Example Usage
 

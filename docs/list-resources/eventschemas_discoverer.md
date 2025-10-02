@@ -3,12 +3,12 @@
 page_title: "awscc_eventschemas_discoverer List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EventSchemas::Discoverer resource type.
 ---
 
 # awscc_eventschemas_discoverer (List Resource)
 
-
+List all resources for `AWS::EventSchemas::Discoverer` resource type.
 
 ## Example Usage
 

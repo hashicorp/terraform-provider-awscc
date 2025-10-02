@@ -3,12 +3,12 @@
 page_title: "awscc_iotfleetwise_fleet List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTFleetWise::Fleet resource type.
 ---
 
 # awscc_iotfleetwise_fleet (List Resource)
 
-
+List all resources for `AWS::IoTFleetWise::Fleet` resource type.
 
 ## Example Usage
 

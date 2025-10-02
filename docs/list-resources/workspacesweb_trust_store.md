@@ -3,12 +3,12 @@
 page_title: "awscc_workspacesweb_trust_store List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::WorkSpacesWeb::TrustStore resource type.
 ---
 
 # awscc_workspacesweb_trust_store (List Resource)
 
-
+List all resources for `AWS::WorkSpacesWeb::TrustStore` resource type.
 
 ## Example Usage
 

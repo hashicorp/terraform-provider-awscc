@@ -3,12 +3,12 @@
 page_title: "awscc_redshift_cluster List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Redshift::Cluster resource type.
 ---
 
 # awscc_redshift_cluster (List Resource)
 
-
+List all resources for `AWS::Redshift::Cluster` resource type.
 
 ## Example Usage
 

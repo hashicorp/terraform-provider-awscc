@@ -3,12 +3,12 @@
 page_title: "awscc_networkfirewall_firewall List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::NetworkFirewall::Firewall resource type.
 ---
 
 # awscc_networkfirewall_firewall (List Resource)
 
-
+List all resources for `AWS::NetworkFirewall::Firewall` resource type.
 
 ## Example Usage
 

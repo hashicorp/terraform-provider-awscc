@@ -3,12 +3,12 @@
 page_title: "awscc_omics_run_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Omics::RunGroup resource type.
 ---
 
 # awscc_omics_run_group (List Resource)
 
-
+List all resources for `AWS::Omics::RunGroup` resource type.
 
 ## Example Usage
 

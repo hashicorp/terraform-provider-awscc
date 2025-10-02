@@ -3,12 +3,12 @@
 page_title: "awscc_arczonalshift_autoshift_observer_notification_status List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ARCZonalShift::AutoshiftObserverNotificationStatus resource type.
 ---
 
 # awscc_arczonalshift_autoshift_observer_notification_status (List Resource)
 
-
+List all resources for `AWS::ARCZonalShift::AutoshiftObserverNotificationStatus` resource type.
 
 ## Example Usage
 

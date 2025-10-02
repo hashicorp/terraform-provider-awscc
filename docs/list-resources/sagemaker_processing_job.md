@@ -3,12 +3,12 @@
 page_title: "awscc_sagemaker_processing_job List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SageMaker::ProcessingJob resource type.
 ---
 
 # awscc_sagemaker_processing_job (List Resource)
 
-
+List all resources for `AWS::SageMaker::ProcessingJob` resource type.
 
 ## Example Usage
 

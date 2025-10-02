@@ -3,12 +3,12 @@
 page_title: "awscc_events_event_bus List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Events::EventBus resource type.
 ---
 
 # awscc_events_event_bus (List Resource)
 
-
+List all resources for `AWS::Events::EventBus` resource type.
 
 ## Example Usage
 

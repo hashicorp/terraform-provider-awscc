@@ -3,12 +3,12 @@
 page_title: "awscc_sagemaker_mlflow_tracking_server List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SageMaker::MlflowTrackingServer resource type.
 ---
 
 # awscc_sagemaker_mlflow_tracking_server (List Resource)
 
-
+List all resources for `AWS::SageMaker::MlflowTrackingServer` resource type.
 
 ## Example Usage
 

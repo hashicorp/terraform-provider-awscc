@@ -3,12 +3,12 @@
 page_title: "awscc_workspacesweb_portal List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::WorkSpacesWeb::Portal resource type.
 ---
 
 # awscc_workspacesweb_portal (List Resource)
 
-
+List all resources for `AWS::WorkSpacesWeb::Portal` resource type.
 
 ## Example Usage
 

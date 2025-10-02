@@ -3,12 +3,12 @@
 page_title: "awscc_accessanalyzer_analyzer List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::AccessAnalyzer::Analyzer resource type.
 ---
 
 # awscc_accessanalyzer_analyzer (List Resource)
 
-
+List all resources for `AWS::AccessAnalyzer::Analyzer` resource type.
 
 ## Example Usage
 

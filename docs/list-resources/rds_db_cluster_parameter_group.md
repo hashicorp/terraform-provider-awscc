@@ -3,12 +3,12 @@
 page_title: "awscc_rds_db_cluster_parameter_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::RDS::DBClusterParameterGroup resource type.
 ---
 
 # awscc_rds_db_cluster_parameter_group (List Resource)
 
-
+List all resources for `AWS::RDS::DBClusterParameterGroup` resource type.
 
 ## Example Usage
 

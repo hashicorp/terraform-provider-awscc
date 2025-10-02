@@ -3,12 +3,12 @@
 page_title: "awscc_config_config_rule List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Config::ConfigRule resource type.
 ---
 
 # awscc_config_config_rule (List Resource)
 
-
+List all resources for `AWS::Config::ConfigRule` resource type.
 
 ## Example Usage
 

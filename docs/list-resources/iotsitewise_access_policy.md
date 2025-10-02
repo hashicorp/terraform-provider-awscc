@@ -3,12 +3,12 @@
 page_title: "awscc_iotsitewise_access_policy List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTSiteWise::AccessPolicy resource type.
 ---
 
 # awscc_iotsitewise_access_policy (List Resource)
 
-
+List all resources for `AWS::IoTSiteWise::AccessPolicy` resource type.
 
 ## Example Usage
 

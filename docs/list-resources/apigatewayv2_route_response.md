@@ -3,12 +3,12 @@
 page_title: "awscc_apigatewayv2_route_response List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ApiGatewayV2::RouteResponse resource type.
 ---
 
 # awscc_apigatewayv2_route_response (List Resource)
 
-
+List all resources for `AWS::ApiGatewayV2::RouteResponse` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_autoscaling_scaling_policy List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::AutoScaling::ScalingPolicy resource type.
 ---
 
 # awscc_autoscaling_scaling_policy (List Resource)
 
-
+List all resources for `AWS::AutoScaling::ScalingPolicy` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_ssm_parameter List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SSM::Parameter resource type.
 ---
 
 # awscc_ssm_parameter (List Resource)
 
-
+List all resources for `AWS::SSM::Parameter` resource type.
 
 ## Example Usage
 

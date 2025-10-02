@@ -3,12 +3,12 @@
 page_title: "awscc_lightsail_alarm List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Lightsail::Alarm resource type.
 ---
 
 # awscc_lightsail_alarm (List Resource)
 
-
+List all resources for `AWS::Lightsail::Alarm` resource type.
 
 ## Example Usage
 

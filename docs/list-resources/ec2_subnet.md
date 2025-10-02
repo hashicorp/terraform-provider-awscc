@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_subnet List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::Subnet resource type.
 ---
 
 # awscc_ec2_subnet (List Resource)
 
-
+List all resources for `AWS::EC2::Subnet` resource type.
 
 ## Example Usage
 

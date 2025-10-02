@@ -3,12 +3,12 @@
 page_title: "awscc_iot_provisioning_template List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoT::ProvisioningTemplate resource type.
 ---
 
 # awscc_iot_provisioning_template (List Resource)
 
-
+List all resources for `AWS::IoT::ProvisioningTemplate` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_mediapackage_asset List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MediaPackage::Asset resource type.
 ---
 
 # awscc_mediapackage_asset (List Resource)
 
-
+List all resources for `AWS::MediaPackage::Asset` resource type.
 
 ## Example Usage
 

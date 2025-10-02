@@ -3,12 +3,12 @@
 page_title: "awscc_fms_notification_channel List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::FMS::NotificationChannel resource type.
 ---
 
 # awscc_fms_notification_channel (List Resource)
 
-
+List all resources for `AWS::FMS::NotificationChannel` resource type.
 
 ## Example Usage
 

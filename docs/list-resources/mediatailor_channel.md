@@ -3,12 +3,12 @@
 page_title: "awscc_mediatailor_channel List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MediaTailor::Channel resource type.
 ---
 
 # awscc_mediatailor_channel (List Resource)
 
-
+List all resources for `AWS::MediaTailor::Channel` resource type.
 
 ## Example Usage
 

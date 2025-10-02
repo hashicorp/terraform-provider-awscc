@@ -3,12 +3,12 @@
 page_title: "awscc_vpclattice_resource_gateway List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::VpcLattice::ResourceGateway resource type.
 ---
 
 # awscc_vpclattice_resource_gateway (List Resource)
 
-
+List all resources for `AWS::VpcLattice::ResourceGateway` resource type.
 
 ## Example Usage
 

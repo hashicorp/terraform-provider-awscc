@@ -3,12 +3,12 @@
 page_title: "awscc_grafana_workspace List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Grafana::Workspace resource type.
 ---
 
 # awscc_grafana_workspace (List Resource)
 
-
+List all resources for `AWS::Grafana::Workspace` resource type.
 
 ## Example Usage
 

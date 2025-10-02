@@ -3,12 +3,12 @@
 page_title: "awscc_sso_instance_access_control_attribute_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SSO::InstanceAccessControlAttributeConfiguration resource type.
 ---
 
 # awscc_sso_instance_access_control_attribute_configuration (List Resource)
 
-
+List all resources for `AWS::SSO::InstanceAccessControlAttributeConfiguration` resource type.
 
 ## Example Usage
 

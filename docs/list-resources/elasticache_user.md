@@ -3,12 +3,12 @@
 page_title: "awscc_elasticache_user List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ElastiCache::User resource type.
 ---
 
 # awscc_elasticache_user (List Resource)
 
-
+List all resources for `AWS::ElastiCache::User` resource type.
 
 ## Example Usage
 

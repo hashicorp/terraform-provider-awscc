@@ -3,12 +3,12 @@
 page_title: "awscc_lakeformation_tag List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::LakeFormation::Tag resource type.
 ---
 
 # awscc_lakeformation_tag (List Resource)
 
-
+List all resources for `AWS::LakeFormation::Tag` resource type.
 
 ## Example Usage
 

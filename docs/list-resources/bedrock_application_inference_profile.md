@@ -3,12 +3,12 @@
 page_title: "awscc_bedrock_application_inference_profile List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Bedrock::ApplicationInferenceProfile resource type.
 ---
 
 # awscc_bedrock_application_inference_profile (List Resource)
 
-
+List all resources for `AWS::Bedrock::ApplicationInferenceProfile` resource type.
 
 ## Example Usage
 

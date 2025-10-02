@@ -3,12 +3,12 @@
 page_title: "awscc_applicationsignals_discovery List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ApplicationSignals::Discovery resource type.
 ---
 
 # awscc_applicationsignals_discovery (List Resource)
 
-
+List all resources for `AWS::ApplicationSignals::Discovery` resource type.
 
 ## Example Usage
 

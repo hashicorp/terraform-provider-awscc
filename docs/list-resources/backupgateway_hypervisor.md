@@ -3,12 +3,12 @@
 page_title: "awscc_backupgateway_hypervisor List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::BackupGateway::Hypervisor resource type.
 ---
 
 # awscc_backupgateway_hypervisor (List Resource)
 
-
+List all resources for `AWS::BackupGateway::Hypervisor` resource type.
 
 ## Example Usage
 

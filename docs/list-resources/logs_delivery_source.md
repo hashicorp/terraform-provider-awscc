@@ -3,12 +3,12 @@
 page_title: "awscc_logs_delivery_source List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Logs::DeliverySource resource type.
 ---
 
 # awscc_logs_delivery_source (List Resource)
 
-
+List all resources for `AWS::Logs::DeliverySource` resource type.
 
 ## Example Usage
 

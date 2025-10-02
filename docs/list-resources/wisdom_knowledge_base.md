@@ -3,12 +3,12 @@
 page_title: "awscc_wisdom_knowledge_base List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Wisdom::KnowledgeBase resource type.
 ---
 
 # awscc_wisdom_knowledge_base (List Resource)
 
-
+List all resources for `AWS::Wisdom::KnowledgeBase` resource type.
 
 ## Example Usage
 

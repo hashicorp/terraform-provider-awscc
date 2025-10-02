@@ -3,12 +3,12 @@
 page_title: "awscc_panorama_application_instance List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Panorama::ApplicationInstance resource type.
 ---
 
 # awscc_panorama_application_instance (List Resource)
 
-
+List all resources for `AWS::Panorama::ApplicationInstance` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_mediaconnect_flow_vpc_interface List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MediaConnect::FlowVpcInterface resource type.
 ---
 
 # awscc_mediaconnect_flow_vpc_interface (List Resource)
 
-
+List all resources for `AWS::MediaConnect::FlowVpcInterface` resource type.
 
 ## Example Usage
 

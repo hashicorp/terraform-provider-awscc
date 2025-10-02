@@ -3,12 +3,12 @@
 page_title: "awscc_cloudformation_hook_default_version List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudFormation::HookDefaultVersion resource type.
 ---
 
 # awscc_cloudformation_hook_default_version (List Resource)
 
-
+List all resources for `AWS::CloudFormation::HookDefaultVersion` resource type.
 
 ## Example Usage
 

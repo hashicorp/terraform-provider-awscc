@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_network_insights_analysis List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::NetworkInsightsAnalysis resource type.
 ---
 
 # awscc_ec2_network_insights_analysis (List Resource)
 
-
+List all resources for `AWS::EC2::NetworkInsightsAnalysis` resource type.
 
 ## Example Usage
 

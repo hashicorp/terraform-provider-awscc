@@ -3,12 +3,12 @@
 page_title: "awscc_iot_topic_rule List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoT::TopicRule resource type.
 ---
 
 # awscc_iot_topic_rule (List Resource)
 
-
+List all resources for `AWS::IoT::TopicRule` resource type.
 
 ## Example Usage
 

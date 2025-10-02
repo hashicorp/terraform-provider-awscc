@@ -3,12 +3,12 @@
 page_title: "awscc_vpclattice_service_network List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::VpcLattice::ServiceNetwork resource type.
 ---
 
 # awscc_vpclattice_service_network (List Resource)
 
-
+List all resources for `AWS::VpcLattice::ServiceNetwork` resource type.
 
 ## Example Usage
 

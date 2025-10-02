@@ -3,12 +3,12 @@
 page_title: "awscc_bedrock_agent List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Bedrock::Agent resource type.
 ---
 
 # awscc_bedrock_agent (List Resource)
 
-
+List all resources for `AWS::Bedrock::Agent` resource type.
 
 ## Example Usage
 

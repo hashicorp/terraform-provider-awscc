@@ -3,12 +3,12 @@
 page_title: "awscc_apigateway_rest_api List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ApiGateway::RestApi resource type.
 ---
 
 # awscc_apigateway_rest_api (List Resource)
 
-
+List all resources for `AWS::ApiGateway::RestApi` resource type.
 
 ## Example Usage
 

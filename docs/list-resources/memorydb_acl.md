@@ -3,12 +3,12 @@
 page_title: "awscc_memorydb_acl List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MemoryDB::ACL resource type.
 ---
 
 # awscc_memorydb_acl (List Resource)
 
-
+List all resources for `AWS::MemoryDB::ACL` resource type.
 
 ## Example Usage
 

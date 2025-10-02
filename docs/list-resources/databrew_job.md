@@ -3,12 +3,12 @@
 page_title: "awscc_databrew_job List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DataBrew::Job resource type.
 ---
 
 # awscc_databrew_job (List Resource)
 
-
+List all resources for `AWS::DataBrew::Job` resource type.
 
 ## Example Usage
 

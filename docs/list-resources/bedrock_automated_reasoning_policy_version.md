@@ -3,12 +3,12 @@
 page_title: "awscc_bedrock_automated_reasoning_policy_version List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Bedrock::AutomatedReasoningPolicyVersion resource type.
 ---
 
 # awscc_bedrock_automated_reasoning_policy_version (List Resource)
 
-
+List all resources for `AWS::Bedrock::AutomatedReasoningPolicyVersion` resource type.
 
 ## Example Usage
 

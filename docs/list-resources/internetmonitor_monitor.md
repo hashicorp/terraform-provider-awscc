@@ -3,12 +3,12 @@
 page_title: "awscc_internetmonitor_monitor List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::InternetMonitor::Monitor resource type.
 ---
 
 # awscc_internetmonitor_monitor (List Resource)
 
-
+List all resources for `AWS::InternetMonitor::Monitor` resource type.
 
 ## Example Usage
 

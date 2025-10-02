@@ -3,12 +3,12 @@
 page_title: "awscc_networkfirewall_rule_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::NetworkFirewall::RuleGroup resource type.
 ---
 
 # awscc_networkfirewall_rule_group (List Resource)
 
-
+List all resources for `AWS::NetworkFirewall::RuleGroup` resource type.
 
 ## Example Usage
 

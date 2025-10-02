@@ -3,12 +3,12 @@
 page_title: "awscc_cloudfront_origin_access_control List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudFront::OriginAccessControl resource type.
 ---
 
 # awscc_cloudfront_origin_access_control (List Resource)
 
-
+List all resources for `AWS::CloudFront::OriginAccessControl` resource type.
 
 ## Example Usage
 

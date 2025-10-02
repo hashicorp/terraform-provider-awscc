@@ -3,12 +3,12 @@
 page_title: "awscc_notificationscontacts_email_contact List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::NotificationsContacts::EmailContact resource type.
 ---
 
 # awscc_notificationscontacts_email_contact (List Resource)
 
-
+List all resources for `AWS::NotificationsContacts::EmailContact` resource type.
 
 ## Example Usage
 

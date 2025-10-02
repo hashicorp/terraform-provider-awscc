@@ -3,12 +3,12 @@
 page_title: "awscc_lambda_code_signing_config List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Lambda::CodeSigningConfig resource type.
 ---
 
 # awscc_lambda_code_signing_config (List Resource)
 
-
+List all resources for `AWS::Lambda::CodeSigningConfig` resource type.
 
 ## Example Usage
 

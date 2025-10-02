@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_route_server List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::RouteServer resource type.
 ---
 
 # awscc_ec2_route_server (List Resource)
 
-
+List all resources for `AWS::EC2::RouteServer` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_route53resolver_resolver_query_logging_config_association List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation resource type.
 ---
 
 # awscc_route53resolver_resolver_query_logging_config_association (List Resource)
 
-
+List all resources for `AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation` resource type.
 
 ## Example Usage
 

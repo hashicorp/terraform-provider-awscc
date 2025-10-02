@@ -3,12 +3,12 @@
 page_title: "awscc_comprehend_document_classifier List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Comprehend::DocumentClassifier resource type.
 ---
 
 # awscc_comprehend_document_classifier (List Resource)
 
-
+List all resources for `AWS::Comprehend::DocumentClassifier` resource type.
 
 ## Example Usage
 

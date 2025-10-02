@@ -3,12 +3,12 @@
 page_title: "awscc_applicationsignals_service_level_objective List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ApplicationSignals::ServiceLevelObjective resource type.
 ---
 
 # awscc_applicationsignals_service_level_objective (List Resource)
 
-
+List all resources for `AWS::ApplicationSignals::ServiceLevelObjective` resource type.
 
 ## Example Usage
 

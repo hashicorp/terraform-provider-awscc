@@ -3,12 +3,12 @@
 page_title: "awscc_inspectorv2_code_security_integration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::InspectorV2::CodeSecurityIntegration resource type.
 ---
 
 # awscc_inspectorv2_code_security_integration (List Resource)
 
-
+List all resources for `AWS::InspectorV2::CodeSecurityIntegration` resource type.
 
 ## Example Usage
 

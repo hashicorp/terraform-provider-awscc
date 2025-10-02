@@ -3,12 +3,12 @@
 page_title: "awscc_shield_drt_access List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Shield::DRTAccess resource type.
 ---
 
 # awscc_shield_drt_access (List Resource)
 
-
+List all resources for `AWS::Shield::DRTAccess` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_guardduty_publishing_destination List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::GuardDuty::PublishingDestination resource type.
 ---
 
 # awscc_guardduty_publishing_destination (List Resource)
 
-
+List all resources for `AWS::GuardDuty::PublishingDestination` resource type.
 
 ## Example Usage
 

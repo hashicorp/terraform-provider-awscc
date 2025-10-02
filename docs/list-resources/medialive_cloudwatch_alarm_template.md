@@ -3,12 +3,12 @@
 page_title: "awscc_medialive_cloudwatch_alarm_template List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MediaLive::CloudWatchAlarmTemplate resource type.
 ---
 
 # awscc_medialive_cloudwatch_alarm_template (List Resource)
 
-
+List all resources for `AWS::MediaLive::CloudWatchAlarmTemplate` resource type.
 
 ## Example Usage
 

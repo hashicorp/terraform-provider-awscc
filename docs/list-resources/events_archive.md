@@ -3,12 +3,12 @@
 page_title: "awscc_events_archive List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Events::Archive resource type.
 ---
 
 # awscc_events_archive (List Resource)
 
-
+List all resources for `AWS::Events::Archive` resource type.
 
 ## Example Usage
 

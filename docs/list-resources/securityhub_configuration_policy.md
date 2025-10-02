@@ -3,12 +3,12 @@
 page_title: "awscc_securityhub_configuration_policy List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SecurityHub::ConfigurationPolicy resource type.
 ---
 
 # awscc_securityhub_configuration_policy (List Resource)
 
-
+List all resources for `AWS::SecurityHub::ConfigurationPolicy` resource type.
 
 ## Example Usage
 

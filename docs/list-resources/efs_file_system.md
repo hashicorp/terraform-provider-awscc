@@ -3,12 +3,12 @@
 page_title: "awscc_efs_file_system List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EFS::FileSystem resource type.
 ---
 
 # awscc_efs_file_system (List Resource)
 
-
+List all resources for `AWS::EFS::FileSystem` resource type.
 
 ## Example Usage
 

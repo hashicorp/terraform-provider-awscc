@@ -3,12 +3,12 @@
 page_title: "awscc_personalize_schema List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Personalize::Schema resource type.
 ---
 
 # awscc_personalize_schema (List Resource)
 
-
+List all resources for `AWS::Personalize::Schema` resource type.
 
 ## Example Usage
 

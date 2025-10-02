@@ -3,12 +3,12 @@
 page_title: "awscc_iam_user List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IAM::User resource type.
 ---
 
 # awscc_iam_user (List Resource)
 
-
+List all resources for `AWS::IAM::User` resource type.
 
 ## Example Usage
 

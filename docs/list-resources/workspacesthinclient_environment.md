@@ -3,12 +3,12 @@
 page_title: "awscc_workspacesthinclient_environment List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::WorkSpacesThinClient::Environment resource type.
 ---
 
 # awscc_workspacesthinclient_environment (List Resource)
 
-
+List all resources for `AWS::WorkSpacesThinClient::Environment` resource type.
 
 ## Example Usage
 

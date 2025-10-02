@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_transit_gateway_multicast_group_member List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::TransitGatewayMulticastGroupMember resource type.
 ---
 
 # awscc_ec2_transit_gateway_multicast_group_member (List Resource)
 
-
+List all resources for `AWS::EC2::TransitGatewayMulticastGroupMember` resource type.
 
 ## Example Usage
 

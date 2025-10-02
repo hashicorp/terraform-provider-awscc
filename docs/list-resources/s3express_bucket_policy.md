@@ -3,12 +3,12 @@
 page_title: "awscc_s3express_bucket_policy List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::S3Express::BucketPolicy resource type.
 ---
 
 # awscc_s3express_bucket_policy (List Resource)
 
-
+List all resources for `AWS::S3Express::BucketPolicy` resource type.
 
 ## Example Usage
 

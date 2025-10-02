@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_local_gateway_route_table_virtual_interface_group_association List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::LocalGatewayRouteTableVirtualInterfaceGroupAssociation resource type.
 ---
 
 # awscc_ec2_local_gateway_route_table_virtual_interface_group_association (List Resource)
 
-
+List all resources for `AWS::EC2::LocalGatewayRouteTableVirtualInterfaceGroupAssociation` resource type.
 
 ## Example Usage
 

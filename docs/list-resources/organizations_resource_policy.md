@@ -3,12 +3,12 @@
 page_title: "awscc_organizations_resource_policy List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Organizations::ResourcePolicy resource type.
 ---
 
 # awscc_organizations_resource_policy (List Resource)
 
-
+List all resources for `AWS::Organizations::ResourcePolicy` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_rds_db_proxy List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::RDS::DBProxy resource type.
 ---
 
 # awscc_rds_db_proxy (List Resource)
 
-
+List all resources for `AWS::RDS::DBProxy` resource type.
 
 ## Example Usage
 

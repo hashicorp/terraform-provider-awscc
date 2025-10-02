@@ -3,12 +3,12 @@
 page_title: "awscc_securityhub_hub List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SecurityHub::Hub resource type.
 ---
 
 # awscc_securityhub_hub (List Resource)
 
-
+List all resources for `AWS::SecurityHub::Hub` resource type.
 
 ## Example Usage
 

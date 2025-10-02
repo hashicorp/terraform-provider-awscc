@@ -3,12 +3,12 @@
 page_title: "awscc_cloudfront_function List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudFront::Function resource type.
 ---
 
 # awscc_cloudfront_function (List Resource)
 
-
+List all resources for `AWS::CloudFront::Function` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_rolesanywhere_crl List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::RolesAnywhere::CRL resource type.
 ---
 
 # awscc_rolesanywhere_crl (List Resource)
 
-
+List all resources for `AWS::RolesAnywhere::CRL` resource type.
 
 ## Example Usage
 

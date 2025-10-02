@@ -3,12 +3,12 @@
 page_title: "awscc_personalize_dataset List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Personalize::Dataset resource type.
 ---
 
 # awscc_personalize_dataset (List Resource)
 
-
+List all resources for `AWS::Personalize::Dataset` resource type.
 
 ## Example Usage
 

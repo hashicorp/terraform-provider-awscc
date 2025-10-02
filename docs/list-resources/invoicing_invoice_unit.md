@@ -3,12 +3,12 @@
 page_title: "awscc_invoicing_invoice_unit List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Invoicing::InvoiceUnit resource type.
 ---
 
 # awscc_invoicing_invoice_unit (List Resource)
 
-
+List all resources for `AWS::Invoicing::InvoiceUnit` resource type.
 
 ## Example Usage
 

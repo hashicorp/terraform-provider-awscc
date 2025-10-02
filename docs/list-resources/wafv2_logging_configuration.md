@@ -3,12 +3,12 @@
 page_title: "awscc_wafv2_logging_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::WAFv2::LoggingConfiguration resource type.
 ---
 
 # awscc_wafv2_logging_configuration (List Resource)
 
-
+List all resources for `AWS::WAFv2::LoggingConfiguration` resource type.
 
 ## Example Usage
 

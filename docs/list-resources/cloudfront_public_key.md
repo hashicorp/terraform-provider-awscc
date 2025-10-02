@@ -3,12 +3,12 @@
 page_title: "awscc_cloudfront_public_key List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudFront::PublicKey resource type.
 ---
 
 # awscc_cloudfront_public_key (List Resource)
 
-
+List all resources for `AWS::CloudFront::PublicKey` resource type.
 
 ## Example Usage
 

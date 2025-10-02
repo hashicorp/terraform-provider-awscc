@@ -3,12 +3,12 @@
 page_title: "awscc_odb_cloud_autonomous_vm_cluster List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ODB::CloudAutonomousVmCluster resource type.
 ---
 
 # awscc_odb_cloud_autonomous_vm_cluster (List Resource)
 
-
+List all resources for `AWS::ODB::CloudAutonomousVmCluster` resource type.
 
 ## Example Usage
 

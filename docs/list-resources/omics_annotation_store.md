@@ -3,12 +3,12 @@
 page_title: "awscc_omics_annotation_store List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Omics::AnnotationStore resource type.
 ---
 
 # awscc_omics_annotation_store (List Resource)
 
-
+List all resources for `AWS::Omics::AnnotationStore` resource type.
 
 ## Example Usage
 

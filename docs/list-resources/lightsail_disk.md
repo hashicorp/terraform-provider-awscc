@@ -3,12 +3,12 @@
 page_title: "awscc_lightsail_disk List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Lightsail::Disk resource type.
 ---
 
 # awscc_lightsail_disk (List Resource)
 
-
+List all resources for `AWS::Lightsail::Disk` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_iot_fleet_metric List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoT::FleetMetric resource type.
 ---
 
 # awscc_iot_fleet_metric (List Resource)
 
-
+List all resources for `AWS::IoT::FleetMetric` resource type.
 
 ## Example Usage
 

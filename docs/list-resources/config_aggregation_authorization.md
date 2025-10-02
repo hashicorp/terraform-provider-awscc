@@ -3,12 +3,12 @@
 page_title: "awscc_config_aggregation_authorization List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Config::AggregationAuthorization resource type.
 ---
 
 # awscc_config_aggregation_authorization (List Resource)
 
-
+List all resources for `AWS::Config::AggregationAuthorization` resource type.
 
 ## Example Usage
 

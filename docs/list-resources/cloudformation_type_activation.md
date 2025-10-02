@@ -3,12 +3,12 @@
 page_title: "awscc_cloudformation_type_activation List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudFormation::TypeActivation resource type.
 ---
 
 # awscc_cloudformation_type_activation (List Resource)
 
-
+List all resources for `AWS::CloudFormation::TypeActivation` resource type.
 
 ## Example Usage
 

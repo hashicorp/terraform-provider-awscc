@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_dhcp_options List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::DHCPOptions resource type.
 ---
 
 # awscc_ec2_dhcp_options (List Resource)
 
-
+List all resources for `AWS::EC2::DHCPOptions` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_quicksight_topic List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::QuickSight::Topic resource type.
 ---
 
 # awscc_quicksight_topic (List Resource)
 
-
+List all resources for `AWS::QuickSight::Topic` resource type.
 
 ## Example Usage
 

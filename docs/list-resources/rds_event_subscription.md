@@ -3,12 +3,12 @@
 page_title: "awscc_rds_event_subscription List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::RDS::EventSubscription resource type.
 ---
 
 # awscc_rds_event_subscription (List Resource)
 
-
+List all resources for `AWS::RDS::EventSubscription` resource type.
 
 ## Example Usage
 

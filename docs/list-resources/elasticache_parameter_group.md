@@ -3,12 +3,12 @@
 page_title: "awscc_elasticache_parameter_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ElastiCache::ParameterGroup resource type.
 ---
 
 # awscc_elasticache_parameter_group (List Resource)
 
-
+List all resources for `AWS::ElastiCache::ParameterGroup` resource type.
 
 ## Example Usage
 

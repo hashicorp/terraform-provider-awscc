@@ -3,12 +3,12 @@
 page_title: "awscc_pcaconnectorscep_connector List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::PCAConnectorSCEP::Connector resource type.
 ---
 
 # awscc_pcaconnectorscep_connector (List Resource)
 
-
+List all resources for `AWS::PCAConnectorSCEP::Connector` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_datasync_storage_system List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DataSync::StorageSystem resource type.
 ---
 
 # awscc_datasync_storage_system (List Resource)
 
-
+List all resources for `AWS::DataSync::StorageSystem` resource type.
 
 ## Example Usage
 

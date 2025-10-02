@@ -3,12 +3,12 @@
 page_title: "awscc_location_tracker List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Location::Tracker resource type.
 ---
 
 # awscc_location_tracker (List Resource)
 
-
+List all resources for `AWS::Location::Tracker` resource type.
 
 ## Example Usage
 

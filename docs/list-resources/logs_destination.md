@@ -3,12 +3,12 @@
 page_title: "awscc_logs_destination List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Logs::Destination resource type.
 ---
 
 # awscc_logs_destination (List Resource)
 
-
+List all resources for `AWS::Logs::Destination` resource type.
 
 ## Example Usage
 

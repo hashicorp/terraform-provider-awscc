@@ -3,12 +3,12 @@
 page_title: "awscc_route53recoveryreadiness_readiness_check List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Route53RecoveryReadiness::ReadinessCheck resource type.
 ---
 
 # awscc_route53recoveryreadiness_readiness_check (List Resource)
 
-
+List all resources for `AWS::Route53RecoveryReadiness::ReadinessCheck` resource type.
 
 ## Example Usage
 

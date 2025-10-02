@@ -3,12 +3,12 @@
 page_title: "awscc_inspectorv2_cis_scan_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::InspectorV2::CisScanConfiguration resource type.
 ---
 
 # awscc_inspectorv2_cis_scan_configuration (List Resource)
 
-
+List all resources for `AWS::InspectorV2::CisScanConfiguration` resource type.
 
 ## Example Usage
 

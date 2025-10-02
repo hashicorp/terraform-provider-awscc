@@ -3,12 +3,12 @@
 page_title: "awscc_apigateway_api_key List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ApiGateway::ApiKey resource type.
 ---
 
 # awscc_apigateway_api_key (List Resource)
 
-
+List all resources for `AWS::ApiGateway::ApiKey` resource type.
 
 ## Example Usage
 

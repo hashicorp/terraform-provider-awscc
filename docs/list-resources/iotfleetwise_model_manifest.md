@@ -3,12 +3,12 @@
 page_title: "awscc_iotfleetwise_model_manifest List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTFleetWise::ModelManifest resource type.
 ---
 
 # awscc_iotfleetwise_model_manifest (List Resource)
 
-
+List all resources for `AWS::IoTFleetWise::ModelManifest` resource type.
 
 ## Example Usage
 

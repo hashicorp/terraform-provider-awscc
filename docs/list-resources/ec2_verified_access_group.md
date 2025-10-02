@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_verified_access_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::VerifiedAccessGroup resource type.
 ---
 
 # awscc_ec2_verified_access_group (List Resource)
 
-
+List all resources for `AWS::EC2::VerifiedAccessGroup` resource type.
 
 ## Example Usage
 

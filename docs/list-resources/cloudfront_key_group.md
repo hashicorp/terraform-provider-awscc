@@ -3,12 +3,12 @@
 page_title: "awscc_cloudfront_key_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudFront::KeyGroup resource type.
 ---
 
 # awscc_cloudfront_key_group (List Resource)
 
-
+List all resources for `AWS::CloudFront::KeyGroup` resource type.
 
 ## Example Usage
 

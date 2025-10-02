@@ -3,12 +3,12 @@
 page_title: "awscc_events_connection List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Events::Connection resource type.
 ---
 
 # awscc_events_connection (List Resource)
 
-
+List all resources for `AWS::Events::Connection` resource type.
 
 ## Example Usage
 

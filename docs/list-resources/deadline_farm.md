@@ -3,12 +3,12 @@
 page_title: "awscc_deadline_farm List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Deadline::Farm resource type.
 ---
 
 # awscc_deadline_farm (List Resource)
 
-
+List all resources for `AWS::Deadline::Farm` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_evs_environment List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EVS::Environment resource type.
 ---
 
 # awscc_evs_environment (List Resource)
 
-
+List all resources for `AWS::EVS::Environment` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_codeartifact_repository List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CodeArtifact::Repository resource type.
 ---
 
 # awscc_codeartifact_repository (List Resource)
 
-
+List all resources for `AWS::CodeArtifact::Repository` resource type.
 
 ## Example Usage
 

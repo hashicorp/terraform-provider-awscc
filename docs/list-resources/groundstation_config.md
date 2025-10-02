@@ -3,12 +3,12 @@
 page_title: "awscc_groundstation_config List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::GroundStation::Config resource type.
 ---
 
 # awscc_groundstation_config (List Resource)
 
-
+List all resources for `AWS::GroundStation::Config` resource type.
 
 ## Example Usage
 

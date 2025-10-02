@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_subnet_cidr_block List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::SubnetCidrBlock resource type.
 ---
 
 # awscc_ec2_subnet_cidr_block (List Resource)
 
-
+List all resources for `AWS::EC2::SubnetCidrBlock` resource type.
 
 ## Example Usage
 

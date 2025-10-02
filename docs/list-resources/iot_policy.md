@@ -3,12 +3,12 @@
 page_title: "awscc_iot_policy List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoT::Policy resource type.
 ---
 
 # awscc_iot_policy (List Resource)
 
-
+List all resources for `AWS::IoT::Policy` resource type.
 
 ## Example Usage
 

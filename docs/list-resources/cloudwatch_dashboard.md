@@ -3,12 +3,12 @@
 page_title: "awscc_cloudwatch_dashboard List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudWatch::Dashboard resource type.
 ---
 
 # awscc_cloudwatch_dashboard (List Resource)
 
-
+List all resources for `AWS::CloudWatch::Dashboard` resource type.
 
 ## Example Usage
 

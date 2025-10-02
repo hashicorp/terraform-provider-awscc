@@ -3,12 +3,12 @@
 page_title: "awscc_databrew_ruleset List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DataBrew::Ruleset resource type.
 ---
 
 # awscc_databrew_ruleset (List Resource)
 
-
+List all resources for `AWS::DataBrew::Ruleset` resource type.
 
 ## Example Usage
 

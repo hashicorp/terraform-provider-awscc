@@ -3,12 +3,12 @@
 page_title: "awscc_athena_work_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Athena::WorkGroup resource type.
 ---
 
 # awscc_athena_work_group (List Resource)
 
-
+List all resources for `AWS::Athena::WorkGroup` resource type.
 
 ## Example Usage
 

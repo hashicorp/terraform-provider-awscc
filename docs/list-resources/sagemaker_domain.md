@@ -3,12 +3,12 @@
 page_title: "awscc_sagemaker_domain List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SageMaker::Domain resource type.
 ---
 
 # awscc_sagemaker_domain (List Resource)
 
-
+List all resources for `AWS::SageMaker::Domain` resource type.
 
 ## Example Usage
 

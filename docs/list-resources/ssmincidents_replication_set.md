@@ -3,12 +3,12 @@
 page_title: "awscc_ssmincidents_replication_set List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SSMIncidents::ReplicationSet resource type.
 ---
 
 # awscc_ssmincidents_replication_set (List Resource)
 
-
+List all resources for `AWS::SSMIncidents::ReplicationSet` resource type.
 
 ## Example Usage
 

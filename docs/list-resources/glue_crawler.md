@@ -3,12 +3,12 @@
 page_title: "awscc_glue_crawler List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Glue::Crawler resource type.
 ---
 
 # awscc_glue_crawler (List Resource)
 
-
+List all resources for `AWS::Glue::Crawler` resource type.
 
 ## Example Usage
 

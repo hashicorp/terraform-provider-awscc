@@ -3,12 +3,12 @@
 page_title: "awscc_iotfleetwise_signal_catalog List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTFleetWise::SignalCatalog resource type.
 ---
 
 # awscc_iotfleetwise_signal_catalog (List Resource)
 
-
+List all resources for `AWS::IoTFleetWise::SignalCatalog` resource type.
 
 ## Example Usage
 

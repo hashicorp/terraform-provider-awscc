@@ -3,12 +3,12 @@
 page_title: "awscc_elasticbeanstalk_configuration_template List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ElasticBeanstalk::ConfigurationTemplate resource type.
 ---
 
 # awscc_elasticbeanstalk_configuration_template (List Resource)
 
-
+List all resources for `AWS::ElasticBeanstalk::ConfigurationTemplate` resource type.
 
 ## Example Usage
 

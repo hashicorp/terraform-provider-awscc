@@ -3,12 +3,12 @@
 page_title: "awscc_smsvoice_pool List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SMSVOICE::Pool resource type.
 ---
 
 # awscc_smsvoice_pool (List Resource)
 
-
+List all resources for `AWS::SMSVOICE::Pool` resource type.
 
 ## Example Usage
 

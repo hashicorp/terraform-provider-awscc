@@ -3,12 +3,12 @@
 page_title: "awscc_athena_capacity_reservation List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Athena::CapacityReservation resource type.
 ---
 
 # awscc_athena_capacity_reservation (List Resource)
 
-
+List all resources for `AWS::Athena::CapacityReservation` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_route53recoverycontrol_control_panel List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Route53RecoveryControl::ControlPanel resource type.
 ---
 
 # awscc_route53recoverycontrol_control_panel (List Resource)
 
-
+List all resources for `AWS::Route53RecoveryControl::ControlPanel` resource type.
 
 ## Example Usage
 

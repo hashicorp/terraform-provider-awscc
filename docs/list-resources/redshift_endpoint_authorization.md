@@ -3,12 +3,12 @@
 page_title: "awscc_redshift_endpoint_authorization List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Redshift::EndpointAuthorization resource type.
 ---
 
 # awscc_redshift_endpoint_authorization (List Resource)
 
-
+List all resources for `AWS::Redshift::EndpointAuthorization` resource type.
 
 ## Example Usage
 

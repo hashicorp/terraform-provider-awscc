@@ -3,12 +3,12 @@
 page_title: "awscc_ses_mail_manager_relay List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SES::MailManagerRelay resource type.
 ---
 
 # awscc_ses_mail_manager_relay (List Resource)
 
-
+List all resources for `AWS::SES::MailManagerRelay` resource type.
 
 ## Example Usage
 

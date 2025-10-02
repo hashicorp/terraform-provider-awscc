@@ -3,12 +3,12 @@
 page_title: "awscc_codestarconnections_sync_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CodeStarConnections::SyncConfiguration resource type.
 ---
 
 # awscc_codestarconnections_sync_configuration (List Resource)
 
-
+List all resources for `AWS::CodeStarConnections::SyncConfiguration` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_controltower_landing_zone List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ControlTower::LandingZone resource type.
 ---
 
 # awscc_controltower_landing_zone (List Resource)
 
-
+List all resources for `AWS::ControlTower::LandingZone` resource type.
 
 ## Example Usage
 

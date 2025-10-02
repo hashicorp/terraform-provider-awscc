@@ -3,12 +3,12 @@
 page_title: "awscc_config_stored_query List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Config::StoredQuery resource type.
 ---
 
 # awscc_config_stored_query (List Resource)
 
-
+List all resources for `AWS::Config::StoredQuery` resource type.
 
 ## Example Usage
 

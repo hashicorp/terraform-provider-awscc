@@ -3,12 +3,12 @@
 page_title: "awscc_mediaconnect_flow_entitlement List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MediaConnect::FlowEntitlement resource type.
 ---
 
 # awscc_mediaconnect_flow_entitlement (List Resource)
 
-
+List all resources for `AWS::MediaConnect::FlowEntitlement` resource type.
 
 ## Example Usage
 

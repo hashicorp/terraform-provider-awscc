@@ -3,12 +3,12 @@
 page_title: "awscc_ses_mail_manager_address_list List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SES::MailManagerAddressList resource type.
 ---
 
 # awscc_ses_mail_manager_address_list (List Resource)
 
-
+List all resources for `AWS::SES::MailManagerAddressList` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_globalaccelerator_accelerator List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::GlobalAccelerator::Accelerator resource type.
 ---
 
 # awscc_globalaccelerator_accelerator (List Resource)
 
-
+List all resources for `AWS::GlobalAccelerator::Accelerator` resource type.
 
 ## Example Usage
 

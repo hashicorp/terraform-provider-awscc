@@ -3,12 +3,12 @@
 page_title: "awscc_networkmanager_core_network List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::NetworkManager::CoreNetwork resource type.
 ---
 
 # awscc_networkmanager_core_network (List Resource)
 
-
+List all resources for `AWS::NetworkManager::CoreNetwork` resource type.
 
 ## Example Usage
 

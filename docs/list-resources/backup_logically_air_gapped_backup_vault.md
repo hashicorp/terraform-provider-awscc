@@ -3,12 +3,12 @@
 page_title: "awscc_backup_logically_air_gapped_backup_vault List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Backup::LogicallyAirGappedBackupVault resource type.
 ---
 
 # awscc_backup_logically_air_gapped_backup_vault (List Resource)
 
-
+List all resources for `AWS::Backup::LogicallyAirGappedBackupVault` resource type.
 
 ## Example Usage
 

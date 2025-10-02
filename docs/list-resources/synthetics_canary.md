@@ -3,12 +3,12 @@
 page_title: "awscc_synthetics_canary List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Synthetics::Canary resource type.
 ---
 
 # awscc_synthetics_canary (List Resource)
 
-
+List all resources for `AWS::Synthetics::Canary` resource type.
 
 ## Example Usage
 

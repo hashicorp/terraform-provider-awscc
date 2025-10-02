@@ -3,12 +3,12 @@
 page_title: "awscc_servicecatalogappregistry_attribute_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ServiceCatalogAppRegistry::AttributeGroup resource type.
 ---
 
 # awscc_servicecatalogappregistry_attribute_group (List Resource)
 
-
+List all resources for `AWS::ServiceCatalogAppRegistry::AttributeGroup` resource type.
 
 ## Example Usage
 

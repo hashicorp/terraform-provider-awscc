@@ -3,12 +3,12 @@
 page_title: "awscc_lightsail_static_ip List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Lightsail::StaticIp resource type.
 ---
 
 # awscc_lightsail_static_ip (List Resource)
 
-
+List all resources for `AWS::Lightsail::StaticIp` resource type.
 
 ## Example Usage
 

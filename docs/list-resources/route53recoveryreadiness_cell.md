@@ -3,12 +3,12 @@
 page_title: "awscc_route53recoveryreadiness_cell List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Route53RecoveryReadiness::Cell resource type.
 ---
 
 # awscc_route53recoveryreadiness_cell (List Resource)
 
-
+List all resources for `AWS::Route53RecoveryReadiness::Cell` resource type.
 
 ## Example Usage
 

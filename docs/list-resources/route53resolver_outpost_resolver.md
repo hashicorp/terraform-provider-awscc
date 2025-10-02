@@ -3,12 +3,12 @@
 page_title: "awscc_route53resolver_outpost_resolver List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Route53Resolver::OutpostResolver resource type.
 ---
 
 # awscc_route53resolver_outpost_resolver (List Resource)
 
-
+List all resources for `AWS::Route53Resolver::OutpostResolver` resource type.
 
 ## Example Usage
 

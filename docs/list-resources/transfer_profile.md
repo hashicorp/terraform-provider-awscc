@@ -3,12 +3,12 @@
 page_title: "awscc_transfer_profile List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Transfer::Profile resource type.
 ---
 
 # awscc_transfer_profile (List Resource)
 
-
+List all resources for `AWS::Transfer::Profile` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_sso_permission_set List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SSO::PermissionSet resource type.
 ---
 
 # awscc_sso_permission_set (List Resource)
 
-
+List all resources for `AWS::SSO::PermissionSet` resource type.
 
 ## Example Usage
 

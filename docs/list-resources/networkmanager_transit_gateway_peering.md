@@ -3,12 +3,12 @@
 page_title: "awscc_networkmanager_transit_gateway_peering List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::NetworkManager::TransitGatewayPeering resource type.
 ---
 
 # awscc_networkmanager_transit_gateway_peering (List Resource)
 
-
+List all resources for `AWS::NetworkManager::TransitGatewayPeering` resource type.
 
 ## Example Usage
 

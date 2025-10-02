@@ -3,12 +3,12 @@
 page_title: "awscc_chatbot_slack_channel_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Chatbot::SlackChannelConfiguration resource type.
 ---
 
 # awscc_chatbot_slack_channel_configuration (List Resource)
 
-
+List all resources for `AWS::Chatbot::SlackChannelConfiguration` resource type.
 
 ## Example Usage
 

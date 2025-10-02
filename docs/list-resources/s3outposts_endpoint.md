@@ -3,12 +3,12 @@
 page_title: "awscc_s3outposts_endpoint List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::S3Outposts::Endpoint resource type.
 ---
 
 # awscc_s3outposts_endpoint (List Resource)
 
-
+List all resources for `AWS::S3Outposts::Endpoint` resource type.
 
 ## Example Usage
 

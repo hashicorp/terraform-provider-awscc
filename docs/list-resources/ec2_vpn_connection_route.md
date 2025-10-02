@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_vpn_connection_route List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::VPNConnectionRoute resource type.
 ---
 
 # awscc_ec2_vpn_connection_route (List Resource)
 
-
+List all resources for `AWS::EC2::VPNConnectionRoute` resource type.
 
 ## Example Usage
 

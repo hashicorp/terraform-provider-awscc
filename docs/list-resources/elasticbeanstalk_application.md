@@ -3,12 +3,12 @@
 page_title: "awscc_elasticbeanstalk_application List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ElasticBeanstalk::Application resource type.
 ---
 
 # awscc_elasticbeanstalk_application (List Resource)
 
-
+List all resources for `AWS::ElasticBeanstalk::Application` resource type.
 
 ## Example Usage
 

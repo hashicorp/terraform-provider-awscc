@@ -3,12 +3,12 @@
 page_title: "awscc_sagemaker_model_package List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SageMaker::ModelPackage resource type.
 ---
 
 # awscc_sagemaker_model_package (List Resource)
 
-
+List all resources for `AWS::SageMaker::ModelPackage` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_guardduty_member List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::GuardDuty::Member resource type.
 ---
 
 # awscc_guardduty_member (List Resource)
 
-
+List all resources for `AWS::GuardDuty::Member` resource type.
 
 ## Example Usage
 

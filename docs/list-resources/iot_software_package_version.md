@@ -3,12 +3,12 @@
 page_title: "awscc_iot_software_package_version List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoT::SoftwarePackageVersion resource type.
 ---
 
 # awscc_iot_software_package_version (List Resource)
 
-
+List all resources for `AWS::IoT::SoftwarePackageVersion` resource type.
 
 ## Example Usage
 

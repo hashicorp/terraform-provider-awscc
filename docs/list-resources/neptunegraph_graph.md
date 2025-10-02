@@ -3,12 +3,12 @@
 page_title: "awscc_neptunegraph_graph List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::NeptuneGraph::Graph resource type.
 ---
 
 # awscc_neptunegraph_graph (List Resource)
 
-
+List all resources for `AWS::NeptuneGraph::Graph` resource type.
 
 ## Example Usage
 

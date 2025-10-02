@@ -3,12 +3,12 @@
 page_title: "awscc_neptune_db_parameter_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Neptune::DBParameterGroup resource type.
 ---
 
 # awscc_neptune_db_parameter_group (List Resource)
 
-
+List all resources for `AWS::Neptune::DBParameterGroup` resource type.
 
 ## Example Usage
 

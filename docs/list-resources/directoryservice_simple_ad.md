@@ -3,12 +3,12 @@
 page_title: "awscc_directoryservice_simple_ad List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DirectoryService::SimpleAD resource type.
 ---
 
 # awscc_directoryservice_simple_ad (List Resource)
 
-
+List all resources for `AWS::DirectoryService::SimpleAD` resource type.
 
 ## Example Usage
 

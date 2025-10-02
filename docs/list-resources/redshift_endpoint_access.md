@@ -3,12 +3,12 @@
 page_title: "awscc_redshift_endpoint_access List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Redshift::EndpointAccess resource type.
 ---
 
 # awscc_redshift_endpoint_access (List Resource)
 
-
+List all resources for `AWS::Redshift::EndpointAccess` resource type.
 
 ## Example Usage
 

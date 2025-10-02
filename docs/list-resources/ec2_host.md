@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_host List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::Host resource type.
 ---
 
 # awscc_ec2_host (List Resource)
 
-
+List all resources for `AWS::EC2::Host` resource type.
 
 ## Example Usage
 

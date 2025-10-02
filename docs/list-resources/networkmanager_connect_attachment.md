@@ -3,12 +3,12 @@
 page_title: "awscc_networkmanager_connect_attachment List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::NetworkManager::ConnectAttachment resource type.
 ---
 
 # awscc_networkmanager_connect_attachment (List Resource)
 
-
+List all resources for `AWS::NetworkManager::ConnectAttachment` resource type.
 
 ## Example Usage
 

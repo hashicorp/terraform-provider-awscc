@@ -3,12 +3,12 @@
 page_title: "awscc_stepfunctions_state_machine List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::StepFunctions::StateMachine resource type.
 ---
 
 # awscc_stepfunctions_state_machine (List Resource)
 
-
+List all resources for `AWS::StepFunctions::StateMachine` resource type.
 
 ## Example Usage
 

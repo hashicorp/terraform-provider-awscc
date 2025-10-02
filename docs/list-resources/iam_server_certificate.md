@@ -3,12 +3,12 @@
 page_title: "awscc_iam_server_certificate List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IAM::ServerCertificate resource type.
 ---
 
 # awscc_iam_server_certificate (List Resource)
 
-
+List all resources for `AWS::IAM::ServerCertificate` resource type.
 
 ## Example Usage
 

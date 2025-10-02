@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_launch_template List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::LaunchTemplate resource type.
 ---
 
 # awscc_ec2_launch_template (List Resource)
 
-
+List all resources for `AWS::EC2::LaunchTemplate` resource type.
 
 ## Example Usage
 

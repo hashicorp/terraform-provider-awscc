@@ -3,12 +3,12 @@
 page_title: "awscc_imagebuilder_image_recipe List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ImageBuilder::ImageRecipe resource type.
 ---
 
 # awscc_imagebuilder_image_recipe (List Resource)
 
-
+List all resources for `AWS::ImageBuilder::ImageRecipe` resource type.
 
 ## Example Usage
 

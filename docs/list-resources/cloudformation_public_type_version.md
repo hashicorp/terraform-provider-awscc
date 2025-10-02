@@ -3,12 +3,12 @@
 page_title: "awscc_cloudformation_public_type_version List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudFormation::PublicTypeVersion resource type.
 ---
 
 # awscc_cloudformation_public_type_version (List Resource)
 
-
+List all resources for `AWS::CloudFormation::PublicTypeVersion` resource type.
 
 ## Example Usage
 

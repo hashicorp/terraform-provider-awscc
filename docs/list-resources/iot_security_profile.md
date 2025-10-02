@@ -3,12 +3,12 @@
 page_title: "awscc_iot_security_profile List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoT::SecurityProfile resource type.
 ---
 
 # awscc_iot_security_profile (List Resource)
 
-
+List all resources for `AWS::IoT::SecurityProfile` resource type.
 
 ## Example Usage
 

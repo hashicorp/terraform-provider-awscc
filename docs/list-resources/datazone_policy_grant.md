@@ -3,12 +3,12 @@
 page_title: "awscc_datazone_policy_grant List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DataZone::PolicyGrant resource type.
 ---
 
 # awscc_datazone_policy_grant (List Resource)
 
-
+List all resources for `AWS::DataZone::PolicyGrant` resource type.
 
 ## Example Usage
 

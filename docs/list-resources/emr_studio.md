@@ -3,12 +3,12 @@
 page_title: "awscc_emr_studio List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EMR::Studio resource type.
 ---
 
 # awscc_emr_studio (List Resource)
 
-
+List all resources for `AWS::EMR::Studio` resource type.
 
 ## Example Usage
 

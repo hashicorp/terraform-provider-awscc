@@ -3,12 +3,12 @@
 page_title: "awscc_lex_bot List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Lex::Bot resource type.
 ---
 
 # awscc_lex_bot (List Resource)
 
-
+List all resources for `AWS::Lex::Bot` resource type.
 
 ## Example Usage
 

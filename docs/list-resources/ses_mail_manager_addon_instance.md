@@ -3,12 +3,12 @@
 page_title: "awscc_ses_mail_manager_addon_instance List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SES::MailManagerAddonInstance resource type.
 ---
 
 # awscc_ses_mail_manager_addon_instance (List Resource)
 
-
+List all resources for `AWS::SES::MailManagerAddonInstance` resource type.
 
 ## Example Usage
 

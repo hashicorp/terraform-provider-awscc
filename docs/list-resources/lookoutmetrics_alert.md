@@ -3,12 +3,12 @@
 page_title: "awscc_lookoutmetrics_alert List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::LookoutMetrics::Alert resource type.
 ---
 
 # awscc_lookoutmetrics_alert (List Resource)
 
-
+List all resources for `AWS::LookoutMetrics::Alert` resource type.
 
 ## Example Usage
 

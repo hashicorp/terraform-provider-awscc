@@ -3,12 +3,12 @@
 page_title: "awscc_finspace_environment List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::FinSpace::Environment resource type.
 ---
 
 # awscc_finspace_environment (List Resource)
 
-
+List all resources for `AWS::FinSpace::Environment` resource type.
 
 ## Example Usage
 

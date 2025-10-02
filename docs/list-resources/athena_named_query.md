@@ -3,12 +3,12 @@
 page_title: "awscc_athena_named_query List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Athena::NamedQuery resource type.
 ---
 
 # awscc_athena_named_query (List Resource)
 
-
+List all resources for `AWS::Athena::NamedQuery` resource type.
 
 ## Example Usage
 

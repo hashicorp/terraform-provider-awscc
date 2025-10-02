@@ -3,12 +3,12 @@
 page_title: "awscc_codegurureviewer_repository_association List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CodeGuruReviewer::RepositoryAssociation resource type.
 ---
 
 # awscc_codegurureviewer_repository_association (List Resource)
 
-
+List all resources for `AWS::CodeGuruReviewer::RepositoryAssociation` resource type.
 
 ## Example Usage
 

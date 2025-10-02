@@ -3,12 +3,12 @@
 page_title: "awscc_elasticloadbalancingv2_trust_store List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ElasticLoadBalancingV2::TrustStore resource type.
 ---
 
 # awscc_elasticloadbalancingv2_trust_store (List Resource)
 
-
+List all resources for `AWS::ElasticLoadBalancingV2::TrustStore` resource type.
 
 ## Example Usage
 

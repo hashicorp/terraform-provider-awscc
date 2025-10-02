@@ -3,12 +3,12 @@
 page_title: "awscc_batch_consumable_resource List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Batch::ConsumableResource resource type.
 ---
 
 # awscc_batch_consumable_resource (List Resource)
 
-
+List all resources for `AWS::Batch::ConsumableResource` resource type.
 
 ## Example Usage
 

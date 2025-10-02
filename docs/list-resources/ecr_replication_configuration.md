@@ -3,12 +3,12 @@
 page_title: "awscc_ecr_replication_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ECR::ReplicationConfiguration resource type.
 ---
 
 # awscc_ecr_replication_configuration (List Resource)
 
-
+List all resources for `AWS::ECR::ReplicationConfiguration` resource type.
 
 ## Example Usage
 

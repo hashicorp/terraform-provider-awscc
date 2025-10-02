@@ -3,12 +3,12 @@
 page_title: "awscc_iotwireless_device_profile List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTWireless::DeviceProfile resource type.
 ---
 
 # awscc_iotwireless_device_profile (List Resource)
 
-
+List all resources for `AWS::IoTWireless::DeviceProfile` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_ecr_pull_through_cache_rule List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ECR::PullThroughCacheRule resource type.
 ---
 
 # awscc_ecr_pull_through_cache_rule (List Resource)
 
-
+List all resources for `AWS::ECR::PullThroughCacheRule` resource type.
 
 ## Example Usage
 

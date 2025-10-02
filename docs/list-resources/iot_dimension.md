@@ -3,12 +3,12 @@
 page_title: "awscc_iot_dimension List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoT::Dimension resource type.
 ---
 
 # awscc_iot_dimension (List Resource)
 
-
+List all resources for `AWS::IoT::Dimension` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_datasync_location_s3 List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DataSync::LocationS3 resource type.
 ---
 
 # awscc_datasync_location_s3 (List Resource)
 
-
+List all resources for `AWS::DataSync::LocationS3` resource type.
 
 ## Example Usage
 

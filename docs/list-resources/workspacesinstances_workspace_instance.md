@@ -3,12 +3,12 @@
 page_title: "awscc_workspacesinstances_workspace_instance List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::WorkspacesInstances::WorkspaceInstance resource type.
 ---
 
 # awscc_workspacesinstances_workspace_instance (List Resource)
 
-
+List all resources for `AWS::WorkspacesInstances::WorkspaceInstance` resource type.
 
 ## Example Usage
 

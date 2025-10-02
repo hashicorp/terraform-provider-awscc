@@ -3,12 +3,12 @@
 page_title: "awscc_location_geofence_collection List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Location::GeofenceCollection resource type.
 ---
 
 # awscc_location_geofence_collection (List Resource)
 
-
+List all resources for `AWS::Location::GeofenceCollection` resource type.
 
 ## Example Usage
 

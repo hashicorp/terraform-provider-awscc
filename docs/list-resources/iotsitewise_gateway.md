@@ -3,12 +3,12 @@
 page_title: "awscc_iotsitewise_gateway List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTSiteWise::Gateway resource type.
 ---
 
 # awscc_iotsitewise_gateway (List Resource)
 
-
+List all resources for `AWS::IoTSiteWise::Gateway` resource type.
 
 ## Example Usage
 

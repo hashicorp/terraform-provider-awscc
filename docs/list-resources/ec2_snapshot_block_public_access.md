@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_snapshot_block_public_access List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::SnapshotBlockPublicAccess resource type.
 ---
 
 # awscc_ec2_snapshot_block_public_access (List Resource)
 
-
+List all resources for `AWS::EC2::SnapshotBlockPublicAccess` resource type.
 
 ## Example Usage
 

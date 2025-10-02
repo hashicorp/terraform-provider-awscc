@@ -3,12 +3,12 @@
 page_title: "awscc_supportapp_account_alias List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SupportApp::AccountAlias resource type.
 ---
 
 # awscc_supportapp_account_alias (List Resource)
 
-
+List all resources for `AWS::SupportApp::AccountAlias` resource type.
 
 ## Example Usage
 

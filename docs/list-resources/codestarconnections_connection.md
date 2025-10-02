@@ -3,12 +3,12 @@
 page_title: "awscc_codestarconnections_connection List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CodeStarConnections::Connection resource type.
 ---
 
 # awscc_codestarconnections_connection (List Resource)
 
-
+List all resources for `AWS::CodeStarConnections::Connection` resource type.
 
 ## Example Usage
 

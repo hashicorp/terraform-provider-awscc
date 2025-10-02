@@ -3,12 +3,12 @@
 page_title: "awscc_elasticloadbalancingv2_target_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ElasticLoadBalancingV2::TargetGroup resource type.
 ---
 
 # awscc_elasticloadbalancingv2_target_group (List Resource)
 
-
+List all resources for `AWS::ElasticLoadBalancingV2::TargetGroup` resource type.
 
 ## Example Usage
 

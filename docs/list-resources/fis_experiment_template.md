@@ -3,12 +3,12 @@
 page_title: "awscc_fis_experiment_template List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::FIS::ExperimentTemplate resource type.
 ---
 
 # awscc_fis_experiment_template (List Resource)
 
-
+List all resources for `AWS::FIS::ExperimentTemplate` resource type.
 
 ## Example Usage
 

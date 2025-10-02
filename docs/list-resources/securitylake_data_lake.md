@@ -3,12 +3,12 @@
 page_title: "awscc_securitylake_data_lake List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SecurityLake::DataLake resource type.
 ---
 
 # awscc_securitylake_data_lake (List Resource)
 
-
+List all resources for `AWS::SecurityLake::DataLake` resource type.
 
 ## Example Usage
 

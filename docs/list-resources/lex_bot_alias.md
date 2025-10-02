@@ -3,12 +3,12 @@
 page_title: "awscc_lex_bot_alias List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Lex::BotAlias resource type.
 ---
 
 # awscc_lex_bot_alias (List Resource)
 
-
+List all resources for `AWS::Lex::BotAlias` resource type.
 
 ## Example Usage
 

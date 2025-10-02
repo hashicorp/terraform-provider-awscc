@@ -3,12 +3,12 @@
 page_title: "awscc_ssmquicksetup_configuration_manager List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SSMQuickSetup::ConfigurationManager resource type.
 ---
 
 # awscc_ssmquicksetup_configuration_manager (List Resource)
 
-
+List all resources for `AWS::SSMQuickSetup::ConfigurationManager` resource type.
 
 ## Example Usage
 

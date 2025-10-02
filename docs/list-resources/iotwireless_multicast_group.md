@@ -3,12 +3,12 @@
 page_title: "awscc_iotwireless_multicast_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTWireless::MulticastGroup resource type.
 ---
 
 # awscc_iotwireless_multicast_group (List Resource)
 
-
+List all resources for `AWS::IoTWireless::MulticastGroup` resource type.
 
 ## Example Usage
 

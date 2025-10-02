@@ -3,12 +3,12 @@
 page_title: "awscc_events_rule List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Events::Rule resource type.
 ---
 
 # awscc_events_rule (List Resource)
 
-
+List all resources for `AWS::Events::Rule` resource type.
 
 ## Example Usage
 

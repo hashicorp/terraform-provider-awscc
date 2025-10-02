@@ -3,12 +3,12 @@
 page_title: "awscc_connect_approved_origin List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Connect::ApprovedOrigin resource type.
 ---
 
 # awscc_connect_approved_origin (List Resource)
 
-
+List all resources for `AWS::Connect::ApprovedOrigin` resource type.
 
 ## Example Usage
 

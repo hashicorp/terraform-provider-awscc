@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_instance List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::Instance resource type.
 ---
 
 # awscc_ec2_instance (List Resource)
 
-
+List all resources for `AWS::EC2::Instance` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_route53recoveryreadiness_resource_set List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Route53RecoveryReadiness::ResourceSet resource type.
 ---
 
 # awscc_route53recoveryreadiness_resource_set (List Resource)
 
-
+List all resources for `AWS::Route53RecoveryReadiness::ResourceSet` resource type.
 
 ## Example Usage
 

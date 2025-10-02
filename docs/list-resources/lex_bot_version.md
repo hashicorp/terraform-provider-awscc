@@ -3,12 +3,12 @@
 page_title: "awscc_lex_bot_version List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Lex::BotVersion resource type.
 ---
 
 # awscc_lex_bot_version (List Resource)
 
-
+List all resources for `AWS::Lex::BotVersion` resource type.
 
 ## Example Usage
 

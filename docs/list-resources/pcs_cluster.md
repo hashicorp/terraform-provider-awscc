@@ -3,12 +3,12 @@
 page_title: "awscc_pcs_cluster List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::PCS::Cluster resource type.
 ---
 
 # awscc_pcs_cluster (List Resource)
 
-
+List all resources for `AWS::PCS::Cluster` resource type.
 
 ## Example Usage
 

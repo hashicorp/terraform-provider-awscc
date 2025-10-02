@@ -3,12 +3,12 @@
 page_title: "awscc_ses_template List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SES::Template resource type.
 ---
 
 # awscc_ses_template (List Resource)
 
-
+List all resources for `AWS::SES::Template` resource type.
 
 ## Example Usage
 

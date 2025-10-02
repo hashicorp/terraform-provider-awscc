@@ -3,12 +3,12 @@
 page_title: "awscc_amplify_app List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Amplify::App resource type.
 ---
 
 # awscc_amplify_app (List Resource)
 
-
+List all resources for `AWS::Amplify::App` resource type.
 
 ## Example Usage
 

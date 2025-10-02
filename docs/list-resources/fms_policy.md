@@ -3,12 +3,12 @@
 page_title: "awscc_fms_policy List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::FMS::Policy resource type.
 ---
 
 # awscc_fms_policy (List Resource)
 
-
+List all resources for `AWS::FMS::Policy` resource type.
 
 ## Example Usage
 

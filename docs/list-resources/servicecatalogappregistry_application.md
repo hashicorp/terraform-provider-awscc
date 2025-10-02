@@ -3,12 +3,12 @@
 page_title: "awscc_servicecatalogappregistry_application List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ServiceCatalogAppRegistry::Application resource type.
 ---
 
 # awscc_servicecatalogappregistry_application (List Resource)
 
-
+List all resources for `AWS::ServiceCatalogAppRegistry::Application` resource type.
 
 ## Example Usage
 

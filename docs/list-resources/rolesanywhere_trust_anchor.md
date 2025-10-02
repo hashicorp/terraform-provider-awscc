@@ -3,12 +3,12 @@
 page_title: "awscc_rolesanywhere_trust_anchor List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::RolesAnywhere::TrustAnchor resource type.
 ---
 
 # awscc_rolesanywhere_trust_anchor (List Resource)
 
-
+List all resources for `AWS::RolesAnywhere::TrustAnchor` resource type.
 
 ## Example Usage
 

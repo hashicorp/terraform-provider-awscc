@@ -3,12 +3,12 @@
 page_title: "awscc_lambda_event_source_mapping List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Lambda::EventSourceMapping resource type.
 ---
 
 # awscc_lambda_event_source_mapping (List Resource)
 
-
+List all resources for `AWS::Lambda::EventSourceMapping` resource type.
 
 ## Example Usage
 

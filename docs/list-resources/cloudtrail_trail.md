@@ -3,12 +3,12 @@
 page_title: "awscc_cloudtrail_trail List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudTrail::Trail resource type.
 ---
 
 # awscc_cloudtrail_trail (List Resource)
 
-
+List all resources for `AWS::CloudTrail::Trail` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_apigateway_domain_name_access_association List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ApiGateway::DomainNameAccessAssociation resource type.
 ---
 
 # awscc_apigateway_domain_name_access_association (List Resource)
 
-
+List all resources for `AWS::ApiGateway::DomainNameAccessAssociation` resource type.
 
 ## Example Usage
 

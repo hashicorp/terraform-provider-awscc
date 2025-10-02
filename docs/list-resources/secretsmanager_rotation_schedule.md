@@ -3,12 +3,12 @@
 page_title: "awscc_secretsmanager_rotation_schedule List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SecretsManager::RotationSchedule resource type.
 ---
 
 # awscc_secretsmanager_rotation_schedule (List Resource)
 
-
+List all resources for `AWS::SecretsManager::RotationSchedule` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_elasticbeanstalk_application_version List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ElasticBeanstalk::ApplicationVersion resource type.
 ---
 
 # awscc_elasticbeanstalk_application_version (List Resource)
 
-
+List all resources for `AWS::ElasticBeanstalk::ApplicationVersion` resource type.
 
 ## Example Usage
 

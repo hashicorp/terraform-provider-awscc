@@ -3,12 +3,12 @@
 page_title: "awscc_s3tables_table_bucket List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::S3Tables::TableBucket resource type.
 ---
 
 # awscc_s3tables_table_bucket (List Resource)
 
-
+List all resources for `AWS::S3Tables::TableBucket` resource type.
 
 ## Example Usage
 

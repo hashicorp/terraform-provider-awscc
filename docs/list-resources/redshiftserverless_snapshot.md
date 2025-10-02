@@ -3,12 +3,12 @@
 page_title: "awscc_redshiftserverless_snapshot List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::RedshiftServerless::Snapshot resource type.
 ---
 
 # awscc_redshiftserverless_snapshot (List Resource)
 
-
+List all resources for `AWS::RedshiftServerless::Snapshot` resource type.
 
 ## Example Usage
 

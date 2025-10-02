@@ -3,12 +3,12 @@
 page_title: "awscc_appflow_flow List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::AppFlow::Flow resource type.
 ---
 
 # awscc_appflow_flow (List Resource)
 
-
+List all resources for `AWS::AppFlow::Flow` resource type.
 
 ## Example Usage
 

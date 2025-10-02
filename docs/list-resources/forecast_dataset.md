@@ -3,12 +3,12 @@
 page_title: "awscc_forecast_dataset List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Forecast::Dataset resource type.
 ---
 
 # awscc_forecast_dataset (List Resource)
 
-
+List all resources for `AWS::Forecast::Dataset` resource type.
 
 ## Example Usage
 

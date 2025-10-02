@@ -3,12 +3,12 @@
 page_title: "awscc_cloudwatch_composite_alarm List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudWatch::CompositeAlarm resource type.
 ---
 
 # awscc_cloudwatch_composite_alarm (List Resource)
 
-
+List all resources for `AWS::CloudWatch::CompositeAlarm` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_cassandra_type List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Cassandra::Type resource type.
 ---
 
 # awscc_cassandra_type (List Resource)
 
-
+List all resources for `AWS::Cassandra::Type` resource type.
 
 ## Example Usage
 

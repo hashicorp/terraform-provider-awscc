@@ -3,12 +3,12 @@
 page_title: "awscc_macie_custom_data_identifier List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Macie::CustomDataIdentifier resource type.
 ---
 
 # awscc_macie_custom_data_identifier (List Resource)
 
-
+List all resources for `AWS::Macie::CustomDataIdentifier` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_systemsmanagersap_application List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SystemsManagerSAP::Application resource type.
 ---
 
 # awscc_systemsmanagersap_application (List Resource)
 
-
+List all resources for `AWS::SystemsManagerSAP::Application` resource type.
 
 ## Example Usage
 

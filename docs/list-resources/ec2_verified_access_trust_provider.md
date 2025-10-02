@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_verified_access_trust_provider List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::VerifiedAccessTrustProvider resource type.
 ---
 
 # awscc_ec2_verified_access_trust_provider (List Resource)
 
-
+List all resources for `AWS::EC2::VerifiedAccessTrustProvider` resource type.
 
 ## Example Usage
 

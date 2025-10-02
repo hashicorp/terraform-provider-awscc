@@ -3,12 +3,12 @@
 page_title: "awscc_medialive_sdi_source List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MediaLive::SdiSource resource type.
 ---
 
 # awscc_medialive_sdi_source (List Resource)
 
-
+List all resources for `AWS::MediaLive::SdiSource` resource type.
 
 ## Example Usage
 

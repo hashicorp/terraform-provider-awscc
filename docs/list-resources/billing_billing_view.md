@@ -3,12 +3,12 @@
 page_title: "awscc_billing_billing_view List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Billing::BillingView resource type.
 ---
 
 # awscc_billing_billing_view (List Resource)
 
-
+List all resources for `AWS::Billing::BillingView` resource type.
 
 ## Example Usage
 

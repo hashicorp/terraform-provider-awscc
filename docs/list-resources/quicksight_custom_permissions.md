@@ -3,12 +3,12 @@
 page_title: "awscc_quicksight_custom_permissions List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::QuickSight::CustomPermissions resource type.
 ---
 
 # awscc_quicksight_custom_permissions (List Resource)
 
-
+List all resources for `AWS::QuickSight::CustomPermissions` resource type.
 
 ## Example Usage
 

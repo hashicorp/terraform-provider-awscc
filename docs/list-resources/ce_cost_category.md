@@ -3,12 +3,12 @@
 page_title: "awscc_ce_cost_category List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CE::CostCategory resource type.
 ---
 
 # awscc_ce_cost_category (List Resource)
 
-
+List all resources for `AWS::CE::CostCategory` resource type.
 
 ## Example Usage
 

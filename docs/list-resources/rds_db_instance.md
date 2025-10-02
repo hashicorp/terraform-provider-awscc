@@ -3,12 +3,12 @@
 page_title: "awscc_rds_db_instance List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::RDS::DBInstance resource type.
 ---
 
 # awscc_rds_db_instance (List Resource)
 
-
+List all resources for `AWS::RDS::DBInstance` resource type.
 
 ## Example Usage
 

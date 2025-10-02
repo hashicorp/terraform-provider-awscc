@@ -3,12 +3,12 @@
 page_title: "awscc_devopsguru_log_anomaly_detection_integration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DevOpsGuru::LogAnomalyDetectionIntegration resource type.
 ---
 
 # awscc_devopsguru_log_anomaly_detection_integration (List Resource)
 
-
+List all resources for `AWS::DevOpsGuru::LogAnomalyDetectionIntegration` resource type.
 
 ## Example Usage
 

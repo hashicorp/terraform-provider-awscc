@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_traffic_mirror_filter List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::TrafficMirrorFilter resource type.
 ---
 
 # awscc_ec2_traffic_mirror_filter (List Resource)
 
-
+List all resources for `AWS::EC2::TrafficMirrorFilter` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_servicecatalog_tag_option List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ServiceCatalog::TagOption resource type.
 ---
 
 # awscc_servicecatalog_tag_option (List Resource)
 
-
+List all resources for `AWS::ServiceCatalog::TagOption` resource type.
 
 ## Example Usage
 

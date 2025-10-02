@@ -3,12 +3,12 @@
 page_title: "awscc_config_conformance_pack List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Config::ConformancePack resource type.
 ---
 
 # awscc_config_conformance_pack (List Resource)
 
-
+List all resources for `AWS::Config::ConformancePack` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_ivs_channel List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IVS::Channel resource type.
 ---
 
 # awscc_ivs_channel (List Resource)
 
-
+List all resources for `AWS::IVS::Channel` resource type.
 
 ## Example Usage
 

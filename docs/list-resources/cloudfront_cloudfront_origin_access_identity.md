@@ -3,12 +3,12 @@
 page_title: "awscc_cloudfront_cloudfront_origin_access_identity List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudFront::CloudFrontOriginAccessIdentity resource type.
 ---
 
 # awscc_cloudfront_cloudfront_origin_access_identity (List Resource)
 
-
+List all resources for `AWS::CloudFront::CloudFrontOriginAccessIdentity` resource type.
 
 ## Example Usage
 

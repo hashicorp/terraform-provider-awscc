@@ -3,12 +3,12 @@
 page_title: "awscc_ssmincidents_response_plan List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SSMIncidents::ResponsePlan resource type.
 ---
 
 # awscc_ssmincidents_response_plan (List Resource)
 
-
+List all resources for `AWS::SSMIncidents::ResponsePlan` resource type.
 
 ## Example Usage
 

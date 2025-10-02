@@ -3,12 +3,12 @@
 page_title: "awscc_oam_link List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Oam::Link resource type.
 ---
 
 # awscc_oam_link (List Resource)
 
-
+List all resources for `AWS::Oam::Link` resource type.
 
 ## Example Usage
 

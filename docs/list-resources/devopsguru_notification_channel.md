@@ -3,12 +3,12 @@
 page_title: "awscc_devopsguru_notification_channel List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DevOpsGuru::NotificationChannel resource type.
 ---
 
 # awscc_devopsguru_notification_channel (List Resource)
 
-
+List all resources for `AWS::DevOpsGuru::NotificationChannel` resource type.
 
 ## Example Usage
 

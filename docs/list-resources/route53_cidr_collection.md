@@ -3,12 +3,12 @@
 page_title: "awscc_route53_cidr_collection List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Route53::CidrCollection resource type.
 ---
 
 # awscc_route53_cidr_collection (List Resource)
 
-
+List all resources for `AWS::Route53::CidrCollection` resource type.
 
 ## Example Usage
 

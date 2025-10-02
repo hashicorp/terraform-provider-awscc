@@ -3,12 +3,12 @@
 page_title: "awscc_mwaa_environment List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MWAA::Environment resource type.
 ---
 
 # awscc_mwaa_environment (List Resource)
 
-
+List all resources for `AWS::MWAA::Environment` resource type.
 
 ## Example Usage
 

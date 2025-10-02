@@ -3,12 +3,12 @@
 page_title: "awscc_proton_environment_template List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Proton::EnvironmentTemplate resource type.
 ---
 
 # awscc_proton_environment_template (List Resource)
 
-
+List all resources for `AWS::Proton::EnvironmentTemplate` resource type.
 
 ## Example Usage
 

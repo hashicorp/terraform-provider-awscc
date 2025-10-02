@@ -3,12 +3,12 @@
 page_title: "awscc_rds_global_cluster List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::RDS::GlobalCluster resource type.
 ---
 
 # awscc_rds_global_cluster (List Resource)
 
-
+List all resources for `AWS::RDS::GlobalCluster` resource type.
 
 ## Example Usage
 

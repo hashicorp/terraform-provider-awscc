@@ -3,12 +3,12 @@
 page_title: "awscc_sns_topic List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SNS::Topic resource type.
 ---
 
 # awscc_sns_topic (List Resource)
 
-
+List all resources for `AWS::SNS::Topic` resource type.
 
 ## Example Usage
 

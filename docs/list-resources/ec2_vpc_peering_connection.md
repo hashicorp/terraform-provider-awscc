@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_vpc_peering_connection List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::VPCPeeringConnection resource type.
 ---
 
 # awscc_ec2_vpc_peering_connection (List Resource)
 
-
+List all resources for `AWS::EC2::VPCPeeringConnection` resource type.
 
 ## Example Usage
 

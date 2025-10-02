@@ -3,12 +3,12 @@
 page_title: "awscc_sagemaker_endpoint List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SageMaker::Endpoint resource type.
 ---
 
 # awscc_sagemaker_endpoint (List Resource)
 
-
+List all resources for `AWS::SageMaker::Endpoint` resource type.
 
 ## Example Usage
 

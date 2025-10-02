@@ -3,12 +3,12 @@
 page_title: "awscc_iotsitewise_dataset List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTSiteWise::Dataset resource type.
 ---
 
 # awscc_iotsitewise_dataset (List Resource)
 
-
+List all resources for `AWS::IoTSiteWise::Dataset` resource type.
 
 ## Example Usage
 

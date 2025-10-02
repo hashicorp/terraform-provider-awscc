@@ -3,12 +3,12 @@
 page_title: "awscc_billingconductor_pricing_plan List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::BillingConductor::PricingPlan resource type.
 ---
 
 # awscc_billingconductor_pricing_plan (List Resource)
 
-
+List all resources for `AWS::BillingConductor::PricingPlan` resource type.
 
 ## Example Usage
 

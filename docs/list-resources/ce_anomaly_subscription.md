@@ -3,12 +3,12 @@
 page_title: "awscc_ce_anomaly_subscription List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CE::AnomalySubscription resource type.
 ---
 
 # awscc_ce_anomaly_subscription (List Resource)
 
-
+List all resources for `AWS::CE::AnomalySubscription` resource type.
 
 ## Example Usage
 

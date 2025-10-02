@@ -3,12 +3,12 @@
 page_title: "awscc_aiops_investigation_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::AIOps::InvestigationGroup resource type.
 ---
 
 # awscc_aiops_investigation_group (List Resource)
 
-
+List all resources for `AWS::AIOps::InvestigationGroup` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_mediapackage_packaging_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MediaPackage::PackagingGroup resource type.
 ---
 
 # awscc_mediapackage_packaging_group (List Resource)
 
-
+List all resources for `AWS::MediaPackage::PackagingGroup` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_paymentcryptography_alias List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::PaymentCryptography::Alias resource type.
 ---
 
 # awscc_paymentcryptography_alias (List Resource)
 
-
+List all resources for `AWS::PaymentCryptography::Alias` resource type.
 
 ## Example Usage
 

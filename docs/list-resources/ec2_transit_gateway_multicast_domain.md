@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_transit_gateway_multicast_domain List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::TransitGatewayMulticastDomain resource type.
 ---
 
 # awscc_ec2_transit_gateway_multicast_domain (List Resource)
 
-
+List all resources for `AWS::EC2::TransitGatewayMulticastDomain` resource type.
 
 ## Example Usage
 

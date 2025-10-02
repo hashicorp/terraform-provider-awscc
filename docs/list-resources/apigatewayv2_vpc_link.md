@@ -3,12 +3,12 @@
 page_title: "awscc_apigatewayv2_vpc_link List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ApiGatewayV2::VpcLink resource type.
 ---
 
 # awscc_apigatewayv2_vpc_link (List Resource)
 
-
+List all resources for `AWS::ApiGatewayV2::VpcLink` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_launchwizard_deployment List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::LaunchWizard::Deployment resource type.
 ---
 
 # awscc_launchwizard_deployment (List Resource)
 
-
+List all resources for `AWS::LaunchWizard::Deployment` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_connect_traffic_distribution_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Connect::TrafficDistributionGroup resource type.
 ---
 
 # awscc_connect_traffic_distribution_group (List Resource)
 
-
+List all resources for `AWS::Connect::TrafficDistributionGroup` resource type.
 
 ## Example Usage
 

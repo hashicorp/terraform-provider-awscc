@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_traffic_mirror_session List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::TrafficMirrorSession resource type.
 ---
 
 # awscc_ec2_traffic_mirror_session (List Resource)
 
-
+List all resources for `AWS::EC2::TrafficMirrorSession` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_dms_instance_profile List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DMS::InstanceProfile resource type.
 ---
 
 # awscc_dms_instance_profile (List Resource)
 
-
+List all resources for `AWS::DMS::InstanceProfile` resource type.
 
 ## Example Usage
 

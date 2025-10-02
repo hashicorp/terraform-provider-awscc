@@ -3,12 +3,12 @@
 page_title: "awscc_frauddetector_event_type List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::FraudDetector::EventType resource type.
 ---
 
 # awscc_frauddetector_event_type (List Resource)
 
-
+List all resources for `AWS::FraudDetector::EventType` resource type.
 
 ## Example Usage
 

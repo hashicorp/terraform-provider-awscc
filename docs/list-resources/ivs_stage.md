@@ -3,12 +3,12 @@
 page_title: "awscc_ivs_stage List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IVS::Stage resource type.
 ---
 
 # awscc_ivs_stage (List Resource)
 
-
+List all resources for `AWS::IVS::Stage` resource type.
 
 ## Example Usage
 

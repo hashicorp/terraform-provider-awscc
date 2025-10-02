@@ -3,12 +3,12 @@
 page_title: "awscc_neptune_db_cluster List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Neptune::DBCluster resource type.
 ---
 
 # awscc_neptune_db_cluster (List Resource)
 
-
+List all resources for `AWS::Neptune::DBCluster` resource type.
 
 ## Example Usage
 

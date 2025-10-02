@@ -3,12 +3,12 @@
 page_title: "awscc_workspacesweb_user_access_logging_settings List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::WorkSpacesWeb::UserAccessLoggingSettings resource type.
 ---
 
 # awscc_workspacesweb_user_access_logging_settings (List Resource)
 
-
+List all resources for `AWS::WorkSpacesWeb::UserAccessLoggingSettings` resource type.
 
 ## Example Usage
 

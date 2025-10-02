@@ -3,12 +3,12 @@
 page_title: "awscc_omics_variant_store List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Omics::VariantStore resource type.
 ---
 
 # awscc_omics_variant_store (List Resource)
 
-
+List all resources for `AWS::Omics::VariantStore` resource type.
 
 ## Example Usage
 

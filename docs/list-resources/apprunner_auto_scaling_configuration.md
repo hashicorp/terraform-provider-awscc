@@ -3,12 +3,12 @@
 page_title: "awscc_apprunner_auto_scaling_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::AppRunner::AutoScalingConfiguration resource type.
 ---
 
 # awscc_apprunner_auto_scaling_configuration (List Resource)
 
-
+List all resources for `AWS::AppRunner::AutoScalingConfiguration` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_networkmanager_direct_connect_gateway_attachment List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::NetworkManager::DirectConnectGatewayAttachment resource type.
 ---
 
 # awscc_networkmanager_direct_connect_gateway_attachment (List Resource)
 
-
+List all resources for `AWS::NetworkManager::DirectConnectGatewayAttachment` resource type.
 
 ## Example Usage
 

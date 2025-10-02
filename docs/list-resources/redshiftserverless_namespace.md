@@ -3,12 +3,12 @@
 page_title: "awscc_redshiftserverless_namespace List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::RedshiftServerless::Namespace resource type.
 ---
 
 # awscc_redshiftserverless_namespace (List Resource)
 
-
+List all resources for `AWS::RedshiftServerless::Namespace` resource type.
 
 ## Example Usage
 

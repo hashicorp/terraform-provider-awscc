@@ -3,12 +3,12 @@
 page_title: "awscc_shield_protection List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Shield::Protection resource type.
 ---
 
 # awscc_shield_protection (List Resource)
 
-
+List all resources for `AWS::Shield::Protection` resource type.
 
 ## Example Usage
 

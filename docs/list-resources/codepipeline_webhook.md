@@ -3,12 +3,12 @@
 page_title: "awscc_codepipeline_webhook List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CodePipeline::Webhook resource type.
 ---
 
 # awscc_codepipeline_webhook (List Resource)
 
-
+List all resources for `AWS::CodePipeline::Webhook` resource type.
 
 ## Example Usage
 

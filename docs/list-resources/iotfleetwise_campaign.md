@@ -3,12 +3,12 @@
 page_title: "awscc_iotfleetwise_campaign List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTFleetWise::Campaign resource type.
 ---
 
 # awscc_iotfleetwise_campaign (List Resource)
 
-
+List all resources for `AWS::IoTFleetWise::Campaign` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_ivs_playback_key_pair List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IVS::PlaybackKeyPair resource type.
 ---
 
 # awscc_ivs_playback_key_pair (List Resource)
 
-
+List all resources for `AWS::IVS::PlaybackKeyPair` resource type.
 
 ## Example Usage
 

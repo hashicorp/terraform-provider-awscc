@@ -3,12 +3,12 @@
 page_title: "awscc_sagemaker_inference_component List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SageMaker::InferenceComponent resource type.
 ---
 
 # awscc_sagemaker_inference_component (List Resource)
 
-
+List all resources for `AWS::SageMaker::InferenceComponent` resource type.
 
 ## Example Usage
 

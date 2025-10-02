@@ -3,12 +3,12 @@
 page_title: "awscc_ecs_cluster_capacity_provider_associations List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ECS::ClusterCapacityProviderAssociations resource type.
 ---
 
 # awscc_ecs_cluster_capacity_provider_associations (List Resource)
 
-
+List all resources for `AWS::ECS::ClusterCapacityProviderAssociations` resource type.
 
 ## Example Usage
 

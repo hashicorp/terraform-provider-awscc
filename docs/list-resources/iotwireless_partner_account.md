@@ -3,12 +3,12 @@
 page_title: "awscc_iotwireless_partner_account List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTWireless::PartnerAccount resource type.
 ---
 
 # awscc_iotwireless_partner_account (List Resource)
 
-
+List all resources for `AWS::IoTWireless::PartnerAccount` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_aps_scraper List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::APS::Scraper resource type.
 ---
 
 # awscc_aps_scraper (List Resource)
 
-
+List all resources for `AWS::APS::Scraper` resource type.
 
 ## Example Usage
 

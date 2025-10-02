@@ -3,12 +3,12 @@
 page_title: "awscc_lex_resource_policy List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Lex::ResourcePolicy resource type.
 ---
 
 # awscc_lex_resource_policy (List Resource)
 
-
+List all resources for `AWS::Lex::ResourcePolicy` resource type.
 
 ## Example Usage
 

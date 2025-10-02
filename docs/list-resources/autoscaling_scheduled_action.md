@@ -3,12 +3,12 @@
 page_title: "awscc_autoscaling_scheduled_action List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::AutoScaling::ScheduledAction resource type.
 ---
 
 # awscc_autoscaling_scheduled_action (List Resource)
 
-
+List all resources for `AWS::AutoScaling::ScheduledAction` resource type.
 
 ## Example Usage
 

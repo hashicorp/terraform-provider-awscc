@@ -3,12 +3,12 @@
 page_title: "awscc_acmpca_certificate_authority List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ACMPCA::CertificateAuthority resource type.
 ---
 
 # awscc_acmpca_certificate_authority (List Resource)
 
-
+List all resources for `AWS::ACMPCA::CertificateAuthority` resource type.
 
 ## Example Usage
 

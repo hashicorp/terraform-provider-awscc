@@ -3,12 +3,12 @@
 page_title: "awscc_rds_db_cluster List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::RDS::DBCluster resource type.
 ---
 
 # awscc_rds_db_cluster (List Resource)
 
-
+List all resources for `AWS::RDS::DBCluster` resource type.
 
 ## Example Usage
 

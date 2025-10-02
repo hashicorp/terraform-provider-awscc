@@ -3,12 +3,12 @@
 page_title: "awscc_connect_instance List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Connect::Instance resource type.
 ---
 
 # awscc_connect_instance (List Resource)
 
-
+List all resources for `AWS::Connect::Instance` resource type.
 
 ## Example Usage
 

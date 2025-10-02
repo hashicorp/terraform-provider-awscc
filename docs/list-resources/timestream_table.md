@@ -3,12 +3,12 @@
 page_title: "awscc_timestream_table List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Timestream::Table resource type.
 ---
 
 # awscc_timestream_table (List Resource)
 
-
+List all resources for `AWS::Timestream::Table` resource type.
 
 ## Example Usage
 

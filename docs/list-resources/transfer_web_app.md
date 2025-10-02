@@ -3,12 +3,12 @@
 page_title: "awscc_transfer_web_app List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Transfer::WebApp resource type.
 ---
 
 # awscc_transfer_web_app (List Resource)
 
-
+List all resources for `AWS::Transfer::WebApp` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_vpc_block_public_access_exclusion List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::VPCBlockPublicAccessExclusion resource type.
 ---
 
 # awscc_ec2_vpc_block_public_access_exclusion (List Resource)
 
-
+List all resources for `AWS::EC2::VPCBlockPublicAccessExclusion` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_datasync_location_fsx_lustre List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DataSync::LocationFSxLustre resource type.
 ---
 
 # awscc_datasync_location_fsx_lustre (List Resource)
 
-
+List all resources for `AWS::DataSync::LocationFSxLustre` resource type.
 
 ## Example Usage
 

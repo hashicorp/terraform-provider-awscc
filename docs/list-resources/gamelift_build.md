@@ -3,12 +3,12 @@
 page_title: "awscc_gamelift_build List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::GameLift::Build resource type.
 ---
 
 # awscc_gamelift_build (List Resource)
 
-
+List all resources for `AWS::GameLift::Build` resource type.
 
 ## Example Usage
 

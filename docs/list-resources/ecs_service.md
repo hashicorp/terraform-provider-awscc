@@ -3,12 +3,12 @@
 page_title: "awscc_ecs_service List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ECS::Service resource type.
 ---
 
 # awscc_ecs_service (List Resource)
 
-
+List all resources for `AWS::ECS::Service` resource type.
 
 ## Example Usage
 

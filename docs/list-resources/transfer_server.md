@@ -3,12 +3,12 @@
 page_title: "awscc_transfer_server List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Transfer::Server resource type.
 ---
 
 # awscc_transfer_server (List Resource)
 
-
+List all resources for `AWS::Transfer::Server` resource type.
 
 ## Example Usage
 

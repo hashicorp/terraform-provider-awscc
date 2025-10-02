@@ -3,12 +3,12 @@
 page_title: "awscc_odb_cloud_exadata_infrastructure List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ODB::CloudExadataInfrastructure resource type.
 ---
 
 # awscc_odb_cloud_exadata_infrastructure (List Resource)
 
-
+List all resources for `AWS::ODB::CloudExadataInfrastructure` resource type.
 
 ## Example Usage
 

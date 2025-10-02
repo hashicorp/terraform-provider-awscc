@@ -3,12 +3,12 @@
 page_title: "awscc_dynamodb_global_table List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DynamoDB::GlobalTable resource type.
 ---
 
 # awscc_dynamodb_global_table (List Resource)
 
-
+List all resources for `AWS::DynamoDB::GlobalTable` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_security_group_egress List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::SecurityGroupEgress resource type.
 ---
 
 # awscc_ec2_security_group_egress (List Resource)
 
-
+List all resources for `AWS::EC2::SecurityGroupEgress` resource type.
 
 ## Example Usage
 

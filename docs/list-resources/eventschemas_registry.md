@@ -3,12 +3,12 @@
 page_title: "awscc_eventschemas_registry List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EventSchemas::Registry resource type.
 ---
 
 # awscc_eventschemas_registry (List Resource)
 
-
+List all resources for `AWS::EventSchemas::Registry` resource type.
 
 ## Example Usage
 

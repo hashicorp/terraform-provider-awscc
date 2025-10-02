@@ -3,12 +3,12 @@
 page_title: "awscc_memorydb_parameter_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MemoryDB::ParameterGroup resource type.
 ---
 
 # awscc_memorydb_parameter_group (List Resource)
 
-
+List all resources for `AWS::MemoryDB::ParameterGroup` resource type.
 
 ## Example Usage
 

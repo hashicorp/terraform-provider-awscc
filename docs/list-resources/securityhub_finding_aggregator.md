@@ -3,12 +3,12 @@
 page_title: "awscc_securityhub_finding_aggregator List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SecurityHub::FindingAggregator resource type.
 ---
 
 # awscc_securityhub_finding_aggregator (List Resource)
 
-
+List all resources for `AWS::SecurityHub::FindingAggregator` resource type.
 
 ## Example Usage
 

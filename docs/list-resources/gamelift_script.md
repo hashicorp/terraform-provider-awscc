@@ -3,12 +3,12 @@
 page_title: "awscc_gamelift_script List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::GameLift::Script resource type.
 ---
 
 # awscc_gamelift_script (List Resource)
 
-
+List all resources for `AWS::GameLift::Script` resource type.
 
 ## Example Usage
 

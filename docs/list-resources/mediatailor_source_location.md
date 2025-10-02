@@ -3,12 +3,12 @@
 page_title: "awscc_mediatailor_source_location List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MediaTailor::SourceLocation resource type.
 ---
 
 # awscc_mediatailor_source_location (List Resource)
 
-
+List all resources for `AWS::MediaTailor::SourceLocation` resource type.
 
 ## Example Usage
 

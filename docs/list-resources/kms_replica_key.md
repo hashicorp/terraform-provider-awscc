@@ -3,12 +3,12 @@
 page_title: "awscc_kms_replica_key List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::KMS::ReplicaKey resource type.
 ---
 
 # awscc_kms_replica_key (List Resource)
 
-
+List all resources for `AWS::KMS::ReplicaKey` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_ram_resource_share List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::RAM::ResourceShare resource type.
 ---
 
 # awscc_ram_resource_share (List Resource)
 
-
+List all resources for `AWS::RAM::ResourceShare` resource type.
 
 ## Example Usage
 

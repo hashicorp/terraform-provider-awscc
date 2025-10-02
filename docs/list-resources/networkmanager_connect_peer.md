@@ -3,12 +3,12 @@
 page_title: "awscc_networkmanager_connect_peer List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::NetworkManager::ConnectPeer resource type.
 ---
 
 # awscc_networkmanager_connect_peer (List Resource)
 
-
+List all resources for `AWS::NetworkManager::ConnectPeer` resource type.
 
 ## Example Usage
 

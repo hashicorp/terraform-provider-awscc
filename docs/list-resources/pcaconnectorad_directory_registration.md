@@ -3,12 +3,12 @@
 page_title: "awscc_pcaconnectorad_directory_registration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::PCAConnectorAD::DirectoryRegistration resource type.
 ---
 
 # awscc_pcaconnectorad_directory_registration (List Resource)
 
-
+List all resources for `AWS::PCAConnectorAD::DirectoryRegistration` resource type.
 
 ## Example Usage
 

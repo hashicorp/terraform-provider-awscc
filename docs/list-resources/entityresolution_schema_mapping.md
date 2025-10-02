@@ -3,12 +3,12 @@
 page_title: "awscc_entityresolution_schema_mapping List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EntityResolution::SchemaMapping resource type.
 ---
 
 # awscc_entityresolution_schema_mapping (List Resource)
 
-
+List all resources for `AWS::EntityResolution::SchemaMapping` resource type.
 
 ## Example Usage
 

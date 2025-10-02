@@ -3,12 +3,12 @@
 page_title: "awscc_s3_access_grant List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::S3::AccessGrant resource type.
 ---
 
 # awscc_s3_access_grant (List Resource)
 
-
+List all resources for `AWS::S3::AccessGrant` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_simspaceweaver_simulation List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SimSpaceWeaver::Simulation resource type.
 ---
 
 # awscc_simspaceweaver_simulation (List Resource)
 
-
+List all resources for `AWS::SimSpaceWeaver::Simulation` resource type.
 
 ## Example Usage
 

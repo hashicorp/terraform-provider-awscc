@@ -3,12 +3,12 @@
 page_title: "awscc_medialive_network List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MediaLive::Network resource type.
 ---
 
 # awscc_medialive_network (List Resource)
 
-
+List all resources for `AWS::MediaLive::Network` resource type.
 
 ## Example Usage
 

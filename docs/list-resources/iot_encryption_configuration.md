@@ -3,12 +3,12 @@
 page_title: "awscc_iot_encryption_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoT::EncryptionConfiguration resource type.
 ---
 
 # awscc_iot_encryption_configuration (List Resource)
 
-
+List all resources for `AWS::IoT::EncryptionConfiguration` resource type.
 
 ## Example Usage
 

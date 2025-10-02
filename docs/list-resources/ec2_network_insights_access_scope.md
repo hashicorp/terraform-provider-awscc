@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_network_insights_access_scope List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::NetworkInsightsAccessScope resource type.
 ---
 
 # awscc_ec2_network_insights_access_scope (List Resource)
 
-
+List all resources for `AWS::EC2::NetworkInsightsAccessScope` resource type.
 
 ## Example Usage
 

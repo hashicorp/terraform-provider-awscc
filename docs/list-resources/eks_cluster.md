@@ -3,12 +3,12 @@
 page_title: "awscc_eks_cluster List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EKS::Cluster resource type.
 ---
 
 # awscc_eks_cluster (List Resource)
 
-
+List all resources for `AWS::EKS::Cluster` resource type.
 
 ## Example Usage
 

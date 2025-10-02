@@ -3,12 +3,12 @@
 page_title: "awscc_lambda_layer_version List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Lambda::LayerVersion resource type.
 ---
 
 # awscc_lambda_layer_version (List Resource)
 
-
+List all resources for `AWS::Lambda::LayerVersion` resource type.
 
 ## Example Usage
 

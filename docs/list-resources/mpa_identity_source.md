@@ -3,12 +3,12 @@
 page_title: "awscc_mpa_identity_source List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MPA::IdentitySource resource type.
 ---
 
 # awscc_mpa_identity_source (List Resource)
 
-
+List all resources for `AWS::MPA::IdentitySource` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_lookoutmetrics_anomaly_detector List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::LookoutMetrics::AnomalyDetector resource type.
 ---
 
 # awscc_lookoutmetrics_anomaly_detector (List Resource)
 
-
+List all resources for `AWS::LookoutMetrics::AnomalyDetector` resource type.
 
 ## Example Usage
 

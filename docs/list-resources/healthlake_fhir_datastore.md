@@ -3,12 +3,12 @@
 page_title: "awscc_healthlake_fhir_datastore List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::HealthLake::FHIRDatastore resource type.
 ---
 
 # awscc_healthlake_fhir_datastore (List Resource)
 
-
+List all resources for `AWS::HealthLake::FHIRDatastore` resource type.
 
 ## Example Usage
 

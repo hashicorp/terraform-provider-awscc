@@ -3,12 +3,12 @@
 page_title: "awscc_sqs_queue List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SQS::Queue resource type.
 ---
 
 # awscc_sqs_queue (List Resource)
 
-
+List all resources for `AWS::SQS::Queue` resource type.
 
 ## Example Usage
 

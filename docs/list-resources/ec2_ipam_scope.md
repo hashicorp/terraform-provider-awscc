@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_ipam_scope List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::IPAMScope resource type.
 ---
 
 # awscc_ec2_ipam_scope (List Resource)
 
-
+List all resources for `AWS::EC2::IPAMScope` resource type.
 
 ## Example Usage
 

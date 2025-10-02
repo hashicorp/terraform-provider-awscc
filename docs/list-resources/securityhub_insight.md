@@ -3,12 +3,12 @@
 page_title: "awscc_securityhub_insight List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SecurityHub::Insight resource type.
 ---
 
 # awscc_securityhub_insight (List Resource)
 
-
+List all resources for `AWS::SecurityHub::Insight` resource type.
 
 ## Example Usage
 

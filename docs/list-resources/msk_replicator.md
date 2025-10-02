@@ -3,12 +3,12 @@
 page_title: "awscc_msk_replicator List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MSK::Replicator resource type.
 ---
 
 # awscc_msk_replicator (List Resource)
 
-
+List all resources for `AWS::MSK::Replicator` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_mediaconnect_gateway List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MediaConnect::Gateway resource type.
 ---
 
 # awscc_mediaconnect_gateway (List Resource)
 
-
+List all resources for `AWS::MediaConnect::Gateway` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_iotsitewise_dashboard List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTSiteWise::Dashboard resource type.
 ---
 
 # awscc_iotsitewise_dashboard (List Resource)
 
-
+List all resources for `AWS::IoTSiteWise::Dashboard` resource type.
 
 ## Example Usage
 

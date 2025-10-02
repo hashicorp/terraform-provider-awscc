@@ -3,12 +3,12 @@
 page_title: "awscc_omics_workflow_version List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Omics::WorkflowVersion resource type.
 ---
 
 # awscc_omics_workflow_version (List Resource)
 
-
+List all resources for `AWS::Omics::WorkflowVersion` resource type.
 
 ## Example Usage
 

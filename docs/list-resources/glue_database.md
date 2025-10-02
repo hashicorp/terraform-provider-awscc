@@ -3,12 +3,12 @@
 page_title: "awscc_glue_database List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Glue::Database resource type.
 ---
 
 # awscc_glue_database (List Resource)
 
-
+List all resources for `AWS::Glue::Database` resource type.
 
 ## Example Usage
 

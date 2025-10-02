@@ -3,12 +3,12 @@
 page_title: "awscc_quicksight_data_source List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::QuickSight::DataSource resource type.
 ---
 
 # awscc_quicksight_data_source (List Resource)
 
-
+List all resources for `AWS::QuickSight::DataSource` resource type.
 
 ## Example Usage
 

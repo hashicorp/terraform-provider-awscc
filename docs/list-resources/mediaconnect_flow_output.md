@@ -3,12 +3,12 @@
 page_title: "awscc_mediaconnect_flow_output List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MediaConnect::FlowOutput resource type.
 ---
 
 # awscc_mediaconnect_flow_output (List Resource)
 
-
+List all resources for `AWS::MediaConnect::FlowOutput` resource type.
 
 ## Example Usage
 

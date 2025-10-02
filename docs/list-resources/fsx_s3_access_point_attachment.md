@@ -3,12 +3,12 @@
 page_title: "awscc_fsx_s3_access_point_attachment List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::FSx::S3AccessPointAttachment resource type.
 ---
 
 # awscc_fsx_s3_access_point_attachment (List Resource)
 
-
+List all resources for `AWS::FSx::S3AccessPointAttachment` resource type.
 
 ## Example Usage
 

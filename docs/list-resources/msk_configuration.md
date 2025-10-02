@@ -3,12 +3,12 @@
 page_title: "awscc_msk_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MSK::Configuration resource type.
 ---
 
 # awscc_msk_configuration (List Resource)
 
-
+List all resources for `AWS::MSK::Configuration` resource type.
 
 ## Example Usage
 

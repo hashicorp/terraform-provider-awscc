@@ -3,12 +3,12 @@
 page_title: "awscc_synthetics_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Synthetics::Group resource type.
 ---
 
 # awscc_synthetics_group (List Resource)
 
-
+List all resources for `AWS::Synthetics::Group` resource type.
 
 ## Example Usage
 

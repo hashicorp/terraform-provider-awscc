@@ -3,12 +3,12 @@
 page_title: "awscc_batch_compute_environment List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Batch::ComputeEnvironment resource type.
 ---
 
 # awscc_batch_compute_environment (List Resource)
 
-
+List all resources for `AWS::Batch::ComputeEnvironment` resource type.
 
 ## Example Usage
 

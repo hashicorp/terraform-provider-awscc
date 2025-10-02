@@ -3,12 +3,12 @@
 page_title: "awscc_efs_access_point List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EFS::AccessPoint resource type.
 ---
 
 # awscc_efs_access_point (List Resource)
 
-
+List all resources for `AWS::EFS::AccessPoint` resource type.
 
 ## Example Usage
 

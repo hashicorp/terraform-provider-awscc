@@ -3,12 +3,12 @@
 page_title: "awscc_quicksight_analysis List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::QuickSight::Analysis resource type.
 ---
 
 # awscc_quicksight_analysis (List Resource)
 
-
+List all resources for `AWS::QuickSight::Analysis` resource type.
 
 ## Example Usage
 

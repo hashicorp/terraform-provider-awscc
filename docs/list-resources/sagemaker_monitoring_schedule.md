@@ -3,12 +3,12 @@
 page_title: "awscc_sagemaker_monitoring_schedule List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SageMaker::MonitoringSchedule resource type.
 ---
 
 # awscc_sagemaker_monitoring_schedule (List Resource)
 
-
+List all resources for `AWS::SageMaker::MonitoringSchedule` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_elasticache_serverless_cache List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ElastiCache::ServerlessCache resource type.
 ---
 
 # awscc_elasticache_serverless_cache (List Resource)
 
-
+List all resources for `AWS::ElastiCache::ServerlessCache` resource type.
 
 ## Example Usage
 

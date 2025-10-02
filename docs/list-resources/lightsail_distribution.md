@@ -3,12 +3,12 @@
 page_title: "awscc_lightsail_distribution List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Lightsail::Distribution resource type.
 ---
 
 # awscc_lightsail_distribution (List Resource)
 
-
+List all resources for `AWS::Lightsail::Distribution` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_workspacesweb_ip_access_settings List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::WorkSpacesWeb::IpAccessSettings resource type.
 ---
 
 # awscc_workspacesweb_ip_access_settings (List Resource)
 
-
+List all resources for `AWS::WorkSpacesWeb::IpAccessSettings` resource type.
 
 ## Example Usage
 

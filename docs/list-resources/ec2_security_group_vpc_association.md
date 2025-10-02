@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_security_group_vpc_association List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::SecurityGroupVpcAssociation resource type.
 ---
 
 # awscc_ec2_security_group_vpc_association (List Resource)
 
-
+List all resources for `AWS::EC2::SecurityGroupVpcAssociation` resource type.
 
 ## Example Usage
 

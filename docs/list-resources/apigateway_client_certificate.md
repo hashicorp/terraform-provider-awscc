@@ -3,12 +3,12 @@
 page_title: "awscc_apigateway_client_certificate List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ApiGateway::ClientCertificate resource type.
 ---
 
 # awscc_apigateway_client_certificate (List Resource)
 
-
+List all resources for `AWS::ApiGateway::ClientCertificate` resource type.
 
 ## Example Usage
 

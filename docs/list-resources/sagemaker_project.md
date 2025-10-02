@@ -3,12 +3,12 @@
 page_title: "awscc_sagemaker_project List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SageMaker::Project resource type.
 ---
 
 # awscc_sagemaker_project (List Resource)
 
-
+List all resources for `AWS::SageMaker::Project` resource type.
 
 ## Example Usage
 

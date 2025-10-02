@@ -3,12 +3,12 @@
 page_title: "awscc_datasync_location_nfs List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DataSync::LocationNFS resource type.
 ---
 
 # awscc_datasync_location_nfs (List Resource)
 
-
+List all resources for `AWS::DataSync::LocationNFS` resource type.
 
 ## Example Usage
 

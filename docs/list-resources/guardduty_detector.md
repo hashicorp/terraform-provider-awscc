@@ -3,12 +3,12 @@
 page_title: "awscc_guardduty_detector List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::GuardDuty::Detector resource type.
 ---
 
 # awscc_guardduty_detector (List Resource)
 
-
+List all resources for `AWS::GuardDuty::Detector` resource type.
 
 ## Example Usage
 

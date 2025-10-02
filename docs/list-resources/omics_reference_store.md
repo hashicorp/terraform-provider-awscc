@@ -3,12 +3,12 @@
 page_title: "awscc_omics_reference_store List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Omics::ReferenceStore resource type.
 ---
 
 # awscc_omics_reference_store (List Resource)
 
-
+List all resources for `AWS::Omics::ReferenceStore` resource type.
 
 ## Example Usage
 

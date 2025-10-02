@@ -3,12 +3,12 @@
 page_title: "awscc_iottwinmaker_workspace List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTTwinMaker::Workspace resource type.
 ---
 
 # awscc_iottwinmaker_workspace (List Resource)
 
-
+List all resources for `AWS::IoTTwinMaker::Workspace` resource type.
 
 ## Example Usage
 

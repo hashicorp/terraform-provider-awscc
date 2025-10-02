@@ -3,12 +3,12 @@
 page_title: "awscc_iotcoredeviceadvisor_suite_definition List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTCoreDeviceAdvisor::SuiteDefinition resource type.
 ---
 
 # awscc_iotcoredeviceadvisor_suite_definition (List Resource)
 
-
+List all resources for `AWS::IoTCoreDeviceAdvisor::SuiteDefinition` resource type.
 
 ## Example Usage
 

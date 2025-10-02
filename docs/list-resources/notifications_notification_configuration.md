@@ -3,12 +3,12 @@
 page_title: "awscc_notifications_notification_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Notifications::NotificationConfiguration resource type.
 ---
 
 # awscc_notifications_notification_configuration (List Resource)
 
-
+List all resources for `AWS::Notifications::NotificationConfiguration` resource type.
 
 ## Example Usage
 

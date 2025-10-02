@@ -3,12 +3,12 @@
 page_title: "awscc_backup_framework List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Backup::Framework resource type.
 ---
 
 # awscc_backup_framework (List Resource)
 
-
+List all resources for `AWS::Backup::Framework` resource type.
 
 ## Example Usage
 

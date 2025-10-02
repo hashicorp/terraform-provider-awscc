@@ -3,12 +3,12 @@
 page_title: "awscc_sagemaker_model_bias_job_definition List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SageMaker::ModelBiasJobDefinition resource type.
 ---
 
 # awscc_sagemaker_model_bias_job_definition (List Resource)
 
-
+List all resources for `AWS::SageMaker::ModelBiasJobDefinition` resource type.
 
 ## Example Usage
 

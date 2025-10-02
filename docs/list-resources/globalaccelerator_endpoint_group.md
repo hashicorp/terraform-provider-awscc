@@ -3,12 +3,12 @@
 page_title: "awscc_globalaccelerator_endpoint_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::GlobalAccelerator::EndpointGroup resource type.
 ---
 
 # awscc_globalaccelerator_endpoint_group (List Resource)
 
-
+List all resources for `AWS::GlobalAccelerator::EndpointGroup` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_workspacesweb_network_settings List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::WorkSpacesWeb::NetworkSettings resource type.
 ---
 
 # awscc_workspacesweb_network_settings (List Resource)
 
-
+List all resources for `AWS::WorkSpacesWeb::NetworkSettings` resource type.
 
 ## Example Usage
 

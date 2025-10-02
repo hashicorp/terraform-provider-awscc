@@ -3,12 +3,12 @@
 page_title: "awscc_kendra_data_source List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Kendra::DataSource resource type.
 ---
 
 # awscc_kendra_data_source (List Resource)
 
-
+List all resources for `AWS::Kendra::DataSource` resource type.
 
 ## Example Usage
 

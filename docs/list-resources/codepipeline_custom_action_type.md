@@ -3,12 +3,12 @@
 page_title: "awscc_codepipeline_custom_action_type List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CodePipeline::CustomActionType resource type.
 ---
 
 # awscc_codepipeline_custom_action_type (List Resource)
 
-
+List all resources for `AWS::CodePipeline::CustomActionType` resource type.
 
 ## Example Usage
 

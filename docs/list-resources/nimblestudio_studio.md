@@ -3,12 +3,12 @@
 page_title: "awscc_nimblestudio_studio List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::NimbleStudio::Studio resource type.
 ---
 
 # awscc_nimblestudio_studio (List Resource)
 
-
+List all resources for `AWS::NimbleStudio::Studio` resource type.
 
 ## Example Usage
 

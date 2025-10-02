@@ -3,12 +3,12 @@
 page_title: "awscc_smsvoice_opt_out_list List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SMSVOICE::OptOutList resource type.
 ---
 
 # awscc_smsvoice_opt_out_list (List Resource)
 
-
+List all resources for `AWS::SMSVOICE::OptOutList` resource type.
 
 ## Example Usage
 

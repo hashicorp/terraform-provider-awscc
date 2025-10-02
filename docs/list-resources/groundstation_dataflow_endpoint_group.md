@@ -3,12 +3,12 @@
 page_title: "awscc_groundstation_dataflow_endpoint_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::GroundStation::DataflowEndpointGroup resource type.
 ---
 
 # awscc_groundstation_dataflow_endpoint_group (List Resource)
 
-
+List all resources for `AWS::GroundStation::DataflowEndpointGroup` resource type.
 
 ## Example Usage
 

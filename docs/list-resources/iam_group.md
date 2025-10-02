@@ -3,12 +3,12 @@
 page_title: "awscc_iam_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IAM::Group resource type.
 ---
 
 # awscc_iam_group (List Resource)
 
-
+List all resources for `AWS::IAM::Group` resource type.
 
 ## Example Usage
 

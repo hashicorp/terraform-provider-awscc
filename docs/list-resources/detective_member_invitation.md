@@ -3,12 +3,12 @@
 page_title: "awscc_detective_member_invitation List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Detective::MemberInvitation resource type.
 ---
 
 # awscc_detective_member_invitation (List Resource)
 
-
+List all resources for `AWS::Detective::MemberInvitation` resource type.
 
 ## Example Usage
 

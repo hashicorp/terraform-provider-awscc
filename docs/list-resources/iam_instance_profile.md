@@ -3,12 +3,12 @@
 page_title: "awscc_iam_instance_profile List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IAM::InstanceProfile resource type.
 ---
 
 # awscc_iam_instance_profile (List Resource)
 
-
+List all resources for `AWS::IAM::InstanceProfile` resource type.
 
 ## Example Usage
 

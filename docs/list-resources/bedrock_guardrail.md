@@ -3,12 +3,12 @@
 page_title: "awscc_bedrock_guardrail List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Bedrock::Guardrail resource type.
 ---
 
 # awscc_bedrock_guardrail (List Resource)
 
-
+List all resources for `AWS::Bedrock::Guardrail` resource type.
 
 ## Example Usage
 

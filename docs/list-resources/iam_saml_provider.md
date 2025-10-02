@@ -3,12 +3,12 @@
 page_title: "awscc_iam_saml_provider List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IAM::SAMLProvider resource type.
 ---
 
 # awscc_iam_saml_provider (List Resource)
 
-
+List all resources for `AWS::IAM::SAMLProvider` resource type.
 
 ## Example Usage
 

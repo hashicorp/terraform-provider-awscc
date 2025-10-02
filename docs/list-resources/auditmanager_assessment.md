@@ -3,12 +3,12 @@
 page_title: "awscc_auditmanager_assessment List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::AuditManager::Assessment resource type.
 ---
 
 # awscc_auditmanager_assessment (List Resource)
 
-
+List all resources for `AWS::AuditManager::Assessment` resource type.
 
 ## Example Usage
 

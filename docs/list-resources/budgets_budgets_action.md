@@ -3,12 +3,12 @@
 page_title: "awscc_budgets_budgets_action List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Budgets::BudgetsAction resource type.
 ---
 
 # awscc_budgets_budgets_action (List Resource)
 
-
+List all resources for `AWS::Budgets::BudgetsAction` resource type.
 
 ## Example Usage
 

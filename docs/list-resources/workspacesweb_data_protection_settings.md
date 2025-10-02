@@ -3,12 +3,12 @@
 page_title: "awscc_workspacesweb_data_protection_settings List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::WorkSpacesWeb::DataProtectionSettings resource type.
 ---
 
 # awscc_workspacesweb_data_protection_settings (List Resource)
 
-
+List all resources for `AWS::WorkSpacesWeb::DataProtectionSettings` resource type.
 
 ## Example Usage
 

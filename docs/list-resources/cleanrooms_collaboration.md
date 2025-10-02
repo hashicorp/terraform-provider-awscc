@@ -3,12 +3,12 @@
 page_title: "awscc_cleanrooms_collaboration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CleanRooms::Collaboration resource type.
 ---
 
 # awscc_cleanrooms_collaboration (List Resource)
 
-
+List all resources for `AWS::CleanRooms::Collaboration` resource type.
 
 ## Example Usage
 

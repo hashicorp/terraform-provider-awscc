@@ -3,12 +3,12 @@
 page_title: "awscc_iot_certificate_provider List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoT::CertificateProvider resource type.
 ---
 
 # awscc_iot_certificate_provider (List Resource)
 
-
+List all resources for `AWS::IoT::CertificateProvider` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_dms_data_migration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DMS::DataMigration resource type.
 ---
 
 # awscc_dms_data_migration (List Resource)
 
-
+List all resources for `AWS::DMS::DataMigration` resource type.
 
 ## Example Usage
 

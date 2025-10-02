@@ -3,12 +3,12 @@
 page_title: "awscc_kendra_index List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Kendra::Index resource type.
 ---
 
 # awscc_kendra_index (List Resource)
 
-
+List all resources for `AWS::Kendra::Index` resource type.
 
 ## Example Usage
 

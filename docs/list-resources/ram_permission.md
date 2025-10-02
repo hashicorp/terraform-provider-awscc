@@ -3,12 +3,12 @@
 page_title: "awscc_ram_permission List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::RAM::Permission resource type.
 ---
 
 # awscc_ram_permission (List Resource)
 
-
+List all resources for `AWS::RAM::Permission` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_lightsail_certificate List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Lightsail::Certificate resource type.
 ---
 
 # awscc_lightsail_certificate (List Resource)
 
-
+List all resources for `AWS::Lightsail::Certificate` resource type.
 
 ## Example Usage
 

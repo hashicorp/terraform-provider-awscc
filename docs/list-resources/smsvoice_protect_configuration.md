@@ -3,12 +3,12 @@
 page_title: "awscc_smsvoice_protect_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SMSVOICE::ProtectConfiguration resource type.
 ---
 
 # awscc_smsvoice_protect_configuration (List Resource)
 
-
+List all resources for `AWS::SMSVOICE::ProtectConfiguration` resource type.
 
 ## Example Usage
 

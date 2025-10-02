@@ -3,12 +3,12 @@
 page_title: "awscc_route53_health_check List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Route53::HealthCheck resource type.
 ---
 
 # awscc_route53_health_check (List Resource)
 
-
+List all resources for `AWS::Route53::HealthCheck` resource type.
 
 ## Example Usage
 

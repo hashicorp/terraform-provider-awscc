@@ -3,12 +3,12 @@
 page_title: "awscc_backup_restore_testing_selection List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Backup::RestoreTestingSelection resource type.
 ---
 
 # awscc_backup_restore_testing_selection (List Resource)
 
-
+List all resources for `AWS::Backup::RestoreTestingSelection` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_scheduler_schedule List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Scheduler::Schedule resource type.
 ---
 
 # awscc_scheduler_schedule (List Resource)
 
-
+List all resources for `AWS::Scheduler::Schedule` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_workspaces_workspaces_pool List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::WorkSpaces::WorkspacesPool resource type.
 ---
 
 # awscc_workspaces_workspaces_pool (List Resource)
 
-
+List all resources for `AWS::WorkSpaces::WorkspacesPool` resource type.
 
 ## Example Usage
 

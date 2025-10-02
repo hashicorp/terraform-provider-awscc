@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_vpn_gateway List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::VPNGateway resource type.
 ---
 
 # awscc_ec2_vpn_gateway (List Resource)
 
-
+List all resources for `AWS::EC2::VPNGateway` resource type.
 
 ## Example Usage
 

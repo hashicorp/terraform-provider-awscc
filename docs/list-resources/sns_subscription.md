@@ -3,12 +3,12 @@
 page_title: "awscc_sns_subscription List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SNS::Subscription resource type.
 ---
 
 # awscc_sns_subscription (List Resource)
 
-
+List all resources for `AWS::SNS::Subscription` resource type.
 
 ## Example Usage
 

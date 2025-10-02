@@ -3,12 +3,12 @@
 page_title: "awscc_iotwireless_wireless_device List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTWireless::WirelessDevice resource type.
 ---
 
 # awscc_iotwireless_wireless_device (List Resource)
 
-
+List all resources for `AWS::IoTWireless::WirelessDevice` resource type.
 
 ## Example Usage
 

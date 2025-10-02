@@ -3,12 +3,12 @@
 page_title: "awscc_glue_registry List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Glue::Registry resource type.
 ---
 
 # awscc_glue_registry (List Resource)
 
-
+List all resources for `AWS::Glue::Registry` resource type.
 
 ## Example Usage
 

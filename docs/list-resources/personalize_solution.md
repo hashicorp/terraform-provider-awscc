@@ -3,12 +3,12 @@
 page_title: "awscc_personalize_solution List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Personalize::Solution resource type.
 ---
 
 # awscc_personalize_solution (List Resource)
 
-
+List all resources for `AWS::Personalize::Solution` resource type.
 
 ## Example Usage
 

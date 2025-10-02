@@ -3,12 +3,12 @@
 page_title: "awscc_detective_organization_admin List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Detective::OrganizationAdmin resource type.
 ---
 
 # awscc_detective_organization_admin (List Resource)
 
-
+List all resources for `AWS::Detective::OrganizationAdmin` resource type.
 
 ## Example Usage
 

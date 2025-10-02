@@ -3,12 +3,12 @@
 page_title: "awscc_secretsmanager_secret_target_attachment List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SecretsManager::SecretTargetAttachment resource type.
 ---
 
 # awscc_secretsmanager_secret_target_attachment (List Resource)
 
-
+List all resources for `AWS::SecretsManager::SecretTargetAttachment` resource type.
 
 ## Example Usage
 

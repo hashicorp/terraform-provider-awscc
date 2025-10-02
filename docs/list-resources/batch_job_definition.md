@@ -3,12 +3,12 @@
 page_title: "awscc_batch_job_definition List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Batch::JobDefinition resource type.
 ---
 
 # awscc_batch_job_definition (List Resource)
 
-
+List all resources for `AWS::Batch::JobDefinition` resource type.
 
 ## Example Usage
 

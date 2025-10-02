@@ -3,12 +3,12 @@
 page_title: "awscc_route53_dnssec List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Route53::DNSSEC resource type.
 ---
 
 # awscc_route53_dnssec (List Resource)
 
-
+List all resources for `AWS::Route53::DNSSEC` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_sagemaker_app List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SageMaker::App resource type.
 ---
 
 # awscc_sagemaker_app (List Resource)
 
-
+List all resources for `AWS::SageMaker::App` resource type.
 
 ## Example Usage
 

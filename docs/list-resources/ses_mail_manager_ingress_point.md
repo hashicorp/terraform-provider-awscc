@@ -3,12 +3,12 @@
 page_title: "awscc_ses_mail_manager_ingress_point List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SES::MailManagerIngressPoint resource type.
 ---
 
 # awscc_ses_mail_manager_ingress_point (List Resource)
 
-
+List all resources for `AWS::SES::MailManagerIngressPoint` resource type.
 
 ## Example Usage
 

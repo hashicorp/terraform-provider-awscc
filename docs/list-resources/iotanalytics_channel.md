@@ -3,12 +3,12 @@
 page_title: "awscc_iotanalytics_channel List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTAnalytics::Channel resource type.
 ---
 
 # awscc_iotanalytics_channel (List Resource)
 
-
+List all resources for `AWS::IoTAnalytics::Channel` resource type.
 
 ## Example Usage
 

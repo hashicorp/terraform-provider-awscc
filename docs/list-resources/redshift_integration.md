@@ -3,12 +3,12 @@
 page_title: "awscc_redshift_integration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Redshift::Integration resource type.
 ---
 
 # awscc_redshift_integration (List Resource)
 
-
+List all resources for `AWS::Redshift::Integration` resource type.
 
 ## Example Usage
 

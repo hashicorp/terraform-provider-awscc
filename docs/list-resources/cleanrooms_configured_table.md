@@ -3,12 +3,12 @@
 page_title: "awscc_cleanrooms_configured_table List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CleanRooms::ConfiguredTable resource type.
 ---
 
 # awscc_cleanrooms_configured_table (List Resource)
 
-
+List all resources for `AWS::CleanRooms::ConfiguredTable` resource type.
 
 ## Example Usage
 

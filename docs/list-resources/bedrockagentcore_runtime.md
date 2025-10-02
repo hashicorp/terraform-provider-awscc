@@ -3,12 +3,12 @@
 page_title: "awscc_bedrockagentcore_runtime List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::BedrockAgentCore::Runtime resource type.
 ---
 
 # awscc_bedrockagentcore_runtime (List Resource)
 
-
+List all resources for `AWS::BedrockAgentCore::Runtime` resource type.
 
 ## Example Usage
 

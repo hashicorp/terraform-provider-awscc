@@ -3,12 +3,12 @@
 page_title: "awscc_aps_workspace List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::APS::Workspace resource type.
 ---
 
 # awscc_aps_workspace (List Resource)
 
-
+List all resources for `AWS::APS::Workspace` resource type.
 
 ## Example Usage
 

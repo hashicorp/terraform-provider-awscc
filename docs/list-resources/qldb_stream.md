@@ -3,12 +3,12 @@
 page_title: "awscc_qldb_stream List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::QLDB::Stream resource type.
 ---
 
 # awscc_qldb_stream (List Resource)
 
-
+List all resources for `AWS::QLDB::Stream` resource type.
 
 ## Example Usage
 

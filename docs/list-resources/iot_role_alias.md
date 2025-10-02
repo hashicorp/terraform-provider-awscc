@@ -3,12 +3,12 @@
 page_title: "awscc_iot_role_alias List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoT::RoleAlias resource type.
 ---
 
 # awscc_iot_role_alias (List Resource)
 
-
+List all resources for `AWS::IoT::RoleAlias` resource type.
 
 ## Example Usage
 

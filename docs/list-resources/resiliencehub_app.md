@@ -3,12 +3,12 @@
 page_title: "awscc_resiliencehub_app List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ResilienceHub::App resource type.
 ---
 
 # awscc_resiliencehub_app (List Resource)
 
-
+List all resources for `AWS::ResilienceHub::App` resource type.
 
 ## Example Usage
 

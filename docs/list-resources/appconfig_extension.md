@@ -3,12 +3,12 @@
 page_title: "awscc_appconfig_extension List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::AppConfig::Extension resource type.
 ---
 
 # awscc_appconfig_extension (List Resource)
 
-
+List all resources for `AWS::AppConfig::Extension` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_bedrockagentcore_browser_custom List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::BedrockAgentCore::BrowserCustom resource type.
 ---
 
 # awscc_bedrockagentcore_browser_custom (List Resource)
 
-
+List all resources for `AWS::BedrockAgentCore::BrowserCustom` resource type.
 
 ## Example Usage
 

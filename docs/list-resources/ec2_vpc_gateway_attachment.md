@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_vpc_gateway_attachment List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::VPCGatewayAttachment resource type.
 ---
 
 # awscc_ec2_vpc_gateway_attachment (List Resource)
 
-
+List all resources for `AWS::EC2::VPCGatewayAttachment` resource type.
 
 ## Example Usage
 

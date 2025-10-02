@@ -3,12 +3,12 @@
 page_title: "awscc_msk_serverless_cluster List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MSK::ServerlessCluster resource type.
 ---
 
 # awscc_msk_serverless_cluster (List Resource)
 
-
+List all resources for `AWS::MSK::ServerlessCluster` resource type.
 
 ## Example Usage
 

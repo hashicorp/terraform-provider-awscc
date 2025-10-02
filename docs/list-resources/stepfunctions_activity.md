@@ -3,12 +3,12 @@
 page_title: "awscc_stepfunctions_activity List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::StepFunctions::Activity resource type.
 ---
 
 # awscc_stepfunctions_activity (List Resource)
 
-
+List all resources for `AWS::StepFunctions::Activity` resource type.
 
 ## Example Usage
 

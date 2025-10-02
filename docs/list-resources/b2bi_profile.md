@@ -3,12 +3,12 @@
 page_title: "awscc_b2bi_profile List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::B2BI::Profile resource type.
 ---
 
 # awscc_b2bi_profile (List Resource)
 
-
+List all resources for `AWS::B2BI::Profile` resource type.
 
 ## Example Usage
 

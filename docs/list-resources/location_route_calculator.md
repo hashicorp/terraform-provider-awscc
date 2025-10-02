@@ -3,12 +3,12 @@
 page_title: "awscc_location_route_calculator List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Location::RouteCalculator resource type.
 ---
 
 # awscc_location_route_calculator (List Resource)
 
-
+List all resources for `AWS::Location::RouteCalculator` resource type.
 
 ## Example Usage
 

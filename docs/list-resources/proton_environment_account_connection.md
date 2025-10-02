@@ -3,12 +3,12 @@
 page_title: "awscc_proton_environment_account_connection List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Proton::EnvironmentAccountConnection resource type.
 ---
 
 # awscc_proton_environment_account_connection (List Resource)
 
-
+List all resources for `AWS::Proton::EnvironmentAccountConnection` resource type.
 
 ## Example Usage
 

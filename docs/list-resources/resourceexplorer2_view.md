@@ -3,12 +3,12 @@
 page_title: "awscc_resourceexplorer2_view List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ResourceExplorer2::View resource type.
 ---
 
 # awscc_resourceexplorer2_view (List Resource)
 
-
+List all resources for `AWS::ResourceExplorer2::View` resource type.
 
 ## Example Usage
 

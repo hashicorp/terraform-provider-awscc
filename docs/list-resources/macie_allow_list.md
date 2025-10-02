@@ -3,12 +3,12 @@
 page_title: "awscc_macie_allow_list List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Macie::AllowList resource type.
 ---
 
 # awscc_macie_allow_list (List Resource)
 
-
+List all resources for `AWS::Macie::AllowList` resource type.
 
 ## Example Usage
 

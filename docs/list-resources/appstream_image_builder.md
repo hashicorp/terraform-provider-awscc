@@ -3,12 +3,12 @@
 page_title: "awscc_appstream_image_builder List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::AppStream::ImageBuilder resource type.
 ---
 
 # awscc_appstream_image_builder (List Resource)
 
-
+List all resources for `AWS::AppStream::ImageBuilder` resource type.
 
 ## Example Usage
 

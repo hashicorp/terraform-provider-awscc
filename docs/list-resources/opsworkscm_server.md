@@ -3,12 +3,12 @@
 page_title: "awscc_opsworkscm_server List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::OpsWorksCM::Server resource type.
 ---
 
 # awscc_opsworkscm_server (List Resource)
 
-
+List all resources for `AWS::OpsWorksCM::Server` resource type.
 
 ## Example Usage
 

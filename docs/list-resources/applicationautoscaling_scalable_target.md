@@ -3,12 +3,12 @@
 page_title: "awscc_applicationautoscaling_scalable_target List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ApplicationAutoScaling::ScalableTarget resource type.
 ---
 
 # awscc_applicationautoscaling_scalable_target (List Resource)
 
-
+List all resources for `AWS::ApplicationAutoScaling::ScalableTarget` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_backup_backup_plan List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Backup::BackupPlan resource type.
 ---
 
 # awscc_backup_backup_plan (List Resource)
 
-
+List all resources for `AWS::Backup::BackupPlan` resource type.
 
 ## Example Usage
 

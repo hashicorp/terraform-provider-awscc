@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_instance_connect_endpoint List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::InstanceConnectEndpoint resource type.
 ---
 
 # awscc_ec2_instance_connect_endpoint (List Resource)
 
-
+List all resources for `AWS::EC2::InstanceConnectEndpoint` resource type.
 
 ## Example Usage
 

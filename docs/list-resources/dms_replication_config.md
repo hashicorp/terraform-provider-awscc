@@ -3,12 +3,12 @@
 page_title: "awscc_dms_replication_config List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DMS::ReplicationConfig resource type.
 ---
 
 # awscc_dms_replication_config (List Resource)
 
-
+List all resources for `AWS::DMS::ReplicationConfig` resource type.
 
 ## Example Usage
 

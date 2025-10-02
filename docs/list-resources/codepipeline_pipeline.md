@@ -3,12 +3,12 @@
 page_title: "awscc_codepipeline_pipeline List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CodePipeline::Pipeline resource type.
 ---
 
 # awscc_codepipeline_pipeline (List Resource)
 
-
+List all resources for `AWS::CodePipeline::Pipeline` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_medialive_cluster List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MediaLive::Cluster resource type.
 ---
 
 # awscc_medialive_cluster (List Resource)
 
-
+List all resources for `AWS::MediaLive::Cluster` resource type.
 
 ## Example Usage
 

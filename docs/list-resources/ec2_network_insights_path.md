@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_network_insights_path List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::NetworkInsightsPath resource type.
 ---
 
 # awscc_ec2_network_insights_path (List Resource)
 
-
+List all resources for `AWS::EC2::NetworkInsightsPath` resource type.
 
 ## Example Usage
 

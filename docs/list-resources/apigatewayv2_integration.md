@@ -3,12 +3,12 @@
 page_title: "awscc_apigatewayv2_integration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ApiGatewayV2::Integration resource type.
 ---
 
 # awscc_apigatewayv2_integration (List Resource)
 
-
+List all resources for `AWS::ApiGatewayV2::Integration` resource type.
 
 ## Example Usage
 

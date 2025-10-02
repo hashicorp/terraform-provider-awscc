@@ -3,12 +3,12 @@
 page_title: "awscc_cloudfront_continuous_deployment_policy List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudFront::ContinuousDeploymentPolicy resource type.
 ---
 
 # awscc_cloudfront_continuous_deployment_policy (List Resource)
 
-
+List all resources for `AWS::CloudFront::ContinuousDeploymentPolicy` resource type.
 
 ## Example Usage
 

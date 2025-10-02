@@ -3,12 +3,12 @@
 page_title: "awscc_rum_app_monitor List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::RUM::AppMonitor resource type.
 ---
 
 # awscc_rum_app_monitor (List Resource)
 
-
+List all resources for `AWS::RUM::AppMonitor` resource type.
 
 ## Example Usage
 

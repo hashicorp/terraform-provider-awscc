@@ -3,12 +3,12 @@
 page_title: "awscc_datapipeline_pipeline List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DataPipeline::Pipeline resource type.
 ---
 
 # awscc_datapipeline_pipeline (List Resource)
 
-
+List all resources for `AWS::DataPipeline::Pipeline` resource type.
 
 ## Example Usage
 

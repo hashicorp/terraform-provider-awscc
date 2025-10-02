@@ -3,12 +3,12 @@
 page_title: "awscc_cloudfront_response_headers_policy List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudFront::ResponseHeadersPolicy resource type.
 ---
 
 # awscc_cloudfront_response_headers_policy (List Resource)
 
-
+List all resources for `AWS::CloudFront::ResponseHeadersPolicy` resource type.
 
 ## Example Usage
 

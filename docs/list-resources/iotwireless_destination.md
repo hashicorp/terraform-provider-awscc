@@ -3,12 +3,12 @@
 page_title: "awscc_iotwireless_destination List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTWireless::Destination resource type.
 ---
 
 # awscc_iotwireless_destination (List Resource)
 
-
+List all resources for `AWS::IoTWireless::Destination` resource type.
 
 ## Example Usage
 

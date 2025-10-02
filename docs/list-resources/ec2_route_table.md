@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_route_table List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::RouteTable resource type.
 ---
 
 # awscc_ec2_route_table (List Resource)
 
-
+List all resources for `AWS::EC2::RouteTable` resource type.
 
 ## Example Usage
 

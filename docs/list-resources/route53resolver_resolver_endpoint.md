@@ -3,12 +3,12 @@
 page_title: "awscc_route53resolver_resolver_endpoint List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Route53Resolver::ResolverEndpoint resource type.
 ---
 
 # awscc_route53resolver_resolver_endpoint (List Resource)
 
-
+List all resources for `AWS::Route53Resolver::ResolverEndpoint` resource type.
 
 ## Example Usage
 

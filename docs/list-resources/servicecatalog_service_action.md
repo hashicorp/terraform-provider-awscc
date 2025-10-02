@@ -3,12 +3,12 @@
 page_title: "awscc_servicecatalog_service_action List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ServiceCatalog::ServiceAction resource type.
 ---
 
 # awscc_servicecatalog_service_action (List Resource)
 
-
+List all resources for `AWS::ServiceCatalog::ServiceAction` resource type.
 
 ## Example Usage
 

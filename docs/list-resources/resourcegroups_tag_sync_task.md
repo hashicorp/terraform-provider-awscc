@@ -3,12 +3,12 @@
 page_title: "awscc_resourcegroups_tag_sync_task List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ResourceGroups::TagSyncTask resource type.
 ---
 
 # awscc_resourcegroups_tag_sync_task (List Resource)
 
-
+List all resources for `AWS::ResourceGroups::TagSyncTask` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_apigateway_domain_name_v2 List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ApiGateway::DomainNameV2 resource type.
 ---
 
 # awscc_apigateway_domain_name_v2 (List Resource)
 
-
+List all resources for `AWS::ApiGateway::DomainNameV2` resource type.
 
 ## Example Usage
 

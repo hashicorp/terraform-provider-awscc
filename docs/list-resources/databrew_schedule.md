@@ -3,12 +3,12 @@
 page_title: "awscc_databrew_schedule List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DataBrew::Schedule resource type.
 ---
 
 # awscc_databrew_schedule (List Resource)
 
-
+List all resources for `AWS::DataBrew::Schedule` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_sagemaker_user_profile List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SageMaker::UserProfile resource type.
 ---
 
 # awscc_sagemaker_user_profile (List Resource)
 
-
+List all resources for `AWS::SageMaker::UserProfile` resource type.
 
 ## Example Usage
 

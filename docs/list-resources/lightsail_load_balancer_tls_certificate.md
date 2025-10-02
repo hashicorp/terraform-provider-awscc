@@ -3,12 +3,12 @@
 page_title: "awscc_lightsail_load_balancer_tls_certificate List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Lightsail::LoadBalancerTlsCertificate resource type.
 ---
 
 # awscc_lightsail_load_balancer_tls_certificate (List Resource)
 
-
+List all resources for `AWS::Lightsail::LoadBalancerTlsCertificate` resource type.
 
 ## Example Usage
 

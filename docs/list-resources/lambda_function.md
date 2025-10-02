@@ -3,12 +3,12 @@
 page_title: "awscc_lambda_function List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Lambda::Function resource type.
 ---
 
 # awscc_lambda_function (List Resource)
 
-
+List all resources for `AWS::Lambda::Function` resource type.
 
 ## Example Usage
 

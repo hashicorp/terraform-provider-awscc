@@ -3,12 +3,12 @@
 page_title: "awscc_fsx_data_repository_association List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::FSx::DataRepositoryAssociation resource type.
 ---
 
 # awscc_fsx_data_repository_association (List Resource)
 
-
+List all resources for `AWS::FSx::DataRepositoryAssociation` resource type.
 
 ## Example Usage
 

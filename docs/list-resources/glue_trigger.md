@@ -3,12 +3,12 @@
 page_title: "awscc_glue_trigger List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Glue::Trigger resource type.
 ---
 
 # awscc_glue_trigger (List Resource)
 
-
+List all resources for `AWS::Glue::Trigger` resource type.
 
 ## Example Usage
 

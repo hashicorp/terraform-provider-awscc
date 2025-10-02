@@ -3,12 +3,12 @@
 page_title: "awscc_gamelift_matchmaking_rule_set List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::GameLift::MatchmakingRuleSet resource type.
 ---
 
 # awscc_gamelift_matchmaking_rule_set (List Resource)
 
-
+List all resources for `AWS::GameLift::MatchmakingRuleSet` resource type.
 
 ## Example Usage
 

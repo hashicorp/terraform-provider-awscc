@@ -3,12 +3,12 @@
 page_title: "awscc_athena_data_catalog List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Athena::DataCatalog resource type.
 ---
 
 # awscc_athena_data_catalog (List Resource)
 
-
+List all resources for `AWS::Athena::DataCatalog` resource type.
 
 ## Example Usage
 

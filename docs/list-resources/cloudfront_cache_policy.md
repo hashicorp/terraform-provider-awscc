@@ -3,12 +3,12 @@
 page_title: "awscc_cloudfront_cache_policy List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudFront::CachePolicy resource type.
 ---
 
 # awscc_cloudfront_cache_policy (List Resource)
 
-
+List all resources for `AWS::CloudFront::CachePolicy` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_supportapp_slack_workspace_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SupportApp::SlackWorkspaceConfiguration resource type.
 ---
 
 # awscc_supportapp_slack_workspace_configuration (List Resource)
 
-
+List all resources for `AWS::SupportApp::SlackWorkspaceConfiguration` resource type.
 
 ## Example Usage
 

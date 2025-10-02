@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_network_performance_metric_subscription List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::NetworkPerformanceMetricSubscription resource type.
 ---
 
 # awscc_ec2_network_performance_metric_subscription (List Resource)
 
-
+List all resources for `AWS::EC2::NetworkPerformanceMetricSubscription` resource type.
 
 ## Example Usage
 

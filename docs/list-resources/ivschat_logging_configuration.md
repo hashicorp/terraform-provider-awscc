@@ -3,12 +3,12 @@
 page_title: "awscc_ivschat_logging_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IVSChat::LoggingConfiguration resource type.
 ---
 
 # awscc_ivschat_logging_configuration (List Resource)
 
-
+List all resources for `AWS::IVSChat::LoggingConfiguration` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_macie_findings_filter List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Macie::FindingsFilter resource type.
 ---
 
 # awscc_macie_findings_filter (List Resource)
 
-
+List all resources for `AWS::Macie::FindingsFilter` resource type.
 
 ## Example Usage
 

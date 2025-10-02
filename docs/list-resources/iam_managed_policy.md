@@ -3,12 +3,12 @@
 page_title: "awscc_iam_managed_policy List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IAM::ManagedPolicy resource type.
 ---
 
 # awscc_iam_managed_policy (List Resource)
 
-
+List all resources for `AWS::IAM::ManagedPolicy` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_guardduty_threat_intel_set List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::GuardDuty::ThreatIntelSet resource type.
 ---
 
 # awscc_guardduty_threat_intel_set (List Resource)
 
-
+List all resources for `AWS::GuardDuty::ThreatIntelSet` resource type.
 
 ## Example Usage
 

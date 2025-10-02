@@ -3,12 +3,12 @@
 page_title: "awscc_cloudfront_realtime_log_config List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudFront::RealtimeLogConfig resource type.
 ---
 
 # awscc_cloudfront_realtime_log_config (List Resource)
 
-
+List all resources for `AWS::CloudFront::RealtimeLogConfig` resource type.
 
 ## Example Usage
 

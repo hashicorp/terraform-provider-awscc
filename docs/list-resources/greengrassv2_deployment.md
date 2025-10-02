@@ -3,12 +3,12 @@
 page_title: "awscc_greengrassv2_deployment List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::GreengrassV2::Deployment resource type.
 ---
 
 # awscc_greengrassv2_deployment (List Resource)
 
-
+List all resources for `AWS::GreengrassV2::Deployment` resource type.
 
 ## Example Usage
 

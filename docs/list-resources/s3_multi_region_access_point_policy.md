@@ -3,12 +3,12 @@
 page_title: "awscc_s3_multi_region_access_point_policy List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::S3::MultiRegionAccessPointPolicy resource type.
 ---
 
 # awscc_s3_multi_region_access_point_policy (List Resource)
 
-
+List all resources for `AWS::S3::MultiRegionAccessPointPolicy` resource type.
 
 ## Example Usage
 

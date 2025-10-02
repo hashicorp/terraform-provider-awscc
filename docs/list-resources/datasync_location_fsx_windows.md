@@ -3,12 +3,12 @@
 page_title: "awscc_datasync_location_fsx_windows List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DataSync::LocationFSxWindows resource type.
 ---
 
 # awscc_datasync_location_fsx_windows (List Resource)
 
-
+List all resources for `AWS::DataSync::LocationFSxWindows` resource type.
 
 ## Example Usage
 

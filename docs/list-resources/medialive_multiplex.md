@@ -3,12 +3,12 @@
 page_title: "awscc_medialive_multiplex List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MediaLive::Multiplex resource type.
 ---
 
 # awscc_medialive_multiplex (List Resource)
 
-
+List all resources for `AWS::MediaLive::Multiplex` resource type.
 
 ## Example Usage
 

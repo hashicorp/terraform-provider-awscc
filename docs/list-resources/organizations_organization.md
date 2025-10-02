@@ -3,12 +3,12 @@
 page_title: "awscc_organizations_organization List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Organizations::Organization resource type.
 ---
 
 # awscc_organizations_organization (List Resource)
 
-
+List all resources for `AWS::Organizations::Organization` resource type.
 
 ## Example Usage
 

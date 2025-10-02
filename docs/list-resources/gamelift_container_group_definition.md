@@ -3,12 +3,12 @@
 page_title: "awscc_gamelift_container_group_definition List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::GameLift::ContainerGroupDefinition resource type.
 ---
 
 # awscc_gamelift_container_group_definition (List Resource)
 
-
+List all resources for `AWS::GameLift::ContainerGroupDefinition` resource type.
 
 ## Example Usage
 

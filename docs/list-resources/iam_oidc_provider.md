@@ -3,12 +3,12 @@
 page_title: "awscc_iam_oidc_provider List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IAM::OIDCProvider resource type.
 ---
 
 # awscc_iam_oidc_provider (List Resource)
 
-
+List all resources for `AWS::IAM::OIDCProvider` resource type.
 
 ## Example Usage
 

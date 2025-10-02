@@ -3,12 +3,12 @@
 page_title: "awscc_securitylake_aws_log_source List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SecurityLake::AwsLogSource resource type.
 ---
 
 # awscc_securitylake_aws_log_source (List Resource)
 
-
+List all resources for `AWS::SecurityLake::AwsLogSource` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_licensemanager_license List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::LicenseManager::License resource type.
 ---
 
 # awscc_licensemanager_license (List Resource)
 
-
+List all resources for `AWS::LicenseManager::License` resource type.
 
 ## Example Usage
 

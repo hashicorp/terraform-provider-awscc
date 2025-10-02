@@ -3,12 +3,12 @@
 page_title: "awscc_batch_job_queue List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Batch::JobQueue resource type.
 ---
 
 # awscc_batch_job_queue (List Resource)
 
-
+List all resources for `AWS::Batch::JobQueue` resource type.
 
 ## Example Usage
 

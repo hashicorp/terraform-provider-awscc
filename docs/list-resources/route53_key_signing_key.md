@@ -3,12 +3,12 @@
 page_title: "awscc_route53_key_signing_key List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Route53::KeySigningKey resource type.
 ---
 
 # awscc_route53_key_signing_key (List Resource)
 
-
+List all resources for `AWS::Route53::KeySigningKey` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_cloudtrail_dashboard List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudTrail::Dashboard resource type.
 ---
 
 # awscc_cloudtrail_dashboard (List Resource)
 
-
+List all resources for `AWS::CloudTrail::Dashboard` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_ssm_patch_baseline List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SSM::PatchBaseline resource type.
 ---
 
 # awscc_ssm_patch_baseline (List Resource)
 
-
+List all resources for `AWS::SSM::PatchBaseline` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_omics_sequence_store List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Omics::SequenceStore resource type.
 ---
 
 # awscc_omics_sequence_store (List Resource)
 
-
+List all resources for `AWS::Omics::SequenceStore` resource type.
 
 ## Example Usage
 

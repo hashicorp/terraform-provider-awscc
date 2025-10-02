@@ -3,12 +3,12 @@
 page_title: "awscc_sso_assignment List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SSO::Assignment resource type.
 ---
 
 # awscc_sso_assignment (List Resource)
 
-
+List all resources for `AWS::SSO::Assignment` resource type.
 
 ## Example Usage
 

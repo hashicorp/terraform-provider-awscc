@@ -3,12 +3,12 @@
 page_title: "awscc_gamelift_game_session_queue List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::GameLift::GameSessionQueue resource type.
 ---
 
 # awscc_gamelift_game_session_queue (List Resource)
 
-
+List all resources for `AWS::GameLift::GameSessionQueue` resource type.
 
 ## Example Usage
 

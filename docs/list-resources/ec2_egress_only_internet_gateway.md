@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_egress_only_internet_gateway List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::EgressOnlyInternetGateway resource type.
 ---
 
 # awscc_ec2_egress_only_internet_gateway (List Resource)
 
-
+List all resources for `AWS::EC2::EgressOnlyInternetGateway` resource type.
 
 ## Example Usage
 

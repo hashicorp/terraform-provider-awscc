@@ -3,12 +3,12 @@
 page_title: "awscc_elasticache_subnet_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ElastiCache::SubnetGroup resource type.
 ---
 
 # awscc_elasticache_subnet_group (List Resource)
 
-
+List all resources for `AWS::ElastiCache::SubnetGroup` resource type.
 
 ## Example Usage
 

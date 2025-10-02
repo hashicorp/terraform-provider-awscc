@@ -3,12 +3,12 @@
 page_title: "awscc_deadline_monitor List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Deadline::Monitor resource type.
 ---
 
 # awscc_deadline_monitor (List Resource)
 
-
+List all resources for `AWS::Deadline::Monitor` resource type.
 
 ## Example Usage
 

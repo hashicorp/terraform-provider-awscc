@@ -3,12 +3,12 @@
 page_title: "awscc_bedrock_prompt List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Bedrock::Prompt resource type.
 ---
 
 # awscc_bedrock_prompt (List Resource)
 
-
+List all resources for `AWS::Bedrock::Prompt` resource type.
 
 ## Example Usage
 

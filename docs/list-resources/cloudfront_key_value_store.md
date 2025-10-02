@@ -3,12 +3,12 @@
 page_title: "awscc_cloudfront_key_value_store List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudFront::KeyValueStore resource type.
 ---
 
 # awscc_cloudfront_key_value_store (List Resource)
 
-
+List all resources for `AWS::CloudFront::KeyValueStore` resource type.
 
 ## Example Usage
 

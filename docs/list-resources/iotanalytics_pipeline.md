@@ -3,12 +3,12 @@
 page_title: "awscc_iotanalytics_pipeline List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTAnalytics::Pipeline resource type.
 ---
 
 # awscc_iotanalytics_pipeline (List Resource)
 
-
+List all resources for `AWS::IoTAnalytics::Pipeline` resource type.
 
 ## Example Usage
 

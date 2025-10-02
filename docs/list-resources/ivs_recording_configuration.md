@@ -3,12 +3,12 @@
 page_title: "awscc_ivs_recording_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IVS::RecordingConfiguration resource type.
 ---
 
 # awscc_ivs_recording_configuration (List Resource)
 
-
+List all resources for `AWS::IVS::RecordingConfiguration` resource type.
 
 ## Example Usage
 

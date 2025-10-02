@@ -3,12 +3,12 @@
 page_title: "awscc_workspacesweb_browser_settings List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::WorkSpacesWeb::BrowserSettings resource type.
 ---
 
 # awscc_workspacesweb_browser_settings (List Resource)
 
-
+List all resources for `AWS::WorkSpacesWeb::BrowserSettings` resource type.
 
 ## Example Usage
 

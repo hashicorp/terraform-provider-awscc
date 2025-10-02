@@ -3,12 +3,12 @@
 page_title: "awscc_appintegrations_data_integration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::AppIntegrations::DataIntegration resource type.
 ---
 
 # awscc_appintegrations_data_integration (List Resource)
 
-
+List all resources for `AWS::AppIntegrations::DataIntegration` resource type.
 
 ## Example Usage
 

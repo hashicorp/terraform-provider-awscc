@@ -3,12 +3,12 @@
 page_title: "awscc_networkfirewall_vpc_endpoint_association List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::NetworkFirewall::VpcEndpointAssociation resource type.
 ---
 
 # awscc_networkfirewall_vpc_endpoint_association (List Resource)
 
-
+List all resources for `AWS::NetworkFirewall::VpcEndpointAssociation` resource type.
 
 ## Example Usage
 

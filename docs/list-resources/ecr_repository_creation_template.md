@@ -3,12 +3,12 @@
 page_title: "awscc_ecr_repository_creation_template List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ECR::RepositoryCreationTemplate resource type.
 ---
 
 # awscc_ecr_repository_creation_template (List Resource)
 
-
+List all resources for `AWS::ECR::RepositoryCreationTemplate` resource type.
 
 ## Example Usage
 

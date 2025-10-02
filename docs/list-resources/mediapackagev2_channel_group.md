@@ -3,12 +3,12 @@
 page_title: "awscc_mediapackagev2_channel_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MediaPackageV2::ChannelGroup resource type.
 ---
 
 # awscc_mediapackagev2_channel_group (List Resource)
 
-
+List all resources for `AWS::MediaPackageV2::ChannelGroup` resource type.
 
 ## Example Usage
 

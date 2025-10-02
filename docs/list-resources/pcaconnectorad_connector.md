@@ -3,12 +3,12 @@
 page_title: "awscc_pcaconnectorad_connector List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::PCAConnectorAD::Connector resource type.
 ---
 
 # awscc_pcaconnectorad_connector (List Resource)
 
-
+List all resources for `AWS::PCAConnectorAD::Connector` resource type.
 
 ## Example Usage
 

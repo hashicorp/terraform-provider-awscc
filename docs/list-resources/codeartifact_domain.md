@@ -3,12 +3,12 @@
 page_title: "awscc_codeartifact_domain List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CodeArtifact::Domain resource type.
 ---
 
 # awscc_codeartifact_domain (List Resource)
 
-
+List all resources for `AWS::CodeArtifact::Domain` resource type.
 
 ## Example Usage
 

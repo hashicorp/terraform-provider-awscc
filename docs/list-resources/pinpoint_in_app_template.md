@@ -3,12 +3,12 @@
 page_title: "awscc_pinpoint_in_app_template List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Pinpoint::InAppTemplate resource type.
 ---
 
 # awscc_pinpoint_in_app_template (List Resource)
 
-
+List all resources for `AWS::Pinpoint::InAppTemplate` resource type.
 
 ## Example Usage
 

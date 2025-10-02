@@ -3,12 +3,12 @@
 page_title: "awscc_billingconductor_pricing_rule List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::BillingConductor::PricingRule resource type.
 ---
 
 # awscc_billingconductor_pricing_rule (List Resource)
 
-
+List all resources for `AWS::BillingConductor::PricingRule` resource type.
 
 ## Example Usage
 

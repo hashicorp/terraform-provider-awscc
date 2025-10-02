@@ -3,12 +3,12 @@
 page_title: "awscc_ivs_playback_restriction_policy List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IVS::PlaybackRestrictionPolicy resource type.
 ---
 
 # awscc_ivs_playback_restriction_policy (List Resource)
 
-
+List all resources for `AWS::IVS::PlaybackRestrictionPolicy` resource type.
 
 ## Example Usage
 

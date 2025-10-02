@@ -3,12 +3,12 @@
 page_title: "awscc_iotsitewise_project List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTSiteWise::Project resource type.
 ---
 
 # awscc_iotsitewise_project (List Resource)
 
-
+List all resources for `AWS::IoTSiteWise::Project` resource type.
 
 ## Example Usage
 

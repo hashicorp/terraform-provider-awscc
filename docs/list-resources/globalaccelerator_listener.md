@@ -3,12 +3,12 @@
 page_title: "awscc_globalaccelerator_listener List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::GlobalAccelerator::Listener resource type.
 ---
 
 # awscc_globalaccelerator_listener (List Resource)
 
-
+List all resources for `AWS::GlobalAccelerator::Listener` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_ecs_task_definition List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ECS::TaskDefinition resource type.
 ---
 
 # awscc_ecs_task_definition (List Resource)
 
-
+List all resources for `AWS::ECS::TaskDefinition` resource type.
 
 ## Example Usage
 

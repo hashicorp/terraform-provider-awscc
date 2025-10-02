@@ -3,12 +3,12 @@
 page_title: "awscc_kinesisfirehose_delivery_stream List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::KinesisFirehose::DeliveryStream resource type.
 ---
 
 # awscc_kinesisfirehose_delivery_stream (List Resource)
 
-
+List all resources for `AWS::KinesisFirehose::DeliveryStream` resource type.
 
 ## Example Usage
 

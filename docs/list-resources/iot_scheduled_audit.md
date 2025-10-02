@@ -3,12 +3,12 @@
 page_title: "awscc_iot_scheduled_audit List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoT::ScheduledAudit resource type.
 ---
 
 # awscc_iot_scheduled_audit (List Resource)
 
-
+List all resources for `AWS::IoT::ScheduledAudit` resource type.
 
 ## Example Usage
 

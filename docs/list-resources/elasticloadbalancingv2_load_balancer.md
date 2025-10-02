@@ -3,12 +3,12 @@
 page_title: "awscc_elasticloadbalancingv2_load_balancer List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ElasticLoadBalancingV2::LoadBalancer resource type.
 ---
 
 # awscc_elasticloadbalancingv2_load_balancer (List Resource)
 
-
+List all resources for `AWS::ElasticLoadBalancingV2::LoadBalancer` resource type.
 
 ## Example Usage
 

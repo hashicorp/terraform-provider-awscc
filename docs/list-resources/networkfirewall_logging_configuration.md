@@ -3,12 +3,12 @@
 page_title: "awscc_networkfirewall_logging_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::NetworkFirewall::LoggingConfiguration resource type.
 ---
 
 # awscc_networkfirewall_logging_configuration (List Resource)
 
-
+List all resources for `AWS::NetworkFirewall::LoggingConfiguration` resource type.
 
 ## Example Usage
 

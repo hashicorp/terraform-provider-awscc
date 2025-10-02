@@ -3,12 +3,12 @@
 page_title: "awscc_ivschat_room List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IVSChat::Room resource type.
 ---
 
 # awscc_ivschat_room (List Resource)
 
-
+List all resources for `AWS::IVSChat::Room` resource type.
 
 ## Example Usage
 

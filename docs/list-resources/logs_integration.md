@@ -3,12 +3,12 @@
 page_title: "awscc_logs_integration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Logs::Integration resource type.
 ---
 
 # awscc_logs_integration (List Resource)
 
-
+List all resources for `AWS::Logs::Integration` resource type.
 
 ## Example Usage
 

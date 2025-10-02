@@ -3,12 +3,12 @@
 page_title: "awscc_iotevents_alarm_model List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTEvents::AlarmModel resource type.
 ---
 
 # awscc_iotevents_alarm_model (List Resource)
 
-
+List all resources for `AWS::IoTEvents::AlarmModel` resource type.
 
 ## Example Usage
 

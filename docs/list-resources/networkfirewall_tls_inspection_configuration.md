@@ -3,12 +3,12 @@
 page_title: "awscc_networkfirewall_tls_inspection_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::NetworkFirewall::TLSInspectionConfiguration resource type.
 ---
 
 # awscc_networkfirewall_tls_inspection_configuration (List Resource)
 
-
+List all resources for `AWS::NetworkFirewall::TLSInspectionConfiguration` resource type.
 
 ## Example Usage
 

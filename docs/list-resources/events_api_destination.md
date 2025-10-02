@@ -3,12 +3,12 @@
 page_title: "awscc_events_api_destination List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Events::ApiDestination resource type.
 ---
 
 # awscc_events_api_destination (List Resource)
 
-
+List all resources for `AWS::Events::ApiDestination` resource type.
 
 ## Example Usage
 

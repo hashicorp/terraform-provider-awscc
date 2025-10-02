@@ -3,12 +3,12 @@
 page_title: "awscc_events_endpoint List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Events::Endpoint resource type.
 ---
 
 # awscc_events_endpoint (List Resource)
 
-
+List all resources for `AWS::Events::Endpoint` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_healthimaging_datastore List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::HealthImaging::Datastore resource type.
 ---
 
 # awscc_healthimaging_datastore (List Resource)
 
-
+List all resources for `AWS::HealthImaging::Datastore` resource type.
 
 ## Example Usage
 

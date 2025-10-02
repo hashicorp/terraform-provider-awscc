@@ -3,12 +3,12 @@
 page_title: "awscc_kafkaconnect_connector List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::KafkaConnect::Connector resource type.
 ---
 
 # awscc_kafkaconnect_connector (List Resource)
 
-
+List all resources for `AWS::KafkaConnect::Connector` resource type.
 
 ## Example Usage
 

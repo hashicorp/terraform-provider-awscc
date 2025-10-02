@@ -3,12 +3,12 @@
 page_title: "awscc_connectcampaigns_campaign List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ConnectCampaigns::Campaign resource type.
 ---
 
 # awscc_connectcampaigns_campaign (List Resource)
 
-
+List all resources for `AWS::ConnectCampaigns::Campaign` resource type.
 
 ## Example Usage
 

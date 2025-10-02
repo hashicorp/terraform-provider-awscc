@@ -3,12 +3,12 @@
 page_title: "awscc_timestream_database List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Timestream::Database resource type.
 ---
 
 # awscc_timestream_database (List Resource)
 
-
+List all resources for `AWS::Timestream::Database` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_cloudformation_guard_hook List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudFormation::GuardHook resource type.
 ---
 
 # awscc_cloudformation_guard_hook (List Resource)
 
-
+List all resources for `AWS::CloudFormation::GuardHook` resource type.
 
 ## Example Usage
 

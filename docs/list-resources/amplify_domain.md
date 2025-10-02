@@ -3,12 +3,12 @@
 page_title: "awscc_amplify_domain List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Amplify::Domain resource type.
 ---
 
 # awscc_amplify_domain (List Resource)
 
-
+List all resources for `AWS::Amplify::Domain` resource type.
 
 ## Example Usage
 

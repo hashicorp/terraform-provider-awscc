@@ -3,12 +3,12 @@
 page_title: "awscc_rds_db_subnet_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::RDS::DBSubnetGroup resource type.
 ---
 
 # awscc_rds_db_subnet_group (List Resource)
 
-
+List all resources for `AWS::RDS::DBSubnetGroup` resource type.
 
 ## Example Usage
 

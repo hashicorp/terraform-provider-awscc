@@ -3,12 +3,12 @@
 page_title: "awscc_appconfig_deployment_strategy List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::AppConfig::DeploymentStrategy resource type.
 ---
 
 # awscc_appconfig_deployment_strategy (List Resource)
 
-
+List all resources for `AWS::AppConfig::DeploymentStrategy` resource type.
 
 ## Example Usage
 

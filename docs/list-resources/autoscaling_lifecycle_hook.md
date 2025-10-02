@@ -3,12 +3,12 @@
 page_title: "awscc_autoscaling_lifecycle_hook List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::AutoScaling::LifecycleHook resource type.
 ---
 
 # awscc_autoscaling_lifecycle_hook (List Resource)
 
-
+List all resources for `AWS::AutoScaling::LifecycleHook` resource type.
 
 ## Example Usage
 

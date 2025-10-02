@@ -3,12 +3,12 @@
 page_title: "awscc_cloudfront_origin_request_policy List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudFront::OriginRequestPolicy resource type.
 ---
 
 # awscc_cloudfront_origin_request_policy (List Resource)
 
-
+List all resources for `AWS::CloudFront::OriginRequestPolicy` resource type.
 
 ## Example Usage
 

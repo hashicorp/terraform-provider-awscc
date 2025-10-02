@@ -3,12 +3,12 @@
 page_title: "awscc_connect_instance_storage_config List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Connect::InstanceStorageConfig resource type.
 ---
 
 # awscc_connect_instance_storage_config (List Resource)
 
-
+List all resources for `AWS::Connect::InstanceStorageConfig` resource type.
 
 ## Example Usage
 

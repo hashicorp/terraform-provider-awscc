@@ -3,12 +3,12 @@
 page_title: "awscc_ses_mail_manager_rule_set List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SES::MailManagerRuleSet resource type.
 ---
 
 # awscc_ses_mail_manager_rule_set (List Resource)
 
-
+List all resources for `AWS::SES::MailManagerRuleSet` resource type.
 
 ## Example Usage
 

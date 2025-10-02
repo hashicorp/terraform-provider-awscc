@@ -3,12 +3,12 @@
 page_title: "awscc_iot_resource_specific_logging List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoT::ResourceSpecificLogging resource type.
 ---
 
 # awscc_iot_resource_specific_logging (List Resource)
 
-
+List all resources for `AWS::IoT::ResourceSpecificLogging` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_ses_mail_manager_addon_subscription List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SES::MailManagerAddonSubscription resource type.
 ---
 
 # awscc_ses_mail_manager_addon_subscription (List Resource)
 
-
+List all resources for `AWS::SES::MailManagerAddonSubscription` resource type.
 
 ## Example Usage
 

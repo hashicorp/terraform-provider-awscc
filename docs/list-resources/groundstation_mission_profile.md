@@ -3,12 +3,12 @@
 page_title: "awscc_groundstation_mission_profile List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::GroundStation::MissionProfile resource type.
 ---
 
 # awscc_groundstation_mission_profile (List Resource)
 
-
+List all resources for `AWS::GroundStation::MissionProfile` resource type.
 
 ## Example Usage
 

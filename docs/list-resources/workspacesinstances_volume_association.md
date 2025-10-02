@@ -3,12 +3,12 @@
 page_title: "awscc_workspacesinstances_volume_association List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::WorkspacesInstances::VolumeAssociation resource type.
 ---
 
 # awscc_workspacesinstances_volume_association (List Resource)
 
-
+List all resources for `AWS::WorkspacesInstances::VolumeAssociation` resource type.
 
 ## Example Usage
 

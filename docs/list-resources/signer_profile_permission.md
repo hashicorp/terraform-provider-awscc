@@ -3,12 +3,12 @@
 page_title: "awscc_signer_profile_permission List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Signer::ProfilePermission resource type.
 ---
 
 # awscc_signer_profile_permission (List Resource)
 
-
+List all resources for `AWS::Signer::ProfilePermission` resource type.
 
 ## Example Usage
 

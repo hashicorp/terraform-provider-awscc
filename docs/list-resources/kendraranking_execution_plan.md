@@ -3,12 +3,12 @@
 page_title: "awscc_kendraranking_execution_plan List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::KendraRanking::ExecutionPlan resource type.
 ---
 
 # awscc_kendraranking_execution_plan (List Resource)
 
-
+List all resources for `AWS::KendraRanking::ExecutionPlan` resource type.
 
 ## Example Usage
 

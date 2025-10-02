@@ -3,12 +3,12 @@
 page_title: "awscc_appsync_api List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::AppSync::Api resource type.
 ---
 
 # awscc_appsync_api (List Resource)
 
-
+List all resources for `AWS::AppSync::Api` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_iam_virtual_mfa_device List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IAM::VirtualMFADevice resource type.
 ---
 
 # awscc_iam_virtual_mfa_device (List Resource)
 
-
+List all resources for `AWS::IAM::VirtualMFADevice` resource type.
 
 ## Example Usage
 

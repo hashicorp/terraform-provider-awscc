@@ -3,12 +3,12 @@
 page_title: "awscc_m2_application List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::M2::Application resource type.
 ---
 
 # awscc_m2_application (List Resource)
 
-
+List all resources for `AWS::M2::Application` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_rds_db_proxy_endpoint List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::RDS::DBProxyEndpoint resource type.
 ---
 
 # awscc_rds_db_proxy_endpoint (List Resource)
 
-
+List all resources for `AWS::RDS::DBProxyEndpoint` resource type.
 
 ## Example Usage
 

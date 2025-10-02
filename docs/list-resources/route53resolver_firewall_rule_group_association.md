@@ -3,12 +3,12 @@
 page_title: "awscc_route53resolver_firewall_rule_group_association List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Route53Resolver::FirewallRuleGroupAssociation resource type.
 ---
 
 # awscc_route53resolver_firewall_rule_group_association (List Resource)
 
-
+List all resources for `AWS::Route53Resolver::FirewallRuleGroupAssociation` resource type.
 
 ## Example Usage
 

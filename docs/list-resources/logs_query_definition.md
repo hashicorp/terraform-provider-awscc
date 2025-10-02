@@ -3,12 +3,12 @@
 page_title: "awscc_logs_query_definition List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Logs::QueryDefinition resource type.
 ---
 
 # awscc_logs_query_definition (List Resource)
 
-
+List all resources for `AWS::Logs::QueryDefinition` resource type.
 
 ## Example Usage
 

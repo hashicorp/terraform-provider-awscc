@@ -3,12 +3,12 @@
 page_title: "awscc_entityresolution_id_mapping_workflow List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EntityResolution::IdMappingWorkflow resource type.
 ---
 
 # awscc_entityresolution_id_mapping_workflow (List Resource)
 
-
+List all resources for `AWS::EntityResolution::IdMappingWorkflow` resource type.
 
 ## Example Usage
 

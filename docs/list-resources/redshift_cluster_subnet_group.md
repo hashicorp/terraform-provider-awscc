@@ -3,12 +3,12 @@
 page_title: "awscc_redshift_cluster_subnet_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Redshift::ClusterSubnetGroup resource type.
 ---
 
 # awscc_redshift_cluster_subnet_group (List Resource)
 
-
+List all resources for `AWS::Redshift::ClusterSubnetGroup` resource type.
 
 ## Example Usage
 

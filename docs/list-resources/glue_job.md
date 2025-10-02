@@ -3,12 +3,12 @@
 page_title: "awscc_glue_job List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Glue::Job resource type.
 ---
 
 # awscc_glue_job (List Resource)
 
-
+List all resources for `AWS::Glue::Job` resource type.
 
 ## Example Usage
 

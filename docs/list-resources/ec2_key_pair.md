@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_key_pair List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::KeyPair resource type.
 ---
 
 # awscc_ec2_key_pair (List Resource)
 
-
+List all resources for `AWS::EC2::KeyPair` resource type.
 
 ## Example Usage
 

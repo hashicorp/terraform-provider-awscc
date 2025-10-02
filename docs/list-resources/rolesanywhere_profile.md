@@ -3,12 +3,12 @@
 page_title: "awscc_rolesanywhere_profile List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::RolesAnywhere::Profile resource type.
 ---
 
 # awscc_rolesanywhere_profile (List Resource)
 
-
+List all resources for `AWS::RolesAnywhere::Profile` resource type.
 
 ## Example Usage
 

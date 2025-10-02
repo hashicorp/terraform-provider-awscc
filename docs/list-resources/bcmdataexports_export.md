@@ -3,12 +3,12 @@
 page_title: "awscc_bcmdataexports_export List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::BCMDataExports::Export resource type.
 ---
 
 # awscc_bcmdataexports_export (List Resource)
 
-
+List all resources for `AWS::BCMDataExports::Export` resource type.
 
 ## Example Usage
 

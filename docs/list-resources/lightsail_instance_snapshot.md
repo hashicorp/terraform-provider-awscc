@@ -3,12 +3,12 @@
 page_title: "awscc_lightsail_instance_snapshot List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Lightsail::InstanceSnapshot resource type.
 ---
 
 # awscc_lightsail_instance_snapshot (List Resource)
 
-
+List all resources for `AWS::Lightsail::InstanceSnapshot` resource type.
 
 ## Example Usage
 

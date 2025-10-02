@@ -3,12 +3,12 @@
 page_title: "awscc_quicksight_vpc_connection List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::QuickSight::VPCConnection resource type.
 ---
 
 # awscc_quicksight_vpc_connection (List Resource)
 
-
+List all resources for `AWS::QuickSight::VPCConnection` resource type.
 
 ## Example Usage
 

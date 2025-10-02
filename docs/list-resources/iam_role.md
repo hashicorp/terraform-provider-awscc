@@ -3,12 +3,12 @@
 page_title: "awscc_iam_role List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IAM::Role resource type.
 ---
 
 # awscc_iam_role (List Resource)
 
-
+List all resources for `AWS::IAM::Role` resource type.
 
 ## Example Usage
 

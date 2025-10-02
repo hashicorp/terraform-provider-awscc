@@ -3,12 +3,12 @@
 page_title: "awscc_inspectorv2_filter List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::InspectorV2::Filter resource type.
 ---
 
 # awscc_inspectorv2_filter (List Resource)
 
-
+List all resources for `AWS::InspectorV2::Filter` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_cognito_identity_pool List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Cognito::IdentityPool resource type.
 ---
 
 # awscc_cognito_identity_pool (List Resource)
 
-
+List all resources for `AWS::Cognito::IdentityPool` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_datasync_location_object_storage List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DataSync::LocationObjectStorage resource type.
 ---
 
 # awscc_datasync_location_object_storage (List Resource)
 
-
+List all resources for `AWS::DataSync::LocationObjectStorage` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_quicksight_folder List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::QuickSight::Folder resource type.
 ---
 
 # awscc_quicksight_folder (List Resource)
 
-
+List all resources for `AWS::QuickSight::Folder` resource type.
 
 ## Example Usage
 

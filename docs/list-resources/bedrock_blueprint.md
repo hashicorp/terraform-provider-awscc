@@ -3,12 +3,12 @@
 page_title: "awscc_bedrock_blueprint List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Bedrock::Blueprint resource type.
 ---
 
 # awscc_bedrock_blueprint (List Resource)
 
-
+List all resources for `AWS::Bedrock::Blueprint` resource type.
 
 ## Example Usage
 

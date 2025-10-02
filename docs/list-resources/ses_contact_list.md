@@ -3,12 +3,12 @@
 page_title: "awscc_ses_contact_list List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SES::ContactList resource type.
 ---
 
 # awscc_ses_contact_list (List Resource)
 
-
+List all resources for `AWS::SES::ContactList` resource type.
 
 ## Example Usage
 

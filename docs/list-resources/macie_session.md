@@ -3,12 +3,12 @@
 page_title: "awscc_macie_session List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Macie::Session resource type.
 ---
 
 # awscc_macie_session (List Resource)
 
-
+List all resources for `AWS::Macie::Session` resource type.
 
 ## Example Usage
 

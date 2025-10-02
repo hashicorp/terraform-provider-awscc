@@ -3,12 +3,12 @@
 page_title: "awscc_ses_email_identity List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SES::EmailIdentity resource type.
 ---
 
 # awscc_ses_email_identity (List Resource)
 
-
+List all resources for `AWS::SES::EmailIdentity` resource type.
 
 ## Example Usage
 

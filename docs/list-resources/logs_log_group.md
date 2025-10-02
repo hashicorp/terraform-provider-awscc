@@ -3,12 +3,12 @@
 page_title: "awscc_logs_log_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Logs::LogGroup resource type.
 ---
 
 # awscc_logs_log_group (List Resource)
 
-
+List all resources for `AWS::Logs::LogGroup` resource type.
 
 ## Example Usage
 

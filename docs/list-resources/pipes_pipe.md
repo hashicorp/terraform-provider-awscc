@@ -3,12 +3,12 @@
 page_title: "awscc_pipes_pipe List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Pipes::Pipe resource type.
 ---
 
 # awscc_pipes_pipe (List Resource)
 
-
+List all resources for `AWS::Pipes::Pipe` resource type.
 
 ## Example Usage
 

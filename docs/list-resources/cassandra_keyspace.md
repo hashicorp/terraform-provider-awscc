@@ -3,12 +3,12 @@
 page_title: "awscc_cassandra_keyspace List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Cassandra::Keyspace resource type.
 ---
 
 # awscc_cassandra_keyspace (List Resource)
 
-
+List all resources for `AWS::Cassandra::Keyspace` resource type.
 
 ## Example Usage
 

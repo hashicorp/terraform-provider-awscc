@@ -3,12 +3,12 @@
 page_title: "awscc_apptest_test_case List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::AppTest::TestCase resource type.
 ---
 
 # awscc_apptest_test_case (List Resource)
 
-
+List all resources for `AWS::AppTest::TestCase` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_route53resolver_resolver_config List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Route53Resolver::ResolverConfig resource type.
 ---
 
 # awscc_route53resolver_resolver_config (List Resource)
 
-
+List all resources for `AWS::Route53Resolver::ResolverConfig` resource type.
 
 ## Example Usage
 

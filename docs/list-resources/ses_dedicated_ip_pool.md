@@ -3,12 +3,12 @@
 page_title: "awscc_ses_dedicated_ip_pool List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SES::DedicatedIpPool resource type.
 ---
 
 # awscc_ses_dedicated_ip_pool (List Resource)
 
-
+List all resources for `AWS::SES::DedicatedIpPool` resource type.
 
 ## Example Usage
 

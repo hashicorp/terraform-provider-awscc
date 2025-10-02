@@ -3,12 +3,12 @@
 page_title: "awscc_secretsmanager_resource_policy List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SecretsManager::ResourcePolicy resource type.
 ---
 
 # awscc_secretsmanager_resource_policy (List Resource)
 
-
+List all resources for `AWS::SecretsManager::ResourcePolicy` resource type.
 
 ## Example Usage
 

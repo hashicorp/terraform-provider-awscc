@@ -3,12 +3,12 @@
 page_title: "awscc_lightsail_load_balancer List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Lightsail::LoadBalancer resource type.
 ---
 
 # awscc_lightsail_load_balancer (List Resource)
 
-
+List all resources for `AWS::Lightsail::LoadBalancer` resource type.
 
 ## Example Usage
 

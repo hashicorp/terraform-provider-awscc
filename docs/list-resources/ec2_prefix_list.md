@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_prefix_list List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::PrefixList resource type.
 ---
 
 # awscc_ec2_prefix_list (List Resource)
 
-
+List all resources for `AWS::EC2::PrefixList` resource type.
 
 ## Example Usage
 

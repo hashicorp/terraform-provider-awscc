@@ -3,12 +3,12 @@
 page_title: "awscc_guardduty_filter List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::GuardDuty::Filter resource type.
 ---
 
 # awscc_guardduty_filter (List Resource)
 
-
+List all resources for `AWS::GuardDuty::Filter` resource type.
 
 ## Example Usage
 

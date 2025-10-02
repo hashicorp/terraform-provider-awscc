@@ -3,12 +3,12 @@
 page_title: "awscc_shield_proactive_engagement List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Shield::ProactiveEngagement resource type.
 ---
 
 # awscc_shield_proactive_engagement (List Resource)
 
-
+List all resources for `AWS::Shield::ProactiveEngagement` resource type.
 
 ## Example Usage
 

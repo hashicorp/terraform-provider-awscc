@@ -3,12 +3,12 @@
 page_title: "awscc_gamelift_fleet List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::GameLift::Fleet resource type.
 ---
 
 # awscc_gamelift_fleet (List Resource)
 
-
+List all resources for `AWS::GameLift::Fleet` resource type.
 
 ## Example Usage
 

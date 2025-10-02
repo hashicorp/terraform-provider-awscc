@@ -3,12 +3,12 @@
 page_title: "awscc_ivs_ingest_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IVS::IngestConfiguration resource type.
 ---
 
 # awscc_ivs_ingest_configuration (List Resource)
 
-
+List all resources for `AWS::IVS::IngestConfiguration` resource type.
 
 ## Example Usage
 

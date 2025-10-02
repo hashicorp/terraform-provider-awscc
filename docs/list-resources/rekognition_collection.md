@@ -3,12 +3,12 @@
 page_title: "awscc_rekognition_collection List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Rekognition::Collection resource type.
 ---
 
 # awscc_rekognition_collection (List Resource)
 
-
+List all resources for `AWS::Rekognition::Collection` resource type.
 
 ## Example Usage
 

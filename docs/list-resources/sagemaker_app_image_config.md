@@ -3,12 +3,12 @@
 page_title: "awscc_sagemaker_app_image_config List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SageMaker::AppImageConfig resource type.
 ---
 
 # awscc_sagemaker_app_image_config (List Resource)
 
-
+List all resources for `AWS::SageMaker::AppImageConfig` resource type.
 
 ## Example Usage
 

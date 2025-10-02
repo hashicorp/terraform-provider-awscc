@@ -3,12 +3,12 @@
 page_title: "awscc_ses_configuration_set List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SES::ConfigurationSet resource type.
 ---
 
 # awscc_ses_configuration_set (List Resource)
 
-
+List all resources for `AWS::SES::ConfigurationSet` resource type.
 
 ## Example Usage
 

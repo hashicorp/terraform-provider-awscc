@@ -3,12 +3,12 @@
 page_title: "awscc_iot_mitigation_action List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoT::MitigationAction resource type.
 ---
 
 # awscc_iot_mitigation_action (List Resource)
 
-
+List all resources for `AWS::IoT::MitigationAction` resource type.
 
 ## Example Usage
 

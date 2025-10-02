@@ -3,12 +3,12 @@
 page_title: "awscc_cloudfront_connection_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudFront::ConnectionGroup resource type.
 ---
 
 # awscc_cloudfront_connection_group (List Resource)
 
-
+List all resources for `AWS::CloudFront::ConnectionGroup` resource type.
 
 ## Example Usage
 

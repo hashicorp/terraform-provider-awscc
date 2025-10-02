@@ -3,12 +3,12 @@
 page_title: "awscc_cloudformation_lambda_hook List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudFormation::LambdaHook resource type.
 ---
 
 # awscc_cloudformation_lambda_hook (List Resource)
 
-
+List all resources for `AWS::CloudFormation::LambdaHook` resource type.
 
 ## Example Usage
 

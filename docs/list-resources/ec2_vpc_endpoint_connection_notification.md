@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_vpc_endpoint_connection_notification List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::VPCEndpointConnectionNotification resource type.
 ---
 
 # awscc_ec2_vpc_endpoint_connection_notification (List Resource)
 
-
+List all resources for `AWS::EC2::VPCEndpointConnectionNotification` resource type.
 
 ## Example Usage
 

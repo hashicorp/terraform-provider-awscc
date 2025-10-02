@@ -3,12 +3,12 @@
 page_title: "awscc_arczonalshift_zonal_autoshift_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ARCZonalShift::ZonalAutoshiftConfiguration resource type.
 ---
 
 # awscc_arczonalshift_zonal_autoshift_configuration (List Resource)
 
-
+List all resources for `AWS::ARCZonalShift::ZonalAutoshiftConfiguration` resource type.
 
 ## Example Usage
 

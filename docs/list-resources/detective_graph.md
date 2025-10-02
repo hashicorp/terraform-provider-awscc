@@ -3,12 +3,12 @@
 page_title: "awscc_detective_graph List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Detective::Graph resource type.
 ---
 
 # awscc_detective_graph (List Resource)
 
-
+List all resources for `AWS::Detective::Graph` resource type.
 
 ## Example Usage
 

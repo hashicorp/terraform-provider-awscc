@@ -3,12 +3,12 @@
 page_title: "awscc_paymentcryptography_key List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::PaymentCryptography::Key resource type.
 ---
 
 # awscc_paymentcryptography_key (List Resource)
 
-
+List all resources for `AWS::PaymentCryptography::Key` resource type.
 
 ## Example Usage
 

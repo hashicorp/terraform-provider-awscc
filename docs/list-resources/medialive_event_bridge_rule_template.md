@@ -3,12 +3,12 @@
 page_title: "awscc_medialive_event_bridge_rule_template List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MediaLive::EventBridgeRuleTemplate resource type.
 ---
 
 # awscc_medialive_event_bridge_rule_template (List Resource)
 
-
+List all resources for `AWS::MediaLive::EventBridgeRuleTemplate` resource type.
 
 ## Example Usage
 

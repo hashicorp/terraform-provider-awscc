@@ -3,12 +3,12 @@
 page_title: "awscc_route53profiles_profile_association List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Route53Profiles::ProfileAssociation resource type.
 ---
 
 # awscc_route53profiles_profile_association (List Resource)
 
-
+List all resources for `AWS::Route53Profiles::ProfileAssociation` resource type.
 
 ## Example Usage
 

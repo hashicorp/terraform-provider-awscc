@@ -3,12 +3,12 @@
 page_title: "awscc_connect_security_key List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Connect::SecurityKey resource type.
 ---
 
 # awscc_connect_security_key (List Resource)
 
-
+List all resources for `AWS::Connect::SecurityKey` resource type.
 
 ## Example Usage
 

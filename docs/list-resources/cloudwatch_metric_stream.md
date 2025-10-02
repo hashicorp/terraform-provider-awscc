@@ -3,12 +3,12 @@
 page_title: "awscc_cloudwatch_metric_stream List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudWatch::MetricStream resource type.
 ---
 
 # awscc_cloudwatch_metric_stream (List Resource)
 
-
+List all resources for `AWS::CloudWatch::MetricStream` resource type.
 
 ## Example Usage
 

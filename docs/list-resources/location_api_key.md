@@ -3,12 +3,12 @@
 page_title: "awscc_location_api_key List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Location::APIKey resource type.
 ---
 
 # awscc_location_api_key (List Resource)
 
-
+List all resources for `AWS::Location::APIKey` resource type.
 
 ## Example Usage
 

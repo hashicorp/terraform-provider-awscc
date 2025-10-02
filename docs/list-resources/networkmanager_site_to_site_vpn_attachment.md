@@ -3,12 +3,12 @@
 page_title: "awscc_networkmanager_site_to_site_vpn_attachment List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::NetworkManager::SiteToSiteVpnAttachment resource type.
 ---
 
 # awscc_networkmanager_site_to_site_vpn_attachment (List Resource)
 
-
+List all resources for `AWS::NetworkManager::SiteToSiteVpnAttachment` resource type.
 
 ## Example Usage
 

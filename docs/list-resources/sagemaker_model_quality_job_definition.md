@@ -3,12 +3,12 @@
 page_title: "awscc_sagemaker_model_quality_job_definition List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SageMaker::ModelQualityJobDefinition resource type.
 ---
 
 # awscc_sagemaker_model_quality_job_definition (List Resource)
 
-
+List all resources for `AWS::SageMaker::ModelQualityJobDefinition` resource type.
 
 ## Example Usage
 

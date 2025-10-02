@@ -3,12 +3,12 @@
 page_title: "awscc_location_place_index List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Location::PlaceIndex resource type.
 ---
 
 # awscc_location_place_index (List Resource)
 
-
+List all resources for `AWS::Location::PlaceIndex` resource type.
 
 ## Example Usage
 

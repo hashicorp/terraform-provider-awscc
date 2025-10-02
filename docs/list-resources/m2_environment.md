@@ -3,12 +3,12 @@
 page_title: "awscc_m2_environment List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::M2::Environment resource type.
 ---
 
 # awscc_m2_environment (List Resource)
 
-
+List all resources for `AWS::M2::Environment` resource type.
 
 ## Example Usage
 

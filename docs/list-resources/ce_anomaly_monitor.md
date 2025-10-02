@@ -3,12 +3,12 @@
 page_title: "awscc_ce_anomaly_monitor List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CE::AnomalyMonitor resource type.
 ---
 
 # awscc_ce_anomaly_monitor (List Resource)
 
-
+List all resources for `AWS::CE::AnomalyMonitor` resource type.
 
 ## Example Usage
 

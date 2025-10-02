@@ -3,12 +3,12 @@
 page_title: "awscc_iot_authorizer List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoT::Authorizer resource type.
 ---
 
 # awscc_iot_authorizer (List Resource)
 
-
+List all resources for `AWS::IoT::Authorizer` resource type.
 
 ## Example Usage
 

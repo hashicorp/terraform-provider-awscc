@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_customer_gateway List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::CustomerGateway resource type.
 ---
 
 # awscc_ec2_customer_gateway (List Resource)
 
-
+List all resources for `AWS::EC2::CustomerGateway` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_datasync_location_hdfs List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DataSync::LocationHDFS resource type.
 ---
 
 # awscc_datasync_location_hdfs (List Resource)
 
-
+List all resources for `AWS::DataSync::LocationHDFS` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_neptunegraph_private_graph_endpoint List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::NeptuneGraph::PrivateGraphEndpoint resource type.
 ---
 
 # awscc_neptunegraph_private_graph_endpoint (List Resource)
 
-
+List all resources for `AWS::NeptuneGraph::PrivateGraphEndpoint` resource type.
 
 ## Example Usage
 

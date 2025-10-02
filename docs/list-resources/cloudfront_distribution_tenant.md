@@ -3,12 +3,12 @@
 page_title: "awscc_cloudfront_distribution_tenant List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudFront::DistributionTenant resource type.
 ---
 
 # awscc_cloudfront_distribution_tenant (List Resource)
 
-
+List all resources for `AWS::CloudFront::DistributionTenant` resource type.
 
 ## Example Usage
 

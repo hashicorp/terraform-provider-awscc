@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_local_gateway_route List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::LocalGatewayRoute resource type.
 ---
 
 # awscc_ec2_local_gateway_route (List Resource)
 
-
+List all resources for `AWS::EC2::LocalGatewayRoute` resource type.
 
 ## Example Usage
 

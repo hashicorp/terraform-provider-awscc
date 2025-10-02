@@ -3,12 +3,12 @@
 page_title: "awscc_msk_vpc_connection List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MSK::VpcConnection resource type.
 ---
 
 # awscc_msk_vpc_connection (List Resource)
 
-
+List all resources for `AWS::MSK::VpcConnection` resource type.
 
 ## Example Usage
 

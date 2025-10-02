@@ -3,12 +3,12 @@
 page_title: "awscc_iotwireless_task_definition List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTWireless::TaskDefinition resource type.
 ---
 
 # awscc_iotwireless_task_definition (List Resource)
 
-
+List all resources for `AWS::IoTWireless::TaskDefinition` resource type.
 
 ## Example Usage
 

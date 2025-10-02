@@ -3,12 +3,12 @@
 page_title: "awscc_emr_security_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EMR::SecurityConfiguration resource type.
 ---
 
 # awscc_emr_security_configuration (List Resource)
 
-
+List all resources for `AWS::EMR::SecurityConfiguration` resource type.
 
 ## Example Usage
 

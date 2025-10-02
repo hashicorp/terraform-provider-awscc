@@ -3,12 +3,12 @@
 page_title: "awscc_dsql_cluster List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DSQL::Cluster resource type.
 ---
 
 # awscc_dsql_cluster (List Resource)
 
-
+List all resources for `AWS::DSQL::Cluster` resource type.
 
 ## Example Usage
 

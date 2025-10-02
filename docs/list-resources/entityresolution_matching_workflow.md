@@ -3,12 +3,12 @@
 page_title: "awscc_entityresolution_matching_workflow List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EntityResolution::MatchingWorkflow resource type.
 ---
 
 # awscc_entityresolution_matching_workflow (List Resource)
 
-
+List all resources for `AWS::EntityResolution::MatchingWorkflow` resource type.
 
 ## Example Usage
 

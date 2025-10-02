@@ -3,12 +3,12 @@
 page_title: "awscc_medialive_signal_map List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MediaLive::SignalMap resource type.
 ---
 
 # awscc_medialive_signal_map (List Resource)
 
-
+List all resources for `AWS::MediaLive::SignalMap` resource type.
 
 ## Example Usage
 

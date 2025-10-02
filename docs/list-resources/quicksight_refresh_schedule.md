@@ -3,12 +3,12 @@
 page_title: "awscc_quicksight_refresh_schedule List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::QuickSight::RefreshSchedule resource type.
 ---
 
 # awscc_quicksight_refresh_schedule (List Resource)
 
-
+List all resources for `AWS::QuickSight::RefreshSchedule` resource type.
 
 ## Example Usage
 

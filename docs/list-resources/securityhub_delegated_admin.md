@@ -3,12 +3,12 @@
 page_title: "awscc_securityhub_delegated_admin List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SecurityHub::DelegatedAdmin resource type.
 ---
 
 # awscc_securityhub_delegated_admin (List Resource)
 
-
+List all resources for `AWS::SecurityHub::DelegatedAdmin` resource type.
 
 ## Example Usage
 

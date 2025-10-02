@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_placement_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::PlacementGroup resource type.
 ---
 
 # awscc_ec2_placement_group (List Resource)
 
-
+List all resources for `AWS::EC2::PlacementGroup` resource type.
 
 ## Example Usage
 

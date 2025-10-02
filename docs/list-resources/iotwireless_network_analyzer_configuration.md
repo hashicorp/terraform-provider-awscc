@@ -3,12 +3,12 @@
 page_title: "awscc_iotwireless_network_analyzer_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTWireless::NetworkAnalyzerConfiguration resource type.
 ---
 
 # awscc_iotwireless_network_analyzer_configuration (List Resource)
 
-
+List all resources for `AWS::IoTWireless::NetworkAnalyzerConfiguration` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_chatbot_custom_action List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Chatbot::CustomAction resource type.
 ---
 
 # awscc_chatbot_custom_action (List Resource)
 
-
+List all resources for `AWS::Chatbot::CustomAction` resource type.
 
 ## Example Usage
 

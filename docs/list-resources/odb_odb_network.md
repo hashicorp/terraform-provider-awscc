@@ -3,12 +3,12 @@
 page_title: "awscc_odb_odb_network List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ODB::OdbNetwork resource type.
 ---
 
 # awscc_odb_odb_network (List Resource)
 
-
+List all resources for `AWS::ODB::OdbNetwork` resource type.
 
 ## Example Usage
 

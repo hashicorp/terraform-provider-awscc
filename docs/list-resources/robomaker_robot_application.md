@@ -3,12 +3,12 @@
 page_title: "awscc_robomaker_robot_application List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::RoboMaker::RobotApplication resource type.
 ---
 
 # awscc_robomaker_robot_application (List Resource)
 
-
+List all resources for `AWS::RoboMaker::RobotApplication` resource type.
 
 ## Example Usage
 

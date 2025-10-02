@@ -3,12 +3,12 @@
 page_title: "awscc_bedrockagentcore_code_interpreter_custom List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::BedrockAgentCore::CodeInterpreterCustom resource type.
 ---
 
 # awscc_bedrockagentcore_code_interpreter_custom (List Resource)
 
-
+List all resources for `AWS::BedrockAgentCore::CodeInterpreterCustom` resource type.
 
 ## Example Usage
 

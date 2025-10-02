@@ -3,12 +3,12 @@
 page_title: "awscc_imagebuilder_image_pipeline List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ImageBuilder::ImagePipeline resource type.
 ---
 
 # awscc_imagebuilder_image_pipeline (List Resource)
 
-
+List all resources for `AWS::ImageBuilder::ImagePipeline` resource type.
 
 ## Example Usage
 

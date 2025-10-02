@@ -3,12 +3,12 @@
 page_title: "awscc_cloudformation_stack List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudFormation::Stack resource type.
 ---
 
 # awscc_cloudformation_stack (List Resource)
 
-
+List all resources for `AWS::CloudFormation::Stack` resource type.
 
 ## Example Usage
 

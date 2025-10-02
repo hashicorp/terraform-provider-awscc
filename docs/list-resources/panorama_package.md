@@ -3,12 +3,12 @@
 page_title: "awscc_panorama_package List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Panorama::Package resource type.
 ---
 
 # awscc_panorama_package (List Resource)
 
-
+List all resources for `AWS::Panorama::Package` resource type.
 
 ## Example Usage
 

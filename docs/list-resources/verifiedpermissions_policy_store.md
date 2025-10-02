@@ -3,12 +3,12 @@
 page_title: "awscc_verifiedpermissions_policy_store List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::VerifiedPermissions::PolicyStore resource type.
 ---
 
 # awscc_verifiedpermissions_policy_store (List Resource)
 
-
+List all resources for `AWS::VerifiedPermissions::PolicyStore` resource type.
 
 ## Example Usage
 

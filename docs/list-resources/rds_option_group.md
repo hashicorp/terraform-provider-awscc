@@ -3,12 +3,12 @@
 page_title: "awscc_rds_option_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::RDS::OptionGroup resource type.
 ---
 
 # awscc_rds_option_group (List Resource)
 
-
+List all resources for `AWS::RDS::OptionGroup` resource type.
 
 ## Example Usage
 

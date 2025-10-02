@@ -3,12 +3,12 @@
 page_title: "awscc_sagemaker_space List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SageMaker::Space resource type.
 ---
 
 # awscc_sagemaker_space (List Resource)
 
-
+List all resources for `AWS::SageMaker::Space` resource type.
 
 ## Example Usage
 

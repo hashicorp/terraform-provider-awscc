@@ -3,12 +3,12 @@
 page_title: "awscc_observabilityadmin_telemetry_rule List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ObservabilityAdmin::TelemetryRule resource type.
 ---
 
 # awscc_observabilityadmin_telemetry_rule (List Resource)
 
-
+List all resources for `AWS::ObservabilityAdmin::TelemetryRule` resource type.
 
 ## Example Usage
 

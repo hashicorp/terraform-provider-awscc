@@ -3,12 +3,12 @@
 page_title: "awscc_datasync_location_smb List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DataSync::LocationSMB resource type.
 ---
 
 # awscc_datasync_location_smb (List Resource)
 
-
+List all resources for `AWS::DataSync::LocationSMB` resource type.
 
 ## Example Usage
 

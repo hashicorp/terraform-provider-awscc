@@ -3,12 +3,12 @@
 page_title: "awscc_lightsail_container List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Lightsail::Container resource type.
 ---
 
 # awscc_lightsail_container (List Resource)
 
-
+List all resources for `AWS::Lightsail::Container` resource type.
 
 ## Example Usage
 

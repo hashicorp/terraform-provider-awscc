@@ -3,12 +3,12 @@
 page_title: "awscc_gamelift_location List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::GameLift::Location resource type.
 ---
 
 # awscc_gamelift_location (List Resource)
 
-
+List all resources for `AWS::GameLift::Location` resource type.
 
 ## Example Usage
 

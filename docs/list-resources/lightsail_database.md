@@ -3,12 +3,12 @@
 page_title: "awscc_lightsail_database List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Lightsail::Database resource type.
 ---
 
 # awscc_lightsail_database (List Resource)
 
-
+List all resources for `AWS::Lightsail::Database` resource type.
 
 ## Example Usage
 

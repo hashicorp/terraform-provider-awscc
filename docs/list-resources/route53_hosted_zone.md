@@ -3,12 +3,12 @@
 page_title: "awscc_route53_hosted_zone List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Route53::HostedZone resource type.
 ---
 
 # awscc_route53_hosted_zone (List Resource)
 
-
+List all resources for `AWS::Route53::HostedZone` resource type.
 
 ## Example Usage
 

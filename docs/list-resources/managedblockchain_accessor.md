@@ -3,12 +3,12 @@
 page_title: "awscc_managedblockchain_accessor List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ManagedBlockchain::Accessor resource type.
 ---
 
 # awscc_managedblockchain_accessor (List Resource)
 
-
+List all resources for `AWS::ManagedBlockchain::Accessor` resource type.
 
 ## Example Usage
 

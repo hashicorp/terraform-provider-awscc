@@ -3,12 +3,12 @@
 page_title: "awscc_cur_report_definition List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CUR::ReportDefinition resource type.
 ---
 
 # awscc_cur_report_definition (List Resource)
 
-
+List all resources for `AWS::CUR::ReportDefinition` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_globalaccelerator_cross_account_attachment List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::GlobalAccelerator::CrossAccountAttachment resource type.
 ---
 
 # awscc_globalaccelerator_cross_account_attachment (List Resource)
 
-
+List all resources for `AWS::GlobalAccelerator::CrossAccountAttachment` resource type.
 
 ## Example Usage
 

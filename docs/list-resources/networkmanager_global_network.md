@@ -3,12 +3,12 @@
 page_title: "awscc_networkmanager_global_network List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::NetworkManager::GlobalNetwork resource type.
 ---
 
 # awscc_networkmanager_global_network (List Resource)
 
-
+List all resources for `AWS::NetworkManager::GlobalNetwork` resource type.
 
 ## Example Usage
 

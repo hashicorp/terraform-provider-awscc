@@ -3,12 +3,12 @@
 page_title: "awscc_sagemaker_feature_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SageMaker::FeatureGroup resource type.
 ---
 
 # awscc_sagemaker_feature_group (List Resource)
 
-
+List all resources for `AWS::SageMaker::FeatureGroup` resource type.
 
 ## Example Usage
 

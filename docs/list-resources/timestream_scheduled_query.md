@@ -3,12 +3,12 @@
 page_title: "awscc_timestream_scheduled_query List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Timestream::ScheduledQuery resource type.
 ---
 
 # awscc_timestream_scheduled_query (List Resource)
 
-
+List all resources for `AWS::Timestream::ScheduledQuery` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_ip_pool_route_table_association List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::IpPoolRouteTableAssociation resource type.
 ---
 
 # awscc_ec2_ip_pool_route_table_association (List Resource)
 
-
+List all resources for `AWS::EC2::IpPoolRouteTableAssociation` resource type.
 
 ## Example Usage
 

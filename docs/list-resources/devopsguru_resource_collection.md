@@ -3,12 +3,12 @@
 page_title: "awscc_devopsguru_resource_collection List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DevOpsGuru::ResourceCollection resource type.
 ---
 
 # awscc_devopsguru_resource_collection (List Resource)
 
-
+List all resources for `AWS::DevOpsGuru::ResourceCollection` resource type.
 
 ## Example Usage
 

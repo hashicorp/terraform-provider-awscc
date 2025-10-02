@@ -3,12 +3,12 @@
 page_title: "awscc_ses_mail_manager_traffic_policy List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SES::MailManagerTrafficPolicy resource type.
 ---
 
 # awscc_ses_mail_manager_traffic_policy (List Resource)
 
-
+List all resources for `AWS::SES::MailManagerTrafficPolicy` resource type.
 
 ## Example Usage
 

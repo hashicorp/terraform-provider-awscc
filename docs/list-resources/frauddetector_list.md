@@ -3,12 +3,12 @@
 page_title: "awscc_frauddetector_list List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::FraudDetector::List resource type.
 ---
 
 # awscc_frauddetector_list (List Resource)
 
-
+List all resources for `AWS::FraudDetector::List` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_ecs_capacity_provider List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ECS::CapacityProvider resource type.
 ---
 
 # awscc_ecs_capacity_provider (List Resource)
 
-
+List all resources for `AWS::ECS::CapacityProvider` resource type.
 
 ## Example Usage
 

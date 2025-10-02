@@ -3,12 +3,12 @@
 page_title: "awscc_odb_cloud_vm_cluster List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ODB::CloudVmCluster resource type.
 ---
 
 # awscc_odb_cloud_vm_cluster (List Resource)
 
-
+List all resources for `AWS::ODB::CloudVmCluster` resource type.
 
 ## Example Usage
 

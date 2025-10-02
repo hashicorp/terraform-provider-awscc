@@ -3,12 +3,12 @@
 page_title: "awscc_cloudformation_publisher List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudFormation::Publisher resource type.
 ---
 
 # awscc_cloudformation_publisher (List Resource)
 
-
+List all resources for `AWS::CloudFormation::Publisher` resource type.
 
 ## Example Usage
 

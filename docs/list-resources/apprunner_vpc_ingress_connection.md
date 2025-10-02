@@ -3,12 +3,12 @@
 page_title: "awscc_apprunner_vpc_ingress_connection List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::AppRunner::VpcIngressConnection resource type.
 ---
 
 # awscc_apprunner_vpc_ingress_connection (List Resource)
 
-
+List all resources for `AWS::AppRunner::VpcIngressConnection` resource type.
 
 ## Example Usage
 

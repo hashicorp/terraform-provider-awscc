@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_subnet_network_acl_association List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::SubnetNetworkAclAssociation resource type.
 ---
 
 # awscc_ec2_subnet_network_acl_association (List Resource)
 
-
+List all resources for `AWS::EC2::SubnetNetworkAclAssociation` resource type.
 
 ## Example Usage
 

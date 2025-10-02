@@ -3,12 +3,12 @@
 page_title: "awscc_oam_sink List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Oam::Sink resource type.
 ---
 
 # awscc_oam_sink (List Resource)
 
-
+List all resources for `AWS::Oam::Sink` resource type.
 
 ## Example Usage
 

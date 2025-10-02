@@ -3,12 +3,12 @@
 page_title: "awscc_kendra_faq List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Kendra::Faq resource type.
 ---
 
 # awscc_kendra_faq (List Resource)
 
-
+List all resources for `AWS::Kendra::Faq` resource type.
 
 ## Example Usage
 

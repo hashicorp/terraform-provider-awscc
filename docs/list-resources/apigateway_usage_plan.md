@@ -3,12 +3,12 @@
 page_title: "awscc_apigateway_usage_plan List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ApiGateway::UsagePlan resource type.
 ---
 
 # awscc_apigateway_usage_plan (List Resource)
 
-
+List all resources for `AWS::ApiGateway::UsagePlan` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_ssmcontacts_rotation List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SSMContacts::Rotation resource type.
 ---
 
 # awscc_ssmcontacts_rotation (List Resource)
 
-
+List all resources for `AWS::SSMContacts::Rotation` resource type.
 
 ## Example Usage
 

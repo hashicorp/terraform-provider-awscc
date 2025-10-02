@@ -3,12 +3,12 @@
 page_title: "awscc_lookoutequipment_inference_scheduler List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::LookoutEquipment::InferenceScheduler resource type.
 ---
 
 # awscc_lookoutequipment_inference_scheduler (List Resource)
 
-
+List all resources for `AWS::LookoutEquipment::InferenceScheduler` resource type.
 
 ## Example Usage
 

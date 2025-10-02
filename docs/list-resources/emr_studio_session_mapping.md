@@ -3,12 +3,12 @@
 page_title: "awscc_emr_studio_session_mapping List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EMR::StudioSessionMapping resource type.
 ---
 
 # awscc_emr_studio_session_mapping (List Resource)
 
-
+List all resources for `AWS::EMR::StudioSessionMapping` resource type.
 
 ## Example Usage
 

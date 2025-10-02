@@ -3,12 +3,12 @@
 page_title: "awscc_transfer_certificate List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Transfer::Certificate resource type.
 ---
 
 # awscc_transfer_certificate (List Resource)
 
-
+List all resources for `AWS::Transfer::Certificate` resource type.
 
 ## Example Usage
 

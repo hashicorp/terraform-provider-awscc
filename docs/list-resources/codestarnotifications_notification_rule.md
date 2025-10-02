@@ -3,12 +3,12 @@
 page_title: "awscc_codestarnotifications_notification_rule List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CodeStarNotifications::NotificationRule resource type.
 ---
 
 # awscc_codestarnotifications_notification_rule (List Resource)
 
-
+List all resources for `AWS::CodeStarNotifications::NotificationRule` resource type.
 
 ## Example Usage
 

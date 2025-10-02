@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_vpc_endpoint_service_permissions List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::VPCEndpointServicePermissions resource type.
 ---
 
 # awscc_ec2_vpc_endpoint_service_permissions (List Resource)
 
-
+List all resources for `AWS::EC2::VPCEndpointServicePermissions` resource type.
 
 ## Example Usage
 

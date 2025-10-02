@@ -3,12 +3,12 @@
 page_title: "awscc_appsync_graph_ql_api List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::AppSync::GraphQLApi resource type.
 ---
 
 # awscc_appsync_graph_ql_api (List Resource)
 
-
+List all resources for `AWS::AppSync::GraphQLApi` resource type.
 
 ## Example Usage
 

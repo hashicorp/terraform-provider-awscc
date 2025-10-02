@@ -3,12 +3,12 @@
 page_title: "awscc_route53resolver_firewall_domain_list List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Route53Resolver::FirewallDomainList resource type.
 ---
 
 # awscc_route53resolver_firewall_domain_list (List Resource)
 
-
+List all resources for `AWS::Route53Resolver::FirewallDomainList` resource type.
 
 ## Example Usage
 

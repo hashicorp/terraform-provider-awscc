@@ -3,12 +3,12 @@
 page_title: "awscc_inspector_assessment_target List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Inspector::AssessmentTarget resource type.
 ---
 
 # awscc_inspector_assessment_target (List Resource)
 
-
+List all resources for `AWS::Inspector::AssessmentTarget` resource type.
 
 ## Example Usage
 

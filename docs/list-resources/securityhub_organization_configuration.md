@@ -3,12 +3,12 @@
 page_title: "awscc_securityhub_organization_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SecurityHub::OrganizationConfiguration resource type.
 ---
 
 # awscc_securityhub_organization_configuration (List Resource)
 
-
+List all resources for `AWS::SecurityHub::OrganizationConfiguration` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_lakeformation_data_cells_filter List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::LakeFormation::DataCellsFilter resource type.
 ---
 
 # awscc_lakeformation_data_cells_filter (List Resource)
 
-
+List all resources for `AWS::LakeFormation::DataCellsFilter` resource type.
 
 ## Example Usage
 

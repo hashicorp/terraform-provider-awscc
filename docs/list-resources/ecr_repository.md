@@ -3,12 +3,12 @@
 page_title: "awscc_ecr_repository List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ECR::Repository resource type.
 ---
 
 # awscc_ecr_repository (List Resource)
 
-
+List all resources for `AWS::ECR::Repository` resource type.
 
 ## Example Usage
 

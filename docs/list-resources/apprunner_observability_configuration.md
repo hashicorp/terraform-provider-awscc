@@ -3,12 +3,12 @@
 page_title: "awscc_apprunner_observability_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::AppRunner::ObservabilityConfiguration resource type.
 ---
 
 # awscc_apprunner_observability_configuration (List Resource)
 
-
+List all resources for `AWS::AppRunner::ObservabilityConfiguration` resource type.
 
 ## Example Usage
 

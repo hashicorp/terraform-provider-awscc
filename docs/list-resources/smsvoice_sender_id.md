@@ -3,12 +3,12 @@
 page_title: "awscc_smsvoice_sender_id List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SMSVOICE::SenderId resource type.
 ---
 
 # awscc_smsvoice_sender_id (List Resource)
 
-
+List all resources for `AWS::SMSVOICE::SenderId` resource type.
 
 ## Example Usage
 

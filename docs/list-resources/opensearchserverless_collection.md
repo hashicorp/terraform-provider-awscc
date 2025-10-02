@@ -3,12 +3,12 @@
 page_title: "awscc_opensearchserverless_collection List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::OpenSearchServerless::Collection resource type.
 ---
 
 # awscc_opensearchserverless_collection (List Resource)
 
-
+List all resources for `AWS::OpenSearchServerless::Collection` resource type.
 
 ## Example Usage
 

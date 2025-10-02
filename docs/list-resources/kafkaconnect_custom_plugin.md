@@ -3,12 +3,12 @@
 page_title: "awscc_kafkaconnect_custom_plugin List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::KafkaConnect::CustomPlugin resource type.
 ---
 
 # awscc_kafkaconnect_custom_plugin (List Resource)
 
-
+List all resources for `AWS::KafkaConnect::CustomPlugin` resource type.
 
 ## Example Usage
 

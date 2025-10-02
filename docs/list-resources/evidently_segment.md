@@ -3,12 +3,12 @@
 page_title: "awscc_evidently_segment List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Evidently::Segment resource type.
 ---
 
 # awscc_evidently_segment (List Resource)
 
-
+List all resources for `AWS::Evidently::Segment` resource type.
 
 ## Example Usage
 

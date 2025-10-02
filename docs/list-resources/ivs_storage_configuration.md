@@ -3,12 +3,12 @@
 page_title: "awscc_ivs_storage_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IVS::StorageConfiguration resource type.
 ---
 
 # awscc_ivs_storage_configuration (List Resource)
 
-
+List all resources for `AWS::IVS::StorageConfiguration` resource type.
 
 ## Example Usage
 

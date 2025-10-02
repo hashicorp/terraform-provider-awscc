@@ -3,12 +3,12 @@
 page_title: "awscc_msk_cluster List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MSK::Cluster resource type.
 ---
 
 # awscc_msk_cluster (List Resource)
 
-
+List all resources for `AWS::MSK::Cluster` resource type.
 
 ## Example Usage
 

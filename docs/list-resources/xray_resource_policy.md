@@ -3,12 +3,12 @@
 page_title: "awscc_xray_resource_policy List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::XRay::ResourcePolicy resource type.
 ---
 
 # awscc_xray_resource_policy (List Resource)
 
-
+List all resources for `AWS::XRay::ResourcePolicy` resource type.
 
 ## Example Usage
 

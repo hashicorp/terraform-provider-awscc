@@ -3,12 +3,12 @@
 page_title: "awscc_datasync_location_azure_blob List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DataSync::LocationAzureBlob resource type.
 ---
 
 # awscc_datasync_location_azure_blob (List Resource)
 
-
+List all resources for `AWS::DataSync::LocationAzureBlob` resource type.
 
 ## Example Usage
 

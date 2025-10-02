@@ -3,12 +3,12 @@
 page_title: "awscc_b2bi_capability List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::B2BI::Capability resource type.
 ---
 
 # awscc_b2bi_capability (List Resource)
 
-
+List all resources for `AWS::B2BI::Capability` resource type.
 
 ## Example Usage
 

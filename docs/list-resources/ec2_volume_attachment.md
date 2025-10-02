@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_volume_attachment List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::VolumeAttachment resource type.
 ---
 
 # awscc_ec2_volume_attachment (List Resource)
 
-
+List all resources for `AWS::EC2::VolumeAttachment` resource type.
 
 ## Example Usage
 

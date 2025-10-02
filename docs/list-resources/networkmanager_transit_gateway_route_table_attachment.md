@@ -3,12 +3,12 @@
 page_title: "awscc_networkmanager_transit_gateway_route_table_attachment List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::NetworkManager::TransitGatewayRouteTableAttachment resource type.
 ---
 
 # awscc_networkmanager_transit_gateway_route_table_attachment (List Resource)
 
-
+List all resources for `AWS::NetworkManager::TransitGatewayRouteTableAttachment` resource type.
 
 ## Example Usage
 

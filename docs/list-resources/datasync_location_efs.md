@@ -3,12 +3,12 @@
 page_title: "awscc_datasync_location_efs List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DataSync::LocationEFS resource type.
 ---
 
 # awscc_datasync_location_efs (List Resource)
 
-
+List all resources for `AWS::DataSync::LocationEFS` resource type.
 
 ## Example Usage
 

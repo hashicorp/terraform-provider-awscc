@@ -3,12 +3,12 @@
 page_title: "awscc_sagemaker_pipeline List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SageMaker::Pipeline resource type.
 ---
 
 # awscc_sagemaker_pipeline (List Resource)
 
-
+List all resources for `AWS::SageMaker::Pipeline` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_iotanalytics_datastore List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoTAnalytics::Datastore resource type.
 ---
 
 # awscc_iotanalytics_datastore (List Resource)
 
-
+List all resources for `AWS::IoTAnalytics::Datastore` resource type.
 
 ## Example Usage
 

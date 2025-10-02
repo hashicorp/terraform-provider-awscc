@@ -3,12 +3,12 @@
 page_title: "awscc_securitylake_subscriber_notification List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SecurityLake::SubscriberNotification resource type.
 ---
 
 # awscc_securitylake_subscriber_notification (List Resource)
 
-
+List all resources for `AWS::SecurityLake::SubscriberNotification` resource type.
 
 ## Example Usage
 

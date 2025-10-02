@@ -3,12 +3,12 @@
 page_title: "awscc_route53recoverycontrol_cluster List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Route53RecoveryControl::Cluster resource type.
 ---
 
 # awscc_route53recoverycontrol_cluster (List Resource)
 
-
+List all resources for `AWS::Route53RecoveryControl::Cluster` resource type.
 
 ## Example Usage
 

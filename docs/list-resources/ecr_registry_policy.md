@@ -3,12 +3,12 @@
 page_title: "awscc_ecr_registry_policy List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::ECR::RegistryPolicy resource type.
 ---
 
 # awscc_ecr_registry_policy (List Resource)
 
-
+List all resources for `AWS::ECR::RegistryPolicy` resource type.
 
 ## Example Usage
 

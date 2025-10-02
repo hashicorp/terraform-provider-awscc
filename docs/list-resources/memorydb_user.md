@@ -3,12 +3,12 @@
 page_title: "awscc_memorydb_user List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MemoryDB::User resource type.
 ---
 
 # awscc_memorydb_user (List Resource)
 
-
+List all resources for `AWS::MemoryDB::User` resource type.
 
 ## Example Usage
 

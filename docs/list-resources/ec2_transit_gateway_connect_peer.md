@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_transit_gateway_connect_peer List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::TransitGatewayConnectPeer resource type.
 ---
 
 # awscc_ec2_transit_gateway_connect_peer (List Resource)
 
-
+List all resources for `AWS::EC2::TransitGatewayConnectPeer` resource type.
 
 ## Example Usage
 

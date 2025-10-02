@@ -3,12 +3,12 @@
 page_title: "awscc_cleanrooms_membership List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CleanRooms::Membership resource type.
 ---
 
 # awscc_cleanrooms_membership (List Resource)
 
-
+List all resources for `AWS::CleanRooms::Membership` resource type.
 
 ## Example Usage
 

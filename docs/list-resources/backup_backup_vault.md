@@ -3,12 +3,12 @@
 page_title: "awscc_backup_backup_vault List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Backup::BackupVault resource type.
 ---
 
 # awscc_backup_backup_vault (List Resource)
 
-
+List all resources for `AWS::Backup::BackupVault` resource type.
 
 ## Example Usage
 

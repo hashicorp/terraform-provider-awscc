@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_enclave_certificate_iam_role_association List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::EnclaveCertificateIamRoleAssociation resource type.
 ---
 
 # awscc_ec2_enclave_certificate_iam_role_association (List Resource)
 
-
+List all resources for `AWS::EC2::EnclaveCertificateIamRoleAssociation` resource type.
 
 ## Example Usage
 

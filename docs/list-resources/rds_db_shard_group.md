@@ -3,12 +3,12 @@
 page_title: "awscc_rds_db_shard_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::RDS::DBShardGroup resource type.
 ---
 
 # awscc_rds_db_shard_group (List Resource)
 
-
+List all resources for `AWS::RDS::DBShardGroup` resource type.
 
 ## Example Usage
 

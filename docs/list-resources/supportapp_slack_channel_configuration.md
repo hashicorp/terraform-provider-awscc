@@ -3,12 +3,12 @@
 page_title: "awscc_supportapp_slack_channel_configuration List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SupportApp::SlackChannelConfiguration resource type.
 ---
 
 # awscc_supportapp_slack_channel_configuration (List Resource)
 
-
+List all resources for `AWS::SupportApp::SlackChannelConfiguration` resource type.
 
 ## Example Usage
 

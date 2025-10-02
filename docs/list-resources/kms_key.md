@@ -3,12 +3,12 @@
 page_title: "awscc_kms_key List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::KMS::Key resource type.
 ---
 
 # awscc_kms_key (List Resource)
 
-
+List all resources for `AWS::KMS::Key` resource type.
 
 ## Example Usage
 

@@ -3,12 +3,12 @@
 page_title: "awscc_codedeploy_deployment_config List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CodeDeploy::DeploymentConfig resource type.
 ---
 
 # awscc_codedeploy_deployment_config (List Resource)
 
-
+List all resources for `AWS::CodeDeploy::DeploymentConfig` resource type.
 
 ## Example Usage
 

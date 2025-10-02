@@ -3,12 +3,12 @@
 page_title: "awscc_codedeploy_application List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CodeDeploy::Application resource type.
 ---
 
 # awscc_codedeploy_application (List Resource)
 
-
+List all resources for `AWS::CodeDeploy::Application` resource type.
 
 ## Example Usage
 

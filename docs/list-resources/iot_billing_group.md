@@ -3,12 +3,12 @@
 page_title: "awscc_iot_billing_group List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::IoT::BillingGroup resource type.
 ---
 
 # awscc_iot_billing_group (List Resource)
 
-
+List all resources for `AWS::IoT::BillingGroup` resource type.
 
 ## Example Usage
 

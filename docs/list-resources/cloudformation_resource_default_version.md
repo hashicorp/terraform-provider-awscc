@@ -3,12 +3,12 @@
 page_title: "awscc_cloudformation_resource_default_version List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::CloudFormation::ResourceDefaultVersion resource type.
 ---
 
 # awscc_cloudformation_resource_default_version (List Resource)
 
-
+List all resources for `AWS::CloudFormation::ResourceDefaultVersion` resource type.
 
 ## Example Usage
 

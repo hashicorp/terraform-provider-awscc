@@ -3,12 +3,12 @@
 page_title: "awscc_transfer_workflow List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Transfer::Workflow resource type.
 ---
 
 # awscc_transfer_workflow (List Resource)
 
-
+List all resources for `AWS::Transfer::Workflow` resource type.
 
 ## Example Usage
 

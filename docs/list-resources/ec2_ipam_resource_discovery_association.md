@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_ipam_resource_discovery_association List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::EC2::IPAMResourceDiscoveryAssociation resource type.
 ---
 
 # awscc_ec2_ipam_resource_discovery_association (List Resource)
 
-
+List all resources for `AWS::EC2::IPAMResourceDiscoveryAssociation` resource type.
 
 ## Example Usage
 

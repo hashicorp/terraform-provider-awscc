@@ -3,12 +3,12 @@
 page_title: "awscc_guardduty_trusted_entity_set List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::GuardDuty::TrustedEntitySet resource type.
 ---
 
 # awscc_guardduty_trusted_entity_set (List Resource)
 
-
+List all resources for `AWS::GuardDuty::TrustedEntitySet` resource type.
 
 ## Example Usage
 

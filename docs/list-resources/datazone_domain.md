@@ -3,12 +3,12 @@
 page_title: "awscc_datazone_domain List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::DataZone::Domain resource type.
 ---
 
 # awscc_datazone_domain (List Resource)
 
-
+List all resources for `AWS::DataZone::Domain` resource type.
 
 ## Example Usage
 

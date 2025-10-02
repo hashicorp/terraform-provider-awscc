@@ -3,12 +3,12 @@
 page_title: "awscc_mediaconnect_bridge List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::MediaConnect::Bridge resource type.
 ---
 
 # awscc_mediaconnect_bridge (List Resource)
 
-
+List all resources for `AWS::MediaConnect::Bridge` resource type.
 
 ## Example Usage
 

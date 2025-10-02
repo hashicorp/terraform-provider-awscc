@@ -3,12 +3,12 @@
 page_title: "awscc_notifications_managed_notification_account_contact_association List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::Notifications::ManagedNotificationAccountContactAssociation resource type.
 ---
 
 # awscc_notifications_managed_notification_account_contact_association (List Resource)
 
-
+List all resources for `AWS::Notifications::ManagedNotificationAccountContactAssociation` resource type.
 
 ## Example Usage
 

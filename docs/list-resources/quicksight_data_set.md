@@ -3,12 +3,12 @@
 page_title: "awscc_quicksight_data_set List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::QuickSight::DataSet resource type.
 ---
 
 # awscc_quicksight_data_set (List Resource)
 
-
+List all resources for `AWS::QuickSight::DataSet` resource type.
 
 ## Example Usage
 

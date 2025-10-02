@@ -3,12 +3,12 @@
 page_title: "awscc_smsvoice_phone_number List Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  
+  List all resources for AWS::SMSVOICE::PhoneNumber resource type.
 ---
 
 # awscc_smsvoice_phone_number (List Resource)
 
-
+List all resources for `AWS::SMSVOICE::PhoneNumber` resource type.
 
 ## Example Usage
 
