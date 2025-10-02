@@ -141,6 +141,21 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Whether the proxy includes detailed information about SQL statements in its logs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DefaultAuthScheme
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The default authentication scheme that the proxy uses for client connections to the proxy and connections from the proxy to the underlying database.",
+		//	  "enum": [
+		//	    "IAM_AUTH",
+		//	    "NONE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"default_auth_scheme": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The default authentication scheme that the proxy uses for client connections to the proxy and connections from the proxy to the underlying database.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -150,6 +165,22 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EndpointNetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.",
+		//	  "enum": [
+		//	    "IPV4",
+		//	    "IPV6",
+		//	    "DUAL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"endpoint_network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EngineFamily
@@ -241,6 +272,21 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: TargetConnectionNetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The network type that the proxy uses to connect to the target database. The network type determines the IP version that the proxy uses for connections to the database.",
+		//	  "enum": [
+		//	    "IPV4",
+		//	    "IPV6"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"target_connection_network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The network type that the proxy uses to connect to the target database. The network type determines the IP version that the proxy uses for connections to the database.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -303,26 +349,29 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBProxy").WithTerraformTypeName("awscc_rds_db_proxy")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"auth":                      "Auth",
-		"auth_scheme":               "AuthScheme",
-		"client_password_auth_type": "ClientPasswordAuthType",
-		"db_proxy_arn":              "DBProxyArn",
-		"db_proxy_name":             "DBProxyName",
-		"debug_logging":             "DebugLogging",
-		"description":               "Description",
-		"endpoint":                  "Endpoint",
-		"engine_family":             "EngineFamily",
-		"iam_auth":                  "IAMAuth",
-		"idle_client_timeout":       "IdleClientTimeout",
-		"key":                       "Key",
-		"require_tls":               "RequireTLS",
-		"role_arn":                  "RoleArn",
-		"secret_arn":                "SecretArn",
-		"tags":                      "Tags",
-		"value":                     "Value",
-		"vpc_id":                    "VpcId",
-		"vpc_security_group_ids":    "VpcSecurityGroupIds",
-		"vpc_subnet_ids":            "VpcSubnetIds",
+		"auth":                           "Auth",
+		"auth_scheme":                    "AuthScheme",
+		"client_password_auth_type":      "ClientPasswordAuthType",
+		"db_proxy_arn":                   "DBProxyArn",
+		"db_proxy_name":                  "DBProxyName",
+		"debug_logging":                  "DebugLogging",
+		"default_auth_scheme":            "DefaultAuthScheme",
+		"description":                    "Description",
+		"endpoint":                       "Endpoint",
+		"endpoint_network_type":          "EndpointNetworkType",
+		"engine_family":                  "EngineFamily",
+		"iam_auth":                       "IAMAuth",
+		"idle_client_timeout":            "IdleClientTimeout",
+		"key":                            "Key",
+		"require_tls":                    "RequireTLS",
+		"role_arn":                       "RoleArn",
+		"secret_arn":                     "SecretArn",
+		"tags":                           "Tags",
+		"target_connection_network_type": "TargetConnectionNetworkType",
+		"value":                          "Value",
+		"vpc_id":                         "VpcId",
+		"vpc_security_group_ids":         "VpcSecurityGroupIds",
+		"vpc_subnet_ids":                 "VpcSubnetIds",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

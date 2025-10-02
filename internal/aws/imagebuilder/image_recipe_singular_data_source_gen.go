@@ -71,6 +71,25 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Specify additional settings and launch scripts for your build instances.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: AmiTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The tags to apply to the AMI created by this image recipe.",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"ami_tags":          // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The tags to apply to the AMI created by this image recipe.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -399,6 +418,7 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"additional_instance_configuration": "AdditionalInstanceConfiguration",
+		"ami_tags":                          "AmiTags",
 		"arn":                               "Arn",
 		"block_device_mappings":             "BlockDeviceMappings",
 		"component_arn":                     "ComponentArn",

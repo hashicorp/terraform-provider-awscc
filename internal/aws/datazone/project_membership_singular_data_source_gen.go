@@ -75,6 +75,28 @@ func projectMembershipDataSource(ctx context.Context) (datasource.DataSource, er
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: MemberIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"member_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: MemberIdentifierType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "USER_IDENTIFIER",
+		//	    "GROUP_IDENTIFIER"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"member_identifier_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProjectIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -102,12 +124,14 @@ func projectMembershipDataSource(ctx context.Context) (datasource.DataSource, er
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::ProjectMembership").WithTerraformTypeName("awscc_datazone_project_membership")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"designation":        "Designation",
-		"domain_identifier":  "DomainIdentifier",
-		"group_identifier":   "GroupIdentifier",
-		"member":             "Member",
-		"project_identifier": "ProjectIdentifier",
-		"user_identifier":    "UserIdentifier",
+		"designation":            "Designation",
+		"domain_identifier":      "DomainIdentifier",
+		"group_identifier":       "GroupIdentifier",
+		"member":                 "Member",
+		"member_identifier":      "MemberIdentifier",
+		"member_identifier_type": "MemberIdentifierType",
+		"project_identifier":     "ProjectIdentifier",
+		"user_identifier":        "UserIdentifier",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

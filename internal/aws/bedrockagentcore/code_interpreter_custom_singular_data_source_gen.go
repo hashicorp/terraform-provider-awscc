@@ -29,7 +29,7 @@ func codeInterpreterCustomDataSource(ctx context.Context) (datasource.DataSource
 		//
 		//	{
 		//	  "description": "The ARN of a CodeInterpreter resource.",
-		//	  "pattern": "^arn:(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:(aws|[0-9]{12}):code-interpreter(-custom)?/(aws\\.codeinterpreter\\.v1|[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10})$",
+		//	  "pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:(aws|[0-9]{12}):code-interpreter(-custom)?\\/(aws\\.codeinterpreter\\.v1|[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10})$",
 		//	  "type": "string"
 		//	}
 		"code_interpreter_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
