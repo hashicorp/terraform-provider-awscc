@@ -428,8 +428,9 @@ type DataSourceData struct {
 }
 
 type ResourceImportData struct {
-	ResourceName string
-	Identifier   []string
+	ResourceName         string
+	Identifier           []string
+	GenerateListResource bool
 }
 
 type DataSources struct {
@@ -557,6 +558,7 @@ func (g *Generator) GenerateResourceImportExamples(packageName, filename string,
 			temp = append(temp, value.Name)
 		}
 		r.Identifier = temp
+		r.GenerateListResource = v.GenerateListResource
 		importsTemplateData.Resources = append(importsTemplateData.Resources, r)
 	}
 	i := g.NewUnformattedFileDestination(filename)
