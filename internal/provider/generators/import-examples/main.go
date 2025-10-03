@@ -23,8 +23,9 @@ var (
 )
 
 type FileData struct {
-	Resource   string
-	Identifier []string
+	Resource             string
+	Identifier           []string
+	GenerateListResource bool
 }
 
 func usage() {
@@ -59,7 +60,7 @@ func main() {
 	g := NewGenerator()
 
 	for _, v := range data {
-		if err := g.GenerateExample(v.Resource, v.Identifier); err != nil {
+		if err := g.GenerateExample(v.Resource, v.Identifier, v.GenerateListResource); err != nil {
 			g.Fatalf("error generating Terraform %s import example: %s", v.Resource, err)
 		}
 	}
@@ -75,16 +76,23 @@ func NewGenerator() *Generator {
 	}
 }
 
-func (g *Generator) GenerateExample(resourceName string, identifier []string) error {
+func (g *Generator) GenerateExample(resourceName string, identifier []string, generateListResource bool) error {
 	g.Infof("generating Terraform import code for %[1]q ", resourceName)
 	templateData := &TemplateData{
 		ResourceType: resourceName,
 		Identifier:   formatIdentifier(identifier),
 	}
 
+	listDirectory := fmt.Sprintf("./examples/list-resources/%s", resourceName)
 	directory := fmt.Sprintf("./examples/resources/%s", resourceName)
-	for _, v := range filesData {
+	for _, v := range resourceFilesData {
 		if err := createFile(g, v.filename(directory), v.templateBody, templateData); err != nil {
+			return err
+		}
+	}
+
+	if generateListResource {
+		if err := createFile(g, listResourceFilesData.filename(listDirectory), listResourceFilesData.templateBody, templateData); err != nil {
 			return err
 		}
 	}
@@ -110,7 +118,7 @@ type fileData struct {
 	templateBody string
 }
 
-var filesData = []fileData{
+var resourceFilesData = []fileData{
 	{
 		filename:     func(directory string) string { return fmt.Sprintf("%s/import.sh", directory) },
 		templateBody: importExampleTemplateBody,
@@ -123,6 +131,11 @@ var filesData = []fileData{
 		filename:     func(directory string) string { return fmt.Sprintf("%s/import-by-identity.tf", directory) },
 		templateBody: importExampleTemplateByIdentity,
 	},
+}
+
+var listResourceFilesData = fileData{
+	filename:     func(directory string) string { return fmt.Sprintf("%s/list-resource.tfquery.hcl", directory) },
+	templateBody: importExampleListResourceBody,
 }
 
 func createFile(g *Generator, filename, templateBody string, templateData *TemplateData) error {
@@ -161,6 +174,11 @@ var (
   identity = { {{ $parts := Split .Identifier "|" }} {{ range $part := $parts }}
 {{ $part }} = "{{ $part }}" {{ end }}
   }
+}
+`
+
+	importExampleListResourceBody = `list "{{ .ResourceType }}" "example" {
+  provider = awscc
 }
 `
 )
