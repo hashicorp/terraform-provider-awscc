@@ -45,7 +45,7 @@ func exportDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "additionalProperties": false,
 		//	              "patternProperties": {
 		//	                "": {
-		//	                  "maxLength": 1024,
+		//	                  "maxLength": 16384,
 		//	                  "minLength": 0,
 		//	                  "pattern": "^[\\S\\s]*$",
 		//	                  "type": "string"
@@ -149,7 +149,7 @@ func exportDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "ExportArn": {
 		//	      "maxLength": 2048,
 		//	      "minLength": 20,
-		//	      "pattern": "^arn:aws[-a-z0-9]*:[-a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
+		//	      "pattern": "^arn:aws[-a-z0-9]*:(bcm-data-exports):[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
 		//	      "type": "string"
 		//	    },
 		//	    "Name": {
@@ -277,7 +277,7 @@ func exportDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "maxLength": 2048,
 		//	  "minLength": 20,
-		//	  "pattern": "^arn:aws[-a-z0-9]*:[-a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
+		//	  "pattern": "^arn:aws[-a-z0-9]*:(bcm-data-exports):[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
 		//	  "type": "string"
 		//	}
 		"export_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

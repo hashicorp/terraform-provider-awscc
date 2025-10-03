@@ -366,9 +366,9 @@ func configurationManagerResource(ctx context.Context) (resource.Resource, error
 		"type_version":                             "TypeVersion",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(2160).WithDeleteTimeoutInMinutes(2160)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithUpdateTimeoutInMinutes(2160)
 
 	v, err := generic.NewResource(ctx, opts...)
 

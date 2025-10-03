@@ -1,0 +1,309 @@
+{
+  "typeName": "AWS::BedrockAgentCore::Gateway",
+  "description": "Definition of AWS::BedrockAgentCore::Gateway Resource Type",
+  "definitions": {
+    "AuthorizerConfiguration": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "CustomJWTAuthorizer",
+          "properties": {
+            "CustomJWTAuthorizer": {
+              "$ref": "#/definitions/CustomJWTAuthorizerConfiguration"
+            }
+          },
+          "required": [
+            "CustomJWTAuthorizer"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "AuthorizerType": {
+      "type": "string",
+      "enum": [
+        "CUSTOM_JWT",
+        "AWS_IAM"
+      ]
+    },
+    "CustomJWTAuthorizerConfiguration": {
+      "type": "object",
+      "properties": {
+        "DiscoveryUrl": {
+          "type": "string",
+          "pattern": "^.+/\\.well-known/openid-configuration$"
+        },
+        "AllowedAudience": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "AllowedClients": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "DiscoveryUrl"
+      ],
+      "additionalProperties": false
+    },
+    "ExceptionLevel": {
+      "type": "string",
+      "enum": [
+        "DEBUG"
+      ]
+    },
+    "GatewayProtocolConfiguration": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Mcp",
+          "properties": {
+            "Mcp": {
+              "$ref": "#/definitions/MCPGatewayConfiguration"
+            }
+          },
+          "required": [
+            "Mcp"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "GatewayProtocolType": {
+      "type": "string",
+      "enum": [
+        "MCP"
+      ]
+    },
+    "GatewayStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "UPDATING",
+        "UPDATE_UNSUCCESSFUL",
+        "DELETING",
+        "READY",
+        "FAILED"
+      ]
+    },
+    "MCPGatewayConfiguration": {
+      "type": "object",
+      "properties": {
+        "SupportedVersions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "default": "2025-03-26"
+          }
+        },
+        "Instructions": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 1
+        },
+        "SearchType": {
+          "$ref": "#/definitions/SearchType"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SearchType": {
+      "type": "string",
+      "enum": [
+        "SEMANTIC"
+      ]
+    },
+    "TagsMap": {
+      "type": "object",
+      "maxProperties": 50,
+      "minProperties": 0,
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 0,
+          "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "WorkloadIdentityDetails": {
+      "type": "object",
+      "properties": {
+        "WorkloadIdentityArn": {
+          "type": "string",
+          "maxLength": 1024,
+          "minLength": 1
+        }
+      },
+      "required": [
+        "WorkloadIdentityArn"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "AuthorizerConfiguration": {
+      "$ref": "#/definitions/AuthorizerConfiguration"
+    },
+    "AuthorizerType": {
+      "$ref": "#/definitions/AuthorizerType"
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Description": {
+      "type": "string",
+      "maxLength": 200,
+      "minLength": 1
+    },
+    "ExceptionLevel": {
+      "$ref": "#/definitions/ExceptionLevel"
+    },
+    "GatewayArn": {
+      "type": "string",
+      "pattern": "^arn:aws(|-cn|-us-gov):bedrock-agentcore:[a-z0-9-]{1,20}:[0-9]{12}:gateway/([0-9a-z][-]?){1,100}-[a-z0-9]{10}$"
+    },
+    "GatewayIdentifier": {
+      "type": "string",
+      "pattern": "^([0-9a-z][-]?){1,100}-[0-9a-z]{10}$"
+    },
+    "GatewayUrl": {
+      "type": "string",
+      "maxLength": 1024,
+      "minLength": 1
+    },
+    "KmsKeyArn": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 1,
+      "pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"
+    },
+    "Name": {
+      "type": "string",
+      "pattern": "^([0-9a-zA-Z][-]?){1,100}$"
+    },
+    "ProtocolConfiguration": {
+      "$ref": "#/definitions/GatewayProtocolConfiguration"
+    },
+    "ProtocolType": {
+      "$ref": "#/definitions/GatewayProtocolType"
+    },
+    "RoleArn": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 1,
+      "pattern": "^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/.+$"
+    },
+    "Status": {
+      "$ref": "#/definitions/GatewayStatus"
+    },
+    "StatusReasons": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 2048
+      },
+      "maxItems": 100
+    },
+    "Tags": {
+      "$ref": "#/definitions/TagsMap"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "WorkloadIdentityDetails": {
+      "$ref": "#/definitions/WorkloadIdentityDetails"
+    }
+  },
+  "required": [
+    "AuthorizerType",
+    "Name",
+    "ProtocolType",
+    "RoleArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/CreatedAt",
+    "/properties/GatewayArn",
+    "/properties/GatewayIdentifier",
+    "/properties/GatewayUrl",
+    "/properties/Status",
+    "/properties/StatusReasons",
+    "/properties/UpdatedAt",
+    "/properties/WorkloadIdentityDetails"
+  ],
+  "primaryIdentifier": [
+    "/properties/GatewayIdentifier"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bedrock-agentcore:CreateGateway",
+        "bedrock-agentcore:CreateWorkloadIdentity",
+        "bedrock-agentcore:DeleteWorkloadIdentity",
+        "bedrock-agentcore:GetGateway",
+        "bedrock-agentcore:ListTagsForResource",
+        "bedrock-agentcore:SynchronizeGatewayTargets",
+        "bedrock-agentcore:TagResource",
+        "iam:PassRole",
+        "kms:CreateGrant",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bedrock-agentcore:GetGateway",
+        "bedrock-agentcore:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bedrock-agentcore:GetGateway",
+        "bedrock-agentcore:ListTagsForResource",
+        "bedrock-agentcore:TagResource",
+        "bedrock-agentcore:UntagResource",
+        "bedrock-agentcore:UpdateGateway",
+        "iam:PassRole",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bedrock-agentcore:DeleteGateway",
+        "bedrock-agentcore:DeleteWorkloadIdentity",
+        "bedrock-agentcore:GetGateway"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bedrock-agentcore:ListGateways"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "bedrock-agentcore:ListTagsForResource",
+      "bedrock-agentcore:TagResource",
+      "bedrock-agentcore:UntagResource"
+    ]
+  }
+}

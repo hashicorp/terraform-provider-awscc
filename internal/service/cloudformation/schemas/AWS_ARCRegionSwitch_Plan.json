@@ -1066,6 +1066,12 @@
         }
       },
       "additionalProperties": false
+    },
+    "PlanHealthChecks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
   },
   "required": [
@@ -1080,7 +1086,8 @@
     "/properties/Owner",
     "/properties/Version",
     "/properties/HealthChecksForPlan",
-    "/properties/Route53HealthChecks"
+    "/properties/Route53HealthChecks",
+    "/properties/PlanHealthChecks"
   ],
   "createOnlyProperties": [
     "/properties/Name",
@@ -1089,7 +1096,8 @@
     "/properties/Regions"
   ],
   "deprecatedProperties": [
-    "/properties/HealthChecksForPlan"
+    "/properties/HealthChecksForPlan",
+    "/properties/Route53HealthChecks"
   ],
   "primaryIdentifier": [
     "/properties/Arn"

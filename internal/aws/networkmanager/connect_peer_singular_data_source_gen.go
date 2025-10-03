@@ -240,6 +240,21 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The inside IP addresses used for a Connect peer configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LastModificationErrors
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Errors from the last modification of the connect peer.",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"last_modification_errors": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Errors from the last modification of the connect peer.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PeerAddress
 		// CloudFormation resource type schema:
 		//
@@ -336,25 +351,26 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::ConnectPeer").WithTerraformTypeName("awscc_networkmanager_connect_peer")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"bgp_configurations":    "BgpConfigurations",
-		"bgp_options":           "BgpOptions",
-		"configuration":         "Configuration",
-		"connect_attachment_id": "ConnectAttachmentId",
-		"connect_peer_id":       "ConnectPeerId",
-		"core_network_address":  "CoreNetworkAddress",
-		"core_network_asn":      "CoreNetworkAsn",
-		"core_network_id":       "CoreNetworkId",
-		"created_at":            "CreatedAt",
-		"edge_location":         "EdgeLocation",
-		"inside_cidr_blocks":    "InsideCidrBlocks",
-		"key":                   "Key",
-		"peer_address":          "PeerAddress",
-		"peer_asn":              "PeerAsn",
-		"protocol":              "Protocol",
-		"state":                 "State",
-		"subnet_arn":            "SubnetArn",
-		"tags":                  "Tags",
-		"value":                 "Value",
+		"bgp_configurations":       "BgpConfigurations",
+		"bgp_options":              "BgpOptions",
+		"configuration":            "Configuration",
+		"connect_attachment_id":    "ConnectAttachmentId",
+		"connect_peer_id":          "ConnectPeerId",
+		"core_network_address":     "CoreNetworkAddress",
+		"core_network_asn":         "CoreNetworkAsn",
+		"core_network_id":          "CoreNetworkId",
+		"created_at":               "CreatedAt",
+		"edge_location":            "EdgeLocation",
+		"inside_cidr_blocks":       "InsideCidrBlocks",
+		"key":                      "Key",
+		"last_modification_errors": "LastModificationErrors",
+		"peer_address":             "PeerAddress",
+		"peer_asn":                 "PeerAsn",
+		"protocol":                 "Protocol",
+		"state":                    "State",
+		"subnet_arn":               "SubnetArn",
+		"tags":                     "Tags",
+		"value":                    "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

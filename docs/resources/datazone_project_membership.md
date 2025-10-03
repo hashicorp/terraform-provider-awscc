@@ -25,6 +25,8 @@ Definition of AWS::DataZone::ProjectMembership Resource Type
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `member_identifier` (String)
+- `member_identifier_type` (String)
 
 <a id="nestedatt--member"></a>
 ### Nested Schema for `member`

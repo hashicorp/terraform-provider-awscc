@@ -23,6 +23,7 @@ Resource schema for AWS::RDS::DBProxyEndpoint.
 
 ### Optional
 
+- `endpoint_network_type` (String) The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.
 - `tags` (Attributes List) An optional set of key-value pairs to associate arbitrary data of your choosing with the DB proxy endpoint. (see [below for nested schema](#nestedatt--tags))
 - `target_role` (String) A value that indicates whether the DB proxy endpoint can be used for read/write or read-only operations.
 - `vpc_security_group_ids` (List of String) VPC security group IDs to associate with the new DB proxy endpoint.

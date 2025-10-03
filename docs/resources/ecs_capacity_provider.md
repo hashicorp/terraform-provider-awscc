@@ -180,6 +180,8 @@ resource "awscc_ecs_capacity_provider" "example" {
 ### Optional
 
 - `auto_scaling_group_provider` (Attributes) (see [below for nested schema](#nestedatt--auto_scaling_group_provider))
+- `cluster_name` (String)
+- `managed_instances_provider` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider))
 - `name` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
@@ -207,6 +209,157 @@ Optional:
 - `minimum_scaling_step_size` (Number)
 - `status` (String)
 - `target_capacity` (Number)
+
+
+
+<a id="nestedatt--managed_instances_provider"></a>
+### Nested Schema for `managed_instances_provider`
+
+Optional:
+
+- `infrastructure_role_arn` (String)
+- `instance_launch_template` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template))
+- `propagate_tags` (String)
+
+<a id="nestedatt--managed_instances_provider--instance_launch_template"></a>
+### Nested Schema for `managed_instances_provider.instance_launch_template`
+
+Optional:
+
+- `ec_2_instance_profile_arn` (String)
+- `instance_requirements` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--instance_requirements))
+- `monitoring` (String)
+- `network_configuration` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--network_configuration))
+- `storage_configuration` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--storage_configuration))
+
+<a id="nestedatt--managed_instances_provider--instance_launch_template--instance_requirements"></a>
+### Nested Schema for `managed_instances_provider.instance_launch_template.instance_requirements`
+
+Optional:
+
+- `accelerator_count` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--instance_requirements--accelerator_count))
+- `accelerator_manufacturers` (List of String)
+- `accelerator_names` (List of String)
+- `accelerator_total_memory_mi_b` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--instance_requirements--accelerator_total_memory_mi_b))
+- `accelerator_types` (List of String)
+- `allowed_instance_types` (List of String)
+- `bare_metal` (String)
+- `baseline_ebs_bandwidth_mbps` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--instance_requirements--baseline_ebs_bandwidth_mbps))
+- `burstable_performance` (String)
+- `cpu_manufacturers` (List of String)
+- `excluded_instance_types` (List of String)
+- `instance_generations` (List of String)
+- `local_storage` (String)
+- `local_storage_types` (List of String)
+- `max_spot_price_as_percentage_of_optimal_on_demand_price` (Number)
+- `memory_gi_b_per_v_cpu` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--instance_requirements--memory_gi_b_per_v_cpu))
+- `memory_mi_b` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--instance_requirements--memory_mi_b))
+- `network_bandwidth_gbps` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--instance_requirements--network_bandwidth_gbps))
+- `network_interface_count` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--instance_requirements--network_interface_count))
+- `on_demand_max_price_percentage_over_lowest_price` (Number)
+- `require_hibernate_support` (Boolean)
+- `spot_max_price_percentage_over_lowest_price` (Number)
+- `total_local_storage_gb` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--instance_requirements--total_local_storage_gb))
+- `v_cpu_count` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--instance_requirements--v_cpu_count))
+
+<a id="nestedatt--managed_instances_provider--instance_launch_template--instance_requirements--accelerator_count"></a>
+### Nested Schema for `managed_instances_provider.instance_launch_template.instance_requirements.accelerator_count`
+
+Optional:
+
+- `max` (Number)
+- `min` (Number)
+
+
+<a id="nestedatt--managed_instances_provider--instance_launch_template--instance_requirements--accelerator_total_memory_mi_b"></a>
+### Nested Schema for `managed_instances_provider.instance_launch_template.instance_requirements.accelerator_total_memory_mi_b`
+
+Optional:
+
+- `max` (Number)
+- `min` (Number)
+
+
+<a id="nestedatt--managed_instances_provider--instance_launch_template--instance_requirements--baseline_ebs_bandwidth_mbps"></a>
+### Nested Schema for `managed_instances_provider.instance_launch_template.instance_requirements.baseline_ebs_bandwidth_mbps`
+
+Optional:
+
+- `max` (Number)
+- `min` (Number)
+
+
+<a id="nestedatt--managed_instances_provider--instance_launch_template--instance_requirements--memory_gi_b_per_v_cpu"></a>
+### Nested Schema for `managed_instances_provider.instance_launch_template.instance_requirements.memory_gi_b_per_v_cpu`
+
+Optional:
+
+- `max` (Number)
+- `min` (Number)
+
+
+<a id="nestedatt--managed_instances_provider--instance_launch_template--instance_requirements--memory_mi_b"></a>
+### Nested Schema for `managed_instances_provider.instance_launch_template.instance_requirements.memory_mi_b`
+
+Optional:
+
+- `max` (Number)
+- `min` (Number)
+
+
+<a id="nestedatt--managed_instances_provider--instance_launch_template--instance_requirements--network_bandwidth_gbps"></a>
+### Nested Schema for `managed_instances_provider.instance_launch_template.instance_requirements.network_bandwidth_gbps`
+
+Optional:
+
+- `max` (Number)
+- `min` (Number)
+
+
+<a id="nestedatt--managed_instances_provider--instance_launch_template--instance_requirements--network_interface_count"></a>
+### Nested Schema for `managed_instances_provider.instance_launch_template.instance_requirements.network_interface_count`
+
+Optional:
+
+- `max` (Number)
+- `min` (Number)
+
+
+<a id="nestedatt--managed_instances_provider--instance_launch_template--instance_requirements--total_local_storage_gb"></a>
+### Nested Schema for `managed_instances_provider.instance_launch_template.instance_requirements.total_local_storage_gb`
+
+Optional:
+
+- `max` (Number)
+- `min` (Number)
+
+
+<a id="nestedatt--managed_instances_provider--instance_launch_template--instance_requirements--v_cpu_count"></a>
+### Nested Schema for `managed_instances_provider.instance_launch_template.instance_requirements.v_cpu_count`
+
+Optional:
+
+- `max` (Number)
+- `min` (Number)
+
+
+
+<a id="nestedatt--managed_instances_provider--instance_launch_template--network_configuration"></a>
+### Nested Schema for `managed_instances_provider.instance_launch_template.network_configuration`
+
+Optional:
+
+- `security_groups` (List of String)
+- `subnets` (List of String)
+
+
+<a id="nestedatt--managed_instances_provider--instance_launch_template--storage_configuration"></a>
+### Nested Schema for `managed_instances_provider.instance_launch_template.storage_configuration`
+
+Optional:
+
+- `storage_size_gi_b` (Number)
+
 
 
 

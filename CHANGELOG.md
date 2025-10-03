@@ -1,4 +1,26 @@
-## 1.58.0 (Unreleased)
+## 1.59.0 (Unreleased)
+
+## 1.58.0 (October 2, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_amazonmq_brokers`
+* **New Data Source:** `awscc_applicationsignals_grouping_configuration`
+* **New Data Source:** `awscc_applicationsignals_grouping_configurations`
+* **New Data Source:** `awscc_bedrockagentcore_gateway`
+* **New Data Source:** `awscc_bedrockagentcore_gateways`
+* **New Data Source:** `awscc_datazone_form_type`
+* **New Data Source:** `awscc_ec2_local_gateway_virtual_interface`
+* **New Data Source:** `awscc_ec2_local_gateway_virtual_interface_group`
+* **New Data Source:** `awscc_ec2_local_gateway_virtual_interface_groups`
+* **New Data Source:** `awscc_ec2_local_gateway_virtual_interfaces`
+* **New Data Source:** `awscc_servicecatalog_portfolio_share`
+* **New Resource:** `awscc_applicationsignals_grouping_configuration`
+* **New Resource:** `awscc_bedrockagentcore_gateway`
+* **New Resource:** `awscc_datazone_form_type`
+* **New Resource:** `awscc_ec2_local_gateway_virtual_interface`
+* **New Resource:** `awscc_ec2_local_gateway_virtual_interface_group`
+* **New Resource:** `awscc_servicecatalog_portfolio_share`
 
 ## 1.57.0 (September 22, 2025)
 

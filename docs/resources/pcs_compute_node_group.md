@@ -28,7 +28,7 @@ AWS::PCS::ComputeNodeGroup resource creates an AWS PCS compute node group.
 
 - `ami_id` (String) The ID of the Amazon Machine Image (AMI) that AWS PCS uses to launch instances. If not provided, AWS PCS uses the AMI ID specified in the custom launch template.
 - `name` (String) The name that identifies the compute node group.
-- `purchase_option` (String) Specifies how EC2 instances are purchased on your behalf. AWS PCS supports On-Demand and Spot instances. For more information, see Instance purchasing options in the Amazon Elastic Compute Cloud User Guide. If you don't provide this option, it defaults to On-Demand.
+- `purchase_option` (String) Specifies how EC2 instances are purchased on your behalf. AWS PCS supports On-Demand, Spot and Capacity Block instances. For more information, see Instance purchasing options in the Amazon Elastic Compute Cloud User Guide. If you don't provide this option, it defaults to On-Demand.
 - `slurm_configuration` (Attributes) Additional options related to the Slurm scheduler. (see [below for nested schema](#nestedatt--slurm_configuration))
 - `spot_options` (Attributes) Additional configuration when you specify SPOT as the purchase option. (see [below for nested schema](#nestedatt--spot_options))
 - `tags` (Map of String) 1 or more tags added to the resource. Each tag consists of a tag key and tag value. The tag value is optional and can be an empty string.

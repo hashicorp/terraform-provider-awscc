@@ -24,6 +24,8 @@ Data Source schema for AWS::DataZone::ProjectMembership
 - `designation` (String)
 - `domain_identifier` (String)
 - `member` (Attributes) (see [below for nested schema](#nestedatt--member))
+- `member_identifier` (String)
+- `member_identifier_type` (String)
 - `project_identifier` (String)
 
 <a id="nestedatt--member"></a>

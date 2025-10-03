@@ -296,6 +296,24 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: LastModificationErrors
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Errors from the last modification of the connect peer.",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"last_modification_errors": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Errors from the last modification of the connect peer.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PeerAddress
 		// CloudFormation resource type schema:
 		//
@@ -435,25 +453,26 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.IsGlobalResourceType(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"bgp_configurations":    "BgpConfigurations",
-		"bgp_options":           "BgpOptions",
-		"configuration":         "Configuration",
-		"connect_attachment_id": "ConnectAttachmentId",
-		"connect_peer_id":       "ConnectPeerId",
-		"core_network_address":  "CoreNetworkAddress",
-		"core_network_asn":      "CoreNetworkAsn",
-		"core_network_id":       "CoreNetworkId",
-		"created_at":            "CreatedAt",
-		"edge_location":         "EdgeLocation",
-		"inside_cidr_blocks":    "InsideCidrBlocks",
-		"key":                   "Key",
-		"peer_address":          "PeerAddress",
-		"peer_asn":              "PeerAsn",
-		"protocol":              "Protocol",
-		"state":                 "State",
-		"subnet_arn":            "SubnetArn",
-		"tags":                  "Tags",
-		"value":                 "Value",
+		"bgp_configurations":       "BgpConfigurations",
+		"bgp_options":              "BgpOptions",
+		"configuration":            "Configuration",
+		"connect_attachment_id":    "ConnectAttachmentId",
+		"connect_peer_id":          "ConnectPeerId",
+		"core_network_address":     "CoreNetworkAddress",
+		"core_network_asn":         "CoreNetworkAsn",
+		"core_network_id":          "CoreNetworkId",
+		"created_at":               "CreatedAt",
+		"edge_location":            "EdgeLocation",
+		"inside_cidr_blocks":       "InsideCidrBlocks",
+		"key":                      "Key",
+		"last_modification_errors": "LastModificationErrors",
+		"peer_address":             "PeerAddress",
+		"peer_asn":                 "PeerAsn",
+		"protocol":                 "Protocol",
+		"state":                    "State",
+		"subnet_arn":               "SubnetArn",
+		"tags":                     "Tags",
+		"value":                    "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

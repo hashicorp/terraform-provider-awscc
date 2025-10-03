@@ -30,6 +30,7 @@ Data Source schema for AWS::NetworkManager::ConnectPeer
 - `created_at` (String) Connect peer creation time.
 - `edge_location` (String) The Connect peer Regions where edges are located.
 - `inside_cidr_blocks` (List of String) The inside IP addresses used for a Connect peer configuration.
+- `last_modification_errors` (List of String) Errors from the last modification of the connect peer.
 - `peer_address` (String) The IP address of the Connect peer.
 - `state` (String) State of the connect peer.
 - `subnet_arn` (String) The subnet ARN for the connect peer.

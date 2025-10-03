@@ -1,0 +1,172 @@
+{
+  "typeName": "AWS::EC2::LocalGatewayVirtualInterface",
+  "description": "Resource Type definition for Local Gateway Virtual Interface which describes a virtual interface for AWS Outposts local gateways.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ec2-lgw.git",
+  "definitions": {
+    "Tags": {
+      "description": "An array of key-value pairs to associate with a resource, each pair must be unique.",
+      "type": "array",
+      "insertionOrder": false,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 127,
+          "pattern": ""
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": ""
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "LocalGatewayVirtualInterfaceId": {
+      "description": "The ID of the virtual interface",
+      "type": "string"
+    },
+    "LocalGatewayId": {
+      "description": "The ID of the local gateway",
+      "type": "string"
+    },
+    "LocalGatewayVirtualInterfaceGroupId": {
+      "description": "The ID of the virtual interface group",
+      "type": "string"
+    },
+    "OutpostLagId": {
+      "description": "The Outpost LAG ID.",
+      "type": "string"
+    },
+    "Vlan": {
+      "description": "The ID of the VLAN.",
+      "type": "integer"
+    },
+    "LocalAddress": {
+      "description": "The local address.",
+      "type": "string"
+    },
+    "PeerAddress": {
+      "description": "The peer address.",
+      "type": "string"
+    },
+    "LocalBgpAsn": {
+      "description": "The Autonomous System Number(ASN) for the local Border Gateway Protocol (BGP)",
+      "type": "integer"
+    },
+    "PeerBgpAsn": {
+      "description": "The peer BGP ASN.",
+      "type": "integer"
+    },
+    "PeerBgpAsnExtended": {
+      "description": "The extended 32-bit ASN of the BGP peer for use with larger ASN values.",
+      "type": "integer",
+      "format": "int64"
+    },
+    "OwnerId": {
+      "description": "The ID of the Amazon Web Services account that owns the local gateway virtual interface group",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "ConfigurationState": {
+      "description": "The current state of the local gateway virtual interface",
+      "type": "string"
+    }
+  },
+  "required": [
+    "OutpostLagId",
+    "LocalGatewayVirtualInterfaceGroupId",
+    "Vlan",
+    "LocalAddress",
+    "PeerAddress"
+  ],
+  "createOnlyProperties": [
+    "/properties/LocalGatewayVirtualInterfaceGroupId",
+    "/properties/OutpostLagId",
+    "/properties/Vlan",
+    "/properties/LocalAddress",
+    "/properties/PeerAddress",
+    "/properties/PeerBgpAsn",
+    "/properties/PeerBgpAsnExtended"
+  ],
+  "readOnlyProperties": [
+    "/properties/LocalGatewayVirtualInterfaceId",
+    "/properties/LocalGatewayId",
+    "/properties/LocalBgpAsn",
+    "/properties/OwnerId",
+    "/properties/ConfigurationState"
+  ],
+  "primaryIdentifier": [
+    "/properties/LocalGatewayVirtualInterfaceId"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags",
+      "ec2:DescribeTags"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ec2:CreateLocalGatewayVirtualInterface",
+        "ec2:DescribeLocalGatewayVirtualInterfaces",
+        "ec2:CreateTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ec2:DescribeLocalGatewayVirtualInterfaces",
+        "ec2:DescribeTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ec2:DescribeLocalGatewayVirtualInterfaces",
+        "ec2:CreateTags",
+        "ec2:DeleteTags",
+        "ec2:DescribeTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:DeleteLocalGatewayVirtualInterface",
+        "ec2:DescribeLocalGatewayVirtualInterfaces",
+        "ec2:DeleteTags"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:DescribeLocalGatewayVirtualInterfaces"
+      ]
+    }
+  },
+  "replacementStrategy": "delete_then_create",
+  "additionalProperties": false
+}

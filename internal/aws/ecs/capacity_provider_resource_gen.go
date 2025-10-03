@@ -7,16 +7,21 @@ package ecs
 
 import (
 	"context"
+	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -193,6 +198,964 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ClusterName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ManagedInstancesProvider
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "InfrastructureRoleArn": {
+		//	      "type": "string"
+		//	    },
+		//	    "InstanceLaunchTemplate": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Ec2InstanceProfileArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "InstanceRequirements": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "AcceleratorCount": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Max": {
+		//	                  "type": "integer"
+		//	                },
+		//	                "Min": {
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "AcceleratorManufacturers": {
+		//	              "items": {
+		//	                "enum": [
+		//	                  "amazon-web-services",
+		//	                  "amd",
+		//	                  "habana",
+		//	                  "nvidia",
+		//	                  "xilinx"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            },
+		//	            "AcceleratorNames": {
+		//	              "items": {
+		//	                "enum": [
+		//	                  "a10g",
+		//	                  "a100",
+		//	                  "h100",
+		//	                  "inferentia",
+		//	                  "k520",
+		//	                  "k80",
+		//	                  "m60",
+		//	                  "radeon-pro-v520",
+		//	                  "t4",
+		//	                  "t4g",
+		//	                  "vu9p",
+		//	                  "v100"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            },
+		//	            "AcceleratorTotalMemoryMiB": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Max": {
+		//	                  "type": "integer"
+		//	                },
+		//	                "Min": {
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "AcceleratorTypes": {
+		//	              "items": {
+		//	                "enum": [
+		//	                  "gpu",
+		//	                  "fpga",
+		//	                  "inference"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            },
+		//	            "AllowedInstanceTypes": {
+		//	              "items": {
+		//	                "maxLength": 30,
+		//	                "minLength": 1,
+		//	                "pattern": "[a-zA-Z0-9\\.\\*]+",
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            },
+		//	            "BareMetal": {
+		//	              "enum": [
+		//	                "included",
+		//	                "required",
+		//	                "excluded"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "BaselineEbsBandwidthMbps": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Max": {
+		//	                  "type": "integer"
+		//	                },
+		//	                "Min": {
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "BurstablePerformance": {
+		//	              "enum": [
+		//	                "included",
+		//	                "required",
+		//	                "excluded"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "CpuManufacturers": {
+		//	              "items": {
+		//	                "enum": [
+		//	                  "intel",
+		//	                  "amd",
+		//	                  "amazon-web-services"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            },
+		//	            "ExcludedInstanceTypes": {
+		//	              "items": {
+		//	                "maxLength": 30,
+		//	                "minLength": 1,
+		//	                "pattern": "[a-zA-Z0-9\\.\\*]+",
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            },
+		//	            "InstanceGenerations": {
+		//	              "items": {
+		//	                "enum": [
+		//	                  "current",
+		//	                  "previous"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            },
+		//	            "LocalStorage": {
+		//	              "enum": [
+		//	                "included",
+		//	                "required",
+		//	                "excluded"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "LocalStorageTypes": {
+		//	              "items": {
+		//	                "enum": [
+		//	                  "hdd",
+		//	                  "ssd"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            },
+		//	            "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice": {
+		//	              "type": "integer"
+		//	            },
+		//	            "MemoryGiBPerVCpu": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Max": {
+		//	                  "type": "number"
+		//	                },
+		//	                "Min": {
+		//	                  "type": "number"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "MemoryMiB": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Max": {
+		//	                  "type": "integer"
+		//	                },
+		//	                "Min": {
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Min"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "NetworkBandwidthGbps": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Max": {
+		//	                  "type": "number"
+		//	                },
+		//	                "Min": {
+		//	                  "type": "number"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "NetworkInterfaceCount": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Max": {
+		//	                  "type": "integer"
+		//	                },
+		//	                "Min": {
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "OnDemandMaxPricePercentageOverLowestPrice": {
+		//	              "type": "integer"
+		//	            },
+		//	            "RequireHibernateSupport": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "SpotMaxPricePercentageOverLowestPrice": {
+		//	              "type": "integer"
+		//	            },
+		//	            "TotalLocalStorageGB": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Max": {
+		//	                  "type": "number"
+		//	                },
+		//	                "Min": {
+		//	                  "type": "number"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "VCpuCount": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Max": {
+		//	                  "type": "integer"
+		//	                },
+		//	                "Min": {
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Min"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "VCpuCount",
+		//	            "MemoryMiB"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Monitoring": {
+		//	          "enum": [
+		//	            "BASIC",
+		//	            "DETAILED"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "NetworkConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "SecurityGroups": {
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "Subnets": {
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Subnets"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "StorageConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "StorageSizeGiB": {
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "StorageSizeGiB"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Ec2InstanceProfileArn",
+		//	        "NetworkConfiguration"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "PropagateTags": {
+		//	      "enum": [
+		//	        "CAPACITY_PROVIDER",
+		//	        "NONE"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "InfrastructureRoleArn",
+		//	    "InstanceLaunchTemplate"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"managed_instances_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InfrastructureRoleArn
+				"infrastructure_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: InstanceLaunchTemplate
+				"instance_launch_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Ec2InstanceProfileArn
+						"ec_2_instance_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: InstanceRequirements
+						"instance_requirements": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AcceleratorCount
+								"accelerator_count": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Max
+										"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Min
+										"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: AcceleratorManufacturers
+								"accelerator_manufacturers": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.ValueStringsAre(
+											stringvalidator.OneOf(
+												"amazon-web-services",
+												"amd",
+												"habana",
+												"nvidia",
+												"xilinx",
+											),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: AcceleratorNames
+								"accelerator_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.ValueStringsAre(
+											stringvalidator.OneOf(
+												"a10g",
+												"a100",
+												"h100",
+												"inferentia",
+												"k520",
+												"k80",
+												"m60",
+												"radeon-pro-v520",
+												"t4",
+												"t4g",
+												"vu9p",
+												"v100",
+											),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: AcceleratorTotalMemoryMiB
+								"accelerator_total_memory_mi_b": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Max
+										"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Min
+										"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: AcceleratorTypes
+								"accelerator_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.ValueStringsAre(
+											stringvalidator.OneOf(
+												"gpu",
+												"fpga",
+												"inference",
+											),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: AllowedInstanceTypes
+								"allowed_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.ValueStringsAre(
+											stringvalidator.LengthBetween(1, 30),
+											stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9\\.\\*]+"), ""),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: BareMetal
+								"bare_metal": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"included",
+											"required",
+											"excluded",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: BaselineEbsBandwidthMbps
+								"baseline_ebs_bandwidth_mbps": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Max
+										"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Min
+										"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: BurstablePerformance
+								"burstable_performance": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"included",
+											"required",
+											"excluded",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: CpuManufacturers
+								"cpu_manufacturers": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.ValueStringsAre(
+											stringvalidator.OneOf(
+												"intel",
+												"amd",
+												"amazon-web-services",
+											),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ExcludedInstanceTypes
+								"excluded_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.ValueStringsAre(
+											stringvalidator.LengthBetween(1, 30),
+											stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9\\.\\*]+"), ""),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: InstanceGenerations
+								"instance_generations": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.ValueStringsAre(
+											stringvalidator.OneOf(
+												"current",
+												"previous",
+											),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: LocalStorage
+								"local_storage": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"included",
+											"required",
+											"excluded",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: LocalStorageTypes
+								"local_storage_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.ValueStringsAre(
+											stringvalidator.OneOf(
+												"hdd",
+												"ssd",
+											),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
+								"max_spot_price_as_percentage_of_optimal_on_demand_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: MemoryGiBPerVCpu
+								"memory_gi_b_per_v_cpu": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Max
+										"max": schema.Float64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+												float64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Min
+										"min": schema.Float64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+												float64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: MemoryMiB
+								"memory_mi_b": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Max
+										"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Min
+										"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												fwvalidators.NotNullInt64(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Object{ /*START VALIDATORS*/
+										fwvalidators.NotNullObject(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: NetworkBandwidthGbps
+								"network_bandwidth_gbps": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Max
+										"max": schema.Float64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+												float64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Min
+										"min": schema.Float64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+												float64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: NetworkInterfaceCount
+								"network_interface_count": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Max
+										"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Min
+										"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: OnDemandMaxPricePercentageOverLowestPrice
+								"on_demand_max_price_percentage_over_lowest_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: RequireHibernateSupport
+								"require_hibernate_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SpotMaxPricePercentageOverLowestPrice
+								"spot_max_price_percentage_over_lowest_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: TotalLocalStorageGB
+								"total_local_storage_gb": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Max
+										"max": schema.Float64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+												float64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Min
+										"min": schema.Float64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+												float64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: VCpuCount
+								"v_cpu_count": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Max
+										"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Min
+										"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												fwvalidators.NotNullInt64(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Object{ /*START VALIDATORS*/
+										fwvalidators.NotNullObject(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Monitoring
+						"monitoring": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"BASIC",
+									"DETAILED",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: NetworkConfiguration
+						"network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SecurityGroups
+								"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Subnets
+								"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										fwvalidators.NotNullList(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: StorageConfiguration
+						"storage_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: StorageSizeGiB
+								"storage_size_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										fwvalidators.NotNullInt64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PropagateTags
+				"propagate_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"CAPACITY_PROVIDER",
+							"NONE",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -288,20 +1251,59 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"accelerator_count":              "AcceleratorCount",
+		"accelerator_manufacturers":      "AcceleratorManufacturers",
+		"accelerator_names":              "AcceleratorNames",
+		"accelerator_total_memory_mi_b":  "AcceleratorTotalMemoryMiB",
+		"accelerator_types":              "AcceleratorTypes",
+		"allowed_instance_types":         "AllowedInstanceTypes",
 		"auto_scaling_group_arn":         "AutoScalingGroupArn",
 		"auto_scaling_group_provider":    "AutoScalingGroupProvider",
+		"bare_metal":                     "BareMetal",
+		"baseline_ebs_bandwidth_mbps":    "BaselineEbsBandwidthMbps",
+		"burstable_performance":          "BurstablePerformance",
+		"cluster_name":                   "ClusterName",
+		"cpu_manufacturers":              "CpuManufacturers",
+		"ec_2_instance_profile_arn":      "Ec2InstanceProfileArn",
+		"excluded_instance_types":        "ExcludedInstanceTypes",
+		"infrastructure_role_arn":        "InfrastructureRoleArn",
+		"instance_generations":           "InstanceGenerations",
+		"instance_launch_template":       "InstanceLaunchTemplate",
+		"instance_requirements":          "InstanceRequirements",
 		"instance_warmup_period":         "InstanceWarmupPeriod",
 		"key":                            "Key",
+		"local_storage":                  "LocalStorage",
+		"local_storage_types":            "LocalStorageTypes",
 		"managed_draining":               "ManagedDraining",
+		"managed_instances_provider":     "ManagedInstancesProvider",
 		"managed_scaling":                "ManagedScaling",
 		"managed_termination_protection": "ManagedTerminationProtection",
-		"maximum_scaling_step_size":      "MaximumScalingStepSize",
-		"minimum_scaling_step_size":      "MinimumScalingStepSize",
-		"name":                           "Name",
-		"status":                         "Status",
-		"tags":                           "Tags",
-		"target_capacity":                "TargetCapacity",
-		"value":                          "Value",
+		"max":                            "Max",
+		"max_spot_price_as_percentage_of_optimal_on_demand_price": "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice",
+		"maximum_scaling_step_size":                               "MaximumScalingStepSize",
+		"memory_gi_b_per_v_cpu":                                   "MemoryGiBPerVCpu",
+		"memory_mi_b":                                             "MemoryMiB",
+		"min":                                                     "Min",
+		"minimum_scaling_step_size":                               "MinimumScalingStepSize",
+		"monitoring":                                              "Monitoring",
+		"name":                                                    "Name",
+		"network_bandwidth_gbps":                                  "NetworkBandwidthGbps",
+		"network_configuration":                                   "NetworkConfiguration",
+		"network_interface_count":                                 "NetworkInterfaceCount",
+		"on_demand_max_price_percentage_over_lowest_price": "OnDemandMaxPricePercentageOverLowestPrice",
+		"propagate_tags":                              "PropagateTags",
+		"require_hibernate_support":                   "RequireHibernateSupport",
+		"security_groups":                             "SecurityGroups",
+		"spot_max_price_percentage_over_lowest_price": "SpotMaxPricePercentageOverLowestPrice",
+		"status":                 "Status",
+		"storage_configuration":  "StorageConfiguration",
+		"storage_size_gi_b":      "StorageSizeGiB",
+		"subnets":                "Subnets",
+		"tags":                   "Tags",
+		"target_capacity":        "TargetCapacity",
+		"total_local_storage_gb": "TotalLocalStorageGB",
+		"v_cpu_count":            "VCpuCount",
+		"value":                  "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

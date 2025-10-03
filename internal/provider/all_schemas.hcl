@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1220 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1245 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -74,6 +74,10 @@ resource_schema "aws_accessanalyzer_analyzer" {
   # git checkout internal/service/cloudformation/schemas/AWS_AccessAnalyzer_Analyzer.json
   # Suppression Reason: AnalyzerConfiguration/UnusedAccessConfiguration/AnalysisRule/Exclusions/ResourceTags is of unsupported type: list of array.
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1528
+}
+
+resource_schema "aws_amazonmq_broker" {
+  cloudformation_type_name = "AWS::AmazonMQ::Broker"
 }
 
 resource_schema "aws_amazonmq_configuration" {
@@ -463,6 +467,10 @@ resource_schema "aws_applicationsignals_discovery" {
   cloudformation_type_name = "AWS::ApplicationSignals::Discovery"
 }
 
+resource_schema "aws_applicationsignals_grouping_configuration" {
+  cloudformation_type_name = "AWS::ApplicationSignals::GroupingConfiguration"
+}
+
 resource_schema "aws_applicationsignals_service_level_objective" {
   cloudformation_type_name = "AWS::ApplicationSignals::ServiceLevelObjective"
 }
@@ -683,6 +691,20 @@ resource_schema "aws_bedrockagentcore_browser_custom" {
 
 resource_schema "aws_bedrockagentcore_code_interpreter_custom" {
   cloudformation_type_name = "AWS::BedrockAgentCore::CodeInterpreterCustom"
+}
+
+resource_schema "aws_bedrockagentcore_gateway" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::Gateway"
+}
+
+resource_schema "aws_bedrockagentcore_gateway_target" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::GatewayTarget"
+
+  # Stack overflow
+  # Ref: https://github.com/hashicorp/terraform-provider-awscc/issues/2817
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_bedrockagentcore_runtime" {
@@ -1525,6 +1547,11 @@ resource_schema "aws_datazone_environment_profile" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_datazone_form_type" {
+  cloudformation_type_name               = "AWS::DataZone::FormType"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_datazone_group_profile" {
   cloudformation_type_name               = "AWS::DataZone::GroupProfile"
   suppress_plural_data_source_generation = true
@@ -1781,6 +1808,14 @@ resource_schema "aws_ec2_local_gateway_route_table_vpc_association" {
 
 resource_schema "aws_ec2_local_gateway_route_table_virtual_interface_group_association" {
   cloudformation_type_name = "AWS::EC2::LocalGatewayRouteTableVirtualInterfaceGroupAssociation"
+}
+
+resource_schema "aws_ec2_local_gateway_virtual_interface" {
+  cloudformation_type_name = "AWS::EC2::LocalGatewayVirtualInterface"
+}
+
+resource_schema "aws_ec2_local_gateway_virtual_interface_group" {
+  cloudformation_type_name = "AWS::EC2::LocalGatewayVirtualInterfaceGroup"
 }
 
 resource_schema "aws_ec2_nat_gateway" {
@@ -5123,6 +5158,11 @@ resource_schema "aws_servicecatalog_launch_template_constraint" {
 
 resource_schema "aws_servicecatalog_portfolio_product_association" {
   cloudformation_type_name               = "AWS::ServiceCatalog::PortfolioProductAssociation"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_servicecatalog_portfolio_share" {
+  cloudformation_type_name               = "AWS::ServiceCatalog::PortfolioShare"
   suppress_plural_data_source_generation = true
 }
 

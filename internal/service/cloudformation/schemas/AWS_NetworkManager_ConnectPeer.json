@@ -55,6 +55,13 @@
       "description": "The subnet ARN for the connect peer.",
       "type": "string"
     },
+    "LastModificationErrors": {
+      "description": "Errors from the last modification of the connect peer.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "Tags": {
       "description": "An array of key-value pairs to apply to this resource.",
       "type": "array",
@@ -191,7 +198,8 @@
     "/properties/CreatedAt",
     "/properties/Configuration",
     "/properties/CoreNetworkId",
-    "/properties/EdgeLocation"
+    "/properties/EdgeLocation",
+    "/properties/LastModificationErrors"
   ],
   "primaryIdentifier": [
     "/properties/ConnectPeerId"

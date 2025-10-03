@@ -3,12 +3,12 @@
 page_title: "awscc_datasync_location_smb Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource schema for AWS::DataSync::LocationSMB.
+  Resource Type definition for AWS::DataSync::LocationSMB.
 ---
 
 # awscc_datasync_location_smb (Resource)
 
-Resource schema for AWS::DataSync::LocationSMB.
+Resource Type definition for AWS::DataSync::LocationSMB.
 
 
 
@@ -22,6 +22,8 @@ Resource schema for AWS::DataSync::LocationSMB.
 ### Optional
 
 - `authentication_type` (String) The authentication mode used to determine identity of user.
+- `cmk_secret_config` (Attributes) Specifies configuration information for a DataSync-managed secret, such as a password or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key. (see [below for nested schema](#nestedatt--cmk_secret_config))
+- `custom_secret_config` (Attributes) Specifies configuration information for a customer-managed secret, such as a password or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret. (see [below for nested schema](#nestedatt--custom_secret_config))
 - `dns_ip_addresses` (List of String) Specifies the IPv4 addresses for the DNS servers that your SMB file server belongs to. This parameter applies only if AuthenticationType is set to KERBEROS. If you have multiple domains in your environment, configuring this parameter makes sure that DataSync connects to the right SMB file server.
 - `domain` (String) The name of the Windows domain that the SMB server belongs to.
 - `kerberos_keytab` (String) The Base64 string representation of the Keytab file. Specifies your Kerberos key table (keytab) file, which includes mappings between your service principal name (SPN) and encryption keys. To avoid task execution errors, make sure that the SPN in the keytab file matches exactly what you specify for KerberosPrincipal and in your krb5.conf file.
@@ -39,6 +41,28 @@ Resource schema for AWS::DataSync::LocationSMB.
 - `id` (String) Uniquely identifies the resource.
 - `location_arn` (String) The Amazon Resource Name (ARN) of the SMB location that is created.
 - `location_uri` (String) The URL of the SMB location that was described.
+- `managed_secret_config` (Attributes) Specifies configuration information for a DataSync-managed secret, such as a password or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager. (see [below for nested schema](#nestedatt--managed_secret_config))
+
+<a id="nestedatt--cmk_secret_config"></a>
+### Nested Schema for `cmk_secret_config`
+
+Optional:
+
+- `kms_key_arn` (String) Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.
+
+Read-Only:
+
+- `secret_arn` (String) Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.
+
+
+<a id="nestedatt--custom_secret_config"></a>
+### Nested Schema for `custom_secret_config`
+
+Optional:
+
+- `secret_access_role_arn` (String) Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.
+- `secret_arn` (String) Specifies the ARN for a customer created AWS Secrets Manager secret.
+
 
 <a id="nestedatt--mount_options"></a>
 ### Nested Schema for `mount_options`
@@ -55,6 +79,14 @@ Optional:
 
 - `key` (String) The key for an AWS resource tag.
 - `value` (String) The value for an AWS resource tag.
+
+
+<a id="nestedatt--managed_secret_config"></a>
+### Nested Schema for `managed_secret_config`
+
+Read-Only:
+
+- `secret_arn` (String) Specifies the ARN for an AWS Secrets Manager secret.
 
 ## Import
 
