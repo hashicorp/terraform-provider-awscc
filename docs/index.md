@@ -247,9 +247,9 @@ terraform {
   provider_meta "awscc" {
     user_agent = [
       {
-        name    = "example-demo"
-        version = "0.0.1"
-        comment = "a demo module"
+        product_name    = "example-demo"
+        product_version = "0.0.1"
+        comment         = "a demo module"
       },
     ]
   }
@@ -335,9 +335,9 @@ Optional:
 
 Required:
 
-- `product_name` (String) Product name. At least one of `product_name` or `comment` must be set.
+- `product_name` (String) Product name.
 
 Optional:
 
-- `comment` (String) User-Agent comment. At least one of `comment` or `product_name` must be set.
+- `comment` (String) Comment describing any additional product details.
 - `product_version` (String) Product version. Optional, and should only be set when `product_name` is set.

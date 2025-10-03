@@ -111,14 +111,14 @@ terraform {
   provider_meta "awscc" {
     user_agent = [
       {
-        name    = "my-test-module"
-        version = "0.0.1"
-        comment = "testing user-agent comment"
+        product_name    = "test-module"
+        product_version = "0.0.1"
+        comment         = "test comment"
       },
       {
-        name    = "other-test-module"
-        version = "0.0.2"
-        comment = "second user agent"
+        product_name    = "second-test-module"
+        product_version = "0.0.2"
+        comment         = "second test comment"
       }
     ]
   }

@@ -13,13 +13,13 @@ func TestUserAgentProducts(t *testing.T) {
 
 	simpleProduct := awsbase.UserAgentProduct{Name: "simple", Version: "0.0.1", Comment: "test comment"}
 	simpleAddProduct := userAgentProduct{
-		Name:    types.StringValue(simpleProduct.Name),
-		Version: types.StringValue(simpleProduct.Version),
-		Comment: types.StringValue(simpleProduct.Comment),
+		ProductName:    types.StringValue(simpleProduct.Name),
+		ProductVersion: types.StringValue(simpleProduct.Version),
+		Comment:        types.StringValue(simpleProduct.Comment),
 	}
 	minimalProduct := awsbase.UserAgentProduct{Name: "minimal"}
 	minimalAddProduct := userAgentProduct{
-		Name: types.StringValue(minimalProduct.Name),
+		ProductName: types.StringValue(minimalProduct.Name),
 	}
 
 	testcases := map[string]struct {

@@ -269,11 +269,11 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"comment": schema.StringAttribute{
-							Description: "User-Agent comment. At least one of `comment` or `product_name` must be set.",
+							Description: "Comment describing any additional product details.",
 							Optional:    true,
 						},
 						"product_name": schema.StringAttribute{
-							Description: "Product name. At least one of `product_name` or `comment` must be set.",
+							Description: "Product name.",
 							Required:    true,
 						},
 						"product_version": schema.StringAttribute{
@@ -295,15 +295,15 @@ func (p *ccProvider) MetaSchema(ctx context.Context, req provider.MetaSchemaRequ
 			"user_agent": metaschema.ListNestedAttribute{
 				NestedObject: metaschema.NestedAttributeObject{
 					Attributes: map[string]metaschema.Attribute{
-						"comment": metaschema.StringAttribute{
-							Description: "User-Agent comment. At least one of `comment` or `product_name` must be set.",
+						"comment": schema.StringAttribute{
+							Description: "Comment describing any additional product details.",
 							Optional:    true,
 						},
-						"name": metaschema.StringAttribute{
-							Description: "Product name. At least one of `product_name` or `comment` must be set.",
+						"product_name": schema.StringAttribute{
+							Description: "Product name.",
 							Required:    true,
 						},
-						"version": metaschema.StringAttribute{
+						"product_version": schema.StringAttribute{
 							Description: "Product version. Optional, and should only be set when `product_name` is set.",
 							Optional:    true,
 						},

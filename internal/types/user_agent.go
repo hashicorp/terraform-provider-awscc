@@ -6,9 +6,9 @@ import (
 )
 
 type userAgentProduct struct {
-	Name    tftypes.String `tfsdk:"name"`
-	Version tftypes.String `tfsdk:"version"`
-	Comment tftypes.String `tfsdk:"comment"`
+	Comment        tftypes.String `tfsdk:"comment"`
+	ProductName    tftypes.String `tfsdk:"product_name"`
+	ProductVersion tftypes.String `tfsdk:"product_version"`
 }
 
 type UserAgentProducts []userAgentProduct
@@ -17,9 +17,9 @@ func (uap UserAgentProducts) UserAgentProducts() []awsbase.UserAgentProduct {
 	results := make([]awsbase.UserAgentProduct, len(uap))
 	for i, p := range uap {
 		results[i] = awsbase.UserAgentProduct{
-			Name:    p.Name.ValueString(),
-			Version: p.Version.ValueString(),
 			Comment: p.Comment.ValueString(),
+			Name:    p.ProductName.ValueString(),
+			Version: p.ProductVersion.ValueString(),
 		}
 	}
 	return results
