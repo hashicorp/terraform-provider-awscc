@@ -72,7 +72,7 @@ func sortPatchOperations(patch []jsonpatch.JsonPatchOperation) []jsonpatch.JsonP
 func comparePathsNumerically(path1, path2 string) bool {
 	parts1 := strings.Split(path1, "/")
 	parts2 := strings.Split(path2, "/")
-	
+
 	for i := 0; i < len(parts1) && i < len(parts2); i++ {
 		if idx1, err1 := strconv.Atoi(parts1[i]); err1 == nil {
 			if idx2, err2 := strconv.Atoi(parts2[i]); err2 == nil {

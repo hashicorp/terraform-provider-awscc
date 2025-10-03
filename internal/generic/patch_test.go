@@ -38,7 +38,7 @@ func TestSortPatchOperations(t *testing.T) {
 				t.Fatalf("More remove operations than expected")
 			}
 			if op.Path != expectedRemoveOrder[removeOpIndex] {
-				t.Errorf("Expected remove operation %d to have path %s, got %s", 
+				t.Errorf("Expected remove operation %d to have path %s, got %s",
 					removeOpIndex, expectedRemoveOrder[removeOpIndex], op.Path)
 			}
 			removeOpIndex++
@@ -72,7 +72,7 @@ func TestComparePathsNumerically(t *testing.T) {
 	for _, test := range tests {
 		result := comparePathsNumerically(test.path1, test.path2)
 		if result != test.expected {
-			t.Errorf("comparePathsNumerically(%s, %s) = %v, expected %v (%s)", 
+			t.Errorf("comparePathsNumerically(%s, %s) = %v, expected %v (%s)",
 				test.path1, test.path2, result, test.expected, test.desc)
 		}
 	}
@@ -98,7 +98,7 @@ func TestSortPatchOperationsWithLexicalIssue(t *testing.T) {
 	// Expected order: 12, 11, 10, 9, 6, 4, 3, 1 (highest to lowest)
 	expectedRemoveOrder := []string{
 		"/QueueConfigs/12",
-		"/QueueConfigs/11", 
+		"/QueueConfigs/11",
 		"/QueueConfigs/10",
 		"/QueueConfigs/9",
 		"/QueueConfigs/6",
@@ -114,7 +114,7 @@ func TestSortPatchOperationsWithLexicalIssue(t *testing.T) {
 				t.Fatalf("More remove operations than expected")
 			}
 			if op.Path != expectedRemoveOrder[removeOpIndex] {
-				t.Errorf("Expected remove operation %d to have path %s, got %s", 
+				t.Errorf("Expected remove operation %d to have path %s, got %s",
 					removeOpIndex, expectedRemoveOrder[removeOpIndex], op.Path)
 			}
 			removeOpIndex++
