@@ -42,7 +42,7 @@ func TestAccAWSS3Bucket_identity_noTerraformSupport(t *testing.T) {
 			},
 			{
 				ExternalProviders: map[string]resource.ExternalProvider{
-					"aws": {
+					"awscc": {
 						Source:            "hashicorp/awscc",
 						VersionConstraint: "1.58.0",
 					},
