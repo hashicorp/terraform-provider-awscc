@@ -1,5 +1,9 @@
 ## 1.59.0 (Unreleased)
 
+BUG:
+
+* provider: Fix `Missing Resource Identity After Update` error when using Terraform version without identity support ([#2833](https://github.com/hashicorp/terraform-provider-awscc/pull/2833))
+
 ## 1.58.0 (October 2, 2025)
 
 FEATURES:
