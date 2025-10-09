@@ -141,6 +141,65 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The name that identifies the queue.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SlurmConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The Slurm configuration for the queue.",
+		//	  "properties": {
+		//	    "SlurmCustomSettings": {
+		//	      "description": "Custom Slurm parameters that directly map to Slurm configuration settings.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Additional settings that directly map to Slurm settings.",
+		//	        "properties": {
+		//	          "ParameterName": {
+		//	            "description": "AWS PCS supports configuration of the Slurm parameters for queues:.",
+		//	            "type": "string"
+		//	          },
+		//	          "ParameterValue": {
+		//	            "description": "The value for the configured Slurm setting.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "ParameterName",
+		//	          "ParameterValue"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"slurm_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SlurmCustomSettings
+				"slurm_custom_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ParameterName
+							"parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "AWS PCS supports configuration of the Slurm parameters for queues:.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ParameterValue
+							"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The value for the configured Slurm setting.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Custom Slurm parameters that directly map to Slurm configuration settings.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The Slurm configuration for the queue.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -205,7 +264,11 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"error_info":                        "ErrorInfo",
 		"message":                           "Message",
 		"name":                              "Name",
+		"parameter_name":                    "ParameterName",
+		"parameter_value":                   "ParameterValue",
 		"queue_id":                          "Id",
+		"slurm_configuration":               "SlurmConfiguration",
+		"slurm_custom_settings":             "SlurmCustomSettings",
 		"status":                            "Status",
 		"tags":                              "Tags",
 	})
