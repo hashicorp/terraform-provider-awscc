@@ -1,0 +1,92 @@
+{
+  "typeName": "AWS::ServiceCatalog::ResourceUpdateConstraint",
+  "description": "Resource type definition for AWS::ServiceCatalog::ResourceUpdateConstraint",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-servicecatalog/tree/master/aws-servicecatalog-resourceupdateconstraint.git",
+  "additionalProperties": false,
+  "properties": {
+    "Id": {
+      "type": "string",
+      "description": "Unique identifier for the constraint"
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the constraint"
+    },
+    "AcceptLanguage": {
+      "type": "string",
+      "description": "The language code"
+    },
+    "TagUpdateOnProvisionedProduct": {
+      "type": "string",
+      "description": "ALLOWED or NOT_ALLOWED, to permit or prevent changes to the tags on provisioned instances of the specified portfolio / product combination"
+    },
+    "PortfolioId": {
+      "type": "string",
+      "description": "The portfolio identifier"
+    },
+    "ProductId": {
+      "type": "string",
+      "description": "The product identifier"
+    }
+  },
+  "required": [
+    "TagUpdateOnProvisionedProduct",
+    "PortfolioId",
+    "ProductId"
+  ],
+  "createOnlyProperties": [
+    "/properties/PortfolioId",
+    "/properties/ProductId"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "readOnlyProperties": [
+    "/properties/Id"
+  ],
+  "writeOnlyProperties": [
+    "/properties/AcceptLanguage"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "servicecatalog:CreateConstraint",
+        "servicecatalog:DescribeConstraint"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "servicecatalog:DescribeConstraint"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "servicecatalog:UpdateConstraint",
+        "servicecatalog:DescribeConstraint"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "servicecatalog:DeleteConstraint"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "PortfolioId": {
+            "$ref": "resource-schema.json#/properties/PortfolioId"
+          }
+        },
+        "required": [
+          "PortfolioId"
+        ]
+      },
+      "permissions": [
+        "servicecatalog:ListConstraintsForPortfolio"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": false
+  }
+}

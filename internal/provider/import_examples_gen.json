@@ -677,6 +677,10 @@
         "identifier": ["GatewayIdentifier"]
     },
     {
+        "resource": "awscc_bedrockagentcore_memory",
+        "identifier": ["MemoryArn"]
+    },
+    {
         "resource": "awscc_bedrockagentcore_runtime",
         "generateListResource": true,
         "identifier": ["AgentRuntimeId"]
@@ -3463,6 +3467,10 @@
         "identifier": ["DiskName"]
     },
     {
+        "resource": "awscc_lightsail_disk_snapshot",
+        "identifier": ["DiskSnapshotName"]
+    },
+    {
         "resource": "awscc_lightsail_distribution",
         "generateListResource": true,
         "identifier": ["DistributionName"]
@@ -3916,6 +3924,10 @@
         "identifier": ["DBSubnetGroupName"]
     },
     {
+        "resource": "awscc_neptune_event_subscription",
+        "identifier": ["SubscriptionName"]
+    },
+    {
         "resource": "awscc_neptunegraph_graph",
         "generateListResource": true,
         "identifier": ["GraphId"]
@@ -4076,6 +4088,10 @@
         "resource": "awscc_notificationscontacts_email_contact",
         "generateListResource": true,
         "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_observabilityadmin_organization_centralization_rule",
+        "identifier": ["RuleArn"]
     },
     {
         "resource": "awscc_observabilityadmin_organization_telemetry_rule",
@@ -5412,6 +5428,10 @@
     {
         "resource": "awscc_servicecatalog_portfolio_share",
         "identifier": ["PortfolioId","AccountId"]
+    },
+    {
+        "resource": "awscc_servicecatalog_resource_update_constraint",
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_servicecatalog_service_action",

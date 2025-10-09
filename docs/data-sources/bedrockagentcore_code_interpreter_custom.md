@@ -26,6 +26,7 @@ Data Source schema for AWS::BedrockAgentCore::CodeInterpreterCustom
 - `created_at` (String) Timestamp when the code interpreter was created.
 - `description` (String) The description of the code interpreter.
 - `execution_role_arn` (String) The ARN of the IAM role that the code interpreter uses to access resources.
+- `failure_reason` (String) The reason for failure if the code interpreter creation or operation failed.
 - `last_updated_at` (String) Timestamp when the code interpreter was last updated.
 - `name` (String) The name of the code interpreter.
 - `network_configuration` (Attributes) Network configuration for code interpreter. (see [below for nested schema](#nestedatt--network_configuration))
@@ -38,3 +39,12 @@ Data Source schema for AWS::BedrockAgentCore::CodeInterpreterCustom
 Read-Only:
 
 - `network_mode` (String) Network modes supported by code interpreter
+- `vpc_config` (Attributes) Network mode configuration for VPC (see [below for nested schema](#nestedatt--network_configuration--vpc_config))
+
+<a id="nestedatt--network_configuration--vpc_config"></a>
+### Nested Schema for `network_configuration.vpc_config`
+
+Read-Only:
+
+- `security_groups` (List of String) Security groups for VPC
+- `subnets` (List of String) Subnets for VPC

@@ -76,7 +76,7 @@
       }
     },
     "DeliveryDestinationType": {
-      "description": "Displays whether this delivery destination is CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.",
+      "description": "Displays whether this delivery destination is CloudWatch Logs, Amazon S3, Kinesis Data Firehose, or XRay.",
       "type": "string",
       "minLength": 1,
       "maxLength": 12,
@@ -102,11 +102,11 @@
   "createOnlyProperties": [
     "/properties/Name",
     "/properties/OutputFormat",
-    "/properties/DestinationResourceArn"
+    "/properties/DestinationResourceArn",
+    "/properties/DeliveryDestinationType"
   ],
   "readOnlyProperties": [
-    "/properties/Arn",
-    "/properties/DeliveryDestinationType"
+    "/properties/Arn"
   ],
   "primaryIdentifier": [
     "/properties/Name"

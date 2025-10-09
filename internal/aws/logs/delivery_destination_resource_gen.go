@@ -106,17 +106,23 @@ func deliveryDestinationResource(ctx context.Context) (resource.Resource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Displays whether this delivery destination is CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.",
+		//	  "description": "Displays whether this delivery destination is CloudWatch Logs, Amazon S3, Kinesis Data Firehose, or XRay.",
 		//	  "maxLength": 12,
 		//	  "minLength": 1,
 		//	  "pattern": "^[0-9A-Za-z]+$",
 		//	  "type": "string"
 		//	}
 		"delivery_destination_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Displays whether this delivery destination is CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.",
+			Description: "Displays whether this delivery destination is CloudWatch Logs, Amazon S3, Kinesis Data Firehose, or XRay.",
+			Optional:    true,
 			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 12),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9A-Za-z]+$"), ""),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DestinationResourceArn

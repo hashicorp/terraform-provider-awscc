@@ -707,6 +707,10 @@ resource_schema "aws_bedrockagentcore_gateway_target" {
   suppress_plural_data_source_generation   = true
 }
 
+resource_schema "aws_bedrockagentcore_memory" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::Memory"
+}
+
 resource_schema "aws_bedrockagentcore_runtime" {
   cloudformation_type_name = "AWS::BedrockAgentCore::Runtime"
 }
@@ -3326,6 +3330,10 @@ resource_schema "aws_lightsail_disk" {
   cloudformation_type_name = "AWS::Lightsail::Disk"
 }
 
+resource_schema "aws_lightsail_disk_snapshot" {
+  cloudformation_type_name = "AWS::Lightsail::DiskSnapshot"
+}
+
 resource_schema "aws_lightsail_distribution" {
   cloudformation_type_name = "AWS::Lightsail::Distribution"
 }
@@ -3749,6 +3757,10 @@ resource_schema "aws_neptune_db_subnet_group" {
   cloudformation_type_name = "AWS::Neptune::DBSubnetGroup"
 }
 
+resource_schema "aws_neptune_event_subscription" {
+  cloudformation_type_name = "AWS::Neptune::EventSubscription"
+}
+
 resource_schema "aws_neptunegraph_graph" {
   cloudformation_type_name = "AWS::NeptuneGraph::Graph"
 }
@@ -3916,6 +3928,10 @@ resource_schema "aws_notifications_organizational_unit_association" {
 
 resource_schema "aws_notificationscontacts_email_contact" {
   cloudformation_type_name = "AWS::NotificationsContacts::EmailContact"
+}
+
+resource_schema "aws_observabilityadmin_organization_centralization_rule" {
+  cloudformation_type_name = "AWS::ObservabilityAdmin::OrganizationCentralizationRule"
 }
 
 resource_schema "aws_observabilityadmin_organization_telemetry_rule" {
@@ -5163,6 +5179,11 @@ resource_schema "aws_servicecatalog_portfolio_product_association" {
 
 resource_schema "aws_servicecatalog_portfolio_share" {
   cloudformation_type_name               = "AWS::ServiceCatalog::PortfolioShare"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_servicecatalog_resource_update_constraint" {
+  cloudformation_type_name               = "AWS::ServiceCatalog::ResourceUpdateConstraint"
   suppress_plural_data_source_generation = true
 }
 

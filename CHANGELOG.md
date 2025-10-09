@@ -1,3 +1,29 @@
+## 1.60.0 (Unreleased)
+
+## 1.59.0 (October 9, 2025)
+
+BUG FIXES:
+
+* provider: Fix `Missing Resource Identity After Update` error when using Terraform version without identity support ([#2833](https://github.com/hashicorp/terraform-provider-awscc/pull/2833))
+* provider: Fix ordering of array indices in patch operations ([#2823](https://github.com/hashicorp/terraform-provider-awscc/pull/2823))
+
+FEATURES:
+
+* **New Data Source:** `awscc_bedrockagentcore_memories`
+* **New Data Source:** `awscc_bedrockagentcore_memory`
+* **New Data Source:** `awscc_lightsail_disk_snapshot`
+* **New Data Source:** `awscc_lightsail_disk_snapshots`
+* **New Data Source:** `awscc_neptune_event_subscription`
+* **New Data Source:** `awscc_neptune_event_subscriptions`
+* **New Data Source:** `awscc_observabilityadmin_organization_centralization_rule`
+* **New Data Source:** `awscc_observabilityadmin_organization_centralization_rules`
+* **New Data Source:** `awscc_servicecatalog_resource_update_constraint`
+* **New Resource:** `awscc_bedrockagentcore_memory`
+* **New Resource:** `awscc_lightsail_disk_snapshot`
+* **New Resource:** `awscc_neptune_event_subscription`
+* **New Resource:** `awscc_observabilityadmin_organization_centralization_rule`
+* **New Resource:** `awscc_servicecatalog_resource_update_constraint`
+
 ## 1.58.0 (October 2, 2025)
 
 FEATURES:

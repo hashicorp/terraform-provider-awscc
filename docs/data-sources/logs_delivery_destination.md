@@ -27,7 +27,7 @@ Data Source schema for AWS::Logs::DeliveryDestination
 The policy must be in JSON string format.
 
 Length Constraints: Maximum length of 51200 (see [below for nested schema](#nestedatt--delivery_destination_policy))
-- `delivery_destination_type` (String) Displays whether this delivery destination is CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.
+- `delivery_destination_type` (String) Displays whether this delivery destination is CloudWatch Logs, Amazon S3, Kinesis Data Firehose, or XRay.
 - `destination_resource_arn` (String) The ARN of the Amazon Web Services destination that this delivery destination represents. That Amazon Web Services destination can be a log group in CloudWatch Logs, an Amazon S3 bucket, or a delivery stream in Firehose.
 - `name` (String) The name of this delivery destination.
 - `output_format` (String) The format of the logs that are sent to this delivery destination.

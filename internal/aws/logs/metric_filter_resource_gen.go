@@ -16,10 +16,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -48,6 +50,47 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EmitSystemFieldDimensions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"emit_system_field_dimensions": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: FieldSelectionCriteria
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "maxLength": 2000,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"field_selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 2000),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: FilterName
@@ -386,19 +429,21 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"apply_on_transformed_logs": "ApplyOnTransformedLogs",
-		"default_value":             "DefaultValue",
-		"dimensions":                "Dimensions",
-		"filter_name":               "FilterName",
-		"filter_pattern":            "FilterPattern",
-		"key":                       "Key",
-		"log_group_name":            "LogGroupName",
-		"metric_name":               "MetricName",
-		"metric_namespace":          "MetricNamespace",
-		"metric_transformations":    "MetricTransformations",
-		"metric_value":              "MetricValue",
-		"unit":                      "Unit",
-		"value":                     "Value",
+		"apply_on_transformed_logs":    "ApplyOnTransformedLogs",
+		"default_value":                "DefaultValue",
+		"dimensions":                   "Dimensions",
+		"emit_system_field_dimensions": "EmitSystemFieldDimensions",
+		"field_selection_criteria":     "FieldSelectionCriteria",
+		"filter_name":                  "FilterName",
+		"filter_pattern":               "FilterPattern",
+		"key":                          "Key",
+		"log_group_name":               "LogGroupName",
+		"metric_name":                  "MetricName",
+		"metric_namespace":             "MetricNamespace",
+		"metric_transformations":       "MetricTransformations",
+		"metric_value":                 "MetricValue",
+		"unit":                         "Unit",
+		"value":                        "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

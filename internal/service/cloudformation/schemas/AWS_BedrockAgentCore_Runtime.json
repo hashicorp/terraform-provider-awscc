@@ -55,6 +55,9 @@
       "properties": {
         "NetworkMode": {
           "$ref": "#/definitions/NetworkMode"
+        },
+        "NetworkModeConfig": {
+          "$ref": "#/definitions/VpcConfig"
         }
       },
       "required": [
@@ -66,8 +69,56 @@
       "type": "string",
       "description": "Network mode configuration type",
       "enum": [
-        "PUBLIC"
+        "PUBLIC",
+        "VPC"
       ]
+    },
+    "VpcConfig": {
+      "type": "object",
+      "description": "Network mode configuration for VPC",
+      "properties": {
+        "SecurityGroups": {
+          "$ref": "#/definitions/SecurityGroups"
+        },
+        "Subnets": {
+          "$ref": "#/definitions/Subnets"
+        }
+      },
+      "required": [
+        "SecurityGroups",
+        "Subnets"
+      ],
+      "additionalProperties": false
+    },
+    "SecurityGroups": {
+      "type": "array",
+      "description": "Security groups for VPC",
+      "minItems": 1,
+      "maxItems": 16,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/SecurityGroupId"
+      }
+    },
+    "SecurityGroupId": {
+      "type": "string",
+      "description": "Security group id",
+      "pattern": "^sg-[0-9a-zA-Z]{8,17}$"
+    },
+    "Subnets": {
+      "type": "array",
+      "description": "Subnets for VPC",
+      "minItems": 1,
+      "maxItems": 16,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/SubnetId"
+      }
+    },
+    "SubnetId": {
+      "type": "string",
+      "description": "Subnet id",
+      "pattern": "^subnet-[0-9a-zA-Z]{8,17}$"
     },
     "ProtocolConfiguration": {
       "type": "string",
@@ -324,6 +375,7 @@
         "bedrock-agentcore:CreateWorkloadIdentity",
         "bedrock-agentcore:TagResource",
         "bedrock-agentcore:ListTagsForResource",
+        "iam:CreateServiceLinkedRole",
         "iam:PassRole"
       ]
     },
@@ -343,6 +395,7 @@
         "bedrock-agentcore:TagResource",
         "bedrock-agentcore:UntagResource",
         "bedrock-agentcore:ListTagsForResource",
+        "iam:CreateServiceLinkedRole",
         "iam:PassRole"
       ]
     },

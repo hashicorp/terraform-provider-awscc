@@ -1,0 +1,1 @@
+$ terraform import awscc_servicecatalog_resource_update_constraint.example "id"

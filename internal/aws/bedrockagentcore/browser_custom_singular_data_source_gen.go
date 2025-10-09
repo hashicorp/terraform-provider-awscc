@@ -84,6 +84,17 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "The Amazon Resource Name (ARN) of the IAM role that the browser uses to access resources.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: FailureReason
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The reason for failure if the browser creation or operation failed.",
+		//	  "type": "string"
+		//	}
+		"failure_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The reason for failure if the browser creation or operation failed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -119,9 +130,45 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	      "default": "PUBLIC",
 		//	      "description": "Network modes supported by browser",
 		//	      "enum": [
-		//	        "PUBLIC"
+		//	        "PUBLIC",
+		//	        "VPC"
 		//	      ],
 		//	      "type": "string"
+		//	    },
+		//	    "VpcConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "Network mode configuration for VPC",
+		//	      "properties": {
+		//	        "SecurityGroups": {
+		//	          "description": "Security groups for VPC",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "description": "Security group id",
+		//	            "pattern": "^sg-[0-9a-zA-Z]{8,17}$",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 16,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
+		//	        "Subnets": {
+		//	          "description": "Subnets for VPC",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "description": "Subnet id",
+		//	            "pattern": "^subnet-[0-9a-zA-Z]{8,17}$",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 16,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SecurityGroups",
+		//	        "Subnets"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -134,6 +181,25 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 				// Property: NetworkMode
 				"network_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Network modes supported by browser",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcConfig
+				"vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SecurityGroups
+						"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Security groups for VPC",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Subnets
+						"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Subnets for VPC",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Network mode configuration for VPC",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -264,6 +330,7 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 		"description":           "Description",
 		"enabled":               "Enabled",
 		"execution_role_arn":    "ExecutionRoleArn",
+		"failure_reason":        "FailureReason",
 		"last_updated_at":       "LastUpdatedAt",
 		"name":                  "Name",
 		"network_configuration": "NetworkConfiguration",
@@ -271,8 +338,11 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 		"prefix":                "Prefix",
 		"recording_config":      "RecordingConfig",
 		"s3_location":           "S3Location",
+		"security_groups":       "SecurityGroups",
 		"status":                "Status",
+		"subnets":               "Subnets",
 		"tags":                  "Tags",
+		"vpc_config":            "VpcConfig",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
