@@ -306,6 +306,39 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: LoggingConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The logging configuration settings for the image.",
+		//	  "properties": {
+		//	    "LogGroupName": {
+		//	      "description": "The name of the log group for image build logs.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LogGroupName
+				"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the log group for image build logs.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The logging configuration settings for the image.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -518,6 +551,8 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"image_tests_enabled":              "ImageTestsEnabled",
 		"image_uri":                        "ImageUri",
 		"infrastructure_configuration_arn": "InfrastructureConfigurationArn",
+		"log_group_name":                   "LogGroupName",
+		"logging_configuration":            "LoggingConfiguration",
 		"name":                             "Name",
 		"on_failure":                       "OnFailure",
 		"parallel_group":                   "ParallelGroup",

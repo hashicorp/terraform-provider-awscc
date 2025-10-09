@@ -64,7 +64,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//	          "Lambda": {
 		//	            "description": "ARN of a Lambda.",
 		//	            "maxLength": 2048,
-		//	            "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
+		//	            "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z0-9-]{1,20}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -250,7 +250,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtMost(2048),
-									stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"), ""),
+									stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*)?:lambda:[a-z0-9-]{1,20}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -523,7 +523,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "Arn representation of the Agent.",
 		//	  "maxLength": 2048,
-		//	  "pattern": "^arn:aws(|-cn|-us-gov):bedrock:[a-z0-9-]{1,20}:[0-9]{12}:agent/[0-9a-zA-Z]{10}$",
+		//	  "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:agent/[0-9a-zA-Z]{10}$",
 		//	  "type": "string"
 		//	}
 		"agent_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -576,7 +576,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//	        "properties": {
 		//	          "AliasArn": {
 		//	            "description": "Alias ARN for agent descriptor",
-		//	            "pattern": "^arn:aws(|-cn|-us-gov):bedrock:[a-z0-9-]{1,20}:[0-9]{12}:agent-alias/[0-9a-zA-Z]{10}/[0-9a-zA-Z]{10}$",
+		//	            "pattern": "^arn:(aws[a-zA-Z-]*)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:agent-alias/[0-9a-zA-Z]{10}/[0-9a-zA-Z]{10}$",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -620,7 +620,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(|-cn|-us-gov):bedrock:[a-z0-9-]{1,20}:[0-9]{12}:agent-alias/[0-9a-zA-Z]{10}/[0-9a-zA-Z]{10}$"), ""),
+									stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:agent-alias/[0-9a-zA-Z]{10}/[0-9a-zA-Z]{10}$"), ""),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -824,7 +824,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//	        "Lambda": {
 		//	          "description": "ARN of a Lambda.",
 		//	          "maxLength": 2048,
-		//	          "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
+		//	          "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z0-9-]{1,20}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -848,7 +848,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthAtMost(2048),
-								stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*)?:lambda:[a-z0-9-]{1,20}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"), ""),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -878,7 +878,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A KMS key ARN",
 		//	  "maxLength": 2048,
 		//	  "minLength": 1,
-		//	  "pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
+		//	  "pattern": "^arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
 		//	  "type": "string"
 		//	}
 		"customer_encryption_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -887,7 +887,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 2048),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1019,7 +1019,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Max Session Time.",
-		//	  "maximum": 3600,
+		//	  "maximum": 5400,
 		//	  "minimum": 60,
 		//	  "type": "number"
 		//	}
@@ -1028,7 +1028,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Float64{ /*START VALIDATORS*/
-				float64validator.Between(60.000000, 3600.000000),
+				float64validator.Between(60.000000, 5400.000000),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 				float64planmodifier.UseStateForUnknown(),
@@ -1290,7 +1290,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//	    "OverrideLambda": {
 		//	      "description": "ARN of a Lambda.",
 		//	      "maxLength": 2048,
-		//	      "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
+		//	      "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z0-9-]{1,20}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
 		//	      "type": "string"
 		//	    },
 		//	    "PromptConfigurations": {
@@ -1323,7 +1323,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//	            "properties": {
 		//	              "MaximumLength": {
 		//	                "description": "Maximum length of output",
-		//	                "maximum": 4096,
+		//	                "maximum": 131072,
 		//	                "minimum": 0,
 		//	                "type": "number"
 		//	              },
@@ -1415,7 +1415,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthAtMost(2048),
-						stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"), ""),
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*)?:lambda:[a-z0-9-]{1,20}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -1469,7 +1469,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.Float64{ /*START VALIDATORS*/
-											float64validator.Between(0.000000, 4096.000000),
+											float64validator.Between(0.000000, 131072.000000),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 											float64planmodifier.UseStateForUnknown(),
