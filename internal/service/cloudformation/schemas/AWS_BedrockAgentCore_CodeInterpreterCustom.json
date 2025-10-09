@@ -17,7 +17,8 @@
       "type": "string",
       "enum": [
         "PUBLIC",
-        "SANDBOX"
+        "SANDBOX",
+        "VPC"
       ],
       "description": "Network modes supported by code interpreter"
     },
@@ -27,6 +28,9 @@
         "NetworkMode": {
           "$ref": "#/definitions/CodeInterpreterNetworkMode",
           "default": "SANDBOX"
+        },
+        "VpcConfig": {
+          "$ref": "#/definitions/VpcConfig"
         }
       },
       "required": [
@@ -103,6 +107,53 @@
       },
       "description": "List of code interpreters"
     },
+    "VpcConfig": {
+      "type": "object",
+      "description": "Network mode configuration for VPC",
+      "properties": {
+        "SecurityGroups": {
+          "$ref": "#/definitions/SecurityGroups"
+        },
+        "Subnets": {
+          "$ref": "#/definitions/Subnets"
+        }
+      },
+      "required": [
+        "SecurityGroups",
+        "Subnets"
+      ],
+      "additionalProperties": false
+    },
+    "SecurityGroups": {
+      "type": "array",
+      "description": "Security groups for VPC",
+      "minItems": 1,
+      "maxItems": 16,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/SecurityGroupId"
+      }
+    },
+    "SecurityGroupId": {
+      "type": "string",
+      "description": "Security group id",
+      "pattern": "^sg-[0-9a-zA-Z]{8,17}$"
+    },
+    "Subnets": {
+      "type": "array",
+      "description": "Subnets for VPC",
+      "minItems": 1,
+      "maxItems": 16,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/SubnetId"
+      }
+    },
+    "SubnetId": {
+      "type": "string",
+      "description": "Subnet id",
+      "pattern": "^subnet-[0-9a-zA-Z]{8,17}$"
+    },
     "TagsMap": {
       "type": "object",
       "description": "A map of tag keys and values",
@@ -147,6 +198,10 @@
       "$ref": "#/definitions/CodeInterpreterStatus",
       "description": "Status of code interpreter."
     },
+    "FailureReason": {
+      "type": "string",
+      "description": "The reason for failure if the code interpreter creation or operation failed."
+    },
     "CreatedAt": {
       "type": "string",
       "format": "date-time",
@@ -170,6 +225,7 @@
     "/properties/CodeInterpreterId",
     "/properties/CodeInterpreterArn",
     "/properties/Status",
+    "/properties/FailureReason",
     "/properties/CreatedAt",
     "/properties/LastUpdatedAt"
   ],
@@ -194,6 +250,7 @@
         "bedrock-agentcore:GetCodeInterpreter",
         "bedrock-agentcore:TagResource",
         "bedrock-agentcore:ListTagsForResource",
+        "iam:CreateServiceLinkedRole",
         "iam:PassRole"
       ]
     },

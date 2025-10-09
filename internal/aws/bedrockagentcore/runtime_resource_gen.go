@@ -347,9 +347,45 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		//	    "NetworkMode": {
 		//	      "description": "Network mode configuration type",
 		//	      "enum": [
-		//	        "PUBLIC"
+		//	        "PUBLIC",
+		//	        "VPC"
 		//	      ],
 		//	      "type": "string"
+		//	    },
+		//	    "NetworkModeConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "Network mode configuration for VPC",
+		//	      "properties": {
+		//	        "SecurityGroups": {
+		//	          "description": "Security groups for VPC",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "description": "Security group id",
+		//	            "pattern": "^sg-[0-9a-zA-Z]{8,17}$",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 16,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
+		//	        "Subnets": {
+		//	          "description": "Subnets for VPC",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "description": "Subnet id",
+		//	            "pattern": "^subnet-[0-9a-zA-Z]{8,17}$",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 16,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SecurityGroups",
+		//	        "Subnets"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -366,8 +402,56 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"PUBLIC",
+							"VPC",
 						),
 					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: NetworkModeConfig
+				"network_mode_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SecurityGroups
+						"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Security groups for VPC",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 16),
+								listvalidator.ValueStringsAre(
+									stringvalidator.RegexMatches(regexp.MustCompile("^sg-[0-9a-zA-Z]{8,17}$"), ""),
+								),
+								fwvalidators.NotNullList(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Subnets
+						"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Subnets for VPC",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 16),
+								listvalidator.ValueStringsAre(
+									stringvalidator.RegexMatches(regexp.MustCompile("^subnet-[0-9a-zA-Z]{8,17}$"), ""),
+								),
+								fwvalidators.NotNullList(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Network mode configuration for VPC",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Network access configuration for the Agent",
@@ -542,9 +626,12 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		"last_updated_at":           "LastUpdatedAt",
 		"network_configuration":     "NetworkConfiguration",
 		"network_mode":              "NetworkMode",
+		"network_mode_config":       "NetworkModeConfig",
 		"protocol_configuration":    "ProtocolConfiguration",
 		"role_arn":                  "RoleArn",
+		"security_groups":           "SecurityGroups",
 		"status":                    "Status",
+		"subnets":                   "Subnets",
 		"tags":                      "Tags",
 		"workload_identity_arn":     "WorkloadIdentityArn",
 		"workload_identity_details": "WorkloadIdentityDetails",

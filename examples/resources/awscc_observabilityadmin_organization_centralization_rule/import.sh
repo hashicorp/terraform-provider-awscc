@@ -1,0 +1,1 @@
+$ terraform import awscc_observabilityadmin_organization_centralization_rule.example "rule_arn"

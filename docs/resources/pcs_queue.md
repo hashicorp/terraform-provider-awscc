@@ -23,6 +23,7 @@ AWS::PCS::Queue resource creates an AWS PCS queue.
 
 - `compute_node_group_configurations` (Attributes List) The list of compute node group configurations associated with the queue. Queues assign jobs to associated compute node groups. (see [below for nested schema](#nestedatt--compute_node_group_configurations))
 - `name` (String) The name that identifies the queue.
+- `slurm_configuration` (Attributes) The Slurm configuration for the queue. (see [below for nested schema](#nestedatt--slurm_configuration))
 - `tags` (Map of String) 1 or more tags added to the resource. Each tag consists of a tag key and tag value. The tag value is optional and can be an empty string.
 
 ### Read-Only
@@ -39,6 +40,23 @@ AWS::PCS::Queue resource creates an AWS PCS queue.
 Optional:
 
 - `compute_node_group_id` (String) The compute node group ID for the compute node group configuration.
+
+
+<a id="nestedatt--slurm_configuration"></a>
+### Nested Schema for `slurm_configuration`
+
+Optional:
+
+- `slurm_custom_settings` (Attributes List) Custom Slurm parameters that directly map to Slurm configuration settings. (see [below for nested schema](#nestedatt--slurm_configuration--slurm_custom_settings))
+
+<a id="nestedatt--slurm_configuration--slurm_custom_settings"></a>
+### Nested Schema for `slurm_configuration.slurm_custom_settings`
+
+Optional:
+
+- `parameter_name` (String) AWS PCS supports configuration of the Slurm parameters for queues:.
+- `parameter_value` (String) The value for the configured Slurm setting.
+
 
 
 <a id="nestedatt--error_info"></a>

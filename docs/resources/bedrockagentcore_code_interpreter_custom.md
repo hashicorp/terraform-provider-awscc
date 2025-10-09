@@ -74,6 +74,7 @@ resource "awscc_bedrockagentcore_code_interpreter_custom" "example" {
 - `code_interpreter_arn` (String) The ARN of a CodeInterpreter resource.
 - `code_interpreter_id` (String) The id of the code interpreter.
 - `created_at` (String) Timestamp when the code interpreter was created.
+- `failure_reason` (String) The reason for failure if the code interpreter creation or operation failed.
 - `id` (String) Uniquely identifies the resource.
 - `last_updated_at` (String) Timestamp when the code interpreter was last updated.
 - `status` (String) Status of code interpreter.
@@ -84,6 +85,15 @@ resource "awscc_bedrockagentcore_code_interpreter_custom" "example" {
 Optional:
 
 - `network_mode` (String) Network modes supported by code interpreter
+- `vpc_config` (Attributes) Network mode configuration for VPC (see [below for nested schema](#nestedatt--network_configuration--vpc_config))
+
+<a id="nestedatt--network_configuration--vpc_config"></a>
+### Nested Schema for `network_configuration.vpc_config`
+
+Optional:
+
+- `security_groups` (List of String) Security groups for VPC
+- `subnets` (List of String) Subnets for VPC
 
 ## Import
 

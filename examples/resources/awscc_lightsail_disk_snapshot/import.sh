@@ -1,0 +1,1 @@
+$ terraform import awscc_lightsail_disk_snapshot.example "disk_snapshot_name"

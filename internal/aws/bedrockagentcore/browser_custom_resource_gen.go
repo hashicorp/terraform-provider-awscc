@@ -10,11 +10,13 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -119,6 +121,20 @@ func browserCustomResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: FailureReason
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The reason for failure if the browser creation or operation failed.",
+		//	  "type": "string"
+		//	}
+		"failure_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The reason for failure if the browser creation or operation failed.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -160,9 +176,45 @@ func browserCustomResource(ctx context.Context) (resource.Resource, error) {
 		//	      "default": "PUBLIC",
 		//	      "description": "Network modes supported by browser",
 		//	      "enum": [
-		//	        "PUBLIC"
+		//	        "PUBLIC",
+		//	        "VPC"
 		//	      ],
 		//	      "type": "string"
+		//	    },
+		//	    "VpcConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "Network mode configuration for VPC",
+		//	      "properties": {
+		//	        "SecurityGroups": {
+		//	          "description": "Security groups for VPC",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "description": "Security group id",
+		//	            "pattern": "^sg-[0-9a-zA-Z]{8,17}$",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 16,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
+		//	        "Subnets": {
+		//	          "description": "Subnets for VPC",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "description": "Subnet id",
+		//	            "pattern": "^subnet-[0-9a-zA-Z]{8,17}$",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 16,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SecurityGroups",
+		//	        "Subnets"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -181,10 +233,58 @@ func browserCustomResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"PUBLIC",
+							"VPC",
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: VpcConfig
+				"vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SecurityGroups
+						"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Security groups for VPC",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 16),
+								listvalidator.ValueStringsAre(
+									stringvalidator.RegexMatches(regexp.MustCompile("^sg-[0-9a-zA-Z]{8,17}$"), ""),
+								),
+								fwvalidators.NotNullList(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Subnets
+						"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Subnets for VPC",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 16),
+								listvalidator.ValueStringsAre(
+									stringvalidator.RegexMatches(regexp.MustCompile("^subnet-[0-9a-zA-Z]{8,17}$"), ""),
+								),
+								fwvalidators.NotNullList(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Network mode configuration for VPC",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -367,6 +467,7 @@ func browserCustomResource(ctx context.Context) (resource.Resource, error) {
 		"description":           "Description",
 		"enabled":               "Enabled",
 		"execution_role_arn":    "ExecutionRoleArn",
+		"failure_reason":        "FailureReason",
 		"last_updated_at":       "LastUpdatedAt",
 		"name":                  "Name",
 		"network_configuration": "NetworkConfiguration",
@@ -374,8 +475,11 @@ func browserCustomResource(ctx context.Context) (resource.Resource, error) {
 		"prefix":                "Prefix",
 		"recording_config":      "RecordingConfig",
 		"s3_location":           "S3Location",
+		"security_groups":       "SecurityGroups",
 		"status":                "Status",
+		"subnets":               "Subnets",
 		"tags":                  "Tags",
+		"vpc_config":            "VpcConfig",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

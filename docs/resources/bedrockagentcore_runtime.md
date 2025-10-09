@@ -154,6 +154,19 @@ Required:
 
 - `network_mode` (String) Network mode configuration type
 
+Optional:
+
+- `network_mode_config` (Attributes) Network mode configuration for VPC (see [below for nested schema](#nestedatt--network_configuration--network_mode_config))
+
+<a id="nestedatt--network_configuration--network_mode_config"></a>
+### Nested Schema for `network_configuration.network_mode_config`
+
+Optional:
+
+- `security_groups` (List of String) Security groups for VPC
+- `subnets` (List of String) Subnets for VPC
+
+
 
 <a id="nestedatt--authorizer_configuration"></a>
 ### Nested Schema for `authorizer_configuration`

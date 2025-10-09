@@ -1,0 +1,1 @@
+$ terraform import awscc_neptune_event_subscription.example "subscription_name"
