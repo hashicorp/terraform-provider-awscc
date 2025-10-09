@@ -164,6 +164,12 @@
   },
   "replacementStrategy": "delete_then_create",
   "properties": {
+    "FieldSelectionCriteria": {
+      "minLength": 0,
+      "description": "",
+      "type": "string",
+      "maxLength": 2000
+    },
     "MetricTransformations": {
       "minItems": 1,
       "maxItems": 1,
@@ -178,6 +184,14 @@
       "description": "A filter pattern for extracting metric data out of ingested log events. For more information, see [Filter and Pattern Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html).",
       "type": "string",
       "maxLength": 1024
+    },
+    "EmitSystemFieldDimensions": {
+      "description": "",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
     "LogGroupName": {
       "minLength": 1,

@@ -109,6 +109,17 @@
   },
   "additionalProperties": false,
   "definitions": {
+    "ImageLoggingConfiguration": {
+      "description": "The logging configuration settings for the image.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "LogGroupName": {
+          "description": "The name of the log group for image build logs.",
+          "type": "string"
+        }
+      }
+    },
     "ImageScanningConfiguration": {
       "description": "Contains settings for Image Builder image resource and container image scans.",
       "additionalProperties": false,
@@ -210,6 +221,20 @@
         }
       }
     },
+    "DeletionSettings": {
+      "description": "The deletion settings of the image, indicating whether to delete the underlying resources in addition to the image.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ExecutionRole": {
+          "description": "The execution role to use for deleting the image, as well as underlying resources.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ExecutionRole"
+      ]
+    },
     "WorkflowParameter": {
       "description": "A parameter associated with the workflow",
       "additionalProperties": false,
@@ -264,6 +289,10 @@
     "DistributionConfigurationArn": {
       "description": "The Amazon Resource Name (ARN) of the distribution configuration.",
       "type": "string"
+    },
+    "LoggingConfiguration": {
+      "description": "The logging configuration settings for the image.",
+      "$ref": "#/definitions/ImageLoggingConfiguration"
     },
     "ImageId": {
       "description": "The AMI ID of the EC2 AMI in current region.",

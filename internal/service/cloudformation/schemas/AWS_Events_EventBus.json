@@ -112,7 +112,12 @@
         "events:TagResource",
         "kms:DescribeKey",
         "kms:GenerateDataKey",
-        "kms:Decrypt"
+        "kms:Decrypt",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncrypt",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo",
+        "kms:Encrypt"
       ]
     },
     "read": {
@@ -130,7 +135,12 @@
         "events:UpdateEventBus",
         "kms:DescribeKey",
         "kms:GenerateDataKey",
-        "kms:Decrypt"
+        "kms:Decrypt",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncrypt",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo",
+        "kms:Encrypt"
       ]
     },
     "delete": {
