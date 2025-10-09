@@ -27,7 +27,6 @@ Data Source schema for AWS::PCS::Queue
 - `error_info` (Attributes List) The list of errors that occurred during queue provisioning. (see [below for nested schema](#nestedatt--error_info))
 - `name` (String) The name that identifies the queue.
 - `queue_id` (String) The generated unique ID of the queue.
-- `slurm_configuration` (Attributes) The Slurm configuration for the queue. (see [below for nested schema](#nestedatt--slurm_configuration))
 - `status` (String) The provisioning status of the queue. The provisioning status doesn't indicate the overall health of the queue.
 - `tags` (Map of String) 1 or more tags added to the resource. Each tag consists of a tag key and tag value. The tag value is optional and can be an empty string.
 
@@ -46,19 +45,3 @@ Read-Only:
 
 - `code` (String) The short-form error code.
 - `message` (String) The detailed error information.
-
-
-<a id="nestedatt--slurm_configuration"></a>
-### Nested Schema for `slurm_configuration`
-
-Read-Only:
-
-- `slurm_custom_settings` (Attributes List) Custom Slurm parameters that directly map to Slurm configuration settings. (see [below for nested schema](#nestedatt--slurm_configuration--slurm_custom_settings))
-
-<a id="nestedatt--slurm_configuration--slurm_custom_settings"></a>
-### Nested Schema for `slurm_configuration.slurm_custom_settings`
-
-Read-Only:
-
-- `parameter_name` (String) AWS PCS supports configuration of the Slurm parameters for queues:.
-- `parameter_value` (String) The value for the configured Slurm setting.
