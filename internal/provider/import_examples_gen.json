@@ -678,6 +678,7 @@
     },
     {
         "resource": "awscc_bedrockagentcore_memory",
+        "generateListResource": true,
         "identifier": ["MemoryArn"]
     },
     {
@@ -3468,6 +3469,7 @@
     },
     {
         "resource": "awscc_lightsail_disk_snapshot",
+        "generateListResource": true,
         "identifier": ["DiskSnapshotName"]
     },
     {
@@ -3925,6 +3927,7 @@
     },
     {
         "resource": "awscc_neptune_event_subscription",
+        "generateListResource": true,
         "identifier": ["SubscriptionName"]
     },
     {
@@ -4091,6 +4094,7 @@
     },
     {
         "resource": "awscc_observabilityadmin_organization_centralization_rule",
+        "generateListResource": true,
         "identifier": ["RuleArn"]
     },
     {
