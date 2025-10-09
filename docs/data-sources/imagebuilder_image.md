@@ -32,6 +32,7 @@ Data Source schema for AWS::ImageBuilder::Image
 - `image_tests_configuration` (Attributes) The image tests configuration used when creating this image. (see [below for nested schema](#nestedatt--image_tests_configuration))
 - `image_uri` (String) URI for containers created in current Region with default ECR image tag
 - `infrastructure_configuration_arn` (String) The Amazon Resource Name (ARN) of the infrastructure configuration.
+- `logging_configuration` (Attributes) The logging configuration settings for the image. (see [below for nested schema](#nestedatt--logging_configuration))
 - `name` (String) The name of the image.
 - `tags` (Map of String) The tags associated with the image.
 - `workflows` (Attributes List) Workflows to define the image build process (see [below for nested schema](#nestedatt--workflows))
@@ -61,6 +62,14 @@ Read-Only:
 
 - `image_tests_enabled` (Boolean) ImageTestsEnabled
 - `timeout_minutes` (Number) TimeoutMinutes
+
+
+<a id="nestedatt--logging_configuration"></a>
+### Nested Schema for `logging_configuration`
+
+Read-Only:
+
+- `log_group_name` (String) The name of the log group for image build logs.
 
 
 <a id="nestedatt--workflows"></a>

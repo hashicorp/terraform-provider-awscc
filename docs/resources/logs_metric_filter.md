@@ -60,6 +60,8 @@ resource "awscc_logs_log_group" "this" {
 
 - `apply_on_transformed_logs` (Boolean) This parameter is valid only for log groups that have an active log transformer. For more information about log transformers, see [PutTransformer](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html).
  If this value is ``true``, the metric filter is applied on the transformed version of the log events instead of the original ingested log events.
+- `emit_system_field_dimensions` (List of String)
+- `field_selection_criteria` (String)
 - `filter_name` (String) The name of the metric filter.
 
 ### Read-Only

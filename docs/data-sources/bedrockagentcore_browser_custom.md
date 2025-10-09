@@ -26,6 +26,7 @@ Data Source schema for AWS::BedrockAgentCore::BrowserCustom
 - `created_at` (String) Timestamp when the browser was created.
 - `description` (String) The description of the browser.
 - `execution_role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that the browser uses to access resources.
+- `failure_reason` (String) The reason for failure if the browser creation or operation failed.
 - `last_updated_at` (String) Timestamp when the browser was last updated.
 - `name` (String) The name of the browser.
 - `network_configuration` (Attributes) Network configuration for browser. (see [below for nested schema](#nestedatt--network_configuration))
@@ -39,6 +40,16 @@ Data Source schema for AWS::BedrockAgentCore::BrowserCustom
 Read-Only:
 
 - `network_mode` (String) Network modes supported by browser
+- `vpc_config` (Attributes) Network mode configuration for VPC (see [below for nested schema](#nestedatt--network_configuration--vpc_config))
+
+<a id="nestedatt--network_configuration--vpc_config"></a>
+### Nested Schema for `network_configuration.vpc_config`
+
+Read-Only:
+
+- `security_groups` (List of String) Security groups for VPC
+- `subnets` (List of String) Subnets for VPC
+
 
 
 <a id="nestedatt--recording_config"></a>
