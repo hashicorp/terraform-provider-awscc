@@ -4,58 +4,77 @@
 package generic
 
 import (
+	"reflect"
 	"testing"
 
 	"github.com/mattbaird/jsonpatch"
 )
 
-func TestSortPatchOperations(t *testing.T) {
-	// Test case that reproduces the issue from the GitHub issue
-	patch := []jsonpatch.JsonPatchOperation{
-		{Operation: "remove", Path: "/QueueConfigs/6"},
-		{Operation: "remove", Path: "/QueueConfigs/4"},
-		{Operation: "remove", Path: "/QueueConfigs/3"},
-		{Operation: "remove", Path: "/QueueConfigs/11"},
-		{Operation: "remove", Path: "/QueueConfigs/10"},
-		{Operation: "add", Path: "/QueueConfigs/3", Value: map[string]interface{}{"test": "value"}},
+func Test_sortPatchOperations(t *testing.T) {
+	tests := []struct {
+		name  string
+		patch []jsonpatch.JsonPatchOperation
+		want  []jsonpatch.JsonPatchOperation
+	}{
+		{
+			name: "index sorted",
+			patch: []jsonpatch.JsonPatchOperation{
+				{Operation: "remove", Path: "/QueueConfigs/6"},
+				{Operation: "remove", Path: "/QueueConfigs/4"},
+				{Operation: "remove", Path: "/QueueConfigs/11"},
+				{Operation: "remove", Path: "/QueueConfigs/10"},
+				{Operation: "add", Path: "/QueueConfigs/3", Value: map[string]any{"test": "value"}},
+			},
+			want: []jsonpatch.JsonPatchOperation{
+				{Operation: "remove", Path: "/QueueConfigs/11"},
+				{Operation: "remove", Path: "/QueueConfigs/10"},
+				{Operation: "remove", Path: "/QueueConfigs/6"},
+				{Operation: "remove", Path: "/QueueConfigs/4"},
+				{Operation: "add", Path: "/QueueConfigs/3", Value: map[string]any{"test": "value"}},
+			},
+		},
+		{
+			name: "mixed paths",
+			patch: []jsonpatch.JsonPatchOperation{
+				{Operation: "remove", Path: "/QueueConfigs/11"},
+				{Operation: "remove", Path: "/QueueConfigs/10"},
+				{Operation: "remove", Path: "/QueueConfigs/12"},
+				{Operation: "remove", Path: "/OtherQueueConfigs/1"},
+				{Operation: "remove", Path: "/OtherQueueConfigs/3"},
+				{Operation: "remove", Path: "/ThirdQueueConfigs/2"},
+				{Operation: "remove", Path: "/A"},
+				{Operation: "remove", Path: "/B"},
+				{Operation: "add", Path: "/QueueConfigs/3", Value: map[string]any{"test": "value"}},
+			},
+			want: []jsonpatch.JsonPatchOperation{
+				{Operation: "remove", Path: "/ThirdQueueConfigs/2"},
+				{Operation: "remove", Path: "/QueueConfigs/12"},
+				{Operation: "remove", Path: "/QueueConfigs/11"},
+				{Operation: "remove", Path: "/QueueConfigs/10"},
+				{Operation: "remove", Path: "/OtherQueueConfigs/3"},
+				{Operation: "remove", Path: "/OtherQueueConfigs/1"},
+				{Operation: "remove", Path: "/B"},
+				{Operation: "remove", Path: "/A"},
+				{Operation: "add", Path: "/QueueConfigs/3", Value: map[string]any{"test": "value"}},
+			},
+		},
 	}
-
-	sorted := sortPatchOperations(patch)
-
-	// Verify that remove operations are sorted numerically in descending order
-	expectedRemoveOrder := []string{
-		"/QueueConfigs/11",
-		"/QueueConfigs/10",
-		"/QueueConfigs/6",
-		"/QueueConfigs/4",
-		"/QueueConfigs/3",
-	}
-
-	removeOpIndex := 0
-	for _, op := range sorted {
-		if op.Operation == "remove" {
-			if removeOpIndex >= len(expectedRemoveOrder) {
-				t.Fatalf("More remove operations than expected")
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := sortPatchOperations(tt.patch)
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("sortPatchOperations() = %v, want %v", got, tt.want)
 			}
-			if op.Path != expectedRemoveOrder[removeOpIndex] {
-				t.Errorf("Expected remove operation %d to have path %s, got %s",
-					removeOpIndex, expectedRemoveOrder[removeOpIndex], op.Path)
-			}
-			removeOpIndex++
-		}
-	}
-
-	if removeOpIndex != len(expectedRemoveOrder) {
-		t.Errorf("Expected %d remove operations, got %d", len(expectedRemoveOrder), removeOpIndex)
+		})
 	}
 }
 
-func TestComparePathsNumerically(t *testing.T) {
+func Test_comparePathsNumerically(t *testing.T) {
 	tests := []struct {
 		path1    string
 		path2    string
 		expected bool
-		desc     string
+		name     string
 	}{
 		{"/QueueConfigs/11", "/QueueConfigs/10", true, "11 > 10"},
 		{"/QueueConfigs/10", "/QueueConfigs/6", true, "10 > 6"},
@@ -69,59 +88,13 @@ func TestComparePathsNumerically(t *testing.T) {
 		{"/QueueConfigs/1", "/OtherConfigs/2", true, "Q > O lexically"},
 	}
 
-	for _, test := range tests {
-		result := comparePathsNumerically(test.path1, test.path2)
-		if result != test.expected {
-			t.Errorf("comparePathsNumerically(%s, %s) = %v, expected %v (%s)",
-				test.path1, test.path2, result, test.expected, test.desc)
-		}
-	}
-}
-
-func TestSortPatchOperationsWithLexicalIssue(t *testing.T) {
-	// This test reproduces the exact issue where lexical sorting causes problems
-	// with indices >= 10
-	patch := []jsonpatch.JsonPatchOperation{
-		{Operation: "remove", Path: "/QueueConfigs/6"},
-		{Operation: "remove", Path: "/QueueConfigs/4"},
-		{Operation: "remove", Path: "/QueueConfigs/3"},
-		{Operation: "remove", Path: "/QueueConfigs/11"},
-		{Operation: "remove", Path: "/QueueConfigs/10"},
-		{Operation: "remove", Path: "/QueueConfigs/9"},
-		{Operation: "remove", Path: "/QueueConfigs/12"},
-		{Operation: "remove", Path: "/QueueConfigs/1"},
-		{Operation: "add", Path: "/QueueConfigs/3", Value: map[string]interface{}{"test": "value"}},
-	}
-
-	sorted := sortPatchOperations(patch)
-
-	// Expected order: 12, 11, 10, 9, 6, 4, 3, 1 (highest to lowest)
-	expectedRemoveOrder := []string{
-		"/QueueConfigs/12",
-		"/QueueConfigs/11",
-		"/QueueConfigs/10",
-		"/QueueConfigs/9",
-		"/QueueConfigs/6",
-		"/QueueConfigs/4",
-		"/QueueConfigs/3",
-		"/QueueConfigs/1",
-	}
-
-	removeOpIndex := 0
-	for _, op := range sorted {
-		if op.Operation == "remove" {
-			if removeOpIndex >= len(expectedRemoveOrder) {
-				t.Fatalf("More remove operations than expected")
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result := comparePathsNumerically(tt.path1, tt.path2)
+			if result != tt.expected {
+				t.Errorf("comparePathsNumerically(%s, %s) = %v, expected %v (%s)",
+					tt.path1, tt.path2, result, tt.expected, tt.name)
 			}
-			if op.Path != expectedRemoveOrder[removeOpIndex] {
-				t.Errorf("Expected remove operation %d to have path %s, got %s",
-					removeOpIndex, expectedRemoveOrder[removeOpIndex], op.Path)
-			}
-			removeOpIndex++
-		}
-	}
-
-	if removeOpIndex != len(expectedRemoveOrder) {
-		t.Errorf("Expected %d remove operations, got %d", len(expectedRemoveOrder), removeOpIndex)
+		})
 	}
 }

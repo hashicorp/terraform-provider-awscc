@@ -67,7 +67,8 @@ func sortPatchOperations(patch []jsonpatch.JsonPatchOperation) []jsonpatch.JsonP
 	return append(removeOps, otherOps...)
 }
 
-// comparePathsNumerically compares two JSON patch paths, treating array indices as numbers.
+// comparePathsNumerically compares two JSON patch paths, treating array indices as numbers
+//
 // Returns true if path1 should come before path2 (higher indices first for removal).
 func comparePathsNumerically(path1, path2 string) bool {
 	parts1 := strings.Split(path1, "/")
