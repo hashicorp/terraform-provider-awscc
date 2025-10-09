@@ -1,0 +1,3 @@
+list "awscc_networkmanager_direct_connect_gateway_attachment" "example" {
+  provider = awscc
+}
