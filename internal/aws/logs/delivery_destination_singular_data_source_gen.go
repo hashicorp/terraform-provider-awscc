@@ -78,14 +78,14 @@ func deliveryDestinationDataSource(ctx context.Context) (datasource.DataSource, 
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Displays whether this delivery destination is CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.",
+		//	  "description": "Displays whether this delivery destination is CloudWatch Logs, Amazon S3, Kinesis Data Firehose, or XRay.",
 		//	  "maxLength": 12,
 		//	  "minLength": 1,
 		//	  "pattern": "^[0-9A-Za-z]+$",
 		//	  "type": "string"
 		//	}
 		"delivery_destination_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Displays whether this delivery destination is CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.",
+			Description: "Displays whether this delivery destination is CloudWatch Logs, Amazon S3, Kinesis Data Firehose, or XRay.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DestinationResourceArn

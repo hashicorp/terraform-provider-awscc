@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -57,6 +58,35 @@ func subscriptionFilterDataSource(ctx context.Context) (datasource.DataSource, e
 		//	}
 		"distribution": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The method used to distribute log data to the destination, which can be either random or grouped by log stream.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EmitSystemFields
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"emit_system_fields": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: FieldSelectionCriteria
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "maxLength": 2000,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"field_selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FilterName
@@ -123,6 +153,8 @@ func subscriptionFilterDataSource(ctx context.Context) (datasource.DataSource, e
 		"apply_on_transformed_logs": "ApplyOnTransformedLogs",
 		"destination_arn":           "DestinationArn",
 		"distribution":              "Distribution",
+		"emit_system_fields":        "EmitSystemFields",
+		"field_selection_criteria":  "FieldSelectionCriteria",
 		"filter_name":               "FilterName",
 		"filter_pattern":            "FilterPattern",
 		"log_group_name":            "LogGroupName",

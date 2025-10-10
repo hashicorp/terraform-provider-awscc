@@ -710,6 +710,19 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 		return
 	}
 
+	if !response.Identity.Raw.IsFullyNull() && !r.hasMutableIdentity {
+		traceExit(ctx, "Resource.Update")
+		return
+	}
+
+	// set resource identity
+	pi := r.primaryIdentifier.AppendDefaults(r.isGlobal)
+
+	response.Diagnostics.Append(pi.SetIdentity(ctx, r.provider, &response.State, response.Identity)...)
+	if response.Diagnostics.HasError() {
+		return
+	}
+
 	traceExit(ctx, "Resource.Update")
 }
 

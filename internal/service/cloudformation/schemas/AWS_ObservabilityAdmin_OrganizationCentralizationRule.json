@@ -1,0 +1,277 @@
+{
+  "typeName": "AWS::ObservabilityAdmin::OrganizationCentralizationRule",
+  "description": "Resource schema for AWS:ObservabilityAdmin:OrganizationCentralizationRule",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "ResourceArn": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1011,
+      "pattern": "^arn:aws([a-z0-9\\-]+)?:([a-zA-Z0-9\\-]+):([a-z0-9\\-]+)?:([0-9]{12})?:(.+)$"
+    },
+    "AccountIdentifier": {
+      "type": "string",
+      "minLength": 12,
+      "maxLength": 12,
+      "pattern": "^[0-9]{12}$"
+    },
+    "Region": {
+      "type": "string",
+      "minLength": 1
+    },
+    "Regions": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Region"
+      }
+    },
+    "CentralizationRule": {
+      "type": "object",
+      "properties": {
+        "Source": {
+          "$ref": "#/definitions/CentralizationRuleSource"
+        },
+        "Destination": {
+          "$ref": "#/definitions/CentralizationRuleDestination"
+        }
+      },
+      "required": [
+        "Source",
+        "Destination"
+      ],
+      "additionalProperties": false
+    },
+    "CentralizationRuleSource": {
+      "type": "object",
+      "properties": {
+        "Regions": {
+          "$ref": "#/definitions/Regions"
+        },
+        "Scope": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "SourceLogsConfiguration": {
+          "$ref": "#/definitions/SourceLogsConfiguration"
+        }
+      },
+      "required": [
+        "Regions"
+      ],
+      "additionalProperties": false
+    },
+    "SourceLogsConfiguration": {
+      "type": "object",
+      "properties": {
+        "LogGroupSelectionCriteria": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "EncryptedLogGroupStrategy": {
+          "type": "string",
+          "enum": [
+            "ALLOW",
+            "SKIP"
+          ]
+        }
+      },
+      "required": [
+        "LogGroupSelectionCriteria",
+        "EncryptedLogGroupStrategy"
+      ],
+      "additionalProperties": false
+    },
+    "CentralizationRuleDestination": {
+      "type": "object",
+      "properties": {
+        "Region": {
+          "$ref": "#/definitions/Region"
+        },
+        "Account": {
+          "$ref": "#/definitions/AccountIdentifier"
+        },
+        "DestinationLogsConfiguration": {
+          "$ref": "#/definitions/DestinationLogsConfiguration"
+        }
+      },
+      "required": [
+        "Region"
+      ],
+      "additionalProperties": false
+    },
+    "DestinationLogsConfiguration": {
+      "type": "object",
+      "properties": {
+        "LogsEncryptionConfiguration": {
+          "$ref": "#/definitions/LogsEncryptionConfiguration"
+        },
+        "BackupConfiguration": {
+          "$ref": "#/definitions/LogsBackupConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "LogsEncryptionConfiguration": {
+      "type": "object",
+      "properties": {
+        "EncryptionStrategy": {
+          "type": "string",
+          "enum": [
+            "CUSTOMER_MANAGED",
+            "AWS_OWNED"
+          ]
+        },
+        "KmsKeyArn": {
+          "$ref": "#/definitions/ResourceArn"
+        },
+        "EncryptionConflictResolutionStrategy": {
+          "type": "string",
+          "enum": [
+            "ALLOW",
+            "SKIP"
+          ]
+        }
+      },
+      "required": [
+        "EncryptionStrategy"
+      ],
+      "additionalProperties": false
+    },
+    "LogsBackupConfiguration": {
+      "type": "object",
+      "properties": {
+        "Region": {
+          "$ref": "#/definitions/Region"
+        },
+        "KmsKeyArn": {
+          "$ref": "#/definitions/ResourceArn"
+        }
+      },
+      "required": [
+        "Region"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "RuleName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[0-9A-Za-z-]+$"
+    },
+    "Rule": {
+      "$ref": "#/definitions/CentralizationRule"
+    },
+    "RuleArn": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1011,
+      "pattern": "^arn:aws([a-z0-9\\-]+)?:([a-zA-Z0-9\\-]+):([a-z0-9\\-]+)?:([0-9]{12})?:(.+)$"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "RuleName",
+    "Rule"
+  ],
+  "createOnlyProperties": [
+    "/properties/RuleName"
+  ],
+  "readOnlyProperties": [
+    "/properties/RuleArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/RuleArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/RuleName"
+    ]
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "observabilityadmin:CreateCentralizationRuleForOrganization",
+        "observabilityadmin:GetCentralizationRuleForOrganization",
+        "observabilityadmin:ListTagsForResource",
+        "observabilityadmin:TagResource"
+      ],
+      "timeoutInMinutes": 90
+    },
+    "read": {
+      "permissions": [
+        "observabilityadmin:GetCentralizationRuleForOrganization",
+        "observabilityadmin:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "observabilityadmin:UpdateCentralizationRuleForOrganization",
+        "observabilityadmin:GetCentralizationRuleForOrganization",
+        "observabilityadmin:ListTagsForResource",
+        "observabilityadmin:TagResource",
+        "observabilityadmin:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "observabilityadmin:DeleteCentralizationRuleForOrganization"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "observabilityadmin:ListCentralizationRulesForOrganization"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "observabilityadmin:TagResource",
+      "observabilityadmin:UntagResource",
+      "observabilityadmin:ListTagsForResource"
+    ]
+  }
+}

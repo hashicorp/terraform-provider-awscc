@@ -220,6 +220,31 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Amazon Resource Name (ARN) of the infrastructure configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LoggingConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The logging configuration settings for the image.",
+		//	  "properties": {
+		//	    "LogGroupName": {
+		//	      "description": "The name of the log group for image build logs.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LogGroupName
+				"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the log group for image build logs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The logging configuration settings for the image.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -377,6 +402,8 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"image_tests_enabled":              "ImageTestsEnabled",
 		"image_uri":                        "ImageUri",
 		"infrastructure_configuration_arn": "InfrastructureConfigurationArn",
+		"log_group_name":                   "LogGroupName",
+		"logging_configuration":            "LoggingConfiguration",
 		"name":                             "Name",
 		"on_failure":                       "OnFailure",
 		"parallel_group":                   "ParallelGroup",

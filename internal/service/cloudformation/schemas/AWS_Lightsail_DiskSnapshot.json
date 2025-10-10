@@ -1,0 +1,186 @@
+{
+  "typeName": "AWS::Lightsail::DiskSnapshot",
+  "description": "Resource Type definition for AWS::Lightsail::DiskSnapshot",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-lightsail.git",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "DiskSnapshotName": {
+      "type": "string",
+      "description": "The name of the disk snapshot (e.g., my-disk-snapshot).",
+      "pattern": "^\\w[\\w\\-]*\\w$",
+      "minLength": 2,
+      "maxLength": 255
+    },
+    "DiskSnapshotArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the disk snapshot.",
+      "pattern": ".*\\S.*"
+    },
+    "DiskName": {
+      "type": "string",
+      "description": "The name of the source disk from which the snapshot was created.",
+      "pattern": "^\\w[\\w\\-]*\\w$",
+      "minLength": 2,
+      "maxLength": 255
+    },
+    "Tags": {
+      "type": "array",
+      "description": "An array of key-value pairs to apply to this resource.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50
+    },
+    "Location": {
+      "type": "object",
+      "description": "The AWS Region and Availability Zone where the disk snapshot was created.",
+      "properties": {
+        "AvailabilityZone": {
+          "type": "string",
+          "description": "The Availability Zone where the disk snapshot was created."
+        },
+        "RegionName": {
+          "type": "string",
+          "description": "The AWS Region where the disk snapshot was created."
+        }
+      },
+      "additionalProperties": false
+    },
+    "ResourceType": {
+      "type": "string",
+      "description": "The Lightsail resource type (DiskSnapshot).",
+      "enum": [
+        "DiskSnapshot"
+      ]
+    },
+    "State": {
+      "type": "string",
+      "description": "The status of the disk snapshot operation.",
+      "enum": [
+        "pending",
+        "completed",
+        "error",
+        "unknown"
+      ]
+    },
+    "Progress": {
+      "type": "string",
+      "description": "The progress of the disk snapshot creation operation."
+    },
+    "FromDiskName": {
+      "type": "string",
+      "description": "The name of the source disk from which the disk snapshot was created.",
+      "pattern": "^\\w[\\w\\-]*\\w$"
+    },
+    "SizeInGb": {
+      "type": "integer",
+      "description": "The size of the disk snapshot in GB.",
+      "minimum": 1
+    },
+    "IsFromAutoSnapshot": {
+      "type": "boolean",
+      "description": "A Boolean value indicating whether the snapshot was created from an automatic snapshot."
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp when the disk snapshot was created.",
+      "format": "date-time"
+    },
+    "SupportCode": {
+      "type": "string",
+      "description": "The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "DiskSnapshotName",
+    "DiskName"
+  ],
+  "readOnlyProperties": [
+    "/properties/DiskSnapshotArn",
+    "/properties/Location",
+    "/properties/ResourceType",
+    "/properties/State",
+    "/properties/Progress",
+    "/properties/FromDiskName",
+    "/properties/SizeInGb",
+    "/properties/IsFromAutoSnapshot",
+    "/properties/CreatedAt",
+    "/properties/SupportCode"
+  ],
+  "createOnlyProperties": [
+    "/properties/DiskSnapshotName",
+    "/properties/DiskName"
+  ],
+  "primaryIdentifier": [
+    "/properties/DiskSnapshotName"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "lightsail:CreateDiskSnapshot",
+        "lightsail:GetDiskSnapshot",
+        "lightsail:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "lightsail:GetDiskSnapshot"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "lightsail:GetDiskSnapshot",
+        "lightsail:TagResource",
+        "lightsail:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "lightsail:DeleteDiskSnapshot",
+        "lightsail:GetDiskSnapshot"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "lightsail:GetDiskSnapshots"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "lightsail:TagResource",
+      "lightsail:UntagResource"
+    ]
+  }
+}

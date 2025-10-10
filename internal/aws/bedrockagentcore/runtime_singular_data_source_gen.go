@@ -258,9 +258,45 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "NetworkMode": {
 		//	      "description": "Network mode configuration type",
 		//	      "enum": [
-		//	        "PUBLIC"
+		//	        "PUBLIC",
+		//	        "VPC"
 		//	      ],
 		//	      "type": "string"
+		//	    },
+		//	    "NetworkModeConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "Network mode configuration for VPC",
+		//	      "properties": {
+		//	        "SecurityGroups": {
+		//	          "description": "Security groups for VPC",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "description": "Security group id",
+		//	            "pattern": "^sg-[0-9a-zA-Z]{8,17}$",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 16,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
+		//	        "Subnets": {
+		//	          "description": "Subnets for VPC",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "description": "Subnet id",
+		//	            "pattern": "^subnet-[0-9a-zA-Z]{8,17}$",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 16,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SecurityGroups",
+		//	        "Subnets"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -273,6 +309,25 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: NetworkMode
 				"network_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Network mode configuration type",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NetworkModeConfig
+				"network_mode_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SecurityGroups
+						"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Security groups for VPC",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Subnets
+						"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Subnets for VPC",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Network mode configuration for VPC",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -413,9 +468,12 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"last_updated_at":           "LastUpdatedAt",
 		"network_configuration":     "NetworkConfiguration",
 		"network_mode":              "NetworkMode",
+		"network_mode_config":       "NetworkModeConfig",
 		"protocol_configuration":    "ProtocolConfiguration",
 		"role_arn":                  "RoleArn",
+		"security_groups":           "SecurityGroups",
 		"status":                    "Status",
+		"subnets":                   "Subnets",
 		"tags":                      "Tags",
 		"workload_identity_arn":     "WorkloadIdentityArn",
 		"workload_identity_details": "WorkloadIdentityDetails",

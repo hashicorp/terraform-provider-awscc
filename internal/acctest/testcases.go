@@ -27,6 +27,10 @@ func (td TestData) ResourceTest(t *testing.T, steps []resource.TestStep) {
 	})
 }
 
+func (td TestData) ResourceTestWithTestCase(t *testing.T, testCase resource.TestCase) {
+	resource.ParallelTest(t, testCase)
+}
+
 func (td TestData) ResourceTestNoProviderFactories(t *testing.T, steps []resource.TestStep) {
 	td.runAcceptanceTestNoProviderFactories(t, resource.TestCase{
 		PreCheck:     func() { PreCheck(t) },

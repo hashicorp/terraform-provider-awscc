@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -31,6 +32,35 @@ func metricFilterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	}
 		"apply_on_transformed_logs": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "This parameter is valid only for log groups that have an active log transformer. For more information about log transformers, see [PutTransformer](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html).\n If this value is ``true``, the metric filter is applied on the transformed version of the log events instead of the original ingested log events.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EmitSystemFieldDimensions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"emit_system_field_dimensions": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: FieldSelectionCriteria
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "maxLength": 2000,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"field_selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FilterName
@@ -254,19 +284,21 @@ func metricFilterDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::MetricFilter").WithTerraformTypeName("awscc_logs_metric_filter")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"apply_on_transformed_logs": "ApplyOnTransformedLogs",
-		"default_value":             "DefaultValue",
-		"dimensions":                "Dimensions",
-		"filter_name":               "FilterName",
-		"filter_pattern":            "FilterPattern",
-		"key":                       "Key",
-		"log_group_name":            "LogGroupName",
-		"metric_name":               "MetricName",
-		"metric_namespace":          "MetricNamespace",
-		"metric_transformations":    "MetricTransformations",
-		"metric_value":              "MetricValue",
-		"unit":                      "Unit",
-		"value":                     "Value",
+		"apply_on_transformed_logs":    "ApplyOnTransformedLogs",
+		"default_value":                "DefaultValue",
+		"dimensions":                   "Dimensions",
+		"emit_system_field_dimensions": "EmitSystemFieldDimensions",
+		"field_selection_criteria":     "FieldSelectionCriteria",
+		"filter_name":                  "FilterName",
+		"filter_pattern":               "FilterPattern",
+		"key":                          "Key",
+		"log_group_name":               "LogGroupName",
+		"metric_name":                  "MetricName",
+		"metric_namespace":             "MetricNamespace",
+		"metric_transformations":       "MetricTransformations",
+		"metric_value":                 "MetricValue",
+		"unit":                         "Unit",
+		"value":                        "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
