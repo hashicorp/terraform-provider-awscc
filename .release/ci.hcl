@@ -15,7 +15,7 @@ project "terraform-provider-awscc" {
   team = "_UNUSED_"
 
   slack {
-    notification_channel = "CN0G9S7M4" // #feed-tf-aws
+    notification_channel = "C09L3G3V55J" // #feed-tf-aws
   }
 
   github {
@@ -93,8 +93,8 @@ event "promote-production" {
 
     post-promotion {
       organization = "hashicorp"
-      repository = "terraform-provider-awscc"
-      workflow = "crt-post-promote-production.yml"
+      repository   = "terraform-provider-awscc"
+      workflow     = "crt-post-promote-production.yml"
     }
   }
 
