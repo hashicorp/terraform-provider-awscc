@@ -43,7 +43,8 @@ func NewListResource(resource func(context.Context) (resource.Resource, error)) 
 
 func (r *genericResource) ListResourceConfigSchema(_ context.Context, _ list.ListResourceSchemaRequest, response *list.ListResourceSchemaResponse) {
 	response.Schema = listschema.Schema{
-		Attributes: map[string]listschema.Attribute{},
+		MarkdownDescription: "List all resources for `" + r.cfTypeName + "` resource type.",
+		Attributes:          map[string]listschema.Attribute{},
 	}
 }
 
