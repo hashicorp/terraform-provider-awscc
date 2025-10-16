@@ -1,0 +1,1 @@
+$ terraform import awscc_servicecatalog_tag_option_association.example "tag_option_id|resource_id"

@@ -1,0 +1,1 @@
+$ terraform import awscc_ssmquicksetup_lifecycle_automation.example "association_id"

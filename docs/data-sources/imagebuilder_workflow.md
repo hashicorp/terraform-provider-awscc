@@ -26,8 +26,19 @@ Data Source schema for AWS::ImageBuilder::Workflow
 - `data` (String) The data of the workflow.
 - `description` (String) The description of the workflow.
 - `kms_key_id` (String) The KMS key identifier used to encrypt the workflow.
+- `latest_version` (Attributes) The latest version references of the workflow. (see [below for nested schema](#nestedatt--latest_version))
 - `name` (String) The name of the workflow.
 - `tags` (Map of String) The tags associated with the workflow.
 - `type` (String) The type of the workflow denotes whether the workflow is used to build, test, or distribute.
 - `uri` (String) The uri of the workflow.
 - `version` (String) The version of the workflow.
+
+<a id="nestedatt--latest_version"></a>
+### Nested Schema for `latest_version`
+
+Read-Only:
+
+- `arn` (String) The latest version ARN of the created workflow.
+- `major` (String) The latest version ARN of the created workflow, with the same major version.
+- `minor` (String) The latest version ARN of the created workflow, with the same minor version.
+- `patch` (String) The latest version ARN of the created workflow, with the same patch version.

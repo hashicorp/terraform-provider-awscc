@@ -673,6 +673,7 @@ Optional:
 
 - `docker_settings` (Attributes) A collection of settings that are required to start docker-proxy server. (see [below for nested schema](#nestedatt--domain_settings--docker_settings))
 - `execution_role_identity_config` (String) The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key.
+- `ip_address_type` (String) A setting to indicate if IPv6 routing should be enabled along with IPv4 or not
 - `r_studio_server_pro_domain_settings` (Attributes) A collection of settings that update the current configuration for the RStudioServerPro Domain-level app. (see [below for nested schema](#nestedatt--domain_settings--r_studio_server_pro_domain_settings))
 - `security_group_ids` (List of String) The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.
 - `unified_studio_settings` (Attributes) A collection of settings that apply to an Amazon SageMaker AI domain when you use it in Amazon SageMaker Unified Studio. (see [below for nested schema](#nestedatt--domain_settings--unified_studio_settings))

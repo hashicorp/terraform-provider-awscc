@@ -74,6 +74,7 @@ Read-Only:
 
 Read-Only:
 
+- `blueprint_types` (List of String)
 - `dependencies` (Attributes List) List of Lambda layers to attach to the canary (see [below for nested schema](#nestedatt--code--dependencies))
 - `handler` (String)
 - `s3_bucket` (String)

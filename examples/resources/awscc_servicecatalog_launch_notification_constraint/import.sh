@@ -1,0 +1,1 @@
+$ terraform import awscc_servicecatalog_launch_notification_constraint.example "id"

@@ -50,13 +50,11 @@ Resource Type definition for AWS::Synthetics::Canary
 <a id="nestedatt--code"></a>
 ### Nested Schema for `code`
 
-Required:
-
-- `handler` (String)
-
 Optional:
 
+- `blueprint_types` (List of String)
 - `dependencies` (Attributes List) List of Lambda layers to attach to the canary (see [below for nested schema](#nestedatt--code--dependencies))
+- `handler` (String)
 - `s3_bucket` (String)
 - `s3_key` (String)
 - `s3_object_version` (String)

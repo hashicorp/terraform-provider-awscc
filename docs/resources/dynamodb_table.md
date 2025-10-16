@@ -161,7 +161,6 @@ resource "awscc_dynamodb_table" "example" {
  Updates are not supported. The following are exceptions:
   +  If you update either the contributor insights specification or the provisioned throughput values of global secondary indexes, you can update the table without interruption.
   +  You can delete or add one global secondary index without interruption. If you do both in the same update (for example, by changing the index's logical ID), the update fails. (see [below for nested schema](#nestedatt--global_secondary_indexes))
-- `global_table_settings_replication_mode` (String)
 - `import_source_specification` (Attributes) Specifies the properties of data being imported from the S3 bucket source to the" table.
   If you specify the ``ImportSourceSpecification`` property, and also specify either the ``StreamSpecification``, the ``TableClass`` property, the ``DeletionProtectionEnabled`` property, or the ``WarmThroughput`` property, the IAM entity creating/updating stack must have ``UpdateTable`` permission. (see [below for nested schema](#nestedatt--import_source_specification))
 - `kinesis_stream_specification` (Attributes) The Kinesis Data Streams configuration for the specified table. (see [below for nested schema](#nestedatt--kinesis_stream_specification))
