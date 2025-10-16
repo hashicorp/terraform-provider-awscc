@@ -90,7 +90,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	    "description": "The settings to use when creating a cluster. This parameter is used to turn on CloudWatch Container Insights with enhanced observability or CloudWatch Container Insights for a cluster.\n Container Insights with enhanced observability provides all the Container Insights metrics, plus additional task and container metrics. This version supports enhanced observability for Amazon ECS clusters using the Amazon EC2 and Fargate launch types. After you configure Container Insights with enhanced observability on Amazon ECS, Container Insights auto-collects detailed infrastructure telemetry from the cluster level down to the container level in your environment and displays these critical performance data in curated dashboards removing the heavy lifting in observability set-up. \n For more information, see [Monitor Amazon ECS containers using Container Insights with enhanced observability](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html) in the *Amazon Elastic Container Service Developer Guide*.",
 		//	    "properties": {
 		//	      "Name": {
-		//	        "description": "The name of the cluster setting. The value is ``containerInsights`` .",
+		//	        "description": "The name of the cluster setting. The value is ``containerInsights``.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
@@ -107,7 +107,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the cluster setting. The value is ``containerInsights`` .",
+						Description: "The name of the cluster setting. The value is ``containerInsights``.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

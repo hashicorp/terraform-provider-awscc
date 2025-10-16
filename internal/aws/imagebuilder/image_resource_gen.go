@@ -306,6 +306,61 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: LatestVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The latest version references of the image.",
+		//	  "properties": {
+		//	    "Arn": {
+		//	      "description": "The latest version ARN of the created image.",
+		//	      "type": "string"
+		//	    },
+		//	    "Major": {
+		//	      "description": "The latest version ARN of the created image, with the same major version.",
+		//	      "type": "string"
+		//	    },
+		//	    "Minor": {
+		//	      "description": "The latest version ARN of the created image, with the same minor version.",
+		//	      "type": "string"
+		//	    },
+		//	    "Patch": {
+		//	      "description": "The latest version ARN of the created image, with the same patch version.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"latest_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Arn
+				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created image.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Major
+				"major": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created image, with the same major version.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Minor
+				"minor": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created image, with the same minor version.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Patch
+				"patch": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created image, with the same patch version.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The latest version references of the image.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LoggingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -551,12 +606,16 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"image_tests_enabled":              "ImageTestsEnabled",
 		"image_uri":                        "ImageUri",
 		"infrastructure_configuration_arn": "InfrastructureConfigurationArn",
+		"latest_version":                   "LatestVersion",
 		"log_group_name":                   "LogGroupName",
 		"logging_configuration":            "LoggingConfiguration",
+		"major":                            "Major",
+		"minor":                            "Minor",
 		"name":                             "Name",
 		"on_failure":                       "OnFailure",
 		"parallel_group":                   "ParallelGroup",
 		"parameters":                       "Parameters",
+		"patch":                            "Patch",
 		"repository_name":                  "RepositoryName",
 		"tags":                             "Tags",
 		"timeout_minutes":                  "TimeoutMinutes",

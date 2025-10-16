@@ -312,7 +312,16 @@ func objectTypeResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "NEW_ONLY",
 		//	                  "ASSET",
 		//	                  "CASE",
-		//	                  "ORDER"
+		//	                  "ORDER",
+		//	                  "AIR_PREFERENCE",
+		//	                  "AIR_BOOKING",
+		//	                  "AIR_SEGMENT",
+		//	                  "HOTEL_PREFERENCE",
+		//	                  "HOTEL_STAY_REVENUE",
+		//	                  "HOTEL_RESERVATION",
+		//	                  "LOYALTY",
+		//	                  "LOYALTY_TRANSACTION",
+		//	                  "LOYALTY_PROMOTION"
 		//	                ],
 		//	                "type": "string"
 		//	              },
@@ -380,6 +389,15 @@ func objectTypeResource(ctx context.Context) (resource.Resource, error) {
 												"ASSET",
 												"CASE",
 												"ORDER",
+												"AIR_PREFERENCE",
+												"AIR_BOOKING",
+												"AIR_SEGMENT",
+												"HOTEL_PREFERENCE",
+												"HOTEL_STAY_REVENUE",
+												"HOTEL_RESERVATION",
+												"LOYALTY",
+												"LOYALTY_TRANSACTION",
+												"LOYALTY_PROMOTION",
 											),
 										),
 									}, /*END VALIDATORS*/

@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -173,6 +174,77 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	          "Configuration": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
+		//	              "SelfManagedConfiguration": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "HistoricalContextWindowSize": {
+		//	                    "maximum": 50,
+		//	                    "minimum": 0,
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "InvocationConfiguration": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "PayloadDeliveryBucketName": {
+		//	                        "pattern": "^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "TopicArn": {
+		//	                        "description": "ARN format",
+		//	                        "pattern": "",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "TriggerConditions": {
+		//	                    "additionalProperties": false,
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "MessageBasedTrigger": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "MessageCount": {
+		//	                              "maximum": 50,
+		//	                              "minimum": 1,
+		//	                              "type": "integer"
+		//	                            }
+		//	                          },
+		//	                          "type": "object"
+		//	                        },
+		//	                        "TimeBasedTrigger": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "IdleSessionTimeout": {
+		//	                              "maximum": 3000,
+		//	                              "minimum": 10,
+		//	                              "type": "integer"
+		//	                            }
+		//	                          },
+		//	                          "type": "object"
+		//	                        },
+		//	                        "TokenBasedTrigger": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "TokenCount": {
+		//	                              "maximum": 500000,
+		//	                              "minimum": 100,
+		//	                              "type": "integer"
+		//	                            }
+		//	                          },
+		//	                          "type": "object"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "minItems": 1,
+		//	                    "type": "array"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
 		//	              "SemanticOverride": {
 		//	                "additionalProperties": false,
 		//	                "properties": {
@@ -560,6 +632,136 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Configuration
 							"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: SelfManagedConfiguration
+									"self_managed_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: HistoricalContextWindowSize
+											"historical_context_window_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													int64validator.Between(0, 50),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: InvocationConfiguration
+											"invocation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: PayloadDeliveryBucketName
+													"payload_delivery_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$"), ""),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: TopicArn
+													"topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "ARN format",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: TriggerConditions
+											"trigger_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: MessageBasedTrigger
+														"message_based_trigger": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: MessageCount
+																"message_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																	Optional: true,
+																	Computed: true,
+																	Validators: []validator.Int64{ /*START VALIDATORS*/
+																		int64validator.Between(1, 50),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																		int64planmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																objectplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: TimeBasedTrigger
+														"time_based_trigger": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: IdleSessionTimeout
+																"idle_session_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																	Optional: true,
+																	Computed: true,
+																	Validators: []validator.Int64{ /*START VALIDATORS*/
+																		int64validator.Between(10, 3000),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																		int64planmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																objectplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: TokenBasedTrigger
+														"token_based_trigger": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: TokenCount
+																"token_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																	Optional: true,
+																	Computed: true,
+																	Validators: []validator.Int64{ /*START VALIDATORS*/
+																		int64validator.Between(100, 500000),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																		int64planmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																objectplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.List{ /*START VALIDATORS*/
+													listvalidator.SizeAtLeast(1),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
 									// Property: SemanticOverride
 									"semantic_override": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1356,13 +1558,20 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		"event_expiry_duration":           "EventExpiryDuration",
 		"extraction":                      "Extraction",
 		"failure_reason":                  "FailureReason",
+		"historical_context_window_size":  "HistoricalContextWindowSize",
+		"idle_session_timeout":            "IdleSessionTimeout",
+		"invocation_configuration":        "InvocationConfiguration",
 		"memory_arn":                      "MemoryArn",
 		"memory_execution_role_arn":       "MemoryExecutionRoleArn",
 		"memory_id":                       "MemoryId",
 		"memory_strategies":               "MemoryStrategies",
+		"message_based_trigger":           "MessageBasedTrigger",
+		"message_count":                   "MessageCount",
 		"model_id":                        "ModelId",
 		"name":                            "Name",
 		"namespaces":                      "Namespaces",
+		"payload_delivery_bucket_name":    "PayloadDeliveryBucketName",
+		"self_managed_configuration":      "SelfManagedConfiguration",
 		"semantic_memory_strategy":        "SemanticMemoryStrategy",
 		"semantic_override":               "SemanticOverride",
 		"status":                          "Status",
@@ -1370,13 +1579,18 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		"summary_memory_strategy":         "SummaryMemoryStrategy",
 		"summary_override":                "SummaryOverride",
 		"tags":                            "Tags",
+		"time_based_trigger":              "TimeBasedTrigger",
+		"token_based_trigger":             "TokenBasedTrigger",
+		"token_count":                     "TokenCount",
+		"topic_arn":                       "TopicArn",
+		"trigger_conditions":              "TriggerConditions",
 		"type":                            "Type",
 		"updated_at":                      "UpdatedAt",
 		"user_preference_memory_strategy": "UserPreferenceMemoryStrategy",
 		"user_preference_override":        "UserPreferenceOverride",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(45).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 

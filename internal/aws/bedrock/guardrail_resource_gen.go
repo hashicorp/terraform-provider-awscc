@@ -1323,7 +1323,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 		//	        "properties": {
 		//	          "Definition": {
 		//	            "description": "Definition of topic in topic policy",
-		//	            "maxLength": 200,
+		//	            "maxLength": 1000,
 		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },
@@ -1419,7 +1419,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 200),
+									stringvalidator.LengthBetween(1, 1000),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
