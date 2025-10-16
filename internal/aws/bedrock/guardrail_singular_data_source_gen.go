@@ -871,7 +871,7 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "properties": {
 		//	          "Definition": {
 		//	            "description": "Definition of topic in topic policy",
-		//	            "maxLength": 200,
+		//	            "maxLength": 1000,
 		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },

@@ -783,7 +783,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "integer"
 		//	              },
 		//	              "IpAddressType": {
-		//	                "description": "",
+		//	                "description": "Specifies which IP protocol CloudFront uses when connecting to your origin. If your origin uses both IPv4 and IPv6 protocols, you can choose ``dualstack`` to help optimize reliability.",
 		//	                "enum": [
 		//	                  "ipv4",
 		//	                  "ipv6",
@@ -2272,7 +2272,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: IpAddressType
 									"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "",
+										Description: "Specifies which IP protocol CloudFront uses when connecting to your origin. If your origin uses both IPv4 and IPv6 protocols, you can choose ``dualstack`` to help optimize reliability.",
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/

@@ -5142,6 +5142,10 @@
         "identifier": ["ManagerArn"]
     },
     {
+        "resource": "awscc_ssmquicksetup_lifecycle_automation",
+        "identifier": ["AssociationId"]
+    },
+    {
         "resource": "awscc_sso_application",
         "identifier": ["ApplicationArn"]
     },
@@ -5422,6 +5426,11 @@
         "identifier": ["ProvisionedProductId"]
     },
     {
+        "resource": "awscc_servicecatalog_launch_notification_constraint",
+        "generateListResource": true,
+        "identifier": ["Id"]
+    },
+    {
         "resource": "awscc_servicecatalog_launch_template_constraint",
         "identifier": ["Id"]
     },
@@ -5450,6 +5459,10 @@
         "resource": "awscc_servicecatalog_tag_option",
         "generateListResource": true,
         "identifier": ["Id"]
+    },
+    {
+        "resource": "awscc_servicecatalog_tag_option_association",
+        "identifier": ["TagOptionId","ResourceId"]
     },
     {
         "resource": "awscc_servicecatalogappregistry_application",

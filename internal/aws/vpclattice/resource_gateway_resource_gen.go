@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -86,6 +87,21 @@ func resourceGatewayResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Ipv4AddressesPerEni
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The number of IPv4 addresses to allocate per ENI for the resource gateway",
+		//	  "type": "integer"
+		//	}
+		"ipv_4_addresses_per_eni": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The number of IPv4 addresses to allocate per ENI for the resource gateway",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -251,7 +267,7 @@ func resourceGatewayResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Creates a resource gateway for a service. ",
+		Description: "Creates a resource gateway for a service.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -267,16 +283,17 @@ func resourceGatewayResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                 "Arn",
-		"ip_address_type":     "IpAddressType",
-		"key":                 "Key",
-		"name":                "Name",
-		"resource_gateway_id": "Id",
-		"security_group_ids":  "SecurityGroupIds",
-		"subnet_ids":          "SubnetIds",
-		"tags":                "Tags",
-		"value":               "Value",
-		"vpc_identifier":      "VpcIdentifier",
+		"arn":                     "Arn",
+		"ip_address_type":         "IpAddressType",
+		"ipv_4_addresses_per_eni": "Ipv4AddressesPerEni",
+		"key":                     "Key",
+		"name":                    "Name",
+		"resource_gateway_id":     "Id",
+		"security_group_ids":      "SecurityGroupIds",
+		"subnet_ids":              "SubnetIds",
+		"tags":                    "Tags",
+		"value":                   "Value",
+		"vpc_identifier":          "VpcIdentifier",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

@@ -766,7 +766,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	                "type": "integer"
 		//	              },
 		//	              "IpAddressType": {
-		//	                "description": "",
+		//	                "description": "Specifies which IP protocol CloudFront uses when connecting to your origin. If your origin uses both IPv4 and IPv6 protocols, you can choose ``dualstack`` to help optimize reliability.",
 		//	                "enum": [
 		//	                  "ipv4",
 		//	                  "ipv6",
@@ -1706,7 +1706,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 									}, /*END ATTRIBUTE*/
 									// Property: IpAddressType
 									"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "",
+										Description: "Specifies which IP protocol CloudFront uses when connecting to your origin. If your origin uses both IPv4 and IPv6 protocols, you can choose ``dualstack`` to help optimize reliability.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: OriginKeepaliveTimeout

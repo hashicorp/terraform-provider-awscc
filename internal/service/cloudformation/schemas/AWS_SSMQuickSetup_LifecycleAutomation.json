@@ -1,0 +1,137 @@
+{
+  "typeName": "AWS::SSMQuickSetup::LifecycleAutomation",
+  "description": "Resource Type definition for AWS::SSMQuickSetup::LifecycleAutomation that executes SSM Automation documents in response to CloudFormation lifecycle events.",
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": false,
+    "permissions": [
+      "ssm:AddTagsToResource",
+      "ssm:RemoveTagsFromResource",
+      "ssm:ListTagsForResource"
+    ]
+  },
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "AutomationParameters": {
+      "type": "object",
+      "description": "Parameters to be passed to the Automation Document",
+      "patternProperties": {
+        "": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "TagsMap": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9 +=@_\\/:.-]+$"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "AutomationDocument": {
+      "description": "The name of the Automation document to execute",
+      "type": "string",
+      "pattern": "^\\S+$",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "AutomationParameters": {
+      "$ref": "#/definitions/AutomationParameters"
+    },
+    "ResourceKey": {
+      "description": "A unique identifier used for generating a unique logical ID for the custom resource",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]+$",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "AssociationId": {
+      "description": "The id from the association that is returned when creating the association",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]+$",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "Tags": {
+      "$ref": "#/definitions/TagsMap"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "AutomationDocument",
+    "ResourceKey",
+    "AutomationParameters"
+  ],
+  "readOnlyProperties": [
+    "/properties/AssociationId"
+  ],
+  "primaryIdentifier": [
+    "/properties/AssociationId"
+  ],
+  "createOnlyProperties": [
+    "/properties/ResourceKey"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ssm:CreateAssociation",
+        "ssm:DescribeAssociation",
+        "ssm:DescribeAssociationExecutions",
+        "ssm:DescribeAssociationExecutionTargets",
+        "ssm:GetAutomationExecution",
+        "ssm:AddTagsToResource",
+        "ssm:ListTagsForResource",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ssm:DescribeAssociation",
+        "ssm:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ssm:DescribeAssociation",
+        "ssm:UpdateAssociation",
+        "ssm:DescribeAssociationExecutions",
+        "ssm:DescribeAssociationExecutionTargets",
+        "ssm:GetAutomationExecution",
+        "ssm:AddTagsToResource",
+        "ssm:RemoveTagsFromResource",
+        "ssm:ListTagsForResource",
+        "iam:PassRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ssm:DeleteAssociation",
+        "ssm:UpdateAssociation",
+        "ssm:DescribeAssociation",
+        "ssm:DescribeAssociationExecutions",
+        "ssm:DescribeAssociationExecutionTargets",
+        "ssm:GetAutomationExecution",
+        "iam:PassRole"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ssm:ListAssociations"
+      ]
+    }
+  }
+}

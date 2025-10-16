@@ -64,9 +64,12 @@ resource "awscc_ecs_capacity_provider" "example" {
 
 ### Required
 
-- `capacity_providers` (List of String) List of capacity providers to associate with the cluster
 - `cluster` (String) The name of the cluster
 - `default_capacity_provider_strategy` (Attributes List) List of capacity providers to associate with the cluster (see [below for nested schema](#nestedatt--default_capacity_provider_strategy))
+
+### Optional
+
+- `capacity_providers` (List of String) List of capacity providers to associate with the cluster
 
 ### Read-Only
 

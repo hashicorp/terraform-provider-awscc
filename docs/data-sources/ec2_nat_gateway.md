@@ -23,6 +23,7 @@ Data Source schema for AWS::EC2::NatGateway
 
 - `allocation_id` (String) [Public NAT gateway only] The allocation ID of the Elastic IP address that's associated with the NAT gateway. This property is required for a public NAT gateway and cannot be specified with a private NAT gateway.
 - `connectivity_type` (String) Indicates whether the NAT gateway supports public or private connectivity. The default is public connectivity.
+- `eni_id` (String)
 - `max_drain_duration_seconds` (Number) The maximum amount of time to wait (in seconds) before forcibly releasing the IP addresses if connections are still in progress. Default value is 350 seconds.
 - `nat_gateway_id` (String)
 - `private_ip_address` (String) The private IPv4 address to assign to the NAT gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.
@@ -33,6 +34,7 @@ Data Source schema for AWS::EC2::NatGateway
  ``SecondaryPrivateIpAddressCount`` and ``SecondaryPrivateIpAddresses`` cannot be set at the same time.
 - `subnet_id` (String) The ID of the subnet in which the NAT gateway is located.
 - `tags` (Attributes List) The tags for the NAT gateway. (see [below for nested schema](#nestedatt--tags))
+- `vpc_id` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1245 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1253 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -4902,6 +4902,11 @@ resource_schema "aws_ssmquicksetup_configuration_manager" {
   cloudformation_type_name = "AWS::SSMQuickSetup::ConfigurationManager"
 }
 
+resource_schema "aws_ssmquicksetup_lifecycle_automation" {
+  cloudformation_type_name = "AWS::SSMQuickSetup::LifecycleAutomation"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_sso_application" {
   cloudformation_type_name               = "AWS::SSO::Application"
   suppress_plural_data_source_generation = true
@@ -5167,6 +5172,10 @@ resource_schema "aws_servicecatalog_cloudformation_provisioned_product" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_servicecatalog_launch_notification_constraint" {
+  cloudformation_type_name = "AWS::ServiceCatalog::LaunchNotificationConstraint"
+}
+
 resource_schema "aws_servicecatalog_launch_template_constraint" {
   cloudformation_type_name               = "AWS::ServiceCatalog::LaunchTemplateConstraint"
   suppress_plural_data_source_generation = true
@@ -5198,6 +5207,11 @@ resource_schema "aws_servicecatalog_service_action_association" {
 
 resource_schema "aws_servicecatalog_tag_option" {
   cloudformation_type_name = "AWS::ServiceCatalog::TagOption"
+}
+
+resource_schema "aws_servicecatalog_tag_option_association" {
+  cloudformation_type_name               = "AWS::ServiceCatalog::TagOptionAssociation"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_servicecatalogappregistry_application" {

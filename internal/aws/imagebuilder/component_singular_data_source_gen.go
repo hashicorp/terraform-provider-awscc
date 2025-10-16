@@ -91,6 +91,58 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The KMS key identifier used to encrypt the component.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LatestVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The latest version references of the component.",
+		//	  "properties": {
+		//	    "Arn": {
+		//	      "description": "The latest version ARN of the created component.",
+		//	      "type": "string"
+		//	    },
+		//	    "Major": {
+		//	      "description": "The latest version ARN of the created component, with the same major version.",
+		//	      "type": "string"
+		//	    },
+		//	    "Minor": {
+		//	      "description": "The latest version ARN of the created component, with the same minor version.",
+		//	      "type": "string"
+		//	    },
+		//	    "Patch": {
+		//	      "description": "The latest version ARN of the created component, with the same patch version.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"latest_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Arn
+				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created component.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Major
+				"major": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created component, with the same major version.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Minor
+				"minor": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created component, with the same minor version.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Patch
+				"patch": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created component, with the same patch version.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The latest version references of the component.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -213,7 +265,11 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description":           "Description",
 		"encrypted":             "Encrypted",
 		"kms_key_id":            "KmsKeyId",
+		"latest_version":        "LatestVersion",
+		"major":                 "Major",
+		"minor":                 "Minor",
 		"name":                  "Name",
+		"patch":                 "Patch",
 		"platform":              "Platform",
 		"supported_os_versions": "SupportedOsVersions",
 		"tags":                  "Tags",

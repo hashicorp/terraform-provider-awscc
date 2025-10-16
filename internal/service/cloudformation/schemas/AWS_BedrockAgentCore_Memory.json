@@ -462,11 +462,103 @@
         },
         "UserPreferenceOverride": {
           "$ref": "#/definitions/UserPreferenceOverride"
+        },
+        "SelfManagedConfiguration": {
+          "$ref": "#/definitions/SelfManagedConfiguration"
         }
       },
       "additionalProperties": false,
       "maxProperties": 1,
       "minProperties": 1
+    },
+    "SelfManagedConfiguration": {
+      "type": "object",
+      "properties": {
+        "TriggerConditions": {
+          "$ref": "#/definitions/TriggerConditionList"
+        },
+        "InvocationConfiguration": {
+          "$ref": "#/definitions/InvocationConfigurationInput"
+        },
+        "HistoricalContextWindowSize": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 50
+        }
+      },
+      "additionalProperties": false
+    },
+    "TriggerConditionList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/TriggerConditionInput"
+      },
+      "additionalProperties": false,
+      "insertionOrder": false,
+      "minItems": 1
+    },
+    "TriggerConditionInput": {
+      "type": "object",
+      "properties": {
+        "MessageBasedTrigger": {
+          "$ref": "#/definitions/MessageBasedTriggerInput"
+        },
+        "TokenBasedTrigger": {
+          "$ref": "#/definitions/TokenBasedTriggerInput"
+        },
+        "TimeBasedTrigger": {
+          "$ref": "#/definitions/TimeBasedTriggerInput"
+        }
+      },
+      "additionalProperties": false,
+      "maxProperties": 1,
+      "minProperties": 1
+    },
+    "MessageBasedTriggerInput": {
+      "type": "object",
+      "properties": {
+        "MessageCount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        }
+      },
+      "additionalProperties": false
+    },
+    "TokenBasedTriggerInput": {
+      "type": "object",
+      "properties": {
+        "TokenCount": {
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 500000
+        }
+      },
+      "additionalProperties": false
+    },
+    "TimeBasedTriggerInput": {
+      "type": "object",
+      "properties": {
+        "IdleSessionTimeout": {
+          "type": "integer",
+          "minimum": 10,
+          "maximum": 3000
+        }
+      },
+      "additionalProperties": false
+    },
+    "InvocationConfigurationInput": {
+      "type": "object",
+      "properties": {
+        "TopicArn": {
+          "$ref": "#/definitions/Arn"
+        },
+        "PayloadDeliveryBucketName": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$"
+        }
+      },
+      "additionalProperties": false
     },
     "SemanticOverride": {
       "type": "object",
@@ -702,7 +794,8 @@
         "kms:ReEncryptFrom",
         "kms:GenerateDataKey",
         "bedrock-agentcore:TagResource"
-      ]
+      ],
+      "timeoutInMinutes": 45
     },
     "read": {
       "permissions": [

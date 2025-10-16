@@ -22,6 +22,7 @@
     "update": {
       "permissions": [
         "ecs:DescribeClusters",
+        "ecs:DescribeCapacityProviders",
         "ecs:PutClusterCapacityProviders"
       ]
     },
@@ -122,7 +123,6 @@
     }
   },
   "required": [
-    "CapacityProviders",
     "Cluster",
     "DefaultCapacityProviderStrategy"
   ]

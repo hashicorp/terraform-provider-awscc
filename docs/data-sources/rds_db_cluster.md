@@ -246,17 +246,13 @@ Data Source schema for AWS::RDS::DBCluster
  Constraints: Minimum 30-minute window.
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
 - `publicly_accessible` (Boolean) Specifies whether the DB cluster is publicly accessible.
- When the DB cluster is publicly accessible and you connect from outside of the DB cluster's virtual private cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within the same VPC as the DB cluster, the endpoint resolves to the private IP address. Access to the DB cluster is ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned to the DB cluster doesn't permit it.
- When the DB cluster isn't publicly accessible, it is an internal DB cluster with a DNS name that resolves to a private IP address.
  Valid for Cluster Type: Multi-AZ DB clusters only
- Default: The default behavior varies depending on whether ``DBSubnetGroupName`` is specified.
- If ``DBSubnetGroupName`` isn't specified, and ``PubliclyAccessible`` isn't specified, the following applies:
-  +  If the default VPC in the target Region doesn?t have an internet gateway attached to it, the DB cluster is private.
-  +  If the default VPC in the target Region has an internet gateway attached to it, the DB cluster is public.
-  
- If ``DBSubnetGroupName`` is specified, and ``PubliclyAccessible`` isn't specified, the following applies:
-  +  If the subnets are part of a VPC that doesn?t have an internet gateway attached to it, the DB cluster is private.
-  +  If the subnets are part of a VPC that has an internet gateway attached to it, the DB cluster is public.
+ When the DB cluster is publicly accessible and you connect from outside of the DB cluster's virtual private cloud (VPC), its domain name system (DNS) endpoint resolves to the public IP address. When you connect from within the same VPC as the DB cluster, the endpoint resolves to the private IP address. Access to the DB cluster is controlled by its security group settings.
+ When the DB cluster isn't publicly accessible, it is an internal DB cluster with a DNS name that resolves to a private IP address.
+ The default behavior when ``PubliclyAccessible`` is not specified depends on whether a ``DBSubnetGroup`` is specified.
+ If ``DBSubnetGroup`` isn't specified, ``PubliclyAccessible`` defaults to ``true``.
+ If ``DBSubnetGroup`` is specified, ``PubliclyAccessible`` defaults to ``false`` unless the value of ``DBSubnetGroup`` is ``default``, in which case ``PubliclyAccessible`` defaults to ``true``.
+ If ``PubliclyAccessible`` is true and the VPC that the ``DBSubnetGroup`` is in doesn't have an internet gateway attached to it, Amazon RDS returns an error.
 - `read_endpoint` (Attributes) The ``ReadEndpoint`` return value specifies the reader endpoint for the DB cluster.
  The reader endpoint for a DB cluster load-balances connections across the Aurora Replicas that are available in a DB cluster. As clients request new connections to the reader endpoint, Aurora distributes the connection requests among the Aurora Replicas in the DB cluster. This functionality can help balance your read workload across multiple Aurora Replicas in your DB cluster.
  If a failover occurs, and the Aurora Replica that you are connected to is promoted to be the primary instance, your connection is dropped. To continue sending your read workload to other Aurora Replicas in the cluster, you can then reconnect to the reader endpoint.

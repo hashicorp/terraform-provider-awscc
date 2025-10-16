@@ -250,7 +250,7 @@ func projectProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	        "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	        "type": "string"
 		//	      },
-		//	      "Id": {
+		//	      "EnvironmentConfigurationId": {
 		//	        "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	        "type": "string"
 		//	      },
@@ -468,8 +468,8 @@ func projectProfileResource(ctx context.Context) (resource.Resource, error) {
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
-					// Property: Id
-					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					// Property: EnvironmentConfigurationId
+					"environment_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -611,33 +611,33 @@ func projectProfileResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"aws_account":                "AwsAccount",
-		"aws_account_id":             "AwsAccountId",
-		"aws_region":                 "AwsRegion",
-		"configuration_parameters":   "ConfigurationParameters",
-		"created_at":                 "CreatedAt",
-		"created_by":                 "CreatedBy",
-		"deployment_mode":            "DeploymentMode",
-		"deployment_order":           "DeploymentOrder",
-		"description":                "Description",
-		"domain_id":                  "DomainId",
-		"domain_identifier":          "DomainIdentifier",
-		"domain_unit_id":             "DomainUnitId",
-		"domain_unit_identifier":     "DomainUnitIdentifier",
-		"environment_blueprint_id":   "EnvironmentBlueprintId",
-		"environment_configurations": "EnvironmentConfigurations",
-		"id":                         "Id",
-		"identifier":                 "Identifier",
-		"is_editable":                "IsEditable",
-		"last_updated_at":            "LastUpdatedAt",
-		"name":                       "Name",
-		"parameter_overrides":        "ParameterOverrides",
-		"project_profile_id":         "Id",
-		"region_name":                "RegionName",
-		"resolved_parameters":        "ResolvedParameters",
-		"ssm_path":                   "SsmPath",
-		"status":                     "Status",
-		"value":                      "Value",
+		"aws_account":                  "AwsAccount",
+		"aws_account_id":               "AwsAccountId",
+		"aws_region":                   "AwsRegion",
+		"configuration_parameters":     "ConfigurationParameters",
+		"created_at":                   "CreatedAt",
+		"created_by":                   "CreatedBy",
+		"deployment_mode":              "DeploymentMode",
+		"deployment_order":             "DeploymentOrder",
+		"description":                  "Description",
+		"domain_id":                    "DomainId",
+		"domain_identifier":            "DomainIdentifier",
+		"domain_unit_id":               "DomainUnitId",
+		"domain_unit_identifier":       "DomainUnitIdentifier",
+		"environment_blueprint_id":     "EnvironmentBlueprintId",
+		"environment_configuration_id": "EnvironmentConfigurationId",
+		"environment_configurations":   "EnvironmentConfigurations",
+		"identifier":                   "Identifier",
+		"is_editable":                  "IsEditable",
+		"last_updated_at":              "LastUpdatedAt",
+		"name":                         "Name",
+		"parameter_overrides":          "ParameterOverrides",
+		"project_profile_id":           "Id",
+		"region_name":                  "RegionName",
+		"resolved_parameters":          "ResolvedParameters",
+		"ssm_path":                     "SsmPath",
+		"status":                       "Status",
+		"value":                        "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

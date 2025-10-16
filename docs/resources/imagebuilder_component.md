@@ -77,7 +77,18 @@ resource "awscc_imagebuilder_component" "httpd" {
 - `arn` (String) The Amazon Resource Name (ARN) of the component.
 - `encrypted` (Boolean) The encryption status of the component.
 - `id` (String) Uniquely identifies the resource.
+- `latest_version` (Attributes) The latest version references of the component. (see [below for nested schema](#nestedatt--latest_version))
 - `type` (String) The type of the component denotes whether the component is used to build the image or only to test it.
+
+<a id="nestedatt--latest_version"></a>
+### Nested Schema for `latest_version`
+
+Read-Only:
+
+- `arn` (String) The latest version ARN of the created component.
+- `major` (String) The latest version ARN of the created component, with the same major version.
+- `minor` (String) The latest version ARN of the created component, with the same minor version.
+- `patch` (String) The latest version ARN of the created component, with the same patch version.
 
 ## Import
 

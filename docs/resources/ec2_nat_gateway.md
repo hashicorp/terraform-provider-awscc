@@ -64,9 +64,11 @@ resource "awscc_ec2_nat_gateway" "main" {
  ``SecondaryPrivateIpAddressCount`` and ``SecondaryPrivateIpAddresses`` cannot be set at the same time.
 - `subnet_id` (String) The ID of the subnet in which the NAT gateway is located.
 - `tags` (Attributes List) The tags for the NAT gateway. (see [below for nested schema](#nestedatt--tags))
+- `vpc_id` (String)
 
 ### Read-Only
 
+- `eni_id` (String)
 - `id` (String) Uniquely identifies the resource.
 - `nat_gateway_id` (String)
 

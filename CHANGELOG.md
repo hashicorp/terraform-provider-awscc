@@ -1,4 +1,18 @@
-## 1.60.0 (Unreleased)
+## 1.60.0 (October 16, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_datazone_project_profile`
+* **New Data Source:** `awscc_servicecatalog_launch_notification_constraint`
+* **New Data Source:** `awscc_servicecatalog_launch_notification_constraints`
+* **New Data Source:** `awscc_servicecatalog_tag_option_association`
+* **New Data Source:** `awscc_ssmquicksetup_lifecycle_automation`
+* **New List Resource:** `awscc_datazone_project_profile`
+* **New List Resource:** `awscc_servicecatalog_launch_notification_constraint`
+* **New Resource:** `awscc_datazone_project_profile`
+* **New Resource:** `awscc_servicecatalog_launch_notification_constraint`
+* **New Resource:** `awscc_servicecatalog_tag_option_association`
+* **New Resource:** `awscc_ssmquicksetup_lifecycle_automation`
 
 ## 1.59.0 (October 9, 2025)
 

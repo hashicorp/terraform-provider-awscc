@@ -35,6 +35,7 @@ Resource schema for AWS::ImageBuilder::Image
 - `id` (String) Uniquely identifies the resource.
 - `image_id` (String) The AMI ID of the EC2 AMI in current region.
 - `image_uri` (String) URI for containers created in current Region with default ECR image tag
+- `latest_version` (Attributes) The latest version references of the image. (see [below for nested schema](#nestedatt--latest_version))
 - `name` (String) The name of the image.
 
 <a id="nestedatt--image_scanning_configuration"></a>
@@ -89,6 +90,18 @@ Optional:
 
 - `name` (String)
 - `value` (List of String)
+
+
+
+<a id="nestedatt--latest_version"></a>
+### Nested Schema for `latest_version`
+
+Read-Only:
+
+- `arn` (String) The latest version ARN of the created image.
+- `major` (String) The latest version ARN of the created image, with the same major version.
+- `minor` (String) The latest version ARN of the created image, with the same minor version.
+- `patch` (String) The latest version ARN of the created image, with the same patch version.
 
 ## Import
 

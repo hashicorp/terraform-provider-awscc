@@ -49,7 +49,7 @@ Data Source schema for AWS::ECS::Cluster
 
 Read-Only:
 
-- `name` (String) The name of the cluster setting. The value is ``containerInsights`` .
+- `name` (String) The name of the cluster setting. The value is ``containerInsights``.
 - `value` (String) The value to set for the cluster setting. The supported values are ``enhanced``, ``enabled``, and ``disabled``. 
  To use Container Insights with enhanced observability, set the ``containerInsights`` account setting to ``enhanced``.
  To use Container Insights, set the ``containerInsights`` account setting to ``enabled``.

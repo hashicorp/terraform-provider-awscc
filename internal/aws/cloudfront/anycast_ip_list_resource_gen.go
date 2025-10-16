@@ -57,6 +57,13 @@ func anycastIpListResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "The ID of the Anycast static IP list.",
 		//	      "type": "string"
 		//	    },
+		//	    "IpAddressType": {
+		//	      "enum": [
+		//	        "ipv4",
+		//	        "dualstack"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "IpCount": {
 		//	      "description": "The number of IP addresses in the Anycast static IP list.",
 		//	      "type": "integer"
@@ -106,6 +113,10 @@ func anycastIpListResource(ctx context.Context) (resource.Resource, error) {
 				"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The ID of the Anycast static IP list.",
 					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IpAddressType
+				"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: IpCount
 				"ip_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -159,6 +170,29 @@ func anycastIpListResource(ctx context.Context) (resource.Resource, error) {
 		"anycast_ip_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "",
 			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IpAddressType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "ipv4",
+		//	    "dualstack"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ipv4",
+					"dualstack",
+				),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -322,6 +356,7 @@ func anycastIpListResource(ctx context.Context) (resource.Resource, error) {
 		"arn":                "Arn",
 		"e_tag":              "ETag",
 		"id":                 "Id",
+		"ip_address_type":    "IpAddressType",
 		"ip_count":           "IpCount",
 		"items":              "Items",
 		"key":                "Key",

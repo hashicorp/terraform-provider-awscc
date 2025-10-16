@@ -382,12 +382,8 @@
     "/properties/ServerId",
     "/properties/State"
   ],
-  "writeOnlyProperties": [
-    "/properties/IdentityProviderType"
-  ],
   "createOnlyProperties": [
-    "/properties/Domain",
-    "/properties/IdentityProviderType"
+    "/properties/Domain"
   ],
   "primaryIdentifier": [
     "/properties/Arn"
@@ -434,6 +430,9 @@
     "update": {
       "permissions": [
         "apigateway:GET",
+        "ds:AuthorizeApplication",
+        "ds:DescribeDirectories",
+        "ds:UnauthorizeApplication",
         "ec2:AssociateAddress",
         "ec2:CreateVpcEndpoint",
         "ec2:DeleteVpcEndpoints",

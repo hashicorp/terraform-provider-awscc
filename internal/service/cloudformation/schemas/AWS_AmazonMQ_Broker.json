@@ -69,22 +69,7 @@
       "type": "boolean"
     },
     "AuthenticationStrategy": {
-      "type": "string",
-      "anyOf": [
-        {
-          "enum": [
-            "SIMPLE",
-            "LDAP"
-          ],
-          "type": "string"
-        },
-        {
-          "pattern": "^[Ss][Ii][Mm][Pp][Ll][Ee]$"
-        },
-        {
-          "pattern": "^[Ll][Dd][Aa][Pp]$"
-        }
-      ]
+      "type": "string"
     },
     "LdapServerMetadata": {
       "$ref": "#/definitions/LdapServerMetadata"

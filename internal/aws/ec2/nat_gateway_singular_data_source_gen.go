@@ -45,6 +45,17 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Indicates whether the NAT gateway supports public or private connectivity. The default is public connectivity.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EniId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"eni_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxDrainDurationSeconds
 		// CloudFormation resource type schema:
 		//
@@ -181,6 +192,17 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The tags for the NAT gateway.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: VpcId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -200,6 +222,7 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allocation_id":                      "AllocationId",
 		"connectivity_type":                  "ConnectivityType",
+		"eni_id":                             "EniId",
 		"key":                                "Key",
 		"max_drain_duration_seconds":         "MaxDrainDurationSeconds",
 		"nat_gateway_id":                     "NatGatewayId",
@@ -210,6 +233,7 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"subnet_id":                          "SubnetId",
 		"tags":                               "Tags",
 		"value":                              "Value",
+		"vpc_id":                             "VpcId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

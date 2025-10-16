@@ -32,7 +32,8 @@
         "ec2:DisassociateNatGatewayAddress",
         "ec2:AssignPrivateNatGatewayAddress",
         "ec2:UnassignPrivateNatGatewayAddress"
-      ]
+      ],
+      "timeoutInMinutes": 90
     },
     "list": {
       "permissions": [
@@ -48,13 +49,15 @@
   },
   "typeName": "AWS::EC2::NatGateway",
   "readOnlyProperties": [
-    "/properties/NatGatewayId"
+    "/properties/NatGatewayId",
+    "/properties/EniId"
   ],
   "description": "Specifies a network address translation (NAT) gateway in the specified subnet. You can create either a public NAT gateway or a private NAT gateway. The default is a public NAT gateway. If you create a public NAT gateway, you must specify an elastic IP address.\n With a NAT gateway, instances in a private subnet can connect to the internet, other AWS services, or an on-premises network using the IP address of the NAT gateway. For more information, see [NAT gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) in the *Amazon VPC User Guide*.\n If you add a default route (``AWS::EC2::Route`` resource) that points to a NAT gateway, specify the NAT gateway ID for the route's ``NatGatewayId`` property.\n  When you associate an Elastic IP address or secondary Elastic IP address with a public NAT gateway, the network border group of the Elastic IP address must match the network border group of the Availability Zone (AZ) that the public NAT gateway is in. Otherwise, the NAT gateway fails to launch. You can see the network border group for the AZ by viewing the details of the subnet. Similarly, you can view the network border group for the Elastic IP address by viewing its details. For more information, see [Allocate an Elastic IP address](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#allocate-eip) in the *Amazon VPC User Guide*.",
   "writeOnlyProperties": [
     "/properties/MaxDrainDurationSeconds"
   ],
   "createOnlyProperties": [
+    "/properties/VpcId",
     "/properties/SubnetId",
     "/properties/ConnectivityType",
     "/properties/AllocationId",
@@ -83,28 +86,6 @@
         "Value",
         "Key"
       ]
-    },
-    "AvailabilityZoneAddress": {
-      "description": "",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "AvailabilityZone": {
-          "type": "string"
-        },
-        "AllocationIds": {
-          "uniqueItems": true,
-          "insertionOrder": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "AvailabilityZone",
-        "AllocationIds"
-      ]
     }
   },
   "properties": {
@@ -126,6 +107,10 @@
       "type": "integer",
       "minimum": 1
     },
+    "EniId": {
+      "description": "",
+      "type": "string"
+    },
     "AllocationId": {
       "description": "[Public NAT gateway only] The allocation ID of the Elastic IP address that's associated with the NAT gateway. This property is required for a public NAT gateway and cannot be specified with a private NAT gateway.",
       "type": "string"
@@ -146,6 +131,10 @@
       "items": {
         "type": "string"
       }
+    },
+    "VpcId": {
+      "description": "",
+      "type": "string"
     },
     "NatGatewayId": {
       "description": "",
