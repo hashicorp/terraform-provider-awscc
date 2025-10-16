@@ -1,0 +1,61 @@
+{
+  "typeName": "AWS::ServiceCatalog::TagOptionAssociation",
+  "description": "Resource Type definition for AWS::ServiceCatalog::TagOptionAssociation",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-servicecatalog/tree/master/aws-servicecatalog-tagoptionassociation.git",
+  "additionalProperties": false,
+  "properties": {
+    "TagOptionId": {
+      "type": "string",
+      "description": "The TagOption identifier."
+    },
+    "ResourceId": {
+      "type": "string",
+      "description": "The CloudformationProduct or Portfolio identifier."
+    }
+  },
+  "createOnlyProperties": [
+    "/properties/TagOptionId",
+    "/properties/ResourceId"
+  ],
+  "primaryIdentifier": [
+    "/properties/TagOptionId",
+    "/properties/ResourceId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "read": {
+      "permissions": [
+        "servicecatalog:ListResourcesForTagOption"
+      ]
+    },
+    "create": {
+      "permissions": [
+        "servicecatalog:AssociateTagOptionWithResource",
+        "servicecatalog:ListResourcesForTagOption"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "TagOptionId": {
+            "$ref": "resource-schema.json#/properties/TagOptionId"
+          }
+        },
+        "required": [
+          "TagOptionId"
+        ]
+      },
+      "permissions": [
+        "servicecatalog:ListResourcesForTagOption"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "servicecatalog:DisassociateTagOptionFromResource",
+        "servicecatalog:ListResourcesForTagOption"
+      ]
+    }
+  }
+}
