@@ -52,11 +52,6 @@ func brokerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "anyOf": [
-		//	    {},
-		//	    {},
-		//	    {}
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"authentication_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/

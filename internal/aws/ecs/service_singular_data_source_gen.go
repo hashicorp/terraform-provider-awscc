@@ -8,6 +8,7 @@ package ecs
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -139,6 +140,9 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "minimum": 0,
 		//	      "type": "integer"
 		//	    },
+		//	    "CanaryConfiguration": {
+		//	      "description": ""
+		//	    },
 		//	    "DeploymentCircuitBreaker": {
 		//	      "additionalProperties": false,
 		//	      "description": "The deployment circuit breaker can only be used for services using the rolling update (``ECS``) deployment type.\n  The *deployment circuit breaker* determines whether a service deployment will fail if the service can't reach a steady state. If you use the deployment circuit breaker, a service deployment will transition to a failed state and stop launching new tasks. If you use the rollback option, when a service deployment fails, the service is rolled back to the last deployment that completed successfully. For more information, see [Rolling update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html) in the *Amazon Elastic Container Service Developer Guide*",
@@ -203,6 +207,9 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "type": "array"
 		//	    },
+		//	    "LinearConfiguration": {
+		//	      "description": ""
+		//	    },
 		//	    "MaximumPercent": {
 		//	      "description": "If a service is using the rolling update (``ECS``) deployment type, the ``maximumPercent`` parameter represents an upper limit on the number of your service's tasks that are allowed in the ``RUNNING`` or ``PENDING`` state during a deployment, as a percentage of the ``desiredCount`` (rounded down to the nearest integer). This parameter enables you to define the deployment batch size. For example, if your service is using the ``REPLICA`` service scheduler and has a ``desiredCount`` of four tasks and a ``maximumPercent`` value of 200%, the scheduler may start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default ``maximumPercent`` value for a service using the ``REPLICA`` service scheduler is 200%.\n The Amazon ECS scheduler uses this parameter to replace unhealthy tasks by starting replacement tasks first and then stopping the unhealthy tasks, as long as cluster resources for starting replacement tasks are available. For more information about how the scheduler replaces unhealthy tasks, see [Amazon ECS services](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html).\n If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types, and tasks in the service use the EC2 launch type, the *maximum percent* value is set to the default value. The *maximum percent* value is used to define the upper limit on the number of the tasks in the service that remain in the ``RUNNING`` state while the container instances are in the ``DRAINING`` state.\n  You can't specify a custom ``maximumPercent`` value for a service that uses either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and has tasks that use the EC2 launch type.\n  If the service uses either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types, and the tasks in the service use the Fargate launch type, the maximum percent value is not used. The value is still returned when describing your service.",
 		//	      "type": "integer"
@@ -215,7 +222,9 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "description": "The deployment strategy for the service. Choose from these valid values:\n  +  ``ROLLING`` - When you create a service which uses the rolling update (``ROLLING``) deployment strategy, the Amazon ECS service scheduler replaces the currently running tasks with new tasks. The number of tasks that Amazon ECS adds or removes from the service during a rolling update is controlled by the service deployment configuration.\n  +  ``BLUE_GREEN`` - A blue/green deployment strategy (``BLUE_GREEN``) is a release methodology that reduces downtime and risk by running two identical production environments called blue and green. With Amazon ECS blue/green deployments, you can validate new service revisions before directing production traffic to them. This approach provides a safer way to deploy changes with the ability to quickly roll back if needed.",
 		//	      "enum": [
 		//	        "ROLLING",
-		//	        "BLUE_GREEN"
+		//	        "BLUE_GREEN",
+		//	        "LINEAR",
+		//	        "CANARY"
 		//	      ],
 		//	      "type": "string"
 		//	    }
@@ -250,6 +259,12 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: BakeTimeInMinutes
 				"bake_time_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "The duration when both blue and green service revisions are running simultaneously after the production traffic has shifted.\n The following rules apply when you don't specify a value:\n  +  For rolling deployments, the value is set to 3 hours (180 minutes).\n  +  When you use an external deployment controller (``EXTERNAL``), or the ACD blue/green deployment controller (``CODE_DEPLOY``), the value is set to 3 hours (180 minutes).\n  +  For all other cases, the value is set to 36 hours (2160 minutes).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CanaryConfiguration
+				"canary_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  jsontypes.NormalizedType{},
+					Description: "",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: DeploymentCircuitBreaker
@@ -297,6 +312,12 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "An array of deployment lifecycle hook objects to run custom logic at specific stages of the deployment lifecycle.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LinearConfiguration
+				"linear_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  jsontypes.NormalizedType{},
+					Description: "",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: MaximumPercent
@@ -425,11 +446,11 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The period of time, in seconds, that the Amazon Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after a task has first started. If you do not specify a health check grace period value, the default value of 0 is used. If you do not use any of the health checks, then ``healthCheckGracePeriodSeconds`` is unused.\n If your service has more running tasks than desired, unhealthy tasks in the grace period might be stopped to reach the desired count.",
+		//	  "description": "The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after a task has first started. If you do not specify a health check grace period value, the default value of 0 is used. If you do not use any of the health checks, then ``healthCheckGracePeriodSeconds`` is unused.\n If your service has more running tasks than desired, unhealthy tasks in the grace period might be stopped to reach the desired count.",
 		//	  "type": "integer"
 		//	}
 		"health_check_grace_period_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The period of time, in seconds, that the Amazon Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after a task has first started. If you do not specify a health check grace period value, the default value of 0 is used. If you do not use any of the health checks, then ``healthCheckGracePeriodSeconds`` is unused.\n If your service has more running tasks than desired, unhealthy tasks in the grace period might be stopped to reach the desired count.",
+			Description: "The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after a task has first started. If you do not specify a health check grace period value, the default value of 0 is used. If you do not use any of the health checks, then ``healthCheckGracePeriodSeconds`` is unused.\n If your service has more running tasks than desired, unhealthy tasks in the grace period might be stopped to reach the desired count.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LaunchType
@@ -1595,6 +1616,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"awsvpc_configuration":              "AwsvpcConfiguration",
 		"bake_time_in_minutes":              "BakeTimeInMinutes",
 		"base":                              "Base",
+		"canary_configuration":              "CanaryConfiguration",
 		"capacity_provider":                 "CapacityProvider",
 		"capacity_provider_strategy":        "CapacityProviderStrategy",
 		"client_aliases":                    "ClientAliases",
@@ -1633,6 +1655,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"launch_type":                       "LaunchType",
 		"lifecycle_hooks":                   "LifecycleHooks",
 		"lifecycle_stages":                  "LifecycleStages",
+		"linear_configuration":              "LinearConfiguration",
 		"load_balancer_name":                "LoadBalancerName",
 		"load_balancers":                    "LoadBalancers",
 		"log_configuration":                 "LogConfiguration",
