@@ -130,7 +130,7 @@
           "type": "string"
         },
         "Name": {
-          "description": "The name of the cluster setting. The value is ``containerInsights`` .",
+          "description": "The name of the cluster setting. The value is ``containerInsights``.",
           "type": "string"
         }
       }

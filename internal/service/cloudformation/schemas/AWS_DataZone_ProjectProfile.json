@@ -46,7 +46,7 @@
           "minLength": 1,
           "pattern": "^[\\w -]+$"
         },
-        "Id": {
+        "EnvironmentConfigurationId": {
           "type": "string",
           "pattern": "^[a-zA-Z0-9_-]{1,36}$"
         },
@@ -234,7 +234,7 @@
     "/properties/Id",
     "/properties/Identifier",
     "/properties/LastUpdatedAt",
-    "/properties/EnvironmentConfigurations/*/Id",
+    "/properties/EnvironmentConfigurations/*/EnvironmentConfigurationId",
     "/properties/EnvironmentConfigurations/*/ConfigurationParameters/ResolvedParameters"
   ],
   "writeOnlyProperties": [

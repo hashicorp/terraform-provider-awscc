@@ -164,20 +164,39 @@
           "items": {
             "$ref": "#/definitions/Dependency"
           }
+        },
+        "BlueprintTypes": {
+          "type": "array",
+          "maxItems": 1,
+          "items": {
+            "type": "string"
+          }
         }
       },
-      "required": [
-        "Handler"
-      ],
       "oneOf": [
         {
           "required": [
+            "Handler",
             "S3Bucket",
             "S3Key"
           ]
         },
         {
           "required": [
+            "BlueprintTypes",
+            "S3Bucket",
+            "S3Key"
+          ]
+        },
+        {
+          "required": [
+            "Handler",
+            "Script"
+          ]
+        },
+        {
+          "required": [
+            "BlueprintTypes",
             "Script"
           ]
         }
