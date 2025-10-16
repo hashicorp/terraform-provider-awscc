@@ -1,4 +1,4 @@
-## 1.60.0 (Unreleased)
+## 1.60.0 (October 16, 2025)
 
 FEATURES:
 
