@@ -78,23 +78,9 @@ func (r *genericResource) List(ctx context.Context, request list.ListRequest, st
 				return
 			}
 
-			obj, err := r.describe(ctx, conn, aws.ToString(description.Identifier))
-			if err != nil {
-				result = list.ListResult{
-					Diagnostics: diag.Diagnostics{
-						diag.NewErrorDiagnostic(
-							"Error Listing Remote Resources",
-							fmt.Sprintf("Error: %s", err),
-						),
-					},
-				}
-				yield(result)
-				return
-			}
-
 			translator := toTerraform{cfToTfNameMap: r.cfToTfNameMap}
 			schema := request.ResourceSchema
-			val, err := translator.FromString(ctx, schema, aws.ToString(obj.Properties))
+			val, err := translator.FromString(ctx, schema, aws.ToString(description.Properties))
 			if err != nil {
 				result = list.ListResult{
 					Diagnostics: diag.Diagnostics{
@@ -139,7 +125,24 @@ func (r *genericResource) List(ctx context.Context, request list.ListRequest, st
 }
 
 func (r *genericResource) stream(ctx context.Context, conn *cloudcontrol.Client) iter.Seq2[cctypes.ResourceDescription, error] {
-	return tfcloudcontrol.StreamResourcesByTypeName(ctx, conn, r.provider.RoleARN(ctx), r.cfTypeName)
+	return func(yield func(cctypes.ResourceDescription, error) bool) {
+		for description, err := range tfcloudcontrol.StreamResourcesByTypeName(ctx, conn, r.provider.RoleARN(ctx), r.cfTypeName) {
+			if err != nil {
+				yield(cctypes.ResourceDescription{}, err)
+				return
+			}
+
+			output, err := r.describe(ctx, conn, aws.ToString(description.Identifier))
+			if err != nil {
+				yield(cctypes.ResourceDescription{}, err)
+				return
+			}
+
+			if !yield(*output, nil) {
+				return
+			}
+		}
+	}
 }
 
 func (r *genericResource) populateIdentityTypes(ctx context.Context, schemaType attr.Type, result list.ListResult) diag.Diagnostics {
