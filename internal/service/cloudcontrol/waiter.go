@@ -6,6 +6,7 @@ package cloudcontrol
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
@@ -31,10 +32,24 @@ func RetryGetResourceRequestStatus(pProgressEvent **types.ProgressEvent) func(co
 					return false, nil
 				}
 
-				return false, fmt.Errorf("waiter state transitioned to %s. StatusMessage: %s. ErrorCode: %s", value, aws.ToString(progressEvent.StatusMessage), progressEvent.ErrorCode)
+				statusMessage := aws.ToString(progressEvent.StatusMessage)
+
+				// Attempt to retrieve hook results
+				if output.HooksProgressEvent != nil {
+					var details []string
+					for _, hook := range output.HooksProgressEvent {
+						if *hook.HookStatus == "HOOK_COMPLETE_FAILED" {
+							details = append(details, fmt.Sprintf("Reason: %s", aws.ToString(hook.HookStatusMessage)))
+						}
+					}
+					hookResults := strings.Join(details, "\n")
+					if hookResults != "" {
+						statusMessage = fmt.Sprintf("Hook invocation failed: \n%s", hookResults)
+					}
+				}
+				return false, fmt.Errorf("waiter state transitioned to %s. StatusMessage: %s. ErrorCode: %s", value, statusMessage, progressEvent.ErrorCode)
 			}
 		}
-
 		return true, err
 	}
 }
