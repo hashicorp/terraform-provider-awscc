@@ -1,5 +1,9 @@
 ## 1.61.0 (Unreleased)
 
+ENHANCEMENTS:
+
+* provider: Include CloudFormation hook failure details in error messages for better debugging
+
 ## 1.60.0 (October 16, 2025)
 
 FEATURES:
