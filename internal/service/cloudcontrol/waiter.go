@@ -44,7 +44,7 @@ func RetryGetResourceRequestStatus(pProgressEvent **types.ProgressEvent) func(co
 						// HOOK_COMPLETE_FAILED: The Hook invocation is complete with a failed result.
 						// HOOK_FAILED: The Hook invocation didn't complete successfully.
 						if hookStatus == "HOOK_COMPLETE_FAILED" || hookStatus == "HOOK_FAILED" {
-							hookErrors = append(hookErrors, fmt.Sprintf("%s (%s v%s) at %s: %s",
+							hookErrors = append(hookErrors, fmt.Sprintf("HookName: %s, HookArn: %s, HookVersion: %s, Time: %s, HookMessage: %s",
 								aws.ToString(hookEvent.HookTypeName),
 								aws.ToString(hookEvent.HookTypeArn),
 								aws.ToString(hookEvent.HookTypeVersionId),

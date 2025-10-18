@@ -45,11 +45,11 @@ func TestRetryGetResourceRequestStatus_WithHookFailures(t *testing.T) {
 	expectedParts := []string{
 		"waiter state transitioned to FAILED",
 		"Hook failures:",
-		"Private::Security::S3PublicAccessBlock",
-		"arn:aws:cloudformation:us-east-1:123456789012:type/hook/test",
-		"v00000001",
-		"at 2025-10-18T11:10:45Z",
-		"Unable to assume role",
+		"HookName: Private::Security::S3PublicAccessBlock",
+		"HookArn: arn:aws:cloudformation:us-east-1:123456789012:type/hook/test",
+		"HookVersion: 00000001",
+		"Time: 2025-10-18T11:10:45Z",
+		"HookMessage: Unable to assume role",
 	}
 
 	for _, part := range expectedParts {
@@ -90,10 +90,10 @@ func TestRetryGetResourceRequestStatus_WithHookCompleteFailed(t *testing.T) {
 	expectedParts := []string{
 		"waiter state transitioned to FAILED",
 		"Hook failures:",
-		"Private::Security::S3PublicAccessBlock",
-		"arn:aws:cloudformation:us-east-1:123456789012:type/hook/test",
-		"v00000002",
-		"at 2025-10-18T11:15:30Z",
+		"HookName: Private::Security::S3PublicAccessBlock",
+		"HookArn: arn:aws:cloudformation:us-east-1:123456789012:type/hook/test",
+		"HookVersion: 00000002",
+		"Time: 2025-10-18T11:15:30Z",
 		"Template failed validation",
 	}
 
