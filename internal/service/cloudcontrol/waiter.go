@@ -35,7 +35,7 @@ func RetryGetResourceRequestStatus(pProgressEvent **types.ProgressEvent) func(co
 				// Build enhanced error message with hook information
 				errorMsg := fmt.Sprintf("waiter state transitioned to %s. StatusMessage: %s",
 					value, aws.ToString(progressEvent.StatusMessage))
-				
+
 				if progressEvent.ErrorCode != "" {
 					errorMsg += fmt.Sprintf(". ErrorCode: %s", string(progressEvent.ErrorCode))
 				}
