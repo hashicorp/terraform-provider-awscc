@@ -25,12 +25,12 @@ func TestRetryGetResourceRequestStatus_WithHookFailures(t *testing.T) {
 		},
 		HooksProgressEvent: []types.HookProgressEvent{
 			{
-				HookTypeName:        aws.String("Private::Security::S3PublicAccessBlock"),
-				HookTypeArn:         aws.String("arn:aws:cloudformation:us-east-1:123456789012:type/hook/test"),
-				HookTypeVersionId:   aws.String("00000001"),
-				HookStatus:          aws.String("HOOK_FAILED"),
-				HookStatusMessage:   aws.String("Unable to assume role"),
-				HookEventTime:       &testTime,
+				HookTypeName:      aws.String("Private::Security::S3PublicAccessBlock"),
+				HookTypeArn:       aws.String("arn:aws:cloudformation:us-east-1:123456789012:type/hook/test"),
+				HookTypeVersionId: aws.String("00000001"),
+				HookStatus:        aws.String("HOOK_FAILED"),
+				HookStatusMessage: aws.String("Unable to assume role"),
+				HookEventTime:     &testTime,
 			},
 		},
 	}
@@ -70,12 +70,12 @@ func TestRetryGetResourceRequestStatus_WithHookCompleteFailed(t *testing.T) {
 		},
 		HooksProgressEvent: []types.HookProgressEvent{
 			{
-				HookTypeName:        aws.String("Private::Security::S3PublicAccessBlock"),
-				HookTypeArn:         aws.String("arn:aws:cloudformation:us-east-1:123456789012:type/hook/test"),
-				HookTypeVersionId:   aws.String("00000002"),
-				HookStatus:          aws.String("HOOK_COMPLETE_FAILED"),
-				HookStatusMessage:   aws.String("Template failed validation, the following rule(s) failed: s3-security-rules.guard/default."),
-				HookEventTime:       &testTime,
+				HookTypeName:      aws.String("Private::Security::S3PublicAccessBlock"),
+				HookTypeArn:       aws.String("arn:aws:cloudformation:us-east-1:123456789012:type/hook/test"),
+				HookTypeVersionId: aws.String("00000002"),
+				HookStatus:        aws.String("HOOK_COMPLETE_FAILED"),
+				HookStatusMessage: aws.String("Template failed validation, the following rule(s) failed: s3-security-rules.guard/default."),
+				HookEventTime:     &testTime,
 			},
 		},
 	}

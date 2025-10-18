@@ -33,7 +33,7 @@ func RetryGetResourceRequestStatus(pProgressEvent **types.ProgressEvent) func(co
 				}
 
 				// Build enhanced error message with hook information
-				errorMsg := fmt.Sprintf("waiter state transitioned to %s. StatusMessage: %s. ErrorCode: %s", 
+				errorMsg := fmt.Sprintf("waiter state transitioned to %s. StatusMessage: %s. ErrorCode: %s",
 					value, aws.ToString(progressEvent.StatusMessage), progressEvent.ErrorCode)
 
 				// Add hook information if available
@@ -44,7 +44,7 @@ func RetryGetResourceRequestStatus(pProgressEvent **types.ProgressEvent) func(co
 						// HOOK_COMPLETE_FAILED: The Hook invocation is complete with a failed result.
 						// HOOK_FAILED: The Hook invocation didn't complete successfully.
 						if hookStatus == "HOOK_COMPLETE_FAILED" || hookStatus == "HOOK_FAILED" {
-							hookErrors = append(hookErrors, fmt.Sprintf("%s (%s v%s) at %s: %s", 
+							hookErrors = append(hookErrors, fmt.Sprintf("%s (%s v%s) at %s: %s",
 								aws.ToString(hookEvent.HookTypeName),
 								aws.ToString(hookEvent.HookTypeArn),
 								aws.ToString(hookEvent.HookTypeVersionId),
