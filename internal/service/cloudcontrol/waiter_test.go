@@ -1,7 +1,7 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-package cloudcontrol
+package cloudcontrol_test
 
 import (
 	"context"
@@ -12,10 +12,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
+	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 )
 
 func TestRetryGetResourceRequestStatus_WithHookFailures(t *testing.T) {
-	retryFunc := RetryGetResourceRequestStatus(nil)
+	retryFunc := tfcloudcontrol.RetryGetResourceRequestStatus(nil)
 	testTime := time.Date(2025, 10, 18, 11, 10, 45, 0, time.UTC)
 
 	output := &cloudcontrol.GetResourceRequestStatusOutput{
@@ -60,7 +61,7 @@ func TestRetryGetResourceRequestStatus_WithHookFailures(t *testing.T) {
 }
 
 func TestRetryGetResourceRequestStatus_WithHookCompleteFailed(t *testing.T) {
-	retryFunc := RetryGetResourceRequestStatus(nil)
+	retryFunc := tfcloudcontrol.RetryGetResourceRequestStatus(nil)
 	testTime := time.Date(2025, 10, 18, 11, 15, 30, 0, time.UTC)
 
 	output := &cloudcontrol.GetResourceRequestStatusOutput{
