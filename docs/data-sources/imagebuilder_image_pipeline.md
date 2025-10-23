@@ -23,6 +23,7 @@ Data Source schema for AWS::ImageBuilder::ImagePipeline
 
 - `arn` (String) The Amazon Resource Name (ARN) of the image pipeline.
 - `container_recipe_arn` (String) The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.
+- `deployment_id` (String) The deployment ID of the pipeline, used for resource create/update triggers.
 - `description` (String) The description of the image pipeline.
 - `distribution_configuration_arn` (String) The Amazon Resource Name (ARN) of the distribution configuration associated with this image pipeline.
 - `enhanced_image_metadata_enabled` (Boolean) Collects additional information about the image being created, including the operating system (OS) version and package list.

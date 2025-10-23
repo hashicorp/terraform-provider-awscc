@@ -30,6 +30,7 @@ Data Source schema for AWS::ElasticLoadBalancingV2::ListenerRule
 - `priority` (Number) The rule priority. A listener can't have multiple rules with the same priority.
  If you try to reorder rules by updating their priorities, do not specify a new priority if an existing rule already uses this priority, as this can cause an error. If you need to reuse a priority with a different rule, you must remove it as a priority first, and then specify it in a subsequent update.
 - `rule_arn` (String)
+- `transforms` (Attributes Set) (see [below for nested schema](#nestedatt--transforms))
 
 <a id="nestedatt--actions"></a>
 ### Nested Schema for `actions`
@@ -39,10 +40,11 @@ Read-Only:
 - `authenticate_cognito_config` (Attributes) [HTTPS listeners] Information for using Amazon Cognito to authenticate users. Specify only when ``Type`` is ``authenticate-cognito``. (see [below for nested schema](#nestedatt--actions--authenticate_cognito_config))
 - `authenticate_oidc_config` (Attributes) [HTTPS listeners] Information about an identity provider that is compliant with OpenID Connect (OIDC). Specify only when ``Type`` is ``authenticate-oidc``. (see [below for nested schema](#nestedatt--actions--authenticate_oidc_config))
 - `fixed_response_config` (Attributes) [Application Load Balancer] Information for creating an action that returns a custom HTTP response. Specify only when ``Type`` is ``fixed-response``. (see [below for nested schema](#nestedatt--actions--fixed_response_config))
-- `forward_config` (Attributes) Information for creating an action that distributes requests among one or more target groups. For Network Load Balancers, you can specify a single target group. Specify only when ``Type`` is ``forward``. If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``. (see [below for nested schema](#nestedatt--actions--forward_config))
+- `forward_config` (Attributes) Information for creating an action that distributes requests among multiple target groups. Specify only when ``Type`` is ``forward``.
+ If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``. (see [below for nested schema](#nestedatt--actions--forward_config))
 - `order` (Number) The order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first.
 - `redirect_config` (Attributes) [Application Load Balancer] Information for creating a redirect action. Specify only when ``Type`` is ``redirect``. (see [below for nested schema](#nestedatt--actions--redirect_config))
-- `target_group_arn` (String) The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to one or more target groups, use ``ForwardConfig`` instead.
+- `target_group_arn` (String) The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to multiple target groups, you must use ``ForwardConfig`` instead.
 - `type` (String) The type of action.
 
 <a id="nestedatt--actions--authenticate_cognito_config"></a>
@@ -111,7 +113,7 @@ Read-Only:
 
 Read-Only:
 
-- `duration_seconds` (Number) The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.
+- `duration_seconds` (Number) [Application Load Balancers] The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.
 - `enabled` (Boolean) Indicates whether target group stickiness is enabled.
 
 
@@ -156,6 +158,7 @@ Read-Only:
 - `http_request_method_config` (Attributes) Information for an HTTP method condition. Specify only when ``Field`` is ``http-request-method``. (see [below for nested schema](#nestedatt--conditions--http_request_method_config))
 - `path_pattern_config` (Attributes) Information for a path pattern condition. Specify only when ``Field`` is ``path-pattern``. (see [below for nested schema](#nestedatt--conditions--path_pattern_config))
 - `query_string_config` (Attributes) Information for a query string condition. Specify only when ``Field`` is ``query-string``. (see [below for nested schema](#nestedatt--conditions--query_string_config))
+- `regex_values` (Set of String)
 - `source_ip_config` (Attributes) Information for a source IP condition. Specify only when ``Field`` is ``source-ip``. (see [below for nested schema](#nestedatt--conditions--source_ip_config))
 - `values` (Set of String) The condition value. Specify only when ``Field`` is ``host-header`` or ``path-pattern``. Alternatively, to specify multiple host names or multiple path patterns, use ``HostHeaderConfig`` or ``PathPatternConfig``.
  If ``Field`` is ``host-header`` and you're not using ``HostHeaderConfig``, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters.
@@ -176,6 +179,7 @@ Read-Only:
 
 Read-Only:
 
+- `regex_values` (Set of String)
 - `values` (Set of String) The host names. The maximum size of each name is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). You must include at least one "." character. You can include only alphabetical characters after the final "." character.
  If you specify multiple strings, the condition is satisfied if one of the strings matches the host name.
 
@@ -186,6 +190,7 @@ Read-Only:
 Read-Only:
 
 - `http_header_name` (String) The name of the HTTP header field. The maximum size is 40 characters. The header name is case insensitive. The allowed characters are specified by RFC 7230. Wildcards are not supported.
+- `regex_values` (Set of String)
 - `values` (Set of String) The strings to compare against the value of the HTTP header. The maximum size of each string is 128 characters. The comparison strings are case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).
  If the same header appears multiple times in the request, we search them in order until a match is found.
  If you specify multiple strings, the condition is satisfied if one of the strings matches the value of the HTTP header. To require that all of the strings are a match, create one condition per string.
@@ -205,6 +210,7 @@ Read-Only:
 
 Read-Only:
 
+- `regex_values` (Set of String)
 - `values` (Set of String) The path patterns to compare against the request URL. The maximum size of each string is 128 characters. The comparison is case sensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).
  If you specify multiple strings, the condition is satisfied if one of them matches the request URL. The path pattern is compared only to the path of the URL, not to its query string.
 
@@ -234,3 +240,46 @@ Read-Only:
 
 - `values` (Set of String) The source IP addresses, in CIDR format. You can use both IPv4 and IPv6 addresses. Wildcards are not supported.
  If you specify multiple addresses, the condition is satisfied if the source IP address of the request matches one of the CIDR blocks. This condition is not satisfied by the addresses in the X-Forwarded-For header.
+
+
+
+<a id="nestedatt--transforms"></a>
+### Nested Schema for `transforms`
+
+Read-Only:
+
+- `host_header_rewrite_config` (Attributes) (see [below for nested schema](#nestedatt--transforms--host_header_rewrite_config))
+- `type` (String)
+- `url_rewrite_config` (Attributes) (see [below for nested schema](#nestedatt--transforms--url_rewrite_config))
+
+<a id="nestedatt--transforms--host_header_rewrite_config"></a>
+### Nested Schema for `transforms.host_header_rewrite_config`
+
+Read-Only:
+
+- `rewrites` (Attributes Set) (see [below for nested schema](#nestedatt--transforms--host_header_rewrite_config--rewrites))
+
+<a id="nestedatt--transforms--host_header_rewrite_config--rewrites"></a>
+### Nested Schema for `transforms.host_header_rewrite_config.rewrites`
+
+Read-Only:
+
+- `regex` (String)
+- `replace` (String)
+
+
+
+<a id="nestedatt--transforms--url_rewrite_config"></a>
+### Nested Schema for `transforms.url_rewrite_config`
+
+Read-Only:
+
+- `rewrites` (Attributes Set) (see [below for nested schema](#nestedatt--transforms--url_rewrite_config--rewrites))
+
+<a id="nestedatt--transforms--url_rewrite_config--rewrites"></a>
+### Nested Schema for `transforms.url_rewrite_config.rewrites`
+
+Read-Only:
+
+- `regex` (String)
+- `replace` (String)

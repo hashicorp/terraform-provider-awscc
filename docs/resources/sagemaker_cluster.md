@@ -129,6 +129,7 @@ data "aws_partition" "current" {}
 - `orchestrator` (Attributes) Specifies parameter(s) specific to the orchestrator, e.g. specify the EKS cluster. (see [below for nested schema](#nestedatt--orchestrator))
 - `restricted_instance_groups` (Attributes List) The restricted instance groups of the SageMaker HyperPod cluster. (see [below for nested schema](#nestedatt--restricted_instance_groups))
 - `tags` (Attributes Set) Custom tags for managing the SageMaker HyperPod cluster as an AWS resource. You can add tags to your cluster in the same way you add them in other AWS services that support tagging. (see [below for nested schema](#nestedatt--tags))
+- `tiered_storage_config` (Attributes) Configuration for tiered storage in the SageMaker HyperPod cluster. (see [below for nested schema](#nestedatt--tiered_storage_config))
 - `vpc_config` (Attributes) Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC. (see [below for nested schema](#nestedatt--vpc_config))
 
 ### Read-Only
@@ -343,6 +344,15 @@ Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+
+<a id="nestedatt--tiered_storage_config"></a>
+### Nested Schema for `tiered_storage_config`
+
+Optional:
+
+- `instance_memory_allocation_percentage` (Number) The percentage of instance memory to allocate for tiered storage.
+- `mode` (String) The mode of tiered storage.
 
 
 <a id="nestedatt--vpc_config"></a>

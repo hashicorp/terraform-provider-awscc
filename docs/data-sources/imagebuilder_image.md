@@ -27,6 +27,7 @@ Data Source schema for AWS::ImageBuilder::Image
 - `enhanced_image_metadata_enabled` (Boolean) Collects additional information about the image being created, including the operating system (OS) version and package list.
 - `execution_role` (String) The execution role name/ARN for the image build, if provided
 - `image_id` (String) The AMI ID of the EC2 AMI in current region.
+- `image_pipeline_execution_settings` (Attributes) The image pipeline execution settings of the image. (see [below for nested schema](#nestedatt--image_pipeline_execution_settings))
 - `image_recipe_arn` (String) The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.
 - `image_scanning_configuration` (Attributes) Contains settings for vulnerability scans. (see [below for nested schema](#nestedatt--image_scanning_configuration))
 - `image_tests_configuration` (Attributes) The image tests configuration used when creating this image. (see [below for nested schema](#nestedatt--image_tests_configuration))
@@ -37,6 +38,15 @@ Data Source schema for AWS::ImageBuilder::Image
 - `name` (String) The name of the image.
 - `tags` (Map of String) The tags associated with the image.
 - `workflows` (Attributes List) Workflows to define the image build process (see [below for nested schema](#nestedatt--workflows))
+
+<a id="nestedatt--image_pipeline_execution_settings"></a>
+### Nested Schema for `image_pipeline_execution_settings`
+
+Read-Only:
+
+- `deployment_id` (String) The deployment ID of the pipeline, used to trigger new image pipeline executions.
+- `on_update` (Boolean) Whether to trigger the image pipeline when the pipeline is updated. False by default.
+
 
 <a id="nestedatt--image_scanning_configuration"></a>
 ### Nested Schema for `image_scanning_configuration`

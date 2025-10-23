@@ -228,6 +228,9 @@ commitschemas: ## Commit schema changes
 commitrefresh: ## Commit schema refresh changes
 	@git add -A && git commit -m "$$(date -I) CloudFormation schemas in us-east-1; Refresh existing schemas"
 
+commitdocs: ## Commit documentation changes
+	@git add -A && git commit -m "$$(date -I) Documentation; Update generated documentation"
+
 bigdiffer: ## Show big diff between current branch and main
 	@echo "==> Showing big diff between this schema generation and last"
 	@echo "==> Manually add each new resource/data source type to internal/provider/all_schemas.hcl"

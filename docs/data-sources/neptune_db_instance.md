@@ -41,6 +41,7 @@ If you update this property, some interruptions may occur.
 - `endpoint` (String) The connection endpoint for the database. For example: `mystack-mydb-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`.
 - `port` (String) The port number on which the database accepts connections. For example: `8182`.
 - `preferred_maintenance_window` (String) Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).
+- `publicly_accessible` (Boolean) Indicates that public accessibility is enabled. This should be enabled in combination with IAM Auth enabled on the DBCluster
 - `tags` (Attributes Set) An arbitrary set of tags (key-value pairs) for this DB instance. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
