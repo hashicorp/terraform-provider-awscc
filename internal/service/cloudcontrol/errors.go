@@ -37,19 +37,15 @@ func newWaiterErr(status, msg string) *waiterResultError {
 	return &e
 }
 
-func (e *waiterResultError) withErrorCode(code string) *waiterResultError {
+func (e *waiterResultError) withErrorCode(code string) {
 	e.errorCode = code
-
-	return e
 }
 
-func (e *waiterResultError) withHookEvent(hookEvent types.HookProgressEvent) *waiterResultError {
+func (e *waiterResultError) withHookEvent(hookEvent types.HookProgressEvent) {
 	e.hookErrors = append(e.hookErrors, fmt.Sprintf("HookName: %s, HookArn: %s, HookVersion: %s, Time: %s, HookMessage: %s",
 		aws.ToString(hookEvent.HookTypeName),
 		aws.ToString(hookEvent.HookTypeArn),
 		aws.ToString(hookEvent.HookTypeVersionId),
 		hookEvent.HookEventTime.Format(time.RFC3339),
 		aws.ToString(hookEvent.HookStatusMessage)))
-
-	return e
 }

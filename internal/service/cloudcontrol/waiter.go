@@ -32,7 +32,7 @@ func RetryGetResourceRequestStatus(pProgressEvent **types.ProgressEvent) func(co
 
 				// Build enhanced error message with hook information
 				waiterErr := newWaiterErr(string(value), aws.ToString(progressEvent.StatusMessage))
-				waiterErr = waiterErr.withErrorCode(string(progressEvent.ErrorCode))
+				waiterErr.withErrorCode(string(progressEvent.ErrorCode))
 
 				// Add hook information if available
 				if len(output.HooksProgressEvent) > 0 {
@@ -41,7 +41,7 @@ func RetryGetResourceRequestStatus(pProgressEvent **types.ProgressEvent) func(co
 						// HOOK_COMPLETE_FAILED: The Hook invocation is complete with a failed result.
 						// HOOK_FAILED: The Hook invocation didn't complete successfully.
 						if hookStatus == "HOOK_COMPLETE_FAILED" || hookStatus == "HOOK_FAILED" {
-							waiterErr = waiterErr.withHookEvent(hookEvent)
+							waiterErr.withHookEvent(hookEvent)
 						}
 					}
 				}
