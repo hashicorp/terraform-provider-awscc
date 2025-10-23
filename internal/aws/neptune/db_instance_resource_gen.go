@@ -211,6 +211,21 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: PubliclyAccessible
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates that public accessibility is enabled. This should be enabled in combination with IAM Auth enabled on the DBCluster",
+		//	  "type": "boolean"
+		//	}
+		"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates that public accessibility is enabled. This should be enabled in combination with IAM Auth enabled on the DBCluster",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -317,6 +332,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"key":                          "Key",
 		"port":                         "Port",
 		"preferred_maintenance_window": "PreferredMaintenanceWindow",
+		"publicly_accessible":          "PubliclyAccessible",
 		"tags":                         "Tags",
 		"value":                        "Value",
 	})

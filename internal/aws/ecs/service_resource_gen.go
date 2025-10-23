@@ -677,7 +677,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The launch type on which to run your service. For more information, see [Amazon ECS Launch Types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer Guide*.",
+		//	  "description": "The launch type on which to run your service. For more information, see [Amazon ECS Launch Types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer Guide*.\n  If you want to use Managed Instances, you must use the ``capacityProviderStrategy`` request parameter",
 		//	  "enum": [
 		//	    "EC2",
 		//	    "FARGATE",
@@ -686,7 +686,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"launch_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The launch type on which to run your service. For more information, see [Amazon ECS Launch Types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer Guide*.",
+			Description: "The launch type on which to run your service. For more information, see [Amazon ECS Launch Types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer Guide*.\n  If you want to use Managed Instances, you must use the ``capacityProviderStrategy`` request parameter",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/

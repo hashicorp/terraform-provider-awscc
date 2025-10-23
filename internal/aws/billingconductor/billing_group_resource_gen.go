@@ -107,7 +107,7 @@ func billingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "PricingPlanArn": {
 		//	      "description": "ARN of the attached pricing plan",
-		//	      "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:pricingplan/[a-zA-Z0-9]{10}",
+		//	      "pattern": "arn:aws(-cn)?:billingconductor::(aws|[0-9]{12}):pricingplan/(BasicPricingPlan|[a-zA-Z0-9]{10})",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -123,7 +123,7 @@ func billingGroupResource(ctx context.Context) (resource.Resource, error) {
 					Description: "ARN of the attached pricing plan",
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(-cn)?:billingconductor::[0-9]{12}:pricingplan/[a-zA-Z0-9]{10}"), ""),
+						stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(-cn)?:billingconductor::(aws|[0-9]{12}):pricingplan/(BasicPricingPlan|[a-zA-Z0-9]{10})"), ""),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
