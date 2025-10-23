@@ -199,7 +199,11 @@ func aIPromptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "INTENT_LABELING_GENERATION",
 		//	    "QUERY_REFORMULATION",
 		//	    "SELF_SERVICE_PRE_PROCESSING",
-		//	    "SELF_SERVICE_ANSWER_GENERATION"
+		//	    "SELF_SERVICE_ANSWER_GENERATION",
+		//	    "EMAIL_RESPONSE",
+		//	    "EMAIL_OVERVIEW",
+		//	    "EMAIL_GENERATIVE_ANSWER",
+		//	    "EMAIL_QUERY_REFORMULATION"
 		//	  ],
 		//	  "type": "string"
 		//	}

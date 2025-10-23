@@ -93,7 +93,7 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The image scanning configuration for the repository. This determines whether images are scanned for known vulnerabilities after being pushed to the repository.",
+		//	  "description": "The ``imageScanningConfiguration`` parameter is being deprecated, in favor of specifying the image scanning configuration at the registry level. For more information, see ``PutRegistryScanningConfiguration``.\n  The image scanning configuration for the repository. This determines whether images are scanned for known vulnerabilities after being pushed to the repository.",
 		//	  "properties": {
 		//	    "ScanOnPush": {
 		//	      "description": "The setting that determines whether images are scanned after being pushed to a repository. If set to ``true``, images will be scanned after being pushed. If this parameter is not specified, it will default to ``false`` and images will not be scanned unless a scan is manually started.",
@@ -110,7 +110,7 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The image scanning configuration for the repository. This determines whether images are scanned for known vulnerabilities after being pushed to the repository.",
+			Description: "The ``imageScanningConfiguration`` parameter is being deprecated, in favor of specifying the image scanning configuration at the registry level. For more information, see ``PutRegistryScanningConfiguration``.\n  The image scanning configuration for the repository. This determines whether images are scanned for known vulnerabilities after being pushed to the repository.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ImageTagMutability
@@ -134,11 +134,11 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The image tag mutability exclusion filters associated with the repository. These filters specify which image tags can override the repository's default image tag mutability setting.",
+		//	  "description": "A list of filters that specify which image tags are excluded from the repository's image tag mutability setting.",
 		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "Overrides the default image tag mutability setting of the repository for image tags that match the specified filters.",
+		//	    "description": "A filter that specifies which image tags should be excluded from the repository's image tag mutability setting.",
 		//	    "properties": {
 		//	      "ImageTagMutabilityExclusionFilterType": {
 		//	        "description": "Specifies the type of filter to use for excluding image tags from the repository's mutability setting.",
@@ -180,7 +180,7 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "The image tag mutability exclusion filters associated with the repository. These filters specify which image tags can override the repository's default image tag mutability setting.",
+			Description: "A list of filters that specify which image tags are excluded from the repository's image tag mutability setting.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LifecyclePolicy

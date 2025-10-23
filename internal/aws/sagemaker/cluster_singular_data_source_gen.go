@@ -1054,6 +1054,47 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Custom tags for managing the SageMaker HyperPod cluster as an AWS resource. You can add tags to your cluster in the same way you add them in other AWS services that support tagging.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: TieredStorageConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for tiered storage in the SageMaker HyperPod cluster.",
+		//	  "properties": {
+		//	    "InstanceMemoryAllocationPercentage": {
+		//	      "description": "The percentage of instance memory to allocate for tiered storage.",
+		//	      "type": "integer"
+		//	    },
+		//	    "Mode": {
+		//	      "description": "The mode of tiered storage.",
+		//	      "enum": [
+		//	        "Enable",
+		//	        "Disable"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Mode"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"tiered_storage_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InstanceMemoryAllocationPercentage
+				"instance_memory_allocation_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The percentage of instance memory to allocate for tiered storage.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Mode
+				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The mode of tiered storage.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for tiered storage in the SageMaker HyperPod cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcConfig
 		// CloudFormation resource type schema:
 		//
@@ -1127,59 +1168,61 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Cluster").WithTerraformTypeName("awscc_sagemaker_cluster")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"alarm_name":                  "AlarmName",
-		"auto_rollback_configuration": "AutoRollbackConfiguration",
-		"auto_scaler_type":            "AutoScalerType",
-		"auto_scaling":                "AutoScaling",
-		"cluster_arn":                 "ClusterArn",
-		"cluster_name":                "ClusterName",
-		"cluster_role":                "ClusterRole",
-		"cluster_status":              "ClusterStatus",
-		"creation_time":               "CreationTime",
-		"current_count":               "CurrentCount",
-		"deployment_config":           "DeploymentConfig",
-		"ebs_volume_config":           "EbsVolumeConfig",
-		"eks":                         "Eks",
-		"environment_config":          "EnvironmentConfig",
-		"execution_role":              "ExecutionRole",
-		"failure_message":             "FailureMessage",
-		"fsx_lustre_config":           "FSxLustreConfig",
-		"image_id":                    "ImageId",
-		"instance_count":              "InstanceCount",
-		"instance_group_name":         "InstanceGroupName",
-		"instance_groups":             "InstanceGroups",
-		"instance_storage_configs":    "InstanceStorageConfigs",
-		"instance_type":               "InstanceType",
-		"key":                         "Key",
-		"life_cycle_config":           "LifeCycleConfig",
-		"maximum_batch_size":          "MaximumBatchSize",
-		"mode":                        "Mode",
-		"node_provisioning_mode":      "NodeProvisioningMode",
-		"node_recovery":               "NodeRecovery",
-		"on_create":                   "OnCreate",
-		"on_start_deep_health_checks": "OnStartDeepHealthChecks",
-		"orchestrator":                "Orchestrator",
-		"override_vpc_config":         "OverrideVpcConfig",
-		"per_unit_storage_throughput": "PerUnitStorageThroughput",
-		"restricted_instance_groups":  "RestrictedInstanceGroups",
-		"rollback_maximum_batch_size": "RollbackMaximumBatchSize",
-		"rolling_update_policy":       "RollingUpdatePolicy",
-		"root_volume":                 "RootVolume",
-		"schedule_expression":         "ScheduleExpression",
-		"scheduled_update_config":     "ScheduledUpdateConfig",
-		"security_group_ids":          "SecurityGroupIds",
-		"size_in_gi_b":                "SizeInGiB",
-		"source_s3_uri":               "SourceS3Uri",
-		"subnets":                     "Subnets",
-		"tags":                        "Tags",
-		"threads_per_core":            "ThreadsPerCore",
-		"training_plan_arn":           "TrainingPlanArn",
-		"type":                        "Type",
-		"value":                       "Value",
-		"volume_kms_key_id":           "VolumeKmsKeyId",
-		"volume_size_in_gb":           "VolumeSizeInGB",
-		"vpc_config":                  "VpcConfig",
-		"wait_interval_in_seconds":    "WaitIntervalInSeconds",
+		"alarm_name":                            "AlarmName",
+		"auto_rollback_configuration":           "AutoRollbackConfiguration",
+		"auto_scaler_type":                      "AutoScalerType",
+		"auto_scaling":                          "AutoScaling",
+		"cluster_arn":                           "ClusterArn",
+		"cluster_name":                          "ClusterName",
+		"cluster_role":                          "ClusterRole",
+		"cluster_status":                        "ClusterStatus",
+		"creation_time":                         "CreationTime",
+		"current_count":                         "CurrentCount",
+		"deployment_config":                     "DeploymentConfig",
+		"ebs_volume_config":                     "EbsVolumeConfig",
+		"eks":                                   "Eks",
+		"environment_config":                    "EnvironmentConfig",
+		"execution_role":                        "ExecutionRole",
+		"failure_message":                       "FailureMessage",
+		"fsx_lustre_config":                     "FSxLustreConfig",
+		"image_id":                              "ImageId",
+		"instance_count":                        "InstanceCount",
+		"instance_group_name":                   "InstanceGroupName",
+		"instance_groups":                       "InstanceGroups",
+		"instance_memory_allocation_percentage": "InstanceMemoryAllocationPercentage",
+		"instance_storage_configs":              "InstanceStorageConfigs",
+		"instance_type":                         "InstanceType",
+		"key":                                   "Key",
+		"life_cycle_config":                     "LifeCycleConfig",
+		"maximum_batch_size":                    "MaximumBatchSize",
+		"mode":                                  "Mode",
+		"node_provisioning_mode":                "NodeProvisioningMode",
+		"node_recovery":                         "NodeRecovery",
+		"on_create":                             "OnCreate",
+		"on_start_deep_health_checks":           "OnStartDeepHealthChecks",
+		"orchestrator":                          "Orchestrator",
+		"override_vpc_config":                   "OverrideVpcConfig",
+		"per_unit_storage_throughput":           "PerUnitStorageThroughput",
+		"restricted_instance_groups":            "RestrictedInstanceGroups",
+		"rollback_maximum_batch_size":           "RollbackMaximumBatchSize",
+		"rolling_update_policy":                 "RollingUpdatePolicy",
+		"root_volume":                           "RootVolume",
+		"schedule_expression":                   "ScheduleExpression",
+		"scheduled_update_config":               "ScheduledUpdateConfig",
+		"security_group_ids":                    "SecurityGroupIds",
+		"size_in_gi_b":                          "SizeInGiB",
+		"source_s3_uri":                         "SourceS3Uri",
+		"subnets":                               "Subnets",
+		"tags":                                  "Tags",
+		"threads_per_core":                      "ThreadsPerCore",
+		"tiered_storage_config":                 "TieredStorageConfig",
+		"training_plan_arn":                     "TrainingPlanArn",
+		"type":                                  "Type",
+		"value":                                 "Value",
+		"volume_kms_key_id":                     "VolumeKmsKeyId",
+		"volume_size_in_gb":                     "VolumeSizeInGB",
+		"vpc_config":                            "VpcConfig",
+		"wait_interval_in_seconds":              "WaitIntervalInSeconds",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
