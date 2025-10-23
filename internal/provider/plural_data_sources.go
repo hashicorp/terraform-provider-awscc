@@ -367,6 +367,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_events_connections -cftype AWS::Events::Connection -package events ../aws/events/connection_plural_data_source_gen.go ../aws/events/connection_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_events_endpoints -cftype AWS::Events::Endpoint -package events ../aws/events/endpoint_plural_data_source_gen.go ../aws/events/endpoint_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_events_event_buses -cftype AWS::Events::EventBus -package events ../aws/events/event_bus_plural_data_source_gen.go ../aws/events/event_bus_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_events_event_bus_policies -cftype AWS::Events::EventBusPolicy -package events ../aws/events/event_bus_policy_plural_data_source_gen.go ../aws/events/event_bus_policy_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_events_rules -cftype AWS::Events::Rule -package events ../aws/events/rule_plural_data_source_gen.go ../aws/events/rule_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_evidently_segments -cftype AWS::Evidently::Segment -package evidently ../aws/evidently/segment_plural_data_source_gen.go ../aws/evidently/segment_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_evs_environments -cftype AWS::EVS::Environment -package evs ../aws/evs/environment_plural_data_source_gen.go ../aws/evs/environment_plural_data_source_gen_test.go
@@ -776,6 +777,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_route53resolver_resolver_query_logging_config_associations -cftype AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation -package route53resolver ../aws/route53resolver/resolver_query_logging_config_association_plural_data_source_gen.go ../aws/route53resolver/resolver_query_logging_config_association_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_route53resolver_resolver_rules -cftype AWS::Route53Resolver::ResolverRule -package route53resolver ../aws/route53resolver/resolver_rule_plural_data_source_gen.go ../aws/route53resolver/resolver_rule_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_route53resolver_resolver_rule_associations -cftype AWS::Route53Resolver::ResolverRuleAssociation -package route53resolver ../aws/route53resolver/resolver_rule_association_plural_data_source_gen.go ../aws/route53resolver/resolver_rule_association_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_rtbfabric_requester_gateways -cftype AWS::RTBFabric::RequesterGateway -package rtbfabric ../aws/rtbfabric/requester_gateway_plural_data_source_gen.go ../aws/rtbfabric/requester_gateway_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_s3_access_grants -cftype AWS::S3::AccessGrant -package s3 ../aws/s3/access_grant_plural_data_source_gen.go ../aws/s3/access_grant_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_s3_access_grants_instances -cftype AWS::S3::AccessGrantsInstance -package s3 ../aws/s3/access_grants_instance_plural_data_source_gen.go ../aws/s3/access_grants_instance_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_s3_access_grants_locations -cftype AWS::S3::AccessGrantsLocation -package s3 ../aws/s3/access_grants_location_plural_data_source_gen.go ../aws/s3/access_grants_location_plural_data_source_gen_test.go
@@ -1137,6 +1139,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/route53recoverycontrol"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/route53recoveryreadiness"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/route53resolver"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/rtbfabric"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/rum"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/s3"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/s3express"

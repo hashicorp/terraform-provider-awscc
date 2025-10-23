@@ -1,0 +1,264 @@
+{
+  "typeName": "AWS::APS::AnomalyDetector",
+  "description": "AnomalyDetector schema for cloudformation.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-aps",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate a tag level security for the resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "Label": {
+      "description": "A key-value pair to provide meta-data and multi-dimensional data analysis for filtering and aggregation.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "MissingDataAction": {
+      "properties": {
+        "MarkAsAnomaly": {
+          "type": "boolean"
+        },
+        "Skip": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "required": [
+            "MarkAsAnomaly"
+          ]
+        },
+        {
+          "required": [
+            "Skip"
+          ]
+        }
+      ]
+    },
+    "IgnoreNearExpected": {
+      "properties": {
+        "Amount": {
+          "type": "number"
+        },
+        "Ratio": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "required": [
+            "Amount"
+          ]
+        },
+        {
+          "required": [
+            "Ratio"
+          ]
+        }
+      ]
+    },
+    "RandomCutForestConfiguration": {
+      "type": "object",
+      "properties": {
+        "Query": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ShingleSize": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 1024,
+          "default": 8
+        },
+        "SampleSize": {
+          "type": "integer",
+          "minimum": 256,
+          "maximum": 1024,
+          "default": 256
+        },
+        "IgnoreNearExpectedFromAbove": {
+          "$ref": "#/definitions/IgnoreNearExpected"
+        },
+        "IgnoreNearExpectedFromBelow": {
+          "$ref": "#/definitions/IgnoreNearExpected"
+        }
+      },
+      "required": [
+        "Query"
+      ],
+      "additionalProperties": false
+    },
+    "AnomalyDetectorConfiguration": {
+      "type": "object",
+      "properties": {
+        "RandomCutForest": {
+          "$ref": "#/definitions/RandomCutForestConfiguration"
+        }
+      },
+      "required": [
+        "RandomCutForest"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Workspace": {
+      "description": "Required to identify a specific APS Workspace associated with this Anomaly Detector.",
+      "type": "string",
+      "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$"
+    },
+    "Alias": {
+      "description": "The AnomalyDetector alias.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "EvaluationIntervalInSeconds": {
+      "description": "The AnomalyDetector period of detection and metric generation.",
+      "type": "integer",
+      "default": 60
+    },
+    "Arn": {
+      "description": "The AnomalyDetector ARN.",
+      "type": "string",
+      "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:anomalydetector/[a-zA-Z0-9-]+/[0-9A-Za-z][-.0-9A-Z_a-z]*$"
+    },
+    "Labels": {
+      "description": "An array of key-value pairs to provide meta-data.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Label"
+      }
+    },
+    "MissingDataAction": {
+      "description": "The action to perform when running the expression returns no data.",
+      "$ref": "#/definitions/MissingDataAction"
+    },
+    "Configuration": {
+      "description": "Determines the anomaly detector's algorithm and its configuration.",
+      "$ref": "#/definitions/AnomalyDetectorConfiguration"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Workspace",
+    "Configuration",
+    "Alias"
+  ],
+  "createOnlyProperties": [
+    "/properties/Alias",
+    "/properties/Workspace"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "aps:TagResource",
+      "aps:UntagResource"
+    ]
+  },
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "aps:CreateAnomalyDetector",
+        "aps:DescribeAnomalyDetector",
+        "aps:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "aps:DescribeAnomalyDetector",
+        "aps:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "aps:PutAnomalyDetector",
+        "aps:DescribeAnomalyDetector",
+        "aps:TagResource",
+        "aps:UntagResource",
+        "aps:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "aps:DeleteAnomalyDetector",
+        "aps:DescribeAnomalyDetector"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "aps:ListAnomalyDetectors",
+        "aps:ListTagsForResource"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "Arn": {
+            "$ref": "resource-schema.json#/properties/Workspace"
+          }
+        },
+        "required": [
+          "Arn"
+        ]
+      }
+    }
+  }
+}

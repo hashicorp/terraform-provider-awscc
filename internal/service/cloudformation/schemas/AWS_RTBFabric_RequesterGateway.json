@@ -1,0 +1,252 @@
+{
+  "typeName": "AWS::RTBFabric::RequesterGateway",
+  "description": "Resource Type definition for AWS::RTBFabric::RequesterGateway Resource Type.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "Description": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9 ]+$"
+    },
+    "VpcId": {
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "relationshipRef": {
+        "typeName": "AWS::EC2::VPC",
+        "propertyPath": "/properties/VpcId"
+      }
+    },
+    "SubnetIds": {
+      "type": "array",
+      "description": "The ID of one or more subnets in order to create a requester gateway.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "type": "string",
+        "relationshipRef": {
+          "typeName": "AWS::EC2::Subnet",
+          "propertyPath": "/properties/SubnetId"
+        }
+      },
+      "minItems": 1
+    },
+    "SecurityGroupIds": {
+      "type": "array",
+      "description": "The ID of one or more security groups in order to create a requester gateway.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "type": "string",
+        "anyOf": [
+          {
+            "relationshipRef": {
+              "typeName": "AWS::EC2::SecurityGroup",
+              "propertyPath": "/properties/GroupId"
+            }
+          },
+          {
+            "relationshipRef": {
+              "typeName": "AWS::EC2::SecurityGroup",
+              "propertyPath": "/properties/Id"
+            }
+          }
+        ]
+      },
+      "minItems": 1
+    },
+    "GatewayId": {
+      "type": "string",
+      "pattern": "^(rtbapp-[a-z0-9-]{1,25}|rtb-gw-[a-z0-9-]{1,25})$"
+    },
+    "DomainName": {
+      "type": "string",
+      "pattern": "^(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)(?:\\.(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?))+$"
+    },
+    "RequesterGatewayStatus": {
+      "type": "string",
+      "enum": [
+        "PENDING_CREATION",
+        "ACTIVE",
+        "PENDING_DELETION",
+        "DELETED",
+        "ERROR",
+        "PENDING_UPDATE",
+        "ISOLATED",
+        "PENDING_ISOLATION",
+        "PENDING_RESTORATION"
+      ]
+    },
+    "CreatedTimestamp": {
+      "type": "string"
+    },
+    "UpdatedTimestamp": {
+      "type": "string"
+    },
+    "Arn": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 20,
+      "pattern": "^arn:aws:(rtbfabric|rtbfabric):[a-zA-Z0-9_-]+:[0-9]{12}:gateway/[a-zA-Z0-9-]+$"
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": ""
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+          "minLength": 0,
+          "maxLength": 1600
+        }
+      },
+      "required": [
+        "Key"
+      ]
+    },
+    "Tags": {
+      "type": "array",
+      "insertionOrder": false,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 50,
+      "description": "Tags to assign to the Requester Gateway."
+    },
+    "ActiveLinksCount": {
+      "type": "integer"
+    },
+    "TotalLinksCount": {
+      "type": "integer"
+    }
+  },
+  "properties": {
+    "Tags": {
+      "$ref": "#/definitions/Tags"
+    },
+    "Description": {
+      "$ref": "#/definitions/Description"
+    },
+    "VpcId": {
+      "$ref": "#/definitions/VpcId"
+    },
+    "SubnetIds": {
+      "$ref": "#/definitions/SubnetIds"
+    },
+    "SecurityGroupIds": {
+      "$ref": "#/definitions/SecurityGroupIds"
+    },
+    "GatewayId": {
+      "$ref": "#/definitions/GatewayId"
+    },
+    "DomainName": {
+      "$ref": "#/definitions/DomainName"
+    },
+    "RequesterGatewayStatus": {
+      "$ref": "#/definitions/RequesterGatewayStatus"
+    },
+    "CreatedTimestamp": {
+      "$ref": "#/definitions/CreatedTimestamp"
+    },
+    "UpdatedTimestamp": {
+      "$ref": "#/definitions/UpdatedTimestamp"
+    },
+    "Arn": {
+      "$ref": "#/definitions/Arn"
+    },
+    "ActiveLinksCount": {
+      "$ref": "#/definitions/ActiveLinksCount"
+    },
+    "TotalLinksCount": {
+      "$ref": "#/definitions/TotalLinksCount"
+    }
+  },
+  "required": [
+    "VpcId",
+    "SubnetIds",
+    "SecurityGroupIds"
+  ],
+  "readOnlyProperties": [
+    "/properties/GatewayId",
+    "/properties/Arn",
+    "/properties/RequesterGatewayStatus",
+    "/properties/DomainName",
+    "/properties/CreatedTimestamp",
+    "/properties/UpdatedTimestamp",
+    "/properties/ActiveLinksCount",
+    "/properties/TotalLinksCount"
+  ],
+  "conditionalCreateOnlyProperties": [
+    "/properties/Description",
+    "/properties/VpcId",
+    "/properties/SubnetIds",
+    "/properties/SecurityGroupIds"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/GatewayId"
+    ]
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "rtbfabric:CreateRequesterGateway",
+        "rtbfabric:GetRequesterGateway",
+        "rtbfabric:TagResource",
+        "rtbfabric:ListTagsForResource",
+        "iam:CreateServiceLinkedRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "rtbfabric:GetRequesterGateway",
+        "rtbfabric:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "rtbfabric:GetRequesterGateway",
+        "rtbfabric:UpdateRequesterGateway",
+        "rtbfabric:TagResource",
+        "rtbfabric:UntagResource",
+        "rtbfabric:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "rtbfabric:DeleteRequesterGateway",
+        "rtbfabric:GetRequesterGateway"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "rtbfabric:ListRequesterGateways"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "rtbfabric:TagResource",
+      "rtbfabric:UntagResource",
+      "rtbfabric:ListTagsForResource"
+    ]
+  },
+  "additionalProperties": false
+}

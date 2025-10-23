@@ -22,6 +22,10 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_aps_anomaly_detector",
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_aps_resource_policy",
         "generateListResource": true,
         "identifier": ["WorkspaceArn"]
@@ -2402,6 +2406,11 @@
         "resource": "awscc_events_event_bus",
         "generateListResource": true,
         "identifier": ["Name"]
+    },
+    {
+        "resource": "awscc_events_event_bus_policy",
+        "generateListResource": true,
+        "identifier": ["EventBusName","StatementId"]
     },
     {
         "resource": "awscc_events_rule",
@@ -4827,6 +4836,11 @@
         "resource": "awscc_route53resolver_resolver_rule_association",
         "generateListResource": true,
         "identifier": ["ResolverRuleAssociationId"]
+    },
+    {
+        "resource": "awscc_rtbfabric_requester_gateway",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_s3_access_grant",
