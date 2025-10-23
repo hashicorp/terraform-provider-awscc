@@ -595,6 +595,28 @@
         }
       }
     },
+    "TieredStorageConfig": {
+      "description": "Configuration for tiered storage in the SageMaker HyperPod cluster.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Mode": {
+          "description": "The mode of tiered storage.",
+          "type": "string",
+          "enum": [
+            "Enable",
+            "Disable"
+          ]
+        },
+        "InstanceMemoryAllocationPercentage": {
+          "description": "The percentage of instance memory to allocate for tiered storage.",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "Mode"
+      ]
+    },
     "FSxLustreConfig": {
       "description": "Configuration settings for an Amazon FSx for Lustre file system to be used with the cluster.",
       "additionalProperties": false,
@@ -701,6 +723,9 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "TieredStorageConfig": {
+      "$ref": "#/definitions/TieredStorageConfig"
     }
   }
 }

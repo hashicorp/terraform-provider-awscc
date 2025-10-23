@@ -32,6 +32,10 @@
       "type": "boolean",
       "description": "Indicates that minor version patches are applied automatically.\n\nWhen updating this property, some interruptions may occur."
     },
+    "PubliclyAccessible": {
+      "type": "boolean",
+      "description": "Indicates that public accessibility is enabled. This should be enabled in combination with IAM Auth enabled on the DBCluster"
+    },
     "AvailabilityZone": {
       "type": "string",
       "description": "Specifies the name of the Availability Zone the DB instance is located in."

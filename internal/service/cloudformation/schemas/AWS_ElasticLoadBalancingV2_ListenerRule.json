@@ -103,6 +103,14 @@
         }
       }
     },
+    "RewriteConfigList": {
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/RewriteConfig"
+      }
+    },
     "Action": {
       "description": "Specifies an action for a listener rule.",
       "additionalProperties": false,
@@ -113,7 +121,7 @@
           "type": "integer"
         },
         "TargetGroupArn": {
-          "description": "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to one or more target groups, use ``ForwardConfig`` instead.",
+          "description": "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to multiple target groups, you must use ``ForwardConfig`` instead.",
           "type": "string"
         },
         "FixedResponseConfig": {
@@ -133,7 +141,7 @@
           "$ref": "#/definitions/RedirectConfig"
         },
         "ForwardConfig": {
-          "description": "Information for creating an action that distributes requests among one or more target groups. For Network Load Balancers, you can specify a single target group. Specify only when ``Type`` is ``forward``. If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
+          "description": "Information for creating an action that distributes requests among multiple target groups. Specify only when ``Type`` is ``forward``.\n If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
           "$ref": "#/definitions/ForwardConfig"
         },
         "AuthenticateOidcConfig": {
@@ -165,6 +173,10 @@
         "QueryStringConfig": {
           "description": "Information for a query string condition. Specify only when ``Field`` is ``query-string``.",
           "$ref": "#/definitions/QueryStringConfig"
+        },
+        "RegexValues": {
+          "description": "",
+          "$ref": "#/definitions/ListOfStrings"
         },
         "HostHeaderConfig": {
           "description": "Information for a host header condition. Specify only when ``Field`` is ``host-header``.",
@@ -218,10 +230,27 @@
           "type": "boolean"
         },
         "DurationSeconds": {
-          "description": "The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.",
+          "description": "[Application Load Balancers] The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.",
           "type": "integer"
         }
       }
+    },
+    "RewriteConfig": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Replace": {
+          "type": "string"
+        },
+        "Regex": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Regex",
+        "Replace"
+      ]
     },
     "PathPatternConfig": {
       "description": "Information about a path pattern condition.",
@@ -230,6 +259,10 @@
       "properties": {
         "Values": {
           "description": "The path patterns to compare against the request URL. The maximum size of each string is 128 characters. The comparison is case sensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).\n If you specify multiple strings, the condition is satisfied if one of them matches the request URL. The path pattern is compared only to the path of the URL, not to its query string.",
+          "$ref": "#/definitions/ListOfStrings"
+        },
+        "RegexValues": {
+          "description": "",
           "$ref": "#/definitions/ListOfStrings"
         }
       }
@@ -263,6 +296,10 @@
       "properties": {
         "Values": {
           "description": "The strings to compare against the value of the HTTP header. The maximum size of each string is 128 characters. The comparison strings are case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).\n If the same header appears multiple times in the request, we search them in order until a match is found.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the value of the HTTP header. To require that all of the strings are a match, create one condition per string.",
+          "$ref": "#/definitions/ListOfStrings"
+        },
+        "RegexValues": {
+          "description": "",
           "$ref": "#/definitions/ListOfStrings"
         },
         "HttpHeaderName": {
@@ -355,6 +392,19 @@
         "StatusCode"
       ]
     },
+    "RewriteConfigObject": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Rewrites": {
+          "$ref": "#/definitions/RewriteConfigList"
+        }
+      },
+      "required": [
+        "Rewrites"
+      ]
+    },
     "QueryStringKeyValue": {
       "description": "Information about a key/value pair.",
       "additionalProperties": false,
@@ -371,7 +421,7 @@
       }
     },
     "ForwardConfig": {
-      "description": "Information for creating an action that distributes requests among one or more target groups. For Network Load Balancers, you can specify a single target group. Specify only when ``Type`` is ``forward``. If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
+      "description": "Information for creating an action that distributes requests among multiple target groups. Specify only when ``Type`` is ``forward``.\n If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
@@ -398,8 +448,43 @@
         "Values": {
           "description": "The host names. The maximum size of each name is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). You must include at least one \".\" character. You can include only alphabetical characters after the final \".\" character.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the host name.",
           "$ref": "#/definitions/ListOfStrings"
+        },
+        "RegexValues": {
+          "description": "",
+          "$ref": "#/definitions/ListOfStrings"
         }
       }
+    },
+    "Transform": {
+      "oneOf": [
+        {
+          "required": [
+            "HostHeaderRewriteConfig"
+          ]
+        },
+        {
+          "required": [
+            "UrlRewriteConfig"
+          ]
+        }
+      ],
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Type": {
+          "type": "string"
+        },
+        "UrlRewriteConfig": {
+          "$ref": "#/definitions/RewriteConfigObject"
+        },
+        "HostHeaderRewriteConfig": {
+          "$ref": "#/definitions/RewriteConfigObject"
+        }
+      },
+      "required": [
+        "Type"
+      ]
     },
     "HttpRequestMethodConfig": {
       "description": "Information about an HTTP method condition.\n HTTP defines a set of request methods, also referred to as HTTP verbs. For more information, see the [HTTP Method Registry](https://docs.aws.amazon.com/https://www.iana.org/assignments/http-methods/http-methods.xhtml). You can also define custom HTTP methods.",
@@ -534,6 +619,15 @@
     "RuleArn": {
       "description": "",
       "type": "string"
+    },
+    "Transforms": {
+      "uniqueItems": true,
+      "description": "",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Transform"
+      }
     },
     "Conditions": {
       "uniqueItems": true,
