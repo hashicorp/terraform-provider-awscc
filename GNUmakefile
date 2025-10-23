@@ -289,6 +289,7 @@ biglister: prereq-go ## List all resources and data sources
 .PHONY: build
 .PHONY: cleanschemas
 .PHONY: commitdatas
+.PHONY: commitdocs
 .PHONY: commitresources
 .PHONY: commitschemas
 .PHONY: commitrefresh
