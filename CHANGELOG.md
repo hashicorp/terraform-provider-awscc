@@ -8,6 +8,8 @@ ENHANCEMENTS:
 * **New Data Source:** `awscc_events_event_bus_policy`
 * **New Data Source:** `awscc_rtbfabric_requester_gateway`
 * **New Data Source:** `awscc_rtbfabric_requester_gateways`
+* **New List Resource:** `awscc_events_event_bus_policy`
+* **New List Resource:** `awscc_rtbfabric_requester_gateway`
 * **New Resource:** `awscc_aps_anomaly_detector`
 * **New Resource:** `awscc_events_event_bus_policy`
 * **New Resource:** `awscc_rtbfabric_requester_gateway`
