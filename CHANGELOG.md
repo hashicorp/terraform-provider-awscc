@@ -3,6 +3,9 @@
 ENHANCEMENTS:
 
 * provider: Include CloudFormation hook failure details in error messages for better debugging
+
+FEATURES:
+
 * **New Data Source:** `awscc_aps_anomaly_detector`
 * **New Data Source:** `awscc_events_event_bus_policies`
 * **New Data Source:** `awscc_events_event_bus_policy`
