@@ -65,6 +65,20 @@ func imagePipelineResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DeploymentId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The deployment ID of the pipeline, used for resource create/update triggers.",
+		//	  "type": "string"
+		//	}
+		"deployment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The deployment ID of the pipeline, used for resource create/update triggers.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -656,6 +670,7 @@ func imagePipelineResource(ctx context.Context) (resource.Resource, error) {
 		"auto_disable_policy":                "AutoDisablePolicy",
 		"container_recipe_arn":               "ContainerRecipeArn",
 		"container_tags":                     "ContainerTags",
+		"deployment_id":                      "DeploymentId",
 		"description":                        "Description",
 		"distribution_configuration_arn":     "DistributionConfigurationArn",
 		"ecr_configuration":                  "EcrConfiguration",

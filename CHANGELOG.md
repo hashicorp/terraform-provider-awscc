@@ -1,8 +1,21 @@
-## 1.61.0 (Unreleased)
+## 1.61.0 (October 24, 2025)
 
 ENHANCEMENTS:
 
 * provider: Include CloudFormation hook failure details in error messages for better debugging
+
+FEATURES:
+
+* **New Data Source:** `awscc_aps_anomaly_detector`
+* **New Data Source:** `awscc_events_event_bus_policies`
+* **New Data Source:** `awscc_events_event_bus_policy`
+* **New Data Source:** `awscc_rtbfabric_requester_gateway`
+* **New Data Source:** `awscc_rtbfabric_requester_gateways`
+* **New List Resource:** `awscc_events_event_bus_policy`
+* **New List Resource:** `awscc_rtbfabric_requester_gateway`
+* **New Resource:** `awscc_aps_anomaly_detector`
+* **New Resource:** `awscc_events_event_bus_policy`
+* **New Resource:** `awscc_rtbfabric_requester_gateway`
 
 ## 1.60.0 (October 16, 2025)
 

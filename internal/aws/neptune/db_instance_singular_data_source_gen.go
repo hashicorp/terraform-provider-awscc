@@ -154,6 +154,17 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: PubliclyAccessible
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates that public accessibility is enabled. This should be enabled in combination with IAM Auth enabled on the DBCluster",
+		//	  "type": "boolean"
+		//	}
+		"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates that public accessibility is enabled. This should be enabled in combination with IAM Auth enabled on the DBCluster",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -230,6 +241,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key":                          "Key",
 		"port":                         "Port",
 		"preferred_maintenance_window": "PreferredMaintenanceWindow",
+		"publicly_accessible":          "PubliclyAccessible",
 		"tags":                         "Tags",
 		"value":                        "Value",
 	})

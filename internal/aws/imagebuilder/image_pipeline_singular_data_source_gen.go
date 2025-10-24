@@ -45,6 +45,17 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DeploymentId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The deployment ID of the pipeline, used for resource create/update triggers.",
+		//	  "type": "string"
+		//	}
+		"deployment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The deployment ID of the pipeline, used for resource create/update triggers.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -469,6 +480,7 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		"auto_disable_policy":                "AutoDisablePolicy",
 		"container_recipe_arn":               "ContainerRecipeArn",
 		"container_tags":                     "ContainerTags",
+		"deployment_id":                      "DeploymentId",
 		"description":                        "Description",
 		"distribution_configuration_arn":     "DistributionConfigurationArn",
 		"ecr_configuration":                  "EcrConfiguration",

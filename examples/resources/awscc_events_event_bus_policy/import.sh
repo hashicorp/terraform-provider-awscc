@@ -1,0 +1,1 @@
+$ terraform import awscc_events_event_bus_policy.example "event_bus_name|statement_id"

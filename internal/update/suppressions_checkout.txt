@@ -1,3 +1,10 @@
+# Schema files that should be suppressed (reverted) during updates
+# These schemas have changes which prevent Terraform schema generation,
+# or they no longer exist and are pending major version removal.
+#
+# Lines starting with # are comments and will be ignored.
+# Add one file path per line.
+
 internal/service/cloudformation/schemas/AWS_AppFlow_ConnectorProfile.json
 internal/service/cloudformation/schemas/AWS_Bedrock_FlowVersion.json
 internal/service/cloudformation/schemas/AWS_ControlTower_EnabledControl.json
@@ -14,6 +21,9 @@ internal/service/cloudformation/schemas/AWS_NimbleStudio_LaunchProfile.json
 internal/service/cloudformation/schemas/AWS_NimbleStudio_StreamingImage.json
 internal/service/cloudformation/schemas/AWS_NimbleStudio_Studio.json
 internal/service/cloudformation/schemas/AWS_NimbleStudio_StudioComponent.json
+internal/service/cloudformation/schemas/AWS_Omics_Workflow.json
+internal/service/cloudformation/schemas/AWS_Omics_WorkflowVersion.json
+internal/service/cloudformation/schemas/AWS_OpsWorksCM_Server.json
 internal/service/cloudformation/schemas/AWS_QuickSight_Analysis.json
 internal/service/cloudformation/schemas/AWS_QuickSight_Dashboard.json
 internal/service/cloudformation/schemas/AWS_QuickSight_DataSet.json

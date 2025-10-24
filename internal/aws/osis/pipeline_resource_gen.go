@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -245,7 +246,7 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the pipeline.",
-		//	  "maxLength": 76,
+		//	  "maxLength": 78,
 		//	  "minLength": 46,
 		//	  "pattern": "^arn:(aws|aws\\-cn|aws\\-us\\-gov|aws\\-iso|aws\\-iso\\-b):osis:.+:pipeline\\/.+$",
 		//	  "type": "string"
@@ -292,6 +293,64 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PipelineRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Pipeline Role (ARN) for the pipeline.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "pattern": "^arn:(aws|aws\\-cn|aws\\-us\\-gov|aws\\-iso|aws\\-iso\\-b|aws\\-iso\\-e|aws\\-iso\\-f):iam::[0-9]+:role\\/.*$",
+		//	  "type": "string"
+		//	}
+		"pipeline_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Pipeline Role (ARN) for the pipeline.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws\\-cn|aws\\-us\\-gov|aws\\-iso|aws\\-iso\\-b|aws\\-iso\\-e|aws\\-iso\\-f):iam::[0-9]+:role\\/.*$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ResourcePolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Policy": {
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Policy"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"resource_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Policy
+				"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: jsontypes.NormalizedType{},
+					Optional:   true,
+					Computed:   true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -738,6 +797,9 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		"pipeline_arn":                "PipelineArn",
 		"pipeline_configuration_body": "PipelineConfigurationBody",
 		"pipeline_name":               "PipelineName",
+		"pipeline_role_arn":           "PipelineRoleArn",
+		"policy":                      "Policy",
+		"resource_policy":             "ResourcePolicy",
 		"security_group_ids":          "SecurityGroupIds",
 		"subnet_ids":                  "SubnetIds",
 		"tags":                        "Tags",

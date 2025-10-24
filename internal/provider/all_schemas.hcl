@@ -35,6 +35,11 @@ resource_schema "aws_aiops_investigation_group" {
   cloudformation_type_name = "AWS::AIOps::InvestigationGroup"
 }
 
+resource_schema "aws_aps_anomaly_detector" {
+  cloudformation_type_name               = "AWS::APS::AnomalyDetector"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_aps_resource_policy" {
   cloudformation_type_name = "AWS::APS::ResourcePolicy"
 }
@@ -2368,6 +2373,10 @@ resource_schema "aws_events_event_bus" {
   cloudformation_type_name = "AWS::Events::EventBus"
 }
 
+resource_schema "aws_events_event_bus_policy" {
+  cloudformation_type_name = "AWS::Events::EventBusPolicy"
+}
+
 resource_schema "aws_events_rule" {
   cloudformation_type_name = "AWS::Events::Rule"
 }
@@ -4628,6 +4637,10 @@ resource_schema "aws_route53resolver_resolver_rule" {
 
 resource_schema "aws_route53resolver_resolver_rule_association" {
   cloudformation_type_name = "AWS::Route53Resolver::ResolverRuleAssociation"
+}
+
+resource_schema "aws_rtbfabric_requester_gateway" {
+  cloudformation_type_name = "AWS::RTBFabric::RequesterGateway"
 }
 
 resource_schema "aws_s3_access_grant" {

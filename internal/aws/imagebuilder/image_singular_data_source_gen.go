@@ -89,6 +89,40 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The AMI ID of the EC2 AMI in current region.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ImagePipelineExecutionSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The image pipeline execution settings of the image.",
+		//	  "properties": {
+		//	    "DeploymentId": {
+		//	      "description": "The deployment ID of the pipeline, used to trigger new image pipeline executions.",
+		//	      "type": "string"
+		//	    },
+		//	    "OnUpdate": {
+		//	      "description": "Whether to trigger the image pipeline when the pipeline is updated. False by default.",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"image_pipeline_execution_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DeploymentId
+				"deployment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The deployment ID of the pipeline, used to trigger new image pipeline executions.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: OnUpdate
+				"on_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether to trigger the image pipeline when the pipeline is updated. False by default.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The image pipeline execution settings of the image.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ImageRecipeArn
 		// CloudFormation resource type schema:
 		//
@@ -439,37 +473,40 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::Image").WithTerraformTypeName("awscc_imagebuilder_image")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                              "Arn",
-		"container_recipe_arn":             "ContainerRecipeArn",
-		"container_tags":                   "ContainerTags",
-		"distribution_configuration_arn":   "DistributionConfigurationArn",
-		"ecr_configuration":                "EcrConfiguration",
-		"enhanced_image_metadata_enabled":  "EnhancedImageMetadataEnabled",
-		"execution_role":                   "ExecutionRole",
-		"image_id":                         "ImageId",
-		"image_recipe_arn":                 "ImageRecipeArn",
-		"image_scanning_configuration":     "ImageScanningConfiguration",
-		"image_scanning_enabled":           "ImageScanningEnabled",
-		"image_tests_configuration":        "ImageTestsConfiguration",
-		"image_tests_enabled":              "ImageTestsEnabled",
-		"image_uri":                        "ImageUri",
-		"infrastructure_configuration_arn": "InfrastructureConfigurationArn",
-		"latest_version":                   "LatestVersion",
-		"log_group_name":                   "LogGroupName",
-		"logging_configuration":            "LoggingConfiguration",
-		"major":                            "Major",
-		"minor":                            "Minor",
-		"name":                             "Name",
-		"on_failure":                       "OnFailure",
-		"parallel_group":                   "ParallelGroup",
-		"parameters":                       "Parameters",
-		"patch":                            "Patch",
-		"repository_name":                  "RepositoryName",
-		"tags":                             "Tags",
-		"timeout_minutes":                  "TimeoutMinutes",
-		"value":                            "Value",
-		"workflow_arn":                     "WorkflowArn",
-		"workflows":                        "Workflows",
+		"arn":                               "Arn",
+		"container_recipe_arn":              "ContainerRecipeArn",
+		"container_tags":                    "ContainerTags",
+		"deployment_id":                     "DeploymentId",
+		"distribution_configuration_arn":    "DistributionConfigurationArn",
+		"ecr_configuration":                 "EcrConfiguration",
+		"enhanced_image_metadata_enabled":   "EnhancedImageMetadataEnabled",
+		"execution_role":                    "ExecutionRole",
+		"image_id":                          "ImageId",
+		"image_pipeline_execution_settings": "ImagePipelineExecutionSettings",
+		"image_recipe_arn":                  "ImageRecipeArn",
+		"image_scanning_configuration":      "ImageScanningConfiguration",
+		"image_scanning_enabled":            "ImageScanningEnabled",
+		"image_tests_configuration":         "ImageTestsConfiguration",
+		"image_tests_enabled":               "ImageTestsEnabled",
+		"image_uri":                         "ImageUri",
+		"infrastructure_configuration_arn":  "InfrastructureConfigurationArn",
+		"latest_version":                    "LatestVersion",
+		"log_group_name":                    "LogGroupName",
+		"logging_configuration":             "LoggingConfiguration",
+		"major":                             "Major",
+		"minor":                             "Minor",
+		"name":                              "Name",
+		"on_failure":                        "OnFailure",
+		"on_update":                         "OnUpdate",
+		"parallel_group":                    "ParallelGroup",
+		"parameters":                        "Parameters",
+		"patch":                             "Patch",
+		"repository_name":                   "RepositoryName",
+		"tags":                              "Tags",
+		"timeout_minutes":                   "TimeoutMinutes",
+		"value":                             "Value",
+		"workflow_arn":                      "WorkflowArn",
+		"workflows":                         "Workflows",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

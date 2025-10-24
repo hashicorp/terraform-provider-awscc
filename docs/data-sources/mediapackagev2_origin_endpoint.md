@@ -35,6 +35,8 @@ Data Source schema for AWS::MediaPackageV2::OriginEndpoint
 - `low_latency_hls_manifest_urls` (List of String)
 - `low_latency_hls_manifests` (Attributes List) <p>A low-latency HLS manifest configuration.</p> (see [below for nested schema](#nestedatt--low_latency_hls_manifests))
 - `modified_at` (String) <p>The date and time the origin endpoint was modified.</p>
+- `mss_manifest_urls` (List of String)
+- `mss_manifests` (Attributes List) <p>The Microsoft Smooth Streaming (MSS) manifest configurations associated with this origin endpoint.</p> (see [below for nested schema](#nestedatt--mss_manifests))
 - `origin_endpoint_name` (String)
 - `segment` (Attributes) <p>The segment configuration, including the segment name, duration, and other configuration values.</p> (see [below for nested schema](#nestedatt--segment))
 - `startover_window_seconds` (Number) <p>The size of the window (in seconds) to create a window of the live stream that's available for on-demand viewing. Viewers can start-over or catch-up on content that falls within the window. The maximum startover window is 1,209,600 seconds (14 days).</p>
@@ -258,6 +260,29 @@ Read-Only:
 
 
 
+<a id="nestedatt--mss_manifests"></a>
+### Nested Schema for `mss_manifests`
+
+Read-Only:
+
+- `filter_configuration` (Attributes) <p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p> (see [below for nested schema](#nestedatt--mss_manifests--filter_configuration))
+- `manifest_layout` (String)
+- `manifest_name` (String) <p>The name of the MSS manifest. This name is appended to the origin endpoint URL to create the unique path for accessing this specific MSS manifest.</p>
+- `manifest_window_seconds` (Number) <p>The duration (in seconds) of the manifest window. This represents the total amount of content available in the manifest at any given time.</p>
+
+<a id="nestedatt--mss_manifests--filter_configuration"></a>
+### Nested Schema for `mss_manifests.filter_configuration`
+
+Read-Only:
+
+- `clip_start_time` (String) <p>Optionally specify the clip start time for all of your manifest egress requests. When you include clip start time, note that you cannot use clip start time query parameters for this manifest's endpoint URL.</p>
+- `end` (String) <p>Optionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.</p>
+- `manifest_filter` (String) <p>Optionally specify one or more manifest filters for all of your manifest egress requests. When you include a manifest filter, note that you cannot use an identical manifest filter query parameter for this manifest's endpoint URL.</p>
+- `start` (String) <p>Optionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.</p>
+- `time_delay_seconds` (Number) <p>Optionally specify the time delay for all of your manifest egress requests. Enter a value that is smaller than your endpoint's startover window. When you include time delay, note that you cannot use time delay query parameters for this manifest's endpoint URL.</p>
+
+
+
 <a id="nestedatt--segment"></a>
 ### Nested Schema for `segment`
 
@@ -288,6 +313,7 @@ Read-Only:
 Read-Only:
 
 - `cmaf_encryption_method` (String)
+- `ism_encryption_method` (String)
 - `ts_encryption_method` (String)
 
 

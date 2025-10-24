@@ -8,6 +8,7 @@ package osis
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -178,7 +179,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the pipeline.",
-		//	  "maxLength": 76,
+		//	  "maxLength": 78,
 		//	  "minLength": 46,
 		//	  "pattern": "^arn:(aws|aws\\-cn|aws\\-us\\-gov|aws\\-iso|aws\\-iso\\-b):osis:.+:pipeline\\/.+$",
 		//	  "type": "string"
@@ -213,6 +214,45 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"pipeline_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name of the OpenSearch Ingestion Service pipeline to create. Pipeline names are unique across the pipelines owned by an account within an AWS Region.",
 			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PipelineRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Pipeline Role (ARN) for the pipeline.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "pattern": "^arn:(aws|aws\\-cn|aws\\-us\\-gov|aws\\-iso|aws\\-iso\\-b|aws\\-iso\\-e|aws\\-iso\\-f):iam::[0-9]+:role\\/.*$",
+		//	  "type": "string"
+		//	}
+		"pipeline_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Pipeline Role (ARN) for the pipeline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ResourcePolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Policy": {
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Policy"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"resource_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Policy
+				"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: jsontypes.NormalizedType{},
+					Computed:   true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -556,6 +596,9 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"pipeline_arn":                "PipelineArn",
 		"pipeline_configuration_body": "PipelineConfigurationBody",
 		"pipeline_name":               "PipelineName",
+		"pipeline_role_arn":           "PipelineRoleArn",
+		"policy":                      "Policy",
+		"resource_policy":             "ResourcePolicy",
 		"security_group_ids":          "SecurityGroupIds",
 		"subnet_ids":                  "SubnetIds",
 		"tags":                        "Tags",

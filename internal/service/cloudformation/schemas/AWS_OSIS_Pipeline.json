@@ -158,6 +158,18 @@
         }
       },
       "additionalProperties": false
+    },
+    "ResourcePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Policy": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "Policy"
+      ]
     }
   },
   "properties": {
@@ -225,8 +237,15 @@
       "description": "The Amazon Resource Name (ARN) of the pipeline.",
       "type": "string",
       "minLength": 46,
-      "maxLength": 76,
+      "maxLength": 78,
       "pattern": "^arn:(aws|aws\\-cn|aws\\-us\\-gov|aws\\-iso|aws\\-iso\\-b):osis:.+:pipeline\\/.+$"
+    },
+    "PipelineRoleArn": {
+      "description": "The Pipeline Role (ARN) for the pipeline.",
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "^arn:(aws|aws\\-cn|aws\\-us\\-gov|aws\\-iso|aws\\-iso\\-b|aws\\-iso\\-e|aws\\-iso\\-f):iam::[0-9]+:role\\/.*$"
     },
     "IngestEndpointUrls": {
       "type": "array",
@@ -235,6 +254,9 @@
       "items": {
         "type": "string"
       }
+    },
+    "ResourcePolicy": {
+      "$ref": "#/definitions/ResourcePolicy"
     }
   },
   "additionalProperties": false,
@@ -278,6 +300,8 @@
         "osis:GetPipeline",
         "osis:TagResource",
         "osis:ListTagsForResource",
+        "osis:GetResourcePolicy",
+        "osis:PutResourcePolicy",
         "iam:PassRole",
         "iam:CreateServiceLinkedRole",
         "logs:CreateLogDelivery",
@@ -287,7 +311,8 @@
     "read": {
       "permissions": [
         "osis:GetPipeline",
-        "osis:ListTagsForResource"
+        "osis:ListTagsForResource",
+        "osis:GetResourcePolicy"
       ]
     },
     "update": {
@@ -297,6 +322,9 @@
         "osis:ListTagsForResource",
         "osis:TagResource",
         "osis:UntagResource",
+        "osis:GetResourcePolicy",
+        "osis:PutResourcePolicy",
+        "osis:DeleteResourcePolicy",
         "iam:PassRole",
         "logs:GetLogDelivery",
         "logs:UpdateLogDelivery",
