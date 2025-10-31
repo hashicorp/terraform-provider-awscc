@@ -149,6 +149,13 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "LastModificationErrors": {
+      "description": "Errors from the last modification of the attachment.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
   },
   "additionalProperties": false,
@@ -184,7 +191,8 @@
     "/properties/OwnerAccountId",
     "/properties/EdgeLocation",
     "/properties/AttachmentPolicyRuleNumber",
-    "/properties/SegmentName"
+    "/properties/SegmentName",
+    "/properties/LastModificationErrors"
   ],
   "primaryIdentifier": [
     "/properties/AttachmentId"

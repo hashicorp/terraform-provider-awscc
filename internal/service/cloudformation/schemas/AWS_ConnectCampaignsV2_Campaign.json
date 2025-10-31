@@ -22,6 +22,12 @@
       "minimum": 0.01,
       "description": "Allocates outbound capacity for the specific channel of this campaign between multiple active campaigns"
     },
+    "TimeoutDuration": {
+      "type": "integer",
+      "maximum": 300,
+      "minimum": 10,
+      "description": "Timeout duration for a preview contact in seconds"
+    },
     "QueueId": {
       "type": "string",
       "maxLength": 500,
@@ -102,6 +108,30 @@
         "SUNDAY"
       ]
     },
+    "AgentAction": {
+      "type": "string",
+      "description": "Actions that can performed on a contact by an agent",
+      "enum": [
+        "DISCARD"
+      ]
+    },
+    "AgentActions": {
+      "type": "array",
+      "insertionOrder": false,
+      "description": "Actions that can be performed by agent during preview phase",
+      "items": {
+        "$ref": "#/definitions/AgentAction"
+      }
+    },
+    "TimeoutConfig": {
+      "type": "object",
+      "description": "Timeout Config for preview contacts",
+      "properties": {
+        "DurationInSeconds": {
+          "$ref": "#/definitions/TimeoutDuration"
+        }
+      }
+    },
     "PredictiveConfig": {
       "type": "object",
       "description": "Predictive config",
@@ -134,6 +164,26 @@
       "required": [],
       "additionalProperties": false
     },
+    "PreviewConfig": {
+      "type": "object",
+      "description": "Preview config",
+      "properties": {
+        "BandwidthAllocation": {
+          "$ref": "#/definitions/BandwidthAllocation"
+        },
+        "TimeoutConfig": {
+          "$ref": "#/definitions/TimeoutConfig"
+        },
+        "AgentActions": {
+          "$ref": "#/definitions/AgentActions"
+        }
+      },
+      "required": [
+        "BandwidthAllocation",
+        "TimeoutConfig"
+      ],
+      "additionalProperties": false
+    },
     "TelephonyOutboundMode": {
       "type": "object",
       "description": "Telephony Outbound Mode",
@@ -146,6 +196,9 @@
         },
         "AgentlessConfig": {
           "$ref": "#/definitions/AgentlessConfig"
+        },
+        "PreviewConfig": {
+          "$ref": "#/definitions/PreviewConfig"
         }
       },
       "oneOf": [
@@ -162,6 +215,11 @@
         {
           "required": [
             "AgentlessConfig"
+          ]
+        },
+        {
+          "required": [
+            "PreviewConfig"
           ]
         }
       ],

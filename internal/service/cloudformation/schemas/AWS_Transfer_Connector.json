@@ -30,6 +30,55 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 2048
+    },
+    "ConnectorEgressType": {
+      "type": "string",
+      "enum": [
+        "SERVICE_MANAGED",
+        "VPC_LATTICE"
+      ]
+    },
+    "ConnectorVpcLatticeEgressConfig": {
+      "type": "object",
+      "properties": {
+        "ResourceConfigurationArn": {
+          "type": "string",
+          "description": "ARN of the VPC Lattice resource configuration",
+          "minLength": 1,
+          "maxLength": 2048,
+          "pattern": "^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}$"
+        },
+        "PortNumber": {
+          "type": "integer",
+          "description": "Port to connect to on the target VPC Lattice resource",
+          "minimum": 1,
+          "maximum": 65535
+        }
+      },
+      "required": [
+        "ResourceConfigurationArn"
+      ],
+      "additionalProperties": false
+    },
+    "ConnectorEgressConfig": {
+      "type": "object",
+      "properties": {
+        "VpcLattice": {
+          "$ref": "#/definitions/ConnectorVpcLatticeEgressConfig"
+        }
+      },
+      "required": [
+        "VpcLattice"
+      ],
+      "additionalProperties": false
+    },
+    "ConnectorStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "PENDING",
+        "ERRORED"
+      ]
     }
   },
   "properties": {
@@ -132,6 +181,17 @@
       },
       "additionalProperties": false
     },
+    "EgressType": {
+      "description": "Specifies the egress type for the connector.",
+      "$ref": "#/definitions/ConnectorEgressType"
+    },
+    "EgressConfig": {
+      "description": "Egress configuration for the connector.",
+      "$ref": "#/definitions/ConnectorEgressConfig"
+    },
+    "Status": {
+      "$ref": "#/definitions/ConnectorStatus"
+    },
     "SftpConfig": {
       "description": "Configuration for an SFTP connector.",
       "type": "object",
@@ -216,13 +276,13 @@
   },
   "additionalProperties": false,
   "required": [
-    "AccessRole",
-    "Url"
+    "AccessRole"
   ],
   "readOnlyProperties": [
     "/properties/Arn",
     "/properties/ConnectorId",
-    "/properties/ServiceManagedEgressIpAddresses"
+    "/properties/ServiceManagedEgressIpAddresses",
+    "/properties/Status"
   ],
   "primaryIdentifier": [
     "/properties/ConnectorId"
@@ -243,8 +303,12 @@
     "create": {
       "permissions": [
         "transfer:CreateConnector",
+        "transfer:DescribeConnector",
         "transfer:TagResource",
-        "iam:PassRole"
+        "iam:PassRole",
+        "vpc-lattice:CreateServiceNetworkResourceAssociation",
+        "vpc-lattice:GetResourceConfiguration",
+        "vpc-lattice:AssociateViaAWSService"
       ]
     },
     "read": {
@@ -255,9 +319,13 @@
     "update": {
       "permissions": [
         "transfer:UpdateConnector",
+        "transfer:DescribeConnector",
         "transfer:UnTagResource",
         "transfer:TagResource",
-        "iam:PassRole"
+        "iam:PassRole",
+        "vpc-lattice:CreateServiceNetworkResourceAssociation",
+        "vpc-lattice:GetResourceConfiguration",
+        "vpc-lattice:AssociateViaAWSService"
       ]
     },
     "delete": {

@@ -124,7 +124,8 @@
       "type": "string",
       "enum": [
         "MCP",
-        "HTTP"
+        "HTTP",
+        "A2A"
       ]
     },
     "AuthorizerConfiguration": {

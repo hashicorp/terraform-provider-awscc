@@ -14,7 +14,8 @@
     },
     "create": {
       "permissions": [
-        "ec2:CreateVpcEndpointConnectionNotification"
+        "ec2:CreateVpcEndpointConnectionNotification",
+        "ec2:DescribeVpcEndpointConnectionNotifications"
       ]
     },
     "update": {
@@ -30,7 +31,8 @@
     },
     "delete": {
       "permissions": [
-        "ec2:DeleteVpcEndpointConnectionNotifications"
+        "ec2:DeleteVpcEndpointConnectionNotifications",
+        "ec2:DescribeVpcEndpointConnectionNotifications"
       ]
     }
   },

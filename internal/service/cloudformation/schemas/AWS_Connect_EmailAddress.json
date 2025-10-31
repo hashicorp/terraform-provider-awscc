@@ -24,6 +24,21 @@
         "Value"
       ],
       "additionalProperties": false
+    },
+    "AliasConfiguration": {
+      "description": "Configuration for an email address alias",
+      "type": "object",
+      "properties": {
+        "EmailAddressArn": {
+          "description": "The identifier of the email address alias",
+          "type": "string",
+          "pattern": "^arn:(aws|aws-us-gov):connect:[a-z]{2}-[a-z]+-[0-9]{1}:[0-9]{1,20}:instance/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/email-address/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+        }
+      },
+      "required": [
+        "EmailAddressArn"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -59,6 +74,15 @@
       "pattern": "(^[\\S].*[\\S]$)|(^[\\S]$)",
       "minLength": 0,
       "maxLength": 256
+    },
+    "AliasConfigurations": {
+      "description": "List of alias configurations for the email address",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AliasConfiguration"
+      },
+      "maxItems": 1,
+      "insertionOrder": false
     },
     "Tags": {
       "type": "array",
@@ -100,6 +124,7 @@
     "create": {
       "permissions": [
         "connect:CreateEmailAddress",
+        "connect:AssociateEmailAddressAlias",
         "connect:TagResource",
         "connect:ListIntegrationAssociations",
         "ses:GetEmailIdentity",
@@ -116,6 +141,8 @@
     "update": {
       "permissions": [
         "connect:UpdateEmailAddressMetadata",
+        "connect:AssociateEmailAddressAlias",
+        "connect:DisassociateEmailAddressAlias",
         "connect:TagResource",
         "connect:UntagResource"
       ]
@@ -123,6 +150,7 @@
     "delete": {
       "permissions": [
         "connect:DeleteEmailAddress",
+        "connect:DisassociateEmailAddressAlias",
         "connect:UntagResource",
         "iam:PassRole",
         "ses:DescribeReceiptRule",

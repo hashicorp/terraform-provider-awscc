@@ -448,6 +448,7 @@
         "bedrock-agentcore:SynchronizeGatewayTargets",
         "kms:Decrypt",
         "kms:GenerateDataKey",
+        "kms:ListGrants",
         "s3:GetObject",
         "secretsmanager:GetSecretValue"
       ]
@@ -466,6 +467,7 @@
         "bedrock-agentcore:UpdateGatewayTarget",
         "kms:Decrypt",
         "kms:GenerateDataKey",
+        "kms:ListGrants",
         "s3:GetObject",
         "secretsmanager:GetSecretValue"
       ]
@@ -475,7 +477,8 @@
         "bedrock-agentcore:DeleteGatewayTarget",
         "bedrock-agentcore:GetGatewayTarget",
         "kms:Decrypt",
-        "kms:GenerateDataKey"
+        "kms:GenerateDataKey",
+        "kms:ListGrants"
       ]
     },
     "list": {

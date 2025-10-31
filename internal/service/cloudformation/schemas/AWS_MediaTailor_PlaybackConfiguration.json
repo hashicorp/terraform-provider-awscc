@@ -342,7 +342,14 @@
   },
   "tagging": {
     "taggable": true,
-    "cloudFormationSystemTags": false
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "mediatailor:TagResource",
+      "mediatailor:UntagResource"
+    ]
   },
   "additionalProperties": false,
   "required": [
@@ -370,7 +377,8 @@
         "mediatailor:ConfigureLogsForPlaybackConfiguration",
         "iam:CreateServiceLinkedRole",
         "mediatailor:UntagResource",
-        "mediatailor:TagResource"
+        "mediatailor:TagResource",
+        "mediatailor:GetPlaybackConfiguration"
       ]
     },
     "read": {
@@ -384,12 +392,14 @@
         "mediatailor:ConfigureLogsForPlaybackConfiguration",
         "iam:CreateServiceLinkedRole",
         "mediatailor:UntagResource",
-        "mediatailor:TagResource"
+        "mediatailor:TagResource",
+        "mediatailor:GetPlaybackConfiguration"
       ]
     },
     "delete": {
       "permissions": [
-        "mediatailor:DeletePlaybackConfiguration"
+        "mediatailor:DeletePlaybackConfiguration",
+        "mediatailor:GetPlaybackConfiguration"
       ]
     },
     "list": {

@@ -79,6 +79,13 @@
     "Options": {
       "description": "Protocol options for connect attachment",
       "$ref": "#/definitions/ConnectAttachmentOptions"
+    },
+    "LastModificationErrors": {
+      "description": "Errors from the last modification of the attachment.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
   },
   "definitions": {
@@ -184,7 +191,8 @@
     "/properties/AttachmentId",
     "/properties/OwnerAccountId",
     "/properties/AttachmentPolicyRuleNumber",
-    "/properties/SegmentName"
+    "/properties/SegmentName",
+    "/properties/LastModificationErrors"
   ],
   "createOnlyProperties": [
     "/properties/CoreNetworkId",
