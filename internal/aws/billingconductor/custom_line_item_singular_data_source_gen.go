@@ -100,6 +100,20 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ComputationRule
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The display settings of the Custom Line Item.",
+		//	  "enum": [
+		//	    "CONSOLIDATED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"computation_rule": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The display settings of the Custom Line Item.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -307,6 +321,31 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: PresentationDetails
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Service": {
+		//	      "pattern": "^[a-zA-Z0-9]+$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Service"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"presentation_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Service
+				"service": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProductCode
 		// CloudFormation resource type schema:
 		//
@@ -386,6 +425,7 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		"billing_period_range":            "BillingPeriodRange",
 		"charge_value":                    "ChargeValue",
 		"child_associated_resources":      "ChildAssociatedResources",
+		"computation_rule":                "ComputationRule",
 		"creation_time":                   "CreationTime",
 		"currency_code":                   "CurrencyCode",
 		"custom_line_item_charge_details": "CustomLineItemChargeDetails",
@@ -400,7 +440,9 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		"name":                            "Name",
 		"percentage":                      "Percentage",
 		"percentage_value":                "PercentageValue",
+		"presentation_details":            "PresentationDetails",
 		"product_code":                    "ProductCode",
+		"service":                         "Service",
 		"tags":                            "Tags",
 		"type":                            "Type",
 		"value":                           "Value",

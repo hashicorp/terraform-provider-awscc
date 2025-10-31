@@ -107,7 +107,7 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$",
+		//	  "pattern": "^arn:aws[^:]*:iam::\\d{12}:role(/[a-zA-Z0-9+=,.@_-]+)*/[a-zA-Z0-9+=,.@_-]+$",
 		//	  "type": "string"
 		//	}
 		"manage_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -134,7 +134,7 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 		//	            "type": "array"
 		//	          },
 		//	          "LocationRegistrationRole": {
-		//	            "pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$",
+		//	            "pattern": "^arn:aws[^:]*:iam::\\d{12}:role(/[a-zA-Z0-9+=,.@_-]+)*/[a-zA-Z0-9+=,.@_-]+$",
 		//	            "type": "string"
 		//	          }
 		//	        },

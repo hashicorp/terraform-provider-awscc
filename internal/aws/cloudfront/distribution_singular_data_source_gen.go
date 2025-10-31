@@ -897,6 +897,10 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	                "description": "Specifies how long, in seconds, CloudFront waits for a response from the origin. This is also known as the *origin response timeout*. The minimum timeout is 1 second, the maximum is 120 seconds, and the default (if you don't specify otherwise) is 30 seconds.\n For more information, see [Response timeout](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginResponseTimeout) in the *Amazon CloudFront Developer Guide*.",
 		//	                "type": "integer"
 		//	              },
+		//	              "OwnerAccountId": {
+		//	                "description": "",
+		//	                "type": "string"
+		//	              },
 		//	              "VpcOriginId": {
 		//	                "description": "The VPC origin ID.",
 		//	                "type": "string"
@@ -1825,6 +1829,11 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 										Description: "Specifies how long, in seconds, CloudFront waits for a response from the origin. This is also known as the *origin response timeout*. The minimum timeout is 1 second, the maximum is 120 seconds, and the default (if you don't specify otherwise) is 30 seconds.\n For more information, see [Response timeout](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginResponseTimeout) in the *Amazon CloudFront Developer Guide*.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
+									// Property: OwnerAccountId
+									"owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
 									// Property: VpcOriginId
 									"vpc_origin_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The VPC origin ID.",
@@ -2139,6 +2148,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"origin_shield_region":            "OriginShieldRegion",
 		"origin_ssl_protocols":            "OriginSSLProtocols",
 		"origins":                         "Origins",
+		"owner_account_id":                "OwnerAccountId",
 		"parameter_definitions":           "ParameterDefinitions",
 		"path_pattern":                    "PathPattern",
 		"prefix":                          "Prefix",

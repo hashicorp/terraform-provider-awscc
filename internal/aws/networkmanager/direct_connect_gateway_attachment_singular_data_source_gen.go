@@ -116,6 +116,21 @@ func directConnectGatewayAttachmentDataSource(ctx context.Context) (datasource.D
 			Description: "The Regions where the edges are located.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LastModificationErrors
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Errors from the last modification of the attachment.",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"last_modification_errors": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Errors from the last modification of the attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkFunctionGroupName
 		// CloudFormation resource type schema:
 		//
@@ -410,6 +425,7 @@ func directConnectGatewayAttachmentDataSource(ctx context.Context) (datasource.D
 		"direct_connect_gateway_arn":             "DirectConnectGatewayArn",
 		"edge_locations":                         "EdgeLocations",
 		"key":                                    "Key",
+		"last_modification_errors":               "LastModificationErrors",
 		"network_function_group_name":            "NetworkFunctionGroupName",
 		"owner_account_id":                       "OwnerAccountId",
 		"proposed_network_function_group_change": "ProposedNetworkFunctionGroupChange",
