@@ -24,6 +24,7 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -63,6 +64,46 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DeletionSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The deletion settings of the image, indicating whether to delete the underlying resources in addition to the image.",
+		//	  "properties": {
+		//	    "ExecutionRole": {
+		//	      "description": "The execution role to use for deleting the image, as well as underlying resources.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ExecutionRole"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"deletion_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExecutionRole
+				"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The execution role to use for deleting the image, as well as underlying resources.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The deletion settings of the image, indicating whether to delete the underlying resources in addition to the image.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// DeletionSettings is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DistributionConfigurationArn
 		// CloudFormation resource type schema:
@@ -641,6 +682,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		"arn":                               "Arn",
 		"container_recipe_arn":              "ContainerRecipeArn",
 		"container_tags":                    "ContainerTags",
+		"deletion_settings":                 "DeletionSettings",
 		"deployment_id":                     "DeploymentId",
 		"distribution_configuration_arn":    "DistributionConfigurationArn",
 		"ecr_configuration":                 "EcrConfiguration",
@@ -675,6 +717,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/DeletionSettings",
 		"/properties/ImagePipelineExecutionSettings",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(720).WithDeleteTimeoutInMinutes(0)

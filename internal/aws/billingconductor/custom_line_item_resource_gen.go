@@ -154,6 +154,30 @@ func customLineItemResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ComputationRule
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The display settings of the Custom Line Item.",
+		//	  "enum": [
+		//	    "CONSOLIDATED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"computation_rule": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The display settings of the Custom Line Item.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"CONSOLIDATED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -466,6 +490,44 @@ func customLineItemResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_\\+=\\.\\-@]+"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
+		// Property: PresentationDetails
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Service": {
+		//	      "pattern": "^[a-zA-Z0-9]+$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Service"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"presentation_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Service
+				"service": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]+$"), ""),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ProductCode
 		// CloudFormation resource type schema:
 		//
@@ -581,6 +643,7 @@ func customLineItemResource(ctx context.Context) (resource.Resource, error) {
 		"billing_period_range":            "BillingPeriodRange",
 		"charge_value":                    "ChargeValue",
 		"child_associated_resources":      "ChildAssociatedResources",
+		"computation_rule":                "ComputationRule",
 		"creation_time":                   "CreationTime",
 		"currency_code":                   "CurrencyCode",
 		"custom_line_item_charge_details": "CustomLineItemChargeDetails",
@@ -595,7 +658,9 @@ func customLineItemResource(ctx context.Context) (resource.Resource, error) {
 		"name":                            "Name",
 		"percentage":                      "Percentage",
 		"percentage_value":                "PercentageValue",
+		"presentation_details":            "PresentationDetails",
 		"product_code":                    "ProductCode",
+		"service":                         "Service",
 		"tags":                            "Tags",
 		"type":                            "Type",
 		"value":                           "Value",

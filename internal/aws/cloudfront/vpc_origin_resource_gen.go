@@ -33,6 +33,20 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::CloudFront::VpcOrigin resource.
 func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccountId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -304,6 +318,7 @@ func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.IsGlobalResourceType(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"account_id":                 "AccountId",
 		"arn":                        "Arn",
 		"created_time":               "CreatedTime",
 		"http_port":                  "HTTPPort",

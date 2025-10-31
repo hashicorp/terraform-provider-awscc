@@ -464,7 +464,8 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Protocol configuration for the agent runtime",
 		//	  "enum": [
 		//	    "MCP",
-		//	    "HTTP"
+		//	    "HTTP",
+		//	    "A2A"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -476,6 +477,7 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"MCP",
 					"HTTP",
+					"A2A",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

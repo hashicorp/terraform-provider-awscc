@@ -346,6 +346,115 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EgressConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Egress configuration for the connector.",
+		//	  "properties": {
+		//	    "VpcLattice": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "PortNumber": {
+		//	          "description": "Port to connect to on the target VPC Lattice resource",
+		//	          "maximum": 65535,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "ResourceConfigurationArn": {
+		//	          "description": "ARN of the VPC Lattice resource configuration",
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "pattern": "^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ResourceConfigurationArn"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "VpcLattice"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"egress_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: VpcLattice
+				"vpc_lattice": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PortNumber
+						"port_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Port to connect to on the target VPC Lattice resource",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(1, 65535),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ResourceConfigurationArn
+						"resource_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "ARN of the VPC Lattice resource configuration",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Egress configuration for the connector.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EgressType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the egress type for the connector.",
+		//	  "enum": [
+		//	    "SERVICE_MANAGED",
+		//	    "VPC_LATTICE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"egress_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the egress type for the connector.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"SERVICE_MANAGED",
+					"VPC_LATTICE",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LoggingRole
 		// CloudFormation resource type schema:
 		//
@@ -498,6 +607,23 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "ACTIVE",
+		//	    "PENDING",
+		//	    "ERRORED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -582,10 +708,14 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"url": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "URL for Connector",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(255),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -622,6 +752,8 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		"basic_auth_secret_id":                "BasicAuthSecretId",
 		"compression":                         "Compression",
 		"connector_id":                        "ConnectorId",
+		"egress_config":                       "EgressConfig",
+		"egress_type":                         "EgressType",
 		"encryption_algorithm":                "EncryptionAlgorithm",
 		"key":                                 "Key",
 		"local_profile_id":                    "LocalProfileId",
@@ -631,16 +763,20 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		"mdn_signing_algorithm":               "MdnSigningAlgorithm",
 		"message_subject":                     "MessageSubject",
 		"partner_profile_id":                  "PartnerProfileId",
+		"port_number":                         "PortNumber",
 		"preserve_content_type":               "PreserveContentType",
+		"resource_configuration_arn":          "ResourceConfigurationArn",
 		"security_policy_name":                "SecurityPolicyName",
 		"service_managed_egress_ip_addresses": "ServiceManagedEgressIpAddresses",
 		"sftp_config":                         "SftpConfig",
 		"signing_algorithm":                   "SigningAlgorithm",
+		"status":                              "Status",
 		"tags":                                "Tags",
 		"trusted_host_keys":                   "TrustedHostKeys",
 		"url":                                 "Url",
 		"user_secret_id":                      "UserSecretId",
 		"value":                               "Value",
+		"vpc_lattice":                         "VpcLattice",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

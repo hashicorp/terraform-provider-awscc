@@ -392,6 +392,21 @@ func firewallResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TransitGatewayAttachmentId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "^tgw-attach-[0-9a-z]+$",
+		//	  "type": "string"
+		//	}
+		"transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -479,6 +494,7 @@ func firewallResource(ctx context.Context) (resource.Resource, error) {
 		"subnet_id":                           "SubnetId",
 		"subnet_mappings":                     "SubnetMappings",
 		"tags":                                "Tags",
+		"transit_gateway_attachment_id":       "TransitGatewayAttachmentId",
 		"transit_gateway_id":                  "TransitGatewayId",
 		"value":                               "Value",
 		"vpc_id":                              "VpcId",

@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -147,6 +148,24 @@ func directConnectGatewayAttachmentResource(ctx context.Context) (resource.Resou
 			Required:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LastModificationErrors
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Errors from the last modification of the attachment.",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"last_modification_errors": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Errors from the last modification of the attachment.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkFunctionGroupName
@@ -552,6 +571,7 @@ func directConnectGatewayAttachmentResource(ctx context.Context) (resource.Resou
 		"direct_connect_gateway_arn":             "DirectConnectGatewayArn",
 		"edge_locations":                         "EdgeLocations",
 		"key":                                    "Key",
+		"last_modification_errors":               "LastModificationErrors",
 		"network_function_group_name":            "NetworkFunctionGroupName",
 		"owner_account_id":                       "OwnerAccountId",
 		"proposed_network_function_group_change": "ProposedNetworkFunctionGroupChange",

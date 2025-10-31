@@ -54,14 +54,14 @@ func assignmentResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The permission set that the assignemt will be assigned",
+		//	  "description": "The permission set that the assignment will be assigned",
 		//	  "maxLength": 1224,
 		//	  "minLength": 10,
 		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
 		//	  "type": "string"
 		//	}
 		"permission_set_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The permission set that the assignemt will be assigned",
+			Description: "The permission set that the assignment will be assigned",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(10, 1224),
@@ -138,14 +138,14 @@ func assignmentResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The type of resource to be provsioned to, only aws account now",
+		//	  "description": "The type of resource to be provisioned to, only aws account now",
 		//	  "enum": [
 		//	    "AWS_ACCOUNT"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"target_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of resource to be provsioned to, only aws account now",
+			Description: "The type of resource to be provisioned to, only aws account now",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
@@ -190,12 +190,12 @@ func assignmentResource(ctx context.Context) (resource.Resource, error) {
 		},
 		identity.Identifier{
 			Name:              "target_type",
-			Description:       "The type of resource to be provsioned to, only aws account now",
+			Description:       "The type of resource to be provisioned to, only aws account now",
 			RequiredForImport: true,
 		},
 		identity.Identifier{
 			Name:              "permission_set_arn",
-			Description:       "The permission set that the assignemt will be assigned",
+			Description:       "The permission set that the assignment will be assigned",
 			RequiredForImport: true,
 		},
 		identity.Identifier{

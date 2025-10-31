@@ -762,7 +762,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "Values": {
-		//	            "description": "The host names. The maximum size of each name is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). You must include at least one \".\" character. You can include only alphabetical characters after the final \".\" character.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the host name.",
+		//	            "description": "The host names. The maximum length of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). You must include at least one \".\" character. You can include only alphabetical characters after the final \".\" character.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the host name.",
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "type": "string"
@@ -790,7 +790,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "Values": {
-		//	            "description": "The strings to compare against the value of the HTTP header. The maximum size of each string is 128 characters. The comparison strings are case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).\n If the same header appears multiple times in the request, we search them in order until a match is found.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the value of the HTTP header. To require that all of the strings are a match, create one condition per string.",
+		//	            "description": "The strings to compare against the value of the HTTP header. The maximum length of each string is 128 characters. The comparison strings are case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).\n If the same header appears multiple times in the request, we search them in order until a match is found.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the value of the HTTP header. To require that all of the strings are a match, create one condition per string.",
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "type": "string"
@@ -806,7 +806,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "Information for an HTTP method condition. Specify only when ``Field`` is ``http-request-method``.",
 		//	        "properties": {
 		//	          "Values": {
-		//	            "description": "The name of the request method. The maximum size is 40 characters. The allowed characters are A-Z, hyphen (-), and underscore (_). The comparison is case sensitive. Wildcards are not supported; therefore, the method name must be an exact match.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the HTTP request method. We recommend that you route GET and HEAD requests in the same way, because the response to a HEAD request may be cached.",
+		//	            "description": "The name of the request method. The maximum length is 40 characters. The allowed characters are A-Z, hyphen (-), and underscore (_). The comparison is case sensitive. Wildcards are not supported; therefore, the method name must be an exact match.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the HTTP request method. We recommend that you route GET and HEAD requests in the same way, because the response to a HEAD request may be cached.",
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "type": "string"
@@ -846,7 +846,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "Information for a query string condition. Specify only when ``Field`` is ``query-string``.",
 		//	        "properties": {
 		//	          "Values": {
-		//	            "description": "The key/value pairs or values to find in the query string. The maximum size of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, you must escape these characters in ``Values`` using a '\\' character.\n If you specify multiple key/value pairs or values, the condition is satisfied if one of them is found in the query string.",
+		//	            "description": "The key/value pairs or values to find in the query string. The maximum length of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, you must escape these characters in ``Values`` using a '\\' character.\n If you specify multiple key/value pairs or values, the condition is satisfied if one of them is found in the query string.",
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "additionalProperties": false,
@@ -870,6 +870,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "RegexValues": {
+		//	        "description": "The regular expressions to match against the condition field. The maximum length of each string is 128 characters. Specify only when ``Field`` is ``http-header``, ``host-header``, or ``path-pattern``.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -935,7 +936,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Values
 							"values": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "The host names. The maximum size of each name is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). You must include at least one \".\" character. You can include only alphabetical characters after the final \".\" character.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the host name.",
+								Description: "The host names. The maximum length of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). You must include at least one \".\" character. You can include only alphabetical characters after the final \".\" character.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the host name.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -974,7 +975,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Values
 							"values": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "The strings to compare against the value of the HTTP header. The maximum size of each string is 128 characters. The comparison strings are case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).\n If the same header appears multiple times in the request, we search them in order until a match is found.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the value of the HTTP header. To require that all of the strings are a match, create one condition per string.",
+								Description: "The strings to compare against the value of the HTTP header. The maximum length of each string is 128 characters. The comparison strings are case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).\n If the same header appears multiple times in the request, we search them in order until a match is found.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the value of the HTTP header. To require that all of the strings are a match, create one condition per string.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -995,7 +996,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Values
 							"values": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "The name of the request method. The maximum size is 40 characters. The allowed characters are A-Z, hyphen (-), and underscore (_). The comparison is case sensitive. Wildcards are not supported; therefore, the method name must be an exact match.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the HTTP request method. We recommend that you route GET and HEAD requests in the same way, because the response to a HEAD request may be cached.",
+								Description: "The name of the request method. The maximum length is 40 characters. The allowed characters are A-Z, hyphen (-), and underscore (_). The comparison is case sensitive. Wildcards are not supported; therefore, the method name must be an exact match.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the HTTP request method. We recommend that you route GET and HEAD requests in the same way, because the response to a HEAD request may be cached.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1067,7 +1068,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "The key/value pairs or values to find in the query string. The maximum size of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, you must escape these characters in ``Values`` using a '\\' character.\n If you specify multiple key/value pairs or values, the condition is satisfied if one of them is found in the query string.",
+								Description: "The key/value pairs or values to find in the query string. The maximum length of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, you must escape these characters in ``Values`` using a '\\' character.\n If you specify multiple key/value pairs or values, the condition is satisfied if one of them is found in the query string.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1085,6 +1086,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 					// Property: RegexValues
 					"regex_values": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
+						Description: "The regular expressions to match against the condition field. The maximum length of each string is 128 characters. Specify only when ``Field`` is ``http-header``, ``host-header``, or ``path-pattern``.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1213,12 +1215,14 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "additionalProperties": false,
-		//	              "description": "",
+		//	              "description": "Information about a rewrite transform. This transform matches a pattern and replaces it with the specified string.",
 		//	              "properties": {
 		//	                "Regex": {
+		//	                  "description": "The regular expression to match in the input string. The maximum length of the string is 1,024 characters.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Replace": {
+		//	                  "description": "The replacement string to use when rewriting the matched input. The maximum length of the string is 1,024 characters. You can specify capture groups in the regular expression (for example, $1 and $2).",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -1238,6 +1242,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "Type": {
+		//	        "description": "",
 		//	        "type": "string"
 		//	      },
 		//	      "UrlRewriteConfig": {
@@ -1248,12 +1253,14 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "additionalProperties": false,
-		//	              "description": "",
+		//	              "description": "Information about a rewrite transform. This transform matches a pattern and replaces it with the specified string.",
 		//	              "properties": {
 		//	                "Regex": {
+		//	                  "description": "The regular expression to match in the input string. The maximum length of the string is 1,024 characters.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Replace": {
+		//	                  "description": "The replacement string to use when rewriting the matched input. The maximum length of the string is 1,024 characters. You can specify capture groups in the regular expression (for example, $1 and $2).",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -1293,8 +1300,9 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Regex
 										"regex": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Description: "The regular expression to match in the input string. The maximum length of the string is 1,024 characters.",
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1304,8 +1312,9 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 										// Property: Replace
 										"replace": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Description: "The replacement string to use when rewriting the matched input. The maximum length of the string is 1,024 characters. You can specify capture groups in the regular expression (for example, $1 and $2).",
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1334,8 +1343,9 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -1352,8 +1362,9 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Regex
 										"regex": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Description: "The regular expression to match in the input string. The maximum length of the string is 1,024 characters.",
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -1363,8 +1374,9 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 										// Property: Replace
 										"replace": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Description: "The replacement string to use when rewriting the matched input. The maximum length of the string is 1,024 characters. You can specify capture groups in the regular expression (for example, $1 and $2).",
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
