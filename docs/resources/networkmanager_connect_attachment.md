@@ -71,6 +71,7 @@ resource "awscc_networkmanager_connect_attachment" "example" {
 - `core_network_arn` (String) The ARN of a core network.
 - `created_at` (String) Creation time of the attachment.
 - `id` (String) Uniquely identifies the resource.
+- `last_modification_errors` (List of String) Errors from the last modification of the attachment.
 - `owner_account_id` (String) The ID of the attachment account owner.
 - `resource_arn` (String) The attachment resource ARN.
 - `segment_name` (String) The name of the segment attachment.

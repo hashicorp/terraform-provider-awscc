@@ -28,6 +28,7 @@ Data Source schema for AWS::NetworkManager::ConnectAttachment
 - `core_network_id` (String) ID of the CoreNetwork that the attachment will be attached to.
 - `created_at` (String) Creation time of the attachment.
 - `edge_location` (String) Edge location of the attachment.
+- `last_modification_errors` (List of String) Errors from the last modification of the attachment.
 - `network_function_group_name` (String) The name of the network function group attachment.
 - `options` (Attributes) Protocol options for connect attachment (see [below for nested schema](#nestedatt--options))
 - `owner_account_id` (String) The ID of the attachment account owner.

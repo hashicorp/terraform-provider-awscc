@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_capacity_manager_data_export.example "capacity_manager_data_export_id"

@@ -21,6 +21,7 @@ Data Source schema for AWS::CloudFront::VpcOrigin
 
 ### Read-Only
 
+- `account_id` (String)
 - `arn` (String)
 - `created_time` (String)
 - `last_modified_time` (String)

@@ -224,11 +224,11 @@ Optional:
   +  For rolling deployments, the value is set to 3 hours (180 minutes).
   +  When you use an external deployment controller (``EXTERNAL``), or the ACD blue/green deployment controller (``CODE_DEPLOY``), the value is set to 3 hours (180 minutes).
   +  For all other cases, the value is set to 36 hours (2160 minutes).
-- `canary_configuration` (String)
+- `canary_configuration` (Attributes) (see [below for nested schema](#nestedatt--deployment_configuration--canary_configuration))
 - `deployment_circuit_breaker` (Attributes) The deployment circuit breaker can only be used for services using the rolling update (``ECS``) deployment type.
   The *deployment circuit breaker* determines whether a service deployment will fail if the service can't reach a steady state. If you use the deployment circuit breaker, a service deployment will transition to a failed state and stop launching new tasks. If you use the rollback option, when a service deployment fails, the service is rolled back to the last deployment that completed successfully. For more information, see [Rolling update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html) in the *Amazon Elastic Container Service Developer Guide* (see [below for nested schema](#nestedatt--deployment_configuration--deployment_circuit_breaker))
 - `lifecycle_hooks` (Attributes List) An array of deployment lifecycle hook objects to run custom logic at specific stages of the deployment lifecycle. (see [below for nested schema](#nestedatt--deployment_configuration--lifecycle_hooks))
-- `linear_configuration` (String)
+- `linear_configuration` (Attributes) (see [below for nested schema](#nestedatt--deployment_configuration--linear_configuration))
 - `maximum_percent` (Number) If a service is using the rolling update (``ECS``) deployment type, the ``maximumPercent`` parameter represents an upper limit on the number of your service's tasks that are allowed in the ``RUNNING`` or ``PENDING`` state during a deployment, as a percentage of the ``desiredCount`` (rounded down to the nearest integer). This parameter enables you to define the deployment batch size. For example, if your service is using the ``REPLICA`` service scheduler and has a ``desiredCount`` of four tasks and a ``maximumPercent`` value of 200%, the scheduler may start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default ``maximumPercent`` value for a service using the ``REPLICA`` service scheduler is 200%.
  The Amazon ECS scheduler uses this parameter to replace unhealthy tasks by starting replacement tasks first and then stopping the unhealthy tasks, as long as cluster resources for starting replacement tasks are available. For more information about how the scheduler replaces unhealthy tasks, see [Amazon ECS services](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html).
  If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types, and tasks in the service use the EC2 launch type, the *maximum percent* value is set to the default value. The *maximum percent* value is used to define the upper limit on the number of the tasks in the service that remain in the ``RUNNING`` state while the container instances are in the ``DRAINING`` state.
@@ -262,6 +262,15 @@ Optional:
 - `alarm_names` (List of String) One or more CloudWatch alarm names. Use a "," to separate the alarms.
 - `enable` (Boolean) Determines whether to use the CloudWatch alarm option in the service deployment process.
 - `rollback` (Boolean) Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is used, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
+
+
+<a id="nestedatt--deployment_configuration--canary_configuration"></a>
+### Nested Schema for `deployment_configuration.canary_configuration`
+
+Optional:
+
+- `canary_bake_time_in_minutes` (Number)
+- `canary_percent` (Number)
 
 
 <a id="nestedatt--deployment_configuration--deployment_circuit_breaker"></a>
@@ -308,6 +317,15 @@ Optional:
  You must provide this parameter when configuring a deployment lifecycle hook.
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS permission to call Lambda functions on your behalf.
  For more information, see [Permissions required for Lambda functions in Amazon ECS blue/green deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-permissions.html) in the *Amazon Elastic Container Service Developer Guide*.
+
+
+<a id="nestedatt--deployment_configuration--linear_configuration"></a>
+### Nested Schema for `deployment_configuration.linear_configuration`
+
+Optional:
+
+- `step_bake_time_in_minutes` (Number)
+- `step_percent` (Number)
 
 
 
@@ -437,6 +455,7 @@ Optional:
 
 Optional:
 
+- `access_log_configuration` (Attributes) (see [below for nested schema](#nestedatt--service_connect_configuration--access_log_configuration))
 - `enabled` (Boolean) Specifies whether to use Service Connect with this service.
 - `log_configuration` (Attributes) The log configuration for the container. This parameter maps to ``LogConfig`` in the docker container create command and the ``--log-driver`` option to docker run.
  By default, containers use the same logging driver that the Docker daemon uses. However, the container might use a different logging driver than the Docker daemon by specifying a log driver configuration in the container definition.
@@ -451,6 +470,15 @@ Optional:
 - `services` (Attributes List) The list of Service Connect service objects. These are names and aliases (also known as endpoints) that are used by other Amazon ECS services to connect to this service. 
  This field is not required for a "client" Amazon ECS service that's a member of a namespace only to connect to other services within the namespace. An example of this would be a frontend application that accepts incoming requests from either a load balancer that's attached to the service or by other means.
  An object selects a port from the task definition, assigns a name for the CMAPlong service, and a list of aliases (endpoints) and ports for client applications to refer to this service. (see [below for nested schema](#nestedatt--service_connect_configuration--services))
+
+<a id="nestedatt--service_connect_configuration--access_log_configuration"></a>
+### Nested Schema for `service_connect_configuration.access_log_configuration`
+
+Optional:
+
+- `format` (String)
+- `include_query_parameters` (String)
+
 
 <a id="nestedatt--service_connect_configuration--log_configuration"></a>
 ### Nested Schema for `service_connect_configuration.log_configuration`

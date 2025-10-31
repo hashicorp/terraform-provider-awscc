@@ -65,8 +65,10 @@ resource "awscc_billingconductor_custom_line_item" "example" {
 
 - `account_id` (String) The account which this custom line item will be charged to
 - `billing_period_range` (Attributes) (see [below for nested schema](#nestedatt--billing_period_range))
+- `computation_rule` (String) The display settings of the Custom Line Item.
 - `custom_line_item_charge_details` (Attributes) (see [below for nested schema](#nestedatt--custom_line_item_charge_details))
 - `description` (String)
+- `presentation_details` (Attributes) (see [below for nested schema](#nestedatt--presentation_details))
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -124,6 +126,14 @@ Optional:
 - `child_associated_resources` (Set of String)
 - `percentage_value` (Number)
 
+
+
+<a id="nestedatt--presentation_details"></a>
+### Nested Schema for `presentation_details`
+
+Optional:
+
+- `service` (String)
 
 
 <a id="nestedatt--tags"></a>

@@ -26,12 +26,14 @@ Data Source schema for AWS::BillingConductor::CustomLineItem
 - `association_size` (Number) Number of source values associated to this custom line item
 - `billing_group_arn` (String) Billing Group ARN
 - `billing_period_range` (Attributes) (see [below for nested schema](#nestedatt--billing_period_range))
+- `computation_rule` (String) The display settings of the Custom Line Item.
 - `creation_time` (Number) Creation timestamp in UNIX epoch time format
 - `currency_code` (String)
 - `custom_line_item_charge_details` (Attributes) (see [below for nested schema](#nestedatt--custom_line_item_charge_details))
 - `description` (String)
 - `last_modified_time` (Number) Latest modified timestamp in UNIX epoch time format
 - `name` (String)
+- `presentation_details` (Attributes) (see [below for nested schema](#nestedatt--presentation_details))
 - `product_code` (String)
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
@@ -80,6 +82,14 @@ Read-Only:
 - `child_associated_resources` (Set of String)
 - `percentage_value` (Number)
 
+
+
+<a id="nestedatt--presentation_details"></a>
+### Nested Schema for `presentation_details`
+
+Read-Only:
+
+- `service` (String)
 
 
 <a id="nestedatt--tags"></a>

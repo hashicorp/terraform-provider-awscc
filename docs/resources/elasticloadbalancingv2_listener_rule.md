@@ -274,7 +274,7 @@ Optional:
 - `http_request_method_config` (Attributes) Information for an HTTP method condition. Specify only when ``Field`` is ``http-request-method``. (see [below for nested schema](#nestedatt--conditions--http_request_method_config))
 - `path_pattern_config` (Attributes) Information for a path pattern condition. Specify only when ``Field`` is ``path-pattern``. (see [below for nested schema](#nestedatt--conditions--path_pattern_config))
 - `query_string_config` (Attributes) Information for a query string condition. Specify only when ``Field`` is ``query-string``. (see [below for nested schema](#nestedatt--conditions--query_string_config))
-- `regex_values` (Set of String)
+- `regex_values` (Set of String) The regular expressions to match against the condition field. The maximum length of each string is 128 characters. Specify only when ``Field`` is ``http-header``, ``host-header``, or ``path-pattern``.
 - `source_ip_config` (Attributes) Information for a source IP condition. Specify only when ``Field`` is ``source-ip``. (see [below for nested schema](#nestedatt--conditions--source_ip_config))
 - `values` (Set of String) The condition value. Specify only when ``Field`` is ``host-header`` or ``path-pattern``. Alternatively, to specify multiple host names or multiple path patterns, use ``HostHeaderConfig`` or ``PathPatternConfig``.
  If ``Field`` is ``host-header`` and you're not using ``HostHeaderConfig``, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters.
@@ -296,7 +296,7 @@ Optional:
 Optional:
 
 - `regex_values` (Set of String)
-- `values` (Set of String) The host names. The maximum size of each name is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). You must include at least one "." character. You can include only alphabetical characters after the final "." character.
+- `values` (Set of String) The host names. The maximum length of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). You must include at least one "." character. You can include only alphabetical characters after the final "." character.
  If you specify multiple strings, the condition is satisfied if one of the strings matches the host name.
 
 
@@ -307,7 +307,7 @@ Optional:
 
 - `http_header_name` (String) The name of the HTTP header field. The maximum size is 40 characters. The header name is case insensitive. The allowed characters are specified by RFC 7230. Wildcards are not supported.
 - `regex_values` (Set of String)
-- `values` (Set of String) The strings to compare against the value of the HTTP header. The maximum size of each string is 128 characters. The comparison strings are case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).
+- `values` (Set of String) The strings to compare against the value of the HTTP header. The maximum length of each string is 128 characters. The comparison strings are case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).
  If the same header appears multiple times in the request, we search them in order until a match is found.
  If you specify multiple strings, the condition is satisfied if one of the strings matches the value of the HTTP header. To require that all of the strings are a match, create one condition per string.
 
@@ -317,7 +317,7 @@ Optional:
 
 Optional:
 
-- `values` (Set of String) The name of the request method. The maximum size is 40 characters. The allowed characters are A-Z, hyphen (-), and underscore (_). The comparison is case sensitive. Wildcards are not supported; therefore, the method name must be an exact match.
+- `values` (Set of String) The name of the request method. The maximum length is 40 characters. The allowed characters are A-Z, hyphen (-), and underscore (_). The comparison is case sensitive. Wildcards are not supported; therefore, the method name must be an exact match.
  If you specify multiple strings, the condition is satisfied if one of the strings matches the HTTP request method. We recommend that you route GET and HEAD requests in the same way, because the response to a HEAD request may be cached.
 
 
@@ -336,7 +336,7 @@ Optional:
 
 Optional:
 
-- `values` (Attributes Set) The key/value pairs or values to find in the query string. The maximum size of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, you must escape these characters in ``Values`` using a '\' character.
+- `values` (Attributes Set) The key/value pairs or values to find in the query string. The maximum length of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, you must escape these characters in ``Values`` using a '\' character.
  If you specify multiple key/value pairs or values, the condition is satisfied if one of them is found in the query string. (see [below for nested schema](#nestedatt--conditions--query_string_config--values))
 
 <a id="nestedatt--conditions--query_string_config--values"></a>
@@ -380,8 +380,8 @@ Optional:
 
 Optional:
 
-- `regex` (String)
-- `replace` (String)
+- `regex` (String) The regular expression to match in the input string. The maximum length of the string is 1,024 characters.
+- `replace` (String) The replacement string to use when rewriting the matched input. The maximum length of the string is 1,024 characters. You can specify capture groups in the regular expression (for example, $1 and $2).
 
 
 
@@ -397,8 +397,8 @@ Optional:
 
 Optional:
 
-- `regex` (String)
-- `replace` (String)
+- `regex` (String) The regular expression to match in the input string. The maximum length of the string is 1,024 characters.
+- `replace` (String) The replacement string to use when rewriting the matched input. The maximum length of the string is 1,024 characters. You can specify capture groups in the regular expression (for example, $1 and $2).
 
 ## Import
 

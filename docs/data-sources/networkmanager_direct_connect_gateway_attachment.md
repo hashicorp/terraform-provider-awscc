@@ -29,6 +29,7 @@ Data Source schema for AWS::NetworkManager::DirectConnectGatewayAttachment
 - `created_at` (String) Creation time of the attachment.
 - `direct_connect_gateway_arn` (String) The ARN of the Direct Connect Gateway.
 - `edge_locations` (List of String) The Regions where the edges are located.
+- `last_modification_errors` (List of String) Errors from the last modification of the attachment.
 - `network_function_group_name` (String) The name of the network function group attachment.
 - `owner_account_id` (String) Owner account of the attachment.
 - `proposed_network_function_group_change` (Attributes) The attachment to move from one network function group to another. (see [below for nested schema](#nestedatt--proposed_network_function_group_change))

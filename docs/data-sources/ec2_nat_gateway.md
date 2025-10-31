@@ -34,7 +34,7 @@ Data Source schema for AWS::EC2::NatGateway
  ``SecondaryPrivateIpAddressCount`` and ``SecondaryPrivateIpAddresses`` cannot be set at the same time.
 - `subnet_id` (String) The ID of the subnet in which the NAT gateway is located.
 - `tags` (Attributes List) The tags for the NAT gateway. (see [below for nested schema](#nestedatt--tags))
-- `vpc_id` (String)
+- `vpc_id` (String) The ID of the VPC in which the NAT gateway is located.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

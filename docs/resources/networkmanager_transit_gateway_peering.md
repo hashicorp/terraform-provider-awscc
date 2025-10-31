@@ -71,6 +71,7 @@ resource "awscc_networkmanager_transit_gateway_peering" "example" {
 - `created_at` (String) The creation time of the transit gateway peering
 - `edge_location` (String) The location of the transit gateway peering
 - `id` (String) Uniquely identifies the resource.
+- `last_modification_errors` (List of String) Errors from the last modification of the transit gateway peering.
 - `owner_account_id` (String) Peering owner account Id
 - `peering_id` (String) The Id of the transit gateway peering
 - `peering_type` (String) Peering type (TransitGatewayPeering)

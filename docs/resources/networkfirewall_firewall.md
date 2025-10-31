@@ -40,6 +40,7 @@ Resource type definition for AWS::NetworkFirewall::Firewall
 - `firewall_arn` (String) A resource ARN.
 - `firewall_id` (String)
 - `id` (String) Uniquely identifies the resource.
+- `transit_gateway_attachment_id` (String)
 
 <a id="nestedatt--availability_zone_mappings"></a>
 ### Nested Schema for `availability_zone_mappings`

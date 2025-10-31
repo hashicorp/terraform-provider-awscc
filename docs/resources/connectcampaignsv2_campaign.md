@@ -135,6 +135,7 @@ Optional:
 
 - `agentless_config` (String) Agentless config
 - `predictive_config` (Attributes) Predictive config (see [below for nested schema](#nestedatt--channel_subtype_config--telephony--outbound_mode--predictive_config))
+- `preview_config` (Attributes) Preview config (see [below for nested schema](#nestedatt--channel_subtype_config--telephony--outbound_mode--preview_config))
 - `progressive_config` (Attributes) Progressive config (see [below for nested schema](#nestedatt--channel_subtype_config--telephony--outbound_mode--progressive_config))
 
 <a id="nestedatt--channel_subtype_config--telephony--outbound_mode--predictive_config"></a>
@@ -143,6 +144,24 @@ Optional:
 Optional:
 
 - `bandwidth_allocation` (Number) The bandwidth allocation of a queue resource.
+
+
+<a id="nestedatt--channel_subtype_config--telephony--outbound_mode--preview_config"></a>
+### Nested Schema for `channel_subtype_config.telephony.outbound_mode.preview_config`
+
+Optional:
+
+- `agent_actions` (List of String) Actions that can be performed by agent during preview phase
+- `bandwidth_allocation` (Number) The bandwidth allocation of a queue resource.
+- `timeout_config` (Attributes) Timeout Config for preview contacts (see [below for nested schema](#nestedatt--channel_subtype_config--telephony--outbound_mode--preview_config--timeout_config))
+
+<a id="nestedatt--channel_subtype_config--telephony--outbound_mode--preview_config--timeout_config"></a>
+### Nested Schema for `channel_subtype_config.telephony.outbound_mode.preview_config.timeout_config`
+
+Optional:
+
+- `duration_in_seconds` (Number) Timeout duration for a preview contact in seconds
+
 
 
 <a id="nestedatt--channel_subtype_config--telephony--outbound_mode--progressive_config"></a>

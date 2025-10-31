@@ -28,6 +28,7 @@ Data Source schema for AWS::NetworkManager::TransitGatewayRouteTableAttachment
 - `core_network_id` (String) The ID of a core network where you're creating a site-to-site VPN attachment.
 - `created_at` (String) Creation time of the attachment.
 - `edge_location` (String) The Region where the edge is located.
+- `last_modification_errors` (List of String) Errors from the last modification of the attachment.
 - `network_function_group_name` (String) The name of the network function group attachment.
 - `owner_account_id` (String) Owner account of the attachment.
 - `peering_id` (String) The Id of peering between transit gateway and core network.

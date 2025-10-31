@@ -1,0 +1,1 @@
+$ terraform import awscc_s3vectors_vector_bucket_policy.example "vector_bucket_arn"
