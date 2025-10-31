@@ -238,7 +238,7 @@ bigdiffer: ## Show big diff between current branch and main
 	diff internal/provider/generators/allschemas/available_schemas.$$LAST_VERSION_DATE.hcl internal/provider/generators/allschemas/available_schemas.$$(date -I).hcl || true
 
 newbranch: ## Create a new branch for schema updates
-	@NEW_BRANCH="$(date -I)-schema-updates"; \
+	@NEW_BRANCH="$$(date -I)-schema-updates"; \
 	echo "==> Creating and switching to new branch $$NEW_BRANCH"; \
 	git checkout -b $$NEW_BRANCH
 
