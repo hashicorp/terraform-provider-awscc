@@ -1636,6 +1636,11 @@
         "identifier": ["TableName"]
     },
     {
+        "resource": "awscc_ec2_capacity_manager_data_export",
+        "generateListResource": true,
+        "identifier": ["CapacityManagerDataExportId"]
+    },
+    {
         "resource": "awscc_ec2_capacity_reservation",
         "generateListResource": true,
         "identifier": ["Id"]
@@ -4838,7 +4843,16 @@
         "identifier": ["ResolverRuleAssociationId"]
     },
     {
+        "resource": "awscc_rtbfabric_link",
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_rtbfabric_requester_gateway",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_rtbfabric_responder_gateway",
         "generateListResource": true,
         "identifier": ["Arn"]
     },
@@ -4955,6 +4969,20 @@
     {
         "resource": "awscc_s3tables_table_policy",
         "identifier": ["TableARN"]
+    },
+    {
+        "resource": "awscc_s3vectors_index",
+        "identifier": ["IndexArn"]
+    },
+    {
+        "resource": "awscc_s3vectors_vector_bucket",
+        "generateListResource": true,
+        "identifier": ["VectorBucketArn"]
+    },
+    {
+        "resource": "awscc_s3vectors_vector_bucket_policy",
+        "generateListResource": true,
+        "identifier": ["VectorBucketArn"]
     },
     {
         "resource": "awscc_ses_configuration_set",
