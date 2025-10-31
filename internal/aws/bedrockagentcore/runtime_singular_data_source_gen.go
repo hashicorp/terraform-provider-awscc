@@ -341,7 +341,8 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Protocol configuration for the agent runtime",
 		//	  "enum": [
 		//	    "MCP",
-		//	    "HTTP"
+		//	    "HTTP",
+		//	    "A2A"
 		//	  ],
 		//	  "type": "string"
 		//	}

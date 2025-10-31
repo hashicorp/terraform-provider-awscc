@@ -277,7 +277,8 @@
         "iam:PassRole",
         "kms:Decrypt",
         "kms:DescribeKey",
-        "kms:GenerateDataKey"
+        "kms:GenerateDataKey",
+        "kms:ListGrants"
       ]
     },
     "delete": {

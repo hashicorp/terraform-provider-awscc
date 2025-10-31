@@ -229,6 +229,20 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "InstanceArn": {
+            "$ref": "resource-schema.json#/properties/InstanceArn"
+          },
+          "PermissionSetArn": {
+            "$ref": "resource-schema.json#/properties/PermissionSetArn"
+          }
+        },
+        "required": [
+          "InstanceArn",
+          "PermissionSetArn"
+        ]
+      },
       "permissions": [
         "sso:DescribePermissionSet"
       ]

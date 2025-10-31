@@ -36,6 +36,7 @@ AWS::NetworkManager::SiteToSiteVpnAttachment Resource Type definition.
 - `created_at` (String) Creation time of the attachment.
 - `edge_location` (String) The Region where the edge is located.
 - `id` (String) Uniquely identifies the resource.
+- `last_modification_errors` (List of String) Errors from the last modification of the attachment.
 - `owner_account_id` (String) Owner account of the attachment.
 - `resource_arn` (String) The ARN of the Resource.
 - `segment_name` (String) The name of the segment that attachment is in.

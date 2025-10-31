@@ -267,6 +267,11 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	              "required": [
 		//	                "AgentlessConfig"
 		//	              ]
+		//	            },
+		//	            {
+		//	              "required": [
+		//	                "PreviewConfig"
+		//	              ]
 		//	            }
 		//	          ],
 		//	          "properties": {
@@ -288,6 +293,47 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	              },
 		//	              "required": [
 		//	                "BandwidthAllocation"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "PreviewConfig": {
+		//	              "additionalProperties": false,
+		//	              "description": "Preview config",
+		//	              "properties": {
+		//	                "AgentActions": {
+		//	                  "description": "Actions that can be performed by agent during preview phase",
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "description": "Actions that can performed on a contact by an agent",
+		//	                    "enum": [
+		//	                      "DISCARD"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array"
+		//	                },
+		//	                "BandwidthAllocation": {
+		//	                  "description": "The bandwidth allocation of a queue resource.",
+		//	                  "maximum": 1,
+		//	                  "minimum": 0,
+		//	                  "type": "number"
+		//	                },
+		//	                "TimeoutConfig": {
+		//	                  "description": "Timeout Config for preview contacts",
+		//	                  "properties": {
+		//	                    "DurationInSeconds": {
+		//	                      "description": "Timeout duration for a preview contact in seconds",
+		//	                      "maximum": 300,
+		//	                      "minimum": 10,
+		//	                      "type": "integer"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "BandwidthAllocation",
+		//	                "TimeoutConfig"
 		//	              ],
 		//	              "type": "object"
 		//	            },
@@ -641,6 +687,74 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "Predictive config",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: PreviewConfig
+								"preview_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AgentActions
+										"agent_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "Actions that can be performed by agent during preview phase",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.ValueStringsAre(
+													stringvalidator.OneOf(
+														"DISCARD",
+													),
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												generic.Multiset(),
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: BandwidthAllocation
+										"bandwidth_allocation": schema.Float64Attribute{ /*START ATTRIBUTE*/
+											Description: "The bandwidth allocation of a queue resource.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Float64{ /*START VALIDATORS*/
+												float64validator.Between(0.000000, 1.000000),
+												fwvalidators.NotNullFloat64(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+												float64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: TimeoutConfig
+										"timeout_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: DurationInSeconds
+												"duration_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Description: "Timeout duration for a preview contact in seconds",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.Int64{ /*START VALIDATORS*/
+														int64validator.Between(10, 300),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+														int64planmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Timeout Config for preview contacts",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Object{ /*START VALIDATORS*/
+												fwvalidators.NotNullObject(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Preview config",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2097,6 +2211,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"agent_actions":                     "AgentActions",
 		"agentless_config":                  "AgentlessConfig",
 		"all_channels_subtypes":             "AllChannelsSubtypes",
 		"answer_machine_detection_config":   "AnswerMachineDetectionConfig",
@@ -2120,6 +2235,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"daily_hours":                       "DailyHours",
 		"default_outbound_config":           "DefaultOutboundConfig",
 		"default_time_zone":                 "DefaultTimeZone",
+		"duration_in_seconds":               "DurationInSeconds",
 		"email":                             "Email",
 		"enable_answer_machine_detection":   "EnableAnswerMachineDetection",
 		"end_date":                          "EndDate",
@@ -2135,6 +2251,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"open_hours":                        "OpenHours",
 		"outbound_mode":                     "OutboundMode",
 		"predictive_config":                 "PredictiveConfig",
+		"preview_config":                    "PreviewConfig",
 		"progressive_config":                "ProgressiveConfig",
 		"refresh_frequency":                 "RefreshFrequency",
 		"restricted_period_list":            "RestrictedPeriodList",
@@ -2147,6 +2264,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"start_time":                        "StartTime",
 		"tags":                              "Tags",
 		"telephony":                         "Telephony",
+		"timeout_config":                    "TimeoutConfig",
 		"unit":                              "Unit",
 		"value":                             "Value",
 		"wisdom_template_arn":               "WisdomTemplateArn",

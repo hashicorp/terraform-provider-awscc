@@ -1531,6 +1531,8 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "ml.trn1.32xlarge",
 		//	              "ml.trn1n.32xlarge",
 		//	              "ml.p5.48xlarge",
+		//	              "ml.p5e.48xlarge",
+		//	              "ml.p5en.48xlarge",
 		//	              "ml.m6i.large",
 		//	              "ml.m6i.xlarge",
 		//	              "ml.m6i.2xlarge",

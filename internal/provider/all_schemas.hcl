@@ -1691,6 +1691,10 @@ resource_schema "aws_dynamodb_table" {
   cloudformation_type_name = "AWS::DynamoDB::Table"
 }
 
+resource_schema "aws_ec2_capacity_manager_data_export" {
+  cloudformation_type_name = "AWS::EC2::CapacityManagerDataExport"
+}
+
 resource_schema "aws_ec2_capacity_reservation" {
   cloudformation_type_name = "AWS::EC2::CapacityReservation"
 }
@@ -4639,8 +4643,17 @@ resource_schema "aws_route53resolver_resolver_rule_association" {
   cloudformation_type_name = "AWS::Route53Resolver::ResolverRuleAssociation"
 }
 
+resource_schema "aws_rtbfabric_link" {
+  cloudformation_type_name               = "AWS::RTBFabric::Link"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_rtbfabric_requester_gateway" {
   cloudformation_type_name = "AWS::RTBFabric::RequesterGateway"
+}
+
+resource_schema "aws_rtbfabric_responder_gateway" {
+  cloudformation_type_name = "AWS::RTBFabric::ResponderGateway"
 }
 
 resource_schema "aws_s3_access_grant" {
@@ -4743,6 +4756,19 @@ resource_schema "aws_s3tables_table_bucket_policy" {
 resource_schema "aws_s3tables_table_policy" {
   cloudformation_type_name               = "AWS::S3Tables::TablePolicy"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_s3vectors_index" {
+  cloudformation_type_name               = "AWS::S3Vectors::Index"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_s3vectors_vector_bucket" {
+  cloudformation_type_name = "AWS::S3Vectors::VectorBucket"
+}
+
+resource_schema "aws_s3vectors_vector_bucket_policy" {
+  cloudformation_type_name = "AWS::S3Vectors::VectorBucketPolicy"
 }
 
 resource_schema "aws_ses_configuration_set" {

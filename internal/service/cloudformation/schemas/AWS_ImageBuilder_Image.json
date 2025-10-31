@@ -116,6 +116,7 @@
     }
   },
   "writeOnlyProperties": [
+    "/properties/DeletionSettings",
     "/properties/ImagePipelineExecutionSettings"
   ],
   "additionalProperties": false,
@@ -358,6 +359,10 @@
           ]
         }
       }
+    },
+    "DeletionSettings": {
+      "description": "The deletion settings of the image, indicating whether to delete the underlying resources in addition to the image.",
+      "$ref": "#/definitions/DeletionSettings"
     },
     "ImageUri": {
       "description": "URI for containers created in current Region with default ECR image tag",

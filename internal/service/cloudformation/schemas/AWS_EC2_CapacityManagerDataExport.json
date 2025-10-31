@@ -1,0 +1,131 @@
+{
+  "typeName": "AWS::EC2::CapacityManagerDataExport",
+  "description": "Resource Type definition for AWS::EC2::CapacityManagerDataExport",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ec2-capacity-manager-data-export.git",
+  "additionalProperties": false,
+  "properties": {
+    "CapacityManagerDataExportId": {
+      "type": "string",
+      "description": "The unique identifier of the capacity manager data export."
+    },
+    "S3BucketName": {
+      "type": "string",
+      "description": "The name of the Amazon S3 bucket where the capacity manager data export will be stored. The bucket must exist and be accessible by EC2 Capacity Manager service."
+    },
+    "S3BucketPrefix": {
+      "type": "string",
+      "description": "The prefix for the S3 bucket location where exported files will be placed. If not specified, files will be placed in the root of the bucket."
+    },
+    "Schedule": {
+      "type": "string",
+      "enum": [
+        "hourly"
+      ],
+      "description": "The schedule for the capacity manager data export. Currently supports hourly exports that provide periodic snapshots of capacity manager data."
+    },
+    "OutputFormat": {
+      "type": "string",
+      "enum": [
+        "csv",
+        "parquet"
+      ],
+      "description": "The format of the exported capacity manager data. Choose 'csv' for comma-separated values or 'parquet' for optimized columnar storage format."
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "description": "An array of key-value pairs to apply to the capacity manager data export."
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "S3BucketName",
+    "Schedule",
+    "OutputFormat"
+  ],
+  "primaryIdentifier": [
+    "/properties/CapacityManagerDataExportId"
+  ],
+  "readOnlyProperties": [
+    "/properties/CapacityManagerDataExportId"
+  ],
+  "createOnlyProperties": [
+    "/properties/S3BucketName",
+    "/properties/S3BucketPrefix",
+    "/properties/OutputFormat",
+    "/properties/Schedule"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ec2:CreateCapacityManagerDataExport",
+        "ec2:CreateTags",
+        "ec2:DescribeCapacityManagerDataExports"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ec2:DescribeCapacityManagerDataExports",
+        "ec2:DescribeTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ec2:DescribeCapacityManagerDataExports",
+        "ec2:CreateTags",
+        "ec2:DeleteTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:DescribeCapacityManagerDataExports",
+        "ec2:DeleteCapacityManagerDataExport",
+        "ec2:DeleteTags"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:DescribeCapacityManagerDataExports"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags"
+    ]
+  }
+}

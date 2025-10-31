@@ -1,0 +1,1 @@
+$ terraform import awscc_s3vectors_index.example "index_arn"

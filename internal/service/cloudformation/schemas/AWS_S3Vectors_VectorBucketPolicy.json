@@ -1,0 +1,105 @@
+{
+  "typeName": "AWS::S3Vectors::VectorBucketPolicy",
+  "description": "Resource Type definition for AWS::S3Vectors::VectorBucketPolicy",
+  "definitions": {
+    "Policy": {
+      "description": "A policy document containing permissions to add to the specified vector bucket. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM.",
+      "type": [
+        "object",
+        "string"
+      ]
+    },
+    "VectorBucketArn": {
+      "description": "The Amazon Resource Name (ARN) of the vector bucket.",
+      "type": "string",
+      "examples": [
+        "arn:aws:s3vectors:us-east-1:123456789012:bucket/myvectorbucket"
+      ]
+    },
+    "VectorBucketName": {
+      "description": "The name of the vector bucket",
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 63
+    }
+  },
+  "properties": {
+    "Policy": {
+      "$ref": "#/definitions/Policy"
+    },
+    "VectorBucketArn": {
+      "$ref": "#/definitions/VectorBucketArn"
+    },
+    "VectorBucketName": {
+      "$ref": "#/definitions/VectorBucketName"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Policy"
+  ],
+  "oneOf": [
+    {
+      "required": [
+        "VectorBucketName"
+      ]
+    },
+    {
+      "required": [
+        "VectorBucketArn"
+      ]
+    }
+  ],
+  "primaryIdentifier": [
+    "/properties/VectorBucketArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/VectorBucketName"
+    ]
+  ],
+  "writeOnlyProperties": [
+    "/properties/VectorBucketName"
+  ],
+  "createOnlyProperties": [
+    "/properties/VectorBucketArn",
+    "/properties/VectorBucketName"
+  ],
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "s3vectors:GetVectorBucketPolicy",
+        "s3vectors:PutVectorBucketPolicy"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "s3vectors:GetVectorBucketPolicy"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "s3vectors:GetVectorBucketPolicy",
+        "s3vectors:PutVectorBucketPolicy"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "s3vectors:GetVectorBucketPolicy",
+        "s3vectors:DeleteVectorBucketPolicy"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "s3vectors:GetVectorBucketPolicy",
+        "s3vectors:ListVectorBuckets"
+      ]
+    }
+  }
+}

@@ -27,6 +27,11 @@
       ],
       "timeoutInMinutes": 180
     },
+    "update": {
+      "permissions": [
+        "lambda:GetFunctionConfiguration"
+      ]
+    },
     "list": {
       "permissions": [
         "lambda:ListVersionsByFunction"

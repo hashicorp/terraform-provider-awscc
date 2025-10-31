@@ -118,7 +118,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "DataAccessRole": {
 		//	          "description": "The data access role included in the configuration details of the AWS Glue data source.",
-		//	          "pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]{1,128}$",
+		//	          "pattern": "^arn:aws[^:]*:iam::\\d{12}:role(/[a-zA-Z0-9+=,.@_-]+)*/[a-zA-Z0-9+=,.@_-]+$",
 		//	          "type": "string"
 		//	        },
 		//	        "RelationalFilterConfigurations": {
@@ -189,7 +189,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "properties": {
 		//	        "DataAccessRole": {
 		//	          "description": "The data access role included in the configuration details of the Amazon Redshift data source.",
-		//	          "pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]{1,128}$",
+		//	          "pattern": "^arn:aws[^:]*:iam::\\d{12}:role(/[a-zA-Z0-9+=,.@_-]+)*/[a-zA-Z0-9+=,.@_-]+$",
 		//	          "type": "string"
 		//	        },
 		//	        "RedshiftCredentialConfiguration": {

@@ -1,4 +1,27 @@
-## 1.62.0 (Unreleased)
+## 1.62.0 (October 31, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_ec2_capacity_manager_data_export`
+* **New Data Source:** `awscc_ec2_capacity_manager_data_exports`
+* **New Data Source:** `awscc_rtbfabric_link`
+* **New Data Source:** `awscc_rtbfabric_responder_gateway`
+* **New Data Source:** `awscc_rtbfabric_responder_gateways`
+* **New Data Source:** `awscc_s3vectors_index`
+* **New Data Source:** `awscc_s3vectors_vector_bucket`
+* **New Data Source:** `awscc_s3vectors_vector_buckets`
+* **New Data Source:** `awscc_s3vectors_vector_bucket_policies`
+* **New Data Source:** `awscc_s3vectors_vector_bucket_policy`
+* **New List Resource:** `awscc_ec2_capacity_manager_data_export`
+* **New List Resource:** `awscc_rtbfabric_responder_gateway`
+* **New List Resource:** `awscc_s3vectors_vector_bucket_policy`
+* **New List Resource:** `awscc_s3vectors_vector_bucket`
+* **New Resource:** `awscc_ec2_capacity_manager_data_export`
+* **New Resource:** `awscc_rtbfabric_link`
+* **New Resource:** `awscc_rtbfabric_responder_gateway`
+* **New Resource:** `awscc_s3vectors_index`
+* **New Resource:** `awscc_s3vectors_vector_bucket_policy`
+* **New Resource:** `awscc_s3vectors_vector_bucket`
 
 ## 1.61.0 (October 24, 2025)
 

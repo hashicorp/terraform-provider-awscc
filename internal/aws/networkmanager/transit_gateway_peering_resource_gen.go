@@ -11,10 +11,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -84,6 +86,24 @@ func transitGatewayPeeringResource(ctx context.Context) (resource.Resource, erro
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LastModificationErrors
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Errors from the last modification of the transit gateway peering.",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"last_modification_errors": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Errors from the last modification of the transit gateway peering.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: OwnerAccountId
@@ -289,6 +309,7 @@ func transitGatewayPeeringResource(ctx context.Context) (resource.Resource, erro
 		"created_at":                            "CreatedAt",
 		"edge_location":                         "EdgeLocation",
 		"key":                                   "Key",
+		"last_modification_errors":              "LastModificationErrors",
 		"owner_account_id":                      "OwnerAccountId",
 		"peering_id":                            "PeeringId",
 		"peering_type":                          "PeeringType",

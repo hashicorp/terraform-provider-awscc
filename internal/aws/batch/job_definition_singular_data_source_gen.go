@@ -4761,6 +4761,28 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"propagate_tags": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ResourceRetentionPolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "SkipDeregisterOnUpdate": {
+		//	      "default": false,
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"resource_retention_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SkipDeregisterOnUpdate
+				"skip_deregister_on_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RetryStrategy
 		// CloudFormation resource type schema:
 		//
@@ -5004,6 +5026,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"repository_credentials":         "RepositoryCredentials",
 		"requests":                       "Requests",
 		"resource_requirements":          "ResourceRequirements",
+		"resource_retention_policy":      "ResourceRetentionPolicy",
 		"resources":                      "Resources",
 		"retry_strategy":                 "RetryStrategy",
 		"root_directory":                 "RootDirectory",
@@ -5023,6 +5046,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"size":                           "Size",
 		"size_in_gi_b":                   "SizeInGiB",
 		"size_limit":                     "SizeLimit",
+		"skip_deregister_on_update":      "SkipDeregisterOnUpdate",
 		"soft_limit":                     "SoftLimit",
 		"source_path":                    "SourcePath",
 		"source_volume":                  "SourceVolume",

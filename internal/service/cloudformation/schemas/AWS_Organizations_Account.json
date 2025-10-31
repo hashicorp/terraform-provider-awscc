@@ -75,6 +75,17 @@
         "SUSPENDED",
         "PENDING_CLOSURE"
       ]
+    },
+    "State": {
+      "description": "The state of the account in the organization.",
+      "type": "string",
+      "enum": [
+        "PENDING_ACTIVATION",
+        "ACTIVE",
+        "SUSPENDED",
+        "PENDING_CLOSURE",
+        "CLOSED"
+      ]
     }
   },
   "definitions": {
@@ -124,6 +135,7 @@
   "readOnlyProperties": [
     "/properties/AccountId",
     "/properties/Status",
+    "/properties/State",
     "/properties/JoinedTimestamp",
     "/properties/JoinedMethod",
     "/properties/Arn"

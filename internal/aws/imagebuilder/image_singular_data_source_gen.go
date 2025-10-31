@@ -45,6 +45,34 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DeletionSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The deletion settings of the image, indicating whether to delete the underlying resources in addition to the image.",
+		//	  "properties": {
+		//	    "ExecutionRole": {
+		//	      "description": "The execution role to use for deleting the image, as well as underlying resources.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ExecutionRole"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"deletion_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExecutionRole
+				"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The execution role to use for deleting the image, as well as underlying resources.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The deletion settings of the image, indicating whether to delete the underlying resources in addition to the image.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DistributionConfigurationArn
 		// CloudFormation resource type schema:
 		//
@@ -476,6 +504,7 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn":                               "Arn",
 		"container_recipe_arn":              "ContainerRecipeArn",
 		"container_tags":                    "ContainerTags",
+		"deletion_settings":                 "DeletionSettings",
 		"deployment_id":                     "DeploymentId",
 		"distribution_configuration_arn":    "DistributionConfigurationArn",
 		"ecr_configuration":                 "EcrConfiguration",

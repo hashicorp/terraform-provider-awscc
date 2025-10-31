@@ -8,13 +8,14 @@ package ecs
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
@@ -188,7 +189,21 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "integer"
 		//	    },
 		//	    "CanaryConfiguration": {
-		//	      "description": ""
+		//	      "additionalProperties": false,
+		//	      "description": "",
+		//	      "properties": {
+		//	        "CanaryBakeTimeInMinutes": {
+		//	          "maximum": 1440,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        },
+		//	        "CanaryPercent": {
+		//	          "maximum": 100,
+		//	          "minimum": 0.1,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    },
 		//	    "DeploymentCircuitBreaker": {
 		//	      "additionalProperties": false,
@@ -255,7 +270,21 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "array"
 		//	    },
 		//	    "LinearConfiguration": {
-		//	      "description": ""
+		//	      "additionalProperties": false,
+		//	      "description": "",
+		//	      "properties": {
+		//	        "StepBakeTimeInMinutes": {
+		//	          "maximum": 1440,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        },
+		//	        "StepPercent": {
+		//	          "maximum": 100,
+		//	          "minimum": 3,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    },
 		//	    "MaximumPercent": {
 		//	      "description": "If a service is using the rolling update (``ECS``) deployment type, the ``maximumPercent`` parameter represents an upper limit on the number of your service's tasks that are allowed in the ``RUNNING`` or ``PENDING`` state during a deployment, as a percentage of the ``desiredCount`` (rounded down to the nearest integer). This parameter enables you to define the deployment batch size. For example, if your service is using the ``REPLICA`` service scheduler and has a ``desiredCount`` of four tasks and a ``maximumPercent`` value of 200%, the scheduler may start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default ``maximumPercent`` value for a service using the ``REPLICA`` service scheduler is 200%.\n The Amazon ECS scheduler uses this parameter to replace unhealthy tasks by starting replacement tasks first and then stopping the unhealthy tasks, as long as cluster resources for starting replacement tasks are available. For more information about how the scheduler replaces unhealthy tasks, see [Amazon ECS services](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html).\n If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types, and tasks in the service use the EC2 launch type, the *maximum percent* value is set to the default value. The *maximum percent* value is used to define the upper limit on the number of the tasks in the service that remain in the ``RUNNING`` state while the container instances are in the ``DRAINING`` state.\n  You can't specify a custom ``maximumPercent`` value for a service that uses either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and has tasks that use the EC2 launch type.\n  If the service uses either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types, and the tasks in the service use the Fargate launch type, the maximum percent value is not used. The value is still returned when describing your service.",
@@ -341,13 +370,36 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: CanaryConfiguration
-				"canary_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
-					CustomType:  jsontypes.NormalizedType{},
+				"canary_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CanaryBakeTimeInMinutes
+						"canary_bake_time_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(0, 1440),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: CanaryPercent
+						"canary_percent": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(0.100000, 100.000000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
 					Description: "",
 					Optional:    true,
 					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: DeploymentCircuitBreaker
@@ -457,13 +509,36 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: LinearConfiguration
-				"linear_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
-					CustomType:  jsontypes.NormalizedType{},
+				"linear_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: StepBakeTimeInMinutes
+						"step_bake_time_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(0, 1440),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: StepPercent
+						"step_percent": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(3.000000, 100.000000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
 					Description: "",
 					Optional:    true,
 					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MaximumPercent
@@ -1207,6 +1282,30 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "The configuration for this service to discover and connect to services, and be discovered by, and connected from, other services within a namespace.\n Tasks that run in a namespace can use short names to connect to services in the namespace. Tasks can connect to services across all of the clusters in the namespace. Tasks connect through a managed proxy container that collects logs and metrics for increased visibility. Only the tasks that Amazon ECS services create are supported with Service Connect. For more information, see [Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.",
 		//	  "properties": {
+		//	    "AccessLogConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "",
+		//	      "properties": {
+		//	        "Format": {
+		//	          "enum": [
+		//	            "TEXT",
+		//	            "JSON"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "IncludeQueryParameters": {
+		//	          "enum": [
+		//	            "DISABLED",
+		//	            "ENABLED"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Format"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "Enabled": {
 		//	      "description": "Specifies whether to use Service Connect with this service.",
 		//	      "type": "boolean"
@@ -1398,6 +1497,46 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"service_connect_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccessLogConfiguration
+				"access_log_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Format
+						"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"TEXT",
+									"JSON",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: IncludeQueryParameters
+						"include_query_parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"DISABLED",
+									"ENABLED",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Specifies whether to use Service Connect with this service.",
@@ -2304,6 +2443,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_log_configuration":          "AccessLogConfiguration",
 		"advanced_configuration":            "AdvancedConfiguration",
 		"alarm_names":                       "AlarmNames",
 		"alarms":                            "Alarms",
@@ -2314,7 +2454,9 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"awsvpc_configuration":              "AwsvpcConfiguration",
 		"bake_time_in_minutes":              "BakeTimeInMinutes",
 		"base":                              "Base",
+		"canary_bake_time_in_minutes":       "CanaryBakeTimeInMinutes",
 		"canary_configuration":              "CanaryConfiguration",
+		"canary_percent":                    "CanaryPercent",
 		"capacity_provider":                 "CapacityProvider",
 		"capacity_provider_strategy":        "CapacityProviderStrategy",
 		"client_aliases":                    "ClientAliases",
@@ -2339,11 +2481,13 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"filesystem_type":                   "FilesystemType",
 		"force_new_deployment":              "ForceNewDeployment",
 		"force_new_deployment_nonce":        "ForceNewDeploymentNonce",
+		"format":                            "Format",
 		"header":                            "Header",
 		"health_check_grace_period_seconds": "HealthCheckGracePeriodSeconds",
 		"hook_details":                      "HookDetails",
 		"hook_target_arn":                   "HookTargetArn",
 		"idle_timeout_seconds":              "IdleTimeoutSeconds",
+		"include_query_parameters":          "IncludeQueryParameters",
 		"ingress_port_override":             "IngressPortOverride",
 		"iops":                              "Iops",
 		"issuer_certificate_authority":      "IssuerCertificateAuthority",
@@ -2388,6 +2532,8 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"services":                          "Services",
 		"size_in_gi_b":                      "SizeInGiB",
 		"snapshot_id":                       "SnapshotId",
+		"step_bake_time_in_minutes":         "StepBakeTimeInMinutes",
+		"step_percent":                      "StepPercent",
 		"strategy":                          "Strategy",
 		"subnets":                           "Subnets",
 		"tag_specifications":                "TagSpecifications",

@@ -94,7 +94,10 @@ func anomalyMonitorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	{
 		//	  "description": "The dimensions to evaluate",
 		//	  "enum": [
-		//	    "SERVICE"
+		//	    "SERVICE",
+		//	    "LINKED_ACCOUNT",
+		//	    "TAG",
+		//	    "COST_CATEGORY"
 		//	  ],
 		//	  "type": "string"
 		//	}

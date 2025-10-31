@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -130,6 +131,24 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LastModificationErrors
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Errors from the last modification of the attachment.",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"last_modification_errors": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Errors from the last modification of the attachment.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkFunctionGroupName
@@ -650,6 +669,7 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		"edge_location":                          "EdgeLocation",
 		"ipv_6_support":                          "Ipv6Support",
 		"key":                                    "Key",
+		"last_modification_errors":               "LastModificationErrors",
 		"network_function_group_name":            "NetworkFunctionGroupName",
 		"options":                                "Options",
 		"owner_account_id":                       "OwnerAccountId",

@@ -132,6 +132,12 @@
       "maxLength": 128,
       "pattern": "^tgw-[0-9a-z]+$"
     },
+    "TransitGatewayAttachmentId": {
+      "type": "string",
+      "pattern": "^tgw-attach-[0-9a-z]+$",
+      "minLength": 1,
+      "maxLength": 128
+    },
     "Description": {
       "type": "string",
       "maxLength": 512,
@@ -180,6 +186,7 @@
   "readOnlyProperties": [
     "/properties/FirewallArn",
     "/properties/FirewallId",
+    "/properties/TransitGatewayAttachmentId",
     "/properties/EndpointIds"
   ],
   "primaryIdentifier": [

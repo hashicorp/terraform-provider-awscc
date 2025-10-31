@@ -31,6 +31,7 @@ Data Source schema for AWS::Batch::JobDefinition
 - `parameters` (Map of String)
 - `platform_capabilities` (List of String)
 - `propagate_tags` (Boolean)
+- `resource_retention_policy` (Attributes) (see [below for nested schema](#nestedatt--resource_retention_policy))
 - `retry_strategy` (Attributes) (see [below for nested schema](#nestedatt--retry_strategy))
 - `scheduling_priority` (Number)
 - `tags` (Map of String) A key-value pair to associate with a resource.
@@ -1352,6 +1353,14 @@ Read-Only:
 
 
 
+
+
+<a id="nestedatt--resource_retention_policy"></a>
+### Nested Schema for `resource_retention_policy`
+
+Read-Only:
+
+- `skip_deregister_on_update` (Boolean)
 
 
 <a id="nestedatt--retry_strategy"></a>

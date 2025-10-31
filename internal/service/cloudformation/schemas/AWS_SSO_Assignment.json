@@ -21,14 +21,14 @@
       "pattern": "\\d{12}"
     },
     "TargetType": {
-      "description": "The type of resource to be provsioned to, only aws account now",
+      "description": "The type of resource to be provisioned to, only aws account now",
       "type": "string",
       "enum": [
         "AWS_ACCOUNT"
       ]
     },
     "PermissionSetArn": {
-      "description": "The permission set that the assignemt will be assigned",
+      "description": "The permission set that the assignment will be assigned",
       "type": "string",
       "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
       "minLength": 10,
@@ -106,6 +106,36 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "InstanceArn": {
+            "$ref": "resource-schema.json#/properties/InstanceArn"
+          },
+          "PermissionSetArn": {
+            "$ref": "resource-schema.json#/properties/PermissionSetArn"
+          },
+          "PrincipalId": {
+            "$ref": "resource-schema.json#/properties/PrincipalId"
+          },
+          "PrincipalType": {
+            "$ref": "resource-schema.json#/properties/PrincipalType"
+          },
+          "TargetId": {
+            "$ref": "resource-schema.json#/properties/TargetId"
+          },
+          "TargetType": {
+            "$ref": "resource-schema.json#/properties/TargetType"
+          }
+        },
+        "required": [
+          "InstanceArn",
+          "PermissionSetArn",
+          "PrincipalId",
+          "PrincipalType",
+          "TargetId",
+          "TargetType"
+        ]
+      },
       "permissions": [
         "sso:ListAccountAssignments",
         "iam:ListRolePolicies"

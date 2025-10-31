@@ -133,7 +133,7 @@
       }
     },
     "VpcId": {
-      "description": "",
+      "description": "The ID of the VPC in which the NAT gateway is located.",
       "type": "string"
     },
     "NatGatewayId": {

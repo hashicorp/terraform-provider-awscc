@@ -87,6 +87,13 @@
     "Options": {
       "description": "Vpc options of the attachment.",
       "$ref": "#/definitions/VpcOptions"
+    },
+    "LastModificationErrors": {
+      "description": "Errors from the last modification of the attachment.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
   },
   "definitions": {
@@ -219,7 +226,8 @@
     "/properties/AttachmentPolicyRuleNumber",
     "/properties/SegmentName",
     "/properties/NetworkFunctionGroupName",
-    "/properties/ResourceArn"
+    "/properties/ResourceArn",
+    "/properties/LastModificationErrors"
   ],
   "primaryIdentifier": [
     "/properties/AttachmentId"

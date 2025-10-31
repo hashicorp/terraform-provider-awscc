@@ -18,6 +18,7 @@ Resource schema for AWS::ImageBuilder::Image
 ### Optional
 
 - `container_recipe_arn` (String) The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.
+- `deletion_settings` (Attributes) The deletion settings of the image, indicating whether to delete the underlying resources in addition to the image. (see [below for nested schema](#nestedatt--deletion_settings))
 - `distribution_configuration_arn` (String) The Amazon Resource Name (ARN) of the distribution configuration.
 - `enhanced_image_metadata_enabled` (Boolean) Collects additional information about the image being created, including the operating system (OS) version and package list.
 - `execution_role` (String) The execution role name/ARN for the image build, if provided
@@ -38,6 +39,14 @@ Resource schema for AWS::ImageBuilder::Image
 - `image_uri` (String) URI for containers created in current Region with default ECR image tag
 - `latest_version` (Attributes) The latest version references of the image. (see [below for nested schema](#nestedatt--latest_version))
 - `name` (String) The name of the image.
+
+<a id="nestedatt--deletion_settings"></a>
+### Nested Schema for `deletion_settings`
+
+Optional:
+
+- `execution_role` (String) The execution role to use for deleting the image, as well as underlying resources.
+
 
 <a id="nestedatt--image_pipeline_execution_settings"></a>
 ### Nested Schema for `image_pipeline_execution_settings`

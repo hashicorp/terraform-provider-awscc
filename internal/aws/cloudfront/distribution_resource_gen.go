@@ -914,6 +914,10 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	                "description": "Specifies how long, in seconds, CloudFront waits for a response from the origin. This is also known as the *origin response timeout*. The minimum timeout is 1 second, the maximum is 120 seconds, and the default (if you don't specify otherwise) is 30 seconds.\n For more information, see [Response timeout](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginResponseTimeout) in the *Amazon CloudFront Developer Guide*.",
 		//	                "type": "integer"
 		//	              },
+		//	              "OwnerAccountId": {
+		//	                "description": "",
+		//	                "type": "string"
+		//	              },
 		//	              "VpcOriginId": {
 		//	                "description": "The VPC origin ID.",
 		//	                "type": "string"
@@ -2512,6 +2516,15 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
+									// Property: OwnerAccountId
+									"owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
 									// Property: VpcOriginId
 									"vpc_origin_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The VPC origin ID.",
@@ -3003,6 +3016,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"origin_shield_region":            "OriginShieldRegion",
 		"origin_ssl_protocols":            "OriginSSLProtocols",
 		"origins":                         "Origins",
+		"owner_account_id":                "OwnerAccountId",
 		"parameter_definitions":           "ParameterDefinitions",
 		"path_pattern":                    "PathPattern",
 		"prefix":                          "Prefix",

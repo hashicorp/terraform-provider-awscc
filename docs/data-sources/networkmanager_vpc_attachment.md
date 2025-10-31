@@ -28,6 +28,7 @@ Data Source schema for AWS::NetworkManager::VpcAttachment
 - `core_network_id` (String) The ID of a core network for the VPC attachment.
 - `created_at` (String) Creation time of the attachment.
 - `edge_location` (String) The Region where the edge is located.
+- `last_modification_errors` (List of String) Errors from the last modification of the attachment.
 - `network_function_group_name` (String) The name of the network function group attachment.
 - `options` (Attributes) Vpc options of the attachment. (see [below for nested schema](#nestedatt--options))
 - `owner_account_id` (String) Owner account of the attachment.

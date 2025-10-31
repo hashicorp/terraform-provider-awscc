@@ -128,6 +128,10 @@
       "type": "string",
       "description": ""
     },
+    "AccountId": {
+      "type": "string",
+      "description": ""
+    },
     "CreatedTime": {
       "type": "string",
       "description": ""
@@ -160,6 +164,7 @@
   "readOnlyProperties": [
     "/properties/Id",
     "/properties/Arn",
+    "/properties/AccountId",
     "/properties/Status",
     "/properties/CreatedTime",
     "/properties/LastModifiedTime"

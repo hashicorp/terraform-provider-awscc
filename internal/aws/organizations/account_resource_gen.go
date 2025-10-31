@@ -184,6 +184,27 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// RoleName is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The state of the account in the organization.",
+		//	  "enum": [
+		//	    "PENDING_ACTIVATION",
+		//	    "ACTIVE",
+		//	    "SUSPENDED",
+		//	    "PENDING_CLOSURE",
+		//	    "CLOSED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the account in the organization.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -316,6 +337,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		"key":              "Key",
 		"parent_ids":       "ParentIds",
 		"role_name":        "RoleName",
+		"state":            "State",
 		"status":           "Status",
 		"tags":             "Tags",
 		"value":            "Value",

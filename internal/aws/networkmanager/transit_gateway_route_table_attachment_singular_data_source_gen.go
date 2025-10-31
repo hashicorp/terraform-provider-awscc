@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -97,6 +98,21 @@ func transitGatewayRouteTableAttachmentDataSource(ctx context.Context) (datasour
 		//	}
 		"edge_location": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Region where the edge is located.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: LastModificationErrors
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Errors from the last modification of the attachment.",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"last_modification_errors": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Errors from the last modification of the attachment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkFunctionGroupName
@@ -417,6 +433,7 @@ func transitGatewayRouteTableAttachmentDataSource(ctx context.Context) (datasour
 		"created_at":                             "CreatedAt",
 		"edge_location":                          "EdgeLocation",
 		"key":                                    "Key",
+		"last_modification_errors":               "LastModificationErrors",
 		"network_function_group_name":            "NetworkFunctionGroupName",
 		"owner_account_id":                       "OwnerAccountId",
 		"peering_id":                             "PeeringId",

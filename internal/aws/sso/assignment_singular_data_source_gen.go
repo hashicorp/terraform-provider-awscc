@@ -40,14 +40,14 @@ func assignmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The permission set that the assignemt will be assigned",
+		//	  "description": "The permission set that the assignment will be assigned",
 		//	  "maxLength": 1224,
 		//	  "minLength": 10,
 		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
 		//	  "type": "string"
 		//	}
 		"permission_set_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The permission set that the assignemt will be assigned",
+			Description: "The permission set that the assignment will be assigned",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PrincipalId
@@ -95,14 +95,14 @@ func assignmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The type of resource to be provsioned to, only aws account now",
+		//	  "description": "The type of resource to be provisioned to, only aws account now",
 		//	  "enum": [
 		//	    "AWS_ACCOUNT"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"target_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of resource to be provsioned to, only aws account now",
+			Description: "The type of resource to be provisioned to, only aws account now",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
