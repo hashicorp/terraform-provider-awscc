@@ -78,5 +78,7 @@
     "/properties/NamedQueryId"
   ],
   "additionalProperties": false,
-  "taggable": false
+  "tagging": {
+    "taggable": false
+  }
 }

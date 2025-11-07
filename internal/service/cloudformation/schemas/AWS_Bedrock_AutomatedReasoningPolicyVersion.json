@@ -149,14 +149,20 @@
         "bedrock:GetAutomatedReasoningPolicy",
         "bedrock:ExportAutomatedReasoningPolicyVersion",
         "bedrock:TagResource",
-        "bedrock:ListTagsForResource"
+        "bedrock:ListTagsForResource",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
       ]
     },
     "read": {
       "permissions": [
         "bedrock:GetAutomatedReasoningPolicy",
         "bedrock:ExportAutomatedReasoningPolicyVersion",
-        "bedrock:ListTagsForResource"
+        "bedrock:ListTagsForResource",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
       ]
     },
     "delete": {

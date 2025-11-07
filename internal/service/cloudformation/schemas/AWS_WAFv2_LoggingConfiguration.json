@@ -234,5 +234,8 @@
         "wafv2:ListLoggingConfigurations"
       ]
     }
+  },
+  "propertyTransform": {
+    "/properties/RedactedFields/*/SingleHeader/Name": "$lowercase(Name)"
   }
 }
