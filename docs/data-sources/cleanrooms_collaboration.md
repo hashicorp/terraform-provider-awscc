@@ -21,6 +21,7 @@ Data Source schema for AWS::CleanRooms::Collaboration
 
 ### Read-Only
 
+- `allowed_result_regions` (Set of String)
 - `analytics_engine` (String)
 - `arn` (String)
 - `auto_approved_change_types` (Set of String)

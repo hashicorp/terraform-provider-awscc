@@ -67,6 +67,7 @@ Contains between 3 and 32 characters
 - `collection_id` (String) The identifier of the collection
 - `dashboard_endpoint` (String) The OpenSearch Dashboards endpoint for the collection.
 - `id` (String) Uniquely identifies the resource.
+- `kms_key_arn` (String) The ARN of the AWS KMS key used to encrypt the collection.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

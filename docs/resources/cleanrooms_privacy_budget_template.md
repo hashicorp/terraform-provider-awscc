@@ -38,10 +38,22 @@ Represents a privacy budget within a collaboration
 <a id="nestedatt--parameters"></a>
 ### Nested Schema for `parameters`
 
-Required:
+Optional:
 
+- `budget_parameters` (Attributes List) (see [below for nested schema](#nestedatt--parameters--budget_parameters))
 - `epsilon` (Number)
+- `resource_arn` (String)
 - `users_noise_per_query` (Number)
+
+<a id="nestedatt--parameters--budget_parameters"></a>
+### Nested Schema for `parameters.budget_parameters`
+
+Optional:
+
+- `auto_refresh` (String)
+- `budget` (Number)
+- `type` (String)
+
 
 
 <a id="nestedatt--tags"></a>

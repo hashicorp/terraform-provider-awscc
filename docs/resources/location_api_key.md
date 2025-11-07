@@ -67,7 +67,26 @@ Required:
 
 Optional:
 
+- `allow_android_apps` (Attributes List) (see [below for nested schema](#nestedatt--restrictions--allow_android_apps))
+- `allow_apple_apps` (Attributes List) (see [below for nested schema](#nestedatt--restrictions--allow_apple_apps))
 - `allow_referers` (List of String)
+
+<a id="nestedatt--restrictions--allow_android_apps"></a>
+### Nested Schema for `restrictions.allow_android_apps`
+
+Optional:
+
+- `certificate_fingerprint` (String)
+- `package` (String)
+
+
+<a id="nestedatt--restrictions--allow_apple_apps"></a>
+### Nested Schema for `restrictions.allow_apple_apps`
+
+Optional:
+
+- `bundle_id` (String)
+
 
 
 <a id="nestedatt--tags"></a>
