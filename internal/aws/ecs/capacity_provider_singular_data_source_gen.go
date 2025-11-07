@@ -189,7 +189,8 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	                  "t4",
 		//	                  "t4g",
 		//	                  "vu9p",
-		//	                  "v100"
+		//	                  "v100",
+		//	                  "l40s"
 		//	                ],
 		//	                "type": "string"
 		//	              },
