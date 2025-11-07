@@ -2,6 +2,28 @@
   "typeName": "AWS::Location::APIKey",
   "description": "Definition of AWS::Location::APIKey Resource Type",
   "definitions": {
+    "AndroidApp": {
+      "type": "object",
+      "properties": {
+        "Package": {
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^([A-Za-z][A-Za-z\\d_]*\\.)+[A-Za-z][A-Za-z\\d_]*$"
+        },
+        "CertificateFingerprint": {
+          "type": "string",
+          "maxLength": 59,
+          "minLength": 59,
+          "pattern": "^([A-Fa-f0-9]{2}:){19}[A-Fa-f0-9]{2}$"
+        }
+      },
+      "required": [
+        "CertificateFingerprint",
+        "Package"
+      ],
+      "additionalProperties": false
+    },
     "ApiKeyRestrictions": {
       "type": "object",
       "properties": {
@@ -33,16 +55,49 @@
           "items": {
             "type": "string",
             "maxLength": 253,
-            "pattern": "^([$\\-._+!*\\x{60}(),;/?:@=&\\w]|%([0-9a-fA-F?]{2}|[0-9a-fA-F?]?[*]))+$"
+            "pattern": "^([\\w!$&()*+,./:;=?@\\x{60}-]|%([\\dA-Fa-f]{2}|[\\dA-Fa-f]?\\*))+$"
           },
           "maxItems": 5,
-          "minItems": 1,
+          "minItems": 0,
+          "insertionOrder": false
+        },
+        "AllowAndroidApps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AndroidApp"
+          },
+          "maxItems": 5,
+          "minItems": 0,
+          "insertionOrder": false
+        },
+        "AllowAppleApps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppleApp"
+          },
+          "maxItems": 5,
+          "minItems": 0,
           "insertionOrder": false
         }
       },
       "required": [
         "AllowActions",
         "AllowResources"
+      ],
+      "additionalProperties": false
+    },
+    "AppleApp": {
+      "type": "object",
+      "properties": {
+        "BundleId": {
+          "type": "string",
+          "maxLength": 155,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9\\-]+(\\.[A-Za-z0-9\\-]+)+$"
+        }
+      },
+      "required": [
+        "BundleId"
       ],
       "additionalProperties": false
     },
@@ -203,6 +258,17 @@
         "geo-routes:SnapToRoads"
       ]
     },
+    "delete": {
+      "permissions": [
+        "geo:DeleteKey",
+        "geo:DescribeKey"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "geo:ListKeys"
+      ]
+    },
     "read": {
       "permissions": [
         "geo:DescribeKey"
@@ -239,17 +305,6 @@
         "geo-routes:OptimizeWaypoints",
         "geo-routes:SnapToRoads",
         "geo:UpdateKey"
-      ]
-    },
-    "delete": {
-      "permissions": [
-        "geo:DeleteKey",
-        "geo:DescribeKey"
-      ]
-    },
-    "list": {
-      "permissions": [
-        "geo:ListKeys"
       ]
     }
   },

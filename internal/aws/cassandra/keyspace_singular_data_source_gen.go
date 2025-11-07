@@ -65,6 +65,7 @@ func keyspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "items": {
 		//	        "enum": [
 		//	          "af-south-1",
+		//	          "ap-east-1",
 		//	          "ap-northeast-1",
 		//	          "ap-northeast-2",
 		//	          "ap-south-1",
@@ -76,6 +77,8 @@ func keyspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "eu-west-1",
 		//	          "eu-west-2",
 		//	          "eu-west-3",
+		//	          "me-central-1",
+		//	          "me-south-1",
 		//	          "sa-east-1",
 		//	          "us-east-1",
 		//	          "us-east-2",
@@ -84,7 +87,7 @@ func keyspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        ],
 		//	        "type": "string"
 		//	      },
-		//	      "maxItems": 17,
+		//	      "maxItems": 20,
 		//	      "minItems": 2,
 		//	      "type": "array",
 		//	      "uniqueItems": true

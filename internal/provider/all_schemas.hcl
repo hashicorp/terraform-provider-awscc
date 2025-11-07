@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1253 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1267 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -723,6 +723,10 @@ resource_schema "aws_bedrockagentcore_runtime" {
 resource_schema "aws_bedrockagentcore_runtime_endpoint" {
   cloudformation_type_name               = "AWS::BedrockAgentCore::RuntimeEndpoint"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_bedrockagentcore_workload_identity" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::WorkloadIdentity"
 }
 
 resource_schema "aws_billing_billing_view" {
@@ -2548,6 +2552,10 @@ resource_schema "aws_glue_crawler" {
 
 resource_schema "aws_glue_database" {
   cloudformation_type_name = "AWS::Glue::Database"
+}
+
+resource_schema "aws_glue_integration_resource_property" {
+  cloudformation_type_name = "AWS::Glue::IntegrationResourceProperty"
 }
 
 resource_schema "aws_glue_job" {
@@ -4824,6 +4832,10 @@ resource_schema "aws_ses_mail_manager_traffic_policy" {
   cloudformation_type_name = "AWS::SES::MailManagerTrafficPolicy"
 }
 
+resource_schema "aws_ses_multi_region_endpoint" {
+  cloudformation_type_name = "AWS::SES::MultiRegionEndpoint"
+}
+
 resource_schema "aws_ses_template" {
   cloudformation_type_name = "AWS::SES::Template"
 }
@@ -4942,7 +4954,7 @@ resource_schema "aws_ssmquicksetup_configuration_manager" {
 }
 
 resource_schema "aws_ssmquicksetup_lifecycle_automation" {
-  cloudformation_type_name = "AWS::SSMQuickSetup::LifecycleAutomation"
+  cloudformation_type_name               = "AWS::SSMQuickSetup::LifecycleAutomation"
   suppress_plural_data_source_generation = true
 }
 
@@ -5206,6 +5218,10 @@ resource_schema "aws_securitylake_subscriber_notification" {
   cloudformation_type_name = "AWS::SecurityLake::SubscriberNotification"
 }
 
+resource_schema "aws_servicecatalog_cloudformation_product" {
+  cloudformation_type_name = "AWS::ServiceCatalog::CloudFormationProduct"
+}
+
 resource_schema "aws_servicecatalog_cloudformation_provisioned_product" {
   cloudformation_type_name               = "AWS::ServiceCatalog::CloudFormationProvisionedProduct"
   suppress_plural_data_source_generation = true
@@ -5217,6 +5233,11 @@ resource_schema "aws_servicecatalog_launch_notification_constraint" {
 
 resource_schema "aws_servicecatalog_launch_template_constraint" {
   cloudformation_type_name               = "AWS::ServiceCatalog::LaunchTemplateConstraint"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_servicecatalog_portfolio_principal_association" {
+  cloudformation_type_name               = "AWS::ServiceCatalog::PortfolioPrincipalAssociation"
   suppress_plural_data_source_generation = true
 }
 

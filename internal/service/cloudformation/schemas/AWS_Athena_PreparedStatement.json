@@ -81,5 +81,7 @@
     "/properties/WorkGroup"
   ],
   "additionalProperties": false,
-  "taggable": false
+  "tagging": {
+    "taggable": false
+  }
 }

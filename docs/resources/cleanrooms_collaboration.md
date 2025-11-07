@@ -56,6 +56,7 @@ resource "awscc_cleanrooms_collaboration" "example" {
 
 ### Optional
 
+- `allowed_result_regions` (Set of String)
 - `analytics_engine` (String)
 - `auto_approved_change_types` (Set of String)
 - `creator_member_abilities` (Set of String)

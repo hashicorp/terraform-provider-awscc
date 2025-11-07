@@ -695,6 +695,11 @@
         "identifier": ["AgentRuntimeEndpointArn"]
     },
     {
+        "resource": "awscc_bedrockagentcore_workload_identity",
+        "generateListResource": true,
+        "identifier": ["Name"]
+    },
+    {
         "resource": "awscc_billing_billing_view",
         "generateListResource": true,
         "identifier": ["Arn"]
@@ -2616,6 +2621,11 @@
         "resource": "awscc_glue_database",
         "generateListResource": true,
         "identifier": ["DatabaseName"]
+    },
+    {
+        "resource": "awscc_glue_integration_resource_property",
+        "generateListResource": true,
+        "identifier": ["ResourceArn","ResourcePropertyArn"]
     },
     {
         "resource": "awscc_glue_job",
@@ -5049,6 +5059,11 @@
         "identifier": ["TrafficPolicyId"]
     },
     {
+        "resource": "awscc_ses_multi_region_endpoint",
+        "generateListResource": true,
+        "identifier": ["EndpointName"]
+    },
+    {
         "resource": "awscc_ses_template",
         "generateListResource": true,
         "identifier": ["Id"]
@@ -5464,6 +5479,11 @@
         "identifier": ["SubscriberArn"]
     },
     {
+        "resource": "awscc_servicecatalog_cloudformation_product",
+        "generateListResource": true,
+        "identifier": ["Id"]
+    },
+    {
         "resource": "awscc_servicecatalog_cloudformation_provisioned_product",
         "identifier": ["ProvisionedProductId"]
     },
@@ -5475,6 +5495,10 @@
     {
         "resource": "awscc_servicecatalog_launch_template_constraint",
         "identifier": ["Id"]
+    },
+    {
+        "resource": "awscc_servicecatalog_portfolio_principal_association",
+        "identifier": ["PortfolioId","PrincipalARN"]
     },
     {
         "resource": "awscc_servicecatalog_portfolio_product_association",

@@ -125,7 +125,8 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "SM2",
 		//	    "ML_DSA_44",
 		//	    "ML_DSA_65",
-		//	    "ML_DSA_87"
+		//	    "ML_DSA_87",
+		//	    "ECC_NIST_EDWARDS25519"
 		//	  ],
 		//	  "type": "string"
 		//	}

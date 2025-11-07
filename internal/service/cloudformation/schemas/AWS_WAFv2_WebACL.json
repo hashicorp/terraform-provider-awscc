@@ -3,6 +3,68 @@
   "description": "Contains the Rules that identify the requests that you want to allow, block, or count. In a WebACL, you also specify a default action (ALLOW or BLOCK), and the action for each Rule that you add to a WebACL, for example, block requests from specified IP addresses or block requests from specified referrers. You also associate the WebACL with a CloudFront distribution to identify the requests that you want AWS WAF to filter. If you add more than one Rule to a WebACL, a request needs to match only one of the specifications to be allowed, blocked, or counted.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-wafv2.git",
   "definitions": {
+    "ApplicationConfig": {
+      "description": "Configures the ability for the WAF; console to store and retrieve application attributes during the webacl; creation process. Application attributes help WAF; give recommendations for protection packs.",
+      "type": "object",
+      "properties": {
+        "Attributes": {
+          "$ref": "#/definitions/ApplicationAttributes"
+        }
+      },
+      "required": [
+        "Attributes"
+      ],
+      "additionalProperties": false
+    },
+    "ApplicationAttributes": {
+      "description": "Contains the attribute name and a list of values for that attribute.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ApplicationAttribute"
+      },
+      "minItems": 1,
+      "maxItems": 10
+    },
+    "ApplicationAttribute": {
+      "description": "Application details defined during the &webacl; creation process. Application attributes help WAF; give recommendations for protection packs.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "$ref": "#/definitions/AttributeName"
+        },
+        "Values": {
+          "$ref": "#/definitions/AttributeValues"
+        }
+      },
+      "required": [
+        "Name",
+        "Values"
+      ],
+      "additionalProperties": false
+    },
+    "AttributeValues": {
+      "description": "Contains a list of values for that attribute",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AttributeValue"
+      },
+      "minItems": 1,
+      "maxItems": 10
+    },
+    "AttributeValue": {
+      "description": "Specifies the attribute value.",
+      "type": "string",
+      "pattern": "^[\\w\\-]+$",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "AttributeName": {
+      "description": "Specifies the attribute name.",
+      "type": "string",
+      "pattern": "^[\\w\\-]+$",
+      "minLength": 1,
+      "maxLength": 64
+    },
     "AndStatement": {
       "type": "object",
       "properties": {
@@ -2195,6 +2257,10 @@
     "DataProtectionConfig": {
       "description": "Collection of dataProtects.",
       "$ref": "#/definitions/DataProtectionConfig"
+    },
+    "ApplicationConfig": {
+      "description": "Collection of application attributes.",
+      "$ref": "#/definitions/ApplicationConfig"
     },
     "Tags": {
       "type": "array",

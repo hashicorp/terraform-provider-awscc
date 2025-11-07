@@ -1,0 +1,132 @@
+{
+  "typeName": "AWS::BedrockAgentCore::WorkloadIdentity",
+  "description": "Definition of AWS::BedrockAgentCore::WorkloadIdentity Resource Type",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "properties": {
+    "Name": {
+      "description": "The name of the workload identity. The name must be unique within your account.",
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 255,
+      "pattern": "[A-Za-z0-9_.-]+"
+    },
+    "AllowedResourceOauth2ReturnUrls": {
+      "description": "The list of allowed OAuth2 return URLs for resources associated with this workload identity.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2048,
+        "pattern": "\\w+:(/?/?)[^\\s]+"
+      },
+      "insertionOrder": false
+    },
+    "WorkloadIdentityArn": {
+      "description": "The Amazon Resource Name (ARN) of the workload identity.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "CreatedTime": {
+      "description": "The timestamp when the workload identity was created.",
+      "type": "number"
+    },
+    "LastUpdatedTime": {
+      "description": "The timestamp when the workload identity was last updated.",
+      "type": "number"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": ""
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/WorkloadIdentityArn",
+    "/properties/CreatedTime",
+    "/properties/LastUpdatedTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
+  "primaryIdentifier": [
+    "/properties/Name"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bedrock-agentcore:CreateWorkloadIdentity",
+        "bedrock-agentcore:GetWorkloadIdentity",
+        "bedrock-agentcore:TagResource",
+        "bedrock-agentcore:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bedrock-agentcore:GetWorkloadIdentity",
+        "bedrock-agentcore:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bedrock-agentcore:UpdateWorkloadIdentity",
+        "bedrock-agentcore:GetWorkloadIdentity",
+        "bedrock-agentcore:TagResource",
+        "bedrock-agentcore:UntagResource",
+        "bedrock-agentcore:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bedrock-agentcore:DeleteWorkloadIdentity"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bedrock-agentcore:ListWorkloadIdentities"
+      ]
+    }
+  },
+  "tagging": {
+    "cloudFormationSystemTags": false,
+    "tagOnCreate": true,
+    "tagProperty": "/properties/Tags",
+    "tagUpdatable": true,
+    "taggable": true,
+    "permissions": [
+      "bedrock-agentcore:TagResource",
+      "bedrock-agentcore:UntagResource",
+      "bedrock-agentcore:ListTagsForResource"
+    ]
+  }
+}

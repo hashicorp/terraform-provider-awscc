@@ -26,6 +26,7 @@ Data Source schema for AWS::OpenSearchServerless::Collection
 - `collection_id` (String) The identifier of the collection
 - `dashboard_endpoint` (String) The OpenSearch Dashboards endpoint for the collection.
 - `description` (String) The description of the collection
+- `kms_key_arn` (String) The ARN of the AWS KMS key used to encrypt the collection.
 - `name` (String) The name of the collection.
 
 The name must meet the following criteria:

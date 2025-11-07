@@ -195,15 +195,64 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 		//	      "minItems": 1,
 		//	      "type": "array"
 		//	    },
+		//	    "AllowAndroidApps": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "CertificateFingerprint": {
+		//	            "maxLength": 59,
+		//	            "minLength": 59,
+		//	            "pattern": "^([A-Fa-f0-9]{2}:){19}[A-Fa-f0-9]{2}$",
+		//	            "type": "string"
+		//	          },
+		//	          "Package": {
+		//	            "maxLength": 255,
+		//	            "minLength": 1,
+		//	            "pattern": "^([A-Za-z][A-Za-z\\d_]*\\.)+[A-Za-z][A-Za-z\\d_]*$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "CertificateFingerprint",
+		//	          "Package"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 5,
+		//	      "minItems": 0,
+		//	      "type": "array"
+		//	    },
+		//	    "AllowAppleApps": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "BundleId": {
+		//	            "maxLength": 155,
+		//	            "minLength": 1,
+		//	            "pattern": "^[A-Za-z0-9\\-]+(\\.[A-Za-z0-9\\-]+)+$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "BundleId"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 5,
+		//	      "minItems": 0,
+		//	      "type": "array"
+		//	    },
 		//	    "AllowReferers": {
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "maxLength": 253,
-		//	        "pattern": "^([$\\-._+!*\\x{60}(),;/?:@=\u0026\\w]|%([0-9a-fA-F?]{2}|[0-9a-fA-F?]?[*]))+$",
+		//	        "pattern": "^([\\w!$\u0026()*+,./:;=?@\\x{60}-]|%([\\dA-Fa-f]{2}|[\\dA-Fa-f]?\\*))+$",
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 5,
-		//	      "minItems": 1,
+		//	      "minItems": 0,
 		//	      "type": "array"
 		//	    },
 		//	    "AllowResources": {
@@ -241,16 +290,87 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 						generic.Multiset(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: AllowAndroidApps
+				"allow_android_apps": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CertificateFingerprint
+							"certificate_fingerprint": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(59, 59),
+									stringvalidator.RegexMatches(regexp.MustCompile("^([A-Fa-f0-9]{2}:){19}[A-Fa-f0-9]{2}$"), ""),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Package
+							"package": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 255),
+									stringvalidator.RegexMatches(regexp.MustCompile("^([A-Za-z][A-Za-z\\d_]*\\.)+[A-Za-z][A-Za-z\\d_]*$"), ""),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(0, 5),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AllowAppleApps
+				"allow_apple_apps": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BundleId
+							"bundle_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 155),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9\\-]+(\\.[A-Za-z0-9\\-]+)+$"), ""),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(0, 5),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: AllowReferers
 				"allow_referers": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(1, 5),
+						listvalidator.SizeBetween(0, 5),
 						listvalidator.ValueStringsAre(
 							stringvalidator.LengthAtMost(253),
-							stringvalidator.RegexMatches(regexp.MustCompile("^([$\\-._+!*\\x{60}(),;/?:@=&\\w]|%([0-9a-fA-F?]{2}|[0-9a-fA-F?]?[*]))+$"), ""),
+							stringvalidator.RegexMatches(regexp.MustCompile("^([\\w!$&()*+,./:;=?@\\x{60}-]|%([\\dA-Fa-f]{2}|[\\dA-Fa-f]?\\*))+$"), ""),
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -398,23 +518,28 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allow_actions":   "AllowActions",
-		"allow_referers":  "AllowReferers",
-		"allow_resources": "AllowResources",
-		"arn":             "Arn",
-		"create_time":     "CreateTime",
-		"description":     "Description",
-		"expire_time":     "ExpireTime",
-		"force_delete":    "ForceDelete",
-		"force_update":    "ForceUpdate",
-		"key":             "Key",
-		"key_arn":         "KeyArn",
-		"key_name":        "KeyName",
-		"no_expiry":       "NoExpiry",
-		"restrictions":    "Restrictions",
-		"tags":            "Tags",
-		"update_time":     "UpdateTime",
-		"value":           "Value",
+		"allow_actions":           "AllowActions",
+		"allow_android_apps":      "AllowAndroidApps",
+		"allow_apple_apps":        "AllowAppleApps",
+		"allow_referers":          "AllowReferers",
+		"allow_resources":         "AllowResources",
+		"arn":                     "Arn",
+		"bundle_id":               "BundleId",
+		"certificate_fingerprint": "CertificateFingerprint",
+		"create_time":             "CreateTime",
+		"description":             "Description",
+		"expire_time":             "ExpireTime",
+		"force_delete":            "ForceDelete",
+		"force_update":            "ForceUpdate",
+		"key":                     "Key",
+		"key_arn":                 "KeyArn",
+		"key_name":                "KeyName",
+		"no_expiry":               "NoExpiry",
+		"package":                 "Package",
+		"restrictions":            "Restrictions",
+		"tags":                    "Tags",
+		"update_time":             "UpdateTime",
+		"value":                   "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

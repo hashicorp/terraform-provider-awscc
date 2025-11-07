@@ -326,7 +326,7 @@
         },
         "KeySchema": {
           "minItems": 1,
-          "maxItems": 2,
+          "maxItems": 8,
           "uniqueItems": true,
           "type": "array",
           "items": {
@@ -369,16 +369,25 @@
       }
     },
     "ReplicaStreamSpecification": {
+      "anyOf": [
+        {
+          "required": [
+            "ResourcePolicy"
+          ]
+        },
+        {
+          "required": [
+            "Tags"
+          ]
+        }
+      ],
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "ResourcePolicy": {
           "$ref": "#/definitions/ResourcePolicy"
         }
-      },
-      "required": [
-        "ResourcePolicy"
-      ]
+      }
     },
     "GlobalTableWitness": {
       "additionalProperties": false,

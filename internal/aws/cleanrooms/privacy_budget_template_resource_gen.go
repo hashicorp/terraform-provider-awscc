@@ -10,9 +10,11 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -132,10 +134,50 @@ func privacyBudgetTemplateResource(ctx context.Context) (resource.Resource, erro
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "BudgetParameters": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "AutoRefresh": {
+		//	            "enum": [
+		//	              "ENABLED",
+		//	              "DISABLED"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Budget": {
+		//	            "minimum": 0,
+		//	            "type": "integer"
+		//	          },
+		//	          "Type": {
+		//	            "enum": [
+		//	              "CALENDAR_DAY",
+		//	              "CALENDAR_MONTH",
+		//	              "CALENDAR_WEEK",
+		//	              "LIFETIME"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Type",
+		//	          "Budget"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 2,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
 		//	    "Epsilon": {
 		//	      "maximum": 20,
 		//	      "minimum": 1,
 		//	      "type": "integer"
+		//	    },
+		//	    "ResourceArn": {
+		//	      "maxLength": 200,
+		//	      "type": "string"
 		//	    },
 		//	    "UsersNoisePerQuery": {
 		//	      "maximum": 100,
@@ -143,27 +185,102 @@ func privacyBudgetTemplateResource(ctx context.Context) (resource.Resource, erro
 		//	      "type": "integer"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "Epsilon",
-		//	    "UsersNoisePerQuery"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BudgetParameters
+				"budget_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AutoRefresh
+							"auto_refresh": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"ENABLED",
+										"DISABLED",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Budget
+							"budget": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.AtLeast(0),
+									fwvalidators.NotNullInt64(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"CALENDAR_DAY",
+										"CALENDAR_MONTH",
+										"CALENDAR_WEEK",
+										"LIFETIME",
+									),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 2),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: Epsilon
 				"epsilon": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
 						int64validator.Between(1, 20),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceArn
+				"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(200),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: UsersNoisePerQuery
 				"users_noise_per_query": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
 						int64validator.Between(10, 100),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Required: true,
@@ -188,7 +305,8 @@ func privacyBudgetTemplateResource(ctx context.Context) (resource.Resource, erro
 		//
 		//	{
 		//	  "enum": [
-		//	    "DIFFERENTIAL_PRIVACY"
+		//	    "DIFFERENTIAL_PRIVACY",
+		//	    "ACCESS_BUDGET"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -197,6 +315,7 @@ func privacyBudgetTemplateResource(ctx context.Context) (resource.Resource, erro
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"DIFFERENTIAL_PRIVACY",
+					"ACCESS_BUDGET",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -302,6 +421,8 @@ func privacyBudgetTemplateResource(ctx context.Context) (resource.Resource, erro
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                                "Arn",
 		"auto_refresh":                       "AutoRefresh",
+		"budget":                             "Budget",
+		"budget_parameters":                  "BudgetParameters",
 		"collaboration_arn":                  "CollaborationArn",
 		"collaboration_identifier":           "CollaborationIdentifier",
 		"epsilon":                            "Epsilon",
@@ -311,7 +432,9 @@ func privacyBudgetTemplateResource(ctx context.Context) (resource.Resource, erro
 		"parameters":                         "Parameters",
 		"privacy_budget_template_identifier": "PrivacyBudgetTemplateIdentifier",
 		"privacy_budget_type":                "PrivacyBudgetType",
+		"resource_arn":                       "ResourceArn",
 		"tags":                               "Tags",
+		"type":                               "Type",
 		"users_noise_per_query":              "UsersNoisePerQuery",
 		"value":                              "Value",
 	})

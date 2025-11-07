@@ -223,6 +223,29 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "properties": {
+		//	    "AmazonQProperties": {
+		//	      "additionalProperties": false,
+		//	      "description": "Amazon Q properties of the connection.",
+		//	      "properties": {
+		//	        "AuthMode": {
+		//	          "description": "The authentication mode of the connection's AmazonQ properties",
+		//	          "maxLength": 128,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        },
+		//	        "IsEnabled": {
+		//	          "description": "Specifies whether Amazon Q is enabled for the connection",
+		//	          "type": "boolean"
+		//	        },
+		//	        "ProfileArn": {
+		//	          "maxLength": 2048,
+		//	          "minLength": 0,
+		//	          "pattern": "arn:aws[a-z\\-]*:[a-z0-9\\-]+:[a-z0-9\\-]*:[0-9]*:.*",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "AthenaProperties": {
 		//	      "additionalProperties": false,
 		//	      "description": "Athena Properties Input",
@@ -766,6 +789,27 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"props": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AmazonQProperties
+				"amazon_q_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AuthMode
+						"auth_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The authentication mode of the connection's AmazonQ properties",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: IsEnabled
+						"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether Amazon Q is enabled for the connection",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ProfileArn
+						"profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Amazon Q properties of the connection.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: AthenaProperties
 				"athena_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1191,6 +1235,21 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Scope
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The scope of the connection.",
+		//	  "enum": [
+		//	    "DOMAIN",
+		//	    "PROJECT"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The scope of the connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -1222,7 +1281,9 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"access_role":                              "AccessRole",
 		"access_token":                             "AccessToken",
 		"additional_args":                          "AdditionalArgs",
+		"amazon_q_properties":                      "AmazonQProperties",
 		"athena_properties":                        "AthenaProperties",
+		"auth_mode":                                "AuthMode",
 		"authentication_configuration":             "AuthenticationConfiguration",
 		"authentication_type":                      "AuthenticationType",
 		"authorization_code":                       "AuthorizationCode",
@@ -1262,6 +1323,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"iam_properties":                           "IamProperties",
 		"idle_timeout":                             "IdleTimeout",
 		"instance_profile_arn":                     "InstanceProfileArn",
+		"is_enabled":                               "IsEnabled",
 		"java_virtual_env":                         "JavaVirtualEnv",
 		"jwt_token":                                "JwtToken",
 		"kms_key_arn":                              "KmsKeyArn",
@@ -1277,6 +1339,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"password":                                 "Password",
 		"physical_connection_requirements":         "PhysicalConnectionRequirements",
 		"port":                                     "Port",
+		"profile_arn":                              "ProfileArn",
 		"project_id":                               "ProjectId",
 		"project_identifier":                       "ProjectIdentifier",
 		"props":                                    "Props",
@@ -1290,6 +1353,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"s3_properties":                            "S3Properties",
 		"s3_uri":                                   "S3Uri",
 		"schedule":                                 "Schedule",
+		"scope":                                    "Scope",
 		"secret_arn":                               "SecretArn",
 		"security_group_id_list":                   "SecurityGroupIdList",
 		"spark_emr_properties":                     "SparkEmrProperties",

@@ -178,7 +178,7 @@ resource "awscc_ecs_task_definition" "example" {
 - `pid_mode` (String) The process namespace to use for the containers in the task. The valid values are ``host`` or ``task``. On Fargate for Linux containers, the only valid value is ``task``. For example, monitoring sidecars might need ``pidMode`` to access information about other containers running in the same task.
  If ``host`` is specified, all containers within the tasks that specified the ``host`` PID mode on the same container instance share the same process namespace with the host Amazon EC2 instance.
  If ``task`` is specified, all containers within the specified task share the same process namespace.
- If no value is specified, the default is a private namespace for each container.
+ If no value is specified, the The default is a private namespace for each container.
  If the ``host`` PID mode is used, there's a heightened risk of undesired process namespace exposure.
   This parameter is not supported for Windows containers.
    This parameter is only supported for tasks that are hosted on FARGATElong if the tasks are using platform version ``1.4.0`` or later (Linux). This isn't supported for Windows containers on Fargate.
@@ -187,7 +187,7 @@ resource "awscc_ecs_task_definition" "example" {
 - `proxy_configuration` (Attributes) The configuration details for the App Mesh proxy.
  Your Amazon ECS container instances require at least version 1.26.0 of the container agent and at least version 1.26.0-1 of the ``ecs-init`` package to use a proxy configuration. If your container instances are launched from the Amazon ECS optimized AMI version ``20190301`` or later, they contain the required versions of the container agent and ``ecs-init``. For more information, see [Amazon ECS-optimized Linux AMI](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html) in the *Amazon Elastic Container Service Developer Guide*. (see [below for nested schema](#nestedatt--proxy_configuration))
 - `requires_compatibilities` (Set of String) The task launch types the task definition was validated against. The valid values are ``MANAGED_INSTANCES``, ``EC2``, ``FARGATE``, and ``EXTERNAL``. For more information, see [Amazon ECS launch types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer Guide*.
-- `runtime_platform` (Attributes) The operating system that your tasks definitions run on. A platform family is specified only for tasks using the Fargate launch type. (see [below for nested schema](#nestedatt--runtime_platform))
+- `runtime_platform` (Attributes) The operating system that your tasks definitions run on. (see [below for nested schema](#nestedatt--runtime_platform))
 - `tags` (Attributes List) The metadata that you apply to the task definition to help you categorize and organize them. Each tag consists of a key and an optional value. You define both of them.
  The following basic restrictions apply to tags:
   +  Maximum number of tags per resource - 50
@@ -214,7 +214,7 @@ resource "awscc_ecs_task_definition" "example" {
 Optional:
 
 - `command` (List of String) The command that's passed to the container. This parameter maps to ``Cmd`` in the docker container create command and the ``COMMAND`` parameter to docker run. If there are multiple arguments, each argument is a separated string in the array.
-- `cpu` (Number) The number of ``cpu`` units reserved for the container. This parameter maps to ``CpuShares`` in the docker container create commandand the ``--cpu-shares`` option to docker run.
+- `cpu` (Number) The number of ``cpu`` units reserved for the container. This parameter maps to ``CpuShares`` in the docker container create command and the ``--cpu-shares`` option to docker run.
  This field is optional for tasks using the Fargate launch type, and the only requirement is that the total amount of CPU reserved for all containers within a task be lower than the task-level ``cpu`` value.
   You can determine the number of CPU units that are available per EC2 instance type by multiplying the vCPUs listed for that instance type on the [Amazon EC2 Instances](https://docs.aws.amazon.com/ec2/instance-types/) detail page by 1,024.
   Linux containers share unallocated CPU units with other containers on the container instance with the same ratio as their allocated amount. For example, if you run a single-container task on a single-core instance type with 512 CPU units specified for that container, and that's the only task running on the container instance, that container could use the full 1,024 CPU unit share at any given time. However, if you launched another copy of the same task on that container instance, each task is guaranteed a minimum of 512 CPU units when needed. Moreover, each container could float to higher CPU usage if the other container was not using it. If both tasks were 100% active all of the time, they would be limited to 512 CPU units.
@@ -693,7 +693,7 @@ Optional:
 Optional:
 
 - `cpu_architecture` (String) The CPU architecture.
- You can run your Linux tasks on an ARM-based platform by setting the value to ``ARM64``. This option is available for tasks that run on Linux Amazon EC2 instance or Linux containers on Fargate.
+ You can run your Linux tasks on an ARM-based platform by setting the value to ``ARM64``. This option is available for tasks that run on Linux Amazon EC2 instance, Amazon ECS Managed Instances, or Linux containers on Fargate.
 - `operating_system_family` (String) The operating system.
 
 

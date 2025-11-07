@@ -1,0 +1,1 @@
+$ terraform import awscc_glue_integration_resource_property.example "resource_arn|resource_property_arn"

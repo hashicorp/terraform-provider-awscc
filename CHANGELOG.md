@@ -1,5 +1,21 @@
 ## 1.63.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_bedrockagentcore_workload_identities`
+* **New Data Source:** `awscc_bedrockagentcore_workload_identity`
+* **New Data Source:** `awscc_glue_integration_resource_properties`
+* **New Data Source:** `awscc_glue_integration_resource_property`
+* **New Data Source:** `awscc_servicecatalog_cloudformation_product`
+* **New Data Source:** `awscc_servicecatalog_cloudformation_products`
+* **New Data Source:** `awscc_servicecatalog_portfolio_principal_association`
+* **New Data Source:** `awscc_ses_multi_region_endpoint`
+* **New Data Source:** `awscc_ses_multi_region_endpoints`
+* **New Resource:** `awscc_bedrockagentcore_workload_identity`
+* **New Resource:** `awscc_glue_integration_resource_property`
+* **New Resource:** `awscc_servicecatalog_cloudformation_product`
+* **New Resource:** `awscc_servicecatalog_portfolio_principal_association`
+
 ## 1.62.0 (October 31, 2025)
 
 FEATURES:

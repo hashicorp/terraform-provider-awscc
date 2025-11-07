@@ -61,6 +61,46 @@ func automatedReasoningPolicyDataSource(ctx context.Context) (datasource.DataSou
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ForceDelete
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": false,
+		//	  "description": "Specifies whether to force delete the automated reasoning policy even if it has active resources. When false , Amazon Bedrock validates if all artifacts have been deleted (e.g. policy version, test case, test result) for a policy before deletion. When true , Amazon Bedrock will delete the policy and all its artifacts without validation. Default is false",
+		//	  "type": "boolean"
+		//	}
+		"force_delete": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to force delete the automated reasoning policy even if it has active resources. When false , Amazon Bedrock validates if all artifacts have been deleted (e.g. policy version, test case, test result) for a policy before deletion. When true , Amazon Bedrock will delete the policy and all its artifacts without validation. Default is false",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The KMS key with which the Policy's assets will be encrypted at rest.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "^arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
+		//	  "type": "string"
+		//	}
+		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The KMS key with which the Policy's assets will be encrypted at rest.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The KMS key with which the Policy's assets will be encrypted at rest.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "^(arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:((key/[a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+)))|([a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+)$",
+		//	  "type": "string"
+		//	}
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The KMS key with which the Policy's assets will be encrypted at rest.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -434,8 +474,11 @@ func automatedReasoningPolicyDataSource(ctx context.Context) (datasource.DataSou
 		"definition_hash":      "DefinitionHash",
 		"description":          "Description",
 		"expression":           "Expression",
+		"force_delete":         "ForceDelete",
 		"id":                   "Id",
 		"key":                  "Key",
+		"kms_key_arn":          "KmsKeyArn",
+		"kms_key_id":           "KmsKeyId",
 		"name":                 "Name",
 		"policy_arn":           "PolicyArn",
 		"policy_definition":    "PolicyDefinition",

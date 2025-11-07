@@ -27,7 +27,7 @@ Data Source schema for AWS::ECR::RepositoryCreationTemplate
 - `description` (String) The description associated with the repository creation template.
 - `encryption_configuration` (Attributes) The encryption configuration associated with the repository creation template. (see [below for nested schema](#nestedatt--encryption_configuration))
 - `image_tag_mutability` (String) The tag mutability setting for the repository. If this parameter is omitted, the default setting of ``MUTABLE`` will be used which will allow image tags to be overwritten. If ``IMMUTABLE`` is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.
-- `image_tag_mutability_exclusion_filters` (Attributes List) Defines the image tag mutability exclusion filters to apply when creating repositories from this template. These filters specify which image tags can override the repository's default image tag mutability setting. (see [below for nested schema](#nestedatt--image_tag_mutability_exclusion_filters))
+- `image_tag_mutability_exclusion_filters` (Attributes List) A list of filters that specify which image tags are excluded from the repository creation template's image tag mutability setting. (see [below for nested schema](#nestedatt--image_tag_mutability_exclusion_filters))
 - `lifecycle_policy` (String) The lifecycle policy to use for repositories created using the template.
 - `prefix` (String) The repository namespace prefix associated with the repository creation template.
 - `repository_policy` (String) The repository policy to apply to repositories created using the template. A repository policy is a permissions policy associated with a repository to control access permissions.

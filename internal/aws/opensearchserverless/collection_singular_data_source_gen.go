@@ -80,6 +80,17 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The identifier of the collection",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the AWS KMS key used to encrypt the collection.",
+		//	  "type": "string"
+		//	}
+		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the AWS KMS key used to encrypt the collection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -199,6 +210,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"dashboard_endpoint":  "DashboardEndpoint",
 		"description":         "Description",
 		"key":                 "Key",
+		"kms_key_arn":         "KmsKeyArn",
 		"name":                "Name",
 		"standby_replicas":    "StandbyReplicas",
 		"tags":                "Tags",

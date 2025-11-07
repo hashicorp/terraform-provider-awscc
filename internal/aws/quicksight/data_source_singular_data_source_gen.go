@@ -4363,6 +4363,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "EXASOL",
 		//	    "FILE",
 		//	    "GITHUB",
+		//	    "INTERNATIONAL_DATA_CORPORATION",
 		//	    "JIRA",
 		//	    "MARIADB",
 		//	    "MYSQL",

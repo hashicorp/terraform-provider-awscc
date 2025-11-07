@@ -11,7 +11,16 @@
     "/properties/PolicyArn",
     "/properties/DefinitionHash",
     "/properties/CreatedAt",
-    "/properties/UpdatedAt"
+    "/properties/UpdatedAt",
+    "/properties/KmsKeyArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/KmsKeyId",
+    "/properties/ForceDelete"
+  ],
+  "writeOnlyProperties": [
+    "/properties/KmsKeyId",
+    "/properties/ForceDelete"
   ],
   "definitions": {
     "Name": {
@@ -195,6 +204,20 @@
       "minLength": 1,
       "maxLength": 2048
     },
+    "KmsKeyId": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 1,
+      "pattern": "^(arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:((key/[a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+)))|([a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+)$",
+      "description": "The KMS key with which the Policy's assets will be encrypted at rest."
+    },
+    "KmsKeyArn": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 1,
+      "pattern": "^arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
+      "description": "The KMS key with which the Policy's assets will be encrypted at rest."
+    },
     "Version": {
       "type": "string",
       "pattern": "^(([1-9][0-9]{0,11})|(DRAFT))$",
@@ -255,6 +278,11 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "ForceDelete": {
+      "type": "boolean",
+      "description": "Specifies whether to force delete the automated reasoning policy even if it has active resources. When false , Amazon Bedrock validates if all artifacts have been deleted (e.g. policy version, test case, test result) for a policy before deletion. When true , Amazon Bedrock will delete the policy and all its artifacts without validation. Default is false",
+      "default": false
     }
   },
   "properties": {
@@ -269,6 +297,12 @@
     },
     "PolicyArn": {
       "$ref": "#/definitions/PolicyArn"
+    },
+    "KmsKeyId": {
+      "$ref": "#/definitions/KmsKeyId"
+    },
+    "KmsKeyArn": {
+      "$ref": "#/definitions/KmsKeyArn"
     },
     "Version": {
       "$ref": "#/definitions/Version"
@@ -287,6 +321,9 @@
     },
     "Tags": {
       "$ref": "#/definitions/Tags"
+    },
+    "ForceDelete": {
+      "$ref": "#/definitions/ForceDelete"
     }
   },
   "required": [
@@ -299,14 +336,20 @@
         "bedrock:GetAutomatedReasoningPolicy",
         "bedrock:ExportAutomatedReasoningPolicyVersion",
         "bedrock:TagResource",
-        "bedrock:ListTagsForResource"
+        "bedrock:ListTagsForResource",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
       ]
     },
     "read": {
       "permissions": [
         "bedrock:GetAutomatedReasoningPolicy",
         "bedrock:ExportAutomatedReasoningPolicyVersion",
-        "bedrock:ListTagsForResource"
+        "bedrock:ListTagsForResource",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey"
       ]
     },
     "update": {
@@ -316,7 +359,10 @@
         "bedrock:ExportAutomatedReasoningPolicyVersion",
         "bedrock:ListTagsForResource",
         "bedrock:TagResource",
-        "bedrock:UntagResource"
+        "bedrock:UntagResource",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
       ]
     },
     "delete": {

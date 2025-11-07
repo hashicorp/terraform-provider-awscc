@@ -91,6 +91,7 @@ func keyspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "items": {
 		//	        "enum": [
 		//	          "af-south-1",
+		//	          "ap-east-1",
 		//	          "ap-northeast-1",
 		//	          "ap-northeast-2",
 		//	          "ap-south-1",
@@ -102,6 +103,8 @@ func keyspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "eu-west-1",
 		//	          "eu-west-2",
 		//	          "eu-west-3",
+		//	          "me-central-1",
+		//	          "me-south-1",
 		//	          "sa-east-1",
 		//	          "us-east-1",
 		//	          "us-east-2",
@@ -110,7 +113,7 @@ func keyspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	        ],
 		//	        "type": "string"
 		//	      },
-		//	      "maxItems": 17,
+		//	      "maxItems": 20,
 		//	      "minItems": 2,
 		//	      "type": "array",
 		//	      "uniqueItems": true
@@ -133,10 +136,11 @@ func keyspaceResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Set{ /*START VALIDATORS*/
-						setvalidator.SizeBetween(2, 17),
+						setvalidator.SizeBetween(2, 20),
 						setvalidator.ValueStringsAre(
 							stringvalidator.OneOf(
 								"af-south-1",
+								"ap-east-1",
 								"ap-northeast-1",
 								"ap-northeast-2",
 								"ap-south-1",
@@ -148,6 +152,8 @@ func keyspaceResource(ctx context.Context) (resource.Resource, error) {
 								"eu-west-1",
 								"eu-west-2",
 								"eu-west-3",
+								"me-central-1",
+								"me-south-1",
 								"sa-east-1",
 								"us-east-1",
 								"us-east-2",
