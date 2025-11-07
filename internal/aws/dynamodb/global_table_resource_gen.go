@@ -145,7 +145,7 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	          ],
 		//	          "type": "object"
 		//	        },
-		//	        "maxItems": 2,
+		//	        "maxItems": 8,
 		//	        "minItems": 1,
 		//	        "type": "array",
 		//	        "uniqueItems": true
@@ -315,7 +315,7 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.List{ /*START VALIDATORS*/
-							listvalidator.SizeBetween(1, 2),
+							listvalidator.SizeBetween(1, 8),
 							listvalidator.UniqueValues(),
 							fwvalidators.NotNullList(),
 						}, /*END VALIDATORS*/
@@ -1044,6 +1044,18 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "ReplicaStreamSpecification": {
 		//	        "additionalProperties": false,
+		//	        "anyOf": [
+		//	          {
+		//	            "required": [
+		//	              "ResourcePolicy"
+		//	            ]
+		//	          },
+		//	          {
+		//	            "required": [
+		//	              "Tags"
+		//	            ]
+		//	          }
+		//	        ],
 		//	        "properties": {
 		//	          "ResourcePolicy": {
 		//	            "additionalProperties": false,
@@ -1058,9 +1070,6 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "object"
 		//	          }
 		//	        },
-		//	        "required": [
-		//	          "ResourcePolicy"
-		//	        ],
 		//	        "type": "object"
 		//	      },
 		//	      "ResourcePolicy": {
@@ -1602,9 +1611,6 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END SCHEMA*/
 								Optional: true,
 								Computed: true,
-								Validators: []validator.Object{ /*START VALIDATORS*/
-									fwvalidators.NotNullObject(),
-								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/

@@ -270,7 +270,8 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "t4",
 		//	                  "t4g",
 		//	                  "vu9p",
-		//	                  "v100"
+		//	                  "v100",
+		//	                  "l40s"
 		//	                ],
 		//	                "type": "string"
 		//	              },
@@ -645,6 +646,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 												"t4g",
 												"vu9p",
 												"v100",
+												"l40s",
 											),
 										),
 									}, /*END VALIDATORS*/
