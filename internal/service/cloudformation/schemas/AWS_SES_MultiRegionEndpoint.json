@@ -1,0 +1,153 @@
+{
+  "typeName": "AWS::SES::MultiRegionEndpoint",
+  "description": "Resource Type definition for AWS::SES::MultiRegionEndpoint",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ses.git",
+  "additionalProperties": false,
+  "properties": {
+    "EndpointName": {
+      "type": "string",
+      "description": "The name of the multi-region endpoint (global-endpoint).",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[\\w\\-_]+$"
+    },
+    "Tags": {
+      "$ref": "#/definitions/Tags"
+    },
+    "Details": {
+      "$ref": "#/definitions/Details"
+    }
+  },
+  "definitions": {
+    "Details": {
+      "type": "object",
+      "description": "Contains details of a multi-region endpoint (global-endpoint) being created.",
+      "additionalProperties": false,
+      "required": [
+        "RouteDetails"
+      ],
+      "properties": {
+        "RouteDetails": {
+          "$ref": "#/definitions/RouteDetails"
+        }
+      }
+    },
+    "RouteDetails": {
+      "type": "array",
+      "description": "A list of route configuration details. Must contain exactly one route configuration",
+      "minItems": 1,
+      "maxItems": 1,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "Region"
+        ],
+        "properties": {
+          "Region": {
+            "$ref": "#/definitions/Region"
+          }
+        }
+      }
+    },
+    "Region": {
+      "description": "The name of an AWS-Region to be a secondary region for the multi-region endpoint (global-endpoint)",
+      "type": "string"
+    },
+    "Tags": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 50,
+      "insertionOrder": false,
+      "description": "An Array of objects that define the tags (keys and values) to associate with the multi-region endpoint (global-endpoint).",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "An object that defines the tags that are associated with a resource.",
+      "additionalProperties": false,
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "One part of a key-value pair that defines a tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The optional part of a key-value pair that defines a tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      }
+    }
+  },
+  "required": [
+    "EndpointName",
+    "Details"
+  ],
+  "createOnlyProperties": [
+    "/properties/EndpointName",
+    "/properties/Details"
+  ],
+  "primaryIdentifier": [
+    "/properties/EndpointName"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ses:TagResource",
+      "ses:UntagResource",
+      "ses:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ses:TagResource",
+        "ses:CreateMultiRegionEndpoint",
+        "ses:GetMultiRegionEndpoint",
+        "ses:ListTagsForResource",
+        "iam:CreateServiceLinkedRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ses:GetMultiRegionEndpoint",
+        "ses:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ses:GetMultiRegionEndpoint",
+        "ses:TagResource",
+        "ses:ListTagsForResource",
+        "ses:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ses:DeleteMultiRegionEndpoint",
+        "ses:GetMultiRegionEndpoint"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ses:ListMultiRegionEndpoints"
+      ]
+    }
+  }
+}

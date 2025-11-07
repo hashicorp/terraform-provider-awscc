@@ -1,0 +1,307 @@
+{
+  "typeName": "AWS::ServiceCatalog::CloudFormationProduct",
+  "description": "Resource type definition for AWS::ServiceCatalog::CloudFormationProduct",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "CodeStarParameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ArtifactPath": {
+          "description": "The absolute path where the artifact resides within the repo and branch, formatted as \"folder/file.json\".",
+          "type": "string"
+        },
+        "Branch": {
+          "description": "The specific branch where the artifact resides.",
+          "type": "string"
+        },
+        "ConnectionArn": {
+          "description": "The CodeStar ARN, which is the connection between AWS Service Catalog and the external repository.\n\n",
+          "type": "string"
+        },
+        "Repository": {
+          "description": "The specific repository where the product's artifact-to-be-synced resides, formatted as \"Account/Repo.\"",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ArtifactPath",
+        "Repository",
+        "Branch",
+        "ConnectionArn"
+      ]
+    },
+    "ConnectionParameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "CodeStar": {
+          "description": "The connection details based on the connection Type.",
+          "$ref": "#/definitions/CodeStarParameters"
+        }
+      }
+    },
+    "SourceConnection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ConnectionParameters": {
+          "description": "The connection details based on the connection Type.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "CodeStar": {
+              "$ref": "#/definitions/CodeStarParameters"
+            }
+          }
+        },
+        "Type": {
+          "description": "The only supported SourceConnection type is Codestar.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ConnectionParameters",
+        "Type"
+      ]
+    },
+    "ProvisioningArtifactProperties": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Description": {
+          "description": "The description of the provisioning artifact, including how it differs from the previous provisioning artifact.",
+          "type": "string"
+        },
+        "Info": {
+          "additionalProperties": false,
+          "description": "Specify the template source with one of the following options, but not both. Keys accepted: [ LoadTemplateFromURL, ImportFromPhysicalId ] The URL of the AWS CloudFormation template in Amazon S3 in JSON format. Specify the URL in JSON format as follows:\n\n\"LoadTemplateFromURL\": \"https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/...\"\n\nImportFromPhysicalId: The physical id of the resource that contains the template. Currently only supports AWS CloudFormation stack arn. Specify the physical id in JSON format as follows: ImportFromPhysicalId: \"arn:aws:cloudformation:[us-east-1]:[accountId]:stack/[StackName]/[resourceId]",
+          "type": "object",
+          "properties": {
+            "LoadTemplateFromURL": {
+              "description": "The URL of the AWS CloudFormation template in Amazon S3 in JSON format.",
+              "type": "string"
+            },
+            "ImportFromPhysicalId": {
+              "description": "The physical id of the resource that contains the template. Currently only supports AWS CloudFormation stack arn",
+              "type": "string"
+            }
+          }
+        },
+        "DisableTemplateValidation": {
+          "description": "If set to true, AWS Service Catalog stops validating the specified provisioning artifact even if it is invalid.",
+          "type": "boolean"
+        },
+        "Name": {
+          "description": "The name of the provisioning artifact (for example, v1 v2beta). No spaces are allowed.",
+          "type": "string"
+        },
+        "Type": {
+          "description": "The type of provisioning artifact. Valid values are CLOUD_FORMATION_TEMPLATE, TERRAFORM_OPEN_SOURCE, TERRAFORM_CLOUD, EXTERNAL",
+          "type": "string",
+          "enum": [
+            "CLOUD_FORMATION_TEMPLATE",
+            "MARKETPLACE_AMI",
+            "MARKETPLACE_CAR",
+            "TERRAFORM_OPEN_SOURCE",
+            "TERRAFORM_CLOUD",
+            "EXTERNAL"
+          ]
+        }
+      },
+      "required": [
+        "Info"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "description": "The tag key.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "The tag value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    }
+  },
+  "properties": {
+    "Owner": {
+      "description": "The owner of the product.",
+      "type": "string"
+    },
+    "Description": {
+      "description": "The description of the product.",
+      "type": "string"
+    },
+    "SupportEmail": {
+      "description": "The contact email for product support.",
+      "type": "string"
+    },
+    "SupportUrl": {
+      "description": "The contact URL for product support.",
+      "type": "string"
+    },
+    "ProductType": {
+      "description": "The type of product.",
+      "type": "string",
+      "enum": [
+        "CLOUD_FORMATION_TEMPLATE",
+        "MARKETPLACE_AMI",
+        "MARKETPLACE_CAR",
+        "TERRAFORM_OPEN_SOURCE",
+        "TERRAFORM_CLOUD",
+        "EXTERNAL"
+      ]
+    },
+    "ProvisioningArtifactParameters": {
+      "description": "The configuration of the provisioning artifact (also known as a version).",
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/ProvisioningArtifactProperties"
+      },
+      "insertionOrder": false
+    },
+    "ProductName": {
+      "description": "The name of the product.",
+      "type": "string"
+    },
+    "Name": {
+      "description": "The name of the product.",
+      "type": "string"
+    },
+    "ReplaceProvisioningArtifacts": {
+      "description": "This property is turned off by default. If turned off, you can update provisioning artifacts or product attributes (such as description, distributor, name, owner, and more) and the associated provisioning artifacts will retain the same unique identifier. Provisioning artifacts are matched within the CloudFormationProduct resource, and only those that have been updated will be changed. Provisioning artifacts are matched by a combinaton of provisioning artifact template URL and name.",
+      "type": "boolean"
+    },
+    "SupportDescription": {
+      "description": "The support information about the product.",
+      "type": "string"
+    },
+    "Distributor": {
+      "description": "The distributor of the product.",
+      "type": "string"
+    },
+    "ProvisioningArtifactIds": {
+      "description": "The IDs of the provisioning artifacts",
+      "type": "string"
+    },
+    "ProvisioningArtifactNames": {
+      "description": "The names of the provisioning artifacts",
+      "type": "string"
+    },
+    "AcceptLanguage": {
+      "description": "The language code.",
+      "type": "string"
+    },
+    "Id": {
+      "description": "The ID of the product, such as prod-tsjbmal34qvek",
+      "type": "string"
+    },
+    "SourceConnection": {
+      "description": "A top level ProductViewDetail response containing details about the product's connection. AWS Service Catalog returns this field for the CreateProduct, UpdateProduct, DescribeProductAsAdmin, and SearchProductAsAdmin APIs. This response contains the same fields as the ConnectionParameters request, with the addition of the LastSync response.",
+      "$ref": "#/definitions/SourceConnection"
+    },
+    "Tags": {
+      "description": "One or more tags.",
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Owner",
+    "Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/Id",
+    "/properties/ProvisioningArtifactIds",
+    "/properties/ProvisioningArtifactNames",
+    "/properties/ProductName"
+  ],
+  "writeOnlyProperties": [
+    "/properties/AcceptLanguage",
+    "/properties/ReplaceProvisioningArtifacts",
+    "/properties/ProvisioningArtifactParameters/*/DisableTemplateValidation"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": false,
+    "tagOnCreate": true,
+    "tagUpdatable": true
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "servicecatalog:DescribeProductAsAdmin",
+        "servicecatalog:CreateProvisioningArtifact",
+        "servicecatalog:CreateProduct",
+        "servicecatalog:DescribeProvisioningArtifact",
+        "servicecatalog:TagResource",
+        "codestar-connections:PassConnection",
+        "codestar-connections:UseConnection",
+        "codestar-connections:GetConnection",
+        "cloudformation:ValidateTemplate",
+        "cloudformation:GetTemplate",
+        "s3:GetObject"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "servicecatalog:DescribeProductAsAdmin",
+        "servicecatalog:DescribeProvisioningArtifact",
+        "servicecatalog:ListTagsForResource",
+        "servicecatalog:ListProvisioningArtifacts",
+        "s3:GetObject"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "servicecatalog:DescribeProductAsAdmin",
+        "servicecatalog:UpdateProduct",
+        "servicecatalog:ListProvisioningArtifacts",
+        "servicecatalog:DescribeProvisioningArtifact",
+        "codestar-connections:PassConnection",
+        "codestar-connections:UseConnection",
+        "codestar-connections:GetConnection",
+        "servicecatalog:DeleteProvisioningArtifact",
+        "servicecatalog:CreateProvisioningArtifact",
+        "cloudformation:ValidateTemplate",
+        "cloudformation:GetTemplate",
+        "servicecatalog:TagResource",
+        "servicecatalog:UntagResource",
+        "s3:GetObject",
+        "servicecatalog:ListServiceActionsForProvisioningArtifact",
+        "servicecatalog:DisassociateServiceActionFromProvisioningArtifact"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "servicecatalog:DeleteProduct",
+        "s3:GetObject"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "servicecatalog:SearchProductsAsAdmin",
+        "s3:GetObject"
+      ]
+    }
+  }
+}
