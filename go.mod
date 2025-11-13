@@ -5,10 +5,10 @@ go 1.24.10
 require (
 	github.com/YakDriver/regexache v0.25.0
 	github.com/aws/aws-sdk-go-v2 v1.39.6
-	github.com/aws/aws-sdk-go-v2/config v1.31.19
+	github.com/aws/aws-sdk-go-v2/config v1.31.20
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.18.13
-	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.29.2
-	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.68.4
+	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.29.3
+	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.68.5
 	github.com/google/go-cmp v0.7.0
 	github.com/google/go-github/v72 v72.0.0
 	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.23.0
@@ -37,7 +37,7 @@ require (
 	github.com/apparentlymart/go-textseg/v15 v15.0.0 // indirect
 	github.com/armon/go-radix v1.0.0 // indirect
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.2 // indirect
-	github.com/aws/aws-sdk-go-v2/credentials v1.18.23 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.18.24 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.13 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.13 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.8.4 // indirect
@@ -52,9 +52,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.88.5 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sns v1.38.5 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.42.9 // indirect
-	github.com/aws/aws-sdk-go-v2/service/sso v1.30.2 // indirect
-	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.35.6 // indirect
-	github.com/aws/aws-sdk-go-v2/service/sts v1.40.1 // indirect
+	github.com/aws/aws-sdk-go-v2/service/sso v1.30.3 // indirect
+	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.35.7 // indirect
+	github.com/aws/aws-sdk-go-v2/service/sts v1.40.2 // indirect
 	github.com/aws/smithy-go v1.23.2 // indirect
 	github.com/bgentry/speakeasy v0.1.0 // indirect
 	github.com/cloudflare/circl v1.6.1 // indirect
