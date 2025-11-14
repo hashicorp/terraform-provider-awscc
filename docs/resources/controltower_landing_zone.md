@@ -58,6 +58,7 @@ resource "awscc_controltower_landing_zone" "this" {
 
 ### Optional
 
+- `remediation_types` (List of String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

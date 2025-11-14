@@ -28,7 +28,7 @@ Data Source schema for AWS::ApiGateway::RestApi
 - `clone_from` (String)
 - `description` (String)
 - `disable_execute_api_endpoint` (Boolean)
-- `endpoint_configuration` (Attributes) A list of the endpoint types of the API. Use this property when creating an API. When importing an existing API, specify the endpoint configuration types using the ``Parameters`` property. (see [below for nested schema](#nestedatt--endpoint_configuration))
+- `endpoint_configuration` (Attributes) A list of the endpoint types and IP address types of the API. Use this property when creating an API. When importing an existing API, specify the endpoint configuration types using the ``Parameters`` property. (see [below for nested schema](#nestedatt--endpoint_configuration))
 - `fail_on_warnings` (Boolean)
 - `minimum_compression_size` (Number)
 - `mode` (String) This property applies only when you use OpenAPI to define your REST API. The ``Mode`` determines how API Gateway handles resource updates.
@@ -70,5 +70,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.
+- `value` (String) The value for the specified tag key.

@@ -77,6 +77,7 @@ resource "awscc_s3tables_table" "example" {
 - `compaction` (Attributes) Settings governing the Compaction maintenance action. Contains details about the compaction settings for an Iceberg table. (see [below for nested schema](#nestedatt--compaction))
 - `iceberg_metadata` (Attributes) Contains details about the metadata for an Iceberg table. (see [below for nested schema](#nestedatt--iceberg_metadata))
 - `snapshot_management` (Attributes) Contains details about the snapshot management settings for an Iceberg table. A snapshot is expired when it exceeds MinSnapshotsToKeep and MaxSnapshotAgeHours. (see [below for nested schema](#nestedatt--snapshot_management))
+- `tags` (Attributes Set) User tags (key-value pairs) to associate with the table. (see [below for nested schema](#nestedatt--tags))
 - `without_metadata` (String) Indicates that you don't want to specify a schema for the table. This property is mutually exclusive to 'IcebergMetadata', and its only possible value is 'Yes'.
 
 ### Read-Only
@@ -129,6 +130,15 @@ Optional:
 - `max_snapshot_age_hours` (Number) The maximum age of a snapshot before it can be expired.
 - `min_snapshots_to_keep` (Number) The minimum number of snapshots to keep.
 - `status` (String) Indicates whether the SnapshotManagement maintenance action is enabled.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) Tag key must be between 1 to 128 characters in length. Tag key cannot start with 'aws:' and can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.
+- `value` (String) Tag value must be between 0 to 256 characters in length. Tag value can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.
 
 ## Import
 

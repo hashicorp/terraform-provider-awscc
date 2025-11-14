@@ -23,6 +23,7 @@ Data Source schema for AWS::BedrockAgentCore::BrowserCustom
 
 - `browser_arn` (String) The ARN of a Browser resource.
 - `browser_id` (String) The id of the browser.
+- `browser_signing` (Attributes) Browser signing configuration. (see [below for nested schema](#nestedatt--browser_signing))
 - `created_at` (String) Timestamp when the browser was created.
 - `description` (String) The description of the browser.
 - `execution_role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that the browser uses to access resources.
@@ -33,6 +34,14 @@ Data Source schema for AWS::BedrockAgentCore::BrowserCustom
 - `recording_config` (Attributes) Recording configuration for browser. (see [below for nested schema](#nestedatt--recording_config))
 - `status` (String) Status of browser.
 - `tags` (Map of String) A map of tag keys and values
+
+<a id="nestedatt--browser_signing"></a>
+### Nested Schema for `browser_signing`
+
+Read-Only:
+
+- `enabled` (Boolean)
+
 
 <a id="nestedatt--network_configuration"></a>
 ### Nested Schema for `network_configuration`

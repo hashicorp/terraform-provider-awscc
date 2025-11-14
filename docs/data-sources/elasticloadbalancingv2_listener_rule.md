@@ -42,6 +42,7 @@ Read-Only:
 - `fixed_response_config` (Attributes) [Application Load Balancer] Information for creating an action that returns a custom HTTP response. Specify only when ``Type`` is ``fixed-response``. (see [below for nested schema](#nestedatt--actions--fixed_response_config))
 - `forward_config` (Attributes) Information for creating an action that distributes requests among multiple target groups. Specify only when ``Type`` is ``forward``.
  If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``. (see [below for nested schema](#nestedatt--actions--forward_config))
+- `jwt_validation_config` (Attributes) (see [below for nested schema](#nestedatt--actions--jwt_validation_config))
 - `order` (Number) The order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first.
 - `redirect_config` (Attributes) [Application Load Balancer] Information for creating a redirect action. Specify only when ``Type`` is ``redirect``. (see [below for nested schema](#nestedatt--actions--redirect_config))
 - `target_group_arn` (String) The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to multiple target groups, you must use ``ForwardConfig`` instead.
@@ -124,6 +125,26 @@ Read-Only:
 
 - `target_group_arn` (String) The Amazon Resource Name (ARN) of the target group.
 - `weight` (Number) The weight. The range is 0 to 999.
+
+
+
+<a id="nestedatt--actions--jwt_validation_config"></a>
+### Nested Schema for `actions.jwt_validation_config`
+
+Read-Only:
+
+- `additional_claims` (Attributes List) (see [below for nested schema](#nestedatt--actions--jwt_validation_config--additional_claims))
+- `issuer` (String)
+- `jwks_endpoint` (String)
+
+<a id="nestedatt--actions--jwt_validation_config--additional_claims"></a>
+### Nested Schema for `actions.jwt_validation_config.additional_claims`
+
+Read-Only:
+
+- `format` (String)
+- `name` (String)
+- `values` (List of String)
 
 
 

@@ -28,6 +28,8 @@ Data Source schema for AWS::EC2::TransitGateway
 - `default_route_table_propagation` (String)
 - `description` (String)
 - `dns_support` (String)
+- `encryption_support` (String)
+- `encryption_support_state` (String)
 - `multicast_support` (String)
 - `propagation_default_route_table_id` (String)
 - `security_group_referencing_support` (String)

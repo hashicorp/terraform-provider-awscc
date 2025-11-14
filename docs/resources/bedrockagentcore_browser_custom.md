@@ -83,6 +83,7 @@ resource "awscc_bedrockagentcore_browser_custom" "example" {
 
 ### Optional
 
+- `browser_signing` (Attributes) Browser signing configuration. (see [below for nested schema](#nestedatt--browser_signing))
 - `description` (String) The description of the browser.
 - `execution_role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that the browser uses to access resources.
 - `recording_config` (Attributes) Recording configuration for browser. (see [below for nested schema](#nestedatt--recording_config))
@@ -114,6 +115,14 @@ Optional:
 - `security_groups` (List of String) Security groups for VPC
 - `subnets` (List of String) Subnets for VPC
 
+
+
+<a id="nestedatt--browser_signing"></a>
+### Nested Schema for `browser_signing`
+
+Optional:
+
+- `enabled` (Boolean)
 
 
 <a id="nestedatt--recording_config"></a>

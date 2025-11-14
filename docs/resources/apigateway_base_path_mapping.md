@@ -3,12 +3,12 @@
 page_title: "awscc_apigateway_base_path_mapping Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  The AWS::ApiGateway::BasePathMapping resource creates a base path that clients who call your API must use in the invocation URL.
+  The AWS::ApiGateway::BasePathMapping resource creates a base path that clients who call your API must use in the invocation URL. Supported only for public custom domain names.
 ---
 
 # awscc_apigateway_base_path_mapping (Resource)
 
-The ``AWS::ApiGateway::BasePathMapping`` resource creates a base path that clients who call your API must use in the invocation URL.
+The ``AWS::ApiGateway::BasePathMapping`` resource creates a base path that clients who call your API must use in the invocation URL. Supported only for public custom domain names.
 
 ## Example Usage
 

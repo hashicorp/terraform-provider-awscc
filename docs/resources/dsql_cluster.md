@@ -33,6 +33,7 @@ resource "awscc_dsql_cluster" "example" {
 - `deletion_protection_enabled` (Boolean) Whether deletion protection is enabled in this cluster.
 - `kms_encryption_key` (String) The KMS key that encrypts data on the cluster.
 - `multi_region_properties` (Attributes) The Multi-region properties associated to this cluster. (see [below for nested schema](#nestedatt--multi_region_properties))
+- `policy_document` (String) The IAM policy applied to the cluster resource.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -41,6 +42,7 @@ resource "awscc_dsql_cluster" "example" {
 - `encryption_details` (Attributes) The encryption configuration details for the cluster. (see [below for nested schema](#nestedatt--encryption_details))
 - `id` (String) Uniquely identifies the resource.
 - `identifier` (String) The ID of the created cluster.
+- `policy_version` (String) The version number of the cluster's resource based policy
 - `resource_arn` (String) The Amazon Resource Name (ARN) for the cluster.
 - `status` (String) The status of the cluster.
 - `vpc_endpoint_service_name` (String) The VPC endpoint service name.
