@@ -37,16 +37,16 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "Value": {
+        "Key": {
           "type": "string"
         },
-        "Key": {
+        "Value": {
           "type": "string"
         }
       },
       "required": [
-        "Value",
-        "Key"
+        "Key",
+        "Value"
       ]
     }
   },

@@ -94,12 +94,44 @@
             "SubnetIds"
           ],
           "additionalProperties": false
+        },
+        "VpcConfiguration": {
+          "description": "Configuration for VPC metrics source",
+          "type": "object",
+          "properties": {
+            "SecurityGroupIds": {
+              "description": "List of security group IDs",
+              "type": "array",
+              "insertionOrder": false,
+              "items": {
+                "$ref": "#/definitions/SecurityGroupId"
+              }
+            },
+            "SubnetIds": {
+              "description": "List of subnet IDs",
+              "type": "array",
+              "insertionOrder": false,
+              "items": {
+                "$ref": "#/definitions/SubnetId"
+              }
+            }
+          },
+          "required": [
+            "SecurityGroupIds",
+            "SubnetIds"
+          ],
+          "additionalProperties": false
         }
       },
       "oneOf": [
         {
           "required": [
             "EksConfiguration"
+          ]
+        },
+        {
+          "required": [
+            "VpcConfiguration"
           ]
         }
       ],
@@ -322,19 +354,33 @@
         "eks:DescribeCluster",
         "ec2:DescribeSubnets",
         "ec2:DescribeSecurityGroups",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:CreateNetworkInterface",
+        "ec2:DeleteNetworkInterface",
+        "ec2:AttachNetworkInterface",
+        "ec2:DetachNetworkInterface",
+        "ec2:ModifyNetworkInterfaceAttribute",
+        "ec2:DescribeVpcs",
+        "kafka:DescribeCluster",
+        "kafka:DescribeClusterV2",
+        "kafka:GetBootstrapBrokers",
+        "kafka:ListClusters",
+        "kafka:ListNodes",
         "iam:CreateServiceLinkedRole",
         "iam:PassRole",
         "logs:CreateLogDelivery",
         "logs:GetLogDelivery",
         "logs:ListLogDeliveries",
-        "logs:PutResourcePolicy"
+        "logs:PutResourcePolicy",
+        "logs:DescribeLogGroups"
       ]
     },
     "read": {
       "permissions": [
         "aps:DescribeScraper",
         "aps:DescribeScraperLoggingConfiguration",
-        "aps:ListTagsForResource"
+        "aps:ListTagsForResource",
+        "ec2:DescribeNetworkInterfaces"
       ]
     },
     "update": {
@@ -349,11 +395,21 @@
         "aps:TagResource",
         "aps:UntagResource",
         "aps:ListTagsForResource",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:ModifyNetworkInterfaceAttribute",
+        "ec2:DescribeVpcs",
+        "kafka:DescribeCluster",
+        "kafka:DescribeClusterV2",
+        "kafka:GetBootstrapBrokers",
         "iam:PassRole",
         "logs:CreateLogDelivery",
         "logs:GetLogDelivery",
+        "logs:UpdateLogDelivery",
         "logs:ListLogDeliveries",
-        "logs:PutResourcePolicy"
+        "logs:PutResourcePolicy",
+        "logs:DescribeLogGroups"
       ]
     },
     "delete": {
@@ -366,6 +422,11 @@
         "eks:DescribeCluster",
         "ec2:DescribeSubnets",
         "ec2:DescribeSecurityGroups",
+        "ec2:DescribeNetworkInterfaces",
+        "ec2:DeleteNetworkInterface",
+        "ec2:DetachNetworkInterface",
+        "ec2:DescribeVpcs",
+        "kafka:DescribeCluster",
         "iam:DeleteServiceLinkedRole",
         "logs:DeleteLogDelivery"
       ]

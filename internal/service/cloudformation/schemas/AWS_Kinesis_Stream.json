@@ -96,6 +96,21 @@
         "Key",
         "Value"
       ]
+    },
+    "WarmThroughputObject": {
+      "description": "Warm throughput configuration details for the stream. Only present for ON_DEMAND streams.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "TargetMiBps": {
+          "description": "Target warm throughput in MiB/s that a customer can write to a stream at any given time",
+          "type": "integer"
+        },
+        "CurrentMiBps": {
+          "description": "Current warm throughput in MiB/s",
+          "type": "integer"
+        }
+      }
     }
   },
   "properties": {
@@ -142,7 +157,7 @@
       "$ref": "#/definitions/StreamEncryption"
     },
     "Tags": {
-      "description": "An arbitrary set of tags (key\u2013value pairs) to associate with the Kinesis stream.",
+      "description": "An arbitrary set of tags (key-value pairs) to associate with the Kinesis stream.",
       "type": "array",
       "uniqueItems": false,
       "insertionOrder": false,
@@ -150,17 +165,35 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "MaxRecordSizeInKiB": {
+      "description": "Maximum size of a data record in KiB allowed to be put into Kinesis stream.",
+      "type": "integer",
+      "minimum": 1024,
+      "maximum": 10240
+    },
+    "WarmThroughputMiBps": {
+      "description": "Target warm throughput in MiB/s for the stream. This property can ONLY be set when StreamMode is ON_DEMAND.",
+      "type": "integer"
+    },
+    "WarmThroughputObject": {
+      "description": "Warm throughput configuration details for the stream. Only present for ON_DEMAND streams.",
+      "$ref": "#/definitions/WarmThroughputObject"
     }
   },
   "additionalProperties": false,
   "readOnlyProperties": [
-    "/properties/Arn"
+    "/properties/Arn",
+    "/properties/WarmThroughputObject"
   ],
   "createOnlyProperties": [
     "/properties/Name"
   ],
   "primaryIdentifier": [
     "/properties/Name"
+  ],
+  "writeOnlyProperties": [
+    "/properties/WarmThroughputMiBps"
   ],
   "$comment": "Do not set SystemTags to true without implementing a fail-open mechanism. It should not fail when adding systemTags for customers without AddTagsToStream Permission. Cloudformation will automatically add system tags even if customer does not have the AddTagsToStream permission. COE: https://www.coe.a2z.com/coe/236297/content",
   "tagging": {
@@ -188,7 +221,9 @@
         "kinesis:StartStreamEncryption",
         "kinesis:AddTagsToStream",
         "kinesis:ListTagsForStream",
-        "kinesis:ListTagsForResource"
+        "kinesis:ListTagsForResource",
+        "kinesis:UpdateMaxRecordSize",
+        "kinesis:UpdateStreamWarmThroughput"
       ]
     },
     "read": {
@@ -214,7 +249,9 @@
         "kinesis:RemoveTagsFromStream",
         "kinesis:UntagResource",
         "kinesis:ListTagsForStream",
-        "kinesis:ListTagsForResource"
+        "kinesis:ListTagsForResource",
+        "kinesis:UpdateMaxRecordSize",
+        "kinesis:UpdateStreamWarmThroughput"
       ],
       "timeoutInMinutes": 240
     },

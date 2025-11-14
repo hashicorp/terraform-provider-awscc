@@ -13,6 +13,15 @@
     },
     "EncryptionConfiguration": {
       "$ref": "#/definitions/EncryptionConfiguration"
+    },
+    "Tags": {
+      "description": "User tags (key-value pairs) to associate with the table bucket.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     }
   },
   "definitions": {
@@ -72,6 +81,27 @@
         }
       },
       "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "description": "Tag key must be between 1 to 128 characters in length. Tag key cannot start with 'aws:' and can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "description": "Tag value must be between 0 to 256 characters in length. Tag value can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
+          "type": "string",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
     }
   },
   "additionalProperties": false,
@@ -88,10 +118,16 @@
     "/properties/TableBucketARN"
   ],
   "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "s3tables:TagResource",
+      "s3tables:UntagResource",
+      "s3tables:ListTagsForResource"
+    ]
   },
   "handlers": {
     "create": {
@@ -102,14 +138,17 @@
         "s3tables:GetTableBucket",
         "s3tables:GetTableBucketMaintenanceConfiguration",
         "s3tables:GetTableBucketEncryption",
-        "kms:DescribeKey"
+        "kms:DescribeKey",
+        "s3tables:TagResource",
+        "s3tables:ListTagsForResource"
       ]
     },
     "read": {
       "permissions": [
         "s3tables:GetTableBucket",
         "s3tables:GetTableBucketMaintenanceConfiguration",
-        "s3tables:GetTableBucketEncryption"
+        "s3tables:GetTableBucketEncryption",
+        "s3tables:ListTagsForResource"
       ]
     },
     "update": {
@@ -120,7 +159,10 @@
         "s3tables:GetTableBucketEncryption",
         "s3tables:DeleteTableBucketEncryption",
         "s3tables:GetTableBucket",
-        "kms:DescribeKey"
+        "kms:DescribeKey",
+        "s3tables:TagResource",
+        "s3tables:UntagResource",
+        "s3tables:ListTagsForResource"
       ]
     },
     "delete": {

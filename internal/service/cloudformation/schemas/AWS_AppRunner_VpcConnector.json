@@ -67,7 +67,12 @@
     "tagOnCreate": true,
     "tagUpdatable": false,
     "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "apprunner:TagResource",
+      "apprunner:UntagResource",
+      "apprunner:ListTagsForResource"
+    ]
   },
   "additionalProperties": false,
   "required": [
@@ -79,12 +84,12 @@
     "/properties/SecurityGroups",
     "/properties/Tags"
   ],
+  "writeOnlyProperties": [
+    "/properties/Tags"
+  ],
   "readOnlyProperties": [
     "/properties/VpcConnectorArn",
     "/properties/VpcConnectorRevision"
-  ],
-  "writeOnlyProperties": [
-    "/properties/Tags"
   ],
   "primaryIdentifier": [
     "/properties/VpcConnectorArn"

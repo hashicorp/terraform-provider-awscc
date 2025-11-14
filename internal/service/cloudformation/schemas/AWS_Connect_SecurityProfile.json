@@ -71,6 +71,75 @@
         "Value"
       ],
       "additionalProperties": false
+    },
+    "DataTableAccessControlConfiguration": {
+      "description": "Defines the access control configuration for data tables.",
+      "type": "object",
+      "properties": {
+        "PrimaryAttributeAccessControlConfiguration": {
+          "$ref": "#/definitions/PrimaryAttributeAccessControlConfigurationItem"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PrimaryAttributeAccessControlConfigurationItem": {
+      "description": "Contains the configuration for record-based access control.",
+      "type": "object",
+      "properties": {
+        "PrimaryAttributeValues": {
+          "description": "An array of PrimaryAttributeValue objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrimaryAttributeValue"
+          },
+          "minItems": 1,
+          "maxItems": 5,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "PrimaryAttributeValues"
+      ],
+      "additionalProperties": false
+    },
+    "PrimaryAttributeValue": {
+      "description": "An object defining the access control for a specific attribute and its values.",
+      "type": "object",
+      "properties": {
+        "AccessType": {
+          "description": "Specifies the type of access granted. Currently, only \"ALLOW\" is supported",
+          "type": "string",
+          "enum": [
+            "ALLOW"
+          ]
+        },
+        "AttributeName": {
+          "description": "The name of the primary attribute.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 127,
+          "pattern": ""
+        },
+        "Values": {
+          "description": "An array of allowed primary values for the specified primary attribute.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000,
+            "pattern": ""
+          },
+          "minItems": 1,
+          "maxItems": 2,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "AccessType",
+        "AttributeName",
+        "Values"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -172,6 +241,15 @@
     "LastModifiedTime": {
       "type": "number",
       "description": "The timestamp when this resource was last modified."
+    },
+    "GranularAccessControlConfiguration": {
+      "type": "object",
+      "properties": {
+        "DataTableAccessControlConfiguration": {
+          "$ref": "#/definitions/DataTableAccessControlConfiguration"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false,

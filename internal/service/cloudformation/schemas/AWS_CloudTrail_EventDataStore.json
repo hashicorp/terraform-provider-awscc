@@ -302,8 +302,7 @@
     "/properties/EventDataStoreArn",
     "/properties/CreatedTimestamp",
     "/properties/UpdatedTimestamp",
-    "/properties/Status",
-    "/properties/FederationStatus"
+    "/properties/Status"
   ],
   "primaryIdentifier": [
     "/properties/EventDataStoreArn"

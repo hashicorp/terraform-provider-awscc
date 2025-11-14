@@ -533,5 +533,8 @@
     "ManagedInstancesProvider": {
       "$ref": "#/definitions/ManagedInstancesProvider"
     }
-  }
+  },
+  "conditionalCreateOnlyProperties": [
+    "/properties/ManagedInstancesProvider/InstanceLaunchTemplate/CapacityOptionType"
+  ]
 }

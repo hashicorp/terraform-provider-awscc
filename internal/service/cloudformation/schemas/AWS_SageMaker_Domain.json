@@ -1221,8 +1221,10 @@
     "/properties/DomainName",
     "/properties/DomainSettings/RStudioServerProDomainSettings/DefaultResourceSpec",
     "/properties/KmsKeyId",
-    "/properties/VpcId",
     "/properties/Tags"
+  ],
+  "conditionalCreateOnlyProperties": [
+    "/properties/VpcId"
   ],
   "writeOnlyProperties": [
     "/properties/Tags"

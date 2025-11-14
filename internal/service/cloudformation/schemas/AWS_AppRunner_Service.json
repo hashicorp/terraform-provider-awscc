@@ -496,7 +496,8 @@
   ],
   "createOnlyProperties": [
     "/properties/ServiceName",
-    "/properties/EncryptionConfiguration"
+    "/properties/EncryptionConfiguration",
+    "/properties/Tags"
   ],
   "readOnlyProperties": [
     "/properties/ServiceArn",
@@ -505,7 +506,8 @@
     "/properties/Status"
   ],
   "writeOnlyProperties": [
-    "/properties/AutoScalingConfigurationArn"
+    "/properties/AutoScalingConfigurationArn",
+    "/properties/Tags"
   ],
   "primaryIdentifier": [
     "/properties/ServiceArn"

@@ -84,7 +84,7 @@
         "REQUESTED",
         "ACCEPTED",
         "ACTIVE",
-        "DECLINED",
+        "REJECTED",
         "FAILED",
         "PENDING_DELETION",
         "DELETED",
@@ -524,7 +524,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": true,
+    "cloudFormationSystemTags": false,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "rtbfabric:TagResource",

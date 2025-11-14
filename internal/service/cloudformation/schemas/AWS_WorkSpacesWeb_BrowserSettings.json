@@ -2,6 +2,38 @@
   "typeName": "AWS::WorkSpacesWeb::BrowserSettings",
   "description": "Definition of AWS::WorkSpacesWeb::BrowserSettings Resource Type",
   "definitions": {
+    "Category": {
+      "type": "string",
+      "enum": [
+        "Cults",
+        "Gambling",
+        "Nudity",
+        "Pornography",
+        "SexEducation",
+        "Tasteless",
+        "Violence",
+        "DownloadSites",
+        "ImageSharing",
+        "PeerToPeer",
+        "StreamingMediaAndDownloads",
+        "GenerativeAI",
+        "CriminalActivity",
+        "Hacking",
+        "HateAndIntolerance",
+        "IllegalDrug",
+        "IllegalSoftware",
+        "SchoolCheating",
+        "SelfHarm",
+        "Weapons",
+        "Chat",
+        "Games",
+        "InstantMessaging",
+        "ProfessionalNetwork",
+        "SocialNetworking",
+        "WebBasedEmail",
+        "ParkedDomains"
+      ]
+    },
     "EncryptionContextMap": {
       "type": "object",
       "patternProperties": {
@@ -35,6 +67,43 @@
         "Value"
       ],
       "additionalProperties": false
+    },
+    "Unit": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "WebContentFilteringPolicy": {
+      "type": "object",
+      "properties": {
+        "BlockedCategories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Category"
+          },
+          "maxItems": 100,
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "AllowedUrls": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^((([a-zA-Z][a-zA-Z0-9+.-]*):\\/\\/(\\*|[\\w%._\\-\\+~#=@]+)?(\\/[^@\\s]*)?(?:\\?([^*\\s]+(?:\\*?)))?)|(\\*|[\\w%._\\-\\+~#=@]+\\.[\\w%._\\-\\+~#=@]+)(?::(\\d{1,5}))?(\\/[^@\\s]*)?(?:\\?([^*\\s]+(?:\\*?)))?|(([a-zA-Z][a-zA-Z0-9+.-]*):(\\/\\/)?\\*))$"
+          },
+          "maxItems": 1000,
+          "minItems": 1
+        },
+        "BlockedUrls": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^((([a-zA-Z][a-zA-Z0-9+.-]*):\\/\\/(\\*|[\\w%._\\-\\+~#=@]+)?(\\/[^@\\s]*)?(?:\\?([^*\\s]+(?:\\*?)))?)|(\\*|[\\w%._\\-\\+~#=@]+\\.[\\w%._\\-\\+~#=@]+)(?::(\\d{1,5}))?(\\/[^@\\s]*)?(?:\\?([^*\\s]+(?:\\*?)))?|(([a-zA-Z][a-zA-Z0-9+.-]*):(\\/\\/)?\\*))$"
+          },
+          "maxItems": 1000,
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -55,7 +124,7 @@
       "type": "string",
       "maxLength": 131072,
       "minLength": 2,
-      "pattern": "\\{[\\S\\s]*\\}\\s*"
+      "pattern": "^\\{[\\S\\s]*\\}\\s*$"
     },
     "BrowserSettingsArn": {
       "type": "string",
@@ -77,6 +146,9 @@
       "maxItems": 200,
       "minItems": 0,
       "insertionOrder": false
+    },
+    "WebContentFilteringPolicy": {
+      "$ref": "#/definitions/WebContentFilteringPolicy"
     }
   },
   "readOnlyProperties": [

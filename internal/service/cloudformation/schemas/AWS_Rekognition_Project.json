@@ -14,6 +14,29 @@
       "minLength": 1,
       "maxLength": 255,
       "pattern": "[a-zA-Z0-9][a-zA-Z0-9_\\-]*"
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "maxLength": 128,
+          "pattern": ""
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "maxLength": 256,
+          "pattern": "\\A[a-zA-Z0-9+\\-=\\._\\:\\/@]+$"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -22,6 +45,17 @@
     },
     "ProjectName": {
       "$ref": "#/definitions/ProjectName"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "minItems": 0,
+      "maxItems": 200,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     }
   },
   "additionalProperties": false,
@@ -37,21 +71,41 @@
   "primaryIdentifier": [
     "/properties/ProjectName"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "rekognition:ListTagsForResource",
+      "rekognition:TagResource",
+      "rekognition:UntagResource"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
-        "rekognition:CreateProject"
+        "rekognition:CreateProject",
+        "rekognition:TagResource",
+        "rekognition:ListTagsForResource"
       ],
       "timeoutInMinutes": 15
     },
     "read": {
       "permissions": [
-        "rekognition:DescribeProjects"
+        "rekognition:DescribeProjects",
+        "rekognition:ListTagsForResource"
       ],
       "timeoutInMinutes": 15
     },
     "update": {
-      "permissions": [],
+      "permissions": [
+        "rekognition:DescribeProjects",
+        "rekognition:TagResource",
+        "rekognition:UntagResource",
+        "rekognition:ListTagsForResource"
+      ],
       "timeoutInMinutes": 15
     },
     "delete": {
