@@ -3774,6 +3774,21 @@
         "identifier": ["GatewayArn"]
     },
     {
+        "resource": "awscc_mediaconnect_router_input",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_mediaconnect_router_network_interface",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_mediaconnect_router_output",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_medialive_channel_placement_group",
         "identifier": ["Id","ClusterId"]
     },
@@ -4851,6 +4866,10 @@
         "resource": "awscc_route53resolver_resolver_rule_association",
         "generateListResource": true,
         "identifier": ["ResolverRuleAssociationId"]
+    },
+    {
+        "resource": "awscc_rtbfabric_inbound_external_link",
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_rtbfabric_link",
