@@ -48,6 +48,30 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "The id of the browser.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: BrowserSigning
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Browser signing configuration.",
+		//	  "properties": {
+		//	    "Enabled": {
+		//	      "default": false,
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"browser_signing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Browser signing configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -325,6 +349,7 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"browser_arn":           "BrowserArn",
 		"browser_id":            "BrowserId",
+		"browser_signing":       "BrowserSigning",
 		"bucket":                "Bucket",
 		"created_at":            "CreatedAt",
 		"description":           "Description",

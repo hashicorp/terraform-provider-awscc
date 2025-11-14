@@ -783,18 +783,6 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "ReplicaStreamSpecification": {
 		//	        "additionalProperties": false,
-		//	        "anyOf": [
-		//	          {
-		//	            "required": [
-		//	              "ResourcePolicy"
-		//	            ]
-		//	          },
-		//	          {
-		//	            "required": [
-		//	              "Tags"
-		//	            ]
-		//	          }
-		//	        ],
 		//	        "properties": {
 		//	          "ResourcePolicy": {
 		//	            "additionalProperties": false,
@@ -809,6 +797,9 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "object"
 		//	          }
 		//	        },
+		//	        "required": [
+		//	          "ResourcePolicy"
+		//	        ],
 		//	        "type": "object"
 		//	      },
 		//	      "ResourcePolicy": {

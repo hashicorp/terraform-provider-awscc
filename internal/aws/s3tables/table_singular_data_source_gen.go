@@ -262,6 +262,54 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The name for the table.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "User tags (key-value pairs) to associate with the table.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "Tag key must be between 1 to 128 characters in length. Tag key cannot start with 'aws:' and can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "Tag value must be between 0 to 256 characters in length. Tag value can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
+		//	        "maxLength": 256,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Tag key must be between 1 to 128 characters in length. Tag key cannot start with 'aws:' and can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Tag value must be between 0 to 256 characters in length. Tag value can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "User tags (key-value pairs) to associate with the table.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VersionToken
 		// CloudFormation resource type schema:
 		//
@@ -318,6 +366,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"compaction":             "Compaction",
 		"iceberg_metadata":       "IcebergMetadata",
 		"iceberg_schema":         "IcebergSchema",
+		"key":                    "Key",
 		"max_snapshot_age_hours": "MaxSnapshotAgeHours",
 		"min_snapshots_to_keep":  "MinSnapshotsToKeep",
 		"name":                   "Name",
@@ -330,8 +379,10 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"table_arn":              "TableARN",
 		"table_bucket_arn":       "TableBucketARN",
 		"table_name":             "TableName",
+		"tags":                   "Tags",
 		"target_file_size_mb":    "TargetFileSizeMB",
 		"type":                   "Type",
+		"value":                  "Value",
 		"version_token":          "VersionToken",
 		"warehouse_location":     "WarehouseLocation",
 		"without_metadata":       "WithoutMetadata",

@@ -228,6 +228,52 @@ func listenerRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	        },
 		//	        "type": "object"
 		//	      },
+		//	      "JwtValidationConfig": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "AdditionalClaims": {
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "",
+		//	              "properties": {
+		//	                "Format": {
+		//	                  "type": "string"
+		//	                },
+		//	                "Name": {
+		//	                  "type": "string"
+		//	                },
+		//	                "Values": {
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Format",
+		//	                "Name",
+		//	                "Values"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "Issuer": {
+		//	            "type": "string"
+		//	          },
+		//	          "JwksEndpoint": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "JwksEndpoint",
+		//	          "Issuer"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "Order": {
 		//	        "description": "The order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first.",
 		//	        "type": "integer"
@@ -467,6 +513,42 @@ func listenerRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Information for creating an action that distributes requests among multiple target groups. Specify only when ``Type`` is ``forward``.\n If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: JwtValidationConfig
+					"jwt_validation_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AdditionalClaims
+							"additional_claims": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Format
+										"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Values
+										"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Issuer
+							"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: JwksEndpoint
+							"jwks_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Order
@@ -1064,6 +1146,7 @@ func listenerRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"actions":                             "Actions",
+		"additional_claims":                   "AdditionalClaims",
 		"authenticate_cognito_config":         "AuthenticateCognitoConfig",
 		"authenticate_oidc_config":            "AuthenticateOidcConfig",
 		"authentication_request_extra_params": "AuthenticationRequestExtraParams",
@@ -1076,6 +1159,7 @@ func listenerRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"enabled":                             "Enabled",
 		"field":                               "Field",
 		"fixed_response_config":               "FixedResponseConfig",
+		"format":                              "Format",
 		"forward_config":                      "ForwardConfig",
 		"host":                                "Host",
 		"host_header_config":                  "HostHeaderConfig",
@@ -1085,9 +1169,12 @@ func listenerRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"http_request_method_config":          "HttpRequestMethodConfig",
 		"is_default":                          "IsDefault",
 		"issuer":                              "Issuer",
+		"jwks_endpoint":                       "JwksEndpoint",
+		"jwt_validation_config":               "JwtValidationConfig",
 		"key":                                 "Key",
 		"listener_arn":                        "ListenerArn",
 		"message_body":                        "MessageBody",
+		"name":                                "Name",
 		"on_unauthenticated_request":          "OnUnauthenticatedRequest",
 		"order":                               "Order",
 		"path":                                "Path",

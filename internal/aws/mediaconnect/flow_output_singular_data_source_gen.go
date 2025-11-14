@@ -8,6 +8,7 @@ package mediaconnect
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -422,6 +423,111 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The remote ID for the Zixi-pull stream.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RouterIntegrationState
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"router_integration_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: RouterIntegrationTransitEncryption
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The configuration that defines how content is encrypted during transit between the MediaConnect router and a MediaConnect flow.",
+		//	  "properties": {
+		//	    "EncryptionKeyConfiguration": {
+		//	      "description": "Configuration settings for flow transit encryption keys.",
+		//	      "properties": {
+		//	        "Automatic": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.",
+		//	          "type": "object"
+		//	        },
+		//	        "SecretsManager": {
+		//	          "additionalProperties": false,
+		//	          "description": "The configuration settings for transit encryption of a flow output using AWS Secrets Manager, including the secret ARN and role ARN.",
+		//	          "properties": {
+		//	            "RoleArn": {
+		//	              "description": "The ARN of the IAM role used for transit encryption to the router input using AWS Secrets Manager.",
+		//	              "pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$",
+		//	              "type": "string"
+		//	            },
+		//	            "SecretArn": {
+		//	              "description": "The ARN of the AWS Secrets Manager secret used for transit encryption to the router input.",
+		//	              "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "RoleArn",
+		//	            "SecretArn"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "EncryptionKeyType": {
+		//	      "enum": [
+		//	        "SECRETS_MANAGER",
+		//	        "AUTOMATIC"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "EncryptionKeyConfiguration"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"router_integration_transit_encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EncryptionKeyConfiguration
+				"encryption_key_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Automatic
+						"automatic": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType:  jsontypes.NormalizedType{},
+							Description: "Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecretsManager
+						"secrets_manager": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: RoleArn
+								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the IAM role used for transit encryption to the router input using AWS Secrets Manager.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretArn
+								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the AWS Secrets Manager secret used for transit encryption to the router input.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The configuration settings for transit encryption of a flow output using AWS Secrets Manager, including the secret ARN and role ARN.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration settings for flow transit encryption keys.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EncryptionKeyType
+				"encryption_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration that defines how content is encrypted during transit between the MediaConnect router and a MediaConnect flow.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SmoothingLatency
 		// CloudFormation resource type schema:
 		//
@@ -486,39 +592,45 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::FlowOutput").WithTerraformTypeName("awscc_mediaconnect_flow_output")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"algorithm":                          "Algorithm",
-		"cidr_allow_list":                    "CidrAllowList",
-		"compression_factor":                 "CompressionFactor",
-		"description":                        "Description",
-		"destination":                        "Destination",
-		"destination_configurations":         "DestinationConfigurations",
-		"destination_ip":                     "DestinationIp",
-		"destination_port":                   "DestinationPort",
-		"encoder_profile":                    "EncoderProfile",
-		"encoding_name":                      "EncodingName",
-		"encoding_parameters":                "EncodingParameters",
-		"encryption":                         "Encryption",
-		"flow_arn":                           "FlowArn",
-		"interface":                          "Interface",
-		"key_type":                           "KeyType",
-		"max_latency":                        "MaxLatency",
-		"media_stream_name":                  "MediaStreamName",
-		"media_stream_output_configurations": "MediaStreamOutputConfigurations",
-		"min_latency":                        "MinLatency",
-		"name":                               "Name",
-		"ndi_program_name":                   "NdiProgramName",
-		"ndi_speed_hq_quality":               "NdiSpeedHqQuality",
-		"output_arn":                         "OutputArn",
-		"output_status":                      "OutputStatus",
-		"port":                               "Port",
-		"protocol":                           "Protocol",
-		"remote_id":                          "RemoteId",
-		"role_arn":                           "RoleArn",
-		"secret_arn":                         "SecretArn",
-		"smoothing_latency":                  "SmoothingLatency",
-		"stream_id":                          "StreamId",
-		"vpc_interface_attachment":           "VpcInterfaceAttachment",
-		"vpc_interface_name":                 "VpcInterfaceName",
+		"algorithm":                             "Algorithm",
+		"automatic":                             "Automatic",
+		"cidr_allow_list":                       "CidrAllowList",
+		"compression_factor":                    "CompressionFactor",
+		"description":                           "Description",
+		"destination":                           "Destination",
+		"destination_configurations":            "DestinationConfigurations",
+		"destination_ip":                        "DestinationIp",
+		"destination_port":                      "DestinationPort",
+		"encoder_profile":                       "EncoderProfile",
+		"encoding_name":                         "EncodingName",
+		"encoding_parameters":                   "EncodingParameters",
+		"encryption":                            "Encryption",
+		"encryption_key_configuration":          "EncryptionKeyConfiguration",
+		"encryption_key_type":                   "EncryptionKeyType",
+		"flow_arn":                              "FlowArn",
+		"interface":                             "Interface",
+		"key_type":                              "KeyType",
+		"max_latency":                           "MaxLatency",
+		"media_stream_name":                     "MediaStreamName",
+		"media_stream_output_configurations":    "MediaStreamOutputConfigurations",
+		"min_latency":                           "MinLatency",
+		"name":                                  "Name",
+		"ndi_program_name":                      "NdiProgramName",
+		"ndi_speed_hq_quality":                  "NdiSpeedHqQuality",
+		"output_arn":                            "OutputArn",
+		"output_status":                         "OutputStatus",
+		"port":                                  "Port",
+		"protocol":                              "Protocol",
+		"remote_id":                             "RemoteId",
+		"role_arn":                              "RoleArn",
+		"router_integration_state":              "RouterIntegrationState",
+		"router_integration_transit_encryption": "RouterIntegrationTransitEncryption",
+		"secret_arn":                            "SecretArn",
+		"secrets_manager":                       "SecretsManager",
+		"smoothing_latency":                     "SmoothingLatency",
+		"stream_id":                             "StreamId",
+		"vpc_interface_attachment":              "VpcInterfaceAttachment",
+		"vpc_interface_name":                    "VpcInterfaceName",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

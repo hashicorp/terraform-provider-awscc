@@ -187,7 +187,14 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                      "t4",
 		//	                      "t4g",
 		//	                      "vu9p",
-		//	                      "v100"
+		//	                      "v100",
+		//	                      "l40s",
+		//	                      "l4",
+		//	                      "gaudi-hl-205",
+		//	                      "inferentia2",
+		//	                      "trainium",
+		//	                      "trainium2",
+		//	                      "u30"
 		//	                    ],
 		//	                    "type": "string"
 		//	                  },
@@ -211,7 +218,8 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    "enum": [
 		//	                      "gpu",
 		//	                      "fpga",
-		//	                      "inference"
+		//	                      "inference",
+		//	                      "media"
 		//	                    ],
 		//	                    "type": "string"
 		//	                  },

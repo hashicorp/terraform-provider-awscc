@@ -85,8 +85,8 @@ func domainNameAccessAssociationDataSource(ctx context.Context) (datasource.Data
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Value",
-		//	      "Key"
+		//	      "Key",
+		//	      "Value"
 		//	    ],
 		//	    "type": "object"
 		//	  },
