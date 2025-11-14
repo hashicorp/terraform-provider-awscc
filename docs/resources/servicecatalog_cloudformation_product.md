@@ -3,12 +3,12 @@
 page_title: "awscc_servicecatalog_cloudformation_product Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource type definition for AWS::ServiceCatalog::CloudFormationProduct
+  Resource Type definition for AWS::ServiceCatalog::CloudFormationProduct
 ---
 
 # awscc_servicecatalog_cloudformation_product (Resource)
 
-Resource type definition for AWS::ServiceCatalog::CloudFormationProduct
+Resource Type definition for AWS::ServiceCatalog::CloudFormationProduct
 
 
 
@@ -17,54 +17,41 @@ Resource type definition for AWS::ServiceCatalog::CloudFormationProduct
 
 ### Required
 
-- `name` (String) The name of the product.
-- `owner` (String) The owner of the product.
+- `name` (String)
+- `owner` (String)
 
 ### Optional
 
-- `accept_language` (String) The language code.
-- `description` (String) The description of the product.
-- `distributor` (String) The distributor of the product.
-- `product_type` (String) The type of product.
-- `provisioning_artifact_parameters` (Attributes List) The configuration of the provisioning artifact (also known as a version). (see [below for nested schema](#nestedatt--provisioning_artifact_parameters))
-- `replace_provisioning_artifacts` (Boolean) This property is turned off by default. If turned off, you can update provisioning artifacts or product attributes (such as description, distributor, name, owner, and more) and the associated provisioning artifacts will retain the same unique identifier. Provisioning artifacts are matched within the CloudFormationProduct resource, and only those that have been updated will be changed. Provisioning artifacts are matched by a combinaton of provisioning artifact template URL and name.
-- `source_connection` (Attributes) A top level ProductViewDetail response containing details about the product's connection. AWS Service Catalog returns this field for the CreateProduct, UpdateProduct, DescribeProductAsAdmin, and SearchProductAsAdmin APIs. This response contains the same fields as the ConnectionParameters request, with the addition of the LastSync response. (see [below for nested schema](#nestedatt--source_connection))
-- `support_description` (String) The support information about the product.
-- `support_email` (String) The contact email for product support.
-- `support_url` (String) The contact URL for product support.
-- `tags` (Attributes List) One or more tags. (see [below for nested schema](#nestedatt--tags))
+- `accept_language` (String)
+- `description` (String)
+- `distributor` (String)
+- `product_type` (String)
+- `provisioning_artifact_parameters` (Attributes List) (see [below for nested schema](#nestedatt--provisioning_artifact_parameters))
+- `replace_provisioning_artifacts` (Boolean)
+- `source_connection` (Attributes) (see [below for nested schema](#nestedatt--source_connection))
+- `support_description` (String)
+- `support_email` (String)
+- `support_url` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `cloudformation_product_id` (String) The ID of the product, such as prod-tsjbmal34qvek
+- `cloudformation_product_id` (String)
 - `id` (String) Uniquely identifies the resource.
-- `product_name` (String) The name of the product.
-- `provisioning_artifact_ids` (String) The IDs of the provisioning artifacts
-- `provisioning_artifact_names` (String) The names of the provisioning artifacts
+- `product_name` (String)
+- `provisioning_artifact_ids` (String)
+- `provisioning_artifact_names` (String)
 
 <a id="nestedatt--provisioning_artifact_parameters"></a>
 ### Nested Schema for `provisioning_artifact_parameters`
 
 Optional:
 
-- `description` (String) The description of the provisioning artifact, including how it differs from the previous provisioning artifact.
-- `disable_template_validation` (Boolean) If set to true, AWS Service Catalog stops validating the specified provisioning artifact even if it is invalid.
-- `info` (Attributes) Specify the template source with one of the following options, but not both. Keys accepted: [ LoadTemplateFromURL, ImportFromPhysicalId ] The URL of the AWS CloudFormation template in Amazon S3 in JSON format. Specify the URL in JSON format as follows:
-
-"LoadTemplateFromURL": "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."
-
-ImportFromPhysicalId: The physical id of the resource that contains the template. Currently only supports AWS CloudFormation stack arn. Specify the physical id in JSON format as follows: ImportFromPhysicalId: "arn:aws:cloudformation:[us-east-1]:[accountId]:stack/[StackName]/[resourceId] (see [below for nested schema](#nestedatt--provisioning_artifact_parameters--info))
-- `name` (String) The name of the provisioning artifact (for example, v1 v2beta). No spaces are allowed.
-- `type` (String) The type of provisioning artifact. Valid values are CLOUD_FORMATION_TEMPLATE, TERRAFORM_OPEN_SOURCE, TERRAFORM_CLOUD, EXTERNAL
-
-<a id="nestedatt--provisioning_artifact_parameters--info"></a>
-### Nested Schema for `provisioning_artifact_parameters.info`
-
-Optional:
-
-- `import_from_physical_id` (String) The physical id of the resource that contains the template. Currently only supports AWS CloudFormation stack arn
-- `load_template_from_url` (String) The URL of the AWS CloudFormation template in Amazon S3 in JSON format.
-
+- `description` (String)
+- `disable_template_validation` (Boolean)
+- `info` (String)
+- `name` (String)
+- `type` (String)
 
 
 <a id="nestedatt--source_connection"></a>
@@ -72,8 +59,8 @@ Optional:
 
 Optional:
 
-- `connection_parameters` (Attributes) The connection details based on the connection Type. (see [below for nested schema](#nestedatt--source_connection--connection_parameters))
-- `type` (String) The only supported SourceConnection type is Codestar.
+- `connection_parameters` (Attributes) (see [below for nested schema](#nestedatt--source_connection--connection_parameters))
+- `type` (String)
 
 <a id="nestedatt--source_connection--connection_parameters"></a>
 ### Nested Schema for `source_connection.connection_parameters`
@@ -87,10 +74,10 @@ Optional:
 
 Optional:
 
-- `artifact_path` (String) The absolute path where the artifact resides within the repo and branch, formatted as "folder/file.json".
-- `branch` (String) The specific branch where the artifact resides.
-- `connection_arn` (String) The CodeStar ARN, which is the connection between AWS Service Catalog and the external repository.
-- `repository` (String) The specific repository where the product's artifact-to-be-synced resides, formatted as "Account/Repo."
+- `artifact_path` (String)
+- `branch` (String)
+- `connection_arn` (String)
+- `repository` (String)
 
 
 
@@ -100,8 +87,8 @@ Optional:
 
 Optional:
 
-- `key` (String) The tag key.
-- `value` (String) The tag value
+- `key` (String)
+- `value` (String)
 
 ## Import
 
@@ -123,7 +110,7 @@ import {
 
 #### Required
 
-- `id` (String) The ID of the product, such as prod-tsjbmal34qvek
+- `id` (String)
 
 #### Optional
 

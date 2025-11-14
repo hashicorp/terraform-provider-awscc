@@ -2,12 +2,12 @@
 page_title: "awscc_apigateway_gateway_response Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  The AWS::ApiGateway::GatewayResponse resource creates a gateway response for your API. For more information, see API Gateway Responses https://docs.aws.amazon.com/apigateway/latest/developerguide/customize-gateway-responses.html#api-gateway-gatewayResponse-definition in the API Gateway Developer Guide.
+  The AWS::ApiGateway::GatewayResponse resource creates a gateway response for your API. When you delete a stack containing this resource, your custom gateway responses are reset. For more information, see API Gateway Responses https://docs.aws.amazon.com/apigateway/latest/developerguide/customize-gateway-responses.html#api-gateway-gatewayResponse-definition in the API Gateway Developer Guide.
 ---
 
 # awscc_apigateway_gateway_response (Resource)
 
-The ``AWS::ApiGateway::GatewayResponse`` resource creates a gateway response for your API. For more information, see [API Gateway Responses](https://docs.aws.amazon.com/apigateway/latest/developerguide/customize-gateway-responses.html#api-gateway-gatewayResponse-definition) in the *API Gateway Developer Guide*.
+The ``AWS::ApiGateway::GatewayResponse`` resource creates a gateway response for your API. When you delete a stack containing this resource, your custom gateway responses are reset. For more information, see [API Gateway Responses](https://docs.aws.amazon.com/apigateway/latest/developerguide/customize-gateway-responses.html#api-gateway-gatewayResponse-definition) in the *API Gateway Developer Guide*.
 
 ## Example Usage
 

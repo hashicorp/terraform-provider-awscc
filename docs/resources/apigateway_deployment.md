@@ -144,8 +144,8 @@ Optional:
 
 Optional:
 
-- `key` (String) The key name of the tag
-- `value` (String) The value for the tag
+- `key` (String) A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.
+- `value` (String) The value for the specified tag key.
 
 ## Import
 

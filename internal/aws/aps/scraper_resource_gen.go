@@ -435,6 +435,11 @@ func scraperResource(ctx context.Context) (resource.Resource, error) {
 		//	      "required": [
 		//	        "EksConfiguration"
 		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "VpcConfiguration"
+		//	      ]
 		//	    }
 		//	  ],
 		//	  "properties": {
@@ -470,6 +475,37 @@ func scraperResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "required": [
 		//	        "ClusterArn",
+		//	        "SubnetIds"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "VpcConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for VPC metrics source",
+		//	      "properties": {
+		//	        "SecurityGroupIds": {
+		//	          "description": "List of security group IDs",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "description": "ID of a security group",
+		//	            "pattern": "^sg-[0-9a-z]+$",
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "SubnetIds": {
+		//	          "description": "List of subnet IDs",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "description": "ID of a subnet",
+		//	            "pattern": "^subnet-[0-9a-z]+$",
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SecurityGroupIds",
 		//	        "SubnetIds"
 		//	      ],
 		//	      "type": "object"
@@ -530,6 +566,51 @@ func scraperResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Configuration for EKS metrics source",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: VpcConfiguration
+				"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SecurityGroupIds
+						"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of security group IDs",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.ValueStringsAre(
+									stringvalidator.RegexMatches(regexp.MustCompile("^sg-[0-9a-z]+$"), ""),
+								),
+								fwvalidators.NotNullList(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SubnetIds
+						"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of subnet IDs",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.ValueStringsAre(
+									stringvalidator.RegexMatches(regexp.MustCompile("^subnet-[0-9a-z]+$"), ""),
+								),
+								fwvalidators.NotNullList(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for VPC metrics source",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -669,6 +750,7 @@ func scraperResource(ctx context.Context) (resource.Resource, error) {
 		"target_role_arn":               "TargetRoleArn",
 		"type":                          "Type",
 		"value":                         "Value",
+		"vpc_configuration":             "VpcConfiguration",
 		"workspace_arn":                 "WorkspaceArn",
 	})
 

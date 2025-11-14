@@ -43,7 +43,7 @@ func trailResource(ctx context.Context) (resource.Resource, error) {
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "Advanced event selectors let you create fine-grained selectors for the following AWS CloudTrail event record ?elds. They help you control costs by logging only those events that are important to you.",
+		//	    "description": "Advanced event selectors let you create fine-grained selectors for the following AWS CloudTrail event record fields. They help you control costs by logging only those events that are important to you.",
 		//	    "properties": {
 		//	      "FieldSelectors": {
 		//	        "description": "Contains all selector statements in an advanced event selector.",

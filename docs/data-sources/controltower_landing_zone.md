@@ -26,6 +26,7 @@ Data Source schema for AWS::ControlTower::LandingZone
 - `landing_zone_identifier` (String)
 - `latest_available_version` (String)
 - `manifest` (String)
+- `remediation_types` (List of String)
 - `status` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `version` (String)

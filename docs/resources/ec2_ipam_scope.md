@@ -34,6 +34,7 @@ resource "awscc_ec2_ipam_scope" "example" {
 ### Optional
 
 - `description` (String)
+- `external_authority_configuration` (Attributes) External service configuration to connect your AWS IPAM scope. (see [below for nested schema](#nestedatt--external_authority_configuration))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -45,6 +46,15 @@ resource "awscc_ec2_ipam_scope" "example" {
 - `ipam_scope_type` (String) Determines whether this scope contains publicly routable space or space for a private network
 - `is_default` (Boolean) Is this one of the default scopes created with the IPAM.
 - `pool_count` (Number) The number of pools that currently exist in this scope.
+
+<a id="nestedatt--external_authority_configuration"></a>
+### Nested Schema for `external_authority_configuration`
+
+Optional:
+
+- `external_resource_identifier` (String) Resource identifier of the scope in the external service connecting to your AWS IPAM scope.
+- `ipam_scope_external_authority_type` (String) An external service connecting to your AWS IPAM scope.
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

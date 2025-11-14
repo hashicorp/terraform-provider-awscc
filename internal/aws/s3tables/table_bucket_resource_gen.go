@@ -15,11 +15,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -121,6 +123,74 @@ func tableBucketResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "User tags (key-value pairs) to associate with the table bucket.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "Tag key must be between 1 to 128 characters in length. Tag key cannot start with 'aws:' and can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "Tag value must be between 0 to 256 characters in length. Tag value can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
+		//	        "maxLength": 256,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Tag key must be between 1 to 128 characters in length. Tag key cannot start with 'aws:' and can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Tag value must be between 0 to 256 characters in length. Tag value can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(256),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "User tags (key-value pairs) to associate with the table bucket.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: UnreferencedFileRemoval
@@ -230,14 +300,17 @@ func tableBucketResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"encryption_configuration":  "EncryptionConfiguration",
+		"key":                       "Key",
 		"kms_key_arn":               "KMSKeyArn",
 		"noncurrent_days":           "NoncurrentDays",
 		"sse_algorithm":             "SSEAlgorithm",
 		"status":                    "Status",
 		"table_bucket_arn":          "TableBucketARN",
 		"table_bucket_name":         "TableBucketName",
+		"tags":                      "Tags",
 		"unreferenced_days":         "UnreferencedDays",
 		"unreferenced_file_removal": "UnreferencedFileRemoval",
+		"value":                     "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

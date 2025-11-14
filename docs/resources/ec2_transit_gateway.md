@@ -42,6 +42,7 @@ resource "awscc_ec2_transit_gateway" "example_transit_gateway" {
 - `default_route_table_propagation` (String)
 - `description` (String)
 - `dns_support` (String)
+- `encryption_support` (String)
 - `multicast_support` (String)
 - `propagation_default_route_table_id` (String)
 - `security_group_referencing_support` (String)
@@ -51,6 +52,7 @@ resource "awscc_ec2_transit_gateway" "example_transit_gateway" {
 
 ### Read-Only
 
+- `encryption_support_state` (String)
 - `id` (String) Uniquely identifies the resource.
 - `transit_gateway_arn` (String)
 - `transit_gateway_id` (String)

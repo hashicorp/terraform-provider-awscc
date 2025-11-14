@@ -24,16 +24,16 @@ Data Source schema for AWS::EC2::Volume
 - `auto_enable_io` (Boolean) Indicates whether the volume is auto-enabled for I/O operations. By default, Amazon EBS disables I/O to the volume from attached EC2 instances when it determines that a volume's data is potentially inconsistent. If the consistency of the volume is not a concern, and you prefer that the volume be made available immediately if it's impaired, you can configure the volume to automatically enable I/O.
 - `availability_zone` (String) The ID of the Availability Zone in which to create the volume. For example, ``us-east-1a``.
  Either ``AvailabilityZone`` or ``AvailabilityZoneId`` must be specified, but not both.
+- `availability_zone_id` (String)
 - `encrypted` (Boolean) Indicates whether the volume should be encrypted. The effect of setting the encryption state to ``true`` depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see [Encryption by default](https://docs.aws.amazon.com/ebs/latest/userguide/work-with-ebs-encr.html#encryption-by-default) in the *Amazon EBS User Guide*.
  Encrypted Amazon EBS volumes must be attached to instances that support Amazon EBS encryption. For more information, see [Supported instance types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption-requirements.html#ebs-encryption_supported_instances).
-- `iops` (Number) The number of I/O operations per second (IOPS). For ``gp3``, ``io1``, and ``io2`` volumes, this represents the number of IOPS that are provisioned for the volume. For ``gp2`` volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.
- The following are the supported values for each volume type:
-  +  ``gp3``: 3,000 - 16,000 IOPS
-  +  ``io1``: 100 - 64,000 IOPS
-  +  ``io2``: 100 - 256,000 IOPS
+- `iops` (Number) The number of I/O operations per second (IOPS) to provision for the volume. Required for ``io1`` and ``io2`` volumes. Optional for ``gp3`` volumes. Omit for all other volume types. 
+ Valid ranges:
+  +  gp3: ``3,000``(*default*)``- 80,000`` IOPS
+  +  io1: ``100 - 64,000`` IOPS
+  +  io2: ``100 - 256,000`` IOPS
   
- For ``io2`` volumes, you can achieve up to 256,000 IOPS on [instances built on the Nitro System](https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html). On other instances, you can achieve performance up to 32,000 IOPS.
- This parameter is required for ``io1`` and ``io2`` volumes. The default for ``gp3`` volumes is 3,000 IOPS. This parameter is not supported for ``gp2``, ``st1``, ``sc1``, or ``standard`` volumes.
+  [Instances built on the Nitro System](https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html) can support up to 256,000 IOPS. Other instances can support up to 32,000 IOPS.
 - `kms_key_id` (String) The identifier of the kms-key-long to use for Amazon EBS encryption. If ``KmsKeyId`` is specified, the encrypted state must be ``true``.
  If you omit this property and your account is enabled for encryption by default, or *Encrypted* is set to ``true``, then the volume is encrypted using the default key specified for your account. If your account does not have a default key, then the volume is encrypted using the aws-managed-key.
  Alternatively, if you want to specify a different key, you can specify one of the following:
@@ -44,14 +44,16 @@ Data Source schema for AWS::EC2::Volume
 - `multi_attach_enabled` (Boolean) Indicates whether Amazon EBS Multi-Attach is enabled.
  CFNlong does not currently support updating a single-attach volume to be multi-attach enabled, updating a multi-attach enabled volume to be single-attach, or updating the size or number of I/O operations per second (IOPS) of a multi-attach enabled volume.
 - `outpost_arn` (String) The Amazon Resource Name (ARN) of the Outpost.
-- `size` (Number) The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. If you specify a snapshot, the default is the snapshot size. You can specify a volume size that is equal to or larger than the snapshot size.
- The following are the supported volumes sizes for each volume type:
-  +  ``gp2`` and ``gp3``: 1 - 16,384 GiB
-  +  ``io1``: 4 - 16,384 GiB
-  +  ``io2``: 4 - 65,536 GiB
-  +  ``st1`` and ``sc1``: 125 - 16,384 GiB
-  +  ``standard``: 1 - 1024 GiB
+- `size` (Number) The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. If you specify a snapshot, the default is the snapshot size, and you can specify a volume size that is equal to or larger than the snapshot size.
+ Valid sizes:
+  +  gp2: ``1 - 16,384`` GiB
+  +  gp3: ``1 - 65,536`` GiB
+  +  io1: ``4 - 16,384`` GiB
+  +  io2: ``4 - 65,536`` GiB
+  +  st1 and sc1: ``125 - 16,384`` GiB
+  +  standard: ``1 - 1024`` GiB
 - `snapshot_id` (String) The snapshot from which to create the volume. You must specify either a snapshot ID or a volume size.
+- `source_volume_id` (String)
 - `tags` (Attributes List) The tags to apply to the volume during creation. (see [below for nested schema](#nestedatt--tags))
 - `throughput` (Number) The throughput to provision for a volume, with a maximum of 1,000 MiB/s.
  This parameter is valid only for ``gp3`` volumes. The default value is 125.

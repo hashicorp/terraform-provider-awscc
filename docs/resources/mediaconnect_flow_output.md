@@ -18,7 +18,6 @@ Resource schema for AWS::MediaConnect::FlowOutput
 ### Required
 
 - `flow_arn` (String) The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.
-- `protocol` (String) The protocol that is used by the source or output.
 
 ### Optional
 
@@ -34,7 +33,10 @@ Resource schema for AWS::MediaConnect::FlowOutput
 - `ndi_speed_hq_quality` (Number) A quality setting for the NDI Speed HQ encoder.
 - `output_status` (String) An indication of whether the output should transmit data or not.
 - `port` (Number) The port to use when content is distributed to this output.
+- `protocol` (String) The protocol that is used by the source or output.
 - `remote_id` (String) The remote ID for the Zixi-pull stream.
+- `router_integration_state` (String)
+- `router_integration_transit_encryption` (Attributes) The configuration that defines how content is encrypted during transit between the MediaConnect router and a MediaConnect flow. (see [below for nested schema](#nestedatt--router_integration_transit_encryption))
 - `smoothing_latency` (Number) The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
 - `stream_id` (String) The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
 - `vpc_interface_attachment` (Attributes) The name of the VPC interface attachment to use for this output. (see [below for nested schema](#nestedatt--vpc_interface_attachment))
@@ -90,6 +92,33 @@ Optional:
 
 - `compression_factor` (Number) A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are in the range of 3.0 to 10.0, inclusive.
 - `encoder_profile` (String) A setting on the encoder that drives compression settings. This property only applies to video media streams associated with outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol.
+
+
+
+<a id="nestedatt--router_integration_transit_encryption"></a>
+### Nested Schema for `router_integration_transit_encryption`
+
+Optional:
+
+- `encryption_key_configuration` (Attributes) Configuration settings for flow transit encryption keys. (see [below for nested schema](#nestedatt--router_integration_transit_encryption--encryption_key_configuration))
+- `encryption_key_type` (String)
+
+<a id="nestedatt--router_integration_transit_encryption--encryption_key_configuration"></a>
+### Nested Schema for `router_integration_transit_encryption.encryption_key_configuration`
+
+Optional:
+
+- `automatic` (String) Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.
+- `secrets_manager` (Attributes) The configuration settings for transit encryption of a flow output using AWS Secrets Manager, including the secret ARN and role ARN. (see [below for nested schema](#nestedatt--router_integration_transit_encryption--encryption_key_configuration--secrets_manager))
+
+<a id="nestedatt--router_integration_transit_encryption--encryption_key_configuration--secrets_manager"></a>
+### Nested Schema for `router_integration_transit_encryption.encryption_key_configuration.secrets_manager`
+
+Optional:
+
+- `role_arn` (String) The ARN of the IAM role used for transit encryption to the router input using AWS Secrets Manager.
+- `secret_arn` (String) The ARN of the AWS Secrets Manager secret used for transit encryption to the router input.
+
 
 
 

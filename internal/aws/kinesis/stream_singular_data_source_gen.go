@@ -64,6 +64,19 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The final list of shard-level metrics",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: MaxRecordSizeInKiB
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Maximum size of a data record in KiB allowed to be put into Kinesis stream.",
+		//	  "maximum": 10240,
+		//	  "minimum": 1024,
+		//	  "type": "integer"
+		//	}
+		"max_record_size_in_ki_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Maximum size of a data record in KiB allowed to be put into Kinesis stream.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -188,7 +201,7 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An arbitrary set of tags (key–value pairs) to associate with the Kinesis stream.",
+		//	  "description": "An arbitrary set of tags (key-value pairs) to associate with the Kinesis stream.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -232,7 +245,52 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "An arbitrary set of tags (key–value pairs) to associate with the Kinesis stream.",
+			Description: "An arbitrary set of tags (key-value pairs) to associate with the Kinesis stream.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: WarmThroughputMiBps
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Target warm throughput in MiB/s for the stream. This property can ONLY be set when StreamMode is ON_DEMAND.",
+		//	  "type": "integer"
+		//	}
+		"warm_throughput_mi_bps": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Target warm throughput in MiB/s for the stream. This property can ONLY be set when StreamMode is ON_DEMAND.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: WarmThroughputObject
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Warm throughput configuration details for the stream. Only present for ON_DEMAND streams.",
+		//	  "properties": {
+		//	    "CurrentMiBps": {
+		//	      "description": "Current warm throughput in MiB/s",
+		//	      "type": "integer"
+		//	    },
+		//	    "TargetMiBps": {
+		//	      "description": "Target warm throughput in MiB/s that a customer can write to a stream at any given time",
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"warm_throughput_object": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CurrentMiBps
+				"current_mi_bps": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Current warm throughput in MiB/s",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TargetMiBps
+				"target_mi_bps": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Target warm throughput in MiB/s that a customer can write to a stream at any given time",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Warm throughput configuration details for the stream. Only present for ON_DEMAND streams.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -253,10 +311,12 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                         "Arn",
+		"current_mi_bps":              "CurrentMiBps",
 		"desired_shard_level_metrics": "DesiredShardLevelMetrics",
 		"encryption_type":             "EncryptionType",
 		"key":                         "Key",
 		"key_id":                      "KeyId",
+		"max_record_size_in_ki_b":     "MaxRecordSizeInKiB",
 		"name":                        "Name",
 		"retention_period_hours":      "RetentionPeriodHours",
 		"shard_count":                 "ShardCount",
@@ -264,7 +324,10 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"stream_mode":                 "StreamMode",
 		"stream_mode_details":         "StreamModeDetails",
 		"tags":                        "Tags",
+		"target_mi_bps":               "TargetMiBps",
 		"value":                       "Value",
+		"warm_throughput_mi_bps":      "WarmThroughputMiBps",
+		"warm_throughput_object":      "WarmThroughputObject",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

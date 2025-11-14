@@ -1,0 +1,1 @@
+$ terraform import awscc_rtbfabric_inbound_external_link.example "arn"

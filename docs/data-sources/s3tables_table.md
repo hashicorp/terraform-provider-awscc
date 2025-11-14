@@ -29,6 +29,7 @@ Data Source schema for AWS::S3Tables::Table
 - `table_arn` (String) The Amazon Resource Name (ARN) of the specified table.
 - `table_bucket_arn` (String) The Amazon Resource Name (ARN) of the specified table bucket.
 - `table_name` (String) The name for the table.
+- `tags` (Attributes Set) User tags (key-value pairs) to associate with the table. (see [below for nested schema](#nestedatt--tags))
 - `version_token` (String) The version token of the table
 - `warehouse_location` (String) The warehouse location of the table.
 - `without_metadata` (String) Indicates that you don't want to specify a schema for the table. This property is mutually exclusive to 'IcebergMetadata', and its only possible value is 'Yes'.
@@ -76,3 +77,12 @@ Read-Only:
 - `max_snapshot_age_hours` (Number) The maximum age of a snapshot before it can be expired.
 - `min_snapshots_to_keep` (Number) The minimum number of snapshots to keep.
 - `status` (String) Indicates whether the SnapshotManagement maintenance action is enabled.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) Tag key must be between 1 to 128 characters in length. Tag key cannot start with 'aws:' and can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.
+- `value` (String) Tag value must be between 0 to 256 characters in length. Tag value can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.

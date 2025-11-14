@@ -1,5 +1,19 @@
 ## 1.64.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_mediaconnect_router_input`
+* **New Data Source:** `awscc_mediaconnect_router_inputs`
+* **New Data Source:** `awscc_mediaconnect_router_network_interface`
+* **New Data Source:** `awscc_mediaconnect_router_network_interfaces`
+* **New Data Source:** `awscc_mediaconnect_router_output`
+* **New Data Source:** `awscc_mediaconnect_router_outputs`
+* **New Data Source:** `awscc_rtbfabric_inbound_external_link`
+* **New Resource:** `awscc_mediaconnect_router_input`
+* **New Resource:** `awscc_mediaconnect_router_network_interface`
+* **New Resource:** `awscc_mediaconnect_router_output`
+* **New Resource:** `awscc_rtbfabric_inbound_external_link`
+
 ## 1.63.0 (November 7, 2025)
 
 FEATURES:

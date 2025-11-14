@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1267 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1270 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -3611,6 +3611,18 @@ resource_schema "aws_mediaconnect_gateway" {
   cloudformation_type_name = "AWS::MediaConnect::Gateway"
 }
 
+resource_schema "aws_mediaconnect_router_input" {
+  cloudformation_type_name = "AWS::MediaConnect::RouterInput"
+}
+
+resource_schema "aws_mediaconnect_router_network_interface" {
+  cloudformation_type_name = "AWS::MediaConnect::RouterNetworkInterface"
+}
+
+resource_schema "aws_mediaconnect_router_output" {
+  cloudformation_type_name = "AWS::MediaConnect::RouterOutput"
+}
+
 resource_schema "aws_medialive_channel_placement_group" {
   cloudformation_type_name               = "AWS::MediaLive::ChannelPlacementGroup"
   suppress_plural_data_source_generation = true
@@ -4649,6 +4661,11 @@ resource_schema "aws_route53resolver_resolver_rule" {
 
 resource_schema "aws_route53resolver_resolver_rule_association" {
   cloudformation_type_name = "AWS::Route53Resolver::ResolverRuleAssociation"
+}
+
+resource_schema "aws_rtbfabric_inbound_external_link" {
+  cloudformation_type_name               = "AWS::RTBFabric::InboundExternalLink"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_rtbfabric_link" {

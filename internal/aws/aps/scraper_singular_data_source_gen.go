@@ -326,6 +326,11 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "required": [
 		//	        "EksConfiguration"
 		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "VpcConfiguration"
+		//	      ]
 		//	    }
 		//	  ],
 		//	  "properties": {
@@ -364,6 +369,37 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "SubnetIds"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "VpcConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for VPC metrics source",
+		//	      "properties": {
+		//	        "SecurityGroupIds": {
+		//	          "description": "List of security group IDs",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "description": "ID of a security group",
+		//	            "pattern": "^sg-[0-9a-z]+$",
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "SubnetIds": {
+		//	          "description": "List of subnet IDs",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "description": "ID of a subnet",
+		//	            "pattern": "^subnet-[0-9a-z]+$",
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SecurityGroupIds",
+		//	        "SubnetIds"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -392,6 +428,25 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Configuration for EKS metrics source",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcConfiguration
+				"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SecurityGroupIds
+						"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of security group IDs",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SubnetIds
+						"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of subnet IDs",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for VPC metrics source",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -492,6 +547,7 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"target_role_arn":               "TargetRoleArn",
 		"type":                          "Type",
 		"value":                         "Value",
+		"vpc_configuration":             "VpcConfiguration",
 		"workspace_arn":                 "WorkspaceArn",
 	})
 

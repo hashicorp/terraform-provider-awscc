@@ -2,13 +2,15 @@
 page_title: "awscc_apigateway_domain_name Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  The AWS::ApiGateway::DomainName resource specifies a custom domain name for your API in API Gateway.
+  The AWS::ApiGateway::DomainName resource specifies a public custom domain name for your API in API Gateway.
+  To create a custom domain name for private APIs, use AWS::ApiGateway::DomainNameV2 https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-domainnamev2.html.
   You can use a custom domain name to provide a URL that's more intuitive and easier to recall. For more information about using custom domain names, see Set up Custom Domain Name for an API in API Gateway https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html in the API Gateway Developer Guide.
 ---
 
 # awscc_apigateway_domain_name (Resource)
 
-The ``AWS::ApiGateway::DomainName`` resource specifies a custom domain name for your API in API Gateway.
+The ``AWS::ApiGateway::DomainName`` resource specifies a public custom domain name for your API in API Gateway.
+ To create a custom domain name for private APIs, use [AWS::ApiGateway::DomainNameV2](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-domainnamev2.html).
  You can use a custom domain name to provide a URL that's more intuitive and easier to recall. For more information about using custom domain names, see [Set up Custom Domain Name for an API in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html) in the *API Gateway Developer Guide*.
 
 ## Example Usage
@@ -41,8 +43,7 @@ resource "awscc_apigateway_domain_name" "example" {
 
 - `certificate_arn` (String)
 - `domain_name` (String)
-- `endpoint_configuration` (Attributes) The ``EndpointConfiguration`` property type specifies the endpoint types of an Amazon API Gateway domain name.
- ``EndpointConfiguration`` is a property of the [AWS::ApiGateway::DomainName](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-domainname.html) resource. (see [below for nested schema](#nestedatt--endpoint_configuration))
+- `endpoint_configuration` (Attributes) The endpoint configuration of this DomainName showing the endpoint types and IP address types of the domain name. (see [below for nested schema](#nestedatt--endpoint_configuration))
 - `mutual_tls_authentication` (Attributes) (see [below for nested schema](#nestedatt--mutual_tls_authentication))
 - `ownership_verification_certificate_arn` (String) The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the RegionalCertificateArn.
 - `regional_certificate_arn` (String)
@@ -82,8 +83,8 @@ Optional:
 
 Optional:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.
+- `value` (String) The value for the specified tag key.
 
 ## Import
 

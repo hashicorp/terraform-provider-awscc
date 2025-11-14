@@ -72,6 +72,7 @@ resource "awscc_backup_logically_air_gapped_backup_vault" "example" {
 
 - `access_policy` (String)
 - `backup_vault_tags` (Map of String)
+- `mpa_approval_team_arn` (String)
 - `notifications` (Attributes) (see [below for nested schema](#nestedatt--notifications))
 
 ### Read-Only

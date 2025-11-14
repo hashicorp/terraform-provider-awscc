@@ -64,8 +64,8 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.
+- `value` (String) The value for the specified tag key.
 
 
 <a id="nestedatt--throttle"></a>

@@ -1,15 +1,22 @@
 {
   "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
+    "permissions": [
+      "s3tables:TagResource",
+      "s3tables:UntagResource",
+      "s3tables:ListTagsForResource"
+    ],
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
     "cloudFormationSystemTags": false
   },
   "handlers": {
     "read": {
       "permissions": [
         "s3tables:GetTable",
-        "s3tables:GetTableMaintenanceConfiguration"
+        "s3tables:GetTableMaintenanceConfiguration",
+        "s3tables:ListTagsForResource"
       ]
     },
     "create": {
@@ -17,14 +24,21 @@
         "s3tables:CreateTable",
         "s3tables:PutTableData",
         "s3tables:GetTable",
-        "s3tables:PutTableMaintenanceConfiguration"
+        "s3tables:PutTableMaintenanceConfiguration",
+        "s3tables:GetTableMaintenanceConfiguration",
+        "s3tables:TagResource",
+        "s3tables:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
         "s3tables:GetTable",
         "s3tables:RenameTable",
-        "s3tables:PutTableMaintenanceConfiguration"
+        "s3tables:PutTableMaintenanceConfiguration",
+        "s3tables:GetTableMaintenanceConfiguration",
+        "s3tables:TagResource",
+        "s3tables:UntagResource",
+        "s3tables:ListTagsForResource"
       ]
     },
     "list": {
@@ -198,6 +212,27 @@
         "IcebergSchema"
       ]
     },
+    "Tag": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "description": "Tag value must be between 0 to 256 characters in length. Tag value can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
+          "type": "string",
+          "maxLength": 256
+        },
+        "Key": {
+          "minLength": 1,
+          "description": "Tag key must be between 1 to 128 characters in length. Tag key cannot start with 'aws:' and can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
     "WarehouseLocation": {
       "description": "The warehouse location of the table.",
       "type": "string"
@@ -267,6 +302,15 @@
     },
     "SnapshotManagement": {
       "$ref": "#/definitions/SnapshotManagement"
+    },
+    "Tags": {
+      "uniqueItems": true,
+      "description": "User tags (key-value pairs) to associate with the table.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     }
   }
 }

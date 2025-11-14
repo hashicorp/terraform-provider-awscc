@@ -9,11 +9,14 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -233,6 +236,173 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: GranularAccessControlConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "DataTableAccessControlConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Defines the access control configuration for data tables.",
+		//	      "properties": {
+		//	        "PrimaryAttributeAccessControlConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Contains the configuration for record-based access control.",
+		//	          "properties": {
+		//	            "PrimaryAttributeValues": {
+		//	              "description": "An array of PrimaryAttributeValue objects.",
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "An object defining the access control for a specific attribute and its values.",
+		//	                "properties": {
+		//	                  "AccessType": {
+		//	                    "description": "Specifies the type of access granted. Currently, only \"ALLOW\" is supported",
+		//	                    "enum": [
+		//	                      "ALLOW"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "AttributeName": {
+		//	                    "description": "The name of the primary attribute.",
+		//	                    "maxLength": 127,
+		//	                    "minLength": 1,
+		//	                    "pattern": "",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Values": {
+		//	                    "description": "An array of allowed primary values for the specified primary attribute.",
+		//	                    "items": {
+		//	                      "maxLength": 1000,
+		//	                      "minLength": 1,
+		//	                      "pattern": "",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "maxItems": 2,
+		//	                    "minItems": 1,
+		//	                    "type": "array",
+		//	                    "uniqueItems": true
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "AccessType",
+		//	                  "AttributeName",
+		//	                  "Values"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 5,
+		//	              "minItems": 1,
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "PrimaryAttributeValues"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"granular_access_control_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DataTableAccessControlConfiguration
+				"data_table_access_control_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PrimaryAttributeAccessControlConfiguration
+						"primary_attribute_access_control_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: PrimaryAttributeValues
+								"primary_attribute_values": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AccessType
+											"access_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the type of access granted. Currently, only \"ALLOW\" is supported",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"ALLOW",
+													),
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: AttributeName
+											"attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name of the primary attribute.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 127),
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Values
+											"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Description: "An array of allowed primary values for the specified primary attribute.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.List{ /*START VALIDATORS*/
+													listvalidator.SizeBetween(1, 2),
+													listvalidator.UniqueValues(),
+													listvalidator.ValueStringsAre(
+														stringvalidator.LengthBetween(1, 1000),
+													),
+													fwvalidators.NotNullList(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "An array of PrimaryAttributeValue objects.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(1, 5),
+										listvalidator.UniqueValues(),
+										fwvalidators.NotNullList(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Contains the configuration for record-based access control.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Defines the access control configuration for data tables.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: HierarchyRestrictedResources
@@ -515,23 +685,30 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allowed_access_control_hierarchy_group_id": "AllowedAccessControlHierarchyGroupId",
-		"allowed_access_control_tags":               "AllowedAccessControlTags",
-		"application_permissions":                   "ApplicationPermissions",
-		"applications":                              "Applications",
-		"description":                               "Description",
-		"hierarchy_restricted_resources":            "HierarchyRestrictedResources",
-		"instance_arn":                              "InstanceArn",
-		"key":                                       "Key",
-		"last_modified_region":                      "LastModifiedRegion",
-		"last_modified_time":                        "LastModifiedTime",
-		"namespace":                                 "Namespace",
-		"permissions":                               "Permissions",
-		"security_profile_arn":                      "SecurityProfileArn",
-		"security_profile_name":                     "SecurityProfileName",
-		"tag_restricted_resources":                  "TagRestrictedResources",
-		"tags":                                      "Tags",
-		"value":                                     "Value",
+		"access_type": "AccessType",
+		"allowed_access_control_hierarchy_group_id":      "AllowedAccessControlHierarchyGroupId",
+		"allowed_access_control_tags":                    "AllowedAccessControlTags",
+		"application_permissions":                        "ApplicationPermissions",
+		"applications":                                   "Applications",
+		"attribute_name":                                 "AttributeName",
+		"data_table_access_control_configuration":        "DataTableAccessControlConfiguration",
+		"description":                                    "Description",
+		"granular_access_control_configuration":          "GranularAccessControlConfiguration",
+		"hierarchy_restricted_resources":                 "HierarchyRestrictedResources",
+		"instance_arn":                                   "InstanceArn",
+		"key":                                            "Key",
+		"last_modified_region":                           "LastModifiedRegion",
+		"last_modified_time":                             "LastModifiedTime",
+		"namespace":                                      "Namespace",
+		"permissions":                                    "Permissions",
+		"primary_attribute_access_control_configuration": "PrimaryAttributeAccessControlConfiguration",
+		"primary_attribute_values":                       "PrimaryAttributeValues",
+		"security_profile_arn":                           "SecurityProfileArn",
+		"security_profile_name":                          "SecurityProfileName",
+		"tag_restricted_resources":                       "TagRestrictedResources",
+		"tags":                                           "Tags",
+		"value":                                          "Value",
+		"values":                                         "Values",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

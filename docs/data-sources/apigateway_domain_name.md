@@ -26,8 +26,7 @@ Data Source schema for AWS::ApiGateway::DomainName
 - `distribution_hosted_zone_id` (String)
 - `domain_name` (String)
 - `domain_name_arn` (String)
-- `endpoint_configuration` (Attributes) The ``EndpointConfiguration`` property type specifies the endpoint types of an Amazon API Gateway domain name.
- ``EndpointConfiguration`` is a property of the [AWS::ApiGateway::DomainName](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-domainname.html) resource. (see [below for nested schema](#nestedatt--endpoint_configuration))
+- `endpoint_configuration` (Attributes) The endpoint configuration of this DomainName showing the endpoint types and IP address types of the domain name. (see [below for nested schema](#nestedatt--endpoint_configuration))
 - `mutual_tls_authentication` (Attributes) (see [below for nested schema](#nestedatt--mutual_tls_authentication))
 - `ownership_verification_certificate_arn` (String) The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the RegionalCertificateArn.
 - `regional_certificate_arn` (String)
@@ -60,5 +59,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.
+- `value` (String) The value for the specified tag key.

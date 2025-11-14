@@ -1279,7 +1279,9 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -1370,6 +1372,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/AutoScalingConfigurationArn",
+		"/properties/Tags",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

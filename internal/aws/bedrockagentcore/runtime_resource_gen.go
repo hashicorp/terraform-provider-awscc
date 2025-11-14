@@ -9,14 +9,18 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -58,6 +62,74 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "The artifact of the agent",
 		//	  "properties": {
+		//	    "CodeConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Representation of a code configuration",
+		//	      "properties": {
+		//	        "Code": {
+		//	          "additionalProperties": false,
+		//	          "description": "Object represents source code from zip file",
+		//	          "properties": {
+		//	            "S3": {
+		//	              "additionalProperties": false,
+		//	              "description": "S3 Location Configuration",
+		//	              "properties": {
+		//	                "Bucket": {
+		//	                  "description": "S3 bucket name",
+		//	                  "pattern": "^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$",
+		//	                  "type": "string"
+		//	                },
+		//	                "Prefix": {
+		//	                  "description": "S3 object key prefix",
+		//	                  "maxLength": 1024,
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                },
+		//	                "VersionId": {
+		//	                  "description": "S3 object version ID",
+		//	                  "maxLength": 1024,
+		//	                  "minLength": 3,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Bucket",
+		//	                "Prefix"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "EntryPoint": {
+		//	          "description": "List of entry points",
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "description": "Entry point",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 2,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
+		//	        "Runtime": {
+		//	          "description": "Managed runtime types",
+		//	          "enum": [
+		//	            "PYTHON_3_10",
+		//	            "PYTHON_3_11",
+		//	            "PYTHON_3_12",
+		//	            "PYTHON_3_13"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Code",
+		//	        "Runtime",
+		//	        "EntryPoint"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "ContainerConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -79,6 +151,112 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"agent_runtime_artifact": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CodeConfiguration
+				"code_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Code
+						"code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: S3
+								"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Bucket
+										"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "S3 bucket name",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$"), ""),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Prefix
+										"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "S3 object key prefix",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(1, 1024),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: VersionId
+										"version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "S3 object version ID",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(3, 1024),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "S3 Location Configuration",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Object represents source code from zip file",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EntryPoint
+						"entry_point": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of entry points",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 2),
+								fwvalidators.NotNullList(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Runtime
+						"runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Managed runtime types",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"PYTHON_3_10",
+									"PYTHON_3_11",
+									"PYTHON_3_12",
+									"PYTHON_3_13",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Representation of a code configuration",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: ContainerConfiguration
 				"container_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -337,6 +515,62 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: LifecycleConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Lifecycle configuration for managing runtime sessions",
+		//	  "properties": {
+		//	    "IdleRuntimeSessionTimeout": {
+		//	      "description": "Timeout in seconds for idle runtime sessions",
+		//	      "maximum": 28800,
+		//	      "minimum": 60,
+		//	      "type": "integer"
+		//	    },
+		//	    "MaxLifetime": {
+		//	      "description": "Maximum lifetime in seconds for runtime sessions",
+		//	      "maximum": 28800,
+		//	      "minimum": 60,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"lifecycle_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IdleRuntimeSessionTimeout
+				"idle_runtime_session_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Timeout in seconds for idle runtime sessions",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(60, 28800),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MaxLifetime
+				"max_lifetime": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Maximum lifetime in seconds for runtime sessions",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(60, 28800),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Lifecycle configuration for managing runtime sessions",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -484,6 +718,58 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: RequestHeaderConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for HTTP request headers",
+		//	  "properties": {
+		//	    "RequestHeaderAllowlist": {
+		//	      "description": "List of allowed HTTP headers for agent runtime requests",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "HTTP header name",
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "pattern": "^(Authorization|X-Amzn-Bedrock-AgentCore-Runtime-Custom-[a-zA-Z0-9_-]+)$",
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 20,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"request_header_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RequestHeaderAllowlist
+				"request_header_allowlist": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "List of allowed HTTP headers for agent runtime requests",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						setvalidator.SizeBetween(1, 20),
+						setvalidator.ValueStringsAre(
+							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.RegexMatches(regexp.MustCompile("^(Authorization|X-Amzn-Bedrock-AgentCore-Runtime-Custom-[a-zA-Z0-9_-]+)$"), ""),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for HTTP request headers",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -610,33 +896,46 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"agent_runtime_arn":         "AgentRuntimeArn",
-		"agent_runtime_artifact":    "AgentRuntimeArtifact",
-		"agent_runtime_id":          "AgentRuntimeId",
-		"agent_runtime_name":        "AgentRuntimeName",
-		"agent_runtime_version":     "AgentRuntimeVersion",
-		"allowed_audience":          "AllowedAudience",
-		"allowed_clients":           "AllowedClients",
-		"authorizer_configuration":  "AuthorizerConfiguration",
-		"container_configuration":   "ContainerConfiguration",
-		"container_uri":             "ContainerUri",
-		"created_at":                "CreatedAt",
-		"custom_jwt_authorizer":     "CustomJWTAuthorizer",
-		"description":               "Description",
-		"discovery_url":             "DiscoveryUrl",
-		"environment_variables":     "EnvironmentVariables",
-		"last_updated_at":           "LastUpdatedAt",
-		"network_configuration":     "NetworkConfiguration",
-		"network_mode":              "NetworkMode",
-		"network_mode_config":       "NetworkModeConfig",
-		"protocol_configuration":    "ProtocolConfiguration",
-		"role_arn":                  "RoleArn",
-		"security_groups":           "SecurityGroups",
-		"status":                    "Status",
-		"subnets":                   "Subnets",
-		"tags":                      "Tags",
-		"workload_identity_arn":     "WorkloadIdentityArn",
-		"workload_identity_details": "WorkloadIdentityDetails",
+		"agent_runtime_arn":            "AgentRuntimeArn",
+		"agent_runtime_artifact":       "AgentRuntimeArtifact",
+		"agent_runtime_id":             "AgentRuntimeId",
+		"agent_runtime_name":           "AgentRuntimeName",
+		"agent_runtime_version":        "AgentRuntimeVersion",
+		"allowed_audience":             "AllowedAudience",
+		"allowed_clients":              "AllowedClients",
+		"authorizer_configuration":     "AuthorizerConfiguration",
+		"bucket":                       "Bucket",
+		"code":                         "Code",
+		"code_configuration":           "CodeConfiguration",
+		"container_configuration":      "ContainerConfiguration",
+		"container_uri":                "ContainerUri",
+		"created_at":                   "CreatedAt",
+		"custom_jwt_authorizer":        "CustomJWTAuthorizer",
+		"description":                  "Description",
+		"discovery_url":                "DiscoveryUrl",
+		"entry_point":                  "EntryPoint",
+		"environment_variables":        "EnvironmentVariables",
+		"idle_runtime_session_timeout": "IdleRuntimeSessionTimeout",
+		"last_updated_at":              "LastUpdatedAt",
+		"lifecycle_configuration":      "LifecycleConfiguration",
+		"max_lifetime":                 "MaxLifetime",
+		"network_configuration":        "NetworkConfiguration",
+		"network_mode":                 "NetworkMode",
+		"network_mode_config":          "NetworkModeConfig",
+		"prefix":                       "Prefix",
+		"protocol_configuration":       "ProtocolConfiguration",
+		"request_header_allowlist":     "RequestHeaderAllowlist",
+		"request_header_configuration": "RequestHeaderConfiguration",
+		"role_arn":                     "RoleArn",
+		"runtime":                      "Runtime",
+		"s3":                           "S3",
+		"security_groups":              "SecurityGroups",
+		"status":                       "Status",
+		"subnets":                      "Subnets",
+		"tags":                         "Tags",
+		"version_id":                   "VersionId",
+		"workload_identity_arn":        "WorkloadIdentityArn",
+		"workload_identity_details":    "WorkloadIdentityDetails",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

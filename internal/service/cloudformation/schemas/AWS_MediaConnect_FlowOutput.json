@@ -146,6 +146,86 @@
       "required": [
         "CompressionFactor"
       ]
+    },
+    "FlowTransitEncryption": {
+      "type": "object",
+      "description": "The configuration that defines how content is encrypted during transit between the MediaConnect router and a MediaConnect flow.",
+      "properties": {
+        "EncryptionKeyType": {
+          "$ref": "#/definitions/FlowTransitEncryptionKeyType"
+        },
+        "EncryptionKeyConfiguration": {
+          "$ref": "#/definitions/FlowTransitEncryptionKeyConfiguration"
+        }
+      },
+      "required": [
+        "EncryptionKeyConfiguration"
+      ],
+      "additionalProperties": false
+    },
+    "FlowTransitEncryptionKeyConfiguration": {
+      "description": "Configuration settings for flow transit encryption keys.",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "SecretsManager",
+          "properties": {
+            "SecretsManager": {
+              "$ref": "#/definitions/SecretsManagerEncryptionKeyConfiguration"
+            }
+          },
+          "required": [
+            "SecretsManager"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Automatic",
+          "properties": {
+            "Automatic": {
+              "$ref": "#/definitions/AutomaticEncryptionKeyConfiguration"
+            }
+          },
+          "required": [
+            "Automatic"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FlowTransitEncryptionKeyType": {
+      "type": "string",
+      "enum": [
+        "SECRETS_MANAGER",
+        "AUTOMATIC"
+      ]
+    },
+    "SecretsManagerEncryptionKeyConfiguration": {
+      "type": "object",
+      "description": "The configuration settings for transit encryption of a flow output using AWS Secrets Manager, including the secret ARN and role ARN.",
+      "properties": {
+        "SecretArn": {
+          "type": "string",
+          "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
+          "description": "The ARN of the AWS Secrets Manager secret used for transit encryption to the router input."
+        },
+        "RoleArn": {
+          "type": "string",
+          "pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$",
+          "description": "The ARN of the IAM role used for transit encryption to the router input using AWS Secrets Manager."
+        }
+      },
+      "required": [
+        "RoleArn",
+        "SecretArn"
+      ],
+      "additionalProperties": false
+    },
+    "AutomaticEncryptionKeyConfiguration": {
+      "type": "object",
+      "description": "Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.",
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -247,12 +327,21 @@
     "NdiSpeedHqQuality": {
       "type": "integer",
       "description": "A quality setting for the NDI Speed HQ encoder."
+    },
+    "RouterIntegrationState": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "RouterIntegrationTransitEncryption": {
+      "$ref": "#/definitions/FlowTransitEncryption"
     }
   },
   "additionalProperties": false,
   "required": [
-    "FlowArn",
-    "Protocol"
+    "FlowArn"
   ],
   "createOnlyProperties": [
     "/properties/Name"

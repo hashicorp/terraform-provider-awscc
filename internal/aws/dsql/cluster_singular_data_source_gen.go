@@ -149,6 +149,28 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Multi-region properties associated to this cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: PolicyDocument
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IAM policy applied to the cluster resource.",
+		//	  "type": "string"
+		//	}
+		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IAM policy applied to the cluster resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PolicyVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version number of the cluster's resource based policy",
+		//	  "type": "string"
+		//	}
+		"policy_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version number of the cluster's resource based policy",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceArn
 		// CloudFormation resource type schema:
 		//
@@ -258,6 +280,8 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kms_encryption_key":          "KmsEncryptionKey",
 		"kms_key_arn":                 "KmsKeyArn",
 		"multi_region_properties":     "MultiRegionProperties",
+		"policy_document":             "PolicyDocument",
+		"policy_version":              "PolicyVersion",
 		"resource_arn":                "ResourceArn",
 		"status":                      "Status",
 		"tags":                        "Tags",

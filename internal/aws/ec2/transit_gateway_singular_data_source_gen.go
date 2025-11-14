@@ -87,6 +87,28 @@ func transitGatewayDataSource(ctx context.Context) (datasource.DataSource, error
 		"dns_support": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: EncryptionSupport
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "disable",
+		//	    "enable"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"encryption_support": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: EncryptionSupportState
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"encryption_support_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -216,6 +238,8 @@ func transitGatewayDataSource(ctx context.Context) (datasource.DataSource, error
 		"default_route_table_propagation":    "DefaultRouteTablePropagation",
 		"description":                        "Description",
 		"dns_support":                        "DnsSupport",
+		"encryption_support":                 "EncryptionSupport",
+		"encryption_support_state":           "EncryptionSupportState",
 		"key":                                "Key",
 		"multicast_support":                  "MulticastSupport",
 		"propagation_default_route_table_id": "PropagationDefaultRouteTableId",

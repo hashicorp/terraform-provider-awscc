@@ -482,6 +482,10 @@ func targetGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      "Port": {
 		//	        "description": "The port on which the target is listening. If the target group protocol is GENEVE, the supported port is 6081. If the target type is alb, the targeted Application Load Balancer must have at least one listener whose port matches the target group port. Not used if the target is a Lambda function.",
 		//	        "type": "integer"
+		//	      },
+		//	      "QuicServerId": {
+		//	        "description": "The Server ID used by targets when using QUIC or TCP_QUIC protocols.",
+		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -523,6 +527,15 @@ func targetGroupResource(ctx context.Context) (resource.Resource, error) {
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: QuicServerId
+					"quic_server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Server ID used by targets when using QUIC or TCP_QUIC protocols.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -613,6 +626,7 @@ func targetGroupResource(ctx context.Context) (resource.Resource, error) {
 		"port":                          "Port",
 		"protocol":                      "Protocol",
 		"protocol_version":              "ProtocolVersion",
+		"quic_server_id":                "QuicServerId",
 		"tags":                          "Tags",
 		"target_group_arn":              "TargetGroupArn",
 		"target_group_attributes":       "TargetGroupAttributes",

@@ -269,7 +269,8 @@ func flowLogResource(ctx context.Context) (resource.Resource, error) {
 		//	    "Subnet",
 		//	    "VPC",
 		//	    "TransitGateway",
-		//	    "TransitGatewayAttachment"
+		//	    "TransitGatewayAttachment",
+		//	    "RegionalNatGateway"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -283,6 +284,7 @@ func flowLogResource(ctx context.Context) (resource.Resource, error) {
 					"VPC",
 					"TransitGateway",
 					"TransitGatewayAttachment",
+					"RegionalNatGateway",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

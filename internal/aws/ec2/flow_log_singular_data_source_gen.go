@@ -180,7 +180,8 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "Subnet",
 		//	    "VPC",
 		//	    "TransitGateway",
-		//	    "TransitGatewayAttachment"
+		//	    "TransitGatewayAttachment",
+		//	    "RegionalNatGateway"
 		//	  ],
 		//	  "type": "string"
 		//	}

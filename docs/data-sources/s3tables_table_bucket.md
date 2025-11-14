@@ -24,6 +24,7 @@ Data Source schema for AWS::S3Tables::TableBucket
 - `encryption_configuration` (Attributes) Specifies encryption settings for the table bucket (see [below for nested schema](#nestedatt--encryption_configuration))
 - `table_bucket_arn` (String) The Amazon Resource Name (ARN) of the specified table bucket.
 - `table_bucket_name` (String) A name for the table bucket.
+- `tags` (Attributes Set) User tags (key-value pairs) to associate with the table bucket. (see [below for nested schema](#nestedatt--tags))
 - `unreferenced_file_removal` (Attributes) Settings governing the Unreferenced File Removal maintenance action. Unreferenced file removal identifies and deletes all objects that are not referenced by any table snapshots. (see [below for nested schema](#nestedatt--unreferenced_file_removal))
 
 <a id="nestedatt--encryption_configuration"></a>
@@ -33,6 +34,15 @@ Read-Only:
 
 - `kms_key_arn` (String) ARN of the KMS key to use for encryption
 - `sse_algorithm` (String) Server-side encryption algorithm
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) Tag key must be between 1 to 128 characters in length. Tag key cannot start with 'aws:' and can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.
+- `value` (String) Tag value must be between 0 to 256 characters in length. Tag value can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.
 
 
 <a id="nestedatt--unreferenced_file_removal"></a>

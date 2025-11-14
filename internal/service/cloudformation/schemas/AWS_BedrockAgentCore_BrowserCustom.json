@@ -52,6 +52,17 @@
       "additionalProperties": false,
       "description": "Recording configuration for browser"
     },
+    "BrowserSigning": {
+      "type": "object",
+      "properties": {
+        "Enabled": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "additionalProperties": false,
+      "description": "Browser signing configuration"
+    },
     "S3Location": {
       "type": "object",
       "properties": {
@@ -218,6 +229,10 @@
       "$ref": "#/definitions/RecordingConfig",
       "description": "Recording configuration for browser."
     },
+    "BrowserSigning": {
+      "$ref": "#/definitions/BrowserSigning",
+      "description": "Browser signing configuration."
+    },
     "ExecutionRoleArn": {
       "$ref": "#/definitions/RoleArn",
       "description": "The Amazon Resource Name (ARN) of the IAM role that the browser uses to access resources."
@@ -270,6 +285,7 @@
     "/properties/Description",
     "/properties/NetworkConfiguration",
     "/properties/RecordingConfig",
+    "/properties/BrowserSigning",
     "/properties/ExecutionRoleArn"
   ],
   "handlers": {

@@ -69,6 +69,40 @@ func browserCustomResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: BrowserSigning
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Browser signing configuration.",
+		//	  "properties": {
+		//	    "Enabled": {
+		//	      "default": false,
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"browser_signing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Default:  booldefault.StaticBool(false),
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Browser signing configuration.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -462,6 +496,7 @@ func browserCustomResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"browser_arn":           "BrowserArn",
 		"browser_id":            "BrowserId",
+		"browser_signing":       "BrowserSigning",
 		"bucket":                "Bucket",
 		"created_at":            "CreatedAt",
 		"description":           "Description",

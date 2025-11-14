@@ -259,7 +259,7 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "REQUESTED",
 		//	    "ACCEPTED",
 		//	    "ACTIVE",
-		//	    "DECLINED",
+		//	    "REJECTED",
 		//	    "FAILED",
 		//	    "PENDING_DELETION",
 		//	    "DELETED",

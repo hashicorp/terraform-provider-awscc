@@ -70,6 +70,7 @@ resource "awscc_connect_security_profile" "example" {
 - `allowed_access_control_tags` (Attributes Set) The list of tags that a security profile uses to restrict access to resources in Amazon Connect. (see [below for nested schema](#nestedatt--allowed_access_control_tags))
 - `applications` (Attributes Set) A list of third-party applications that the security profile will give access to. (see [below for nested schema](#nestedatt--applications))
 - `description` (String) The description of the security profile.
+- `granular_access_control_configuration` (Attributes) (see [below for nested schema](#nestedatt--granular_access_control_configuration))
 - `hierarchy_restricted_resources` (Set of String) The list of resources that a security profile applies hierarchy restrictions to in Amazon Connect.
 - `permissions` (Set of String) Permissions assigned to the security profile.
 - `tag_restricted_resources` (Set of String) The list of resources that a security profile applies tag restrictions to in Amazon Connect.
@@ -98,6 +99,40 @@ Optional:
 
 - `application_permissions` (Set of String) The permissions that the agent is granted on the application
 - `namespace` (String) Namespace of the application that you want to give access to.
+
+
+<a id="nestedatt--granular_access_control_configuration"></a>
+### Nested Schema for `granular_access_control_configuration`
+
+Optional:
+
+- `data_table_access_control_configuration` (Attributes) Defines the access control configuration for data tables. (see [below for nested schema](#nestedatt--granular_access_control_configuration--data_table_access_control_configuration))
+
+<a id="nestedatt--granular_access_control_configuration--data_table_access_control_configuration"></a>
+### Nested Schema for `granular_access_control_configuration.data_table_access_control_configuration`
+
+Optional:
+
+- `primary_attribute_access_control_configuration` (Attributes) Contains the configuration for record-based access control. (see [below for nested schema](#nestedatt--granular_access_control_configuration--data_table_access_control_configuration--primary_attribute_access_control_configuration))
+
+<a id="nestedatt--granular_access_control_configuration--data_table_access_control_configuration--primary_attribute_access_control_configuration"></a>
+### Nested Schema for `granular_access_control_configuration.data_table_access_control_configuration.primary_attribute_access_control_configuration`
+
+Optional:
+
+- `primary_attribute_values` (Attributes List) An array of PrimaryAttributeValue objects. (see [below for nested schema](#nestedatt--granular_access_control_configuration--data_table_access_control_configuration--primary_attribute_access_control_configuration--primary_attribute_values))
+
+<a id="nestedatt--granular_access_control_configuration--data_table_access_control_configuration--primary_attribute_access_control_configuration--primary_attribute_values"></a>
+### Nested Schema for `granular_access_control_configuration.data_table_access_control_configuration.primary_attribute_access_control_configuration.primary_attribute_values`
+
+Optional:
+
+- `access_type` (String) Specifies the type of access granted. Currently, only "ALLOW" is supported
+- `attribute_name` (String) The name of the primary attribute.
+- `values` (List of String) An array of allowed primary values for the specified primary attribute.
+
+
+
 
 
 <a id="nestedatt--tags"></a>

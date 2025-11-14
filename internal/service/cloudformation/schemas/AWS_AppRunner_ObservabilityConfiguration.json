@@ -73,7 +73,12 @@
     "tagOnCreate": true,
     "tagUpdatable": false,
     "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "apprunner:TagResource",
+      "apprunner:UntagResource",
+      "apprunner:ListTagsForResource"
+    ]
   },
   "additionalProperties": false,
   "required": [],
@@ -82,13 +87,13 @@
     "/properties/TraceConfiguration",
     "/properties/Tags"
   ],
+  "writeOnlyProperties": [
+    "/properties/Tags"
+  ],
   "readOnlyProperties": [
     "/properties/ObservabilityConfigurationArn",
     "/properties/ObservabilityConfigurationRevision",
     "/properties/Latest"
-  ],
-  "writeOnlyProperties": [
-    "/properties/Tags"
   ],
   "primaryIdentifier": [
     "/properties/ObservabilityConfigurationArn"

@@ -307,6 +307,52 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "type": "object"
 		//	      },
+		//	      "JwtValidationConfig": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "AdditionalClaims": {
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "",
+		//	              "properties": {
+		//	                "Format": {
+		//	                  "type": "string"
+		//	                },
+		//	                "Name": {
+		//	                  "type": "string"
+		//	                },
+		//	                "Values": {
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Format",
+		//	                "Name",
+		//	                "Values"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "Issuer": {
+		//	            "type": "string"
+		//	          },
+		//	          "JwksEndpoint": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "JwksEndpoint",
+		//	          "Issuer"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "Order": {
 		//	        "description": "The order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first.",
 		//	        "type": "integer"
@@ -710,6 +756,89 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
+					// Property: JwtValidationConfig
+					"jwt_validation_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AdditionalClaims
+							"additional_claims": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Format
+										"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Values
+										"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.UniqueValues(),
+												fwvalidators.NotNullList(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.UniqueValues(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Issuer
+							"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: JwksEndpoint
+							"jwks_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: Order
 					"order": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "The order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first.",
@@ -1037,6 +1166,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"additional_claims":                   "AdditionalClaims",
 		"advertise_trust_store_ca_names":      "AdvertiseTrustStoreCaNames",
 		"alpn_policy":                         "AlpnPolicy",
 		"authenticate_cognito_config":         "AuthenticateCognitoConfig",
@@ -1052,10 +1182,13 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		"duration_seconds":                    "DurationSeconds",
 		"enabled":                             "Enabled",
 		"fixed_response_config":               "FixedResponseConfig",
+		"format":                              "Format",
 		"forward_config":                      "ForwardConfig",
 		"host":                                "Host",
 		"ignore_client_certificate_expiry":    "IgnoreClientCertificateExpiry",
 		"issuer":                              "Issuer",
+		"jwks_endpoint":                       "JwksEndpoint",
+		"jwt_validation_config":               "JwtValidationConfig",
 		"key":                                 "Key",
 		"listener_arn":                        "ListenerArn",
 		"listener_attributes":                 "ListenerAttributes",
@@ -1063,6 +1196,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		"message_body":                        "MessageBody",
 		"mode":                                "Mode",
 		"mutual_authentication":               "MutualAuthentication",
+		"name":                                "Name",
 		"on_unauthenticated_request":          "OnUnauthenticatedRequest",
 		"order":                               "Order",
 		"path":                                "Path",
@@ -1087,6 +1221,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		"user_pool_client_id":                 "UserPoolClientId",
 		"user_pool_domain":                    "UserPoolDomain",
 		"value":                               "Value",
+		"values":                              "Values",
 		"weight":                              "Weight",
 	})
 
