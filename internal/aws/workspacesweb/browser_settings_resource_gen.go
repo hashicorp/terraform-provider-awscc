@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -86,7 +87,7 @@ func browserSettingsResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "maxLength": 131072,
 		//	  "minLength": 2,
-		//	  "pattern": "\\{[\\S\\s]*\\}\\s*",
+		//	  "pattern": "^\\{[\\S\\s]*\\}\\s*$",
 		//	  "type": "string"
 		//	}
 		"browser_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -94,7 +95,7 @@ func browserSettingsResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(2, 131072),
-				stringvalidator.RegexMatches(regexp.MustCompile("\\{[\\S\\s]*\\}\\s*"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^\\{[\\S\\s]*\\}\\s*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -208,6 +209,154 @@ func browserSettingsResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: WebContentFilteringPolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "AllowedUrls": {
+		//	      "items": {
+		//	        "pattern": "^((([a-zA-Z][a-zA-Z0-9+.-]*):\\/\\/(\\*|[\\w%._\\-\\+~#=@]+)?(\\/[^@\\s]*)?(?:\\?([^*\\s]+(?:\\*?)))?)|(\\*|[\\w%._\\-\\+~#=@]+\\.[\\w%._\\-\\+~#=@]+)(?::(\\d{1,5}))?(\\/[^@\\s]*)?(?:\\?([^*\\s]+(?:\\*?)))?|(([a-zA-Z][a-zA-Z0-9+.-]*):(\\/\\/)?\\*))$",
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 1000,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "BlockedCategories": {
+		//	      "items": {
+		//	        "enum": [
+		//	          "Cults",
+		//	          "Gambling",
+		//	          "Nudity",
+		//	          "Pornography",
+		//	          "SexEducation",
+		//	          "Tasteless",
+		//	          "Violence",
+		//	          "DownloadSites",
+		//	          "ImageSharing",
+		//	          "PeerToPeer",
+		//	          "StreamingMediaAndDownloads",
+		//	          "GenerativeAI",
+		//	          "CriminalActivity",
+		//	          "Hacking",
+		//	          "HateAndIntolerance",
+		//	          "IllegalDrug",
+		//	          "IllegalSoftware",
+		//	          "SchoolCheating",
+		//	          "SelfHarm",
+		//	          "Weapons",
+		//	          "Chat",
+		//	          "Games",
+		//	          "InstantMessaging",
+		//	          "ProfessionalNetwork",
+		//	          "SocialNetworking",
+		//	          "WebBasedEmail",
+		//	          "ParkedDomains"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 100,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "BlockedUrls": {
+		//	      "items": {
+		//	        "pattern": "^((([a-zA-Z][a-zA-Z0-9+.-]*):\\/\\/(\\*|[\\w%._\\-\\+~#=@]+)?(\\/[^@\\s]*)?(?:\\?([^*\\s]+(?:\\*?)))?)|(\\*|[\\w%._\\-\\+~#=@]+\\.[\\w%._\\-\\+~#=@]+)(?::(\\d{1,5}))?(\\/[^@\\s]*)?(?:\\?([^*\\s]+(?:\\*?)))?|(([a-zA-Z][a-zA-Z0-9+.-]*):(\\/\\/)?\\*))$",
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 1000,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"web_content_filtering_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllowedUrls
+				"allowed_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 1000),
+						listvalidator.ValueStringsAre(
+							stringvalidator.RegexMatches(regexp.MustCompile("^((([a-zA-Z][a-zA-Z0-9+.-]*):\\/\\/(\\*|[\\w%._\\-\\+~#=@]+)?(\\/[^@\\s]*)?(?:\\?([^*\\s]+(?:\\*?)))?)|(\\*|[\\w%._\\-\\+~#=@]+\\.[\\w%._\\-\\+~#=@]+)(?::(\\d{1,5}))?(\\/[^@\\s]*)?(?:\\?([^*\\s]+(?:\\*?)))?|(([a-zA-Z][a-zA-Z0-9+.-]*):(\\/\\/)?\\*))$"), ""),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: BlockedCategories
+				"blocked_categories": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 100),
+						listvalidator.UniqueValues(),
+						listvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
+								"Cults",
+								"Gambling",
+								"Nudity",
+								"Pornography",
+								"SexEducation",
+								"Tasteless",
+								"Violence",
+								"DownloadSites",
+								"ImageSharing",
+								"PeerToPeer",
+								"StreamingMediaAndDownloads",
+								"GenerativeAI",
+								"CriminalActivity",
+								"Hacking",
+								"HateAndIntolerance",
+								"IllegalDrug",
+								"IllegalSoftware",
+								"SchoolCheating",
+								"SelfHarm",
+								"Weapons",
+								"Chat",
+								"Games",
+								"InstantMessaging",
+								"ProfessionalNetwork",
+								"SocialNetworking",
+								"WebBasedEmail",
+								"ParkedDomains",
+							),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: BlockedUrls
+				"blocked_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 1000),
+						listvalidator.ValueStringsAre(
+							stringvalidator.RegexMatches(regexp.MustCompile("^((([a-zA-Z][a-zA-Z0-9+.-]*):\\/\\/(\\*|[\\w%._\\-\\+~#=@]+)?(\\/[^@\\s]*)?(?:\\?([^*\\s]+(?:\\*?)))?)|(\\*|[\\w%._\\-\\+~#=@]+\\.[\\w%._\\-\\+~#=@]+)(?::(\\d{1,5}))?(\\/[^@\\s]*)?(?:\\?([^*\\s]+(?:\\*?)))?|(([a-zA-Z][a-zA-Z0-9+.-]*):(\\/\\/)?\\*))$"), ""),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -237,13 +386,17 @@ func browserSettingsResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"additional_encryption_context": "AdditionalEncryptionContext",
+		"allowed_urls":                  "AllowedUrls",
 		"associated_portal_arns":        "AssociatedPortalArns",
+		"blocked_categories":            "BlockedCategories",
+		"blocked_urls":                  "BlockedUrls",
 		"browser_policy":                "BrowserPolicy",
 		"browser_settings_arn":          "BrowserSettingsArn",
 		"customer_managed_key":          "CustomerManagedKey",
 		"key":                           "Key",
 		"tags":                          "Tags",
 		"value":                         "Value",
+		"web_content_filtering_policy":  "WebContentFilteringPolicy",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

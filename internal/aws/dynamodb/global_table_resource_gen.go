@@ -1044,18 +1044,6 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "ReplicaStreamSpecification": {
 		//	        "additionalProperties": false,
-		//	        "anyOf": [
-		//	          {
-		//	            "required": [
-		//	              "ResourcePolicy"
-		//	            ]
-		//	          },
-		//	          {
-		//	            "required": [
-		//	              "Tags"
-		//	            ]
-		//	          }
-		//	        ],
 		//	        "properties": {
 		//	          "ResourcePolicy": {
 		//	            "additionalProperties": false,
@@ -1070,6 +1058,9 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "object"
 		//	          }
 		//	        },
+		//	        "required": [
+		//	          "ResourcePolicy"
+		//	        ],
 		//	        "type": "object"
 		//	      },
 		//	      "ResourcePolicy": {
@@ -1611,6 +1602,9 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END SCHEMA*/
 								Optional: true,
 								Computed: true,
+								Validators: []validator.Object{ /*START VALIDATORS*/
+									fwvalidators.NotNullObject(),
+								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/

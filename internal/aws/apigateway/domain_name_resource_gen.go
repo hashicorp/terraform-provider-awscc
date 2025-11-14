@@ -110,7 +110,7 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The ``EndpointConfiguration`` property type specifies the endpoint types of an Amazon API Gateway domain name.\n ``EndpointConfiguration`` is a property of the [AWS::ApiGateway::DomainName](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-domainname.html) resource.",
+		//	  "description": "The endpoint configuration of this DomainName showing the endpoint types and IP address types of the domain name.",
 		//	  "properties": {
 		//	    "IpAddressType": {
 		//	      "description": "",
@@ -148,7 +148,7 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The ``EndpointConfiguration`` property type specifies the endpoint types of an Amazon API Gateway domain name.\n ``EndpointConfiguration`` is a property of the [AWS::ApiGateway::DomainName](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-domainname.html) resource.",
+			Description: "The endpoint configuration of this DomainName showing the endpoint types and IP address types of the domain name.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -310,12 +310,14 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "",
+		//	    "description": "An array of key-value pairs to apply to this resource.\n For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "The value for the specified tag key.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -328,16 +330,18 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "The value for the specified tag key.",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -363,7 +367,7 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "The ``AWS::ApiGateway::DomainName`` resource specifies a custom domain name for your API in API Gateway.\n You can use a custom domain name to provide a URL that's more intuitive and easier to recall. For more information about using custom domain names, see [Set up Custom Domain Name for an API in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html) in the *API Gateway Developer Guide*.",
+		Description: "The ``AWS::ApiGateway::DomainName`` resource specifies a public custom domain name for your API in API Gateway.\n To create a custom domain name for private APIs, use [AWS::ApiGateway::DomainNameV2](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-domainnamev2.html).\n You can use a custom domain name to provide a URL that's more intuitive and easier to recall. For more information about using custom domain names, see [Set up Custom Domain Name for an API in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html) in the *API Gateway Developer Guide*.",
 		Version:     1,
 		Attributes:  attributes,
 	}

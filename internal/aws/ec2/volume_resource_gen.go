@@ -55,7 +55,26 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the Availability Zone in which to create the volume. For example, ``us-east-1a``.\n Either ``AvailabilityZone`` or ``AvailabilityZoneId`` must be specified, but not both.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AvailabilityZoneId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"availability_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Encrypted
 		// CloudFormation resource type schema:
@@ -76,11 +95,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The number of I/O operations per second (IOPS). For ``gp3``, ``io1``, and ``io2`` volumes, this represents the number of IOPS that are provisioned for the volume. For ``gp2`` volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.\n The following are the supported values for each volume type:\n  +  ``gp3``: 3,000 - 16,000 IOPS\n  +  ``io1``: 100 - 64,000 IOPS\n  +  ``io2``: 100 - 256,000 IOPS\n  \n For ``io2`` volumes, you can achieve up to 256,000 IOPS on [instances built on the Nitro System](https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html). On other instances, you can achieve performance up to 32,000 IOPS.\n This parameter is required for ``io1`` and ``io2`` volumes. The default for ``gp3`` volumes is 3,000 IOPS. This parameter is not supported for ``gp2``, ``st1``, ``sc1``, or ``standard`` volumes.",
+		//	  "description": "The number of I/O operations per second (IOPS) to provision for the volume. Required for ``io1`` and ``io2`` volumes. Optional for ``gp3`` volumes. Omit for all other volume types. \n Valid ranges:\n  +  gp3: ``3,000``(*default*)``- 80,000`` IOPS\n  +  io1: ``100 - 64,000`` IOPS\n  +  io2: ``100 - 256,000`` IOPS\n  \n  [Instances built on the Nitro System](https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html) can support up to 256,000 IOPS. Other instances can support up to 32,000 IOPS.",
 		//	  "type": "integer"
 		//	}
 		"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of I/O operations per second (IOPS). For ``gp3``, ``io1``, and ``io2`` volumes, this represents the number of IOPS that are provisioned for the volume. For ``gp2`` volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.\n The following are the supported values for each volume type:\n  +  ``gp3``: 3,000 - 16,000 IOPS\n  +  ``io1``: 100 - 64,000 IOPS\n  +  ``io2``: 100 - 256,000 IOPS\n  \n For ``io2`` volumes, you can achieve up to 256,000 IOPS on [instances built on the Nitro System](https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html). On other instances, you can achieve performance up to 32,000 IOPS.\n This parameter is required for ``io1`` and ``io2`` volumes. The default for ``gp3`` volumes is 3,000 IOPS. This parameter is not supported for ``gp2``, ``st1``, ``sc1``, or ``standard`` volumes.",
+			Description: "The number of I/O operations per second (IOPS) to provision for the volume. Required for ``io1`` and ``io2`` volumes. Optional for ``gp3`` volumes. Omit for all other volume types. \n Valid ranges:\n  +  gp3: ``3,000``(*default*)``- 80,000`` IOPS\n  +  io1: ``100 - 64,000`` IOPS\n  +  io2: ``100 - 256,000`` IOPS\n  \n  [Instances built on the Nitro System](https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html) can support up to 256,000 IOPS. Other instances can support up to 32,000 IOPS.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -136,11 +155,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. If you specify a snapshot, the default is the snapshot size. You can specify a volume size that is equal to or larger than the snapshot size.\n The following are the supported volumes sizes for each volume type:\n  +  ``gp2`` and ``gp3``: 1 - 16,384 GiB\n  +  ``io1``: 4 - 16,384 GiB\n  +  ``io2``: 4 - 65,536 GiB\n  +  ``st1`` and ``sc1``: 125 - 16,384 GiB\n  +  ``standard``: 1 - 1024 GiB",
+		//	  "description": "The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. If you specify a snapshot, the default is the snapshot size, and you can specify a volume size that is equal to or larger than the snapshot size.\n Valid sizes:\n  +  gp2: ``1 - 16,384`` GiB\n  +  gp3: ``1 - 65,536`` GiB\n  +  io1: ``4 - 16,384`` GiB\n  +  io2: ``4 - 65,536`` GiB\n  +  st1 and sc1: ``125 - 16,384`` GiB\n  +  standard: ``1 - 1024`` GiB",
 		//	  "type": "integer"
 		//	}
 		"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. If you specify a snapshot, the default is the snapshot size. You can specify a volume size that is equal to or larger than the snapshot size.\n The following are the supported volumes sizes for each volume type:\n  +  ``gp2`` and ``gp3``: 1 - 16,384 GiB\n  +  ``io1``: 4 - 16,384 GiB\n  +  ``io2``: 4 - 65,536 GiB\n  +  ``st1`` and ``sc1``: 125 - 16,384 GiB\n  +  ``standard``: 1 - 1024 GiB",
+			Description: "The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. If you specify a snapshot, the default is the snapshot size, and you can specify a volume size that is equal to or larger than the snapshot size.\n Valid sizes:\n  +  gp2: ``1 - 16,384`` GiB\n  +  gp3: ``1 - 65,536`` GiB\n  +  io1: ``4 - 16,384`` GiB\n  +  io2: ``4 - 65,536`` GiB\n  +  st1 and sc1: ``125 - 16,384`` GiB\n  +  standard: ``1 - 1024`` GiB",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -156,6 +175,21 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The snapshot from which to create the volume. You must specify either a snapshot ID or a volume size.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SourceVolumeId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"source_volume_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -316,6 +350,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"auto_enable_io":             "AutoEnableIO",
 		"availability_zone":          "AvailabilityZone",
+		"availability_zone_id":       "AvailabilityZoneId",
 		"encrypted":                  "Encrypted",
 		"iops":                       "Iops",
 		"key":                        "Key",
@@ -324,6 +359,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		"outpost_arn":                "OutpostArn",
 		"size":                       "Size",
 		"snapshot_id":                "SnapshotId",
+		"source_volume_id":           "SourceVolumeId",
 		"tags":                       "Tags",
 		"throughput":                 "Throughput",
 		"value":                      "Value",

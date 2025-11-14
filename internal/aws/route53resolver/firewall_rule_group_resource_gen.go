@@ -140,7 +140,8 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "FirewallDomainRedirectionAction",
 		//	        "enum": [
 		//	          "DGA",
-		//	          "DNS_TUNNELING"
+		//	          "DNS_TUNNELING",
+		//	          "DICTIONARY_DGA"
 		//	        ],
 		//	        "type": "string"
 		//	      },
@@ -283,6 +284,7 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 							stringvalidator.OneOf(
 								"DGA",
 								"DNS_TUNNELING",
+								"DICTIONARY_DGA",
 							),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

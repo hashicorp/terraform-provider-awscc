@@ -210,7 +210,14 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "t4",
 		//	                    "t4g",
 		//	                    "vu9p",
-		//	                    "v100"
+		//	                    "v100",
+		//	                    "l40s",
+		//	                    "l4",
+		//	                    "gaudi-hl-205",
+		//	                    "inferentia2",
+		//	                    "trainium",
+		//	                    "trainium2",
+		//	                    "u30"
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
@@ -234,7 +241,8 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "enum": [
 		//	                    "gpu",
 		//	                    "fpga",
-		//	                    "inference"
+		//	                    "inference",
+		//	                    "media"
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
@@ -756,7 +764,14 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	                          "t4",
 		//	                          "t4g",
 		//	                          "vu9p",
-		//	                          "v100"
+		//	                          "v100",
+		//	                          "l40s",
+		//	                          "l4",
+		//	                          "gaudi-hl-205",
+		//	                          "inferentia2",
+		//	                          "trainium",
+		//	                          "trainium2",
+		//	                          "u30"
 		//	                        ],
 		//	                        "type": "string"
 		//	                      },
@@ -780,7 +795,8 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	                        "enum": [
 		//	                          "gpu",
 		//	                          "fpga",
-		//	                          "inference"
+		//	                          "inference",
+		//	                          "media"
 		//	                        ],
 		//	                        "type": "string"
 		//	                      },
@@ -1527,6 +1543,13 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													"t4g",
 													"vu9p",
 													"v100",
+													"l40s",
+													"l4",
+													"gaudi-hl-205",
+													"inferentia2",
+													"trainium",
+													"trainium2",
+													"u30",
 												),
 											),
 										}, /*END VALIDATORS*/
@@ -1571,6 +1594,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													"gpu",
 													"fpga",
 													"inference",
+													"media",
 												),
 											),
 										}, /*END VALIDATORS*/
@@ -2514,6 +2538,13 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 																"t4g",
 																"vu9p",
 																"v100",
+																"l40s",
+																"l4",
+																"gaudi-hl-205",
+																"inferentia2",
+																"trainium",
+																"trainium2",
+																"u30",
 															),
 														),
 													}, /*END VALIDATORS*/
@@ -2558,6 +2589,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 																"gpu",
 																"fpga",
 																"inference",
+																"media",
 															),
 														),
 													}, /*END VALIDATORS*/

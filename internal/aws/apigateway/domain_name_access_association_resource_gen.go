@@ -110,8 +110,8 @@ func domainNameAccessAssociationResource(ctx context.Context) (resource.Resource
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Value",
-		//	      "Key"
+		//	      "Key",
+		//	      "Value"
 		//	    ],
 		//	    "type": "object"
 		//	  },

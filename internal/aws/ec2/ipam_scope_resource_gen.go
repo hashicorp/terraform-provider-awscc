@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -57,6 +58,68 @@ func iPAMScopeResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ExternalAuthorityConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "External service configuration to connect your AWS IPAM scope.",
+		//	  "properties": {
+		//	    "ExternalResourceIdentifier": {
+		//	      "description": "Resource identifier of the scope in the external service connecting to your AWS IPAM scope.",
+		//	      "type": "string"
+		//	    },
+		//	    "IpamScopeExternalAuthorityType": {
+		//	      "description": "An external service connecting to your AWS IPAM scope.",
+		//	      "enum": [
+		//	        "infoblox"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "IpamScopeExternalAuthorityType",
+		//	    "ExternalResourceIdentifier"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"external_authority_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExternalResourceIdentifier
+				"external_resource_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Resource identifier of the scope in the external service connecting to your AWS IPAM scope.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: IpamScopeExternalAuthorityType
+				"ipam_scope_external_authority_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "An external service connecting to your AWS IPAM scope.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"infoblox",
+						),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "External service configuration to connect your AWS IPAM scope.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: IpamArn
@@ -246,17 +309,20 @@ func iPAMScopeResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":             "Arn",
-		"description":     "Description",
-		"ipam_arn":        "IpamArn",
-		"ipam_id":         "IpamId",
-		"ipam_scope_id":   "IpamScopeId",
-		"ipam_scope_type": "IpamScopeType",
-		"is_default":      "IsDefault",
-		"key":             "Key",
-		"pool_count":      "PoolCount",
-		"tags":            "Tags",
-		"value":           "Value",
+		"arn":                                "Arn",
+		"description":                        "Description",
+		"external_authority_configuration":   "ExternalAuthorityConfiguration",
+		"external_resource_identifier":       "ExternalResourceIdentifier",
+		"ipam_arn":                           "IpamArn",
+		"ipam_id":                            "IpamId",
+		"ipam_scope_external_authority_type": "IpamScopeExternalAuthorityType",
+		"ipam_scope_id":                      "IpamScopeId",
+		"ipam_scope_type":                    "IpamScopeType",
+		"is_default":                         "IsDefault",
+		"key":                                "Key",
+		"pool_count":                         "PoolCount",
+		"tags":                               "Tags",
+		"value":                              "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

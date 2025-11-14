@@ -52,7 +52,7 @@ func requesterGatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "maxLength": 2048,
 		//	  "minLength": 20,
-		//	  "pattern": "^arn:aws:(rtbfabric|rtbfabric):[a-zA-Z0-9_-]+:[0-9]{12}:gateway/[a-zA-Z0-9-]+$",
+		//	  "pattern": "^arn:aws:rtbfabric:[a-zA-Z0-9_-]+:[0-9]{12}:gateway/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/

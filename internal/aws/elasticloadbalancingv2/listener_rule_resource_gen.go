@@ -8,10 +8,12 @@ package elasticloadbalancingv2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -237,6 +239,52 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	            "uniqueItems": true
 		//	          }
 		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "JwtValidationConfig": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "AdditionalClaims": {
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "",
+		//	              "properties": {
+		//	                "Format": {
+		//	                  "type": "string"
+		//	                },
+		//	                "Name": {
+		//	                  "type": "string"
+		//	                },
+		//	                "Values": {
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Format",
+		//	                "Name",
+		//	                "Values"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "Issuer": {
+		//	            "type": "string"
+		//	          },
+		//	          "JwksEndpoint": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "JwksEndpoint",
+		//	          "Issuer"
+		//	        ],
 		//	        "type": "object"
 		//	      },
 		//	      "Order": {
@@ -633,6 +681,89 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Information for creating an action that distributes requests among multiple target groups. Specify only when ``Type`` is ``forward``.\n If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: JwtValidationConfig
+					"jwt_validation_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AdditionalClaims
+							"additional_claims": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Format
+										"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Values
+										"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.UniqueValues(),
+												fwvalidators.NotNullList(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.UniqueValues(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Issuer
+							"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: JwksEndpoint
+							"jwks_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1441,6 +1572,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"actions":                             "Actions",
+		"additional_claims":                   "AdditionalClaims",
 		"authenticate_cognito_config":         "AuthenticateCognitoConfig",
 		"authenticate_oidc_config":            "AuthenticateOidcConfig",
 		"authentication_request_extra_params": "AuthenticationRequestExtraParams",
@@ -1453,6 +1585,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		"enabled":                             "Enabled",
 		"field":                               "Field",
 		"fixed_response_config":               "FixedResponseConfig",
+		"format":                              "Format",
 		"forward_config":                      "ForwardConfig",
 		"host":                                "Host",
 		"host_header_config":                  "HostHeaderConfig",
@@ -1462,9 +1595,12 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		"http_request_method_config":          "HttpRequestMethodConfig",
 		"is_default":                          "IsDefault",
 		"issuer":                              "Issuer",
+		"jwks_endpoint":                       "JwksEndpoint",
+		"jwt_validation_config":               "JwtValidationConfig",
 		"key":                                 "Key",
 		"listener_arn":                        "ListenerArn",
 		"message_body":                        "MessageBody",
+		"name":                                "Name",
 		"on_unauthenticated_request":          "OnUnauthenticatedRequest",
 		"order":                               "Order",
 		"path":                                "Path",

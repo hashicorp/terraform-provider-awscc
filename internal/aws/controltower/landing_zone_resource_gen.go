@@ -10,6 +10,7 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -17,6 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -95,6 +97,33 @@ func landingZoneResource(ctx context.Context) (resource.Resource, error) {
 		"manifest": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType: jsontypes.NormalizedType{},
 			Required:   true,
+		}, /*END ATTRIBUTE*/
+		// Property: RemediationTypes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "enum": [
+		//	      "INHERITANCE_DRIFT"
+		//	    ],
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"remediation_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.ValueStringsAre(
+					stringvalidator.OneOf(
+						"INHERITANCE_DRIFT",
+					),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
@@ -218,6 +247,7 @@ func landingZoneResource(ctx context.Context) (resource.Resource, error) {
 		"landing_zone_identifier":  "LandingZoneIdentifier",
 		"latest_available_version": "LatestAvailableVersion",
 		"manifest":                 "Manifest",
+		"remediation_types":        "RemediationTypes",
 		"status":                   "Status",
 		"tags":                     "Tags",
 		"value":                    "Value",

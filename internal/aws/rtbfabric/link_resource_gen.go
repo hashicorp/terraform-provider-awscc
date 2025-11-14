@@ -360,7 +360,7 @@ func linkResource(ctx context.Context) (resource.Resource, error) {
 		//	    "REQUESTED",
 		//	    "ACCEPTED",
 		//	    "ACTIVE",
-		//	    "DECLINED",
+		//	    "REJECTED",
 		//	    "FAILED",
 		//	    "PENDING_DELETION",
 		//	    "DELETED",
