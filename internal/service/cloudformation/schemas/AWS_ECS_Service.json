@@ -358,18 +358,20 @@
       ]
     },
     "LinearConfiguration": {
-      "description": "",
+      "description": "Configuration for a linear deployment strategy that shifts production traffic in equal percentage increments with configurable wait times between each step until 100 percent of traffic is shifted to the new service revision. \n The following validation applies only to Linear deployments created through CFN. CFN operations time out after 36 hours. Linear deployments can approach this limit because of their extended duration. This can cause CFN to roll back the deployment. To prevent timeout-related rollbacks, CFN rejects deployments when the calculated deployment time exceeds 33 hours based on your template configuration: \n  ``BakeTimeInMinutes + (StepBakeTimeInMinutes ? Number of deployment steps)`` \n Where the number of deployment steps is calculated as follows:\n  +  *If StepPercent evenly divides by 100*: The number of deployment steps equals ``(100 ? StepPercent) - 1``\n  +  *Otherwise*: The number of deployment steps equals the floor of ``100 ? StepPercent``. For example, if ``StepPercent`` is 11, the number of deployment steps is 9 (not 9.1).\n  \n This calculation reflects that CFN doesn't apply the step bake time after the final traffic shift reaches 100%. For example, with a ``StepPercent`` of 50%, there are actually two traffic shifts, but only one deployment step is counted for validation purposes because the bake time is applied only after the first 50% shift, not after reaching 100%.\n Additional backend processes (such as task scaling and running lifecycle hooks) can extend deployment time beyond these calculations. Even deployments under the 33-hour threshold might still time out if these processes cause the total duration to exceed 36 hours.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "StepBakeTimeInMinutes": {
           "maximum": 1440,
+          "description": "The amount of time in minutes to wait between each traffic shifting step during a linear deployment. Valid values are 0 to 1440 minutes (24 hours). The default value is 6. This bake time is not applied after reaching 100 percent traffic.",
           "type": "integer",
           "minimum": 0
         },
         "StepPercent": {
           "multipleOf": 0.1,
           "maximum": 100,
+          "description": "The percentage of production traffic to shift in each step during a linear deployment. Valid values are multiples of 0.1 from 3.0 to 100.0. The default value is 10.0.",
           "type": "number",
           "minimum": 3
         }
@@ -381,32 +383,34 @@
       "type": "object",
       "properties": {
         "CapacityProvider": {
-          "description": "The short name of the capacity provider.",
+          "description": "The short name of the capacity provider. This can be either an AWS managed capacity provider (``FARGATE`` or ``FARGATE_SPOT``) or the name of a custom capacity provider that you created.",
           "type": "string"
         },
         "Base": {
-          "description": "The *base* value designates how many tasks, at a minimum, to run on the specified capacity provider for each service. Only one capacity provider in a capacity provider strategy can have a *base* defined. If no value is specified, the default value of ``0`` is used.\n Base value characteristics:\n  +  Only one capacity provider in a strategy can have a base defined\n  +  Default value is ``0`` if not specified\n  +  Valid range: 0 to 100,000\n  +  Base requirements are satisfied first before weight distribution",
+          "description": "The *base* value designates how many tasks, at a minimum, to run on the specified capacity provider for each service. Only one capacity provider in a capacity provider strategy can have a *base* defined. If no value is specified, the default value of ``0`` is used.\n Base value characteristics:\n  +  Only one capacity provider in a strategy can have a base defined\n  +  The default value is ``0`` if not specified\n  +  The valid range is 0 to 100,000\n  +  Base requirements are satisfied first before weight distribution",
           "type": "integer"
         },
         "Weight": {
-          "description": "The *weight* value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The ``weight`` value is taken into consideration after the ``base`` value, if defined, is satisfied.\n If no ``weight`` value is specified, the default value of ``0`` is used. When multiple capacity providers are specified within a capacity provider strategy, at least one of the capacity providers must have a weight value greater than zero and any capacity providers with a weight of ``0`` can't be used to place tasks. If you specify multiple capacity providers in a strategy that all have a weight of ``0``, any ``RunTask`` or ``CreateService`` actions using the capacity provider strategy will fail.\n Weight value characteristics:\n  +  Weight is considered after the base value is satisfied\n  +  Default value is ``0`` if not specified\n  +  Valid range: 0 to 1,000\n  +  At least one capacity provider must have a weight greater than zero\n  +  Capacity providers with weight of ``0`` cannot place tasks\n  \n Task distribution logic:\n  1.  Base satisfaction: The minimum number of tasks specified by the base value are placed on that capacity provider\n  1.  Weight distribution: After base requirements are met, additional tasks are distributed according to weight ratios\n  \n Examples:\n Equal Distribution: Two capacity providers both with weight ``1`` will split tasks evenly after base requirements are met.\n Weighted Distribution: If capacityProviderA has weight ``1`` and capacityProviderB has weight ``4``, then for every 1 task on A, 4 tasks will run on B.",
+          "description": "The *weight* value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The ``weight`` value is taken into consideration after the ``base`` value, if defined, is satisfied.\n If no ``weight`` value is specified, the default value of ``0`` is used. When multiple capacity providers are specified within a capacity provider strategy, at least one of the capacity providers must have a weight value greater than zero and any capacity providers with a weight of ``0`` can't be used to place tasks. If you specify multiple capacity providers in a strategy that all have a weight of ``0``, any ``RunTask`` or ``CreateService`` actions using the capacity provider strategy will fail.\n Weight value characteristics:\n  +  Weight is considered after the base value is satisfied\n  +  The default value is ``0`` if not specified\n  +  The valid range is 0 to 1,000\n  +  At least one capacity provider must have a weight greater than zero\n  +  Capacity providers with weight of ``0`` cannot place tasks\n  \n Task distribution logic:\n  1.  Base satisfaction: The minimum number of tasks specified by the base value are placed on that capacity provider\n  1.  Weight distribution: After base requirements are met, additional tasks are distributed according to weight ratios\n  \n Examples:\n Equal Distribution: Two capacity providers both with weight ``1`` will split tasks evenly after base requirements are met.\n Weighted Distribution: If capacityProviderA has weight ``1`` and capacityProviderB has weight ``4``, then for every 1 task on A, 4 tasks will run on B.",
           "type": "integer"
         }
       }
     },
     "CanaryConfiguration": {
-      "description": "",
+      "description": "Configuration for a canary deployment strategy that shifts a fixed percentage of traffic to the new service revision, waits for a specified bake time, then shifts the remaining traffic. \n The following validation applies only to Canary deployments created through CFN. CFN operations time out after 36 hours. Canary deployments can approach this limit because of their extended duration. This can cause CFN to roll back the deployment. To prevent timeout-related rollbacks, CFN rejects deployments when the calculated deployment time exceeds 33 hours based on your template configuration: \n  ``BakeTimeInMinutes + CanaryBakeTimeInMinutes`` \n Additional backend processes (such as task scaling and running lifecycle hooks) can extend deployment time beyond these calculations. Even deployments under the 33-hour threshold might still time out if these processes cause the total duration to exceed 36 hours.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "CanaryPercent": {
           "multipleOf": 0.1,
           "maximum": 100,
+          "description": "The percentage of production traffic to shift to the new service revision during the canary phase. Valid values are multiples of 0.1 from 0.1 to 100.0. The default value is 5.0.",
           "type": "number",
           "minimum": 0.1
         },
         "CanaryBakeTimeInMinutes": {
           "maximum": 1440,
+          "description": "The amount of time in minutes to wait during the canary phase before shifting the remaining production traffic to the new service revision. Valid values are 0 to 1440 minutes (24 hours). The default value is 10.",
           "type": "integer",
           "minimum": 0
         }
@@ -461,11 +465,12 @@
       ]
     },
     "ServiceConnectAccessLogConfiguration": {
-      "description": "",
+      "description": "Configuration for Service Connect access logging. Access logs provide detailed information about requests made to your service, including request patterns, response codes, and timing data for debugging and monitoring purposes.\n  To enable access logs, you must also specify a ``logConfiguration`` in the ``serviceConnectConfiguration``.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "Format": {
+          "description": "The format for Service Connect access log output. Choose TEXT for human-readable logs or JSON for structured data that integrates well with log analysis tools.",
           "type": "string",
           "enum": [
             "TEXT",
@@ -473,6 +478,7 @@
           ]
         },
         "IncludeQueryParameters": {
+          "description": "Specifies whether to include query parameters in Service Connect access logs.\n When enabled, query parameters from HTTP requests are included in the access logs. Consider security and privacy implications when enabling this feature, as query parameters may contain sensitive information such as request IDs and tokens. By default, this parameter is ``DISABLED``.",
           "type": "string",
           "enum": [
             "DISABLED",
@@ -524,7 +530,7 @@
           }
         },
         "AccessLogConfiguration": {
-          "description": "",
+          "description": "The configuration for Service Connect access logging. Access logs capture detailed information about requests made to your service, including request patterns, response codes, and timing data. They can be useful for debugging connectivity issues, monitoring service performance, and auditing service-to-service communication for security and compliance purposes.\n  To enable access logs, you must also specify a ``logConfiguration`` in the ``serviceConnectConfiguration``.",
           "$ref": "#/definitions/ServiceConnectAccessLogConfiguration"
         },
         "Enabled": {
@@ -799,7 +805,7 @@
       "type": "object",
       "properties": {
         "CanaryConfiguration": {
-          "description": "",
+          "description": "Configuration for canary deployment strategy. Only valid when the deployment strategy is ``CANARY``. This configuration enables shifting a fixed percentage of traffic for testing, followed by shifting the remaining traffic after a bake period.",
           "$ref": "#/definitions/CanaryConfiguration"
         },
         "BakeTimeInMinutes": {
@@ -842,7 +848,7 @@
           "type": "integer"
         },
         "LinearConfiguration": {
-          "description": "",
+          "description": "Configuration for linear deployment strategy. Only valid when the deployment strategy is ``LINEAR``. This configuration enables progressive traffic shifting in equal percentage increments with configurable bake times between each step.",
           "$ref": "#/definitions/LinearConfiguration"
         }
       }

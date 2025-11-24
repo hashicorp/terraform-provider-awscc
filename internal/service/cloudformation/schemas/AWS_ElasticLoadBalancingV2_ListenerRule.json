@@ -470,17 +470,20 @@
       "additionalProperties": false,
       "properties": {
         "JwksEndpoint": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "Issuer": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "AdditionalClaims": {
           "type": "array",
           "uniqueItems": true,
           "items": {
             "$ref": "#/definitions/JwtValidationActionAdditionalClaim"
-          }
+          },
+          "description": ""
         }
       },
       "required": [
@@ -494,17 +497,20 @@
       "additionalProperties": false,
       "properties": {
         "Format": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "Name": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "Values": {
           "type": "array",
           "uniqueItems": true,
           "items": {
             "type": "string"
-          }
+          },
+          "description": ""
         }
       },
       "required": [

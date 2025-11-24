@@ -94,11 +94,11 @@
   "createOnlyProperties": [
     "/properties/BackupVaultName",
     "/properties/MinRetentionDays",
-    "/properties/MaxRetentionDays"
+    "/properties/MaxRetentionDays",
+    "/properties/EncryptionKeyArn"
   ],
   "readOnlyProperties": [
     "/properties/BackupVaultArn",
-    "/properties/EncryptionKeyArn",
     "/properties/VaultState",
     "/properties/VaultType"
   ],
@@ -116,7 +116,9 @@
         "backup-storage:Mount",
         "backup-storage:MountCapsule",
         "backup:DescribeBackupVault",
-        "mpa:GetApprovalTeam"
+        "mpa:GetApprovalTeam",
+        "kms:DescribeKey",
+        "kms:CreateGrant"
       ]
     },
     "read": {

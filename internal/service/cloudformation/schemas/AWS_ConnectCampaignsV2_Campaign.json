@@ -28,6 +28,12 @@
       "minimum": 10,
       "description": "Timeout duration for a preview contact in seconds"
     },
+    "RingTimeout": {
+      "type": "integer",
+      "maximum": 60,
+      "minimum": 15,
+      "description": "Maximum ring time for outbound calls in seconds"
+    },
     "QueueId": {
       "type": "string",
       "maxLength": 500,
@@ -255,6 +261,9 @@
         },
         "AnswerMachineDetectionConfig": {
           "$ref": "#/definitions/AnswerMachineDetectionConfig"
+        },
+        "RingTimeout": {
+          "$ref": "#/definitions/RingTimeout"
         }
       },
       "required": [

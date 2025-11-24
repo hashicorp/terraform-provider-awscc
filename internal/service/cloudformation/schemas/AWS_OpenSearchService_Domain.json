@@ -140,6 +140,28 @@
         }
       }
     },
+    "S3VectorsEngine": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "type": "boolean",
+          "description": "Whether to enable S3 vectors engine."
+        }
+      },
+      "required": [
+        "Enabled"
+      ]
+    },
+    "AIMLOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "S3VectorsEngine": {
+          "$ref": "#/definitions/S3VectorsEngine"
+        }
+      }
+    },
     "DomainEndpointOptions": {
       "type": "object",
       "additionalProperties": false,
@@ -599,6 +621,9 @@
     },
     "IdentityCenterOptions": {
       "$ref": "#/definitions/IdentityCenterOptions"
+    },
+    "AIMLOptions": {
+      "$ref": "#/definitions/AIMLOptions"
     }
   },
   "propertyTransform": {

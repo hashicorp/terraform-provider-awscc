@@ -101,6 +101,10 @@
       "type": "string",
       "description": ""
     },
+    "EndpointAccessMode": {
+      "type": "string",
+      "description": ""
+    },
     "RoutingMode": {
       "type": "string",
       "description": "",

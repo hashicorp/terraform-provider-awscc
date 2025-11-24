@@ -49,6 +49,45 @@
             "SelfServiceAIAgentConfiguration"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "EmailResponseAIAgentConfiguration",
+          "properties": {
+            "EmailResponseAIAgentConfiguration": {
+              "$ref": "#/definitions/EmailResponseAIAgentConfiguration"
+            }
+          },
+          "required": [
+            "EmailResponseAIAgentConfiguration"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "EmailOverviewAIAgentConfiguration",
+          "properties": {
+            "EmailOverviewAIAgentConfiguration": {
+              "$ref": "#/definitions/EmailOverviewAIAgentConfiguration"
+            }
+          },
+          "required": [
+            "EmailOverviewAIAgentConfiguration"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "EmailGenerativeAnswerAIAgentConfiguration",
+          "properties": {
+            "EmailGenerativeAnswerAIAgentConfiguration": {
+              "$ref": "#/definitions/EmailGenerativeAnswerAIAgentConfiguration"
+            }
+          },
+          "required": [
+            "EmailGenerativeAnswerAIAgentConfiguration"
+          ],
+          "additionalProperties": false
         }
       ]
     },
@@ -57,7 +96,10 @@
       "enum": [
         "MANUAL_SEARCH",
         "ANSWER_RECOMMENDATION",
-        "SELF_SERVICE"
+        "SELF_SERVICE",
+        "EMAIL_RESPONSE",
+        "EMAIL_OVERVIEW",
+        "EMAIL_GENERATIVE_ANSWER"
       ]
     },
     "SelfServiceAIAgentConfiguration": {
@@ -298,6 +340,68 @@
           "additionalProperties": false
         }
       ]
+    },
+    "EmailResponseAIAgentConfiguration": {
+      "type": "object",
+      "properties": {
+        "EmailResponseAIPromptId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"
+        },
+        "EmailQueryReformulationAIPromptId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"
+        },
+        "AssociationConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssociationConfiguration"
+          }
+        },
+        "Locale": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "EmailOverviewAIAgentConfiguration": {
+      "type": "object",
+      "properties": {
+        "EmailOverviewAIPromptId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"
+        },
+        "Locale": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "EmailGenerativeAnswerAIAgentConfiguration": {
+      "type": "object",
+      "properties": {
+        "EmailGenerativeAnswerAIPromptId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"
+        },
+        "EmailQueryReformulationAIPromptId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"
+        },
+        "AssociationConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssociationConfiguration"
+          }
+        },
+        "Locale": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
     },
     "Tags": {
       "type": "object",

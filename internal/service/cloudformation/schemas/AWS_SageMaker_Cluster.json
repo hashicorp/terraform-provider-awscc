@@ -182,6 +182,16 @@
       "description": "Defines the configuration for attaching additional storage to the instances in the SageMaker HyperPod cluster instance group.",
       "type": "object"
     },
+    "ClusterKubernetesLabels": {
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      },
+      "description": "A map of Kubernetes labels to apply to cluster nodes.",
+      "additionalProperties": false,
+      "type": "object"
+    },
     "VpcConfig": {
       "description": "Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC.",
       "additionalProperties": false,
@@ -215,6 +225,34 @@
       "required": [
         "SecurityGroupIds",
         "Subnets"
+      ]
+    },
+    "ClusterKubernetesTaint": {
+      "description": "A Kubernetes taint to apply to cluster nodes.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "description": "The value of the taint.",
+          "type": "string"
+        },
+        "Effect": {
+          "description": "The effect of the taint.",
+          "type": "string",
+          "enum": [
+            "NoSchedule",
+            "PreferNoSchedule",
+            "NoExecute"
+          ]
+        },
+        "Key": {
+          "description": "The key of the taint.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Effect"
       ]
     },
     "ClusterRestrictedInstanceGroup": {
@@ -283,12 +321,30 @@
         "$ref": "#/definitions/AlarmDetails"
       }
     },
+    "ClusterCapacityRequirements": {
+      "description": "Specifies the capacity requirements configuration for an instance group",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Spot": {
+          "$ref": "#/definitions/ClusterSpotOptions"
+        },
+        "OnDemand": {
+          "$ref": "#/definitions/ClusterOnDemandOptions"
+        }
+      }
+    },
     "ImageId": {
       "minLength": 7,
       "pattern": "^ami-[0-9a-fA-F]{8,17}|default$",
       "description": "AMI Id to be used for launching EC2 instances - HyperPodPublicAmiId or CustomAmiId",
       "type": "string",
       "maxLength": 21
+    },
+    "ClusterSpotOptions": {
+      "description": "Options for Spot capacity",
+      "additionalProperties": false,
+      "type": "object"
     },
     "CapacitySizeConfig": {
       "description": "The configuration of the size measurements of the AMI update. Using this configuration, you can specify whether SageMaker should update your instance group by an amount or percentage of instances.",
@@ -347,6 +403,11 @@
       "type": "string",
       "maxLength": 63
     },
+    "ClusterOnDemandOptions": {
+      "description": "Options for OnDemand capacity",
+      "additionalProperties": false,
+      "type": "object"
+    },
     "ClusterInstanceGroupsList": {
       "minItems": 1,
       "description": "The instance groups of the SageMaker HyperPod cluster.",
@@ -363,6 +424,19 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/ClusterRestrictedInstanceGroup"
+      }
+    },
+    "ClusterKubernetesConfig": {
+      "description": "Kubernetes configuration for cluster nodes including labels and taints.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Labels": {
+          "$ref": "#/definitions/ClusterKubernetesLabels"
+        },
+        "Taints": {
+          "$ref": "#/definitions/ClusterKubernetesTaints"
+        }
       }
     },
     "Orchestrator": {
@@ -432,16 +506,31 @@
         "$ref": "#/definitions/DeepHealthCheckType"
       }
     },
+    "ClusterKubernetesTaints": {
+      "maxItems": 50,
+      "description": "A list of Kubernetes taints to apply to cluster nodes. Maximum of 50 taints.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ClusterKubernetesTaint"
+      }
+    },
     "ClusterInstanceGroup": {
       "description": "Details of an instance group in a SageMaker HyperPod cluster.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
+        "CapacityRequirements": {
+          "$ref": "#/definitions/ClusterCapacityRequirements"
+        },
         "InstanceGroupName": {
           "$ref": "#/definitions/InstanceGroupName"
         },
         "InstanceStorageConfigs": {
           "$ref": "#/definitions/ClusterInstanceStorageConfigs"
+        },
+        "KubernetesConfig": {
+          "$ref": "#/definitions/ClusterKubernetesConfig"
         },
         "LifeCycleConfig": {
           "$ref": "#/definitions/ClusterLifeCycleConfig"

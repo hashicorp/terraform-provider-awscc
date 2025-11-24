@@ -113,6 +113,15 @@
           "description": "",
           "type": "string"
         },
+        "ResponseTransferMode": {
+          "default": "BUFFERED",
+          "description": "",
+          "type": "string",
+          "enum": [
+            "BUFFERED",
+            "STREAM"
+          ]
+        },
         "Uri": {
           "description": "",
           "type": "string"
@@ -158,6 +167,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "IntegrationTarget": {
+          "description": "",
+          "type": "string"
         },
         "ContentHandling": {
           "description": "",

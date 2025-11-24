@@ -184,7 +184,7 @@
       "type": "object",
       "properties": {
         "Name": {
-          "description": "The name for the metric that is defined in this structure. For extended metrics, valid values are the following:\n\nPerformanceNavigationDuration\n\nPerformanceResourceDuration\n\nNavigationSatisfiedTransaction\n\nNavigationToleratedTransaction\n\nNavigationFrustratedTransaction\n\nWebVitalsCumulativeLayoutShift\n\nWebVitalsFirstInputDelay\n\nWebVitalsLargestContentfulPaint\n\nJsErrorCount\n\nHttpErrorCount\n\nSessionCount",
+          "description": "The name for the metric that is defined in this structure. For extended metrics, valid values are the following:\n\nPerformanceNavigationDuration\n\nPerformanceResourceDuration\n\nNavigationSatisfiedTransaction\n\nNavigationToleratedTransaction\n\nNavigationFrustratedTransaction\n\nWebVitalsCumulativeLayoutShift\n\nWebVitalsFirstInputDelay\n\nWebVitalsLargestContentfulPaint\n\nWebVitalsInteractionToNextPaint\n\nJsErrorCount\n\nHttpErrorCount\n\nSessionCount\n\nPageViewCount\n\nHttp4xxCount\n\nHttp5xxCount\n\nSessionDuration\n\nPageViewCountPerSession\n\nJsErrorCountPerSession\n\nHttp4xxCountPerSession\n\nHttp5xxCountPerSession\n\nJsErrorCountPerPageView\n\nHttp4xxCountPerPageView\n\nHttp5xxCountPerPageView\n\nTimeOnPage\n\nColdLaunchTime\n\nWarmLaunchTime\n\nCrashCount\n\nANRCount\n\nAppHangCount\n\nScreenLoadCount\n\nScreenLoadTime\n\nNetworkLatency\n\nSpanPayloadSize\n\nLogEventPayloadSize",
           "type": "string",
           "minLength": 1,
           "maxLength": 255
@@ -354,11 +354,20 @@
     },
     "DeobfuscationConfiguration": {
       "$ref": "#/definitions/DeobfuscationConfiguration"
+    },
+    "Platform": {
+      "type": "string",
+      "enum": [
+        "Web",
+        "Android",
+        "iOS"
+      ]
     }
   },
   "additionalProperties": false,
   "createOnlyProperties": [
-    "/properties/Name"
+    "/properties/Name",
+    "/properties/Platform"
   ],
   "readOnlyProperties": [
     "/properties/Id"
@@ -373,18 +382,6 @@
   ],
   "required": [
     "Name"
-  ],
-  "oneOf": [
-    {
-      "required": [
-        "Domain"
-      ]
-    },
-    {
-      "required": [
-        "DomainList"
-      ]
-    }
   ],
   "tagging": {
     "taggable": true,

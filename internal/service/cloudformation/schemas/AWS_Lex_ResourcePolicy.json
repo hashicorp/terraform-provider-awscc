@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::Lex::ResourcePolicy",
-  "description": "A resource policy with specified policy statements that attaches to a Lex bot or bot alias.",
+  "description": "Resource Type definition for a resource policy with specified policy statements that attaches to a Lex bot or bot alias.",
   "sourceUrl": "https://docs.aws.amazon.com/lexv2/latest/dg/security_iam_service-with-iam.html#security_iam_service-with-iam-resource-based-policies",
   "definitions": {
     "ResourceArn": {
@@ -39,11 +39,10 @@
       "$ref": "#/definitions/PhysicalId"
     }
   },
-  "taggable": false,
   "additionalProperties": false,
   "required": [
-    "ResourceArn",
-    "Policy"
+    "Policy",
+    "ResourceArn"
   ],
   "primaryIdentifier": [
     "/properties/Id"
@@ -57,11 +56,15 @@
     "/properties/Id",
     "/properties/RevisionId"
   ],
+  "createOnlyProperties": [
+    "/properties/ResourceArn"
+  ],
   "handlers": {
     "create": {
       "permissions": [
         "lex:CreateResourcePolicy",
-        "lex:DescribeResourcePolicy"
+        "lex:DescribeResourcePolicy",
+        "lex:CreateResourcePolicyStatement"
       ]
     },
     "read": {
@@ -71,14 +74,19 @@
     },
     "update": {
       "permissions": [
+        "lex:CreateResourcePolicy",
         "lex:UpdateResourcePolicy",
-        "lex:DescribeResourcePolicy"
+        "lex:DescribeResourcePolicy",
+        "lex:DeleteResourcePolicy",
+        "lex:CreateResourcePolicyStatement",
+        "lex:DeleteResourcePolicyStatement"
       ]
     },
     "delete": {
       "permissions": [
         "lex:DeleteResourcePolicy",
-        "lex:DescribeResourcePolicy"
+        "lex:DescribeResourcePolicy",
+        "lex:DeleteResourcePolicyStatement"
       ]
     },
     "list": {
@@ -86,5 +94,8 @@
         "lex:DescribeResourcePolicy"
       ]
     }
+  },
+  "tagging": {
+    "taggable": false
   }
 }
