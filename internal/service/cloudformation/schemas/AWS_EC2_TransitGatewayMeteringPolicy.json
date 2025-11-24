@@ -1,0 +1,117 @@
+{
+  "tagging": {
+    "permissions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags"
+    ],
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": false
+  },
+  "handlers": {
+    "read": {
+      "permissions": [
+        "ec2:DescribeTransitGatewayMeteringPolicies",
+        "ec2:DescribeTags"
+      ]
+    },
+    "create": {
+      "permissions": [
+        "ec2:DescribeTransitGatewayMeteringPolicies",
+        "ec2:CreateTransitGatewayMeteringPolicy",
+        "ec2:CreateTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ec2:DescribeTransitGatewayMeteringPolicies",
+        "ec2:ModifyTransitGatewayMeteringPolicy",
+        "ec2:CreateTags",
+        "ec2:DeleteTags"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:DescribeTransitGatewayMeteringPolicies",
+        "ec2:DescribeTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:DescribeTransitGatewayMeteringPolicies",
+        "ec2:DeleteTransitGatewayMeteringPolicy",
+        "ec2:DeleteTags"
+      ]
+    }
+  },
+  "typeName": "AWS::EC2::TransitGatewayMeteringPolicy",
+  "readOnlyProperties": [
+    "/properties/TransitGatewayMeteringPolicyId",
+    "/properties/State",
+    "/properties/UpdateEffectiveAt"
+  ],
+  "description": "AWS::EC2::TransitGatewayMeteringPolicy Resource Definition",
+  "createOnlyProperties": [
+    "/properties/TransitGatewayId"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/TransitGatewayMeteringPolicyId"
+  ],
+  "definitions": {
+    "Tag": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "type": "string"
+        },
+        "Key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    }
+  },
+  "properties": {
+    "TransitGatewayId": {
+      "description": "The Id of transit gateway",
+      "type": "string"
+    },
+    "MiddleboxAttachmentIds": {
+      "description": "Middle box attachment Ids",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "State": {
+      "description": "State of the transit gateway metering policy",
+      "type": "string"
+    },
+    "UpdateEffectiveAt": {
+      "description": "The timestamp at which the latest action performed on the metering policy will become effective",
+      "type": "string"
+    },
+    "TransitGatewayMeteringPolicyId": {
+      "description": "The Id of the transit gateway metering policy",
+      "type": "string"
+    },
+    "Tags": {
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "required": [
+    "TransitGatewayId"
+  ]
+}

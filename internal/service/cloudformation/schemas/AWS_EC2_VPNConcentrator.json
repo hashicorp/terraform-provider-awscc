@@ -1,0 +1,110 @@
+{
+  "typeName": "AWS::EC2::VPNConcentrator",
+  "$schema": "https://raw.githubusercontent.com/aws-cloudformation/cloudformation-resource-schema/blob/master/src/main/resources/schema/provider.definition.schema.v1.json",
+  "description": "Resource Type definition for AWS::EC2::VPNConcentrator",
+  "additionalProperties": false,
+  "replacementStrategy": "delete_then_create",
+  "properties": {
+    "VpnConcentratorId": {
+      "description": "The provider-assigned unique ID for this managed resource",
+      "type": "string"
+    },
+    "TransitGatewayId": {
+      "description": "The ID of the transit gateway",
+      "type": "string"
+    },
+    "TransitGatewayAttachmentId": {
+      "description": "The ID of the transit gateway attachment",
+      "type": "string"
+    },
+    "Type": {
+      "description": "The type of VPN concentrator",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "Any tags assigned to the VPN concentrator.",
+      "type": "array",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "required": [
+    "TransitGatewayId",
+    "Type"
+  ],
+  "createOnlyProperties": [
+    "/properties/TransitGatewayId",
+    "/properties/Type"
+  ],
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/VpnConcentratorId",
+    "/properties/TransitGatewayAttachmentId"
+  ],
+  "primaryIdentifier": [
+    "/properties/VpnConcentratorId"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ec2:CreateVpnConcentrator",
+        "ec2:DescribeVpnConcentrators",
+        "ec2:CreateTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:DeleteVpnConcentrator",
+        "ec2:DescribeVpnConcentrators"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ec2:DescribeVpnConcentrators",
+        "ec2:CreateTags",
+        "ec2:DeleteTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ec2:DescribeVpnConcentrators"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:DescribeVpnConcentrators"
+      ]
+    }
+  }
+}

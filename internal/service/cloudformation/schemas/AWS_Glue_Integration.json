@@ -1,0 +1,220 @@
+{
+  "tagging": {
+    "permissions": [
+      "glue:TagResource",
+      "glue:UntagResource",
+      "glue:GetTags"
+    ],
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": true
+  },
+  "typeName": "AWS::Glue::Integration",
+  "readOnlyProperties": [
+    "/properties/IntegrationArn",
+    "/properties/CreateTime",
+    "/properties/Status"
+  ],
+  "description": "Resource Type definition for AWS::Glue::Integration",
+  "createOnlyProperties": [
+    "/properties/IntegrationName",
+    "/properties/SourceArn",
+    "/properties/TargetArn",
+    "/properties/KmsKeyId",
+    "/properties/AdditionalEncryptionContext",
+    "/properties/IntegrationConfig",
+    "/properties/IntegrationConfig/RefreshInterval"
+  ],
+  "primaryIdentifier": [
+    "/properties/IntegrationArn",
+    "/properties/IntegrationName"
+  ],
+  "required": [
+    "IntegrationName",
+    "SourceArn",
+    "TargetArn"
+  ],
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "handlers": {
+    "read": {
+      "permissions": [
+        "glue:DescribeIntegrations",
+        "glue:GetTags"
+      ]
+    },
+    "create": {
+      "permissions": [
+        "glue:CreateIntegration",
+        "glue:DescribeIntegrations",
+        "glue:TagResource",
+        "glue:GetTags",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "glue:CreateInboundIntegration"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "glue:DescribeIntegrations",
+        "glue:ModifyIntegration",
+        "glue:TagResource",
+        "glue:UntagResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "glue:DescribeIntegrations"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "glue:UntagResource",
+        "glue:DeleteIntegration",
+        "glue:DescribeIntegrations"
+      ]
+    }
+  },
+  "writeOnlyProperties": [
+    "/properties/IntegrationConfig/SourceProperties",
+    "/properties/IntegrationConfig/ContinuousSync"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "IntegrationConfig": {
+      "description": "The configuration settings for the integration.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ContinuousSync": {
+          "description": "Enables continuous synchronization for on-demand data extractions.",
+          "type": "boolean"
+        },
+        "RefreshInterval": {
+          "description": "Specifies the frequency at which CDC (Change Data Capture) pulls or incremental loads should occur.",
+          "type": "string",
+          "maxLength": 128
+        },
+        "SourceProperties": {
+          "$ref": "#/definitions/SourceProperties"
+        }
+      }
+    },
+    "IntegrationAdditionalEncryptionContextMap": {
+      "patternProperties": {
+        "": {
+          "minLength": 0,
+          "type": "string",
+          "maxLength": 131072
+        }
+      },
+      "description": "An optional set of non-secret key value pairs that contains additional contextual information about the data.",
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "minLength": 0,
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+          "type": "string",
+          "maxLength": 256
+        },
+        "Key": {
+          "minLength": 1,
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "Key"
+      ]
+    },
+    "SourceProperties": {
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      },
+      "description": "A collection of key-value pairs that specify additional properties for the integration source.",
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "Tags": {
+      "maxItems": 50,
+      "uniqueItems": true,
+      "description": "An array of key-value pairs to apply to this resource.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "properties": {
+    "DataFilter": {
+      "type": "string",
+      "maxLength": 2048
+    },
+    "Status": {
+      "description": "The status of the integration.",
+      "type": "string"
+    },
+    "IntegrationArn": {
+      "pattern": "arn:aws:.*:.*:[0-9]+:.*",
+      "description": "The Amazon Resource Name (ARN) of the integration.",
+      "type": "string"
+    },
+    "IntegrationName": {
+      "minLength": 1,
+      "description": "The name of the integration.",
+      "type": "string",
+      "maxLength": 128
+    },
+    "Description": {
+      "type": "string",
+      "maxLength": 1000
+    },
+    "SourceArn": {
+      "pattern": "arn:aws:.*:.*:[0-9]+:.*",
+      "description": "The Amazon Resource Name (ARN) of the database to use as the source for replication",
+      "type": "string",
+      "maxLength": 512
+    },
+    "IntegrationConfig": {
+      "$ref": "#/definitions/IntegrationConfig"
+    },
+    "KmsKeyId": {
+      "description": "An KMS key identifier for the key to use to encrypt the integration. If you don't specify an encryption key, the default AWS owned KMS key is used.",
+      "type": "string"
+    },
+    "CreateTime": {
+      "description": "The time (UTC) when the integration was created.",
+      "type": "string"
+    },
+    "TargetArn": {
+      "pattern": "arn:aws:.*:.*:[0-9]+:.*",
+      "description": "The Amazon Resource Name (ARN) of the Glue data warehouse to use as the target for replication",
+      "type": "string",
+      "maxLength": 512
+    },
+    "AdditionalEncryptionContext": {
+      "$ref": "#/definitions/IntegrationAdditionalEncryptionContextMap"
+    },
+    "Tags": {
+      "maxItems": 50,
+      "uniqueItems": true,
+      "description": "An array of key-value pairs to apply to this resource.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  }
+}
