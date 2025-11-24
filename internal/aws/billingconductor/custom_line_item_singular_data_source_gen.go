@@ -63,7 +63,7 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		//
 		//	{
 		//	  "description": "Billing Group ARN",
-		//	  "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/?[0-9]{12}",
+		//	  "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/?[a-zA-Z0-9]{10,12}",
 		//	  "type": "string"
 		//	}
 		"billing_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

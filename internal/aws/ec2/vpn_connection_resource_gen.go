@@ -17,6 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -284,6 +285,34 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TunnelBandwidth
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "standard",
+		//	  "description": "",
+		//	  "enum": [
+		//	    "standard",
+		//	    "large"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"tunnel_bandwidth": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			Default:     stringdefault.StaticString("standard"),
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"standard",
+					"large",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TunnelInsideIpVersion
 		// CloudFormation resource type schema:
 		//
@@ -312,6 +341,22 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: VpnConcentratorId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"vpn_concentrator_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: VpnConnectionId
@@ -401,6 +446,22 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	            "additionalProperties": false,
 		//	            "description": "Options for sending VPN tunnel logs to CloudWatch.",
 		//	            "properties": {
+		//	              "BgpLogEnabled": {
+		//	                "description": "",
+		//	                "type": "boolean"
+		//	              },
+		//	              "BgpLogGroupArn": {
+		//	                "description": "",
+		//	                "type": "string"
+		//	              },
+		//	              "BgpLogOutputFormat": {
+		//	                "description": "",
+		//	                "enum": [
+		//	                  "json",
+		//	                  "text"
+		//	                ],
+		//	                "type": "string"
+		//	              },
 		//	              "LogEnabled": {
 		//	                "description": "Enable or disable VPN tunnel logging feature. Default value is ``False``.\n Valid values: ``True`` | ``False``",
 		//	                "type": "boolean"
@@ -708,6 +769,39 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 							// Property: CloudwatchLogOptions
 							"cloudwatch_log_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: BgpLogEnabled
+									"bgp_log_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: BgpLogGroupArn
+									"bgp_log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: BgpLogOutputFormat
+									"bgp_log_output_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"json",
+												"text",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
 									// Property: LogEnabled
 									"log_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 										Description: "Enable or disable VPN tunnel logging feature. Default value is ``False``.\n Valid values: ``True`` | ``False``",
@@ -1101,6 +1195,9 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"bgp_log_enabled":                         "BgpLogEnabled",
+		"bgp_log_group_arn":                       "BgpLogGroupArn",
+		"bgp_log_output_format":                   "BgpLogOutputFormat",
 		"cloudwatch_log_options":                  "CloudwatchLogOptions",
 		"customer_gateway_id":                     "CustomerGatewayId",
 		"dpd_timeout_action":                      "DPDTimeoutAction",
@@ -1136,11 +1233,13 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                                    "Tags",
 		"transit_gateway_id":                      "TransitGatewayId",
 		"transport_transit_gateway_attachment_id": "TransportTransitGatewayAttachmentId",
+		"tunnel_bandwidth":                        "TunnelBandwidth",
 		"tunnel_inside_cidr":                      "TunnelInsideCidr",
 		"tunnel_inside_ip_version":                "TunnelInsideIpVersion",
 		"tunnel_inside_ipv_6_cidr":                "TunnelInsideIpv6Cidr",
 		"type":                                    "Type",
 		"value":                                   "Value",
+		"vpn_concentrator_id":                     "VpnConcentratorId",
 		"vpn_connection_id":                       "VpnConnectionId",
 		"vpn_gateway_id":                          "VpnGatewayId",
 		"vpn_tunnel_options_specifications":       "VpnTunnelOptionsSpecifications",

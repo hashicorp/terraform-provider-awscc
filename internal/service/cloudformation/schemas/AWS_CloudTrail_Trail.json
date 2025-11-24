@@ -122,6 +122,14 @@
         "FieldSelectors"
       ]
     },
+    "SourceEventCategory": {
+      "description": "Event category for an insight selector.",
+      "type": "string",
+      "enum": [
+        "Management",
+        "Data"
+      ]
+    },
     "InsightSelector": {
       "description": "A string that contains insight types that are logged on a trail.",
       "additionalProperties": false,
@@ -130,8 +138,46 @@
         "InsightType": {
           "description": "The type of insight to log on a trail.",
           "type": "string"
+        },
+        "EventCategories": {
+          "uniqueItems": true,
+          "description": "The categories of events for which to log insights. By default, insights are logged for management events only.",
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceEventCategory"
+          }
         }
       }
+    },
+    "AggregationConfiguration": {
+      "description": "Configure to add aggregation rules to aggregate CloudTrail Events.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "EventCategory": {
+          "description": "The category of events to be aggregated.",
+          "type": "string",
+          "enum": [
+            "Data"
+          ]
+        },
+        "Templates": {
+          "minItems": 1,
+          "maxItems": 50,
+          "uniqueItems": true,
+          "description": "Contains all templates in an aggregation configuration.",
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Template"
+          }
+        }
+      },
+      "required": [
+        "EventCategory",
+        "Templates"
+      ]
     },
     "EventSelector": {
       "description": "The type of email sending events to publish to the event destination.",
@@ -306,6 +352,15 @@
       "required": [
         "Field"
       ]
+    },
+    "Template": {
+      "description": "A template used to configure aggregation rules.",
+      "type": "string",
+      "enum": [
+        "API_ACTIVITY",
+        "RESOURCE_ACCESS",
+        "USER_ACTIONS"
+      ]
     }
   },
   "properties": {
@@ -326,6 +381,16 @@
     "KMSKeyId": {
       "description": "Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by 'alias/', a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.",
       "type": "string"
+    },
+    "AggregationConfigurations": {
+      "maxItems": 1,
+      "uniqueItems": true,
+      "description": "Specifies the aggregation configuration to aggregate CloudTrail Events. A maximum of 1 aggregation configuration is allowed.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AggregationConfiguration"
+      }
     },
     "CloudWatchLogsRoleArn": {
       "description": "Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.",

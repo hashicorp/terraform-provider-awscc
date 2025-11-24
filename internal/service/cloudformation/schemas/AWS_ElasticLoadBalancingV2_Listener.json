@@ -292,16 +292,19 @@
       "type": "object",
       "properties": {
         "Format": {
+          "description": "",
           "type": "string"
         },
         "Values": {
           "uniqueItems": true,
+          "description": "",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "Name": {
+          "description": "",
           "type": "string"
         }
       },
@@ -351,13 +354,16 @@
       "type": "object",
       "properties": {
         "JwksEndpoint": {
+          "description": "",
           "type": "string"
         },
         "Issuer": {
+          "description": "",
           "type": "string"
         },
         "AdditionalClaims": {
           "uniqueItems": true,
+          "description": "",
           "type": "array",
           "items": {
             "$ref": "#/definitions/JwtValidationActionAdditionalClaim"

@@ -126,17 +126,18 @@ resource "awscc_msk_cluster" "example" {
 
 - `client_authentication` (Attributes) (see [below for nested schema](#nestedatt--client_authentication))
 - `configuration_info` (Attributes) (see [below for nested schema](#nestedatt--configuration_info))
-- `current_version` (String) The current version of the MSK cluster
 - `encryption_info` (Attributes) (see [below for nested schema](#nestedatt--encryption_info))
 - `enhanced_monitoring` (String)
 - `logging_info` (Attributes) (see [below for nested schema](#nestedatt--logging_info))
 - `open_monitoring` (Attributes) (see [below for nested schema](#nestedatt--open_monitoring))
+- `rebalancing` (Attributes) (see [below for nested schema](#nestedatt--rebalancing))
 - `storage_mode` (String)
 - `tags` (Map of String) A key-value pair to associate with a resource.
 
 ### Read-Only
 
 - `arn` (String)
+- `current_version` (String) The current version of the MSK cluster
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--broker_node_group_info"></a>
@@ -410,6 +411,16 @@ Optional:
 Optional:
 
 - `enabled_in_broker` (Boolean)
+
+
+
+
+<a id="nestedatt--rebalancing"></a>
+### Nested Schema for `rebalancing`
+
+Optional:
+
+- `status` (String)
 
 ## Import
 

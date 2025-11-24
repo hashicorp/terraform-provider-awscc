@@ -222,6 +222,12 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "description": "The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.",
 		//	              "maxLength": 100,
 		//	              "type": "string"
+		//	            },
+		//	            "RingTimeout": {
+		//	              "description": "Maximum ring time for outbound calls in seconds",
+		//	              "maximum": 60,
+		//	              "minimum": 15,
+		//	              "type": "integer"
 		//	            }
 		//	          },
 		//	          "required": [
@@ -478,6 +484,11 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 								// Property: ConnectSourcePhoneNumber
 								"connect_source_phone_number": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RingTimeout
+								"ring_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Maximum ring time for outbound calls in seconds",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -1569,6 +1580,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"refresh_frequency":                 "RefreshFrequency",
 		"restricted_period_list":            "RestrictedPeriodList",
 		"restricted_periods":                "RestrictedPeriods",
+		"ring_timeout":                      "RingTimeout",
 		"schedule":                          "Schedule",
 		"sms":                               "Sms",
 		"source":                            "Source",

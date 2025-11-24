@@ -22,6 +22,7 @@ Data Source schema for AWS::S3Tables::TableBucket
 ### Read-Only
 
 - `encryption_configuration` (Attributes) Specifies encryption settings for the table bucket (see [below for nested schema](#nestedatt--encryption_configuration))
+- `metrics_configuration` (Attributes) Settings governing the Metric configuration for the table bucket. (see [below for nested schema](#nestedatt--metrics_configuration))
 - `table_bucket_arn` (String) The Amazon Resource Name (ARN) of the specified table bucket.
 - `table_bucket_name` (String) A name for the table bucket.
 - `tags` (Attributes Set) User tags (key-value pairs) to associate with the table bucket. (see [below for nested schema](#nestedatt--tags))
@@ -34,6 +35,14 @@ Read-Only:
 
 - `kms_key_arn` (String) ARN of the KMS key to use for encryption
 - `sse_algorithm` (String) Server-side encryption algorithm
+
+
+<a id="nestedatt--metrics_configuration"></a>
+### Nested Schema for `metrics_configuration`
+
+Read-Only:
+
+- `status` (String) Indicates whether Metrics are enabled.
 
 
 <a id="nestedatt--tags"></a>

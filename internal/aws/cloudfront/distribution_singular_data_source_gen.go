@@ -283,6 +283,19 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      "description": "A comment to describe the distribution. The comment cannot be longer than 128 characters.",
 		//	      "type": "string"
 		//	    },
+		//	    "ConnectionFunctionAssociation": {
+		//	      "additionalProperties": false,
+		//	      "description": "",
+		//	      "properties": {
+		//	        "Id": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Id"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "ConnectionMode": {
 		//	      "description": "This field specifies whether the connection mode is through a standard distribution (direct) or a multi-tenant distribution with distribution tenants (tenant-only).",
 		//	      "enum": [
@@ -1066,6 +1079,40 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "ViewerMtlsConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "",
+		//	      "properties": {
+		//	        "Mode": {
+		//	          "default": "required",
+		//	          "enum": [
+		//	            "required",
+		//	            "optional"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "TrustStoreConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "AdvertiseTrustStoreCaNames": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "IgnoreCertificateExpiry": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "TrustStoreId": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "TrustStoreId"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "WebACLId": {
 		//	      "default": "",
 		//	      "description": "Multi-tenant distributions only support WAF V2 web ACLs.\n  A unique identifier that specifies the WAF web ACL, if any, to associate with this distribution. To specify a web ACL created using the latest version of WAF, use the ACL ARN, for example ``arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111``. To specify a web ACL created using WAF Classic, use the ACL ID, for example ``a1b2c3d4-5678-90ab-cdef-EXAMPLE11111``.\n WAF is a web application firewall that lets you monitor the HTTP and HTTPS requests that are forwarded to CloudFront, and lets you control access to your content. Based on conditions that you specify, such as the IP addresses that requests originate from or the values of query strings, CloudFront responds to requests either with the requested content or with an HTTP 403 status code (Forbidden). You can also configure CloudFront to return a custom error page when a request is blocked. For more information about WAF, see the [Developer Guide](https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html).",
@@ -1295,6 +1342,17 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 				// Property: Comment
 				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "A comment to describe the distribution. The comment cannot be longer than 128 characters.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ConnectionFunctionAssociation
+				"connection_function_association": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Id
+						"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ConnectionMode
@@ -1977,6 +2035,36 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 					Description: "A complex type that determines the distribution's SSL/TLS configuration for communicating with viewers.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: ViewerMtlsConfig
+				"viewer_mtls_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Mode
+						"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TrustStoreConfig
+						"trust_store_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AdvertiseTrustStoreCaNames
+								"advertise_trust_store_ca_names": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: IgnoreCertificateExpiry
+								"ignore_certificate_expiry": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: TrustStoreId
+								"trust_store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: WebACLId
 				"web_acl_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Multi-tenant distributions only support WAF V2 web ACLs.\n  A unique identifier that specifies the WAF web ACL, if any, to associate with this distribution. To specify a web ACL created using the latest version of WAF, use the ACL ARN, for example ``arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111``. To specify a web ACL created using WAF Classic, use the ACL ID, for example ``a1b2c3d4-5678-90ab-cdef-EXAMPLE11111``.\n WAF is a web application firewall that lets you monitor the HTTP and HTTPS requests that are forwarded to CloudFront, and lets you control access to your content. Based on conditions that you specify, such as the IP addresses that requests originate from or the values of query strings, CloudFront responds to requests either with the requested content or with an HTTP 403 status code (Forbidden). You can also configure CloudFront to return a custom error page when a request is blocked. For more information about WAF, see the [Developer Guide](https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html).",
@@ -2071,6 +2159,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"acm_certificate_arn":             "AcmCertificateArn",
+		"advertise_trust_store_ca_names":  "AdvertiseTrustStoreCaNames",
 		"aliases":                         "Aliases",
 		"allowed_methods":                 "AllowedMethods",
 		"anycast_ip_list_id":              "AnycastIpListId",
@@ -2083,6 +2172,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"comment":                         "Comment",
 		"compress":                        "Compress",
 		"connection_attempts":             "ConnectionAttempts",
+		"connection_function_association": "ConnectionFunctionAssociation",
 		"connection_mode":                 "ConnectionMode",
 		"connection_timeout":              "ConnectionTimeout",
 		"continuous_deployment_policy_id": "ContinuousDeploymentPolicyId",
@@ -2119,6 +2209,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"https_port":                      "HTTPSPort",
 		"iam_certificate_id":              "IamCertificateId",
 		"id":                              "Id",
+		"ignore_certificate_expiry":       "IgnoreCertificateExpiry",
 		"include_body":                    "IncludeBody",
 		"include_cookies":                 "IncludeCookies",
 		"ip_address_type":                 "IpAddressType",
@@ -2133,6 +2224,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"members":                         "Members",
 		"min_ttl":                         "MinTTL",
 		"minimum_protocol_version":        "MinimumProtocolVersion",
+		"mode":                            "Mode",
 		"name":                            "Name",
 		"origin_access_control_id":        "OriginAccessControlId",
 		"origin_access_identity":          "OriginAccessIdentity",
@@ -2175,10 +2267,13 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"tags":                            "Tags",
 		"target_origin_id":                "TargetOriginId",
 		"tenant_config":                   "TenantConfig",
+		"trust_store_config":              "TrustStoreConfig",
+		"trust_store_id":                  "TrustStoreId",
 		"trusted_key_groups":              "TrustedKeyGroups",
 		"trusted_signers":                 "TrustedSigners",
 		"value":                           "Value",
 		"viewer_certificate":              "ViewerCertificate",
+		"viewer_mtls_config":              "ViewerMtlsConfig",
 		"viewer_protocol_policy":          "ViewerProtocolPolicy",
 		"vpc_origin_config":               "VpcOriginConfig",
 		"vpc_origin_id":                   "VpcOriginId",

@@ -17,6 +17,7 @@ VpcLattice ServiceNetworkResourceAssociation CFN resource
 
 ### Optional
 
+- `private_dns_enabled` (Boolean)
 - `resource_configuration_id` (String)
 - `service_network_id` (String)
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))

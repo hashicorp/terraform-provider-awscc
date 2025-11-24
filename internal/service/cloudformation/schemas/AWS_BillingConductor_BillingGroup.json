@@ -38,13 +38,14 @@
           },
           "minItems": 1
         },
+        "ResponsibilityTransferArn": {
+          "type": "string",
+          "pattern": "arn:[a-z0-9][a-z0-9-.]{0,62}:organizations::[0-9]{12}:transfer/o-[a-z0-9]{10,32}/(billing)/(inbound|outbound)/rt-[0-9a-z]{8,32}"
+        },
         "AutoAssociate": {
           "type": "boolean"
         }
-      },
-      "required": [
-        "LinkedAccountIds"
-      ]
+      }
     },
     "Tag": {
       "type": "object",
@@ -71,7 +72,7 @@
     "Arn": {
       "description": "Billing Group ARN",
       "type": "string",
-      "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/?[0-9]{12}"
+      "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/?[a-zA-Z0-9]{10,12}"
     },
     "Name": {
       "type": "string",
@@ -137,8 +138,33 @@
   "required": [
     "Name",
     "AccountGrouping",
-    "PrimaryAccountId",
     "ComputationPreference"
+  ],
+  "anyOf": [
+    {
+      "required": [
+        "PrimaryAccountId"
+      ],
+      "properties": {
+        "AccountGrouping": {
+          "required": [
+            "LinkedAccountIds"
+          ]
+        }
+      }
+    },
+    {
+      "required": [
+        "AccountGrouping"
+      ],
+      "properties": {
+        "AccountGrouping": {
+          "required": [
+            "ResponsibilityTransferArn"
+          ]
+        }
+      }
+    }
   ],
   "readOnlyProperties": [
     "/properties/Arn",
@@ -161,7 +187,8 @@
         "billingconductor:AssociateAccounts",
         "billingconductor:ListBillingGroups",
         "billingconductor:TagResource",
-        "billingconductor:ListTagsForResource"
+        "billingconductor:ListTagsForResource",
+        "organizations:DescribeResponsibilityTransfer"
       ]
     },
     "read": {

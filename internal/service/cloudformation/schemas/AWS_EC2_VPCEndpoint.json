@@ -89,7 +89,9 @@
     "/properties/VpcId",
     "/properties/ServiceNetworkArn",
     "/properties/ResourceConfigurationArn",
-    "/properties/ServiceRegion"
+    "/properties/ServiceRegion",
+    "/properties/DnsOptions/PrivateDnsPreference",
+    "/properties/DnsOptions/PrivateDnsSpecifiedDomains"
   ],
   "additionalProperties": false,
   "primaryIdentifier": [
@@ -110,6 +112,17 @@
             "NotSpecified"
           ]
         },
+        "PrivateDnsSpecifiedDomains": {
+          "minItems": 1,
+          "maxItems": 10,
+          "description": "",
+          "type": "array",
+          "items": {
+            "minLength": 1,
+            "type": "string",
+            "maxLength": 255
+          }
+        },
         "DnsRecordIpType": {
           "description": "The DNS records created for the endpoint.",
           "type": "string",
@@ -119,6 +132,16 @@
             "dualstack",
             "service-defined",
             "not-specified"
+          ]
+        },
+        "PrivateDnsPreference": {
+          "description": "",
+          "type": "string",
+          "enum": [
+            "VERIFIED_DOMAINS_ONLY",
+            "ALL_DOMAINS",
+            "VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS",
+            "SPECIFIED_DOMAINS_ONLY"
           ]
         }
       }

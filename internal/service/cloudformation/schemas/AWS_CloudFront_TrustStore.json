@@ -1,0 +1,194 @@
+{
+  "typeName": "AWS::CloudFront::TrustStore",
+  "additionalProperties": false,
+  "definitions": {
+    "CaCertificatesBundleSource": {
+      "additionalProperties": false,
+      "properties": {
+        "CaCertificatesBundleS3Location": {
+          "$ref": "#/definitions/CaCertificatesBundleS3Location"
+        }
+      },
+      "required": [
+        "CaCertificatesBundleS3Location"
+      ],
+      "type": "object"
+    },
+    "CaCertificatesBundleS3Location": {
+      "additionalProperties": false,
+      "properties": {
+        "Bucket": {
+          "type": "string",
+          "description": "The S3 bucket containing the CA certificates bundle PEM file"
+        },
+        "Key": {
+          "type": "string",
+          "description": "The S3 object key of the CA certificates bundle PEM file"
+        },
+        "Region": {
+          "type": "string",
+          "description": "The S3 bucket region"
+        },
+        "Version": {
+          "type": "string",
+          "description": "The S3 object version of the CA certificates bundle PEM file"
+        }
+      },
+      "required": [
+        "Bucket",
+        "Key",
+        "Region"
+      ],
+      "type": "object"
+    },
+    "Tag": {
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string",
+          "pattern": ""
+        },
+        "Value": {
+          "maxLength": 256,
+          "minLength": 0,
+          "type": "string",
+          "pattern": ""
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "type": "object"
+    }
+  },
+  "description": "Resource Type definition for AWS::CloudFront::TrustStore. TrustStores contain CA certificates for mTLS authentication and can be associated with CloudFront distributions.",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudfront:CreateTrustStore",
+        "cloudfront:GetTrustStore",
+        "cloudfront:TagResource",
+        "cloudfront:ListTagsForResource",
+        "s3:GetObjectVersion",
+        "s3:GetObject",
+        "s3:ListBucket"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudfront:GetTrustStore",
+        "cloudfront:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cloudfront:GetTrustStore",
+        "cloudfront:UpdateTrustStore",
+        "cloudfront:TagResource",
+        "cloudfront:UntagResource",
+        "cloudfront:ListTagsForResource",
+        "s3:GetObjectVersion",
+        "s3:GetObject",
+        "s3:ListBucket"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudfront:DeleteTrustStore",
+        "cloudfront:GetTrustStore"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudfront:ListTrustStores",
+        "cloudfront:ListTagsForResource"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Name"
+    ]
+  ],
+  "properties": {
+    "Id": {
+      "type": "string",
+      "description": "The unique identifier for the trust store"
+    },
+    "Name": {
+      "type": "string",
+      "description": "A unique name to identify the trust store"
+    },
+    "Arn": {
+      "type": "string",
+      "pattern": "^arn:aws:cloudfront::[0-9]{12}:trust-store/[A-Za-z0-9_]+$",
+      "description": "The Amazon Resource Name (ARN) of the trust store"
+    },
+    "CaCertificatesBundleSource": {
+      "$ref": "#/definitions/CaCertificatesBundleSource"
+    },
+    "Status": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "ACTIVE",
+        "FAILED"
+      ],
+      "description": "Current status of the trust store"
+    },
+    "ETag": {
+      "type": "string"
+    },
+    "LastModifiedTime": {
+      "type": "string",
+      "description": "The last modification timestamp of the trust store PEM file"
+    },
+    "NumberOfCaCertificates": {
+      "type": "integer",
+      "description": "The number of CA certificates in the trust store PEM file"
+    },
+    "Tags": {
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "description": "Key-value pairs for resource tagging"
+    }
+  },
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/Id",
+    "/properties/Arn",
+    "/properties/Status",
+    "/properties/ETag",
+    "/properties/LastModifiedTime",
+    "/properties/NumberOfCaCertificates"
+  ],
+  "writeOnlyProperties": [
+    "/properties/CaCertificatesBundleSource"
+  ],
+  "required": [
+    "Name"
+  ],
+  "tagging": {
+    "cloudFormationSystemTags": false,
+    "permissions": [
+      "cloudfront:TagResource",
+      "cloudfront:UntagResource",
+      "cloudfront:ListTagsForResource"
+    ],
+    "tagOnCreate": true,
+    "tagProperty": "/properties/Tags",
+    "tagUpdatable": true,
+    "taggable": true
+  }
+}

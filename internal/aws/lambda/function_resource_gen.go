@@ -1058,6 +1058,52 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TenancyConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "TenantIsolationMode": {
+		//	      "description": "Determines how your Lambda function isolates execution environments between tenants.",
+		//	      "enum": [
+		//	        "PER_TENANT"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "TenantIsolationMode"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"tenancy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: TenantIsolationMode
+				"tenant_isolation_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Determines how your Lambda function isolates execution environments between tenants.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"PER_TENANT",
+						),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Timeout
 		// CloudFormation resource type schema:
 		//
@@ -1273,6 +1319,8 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"system_log_level":               "SystemLogLevel",
 		"tags":                           "Tags",
 		"target_arn":                     "TargetArn",
+		"tenancy_config":                 "TenancyConfig",
+		"tenant_isolation_mode":          "TenantIsolationMode",
 		"timeout":                        "Timeout",
 		"tracing_config":                 "TracingConfig",
 		"update_runtime_on":              "UpdateRuntimeOn",

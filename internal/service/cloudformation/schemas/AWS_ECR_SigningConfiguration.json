@@ -1,0 +1,123 @@
+{
+  "typeName": "AWS::ECR::SigningConfiguration",
+  "description": "The AWS::ECR::SigningConfiguration resource creates or updates the signing configuration for an Amazon ECR registry.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ecr.git",
+  "definitions": {
+    "Rule": {
+      "type": "object",
+      "properties": {
+        "SigningProfileArn": {
+          "type": "string",
+          "maxLength": 200,
+          "pattern": "^arn:aws(-[a-z]+)*:signer:[a-z0-9-]+:[0-9]{12}:\\/signing-profiles\\/[a-zA-Z0-9_]{2,}$",
+          "description": "AWS Signer signing profile ARN to use for matched repositories."
+        },
+        "RepositoryFilters": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 100,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/RepositoryFilter"
+          },
+          "description": "Optional array of repository filters. If omitted, the rule matches all repositories. If provided, must contain at least one filter. Empty arrays are not allowed."
+        }
+      },
+      "required": [
+        "SigningProfileArn"
+      ],
+      "additionalProperties": false
+    },
+    "RepositoryFilter": {
+      "type": "object",
+      "properties": {
+        "Filter": {
+          "$ref": "#/definitions/Filter"
+        },
+        "FilterType": {
+          "$ref": "#/definitions/FilterType"
+        }
+      },
+      "description": "An array of objects representing the details of a repository filter.",
+      "required": [
+        "Filter",
+        "FilterType"
+      ],
+      "additionalProperties": false
+    },
+    "Filter": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "",
+      "description": "Repository name pattern (supports '*' wildcard)."
+    },
+    "FilterType": {
+      "description": "Type of repository filter",
+      "type": "string",
+      "enum": [
+        "WILDCARD_MATCH"
+      ]
+    }
+  },
+  "properties": {
+    "RegistryId": {
+      "type": "string",
+      "pattern": "^[0-9]{12}$",
+      "description": "12-digit AWS account ID of the ECR registry."
+    },
+    "Rules": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 50,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Rule"
+      },
+      "description": "Array of signing rules that define which repositories should be signed and with which signing profiles."
+    }
+  },
+  "required": [
+    "Rules"
+  ],
+  "readOnlyProperties": [
+    "/properties/RegistryId"
+  ],
+  "primaryIdentifier": [
+    "/properties/RegistryId"
+  ],
+  "additionalProperties": false,
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ecr:PutSigningConfiguration",
+        "ecr:GetSigningConfiguration"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ecr:GetSigningConfiguration"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ecr:PutSigningConfiguration",
+        "ecr:GetSigningConfiguration"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ecr:DeleteSigningConfiguration",
+        "ecr:GetSigningConfiguration"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ecr:GetSigningConfiguration"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": false
+  }
+}

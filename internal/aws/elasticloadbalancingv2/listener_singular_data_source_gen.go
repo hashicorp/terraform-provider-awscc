@@ -284,17 +284,21 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "description": "",
 		//	        "properties": {
 		//	          "AdditionalClaims": {
+		//	            "description": "",
 		//	            "items": {
 		//	              "additionalProperties": false,
 		//	              "description": "",
 		//	              "properties": {
 		//	                "Format": {
+		//	                  "description": "",
 		//	                  "type": "string"
 		//	                },
 		//	                "Name": {
+		//	                  "description": "",
 		//	                  "type": "string"
 		//	                },
 		//	                "Values": {
+		//	                  "description": "",
 		//	                  "items": {
 		//	                    "type": "string"
 		//	                  },
@@ -313,9 +317,11 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "Issuer": {
+		//	            "description": "",
 		//	            "type": "string"
 		//	          },
 		//	          "JwksEndpoint": {
+		//	            "description": "",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -575,28 +581,34 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Format
 										"format": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
+											Description: "",
+											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Name
 										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
+											Description: "",
+											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Values
 										"values": schema.ListAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
+											Description: "",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Computed: true,
+								Description: "",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Issuer
 							"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: JwksEndpoint
 							"jwks_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "",

@@ -109,6 +109,7 @@ resource "awscc_apigateway_stage" "example" {
 - `clone_from` (String)
 - `description` (String)
 - `disable_execute_api_endpoint` (Boolean)
+- `endpoint_access_mode` (String)
 - `endpoint_configuration` (Attributes) A list of the endpoint types and IP address types of the API. Use this property when creating an API. When importing an existing API, specify the endpoint configuration types using the ``Parameters`` property. (see [below for nested schema](#nestedatt--endpoint_configuration))
 - `fail_on_warnings` (Boolean)
 - `minimum_compression_size` (Number)
@@ -121,6 +122,7 @@ resource "awscc_apigateway_stage" "example" {
 - `name` (String) The name of the RestApi. A name is required if the REST API is not based on an OpenAPI specification.
 - `parameters` (String)
 - `policy` (String) A policy document that contains the permissions for the ``RestApi`` resource. To set the ARN for the policy, use the ``!Join`` intrinsic function with ``""`` as delimiter and values of ``"execute-api:/"`` and ``"*"``.
+- `security_policy` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

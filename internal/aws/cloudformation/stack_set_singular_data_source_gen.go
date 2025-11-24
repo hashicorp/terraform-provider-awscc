@@ -43,6 +43,16 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to the target organization or organizational unit (OU). Specify only if PermissionModel is SERVICE_MANAGED.",
 		//	  "properties": {
+		//	    "DependsOn": {
+		//	      "description": "A list of StackSet ARNs that this StackSet depends on for auto-deployment operations. When auto-deployment is triggered, operations will be sequenced to ensure all dependencies complete successfully before this StackSet's operation begins.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "The Amazon Resource Number (ARN) of a stack set.",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
 		//	    "Enabled": {
 		//	      "description": "If set to true, StackSets automatically deploys additional stack instances to AWS Organizations accounts that are added to a target organization or organizational unit (OU) in the specified Regions. If an account is removed from a target organization or OU, StackSets deletes stack instances from the account in the specified Regions.",
 		//	      "type": "boolean"
@@ -56,6 +66,12 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"auto_deployment": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DependsOn
+				"depends_on": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of StackSet ARNs that this StackSet depends on for auto-deployment operations. When auto-deployment is triggered, operations will be sequenced to ensure all dependencies complete successfully before this StackSet's operation begins.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "If set to true, StackSets automatically deploys additional stack instances to AWS Organizations accounts that are added to a target organization or organizational unit (OU) in the specified Regions. If an account is removed from a target organization or OU, StackSets deletes stack instances from the account in the specified Regions.",
@@ -598,6 +614,7 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"call_as":                          "CallAs",
 		"capabilities":                     "Capabilities",
 		"concurrency_mode":                 "ConcurrencyMode",
+		"depends_on":                       "DependsOn",
 		"deployment_targets":               "DeploymentTargets",
 		"description":                      "Description",
 		"enabled":                          "Enabled",

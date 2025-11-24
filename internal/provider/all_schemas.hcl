@@ -913,6 +913,10 @@ resource_schema "aws_cloudfront_cloudfront_origin_access_identity" {
   cloudformation_type_name = "AWS::CloudFront::CloudFrontOriginAccessIdentity"
 }
 
+resource_schema "aws_cloudfront_connection_function" {
+  cloudformation_type_name = "AWS::CloudFront::ConnectionFunction"
+}
+
 resource_schema "aws_cloudfront_connection_group" {
   cloudformation_type_name = "AWS::CloudFront::ConnectionGroup"
 }
@@ -964,6 +968,10 @@ resource_schema "aws_cloudfront_realtime_log_config" {
 
 resource_schema "aws_cloudfront_response_headers_policy" {
   cloudformation_type_name = "AWS::CloudFront::ResponseHeadersPolicy"
+}
+
+resource_schema "aws_cloudfront_trust_store" {
+  cloudformation_type_name = "AWS::CloudFront::TrustStore"
 }
 
 resource_schema "aws_cloudfront_vpc_origin" {
@@ -1094,6 +1102,11 @@ resource_schema "aws_cognito_log_delivery_configuration" {
 
 resource_schema "aws_cognito_managed_login_branding" {
   cloudformation_type_name               = "AWS::Cognito::ManagedLoginBranding"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_cognito_terms" {
+  cloudformation_type_name               = "AWS::Cognito::Terms"
   suppress_plural_data_source_generation = true
 }
 
@@ -1985,6 +1998,15 @@ resource_schema "aws_ec2_transit_gateway_connect_peer" {
   cloudformation_type_name = "AWS::EC2::TransitGatewayConnectPeer"
 }
 
+resource_schema "aws_ec2_transit_gateway_metering_policy" {
+  cloudformation_type_name = "AWS::EC2::TransitGatewayMeteringPolicy"
+}
+
+resource_schema "aws_ec2_transit_gateway_metering_policy_entry" {
+  cloudformation_type_name               = "AWS::EC2::TransitGatewayMeteringPolicyEntry"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_ec2_transit_gateway_multicast_domain" {
   cloudformation_type_name = "AWS::EC2::TransitGatewayMulticastDomain"
 }
@@ -2050,6 +2072,10 @@ resource_schema "aws_ec2_vpcdhcp_options_association" {
   cloudformation_type_name = "AWS::EC2::VPCDHCPOptionsAssociation"
 }
 
+resource_schema "aws_ec2_vpc_encryption_control" {
+  cloudformation_type_name = "AWS::EC2::VPCEncryptionControl"
+}
+
 resource_schema "aws_ec2_vpc_endpoint" {
   cloudformation_type_name = "AWS::EC2::VPCEndpoint"
 }
@@ -2072,6 +2098,10 @@ resource_schema "aws_ec2_vpc_gateway_attachment" {
 
 resource_schema "aws_ec2_vpc_peering_connection" {
   cloudformation_type_name = "AWS::EC2::VPCPeeringConnection"
+}
+
+resource_schema "aws_ec2_vpn_concentrator" {
+  cloudformation_type_name = "AWS::EC2::VPNConcentrator"
 }
 
 resource_schema "aws_ec2_vpn_connection" {
@@ -2118,6 +2148,10 @@ resource_schema "aws_ecr_pull_through_cache_rule" {
   cloudformation_type_name = "AWS::ECR::PullThroughCacheRule"
 }
 
+resource_schema "aws_ecr_pull_time_update_exclusion" {
+  cloudformation_type_name = "AWS::ECR::PullTimeUpdateExclusion"
+}
+
 resource_schema "aws_ecr_registry_policy" {
   cloudformation_type_name = "AWS::ECR::RegistryPolicy"
 }
@@ -2138,6 +2172,10 @@ resource_schema "aws_ecr_repository_creation_template" {
   cloudformation_type_name = "AWS::ECR::RepositoryCreationTemplate"
 }
 
+resource_schema "aws_ecr_signing_configuration" {
+  cloudformation_type_name = "AWS::ECR::SigningConfiguration"
+}
+
 resource_schema "aws_ecs_capacity_provider" {
   cloudformation_type_name = "AWS::ECS::CapacityProvider"
 }
@@ -2148,6 +2186,11 @@ resource_schema "aws_ecs_cluster" {
 
 resource_schema "aws_ecs_cluster_capacity_provider_associations" {
   cloudformation_type_name = "AWS::ECS::ClusterCapacityProviderAssociations"
+}
+
+resource_schema "aws_ecs_express_gateway_service" {
+  cloudformation_type_name               = "AWS::ECS::ExpressGatewayService"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_ecs_primary_task_set" {
@@ -2552,6 +2595,10 @@ resource_schema "aws_glue_crawler" {
 
 resource_schema "aws_glue_database" {
   cloudformation_type_name = "AWS::Glue::Database"
+}
+
+resource_schema "aws_glue_integration" {
+  cloudformation_type_name = "AWS::Glue::Integration"
 }
 
 resource_schema "aws_glue_integration_resource_property" {
@@ -5471,6 +5518,19 @@ resource_schema "aws_vpclattice_access_log_subscription" {
 resource_schema "aws_vpclattice_auth_policy" {
   cloudformation_type_name               = "AWS::VpcLattice::AuthPolicy"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_vpclattice_domain_verification" {
+  cloudformation_type_name = "AWS::VpcLattice::DomainVerification"
+
+  # Suppression Reason:
+  # error generating Terraform resource import examples generation instructions: ../service/cloudformation/schemas/AWS_VpcLattice_DomainVerification.json: 
+  # emitting schema code: value overwrites Value for Terraform attribute value
+  # 
+  # Ref: https://github.com/hashicorp/terraform-provider-awscc/issues/2901
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_listener" {

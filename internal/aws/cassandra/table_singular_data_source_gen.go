@@ -839,6 +839,38 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "An array of key-value pairs to apply to this resource",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: WarmThroughput
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Warm throughput configuration for the table",
+		//	  "properties": {
+		//	    "ReadUnitsPerSecond": {
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "WriteUnitsPerSecond": {
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"warm_throughput": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ReadUnitsPerSecond
+				"read_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: WriteUnitsPerSecond
+				"write_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Warm throughput configuration for the table",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -881,6 +913,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"provisioned_throughput":         "ProvisionedThroughput",
 		"read_capacity_auto_scaling":     "ReadCapacityAutoScaling",
 		"read_capacity_units":            "ReadCapacityUnits",
+		"read_units_per_second":          "ReadUnitsPerSecond",
 		"region":                         "Region",
 		"regular_columns":                "RegularColumns",
 		"replica_specifications":         "ReplicaSpecifications",
@@ -894,8 +927,10 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"target_value":                "TargetValue",
 		"value":                       "Value",
 		"view_type":                   "ViewType",
+		"warm_throughput":             "WarmThroughput",
 		"write_capacity_auto_scaling": "WriteCapacityAutoScaling",
 		"write_capacity_units":        "WriteCapacityUnits",
+		"write_units_per_second":      "WriteUnitsPerSecond",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

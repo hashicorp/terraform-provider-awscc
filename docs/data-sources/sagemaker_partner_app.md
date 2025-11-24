@@ -21,11 +21,14 @@ Data Source schema for AWS::SageMaker::PartnerApp
 
 ### Read-Only
 
+- `app_version` (String) The version of the PartnerApp.
 - `application_config` (Attributes) A collection of settings that specify the maintenance schedule for the PartnerApp. (see [below for nested schema](#nestedatt--application_config))
 - `arn` (String) The Amazon Resource Name (ARN) of the created PartnerApp.
 - `auth_type` (String) The Auth type of PartnerApp.
 - `base_url` (String) The AppServerUrl based on app and account-info.
 - `client_token` (String) The client token for the PartnerApp.
+- `current_version_eol_date` (String) The end-of-life date for the current version of the PartnerApp.
+- `enable_auto_minor_version_upgrade` (Boolean) Enables automatic minor version upgrades for the PartnerApp.
 - `enable_iam_session_based_identity` (Boolean) Enables IAM Session based Identity for PartnerApp.
 - `execution_role_arn` (String) The execution role for the user.
 - `kms_key_id` (String) The AWS KMS customer managed key used to encrypt the data associated with the PartnerApp.

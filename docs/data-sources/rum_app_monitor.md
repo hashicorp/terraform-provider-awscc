@@ -29,6 +29,7 @@ Data Source schema for AWS::RUM::AppMonitor
 - `domain` (String) The top-level internet domain name for which your application has administrative authority. The CreateAppMonitor requires either the domain or the domain list.
 - `domain_list` (List of String) The top-level internet domain names for which your application has administrative authority. The CreateAppMonitor requires either the domain or the domain list.
 - `name` (String) A name for the app monitor
+- `platform` (String)
 - `resource_policy` (Attributes) A structure that defines resource policy attached to your app monitor. (see [below for nested schema](#nestedatt--resource_policy))
 - `tags` (Attributes Set) Assigns one or more tags (key-value pairs) to the app monitor. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters.You can associate as many as 50 tags with an app monitor. (see [below for nested schema](#nestedatt--tags))
 
@@ -113,11 +114,57 @@ WebVitalsFirstInputDelay
 
 WebVitalsLargestContentfulPaint
 
+WebVitalsInteractionToNextPaint
+
 JsErrorCount
 
 HttpErrorCount
 
 SessionCount
+
+PageViewCount
+
+Http4xxCount
+
+Http5xxCount
+
+SessionDuration
+
+PageViewCountPerSession
+
+JsErrorCountPerSession
+
+Http4xxCountPerSession
+
+Http5xxCountPerSession
+
+JsErrorCountPerPageView
+
+Http4xxCountPerPageView
+
+Http5xxCountPerPageView
+
+TimeOnPage
+
+ColdLaunchTime
+
+WarmLaunchTime
+
+CrashCount
+
+ANRCount
+
+AppHangCount
+
+ScreenLoadCount
+
+ScreenLoadTime
+
+NetworkLatency
+
+SpanPayloadSize
+
+LogEventPayloadSize
 - `namespace` (String) The namespace used by CloudWatch Metrics for the metric that is defined in this structure
 - `unit_label` (String) The CloudWatch metric unit to use for this metric. If you omit this field, the metric is recorded with no unit.
 - `value_key` (String) The field within the event object that the metric value is sourced from.

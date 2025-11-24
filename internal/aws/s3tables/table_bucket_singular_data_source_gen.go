@@ -60,6 +60,36 @@ func tableBucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Specifies encryption settings for the table bucket",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: MetricsConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Settings governing the Metric configuration for the table bucket.",
+		//	  "properties": {
+		//	    "Status": {
+		//	      "default": "Disabled",
+		//	      "description": "Indicates whether Metrics are enabled.",
+		//	      "enum": [
+		//	        "Enabled",
+		//	        "Disabled"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"metrics_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether Metrics are enabled.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings governing the Metric configuration for the table bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TableBucketARN
 		// CloudFormation resource type schema:
 		//
@@ -204,6 +234,7 @@ func tableBucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"encryption_configuration":  "EncryptionConfiguration",
 		"key":                       "Key",
 		"kms_key_arn":               "KMSKeyArn",
+		"metrics_configuration":     "MetricsConfiguration",
 		"noncurrent_days":           "NoncurrentDays",
 		"sse_algorithm":             "SSEAlgorithm",
 		"status":                    "Status",

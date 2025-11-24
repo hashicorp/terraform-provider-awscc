@@ -191,7 +191,7 @@
     "BillingGroupArn": {
       "description": "Billing Group ARN",
       "type": "string",
-      "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/?[0-9]{12}"
+      "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/?[a-zA-Z0-9]{10,12}"
     },
     "BillingPeriodRange": {
       "$ref": "#/definitions/BillingPeriodRange"

@@ -193,6 +193,22 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "The transit gateway attachment ID to use for the VPN tunnel.\n Required if ``OutsideIpAddressType`` is set to ``PrivateIpv4``.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: TunnelBandwidth
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "standard",
+		//	  "description": "",
+		//	  "enum": [
+		//	    "standard",
+		//	    "large"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"tunnel_bandwidth": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TunnelInsideIpVersion
 		// CloudFormation resource type schema:
 		//
@@ -213,6 +229,17 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The type of VPN connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: VpnConcentratorId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"vpn_concentrator_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpnConnectionId
@@ -294,6 +321,22 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	            "additionalProperties": false,
 		//	            "description": "Options for sending VPN tunnel logs to CloudWatch.",
 		//	            "properties": {
+		//	              "BgpLogEnabled": {
+		//	                "description": "",
+		//	                "type": "boolean"
+		//	              },
+		//	              "BgpLogGroupArn": {
+		//	                "description": "",
+		//	                "type": "string"
+		//	              },
+		//	              "BgpLogOutputFormat": {
+		//	                "description": "",
+		//	                "enum": [
+		//	                  "json",
+		//	                  "text"
+		//	                ],
+		//	                "type": "string"
+		//	              },
 		//	              "LogEnabled": {
 		//	                "description": "Enable or disable VPN tunnel logging feature. Default value is ``False``.\n Valid values: ``True`` | ``False``",
 		//	                "type": "boolean"
@@ -564,6 +607,21 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 							// Property: CloudwatchLogOptions
 							"cloudwatch_log_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: BgpLogEnabled
+									"bgp_log_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: BgpLogGroupArn
+									"bgp_log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: BgpLogOutputFormat
+									"bgp_log_output_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
 									// Property: LogEnabled
 									"log_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 										Description: "Enable or disable VPN tunnel logging feature. Default value is ``False``.\n Valid values: ``True`` | ``False``",
@@ -738,6 +796,9 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPNConnection").WithTerraformTypeName("awscc_ec2_vpn_connection")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"bgp_log_enabled":                         "BgpLogEnabled",
+		"bgp_log_group_arn":                       "BgpLogGroupArn",
+		"bgp_log_output_format":                   "BgpLogOutputFormat",
 		"cloudwatch_log_options":                  "CloudwatchLogOptions",
 		"customer_gateway_id":                     "CustomerGatewayId",
 		"dpd_timeout_action":                      "DPDTimeoutAction",
@@ -773,11 +834,13 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"tags":                                    "Tags",
 		"transit_gateway_id":                      "TransitGatewayId",
 		"transport_transit_gateway_attachment_id": "TransportTransitGatewayAttachmentId",
+		"tunnel_bandwidth":                        "TunnelBandwidth",
 		"tunnel_inside_cidr":                      "TunnelInsideCidr",
 		"tunnel_inside_ip_version":                "TunnelInsideIpVersion",
 		"tunnel_inside_ipv_6_cidr":                "TunnelInsideIpv6Cidr",
 		"type":                                    "Type",
 		"value":                                   "Value",
+		"vpn_concentrator_id":                     "VpnConcentratorId",
 		"vpn_connection_id":                       "VpnConnectionId",
 		"vpn_gateway_id":                          "VpnGatewayId",
 		"vpn_tunnel_options_specifications":       "VpnTunnelOptionsSpecifications",

@@ -314,6 +314,7 @@ Optional:
 - `opensearch_serverless_configuration` (Attributes) Contains the storage configuration of the knowledge base in Amazon OpenSearch Service. (see [below for nested schema](#nestedatt--storage_configuration--opensearch_serverless_configuration))
 - `pinecone_configuration` (Attributes) Contains the storage configuration of the knowledge base in Pinecone. (see [below for nested schema](#nestedatt--storage_configuration--pinecone_configuration))
 - `rds_configuration` (Attributes) Contains details about the storage configuration of the knowledge base in Amazon RDS. For more information, see Create a vector index in Amazon RDS. (see [below for nested schema](#nestedatt--storage_configuration--rds_configuration))
+- `s3_vectors_configuration` (Attributes) Contains the storage configuration of the knowledge base for S3 vectors. (see [below for nested schema](#nestedatt--storage_configuration--s3_vectors_configuration))
 - `type` (String) The storage type of a knowledge base.
 
 <a id="nestedatt--storage_configuration--mongo_db_atlas_configuration"></a>
@@ -441,6 +442,17 @@ Optional:
 - `primary_key_field` (String) The name of the field in which Amazon Bedrock stores the ID for each entry.
 - `text_field` (String) The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
 - `vector_field` (String) The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
+
+
+
+<a id="nestedatt--storage_configuration--s3_vectors_configuration"></a>
+### Nested Schema for `storage_configuration.s3_vectors_configuration`
+
+Optional:
+
+- `index_arn` (String) The Amazon Resource Name (ARN) of the vector index used for the knowledge base. This ARN identifies the specific vector index resource within Amazon Bedrock.
+- `index_name` (String) The name of the vector index used for the knowledge base. This name identifies the vector index within the Amazon Bedrock service.
+- `vector_bucket_arn` (String) The Amazon Resource Name (ARN) of the S3 bucket where vector embeddings are stored. This bucket contains the vector data used by the knowledge base.
 
 ## Import
 

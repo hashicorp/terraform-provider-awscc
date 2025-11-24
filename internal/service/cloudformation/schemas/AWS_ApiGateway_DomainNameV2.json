@@ -44,6 +44,9 @@
     "SecurityPolicy": {
       "type": "string"
     },
+    "EndpointAccessMode": {
+      "type": "string"
+    },
     "Policy": {
       "type": [
         "object",

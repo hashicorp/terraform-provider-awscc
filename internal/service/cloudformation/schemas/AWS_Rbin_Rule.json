@@ -135,7 +135,8 @@
       "type": "string",
       "enum": [
         "EBS_SNAPSHOT",
-        "EC2_IMAGE"
+        "EC2_IMAGE",
+        "EBS_VOLUME"
       ]
     },
     "Tags": {

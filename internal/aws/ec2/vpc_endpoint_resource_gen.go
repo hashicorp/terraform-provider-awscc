@@ -8,6 +8,7 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -95,6 +96,27 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	        "NotSpecified"
 		//	      ],
 		//	      "type": "string"
+		//	    },
+		//	    "PrivateDnsPreference": {
+		//	      "description": "",
+		//	      "enum": [
+		//	        "VERIFIED_DOMAINS_ONLY",
+		//	        "ALL_DOMAINS",
+		//	        "VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS",
+		//	        "SPECIFIED_DOMAINS_ONLY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "PrivateDnsSpecifiedDomains": {
+		//	      "description": "",
+		//	      "items": {
+		//	        "maxLength": 255,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -133,6 +155,41 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PrivateDnsPreference
+				"private_dns_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"VERIFIED_DOMAINS_ONLY",
+							"ALL_DOMAINS",
+							"VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS",
+							"SPECIFIED_DOMAINS_ONLY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PrivateDnsSpecifiedDomains
+				"private_dns_specified_domains": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+						listvalidator.ValueStringsAre(
+							stringvalidator.LengthBetween(1, 255),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+						listplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -526,6 +583,8 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"policy_document":       "PolicyDocument",
 		"private_dns_enabled":   "PrivateDnsEnabled",
 		"private_dns_only_for_inbound_resolver_endpoint": "PrivateDnsOnlyForInboundResolverEndpoint",
+		"private_dns_preference":                         "PrivateDnsPreference",
+		"private_dns_specified_domains":                  "PrivateDnsSpecifiedDomains",
 		"resource_configuration_arn":                     "ResourceConfigurationArn",
 		"route_table_ids":                                "RouteTableIds",
 		"security_group_ids":                             "SecurityGroupIds",

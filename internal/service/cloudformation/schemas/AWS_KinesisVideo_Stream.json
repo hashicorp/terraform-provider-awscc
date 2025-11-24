@@ -25,6 +25,22 @@
         "Value"
       ],
       "additionalProperties": false
+    },
+    "StreamStorageConfiguration": {
+      "description": "Configuration for the storage tier of the Kinesis Video Stream.",
+      "type": "object",
+      "properties": {
+        "DefaultStorageTier": {
+          "type": "string",
+          "description": "The storage tier for the Kinesis Video Stream. Determines the storage class used for stream data.",
+          "enum": [
+            "HOT",
+            "WARM"
+          ],
+          "default": "HOT"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -76,6 +92,10 @@
       },
       "minItems": 1,
       "maxItems": 50
+    },
+    "StreamStorageConfiguration": {
+      "description": "Configuration for the storage tier of the Kinesis Video Stream.",
+      "$ref": "#/definitions/StreamStorageConfiguration"
     }
   },
   "additionalProperties": false,
@@ -111,7 +131,8 @@
     "read": {
       "permissions": [
         "kinesisvideo:DescribeStream",
-        "kinesisvideo:ListTagsForStream"
+        "kinesisvideo:ListTagsForStream",
+        "kinesisvideo:DescribeStreamStorageConfiguration"
       ]
     },
     "update": {

@@ -180,6 +180,10 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "array",
 		//	      "uniqueItems": true
 		//	    },
+		//	    "IntegrationTarget": {
+		//	      "description": "",
+		//	      "type": "string"
+		//	    },
 		//	    "PassthroughBehavior": {
 		//	      "description": "",
 		//	      "enum": [
@@ -208,6 +212,15 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        }
 		//	      },
 		//	      "type": "object"
+		//	    },
+		//	    "ResponseTransferMode": {
+		//	      "default": "BUFFERED",
+		//	      "description": "",
+		//	      "enum": [
+		//	        "BUFFERED",
+		//	        "STREAM"
+		//	      ],
+		//	      "type": "string"
 		//	    },
 		//	    "TimeoutInMillis": {
 		//	      "description": "",
@@ -311,6 +324,11 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: IntegrationTarget
+				"integration_target": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: PassthroughBehavior
 				"passthrough_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "",
@@ -327,6 +345,11 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 				"request_templates": // Pattern: ""
 				schema.MapAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResponseTransferMode
+				"response_transfer_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -531,6 +554,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"integration":             "Integration",
 		"integration_http_method": "IntegrationHttpMethod",
 		"integration_responses":   "IntegrationResponses",
+		"integration_target":      "IntegrationTarget",
 		"method_responses":        "MethodResponses",
 		"operation_name":          "OperationName",
 		"passthrough_behavior":    "PassthroughBehavior",
@@ -542,6 +566,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"response_models":         "ResponseModels",
 		"response_parameters":     "ResponseParameters",
 		"response_templates":      "ResponseTemplates",
+		"response_transfer_mode":  "ResponseTransferMode",
 		"rest_api_id":             "RestApiId",
 		"selection_pattern":       "SelectionPattern",
 		"status_code":             "StatusCode",

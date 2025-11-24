@@ -766,6 +766,34 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Rebalancing
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Status": {
+		//	      "enum": [
+		//	        "PAUSED",
+		//	        "ACTIVE"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Status"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"rebalancing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: StorageMode
 		// CloudFormation resource type schema:
 		//
@@ -855,11 +883,13 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"prometheus":                     "Prometheus",
 		"provisioned_throughput":         "ProvisionedThroughput",
 		"public_access":                  "PublicAccess",
+		"rebalancing":                    "Rebalancing",
 		"revision":                       "Revision",
 		"s3":                             "S3",
 		"sasl":                           "Sasl",
 		"scram":                          "Scram",
 		"security_groups":                "SecurityGroups",
+		"status":                         "Status",
 		"storage_info":                   "StorageInfo",
 		"storage_mode":                   "StorageMode",
 		"tags":                           "Tags",

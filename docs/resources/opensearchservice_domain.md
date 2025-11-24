@@ -20,6 +20,7 @@ An example resource schema demonstrating some basic constructs and validation ru
 - `access_policies` (String)
 - `advanced_options` (Map of String)
 - `advanced_security_options` (Attributes) (see [below for nested schema](#nestedatt--advanced_security_options))
+- `aiml_options` (Attributes) (see [below for nested schema](#nestedatt--aiml_options))
 - `cluster_config` (Attributes) (see [below for nested schema](#nestedatt--cluster_config))
 - `cognito_options` (Attributes) (see [below for nested schema](#nestedatt--cognito_options))
 - `domain_endpoint_options` (Attributes) (see [below for nested schema](#nestedatt--domain_endpoint_options))
@@ -118,6 +119,22 @@ Optional:
 - `entity_id` (String)
 - `metadata_content` (String)
 
+
+
+
+<a id="nestedatt--aiml_options"></a>
+### Nested Schema for `aiml_options`
+
+Optional:
+
+- `s3_vectors_engine` (Attributes) (see [below for nested schema](#nestedatt--aiml_options--s3_vectors_engine))
+
+<a id="nestedatt--aiml_options--s3_vectors_engine"></a>
+### Nested Schema for `aiml_options.s3_vectors_engine`
+
+Optional:
+
+- `enabled` (Boolean) Whether to enable S3 vectors engine.
 
 
 

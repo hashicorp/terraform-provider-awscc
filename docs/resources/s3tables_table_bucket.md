@@ -43,6 +43,7 @@ resource "awscc_s3tables_table_bucket" "example" {
 ### Optional
 
 - `encryption_configuration` (Attributes) Specifies encryption settings for the table bucket (see [below for nested schema](#nestedatt--encryption_configuration))
+- `metrics_configuration` (Attributes) Settings governing the Metric configuration for the table bucket. (see [below for nested schema](#nestedatt--metrics_configuration))
 - `tags` (Attributes Set) User tags (key-value pairs) to associate with the table bucket. (see [below for nested schema](#nestedatt--tags))
 - `unreferenced_file_removal` (Attributes) Settings governing the Unreferenced File Removal maintenance action. Unreferenced file removal identifies and deletes all objects that are not referenced by any table snapshots. (see [below for nested schema](#nestedatt--unreferenced_file_removal))
 
@@ -58,6 +59,14 @@ Optional:
 
 - `kms_key_arn` (String) ARN of the KMS key to use for encryption
 - `sse_algorithm` (String) Server-side encryption algorithm
+
+
+<a id="nestedatt--metrics_configuration"></a>
+### Nested Schema for `metrics_configuration`
+
+Optional:
+
+- `status` (String) Indicates whether Metrics are enabled.
 
 
 <a id="nestedatt--tags"></a>

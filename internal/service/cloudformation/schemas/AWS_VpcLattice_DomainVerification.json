@@ -1,0 +1,158 @@
+{
+  "typeName": "AWS::VpcLattice::DomainVerification",
+  "description": "Creates a Lattice Domain Verification",
+  "additionalProperties": false,
+  "definitions": {
+    "TxtMethodConfig": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key"
+      ]
+    }
+  },
+  "properties": {
+    "DomainName": {
+      "type": "string",
+      "maxLength": 255,
+      "minLength": 3
+    },
+    "Id": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 20,
+      "pattern": "^((dv-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:domainverification/dv-[0-9a-z]{17}))$"
+    },
+    "Arn": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 20,
+      "pattern": "^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:domainverification/dv-[0-9a-z]{17}$"
+    },
+    "Status": {
+      "type": "string",
+      "enum": [
+        "VERIFIED",
+        "PENDING",
+        "VERIFICATION_TIMED_OUT"
+      ]
+    },
+    "TxtMethodConfig": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "Tags": {
+      "type": "array",
+      "insertionOrder": false,
+      "uniqueItems": true,
+      "minItems": 0,
+      "maxItems": 50,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "required": [
+    "DomainName"
+  ],
+  "readOnlyProperties": [
+    "/properties/TxtMethodConfig",
+    "/properties/Status",
+    "/properties/Id",
+    "/properties/Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/DomainName"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Id"
+    ],
+    [
+      "/properties/DomainName"
+    ]
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "vpc-lattice:StartDomainVerification",
+        "vpc-lattice:GetDomainVerification",
+        "vpc-lattice:TagResource",
+        "vpc-lattice:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "vpc-lattice:GetDomainVerification",
+        "vpc-lattice:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "vpc-lattice:StartDomainVerification",
+        "vpc-lattice:GetDomainVerification",
+        "vpc-lattice:TagResource",
+        "vpc-lattice:UntagResource",
+        "vpc-lattice:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "vpc-lattice:DeleteDomainVerification",
+        "vpc-lattice:GetDomainVerification",
+        "vpc-lattice:UntagResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "vpc-lattice:ListDomainVerifications"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "vpc-lattice:UntagResource",
+      "vpc-lattice:TagResource",
+      "vpc-lattice:ListTagsForResource"
+    ]
+  }
+}

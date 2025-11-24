@@ -470,6 +470,61 @@ func imageRecipeResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: LatestVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The latest version references of the image recipe.",
+		//	  "properties": {
+		//	    "Arn": {
+		//	      "description": "The latest version ARN of the created image recipe.",
+		//	      "type": "string"
+		//	    },
+		//	    "Major": {
+		//	      "description": "The latest version ARN of the created image recipe, with the same major version.",
+		//	      "type": "string"
+		//	    },
+		//	    "Minor": {
+		//	      "description": "The latest version ARN of the created image recipe, with the same minor version.",
+		//	      "type": "string"
+		//	    },
+		//	    "Patch": {
+		//	      "description": "The latest version ARN of the created image recipe, with the same patch version.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"latest_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Arn
+				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created image recipe.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Major
+				"major": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created image recipe, with the same major version.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Minor
+				"minor": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created image recipe, with the same minor version.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Patch
+				"patch": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created image recipe, with the same patch version.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The latest version references of the image recipe.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -593,10 +648,14 @@ func imageRecipeResource(ctx context.Context) (resource.Resource, error) {
 		"encrypted":                         "Encrypted",
 		"iops":                              "Iops",
 		"kms_key_id":                        "KmsKeyId",
+		"latest_version":                    "LatestVersion",
+		"major":                             "Major",
+		"minor":                             "Minor",
 		"name":                              "Name",
 		"no_device":                         "NoDevice",
 		"parameters":                        "Parameters",
 		"parent_image":                      "ParentImage",
+		"patch":                             "Patch",
 		"snapshot_id":                       "SnapshotId",
 		"systems_manager_agent":             "SystemsManagerAgent",
 		"tags":                              "Tags",

@@ -1,0 +1,134 @@
+{
+  "typeName": "AWS::Cognito::Terms",
+  "description": "Resource Type definition for AWS::Cognito::Terms",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "definitions": {
+    "TermsIdType": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[4][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
+    },
+    "TermsNameType": {
+      "type": "string",
+      "pattern": "^(terms-of-use|privacy-policy)$"
+    },
+    "TermsSourceType": {
+      "type": "string",
+      "enum": [
+        "LINK"
+      ]
+    },
+    "TermsEnforcementType": {
+      "type": "string",
+      "enum": [
+        "NONE"
+      ]
+    },
+    "LinksType": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$",
+          "minLength": 1,
+          "maxLength": 1024
+        }
+      },
+      "minProperties": 1,
+      "maxProperties": 12,
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "UserPoolId": {
+      "type": "string"
+    },
+    "ClientId": {
+      "type": "string"
+    },
+    "TermsId": {
+      "$ref": "#/definitions/TermsIdType"
+    },
+    "TermsName": {
+      "$ref": "#/definitions/TermsNameType"
+    },
+    "TermsSource": {
+      "$ref": "#/definitions/TermsSourceType"
+    },
+    "Enforcement": {
+      "$ref": "#/definitions/TermsEnforcementType"
+    },
+    "Links": {
+      "$ref": "#/definitions/LinksType"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "UserPoolId",
+    "TermsName",
+    "TermsSource",
+    "Enforcement",
+    "Links"
+  ],
+  "createOnlyProperties": [
+    "/properties/UserPoolId",
+    "/properties/ClientId"
+  ],
+  "readOnlyProperties": [
+    "/properties/TermsId"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ClientId"
+  ],
+  "primaryIdentifier": [
+    "/properties/UserPoolId",
+    "/properties/TermsId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cognito-idp:CreateTerms"
+      ],
+      "timeoutInMinutes": 2
+    },
+    "read": {
+      "permissions": [
+        "cognito-idp:DescribeTerms"
+      ],
+      "timeoutInMinutes": 2
+    },
+    "update": {
+      "permissions": [
+        "cognito-idp:UpdateTerms"
+      ],
+      "timeoutInMinutes": 2
+    },
+    "delete": {
+      "permissions": [
+        "cognito-idp:DeleteTerms"
+      ],
+      "timeoutInMinutes": 2
+    },
+    "list": {
+      "permissions": [
+        "cognito-idp:ListTerms"
+      ],
+      "timeoutInMinutes": 2,
+      "handlerSchema": {
+        "properties": {
+          "UserPoolId": {
+            "$ref": "resource-schema.json#/properties/UserPoolId"
+          }
+        },
+        "required": [
+          "UserPoolId"
+        ]
+      }
+    }
+  }
+}

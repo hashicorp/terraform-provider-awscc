@@ -904,6 +904,11 @@
         "identifier": ["Id"]
     },
     {
+        "resource": "awscc_cloudfront_connection_function",
+        "generateListResource": true,
+        "identifier": ["Id"]
+    },
+    {
         "resource": "awscc_cloudfront_connection_group",
         "generateListResource": true,
         "identifier": ["Id"]
@@ -964,6 +969,11 @@
     },
     {
         "resource": "awscc_cloudfront_response_headers_policy",
+        "generateListResource": true,
+        "identifier": ["Id"]
+    },
+    {
+        "resource": "awscc_cloudfront_trust_store",
         "generateListResource": true,
         "identifier": ["Id"]
     },
@@ -1114,6 +1124,10 @@
     {
         "resource": "awscc_cognito_managed_login_branding",
         "identifier": ["UserPoolId","ManagedLoginBrandingId"]
+    },
+    {
+        "resource": "awscc_cognito_terms",
+        "identifier": ["UserPoolId","TermsId"]
     },
     {
         "resource": "awscc_cognito_user_pool_client",
@@ -1982,6 +1996,15 @@
         "identifier": ["TransitGatewayConnectPeerId"]
     },
     {
+        "resource": "awscc_ec2_transit_gateway_metering_policy",
+        "generateListResource": true,
+        "identifier": ["TransitGatewayMeteringPolicyId"]
+    },
+    {
+        "resource": "awscc_ec2_transit_gateway_metering_policy_entry",
+        "identifier": ["TransitGatewayMeteringPolicyId","PolicyRuleNumber"]
+    },
+    {
         "resource": "awscc_ec2_transit_gateway_multicast_domain",
         "generateListResource": true,
         "identifier": ["TransitGatewayMulticastDomainId"]
@@ -2052,6 +2075,11 @@
         "identifier": ["DhcpOptionsId","VpcId"]
     },
     {
+        "resource": "awscc_ec2_vpc_encryption_control",
+        "generateListResource": true,
+        "identifier": ["VpcEncryptionControlId"]
+    },
+    {
         "resource": "awscc_ec2_vpc_endpoint",
         "generateListResource": true,
         "identifier": ["Id"]
@@ -2080,6 +2108,11 @@
         "resource": "awscc_ec2_vpc_peering_connection",
         "generateListResource": true,
         "identifier": ["Id"]
+    },
+    {
+        "resource": "awscc_ec2_vpn_concentrator",
+        "generateListResource": true,
+        "identifier": ["VpnConcentratorId"]
     },
     {
         "resource": "awscc_ec2_vpn_connection",
@@ -2137,6 +2170,11 @@
         "identifier": ["EcrRepositoryPrefix"]
     },
     {
+        "resource": "awscc_ecr_pull_time_update_exclusion",
+        "generateListResource": true,
+        "identifier": ["PrincipalArn"]
+    },
+    {
         "resource": "awscc_ecr_registry_policy",
         "generateListResource": true,
         "identifier": ["RegistryId"]
@@ -2162,6 +2200,11 @@
         "identifier": ["Prefix"]
     },
     {
+        "resource": "awscc_ecr_signing_configuration",
+        "generateListResource": true,
+        "identifier": ["RegistryId"]
+    },
+    {
         "resource": "awscc_ecs_capacity_provider",
         "generateListResource": true,
         "identifier": ["Name"]
@@ -2175,6 +2218,10 @@
         "resource": "awscc_ecs_cluster_capacity_provider_associations",
         "generateListResource": true,
         "identifier": ["Cluster"]
+    },
+    {
+        "resource": "awscc_ecs_express_gateway_service",
+        "identifier": ["ServiceArn"]
     },
     {
         "resource": "awscc_ecs_primary_task_set",
@@ -2621,6 +2668,11 @@
         "resource": "awscc_glue_database",
         "generateListResource": true,
         "identifier": ["DatabaseName"]
+    },
+    {
+        "resource": "awscc_glue_integration",
+        "generateListResource": true,
+        "identifier": ["IntegrationArn","IntegrationName"]
     },
     {
         "resource": "awscc_glue_integration_resource_property",

@@ -22,6 +22,33 @@
         "Key",
         "Value"
       ]
+    },
+    "DnsOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "PrivateDnsPreference": {
+          "type": "string",
+          "enum": [
+            "VERIFIED_DOMAINS_ONLY",
+            "ALL_DOMAINS",
+            "VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS",
+            "SPECIFIED_DOMAINS_ONLY"
+          ]
+        },
+        "PrivateDnsSpecifiedDomains": {
+          "type": "array",
+          "insertionOrder": false,
+          "uniqueItems": true,
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          }
+        }
+      }
     }
   },
   "properties": {
@@ -107,6 +134,12 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "PrivateDnsEnabled": {
+      "type": "boolean"
+    },
+    "DnsOptions": {
+      "$ref": "#/definitions/DnsOptions"
     }
   },
   "readOnlyProperties": [
@@ -125,7 +158,11 @@
   ],
   "createOnlyProperties": [
     "/properties/ServiceNetworkIdentifier",
-    "/properties/VpcIdentifier"
+    "/properties/VpcIdentifier",
+    "/properties/PrivateDnsEnabled",
+    "/properties/DnsOptions",
+    "/properties/DnsOptions/PrivateDnsPreference",
+    "/properties/DnsOptions/PrivateDnsSpecifiedDomains"
   ],
   "primaryIdentifier": [
     "/properties/Arn"

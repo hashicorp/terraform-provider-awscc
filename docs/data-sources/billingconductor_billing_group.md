@@ -41,6 +41,7 @@ Read-Only:
 
 - `auto_associate` (Boolean)
 - `linked_account_ids` (Set of String)
+- `responsibility_transfer_arn` (String)
 
 
 <a id="nestedatt--computation_preference"></a>

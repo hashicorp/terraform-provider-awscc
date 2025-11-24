@@ -1,0 +1,1 @@
+$ terraform import awscc_glue_integration.example "integration_arn|integration_name"

@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -218,6 +219,19 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "InfrastructureOptimization": {
+		//	      "additionalProperties": false,
+		//	      "description": "Defines how Amazon ECS Managed Instances optimizes the infrastructure in your capacity provider. Configure it to turn on or off the infrastructure optimization in your capacity provider, and to control the idle EC2 instances optimization delay.",
+		//	      "properties": {
+		//	        "ScaleInAfter": {
+		//	          "description": "This parameter defines the number of seconds Amazon ECS Managed Instances waits before optimizing EC2 instances that have become idle or underutilized. A longer delay increases the likelihood of placing new tasks on idle instances, reducing startup time. A shorter delay helps reduce infrastructure costs by optimizing idle instances more quickly. Valid values are: Not set (null) - Uses the default optimization behavior, `-1` - Disables automatic infrastructure optimization, `0` to `3600` (inclusive) - Specifies the number of seconds to wait before optimizing instances.",
+		//	          "maximum": 3600,
+		//	          "minimum": -1,
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "InfrastructureRoleArn": {
 		//	      "type": "string"
 		//	    },
@@ -552,6 +566,29 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"managed_instances_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InfrastructureOptimization
+				"infrastructure_optimization": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ScaleInAfter
+						"scale_in_after": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "This parameter defines the number of seconds Amazon ECS Managed Instances waits before optimizing EC2 instances that have become idle or underutilized. A longer delay increases the likelihood of placing new tasks on idle instances, reducing startup time. A shorter delay helps reduce infrastructure costs by optimizing idle instances more quickly. Valid values are: Not set (null) - Uses the default optimization behavior, `-1` - Disables automatic infrastructure optimization, `0` to `3600` (inclusive) - Specifies the number of seconds to wait before optimizing instances.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(-1, 3600),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Defines how Amazon ECS Managed Instances optimizes the infrastructure in your capacity provider. Configure it to turn on or off the infrastructure optimization in your capacity provider, and to control the idle EC2 instances optimization delay.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: InfrastructureRoleArn
 				"infrastructure_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
@@ -1268,6 +1305,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		"cpu_manufacturers":              "CpuManufacturers",
 		"ec_2_instance_profile_arn":      "Ec2InstanceProfileArn",
 		"excluded_instance_types":        "ExcludedInstanceTypes",
+		"infrastructure_optimization":    "InfrastructureOptimization",
 		"infrastructure_role_arn":        "InfrastructureRoleArn",
 		"instance_generations":           "InstanceGenerations",
 		"instance_launch_template":       "InstanceLaunchTemplate",
@@ -1295,6 +1333,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		"on_demand_max_price_percentage_over_lowest_price": "OnDemandMaxPricePercentageOverLowestPrice",
 		"propagate_tags":                              "PropagateTags",
 		"require_hibernate_support":                   "RequireHibernateSupport",
+		"scale_in_after":                              "ScaleInAfter",
 		"security_groups":                             "SecurityGroups",
 		"spot_max_price_percentage_over_lowest_price": "SpotMaxPricePercentageOverLowestPrice",
 		"status":                 "Status",

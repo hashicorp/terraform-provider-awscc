@@ -100,6 +100,7 @@ resource "awscc_elasticloadbalancingv2_target_group" "alb-example" {
 - `protocol` (String) The protocol to use for routing traffic to the targets.
 - `protocol_version` (String) [HTTP/HTTPS protocol] The protocol version. The possible values are GRPC, HTTP1, and HTTP2.
 - `tags` (Attributes List) The tags. (see [below for nested schema](#nestedatt--tags))
+- `target_control_port` (Number) The port that the target control agent uses to communicate the available capacity of targets to the load balancer.
 - `target_group_attributes` (Attributes Set) The attributes. (see [below for nested schema](#nestedatt--target_group_attributes))
 - `target_type` (String) The type of target that you must specify when registering targets with this target group. You can't specify targets for a target group using more than one target type.
 - `targets` (Attributes Set) The targets. (see [below for nested schema](#nestedatt--targets))

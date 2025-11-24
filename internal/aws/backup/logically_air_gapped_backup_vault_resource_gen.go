@@ -104,9 +104,11 @@ func logicallyAirGappedBackupVaultResource(ctx context.Context) (resource.Resour
 		//	  "type": "string"
 		//	}
 		"encryption_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: MaxRetentionDays

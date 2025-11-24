@@ -21,12 +21,23 @@ Data Source schema for AWS::SecretsManager::RotationSchedule
 
 ### Read-Only
 
+- `external_secret_rotation_metadata` (Attributes List) The list of metadata needed to successfully rotate a managed external secret. (see [below for nested schema](#nestedatt--external_secret_rotation_metadata))
+- `external_secret_rotation_role_arn` (String) The ARN of the IAM role that is used by Secrets Manager to rotate a managed external secret.
 - `hosted_rotation_lambda` (Attributes) Creates a new Lambda rotation function based on one of the Secrets Manager rotation function templates. To use a rotation function that already exists, specify RotationLambdaARN instead. (see [below for nested schema](#nestedatt--hosted_rotation_lambda))
 - `rotate_immediately_on_update` (Boolean) Specifies whether to rotate the secret immediately or wait until the next scheduled rotation window.
 - `rotation_lambda_arn` (String) The ARN of an existing Lambda rotation function. To specify a rotation function that is also defined in this template, use the Ref function.
 - `rotation_rules` (Attributes) A structure that defines the rotation configuration for this secret. (see [below for nested schema](#nestedatt--rotation_rules))
 - `rotation_schedule_id` (String) The ARN of the secret.
 - `secret_id` (String) The ARN or name of the secret to rotate.
+
+<a id="nestedatt--external_secret_rotation_metadata"></a>
+### Nested Schema for `external_secret_rotation_metadata`
+
+Read-Only:
+
+- `key` (String) The key name of the metadata item. You can specify a value that's 1 to 256 characters in length.
+- `value` (String) The value for the metadata item. You can specify a value that's 1 to 2048 characters in length.
+
 
 <a id="nestedatt--hosted_rotation_lambda"></a>
 ### Nested Schema for `hosted_rotation_lambda`

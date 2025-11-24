@@ -53,11 +53,12 @@ func billingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      "minItems": 1,
 		//	      "type": "array",
 		//	      "uniqueItems": true
+		//	    },
+		//	    "ResponsibilityTransferArn": {
+		//	      "pattern": "arn:[a-z0-9][a-z0-9-.]{0,62}:organizations::[0-9]{12}:transfer/o-[a-z0-9]{10,32}/(billing)/(inbound|outbound)/rt-[0-9a-z]{8,32}",
+		//	      "type": "string"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "LinkedAccountIds"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"account_grouping": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -73,13 +74,28 @@ func billingGroupResource(ctx context.Context) (resource.Resource, error) {
 				// Property: LinkedAccountIds
 				"linked_account_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.Set{ /*START VALIDATORS*/
 						setvalidator.SizeAtLeast(1),
 						setvalidator.ValueStringsAre(
 							stringvalidator.RegexMatches(regexp.MustCompile("[0-9]{12}"), ""),
 						),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ResponsibilityTransferArn
+				"responsibility_transfer_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.RegexMatches(regexp.MustCompile("arn:[a-z0-9][a-z0-9-.]{0,62}:organizations::[0-9]{12}:transfer/o-[a-z0-9]{10,32}/(billing)/(inbound|outbound)/rt-[0-9a-z]{8,32}"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Required: true,
@@ -89,7 +105,7 @@ func billingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Billing Group ARN",
-		//	  "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/?[0-9]{12}",
+		//	  "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/?[a-zA-Z0-9]{10,12}",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -200,12 +216,14 @@ func billingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"primary_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "This account will act as a virtual payer account of the billing group",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.RegexMatches(regexp.MustCompile("[0-9]{12}"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Size
@@ -343,23 +361,24 @@ func billingGroupResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.IsGlobalResourceType(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_grouping":       "AccountGrouping",
-		"arn":                    "Arn",
-		"auto_associate":         "AutoAssociate",
-		"computation_preference": "ComputationPreference",
-		"creation_time":          "CreationTime",
-		"description":            "Description",
-		"key":                    "Key",
-		"last_modified_time":     "LastModifiedTime",
-		"linked_account_ids":     "LinkedAccountIds",
-		"name":                   "Name",
-		"pricing_plan_arn":       "PricingPlanArn",
-		"primary_account_id":     "PrimaryAccountId",
-		"size":                   "Size",
-		"status":                 "Status",
-		"status_reason":          "StatusReason",
-		"tags":                   "Tags",
-		"value":                  "Value",
+		"account_grouping":            "AccountGrouping",
+		"arn":                         "Arn",
+		"auto_associate":              "AutoAssociate",
+		"computation_preference":      "ComputationPreference",
+		"creation_time":               "CreationTime",
+		"description":                 "Description",
+		"key":                         "Key",
+		"last_modified_time":          "LastModifiedTime",
+		"linked_account_ids":          "LinkedAccountIds",
+		"name":                        "Name",
+		"pricing_plan_arn":            "PricingPlanArn",
+		"primary_account_id":          "PrimaryAccountId",
+		"responsibility_transfer_arn": "ResponsibilityTransferArn",
+		"size":                        "Size",
+		"status":                      "Status",
+		"status_reason":               "StatusReason",
+		"tags":                        "Tags",
+		"value":                       "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

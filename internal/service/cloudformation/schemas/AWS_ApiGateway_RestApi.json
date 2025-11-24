@@ -213,6 +213,10 @@
       "description": "",
       "type": "string"
     },
+    "SecurityPolicy": {
+      "description": "",
+      "type": "string"
+    },
     "ApiKeySourceType": {
       "description": "",
       "type": "string"
@@ -235,6 +239,10 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "EndpointAccessMode": {
+      "description": "",
+      "type": "string"
     }
   }
 }

@@ -20,6 +20,7 @@
     "/properties/Type",
     "/properties/CustomerGatewayId",
     "/properties/VpnGatewayId",
+    "/properties/VpnConcentratorId",
     "/properties/TransitGatewayId",
     "/properties/EnableAcceleration",
     "/properties/LocalIpv4NetworkCidr",
@@ -31,6 +32,7 @@
     "/properties/TransportTransitGatewayAttachmentId",
     "/properties/TunnelInsideIpVersion",
     "/properties/PreSharedKeyStorage",
+    "/properties/TunnelBandwidth",
     "/properties/VpnTunnelOptionsSpecifications"
   ],
   "primaryIdentifier": [
@@ -83,6 +85,10 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
+        "BgpLogEnabled": {
+          "description": "",
+          "type": "boolean"
+        },
         "LogEnabled": {
           "description": "Enable or disable VPN tunnel logging feature. Default value is ``False``.\n Valid values: ``True`` | ``False``",
           "type": "boolean"
@@ -95,9 +101,21 @@
             "text"
           ]
         },
+        "BgpLogGroupArn": {
+          "description": "",
+          "type": "string"
+        },
         "LogGroupArn": {
           "description": "The Amazon Resource Name (ARN) of the CloudWatch log group to send logs to.",
           "type": "string"
+        },
+        "BgpLogOutputFormat": {
+          "description": "",
+          "type": "string",
+          "enum": [
+            "json",
+            "text"
+          ]
         }
       }
     },
@@ -450,12 +468,25 @@
       "description": "The type of VPN connection.",
       "type": "string"
     },
+    "TunnelBandwidth": {
+      "default": "standard",
+      "description": "",
+      "type": "string",
+      "enum": [
+        "standard",
+        "large"
+      ]
+    },
     "LocalIpv4NetworkCidr": {
       "description": "The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.\n Default: ``0.0.0.0/0``",
       "type": "string"
     },
     "VpnGatewayId": {
       "description": "The ID of the virtual private gateway at the AWS side of the VPN connection.\n You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.",
+      "type": "string"
+    },
+    "VpnConcentratorId": {
+      "description": "",
       "type": "string"
     },
     "PreSharedKeyStorage": {

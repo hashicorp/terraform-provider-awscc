@@ -48,9 +48,11 @@ Read-Only:
 - `bytes_scanned_cutoff_per_query` (Number) The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.
 - `customer_content_encryption_configuration` (Attributes) Indicates the KMS key for encrypting notebook content. (see [below for nested schema](#nestedatt--work_group_configuration--customer_content_encryption_configuration))
 - `enforce_work_group_configuration` (Boolean) If set to "true", the settings for the workgroup override client-side settings. If set to "false", client-side settings are used
+- `engine_configuration` (Attributes) The engine configuration for running queries. (see [below for nested schema](#nestedatt--work_group_configuration--engine_configuration))
 - `engine_version` (Attributes) The Athena engine version for running queries. (see [below for nested schema](#nestedatt--work_group_configuration--engine_version))
-- `execution_role` (String) Execution Role ARN required to run Athena Spark Calculations
+- `execution_role` (String) The ARN of the execution role used to access user resources for Spark sessions and Identity Center enabled workgroups. This property applies only to Spark enabled workgroups and Identity Center enabled workgroups.
 - `managed_query_results_configuration` (Attributes) The configuration for the managed query results and encryption option. ResultConfiguration and ManagedQueryResultsConfiguration cannot be set at the same time (see [below for nested schema](#nestedatt--work_group_configuration--managed_query_results_configuration))
+- `monitoring_configuration` (Attributes) Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets, Amazon CloudWatch log groups etc. (see [below for nested schema](#nestedatt--work_group_configuration--monitoring_configuration))
 - `publish_cloudwatch_metrics_enabled` (Boolean) Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.
 - `requester_pays_enabled` (Boolean) If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error.
 - `result_configuration` (Attributes) The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results. These are known as "client-side settings". If workgroup settings override client-side settings, then the query uses the workgroup settings. (see [below for nested schema](#nestedatt--work_group_configuration--result_configuration))
@@ -61,6 +63,28 @@ Read-Only:
 Read-Only:
 
 - `kms_key` (String) For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
+
+
+<a id="nestedatt--work_group_configuration--engine_configuration"></a>
+### Nested Schema for `work_group_configuration.engine_configuration`
+
+Read-Only:
+
+- `additional_configs` (Map of String) Contains additional notebook engine MAP<string, string> parameter mappings in the form of key-value pairs. To specify an Athena notebook that the Jupyter server will download and serve, specify a value for the StartSessionRequest$NotebookVersion field, and then add a key named NotebookId to AdditionalConfigs that has the value of the Athena notebook ID.
+- `classifications` (Attributes List) The configuration classifications that can be specified for the engine. (see [below for nested schema](#nestedatt--work_group_configuration--engine_configuration--classifications))
+- `coordinator_dpu_size` (Number) The number of DPUs to use for the coordinator. A coordinator is a special executor that orchestrates processing work and manages other executors in a notebook session. The default is 1.
+- `default_executor_dpu_size` (Number) The default number of DPUs to use for executors. An executor is the smallest unit of compute that a notebook session can request from Athena. The default is 1.
+- `max_concurrent_dpus` (Number) The maximum number of DPUs that can run concurrently.
+- `spark_properties` (Map of String) Specifies custom jar files and Spark properties for use cases like cluster encryption, table formats, and general Spark tuning.
+
+<a id="nestedatt--work_group_configuration--engine_configuration--classifications"></a>
+### Nested Schema for `work_group_configuration.engine_configuration.classifications`
+
+Read-Only:
+
+- `name` (String) The name of the configuration classification.
+- `properties` (Map of String) A set of properties specified within a configuration classification.
+
 
 
 <a id="nestedatt--work_group_configuration--engine_version"></a>
@@ -86,6 +110,46 @@ Read-Only:
 Read-Only:
 
 - `kms_key` (String) For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
+
+
+
+<a id="nestedatt--work_group_configuration--monitoring_configuration"></a>
+### Nested Schema for `work_group_configuration.monitoring_configuration`
+
+Read-Only:
+
+- `cloudwatch_logging_configuration` (Attributes) Configuration settings for delivering logs to Amazon CloudWatch log groups. (see [below for nested schema](#nestedatt--work_group_configuration--monitoring_configuration--cloudwatch_logging_configuration))
+- `managed_logging_configuration` (Attributes) Configuration settings for managed log persistence. (see [below for nested schema](#nestedatt--work_group_configuration--monitoring_configuration--managed_logging_configuration))
+- `s3_logging_configuration` (Attributes) Configuration settings for delivering logs to Amazon S3 buckets. (see [below for nested schema](#nestedatt--work_group_configuration--monitoring_configuration--s3_logging_configuration))
+
+<a id="nestedatt--work_group_configuration--monitoring_configuration--cloudwatch_logging_configuration"></a>
+### Nested Schema for `work_group_configuration.monitoring_configuration.cloudwatch_logging_configuration`
+
+Read-Only:
+
+- `enabled` (Boolean) Enables CloudWatch logging.
+- `log_group` (String) The name of the log group in Amazon CloudWatch Logs where you want to publish your logs.
+- `log_stream_name_prefix` (String) Prefix for the CloudWatch log stream name.
+- `log_types` (Map of List of String) The types of logs that you want to publish to CloudWatch.
+
+
+<a id="nestedatt--work_group_configuration--monitoring_configuration--managed_logging_configuration"></a>
+### Nested Schema for `work_group_configuration.monitoring_configuration.managed_logging_configuration`
+
+Read-Only:
+
+- `enabled` (Boolean) Enables managed log persistence.
+- `kms_key` (String) The KMS key ARN to encrypt the logs stored in managed log persistence.
+
+
+<a id="nestedatt--work_group_configuration--monitoring_configuration--s3_logging_configuration"></a>
+### Nested Schema for `work_group_configuration.monitoring_configuration.s3_logging_configuration`
+
+Read-Only:
+
+- `enabled` (Boolean) Enables S3 log delivery.
+- `kms_key` (String) The KMS key ARN to encrypt the logs published to the given Amazon S3 destination.
+- `log_location` (String) The Amazon S3 destination URI for log publishing.
 
 
 
@@ -127,9 +191,11 @@ Read-Only:
 - `bytes_scanned_cutoff_per_query` (Number) The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.
 - `customer_content_encryption_configuration` (Attributes) Indicates the KMS key for encrypting notebook content. (see [below for nested schema](#nestedatt--work_group_configuration_updates--customer_content_encryption_configuration))
 - `enforce_work_group_configuration` (Boolean) If set to "true", the settings for the workgroup override client-side settings. If set to "false", client-side settings are used
+- `engine_configuration` (Attributes) The engine configuration for running queries. (see [below for nested schema](#nestedatt--work_group_configuration_updates--engine_configuration))
 - `engine_version` (Attributes) The Athena engine version for running queries. (see [below for nested schema](#nestedatt--work_group_configuration_updates--engine_version))
-- `execution_role` (String) Execution Role ARN required to run Athena Spark Calculations
+- `execution_role` (String) The ARN of the execution role used to access user resources for Spark sessions and Identity Center enabled workgroups. This property applies only to Spark enabled workgroups and Identity Center enabled workgroups.
 - `managed_query_results_configuration` (Attributes) The configuration for the managed query results and encryption option. ResultConfiguration and ManagedQueryResultsConfiguration cannot be set at the same time (see [below for nested schema](#nestedatt--work_group_configuration_updates--managed_query_results_configuration))
+- `monitoring_configuration` (Attributes) Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets, Amazon CloudWatch log groups etc. (see [below for nested schema](#nestedatt--work_group_configuration_updates--monitoring_configuration))
 - `publish_cloudwatch_metrics_enabled` (Boolean) Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.
 - `remove_bytes_scanned_cutoff_per_query` (Boolean) Indicates that the data usage control limit per query is removed.
 - `remove_customer_content_encryption_configuration` (Boolean)
@@ -142,6 +208,28 @@ Read-Only:
 Read-Only:
 
 - `kms_key` (String) For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
+
+
+<a id="nestedatt--work_group_configuration_updates--engine_configuration"></a>
+### Nested Schema for `work_group_configuration_updates.engine_configuration`
+
+Read-Only:
+
+- `additional_configs` (Map of String) Contains additional notebook engine MAP<string, string> parameter mappings in the form of key-value pairs. To specify an Athena notebook that the Jupyter server will download and serve, specify a value for the StartSessionRequest$NotebookVersion field, and then add a key named NotebookId to AdditionalConfigs that has the value of the Athena notebook ID.
+- `classifications` (Attributes List) The configuration classifications that can be specified for the engine. (see [below for nested schema](#nestedatt--work_group_configuration_updates--engine_configuration--classifications))
+- `coordinator_dpu_size` (Number) The number of DPUs to use for the coordinator. A coordinator is a special executor that orchestrates processing work and manages other executors in a notebook session. The default is 1.
+- `default_executor_dpu_size` (Number) The default number of DPUs to use for executors. An executor is the smallest unit of compute that a notebook session can request from Athena. The default is 1.
+- `max_concurrent_dpus` (Number) The maximum number of DPUs that can run concurrently.
+- `spark_properties` (Map of String) Specifies custom jar files and Spark properties for use cases like cluster encryption, table formats, and general Spark tuning.
+
+<a id="nestedatt--work_group_configuration_updates--engine_configuration--classifications"></a>
+### Nested Schema for `work_group_configuration_updates.engine_configuration.classifications`
+
+Read-Only:
+
+- `name` (String) The name of the configuration classification.
+- `properties` (Map of String) A set of properties specified within a configuration classification.
+
 
 
 <a id="nestedatt--work_group_configuration_updates--engine_version"></a>
@@ -167,6 +255,46 @@ Read-Only:
 Read-Only:
 
 - `kms_key` (String) For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
+
+
+
+<a id="nestedatt--work_group_configuration_updates--monitoring_configuration"></a>
+### Nested Schema for `work_group_configuration_updates.monitoring_configuration`
+
+Read-Only:
+
+- `cloudwatch_logging_configuration` (Attributes) Configuration settings for delivering logs to Amazon CloudWatch log groups. (see [below for nested schema](#nestedatt--work_group_configuration_updates--monitoring_configuration--cloudwatch_logging_configuration))
+- `managed_logging_configuration` (Attributes) Configuration settings for managed log persistence. (see [below for nested schema](#nestedatt--work_group_configuration_updates--monitoring_configuration--managed_logging_configuration))
+- `s3_logging_configuration` (Attributes) Configuration settings for delivering logs to Amazon S3 buckets. (see [below for nested schema](#nestedatt--work_group_configuration_updates--monitoring_configuration--s3_logging_configuration))
+
+<a id="nestedatt--work_group_configuration_updates--monitoring_configuration--cloudwatch_logging_configuration"></a>
+### Nested Schema for `work_group_configuration_updates.monitoring_configuration.cloudwatch_logging_configuration`
+
+Read-Only:
+
+- `enabled` (Boolean) Enables CloudWatch logging.
+- `log_group` (String) The name of the log group in Amazon CloudWatch Logs where you want to publish your logs.
+- `log_stream_name_prefix` (String) Prefix for the CloudWatch log stream name.
+- `log_types` (Map of List of String) The types of logs that you want to publish to CloudWatch.
+
+
+<a id="nestedatt--work_group_configuration_updates--monitoring_configuration--managed_logging_configuration"></a>
+### Nested Schema for `work_group_configuration_updates.monitoring_configuration.managed_logging_configuration`
+
+Read-Only:
+
+- `enabled` (Boolean) Enables managed log persistence.
+- `kms_key` (String) The KMS key ARN to encrypt the logs stored in managed log persistence.
+
+
+<a id="nestedatt--work_group_configuration_updates--monitoring_configuration--s3_logging_configuration"></a>
+### Nested Schema for `work_group_configuration_updates.monitoring_configuration.s3_logging_configuration`
+
+Read-Only:
+
+- `enabled` (Boolean) Enables S3 log delivery.
+- `kms_key` (String) The KMS key ARN to encrypt the logs published to the given Amazon S3 destination.
+- `log_location` (String) The Amazon S3 destination URI for log publishing.
 
 
 

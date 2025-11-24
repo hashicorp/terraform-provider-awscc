@@ -279,6 +279,7 @@ data "aws_region" "current" {}
 ### Optional
 
 - `advanced_event_selectors` (Attributes Set) The advanced event selectors that were used to select events for the data store. (see [below for nested schema](#nestedatt--advanced_event_selectors))
+- `aggregation_configurations` (Attributes Set) Specifies the aggregation configuration to aggregate CloudTrail Events. A maximum of 1 aggregation configuration is allowed. (see [below for nested schema](#nestedatt--aggregation_configurations))
 - `cloudwatch_logs_log_group_arn` (String) Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn.
 - `cloudwatch_logs_role_arn` (String) Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.
 - `enable_log_file_validation` (Boolean) Specifies whether log file validation is enabled. The default is false.
@@ -322,6 +323,15 @@ Optional:
 
 
 
+<a id="nestedatt--aggregation_configurations"></a>
+### Nested Schema for `aggregation_configurations`
+
+Optional:
+
+- `event_category` (String) The category of events to be aggregated.
+- `templates` (Set of String) Contains all templates in an aggregation configuration.
+
+
 <a id="nestedatt--event_selectors"></a>
 ### Nested Schema for `event_selectors`
 
@@ -347,6 +357,7 @@ Optional:
 
 Optional:
 
+- `event_categories` (Set of String) The categories of events for which to log insights. By default, insights are logged for management events only.
 - `insight_type` (String) The type of insight to log on a trail.
 
 

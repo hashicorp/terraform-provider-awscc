@@ -246,17 +246,21 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "",
 		//	        "properties": {
 		//	          "AdditionalClaims": {
+		//	            "description": "",
 		//	            "items": {
 		//	              "additionalProperties": false,
 		//	              "description": "",
 		//	              "properties": {
 		//	                "Format": {
+		//	                  "description": "",
 		//	                  "type": "string"
 		//	                },
 		//	                "Name": {
+		//	                  "description": "",
 		//	                  "type": "string"
 		//	                },
 		//	                "Values": {
+		//	                  "description": "",
 		//	                  "items": {
 		//	                    "type": "string"
 		//	                  },
@@ -275,9 +279,11 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "Issuer": {
+		//	            "description": "",
 		//	            "type": "string"
 		//	          },
 		//	          "JwksEndpoint": {
+		//	            "description": "",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -696,8 +702,9 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Format
 										"format": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Description: "",
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -707,8 +714,9 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 										// Property: Name
 										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Description: "",
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -719,6 +727,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 										// Property: Values
 										"values": schema.ListAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
+											Description: "",
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.List{ /*START VALIDATORS*/
@@ -731,8 +740,9 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Optional: true,
-								Computed: true,
+								Description: "",
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.UniqueValues(),
 								}, /*END VALIDATORS*/
@@ -742,8 +752,9 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Issuer
 							"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Description: "",
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -753,8 +764,9 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: JwksEndpoint
 							"jwks_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Description: "",
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/

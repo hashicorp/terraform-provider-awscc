@@ -70,6 +70,9 @@
         "LOCAL",
         "TIERED"
       ]
+    },
+    "Rebalancing": {
+      "$ref": "#/definitions/Rebalancing"
     }
   },
   "definitions": {
@@ -286,6 +289,22 @@
       "required": [
         "ClientSubnets",
         "InstanceType"
+      ]
+    },
+    "Rebalancing": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Status": {
+          "type": "string",
+          "enum": [
+            "PAUSED",
+            "ACTIVE"
+          ]
+        }
+      },
+      "required": [
+        "Status"
       ]
     },
     "EncryptionAtRest": {
@@ -521,7 +540,8 @@
     "/properties/Arn"
   ],
   "readOnlyProperties": [
-    "/properties/Arn"
+    "/properties/Arn",
+    "/properties/CurrentVersion"
   ],
   "tagging": {
     "taggable": true,
@@ -575,6 +595,7 @@
         "kafka:UpdateStorage",
         "kafka:UpdateSecurity",
         "kafka:UpdateConnectivity",
+        "kafka:UpdateRebalancing",
         "kafka:DescribeCluster",
         "kafka:DescribeClusterOperation",
         "kafka:TagResource",
@@ -582,6 +603,7 @@
         "ec2:DescribeSubnets",
         "ec2:DescribeVpcs",
         "ec2:DescribeSecurityGroups",
+        "ec2:DescribeRouteTables",
         "iam:AttachRolePolicy",
         "iam:CreateServiceLinkedRole",
         "iam:PutRolePolicy",

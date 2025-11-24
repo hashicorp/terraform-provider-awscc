@@ -38,6 +38,9 @@ resource "awscc_vpclattice_resource_configuration" "example" {
 ### Optional
 
 - `allow_association_to_sharable_service_network` (Boolean)
+- `custom_domain_name` (String)
+- `domain_verification_id` (String)
+- `group_domain` (String)
 - `port_ranges` (List of String)
 - `protocol_type` (String)
 - `resource_configuration_auth_type` (String)

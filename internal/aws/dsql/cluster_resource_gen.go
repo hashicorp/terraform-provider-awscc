@@ -109,6 +109,20 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Endpoint
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The DSQL cluster endpoint.",
+		//	  "type": "string"
+		//	}
+		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The DSQL cluster endpoint.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Identifier
 		// CloudFormation resource type schema:
 		//
@@ -365,6 +379,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"encryption_details":          "EncryptionDetails",
 		"encryption_status":           "EncryptionStatus",
 		"encryption_type":             "EncryptionType",
+		"endpoint":                    "Endpoint",
 		"identifier":                  "Identifier",
 		"key":                         "Key",
 		"kms_encryption_key":          "KmsEncryptionKey",
