@@ -316,7 +316,8 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The resource type retained by the retention rule.",
 		//	  "enum": [
 		//	    "EBS_SNAPSHOT",
-		//	    "EC2_IMAGE"
+		//	    "EC2_IMAGE",
+		//	    "EBS_VOLUME"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -327,6 +328,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"EBS_SNAPSHOT",
 					"EC2_IMAGE",
+					"EBS_VOLUME",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

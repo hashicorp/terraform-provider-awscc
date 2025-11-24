@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
@@ -18,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -232,6 +234,23 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	    "additionalProperties": false,
 		//	    "description": "Details of an instance group in a SageMaker HyperPod cluster.",
 		//	    "properties": {
+		//	      "CapacityRequirements": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specifies the capacity requirements configuration for an instance group",
+		//	        "properties": {
+		//	          "OnDemand": {
+		//	            "additionalProperties": false,
+		//	            "description": "Options for OnDemand capacity",
+		//	            "type": "object"
+		//	          },
+		//	          "Spot": {
+		//	            "additionalProperties": false,
+		//	            "description": "Options for Spot capacity",
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
 		//	      "CurrentCount": {
 		//	        "description": "The number of instances that are currently in the instance group of a SageMaker HyperPod cluster.",
 		//	        "minimum": 0,
@@ -300,6 +319,57 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	      "InstanceType": {
 		//	        "description": "The instance type of the instance group of a SageMaker HyperPod cluster.",
 		//	        "type": "string"
+		//	      },
+		//	      "KubernetesConfig": {
+		//	        "additionalProperties": false,
+		//	        "description": "Kubernetes configuration for cluster nodes including labels and taints.",
+		//	        "properties": {
+		//	          "Labels": {
+		//	            "additionalProperties": false,
+		//	            "description": "A map of Kubernetes labels to apply to cluster nodes.",
+		//	            "patternProperties": {
+		//	              "": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Taints": {
+		//	            "description": "A list of Kubernetes taints to apply to cluster nodes. Maximum of 50 taints.",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "A Kubernetes taint to apply to cluster nodes.",
+		//	              "properties": {
+		//	                "Effect": {
+		//	                  "description": "The effect of the taint.",
+		//	                  "enum": [
+		//	                    "NoSchedule",
+		//	                    "PreferNoSchedule",
+		//	                    "NoExecute"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "Key": {
+		//	                  "description": "The key of the taint.",
+		//	                  "type": "string"
+		//	                },
+		//	                "Value": {
+		//	                  "description": "The value of the taint.",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Key",
+		//	                "Effect"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "maxItems": 50,
+		//	            "type": "array"
+		//	          }
+		//	        },
+		//	        "type": "object"
 		//	      },
 		//	      "LifeCycleConfig": {
 		//	        "additionalProperties": false,
@@ -506,6 +576,37 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"instance_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CapacityRequirements
+					"capacity_requirements": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: OnDemand
+							"on_demand": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  jsontypes.NormalizedType{},
+								Description: "Options for OnDemand capacity",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Spot
+							"spot": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  jsontypes.NormalizedType{},
+								Description: "Options for Spot capacity",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Specifies the capacity requirements configuration for an instance group",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: CurrentCount
 					"current_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "The number of instances that are currently in the instance group of a SageMaker HyperPod cluster.",
@@ -642,6 +743,83 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: KubernetesConfig
+					"kubernetes_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Labels
+							"labels":            // Pattern: ""
+							schema.MapAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "A map of Kubernetes labels to apply to cluster nodes.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+									mapplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Taints
+							"taints": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Effect
+										"effect": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The effect of the taint.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"NoSchedule",
+													"PreferNoSchedule",
+													"NoExecute",
+												),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Key
+										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The key of the taint.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The value of the taint.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "A list of Kubernetes taints to apply to cluster nodes. Maximum of 50 taints.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.SizeAtMost(50),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Kubernetes configuration for cluster nodes including labels and taints.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: LifeCycleConfig
@@ -1786,6 +1964,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"auto_rollback_configuration":           "AutoRollbackConfiguration",
 		"auto_scaler_type":                      "AutoScalerType",
 		"auto_scaling":                          "AutoScaling",
+		"capacity_requirements":                 "CapacityRequirements",
 		"cluster_arn":                           "ClusterArn",
 		"cluster_name":                          "ClusterName",
 		"cluster_role":                          "ClusterRole",
@@ -1794,6 +1973,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"current_count":                         "CurrentCount",
 		"deployment_config":                     "DeploymentConfig",
 		"ebs_volume_config":                     "EbsVolumeConfig",
+		"effect":                                "Effect",
 		"eks":                                   "Eks",
 		"environment_config":                    "EnvironmentConfig",
 		"execution_role":                        "ExecutionRole",
@@ -1807,12 +1987,15 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"instance_storage_configs":              "InstanceStorageConfigs",
 		"instance_type":                         "InstanceType",
 		"key":                                   "Key",
+		"kubernetes_config":                     "KubernetesConfig",
+		"labels":                                "Labels",
 		"life_cycle_config":                     "LifeCycleConfig",
 		"maximum_batch_size":                    "MaximumBatchSize",
 		"mode":                                  "Mode",
 		"node_provisioning_mode":                "NodeProvisioningMode",
 		"node_recovery":                         "NodeRecovery",
 		"on_create":                             "OnCreate",
+		"on_demand":                             "OnDemand",
 		"on_start_deep_health_checks":           "OnStartDeepHealthChecks",
 		"orchestrator":                          "Orchestrator",
 		"override_vpc_config":                   "OverrideVpcConfig",
@@ -1826,8 +2009,10 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"security_group_ids":                    "SecurityGroupIds",
 		"size_in_gi_b":                          "SizeInGiB",
 		"source_s3_uri":                         "SourceS3Uri",
+		"spot":                                  "Spot",
 		"subnets":                               "Subnets",
 		"tags":                                  "Tags",
+		"taints":                                "Taints",
 		"threads_per_core":                      "ThreadsPerCore",
 		"tiered_storage_config":                 "TieredStorageConfig",
 		"training_plan_arn":                     "TrainingPlanArn",

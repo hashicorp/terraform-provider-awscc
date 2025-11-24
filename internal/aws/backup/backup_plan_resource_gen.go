@@ -166,6 +166,9 @@ func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 		//	          },
 		//	          "TargetBackupVault": {
 		//	            "type": "string"
+		//	          },
+		//	          "TargetLogicallyAirGappedBackupVaultArn": {
+		//	            "type": "string"
 		//	          }
 		//	        },
 		//	        "required": [
@@ -402,6 +405,14 @@ func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 							"target_backup_vault": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Required: true,
 							}, /*END ATTRIBUTE*/
+							// Property: TargetLogicallyAirGappedBackupVaultArn
+							"target_logically_air_gapped_backup_vault_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Required: true,
@@ -494,32 +505,33 @@ func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"advanced_backup_settings":                  "AdvancedBackupSettings",
-		"backup_options":                            "BackupOptions",
-		"backup_plan":                               "BackupPlan",
-		"backup_plan_arn":                           "BackupPlanArn",
-		"backup_plan_id":                            "BackupPlanId",
-		"backup_plan_name":                          "BackupPlanName",
-		"backup_plan_rule":                          "BackupPlanRule",
-		"backup_plan_tags":                          "BackupPlanTags",
-		"completion_window_minutes":                 "CompletionWindowMinutes",
-		"copy_actions":                              "CopyActions",
-		"delete_after_days":                         "DeleteAfterDays",
-		"destination_backup_vault_arn":              "DestinationBackupVaultArn",
-		"enable_continuous_backup":                  "EnableContinuousBackup",
-		"index_actions":                             "IndexActions",
-		"lifecycle":                                 "Lifecycle",
-		"move_to_cold_storage_after_days":           "MoveToColdStorageAfterDays",
-		"opt_in_to_archive_for_supported_resources": "OptInToArchiveForSupportedResources",
-		"recovery_point_tags":                       "RecoveryPointTags",
-		"resource_type":                             "ResourceType",
-		"resource_types":                            "ResourceTypes",
-		"rule_name":                                 "RuleName",
-		"schedule_expression":                       "ScheduleExpression",
-		"schedule_expression_timezone":              "ScheduleExpressionTimezone",
-		"start_window_minutes":                      "StartWindowMinutes",
-		"target_backup_vault":                       "TargetBackupVault",
-		"version_id":                                "VersionId",
+		"advanced_backup_settings":                     "AdvancedBackupSettings",
+		"backup_options":                               "BackupOptions",
+		"backup_plan":                                  "BackupPlan",
+		"backup_plan_arn":                              "BackupPlanArn",
+		"backup_plan_id":                               "BackupPlanId",
+		"backup_plan_name":                             "BackupPlanName",
+		"backup_plan_rule":                             "BackupPlanRule",
+		"backup_plan_tags":                             "BackupPlanTags",
+		"completion_window_minutes":                    "CompletionWindowMinutes",
+		"copy_actions":                                 "CopyActions",
+		"delete_after_days":                            "DeleteAfterDays",
+		"destination_backup_vault_arn":                 "DestinationBackupVaultArn",
+		"enable_continuous_backup":                     "EnableContinuousBackup",
+		"index_actions":                                "IndexActions",
+		"lifecycle":                                    "Lifecycle",
+		"move_to_cold_storage_after_days":              "MoveToColdStorageAfterDays",
+		"opt_in_to_archive_for_supported_resources":    "OptInToArchiveForSupportedResources",
+		"recovery_point_tags":                          "RecoveryPointTags",
+		"resource_type":                                "ResourceType",
+		"resource_types":                               "ResourceTypes",
+		"rule_name":                                    "RuleName",
+		"schedule_expression":                          "ScheduleExpression",
+		"schedule_expression_timezone":                 "ScheduleExpressionTimezone",
+		"start_window_minutes":                         "StartWindowMinutes",
+		"target_backup_vault":                          "TargetBackupVault",
+		"target_logically_air_gapped_backup_vault_arn": "TargetLogicallyAirGappedBackupVaultArn",
+		"version_id":                                   "VersionId",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

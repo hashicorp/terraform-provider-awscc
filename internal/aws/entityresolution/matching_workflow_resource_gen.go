@@ -404,7 +404,7 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		//	            ],
 		//	            "type": "object"
 		//	          },
-		//	          "maxItems": 15,
+		//	          "maxItems": 25,
 		//	          "minItems": 1,
 		//	          "type": "array"
 		//	        }
@@ -435,7 +435,7 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		//	            },
 		//	            "type": "object"
 		//	          },
-		//	          "maxItems": 15,
+		//	          "maxItems": 25,
 		//	          "minItems": 1,
 		//	          "type": "array"
 		//	        }
@@ -592,7 +592,7 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(1, 15),
+								listvalidator.SizeBetween(1, 25),
 								fwvalidators.NotNullList(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -639,7 +639,7 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(1, 15),
+								listvalidator.SizeBetween(1, 25),
 								fwvalidators.NotNullList(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -83,6 +84,51 @@ func tableBucketResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Specifies encryption settings for the table bucket",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MetricsConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Settings governing the Metric configuration for the table bucket.",
+		//	  "properties": {
+		//	    "Status": {
+		//	      "default": "Disabled",
+		//	      "description": "Indicates whether Metrics are enabled.",
+		//	      "enum": [
+		//	        "Enabled",
+		//	        "Disabled"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"metrics_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether Metrics are enabled.",
+					Optional:    true,
+					Computed:    true,
+					Default:     stringdefault.StaticString("Disabled"),
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"Enabled",
+							"Disabled",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings governing the Metric configuration for the table bucket.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -302,6 +348,7 @@ func tableBucketResource(ctx context.Context) (resource.Resource, error) {
 		"encryption_configuration":  "EncryptionConfiguration",
 		"key":                       "Key",
 		"kms_key_arn":               "KMSKeyArn",
+		"metrics_configuration":     "MetricsConfiguration",
 		"noncurrent_days":           "NoncurrentDays",
 		"sse_algorithm":             "SSEAlgorithm",
 		"status":                    "Status",

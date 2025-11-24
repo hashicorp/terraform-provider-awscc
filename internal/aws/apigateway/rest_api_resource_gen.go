@@ -207,6 +207,21 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EndpointAccessMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"endpoint_access_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -413,6 +428,21 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: SecurityPolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"security_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -513,6 +543,7 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		"description":                  "Description",
 		"disable_execute_api_endpoint": "DisableExecuteApiEndpoint",
 		"e_tag":                        "ETag",
+		"endpoint_access_mode":         "EndpointAccessMode",
 		"endpoint_configuration":       "EndpointConfiguration",
 		"fail_on_warnings":             "FailOnWarnings",
 		"ip_address_type":              "IpAddressType",
@@ -524,6 +555,7 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		"policy":                       "Policy",
 		"rest_api_id":                  "RestApiId",
 		"root_resource_id":             "RootResourceId",
+		"security_policy":              "SecurityPolicy",
 		"tags":                         "Tags",
 		"types":                        "Types",
 		"value":                        "Value",

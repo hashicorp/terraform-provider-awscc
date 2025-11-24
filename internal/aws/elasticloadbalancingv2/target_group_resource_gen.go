@@ -350,6 +350,21 @@ func targetGroupResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TargetControlPort
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The port that the target control agent uses to communicate the available capacity of targets to the load balancer.",
+		//	  "type": "integer"
+		//	}
+		"target_control_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port that the target control agent uses to communicate the available capacity of targets to the load balancer.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TargetGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -628,6 +643,7 @@ func targetGroupResource(ctx context.Context) (resource.Resource, error) {
 		"protocol_version":              "ProtocolVersion",
 		"quic_server_id":                "QuicServerId",
 		"tags":                          "Tags",
+		"target_control_port":           "TargetControlPort",
 		"target_group_arn":              "TargetGroupArn",
 		"target_group_attributes":       "TargetGroupAttributes",
 		"target_group_full_name":        "TargetGroupFullName",

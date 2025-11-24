@@ -70,6 +70,9 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 1011),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: RevisionId
 		// CloudFormation resource type schema:
@@ -100,7 +103,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "A resource policy with specified policy statements that attaches to a Lex bot or bot alias.",
+		Description: "Resource Type definition for a resource policy with specified policy statements that attaches to a Lex bot or bot alias.",
 		Version:     1,
 		Attributes:  attributes,
 	}
