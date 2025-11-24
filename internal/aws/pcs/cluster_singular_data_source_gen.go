@@ -64,7 +64,8 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "description": "Indicates the type of endpoint running at the specific IP address.",
 		//	        "enum": [
 		//	          "SLURMCTLD",
-		//	          "SLURMDBD"
+		//	          "SLURMDBD",
+		//	          "SLURMRESTD"
 		//	        ],
 		//	        "type": "string"
 		//	      }
@@ -343,6 +344,32 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "JwtAuth": {
+		//	      "additionalProperties": false,
+		//	      "description": "JWT authentication configuration for Slurm.",
+		//	      "properties": {
+		//	        "JwtKey": {
+		//	          "additionalProperties": false,
+		//	          "description": "JWT key configuration.",
+		//	          "properties": {
+		//	            "SecretArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the JWT key secret.",
+		//	              "type": "string"
+		//	            },
+		//	            "SecretVersion": {
+		//	              "description": "The version of the JWT key secret.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SecretArn",
+		//	            "SecretVersion"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "ScaleDownIdleTimeInSeconds": {
 		//	      "description": "The time before an idle node is scaled down.",
 		//	      "minimum": 1,
@@ -371,6 +398,25 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "type": "array"
+		//	    },
+		//	    "SlurmRest": {
+		//	      "additionalProperties": false,
+		//	      "description": "The SlurmRest configuration includes configurable settings for Slurm Rest.",
+		//	      "properties": {
+		//	        "Mode": {
+		//	          "default": "NONE",
+		//	          "description": "The default value is `STANDARD`. A value of `STANDARD` means that Slurm Rest is enabled.",
+		//	          "enum": [
+		//	            "STANDARD",
+		//	            "NONE"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Mode"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -411,6 +457,30 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "The shared Slurm key for authentication, also known as the cluster secret.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: JwtAuth
+				"jwt_auth": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: JwtKey
+						"jwt_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SecretArn
+								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the JWT key secret.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretVersion
+								"secret_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The version of the JWT key secret.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "JWT key configuration.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "JWT authentication configuration for Slurm.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: ScaleDownIdleTimeInSeconds
 				"scale_down_idle_time_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "The time before an idle node is scaled down.",
@@ -433,6 +503,18 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "Additional Slurm-specific configuration that directly maps to Slurm settings.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SlurmRest
+				"slurm_rest": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Mode
+						"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The default value is `STANDARD`. A value of `STANDARD` means that Slurm Rest is enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The SlurmRest configuration includes configurable settings for Slurm Rest.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -503,6 +585,8 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"endpoints":                       "Endpoints",
 		"error_info":                      "ErrorInfo",
 		"ipv_6_address":                   "Ipv6Address",
+		"jwt_auth":                        "JwtAuth",
+		"jwt_key":                         "JwtKey",
 		"message":                         "Message",
 		"mode":                            "Mode",
 		"name":                            "Name",
@@ -521,6 +605,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"size":                            "Size",
 		"slurm_configuration":             "SlurmConfiguration",
 		"slurm_custom_settings":           "SlurmCustomSettings",
+		"slurm_rest":                      "SlurmRest",
 		"status":                          "Status",
 		"subnet_ids":                      "SubnetIds",
 		"tags":                            "Tags",

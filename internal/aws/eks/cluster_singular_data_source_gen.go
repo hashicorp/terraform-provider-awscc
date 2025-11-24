@@ -154,6 +154,37 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Todo: add description",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ControlPlaneScalingConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for provisioned control plane scaling.",
+		//	  "properties": {
+		//	    "Tier": {
+		//	      "description": "The scaling tier for the provisioned control plane.",
+		//	      "enum": [
+		//	        "standard",
+		//	        "tier-xl",
+		//	        "tier-2xl",
+		//	        "tier-4xl"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"control_plane_scaling_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Tier
+				"tier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The scaling tier for the provisioned control plane.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for provisioned control plane scaling.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeletionProtection
 		// CloudFormation resource type schema:
 		//
@@ -873,6 +904,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"compute_config":                              "ComputeConfig",
 		"control_plane_instance_type":                 "ControlPlaneInstanceType",
 		"control_plane_placement":                     "ControlPlanePlacement",
+		"control_plane_scaling_config":                "ControlPlaneScalingConfig",
 		"deletion_protection":                         "DeletionProtection",
 		"elastic_load_balancing":                      "ElasticLoadBalancing",
 		"enabled":                                     "Enabled",
@@ -910,6 +942,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"subnet_ids":                                  "SubnetIds",
 		"support_type":                                "SupportType",
 		"tags":                                        "Tags",
+		"tier":                                        "Tier",
 		"type":                                        "Type",
 		"upgrade_policy":                              "UpgradePolicy",
 		"value":                                       "Value",

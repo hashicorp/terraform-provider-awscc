@@ -210,10 +210,10 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	      "description": "The destination configuration for failed invocations.",
 		//	      "properties": {
 		//	        "Destination": {
-		//	          "description": "The Amazon Resource Name (ARN) of the destination resource.\n To retain records of unsuccessful [asynchronous invocations](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations), you can configure an Amazon SNS topic, Amazon SQS queue, Amazon S3 bucket, Lambda function, or Amazon EventBridge event bus as the destination.\n To retain records of failed invocations from [Kinesis](https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html), [DynamoDB](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html), [self-managed Kafka](https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-smaa-onfailure-destination) or [Amazon MSK](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-onfailure-destination), you can configure an Amazon SNS topic, Amazon SQS queue, or Amazon S3 bucket as the destination.",
+		//	          "description": "The Amazon Resource Name (ARN) of the destination resource.\n To retain records of unsuccessful [asynchronous invocations](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations), you can configure an Amazon SNS topic, Amazon SQS queue, Amazon S3 bucket, Lambda function, or Amazon EventBridge event bus as the destination.\n  Amazon SNS destinations have a message size limit of 256 KB. If the combined size of the function request and response payload exceeds the limit, Lambda will drop the payload when sending ``OnFailure`` event to the destination. For details on this behavior, refer to [Retaining records of asynchronous invocations](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html).\n  To retain records of failed invocations from [Kinesis](https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html), [DynamoDB](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html), [self-managed Kafka](https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-smaa-onfailure-destination) or [Amazon MSK](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-onfailure-destination), you can configure an Amazon SNS topic, Amazon SQS queue, or Amazon S3 bucket as the destination.",
 		//	          "maxLength": 1024,
 		//	          "minLength": 12,
-		//	          "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
+		//	          "pattern": "^$|kafka://([^.]([a-zA-Z0-9\\-_.]{0,248}))|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -229,7 +229,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Destination
 						"destination": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Amazon Resource Name (ARN) of the destination resource.\n To retain records of unsuccessful [asynchronous invocations](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations), you can configure an Amazon SNS topic, Amazon SQS queue, Amazon S3 bucket, Lambda function, or Amazon EventBridge event bus as the destination.\n To retain records of failed invocations from [Kinesis](https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html), [DynamoDB](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html), [self-managed Kafka](https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-smaa-onfailure-destination) or [Amazon MSK](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-onfailure-destination), you can configure an Amazon SNS topic, Amazon SQS queue, or Amazon S3 bucket as the destination.",
+							Description: "The Amazon Resource Name (ARN) of the destination resource.\n To retain records of unsuccessful [asynchronous invocations](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations), you can configure an Amazon SNS topic, Amazon SQS queue, Amazon S3 bucket, Lambda function, or Amazon EventBridge event bus as the destination.\n  Amazon SNS destinations have a message size limit of 256 KB. If the combined size of the function request and response payload exceeds the limit, Lambda will drop the payload when sending ``OnFailure`` event to the destination. For details on this behavior, refer to [Retaining records of asynchronous invocations](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html).\n  To retain records of failed invocations from [Kinesis](https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html), [DynamoDB](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html), [self-managed Kafka](https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-smaa-onfailure-destination) or [Amazon MSK](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-onfailure-destination), you can configure an Amazon SNS topic, Amazon SQS queue, or Amazon S3 bucket as the destination.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -444,6 +444,36 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 			Description: "The ARN of the KMSlong (KMS) customer managed key that Lambda uses to encrypt your function's [filter criteria](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-basics).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LoggingConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The function's Amazon CloudWatch Logs configuration settings.",
+		//	  "properties": {
+		//	    "SystemLogLevel": {
+		//	      "description": "Set this property to filter the system logs for your function that Lambda sends to CloudWatch. Lambda only sends system logs at the selected level of detail and lower, where ``DEBUG`` is the highest level and ``WARN`` is the lowest.",
+		//	      "enum": [
+		//	        "DEBUG",
+		//	        "INFO",
+		//	        "WARN"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"logging_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SystemLogLevel
+				"system_log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Set this property to filter the system logs for your function that Lambda sends to CloudWatch. Lambda only sends system logs at the selected level of detail and lower, where ``DEBUG`` is the highest level and ``WARN`` is the lowest.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The function's Amazon CloudWatch Logs configuration settings.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaximumBatchingWindowInSeconds
 		// CloudFormation resource type schema:
 		//
@@ -494,11 +524,13 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	      "description": "The metrics you want your event source mapping to produce. Include ``EventCount`` to receive event source mapping metrics related to the number of events processed by your event source mapping. For more information about these metrics, see [Event source mapping metrics](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics).",
 		//	      "items": {
 		//	        "enum": [
-		//	          "EventCount"
+		//	          "EventCount",
+		//	          "ErrorCount",
+		//	          "KafkaMetrics"
 		//	        ],
 		//	        "type": "string"
 		//	      },
-		//	      "maxItems": 1,
+		//	      "maxItems": 3,
 		//	      "minItems": 0,
 		//	      "type": "array",
 		//	      "uniqueItems": true
@@ -536,19 +568,25 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "(Amazon MSK and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see [provisioned mode](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode).",
+		//	  "description": "(Amazon SQS, Amazon MSK, and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see [provisioned mode](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode).",
 		//	  "properties": {
 		//	    "MaximumPollers": {
-		//	      "description": "The maximum number of event pollers this event source can scale up to.",
+		//	      "description": "The maximum number of event pollers this event source can scale up to. For Amazon SQS events source mappings, default is 200, and minimum value allowed is 2. For Amazon MSK and self-managed Apache Kafka event source mappings, default is 200, and minimum value allowed is 1.",
 		//	      "maximum": 2000,
 		//	      "minimum": 1,
 		//	      "type": "integer"
 		//	    },
 		//	    "MinimumPollers": {
-		//	      "description": "The minimum number of event pollers this event source can scale down to.",
+		//	      "description": "The minimum number of event pollers this event source can scale down to. For Amazon SQS events source mappings, default is 2, and minimum 2 required. For Amazon MSK and self-managed Apache Kafka event source mappings, default is 1.",
 		//	      "maximum": 200,
 		//	      "minimum": 1,
 		//	      "type": "integer"
+		//	    },
+		//	    "PollerGroupName": {
+		//	      "description": "",
+		//	      "maxLength": 128,
+		//	      "minLength": 0,
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -557,16 +595,21 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: MaximumPollers
 				"maximum_pollers": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The maximum number of event pollers this event source can scale up to.",
+					Description: "The maximum number of event pollers this event source can scale up to. For Amazon SQS events source mappings, default is 200, and minimum value allowed is 2. For Amazon MSK and self-managed Apache Kafka event source mappings, default is 200, and minimum value allowed is 1.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: MinimumPollers
 				"minimum_pollers": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The minimum number of event pollers this event source can scale down to.",
+					Description: "The minimum number of event pollers this event source can scale down to. For Amazon SQS events source mappings, default is 2, and minimum 2 required. For Amazon MSK and self-managed Apache Kafka event source mappings, default is 1.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PollerGroupName
+				"poller_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "(Amazon MSK and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see [provisioned mode](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode).",
+			Description: "(Amazon SQS, Amazon MSK, and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see [provisioned mode](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Queues
@@ -595,7 +638,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "(Amazon SQS only) The scaling configuration for the event source. For more information, see [Configuring maximum concurrency for Amazon SQS event sources](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency).",
+		//	  "description": "This property is for Amazon SQS event sources only. You cannot use ``ProvisionedPollerConfig`` while using ``ScalingConfig``. These options are mutually exclusive. To remove the scaling configuration, pass an empty value.",
 		//	  "properties": {
 		//	    "MaximumConcurrency": {
 		//	      "description": "Limits the number of concurrent instances that the SQS event source can invoke.",
@@ -614,7 +657,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "(Amazon SQS only) The scaling configuration for the event source. For more information, see [Configuring maximum concurrency for Amazon SQS event sources](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency).",
+			Description: "This property is for Amazon SQS event sources only. You cannot use ``ProvisionedPollerConfig`` while using ``ScalingConfig``. These options are mutually exclusive. To remove the scaling configuration, pass an empty value.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SelfManagedEventSource
@@ -1024,6 +1067,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		"kafka_bootstrap_servers":                "KafkaBootstrapServers",
 		"key":                                    "Key",
 		"kms_key_arn":                            "KmsKeyArn",
+		"logging_config":                         "LoggingConfig",
 		"maximum_batching_window_in_seconds":     "MaximumBatchingWindowInSeconds",
 		"maximum_concurrency":                    "MaximumConcurrency",
 		"maximum_pollers":                        "MaximumPollers",
@@ -1035,6 +1079,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		"on_failure":                             "OnFailure",
 		"parallelization_factor":                 "ParallelizationFactor",
 		"pattern":                                "Pattern",
+		"poller_group_name":                      "PollerGroupName",
 		"provisioned_poller_config":              "ProvisionedPollerConfig",
 		"queues":                                 "Queues",
 		"scaling_config":                         "ScalingConfig",
@@ -1046,6 +1091,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		"source_access_configurations":           "SourceAccessConfigurations",
 		"starting_position":                      "StartingPosition",
 		"starting_position_timestamp":            "StartingPositionTimestamp",
+		"system_log_level":                       "SystemLogLevel",
 		"tags":                                   "Tags",
 		"topics":                                 "Topics",
 		"tumbling_window_in_seconds":             "TumblingWindowInSeconds",

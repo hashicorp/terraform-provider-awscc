@@ -146,6 +146,17 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EndpointAccessMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"endpoint_access_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -297,6 +308,17 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SecurityPolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"security_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -368,6 +390,7 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description":                  "Description",
 		"disable_execute_api_endpoint": "DisableExecuteApiEndpoint",
 		"e_tag":                        "ETag",
+		"endpoint_access_mode":         "EndpointAccessMode",
 		"endpoint_configuration":       "EndpointConfiguration",
 		"fail_on_warnings":             "FailOnWarnings",
 		"ip_address_type":              "IpAddressType",
@@ -379,6 +402,7 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"policy":                       "Policy",
 		"rest_api_id":                  "RestApiId",
 		"root_resource_id":             "RootResourceId",
+		"security_policy":              "SecurityPolicy",
 		"tags":                         "Tags",
 		"types":                        "Types",
 		"value":                        "Value",

@@ -44,6 +44,50 @@ func serviceNetworkVpcAssociationDataSource(ctx context.Context) (datasource.Dat
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: DnsOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "PrivateDnsPreference": {
+		//	      "enum": [
+		//	        "VERIFIED_DOMAINS_ONLY",
+		//	        "ALL_DOMAINS",
+		//	        "VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS",
+		//	        "SPECIFIED_DOMAINS_ONLY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "PrivateDnsSpecifiedDomains": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "maxLength": 255,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"dns_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PrivateDnsPreference
+				"private_dns_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PrivateDnsSpecifiedDomains
+				"private_dns_specified_domains": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -54,6 +98,15 @@ func serviceNetworkVpcAssociationDataSource(ctx context.Context) (datasource.Dat
 		//	  "type": "string"
 		//	}
 		"service_network_vpc_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: PrivateDnsEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"private_dns_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
@@ -227,7 +280,11 @@ func serviceNetworkVpcAssociationDataSource(ctx context.Context) (datasource.Dat
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                                "Arn",
 		"created_at":                         "CreatedAt",
+		"dns_options":                        "DnsOptions",
 		"key":                                "Key",
+		"private_dns_enabled":                "PrivateDnsEnabled",
+		"private_dns_preference":             "PrivateDnsPreference",
+		"private_dns_specified_domains":      "PrivateDnsSpecifiedDomains",
 		"security_group_ids":                 "SecurityGroupIds",
 		"service_network_arn":                "ServiceNetworkArn",
 		"service_network_id":                 "ServiceNetworkId",

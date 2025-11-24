@@ -78,6 +78,17 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EndpointAccessMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"endpoint_access_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -284,6 +295,7 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"distribution_hosted_zone_id":            "DistributionHostedZoneId",
 		"domain_name":                            "DomainName",
 		"domain_name_arn":                        "DomainNameArn",
+		"endpoint_access_mode":                   "EndpointAccessMode",
 		"endpoint_configuration":                 "EndpointConfiguration",
 		"ip_address_type":                        "IpAddressType",
 		"key":                                    "Key",

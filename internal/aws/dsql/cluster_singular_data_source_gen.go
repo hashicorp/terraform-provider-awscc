@@ -88,6 +88,17 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The encryption configuration details for the cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Endpoint
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The DSQL cluster endpoint.",
+		//	  "type": "string"
+		//	}
+		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The DSQL cluster endpoint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Identifier
 		// CloudFormation resource type schema:
 		//
@@ -275,6 +286,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"encryption_details":          "EncryptionDetails",
 		"encryption_status":           "EncryptionStatus",
 		"encryption_type":             "EncryptionType",
+		"endpoint":                    "Endpoint",
 		"identifier":                  "Identifier",
 		"key":                         "Key",
 		"kms_encryption_key":          "KmsEncryptionKey",

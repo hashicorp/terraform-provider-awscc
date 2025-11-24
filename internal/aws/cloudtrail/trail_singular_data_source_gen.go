@@ -213,6 +213,70 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The advanced event selectors that were used to select events for the data store.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: AggregationConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the aggregation configuration to aggregate CloudTrail Events. A maximum of 1 aggregation configuration is allowed.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Configure to add aggregation rules to aggregate CloudTrail Events.",
+		//	    "properties": {
+		//	      "EventCategory": {
+		//	        "description": "The category of events to be aggregated.",
+		//	        "enum": [
+		//	          "Data"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "Templates": {
+		//	        "description": "Contains all templates in an aggregation configuration.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "description": "A template used to configure aggregation rules.",
+		//	          "enum": [
+		//	            "API_ACTIVITY",
+		//	            "RESOURCE_ACCESS",
+		//	            "USER_ACTIONS"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 50,
+		//	        "minItems": 1,
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "EventCategory",
+		//	      "Templates"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 1,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"aggregation_configurations": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EventCategory
+					"event_category": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The category of events to be aggregated.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Templates
+					"templates": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "Contains all templates in an aggregation configuration.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies the aggregation configuration to aggregate CloudTrail Events. A maximum of 1 aggregation configuration is allowed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -386,6 +450,20 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "additionalProperties": false,
 		//	    "description": "A string that contains insight types that are logged on a trail.",
 		//	    "properties": {
+		//	      "EventCategories": {
+		//	        "description": "The categories of events for which to log insights. By default, insights are logged for management events only.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "description": "Event category for an insight selector.",
+		//	          "enum": [
+		//	            "Management",
+		//	            "Data"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
 		//	      "InsightType": {
 		//	        "description": "The type of insight to log on a trail.",
 		//	        "type": "string"
@@ -399,6 +477,12 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"insight_selectors": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EventCategories
+					"event_categories": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "The categories of events for which to log insights. By default, insights are logged for management events only.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: InsightType
 					"insight_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The type of insight to log on a trail.",
@@ -571,6 +655,7 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"advanced_event_selectors":         "AdvancedEventSelectors",
+		"aggregation_configurations":       "AggregationConfigurations",
 		"arn":                              "Arn",
 		"cloudwatch_logs_log_group_arn":    "CloudWatchLogsLogGroupArn",
 		"cloudwatch_logs_role_arn":         "CloudWatchLogsRoleArn",
@@ -578,6 +663,8 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"enable_log_file_validation":       "EnableLogFileValidation",
 		"ends_with":                        "EndsWith",
 		"equals":                           "Equals",
+		"event_categories":                 "EventCategories",
+		"event_category":                   "EventCategory",
 		"event_selectors":                  "EventSelectors",
 		"exclude_management_event_sources": "ExcludeManagementEventSources",
 		"field":                            "Field",
@@ -602,6 +689,7 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"sns_topic_name":                   "SnsTopicName",
 		"starts_with":                      "StartsWith",
 		"tags":                             "Tags",
+		"templates":                        "Templates",
 		"trail_name":                       "TrailName",
 		"type":                             "Type",
 		"value":                            "Value",

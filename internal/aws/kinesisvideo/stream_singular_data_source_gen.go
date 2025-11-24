@@ -102,6 +102,36 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The name of the Kinesis Video stream.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: StreamStorageConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for the storage tier of the Kinesis Video Stream.",
+		//	  "properties": {
+		//	    "DefaultStorageTier": {
+		//	      "default": "HOT",
+		//	      "description": "The storage tier for the Kinesis Video Stream. Determines the storage class used for stream data.",
+		//	      "enum": [
+		//	        "HOT",
+		//	        "WARM"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"stream_storage_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DefaultStorageTier
+				"default_storage_tier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The storage tier for the Kinesis Video Stream. Determines the storage class used for stream data.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for the storage tier of the Kinesis Video Stream.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -171,15 +201,17 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::KinesisVideo::Stream").WithTerraformTypeName("awscc_kinesisvideo_stream")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                     "Arn",
-		"data_retention_in_hours": "DataRetentionInHours",
-		"device_name":             "DeviceName",
-		"key":                     "Key",
-		"kms_key_id":              "KmsKeyId",
-		"media_type":              "MediaType",
-		"name":                    "Name",
-		"tags":                    "Tags",
-		"value":                   "Value",
+		"arn":                          "Arn",
+		"data_retention_in_hours":      "DataRetentionInHours",
+		"default_storage_tier":         "DefaultStorageTier",
+		"device_name":                  "DeviceName",
+		"key":                          "Key",
+		"kms_key_id":                   "KmsKeyId",
+		"media_type":                   "MediaType",
+		"name":                         "Name",
+		"stream_storage_configuration": "StreamStorageConfiguration",
+		"tags":                         "Tags",
+		"value":                        "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

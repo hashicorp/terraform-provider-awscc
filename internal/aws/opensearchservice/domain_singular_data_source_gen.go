@@ -24,6 +24,44 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::OpenSearchService::Domain resource.
 func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AIMLOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "S3VectorsEngine": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "description": "Whether to enable S3 vectors engine.",
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Enabled"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"aiml_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3VectorsEngine
+				"s3_vectors_engine": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether to enable S3 vectors engine.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AccessPolicies
 		// CloudFormation resource type schema:
 		//
@@ -1155,6 +1193,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"access_policies":                 "AccessPolicies",
 		"advanced_options":                "AdvancedOptions",
 		"advanced_security_options":       "AdvancedSecurityOptions",
+		"aiml_options":                    "AIMLOptions",
 		"anonymous_auth_disable_date":     "AnonymousAuthDisableDate",
 		"anonymous_auth_enabled":          "AnonymousAuthEnabled",
 		"arn":                             "Arn",
@@ -1227,6 +1266,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"public_key":                      "PublicKey",
 		"role_arn":                        "RoleArn",
 		"roles_key":                       "RolesKey",
+		"s3_vectors_engine":               "S3VectorsEngine",
 		"saml_options":                    "SAMLOptions",
 		"security_group_ids":              "SecurityGroupIds",
 		"service_software_options":        "ServiceSoftwareOptions",

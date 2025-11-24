@@ -219,7 +219,8 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The resource type retained by the retention rule.",
 		//	  "enum": [
 		//	    "EBS_SNAPSHOT",
-		//	    "EC2_IMAGE"
+		//	    "EC2_IMAGE",
+		//	    "EBS_VOLUME"
 		//	  ],
 		//	  "type": "string"
 		//	}

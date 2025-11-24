@@ -41,11 +41,12 @@ func billingGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      "minItems": 1,
 		//	      "type": "array",
 		//	      "uniqueItems": true
+		//	    },
+		//	    "ResponsibilityTransferArn": {
+		//	      "pattern": "arn:[a-z0-9][a-z0-9-.]{0,62}:organizations::[0-9]{12}:transfer/o-[a-z0-9]{10,32}/(billing)/(inbound|outbound)/rt-[0-9a-z]{8,32}",
+		//	      "type": "string"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "LinkedAccountIds"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"account_grouping": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -59,6 +60,10 @@ func billingGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 					ElementType: types.StringType,
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: ResponsibilityTransferArn
+				"responsibility_transfer_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
@@ -67,7 +72,7 @@ func billingGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "description": "Billing Group ARN",
-		//	  "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/?[0-9]{12}",
+		//	  "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/?[a-zA-Z0-9]{10,12}",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -250,23 +255,24 @@ func billingGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::BillingConductor::BillingGroup").WithTerraformTypeName("awscc_billingconductor_billing_group")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_grouping":       "AccountGrouping",
-		"arn":                    "Arn",
-		"auto_associate":         "AutoAssociate",
-		"computation_preference": "ComputationPreference",
-		"creation_time":          "CreationTime",
-		"description":            "Description",
-		"key":                    "Key",
-		"last_modified_time":     "LastModifiedTime",
-		"linked_account_ids":     "LinkedAccountIds",
-		"name":                   "Name",
-		"pricing_plan_arn":       "PricingPlanArn",
-		"primary_account_id":     "PrimaryAccountId",
-		"size":                   "Size",
-		"status":                 "Status",
-		"status_reason":          "StatusReason",
-		"tags":                   "Tags",
-		"value":                  "Value",
+		"account_grouping":            "AccountGrouping",
+		"arn":                         "Arn",
+		"auto_associate":              "AutoAssociate",
+		"computation_preference":      "ComputationPreference",
+		"creation_time":               "CreationTime",
+		"description":                 "Description",
+		"key":                         "Key",
+		"last_modified_time":          "LastModifiedTime",
+		"linked_account_ids":          "LinkedAccountIds",
+		"name":                        "Name",
+		"pricing_plan_arn":            "PricingPlanArn",
+		"primary_account_id":          "PrimaryAccountId",
+		"responsibility_transfer_arn": "ResponsibilityTransferArn",
+		"size":                        "Size",
+		"status":                      "Status",
+		"status_reason":               "StatusReason",
+		"tags":                        "Tags",
+		"value":                       "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

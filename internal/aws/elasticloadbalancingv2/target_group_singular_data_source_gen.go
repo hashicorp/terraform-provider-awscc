@@ -251,6 +251,17 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The tags.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: TargetControlPort
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The port that the target control agent uses to communicate the available capacity of targets to the load balancer.",
+		//	  "type": "integer"
+		//	}
+		"target_control_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port that the target control agent uses to communicate the available capacity of targets to the load balancer.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TargetGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -459,6 +470,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"protocol_version":              "ProtocolVersion",
 		"quic_server_id":                "QuicServerId",
 		"tags":                          "Tags",
+		"target_control_port":           "TargetControlPort",
 		"target_group_arn":              "TargetGroupArn",
 		"target_group_attributes":       "TargetGroupAttributes",
 		"target_group_full_name":        "TargetGroupFullName",

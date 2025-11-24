@@ -717,6 +717,37 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A list of [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) to apply to the function.\n  You must have the ``lambda:TagResource``, ``lambda:UntagResource``, and ``lambda:ListTags`` permissions for your [principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html) to manage the CFN stack. If you don't have these permissions, there might be unexpected behavior with stack-level tags propagating to the resource during resource creation and update.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: TenancyConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "TenantIsolationMode": {
+		//	      "description": "Determines how your Lambda function isolates execution environments between tenants.",
+		//	      "enum": [
+		//	        "PER_TENANT"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "TenantIsolationMode"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"tenancy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: TenantIsolationMode
+				"tenant_isolation_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Determines how your Lambda function isolates execution environments between tenants.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Timeout
 		// CloudFormation resource type schema:
 		//
@@ -877,6 +908,8 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"system_log_level":               "SystemLogLevel",
 		"tags":                           "Tags",
 		"target_arn":                     "TargetArn",
+		"tenancy_config":                 "TenancyConfig",
+		"tenant_isolation_mode":          "TenantIsolationMode",
 		"timeout":                        "Timeout",
 		"tracing_config":                 "TracingConfig",
 		"update_runtime_on":              "UpdateRuntimeOn",

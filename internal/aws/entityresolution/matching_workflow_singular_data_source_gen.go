@@ -315,7 +315,7 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 		//	            ],
 		//	            "type": "object"
 		//	          },
-		//	          "maxItems": 15,
+		//	          "maxItems": 25,
 		//	          "minItems": 1,
 		//	          "type": "array"
 		//	        }
@@ -346,7 +346,7 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 		//	            },
 		//	            "type": "object"
 		//	          },
-		//	          "maxItems": 15,
+		//	          "maxItems": 25,
 		//	          "minItems": 1,
 		//	          "type": "array"
 		//	        }

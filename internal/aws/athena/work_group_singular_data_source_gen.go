@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -163,6 +164,70 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "description": "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
 		//	      "type": "boolean"
 		//	    },
+		//	    "EngineConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "The engine configuration for running queries.",
+		//	      "properties": {
+		//	        "AdditionalConfigs": {
+		//	          "additionalProperties": false,
+		//	          "description": "Contains additional notebook engine MAP\u003cstring, string\u003e parameter mappings in the form of key-value pairs. To specify an Athena notebook that the Jupyter server will download and serve, specify a value for the StartSessionRequest$NotebookVersion field, and then add a key named NotebookId to AdditionalConfigs that has the value of the Athena notebook ID.",
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "Classifications": {
+		//	          "description": "The configuration classifications that can be specified for the engine.",
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "A classification refers to a set of specific configurations.",
+		//	            "properties": {
+		//	              "Name": {
+		//	                "description": "The name of the configuration classification.",
+		//	                "type": "string"
+		//	              },
+		//	              "Properties": {
+		//	                "additionalProperties": false,
+		//	                "description": "A set of properties specified within a configuration classification.",
+		//	                "patternProperties": {
+		//	                  "": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "CoordinatorDpuSize": {
+		//	          "description": "The number of DPUs to use for the coordinator. A coordinator is a special executor that orchestrates processing work and manages other executors in a notebook session. The default is 1.",
+		//	          "type": "integer"
+		//	        },
+		//	        "DefaultExecutorDpuSize": {
+		//	          "description": "The default number of DPUs to use for executors. An executor is the smallest unit of compute that a notebook session can request from Athena. The default is 1.",
+		//	          "type": "integer"
+		//	        },
+		//	        "MaxConcurrentDpus": {
+		//	          "description": "The maximum number of DPUs that can run concurrently.",
+		//	          "type": "integer"
+		//	        },
+		//	        "SparkProperties": {
+		//	          "additionalProperties": false,
+		//	          "description": "Specifies custom jar files and Spark properties for use cases like cluster encryption, table formats, and general Spark tuning.",
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "EngineVersion": {
 		//	      "additionalProperties": false,
 		//	      "description": "The Athena engine version for running queries.",
@@ -179,7 +244,7 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "ExecutionRole": {
-		//	      "description": "Execution Role ARN required to run Athena Spark Calculations",
+		//	      "description": "The ARN of the execution role used to access user resources for Spark sessions and Identity Center enabled workgroups. This property applies only to Spark enabled workgroups and Identity Center enabled workgroups.",
 		//	      "type": "string"
 		//	    },
 		//	    "ManagedQueryResultsConfiguration": {
@@ -195,6 +260,79 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "properties": {
 		//	            "KmsKey": {
 		//	              "description": "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "MonitoringConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets, Amazon CloudWatch log groups etc.",
+		//	      "properties": {
+		//	        "CloudWatchLoggingConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration settings for delivering logs to Amazon CloudWatch log groups.",
+		//	          "properties": {
+		//	            "Enabled": {
+		//	              "description": "Enables CloudWatch logging.",
+		//	              "type": "boolean"
+		//	            },
+		//	            "LogGroup": {
+		//	              "description": "The name of the log group in Amazon CloudWatch Logs where you want to publish your logs.",
+		//	              "type": "string"
+		//	            },
+		//	            "LogStreamNamePrefix": {
+		//	              "description": "Prefix for the CloudWatch log stream name.",
+		//	              "type": "string"
+		//	            },
+		//	            "LogTypes": {
+		//	              "additionalProperties": false,
+		//	              "description": "The types of logs that you want to publish to CloudWatch.",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "ManagedLoggingConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration settings for managed log persistence.",
+		//	          "properties": {
+		//	            "Enabled": {
+		//	              "description": "Enables managed log persistence.",
+		//	              "type": "boolean"
+		//	            },
+		//	            "KmsKey": {
+		//	              "description": "The KMS key ARN to encrypt the logs stored in managed log persistence.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "S3LoggingConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration settings for delivering logs to Amazon S3 buckets.",
+		//	          "properties": {
+		//	            "Enabled": {
+		//	              "description": "Enables S3 log delivery.",
+		//	              "type": "boolean"
+		//	            },
+		//	            "KmsKey": {
+		//	              "description": "The KMS key ARN to encrypt the logs published to the given Amazon S3 destination.",
+		//	              "type": "string"
+		//	            },
+		//	            "LogLocation": {
+		//	              "description": "The Amazon S3 destination URI for log publishing.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -298,6 +436,63 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: EngineConfiguration
+				"engine_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AdditionalConfigs
+						"additional_configs": // Pattern: ""
+						schema.MapAttribute{  /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Contains additional notebook engine MAP<string, string> parameter mappings in the form of key-value pairs. To specify an Athena notebook that the Jupyter server will download and serve, specify a value for the StartSessionRequest$NotebookVersion field, and then add a key named NotebookId to AdditionalConfigs that has the value of the Athena notebook ID.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Classifications
+						"classifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Name
+									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The name of the configuration classification.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Properties
+									"properties":        // Pattern: ""
+									schema.MapAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "A set of properties specified within a configuration classification.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "The configuration classifications that can be specified for the engine.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CoordinatorDpuSize
+						"coordinator_dpu_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The number of DPUs to use for the coordinator. A coordinator is a special executor that orchestrates processing work and manages other executors in a notebook session. The default is 1.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DefaultExecutorDpuSize
+						"default_executor_dpu_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The default number of DPUs to use for executors. An executor is the smallest unit of compute that a notebook session can request from Athena. The default is 1.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaxConcurrentDpus
+						"max_concurrent_dpus": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The maximum number of DPUs that can run concurrently.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SparkProperties
+						"spark_properties":  // Pattern: ""
+						schema.MapAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Specifies custom jar files and Spark properties for use cases like cluster encryption, table formats, and general Spark tuning.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The engine configuration for running queries.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: EngineVersion
 				"engine_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -317,7 +512,7 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ExecutionRole
 				"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Execution Role ARN required to run Athena Spark Calculations",
+					Description: "The ARN of the execution role used to access user resources for Spark sessions and Identity Center enabled workgroups. This property applies only to Spark enabled workgroups and Identity Center enabled workgroups.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ManagedQueryResultsConfiguration
@@ -341,6 +536,81 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The configuration for the managed query results and encryption option. ResultConfiguration and ManagedQueryResultsConfiguration cannot be set at the same time",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MonitoringConfiguration
+				"monitoring_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CloudWatchLoggingConfiguration
+						"cloudwatch_logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Enables CloudWatch logging.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogGroup
+								"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the log group in Amazon CloudWatch Logs where you want to publish your logs.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogStreamNamePrefix
+								"log_stream_name_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Prefix for the CloudWatch log stream name.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogTypes
+								"log_types":         // Pattern: ""
+								schema.MapAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.ListType{ElemType: types.StringType},
+									Description: "The types of logs that you want to publish to CloudWatch.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration settings for delivering logs to Amazon CloudWatch log groups.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ManagedLoggingConfiguration
+						"managed_logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Enables managed log persistence.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: KmsKey
+								"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The KMS key ARN to encrypt the logs stored in managed log persistence.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration settings for managed log persistence.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3LoggingConfiguration
+						"s3_logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Enables S3 log delivery.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: KmsKey
+								"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The KMS key ARN to encrypt the logs published to the given Amazon S3 destination.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogLocation
+								"log_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 destination URI for log publishing.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration settings for delivering logs to Amazon S3 buckets.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets, Amazon CloudWatch log groups etc.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PublishCloudWatchMetricsEnabled
@@ -438,6 +708,70 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "description": "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
 		//	      "type": "boolean"
 		//	    },
+		//	    "EngineConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "The engine configuration for running queries.",
+		//	      "properties": {
+		//	        "AdditionalConfigs": {
+		//	          "additionalProperties": false,
+		//	          "description": "Contains additional notebook engine MAP\u003cstring, string\u003e parameter mappings in the form of key-value pairs. To specify an Athena notebook that the Jupyter server will download and serve, specify a value for the StartSessionRequest$NotebookVersion field, and then add a key named NotebookId to AdditionalConfigs that has the value of the Athena notebook ID.",
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "Classifications": {
+		//	          "description": "The configuration classifications that can be specified for the engine.",
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "A classification refers to a set of specific configurations.",
+		//	            "properties": {
+		//	              "Name": {
+		//	                "description": "The name of the configuration classification.",
+		//	                "type": "string"
+		//	              },
+		//	              "Properties": {
+		//	                "additionalProperties": false,
+		//	                "description": "A set of properties specified within a configuration classification.",
+		//	                "patternProperties": {
+		//	                  "": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "CoordinatorDpuSize": {
+		//	          "description": "The number of DPUs to use for the coordinator. A coordinator is a special executor that orchestrates processing work and manages other executors in a notebook session. The default is 1.",
+		//	          "type": "integer"
+		//	        },
+		//	        "DefaultExecutorDpuSize": {
+		//	          "description": "The default number of DPUs to use for executors. An executor is the smallest unit of compute that a notebook session can request from Athena. The default is 1.",
+		//	          "type": "integer"
+		//	        },
+		//	        "MaxConcurrentDpus": {
+		//	          "description": "The maximum number of DPUs that can run concurrently.",
+		//	          "type": "integer"
+		//	        },
+		//	        "SparkProperties": {
+		//	          "additionalProperties": false,
+		//	          "description": "Specifies custom jar files and Spark properties for use cases like cluster encryption, table formats, and general Spark tuning.",
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "EngineVersion": {
 		//	      "additionalProperties": false,
 		//	      "description": "The Athena engine version for running queries.",
@@ -454,7 +788,7 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "ExecutionRole": {
-		//	      "description": "Execution Role ARN required to run Athena Spark Calculations",
+		//	      "description": "The ARN of the execution role used to access user resources for Spark sessions and Identity Center enabled workgroups. This property applies only to Spark enabled workgroups and Identity Center enabled workgroups.",
 		//	      "type": "string"
 		//	    },
 		//	    "ManagedQueryResultsConfiguration": {
@@ -470,6 +804,79 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "properties": {
 		//	            "KmsKey": {
 		//	              "description": "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "MonitoringConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets, Amazon CloudWatch log groups etc.",
+		//	      "properties": {
+		//	        "CloudWatchLoggingConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration settings for delivering logs to Amazon CloudWatch log groups.",
+		//	          "properties": {
+		//	            "Enabled": {
+		//	              "description": "Enables CloudWatch logging.",
+		//	              "type": "boolean"
+		//	            },
+		//	            "LogGroup": {
+		//	              "description": "The name of the log group in Amazon CloudWatch Logs where you want to publish your logs.",
+		//	              "type": "string"
+		//	            },
+		//	            "LogStreamNamePrefix": {
+		//	              "description": "Prefix for the CloudWatch log stream name.",
+		//	              "type": "string"
+		//	            },
+		//	            "LogTypes": {
+		//	              "additionalProperties": false,
+		//	              "description": "The types of logs that you want to publish to CloudWatch.",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "ManagedLoggingConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration settings for managed log persistence.",
+		//	          "properties": {
+		//	            "Enabled": {
+		//	              "description": "Enables managed log persistence.",
+		//	              "type": "boolean"
+		//	            },
+		//	            "KmsKey": {
+		//	              "description": "The KMS key ARN to encrypt the logs stored in managed log persistence.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "S3LoggingConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration settings for delivering logs to Amazon S3 buckets.",
+		//	          "properties": {
+		//	            "Enabled": {
+		//	              "description": "Enables S3 log delivery.",
+		//	              "type": "boolean"
+		//	            },
+		//	            "KmsKey": {
+		//	              "description": "The KMS key ARN to encrypt the logs published to the given Amazon S3 destination.",
+		//	              "type": "string"
+		//	            },
+		//	            "LogLocation": {
+		//	              "description": "The Amazon S3 destination URI for log publishing.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -592,6 +999,63 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: EngineConfiguration
+				"engine_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AdditionalConfigs
+						"additional_configs": // Pattern: ""
+						schema.MapAttribute{  /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Contains additional notebook engine MAP<string, string> parameter mappings in the form of key-value pairs. To specify an Athena notebook that the Jupyter server will download and serve, specify a value for the StartSessionRequest$NotebookVersion field, and then add a key named NotebookId to AdditionalConfigs that has the value of the Athena notebook ID.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Classifications
+						"classifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Name
+									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The name of the configuration classification.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Properties
+									"properties":        // Pattern: ""
+									schema.MapAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "A set of properties specified within a configuration classification.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "The configuration classifications that can be specified for the engine.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CoordinatorDpuSize
+						"coordinator_dpu_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The number of DPUs to use for the coordinator. A coordinator is a special executor that orchestrates processing work and manages other executors in a notebook session. The default is 1.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DefaultExecutorDpuSize
+						"default_executor_dpu_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The default number of DPUs to use for executors. An executor is the smallest unit of compute that a notebook session can request from Athena. The default is 1.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaxConcurrentDpus
+						"max_concurrent_dpus": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The maximum number of DPUs that can run concurrently.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SparkProperties
+						"spark_properties":  // Pattern: ""
+						schema.MapAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Specifies custom jar files and Spark properties for use cases like cluster encryption, table formats, and general Spark tuning.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The engine configuration for running queries.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: EngineVersion
 				"engine_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -611,7 +1075,7 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ExecutionRole
 				"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Execution Role ARN required to run Athena Spark Calculations",
+					Description: "The ARN of the execution role used to access user resources for Spark sessions and Identity Center enabled workgroups. This property applies only to Spark enabled workgroups and Identity Center enabled workgroups.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ManagedQueryResultsConfiguration
@@ -635,6 +1099,81 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The configuration for the managed query results and encryption option. ResultConfiguration and ManagedQueryResultsConfiguration cannot be set at the same time",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MonitoringConfiguration
+				"monitoring_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CloudWatchLoggingConfiguration
+						"cloudwatch_logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Enables CloudWatch logging.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogGroup
+								"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the log group in Amazon CloudWatch Logs where you want to publish your logs.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogStreamNamePrefix
+								"log_stream_name_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Prefix for the CloudWatch log stream name.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogTypes
+								"log_types":         // Pattern: ""
+								schema.MapAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.ListType{ElemType: types.StringType},
+									Description: "The types of logs that you want to publish to CloudWatch.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration settings for delivering logs to Amazon CloudWatch log groups.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ManagedLoggingConfiguration
+						"managed_logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Enables managed log persistence.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: KmsKey
+								"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The KMS key ARN to encrypt the logs stored in managed log persistence.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration settings for managed log persistence.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3LoggingConfiguration
+						"s3_logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Enables S3 log delivery.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: KmsKey
+								"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The KMS key ARN to encrypt the logs published to the given Amazon S3 destination.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogLocation
+								"log_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 destination URI for log publishing.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration settings for delivering logs to Amazon S3 buckets.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets, Amazon CloudWatch log groups etc.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PublishCloudWatchMetricsEnabled
@@ -740,24 +1279,38 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"acl_configuration":                         "AclConfiguration",
+		"additional_configs":                        "AdditionalConfigs",
 		"additional_configuration":                  "AdditionalConfiguration",
 		"bytes_scanned_cutoff_per_query":            "BytesScannedCutoffPerQuery",
+		"classifications":                           "Classifications",
+		"cloudwatch_logging_configuration":          "CloudWatchLoggingConfiguration",
+		"coordinator_dpu_size":                      "CoordinatorDpuSize",
 		"creation_time":                             "CreationTime",
 		"customer_content_encryption_configuration": "CustomerContentEncryptionConfiguration",
+		"default_executor_dpu_size":                 "DefaultExecutorDpuSize",
 		"description":                               "Description",
 		"effective_engine_version":                  "EffectiveEngineVersion",
 		"enabled":                                   "Enabled",
 		"encryption_configuration":                  "EncryptionConfiguration",
 		"encryption_option":                         "EncryptionOption",
 		"enforce_work_group_configuration":          "EnforceWorkGroupConfiguration",
+		"engine_configuration":                      "EngineConfiguration",
 		"engine_version":                            "EngineVersion",
 		"execution_role":                            "ExecutionRole",
 		"expected_bucket_owner":                     "ExpectedBucketOwner",
 		"key":                                       "Key",
 		"kms_key":                                   "KmsKey",
+		"log_group":                                 "LogGroup",
+		"log_location":                              "LogLocation",
+		"log_stream_name_prefix":                    "LogStreamNamePrefix",
+		"log_types":                                 "LogTypes",
+		"managed_logging_configuration":             "ManagedLoggingConfiguration",
 		"managed_query_results_configuration":       "ManagedQueryResultsConfiguration",
+		"max_concurrent_dpus":                       "MaxConcurrentDpus",
+		"monitoring_configuration":                  "MonitoringConfiguration",
 		"name":                                      "Name",
 		"output_location":                           "OutputLocation",
+		"properties":                                "Properties",
 		"publish_cloudwatch_metrics_enabled":        "PublishCloudWatchMetricsEnabled",
 		"recursive_delete_option":                   "RecursiveDeleteOption",
 		"remove_acl_configuration":                  "RemoveAclConfiguration",
@@ -770,7 +1323,9 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"result_configuration":                             "ResultConfiguration",
 		"result_configuration_updates":                     "ResultConfigurationUpdates",
 		"s3_acl_option":                                    "S3AclOption",
+		"s3_logging_configuration":                         "S3LoggingConfiguration",
 		"selected_engine_version":                          "SelectedEngineVersion",
+		"spark_properties":                                 "SparkProperties",
 		"state":                                            "State",
 		"tags":                                             "Tags",
 		"value":                                            "Value",
