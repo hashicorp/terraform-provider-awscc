@@ -25,8 +25,10 @@ Resource Type definition for AWS::SageMaker::PartnerApp
 
 ### Optional
 
+- `app_version` (String) The version of the PartnerApp.
 - `application_config` (Attributes) A collection of settings that specify the maintenance schedule for the PartnerApp. (see [below for nested schema](#nestedatt--application_config))
 - `client_token` (String) The client token for the PartnerApp.
+- `enable_auto_minor_version_upgrade` (Boolean) Enables automatic minor version upgrades for the PartnerApp.
 - `enable_iam_session_based_identity` (Boolean) Enables IAM Session based Identity for PartnerApp.
 - `kms_key_id` (String) The AWS KMS customer managed key used to encrypt the data associated with the PartnerApp.
 - `maintenance_config` (Attributes) A collection of settings that specify the maintenance schedule for the PartnerApp. (see [below for nested schema](#nestedatt--maintenance_config))
@@ -36,6 +38,7 @@ Resource Type definition for AWS::SageMaker::PartnerApp
 
 - `arn` (String) The Amazon Resource Name (ARN) of the created PartnerApp.
 - `base_url` (String) The AppServerUrl based on app and account-info.
+- `current_version_eol_date` (String) The end-of-life date for the current version of the PartnerApp.
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--application_config"></a>

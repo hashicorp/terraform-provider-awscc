@@ -216,6 +216,7 @@ resource "awscc_kms_key" "main" {
 - `access_config` (Attributes) An object representing the Access Config to use for the cluster. (see [below for nested schema](#nestedatt--access_config))
 - `bootstrap_self_managed_addons` (Boolean) Set this value to false to avoid creating the default networking add-ons when the cluster is created.
 - `compute_config` (Attributes) Todo: add description (see [below for nested schema](#nestedatt--compute_config))
+- `control_plane_scaling_config` (Attributes) Configuration for provisioned control plane scaling. (see [below for nested schema](#nestedatt--control_plane_scaling_config))
 - `deletion_protection` (Boolean) Set this value to true to enable deletion protection for the cluster.
 - `encryption_config` (Attributes List) (see [below for nested schema](#nestedatt--encryption_config))
 - `force` (Boolean) Force cluster version update
@@ -273,6 +274,14 @@ Optional:
 - `enabled` (Boolean) Todo: add description
 - `node_pools` (List of String) Todo: add description
 - `node_role_arn` (String) Todo: add description
+
+
+<a id="nestedatt--control_plane_scaling_config"></a>
+### Nested Schema for `control_plane_scaling_config`
+
+Optional:
+
+- `tier` (String) The scaling tier for the provisioned control plane.
 
 
 <a id="nestedatt--encryption_config"></a>

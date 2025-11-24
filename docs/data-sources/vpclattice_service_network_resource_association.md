@@ -22,6 +22,7 @@ Data Source schema for AWS::VpcLattice::ServiceNetworkResourceAssociation
 ### Read-Only
 
 - `arn` (String)
+- `private_dns_enabled` (Boolean)
 - `resource_configuration_id` (String)
 - `service_network_id` (String)
 - `service_network_resource_association_id` (String)

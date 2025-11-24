@@ -1,0 +1,1 @@
+$ terraform import awscc_cognito_terms.example "user_pool_id|terms_id"

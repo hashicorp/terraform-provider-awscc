@@ -43,6 +43,7 @@ resource "awscc_apigateway_domain_name" "example" {
 
 - `certificate_arn` (String)
 - `domain_name` (String)
+- `endpoint_access_mode` (String)
 - `endpoint_configuration` (Attributes) The endpoint configuration of this DomainName showing the endpoint types and IP address types of the domain name. (see [below for nested schema](#nestedatt--endpoint_configuration))
 - `mutual_tls_authentication` (Attributes) (see [below for nested schema](#nestedatt--mutual_tls_authentication))
 - `ownership_verification_certificate_arn` (String) The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the RegionalCertificateArn.

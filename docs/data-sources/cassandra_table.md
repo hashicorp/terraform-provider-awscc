@@ -35,6 +35,7 @@ Data Source schema for AWS::Cassandra::Table
 - `replica_specifications` (Attributes List) (see [below for nested schema](#nestedatt--replica_specifications))
 - `table_name` (String) Name for Cassandra table
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource (see [below for nested schema](#nestedatt--tags))
+- `warm_throughput` (Attributes) Warm throughput configuration for the table (see [below for nested schema](#nestedatt--warm_throughput))
 
 <a id="nestedatt--auto_scaling_specifications"></a>
 ### Nested Schema for `auto_scaling_specifications`
@@ -234,3 +235,12 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
+
+
+<a id="nestedatt--warm_throughput"></a>
+### Nested Schema for `warm_throughput`
+
+Read-Only:
+
+- `read_units_per_second` (Number)
+- `write_units_per_second` (Number)

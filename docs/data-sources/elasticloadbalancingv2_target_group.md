@@ -36,6 +36,7 @@ Data Source schema for AWS::ElasticLoadBalancingV2::TargetGroup
 - `protocol` (String) The protocol to use for routing traffic to the targets.
 - `protocol_version` (String) [HTTP/HTTPS protocol] The protocol version. The possible values are GRPC, HTTP1, and HTTP2.
 - `tags` (Attributes List) The tags. (see [below for nested schema](#nestedatt--tags))
+- `target_control_port` (Number) The port that the target control agent uses to communicate the available capacity of targets to the load balancer.
 - `target_group_arn` (String) The ARN of the Target Group
 - `target_group_attributes` (Attributes Set) The attributes. (see [below for nested schema](#nestedatt--target_group_attributes))
 - `target_group_full_name` (String) The full name of the target group.

@@ -116,6 +116,7 @@ resource "awscc_cassandra_table" "awscc_cassandra_table_example" {
 - `replica_specifications` (Attributes List) (see [below for nested schema](#nestedatt--replica_specifications))
 - `table_name` (String) Name for Cassandra table
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource (see [below for nested schema](#nestedatt--tags))
+- `warm_throughput` (Attributes) Warm throughput configuration for the table (see [below for nested schema](#nestedatt--warm_throughput))
 
 ### Read-Only
 
@@ -319,6 +320,15 @@ Optional:
 
 - `key` (String)
 - `value` (String)
+
+
+<a id="nestedatt--warm_throughput"></a>
+### Nested Schema for `warm_throughput`
+
+Optional:
+
+- `read_units_per_second` (Number)
+- `write_units_per_second` (Number)
 
 ## Import
 

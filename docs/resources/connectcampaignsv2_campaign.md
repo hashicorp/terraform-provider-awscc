@@ -117,6 +117,7 @@ Optional:
 - `answer_machine_detection_config` (Attributes) The configuration used for answering machine detection during outbound calls (see [below for nested schema](#nestedatt--channel_subtype_config--telephony--default_outbound_config--answer_machine_detection_config))
 - `connect_contact_flow_id` (String) The identifier of the contact flow for the outbound call
 - `connect_source_phone_number` (String) The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.
+- `ring_timeout` (Number) Maximum ring time for outbound calls in seconds
 
 <a id="nestedatt--channel_subtype_config--telephony--default_outbound_config--answer_machine_detection_config"></a>
 ### Nested Schema for `channel_subtype_config.telephony.default_outbound_config.answer_machine_detection_config`

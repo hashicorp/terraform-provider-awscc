@@ -23,6 +23,8 @@ Data Source schema for AWS::VpcLattice::ServiceNetworkVpcAssociation
 
 - `arn` (String)
 - `created_at` (String)
+- `dns_options` (Attributes) (see [below for nested schema](#nestedatt--dns_options))
+- `private_dns_enabled` (Boolean)
 - `security_group_ids` (Set of String)
 - `service_network_arn` (String)
 - `service_network_id` (String)
@@ -33,6 +35,15 @@ Data Source schema for AWS::VpcLattice::ServiceNetworkVpcAssociation
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 - `vpc_id` (String)
 - `vpc_identifier` (String)
+
+<a id="nestedatt--dns_options"></a>
+### Nested Schema for `dns_options`
+
+Read-Only:
+
+- `private_dns_preference` (String)
+- `private_dns_specified_domains` (Set of String)
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

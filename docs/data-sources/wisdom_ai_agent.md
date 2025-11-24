@@ -38,6 +38,9 @@ Data Source schema for AWS::Wisdom::AIAgent
 Read-Only:
 
 - `answer_recommendation_ai_agent_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--answer_recommendation_ai_agent_configuration))
+- `email_generative_answer_ai_agent_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--email_generative_answer_ai_agent_configuration))
+- `email_overview_ai_agent_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--email_overview_ai_agent_configuration))
+- `email_response_ai_agent_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--email_response_ai_agent_configuration))
 - `manual_search_ai_agent_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--manual_search_ai_agent_configuration))
 - `self_service_ai_agent_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--self_service_ai_agent_configuration))
 
@@ -125,6 +128,203 @@ Read-Only:
 
 <a id="nestedatt--configuration--answer_recommendation_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--tag_condition"></a>
 ### Nested Schema for `configuration.answer_recommendation_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
+
+
+
+
+
+
+
+<a id="nestedatt--configuration--email_generative_answer_ai_agent_configuration"></a>
+### Nested Schema for `configuration.email_generative_answer_ai_agent_configuration`
+
+Read-Only:
+
+- `association_configurations` (Attributes List) (see [below for nested schema](#nestedatt--configuration--email_generative_answer_ai_agent_configuration--association_configurations))
+- `email_generative_answer_ai_prompt_id` (String)
+- `email_query_reformulation_ai_prompt_id` (String)
+- `locale` (String)
+
+<a id="nestedatt--configuration--email_generative_answer_ai_agent_configuration--association_configurations"></a>
+### Nested Schema for `configuration.email_generative_answer_ai_agent_configuration.association_configurations`
+
+Read-Only:
+
+- `association_configuration_data` (Attributes) (see [below for nested schema](#nestedatt--configuration--email_generative_answer_ai_agent_configuration--association_configurations--association_configuration_data))
+- `association_id` (String)
+- `association_type` (String)
+
+<a id="nestedatt--configuration--email_generative_answer_ai_agent_configuration--association_configurations--association_configuration_data"></a>
+### Nested Schema for `configuration.email_generative_answer_ai_agent_configuration.association_configurations.association_configuration_data`
+
+Read-Only:
+
+- `knowledge_base_association_configuration_data` (Attributes) (see [below for nested schema](#nestedatt--configuration--email_generative_answer_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data))
+
+<a id="nestedatt--configuration--email_generative_answer_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data"></a>
+### Nested Schema for `configuration.email_generative_answer_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data`
+
+Read-Only:
+
+- `content_tag_filter` (Attributes) (see [below for nested schema](#nestedatt--configuration--email_generative_answer_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter))
+- `max_results` (Number)
+- `override_knowledge_base_search_type` (String)
+
+<a id="nestedatt--configuration--email_generative_answer_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter"></a>
+### Nested Schema for `configuration.email_generative_answer_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter`
+
+Read-Only:
+
+- `and_conditions` (Attributes List) (see [below for nested schema](#nestedatt--configuration--email_generative_answer_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--and_conditions))
+- `or_conditions` (Attributes List) (see [below for nested schema](#nestedatt--configuration--email_generative_answer_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--or_conditions))
+- `tag_condition` (Attributes) (see [below for nested schema](#nestedatt--configuration--email_generative_answer_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--tag_condition))
+
+<a id="nestedatt--configuration--email_generative_answer_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--and_conditions"></a>
+### Nested Schema for `configuration.email_generative_answer_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
+
+
+<a id="nestedatt--configuration--email_generative_answer_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--or_conditions"></a>
+### Nested Schema for `configuration.email_generative_answer_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions`
+
+Read-Only:
+
+- `and_conditions` (Attributes List) (see [below for nested schema](#nestedatt--configuration--email_generative_answer_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--or_conditions--and_conditions))
+- `tag_condition` (Attributes) (see [below for nested schema](#nestedatt--configuration--email_generative_answer_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--or_conditions--tag_condition))
+
+<a id="nestedatt--configuration--email_generative_answer_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--or_conditions--and_conditions"></a>
+### Nested Schema for `configuration.email_generative_answer_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions.and_conditions`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
+
+
+<a id="nestedatt--configuration--email_generative_answer_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--or_conditions--tag_condition"></a>
+### Nested Schema for `configuration.email_generative_answer_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions.tag_condition`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
+
+
+
+<a id="nestedatt--configuration--email_generative_answer_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--tag_condition"></a>
+### Nested Schema for `configuration.email_generative_answer_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
+
+
+
+
+
+
+
+<a id="nestedatt--configuration--email_overview_ai_agent_configuration"></a>
+### Nested Schema for `configuration.email_overview_ai_agent_configuration`
+
+Read-Only:
+
+- `email_overview_ai_prompt_id` (String)
+- `locale` (String)
+
+
+<a id="nestedatt--configuration--email_response_ai_agent_configuration"></a>
+### Nested Schema for `configuration.email_response_ai_agent_configuration`
+
+Read-Only:
+
+- `association_configurations` (Attributes List) (see [below for nested schema](#nestedatt--configuration--email_response_ai_agent_configuration--association_configurations))
+- `email_query_reformulation_ai_prompt_id` (String)
+- `email_response_ai_prompt_id` (String)
+- `locale` (String)
+
+<a id="nestedatt--configuration--email_response_ai_agent_configuration--association_configurations"></a>
+### Nested Schema for `configuration.email_response_ai_agent_configuration.association_configurations`
+
+Read-Only:
+
+- `association_configuration_data` (Attributes) (see [below for nested schema](#nestedatt--configuration--email_response_ai_agent_configuration--association_configurations--association_configuration_data))
+- `association_id` (String)
+- `association_type` (String)
+
+<a id="nestedatt--configuration--email_response_ai_agent_configuration--association_configurations--association_configuration_data"></a>
+### Nested Schema for `configuration.email_response_ai_agent_configuration.association_configurations.association_configuration_data`
+
+Read-Only:
+
+- `knowledge_base_association_configuration_data` (Attributes) (see [below for nested schema](#nestedatt--configuration--email_response_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data))
+
+<a id="nestedatt--configuration--email_response_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data"></a>
+### Nested Schema for `configuration.email_response_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data`
+
+Read-Only:
+
+- `content_tag_filter` (Attributes) (see [below for nested schema](#nestedatt--configuration--email_response_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter))
+- `max_results` (Number)
+- `override_knowledge_base_search_type` (String)
+
+<a id="nestedatt--configuration--email_response_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter"></a>
+### Nested Schema for `configuration.email_response_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter`
+
+Read-Only:
+
+- `and_conditions` (Attributes List) (see [below for nested schema](#nestedatt--configuration--email_response_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--and_conditions))
+- `or_conditions` (Attributes List) (see [below for nested schema](#nestedatt--configuration--email_response_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--or_conditions))
+- `tag_condition` (Attributes) (see [below for nested schema](#nestedatt--configuration--email_response_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--tag_condition))
+
+<a id="nestedatt--configuration--email_response_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--and_conditions"></a>
+### Nested Schema for `configuration.email_response_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.and_conditions`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
+
+
+<a id="nestedatt--configuration--email_response_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--or_conditions"></a>
+### Nested Schema for `configuration.email_response_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions`
+
+Read-Only:
+
+- `and_conditions` (Attributes List) (see [below for nested schema](#nestedatt--configuration--email_response_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--or_conditions--and_conditions))
+- `tag_condition` (Attributes) (see [below for nested schema](#nestedatt--configuration--email_response_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--or_conditions--tag_condition))
+
+<a id="nestedatt--configuration--email_response_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--or_conditions--and_conditions"></a>
+### Nested Schema for `configuration.email_response_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions.and_conditions`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
+
+
+<a id="nestedatt--configuration--email_response_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--or_conditions--tag_condition"></a>
+### Nested Schema for `configuration.email_response_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.or_conditions.tag_condition`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
+
+
+
+<a id="nestedatt--configuration--email_response_ai_agent_configuration--association_configurations--association_configuration_data--knowledge_base_association_configuration_data--content_tag_filter--tag_condition"></a>
+### Nested Schema for `configuration.email_response_ai_agent_configuration.association_configurations.association_configuration_data.knowledge_base_association_configuration_data.content_tag_filter.tag_condition`
 
 Read-Only:
 

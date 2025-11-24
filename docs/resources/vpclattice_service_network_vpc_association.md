@@ -49,6 +49,8 @@ resource "awscc_vpclattice_service_network_vpc_association" "example" {
 
 ### Optional
 
+- `dns_options` (Attributes) (see [below for nested schema](#nestedatt--dns_options))
+- `private_dns_enabled` (Boolean)
 - `security_group_ids` (Set of String)
 - `service_network_identifier` (String)
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
@@ -65,6 +67,15 @@ resource "awscc_vpclattice_service_network_vpc_association" "example" {
 - `service_network_vpc_association_id` (String)
 - `status` (String)
 - `vpc_id` (String)
+
+<a id="nestedatt--dns_options"></a>
+### Nested Schema for `dns_options`
+
+Optional:
+
+- `private_dns_preference` (String)
+- `private_dns_specified_domains` (Set of String)
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

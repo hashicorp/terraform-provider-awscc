@@ -42,12 +42,21 @@ resource "awscc_kinesisvideo_stream" "example" {
 - `kms_key_id` (String) AWS KMS key ID that Kinesis Video Streams uses to encrypt stream data.
 - `media_type` (String) The media type of the stream. Consumers of the stream can use this information when processing the stream.
 - `name` (String) The name of the Kinesis Video stream.
+- `stream_storage_configuration` (Attributes) Configuration for the storage tier of the Kinesis Video Stream. (see [below for nested schema](#nestedatt--stream_storage_configuration))
 - `tags` (Attributes List) An array of key-value pairs associated with the Kinesis Video Stream. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `arn` (String) The Amazon Resource Name (ARN) of the Kinesis Video stream.
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--stream_storage_configuration"></a>
+### Nested Schema for `stream_storage_configuration`
+
+Optional:
+
+- `default_storage_tier` (String) The storage tier for the Kinesis Video Stream. Determines the storage class used for stream data.
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

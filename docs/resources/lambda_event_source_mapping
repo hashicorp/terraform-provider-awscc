@@ -87,6 +87,7 @@ resource "awscc_lambda_permission" "example" {
 - `function_response_types` (List of String) (Kinesis, DynamoDB Streams, and SQS) A list of current response type enums applied to the event source mapping.
  Valid Values: ``ReportBatchItemFailures``
 - `kms_key_arn` (String) The ARN of the KMSlong (KMS) customer managed key that Lambda uses to encrypt your function's [filter criteria](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-basics).
+- `logging_config` (Attributes) The function's Amazon CloudWatch Logs configuration settings. (see [below for nested schema](#nestedatt--logging_config))
 - `maximum_batching_window_in_seconds` (Number) The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function.
  *Default (, , event sources)*: 0
  *Default (, Kafka, , event sources)*: 500 ms
@@ -96,9 +97,9 @@ resource "awscc_lambda_permission" "example" {
 - `maximum_retry_attempts` (Number) (Kinesis and DynamoDB Streams only) Discard records after the specified number of retries. The default value is -1, which sets the maximum number of retries to infinite. When MaximumRetryAttempts is infinite, Lambda retries failed records until the record expires in the event source.
 - `metrics_config` (Attributes) The metrics configuration for your event source. For more information, see [Event source mapping metrics](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics). (see [below for nested schema](#nestedatt--metrics_config))
 - `parallelization_factor` (Number) (Kinesis and DynamoDB Streams only) The number of batches to process concurrently from each shard. The default value is 1.
-- `provisioned_poller_config` (Attributes) (Amazon MSK and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see [provisioned mode](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode). (see [below for nested schema](#nestedatt--provisioned_poller_config))
+- `provisioned_poller_config` (Attributes) (Amazon SQS, Amazon MSK, and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see [provisioned mode](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode). (see [below for nested schema](#nestedatt--provisioned_poller_config))
 - `queues` (List of String) (Amazon MQ) The name of the Amazon MQ broker destination queue to consume.
-- `scaling_config` (Attributes) (Amazon SQS only) The scaling configuration for the event source. For more information, see [Configuring maximum concurrency for Amazon SQS event sources](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-max-concurrency). (see [below for nested schema](#nestedatt--scaling_config))
+- `scaling_config` (Attributes) This property is for Amazon SQS event sources only. You cannot use ``ProvisionedPollerConfig`` while using ``ScalingConfig``. These options are mutually exclusive. To remove the scaling configuration, pass an empty value. (see [below for nested schema](#nestedatt--scaling_config))
 - `self_managed_event_source` (Attributes) The self-managed Apache Kafka cluster for your event source. (see [below for nested schema](#nestedatt--self_managed_event_source))
 - `self_managed_kafka_event_source_config` (Attributes) Specific configuration settings for a self-managed Apache Kafka event source. (see [below for nested schema](#nestedatt--self_managed_kafka_event_source_config))
 - `source_access_configurations` (Attributes List) An array of the authentication protocol, VPC components, or virtual host to secure and define your event source. (see [below for nested schema](#nestedatt--source_access_configurations))
@@ -173,7 +174,8 @@ Optional:
 
 - `destination` (String) The Amazon Resource Name (ARN) of the destination resource.
  To retain records of unsuccessful [asynchronous invocations](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations), you can configure an Amazon SNS topic, Amazon SQS queue, Amazon S3 bucket, Lambda function, or Amazon EventBridge event bus as the destination.
- To retain records of failed invocations from [Kinesis](https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html), [DynamoDB](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html), [self-managed Kafka](https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-smaa-onfailure-destination) or [Amazon MSK](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-onfailure-destination), you can configure an Amazon SNS topic, Amazon SQS queue, or Amazon S3 bucket as the destination.
+  Amazon SNS destinations have a message size limit of 256 KB. If the combined size of the function request and response payload exceeds the limit, Lambda will drop the payload when sending ``OnFailure`` event to the destination. For details on this behavior, refer to [Retaining records of asynchronous invocations](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html).
+  To retain records of failed invocations from [Kinesis](https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html), [DynamoDB](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html), [self-managed Kafka](https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-smaa-onfailure-destination) or [Amazon MSK](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-onfailure-destination), you can configure an Amazon SNS topic, Amazon SQS queue, or Amazon S3 bucket as the destination.
 
 
 
@@ -203,6 +205,14 @@ Optional:
 
 
 
+<a id="nestedatt--logging_config"></a>
+### Nested Schema for `logging_config`
+
+Optional:
+
+- `system_log_level` (String) Set this property to filter the system logs for your function that Lambda sends to CloudWatch. Lambda only sends system logs at the selected level of detail and lower, where ``DEBUG`` is the highest level and ``WARN`` is the lowest.
+
+
 <a id="nestedatt--metrics_config"></a>
 ### Nested Schema for `metrics_config`
 
@@ -216,8 +226,9 @@ Optional:
 
 Optional:
 
-- `maximum_pollers` (Number) The maximum number of event pollers this event source can scale up to.
-- `minimum_pollers` (Number) The minimum number of event pollers this event source can scale down to.
+- `maximum_pollers` (Number) The maximum number of event pollers this event source can scale up to. For Amazon SQS events source mappings, default is 200, and minimum value allowed is 2. For Amazon MSK and self-managed Apache Kafka event source mappings, default is 200, and minimum value allowed is 1.
+- `minimum_pollers` (Number) The minimum number of event pollers this event source can scale down to. For Amazon SQS events source mappings, default is 2, and minimum 2 required. For Amazon MSK and self-managed Apache Kafka event source mappings, default is 1.
+- `poller_group_name` (String)
 
 
 <a id="nestedatt--scaling_config"></a>

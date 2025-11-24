@@ -87,6 +87,7 @@ Optional:
 - `schedule_expression` (String)
 - `schedule_expression_timezone` (String)
 - `start_window_minutes` (Number)
+- `target_logically_air_gapped_backup_vault_arn` (String)
 
 <a id="nestedatt--backup_plan--backup_plan_rule--copy_actions"></a>
 ### Nested Schema for `backup_plan.backup_plan_rule.copy_actions`

@@ -3,12 +3,12 @@
 page_title: "awscc_lex_bot_version Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  A version is a numbered snapshot of your work that you can publish for use in different parts of your workflow, such as development, beta deployment, and production.
+  Resource Type definition for bot versions, a numbered snapshot of your work that you can publish for use in different parts of your workflow, such as development, beta deployment, and production.
 ---
 
 # awscc_lex_bot_version (Resource)
 
-A version is a numbered snapshot of your work that you can publish for use in different parts of your workflow, such as development, beta deployment, and production.
+Resource Type definition for bot versions, a numbered snapshot of your work that you can publish for use in different parts of your workflow, such as development, beta deployment, and production.
 
 ## Example Usage
 

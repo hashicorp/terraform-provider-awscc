@@ -40,6 +40,7 @@ resource "awscc_dsql_cluster" "example" {
 
 - `creation_time` (String) The time of when the cluster was created in ISO-8601 format.
 - `encryption_details` (Attributes) The encryption configuration details for the cluster. (see [below for nested schema](#nestedatt--encryption_details))
+- `endpoint` (String) The DSQL cluster endpoint.
 - `id` (String) Uniquely identifies the resource.
 - `identifier` (String) The ID of the created cluster.
 - `policy_version` (String) The version number of the cluster's resource based policy

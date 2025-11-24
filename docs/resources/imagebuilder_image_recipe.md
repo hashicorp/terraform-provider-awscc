@@ -94,6 +94,7 @@ resource "awscc_imagebuilder_image_recipe" "example" {
 
 - `arn` (String) The Amazon Resource Name (ARN) of the image recipe.
 - `id` (String) Uniquely identifies the resource.
+- `latest_version` (Attributes) The latest version references of the image recipe. (see [below for nested schema](#nestedatt--latest_version))
 
 <a id="nestedatt--additional_instance_configuration"></a>
 ### Nested Schema for `additional_instance_configuration`
@@ -153,6 +154,18 @@ Optional:
 
 - `name` (String) The name of the component parameter to set.
 - `value` (List of String) Sets the value for the named component parameter.
+
+
+
+<a id="nestedatt--latest_version"></a>
+### Nested Schema for `latest_version`
+
+Read-Only:
+
+- `arn` (String) The latest version ARN of the created image recipe.
+- `major` (String) The latest version ARN of the created image recipe, with the same major version.
+- `minor` (String) The latest version ARN of the created image recipe, with the same minor version.
+- `patch` (String) The latest version ARN of the created image recipe, with the same patch version.
 
 ## Import
 

@@ -31,6 +31,7 @@ Data Source schema for AWS::Bedrock::DataAutomationProject
 - `project_description` (String) Description of the DataAutomationProject
 - `project_name` (String) Name of the DataAutomationProject
 - `project_stage` (String) Stage of the Project
+- `project_type` (String) Type of the DataAutomationProject - Sync or Async
 - `standard_output_configuration` (Attributes) Standard output configuration (see [below for nested schema](#nestedatt--standard_output_configuration))
 - `status` (String)
 - `tags` (Attributes List) List of Tags (see [below for nested schema](#nestedatt--tags))
@@ -69,7 +70,19 @@ Read-Only:
 
 Read-Only:
 
+- `language_configuration` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--audio--language_configuration))
 - `modality_processing` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--audio--modality_processing))
+- `sensitive_data_configuration` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--audio--sensitive_data_configuration))
+
+<a id="nestedatt--override_configuration--audio--language_configuration"></a>
+### Nested Schema for `override_configuration.audio.language_configuration`
+
+Read-Only:
+
+- `generative_output_language` (String)
+- `identify_multiple_languages` (Boolean)
+- `input_languages` (List of String)
+
 
 <a id="nestedatt--override_configuration--audio--modality_processing"></a>
 ### Nested Schema for `override_configuration.audio.modality_processing`
@@ -79,6 +92,25 @@ Read-Only:
 - `state` (String)
 
 
+<a id="nestedatt--override_configuration--audio--sensitive_data_configuration"></a>
+### Nested Schema for `override_configuration.audio.sensitive_data_configuration`
+
+Read-Only:
+
+- `detection_mode` (String)
+- `detection_scope` (List of String)
+- `pii_entities_configuration` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--audio--sensitive_data_configuration--pii_entities_configuration))
+
+<a id="nestedatt--override_configuration--audio--sensitive_data_configuration--pii_entities_configuration"></a>
+### Nested Schema for `override_configuration.audio.sensitive_data_configuration.pii_entities_configuration`
+
+Read-Only:
+
+- `pii_entity_types` (List of String)
+- `redaction_mask_mode` (String)
+
+
+
 
 <a id="nestedatt--override_configuration--document"></a>
 ### Nested Schema for `override_configuration.document`
@@ -86,6 +118,7 @@ Read-Only:
 Read-Only:
 
 - `modality_processing` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--document--modality_processing))
+- `sensitive_data_configuration` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--document--sensitive_data_configuration))
 - `splitter` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--document--splitter))
 
 <a id="nestedatt--override_configuration--document--modality_processing"></a>
@@ -94,6 +127,25 @@ Read-Only:
 Read-Only:
 
 - `state` (String)
+
+
+<a id="nestedatt--override_configuration--document--sensitive_data_configuration"></a>
+### Nested Schema for `override_configuration.document.sensitive_data_configuration`
+
+Read-Only:
+
+- `detection_mode` (String)
+- `detection_scope` (List of String)
+- `pii_entities_configuration` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--document--sensitive_data_configuration--pii_entities_configuration))
+
+<a id="nestedatt--override_configuration--document--sensitive_data_configuration--pii_entities_configuration"></a>
+### Nested Schema for `override_configuration.document.sensitive_data_configuration.pii_entities_configuration`
+
+Read-Only:
+
+- `pii_entity_types` (List of String)
+- `redaction_mask_mode` (String)
+
 
 
 <a id="nestedatt--override_configuration--document--splitter"></a>
@@ -111,6 +163,7 @@ Read-Only:
 Read-Only:
 
 - `modality_processing` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--image--modality_processing))
+- `sensitive_data_configuration` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--image--sensitive_data_configuration))
 
 <a id="nestedatt--override_configuration--image--modality_processing"></a>
 ### Nested Schema for `override_configuration.image.modality_processing`
@@ -118,6 +171,25 @@ Read-Only:
 Read-Only:
 
 - `state` (String)
+
+
+<a id="nestedatt--override_configuration--image--sensitive_data_configuration"></a>
+### Nested Schema for `override_configuration.image.sensitive_data_configuration`
+
+Read-Only:
+
+- `detection_mode` (String)
+- `detection_scope` (List of String)
+- `pii_entities_configuration` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--image--sensitive_data_configuration--pii_entities_configuration))
+
+<a id="nestedatt--override_configuration--image--sensitive_data_configuration--pii_entities_configuration"></a>
+### Nested Schema for `override_configuration.image.sensitive_data_configuration.pii_entities_configuration`
+
+Read-Only:
+
+- `pii_entity_types` (List of String)
+- `redaction_mask_mode` (String)
+
 
 
 
@@ -138,6 +210,7 @@ Read-Only:
 Read-Only:
 
 - `modality_processing` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--video--modality_processing))
+- `sensitive_data_configuration` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--video--sensitive_data_configuration))
 
 <a id="nestedatt--override_configuration--video--modality_processing"></a>
 ### Nested Schema for `override_configuration.video.modality_processing`
@@ -145,6 +218,25 @@ Read-Only:
 Read-Only:
 
 - `state` (String)
+
+
+<a id="nestedatt--override_configuration--video--sensitive_data_configuration"></a>
+### Nested Schema for `override_configuration.video.sensitive_data_configuration`
+
+Read-Only:
+
+- `detection_mode` (String)
+- `detection_scope` (List of String)
+- `pii_entities_configuration` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--video--sensitive_data_configuration--pii_entities_configuration))
+
+<a id="nestedatt--override_configuration--video--sensitive_data_configuration--pii_entities_configuration"></a>
+### Nested Schema for `override_configuration.video.sensitive_data_configuration.pii_entities_configuration`
+
+Read-Only:
+
+- `pii_entity_types` (List of String)
+- `redaction_mask_mode` (String)
+
 
 
 

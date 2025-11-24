@@ -33,6 +33,7 @@ Data Source schema for AWS::MSK::Cluster
 - `logging_info` (Attributes) (see [below for nested schema](#nestedatt--logging_info))
 - `number_of_broker_nodes` (Number)
 - `open_monitoring` (Attributes) (see [below for nested schema](#nestedatt--open_monitoring))
+- `rebalancing` (Attributes) (see [below for nested schema](#nestedatt--rebalancing))
 - `storage_mode` (String)
 - `tags` (Map of String) A key-value pair to associate with a resource.
 
@@ -304,3 +305,13 @@ Read-Only:
 Read-Only:
 
 - `enabled_in_broker` (Boolean)
+
+
+
+
+<a id="nestedatt--rebalancing"></a>
+### Nested Schema for `rebalancing`
+
+Read-Only:
+
+- `status` (String)
