@@ -1,5 +1,46 @@
 ## 1.65.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_cloudfront_connection_function`
+* **New Data Source:** `awscc_cloudfront_connection_functions`
+* **New Data Source:** `awscc_cloudfront_trust_store`
+* **New Data Source:** `awscc_cloudfront_trust_stores`
+* **New Data Source:** `awscc_cognito_terms`
+* **New Data Source:** `awscc_ec2_transit_gateway_metering_policies`
+* **New Data Source:** `awscc_ec2_transit_gateway_metering_policy`
+* **New Data Source:** `awscc_ec2_transit_gateway_metering_policy_entry`
+* **New Data Source:** `awscc_ec2_vpc_encryption_control`
+* **New Data Source:** `awscc_ec2_vpc_encryption_controls`
+* **New Data Source:** `awscc_ec2_vpn_concentrator`
+* **New Data Source:** `awscc_ec2_vpn_concentrators`
+* **New Data Source:** `awscc_ecr_pull_time_update_exclusion`
+* **New Data Source:** `awscc_ecr_pull_time_update_exclusions`
+* **New Data Source:** `awscc_ecr_signing_configuration`
+* **New Data Source:** `awscc_ecr_signing_configurations`
+* **New Data Source:** `awscc_ecs_express_gateway_service`
+* **New Data Source:** `awscc_glue_integration`
+* **New Data Source:** `awscc_glue_integrations`
+* **New List Resource:** `awscc_cloudfront_connection_function`
+* **New List Resource:** `awscc_cloudfront_trust_store`
+* **New List Resource:** `awscc_ec2_transit_gateway_metering_policy`
+* **New List Resource:** `awscc_ec2_vpc_encryption_control`
+* **New List Resource:** `awscc_ec2_vpn_concentrator`
+* **New List Resource:** `awscc_ecr_pull_time_update_exclusion`
+* **New List Resource:** `awscc_ecr_signing_configuration`
+* **New List Resource:** `awscc_glue_integration`
+* **New Resource:** `awscc_cloudfront_connection_function`
+* **New Resource:** `awscc_cloudfront_trust_store`
+* **New Resource:** `awscc_cognito_terms`
+* **New Resource:** `awscc_ec2_transit_gateway_metering_policy`
+* **New Resource:** `awscc_ec2_transit_gateway_metering_policy_entry`
+* **New Resource:** `awscc_ec2_vpc_encryption_control`
+* **New Resource:** `awscc_ec2_vpn_concentrator`
+* **New Resource:** `awscc_ecr_pull_time_update_exclusion`
+* **New Resource:** `awscc_ecr_signing_configuration`
+* **New Resource:** `awscc_ecs_express_gateway_service`
+* **New Resource:** `awscc_glue_integration`
+
 ## 1.64.0 (November 14, 2025)
 
 FEATURES:
