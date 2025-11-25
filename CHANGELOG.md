@@ -1,5 +1,9 @@
 ## 1.66.0 (Unreleased)
 
+BUG FIXES:
+
+* provider: Fix `Missing Resource Identity After Read` error during refresh when a resource is tainted on create ([#2905](https://github.com/hashicorp/terraform-provider-awscc/pull/2905))
+
 ## 1.65.0 (November 24, 2025)
 
 FEATURES:
