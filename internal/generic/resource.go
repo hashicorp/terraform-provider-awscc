@@ -515,6 +515,13 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 		response.Diagnostics.Append(ResourceNotFoundWarningDiag(err))
 		response.State.RemoveResource(ctx)
 
+		if !response.Identity.Raw.IsFullyNull() {
+			return
+		}
+		// set partial identity. This is necessary if resource was tainted
+		// and did not set an identit
+		response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameAccountID), r.provider.AccountID(ctx))...)
+
 		return
 	}
 
