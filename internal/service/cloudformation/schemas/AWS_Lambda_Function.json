@@ -27,6 +27,9 @@
   "primaryIdentifier": [
     "/properties/FunctionName"
   ],
+  "conditionalCreateOnlyProperties": [
+    "/properties/DurableConfig"
+  ],
   "required": [
     "Code",
     "Role"
@@ -37,7 +40,8 @@
         "lambda:GetFunction",
         "lambda:GetFunctionCodeSigningConfig",
         "lambda:GetFunctionRecursionConfig",
-        "lambda:GetRuntimeManagementConfig"
+        "lambda:GetRuntimeManagementConfig",
+        "lambda:GetFunctionScalingConfig"
       ]
     },
     "create": {
@@ -63,7 +67,9 @@
         "lambda:PutRuntimeManagementConfig",
         "lambda:TagResource",
         "lambda:PutFunctionRecursionConfig",
-        "lambda:GetFunctionRecursionConfig"
+        "lambda:GetFunctionRecursionConfig",
+        "lambda:PutFunctionScalingConfig",
+        "lambda:PassCapacityProvider"
       ]
     },
     "update": {
@@ -92,7 +98,10 @@
         "lambda:GetCodeSigningConfig",
         "lambda:GetFunctionCodeSigningConfig",
         "lambda:PutFunctionRecursionConfig",
-        "lambda:GetFunctionRecursionConfig"
+        "lambda:GetFunctionRecursionConfig",
+        "lambda:PutFunctionScalingConfig",
+        "lambda:PublishVersion",
+        "lambda:PassCapacityProvider"
       ]
     },
     "list": {
@@ -116,7 +125,8 @@
     "/properties/Code/S3Key",
     "/properties/Code/S3ObjectVersion",
     "/properties/Code/ZipFile",
-    "/properties/Code/SourceKMSKeyArn"
+    "/properties/Code/SourceKMSKeyArn",
+    "/properties/PublishToLatestPublished"
   ],
   "additionalProperties": false,
   "definitions": {
@@ -148,6 +158,54 @@
           }
         }
       }
+    },
+    "FunctionScalingConfig": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "MinExecutionEnvironments": {
+          "description": "The minimum number of execution environments to maintain for the function.",
+          "maximum": 15000,
+          "type": "integer",
+          "minimum": 0
+        },
+        "MaxExecutionEnvironments": {
+          "description": "The maximum number of execution environments that can be provisioned for the function.",
+          "maximum": 15000,
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "LambdaManagedInstancesCapacityProviderConfig": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ExecutionEnvironmentMemoryGiBPerVCpu": {
+          "description": "The amount of memory in GiB allocated per vCPU for execution environments.",
+          "maximum": 8,
+          "type": "number",
+          "minimum": 2
+        },
+        "CapacityProviderArn": {
+          "minLength": 1,
+          "pattern": "^arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:capacity-provider:[a-zA-Z0-9-_]+$",
+          "description": "The Amazon Resource Name (ARN) of the capacity provider.",
+          "type": "string",
+          "maxLength": 140
+        },
+        "PerExecutionEnvironmentMaxConcurrency": {
+          "description": "The maximum number of concurrent execution environments that can run on each compute instance.",
+          "maximum": 1600,
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "CapacityProviderArn"
+      ]
     },
     "TracingConfig": {
       "description": "The function's [](https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html) tracing configuration. To sample and record incoming requests, set ``Mode`` to ``Active``.",
@@ -205,6 +263,19 @@
         }
       }
     },
+    "CapacityProviderConfig": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "LambdaManagedInstancesCapacityProviderConfig": {
+          "$ref": "#/definitions/LambdaManagedInstancesCapacityProviderConfig"
+        }
+      },
+      "required": [
+        "LambdaManagedInstancesCapacityProviderConfig"
+      ]
+    },
     "RuntimeManagementConfig": {
       "description": "Sets the runtime management configuration for a function's version. For more information, see [Runtime updates](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html).",
       "additionalProperties": false,
@@ -226,6 +297,29 @@
       },
       "required": [
         "UpdateRuntimeOn"
+      ]
+    },
+    "DurableConfig": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ExecutionTimeout": {
+          "description": "The amount of time (in seconds) that Lambda allows a durable function to run before stopping it. The maximum is one 366-day year or 31,622,400 seconds.",
+          "maximum": 31622400,
+          "type": "integer",
+          "minimum": 1
+        },
+        "RetentionPeriodInDays": {
+          "default": 14,
+          "description": "The number of days after a durable execution is closed that Lambda retains its history, from one to 90 days. The default is 14 days.",
+          "maximum": 90,
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "ExecutionTimeout"
       ]
     },
     "SnapStart": {
@@ -456,6 +550,10 @@
     }
   },
   "properties": {
+    "FunctionScalingConfig": {
+      "description": "",
+      "$ref": "#/definitions/FunctionScalingConfig"
+    },
     "Description": {
       "description": "A description of the function.",
       "type": "string",
@@ -472,6 +570,10 @@
     "RuntimeManagementConfig": {
       "description": "Sets the runtime management configuration for a function's version. For more information, see [Runtime updates](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html).",
       "$ref": "#/definitions/RuntimeManagementConfig"
+    },
+    "DurableConfig": {
+      "description": "",
+      "$ref": "#/definitions/DurableConfig"
     },
     "ReservedConcurrentExecutions": {
       "description": "The number of simultaneous executions to reserve for the function.",
@@ -503,6 +605,10 @@
       "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
       "description": "The ARN of the KMSlong (KMS) customer managed key that's used to encrypt the following resources:\n  +  The function's [environment variables](https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption).\n  +  The function's [Lambda SnapStart](https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html) snapshots.\n  +  When used with ``SourceKMSKeyArn``, the unzipped version of the .zip deployment package that's used for function invocations. For more information, see [Specifying a customer managed key for Lambda](https://docs.aws.amazon.com/lambda/latest/dg/encrypt-zip-package.html#enable-zip-custom-encryption).\n  +  The optimized version of the container image that's used for function invocations. Note that this is not the same key that's used to protect your container image in the Amazon Elastic Container Registry (Amazon ECR). For more information, see [Function lifecycle](https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-lifecycle).\n  \n If you don't provide a customer managed key, Lambda uses an [owned key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk) or an [](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk).",
       "type": "string"
+    },
+    "PublishToLatestPublished": {
+      "description": "",
+      "type": "boolean"
     },
     "PackageType": {
       "description": "The type of deployment package. Set to ``Image`` for container image and set ``Zip`` for .zip file archive.",
@@ -554,6 +660,10 @@
       "description": "The amount of time (in seconds) that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds. For more information, see [Lambda execution environment](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html).",
       "type": "integer",
       "minimum": 1
+    },
+    "CapacityProviderConfig": {
+      "description": "",
+      "$ref": "#/definitions/CapacityProviderConfig"
     },
     "Handler": {
       "pattern": "^[^\\s]+$",

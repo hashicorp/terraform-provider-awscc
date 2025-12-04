@@ -185,8 +185,7 @@
         "sqs:GetQueueAttributes",
         "sqs:ListQueueTags",
         "sqs:CreateQueue",
-        "sqs:SetQueueAttributes",
-        "ec2:DescribeInstances"
+        "sqs:SetQueueAttributes"
       ],
       "timeoutInMinutes": 370
     },

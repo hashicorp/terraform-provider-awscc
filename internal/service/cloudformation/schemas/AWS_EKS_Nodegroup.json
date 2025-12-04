@@ -81,85 +81,11 @@
         "Ec2SshKey"
       ]
     },
-    "NodeRepairConfig": {
-      "description": "The node auto repair configuration for node group.",
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "Enabled": {
-          "description": "Set this value to true to enable node auto repair for the node group.",
-          "type": "boolean"
-        },
-        "MaxUnhealthyNodeThresholdCount": {
-          "description": "Specify a count threshold of unhealthy nodes, above which node auto repair actions will stop. When using this, you cannot also set MaxUnhealthyNodeThresholdPercentage at the same time.",
-          "type": "integer",
-          "minimum": 1
-        },
-        "MaxUnhealthyNodeThresholdPercentage": {
-          "description": "Specify a percentage threshold of unhealthy nodes, above which node auto repair actions will stop. When using this, you cannot also set MaxUnhealthyNodeThresholdCount at the same time.",
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 100
-        },
-        "MaxParallelNodesRepairedCount": {
-          "description": "Specify the maximum number of nodes that can be repaired concurrently or in parallel, expressed as a count of unhealthy nodes. This gives you finer-grained control over the pace of node replacements. When using this, you cannot also set MaxParallelNodesRepairedPercentage at the same time.",
-          "type": "integer",
-          "minimum": 1
-        },
-        "MaxParallelNodesRepairedPercentage": {
-          "description": "Specify the maximum number of nodes that can be repaired concurrently or in parallel, expressed as a percentage of unhealthy nodes. This gives you finer-grained control over the pace of node replacements. When using this, you cannot also set MaxParallelNodesRepairedCount at the same time.",
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 100
-        },
-        "NodeRepairConfigOverrides": {
-          "description": "Specify granular overrides for specific repair actions. These overrides control the repair action and the repair delay time before a node is considered eligible for repair. If you use this, you must specify all the values.",
-          "type": "array",
-          "insertionOrder": false,
-          "items": {
-            "$ref": "#/definitions/NodeRepairConfigOverrides"
-          }
-        }
-      }
-    },
-    "NodeRepairConfigOverrides": {
-      "description": "Specify granular overrides for specific repair actions. These overrides control the repair action and the repair delay time before a node is considered eligible for repair. If you use this, you must specify all the values.",
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "NodeMonitoringCondition": {
-          "description": "Specify an unhealthy condition reported by the node monitoring agent that this override would apply to.",
-          "type": "string"
-        },
-        "NodeUnhealthyReason": {
-          "description": "Specify a reason reported by the node monitoring agent that this override would apply to.",
-          "type": "string"
-        },
-        "MinRepairWaitTimeMins": {
-          "description": "Specify the minimum time in minutes to wait before attempting to repair a node with this specific NodeMonitoringCondition and NodeUnhealthyReason.",
-          "type": "integer",
-          "minimum": 1
-        },
-        "RepairAction": {
-          "description": "Specify the repair action to take for nodes when all of the specified conditions are met.",
-          "type": "string",
-          "enum": [
-            "Replace",
-            "Reboot",
-            "NoAction"
-          ]
-        }
-      }
-    },
     "UpdateConfig": {
       "description": "The node group update configuration.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "UpdateStrategy": {
-          "description": "The configuration for the behavior to follow during an node group version update of this managed node group. You choose between two possible strategies for replacing nodes during an UpdateNodegroupVersion action.",
-          "type": "string"
-        },
         "MaxUnavailable": {
           "description": "The maximum number of nodes unavailable at once during a version update. Nodes will be updated in parallel. This value or maxUnavailablePercentage is required to have a value.The maximum number is 100. ",
           "type": "number",
@@ -170,6 +96,21 @@
           "type": "number",
           "minimum": 1,
           "maximum": 100
+        },
+        "UpdateStrategy": {
+          "description": "The configuration for the behavior to follow during an node group version update of this managed node group. You choose between two possible strategies for replacing nodes during an UpdateNodegroupVersion action.",
+          "type": "string"
+        }
+      }
+    },
+    "NodeRepairConfig": {
+      "description": "The node auto repair configuration for node group.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "description": "Set this value to true to enable node auto repair for the node group.",
+          "type": "boolean"
         }
       }
     }
