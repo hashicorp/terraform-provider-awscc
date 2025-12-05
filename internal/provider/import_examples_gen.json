@@ -4225,11 +4225,6 @@
         "identifier": ["Arn"]
     },
     {
-        "resource": "awscc_observabilityadmin_telemetry_pipelines",
-        "generateListResource": true,
-        "identifier": ["PipelineIdentifier"]
-    },
-    {
         "resource": "awscc_observabilityadmin_telemetry_rule",
         "generateListResource": true,
         "identifier": ["RuleArn"]

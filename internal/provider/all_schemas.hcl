@@ -4051,7 +4051,10 @@ resource_schema "aws_observabilityadmin_s3_table_integration" {
 }
 
 resource_schema "aws_observabilityadmin_telemetry_pipelines" {
-  cloudformation_type_name = "AWS::ObservabilityAdmin::TelemetryPipelines"
+  cloudformation_type_name                 = "AWS::ObservabilityAdmin::TelemetryPipelines"
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_observabilityadmin_telemetry_rule" {
