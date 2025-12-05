@@ -1,4 +1,4 @@
-# Copyright (c) HashiCorp, Inc.
+# Copyright IBM Corp. 2021, 2025
 # SPDX-License-Identifier: MPL-2.0
 
 run_makes_resource_log = "internal/provider/logs.txt"
