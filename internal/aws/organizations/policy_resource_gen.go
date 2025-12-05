@@ -253,7 +253,6 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	    "S3_POLICY",
 		//	    "INSPECTOR_POLICY",
 		//	    "BEDROCK_POLICY",
-		//	    "NETWORK_SECURITY_DIRECTOR_POLICY",
 		//	    "UPGRADE_ROLLOUT_POLICY"
 		//	  ],
 		//	  "type": "string"
@@ -274,7 +273,6 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 					"S3_POLICY",
 					"INSPECTOR_POLICY",
 					"BEDROCK_POLICY",
-					"NETWORK_SECURITY_DIRECTOR_POLICY",
 					"UPGRADE_ROLLOUT_POLICY",
 				),
 			}, /*END VALIDATORS*/

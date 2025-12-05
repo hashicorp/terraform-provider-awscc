@@ -141,14 +141,14 @@ func eventInvokeConfigResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The name of the Lambda function.",
-		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]+(-[a-z]+)+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
+		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]+(-[a-z]+)+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST(\\.PUBLISHED)?|[a-zA-Z0-9-_]+))?$",
 		//	  "type": "string"
 		//	}
 		"function_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the Lambda function.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]+(-[a-z]+)+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]+(-[a-z]+)+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST(\\.PUBLISHED)?|[a-zA-Z0-9-_]+))?$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -199,14 +199,14 @@ func eventInvokeConfigResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The identifier of a version or alias.",
-		//	  "pattern": "^(|[a-zA-Z0-9$_-]{1,129})$",
+		//	  "pattern": "^\\$(LATEST(\\.PUBLISHED)?)|[a-zA-Z0-9$_-]{1,129}$",
 		//	  "type": "string"
 		//	}
 		"qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of a version or alias.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^(|[a-zA-Z0-9$_-]{1,129})$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^\\$(LATEST(\\.PUBLISHED)?)|[a-zA-Z0-9$_-]{1,129}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

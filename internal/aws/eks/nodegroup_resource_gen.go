@@ -267,62 +267,6 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		//	    "Enabled": {
 		//	      "description": "Set this value to true to enable node auto repair for the node group.",
 		//	      "type": "boolean"
-		//	    },
-		//	    "MaxParallelNodesRepairedCount": {
-		//	      "description": "Specify the maximum number of nodes that can be repaired concurrently or in parallel, expressed as a count of unhealthy nodes. This gives you finer-grained control over the pace of node replacements. When using this, you cannot also set MaxParallelNodesRepairedPercentage at the same time.",
-		//	      "minimum": 1,
-		//	      "type": "integer"
-		//	    },
-		//	    "MaxParallelNodesRepairedPercentage": {
-		//	      "description": "Specify the maximum number of nodes that can be repaired concurrently or in parallel, expressed as a percentage of unhealthy nodes. This gives you finer-grained control over the pace of node replacements. When using this, you cannot also set MaxParallelNodesRepairedCount at the same time.",
-		//	      "maximum": 100,
-		//	      "minimum": 1,
-		//	      "type": "integer"
-		//	    },
-		//	    "MaxUnhealthyNodeThresholdCount": {
-		//	      "description": "Specify a count threshold of unhealthy nodes, above which node auto repair actions will stop. When using this, you cannot also set MaxUnhealthyNodeThresholdPercentage at the same time.",
-		//	      "minimum": 1,
-		//	      "type": "integer"
-		//	    },
-		//	    "MaxUnhealthyNodeThresholdPercentage": {
-		//	      "description": "Specify a percentage threshold of unhealthy nodes, above which node auto repair actions will stop. When using this, you cannot also set MaxUnhealthyNodeThresholdCount at the same time.",
-		//	      "maximum": 100,
-		//	      "minimum": 1,
-		//	      "type": "integer"
-		//	    },
-		//	    "NodeRepairConfigOverrides": {
-		//	      "description": "Specify granular overrides for specific repair actions. These overrides control the repair action and the repair delay time before a node is considered eligible for repair. If you use this, you must specify all the values.",
-		//	      "insertionOrder": false,
-		//	      "items": {
-		//	        "additionalProperties": false,
-		//	        "description": "Specify granular overrides for specific repair actions. These overrides control the repair action and the repair delay time before a node is considered eligible for repair. If you use this, you must specify all the values.",
-		//	        "properties": {
-		//	          "MinRepairWaitTimeMins": {
-		//	            "description": "Specify the minimum time in minutes to wait before attempting to repair a node with this specific NodeMonitoringCondition and NodeUnhealthyReason.",
-		//	            "minimum": 1,
-		//	            "type": "integer"
-		//	          },
-		//	          "NodeMonitoringCondition": {
-		//	            "description": "Specify an unhealthy condition reported by the node monitoring agent that this override would apply to.",
-		//	            "type": "string"
-		//	          },
-		//	          "NodeUnhealthyReason": {
-		//	            "description": "Specify a reason reported by the node monitoring agent that this override would apply to.",
-		//	            "type": "string"
-		//	          },
-		//	          "RepairAction": {
-		//	            "description": "Specify the repair action to take for nodes when all of the specified conditions are met.",
-		//	            "enum": [
-		//	              "Replace",
-		//	              "Reboot",
-		//	              "NoAction"
-		//	            ],
-		//	            "type": "string"
-		//	          }
-		//	        },
-		//	        "type": "object"
-		//	      },
-		//	      "type": "array"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -336,114 +280,6 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: MaxParallelNodesRepairedCount
-				"max_parallel_nodes_repaired_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Specify the maximum number of nodes that can be repaired concurrently or in parallel, expressed as a count of unhealthy nodes. This gives you finer-grained control over the pace of node replacements. When using this, you cannot also set MaxParallelNodesRepairedPercentage at the same time.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.Int64{ /*START VALIDATORS*/
-						int64validator.AtLeast(1),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: MaxParallelNodesRepairedPercentage
-				"max_parallel_nodes_repaired_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Specify the maximum number of nodes that can be repaired concurrently or in parallel, expressed as a percentage of unhealthy nodes. This gives you finer-grained control over the pace of node replacements. When using this, you cannot also set MaxParallelNodesRepairedCount at the same time.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.Int64{ /*START VALIDATORS*/
-						int64validator.Between(1, 100),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: MaxUnhealthyNodeThresholdCount
-				"max_unhealthy_node_threshold_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Specify a count threshold of unhealthy nodes, above which node auto repair actions will stop. When using this, you cannot also set MaxUnhealthyNodeThresholdPercentage at the same time.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.Int64{ /*START VALIDATORS*/
-						int64validator.AtLeast(1),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: MaxUnhealthyNodeThresholdPercentage
-				"max_unhealthy_node_threshold_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Specify a percentage threshold of unhealthy nodes, above which node auto repair actions will stop. When using this, you cannot also set MaxUnhealthyNodeThresholdCount at the same time.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.Int64{ /*START VALIDATORS*/
-						int64validator.Between(1, 100),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: NodeRepairConfigOverrides
-				"node_repair_config_overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: MinRepairWaitTimeMins
-							"min_repair_wait_time_mins": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "Specify the minimum time in minutes to wait before attempting to repair a node with this specific NodeMonitoringCondition and NodeUnhealthyReason.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.Int64{ /*START VALIDATORS*/
-									int64validator.AtLeast(1),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-									int64planmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: NodeMonitoringCondition
-							"node_monitoring_condition": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Specify an unhealthy condition reported by the node monitoring agent that this override would apply to.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: NodeUnhealthyReason
-							"node_unhealthy_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Specify a reason reported by the node monitoring agent that this override would apply to.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: RepairAction
-							"repair_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Specify the repair action to take for nodes when all of the specified conditions are met.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.OneOf(
-										"Replace",
-										"Reboot",
-										"NoAction",
-									),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Specify granular overrides for specific repair actions. These overrides control the repair action and the repair delay time before a node is considered eligible for repair. If you use this, you must specify all the values.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -852,50 +688,41 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"ami_type":                               "AmiType",
-		"arn":                                    "Arn",
-		"capacity_type":                          "CapacityType",
-		"cluster_name":                           "ClusterName",
-		"desired_size":                           "DesiredSize",
-		"disk_size":                              "DiskSize",
-		"ec_2_ssh_key":                           "Ec2SshKey",
-		"effect":                                 "Effect",
-		"enabled":                                "Enabled",
-		"force_update_enabled":                   "ForceUpdateEnabled",
-		"id":                                     "Id",
-		"instance_types":                         "InstanceTypes",
-		"key":                                    "Key",
-		"labels":                                 "Labels",
-		"launch_template":                        "LaunchTemplate",
-		"max_parallel_nodes_repaired_count":      "MaxParallelNodesRepairedCount",
-		"max_parallel_nodes_repaired_percentage": "MaxParallelNodesRepairedPercentage",
-		"max_size":                               "MaxSize",
-		"max_unavailable":                        "MaxUnavailable",
-		"max_unavailable_percentage":             "MaxUnavailablePercentage",
-		"max_unhealthy_node_threshold_count":     "MaxUnhealthyNodeThresholdCount",
-		"max_unhealthy_node_threshold_percentage": "MaxUnhealthyNodeThresholdPercentage",
-		"min_repair_wait_time_mins":               "MinRepairWaitTimeMins",
-		"min_size":                                "MinSize",
-		"name":                                    "Name",
-		"node_monitoring_condition":               "NodeMonitoringCondition",
-		"node_repair_config":                      "NodeRepairConfig",
-		"node_repair_config_overrides":            "NodeRepairConfigOverrides",
-		"node_role":                               "NodeRole",
-		"node_unhealthy_reason":                   "NodeUnhealthyReason",
-		"nodegroup_id":                            "Id",
-		"nodegroup_name":                          "NodegroupName",
-		"release_version":                         "ReleaseVersion",
-		"remote_access":                           "RemoteAccess",
-		"repair_action":                           "RepairAction",
-		"scaling_config":                          "ScalingConfig",
-		"source_security_groups":                  "SourceSecurityGroups",
-		"subnets":                                 "Subnets",
-		"tags":                                    "Tags",
-		"taints":                                  "Taints",
-		"update_config":                           "UpdateConfig",
-		"update_strategy":                         "UpdateStrategy",
-		"value":                                   "Value",
-		"version":                                 "Version",
+		"ami_type":                   "AmiType",
+		"arn":                        "Arn",
+		"capacity_type":              "CapacityType",
+		"cluster_name":               "ClusterName",
+		"desired_size":               "DesiredSize",
+		"disk_size":                  "DiskSize",
+		"ec_2_ssh_key":               "Ec2SshKey",
+		"effect":                     "Effect",
+		"enabled":                    "Enabled",
+		"force_update_enabled":       "ForceUpdateEnabled",
+		"id":                         "Id",
+		"instance_types":             "InstanceTypes",
+		"key":                        "Key",
+		"labels":                     "Labels",
+		"launch_template":            "LaunchTemplate",
+		"max_size":                   "MaxSize",
+		"max_unavailable":            "MaxUnavailable",
+		"max_unavailable_percentage": "MaxUnavailablePercentage",
+		"min_size":                   "MinSize",
+		"name":                       "Name",
+		"node_repair_config":         "NodeRepairConfig",
+		"node_role":                  "NodeRole",
+		"nodegroup_id":               "Id",
+		"nodegroup_name":             "NodegroupName",
+		"release_version":            "ReleaseVersion",
+		"remote_access":              "RemoteAccess",
+		"scaling_config":             "ScalingConfig",
+		"source_security_groups":     "SourceSecurityGroups",
+		"subnets":                    "Subnets",
+		"tags":                       "Tags",
+		"taints":                     "Taints",
+		"update_config":              "UpdateConfig",
+		"update_strategy":            "UpdateStrategy",
+		"value":                      "Value",
+		"version":                    "Version",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
