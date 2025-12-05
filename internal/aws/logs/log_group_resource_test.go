@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/hashicorp/terraform-plugin-testing/config"
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
 	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
@@ -58,6 +59,49 @@ func TestAccAWSLogsLogGroupWithDataProtectionPolicy_create(t *testing.T) {
 				td.CheckExistsInAWS(),
 				resource.TestCheckResourceAttrSet(resourceName, "arn"),
 				resource.TestCheckNoResourceAttr(resourceName, "kms_key_id"),
+				resource.TestCheckResourceAttr(resourceName, "log_group_name", rName),
+			),
+		},
+	})
+}
+
+func TestAccAWSLogsLogGroup_providerMeta(t *testing.T) {
+	td := acctest.NewTestData(t, "AWS::Logs::LogGroup", "awscc_logs_log_group", "test")
+	resourceName := td.ResourceName
+	rName := td.RandomName()
+
+	td.ResourceTestNoProviderFactories(t, []resource.TestStep{
+		{
+			ProtoV6ProviderFactories: td.ProviderFactories(),
+			ConfigDirectory:          config.StaticDirectory("testdata/LogGroup/providerMeta/"),
+			ConfigVariables: config.Variables{
+				"rName": config.StringVariable(rName),
+			},
+			Check: resource.ComposeTestCheckFunc(
+				td.CheckExistsInAWS(),
+				resource.TestCheckResourceAttr(resourceName, "log_group_name", rName),
+			),
+		},
+	})
+}
+
+func TestAccAWSLogsLogGroup_providerMetaWithModule(t *testing.T) {
+	// https://github.com/hashicorp/terraform-plugin-testing/issues/277
+	t.Skip("The ConfigDirectory field does not currently support copying modules to the working directory")
+
+	td := acctest.NewTestData(t, "AWS::Logs::LogGroup", "awscc_logs_log_group", "test")
+	resourceName := td.ResourceName
+	rName := td.RandomName()
+
+	td.ResourceTestNoProviderFactories(t, []resource.TestStep{
+		{
+			ProtoV6ProviderFactories: td.ProviderFactories(),
+			ConfigDirectory:          config.StaticDirectory("testdata/LogGroup/providerMetaWithModule/"),
+			ConfigVariables: config.Variables{
+				"rName": config.StringVariable(rName),
+			},
+			Check: resource.ComposeTestCheckFunc(
+				td.CheckExistsInAWS(),
 				resource.TestCheckResourceAttr(resourceName, "log_group_name", rName),
 			),
 		},
