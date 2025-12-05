@@ -1,0 +1,1 @@
+$ terraform import awscc_connect_data_table.example "instance_arn|arn"

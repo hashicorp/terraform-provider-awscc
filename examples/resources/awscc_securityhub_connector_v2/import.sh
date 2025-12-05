@@ -1,0 +1,1 @@
+$ terraform import awscc_securityhub_connector_v2.example "connector_arn"

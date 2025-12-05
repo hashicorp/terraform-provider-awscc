@@ -1,0 +1,1 @@
+$ terraform import awscc_lambda_capacity_provider.example "capacity_provider_name"

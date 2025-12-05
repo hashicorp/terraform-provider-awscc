@@ -25,9 +25,19 @@ Data Source schema for AWS::Lambda::Version
 - `description` (String) A description for the version to override the description in the function configuration. Updates are not supported for this property.
 - `function_arn` (String) The ARN of the version.
 - `function_name` (String) The name of the Lambda function.
+- `function_scaling_config` (Attributes) The scaling configuration to apply to the function, including minimum and maximum execution environment limits. (see [below for nested schema](#nestedatt--function_scaling_config))
 - `provisioned_concurrency_config` (Attributes) Specifies a provisioned concurrency configuration for a function's version. Updates are not supported for this property. (see [below for nested schema](#nestedatt--provisioned_concurrency_config))
 - `runtime_policy` (Attributes) Specifies the runtime management configuration of a function. Displays runtimeVersionArn only for Manual. (see [below for nested schema](#nestedatt--runtime_policy))
 - `version` (String) The version number.
+
+<a id="nestedatt--function_scaling_config"></a>
+### Nested Schema for `function_scaling_config`
+
+Read-Only:
+
+- `max_execution_environments` (Number) The maximum number of execution environments that can be provisioned for the function.
+- `min_execution_environments` (Number) The minimum number of execution environments to maintain for the function.
+
 
 <a id="nestedatt--provisioned_concurrency_config"></a>
 ### Nested Schema for `provisioned_concurrency_config`

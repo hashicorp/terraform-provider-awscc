@@ -1,0 +1,1 @@
+$ terraform import awscc_devopsagent_agent_space.example "agent_space_id"
