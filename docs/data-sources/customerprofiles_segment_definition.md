@@ -28,6 +28,8 @@ Data Source schema for AWS::CustomerProfiles::SegmentDefinition
 - `segment_definition_arn` (String) The Amazon Resource Name (ARN) of the segment definition.
 - `segment_definition_name` (String) The unique name of the segment definition.
 - `segment_groups` (Attributes) An array that defines the set of segment criteria to evaluate when handling segment groups for the segment. (see [below for nested schema](#nestedatt--segment_groups))
+- `segment_sql_query` (String) The SQL query that defines the segment criteria.
+- `segment_type` (String) The SQL query that defines the segment criteria.
 - `tags` (Attributes Set) The tags used to organize, track, or control access for this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--segment_groups"></a>

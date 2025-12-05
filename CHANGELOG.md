@@ -4,6 +4,35 @@ BUG FIXES:
 
 * provider: Fix `Missing Resource Identity After Read` error during refresh when a resource is tainted on create ([#2905](https://github.com/hashicorp/terraform-provider-awscc/pull/2905))
 
+FEATURES:
+
+* **New Data Source:** `awscc_connect_data_table`
+* **New Data Source:** `awscc_connect_data_table_attribute`
+* **New Data Source:** `awscc_devopsagent_agent_space`
+* **New Data Source:** `awscc_devopsagent_agent_spaces`
+* **New Data Source:** `awscc_devopsagent_association`
+* **New Data Source:** `awscc_eks_capability`
+* **New Data Source:** `awscc_lambda_capacity_provider`
+* **New Data Source:** `awscc_lambda_capacity_providers`
+* **New Data Source:** `awscc_observabilityadmin_s3_table_integration`
+* **New Data Source:** `awscc_observabilityadmin_s3_table_integrations`
+* **New Data Source:** `awscc_rtbfabric_outbound_external_link`
+* **New Data Source:** `awscc_securityhub_connector_v2`
+* **New Data Source:** `awscc_securityhub_connector_v2s`
+* **New List Resource:** `awscc_devopsagent_agent_space`
+* **New List Resource:** `awscc_lambda_capacity_provider`
+* **New List Resource:** `awscc_observabilityadmin_s3_table_integration`
+* **New List Resource:** `awscc_securityhub_connector_v2`
+* **New Resource:** `awscc_connect_data_table`
+* **New Resource:** `awscc_connect_data_table_attribute`
+* **New Resource:** `awscc_devopsagent_agent_space`
+* **New Resource:** `awscc_devopsagent_association`
+* **New Resource:** `awscc_eks_capability`
+* **New Resource:** `awscc_lambda_capacity_provider`
+* **New Resource:** `awscc_observabilityadmin_s3_table_integration`
+* **New Resource:** `awscc_rtbfabric_outbound_external_link`
+* **New Resource:** `awscc_securityhub_connector_v2`
+
 ## 1.65.0 (November 24, 2025)
 
 FEATURES:

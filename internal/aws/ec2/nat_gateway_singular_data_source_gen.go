@@ -34,6 +34,93 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "[Public NAT gateway only] The allocation ID of the Elastic IP address that's associated with the NAT gateway. This property is required for a public NAT gateway and cannot be specified with a private NAT gateway.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: AutoProvisionZones
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"auto_provision_zones": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: AutoScalingIps
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"auto_scaling_ips": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: AvailabilityMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"availability_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: AvailabilityZoneAddresses
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "",
+		//	    "properties": {
+		//	      "AllocationIds": {
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "AvailabilityZone": {
+		//	        "type": "string"
+		//	      },
+		//	      "AvailabilityZoneId": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "AllocationIds"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"availability_zone_addresses": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AllocationIds
+					"allocation_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: AvailabilityZone
+					"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: AvailabilityZoneId
+					"availability_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectivityType
 		// CloudFormation resource type schema:
 		//
@@ -87,6 +174,17 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The private IPv4 address to assign to the NAT gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: RouteTableId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecondaryAllocationIds
@@ -221,12 +319,20 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allocation_id":                      "AllocationId",
+		"allocation_ids":                     "AllocationIds",
+		"auto_provision_zones":               "AutoProvisionZones",
+		"auto_scaling_ips":                   "AutoScalingIps",
+		"availability_mode":                  "AvailabilityMode",
+		"availability_zone":                  "AvailabilityZone",
+		"availability_zone_addresses":        "AvailabilityZoneAddresses",
+		"availability_zone_id":               "AvailabilityZoneId",
 		"connectivity_type":                  "ConnectivityType",
 		"eni_id":                             "EniId",
 		"key":                                "Key",
 		"max_drain_duration_seconds":         "MaxDrainDurationSeconds",
 		"nat_gateway_id":                     "NatGatewayId",
 		"private_ip_address":                 "PrivateIpAddress",
+		"route_table_id":                     "RouteTableId",
 		"secondary_allocation_ids":           "SecondaryAllocationIds",
 		"secondary_private_ip_address_count": "SecondaryPrivateIpAddressCount",
 		"secondary_private_ip_addresses":     "SecondaryPrivateIpAddresses",

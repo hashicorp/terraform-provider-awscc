@@ -399,9 +399,8 @@ func automationRuleV2Resource(ctx context.Context) (resource.Resource, error) {
 		//	                        "activity_id",
 		//	                        "compliance.status_id",
 		//	                        "confidence_score",
-		//	                        "severity_id",
-		//	                        "status_id",
-		//	                        "finding_info.related_events_count"
+		//	                        "finding_info.related_events_count",
+		//	                        "vendor_attributes.severity_id"
 		//	                      ],
 		//	                      "type": "string"
 		//	                    },
@@ -454,7 +453,6 @@ func automationRuleV2Resource(ctx context.Context) (resource.Resource, error) {
 		//	                    "FieldName": {
 		//	                      "description": "The name of the field",
 		//	                      "enum": [
-		//	                        "metadata.uid",
 		//	                        "activity_name",
 		//	                        "cloud.account.name",
 		//	                        "cloud.account.uid",
@@ -484,11 +482,9 @@ func automationRuleV2Resource(ctx context.Context) (resource.Resource, error) {
 		//	                        "resources.region",
 		//	                        "resources.type",
 		//	                        "resources.uid",
-		//	                        "severity",
-		//	                        "status",
-		//	                        "comment",
 		//	                        "vulnerabilities.fix_coverage",
-		//	                        "class_name"
+		//	                        "class_name",
+		//	                        "vendor_attributes.severity"
 		//	                      ],
 		//	                      "type": "string"
 		//	                    },
@@ -833,9 +829,8 @@ func automationRuleV2Resource(ctx context.Context) (resource.Resource, error) {
 															"activity_id",
 															"compliance.status_id",
 															"confidence_score",
-															"severity_id",
-															"status_id",
 															"finding_info.related_events_count",
+															"vendor_attributes.severity_id",
 														),
 														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/
@@ -923,7 +918,6 @@ func automationRuleV2Resource(ctx context.Context) (resource.Resource, error) {
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.OneOf(
-															"metadata.uid",
 															"activity_name",
 															"cloud.account.name",
 															"cloud.account.uid",
@@ -953,11 +947,9 @@ func automationRuleV2Resource(ctx context.Context) (resource.Resource, error) {
 															"resources.region",
 															"resources.type",
 															"resources.uid",
-															"severity",
-															"status",
-															"comment",
 															"vulnerabilities.fix_coverage",
 															"class_name",
+															"vendor_attributes.severity",
 														),
 														fwvalidators.NotNullString(),
 													}, /*END VALIDATORS*/

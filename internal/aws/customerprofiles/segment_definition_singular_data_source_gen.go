@@ -42,7 +42,7 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 		//
 		//	{
 		//	  "description": "The description of the segment definition.",
-		//	  "maxLength": 1000,
+		//	  "maxLength": 4000,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
@@ -2549,6 +2549,34 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 			Description: "An array that defines the set of segment criteria to evaluate when handling segment groups for the segment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SegmentSqlQuery
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The SQL query that defines the segment criteria.",
+		//	  "maxLength": 50000,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"segment_sql_query": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The SQL query that defines the segment criteria.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SegmentType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The SQL query that defines the segment criteria.",
+		//	  "enum": [
+		//	    "CLASSIC",
+		//	    "ENHANCED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"segment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The SQL query that defines the segment criteria.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -2662,6 +2690,8 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 		"segment_definition_arn":  "SegmentDefinitionArn",
 		"segment_definition_name": "SegmentDefinitionName",
 		"segment_groups":          "SegmentGroups",
+		"segment_sql_query":       "SegmentSqlQuery",
+		"segment_type":            "SegmentType",
 		"shipping_address":        "ShippingAddress",
 		"source_segments":         "SourceSegments",
 		"source_type":             "SourceType",

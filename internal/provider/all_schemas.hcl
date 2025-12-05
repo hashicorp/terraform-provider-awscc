@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1270 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1280 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -1222,6 +1222,16 @@ resource_schema "aws_connect_contact_flow_version" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_connect_data_table" {
+  cloudformation_type_name               = "AWS::Connect::DataTable"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_data_table_attribute" {
+  cloudformation_type_name               = "AWS::Connect::DataTableAttribute"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_connect_email_address" {
   cloudformation_type_name               = "AWS::Connect::EmailAddress"
   suppress_plural_data_source_generation = true
@@ -1678,6 +1688,15 @@ resource_schema "aws_detective_member_invitation" {
 
 resource_schema "aws_detective_organization_admin" {
   cloudformation_type_name = "AWS::Detective::OrganizationAdmin"
+}
+
+resource_schema "aws_devopsagent_agent_space" {
+  cloudformation_type_name = "AWS::DevOpsAgent::AgentSpace"
+}
+
+resource_schema "aws_devopsagent_association" {
+  cloudformation_type_name               = "AWS::DevOpsAgent::Association"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_devopsguru_log_anomaly_detection_integration" {
@@ -2231,6 +2250,11 @@ resource_schema "aws_eks_access_entry" {
 
 resource_schema "aws_eks_addon" {
   cloudformation_type_name               = "AWS::EKS::Addon"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_eks_capability" {
+  cloudformation_type_name               = "AWS::EKS::Capability"
   suppress_plural_data_source_generation = true
 }
 
@@ -3301,6 +3325,10 @@ resource_schema "aws_lambda_alias" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_lambda_capacity_provider" {
+  cloudformation_type_name = "AWS::Lambda::CapacityProvider"
+}
+
 resource_schema "aws_lambda_code_signing_config" {
   cloudformation_type_name = "AWS::Lambda::CodeSigningConfig"
 }
@@ -4018,6 +4046,17 @@ resource_schema "aws_observabilityadmin_organization_telemetry_rule" {
   cloudformation_type_name = "AWS::ObservabilityAdmin::OrganizationTelemetryRule"
 }
 
+resource_schema "aws_observabilityadmin_s3_table_integration" {
+  cloudformation_type_name = "AWS::ObservabilityAdmin::S3TableIntegration"
+}
+
+resource_schema "aws_observabilityadmin_telemetry_pipelines" {
+  cloudformation_type_name                 = "AWS::ObservabilityAdmin::TelemetryPipelines"
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_observabilityadmin_telemetry_rule" {
   cloudformation_type_name = "AWS::ObservabilityAdmin::TelemetryRule"
 }
@@ -4720,6 +4759,11 @@ resource_schema "aws_rtbfabric_link" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_rtbfabric_outbound_external_link" {
+  cloudformation_type_name               = "AWS::RTBFabric::OutboundExternalLink"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_rtbfabric_requester_gateway" {
   cloudformation_type_name = "AWS::RTBFabric::RequesterGateway"
 }
@@ -5218,6 +5262,10 @@ resource_schema "aws_securityhub_automation_rule_v2" {
 
 resource_schema "aws_securityhub_configuration_policy" {
   cloudformation_type_name = "AWS::SecurityHub::ConfigurationPolicy"
+}
+
+resource_schema "aws_securityhub_connector_v2" {
+  cloudformation_type_name = "AWS::SecurityHub::ConnectorV2"
 }
 
 resource_schema "aws_securityhub_delegated_admin" {

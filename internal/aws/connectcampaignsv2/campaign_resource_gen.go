@@ -242,12 +242,6 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	              "description": "The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.",
 		//	              "maxLength": 100,
 		//	              "type": "string"
-		//	            },
-		//	            "RingTimeout": {
-		//	              "description": "Maximum ring time for outbound calls in seconds",
-		//	              "maximum": 60,
-		//	              "minimum": 15,
-		//	              "type": "integer"
 		//	            }
 		//	          },
 		//	          "required": [
@@ -649,18 +643,6 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: RingTimeout
-								"ring_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Maximum ring time for outbound calls in seconds",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.Int64{ /*START VALIDATORS*/
-										int64validator.Between(15, 60),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-										int64planmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -2274,7 +2256,6 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"refresh_frequency":                 "RefreshFrequency",
 		"restricted_period_list":            "RestrictedPeriodList",
 		"restricted_periods":                "RestrictedPeriods",
-		"ring_timeout":                      "RingTimeout",
 		"schedule":                          "Schedule",
 		"sms":                               "Sms",
 		"source":                            "Source",

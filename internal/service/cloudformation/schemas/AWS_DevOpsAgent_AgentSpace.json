@@ -1,0 +1,86 @@
+{
+  "typeName": "AWS::DevOpsAgent::AgentSpace",
+  "description": "Resource Type definition for AWS::DevOpsAgent::AgentSpace",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {},
+  "properties": {
+    "AgentSpaceId": {
+      "description": "The unique identifier of the AgentSpace",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "Name": {
+      "description": "The name of the AgentSpace.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "Description": {
+      "description": "The description of the AgentSpace.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "CreatedAt": {
+      "description": "The timestamp when the resource was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "description": "The timestamp when the resource was last updated.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) of the AgentSpace.",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": false
+  },
+  "required": [
+    "Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/AgentSpaceId",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/Arn"
+  ],
+  "primaryIdentifier": [
+    "/properties/AgentSpaceId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "aidevops:CreateAgentSpace",
+        "aidevops:GetAgentSpace"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "aidevops:GetAgentSpace"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "aidevops:UpdateAgentSpace",
+        "aidevops:GetAgentSpace"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "aidevops:DeleteAgentSpace",
+        "aidevops:GetAgentSpace"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "aidevops:ListAgentSpaces"
+      ]
+    }
+  }
+}

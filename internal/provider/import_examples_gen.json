@@ -1227,6 +1227,14 @@
         "identifier": ["ContactFlowVersionARN"]
     },
     {
+        "resource": "awscc_connect_data_table",
+        "identifier": ["InstanceArn","Arn"]
+    },
+    {
+        "resource": "awscc_connect_data_table_attribute",
+        "identifier": ["InstanceArn","DataTableArn","AttributeId"]
+    },
+    {
         "resource": "awscc_connect_email_address",
         "identifier": ["EmailAddressArn"]
     },
@@ -1618,6 +1626,15 @@
         "resource": "awscc_detective_organization_admin",
         "generateListResource": true,
         "identifier": ["AccountId"]
+    },
+    {
+        "resource": "awscc_devopsagent_agent_space",
+        "generateListResource": true,
+        "identifier": ["AgentSpaceId"]
+    },
+    {
+        "resource": "awscc_devopsagent_association",
+        "identifier": ["AgentSpaceId","AssociationId"]
     },
     {
         "resource": "awscc_devopsguru_log_anomaly_detection_integration",
@@ -2262,6 +2279,10 @@
     {
         "resource": "awscc_eks_addon",
         "identifier": ["ClusterName","AddonName"]
+    },
+    {
+        "resource": "awscc_eks_capability",
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_eks_cluster",
@@ -3438,6 +3459,11 @@
         "identifier": ["AliasArn"]
     },
     {
+        "resource": "awscc_lambda_capacity_provider",
+        "generateListResource": true,
+        "identifier": ["CapacityProviderName"]
+    },
+    {
         "resource": "awscc_lambda_code_signing_config",
         "generateListResource": true,
         "identifier": ["CodeSigningConfigArn"]
@@ -4194,6 +4220,11 @@
         "identifier": ["RuleArn"]
     },
     {
+        "resource": "awscc_observabilityadmin_s3_table_integration",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_observabilityadmin_telemetry_rule",
         "generateListResource": true,
         "identifier": ["RuleArn"]
@@ -4928,6 +4959,10 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_rtbfabric_outbound_external_link",
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_rtbfabric_requester_gateway",
         "generateListResource": true,
         "identifier": ["Arn"]
@@ -5483,6 +5518,11 @@
         "resource": "awscc_securityhub_configuration_policy",
         "generateListResource": true,
         "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_securityhub_connector_v2",
+        "generateListResource": true,
+        "identifier": ["ConnectorArn"]
     },
     {
         "resource": "awscc_securityhub_delegated_admin",

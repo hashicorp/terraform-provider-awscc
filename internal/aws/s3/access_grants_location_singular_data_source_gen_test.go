@@ -6,6 +6,7 @@
 package s3_test
 
 import (
+	"fmt"
 	"regexp"
 	"testing"
 
@@ -18,8 +19,11 @@ func TestAccAWSS3AccessGrantsLocationDataSource_basic(t *testing.T) {
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{
-			Config:      td.EmptyDataSourceConfig(),
-			ExpectError: regexp.MustCompile("Missing required argument"),
+			Config: td.DataSourceWithEmptyResourceConfig(),
+			Check: resource.ComposeTestCheckFunc(
+				resource.TestCheckResourceAttrPair(fmt.Sprintf("data.%s", td.ResourceName), "id", td.ResourceName, "id"),
+				resource.TestCheckResourceAttrPair(fmt.Sprintf("data.%s", td.ResourceName), "arn", td.ResourceName, "arn"),
+			),
 		},
 	})
 }

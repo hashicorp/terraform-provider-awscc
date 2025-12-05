@@ -308,9 +308,6 @@
         },
         "ModalityProcessing": {
           "$ref": "#/definitions/ModalityProcessingConfiguration"
-        },
-        "SensitiveDataConfiguration": {
-          "$ref": "#/definitions/SensitiveDataConfiguration"
         }
       },
       "additionalProperties": false
@@ -323,9 +320,6 @@
         },
         "LanguageConfiguration": {
           "$ref": "#/definitions/AudioLanguageConfiguration"
-        },
-        "SensitiveDataConfiguration": {
-          "$ref": "#/definitions/SensitiveDataConfiguration"
         }
       },
       "additionalProperties": false
@@ -335,9 +329,6 @@
       "properties": {
         "ModalityProcessing": {
           "$ref": "#/definitions/ModalityProcessingConfiguration"
-        },
-        "SensitiveDataConfiguration": {
-          "$ref": "#/definitions/SensitiveDataConfiguration"
         }
       },
       "additionalProperties": false
@@ -347,9 +338,6 @@
       "properties": {
         "ModalityProcessing": {
           "$ref": "#/definitions/ModalityProcessingConfiguration"
-        },
-        "SensitiveDataConfiguration": {
-          "$ref": "#/definitions/SensitiveDataConfiguration"
         }
       },
       "additionalProperties": false
@@ -576,95 +564,6 @@
       },
       "additionalProperties": false
     },
-    "SensitiveDataConfiguration": {
-      "type": "object",
-      "properties": {
-        "DetectionMode": {
-          "$ref": "#/definitions/SensitiveDataDetectionMode"
-        },
-        "DetectionScope": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SensitiveDataDetectionScope"
-          }
-        },
-        "PiiEntitiesConfiguration": {
-          "$ref": "#/definitions/PIIEntitiesConfiguration"
-        }
-      }
-    },
-    "SensitiveDataDetectionMode": {
-      "type": "string",
-      "enum": [
-        "DETECTION",
-        "DETECTION_AND_REDACTION"
-      ]
-    },
-    "SensitiveDataDetectionScope": {
-      "type": "string",
-      "enum": [
-        "STANDARD",
-        "CUSTOM"
-      ]
-    },
-    "PIIEntitiesConfiguration": {
-      "type": "object",
-      "properties": {
-        "PiiEntityTypes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PIIEntityTypes"
-          }
-        },
-        "RedactionMaskMode": {
-          "$ref": "#/definitions/PIIRedactionMaskMode"
-        }
-      }
-    },
-    "PIIRedactionMaskMode": {
-      "type": "string",
-      "enum": [
-        "PII",
-        "ENTITY_TYPE"
-      ]
-    },
-    "PIIEntityTypes": {
-      "type": "string",
-      "enum": [
-        "ALL",
-        "ADDRESS",
-        "AGE",
-        "NAME",
-        "EMAIL",
-        "PHONE",
-        "USERNAME",
-        "PASSWORD",
-        "DRIVER_ID",
-        "LICENSE_PLATE",
-        "VEHICLE_IDENTIFICATION_NUMBER",
-        "CREDIT_DEBIT_CARD_CVV",
-        "CREDIT_DEBIT_CARD_EXPIRY",
-        "CREDIT_DEBIT_CARD_NUMBER",
-        "PIN",
-        "INTERNATIONAL_BANK_ACCOUNT_NUMBER",
-        "SWIFT_CODE",
-        "IP_ADDRESS",
-        "MAC_ADDRESS",
-        "URL",
-        "AWS_ACCESS_KEY",
-        "AWS_SECRET_KEY",
-        "US_BANK_ACCOUNT_NUMBER",
-        "US_BANK_ROUTING_NUMBER",
-        "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
-        "US_PASSPORT_NUMBER",
-        "US_SOCIAL_SECURITY_NUMBER",
-        "CA_HEALTH_NUMBER",
-        "CA_SOCIAL_INSURANCE_NUMBER",
-        "UK_NATIONAL_HEALTH_SERVICE_NUMBER",
-        "UK_NATIONAL_INSURANCE_NUMBER",
-        "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
-      ]
-    },
     "AudioGenerativeOutputLanguage": {
       "type": "string",
       "enum": [
@@ -848,14 +747,6 @@
       "pattern": "^[a-zA-Z0-9-_]+$",
       "description": "Name of the DataAutomationProject"
     },
-    "ProjectType": {
-      "type": "string",
-      "description": "Type of the DataAutomationProject - Sync or Async",
-      "enum": [
-        "ASYNC",
-        "SYNC"
-      ]
-    },
     "ProjectStage": {
       "$ref": "#/definitions/DataAutomationProjectStage"
     },
@@ -908,8 +799,7 @@
     "/properties/Status"
   ],
   "createOnlyProperties": [
-    "/properties/ProjectName",
-    "/properties/ProjectType"
+    "/properties/ProjectName"
   ],
   "primaryIdentifier": [
     "/properties/ProjectArn"

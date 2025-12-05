@@ -60,7 +60,7 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The description of the segment definition.",
-		//	  "maxLength": 1000,
+		//	  "maxLength": 4000,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
@@ -69,7 +69,7 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1000),
+				stringvalidator.LengthBetween(1, 4000),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -4004,9 +4004,50 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "An array that defines the set of segment criteria to evaluate when handling segment groups for the segment.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.RequiresReplace(),
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SegmentSqlQuery
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The SQL query that defines the segment criteria.",
+		//	  "maxLength": 50000,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"segment_sql_query": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The SQL query that defines the segment criteria.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 50000),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SegmentType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The SQL query that defines the segment criteria.",
+		//	  "enum": [
+		//	    "CLASSIC",
+		//	    "ENHANCED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"segment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The SQL query that defines the segment criteria.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -4162,6 +4203,8 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"segment_definition_arn":  "SegmentDefinitionArn",
 		"segment_definition_name": "SegmentDefinitionName",
 		"segment_groups":          "SegmentGroups",
+		"segment_sql_query":       "SegmentSqlQuery",
+		"segment_type":            "SegmentType",
 		"shipping_address":        "ShippingAddress",
 		"source_segments":         "SourceSegments",
 		"source_type":             "SourceType",

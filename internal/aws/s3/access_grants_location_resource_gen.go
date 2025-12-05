@@ -72,7 +72,11 @@ func accessGrantsLocationResource(ctx context.Context) (resource.Resource, error
 		//	}
 		"iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the access grant location's associated IAM role.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: LocationScope
 		// CloudFormation resource type schema:
@@ -86,7 +90,11 @@ func accessGrantsLocationResource(ctx context.Context) (resource.Resource, error
 		//	}
 		"location_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Descriptor for where the location actually points",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:

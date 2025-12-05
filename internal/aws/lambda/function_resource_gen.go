@@ -9,12 +9,15 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
@@ -87,6 +90,110 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CapacityProviderConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "LambdaManagedInstancesCapacityProviderConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "",
+		//	      "properties": {
+		//	        "CapacityProviderArn": {
+		//	          "description": "The Amazon Resource Name (ARN) of the capacity provider.",
+		//	          "maxLength": 140,
+		//	          "minLength": 1,
+		//	          "pattern": "^arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:capacity-provider:[a-zA-Z0-9-_]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "ExecutionEnvironmentMemoryGiBPerVCpu": {
+		//	          "description": "The amount of memory in GiB allocated per vCPU for execution environments.",
+		//	          "maximum": 8,
+		//	          "minimum": 2,
+		//	          "type": "number"
+		//	        },
+		//	        "PerExecutionEnvironmentMaxConcurrency": {
+		//	          "description": "The maximum number of concurrent execution environments that can run on each compute instance.",
+		//	          "maximum": 1600,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "CapacityProviderArn"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "LambdaManagedInstancesCapacityProviderConfig"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"capacity_provider_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LambdaManagedInstancesCapacityProviderConfig
+				"lambda_managed_instances_capacity_provider_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CapacityProviderArn
+						"capacity_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) of the capacity provider.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 140),
+								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:capacity-provider:[a-zA-Z0-9-_]+$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ExecutionEnvironmentMemoryGiBPerVCpu
+						"execution_environment_memory_gi_b_per_v_cpu": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "The amount of memory in GiB allocated per vCPU for execution environments.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(2.000000, 8.000000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PerExecutionEnvironmentMaxConcurrency
+						"per_execution_environment_max_concurrency": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The maximum number of concurrent execution environments that can run on each compute instance.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(1, 1600),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Code
@@ -284,6 +391,68 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DurableConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "ExecutionTimeout": {
+		//	      "description": "The amount of time (in seconds) that Lambda allows a durable function to run before stopping it. The maximum is one 366-day year or 31,622,400 seconds.",
+		//	      "maximum": 31622400,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "RetentionPeriodInDays": {
+		//	      "default": 14,
+		//	      "description": "The number of days after a durable execution is closed that Lambda retains its history, from one to 90 days. The default is 14 days.",
+		//	      "maximum": 90,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ExecutionTimeout"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"durable_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExecutionTimeout
+				"execution_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The amount of time (in seconds) that Lambda allows a durable function to run before stopping it. The maximum is one 366-day year or 31,622,400 seconds.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(1, 31622400),
+						fwvalidators.NotNullInt64(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RetentionPeriodInDays
+				"retention_period_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The number of days after a durable execution is closed that Lambda retains its history, from one to 90 days. The default is 14 days.",
+					Optional:    true,
+					Computed:    true,
+					Default:     int64default.StaticInt64(14),
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(1, 90),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Environment
 		// CloudFormation resource type schema:
 		//
@@ -459,6 +628,62 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: FunctionScalingConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "MaxExecutionEnvironments": {
+		//	      "description": "The maximum number of execution environments that can be provisioned for the function.",
+		//	      "maximum": 15000,
+		//	      "minimum": 0,
+		//	      "type": "integer"
+		//	    },
+		//	    "MinExecutionEnvironments": {
+		//	      "description": "The minimum number of execution environments to maintain for the function.",
+		//	      "maximum": 15000,
+		//	      "minimum": 0,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"function_scaling_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxExecutionEnvironments
+				"max_execution_environments": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum number of execution environments that can be provisioned for the function.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(0, 15000),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MinExecutionEnvironments
+				"min_execution_environments": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The minimum number of execution environments to maintain for the function.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(0, 15000),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Handler
@@ -759,6 +984,22 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PublishToLatestPublished
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "boolean"
+		//	}
+		"publish_to_latest_published": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// PublishToLatestPublished is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: RecursiveLoop
 		// CloudFormation resource type schema:
@@ -1272,63 +1513,75 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"application_log_level":          "ApplicationLogLevel",
-		"apply_on":                       "ApplyOn",
-		"architectures":                  "Architectures",
-		"arn":                            "Arn",
-		"code":                           "Code",
-		"code_signing_config_arn":        "CodeSigningConfigArn",
-		"command":                        "Command",
-		"dead_letter_config":             "DeadLetterConfig",
-		"description":                    "Description",
-		"entry_point":                    "EntryPoint",
-		"environment":                    "Environment",
-		"ephemeral_storage":              "EphemeralStorage",
-		"file_system_configs":            "FileSystemConfigs",
-		"function_name":                  "FunctionName",
-		"handler":                        "Handler",
-		"image_config":                   "ImageConfig",
-		"image_uri":                      "ImageUri",
-		"ipv_6_allowed_for_dual_stack":   "Ipv6AllowedForDualStack",
-		"key":                            "Key",
-		"kms_key_arn":                    "KmsKeyArn",
-		"layers":                         "Layers",
-		"local_mount_path":               "LocalMountPath",
-		"log_format":                     "LogFormat",
-		"log_group":                      "LogGroup",
-		"logging_config":                 "LoggingConfig",
-		"memory_size":                    "MemorySize",
-		"mode":                           "Mode",
-		"optimization_status":            "OptimizationStatus",
-		"package_type":                   "PackageType",
-		"recursive_loop":                 "RecursiveLoop",
-		"reserved_concurrent_executions": "ReservedConcurrentExecutions",
-		"role":                           "Role",
-		"runtime":                        "Runtime",
-		"runtime_management_config":      "RuntimeManagementConfig",
-		"runtime_version_arn":            "RuntimeVersionArn",
-		"s3_bucket":                      "S3Bucket",
-		"s3_key":                         "S3Key",
-		"s3_object_version":              "S3ObjectVersion",
-		"security_group_ids":             "SecurityGroupIds",
-		"size":                           "Size",
-		"snap_start":                     "SnapStart",
-		"snap_start_response":            "SnapStartResponse",
-		"source_kms_key_arn":             "SourceKMSKeyArn",
-		"subnet_ids":                     "SubnetIds",
-		"system_log_level":               "SystemLogLevel",
-		"tags":                           "Tags",
-		"target_arn":                     "TargetArn",
-		"tenancy_config":                 "TenancyConfig",
-		"tenant_isolation_mode":          "TenantIsolationMode",
-		"timeout":                        "Timeout",
-		"tracing_config":                 "TracingConfig",
-		"update_runtime_on":              "UpdateRuntimeOn",
-		"value":                          "Value",
-		"variables":                      "Variables",
-		"vpc_config":                     "VpcConfig",
-		"working_directory":              "WorkingDirectory",
-		"zip_file":                       "ZipFile",
+		"application_log_level":    "ApplicationLogLevel",
+		"apply_on":                 "ApplyOn",
+		"architectures":            "Architectures",
+		"arn":                      "Arn",
+		"capacity_provider_arn":    "CapacityProviderArn",
+		"capacity_provider_config": "CapacityProviderConfig",
+		"code":                     "Code",
+		"code_signing_config_arn":  "CodeSigningConfigArn",
+		"command":                  "Command",
+		"dead_letter_config":       "DeadLetterConfig",
+		"description":              "Description",
+		"durable_config":           "DurableConfig",
+		"entry_point":              "EntryPoint",
+		"environment":              "Environment",
+		"ephemeral_storage":        "EphemeralStorage",
+		"execution_environment_memory_gi_b_per_v_cpu": "ExecutionEnvironmentMemoryGiBPerVCpu",
+		"execution_timeout":                           "ExecutionTimeout",
+		"file_system_configs":                         "FileSystemConfigs",
+		"function_name":                               "FunctionName",
+		"function_scaling_config":                     "FunctionScalingConfig",
+		"handler":                                     "Handler",
+		"image_config":                                "ImageConfig",
+		"image_uri":                                   "ImageUri",
+		"ipv_6_allowed_for_dual_stack":                "Ipv6AllowedForDualStack",
+		"key":                                         "Key",
+		"kms_key_arn":                                 "KmsKeyArn",
+		"lambda_managed_instances_capacity_provider_config": "LambdaManagedInstancesCapacityProviderConfig",
+		"layers":                     "Layers",
+		"local_mount_path":           "LocalMountPath",
+		"log_format":                 "LogFormat",
+		"log_group":                  "LogGroup",
+		"logging_config":             "LoggingConfig",
+		"max_execution_environments": "MaxExecutionEnvironments",
+		"memory_size":                "MemorySize",
+		"min_execution_environments": "MinExecutionEnvironments",
+		"mode":                       "Mode",
+		"optimization_status":        "OptimizationStatus",
+		"package_type":               "PackageType",
+		"per_execution_environment_max_concurrency": "PerExecutionEnvironmentMaxConcurrency",
+		"publish_to_latest_published":               "PublishToLatestPublished",
+		"recursive_loop":                            "RecursiveLoop",
+		"reserved_concurrent_executions":            "ReservedConcurrentExecutions",
+		"retention_period_in_days":                  "RetentionPeriodInDays",
+		"role":                                      "Role",
+		"runtime":                                   "Runtime",
+		"runtime_management_config":                 "RuntimeManagementConfig",
+		"runtime_version_arn":                       "RuntimeVersionArn",
+		"s3_bucket":                                 "S3Bucket",
+		"s3_key":                                    "S3Key",
+		"s3_object_version":                         "S3ObjectVersion",
+		"security_group_ids":                        "SecurityGroupIds",
+		"size":                                      "Size",
+		"snap_start":                                "SnapStart",
+		"snap_start_response":                       "SnapStartResponse",
+		"source_kms_key_arn":                        "SourceKMSKeyArn",
+		"subnet_ids":                                "SubnetIds",
+		"system_log_level":                          "SystemLogLevel",
+		"tags":                                      "Tags",
+		"target_arn":                                "TargetArn",
+		"tenancy_config":                            "TenancyConfig",
+		"tenant_isolation_mode":                     "TenantIsolationMode",
+		"timeout":                                   "Timeout",
+		"tracing_config":                            "TracingConfig",
+		"update_runtime_on":                         "UpdateRuntimeOn",
+		"value":                                     "Value",
+		"variables":                                 "Variables",
+		"vpc_config":                                "VpcConfig",
+		"working_directory":                         "WorkingDirectory",
+		"zip_file":                                  "ZipFile",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
@@ -1340,6 +1593,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Code/S3ObjectVersion",
 		"/properties/Code/ZipFile",
 		"/properties/Code/SourceKMSKeyArn",
+		"/properties/PublishToLatestPublished",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -493,7 +493,7 @@
     "Description": {
       "description": "The description of the segment definition.",
       "type": "string",
-      "maxLength": 1000,
+      "maxLength": 4000,
       "minLength": 1
     },
     "DisplayName": {
@@ -520,11 +520,25 @@
       "description": "An array that defines the set of segment criteria to evaluate when handling segment groups for the segment.",
       "$ref": "#/definitions/SegmentGroup"
     },
+    "SegmentSqlQuery": {
+      "description": "The SQL query that defines the segment criteria.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50000
+    },
     "SegmentDefinitionArn": {
       "description": "The Amazon Resource Name (ARN) of the segment definition.",
       "type": "string",
       "maxLength": 255,
       "minLength": 1
+    },
+    "SegmentType": {
+      "description": "The SQL query that defines the segment criteria.",
+      "type": "string",
+      "enum": [
+        "CLASSIC",
+        "ENHANCED"
+      ]
     },
     "Tags": {
       "description": "The tags used to organize, track, or control access for this resource.",
@@ -541,18 +555,19 @@
   "required": [
     "DomainName",
     "DisplayName",
-    "SegmentDefinitionName",
-    "SegmentGroups"
+    "SegmentDefinitionName"
   ],
   "readOnlyProperties": [
     "/properties/CreatedAt",
-    "/properties/SegmentDefinitionArn"
+    "/properties/SegmentDefinitionArn",
+    "/properties/SegmentType"
   ],
   "createOnlyProperties": [
     "/properties/DomainName",
     "/properties/SegmentDefinitionName",
     "/properties/DisplayName",
-    "/properties/SegmentGroups"
+    "/properties/SegmentGroups",
+    "/properties/SegmentSqlQuery"
   ],
   "primaryIdentifier": [
     "/properties/DomainName",
@@ -562,24 +577,48 @@
     "create": {
       "permissions": [
         "profile:CreateSegmentDefinition",
-        "profile:TagResource"
+        "profile:TagResource",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:GetKeyPolicy",
+        "kms:PutKeyPolicy",
+        "kms:ListGrants",
+        "kms:GenerateDataKey"
       ]
     },
     "read": {
       "permissions": [
-        "profile:GetSegmentDefinition"
+        "profile:GetSegmentDefinition",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:GetKeyPolicy",
+        "kms:PutKeyPolicy",
+        "kms:ListGrants",
+        "kms:GenerateDataKey"
       ]
     },
     "update": {
       "permissions": [
         "profile:GetSegmentDefinition",
         "profile:UntagResource",
-        "profile:TagResource"
+        "profile:TagResource",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:GetKeyPolicy",
+        "kms:PutKeyPolicy",
+        "kms:ListGrants",
+        "kms:GenerateDataKey"
       ]
     },
     "delete": {
       "permissions": [
-        "profile:DeleteSegmentDefinition"
+        "profile:DeleteSegmentDefinition",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:GetKeyPolicy",
+        "kms:PutKeyPolicy",
+        "kms:ListGrants",
+        "kms:GenerateDataKey"
       ]
     },
     "list": {
@@ -594,7 +633,13 @@
         ]
       },
       "permissions": [
-        "profile:ListSegmentDefinitions"
+        "profile:ListSegmentDefinitions",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:GetKeyPolicy",
+        "kms:PutKeyPolicy",
+        "kms:ListGrants",
+        "kms:GenerateDataKey"
       ]
     }
   },
