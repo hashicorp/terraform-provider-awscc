@@ -1,0 +1,187 @@
+{
+  "typeName": "AWS::Connect::DataTable",
+  "description": "Resource Type definition for AWS::Connect::DataTable",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-connect",
+  "definitions": {
+    "Description": {
+      "description": "The description of the Data Table.",
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 250,
+      "pattern": "^[\\P{C}\r\n\t]+$"
+    },
+    "Timestamp": {
+      "description": "A epoch time stamp field used for data table operations.",
+      "type": "number"
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": ""
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "properties": {
+    "InstanceArn": {
+      "description": "The identifier of the Amazon Connect instance.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$"
+    },
+    "Name": {
+      "description": "The name of the Data Table",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[\\p{L}\\p{Z}\\p{N}\\-_.:=@'|]+$"
+    },
+    "Arn": {
+      "description": "The arn of the Data Table",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "TimeZone": {
+      "description": "The time zone of the Data Table",
+      "type": "string"
+    },
+    "Description": {
+      "description": "The description of the Data Table.",
+      "$ref": "#/definitions/Description"
+    },
+    "ValueLockLevel": {
+      "description": "The value lock level of the Data Table",
+      "type": "string",
+      "enum": [
+        "NONE"
+      ]
+    },
+    "LockVersion": {
+      "description": "The lock version of the Data Table",
+      "type": "object",
+      "properties": {
+        "DataTable": {
+          "type": "string",
+          "description": "The data table for the lock version"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Status": {
+      "description": "The status of the Data Table",
+      "type": "string",
+      "enum": [
+        "PUBLISHED"
+      ]
+    },
+    "CreatedTime": {
+      "description": "The creation time of the Data Table",
+      "$ref": "#/definitions/Timestamp"
+    },
+    "LastModifiedTime": {
+      "description": "Last modified time.",
+      "$ref": "#/definitions/Timestamp"
+    },
+    "LastModifiedRegion": {
+      "description": "Last modified region.",
+      "type": "string",
+      "pattern": "[a-z]{2}(-[a-z]+){1,2}(-[0-9])?"
+    },
+    "Tags": {
+      "description": "One or more tags.",
+      "type": "array",
+      "maxItems": 50,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "connect:TagResource",
+      "connect:UntagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "connect:CreateDataTable",
+        "connect:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "connect:DescribeDataTable"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "connect:DeleteDataTable",
+        "connect:UntagResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "connect:UpdateDataTableMetadata",
+        "connect:TagResource",
+        "connect:UntagResource"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "InstanceArn": {
+            "$ref": "resource-schema.json#/properties/InstanceArn"
+          }
+        },
+        "required": [
+          "InstanceArn"
+        ]
+      },
+      "permissions": [
+        "connect:ListDataTables"
+      ]
+    }
+  },
+  "createOnlyProperties": [
+    "/properties/InstanceArn",
+    "/properties/Status"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/LockVersion",
+    "/properties/CreatedTime",
+    "/properties/LastModifiedRegion",
+    "/properties/LastModifiedTime"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/InstanceArn",
+    "/properties/Arn"
+  ]
+}
