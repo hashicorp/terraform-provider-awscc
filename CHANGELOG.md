@@ -1,3 +1,5 @@
+## 1.67.0 (Unreleased)
+
 ## 1.66.0 (December 4, 2025)
 
 BUG FIXES:
