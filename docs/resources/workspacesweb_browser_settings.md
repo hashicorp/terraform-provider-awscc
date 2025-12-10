@@ -21,6 +21,7 @@ Definition of AWS::WorkSpacesWeb::BrowserSettings Resource Type
 - `browser_policy` (String)
 - `customer_managed_key` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `web_content_filtering_policy` (Attributes) (see [below for nested schema](#nestedatt--web_content_filtering_policy))
 
 ### Read-Only
 
@@ -35,6 +36,16 @@ Optional:
 
 - `key` (String)
 - `value` (String)
+
+
+<a id="nestedatt--web_content_filtering_policy"></a>
+### Nested Schema for `web_content_filtering_policy`
+
+Optional:
+
+- `allowed_urls` (List of String)
+- `blocked_categories` (List of String)
+- `blocked_urls` (List of String)
 
 ## Import
 

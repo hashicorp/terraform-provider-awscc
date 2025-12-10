@@ -23,6 +23,7 @@ Data Source schema for AWS::EC2::IPAMScope
 
 - `arn` (String) The Amazon Resource Name (ARN) of the IPAM scope.
 - `description` (String)
+- `external_authority_configuration` (Attributes) External service configuration to connect your AWS IPAM scope. (see [below for nested schema](#nestedatt--external_authority_configuration))
 - `ipam_arn` (String) The Amazon Resource Name (ARN) of the IPAM this scope is a part of.
 - `ipam_id` (String) The Id of the IPAM this scope is a part of.
 - `ipam_scope_id` (String) Id of the IPAM scope.
@@ -30,6 +31,15 @@ Data Source schema for AWS::EC2::IPAMScope
 - `is_default` (Boolean) Is this one of the default scopes created with the IPAM.
 - `pool_count` (Number) The number of pools that currently exist in this scope.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--external_authority_configuration"></a>
+### Nested Schema for `external_authority_configuration`
+
+Read-Only:
+
+- `external_resource_identifier` (String) Resource identifier of the scope in the external service connecting to your AWS IPAM scope.
+- `ipam_scope_external_authority_type` (String) An external service connecting to your AWS IPAM scope.
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

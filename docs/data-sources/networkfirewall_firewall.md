@@ -35,6 +35,7 @@ Data Source schema for AWS::NetworkFirewall::Firewall
 - `subnet_change_protection` (Boolean)
 - `subnet_mappings` (Attributes Set) (see [below for nested schema](#nestedatt--subnet_mappings))
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `transit_gateway_attachment_id` (String)
 - `transit_gateway_id` (String)
 - `vpc_id` (String)
 

@@ -37,4 +37,10 @@ website/vendor
 internal/update/makes_error.txt
 last_resource.txt
 
+# Make target logs
+.make-plural-data-sources.log
+.make-resources.log
+.make-schemas.log
+.make-singular-data-sources.log
+
 *_test.json

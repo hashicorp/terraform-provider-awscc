@@ -32,7 +32,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "properties": {
 		//	    "AccessRole": {
 		//	      "maxLength": 2048,
-		//	      "pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$",
+		//	      "pattern": "^arn:aws[^:]*:iam::\\d{12}:role(/[a-zA-Z0-9+=,.@_-]+)*/[a-zA-Z0-9+=,.@_-]+$",
 		//	      "type": "string"
 		//	    },
 		//	    "AwsAccountId": {
@@ -137,6 +137,17 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The ID of the domain unit in which the connection is created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EnableTrustedIdentityPropagation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether the trusted identity propagation is enabled",
+		//	  "type": "boolean"
+		//	}
+		"enable_trusted_identity_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether the trusted identity propagation is enabled",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentId
 		// CloudFormation resource type schema:
 		//
@@ -196,11 +207,45 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The ID of the project in which the connection is created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ProjectIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the project in which the connection should be created. If ",
+		//	  "type": "string"
+		//	}
+		"project_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the project in which the connection should be created. If ",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Props
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "properties": {
+		//	    "AmazonQProperties": {
+		//	      "additionalProperties": false,
+		//	      "description": "Amazon Q properties of the connection.",
+		//	      "properties": {
+		//	        "AuthMode": {
+		//	          "description": "The authentication mode of the connection's AmazonQ properties",
+		//	          "maxLength": 128,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        },
+		//	        "IsEnabled": {
+		//	          "description": "Specifies whether Amazon Q is enabled for the connection",
+		//	          "type": "boolean"
+		//	        },
+		//	        "ProfileArn": {
+		//	          "maxLength": 2048,
+		//	          "minLength": 0,
+		//	          "pattern": "arn:aws[a-z\\-]*:[a-z0-9\\-]+:[a-z0-9\\-]*:[0-9]*:.*",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "AthenaProperties": {
 		//	      "additionalProperties": false,
 		//	      "description": "Athena Properties Input",
@@ -618,6 +663,30 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "S3Properties": {
+		//	      "additionalProperties": false,
+		//	      "description": "S3 Properties Input",
+		//	      "properties": {
+		//	        "S3AccessGrantLocationId": {
+		//	          "description": "The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties of a connection.",
+		//	          "maxLength": 64,
+		//	          "minLength": 0,
+		//	          "pattern": "[a-zA-Z0-9\\-]+",
+		//	          "type": "string"
+		//	        },
+		//	        "S3Uri": {
+		//	          "description": "The Amazon S3 URI that's part of the Amazon S3 properties of a connection.",
+		//	          "maxLength": 2048,
+		//	          "minLength": 0,
+		//	          "pattern": "s3://.+",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "S3Uri"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "SparkEmrProperties": {
 		//	      "additionalProperties": false,
 		//	      "description": "Spark EMR Properties Input.",
@@ -629,7 +698,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "InstanceProfileArn": {
 		//	          "maxLength": 2048,
-		//	          "pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$",
+		//	          "pattern": "^arn:aws[^:]*:iam::\\d{12}:role(/[a-zA-Z0-9+=,.@_-]+)*/[a-zA-Z0-9+=,.@_-]+$",
 		//	          "type": "string"
 		//	        },
 		//	        "JavaVirtualEnv": {
@@ -649,7 +718,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "RuntimeRole": {
 		//	          "maxLength": 2048,
-		//	          "pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$",
+		//	          "pattern": "^arn:aws[^:]*:iam::\\d{12}:role(/[a-zA-Z0-9+=,.@_-]+)*/[a-zA-Z0-9+=,.@_-]+$",
 		//	          "type": "string"
 		//	        },
 		//	        "TrustedCertificatesS3Uri": {
@@ -720,6 +789,27 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"props": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AmazonQProperties
+				"amazon_q_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AuthMode
+						"auth_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The authentication mode of the connection's AmazonQ properties",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: IsEnabled
+						"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether Amazon Q is enabled for the connection",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ProfileArn
+						"profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Amazon Q properties of the connection.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: AthenaProperties
 				"athena_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1044,6 +1134,23 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "Redshift Properties Input",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: S3Properties
+				"s3_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: S3AccessGrantLocationId
+						"s3_access_grant_location_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties of a connection.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3Uri
+						"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon S3 URI that's part of the Amazon S3 properties of a connection.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "S3 Properties Input",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: SparkEmrProperties
 				"spark_emr_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1128,6 +1235,21 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Scope
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The scope of the connection.",
+		//	  "enum": [
+		//	    "DOMAIN",
+		//	    "PROJECT"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The scope of the connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -1159,7 +1281,9 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"access_role":                              "AccessRole",
 		"access_token":                             "AccessToken",
 		"additional_args":                          "AdditionalArgs",
+		"amazon_q_properties":                      "AmazonQProperties",
 		"athena_properties":                        "AthenaProperties",
+		"auth_mode":                                "AuthMode",
 		"authentication_configuration":             "AuthenticationConfiguration",
 		"authentication_type":                      "AuthenticationType",
 		"authorization_code":                       "AuthorizationCode",
@@ -1183,6 +1307,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"domain_id":                                "DomainId",
 		"domain_identifier":                        "DomainIdentifier",
 		"domain_unit_id":                           "DomainUnitId",
+		"enable_trusted_identity_propagation":      "EnableTrustedIdentityPropagation",
 		"enabled":                                  "Enabled",
 		"environment_id":                           "EnvironmentId",
 		"environment_identifier":                   "EnvironmentIdentifier",
@@ -1198,6 +1323,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"iam_properties":                           "IamProperties",
 		"idle_timeout":                             "IdleTimeout",
 		"instance_profile_arn":                     "InstanceProfileArn",
+		"is_enabled":                               "IsEnabled",
 		"java_virtual_env":                         "JavaVirtualEnv",
 		"jwt_token":                                "JwtToken",
 		"kms_key_arn":                              "KmsKeyArn",
@@ -1213,7 +1339,9 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"password":                                 "Password",
 		"physical_connection_requirements":         "PhysicalConnectionRequirements",
 		"port":                                     "Port",
+		"profile_arn":                              "ProfileArn",
 		"project_id":                               "ProjectId",
+		"project_identifier":                       "ProjectIdentifier",
 		"props":                                    "Props",
 		"python_properties":                        "PythonProperties",
 		"python_virtual_env":                       "PythonVirtualEnv",
@@ -1221,7 +1349,11 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"redshift_properties":                      "RedshiftProperties",
 		"refresh_token":                            "RefreshToken",
 		"runtime_role":                             "RuntimeRole",
+		"s3_access_grant_location_id":              "S3AccessGrantLocationId",
+		"s3_properties":                            "S3Properties",
+		"s3_uri":                                   "S3Uri",
 		"schedule":                                 "Schedule",
+		"scope":                                    "Scope",
 		"secret_arn":                               "SecretArn",
 		"security_group_id_list":                   "SecurityGroupIdList",
 		"spark_emr_properties":                     "SparkEmrProperties",

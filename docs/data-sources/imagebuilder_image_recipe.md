@@ -27,6 +27,7 @@ Data Source schema for AWS::ImageBuilder::ImageRecipe
 - `block_device_mappings` (Attributes List) The block device mappings to apply when creating images from this recipe. (see [below for nested schema](#nestedatt--block_device_mappings))
 - `components` (Attributes List) The components of the image recipe. (see [below for nested schema](#nestedatt--components))
 - `description` (String) The description of the image recipe.
+- `latest_version` (Attributes) The latest version references of the image recipe. (see [below for nested schema](#nestedatt--latest_version))
 - `name` (String) The name of the image recipe.
 - `parent_image` (String) The parent image of the image recipe.
 - `tags` (Map of String) The tags of the image recipe.
@@ -91,3 +92,15 @@ Read-Only:
 
 - `name` (String) The name of the component parameter to set.
 - `value` (List of String) Sets the value for the named component parameter.
+
+
+
+<a id="nestedatt--latest_version"></a>
+### Nested Schema for `latest_version`
+
+Read-Only:
+
+- `arn` (String) The latest version ARN of the created image recipe.
+- `major` (String) The latest version ARN of the created image recipe, with the same major version.
+- `minor` (String) The latest version ARN of the created image recipe, with the same minor version.
+- `patch` (String) The latest version ARN of the created image recipe, with the same patch version.

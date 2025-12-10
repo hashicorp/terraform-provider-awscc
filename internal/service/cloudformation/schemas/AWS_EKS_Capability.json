@@ -1,0 +1,376 @@
+{
+  "typeName": "AWS::EKS::Capability",
+  "description": "Resource Type definition for EKS Capability.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-eks.git",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "CapabilityConfiguration": {
+      "description": "Configuration settings for a capability. The structure of this object varies depending on the capability type.",
+      "type": "object",
+      "properties": {
+        "ArgoCd": {
+          "$ref": "#/definitions/ArgoCd"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ArgoCd": {
+      "description": "Configuration settings for an Argo CD capability. This includes the Kubernetes namespace, IAM Identity Center integration, RBAC role mappings, and network access configuration.",
+      "type": "object",
+      "properties": {
+        "Namespace": {
+          "type": "string",
+          "description": "The Kubernetes namespace where Argo CD resources will be created. If not specified, the default namespace is used."
+        },
+        "AwsIdc": {
+          "$ref": "#/definitions/AwsIdc"
+        },
+        "RbacRoleMappings": {
+          "type": "array",
+          "description": "A list of role mappings that define which IAM Identity Center users or groups have which Argo CD roles. Each mapping associates an Argo CD role (ADMIN, EDITOR, or VIEWER) with one or more IAM Identity Center identities.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/ArgoCdRoleMapping"
+          }
+        },
+        "NetworkAccess": {
+          "$ref": "#/definitions/NetworkAccess"
+        },
+        "ServerUrl": {
+          "type": "string",
+          "description": "The URL of the Argo CD server. Use this URL to access the Argo CD web interface and API."
+        }
+      },
+      "required": [
+        "AwsIdc"
+      ],
+      "additionalProperties": false
+    },
+    "AwsIdc": {
+      "description": "Configuration for integrating Argo CD with IAM Identity Center. This allows you to use your organization's identity provider for authentication to Argo CD.",
+      "type": "object",
+      "properties": {
+        "IdcInstanceArn": {
+          "type": "string",
+          "description": "The ARN of the IAM Identity Center instance to use for authentication."
+        },
+        "IdcRegion": {
+          "type": "string",
+          "description": "The Region where your IAM Identity Center instance is located."
+        },
+        "IdcManagedApplicationArn": {
+          "type": "string",
+          "description": "The ARN of the managed application created in IAM Identity Center for this Argo CD capability. This application is automatically created and managed by EKS."
+        }
+      },
+      "required": [
+        "IdcInstanceArn"
+      ],
+      "additionalProperties": false
+    },
+    "ArgoCdRoleMapping": {
+      "description": "A mapping between an Argo CD role and IAM Identity Center identities. This defines which users or groups have specific permissions in Argo CD.",
+      "type": "object",
+      "properties": {
+        "Role": {
+          "type": "string",
+          "enum": [
+            "ADMIN",
+            "EDITOR",
+            "VIEWER"
+          ],
+          "description": "The Argo CD role to assign. Valid values are: ADMIN (full administrative access to Argo CD), EDITOR (edit access to Argo CD resources), or VIEWER (read-only access to Argo CD resources)."
+        },
+        "Identities": {
+          "type": "array",
+          "description": "A list of IAM Identity Center identities (users or groups) that should be assigned this Argo CD role.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/SsoIdentity"
+          }
+        }
+      },
+      "required": [
+        "Role",
+        "Identities"
+      ],
+      "additionalProperties": false
+    },
+    "SsoIdentity": {
+      "description": "An IAM Identity Center identity (user or group) that can be assigned permissions in a capability.",
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "The unique identifier of the IAM Identity Center user or group."
+        },
+        "Type": {
+          "type": "string",
+          "enum": [
+            "SSO_USER",
+            "SSO_GROUP"
+          ],
+          "description": "The type of identity. Valid values are SSO_USER or SSO_GROUP."
+        }
+      },
+      "required": [
+        "Id",
+        "Type"
+      ],
+      "additionalProperties": false
+    },
+    "NetworkAccess": {
+      "description": "Configuration for network access to the Argo CD capability's managed API server endpoint. By default, the Argo CD server is accessible via a public endpoint. You can optionally specify one or more VPC endpoint IDs to enable private connectivity from your VPCs.",
+      "type": "object",
+      "properties": {
+        "VpceIds": {
+          "type": "array",
+          "description": "A list of VPC endpoint IDs to associate with the managed Argo CD API server endpoint. Each VPC endpoint provides private connectivity from a specific VPC to the Argo CD server. You can specify multiple VPC endpoint IDs to enable access from multiple VPCs.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "ClusterName": {
+      "description": "The name of the EKS cluster where you want to create the capability.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "CapabilityName": {
+      "description": "A unique name for the capability. The name must be unique within your cluster and can contain alphanumeric characters, hyphens, and underscores.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "Type": {
+      "description": "The type of capability to create. Valid values are: ACK (AWS Controllers for Kubernetes, which lets you manage AWS resources directly from Kubernetes), ARGOCD (Argo CD for GitOps-based continuous delivery), or KRO (Kube Resource Orchestrator for composing and managing custom Kubernetes resources).",
+      "type": "string",
+      "enum": [
+        "ARGOCD",
+        "ACK",
+        "KRO"
+      ]
+    },
+    "RoleArn": {
+      "description": "The Amazon Resource Name (ARN) of the IAM role that the capability uses to interact with AWS services. This role must have a trust policy that allows the EKS service principal to assume it, and it must have the necessary permissions for the capability type you're creating.",
+      "pattern": "^arn:aws[a-z-]*:iam::[0-9]+:role/[a-zA-Z0-9+=,.@_-]+$",
+      "type": "string"
+    },
+    "DeletePropagationPolicy": {
+      "description": "Specifies how Kubernetes resources managed by the capability should be handled when the capability is deleted. Currently, the only supported value is RETAIN which retains all Kubernetes resources managed by the capability when the capability is deleted.",
+      "type": "string",
+      "enum": [
+        "RETAIN"
+      ]
+    },
+    "Configuration": {
+      "description": "The configuration settings for the capability. The structure of this object varies depending on the capability type. For Argo CD capabilities, you can configure IAM Identity Center integration, RBAC role mappings, and network access settings.",
+      "$ref": "#/definitions/CapabilityConfiguration"
+    },
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) of the capability.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "The current status of the capability. Valid values include: CREATING (the capability is being created), ACTIVE (the capability is running and available), UPDATING (the capability is being updated), DELETING (the capability is being deleted), CREATE_FAILED (the capability creation failed), UPDATE_FAILED (the capability update failed), or DELETE_FAILED (the capability deletion failed).",
+      "type": "string"
+    },
+    "CreatedAt": {
+      "description": "The Unix epoch timestamp in seconds for when the capability was created.",
+      "type": "string"
+    },
+    "ModifiedAt": {
+      "description": "The Unix epoch timestamp in seconds for when the capability was last modified.",
+      "type": "string"
+    },
+    "Version": {
+      "description": "The version of the capability software that is currently running.",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "eks:TagResource",
+      "eks:UntagResource"
+    ]
+  },
+  "additionalProperties": false,
+  "required": [
+    "ClusterName",
+    "CapabilityName",
+    "Type",
+    "RoleArn",
+    "DeletePropagationPolicy"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/ClusterName",
+    "/properties/CapabilityName",
+    "/properties/Type",
+    "/properties/Configuration/ArgoCd/Namespace",
+    "/properties/Configuration/ArgoCd/AwsIdc"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Status",
+    "/properties/CreatedAt",
+    "/properties/ModifiedAt",
+    "/properties/Version",
+    "/properties/Configuration/ArgoCd/ServerUrl",
+    "/properties/Configuration/ArgoCd/AwsIdc/IdcManagedApplicationArn"
+  ],
+  "replacementStrategy": "delete_then_create",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "eks:CreateCapability",
+        "eks:DescribeCapability",
+        "eks:TagResource",
+        "eks:CreateAccessEntry",
+        "eks:DeleteAccessEntry",
+        "eks:DescribeAccessEntry",
+        "eks:UpdateAccessEntry",
+        "eks:AssociateAccessPolicy",
+        "eks:DisassociateAccessPolicy",
+        "eks:ListAssociatedAccessPolicies",
+        "iam:PassRole",
+        "iam:GetRole",
+        "sso:CreateApplication",
+        "sso:DeleteApplication",
+        "sso:DeleteApplicationAccessScope",
+        "sso:DeleteApplicationAuthenticationMethod",
+        "sso:DeleteApplicationGrant",
+        "sso:PutApplicationAccessScope",
+        "sso:PutApplicationGrant",
+        "sso:PutApplicationAuthenticationMethod",
+        "sso:PutApplicationAssignmentConfiguration",
+        "sso:CreateApplicationAssignment",
+        "sso:DescribeInstance",
+        "sso:DescribeRegisteredRegions",
+        "sso:ListApplicationAssignments",
+        "sso:DeleteApplicationAssignment",
+        "identitystore:ListGroups",
+        "identitystore:ListUsers",
+        "identitystore:DescribeGroup"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "eks:DescribeCapability"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "eks:DescribeCapability",
+        "eks:UpdateCapability",
+        "eks:DescribeUpdate",
+        "eks:TagResource",
+        "eks:UntagResource",
+        "iam:PassRole",
+        "iam:GetRole",
+        "eks:CreateAccessEntry",
+        "eks:DeleteAccessEntry",
+        "eks:DescribeAccessEntry",
+        "eks:UpdateAccessEntry",
+        "eks:AssociateAccessPolicy",
+        "eks:DisassociateAccessPolicy",
+        "eks:ListAssociatedAccessPolicies",
+        "sso:CreateApplication",
+        "sso:DeleteApplication",
+        "sso:DeleteApplicationAccessScope",
+        "sso:DeleteApplicationAuthenticationMethod",
+        "sso:DeleteApplicationGrant",
+        "sso:PutApplicationAccessScope",
+        "sso:PutApplicationGrant",
+        "sso:PutApplicationAuthenticationMethod",
+        "sso:PutApplicationAssignmentConfiguration",
+        "sso:CreateApplicationAssignment",
+        "sso:DescribeInstance",
+        "sso:DescribeRegisteredRegions",
+        "sso:ListApplicationAssignments",
+        "sso:DeleteApplicationAssignment",
+        "identitystore:ListGroups",
+        "identitystore:ListUsers",
+        "identitystore:DescribeGroup"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "eks:DeleteCapability",
+        "eks:DescribeCapability",
+        "eks:DeleteAccessEntry",
+        "eks:DescribeAccessEntry",
+        "eks:DisassociateAccessPolicy",
+        "eks:ListAssociatedAccessPolicies",
+        "eks:UntagResource",
+        "sso:DeleteApplication",
+        "sso:DeleteApplicationAccessScope",
+        "sso:DeleteApplicationAuthenticationMethod",
+        "sso:DeleteApplicationGrant",
+        "sso:DescribeInstance",
+        "sso:DescribeRegisteredRegions",
+        "sso:ListApplicationAssignments",
+        "sso:DeleteApplicationAssignment"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "ClusterName": {
+            "$ref": "resource-schema.json#/properties/ClusterName"
+          }
+        },
+        "required": [
+          "ClusterName"
+        ]
+      },
+      "permissions": [
+        "eks:ListCapabilities"
+      ]
+    }
+  }
+}

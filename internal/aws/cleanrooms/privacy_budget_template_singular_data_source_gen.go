@@ -95,10 +95,50 @@ func privacyBudgetTemplateDataSource(ctx context.Context) (datasource.DataSource
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "BudgetParameters": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "AutoRefresh": {
+		//	            "enum": [
+		//	              "ENABLED",
+		//	              "DISABLED"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Budget": {
+		//	            "minimum": 0,
+		//	            "type": "integer"
+		//	          },
+		//	          "Type": {
+		//	            "enum": [
+		//	              "CALENDAR_DAY",
+		//	              "CALENDAR_MONTH",
+		//	              "CALENDAR_WEEK",
+		//	              "LIFETIME"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Type",
+		//	          "Budget"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 2,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
 		//	    "Epsilon": {
 		//	      "maximum": 20,
 		//	      "minimum": 1,
 		//	      "type": "integer"
+		//	    },
+		//	    "ResourceArn": {
+		//	      "maxLength": 200,
+		//	      "type": "string"
 		//	    },
 		//	    "UsersNoisePerQuery": {
 		//	      "maximum": 100,
@@ -106,16 +146,36 @@ func privacyBudgetTemplateDataSource(ctx context.Context) (datasource.DataSource
 		//	      "type": "integer"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "Epsilon",
-		//	    "UsersNoisePerQuery"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BudgetParameters
+				"budget_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AutoRefresh
+							"auto_refresh": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Budget
+							"budget": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: Epsilon
 				"epsilon": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceArn
+				"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: UsersNoisePerQuery
@@ -142,7 +202,8 @@ func privacyBudgetTemplateDataSource(ctx context.Context) (datasource.DataSource
 		//
 		//	{
 		//	  "enum": [
-		//	    "DIFFERENTIAL_PRIVACY"
+		//	    "DIFFERENTIAL_PRIVACY",
+		//	    "ACCESS_BUDGET"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -212,6 +273,8 @@ func privacyBudgetTemplateDataSource(ctx context.Context) (datasource.DataSource
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                                "Arn",
 		"auto_refresh":                       "AutoRefresh",
+		"budget":                             "Budget",
+		"budget_parameters":                  "BudgetParameters",
 		"collaboration_arn":                  "CollaborationArn",
 		"collaboration_identifier":           "CollaborationIdentifier",
 		"epsilon":                            "Epsilon",
@@ -221,7 +284,9 @@ func privacyBudgetTemplateDataSource(ctx context.Context) (datasource.DataSource
 		"parameters":                         "Parameters",
 		"privacy_budget_template_identifier": "PrivacyBudgetTemplateIdentifier",
 		"privacy_budget_type":                "PrivacyBudgetType",
+		"resource_arn":                       "ResourceArn",
 		"tags":                               "Tags",
+		"type":                               "Type",
 		"users_noise_per_query":              "UsersNoisePerQuery",
 		"value":                              "Value",
 	})

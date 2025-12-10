@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -31,6 +32,86 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::SecretsManager::RotationSchedule resource.
 func rotationScheduleResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ExternalSecretRotationMetadata
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The list of metadata needed to successfully rotate a managed external secret.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "The metadata needed to successfully rotate a managed external secret. Each metadata item is a key and value pair of strings in a JSON text string.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the metadata item. You can specify a value that's 1 to 256 characters in length.",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the metadata item. You can specify a value that's 1 to 2048 characters in length.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"external_secret_rotation_metadata": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the metadata item. You can specify a value that's 1 to 256 characters in length.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the metadata item. You can specify a value that's 1 to 2048 characters in length.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The list of metadata needed to successfully rotate a managed external secret.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ExternalSecretRotationRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the IAM role that is used by Secrets Manager to rotate a managed external secret.",
+		//	  "type": "string"
+		//	}
+		"external_secret_rotation_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the IAM role that is used by Secrets Manager to rotate a managed external secret.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: HostedRotationLambda
 		// CloudFormation resource type schema:
 		//
@@ -359,26 +440,30 @@ func rotationScheduleResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"automatically_after_days":     "AutomaticallyAfterDays",
-		"duration":                     "Duration",
-		"exclude_characters":           "ExcludeCharacters",
-		"hosted_rotation_lambda":       "HostedRotationLambda",
-		"kms_key_arn":                  "KmsKeyArn",
-		"master_secret_arn":            "MasterSecretArn",
-		"master_secret_kms_key_arn":    "MasterSecretKmsKeyArn",
-		"rotate_immediately_on_update": "RotateImmediatelyOnUpdate",
-		"rotation_lambda_arn":          "RotationLambdaARN",
-		"rotation_lambda_name":         "RotationLambdaName",
-		"rotation_rules":               "RotationRules",
-		"rotation_schedule_id":         "Id",
-		"rotation_type":                "RotationType",
-		"runtime":                      "Runtime",
-		"schedule_expression":          "ScheduleExpression",
-		"secret_id":                    "SecretId",
-		"superuser_secret_arn":         "SuperuserSecretArn",
-		"superuser_secret_kms_key_arn": "SuperuserSecretKmsKeyArn",
-		"vpc_security_group_ids":       "VpcSecurityGroupIds",
-		"vpc_subnet_ids":               "VpcSubnetIds",
+		"automatically_after_days":          "AutomaticallyAfterDays",
+		"duration":                          "Duration",
+		"exclude_characters":                "ExcludeCharacters",
+		"external_secret_rotation_metadata": "ExternalSecretRotationMetadata",
+		"external_secret_rotation_role_arn": "ExternalSecretRotationRoleArn",
+		"hosted_rotation_lambda":            "HostedRotationLambda",
+		"key":                               "Key",
+		"kms_key_arn":                       "KmsKeyArn",
+		"master_secret_arn":                 "MasterSecretArn",
+		"master_secret_kms_key_arn":         "MasterSecretKmsKeyArn",
+		"rotate_immediately_on_update":      "RotateImmediatelyOnUpdate",
+		"rotation_lambda_arn":               "RotationLambdaARN",
+		"rotation_lambda_name":              "RotationLambdaName",
+		"rotation_rules":                    "RotationRules",
+		"rotation_schedule_id":              "Id",
+		"rotation_type":                     "RotationType",
+		"runtime":                           "Runtime",
+		"schedule_expression":               "ScheduleExpression",
+		"secret_id":                         "SecretId",
+		"superuser_secret_arn":              "SuperuserSecretArn",
+		"superuser_secret_kms_key_arn":      "SuperuserSecretKmsKeyArn",
+		"value":                             "Value",
+		"vpc_security_group_ids":            "VpcSecurityGroupIds",
+		"vpc_subnet_ids":                    "VpcSubnetIds",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

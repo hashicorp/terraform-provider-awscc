@@ -50,6 +50,16 @@
       "type": "boolean",
       "description": "Enables IAM Session based Identity for PartnerApp."
     },
+    "EnableAutoMinorVersionUpgrade": {
+      "type": "boolean",
+      "description": "Enables automatic minor version upgrades for the PartnerApp."
+    },
+    "AppVersion": {
+      "type": "string",
+      "description": "The version of the PartnerApp.",
+      "minLength": 1,
+      "maxLength": 64
+    },
     "ApplicationConfig": {
       "$ref": "#/definitions/PartnerAppConfig",
       "description": "A collection of settings that specify the maintenance schedule for the PartnerApp."
@@ -65,6 +75,10 @@
       "type": "string",
       "description": "The AppServerUrl based on app and account-info.",
       "maxLength": 2048
+    },
+    "CurrentVersionEolDate": {
+      "type": "string",
+      "description": "The end-of-life date for the current version of the PartnerApp."
     },
     "MaintenanceConfig": {
       "$ref": "#/definitions/PartnerAppMaintenanceConfig",
@@ -181,7 +195,8 @@
   ],
   "readOnlyProperties": [
     "/properties/Arn",
-    "/properties/BaseUrl"
+    "/properties/BaseUrl",
+    "/properties/CurrentVersionEolDate"
   ],
   "writeOnlyProperties": [
     "/properties/ClientToken"

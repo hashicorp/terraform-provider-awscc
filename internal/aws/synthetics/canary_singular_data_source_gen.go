@@ -129,17 +129,39 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "oneOf": [
 		//	    {
 		//	      "required": [
+		//	        "Handler",
 		//	        "S3Bucket",
 		//	        "S3Key"
 		//	      ]
 		//	    },
 		//	    {
 		//	      "required": [
+		//	        "BlueprintTypes",
+		//	        "S3Bucket",
+		//	        "S3Key"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "Handler",
+		//	        "Script"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "BlueprintTypes",
 		//	        "Script"
 		//	      ]
 		//	    }
 		//	  ],
 		//	  "properties": {
+		//	    "BlueprintTypes": {
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 1,
+		//	      "type": "array"
+		//	    },
 		//	    "Dependencies": {
 		//	      "description": "List of Lambda layers to attach to the canary",
 		//	      "items": {
@@ -187,13 +209,15 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "Handler"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BlueprintTypes
+				"blueprint_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: Dependencies
 				"dependencies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -815,6 +839,7 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"artifact_s3_location": "ArtifactS3Location",
 		"base_canary_run_id":   "BaseCanaryRunId",
 		"base_screenshots":     "BaseScreenshots",
+		"blueprint_types":      "BlueprintTypes",
 		"browser_configs":      "BrowserConfigs",
 		"browser_type":         "BrowserType",
 		"canary_id":            "Id",

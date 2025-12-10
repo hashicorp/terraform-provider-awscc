@@ -76,6 +76,7 @@ resource "awscc_lambda_version" "example" {
 
 - `code_sha_256` (String) Only publish a version if the hash value matches the value that's specified. Use this option to avoid publishing a version if the function code has changed since you last updated it. Updates are not supported for this property.
 - `description` (String) A description for the version to override the description in the function configuration. Updates are not supported for this property.
+- `function_scaling_config` (Attributes) The scaling configuration to apply to the function, including minimum and maximum execution environment limits. (see [below for nested schema](#nestedatt--function_scaling_config))
 - `provisioned_concurrency_config` (Attributes) Specifies a provisioned concurrency configuration for a function's version. Updates are not supported for this property. (see [below for nested schema](#nestedatt--provisioned_concurrency_config))
 - `runtime_policy` (Attributes) Specifies the runtime management configuration of a function. Displays runtimeVersionArn only for Manual. (see [below for nested schema](#nestedatt--runtime_policy))
 
@@ -84,6 +85,15 @@ resource "awscc_lambda_version" "example" {
 - `function_arn` (String) The ARN of the version.
 - `id` (String) Uniquely identifies the resource.
 - `version` (String) The version number.
+
+<a id="nestedatt--function_scaling_config"></a>
+### Nested Schema for `function_scaling_config`
+
+Optional:
+
+- `max_execution_environments` (Number) The maximum number of execution environments that can be provisioned for the function.
+- `min_execution_environments` (Number) The minimum number of execution environments to maintain for the function.
+
 
 <a id="nestedatt--provisioned_concurrency_config"></a>
 ### Nested Schema for `provisioned_concurrency_config`

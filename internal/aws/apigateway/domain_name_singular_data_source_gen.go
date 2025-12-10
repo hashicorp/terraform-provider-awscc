@@ -78,12 +78,23 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EndpointAccessMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"endpoint_access_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointConfiguration
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The ``EndpointConfiguration`` property type specifies the endpoint types of an Amazon API Gateway domain name.\n ``EndpointConfiguration`` is a property of the [AWS::ApiGateway::DomainName](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-domainname.html) resource.",
+		//	  "description": "The endpoint configuration of this DomainName showing the endpoint types and IP address types of the domain name.",
 		//	  "properties": {
 		//	    "IpAddressType": {
 		//	      "description": "",
@@ -113,7 +124,7 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The ``EndpointConfiguration`` property type specifies the endpoint types of an Amazon API Gateway domain name.\n ``EndpointConfiguration`` is a property of the [AWS::ApiGateway::DomainName](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-domainname.html) resource.",
+			Description: "The endpoint configuration of this DomainName showing the endpoint types and IP address types of the domain name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MutualTlsAuthentication
@@ -229,12 +240,14 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "",
+		//	    "description": "An array of key-value pairs to apply to this resource.\n For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "The value for the specified tag key.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -247,11 +260,13 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The value for the specified tag key.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -280,6 +295,7 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"distribution_hosted_zone_id":            "DistributionHostedZoneId",
 		"domain_name":                            "DomainName",
 		"domain_name_arn":                        "DomainNameArn",
+		"endpoint_access_mode":                   "EndpointAccessMode",
 		"endpoint_configuration":                 "EndpointConfiguration",
 		"ip_address_type":                        "IpAddressType",
 		"key":                                    "Key",

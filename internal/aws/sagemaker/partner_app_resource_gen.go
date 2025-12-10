@@ -38,6 +38,26 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::SageMaker::PartnerApp resource.
 func partnerAppResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AppVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version of the PartnerApp.",
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"app_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version of the PartnerApp.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 64),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationConfig
 		// CloudFormation resource type schema:
 		//
@@ -188,6 +208,35 @@ func partnerAppResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// ClientToken is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: CurrentVersionEolDate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The end-of-life date for the current version of the PartnerApp.",
+		//	  "type": "string"
+		//	}
+		"current_version_eol_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The end-of-life date for the current version of the PartnerApp.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EnableAutoMinorVersionUpgrade
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Enables automatic minor version upgrades for the PartnerApp.",
+		//	  "type": "boolean"
+		//	}
+		"enable_auto_minor_version_upgrade": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Enables automatic minor version upgrades for the PartnerApp.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: EnableIamSessionBasedIdentity
 		// CloudFormation resource type schema:
@@ -456,12 +505,15 @@ func partnerAppResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"admin_users":                       "AdminUsers",
+		"app_version":                       "AppVersion",
 		"application_config":                "ApplicationConfig",
 		"arguments":                         "Arguments",
 		"arn":                               "Arn",
 		"auth_type":                         "AuthType",
 		"base_url":                          "BaseUrl",
 		"client_token":                      "ClientToken",
+		"current_version_eol_date":          "CurrentVersionEolDate",
+		"enable_auto_minor_version_upgrade": "EnableAutoMinorVersionUpgrade",
 		"enable_iam_session_based_identity": "EnableIamSessionBasedIdentity",
 		"execution_role_arn":                "ExecutionRoleArn",
 		"key":                               "Key",

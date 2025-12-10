@@ -109,6 +109,20 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Endpoint
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The DSQL cluster endpoint.",
+		//	  "type": "string"
+		//	}
+		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The DSQL cluster endpoint.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Identifier
 		// CloudFormation resource type schema:
 		//
@@ -188,6 +202,35 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PolicyDocument
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IAM policy applied to the cluster resource.",
+		//	  "type": "string"
+		//	}
+		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IAM policy applied to the cluster resource.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PolicyVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version number of the cluster's resource based policy",
+		//	  "type": "string"
+		//	}
+		"policy_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The version number of the cluster's resource based policy",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceArn
@@ -336,11 +379,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"encryption_details":          "EncryptionDetails",
 		"encryption_status":           "EncryptionStatus",
 		"encryption_type":             "EncryptionType",
+		"endpoint":                    "Endpoint",
 		"identifier":                  "Identifier",
 		"key":                         "Key",
 		"kms_encryption_key":          "KmsEncryptionKey",
 		"kms_key_arn":                 "KmsKeyArn",
 		"multi_region_properties":     "MultiRegionProperties",
+		"policy_document":             "PolicyDocument",
+		"policy_version":              "PolicyVersion",
 		"resource_arn":                "ResourceArn",
 		"status":                      "Status",
 		"tags":                        "Tags",

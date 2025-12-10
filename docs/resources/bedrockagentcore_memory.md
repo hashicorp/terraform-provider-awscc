@@ -68,9 +68,63 @@ Optional:
 
 Optional:
 
+- `self_managed_configuration` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--self_managed_configuration))
 - `semantic_override` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--semantic_override))
 - `summary_override` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--summary_override))
 - `user_preference_override` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--user_preference_override))
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--self_managed_configuration"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.self_managed_configuration`
+
+Optional:
+
+- `historical_context_window_size` (Number)
+- `invocation_configuration` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--self_managed_configuration--invocation_configuration))
+- `trigger_conditions` (Attributes List) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--self_managed_configuration--trigger_conditions))
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--self_managed_configuration--invocation_configuration"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.self_managed_configuration.invocation_configuration`
+
+Optional:
+
+- `payload_delivery_bucket_name` (String)
+- `topic_arn` (String) ARN format
+
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--self_managed_configuration--trigger_conditions"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.self_managed_configuration.trigger_conditions`
+
+Optional:
+
+- `message_based_trigger` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--self_managed_configuration--trigger_conditions--message_based_trigger))
+- `time_based_trigger` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--self_managed_configuration--trigger_conditions--time_based_trigger))
+- `token_based_trigger` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--self_managed_configuration--trigger_conditions--token_based_trigger))
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--self_managed_configuration--trigger_conditions--message_based_trigger"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.self_managed_configuration.trigger_conditions.message_based_trigger`
+
+Optional:
+
+- `message_count` (Number)
+
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--self_managed_configuration--trigger_conditions--time_based_trigger"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.self_managed_configuration.trigger_conditions.time_based_trigger`
+
+Optional:
+
+- `idle_session_timeout` (Number)
+
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--self_managed_configuration--trigger_conditions--token_based_trigger"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.self_managed_configuration.trigger_conditions.token_based_trigger`
+
+Optional:
+
+- `token_count` (Number)
+
+
+
 
 <a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--semantic_override"></a>
 ### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.semantic_override`

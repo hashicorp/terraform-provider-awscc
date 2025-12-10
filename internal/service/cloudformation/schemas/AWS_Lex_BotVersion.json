@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::Lex::BotVersion",
-  "description": "A version is a numbered snapshot of your work that you can publish for use in different parts of your workflow, such as development, beta deployment, and production.",
+  "description": "Resource Type definition for bot versions, a numbered snapshot of your work that you can publish for use in different parts of your workflow, such as development, beta deployment, and production.",
   "sourceUrl": "https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBotVersion.html",
   "definitions": {
     "Id": {
@@ -79,7 +79,9 @@
       "$ref": "#/definitions/BotVersionLocaleSpecificationList"
     }
   },
-  "taggable": false,
+  "tagging": {
+    "taggable": false
+  },
   "additionalProperties": false,
   "required": [
     "BotId",

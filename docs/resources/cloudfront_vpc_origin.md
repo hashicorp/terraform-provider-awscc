@@ -162,6 +162,7 @@ resource "awscc_cloudfront_vpc_origin" "example" {
 
 ### Read-Only
 
+- `account_id` (String)
 - `arn` (String)
 - `created_time` (String)
 - `id` (String) Uniquely identifies the resource.

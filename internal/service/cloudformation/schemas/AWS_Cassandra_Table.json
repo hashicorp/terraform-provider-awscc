@@ -267,6 +267,21 @@
         "NEW_AND_OLD_IMAGES"
       ],
       "default": "NEW_AND_OLD_IMAGES"
+    },
+    "WarmThroughput": {
+      "description": "Warm throughput configuration for the table",
+      "type": "object",
+      "properties": {
+        "ReadUnitsPerSecond": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "WriteUnitsPerSecond": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -351,6 +366,9 @@
       "items": {
         "$ref": "#/definitions/ReplicaSpecification"
       }
+    },
+    "WarmThroughput": {
+      "$ref": "#/definitions/WarmThroughput"
     }
   },
   "additionalProperties": false,

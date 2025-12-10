@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1245 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1280 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -33,6 +33,11 @@ resource_schema "aws_acmpca_permission" {
 
 resource_schema "aws_aiops_investigation_group" {
   cloudformation_type_name = "AWS::AIOps::InvestigationGroup"
+}
+
+resource_schema "aws_aps_anomaly_detector" {
+  cloudformation_type_name               = "AWS::APS::AnomalyDetector"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_aps_resource_policy" {
@@ -720,6 +725,10 @@ resource_schema "aws_bedrockagentcore_runtime_endpoint" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_bedrockagentcore_workload_identity" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::WorkloadIdentity"
+}
+
 resource_schema "aws_billing_billing_view" {
   cloudformation_type_name = "AWS::Billing::BillingView"
 }
@@ -904,6 +913,10 @@ resource_schema "aws_cloudfront_cloudfront_origin_access_identity" {
   cloudformation_type_name = "AWS::CloudFront::CloudFrontOriginAccessIdentity"
 }
 
+resource_schema "aws_cloudfront_connection_function" {
+  cloudformation_type_name = "AWS::CloudFront::ConnectionFunction"
+}
+
 resource_schema "aws_cloudfront_connection_group" {
   cloudformation_type_name = "AWS::CloudFront::ConnectionGroup"
 }
@@ -955,6 +968,10 @@ resource_schema "aws_cloudfront_realtime_log_config" {
 
 resource_schema "aws_cloudfront_response_headers_policy" {
   cloudformation_type_name = "AWS::CloudFront::ResponseHeadersPolicy"
+}
+
+resource_schema "aws_cloudfront_trust_store" {
+  cloudformation_type_name = "AWS::CloudFront::TrustStore"
 }
 
 resource_schema "aws_cloudfront_vpc_origin" {
@@ -1088,6 +1105,11 @@ resource_schema "aws_cognito_managed_login_branding" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_cognito_terms" {
+  cloudformation_type_name               = "AWS::Cognito::Terms"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_cognito_user_pool" {
   cloudformation_type_name = "AWS::Cognito::UserPool"
 
@@ -1197,6 +1219,16 @@ resource_schema "aws_connect_contact_flow_module" {
 
 resource_schema "aws_connect_contact_flow_version" {
   cloudformation_type_name               = "AWS::Connect::ContactFlowVersion"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_data_table" {
+  cloudformation_type_name               = "AWS::Connect::DataTable"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_data_table_attribute" {
+  cloudformation_type_name               = "AWS::Connect::DataTableAttribute"
   suppress_plural_data_source_generation = true
 }
 
@@ -1658,6 +1690,15 @@ resource_schema "aws_detective_organization_admin" {
   cloudformation_type_name = "AWS::Detective::OrganizationAdmin"
 }
 
+resource_schema "aws_devopsagent_agent_space" {
+  cloudformation_type_name = "AWS::DevOpsAgent::AgentSpace"
+}
+
+resource_schema "aws_devopsagent_association" {
+  cloudformation_type_name               = "AWS::DevOpsAgent::Association"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_devopsguru_log_anomaly_detection_integration" {
   cloudformation_type_name = "AWS::DevOpsGuru::LogAnomalyDetectionIntegration"
 }
@@ -1684,6 +1725,10 @@ resource_schema "aws_dynamodb_global_table" {
 
 resource_schema "aws_dynamodb_table" {
   cloudformation_type_name = "AWS::DynamoDB::Table"
+}
+
+resource_schema "aws_ec2_capacity_manager_data_export" {
+  cloudformation_type_name = "AWS::EC2::CapacityManagerDataExport"
 }
 
 resource_schema "aws_ec2_capacity_reservation" {
@@ -1972,6 +2017,15 @@ resource_schema "aws_ec2_transit_gateway_connect_peer" {
   cloudformation_type_name = "AWS::EC2::TransitGatewayConnectPeer"
 }
 
+resource_schema "aws_ec2_transit_gateway_metering_policy" {
+  cloudformation_type_name = "AWS::EC2::TransitGatewayMeteringPolicy"
+}
+
+resource_schema "aws_ec2_transit_gateway_metering_policy_entry" {
+  cloudformation_type_name               = "AWS::EC2::TransitGatewayMeteringPolicyEntry"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_ec2_transit_gateway_multicast_domain" {
   cloudformation_type_name = "AWS::EC2::TransitGatewayMulticastDomain"
 }
@@ -2037,6 +2091,10 @@ resource_schema "aws_ec2_vpcdhcp_options_association" {
   cloudformation_type_name = "AWS::EC2::VPCDHCPOptionsAssociation"
 }
 
+resource_schema "aws_ec2_vpc_encryption_control" {
+  cloudformation_type_name = "AWS::EC2::VPCEncryptionControl"
+}
+
 resource_schema "aws_ec2_vpc_endpoint" {
   cloudformation_type_name = "AWS::EC2::VPCEndpoint"
 }
@@ -2059,6 +2117,10 @@ resource_schema "aws_ec2_vpc_gateway_attachment" {
 
 resource_schema "aws_ec2_vpc_peering_connection" {
   cloudformation_type_name = "AWS::EC2::VPCPeeringConnection"
+}
+
+resource_schema "aws_ec2_vpn_concentrator" {
+  cloudformation_type_name = "AWS::EC2::VPNConcentrator"
 }
 
 resource_schema "aws_ec2_vpn_connection" {
@@ -2105,6 +2167,10 @@ resource_schema "aws_ecr_pull_through_cache_rule" {
   cloudformation_type_name = "AWS::ECR::PullThroughCacheRule"
 }
 
+resource_schema "aws_ecr_pull_time_update_exclusion" {
+  cloudformation_type_name = "AWS::ECR::PullTimeUpdateExclusion"
+}
+
 resource_schema "aws_ecr_registry_policy" {
   cloudformation_type_name = "AWS::ECR::RegistryPolicy"
 }
@@ -2125,6 +2191,10 @@ resource_schema "aws_ecr_repository_creation_template" {
   cloudformation_type_name = "AWS::ECR::RepositoryCreationTemplate"
 }
 
+resource_schema "aws_ecr_signing_configuration" {
+  cloudformation_type_name = "AWS::ECR::SigningConfiguration"
+}
+
 resource_schema "aws_ecs_capacity_provider" {
   cloudformation_type_name = "AWS::ECS::CapacityProvider"
 }
@@ -2135,6 +2205,11 @@ resource_schema "aws_ecs_cluster" {
 
 resource_schema "aws_ecs_cluster_capacity_provider_associations" {
   cloudformation_type_name = "AWS::ECS::ClusterCapacityProviderAssociations"
+}
+
+resource_schema "aws_ecs_express_gateway_service" {
+  cloudformation_type_name               = "AWS::ECS::ExpressGatewayService"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_ecs_primary_task_set" {
@@ -2175,6 +2250,11 @@ resource_schema "aws_eks_access_entry" {
 
 resource_schema "aws_eks_addon" {
   cloudformation_type_name               = "AWS::EKS::Addon"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_eks_capability" {
+  cloudformation_type_name               = "AWS::EKS::Capability"
   suppress_plural_data_source_generation = true
 }
 
@@ -2368,6 +2448,10 @@ resource_schema "aws_events_event_bus" {
   cloudformation_type_name = "AWS::Events::EventBus"
 }
 
+resource_schema "aws_events_event_bus_policy" {
+  cloudformation_type_name = "AWS::Events::EventBusPolicy"
+}
+
 resource_schema "aws_events_rule" {
   cloudformation_type_name = "AWS::Events::Rule"
 }
@@ -2535,6 +2619,14 @@ resource_schema "aws_glue_crawler" {
 
 resource_schema "aws_glue_database" {
   cloudformation_type_name = "AWS::Glue::Database"
+}
+
+resource_schema "aws_glue_integration" {
+  cloudformation_type_name = "AWS::Glue::Integration"
+}
+
+resource_schema "aws_glue_integration_resource_property" {
+  cloudformation_type_name = "AWS::Glue::IntegrationResourceProperty"
 }
 
 resource_schema "aws_glue_job" {
@@ -3233,6 +3325,10 @@ resource_schema "aws_lambda_alias" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_lambda_capacity_provider" {
+  cloudformation_type_name = "AWS::Lambda::CapacityProvider"
+}
+
 resource_schema "aws_lambda_code_signing_config" {
   cloudformation_type_name = "AWS::Lambda::CodeSigningConfig"
 }
@@ -3590,6 +3686,18 @@ resource_schema "aws_mediaconnect_gateway" {
   cloudformation_type_name = "AWS::MediaConnect::Gateway"
 }
 
+resource_schema "aws_mediaconnect_router_input" {
+  cloudformation_type_name = "AWS::MediaConnect::RouterInput"
+}
+
+resource_schema "aws_mediaconnect_router_network_interface" {
+  cloudformation_type_name = "AWS::MediaConnect::RouterNetworkInterface"
+}
+
+resource_schema "aws_mediaconnect_router_output" {
+  cloudformation_type_name = "AWS::MediaConnect::RouterOutput"
+}
+
 resource_schema "aws_medialive_channel_placement_group" {
   cloudformation_type_name               = "AWS::MediaLive::ChannelPlacementGroup"
   suppress_plural_data_source_generation = true
@@ -3936,6 +4044,17 @@ resource_schema "aws_observabilityadmin_organization_centralization_rule" {
 
 resource_schema "aws_observabilityadmin_organization_telemetry_rule" {
   cloudformation_type_name = "AWS::ObservabilityAdmin::OrganizationTelemetryRule"
+}
+
+resource_schema "aws_observabilityadmin_s3_table_integration" {
+  cloudformation_type_name = "AWS::ObservabilityAdmin::S3TableIntegration"
+}
+
+resource_schema "aws_observabilityadmin_telemetry_pipelines" {
+  cloudformation_type_name                 = "AWS::ObservabilityAdmin::TelemetryPipelines"
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_observabilityadmin_telemetry_rule" {
@@ -4630,6 +4749,29 @@ resource_schema "aws_route53resolver_resolver_rule_association" {
   cloudformation_type_name = "AWS::Route53Resolver::ResolverRuleAssociation"
 }
 
+resource_schema "aws_rtbfabric_inbound_external_link" {
+  cloudformation_type_name               = "AWS::RTBFabric::InboundExternalLink"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_rtbfabric_link" {
+  cloudformation_type_name               = "AWS::RTBFabric::Link"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_rtbfabric_outbound_external_link" {
+  cloudformation_type_name               = "AWS::RTBFabric::OutboundExternalLink"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_rtbfabric_requester_gateway" {
+  cloudformation_type_name = "AWS::RTBFabric::RequesterGateway"
+}
+
+resource_schema "aws_rtbfabric_responder_gateway" {
+  cloudformation_type_name = "AWS::RTBFabric::ResponderGateway"
+}
+
 resource_schema "aws_s3_access_grant" {
   cloudformation_type_name = "AWS::S3::AccessGrant"
 }
@@ -4732,6 +4874,19 @@ resource_schema "aws_s3tables_table_policy" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_s3vectors_index" {
+  cloudformation_type_name               = "AWS::S3Vectors::Index"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_s3vectors_vector_bucket" {
+  cloudformation_type_name = "AWS::S3Vectors::VectorBucket"
+}
+
+resource_schema "aws_s3vectors_vector_bucket_policy" {
+  cloudformation_type_name = "AWS::S3Vectors::VectorBucketPolicy"
+}
+
 resource_schema "aws_ses_configuration_set" {
   cloudformation_type_name = "AWS::SES::ConfigurationSet"
 }
@@ -4783,6 +4938,10 @@ resource_schema "aws_ses_mail_manager_rule_set" {
 
 resource_schema "aws_ses_mail_manager_traffic_policy" {
   cloudformation_type_name = "AWS::SES::MailManagerTrafficPolicy"
+}
+
+resource_schema "aws_ses_multi_region_endpoint" {
+  cloudformation_type_name = "AWS::SES::MultiRegionEndpoint"
 }
 
 resource_schema "aws_ses_template" {
@@ -4900,6 +5059,11 @@ resource_schema "aws_ssmincidents_response_plan" {
 
 resource_schema "aws_ssmquicksetup_configuration_manager" {
   cloudformation_type_name = "AWS::SSMQuickSetup::ConfigurationManager"
+}
+
+resource_schema "aws_ssmquicksetup_lifecycle_automation" {
+  cloudformation_type_name               = "AWS::SSMQuickSetup::LifecycleAutomation"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_sso_application" {
@@ -5100,6 +5264,10 @@ resource_schema "aws_securityhub_configuration_policy" {
   cloudformation_type_name = "AWS::SecurityHub::ConfigurationPolicy"
 }
 
+resource_schema "aws_securityhub_connector_v2" {
+  cloudformation_type_name = "AWS::SecurityHub::ConnectorV2"
+}
+
 resource_schema "aws_securityhub_delegated_admin" {
   cloudformation_type_name = "AWS::SecurityHub::DelegatedAdmin"
 }
@@ -5162,13 +5330,26 @@ resource_schema "aws_securitylake_subscriber_notification" {
   cloudformation_type_name = "AWS::SecurityLake::SubscriberNotification"
 }
 
+resource_schema "aws_servicecatalog_cloudformation_product" {
+  cloudformation_type_name = "AWS::ServiceCatalog::CloudFormationProduct"
+}
+
 resource_schema "aws_servicecatalog_cloudformation_provisioned_product" {
   cloudformation_type_name               = "AWS::ServiceCatalog::CloudFormationProvisionedProduct"
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_servicecatalog_launch_notification_constraint" {
+  cloudformation_type_name = "AWS::ServiceCatalog::LaunchNotificationConstraint"
+}
+
 resource_schema "aws_servicecatalog_launch_template_constraint" {
   cloudformation_type_name               = "AWS::ServiceCatalog::LaunchTemplateConstraint"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_servicecatalog_portfolio_principal_association" {
+  cloudformation_type_name               = "AWS::ServiceCatalog::PortfolioPrincipalAssociation"
   suppress_plural_data_source_generation = true
 }
 
@@ -5198,6 +5379,11 @@ resource_schema "aws_servicecatalog_service_action_association" {
 
 resource_schema "aws_servicecatalog_tag_option" {
   cloudformation_type_name = "AWS::ServiceCatalog::TagOption"
+}
+
+resource_schema "aws_servicecatalog_tag_option_association" {
+  cloudformation_type_name               = "AWS::ServiceCatalog::TagOptionAssociation"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_servicecatalogappregistry_application" {
@@ -5380,6 +5566,19 @@ resource_schema "aws_vpclattice_access_log_subscription" {
 resource_schema "aws_vpclattice_auth_policy" {
   cloudformation_type_name               = "AWS::VpcLattice::AuthPolicy"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_vpclattice_domain_verification" {
+  cloudformation_type_name = "AWS::VpcLattice::DomainVerification"
+
+  # Suppression Reason:
+  # error generating Terraform resource import examples generation instructions: ../service/cloudformation/schemas/AWS_VpcLattice_DomainVerification.json: 
+  # emitting schema code: value overwrites Value for Terraform attribute value
+  # 
+  # Ref: https://github.com/hashicorp/terraform-provider-awscc/issues/2901
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_listener" {

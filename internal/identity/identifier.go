@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/path"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 )
 
@@ -89,4 +90,36 @@ func (a Identifiers) SetIdentity(ctx context.Context, provider cloudcontrol.Prov
 	}
 
 	return diags
+}
+
+func (a Identifiers) GetIdentity(ctx context.Context, state IdentitySetter) ([]string, types.String, types.String, diag.Diagnostics) {
+	var diags diag.Diagnostics
+	var identifier []string
+	var accountID, region types.String
+	for _, v := range a {
+		if v.RequiredForImport {
+			var out types.String
+			diags.Append(state.GetAttribute(ctx, path.Root(v.Name), &out)...)
+			if diags.HasError() {
+				return nil, types.String{}, types.String{}, diags
+			}
+
+			identifier = append(identifier, out.ValueString())
+		} else {
+			switch v.Name {
+			case NameAccountID:
+				diags.Append(state.GetAttribute(ctx, path.Root(NameAccountID), &accountID)...)
+				if diags.HasError() {
+					return nil, types.String{}, types.String{}, diags
+				}
+			case NameRegion:
+				diags.Append(state.GetAttribute(ctx, path.Root(NameRegion), &region)...)
+				if diags.HasError() {
+					return nil, types.String{}, types.String{}, diags
+				}
+			}
+		}
+	}
+
+	return identifier, accountID, region, diags
 }

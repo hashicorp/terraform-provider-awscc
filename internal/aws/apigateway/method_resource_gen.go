@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -212,6 +213,10 @@ func methodResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "array",
 		//	      "uniqueItems": true
 		//	    },
+		//	    "IntegrationTarget": {
+		//	      "description": "",
+		//	      "type": "string"
+		//	    },
 		//	    "PassthroughBehavior": {
 		//	      "description": "",
 		//	      "enum": [
@@ -240,6 +245,15 @@ func methodResource(ctx context.Context) (resource.Resource, error) {
 		//	        }
 		//	      },
 		//	      "type": "object"
+		//	    },
+		//	    "ResponseTransferMode": {
+		//	      "default": "BUFFERED",
+		//	      "description": "",
+		//	      "enum": [
+		//	        "BUFFERED",
+		//	        "STREAM"
+		//	      ],
+		//	      "type": "string"
 		//	    },
 		//	    "TimeoutInMillis": {
 		//	      "description": "",
@@ -422,6 +436,15 @@ func methodResource(ctx context.Context) (resource.Resource, error) {
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: IntegrationTarget
+				"integration_target": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: PassthroughBehavior
 				"passthrough_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "",
@@ -458,6 +481,22 @@ func methodResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 						mapplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ResponseTransferMode
+				"response_transfer_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					Default:     stringdefault.StaticString("BUFFERED"),
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"BUFFERED",
+							"STREAM",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: TimeoutInMillis
@@ -753,6 +792,7 @@ func methodResource(ctx context.Context) (resource.Resource, error) {
 		"integration":             "Integration",
 		"integration_http_method": "IntegrationHttpMethod",
 		"integration_responses":   "IntegrationResponses",
+		"integration_target":      "IntegrationTarget",
 		"method_responses":        "MethodResponses",
 		"operation_name":          "OperationName",
 		"passthrough_behavior":    "PassthroughBehavior",
@@ -764,6 +804,7 @@ func methodResource(ctx context.Context) (resource.Resource, error) {
 		"response_models":         "ResponseModels",
 		"response_parameters":     "ResponseParameters",
 		"response_templates":      "ResponseTemplates",
+		"response_transfer_mode":  "ResponseTransferMode",
 		"rest_api_id":             "RestApiId",
 		"selection_pattern":       "SelectionPattern",
 		"status_code":             "StatusCode",

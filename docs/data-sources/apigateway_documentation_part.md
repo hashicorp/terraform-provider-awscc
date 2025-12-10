@@ -23,7 +23,7 @@ Data Source schema for AWS::ApiGateway::DocumentationPart
 
 - `documentation_part_id` (String)
 - `location` (Attributes) The ``Location`` property specifies the location of the Amazon API Gateway API entity that the documentation applies to. ``Location`` is a property of the [AWS::ApiGateway::DocumentationPart](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-documentationpart.html) resource.
- For more information about each property, including constraints and valid values, see [DocumentationPart](https://docs.aws.amazon.com/apigateway/latest/api/API_DocumentationPartLocation.html) in the *Amazon API Gateway REST API Reference*. (see [below for nested schema](#nestedatt--location))
+  For more information about each property, including constraints and valid values, see [DocumentationPart](https://docs.aws.amazon.com/apigateway/latest/api/API_DocumentationPartLocation.html) in the *Amazon API Gateway REST API Reference*. (see [below for nested schema](#nestedatt--location))
 - `properties` (String)
 - `rest_api_id` (String)
 

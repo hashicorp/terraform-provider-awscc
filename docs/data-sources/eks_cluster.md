@@ -28,6 +28,7 @@ Data Source schema for AWS::EKS::Cluster
 - `cluster_id` (String) The unique ID given to your cluster.
 - `cluster_security_group_id` (String) The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control plane to data plane communication.
 - `compute_config` (Attributes) Todo: add description (see [below for nested schema](#nestedatt--compute_config))
+- `control_plane_scaling_config` (Attributes) Configuration for provisioned control plane scaling. (see [below for nested schema](#nestedatt--control_plane_scaling_config))
 - `deletion_protection` (Boolean) Set this value to true to enable deletion protection for the cluster.
 - `encryption_config` (Attributes List) (see [below for nested schema](#nestedatt--encryption_config))
 - `encryption_config_key_arn` (String) Amazon Resource Name (ARN) or alias of the customer master key (CMK).
@@ -64,6 +65,14 @@ Read-Only:
 - `enabled` (Boolean) Todo: add description
 - `node_pools` (List of String) Todo: add description
 - `node_role_arn` (String) Todo: add description
+
+
+<a id="nestedatt--control_plane_scaling_config"></a>
+### Nested Schema for `control_plane_scaling_config`
+
+Read-Only:
+
+- `tier` (String) The scaling tier for the provisioned control plane.
 
 
 <a id="nestedatt--encryption_config"></a>

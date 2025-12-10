@@ -235,6 +235,338 @@ func aIAgentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "EmailGenerativeAnswerAIAgentConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AssociationConfigurations": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "AssociationConfigurationData": {
+		//	                "properties": {
+		//	                  "KnowledgeBaseAssociationConfigurationData": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "ContentTagFilter": {
+		//	                        "properties": {
+		//	                          "AndConditions": {
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "Key": {
+		//	                                  "maxLength": 128,
+		//	                                  "minLength": 1,
+		//	                                  "pattern": "",
+		//	                                  "type": "string"
+		//	                                },
+		//	                                "Value": {
+		//	                                  "maxLength": 256,
+		//	                                  "minLength": 1,
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "Key"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array"
+		//	                          },
+		//	                          "OrConditions": {
+		//	                            "items": {
+		//	                              "properties": {
+		//	                                "AndConditions": {
+		//	                                  "items": {
+		//	                                    "additionalProperties": false,
+		//	                                    "properties": {
+		//	                                      "Key": {
+		//	                                        "maxLength": 128,
+		//	                                        "minLength": 1,
+		//	                                        "pattern": "",
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "Value": {
+		//	                                        "maxLength": 256,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Key"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "type": "array"
+		//	                                },
+		//	                                "TagCondition": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "Key": {
+		//	                                      "maxLength": 128,
+		//	                                      "minLength": 1,
+		//	                                      "pattern": "",
+		//	                                      "type": "string"
+		//	                                    },
+		//	                                    "Value": {
+		//	                                      "maxLength": 256,
+		//	                                      "minLength": 1,
+		//	                                      "type": "string"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Key"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array"
+		//	                          },
+		//	                          "TagCondition": {
+		//	                            "additionalProperties": false,
+		//	                            "properties": {
+		//	                              "Key": {
+		//	                                "maxLength": 128,
+		//	                                "minLength": 1,
+		//	                                "pattern": "",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "Value": {
+		//	                                "maxLength": 256,
+		//	                                "minLength": 1,
+		//	                                "type": "string"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "Key"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          }
+		//	                        },
+		//	                        "type": "object"
+		//	                      },
+		//	                      "MaxResults": {
+		//	                        "maximum": 100,
+		//	                        "minimum": 1,
+		//	                        "type": "number"
+		//	                      },
+		//	                      "OverrideKnowledgeBaseSearchType": {
+		//	                        "enum": [
+		//	                          "HYBRID",
+		//	                          "SEMANTIC"
+		//	                        ],
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "AssociationId": {
+		//	                "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
+		//	                "type": "string"
+		//	              },
+		//	              "AssociationType": {
+		//	                "enum": [
+		//	                  "KNOWLEDGE_BASE"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "EmailGenerativeAnswerAIPromptId": {
+		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
+		//	          "type": "string"
+		//	        },
+		//	        "EmailQueryReformulationAIPromptId": {
+		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
+		//	          "type": "string"
+		//	        },
+		//	        "Locale": {
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "EmailOverviewAIAgentConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "EmailOverviewAIPromptId": {
+		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
+		//	          "type": "string"
+		//	        },
+		//	        "Locale": {
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "EmailResponseAIAgentConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AssociationConfigurations": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "AssociationConfigurationData": {
+		//	                "properties": {
+		//	                  "KnowledgeBaseAssociationConfigurationData": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "ContentTagFilter": {
+		//	                        "properties": {
+		//	                          "AndConditions": {
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "Key": {
+		//	                                  "maxLength": 128,
+		//	                                  "minLength": 1,
+		//	                                  "pattern": "",
+		//	                                  "type": "string"
+		//	                                },
+		//	                                "Value": {
+		//	                                  "maxLength": 256,
+		//	                                  "minLength": 1,
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "Key"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array"
+		//	                          },
+		//	                          "OrConditions": {
+		//	                            "items": {
+		//	                              "properties": {
+		//	                                "AndConditions": {
+		//	                                  "items": {
+		//	                                    "additionalProperties": false,
+		//	                                    "properties": {
+		//	                                      "Key": {
+		//	                                        "maxLength": 128,
+		//	                                        "minLength": 1,
+		//	                                        "pattern": "",
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "Value": {
+		//	                                        "maxLength": 256,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Key"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "type": "array"
+		//	                                },
+		//	                                "TagCondition": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "Key": {
+		//	                                      "maxLength": 128,
+		//	                                      "minLength": 1,
+		//	                                      "pattern": "",
+		//	                                      "type": "string"
+		//	                                    },
+		//	                                    "Value": {
+		//	                                      "maxLength": 256,
+		//	                                      "minLength": 1,
+		//	                                      "type": "string"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Key"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array"
+		//	                          },
+		//	                          "TagCondition": {
+		//	                            "additionalProperties": false,
+		//	                            "properties": {
+		//	                              "Key": {
+		//	                                "maxLength": 128,
+		//	                                "minLength": 1,
+		//	                                "pattern": "",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "Value": {
+		//	                                "maxLength": 256,
+		//	                                "minLength": 1,
+		//	                                "type": "string"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "Key"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          }
+		//	                        },
+		//	                        "type": "object"
+		//	                      },
+		//	                      "MaxResults": {
+		//	                        "maximum": 100,
+		//	                        "minimum": 1,
+		//	                        "type": "number"
+		//	                      },
+		//	                      "OverrideKnowledgeBaseSearchType": {
+		//	                        "enum": [
+		//	                          "HYBRID",
+		//	                          "SEMANTIC"
+		//	                        ],
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "AssociationId": {
+		//	                "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
+		//	                "type": "string"
+		//	              },
+		//	              "AssociationType": {
+		//	                "enum": [
+		//	                  "KNOWLEDGE_BASE"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "EmailQueryReformulationAIPromptId": {
+		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
+		//	          "type": "string"
+		//	        },
+		//	        "EmailResponseAIPromptId": {
+		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
+		//	          "type": "string"
+		//	        },
+		//	        "Locale": {
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "ManualSearchAIAgentConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -694,6 +1026,276 @@ func aIAgentDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END SCHEMA*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: EmailGenerativeAnswerAIAgentConfiguration
+				"email_generative_answer_ai_agent_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AssociationConfigurations
+						"association_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AssociationConfigurationData
+									"association_configuration_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: KnowledgeBaseAssociationConfigurationData
+											"knowledge_base_association_configuration_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: ContentTagFilter
+													"content_tag_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: AndConditions
+															"and_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Key
+																		"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Value
+																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: OrConditions
+															"or_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: AndConditions
+																		"and_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Key
+																					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Computed: true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Computed: true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																			}, /*END NESTED OBJECT*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: TagCondition
+																		"tag_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Key
+																				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: TagCondition
+															"tag_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Key
+																	"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Value
+																	"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: MaxResults
+													"max_results": schema.Float64Attribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: OverrideKnowledgeBaseSearchType
+													"override_knowledge_base_search_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: AssociationId
+									"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: AssociationType
+									"association_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: EmailGenerativeAnswerAIPromptId
+						"email_generative_answer_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: EmailQueryReformulationAIPromptId
+						"email_query_reformulation_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Locale
+						"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EmailOverviewAIAgentConfiguration
+				"email_overview_ai_agent_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EmailOverviewAIPromptId
+						"email_overview_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Locale
+						"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EmailResponseAIAgentConfiguration
+				"email_response_ai_agent_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AssociationConfigurations
+						"association_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AssociationConfigurationData
+									"association_configuration_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: KnowledgeBaseAssociationConfigurationData
+											"knowledge_base_association_configuration_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: ContentTagFilter
+													"content_tag_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: AndConditions
+															"and_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Key
+																		"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Value
+																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: OrConditions
+															"or_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: AndConditions
+																		"and_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Key
+																					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Computed: true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Computed: true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																			}, /*END NESTED OBJECT*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: TagCondition
+																		"tag_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Key
+																				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: TagCondition
+															"tag_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Key
+																	"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Value
+																	"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: MaxResults
+													"max_results": schema.Float64Attribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: OverrideKnowledgeBaseSearchType
+													"override_knowledge_base_search_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: AssociationId
+									"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: AssociationType
+									"association_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: EmailQueryReformulationAIPromptId
+						"email_query_reformulation_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: EmailResponseAIPromptId
+						"email_response_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Locale
+						"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: ManualSearchAIAgentConfiguration
 				"manual_search_ai_agent_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1012,7 +1614,10 @@ func aIAgentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "enum": [
 		//	    "MANUAL_SEARCH",
 		//	    "ANSWER_RECOMMENDATION",
-		//	    "SELF_SERVICE"
+		//	    "SELF_SERVICE",
+		//	    "EMAIL_RESPONSE",
+		//	    "EMAIL_OVERVIEW",
+		//	    "EMAIL_GENERATIVE_ANSWER"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -1036,22 +1641,29 @@ func aIAgentDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Wisdom::AIAgent").WithTerraformTypeName("awscc_wisdom_ai_agent")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"ai_agent_arn":                                 "AIAgentArn",
-		"ai_agent_id":                                  "AIAgentId",
-		"and_conditions":                               "AndConditions",
-		"answer_generation_ai_guardrail_id":            "AnswerGenerationAIGuardrailId",
-		"answer_generation_ai_prompt_id":               "AnswerGenerationAIPromptId",
-		"answer_recommendation_ai_agent_configuration": "AnswerRecommendationAIAgentConfiguration",
-		"assistant_arn":                                "AssistantArn",
-		"assistant_id":                                 "AssistantId",
-		"association_configuration_data":               "AssociationConfigurationData",
-		"association_configurations":                   "AssociationConfigurations",
-		"association_id":                               "AssociationId",
-		"association_type":                             "AssociationType",
-		"configuration":                                "Configuration",
-		"content_tag_filter":                           "ContentTagFilter",
-		"description":                                  "Description",
-		"intent_labeling_generation_ai_prompt_id":      "IntentLabelingGenerationAIPromptId",
+		"ai_agent_arn":                                   "AIAgentArn",
+		"ai_agent_id":                                    "AIAgentId",
+		"and_conditions":                                 "AndConditions",
+		"answer_generation_ai_guardrail_id":              "AnswerGenerationAIGuardrailId",
+		"answer_generation_ai_prompt_id":                 "AnswerGenerationAIPromptId",
+		"answer_recommendation_ai_agent_configuration":   "AnswerRecommendationAIAgentConfiguration",
+		"assistant_arn":                                  "AssistantArn",
+		"assistant_id":                                   "AssistantId",
+		"association_configuration_data":                 "AssociationConfigurationData",
+		"association_configurations":                     "AssociationConfigurations",
+		"association_id":                                 "AssociationId",
+		"association_type":                               "AssociationType",
+		"configuration":                                  "Configuration",
+		"content_tag_filter":                             "ContentTagFilter",
+		"description":                                    "Description",
+		"email_generative_answer_ai_agent_configuration": "EmailGenerativeAnswerAIAgentConfiguration",
+		"email_generative_answer_ai_prompt_id":           "EmailGenerativeAnswerAIPromptId",
+		"email_overview_ai_agent_configuration":          "EmailOverviewAIAgentConfiguration",
+		"email_overview_ai_prompt_id":                    "EmailOverviewAIPromptId",
+		"email_query_reformulation_ai_prompt_id":         "EmailQueryReformulationAIPromptId",
+		"email_response_ai_agent_configuration":          "EmailResponseAIAgentConfiguration",
+		"email_response_ai_prompt_id":                    "EmailResponseAIPromptId",
+		"intent_labeling_generation_ai_prompt_id":        "IntentLabelingGenerationAIPromptId",
 		"key": "Key",
 		"knowledge_base_association_configuration_data": "KnowledgeBaseAssociationConfigurationData",
 		"locale":                                      "Locale",

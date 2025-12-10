@@ -54,6 +54,8 @@ resource "awscc_ec2_nat_gateway" "main" {
 ### Optional
 
 - `allocation_id` (String) [Public NAT gateway only] The allocation ID of the Elastic IP address that's associated with the NAT gateway. This property is required for a public NAT gateway and cannot be specified with a private NAT gateway.
+- `availability_mode` (String)
+- `availability_zone_addresses` (Attributes Set) (see [below for nested schema](#nestedatt--availability_zone_addresses))
 - `connectivity_type` (String) Indicates whether the NAT gateway supports public or private connectivity. The default is public connectivity.
 - `max_drain_duration_seconds` (Number) The maximum amount of time to wait (in seconds) before forcibly releasing the IP addresses if connections are still in progress. Default value is 350 seconds.
 - `private_ip_address` (String) The private IPv4 address to assign to the NAT gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.
@@ -64,11 +66,26 @@ resource "awscc_ec2_nat_gateway" "main" {
  ``SecondaryPrivateIpAddressCount`` and ``SecondaryPrivateIpAddresses`` cannot be set at the same time.
 - `subnet_id` (String) The ID of the subnet in which the NAT gateway is located.
 - `tags` (Attributes List) The tags for the NAT gateway. (see [below for nested schema](#nestedatt--tags))
+- `vpc_id` (String) The ID of the VPC in which the NAT gateway is located.
 
 ### Read-Only
 
+- `auto_provision_zones` (String)
+- `auto_scaling_ips` (String)
+- `eni_id` (String)
 - `id` (String) Uniquely identifies the resource.
 - `nat_gateway_id` (String)
+- `route_table_id` (String)
+
+<a id="nestedatt--availability_zone_addresses"></a>
+### Nested Schema for `availability_zone_addresses`
+
+Optional:
+
+- `allocation_ids` (Set of String)
+- `availability_zone` (String)
+- `availability_zone_id` (String)
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

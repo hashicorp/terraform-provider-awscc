@@ -21,7 +21,10 @@
     "/properties/ResourceGatewayId",
     "/properties/ResourceConfigurationType",
     "/properties/ProtocolType",
-    "/properties/ResourceConfigurationAuthType"
+    "/properties/ResourceConfigurationAuthType",
+    "/properties/CustomDomainName",
+    "/properties/GroupDomain",
+    "/properties/DomainVerificationId"
   ],
   "primaryIdentifier": [
     "/properties/Arn"
@@ -147,23 +150,10 @@
     }
   },
   "properties": {
-    "AllowAssociationToSharableServiceNetwork": {
-      "type": "boolean"
-    },
-    "ProtocolType": {
+    "CustomDomainName": {
+      "minLength": 3,
       "type": "string",
-      "enum": [
-        "TCP"
-      ]
-    },
-    "ResourceConfigurationType": {
-      "type": "string",
-      "enum": [
-        "GROUP",
-        "CHILD",
-        "SINGLE",
-        "ARN"
-      ]
+      "maxLength": 255
     },
     "PortRanges": {
       "insertionOrder": false,
@@ -216,6 +206,51 @@
       ],
       "type": "object"
     },
+    "GroupDomain": {
+      "minLength": 3,
+      "type": "string",
+      "maxLength": 255
+    },
+    "ResourceConfigurationAuthType": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "AWS_IAM"
+      ]
+    },
+    "ResourceConfigurationGroupId": {
+      "$ref": "#/definitions/Id"
+    },
+    "Name": {
+      "minLength": 3,
+      "pattern": "",
+      "type": "string",
+      "maxLength": 40
+    },
+    "AllowAssociationToSharableServiceNetwork": {
+      "type": "boolean"
+    },
+    "ProtocolType": {
+      "type": "string",
+      "enum": [
+        "TCP"
+      ]
+    },
+    "ResourceConfigurationType": {
+      "type": "string",
+      "enum": [
+        "GROUP",
+        "CHILD",
+        "SINGLE",
+        "ARN"
+      ]
+    },
+    "DomainVerificationId": {
+      "minLength": 20,
+      "pattern": "^dv-[a-fA-F0-9]{17}$",
+      "type": "string",
+      "maxLength": 20
+    },
     "Id": {
       "$ref": "#/definitions/Id"
     },
@@ -228,16 +263,6 @@
       "type": "string",
       "maxLength": 2048
     },
-    "ResourceConfigurationAuthType": {
-      "type": "string",
-      "enum": [
-        "NONE",
-        "AWS_IAM"
-      ]
-    },
-    "ResourceConfigurationGroupId": {
-      "$ref": "#/definitions/Id"
-    },
     "Tags": {
       "minItems": 0,
       "maxItems": 50,
@@ -247,12 +272,6 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
-    },
-    "Name": {
-      "minLength": 3,
-      "pattern": "",
-      "type": "string",
-      "maxLength": 40
     }
   }
 }

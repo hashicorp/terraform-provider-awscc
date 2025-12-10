@@ -49,7 +49,7 @@ Data Source schema for AWS::ECS::Cluster
 
 Read-Only:
 
-- `name` (String) The name of the cluster setting. The value is ``containerInsights`` .
+- `name` (String) The name of the cluster setting. The value is ``containerInsights``.
 - `value` (String) The value to set for the cluster setting. The supported values are ``enhanced``, ``enabled``, and ``disabled``. 
  To use Container Insights with enhanced observability, set the ``containerInsights`` account setting to ``enhanced``.
  To use Container Insights, set the ``containerInsights`` account setting to ``enabled``.
@@ -113,16 +113,16 @@ Read-Only:
 - `base` (Number) The *base* value designates how many tasks, at a minimum, to run on the specified capacity provider for each service. Only one capacity provider in a capacity provider strategy can have a *base* defined. If no value is specified, the default value of ``0`` is used.
  Base value characteristics:
   +  Only one capacity provider in a strategy can have a base defined
-  +  Default value is ``0`` if not specified
-  +  Valid range: 0 to 100,000
+  +  The default value is ``0`` if not specified
+  +  The valid range is 0 to 100,000
   +  Base requirements are satisfied first before weight distribution
-- `capacity_provider` (String) The short name of the capacity provider.
+- `capacity_provider` (String) The short name of the capacity provider. This can be either an AWS managed capacity provider (``FARGATE`` or ``FARGATE_SPOT``) or the name of a custom capacity provider that you created.
 - `weight` (Number) The *weight* value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The ``weight`` value is taken into consideration after the ``base`` value, if defined, is satisfied.
  If no ``weight`` value is specified, the default value of ``0`` is used. When multiple capacity providers are specified within a capacity provider strategy, at least one of the capacity providers must have a weight value greater than zero and any capacity providers with a weight of ``0`` can't be used to place tasks. If you specify multiple capacity providers in a strategy that all have a weight of ``0``, any ``RunTask`` or ``CreateService`` actions using the capacity provider strategy will fail.
  Weight value characteristics:
   +  Weight is considered after the base value is satisfied
-  +  Default value is ``0`` if not specified
-  +  Valid range: 0 to 1,000
+  +  The default value is ``0`` if not specified
+  +  The valid range is 0 to 1,000
   +  At least one capacity provider must have a weight greater than zero
   +  Capacity providers with weight of ``0`` cannot place tasks
   

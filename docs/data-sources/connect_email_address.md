@@ -21,12 +21,21 @@ Data Source schema for AWS::Connect::EmailAddress
 
 ### Read-Only
 
+- `alias_configurations` (Attributes List) List of alias configurations for the email address (see [below for nested schema](#nestedatt--alias_configurations))
 - `description` (String) A description for the email address.
 - `display_name` (String) The display name for the email address.
 - `email_address` (String) Email address to be created for this instance
 - `email_address_arn` (String) The identifier of the email address.
 - `instance_arn` (String) The identifier of the Amazon Connect instance.
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--alias_configurations"></a>
+### Nested Schema for `alias_configurations`
+
+Read-Only:
+
+- `email_address_arn` (String) The identifier of the email address alias
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

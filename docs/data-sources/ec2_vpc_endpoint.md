@@ -53,6 +53,8 @@ Read-Only:
 
 - `dns_record_ip_type` (String) The DNS records created for the endpoint.
 - `private_dns_only_for_inbound_resolver_endpoint` (String) Indicates whether to enable private DNS only for inbound endpoints. This option is available only for services that support both gateway and interface endpoints. It routes traffic that originates from the VPC to the gateway endpoint and traffic that originates from on-premises to the interface endpoint.
+- `private_dns_preference` (String)
+- `private_dns_specified_domains` (List of String)
 
 
 <a id="nestedatt--tags"></a>

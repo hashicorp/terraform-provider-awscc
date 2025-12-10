@@ -267,14 +267,14 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "ForwardConfig": {
 		//	        "additionalProperties": false,
-		//	        "description": "Information for creating an action that distributes requests among one or more target groups. For Network Load Balancers, you can specify a single target group. Specify only when ``Type`` is ``forward``. If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
+		//	        "description": "Information for creating an action that distributes requests among multiple target groups. Specify only when ``Type`` is ``forward``.\n If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
 		//	        "properties": {
 		//	          "TargetGroupStickinessConfig": {
 		//	            "additionalProperties": false,
 		//	            "description": "Information about the target group stickiness for a rule.",
 		//	            "properties": {
 		//	              "DurationSeconds": {
-		//	                "description": "The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.",
+		//	                "description": "[Application Load Balancers] The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.",
 		//	                "type": "integer"
 		//	              },
 		//	              "Enabled": {
@@ -305,6 +305,58 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	            "uniqueItems": true
 		//	          }
 		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "JwtValidationConfig": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "AdditionalClaims": {
+		//	            "description": "",
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "",
+		//	              "properties": {
+		//	                "Format": {
+		//	                  "description": "",
+		//	                  "type": "string"
+		//	                },
+		//	                "Name": {
+		//	                  "description": "",
+		//	                  "type": "string"
+		//	                },
+		//	                "Values": {
+		//	                  "description": "",
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Format",
+		//	                "Name",
+		//	                "Values"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "Issuer": {
+		//	            "description": "",
+		//	            "type": "string"
+		//	          },
+		//	          "JwksEndpoint": {
+		//	            "description": "",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "JwksEndpoint",
+		//	          "Issuer"
+		//	        ],
 		//	        "type": "object"
 		//	      },
 		//	      "Order": {
@@ -346,7 +398,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "TargetGroupArn": {
-		//	        "description": "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to one or more target groups, use ``ForwardConfig`` instead.",
+		//	        "description": "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to multiple target groups, you must use ``ForwardConfig`` instead.",
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
@@ -644,7 +696,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: DurationSeconds
 									"duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.",
+										Description: "[Application Load Balancers] The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -703,7 +755,96 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "Information for creating an action that distributes requests among one or more target groups. For Network Load Balancers, you can specify a single target group. Specify only when ``Type`` is ``forward``. If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
+						Description: "Information for creating an action that distributes requests among multiple target groups. Specify only when ``Type`` is ``forward``.\n If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: JwtValidationConfig
+					"jwt_validation_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AdditionalClaims
+							"additional_claims": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Format
+										"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Values
+										"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.UniqueValues(),
+												fwvalidators.NotNullList(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.UniqueValues(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Issuer
+							"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: JwksEndpoint
+							"jwks_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -789,7 +930,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: TargetGroupArn
 					"target_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to one or more target groups, use ``ForwardConfig`` instead.",
+						Description: "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to multiple target groups, you must use ``ForwardConfig`` instead.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1037,6 +1178,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"additional_claims":                   "AdditionalClaims",
 		"advertise_trust_store_ca_names":      "AdvertiseTrustStoreCaNames",
 		"alpn_policy":                         "AlpnPolicy",
 		"authenticate_cognito_config":         "AuthenticateCognitoConfig",
@@ -1052,10 +1194,13 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		"duration_seconds":                    "DurationSeconds",
 		"enabled":                             "Enabled",
 		"fixed_response_config":               "FixedResponseConfig",
+		"format":                              "Format",
 		"forward_config":                      "ForwardConfig",
 		"host":                                "Host",
 		"ignore_client_certificate_expiry":    "IgnoreClientCertificateExpiry",
 		"issuer":                              "Issuer",
+		"jwks_endpoint":                       "JwksEndpoint",
+		"jwt_validation_config":               "JwtValidationConfig",
 		"key":                                 "Key",
 		"listener_arn":                        "ListenerArn",
 		"listener_attributes":                 "ListenerAttributes",
@@ -1063,6 +1208,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		"message_body":                        "MessageBody",
 		"mode":                                "Mode",
 		"mutual_authentication":               "MutualAuthentication",
+		"name":                                "Name",
 		"on_unauthenticated_request":          "OnUnauthenticatedRequest",
 		"order":                               "Order",
 		"path":                                "Path",
@@ -1087,6 +1233,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		"user_pool_client_id":                 "UserPoolClientId",
 		"user_pool_domain":                    "UserPoolDomain",
 		"value":                               "Value",
+		"values":                              "Values",
 		"weight":                              "Weight",
 	})
 

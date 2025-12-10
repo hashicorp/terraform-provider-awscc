@@ -42,6 +42,47 @@ func iPAMScopeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ExternalAuthorityConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "External service configuration to connect your AWS IPAM scope.",
+		//	  "properties": {
+		//	    "ExternalResourceIdentifier": {
+		//	      "description": "Resource identifier of the scope in the external service connecting to your AWS IPAM scope.",
+		//	      "type": "string"
+		//	    },
+		//	    "IpamScopeExternalAuthorityType": {
+		//	      "description": "An external service connecting to your AWS IPAM scope.",
+		//	      "enum": [
+		//	        "infoblox"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "IpamScopeExternalAuthorityType",
+		//	    "ExternalResourceIdentifier"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"external_authority_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExternalResourceIdentifier
+				"external_resource_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Resource identifier of the scope in the external service connecting to your AWS IPAM scope.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IpamScopeExternalAuthorityType
+				"ipam_scope_external_authority_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "An external service connecting to your AWS IPAM scope.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "External service configuration to connect your AWS IPAM scope.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpamArn
 		// CloudFormation resource type schema:
 		//
@@ -179,17 +220,20 @@ func iPAMScopeDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::IPAMScope").WithTerraformTypeName("awscc_ec2_ipam_scope")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":             "Arn",
-		"description":     "Description",
-		"ipam_arn":        "IpamArn",
-		"ipam_id":         "IpamId",
-		"ipam_scope_id":   "IpamScopeId",
-		"ipam_scope_type": "IpamScopeType",
-		"is_default":      "IsDefault",
-		"key":             "Key",
-		"pool_count":      "PoolCount",
-		"tags":            "Tags",
-		"value":           "Value",
+		"arn":                                "Arn",
+		"description":                        "Description",
+		"external_authority_configuration":   "ExternalAuthorityConfiguration",
+		"external_resource_identifier":       "ExternalResourceIdentifier",
+		"ipam_arn":                           "IpamArn",
+		"ipam_id":                            "IpamId",
+		"ipam_scope_external_authority_type": "IpamScopeExternalAuthorityType",
+		"ipam_scope_id":                      "IpamScopeId",
+		"ipam_scope_type":                    "IpamScopeType",
+		"is_default":                         "IsDefault",
+		"key":                                "Key",
+		"pool_count":                         "PoolCount",
+		"tags":                               "Tags",
+		"value":                              "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

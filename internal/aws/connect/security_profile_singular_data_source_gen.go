@@ -161,6 +161,122 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 			Description: "The description of the security profile.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: GranularAccessControlConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "DataTableAccessControlConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Defines the access control configuration for data tables.",
+		//	      "properties": {
+		//	        "PrimaryAttributeAccessControlConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Contains the configuration for record-based access control.",
+		//	          "properties": {
+		//	            "PrimaryAttributeValues": {
+		//	              "description": "An array of PrimaryAttributeValue objects.",
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "An object defining the access control for a specific attribute and its values.",
+		//	                "properties": {
+		//	                  "AccessType": {
+		//	                    "description": "Specifies the type of access granted. Currently, only \"ALLOW\" is supported",
+		//	                    "enum": [
+		//	                      "ALLOW"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "AttributeName": {
+		//	                    "description": "The name of the primary attribute.",
+		//	                    "maxLength": 127,
+		//	                    "minLength": 1,
+		//	                    "pattern": "",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Values": {
+		//	                    "description": "An array of allowed primary values for the specified primary attribute.",
+		//	                    "items": {
+		//	                      "maxLength": 1000,
+		//	                      "minLength": 1,
+		//	                      "pattern": "",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "maxItems": 2,
+		//	                    "minItems": 1,
+		//	                    "type": "array",
+		//	                    "uniqueItems": true
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "AccessType",
+		//	                  "AttributeName",
+		//	                  "Values"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 5,
+		//	              "minItems": 1,
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "PrimaryAttributeValues"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"granular_access_control_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DataTableAccessControlConfiguration
+				"data_table_access_control_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PrimaryAttributeAccessControlConfiguration
+						"primary_attribute_access_control_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: PrimaryAttributeValues
+								"primary_attribute_values": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AccessType
+											"access_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the type of access granted. Currently, only \"ALLOW\" is supported",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: AttributeName
+											"attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name of the primary attribute.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Values
+											"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Description: "An array of allowed primary values for the specified primary attribute.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "An array of PrimaryAttributeValue objects.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Contains the configuration for record-based access control.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Defines the access control configuration for data tables.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: HierarchyRestrictedResources
 		// CloudFormation resource type schema:
 		//
@@ -354,23 +470,30 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::SecurityProfile").WithTerraformTypeName("awscc_connect_security_profile")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allowed_access_control_hierarchy_group_id": "AllowedAccessControlHierarchyGroupId",
-		"allowed_access_control_tags":               "AllowedAccessControlTags",
-		"application_permissions":                   "ApplicationPermissions",
-		"applications":                              "Applications",
-		"description":                               "Description",
-		"hierarchy_restricted_resources":            "HierarchyRestrictedResources",
-		"instance_arn":                              "InstanceArn",
-		"key":                                       "Key",
-		"last_modified_region":                      "LastModifiedRegion",
-		"last_modified_time":                        "LastModifiedTime",
-		"namespace":                                 "Namespace",
-		"permissions":                               "Permissions",
-		"security_profile_arn":                      "SecurityProfileArn",
-		"security_profile_name":                     "SecurityProfileName",
-		"tag_restricted_resources":                  "TagRestrictedResources",
-		"tags":                                      "Tags",
-		"value":                                     "Value",
+		"access_type": "AccessType",
+		"allowed_access_control_hierarchy_group_id":      "AllowedAccessControlHierarchyGroupId",
+		"allowed_access_control_tags":                    "AllowedAccessControlTags",
+		"application_permissions":                        "ApplicationPermissions",
+		"applications":                                   "Applications",
+		"attribute_name":                                 "AttributeName",
+		"data_table_access_control_configuration":        "DataTableAccessControlConfiguration",
+		"description":                                    "Description",
+		"granular_access_control_configuration":          "GranularAccessControlConfiguration",
+		"hierarchy_restricted_resources":                 "HierarchyRestrictedResources",
+		"instance_arn":                                   "InstanceArn",
+		"key":                                            "Key",
+		"last_modified_region":                           "LastModifiedRegion",
+		"last_modified_time":                             "LastModifiedTime",
+		"namespace":                                      "Namespace",
+		"permissions":                                    "Permissions",
+		"primary_attribute_access_control_configuration": "PrimaryAttributeAccessControlConfiguration",
+		"primary_attribute_values":                       "PrimaryAttributeValues",
+		"security_profile_arn":                           "SecurityProfileArn",
+		"security_profile_name":                          "SecurityProfileName",
+		"tag_restricted_resources":                       "TagRestrictedResources",
+		"tags":                                           "Tags",
+		"value":                                          "Value",
+		"values":                                         "Values",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

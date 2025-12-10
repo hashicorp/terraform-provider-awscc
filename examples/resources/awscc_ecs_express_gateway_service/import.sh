@@ -1,0 +1,1 @@
+$ terraform import awscc_ecs_express_gateway_service.example "service_arn"

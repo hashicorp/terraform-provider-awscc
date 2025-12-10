@@ -18,9 +18,11 @@ Resource schema for AWS::ImageBuilder::Image
 ### Optional
 
 - `container_recipe_arn` (String) The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.
+- `deletion_settings` (Attributes) The deletion settings of the image, indicating whether to delete the underlying resources in addition to the image. (see [below for nested schema](#nestedatt--deletion_settings))
 - `distribution_configuration_arn` (String) The Amazon Resource Name (ARN) of the distribution configuration.
 - `enhanced_image_metadata_enabled` (Boolean) Collects additional information about the image being created, including the operating system (OS) version and package list.
 - `execution_role` (String) The execution role name/ARN for the image build, if provided
+- `image_pipeline_execution_settings` (Attributes) The image pipeline execution settings of the image. (see [below for nested schema](#nestedatt--image_pipeline_execution_settings))
 - `image_recipe_arn` (String) The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.
 - `image_scanning_configuration` (Attributes) Contains settings for vulnerability scans. (see [below for nested schema](#nestedatt--image_scanning_configuration))
 - `image_tests_configuration` (Attributes) The image tests configuration used when creating this image. (see [below for nested schema](#nestedatt--image_tests_configuration))
@@ -35,7 +37,25 @@ Resource schema for AWS::ImageBuilder::Image
 - `id` (String) Uniquely identifies the resource.
 - `image_id` (String) The AMI ID of the EC2 AMI in current region.
 - `image_uri` (String) URI for containers created in current Region with default ECR image tag
+- `latest_version` (Attributes) The latest version references of the image. (see [below for nested schema](#nestedatt--latest_version))
 - `name` (String) The name of the image.
+
+<a id="nestedatt--deletion_settings"></a>
+### Nested Schema for `deletion_settings`
+
+Optional:
+
+- `execution_role` (String) The execution role to use for deleting the image, as well as underlying resources.
+
+
+<a id="nestedatt--image_pipeline_execution_settings"></a>
+### Nested Schema for `image_pipeline_execution_settings`
+
+Optional:
+
+- `deployment_id` (String) The deployment ID of the pipeline, used to trigger new image pipeline executions.
+- `on_update` (Boolean) Whether to trigger the image pipeline when the pipeline is updated. False by default.
+
 
 <a id="nestedatt--image_scanning_configuration"></a>
 ### Nested Schema for `image_scanning_configuration`
@@ -89,6 +109,18 @@ Optional:
 
 - `name` (String)
 - `value` (List of String)
+
+
+
+<a id="nestedatt--latest_version"></a>
+### Nested Schema for `latest_version`
+
+Read-Only:
+
+- `arn` (String) The latest version ARN of the created image.
+- `major` (String) The latest version ARN of the created image, with the same major version.
+- `minor` (String) The latest version ARN of the created image, with the same minor version.
+- `patch` (String) The latest version ARN of the created image, with the same patch version.
 
 ## Import
 

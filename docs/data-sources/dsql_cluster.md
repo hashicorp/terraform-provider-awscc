@@ -24,9 +24,12 @@ Data Source schema for AWS::DSQL::Cluster
 - `creation_time` (String) The time of when the cluster was created in ISO-8601 format.
 - `deletion_protection_enabled` (Boolean) Whether deletion protection is enabled in this cluster.
 - `encryption_details` (Attributes) The encryption configuration details for the cluster. (see [below for nested schema](#nestedatt--encryption_details))
+- `endpoint` (String) The DSQL cluster endpoint.
 - `identifier` (String) The ID of the created cluster.
 - `kms_encryption_key` (String) The KMS key that encrypts data on the cluster.
 - `multi_region_properties` (Attributes) The Multi-region properties associated to this cluster. (see [below for nested schema](#nestedatt--multi_region_properties))
+- `policy_document` (String) The IAM policy applied to the cluster resource.
+- `policy_version` (String) The version number of the cluster's resource based policy
 - `resource_arn` (String) The Amazon Resource Name (ARN) for the cluster.
 - `status` (String) The status of the cluster.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))

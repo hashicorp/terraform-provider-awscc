@@ -1,0 +1,125 @@
+{
+  "typeName": "AWS::Events::EventBusPolicy",
+  "description": "Resource Type definition for AWS::Events::EventBusPolicy",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-events-eventbuspolicy",
+  "definitions": {
+    "Condition": {
+      "type": "object",
+      "description": "This parameter enables you to limit the permission to accounts that fulfill a certain condition, such as being a member of a certain AWS organization.",
+      "additionalProperties": false,
+      "properties": {
+        "Value": {
+          "description": "Specifies the key for the condition. Currently the only supported key is aws:PrincipalOrgID.",
+          "type": "string"
+        },
+        "Type": {
+          "description": "Specifies the type of condition. Currently the only supported value is StringEquals.",
+          "type": "string"
+        },
+        "Key": {
+          "description": "Specifies the value for the key. Currently, this must be the ID of the organization.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "properties": {
+    "EventBusName": {
+      "description": "The name of the event bus associated with the rule. If you omit this, the default event bus is used.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "[\\.\\-_A-Za-z0-9]+"
+    },
+    "Condition": {
+      "$ref": "#/definitions/Condition"
+    },
+    "Action": {
+      "description": "The action that you are enabling the other account to perform.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "events:[a-zA-Z]+"
+    },
+    "StatementId": {
+      "description": "An identifier string for the external account that you are granting permissions to",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "[a-zA-Z0-9-_]+"
+    },
+    "Statement": {
+      "description": "A JSON string that describes the permission policy statement. You can include a Policy parameter in the request instead of using the StatementId, Action, Principal, or Condition parameters.",
+      "type": "object"
+    },
+    "Principal": {
+      "description": "The 12-digit AWS account ID that you are permitting to put events to your default event bus. Specify \"*\" to permit any account to put events to your default event bus.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 12,
+      "pattern": "(\\d{12}|\\*)"
+    }
+  },
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": false
+  },
+  "required": [
+    "StatementId"
+  ],
+  "createOnlyProperties": [
+    "/properties/EventBusName",
+    "/properties/StatementId"
+  ],
+  "primaryIdentifier": [
+    "/properties/EventBusName",
+    "/properties/StatementId"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Principal",
+    "/properties/Condition",
+    "/properties/Action"
+  ],
+  "deprecatedProperties": [
+    "/properties/Principal",
+    "/properties/Condition",
+    "/properties/Action"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "events:DescribeEventBus",
+        "events:PutPermission"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "events:DescribeEventBus"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "events:DescribeEventBus",
+        "events:PutPermission"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "events:DescribeEventBus",
+        "events:RemovePermission"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "EventBusName": {
+            "$ref": "resource-schema.json#/properties/EventBusName"
+          }
+        }
+      },
+      "permissions": [
+        "events:DescribeEventBus"
+      ]
+    }
+  }
+}

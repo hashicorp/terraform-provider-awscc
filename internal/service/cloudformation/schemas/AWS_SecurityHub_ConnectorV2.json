@@ -1,0 +1,251 @@
+{
+  "typeName": "AWS::SecurityHub::ConnectorV2",
+  "description": "Resource schema for AWS::SecurityHub::ConnectorV2",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-securityhub",
+  "definitions": {
+    "Tags": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      }
+    },
+    "ISO8601DateString": {
+      "description": "The timestamp formatted in ISO8601",
+      "type": "string",
+      "pattern": "^(\\d\\d\\d\\d)-([0][1-9]|[1][0-2])-([0][1-9]|[1-2](\\d)|[3][0-1])[T](?:([0-1](\\d)|[2][0-3]):[0-5](\\d):[0-5](\\d)|23:59:60)(?:\\.(\\d)+)?([Z]|[+-](\\d\\d)(:?(\\d\\d))?)$"
+    },
+    "Provider": {
+      "type": "object",
+      "description": "The provider configuration of the connector",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "JiraCloud": {
+              "type": "object",
+              "properties": {
+                "ProjectKey": {
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 10
+                },
+                "CloudId": {
+                  "type": "string"
+                },
+                "Domain": {
+                  "type": "string"
+                },
+                "AuthUrl": {
+                  "description": "The authUrl of the JiraCloud connector",
+                  "type": "string",
+                  "pattern": ".*\\S.*"
+                },
+                "AuthStatus": {
+                  "$ref": "#/definitions/AuthStatus"
+                }
+              },
+              "required": [
+                "ProjectKey"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "JiraCloud"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "ServiceNow": {
+              "type": "object",
+              "properties": {
+                "InstanceName": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "SecretArn": {
+                  "description": "The ARN of secrets manager containing ClientId and ClientSecret",
+                  "type": "string",
+                  "pattern": ".*\\S.*",
+                  "minLength": 20,
+                  "maxLength": 2048
+                },
+                "AuthStatus": {
+                  "$ref": "#/definitions/AuthStatus"
+                }
+              },
+              "required": [
+                "InstanceName",
+                "SecretArn"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "ServiceNow"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "AuthStatus": {
+      "description": "The auth status of the connector",
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "FAILED"
+      ]
+    }
+  },
+  "properties": {
+    "Name": {
+      "description": "The name of the connector",
+      "type": "string",
+      "pattern": ".*\\S.*",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "Description": {
+      "description": "A description of the connector",
+      "type": "string",
+      "pattern": ".*\\S.*",
+      "minLength": 0,
+      "maxLength": 256
+    },
+    "KmsKeyArn": {
+      "description": "The ARN of KMS key used for the connector",
+      "type": "string",
+      "pattern": ".*\\S.*",
+      "minLength": 20,
+      "maxLength": 2048
+    },
+    "Provider": {
+      "$ref": "#/definitions/Provider"
+    },
+    "Message": {
+      "description": "The message of the connector status change",
+      "type": "string"
+    },
+    "ConnectorStatus": {
+      "description": "The status of the connector",
+      "type": "string",
+      "enum": [
+        "CONNECTED",
+        "FAILED_TO_CONNECT",
+        "PENDING_AUTHORIZATION",
+        "PENDING_CONFIGURATION"
+      ]
+    },
+    "Tags": {
+      "$ref": "#/definitions/Tags"
+    },
+    "ConnectorArn": {
+      "description": "The ARN of the connector",
+      "type": "string",
+      "pattern": "^arn:aws\\S*:securityhub:[a-z0-9-]+:[0-9]{12}:connectorv2/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "ConnectorId": {
+      "description": "The ID of the connector",
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "LastUpdatedAt": {
+      "$ref": "#/definitions/ISO8601DateString"
+    },
+    "LastCheckedAt": {
+      "$ref": "#/definitions/ISO8601DateString"
+    },
+    "CreatedAt": {
+      "$ref": "#/definitions/ISO8601DateString"
+    }
+  },
+  "required": [
+    "Name",
+    "Provider"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/KmsKeyArn",
+    "/properties/Provider/ServiceNow/InstanceName"
+  ],
+  "readOnlyProperties": [
+    "/properties/ConnectorArn",
+    "/properties/ConnectorId",
+    "/properties/Message",
+    "/properties/ConnectorStatus",
+    "/properties/LastUpdatedAt",
+    "/properties/LastCheckedAt",
+    "/properties/CreatedAt",
+    "/properties/Provider/JiraCloud/Domain",
+    "/properties/Provider/JiraCloud/AuthUrl",
+    "/properties/Provider/JiraCloud/CloudId",
+    "/properties/Provider/JiraCloud/AuthStatus",
+    "/properties/Provider/ServiceNow/AuthStatus"
+  ],
+  "primaryIdentifier": [
+    "/properties/ConnectorArn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "securityhub:ListTagsForResource",
+      "securityhub:TagResource",
+      "securityhub:UntagResource"
+    ]
+  },
+  "additionalProperties": false,
+  "handlers": {
+    "create": {
+      "permissions": [
+        "securityhub:CreateConnectorV2",
+        "securityhub:GetConnectorV2",
+        "securityhub:TagResource",
+        "securityhub:ListTagsForResource",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "securityhub:GetConnectorV2",
+        "securityhub:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "securityhub:UpdateConnectorV2",
+        "securityhub:GetConnectorV2",
+        "securityhub:TagResource",
+        "securityhub:UntagResource",
+        "securityhub:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "securityhub:GetConnectorV2",
+        "securityhub:DeleteConnectorV2"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "securityhub:ListConnectorsV2",
+        "securityhub:ListTagsForResource"
+      ]
+    }
+  }
+}

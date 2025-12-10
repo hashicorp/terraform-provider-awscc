@@ -1,0 +1,1 @@
+$ terraform import awscc_observabilityadmin_s3_table_integration.example "arn"

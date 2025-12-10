@@ -24,6 +24,7 @@ Data Source schema for AWS::OpenSearchService::Domain
 - `access_policies` (String)
 - `advanced_options` (Map of String)
 - `advanced_security_options` (Attributes) (see [below for nested schema](#nestedatt--advanced_security_options))
+- `aiml_options` (Attributes) (see [below for nested schema](#nestedatt--aiml_options))
 - `arn` (String)
 - `cluster_config` (Attributes) (see [below for nested schema](#nestedatt--cluster_config))
 - `cognito_options` (Attributes) (see [below for nested schema](#nestedatt--cognito_options))
@@ -115,6 +116,22 @@ Read-Only:
 - `entity_id` (String)
 - `metadata_content` (String)
 
+
+
+
+<a id="nestedatt--aiml_options"></a>
+### Nested Schema for `aiml_options`
+
+Read-Only:
+
+- `s3_vectors_engine` (Attributes) (see [below for nested schema](#nestedatt--aiml_options--s3_vectors_engine))
+
+<a id="nestedatt--aiml_options--s3_vectors_engine"></a>
+### Nested Schema for `aiml_options.s3_vectors_engine`
+
+Read-Only:
+
+- `enabled` (Boolean) Whether to enable S3 vectors engine.
 
 
 

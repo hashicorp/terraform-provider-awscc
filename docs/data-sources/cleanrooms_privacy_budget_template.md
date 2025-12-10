@@ -37,8 +37,20 @@ Data Source schema for AWS::CleanRooms::PrivacyBudgetTemplate
 
 Read-Only:
 
+- `budget_parameters` (Attributes List) (see [below for nested schema](#nestedatt--parameters--budget_parameters))
 - `epsilon` (Number)
+- `resource_arn` (String)
 - `users_noise_per_query` (Number)
+
+<a id="nestedatt--parameters--budget_parameters"></a>
+### Nested Schema for `parameters.budget_parameters`
+
+Read-Only:
+
+- `auto_refresh` (String)
+- `budget` (Number)
+- `type` (String)
+
 
 
 <a id="nestedatt--tags"></a>

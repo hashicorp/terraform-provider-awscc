@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -228,6 +229,41 @@ func dataAutomationProjectResource(ctx context.Context) (resource.Resource, erro
 		//	    "Audio": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "LanguageConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "GenerativeOutputLanguage": {
+		//	              "enum": [
+		//	                "DEFAULT",
+		//	                "EN"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "IdentifyMultipleLanguages": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "InputLanguages": {
+		//	              "items": {
+		//	                "enum": [
+		//	                  "EN",
+		//	                  "DE",
+		//	                  "ES",
+		//	                  "FR",
+		//	                  "IT",
+		//	                  "PT",
+		//	                  "JA",
+		//	                  "KO",
+		//	                  "CN",
+		//	                  "TW",
+		//	                  "HK"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "ModalityProcessing": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
@@ -365,6 +401,64 @@ func dataAutomationProjectResource(ctx context.Context) (resource.Resource, erro
 				// Property: Audio
 				"audio": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LanguageConfiguration
+						"language_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: GenerativeOutputLanguage
+								"generative_output_language": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"DEFAULT",
+											"EN",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: IdentifyMultipleLanguages
+								"identify_multiple_languages": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: InputLanguages
+								"input_languages": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.ValueStringsAre(
+											stringvalidator.OneOf(
+												"EN",
+												"DE",
+												"ES",
+												"FR",
+												"IT",
+												"PT",
+												"JA",
+												"KO",
+												"CN",
+												"TW",
+												"HK",
+											),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: ModalityProcessing
 						"modality_processing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1875,12 +1969,16 @@ func dataAutomationProjectResource(ctx context.Context) (resource.Resource, erro
 		"document":                      "Document",
 		"extraction":                    "Extraction",
 		"generative_field":              "GenerativeField",
+		"generative_output_language":    "GenerativeOutputLanguage",
 		"granularity":                   "Granularity",
+		"identify_multiple_languages":   "IdentifyMultipleLanguages",
 		"image":                         "Image",
+		"input_languages":               "InputLanguages",
 		"jpeg":                          "jpeg",
 		"key":                           "Key",
 		"kms_encryption_context":        "KmsEncryptionContext",
 		"kms_key_id":                    "KmsKeyId",
+		"language_configuration":        "LanguageConfiguration",
 		"last_modified_time":            "LastModifiedTime",
 		"modality_processing":           "ModalityProcessing",
 		"modality_routing":              "ModalityRouting",

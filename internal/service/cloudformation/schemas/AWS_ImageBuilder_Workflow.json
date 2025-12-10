@@ -1,20 +1,112 @@
 {
-  "tagging": {
-    "permissions": [
-      "imagebuilder:TagResource",
-      "imagebuilder:UntagResource"
-    ],
-    "taggable": true,
-    "tagOnCreate": true,
-    "tagUpdatable": true,
-    "tagProperty": "/properties/Tags",
-    "cloudFormationSystemTags": true
-  },
   "typeName": "AWS::ImageBuilder::Workflow",
-  "readOnlyProperties": [
+  "description": "Resource schema for AWS::ImageBuilder::Workflow",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-imagebuilder",
+  "properties": {
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) of the workflow.",
+      "type": "string"
+    },
+    "Name": {
+      "description": "The name of the workflow.",
+      "type": "string"
+    },
+    "Version": {
+      "description": "The version of the workflow.",
+      "type": "string"
+    },
+    "Description": {
+      "description": "The description of the workflow.",
+      "type": "string"
+    },
+    "ChangeDescription": {
+      "description": "The change description of the workflow.",
+      "type": "string"
+    },
+    "Type": {
+      "description": "The type of the workflow denotes whether the workflow is used to build, test, or distribute.",
+      "type": "string",
+      "enum": [
+        "BUILD",
+        "TEST",
+        "DISTRIBUTION"
+      ]
+    },
+    "Data": {
+      "description": "The data of the workflow.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 16000
+    },
+    "Uri": {
+      "description": "The uri of the workflow.",
+      "type": "string"
+    },
+    "KmsKeyId": {
+      "description": "The KMS key identifier used to encrypt the workflow.",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "The tags associated with the workflow.",
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      }
+    },
+    "LatestVersion": {
+      "description": "The latest version references of the workflow.",
+      "$ref": "#/definitions/LatestVersion"
+    }
+  },
+  "definitions": {
+    "LatestVersion": {
+      "description": "The latest version references of the workflow.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Arn": {
+          "description": "The latest version ARN of the created workflow.",
+          "type": "string"
+        },
+        "Major": {
+          "description": "The latest version ARN of the created workflow, with the same major version.",
+          "type": "string"
+        },
+        "Minor": {
+          "description": "The latest version ARN of the created workflow, with the same minor version.",
+          "type": "string"
+        },
+        "Patch": {
+          "description": "The latest version ARN of the created workflow, with the same patch version.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Name",
+    "Type",
+    "Version"
+  ],
+  "primaryIdentifier": [
     "/properties/Arn"
   ],
-  "description": "Resource schema for AWS::ImageBuilder::Workflow",
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/LatestVersion",
+    "/properties/LatestVersion/Arn",
+    "/properties/LatestVersion/Major",
+    "/properties/LatestVersion/Minor",
+    "/properties/LatestVersion/Patch"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Data",
+    "/properties/Uri"
+  ],
   "createOnlyProperties": [
     "/properties/Name",
     "/properties/Version",
@@ -25,22 +117,18 @@
     "/properties/Type",
     "/properties/KmsKeyId"
   ],
-  "primaryIdentifier": [
-    "/properties/Arn"
-  ],
-  "required": [
-    "Name",
-    "Type",
-    "Version"
-  ],
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-imagebuilder",
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "imagebuilder:TagResource",
+      "imagebuilder:UntagResource"
+    ]
+  },
   "handlers": {
-    "read": {
-      "permissions": [
-        "imagebuilder:GetWorkflow",
-        "kms:Decrypt"
-      ]
-    },
     "create": {
       "permissions": [
         "iam:GetRole",
@@ -58,10 +146,23 @@
         "imagebuilder:CreateWorkflow"
       ]
     },
+    "read": {
+      "permissions": [
+        "imagebuilder:GetWorkflow",
+        "kms:Decrypt"
+      ]
+    },
     "update": {
       "permissions": [
         "imagebuilder:TagResource",
         "imagebuilder:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "imagebuilder:GetWorkflow",
+        "imagebuilder:UntagResource",
+        "imagebuilder:DeleteWorkflow"
       ]
     },
     "list": {
@@ -76,74 +177,6 @@
           }
         }
       }
-    },
-    "delete": {
-      "permissions": [
-        "imagebuilder:GetWorkflow",
-        "imagebuilder:UntagResource",
-        "imagebuilder:DeleteWorkflow"
-      ]
-    }
-  },
-  "writeOnlyProperties": [
-    "/properties/Data",
-    "/properties/Uri"
-  ],
-  "additionalProperties": false,
-  "definitions": {},
-  "properties": {
-    "Type": {
-      "description": "The type of the workflow denotes whether the workflow is used to build, test, or distribute.",
-      "type": "string",
-      "enum": [
-        "BUILD",
-        "TEST",
-        "DISTRIBUTION"
-      ]
-    },
-    "Description": {
-      "description": "The description of the workflow.",
-      "type": "string"
-    },
-    "KmsKeyId": {
-      "description": "The KMS key identifier used to encrypt the workflow.",
-      "type": "string"
-    },
-    "Version": {
-      "description": "The version of the workflow.",
-      "type": "string"
-    },
-    "ChangeDescription": {
-      "description": "The change description of the workflow.",
-      "type": "string"
-    },
-    "Data": {
-      "minLength": 1,
-      "description": "The data of the workflow.",
-      "type": "string",
-      "maxLength": 16000
-    },
-    "Arn": {
-      "description": "The Amazon Resource Name (ARN) of the workflow.",
-      "type": "string"
-    },
-    "Uri": {
-      "description": "The uri of the workflow.",
-      "type": "string"
-    },
-    "Tags": {
-      "patternProperties": {
-        "": {
-          "type": "string"
-        }
-      },
-      "description": "The tags associated with the workflow.",
-      "additionalProperties": false,
-      "type": "object"
-    },
-    "Name": {
-      "description": "The name of the workflow.",
-      "type": "string"
     }
   }
 }

@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_vpn_concentrator.example "vpn_concentrator_id"

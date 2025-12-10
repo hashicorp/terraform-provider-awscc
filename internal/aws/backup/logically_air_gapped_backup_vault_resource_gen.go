@@ -104,9 +104,11 @@ func logicallyAirGappedBackupVaultResource(ctx context.Context) (resource.Resour
 		//	  "type": "string"
 		//	}
 		"encryption_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: MaxRetentionDays
@@ -131,6 +133,19 @@ func logicallyAirGappedBackupVaultResource(ctx context.Context) (resource.Resour
 			Required: true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MpaApprovalTeamArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"mpa_approval_team_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Notifications
@@ -242,18 +257,19 @@ func logicallyAirGappedBackupVaultResource(ctx context.Context) (resource.Resour
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_policy":       "AccessPolicy",
-		"backup_vault_arn":    "BackupVaultArn",
-		"backup_vault_events": "BackupVaultEvents",
-		"backup_vault_name":   "BackupVaultName",
-		"backup_vault_tags":   "BackupVaultTags",
-		"encryption_key_arn":  "EncryptionKeyArn",
-		"max_retention_days":  "MaxRetentionDays",
-		"min_retention_days":  "MinRetentionDays",
-		"notifications":       "Notifications",
-		"sns_topic_arn":       "SNSTopicArn",
-		"vault_state":         "VaultState",
-		"vault_type":          "VaultType",
+		"access_policy":         "AccessPolicy",
+		"backup_vault_arn":      "BackupVaultArn",
+		"backup_vault_events":   "BackupVaultEvents",
+		"backup_vault_name":     "BackupVaultName",
+		"backup_vault_tags":     "BackupVaultTags",
+		"encryption_key_arn":    "EncryptionKeyArn",
+		"max_retention_days":    "MaxRetentionDays",
+		"min_retention_days":    "MinRetentionDays",
+		"mpa_approval_team_arn": "MpaApprovalTeamArn",
+		"notifications":         "Notifications",
+		"sns_topic_arn":         "SNSTopicArn",
+		"vault_state":           "VaultState",
+		"vault_type":            "VaultType",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

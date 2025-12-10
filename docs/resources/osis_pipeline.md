@@ -59,6 +59,8 @@ resource "awscc_osis_pipeline" "example_pipeline" {
 - `buffer_options` (Attributes) Key-value pairs to configure buffering. (see [below for nested schema](#nestedatt--buffer_options))
 - `encryption_at_rest_options` (Attributes) Key-value pairs to configure encryption at rest. (see [below for nested schema](#nestedatt--encryption_at_rest_options))
 - `log_publishing_options` (Attributes) Key-value pairs to configure log publishing. (see [below for nested schema](#nestedatt--log_publishing_options))
+- `pipeline_role_arn` (String) The Pipeline Role (ARN) for the pipeline.
+- `resource_policy` (Attributes) (see [below for nested schema](#nestedatt--resource_policy))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `vpc_options` (Attributes) Container for the values required to configure VPC access for the pipeline. If you don't specify these values, OpenSearch Ingestion Service creates the pipeline with a public endpoint. (see [below for nested schema](#nestedatt--vpc_options))
 
@@ -101,6 +103,14 @@ Optional:
 
 - `log_group` (String)
 
+
+
+<a id="nestedatt--resource_policy"></a>
+### Nested Schema for `resource_policy`
+
+Optional:
+
+- `policy` (String)
 
 
 <a id="nestedatt--tags"></a>

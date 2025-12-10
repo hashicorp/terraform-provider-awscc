@@ -31,8 +31,10 @@ Data Source schema for AWS::BedrockAgentCore::Runtime
 - `description` (String) Description of the resource
 - `environment_variables` (Map of String) Environment variables for the agent runtime
 - `last_updated_at` (String) When resource was last updated
+- `lifecycle_configuration` (Attributes) Lifecycle configuration for managing runtime sessions (see [below for nested schema](#nestedatt--lifecycle_configuration))
 - `network_configuration` (Attributes) Network access configuration for the Agent (see [below for nested schema](#nestedatt--network_configuration))
 - `protocol_configuration` (String) Protocol configuration for the agent runtime
+- `request_header_configuration` (Attributes) Configuration for HTTP request headers (see [below for nested schema](#nestedatt--request_header_configuration))
 - `role_arn` (String) Amazon Resource Name (ARN) of an IAM role
 - `status` (String) Current status of the agent
 - `tags` (Map of String) A map of tag keys and values
@@ -43,7 +45,36 @@ Data Source schema for AWS::BedrockAgentCore::Runtime
 
 Read-Only:
 
+- `code_configuration` (Attributes) Representation of a code configuration (see [below for nested schema](#nestedatt--agent_runtime_artifact--code_configuration))
 - `container_configuration` (Attributes) (see [below for nested schema](#nestedatt--agent_runtime_artifact--container_configuration))
+
+<a id="nestedatt--agent_runtime_artifact--code_configuration"></a>
+### Nested Schema for `agent_runtime_artifact.code_configuration`
+
+Read-Only:
+
+- `code` (Attributes) Object represents source code from zip file (see [below for nested schema](#nestedatt--agent_runtime_artifact--code_configuration--code))
+- `entry_point` (List of String) List of entry points
+- `runtime` (String) Managed runtime types
+
+<a id="nestedatt--agent_runtime_artifact--code_configuration--code"></a>
+### Nested Schema for `agent_runtime_artifact.code_configuration.code`
+
+Read-Only:
+
+- `s3` (Attributes) S3 Location Configuration (see [below for nested schema](#nestedatt--agent_runtime_artifact--code_configuration--code--s3))
+
+<a id="nestedatt--agent_runtime_artifact--code_configuration--code--s3"></a>
+### Nested Schema for `agent_runtime_artifact.code_configuration.code.s3`
+
+Read-Only:
+
+- `bucket` (String) S3 bucket name
+- `prefix` (String) S3 object key prefix
+- `version_id` (String) S3 object version ID
+
+
+
 
 <a id="nestedatt--agent_runtime_artifact--container_configuration"></a>
 ### Nested Schema for `agent_runtime_artifact.container_configuration`
@@ -72,6 +103,15 @@ Read-Only:
 
 
 
+<a id="nestedatt--lifecycle_configuration"></a>
+### Nested Schema for `lifecycle_configuration`
+
+Read-Only:
+
+- `idle_runtime_session_timeout` (Number) Timeout in seconds for idle runtime sessions
+- `max_lifetime` (Number) Maximum lifetime in seconds for runtime sessions
+
+
 <a id="nestedatt--network_configuration"></a>
 ### Nested Schema for `network_configuration`
 
@@ -88,6 +128,14 @@ Read-Only:
 - `security_groups` (List of String) Security groups for VPC
 - `subnets` (List of String) Subnets for VPC
 
+
+
+<a id="nestedatt--request_header_configuration"></a>
+### Nested Schema for `request_header_configuration`
+
+Read-Only:
+
+- `request_header_allowlist` (Set of String) List of allowed HTTP headers for agent runtime requests
 
 
 <a id="nestedatt--workload_identity_details"></a>

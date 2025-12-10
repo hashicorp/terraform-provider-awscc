@@ -126,6 +126,7 @@ resource "awscc_imagebuilder_container_recipe" "example" {
 
 - `arn` (String) The Amazon Resource Name (ARN) of the container recipe.
 - `id` (String) Uniquely identifies the resource.
+- `latest_version` (Attributes) The latest version references of the container recipe. (see [below for nested schema](#nestedatt--latest_version))
 
 <a id="nestedatt--components"></a>
 ### Nested Schema for `components`
@@ -187,6 +188,17 @@ Optional:
 
 - `repository_name` (String) The name of the container repository where the output container image is stored. This name is prefixed by the repository location.
 - `service` (String) Specifies the service in which this image was registered.
+
+
+<a id="nestedatt--latest_version"></a>
+### Nested Schema for `latest_version`
+
+Read-Only:
+
+- `arn` (String) The latest version ARN of the created container recipe.
+- `major` (String) The latest version ARN of the created container recipe, with the same major version.
+- `minor` (String) The latest version ARN of the created container recipe, with the same minor version.
+- `patch` (String) The latest version ARN of the created container recipe, with the same patch version.
 
 ## Import
 

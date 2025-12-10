@@ -140,7 +140,7 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "type": "string"
 		//	                },
 		//	                "Name": {
-		//	                  "description": "The name for the metric that is defined in this structure. For extended metrics, valid values are the following:\n\nPerformanceNavigationDuration\n\nPerformanceResourceDuration\n\nNavigationSatisfiedTransaction\n\nNavigationToleratedTransaction\n\nNavigationFrustratedTransaction\n\nWebVitalsCumulativeLayoutShift\n\nWebVitalsFirstInputDelay\n\nWebVitalsLargestContentfulPaint\n\nJsErrorCount\n\nHttpErrorCount\n\nSessionCount",
+		//	                  "description": "The name for the metric that is defined in this structure. For extended metrics, valid values are the following:\n\nPerformanceNavigationDuration\n\nPerformanceResourceDuration\n\nNavigationSatisfiedTransaction\n\nNavigationToleratedTransaction\n\nNavigationFrustratedTransaction\n\nWebVitalsCumulativeLayoutShift\n\nWebVitalsFirstInputDelay\n\nWebVitalsLargestContentfulPaint\n\nWebVitalsInteractionToNextPaint\n\nJsErrorCount\n\nHttpErrorCount\n\nSessionCount\n\nPageViewCount\n\nHttp4xxCount\n\nHttp5xxCount\n\nSessionDuration\n\nPageViewCountPerSession\n\nJsErrorCountPerSession\n\nHttp4xxCountPerSession\n\nHttp5xxCountPerSession\n\nJsErrorCountPerPageView\n\nHttp4xxCountPerPageView\n\nHttp5xxCountPerPageView\n\nTimeOnPage\n\nColdLaunchTime\n\nWarmLaunchTime\n\nCrashCount\n\nANRCount\n\nAppHangCount\n\nScreenLoadCount\n\nScreenLoadTime\n\nNetworkLatency\n\nSpanPayloadSize\n\nLogEventPayloadSize",
 		//	                  "maxLength": 255,
 		//	                  "minLength": 1,
 		//	                  "type": "string"
@@ -286,7 +286,7 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 										}, /*END ATTRIBUTE*/
 										// Property: Name
 										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The name for the metric that is defined in this structure. For extended metrics, valid values are the following:\n\nPerformanceNavigationDuration\n\nPerformanceResourceDuration\n\nNavigationSatisfiedTransaction\n\nNavigationToleratedTransaction\n\nNavigationFrustratedTransaction\n\nWebVitalsCumulativeLayoutShift\n\nWebVitalsFirstInputDelay\n\nWebVitalsLargestContentfulPaint\n\nJsErrorCount\n\nHttpErrorCount\n\nSessionCount",
+											Description: "The name for the metric that is defined in this structure. For extended metrics, valid values are the following:\n\nPerformanceNavigationDuration\n\nPerformanceResourceDuration\n\nNavigationSatisfiedTransaction\n\nNavigationToleratedTransaction\n\nNavigationFrustratedTransaction\n\nWebVitalsCumulativeLayoutShift\n\nWebVitalsFirstInputDelay\n\nWebVitalsLargestContentfulPaint\n\nWebVitalsInteractionToNextPaint\n\nJsErrorCount\n\nHttpErrorCount\n\nSessionCount\n\nPageViewCount\n\nHttp4xxCount\n\nHttp5xxCount\n\nSessionDuration\n\nPageViewCountPerSession\n\nJsErrorCountPerSession\n\nHttp4xxCountPerSession\n\nHttp5xxCountPerSession\n\nJsErrorCountPerPageView\n\nHttp4xxCountPerPageView\n\nHttp5xxCountPerPageView\n\nTimeOnPage\n\nColdLaunchTime\n\nWarmLaunchTime\n\nCrashCount\n\nANRCount\n\nAppHangCount\n\nScreenLoadCount\n\nScreenLoadTime\n\nNetworkLatency\n\nSpanPayloadSize\n\nLogEventPayloadSize",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Namespace
@@ -487,6 +487,20 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A name for the app monitor",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Platform
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "Web",
+		//	    "Android",
+		//	    "iOS"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"platform": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourcePolicy
 		// CloudFormation resource type schema:
 		//
@@ -619,6 +633,7 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"metric_destinations":         "MetricDestinations",
 		"name":                        "Name",
 		"namespace":                   "Namespace",
+		"platform":                    "Platform",
 		"policy_document":             "PolicyDocument",
 		"policy_revision_id":          "PolicyRevisionId",
 		"resource_policy":             "ResourcePolicy",

@@ -120,7 +120,10 @@ func anomalyMonitorResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The dimensions to evaluate",
 		//	  "enum": [
-		//	    "SERVICE"
+		//	    "SERVICE",
+		//	    "LINKED_ACCOUNT",
+		//	    "TAG",
+		//	    "COST_CATEGORY"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -131,6 +134,9 @@ func anomalyMonitorResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"SERVICE",
+					"LINKED_ACCOUNT",
+					"TAG",
+					"COST_CATEGORY",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

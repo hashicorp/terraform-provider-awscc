@@ -46,6 +46,15 @@ func serviceNetworkResourceAssociationDataSource(ctx context.Context) (datasourc
 		"service_network_resource_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: PrivateDnsEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"private_dns_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceConfigurationId
 		// CloudFormation resource type schema:
 		//
@@ -135,6 +144,7 @@ func serviceNetworkResourceAssociationDataSource(ctx context.Context) (datasourc
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                       "Arn",
 		"key":                       "Key",
+		"private_dns_enabled":       "PrivateDnsEnabled",
 		"resource_configuration_id": "ResourceConfigurationId",
 		"service_network_id":        "ServiceNetworkId",
 		"service_network_resource_association_id": "Id",

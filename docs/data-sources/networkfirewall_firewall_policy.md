@@ -33,6 +33,7 @@ Data Source schema for AWS::NetworkFirewall::FirewallPolicy
 
 Read-Only:
 
+- `enable_tls_session_holding` (Boolean)
 - `policy_variables` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--policy_variables))
 - `stateful_default_actions` (List of String)
 - `stateful_engine_options` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--stateful_engine_options))

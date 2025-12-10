@@ -134,7 +134,9 @@ func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "GeneratedRulesType": {
 		//	              "enum": [
 		//	                "ALLOWLIST",
-		//	                "DENYLIST"
+		//	                "DENYLIST",
+		//	                "ALERTLIST",
+		//	                "REJECTLIST"
 		//	              ],
 		//	              "type": "string"
 		//	            },

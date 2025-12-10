@@ -165,6 +165,7 @@ Optional:
 
 - `database_name` (String)
 - `output_location` (String)
+- `region` (String)
 - `table_name` (String)
 - `work_group` (String)
 
@@ -175,6 +176,7 @@ Optional:
 Optional:
 
 - `database_name` (String)
+- `region` (String)
 - `table_name` (String)
 
 

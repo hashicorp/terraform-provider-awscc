@@ -49,15 +49,15 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "description": "The details of a capacity provider strategy. A capacity provider strategy can be set when using the ``RunTask`` or ``CreateService`` APIs or as the default capacity provider strategy for a cluster with the ``CreateCluster`` API.\n Only capacity providers that are already associated with a cluster and have an ``ACTIVE`` or ``UPDATING`` status can be used in a capacity provider strategy. The ``PutClusterCapacityProviders`` API is used to associate a capacity provider with a cluster.\n If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created. New Auto Scaling group capacity providers can be created with the ``CreateCapacityProvider`` API operation.\n To use an FARGATElong capacity provider, specify either the ``FARGATE`` or ``FARGATE_SPOT`` capacity providers. The FARGATElong capacity providers are available to all accounts and only need to be associated with a cluster to be used in a capacity provider strategy.",
 		//	    "properties": {
 		//	      "Base": {
-		//	        "description": "The *base* value designates how many tasks, at a minimum, to run on the specified capacity provider for each service. Only one capacity provider in a capacity provider strategy can have a *base* defined. If no value is specified, the default value of ``0`` is used.\n Base value characteristics:\n  +  Only one capacity provider in a strategy can have a base defined\n  +  Default value is ``0`` if not specified\n  +  Valid range: 0 to 100,000\n  +  Base requirements are satisfied first before weight distribution",
+		//	        "description": "The *base* value designates how many tasks, at a minimum, to run on the specified capacity provider for each service. Only one capacity provider in a capacity provider strategy can have a *base* defined. If no value is specified, the default value of ``0`` is used.\n Base value characteristics:\n  +  Only one capacity provider in a strategy can have a base defined\n  +  The default value is ``0`` if not specified\n  +  The valid range is 0 to 100,000\n  +  Base requirements are satisfied first before weight distribution",
 		//	        "type": "integer"
 		//	      },
 		//	      "CapacityProvider": {
-		//	        "description": "The short name of the capacity provider.",
+		//	        "description": "The short name of the capacity provider. This can be either an AWS managed capacity provider (``FARGATE`` or ``FARGATE_SPOT``) or the name of a custom capacity provider that you created.",
 		//	        "type": "string"
 		//	      },
 		//	      "Weight": {
-		//	        "description": "The *weight* value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The ``weight`` value is taken into consideration after the ``base`` value, if defined, is satisfied.\n If no ``weight`` value is specified, the default value of ``0`` is used. When multiple capacity providers are specified within a capacity provider strategy, at least one of the capacity providers must have a weight value greater than zero and any capacity providers with a weight of ``0`` can't be used to place tasks. If you specify multiple capacity providers in a strategy that all have a weight of ``0``, any ``RunTask`` or ``CreateService`` actions using the capacity provider strategy will fail.\n Weight value characteristics:\n  +  Weight is considered after the base value is satisfied\n  +  Default value is ``0`` if not specified\n  +  Valid range: 0 to 1,000\n  +  At least one capacity provider must have a weight greater than zero\n  +  Capacity providers with weight of ``0`` cannot place tasks\n  \n Task distribution logic:\n  1.  Base satisfaction: The minimum number of tasks specified by the base value are placed on that capacity provider\n  1.  Weight distribution: After base requirements are met, additional tasks are distributed according to weight ratios\n  \n Examples:\n Equal Distribution: Two capacity providers both with weight ``1`` will split tasks evenly after base requirements are met.\n Weighted Distribution: If capacityProviderA has weight ``1`` and capacityProviderB has weight ``4``, then for every 1 task on A, 4 tasks will run on B.",
+		//	        "description": "The *weight* value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The ``weight`` value is taken into consideration after the ``base`` value, if defined, is satisfied.\n If no ``weight`` value is specified, the default value of ``0`` is used. When multiple capacity providers are specified within a capacity provider strategy, at least one of the capacity providers must have a weight value greater than zero and any capacity providers with a weight of ``0`` can't be used to place tasks. If you specify multiple capacity providers in a strategy that all have a weight of ``0``, any ``RunTask`` or ``CreateService`` actions using the capacity provider strategy will fail.\n Weight value characteristics:\n  +  Weight is considered after the base value is satisfied\n  +  The default value is ``0`` if not specified\n  +  The valid range is 0 to 1,000\n  +  At least one capacity provider must have a weight greater than zero\n  +  Capacity providers with weight of ``0`` cannot place tasks\n  \n Task distribution logic:\n  1.  Base satisfaction: The minimum number of tasks specified by the base value are placed on that capacity provider\n  1.  Weight distribution: After base requirements are met, additional tasks are distributed according to weight ratios\n  \n Examples:\n Equal Distribution: Two capacity providers both with weight ``1`` will split tasks evenly after base requirements are met.\n Weighted Distribution: If capacityProviderA has weight ``1`` and capacityProviderB has weight ``4``, then for every 1 task on A, 4 tasks will run on B.",
 		//	        "type": "integer"
 		//	      }
 		//	    },
@@ -70,17 +70,17 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Base
 					"base": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The *base* value designates how many tasks, at a minimum, to run on the specified capacity provider for each service. Only one capacity provider in a capacity provider strategy can have a *base* defined. If no value is specified, the default value of ``0`` is used.\n Base value characteristics:\n  +  Only one capacity provider in a strategy can have a base defined\n  +  Default value is ``0`` if not specified\n  +  Valid range: 0 to 100,000\n  +  Base requirements are satisfied first before weight distribution",
+						Description: "The *base* value designates how many tasks, at a minimum, to run on the specified capacity provider for each service. Only one capacity provider in a capacity provider strategy can have a *base* defined. If no value is specified, the default value of ``0`` is used.\n Base value characteristics:\n  +  Only one capacity provider in a strategy can have a base defined\n  +  The default value is ``0`` if not specified\n  +  The valid range is 0 to 100,000\n  +  Base requirements are satisfied first before weight distribution",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: CapacityProvider
 					"capacity_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The short name of the capacity provider.",
+						Description: "The short name of the capacity provider. This can be either an AWS managed capacity provider (``FARGATE`` or ``FARGATE_SPOT``) or the name of a custom capacity provider that you created.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Weight
 					"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The *weight* value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The ``weight`` value is taken into consideration after the ``base`` value, if defined, is satisfied.\n If no ``weight`` value is specified, the default value of ``0`` is used. When multiple capacity providers are specified within a capacity provider strategy, at least one of the capacity providers must have a weight value greater than zero and any capacity providers with a weight of ``0`` can't be used to place tasks. If you specify multiple capacity providers in a strategy that all have a weight of ``0``, any ``RunTask`` or ``CreateService`` actions using the capacity provider strategy will fail.\n Weight value characteristics:\n  +  Weight is considered after the base value is satisfied\n  +  Default value is ``0`` if not specified\n  +  Valid range: 0 to 1,000\n  +  At least one capacity provider must have a weight greater than zero\n  +  Capacity providers with weight of ``0`` cannot place tasks\n  \n Task distribution logic:\n  1.  Base satisfaction: The minimum number of tasks specified by the base value are placed on that capacity provider\n  1.  Weight distribution: After base requirements are met, additional tasks are distributed according to weight ratios\n  \n Examples:\n Equal Distribution: Two capacity providers both with weight ``1`` will split tasks evenly after base requirements are met.\n Weighted Distribution: If capacityProviderA has weight ``1`` and capacityProviderB has weight ``4``, then for every 1 task on A, 4 tasks will run on B.",
+						Description: "The *weight* value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The ``weight`` value is taken into consideration after the ``base`` value, if defined, is satisfied.\n If no ``weight`` value is specified, the default value of ``0`` is used. When multiple capacity providers are specified within a capacity provider strategy, at least one of the capacity providers must have a weight value greater than zero and any capacity providers with a weight of ``0`` can't be used to place tasks. If you specify multiple capacity providers in a strategy that all have a weight of ``0``, any ``RunTask`` or ``CreateService`` actions using the capacity provider strategy will fail.\n Weight value characteristics:\n  +  Weight is considered after the base value is satisfied\n  +  The default value is ``0`` if not specified\n  +  The valid range is 0 to 1,000\n  +  At least one capacity provider must have a weight greater than zero\n  +  Capacity providers with weight of ``0`` cannot place tasks\n  \n Task distribution logic:\n  1.  Base satisfaction: The minimum number of tasks specified by the base value are placed on that capacity provider\n  1.  Weight distribution: After base requirements are met, additional tasks are distributed according to weight ratios\n  \n Examples:\n Equal Distribution: Two capacity providers both with weight ``1`` will split tasks evenly after base requirements are met.\n Weighted Distribution: If capacityProviderA has weight ``1`` and capacityProviderB has weight ``4``, then for every 1 task on A, 4 tasks will run on B.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -138,6 +138,25 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "maximum": 1440,
 		//	      "minimum": 0,
 		//	      "type": "integer"
+		//	    },
+		//	    "CanaryConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for canary deployment strategy. Only valid when the deployment strategy is ``CANARY``. This configuration enables shifting a fixed percentage of traffic for testing, followed by shifting the remaining traffic after a bake period.",
+		//	      "properties": {
+		//	        "CanaryBakeTimeInMinutes": {
+		//	          "description": "The amount of time in minutes to wait during the canary phase before shifting the remaining production traffic to the new service revision. Valid values are 0 to 1440 minutes (24 hours). The default value is 10.",
+		//	          "maximum": 1440,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        },
+		//	        "CanaryPercent": {
+		//	          "description": "The percentage of production traffic to shift to the new service revision during the canary phase. Valid values are multiples of 0.1 from 0.1 to 100.0. The default value is 5.0.",
+		//	          "maximum": 100,
+		//	          "minimum": 0.1,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    },
 		//	    "DeploymentCircuitBreaker": {
 		//	      "additionalProperties": false,
@@ -203,6 +222,25 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "type": "array"
 		//	    },
+		//	    "LinearConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for linear deployment strategy. Only valid when the deployment strategy is ``LINEAR``. This configuration enables progressive traffic shifting in equal percentage increments with configurable bake times between each step.",
+		//	      "properties": {
+		//	        "StepBakeTimeInMinutes": {
+		//	          "description": "The amount of time in minutes to wait between each traffic shifting step during a linear deployment. Valid values are 0 to 1440 minutes (24 hours). The default value is 6. This bake time is not applied after reaching 100 percent traffic.",
+		//	          "maximum": 1440,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        },
+		//	        "StepPercent": {
+		//	          "description": "The percentage of production traffic to shift in each step during a linear deployment. Valid values are multiples of 0.1 from 3.0 to 100.0. The default value is 10.0.",
+		//	          "maximum": 100,
+		//	          "minimum": 3,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "MaximumPercent": {
 		//	      "description": "If a service is using the rolling update (``ECS``) deployment type, the ``maximumPercent`` parameter represents an upper limit on the number of your service's tasks that are allowed in the ``RUNNING`` or ``PENDING`` state during a deployment, as a percentage of the ``desiredCount`` (rounded down to the nearest integer). This parameter enables you to define the deployment batch size. For example, if your service is using the ``REPLICA`` service scheduler and has a ``desiredCount`` of four tasks and a ``maximumPercent`` value of 200%, the scheduler may start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default ``maximumPercent`` value for a service using the ``REPLICA`` service scheduler is 200%.\n The Amazon ECS scheduler uses this parameter to replace unhealthy tasks by starting replacement tasks first and then stopping the unhealthy tasks, as long as cluster resources for starting replacement tasks are available. For more information about how the scheduler replaces unhealthy tasks, see [Amazon ECS services](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html).\n If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types, and tasks in the service use the EC2 launch type, the *maximum percent* value is set to the default value. The *maximum percent* value is used to define the upper limit on the number of the tasks in the service that remain in the ``RUNNING`` state while the container instances are in the ``DRAINING`` state.\n  You can't specify a custom ``maximumPercent`` value for a service that uses either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and has tasks that use the EC2 launch type.\n  If the service uses either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types, and the tasks in the service use the Fargate launch type, the maximum percent value is not used. The value is still returned when describing your service.",
 		//	      "type": "integer"
@@ -215,7 +253,9 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "description": "The deployment strategy for the service. Choose from these valid values:\n  +  ``ROLLING`` - When you create a service which uses the rolling update (``ROLLING``) deployment strategy, the Amazon ECS service scheduler replaces the currently running tasks with new tasks. The number of tasks that Amazon ECS adds or removes from the service during a rolling update is controlled by the service deployment configuration.\n  +  ``BLUE_GREEN`` - A blue/green deployment strategy (``BLUE_GREEN``) is a release methodology that reduces downtime and risk by running two identical production environments called blue and green. With Amazon ECS blue/green deployments, you can validate new service revisions before directing production traffic to them. This approach provides a safer way to deploy changes with the ability to quickly roll back if needed.",
 		//	      "enum": [
 		//	        "ROLLING",
-		//	        "BLUE_GREEN"
+		//	        "BLUE_GREEN",
+		//	        "LINEAR",
+		//	        "CANARY"
 		//	      ],
 		//	      "type": "string"
 		//	    }
@@ -250,6 +290,23 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: BakeTimeInMinutes
 				"bake_time_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "The duration when both blue and green service revisions are running simultaneously after the production traffic has shifted.\n The following rules apply when you don't specify a value:\n  +  For rolling deployments, the value is set to 3 hours (180 minutes).\n  +  When you use an external deployment controller (``EXTERNAL``), or the ACD blue/green deployment controller (``CODE_DEPLOY``), the value is set to 3 hours (180 minutes).\n  +  For all other cases, the value is set to 36 hours (2160 minutes).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CanaryConfiguration
+				"canary_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CanaryBakeTimeInMinutes
+						"canary_bake_time_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The amount of time in minutes to wait during the canary phase before shifting the remaining production traffic to the new service revision. Valid values are 0 to 1440 minutes (24 hours). The default value is 10.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CanaryPercent
+						"canary_percent": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "The percentage of production traffic to shift to the new service revision during the canary phase. Valid values are multiples of 0.1 from 0.1 to 100.0. The default value is 5.0.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for canary deployment strategy. Only valid when the deployment strategy is ``CANARY``. This configuration enables shifting a fixed percentage of traffic for testing, followed by shifting the remaining traffic after a bake period.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: DeploymentCircuitBreaker
@@ -297,6 +354,23 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "An array of deployment lifecycle hook objects to run custom logic at specific stages of the deployment lifecycle.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LinearConfiguration
+				"linear_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: StepBakeTimeInMinutes
+						"step_bake_time_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The amount of time in minutes to wait between each traffic shifting step during a linear deployment. Valid values are 0 to 1440 minutes (24 hours). The default value is 6. This bake time is not applied after reaching 100 percent traffic.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: StepPercent
+						"step_percent": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "The percentage of production traffic to shift in each step during a linear deployment. Valid values are multiples of 0.1 from 3.0 to 100.0. The default value is 10.0.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for linear deployment strategy. Only valid when the deployment strategy is ``LINEAR``. This configuration enables progressive traffic shifting in equal percentage increments with configurable bake times between each step.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: MaximumPercent
@@ -425,18 +499,18 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The period of time, in seconds, that the Amazon Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after a task has first started. If you do not specify a health check grace period value, the default value of 0 is used. If you do not use any of the health checks, then ``healthCheckGracePeriodSeconds`` is unused.\n If your service has more running tasks than desired, unhealthy tasks in the grace period might be stopped to reach the desired count.",
+		//	  "description": "The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after a task has first started. If you do not specify a health check grace period value, the default value of 0 is used. If you do not use any of the health checks, then ``healthCheckGracePeriodSeconds`` is unused.\n If your service has more running tasks than desired, unhealthy tasks in the grace period might be stopped to reach the desired count.",
 		//	  "type": "integer"
 		//	}
 		"health_check_grace_period_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The period of time, in seconds, that the Amazon Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after a task has first started. If you do not specify a health check grace period value, the default value of 0 is used. If you do not use any of the health checks, then ``healthCheckGracePeriodSeconds`` is unused.\n If your service has more running tasks than desired, unhealthy tasks in the grace period might be stopped to reach the desired count.",
+			Description: "The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after a task has first started. If you do not specify a health check grace period value, the default value of 0 is used. If you do not use any of the health checks, then ``healthCheckGracePeriodSeconds`` is unused.\n If your service has more running tasks than desired, unhealthy tasks in the grace period might be stopped to reach the desired count.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LaunchType
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The launch type on which to run your service. For more information, see [Amazon ECS Launch Types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer Guide*.",
+		//	  "description": "The launch type on which to run your service. For more information, see [Amazon ECS Launch Types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer Guide*.\n  If you want to use Managed Instances, you must use the ``capacityProviderStrategy`` request parameter",
 		//	  "enum": [
 		//	    "EC2",
 		//	    "FARGATE",
@@ -445,7 +519,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"launch_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The launch type on which to run your service. For more information, see [Amazon ECS Launch Types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer Guide*.",
+			Description: "The launch type on which to run your service. For more information, see [Amazon ECS Launch Types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer Guide*.\n  If you want to use Managed Instances, you must use the ``capacityProviderStrategy`` request parameter",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LoadBalancers
@@ -807,6 +881,32 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "The configuration for this service to discover and connect to services, and be discovered by, and connected from, other services within a namespace.\n Tasks that run in a namespace can use short names to connect to services in the namespace. Tasks can connect to services across all of the clusters in the namespace. Tasks connect through a managed proxy container that collects logs and metrics for increased visibility. Only the tasks that Amazon ECS services create are supported with Service Connect. For more information, see [Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*.",
 		//	  "properties": {
+		//	    "AccessLogConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "The configuration for Service Connect access logging. Access logs capture detailed information about requests made to your service, including request patterns, response codes, and timing data. They can be useful for debugging connectivity issues, monitoring service performance, and auditing service-to-service communication for security and compliance purposes.\n  To enable access logs, you must also specify a ``logConfiguration`` in the ``serviceConnectConfiguration``.",
+		//	      "properties": {
+		//	        "Format": {
+		//	          "description": "The format for Service Connect access log output. Choose TEXT for human-readable logs or JSON for structured data that integrates well with log analysis tools.",
+		//	          "enum": [
+		//	            "TEXT",
+		//	            "JSON"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "IncludeQueryParameters": {
+		//	          "description": "Specifies whether to include query parameters in Service Connect access logs.\n When enabled, query parameters from HTTP requests are included in the access logs. Consider security and privacy implications when enabling this feature, as query parameters may contain sensitive information such as request IDs and tokens. By default, this parameter is ``DISABLED``.",
+		//	          "enum": [
+		//	            "DISABLED",
+		//	            "ENABLED"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Format"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "Enabled": {
 		//	      "description": "Specifies whether to use Service Connect with this service.",
 		//	      "type": "boolean"
@@ -998,6 +1098,23 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"service_connect_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccessLogConfiguration
+				"access_log_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Format
+						"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The format for Service Connect access log output. Choose TEXT for human-readable logs or JSON for structured data that integrates well with log analysis tools.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: IncludeQueryParameters
+						"include_query_parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether to include query parameters in Service Connect access logs.\n When enabled, query parameters from HTTP requests are included in the access logs. Consider security and privacy implications when enabling this feature, as query parameters may contain sensitive information such as request IDs and tokens. By default, this parameter is ``DISABLED``.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for Service Connect access logging. Access logs capture detailed information about requests made to your service, including request patterns, response codes, and timing data. They can be useful for debugging connectivity issues, monitoring service performance, and auditing service-to-service communication for security and compliance purposes.\n  To enable access logs, you must also specify a ``logConfiguration`` in the ``serviceConnectConfiguration``.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Specifies whether to use Service Connect with this service.",
@@ -1585,6 +1702,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::ECS::Service").WithTerraformTypeName("awscc_ecs_service")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_log_configuration":          "AccessLogConfiguration",
 		"advanced_configuration":            "AdvancedConfiguration",
 		"alarm_names":                       "AlarmNames",
 		"alarms":                            "Alarms",
@@ -1595,6 +1713,9 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"awsvpc_configuration":              "AwsvpcConfiguration",
 		"bake_time_in_minutes":              "BakeTimeInMinutes",
 		"base":                              "Base",
+		"canary_bake_time_in_minutes":       "CanaryBakeTimeInMinutes",
+		"canary_configuration":              "CanaryConfiguration",
+		"canary_percent":                    "CanaryPercent",
 		"capacity_provider":                 "CapacityProvider",
 		"capacity_provider_strategy":        "CapacityProviderStrategy",
 		"client_aliases":                    "ClientAliases",
@@ -1619,11 +1740,13 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"filesystem_type":                   "FilesystemType",
 		"force_new_deployment":              "ForceNewDeployment",
 		"force_new_deployment_nonce":        "ForceNewDeploymentNonce",
+		"format":                            "Format",
 		"header":                            "Header",
 		"health_check_grace_period_seconds": "HealthCheckGracePeriodSeconds",
 		"hook_details":                      "HookDetails",
 		"hook_target_arn":                   "HookTargetArn",
 		"idle_timeout_seconds":              "IdleTimeoutSeconds",
+		"include_query_parameters":          "IncludeQueryParameters",
 		"ingress_port_override":             "IngressPortOverride",
 		"iops":                              "Iops",
 		"issuer_certificate_authority":      "IssuerCertificateAuthority",
@@ -1633,6 +1756,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"launch_type":                       "LaunchType",
 		"lifecycle_hooks":                   "LifecycleHooks",
 		"lifecycle_stages":                  "LifecycleStages",
+		"linear_configuration":              "LinearConfiguration",
 		"load_balancer_name":                "LoadBalancerName",
 		"load_balancers":                    "LoadBalancers",
 		"log_configuration":                 "LogConfiguration",
@@ -1667,6 +1791,8 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"services":                          "Services",
 		"size_in_gi_b":                      "SizeInGiB",
 		"snapshot_id":                       "SnapshotId",
+		"step_bake_time_in_minutes":         "StepBakeTimeInMinutes",
+		"step_percent":                      "StepPercent",
 		"strategy":                          "Strategy",
 		"subnets":                           "Subnets",
 		"tag_specifications":                "TagSpecifications",

@@ -146,12 +146,23 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EndpointAccessMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"endpoint_access_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointConfiguration
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "A list of the endpoint types of the API. Use this property when creating an API. When importing an existing API, specify the endpoint configuration types using the ``Parameters`` property.",
+		//	  "description": "A list of the endpoint types and IP address types of the API. Use this property when creating an API. When importing an existing API, specify the endpoint configuration types using the ``Parameters`` property.",
 		//	  "properties": {
 		//	    "IpAddressType": {
 		//	      "description": "",
@@ -200,7 +211,7 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "A list of the endpoint types of the API. Use this property when creating an API. When importing an existing API, specify the endpoint configuration types using the ``Parameters`` property.",
+			Description: "A list of the endpoint types and IP address types of the API. Use this property when creating an API. When importing an existing API, specify the endpoint configuration types using the ``Parameters`` property.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FailOnWarnings
@@ -297,6 +308,17 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SecurityPolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"security_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -304,12 +326,14 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "",
+		//	    "description": "An array of key-value pairs to apply to this resource.\n For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "The value for the specified tag key.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -327,11 +351,13 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The value for the specified tag key.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -364,6 +390,7 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description":                  "Description",
 		"disable_execute_api_endpoint": "DisableExecuteApiEndpoint",
 		"e_tag":                        "ETag",
+		"endpoint_access_mode":         "EndpointAccessMode",
 		"endpoint_configuration":       "EndpointConfiguration",
 		"fail_on_warnings":             "FailOnWarnings",
 		"ip_address_type":              "IpAddressType",
@@ -375,6 +402,7 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"policy":                       "Policy",
 		"rest_api_id":                  "RestApiId",
 		"root_resource_id":             "RootResourceId",
+		"security_policy":              "SecurityPolicy",
 		"tags":                         "Tags",
 		"types":                        "Types",
 		"value":                        "Value",

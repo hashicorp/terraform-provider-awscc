@@ -109,6 +109,20 @@ func collectionResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the AWS KMS key used to encrypt the collection.",
+		//	  "type": "string"
+		//	}
+		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the AWS KMS key used to encrypt the collection.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -153,6 +167,7 @@ func collectionResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -295,6 +310,7 @@ func collectionResource(ctx context.Context) (resource.Resource, error) {
 		"dashboard_endpoint":  "DashboardEndpoint",
 		"description":         "Description",
 		"key":                 "Key",
+		"kms_key_arn":         "KmsKeyArn",
 		"name":                "Name",
 		"standby_replicas":    "StandbyReplicas",
 		"tags":                "Tags",

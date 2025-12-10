@@ -79,6 +79,13 @@
     "UpdatedAt": {
       "description": "Last update time of the attachment.",
       "type": "string"
+    },
+    "LastModificationErrors": {
+      "description": "Errors from the last modification of the attachment.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
   },
   "definitions": {
@@ -183,7 +190,8 @@
     "/properties/AttachmentPolicyRuleNumber",
     "/properties/SegmentName",
     "/properties/NetworkFunctionGroupName",
-    "/properties/ResourceArn"
+    "/properties/ResourceArn",
+    "/properties/LastModificationErrors"
   ],
   "primaryIdentifier": [
     "/properties/AttachmentId"

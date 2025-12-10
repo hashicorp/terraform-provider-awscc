@@ -1272,6 +1272,56 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: WarmThroughput
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Warm throughput configuration for the table",
+		//	  "properties": {
+		//	    "ReadUnitsPerSecond": {
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "WriteUnitsPerSecond": {
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"warm_throughput": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ReadUnitsPerSecond
+				"read_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.AtLeast(1),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: WriteUnitsPerSecond
+				"write_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.AtLeast(1),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Warm throughput configuration for the table",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -1331,6 +1381,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		"provisioned_throughput":         "ProvisionedThroughput",
 		"read_capacity_auto_scaling":     "ReadCapacityAutoScaling",
 		"read_capacity_units":            "ReadCapacityUnits",
+		"read_units_per_second":          "ReadUnitsPerSecond",
 		"region":                         "Region",
 		"regular_columns":                "RegularColumns",
 		"replica_specifications":         "ReplicaSpecifications",
@@ -1344,8 +1395,10 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		"target_value":                "TargetValue",
 		"value":                       "Value",
 		"view_type":                   "ViewType",
+		"warm_throughput":             "WarmThroughput",
 		"write_capacity_auto_scaling": "WriteCapacityAutoScaling",
 		"write_capacity_units":        "WriteCapacityUnits",
+		"write_units_per_second":      "WriteUnitsPerSecond",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

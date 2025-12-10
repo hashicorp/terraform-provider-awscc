@@ -101,6 +101,18 @@
           "type": "string"
         }
       }
+    },
+    "Endpoint": {
+      "description": "The DSQL cluster endpoint.",
+      "type": "string"
+    },
+    "PolicyVersion": {
+      "description": "The version number of the cluster's resource based policy",
+      "type": "string"
+    },
+    "PolicyDocument": {
+      "description": "The IAM policy applied to the cluster resource.",
+      "type": "string"
     }
   },
   "additionalProperties": false,
@@ -126,7 +138,9 @@
     "/properties/CreationTime",
     "/properties/Status",
     "/properties/VpcEndpointServiceName",
-    "/properties/EncryptionDetails"
+    "/properties/EncryptionDetails",
+    "/properties/PolicyVersion",
+    "/properties/Endpoint"
   ],
   "writeOnlyProperties": [
     "/properties/KmsEncryptionKey"
@@ -137,12 +151,14 @@
         "dsql:CreateCluster",
         "dsql:UpdateCluster",
         "dsql:GetCluster",
+        "dsql:GetClusterPolicy",
         "dsql:TagResource",
         "dsql:GetVpcEndpointServiceName",
         "dsql:ListTagsForResource",
         "iam:CreateServiceLinkedRole",
         "dsql:PutMultiRegionProperties",
         "dsql:AddPeerCluster",
+        "dsql:PutClusterPolicy",
         "dsql:PutWitnessRegion",
         "kms:Decrypt",
         "kms:Encrypt",
@@ -153,6 +169,7 @@
     "read": {
       "permissions": [
         "dsql:GetCluster",
+        "dsql:GetClusterPolicy",
         "dsql:GetVpcEndpointServiceName",
         "dsql:ListTagsForResource",
         "tag:GetTagKeys",
@@ -163,14 +180,17 @@
       "permissions": [
         "dsql:UpdateCluster",
         "dsql:GetCluster",
+        "dsql:GetClusterPolicy",
         "dsql:UntagResource",
         "dsql:TagResource",
         "dsql:GetVpcEndpointServiceName",
         "dsql:ListTagsForResource",
+        "dsql:PutClusterPolicy",
         "dsql:PutMultiRegionProperties",
         "dsql:PutWitnessRegion",
         "dsql:AddPeerCluster",
         "dsql:RemovePeerCluster",
+        "dsql:DeleteClusterPolicy",
         "kms:Decrypt",
         "kms:Encrypt",
         "kms:GenerateDataKey",

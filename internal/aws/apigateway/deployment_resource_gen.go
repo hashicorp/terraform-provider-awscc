@@ -296,14 +296,14 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
-		//	        "description": "",
+		//	        "description": "An array of key-value pairs to apply to this resource.\n For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
 		//	        "properties": {
 		//	          "Key": {
-		//	            "description": "The key name of the tag",
+		//	            "description": "A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.",
 		//	            "type": "string"
 		//	          },
 		//	          "Value": {
-		//	            "description": "The value for the tag",
+		//	            "description": "The value for the specified tag key.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -620,7 +620,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Key
 							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The key name of the tag",
+								Description: "A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.",
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
@@ -632,7 +632,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The value for the tag",
+								Description: "The value for the specified tag key.",
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/

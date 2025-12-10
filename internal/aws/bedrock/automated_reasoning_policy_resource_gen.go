@@ -14,6 +14,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -85,6 +87,66 @@ func automatedReasoningPolicyResource(ctx context.Context) (resource.Resource, e
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ForceDelete
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": false,
+		//	  "description": "Specifies whether to force delete the automated reasoning policy even if it has active resources. When false , Amazon Bedrock validates if all artifacts have been deleted (e.g. policy version, test case, test result) for a policy before deletion. When true , Amazon Bedrock will delete the policy and all its artifacts without validation. Default is false",
+		//	  "type": "boolean"
+		//	}
+		"force_delete": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to force delete the automated reasoning policy even if it has active resources. When false , Amazon Bedrock validates if all artifacts have been deleted (e.g. policy version, test case, test result) for a policy before deletion. When true , Amazon Bedrock will delete the policy and all its artifacts without validation. Default is false",
+			Optional:    true,
+			Computed:    true,
+			Default:     booldefault.StaticBool(false),
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// ForceDelete is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The KMS key with which the Policy's assets will be encrypted at rest.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "^arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
+		//	  "type": "string"
+		//	}
+		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The KMS key with which the Policy's assets will be encrypted at rest.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The KMS key with which the Policy's assets will be encrypted at rest.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "^(arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:((key/[a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+)))|([a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+)$",
+		//	  "type": "string"
+		//	}
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The KMS key with which the Policy's assets will be encrypted at rest.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:((key/[a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+)))|([a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+)$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// KmsKeyId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
@@ -637,8 +699,11 @@ func automatedReasoningPolicyResource(ctx context.Context) (resource.Resource, e
 		"definition_hash":      "DefinitionHash",
 		"description":          "Description",
 		"expression":           "Expression",
+		"force_delete":         "ForceDelete",
 		"id":                   "Id",
 		"key":                  "Key",
+		"kms_key_arn":          "KmsKeyArn",
+		"kms_key_id":           "KmsKeyId",
 		"name":                 "Name",
 		"policy_arn":           "PolicyArn",
 		"policy_definition":    "PolicyDefinition",
@@ -654,6 +719,10 @@ func automatedReasoningPolicyResource(ctx context.Context) (resource.Resource, e
 		"version":              "Version",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/KmsKeyId",
+		"/properties/ForceDelete",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

@@ -121,7 +121,8 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	        "description": "FirewallDomainRedirectionAction",
 		//	        "enum": [
 		//	          "DGA",
-		//	          "DNS_TUNNELING"
+		//	          "DNS_TUNNELING",
+		//	          "DICTIONARY_DGA"
 		//	        ],
 		//	        "type": "string"
 		//	      },

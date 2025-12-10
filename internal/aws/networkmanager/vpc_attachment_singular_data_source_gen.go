@@ -100,6 +100,21 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "The Region where the edge is located.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LastModificationErrors
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Errors from the last modification of the attachment.",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"last_modification_errors": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Errors from the last modification of the attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NetworkFunctionGroupName
 		// CloudFormation resource type schema:
 		//
@@ -479,6 +494,7 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		"edge_location":                          "EdgeLocation",
 		"ipv_6_support":                          "Ipv6Support",
 		"key":                                    "Key",
+		"last_modification_errors":               "LastModificationErrors",
 		"network_function_group_name":            "NetworkFunctionGroupName",
 		"options":                                "Options",
 		"owner_account_id":                       "OwnerAccountId",

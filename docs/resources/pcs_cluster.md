@@ -172,8 +172,10 @@ Optional:
 
 - `accounting` (Attributes) The accounting configuration includes configurable settings for Slurm accounting. (see [below for nested schema](#nestedatt--slurm_configuration--accounting))
 - `auth_key` (Attributes) The shared Slurm key for authentication, also known as the cluster secret. (see [below for nested schema](#nestedatt--slurm_configuration--auth_key))
+- `jwt_auth` (Attributes) JWT authentication configuration for Slurm. (see [below for nested schema](#nestedatt--slurm_configuration--jwt_auth))
 - `scale_down_idle_time_in_seconds` (Number) The time before an idle node is scaled down.
 - `slurm_custom_settings` (Attributes List) Additional Slurm-specific configuration that directly maps to Slurm settings. (see [below for nested schema](#nestedatt--slurm_configuration--slurm_custom_settings))
+- `slurm_rest` (Attributes) The SlurmRest configuration includes configurable settings for Slurm Rest. (see [below for nested schema](#nestedatt--slurm_configuration--slurm_rest))
 
 <a id="nestedatt--slurm_configuration--accounting"></a>
 ### Nested Schema for `slurm_configuration.accounting`
@@ -193,6 +195,23 @@ Optional:
 - `secret_version` (String) The version of the shared Slurm key.
 
 
+<a id="nestedatt--slurm_configuration--jwt_auth"></a>
+### Nested Schema for `slurm_configuration.jwt_auth`
+
+Optional:
+
+- `jwt_key` (Attributes) JWT key configuration. (see [below for nested schema](#nestedatt--slurm_configuration--jwt_auth--jwt_key))
+
+<a id="nestedatt--slurm_configuration--jwt_auth--jwt_key"></a>
+### Nested Schema for `slurm_configuration.jwt_auth.jwt_key`
+
+Optional:
+
+- `secret_arn` (String) The Amazon Resource Name (ARN) of the JWT key secret.
+- `secret_version` (String) The version of the JWT key secret.
+
+
+
 <a id="nestedatt--slurm_configuration--slurm_custom_settings"></a>
 ### Nested Schema for `slurm_configuration.slurm_custom_settings`
 
@@ -200,6 +219,14 @@ Optional:
 
 - `parameter_name` (String) AWS PCS supports configuration of the following Slurm parameters for clusters: Prolog, Epilog, and SelectTypeParameters.
 - `parameter_value` (String) The value for the configured Slurm setting.
+
+
+<a id="nestedatt--slurm_configuration--slurm_rest"></a>
+### Nested Schema for `slurm_configuration.slurm_rest`
+
+Optional:
+
+- `mode` (String) The default value is `STANDARD`. A value of `STANDARD` means that Slurm Rest is enabled.
 
 
 

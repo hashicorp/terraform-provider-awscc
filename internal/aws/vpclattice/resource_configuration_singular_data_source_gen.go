@@ -44,6 +44,40 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: CustomDomainName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 255,
+		//	  "minLength": 3,
+		//	  "type": "string"
+		//	}
+		"custom_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: DomainVerificationId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 20,
+		//	  "minLength": 20,
+		//	  "pattern": "^dv-[a-fA-F0-9]{17}$",
+		//	  "type": "string"
+		//	}
+		"domain_verification_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: GroupDomain
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 255,
+		//	  "minLength": 3,
+		//	  "type": "string"
+		//	}
+		"group_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -278,8 +312,11 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		"allow_association_to_sharable_service_network": "AllowAssociationToSharableServiceNetwork",
 		"arn":                               "Arn",
 		"arn_resource":                      "ArnResource",
+		"custom_domain_name":                "CustomDomainName",
 		"dns_resource":                      "DnsResource",
 		"domain_name":                       "DomainName",
+		"domain_verification_id":            "DomainVerificationId",
+		"group_domain":                      "GroupDomain",
 		"ip_address_type":                   "IpAddressType",
 		"ip_resource":                       "IpResource",
 		"key":                               "Key",

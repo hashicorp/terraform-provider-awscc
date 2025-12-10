@@ -22,6 +22,63 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::SecretsManager::RotationSchedule resource.
 func rotationScheduleDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ExternalSecretRotationMetadata
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The list of metadata needed to successfully rotate a managed external secret.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "The metadata needed to successfully rotate a managed external secret. Each metadata item is a key and value pair of strings in a JSON text string.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the metadata item. You can specify a value that's 1 to 256 characters in length.",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the metadata item. You can specify a value that's 1 to 2048 characters in length.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"external_secret_rotation_metadata": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the metadata item. You can specify a value that's 1 to 256 characters in length.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the metadata item. You can specify a value that's 1 to 2048 characters in length.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The list of metadata needed to successfully rotate a managed external secret.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ExternalSecretRotationRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the IAM role that is used by Secrets Manager to rotate a managed external secret.",
+		//	  "type": "string"
+		//	}
+		"external_secret_rotation_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the IAM role that is used by Secrets Manager to rotate a managed external secret.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HostedRotationLambda
 		// CloudFormation resource type schema:
 		//
@@ -244,26 +301,30 @@ func rotationScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithCloudFormationTypeName("AWS::SecretsManager::RotationSchedule").WithTerraformTypeName("awscc_secretsmanager_rotation_schedule")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"automatically_after_days":     "AutomaticallyAfterDays",
-		"duration":                     "Duration",
-		"exclude_characters":           "ExcludeCharacters",
-		"hosted_rotation_lambda":       "HostedRotationLambda",
-		"kms_key_arn":                  "KmsKeyArn",
-		"master_secret_arn":            "MasterSecretArn",
-		"master_secret_kms_key_arn":    "MasterSecretKmsKeyArn",
-		"rotate_immediately_on_update": "RotateImmediatelyOnUpdate",
-		"rotation_lambda_arn":          "RotationLambdaARN",
-		"rotation_lambda_name":         "RotationLambdaName",
-		"rotation_rules":               "RotationRules",
-		"rotation_schedule_id":         "Id",
-		"rotation_type":                "RotationType",
-		"runtime":                      "Runtime",
-		"schedule_expression":          "ScheduleExpression",
-		"secret_id":                    "SecretId",
-		"superuser_secret_arn":         "SuperuserSecretArn",
-		"superuser_secret_kms_key_arn": "SuperuserSecretKmsKeyArn",
-		"vpc_security_group_ids":       "VpcSecurityGroupIds",
-		"vpc_subnet_ids":               "VpcSubnetIds",
+		"automatically_after_days":          "AutomaticallyAfterDays",
+		"duration":                          "Duration",
+		"exclude_characters":                "ExcludeCharacters",
+		"external_secret_rotation_metadata": "ExternalSecretRotationMetadata",
+		"external_secret_rotation_role_arn": "ExternalSecretRotationRoleArn",
+		"hosted_rotation_lambda":            "HostedRotationLambda",
+		"key":                               "Key",
+		"kms_key_arn":                       "KmsKeyArn",
+		"master_secret_arn":                 "MasterSecretArn",
+		"master_secret_kms_key_arn":         "MasterSecretKmsKeyArn",
+		"rotate_immediately_on_update":      "RotateImmediatelyOnUpdate",
+		"rotation_lambda_arn":               "RotationLambdaARN",
+		"rotation_lambda_name":              "RotationLambdaName",
+		"rotation_rules":                    "RotationRules",
+		"rotation_schedule_id":              "Id",
+		"rotation_type":                     "RotationType",
+		"runtime":                           "Runtime",
+		"schedule_expression":               "ScheduleExpression",
+		"secret_id":                         "SecretId",
+		"superuser_secret_arn":              "SuperuserSecretArn",
+		"superuser_secret_kms_key_arn":      "SuperuserSecretKmsKeyArn",
+		"value":                             "Value",
+		"vpc_security_group_ids":            "VpcSecurityGroupIds",
+		"vpc_subnet_ids":                    "VpcSubnetIds",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

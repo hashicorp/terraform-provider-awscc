@@ -95,6 +95,15 @@ func logicallyAirGappedBackupVaultDataSource(ctx context.Context) (datasource.Da
 		"min_retention_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: MpaApprovalTeamArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"mpa_approval_team_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Notifications
 		// CloudFormation resource type schema:
 		//
@@ -168,18 +177,19 @@ func logicallyAirGappedBackupVaultDataSource(ctx context.Context) (datasource.Da
 	opts = opts.WithCloudFormationTypeName("AWS::Backup::LogicallyAirGappedBackupVault").WithTerraformTypeName("awscc_backup_logically_air_gapped_backup_vault")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_policy":       "AccessPolicy",
-		"backup_vault_arn":    "BackupVaultArn",
-		"backup_vault_events": "BackupVaultEvents",
-		"backup_vault_name":   "BackupVaultName",
-		"backup_vault_tags":   "BackupVaultTags",
-		"encryption_key_arn":  "EncryptionKeyArn",
-		"max_retention_days":  "MaxRetentionDays",
-		"min_retention_days":  "MinRetentionDays",
-		"notifications":       "Notifications",
-		"sns_topic_arn":       "SNSTopicArn",
-		"vault_state":         "VaultState",
-		"vault_type":          "VaultType",
+		"access_policy":         "AccessPolicy",
+		"backup_vault_arn":      "BackupVaultArn",
+		"backup_vault_events":   "BackupVaultEvents",
+		"backup_vault_name":     "BackupVaultName",
+		"backup_vault_tags":     "BackupVaultTags",
+		"encryption_key_arn":    "EncryptionKeyArn",
+		"max_retention_days":    "MaxRetentionDays",
+		"min_retention_days":    "MinRetentionDays",
+		"mpa_approval_team_arn": "MpaApprovalTeamArn",
+		"notifications":         "Notifications",
+		"sns_topic_arn":         "SNSTopicArn",
+		"vault_state":           "VaultState",
+		"vault_type":            "VaultType",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

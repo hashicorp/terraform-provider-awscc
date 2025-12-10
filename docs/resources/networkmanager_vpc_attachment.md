@@ -136,6 +136,7 @@ resource "awscc_networkmanager_vpc_attachment" "example" {
 - `created_at` (String) Creation time of the attachment.
 - `edge_location` (String) The Region where the edge is located.
 - `id` (String) Uniquely identifies the resource.
+- `last_modification_errors` (List of String) Errors from the last modification of the attachment.
 - `network_function_group_name` (String) The name of the network function group attachment.
 - `owner_account_id` (String) Owner account of the attachment.
 - `resource_arn` (String) The ARN of the Resource.

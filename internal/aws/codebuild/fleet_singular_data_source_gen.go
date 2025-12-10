@@ -37,7 +37,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "minimum": 1,
+		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
 		"base_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/

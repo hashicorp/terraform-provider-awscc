@@ -300,6 +300,19 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "A comment to describe the distribution. The comment cannot be longer than 128 characters.",
 		//	      "type": "string"
 		//	    },
+		//	    "ConnectionFunctionAssociation": {
+		//	      "additionalProperties": false,
+		//	      "description": "",
+		//	      "properties": {
+		//	        "Id": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Id"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "ConnectionMode": {
 		//	      "description": "This field specifies whether the connection mode is through a standard distribution (direct) or a multi-tenant distribution with distribution tenants (tenant-only).",
 		//	      "enum": [
@@ -783,7 +796,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "integer"
 		//	              },
 		//	              "IpAddressType": {
-		//	                "description": "",
+		//	                "description": "Specifies which IP protocol CloudFront uses when connecting to your origin. If your origin uses both IPv4 and IPv6 protocols, you can choose ``dualstack`` to help optimize reliability.",
 		//	                "enum": [
 		//	                  "ipv4",
 		//	                  "ipv6",
@@ -913,6 +926,10 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	                "default": 30,
 		//	                "description": "Specifies how long, in seconds, CloudFront waits for a response from the origin. This is also known as the *origin response timeout*. The minimum timeout is 1 second, the maximum is 120 seconds, and the default (if you don't specify otherwise) is 30 seconds.\n For more information, see [Response timeout](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginResponseTimeout) in the *Amazon CloudFront Developer Guide*.",
 		//	                "type": "integer"
+		//	              },
+		//	              "OwnerAccountId": {
+		//	                "description": "",
+		//	                "type": "string"
 		//	              },
 		//	              "VpcOriginId": {
 		//	                "description": "The VPC origin ID.",
@@ -1075,6 +1092,40 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "SslSupportMethod": {
 		//	          "description": "In CloudFormation, this field name is ``SslSupportMethod``. Note the different capitalization.\n  If the distribution uses ``Aliases`` (alternate domain names or CNAMEs), specify which viewers the distribution accepts HTTPS connections from.\n  +  ``sni-only`` ? The distribution accepts HTTPS connections from only viewers that support [server name indication (SNI)](https://docs.aws.amazon.com/https://en.wikipedia.org/wiki/Server_Name_Indication). This is recommended. Most browsers and clients support SNI.\n  +  ``vip`` ? The distribution accepts HTTPS connections from all viewers including those that don't support SNI. This is not recommended, and results in additional monthly charges from CloudFront.\n  +  ``static-ip`` - Do not specify this value unless your distribution has been enabled for this feature by the CloudFront team. If you have a use case that requires static IP addresses for a distribution, contact CloudFront through the [Center](https://docs.aws.amazon.com/support/home).\n  \n If the distribution uses the CloudFront domain name such as ``d111111abcdef8.cloudfront.net``, don't set a value for this field.",
 		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ViewerMtlsConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "",
+		//	      "properties": {
+		//	        "Mode": {
+		//	          "default": "required",
+		//	          "enum": [
+		//	            "required",
+		//	            "optional"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "TrustStoreConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "AdvertiseTrustStoreCaNames": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "IgnoreCertificateExpiry": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "TrustStoreId": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "TrustStoreId"
+		//	          ],
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -1496,6 +1547,28 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Default:     stringdefault.StaticString(""),
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ConnectionFunctionAssociation
+				"connection_function_association": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Id
+						"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ConnectionMode
@@ -2272,7 +2345,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: IpAddressType
 									"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "",
+										Description: "Specifies which IP protocol CloudFront uses when connecting to your origin. If your origin uses both IPv4 and IPv6 protocols, you can choose ``dualstack`` to help optimize reliability.",
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
@@ -2510,6 +2583,15 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Default:     int64default.StaticInt64(30),
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: OwnerAccountId
+									"owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: VpcOriginId
@@ -2791,6 +2873,70 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: ViewerMtlsConfig
+				"viewer_mtls_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Mode
+						"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Default:  stringdefault.StaticString("required"),
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"required",
+									"optional",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TrustStoreConfig
+						"trust_store_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AdvertiseTrustStoreCaNames
+								"advertise_trust_store_ca_names": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: IgnoreCertificateExpiry
+								"ignore_certificate_expiry": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: TrustStoreId
+								"trust_store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: WebACLId
 				"web_acl_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Multi-tenant distributions only support WAF V2 web ACLs.\n  A unique identifier that specifies the WAF web ACL, if any, to associate with this distribution. To specify a web ACL created using the latest version of WAF, use the ACL ARN, for example ``arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111``. To specify a web ACL created using WAF Classic, use the ACL ID, for example ``a1b2c3d4-5678-90ab-cdef-EXAMPLE11111``.\n WAF is a web application firewall that lets you monitor the HTTP and HTTPS requests that are forwarded to CloudFront, and lets you control access to your content. Based on conditions that you specify, such as the IP addresses that requests originate from or the values of query strings, CloudFront responds to requests either with the requested content or with an HTTP 403 status code (Forbidden). You can also configure CloudFront to return a custom error page when a request is blocked. For more information about WAF, see the [Developer Guide](https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html).",
@@ -2926,6 +3072,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.IsGlobalResourceType(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"acm_certificate_arn":             "AcmCertificateArn",
+		"advertise_trust_store_ca_names":  "AdvertiseTrustStoreCaNames",
 		"aliases":                         "Aliases",
 		"allowed_methods":                 "AllowedMethods",
 		"anycast_ip_list_id":              "AnycastIpListId",
@@ -2938,6 +3085,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"comment":                         "Comment",
 		"compress":                        "Compress",
 		"connection_attempts":             "ConnectionAttempts",
+		"connection_function_association": "ConnectionFunctionAssociation",
 		"connection_mode":                 "ConnectionMode",
 		"connection_timeout":              "ConnectionTimeout",
 		"continuous_deployment_policy_id": "ContinuousDeploymentPolicyId",
@@ -2974,6 +3122,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"https_port":                      "HTTPSPort",
 		"iam_certificate_id":              "IamCertificateId",
 		"id":                              "Id",
+		"ignore_certificate_expiry":       "IgnoreCertificateExpiry",
 		"include_body":                    "IncludeBody",
 		"include_cookies":                 "IncludeCookies",
 		"ip_address_type":                 "IpAddressType",
@@ -2988,6 +3137,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"members":                         "Members",
 		"min_ttl":                         "MinTTL",
 		"minimum_protocol_version":        "MinimumProtocolVersion",
+		"mode":                            "Mode",
 		"name":                            "Name",
 		"origin_access_control_id":        "OriginAccessControlId",
 		"origin_access_identity":          "OriginAccessIdentity",
@@ -3003,6 +3153,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"origin_shield_region":            "OriginShieldRegion",
 		"origin_ssl_protocols":            "OriginSSLProtocols",
 		"origins":                         "Origins",
+		"owner_account_id":                "OwnerAccountId",
 		"parameter_definitions":           "ParameterDefinitions",
 		"path_pattern":                    "PathPattern",
 		"prefix":                          "Prefix",
@@ -3029,10 +3180,13 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                            "Tags",
 		"target_origin_id":                "TargetOriginId",
 		"tenant_config":                   "TenantConfig",
+		"trust_store_config":              "TrustStoreConfig",
+		"trust_store_id":                  "TrustStoreId",
 		"trusted_key_groups":              "TrustedKeyGroups",
 		"trusted_signers":                 "TrustedSigners",
 		"value":                           "Value",
 		"viewer_certificate":              "ViewerCertificate",
+		"viewer_mtls_config":              "ViewerMtlsConfig",
 		"viewer_protocol_policy":          "ViewerProtocolPolicy",
 		"vpc_origin_config":               "VpcOriginConfig",
 		"vpc_origin_id":                   "VpcOriginId",

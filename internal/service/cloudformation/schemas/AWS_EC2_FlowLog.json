@@ -70,7 +70,8 @@
         "Subnet",
         "VPC",
         "TransitGateway",
-        "TransitGatewayAttachment"
+        "TransitGatewayAttachment",
+        "RegionalNatGateway"
       ]
     },
     "Tags": {

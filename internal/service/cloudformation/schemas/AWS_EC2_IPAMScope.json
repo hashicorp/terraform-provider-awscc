@@ -3,6 +3,28 @@
   "description": "Resource Schema of AWS::EC2::IPAMScope Type",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ipam.git",
   "definitions": {
+    "IpamScopeExternalAuthorityConfiguration": {
+      "description": "External service configuration to connect your AWS IPAM scope.",
+      "type": "object",
+      "properties": {
+        "IpamScopeExternalAuthorityType": {
+          "description": "An external service connecting to your AWS IPAM scope.",
+          "type": "string",
+          "enum": [
+            "infoblox"
+          ]
+        },
+        "ExternalResourceIdentifier": {
+          "description": "Resource identifier of the scope in the external service connecting to your AWS IPAM scope.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "IpamScopeExternalAuthorityType",
+        "ExternalResourceIdentifier"
+      ],
+      "additionalProperties": false
+    },
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
       "type": "object",
@@ -71,6 +93,9 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "ExternalAuthorityConfiguration": {
+      "$ref": "#/definitions/IpamScopeExternalAuthorityConfiguration"
     }
   },
   "additionalProperties": false,

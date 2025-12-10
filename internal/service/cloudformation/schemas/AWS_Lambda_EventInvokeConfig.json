@@ -58,7 +58,7 @@
     "FunctionName": {
       "description": "The name of the Lambda function.",
       "type": "string",
-      "pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]+(-[a-z]+)+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"
+      "pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]+(-[a-z]+)+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST(\\.PUBLISHED)?|[a-zA-Z0-9-_]+))?$"
     },
     "MaximumEventAgeInSeconds": {
       "description": "The maximum age of a request that Lambda sends to a function for processing.",
@@ -75,7 +75,7 @@
     "Qualifier": {
       "description": "The identifier of a version or alias.",
       "type": "string",
-      "pattern": "^(|[a-zA-Z0-9$_-]{1,129})$"
+      "pattern": "^\\$(LATEST(\\.PUBLISHED)?)|[a-zA-Z0-9$_-]{1,129}$"
     }
   },
   "tagging": {

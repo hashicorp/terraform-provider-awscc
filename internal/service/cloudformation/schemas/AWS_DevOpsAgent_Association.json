@@ -1,0 +1,692 @@
+{
+  "typeName": "AWS::DevOpsAgent::Association",
+  "description": "Resource Type definition for AWS::DevOpsAgent::Association defining how the AgentSpace interacts with external services like GitHub, Slack, AWS accounts, and others.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "AssociationId": {
+      "description": "The unique identifier of the association",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "ServiceId": {
+      "description": "The identifier for the associated service. For SourceAws and Aws configurations, this must be 'aws'. For all other service types, this is a UUID generated from the RegisterService command",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "AgentSpaceId": {
+      "description": "The unique identifier of the AgentSpace",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "ServiceConfiguration": {
+      "description": "The configuration that directs how AgentSpace interacts with the given service",
+      "type": "object",
+      "oneOf": [
+        {
+          "properties": {
+            "SourceAws": {
+              "$ref": "#/definitions/SourceAwsConfiguration"
+            }
+          },
+          "required": [
+            "SourceAws"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "Aws": {
+              "$ref": "#/definitions/AWSConfiguration"
+            }
+          },
+          "required": [
+            "Aws"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "GitHub": {
+              "$ref": "#/definitions/GitHubConfiguration"
+            }
+          },
+          "required": [
+            "GitHub"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "Slack": {
+              "$ref": "#/definitions/SlackConfiguration"
+            }
+          },
+          "required": [
+            "Slack"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "Dynatrace": {
+              "$ref": "#/definitions/DynatraceConfiguration"
+            }
+          },
+          "required": [
+            "Dynatrace"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "ServiceNow": {
+              "$ref": "#/definitions/ServiceNowConfiguration"
+            }
+          },
+          "required": [
+            "ServiceNow"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "MCPServer": {
+              "$ref": "#/definitions/MCPServerConfiguration"
+            }
+          },
+          "required": [
+            "MCPServer"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "GitLab": {
+              "$ref": "#/definitions/GitLabConfiguration"
+            }
+          },
+          "required": [
+            "GitLab"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "MCPServerDatadog": {
+              "$ref": "#/definitions/MCPServerDatadogConfiguration"
+            }
+          },
+          "required": [
+            "MCPServerDatadog"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "MCPServerSplunk": {
+              "$ref": "#/definitions/MCPServerSplunkConfiguration"
+            }
+          },
+          "required": [
+            "MCPServerSplunk"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "MCPServerNewRelic": {
+              "$ref": "#/definitions/MCPServerNewRelicConfiguration"
+            }
+          },
+          "required": [
+            "MCPServerNewRelic"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "EventChannel": {
+              "$ref": "#/definitions/EventChannelConfiguration"
+            }
+          },
+          "required": [
+            "EventChannel"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "SourceAwsConfiguration": {
+      "description": "AWS association for 'source' account",
+      "type": "object",
+      "properties": {
+        "AccountId": {
+          "description": "AWS Account Id corresponding to provided resources",
+          "type": "string",
+          "pattern": "\\d{12}"
+        },
+        "AccountType": {
+          "description": "Account Type 'source' for DevOpsAgent monitoring",
+          "type": "string",
+          "enum": [
+            "source"
+          ]
+        },
+        "AssumableRoleArn": {
+          "description": "Role ARN to be assumed by DevOpsAgent to operate on behalf of customer",
+          "type": "string"
+        },
+        "Resources": {
+          "$ref": "#/definitions/AWSResourceList"
+        },
+        "Tags": {
+          "$ref": "#/definitions/AWSTagList"
+        }
+      },
+      "required": [
+        "AccountId",
+        "AccountType",
+        "AssumableRoleArn"
+      ],
+      "additionalProperties": false
+    },
+    "AWSConfiguration": {
+      "description": "AWS association for 'monitor' account",
+      "type": "object",
+      "properties": {
+        "AccountId": {
+          "description": "AWS Account Id corresponding to provided resources",
+          "type": "string",
+          "pattern": "\\d{12}"
+        },
+        "AccountType": {
+          "description": "Account Type 'monitor' for DevOpsAgent monitoring",
+          "type": "string",
+          "enum": [
+            "monitor"
+          ]
+        },
+        "AssumableRoleArn": {
+          "description": "Role ARN to be assumed by DevOpsAgent to operate on behalf of customer",
+          "type": "string"
+        },
+        "Resources": {
+          "$ref": "#/definitions/AWSResourceList"
+        },
+        "Tags": {
+          "$ref": "#/definitions/AWSTagList"
+        }
+      },
+      "required": [
+        "AccountId",
+        "AccountType",
+        "AssumableRoleArn"
+      ],
+      "additionalProperties": false
+    },
+    "GitHubConfiguration": {
+      "description": "GitHub repository integration configuration",
+      "type": "object",
+      "properties": {
+        "RepoName": {
+          "description": "Associated Github repo name",
+          "type": "string"
+        },
+        "RepoId": {
+          "description": "Associated Github repo ID",
+          "type": "string"
+        },
+        "Owner": {
+          "description": "Repository owner",
+          "type": "string"
+        },
+        "OwnerType": {
+          "description": "Type of repository owner",
+          "type": "string",
+          "enum": [
+            "organization",
+            "user"
+          ]
+        }
+      },
+      "required": [
+        "RepoName",
+        "RepoId",
+        "Owner",
+        "OwnerType"
+      ],
+      "additionalProperties": false
+    },
+    "SlackConfiguration": {
+      "description": "Slack workspace integration configuration",
+      "type": "object",
+      "properties": {
+        "WorkspaceId": {
+          "description": "Associated Slack workspace ID",
+          "type": "string",
+          "pattern": "^[TE][A-Z0-9]+$"
+        },
+        "WorkspaceName": {
+          "description": "Associated Slack workspace name",
+          "type": "string"
+        },
+        "TransmissionTarget": {
+          "$ref": "#/definitions/SlackTransmissionTarget"
+        }
+      },
+      "required": [
+        "WorkspaceId",
+        "WorkspaceName",
+        "TransmissionTarget"
+      ],
+      "additionalProperties": false
+    },
+    "SlackTransmissionTarget": {
+      "description": "Transmission targets for agent notifications",
+      "type": "object",
+      "properties": {
+        "IncidentResponseTarget": {
+          "description": "Destination for IncidentResponse agent.",
+          "$ref": "#/definitions/SlackChannel"
+        }
+      },
+      "required": [
+        "IncidentResponseTarget"
+      ],
+      "additionalProperties": false
+    },
+    "SlackChannel": {
+      "description": "Slack channel configuration",
+      "type": "object",
+      "properties": {
+        "ChannelName": {
+          "description": "Slack channel name",
+          "type": "string"
+        },
+        "ChannelId": {
+          "description": "Slack channel ID",
+          "type": "string",
+          "pattern": "^[CGD][A-Z0-9]+$",
+          "minLength": 8,
+          "maxLength": 16
+        }
+      },
+      "required": [
+        "ChannelId"
+      ],
+      "additionalProperties": false
+    },
+    "DynatraceConfiguration": {
+      "description": "Dynatrace monitoring configuration",
+      "type": "object",
+      "properties": {
+        "EnvId": {
+          "description": "Dynatrace environment id",
+          "type": "string"
+        },
+        "Resources": {
+          "description": "List of Dynatrace resources to monitor",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "EnableWebhookUpdates": {
+          "description": "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "EnvId"
+      ],
+      "additionalProperties": false
+    },
+    "ServiceNowConfiguration": {
+      "description": "ServiceNow integration configuration",
+      "type": "object",
+      "properties": {
+        "InstanceId": {
+          "description": "ServiceNow instance ID",
+          "type": "string"
+        },
+        "EnableWebhookUpdates": {
+          "description": "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "MCPServerConfiguration": {
+      "description": "MCP server configuration",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "The name of the MCP server",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "Endpoint": {
+          "description": "MCP server endpoint URL",
+          "type": "string",
+          "pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$"
+        },
+        "Tools": {
+          "description": "List of MCP tools that can be used with the association",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          }
+        },
+        "Description": {
+          "description": "The description of the MCP server",
+          "type": "string"
+        },
+        "EnableWebhookUpdates": {
+          "description": "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Name",
+        "Endpoint",
+        "Tools"
+      ],
+      "additionalProperties": false
+    },
+    "MCPServerDatadogConfiguration": {
+      "description": "Datadog MCP server configuration",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "The name of the MCP server",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "Endpoint": {
+          "description": "MCP server endpoint URL",
+          "type": "string",
+          "pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$"
+        },
+        "Description": {
+          "description": "The description of the MCP server",
+          "type": "string"
+        },
+        "EnableWebhookUpdates": {
+          "description": "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Name",
+        "Endpoint"
+      ],
+      "additionalProperties": false
+    },
+    "MCPServerSplunkConfiguration": {
+      "description": "Splunk MCP server configuration",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "The name of the MCP server",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "Endpoint": {
+          "description": "MCP server endpoint URL",
+          "type": "string",
+          "pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$"
+        },
+        "Description": {
+          "description": "The description of the MCP server",
+          "type": "string"
+        },
+        "EnableWebhookUpdates": {
+          "description": "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Name",
+        "Endpoint"
+      ],
+      "additionalProperties": false
+    },
+    "AWSResource": {
+      "description": "AWS resource definition",
+      "type": "object",
+      "properties": {
+        "ResourceType": {
+          "description": "Resource type",
+          "type": "string",
+          "enum": [
+            "AWS::CloudFormation::Stack",
+            "AWS::ECR::Repository",
+            "AWS::S3::Bucket",
+            "AWS::S3::Object"
+          ]
+        },
+        "ResourceArn": {
+          "description": "The Amazon Resource Name (ARN) of the resource",
+          "type": "string"
+        },
+        "ResourceMetadata": {
+          "description": "Additional metadata for the resource",
+          "type": "object"
+        }
+      },
+      "required": [
+        "ResourceArn"
+      ],
+      "additionalProperties": false
+    },
+    "AWSResourceList": {
+      "description": "List of AWS resources",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AWSResource"
+      }
+    },
+    "AWSTagList": {
+      "description": "List of AWS tags as key-value pairs",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/KeyValuePair"
+      }
+    },
+    "KeyValuePair": {
+      "description": "A key-value pair for tags",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "GitLabConfiguration": {
+      "description": "GitLab project integration configuration",
+      "type": "object",
+      "properties": {
+        "ProjectId": {
+          "description": "GitLab numeric project ID",
+          "type": "string"
+        },
+        "ProjectPath": {
+          "description": "Full GitLab project path (e.g., namespace/project-name)",
+          "type": "string"
+        },
+        "InstanceIdentifier": {
+          "description": "GitLab instance identifier",
+          "type": "string"
+        },
+        "EnableWebhookUpdates": {
+          "description": "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "ProjectId",
+        "ProjectPath"
+      ],
+      "additionalProperties": false
+    },
+    "MCPServerNewRelicConfiguration": {
+      "description": "NewRelic MCP server configuration",
+      "type": "object",
+      "properties": {
+        "AccountId": {
+          "description": "New Relic Account ID",
+          "type": "string",
+          "pattern": "^[0-9]+$",
+          "minLength": 6
+        },
+        "Endpoint": {
+          "description": "MCP server endpoint URL (e.g., https://mcp.newrelic.com/mcp/)",
+          "type": "string",
+          "pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$"
+        }
+      },
+      "required": [
+        "AccountId",
+        "Endpoint"
+      ],
+      "additionalProperties": false
+    },
+    "EventChannelConfiguration": {
+      "description": "EventChannelconfiguration",
+      "type": "object",
+      "properties": {
+        "EnableWebhookUpdates": {
+          "description": "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "AgentSpaceId": {
+      "description": "The unique identifier of the AgentSpace",
+      "$ref": "#/definitions/AgentSpaceId"
+    },
+    "AssociationId": {
+      "description": "The unique identifier of the association",
+      "$ref": "#/definitions/AssociationId"
+    },
+    "ServiceId": {
+      "description": "The identifier for the associated service",
+      "$ref": "#/definitions/ServiceId"
+    },
+    "Configuration": {
+      "description": "The configuration that directs how AgentSpace interacts with the given service",
+      "$ref": "#/definitions/ServiceConfiguration"
+    },
+    "CreatedAt": {
+      "description": "The timestamp when the association was created",
+      "type": "string",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "description": "The timestamp when the association was last updated",
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": false
+  },
+  "required": [
+    "AgentSpaceId",
+    "ServiceId",
+    "Configuration"
+  ],
+  "createOnlyProperties": [
+    "/properties/AgentSpaceId"
+  ],
+  "readOnlyProperties": [
+    "/properties/AssociationId",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Configuration/Dynatrace/EnableWebhookUpdates",
+    "/properties/Configuration/ServiceNow/EnableWebhookUpdates",
+    "/properties/Configuration/MCPServer/EnableWebhookUpdates",
+    "/properties/Configuration/MCPServerDatadog/EnableWebhookUpdates",
+    "/properties/Configuration/MCPServerSplunk/EnableWebhookUpdates",
+    "/properties/Configuration/GitLab/EnableWebhookUpdates",
+    "/properties/Configuration/EventChannel/EnableWebhookUpdates"
+  ],
+  "primaryIdentifier": [
+    "/properties/AgentSpaceId",
+    "/properties/AssociationId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "aidevops:AssociateService",
+        "aidevops:GetAgentSpace",
+        "aidevops:ListAssociations",
+        "aidevops:GetAssociation",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "aidevops:GetAssociation",
+        "aidevops:ListAssociations",
+        "aidevops:GetAgentSpace"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "aidevops:UpdateAssociation",
+        "aidevops:ListAssociations",
+        "aidevops:GetAgentSpace",
+        "aidevops:GetAssociation",
+        "iam:PassRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "aidevops:DisassociateService",
+        "aidevops:GetAgentSpace",
+        "aidevops:GetAssociation"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "AgentSpaceId": {
+            "$ref": "resource-schema.json#/properties/AgentSpaceId"
+          }
+        },
+        "required": [
+          "AgentSpaceId"
+        ]
+      },
+      "permissions": [
+        "aidevops:ListAssociations",
+        "aidevops:GetAgentSpace"
+      ]
+    }
+  }
+}

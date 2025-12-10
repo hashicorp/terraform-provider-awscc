@@ -84,6 +84,10 @@
           "type": "string"
         }
       }
+    },
+    "LatestVersion": {
+      "description": "The latest version references of the container recipe.",
+      "$ref": "#/definitions/LatestVersion"
     }
   },
   "definitions": {
@@ -236,6 +240,29 @@
         "Name",
         "Value"
       ]
+    },
+    "LatestVersion": {
+      "description": "The latest version references of the container recipe.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Arn": {
+          "description": "The latest version ARN of the created container recipe.",
+          "type": "string"
+        },
+        "Major": {
+          "description": "The latest version ARN of the created container recipe, with the same major version.",
+          "type": "string"
+        },
+        "Minor": {
+          "description": "The latest version ARN of the created container recipe, with the same minor version.",
+          "type": "string"
+        },
+        "Patch": {
+          "description": "The latest version ARN of the created container recipe, with the same patch version.",
+          "type": "string"
+        }
+      }
     }
   },
   "additionalProperties": false,
@@ -244,7 +271,6 @@
       "required": [
         "Name",
         "Version",
-        "Components",
         "ParentImage",
         "TargetRepository",
         "ContainerType"
@@ -252,7 +278,12 @@
     }
   ],
   "readOnlyProperties": [
-    "/properties/Arn"
+    "/properties/Arn",
+    "/properties/LatestVersion",
+    "/properties/LatestVersion/Arn",
+    "/properties/LatestVersion/Major",
+    "/properties/LatestVersion/Minor",
+    "/properties/LatestVersion/Patch"
   ],
   "primaryIdentifier": [
     "/properties/Arn"

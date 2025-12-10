@@ -69,7 +69,18 @@ Read-Only:
 
 Read-Only:
 
+- `language_configuration` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--audio--language_configuration))
 - `modality_processing` (Attributes) (see [below for nested schema](#nestedatt--override_configuration--audio--modality_processing))
+
+<a id="nestedatt--override_configuration--audio--language_configuration"></a>
+### Nested Schema for `override_configuration.audio.language_configuration`
+
+Read-Only:
+
+- `generative_output_language` (String)
+- `identify_multiple_languages` (Boolean)
+- `input_languages` (List of String)
+
 
 <a id="nestedatt--override_configuration--audio--modality_processing"></a>
 ### Nested Schema for `override_configuration.audio.modality_processing`

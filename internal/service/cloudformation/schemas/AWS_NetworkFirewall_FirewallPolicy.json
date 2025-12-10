@@ -98,6 +98,9 @@
         },
         "TLSInspectionConfigurationArn": {
           "$ref": "#/definitions/ResourceArn"
+        },
+        "EnableTLSSessionHolding": {
+          "type": "boolean"
         }
       },
       "required": [

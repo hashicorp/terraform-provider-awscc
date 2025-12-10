@@ -65,6 +65,17 @@ resource "awscc_imagebuilder_workflow" "example" {
 
 - `arn` (String) The Amazon Resource Name (ARN) of the workflow.
 - `id` (String) Uniquely identifies the resource.
+- `latest_version` (Attributes) The latest version references of the workflow. (see [below for nested schema](#nestedatt--latest_version))
+
+<a id="nestedatt--latest_version"></a>
+### Nested Schema for `latest_version`
+
+Read-Only:
+
+- `arn` (String) The latest version ARN of the created workflow.
+- `major` (String) The latest version ARN of the created workflow, with the same major version.
+- `minor` (String) The latest version ARN of the created workflow, with the same minor version.
+- `patch` (String) The latest version ARN of the created workflow, with the same patch version.
 
 ## Import
 

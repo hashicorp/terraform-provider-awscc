@@ -107,8 +107,10 @@ resource "awscc_ec2_vpn_connection" "example" {
  You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.
 - `transport_transit_gateway_attachment_id` (String) The transit gateway attachment ID to use for the VPN tunnel.
  Required if ``OutsideIpAddressType`` is set to ``PrivateIpv4``.
+- `tunnel_bandwidth` (String)
 - `tunnel_inside_ip_version` (String) Indicate whether the VPN tunnels process IPv4 or IPv6 traffic.
  Default: ``ipv4``
+- `vpn_concentrator_id` (String)
 - `vpn_gateway_id` (String) The ID of the virtual private gateway at the AWS side of the VPN connection.
  You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.
 - `vpn_tunnel_options_specifications` (Attributes List) The tunnel options for the VPN connection. (see [below for nested schema](#nestedatt--vpn_tunnel_options_specifications))
@@ -206,6 +208,9 @@ Optional:
 
 Optional:
 
+- `bgp_log_enabled` (Boolean)
+- `bgp_log_group_arn` (String)
+- `bgp_log_output_format` (String)
 - `log_enabled` (Boolean) Enable or disable VPN tunnel logging feature. Default value is ``False``.
  Valid values: ``True`` | ``False``
 - `log_group_arn` (String) The Amazon Resource Name (ARN) of the CloudWatch log group to send logs to.

@@ -1330,6 +1330,11 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    {
 		//	      "required": [
+		//	        "S3VectorsConfiguration"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
 		//	        "MongoDbAtlasConfiguration"
 		//	      ]
 		//	    },
@@ -1714,6 +1719,40 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "S3VectorsConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Contains the storage configuration of the knowledge base for S3 vectors.",
+		//	      "oneOf": [
+		//	        {
+		//	          "required": [
+		//	            "IndexArn"
+		//	          ]
+		//	        },
+		//	        {
+		//	          "required": [
+		//	            "VectorBucketArn",
+		//	            "IndexName"
+		//	          ]
+		//	        }
+		//	      ],
+		//	      "properties": {
+		//	        "IndexArn": {
+		//	          "description": "The Amazon Resource Name (ARN) of the vector index used for the knowledge base. This ARN identifies the specific vector index resource within Amazon Bedrock.",
+		//	          "type": "string"
+		//	        },
+		//	        "IndexName": {
+		//	          "description": "The name of the vector index used for the knowledge base. This name identifies the vector index within the Amazon Bedrock service.",
+		//	          "maxLength": 63,
+		//	          "minLength": 3,
+		//	          "type": "string"
+		//	        },
+		//	        "VectorBucketArn": {
+		//	          "description": "The Amazon Resource Name (ARN) of the S3 bucket where vector embeddings are stored. This bucket contains the vector data used by the knowledge base.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "Type": {
 		//	      "description": "The storage type of a knowledge base.",
 		//	      "enum": [
@@ -1722,6 +1761,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	        "RDS",
 		//	        "MONGO_DB_ATLAS",
 		//	        "NEPTUNE_ANALYTICS",
+		//	        "S3_VECTORS",
 		//	        "OPENSEARCH_MANAGED_CLUSTER"
 		//	      ],
 		//	      "type": "string"
@@ -2407,6 +2447,47 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: S3VectorsConfiguration
+				"s3_vectors_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IndexArn
+						"index_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) of the vector index used for the knowledge base. This ARN identifies the specific vector index resource within Amazon Bedrock.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: IndexName
+						"index_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the vector index used for the knowledge base. This name identifies the vector index within the Amazon Bedrock service.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(3, 63),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: VectorBucketArn
+						"vector_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) of the S3 bucket where vector embeddings are stored. This bucket contains the vector data used by the knowledge base.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains the storage configuration of the knowledge base for S3 vectors.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: Type
 				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The storage type of a knowledge base.",
@@ -2419,6 +2500,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							"RDS",
 							"MONGO_DB_ATLAS",
 							"NEPTUNE_ANALYTICS",
+							"S3_VECTORS",
 							"OPENSEARCH_MANAGED_CLUSTER",
 						),
 						fwvalidators.NotNullString(),
@@ -2535,6 +2617,8 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		"generation_context":                       "GenerationContext",
 		"graph_arn":                                "GraphArn",
 		"inclusion":                                "Inclusion",
+		"index_arn":                                "IndexArn",
+		"index_name":                               "IndexName",
 		"kendra_index_arn":                         "KendraIndexArn",
 		"kendra_knowledge_base_configuration":      "KendraKnowledgeBaseConfiguration",
 		"knowledge_base_arn":                       "KnowledgeBaseArn",
@@ -2558,6 +2642,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		"resource_arn":                             "ResourceArn",
 		"role_arn":                                 "RoleArn",
 		"s3_location":                              "S3Location",
+		"s3_vectors_configuration":                 "S3VectorsConfiguration",
 		"serverless_configuration":                 "ServerlessConfiguration",
 		"sql":                                      "Sql",
 		"sql_knowledge_base_configuration":         "SqlKnowledgeBaseConfiguration",
@@ -2577,6 +2662,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		"updated_at":                               "UpdatedAt",
 		"uri":                                      "URI",
 		"username_password_secret_arn":             "UsernamePasswordSecretArn",
+		"vector_bucket_arn":                        "VectorBucketArn",
 		"vector_field":                             "VectorField",
 		"vector_index_name":                        "VectorIndexName",
 		"vector_knowledge_base_configuration":      "VectorKnowledgeBaseConfiguration",

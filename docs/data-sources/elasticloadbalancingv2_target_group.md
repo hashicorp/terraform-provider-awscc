@@ -36,6 +36,7 @@ Data Source schema for AWS::ElasticLoadBalancingV2::TargetGroup
 - `protocol` (String) The protocol to use for routing traffic to the targets.
 - `protocol_version` (String) [HTTP/HTTPS protocol] The protocol version. The possible values are GRPC, HTTP1, and HTTP2.
 - `tags` (Attributes List) The tags. (see [below for nested schema](#nestedatt--tags))
+- `target_control_port` (Number) The port that the target control agent uses to communicate the available capacity of targets to the load balancer.
 - `target_group_arn` (String) The ARN of the Target Group
 - `target_group_attributes` (Attributes Set) The attributes. (see [below for nested schema](#nestedatt--target_group_attributes))
 - `target_group_full_name` (String) The full name of the target group.
@@ -80,3 +81,4 @@ Read-Only:
 - `availability_zone` (String) An Availability Zone or all. This determines whether the target receives traffic from the load balancer nodes in the specified Availability Zone or from all enabled Availability Zones for the load balancer.
 - `id` (String) The ID of the target. If the target type of the target group is instance, specify an instance ID. If the target type is ip, specify an IP address. If the target type is lambda, specify the ARN of the Lambda function. If the target type is alb, specify the ARN of the Application Load Balancer target.
 - `port` (Number) The port on which the target is listening. If the target group protocol is GENEVE, the supported port is 6081. If the target type is alb, the targeted Application Load Balancer must have at least one listener whose port matches the target group port. Not used if the target is a Lambda function.
+- `quic_server_id` (String) The Server ID used by targets when using QUIC or TCP_QUIC protocols.

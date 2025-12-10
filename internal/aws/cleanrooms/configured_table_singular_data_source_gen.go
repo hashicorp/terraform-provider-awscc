@@ -626,6 +626,43 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	          "minLength": 8,
 		//	          "type": "string"
 		//	        },
+		//	        "Region": {
+		//	          "enum": [
+		//	            "us-west-1",
+		//	            "us-west-2",
+		//	            "us-east-1",
+		//	            "us-east-2",
+		//	            "af-south-1",
+		//	            "ap-east-1",
+		//	            "ap-south-2",
+		//	            "ap-southeast-1",
+		//	            "ap-southeast-2",
+		//	            "ap-southeast-5",
+		//	            "ap-southeast-4",
+		//	            "ap-southeast-7",
+		//	            "ap-south-1",
+		//	            "ap-northeast-3",
+		//	            "ap-northeast-1",
+		//	            "ap-northeast-2",
+		//	            "ca-central-1",
+		//	            "ca-west-1",
+		//	            "eu-south-1",
+		//	            "eu-west-3",
+		//	            "eu-south-2",
+		//	            "eu-central-2",
+		//	            "eu-central-1",
+		//	            "eu-north-1",
+		//	            "eu-west-1",
+		//	            "eu-west-2",
+		//	            "me-south-1",
+		//	            "me-central-1",
+		//	            "il-central-1",
+		//	            "sa-east-1",
+		//	            "mx-central-1",
+		//	            "ap-east-2"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "TableName": {
 		//	          "maxLength": 128,
 		//	          "type": "string"
@@ -649,6 +686,43 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	        "DatabaseName": {
 		//	          "maxLength": 128,
 		//	          "pattern": "^[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?$",
+		//	          "type": "string"
+		//	        },
+		//	        "Region": {
+		//	          "enum": [
+		//	            "us-west-1",
+		//	            "us-west-2",
+		//	            "us-east-1",
+		//	            "us-east-2",
+		//	            "af-south-1",
+		//	            "ap-east-1",
+		//	            "ap-south-2",
+		//	            "ap-southeast-1",
+		//	            "ap-southeast-2",
+		//	            "ap-southeast-5",
+		//	            "ap-southeast-4",
+		//	            "ap-southeast-7",
+		//	            "ap-south-1",
+		//	            "ap-northeast-3",
+		//	            "ap-northeast-1",
+		//	            "ap-northeast-2",
+		//	            "ca-central-1",
+		//	            "ca-west-1",
+		//	            "eu-south-1",
+		//	            "eu-west-3",
+		//	            "eu-south-2",
+		//	            "eu-central-2",
+		//	            "eu-central-1",
+		//	            "eu-north-1",
+		//	            "eu-west-1",
+		//	            "eu-west-2",
+		//	            "me-south-1",
+		//	            "me-central-1",
+		//	            "il-central-1",
+		//	            "sa-east-1",
+		//	            "mx-central-1",
+		//	            "ap-east-2"
+		//	          ],
 		//	          "type": "string"
 		//	        },
 		//	        "TableName": {
@@ -746,6 +820,10 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 						"output_location": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
+						// Property: Region
+						"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: TableName
 						"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
@@ -762,6 +840,10 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: DatabaseName
 						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Region
+						"region": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: TableName
@@ -919,6 +1001,7 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		"output_constraints":          "OutputConstraints",
 		"output_location":             "OutputLocation",
 		"policy":                      "Policy",
+		"region":                      "Region",
 		"scalar_functions":            "ScalarFunctions",
 		"schema_name":                 "SchemaName",
 		"secret_arn":                  "SecretArn",

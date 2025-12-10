@@ -41,6 +41,9 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "EnableTLSSessionHolding": {
+		//	      "type": "boolean"
+		//	    },
 		//	    "PolicyVariables": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -265,6 +268,10 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	}
 		"firewall_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnableTLSSessionHolding
+				"enable_tls_session_holding": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: PolicyVariables
 				"policy_variables": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -523,6 +530,7 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		"definition":                         "Definition",
 		"description":                        "Description",
 		"dimensions":                         "Dimensions",
+		"enable_tls_session_holding":         "EnableTLSSessionHolding",
 		"firewall_policy":                    "FirewallPolicy",
 		"firewall_policy_arn":                "FirewallPolicyArn",
 		"firewall_policy_id":                 "FirewallPolicyId",

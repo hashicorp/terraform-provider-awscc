@@ -24,6 +24,7 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -63,6 +64,46 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DeletionSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The deletion settings of the image, indicating whether to delete the underlying resources in addition to the image.",
+		//	  "properties": {
+		//	    "ExecutionRole": {
+		//	      "description": "The execution role to use for deleting the image, as well as underlying resources.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ExecutionRole"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"deletion_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExecutionRole
+				"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The execution role to use for deleting the image, as well as underlying resources.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The deletion settings of the image, indicating whether to delete the underlying resources in addition to the image.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// DeletionSettings is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DistributionConfigurationArn
 		// CloudFormation resource type schema:
@@ -124,6 +165,53 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ImagePipelineExecutionSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The image pipeline execution settings of the image.",
+		//	  "properties": {
+		//	    "DeploymentId": {
+		//	      "description": "The deployment ID of the pipeline, used to trigger new image pipeline executions.",
+		//	      "type": "string"
+		//	    },
+		//	    "OnUpdate": {
+		//	      "description": "Whether to trigger the image pipeline when the pipeline is updated. False by default.",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"image_pipeline_execution_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DeploymentId
+				"deployment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The deployment ID of the pipeline, used to trigger new image pipeline executions.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: OnUpdate
+				"on_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether to trigger the image pipeline when the pipeline is updated. False by default.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The image pipeline execution settings of the image.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ImagePipelineExecutionSettings is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ImageRecipeArn
 		// CloudFormation resource type schema:
@@ -304,6 +392,61 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LatestVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The latest version references of the image.",
+		//	  "properties": {
+		//	    "Arn": {
+		//	      "description": "The latest version ARN of the created image.",
+		//	      "type": "string"
+		//	    },
+		//	    "Major": {
+		//	      "description": "The latest version ARN of the created image, with the same major version.",
+		//	      "type": "string"
+		//	    },
+		//	    "Minor": {
+		//	      "description": "The latest version ARN of the created image, with the same minor version.",
+		//	      "type": "string"
+		//	    },
+		//	    "Patch": {
+		//	      "description": "The latest version ARN of the created image, with the same patch version.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"latest_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Arn
+				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created image.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Major
+				"major": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created image, with the same major version.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Minor
+				"minor": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created image, with the same minor version.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Patch
+				"patch": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created image, with the same patch version.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The latest version references of the image.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: LoggingConfiguration
@@ -536,35 +679,47 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                              "Arn",
-		"container_recipe_arn":             "ContainerRecipeArn",
-		"container_tags":                   "ContainerTags",
-		"distribution_configuration_arn":   "DistributionConfigurationArn",
-		"ecr_configuration":                "EcrConfiguration",
-		"enhanced_image_metadata_enabled":  "EnhancedImageMetadataEnabled",
-		"execution_role":                   "ExecutionRole",
-		"image_id":                         "ImageId",
-		"image_recipe_arn":                 "ImageRecipeArn",
-		"image_scanning_configuration":     "ImageScanningConfiguration",
-		"image_scanning_enabled":           "ImageScanningEnabled",
-		"image_tests_configuration":        "ImageTestsConfiguration",
-		"image_tests_enabled":              "ImageTestsEnabled",
-		"image_uri":                        "ImageUri",
-		"infrastructure_configuration_arn": "InfrastructureConfigurationArn",
-		"log_group_name":                   "LogGroupName",
-		"logging_configuration":            "LoggingConfiguration",
-		"name":                             "Name",
-		"on_failure":                       "OnFailure",
-		"parallel_group":                   "ParallelGroup",
-		"parameters":                       "Parameters",
-		"repository_name":                  "RepositoryName",
-		"tags":                             "Tags",
-		"timeout_minutes":                  "TimeoutMinutes",
-		"value":                            "Value",
-		"workflow_arn":                     "WorkflowArn",
-		"workflows":                        "Workflows",
+		"arn":                               "Arn",
+		"container_recipe_arn":              "ContainerRecipeArn",
+		"container_tags":                    "ContainerTags",
+		"deletion_settings":                 "DeletionSettings",
+		"deployment_id":                     "DeploymentId",
+		"distribution_configuration_arn":    "DistributionConfigurationArn",
+		"ecr_configuration":                 "EcrConfiguration",
+		"enhanced_image_metadata_enabled":   "EnhancedImageMetadataEnabled",
+		"execution_role":                    "ExecutionRole",
+		"image_id":                          "ImageId",
+		"image_pipeline_execution_settings": "ImagePipelineExecutionSettings",
+		"image_recipe_arn":                  "ImageRecipeArn",
+		"image_scanning_configuration":      "ImageScanningConfiguration",
+		"image_scanning_enabled":            "ImageScanningEnabled",
+		"image_tests_configuration":         "ImageTestsConfiguration",
+		"image_tests_enabled":               "ImageTestsEnabled",
+		"image_uri":                         "ImageUri",
+		"infrastructure_configuration_arn":  "InfrastructureConfigurationArn",
+		"latest_version":                    "LatestVersion",
+		"log_group_name":                    "LogGroupName",
+		"logging_configuration":             "LoggingConfiguration",
+		"major":                             "Major",
+		"minor":                             "Minor",
+		"name":                              "Name",
+		"on_failure":                        "OnFailure",
+		"on_update":                         "OnUpdate",
+		"parallel_group":                    "ParallelGroup",
+		"parameters":                        "Parameters",
+		"patch":                             "Patch",
+		"repository_name":                   "RepositoryName",
+		"tags":                              "Tags",
+		"timeout_minutes":                   "TimeoutMinutes",
+		"value":                             "Value",
+		"workflow_arn":                      "WorkflowArn",
+		"workflows":                         "Workflows",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/DeletionSettings",
+		"/properties/ImagePipelineExecutionSettings",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(720).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

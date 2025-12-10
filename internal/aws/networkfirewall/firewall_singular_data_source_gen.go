@@ -276,6 +276,18 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END NESTED OBJECT*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: TransitGatewayAttachmentId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "^tgw-attach-[0-9a-z]+$",
+		//	  "type": "string"
+		//	}
+		"transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -334,6 +346,7 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"subnet_id":                           "SubnetId",
 		"subnet_mappings":                     "SubnetMappings",
 		"tags":                                "Tags",
+		"transit_gateway_attachment_id":       "TransitGatewayAttachmentId",
 		"transit_gateway_id":                  "TransitGatewayId",
 		"value":                               "Value",
 		"vpc_id":                              "VpcId",

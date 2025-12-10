@@ -89,6 +89,9 @@
         "TargetBackupVault": {
           "type": "string"
         },
+        "TargetLogicallyAirGappedBackupVaultArn": {
+          "type": "string"
+        },
         "StartWindowMinutes": {
           "type": "number"
         },

@@ -68,11 +68,11 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": false,
-		//	  "description": "",
+		//	  "description": "Indicates whether to enable stabilization when creating or updating an LCU reservation. This ensures that the final stack status reflects the status of the LCU reservation. The default is ``false``.",
 		//	  "type": "boolean"
 		//	}
 		"enable_capacity_reservation_provision_stabilize": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "Indicates whether to enable stabilization when creating or updating an LCU reservation. This ensures that the final stack status reflects the status of the LCU reservation. The default is ``false``.",
 			Optional:    true,
 			Computed:    true,
 			Default:     booldefault.StaticBool(false),

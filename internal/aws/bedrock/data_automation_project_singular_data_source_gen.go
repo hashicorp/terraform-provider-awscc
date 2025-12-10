@@ -164,6 +164,41 @@ func dataAutomationProjectDataSource(ctx context.Context) (datasource.DataSource
 		//	    "Audio": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "LanguageConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "GenerativeOutputLanguage": {
+		//	              "enum": [
+		//	                "DEFAULT",
+		//	                "EN"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "IdentifyMultipleLanguages": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "InputLanguages": {
+		//	              "items": {
+		//	                "enum": [
+		//	                  "EN",
+		//	                  "DE",
+		//	                  "ES",
+		//	                  "FR",
+		//	                  "IT",
+		//	                  "PT",
+		//	                  "JA",
+		//	                  "KO",
+		//	                  "CN",
+		//	                  "TW",
+		//	                  "HK"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "ModalityProcessing": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
@@ -301,6 +336,25 @@ func dataAutomationProjectDataSource(ctx context.Context) (datasource.DataSource
 				// Property: Audio
 				"audio": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LanguageConfiguration
+						"language_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: GenerativeOutputLanguage
+								"generative_output_language": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: IdentifyMultipleLanguages
+								"identify_multiple_languages": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: InputLanguages
+								"input_languages": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: ModalityProcessing
 						"modality_processing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1218,12 +1272,16 @@ func dataAutomationProjectDataSource(ctx context.Context) (datasource.DataSource
 		"document":                      "Document",
 		"extraction":                    "Extraction",
 		"generative_field":              "GenerativeField",
+		"generative_output_language":    "GenerativeOutputLanguage",
 		"granularity":                   "Granularity",
+		"identify_multiple_languages":   "IdentifyMultipleLanguages",
 		"image":                         "Image",
+		"input_languages":               "InputLanguages",
 		"jpeg":                          "jpeg",
 		"key":                           "Key",
 		"kms_encryption_context":        "KmsEncryptionContext",
 		"kms_key_id":                    "KmsKeyId",
+		"language_configuration":        "LanguageConfiguration",
 		"last_modified_time":            "LastModifiedTime",
 		"modality_processing":           "ModalityProcessing",
 		"modality_routing":              "ModalityRouting",

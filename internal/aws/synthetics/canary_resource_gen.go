@@ -180,17 +180,39 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  "oneOf": [
 		//	    {
 		//	      "required": [
+		//	        "Handler",
 		//	        "S3Bucket",
 		//	        "S3Key"
 		//	      ]
 		//	    },
 		//	    {
 		//	      "required": [
+		//	        "BlueprintTypes",
+		//	        "S3Bucket",
+		//	        "S3Key"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "Handler",
+		//	        "Script"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "BlueprintTypes",
 		//	        "Script"
 		//	      ]
 		//	    }
 		//	  ],
 		//	  "properties": {
+		//	    "BlueprintTypes": {
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 1,
+		//	      "type": "array"
+		//	    },
 		//	    "Dependencies": {
 		//	      "description": "List of Lambda layers to attach to the canary",
 		//	      "items": {
@@ -238,13 +260,22 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "Handler"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BlueprintTypes
+				"blueprint_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeAtMost(1),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: Dependencies
 				"dependencies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -291,7 +322,11 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Handler
 				"handler": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: S3Bucket
 				"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1147,6 +1182,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		"artifact_s3_location": "ArtifactS3Location",
 		"base_canary_run_id":   "BaseCanaryRunId",
 		"base_screenshots":     "BaseScreenshots",
+		"blueprint_types":      "BlueprintTypes",
 		"browser_configs":      "BrowserConfigs",
 		"browser_type":         "BrowserType",
 		"canary_id":            "Id",

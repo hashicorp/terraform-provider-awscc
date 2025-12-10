@@ -8,6 +8,7 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
@@ -119,6 +120,42 @@ func transitGatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"dns_support": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EncryptionSupport
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "disable",
+		//	    "enable"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"encryption_support": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"disable",
+					"enable",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// EncryptionSupport is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: EncryptionSupportState
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"encryption_support_state": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -309,6 +346,8 @@ func transitGatewayResource(ctx context.Context) (resource.Resource, error) {
 		"default_route_table_propagation":    "DefaultRouteTablePropagation",
 		"description":                        "Description",
 		"dns_support":                        "DnsSupport",
+		"encryption_support":                 "EncryptionSupport",
+		"encryption_support_state":           "EncryptionSupportState",
 		"key":                                "Key",
 		"multicast_support":                  "MulticastSupport",
 		"propagation_default_route_table_id": "PropagationDefaultRouteTableId",
@@ -321,6 +360,9 @@ func transitGatewayResource(ctx context.Context) (resource.Resource, error) {
 		"vpn_ecmp_support":                   "VpnEcmpSupport",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/EncryptionSupport",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

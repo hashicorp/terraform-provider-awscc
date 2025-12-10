@@ -1,0 +1,280 @@
+{
+  "typeName": "AWS::EC2::VPCEncryptionControl",
+  "description": "Resource Type definition for AWS::EC2::VPCEncryptionControl",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ec2-vpcencryptioncontrol.git",
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags"
+    ]
+  },
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
+    "ResourceExclusions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "InternetGateway": {
+          "$ref": "#/definitions/VpcEncryptionControlExclusion"
+        },
+        "EgressOnlyInternetGateway": {
+          "$ref": "#/definitions/VpcEncryptionControlExclusion"
+        },
+        "NatGateway": {
+          "$ref": "#/definitions/VpcEncryptionControlExclusion"
+        },
+        "VirtualPrivateGateway": {
+          "$ref": "#/definitions/VpcEncryptionControlExclusion"
+        },
+        "VpcPeering": {
+          "$ref": "#/definitions/VpcEncryptionControlExclusion"
+        },
+        "VpcLattice": {
+          "$ref": "#/definitions/VpcEncryptionControlExclusion"
+        },
+        "ElasticFileSystem": {
+          "$ref": "#/definitions/VpcEncryptionControlExclusion"
+        },
+        "Lambda": {
+          "$ref": "#/definitions/VpcEncryptionControlExclusion"
+        }
+      }
+    },
+    "VpcEncryptionControlExclusion": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "State": {
+          "type": "string"
+        },
+        "StateMessage": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "properties": {
+    "VpcEncryptionControlId": {
+      "description": "The VPC encryption control resource id.",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "The tags to assign to the VPC encryption control.",
+      "type": "array",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "VpcId": {
+      "description": "The VPC on which this VPC encryption control is applied.",
+      "type": "string"
+    },
+    "Mode": {
+      "description": "The VPC encryption control mode, either monitor or enforce.",
+      "type": "string",
+      "enum": [
+        "monitor",
+        "enforce"
+      ]
+    },
+    "State": {
+      "description": "The current state of the VPC encryption control.",
+      "type": "string",
+      "enum": [
+        "creating",
+        "available",
+        "monitor-in-progress",
+        "enforce-in-progress",
+        "monitor-failed",
+        "enforce-failed",
+        "deleting",
+        "deleted",
+        "delete-failed"
+      ]
+    },
+    "StateMessage": {
+      "description": "Provides additional context on the state of the VPC encryption control.",
+      "type": "string"
+    },
+    "InternetGatewayExclusionInput": {
+      "description": "Used to enable or disable IGW exclusion",
+      "type": "string",
+      "enum": [
+        "enable",
+        "disable"
+      ]
+    },
+    "EgressOnlyInternetGatewayExclusionInput": {
+      "description": "Used to enable or disable EIGW exclusion",
+      "type": "string",
+      "enum": [
+        "enable",
+        "disable"
+      ]
+    },
+    "NatGatewayExclusionInput": {
+      "description": "Used to enable or disable Nat gateway exclusion",
+      "type": "string",
+      "enum": [
+        "enable",
+        "disable"
+      ]
+    },
+    "VirtualPrivateGatewayExclusionInput": {
+      "description": "Used to enable or disable VGW exclusion",
+      "type": "string",
+      "enum": [
+        "enable",
+        "disable"
+      ]
+    },
+    "VpcPeeringExclusionInput": {
+      "description": "Used to enable or disable VPC peering exclusion",
+      "type": "string",
+      "enum": [
+        "enable",
+        "disable"
+      ]
+    },
+    "VpcLatticeExclusionInput": {
+      "description": "Used to enable or disable Vpc Lattice exclusion",
+      "type": "string",
+      "enum": [
+        "enable",
+        "disable"
+      ]
+    },
+    "ElasticFileSystemExclusionInput": {
+      "description": "Used to enable or disable EFS exclusion",
+      "type": "string",
+      "enum": [
+        "enable",
+        "disable"
+      ]
+    },
+    "LambdaExclusionInput": {
+      "description": "Used to enable or disable Lambda exclusion",
+      "type": "string",
+      "enum": [
+        "enable",
+        "disable"
+      ]
+    },
+    "ResourceExclusions": {
+      "description": "Enumerates the states of all the VPC encryption control resource exclusions",
+      "$ref": "#/definitions/ResourceExclusions"
+    }
+  },
+  "additionalProperties": false,
+  "required": [],
+  "createOnlyProperties": [
+    "/properties/VpcId"
+  ],
+  "readOnlyProperties": [
+    "/properties/VpcEncryptionControlId",
+    "/properties/State",
+    "/properties/StateMessage",
+    "/properties/ResourceExclusions",
+    "/properties/ResourceExclusions/InternetGateway",
+    "/properties/ResourceExclusions/InternetGateway/State",
+    "/properties/ResourceExclusions/InternetGateway/StateMessage",
+    "/properties/ResourceExclusions/EgressOnlyInternetGateway",
+    "/properties/ResourceExclusions/EgressOnlyInternetGateway/State",
+    "/properties/ResourceExclusions/EgressOnlyInternetGateway/StateMessage",
+    "/properties/ResourceExclusions/NatGateway",
+    "/properties/ResourceExclusions/NatGateway/State",
+    "/properties/ResourceExclusions/NatGateway/StateMessage",
+    "/properties/ResourceExclusions/VirtualPrivateGateway",
+    "/properties/ResourceExclusions/VirtualPrivateGateway/State",
+    "/properties/ResourceExclusions/VirtualPrivateGateway/StateMessage",
+    "/properties/ResourceExclusions/VpcPeering",
+    "/properties/ResourceExclusions/VpcPeering/State",
+    "/properties/ResourceExclusions/VpcPeering/StateMessage",
+    "/properties/ResourceExclusions/VpcLattice",
+    "/properties/ResourceExclusions/VpcLattice/State",
+    "/properties/ResourceExclusions/VpcLattice/StateMessage",
+    "/properties/ResourceExclusions/ElasticFileSystem",
+    "/properties/ResourceExclusions/ElasticFileSystem/State",
+    "/properties/ResourceExclusions/ElasticFileSystem/StateMessage",
+    "/properties/ResourceExclusions/Lambda",
+    "/properties/ResourceExclusions/Lambda/State",
+    "/properties/ResourceExclusions/Lambda/StateMessage"
+  ],
+  "writeOnlyProperties": [
+    "/properties/InternetGatewayExclusionInput",
+    "/properties/EgressOnlyInternetGatewayExclusionInput",
+    "/properties/NatGatewayExclusionInput",
+    "/properties/VirtualPrivateGatewayExclusionInput",
+    "/properties/VpcPeeringExclusionInput",
+    "/properties/VpcLatticeExclusionInput",
+    "/properties/ElasticFileSystemExclusionInput",
+    "/properties/LambdaExclusionInput"
+  ],
+  "primaryIdentifier": [
+    "/properties/VpcEncryptionControlId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ec2:DescribeVpcEncryptionControls",
+        "ec2:CreateVpcEncryptionControl",
+        "ec2:CreateTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ec2:DescribeVpcEncryptionControls",
+        "ec2:DescribeTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ec2:DescribeVpcEncryptionControls",
+        "ec2:ModifyVpcEncryptionControl",
+        "ec2:CreateTags",
+        "ec2:DeleteTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:DescribeVpcEncryptionControls",
+        "ec2:DeleteVpcEncryptionControl",
+        "ec2:DeleteTags"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:DescribeVpcEncryptionControls"
+      ]
+    }
+  }
+}

@@ -66,7 +66,7 @@ func browserSettingsDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	{
 		//	  "maxLength": 131072,
 		//	  "minLength": 2,
-		//	  "pattern": "\\{[\\S\\s]*\\}\\s*",
+		//	  "pattern": "^\\{[\\S\\s]*\\}\\s*$",
 		//	  "type": "string"
 		//	}
 		"browser_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -142,6 +142,91 @@ func browserSettingsDataSource(ctx context.Context) (datasource.DataSource, erro
 			}, /*END NESTED OBJECT*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: WebContentFilteringPolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "AllowedUrls": {
+		//	      "items": {
+		//	        "pattern": "^((([a-zA-Z][a-zA-Z0-9+.-]*):\\/\\/(\\*|[\\w%._\\-\\+~#=@]+)?(\\/[^@\\s]*)?(?:\\?([^*\\s]+(?:\\*?)))?)|(\\*|[\\w%._\\-\\+~#=@]+\\.[\\w%._\\-\\+~#=@]+)(?::(\\d{1,5}))?(\\/[^@\\s]*)?(?:\\?([^*\\s]+(?:\\*?)))?|(([a-zA-Z][a-zA-Z0-9+.-]*):(\\/\\/)?\\*))$",
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 1000,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "BlockedCategories": {
+		//	      "items": {
+		//	        "enum": [
+		//	          "Cults",
+		//	          "Gambling",
+		//	          "Nudity",
+		//	          "Pornography",
+		//	          "SexEducation",
+		//	          "Tasteless",
+		//	          "Violence",
+		//	          "DownloadSites",
+		//	          "ImageSharing",
+		//	          "PeerToPeer",
+		//	          "StreamingMediaAndDownloads",
+		//	          "GenerativeAI",
+		//	          "CriminalActivity",
+		//	          "Hacking",
+		//	          "HateAndIntolerance",
+		//	          "IllegalDrug",
+		//	          "IllegalSoftware",
+		//	          "SchoolCheating",
+		//	          "SelfHarm",
+		//	          "Weapons",
+		//	          "Chat",
+		//	          "Games",
+		//	          "InstantMessaging",
+		//	          "ProfessionalNetwork",
+		//	          "SocialNetworking",
+		//	          "WebBasedEmail",
+		//	          "ParkedDomains"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 100,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "BlockedUrls": {
+		//	      "items": {
+		//	        "pattern": "^((([a-zA-Z][a-zA-Z0-9+.-]*):\\/\\/(\\*|[\\w%._\\-\\+~#=@]+)?(\\/[^@\\s]*)?(?:\\?([^*\\s]+(?:\\*?)))?)|(\\*|[\\w%._\\-\\+~#=@]+\\.[\\w%._\\-\\+~#=@]+)(?::(\\d{1,5}))?(\\/[^@\\s]*)?(?:\\?([^*\\s]+(?:\\*?)))?|(([a-zA-Z][a-zA-Z0-9+.-]*):(\\/\\/)?\\*))$",
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 1000,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"web_content_filtering_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllowedUrls
+				"allowed_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BlockedCategories
+				"blocked_categories": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BlockedUrls
+				"blocked_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -160,13 +245,17 @@ func browserSettingsDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"additional_encryption_context": "AdditionalEncryptionContext",
+		"allowed_urls":                  "AllowedUrls",
 		"associated_portal_arns":        "AssociatedPortalArns",
+		"blocked_categories":            "BlockedCategories",
+		"blocked_urls":                  "BlockedUrls",
 		"browser_policy":                "BrowserPolicy",
 		"browser_settings_arn":          "BrowserSettingsArn",
 		"customer_managed_key":          "CustomerManagedKey",
 		"key":                           "Key",
 		"tags":                          "Tags",
 		"value":                         "Value",
+		"web_content_filtering_policy":  "WebContentFilteringPolicy",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

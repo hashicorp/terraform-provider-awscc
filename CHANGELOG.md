@@ -1,4 +1,176 @@
-## 1.60.0 (Unreleased)
+## 1.67.0 (Unreleased)
+
+## 1.66.0 (December 4, 2025)
+
+BUG FIXES:
+
+* provider: Fix `Missing Resource Identity After Read` error during refresh when a resource is tainted on create ([#2905](https://github.com/hashicorp/terraform-provider-awscc/pull/2905))
+
+FEATURES:
+
+* **New Data Source:** `awscc_connect_data_table`
+* **New Data Source:** `awscc_connect_data_table_attribute`
+* **New Data Source:** `awscc_devopsagent_agent_space`
+* **New Data Source:** `awscc_devopsagent_agent_spaces`
+* **New Data Source:** `awscc_devopsagent_association`
+* **New Data Source:** `awscc_eks_capability`
+* **New Data Source:** `awscc_lambda_capacity_provider`
+* **New Data Source:** `awscc_lambda_capacity_providers`
+* **New Data Source:** `awscc_observabilityadmin_s3_table_integration`
+* **New Data Source:** `awscc_observabilityadmin_s3_table_integrations`
+* **New Data Source:** `awscc_rtbfabric_outbound_external_link`
+* **New Data Source:** `awscc_securityhub_connector_v2`
+* **New Data Source:** `awscc_securityhub_connector_v2s`
+* **New List Resource:** `awscc_devopsagent_agent_space`
+* **New List Resource:** `awscc_lambda_capacity_provider`
+* **New List Resource:** `awscc_observabilityadmin_s3_table_integration`
+* **New List Resource:** `awscc_securityhub_connector_v2`
+* **New Resource:** `awscc_connect_data_table`
+* **New Resource:** `awscc_connect_data_table_attribute`
+* **New Resource:** `awscc_devopsagent_agent_space`
+* **New Resource:** `awscc_devopsagent_association`
+* **New Resource:** `awscc_eks_capability`
+* **New Resource:** `awscc_lambda_capacity_provider`
+* **New Resource:** `awscc_observabilityadmin_s3_table_integration`
+* **New Resource:** `awscc_rtbfabric_outbound_external_link`
+* **New Resource:** `awscc_securityhub_connector_v2`
+
+## 1.65.0 (November 24, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_cloudfront_connection_function`
+* **New Data Source:** `awscc_cloudfront_connection_functions`
+* **New Data Source:** `awscc_cloudfront_trust_store`
+* **New Data Source:** `awscc_cloudfront_trust_stores`
+* **New Data Source:** `awscc_cognito_terms`
+* **New Data Source:** `awscc_ec2_transit_gateway_metering_policies`
+* **New Data Source:** `awscc_ec2_transit_gateway_metering_policy`
+* **New Data Source:** `awscc_ec2_transit_gateway_metering_policy_entry`
+* **New Data Source:** `awscc_ec2_vpc_encryption_control`
+* **New Data Source:** `awscc_ec2_vpc_encryption_controls`
+* **New Data Source:** `awscc_ec2_vpn_concentrator`
+* **New Data Source:** `awscc_ec2_vpn_concentrators`
+* **New Data Source:** `awscc_ecr_pull_time_update_exclusion`
+* **New Data Source:** `awscc_ecr_pull_time_update_exclusions`
+* **New Data Source:** `awscc_ecr_signing_configuration`
+* **New Data Source:** `awscc_ecr_signing_configurations`
+* **New Data Source:** `awscc_ecs_express_gateway_service`
+* **New Data Source:** `awscc_glue_integration`
+* **New Data Source:** `awscc_glue_integrations`
+* **New List Resource:** `awscc_cloudfront_connection_function`
+* **New List Resource:** `awscc_cloudfront_trust_store`
+* **New List Resource:** `awscc_ec2_transit_gateway_metering_policy`
+* **New List Resource:** `awscc_ec2_vpc_encryption_control`
+* **New List Resource:** `awscc_ec2_vpn_concentrator`
+* **New List Resource:** `awscc_ecr_pull_time_update_exclusion`
+* **New List Resource:** `awscc_ecr_signing_configuration`
+* **New List Resource:** `awscc_glue_integration`
+* **New Resource:** `awscc_cloudfront_connection_function`
+* **New Resource:** `awscc_cloudfront_trust_store`
+* **New Resource:** `awscc_cognito_terms`
+* **New Resource:** `awscc_ec2_transit_gateway_metering_policy`
+* **New Resource:** `awscc_ec2_transit_gateway_metering_policy_entry`
+* **New Resource:** `awscc_ec2_vpc_encryption_control`
+* **New Resource:** `awscc_ec2_vpn_concentrator`
+* **New Resource:** `awscc_ecr_pull_time_update_exclusion`
+* **New Resource:** `awscc_ecr_signing_configuration`
+* **New Resource:** `awscc_ecs_express_gateway_service`
+* **New Resource:** `awscc_glue_integration`
+
+## 1.64.0 (November 14, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_mediaconnect_router_input`
+* **New Data Source:** `awscc_mediaconnect_router_inputs`
+* **New Data Source:** `awscc_mediaconnect_router_network_interface`
+* **New Data Source:** `awscc_mediaconnect_router_network_interfaces`
+* **New Data Source:** `awscc_mediaconnect_router_output`
+* **New Data Source:** `awscc_mediaconnect_router_outputs`
+* **New Data Source:** `awscc_rtbfabric_inbound_external_link`
+* **New Resource:** `awscc_mediaconnect_router_input`
+* **New Resource:** `awscc_mediaconnect_router_network_interface`
+* **New Resource:** `awscc_mediaconnect_router_output`
+* **New Resource:** `awscc_rtbfabric_inbound_external_link`
+
+## 1.63.0 (November 7, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_bedrockagentcore_workload_identities`
+* **New Data Source:** `awscc_bedrockagentcore_workload_identity`
+* **New Data Source:** `awscc_glue_integration_resource_properties`
+* **New Data Source:** `awscc_glue_integration_resource_property`
+* **New Data Source:** `awscc_servicecatalog_cloudformation_product`
+* **New Data Source:** `awscc_servicecatalog_cloudformation_products`
+* **New Data Source:** `awscc_servicecatalog_portfolio_principal_association`
+* **New Data Source:** `awscc_ses_multi_region_endpoint`
+* **New Data Source:** `awscc_ses_multi_region_endpoints`
+* **New Resource:** `awscc_bedrockagentcore_workload_identity`
+* **New Resource:** `awscc_glue_integration_resource_property`
+* **New Resource:** `awscc_servicecatalog_cloudformation_product`
+* **New Resource:** `awscc_servicecatalog_portfolio_principal_association`
+
+## 1.62.0 (October 31, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_ec2_capacity_manager_data_export`
+* **New Data Source:** `awscc_ec2_capacity_manager_data_exports`
+* **New Data Source:** `awscc_rtbfabric_link`
+* **New Data Source:** `awscc_rtbfabric_responder_gateway`
+* **New Data Source:** `awscc_rtbfabric_responder_gateways`
+* **New Data Source:** `awscc_s3vectors_index`
+* **New Data Source:** `awscc_s3vectors_vector_bucket`
+* **New Data Source:** `awscc_s3vectors_vector_buckets`
+* **New Data Source:** `awscc_s3vectors_vector_bucket_policies`
+* **New Data Source:** `awscc_s3vectors_vector_bucket_policy`
+* **New List Resource:** `awscc_ec2_capacity_manager_data_export`
+* **New List Resource:** `awscc_rtbfabric_responder_gateway`
+* **New List Resource:** `awscc_s3vectors_vector_bucket_policy`
+* **New List Resource:** `awscc_s3vectors_vector_bucket`
+* **New Resource:** `awscc_ec2_capacity_manager_data_export`
+* **New Resource:** `awscc_rtbfabric_link`
+* **New Resource:** `awscc_rtbfabric_responder_gateway`
+* **New Resource:** `awscc_s3vectors_index`
+* **New Resource:** `awscc_s3vectors_vector_bucket_policy`
+* **New Resource:** `awscc_s3vectors_vector_bucket`
+
+## 1.61.0 (October 24, 2025)
+
+ENHANCEMENTS:
+
+* provider: Include CloudFormation hook failure details in error messages for better debugging
+
+FEATURES:
+
+* **New Data Source:** `awscc_aps_anomaly_detector`
+* **New Data Source:** `awscc_events_event_bus_policies`
+* **New Data Source:** `awscc_events_event_bus_policy`
+* **New Data Source:** `awscc_rtbfabric_requester_gateway`
+* **New Data Source:** `awscc_rtbfabric_requester_gateways`
+* **New List Resource:** `awscc_events_event_bus_policy`
+* **New List Resource:** `awscc_rtbfabric_requester_gateway`
+* **New Resource:** `awscc_aps_anomaly_detector`
+* **New Resource:** `awscc_events_event_bus_policy`
+* **New Resource:** `awscc_rtbfabric_requester_gateway`
+
+## 1.60.0 (October 16, 2025)
+
+FEATURES:
+
+* **New Data Source:** `awscc_datazone_project_profile`
+* **New Data Source:** `awscc_servicecatalog_launch_notification_constraint`
+* **New Data Source:** `awscc_servicecatalog_launch_notification_constraints`
+* **New Data Source:** `awscc_servicecatalog_tag_option_association`
+* **New Data Source:** `awscc_ssmquicksetup_lifecycle_automation`
+* **New List Resource:** `awscc_datazone_project_profile`
+* **New List Resource:** `awscc_servicecatalog_launch_notification_constraint`
+* **New Resource:** `awscc_datazone_project_profile`
+* **New Resource:** `awscc_servicecatalog_launch_notification_constraint`
+* **New Resource:** `awscc_servicecatalog_tag_option_association`
+* **New Resource:** `awscc_ssmquicksetup_lifecycle_automation`
 
 FEATURES:
 

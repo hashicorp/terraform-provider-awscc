@@ -46,7 +46,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "AccessRole": {
 		//	      "maxLength": 2048,
-		//	      "pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$",
+		//	      "pattern": "^arn:aws[^:]*:iam::\\d{12}:role(/[a-zA-Z0-9+=,.@_-]+)*/[a-zA-Z0-9+=,.@_-]+$",
 		//	      "type": "string"
 		//	    },
 		//	    "AwsAccountId": {
@@ -73,7 +73,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthAtMost(2048),
-						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$"), ""),
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[^:]*:iam::\\d{12}:role(/[a-zA-Z0-9+=,.@_-]+)*/[a-zA-Z0-9+=,.@_-]+$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -210,6 +210,23 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EnableTrustedIdentityPropagation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether the trusted identity propagation is enabled",
+		//	  "type": "boolean"
+		//	}
+		"enable_trusted_identity_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether the trusted identity propagation is enabled",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// EnableTrustedIdentityPropagation is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentId
 		// CloudFormation resource type schema:
 		//
@@ -234,9 +251,11 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"environment_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the environment in which the connection is created.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// EnvironmentIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -289,11 +308,51 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ProjectIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the project in which the connection should be created. If ",
+		//	  "type": "string"
+		//	}
+		"project_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the project in which the connection should be created. If ",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// ProjectIdentifier is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Props
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "properties": {
+		//	    "AmazonQProperties": {
+		//	      "additionalProperties": false,
+		//	      "description": "Amazon Q properties of the connection.",
+		//	      "properties": {
+		//	        "AuthMode": {
+		//	          "description": "The authentication mode of the connection's AmazonQ properties",
+		//	          "maxLength": 128,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        },
+		//	        "IsEnabled": {
+		//	          "description": "Specifies whether Amazon Q is enabled for the connection",
+		//	          "type": "boolean"
+		//	        },
+		//	        "ProfileArn": {
+		//	          "maxLength": 2048,
+		//	          "minLength": 0,
+		//	          "pattern": "arn:aws[a-z\\-]*:[a-z0-9\\-]+:[a-z0-9\\-]*:[0-9]*:.*",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "AthenaProperties": {
 		//	      "additionalProperties": false,
 		//	      "description": "Athena Properties Input",
@@ -711,6 +770,30 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "S3Properties": {
+		//	      "additionalProperties": false,
+		//	      "description": "S3 Properties Input",
+		//	      "properties": {
+		//	        "S3AccessGrantLocationId": {
+		//	          "description": "The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties of a connection.",
+		//	          "maxLength": 64,
+		//	          "minLength": 0,
+		//	          "pattern": "[a-zA-Z0-9\\-]+",
+		//	          "type": "string"
+		//	        },
+		//	        "S3Uri": {
+		//	          "description": "The Amazon S3 URI that's part of the Amazon S3 properties of a connection.",
+		//	          "maxLength": 2048,
+		//	          "minLength": 0,
+		//	          "pattern": "s3://.+",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "S3Uri"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "SparkEmrProperties": {
 		//	      "additionalProperties": false,
 		//	      "description": "Spark EMR Properties Input.",
@@ -722,7 +805,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "InstanceProfileArn": {
 		//	          "maxLength": 2048,
-		//	          "pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$",
+		//	          "pattern": "^arn:aws[^:]*:iam::\\d{12}:role(/[a-zA-Z0-9+=,.@_-]+)*/[a-zA-Z0-9+=,.@_-]+$",
 		//	          "type": "string"
 		//	        },
 		//	        "JavaVirtualEnv": {
@@ -742,7 +825,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "RuntimeRole": {
 		//	          "maxLength": 2048,
-		//	          "pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$",
+		//	          "pattern": "^arn:aws[^:]*:iam::\\d{12}:role(/[a-zA-Z0-9+=,.@_-]+)*/[a-zA-Z0-9+=,.@_-]+$",
 		//	          "type": "string"
 		//	        },
 		//	        "TrustedCertificatesS3Uri": {
@@ -813,6 +896,50 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"props": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AmazonQProperties
+				"amazon_q_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AuthMode
+						"auth_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The authentication mode of the connection's AmazonQ properties",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(0, 128),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: IsEnabled
+						"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether Amazon Q is enabled for the connection",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ProfileArn
+						"profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(0, 2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:[a-z0-9\\-]+:[a-z0-9\\-]*:[0-9]*:.*"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Amazon Q properties of the connection.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: AthenaProperties
 				"athena_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1528,6 +1655,44 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: S3Properties
+				"s3_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: S3AccessGrantLocationId
+						"s3_access_grant_location_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties of a connection.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(0, 64),
+								stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9\\-]+"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: S3Uri
+						"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon S3 URI that's part of the Amazon S3 properties of a connection.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(0, 2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("s3://.+"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "S3 Properties Input",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: SparkEmrProperties
 				"spark_emr_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1549,7 +1714,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthAtMost(2048),
-								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[^:]*:iam::\\d{12}:role(/[a-zA-Z0-9+=,.@_-]+)*/[a-zA-Z0-9+=,.@_-]+$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -1597,7 +1762,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthAtMost(2048),
-								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]*$"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[^:]*:iam::\\d{12}:role(/[a-zA-Z0-9+=,.@_-]+)*/[a-zA-Z0-9+=,.@_-]+$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -1747,6 +1912,33 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// Props is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: Scope
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The scope of the connection.",
+		//	  "enum": [
+		//	    "DOMAIN",
+		//	    "PROJECT"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The scope of the connection.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"DOMAIN",
+					"PROJECT",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// Scope is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -1798,7 +1990,9 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"access_role":                              "AccessRole",
 		"access_token":                             "AccessToken",
 		"additional_args":                          "AdditionalArgs",
+		"amazon_q_properties":                      "AmazonQProperties",
 		"athena_properties":                        "AthenaProperties",
+		"auth_mode":                                "AuthMode",
 		"authentication_configuration":             "AuthenticationConfiguration",
 		"authentication_type":                      "AuthenticationType",
 		"authorization_code":                       "AuthorizationCode",
@@ -1822,6 +2016,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"domain_id":                                "DomainId",
 		"domain_identifier":                        "DomainIdentifier",
 		"domain_unit_id":                           "DomainUnitId",
+		"enable_trusted_identity_propagation":      "EnableTrustedIdentityPropagation",
 		"enabled":                                  "Enabled",
 		"environment_id":                           "EnvironmentId",
 		"environment_identifier":                   "EnvironmentIdentifier",
@@ -1837,6 +2032,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"iam_properties":                           "IamProperties",
 		"idle_timeout":                             "IdleTimeout",
 		"instance_profile_arn":                     "InstanceProfileArn",
+		"is_enabled":                               "IsEnabled",
 		"java_virtual_env":                         "JavaVirtualEnv",
 		"jwt_token":                                "JwtToken",
 		"kms_key_arn":                              "KmsKeyArn",
@@ -1852,7 +2048,9 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"password":                                 "Password",
 		"physical_connection_requirements":         "PhysicalConnectionRequirements",
 		"port":                                     "Port",
+		"profile_arn":                              "ProfileArn",
 		"project_id":                               "ProjectId",
+		"project_identifier":                       "ProjectIdentifier",
 		"props":                                    "Props",
 		"python_properties":                        "PythonProperties",
 		"python_virtual_env":                       "PythonVirtualEnv",
@@ -1860,7 +2058,11 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"redshift_properties":                      "RedshiftProperties",
 		"refresh_token":                            "RefreshToken",
 		"runtime_role":                             "RuntimeRole",
+		"s3_access_grant_location_id":              "S3AccessGrantLocationId",
+		"s3_properties":                            "S3Properties",
+		"s3_uri":                                   "S3Uri",
 		"schedule":                                 "Schedule",
+		"scope":                                    "Scope",
 		"secret_arn":                               "SecretArn",
 		"security_group_id_list":                   "SecurityGroupIdList",
 		"spark_emr_properties":                     "SparkEmrProperties",
@@ -1887,8 +2089,11 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/AwsLocation",
 		"/properties/DomainIdentifier",
+		"/properties/EnableTrustedIdentityPropagation",
 		"/properties/EnvironmentIdentifier",
+		"/properties/ProjectIdentifier",
 		"/properties/Props",
+		"/properties/Scope",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

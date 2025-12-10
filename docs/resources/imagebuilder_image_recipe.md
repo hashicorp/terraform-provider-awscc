@@ -76,7 +76,6 @@ resource "awscc_imagebuilder_image_recipe" "example" {
 
 ### Required
 
-- `components` (Attributes List) The components of the image recipe. (see [below for nested schema](#nestedatt--components))
 - `name` (String) The name of the image recipe.
 - `parent_image` (String) The parent image of the image recipe.
 - `version` (String) The version of the image recipe.
@@ -86,6 +85,7 @@ resource "awscc_imagebuilder_image_recipe" "example" {
 - `additional_instance_configuration` (Attributes) Specify additional settings and launch scripts for your build instances. (see [below for nested schema](#nestedatt--additional_instance_configuration))
 - `ami_tags` (Map of String) The tags to apply to the AMI created by this image recipe.
 - `block_device_mappings` (Attributes List) The block device mappings to apply when creating images from this recipe. (see [below for nested schema](#nestedatt--block_device_mappings))
+- `components` (Attributes List) The components of the image recipe. (see [below for nested schema](#nestedatt--components))
 - `description` (String) The description of the image recipe.
 - `tags` (Map of String) The tags of the image recipe.
 - `working_directory` (String) The working directory to be used during build and test workflows.
@@ -94,24 +94,7 @@ resource "awscc_imagebuilder_image_recipe" "example" {
 
 - `arn` (String) The Amazon Resource Name (ARN) of the image recipe.
 - `id` (String) Uniquely identifies the resource.
-
-<a id="nestedatt--components"></a>
-### Nested Schema for `components`
-
-Optional:
-
-- `component_arn` (String) The Amazon Resource Name (ARN) of the component.
-- `parameters` (Attributes List) A group of parameter settings that are used to configure the component for a specific recipe. (see [below for nested schema](#nestedatt--components--parameters))
-
-<a id="nestedatt--components--parameters"></a>
-### Nested Schema for `components.parameters`
-
-Optional:
-
-- `name` (String) The name of the component parameter to set.
-- `value` (List of String) Sets the value for the named component parameter.
-
-
+- `latest_version` (Attributes) The latest version references of the image recipe. (see [below for nested schema](#nestedatt--latest_version))
 
 <a id="nestedatt--additional_instance_configuration"></a>
 ### Nested Schema for `additional_instance_configuration`
@@ -153,6 +136,36 @@ Optional:
 - `throughput` (Number) For GP3 volumes only - The throughput in MiB/s that the volume supports.
 - `volume_size` (Number) Use to override the device's volume size.
 - `volume_type` (String) Use to override the device's volume type.
+
+
+
+<a id="nestedatt--components"></a>
+### Nested Schema for `components`
+
+Optional:
+
+- `component_arn` (String) The Amazon Resource Name (ARN) of the component.
+- `parameters` (Attributes List) A group of parameter settings that are used to configure the component for a specific recipe. (see [below for nested schema](#nestedatt--components--parameters))
+
+<a id="nestedatt--components--parameters"></a>
+### Nested Schema for `components.parameters`
+
+Optional:
+
+- `name` (String) The name of the component parameter to set.
+- `value` (List of String) Sets the value for the named component parameter.
+
+
+
+<a id="nestedatt--latest_version"></a>
+### Nested Schema for `latest_version`
+
+Read-Only:
+
+- `arn` (String) The latest version ARN of the created image recipe.
+- `major` (String) The latest version ARN of the created image recipe, with the same major version.
+- `minor` (String) The latest version ARN of the created image recipe, with the same minor version.
+- `patch` (String) The latest version ARN of the created image recipe, with the same patch version.
 
 ## Import
 

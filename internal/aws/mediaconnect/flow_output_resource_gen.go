@@ -7,7 +7,9 @@ package mediaconnect
 
 import (
 	"context"
+	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -588,7 +590,8 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The protocol that is used by the source or output.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"zixi-push",
@@ -604,6 +607,9 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 					"ndi-speed-hq",
 				),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: RemoteId
 		// CloudFormation resource type schema:
@@ -618,6 +624,166 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RouterIntegrationState
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"router_integration_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RouterIntegrationTransitEncryption
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The configuration that defines how content is encrypted during transit between the MediaConnect router and a MediaConnect flow.",
+		//	  "properties": {
+		//	    "EncryptionKeyConfiguration": {
+		//	      "description": "Configuration settings for flow transit encryption keys.",
+		//	      "properties": {
+		//	        "Automatic": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.",
+		//	          "type": "object"
+		//	        },
+		//	        "SecretsManager": {
+		//	          "additionalProperties": false,
+		//	          "description": "The configuration settings for transit encryption of a flow output using AWS Secrets Manager, including the secret ARN and role ARN.",
+		//	          "properties": {
+		//	            "RoleArn": {
+		//	              "description": "The ARN of the IAM role used for transit encryption to the router input using AWS Secrets Manager.",
+		//	              "pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$",
+		//	              "type": "string"
+		//	            },
+		//	            "SecretArn": {
+		//	              "description": "The ARN of the AWS Secrets Manager secret used for transit encryption to the router input.",
+		//	              "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "RoleArn",
+		//	            "SecretArn"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "EncryptionKeyType": {
+		//	      "enum": [
+		//	        "SECRETS_MANAGER",
+		//	        "AUTOMATIC"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "EncryptionKeyConfiguration"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"router_integration_transit_encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EncryptionKeyConfiguration
+				"encryption_key_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Automatic
+						"automatic": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType:  jsontypes.NormalizedType{},
+							Description: "Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SecretsManager
+						"secrets_manager": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: RoleArn
+								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the IAM role used for transit encryption to the router input using AWS Secrets Manager.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SecretArn
+								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the AWS Secrets Manager secret used for transit encryption to the router input.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The configuration settings for transit encryption of a flow output using AWS Secrets Manager, including the secret ARN and role ARN.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration settings for flow transit encryption keys.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EncryptionKeyType
+				"encryption_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"SECRETS_MANAGER",
+							"AUTOMATIC",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration that defines how content is encrypted during transit between the MediaConnect router and a MediaConnect flow.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SmoothingLatency
@@ -712,39 +878,45 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"algorithm":                          "Algorithm",
-		"cidr_allow_list":                    "CidrAllowList",
-		"compression_factor":                 "CompressionFactor",
-		"description":                        "Description",
-		"destination":                        "Destination",
-		"destination_configurations":         "DestinationConfigurations",
-		"destination_ip":                     "DestinationIp",
-		"destination_port":                   "DestinationPort",
-		"encoder_profile":                    "EncoderProfile",
-		"encoding_name":                      "EncodingName",
-		"encoding_parameters":                "EncodingParameters",
-		"encryption":                         "Encryption",
-		"flow_arn":                           "FlowArn",
-		"interface":                          "Interface",
-		"key_type":                           "KeyType",
-		"max_latency":                        "MaxLatency",
-		"media_stream_name":                  "MediaStreamName",
-		"media_stream_output_configurations": "MediaStreamOutputConfigurations",
-		"min_latency":                        "MinLatency",
-		"name":                               "Name",
-		"ndi_program_name":                   "NdiProgramName",
-		"ndi_speed_hq_quality":               "NdiSpeedHqQuality",
-		"output_arn":                         "OutputArn",
-		"output_status":                      "OutputStatus",
-		"port":                               "Port",
-		"protocol":                           "Protocol",
-		"remote_id":                          "RemoteId",
-		"role_arn":                           "RoleArn",
-		"secret_arn":                         "SecretArn",
-		"smoothing_latency":                  "SmoothingLatency",
-		"stream_id":                          "StreamId",
-		"vpc_interface_attachment":           "VpcInterfaceAttachment",
-		"vpc_interface_name":                 "VpcInterfaceName",
+		"algorithm":                             "Algorithm",
+		"automatic":                             "Automatic",
+		"cidr_allow_list":                       "CidrAllowList",
+		"compression_factor":                    "CompressionFactor",
+		"description":                           "Description",
+		"destination":                           "Destination",
+		"destination_configurations":            "DestinationConfigurations",
+		"destination_ip":                        "DestinationIp",
+		"destination_port":                      "DestinationPort",
+		"encoder_profile":                       "EncoderProfile",
+		"encoding_name":                         "EncodingName",
+		"encoding_parameters":                   "EncodingParameters",
+		"encryption":                            "Encryption",
+		"encryption_key_configuration":          "EncryptionKeyConfiguration",
+		"encryption_key_type":                   "EncryptionKeyType",
+		"flow_arn":                              "FlowArn",
+		"interface":                             "Interface",
+		"key_type":                              "KeyType",
+		"max_latency":                           "MaxLatency",
+		"media_stream_name":                     "MediaStreamName",
+		"media_stream_output_configurations":    "MediaStreamOutputConfigurations",
+		"min_latency":                           "MinLatency",
+		"name":                                  "Name",
+		"ndi_program_name":                      "NdiProgramName",
+		"ndi_speed_hq_quality":                  "NdiSpeedHqQuality",
+		"output_arn":                            "OutputArn",
+		"output_status":                         "OutputStatus",
+		"port":                                  "Port",
+		"protocol":                              "Protocol",
+		"remote_id":                             "RemoteId",
+		"role_arn":                              "RoleArn",
+		"router_integration_state":              "RouterIntegrationState",
+		"router_integration_transit_encryption": "RouterIntegrationTransitEncryption",
+		"secret_arn":                            "SecretArn",
+		"secrets_manager":                       "SecretsManager",
+		"smoothing_latency":                     "SmoothingLatency",
+		"stream_id":                             "StreamId",
+		"vpc_interface_attachment":              "VpcInterfaceAttachment",
+		"vpc_interface_name":                    "VpcInterfaceName",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

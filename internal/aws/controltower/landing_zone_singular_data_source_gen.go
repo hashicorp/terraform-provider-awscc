@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -75,6 +76,22 @@ func landingZoneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"manifest": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType: jsontypes.NormalizedType{},
 			Computed:   true,
+		}, /*END ATTRIBUTE*/
+		// Property: RemediationTypes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "enum": [
+		//	      "INHERITANCE_DRIFT"
+		//	    ],
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"remediation_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
@@ -162,6 +179,7 @@ func landingZoneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"landing_zone_identifier":  "LandingZoneIdentifier",
 		"latest_available_version": "LatestAvailableVersion",
 		"manifest":                 "Manifest",
+		"remediation_types":        "RemediationTypes",
 		"status":                   "Status",
 		"tags":                     "Tags",
 		"value":                    "Value",

@@ -1,0 +1,1 @@
+$ terraform import awscc_cloudfront_connection_function.example "id"

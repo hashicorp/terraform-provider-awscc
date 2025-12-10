@@ -77,6 +77,27 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "NotSpecified"
 		//	      ],
 		//	      "type": "string"
+		//	    },
+		//	    "PrivateDnsPreference": {
+		//	      "description": "",
+		//	      "enum": [
+		//	        "VERIFIED_DOMAINS_ONLY",
+		//	        "ALL_DOMAINS",
+		//	        "VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS",
+		//	        "SPECIFIED_DOMAINS_ONLY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "PrivateDnsSpecifiedDomains": {
+		//	      "description": "",
+		//	      "items": {
+		//	        "maxLength": 255,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -91,6 +112,17 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: PrivateDnsOnlyForInboundResolverEndpoint
 				"private_dns_only_for_inbound_resolver_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Indicates whether to enable private DNS only for inbound endpoints. This option is available only for services that support both gateway and interface endpoints. It routes traffic that originates from the VPC to the gateway endpoint and traffic that originates from on-premises to the interface endpoint.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PrivateDnsPreference
+				"private_dns_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PrivateDnsSpecifiedDomains
+				"private_dns_specified_domains": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -374,6 +406,8 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"policy_document":       "PolicyDocument",
 		"private_dns_enabled":   "PrivateDnsEnabled",
 		"private_dns_only_for_inbound_resolver_endpoint": "PrivateDnsOnlyForInboundResolverEndpoint",
+		"private_dns_preference":                         "PrivateDnsPreference",
+		"private_dns_specified_domains":                  "PrivateDnsSpecifiedDomains",
 		"resource_configuration_arn":                     "ResourceConfigurationArn",
 		"route_table_ids":                                "RouteTableIds",
 		"security_group_ids":                             "SecurityGroupIds",

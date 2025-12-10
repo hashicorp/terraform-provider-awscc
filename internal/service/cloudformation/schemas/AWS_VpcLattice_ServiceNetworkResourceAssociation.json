@@ -59,12 +59,16 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "PrivateDnsEnabled": {
+      "type": "boolean"
     }
   },
   "additionalProperties": false,
   "createOnlyProperties": [
     "/properties/ResourceConfigurationId",
-    "/properties/ServiceNetworkId"
+    "/properties/ServiceNetworkId",
+    "/properties/PrivateDnsEnabled"
   ],
   "readOnlyProperties": [
     "/properties/Id",

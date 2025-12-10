@@ -161,6 +161,26 @@
       "maxLength": 128,
       "pattern": "[a-zA-Z0-9_\\+=\\.\\-@]+"
     },
+    "ComputationRule": {
+      "description": "The display settings of the Custom Line Item.",
+      "type": "string",
+      "enum": [
+        "CONSOLIDATED"
+      ]
+    },
+    "PresentationDetails": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Service": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9]+$"
+        }
+      },
+      "required": [
+        "Service"
+      ]
+    },
     "Description": {
       "type": "string",
       "maxLength": 255
@@ -171,7 +191,7 @@
     "BillingGroupArn": {
       "description": "Billing Group ARN",
       "type": "string",
-      "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/?[0-9]{12}"
+      "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/?[a-zA-Z0-9]{10,12}"
     },
     "BillingPeriodRange": {
       "$ref": "#/definitions/BillingPeriodRange"
@@ -247,6 +267,8 @@
   "createOnlyProperties": [
     "/properties/BillingGroupArn",
     "/properties/AccountId",
+    "/properties/ComputationRule",
+    "/properties/PresentationDetails",
     "/properties/BillingPeriodRange/InclusiveStartBillingPeriod",
     "/properties/BillingPeriodRange/ExclusiveEndBillingPeriod",
     "/properties/CustomLineItemChargeDetails/Type"

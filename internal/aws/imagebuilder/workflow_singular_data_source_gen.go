@@ -80,6 +80,58 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The KMS key identifier used to encrypt the workflow.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LatestVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The latest version references of the workflow.",
+		//	  "properties": {
+		//	    "Arn": {
+		//	      "description": "The latest version ARN of the created workflow.",
+		//	      "type": "string"
+		//	    },
+		//	    "Major": {
+		//	      "description": "The latest version ARN of the created workflow, with the same major version.",
+		//	      "type": "string"
+		//	    },
+		//	    "Minor": {
+		//	      "description": "The latest version ARN of the created workflow, with the same minor version.",
+		//	      "type": "string"
+		//	    },
+		//	    "Patch": {
+		//	      "description": "The latest version ARN of the created workflow, with the same patch version.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"latest_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Arn
+				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created workflow.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Major
+				"major": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created workflow, with the same major version.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Minor
+				"minor": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created workflow, with the same minor version.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Patch
+				"patch": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The latest version ARN of the created workflow, with the same patch version.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The latest version references of the workflow.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -170,7 +222,11 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"data":               "Data",
 		"description":        "Description",
 		"kms_key_id":         "KmsKeyId",
+		"latest_version":     "LatestVersion",
+		"major":              "Major",
+		"minor":              "Minor",
 		"name":               "Name",
+		"patch":              "Patch",
 		"tags":               "Tags",
 		"type":               "Type",
 		"uri":                "Uri",

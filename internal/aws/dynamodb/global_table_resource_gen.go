@@ -145,7 +145,7 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	          ],
 		//	          "type": "object"
 		//	        },
-		//	        "maxItems": 2,
+		//	        "maxItems": 8,
 		//	        "minItems": 1,
 		//	        "type": "array",
 		//	        "uniqueItems": true
@@ -315,7 +315,7 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.List{ /*START VALIDATORS*/
-							listvalidator.SizeBetween(1, 2),
+							listvalidator.SizeBetween(1, 8),
 							listvalidator.UniqueValues(),
 							fwvalidators.NotNullList(),
 						}, /*END VALIDATORS*/
@@ -525,44 +525,6 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
-		// Property: GlobalTableSettingsReplicationMode
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "enum": [
-		//	    "ENABLED",
-		//	    "DISABLED"
-		//	  ],
-		//	  "type": "string"
-		//	}
-		"global_table_settings_replication_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"ENABLED",
-					"DISABLED",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
-		// Property: GlobalTableSourceArn
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "type": "string"
-		//	}
-		"global_table_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// GlobalTableSourceArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: GlobalTableWitnesses
 		// CloudFormation resource type schema:
@@ -2198,61 +2160,59 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"approximate_creation_date_time_precision": "ApproximateCreationDateTimePrecision",
-		"arn":                                    "Arn",
-		"attribute_definitions":                  "AttributeDefinitions",
-		"attribute_name":                         "AttributeName",
-		"attribute_type":                         "AttributeType",
-		"billing_mode":                           "BillingMode",
-		"contributor_insights_specification":     "ContributorInsightsSpecification",
-		"deletion_protection_enabled":            "DeletionProtectionEnabled",
-		"disable_scale_in":                       "DisableScaleIn",
-		"enabled":                                "Enabled",
-		"global_secondary_indexes":               "GlobalSecondaryIndexes",
-		"global_table_settings_replication_mode": "GlobalTableSettingsReplicationMode",
-		"global_table_source_arn":                "GlobalTableSourceArn",
-		"global_table_witnesses":                 "GlobalTableWitnesses",
-		"index_name":                             "IndexName",
-		"key":                                    "Key",
-		"key_schema":                             "KeySchema",
-		"key_type":                               "KeyType",
-		"kinesis_stream_specification":           "KinesisStreamSpecification",
-		"kms_master_key_id":                      "KMSMasterKeyId",
-		"local_secondary_indexes":                "LocalSecondaryIndexes",
-		"max_capacity":                           "MaxCapacity",
-		"max_read_request_units":                 "MaxReadRequestUnits",
-		"max_write_request_units":                "MaxWriteRequestUnits",
-		"min_capacity":                           "MinCapacity",
-		"mode":                                   "Mode",
-		"multi_region_consistency":               "MultiRegionConsistency",
-		"non_key_attributes":                     "NonKeyAttributes",
-		"point_in_time_recovery_enabled":         "PointInTimeRecoveryEnabled",
-		"point_in_time_recovery_specification":   "PointInTimeRecoverySpecification",
-		"policy_document":                        "PolicyDocument",
-		"projection":                             "Projection",
-		"projection_type":                        "ProjectionType",
-		"read_capacity_auto_scaling_settings":    "ReadCapacityAutoScalingSettings",
-		"read_capacity_units":                    "ReadCapacityUnits",
-		"read_on_demand_throughput_settings":     "ReadOnDemandThroughputSettings",
-		"read_provisioned_throughput_settings":   "ReadProvisionedThroughputSettings",
-		"read_units_per_second":                  "ReadUnitsPerSecond",
-		"recovery_period_in_days":                "RecoveryPeriodInDays",
-		"region":                                 "Region",
-		"replica_stream_specification":           "ReplicaStreamSpecification",
-		"replicas":                               "Replicas",
-		"resource_policy":                        "ResourcePolicy",
-		"scale_in_cooldown":                      "ScaleInCooldown",
-		"scale_out_cooldown":                     "ScaleOutCooldown",
-		"seed_capacity":                          "SeedCapacity",
-		"sse_enabled":                            "SSEEnabled",
-		"sse_specification":                      "SSESpecification",
-		"sse_type":                               "SSEType",
-		"stream_arn":                             "StreamArn",
-		"stream_specification":                   "StreamSpecification",
-		"stream_view_type":                       "StreamViewType",
-		"table_class":                            "TableClass",
-		"table_id":                               "TableId",
-		"table_name":                             "TableName",
-		"tags":                                   "Tags",
+		"arn":                                  "Arn",
+		"attribute_definitions":                "AttributeDefinitions",
+		"attribute_name":                       "AttributeName",
+		"attribute_type":                       "AttributeType",
+		"billing_mode":                         "BillingMode",
+		"contributor_insights_specification":   "ContributorInsightsSpecification",
+		"deletion_protection_enabled":          "DeletionProtectionEnabled",
+		"disable_scale_in":                     "DisableScaleIn",
+		"enabled":                              "Enabled",
+		"global_secondary_indexes":             "GlobalSecondaryIndexes",
+		"global_table_witnesses":               "GlobalTableWitnesses",
+		"index_name":                           "IndexName",
+		"key":                                  "Key",
+		"key_schema":                           "KeySchema",
+		"key_type":                             "KeyType",
+		"kinesis_stream_specification":         "KinesisStreamSpecification",
+		"kms_master_key_id":                    "KMSMasterKeyId",
+		"local_secondary_indexes":              "LocalSecondaryIndexes",
+		"max_capacity":                         "MaxCapacity",
+		"max_read_request_units":               "MaxReadRequestUnits",
+		"max_write_request_units":              "MaxWriteRequestUnits",
+		"min_capacity":                         "MinCapacity",
+		"mode":                                 "Mode",
+		"multi_region_consistency":             "MultiRegionConsistency",
+		"non_key_attributes":                   "NonKeyAttributes",
+		"point_in_time_recovery_enabled":       "PointInTimeRecoveryEnabled",
+		"point_in_time_recovery_specification": "PointInTimeRecoverySpecification",
+		"policy_document":                      "PolicyDocument",
+		"projection":                           "Projection",
+		"projection_type":                      "ProjectionType",
+		"read_capacity_auto_scaling_settings":  "ReadCapacityAutoScalingSettings",
+		"read_capacity_units":                  "ReadCapacityUnits",
+		"read_on_demand_throughput_settings":   "ReadOnDemandThroughputSettings",
+		"read_provisioned_throughput_settings": "ReadProvisionedThroughputSettings",
+		"read_units_per_second":                "ReadUnitsPerSecond",
+		"recovery_period_in_days":              "RecoveryPeriodInDays",
+		"region":                               "Region",
+		"replica_stream_specification":         "ReplicaStreamSpecification",
+		"replicas":                             "Replicas",
+		"resource_policy":                      "ResourcePolicy",
+		"scale_in_cooldown":                    "ScaleInCooldown",
+		"scale_out_cooldown":                   "ScaleOutCooldown",
+		"seed_capacity":                        "SeedCapacity",
+		"sse_enabled":                          "SSEEnabled",
+		"sse_specification":                    "SSESpecification",
+		"sse_type":                             "SSEType",
+		"stream_arn":                           "StreamArn",
+		"stream_specification":                 "StreamSpecification",
+		"stream_view_type":                     "StreamViewType",
+		"table_class":                          "TableClass",
+		"table_id":                             "TableId",
+		"table_name":                           "TableName",
+		"tags":                                 "Tags",
 		"target_tracking_scaling_policy_configuration": "TargetTrackingScalingPolicyConfiguration",
 		"target_value":                          "TargetValue",
 		"time_to_live_specification":            "TimeToLiveSpecification",
@@ -2269,7 +2229,6 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Replicas/*/GlobalSecondaryIndexes/*/ReadProvisionedThroughputSettings/ReadCapacityAutoScalingSettings/SeedCapacity",
 		"/properties/WriteProvisionedThroughputSettings/WriteCapacityAutoScalingSettings/SeedCapacity",
 		"/properties/GlobalSecondaryIndexes/*/WriteProvisionedThroughputSettings/WriteCapacityAutoScalingSettings/SeedCapacity",
-		"/properties/GlobalTableSourceArn",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

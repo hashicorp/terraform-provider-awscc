@@ -239,14 +239,14 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "ForwardConfig": {
 		//	        "additionalProperties": false,
-		//	        "description": "Information for creating an action that distributes requests among one or more target groups. For Network Load Balancers, you can specify a single target group. Specify only when ``Type`` is ``forward``. If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
+		//	        "description": "Information for creating an action that distributes requests among multiple target groups. Specify only when ``Type`` is ``forward``.\n If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
 		//	        "properties": {
 		//	          "TargetGroupStickinessConfig": {
 		//	            "additionalProperties": false,
 		//	            "description": "Information about the target group stickiness for a rule.",
 		//	            "properties": {
 		//	              "DurationSeconds": {
-		//	                "description": "The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.",
+		//	                "description": "[Application Load Balancers] The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.",
 		//	                "type": "integer"
 		//	              },
 		//	              "Enabled": {
@@ -277,6 +277,58 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "uniqueItems": true
 		//	          }
 		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "JwtValidationConfig": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "AdditionalClaims": {
+		//	            "description": "",
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "",
+		//	              "properties": {
+		//	                "Format": {
+		//	                  "description": "",
+		//	                  "type": "string"
+		//	                },
+		//	                "Name": {
+		//	                  "description": "",
+		//	                  "type": "string"
+		//	                },
+		//	                "Values": {
+		//	                  "description": "",
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Format",
+		//	                "Name",
+		//	                "Values"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "Issuer": {
+		//	            "description": "",
+		//	            "type": "string"
+		//	          },
+		//	          "JwksEndpoint": {
+		//	            "description": "",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "JwksEndpoint",
+		//	          "Issuer"
+		//	        ],
 		//	        "type": "object"
 		//	      },
 		//	      "Order": {
@@ -318,7 +370,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "TargetGroupArn": {
-		//	        "description": "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to one or more target groups, use ``ForwardConfig`` instead.",
+		//	        "description": "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to multiple target groups, you must use ``ForwardConfig`` instead.",
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
@@ -485,7 +537,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: DurationSeconds
 									"duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.",
+										Description: "[Application Load Balancers] The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: Enabled
@@ -517,7 +569,49 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "Information for creating an action that distributes requests among one or more target groups. For Network Load Balancers, you can specify a single target group. Specify only when ``Type`` is ``forward``. If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
+						Description: "Information for creating an action that distributes requests among multiple target groups. Specify only when ``Type`` is ``forward``.\n If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: JwtValidationConfig
+					"jwt_validation_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AdditionalClaims
+							"additional_claims": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Format
+										"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Values
+										"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Issuer
+							"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: JwksEndpoint
+							"jwks_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Order
@@ -564,7 +658,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: TargetGroupArn
 					"target_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to one or more target groups, use ``ForwardConfig`` instead.",
+						Description: "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to multiple target groups, you must use ``ForwardConfig`` instead.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Type
@@ -744,6 +838,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::ElasticLoadBalancingV2::Listener").WithTerraformTypeName("awscc_elasticloadbalancingv2_listener")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"additional_claims":                   "AdditionalClaims",
 		"advertise_trust_store_ca_names":      "AdvertiseTrustStoreCaNames",
 		"alpn_policy":                         "AlpnPolicy",
 		"authenticate_cognito_config":         "AuthenticateCognitoConfig",
@@ -759,10 +854,13 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"duration_seconds":                    "DurationSeconds",
 		"enabled":                             "Enabled",
 		"fixed_response_config":               "FixedResponseConfig",
+		"format":                              "Format",
 		"forward_config":                      "ForwardConfig",
 		"host":                                "Host",
 		"ignore_client_certificate_expiry":    "IgnoreClientCertificateExpiry",
 		"issuer":                              "Issuer",
+		"jwks_endpoint":                       "JwksEndpoint",
+		"jwt_validation_config":               "JwtValidationConfig",
 		"key":                                 "Key",
 		"listener_arn":                        "ListenerArn",
 		"listener_attributes":                 "ListenerAttributes",
@@ -770,6 +868,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"message_body":                        "MessageBody",
 		"mode":                                "Mode",
 		"mutual_authentication":               "MutualAuthentication",
+		"name":                                "Name",
 		"on_unauthenticated_request":          "OnUnauthenticatedRequest",
 		"order":                               "Order",
 		"path":                                "Path",
@@ -794,6 +893,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"user_pool_client_id":                 "UserPoolClientId",
 		"user_pool_domain":                    "UserPoolDomain",
 		"value":                               "Value",
+		"values":                              "Values",
 		"weight":                              "Weight",
 	})
 

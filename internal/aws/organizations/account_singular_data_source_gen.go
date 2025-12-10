@@ -135,6 +135,24 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The name of an IAM role that AWS Organizations automatically preconfigures in the new member account. Default name is OrganizationAccountAccessRole if not specified.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The state of the account in the organization.",
+		//	  "enum": [
+		//	    "PENDING_ACTIVATION",
+		//	    "ACTIVE",
+		//	    "SUSPENDED",
+		//	    "PENDING_CLOSURE",
+		//	    "CLOSED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the account in the organization.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -229,6 +247,7 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key":              "Key",
 		"parent_ids":       "ParentIds",
 		"role_name":        "RoleName",
+		"state":            "State",
 		"status":           "Status",
 		"tags":             "Tags",
 		"value":            "Value",

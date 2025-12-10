@@ -39,11 +39,11 @@ resource "awscc_billingconductor_billing_group" "example" {
 - `account_grouping` (Attributes) (see [below for nested schema](#nestedatt--account_grouping))
 - `computation_preference` (Attributes) (see [below for nested schema](#nestedatt--computation_preference))
 - `name` (String)
-- `primary_account_id` (String) This account will act as a virtual payer account of the billing group
 
 ### Optional
 
 - `description` (String)
+- `primary_account_id` (String) This account will act as a virtual payer account of the billing group
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -59,13 +59,11 @@ resource "awscc_billingconductor_billing_group" "example" {
 <a id="nestedatt--account_grouping"></a>
 ### Nested Schema for `account_grouping`
 
-Required:
-
-- `linked_account_ids` (Set of String)
-
 Optional:
 
 - `auto_associate` (Boolean)
+- `linked_account_ids` (Set of String)
+- `responsibility_transfer_arn` (String)
 
 
 <a id="nestedatt--computation_preference"></a>

@@ -30,6 +30,7 @@ Data Source schema for AWS::ImageBuilder::ContainerRecipe
 - `image_os_version_override` (String) Specifies the operating system version for the source image.
 - `instance_configuration` (Attributes) A group of options that can be used to configure an instance for building and testing container images. (see [below for nested schema](#nestedatt--instance_configuration))
 - `kms_key_id` (String) Identifies which KMS key is used to encrypt the container image.
+- `latest_version` (Attributes) The latest version references of the container recipe. (see [below for nested schema](#nestedatt--latest_version))
 - `name` (String) The name of the container recipe.
 - `parent_image` (String) The source image for the container recipe.
 - `platform_override` (String) Specifies the operating system platform when you use a custom source image.
@@ -89,6 +90,17 @@ Read-Only:
 - `volume_type` (String) Use to override the device's volume type.
 
 
+
+
+<a id="nestedatt--latest_version"></a>
+### Nested Schema for `latest_version`
+
+Read-Only:
+
+- `arn` (String) The latest version ARN of the created container recipe.
+- `major` (String) The latest version ARN of the created container recipe, with the same major version.
+- `minor` (String) The latest version ARN of the created container recipe, with the same minor version.
+- `patch` (String) The latest version ARN of the created container recipe, with the same patch version.
 
 
 <a id="nestedatt--target_repository"></a>

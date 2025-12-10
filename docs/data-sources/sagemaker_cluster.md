@@ -34,6 +34,7 @@ Data Source schema for AWS::SageMaker::Cluster
 - `orchestrator` (Attributes) Specifies parameter(s) specific to the orchestrator, e.g. specify the EKS cluster. (see [below for nested schema](#nestedatt--orchestrator))
 - `restricted_instance_groups` (Attributes List) The restricted instance groups of the SageMaker HyperPod cluster. (see [below for nested schema](#nestedatt--restricted_instance_groups))
 - `tags` (Attributes Set) Custom tags for managing the SageMaker HyperPod cluster as an AWS resource. You can add tags to your cluster in the same way you add them in other AWS services that support tagging. (see [below for nested schema](#nestedatt--tags))
+- `tiered_storage_config` (Attributes) Configuration for tiered storage in the SageMaker HyperPod cluster. (see [below for nested schema](#nestedatt--tiered_storage_config))
 - `vpc_config` (Attributes) Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC. (see [below for nested schema](#nestedatt--vpc_config))
 
 <a id="nestedatt--auto_scaling"></a>
@@ -50,6 +51,7 @@ Read-Only:
 
 Read-Only:
 
+- `capacity_requirements` (Attributes) Specifies the capacity requirements configuration for an instance group (see [below for nested schema](#nestedatt--instance_groups--capacity_requirements))
 - `current_count` (Number) The number of instances that are currently in the instance group of a SageMaker HyperPod cluster.
 - `execution_role` (String) The execution role for the instance group to assume.
 - `image_id` (String) AMI Id to be used for launching EC2 instances - HyperPodPublicAmiId or CustomAmiId
@@ -57,12 +59,22 @@ Read-Only:
 - `instance_group_name` (String) The name of the instance group of a SageMaker HyperPod cluster.
 - `instance_storage_configs` (Attributes List) The instance storage configuration for the instance group. (see [below for nested schema](#nestedatt--instance_groups--instance_storage_configs))
 - `instance_type` (String) The instance type of the instance group of a SageMaker HyperPod cluster.
+- `kubernetes_config` (Attributes) Kubernetes configuration for cluster nodes including labels and taints. (see [below for nested schema](#nestedatt--instance_groups--kubernetes_config))
 - `life_cycle_config` (Attributes) The lifecycle configuration for a SageMaker HyperPod cluster. (see [below for nested schema](#nestedatt--instance_groups--life_cycle_config))
 - `on_start_deep_health_checks` (List of String) Nodes will undergo advanced stress test to detect and replace faulty instances, based on the type of deep health check(s) passed in.
 - `override_vpc_config` (Attributes) Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC. (see [below for nested schema](#nestedatt--instance_groups--override_vpc_config))
 - `scheduled_update_config` (Attributes) The configuration object of the schedule that SageMaker follows when updating the AMI. (see [below for nested schema](#nestedatt--instance_groups--scheduled_update_config))
 - `threads_per_core` (Number) The number you specified to TreadsPerCore in CreateCluster for enabling or disabling multithreading. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading.
 - `training_plan_arn` (String) The Amazon Resource Name (ARN) of the training plan to use for this cluster instance group. For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see CreateTrainingPlan.
+
+<a id="nestedatt--instance_groups--capacity_requirements"></a>
+### Nested Schema for `instance_groups.capacity_requirements`
+
+Read-Only:
+
+- `on_demand` (String) Options for OnDemand capacity
+- `spot` (String) Options for Spot capacity
+
 
 <a id="nestedatt--instance_groups--instance_storage_configs"></a>
 ### Nested Schema for `instance_groups.instance_storage_configs`
@@ -79,6 +91,25 @@ Read-Only:
 - `root_volume` (Boolean)
 - `volume_kms_key_id` (String)
 - `volume_size_in_gb` (Number) The size in gigabytes (GB) of the additional EBS volume to be attached to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.
+
+
+
+<a id="nestedatt--instance_groups--kubernetes_config"></a>
+### Nested Schema for `instance_groups.kubernetes_config`
+
+Read-Only:
+
+- `labels` (Map of String) A map of Kubernetes labels to apply to cluster nodes.
+- `taints` (Attributes List) A list of Kubernetes taints to apply to cluster nodes. Maximum of 50 taints. (see [below for nested schema](#nestedatt--instance_groups--kubernetes_config--taints))
+
+<a id="nestedatt--instance_groups--kubernetes_config--taints"></a>
+### Nested Schema for `instance_groups.kubernetes_config.taints`
+
+Read-Only:
+
+- `effect` (String) The effect of the taint.
+- `key` (String) The key of the taint.
+- `value` (String) The value of the taint.
 
 
 
@@ -240,6 +271,15 @@ Read-Only:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+
+<a id="nestedatt--tiered_storage_config"></a>
+### Nested Schema for `tiered_storage_config`
+
+Read-Only:
+
+- `instance_memory_allocation_percentage` (Number) The percentage of instance memory to allocate for tiered storage.
+- `mode` (String) The mode of tiered storage.
 
 
 <a id="nestedatt--vpc_config"></a>

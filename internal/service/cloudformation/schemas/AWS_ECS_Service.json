@@ -357,22 +357,62 @@
         "AlternateTargetGroupArn"
       ]
     },
+    "LinearConfiguration": {
+      "description": "Configuration for a linear deployment strategy that shifts production traffic in equal percentage increments with configurable wait times between each step until 100 percent of traffic is shifted to the new service revision. \n The following validation applies only to Linear deployments created through CFN. CFN operations time out after 36 hours. Linear deployments can approach this limit because of their extended duration. This can cause CFN to roll back the deployment. To prevent timeout-related rollbacks, CFN rejects deployments when the calculated deployment time exceeds 33 hours based on your template configuration: \n  ``BakeTimeInMinutes + (StepBakeTimeInMinutes ? Number of deployment steps)`` \n Where the number of deployment steps is calculated as follows:\n  +  *If StepPercent evenly divides by 100*: The number of deployment steps equals ``(100 ? StepPercent) - 1``\n  +  *Otherwise*: The number of deployment steps equals the floor of ``100 ? StepPercent``. For example, if ``StepPercent`` is 11, the number of deployment steps is 9 (not 9.1).\n  \n This calculation reflects that CFN doesn't apply the step bake time after the final traffic shift reaches 100%. For example, with a ``StepPercent`` of 50%, there are actually two traffic shifts, but only one deployment step is counted for validation purposes because the bake time is applied only after the first 50% shift, not after reaching 100%.\n Additional backend processes (such as task scaling and running lifecycle hooks) can extend deployment time beyond these calculations. Even deployments under the 33-hour threshold might still time out if these processes cause the total duration to exceed 36 hours.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "StepBakeTimeInMinutes": {
+          "maximum": 1440,
+          "description": "The amount of time in minutes to wait between each traffic shifting step during a linear deployment. Valid values are 0 to 1440 minutes (24 hours). The default value is 6. This bake time is not applied after reaching 100 percent traffic.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "StepPercent": {
+          "multipleOf": 0.1,
+          "maximum": 100,
+          "description": "The percentage of production traffic to shift in each step during a linear deployment. Valid values are multiples of 0.1 from 3.0 to 100.0. The default value is 10.0.",
+          "type": "number",
+          "minimum": 3
+        }
+      }
+    },
     "CapacityProviderStrategyItem": {
       "description": "The details of a capacity provider strategy. A capacity provider strategy can be set when using the ``RunTask`` or ``CreateService`` APIs or as the default capacity provider strategy for a cluster with the ``CreateCluster`` API.\n Only capacity providers that are already associated with a cluster and have an ``ACTIVE`` or ``UPDATING`` status can be used in a capacity provider strategy. The ``PutClusterCapacityProviders`` API is used to associate a capacity provider with a cluster.\n If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created. New Auto Scaling group capacity providers can be created with the ``CreateCapacityProvider`` API operation.\n To use an FARGATElong capacity provider, specify either the ``FARGATE`` or ``FARGATE_SPOT`` capacity providers. The FARGATElong capacity providers are available to all accounts and only need to be associated with a cluster to be used in a capacity provider strategy.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "CapacityProvider": {
-          "description": "The short name of the capacity provider.",
+          "description": "The short name of the capacity provider. This can be either an AWS managed capacity provider (``FARGATE`` or ``FARGATE_SPOT``) or the name of a custom capacity provider that you created.",
           "type": "string"
         },
         "Base": {
-          "description": "The *base* value designates how many tasks, at a minimum, to run on the specified capacity provider for each service. Only one capacity provider in a capacity provider strategy can have a *base* defined. If no value is specified, the default value of ``0`` is used.\n Base value characteristics:\n  +  Only one capacity provider in a strategy can have a base defined\n  +  Default value is ``0`` if not specified\n  +  Valid range: 0 to 100,000\n  +  Base requirements are satisfied first before weight distribution",
+          "description": "The *base* value designates how many tasks, at a minimum, to run on the specified capacity provider for each service. Only one capacity provider in a capacity provider strategy can have a *base* defined. If no value is specified, the default value of ``0`` is used.\n Base value characteristics:\n  +  Only one capacity provider in a strategy can have a base defined\n  +  The default value is ``0`` if not specified\n  +  The valid range is 0 to 100,000\n  +  Base requirements are satisfied first before weight distribution",
           "type": "integer"
         },
         "Weight": {
-          "description": "The *weight* value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The ``weight`` value is taken into consideration after the ``base`` value, if defined, is satisfied.\n If no ``weight`` value is specified, the default value of ``0`` is used. When multiple capacity providers are specified within a capacity provider strategy, at least one of the capacity providers must have a weight value greater than zero and any capacity providers with a weight of ``0`` can't be used to place tasks. If you specify multiple capacity providers in a strategy that all have a weight of ``0``, any ``RunTask`` or ``CreateService`` actions using the capacity provider strategy will fail.\n Weight value characteristics:\n  +  Weight is considered after the base value is satisfied\n  +  Default value is ``0`` if not specified\n  +  Valid range: 0 to 1,000\n  +  At least one capacity provider must have a weight greater than zero\n  +  Capacity providers with weight of ``0`` cannot place tasks\n  \n Task distribution logic:\n  1.  Base satisfaction: The minimum number of tasks specified by the base value are placed on that capacity provider\n  1.  Weight distribution: After base requirements are met, additional tasks are distributed according to weight ratios\n  \n Examples:\n Equal Distribution: Two capacity providers both with weight ``1`` will split tasks evenly after base requirements are met.\n Weighted Distribution: If capacityProviderA has weight ``1`` and capacityProviderB has weight ``4``, then for every 1 task on A, 4 tasks will run on B.",
+          "description": "The *weight* value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The ``weight`` value is taken into consideration after the ``base`` value, if defined, is satisfied.\n If no ``weight`` value is specified, the default value of ``0`` is used. When multiple capacity providers are specified within a capacity provider strategy, at least one of the capacity providers must have a weight value greater than zero and any capacity providers with a weight of ``0`` can't be used to place tasks. If you specify multiple capacity providers in a strategy that all have a weight of ``0``, any ``RunTask`` or ``CreateService`` actions using the capacity provider strategy will fail.\n Weight value characteristics:\n  +  Weight is considered after the base value is satisfied\n  +  The default value is ``0`` if not specified\n  +  The valid range is 0 to 1,000\n  +  At least one capacity provider must have a weight greater than zero\n  +  Capacity providers with weight of ``0`` cannot place tasks\n  \n Task distribution logic:\n  1.  Base satisfaction: The minimum number of tasks specified by the base value are placed on that capacity provider\n  1.  Weight distribution: After base requirements are met, additional tasks are distributed according to weight ratios\n  \n Examples:\n Equal Distribution: Two capacity providers both with weight ``1`` will split tasks evenly after base requirements are met.\n Weighted Distribution: If capacityProviderA has weight ``1`` and capacityProviderB has weight ``4``, then for every 1 task on A, 4 tasks will run on B.",
           "type": "integer"
+        }
+      }
+    },
+    "CanaryConfiguration": {
+      "description": "Configuration for a canary deployment strategy that shifts a fixed percentage of traffic to the new service revision, waits for a specified bake time, then shifts the remaining traffic. \n The following validation applies only to Canary deployments created through CFN. CFN operations time out after 36 hours. Canary deployments can approach this limit because of their extended duration. This can cause CFN to roll back the deployment. To prevent timeout-related rollbacks, CFN rejects deployments when the calculated deployment time exceeds 33 hours based on your template configuration: \n  ``BakeTimeInMinutes + CanaryBakeTimeInMinutes`` \n Additional backend processes (such as task scaling and running lifecycle hooks) can extend deployment time beyond these calculations. Even deployments under the 33-hour threshold might still time out if these processes cause the total duration to exceed 36 hours.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "CanaryPercent": {
+          "multipleOf": 0.1,
+          "maximum": 100,
+          "description": "The percentage of production traffic to shift to the new service revision during the canary phase. Valid values are multiples of 0.1 from 0.1 to 100.0. The default value is 5.0.",
+          "type": "number",
+          "minimum": 0.1
+        },
+        "CanaryBakeTimeInMinutes": {
+          "maximum": 1440,
+          "description": "The amount of time in minutes to wait during the canary phase before shifting the remaining production traffic to the new service revision. Valid values are 0 to 1440 minutes (24 hours). The default value is 10.",
+          "type": "integer",
+          "minimum": 0
         }
       }
     },
@@ -424,6 +464,32 @@
         "Enable"
       ]
     },
+    "ServiceConnectAccessLogConfiguration": {
+      "description": "Configuration for Service Connect access logging. Access logs provide detailed information about requests made to your service, including request patterns, response codes, and timing data for debugging and monitoring purposes.\n  To enable access logs, you must also specify a ``logConfiguration`` in the ``serviceConnectConfiguration``.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Format": {
+          "description": "The format for Service Connect access log output. Choose TEXT for human-readable logs or JSON for structured data that integrates well with log analysis tools.",
+          "type": "string",
+          "enum": [
+            "TEXT",
+            "JSON"
+          ]
+        },
+        "IncludeQueryParameters": {
+          "description": "Specifies whether to include query parameters in Service Connect access logs.\n When enabled, query parameters from HTTP requests are included in the access logs. Consider security and privacy implications when enabling this feature, as query parameters may contain sensitive information such as request IDs and tokens. By default, this parameter is ``DISABLED``.",
+          "type": "string",
+          "enum": [
+            "DISABLED",
+            "ENABLED"
+          ]
+        }
+      },
+      "required": [
+        "Format"
+      ]
+    },
     "LoadBalancer": {
       "description": "The ``LoadBalancer`` property specifies details on a load balancer that is used with a service.\n If the service is using the ``CODE_DEPLOY`` deployment controller, the service is required to use either an Application Load Balancer or Network Load Balancer. When you are creating an ACDlong deployment group, you specify two target groups (referred to as a ``targetGroupPair``). Each target group binds to a separate task set in the deployment. The load balancer can also have up to two listeners, a required listener for production traffic and an optional listener that allows you to test new revisions of the service before routing production traffic to it.\n Services with tasks that use the ``awsvpc`` network mode (for example, those with the Fargate launch type) only support Application Load Balancers and Network Load Balancers. Classic Load Balancers are not supported. Also, when you create any target groups for these services, you must choose ``ip`` as the target type, not ``instance``. Tasks that use the ``awsvpc`` network mode are associated with an elastic network interface, not an Amazon EC2 instance.",
       "additionalProperties": false,
@@ -462,6 +528,10 @@
           "items": {
             "$ref": "#/definitions/ServiceConnectService"
           }
+        },
+        "AccessLogConfiguration": {
+          "description": "The configuration for Service Connect access logging. Access logs capture detailed information about requests made to your service, including request patterns, response codes, and timing data. They can be useful for debugging connectivity issues, monitoring service performance, and auditing service-to-service communication for security and compliance purposes.\n  To enable access logs, you must also specify a ``logConfiguration`` in the ``serviceConnectConfiguration``.",
+          "$ref": "#/definitions/ServiceConnectAccessLogConfiguration"
         },
         "Enabled": {
           "description": "Specifies whether to use Service Connect with this service.",
@@ -734,6 +804,10 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
+        "CanaryConfiguration": {
+          "description": "Configuration for canary deployment strategy. Only valid when the deployment strategy is ``CANARY``. This configuration enables shifting a fixed percentage of traffic for testing, followed by shifting the remaining traffic after a bake period.",
+          "$ref": "#/definitions/CanaryConfiguration"
+        },
         "BakeTimeInMinutes": {
           "maximum": 1440,
           "description": "The duration when both blue and green service revisions are running simultaneously after the production traffic has shifted.\n The following rules apply when you don't specify a value:\n  +  For rolling deployments, the value is set to 3 hours (180 minutes).\n  +  When you use an external deployment controller (``EXTERNAL``), or the ACD blue/green deployment controller (``CODE_DEPLOY``), the value is set to 3 hours (180 minutes).\n  +  For all other cases, the value is set to 36 hours (2160 minutes).",
@@ -756,7 +830,9 @@
           "type": "string",
           "enum": [
             "ROLLING",
-            "BLUE_GREEN"
+            "BLUE_GREEN",
+            "LINEAR",
+            "CANARY"
           ]
         },
         "DeploymentCircuitBreaker": {
@@ -770,6 +846,10 @@
         "MinimumHealthyPercent": {
           "description": "If a service is using the rolling update (``ECS``) deployment type, the ``minimumHealthyPercent`` represents a lower limit on the number of your service's tasks that must remain in the ``RUNNING`` state during a deployment, as a percentage of the ``desiredCount`` (rounded up to the nearest integer). This parameter enables you to deploy without using additional cluster capacity. For example, if your service has a ``desiredCount`` of four tasks and a ``minimumHealthyPercent`` of 50%, the service scheduler may stop two existing tasks to free up cluster capacity before starting two new tasks. \n  If any tasks are unhealthy and if ``maximumPercent`` doesn't allow the Amazon ECS scheduler to start replacement tasks, the scheduler stops the unhealthy tasks one-by-one \u2014 using the ``minimumHealthyPercent`` as a constraint \u2014 to clear up capacity to launch replacement tasks. For more information about how the scheduler replaces unhealthy tasks, see [Amazon ECS services](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html). \n For services that *do not* use a load balancer, the following should be noted:\n  +  A service is considered healthy if all essential containers within the tasks in the service pass their health checks.\n  +  If a task has no essential containers with a health check defined, the service scheduler will wait for 40 seconds after a task reaches a ``RUNNING`` state before the task is counted towards the minimum healthy percent total.\n  +  If a task has one or more essential containers with a health check defined, the service scheduler will wait for the task to reach a healthy status before counting it towards the minimum healthy percent total. A task is considered healthy when all essential containers within the task have passed their health checks. The amount of time the service scheduler can wait for is determined by the container health check settings. \n  \n For services that *do* use a load balancer, the following should be noted:\n  +  If a task has no essential containers with a health check defined, the service scheduler will wait for the load balancer target group health check to return a healthy status before counting the task towards the minimum healthy percent total.\n  +  If a task has an essential container with a health check defined, the service scheduler will wait for both the task to reach a healthy status and the load balancer target group health check to return a healthy status before counting the task towards the minimum healthy percent total.\n  \n The default value for a replica service for ``minimumHealthyPercent`` is 100%. The default ``minimumHealthyPercent`` value for a service using the ``DAEMON`` service schedule is 0% for the CLI, the AWS SDKs, and the APIs and 50% for the AWS Management Console.\n The minimum number of healthy tasks during a deployment is the ``desiredCount`` multiplied by the ``minimumHealthyPercent``/100, rounded up to the nearest integer value.\n If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and is running tasks that use the EC2 launch type, the *minimum healthy percent* value is set to the default value. The *minimum healthy percent* value is used to define the lower limit on the number of the tasks in the service that remain in the ``RUNNING`` state while the container instances are in the ``DRAINING`` state.\n  You can't specify a custom ``minimumHealthyPercent`` value for a service that uses either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and has tasks that use the EC2 launch type.\n  If a service is using either the blue/green (``CODE_DEPLOY``) or ``EXTERNAL`` deployment types and is running tasks that use the Fargate launch type, the minimum healthy percent value is not used, although it is returned when describing your service.",
           "type": "integer"
+        },
+        "LinearConfiguration": {
+          "description": "Configuration for linear deployment strategy. Only valid when the deployment strategy is ``LINEAR``. This configuration enables progressive traffic shifting in equal percentage increments with configurable bake times between each step.",
+          "$ref": "#/definitions/LinearConfiguration"
         }
       }
     },
@@ -858,7 +938,7 @@
       }
     },
     "LaunchType": {
-      "description": "The launch type on which to run your service. For more information, see [Amazon ECS Launch Types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer Guide*.",
+      "description": "The launch type on which to run your service. For more information, see [Amazon ECS Launch Types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer Guide*.\n  If you want to use Managed Instances, you must use the ``capacityProviderStrategy`` request parameter",
       "type": "string",
       "enum": [
         "EC2",
@@ -903,7 +983,7 @@
       "$ref": "#/definitions/ForceNewDeployment"
     },
     "HealthCheckGracePeriodSeconds": {
-      "description": "The period of time, in seconds, that the Amazon Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after a task has first started. If you do not specify a health check grace period value, the default value of 0 is used. If you do not use any of the health checks, then ``healthCheckGracePeriodSeconds`` is unused.\n If your service has more running tasks than desired, unhealthy tasks in the grace period might be stopped to reach the desired count.",
+      "description": "The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after a task has first started. If you do not specify a health check grace period value, the default value of 0 is used. If you do not use any of the health checks, then ``healthCheckGracePeriodSeconds`` is unused.\n If your service has more running tasks than desired, unhealthy tasks in the grace period might be stopped to reach the desired count.",
       "type": "integer"
     },
     "EnableECSManagedTags": {

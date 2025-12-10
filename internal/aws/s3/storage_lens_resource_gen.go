@@ -82,6 +82,17 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 		//	          },
 		//	          "type": "object"
 		//	        },
+		//	        "AdvancedPerformanceMetrics": {
+		//	          "additionalProperties": false,
+		//	          "description": "Advanced Performance Metrics.",
+		//	          "properties": {
+		//	            "IsEnabled": {
+		//	              "description": "Specifies whether the Advanced Performance Metrics is enabled or disabled.",
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "BucketLevel": {
 		//	          "additionalProperties": false,
 		//	          "description": "Bucket-level metrics configurations.",
@@ -114,6 +125,17 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 		//	              "properties": {
 		//	                "IsEnabled": {
 		//	                  "description": "Specifies whether advanced data protection metrics are enabled or disabled.",
+		//	                  "type": "boolean"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "AdvancedPerformanceMetrics": {
+		//	              "additionalProperties": false,
+		//	              "description": "Advanced Performance Metrics.",
+		//	              "properties": {
+		//	                "IsEnabled": {
+		//	                  "description": "Specifies whether the Advanced Performance Metrics is enabled or disabled.",
 		//	                  "type": "boolean"
 		//	                }
 		//	              },
@@ -317,6 +339,45 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 		//	            "Arn"
 		//	          ],
 		//	          "type": "object"
+		//	        },
+		//	        "StorageLensTableDestination": {
+		//	          "additionalProperties": false,
+		//	          "description": "S3 Tables destination settings for the Amazon S3 Storage Lens metrics export.",
+		//	          "properties": {
+		//	            "Encryption": {
+		//	              "description": "Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS).",
+		//	              "properties": {
+		//	                "SSEKMS": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "AWS KMS server-side encryption.",
+		//	                  "properties": {
+		//	                    "KeyId": {
+		//	                      "description": "The ARN of the KMS key to use for encryption.",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "KeyId"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "SSES3": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "S3 default server-side encryption.",
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "IsEnabled": {
+		//	              "description": "Specifies whether the export to S3 Tables is enabled or disabled.",
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "IsEnabled"
+		//	          ],
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -342,6 +403,117 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 		//	          },
 		//	          "type": "array",
 		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ExpandedPrefixesDataExport": {
+		//	      "additionalProperties": false,
+		//	      "description": "Expanded Prefixes Data Export.",
+		//	      "properties": {
+		//	        "S3BucketDestination": {
+		//	          "additionalProperties": false,
+		//	          "description": "S3 bucket destination settings for the Amazon S3 Storage Lens metrics export.",
+		//	          "properties": {
+		//	            "AccountId": {
+		//	              "description": "The AWS account ID that owns the destination S3 bucket.",
+		//	              "type": "string"
+		//	            },
+		//	            "Arn": {
+		//	              "description": "The ARN of the bucket to which Amazon S3 Storage Lens exports will be placed.",
+		//	              "type": "string"
+		//	            },
+		//	            "Encryption": {
+		//	              "description": "Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS).",
+		//	              "properties": {
+		//	                "SSEKMS": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "AWS KMS server-side encryption.",
+		//	                  "properties": {
+		//	                    "KeyId": {
+		//	                      "description": "The ARN of the KMS key to use for encryption.",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "KeyId"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "SSES3": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "S3 default server-side encryption.",
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "Format": {
+		//	              "description": "Specifies the file format to use when exporting Amazon S3 Storage Lens metrics export.",
+		//	              "enum": [
+		//	                "CSV",
+		//	                "Parquet"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "OutputSchemaVersion": {
+		//	              "description": "The version of the output schema to use when exporting Amazon S3 Storage Lens metrics.",
+		//	              "enum": [
+		//	                "V_1"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "Prefix": {
+		//	              "description": "The prefix to use for Amazon S3 Storage Lens export.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "OutputSchemaVersion",
+		//	            "Format",
+		//	            "AccountId",
+		//	            "Arn"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "StorageLensTableDestination": {
+		//	          "additionalProperties": false,
+		//	          "description": "S3 Tables destination settings for the Amazon S3 Storage Lens metrics export.",
+		//	          "properties": {
+		//	            "Encryption": {
+		//	              "description": "Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS).",
+		//	              "properties": {
+		//	                "SSEKMS": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "AWS KMS server-side encryption.",
+		//	                  "properties": {
+		//	                    "KeyId": {
+		//	                      "description": "The ARN of the KMS key to use for encryption.",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "KeyId"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "SSES3": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "S3 default server-side encryption.",
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "IsEnabled": {
+		//	              "description": "Specifies whether the export to S3 Tables is enabled or disabled.",
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "IsEnabled"
+		//	          ],
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -381,6 +553,10 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 		//	    "IsEnabled": {
 		//	      "description": "Specifies whether the Amazon S3 Storage Lens configuration is enabled or disabled.",
 		//	      "type": "boolean"
+		//	    },
+		//	    "PrefixDelimiter": {
+		//	      "description": "The delimiter to divide S3 key into hierarchy of prefixes.",
+		//	      "type": "string"
 		//	    },
 		//	    "StorageLensArn": {
 		//	      "description": "The ARN for the Amazon S3 Storage Lens configuration.",
@@ -459,6 +635,26 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: AdvancedPerformanceMetrics
+						"advanced_performance_metrics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IsEnabled
+								"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies whether the Advanced Performance Metrics is enabled or disabled.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Advanced Performance Metrics.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: BucketLevel
 						"bucket_level": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -516,6 +712,26 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "Enables advanced data protection metrics.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: AdvancedPerformanceMetrics
+								"advanced_performance_metrics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: IsEnabled
+										"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "Specifies whether the Advanced Performance Metrics is enabled or disabled.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Advanced Performance Metrics.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -849,6 +1065,73 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: StorageLensTableDestination
+						"storage_lens_table_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Encryption
+								"encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: SSEKMS
+										"ssekms": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: KeyId
+												"key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The ARN of the KMS key to use for encryption.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "AWS KMS server-side encryption.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: SSES3
+										"sses3": schema.StringAttribute{ /*START ATTRIBUTE*/
+											CustomType:  jsontypes.NormalizedType{},
+											Description: "S3 default server-side encryption.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS).",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: IsEnabled
+								"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies whether the export to S3 Tables is enabled or disabled.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "S3 Tables destination settings for the Amazon S3 Storage Lens metrics export.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Specifies how Amazon S3 Storage Lens metrics should be exported.",
 					Optional:    true,
@@ -880,6 +1163,203 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "S3 buckets and Regions to include/exclude in the Amazon S3 Storage Lens configuration.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ExpandedPrefixesDataExport
+				"expanded_prefixes_data_export": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: S3BucketDestination
+						"s3_bucket_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccountId
+								"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The AWS account ID that owns the destination S3 bucket.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Arn
+								"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the bucket to which Amazon S3 Storage Lens exports will be placed.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Encryption
+								"encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: SSEKMS
+										"ssekms": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: KeyId
+												"key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The ARN of the KMS key to use for encryption.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "AWS KMS server-side encryption.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: SSES3
+										"sses3": schema.StringAttribute{ /*START ATTRIBUTE*/
+											CustomType:  jsontypes.NormalizedType{},
+											Description: "S3 default server-side encryption.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS).",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Format
+								"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the file format to use when exporting Amazon S3 Storage Lens metrics export.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"CSV",
+											"Parquet",
+										),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: OutputSchemaVersion
+								"output_schema_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The version of the output schema to use when exporting Amazon S3 Storage Lens metrics.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"V_1",
+										),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Prefix
+								"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The prefix to use for Amazon S3 Storage Lens export.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "S3 bucket destination settings for the Amazon S3 Storage Lens metrics export.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: StorageLensTableDestination
+						"storage_lens_table_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Encryption
+								"encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: SSEKMS
+										"ssekms": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: KeyId
+												"key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The ARN of the KMS key to use for encryption.",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "AWS KMS server-side encryption.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: SSES3
+										"sses3": schema.StringAttribute{ /*START ATTRIBUTE*/
+											CustomType:  jsontypes.NormalizedType{},
+											Description: "S3 default server-side encryption.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configures the server-side encryption for Amazon S3 Storage Lens report files with either S3-managed keys (SSE-S3) or KMS-managed keys (SSE-KMS).",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: IsEnabled
+								"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies whether the export to S3 Tables is enabled or disabled.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "S3 Tables destination settings for the Amazon S3 Storage Lens metrics export.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Expanded Prefixes Data Export.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -931,6 +1411,15 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 				"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Specifies whether the Amazon S3 Storage Lens configuration is enabled or disabled.",
 					Required:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PrefixDelimiter
+				"prefix_delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The delimiter to divide S3 key into hierarchy of prefixes.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: StorageLensArn
 				"storage_lens_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1048,6 +1537,7 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 		"activity_metrics":                      "ActivityMetrics",
 		"advanced_cost_optimization_metrics":    "AdvancedCostOptimizationMetrics",
 		"advanced_data_protection_metrics":      "AdvancedDataProtectionMetrics",
+		"advanced_performance_metrics":          "AdvancedPerformanceMetrics",
 		"arn":                                   "Arn",
 		"aws_org":                               "AwsOrg",
 		"bucket_level":                          "BucketLevel",
@@ -1058,6 +1548,7 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 		"detailed_status_codes_metrics":         "DetailedStatusCodesMetrics",
 		"encryption":                            "Encryption",
 		"exclude":                               "Exclude",
+		"expanded_prefixes_data_export":         "ExpandedPrefixesDataExport",
 		"format":                                "Format",
 		"id":                                    "Id",
 		"include":                               "Include",
@@ -1068,6 +1559,7 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 		"min_storage_bytes_percentage":          "MinStorageBytesPercentage",
 		"output_schema_version":                 "OutputSchemaVersion",
 		"prefix":                                "Prefix",
+		"prefix_delimiter":                      "PrefixDelimiter",
 		"prefix_level":                          "PrefixLevel",
 		"regions":                               "Regions",
 		"s3_bucket_destination":                 "S3BucketDestination",
@@ -1078,6 +1570,7 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 		"storage_lens_configuration":            "StorageLensConfiguration",
 		"storage_lens_group_level":              "StorageLensGroupLevel",
 		"storage_lens_group_selection_criteria": "StorageLensGroupSelectionCriteria",
+		"storage_lens_table_destination":        "StorageLensTableDestination",
 		"storage_metrics":                       "StorageMetrics",
 		"tags":                                  "Tags",
 		"value":                                 "Value",

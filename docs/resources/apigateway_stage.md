@@ -84,7 +84,7 @@ resource "awscc_apigateway_rest_api" "example" {
 ### Optional
 
 - `access_log_setting` (Attributes) The ``AccessLogSetting`` property type specifies settings for logging access in this stage.
-  ``AccessLogSetting`` is a property of the [AWS::ApiGateway::Stage](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html) resource. (see [below for nested schema](#nestedatt--access_log_setting))
+ ``AccessLogSetting`` is a property of the [AWS::ApiGateway::Stage](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-stage.html) resource. (see [below for nested schema](#nestedatt--access_log_setting))
 - `cache_cluster_enabled` (Boolean)
 - `cache_cluster_size` (String)
 - `canary_setting` (Attributes) (see [below for nested schema](#nestedatt--canary_setting))
@@ -144,8 +144,8 @@ Optional:
 
 Optional:
 
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:.
-- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:.
+- `key` (String) A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.
+- `value` (String) The value for the specified tag key.
 
 ## Import
 

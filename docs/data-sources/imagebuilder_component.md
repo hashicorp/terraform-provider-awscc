@@ -27,6 +27,7 @@ Data Source schema for AWS::ImageBuilder::Component
 - `description` (String) The description of the component.
 - `encrypted` (Boolean) The encryption status of the component.
 - `kms_key_id` (String) The KMS key identifier used to encrypt the component.
+- `latest_version` (Attributes) The latest version references of the component. (see [below for nested schema](#nestedatt--latest_version))
 - `name` (String) The name of the component.
 - `platform` (String) The platform of the component.
 - `supported_os_versions` (List of String) The operating system (OS) version supported by the component.
@@ -34,3 +35,13 @@ Data Source schema for AWS::ImageBuilder::Component
 - `type` (String) The type of the component denotes whether the component is used to build the image or only to test it.
 - `uri` (String) The uri of the component.
 - `version` (String) The version of the component.
+
+<a id="nestedatt--latest_version"></a>
+### Nested Schema for `latest_version`
+
+Read-Only:
+
+- `arn` (String) The latest version ARN of the created component.
+- `major` (String) The latest version ARN of the created component, with the same major version.
+- `minor` (String) The latest version ARN of the created component, with the same minor version.
+- `patch` (String) The latest version ARN of the created component, with the same patch version.

@@ -22,6 +22,7 @@ Resource Type definition for AWS::Connect::EmailAddress
 
 ### Optional
 
+- `alias_configurations` (Attributes List) List of alias configurations for the email address (see [below for nested schema](#nestedatt--alias_configurations))
 - `description` (String) A description for the email address.
 - `display_name` (String) The display name for the email address.
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
@@ -30,6 +31,14 @@ Resource Type definition for AWS::Connect::EmailAddress
 
 - `email_address_arn` (String) The identifier of the email address.
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--alias_configurations"></a>
+### Nested Schema for `alias_configurations`
+
+Optional:
+
+- `email_address_arn` (String) The identifier of the email address alias
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

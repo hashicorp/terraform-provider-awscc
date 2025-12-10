@@ -8,6 +8,7 @@ package sagemaker
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -161,6 +162,23 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "additionalProperties": false,
 		//	    "description": "Details of an instance group in a SageMaker HyperPod cluster.",
 		//	    "properties": {
+		//	      "CapacityRequirements": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specifies the capacity requirements configuration for an instance group",
+		//	        "properties": {
+		//	          "OnDemand": {
+		//	            "additionalProperties": false,
+		//	            "description": "Options for OnDemand capacity",
+		//	            "type": "object"
+		//	          },
+		//	          "Spot": {
+		//	            "additionalProperties": false,
+		//	            "description": "Options for Spot capacity",
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
 		//	      "CurrentCount": {
 		//	        "description": "The number of instances that are currently in the instance group of a SageMaker HyperPod cluster.",
 		//	        "minimum": 0,
@@ -229,6 +247,57 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "InstanceType": {
 		//	        "description": "The instance type of the instance group of a SageMaker HyperPod cluster.",
 		//	        "type": "string"
+		//	      },
+		//	      "KubernetesConfig": {
+		//	        "additionalProperties": false,
+		//	        "description": "Kubernetes configuration for cluster nodes including labels and taints.",
+		//	        "properties": {
+		//	          "Labels": {
+		//	            "additionalProperties": false,
+		//	            "description": "A map of Kubernetes labels to apply to cluster nodes.",
+		//	            "patternProperties": {
+		//	              "": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Taints": {
+		//	            "description": "A list of Kubernetes taints to apply to cluster nodes. Maximum of 50 taints.",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "A Kubernetes taint to apply to cluster nodes.",
+		//	              "properties": {
+		//	                "Effect": {
+		//	                  "description": "The effect of the taint.",
+		//	                  "enum": [
+		//	                    "NoSchedule",
+		//	                    "PreferNoSchedule",
+		//	                    "NoExecute"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "Key": {
+		//	                  "description": "The key of the taint.",
+		//	                  "type": "string"
+		//	                },
+		//	                "Value": {
+		//	                  "description": "The value of the taint.",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Key",
+		//	                "Effect"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "maxItems": 50,
+		//	            "type": "array"
+		//	          }
+		//	        },
+		//	        "type": "object"
 		//	      },
 		//	      "LifeCycleConfig": {
 		//	        "additionalProperties": false,
@@ -435,6 +504,25 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"instance_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CapacityRequirements
+					"capacity_requirements": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: OnDemand
+							"on_demand": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  jsontypes.NormalizedType{},
+								Description: "Options for OnDemand capacity",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Spot
+							"spot": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  jsontypes.NormalizedType{},
+								Description: "Options for Spot capacity",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Specifies the capacity requirements configuration for an instance group",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: CurrentCount
 					"current_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "The number of instances that are currently in the instance group of a SageMaker HyperPod cluster.",
@@ -492,6 +580,44 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: InstanceType
 					"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The instance type of the instance group of a SageMaker HyperPod cluster.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: KubernetesConfig
+					"kubernetes_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Labels
+							"labels":            // Pattern: ""
+							schema.MapAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "A map of Kubernetes labels to apply to cluster nodes.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Taints
+							"taints": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Effect
+										"effect": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The effect of the taint.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Key
+										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The key of the taint.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The value of the taint.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "A list of Kubernetes taints to apply to cluster nodes. Maximum of 50 taints.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Kubernetes configuration for cluster nodes including labels and taints.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: LifeCycleConfig
@@ -1054,6 +1180,47 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Custom tags for managing the SageMaker HyperPod cluster as an AWS resource. You can add tags to your cluster in the same way you add them in other AWS services that support tagging.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: TieredStorageConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for tiered storage in the SageMaker HyperPod cluster.",
+		//	  "properties": {
+		//	    "InstanceMemoryAllocationPercentage": {
+		//	      "description": "The percentage of instance memory to allocate for tiered storage.",
+		//	      "type": "integer"
+		//	    },
+		//	    "Mode": {
+		//	      "description": "The mode of tiered storage.",
+		//	      "enum": [
+		//	        "Enable",
+		//	        "Disable"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Mode"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"tiered_storage_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InstanceMemoryAllocationPercentage
+				"instance_memory_allocation_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The percentage of instance memory to allocate for tiered storage.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Mode
+				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The mode of tiered storage.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for tiered storage in the SageMaker HyperPod cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcConfig
 		// CloudFormation resource type schema:
 		//
@@ -1127,59 +1294,68 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Cluster").WithTerraformTypeName("awscc_sagemaker_cluster")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"alarm_name":                  "AlarmName",
-		"auto_rollback_configuration": "AutoRollbackConfiguration",
-		"auto_scaler_type":            "AutoScalerType",
-		"auto_scaling":                "AutoScaling",
-		"cluster_arn":                 "ClusterArn",
-		"cluster_name":                "ClusterName",
-		"cluster_role":                "ClusterRole",
-		"cluster_status":              "ClusterStatus",
-		"creation_time":               "CreationTime",
-		"current_count":               "CurrentCount",
-		"deployment_config":           "DeploymentConfig",
-		"ebs_volume_config":           "EbsVolumeConfig",
-		"eks":                         "Eks",
-		"environment_config":          "EnvironmentConfig",
-		"execution_role":              "ExecutionRole",
-		"failure_message":             "FailureMessage",
-		"fsx_lustre_config":           "FSxLustreConfig",
-		"image_id":                    "ImageId",
-		"instance_count":              "InstanceCount",
-		"instance_group_name":         "InstanceGroupName",
-		"instance_groups":             "InstanceGroups",
-		"instance_storage_configs":    "InstanceStorageConfigs",
-		"instance_type":               "InstanceType",
-		"key":                         "Key",
-		"life_cycle_config":           "LifeCycleConfig",
-		"maximum_batch_size":          "MaximumBatchSize",
-		"mode":                        "Mode",
-		"node_provisioning_mode":      "NodeProvisioningMode",
-		"node_recovery":               "NodeRecovery",
-		"on_create":                   "OnCreate",
-		"on_start_deep_health_checks": "OnStartDeepHealthChecks",
-		"orchestrator":                "Orchestrator",
-		"override_vpc_config":         "OverrideVpcConfig",
-		"per_unit_storage_throughput": "PerUnitStorageThroughput",
-		"restricted_instance_groups":  "RestrictedInstanceGroups",
-		"rollback_maximum_batch_size": "RollbackMaximumBatchSize",
-		"rolling_update_policy":       "RollingUpdatePolicy",
-		"root_volume":                 "RootVolume",
-		"schedule_expression":         "ScheduleExpression",
-		"scheduled_update_config":     "ScheduledUpdateConfig",
-		"security_group_ids":          "SecurityGroupIds",
-		"size_in_gi_b":                "SizeInGiB",
-		"source_s3_uri":               "SourceS3Uri",
-		"subnets":                     "Subnets",
-		"tags":                        "Tags",
-		"threads_per_core":            "ThreadsPerCore",
-		"training_plan_arn":           "TrainingPlanArn",
-		"type":                        "Type",
-		"value":                       "Value",
-		"volume_kms_key_id":           "VolumeKmsKeyId",
-		"volume_size_in_gb":           "VolumeSizeInGB",
-		"vpc_config":                  "VpcConfig",
-		"wait_interval_in_seconds":    "WaitIntervalInSeconds",
+		"alarm_name":                            "AlarmName",
+		"auto_rollback_configuration":           "AutoRollbackConfiguration",
+		"auto_scaler_type":                      "AutoScalerType",
+		"auto_scaling":                          "AutoScaling",
+		"capacity_requirements":                 "CapacityRequirements",
+		"cluster_arn":                           "ClusterArn",
+		"cluster_name":                          "ClusterName",
+		"cluster_role":                          "ClusterRole",
+		"cluster_status":                        "ClusterStatus",
+		"creation_time":                         "CreationTime",
+		"current_count":                         "CurrentCount",
+		"deployment_config":                     "DeploymentConfig",
+		"ebs_volume_config":                     "EbsVolumeConfig",
+		"effect":                                "Effect",
+		"eks":                                   "Eks",
+		"environment_config":                    "EnvironmentConfig",
+		"execution_role":                        "ExecutionRole",
+		"failure_message":                       "FailureMessage",
+		"fsx_lustre_config":                     "FSxLustreConfig",
+		"image_id":                              "ImageId",
+		"instance_count":                        "InstanceCount",
+		"instance_group_name":                   "InstanceGroupName",
+		"instance_groups":                       "InstanceGroups",
+		"instance_memory_allocation_percentage": "InstanceMemoryAllocationPercentage",
+		"instance_storage_configs":              "InstanceStorageConfigs",
+		"instance_type":                         "InstanceType",
+		"key":                                   "Key",
+		"kubernetes_config":                     "KubernetesConfig",
+		"labels":                                "Labels",
+		"life_cycle_config":                     "LifeCycleConfig",
+		"maximum_batch_size":                    "MaximumBatchSize",
+		"mode":                                  "Mode",
+		"node_provisioning_mode":                "NodeProvisioningMode",
+		"node_recovery":                         "NodeRecovery",
+		"on_create":                             "OnCreate",
+		"on_demand":                             "OnDemand",
+		"on_start_deep_health_checks":           "OnStartDeepHealthChecks",
+		"orchestrator":                          "Orchestrator",
+		"override_vpc_config":                   "OverrideVpcConfig",
+		"per_unit_storage_throughput":           "PerUnitStorageThroughput",
+		"restricted_instance_groups":            "RestrictedInstanceGroups",
+		"rollback_maximum_batch_size":           "RollbackMaximumBatchSize",
+		"rolling_update_policy":                 "RollingUpdatePolicy",
+		"root_volume":                           "RootVolume",
+		"schedule_expression":                   "ScheduleExpression",
+		"scheduled_update_config":               "ScheduledUpdateConfig",
+		"security_group_ids":                    "SecurityGroupIds",
+		"size_in_gi_b":                          "SizeInGiB",
+		"source_s3_uri":                         "SourceS3Uri",
+		"spot":                                  "Spot",
+		"subnets":                               "Subnets",
+		"tags":                                  "Tags",
+		"taints":                                "Taints",
+		"threads_per_core":                      "ThreadsPerCore",
+		"tiered_storage_config":                 "TieredStorageConfig",
+		"training_plan_arn":                     "TrainingPlanArn",
+		"type":                                  "Type",
+		"value":                                 "Value",
+		"volume_kms_key_id":                     "VolumeKmsKeyId",
+		"volume_size_in_gb":                     "VolumeSizeInGB",
+		"vpc_config":                            "VpcConfig",
+		"wait_interval_in_seconds":              "WaitIntervalInSeconds",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

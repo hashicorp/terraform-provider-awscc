@@ -134,6 +134,7 @@
         "ses:ListTagsForResource",
         "ses:GetArchive",
         "ses:CreateArchive",
+        "iam:CreateServiceLinkedRole",
         "kms:DescribeKey",
         "kms:Decrypt",
         "kms:GenerateDataKey"

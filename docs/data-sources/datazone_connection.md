@@ -27,12 +27,15 @@ Data Source schema for AWS::DataZone::Connection
 - `domain_id` (String) The ID of the domain in which the connection is created.
 - `domain_identifier` (String) The identifier of the domain in which the connection is created.
 - `domain_unit_id` (String) The ID of the domain unit in which the connection is created.
+- `enable_trusted_identity_propagation` (Boolean) Specifies whether the trusted identity propagation is enabled
 - `environment_id` (String) The ID of the environment in which the connection is created.
 - `environment_identifier` (String) The identifier of the environment in which the connection is created.
 - `environment_user_role` (String) The role of the user in the environment.
 - `name` (String) The name of the connection.
 - `project_id` (String) The ID of the project in which the connection is created.
+- `project_identifier` (String) The identifier of the project in which the connection should be created. If
 - `props` (Attributes) (see [below for nested schema](#nestedatt--props))
+- `scope` (String) The scope of the connection.
 - `type` (String) Connection Type
 
 <a id="nestedatt--aws_location"></a>
@@ -51,13 +54,25 @@ Read-Only:
 
 Read-Only:
 
+- `amazon_q_properties` (Attributes) Amazon Q properties of the connection. (see [below for nested schema](#nestedatt--props--amazon_q_properties))
 - `athena_properties` (Attributes) Athena Properties Input (see [below for nested schema](#nestedatt--props--athena_properties))
 - `glue_properties` (Attributes) Glue Properties Input (see [below for nested schema](#nestedatt--props--glue_properties))
 - `hyper_pod_properties` (Attributes) HyperPod Properties Input (see [below for nested schema](#nestedatt--props--hyper_pod_properties))
 - `iam_properties` (Attributes) IAM Properties Input (see [below for nested schema](#nestedatt--props--iam_properties))
 - `redshift_properties` (Attributes) Redshift Properties Input (see [below for nested schema](#nestedatt--props--redshift_properties))
+- `s3_properties` (Attributes) S3 Properties Input (see [below for nested schema](#nestedatt--props--s3_properties))
 - `spark_emr_properties` (Attributes) Spark EMR Properties Input. (see [below for nested schema](#nestedatt--props--spark_emr_properties))
 - `spark_glue_properties` (Attributes) Spark Glue Properties Input. (see [below for nested schema](#nestedatt--props--spark_glue_properties))
+
+<a id="nestedatt--props--amazon_q_properties"></a>
+### Nested Schema for `props.amazon_q_properties`
+
+Read-Only:
+
+- `auth_mode` (String) The authentication mode of the connection's AmazonQ properties
+- `is_enabled` (Boolean) Specifies whether Amazon Q is enabled for the connection
+- `profile_arn` (String)
+
 
 <a id="nestedatt--props--athena_properties"></a>
 ### Nested Schema for `props.athena_properties`
@@ -240,6 +255,15 @@ Read-Only:
 - `cluster_name` (String)
 - `workgroup_name` (String)
 
+
+
+<a id="nestedatt--props--s3_properties"></a>
+### Nested Schema for `props.s3_properties`
+
+Read-Only:
+
+- `s3_access_grant_location_id` (String) The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties of a connection.
+- `s3_uri` (String) The Amazon S3 URI that's part of the Amazon S3 properties of a connection.
 
 
 <a id="nestedatt--props--spark_emr_properties"></a>

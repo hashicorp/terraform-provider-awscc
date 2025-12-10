@@ -13,6 +13,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -60,6 +62,79 @@ func serviceNetworkVpcAssociationResource(ctx context.Context) (resource.Resourc
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DnsOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "PrivateDnsPreference": {
+		//	      "enum": [
+		//	        "VERIFIED_DOMAINS_ONLY",
+		//	        "ALL_DOMAINS",
+		//	        "VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS",
+		//	        "SPECIFIED_DOMAINS_ONLY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "PrivateDnsSpecifiedDomains": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "maxLength": 255,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"dns_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PrivateDnsPreference
+				"private_dns_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"VERIFIED_DOMAINS_ONLY",
+							"ALL_DOMAINS",
+							"VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS",
+							"SPECIFIED_DOMAINS_ONLY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PrivateDnsSpecifiedDomains
+				"private_dns_specified_domains": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						setvalidator.SizeBetween(1, 10),
+						setvalidator.ValueStringsAre(
+							stringvalidator.LengthBetween(1, 255),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+						setplanmodifier.RequiresReplaceIfConfigured(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -73,6 +148,20 @@ func serviceNetworkVpcAssociationResource(ctx context.Context) (resource.Resourc
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PrivateDnsEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"private_dns_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
@@ -325,7 +414,11 @@ func serviceNetworkVpcAssociationResource(ctx context.Context) (resource.Resourc
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                                "Arn",
 		"created_at":                         "CreatedAt",
+		"dns_options":                        "DnsOptions",
 		"key":                                "Key",
+		"private_dns_enabled":                "PrivateDnsEnabled",
+		"private_dns_preference":             "PrivateDnsPreference",
+		"private_dns_specified_domains":      "PrivateDnsSpecifiedDomains",
 		"security_group_ids":                 "SecurityGroupIds",
 		"service_network_arn":                "ServiceNetworkArn",
 		"service_network_id":                 "ServiceNetworkId",

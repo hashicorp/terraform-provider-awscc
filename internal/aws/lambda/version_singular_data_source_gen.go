@@ -72,6 +72,42 @@ func versionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The name of the Lambda function.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: FunctionScalingConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The scaling configuration to apply to the function, including minimum and maximum execution environment limits.",
+		//	  "properties": {
+		//	    "MaxExecutionEnvironments": {
+		//	      "description": "The maximum number of execution environments that can be provisioned for the function.",
+		//	      "minimum": 0,
+		//	      "type": "integer"
+		//	    },
+		//	    "MinExecutionEnvironments": {
+		//	      "description": "The minimum number of execution environments to maintain for the function.",
+		//	      "minimum": 0,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"function_scaling_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxExecutionEnvironments
+				"max_execution_environments": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum number of execution environments that can be provisioned for the function.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinExecutionEnvironments
+				"min_execution_environments": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The minimum number of execution environments to maintain for the function.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The scaling configuration to apply to the function, including minimum and maximum execution environment limits.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProvisionedConcurrencyConfig
 		// CloudFormation resource type schema:
 		//
@@ -172,6 +208,9 @@ func versionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description":                       "Description",
 		"function_arn":                      "FunctionArn",
 		"function_name":                     "FunctionName",
+		"function_scaling_config":           "FunctionScalingConfig",
+		"max_execution_environments":        "MaxExecutionEnvironments",
+		"min_execution_environments":        "MinExecutionEnvironments",
 		"provisioned_concurrency_config":    "ProvisionedConcurrencyConfig",
 		"provisioned_concurrent_executions": "ProvisionedConcurrentExecutions",
 		"runtime_policy":                    "RuntimePolicy",

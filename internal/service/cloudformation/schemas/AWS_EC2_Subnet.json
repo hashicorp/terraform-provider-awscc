@@ -2,6 +2,10 @@
   "typeName": "AWS::EC2::Subnet",
   "description": "Specifies a subnet for the specified VPC.\n For an IPv4 only subnet, specify an IPv4 CIDR block. If the VPC has an IPv6 CIDR block, you can create an IPv6 only subnet or a dual stack subnet instead. For an IPv6 only subnet, specify an IPv6 CIDR block. For a dual stack subnet, specify both an IPv4 CIDR block and an IPv6 CIDR block.\n For more information, see [Subnets for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html) in the *Amazon VPC User Guide*.",
   "additionalProperties": false,
+  "propertyTransform": {
+    "/properties/Ipv6CidrBlock": "Ipv6CidrBlock~>function($c){$split($c,\"/\")~>function($p){$number($p[1])~>function($n){$split($p[0],\":\")~>function($r){($map([0,1,2,3,4,5,6,7],function($i){$pad($r[$i],-4,\"0\")~>function($h){($i<$floor($n/16)?$h:($i=$floor($n/16)?$floor(($n%16)/4)~>function($k){($h~>$substring(0,$k))&$substring(\"0000\",0,4-$k)}:\"0000\"))~>$replace(/^0{1,3}/,\"\")}})~>$join(\":\")~>$replace(/(:0)+$/,\"::\"))&\"/\"&$p[1]}}}}",
+    "/properties/CidrBlock": "CidrBlock~>function($cidr){$split($cidr,\"/\")~>function($split_cidr){$number($split_cidr[1])~>function($sub_mask){$split($split_cidr[0],/[.]/).$number()~>function($octets){($octets.$formatBase($,2).$pad(-8,\"0\")~>$join())~>function($ip_bin_str){$substring($ip_bin_str,0,$sub_mask).$pad(32,\"0\")~>function($canon_ip_bin_str){$map($map([0..3],function($i){$substring($canon_ip_bin_str,$i*8,8)}),function($s){$split($s,\"\")})~>function($canon_octet_arrs){$map($canon_octet_arrs,function($section){$sum($map([0..7],function($bit){$number($section[$bit])*$power(2,7-$bit)}))})~>function($canon_octets){($canon_octets.$string()~>$join(\".\"))&\"/\"&$sub_mask}}}}}}}}"
+  },
   "properties": {
     "AssignIpv6AddressOnCreation": {
       "type": "boolean",

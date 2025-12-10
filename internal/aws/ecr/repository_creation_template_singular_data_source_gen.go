@@ -147,11 +147,11 @@ func repositoryCreationTemplateDataSource(ctx context.Context) (datasource.DataS
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Defines the image tag mutability exclusion filters to apply when creating repositories from this template. These filters specify which image tags can override the repository's default image tag mutability setting.",
+		//	  "description": "A list of filters that specify which image tags are excluded from the repository creation template's image tag mutability setting.",
 		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "Overrides the default image tag mutability setting of the repository for image tags that match the specified filters.",
+		//	    "description": "A filter that specifies which image tags should be excluded from the repository's image tag mutability setting.",
 		//	    "properties": {
 		//	      "ImageTagMutabilityExclusionFilterType": {
 		//	        "description": "",
@@ -193,7 +193,7 @@ func repositoryCreationTemplateDataSource(ctx context.Context) (datasource.DataS
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Defines the image tag mutability exclusion filters to apply when creating repositories from this template. These filters specify which image tags can override the repository's default image tag mutability setting.",
+			Description: "A list of filters that specify which image tags are excluded from the repository creation template's image tag mutability setting.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LifecyclePolicy

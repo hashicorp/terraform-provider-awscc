@@ -217,9 +217,18 @@ Optional:
 
 Optional:
 
+- `infrastructure_optimization` (Attributes) Defines how Amazon ECS Managed Instances optimizes the infrastructure in your capacity provider. Configure it to turn on or off the infrastructure optimization in your capacity provider, and to control the idle EC2 instances optimization delay. (see [below for nested schema](#nestedatt--managed_instances_provider--infrastructure_optimization))
 - `infrastructure_role_arn` (String)
 - `instance_launch_template` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template))
 - `propagate_tags` (String)
+
+<a id="nestedatt--managed_instances_provider--infrastructure_optimization"></a>
+### Nested Schema for `managed_instances_provider.infrastructure_optimization`
+
+Optional:
+
+- `scale_in_after` (Number) This parameter defines the number of seconds Amazon ECS Managed Instances waits before optimizing EC2 instances that have become idle or underutilized. A longer delay increases the likelihood of placing new tasks on idle instances, reducing startup time. A shorter delay helps reduce infrastructure costs by optimizing idle instances more quickly. Valid values are: Not set (null) - Uses the default optimization behavior, `-1` - Disables automatic infrastructure optimization, `0` to `3600` (inclusive) - Specifies the number of seconds to wait before optimizing instances.
+
 
 <a id="nestedatt--managed_instances_provider--instance_launch_template"></a>
 ### Nested Schema for `managed_instances_provider.instance_launch_template`

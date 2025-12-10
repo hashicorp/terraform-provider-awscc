@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
@@ -6912,6 +6913,39 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ResourceRetentionPolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "SkipDeregisterOnUpdate": {
+		//	      "default": false,
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"resource_retention_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SkipDeregisterOnUpdate
+				"skip_deregister_on_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Default:  booldefault.StaticBool(false),
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// SkipDeregisterOnUpdate is a write-only property.
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ResourceRetentionPolicy is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: RetryStrategy
 		// CloudFormation resource type schema:
 		//
@@ -7214,6 +7248,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"repository_credentials":         "RepositoryCredentials",
 		"requests":                       "Requests",
 		"resource_requirements":          "ResourceRequirements",
+		"resource_retention_policy":      "ResourceRetentionPolicy",
 		"resources":                      "Resources",
 		"retry_strategy":                 "RetryStrategy",
 		"root_directory":                 "RootDirectory",
@@ -7233,6 +7268,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"size":                           "Size",
 		"size_in_gi_b":                   "SizeInGiB",
 		"size_limit":                     "SizeLimit",
+		"skip_deregister_on_update":      "SkipDeregisterOnUpdate",
 		"soft_limit":                     "SoftLimit",
 		"source_path":                    "SourcePath",
 		"source_volume":                  "SourceVolume",
@@ -7256,6 +7292,10 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"volumes":                        "Volumes",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/ResourceRetentionPolicy",
+		"/properties/ResourceRetentionPolicy/SkipDeregisterOnUpdate",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

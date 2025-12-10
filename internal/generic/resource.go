@@ -20,7 +20,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/identityschema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
@@ -527,6 +526,12 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 		response.Diagnostics.Append(ResourceNotFoundWarningDiag(err))
 		response.State.RemoveResource(ctx)
 
+		if response.Identity.Raw.IsFullyNull() {
+			// set partial identity. This is necessary if resource was tainted
+			// and did not set an identity
+			response.Diagnostics.Append(response.Identity.SetAttribute(ctx, path.Root(identity.NameAccountID), r.provider.AccountID(ctx))...)
+		}
+
 		return
 	}
 
@@ -799,31 +804,10 @@ func (r *genericResource) ImportState(ctx context.Context, request resource.Impo
 
 	// add accountID identity
 	pi := r.primaryIdentifier.AppendDefaults(r.isGlobal)
-	var identifier []string
-	var accountID, region types.String
-	for _, v := range pi {
-		if v.RequiredForImport {
-			var out types.String
-			response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(v.Name), &out)...)
-			if response.Diagnostics.HasError() {
-				return
-			}
-
-			identifier = append(identifier, out.ValueString())
-		} else {
-			switch v.Name {
-			case identity.NameAccountID:
-				response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(identity.NameAccountID), &accountID)...)
-				if response.Diagnostics.HasError() {
-					return
-				}
-			case identity.NameRegion:
-				response.Diagnostics.Append(request.Identity.GetAttribute(ctx, path.Root(identity.NameRegion), &region)...)
-				if response.Diagnostics.HasError() {
-					return
-				}
-			}
-		}
+	identifier, accountID, region, d := pi.GetIdentity(ctx, request.Identity)
+	response.Diagnostics.Append(d...)
+	if response.Diagnostics.HasError() {
+		return
 	}
 
 	if !accountID.IsNull() {

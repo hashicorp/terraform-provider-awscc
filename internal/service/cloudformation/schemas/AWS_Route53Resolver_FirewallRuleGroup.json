@@ -79,7 +79,8 @@
           "type": "string",
           "enum": [
             "DGA",
-            "DNS_TUNNELING"
+            "DNS_TUNNELING",
+            "DICTIONARY_DGA"
           ]
         },
         "FirewallDomainRedirectionAction": {

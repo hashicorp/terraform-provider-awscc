@@ -43,9 +43,22 @@
         "RetainStacksOnAccountRemoval": {
           "description": "If set to true, stack resources are retained when an account is removed from a target organization or OU. If set to false, stack resources are deleted. Specify only if Enabled is set to True.",
           "type": "boolean"
+        },
+        "DependsOn": {
+          "description": "A list of StackSet ARNs that this StackSet depends on for auto-deployment operations. When auto-deployment is triggered, operations will be sequenced to ensure all dependencies complete successfully before this StackSet's operation begins.",
+          "type": "array",
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/StackSetArn"
+          }
         }
       },
       "additionalProperties": false
+    },
+    "StackSetArn": {
+      "description": "The Amazon Resource Number (ARN) of a stack set.",
+      "type": "string"
     },
     "Account": {
       "description": "AWS account that you want to create stack instances in the specified Region(s) for.",

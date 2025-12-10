@@ -95,6 +95,7 @@ When updating this property, some interruptions may occur.
 `AWS::Neptune::DBCluster` does support restoring from snapshots.
 - `db_subnet_group_name` (String) A DB subnet group to associate with the DB instance. If you update this value, the new subnet group must be a subnet group in a new virtual private cloud (VPC).
 - `preferred_maintenance_window` (String) Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).
+- `publicly_accessible` (Boolean) Indicates that public accessibility is enabled. This should be enabled in combination with IAM Auth enabled on the DBCluster
 - `tags` (Attributes Set) An arbitrary set of tags (key-value pairs) for this DB instance. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

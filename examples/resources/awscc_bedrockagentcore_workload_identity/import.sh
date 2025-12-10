@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrockagentcore_workload_identity.example "name"

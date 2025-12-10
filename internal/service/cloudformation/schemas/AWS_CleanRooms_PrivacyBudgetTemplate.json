@@ -21,6 +21,36 @@
         "Value",
         "Key"
       ]
+    },
+    "BudgetParameter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Type": {
+          "type": "string",
+          "enum": [
+            "CALENDAR_DAY",
+            "CALENDAR_MONTH",
+            "CALENDAR_WEEK",
+            "LIFETIME"
+          ]
+        },
+        "Budget": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "AutoRefresh": {
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "DISABLED"
+          ]
+        }
+      },
+      "required": [
+        "Type",
+        "Budget"
+      ]
     }
   },
   "properties": {
@@ -62,7 +92,8 @@
     "PrivacyBudgetType": {
       "type": "string",
       "enum": [
-        "DIFFERENTIAL_PRIVACY"
+        "DIFFERENTIAL_PRIVACY",
+        "ACCESS_BUDGET"
       ]
     },
     "Parameters": {
@@ -78,12 +109,21 @@
           "type": "integer",
           "minimum": 10,
           "maximum": 100
+        },
+        "BudgetParameters": {
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/BudgetParameter"
+          },
+          "minItems": 1,
+          "maxItems": 2
+        },
+        "ResourceArn": {
+          "type": "string",
+          "maxLength": 200
         }
-      },
-      "required": [
-        "Epsilon",
-        "UsersNoisePerQuery"
-      ]
+      }
     },
     "MembershipArn": {
       "type": "string",
@@ -112,7 +152,8 @@
   "createOnlyProperties": [
     "/properties/MembershipIdentifier",
     "/properties/PrivacyBudgetType",
-    "/properties/AutoRefresh"
+    "/properties/AutoRefresh",
+    "/properties/Parameters/ResourceArn"
   ],
   "primaryIdentifier": [
     "/properties/PrivacyBudgetTemplateIdentifier",

@@ -153,7 +153,7 @@ resource "awscc_elasticloadbalancingv2_load_balancer" "example" {
 
 ### Optional
 
-- `enable_capacity_reservation_provision_stabilize` (Boolean)
+- `enable_capacity_reservation_provision_stabilize` (Boolean) Indicates whether to enable stabilization when creating or updating an LCU reservation. This ensures that the final stack status reflects the status of the LCU reservation. The default is ``false``.
 - `enable_prefix_for_ipv_6_source_nat` (String) [Network Load Balancers with UDP listeners] Indicates whether to use an IPv6 prefix from each subnet for source NAT. The IP address type must be ``dualstack``. The default value is ``off``.
 - `enforce_security_group_inbound_rules_on_private_link_traffic` (String) Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through privatelink. The default is ``on``.
  You can't configure this property on a Network Load Balancer unless you associated a security group with the load balancer when you created it.

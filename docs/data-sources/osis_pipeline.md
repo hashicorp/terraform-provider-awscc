@@ -30,6 +30,8 @@ Data Source schema for AWS::OSIS::Pipeline
 - `pipeline_arn` (String) The Amazon Resource Name (ARN) of the pipeline.
 - `pipeline_configuration_body` (String) The Data Prepper pipeline configuration.
 - `pipeline_name` (String) Name of the OpenSearch Ingestion Service pipeline to create. Pipeline names are unique across the pipelines owned by an account within an AWS Region.
+- `pipeline_role_arn` (String) The Pipeline Role (ARN) for the pipeline.
+- `resource_policy` (Attributes) (see [below for nested schema](#nestedatt--resource_policy))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `vpc_endpoint_service` (String) The VPC endpoint service name for the pipeline.
 - `vpc_endpoints` (Attributes List) The VPC interface endpoints that have access to the pipeline. (see [below for nested schema](#nestedatt--vpc_endpoints))
@@ -66,6 +68,14 @@ Read-Only:
 
 - `log_group` (String)
 
+
+
+<a id="nestedatt--resource_policy"></a>
+### Nested Schema for `resource_policy`
+
+Read-Only:
+
+- `policy` (String)
 
 
 <a id="nestedatt--tags"></a>

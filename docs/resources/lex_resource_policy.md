@@ -2,12 +2,12 @@
 page_title: "awscc_lex_resource_policy Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  A resource policy with specified policy statements that attaches to a Lex bot or bot alias.
+  Resource Type definition for a resource policy with specified policy statements that attaches to a Lex bot or bot alias.
 ---
 
 # awscc_lex_resource_policy (Resource)
 
-A resource policy with specified policy statements that attaches to a Lex bot or bot alias.
+Resource Type definition for a resource policy with specified policy statements that attaches to a Lex bot or bot alias.
 
 ## Example Usage
 

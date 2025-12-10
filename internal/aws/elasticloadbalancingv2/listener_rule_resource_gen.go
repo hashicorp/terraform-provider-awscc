@@ -8,10 +8,12 @@ package elasticloadbalancingv2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -198,14 +200,14 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "ForwardConfig": {
 		//	        "additionalProperties": false,
-		//	        "description": "Information for creating an action that distributes requests among one or more target groups. For Network Load Balancers, you can specify a single target group. Specify only when ``Type`` is ``forward``. If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
+		//	        "description": "Information for creating an action that distributes requests among multiple target groups. Specify only when ``Type`` is ``forward``.\n If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
 		//	        "properties": {
 		//	          "TargetGroupStickinessConfig": {
 		//	            "additionalProperties": false,
 		//	            "description": "Information about the target group stickiness for a rule.",
 		//	            "properties": {
 		//	              "DurationSeconds": {
-		//	                "description": "The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.",
+		//	                "description": "[Application Load Balancers] The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.",
 		//	                "type": "integer"
 		//	              },
 		//	              "Enabled": {
@@ -237,6 +239,58 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	            "uniqueItems": true
 		//	          }
 		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "JwtValidationConfig": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "AdditionalClaims": {
+		//	            "description": "",
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "",
+		//	              "properties": {
+		//	                "Format": {
+		//	                  "description": "",
+		//	                  "type": "string"
+		//	                },
+		//	                "Name": {
+		//	                  "description": "",
+		//	                  "type": "string"
+		//	                },
+		//	                "Values": {
+		//	                  "description": "",
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Format",
+		//	                "Name",
+		//	                "Values"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "Issuer": {
+		//	            "description": "",
+		//	            "type": "string"
+		//	          },
+		//	          "JwksEndpoint": {
+		//	            "description": "",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "JwksEndpoint",
+		//	          "Issuer"
+		//	        ],
 		//	        "type": "object"
 		//	      },
 		//	      "Order": {
@@ -278,7 +332,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "TargetGroupArn": {
-		//	        "description": "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to one or more target groups, use ``ForwardConfig`` instead.",
+		//	        "description": "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to multiple target groups, you must use ``ForwardConfig`` instead.",
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
@@ -576,7 +630,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: DurationSeconds
 									"duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.",
+										Description: "[Application Load Balancers] The time period, in seconds, during which requests from a client should be routed to the same target group. The range is 1-604800 seconds (7 days). You must specify this value when enabling target group stickiness.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -632,7 +686,96 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "Information for creating an action that distributes requests among one or more target groups. For Network Load Balancers, you can specify a single target group. Specify only when ``Type`` is ``forward``. If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
+						Description: "Information for creating an action that distributes requests among multiple target groups. Specify only when ``Type`` is ``forward``.\n If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: JwtValidationConfig
+					"jwt_validation_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AdditionalClaims
+							"additional_claims": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Format
+										"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Values
+										"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.UniqueValues(),
+												fwvalidators.NotNullList(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.UniqueValues(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Issuer
+							"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: JwksEndpoint
+							"jwks_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -718,7 +861,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: TargetGroupArn
 					"target_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to one or more target groups, use ``ForwardConfig`` instead.",
+						Description: "The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to multiple target groups, you must use ``ForwardConfig`` instead.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -753,8 +896,16 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "Information for a host header condition. Specify only when ``Field`` is ``host-header``.",
 		//	        "properties": {
+		//	          "RegexValues": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
 		//	          "Values": {
-		//	            "description": "The host names. The maximum size of each name is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). You must include at least one \".\" character. You can include only alphabetical characters after the final \".\" character.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the host name.",
+		//	            "description": "The host names. The maximum length of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). You must include at least one \".\" character. You can include only alphabetical characters after the final \".\" character.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the host name.",
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "type": "string"
@@ -773,8 +924,16 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	            "description": "The name of the HTTP header field. The maximum size is 40 characters. The header name is case insensitive. The allowed characters are specified by RFC 7230. Wildcards are not supported.",
 		//	            "type": "string"
 		//	          },
+		//	          "RegexValues": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
 		//	          "Values": {
-		//	            "description": "The strings to compare against the value of the HTTP header. The maximum size of each string is 128 characters. The comparison strings are case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).\n If the same header appears multiple times in the request, we search them in order until a match is found.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the value of the HTTP header. To require that all of the strings are a match, create one condition per string.",
+		//	            "description": "The strings to compare against the value of the HTTP header. The maximum length of each string is 128 characters. The comparison strings are case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).\n If the same header appears multiple times in the request, we search them in order until a match is found.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the value of the HTTP header. To require that all of the strings are a match, create one condition per string.",
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "type": "string"
@@ -790,7 +949,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "Information for an HTTP method condition. Specify only when ``Field`` is ``http-request-method``.",
 		//	        "properties": {
 		//	          "Values": {
-		//	            "description": "The name of the request method. The maximum size is 40 characters. The allowed characters are A-Z, hyphen (-), and underscore (_). The comparison is case sensitive. Wildcards are not supported; therefore, the method name must be an exact match.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the HTTP request method. We recommend that you route GET and HEAD requests in the same way, because the response to a HEAD request may be cached.",
+		//	            "description": "The name of the request method. The maximum length is 40 characters. The allowed characters are A-Z, hyphen (-), and underscore (_). The comparison is case sensitive. Wildcards are not supported; therefore, the method name must be an exact match.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the HTTP request method. We recommend that you route GET and HEAD requests in the same way, because the response to a HEAD request may be cached.",
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "type": "string"
@@ -805,6 +964,14 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "Information for a path pattern condition. Specify only when ``Field`` is ``path-pattern``.",
 		//	        "properties": {
+		//	          "RegexValues": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
 		//	          "Values": {
 		//	            "description": "The path patterns to compare against the request URL. The maximum size of each string is 128 characters. The comparison is case sensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).\n If you specify multiple strings, the condition is satisfied if one of them matches the request URL. The path pattern is compared only to the path of the URL, not to its query string.",
 		//	            "insertionOrder": false,
@@ -822,7 +989,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "Information for a query string condition. Specify only when ``Field`` is ``query-string``.",
 		//	        "properties": {
 		//	          "Values": {
-		//	            "description": "The key/value pairs or values to find in the query string. The maximum size of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, you must escape these characters in ``Values`` using a '\\' character.\n If you specify multiple key/value pairs or values, the condition is satisfied if one of them is found in the query string.",
+		//	            "description": "The key/value pairs or values to find in the query string. The maximum length of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, you must escape these characters in ``Values`` using a '\\' character.\n If you specify multiple key/value pairs or values, the condition is satisfied if one of them is found in the query string.",
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "additionalProperties": false,
@@ -844,6 +1011,15 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	          }
 		//	        },
 		//	        "type": "object"
+		//	      },
+		//	      "RegexValues": {
+		//	        "description": "The regular expressions to match against the condition field. The maximum length of each string is 128 characters. Specify only when ``Field`` is ``http-header``, ``host-header``, or ``path-pattern``.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": true
 		//	      },
 		//	      "SourceIpConfig": {
 		//	        "additionalProperties": false,
@@ -891,10 +1067,19 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 					// Property: HostHeaderConfig
 					"host_header_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: RegexValues
+							"regex_values": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+									setplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Values
 							"values": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "The host names. The maximum size of each name is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). You must include at least one \".\" character. You can include only alphabetical characters after the final \".\" character.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the host name.",
+								Description: "The host names. The maximum length of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). You must include at least one \".\" character. You can include only alphabetical characters after the final \".\" character.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the host name.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -921,10 +1106,19 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
+							// Property: RegexValues
+							"regex_values": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+									setplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Values
 							"values": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "The strings to compare against the value of the HTTP header. The maximum size of each string is 128 characters. The comparison strings are case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).\n If the same header appears multiple times in the request, we search them in order until a match is found.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the value of the HTTP header. To require that all of the strings are a match, create one condition per string.",
+								Description: "The strings to compare against the value of the HTTP header. The maximum length of each string is 128 characters. The comparison strings are case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).\n If the same header appears multiple times in the request, we search them in order until a match is found.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the value of the HTTP header. To require that all of the strings are a match, create one condition per string.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -945,7 +1139,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Values
 							"values": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "The name of the request method. The maximum size is 40 characters. The allowed characters are A-Z, hyphen (-), and underscore (_). The comparison is case sensitive. Wildcards are not supported; therefore, the method name must be an exact match.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the HTTP request method. We recommend that you route GET and HEAD requests in the same way, because the response to a HEAD request may be cached.",
+								Description: "The name of the request method. The maximum length is 40 characters. The allowed characters are A-Z, hyphen (-), and underscore (_). The comparison is case sensitive. Wildcards are not supported; therefore, the method name must be an exact match.\n If you specify multiple strings, the condition is satisfied if one of the strings matches the HTTP request method. We recommend that you route GET and HEAD requests in the same way, because the response to a HEAD request may be cached.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -963,6 +1157,15 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 					// Property: PathPatternConfig
 					"path_pattern_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: RegexValues
+							"regex_values": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+									setplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Values
 							"values": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
@@ -1008,7 +1211,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "The key/value pairs or values to find in the query string. The maximum size of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, you must escape these characters in ``Values`` using a '\\' character.\n If you specify multiple key/value pairs or values, the condition is satisfied if one of them is found in the query string.",
+								Description: "The key/value pairs or values to find in the query string. The maximum length of each string is 128 characters. The comparison is case insensitive. The following wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, you must escape these characters in ``Values`` using a '\\' character.\n If you specify multiple key/value pairs or values, the condition is satisfied if one of them is found in the query string.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1021,6 +1224,16 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: RegexValues
+					"regex_values": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "The regular expressions to match against the condition field. The maximum length of each string is 128 characters. Specify only when ``Field`` is ``http-header``, ``host-header``, or ``path-pattern``.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+							setplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: SourceIpConfig
@@ -1115,6 +1328,233 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Transforms
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "",
+		//	    "oneOf": [
+		//	      {
+		//	        "required": [
+		//	          "HostHeaderRewriteConfig"
+		//	        ]
+		//	      },
+		//	      {
+		//	        "required": [
+		//	          "UrlRewriteConfig"
+		//	        ]
+		//	      }
+		//	    ],
+		//	    "properties": {
+		//	      "HostHeaderRewriteConfig": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "Rewrites": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "Information about a rewrite transform. This transform matches a pattern and replaces it with the specified string.",
+		//	              "properties": {
+		//	                "Regex": {
+		//	                  "description": "The regular expression to match in the input string. The maximum length of the string is 1,024 characters.",
+		//	                  "type": "string"
+		//	                },
+		//	                "Replace": {
+		//	                  "description": "The replacement string to use when rewriting the matched input. The maximum length of the string is 1,024 characters. You can specify capture groups in the regular expression (for example, $1 and $2).",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Regex",
+		//	                "Replace"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Rewrites"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "Type": {
+		//	        "description": "",
+		//	        "type": "string"
+		//	      },
+		//	      "UrlRewriteConfig": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "Rewrites": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "Information about a rewrite transform. This transform matches a pattern and replaces it with the specified string.",
+		//	              "properties": {
+		//	                "Regex": {
+		//	                  "description": "The regular expression to match in the input string. The maximum length of the string is 1,024 characters.",
+		//	                  "type": "string"
+		//	                },
+		//	                "Replace": {
+		//	                  "description": "The replacement string to use when rewriting the matched input. The maximum length of the string is 1,024 characters. You can specify capture groups in the regular expression (for example, $1 and $2).",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Regex",
+		//	                "Replace"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Rewrites"
+		//	        ],
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Type"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"transforms": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: HostHeaderRewriteConfig
+					"host_header_rewrite_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Rewrites
+							"rewrites": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Regex
+										"regex": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The regular expression to match in the input string. The maximum length of the string is 1,024 characters.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Replace
+										"replace": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The replacement string to use when rewriting the matched input. The maximum length of the string is 1,024 characters. You can specify capture groups in the regular expression (for example, $1 and $2).",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Set{ /*START VALIDATORS*/
+									fwvalidators.NotNullSet(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+									setplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: UrlRewriteConfig
+					"url_rewrite_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Rewrites
+							"rewrites": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Regex
+										"regex": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The regular expression to match in the input string. The maximum length of the string is 1,024 characters.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Replace
+										"replace": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The replacement string to use when rewriting the matched input. The maximum length of the string is 1,024 characters. You can specify capture groups in the regular expression (for example, $1 and $2).",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Set{ /*START VALIDATORS*/
+									fwvalidators.NotNullSet(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+									setplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -1144,6 +1584,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"actions":                             "Actions",
+		"additional_claims":                   "AdditionalClaims",
 		"authenticate_cognito_config":         "AuthenticateCognitoConfig",
 		"authenticate_oidc_config":            "AuthenticateOidcConfig",
 		"authentication_request_extra_params": "AuthenticationRequestExtraParams",
@@ -1156,17 +1597,22 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		"enabled":                             "Enabled",
 		"field":                               "Field",
 		"fixed_response_config":               "FixedResponseConfig",
+		"format":                              "Format",
 		"forward_config":                      "ForwardConfig",
 		"host":                                "Host",
 		"host_header_config":                  "HostHeaderConfig",
+		"host_header_rewrite_config":          "HostHeaderRewriteConfig",
 		"http_header_config":                  "HttpHeaderConfig",
 		"http_header_name":                    "HttpHeaderName",
 		"http_request_method_config":          "HttpRequestMethodConfig",
 		"is_default":                          "IsDefault",
 		"issuer":                              "Issuer",
+		"jwks_endpoint":                       "JwksEndpoint",
+		"jwt_validation_config":               "JwtValidationConfig",
 		"key":                                 "Key",
 		"listener_arn":                        "ListenerArn",
 		"message_body":                        "MessageBody",
+		"name":                                "Name",
 		"on_unauthenticated_request":          "OnUnauthenticatedRequest",
 		"order":                               "Order",
 		"path":                                "Path",
@@ -1177,6 +1623,10 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		"query":                               "Query",
 		"query_string_config":                 "QueryStringConfig",
 		"redirect_config":                     "RedirectConfig",
+		"regex":                               "Regex",
+		"regex_values":                        "RegexValues",
+		"replace":                             "Replace",
+		"rewrites":                            "Rewrites",
 		"rule_arn":                            "RuleArn",
 		"scope":                               "Scope",
 		"session_cookie_name":                 "SessionCookieName",
@@ -1187,7 +1637,9 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		"target_group_stickiness_config":      "TargetGroupStickinessConfig",
 		"target_groups":                       "TargetGroups",
 		"token_endpoint":                      "TokenEndpoint",
+		"transforms":                          "Transforms",
 		"type":                                "Type",
+		"url_rewrite_config":                  "UrlRewriteConfig",
 		"use_existing_client_secret":          "UseExistingClientSecret",
 		"user_info_endpoint":                  "UserInfoEndpoint",
 		"user_pool_arn":                       "UserPoolArn",

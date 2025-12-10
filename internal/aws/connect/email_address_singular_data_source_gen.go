@@ -22,6 +22,43 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::Connect::EmailAddress resource.
 func emailAddressDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AliasConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of alias configurations for the email address",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Configuration for an email address alias",
+		//	    "properties": {
+		//	      "EmailAddressArn": {
+		//	        "description": "The identifier of the email address alias",
+		//	        "pattern": "^arn:(aws|aws-us-gov):connect:[a-z]{2}-[a-z]+-[0-9]{1}:[0-9]{1,20}:instance/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/email-address/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "EmailAddressArn"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 1,
+		//	  "type": "array"
+		//	}
+		"alias_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EmailAddressArn
+					"email_address_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The identifier of the email address alias",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of alias configurations for the email address",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -157,14 +194,15 @@ func emailAddressDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::EmailAddress").WithTerraformTypeName("awscc_connect_email_address")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"description":       "Description",
-		"display_name":      "DisplayName",
-		"email_address":     "EmailAddress",
-		"email_address_arn": "EmailAddressArn",
-		"instance_arn":      "InstanceArn",
-		"key":               "Key",
-		"tags":              "Tags",
-		"value":             "Value",
+		"alias_configurations": "AliasConfigurations",
+		"description":          "Description",
+		"display_name":         "DisplayName",
+		"email_address":        "EmailAddress",
+		"email_address_arn":    "EmailAddressArn",
+		"instance_arn":         "InstanceArn",
+		"key":                  "Key",
+		"tags":                 "Tags",
+		"value":                "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

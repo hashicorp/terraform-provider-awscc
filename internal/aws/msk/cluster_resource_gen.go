@@ -666,7 +666,6 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"current_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The current version of the MSK cluster",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1117,6 +1116,49 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Rebalancing
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Status": {
+		//	      "enum": [
+		//	        "PAUSED",
+		//	        "ACTIVE"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Status"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"rebalancing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"PAUSED",
+							"ACTIVE",
+						),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: StorageMode
 		// CloudFormation resource type schema:
 		//
@@ -1232,11 +1274,13 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"prometheus":                     "Prometheus",
 		"provisioned_throughput":         "ProvisionedThroughput",
 		"public_access":                  "PublicAccess",
+		"rebalancing":                    "Rebalancing",
 		"revision":                       "Revision",
 		"s3":                             "S3",
 		"sasl":                           "Sasl",
 		"scram":                          "Scram",
 		"security_groups":                "SecurityGroups",
+		"status":                         "Status",
 		"storage_info":                   "StorageInfo",
 		"storage_mode":                   "StorageMode",
 		"tags":                           "Tags",

@@ -66,6 +66,10 @@
           "type": "string"
         }
       }
+    },
+    "LatestVersion": {
+      "description": "The latest version references of the image recipe.",
+      "$ref": "#/definitions/LatestVersion"
     }
   },
   "definitions": {
@@ -207,20 +211,47 @@
         "Name",
         "Value"
       ]
+    },
+    "LatestVersion": {
+      "description": "The latest version references of the image recipe.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Arn": {
+          "description": "The latest version ARN of the created image recipe.",
+          "type": "string"
+        },
+        "Major": {
+          "description": "The latest version ARN of the created image recipe, with the same major version.",
+          "type": "string"
+        },
+        "Minor": {
+          "description": "The latest version ARN of the created image recipe, with the same minor version.",
+          "type": "string"
+        },
+        "Patch": {
+          "description": "The latest version ARN of the created image recipe, with the same patch version.",
+          "type": "string"
+        }
+      }
     }
   },
   "additionalProperties": false,
   "required": [
     "Name",
     "Version",
-    "Components",
     "ParentImage"
   ],
   "primaryIdentifier": [
     "/properties/Arn"
   ],
   "readOnlyProperties": [
-    "/properties/Arn"
+    "/properties/Arn",
+    "/properties/LatestVersion",
+    "/properties/LatestVersion/Arn",
+    "/properties/LatestVersion/Major",
+    "/properties/LatestVersion/Minor",
+    "/properties/LatestVersion/Patch"
   ],
   "createOnlyProperties": [
     "/properties/Name",

@@ -85,6 +85,19 @@ func domainNameV2Resource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EndpointAccessMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"endpoint_access_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -264,6 +277,7 @@ func domainNameV2Resource(ctx context.Context) (resource.Resource, error) {
 		"domain_name":            "DomainName",
 		"domain_name_arn":        "DomainNameArn",
 		"domain_name_id":         "DomainNameId",
+		"endpoint_access_mode":   "EndpointAccessMode",
 		"endpoint_configuration": "EndpointConfiguration",
 		"ip_address_type":        "IpAddressType",
 		"key":                    "Key",

@@ -1,0 +1,112 @@
+{
+  "typeName": "AWS::S3Vectors::VectorBucket",
+  "description": "Resource Type definition for AWS::S3Vectors::VectorBucket",
+  "definitions": {
+    "VectorBucketName": {
+      "description": "The name of the vector bucket.",
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 63
+    },
+    "VectorBucketArn": {
+      "description": "The Amazon Resource Name (ARN) of the vector bucket.",
+      "type": "string",
+      "examples": [
+        "arn:aws:s3vectors:us-east-1:123456789012:bucket/myvectorbucket"
+      ]
+    },
+    "CreationTime": {
+      "description": "Date and time when the vector bucket was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "EncryptionConfiguration": {
+      "type": "object",
+      "description": "The encryption configuration for the vector bucket.",
+      "properties": {
+        "SseType": {
+          "type": "string",
+          "description": "The server-side encryption type to use for the encryption configuration of the vector bucket. By default, if you don't specify, all new vectors in Amazon S3 vector buckets use server-side encryption with Amazon S3 managed keys (SSE-S3), specifically AES256.",
+          "enum": [
+            "AES256",
+            "aws:kms"
+          ],
+          "default": "AES256"
+        },
+        "KmsKeyArn": {
+          "type": "string",
+          "description": "AWS Key Management Service (KMS) customer managed key ID to use for the encryption configuration. This parameter is allowed if and only if sseType is set to aws:kms",
+          "minLength": 1,
+          "maxLength": 2048,
+          "pattern": "^(arn:aws[-a-z0-9]*:kms:[-a-z0-9]*:[0-9]{12}:key/.+)$"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "VectorBucketName": {
+      "$ref": "#/definitions/VectorBucketName"
+    },
+    "VectorBucketArn": {
+      "$ref": "#/definitions/VectorBucketArn"
+    },
+    "CreationTime": {
+      "$ref": "#/definitions/CreationTime"
+    },
+    "EncryptionConfiguration": {
+      "$ref": "#/definitions/EncryptionConfiguration"
+    }
+  },
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/VectorBucketArn",
+    "/properties/CreationTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/VectorBucketName",
+    "/properties/EncryptionConfiguration"
+  ],
+  "primaryIdentifier": [
+    "/properties/VectorBucketArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/VectorBucketName"
+    ]
+  ],
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "s3vectors:GetVectorBucket",
+        "s3vectors:CreateVectorBucket",
+        "kms:GenerateDataKey"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "s3vectors:GetVectorBucket",
+        "kms:GenerateDataKey"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "s3vectors:GetVectorBucket",
+        "s3vectors:DeleteVectorBucket",
+        "kms:GenerateDataKey"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "s3vectors:ListVectorBuckets",
+        "kms:GenerateDataKey"
+      ]
+    }
+  }
+}

@@ -457,7 +457,7 @@
         },
         "Definition": {
           "type": "string",
-          "maxLength": 200,
+          "maxLength": 1000,
           "minLength": 1,
           "description": "Definition of topic in topic policy"
         },

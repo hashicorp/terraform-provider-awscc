@@ -16,7 +16,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -156,6 +158,51 @@ func streamResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: StreamStorageConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for the storage tier of the Kinesis Video Stream.",
+		//	  "properties": {
+		//	    "DefaultStorageTier": {
+		//	      "default": "HOT",
+		//	      "description": "The storage tier for the Kinesis Video Stream. Determines the storage class used for stream data.",
+		//	      "enum": [
+		//	        "HOT",
+		//	        "WARM"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"stream_storage_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DefaultStorageTier
+				"default_storage_tier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The storage tier for the Kinesis Video Stream. Determines the storage class used for stream data.",
+					Optional:    true,
+					Computed:    true,
+					Default:     stringdefault.StaticString("HOT"),
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"HOT",
+							"WARM",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for the storage tier of the Kinesis Video Stream.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -261,15 +308,17 @@ func streamResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                     "Arn",
-		"data_retention_in_hours": "DataRetentionInHours",
-		"device_name":             "DeviceName",
-		"key":                     "Key",
-		"kms_key_id":              "KmsKeyId",
-		"media_type":              "MediaType",
-		"name":                    "Name",
-		"tags":                    "Tags",
-		"value":                   "Value",
+		"arn":                          "Arn",
+		"data_retention_in_hours":      "DataRetentionInHours",
+		"default_storage_tier":         "DefaultStorageTier",
+		"device_name":                  "DeviceName",
+		"key":                          "Key",
+		"kms_key_id":                   "KmsKeyId",
+		"media_type":                   "MediaType",
+		"name":                         "Name",
+		"stream_storage_configuration": "StreamStorageConfiguration",
+		"tags":                         "Tags",
+		"value":                        "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

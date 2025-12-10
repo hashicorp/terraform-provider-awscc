@@ -36,6 +36,7 @@ Resource schema for AWS::ImageBuilder::ImagePipeline
 ### Read-Only
 
 - `arn` (String) The Amazon Resource Name (ARN) of the image pipeline.
+- `deployment_id` (String) The deployment ID of the pipeline, used for resource create/update triggers.
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--image_scanning_configuration"></a>

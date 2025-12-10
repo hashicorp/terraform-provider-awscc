@@ -71,6 +71,8 @@ resource "awscc_bedrock_automated_reasoning_policy" "example" {
 ### Optional
 
 - `description` (String)
+- `force_delete` (Boolean) Specifies whether to force delete the automated reasoning policy even if it has active resources. When false , Amazon Bedrock validates if all artifacts have been deleted (e.g. policy version, test case, test result) for a policy before deletion. When true , Amazon Bedrock will delete the policy and all its artifacts without validation. Default is false
+- `kms_key_id` (String) The KMS key with which the Policy's assets will be encrypted at rest.
 - `policy_definition` (Attributes) (see [below for nested schema](#nestedatt--policy_definition))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
@@ -79,6 +81,7 @@ resource "awscc_bedrock_automated_reasoning_policy" "example" {
 - `created_at` (String) Time this policy was created
 - `definition_hash` (String) The hash for this version
 - `id` (String) Uniquely identifies the resource.
+- `kms_key_arn` (String) The KMS key with which the Policy's assets will be encrypted at rest.
 - `policy_arn` (String)
 - `policy_id` (String) The id of the policy
 - `updated_at` (String) Time this policy was last updated

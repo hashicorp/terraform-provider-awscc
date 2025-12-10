@@ -65,6 +65,7 @@ Optional:
 Optional:
 
 - `eks_configuration` (Attributes) Configuration for EKS metrics source (see [below for nested schema](#nestedatt--source--eks_configuration))
+- `vpc_configuration` (Attributes) Configuration for VPC metrics source (see [below for nested schema](#nestedatt--source--vpc_configuration))
 
 <a id="nestedatt--source--eks_configuration"></a>
 ### Nested Schema for `source.eks_configuration`
@@ -72,6 +73,15 @@ Optional:
 Optional:
 
 - `cluster_arn` (String) ARN of an EKS cluster
+- `security_group_ids` (List of String) List of security group IDs
+- `subnet_ids` (List of String) List of subnet IDs
+
+
+<a id="nestedatt--source--vpc_configuration"></a>
+### Nested Schema for `source.vpc_configuration`
+
+Optional:
+
 - `security_group_ids` (List of String) List of security group IDs
 - `subnet_ids` (List of String) List of subnet IDs
 

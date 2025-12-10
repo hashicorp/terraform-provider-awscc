@@ -101,7 +101,7 @@ func eventInvokeConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//
 		//	{
 		//	  "description": "The name of the Lambda function.",
-		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]+(-[a-z]+)+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
+		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]+(-[a-z]+)+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST(\\.PUBLISHED)?|[a-zA-Z0-9-_]+))?$",
 		//	  "type": "string"
 		//	}
 		"function_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -139,7 +139,7 @@ func eventInvokeConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//
 		//	{
 		//	  "description": "The identifier of a version or alias.",
-		//	  "pattern": "^(|[a-zA-Z0-9$_-]{1,129})$",
+		//	  "pattern": "^\\$(LATEST(\\.PUBLISHED)?)|[a-zA-Z0-9$_-]{1,129}$",
 		//	  "type": "string"
 		//	}
 		"qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/

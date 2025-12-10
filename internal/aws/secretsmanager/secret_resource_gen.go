@@ -385,6 +385,21 @@ func secretResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Type
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -433,6 +448,7 @@ func secretResource(ctx context.Context) (resource.Resource, error) {
 		"secret_string":              "SecretString",
 		"secret_string_template":     "SecretStringTemplate",
 		"tags":                       "Tags",
+		"type":                       "Type",
 		"value":                      "Value",
 	})
 

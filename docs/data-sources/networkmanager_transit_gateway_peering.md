@@ -25,6 +25,7 @@ Data Source schema for AWS::NetworkManager::TransitGatewayPeering
 - `core_network_id` (String) The Id of the core network that you want to peer a transit gateway to.
 - `created_at` (String) The creation time of the transit gateway peering
 - `edge_location` (String) The location of the transit gateway peering
+- `last_modification_errors` (List of String) Errors from the last modification of the transit gateway peering.
 - `owner_account_id` (String) Peering owner account Id
 - `peering_id` (String) The Id of the transit gateway peering
 - `peering_type` (String) Peering type (TransitGatewayPeering)

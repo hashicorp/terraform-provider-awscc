@@ -28,6 +28,7 @@ Data Source schema for AWS::Backup::LogicallyAirGappedBackupVault
 - `encryption_key_arn` (String)
 - `max_retention_days` (Number)
 - `min_retention_days` (Number)
+- `mpa_approval_team_arn` (String)
 - `notifications` (Attributes) (see [below for nested schema](#nestedatt--notifications))
 - `vault_state` (String)
 - `vault_type` (String)

@@ -1,0 +1,3 @@
+list "awscc_ivs_recording_configuration" "example" {
+  provider = awscc
+}

@@ -160,7 +160,9 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	            "GeneratedRulesType": {
 		//	              "enum": [
 		//	                "ALLOWLIST",
-		//	                "DENYLIST"
+		//	                "DENYLIST",
+		//	                "ALERTLIST",
+		//	                "REJECTLIST"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -721,6 +723,8 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 										stringvalidator.OneOf(
 											"ALLOWLIST",
 											"DENYLIST",
+											"ALERTLIST",
+											"REJECTLIST",
 										),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/

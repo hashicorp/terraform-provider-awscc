@@ -86,7 +86,8 @@ func buildResource(ctx context.Context) (resource.Resource, error) {
 		//	    "AMAZON_LINUX_2",
 		//	    "AMAZON_LINUX_2023",
 		//	    "WINDOWS_2012",
-		//	    "WINDOWS_2016"
+		//	    "WINDOWS_2016",
+		//	    "WINDOWS_2022"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -101,6 +102,7 @@ func buildResource(ctx context.Context) (resource.Resource, error) {
 					"AMAZON_LINUX_2023",
 					"WINDOWS_2012",
 					"WINDOWS_2016",
+					"WINDOWS_2022",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

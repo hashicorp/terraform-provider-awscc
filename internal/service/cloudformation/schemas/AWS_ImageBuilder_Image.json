@@ -15,7 +15,12 @@
     "/properties/Arn",
     "/properties/Name",
     "/properties/ImageId",
-    "/properties/ImageUri"
+    "/properties/ImageUri",
+    "/properties/LatestVersion",
+    "/properties/LatestVersion/Arn",
+    "/properties/LatestVersion/Major",
+    "/properties/LatestVersion/Minor",
+    "/properties/LatestVersion/Patch"
   ],
   "description": "Resource schema for AWS::ImageBuilder::Image",
   "createOnlyProperties": [
@@ -30,6 +35,9 @@
   ],
   "primaryIdentifier": [
     "/properties/Arn"
+  ],
+  "conditionalCreateOnlyProperties": [
+    "/properties/ImagePipelineExecutionSettings"
   ],
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-imagebuilder",
   "oneOf": [
@@ -48,11 +56,6 @@
     {
       "required": [
         "ImagePipelineExecutionSettings"
-      ]
-    },
-    {
-      "required": [
-        "ImportDiskImageSettings"
       ]
     }
   ],
@@ -107,6 +110,10 @@
       ]
     }
   },
+  "writeOnlyProperties": [
+    "/properties/DeletionSettings",
+    "/properties/ImagePipelineExecutionSettings"
+  ],
   "additionalProperties": false,
   "definitions": {
     "ImageLoggingConfiguration": {
@@ -181,6 +188,29 @@
         },
         "RepositoryName": {
           "description": "The name of the container repository that Amazon Inspector scans to identify findings for your container images. The name includes the path for the repository location. If you don\u2019t provide this information, Image Builder creates a repository in your account named image-builder-image-scanning-repository to use for vulnerability scans for your output container images.",
+          "type": "string"
+        }
+      }
+    },
+    "LatestVersion": {
+      "description": "The latest version references of the image.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Major": {
+          "description": "The latest version ARN of the created image, with the same major version.",
+          "type": "string"
+        },
+        "Minor": {
+          "description": "The latest version ARN of the created image, with the same minor version.",
+          "type": "string"
+        },
+        "Arn": {
+          "description": "The latest version ARN of the created image.",
+          "type": "string"
+        },
+        "Patch": {
+          "description": "The latest version ARN of the created image, with the same patch version.",
           "type": "string"
         }
       }
@@ -270,6 +300,65 @@
         "$ref": "#/definitions/WorkflowConfiguration"
       }
     },
+    "ImagePipelineExecutionSettings": {
+      "description": "The image pipeline execution settings of the image.",
+      "$ref": "#/definitions/ImagePipelineExecutionSettings",
+      "dependencies": {
+        "ImagePipelineExecutionSettings": {
+          "oneOf": [
+            {
+              "required": [
+                "ImageRecipeArn"
+              ]
+            },
+            {
+              "required": [
+                "ContainerRecipeArn"
+              ]
+            },
+            {
+              "required": [
+                "InfrastructureConfigurationArn"
+              ]
+            },
+            {
+              "required": [
+                "Workflows"
+              ]
+            },
+            {
+              "required": [
+                "DistributionConfigurationArn"
+              ]
+            },
+            {
+              "required": [
+                "ImageTestsConfiguration"
+              ]
+            },
+            {
+              "required": [
+                "ImageScanningConfiguration"
+              ]
+            },
+            {
+              "required": [
+                "EnhancedImageMetadataEnabled"
+              ]
+            },
+            {
+              "required": [
+                "ImportDiskImageSettings"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "DeletionSettings": {
+      "description": "The deletion settings of the image, indicating whether to delete the underlying resources in addition to the image.",
+      "$ref": "#/definitions/DeletionSettings"
+    },
     "ImageUri": {
       "description": "URI for containers created in current Region with default ECR image tag",
       "type": "string"
@@ -289,6 +378,10 @@
     "DistributionConfigurationArn": {
       "description": "The Amazon Resource Name (ARN) of the distribution configuration.",
       "type": "string"
+    },
+    "LatestVersion": {
+      "description": "The latest version references of the image.",
+      "$ref": "#/definitions/LatestVersion"
     },
     "LoggingConfiguration": {
       "description": "The logging configuration settings for the image.",
