@@ -937,7 +937,7 @@ func (r *genericResource) bootstrapContextWithProviderMeta(ctx context.Context, 
 	var metadata []string
 	d.Append(providerMeta.GetAttribute(ctx, path.Root("user_agent"), &metadata)...)
 
-	if metadata != nil {
+	if len(metadata) > 0 {
 		ctx = useragent.Context(ctx, useragent.FromSlice(metadata))
 	}
 
