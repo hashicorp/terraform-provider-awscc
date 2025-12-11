@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	cctypes "github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
+	"github.com/hashicorp/aws-sdk-go-base/v2/useragent"
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -386,7 +387,10 @@ func (r *genericResource) Configure(_ context.Context, request resource.Configur
 }
 
 func (r *genericResource) Create(ctx context.Context, request resource.CreateRequest, response *resource.CreateResponse) {
-	ctx = r.bootstrapContext(ctx)
+	ctx = r.bootstrapContextWithProviderMeta(ctx, request.ProviderMeta, &response.Diagnostics)
+	if response.Diagnostics.HasError() {
+		return
+	}
 
 	traceEntry(ctx, "Resource.Create")
 
@@ -489,7 +493,10 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 }
 
 func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest, response *resource.ReadResponse) {
-	ctx = r.bootstrapContext(ctx)
+	ctx = r.bootstrapContextWithProviderMeta(ctx, request.ProviderMeta, &response.Diagnostics)
+	if response.Diagnostics.HasError() {
+		return
+	}
 
 	traceEntry(ctx, "Resource.Read")
 
@@ -579,7 +586,10 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 }
 
 func (r *genericResource) Update(ctx context.Context, request resource.UpdateRequest, response *resource.UpdateResponse) {
-	ctx = r.bootstrapContext(ctx)
+	ctx = r.bootstrapContextWithProviderMeta(ctx, request.ProviderMeta, &response.Diagnostics)
+	if response.Diagnostics.HasError() {
+		return
+	}
 
 	traceEntry(ctx, "Resource.Update")
 
@@ -717,7 +727,10 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 }
 
 func (r *genericResource) Delete(ctx context.Context, request resource.DeleteRequest, response *resource.DeleteResponse) {
-	ctx = r.bootstrapContext(ctx)
+	ctx = r.bootstrapContextWithProviderMeta(ctx, request.ProviderMeta, &response.Diagnostics)
+	if response.Diagnostics.HasError() {
+		return
+	}
 
 	traceEntry(ctx, "Resource.Delete")
 
@@ -910,10 +923,23 @@ func (r *genericResource) populateUnknownValues(ctx context.Context, id string, 
 	return nil
 }
 
-// bootstrapContext injects the CloudFormation type name into logger contexts.
+// bootstrapContext injects the CloudFormation type name into logger contexts
 func (r *genericResource) bootstrapContext(ctx context.Context) context.Context {
 	ctx = tflog.SetField(ctx, LoggingKeyCFNType, r.cfTypeName)
-	ctx = r.provider.RegisterLogger(ctx)
+	return r.provider.RegisterLogger(ctx)
+}
+
+// bootstrapContextWithProviderMeta is an extension of bootstrapContext which
+// also injects details from the provider_meta block into context
+func (r *genericResource) bootstrapContextWithProviderMeta(ctx context.Context, providerMeta tfsdk.Config, d *diag.Diagnostics) context.Context {
+	ctx = r.bootstrapContext(ctx)
+
+	var metadata []string
+	d.Append(providerMeta.GetAttribute(ctx, path.Root("user_agent"), &metadata)...)
+
+	if len(metadata) > 0 {
+		ctx = useragent.Context(ctx, useragent.FromSlice(metadata))
+	}
 
 	return ctx
 }
