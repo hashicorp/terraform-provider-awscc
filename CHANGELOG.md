@@ -2,7 +2,7 @@
 
 FEATURES:
 
-* provider: The `provider_meta` block is now supported. The `user_agent` argument enables module authors to include additional product information in the `User-Agent` header sent during all AWS API requests made during Create, Read, Update, and Delete operations.
+* provider: The [`provider_meta` block](https://developer.hashicorp.com/terraform/internals/provider-meta) is now supported. The `user_agent` argument enables module authors to include additional product information in the `User-Agent` header sent during all AWS API requests made during Create, Read, Update, and Delete operations.
 
 ## 1.66.0 (December 4, 2025)
 
