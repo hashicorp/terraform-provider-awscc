@@ -597,8 +597,8 @@ func newProviderData(ctx context.Context, c *configModel) (*providerData, diag.D
 		// Add custom retry for CloudControl throttling
 		o.Retryer = retry.NewStandard(func(so *retry.StandardOptions) {
 			so.Retryables = append(so.Retryables, retry.IsErrorRetryableFunc(func(err error) aws.Ternary {
-				if strings.Contains(err.Error(), "Throttling") || 
-				   strings.Contains(err.Error(), "ThrottlingException") {
+				if strings.Contains(err.Error(), "Throttling") ||
+					strings.Contains(err.Error(), "ThrottlingException") {
 					return aws.TrueTernary
 				}
 				return aws.UnknownTernary
