@@ -6,8 +6,11 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strings"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	awsbase "github.com/hashicorp/aws-sdk-go-base/v2"
@@ -591,6 +594,16 @@ func newProviderData(ctx context.Context, c *configModel) (*providerData, diag.D
 		if c.Endpoints != nil {
 			o.BaseEndpoint = flex.StringFromFramework(ctx, c.Endpoints.CloudControlAPI)
 		}
+		// Add custom retry for CloudControl throttling
+		o.Retryer = retry.NewStandard(func(so *retry.StandardOptions) {
+			so.Retryables = append(so.Retryables, retry.IsErrorRetryableFunc(func(err error) aws.Ternary {
+				if strings.Contains(err.Error(), "Throttling") || 
+				   strings.Contains(err.Error(), "ThrottlingException") {
+					return aws.TrueTernary
+				}
+				return aws.UnknownTernary
+			}))
+		})
 	})
 
 	accountID, partitionID, awsDiags := awsbase.GetAwsAccountIDAndPartition(ctx, cfg, &awsbaseConfig)
