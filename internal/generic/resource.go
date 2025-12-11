@@ -20,14 +20,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/identityschema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
-	inttypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 // ResourceOptionsFunc is a type alias for a resource type functional option.
@@ -369,10 +367,6 @@ var (
 	// This attribute is required for acceptance testing.
 	idAttributePath = path.Root("id")
 )
-
-type providerMetaData struct {
-	UserAgent types.List `tfsdk:"user_agent"`
-}
 
 func (r *genericResource) Metadata(_ context.Context, request resource.MetadataRequest, response *resource.MetadataResponse) {
 	response.TypeName = r.tfTypeName
@@ -940,13 +934,11 @@ func (r *genericResource) bootstrapContext(ctx context.Context) context.Context 
 func (r *genericResource) bootstrapContextWithProviderMeta(ctx context.Context, providerMeta tfsdk.Config, d *diag.Diagnostics) context.Context {
 	ctx = r.bootstrapContext(ctx)
 
-	var metadata *providerMetaData
-	d.Append(providerMeta.Get(ctx, &metadata)...)
+	var metadata []string
+	d.Append(providerMeta.GetAttribute(ctx, path.Root("user_agent"), &metadata)...)
 
 	if metadata != nil {
-		var uap inttypes.UserAgentProducts
-		d.Append(metadata.UserAgent.ElementsAs(ctx, &uap, false)...)
-		ctx = useragent.Context(ctx, uap.UserAgentProducts())
+		ctx = useragent.Context(ctx, useragent.FromSlice(metadata))
 	}
 
 	return ctx

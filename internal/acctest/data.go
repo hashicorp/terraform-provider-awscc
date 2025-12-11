@@ -110,16 +110,8 @@ func WithProviderMeta() string {
 terraform {
   provider_meta "awscc" {
     user_agent = [
-      {
-        product_name    = "test-module"
-        product_version = "0.0.1"
-        comment         = "test comment"
-      },
-      {
-        product_name    = "second-test-module"
-        product_version = "0.0.2"
-        comment         = "second test comment"
-      }
+      "test-module/0.0.1 (test comment)",
+      "second-test-module/0.0.2 (second test comment)",
     ]
   }
 }

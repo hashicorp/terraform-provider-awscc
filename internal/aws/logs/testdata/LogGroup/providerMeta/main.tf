@@ -1,11 +1,7 @@
 terraform {
   provider_meta "awscc" {
     user_agent = [
-      {
-        product_name    = "example-demo"
-        product_version = "0.0.1"
-        comment         = "a demo module"
-      },
+      "example-demo/0.0.1 (a demo module)",
     ]
   }
 }

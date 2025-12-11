@@ -292,25 +292,10 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 func (p *ccProvider) MetaSchema(ctx context.Context, req provider.MetaSchemaRequest, resp *provider.MetaSchemaResponse) {
 	resp.Schema = metaschema.Schema{
 		Attributes: map[string]metaschema.Attribute{
-			"user_agent": metaschema.ListNestedAttribute{
-				NestedObject: metaschema.NestedAttributeObject{
-					Attributes: map[string]metaschema.Attribute{
-						"comment": schema.StringAttribute{
-							Description: "Comment describing any additional product details.",
-							Optional:    true,
-						},
-						"product_name": schema.StringAttribute{
-							Description: "Product name.",
-							Required:    true,
-						},
-						"product_version": schema.StringAttribute{
-							Description: "Product version. Optional, and should only be set when `product_name` is set.",
-							Optional:    true,
-						},
-					},
-				},
-				Description: "Product details to append to the User-Agent string sent in all AWS API calls.",
+			"user_agent": schema.ListAttribute{
+				ElementType: types.StringType,
 				Optional:    true,
+				Description: "Product details to append to the User-Agent string sent in all AWS API calls.",
 			},
 		},
 	}
