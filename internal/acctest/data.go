@@ -6,6 +6,7 @@ package acctest
 import (
 	"fmt"
 	"os"
+	"strings"
 	"testing"
 
 	fwprovider "github.com/hashicorp/terraform-plugin-framework/provider"
@@ -101,4 +102,29 @@ func NewTestData(_ *testing.T, cfResourceType, tfResourceType, resourceLabel str
 	}
 
 	return data
+}
+
+// WithProviderMeta returns a terraform block with provider_meta configured
+func WithProviderMeta() string {
+	return `
+terraform {
+  provider_meta "awscc" {
+    user_agent = [
+      "test-module/0.0.1 (test comment)",
+      "second-test-module/0.0.2 (second test comment)",
+    ]
+  }
+}
+`
+}
+
+// ConfigCompose can be called to concatenate multiple strings to build test configurations
+func ConfigCompose(config ...string) string {
+	var str strings.Builder
+
+	for _, conf := range config {
+		str.WriteString(conf)
+	}
+
+	return str.String()
 }
