@@ -7,6 +7,7 @@ package s3vectors
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
@@ -113,6 +114,70 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EncryptionConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The encryption configuration for the index.",
+		//	  "properties": {
+		//	    "KmsKeyArn": {
+		//	      "description": "AWS Key Management Service (KMS) customer managed key ID to use for the encryption configuration. This parameter is allowed if and only if sseType is set to aws:kms",
+		//	      "maxLength": 2048,
+		//	      "minLength": 1,
+		//	      "pattern": "^(arn:aws[-a-z0-9]*:kms:[-a-z0-9]*:[0-9]{12}:key/.+)$",
+		//	      "type": "string"
+		//	    },
+		//	    "SseType": {
+		//	      "description": "Defines the server-side encryption type for index encryption configuration. Defaults to the parent vector bucket's encryption settings when unspecified.",
+		//	      "enum": [
+		//	        "AES256",
+		//	        "aws:kms"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "AWS Key Management Service (KMS) customer managed key ID to use for the encryption configuration. This parameter is allowed if and only if sseType is set to aws:kms",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 2048),
+						stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[-a-z0-9]*:kms:[-a-z0-9]*:[0-9]{12}:key/.+)$"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SseType
+				"sse_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Defines the server-side encryption type for index encryption configuration. Defaults to the parent vector bucket's encryption settings when unspecified.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"AES256",
+							"aws:kms",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The encryption configuration for the index.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: IndexArn
@@ -276,10 +341,13 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 		"data_type":                    "DataType",
 		"dimension":                    "Dimension",
 		"distance_metric":              "DistanceMetric",
+		"encryption_configuration":     "EncryptionConfiguration",
 		"index_arn":                    "IndexArn",
 		"index_name":                   "IndexName",
+		"kms_key_arn":                  "KmsKeyArn",
 		"metadata_configuration":       "MetadataConfiguration",
 		"non_filterable_metadata_keys": "NonFilterableMetadataKeys",
+		"sse_type":                     "SseType",
 		"vector_bucket_arn":            "VectorBucketArn",
 		"vector_bucket_name":           "VectorBucketName",
 	})

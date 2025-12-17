@@ -54,6 +54,13 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "ConnectivityInfo": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "NetworkType": {
+		//	          "enum": [
+		//	            "IPV4",
+		//	            "DUAL"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "PublicAccess": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
@@ -185,6 +192,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: ConnectivityInfo
 				"connectivity_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: NetworkType
+						"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: PublicAccess
 						"public_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -876,6 +887,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kafka_version":                  "KafkaVersion",
 		"log_group":                      "LogGroup",
 		"logging_info":                   "LoggingInfo",
+		"network_type":                   "NetworkType",
 		"node_exporter":                  "NodeExporter",
 		"number_of_broker_nodes":         "NumberOfBrokerNodes",
 		"open_monitoring":                "OpenMonitoring",

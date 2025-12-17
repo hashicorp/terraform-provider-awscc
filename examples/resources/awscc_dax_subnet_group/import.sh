@@ -1,0 +1,1 @@
+$ terraform import awscc_dax_subnet_group.example "subnet_group_name"

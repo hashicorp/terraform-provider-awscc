@@ -118,6 +118,7 @@ resource "awscc_transfer_connector" "example" {
 
 - `arn` (String) Specifies the unique Amazon Resource Name (ARN) for the connector.
 - `connector_id` (String) A unique identifier for the connector.
+- `error_message` (String) Detailed error message when Connector in ERRORED status
 - `id` (String) Uniquely identifies the resource.
 - `service_managed_egress_ip_addresses` (List of String) The list of egress IP addresses of this connector. These IP addresses are assigned automatically when you create the connector.
 - `status` (String)

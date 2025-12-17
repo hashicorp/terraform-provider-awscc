@@ -90,7 +90,8 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "enum": [
 		//	    "CUSTOM_JWT",
-		//	    "AWS_IAM"
+		//	    "AWS_IAM",
+		//	    "NONE"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -160,6 +161,106 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"gateway_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: InterceptorConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "InputConfiguration": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "PassRequestHeaders": {
+		//	            "type": "boolean"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "PassRequestHeaders"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "InterceptionPoints": {
+		//	        "items": {
+		//	          "enum": [
+		//	            "REQUEST",
+		//	            "RESPONSE"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 2,
+		//	        "minItems": 1,
+		//	        "type": "array"
+		//	      },
+		//	      "Interceptor": {
+		//	        "properties": {
+		//	          "Lambda": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Arn": {
+		//	                "maxLength": 170,
+		//	                "minLength": 1,
+		//	                "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:([a-z]{2}(-gov)?-[a-z]+-\\d{1}):(\\d{12}):function:([a-zA-Z0-9-_.]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Arn"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Interceptor",
+		//	      "InterceptionPoints"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 2,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"interceptor_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: InputConfiguration
+					"input_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: PassRequestHeaders
+							"pass_request_headers": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: InterceptionPoints
+					"interception_points": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Interceptor
+					"interceptor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Lambda
+							"lambda": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Arn
+									"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyArn
@@ -370,33 +471,40 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::BedrockAgentCore::Gateway").WithTerraformTypeName("awscc_bedrockagentcore_gateway")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allowed_audience":          "AllowedAudience",
-		"allowed_clients":           "AllowedClients",
-		"authorizer_configuration":  "AuthorizerConfiguration",
-		"authorizer_type":           "AuthorizerType",
-		"created_at":                "CreatedAt",
-		"custom_jwt_authorizer":     "CustomJWTAuthorizer",
-		"description":               "Description",
-		"discovery_url":             "DiscoveryUrl",
-		"exception_level":           "ExceptionLevel",
-		"gateway_arn":               "GatewayArn",
-		"gateway_identifier":        "GatewayIdentifier",
-		"gateway_url":               "GatewayUrl",
-		"instructions":              "Instructions",
-		"kms_key_arn":               "KmsKeyArn",
-		"mcp":                       "Mcp",
-		"name":                      "Name",
-		"protocol_configuration":    "ProtocolConfiguration",
-		"protocol_type":             "ProtocolType",
-		"role_arn":                  "RoleArn",
-		"search_type":               "SearchType",
-		"status":                    "Status",
-		"status_reasons":            "StatusReasons",
-		"supported_versions":        "SupportedVersions",
-		"tags":                      "Tags",
-		"updated_at":                "UpdatedAt",
-		"workload_identity_arn":     "WorkloadIdentityArn",
-		"workload_identity_details": "WorkloadIdentityDetails",
+		"allowed_audience":           "AllowedAudience",
+		"allowed_clients":            "AllowedClients",
+		"arn":                        "Arn",
+		"authorizer_configuration":   "AuthorizerConfiguration",
+		"authorizer_type":            "AuthorizerType",
+		"created_at":                 "CreatedAt",
+		"custom_jwt_authorizer":      "CustomJWTAuthorizer",
+		"description":                "Description",
+		"discovery_url":              "DiscoveryUrl",
+		"exception_level":            "ExceptionLevel",
+		"gateway_arn":                "GatewayArn",
+		"gateway_identifier":         "GatewayIdentifier",
+		"gateway_url":                "GatewayUrl",
+		"input_configuration":        "InputConfiguration",
+		"instructions":               "Instructions",
+		"interception_points":        "InterceptionPoints",
+		"interceptor":                "Interceptor",
+		"interceptor_configurations": "InterceptorConfigurations",
+		"kms_key_arn":                "KmsKeyArn",
+		"lambda":                     "Lambda",
+		"mcp":                        "Mcp",
+		"name":                       "Name",
+		"pass_request_headers":       "PassRequestHeaders",
+		"protocol_configuration":     "ProtocolConfiguration",
+		"protocol_type":              "ProtocolType",
+		"role_arn":                   "RoleArn",
+		"search_type":                "SearchType",
+		"status":                     "Status",
+		"status_reasons":             "StatusReasons",
+		"supported_versions":         "SupportedVersions",
+		"tags":                       "Tags",
+		"updated_at":                 "UpdatedAt",
+		"workload_identity_arn":      "WorkloadIdentityArn",
+		"workload_identity_details":  "WorkloadIdentityDetails",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -35,6 +35,7 @@ resource "awscc_route53resolver_resolver_rule_association" "example" {
 ### Optional
 
 - `name` (String) The name of an association between a Resolver rule and a VPC.
+ The name can be up to 64 characters long and can contain letters (a-z, A-Z), numbers (0-9), hyphens (-), underscores (_), and spaces. The name cannot consist of only numbers.
 
 ### Read-Only
 

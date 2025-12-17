@@ -329,6 +329,17 @@ func connectAttachmentDataSource(ctx context.Context) (datasource.DataSource, er
 			Description: "The attachment resource ARN.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RoutingPolicyLabel
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Routing policy label",
+		//	  "type": "string"
+		//	}
+		"routing_policy_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Routing policy label",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SegmentName
 		// CloudFormation resource type schema:
 		//
@@ -452,6 +463,7 @@ func connectAttachmentDataSource(ctx context.Context) (datasource.DataSource, er
 		"proposed_segment_change":                "ProposedSegmentChange",
 		"protocol":                               "Protocol",
 		"resource_arn":                           "ResourceArn",
+		"routing_policy_label":                   "RoutingPolicyLabel",
 		"segment_name":                           "SegmentName",
 		"state":                                  "State",
 		"tags":                                   "Tags",

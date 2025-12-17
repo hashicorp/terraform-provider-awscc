@@ -197,6 +197,17 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "The Resolver endpoint IP address type.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RniEnhancedMetricsEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether RNI enhanced metrics are enabled for the Resolver Endpoints. When set to true, one-minute granular metrics are published in CloudWatch for each RNI associated with this endpoint. When set to false, metrics are not published. Default is false.",
+		//	  "type": "boolean"
+		//	}
+		"rni_enhanced_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether RNI enhanced metrics are enabled for the Resolver Endpoints. When set to true, one-minute granular metrics are published in CloudWatch for each RNI associated with this endpoint. When set to false, metrics are not published. Default is false.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -259,6 +270,17 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "An array of key-value pairs to apply to this resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: TargetNameServerMetricsEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether target name server metrics are enabled for the Outbound Resolver Endpoint. When set to true, one-minute granular metrics are published in CloudWatch for each target name server associated with this endpoint. When set to false, metrics are not published. Default is false.",
+		//	  "type": "boolean"
+		//	}
+		"target_name_server_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether target name server metrics are enabled for the Outbound Resolver Endpoint. When set to true, one-minute granular metrics are published in CloudWatch for each target name server associated with this endpoint. When set to false, metrics are not published. Default is false.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -276,24 +298,26 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverEndpoint").WithTerraformTypeName("awscc_route53resolver_resolver_endpoint")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                     "Arn",
-		"direction":               "Direction",
-		"host_vpc_id":             "HostVPCId",
-		"ip":                      "Ip",
-		"ip_address_count":        "IpAddressCount",
-		"ip_addresses":            "IpAddresses",
-		"ipv_6":                   "Ipv6",
-		"key":                     "Key",
-		"name":                    "Name",
-		"outpost_arn":             "OutpostArn",
-		"preferred_instance_type": "PreferredInstanceType",
-		"protocols":               "Protocols",
-		"resolver_endpoint_id":    "ResolverEndpointId",
-		"resolver_endpoint_type":  "ResolverEndpointType",
-		"security_group_ids":      "SecurityGroupIds",
-		"subnet_id":               "SubnetId",
-		"tags":                    "Tags",
-		"value":                   "Value",
+		"arn":                                "Arn",
+		"direction":                          "Direction",
+		"host_vpc_id":                        "HostVPCId",
+		"ip":                                 "Ip",
+		"ip_address_count":                   "IpAddressCount",
+		"ip_addresses":                       "IpAddresses",
+		"ipv_6":                              "Ipv6",
+		"key":                                "Key",
+		"name":                               "Name",
+		"outpost_arn":                        "OutpostArn",
+		"preferred_instance_type":            "PreferredInstanceType",
+		"protocols":                          "Protocols",
+		"resolver_endpoint_id":               "ResolverEndpointId",
+		"resolver_endpoint_type":             "ResolverEndpointType",
+		"rni_enhanced_metrics_enabled":       "RniEnhancedMetricsEnabled",
+		"security_group_ids":                 "SecurityGroupIds",
+		"subnet_id":                          "SubnetId",
+		"tags":                               "Tags",
+		"target_name_server_metrics_enabled": "TargetNameServerMetricsEnabled",
+		"value":                              "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

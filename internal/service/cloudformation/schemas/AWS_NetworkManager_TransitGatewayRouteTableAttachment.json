@@ -133,6 +133,10 @@
       "description": "The attachment to move from one network function group to another.",
       "$ref": "#/definitions/ProposedNetworkFunctionGroupChange"
     },
+    "RoutingPolicyLabel": {
+      "description": "Routing policy label",
+      "type": "string"
+    },
     "CreatedAt": {
       "description": "Creation time of the attachment.",
       "type": "string"
@@ -177,7 +181,11 @@
   ],
   "createOnlyProperties": [
     "/properties/PeeringId",
-    "/properties/TransitGatewayRouteTableArn"
+    "/properties/TransitGatewayRouteTableArn",
+    "/properties/RoutingPolicyLabel"
+  ],
+  "writeOnlyProperties": [
+    "/properties/RoutingPolicyLabel"
   ],
   "readOnlyProperties": [
     "/properties/CoreNetworkArn",

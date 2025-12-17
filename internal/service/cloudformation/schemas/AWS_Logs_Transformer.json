@@ -465,6 +465,9 @@
         },
         "OcsfVersion": {
           "$ref": "#/definitions/OcsfVersion"
+        },
+        "MappingVersion": {
+          "$ref": "#/definitions/MappingVersion"
         }
       },
       "additionalProperties": false,
@@ -647,8 +650,15 @@
     "OcsfVersion": {
       "type": "string",
       "enum": [
-        "V1.1"
+        "V1.1",
+        "V1.5"
       ]
+    },
+    "MappingVersion": {
+      "type": "string",
+      "pattern": "^v\\d+\\.\\d+(\\.\\d+)?$",
+      "minLength": 1,
+      "maxLength": 10
     }
   },
   "primaryIdentifier": [

@@ -25,6 +25,8 @@ Data Source schema for AWS::ECS::ExpressGatewayService
 - `cluster` (String)
 - `cpu` (String)
 - `created_at` (String)
+- `ecs_managed_resource_arns` (Attributes) (see [below for nested schema](#nestedatt--ecs_managed_resource_arns))
+- `endpoint` (String)
 - `execution_role_arn` (String)
 - `health_check_path` (String)
 - `infrastructure_role_arn` (String)
@@ -132,6 +134,40 @@ Read-Only:
 - `auto_scaling_target_value` (Number)
 - `max_task_count` (Number)
 - `min_task_count` (Number)
+
+
+
+<a id="nestedatt--ecs_managed_resource_arns"></a>
+### Nested Schema for `ecs_managed_resource_arns`
+
+Read-Only:
+
+- `auto_scaling` (Attributes) (see [below for nested schema](#nestedatt--ecs_managed_resource_arns--auto_scaling))
+- `ingress_path` (Attributes) (see [below for nested schema](#nestedatt--ecs_managed_resource_arns--ingress_path))
+- `log_groups` (List of String)
+- `metric_alarms` (List of String)
+- `service_security_groups` (List of String)
+
+<a id="nestedatt--ecs_managed_resource_arns--auto_scaling"></a>
+### Nested Schema for `ecs_managed_resource_arns.auto_scaling`
+
+Read-Only:
+
+- `application_auto_scaling_policies` (List of String)
+- `scalable_target` (String)
+
+
+<a id="nestedatt--ecs_managed_resource_arns--ingress_path"></a>
+### Nested Schema for `ecs_managed_resource_arns.ingress_path`
+
+Read-Only:
+
+- `certificate_arn` (String)
+- `listener_arn` (String)
+- `listener_rule_arn` (String)
+- `load_balancer_arn` (String)
+- `load_balancer_security_groups` (List of String)
+- `target_group_arns` (List of String)
 
 
 

@@ -25,6 +25,7 @@ Data Source schema for AWS::DevOpsAgent::Association
 - `association_id` (String) The unique identifier of the association
 - `configuration` (Attributes) The configuration that directs how AgentSpace interacts with the given service (see [below for nested schema](#nestedatt--configuration))
 - `created_at` (String) The timestamp when the association was created
+- `linked_association_ids` (List of String) Set of linked association IDs for parent-child relationships
 - `service_id` (String) The identifier for the associated service
 - `updated_at` (String) The timestamp when the association was last updated
 

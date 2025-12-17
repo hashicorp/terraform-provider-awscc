@@ -79,6 +79,47 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The distance metric to be used for similarity search.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EncryptionConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The encryption configuration for the index.",
+		//	  "properties": {
+		//	    "KmsKeyArn": {
+		//	      "description": "AWS Key Management Service (KMS) customer managed key ID to use for the encryption configuration. This parameter is allowed if and only if sseType is set to aws:kms",
+		//	      "maxLength": 2048,
+		//	      "minLength": 1,
+		//	      "pattern": "^(arn:aws[-a-z0-9]*:kms:[-a-z0-9]*:[0-9]{12}:key/.+)$",
+		//	      "type": "string"
+		//	    },
+		//	    "SseType": {
+		//	      "description": "Defines the server-side encryption type for index encryption configuration. Defaults to the parent vector bucket's encryption settings when unspecified.",
+		//	      "enum": [
+		//	        "AES256",
+		//	        "aws:kms"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "AWS Key Management Service (KMS) customer managed key ID to use for the encryption configuration. This parameter is allowed if and only if sseType is set to aws:kms",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SseType
+				"sse_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Defines the server-side encryption type for index encryption configuration. Defaults to the parent vector bucket's encryption settings when unspecified.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The encryption configuration for the index.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IndexArn
 		// CloudFormation resource type schema:
 		//
@@ -189,10 +230,13 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"data_type":                    "DataType",
 		"dimension":                    "Dimension",
 		"distance_metric":              "DistanceMetric",
+		"encryption_configuration":     "EncryptionConfiguration",
 		"index_arn":                    "IndexArn",
 		"index_name":                   "IndexName",
+		"kms_key_arn":                  "KmsKeyArn",
 		"metadata_configuration":       "MetadataConfiguration",
 		"non_filterable_metadata_keys": "NonFilterableMetadataKeys",
+		"sse_type":                     "SseType",
 		"vector_bucket_arn":            "VectorBucketArn",
 		"vector_bucket_name":           "VectorBucketName",
 	})

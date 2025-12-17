@@ -23,6 +23,7 @@ Data Source schema for AWS::EC2::SpotFleet
 
 - `spot_fleet_id` (String)
 - `spot_fleet_request_config_data` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data))
+- `tags` (Attributes List) The tags to specify in SpotFleetRequestConfigData (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--spot_fleet_request_config_data"></a>
 ### Nested Schema for `spot_fleet_request_config_data`
@@ -135,6 +136,7 @@ Read-Only:
 - `network_bandwidth_gbps` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--network_bandwidth_gbps))
 - `network_interface_count` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--network_interface_count))
 - `on_demand_max_price_percentage_over_lowest_price` (Number)
+- `require_encryption_in_transit` (Boolean)
 - `require_hibernate_support` (Boolean)
 - `spot_max_price_percentage_over_lowest_price` (Number)
 - `total_local_storage_gb` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--total_local_storage_gb))
@@ -383,6 +385,7 @@ Read-Only:
 - `network_bandwidth_gbps` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--instance_requirements--network_bandwidth_gbps))
 - `network_interface_count` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--instance_requirements--network_interface_count))
 - `on_demand_max_price_percentage_over_lowest_price` (Number)
+- `require_encryption_in_transit` (Boolean)
 - `require_hibernate_support` (Boolean)
 - `spot_max_price_percentage_over_lowest_price` (Number)
 - `total_local_storage_gb` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--instance_requirements--total_local_storage_gb))
@@ -564,6 +567,17 @@ Read-Only:
 
 <a id="nestedatt--spot_fleet_request_config_data--tag_specifications--tags"></a>
 ### Nested Schema for `spot_fleet_request_config_data.tag_specifications.tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
+
+
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
 
 Read-Only:
 

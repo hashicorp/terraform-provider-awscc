@@ -607,6 +607,13 @@
       "description": "The timestamp when the association was last updated",
       "type": "string",
       "format": "date-time"
+    },
+    "LinkedAssociationIds": {
+      "description": "Set of linked association IDs for parent-child relationships",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AssociationId"
+      }
     }
   },
   "additionalProperties": false,
@@ -633,7 +640,8 @@
     "/properties/Configuration/MCPServerDatadog/EnableWebhookUpdates",
     "/properties/Configuration/MCPServerSplunk/EnableWebhookUpdates",
     "/properties/Configuration/GitLab/EnableWebhookUpdates",
-    "/properties/Configuration/EventChannel/EnableWebhookUpdates"
+    "/properties/Configuration/EventChannel/EnableWebhookUpdates",
+    "/properties/LinkedAssociationIds"
   ],
   "primaryIdentifier": [
     "/properties/AgentSpaceId",

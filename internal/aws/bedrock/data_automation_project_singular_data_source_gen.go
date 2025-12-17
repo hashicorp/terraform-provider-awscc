@@ -211,6 +211,80 @@ func dataAutomationProjectDataSource(ctx context.Context) (datasource.DataSource
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "SensitiveDataConfiguration": {
+		//	          "properties": {
+		//	            "DetectionMode": {
+		//	              "enum": [
+		//	                "DETECTION",
+		//	                "DETECTION_AND_REDACTION"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "DetectionScope": {
+		//	              "items": {
+		//	                "enum": [
+		//	                  "STANDARD",
+		//	                  "CUSTOM"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "PiiEntitiesConfiguration": {
+		//	              "properties": {
+		//	                "PiiEntityTypes": {
+		//	                  "items": {
+		//	                    "enum": [
+		//	                      "ALL",
+		//	                      "ADDRESS",
+		//	                      "AGE",
+		//	                      "NAME",
+		//	                      "EMAIL",
+		//	                      "PHONE",
+		//	                      "USERNAME",
+		//	                      "PASSWORD",
+		//	                      "DRIVER_ID",
+		//	                      "LICENSE_PLATE",
+		//	                      "VEHICLE_IDENTIFICATION_NUMBER",
+		//	                      "CREDIT_DEBIT_CARD_CVV",
+		//	                      "CREDIT_DEBIT_CARD_EXPIRY",
+		//	                      "CREDIT_DEBIT_CARD_NUMBER",
+		//	                      "PIN",
+		//	                      "INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+		//	                      "SWIFT_CODE",
+		//	                      "IP_ADDRESS",
+		//	                      "MAC_ADDRESS",
+		//	                      "URL",
+		//	                      "AWS_ACCESS_KEY",
+		//	                      "AWS_SECRET_KEY",
+		//	                      "US_BANK_ACCOUNT_NUMBER",
+		//	                      "US_BANK_ROUTING_NUMBER",
+		//	                      "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+		//	                      "US_PASSPORT_NUMBER",
+		//	                      "US_SOCIAL_SECURITY_NUMBER",
+		//	                      "CA_HEALTH_NUMBER",
+		//	                      "CA_SOCIAL_INSURANCE_NUMBER",
+		//	                      "UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+		//	                      "UK_NATIONAL_INSURANCE_NUMBER",
+		//	                      "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array"
+		//	                },
+		//	                "RedactionMaskMode": {
+		//	                  "enum": [
+		//	                    "PII",
+		//	                    "ENTITY_TYPE"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -227,6 +301,80 @@ func dataAutomationProjectDataSource(ctx context.Context) (datasource.DataSource
 		//	                "DISABLED"
 		//	              ],
 		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "SensitiveDataConfiguration": {
+		//	          "properties": {
+		//	            "DetectionMode": {
+		//	              "enum": [
+		//	                "DETECTION",
+		//	                "DETECTION_AND_REDACTION"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "DetectionScope": {
+		//	              "items": {
+		//	                "enum": [
+		//	                  "STANDARD",
+		//	                  "CUSTOM"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "PiiEntitiesConfiguration": {
+		//	              "properties": {
+		//	                "PiiEntityTypes": {
+		//	                  "items": {
+		//	                    "enum": [
+		//	                      "ALL",
+		//	                      "ADDRESS",
+		//	                      "AGE",
+		//	                      "NAME",
+		//	                      "EMAIL",
+		//	                      "PHONE",
+		//	                      "USERNAME",
+		//	                      "PASSWORD",
+		//	                      "DRIVER_ID",
+		//	                      "LICENSE_PLATE",
+		//	                      "VEHICLE_IDENTIFICATION_NUMBER",
+		//	                      "CREDIT_DEBIT_CARD_CVV",
+		//	                      "CREDIT_DEBIT_CARD_EXPIRY",
+		//	                      "CREDIT_DEBIT_CARD_NUMBER",
+		//	                      "PIN",
+		//	                      "INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+		//	                      "SWIFT_CODE",
+		//	                      "IP_ADDRESS",
+		//	                      "MAC_ADDRESS",
+		//	                      "URL",
+		//	                      "AWS_ACCESS_KEY",
+		//	                      "AWS_SECRET_KEY",
+		//	                      "US_BANK_ACCOUNT_NUMBER",
+		//	                      "US_BANK_ROUTING_NUMBER",
+		//	                      "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+		//	                      "US_PASSPORT_NUMBER",
+		//	                      "US_SOCIAL_SECURITY_NUMBER",
+		//	                      "CA_HEALTH_NUMBER",
+		//	                      "CA_SOCIAL_INSURANCE_NUMBER",
+		//	                      "UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+		//	                      "UK_NATIONAL_INSURANCE_NUMBER",
+		//	                      "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array"
+		//	                },
+		//	                "RedactionMaskMode": {
+		//	                  "enum": [
+		//	                    "PII",
+		//	                    "ENTITY_TYPE"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
 		//	            }
 		//	          },
 		//	          "type": "object"
@@ -259,6 +407,80 @@ func dataAutomationProjectDataSource(ctx context.Context) (datasource.DataSource
 		//	                "DISABLED"
 		//	              ],
 		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "SensitiveDataConfiguration": {
+		//	          "properties": {
+		//	            "DetectionMode": {
+		//	              "enum": [
+		//	                "DETECTION",
+		//	                "DETECTION_AND_REDACTION"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "DetectionScope": {
+		//	              "items": {
+		//	                "enum": [
+		//	                  "STANDARD",
+		//	                  "CUSTOM"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "PiiEntitiesConfiguration": {
+		//	              "properties": {
+		//	                "PiiEntityTypes": {
+		//	                  "items": {
+		//	                    "enum": [
+		//	                      "ALL",
+		//	                      "ADDRESS",
+		//	                      "AGE",
+		//	                      "NAME",
+		//	                      "EMAIL",
+		//	                      "PHONE",
+		//	                      "USERNAME",
+		//	                      "PASSWORD",
+		//	                      "DRIVER_ID",
+		//	                      "LICENSE_PLATE",
+		//	                      "VEHICLE_IDENTIFICATION_NUMBER",
+		//	                      "CREDIT_DEBIT_CARD_CVV",
+		//	                      "CREDIT_DEBIT_CARD_EXPIRY",
+		//	                      "CREDIT_DEBIT_CARD_NUMBER",
+		//	                      "PIN",
+		//	                      "INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+		//	                      "SWIFT_CODE",
+		//	                      "IP_ADDRESS",
+		//	                      "MAC_ADDRESS",
+		//	                      "URL",
+		//	                      "AWS_ACCESS_KEY",
+		//	                      "AWS_SECRET_KEY",
+		//	                      "US_BANK_ACCOUNT_NUMBER",
+		//	                      "US_BANK_ROUTING_NUMBER",
+		//	                      "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+		//	                      "US_PASSPORT_NUMBER",
+		//	                      "US_SOCIAL_SECURITY_NUMBER",
+		//	                      "CA_HEALTH_NUMBER",
+		//	                      "CA_SOCIAL_INSURANCE_NUMBER",
+		//	                      "UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+		//	                      "UK_NATIONAL_INSURANCE_NUMBER",
+		//	                      "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array"
+		//	                },
+		//	                "RedactionMaskMode": {
+		//	                  "enum": [
+		//	                    "PII",
+		//	                    "ENTITY_TYPE"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
 		//	            }
 		//	          },
 		//	          "type": "object"
@@ -324,6 +546,80 @@ func dataAutomationProjectDataSource(ctx context.Context) (datasource.DataSource
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "SensitiveDataConfiguration": {
+		//	          "properties": {
+		//	            "DetectionMode": {
+		//	              "enum": [
+		//	                "DETECTION",
+		//	                "DETECTION_AND_REDACTION"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "DetectionScope": {
+		//	              "items": {
+		//	                "enum": [
+		//	                  "STANDARD",
+		//	                  "CUSTOM"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "PiiEntitiesConfiguration": {
+		//	              "properties": {
+		//	                "PiiEntityTypes": {
+		//	                  "items": {
+		//	                    "enum": [
+		//	                      "ALL",
+		//	                      "ADDRESS",
+		//	                      "AGE",
+		//	                      "NAME",
+		//	                      "EMAIL",
+		//	                      "PHONE",
+		//	                      "USERNAME",
+		//	                      "PASSWORD",
+		//	                      "DRIVER_ID",
+		//	                      "LICENSE_PLATE",
+		//	                      "VEHICLE_IDENTIFICATION_NUMBER",
+		//	                      "CREDIT_DEBIT_CARD_CVV",
+		//	                      "CREDIT_DEBIT_CARD_EXPIRY",
+		//	                      "CREDIT_DEBIT_CARD_NUMBER",
+		//	                      "PIN",
+		//	                      "INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+		//	                      "SWIFT_CODE",
+		//	                      "IP_ADDRESS",
+		//	                      "MAC_ADDRESS",
+		//	                      "URL",
+		//	                      "AWS_ACCESS_KEY",
+		//	                      "AWS_SECRET_KEY",
+		//	                      "US_BANK_ACCOUNT_NUMBER",
+		//	                      "US_BANK_ROUTING_NUMBER",
+		//	                      "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+		//	                      "US_PASSPORT_NUMBER",
+		//	                      "US_SOCIAL_SECURITY_NUMBER",
+		//	                      "CA_HEALTH_NUMBER",
+		//	                      "CA_SOCIAL_INSURANCE_NUMBER",
+		//	                      "UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+		//	                      "UK_NATIONAL_INSURANCE_NUMBER",
+		//	                      "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array"
+		//	                },
+		//	                "RedactionMaskMode": {
+		//	                  "enum": [
+		//	                    "PII",
+		//	                    "ENTITY_TYPE"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -365,6 +661,36 @@ func dataAutomationProjectDataSource(ctx context.Context) (datasource.DataSource
 							}, /*END SCHEMA*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
+						// Property: SensitiveDataConfiguration
+						"sensitive_data_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DetectionMode
+								"detection_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: DetectionScope
+								"detection_scope": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: PiiEntitiesConfiguration
+								"pii_entities_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: PiiEntityTypes
+										"pii_entity_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RedactionMaskMode
+										"redaction_mask_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
@@ -376,6 +702,36 @@ func dataAutomationProjectDataSource(ctx context.Context) (datasource.DataSource
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: State
 								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SensitiveDataConfiguration
+						"sensitive_data_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DetectionMode
+								"detection_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: DetectionScope
+								"detection_scope": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: PiiEntitiesConfiguration
+								"pii_entities_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: PiiEntityTypes
+										"pii_entity_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RedactionMaskMode
+										"redaction_mask_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -402,6 +758,36 @@ func dataAutomationProjectDataSource(ctx context.Context) (datasource.DataSource
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: State
 								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SensitiveDataConfiguration
+						"sensitive_data_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DetectionMode
+								"detection_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: DetectionScope
+								"detection_scope": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: PiiEntitiesConfiguration
+								"pii_entities_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: PiiEntityTypes
+										"pii_entity_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RedactionMaskMode
+										"redaction_mask_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -441,6 +827,36 @@ func dataAutomationProjectDataSource(ctx context.Context) (datasource.DataSource
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: State
 								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SensitiveDataConfiguration
+						"sensitive_data_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DetectionMode
+								"detection_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: DetectionScope
+								"detection_scope": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: PiiEntitiesConfiguration
+								"pii_entities_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: PiiEntityTypes
+										"pii_entity_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RedactionMaskMode
+										"redaction_mask_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -504,6 +920,21 @@ func dataAutomationProjectDataSource(ctx context.Context) (datasource.DataSource
 		//	}
 		"project_stage": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Stage of the Project",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ProjectType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Type of the DataAutomationProject - Sync or Async",
+		//	  "enum": [
+		//	    "ASYNC",
+		//	    "SYNC"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"project_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Type of the DataAutomationProject - Sync or Async",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StandardOutputConfiguration
@@ -1269,6 +1700,8 @@ func dataAutomationProjectDataSource(ctx context.Context) (datasource.DataSource
 		"channel_labeling":              "ChannelLabeling",
 		"creation_time":                 "CreationTime",
 		"custom_output_configuration":   "CustomOutputConfiguration",
+		"detection_mode":                "DetectionMode",
+		"detection_scope":               "DetectionScope",
 		"document":                      "Document",
 		"extraction":                    "Extraction",
 		"generative_field":              "GenerativeField",
@@ -1289,11 +1722,16 @@ func dataAutomationProjectDataSource(ctx context.Context) (datasource.DataSource
 		"mp_4":                          "mp4",
 		"output_format":                 "OutputFormat",
 		"override_configuration":        "OverrideConfiguration",
+		"pii_entities_configuration":    "PiiEntitiesConfiguration",
+		"pii_entity_types":              "PiiEntityTypes",
 		"png":                           "png",
 		"project_arn":                   "ProjectArn",
 		"project_description":           "ProjectDescription",
 		"project_name":                  "ProjectName",
 		"project_stage":                 "ProjectStage",
+		"project_type":                  "ProjectType",
+		"redaction_mask_mode":           "RedactionMaskMode",
+		"sensitive_data_configuration":  "SensitiveDataConfiguration",
 		"speaker_labeling":              "SpeakerLabeling",
 		"splitter":                      "Splitter",
 		"standard_output_configuration": "StandardOutputConfiguration",

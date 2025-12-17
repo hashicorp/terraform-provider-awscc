@@ -21,6 +21,10 @@ Resource Type definition for AWS::DevOpsAgent::Association defining how the Agen
 - `configuration` (Attributes) The configuration that directs how AgentSpace interacts with the given service (see [below for nested schema](#nestedatt--configuration))
 - `service_id` (String) The identifier for the associated service
 
+### Optional
+
+- `linked_association_ids` (List of String) Set of linked association IDs for parent-child relationships
+
 ### Read-Only
 
 - `association_id` (String) The unique identifier of the association

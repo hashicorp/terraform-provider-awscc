@@ -489,6 +489,23 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: RoutingPolicyLabel
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Routing policy label",
+		//	  "type": "string"
+		//	}
+		"routing_policy_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Routing policy label",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// RoutingPolicyLabel is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: SegmentName
 		// CloudFormation resource type schema:
 		//
@@ -676,6 +693,7 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		"proposed_network_function_group_change": "ProposedNetworkFunctionGroupChange",
 		"proposed_segment_change":                "ProposedSegmentChange",
 		"resource_arn":                           "ResourceArn",
+		"routing_policy_label":                   "RoutingPolicyLabel",
 		"security_group_referencing_support":     "SecurityGroupReferencingSupport",
 		"segment_name":                           "SegmentName",
 		"state":                                  "State",
@@ -686,6 +704,9 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_arn":                                "VpcArn",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/RoutingPolicyLabel",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(60).WithDeleteTimeoutInMinutes(60)
 
 	opts = opts.WithUpdateTimeoutInMinutes(60)

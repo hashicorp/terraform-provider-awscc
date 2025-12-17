@@ -31,6 +31,15 @@
     "Id": {
       "type": "string",
       "description": "The ID of the profile."
+    },
+    "ShareStatus": {
+      "type": "string",
+      "description": "The sharing status of the profile.",
+      "enum": [
+        "NOT_SHARED",
+        "SHARED_WITH_ME",
+        "SHARED_BY_ME"
+      ]
     }
   },
   "definitions": {
@@ -77,7 +86,8 @@
   "readOnlyProperties": [
     "/properties/Arn",
     "/properties/Id",
-    "/properties/ClientToken"
+    "/properties/ClientToken",
+    "/properties/ShareStatus"
   ],
   "createOnlyProperties": [
     "/properties/Name"

@@ -82,13 +82,15 @@
         "Attribute": {
           "type": "string",
           "enum": [
-            "LINE_ITEM_TYPE"
+            "LINE_ITEM_TYPE",
+            "SERVICE"
           ]
         },
         "MatchOption": {
           "type": "string",
           "enum": [
-            "NOT_EQUAL"
+            "NOT_EQUAL",
+            "EQUAL"
           ]
         },
         "Values": {
@@ -98,12 +100,19 @@
           "items": {
             "$ref": "#/definitions/LineItemFilterValue"
           }
+        },
+        "AttributeValues": {
+          "type": "array",
+          "insertionOrder": false,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/AttributeValue"
+          }
         }
       },
       "required": [
         "Attribute",
-        "MatchOption",
-        "Values"
+        "MatchOption"
       ]
     },
     "LineItemFilterValue": {
@@ -111,6 +120,12 @@
       "enum": [
         "SAVINGS_PLAN_NEGATION"
       ]
+    },
+    "AttributeValue": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[a-zA-Z0-9]+$"
     },
     "CustomLineItemChargeDetails": {
       "type": "object",
@@ -165,7 +180,8 @@
       "description": "The display settings of the Custom Line Item.",
       "type": "string",
       "enum": [
-        "CONSOLIDATED"
+        "CONSOLIDATED",
+        "ITEMIZED"
       ]
     },
     "PresentationDetails": {

@@ -27,6 +27,7 @@ Data Source schema for AWS::Transfer::Connector
 - `connector_id` (String) A unique identifier for the connector.
 - `egress_config` (Attributes) Egress configuration for the connector. (see [below for nested schema](#nestedatt--egress_config))
 - `egress_type` (String) Specifies the egress type for the connector.
+- `error_message` (String) Detailed error message when Connector in ERRORED status
 - `logging_role` (String) Specifies the logging role for the connector.
 - `security_policy_name` (String) Security policy for SFTP Connector
 - `service_managed_egress_ip_addresses` (List of String) The list of egress IP addresses of this connector. These IP addresses are assigned automatically when you create the connector.

@@ -323,6 +323,11 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        ],
 		//	        "type": "object"
 		//	      },
+		//	      "MinInstanceCount": {
+		//	        "description": "The minimum number of instances required for the instance group to be InService. MinInstanceCount must be less than or equal to InstanceCount.",
+		//	        "minimum": 0,
+		//	        "type": "integer"
+		//	      },
 		//	      "OnStartDeepHealthChecks": {
 		//	        "description": "Nodes will undergo advanced stress test to detect and replace faulty instances, based on the type of deep health check(s) passed in.",
 		//	        "insertionOrder": false,
@@ -635,6 +640,11 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "The lifecycle configuration for a SageMaker HyperPod cluster.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MinInstanceCount
+					"min_instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The minimum number of instances required for the instance group to be InService. MinInstanceCount must be less than or equal to InstanceCount.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: OnStartDeepHealthChecks
@@ -1325,6 +1335,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"labels":                                "Labels",
 		"life_cycle_config":                     "LifeCycleConfig",
 		"maximum_batch_size":                    "MaximumBatchSize",
+		"min_instance_count":                    "MinInstanceCount",
 		"mode":                                  "Mode",
 		"node_provisioning_mode":                "NodeProvisioningMode",
 		"node_recovery":                         "NodeRecovery",

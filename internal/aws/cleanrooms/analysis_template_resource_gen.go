@@ -9,10 +9,13 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -747,6 +750,189 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: SyntheticDataParameters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "properties": {
+		//	    "MlSyntheticDataParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ColumnClassification": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ColumnMapping": {
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "ColumnName": {
+		//	                    "maxLength": 128,
+		//	                    "pattern": "^[a-z0-9_](([a-z0-9_]+-)*([a-z0-9_]+))?$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "ColumnType": {
+		//	                    "enum": [
+		//	                      "CATEGORICAL",
+		//	                      "NUMERICAL"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "IsPredictiveValue": {
+		//	                    "type": "boolean"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "ColumnName",
+		//	                  "ColumnType",
+		//	                  "IsPredictiveValue"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 1000,
+		//	              "minItems": 5,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ColumnMapping"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Epsilon": {
+		//	          "maximum": 10,
+		//	          "minimum": 0.0001,
+		//	          "type": "number"
+		//	        },
+		//	        "MaxMembershipInferenceAttackScore": {
+		//	          "maximum": 1,
+		//	          "minimum": 0.5,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Epsilon",
+		//	        "MaxMembershipInferenceAttackScore",
+		//	        "ColumnClassification"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"synthetic_data_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MlSyntheticDataParameters
+				"ml_synthetic_data_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ColumnClassification
+						"column_classification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ColumnMapping
+								"column_mapping": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ColumnName
+											"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthAtMost(128),
+													stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9_](([a-z0-9_]+-)*([a-z0-9_]+))?$"), ""),
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: ColumnType
+											"column_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"CATEGORICAL",
+														"NUMERICAL",
+													),
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: IsPredictiveValue
+											"is_predictive_value": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.Bool{ /*START VALIDATORS*/
+													fwvalidators.NotNullBool(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+													boolplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(5, 1000),
+										fwvalidators.NotNullList(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Epsilon
+						"epsilon": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(0.000100, 10.000000),
+								fwvalidators.NotNullFloat64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MaxMembershipInferenceAttackScore
+						"max_membership_inference_attack_score": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(0.500000, 1.000000),
+								fwvalidators.NotNullFloat64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -844,36 +1030,45 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"additional_artifact_hashes":   "AdditionalArtifactHashes",
-		"additional_artifacts":         "AdditionalArtifacts",
-		"analysis_parameters":          "AnalysisParameters",
-		"analysis_template_identifier": "AnalysisTemplateIdentifier",
-		"arn":                          "Arn",
-		"artifacts":                    "Artifacts",
-		"bucket":                       "Bucket",
-		"collaboration_arn":            "CollaborationArn",
-		"collaboration_identifier":     "CollaborationIdentifier",
-		"default_value":                "DefaultValue",
-		"description":                  "Description",
-		"entry_point":                  "EntryPoint",
-		"entry_point_hash":             "EntryPointHash",
-		"error_message_configuration":  "ErrorMessageConfiguration",
-		"format":                       "Format",
-		"key":                          "Key",
-		"location":                     "Location",
-		"membership_arn":               "MembershipArn",
-		"membership_identifier":        "MembershipIdentifier",
-		"name":                         "Name",
-		"referenced_tables":            "ReferencedTables",
-		"role_arn":                     "RoleArn",
-		"schema":                       "Schema",
-		"sha_256":                      "Sha256",
-		"source":                       "Source",
-		"source_metadata":              "SourceMetadata",
-		"tags":                         "Tags",
-		"text":                         "Text",
-		"type":                         "Type",
-		"value":                        "Value",
+		"additional_artifact_hashes":            "AdditionalArtifactHashes",
+		"additional_artifacts":                  "AdditionalArtifacts",
+		"analysis_parameters":                   "AnalysisParameters",
+		"analysis_template_identifier":          "AnalysisTemplateIdentifier",
+		"arn":                                   "Arn",
+		"artifacts":                             "Artifacts",
+		"bucket":                                "Bucket",
+		"collaboration_arn":                     "CollaborationArn",
+		"collaboration_identifier":              "CollaborationIdentifier",
+		"column_classification":                 "ColumnClassification",
+		"column_mapping":                        "ColumnMapping",
+		"column_name":                           "ColumnName",
+		"column_type":                           "ColumnType",
+		"default_value":                         "DefaultValue",
+		"description":                           "Description",
+		"entry_point":                           "EntryPoint",
+		"entry_point_hash":                      "EntryPointHash",
+		"epsilon":                               "Epsilon",
+		"error_message_configuration":           "ErrorMessageConfiguration",
+		"format":                                "Format",
+		"is_predictive_value":                   "IsPredictiveValue",
+		"key":                                   "Key",
+		"location":                              "Location",
+		"max_membership_inference_attack_score": "MaxMembershipInferenceAttackScore",
+		"membership_arn":                        "MembershipArn",
+		"membership_identifier":                 "MembershipIdentifier",
+		"ml_synthetic_data_parameters":          "MlSyntheticDataParameters",
+		"name":                                  "Name",
+		"referenced_tables":                     "ReferencedTables",
+		"role_arn":                              "RoleArn",
+		"schema":                                "Schema",
+		"sha_256":                               "Sha256",
+		"source":                                "Source",
+		"source_metadata":                       "SourceMetadata",
+		"synthetic_data_parameters":             "SyntheticDataParameters",
+		"tags":                                  "Tags",
+		"text":                                  "Text",
+		"type":                                  "Type",
+		"value":                                 "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

@@ -677,6 +677,17 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "MlflowProperties": {
+		//	      "additionalProperties": false,
+		//	      "description": "MLflow Properties Input",
+		//	      "properties": {
+		//	        "TrackingServerArn": {
+		//	          "description": "The ARN of the MLflow tracking server",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "RedshiftProperties": {
 		//	      "additionalProperties": false,
 		//	      "description": "Redshift Properties Input",
@@ -800,7 +811,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "properties": {
 		//	        "ComputeArn": {
 		//	          "maxLength": 2048,
-		//	          "pattern": "^arn:aws(-(cn|us-gov|iso(-[bef])?))?:(elasticmapreduce|emr-serverless):.*",
+		//	          "pattern": "^arn:aws(-(cn|us-gov|iso(-[bef])?))?:(elasticmapreduce|emr-serverless|emr-containers):.*",
 		//	          "type": "string"
 		//	        },
 		//	        "InstanceProfileArn": {
@@ -816,6 +827,10 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "LogUri": {
 		//	          "maxLength": 2048,
 		//	          "pattern": "^s3://.+$",
+		//	          "type": "string"
+		//	        },
+		//	        "ManagedEndpointArn": {
+		//	          "maxLength": 2048,
 		//	          "type": "string"
 		//	        },
 		//	        "PythonVirtualEnv": {
@@ -1475,6 +1490,26 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: MlflowProperties
+				"mlflow_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TrackingServerArn
+						"tracking_server_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the MLflow tracking server",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "MLflow Properties Input",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: RedshiftProperties
 				"redshift_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1702,7 +1737,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthAtMost(2048),
-								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-(cn|us-gov|iso(-[bef])?))?:(elasticmapreduce|emr-serverless):.*"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-(cn|us-gov|iso(-[bef])?))?:(elasticmapreduce|emr-serverless|emr-containers):.*"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -1739,6 +1774,17 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthAtMost(2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^s3://.+$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ManagedEndpointArn
+						"managed_endpoint_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthAtMost(2048),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -2038,7 +2084,9 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"kms_key_arn":                              "KmsKeyArn",
 		"lineage_sync":                             "LineageSync",
 		"log_uri":                                  "LogUri",
+		"managed_endpoint_arn":                     "ManagedEndpointArn",
 		"match_criteria":                           "MatchCriteria",
+		"mlflow_properties":                        "MlflowProperties",
 		"name":                                     "Name",
 		"number_of_workers":                        "NumberOfWorkers",
 		"o_auth_2_client_application":              "OAuth2ClientApplication",
@@ -2073,6 +2121,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"subnet_id_list":                           "SubnetIdList",
 		"token_url":                                "TokenUrl",
 		"token_url_parameters_map":                 "TokenUrlParametersMap",
+		"tracking_server_arn":                      "TrackingServerArn",
 		"trusted_certificates_s3_uri":              "TrustedCertificatesS3Uri",
 		"type":                                     "Type",
 		"user_managed_client_application_client_id":     "UserManagedClientApplicationClientId",

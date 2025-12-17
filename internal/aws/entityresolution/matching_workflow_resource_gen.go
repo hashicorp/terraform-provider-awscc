@@ -193,6 +193,24 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		//	      "ApplyNormalization": {
 		//	        "type": "boolean"
 		//	      },
+		//	      "CustomerProfilesIntegrationConfig": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "DomainArn": {
+		//	            "pattern": "^arn:(aws|aws-us-gov|aws-cn):profile:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(domains/[a-zA-Z_0-9-]{1,255})$",
+		//	            "type": "string"
+		//	          },
+		//	          "ObjectTypeArn": {
+		//	            "pattern": "^arn:(aws|aws-us-gov|aws-cn):profile:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(domains/[a-zA-Z_0-9-]{1,255}/object-types/[a-zA-Z_0-9-]{1,255})$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "DomainArn",
+		//	          "ObjectTypeArn"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "KMSArn": {
 		//	        "pattern": "^arn:(aws|aws-us-gov|aws-cn):kms:.*:[0-9]+:.*$",
 		//	        "type": "string"
@@ -228,8 +246,7 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Output",
-		//	      "OutputS3Path"
+		//	      "Output"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -246,6 +263,40 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 						Computed: true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 							boolplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: CustomerProfilesIntegrationConfig
+					"customer_profiles_integration_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DomainArn
+							"domain_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn):profile:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(domains/[a-zA-Z_0-9-]{1,255})$"), ""),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ObjectTypeArn
+							"object_type_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn):profile:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(domains/[a-zA-Z_0-9-]{1,255}/object-types/[a-zA-Z_0-9-]{1,255})$"), ""),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: KMSArn
@@ -292,10 +343,14 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 					// Property: OutputS3Path
 					"output_s3_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The S3 path to which Entity Resolution will write the output table",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.RegexMatches(regexp.MustCompile("^s3://([^/]+)/?(.*?([^/]+)/?)$"), ""),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -822,42 +877,45 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"apply_normalization":               "ApplyNormalization",
-		"attribute_matching_model":          "AttributeMatchingModel",
-		"condition":                         "Condition",
-		"created_at":                        "CreatedAt",
-		"description":                       "Description",
-		"hashed":                            "Hashed",
-		"incremental_run_config":            "IncrementalRunConfig",
-		"incremental_run_type":              "IncrementalRunType",
-		"input_source_arn":                  "InputSourceARN",
-		"input_source_config":               "InputSourceConfig",
-		"intermediate_s3_path":              "IntermediateS3Path",
-		"intermediate_source_configuration": "IntermediateSourceConfiguration",
-		"key":                               "Key",
-		"kms_arn":                           "KMSArn",
-		"match_purpose":                     "MatchPurpose",
-		"matching_keys":                     "MatchingKeys",
-		"name":                              "Name",
-		"output":                            "Output",
-		"output_s3_path":                    "OutputS3Path",
-		"output_source_config":              "OutputSourceConfig",
-		"provider_configuration":            "ProviderConfiguration",
-		"provider_properties":               "ProviderProperties",
-		"provider_service_arn":              "ProviderServiceArn",
-		"resolution_techniques":             "ResolutionTechniques",
-		"resolution_type":                   "ResolutionType",
-		"role_arn":                          "RoleArn",
-		"rule_based_properties":             "RuleBasedProperties",
-		"rule_condition_properties":         "RuleConditionProperties",
-		"rule_name":                         "RuleName",
-		"rules":                             "Rules",
-		"schema_arn":                        "SchemaArn",
-		"tags":                              "Tags",
-		"updated_at":                        "UpdatedAt",
-		"value":                             "Value",
-		"workflow_arn":                      "WorkflowArn",
-		"workflow_name":                     "WorkflowName",
+		"apply_normalization":                  "ApplyNormalization",
+		"attribute_matching_model":             "AttributeMatchingModel",
+		"condition":                            "Condition",
+		"created_at":                           "CreatedAt",
+		"customer_profiles_integration_config": "CustomerProfilesIntegrationConfig",
+		"description":                          "Description",
+		"domain_arn":                           "DomainArn",
+		"hashed":                               "Hashed",
+		"incremental_run_config":               "IncrementalRunConfig",
+		"incremental_run_type":                 "IncrementalRunType",
+		"input_source_arn":                     "InputSourceARN",
+		"input_source_config":                  "InputSourceConfig",
+		"intermediate_s3_path":                 "IntermediateS3Path",
+		"intermediate_source_configuration":    "IntermediateSourceConfiguration",
+		"key":                                  "Key",
+		"kms_arn":                              "KMSArn",
+		"match_purpose":                        "MatchPurpose",
+		"matching_keys":                        "MatchingKeys",
+		"name":                                 "Name",
+		"object_type_arn":                      "ObjectTypeArn",
+		"output":                               "Output",
+		"output_s3_path":                       "OutputS3Path",
+		"output_source_config":                 "OutputSourceConfig",
+		"provider_configuration":               "ProviderConfiguration",
+		"provider_properties":                  "ProviderProperties",
+		"provider_service_arn":                 "ProviderServiceArn",
+		"resolution_techniques":                "ResolutionTechniques",
+		"resolution_type":                      "ResolutionType",
+		"role_arn":                             "RoleArn",
+		"rule_based_properties":                "RuleBasedProperties",
+		"rule_condition_properties":            "RuleConditionProperties",
+		"rule_name":                            "RuleName",
+		"rules":                                "Rules",
+		"schema_arn":                           "SchemaArn",
+		"tags":                                 "Tags",
+		"updated_at":                           "UpdatedAt",
+		"value":                                "Value",
+		"workflow_arn":                         "WorkflowArn",
+		"workflow_name":                        "WorkflowName",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

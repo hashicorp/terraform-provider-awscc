@@ -325,6 +325,66 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "Assigns a list of private IP addresses to the network interface. You can specify a primary private IP address by setting the value of the Primary property to true in the PrivateIpAddressSpecification property. If you want EC2 to automatically assign private IP addresses, use the SecondaryPrivateIpAddressCount property and do not specify this property.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: PublicIpDnsHostnameTypeSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Public IP DNS hostname type",
+		//	  "enum": [
+		//	    "public-dual-stack-dns-name",
+		//	    "public-ipv4-dns-name",
+		//	    "public-ipv6-dns-name"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"public_ip_dns_hostname_type_specification": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Public IP DNS hostname type",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PublicIpDnsNameOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Describes the public hostname type options, including public hostname type, IPv4-enabled public hostname, IPv6-enabled public hostname, and dual-stack public hostname.",
+		//	  "properties": {
+		//	    "DnsHostnameType": {
+		//	      "type": "string"
+		//	    },
+		//	    "PublicDualStackDnsName": {
+		//	      "type": "string"
+		//	    },
+		//	    "PublicIpv4DnsName": {
+		//	      "type": "string"
+		//	    },
+		//	    "PublicIpv6DnsName": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"public_ip_dns_name_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DnsHostnameType
+				"dns_hostname_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PublicDualStackDnsName
+				"public_dual_stack_dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PublicIpv4DnsName
+				"public_ipv_4_dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PublicIpv6DnsName
+				"public_ipv_6_dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Describes the public hostname type options, including public hostname type, IPv4-enabled public hostname, IPv6-enabled public hostname, and dual-stack public hostname.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecondaryPrivateIpAddressCount
 		// CloudFormation resource type schema:
 		//
@@ -444,37 +504,43 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkInterface").WithTerraformTypeName("awscc_ec2_network_interface")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"connection_tracking_specification":  "ConnectionTrackingSpecification",
-		"description":                        "Description",
-		"enable_primary_ipv_6":               "EnablePrimaryIpv6",
-		"group_set":                          "GroupSet",
-		"interface_type":                     "InterfaceType",
-		"ipv_4_prefix":                       "Ipv4Prefix",
-		"ipv_4_prefix_count":                 "Ipv4PrefixCount",
-		"ipv_4_prefixes":                     "Ipv4Prefixes",
-		"ipv_6_address":                      "Ipv6Address",
-		"ipv_6_address_count":                "Ipv6AddressCount",
-		"ipv_6_addresses":                    "Ipv6Addresses",
-		"ipv_6_prefix":                       "Ipv6Prefix",
-		"ipv_6_prefix_count":                 "Ipv6PrefixCount",
-		"ipv_6_prefixes":                     "Ipv6Prefixes",
-		"key":                                "Key",
-		"network_interface_id":               "Id",
-		"primary":                            "Primary",
-		"primary_ipv_6_address":              "PrimaryIpv6Address",
-		"primary_private_ip_address":         "PrimaryPrivateIpAddress",
-		"private_ip_address":                 "PrivateIpAddress",
-		"private_ip_addresses":               "PrivateIpAddresses",
-		"secondary_private_ip_address_count": "SecondaryPrivateIpAddressCount",
-		"secondary_private_ip_addresses":     "SecondaryPrivateIpAddresses",
-		"source_dest_check":                  "SourceDestCheck",
-		"subnet_id":                          "SubnetId",
-		"tags":                               "Tags",
-		"tcp_established_timeout":            "TcpEstablishedTimeout",
-		"udp_stream_timeout":                 "UdpStreamTimeout",
-		"udp_timeout":                        "UdpTimeout",
-		"value":                              "Value",
-		"vpc_id":                             "VpcId",
+		"connection_tracking_specification":         "ConnectionTrackingSpecification",
+		"description":                               "Description",
+		"dns_hostname_type":                         "DnsHostnameType",
+		"enable_primary_ipv_6":                      "EnablePrimaryIpv6",
+		"group_set":                                 "GroupSet",
+		"interface_type":                            "InterfaceType",
+		"ipv_4_prefix":                              "Ipv4Prefix",
+		"ipv_4_prefix_count":                        "Ipv4PrefixCount",
+		"ipv_4_prefixes":                            "Ipv4Prefixes",
+		"ipv_6_address":                             "Ipv6Address",
+		"ipv_6_address_count":                       "Ipv6AddressCount",
+		"ipv_6_addresses":                           "Ipv6Addresses",
+		"ipv_6_prefix":                              "Ipv6Prefix",
+		"ipv_6_prefix_count":                        "Ipv6PrefixCount",
+		"ipv_6_prefixes":                            "Ipv6Prefixes",
+		"key":                                       "Key",
+		"network_interface_id":                      "Id",
+		"primary":                                   "Primary",
+		"primary_ipv_6_address":                     "PrimaryIpv6Address",
+		"primary_private_ip_address":                "PrimaryPrivateIpAddress",
+		"private_ip_address":                        "PrivateIpAddress",
+		"private_ip_addresses":                      "PrivateIpAddresses",
+		"public_dual_stack_dns_name":                "PublicDualStackDnsName",
+		"public_ip_dns_hostname_type_specification": "PublicIpDnsHostnameTypeSpecification",
+		"public_ip_dns_name_options":                "PublicIpDnsNameOptions",
+		"public_ipv_4_dns_name":                     "PublicIpv4DnsName",
+		"public_ipv_6_dns_name":                     "PublicIpv6DnsName",
+		"secondary_private_ip_address_count":        "SecondaryPrivateIpAddressCount",
+		"secondary_private_ip_addresses":            "SecondaryPrivateIpAddresses",
+		"source_dest_check":                         "SourceDestCheck",
+		"subnet_id":                                 "SubnetId",
+		"tags":                                      "Tags",
+		"tcp_established_timeout":                   "TcpEstablishedTimeout",
+		"udp_stream_timeout":                        "UdpStreamTimeout",
+		"udp_timeout":                               "UdpTimeout",
+		"value":                                     "Value",
+		"vpc_id":                                    "VpcId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

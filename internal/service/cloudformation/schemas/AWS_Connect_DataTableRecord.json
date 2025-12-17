@@ -1,0 +1,142 @@
+{
+  "typeName": "AWS::Connect::DataTableRecord",
+  "description": "Resource Type definition for AWS::Connect::DataTableRecord",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-connect",
+  "definitions": {
+    "AttributeId": {
+      "description": "",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "Value": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "AttributeId": {
+          "description": "",
+          "$ref": "#/definitions/AttributeId"
+        },
+        "AttributeValue": {
+          "description": "",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "InstanceArn": {
+      "description": "",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$"
+    },
+    "DataTableArn": {
+      "description": "",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "RecordId": {
+      "description": "",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "DataTableRecord": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "PrimaryValues": {
+          "description": "",
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Value"
+          }
+        },
+        "Values": {
+          "description": "",
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Value"
+          }
+        }
+      },
+      "required": [
+        "Values"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "connect:ListDataTableAttributes",
+        "connect:BatchCreateDataTableValue"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "connect:ListDataTableAttributes",
+        "connect:ListDataTableValues"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "connect:ListDataTableAttributes",
+        "connect:ListDataTableValues",
+        "connect:BatchDeleteDataTableValue"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "connect:UpdateDataTablePrimaryValues",
+        "connect:BatchCreateDataTableValue",
+        "connect:BatchDeleteDataTableValue",
+        "connect:BatchUpdateDataTableValue",
+        "connect:ListDataTableAttributes",
+        "connect:ListDataTableValues"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "InstanceArn": {
+            "$ref": "resource-schema.json#/properties/InstanceArn"
+          },
+          "DataTableArn": {
+            "$ref": "resource-schema.json#/properties/DataTableArn"
+          }
+        },
+        "required": [
+          "InstanceArn",
+          "DataTableArn"
+        ]
+      },
+      "permissions": [
+        "connect:ListDataTableAttributes",
+        "connect:ListDataTablePrimaryValues"
+      ]
+    }
+  },
+  "createOnlyProperties": [
+    "/properties/InstanceArn",
+    "/properties/DataTableArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/RecordId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/InstanceArn",
+    "/properties/DataTableArn",
+    "/properties/RecordId"
+  ]
+}

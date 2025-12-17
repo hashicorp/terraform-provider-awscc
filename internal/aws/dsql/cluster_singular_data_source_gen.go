@@ -252,6 +252,17 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END NESTED OBJECT*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: VpcEndpoint
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The DSQL cluster VPC endpoint.",
+		//	  "type": "string"
+		//	}
+		"vpc_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The DSQL cluster VPC endpoint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcEndpointServiceName
 		// CloudFormation resource type schema:
 		//
@@ -298,6 +309,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"status":                      "Status",
 		"tags":                        "Tags",
 		"value":                       "Value",
+		"vpc_endpoint":                "VpcEndpoint",
 		"vpc_endpoint_service_name":   "VpcEndpointServiceName",
 		"witness_region":              "WitnessRegion",
 	})

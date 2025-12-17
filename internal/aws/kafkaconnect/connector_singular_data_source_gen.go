@@ -575,6 +575,21 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Details of what logs are delivered and where they are delivered.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: NetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The network type of the Connector.",
+		//	  "enum": [
+		//	    "IPV4",
+		//	    "DUAL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The network type of the Connector.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Plugins
 		// CloudFormation resource type schema:
 		//
@@ -784,6 +799,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"max_worker_count":                    "MaxWorkerCount",
 		"mcu_count":                           "McuCount",
 		"min_worker_count":                    "MinWorkerCount",
+		"network_type":                        "NetworkType",
 		"plugins":                             "Plugins",
 		"prefix":                              "Prefix",
 		"provisioned_capacity":                "ProvisionedCapacity",

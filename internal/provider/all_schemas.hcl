@@ -1232,6 +1232,11 @@ resource_schema "aws_connect_data_table_attribute" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_connect_data_table_record" {
+  cloudformation_type_name               = "AWS::Connect::DataTableRecord"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_connect_email_address" {
   cloudformation_type_name               = "AWS::Connect::EmailAddress"
   suppress_plural_data_source_generation = true
@@ -1348,6 +1353,10 @@ resource_schema "aws_connect_view_version" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_connect_workspace" {
+  cloudformation_type_name = "AWS::Connect::Workspace"
+}
+
 resource_schema "aws_connectcampaigns_campaign" {
   cloudformation_type_name = "AWS::ConnectCampaigns::Campaign"
 }
@@ -1427,6 +1436,10 @@ resource_schema "aws_customerprofiles_object_type" {
 resource_schema "aws_customerprofiles_segment_definition" {
   cloudformation_type_name               = "AWS::CustomerProfiles::SegmentDefinition"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_dax_subnet_group" {
+  cloudformation_type_name = "AWS::DAX::SubnetGroup"
 }
 
 resource_schema "aws_dms_data_migration" {
@@ -2621,6 +2634,11 @@ resource_schema "aws_glue_database" {
   cloudformation_type_name = "AWS::Glue::Database"
 }
 
+resource_schema "aws_glue_identity_center_configuration" {
+  cloudformation_type_name               = "AWS::Glue::IdentityCenterConfiguration"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_glue_integration" {
   cloudformation_type_name = "AWS::Glue::Integration"
 }
@@ -2684,6 +2702,10 @@ resource_schema "aws_groundstation_config" {
 
 resource_schema "aws_groundstation_dataflow_endpoint_group" {
   cloudformation_type_name = "AWS::GroundStation::DataflowEndpointGroup"
+}
+
+resource_schema "aws_groundstation_dataflow_endpoint_group_v2" {
+  cloudformation_type_name = "AWS::GroundStation::DataflowEndpointGroupV2"
 }
 
 resource_schema "aws_groundstation_mission_profile" {
@@ -3913,6 +3935,11 @@ resource_schema "aws_networkmanager_core_network" {
   cloudformation_type_name = "AWS::NetworkManager::CoreNetwork"
 }
 
+resource_schema "aws_networkmanager_core_network_prefix_list_association" {
+  cloudformation_type_name               = "AWS::NetworkManager::CoreNetworkPrefixListAssociation"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_networkmanager_customer_gateway_association" {
   cloudformation_type_name               = "AWS::NetworkManager::CustomerGatewayAssociation"
   suppress_plural_data_source_generation = true
@@ -4948,6 +4975,10 @@ resource_schema "aws_ses_template" {
   cloudformation_type_name = "AWS::SES::Template"
 }
 
+resource_schema "aws_ses_tenant" {
+  cloudformation_type_name = "AWS::SES::Tenant"
+}
+
 resource_schema "aws_ses_vdm_attributes" {
   cloudformation_type_name               = "AWS::SES::VdmAttributes"
   suppress_plural_data_source_generation = true
@@ -5009,6 +5040,16 @@ resource_schema "aws_ssm_association" {
 
 resource_schema "aws_ssm_document" {
   cloudformation_type_name = "AWS::SSM::Document"
+}
+
+resource_schema "aws_ssm_maintenance_window_target" {
+  cloudformation_type_name               = "AWS::SSM::MaintenanceWindowTarget"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_ssm_maintenance_window_task" {
+  cloudformation_type_name               = "AWS::SSM::MaintenanceWindowTask"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_ssm_parameter" {

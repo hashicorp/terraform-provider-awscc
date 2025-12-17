@@ -70,6 +70,13 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	    "ConnectivityInfo": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "NetworkType": {
+		//	          "enum": [
+		//	            "IPV4",
+		//	            "DUAL"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "PublicAccess": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
@@ -213,6 +220,20 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ConnectivityInfo
 				"connectivity_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: NetworkType
+						"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"IPV4",
+									"DUAL",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: PublicAccess
 						"public_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1267,6 +1288,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"kafka_version":                  "KafkaVersion",
 		"log_group":                      "LogGroup",
 		"logging_info":                   "LoggingInfo",
+		"network_type":                   "NetworkType",
 		"node_exporter":                  "NodeExporter",
 		"number_of_broker_nodes":         "NumberOfBrokerNodes",
 		"open_monitoring":                "OpenMonitoring",

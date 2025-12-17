@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -18,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -44,6 +46,108 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 		//	      "additionalProperties": false,
 		//	      "description": "The destination configuration for telemetry data",
 		//	      "properties": {
+		//	        "CloudtrailParameters": {
+		//	          "additionalProperties": false,
+		//	          "description": "Telemetry parameters for Cloudtrail",
+		//	          "properties": {
+		//	            "AdvancedEventSelectors": {
+		//	              "description": "Create fine-grained selectors for AWS CloudTrail management and data.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "An advanced event selector that includes optional name and field selectors",
+		//	                "properties": {
+		//	                  "FieldSelectors": {
+		//	                    "description": "Contains all selector statements in an advanced event selector.",
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "description": "A single selector statement in an advanced event selector.",
+		//	                      "properties": {
+		//	                        "EndsWith": {
+		//	                          "description": "An operator that includes events that match the last few characters of the event record field specified as the value of Field.",
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "type": "array",
+		//	                          "uniqueItems": true
+		//	                        },
+		//	                        "Equals": {
+		//	                          "description": "An operator that includes events that match the exact value of the event record field specified as the value of Field.",
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "type": "array",
+		//	                          "uniqueItems": true
+		//	                        },
+		//	                        "Field": {
+		//	                          "description": "A field in a CloudTrail event record on which to filter events to be logged",
+		//	                          "maxLength": 1000,
+		//	                          "minLength": 1,
+		//	                          "type": "string"
+		//	                        },
+		//	                        "NotEndsWith": {
+		//	                          "description": "An operator that excludes events that match the last few characters of the event record field specified as the value of Field.",
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "type": "array",
+		//	                          "uniqueItems": true
+		//	                        },
+		//	                        "NotEquals": {
+		//	                          "description": "An operator that excludes events that match the exact value of the event record field specified as the value of Field.",
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "type": "array",
+		//	                          "uniqueItems": true
+		//	                        },
+		//	                        "NotStartsWith": {
+		//	                          "description": "An operator that excludes events that match the first few characters of the event record field specified as the value of Field.",
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "type": "array",
+		//	                          "uniqueItems": true
+		//	                        },
+		//	                        "StartsWith": {
+		//	                          "description": "An operator that includes events that match the first few characters of the event record field specified as the value of Field.",
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "type": "array",
+		//	                          "uniqueItems": true
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "type": "array",
+		//	                    "uniqueItems": true
+		//	                  },
+		//	                  "Name": {
+		//	                    "description": "An optional descriptive name for the advanced event selector",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "FieldSelectors"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "AdvancedEventSelectors"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "DestinationPattern": {
 		//	          "description": "Pattern for telemetry data destination",
 		//	          "type": "string"
@@ -54,6 +158,23 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 		//	            "cloud-watch-logs"
 		//	          ],
 		//	          "type": "string"
+		//	        },
+		//	        "ELBLoadBalancerLoggingParameters": {
+		//	          "description": "Telemetry parameters for ELB/NLB Load Balancer Logs",
+		//	          "properties": {
+		//	            "FieldDelimiter": {
+		//	              "description": "A delimiter to delineate log fields",
+		//	              "type": "string"
+		//	            },
+		//	            "OutputFormat": {
+		//	              "enum": [
+		//	                "plain",
+		//	                "json"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        },
 		//	        "RetentionInDays": {
 		//	          "description": "Number of days to retain the telemetry data in the specified destination",
@@ -77,6 +198,147 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "WAFLoggingParameters": {
+		//	          "description": "Telemetry parameters for WAF v2 Web ACL",
+		//	          "properties": {
+		//	            "LogType": {
+		//	              "description": "The type of logs to generate for WAF.",
+		//	              "enum": [
+		//	                "WAF_LOGS"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "LoggingFilter": {
+		//	              "description": "Default handling for logs that don't match any of the specified filtering conditions.",
+		//	              "properties": {
+		//	                "DefaultBehavior": {
+		//	                  "description": "The behavior required of the filter.",
+		//	                  "enum": [
+		//	                    "KEEP",
+		//	                    "DROP"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "Filters": {
+		//	                  "description": "A list of filters to be applied.",
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "description": "A filter to be applied",
+		//	                    "properties": {
+		//	                      "Behavior": {
+		//	                        "description": "The behavior required of the filter.",
+		//	                        "enum": [
+		//	                          "KEEP",
+		//	                          "DROP"
+		//	                        ],
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Conditions": {
+		//	                        "description": "A list of conditions for a filter.",
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "description": "A condition for a filter.",
+		//	                          "properties": {
+		//	                            "ActionCondition": {
+		//	                              "description": "The condition of the action desired in the filter.",
+		//	                              "properties": {
+		//	                                "Action": {
+		//	                                  "description": "The enumerated action to take.",
+		//	                                  "enum": [
+		//	                                    "ALLOW",
+		//	                                    "BLOCK",
+		//	                                    "COUNT",
+		//	                                    "CAPTCHA",
+		//	                                    "CHALLENGE",
+		//	                                    "EXCLUDED_AS_COUNT"
+		//	                                  ],
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            },
+		//	                            "LabelNameCondition": {
+		//	                              "description": "The label name of the condition.",
+		//	                              "properties": {
+		//	                                "LabelName": {
+		//	                                  "description": "The label name of the condition.",
+		//	                                  "maxLength": 1024,
+		//	                                  "minLength": 1,
+		//	                                  "pattern": "^[0-9A-Za-z_\\-:]+$",
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            }
+		//	                          },
+		//	                          "type": "object"
+		//	                        },
+		//	                        "minLength": 1,
+		//	                        "type": "array",
+		//	                        "uniqueItems": true
+		//	                      },
+		//	                      "Requirement": {
+		//	                        "description": "The requirement portion of the filter.",
+		//	                        "enum": [
+		//	                          "MEETS_ALL",
+		//	                          "MEETS_ANY"
+		//	                        ],
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "minLength": 1,
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "RedactedFields": {
+		//	              "description": "Fields not to be included in the logs.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "description": "The field that we want to match this rule to.",
+		//	                "properties": {
+		//	                  "Method": {
+		//	                    "description": "The method with which to match this rule.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "QueryString": {
+		//	                    "description": "The query string to find the resource to match this field to.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "SingleHeader": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Header for the field to match.",
+		//	                    "properties": {
+		//	                      "Name": {
+		//	                        "description": "The name of the header",
+		//	                        "maxLength": 64,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Name"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "UriPath": {
+		//	                    "description": "This is the URI path to match this rule to.",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 100,
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -84,7 +346,11 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 		//	    "ResourceType": {
 		//	      "description": "Resource Type associated with the Organization Telemetry Rule",
 		//	      "enum": [
-		//	        "AWS::EC2::VPC"
+		//	        "AWS::EC2::VPC",
+		//	        "AWS::WAFv2::WebACL",
+		//	        "AWS::CloudTrail",
+		//	        "AWS::EKS::Cluster",
+		//	        "AWS::ElasticLoadBalancingV2::LoadBalancer"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -95,6 +361,25 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 		//	    "SelectionCriteria": {
 		//	      "description": "Selection Criteria on resource level for rule application",
 		//	      "type": "string"
+		//	    },
+		//	    "TelemetrySourceTypes": {
+		//	      "description": "The telemetry source types for a telemetry rule.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "The telemetry source type that goes into the array.",
+		//	        "enum": [
+		//	          "VPC_FLOW_LOGS",
+		//	          "ROUTE53_RESOLVER_QUERY_LOGS",
+		//	          "EKS_AUDIT_LOGS",
+		//	          "EKS_AUTHENTICATOR_LOGS",
+		//	          "EKS_CONTROLLER_MANAGER_LOGS",
+		//	          "EKS_SCHEDULER_LOGS",
+		//	          "EKS_API_LOGS"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
 		//	    },
 		//	    "TelemetryType": {
 		//	      "description": "Telemetry Type associated with the Organization Telemetry Rule",
@@ -115,6 +400,130 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 				// Property: DestinationConfiguration
 				"destination_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CloudtrailParameters
+						"cloudtrail_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AdvancedEventSelectors
+								"advanced_event_selectors": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: FieldSelectors
+											"field_selectors": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: EndsWith
+														"ends_with": schema.SetAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Description: "An operator that includes events that match the last few characters of the event record field specified as the value of Field.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+																setplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Equals
+														"equals": schema.SetAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Description: "An operator that includes events that match the exact value of the event record field specified as the value of Field.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+																setplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Field
+														"field": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "A field in a CloudTrail event record on which to filter events to be logged",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(1, 1000),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: NotEndsWith
+														"not_ends_with": schema.SetAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Description: "An operator that excludes events that match the last few characters of the event record field specified as the value of Field.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+																setplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: NotEquals
+														"not_equals": schema.SetAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Description: "An operator that excludes events that match the exact value of the event record field specified as the value of Field.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+																setplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: NotStartsWith
+														"not_starts_with": schema.SetAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Description: "An operator that excludes events that match the first few characters of the event record field specified as the value of Field.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+																setplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: StartsWith
+														"starts_with": schema.SetAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Description: "An operator that includes events that match the first few characters of the event record field specified as the value of Field.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+																setplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Description: "Contains all selector statements in an advanced event selector.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Set{ /*START VALIDATORS*/
+													fwvalidators.NotNullSet(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+													setplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "An optional descriptive name for the advanced event selector",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "Create fine-grained selectors for AWS CloudTrail management and data.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Set{ /*START VALIDATORS*/
+										fwvalidators.NotNullSet(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+										setplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Telemetry parameters for Cloudtrail",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: DestinationPattern
 						"destination_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Pattern for telemetry data destination",
@@ -136,6 +545,40 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ELBLoadBalancerLoggingParameters
+						"elb_load_balancer_logging_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FieldDelimiter
+								"field_delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A delimiter to delineate log fields",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: OutputFormat
+								"output_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"plain",
+											"json",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Telemetry parameters for ELB/NLB Load Balancer Logs",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: RetentionInDays
@@ -185,6 +628,234 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: WAFLoggingParameters
+						"waf_logging_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: LogType
+								"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of logs to generate for WAF.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"WAF_LOGS",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: LoggingFilter
+								"logging_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DefaultBehavior
+										"default_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The behavior required of the filter.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"KEEP",
+													"DROP",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Filters
+										"filters": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Behavior
+													"behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The behavior required of the filter.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.OneOf(
+																"KEEP",
+																"DROP",
+															),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Conditions
+													"conditions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: ActionCondition
+																"action_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Action
+																		"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The enumerated action to take.",
+																			Optional:    true,
+																			Computed:    true,
+																			Validators: []validator.String{ /*START VALIDATORS*/
+																				stringvalidator.OneOf(
+																					"ALLOW",
+																					"BLOCK",
+																					"COUNT",
+																					"CAPTCHA",
+																					"CHALLENGE",
+																					"EXCLUDED_AS_COUNT",
+																				),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																	Description: "The condition of the action desired in the filter.",
+																	Optional:    true,
+																	Computed:    true,
+																	PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																		objectplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+																// Property: LabelNameCondition
+																"label_name_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: LabelName
+																		"label_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The label name of the condition.",
+																			Optional:    true,
+																			Computed:    true,
+																			Validators: []validator.String{ /*START VALIDATORS*/
+																				stringvalidator.LengthBetween(1, 1024),
+																				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9A-Za-z_\\-:]+$"), ""),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																	Description: "The label name of the condition.",
+																	Optional:    true,
+																	Computed:    true,
+																	PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																		objectplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+														}, /*END NESTED OBJECT*/
+														Description: "A list of conditions for a filter.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+															setplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Requirement
+													"requirement": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The requirement portion of the filter.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.OneOf(
+																"MEETS_ALL",
+																"MEETS_ANY",
+															),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "A list of filters to be applied.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+												setplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Default handling for logs that don't match any of the specified filtering conditions.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: RedactedFields
+								"redacted_fields": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Method
+											"method": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The method with which to match this rule.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: QueryString
+											"query_string": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The query string to find the resource to match this field to.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: SingleHeader
+											"single_header": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Name
+													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The name of the header",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 64),
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Header for the field to match.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: UriPath
+											"uri_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "This is the URI path to match this rule to.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "Fields not to be included in the logs.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Set{ /*START VALIDATORS*/
+										setvalidator.SizeAtMost(100),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+										setplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Telemetry parameters for WAF v2 Web ACL",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The destination configuration for telemetry data",
 					Optional:    true,
@@ -200,6 +871,10 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"AWS::EC2::VPC",
+							"AWS::WAFv2::WebACL",
+							"AWS::CloudTrail",
+							"AWS::EKS::Cluster",
+							"AWS::ElasticLoadBalancingV2::LoadBalancer",
 						),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
@@ -219,6 +894,29 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TelemetrySourceTypes
+				"telemetry_source_types": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The telemetry source types for a telemetry rule.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						setvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
+								"VPC_FLOW_LOGS",
+								"ROUTE53_RESOLVER_QUERY_LOGS",
+								"EKS_AUDIT_LOGS",
+								"EKS_AUTHENTICATOR_LOGS",
+								"EKS_CONTROLLER_MANAGER_LOGS",
+								"EKS_SCHEDULER_LOGS",
+								"EKS_API_LOGS",
+							),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: TelemetryType
@@ -372,24 +1070,56 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"destination_configuration": "DestinationConfiguration",
-		"destination_pattern":       "DestinationPattern",
-		"destination_type":          "DestinationType",
-		"key":                       "Key",
-		"log_format":                "LogFormat",
-		"max_aggregation_interval":  "MaxAggregationInterval",
-		"resource_type":             "ResourceType",
-		"retention_in_days":         "RetentionInDays",
-		"rule":                      "Rule",
-		"rule_arn":                  "RuleArn",
-		"rule_name":                 "RuleName",
-		"scope":                     "Scope",
-		"selection_criteria":        "SelectionCriteria",
-		"tags":                      "Tags",
-		"telemetry_type":            "TelemetryType",
-		"traffic_type":              "TrafficType",
-		"value":                     "Value",
-		"vpc_flow_log_parameters":   "VPCFlowLogParameters",
+		"action":                               "Action",
+		"action_condition":                     "ActionCondition",
+		"advanced_event_selectors":             "AdvancedEventSelectors",
+		"behavior":                             "Behavior",
+		"cloudtrail_parameters":                "CloudtrailParameters",
+		"conditions":                           "Conditions",
+		"default_behavior":                     "DefaultBehavior",
+		"destination_configuration":            "DestinationConfiguration",
+		"destination_pattern":                  "DestinationPattern",
+		"destination_type":                     "DestinationType",
+		"elb_load_balancer_logging_parameters": "ELBLoadBalancerLoggingParameters",
+		"ends_with":                            "EndsWith",
+		"equals":                               "Equals",
+		"field":                                "Field",
+		"field_delimiter":                      "FieldDelimiter",
+		"field_selectors":                      "FieldSelectors",
+		"filters":                              "Filters",
+		"key":                                  "Key",
+		"label_name":                           "LabelName",
+		"label_name_condition":                 "LabelNameCondition",
+		"log_format":                           "LogFormat",
+		"log_type":                             "LogType",
+		"logging_filter":                       "LoggingFilter",
+		"max_aggregation_interval":             "MaxAggregationInterval",
+		"method":                               "Method",
+		"name":                                 "Name",
+		"not_ends_with":                        "NotEndsWith",
+		"not_equals":                           "NotEquals",
+		"not_starts_with":                      "NotStartsWith",
+		"output_format":                        "OutputFormat",
+		"query_string":                         "QueryString",
+		"redacted_fields":                      "RedactedFields",
+		"requirement":                          "Requirement",
+		"resource_type":                        "ResourceType",
+		"retention_in_days":                    "RetentionInDays",
+		"rule":                                 "Rule",
+		"rule_arn":                             "RuleArn",
+		"rule_name":                            "RuleName",
+		"scope":                                "Scope",
+		"selection_criteria":                   "SelectionCriteria",
+		"single_header":                        "SingleHeader",
+		"starts_with":                          "StartsWith",
+		"tags":                                 "Tags",
+		"telemetry_source_types":               "TelemetrySourceTypes",
+		"telemetry_type":                       "TelemetryType",
+		"traffic_type":                         "TrafficType",
+		"uri_path":                             "UriPath",
+		"value":                                "Value",
+		"vpc_flow_log_parameters":              "VPCFlowLogParameters",
+		"waf_logging_parameters":               "WAFLoggingParameters",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

@@ -81,6 +81,14 @@
       "type": "string",
       "description": "The Amazon EC2 instance type."
     },
+    "TargetNameServerMetricsEnabled": {
+      "type": "boolean",
+      "description": "Specifies whether target name server metrics are enabled for the Outbound Resolver Endpoint. When set to true, one-minute granular metrics are published in CloudWatch for each target name server associated with this endpoint. When set to false, metrics are not published. Default is false."
+    },
+    "RniEnhancedMetricsEnabled": {
+      "type": "boolean",
+      "description": "Specifies whether RNI enhanced metrics are enabled for the Resolver Endpoints. When set to true, one-minute granular metrics are published in CloudWatch for each RNI associated with this endpoint. When set to false, metrics are not published. Default is false."
+    },
     "Protocols": {
       "type": "array",
       "description": "Protocols used for the endpoint. DoH-FIPS is applicable for inbound endpoints only.",

@@ -427,7 +427,8 @@
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": "^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"
+            "maxLength": 100,
+            "minLength": 1
           },
           "maxItems": 100,
           "minItems": 1
@@ -436,7 +437,8 @@
           "type": "array",
           "items": {
             "type": "string",
-            "pattern": "^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"
+            "maxLength": 100,
+            "minLength": 1
           },
           "maxItems": 100,
           "minItems": 1

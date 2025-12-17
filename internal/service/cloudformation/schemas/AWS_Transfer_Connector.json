@@ -272,6 +272,11 @@
       "type": "string",
       "pattern": "TransferSFTPConnectorSecurityPolicy-[A-Za-z0-9-]+",
       "maxLength": 50
+    },
+    "ErrorMessage": {
+      "description": "Detailed error message when Connector in ERRORED status",
+      "type": "string",
+      "maxLength": 2048
     }
   },
   "additionalProperties": false,
@@ -282,7 +287,8 @@
     "/properties/Arn",
     "/properties/ConnectorId",
     "/properties/ServiceManagedEgressIpAddresses",
-    "/properties/Status"
+    "/properties/Status",
+    "/properties/ErrorMessage"
   ],
   "primaryIdentifier": [
     "/properties/ConnectorId"

@@ -16,6 +16,7 @@
       "permissions": [
         "s3tables:GetTable",
         "s3tables:GetTableMaintenanceConfiguration",
+        "s3tables:GetTableStorageClass",
         "s3tables:ListTagsForResource"
       ]
     },
@@ -26,6 +27,8 @@
         "s3tables:GetTable",
         "s3tables:PutTableMaintenanceConfiguration",
         "s3tables:GetTableMaintenanceConfiguration",
+        "s3tables:PutTableStorageClass",
+        "s3tables:GetTableStorageClass",
         "s3tables:TagResource",
         "s3tables:ListTagsForResource"
       ]
@@ -88,7 +91,8 @@
     "/properties/TableBucketARN",
     "/properties/OpenTableFormat",
     "/properties/IcebergMetadata",
-    "/properties/WithoutMetadata"
+    "/properties/WithoutMetadata",
+    "/properties/StorageClassConfiguration"
   ],
   "additionalProperties": false,
   "primaryIdentifier": [
@@ -101,6 +105,21 @@
       "enum": [
         "Yes"
       ]
+    },
+    "StorageClassConfiguration": {
+      "description": "Specifies storage class settings for the table",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "StorageClass": {
+          "description": "The storage class for the table",
+          "type": "string",
+          "enum": [
+            "STANDARD",
+            "INTELLIGENT_TIERING"
+          ]
+        }
+      }
     },
     "Compaction": {
       "description": "Settings governing the Compaction maintenance action. Contains details about the compaction settings for an Iceberg table.",
@@ -272,6 +291,9 @@
   "properties": {
     "WithoutMetadata": {
       "$ref": "#/definitions/WithoutMetadata"
+    },
+    "StorageClassConfiguration": {
+      "$ref": "#/definitions/StorageClassConfiguration"
     },
     "Compaction": {
       "$ref": "#/definitions/Compaction"

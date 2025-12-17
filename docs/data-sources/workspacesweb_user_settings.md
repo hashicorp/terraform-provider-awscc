@@ -23,6 +23,7 @@ Data Source schema for AWS::WorkSpacesWeb::UserSettings
 
 - `additional_encryption_context` (Map of String)
 - `associated_portal_arns` (List of String)
+- `branding_configuration` (Attributes) (see [below for nested schema](#nestedatt--branding_configuration))
 - `cookie_synchronization_configuration` (Attributes) (see [below for nested schema](#nestedatt--cookie_synchronization_configuration))
 - `copy_allowed` (String)
 - `customer_managed_key` (String)
@@ -36,6 +37,67 @@ Data Source schema for AWS::WorkSpacesWeb::UserSettings
 - `toolbar_configuration` (Attributes) (see [below for nested schema](#nestedatt--toolbar_configuration))
 - `upload_allowed` (String)
 - `user_settings_arn` (String)
+
+<a id="nestedatt--branding_configuration"></a>
+### Nested Schema for `branding_configuration`
+
+Read-Only:
+
+- `color_theme` (String)
+- `favicon` (String)
+- `favicon_metadata` (Attributes) (see [below for nested schema](#nestedatt--branding_configuration--favicon_metadata))
+- `localized_strings` (Attributes Map) (see [below for nested schema](#nestedatt--branding_configuration--localized_strings))
+- `logo` (String)
+- `logo_metadata` (Attributes) (see [below for nested schema](#nestedatt--branding_configuration--logo_metadata))
+- `terms_of_service` (String)
+- `wallpaper` (String)
+- `wallpaper_metadata` (Attributes) (see [below for nested schema](#nestedatt--branding_configuration--wallpaper_metadata))
+
+<a id="nestedatt--branding_configuration--favicon_metadata"></a>
+### Nested Schema for `branding_configuration.favicon_metadata`
+
+Read-Only:
+
+- `file_extension` (String)
+- `last_upload_timestamp` (String)
+- `mime_type` (String)
+
+
+<a id="nestedatt--branding_configuration--localized_strings"></a>
+### Nested Schema for `branding_configuration.localized_strings`
+
+Read-Only:
+
+- `browser_tab_title` (String)
+- `contact_button_text` (String)
+- `contact_link` (String)
+- `loading_text` (String)
+- `login_button_text` (String)
+- `login_description` (String)
+- `login_title` (String)
+- `welcome_text` (String)
+
+
+<a id="nestedatt--branding_configuration--logo_metadata"></a>
+### Nested Schema for `branding_configuration.logo_metadata`
+
+Read-Only:
+
+- `file_extension` (String)
+- `last_upload_timestamp` (String)
+- `mime_type` (String)
+
+
+<a id="nestedatt--branding_configuration--wallpaper_metadata"></a>
+### Nested Schema for `branding_configuration.wallpaper_metadata`
+
+Read-Only:
+
+- `file_extension` (String)
+- `last_upload_timestamp` (String)
+- `mime_type` (String)
+
+
 
 <a id="nestedatt--cookie_synchronization_configuration"></a>
 ### Nested Schema for `cookie_synchronization_configuration`

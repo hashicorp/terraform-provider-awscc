@@ -68,6 +68,30 @@ func anycastIpListResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "The number of IP addresses in the Anycast static IP list.",
 		//	      "type": "integer"
 		//	    },
+		//	    "IpamCidrConfigResults": {
+		//	      "additionalProperties": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "AnycastIp": {
+		//	            "type": "string"
+		//	          },
+		//	          "Cidr": {
+		//	            "type": "string"
+		//	          },
+		//	          "IpamPoolArn": {
+		//	            "type": "string"
+		//	          },
+		//	          "Status": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
 		//	    "LastModifiedTime": {
 		//	      "description": "The last time the Anycast static IP list was modified.",
 		//	      "format": "date-time",
@@ -122,6 +146,30 @@ func anycastIpListResource(ctx context.Context) (resource.Resource, error) {
 				"ip_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "The number of IP addresses in the Anycast static IP list.",
 					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IpamCidrConfigResults
+				"ipam_cidr_config_results": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AnycastIp
+							"anycast_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Cidr
+							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: IpamPoolArn
+							"ipam_pool_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: LastModifiedTime
 				"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -210,6 +258,118 @@ func anycastIpListResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IpamCidrConfigResults
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "",
+		//	    "properties": {
+		//	      "AnycastIp": {
+		//	        "type": "string"
+		//	      },
+		//	      "Cidr": {
+		//	        "type": "string"
+		//	      },
+		//	      "IpamPoolArn": {
+		//	        "type": "string"
+		//	      },
+		//	      "Status": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"ipam_cidr_config_results": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AnycastIp
+					"anycast_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Cidr
+					"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: IpamPoolArn
+					"ipam_pool_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IpamCidrConfigs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "",
+		//	    "properties": {
+		//	      "Cidr": {
+		//	        "type": "string"
+		//	      },
+		//	      "IpamPoolArn": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Cidr",
+		//	      "IpamPoolArn"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"ipam_cidr_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Cidr
+					"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: IpamPoolArn
+					"ipam_pool_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// IpamCidrConfigs is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
@@ -350,23 +510,31 @@ func anycastIpListResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.IsGlobalResourceType(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"anycast_ip_list":    "AnycastIpList",
-		"anycast_ip_list_id": "Id",
-		"anycast_ips":        "AnycastIps",
-		"arn":                "Arn",
-		"e_tag":              "ETag",
-		"id":                 "Id",
-		"ip_address_type":    "IpAddressType",
-		"ip_count":           "IpCount",
-		"items":              "Items",
-		"key":                "Key",
-		"last_modified_time": "LastModifiedTime",
-		"name":               "Name",
-		"status":             "Status",
-		"tags":               "Tags",
-		"value":              "Value",
+		"anycast_ip":               "AnycastIp",
+		"anycast_ip_list":          "AnycastIpList",
+		"anycast_ip_list_id":       "Id",
+		"anycast_ips":              "AnycastIps",
+		"arn":                      "Arn",
+		"cidr":                     "Cidr",
+		"e_tag":                    "ETag",
+		"id":                       "Id",
+		"ip_address_type":          "IpAddressType",
+		"ip_count":                 "IpCount",
+		"ipam_cidr_config_results": "IpamCidrConfigResults",
+		"ipam_cidr_configs":        "IpamCidrConfigs",
+		"ipam_pool_arn":            "IpamPoolArn",
+		"items":                    "Items",
+		"key":                      "Key",
+		"last_modified_time":       "LastModifiedTime",
+		"name":                     "Name",
+		"status":                   "Status",
+		"tags":                     "Tags",
+		"value":                    "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/IpamCidrConfigs",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

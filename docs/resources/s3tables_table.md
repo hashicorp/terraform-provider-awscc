@@ -77,6 +77,7 @@ resource "awscc_s3tables_table" "example" {
 - `compaction` (Attributes) Settings governing the Compaction maintenance action. Contains details about the compaction settings for an Iceberg table. (see [below for nested schema](#nestedatt--compaction))
 - `iceberg_metadata` (Attributes) Contains details about the metadata for an Iceberg table. (see [below for nested schema](#nestedatt--iceberg_metadata))
 - `snapshot_management` (Attributes) Contains details about the snapshot management settings for an Iceberg table. A snapshot is expired when it exceeds MinSnapshotsToKeep and MaxSnapshotAgeHours. (see [below for nested schema](#nestedatt--snapshot_management))
+- `storage_class_configuration` (Attributes) Specifies storage class settings for the table (see [below for nested schema](#nestedatt--storage_class_configuration))
 - `tags` (Attributes Set) User tags (key-value pairs) to associate with the table. (see [below for nested schema](#nestedatt--tags))
 - `without_metadata` (String) Indicates that you don't want to specify a schema for the table. This property is mutually exclusive to 'IcebergMetadata', and its only possible value is 'Yes'.
 
@@ -130,6 +131,14 @@ Optional:
 - `max_snapshot_age_hours` (Number) The maximum age of a snapshot before it can be expired.
 - `min_snapshots_to_keep` (Number) The minimum number of snapshots to keep.
 - `status` (String) Indicates whether the SnapshotManagement maintenance action is enabled.
+
+
+<a id="nestedatt--storage_class_configuration"></a>
+### Nested Schema for `storage_class_configuration`
+
+Optional:
+
+- `storage_class` (String) The storage class for the table
 
 
 <a id="nestedatt--tags"></a>

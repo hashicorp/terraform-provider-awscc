@@ -360,6 +360,18 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	            "IsResponsible"
 		//	          ],
 		//	          "type": "object"
+		//	        },
+		//	        "SyntheticDataGeneration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "IsResponsible": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "IsResponsible"
+		//	          ],
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -431,6 +443,27 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: ModelTraining
 						"model_training": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IsResponsible
+								"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Bool{ /*START VALIDATORS*/
+										fwvalidators.NotNullBool(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SyntheticDataGeneration
+						"synthetic_data_generation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: IsResponsible
 								"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -704,6 +737,18 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "IsResponsible"
 		//	                ],
 		//	                "type": "object"
+		//	              },
+		//	              "SyntheticDataGeneration": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "IsResponsible": {
+		//	                    "type": "boolean"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "IsResponsible"
+		//	                ],
+		//	                "type": "object"
 		//	              }
 		//	            },
 		//	            "type": "object"
@@ -861,6 +906,27 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: ModelTraining
 									"model_training": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: IsResponsible
+											"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.Bool{ /*START VALIDATORS*/
+													fwvalidators.NotNullBool(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+													boolplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SyntheticDataGeneration
+									"synthetic_data_generation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: IsResponsible
 											"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -1093,6 +1159,7 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		"preserve_nulls":                              "PreserveNulls",
 		"query_compute":                               "QueryCompute",
 		"query_log_status":                            "QueryLogStatus",
+		"synthetic_data_generation":                   "SyntheticDataGeneration",
 		"tags":                                        "Tags",
 		"value":                                       "Value",
 	})

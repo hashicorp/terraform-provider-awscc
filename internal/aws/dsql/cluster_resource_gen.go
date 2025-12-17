@@ -330,6 +330,20 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: VpcEndpoint
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The DSQL cluster VPC endpoint.",
+		//	  "type": "string"
+		//	}
+		"vpc_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The DSQL cluster VPC endpoint.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VpcEndpointServiceName
 		// CloudFormation resource type schema:
 		//
@@ -391,6 +405,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"status":                      "Status",
 		"tags":                        "Tags",
 		"value":                       "Value",
+		"vpc_endpoint":                "VpcEndpoint",
 		"vpc_endpoint_service_name":   "VpcEndpointServiceName",
 		"witness_region":              "WitnessRegion",
 	})

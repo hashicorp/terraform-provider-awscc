@@ -55,6 +55,10 @@
       "description": "The attachment to move from one network function group to another.",
       "$ref": "#/definitions/ProposedNetworkFunctionGroupChange"
     },
+    "RoutingPolicyLabel": {
+      "description": "Routing policy label",
+      "type": "string"
+    },
     "Tags": {
       "description": "Tags for the attachment.",
       "type": "array",
@@ -198,7 +202,11 @@
     "/properties/CoreNetworkId",
     "/properties/EdgeLocation",
     "/properties/TransportAttachmentId",
-    "/properties/Options"
+    "/properties/Options",
+    "/properties/RoutingPolicyLabel"
+  ],
+  "writeOnlyProperties": [
+    "/properties/RoutingPolicyLabel"
   ],
   "primaryIdentifier": [
     "/properties/AttachmentId"

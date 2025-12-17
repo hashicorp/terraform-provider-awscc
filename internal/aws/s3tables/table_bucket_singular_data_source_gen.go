@@ -90,6 +90,35 @@ func tableBucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Settings governing the Metric configuration for the table bucket.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: StorageClassConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies storage class settings for the table bucket",
+		//	  "properties": {
+		//	    "StorageClass": {
+		//	      "description": "The storage class for the table bucket",
+		//	      "enum": [
+		//	        "STANDARD",
+		//	        "INTELLIGENT_TIERING"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"storage_class_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: StorageClass
+				"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The storage class for the table bucket",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies storage class settings for the table bucket",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TableBucketARN
 		// CloudFormation resource type schema:
 		//
@@ -231,19 +260,21 @@ func tableBucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::S3Tables::TableBucket").WithTerraformTypeName("awscc_s3tables_table_bucket")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"encryption_configuration":  "EncryptionConfiguration",
-		"key":                       "Key",
-		"kms_key_arn":               "KMSKeyArn",
-		"metrics_configuration":     "MetricsConfiguration",
-		"noncurrent_days":           "NoncurrentDays",
-		"sse_algorithm":             "SSEAlgorithm",
-		"status":                    "Status",
-		"table_bucket_arn":          "TableBucketARN",
-		"table_bucket_name":         "TableBucketName",
-		"tags":                      "Tags",
-		"unreferenced_days":         "UnreferencedDays",
-		"unreferenced_file_removal": "UnreferencedFileRemoval",
-		"value":                     "Value",
+		"encryption_configuration":    "EncryptionConfiguration",
+		"key":                         "Key",
+		"kms_key_arn":                 "KMSKeyArn",
+		"metrics_configuration":       "MetricsConfiguration",
+		"noncurrent_days":             "NoncurrentDays",
+		"sse_algorithm":               "SSEAlgorithm",
+		"status":                      "Status",
+		"storage_class":               "StorageClass",
+		"storage_class_configuration": "StorageClassConfiguration",
+		"table_bucket_arn":            "TableBucketARN",
+		"table_bucket_name":           "TableBucketName",
+		"tags":                        "Tags",
+		"unreferenced_days":           "UnreferencedDays",
+		"unreferenced_file_removal":   "UnreferencedFileRemoval",
+		"value":                       "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

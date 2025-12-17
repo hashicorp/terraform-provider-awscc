@@ -23,7 +23,11 @@ Data Source schema for AWS::RAM::ResourceShare
 
 - `allow_external_principals` (Boolean) Specifies whether principals outside your organization in AWS Organizations can be associated with a resource share. A value of `true` lets you share with individual AWS accounts that are not in your organization. A value of `false` only has meaning if your account is a member of an AWS Organization. The default value is `true`.
 - `arn` (String)
+- `creation_time` (String) The date and time when the resource share was created.
+- `feature_set` (String) The feature set of the resource share.
+- `last_updated_time` (String) The date and time when the resource share was last updated.
 - `name` (String) Specifies the name of the resource share.
+- `owning_account_id` (String) The ID of the AWS account that owns the resource share.
 - `permission_arns` (List of String) Specifies the [Amazon Resource Names (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the AWS RAM permission to associate with the resource share. If you do not specify an ARN for the permission, AWS RAM automatically attaches the default version of the permission for each resource type. You can associate only one permission with each resource type included in the resource share.
 - `principals` (List of String) Specifies the principals to associate with the resource share. The possible values are:
 
@@ -38,6 +42,7 @@ Data Source schema for AWS::RAM::ResourceShare
 - An ARN of an IAM user
 - `resource_arns` (List of String) Specifies a list of one or more ARNs of the resources to associate with the resource share.
 - `sources` (List of String) Specifies from which source accounts the service principal has access to the resources in this resource share.
+- `status` (String) The current status of the resource share.
 - `tags` (Attributes Set) Specifies one or more tags to attach to the resource share itself. It doesn't attach the tags to the resources associated with the resource share. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>

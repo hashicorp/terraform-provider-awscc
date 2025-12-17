@@ -38,6 +38,7 @@ resource "awscc_route53profiles_profile" "example" {
 - `client_token` (String) The id of the creator request
 - `id` (String) Uniquely identifies the resource.
 - `profile_id` (String) The ID of the profile.
+- `share_status` (String) The sharing status of the profile.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

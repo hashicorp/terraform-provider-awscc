@@ -9,6 +9,14 @@
       "minLength": 1,
       "description": "Campaign name"
     },
+    "CampaignType": {
+      "type": "string",
+      "enum": [
+        "MANAGED",
+        "JOURNEY"
+      ],
+      "description": "Campaign type"
+    },
     "InstanceId": {
       "type": "string",
       "maxLength": 256,
@@ -27,6 +35,12 @@
       "maximum": 300,
       "minimum": 10,
       "description": "Timeout duration for a preview contact in seconds"
+    },
+    "RingTimeout": {
+      "type": "integer",
+      "maximum": 60,
+      "minimum": 15,
+      "description": "Maximum ring time for outbound calls in seconds"
     },
     "QueueId": {
       "type": "string",
@@ -255,6 +269,9 @@
         },
         "AnswerMachineDetectionConfig": {
           "$ref": "#/definitions/AnswerMachineDetectionConfig"
+        },
+        "RingTimeout": {
+          "$ref": "#/definitions/RingTimeout"
         }
       },
       "required": [
@@ -344,7 +361,7 @@
     },
     "EmailOutboundConfig": {
       "type": "object",
-      "description": "Default SMS outbound config",
+      "description": "Default Email outbound config",
       "properties": {
         "ConnectSourceEmailAddress": {
           "$ref": "#/definitions/EmailAddress"
@@ -382,6 +399,53 @@
       ],
       "additionalProperties": false
     },
+    "WhatsAppOutboundMode": {
+      "type": "object",
+      "description": "WhatsApp Outbound Mode",
+      "properties": {
+        "AgentlessConfig": {
+          "$ref": "#/definitions/AgentlessConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "WhatsAppOutboundConfig": {
+      "type": "object",
+      "description": "Default WhatsApp outbound config",
+      "properties": {
+        "ConnectSourcePhoneNumberArn": {
+          "$ref": "#/definitions/Arn"
+        },
+        "WisdomTemplateArn": {
+          "$ref": "#/definitions/Arn"
+        }
+      },
+      "required": [
+        "ConnectSourcePhoneNumberArn",
+        "WisdomTemplateArn"
+      ],
+      "additionalProperties": false
+    },
+    "WhatsAppChannelSubtypeConfig": {
+      "type": "object",
+      "description": "WhatsApp Channel Subtype config",
+      "properties": {
+        "Capacity": {
+          "$ref": "#/definitions/Capacity"
+        },
+        "OutboundMode": {
+          "$ref": "#/definitions/WhatsAppOutboundMode"
+        },
+        "DefaultOutboundConfig": {
+          "$ref": "#/definitions/WhatsAppOutboundConfig"
+        }
+      },
+      "required": [
+        "OutboundMode",
+        "DefaultOutboundConfig"
+      ],
+      "additionalProperties": false
+    },
     "ChannelSubtypeConfig": {
       "type": "object",
       "description": "The possible types of channel subtype config parameters",
@@ -394,6 +458,9 @@
         },
         "Email": {
           "$ref": "#/definitions/EmailChannelSubtypeConfig"
+        },
+        "WhatsApp": {
+          "$ref": "#/definitions/WhatsAppChannelSubtypeConfig"
         }
       },
       "anyOf": [
@@ -410,6 +477,11 @@
         {
           "required": [
             "Email"
+          ]
+        },
+        {
+          "required": [
+            "WhatsApp"
           ]
         }
       ],
@@ -637,6 +709,9 @@
         },
         "Email": {
           "$ref": "#/definitions/TimeWindow"
+        },
+        "WhatsApp": {
+          "$ref": "#/definitions/TimeWindow"
         }
       },
       "required": [
@@ -743,6 +818,9 @@
     "Name": {
       "$ref": "#/definitions/CampaignName"
     },
+    "Type": {
+      "$ref": "#/definitions/CampaignType"
+    },
     "ConnectInstanceId": {
       "$ref": "#/definitions/InstanceId"
     },
@@ -788,8 +866,7 @@
   },
   "required": [
     "Name",
-    "ConnectInstanceId",
-    "ChannelSubtypeConfig"
+    "ConnectInstanceId"
   ],
   "readOnlyProperties": [
     "/properties/Arn"

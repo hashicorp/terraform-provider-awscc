@@ -23,6 +23,7 @@ Resource Type definition for AWS::S3Vectors::Index
 
 ### Optional
 
+- `encryption_configuration` (Attributes) The encryption configuration for the index. (see [below for nested schema](#nestedatt--encryption_configuration))
 - `index_name` (String) The name of the vector index to create.
 - `metadata_configuration` (Attributes) The metadata configuration for the vector index. (see [below for nested schema](#nestedatt--metadata_configuration))
 - `vector_bucket_arn` (String) The Amazon Resource Name (ARN) of the vector bucket.
@@ -33,6 +34,15 @@ Resource Type definition for AWS::S3Vectors::Index
 - `creation_time` (String) Date and time when the vector index was created.
 - `id` (String) Uniquely identifies the resource.
 - `index_arn` (String) The Amazon Resource Name (ARN) of the index
+
+<a id="nestedatt--encryption_configuration"></a>
+### Nested Schema for `encryption_configuration`
+
+Optional:
+
+- `kms_key_arn` (String) AWS Key Management Service (KMS) customer managed key ID to use for the encryption configuration. This parameter is allowed if and only if sseType is set to aws:kms
+- `sse_type` (String) Defines the server-side encryption type for index encryption configuration. Defaults to the parent vector bucket's encryption settings when unspecified.
+
 
 <a id="nestedatt--metadata_configuration"></a>
 ### Nested Schema for `metadata_configuration`

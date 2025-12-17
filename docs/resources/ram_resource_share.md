@@ -71,7 +71,12 @@ resource "awscc_ram_resource_share" "example" {
 ### Read-Only
 
 - `arn` (String)
+- `creation_time` (String) The date and time when the resource share was created.
+- `feature_set` (String) The feature set of the resource share.
 - `id` (String) Uniquely identifies the resource.
+- `last_updated_time` (String) The date and time when the resource share was last updated.
+- `owning_account_id` (String) The ID of the AWS account that owns the resource share.
+- `status` (String) The current status of the resource share.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

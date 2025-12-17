@@ -8,6 +8,7 @@ package ram
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -43,6 +44,48 @@ func resourceShareDataSource(ctx context.Context) (datasource.DataSource, error)
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: CreationTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The date and time when the resource share was created.",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time when the resource share was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: FeatureSet
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The feature set of the resource share.",
+		//	  "enum": [
+		//	    "CREATED_FROM_POLICY",
+		//	    "PROMOTING_TO_STANDARD",
+		//	    "STANDARD"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"feature_set": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The feature set of the resource share.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: LastUpdatedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The date and time when the resource share was last updated.",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time when the resource share was last updated.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -52,6 +95,17 @@ func resourceShareDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the name of the resource share.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: OwningAccountId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the AWS account that owns the resource share.",
+		//	  "type": "string"
+		//	}
+		"owning_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the AWS account that owns the resource share.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PermissionArns
@@ -116,6 +170,24 @@ func resourceShareDataSource(ctx context.Context) (datasource.DataSource, error)
 		"sources": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Description: "Specifies from which source accounts the service principal has access to the resources in this resource share.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The current status of the resource share.",
+		//	  "enum": [
+		//	    "PENDING",
+		//	    "ACTIVE",
+		//	    "FAILED",
+		//	    "DELETING",
+		//	    "DELETED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current status of the resource share.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -183,12 +255,17 @@ func resourceShareDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allow_external_principals": "AllowExternalPrincipals",
 		"arn":                       "Arn",
+		"creation_time":             "CreationTime",
+		"feature_set":               "FeatureSet",
 		"key":                       "Key",
+		"last_updated_time":         "LastUpdatedTime",
 		"name":                      "Name",
+		"owning_account_id":         "OwningAccountId",
 		"permission_arns":           "PermissionArns",
 		"principals":                "Principals",
 		"resource_arns":             "ResourceArns",
 		"sources":                   "Sources",
+		"status":                    "Status",
 		"tags":                      "Tags",
 		"value":                     "Value",
 	})

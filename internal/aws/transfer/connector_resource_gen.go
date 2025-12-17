@@ -455,6 +455,21 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ErrorMessage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Detailed error message when Connector in ERRORED status",
+		//	  "maxLength": 2048,
+		//	  "type": "string"
+		//	}
+		"error_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Detailed error message when Connector in ERRORED status",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LoggingRole
 		// CloudFormation resource type schema:
 		//
@@ -755,6 +770,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		"egress_config":                       "EgressConfig",
 		"egress_type":                         "EgressType",
 		"encryption_algorithm":                "EncryptionAlgorithm",
+		"error_message":                       "ErrorMessage",
 		"key":                                 "Key",
 		"local_profile_id":                    "LocalProfileId",
 		"logging_role":                        "LoggingRole",

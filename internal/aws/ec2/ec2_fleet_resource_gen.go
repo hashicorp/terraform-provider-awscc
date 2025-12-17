@@ -427,6 +427,9 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	                "OnDemandMaxPricePercentageOverLowestPrice": {
 		//	                  "type": "integer"
 		//	                },
+		//	                "RequireEncryptionInTransit": {
+		//	                  "type": "boolean"
+		//	                },
 		//	                "RequireHibernateSupport": {
 		//	                  "type": "boolean"
 		//	                },
@@ -1130,6 +1133,14 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RequireEncryptionInTransit
+										"require_encryption_in_transit": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: RequireHibernateSupport
@@ -1898,6 +1909,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: OnDemandTargetCapacity
@@ -1929,6 +1941,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: TotalTargetCapacity
@@ -2092,47 +2105,57 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"network_interface_count": "NetworkInterfaceCount",
 		"no_device":               "NoDevice",
 		"on_demand_max_price_percentage_over_lowest_price": "OnDemandMaxPricePercentageOverLowestPrice",
-		"on_demand_options":           "OnDemandOptions",
-		"on_demand_target_capacity":   "OnDemandTargetCapacity",
-		"overrides":                   "Overrides",
-		"partition_number":            "PartitionNumber",
-		"placement":                   "Placement",
-		"priority":                    "Priority",
-		"references":                  "References",
-		"replace_unhealthy_instances": "ReplaceUnhealthyInstances",
-		"replacement_strategy":        "ReplacementStrategy",
-		"require_hibernate_support":   "RequireHibernateSupport",
-		"resource_type":               "ResourceType",
-		"single_availability_zone":    "SingleAvailabilityZone",
-		"single_instance_type":        "SingleInstanceType",
-		"snapshot_id":                 "SnapshotId",
+		"on_demand_options":                           "OnDemandOptions",
+		"on_demand_target_capacity":                   "OnDemandTargetCapacity",
+		"overrides":                                   "Overrides",
+		"partition_number":                            "PartitionNumber",
+		"placement":                                   "Placement",
+		"priority":                                    "Priority",
+		"references":                                  "References",
+		"replace_unhealthy_instances":                 "ReplaceUnhealthyInstances",
+		"replacement_strategy":                        "ReplacementStrategy",
+		"require_encryption_in_transit":               "RequireEncryptionInTransit",
+		"require_hibernate_support":                   "RequireHibernateSupport",
+		"resource_type":                               "ResourceType",
+		"single_availability_zone":                    "SingleAvailabilityZone",
+		"single_instance_type":                        "SingleInstanceType",
+		"snapshot_id":                                 "SnapshotId",
 		"spot_max_price_percentage_over_lowest_price": "SpotMaxPricePercentageOverLowestPrice",
-		"spot_options":                        "SpotOptions",
-		"spot_target_capacity":                "SpotTargetCapacity",
-		"spread_domain":                       "SpreadDomain",
-		"subnet_id":                           "SubnetId",
-		"tag_specifications":                  "TagSpecifications",
-		"tags":                                "Tags",
-		"target_capacity_specification":       "TargetCapacitySpecification",
-		"target_capacity_unit_type":           "TargetCapacityUnitType",
-		"tenancy":                             "Tenancy",
-		"terminate_instances_with_expiration": "TerminateInstancesWithExpiration",
-		"termination_delay":                   "TerminationDelay",
-		"total_local_storage_gb":              "TotalLocalStorageGB",
-		"total_target_capacity":               "TotalTargetCapacity",
-		"type":                                "Type",
-		"usage_strategy":                      "UsageStrategy",
-		"v_cpu_count":                         "VCpuCount",
-		"valid_from":                          "ValidFrom",
-		"valid_until":                         "ValidUntil",
-		"value":                               "Value",
-		"version":                             "Version",
-		"virtual_name":                        "VirtualName",
-		"volume_size":                         "VolumeSize",
-		"volume_type":                         "VolumeType",
-		"weighted_capacity":                   "WeightedCapacity",
+		"spot_options":                                "SpotOptions",
+		"spot_target_capacity":                        "SpotTargetCapacity",
+		"spread_domain":                               "SpreadDomain",
+		"subnet_id":                                   "SubnetId",
+		"tag_specifications":                          "TagSpecifications",
+		"tags":                                        "Tags",
+		"target_capacity_specification":               "TargetCapacitySpecification",
+		"target_capacity_unit_type":                   "TargetCapacityUnitType",
+		"tenancy":                                     "Tenancy",
+		"terminate_instances_with_expiration":         "TerminateInstancesWithExpiration",
+		"termination_delay":                           "TerminationDelay",
+		"total_local_storage_gb":                      "TotalLocalStorageGB",
+		"total_target_capacity":                       "TotalTargetCapacity",
+		"type":                                        "Type",
+		"usage_strategy":                              "UsageStrategy",
+		"v_cpu_count":                                 "VCpuCount",
+		"valid_from":                                  "ValidFrom",
+		"valid_until":                                 "ValidUntil",
+		"value":                                       "Value",
+		"version":                                     "Version",
+		"virtual_name":                                "VirtualName",
+		"volume_size":                                 "VolumeSize",
+		"volume_type":                                 "VolumeType",
+		"weighted_capacity":                           "WeightedCapacity",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/LaunchTemplateConfigs/*/Overrides/*/Placement/HostResourceGroupArn",
+		"/properties/LaunchTemplateConfigs/*/Overrides/*/Placement/Affinity",
+		"/properties/LaunchTemplateConfigs/*/Overrides/*/Placement/SpreadDomain",
+		"/properties/LaunchTemplateConfigs/*/Overrides/*/Placement/AvailabilityZone",
+		"/properties/LaunchTemplateConfigs/*/Overrides/*/Placement/PartitionNumber",
+		"/properties/LaunchTemplateConfigs/*/Overrides/*/Placement/HostId",
+		"/properties/LaunchTemplateConfigs/*/Overrides/*/Placement/Tenancy",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

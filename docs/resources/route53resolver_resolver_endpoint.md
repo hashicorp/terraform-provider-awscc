@@ -131,7 +131,9 @@ resource "awscc_route53resolver_resolver_endpoint" "example" {
 - `preferred_instance_type` (String) The Amazon EC2 instance type.
 - `protocols` (List of String) Protocols used for the endpoint. DoH-FIPS is applicable for inbound endpoints only.
 - `resolver_endpoint_type` (String) The Resolver endpoint IP address type.
+- `rni_enhanced_metrics_enabled` (Boolean) Specifies whether RNI enhanced metrics are enabled for the Resolver Endpoints. When set to true, one-minute granular metrics are published in CloudWatch for each RNI associated with this endpoint. When set to false, metrics are not published. Default is false.
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `target_name_server_metrics_enabled` (Boolean) Specifies whether target name server metrics are enabled for the Outbound Resolver Endpoint. When set to true, one-minute granular metrics are published in CloudWatch for each target name server associated with this endpoint. When set to false, metrics are not published. Default is false.
 
 ### Read-Only
 

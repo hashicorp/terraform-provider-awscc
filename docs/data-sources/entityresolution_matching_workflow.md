@@ -57,9 +57,19 @@ Read-Only:
 Read-Only:
 
 - `apply_normalization` (Boolean)
+- `customer_profiles_integration_config` (Attributes) (see [below for nested schema](#nestedatt--output_source_config--customer_profiles_integration_config))
 - `kms_arn` (String)
 - `output` (Attributes List) (see [below for nested schema](#nestedatt--output_source_config--output))
 - `output_s3_path` (String) The S3 path to which Entity Resolution will write the output table
+
+<a id="nestedatt--output_source_config--customer_profiles_integration_config"></a>
+### Nested Schema for `output_source_config.customer_profiles_integration_config`
+
+Read-Only:
+
+- `domain_arn` (String)
+- `object_type_arn` (String)
+
 
 <a id="nestedatt--output_source_config--output"></a>
 ### Nested Schema for `output_source_config.output`

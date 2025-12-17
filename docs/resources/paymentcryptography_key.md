@@ -124,6 +124,7 @@ resource "awscc_paymentcryptography_key" "example" {
 - `derive_key_usage` (String)
 - `enabled` (Boolean)
 - `key_check_value_algorithm` (String)
+- `replication_regions` (List of String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -132,6 +133,7 @@ resource "awscc_paymentcryptography_key" "example" {
 - `key_identifier` (String)
 - `key_origin` (String) Defines the source of a key
 - `key_state` (String) Defines the state of a key
+- `replication_status` (Attributes Map) (see [below for nested schema](#nestedatt--replication_status))
 
 <a id="nestedatt--key_attributes"></a>
 ### Nested Schema for `key_attributes`
@@ -167,6 +169,15 @@ Optional:
 
 - `key` (String)
 - `value` (String)
+
+
+<a id="nestedatt--replication_status"></a>
+### Nested Schema for `replication_status`
+
+Read-Only:
+
+- `status` (String) Defines the replication state of a key
+- `status_message` (String)
 
 ## Import
 

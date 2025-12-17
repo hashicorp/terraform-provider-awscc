@@ -164,6 +164,7 @@ Optional:
 - `instance_type` (String) The instance type of the instance group of a SageMaker HyperPod cluster.
 - `kubernetes_config` (Attributes) Kubernetes configuration for cluster nodes including labels and taints. (see [below for nested schema](#nestedatt--instance_groups--kubernetes_config))
 - `life_cycle_config` (Attributes) The lifecycle configuration for a SageMaker HyperPod cluster. (see [below for nested schema](#nestedatt--instance_groups--life_cycle_config))
+- `min_instance_count` (Number) The minimum number of instances required for the instance group to be InService. MinInstanceCount must be less than or equal to InstanceCount.
 - `on_start_deep_health_checks` (List of String) Nodes will undergo advanced stress test to detect and replace faulty instances, based on the type of deep health check(s) passed in.
 - `override_vpc_config` (Attributes) Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC. (see [below for nested schema](#nestedatt--instance_groups--override_vpc_config))
 - `scheduled_update_config` (Attributes) The configuration object of the schedule that SageMaker follows when updating the AMI. (see [below for nested schema](#nestedatt--instance_groups--scheduled_update_config))

@@ -59,6 +59,10 @@
       "description": "The attachment to move from one network function group to another.",
       "$ref": "#/definitions/ProposedNetworkFunctionGroupChange"
     },
+    "RoutingPolicyLabel": {
+      "description": "Routing policy label",
+      "type": "string"
+    },
     "Tags": {
       "description": "Tags for the attachment.",
       "type": "array",
@@ -212,7 +216,8 @@
   ],
   "createOnlyProperties": [
     "/properties/CoreNetworkId",
-    "/properties/VpcArn"
+    "/properties/VpcArn",
+    "/properties/RoutingPolicyLabel"
   ],
   "readOnlyProperties": [
     "/properties/CoreNetworkArn",
@@ -228,6 +233,9 @@
     "/properties/NetworkFunctionGroupName",
     "/properties/ResourceArn",
     "/properties/LastModificationErrors"
+  ],
+  "writeOnlyProperties": [
+    "/properties/RoutingPolicyLabel"
   ],
   "primaryIdentifier": [
     "/properties/AttachmentId"

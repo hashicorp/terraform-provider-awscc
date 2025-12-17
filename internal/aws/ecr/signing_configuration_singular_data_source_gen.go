@@ -54,7 +54,7 @@ func signingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	              "description": "Repository name pattern (supports '*' wildcard).",
 		//	              "maxLength": 256,
 		//	              "minLength": 1,
-		//	              "pattern": "",
+		//	              "pattern": "^(?:[a-z0-9*]+(?:[._-][a-z0-9*]+)*/)*[a-z0-9*]+(?:[._-][a-z0-9*]+)*$",
 		//	              "type": "string"
 		//	            },
 		//	            "FilterType": {

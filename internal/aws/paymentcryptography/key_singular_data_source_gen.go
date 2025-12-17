@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -302,6 +303,68 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Defines the state of a key",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ReplicationRegions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "pattern": "^[a-z]{2}-[a-z]{1,16}-[0-9]+$",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"replication_regions": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ReplicationStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Status": {
+		//	          "description": "Defines the replication state of a key",
+		//	          "enum": [
+		//	            "IN_PROGRESS",
+		//	            "DELETE_IN_PROGRESS",
+		//	            "FAILED",
+		//	            "SYNCHRONIZED"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "StatusMessage": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Status"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"replication_status":      // Pattern: ""
+		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Defines the replication state of a key",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StatusMessage
+					"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -381,7 +444,11 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key_state":                 "KeyState",
 		"key_usage":                 "KeyUsage",
 		"no_restrictions":           "NoRestrictions",
+		"replication_regions":       "ReplicationRegions",
+		"replication_status":        "ReplicationStatus",
 		"sign":                      "Sign",
+		"status":                    "Status",
+		"status_message":            "StatusMessage",
 		"tags":                      "Tags",
 		"unwrap":                    "Unwrap",
 		"value":                     "Value",

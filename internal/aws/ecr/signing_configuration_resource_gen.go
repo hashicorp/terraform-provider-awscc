@@ -67,7 +67,7 @@ func signingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	              "description": "Repository name pattern (supports '*' wildcard).",
 		//	              "maxLength": 256,
 		//	              "minLength": 1,
-		//	              "pattern": "",
+		//	              "pattern": "^(?:[a-z0-9*]+(?:[._-][a-z0-9*]+)*/)*[a-z0-9*]+(?:[._-][a-z0-9*]+)*$",
 		//	              "type": "string"
 		//	            },
 		//	            "FilterType": {
@@ -118,6 +118,7 @@ func signingConfigurationResource(ctx context.Context) (resource.Resource, error
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 256),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(?:[a-z0-9*]+(?:[._-][a-z0-9*]+)*/)*[a-z0-9*]+(?:[._-][a-z0-9*]+)*$"), ""),
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

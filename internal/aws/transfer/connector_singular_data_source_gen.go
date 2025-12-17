@@ -288,6 +288,18 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Specifies the egress type for the connector.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ErrorMessage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Detailed error message when Connector in ERRORED status",
+		//	  "maxLength": 2048,
+		//	  "type": "string"
+		//	}
+		"error_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Detailed error message when Connector in ERRORED status",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LoggingRole
 		// CloudFormation resource type schema:
 		//
@@ -493,6 +505,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"egress_config":                       "EgressConfig",
 		"egress_type":                         "EgressType",
 		"encryption_algorithm":                "EncryptionAlgorithm",
+		"error_message":                       "ErrorMessage",
 		"key":                                 "Key",
 		"local_profile_id":                    "LocalProfileId",
 		"logging_role":                        "LoggingRole",

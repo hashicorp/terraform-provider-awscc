@@ -442,6 +442,160 @@ func expressGatewayServiceResource(ctx context.Context) (resource.Resource, erro
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ECSManagedResourceArns
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "AutoScaling": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ApplicationAutoScalingPolicies": {
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "ScalableTarget": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "IngressPath": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CertificateArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "ListenerArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "ListenerRuleArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "LoadBalancerArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "LoadBalancerSecurityGroups": {
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "TargetGroupArns": {
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "LogGroups": {
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "MetricAlarms": {
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "ServiceSecurityGroups": {
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"ecs_managed_resource_arns": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoScaling
+				"auto_scaling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ApplicationAutoScalingPolicies
+						"application_auto_scaling_policies": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ScalableTarget
+						"scalable_target": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: IngressPath
+				"ingress_path": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CertificateArn
+						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ListenerArn
+						"listener_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ListenerRuleArn
+						"listener_rule_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LoadBalancerArn
+						"load_balancer_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LoadBalancerSecurityGroups
+						"load_balancer_security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TargetGroupArns
+						"target_group_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LogGroups
+				"log_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MetricAlarms
+				"metric_alarms": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServiceSecurityGroups
+				"service_security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Endpoint
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -1035,48 +1189,62 @@ func expressGatewayServiceResource(ctx context.Context) (resource.Resource, erro
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_type":               "AccessType",
-		"active_configurations":     "ActiveConfigurations",
-		"auto_scaling_metric":       "AutoScalingMetric",
-		"auto_scaling_target_value": "AutoScalingTargetValue",
-		"aws_logs_configuration":    "AwsLogsConfiguration",
-		"cluster":                   "Cluster",
-		"command":                   "Command",
-		"container_port":            "ContainerPort",
-		"cpu":                       "Cpu",
-		"created_at":                "CreatedAt",
-		"credentials_parameter":     "CredentialsParameter",
-		"endpoint":                  "Endpoint",
-		"environment":               "Environment",
-		"execution_role_arn":        "ExecutionRoleArn",
-		"health_check_path":         "HealthCheckPath",
-		"image":                     "Image",
-		"infrastructure_role_arn":   "InfrastructureRoleArn",
-		"ingress_paths":             "IngressPaths",
-		"key":                       "Key",
-		"log_group":                 "LogGroup",
-		"log_stream_prefix":         "LogStreamPrefix",
-		"max_task_count":            "MaxTaskCount",
-		"memory":                    "Memory",
-		"min_task_count":            "MinTaskCount",
-		"name":                      "Name",
-		"network_configuration":     "NetworkConfiguration",
-		"primary_container":         "PrimaryContainer",
-		"repository_credentials":    "RepositoryCredentials",
-		"scaling_target":            "ScalingTarget",
-		"secrets":                   "Secrets",
-		"security_groups":           "SecurityGroups",
-		"service_arn":               "ServiceArn",
-		"service_name":              "ServiceName",
-		"service_revision_arn":      "ServiceRevisionArn",
-		"status":                    "Status",
-		"status_code":               "StatusCode",
-		"subnets":                   "Subnets",
-		"tags":                      "Tags",
-		"task_role_arn":             "TaskRoleArn",
-		"updated_at":                "UpdatedAt",
-		"value":                     "Value",
-		"value_from":                "ValueFrom",
+		"access_type":                       "AccessType",
+		"active_configurations":             "ActiveConfigurations",
+		"application_auto_scaling_policies": "ApplicationAutoScalingPolicies",
+		"auto_scaling":                      "AutoScaling",
+		"auto_scaling_metric":               "AutoScalingMetric",
+		"auto_scaling_target_value":         "AutoScalingTargetValue",
+		"aws_logs_configuration":            "AwsLogsConfiguration",
+		"certificate_arn":                   "CertificateArn",
+		"cluster":                           "Cluster",
+		"command":                           "Command",
+		"container_port":                    "ContainerPort",
+		"cpu":                               "Cpu",
+		"created_at":                        "CreatedAt",
+		"credentials_parameter":             "CredentialsParameter",
+		"ecs_managed_resource_arns":         "ECSManagedResourceArns",
+		"endpoint":                          "Endpoint",
+		"environment":                       "Environment",
+		"execution_role_arn":                "ExecutionRoleArn",
+		"health_check_path":                 "HealthCheckPath",
+		"image":                             "Image",
+		"infrastructure_role_arn":           "InfrastructureRoleArn",
+		"ingress_path":                      "IngressPath",
+		"ingress_paths":                     "IngressPaths",
+		"key":                               "Key",
+		"listener_arn":                      "ListenerArn",
+		"listener_rule_arn":                 "ListenerRuleArn",
+		"load_balancer_arn":                 "LoadBalancerArn",
+		"load_balancer_security_groups":     "LoadBalancerSecurityGroups",
+		"log_group":                         "LogGroup",
+		"log_groups":                        "LogGroups",
+		"log_stream_prefix":                 "LogStreamPrefix",
+		"max_task_count":                    "MaxTaskCount",
+		"memory":                            "Memory",
+		"metric_alarms":                     "MetricAlarms",
+		"min_task_count":                    "MinTaskCount",
+		"name":                              "Name",
+		"network_configuration":             "NetworkConfiguration",
+		"primary_container":                 "PrimaryContainer",
+		"repository_credentials":            "RepositoryCredentials",
+		"scalable_target":                   "ScalableTarget",
+		"scaling_target":                    "ScalingTarget",
+		"secrets":                           "Secrets",
+		"security_groups":                   "SecurityGroups",
+		"service_arn":                       "ServiceArn",
+		"service_name":                      "ServiceName",
+		"service_revision_arn":              "ServiceRevisionArn",
+		"service_security_groups":           "ServiceSecurityGroups",
+		"status":                            "Status",
+		"status_code":                       "StatusCode",
+		"subnets":                           "Subnets",
+		"tags":                              "Tags",
+		"target_group_arns":                 "TargetGroupArns",
+		"task_role_arn":                     "TaskRoleArn",
+		"updated_at":                        "UpdatedAt",
+		"value":                             "Value",
+		"value_from":                        "ValueFrom",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

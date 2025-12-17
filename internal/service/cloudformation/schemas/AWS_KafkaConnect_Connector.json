@@ -59,6 +59,14 @@
       "description": "The version of Kafka Connect. It has to be compatible with both the Kafka cluster's version and the plugins.",
       "type": "string"
     },
+    "NetworkType": {
+      "description": "The network type of the Connector.",
+      "type": "string",
+      "enum": [
+        "IPV4",
+        "DUAL"
+      ]
+    },
     "LogDelivery": {
       "$ref": "#/definitions/LogDelivery"
     },
@@ -510,7 +518,8 @@
     "/properties/LogDelivery",
     "/properties/Plugins",
     "/properties/ServiceExecutionRoleArn",
-    "/properties/WorkerConfiguration"
+    "/properties/WorkerConfiguration",
+    "/properties/NetworkType"
   ],
   "handlers": {
     "create": {

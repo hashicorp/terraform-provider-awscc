@@ -233,6 +233,13 @@
         }
       }
     },
+    "NetworkType": {
+      "type": "string",
+      "enum": [
+        "IPV4",
+        "DUAL"
+      ]
+    },
     "ConfigurationInfo": {
       "type": "object",
       "additionalProperties": false,
@@ -349,6 +356,9 @@
         },
         "VpcConnectivity": {
           "$ref": "#/definitions/VpcConnectivity"
+        },
+        "NetworkType": {
+          "$ref": "#/definitions/NetworkType"
         }
       }
     },
@@ -600,6 +610,7 @@
         "kafka:DescribeClusterOperation",
         "kafka:TagResource",
         "kafka:UntagResource",
+        "ec2:CreateTags",
         "ec2:DescribeSubnets",
         "ec2:DescribeVpcs",
         "ec2:DescribeSecurityGroups",

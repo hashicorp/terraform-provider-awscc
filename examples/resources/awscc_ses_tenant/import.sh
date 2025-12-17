@@ -1,0 +1,1 @@
+$ terraform import awscc_ses_tenant.example "tenant_name"

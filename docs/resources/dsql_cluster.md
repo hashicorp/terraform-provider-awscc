@@ -46,6 +46,7 @@ resource "awscc_dsql_cluster" "example" {
 - `policy_version` (String) The version number of the cluster's resource based policy
 - `resource_arn` (String) The Amazon Resource Name (ARN) for the cluster.
 - `status` (String) The status of the cluster.
+- `vpc_endpoint` (String) The DSQL cluster VPC endpoint.
 - `vpc_endpoint_service_name` (String) The VPC endpoint service name.
 
 <a id="nestedatt--multi_region_properties"></a>

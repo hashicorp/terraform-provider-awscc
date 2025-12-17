@@ -78,6 +78,11 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	      "required": [
 		//	        "Email"
 		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "WhatsApp"
+		//	      ]
 		//	    }
 		//	  ],
 		//	  "description": "The possible types of channel subtype config parameters",
@@ -94,7 +99,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "DefaultOutboundConfig": {
 		//	          "additionalProperties": false,
-		//	          "description": "Default SMS outbound config",
+		//	          "description": "Default Email outbound config",
 		//	          "properties": {
 		//	            "ConnectSourceEmailAddress": {
 		//	              "description": "Email address used for Email messages",
@@ -242,6 +247,12 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	              "description": "The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.",
 		//	              "maxLength": 100,
 		//	              "type": "string"
+		//	            },
+		//	            "RingTimeout": {
+		//	              "description": "Maximum ring time for outbound calls in seconds",
+		//	              "maximum": 60,
+		//	              "minimum": 15,
+		//	              "type": "integer"
 		//	            }
 		//	          },
 		//	          "required": [
@@ -362,6 +373,60 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	        "DefaultOutboundConfig"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "WhatsApp": {
+		//	      "additionalProperties": false,
+		//	      "description": "WhatsApp Channel Subtype config",
+		//	      "properties": {
+		//	        "Capacity": {
+		//	          "description": "Allocates outbound capacity for the specific channel of this campaign between multiple active campaigns",
+		//	          "maximum": 1,
+		//	          "minimum": 0.01,
+		//	          "type": "number"
+		//	        },
+		//	        "DefaultOutboundConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "Default WhatsApp outbound config",
+		//	          "properties": {
+		//	            "ConnectSourcePhoneNumberArn": {
+		//	              "description": "Arn",
+		//	              "maxLength": 500,
+		//	              "minLength": 20,
+		//	              "pattern": "^arn:.*$",
+		//	              "type": "string"
+		//	            },
+		//	            "WisdomTemplateArn": {
+		//	              "description": "Arn",
+		//	              "maxLength": 500,
+		//	              "minLength": 20,
+		//	              "pattern": "^arn:.*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ConnectSourcePhoneNumberArn",
+		//	            "WisdomTemplateArn"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "OutboundMode": {
+		//	          "additionalProperties": false,
+		//	          "description": "WhatsApp Outbound Mode",
+		//	          "properties": {
+		//	            "AgentlessConfig": {
+		//	              "additionalProperties": false,
+		//	              "description": "Agentless config",
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "OutboundMode",
+		//	        "DefaultOutboundConfig"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -427,7 +492,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "Default SMS outbound config",
+							Description: "Default Email outbound config",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.Object{ /*START VALIDATORS*/
@@ -645,6 +710,18 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
+								// Property: RingTimeout
+								"ring_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Maximum ring time for outbound calls in seconds",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(15, 60),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Default Telephone Outbound config",
 							Optional:    true,
@@ -804,9 +881,102 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: WhatsApp
+				"whats_app": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Capacity
+						"capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "Allocates outbound capacity for the specific channel of this campaign between multiple active campaigns",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(0.010000, 1.000000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DefaultOutboundConfig
+						"default_outbound_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ConnectSourcePhoneNumberArn
+								"connect_source_phone_number_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Arn",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(20, 500),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: WisdomTemplateArn
+								"wisdom_template_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Arn",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(20, 500),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Default WhatsApp outbound config",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: OutboundMode
+						"outbound_mode": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AgentlessConfig
+								"agentless_config": schema.StringAttribute{ /*START ATTRIBUTE*/
+									CustomType:  jsontypes.NormalizedType{},
+									Description: "Agentless config",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "WhatsApp Outbound Mode",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "WhatsApp Channel Subtype config",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The possible types of channel subtype config parameters",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CommunicationLimitsOverride
 		// CloudFormation resource type schema:
@@ -1220,6 +1390,123 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "Telephony": {
+		//	      "additionalProperties": false,
+		//	      "description": "Time window config",
+		//	      "properties": {
+		//	        "OpenHours": {
+		//	          "additionalProperties": false,
+		//	          "description": "Open Hours config",
+		//	          "properties": {
+		//	            "DailyHours": {
+		//	              "description": "Daily Hours map",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "Daily Hour",
+		//	                "properties": {
+		//	                  "Key": {
+		//	                    "description": "Day of week",
+		//	                    "enum": [
+		//	                      "MONDAY",
+		//	                      "TUESDAY",
+		//	                      "WEDNESDAY",
+		//	                      "THURSDAY",
+		//	                      "FRIDAY",
+		//	                      "SATURDAY",
+		//	                      "SUNDAY"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Value": {
+		//	                    "description": "List of time range",
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Time range in 24 hour format",
+		//	                      "properties": {
+		//	                        "EndTime": {
+		//	                          "description": "Time in ISO 8601 format, e.g. T23:11",
+		//	                          "pattern": "^T\\d{2}:\\d{2}$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "StartTime": {
+		//	                          "description": "Time in ISO 8601 format, e.g. T23:11",
+		//	                          "pattern": "^T\\d{2}:\\d{2}$",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "StartTime",
+		//	                        "EndTime"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "type": "array"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "DailyHours"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "RestrictedPeriods": {
+		//	          "additionalProperties": false,
+		//	          "description": "Restricted period config",
+		//	          "oneOf": [
+		//	            {
+		//	              "required": [
+		//	                "RestrictedPeriodList"
+		//	              ]
+		//	            }
+		//	          ],
+		//	          "properties": {
+		//	            "RestrictedPeriodList": {
+		//	              "description": "List of restricted period",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "Restricted period",
+		//	                "properties": {
+		//	                  "EndDate": {
+		//	                    "description": "Date in ISO 8601 format, e.g. 2024-01-01",
+		//	                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Name": {
+		//	                    "description": "The name of a restricted period",
+		//	                    "maxLength": 127,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "StartDate": {
+		//	                    "description": "Date in ISO 8601 format, e.g. 2024-01-01",
+		//	                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "StartDate",
+		//	                  "EndDate"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "OpenHours"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "WhatsApp": {
 		//	      "additionalProperties": false,
 		//	      "description": "Time window config",
 		//	      "properties": {
@@ -1878,6 +2165,170 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: WhatsApp
+				"whats_app": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: OpenHours
+						"open_hours": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DailyHours
+								"daily_hours": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Key
+											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Day of week",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"MONDAY",
+														"TUESDAY",
+														"WEDNESDAY",
+														"THURSDAY",
+														"FRIDAY",
+														"SATURDAY",
+														"SUNDAY",
+													),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: EndTime
+														"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Time in ISO 8601 format, e.g. T23:11",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.RegexMatches(regexp.MustCompile("^T\\d{2}:\\d{2}$"), ""),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: StartTime
+														"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Time in ISO 8601 format, e.g. T23:11",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.RegexMatches(regexp.MustCompile("^T\\d{2}:\\d{2}$"), ""),
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Description: "List of time range",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "Daily Hours map",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Set{ /*START VALIDATORS*/
+										fwvalidators.NotNullSet(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+										setplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Open Hours config",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: RestrictedPeriods
+						"restricted_periods": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: RestrictedPeriodList
+								"restricted_period_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: EndDate
+											"end_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Date in ISO 8601 format, e.g. 2024-01-01",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.RegexMatches(regexp.MustCompile("^\\d{4}-\\d{2}-\\d{2}$"), ""),
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name of a restricted period",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthAtMost(127),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: StartDate
+											"start_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Date in ISO 8601 format, e.g. 2024-01-01",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.RegexMatches(regexp.MustCompile("^\\d{4}-\\d{2}-\\d{2}$"), ""),
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "List of restricted period",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Restricted period config",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Time window config",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Campaign communication time config",
 			Optional:    true,
@@ -2182,6 +2633,31 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Type
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Campaign type",
+		//	  "enum": [
+		//	    "MANAGED",
+		//	    "JOURNEY"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Campaign type",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"MANAGED",
+					"JOURNEY",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -2256,6 +2732,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"refresh_frequency":                 "RefreshFrequency",
 		"restricted_period_list":            "RestrictedPeriodList",
 		"restricted_periods":                "RestrictedPeriods",
+		"ring_timeout":                      "RingTimeout",
 		"schedule":                          "Schedule",
 		"sms":                               "Sms",
 		"source":                            "Source",
@@ -2265,8 +2742,10 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                              "Tags",
 		"telephony":                         "Telephony",
 		"timeout_config":                    "TimeoutConfig",
+		"type":                              "Type",
 		"unit":                              "Unit",
 		"value":                             "Value",
+		"whats_app":                         "WhatsApp",
 		"wisdom_template_arn":               "WisdomTemplateArn",
 	})
 

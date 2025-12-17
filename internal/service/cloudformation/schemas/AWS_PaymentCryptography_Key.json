@@ -138,6 +138,16 @@
         "AWS_PAYMENT_CRYPTOGRAPHY"
       ]
     },
+    "KeyReplicationState": {
+      "type": "string",
+      "description": "Defines the replication state of a key",
+      "enum": [
+        "IN_PROGRESS",
+        "DELETE_IN_PROGRESS",
+        "FAILED",
+        "SYNCHRONIZED"
+      ]
+    },
     "KeyState": {
       "type": "string",
       "description": "Defines the state of a key",
@@ -175,6 +185,30 @@
         "TR31_V2_VISA_PIN_VERIFICATION_KEY",
         "TR31_K2_TR34_ASYMMETRIC_KEY"
       ]
+    },
+    "ReplicationStatus": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/ReplicationStatusType"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ReplicationStatusType": {
+      "type": "object",
+      "properties": {
+        "Status": {
+          "$ref": "#/definitions/KeyReplicationState"
+        },
+        "StatusMessage": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Status"
+      ],
+      "additionalProperties": false
     },
     "Tag": {
       "type": "object",
@@ -225,6 +259,16 @@
     "KeyState": {
       "$ref": "#/definitions/KeyState"
     },
+    "ReplicationRegions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z]{2}-[a-z]{1,16}-[0-9]+$"
+      }
+    },
+    "ReplicationStatus": {
+      "$ref": "#/definitions/ReplicationStatus"
+    },
     "Tags": {
       "type": "array",
       "items": {
@@ -242,7 +286,11 @@
   "readOnlyProperties": [
     "/properties/KeyIdentifier",
     "/properties/KeyOrigin",
-    "/properties/KeyState"
+    "/properties/KeyState",
+    "/properties/ReplicationStatus"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ReplicationRegions"
   ],
   "primaryIdentifier": [
     "/properties/KeyIdentifier"
@@ -268,7 +316,9 @@
         "payment-cryptography:TagResource",
         "payment-cryptography:UntagResource",
         "payment-cryptography:StartKeyUsage",
-        "payment-cryptography:StopKeyUsage"
+        "payment-cryptography:StopKeyUsage",
+        "payment-cryptography:AddKeyReplicationRegions",
+        "payment-cryptography:RemoveKeyReplicationRegions"
       ]
     },
     "delete": {

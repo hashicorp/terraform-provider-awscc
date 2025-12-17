@@ -913,6 +913,24 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The timestamp when the association was created",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LinkedAssociationIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Set of linked association IDs for parent-child relationships",
+		//	  "items": {
+		//	    "description": "The unique identifier of the association",
+		//	    "maxLength": 255,
+		//	    "minLength": 1,
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"linked_association_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Set of linked association IDs for parent-child relationships",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceId
 		// CloudFormation resource type schema:
 		//
@@ -978,6 +996,7 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"instance_id":              "InstanceId",
 		"instance_identifier":      "InstanceIdentifier",
 		"key":                      "Key",
+		"linked_association_ids":   "LinkedAssociationIds",
 		"mcp_server":               "MCPServer",
 		"mcp_server_datadog":       "MCPServerDatadog",
 		"mcp_server_new_relic":     "MCPServerNewRelic",

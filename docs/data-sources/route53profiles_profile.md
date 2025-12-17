@@ -25,6 +25,7 @@ Data Source schema for AWS::Route53Profiles::Profile
 - `client_token` (String) The id of the creator request
 - `name` (String) The name of the profile.
 - `profile_id` (String) The ID of the profile.
+- `share_status` (String) The sharing status of the profile.
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>

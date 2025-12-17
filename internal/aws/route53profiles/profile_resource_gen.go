@@ -93,6 +93,25 @@ func profileResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ShareStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The sharing status of the profile.",
+		//	  "enum": [
+		//	    "NOT_SHARED",
+		//	    "SHARED_WITH_ME",
+		//	    "SHARED_BY_ME"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"share_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The sharing status of the profile.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -197,6 +216,7 @@ func profileResource(ctx context.Context) (resource.Resource, error) {
 		"key":          "Key",
 		"name":         "Name",
 		"profile_id":   "Id",
+		"share_status": "ShareStatus",
 		"tags":         "Tags",
 		"value":        "Value",
 	})

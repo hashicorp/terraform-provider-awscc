@@ -29,6 +29,14 @@
       "type": "string",
       "pattern": "^arn:(aws|aws-us-gov|aws-cn):kms:.*:[0-9]+:.*$"
     },
+    "CustomerProfilesDomainArn": {
+      "type": "string",
+      "pattern": "^arn:(aws|aws-us-gov|aws-cn):profile:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(domains/[a-zA-Z_0-9-]{1,255})$"
+    },
+    "CustomerProfilesObjectTypeArn": {
+      "type": "string",
+      "pattern": "^arn:(aws|aws-us-gov|aws-cn):profile:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(domains/[a-zA-Z_0-9-]{1,255}/object-types/[a-zA-Z_0-9-]{1,255})$"
+    },
     "MatchingWorkflowArn": {
       "description": "The default MatchingWorkflow arn",
       "type": "string",
@@ -86,11 +94,13 @@
         },
         "ApplyNormalization": {
           "type": "boolean"
+        },
+        "CustomerProfilesIntegrationConfig": {
+          "$ref": "#/definitions/CustomerProfilesIntegrationConfig"
         }
       },
       "required": [
-        "Output",
-        "OutputS3Path"
+        "Output"
       ],
       "additionalProperties": false
     },
@@ -277,6 +287,22 @@
       ],
       "additionalProperties": false
     },
+    "CustomerProfilesIntegrationConfig": {
+      "type": "object",
+      "properties": {
+        "DomainArn": {
+          "$ref": "#/definitions/CustomerProfilesDomainArn"
+        },
+        "ObjectTypeArn": {
+          "$ref": "#/definitions/CustomerProfilesObjectTypeArn"
+        }
+      },
+      "required": [
+        "DomainArn",
+        "ObjectTypeArn"
+      ],
+      "additionalProperties": false
+    },
     "Tag": {
       "description": "A key-value pair to associate with a resource",
       "type": "object",
@@ -393,7 +419,8 @@
         "events:PutRule",
         "events:DeleteRule",
         "events:PutTargets",
-        "events:ListTargetsByRule"
+        "events:ListTargetsByRule",
+        "profile:PutIntegration"
       ]
     },
     "read": {
@@ -411,7 +438,8 @@
         "events:DeleteRule",
         "events:PutTargets",
         "events:RemoveTargets",
-        "events:ListTargetsByRule"
+        "events:ListTargetsByRule",
+        "profile:DeleteIntegration"
       ]
     },
     "list": {

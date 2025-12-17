@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -132,7 +133,8 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "enum": [
 		//	    "CUSTOM_JWT",
-		//	    "AWS_IAM"
+		//	    "AWS_IAM",
+		//	    "NONE"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -142,6 +144,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"CUSTOM_JWT",
 					"AWS_IAM",
+					"NONE",
 				),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -236,6 +239,158 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: InterceptorConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "InputConfiguration": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "PassRequestHeaders": {
+		//	            "type": "boolean"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "PassRequestHeaders"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "InterceptionPoints": {
+		//	        "items": {
+		//	          "enum": [
+		//	            "REQUEST",
+		//	            "RESPONSE"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 2,
+		//	        "minItems": 1,
+		//	        "type": "array"
+		//	      },
+		//	      "Interceptor": {
+		//	        "properties": {
+		//	          "Lambda": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Arn": {
+		//	                "maxLength": 170,
+		//	                "minLength": 1,
+		//	                "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:([a-z]{2}(-gov)?-[a-z]+-\\d{1}):(\\d{12}):function:([a-zA-Z0-9-_.]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Arn"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Interceptor",
+		//	      "InterceptionPoints"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 2,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"interceptor_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: InputConfiguration
+					"input_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: PassRequestHeaders
+							"pass_request_headers": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Bool{ /*START VALIDATORS*/
+									fwvalidators.NotNullBool(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: InterceptionPoints
+					"interception_points": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.SizeBetween(1, 2),
+							listvalidator.ValueStringsAre(
+								stringvalidator.OneOf(
+									"REQUEST",
+									"RESPONSE",
+								),
+							),
+							fwvalidators.NotNullList(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Interceptor
+					"interceptor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Lambda
+							"lambda": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Arn
+									"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 170),
+											stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*)?:lambda:([a-z]{2}(-gov)?-[a-z]+-\\d{1}):(\\d{12}):function:([a-zA-Z0-9-_.]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"), ""),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.Object{ /*START VALIDATORS*/
+							fwvalidators.NotNullObject(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 2),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyArn
@@ -521,33 +676,40 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allowed_audience":          "AllowedAudience",
-		"allowed_clients":           "AllowedClients",
-		"authorizer_configuration":  "AuthorizerConfiguration",
-		"authorizer_type":           "AuthorizerType",
-		"created_at":                "CreatedAt",
-		"custom_jwt_authorizer":     "CustomJWTAuthorizer",
-		"description":               "Description",
-		"discovery_url":             "DiscoveryUrl",
-		"exception_level":           "ExceptionLevel",
-		"gateway_arn":               "GatewayArn",
-		"gateway_identifier":        "GatewayIdentifier",
-		"gateway_url":               "GatewayUrl",
-		"instructions":              "Instructions",
-		"kms_key_arn":               "KmsKeyArn",
-		"mcp":                       "Mcp",
-		"name":                      "Name",
-		"protocol_configuration":    "ProtocolConfiguration",
-		"protocol_type":             "ProtocolType",
-		"role_arn":                  "RoleArn",
-		"search_type":               "SearchType",
-		"status":                    "Status",
-		"status_reasons":            "StatusReasons",
-		"supported_versions":        "SupportedVersions",
-		"tags":                      "Tags",
-		"updated_at":                "UpdatedAt",
-		"workload_identity_arn":     "WorkloadIdentityArn",
-		"workload_identity_details": "WorkloadIdentityDetails",
+		"allowed_audience":           "AllowedAudience",
+		"allowed_clients":            "AllowedClients",
+		"arn":                        "Arn",
+		"authorizer_configuration":   "AuthorizerConfiguration",
+		"authorizer_type":            "AuthorizerType",
+		"created_at":                 "CreatedAt",
+		"custom_jwt_authorizer":      "CustomJWTAuthorizer",
+		"description":                "Description",
+		"discovery_url":              "DiscoveryUrl",
+		"exception_level":            "ExceptionLevel",
+		"gateway_arn":                "GatewayArn",
+		"gateway_identifier":         "GatewayIdentifier",
+		"gateway_url":                "GatewayUrl",
+		"input_configuration":        "InputConfiguration",
+		"instructions":               "Instructions",
+		"interception_points":        "InterceptionPoints",
+		"interceptor":                "Interceptor",
+		"interceptor_configurations": "InterceptorConfigurations",
+		"kms_key_arn":                "KmsKeyArn",
+		"lambda":                     "Lambda",
+		"mcp":                        "Mcp",
+		"name":                       "Name",
+		"pass_request_headers":       "PassRequestHeaders",
+		"protocol_configuration":     "ProtocolConfiguration",
+		"protocol_type":              "ProtocolType",
+		"role_arn":                   "RoleArn",
+		"search_type":                "SearchType",
+		"status":                     "Status",
+		"status_reasons":             "StatusReasons",
+		"supported_versions":         "SupportedVersions",
+		"tags":                       "Tags",
+		"updated_at":                 "UpdatedAt",
+		"workload_identity_arn":      "WorkloadIdentityArn",
+		"workload_identity_details":  "WorkloadIdentityDetails",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

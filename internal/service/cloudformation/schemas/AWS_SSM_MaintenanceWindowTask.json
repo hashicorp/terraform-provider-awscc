@@ -1,0 +1,314 @@
+{
+  "typeName": "AWS::SSM::MaintenanceWindowTask",
+  "description": "Resource Type definition for AWS::SSM::MaintenanceWindowTask",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ssm/tree/master/aws-ssm-maintenancewindowtask",
+  "additionalProperties": false,
+  "definitions": {
+    "TaskInvocationParameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MaintenanceWindowStepFunctionsParameters": {
+          "$ref": "#/definitions/MaintenanceWindowStepFunctionsParameters"
+        },
+        "MaintenanceWindowRunCommandParameters": {
+          "$ref": "#/definitions/MaintenanceWindowRunCommandParameters"
+        },
+        "MaintenanceWindowLambdaParameters": {
+          "$ref": "#/definitions/MaintenanceWindowLambdaParameters"
+        },
+        "MaintenanceWindowAutomationParameters": {
+          "$ref": "#/definitions/MaintenanceWindowAutomationParameters"
+        }
+      }
+    },
+    "Target": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Values": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "Key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Values",
+        "Key"
+      ]
+    },
+    "CloudWatchOutputConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "CloudWatchOutputEnabled": {
+          "type": "boolean",
+          "description": "Enables Systems Manager to send command output to CloudWatch Logs."
+        },
+        "CloudWatchLogGroupName": {
+          "type": "string",
+          "description": "The name of the CloudWatch log group where you want to send command output."
+        }
+      }
+    },
+    "MaintenanceWindowRunCommandParameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "TimeoutSeconds": {
+          "type": "integer"
+        },
+        "Comment": {
+          "type": "string"
+        },
+        "OutputS3KeyPrefix": {
+          "type": "string"
+        },
+        "Parameters": {
+          "type": "object"
+        },
+        "CloudWatchOutputConfig": {
+          "$ref": "#/definitions/CloudWatchOutputConfig"
+        },
+        "DocumentHashType": {
+          "type": "string"
+        },
+        "ServiceRoleArn": {
+          "type": "string"
+        },
+        "NotificationConfig": {
+          "$ref": "#/definitions/NotificationConfig"
+        },
+        "DocumentVersion": {
+          "type": "string"
+        },
+        "OutputS3BucketName": {
+          "type": "string"
+        },
+        "DocumentHash": {
+          "type": "string"
+        }
+      }
+    },
+    "MaintenanceWindowAutomationParameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Parameters": {
+          "type": "object"
+        },
+        "DocumentVersion": {
+          "type": "string"
+        }
+      }
+    },
+    "NotificationConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "NotificationEvents": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "NotificationArn": {
+          "type": "string"
+        },
+        "NotificationType": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "NotificationArn"
+      ]
+    },
+    "MaintenanceWindowStepFunctionsParameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Input": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        }
+      }
+    },
+    "LoggingInfo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Region": {
+          "type": "string"
+        },
+        "S3Prefix": {
+          "type": "string"
+        },
+        "S3Bucket": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "S3Bucket",
+        "Region"
+      ]
+    },
+    "MaintenanceWindowLambdaParameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Qualifier": {
+          "type": "string"
+        },
+        "Payload": {
+          "type": "string"
+        },
+        "ClientContext": {
+          "type": "string"
+        }
+      }
+    },
+    "ParameterValues": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "properties": {
+    "MaxErrors": {
+      "type": "string",
+      "description": "The maximum number of errors allowed before this task stops being scheduled."
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description of the task."
+    },
+    "ServiceRoleArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the IAM service role for AWS Systems Manager to assume when running a maintenance window task."
+    },
+    "Priority": {
+      "type": "integer",
+      "description": "The priority of the task in the maintenance window. The lower the number, the higher the priority. Tasks that have the same priority are scheduled in parallel."
+    },
+    "MaxConcurrency": {
+      "type": "string",
+      "description": "The maximum number of targets this task can be run for, in parallel."
+    },
+    "Targets": {
+      "type": "array",
+      "description": "The targets (either instances or window target ids).",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/Target"
+      }
+    },
+    "Name": {
+      "type": "string",
+      "description": "The task name."
+    },
+    "TaskArn": {
+      "type": "string",
+      "description": "The resource that the task uses during execution."
+    },
+    "TaskInvocationParameters": {
+      "$ref": "#/definitions/TaskInvocationParameters",
+      "description": "The parameters to pass to the task when it runs. Populate only the fields that match the task type. All other fields should be empty."
+    },
+    "WindowId": {
+      "type": "string",
+      "description": "The ID of the maintenance window where the task is registered."
+    },
+    "TaskParameters": {
+      "type": "object",
+      "description": "The parameters to pass to the task when it runs."
+    },
+    "TaskType": {
+      "type": "string",
+      "description": "The type of task."
+    },
+    "CutoffBehavior": {
+      "type": "string",
+      "description": "The specification for whether tasks should continue to run after the cutoff time specified in the maintenance windows is reached."
+    },
+    "WindowTaskId": {
+      "type": "string",
+      "description": "Unique identifier of the maintenance window task."
+    },
+    "LoggingInfo": {
+      "$ref": "#/definitions/LoggingInfo",
+      "description": "Information about an Amazon S3 bucket to write Run Command task-level logs to."
+    }
+  },
+  "required": [
+    "WindowId",
+    "Priority",
+    "TaskType",
+    "TaskArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/WindowId",
+    "/properties/TaskType"
+  ],
+  "readOnlyProperties": [
+    "/properties/WindowTaskId"
+  ],
+  "primaryIdentifier": [
+    "/properties/WindowId",
+    "/properties/WindowTaskId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "iam:CreateServiceLinkedRole",
+        "iam:PassRole",
+        "ssm:GetMaintenanceWindowTask",
+        "ssm:RegisterTaskWithMaintenanceWindow"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ssm:GetMaintenanceWindowTask"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "iam:CreateServiceLinkedRole",
+        "iam:PassRole",
+        "ssm:UpdateMaintenanceWindowTask"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ssm:DeregisterTaskFromMaintenanceWindow",
+        "ssm:GetMaintenanceWindowTask"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ssm:DescribeMaintenanceWindowTasks"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "WindowId": {
+            "$ref": "resource-schema.json#/properties/WindowId"
+          }
+        },
+        "required": [
+          "WindowId"
+        ]
+      }
+    }
+  }
+}

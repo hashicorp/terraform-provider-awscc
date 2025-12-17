@@ -106,7 +106,8 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		//	{
 		//	  "description": "The display settings of the Custom Line Item.",
 		//	  "enum": [
-		//	    "CONSOLIDATED"
+		//	    "CONSOLIDATED",
+		//	    "ITEMIZED"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -165,13 +166,26 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "properties": {
 		//	          "Attribute": {
 		//	            "enum": [
-		//	              "LINE_ITEM_TYPE"
+		//	              "LINE_ITEM_TYPE",
+		//	              "SERVICE"
 		//	            ],
 		//	            "type": "string"
 		//	          },
+		//	          "AttributeValues": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "maxLength": 256,
+		//	              "minLength": 1,
+		//	              "pattern": "^[a-zA-Z0-9]+$",
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
 		//	          "MatchOption": {
 		//	            "enum": [
-		//	              "NOT_EQUAL"
+		//	              "NOT_EQUAL",
+		//	              "EQUAL"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -189,8 +203,7 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        },
 		//	        "required": [
 		//	          "Attribute",
-		//	          "MatchOption",
-		//	          "Values"
+		//	          "MatchOption"
 		//	        ],
 		//	        "type": "object"
 		//	      },
@@ -252,6 +265,11 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 							// Property: Attribute
 							"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: AttributeValues
+							"attribute_values": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: MatchOption
 							"match_option": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -421,6 +439,7 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		"arn":                             "Arn",
 		"association_size":                "AssociationSize",
 		"attribute":                       "Attribute",
+		"attribute_values":                "AttributeValues",
 		"billing_group_arn":               "BillingGroupArn",
 		"billing_period_range":            "BillingPeriodRange",
 		"charge_value":                    "ChargeValue",

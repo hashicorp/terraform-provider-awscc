@@ -70,6 +70,22 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The name of the profile.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ShareStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The sharing status of the profile.",
+		//	  "enum": [
+		//	    "NOT_SHARED",
+		//	    "SHARED_WITH_ME",
+		//	    "SHARED_BY_ME"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"share_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The sharing status of the profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -141,6 +157,7 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key":          "Key",
 		"name":         "Name",
 		"profile_id":   "Id",
+		"share_status": "ShareStatus",
 		"tags":         "Tags",
 		"value":        "Value",
 	})
