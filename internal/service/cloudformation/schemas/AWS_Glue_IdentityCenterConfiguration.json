@@ -1,0 +1,100 @@
+{
+  "typeName": "AWS::Glue::IdentityCenterConfiguration",
+  "description": "Resource Type definition for AWS::Glue::IdentityCenterConfiguration",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-glue.git",
+  "definitions": {},
+  "properties": {
+    "InstanceArn": {
+      "description": "The IAM identity center instance arn",
+      "type": "string",
+      "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$",
+      "maxLength": 1224,
+      "minLength": 10
+    },
+    "Scopes": {
+      "description": "The downstream scopes that Glue identity center configuration can access",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "UserBackgroundSessionsEnabled": {
+      "description": "Enable or disable user background sessions for Glue Identity Center",
+      "type": "boolean"
+    },
+    "ApplicationArn": {
+      "description": "The Glue IAM identity center application arn",
+      "type": "string",
+      "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$",
+      "maxLength": 1224,
+      "minLength": 10
+    },
+    "AccountId": {
+      "type": "string",
+      "description": "The identifier for the specified AWS account."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "InstanceArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/AccountId"
+  ],
+  "createOnlyProperties": [
+    "/properties/InstanceArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/ApplicationArn",
+    "/properties/AccountId"
+  ],
+  "replacementStrategy": "delete_then_create",
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "glue:CreateGlueIdentityCenterConfiguration",
+        "glue:GetGlueIdentityCenterConfiguration",
+        "sso:CreateApplication",
+        "sso:ListInstances",
+        "sso:ListApplications",
+        "sso:PutApplicationAuthenticationMethod",
+        "sso:PutApplicationGrant",
+        "sso:PutApplicationAccessScope",
+        "sso:PutApplicationAssignmentConfiguration",
+        "sso:PutApplicationSessionConfiguration"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "glue:GetGlueIdentityCenterConfiguration"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "glue:UpdateGlueIdentityCenterConfiguration",
+        "glue:GetGlueIdentityCenterConfiguration",
+        "sso:PutApplicationAuthenticationMethod",
+        "sso:PutApplicationGrant",
+        "sso:PutApplicationAccessScope",
+        "sso:PutApplicationAssignmentConfiguration",
+        "sso:DeleteApplicationAccessScope",
+        "sso:PutApplicationSessionConfiguration"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "glue:DeleteGlueIdentityCenterConfiguration",
+        "glue:GetGlueIdentityCenterConfiguration",
+        "sso:DeleteApplication"
+      ]
+    }
+  }
+}

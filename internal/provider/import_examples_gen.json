@@ -1235,6 +1235,10 @@
         "identifier": ["InstanceArn","DataTableArn","AttributeId"]
     },
     {
+        "resource": "awscc_connect_data_table_record",
+        "identifier": ["InstanceArn","DataTableArn","RecordId"]
+    },
+    {
         "resource": "awscc_connect_email_address",
         "identifier": ["EmailAddressArn"]
     },
@@ -1319,6 +1323,11 @@
         "identifier": ["ViewVersionArn"]
     },
     {
+        "resource": "awscc_connect_workspace",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_connectcampaigns_campaign",
         "generateListResource": true,
         "identifier": ["Arn"]
@@ -1363,6 +1372,11 @@
     {
         "resource": "awscc_customerprofiles_segment_definition",
         "identifier": ["DomainName","SegmentDefinitionName"]
+    },
+    {
+        "resource": "awscc_dax_subnet_group",
+        "generateListResource": true,
+        "identifier": ["SubnetGroupName"]
     },
     {
         "resource": "awscc_dms_data_migration",
@@ -2691,6 +2705,10 @@
         "identifier": ["DatabaseName"]
     },
     {
+        "resource": "awscc_glue_identity_center_configuration",
+        "identifier": ["AccountId"]
+    },
+    {
         "resource": "awscc_glue_integration",
         "generateListResource": true,
         "identifier": ["IntegrationArn","IntegrationName"]
@@ -2749,6 +2767,11 @@
     },
     {
         "resource": "awscc_groundstation_dataflow_endpoint_group",
+        "generateListResource": true,
+        "identifier": ["Id"]
+    },
+    {
+        "resource": "awscc_groundstation_dataflow_endpoint_group_v2",
         "generateListResource": true,
         "identifier": ["Id"]
     },
@@ -4103,6 +4126,10 @@
         "identifier": ["CoreNetworkId"]
     },
     {
+        "resource": "awscc_networkmanager_core_network_prefix_list_association",
+        "identifier": ["CoreNetworkId","PrefixListArn"]
+    },
+    {
         "resource": "awscc_networkmanager_customer_gateway_association",
         "identifier": ["GlobalNetworkId","CustomerGatewayArn"]
     },
@@ -5175,6 +5202,11 @@
         "identifier": ["Id"]
     },
     {
+        "resource": "awscc_ses_tenant",
+        "generateListResource": true,
+        "identifier": ["TenantName"]
+    },
+    {
         "resource": "awscc_ses_vdm_attributes",
         "identifier": ["VdmAttributesResourceId"]
     },
@@ -5245,6 +5277,14 @@
         "resource": "awscc_ssm_document",
         "generateListResource": true,
         "identifier": ["Name"]
+    },
+    {
+        "resource": "awscc_ssm_maintenance_window_target",
+        "identifier": ["WindowId","WindowTargetId"]
+    },
+    {
+        "resource": "awscc_ssm_maintenance_window_task",
+        "identifier": ["WindowId","WindowTaskId"]
     },
     {
         "resource": "awscc_ssm_parameter",

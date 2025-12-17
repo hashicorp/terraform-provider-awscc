@@ -1,0 +1,142 @@
+{
+  "typeName": "AWS::SES::Tenant",
+  "description": "Resource Type definition for AWS::SES::Tenant",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ses.git",
+  "definitions": {
+    "Tag": {
+      "description": "An object that defines the tags (keys and values) that you want to associate with the tenant.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "description": "The key of the key-value tag.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "description": "The value of the key-value tag.",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "ResourceAssociation": {
+      "description": "The resource to associate with the tenant",
+      "type": "object",
+      "properties": {
+        "ResourceArn": {
+          "description": "The ARN of the resource to associate with the tenant",
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "ResourceArn"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "description": "Amazon Resource Name (ARN) of the tenant.",
+      "type": "string",
+      "minLength": 1
+    },
+    "TenantName": {
+      "description": "The name of the tenant.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[\\w\\-_]+$"
+    },
+    "ResourceAssociations": {
+      "description": "The list of resources to associate with the tenant.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/ResourceAssociation"
+      },
+      "minItems": 0
+    },
+    "Tags": {
+      "description": "The tags (keys and values) associated with the tenant.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 50
+    }
+  },
+  "required": [
+    "TenantName"
+  ],
+  "createOnlyProperties": [
+    "/properties/TenantName"
+  ],
+  "primaryIdentifier": [
+    "/properties/TenantName"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn"
+  ],
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ses:TagResource",
+      "ses:UntagResource",
+      "ses:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ses:CreateTenant",
+        "ses:GetTenant",
+        "ses:CreateTenantResourceAssociation",
+        "ses:ListTenantResources",
+        "ses:UntagResource",
+        "ses:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ses:GetTenant",
+        "ses:ListTenantResources"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ses:GetTenant",
+        "ses:CreateTenantResourceAssociation",
+        "ses:DeleteTenantResourceAssociation",
+        "ses:ListTenantResources",
+        "ses:TagResource",
+        "ses:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ses:GetTenant",
+        "ses:DeleteTenant"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ses:ListTenants"
+      ]
+    }
+  }
+}
