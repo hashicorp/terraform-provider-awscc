@@ -570,6 +570,17 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "MlflowProperties": {
+		//	      "additionalProperties": false,
+		//	      "description": "MLflow Properties Input",
+		//	      "properties": {
+		//	        "TrackingServerArn": {
+		//	          "description": "The ARN of the MLflow tracking server",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "RedshiftProperties": {
 		//	      "additionalProperties": false,
 		//	      "description": "Redshift Properties Input",
@@ -693,7 +704,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "properties": {
 		//	        "ComputeArn": {
 		//	          "maxLength": 2048,
-		//	          "pattern": "^arn:aws(-(cn|us-gov|iso(-[bef])?))?:(elasticmapreduce|emr-serverless):.*",
+		//	          "pattern": "^arn:aws(-(cn|us-gov|iso(-[bef])?))?:(elasticmapreduce|emr-serverless|emr-containers):.*",
 		//	          "type": "string"
 		//	        },
 		//	        "InstanceProfileArn": {
@@ -709,6 +720,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "LogUri": {
 		//	          "maxLength": 2048,
 		//	          "pattern": "^s3://.+$",
+		//	          "type": "string"
+		//	        },
+		//	        "ManagedEndpointArn": {
+		//	          "maxLength": 2048,
 		//	          "type": "string"
 		//	        },
 		//	        "PythonVirtualEnv": {
@@ -1054,6 +1069,18 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "IAM Properties Input",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: MlflowProperties
+				"mlflow_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TrackingServerArn
+						"tracking_server_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the MLflow tracking server",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "MLflow Properties Input",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: RedshiftProperties
 				"redshift_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1168,6 +1195,10 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: LogUri
 						"log_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ManagedEndpointArn
+						"managed_endpoint_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: PythonVirtualEnv
@@ -1329,7 +1360,9 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kms_key_arn":                              "KmsKeyArn",
 		"lineage_sync":                             "LineageSync",
 		"log_uri":                                  "LogUri",
+		"managed_endpoint_arn":                     "ManagedEndpointArn",
 		"match_criteria":                           "MatchCriteria",
+		"mlflow_properties":                        "MlflowProperties",
 		"name":                                     "Name",
 		"number_of_workers":                        "NumberOfWorkers",
 		"o_auth_2_client_application":              "OAuth2ClientApplication",
@@ -1364,6 +1397,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"subnet_id_list":                           "SubnetIdList",
 		"token_url":                                "TokenUrl",
 		"token_url_parameters_map":                 "TokenUrlParametersMap",
+		"tracking_server_arn":                      "TrackingServerArn",
 		"trusted_certificates_s3_uri":              "TrustedCertificatesS3Uri",
 		"type":                                     "Type",
 		"user_managed_client_application_client_id":     "UserManagedClientApplicationClientId",

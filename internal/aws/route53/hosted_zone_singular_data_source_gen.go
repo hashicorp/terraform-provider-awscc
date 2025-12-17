@@ -49,6 +49,31 @@ func hostedZoneDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A complex type that contains an optional comment.\n If you don't want to specify a comment, omit the ``HostedZoneConfig`` and ``Comment`` elements.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: HostedZoneFeatures
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "EnableAcceleratedRecovery": {
+		//	      "description": "Enable accelerated recovery on your public hosted zone to gain the ability to make changes to DNS records in the event of us-east-1 unavailability.",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"hosted_zone_features": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnableAcceleratedRecovery
+				"enable_accelerated_recovery": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Enable accelerated recovery on your public hosted zone to gain the ability to make changes to DNS records in the event of us-east-1 unavailability.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HostedZoneTags
 		// CloudFormation resource type schema:
 		//
@@ -229,7 +254,9 @@ func hostedZoneDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"cloudwatch_logs_log_group_arn": "CloudWatchLogsLogGroupArn",
 		"comment":                       "Comment",
+		"enable_accelerated_recovery":   "EnableAcceleratedRecovery",
 		"hosted_zone_config":            "HostedZoneConfig",
+		"hosted_zone_features":          "HostedZoneFeatures",
 		"hosted_zone_id":                "Id",
 		"hosted_zone_tags":              "HostedZoneTags",
 		"key":                           "Key",

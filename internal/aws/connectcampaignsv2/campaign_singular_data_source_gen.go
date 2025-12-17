@@ -58,6 +58,11 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "required": [
 		//	        "Email"
 		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "WhatsApp"
+		//	      ]
 		//	    }
 		//	  ],
 		//	  "description": "The possible types of channel subtype config parameters",
@@ -74,7 +79,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "DefaultOutboundConfig": {
 		//	          "additionalProperties": false,
-		//	          "description": "Default SMS outbound config",
+		//	          "description": "Default Email outbound config",
 		//	          "properties": {
 		//	            "ConnectSourceEmailAddress": {
 		//	              "description": "Email address used for Email messages",
@@ -222,6 +227,12 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "description": "The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.",
 		//	              "maxLength": 100,
 		//	              "type": "string"
+		//	            },
+		//	            "RingTimeout": {
+		//	              "description": "Maximum ring time for outbound calls in seconds",
+		//	              "maximum": 60,
+		//	              "minimum": 15,
+		//	              "type": "integer"
 		//	            }
 		//	          },
 		//	          "required": [
@@ -342,6 +353,60 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "DefaultOutboundConfig"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "WhatsApp": {
+		//	      "additionalProperties": false,
+		//	      "description": "WhatsApp Channel Subtype config",
+		//	      "properties": {
+		//	        "Capacity": {
+		//	          "description": "Allocates outbound capacity for the specific channel of this campaign between multiple active campaigns",
+		//	          "maximum": 1,
+		//	          "minimum": 0.01,
+		//	          "type": "number"
+		//	        },
+		//	        "DefaultOutboundConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "Default WhatsApp outbound config",
+		//	          "properties": {
+		//	            "ConnectSourcePhoneNumberArn": {
+		//	              "description": "Arn",
+		//	              "maxLength": 500,
+		//	              "minLength": 20,
+		//	              "pattern": "^arn:.*$",
+		//	              "type": "string"
+		//	            },
+		//	            "WisdomTemplateArn": {
+		//	              "description": "Arn",
+		//	              "maxLength": 500,
+		//	              "minLength": 20,
+		//	              "pattern": "^arn:.*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ConnectSourcePhoneNumberArn",
+		//	            "WisdomTemplateArn"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "OutboundMode": {
+		//	          "additionalProperties": false,
+		//	          "description": "WhatsApp Outbound Mode",
+		//	          "properties": {
+		//	            "AgentlessConfig": {
+		//	              "additionalProperties": false,
+		//	              "description": "Agentless config",
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "OutboundMode",
+		//	        "DefaultOutboundConfig"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -375,7 +440,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "Default SMS outbound config",
+							Description: "Default Email outbound config",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: OutboundMode
@@ -480,6 +545,11 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Description: "The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
+								// Property: RingTimeout
+								"ring_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Maximum ring time for outbound calls in seconds",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Default Telephone Outbound config",
 							Computed:    true,
@@ -553,6 +623,48 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Telephony Channel Subtype config",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: WhatsApp
+				"whats_app": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Capacity
+						"capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "Allocates outbound capacity for the specific channel of this campaign between multiple active campaigns",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DefaultOutboundConfig
+						"default_outbound_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ConnectSourcePhoneNumberArn
+								"connect_source_phone_number_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Arn",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: WisdomTemplateArn
+								"wisdom_template_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Arn",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Default WhatsApp outbound config",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: OutboundMode
+						"outbound_mode": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AgentlessConfig
+								"agentless_config": schema.StringAttribute{ /*START ATTRIBUTE*/
+									CustomType:  jsontypes.NormalizedType{},
+									Description: "Agentless config",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "WhatsApp Outbound Mode",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "WhatsApp Channel Subtype config",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1037,6 +1149,123 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "OpenHours"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "WhatsApp": {
+		//	      "additionalProperties": false,
+		//	      "description": "Time window config",
+		//	      "properties": {
+		//	        "OpenHours": {
+		//	          "additionalProperties": false,
+		//	          "description": "Open Hours config",
+		//	          "properties": {
+		//	            "DailyHours": {
+		//	              "description": "Daily Hours map",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "Daily Hour",
+		//	                "properties": {
+		//	                  "Key": {
+		//	                    "description": "Day of week",
+		//	                    "enum": [
+		//	                      "MONDAY",
+		//	                      "TUESDAY",
+		//	                      "WEDNESDAY",
+		//	                      "THURSDAY",
+		//	                      "FRIDAY",
+		//	                      "SATURDAY",
+		//	                      "SUNDAY"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Value": {
+		//	                    "description": "List of time range",
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Time range in 24 hour format",
+		//	                      "properties": {
+		//	                        "EndTime": {
+		//	                          "description": "Time in ISO 8601 format, e.g. T23:11",
+		//	                          "pattern": "^T\\d{2}:\\d{2}$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "StartTime": {
+		//	                          "description": "Time in ISO 8601 format, e.g. T23:11",
+		//	                          "pattern": "^T\\d{2}:\\d{2}$",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "StartTime",
+		//	                        "EndTime"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "type": "array"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "DailyHours"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "RestrictedPeriods": {
+		//	          "additionalProperties": false,
+		//	          "description": "Restricted period config",
+		//	          "oneOf": [
+		//	            {
+		//	              "required": [
+		//	                "RestrictedPeriodList"
+		//	              ]
+		//	            }
+		//	          ],
+		//	          "properties": {
+		//	            "RestrictedPeriodList": {
+		//	              "description": "List of restricted period",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "Restricted period",
+		//	                "properties": {
+		//	                  "EndDate": {
+		//	                    "description": "Date in ISO 8601 format, e.g. 2024-01-01",
+		//	                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Name": {
+		//	                    "description": "The name of a restricted period",
+		//	                    "maxLength": 127,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "StartDate": {
+		//	                    "description": "Date in ISO 8601 format, e.g. 2024-01-01",
+		//	                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "StartDate",
+		//	                  "EndDate"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "OpenHours"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -1222,6 +1451,84 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Telephony
 				"telephony": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: OpenHours
+						"open_hours": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DailyHours
+								"daily_hours": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Key
+											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Day of week",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: EndTime
+														"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Time in ISO 8601 format, e.g. T23:11",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: StartTime
+														"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Time in ISO 8601 format, e.g. T23:11",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Description: "List of time range",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "Daily Hours map",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Open Hours config",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RestrictedPeriods
+						"restricted_periods": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: RestrictedPeriodList
+								"restricted_period_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: EndDate
+											"end_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Date in ISO 8601 format, e.g. 2024-01-01",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name of a restricted period",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: StartDate
+											"start_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Date in ISO 8601 format, e.g. 2024-01-01",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "List of restricted period",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Restricted period config",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Time window config",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: WhatsApp
+				"whats_app": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: OpenHours
 						"open_hours": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1507,6 +1814,21 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "One or more tags.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Type
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Campaign type",
+		//	  "enum": [
+		//	    "MANAGED",
+		//	    "JOURNEY"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Campaign type",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -1569,6 +1891,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"refresh_frequency":                 "RefreshFrequency",
 		"restricted_period_list":            "RestrictedPeriodList",
 		"restricted_periods":                "RestrictedPeriods",
+		"ring_timeout":                      "RingTimeout",
 		"schedule":                          "Schedule",
 		"sms":                               "Sms",
 		"source":                            "Source",
@@ -1578,8 +1901,10 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags":                              "Tags",
 		"telephony":                         "Telephony",
 		"timeout_config":                    "TimeoutConfig",
+		"type":                              "Type",
 		"unit":                              "Unit",
 		"value":                             "Value",
+		"whats_app":                         "WhatsApp",
 		"wisdom_template_arn":               "WisdomTemplateArn",
 	})
 

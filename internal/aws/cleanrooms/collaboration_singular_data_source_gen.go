@@ -236,6 +236,18 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	            "IsResponsible"
 		//	          ],
 		//	          "type": "object"
+		//	        },
+		//	        "SyntheticDataGeneration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "IsResponsible": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "IsResponsible"
+		//	          ],
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -285,6 +297,16 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 						}, /*END ATTRIBUTE*/
 						// Property: ModelTraining
 						"model_training": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IsResponsible
+								"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SyntheticDataGeneration
+						"synthetic_data_generation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: IsResponsible
 								"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -477,6 +499,18 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                  "IsResponsible"
 		//	                ],
 		//	                "type": "object"
+		//	              },
+		//	              "SyntheticDataGeneration": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "IsResponsible": {
+		//	                    "type": "boolean"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "IsResponsible"
+		//	                ],
+		//	                "type": "object"
 		//	              }
 		//	            },
 		//	            "type": "object"
@@ -565,6 +599,16 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 									}, /*END ATTRIBUTE*/
 									// Property: ModelTraining
 									"model_training": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: IsResponsible
+											"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: SyntheticDataGeneration
+									"synthetic_data_generation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: IsResponsible
 											"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -712,6 +756,7 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		"preserve_nulls":                              "PreserveNulls",
 		"query_compute":                               "QueryCompute",
 		"query_log_status":                            "QueryLogStatus",
+		"synthetic_data_generation":                   "SyntheticDataGeneration",
 		"tags":                                        "Tags",
 		"value":                                       "Value",
 	})

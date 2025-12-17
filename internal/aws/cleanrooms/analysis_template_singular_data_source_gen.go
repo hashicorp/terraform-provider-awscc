@@ -488,6 +488,121 @@ func analysisTemplateDataSource(ctx context.Context) (datasource.DataSource, err
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: SyntheticDataParameters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "properties": {
+		//	    "MlSyntheticDataParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ColumnClassification": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ColumnMapping": {
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "ColumnName": {
+		//	                    "maxLength": 128,
+		//	                    "pattern": "^[a-z0-9_](([a-z0-9_]+-)*([a-z0-9_]+))?$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "ColumnType": {
+		//	                    "enum": [
+		//	                      "CATEGORICAL",
+		//	                      "NUMERICAL"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "IsPredictiveValue": {
+		//	                    "type": "boolean"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "ColumnName",
+		//	                  "ColumnType",
+		//	                  "IsPredictiveValue"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 1000,
+		//	              "minItems": 5,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ColumnMapping"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Epsilon": {
+		//	          "maximum": 10,
+		//	          "minimum": 0.0001,
+		//	          "type": "number"
+		//	        },
+		//	        "MaxMembershipInferenceAttackScore": {
+		//	          "maximum": 1,
+		//	          "minimum": 0.5,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Epsilon",
+		//	        "MaxMembershipInferenceAttackScore",
+		//	        "ColumnClassification"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"synthetic_data_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MlSyntheticDataParameters
+				"ml_synthetic_data_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ColumnClassification
+						"column_classification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ColumnMapping
+								"column_mapping": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ColumnName
+											"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: ColumnType
+											"column_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: IsPredictiveValue
+											"is_predictive_value": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Epsilon
+						"epsilon": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaxMembershipInferenceAttackScore
+						"max_membership_inference_attack_score": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -549,36 +664,45 @@ func analysisTemplateDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithCloudFormationTypeName("AWS::CleanRooms::AnalysisTemplate").WithTerraformTypeName("awscc_cleanrooms_analysis_template")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"additional_artifact_hashes":   "AdditionalArtifactHashes",
-		"additional_artifacts":         "AdditionalArtifacts",
-		"analysis_parameters":          "AnalysisParameters",
-		"analysis_template_identifier": "AnalysisTemplateIdentifier",
-		"arn":                          "Arn",
-		"artifacts":                    "Artifacts",
-		"bucket":                       "Bucket",
-		"collaboration_arn":            "CollaborationArn",
-		"collaboration_identifier":     "CollaborationIdentifier",
-		"default_value":                "DefaultValue",
-		"description":                  "Description",
-		"entry_point":                  "EntryPoint",
-		"entry_point_hash":             "EntryPointHash",
-		"error_message_configuration":  "ErrorMessageConfiguration",
-		"format":                       "Format",
-		"key":                          "Key",
-		"location":                     "Location",
-		"membership_arn":               "MembershipArn",
-		"membership_identifier":        "MembershipIdentifier",
-		"name":                         "Name",
-		"referenced_tables":            "ReferencedTables",
-		"role_arn":                     "RoleArn",
-		"schema":                       "Schema",
-		"sha_256":                      "Sha256",
-		"source":                       "Source",
-		"source_metadata":              "SourceMetadata",
-		"tags":                         "Tags",
-		"text":                         "Text",
-		"type":                         "Type",
-		"value":                        "Value",
+		"additional_artifact_hashes":            "AdditionalArtifactHashes",
+		"additional_artifacts":                  "AdditionalArtifacts",
+		"analysis_parameters":                   "AnalysisParameters",
+		"analysis_template_identifier":          "AnalysisTemplateIdentifier",
+		"arn":                                   "Arn",
+		"artifacts":                             "Artifacts",
+		"bucket":                                "Bucket",
+		"collaboration_arn":                     "CollaborationArn",
+		"collaboration_identifier":              "CollaborationIdentifier",
+		"column_classification":                 "ColumnClassification",
+		"column_mapping":                        "ColumnMapping",
+		"column_name":                           "ColumnName",
+		"column_type":                           "ColumnType",
+		"default_value":                         "DefaultValue",
+		"description":                           "Description",
+		"entry_point":                           "EntryPoint",
+		"entry_point_hash":                      "EntryPointHash",
+		"epsilon":                               "Epsilon",
+		"error_message_configuration":           "ErrorMessageConfiguration",
+		"format":                                "Format",
+		"is_predictive_value":                   "IsPredictiveValue",
+		"key":                                   "Key",
+		"location":                              "Location",
+		"max_membership_inference_attack_score": "MaxMembershipInferenceAttackScore",
+		"membership_arn":                        "MembershipArn",
+		"membership_identifier":                 "MembershipIdentifier",
+		"ml_synthetic_data_parameters":          "MlSyntheticDataParameters",
+		"name":                                  "Name",
+		"referenced_tables":                     "ReferencedTables",
+		"role_arn":                              "RoleArn",
+		"schema":                                "Schema",
+		"sha_256":                               "Sha256",
+		"source":                                "Source",
+		"source_metadata":                       "SourceMetadata",
+		"synthetic_data_parameters":             "SyntheticDataParameters",
+		"tags":                                  "Tags",
+		"text":                                  "Text",
+		"type":                                  "Type",
+		"value":                                 "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

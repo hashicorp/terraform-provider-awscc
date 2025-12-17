@@ -281,24 +281,24 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "JwtValidationConfig": {
 		//	        "additionalProperties": false,
-		//	        "description": "",
+		//	        "description": "[HTTPS listeners] Information for validating JWT access tokens in client requests. Specify only when ``Type`` is ``jwt-validation``.",
 		//	        "properties": {
 		//	          "AdditionalClaims": {
 		//	            "description": "",
 		//	            "items": {
 		//	              "additionalProperties": false,
-		//	              "description": "",
+		//	              "description": "Information about an additional claim to validate.",
 		//	              "properties": {
 		//	                "Format": {
-		//	                  "description": "",
+		//	                  "description": "The format of the claim value.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Name": {
-		//	                  "description": "",
+		//	                  "description": "The name of the claim. You can't specify ``exp``, ``iss``, ``nbf``, or ``iat`` because we validate them by default.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Values": {
-		//	                  "description": "",
+		//	                  "description": "The claim value. The maximum size of the list is 10. Each value can be up to 256 characters in length. If the format is ``space-separated-values``, the values can't include spaces.",
 		//	                  "items": {
 		//	                    "type": "string"
 		//	                  },
@@ -581,18 +581,18 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Format
 										"format": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "",
+											Description: "The format of the claim value.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Name
 										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "",
+											Description: "The name of the claim. You can't specify ``exp``, ``iss``, ``nbf``, or ``iat`` because we validate them by default.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Values
 										"values": schema.ListAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Description: "",
+											Description: "The claim value. The maximum size of the list is 10. Each value can be up to 256 characters in length. If the format is ``space-separated-values``, the values can't include spaces.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -611,7 +611,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "",
+						Description: "[HTTPS listeners] Information for validating JWT access tokens in client requests. Specify only when ``Type`` is ``jwt-validation``.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Order
@@ -803,11 +803,11 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The protocol for connections from clients to the load balancer. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocols are TCP, TLS, UDP, and TCP_UDP. You can’t specify the UDP or TCP_UDP protocol if dual-stack mode is enabled. You can't specify a protocol for a Gateway Load Balancer.",
+		//	  "description": "The protocol for connections from clients to the load balancer. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocols are TCP, TLS, UDP, TCP_UDP, QUIC, and TCP_QUIC. You can’t specify the UDP, TCP_UDP, QUIC, or TCP_QUIC protocol if dual-stack mode is enabled. You can't specify a protocol for a Gateway Load Balancer.",
 		//	  "type": "string"
 		//	}
 		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The protocol for connections from clients to the load balancer. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocols are TCP, TLS, UDP, and TCP_UDP. You can’t specify the UDP or TCP_UDP protocol if dual-stack mode is enabled. You can't specify a protocol for a Gateway Load Balancer.",
+			Description: "The protocol for connections from clients to the load balancer. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocols are TCP, TLS, UDP, TCP_UDP, QUIC, and TCP_QUIC. You can’t specify the UDP, TCP_UDP, QUIC, or TCP_QUIC protocol if dual-stack mode is enabled. You can't specify a protocol for a Gateway Load Balancer.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SslPolicy

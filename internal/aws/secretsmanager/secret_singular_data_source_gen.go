@@ -278,11 +278,11 @@ func secretDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The exact string that identifies the third-party partner that holds the external secret. For more information, see [Managed external secret partners](https://docs.aws.amazon.com/secretsmanager/latest/userguide/mes-partners.html).",
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The exact string that identifies the third-party partner that holds the external secret. For more information, see [Managed external secret partners](https://docs.aws.amazon.com/secretsmanager/latest/userguide/mes-partners.html).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

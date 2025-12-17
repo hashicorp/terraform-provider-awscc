@@ -410,7 +410,8 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            },
 		//	            "AllowedInstanceTypes": {
 		//	              "items": {
-		//	                "pattern": "^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$",
+		//	                "maxLength": 100,
+		//	                "minLength": 1,
 		//	                "type": "string"
 		//	              },
 		//	              "maxItems": 100,
@@ -485,7 +486,8 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            },
 		//	            "ExcludedInstanceTypes": {
 		//	              "items": {
-		//	                "pattern": "^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$",
+		//	                "maxLength": 100,
+		//	                "minLength": 1,
 		//	                "type": "string"
 		//	              },
 		//	              "maxItems": 100,

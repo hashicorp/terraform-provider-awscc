@@ -304,6 +304,17 @@ func siteToSiteVpnAttachmentDataSource(ctx context.Context) (datasource.DataSour
 			Description: "The ARN of the Resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RoutingPolicyLabel
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Routing policy label",
+		//	  "type": "string"
+		//	}
+		"routing_policy_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Routing policy label",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SegmentName
 		// CloudFormation resource type schema:
 		//
@@ -425,6 +436,7 @@ func siteToSiteVpnAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		"proposed_network_function_group_change": "ProposedNetworkFunctionGroupChange",
 		"proposed_segment_change":                "ProposedSegmentChange",
 		"resource_arn":                           "ResourceArn",
+		"routing_policy_label":                   "RoutingPolicyLabel",
 		"segment_name":                           "SegmentName",
 		"state":                                  "State",
 		"tags":                                   "Tags",

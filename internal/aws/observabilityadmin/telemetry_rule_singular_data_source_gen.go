@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -33,6 +34,108 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	      "additionalProperties": false,
 		//	      "description": "The destination configuration for telemetry data",
 		//	      "properties": {
+		//	        "CloudtrailParameters": {
+		//	          "additionalProperties": false,
+		//	          "description": "Telemetry parameters for Cloudtrail",
+		//	          "properties": {
+		//	            "AdvancedEventSelectors": {
+		//	              "description": "Create fine-grained selectors for AWS CloudTrail management and data.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "An advanced event selector that includes optional name and field selectors",
+		//	                "properties": {
+		//	                  "FieldSelectors": {
+		//	                    "description": "Contains all selector statements in an advanced event selector.",
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "description": "A single selector statement in an advanced event selector.",
+		//	                      "properties": {
+		//	                        "EndsWith": {
+		//	                          "description": "An operator that includes events that match the last few characters of the event record field specified as the value of Field.",
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "type": "array",
+		//	                          "uniqueItems": true
+		//	                        },
+		//	                        "Equals": {
+		//	                          "description": "An operator that includes events that match the exact value of the event record field specified as the value of Field.",
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "type": "array",
+		//	                          "uniqueItems": true
+		//	                        },
+		//	                        "Field": {
+		//	                          "description": "A field in a CloudTrail event record on which to filter events to be logged",
+		//	                          "maxLength": 1000,
+		//	                          "minLength": 1,
+		//	                          "type": "string"
+		//	                        },
+		//	                        "NotEndsWith": {
+		//	                          "description": "An operator that excludes events that match the last few characters of the event record field specified as the value of Field.",
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "type": "array",
+		//	                          "uniqueItems": true
+		//	                        },
+		//	                        "NotEquals": {
+		//	                          "description": "An operator that excludes events that match the exact value of the event record field specified as the value of Field.",
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "type": "array",
+		//	                          "uniqueItems": true
+		//	                        },
+		//	                        "NotStartsWith": {
+		//	                          "description": "An operator that excludes events that match the first few characters of the event record field specified as the value of Field.",
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "type": "array",
+		//	                          "uniqueItems": true
+		//	                        },
+		//	                        "StartsWith": {
+		//	                          "description": "An operator that includes events that match the first few characters of the event record field specified as the value of Field.",
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "type": "array",
+		//	                          "uniqueItems": true
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "type": "array",
+		//	                    "uniqueItems": true
+		//	                  },
+		//	                  "Name": {
+		//	                    "description": "An optional descriptive name for the advanced event selector",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "FieldSelectors"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "AdvancedEventSelectors"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "DestinationPattern": {
 		//	          "description": "Pattern for telemetry data destination",
 		//	          "type": "string"
@@ -43,6 +146,43 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	            "cloud-watch-logs"
 		//	          ],
 		//	          "type": "string"
+		//	        },
+		//	        "ELBLoadBalancerLoggingParameters": {
+		//	          "description": "Telemetry parameters for ELB/NLB Load Balancer Logs",
+		//	          "properties": {
+		//	            "FieldDelimiter": {
+		//	              "description": "A delimiter to delineate log fields",
+		//	              "type": "string"
+		//	            },
+		//	            "OutputFormat": {
+		//	              "enum": [
+		//	                "plain",
+		//	                "json"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "LogDeliveryParameters": {
+		//	          "description": "Parameters for BedrockAgentCore log delivery",
+		//	          "properties": {
+		//	            "LogTypes": {
+		//	              "description": "Types of logs to deliver for BedrockAgentCore resources",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "enum": [
+		//	                  "APPLICATION_LOGS",
+		//	                  "USAGE_LOGS"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "minItems": 1,
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        },
 		//	        "RetentionInDays": {
 		//	          "description": "Number of days to retain the telemetry data in the specified destination",
@@ -66,6 +206,147 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "WAFLoggingParameters": {
+		//	          "description": "Telemetry parameters for WAF v2 Web ACL",
+		//	          "properties": {
+		//	            "LogType": {
+		//	              "description": "The type of logs to generate for WAF.",
+		//	              "enum": [
+		//	                "WAF_LOGS"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "LoggingFilter": {
+		//	              "description": "Default handling for logs that don't match any of the specified filtering conditions.",
+		//	              "properties": {
+		//	                "DefaultBehavior": {
+		//	                  "description": "The behavior required of the filter.",
+		//	                  "enum": [
+		//	                    "KEEP",
+		//	                    "DROP"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "Filters": {
+		//	                  "description": "A list of filters to be applied.",
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "description": "A filter to be applied",
+		//	                    "properties": {
+		//	                      "Behavior": {
+		//	                        "description": "The behavior required of the filter.",
+		//	                        "enum": [
+		//	                          "KEEP",
+		//	                          "DROP"
+		//	                        ],
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Conditions": {
+		//	                        "description": "A list of conditions for a filter.",
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "description": "A condition for a filter.",
+		//	                          "properties": {
+		//	                            "ActionCondition": {
+		//	                              "description": "The condition of the action desired in the filter.",
+		//	                              "properties": {
+		//	                                "Action": {
+		//	                                  "description": "The enumerated action to take.",
+		//	                                  "enum": [
+		//	                                    "ALLOW",
+		//	                                    "BLOCK",
+		//	                                    "COUNT",
+		//	                                    "CAPTCHA",
+		//	                                    "CHALLENGE",
+		//	                                    "EXCLUDED_AS_COUNT"
+		//	                                  ],
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            },
+		//	                            "LabelNameCondition": {
+		//	                              "description": "The label name of the condition.",
+		//	                              "properties": {
+		//	                                "LabelName": {
+		//	                                  "description": "The label name of the condition.",
+		//	                                  "maxLength": 1024,
+		//	                                  "minLength": 1,
+		//	                                  "pattern": "^[0-9A-Za-z_\\-:]+$",
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            }
+		//	                          },
+		//	                          "type": "object"
+		//	                        },
+		//	                        "minLength": 1,
+		//	                        "type": "array",
+		//	                        "uniqueItems": true
+		//	                      },
+		//	                      "Requirement": {
+		//	                        "description": "The requirement portion of the filter.",
+		//	                        "enum": [
+		//	                          "MEETS_ALL",
+		//	                          "MEETS_ANY"
+		//	                        ],
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "minLength": 1,
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "RedactedFields": {
+		//	              "description": "Fields not to be included in the logs.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "description": "The field that we want to match this rule to.",
+		//	                "properties": {
+		//	                  "Method": {
+		//	                    "description": "The method with which to match this rule.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "QueryString": {
+		//	                    "description": "The query string to find the resource to match this field to.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "SingleHeader": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Header for the field to match.",
+		//	                    "properties": {
+		//	                      "Name": {
+		//	                        "description": "The name of the header",
+		//	                        "maxLength": 64,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Name"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "UriPath": {
+		//	                    "description": "This is the URI path to match this rule to.",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 100,
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -73,7 +354,14 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	    "ResourceType": {
 		//	      "description": "Resource Type associated with the Telemetry Rule",
 		//	      "enum": [
-		//	        "AWS::EC2::VPC"
+		//	        "AWS::EC2::VPC",
+		//	        "AWS::WAFv2::WebACL",
+		//	        "AWS::CloudTrail",
+		//	        "AWS::EKS::Cluster",
+		//	        "AWS::ElasticLoadBalancingV2::LoadBalancer",
+		//	        "AWS::BedrockAgentCore::Runtime",
+		//	        "AWS::BedrockAgentCore::Browser",
+		//	        "AWS::BedrockAgentCore::CodeInterpreter"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -81,10 +369,30 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	      "description": "Selection Criteria on resource level for rule application",
 		//	      "type": "string"
 		//	    },
+		//	    "TelemetrySourceTypes": {
+		//	      "description": "The telemetry source types for a telemetry rule.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "The telemetry source type that goes into the array.",
+		//	        "enum": [
+		//	          "VPC_FLOW_LOGS",
+		//	          "ROUTE53_RESOLVER_QUERY_LOGS",
+		//	          "EKS_AUDIT_LOGS",
+		//	          "EKS_AUTHENTICATOR_LOGS",
+		//	          "EKS_CONTROLLER_MANAGER_LOGS",
+		//	          "EKS_SCHEDULER_LOGS",
+		//	          "EKS_API_LOGS"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
 		//	    "TelemetryType": {
 		//	      "description": "Telemetry Type associated with the Telemetry Rule",
 		//	      "enum": [
-		//	        "Logs"
+		//	        "Logs",
+		//	        "Traces"
 		//	      ],
 		//	      "type": "string"
 		//	    }
@@ -100,6 +408,77 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 				// Property: DestinationConfiguration
 				"destination_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CloudtrailParameters
+						"cloudtrail_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AdvancedEventSelectors
+								"advanced_event_selectors": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: FieldSelectors
+											"field_selectors": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: EndsWith
+														"ends_with": schema.SetAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Description: "An operator that includes events that match the last few characters of the event record field specified as the value of Field.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Equals
+														"equals": schema.SetAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Description: "An operator that includes events that match the exact value of the event record field specified as the value of Field.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Field
+														"field": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "A field in a CloudTrail event record on which to filter events to be logged",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: NotEndsWith
+														"not_ends_with": schema.SetAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Description: "An operator that excludes events that match the last few characters of the event record field specified as the value of Field.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: NotEquals
+														"not_equals": schema.SetAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Description: "An operator that excludes events that match the exact value of the event record field specified as the value of Field.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: NotStartsWith
+														"not_starts_with": schema.SetAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Description: "An operator that excludes events that match the first few characters of the event record field specified as the value of Field.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: StartsWith
+														"starts_with": schema.SetAttribute{ /*START ATTRIBUTE*/
+															ElementType: types.StringType,
+															Description: "An operator that includes events that match the first few characters of the event record field specified as the value of Field.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Description: "Contains all selector statements in an advanced event selector.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "An optional descriptive name for the advanced event selector",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "Create fine-grained selectors for AWS CloudTrail management and data.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Telemetry parameters for Cloudtrail",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: DestinationPattern
 						"destination_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Pattern for telemetry data destination",
@@ -108,6 +487,35 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 						// Property: DestinationType
 						"destination_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Type of telemetry destination",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ELBLoadBalancerLoggingParameters
+						"elb_load_balancer_logging_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FieldDelimiter
+								"field_delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A delimiter to delineate log fields",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: OutputFormat
+								"output_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Telemetry parameters for ELB/NLB Load Balancer Logs",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LogDeliveryParameters
+						"log_delivery_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: LogTypes
+								"log_types": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Types of logs to deliver for BedrockAgentCore resources",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Parameters for BedrockAgentCore log delivery",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: RetentionInDays
@@ -137,6 +545,118 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 							Description: "Telemetry parameters for VPC Flow logs",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: WAFLoggingParameters
+						"waf_logging_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: LogType
+								"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of logs to generate for WAF.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LoggingFilter
+								"logging_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DefaultBehavior
+										"default_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The behavior required of the filter.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Filters
+										"filters": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Behavior
+													"behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The behavior required of the filter.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Conditions
+													"conditions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: ActionCondition
+																"action_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Action
+																		"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The enumerated action to take.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																	Description: "The condition of the action desired in the filter.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: LabelNameCondition
+																"label_name_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: LabelName
+																		"label_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The label name of the condition.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																	Description: "The label name of the condition.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+														}, /*END NESTED OBJECT*/
+														Description: "A list of conditions for a filter.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Requirement
+													"requirement": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The requirement portion of the filter.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "A list of filters to be applied.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Default handling for logs that don't match any of the specified filtering conditions.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RedactedFields
+								"redacted_fields": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Method
+											"method": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The method with which to match this rule.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: QueryString
+											"query_string": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The query string to find the resource to match this field to.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SingleHeader
+											"single_header": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Name
+													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The name of the header",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Header for the field to match.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: UriPath
+											"uri_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "This is the URI path to match this rule to.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "Fields not to be included in the logs.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Telemetry parameters for WAF v2 Web ACL",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The destination configuration for telemetry data",
 					Computed:    true,
@@ -149,6 +669,12 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 				// Property: SelectionCriteria
 				"selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Selection Criteria on resource level for rule application",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TelemetrySourceTypes
+				"telemetry_source_types": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The telemetry source types for a telemetry rule.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TelemetryType
@@ -255,23 +781,57 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithCloudFormationTypeName("AWS::ObservabilityAdmin::TelemetryRule").WithTerraformTypeName("awscc_observabilityadmin_telemetry_rule")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"destination_configuration": "DestinationConfiguration",
-		"destination_pattern":       "DestinationPattern",
-		"destination_type":          "DestinationType",
-		"key":                       "Key",
-		"log_format":                "LogFormat",
-		"max_aggregation_interval":  "MaxAggregationInterval",
-		"resource_type":             "ResourceType",
-		"retention_in_days":         "RetentionInDays",
-		"rule":                      "Rule",
-		"rule_arn":                  "RuleArn",
-		"rule_name":                 "RuleName",
-		"selection_criteria":        "SelectionCriteria",
-		"tags":                      "Tags",
-		"telemetry_type":            "TelemetryType",
-		"traffic_type":              "TrafficType",
-		"value":                     "Value",
-		"vpc_flow_log_parameters":   "VPCFlowLogParameters",
+		"action":                               "Action",
+		"action_condition":                     "ActionCondition",
+		"advanced_event_selectors":             "AdvancedEventSelectors",
+		"behavior":                             "Behavior",
+		"cloudtrail_parameters":                "CloudtrailParameters",
+		"conditions":                           "Conditions",
+		"default_behavior":                     "DefaultBehavior",
+		"destination_configuration":            "DestinationConfiguration",
+		"destination_pattern":                  "DestinationPattern",
+		"destination_type":                     "DestinationType",
+		"elb_load_balancer_logging_parameters": "ELBLoadBalancerLoggingParameters",
+		"ends_with":                            "EndsWith",
+		"equals":                               "Equals",
+		"field":                                "Field",
+		"field_delimiter":                      "FieldDelimiter",
+		"field_selectors":                      "FieldSelectors",
+		"filters":                              "Filters",
+		"key":                                  "Key",
+		"label_name":                           "LabelName",
+		"label_name_condition":                 "LabelNameCondition",
+		"log_delivery_parameters":              "LogDeliveryParameters",
+		"log_format":                           "LogFormat",
+		"log_type":                             "LogType",
+		"log_types":                            "LogTypes",
+		"logging_filter":                       "LoggingFilter",
+		"max_aggregation_interval":             "MaxAggregationInterval",
+		"method":                               "Method",
+		"name":                                 "Name",
+		"not_ends_with":                        "NotEndsWith",
+		"not_equals":                           "NotEquals",
+		"not_starts_with":                      "NotStartsWith",
+		"output_format":                        "OutputFormat",
+		"query_string":                         "QueryString",
+		"redacted_fields":                      "RedactedFields",
+		"requirement":                          "Requirement",
+		"resource_type":                        "ResourceType",
+		"retention_in_days":                    "RetentionInDays",
+		"rule":                                 "Rule",
+		"rule_arn":                             "RuleArn",
+		"rule_name":                            "RuleName",
+		"selection_criteria":                   "SelectionCriteria",
+		"single_header":                        "SingleHeader",
+		"starts_with":                          "StartsWith",
+		"tags":                                 "Tags",
+		"telemetry_source_types":               "TelemetrySourceTypes",
+		"telemetry_type":                       "TelemetryType",
+		"traffic_type":                         "TrafficType",
+		"uri_path":                             "UriPath",
+		"value":                                "Value",
+		"vpc_flow_log_parameters":              "VPCFlowLogParameters",
+		"waf_logging_parameters":               "WAFLoggingParameters",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

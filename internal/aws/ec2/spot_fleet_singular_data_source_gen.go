@@ -401,6 +401,9 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "OnDemandMaxPricePercentageOverLowestPrice": {
 		//	                "type": "integer"
 		//	              },
+		//	              "RequireEncryptionInTransit": {
+		//	                "type": "boolean"
+		//	              },
 		//	              "RequireHibernateSupport": {
 		//	                "type": "boolean"
 		//	              },
@@ -954,6 +957,9 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    },
 		//	                    "OnDemandMaxPricePercentageOverLowestPrice": {
 		//	                      "type": "integer"
+		//	                    },
+		//	                    "RequireEncryptionInTransit": {
+		//	                      "type": "boolean"
 		//	                    },
 		//	                    "RequireHibernateSupport": {
 		//	                      "type": "boolean"
@@ -1510,6 +1516,10 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 									"on_demand_max_price_percentage_over_lowest_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
 										Computed: true,
 									}, /*END ATTRIBUTE*/
+									// Property: RequireEncryptionInTransit
+									"require_encryption_in_transit": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
 									// Property: RequireHibernateSupport
 									"require_hibernate_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
 										Computed: true,
@@ -1941,6 +1951,10 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 												"on_demand_max_price_percentage_over_lowest_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
 													Computed: true,
 												}, /*END ATTRIBUTE*/
+												// Property: RequireEncryptionInTransit
+												"require_encryption_in_transit": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
 												// Property: RequireHibernateSupport
 												"require_hibernate_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
 													Computed: true,
@@ -2149,6 +2163,46 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The tags to specify in SpotFleetRequestConfigData",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags to specify in SpotFleetRequestConfigData",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -2250,6 +2304,7 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"references":                                       "References",
 		"replace_unhealthy_instances":                      "ReplaceUnhealthyInstances",
 		"replacement_strategy":                             "ReplacementStrategy",
+		"require_encryption_in_transit":                    "RequireEncryptionInTransit",
 		"require_hibernate_support":                        "RequireHibernateSupport",
 		"resource_type":                                    "ResourceType",
 		"secondary_private_ip_address_count":               "SecondaryPrivateIpAddressCount",

@@ -8,6 +8,7 @@ package workspacesweb
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -59,6 +60,296 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"associated_portal_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: BrandingConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ColorTheme": {
+		//	      "enum": [
+		//	        "Light",
+		//	        "Dark"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Favicon": {
+		//	      "pattern": "",
+		//	      "type": "string"
+		//	    },
+		//	    "FaviconMetadata": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "FileExtension": {
+		//	          "maxLength": 131072,
+		//	          "minLength": 0,
+		//	          "pattern": "^[\\s\\S]*$",
+		//	          "type": "string"
+		//	        },
+		//	        "LastUploadTimestamp": {
+		//	          "format": "date-time",
+		//	          "type": "string"
+		//	        },
+		//	        "MimeType": {
+		//	          "enum": [
+		//	            "image/png",
+		//	            "image/jpeg",
+		//	            "image/x-icon"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "FileExtension",
+		//	        "LastUploadTimestamp",
+		//	        "MimeType"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "LocalizedStrings": {
+		//	      "additionalProperties": false,
+		//	      "patternProperties": {
+		//	        "": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "BrowserTabTitle": {
+		//	              "pattern": "^[^\u003c\u003e\u0026'`~\\\\]*$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContactButtonText": {
+		//	              "pattern": "^[^\u003c\u003e\u0026'`~\\\\]*$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContactLink": {
+		//	              "pattern": "^(https?://|mailto:).*",
+		//	              "type": "string"
+		//	            },
+		//	            "LoadingText": {
+		//	              "pattern": "^[^\u003c\u003e\u0026'`~\\\\]*$",
+		//	              "type": "string"
+		//	            },
+		//	            "LoginButtonText": {
+		//	              "pattern": "^[^\u003c\u003e\u0026'`~\\\\]*$",
+		//	              "type": "string"
+		//	            },
+		//	            "LoginDescription": {
+		//	              "pattern": "^[^\u003c\u003e\u0026'`~\\\\]*$",
+		//	              "type": "string"
+		//	            },
+		//	            "LoginTitle": {
+		//	              "pattern": "^[^\u003c\u003e\u0026'`~\\\\]*$",
+		//	              "type": "string"
+		//	            },
+		//	            "WelcomeText": {
+		//	              "pattern": "^[^\u003c\u003e\u0026'`~\\\\]*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "BrowserTabTitle",
+		//	            "WelcomeText"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Logo": {
+		//	      "pattern": "",
+		//	      "type": "string"
+		//	    },
+		//	    "LogoMetadata": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "FileExtension": {
+		//	          "maxLength": 131072,
+		//	          "minLength": 0,
+		//	          "pattern": "^[\\s\\S]*$",
+		//	          "type": "string"
+		//	        },
+		//	        "LastUploadTimestamp": {
+		//	          "format": "date-time",
+		//	          "type": "string"
+		//	        },
+		//	        "MimeType": {
+		//	          "enum": [
+		//	            "image/png",
+		//	            "image/jpeg",
+		//	            "image/x-icon"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "FileExtension",
+		//	        "LastUploadTimestamp",
+		//	        "MimeType"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "TermsOfService": {
+		//	      "maxLength": 153600,
+		//	      "type": "string"
+		//	    },
+		//	    "Wallpaper": {
+		//	      "pattern": "",
+		//	      "type": "string"
+		//	    },
+		//	    "WallpaperMetadata": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "FileExtension": {
+		//	          "maxLength": 131072,
+		//	          "minLength": 0,
+		//	          "pattern": "^[\\s\\S]*$",
+		//	          "type": "string"
+		//	        },
+		//	        "LastUploadTimestamp": {
+		//	          "format": "date-time",
+		//	          "type": "string"
+		//	        },
+		//	        "MimeType": {
+		//	          "enum": [
+		//	            "image/png",
+		//	            "image/jpeg",
+		//	            "image/x-icon"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "FileExtension",
+		//	        "LastUploadTimestamp",
+		//	        "MimeType"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"branding_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ColorTheme
+				"color_theme": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Favicon
+				"favicon": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: FaviconMetadata
+				"favicon_metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: FileExtension
+						"file_extension": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LastUploadTimestamp
+						"last_upload_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType: timetypes.RFC3339Type{},
+							Computed:   true,
+						}, /*END ATTRIBUTE*/
+						// Property: MimeType
+						"mime_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LocalizedStrings
+				"localized_strings":       // Pattern: ""
+				schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BrowserTabTitle
+							"browser_tab_title": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ContactButtonText
+							"contact_button_text": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ContactLink
+							"contact_link": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: LoadingText
+							"loading_text": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: LoginButtonText
+							"login_button_text": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: LoginDescription
+							"login_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: LoginTitle
+							"login_title": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: WelcomeText
+							"welcome_text": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Logo
+				"logo": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LogoMetadata
+				"logo_metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: FileExtension
+						"file_extension": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LastUploadTimestamp
+						"last_upload_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType: timetypes.RFC3339Type{},
+							Computed:   true,
+						}, /*END ATTRIBUTE*/
+						// Property: MimeType
+						"mime_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TermsOfService
+				"terms_of_service": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Wallpaper
+				"wallpaper": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: WallpaperMetadata
+				"wallpaper_metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: FileExtension
+						"file_extension": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LastUploadTimestamp
+						"last_upload_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType: timetypes.RFC3339Type{},
+							Computed:   true,
+						}, /*END ATTRIBUTE*/
+						// Property: MimeType
+						"mime_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: CookieSynchronizationConfiguration
 		// CloudFormation resource type schema:
@@ -443,6 +734,11 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"allowlist":                            "Allowlist",
 		"associated_portal_arns":               "AssociatedPortalArns",
 		"blocklist":                            "Blocklist",
+		"branding_configuration":               "BrandingConfiguration",
+		"browser_tab_title":                    "BrowserTabTitle",
+		"color_theme":                          "ColorTheme",
+		"contact_button_text":                  "ContactButtonText",
+		"contact_link":                         "ContactLink",
 		"cookie_synchronization_configuration": "CookieSynchronizationConfiguration",
 		"copy_allowed":                         "CopyAllowed",
 		"customer_managed_key":                 "CustomerManagedKey",
@@ -450,21 +746,37 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"disconnect_timeout_in_minutes":        "DisconnectTimeoutInMinutes",
 		"domain":                               "Domain",
 		"download_allowed":                     "DownloadAllowed",
+		"favicon":                              "Favicon",
+		"favicon_metadata":                     "FaviconMetadata",
+		"file_extension":                       "FileExtension",
 		"hidden_toolbar_items":                 "HiddenToolbarItems",
 		"idle_disconnect_timeout_in_minutes":   "IdleDisconnectTimeoutInMinutes",
 		"key":                                  "Key",
+		"last_upload_timestamp":                "LastUploadTimestamp",
+		"loading_text":                         "LoadingText",
+		"localized_strings":                    "LocalizedStrings",
+		"login_button_text":                    "LoginButtonText",
+		"login_description":                    "LoginDescription",
+		"login_title":                          "LoginTitle",
+		"logo":                                 "Logo",
+		"logo_metadata":                        "LogoMetadata",
 		"max_display_resolution":               "MaxDisplayResolution",
+		"mime_type":                            "MimeType",
 		"name":                                 "Name",
 		"paste_allowed":                        "PasteAllowed",
 		"path":                                 "Path",
 		"print_allowed":                        "PrintAllowed",
 		"tags":                                 "Tags",
+		"terms_of_service":                     "TermsOfService",
 		"toolbar_configuration":                "ToolbarConfiguration",
 		"toolbar_type":                         "ToolbarType",
 		"upload_allowed":                       "UploadAllowed",
 		"user_settings_arn":                    "UserSettingsArn",
 		"value":                                "Value",
 		"visual_mode":                          "VisualMode",
+		"wallpaper":                            "Wallpaper",
+		"wallpaper_metadata":                   "WallpaperMetadata",
+		"welcome_text":                         "WelcomeText",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
