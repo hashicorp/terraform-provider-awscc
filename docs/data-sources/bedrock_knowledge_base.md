@@ -213,8 +213,42 @@ Read-Only:
 
 Read-Only:
 
+- `audio` (Attributes List) List of audio configurations for multi modal ingestion. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration--audio))
 - `dimensions` (Number) The dimensions details for the vector configuration used on the Bedrock embeddings model.
 - `embedding_data_type` (String) The data type for the vectors when using a model to convert text into vector embeddings.
+- `video` (Attributes List) List of video configurations for multi modal ingestion. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration--video))
+
+<a id="nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration--audio"></a>
+### Nested Schema for `knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.audio`
+
+Read-Only:
+
+- `segmentation_configuration` (Attributes) Configure the audio segmentation configuration for multi modal ingestion. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration--audio--segmentation_configuration))
+
+<a id="nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration--audio--segmentation_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.audio.segmentation_configuration`
+
+Read-Only:
+
+- `fixed_length_duration` (Number) Duration in seconds to segment the multi modal media
+
+
+
+<a id="nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration--video"></a>
+### Nested Schema for `knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.video`
+
+Read-Only:
+
+- `segmentation_configuration` (Attributes) Configure the video segmentation configuration for multi modal ingestion. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration--video--segmentation_configuration))
+
+<a id="nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration--video--segmentation_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.video.segmentation_configuration`
+
+Read-Only:
+
+- `fixed_length_duration` (Number) Duration in seconds to segment the multi modal media
+
+
 
 
 

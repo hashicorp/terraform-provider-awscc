@@ -79,6 +79,7 @@ resource "awscc_networkmanager_direct_connect_gateway_attachment" "example" {
 
 - `proposed_network_function_group_change` (Attributes) The attachment to move from one network function group to another. (see [below for nested schema](#nestedatt--proposed_network_function_group_change))
 - `proposed_segment_change` (Attributes) The attachment to move from one segment to another. (see [below for nested schema](#nestedatt--proposed_segment_change))
+- `routing_policy_label` (String) Routing policy label
 - `tags` (Attributes Set) Tags for the attachment. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

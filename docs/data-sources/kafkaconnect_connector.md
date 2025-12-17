@@ -31,6 +31,7 @@ Data Source schema for AWS::KafkaConnect::Connector
 - `kafka_cluster_encryption_in_transit` (Attributes) Details of encryption in transit to the Kafka cluster. (see [below for nested schema](#nestedatt--kafka_cluster_encryption_in_transit))
 - `kafka_connect_version` (String) The version of Kafka Connect. It has to be compatible with both the Kafka cluster's version and the plugins.
 - `log_delivery` (Attributes) Details of what logs are delivered and where they are delivered. (see [below for nested schema](#nestedatt--log_delivery))
+- `network_type` (String) The network type of the Connector.
 - `plugins` (Attributes Set) List of plugins to use with the connector. (see [below for nested schema](#nestedatt--plugins))
 - `service_execution_role_arn` (String) The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon S3 objects and other external resources.
 - `tags` (Attributes Set) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))

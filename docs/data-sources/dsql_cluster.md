@@ -33,6 +33,7 @@ Data Source schema for AWS::DSQL::Cluster
 - `resource_arn` (String) The Amazon Resource Name (ARN) for the cluster.
 - `status` (String) The status of the cluster.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `vpc_endpoint` (String) The DSQL cluster VPC endpoint.
 - `vpc_endpoint_service_name` (String) The VPC endpoint service name.
 
 <a id="nestedatt--encryption_details"></a>

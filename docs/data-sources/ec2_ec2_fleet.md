@@ -119,6 +119,7 @@ Read-Only:
 - `network_bandwidth_gbps` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--network_bandwidth_gbps))
 - `network_interface_count` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--network_interface_count))
 - `on_demand_max_price_percentage_over_lowest_price` (Number)
+- `require_encryption_in_transit` (Boolean)
 - `require_hibernate_support` (Boolean)
 - `spot_max_price_percentage_over_lowest_price` (Number)
 - `total_local_storage_gb` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--total_local_storage_gb))

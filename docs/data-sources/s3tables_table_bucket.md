@@ -23,6 +23,7 @@ Data Source schema for AWS::S3Tables::TableBucket
 
 - `encryption_configuration` (Attributes) Specifies encryption settings for the table bucket (see [below for nested schema](#nestedatt--encryption_configuration))
 - `metrics_configuration` (Attributes) Settings governing the Metric configuration for the table bucket. (see [below for nested schema](#nestedatt--metrics_configuration))
+- `storage_class_configuration` (Attributes) Specifies storage class settings for the table bucket (see [below for nested schema](#nestedatt--storage_class_configuration))
 - `table_bucket_arn` (String) The Amazon Resource Name (ARN) of the specified table bucket.
 - `table_bucket_name` (String) A name for the table bucket.
 - `tags` (Attributes Set) User tags (key-value pairs) to associate with the table bucket. (see [below for nested schema](#nestedatt--tags))
@@ -43,6 +44,14 @@ Read-Only:
 Read-Only:
 
 - `status` (String) Indicates whether Metrics are enabled.
+
+
+<a id="nestedatt--storage_class_configuration"></a>
+### Nested Schema for `storage_class_configuration`
+
+Read-Only:
+
+- `storage_class` (String) The storage class for the table bucket
 
 
 <a id="nestedatt--tags"></a>

@@ -42,16 +42,60 @@ Optional:
 - `destination_configuration` (Attributes) The destination configuration for telemetry data (see [below for nested schema](#nestedatt--rule--destination_configuration))
 - `scope` (String) Selection Criteria on scope level for rule application
 - `selection_criteria` (String) Selection Criteria on resource level for rule application
+- `telemetry_source_types` (Set of String) The telemetry source types for a telemetry rule.
 
 <a id="nestedatt--rule--destination_configuration"></a>
 ### Nested Schema for `rule.destination_configuration`
 
 Optional:
 
+- `cloudtrail_parameters` (Attributes) Telemetry parameters for Cloudtrail (see [below for nested schema](#nestedatt--rule--destination_configuration--cloudtrail_parameters))
 - `destination_pattern` (String) Pattern for telemetry data destination
 - `destination_type` (String) Type of telemetry destination
+- `elb_load_balancer_logging_parameters` (Attributes) Telemetry parameters for ELB/NLB Load Balancer Logs (see [below for nested schema](#nestedatt--rule--destination_configuration--elb_load_balancer_logging_parameters))
 - `retention_in_days` (Number) Number of days to retain the telemetry data in the specified destination
 - `vpc_flow_log_parameters` (Attributes) Telemetry parameters for VPC Flow logs (see [below for nested schema](#nestedatt--rule--destination_configuration--vpc_flow_log_parameters))
+- `waf_logging_parameters` (Attributes) Telemetry parameters for WAF v2 Web ACL (see [below for nested schema](#nestedatt--rule--destination_configuration--waf_logging_parameters))
+
+<a id="nestedatt--rule--destination_configuration--cloudtrail_parameters"></a>
+### Nested Schema for `rule.destination_configuration.cloudtrail_parameters`
+
+Optional:
+
+- `advanced_event_selectors` (Attributes Set) Create fine-grained selectors for AWS CloudTrail management and data. (see [below for nested schema](#nestedatt--rule--destination_configuration--cloudtrail_parameters--advanced_event_selectors))
+
+<a id="nestedatt--rule--destination_configuration--cloudtrail_parameters--advanced_event_selectors"></a>
+### Nested Schema for `rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors`
+
+Optional:
+
+- `field_selectors` (Attributes Set) Contains all selector statements in an advanced event selector. (see [below for nested schema](#nestedatt--rule--destination_configuration--cloudtrail_parameters--advanced_event_selectors--field_selectors))
+- `name` (String) An optional descriptive name for the advanced event selector
+
+<a id="nestedatt--rule--destination_configuration--cloudtrail_parameters--advanced_event_selectors--field_selectors"></a>
+### Nested Schema for `rule.destination_configuration.cloudtrail_parameters.advanced_event_selectors.field_selectors`
+
+Optional:
+
+- `ends_with` (Set of String) An operator that includes events that match the last few characters of the event record field specified as the value of Field.
+- `equals` (Set of String) An operator that includes events that match the exact value of the event record field specified as the value of Field.
+- `field` (String) A field in a CloudTrail event record on which to filter events to be logged
+- `not_ends_with` (Set of String) An operator that excludes events that match the last few characters of the event record field specified as the value of Field.
+- `not_equals` (Set of String) An operator that excludes events that match the exact value of the event record field specified as the value of Field.
+- `not_starts_with` (Set of String) An operator that excludes events that match the first few characters of the event record field specified as the value of Field.
+- `starts_with` (Set of String) An operator that includes events that match the first few characters of the event record field specified as the value of Field.
+
+
+
+
+<a id="nestedatt--rule--destination_configuration--elb_load_balancer_logging_parameters"></a>
+### Nested Schema for `rule.destination_configuration.elb_load_balancer_logging_parameters`
+
+Optional:
+
+- `field_delimiter` (String) A delimiter to delineate log fields
+- `output_format` (String)
+
 
 <a id="nestedatt--rule--destination_configuration--vpc_flow_log_parameters"></a>
 ### Nested Schema for `rule.destination_configuration.vpc_flow_log_parameters`
@@ -61,6 +105,79 @@ Optional:
 - `log_format` (String) The fields to include in the flow log record. If you omit this parameter, the flow log is created using the default format.
 - `max_aggregation_interval` (Number) The maximum interval of time, in seconds, during which a flow of packets is captured and aggregated into a flow log record. Default is 600s.
 - `traffic_type` (String) The type of traffic captured for the flow log. Default is ALL
+
+
+<a id="nestedatt--rule--destination_configuration--waf_logging_parameters"></a>
+### Nested Schema for `rule.destination_configuration.waf_logging_parameters`
+
+Optional:
+
+- `log_type` (String) The type of logs to generate for WAF.
+- `logging_filter` (Attributes) Default handling for logs that don't match any of the specified filtering conditions. (see [below for nested schema](#nestedatt--rule--destination_configuration--waf_logging_parameters--logging_filter))
+- `redacted_fields` (Attributes Set) Fields not to be included in the logs. (see [below for nested schema](#nestedatt--rule--destination_configuration--waf_logging_parameters--redacted_fields))
+
+<a id="nestedatt--rule--destination_configuration--waf_logging_parameters--logging_filter"></a>
+### Nested Schema for `rule.destination_configuration.waf_logging_parameters.logging_filter`
+
+Optional:
+
+- `default_behavior` (String) The behavior required of the filter.
+- `filters` (Attributes Set) A list of filters to be applied. (see [below for nested schema](#nestedatt--rule--destination_configuration--waf_logging_parameters--logging_filter--filters))
+
+<a id="nestedatt--rule--destination_configuration--waf_logging_parameters--logging_filter--filters"></a>
+### Nested Schema for `rule.destination_configuration.waf_logging_parameters.logging_filter.filters`
+
+Optional:
+
+- `behavior` (String) The behavior required of the filter.
+- `conditions` (Attributes Set) A list of conditions for a filter. (see [below for nested schema](#nestedatt--rule--destination_configuration--waf_logging_parameters--logging_filter--filters--conditions))
+- `requirement` (String) The requirement portion of the filter.
+
+<a id="nestedatt--rule--destination_configuration--waf_logging_parameters--logging_filter--filters--conditions"></a>
+### Nested Schema for `rule.destination_configuration.waf_logging_parameters.logging_filter.filters.conditions`
+
+Optional:
+
+- `action_condition` (Attributes) The condition of the action desired in the filter. (see [below for nested schema](#nestedatt--rule--destination_configuration--waf_logging_parameters--logging_filter--filters--conditions--action_condition))
+- `label_name_condition` (Attributes) The label name of the condition. (see [below for nested schema](#nestedatt--rule--destination_configuration--waf_logging_parameters--logging_filter--filters--conditions--label_name_condition))
+
+<a id="nestedatt--rule--destination_configuration--waf_logging_parameters--logging_filter--filters--conditions--action_condition"></a>
+### Nested Schema for `rule.destination_configuration.waf_logging_parameters.logging_filter.filters.conditions.action_condition`
+
+Optional:
+
+- `action` (String) The enumerated action to take.
+
+
+<a id="nestedatt--rule--destination_configuration--waf_logging_parameters--logging_filter--filters--conditions--label_name_condition"></a>
+### Nested Schema for `rule.destination_configuration.waf_logging_parameters.logging_filter.filters.conditions.label_name_condition`
+
+Optional:
+
+- `label_name` (String) The label name of the condition.
+
+
+
+
+
+<a id="nestedatt--rule--destination_configuration--waf_logging_parameters--redacted_fields"></a>
+### Nested Schema for `rule.destination_configuration.waf_logging_parameters.redacted_fields`
+
+Optional:
+
+- `method` (String) The method with which to match this rule.
+- `query_string` (String) The query string to find the resource to match this field to.
+- `single_header` (Attributes) Header for the field to match. (see [below for nested schema](#nestedatt--rule--destination_configuration--waf_logging_parameters--redacted_fields--single_header))
+- `uri_path` (String) This is the URI path to match this rule to.
+
+<a id="nestedatt--rule--destination_configuration--waf_logging_parameters--redacted_fields--single_header"></a>
+### Nested Schema for `rule.destination_configuration.waf_logging_parameters.redacted_fields.single_header`
+
+Optional:
+
+- `name` (String) The name of the header
+
+
 
 
 

@@ -42,7 +42,7 @@ Read-Only:
 - `fixed_response_config` (Attributes) [Application Load Balancer] Information for creating an action that returns a custom HTTP response. Specify only when ``Type`` is ``fixed-response``. (see [below for nested schema](#nestedatt--actions--fixed_response_config))
 - `forward_config` (Attributes) Information for creating an action that distributes requests among multiple target groups. Specify only when ``Type`` is ``forward``.
  If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``. (see [below for nested schema](#nestedatt--actions--forward_config))
-- `jwt_validation_config` (Attributes) (see [below for nested schema](#nestedatt--actions--jwt_validation_config))
+- `jwt_validation_config` (Attributes) [HTTPS listeners] Information for validating JWT access tokens in client requests. Specify only when ``Type`` is ``jwt-validation``. (see [below for nested schema](#nestedatt--actions--jwt_validation_config))
 - `order` (Number) The order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first.
 - `redirect_config` (Attributes) [Application Load Balancer] Information for creating a redirect action. Specify only when ``Type`` is ``redirect``. (see [below for nested schema](#nestedatt--actions--redirect_config))
 - `target_group_arn` (String) The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to multiple target groups, you must use ``ForwardConfig`` instead.
@@ -142,9 +142,9 @@ Read-Only:
 
 Read-Only:
 
-- `format` (String)
-- `name` (String)
-- `values` (List of String)
+- `format` (String) The format of the claim value.
+- `name` (String) The name of the claim. You can't specify ``exp``, ``iss``, ``nbf``, or ``iat`` because we validate them by default.
+- `values` (List of String) The claim value. The maximum size of the list is 10. Each value can be up to 256 characters in length. If the format is ``space-separated-values``, the values can't include spaces.
 
 
 

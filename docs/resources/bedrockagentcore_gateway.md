@@ -27,6 +27,7 @@ Definition of AWS::BedrockAgentCore::Gateway Resource Type
 - `authorizer_configuration` (Attributes) (see [below for nested schema](#nestedatt--authorizer_configuration))
 - `description` (String)
 - `exception_level` (String)
+- `interceptor_configurations` (Attributes List) (see [below for nested schema](#nestedatt--interceptor_configurations))
 - `kms_key_arn` (String)
 - `protocol_configuration` (Attributes) (see [below for nested schema](#nestedatt--protocol_configuration))
 - `tags` (Map of String)
@@ -58,6 +59,40 @@ Optional:
 - `allowed_audience` (List of String)
 - `allowed_clients` (List of String)
 - `discovery_url` (String)
+
+
+
+<a id="nestedatt--interceptor_configurations"></a>
+### Nested Schema for `interceptor_configurations`
+
+Optional:
+
+- `input_configuration` (Attributes) (see [below for nested schema](#nestedatt--interceptor_configurations--input_configuration))
+- `interception_points` (List of String)
+- `interceptor` (Attributes) (see [below for nested schema](#nestedatt--interceptor_configurations--interceptor))
+
+<a id="nestedatt--interceptor_configurations--input_configuration"></a>
+### Nested Schema for `interceptor_configurations.input_configuration`
+
+Optional:
+
+- `pass_request_headers` (Boolean)
+
+
+<a id="nestedatt--interceptor_configurations--interceptor"></a>
+### Nested Schema for `interceptor_configurations.interceptor`
+
+Optional:
+
+- `lambda` (Attributes) (see [below for nested schema](#nestedatt--interceptor_configurations--interceptor--lambda))
+
+<a id="nestedatt--interceptor_configurations--interceptor--lambda"></a>
+### Nested Schema for `interceptor_configurations.interceptor.lambda`
+
+Optional:
+
+- `arn` (String)
+
 
 
 

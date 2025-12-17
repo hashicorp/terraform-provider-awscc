@@ -29,6 +29,7 @@ Data Source schema for AWS::BedrockAgentCore::Gateway
 - `gateway_arn` (String)
 - `gateway_identifier` (String)
 - `gateway_url` (String)
+- `interceptor_configurations` (Attributes List) (see [below for nested schema](#nestedatt--interceptor_configurations))
 - `kms_key_arn` (String)
 - `name` (String)
 - `protocol_configuration` (Attributes) (see [below for nested schema](#nestedatt--protocol_configuration))
@@ -55,6 +56,40 @@ Read-Only:
 - `allowed_audience` (List of String)
 - `allowed_clients` (List of String)
 - `discovery_url` (String)
+
+
+
+<a id="nestedatt--interceptor_configurations"></a>
+### Nested Schema for `interceptor_configurations`
+
+Read-Only:
+
+- `input_configuration` (Attributes) (see [below for nested schema](#nestedatt--interceptor_configurations--input_configuration))
+- `interception_points` (List of String)
+- `interceptor` (Attributes) (see [below for nested schema](#nestedatt--interceptor_configurations--interceptor))
+
+<a id="nestedatt--interceptor_configurations--input_configuration"></a>
+### Nested Schema for `interceptor_configurations.input_configuration`
+
+Read-Only:
+
+- `pass_request_headers` (Boolean)
+
+
+<a id="nestedatt--interceptor_configurations--interceptor"></a>
+### Nested Schema for `interceptor_configurations.interceptor`
+
+Read-Only:
+
+- `lambda` (Attributes) (see [below for nested schema](#nestedatt--interceptor_configurations--interceptor--lambda))
+
+<a id="nestedatt--interceptor_configurations--interceptor--lambda"></a>
+### Nested Schema for `interceptor_configurations.interceptor.lambda`
+
+Read-Only:
+
+- `arn` (String)
+
 
 
 

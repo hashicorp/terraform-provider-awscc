@@ -160,6 +160,7 @@ Optional:
 
 Optional:
 
+- `network_type` (String)
 - `public_access` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--public_access))
 - `vpc_connectivity` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity))
 

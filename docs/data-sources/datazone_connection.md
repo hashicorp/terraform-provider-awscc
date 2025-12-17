@@ -59,6 +59,7 @@ Read-Only:
 - `glue_properties` (Attributes) Glue Properties Input (see [below for nested schema](#nestedatt--props--glue_properties))
 - `hyper_pod_properties` (Attributes) HyperPod Properties Input (see [below for nested schema](#nestedatt--props--hyper_pod_properties))
 - `iam_properties` (Attributes) IAM Properties Input (see [below for nested schema](#nestedatt--props--iam_properties))
+- `mlflow_properties` (Attributes) MLflow Properties Input (see [below for nested schema](#nestedatt--props--mlflow_properties))
 - `redshift_properties` (Attributes) Redshift Properties Input (see [below for nested schema](#nestedatt--props--redshift_properties))
 - `s3_properties` (Attributes) S3 Properties Input (see [below for nested schema](#nestedatt--props--s3_properties))
 - `spark_emr_properties` (Attributes) Spark EMR Properties Input. (see [below for nested schema](#nestedatt--props--spark_emr_properties))
@@ -200,6 +201,14 @@ Read-Only:
 - `glue_lineage_sync_enabled` (Boolean)
 
 
+<a id="nestedatt--props--mlflow_properties"></a>
+### Nested Schema for `props.mlflow_properties`
+
+Read-Only:
+
+- `tracking_server_arn` (String) The ARN of the MLflow tracking server
+
+
 <a id="nestedatt--props--redshift_properties"></a>
 ### Nested Schema for `props.redshift_properties`
 
@@ -275,6 +284,7 @@ Read-Only:
 - `instance_profile_arn` (String)
 - `java_virtual_env` (String)
 - `log_uri` (String)
+- `managed_endpoint_arn` (String)
 - `python_virtual_env` (String)
 - `runtime_role` (String)
 - `trusted_certificates_s3_uri` (String)

@@ -204,6 +204,10 @@ resource "awscc_ec2_spot_fleet" "example" {
 
 - `spot_fleet_request_config_data` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data))
 
+### Optional
+
+- `tags` (Attributes List) The tags to specify in SpotFleetRequestConfigData (see [below for nested schema](#nestedatt--tags))
+
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
@@ -323,6 +327,7 @@ Optional:
 - `network_bandwidth_gbps` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--network_bandwidth_gbps))
 - `network_interface_count` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--network_interface_count))
 - `on_demand_max_price_percentage_over_lowest_price` (Number)
+- `require_encryption_in_transit` (Boolean)
 - `require_hibernate_support` (Boolean)
 - `spot_max_price_percentage_over_lowest_price` (Number)
 - `total_local_storage_gb` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements--total_local_storage_gb))
@@ -571,6 +576,7 @@ Optional:
 - `network_bandwidth_gbps` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--instance_requirements--network_bandwidth_gbps))
 - `network_interface_count` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--instance_requirements--network_interface_count))
 - `on_demand_max_price_percentage_over_lowest_price` (Number)
+- `require_encryption_in_transit` (Boolean)
 - `require_hibernate_support` (Boolean)
 - `spot_max_price_percentage_over_lowest_price` (Number)
 - `total_local_storage_gb` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--instance_requirements--total_local_storage_gb))
@@ -752,6 +758,17 @@ Optional:
 
 <a id="nestedatt--spot_fleet_request_config_data--tag_specifications--tags"></a>
 ### Nested Schema for `spot_fleet_request_config_data.tag_specifications.tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
+
+
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
 
 Optional:
 

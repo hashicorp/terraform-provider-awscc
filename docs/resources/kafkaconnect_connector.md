@@ -31,6 +31,7 @@ Resource Type definition for AWS::KafkaConnect::Connector
 
 - `connector_description` (String) A summary description of the connector.
 - `log_delivery` (Attributes) Details of what logs are delivered and where they are delivered. (see [below for nested schema](#nestedatt--log_delivery))
+- `network_type` (String) The network type of the Connector.
 - `tags` (Attributes Set) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 - `worker_configuration` (Attributes) Specifies the worker configuration to use with the connector. (see [below for nested schema](#nestedatt--worker_configuration))
 

@@ -35,8 +35,10 @@ Data Source schema for AWS::Route53Resolver::ResolverEndpoint
 - `protocols` (List of String) Protocols used for the endpoint. DoH-FIPS is applicable for inbound endpoints only.
 - `resolver_endpoint_id` (String) The ID of the resolver endpoint.
 - `resolver_endpoint_type` (String) The Resolver endpoint IP address type.
+- `rni_enhanced_metrics_enabled` (Boolean) Specifies whether RNI enhanced metrics are enabled for the Resolver Endpoints. When set to true, one-minute granular metrics are published in CloudWatch for each RNI associated with this endpoint. When set to false, metrics are not published. Default is false.
 - `security_group_ids` (List of String) The ID of one or more security groups that control access to this VPC. The security group must include one or more inbound rules (for inbound endpoints) or outbound rules (for outbound endpoints). Inbound and outbound rules must allow TCP and UDP access. For inbound access, open port 53. For outbound access, open the port that you're using for DNS queries on your network.
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `target_name_server_metrics_enabled` (Boolean) Specifies whether target name server metrics are enabled for the Outbound Resolver Endpoint. When set to true, one-minute granular metrics are published in CloudWatch for each target name server associated with this endpoint. When set to false, metrics are not published. Default is false.
 
 <a id="nestedatt--ip_addresses"></a>
 ### Nested Schema for `ip_addresses`

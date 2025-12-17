@@ -114,6 +114,7 @@ Optional:
 Optional:
 
 - `attribute` (String)
+- `attribute_values` (Set of String)
 - `match_option` (String)
 - `values` (Set of String)
 

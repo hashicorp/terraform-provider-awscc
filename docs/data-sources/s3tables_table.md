@@ -26,6 +26,7 @@ Data Source schema for AWS::S3Tables::Table
 - `namespace` (String) The namespace that the table belongs to.
 - `open_table_format` (String) Format of the table.
 - `snapshot_management` (Attributes) Contains details about the snapshot management settings for an Iceberg table. A snapshot is expired when it exceeds MinSnapshotsToKeep and MaxSnapshotAgeHours. (see [below for nested schema](#nestedatt--snapshot_management))
+- `storage_class_configuration` (Attributes) Specifies storage class settings for the table (see [below for nested schema](#nestedatt--storage_class_configuration))
 - `table_arn` (String) The Amazon Resource Name (ARN) of the specified table.
 - `table_bucket_arn` (String) The Amazon Resource Name (ARN) of the specified table bucket.
 - `table_name` (String) The name for the table.
@@ -77,6 +78,14 @@ Read-Only:
 - `max_snapshot_age_hours` (Number) The maximum age of a snapshot before it can be expired.
 - `min_snapshots_to_keep` (Number) The minimum number of snapshots to keep.
 - `status` (String) Indicates whether the SnapshotManagement maintenance action is enabled.
+
+
+<a id="nestedatt--storage_class_configuration"></a>
+### Nested Schema for `storage_class_configuration`
+
+Read-Only:
+
+- `storage_class` (String) The storage class for the table
 
 
 <a id="nestedatt--tags"></a>

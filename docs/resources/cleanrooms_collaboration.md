@@ -105,6 +105,7 @@ Optional:
 
 - `model_inference` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration--machine_learning--model_inference))
 - `model_training` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration--machine_learning--model_training))
+- `synthetic_data_generation` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration--machine_learning--synthetic_data_generation))
 
 <a id="nestedatt--creator_payment_configuration--machine_learning--model_inference"></a>
 ### Nested Schema for `creator_payment_configuration.machine_learning.model_inference`
@@ -116,6 +117,14 @@ Optional:
 
 <a id="nestedatt--creator_payment_configuration--machine_learning--model_training"></a>
 ### Nested Schema for `creator_payment_configuration.machine_learning.model_training`
+
+Optional:
+
+- `is_responsible` (Boolean)
+
+
+<a id="nestedatt--creator_payment_configuration--machine_learning--synthetic_data_generation"></a>
+### Nested Schema for `creator_payment_configuration.machine_learning.synthetic_data_generation`
 
 Optional:
 
@@ -186,6 +195,7 @@ Optional:
 
 - `model_inference` (Attributes) (see [below for nested schema](#nestedatt--members--payment_configuration--machine_learning--model_inference))
 - `model_training` (Attributes) (see [below for nested schema](#nestedatt--members--payment_configuration--machine_learning--model_training))
+- `synthetic_data_generation` (Attributes) (see [below for nested schema](#nestedatt--members--payment_configuration--machine_learning--synthetic_data_generation))
 
 <a id="nestedatt--members--payment_configuration--machine_learning--model_inference"></a>
 ### Nested Schema for `members.payment_configuration.machine_learning.model_inference`
@@ -197,6 +207,14 @@ Optional:
 
 <a id="nestedatt--members--payment_configuration--machine_learning--model_training"></a>
 ### Nested Schema for `members.payment_configuration.machine_learning.model_training`
+
+Optional:
+
+- `is_responsible` (Boolean)
+
+
+<a id="nestedatt--members--payment_configuration--machine_learning--synthetic_data_generation"></a>
+### Nested Schema for `members.payment_configuration.machine_learning.synthetic_data_generation`
 
 Optional:
 

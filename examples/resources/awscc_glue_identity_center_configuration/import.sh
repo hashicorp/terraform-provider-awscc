@@ -1,0 +1,1 @@
+$ terraform import awscc_glue_identity_center_configuration.example "account_id"

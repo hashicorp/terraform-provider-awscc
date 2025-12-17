@@ -17,18 +17,19 @@ Definition of AWS::ConnectCampaignsV2::Campaign Resource Type
 
 ### Required
 
-- `channel_subtype_config` (Attributes) The possible types of channel subtype config parameters (see [below for nested schema](#nestedatt--channel_subtype_config))
 - `connect_instance_id` (String) Amazon Connect Instance Id
 - `name` (String) Campaign name
 
 ### Optional
 
+- `channel_subtype_config` (Attributes) The possible types of channel subtype config parameters (see [below for nested schema](#nestedatt--channel_subtype_config))
 - `communication_limits_override` (Attributes) Communication limits config (see [below for nested schema](#nestedatt--communication_limits_override))
 - `communication_time_config` (Attributes) Campaign communication time config (see [below for nested schema](#nestedatt--communication_time_config))
 - `connect_campaign_flow_arn` (String) Arn
 - `schedule` (Attributes) Campaign schedule (see [below for nested schema](#nestedatt--schedule))
 - `source` (Attributes) The possible source of the campaign (see [below for nested schema](#nestedatt--source))
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
+- `type` (String) Campaign type
 
 ### Read-Only
 
@@ -43,6 +44,7 @@ Optional:
 - `email` (Attributes) Email Channel Subtype config (see [below for nested schema](#nestedatt--channel_subtype_config--email))
 - `sms` (Attributes) SMS Channel Subtype config (see [below for nested schema](#nestedatt--channel_subtype_config--sms))
 - `telephony` (Attributes) Telephony Channel Subtype config (see [below for nested schema](#nestedatt--channel_subtype_config--telephony))
+- `whats_app` (Attributes) WhatsApp Channel Subtype config (see [below for nested schema](#nestedatt--channel_subtype_config--whats_app))
 
 <a id="nestedatt--channel_subtype_config--email"></a>
 ### Nested Schema for `channel_subtype_config.email`
@@ -50,7 +52,7 @@ Optional:
 Optional:
 
 - `capacity` (Number) Allocates outbound capacity for the specific channel of this campaign between multiple active campaigns
-- `default_outbound_config` (Attributes) Default SMS outbound config (see [below for nested schema](#nestedatt--channel_subtype_config--email--default_outbound_config))
+- `default_outbound_config` (Attributes) Default Email outbound config (see [below for nested schema](#nestedatt--channel_subtype_config--email--default_outbound_config))
 - `outbound_mode` (Attributes) Email Outbound Mode (see [below for nested schema](#nestedatt--channel_subtype_config--email--outbound_mode))
 
 <a id="nestedatt--channel_subtype_config--email--default_outbound_config"></a>
@@ -117,6 +119,7 @@ Optional:
 - `answer_machine_detection_config` (Attributes) The configuration used for answering machine detection during outbound calls (see [below for nested schema](#nestedatt--channel_subtype_config--telephony--default_outbound_config--answer_machine_detection_config))
 - `connect_contact_flow_id` (String) The identifier of the contact flow for the outbound call
 - `connect_source_phone_number` (String) The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.
+- `ring_timeout` (Number) Maximum ring time for outbound calls in seconds
 
 <a id="nestedatt--channel_subtype_config--telephony--default_outbound_config--answer_machine_detection_config"></a>
 ### Nested Schema for `channel_subtype_config.telephony.default_outbound_config.answer_machine_detection_config`
@@ -174,6 +177,33 @@ Optional:
 
 
 
+<a id="nestedatt--channel_subtype_config--whats_app"></a>
+### Nested Schema for `channel_subtype_config.whats_app`
+
+Optional:
+
+- `capacity` (Number) Allocates outbound capacity for the specific channel of this campaign between multiple active campaigns
+- `default_outbound_config` (Attributes) Default WhatsApp outbound config (see [below for nested schema](#nestedatt--channel_subtype_config--whats_app--default_outbound_config))
+- `outbound_mode` (Attributes) WhatsApp Outbound Mode (see [below for nested schema](#nestedatt--channel_subtype_config--whats_app--outbound_mode))
+
+<a id="nestedatt--channel_subtype_config--whats_app--default_outbound_config"></a>
+### Nested Schema for `channel_subtype_config.whats_app.default_outbound_config`
+
+Optional:
+
+- `connect_source_phone_number_arn` (String) Arn
+- `wisdom_template_arn` (String) Arn
+
+
+<a id="nestedatt--channel_subtype_config--whats_app--outbound_mode"></a>
+### Nested Schema for `channel_subtype_config.whats_app.outbound_mode`
+
+Optional:
+
+- `agentless_config` (String) Agentless config
+
+
+
 
 <a id="nestedatt--communication_limits_override"></a>
 ### Nested Schema for `communication_limits_override`
@@ -211,6 +241,7 @@ Optional:
 - `local_time_zone_config` (Attributes) Local time zone config (see [below for nested schema](#nestedatt--communication_time_config--local_time_zone_config))
 - `sms` (Attributes) Time window config (see [below for nested schema](#nestedatt--communication_time_config--sms))
 - `telephony` (Attributes) Time window config (see [below for nested schema](#nestedatt--communication_time_config--telephony))
+- `whats_app` (Attributes) Time window config (see [below for nested schema](#nestedatt--communication_time_config--whats_app))
 
 <a id="nestedatt--communication_time_config--email"></a>
 ### Nested Schema for `communication_time_config.email`
@@ -370,6 +401,59 @@ Optional:
 
 <a id="nestedatt--communication_time_config--telephony--restricted_periods--restricted_period_list"></a>
 ### Nested Schema for `communication_time_config.telephony.restricted_periods.restricted_period_list`
+
+Optional:
+
+- `end_date` (String) Date in ISO 8601 format, e.g. 2024-01-01
+- `name` (String) The name of a restricted period
+- `start_date` (String) Date in ISO 8601 format, e.g. 2024-01-01
+
+
+
+
+<a id="nestedatt--communication_time_config--whats_app"></a>
+### Nested Schema for `communication_time_config.whats_app`
+
+Optional:
+
+- `open_hours` (Attributes) Open Hours config (see [below for nested schema](#nestedatt--communication_time_config--whats_app--open_hours))
+- `restricted_periods` (Attributes) Restricted period config (see [below for nested schema](#nestedatt--communication_time_config--whats_app--restricted_periods))
+
+<a id="nestedatt--communication_time_config--whats_app--open_hours"></a>
+### Nested Schema for `communication_time_config.whats_app.open_hours`
+
+Optional:
+
+- `daily_hours` (Attributes Set) Daily Hours map (see [below for nested schema](#nestedatt--communication_time_config--whats_app--open_hours--daily_hours))
+
+<a id="nestedatt--communication_time_config--whats_app--open_hours--daily_hours"></a>
+### Nested Schema for `communication_time_config.whats_app.open_hours.daily_hours`
+
+Optional:
+
+- `key` (String) Day of week
+- `value` (Attributes List) List of time range (see [below for nested schema](#nestedatt--communication_time_config--whats_app--open_hours--daily_hours--value))
+
+<a id="nestedatt--communication_time_config--whats_app--open_hours--daily_hours--value"></a>
+### Nested Schema for `communication_time_config.whats_app.open_hours.daily_hours.value`
+
+Optional:
+
+- `end_time` (String) Time in ISO 8601 format, e.g. T23:11
+- `start_time` (String) Time in ISO 8601 format, e.g. T23:11
+
+
+
+
+<a id="nestedatt--communication_time_config--whats_app--restricted_periods"></a>
+### Nested Schema for `communication_time_config.whats_app.restricted_periods`
+
+Optional:
+
+- `restricted_period_list` (Attributes List) List of restricted period (see [below for nested schema](#nestedatt--communication_time_config--whats_app--restricted_periods--restricted_period_list))
+
+<a id="nestedatt--communication_time_config--whats_app--restricted_periods--restricted_period_list"></a>
+### Nested Schema for `communication_time_config.whats_app.restricted_periods.restricted_period_list`
 
 Optional:
 
