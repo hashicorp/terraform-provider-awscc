@@ -1,8 +1,34 @@
-## 1.67.0 (Unreleased)
+## 1.67.0 (December 17, 2025)
 
 FEATURES:
 
 * provider: The [`provider_meta` block](https://developer.hashicorp.com/terraform/internals/provider-meta) is now supported. The `user_agent` argument enables module authors to include additional product information in the `User-Agent` header sent during all AWS API requests made during Create, Read, Update, and Delete operations.
+* **New Data Source:** `awscc_connect_data_table_record`
+* **New Data Source:** `awscc_connect_workspace`
+* **New Data Source:** `awscc_connect_workspaces`
+* **New Data Source:** `awscc_dax_subnet_group`
+* **New Data Source:** `awscc_dax_subnet_groups`
+* **New Data Source:** `awscc_glue_identity_center_configuration`
+* **New Data Source:** `awscc_groundstation_dataflow_endpoint_group_v2`
+* **New Data Source:** `awscc_groundstation_dataflow_endpoint_group_v2s`
+* **New Data Source:** `awscc_networkmanager_core_network_prefix_list_association`
+* **New Data Source:** `awscc_ses_tenant`
+* **New Data Source:** `awscc_ses_tenants`
+* **New Data Source:** `awscc_ssm_maintenance_window_target`
+* **New Data Source:** `awscc_ssm_maintenance_window_task`
+* **New List Resource:** `awscc_connect_workspace`
+* **New List Resource:** `awscc_dax_subnet_group`
+* **New List Resource:** `awscc_groundstation_dataflow_endpoint_group_v2`
+* **New List Resource:** `awscc_ses_tenant`
+* **New Resource:** `awscc_connect_data_table_record`
+* **New Resource:** `awscc_connect_workspace`
+* **New Resource:** `awscc_dax_subnet_group`
+* **New Resource:** `awscc_glue_identity_center_configuration`
+* **New Resource:** `awscc_groundstation_dataflow_endpoint_group_v2`
+* **New Resource:** `awscc_networkmanager_core_network_prefix_list_association`
+* **New Resource:** `awscc_ses_tenant`
+* **New Resource:** `awscc_ssm_maintenance_window_target`
+* **New Resource:** `awscc_ssm_maintenance_window_task`
 
 ## 1.66.0 (December 4, 2025)
 
