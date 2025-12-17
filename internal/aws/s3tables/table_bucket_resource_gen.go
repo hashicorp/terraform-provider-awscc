@@ -135,6 +135,49 @@ func tableBucketResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: StorageClassConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies storage class settings for the table bucket",
+		//	  "properties": {
+		//	    "StorageClass": {
+		//	      "description": "The storage class for the table bucket",
+		//	      "enum": [
+		//	        "STANDARD",
+		//	        "INTELLIGENT_TIERING"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"storage_class_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: StorageClass
+				"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The storage class for the table bucket",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"STANDARD",
+							"INTELLIGENT_TIERING",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies storage class settings for the table bucket",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TableBucketARN
 		// CloudFormation resource type schema:
 		//
@@ -345,19 +388,21 @@ func tableBucketResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"encryption_configuration":  "EncryptionConfiguration",
-		"key":                       "Key",
-		"kms_key_arn":               "KMSKeyArn",
-		"metrics_configuration":     "MetricsConfiguration",
-		"noncurrent_days":           "NoncurrentDays",
-		"sse_algorithm":             "SSEAlgorithm",
-		"status":                    "Status",
-		"table_bucket_arn":          "TableBucketARN",
-		"table_bucket_name":         "TableBucketName",
-		"tags":                      "Tags",
-		"unreferenced_days":         "UnreferencedDays",
-		"unreferenced_file_removal": "UnreferencedFileRemoval",
-		"value":                     "Value",
+		"encryption_configuration":    "EncryptionConfiguration",
+		"key":                         "Key",
+		"kms_key_arn":                 "KMSKeyArn",
+		"metrics_configuration":       "MetricsConfiguration",
+		"noncurrent_days":             "NoncurrentDays",
+		"sse_algorithm":               "SSEAlgorithm",
+		"status":                      "Status",
+		"storage_class":               "StorageClass",
+		"storage_class_configuration": "StorageClassConfiguration",
+		"table_bucket_arn":            "TableBucketARN",
+		"table_bucket_name":           "TableBucketName",
+		"tags":                        "Tags",
+		"unreferenced_days":           "UnreferencedDays",
+		"unreferenced_file_removal":   "UnreferencedFileRemoval",
+		"value":                       "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

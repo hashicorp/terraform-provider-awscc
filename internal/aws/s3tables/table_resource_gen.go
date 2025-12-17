@@ -331,6 +331,50 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: StorageClassConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies storage class settings for the table",
+		//	  "properties": {
+		//	    "StorageClass": {
+		//	      "description": "The storage class for the table",
+		//	      "enum": [
+		//	        "STANDARD",
+		//	        "INTELLIGENT_TIERING"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"storage_class_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: StorageClass
+				"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The storage class for the table",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"STANDARD",
+							"INTELLIGENT_TIERING",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies storage class settings for the table",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TableARN
 		// CloudFormation resource type schema:
 		//
@@ -526,29 +570,31 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"compaction":             "Compaction",
-		"iceberg_metadata":       "IcebergMetadata",
-		"iceberg_schema":         "IcebergSchema",
-		"key":                    "Key",
-		"max_snapshot_age_hours": "MaxSnapshotAgeHours",
-		"min_snapshots_to_keep":  "MinSnapshotsToKeep",
-		"name":                   "Name",
-		"namespace":              "Namespace",
-		"open_table_format":      "OpenTableFormat",
-		"required":               "Required",
-		"schema_field_list":      "SchemaFieldList",
-		"snapshot_management":    "SnapshotManagement",
-		"status":                 "Status",
-		"table_arn":              "TableARN",
-		"table_bucket_arn":       "TableBucketARN",
-		"table_name":             "TableName",
-		"tags":                   "Tags",
-		"target_file_size_mb":    "TargetFileSizeMB",
-		"type":                   "Type",
-		"value":                  "Value",
-		"version_token":          "VersionToken",
-		"warehouse_location":     "WarehouseLocation",
-		"without_metadata":       "WithoutMetadata",
+		"compaction":                  "Compaction",
+		"iceberg_metadata":            "IcebergMetadata",
+		"iceberg_schema":              "IcebergSchema",
+		"key":                         "Key",
+		"max_snapshot_age_hours":      "MaxSnapshotAgeHours",
+		"min_snapshots_to_keep":       "MinSnapshotsToKeep",
+		"name":                        "Name",
+		"namespace":                   "Namespace",
+		"open_table_format":           "OpenTableFormat",
+		"required":                    "Required",
+		"schema_field_list":           "SchemaFieldList",
+		"snapshot_management":         "SnapshotManagement",
+		"status":                      "Status",
+		"storage_class":               "StorageClass",
+		"storage_class_configuration": "StorageClassConfiguration",
+		"table_arn":                   "TableARN",
+		"table_bucket_arn":            "TableBucketARN",
+		"table_name":                  "TableName",
+		"tags":                        "Tags",
+		"target_file_size_mb":         "TargetFileSizeMB",
+		"type":                        "Type",
+		"value":                       "Value",
+		"version_token":               "VersionToken",
+		"warehouse_location":          "WarehouseLocation",
+		"without_metadata":            "WithoutMetadata",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

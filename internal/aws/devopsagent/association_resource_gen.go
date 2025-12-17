@@ -1361,6 +1361,34 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: LinkedAssociationIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Set of linked association IDs for parent-child relationships",
+		//	  "items": {
+		//	    "description": "The unique identifier of the association",
+		//	    "maxLength": 255,
+		//	    "minLength": 1,
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"linked_association_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Set of linked association IDs for parent-child relationships",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(1, 255),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// LinkedAssociationIds is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: ServiceId
 		// CloudFormation resource type schema:
 		//
@@ -1449,6 +1477,7 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		"instance_id":              "InstanceId",
 		"instance_identifier":      "InstanceIdentifier",
 		"key":                      "Key",
+		"linked_association_ids":   "LinkedAssociationIds",
 		"mcp_server":               "MCPServer",
 		"mcp_server_datadog":       "MCPServerDatadog",
 		"mcp_server_new_relic":     "MCPServerNewRelic",
@@ -1485,6 +1514,7 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Configuration/MCPServerSplunk/EnableWebhookUpdates",
 		"/properties/Configuration/GitLab/EnableWebhookUpdates",
 		"/properties/Configuration/EventChannel/EnableWebhookUpdates",
+		"/properties/LinkedAssociationIds",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

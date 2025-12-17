@@ -101,7 +101,7 @@ func scriptResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The file size of the uploaded Realtime script, expressed in bytes. When files are uploaded from an S3 location, this value remains at \"0\".",
-		//	  "minimum": 1,
+		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
 		"size_on_disk": schema.Int64Attribute{ /*START ATTRIBUTE*/

@@ -472,6 +472,39 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	              "additionalProperties": false,
 		//	              "description": "The vector configuration details for the Bedrock embeddings model.",
 		//	              "properties": {
+		//	                "Audio": {
+		//	                  "description": "List of audio configurations for multi modal ingestion.",
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Configure the audio configuration for multi modal ingestion.",
+		//	                    "properties": {
+		//	                      "SegmentationConfiguration": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "Configure the audio segmentation configuration for multi modal ingestion.",
+		//	                        "properties": {
+		//	                          "FixedLengthDuration": {
+		//	                            "description": "Duration in seconds to segment the multi modal media",
+		//	                            "maximum": 30,
+		//	                            "minimum": 1,
+		//	                            "type": "integer"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "FixedLengthDuration"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "SegmentationConfiguration"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "maxItems": 1,
+		//	                  "minItems": 1,
+		//	                  "type": "array"
+		//	                },
 		//	                "Dimensions": {
 		//	                  "description": "The dimensions details for the vector configuration used on the Bedrock embeddings model.",
 		//	                  "maximum": 4096,
@@ -485,6 +518,39 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "BINARY"
 		//	                  ],
 		//	                  "type": "string"
+		//	                },
+		//	                "Video": {
+		//	                  "description": "List of video configurations for multi modal ingestion.",
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Configure the video configuration for multi modal ingestion.",
+		//	                    "properties": {
+		//	                      "SegmentationConfiguration": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "Configure the video segmentation configuration for multi modal ingestion.",
+		//	                        "properties": {
+		//	                          "FixedLengthDuration": {
+		//	                            "description": "Duration in seconds to segment the multi modal media",
+		//	                            "maximum": 30,
+		//	                            "minimum": 1,
+		//	                            "type": "integer"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "FixedLengthDuration"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "SegmentationConfiguration"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "maxItems": 1,
+		//	                  "minItems": 1,
+		//	                  "type": "array"
 		//	                }
 		//	              },
 		//	              "type": "object"
@@ -1107,6 +1173,50 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 								// Property: BedrockEmbeddingModelConfiguration
 								"bedrock_embedding_model_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Audio
+										"audio": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: SegmentationConfiguration
+													"segmentation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: FixedLengthDuration
+															"fixed_length_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "Duration in seconds to segment the multi modal media",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.Int64{ /*START VALIDATORS*/
+																	int64validator.Between(1, 30),
+																	fwvalidators.NotNullInt64(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																	int64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "Configure the audio segmentation configuration for multi modal ingestion.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.Object{ /*START VALIDATORS*/
+															fwvalidators.NotNullObject(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "List of audio configurations for multi modal ingestion.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeBetween(1, 1),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												generic.Multiset(),
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
 										// Property: Dimensions
 										"dimensions": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Description: "The dimensions details for the vector configuration used on the Bedrock embeddings model.",
@@ -1132,6 +1242,50 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Video
+										"video": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: SegmentationConfiguration
+													"segmentation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: FixedLengthDuration
+															"fixed_length_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "Duration in seconds to segment the multi modal media",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.Int64{ /*START VALIDATORS*/
+																	int64validator.Between(1, 30),
+																	fwvalidators.NotNullInt64(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																	int64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "Configure the video segmentation configuration for multi modal ingestion.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.Object{ /*START VALIDATORS*/
+															fwvalidators.NotNullObject(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "List of video configurations for multi modal ingestion.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeBetween(1, 1),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												generic.Multiset(),
+												listplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -2588,6 +2742,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"audio":                                    "Audio",
 		"auth_configuration":                       "AuthConfiguration",
 		"aws_data_catalog_configuration":           "AwsDataCatalogConfiguration",
 		"bedrock_embedding_model_configuration":    "BedrockEmbeddingModelConfiguration",
@@ -2614,6 +2769,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		"execution_timeout_seconds":                "ExecutionTimeoutSeconds",
 		"failure_reasons":                          "FailureReasons",
 		"field_mapping":                            "FieldMapping",
+		"fixed_length_duration":                    "FixedLengthDuration",
 		"generation_context":                       "GenerationContext",
 		"graph_arn":                                "GraphArn",
 		"inclusion":                                "Inclusion",
@@ -2643,6 +2799,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		"role_arn":                                 "RoleArn",
 		"s3_location":                              "S3Location",
 		"s3_vectors_configuration":                 "S3VectorsConfiguration",
+		"segmentation_configuration":               "SegmentationConfiguration",
 		"serverless_configuration":                 "ServerlessConfiguration",
 		"sql":                                      "Sql",
 		"sql_knowledge_base_configuration":         "SqlKnowledgeBaseConfiguration",
@@ -2666,6 +2823,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		"vector_field":                             "VectorField",
 		"vector_index_name":                        "VectorIndexName",
 		"vector_knowledge_base_configuration":      "VectorKnowledgeBaseConfiguration",
+		"video":                                    "Video",
 		"workgroup_arn":                            "WorkgroupArn",
 	})
 

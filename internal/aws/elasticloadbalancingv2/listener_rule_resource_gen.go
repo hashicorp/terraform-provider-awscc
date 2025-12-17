@@ -243,24 +243,24 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "JwtValidationConfig": {
 		//	        "additionalProperties": false,
-		//	        "description": "",
+		//	        "description": "[HTTPS listeners] Information for validating JWT access tokens in client requests. Specify only when ``Type`` is ``jwt-validation``.",
 		//	        "properties": {
 		//	          "AdditionalClaims": {
 		//	            "description": "",
 		//	            "items": {
 		//	              "additionalProperties": false,
-		//	              "description": "",
+		//	              "description": "Information about an additional claim to validate.",
 		//	              "properties": {
 		//	                "Format": {
-		//	                  "description": "",
+		//	                  "description": "The format of the claim value.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Name": {
-		//	                  "description": "",
+		//	                  "description": "The name of the claim. You can't specify ``exp``, ``iss``, ``nbf``, or ``iat`` because we validate them by default.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Values": {
-		//	                  "description": "",
+		//	                  "description": "The claim value. The maximum size of the list is 10. Each value can be up to 256 characters in length. If the format is ``space-separated-values``, the values can't include spaces.",
 		//	                  "items": {
 		//	                    "type": "string"
 		//	                  },
@@ -702,7 +702,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Format
 										"format": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "",
+											Description: "The format of the claim value.",
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
@@ -714,7 +714,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 										// Property: Name
 										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "",
+											Description: "The name of the claim. You can't specify ``exp``, ``iss``, ``nbf``, or ``iat`` because we validate them by default.",
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
@@ -727,7 +727,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 										// Property: Values
 										"values": schema.ListAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Description: "",
+											Description: "The claim value. The maximum size of the list is 10. Each value can be up to 256 characters in length. If the format is ``space-separated-values``, the values can't include spaces.",
 											Optional:    true,
 											Computed:    true,
 											Validators: []validator.List{ /*START VALIDATORS*/
@@ -775,7 +775,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "",
+						Description: "[HTTPS listeners] Information for validating JWT access tokens in client requests. Specify only when ``Type`` is ``jwt-validation``.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/

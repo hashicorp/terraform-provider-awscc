@@ -440,6 +440,23 @@ func connectAttachmentResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: RoutingPolicyLabel
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Routing policy label",
+		//	  "type": "string"
+		//	}
+		"routing_policy_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Routing policy label",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// RoutingPolicyLabel is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: SegmentName
 		// CloudFormation resource type schema:
 		//
@@ -606,6 +623,7 @@ func connectAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		"proposed_segment_change":                "ProposedSegmentChange",
 		"protocol":                               "Protocol",
 		"resource_arn":                           "ResourceArn",
+		"routing_policy_label":                   "RoutingPolicyLabel",
 		"segment_name":                           "SegmentName",
 		"state":                                  "State",
 		"tags":                                   "Tags",
@@ -614,6 +632,9 @@ func connectAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		"value":                                  "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/RoutingPolicyLabel",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

@@ -433,7 +433,8 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		//	            },
 		//	            "AllowedInstanceTypes": {
 		//	              "items": {
-		//	                "pattern": "^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$",
+		//	                "maxLength": 100,
+		//	                "minLength": 1,
 		//	                "type": "string"
 		//	              },
 		//	              "maxItems": 100,
@@ -508,7 +509,8 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		//	            },
 		//	            "ExcludedInstanceTypes": {
 		//	              "items": {
-		//	                "pattern": "^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$",
+		//	                "maxLength": 100,
+		//	                "minLength": 1,
 		//	                "type": "string"
 		//	              },
 		//	              "maxItems": 100,
@@ -1079,7 +1081,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.SizeBetween(1, 100),
 										listvalidator.ValueStringsAre(
-											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"), ""),
+											stringvalidator.LengthBetween(1, 100),
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1201,7 +1203,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.SizeBetween(1, 100),
 										listvalidator.ValueStringsAre(
-											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]+\\.[a-zA-Z0-9]+$"), ""),
+											stringvalidator.LengthBetween(1, 100),
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

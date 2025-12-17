@@ -8,6 +8,7 @@ package ram
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
@@ -59,6 +60,57 @@ func resourceShareResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: CreationTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The date and time when the resource share was created.",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time when the resource share was created.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: FeatureSet
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The feature set of the resource share.",
+		//	  "enum": [
+		//	    "CREATED_FROM_POLICY",
+		//	    "PROMOTING_TO_STANDARD",
+		//	    "STANDARD"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"feature_set": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The feature set of the resource share.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LastUpdatedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The date and time when the resource share was last updated.",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The date and time when the resource share was last updated.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -69,6 +121,20 @@ func resourceShareResource(ctx context.Context) (resource.Resource, error) {
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the name of the resource share.",
 			Required:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: OwningAccountId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the AWS account that owns the resource share.",
+		//	  "type": "string"
+		//	}
+		"owning_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the AWS account that owns the resource share.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PermissionArns
 		// CloudFormation resource type schema:
@@ -157,6 +223,27 @@ func resourceShareResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// Sources is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The current status of the resource share.",
+		//	  "enum": [
+		//	    "PENDING",
+		//	    "ACTIVE",
+		//	    "FAILED",
+		//	    "DELETING",
+		//	    "DELETED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current status of the resource share.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -252,12 +339,17 @@ func resourceShareResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allow_external_principals": "AllowExternalPrincipals",
 		"arn":                       "Arn",
+		"creation_time":             "CreationTime",
+		"feature_set":               "FeatureSet",
 		"key":                       "Key",
+		"last_updated_time":         "LastUpdatedTime",
 		"name":                      "Name",
+		"owning_account_id":         "OwningAccountId",
 		"permission_arns":           "PermissionArns",
 		"principals":                "Principals",
 		"resource_arns":             "ResourceArns",
 		"sources":                   "Sources",
+		"status":                    "Status",
 		"tags":                      "Tags",
 		"value":                     "Value",
 	})

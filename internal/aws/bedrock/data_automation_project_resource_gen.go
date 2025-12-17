@@ -276,6 +276,80 @@ func dataAutomationProjectResource(ctx context.Context) (resource.Resource, erro
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "SensitiveDataConfiguration": {
+		//	          "properties": {
+		//	            "DetectionMode": {
+		//	              "enum": [
+		//	                "DETECTION",
+		//	                "DETECTION_AND_REDACTION"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "DetectionScope": {
+		//	              "items": {
+		//	                "enum": [
+		//	                  "STANDARD",
+		//	                  "CUSTOM"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "PiiEntitiesConfiguration": {
+		//	              "properties": {
+		//	                "PiiEntityTypes": {
+		//	                  "items": {
+		//	                    "enum": [
+		//	                      "ALL",
+		//	                      "ADDRESS",
+		//	                      "AGE",
+		//	                      "NAME",
+		//	                      "EMAIL",
+		//	                      "PHONE",
+		//	                      "USERNAME",
+		//	                      "PASSWORD",
+		//	                      "DRIVER_ID",
+		//	                      "LICENSE_PLATE",
+		//	                      "VEHICLE_IDENTIFICATION_NUMBER",
+		//	                      "CREDIT_DEBIT_CARD_CVV",
+		//	                      "CREDIT_DEBIT_CARD_EXPIRY",
+		//	                      "CREDIT_DEBIT_CARD_NUMBER",
+		//	                      "PIN",
+		//	                      "INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+		//	                      "SWIFT_CODE",
+		//	                      "IP_ADDRESS",
+		//	                      "MAC_ADDRESS",
+		//	                      "URL",
+		//	                      "AWS_ACCESS_KEY",
+		//	                      "AWS_SECRET_KEY",
+		//	                      "US_BANK_ACCOUNT_NUMBER",
+		//	                      "US_BANK_ROUTING_NUMBER",
+		//	                      "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+		//	                      "US_PASSPORT_NUMBER",
+		//	                      "US_SOCIAL_SECURITY_NUMBER",
+		//	                      "CA_HEALTH_NUMBER",
+		//	                      "CA_SOCIAL_INSURANCE_NUMBER",
+		//	                      "UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+		//	                      "UK_NATIONAL_INSURANCE_NUMBER",
+		//	                      "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array"
+		//	                },
+		//	                "RedactionMaskMode": {
+		//	                  "enum": [
+		//	                    "PII",
+		//	                    "ENTITY_TYPE"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -292,6 +366,80 @@ func dataAutomationProjectResource(ctx context.Context) (resource.Resource, erro
 		//	                "DISABLED"
 		//	              ],
 		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "SensitiveDataConfiguration": {
+		//	          "properties": {
+		//	            "DetectionMode": {
+		//	              "enum": [
+		//	                "DETECTION",
+		//	                "DETECTION_AND_REDACTION"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "DetectionScope": {
+		//	              "items": {
+		//	                "enum": [
+		//	                  "STANDARD",
+		//	                  "CUSTOM"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "PiiEntitiesConfiguration": {
+		//	              "properties": {
+		//	                "PiiEntityTypes": {
+		//	                  "items": {
+		//	                    "enum": [
+		//	                      "ALL",
+		//	                      "ADDRESS",
+		//	                      "AGE",
+		//	                      "NAME",
+		//	                      "EMAIL",
+		//	                      "PHONE",
+		//	                      "USERNAME",
+		//	                      "PASSWORD",
+		//	                      "DRIVER_ID",
+		//	                      "LICENSE_PLATE",
+		//	                      "VEHICLE_IDENTIFICATION_NUMBER",
+		//	                      "CREDIT_DEBIT_CARD_CVV",
+		//	                      "CREDIT_DEBIT_CARD_EXPIRY",
+		//	                      "CREDIT_DEBIT_CARD_NUMBER",
+		//	                      "PIN",
+		//	                      "INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+		//	                      "SWIFT_CODE",
+		//	                      "IP_ADDRESS",
+		//	                      "MAC_ADDRESS",
+		//	                      "URL",
+		//	                      "AWS_ACCESS_KEY",
+		//	                      "AWS_SECRET_KEY",
+		//	                      "US_BANK_ACCOUNT_NUMBER",
+		//	                      "US_BANK_ROUTING_NUMBER",
+		//	                      "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+		//	                      "US_PASSPORT_NUMBER",
+		//	                      "US_SOCIAL_SECURITY_NUMBER",
+		//	                      "CA_HEALTH_NUMBER",
+		//	                      "CA_SOCIAL_INSURANCE_NUMBER",
+		//	                      "UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+		//	                      "UK_NATIONAL_INSURANCE_NUMBER",
+		//	                      "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array"
+		//	                },
+		//	                "RedactionMaskMode": {
+		//	                  "enum": [
+		//	                    "PII",
+		//	                    "ENTITY_TYPE"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
 		//	            }
 		//	          },
 		//	          "type": "object"
@@ -324,6 +472,80 @@ func dataAutomationProjectResource(ctx context.Context) (resource.Resource, erro
 		//	                "DISABLED"
 		//	              ],
 		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "SensitiveDataConfiguration": {
+		//	          "properties": {
+		//	            "DetectionMode": {
+		//	              "enum": [
+		//	                "DETECTION",
+		//	                "DETECTION_AND_REDACTION"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "DetectionScope": {
+		//	              "items": {
+		//	                "enum": [
+		//	                  "STANDARD",
+		//	                  "CUSTOM"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "PiiEntitiesConfiguration": {
+		//	              "properties": {
+		//	                "PiiEntityTypes": {
+		//	                  "items": {
+		//	                    "enum": [
+		//	                      "ALL",
+		//	                      "ADDRESS",
+		//	                      "AGE",
+		//	                      "NAME",
+		//	                      "EMAIL",
+		//	                      "PHONE",
+		//	                      "USERNAME",
+		//	                      "PASSWORD",
+		//	                      "DRIVER_ID",
+		//	                      "LICENSE_PLATE",
+		//	                      "VEHICLE_IDENTIFICATION_NUMBER",
+		//	                      "CREDIT_DEBIT_CARD_CVV",
+		//	                      "CREDIT_DEBIT_CARD_EXPIRY",
+		//	                      "CREDIT_DEBIT_CARD_NUMBER",
+		//	                      "PIN",
+		//	                      "INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+		//	                      "SWIFT_CODE",
+		//	                      "IP_ADDRESS",
+		//	                      "MAC_ADDRESS",
+		//	                      "URL",
+		//	                      "AWS_ACCESS_KEY",
+		//	                      "AWS_SECRET_KEY",
+		//	                      "US_BANK_ACCOUNT_NUMBER",
+		//	                      "US_BANK_ROUTING_NUMBER",
+		//	                      "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+		//	                      "US_PASSPORT_NUMBER",
+		//	                      "US_SOCIAL_SECURITY_NUMBER",
+		//	                      "CA_HEALTH_NUMBER",
+		//	                      "CA_SOCIAL_INSURANCE_NUMBER",
+		//	                      "UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+		//	                      "UK_NATIONAL_INSURANCE_NUMBER",
+		//	                      "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array"
+		//	                },
+		//	                "RedactionMaskMode": {
+		//	                  "enum": [
+		//	                    "PII",
+		//	                    "ENTITY_TYPE"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
 		//	            }
 		//	          },
 		//	          "type": "object"
@@ -386,6 +608,80 @@ func dataAutomationProjectResource(ctx context.Context) (resource.Resource, erro
 		//	                "DISABLED"
 		//	              ],
 		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "SensitiveDataConfiguration": {
+		//	          "properties": {
+		//	            "DetectionMode": {
+		//	              "enum": [
+		//	                "DETECTION",
+		//	                "DETECTION_AND_REDACTION"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "DetectionScope": {
+		//	              "items": {
+		//	                "enum": [
+		//	                  "STANDARD",
+		//	                  "CUSTOM"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "PiiEntitiesConfiguration": {
+		//	              "properties": {
+		//	                "PiiEntityTypes": {
+		//	                  "items": {
+		//	                    "enum": [
+		//	                      "ALL",
+		//	                      "ADDRESS",
+		//	                      "AGE",
+		//	                      "NAME",
+		//	                      "EMAIL",
+		//	                      "PHONE",
+		//	                      "USERNAME",
+		//	                      "PASSWORD",
+		//	                      "DRIVER_ID",
+		//	                      "LICENSE_PLATE",
+		//	                      "VEHICLE_IDENTIFICATION_NUMBER",
+		//	                      "CREDIT_DEBIT_CARD_CVV",
+		//	                      "CREDIT_DEBIT_CARD_EXPIRY",
+		//	                      "CREDIT_DEBIT_CARD_NUMBER",
+		//	                      "PIN",
+		//	                      "INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+		//	                      "SWIFT_CODE",
+		//	                      "IP_ADDRESS",
+		//	                      "MAC_ADDRESS",
+		//	                      "URL",
+		//	                      "AWS_ACCESS_KEY",
+		//	                      "AWS_SECRET_KEY",
+		//	                      "US_BANK_ACCOUNT_NUMBER",
+		//	                      "US_BANK_ROUTING_NUMBER",
+		//	                      "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+		//	                      "US_PASSPORT_NUMBER",
+		//	                      "US_SOCIAL_SECURITY_NUMBER",
+		//	                      "CA_HEALTH_NUMBER",
+		//	                      "CA_SOCIAL_INSURANCE_NUMBER",
+		//	                      "UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+		//	                      "UK_NATIONAL_INSURANCE_NUMBER",
+		//	                      "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array"
+		//	                },
+		//	                "RedactionMaskMode": {
+		//	                  "enum": [
+		//	                    "PII",
+		//	                    "ENTITY_TYPE"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
 		//	            }
 		//	          },
 		//	          "type": "object"
@@ -483,6 +779,118 @@ func dataAutomationProjectResource(ctx context.Context) (resource.Resource, erro
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: SensitiveDataConfiguration
+						"sensitive_data_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DetectionMode
+								"detection_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"DETECTION",
+											"DETECTION_AND_REDACTION",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: DetectionScope
+								"detection_scope": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.ValueStringsAre(
+											stringvalidator.OneOf(
+												"STANDARD",
+												"CUSTOM",
+											),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: PiiEntitiesConfiguration
+								"pii_entities_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: PiiEntityTypes
+										"pii_entity_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.ValueStringsAre(
+													stringvalidator.OneOf(
+														"ALL",
+														"ADDRESS",
+														"AGE",
+														"NAME",
+														"EMAIL",
+														"PHONE",
+														"USERNAME",
+														"PASSWORD",
+														"DRIVER_ID",
+														"LICENSE_PLATE",
+														"VEHICLE_IDENTIFICATION_NUMBER",
+														"CREDIT_DEBIT_CARD_CVV",
+														"CREDIT_DEBIT_CARD_EXPIRY",
+														"CREDIT_DEBIT_CARD_NUMBER",
+														"PIN",
+														"INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+														"SWIFT_CODE",
+														"IP_ADDRESS",
+														"MAC_ADDRESS",
+														"URL",
+														"AWS_ACCESS_KEY",
+														"AWS_SECRET_KEY",
+														"US_BANK_ACCOUNT_NUMBER",
+														"US_BANK_ROUTING_NUMBER",
+														"US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+														"US_PASSPORT_NUMBER",
+														"US_SOCIAL_SECURITY_NUMBER",
+														"CA_HEALTH_NUMBER",
+														"CA_SOCIAL_INSURANCE_NUMBER",
+														"UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+														"UK_NATIONAL_INSURANCE_NUMBER",
+														"UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER",
+													),
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RedactionMaskMode
+										"redaction_mask_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"PII",
+													"ENTITY_TYPE",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
 					Computed: true,
@@ -508,6 +916,118 @@ func dataAutomationProjectResource(ctx context.Context) (resource.Resource, erro
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SensitiveDataConfiguration
+						"sensitive_data_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DetectionMode
+								"detection_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"DETECTION",
+											"DETECTION_AND_REDACTION",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: DetectionScope
+								"detection_scope": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.ValueStringsAre(
+											stringvalidator.OneOf(
+												"STANDARD",
+												"CUSTOM",
+											),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: PiiEntitiesConfiguration
+								"pii_entities_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: PiiEntityTypes
+										"pii_entity_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.ValueStringsAre(
+													stringvalidator.OneOf(
+														"ALL",
+														"ADDRESS",
+														"AGE",
+														"NAME",
+														"EMAIL",
+														"PHONE",
+														"USERNAME",
+														"PASSWORD",
+														"DRIVER_ID",
+														"LICENSE_PLATE",
+														"VEHICLE_IDENTIFICATION_NUMBER",
+														"CREDIT_DEBIT_CARD_CVV",
+														"CREDIT_DEBIT_CARD_EXPIRY",
+														"CREDIT_DEBIT_CARD_NUMBER",
+														"PIN",
+														"INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+														"SWIFT_CODE",
+														"IP_ADDRESS",
+														"MAC_ADDRESS",
+														"URL",
+														"AWS_ACCESS_KEY",
+														"AWS_SECRET_KEY",
+														"US_BANK_ACCOUNT_NUMBER",
+														"US_BANK_ROUTING_NUMBER",
+														"US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+														"US_PASSPORT_NUMBER",
+														"US_SOCIAL_SECURITY_NUMBER",
+														"CA_HEALTH_NUMBER",
+														"CA_SOCIAL_INSURANCE_NUMBER",
+														"UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+														"UK_NATIONAL_INSURANCE_NUMBER",
+														"UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER",
+													),
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RedactionMaskMode
+										"redaction_mask_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"PII",
+													"ENTITY_TYPE",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -566,6 +1086,118 @@ func dataAutomationProjectResource(ctx context.Context) (resource.Resource, erro
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SensitiveDataConfiguration
+						"sensitive_data_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DetectionMode
+								"detection_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"DETECTION",
+											"DETECTION_AND_REDACTION",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: DetectionScope
+								"detection_scope": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.ValueStringsAre(
+											stringvalidator.OneOf(
+												"STANDARD",
+												"CUSTOM",
+											),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: PiiEntitiesConfiguration
+								"pii_entities_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: PiiEntityTypes
+										"pii_entity_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.ValueStringsAre(
+													stringvalidator.OneOf(
+														"ALL",
+														"ADDRESS",
+														"AGE",
+														"NAME",
+														"EMAIL",
+														"PHONE",
+														"USERNAME",
+														"PASSWORD",
+														"DRIVER_ID",
+														"LICENSE_PLATE",
+														"VEHICLE_IDENTIFICATION_NUMBER",
+														"CREDIT_DEBIT_CARD_CVV",
+														"CREDIT_DEBIT_CARD_EXPIRY",
+														"CREDIT_DEBIT_CARD_NUMBER",
+														"PIN",
+														"INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+														"SWIFT_CODE",
+														"IP_ADDRESS",
+														"MAC_ADDRESS",
+														"URL",
+														"AWS_ACCESS_KEY",
+														"AWS_SECRET_KEY",
+														"US_BANK_ACCOUNT_NUMBER",
+														"US_BANK_ROUTING_NUMBER",
+														"US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+														"US_PASSPORT_NUMBER",
+														"US_SOCIAL_SECURITY_NUMBER",
+														"CA_HEALTH_NUMBER",
+														"CA_SOCIAL_INSURANCE_NUMBER",
+														"UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+														"UK_NATIONAL_INSURANCE_NUMBER",
+														"UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER",
+													),
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RedactionMaskMode
+										"redaction_mask_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"PII",
+													"ENTITY_TYPE",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -684,6 +1316,118 @@ func dataAutomationProjectResource(ctx context.Context) (resource.Resource, erro
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: SensitiveDataConfiguration
+						"sensitive_data_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DetectionMode
+								"detection_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"DETECTION",
+											"DETECTION_AND_REDACTION",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: DetectionScope
+								"detection_scope": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.ValueStringsAre(
+											stringvalidator.OneOf(
+												"STANDARD",
+												"CUSTOM",
+											),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: PiiEntitiesConfiguration
+								"pii_entities_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: PiiEntityTypes
+										"pii_entity_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.ValueStringsAre(
+													stringvalidator.OneOf(
+														"ALL",
+														"ADDRESS",
+														"AGE",
+														"NAME",
+														"EMAIL",
+														"PHONE",
+														"USERNAME",
+														"PASSWORD",
+														"DRIVER_ID",
+														"LICENSE_PLATE",
+														"VEHICLE_IDENTIFICATION_NUMBER",
+														"CREDIT_DEBIT_CARD_CVV",
+														"CREDIT_DEBIT_CARD_EXPIRY",
+														"CREDIT_DEBIT_CARD_NUMBER",
+														"PIN",
+														"INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+														"SWIFT_CODE",
+														"IP_ADDRESS",
+														"MAC_ADDRESS",
+														"URL",
+														"AWS_ACCESS_KEY",
+														"AWS_SECRET_KEY",
+														"US_BANK_ACCOUNT_NUMBER",
+														"US_BANK_ROUTING_NUMBER",
+														"US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+														"US_PASSPORT_NUMBER",
+														"US_SOCIAL_SECURITY_NUMBER",
+														"CA_HEALTH_NUMBER",
+														"CA_SOCIAL_INSURANCE_NUMBER",
+														"UK_NATIONAL_HEALTH_SERVICE_NUMBER",
+														"UK_NATIONAL_INSURANCE_NUMBER",
+														"UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER",
+													),
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RedactionMaskMode
+										"redaction_mask_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"PII",
+													"ENTITY_TYPE",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
 					Computed: true,
@@ -767,6 +1511,32 @@ func dataAutomationProjectResource(ctx context.Context) (resource.Resource, erro
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ProjectType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Type of the DataAutomationProject - Sync or Async",
+		//	  "enum": [
+		//	    "ASYNC",
+		//	    "SYNC"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"project_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Type of the DataAutomationProject - Sync or Async",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ASYNC",
+					"SYNC",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: StandardOutputConfiguration
@@ -1966,6 +2736,8 @@ func dataAutomationProjectResource(ctx context.Context) (resource.Resource, erro
 		"channel_labeling":              "ChannelLabeling",
 		"creation_time":                 "CreationTime",
 		"custom_output_configuration":   "CustomOutputConfiguration",
+		"detection_mode":                "DetectionMode",
+		"detection_scope":               "DetectionScope",
 		"document":                      "Document",
 		"extraction":                    "Extraction",
 		"generative_field":              "GenerativeField",
@@ -1986,11 +2758,16 @@ func dataAutomationProjectResource(ctx context.Context) (resource.Resource, erro
 		"mp_4":                          "mp4",
 		"output_format":                 "OutputFormat",
 		"override_configuration":        "OverrideConfiguration",
+		"pii_entities_configuration":    "PiiEntitiesConfiguration",
+		"pii_entity_types":              "PiiEntityTypes",
 		"png":                           "png",
 		"project_arn":                   "ProjectArn",
 		"project_description":           "ProjectDescription",
 		"project_name":                  "ProjectName",
 		"project_stage":                 "ProjectStage",
+		"project_type":                  "ProjectType",
+		"redaction_mask_mode":           "RedactionMaskMode",
+		"sensitive_data_configuration":  "SensitiveDataConfiguration",
 		"speaker_labeling":              "SpeakerLabeling",
 		"splitter":                      "Splitter",
 		"standard_output_configuration": "StandardOutputConfiguration",

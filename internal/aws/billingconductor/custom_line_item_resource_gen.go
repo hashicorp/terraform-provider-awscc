@@ -160,7 +160,8 @@ func customLineItemResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The display settings of the Custom Line Item.",
 		//	  "enum": [
-		//	    "CONSOLIDATED"
+		//	    "CONSOLIDATED",
+		//	    "ITEMIZED"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -171,6 +172,7 @@ func customLineItemResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"CONSOLIDATED",
+					"ITEMIZED",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -235,13 +237,26 @@ func customLineItemResource(ctx context.Context) (resource.Resource, error) {
 		//	        "properties": {
 		//	          "Attribute": {
 		//	            "enum": [
-		//	              "LINE_ITEM_TYPE"
+		//	              "LINE_ITEM_TYPE",
+		//	              "SERVICE"
 		//	            ],
 		//	            "type": "string"
 		//	          },
+		//	          "AttributeValues": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "maxLength": 256,
+		//	              "minLength": 1,
+		//	              "pattern": "^[a-zA-Z0-9]+$",
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
 		//	          "MatchOption": {
 		//	            "enum": [
-		//	              "NOT_EQUAL"
+		//	              "NOT_EQUAL",
+		//	              "EQUAL"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -259,8 +274,7 @@ func customLineItemResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "required": [
 		//	          "Attribute",
-		//	          "MatchOption",
-		//	          "Values"
+		//	          "MatchOption"
 		//	        ],
 		//	        "type": "object"
 		//	      },
@@ -338,11 +352,27 @@ func customLineItemResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"LINE_ITEM_TYPE",
+										"SERVICE",
 									),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: AttributeValues
+							"attribute_values": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Set{ /*START VALIDATORS*/
+									setvalidator.ValueStringsAre(
+										stringvalidator.LengthBetween(1, 256),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]+$"), ""),
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+									setplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: MatchOption
@@ -352,6 +382,7 @@ func customLineItemResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"NOT_EQUAL",
+										"EQUAL",
 									),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -370,7 +401,6 @@ func customLineItemResource(ctx context.Context) (resource.Resource, error) {
 											"SAVINGS_PLAN_NEGATION",
 										),
 									),
-									fwvalidators.NotNullSet(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 									setplanmodifier.UseStateForUnknown(),
@@ -639,6 +669,7 @@ func customLineItemResource(ctx context.Context) (resource.Resource, error) {
 		"arn":                             "Arn",
 		"association_size":                "AssociationSize",
 		"attribute":                       "Attribute",
+		"attribute_values":                "AttributeValues",
 		"billing_group_arn":               "BillingGroupArn",
 		"billing_period_range":            "BillingPeriodRange",
 		"charge_value":                    "ChargeValue",

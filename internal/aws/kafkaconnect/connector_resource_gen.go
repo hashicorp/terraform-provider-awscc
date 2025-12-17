@@ -778,6 +778,32 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: NetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The network type of the Connector.",
+		//	  "enum": [
+		//	    "IPV4",
+		//	    "DUAL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The network type of the Connector.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"IPV4",
+					"DUAL",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Plugins
 		// CloudFormation resource type schema:
 		//
@@ -1058,6 +1084,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		"max_worker_count":                    "MaxWorkerCount",
 		"mcu_count":                           "McuCount",
 		"min_worker_count":                    "MinWorkerCount",
+		"network_type":                        "NetworkType",
 		"plugins":                             "Plugins",
 		"prefix":                              "Prefix",
 		"provisioned_capacity":                "ProvisionedCapacity",

@@ -30,11 +30,11 @@ func resolverRuleAssociationResource(ctx context.Context) (resource.Resource, er
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of an association between a Resolver rule and a VPC.",
+		//	  "description": "The name of an association between a Resolver rule and a VPC.\n The name can be up to 64 characters long and can contain letters (a-z, A-Z), numbers (0-9), hyphens (-), underscores (_), and spaces. The name cannot consist of only numbers.",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of an association between a Resolver rule and a VPC.",
+			Description: "The name of an association between a Resolver rule and a VPC.\n The name can be up to 64 characters long and can contain letters (a-z, A-Z), numbers (0-9), hyphens (-), underscores (_), and spaces. The name cannot consist of only numbers.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

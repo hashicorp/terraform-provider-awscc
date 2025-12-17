@@ -419,6 +419,9 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	              "OnDemandMaxPricePercentageOverLowestPrice": {
 		//	                "type": "integer"
 		//	              },
+		//	              "RequireEncryptionInTransit": {
+		//	                "type": "boolean"
+		//	              },
 		//	              "RequireHibernateSupport": {
 		//	                "type": "boolean"
 		//	              },
@@ -972,6 +975,9 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	                    },
 		//	                    "OnDemandMaxPricePercentageOverLowestPrice": {
 		//	                      "type": "integer"
+		//	                    },
+		//	                    "RequireEncryptionInTransit": {
+		//	                      "type": "boolean"
 		//	                    },
 		//	                    "RequireHibernateSupport": {
 		//	                      "type": "boolean"
@@ -1914,6 +1920,14 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: RequireEncryptionInTransit
+									"require_encryption_in_transit": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: RequireHibernateSupport
@@ -2911,6 +2925,14 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 														int64planmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
+												// Property: RequireEncryptionInTransit
+												"require_encryption_in_transit": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+														boolplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 												// Property: RequireHibernateSupport
 												"require_hibernate_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
 													Optional: true,
@@ -3405,6 +3427,64 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END SCHEMA*/
 			Required: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The tags to specify in SpotFleetRequestConfigData",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags to specify in SpotFleetRequestConfigData",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -3517,6 +3597,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		"references":                                       "References",
 		"replace_unhealthy_instances":                      "ReplaceUnhealthyInstances",
 		"replacement_strategy":                             "ReplacementStrategy",
+		"require_encryption_in_transit":                    "RequireEncryptionInTransit",
 		"require_hibernate_support":                        "RequireHibernateSupport",
 		"resource_type":                                    "ResourceType",
 		"secondary_private_ip_address_count":               "SecondaryPrivateIpAddressCount",

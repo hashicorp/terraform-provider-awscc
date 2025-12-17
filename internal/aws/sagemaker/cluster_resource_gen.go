@@ -395,6 +395,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	        ],
 		//	        "type": "object"
 		//	      },
+		//	      "MinInstanceCount": {
+		//	        "description": "The minimum number of instances required for the instance group to be InService. MinInstanceCount must be less than or equal to InstanceCount.",
+		//	        "minimum": 0,
+		//	        "type": "integer"
+		//	      },
 		//	      "OnStartDeepHealthChecks": {
 		//	        "description": "Nodes will undergo advanced stress test to detect and replace faulty instances, based on the type of deep health check(s) passed in.",
 		//	        "insertionOrder": false,
@@ -862,6 +867,18 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: MinInstanceCount
+					"min_instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The minimum number of instances required for the instance group to be InService. MinInstanceCount must be less than or equal to InstanceCount.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							int64validator.AtLeast(0),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: OnStartDeepHealthChecks
@@ -1991,6 +2008,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"labels":                                "Labels",
 		"life_cycle_config":                     "LifeCycleConfig",
 		"maximum_batch_size":                    "MaximumBatchSize",
+		"min_instance_count":                    "MinInstanceCount",
 		"mode":                                  "Mode",
 		"node_provisioning_mode":                "NodeProvisioningMode",
 		"node_recovery":                         "NodeRecovery",

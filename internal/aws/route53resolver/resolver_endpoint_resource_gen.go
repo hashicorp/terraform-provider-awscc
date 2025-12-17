@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -261,6 +262,21 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: RniEnhancedMetricsEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether RNI enhanced metrics are enabled for the Resolver Endpoints. When set to true, one-minute granular metrics are published in CloudWatch for each RNI associated with this endpoint. When set to false, metrics are not published. Default is false.",
+		//	  "type": "boolean"
+		//	}
+		"rni_enhanced_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether RNI enhanced metrics are enabled for the Resolver Endpoints. When set to true, one-minute granular metrics are published in CloudWatch for each RNI associated with this endpoint. When set to false, metrics are not published. Default is false.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -346,6 +362,21 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TargetNameServerMetricsEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether target name server metrics are enabled for the Outbound Resolver Endpoint. When set to true, one-minute granular metrics are published in CloudWatch for each target name server associated with this endpoint. When set to false, metrics are not published. Default is false.",
+		//	  "type": "boolean"
+		//	}
+		"target_name_server_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether target name server metrics are enabled for the Outbound Resolver Endpoint. When set to true, one-minute granular metrics are published in CloudWatch for each target name server associated with this endpoint. When set to false, metrics are not published. Default is false.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -375,24 +406,26 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                     "Arn",
-		"direction":               "Direction",
-		"host_vpc_id":             "HostVPCId",
-		"ip":                      "Ip",
-		"ip_address_count":        "IpAddressCount",
-		"ip_addresses":            "IpAddresses",
-		"ipv_6":                   "Ipv6",
-		"key":                     "Key",
-		"name":                    "Name",
-		"outpost_arn":             "OutpostArn",
-		"preferred_instance_type": "PreferredInstanceType",
-		"protocols":               "Protocols",
-		"resolver_endpoint_id":    "ResolverEndpointId",
-		"resolver_endpoint_type":  "ResolverEndpointType",
-		"security_group_ids":      "SecurityGroupIds",
-		"subnet_id":               "SubnetId",
-		"tags":                    "Tags",
-		"value":                   "Value",
+		"arn":                                "Arn",
+		"direction":                          "Direction",
+		"host_vpc_id":                        "HostVPCId",
+		"ip":                                 "Ip",
+		"ip_address_count":                   "IpAddressCount",
+		"ip_addresses":                       "IpAddresses",
+		"ipv_6":                              "Ipv6",
+		"key":                                "Key",
+		"name":                               "Name",
+		"outpost_arn":                        "OutpostArn",
+		"preferred_instance_type":            "PreferredInstanceType",
+		"protocols":                          "Protocols",
+		"resolver_endpoint_id":               "ResolverEndpointId",
+		"resolver_endpoint_type":             "ResolverEndpointType",
+		"rni_enhanced_metrics_enabled":       "RniEnhancedMetricsEnabled",
+		"security_group_ids":                 "SecurityGroupIds",
+		"subnet_id":                          "SubnetId",
+		"tags":                               "Tags",
+		"target_name_server_metrics_enabled": "TargetNameServerMetricsEnabled",
+		"value":                              "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
