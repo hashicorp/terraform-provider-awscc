@@ -28,6 +28,8 @@
         "route53:CreateQueryLoggingConfig",
         "route53:ChangeTagsForResource",
         "route53:GetChange",
+        "route53:GetHostedZone",
+        "route53:UpdateHostedZoneFeatures",
         "route53:AssociateVPCWithHostedZone",
         "ec2:DescribeVpcs"
       ]
@@ -39,6 +41,7 @@
         "route53:ListTagsForResource",
         "route53:ListQueryLoggingConfigs",
         "route53:UpdateHostedZoneComment",
+        "route53:UpdateHostedZoneFeatures",
         "route53:ChangeTagsForResource",
         "route53:AssociateVPCWithHostedZone",
         "route53:DisassociateVPCFromHostedZone",
@@ -60,6 +63,8 @@
         "route53:DeleteHostedZone",
         "route53:DeleteQueryLoggingConfig",
         "route53:ListQueryLoggingConfigs",
+        "route53:UpdateHostedZoneFeatures",
+        "route53:GetHostedZone",
         "route53:GetChange"
       ]
     }
@@ -78,6 +83,17 @@
     "/properties/Id"
   ],
   "definitions": {
+    "HostedZoneFeatures": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "EnableAcceleratedRecovery": {
+          "description": "Enable accelerated recovery on your public hosted zone to gain the ability to make changes to DNS records in the event of us-east-1 unavailability.",
+          "type": "boolean"
+        }
+      }
+    },
     "HostedZoneTag": {
       "description": "A complex type that contains information about a tag that you want to add or edit for the specified health check or hosted zone.",
       "additionalProperties": false,
@@ -163,6 +179,10 @@
       "items": {
         "$ref": "#/definitions/VPC"
       }
+    },
+    "HostedZoneFeatures": {
+      "description": "",
+      "$ref": "#/definitions/HostedZoneFeatures"
     },
     "HostedZoneConfig": {
       "description": "A complex type that contains an optional comment.\n If you don't want to specify a comment, omit the ``HostedZoneConfig`` and ``Comment`` elements.",

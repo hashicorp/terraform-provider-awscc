@@ -102,7 +102,7 @@
         },
         "JwtValidationConfig": {
           "$ref": "#/definitions/JwtValidationConfig",
-          "description": ""
+          "description": "[HTTPS listeners] Information for validating JWT access tokens in client requests. Specify only when ``Type`` is ``jwt-validation``."
         }
       },
       "required": [
@@ -498,11 +498,11 @@
       "properties": {
         "Format": {
           "type": "string",
-          "description": ""
+          "description": "The format of the claim value."
         },
         "Name": {
           "type": "string",
-          "description": ""
+          "description": "The name of the claim. You can't specify ``exp``, ``iss``, ``nbf``, or ``iat`` because we validate them by default."
         },
         "Values": {
           "type": "array",
@@ -510,7 +510,7 @@
           "items": {
             "type": "string"
           },
-          "description": ""
+          "description": "The claim value. The maximum size of the list is 10. Each value can be up to 256 characters in length. If the format is ``space-separated-values``, the values can't include spaces."
         }
       },
       "required": [
@@ -518,7 +518,7 @@
         "Name",
         "Values"
       ],
-      "description": ""
+      "description": "Information about an additional claim to validate."
     },
     "SourceIpConfig": {
       "type": "object",

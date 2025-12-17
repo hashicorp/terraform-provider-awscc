@@ -190,6 +190,9 @@
         },
         "ModelInference": {
           "$ref": "#/definitions/MembershipModelInferencePaymentConfig"
+        },
+        "SyntheticDataGeneration": {
+          "$ref": "#/definitions/MembershipSyntheticDataGenerationPaymentConfig"
         }
       }
     },
@@ -206,6 +209,18 @@
       ]
     },
     "MembershipModelInferencePaymentConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "IsResponsible": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "IsResponsible"
+      ]
+    },
+    "MembershipSyntheticDataGenerationPaymentConfig": {
       "type": "object",
       "additionalProperties": false,
       "properties": {

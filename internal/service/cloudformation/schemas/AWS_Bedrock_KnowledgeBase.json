@@ -632,6 +632,84 @@
       },
       "additionalProperties": false
     },
+    "FixedLengthDuration": {
+      "type": "integer",
+      "description": "Duration in seconds to segment the multi modal media",
+      "minimum": 1,
+      "maximum": 30
+    },
+    "AudioSegmentationConfiguration": {
+      "type": "object",
+      "description": "Configure the audio segmentation configuration for multi modal ingestion.",
+      "properties": {
+        "FixedLengthDuration": {
+          "$ref": "#/definitions/FixedLengthDuration"
+        }
+      },
+      "required": [
+        "FixedLengthDuration"
+      ],
+      "additionalProperties": false
+    },
+    "VideoSegmentationConfiguration": {
+      "type": "object",
+      "description": "Configure the video segmentation configuration for multi modal ingestion.",
+      "properties": {
+        "FixedLengthDuration": {
+          "$ref": "#/definitions/FixedLengthDuration"
+        }
+      },
+      "required": [
+        "FixedLengthDuration"
+      ],
+      "additionalProperties": false
+    },
+    "AudioConfiguration": {
+      "type": "object",
+      "description": "Configure the audio configuration for multi modal ingestion.",
+      "properties": {
+        "SegmentationConfiguration": {
+          "$ref": "#/definitions/AudioSegmentationConfiguration"
+        }
+      },
+      "required": [
+        "SegmentationConfiguration"
+      ],
+      "additionalProperties": false
+    },
+    "VideoConfiguration": {
+      "type": "object",
+      "description": "Configure the video configuration for multi modal ingestion.",
+      "properties": {
+        "SegmentationConfiguration": {
+          "$ref": "#/definitions/VideoSegmentationConfiguration"
+        }
+      },
+      "required": [
+        "SegmentationConfiguration"
+      ],
+      "additionalProperties": false
+    },
+    "AudioConfigurations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AudioConfiguration"
+      },
+      "maxItems": 1,
+      "minItems": 1,
+      "description": "List of audio configurations for multi modal ingestion.",
+      "insertionOrder": false
+    },
+    "VideoConfigurations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/VideoConfiguration"
+      },
+      "maxItems": 1,
+      "minItems": 1,
+      "description": "List of video configurations for multi modal ingestion.",
+      "insertionOrder": false
+    },
     "BedrockEmbeddingModelConfiguration": {
       "type": "object",
       "description": "The vector configuration details for the Bedrock embeddings model.",
@@ -649,6 +727,12 @@
             "FLOAT32",
             "BINARY"
           ]
+        },
+        "Audio": {
+          "$ref": "#/definitions/AudioConfigurations"
+        },
+        "Video": {
+          "$ref": "#/definitions/VideoConfigurations"
         }
       },
       "additionalProperties": false

@@ -444,10 +444,7 @@
     },
     "list": {
       "permissions": [
-        "cloudformation:ListStackSets",
-        "cloudformation:DescribeStackSet",
-        "cloudformation:ListStackInstances",
-        "cloudformation:DescribeStackInstance"
+        "cloudformation:ListStackSets"
       ]
     }
   }

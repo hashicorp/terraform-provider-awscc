@@ -1,10 +1,5 @@
 {
   "additionalProperties": false,
-  "createOnlyProperties": [
-    "/properties/IpCount",
-    "/properties/Name",
-    "/properties/Tags"
-  ],
   "definitions": {
     "AnycastIpList": {
       "additionalProperties": false,
@@ -30,6 +25,10 @@
         },
         "IpAddressType": {
           "$ref": "#/definitions/IpAddressType",
+          "description": ""
+        },
+        "IpamCidrConfigResults": {
+          "$ref": "#/definitions/IpamCidrConfigResults",
           "description": ""
         },
         "LastModifiedTime": {
@@ -105,6 +104,58 @@
         "dualstack"
       ],
       "type": "string"
+    },
+    "IpamCidrConfigResult": {
+      "additionalProperties": false,
+      "properties": {
+        "Cidr": {
+          "type": "string"
+        },
+        "IpamPoolArn": {
+          "type": "string"
+        },
+        "AnycastIp": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "description": ""
+    },
+    "IpamCidrConfigResults": {
+      "additionalProperties": false,
+      "items": {
+        "$ref": "#/definitions/IpamCidrConfigResult"
+      },
+      "type": "array",
+      "uniqueItems": false
+    },
+    "IpamCidrConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "Cidr": {
+          "type": "string"
+        },
+        "IpamPoolArn": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Cidr",
+        "IpamPoolArn"
+      ],
+      "type": "object",
+      "description": ""
+    },
+    "IpamCidrConfigs": {
+      "additionalProperties": false,
+      "items": {
+        "$ref": "#/definitions/IpamCidrConfig"
+      },
+      "type": "array",
+      "uniqueItems": false
     }
   },
   "description": "An Anycast static IP list. For more information, see [Request Anycast static IPs to use for allowlisting](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/request-static-ips.html) in the *Amazon CloudFront Developer Guide*.",
@@ -166,6 +217,14 @@
       "$ref": "#/definitions/IpAddressType",
       "description": ""
     },
+    "IpamCidrConfigs": {
+      "$ref": "#/definitions/IpamCidrConfigs",
+      "description": ""
+    },
+    "IpamCidrConfigResults": {
+      "$ref": "#/definitions/IpamCidrConfigResults",
+      "description": ""
+    },
     "Name": {
       "maxLength": 64,
       "minLength": 1,
@@ -178,10 +237,19 @@
       "description": "A complex type that contains zero or more ``Tag`` elements."
     }
   },
+  "createOnlyProperties": [
+    "/properties/IpCount",
+    "/properties/Name",
+    "/properties/Tags"
+  ],
   "readOnlyProperties": [
     "/properties/AnycastIpList",
     "/properties/ETag",
-    "/properties/Id"
+    "/properties/Id",
+    "/properties/IpamCidrConfigResults"
+  ],
+  "writeOnlyProperties": [
+    "/properties/IpamCidrConfigs"
   ],
   "required": [
     "IpCount",

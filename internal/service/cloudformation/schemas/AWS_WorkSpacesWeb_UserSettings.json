@@ -2,6 +2,43 @@
   "typeName": "AWS::WorkSpacesWeb::UserSettings",
   "description": "Definition of AWS::WorkSpacesWeb::UserSettings Resource Type",
   "definitions": {
+    "BrandingConfiguration": {
+      "type": "object",
+      "properties": {
+        "Logo": {
+          "type": "string",
+          "pattern": ""
+        },
+        "Wallpaper": {
+          "type": "string",
+          "pattern": ""
+        },
+        "Favicon": {
+          "type": "string",
+          "pattern": ""
+        },
+        "LogoMetadata": {
+          "$ref": "#/definitions/ImageMetadata"
+        },
+        "WallpaperMetadata": {
+          "$ref": "#/definitions/ImageMetadata"
+        },
+        "FaviconMetadata": {
+          "$ref": "#/definitions/ImageMetadata"
+        },
+        "LocalizedStrings": {
+          "$ref": "#/definitions/LocalizedBrandingStringMap"
+        },
+        "ColorTheme": {
+          "$ref": "#/definitions/ColorTheme"
+        },
+        "TermsOfService": {
+          "type": "string",
+          "maxLength": 153600
+        }
+      },
+      "additionalProperties": false
+    },
     "CookieSpecification": {
       "type": "object",
       "properties": {
@@ -74,6 +111,104 @@
       },
       "additionalProperties": false
     },
+    "ColorTheme": {
+      "type": "string",
+      "enum": [
+        "Light",
+        "Dark"
+      ]
+    },
+    "ImageMetadata": {
+      "type": "object",
+      "properties": {
+        "MimeType": {
+          "$ref": "#/definitions/MimeType"
+        },
+        "FileExtension": {
+          "type": "string",
+          "maxLength": 131072,
+          "minLength": 0,
+          "pattern": "^[\\s\\S]*$"
+        },
+        "LastUploadTimestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "FileExtension",
+        "LastUploadTimestamp",
+        "MimeType"
+      ],
+      "additionalProperties": false
+    },
+    "Locale": {
+      "type": "string",
+      "enum": [
+        "de-DE",
+        "en-US",
+        "es-ES",
+        "fr-FR",
+        "id-ID",
+        "it-IT",
+        "ja-JP",
+        "ko-KR",
+        "pt-BR",
+        "zh-CN",
+        "zh-TW"
+      ]
+    },
+    "LocalizedBrandingStringMap": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/LocalizedBrandingStrings"
+        }
+      },
+      "additionalProperties": false
+    },
+    "LocalizedBrandingStrings": {
+      "type": "object",
+      "properties": {
+        "BrowserTabTitle": {
+          "type": "string",
+          "pattern": "^[^<>&'`~\\\\]*$"
+        },
+        "WelcomeText": {
+          "type": "string",
+          "pattern": "^[^<>&'`~\\\\]*$"
+        },
+        "LoginTitle": {
+          "type": "string",
+          "pattern": "^[^<>&'`~\\\\]*$"
+        },
+        "LoginDescription": {
+          "type": "string",
+          "pattern": "^[^<>&'`~\\\\]*$"
+        },
+        "LoginButtonText": {
+          "type": "string",
+          "pattern": "^[^<>&'`~\\\\]*$"
+        },
+        "ContactLink": {
+          "type": "string",
+          "pattern": "^(https?://|mailto:).*"
+        },
+        "ContactButtonText": {
+          "type": "string",
+          "pattern": "^[^<>&'`~\\\\]*$"
+        },
+        "LoadingText": {
+          "type": "string",
+          "pattern": "^[^<>&'`~\\\\]*$"
+        }
+      },
+      "required": [
+        "BrowserTabTitle",
+        "WelcomeText"
+      ],
+      "additionalProperties": false
+    },
     "MaxDisplayResolution": {
       "type": "string",
       "enum": [
@@ -85,6 +220,14 @@
         "size1280X720",
         "size1024X768",
         "size800X600"
+      ]
+    },
+    "MimeType": {
+      "type": "string",
+      "enum": [
+        "image/png",
+        "image/jpeg",
+        "image/x-icon"
       ]
     },
     "Tag": {
@@ -169,6 +312,9 @@
       },
       "insertionOrder": false
     },
+    "BrandingConfiguration": {
+      "$ref": "#/definitions/BrandingConfiguration"
+    },
     "CookieSynchronizationConfiguration": {
       "$ref": "#/definitions/CookieSynchronizationConfiguration"
     },
@@ -234,9 +380,17 @@
     "PrintAllowed",
     "UploadAllowed"
   ],
+  "writeOnlyProperties": [
+    "/properties/BrandingConfiguration/Logo",
+    "/properties/BrandingConfiguration/Favicon",
+    "/properties/BrandingConfiguration/Wallpaper"
+  ],
   "readOnlyProperties": [
     "/properties/AssociatedPortalArns",
-    "/properties/UserSettingsArn"
+    "/properties/UserSettingsArn",
+    "/properties/BrandingConfiguration/LogoMetadata",
+    "/properties/BrandingConfiguration/FaviconMetadata",
+    "/properties/BrandingConfiguration/WallpaperMetadata"
   ],
   "primaryIdentifier": [
     "/properties/UserSettingsArn"
@@ -253,7 +407,8 @@
         "kms:Decrypt",
         "kms:GenerateDataKeyWithoutPlaintext",
         "kms:ReEncryptTo",
-        "kms:ReEncryptFrom"
+        "kms:ReEncryptFrom",
+        "s3:GetObject"
       ]
     },
     "read": {
@@ -276,7 +431,8 @@
         "kms:CreateGrant",
         "kms:DescribeKey",
         "kms:GenerateDataKey",
-        "kms:Decrypt"
+        "kms:Decrypt",
+        "s3:GetObject"
       ]
     },
     "delete": {

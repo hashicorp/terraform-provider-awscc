@@ -185,6 +185,9 @@
   "primaryIdentifier": [
     "/properties/Id"
   ],
+  "writeOnlyProperties": [
+    "/properties/ServiceRole"
+  ],
   "additionalIdentifiers": [
     [
       "/properties/Name"

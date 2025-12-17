@@ -17,7 +17,22 @@
     "/properties/ActiveConfigurations",
     "/properties/Status",
     "/properties/CreatedAt",
-    "/properties/UpdatedAt"
+    "/properties/UpdatedAt",
+    "/properties/Endpoint",
+    "/properties/ECSManagedResourceArns",
+    "/properties/ECSManagedResourceArns/ServiceSecurityGroups",
+    "/properties/ECSManagedResourceArns/AutoScaling",
+    "/properties/ECSManagedResourceArns/AutoScaling/ScalableTarget",
+    "/properties/ECSManagedResourceArns/AutoScaling/ApplicationAutoScalingPolicies",
+    "/properties/ECSManagedResourceArns/LogGroups",
+    "/properties/ECSManagedResourceArns/MetricAlarms",
+    "/properties/ECSManagedResourceArns/IngressPath",
+    "/properties/ECSManagedResourceArns/IngressPath/CertificateArn",
+    "/properties/ECSManagedResourceArns/IngressPath/LoadBalancerSecurityGroups",
+    "/properties/ECSManagedResourceArns/IngressPath/ListenerRuleArn",
+    "/properties/ECSManagedResourceArns/IngressPath/ListenerArn",
+    "/properties/ECSManagedResourceArns/IngressPath/LoadBalancerArn",
+    "/properties/ECSManagedResourceArns/IngressPath/TargetGroupArns"
   ],
   "description": "Resource Type definition for AWS::ECS::ExpressGatewayService",
   "createOnlyProperties": [
@@ -41,7 +56,8 @@
   "handlers": {
     "read": {
       "permissions": [
-        "ecs:DescribeExpressGatewayService"
+        "ecs:DescribeExpressGatewayService",
+        "ecs:DescribeServiceRevisions"
       ]
     },
     "create": {
@@ -207,6 +223,51 @@
         "LogStreamPrefix"
       ]
     },
+    "ECSManagedResourceArns": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "LogGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ServiceSecurityGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "MetricAlarms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "IngressPath": {
+          "$ref": "#/definitions/IngressPathArns"
+        },
+        "AutoScaling": {
+          "$ref": "#/definitions/AutoScalingArns"
+        }
+      }
+    },
+    "AutoScalingArns": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ScalableTarget": {
+          "type": "string"
+        },
+        "ApplicationAutoScalingPolicies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "Secret": {
       "additionalProperties": false,
       "type": "object",
@@ -299,6 +360,36 @@
         "INACTIVE"
       ]
     },
+    "IngressPathArns": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ListenerArn": {
+          "type": "string"
+        },
+        "LoadBalancerArn": {
+          "type": "string"
+        },
+        "TargetGroupArns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ListenerRuleArn": {
+          "type": "string"
+        },
+        "LoadBalancerSecurityGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "CertificateArn": {
+          "type": "string"
+        }
+      }
+    },
     "ExpressGatewayServiceNetworkConfiguration": {
       "additionalProperties": false,
       "type": "object",
@@ -367,6 +458,9 @@
     "ServiceArn": {
       "type": "string"
     },
+    "ECSManagedResourceArns": {
+      "$ref": "#/definitions/ECSManagedResourceArns"
+    },
     "UpdatedAt": {
       "format": "date-time",
       "type": "string"
@@ -385,6 +479,9 @@
       "items": {
         "$ref": "#/definitions/ExpressGatewayServiceConfiguration"
       }
+    },
+    "Endpoint": {
+      "type": "string"
     },
     "ServiceName": {
       "type": "string"

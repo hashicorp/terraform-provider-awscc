@@ -665,6 +665,9 @@
             ]
           }
         },
+        "RequireEncryptionInTransit": {
+          "type": "boolean"
+        },
         "MemoryGiBPerVCpu": {
           "$ref": "#/definitions/MemoryGiBPerVCpuRequest"
         },
@@ -1020,6 +1023,14 @@
     },
     "Id": {
       "type": "string"
+    },
+    "Tags": {
+      "uniqueItems": false,
+      "description": "The tags to specify in SpotFleetRequestConfigData",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     }
   }
 }

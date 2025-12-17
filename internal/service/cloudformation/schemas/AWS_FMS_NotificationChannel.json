@@ -27,13 +27,15 @@
     "create": {
       "permissions": [
         "fms:PutNotificationChannel",
-        "iam:PassRole"
+        "iam:PassRole",
+        "fms:GetNotificationChannel"
       ]
     },
     "update": {
       "permissions": [
         "fms:PutNotificationChannel",
-        "iam:PassRole"
+        "iam:PassRole",
+        "fms:GetNotificationChannel"
       ]
     },
     "read": {
@@ -43,6 +45,7 @@
     },
     "delete": {
       "permissions": [
+        "fms:GetNotificationChannel",
         "fms:DeleteNotificationChannel"
       ]
     },
@@ -52,6 +55,9 @@
       ]
     }
   },
+  "createOnlyProperties": [
+    "/properties/SnsTopicArn"
+  ],
   "primaryIdentifier": [
     "/properties/SnsTopicArn"
   ],

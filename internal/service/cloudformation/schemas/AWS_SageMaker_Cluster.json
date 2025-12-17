@@ -575,6 +575,11 @@
         },
         "ExecutionRole": {
           "$ref": "#/definitions/ExecutionRole"
+        },
+        "MinInstanceCount": {
+          "description": "The minimum number of instances required for the instance group to be InService. MinInstanceCount must be less than or equal to InstanceCount.",
+          "type": "integer",
+          "minimum": 0
         }
       },
       "required": [

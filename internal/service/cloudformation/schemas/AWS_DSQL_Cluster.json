@@ -106,6 +106,10 @@
       "description": "The DSQL cluster endpoint.",
       "type": "string"
     },
+    "VpcEndpoint": {
+      "description": "The DSQL cluster VPC endpoint.",
+      "type": "string"
+    },
     "PolicyVersion": {
       "description": "The version number of the cluster's resource based policy",
       "type": "string"
@@ -140,7 +144,8 @@
     "/properties/VpcEndpointServiceName",
     "/properties/EncryptionDetails",
     "/properties/PolicyVersion",
-    "/properties/Endpoint"
+    "/properties/Endpoint",
+    "/properties/VpcEndpoint"
   ],
   "writeOnlyProperties": [
     "/properties/KmsEncryptionKey"

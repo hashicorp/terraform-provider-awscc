@@ -60,6 +60,7 @@
         "route53resolver:GetFirewallRuleGroup",
         "route53resolver:GetResolverRule",
         "route53:GetHostedZone",
+        "route53profiles:ListProfileResourceAssociations",
         "route53resolver:GetResolverQueryLogConfig",
         "ec2:DescribeVpcEndpoints"
       ]

@@ -246,6 +246,19 @@
             "S3Properties"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "MlflowProperties",
+          "properties": {
+            "MlflowProperties": {
+              "$ref": "#/definitions/MlflowPropertiesInput"
+            }
+          },
+          "required": [
+            "MlflowProperties"
+          ],
+          "additionalProperties": false
         }
       ]
     },
@@ -638,7 +651,7 @@
         "ComputeArn": {
           "type": "string",
           "maxLength": 2048,
-          "pattern": "^arn:aws(-(cn|us-gov|iso(-[bef])?))?:(elasticmapreduce|emr-serverless):.*"
+          "pattern": "^arn:aws(-(cn|us-gov|iso(-[bef])?))?:(elasticmapreduce|emr-serverless|emr-containers):.*"
         },
         "InstanceProfileArn": {
           "type": "string",
@@ -669,6 +682,10 @@
           "type": "string",
           "maxLength": 2048,
           "pattern": "^s3://.+$"
+        },
+        "ManagedEndpointArn": {
+          "type": "string",
+          "maxLength": 2048
         }
       },
       "additionalProperties": false
@@ -810,6 +827,17 @@
       "required": [
         "S3Uri"
       ],
+      "additionalProperties": false
+    },
+    "MlflowPropertiesInput": {
+      "type": "object",
+      "description": "MLflow Properties Input",
+      "properties": {
+        "TrackingServerArn": {
+          "type": "string",
+          "description": "The ARN of the MLflow tracking server"
+        }
+      },
       "additionalProperties": false
     }
   },
