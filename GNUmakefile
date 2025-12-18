@@ -176,7 +176,7 @@ importlint: ## Run importlint
 	@impi --local . --scheme stdThirdPartyLocal --ignore-generated=true ./...
 
 tools: prereq-go ## Install tools
-	cd tools && $(GO_VER) install github.com/golangci/golangci-lint/cmd/golangci-lint
+	cd tools && $(GO_VER) install github.com/golangci/golangci-lint/v2/cmd/golangci-lint
 	cd tools && $(GO_VER) install github.com/pavius/impi/cmd/impi
 	cd tools && $(GO_VER) install github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
 	cd tools && $(GO_VER) install golang.org/x/tools/cmd/goimports@latest
