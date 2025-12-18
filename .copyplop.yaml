@@ -23,6 +23,8 @@ files:
     - "docs/**"
     - ".github/**"
     - "contributing/**"
+    - "**/README.md"
+    - "META.d/**"
   extensions:
     - ".go"
     - ".yml"
