@@ -1,3 +1,6 @@
+# Copyright IBM Corp. 2021, 2025
+# SPDX-License-Identifier: MPL-2.0
+
 terraform {
   # custom provider_meta which should appear appended to user agent
   provider_meta "awscc" {

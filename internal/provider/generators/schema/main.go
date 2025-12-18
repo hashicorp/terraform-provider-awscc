@@ -117,7 +117,9 @@ func run(destinationPackage, generatedCodeRootDirectoryName, resourcesFilename, 
 		return 1
 	}
 
-	defer os.RemoveAll(tempDirectory)
+	defer func() {
+		_ = os.RemoveAll(tempDirectory)
+	}()
 
 	downloader := &Downloader{
 		client:        client,
@@ -175,7 +177,9 @@ func copyFile(dst, src string) error {
 	if err != nil {
 		return err
 	}
-	defer rf.Close()
+	defer func() {
+		_ = rf.Close()
+	}()
 	rstat, err := rf.Stat()
 	if err != nil {
 		return err
@@ -189,7 +193,7 @@ func copyFile(dst, src string) error {
 		return err
 	}
 	if _, err := io.Copy(wf, rf); err != nil {
-		wf.Close()
+		_ = wf.Close()
 		return err
 	}
 	return wf.Close()
@@ -403,7 +407,7 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema, timer int) (string, s
 	return resourceSchemaFilename, *resource.TypeName, nil
 }
 
-func (d *Downloader) infof(format string, a ...interface{}) {
+func (d *Downloader) infof(format string, a ...any) {
 	d.ui.Info(fmt.Sprintf(format, a...))
 }
 

@@ -15,7 +15,7 @@ import (
 )
 
 // StaticPartialObject return an AttributePlanModifier that sets the specified value if the planned value is Null.
-func StaticPartialObject(defaultVal map[string]interface{}) planmodifier.Object {
+func StaticPartialObject(defaultVal map[string]any) planmodifier.Object {
 	return objectDefaultValueAttributePlanModifier{
 		defaultVal: defaultVal,
 	}
@@ -63,7 +63,7 @@ func (m objectDefaultValueAttributePlanModifier) PlanModifyObject(ctx context.Co
 	response.PlanValue = request.PlanValue
 }
 
-func copyAttributeValues(ctx context.Context, dst map[string]attr.Value, src map[string]interface{}) diag.Diagnostics {
+func copyAttributeValues(ctx context.Context, dst map[string]attr.Value, src map[string]any) diag.Diagnostics {
 	var diags diag.Diagnostics
 
 	for k, v := range src {
@@ -73,7 +73,7 @@ func copyAttributeValues(ctx context.Context, dst map[string]attr.Value, src map
 				dst[k] = types.BoolValue(v)
 			case string:
 				dst[k] = types.StringValue(v)
-			case map[string]interface{}:
+			case map[string]any:
 				if old, ok := old.(types.Object); ok {
 					attributeTypes := old.AttributeTypes(ctx)
 					attributes := map[string]attr.Value{}

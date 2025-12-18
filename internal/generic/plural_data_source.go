@@ -84,7 +84,7 @@ func (pd *genericPluralDataSource) Read(ctx context.Context, _ datasource.ReadRe
 		Raw:    val,
 	}
 
-	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
+	tflog.Debug(ctx, "Response.State.Raw", map[string]any{
 		"value": hclog.Fmt("%v", response.State.Raw),
 	})
 

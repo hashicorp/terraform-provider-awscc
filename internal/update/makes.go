@@ -49,7 +49,9 @@ func makeBuild(ctx context.Context, config *GitHubConfig, currentSchemas *allsch
 	if err != nil {
 		return fmt.Errorf("failed to open error log file: %w", err)
 	}
-	defer file.Close()
+	defer func() {
+		_ = file.Close()
+	}()
 
 	hasErrors := true
 
@@ -67,7 +69,9 @@ func makeBuild(ctx context.Context, config *GitHubConfig, currentSchemas *allsch
 		if err != nil {
 			return fmt.Errorf("failed to clear makes_errors.txt: %w", err)
 		}
-		file.Close()
+		if err := file.Close(); err != nil {
+			return fmt.Errorf("failed to close error log file: %w", err)
+		}
 
 		// Execute make command with error filtering
 		command := fmt.Sprintf("make %s 2>&1 | grep \"error\" > %s", buildType, filePaths.RunMakesErrors)
@@ -258,8 +262,8 @@ func handleAWS_UnderscoreError(ctx context.Context, errorLine string, config *Gi
 	/*
 		Example error: "error loading CloudFormation Resource Provider Schema for aws_nimblestudio_studio: describing CloudFormation type: operation error CloudFormation: DescribeType, exceeded maximum number of attempts, 3, https response error StatusCode: 400, ..."
 	*/
-	words := strings.Split(errorLine, " ")
-	for _, word := range words {
+	words := strings.SplitSeq(errorLine, " ")
+	for word := range words {
 		if strings.HasPrefix(word, "aws_") {
 			// Look for a matching file in internal/service/cloudformation/schemas
 			schemasDir := filePaths.CloudFormationSchemasDir
@@ -445,7 +449,11 @@ func addSchemaToCheckout(resource string, filePaths *UpdateFilePaths) error {
 		log.Println("Error opening file:", err)
 		return fmt.Errorf("failed to open checkout file for writing: %w", err)
 	}
-	defer file.Close()
+	defer func() {
+		if cerr := file.Close(); cerr != nil && err == nil {
+			err = fmt.Errorf("failed to close checkout file: %w", cerr)
+		}
+	}()
 
 	writeContent := fmt.Sprintf("\n%s/%s.json", filePaths.CloudFormationSchemasDir, resource)
 	log.Println("Writing to file:", writeContent)
@@ -470,7 +478,9 @@ func checkoutSchemas(suppressionData string) error {
 			if createErr != nil {
 				return fmt.Errorf("failed to create suppression data file: %w", createErr)
 			}
-			f.Close()
+			if err := f.Close(); err != nil {
+				return fmt.Errorf("failed to close suppression data file: %w", err)
+			}
 			return nil
 		} else {
 			return fmt.Errorf("failed to stat suppression data file: %w", err)
@@ -483,8 +493,8 @@ func checkoutSchemas(suppressionData string) error {
 		}
 
 		// Split the contents by spaces to get individual file paths
-		lines := strings.Split(string(contents), "\n")
-		for _, line := range lines {
+		lines := strings.SplitSeq(string(contents), "\n")
+		for line := range lines {
 			path := strings.TrimSpace(line)
 			if path != "" {
 				err := execGit("checkout", path)

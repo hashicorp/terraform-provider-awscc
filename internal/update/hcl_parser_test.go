@@ -478,7 +478,9 @@ func TestTrimAllSchemas_RemovesDefaultEntries(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create temp file: %v", err)
 	}
-	defer os.Remove(tempFile.Name())
+	defer func() {
+		_ = os.Remove(tempFile.Name())
+	}()
 
 	input :=
 		`resource "foo" {
@@ -496,7 +498,9 @@ func TestTrimAllSchemas_RemovesDefaultEntries(t *testing.T) {
 	if _, err := tempFile.WriteString(input); err != nil {
 		t.Fatalf("failed to write to temp file: %v", err)
 	}
-	tempFile.Close()
+	if err := tempFile.Close(); err != nil {
+		t.Fatalf("failed to close temp file: %v", err)
+	}
 
 	filePaths := &UpdateFilePaths{AllSchemasHCL: tempFile.Name()}
 	err = trimAllSchemas(filePaths)

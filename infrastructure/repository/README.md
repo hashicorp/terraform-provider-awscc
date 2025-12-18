@@ -1,3 +1,6 @@
+<!-- Copyright IBM Corp. 2021, 2025 -->
+<!-- SPDX-License-Identifier: MPL-2.0 -->
+
 # repository
 
 Public Terraform configuration for managing the `terraform-provider-awscc` code repository, to enable community contributions. Currently only utilized for managing AWS Partition, AWS Service, and workflow labels.

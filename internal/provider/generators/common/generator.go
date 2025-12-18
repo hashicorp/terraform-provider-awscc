@@ -36,19 +36,19 @@ func (g *Generator) UI() cli.Ui {
 	return g.ui
 }
 
-func (g *Generator) Infof(format string, a ...interface{}) {
+func (g *Generator) Infof(format string, a ...any) {
 	g.ui.Info(fmt.Sprintf(format, a...))
 }
 
-func (g *Generator) Warnf(format string, a ...interface{}) {
+func (g *Generator) Warnf(format string, a ...any) {
 	g.ui.Warn(fmt.Sprintf(format, a...))
 }
 
-func (g *Generator) Errorf(format string, a ...interface{}) {
+func (g *Generator) Errorf(format string, a ...any) {
 	g.ui.Error(fmt.Sprintf(format, a...))
 }
 
-func (g *Generator) Fatalf(format string, a ...interface{}) {
+func (g *Generator) Fatalf(format string, a ...any) {
 	g.Errorf(format, a...)
 	os.Exit(1)
 }
@@ -106,7 +106,11 @@ func (d *fileDestination) Write() error {
 		return fmt.Errorf("opening file (%s): %w", d.filename, err)
 	}
 
-	defer f.Close()
+	defer func() {
+		if cerr := f.Close(); cerr != nil && err == nil {
+			err = fmt.Errorf("closing file (%s): %w", d.filename, cerr)
+		}
+	}()
 
 	_, err = f.WriteString(d.buffer.String())
 

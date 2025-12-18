@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"sort"
+	"slices"
 	"strconv"
 	"strings"
 	"time"
@@ -149,7 +149,11 @@ func makeChangelog(changes *[]string, filePaths *UpdateFilePaths) (*[]string, er
 	if err != nil {
 		return &newChanges, fmt.Errorf("failed to open CHANGELOG.md for writing: %w", err)
 	}
-	defer file.Close()
+	defer func() {
+		if cerr := file.Close(); cerr != nil && err == nil {
+			err = fmt.Errorf("failed to close CHANGELOG.md: %w", cerr)
+		}
+	}()
 
 	_, err = file.WriteString(newContent)
 	if err != nil {
@@ -168,9 +172,7 @@ func writeChangelog(originalContent string, changes []string) string {
 		return originalContent
 	}
 
-	sort.Slice(changes, func(i, j int) bool {
-		return changes[i] < changes[j]
-	})
+	slices.Sort(changes)
 
 	// Parse and increment version
 	newVersion, err := parseAndIncrementChangelogVersion(originalContent)
@@ -204,9 +206,9 @@ func writeChangelog(originalContent string, changes []string) string {
 
 // parseAndIncrementChangelogVersion finds the latest version in changelog content and increments the minor version
 func parseAndIncrementChangelogVersion(changelogContent string) (string, error) {
-	lines := strings.Split(changelogContent, "\n")
+	lines := strings.SplitSeq(changelogContent, "\n")
 
-	for _, line := range lines {
+	for line := range lines {
 		// Look for version headers like "## 1.47.0 (June 26, 2025)"
 		if strings.HasPrefix(strings.TrimSpace(line), "## ") && strings.Contains(line, ".") {
 			log.Printf("Found version line: %s\n", line)

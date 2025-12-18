@@ -446,7 +446,7 @@ func validateResources(ctx context.Context, currAllSchemas *allschemas.AllSchema
 				}
 				log.Printf("Created GitHub issue for resource %s: %s", currAllSchemas.Resources[i].CloudFormationTypeName, link)
 			} else {
-				tflog.Info(ctx, "Skipping GitHub issue creation (no client)", map[string]interface{}{
+				tflog.Info(ctx, "Skipping GitHub issue creation (no client)", map[string]any{
 					"resource": currAllSchemas.Resources[i].CloudFormationTypeName,
 				})
 			}
@@ -462,8 +462,8 @@ func parseCheckoutList(filePaths *UpdateFilePaths) map[string]bool {
 		log.Printf("Failed to read suppression checkout file: %v", err)
 		return result
 	}
-	lines := strings.Split(string(data), "\n")
-	for _, line := range lines {
+	lines := strings.SplitSeq(string(data), "\n")
+	for line := range lines {
 		line = strings.TrimSpace(line)
 		if line != "" {
 			resource := convertJSONResourceToCloudFormationTypeName(line)

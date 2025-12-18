@@ -120,7 +120,7 @@ func (sd *genericSingularDataSource) Read(ctx context.Context, request datasourc
 		return
 	}
 
-	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
+	tflog.Debug(ctx, "Response.State.Raw", map[string]any{
 		"value": hclog.Fmt("%v", response.State.Raw),
 	})
 

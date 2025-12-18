@@ -19,13 +19,13 @@ func TestTranslateToCloudControl(t *testing.T) {
 		Plan          tfsdk.Plan
 		TfToCfNameMap map[string]string
 		ExpectedError bool
-		ExpectedState map[string]interface{}
+		ExpectedState map[string]any
 	}{
 		{
 			TestName:      "simple Plan",
 			Plan:          makeSimpleTestPlan(),
 			TfToCfNameMap: simpleTfToCfNameMap,
-			ExpectedState: map[string]interface{}{
+			ExpectedState: map[string]any{
 				"Name": "testing",
 			},
 		},
@@ -33,7 +33,7 @@ func TestTranslateToCloudControl(t *testing.T) {
 			TestName:      "simple Plan with Optional",
 			Plan:          makeSimpleTestPlanWithOptionalPopulated(),
 			TfToCfNameMap: simpleTfToCfNameMap,
-			ExpectedState: map[string]interface{}{
+			ExpectedState: map[string]any{
 				"Name":   "testing",
 				"Number": float64(42),
 			},
@@ -42,26 +42,26 @@ func TestTranslateToCloudControl(t *testing.T) {
 			TestName:      "complex Plan",
 			Plan:          makeComplexTestPlan(),
 			TfToCfNameMap: complexTfToCfNameMap,
-			ExpectedState: map[string]interface{}{
+			ExpectedState: map[string]any{
 				"Name":        "hello, world",
 				"MachineType": "e2-medium",
-				"Ports":       []interface{}{float64(80), float64(443)},
-				"Tags":        []interface{}{"red", "blue", "green"},
-				"Disks": []interface{}{
-					map[string]interface{}{
+				"Ports":       []any{float64(80), float64(443)},
+				"Tags":        []any{"red", "blue", "green"},
+				"Disks": []any{
+					map[string]any{
 						"Id":                 "disk0",
 						"DeleteWithInstance": true,
 					},
-					map[string]interface{}{
+					map[string]any{
 						"Id":                 "disk1",
 						"DeleteWithInstance": false,
 					},
 				},
-				"BootDisk": map[string]interface{}{
+				"BootDisk": map[string]any{
 					"Id":                 "bootdisk",
 					"DeleteWithInstance": true,
 				},
-				"ScratchDisk": map[string]interface{}{
+				"ScratchDisk": map[string]any{
 					"Interface": "SCSI",
 				},
 			},
@@ -70,23 +70,23 @@ func TestTranslateToCloudControl(t *testing.T) {
 			TestName:      "maps Plan",
 			Plan:          makeMapsTestPlan(),
 			TfToCfNameMap: mapsTfToCfNameMap,
-			ExpectedState: map[string]interface{}{
+			ExpectedState: map[string]any{
 				"Name": "testing",
-				"SimpleMap": map[string]interface{}{
+				"SimpleMap": map[string]any{
 					"one": "eno",
 					"two": "owt",
 				},
-				"ComplexMap": map[string]interface{}{
-					"x": map[string]interface{}{
+				"ComplexMap": map[string]any{
+					"x": map[string]any{
 						"Id":    float64(1),
-						"Flags": []interface{}{true, false},
+						"Flags": []any{true, false},
 					},
-					"y": map[string]interface{}{
+					"y": map[string]any{
 						"Id":    float64(-1),
-						"Flags": []interface{}{false, true, true},
+						"Flags": []any{false, true, true},
 					},
 				},
-				"JsonString": map[string]interface{}{
+				"JsonString": map[string]any{
 					"Key1": float64(42),
 				},
 			},
@@ -120,7 +120,7 @@ func TestTranslateToTerraform(t *testing.T) {
 		TestName      string
 		Schema        schema.Schema
 		CfToTfNameMap map[string]string
-		ResourceModel map[string]interface{}
+		ResourceModel map[string]any
 		ExpectedError bool
 		ExpectedValue tftypes.Value
 	}{
@@ -128,7 +128,7 @@ func TestTranslateToTerraform(t *testing.T) {
 			TestName:      "simple State",
 			Schema:        testSimpleSchema,
 			CfToTfNameMap: simpleCfToTfNameMap,
-			ResourceModel: map[string]interface{}{
+			ResourceModel: map[string]any{
 				"Arn":    "arn:aws:test:::test",
 				"Name":   "testing",
 				"Number": float64(42),
@@ -151,9 +151,9 @@ func TestTranslateToTerraform(t *testing.T) {
 			TestName:      "simple State with JSON string",
 			Schema:        testSimpleSchema,
 			CfToTfNameMap: simpleCfToTfNameMap,
-			ResourceModel: map[string]interface{}{
+			ResourceModel: map[string]any{
 				"Arn": "arn:aws:test:::test",
-				"Name": map[string]interface{}{
+				"Name": map[string]any{
 					"Value": "testing",
 				},
 				"Number": float64(42),
@@ -176,7 +176,7 @@ func TestTranslateToTerraform(t *testing.T) {
 			TestName:      "simple State with extra field",
 			Schema:        testSimpleSchema,
 			CfToTfNameMap: simpleCfToTfNameMap,
-			ResourceModel: map[string]interface{}{
+			ResourceModel: map[string]any{
 				"Arn":    "arn:aws:test:::test",
 				"Height": float64(1.75),
 				"Name":   "testing",
@@ -200,11 +200,11 @@ func TestTranslateToTerraform(t *testing.T) {
 			TestName:      "simple State with List",
 			Schema:        testSimpleSchemaWithList,
 			CfToTfNameMap: simpleCfToTfNameMap,
-			ResourceModel: map[string]interface{}{
+			ResourceModel: map[string]any{
 				"Arn":    "arn:aws:test:::test",
 				"Name":   "testing",
 				"Number": float64(42),
-				"Ports":  []interface{}{float64(8080), float64(8443)},
+				"Ports":  []any{float64(8080), float64(8443)},
 			},
 			ExpectedValue: tftypes.NewValue(tftypes.Object{
 				AttributeTypes: map[string]tftypes.Type{
@@ -229,11 +229,11 @@ func TestTranslateToTerraform(t *testing.T) {
 			TestName:      "simple State with empty List",
 			Schema:        testSimpleSchemaWithList,
 			CfToTfNameMap: simpleCfToTfNameMap,
-			ResourceModel: map[string]interface{}{
+			ResourceModel: map[string]any{
 				"Arn":    "arn:aws:test:::test",
 				"Name":   "testing",
 				"Number": float64(42),
-				"Ports":  []interface{}{},
+				"Ports":  []any{},
 			},
 			ExpectedValue: tftypes.NewValue(tftypes.Object{
 				AttributeTypes: map[string]tftypes.Type{
@@ -255,7 +255,7 @@ func TestTranslateToTerraform(t *testing.T) {
 			TestName:      "simple State with missing List",
 			Schema:        testSimpleSchemaWithList,
 			CfToTfNameMap: simpleCfToTfNameMap,
-			ResourceModel: map[string]interface{}{
+			ResourceModel: map[string]any{
 				"Arn":    "arn:aws:test:::test",
 				"Name":   "testing",
 				"Number": float64(42),
@@ -280,36 +280,36 @@ func TestTranslateToTerraform(t *testing.T) {
 			TestName:      "complex State",
 			Schema:        testComplexSchema,
 			CfToTfNameMap: complexCfToTfNameMap,
-			ResourceModel: map[string]interface{}{
+			ResourceModel: map[string]any{
 				"Name":        "hello, world",
 				"MachineType": "e2-medium",
-				"Ports":       []interface{}{float64(80), float64(443)},
-				"Tags":        []interface{}{"red", "blue", "green"},
-				"Disks": []interface{}{
-					map[string]interface{}{
+				"Ports":       []any{float64(80), float64(443)},
+				"Tags":        []any{"red", "blue", "green"},
+				"Disks": []any{
+					map[string]any{
 						"Id":                 "disk0",
 						"DeleteWithInstance": true,
 					},
-					map[string]interface{}{
+					map[string]any{
 						"Id":                 "disk1",
 						"DeleteWithInstance": false,
 					},
 				},
-				"BootDisk": map[string]interface{}{
+				"BootDisk": map[string]any{
 					"Id":                 "bootdisk",
 					"DeleteWithInstance": true,
 				},
-				"ScratchDisk": map[string]interface{}{
+				"ScratchDisk": map[string]any{
 					"Interface": "SCSI",
 				},
-				"VideoPorts": []interface{}{
-					map[string]interface{}{
+				"VideoPorts": []any{
+					map[string]any{
 						"Id":    float64(1),
-						"Flags": []interface{}{true, false},
+						"Flags": []any{true, false},
 					},
-					map[string]interface{}{
+					map[string]any{
 						"Id":    float64(-1),
-						"Flags": []interface{}{false, true, true},
+						"Flags": []any{false, true, true},
 					},
 				},
 			},
@@ -402,23 +402,23 @@ func TestTranslateToTerraform(t *testing.T) {
 			TestName:      "maps State",
 			Schema:        testMapsSchema,
 			CfToTfNameMap: mapsCfToTfNameMap,
-			ResourceModel: map[string]interface{}{
+			ResourceModel: map[string]any{
 				"Name": "testing",
-				"SimpleMap": map[string]interface{}{
+				"SimpleMap": map[string]any{
 					"one": "eno",
 					"two": "owt",
 				},
-				"ComplexMap": map[string]interface{}{
-					"x": map[string]interface{}{
+				"ComplexMap": map[string]any{
+					"x": map[string]any{
 						"Id":    float64(1),
-						"Flags": []interface{}{true, false},
+						"Flags": []any{true, false},
 					},
-					"y": map[string]interface{}{
+					"y": map[string]any{
 						"Id":    float64(-1),
-						"Flags": []interface{}{false, true, true},
+						"Flags": []any{false, true, true},
 					},
 				},
-				"JsonString": map[string]interface{}{
+				"JsonString": map[string]any{
 					"Key1": float64(42),
 				},
 			},

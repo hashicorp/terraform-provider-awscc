@@ -1,3 +1,6 @@
+<!-- Copyright IBM Corp. 2021, 2025 -->
+<!-- SPDX-License-Identifier: MPL-2.0 -->
+
 # Adding Examples to Generated Documentation
 
 The Terraform AWS Cloud Control provider is 100% generated from the AWS CloudFormation Schema *including* the documentation. This means that at the resource/attribute level any changes must be made in the CloudFormation Schema and cannot be modified within the provider itself. However examples can be added to the generated documentation in order to provide working examples or best practices when using the provider.

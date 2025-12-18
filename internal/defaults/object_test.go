@@ -21,7 +21,7 @@ func TestStaticPartialObject_simple(t *testing.T) {
 		"name":   types.StringType,
 		"wicked": types.BoolType,
 	}
-	defaultVal := map[string]interface{}{
+	defaultVal := map[string]any{
 		"name": "defaultName",
 	}
 
@@ -82,8 +82,8 @@ func TestStaticPartialObject_complex(t *testing.T) {
 		"config": types.ObjectType{AttrTypes: innerAttributeTypes},
 		"id":     types.StringType,
 	}
-	defaultVal := map[string]interface{}{
-		"config": map[string]interface{}{
+	defaultVal := map[string]any{
+		"config": map[string]any{
 			"name": "defaultName",
 		},
 	}

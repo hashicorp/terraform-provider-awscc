@@ -291,8 +291,8 @@ func createFormattedPullRequest(ctx context.Context, config *GitHubConfig, testR
 	currentData := config.CurrentDate
 
 	// If repository is a GitHub URL, parse it to extract owner and repo name
-	if strings.HasPrefix(config.Repository, GitHubURLPrefix) {
-		parts := strings.Split(strings.TrimPrefix(config.Repository, GitHubURLPrefix), "/")
+	if after, ok := strings.CutPrefix(config.Repository, GitHubURLPrefix); ok {
+		parts := strings.Split(after, "/")
 		if len(parts) >= 2 {
 			repoOwner = parts[0]
 			repoName = strings.TrimSuffix(parts[1], ".git") // Remove .git suffix if present
