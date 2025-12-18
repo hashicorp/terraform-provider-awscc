@@ -149,7 +149,11 @@ func makeChangelog(changes *[]string, filePaths *UpdateFilePaths) (*[]string, er
 	if err != nil {
 		return &newChanges, fmt.Errorf("failed to open CHANGELOG.md for writing: %w", err)
 	}
-	defer file.Close()
+	defer func() {
+		if cerr := file.Close(); cerr != nil && err == nil {
+			err = fmt.Errorf("failed to close CHANGELOG.md: %w", cerr)
+		}
+	}()
 
 	_, err = file.WriteString(newContent)
 	if err != nil {

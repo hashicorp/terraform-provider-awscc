@@ -106,7 +106,11 @@ func (d *fileDestination) Write() error {
 		return fmt.Errorf("opening file (%s): %w", d.filename, err)
 	}
 
-	defer f.Close()
+	defer func() {
+		if cerr := f.Close(); cerr != nil && err == nil {
+			err = fmt.Errorf("closing file (%s): %w", d.filename, cerr)
+		}
+	}()
 
 	_, err = f.WriteString(d.buffer.String())
 

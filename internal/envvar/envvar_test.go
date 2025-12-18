@@ -14,7 +14,9 @@ func TestGetWithDefault(t *testing.T) {
 	t.Run("missing", func(t *testing.T) { //nolint:paralleltest
 		want := "default"
 
-		os.Unsetenv(envVar)
+		if err := os.Unsetenv(envVar); err != nil {
+			t.Fatalf("Failed to unset env var: %v", err)
+		}
 
 		got := GetWithDefault(envVar, want)
 

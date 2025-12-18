@@ -165,7 +165,11 @@ func writeSchemasToHCLFile(schema interface{}, filePath string) error {
 	if err != nil {
 		return fmt.Errorf("failed to create file %s: %w", filePath, err)
 	}
-	defer file.Close()
+	defer func() {
+		if cerr := file.Close(); cerr != nil && err == nil {
+			err = fmt.Errorf("failed to close file %s: %w", filePath, cerr)
+		}
+	}()
 
 	// Write the HCL content to the file
 	if _, err := file.Write(hclFile.Bytes()); err != nil {

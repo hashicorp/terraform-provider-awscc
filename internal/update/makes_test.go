@@ -778,13 +778,17 @@ func TestParseCheckoutList(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Failed to create temp file: %v", err)
 	}
-	defer os.Remove(tmpFile.Name())
+	defer func() {
+		_ = os.Remove(tmpFile.Name())
+	}()
 
 	content := "internal/service/cloudformation/schemas/AWS_CustomerProfiles_Domain.json\n"
 	if _, err := tmpFile.WriteString(content); err != nil {
 		t.Fatalf("Failed to write to temp file: %v", err)
 	}
-	tmpFile.Close()
+	if err := tmpFile.Close(); err != nil {
+		t.Fatalf("Failed to close temp file: %v", err)
+	}
 
 	filePaths := &UpdateFilePaths{SuppressionCheckout: tmpFile.Name()}
 	result := parseCheckoutList(filePaths)

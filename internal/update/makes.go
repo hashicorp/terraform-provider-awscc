@@ -49,7 +49,9 @@ func makeBuild(ctx context.Context, config *GitHubConfig, currentSchemas *allsch
 	if err != nil {
 		return fmt.Errorf("failed to open error log file: %w", err)
 	}
-	defer file.Close()
+	defer func() {
+		_ = file.Close()
+	}()
 
 	hasErrors := true
 
@@ -67,7 +69,9 @@ func makeBuild(ctx context.Context, config *GitHubConfig, currentSchemas *allsch
 		if err != nil {
 			return fmt.Errorf("failed to clear makes_errors.txt: %w", err)
 		}
-		file.Close()
+		if err := file.Close(); err != nil {
+			return fmt.Errorf("failed to close error log file: %w", err)
+		}
 
 		// Execute make command with error filtering
 		command := fmt.Sprintf("make %s 2>&1 | grep \"error\" > %s", buildType, filePaths.RunMakesErrors)
@@ -445,7 +449,11 @@ func addSchemaToCheckout(resource string, filePaths *UpdateFilePaths) error {
 		log.Println("Error opening file:", err)
 		return fmt.Errorf("failed to open checkout file for writing: %w", err)
 	}
-	defer file.Close()
+	defer func() {
+		if cerr := file.Close(); cerr != nil && err == nil {
+			err = fmt.Errorf("failed to close checkout file: %w", cerr)
+		}
+	}()
 
 	writeContent := fmt.Sprintf("\n%s/%s.json", filePaths.CloudFormationSchemasDir, resource)
 	log.Println("Writing to file:", writeContent)
@@ -470,7 +478,9 @@ func checkoutSchemas(suppressionData string) error {
 			if createErr != nil {
 				return fmt.Errorf("failed to create suppression data file: %w", createErr)
 			}
-			f.Close()
+			if err := f.Close(); err != nil {
+				return fmt.Errorf("failed to close suppression data file: %w", err)
+			}
 			return nil
 		} else {
 			return fmt.Errorf("failed to stat suppression data file: %w", err)

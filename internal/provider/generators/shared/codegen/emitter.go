@@ -1061,8 +1061,8 @@ func (e Emitter) emitSchema(tfType string, attributeNameMap map[string]string, p
 }
 
 // printf emits a formatted string to the underlying writer.
-func (e Emitter) printf(format string, a ...interface{}) (int, error) {
-	return fprintf(e.Writer, format, a...)
+func (e Emitter) printf(format string, a ...interface{}) {
+	fprintf(e.Writer, format, a...)
 }
 
 // warnf emits a formatted warning message to the UI.
@@ -1071,8 +1071,8 @@ func (e Emitter) warnf(format string, a ...interface{}) {
 }
 
 // fprintf writes a formatted string to a Writer.
-func fprintf(w io.Writer, format string, a ...interface{}) (int, error) {
-	return io.WriteString(w, fmt.Sprintf(format, a...))
+func fprintf(w io.Writer, format string, a ...interface{}) {
+	_, _ = io.WriteString(w, fmt.Sprintf(format, a...))
 }
 
 type aggregate int
