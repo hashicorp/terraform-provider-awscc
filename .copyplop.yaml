@@ -27,6 +27,7 @@ files:
     - ".yml"
     - ".yaml"
     - ".md"
+    - ".hcl"
 
   comment_styles:
     go: "//"
