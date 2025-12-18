@@ -1,3 +1,6 @@
+<!-- Copyright IBM Corp. 2021, 2025 -->
+<!-- SPDX-License-Identifier: MPL-2.0 -->
+
 # Terraform AWS Cloud Control Provider Resource Behavior
 
 This document describes the behavior of resources implemented by the provider. In particular it describes in detail how [AWS CloudFormation resource types](https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html) are defined as [Terraform resources](https://developer.hashicorp.com/terraform/language/resources).

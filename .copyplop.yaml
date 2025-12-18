@@ -22,10 +22,7 @@ files:
     - "**/import_examples_gen.json"
     - "docs/**"
     - ".github/**"
-    - "contributing/**"
-    - "**/README.md"
     - "META.d/**"
-    - ".semgrep/**"
   extensions:
     - ".go"
     - ".yml"

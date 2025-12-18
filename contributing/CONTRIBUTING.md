@@ -1,3 +1,6 @@
+<!-- Copyright IBM Corp. 2021, 2025 -->
+<!-- SPDX-License-Identifier: MPL-2.0 -->
+
 # Contributing to Terraform - AWS Cloud Control Provider
 
 **First:** if you're unsure or afraid of _anything_, ask for help! You can

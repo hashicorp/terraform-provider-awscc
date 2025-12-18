@@ -1,3 +1,6 @@
+<!-- Copyright IBM Corp. 2021, 2025 -->
+<!-- SPDX-License-Identifier: MPL-2.0 -->
+
 # Terraform AWS Cloud Control Provider Codebase Documentation
 
 This directory contains some documentation about the Terraform AWS Cloud Control Provider codebase, aimed at readers who are interested in making code contributions.

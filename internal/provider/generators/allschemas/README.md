@@ -1,3 +1,6 @@
+<!-- Copyright IBM Corp. 2021, 2025 -->
+<!-- SPDX-License-Identifier: MPL-2.0 -->
+
 # All AWS Cloud Control API Schemas
 
 Generate (to stdout) a sample configuration file for use with the [Schema Downloader](../schema/README.md) that lists all available AWS Cloud Control API schemas.

@@ -1,3 +1,6 @@
+<!-- Copyright IBM Corp. 2021, 2025 -->
+<!-- SPDX-License-Identifier: MPL-2.0 -->
+
 # Pull Request Submission and Lifecycle
 
 - [Pull Request Lifecycle](#pull-request-lifecycle)
