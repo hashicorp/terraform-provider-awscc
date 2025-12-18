@@ -3,7 +3,7 @@ module github.com/hashicorp/terraform-provider-awscc/tools
 go 1.24.11
 
 require (
-	github.com/YakDriver/copyplop v0.4.0
+	github.com/YakDriver/copyplop v0.5.0
 	github.com/client9/misspell v0.3.4
 	github.com/golangci/golangci-lint v1.64.8
 	github.com/hashicorp/terraform-plugin-docs v0.24.0
