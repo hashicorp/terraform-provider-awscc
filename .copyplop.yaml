@@ -25,8 +25,6 @@ files:
     - "contributing/**"
     - "**/README.md"
     - "META.d/**"
-    - ".golangci.yml"
-    - ".markdownlint.yml"
     - ".semgrep/**"
   extensions:
     - ".go"

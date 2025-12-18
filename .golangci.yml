@@ -1,18 +1,13 @@
 # Copyright IBM Corp. 2021, 2025
-# SPDX-License-Identifier: MPL-2.0
+# "SPDX-License-Identifier: MPL-2.0"
 
-issues:
-  max-per-linter: 0
-  max-same-issues: 0
-
+version: "2"
 linters:
-  disable-all: true
+  default: none
   enable:
     - asciicheck
     - errcheck
     - gocritic
-    - gofmt
-    - gosimple
     - govet
     - ineffassign
     - makezero
@@ -22,47 +17,43 @@ linters:
     - nilerr
     - nolintlint
     - staticcheck
-    - stylecheck
-    - typecheck
     - unconvert
     - unparam
     - unused
     - whitespace
+  settings:
+    errcheck:
+      exclude-functions:
+        - (*github.com/hashicorp/terraform-plugin-framework/tfsdk.State).SetAttribute
+    gocritic:
+      enabled-tags:
+        - diagnostic
+      disabled-tags:
+        - style
+        - performance
+        - experimental
+        - opinionated
+    mnd:
+      checks:
+        - argument
+        - assign
+        - case
+        - operation
+        - return
+      ignored-functions:
+        - os.Exit
+        - stringvalidator.LengthAtMost
+        - stringvalidator.LengthBetween
+    nolintlint:
+      allow-unused: false
+      allow-no-explanation:
+        - mnd
+    unparam:
+      check-exported: true
 
-linters-settings:
-  errcheck:
-    # TODO: `ignore` is deprecated, but `exclude-functions` does not appear to work
-    ignore: fmt:.*,github.com/hashicorp/terraform-plugin-framework/tfsdk:SetAttribute,fprintf
-    # exclude-functions:
-    #   - (*github.com/hashicorp/terraform-plugin-framework/tfsdk.State).SetAttribute
-  gocritic:
-    enabled-tags:
-      - diagnostic
-    disabled-tags:
-      - style
-      - performance
-      - experimental
-      - opinionated
-  mnd:
-    checks:
-      - argument
-      - assign
-      - case
-      # - condition
-      - operation
-      - return
-    ignored-functions:
-      - os.Exit
-      - stringvalidator.LengthAtMost
-      - stringvalidator.LengthBetween
-  nolintlint:
-    allow-unused: false
-    allow-no-explanation:
-      - mnd
-  stylecheck:
-    checks: ["all", "-ST1003"]
-  unparam:
-    check-exported: true
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
 
 run:
   timeout: 10m
