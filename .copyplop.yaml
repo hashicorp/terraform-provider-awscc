@@ -16,13 +16,12 @@ license:
 # see breakdown of file types below
 files:
   exclude_paths:
-    - "**/when_string_test.go" # standard library generated files
     - "CHANGELOG.md"
-    - "infrastructure/**"
-    - "**/import_examples_gen.json"
     - "docs/**"
     - ".github/**"
     - "META.d/**"
+    - "examples/**"
+    - "**/generators/allschemas"
   extensions:
     - ".go"
     - ".yml"
