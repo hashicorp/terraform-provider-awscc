@@ -19,6 +19,8 @@ files:
     - "**/when_string_test.go" # standard library generated files
     - "CHANGELOG.md"
     - "infrastructure/**"
+    - "examples/**"
+    - "**/generators/allschemas"
     - "**/import_examples_gen.json"
     - "docs/**"
     - ".github/**"
@@ -33,6 +35,7 @@ files:
     - ".yml"
     - ".yaml"
     - ".md"
+    - ".hcl"
 
   comment_styles:
     go: "//"
