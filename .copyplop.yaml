@@ -1,10 +1,10 @@
-# Copyright IBM Corp. 2014, 2025
+# Copyright IBM Corp. 2021, 2025
 # "SPDX-License-Identifier: MPL-2.0"
 
 # Terraform AWSCC Provider Copyplop Configuration
 copyright:
   holder: "IBM Corp."
-  start_year: 2014
+  start_year: 2021
   current_year: 2025
   format: "Copyright {{.Holder}} {{.StartYear}}, {{.CurrentYear}}"
 
@@ -18,7 +18,11 @@ files:
   exclude_paths:
     - "**/when_string_test.go" # standard library generated files
     - "CHANGELOG.md"
+    - "infrastructure/**"
     - "**/import_examples_gen.json"
+    - "docs/**"
+    - ".github/**"
+    - "contributing/**"
   extensions:
     - ".go"
     - ".yml"
