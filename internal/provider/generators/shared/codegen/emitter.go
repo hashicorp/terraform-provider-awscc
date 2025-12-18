@@ -1061,17 +1061,17 @@ func (e Emitter) emitSchema(tfType string, attributeNameMap map[string]string, p
 }
 
 // printf emits a formatted string to the underlying writer.
-func (e Emitter) printf(format string, a ...interface{}) {
+func (e Emitter) printf(format string, a ...any) {
 	fprintf(e.Writer, format, a...)
 }
 
 // warnf emits a formatted warning message to the UI.
-func (e Emitter) warnf(format string, a ...interface{}) {
+func (e Emitter) warnf(format string, a ...any) {
 	e.Ui.Warn(fmt.Sprintf(format, a...))
 }
 
 // fprintf writes a formatted string to a Writer.
-func fprintf(w io.Writer, format string, a ...interface{}) {
+func fprintf(w io.Writer, format string, a ...any) {
 	_, _ = io.WriteString(w, fmt.Sprintf(format, a...))
 }
 
@@ -1213,7 +1213,7 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 			// Set.
 			//
 			switch v := property.Default.(type) {
-			case []interface{}:
+			case []any:
 				switch itemType := property.Items.Type.String(); itemType {
 				case cfschema.PropertyTypeString:
 					features.UsesInternalDefaultsPackage = true
@@ -1248,7 +1248,7 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 			// List.
 			//
 			switch v := property.Default.(type) {
-			case []interface{}:
+			case []any:
 				switch itemType := property.Items.Type.String(); itemType {
 				case cfschema.PropertyTypeString:
 					features.UsesInternalDefaultsPackage = true
@@ -1282,7 +1282,7 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 
 	case cfschema.PropertyTypeObject:
 		switch v := property.Default.(type) {
-		case map[string]interface{}:
+		case map[string]any:
 			if _, ok := v["properties"]; ok {
 				// For example:
 				//
@@ -1531,7 +1531,7 @@ func stringValidators(path []string, property *cfschema.Property) (Features, []s
 	return features, validators, nil
 }
 
-func writeObjectGoLiteral(w io.Writer, obj map[string]interface{}) {
+func writeObjectGoLiteral(w io.Writer, obj map[string]any) {
 	if obj == nil {
 		fprintf(w, "nil")
 		return
@@ -1549,7 +1549,7 @@ func writeObjectGoLiteral(w io.Writer, obj map[string]interface{}) {
 			fprintf(w, "%t", v)
 		case string:
 			fprintf(w, "%q", v)
-		case map[string]interface{}:
+		case map[string]any:
 			writeObjectGoLiteral(w, v)
 		default:
 			fprintf(w, "nil")

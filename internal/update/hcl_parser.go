@@ -152,7 +152,7 @@ func diffSchemas(newSchemas *allschemas.AvailableSchemas, lastSchemas *allschema
 //   - filePath: Target file path for writing the HCL content
 //
 // Returns an error if file creation or writing fails.
-func writeSchemasToHCLFile(schema interface{}, filePath string) error {
+func writeSchemasToHCLFile(schema any, filePath string) error {
 	// Create new HCL file structure
 	hclFile := hclwrite.NewEmptyFile()
 	body := hclFile.Body()

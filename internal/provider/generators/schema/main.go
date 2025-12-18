@@ -407,7 +407,7 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema, timer int) (string, s
 	return resourceSchemaFilename, *resource.TypeName, nil
 }
 
-func (d *Downloader) infof(format string, a ...interface{}) {
+func (d *Downloader) infof(format string, a ...any) {
 	d.ui.Info(fmt.Sprintf(format, a...))
 }
 

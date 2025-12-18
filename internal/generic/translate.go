@@ -21,7 +21,7 @@ type toCloudControl struct {
 }
 
 // AsRaw returns the raw map[string]interface{} representing Cloud Control DesiredState from a Terraform Value.
-func (t toCloudControl) AsRaw(ctx context.Context, schema typeAtTerraformPather, val tftypes.Value) (map[string]interface{}, error) {
+func (t toCloudControl) AsRaw(ctx context.Context, schema typeAtTerraformPather, val tftypes.Value) (map[string]any, error) {
 	v, err := t.rawFromValue(ctx, schema, nil, val)
 
 	if err != nil {
@@ -29,10 +29,10 @@ func (t toCloudControl) AsRaw(ctx context.Context, schema typeAtTerraformPather,
 	}
 
 	if v == nil {
-		return make(map[string]interface{}), nil
+		return make(map[string]any), nil
 	}
 
-	if v, ok := v.(map[string]interface{}); ok {
+	if v, ok := v.(map[string]any); ok {
 		return v, nil
 	}
 
@@ -58,7 +58,7 @@ func (t toCloudControl) AsString(ctx context.Context, schema typeAtTerraformPath
 
 // rawFromValue returns the raw value (suitable for JSON marshaling) of the specified Terraform value.
 // Terraform attribute names are mapped to Cloud Control property names.
-func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraformPather, path *tftypes.AttributePath, val tftypes.Value) (interface{}, error) {
+func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraformPather, path *tftypes.AttributePath, val tftypes.Value) (any, error) {
 	if val.IsNull() || !val.IsKnown() {
 		return nil, nil
 	}
@@ -95,7 +95,7 @@ func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraform
 			return nil, err
 		}
 		if t := new(jsontypes.NormalizedType); t.Equal(attributeType) {
-			var v interface{}
+			var v any
 			diags := jsontypes.NewNormalizedValue(s).Unmarshal(&v)
 			if diags.HasError() {
 				return nil, ccdiag.DiagnosticsError(diags)
@@ -112,7 +112,7 @@ func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraform
 		if err := val.As(&vals); err != nil {
 			return nil, err
 		}
-		vs := make([]interface{}, 0)
+		vs := make([]any, 0)
 		for idx, val := range vals {
 			if typ.Is(tftypes.Set{}) {
 				// No need to worry about a specific value here.
@@ -140,7 +140,7 @@ func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraform
 		if err := val.As(&vals); err != nil {
 			return nil, err
 		}
-		vs := make(map[string]interface{})
+		vs := make(map[string]any)
 		for name, val := range vals {
 			if typ.Is(tftypes.Object{}) {
 				path = path.WithAttributeName(name)
@@ -180,26 +180,26 @@ type toTerraform struct {
 }
 
 // FromRaw returns the Terraform Value for the specified Cloud Control Properties (raw map[string]interface{}).
-func (t toTerraform) FromRaw(ctx context.Context, schema typeAtTerraformPather, resourceModel map[string]interface{}) (tftypes.Value, error) {
+func (t toTerraform) FromRaw(ctx context.Context, schema typeAtTerraformPather, resourceModel map[string]any) (tftypes.Value, error) {
 	return t.valueFromRaw(ctx, schema, nil, resourceModel)
 }
 
 // FromString returns the Terraform Value for the specified Cloud Control Properties (string).
 func (t toTerraform) FromString(ctx context.Context, schema typeAtTerraformPather, resourceModel string) (tftypes.Value, error) {
-	var v interface{}
+	var v any
 
 	if err := json.Unmarshal([]byte(resourceModel), &v); err != nil {
 		return tftypes.Value{}, err
 	}
 
-	if v, ok := v.(map[string]interface{}); ok {
+	if v, ok := v.(map[string]any); ok {
 		return t.FromRaw(ctx, schema, v)
 	}
 
 	return tftypes.Value{}, fmt.Errorf("unexpected raw type: %T", v)
 }
 
-func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPather, path *tftypes.AttributePath, v interface{}) (tftypes.Value, error) {
+func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPather, path *tftypes.AttributePath, v any) (tftypes.Value, error) {
 	attrType, err := schema.TypeAtTerraformPath(ctx, path)
 
 	if err != nil {
@@ -224,7 +224,7 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPat
 	//
 	// Complex types.
 	//
-	case []interface{}:
+	case []any:
 		if len(v) == 0 {
 			return tftypes.NewValue(typ, nil), nil
 		}
@@ -256,7 +256,7 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPat
 		}
 		return tftypes.NewValue(typ, vals), nil
 
-	case map[string]interface{}:
+	case map[string]any:
 		if typ.Is(tftypes.String) {
 			// Value is JSON string.
 			val, err := json.Marshal(v)
@@ -274,7 +274,7 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPat
 			if isObject {
 				attributeName, ok := t.cfToTfNameMap[key]
 				if !ok {
-					tflog.Info(ctx, "attribute name mapping not found", map[string]interface{}{
+					tflog.Info(ctx, "attribute name mapping not found", map[string]any{
 						"key": key,
 					})
 					continue
@@ -286,7 +286,7 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPat
 			val, err := t.valueFromRaw(ctx, schema, path, v)
 			if err != nil {
 				if isObject {
-					tflog.Info(ctx, "not found in Terraform schema", map[string]interface{}{
+					tflog.Info(ctx, "not found in Terraform schema", map[string]any{
 						"key":   key,
 						"path":  path,
 						"error": err.Error(),

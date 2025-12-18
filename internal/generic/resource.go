@@ -396,7 +396,7 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 
 	conn := r.provider.CloudControlAPIClient(ctx)
 
-	tflog.Debug(ctx, "Request.Plan.Raw", map[string]interface{}{
+	tflog.Debug(ctx, "Request.Plan.Raw", map[string]any{
 		"value": hclog.Fmt("%v", request.Plan.Raw),
 	})
 
@@ -409,7 +409,7 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 		return
 	}
 
-	tflog.Debug(ctx, "CloudControl DesiredState", map[string]interface{}{
+	tflog.Debug(ctx, "CloudControl DesiredState", map[string]any{
 		"value": desiredState,
 	})
 
@@ -485,7 +485,7 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 		return
 	}
 
-	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
+	tflog.Debug(ctx, "Response.State.Raw", map[string]any{
 		"value": hclog.Fmt("%v", response.State.Raw),
 	})
 
@@ -500,7 +500,7 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 
 	traceEntry(ctx, "Resource.Read")
 
-	tflog.Debug(ctx, "Request.State.Raw", map[string]interface{}{
+	tflog.Debug(ctx, "Request.State.Raw", map[string]any{
 		"value": hclog.Fmt("%v", request.State.Raw),
 	})
 
@@ -578,7 +578,7 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 		return
 	}
 
-	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
+	tflog.Debug(ctx, "Response.State.Raw", map[string]any{
 		"value": hclog.Fmt("%v", response.State.Raw),
 	})
 
@@ -661,7 +661,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 		return
 	}
 
-	tflog.Debug(ctx, "Cloud Control API PatchDocument", map[string]interface{}{
+	tflog.Debug(ctx, "Cloud Control API PatchDocument", map[string]any{
 		"value": patchDocument,
 	})
 
@@ -787,7 +787,7 @@ func (r *genericResource) ImportState(ctx context.Context, request resource.Impo
 	traceEntry(ctx, "Resource.ImportState")
 
 	if request.ID != "" {
-		tflog.Debug(ctx, "Request.ID", map[string]interface{}{
+		tflog.Debug(ctx, "Request.ID", map[string]any{
 			"value": hclog.Fmt("%v", request.ID),
 		})
 

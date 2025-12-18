@@ -16,7 +16,7 @@ import (
 )
 
 func ListResourcesByTypeName(ctx context.Context, conn *cloudcontrol.Client, roleARN, typeName string) ([]types.ResourceDescription, error) {
-	tflog.Debug(ctx, "ListResourcesByTypeName", map[string]interface{}{
+	tflog.Debug(ctx, "ListResourcesByTypeName", map[string]any{
 		"cfTypeName": typeName,
 	})
 

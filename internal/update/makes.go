@@ -262,8 +262,8 @@ func handleAWS_UnderscoreError(ctx context.Context, errorLine string, config *Gi
 	/*
 		Example error: "error loading CloudFormation Resource Provider Schema for aws_nimblestudio_studio: describing CloudFormation type: operation error CloudFormation: DescribeType, exceeded maximum number of attempts, 3, https response error StatusCode: 400, ..."
 	*/
-	words := strings.Split(errorLine, " ")
-	for _, word := range words {
+	words := strings.SplitSeq(errorLine, " ")
+	for word := range words {
 		if strings.HasPrefix(word, "aws_") {
 			// Look for a matching file in internal/service/cloudformation/schemas
 			schemasDir := filePaths.CloudFormationSchemasDir
@@ -493,8 +493,8 @@ func checkoutSchemas(suppressionData string) error {
 		}
 
 		// Split the contents by spaces to get individual file paths
-		lines := strings.Split(string(contents), "\n")
-		for _, line := range lines {
+		lines := strings.SplitSeq(string(contents), "\n")
+		for line := range lines {
 			path := strings.TrimSpace(line)
 			if path != "" {
 				err := execGit("checkout", path)
