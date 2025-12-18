@@ -18,7 +18,6 @@ files:
   exclude_paths:
     - "CHANGELOG.md"
     - "docs/**"
-    - "META.d/**"
     - "examples/**"
     - "**/generators/allschemas"
   extensions:
@@ -27,6 +26,8 @@ files:
     - ".yaml"
     - ".md"
     - ".hcl"
+    - ".sh"
+    - ".tf"
 
   comment_styles:
     go: "//"
