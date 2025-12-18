@@ -464,7 +464,7 @@ func TestWriteSchemasToHCLFile(t *testing.T) {
 		}
 
 		contentStr := string(content)
-		if !strings.Contains(contentStr, "Copyright (c) HashiCorp, Inc.") {
+		if !strings.Contains(contentStr, "Copyright IBM Corp.") {
 			t.Error("expected copyright header")
 		}
 		if !strings.Contains(contentStr, `resource_schema "aws_s3_bucket" {`) {
