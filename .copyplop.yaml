@@ -18,7 +18,6 @@ files:
   exclude_paths:
     - "CHANGELOG.md"
     - "docs/**"
-    - ".github/**"
     - "META.d/**"
     - "examples/**"
     - "**/generators/allschemas"

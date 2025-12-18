@@ -1,3 +1,6 @@
+<!-- Copyright IBM Corp. 2021, 2025 -->
+<!-- SPDX-License-Identifier: MPL-2.0 -->
+
 <!--- See what makes a good Pull Request at: https://github.com/hashicorp/terraform-provider-awscc/blob/main/contributing/CONTRIBUTING.md --->
 
 <!--- Please keep this note for the community --->
