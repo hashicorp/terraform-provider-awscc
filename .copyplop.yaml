@@ -30,6 +30,7 @@ files:
     - ".golangci.yml"
     - ".markdownlint.yml"
     - ".semgrep/**"
+    - ".copywrite.hcl" #leaving this file include in repo for now
   extensions:
     - ".go"
     - ".yml"
