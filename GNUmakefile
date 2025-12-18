@@ -180,6 +180,7 @@ tools: prereq-go ## Install tools
 	cd tools && $(GO_VER) install github.com/pavius/impi/cmd/impi
 	cd tools && $(GO_VER) install github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
 	cd tools && $(GO_VER) install golang.org/x/tools/cmd/goimports@latest
+	cd tools && $(GO_VER) install github.com/YakDriver/copyplop
 
 docs-all: docs-import docs-fmt docs ## Generate all documentation
 
