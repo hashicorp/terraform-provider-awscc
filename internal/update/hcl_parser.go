@@ -179,7 +179,7 @@ func writeSchemasToHCLFile(schema any, filePath string) error {
 	if err != nil {
 		return fmt.Errorf("failed to read back written file %s: %w", filePath, err)
 	}
-	copyright_header := "// Copyright IBM Corp. 2021, 2025\n// SPDX-License-Identifier: MPL-2.0\n\n"
+	copyright_header := "// Copyright IBM Corp. 2021, 2026\n// SPDX-License-Identifier: MPL-2.0\n\n"
 	updatedData := append([]byte(copyright_header), data...)
 	err = os.WriteFile(filePath, updatedData, filePerm)
 	if err != nil {
