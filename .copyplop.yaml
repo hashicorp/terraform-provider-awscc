@@ -1,11 +1,11 @@
-# Copyright IBM Corp. 2021, 2025
+# Copyright IBM Corp. 2021, 2026
 # "SPDX-License-Identifier: MPL-2.0"
 
 # Terraform AWSCC Provider Copyplop Configuration
 copyright:
   holder: "IBM Corp."
   start_year: 2021
-  current_year: 2025
+  current_year: 2026
   format: "Copyright {{.Holder}} {{.StartYear}}, {{.CurrentYear}}"
 
 license:
@@ -28,6 +28,7 @@ files:
     - ".hcl"
     - ".sh"
     - ".tf"
+    - ".xml"
 
   comment_styles:
     go: "//"
@@ -39,6 +40,7 @@ files:
     yaml: "#"
     md: "<!--"
     html_markdown: "<!--"
+    xml: "<!--"
 
   below_frontmatter:
     - ".md"

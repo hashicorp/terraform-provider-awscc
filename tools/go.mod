@@ -3,7 +3,7 @@ module github.com/hashicorp/terraform-provider-awscc/tools
 go 1.25.5
 
 require (
-	github.com/YakDriver/copyplop v0.8.0
+	github.com/YakDriver/copyplop v0.10.0
 	github.com/client9/misspell v0.3.4
 	github.com/golangci/golangci-lint/v2 v2.7.2
 	github.com/hashicorp/terraform-plugin-docs v0.24.0
@@ -189,7 +189,7 @@ require (
 	github.com/santhosh-tekuri/jsonschema/v6 v6.0.2 // indirect
 	github.com/sashamelentyev/interfacebloat v1.1.0 // indirect
 	github.com/sashamelentyev/usestdlibvars v1.29.0 // indirect
-	github.com/schollz/progressbar/v3 v3.18.0 // indirect
+	github.com/schollz/progressbar/v3 v3.19.0 // indirect
 	github.com/securego/gosec/v2 v2.22.11-0.20251204091113-daccba6b93d7 // indirect
 	github.com/shopspring/decimal v1.3.1 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
