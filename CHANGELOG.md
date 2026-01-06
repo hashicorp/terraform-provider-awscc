@@ -1,5 +1,9 @@
 ## 1.68.0 (Unreleased)
 
+BUG FIXES:
+
+* provider: Fix handling of `provider_meta` `user_agent` values where the product name contains a forward slash ([#2959](https://github.com/hashicorp/terraform-provider-awscc/issues/2959))
+
 ## 1.67.0 (December 17, 2025)
 
 FEATURES:
