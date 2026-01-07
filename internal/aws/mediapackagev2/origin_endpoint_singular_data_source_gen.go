@@ -1506,6 +1506,13 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxItems": 100,
 		//	          "minItems": 0,
 		//	          "type": "array"
+		//	        },
+		//	        "ScteInSegments": {
+		//	          "enum": [
+		//	            "NONE",
+		//	            "ALL"
+		//	          ],
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -1633,6 +1640,10 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 							ElementType: types.StringType,
 							Description: "<p>The SCTE-35 message types that you want to be treated as ad markers in the output.</p>",
 							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ScteInSegments
+						"scte_in_segments": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "<p>The SCTE configuration.</p>",
@@ -1795,6 +1806,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		"scte_dash":                            "ScteDash",
 		"scte_filter":                          "ScteFilter",
 		"scte_hls":                             "ScteHls",
+		"scte_in_segments":                     "ScteInSegments",
 		"segment":                              "Segment",
 		"segment_duration_seconds":             "SegmentDurationSeconds",
 		"segment_name":                         "SegmentName",

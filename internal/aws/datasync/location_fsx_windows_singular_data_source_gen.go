@@ -42,7 +42,7 @@ func locationFSxWindowsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) for the FSx for Windows file system.",
 		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$",
 		//	  "type": "string"
 		//	}
 		"fsx_filesystem_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -55,7 +55,7 @@ func locationFSxWindowsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the Amazon FSx for Windows file system location that is created.",
 		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
 		"location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -96,7 +96,7 @@ func locationFSxWindowsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "maxLength": 128,
-		//	    "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$",
+		//	    "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$",
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array"

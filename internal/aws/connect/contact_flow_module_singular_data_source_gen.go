@@ -62,6 +62,34 @@ func contactFlowModuleDataSource(ctx context.Context) (datasource.DataSource, er
 			Description: "The description of the contact flow module.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ExternalInvocationConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Defines the external invocation configuration of the flow module resource",
+		//	  "properties": {
+		//	    "Enabled": {
+		//	      "description": "Specifies whether the flow module resource is enabled for external invocation",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Enabled"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"external_invocation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether the flow module resource is enabled for external invocation",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Defines the external invocation configuration of the flow module resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -88,6 +116,18 @@ func contactFlowModuleDataSource(ctx context.Context) (datasource.DataSource, er
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the contact flow module.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Settings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The schema of the settings for contact flow module in JSON Schema V4 format.",
+		//	  "maxLength": 256000,
+		//	  "type": "string"
+		//	}
+		"settings": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The schema of the settings for contact flow module in JSON Schema V4 format.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: State
@@ -182,16 +222,19 @@ func contactFlowModuleDataSource(ctx context.Context) (datasource.DataSource, er
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::ContactFlowModule").WithTerraformTypeName("awscc_connect_contact_flow_module")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"contact_flow_module_arn": "ContactFlowModuleArn",
-		"content":                 "Content",
-		"description":             "Description",
-		"instance_arn":            "InstanceArn",
-		"key":                     "Key",
-		"name":                    "Name",
-		"state":                   "State",
-		"status":                  "Status",
-		"tags":                    "Tags",
-		"value":                   "Value",
+		"contact_flow_module_arn":           "ContactFlowModuleArn",
+		"content":                           "Content",
+		"description":                       "Description",
+		"enabled":                           "Enabled",
+		"external_invocation_configuration": "ExternalInvocationConfiguration",
+		"instance_arn":                      "InstanceArn",
+		"key":                               "Key",
+		"name":                              "Name",
+		"settings":                          "Settings",
+		"state":                             "State",
+		"status":                            "Status",
+		"tags":                              "Tags",
+		"value":                             "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -8,6 +8,7 @@ package billing
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -106,6 +107,22 @@ func billingViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        }
 		//	      },
 		//	      "type": "object"
+		//	    },
+		//	    "TimeRange": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "BeginDateInclusive": {
+		//	          "description": "The time in ISO 8601 format, UTC time (YYYY-MM-DDTHH:MM:SSZ).",
+		//	          "format": "date-time",
+		//	          "type": "string"
+		//	        },
+		//	        "EndDateInclusive": {
+		//	          "description": "The time in ISO 8601 format, UTC time (YYYY-MM-DDTHH:MM:SSZ).",
+		//	          "format": "date-time",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -137,6 +154,24 @@ func billingViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 						// Property: Values
 						"values": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TimeRange
+				"time_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BeginDateInclusive
+						"begin_date_inclusive": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType:  timetypes.RFC3339Type{},
+							Description: "The time in ISO 8601 format, UTC time (YYYY-MM-DDTHH:MM:SSZ).",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EndDateInclusive
+						"end_date_inclusive": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType:  timetypes.RFC3339Type{},
+							Description: "The time in ISO 8601 format, UTC time (YYYY-MM-DDTHH:MM:SSZ).",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -275,16 +310,19 @@ func billingViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                    "Arn",
+		"begin_date_inclusive":   "BeginDateInclusive",
 		"billing_view_type":      "BillingViewType",
 		"created_at":             "CreatedAt",
 		"data_filter_expression": "DataFilterExpression",
 		"description":            "Description",
 		"dimensions":             "Dimensions",
+		"end_date_inclusive":     "EndDateInclusive",
 		"key":                    "Key",
 		"name":                   "Name",
 		"owner_account_id":       "OwnerAccountId",
 		"source_views":           "SourceViews",
 		"tags":                   "Tags",
+		"time_range":             "TimeRange",
 		"updated_at":             "UpdatedAt",
 		"value":                  "Value",
 		"values":                 "Values",

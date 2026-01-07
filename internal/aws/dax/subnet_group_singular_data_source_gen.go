@@ -32,6 +32,15 @@ func subnetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"subnet_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetGroupName
 		// CloudFormation resource type schema:
 		//
@@ -73,6 +82,7 @@ func subnetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"description":       "Description",
+		"subnet_group_id":   "Id",
 		"subnet_group_name": "SubnetGroupName",
 		"subnet_ids":        "SubnetIds",
 	})

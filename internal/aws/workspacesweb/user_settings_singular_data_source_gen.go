@@ -713,6 +713,19 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"user_settings_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: WebAuthnAllowed
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "Disabled",
+		//	    "Enabled"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"web_authn_allowed": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -776,6 +789,7 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"visual_mode":                          "VisualMode",
 		"wallpaper":                            "Wallpaper",
 		"wallpaper_metadata":                   "WallpaperMetadata",
+		"web_authn_allowed":                    "WebAuthnAllowed",
 		"welcome_text":                         "WelcomeText",
 	})
 

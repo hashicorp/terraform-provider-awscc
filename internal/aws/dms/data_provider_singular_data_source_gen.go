@@ -104,7 +104,8 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	    "mongodb",
 		//	    "docdb",
 		//	    "db2",
-		//	    "db2_zos"
+		//	    "db2_zos",
+		//	    "sybase"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -178,6 +179,11 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	    {
 		//	      "required": [
 		//	        "IbmDb2zOsSettings"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "SybaseAseSettings"
 		//	      ]
 		//	    }
 		//	  ],
@@ -525,6 +531,41 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	        "DatabaseName"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "SybaseAseSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "SybaseAseSettings property identifier.",
+		//	      "properties": {
+		//	        "CertificateArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "DatabaseName": {
+		//	          "type": "string"
+		//	        },
+		//	        "EncryptPassword": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "Port": {
+		//	          "type": "integer"
+		//	        },
+		//	        "ServerName": {
+		//	          "type": "string"
+		//	        },
+		//	        "SslMode": {
+		//	          "enum": [
+		//	            "none",
+		//	            "require",
+		//	            "verify-ca"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ServerName",
+		//	        "Port",
+		//	        "SslMode"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -817,6 +858,37 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 					Description: "RedshiftSettings property identifier.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: SybaseAseSettings
+				"sybase_ase_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CertificateArn
+						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseName
+						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: EncryptPassword
+						"encrypt_password": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ServerName
+						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SslMode
+						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "SybaseAseSettings property identifier.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The property identifies the exact type of settings for the data provider.",
 			Computed:    true,
@@ -900,6 +972,7 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"database_name":                 "DatabaseName",
 		"description":                   "Description",
 		"doc_db_settings":               "DocDbSettings",
+		"encrypt_password":              "EncryptPassword",
 		"engine":                        "Engine",
 		"exact_settings":                "ExactSettings",
 		"ibm_db_2_luw_settings":         "IbmDb2LuwSettings",
@@ -917,11 +990,12 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"secrets_manager_oracle_asm_secret_id":                   "SecretsManagerOracleAsmSecretId",
 		"secrets_manager_security_db_encryption_access_role_arn": "SecretsManagerSecurityDbEncryptionAccessRoleArn",
 		"secrets_manager_security_db_encryption_secret_id":       "SecretsManagerSecurityDbEncryptionSecretId",
-		"server_name": "ServerName",
-		"settings":    "Settings",
-		"ssl_mode":    "SslMode",
-		"tags":        "Tags",
-		"value":       "Value",
+		"server_name":         "ServerName",
+		"settings":            "Settings",
+		"ssl_mode":            "SslMode",
+		"sybase_ase_settings": "SybaseAseSettings",
+		"tags":                "Tags",
+		"value":               "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

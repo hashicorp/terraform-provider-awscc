@@ -203,7 +203,10 @@ func aIPromptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "EMAIL_RESPONSE",
 		//	    "EMAIL_OVERVIEW",
 		//	    "EMAIL_GENERATIVE_ANSWER",
-		//	    "EMAIL_QUERY_REFORMULATION"
+		//	    "EMAIL_QUERY_REFORMULATION",
+		//	    "ORCHESTRATION",
+		//	    "NOTE_TAKING",
+		//	    "CASE_SUMMARIZATION"
 		//	  ],
 		//	  "type": "string"
 		//	}

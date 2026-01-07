@@ -34,6 +34,17 @@ func stepDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "This specifies what action to take when the cluster step fails. Possible values are CANCEL_AND_WAIT and CONTINUE.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EncryptionKeyArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The KMS key ARN to encrypt the logs published to the given Amazon S3 destination. When omitted, EMR falls back to cluster-level logging behavior.",
+		//	  "type": "string"
+		//	}
+		"encryption_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The KMS key ARN to encrypt the logs published to the given Amazon S3 destination. When omitted, EMR falls back to cluster-level logging behavior.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HadoopJarStep
 		// CloudFormation resource type schema:
 		//
@@ -133,6 +144,17 @@ func stepDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A string that uniquely identifies the cluster (job flow).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LogUri
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon S3 destination URI for log publishing. When omitted, EMR falls back to cluster-level logging behavior.",
+		//	  "type": "string"
+		//	}
+		"log_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon S3 destination URI for log publishing. When omitted, EMR falls back to cluster-level logging behavior.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -161,17 +183,19 @@ func stepDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EMR::Step").WithTerraformTypeName("awscc_emr_step")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"action_on_failure": "ActionOnFailure",
-		"args":              "Args",
-		"hadoop_jar_step":   "HadoopJarStep",
-		"jar":               "Jar",
-		"job_flow_id":       "JobFlowId",
-		"key":               "Key",
-		"main_class":        "MainClass",
-		"name":              "Name",
-		"step_id":           "Id",
-		"step_properties":   "StepProperties",
-		"value":             "Value",
+		"action_on_failure":  "ActionOnFailure",
+		"args":               "Args",
+		"encryption_key_arn": "EncryptionKeyArn",
+		"hadoop_jar_step":    "HadoopJarStep",
+		"jar":                "Jar",
+		"job_flow_id":        "JobFlowId",
+		"key":                "Key",
+		"log_uri":            "LogUri",
+		"main_class":         "MainClass",
+		"name":               "Name",
+		"step_id":            "Id",
+		"step_properties":    "StepProperties",
+		"value":              "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -312,7 +312,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "Mode": {
 		//	          "default": "NONE",
-		//	          "description": "The default value is `STANDARD`. A value of `STANDARD` means that Slurm accounting is enabled.",
+		//	          "description": "The default value is `NONE`. A value of `STANDARD` means that Slurm accounting is enabled.",
 		//	          "enum": [
 		//	            "STANDARD",
 		//	            "NONE"
@@ -405,7 +405,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "properties": {
 		//	        "Mode": {
 		//	          "default": "NONE",
-		//	          "description": "The default value is `STANDARD`. A value of `STANDARD` means that Slurm Rest is enabled.",
+		//	          "description": "The default value is `NONE`. A value of `STANDARD` means that Slurm Rest is enabled.",
 		//	          "enum": [
 		//	            "STANDARD",
 		//	            "NONE"
@@ -433,7 +433,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Mode
 						"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The default value is `STANDARD`. A value of `STANDARD` means that Slurm accounting is enabled.",
+							Description: "The default value is `NONE`. A value of `STANDARD` means that Slurm accounting is enabled.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -510,7 +510,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Mode
 						"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The default value is `STANDARD`. A value of `STANDARD` means that Slurm Rest is enabled.",
+							Description: "The default value is `NONE`. A value of `STANDARD` means that Slurm Rest is enabled.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/

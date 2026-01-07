@@ -66,20 +66,48 @@ func assistantAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "ExternalBedrockKnowledgeBaseConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AccessRoleArn": {
+		//	          "pattern": "^arn:aws:iam::[0-9]{12}:role/(?:service-role/)?[a-zA-Z0-9_+=,.@-]{1,64}$",
+		//	          "type": "string"
+		//	        },
+		//	        "BedrockKnowledgeBaseArn": {
+		//	          "pattern": "^arn:aws(|-cn|-us-gov):bedrock:[a-zA-Z0-9-]*:[0-9]{12}:knowledge-base/[0-9a-zA-Z]+$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "BedrockKnowledgeBaseArn",
+		//	        "AccessRoleArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "KnowledgeBaseId": {
 		//	      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	      "type": "string"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "KnowledgeBaseId"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"association": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExternalBedrockKnowledgeBaseConfig
+				"external_bedrock_knowledge_base_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AccessRoleArn
+						"access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: BedrockKnowledgeBaseArn
+						"bedrock_knowledge_base_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: KnowledgeBaseId
 				"knowledge_base_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -92,7 +120,8 @@ func assistantAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//
 		//	{
 		//	  "enum": [
-		//	    "KNOWLEDGE_BASE"
+		//	    "KNOWLEDGE_BASE",
+		//	    "EXTERNAL_BEDROCK_KNOWLEDGE_BASE"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -160,16 +189,19 @@ func assistantAssociationDataSource(ctx context.Context) (datasource.DataSource,
 	opts = opts.WithCloudFormationTypeName("AWS::Wisdom::AssistantAssociation").WithTerraformTypeName("awscc_wisdom_assistant_association")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"assistant_arn":             "AssistantArn",
-		"assistant_association_arn": "AssistantAssociationArn",
-		"assistant_association_id":  "AssistantAssociationId",
-		"assistant_id":              "AssistantId",
-		"association":               "Association",
-		"association_type":          "AssociationType",
-		"key":                       "Key",
-		"knowledge_base_id":         "KnowledgeBaseId",
-		"tags":                      "Tags",
-		"value":                     "Value",
+		"access_role_arn":                        "AccessRoleArn",
+		"assistant_arn":                          "AssistantArn",
+		"assistant_association_arn":              "AssistantAssociationArn",
+		"assistant_association_id":               "AssistantAssociationId",
+		"assistant_id":                           "AssistantId",
+		"association":                            "Association",
+		"association_type":                       "AssociationType",
+		"bedrock_knowledge_base_arn":             "BedrockKnowledgeBaseArn",
+		"external_bedrock_knowledge_base_config": "ExternalBedrockKnowledgeBaseConfig",
+		"key":                                    "Key",
+		"knowledge_base_id":                      "KnowledgeBaseId",
+		"tags":                                   "Tags",
+		"value":                                  "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

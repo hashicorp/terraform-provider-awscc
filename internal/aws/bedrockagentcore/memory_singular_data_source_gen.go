@@ -132,6 +132,80 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "Configuration": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
+		//	              "EpisodicOverride": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Consolidation": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "AppendToPrompt": {
+		//	                        "description": "Text prompt for model instructions",
+		//	                        "maxLength": 30000,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      },
+		//	                      "ModelId": {
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "AppendToPrompt",
+		//	                      "ModelId"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "Extraction": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "AppendToPrompt": {
+		//	                        "description": "Text prompt for model instructions",
+		//	                        "maxLength": 30000,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      },
+		//	                      "ModelId": {
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "AppendToPrompt",
+		//	                      "ModelId"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "Reflection": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "AppendToPrompt": {
+		//	                        "description": "Text prompt for model instructions",
+		//	                        "maxLength": 30000,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      },
+		//	                      "ModelId": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Namespaces": {
+		//	                        "description": "List of namespaces for memory strategy",
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "description": "Namespace for the memory strategy",
+		//	                          "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "minItems": 1,
+		//	                        "type": "array"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "AppendToPrompt",
+		//	                      "ModelId"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
 		//	              "SelfManagedConfiguration": {
 		//	                "additionalProperties": false,
 		//	                "properties": {
@@ -366,7 +440,94 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "SEMANTIC",
 		//	              "SUMMARIZATION",
 		//	              "USER_PREFERENCE",
-		//	              "CUSTOM"
+		//	              "CUSTOM",
+		//	              "EPISODIC"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "UpdatedAt": {
+		//	            "description": "Last update timestamp of the memory strategy",
+		//	            "format": "date-time",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Name"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "EpisodicMemoryStrategy": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "CreatedAt": {
+		//	            "description": "Creation timestamp of the memory strategy",
+		//	            "format": "date-time",
+		//	            "type": "string"
+		//	          },
+		//	          "Description": {
+		//	            "description": "Description of the Memory resource",
+		//	            "type": "string"
+		//	          },
+		//	          "Name": {
+		//	            "description": "Name of the Memory resource",
+		//	            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
+		//	            "type": "string"
+		//	          },
+		//	          "Namespaces": {
+		//	            "description": "List of namespaces for memory strategy",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "description": "Namespace for the memory strategy",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "type": "string"
+		//	            },
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          },
+		//	          "ReflectionConfiguration": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Namespaces": {
+		//	                "description": "List of namespaces for memory strategy",
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "description": "Namespace for the memory strategy",
+		//	                  "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	                  "type": "string"
+		//	                },
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Namespaces"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "Status": {
+		//	            "description": "Status of the memory strategy",
+		//	            "enum": [
+		//	              "CREATING",
+		//	              "ACTIVE",
+		//	              "DELETING",
+		//	              "FAILED"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "StrategyId": {
+		//	            "description": "Unique identifier for the memory strategy",
+		//	            "minLength": 12,
+		//	            "pattern": "^[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$",
+		//	            "type": "string"
+		//	          },
+		//	          "Type": {
+		//	            "description": "Type of memory strategy",
+		//	            "enum": [
+		//	              "SEMANTIC",
+		//	              "SUMMARIZATION",
+		//	              "USER_PREFERENCE",
+		//	              "CUSTOM",
+		//	              "EPISODIC"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -431,7 +592,8 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "SEMANTIC",
 		//	              "SUMMARIZATION",
 		//	              "USER_PREFERENCE",
-		//	              "CUSTOM"
+		//	              "CUSTOM",
+		//	              "EPISODIC"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -496,7 +658,8 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "SEMANTIC",
 		//	              "SUMMARIZATION",
 		//	              "USER_PREFERENCE",
-		//	              "CUSTOM"
+		//	              "CUSTOM",
+		//	              "EPISODIC"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -561,7 +724,8 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "SEMANTIC",
 		//	              "SUMMARIZATION",
 		//	              "USER_PREFERENCE",
-		//	              "CUSTOM"
+		//	              "CUSTOM",
+		//	              "EPISODIC"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -590,6 +754,63 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 							// Property: Configuration
 							"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EpisodicOverride
+									"episodic_override": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Consolidation
+											"consolidation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AppendToPrompt
+													"append_to_prompt": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Text prompt for model instructions",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: ModelId
+													"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Extraction
+											"extraction": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AppendToPrompt
+													"append_to_prompt": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Text prompt for model instructions",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: ModelId
+													"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Reflection
+											"reflection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AppendToPrompt
+													"append_to_prompt": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Text prompt for model instructions",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: ModelId
+													"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: Namespaces
+													"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "List of namespaces for memory strategy",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
 									// Property: SelfManagedConfiguration
 									"self_managed_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -770,6 +991,67 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 								ElementType: types.StringType,
 								Description: "List of namespaces for memory strategy",
 								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Status of the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StrategyId
+							"strategy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Unique identifier for the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Type of memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: UpdatedAt
+							"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
+								Description: "Last update timestamp of the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: EpisodicMemoryStrategy
+					"episodic_memory_strategy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CreatedAt
+							"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
+								Description: "Creation timestamp of the memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Description of the Memory resource",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Name of the Memory resource",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Namespaces
+							"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of namespaces for memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ReflectionConfiguration
+							"reflection_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Namespaces
+									"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "List of namespaces for memory strategy",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
 							}, /*END ATTRIBUTE*/
 							// Property: Status
 							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1034,6 +1316,8 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"custom_memory_strategy":          "CustomMemoryStrategy",
 		"description":                     "Description",
 		"encryption_key_arn":              "EncryptionKeyArn",
+		"episodic_memory_strategy":        "EpisodicMemoryStrategy",
+		"episodic_override":               "EpisodicOverride",
 		"event_expiry_duration":           "EventExpiryDuration",
 		"extraction":                      "Extraction",
 		"failure_reason":                  "FailureReason",
@@ -1050,6 +1334,8 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name":                            "Name",
 		"namespaces":                      "Namespaces",
 		"payload_delivery_bucket_name":    "PayloadDeliveryBucketName",
+		"reflection":                      "Reflection",
+		"reflection_configuration":        "ReflectionConfiguration",
 		"self_managed_configuration":      "SelfManagedConfiguration",
 		"semantic_memory_strategy":        "SemanticMemoryStrategy",
 		"semantic_override":               "SemanticOverride",

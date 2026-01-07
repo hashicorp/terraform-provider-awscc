@@ -302,8 +302,26 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                },
 		//	                "type": "object"
 		//	              },
+		//	              "BatchConfig": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "MaxBatchOpenMs": {
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "MaxBatchSize": {
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "MaxBatchSizeBytes": {
+		//	                    "type": "integer"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
 		//	              "ConfirmationUrl": {
 		//	                "type": "string"
+		//	              },
+		//	              "EnableBatching": {
+		//	                "type": "boolean"
 		//	              },
 		//	              "Headers": {
 		//	                "items": {
@@ -1064,8 +1082,26 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              },
 		//	              "type": "object"
 		//	            },
+		//	            "BatchConfig": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "MaxBatchOpenMs": {
+		//	                  "type": "integer"
+		//	                },
+		//	                "MaxBatchSize": {
+		//	                  "type": "integer"
+		//	                },
+		//	                "MaxBatchSizeBytes": {
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
 		//	            "ConfirmationUrl": {
 		//	              "type": "string"
+		//	            },
+		//	            "EnableBatching": {
+		//	              "type": "boolean"
 		//	            },
 		//	            "Headers": {
 		//	              "items": {
@@ -1828,8 +1864,30 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 										}, /*END SCHEMA*/
 										Computed: true,
 									}, /*END ATTRIBUTE*/
+									// Property: BatchConfig
+									"batch_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: MaxBatchOpenMs
+											"max_batch_open_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: MaxBatchSize
+											"max_batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: MaxBatchSizeBytes
+											"max_batch_size_bytes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
 									// Property: ConfirmationUrl
 									"confirmation_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: EnableBatching
+									"enable_batching": schema.BoolAttribute{ /*START ATTRIBUTE*/
 										Computed: true,
 									}, /*END ATTRIBUTE*/
 									// Property: Headers
@@ -2521,8 +2579,30 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END SCHEMA*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
+								// Property: BatchConfig
+								"batch_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: MaxBatchOpenMs
+										"max_batch_open_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: MaxBatchSize
+										"max_batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: MaxBatchSizeBytes
+										"max_batch_size_bytes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
 								// Property: ConfirmationUrl
 								"confirmation_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: EnableBatching
+								"enable_batching": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
 								// Property: Headers
@@ -3029,6 +3109,7 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"asset_id":                         "AssetId",
 		"auth":                             "Auth",
 		"aws_iot_sql_version":              "AwsIotSqlVersion",
+		"batch_config":                     "BatchConfig",
 		"batch_mode":                       "BatchMode",
 		"boolean_value":                    "BooleanValue",
 		"bucket_name":                      "BucketName",
@@ -3051,6 +3132,7 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"dynamo_d_bv_2":                    "DynamoDBv2",
 		"dynamo_db":                        "DynamoDB",
 		"elasticsearch":                    "Elasticsearch",
+		"enable_batching":                  "EnableBatching",
 		"endpoint":                         "Endpoint",
 		"entry_id":                         "EntryId",
 		"error_action":                     "ErrorAction",
@@ -3077,6 +3159,9 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"location":                         "Location",
 		"log_group_name":                   "LogGroupName",
 		"longitude":                        "Longitude",
+		"max_batch_open_ms":                "MaxBatchOpenMs",
+		"max_batch_size":                   "MaxBatchSize",
+		"max_batch_size_bytes":             "MaxBatchSizeBytes",
 		"message_expiry":                   "MessageExpiry",
 		"message_format":                   "MessageFormat",
 		"message_id":                       "MessageId",

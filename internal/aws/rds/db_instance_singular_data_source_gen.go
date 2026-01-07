@@ -24,6 +24,83 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::RDS::DBInstance resource.
 func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AdditionalStorageVolumes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "",
+		//	    "properties": {
+		//	      "AllocatedStorage": {
+		//	        "description": "The amount of storage allocated for the additional storage volume, in gibibytes (GiB). The minimum is 20 GiB. The maximum is 65,536 GiB (64 TiB).",
+		//	        "pattern": "^[0-9]*$",
+		//	        "type": "string"
+		//	      },
+		//	      "Iops": {
+		//	        "description": "The number of I/O operations per second (IOPS) provisioned for the additional storage volume.",
+		//	        "type": "integer"
+		//	      },
+		//	      "MaxAllocatedStorage": {
+		//	        "description": "The upper limit in gibibytes (GiB) to which RDS can automatically scale the storage of the additional storage volume.",
+		//	        "type": "integer"
+		//	      },
+		//	      "StorageThroughput": {
+		//	        "description": "The storage throughput value for the additional storage volume, in mebibytes per second (MiBps). This setting applies only to the General Purpose SSD gp3 storage type.",
+		//	        "type": "integer"
+		//	      },
+		//	      "StorageType": {
+		//	        "description": "The storage type for the additional storage volume.",
+		//	        "type": "string"
+		//	      },
+		//	      "VolumeName": {
+		//	        "description": "The name of the additional storage volume.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"additional_storage_volumes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AllocatedStorage
+					"allocated_storage": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The amount of storage allocated for the additional storage volume, in gibibytes (GiB). The minimum is 20 GiB. The maximum is 65,536 GiB (64 TiB).",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Iops
+					"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The number of I/O operations per second (IOPS) provisioned for the additional storage volume.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MaxAllocatedStorage
+					"max_allocated_storage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The upper limit in gibibytes (GiB) to which RDS can automatically scale the storage of the additional storage volume.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StorageThroughput
+					"storage_throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The storage throughput value for the additional storage volume, in mebibytes per second (MiBps). This setting applies only to the General Purpose SSD gp3 storage type.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StorageType
+					"storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The storage type for the additional storage volume.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: VolumeName
+					"volume_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the additional storage volume.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AllocatedStorage
 		// CloudFormation resource type schema:
 		//
@@ -1425,6 +1502,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBInstance").WithTerraformTypeName("awscc_rds_db_instance")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"additional_storage_volumes":                    "AdditionalStorageVolumes",
 		"address":                                       "Address",
 		"allocated_storage":                             "AllocatedStorage",
 		"allow_major_version_upgrade":                   "AllowMajorVersionUpgrade",
@@ -1536,6 +1614,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"use_latest_restorable_time":                    "UseLatestRestorableTime",
 		"valid_till":                                    "ValidTill",
 		"value":                                         "Value",
+		"volume_name":                                   "VolumeName",
 		"vpc_security_groups":                           "VPCSecurityGroups",
 	})
 

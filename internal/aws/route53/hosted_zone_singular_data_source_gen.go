@@ -54,10 +54,10 @@ func hostedZoneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "The features configuration for the hosted zone, including accelerated recovery settings and status information.",
 		//	  "properties": {
 		//	    "EnableAcceleratedRecovery": {
-		//	      "description": "Enable accelerated recovery on your public hosted zone to gain the ability to make changes to DNS records in the event of us-east-1 unavailability.",
+		//	      "description": "",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -67,11 +67,11 @@ func hostedZoneDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: EnableAcceleratedRecovery
 				"enable_accelerated_recovery": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Enable accelerated recovery on your public hosted zone to gain the ability to make changes to DNS records in the event of us-east-1 unavailability.",
+					Description: "",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "The features configuration for the hosted zone, including accelerated recovery settings and status information.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: HostedZoneTags
