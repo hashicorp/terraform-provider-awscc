@@ -112,6 +112,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ce_anomaly_subscriptions -cftype AWS::CE::AnomalySubscription -package ce ../aws/ce/anomaly_subscription_plural_data_source_gen.go ../aws/ce/anomaly_subscription_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ce_cost_categories -cftype AWS::CE::CostCategory -package ce ../aws/ce/cost_category_plural_data_source_gen.go ../aws/ce/cost_category_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cur_report_definitions -cftype AWS::CUR::ReportDefinition -package cur ../aws/cur/report_definition_plural_data_source_gen.go ../aws/cur/report_definition_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_cases_domains -cftype AWS::Cases::Domain -package cases ../aws/cases/domain_plural_data_source_gen.go ../aws/cases/domain_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cassandra_keyspaces -cftype AWS::Cassandra::Keyspace -package cassandra ../aws/cassandra/keyspace_plural_data_source_gen.go ../aws/cassandra/keyspace_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cassandra_tables -cftype AWS::Cassandra::Table -package cassandra ../aws/cassandra/table_plural_data_source_gen.go ../aws/cassandra/table_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cassandra_types -cftype AWS::Cassandra::Type -package cassandra ../aws/cassandra/type_plural_data_source_gen.go ../aws/cassandra/type_plural_data_source_gen_test.go
@@ -1007,6 +1008,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/billing"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/billingconductor"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/budgets"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cases"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cassandra"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ce"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/chatbot"

@@ -162,6 +162,11 @@
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_ce_anomaly_subscription -cfschema ../service/cloudformation/schemas/AWS_CE_AnomalySubscription.json -package ce ../aws/ce/anomaly_subscription_singular_data_source_gen.go ../aws/ce/anomaly_subscription_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_ce_cost_category -cfschema ../service/cloudformation/schemas/AWS_CE_CostCategory.json -package ce ../aws/ce/cost_category_singular_data_source_gen.go ../aws/ce/cost_category_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_cur_report_definition -cfschema ../service/cloudformation/schemas/AWS_CUR_ReportDefinition.json -package cur ../aws/cur/report_definition_singular_data_source_gen.go ../aws/cur/report_definition_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source awscc_cases_case_rule -cfschema ../service/cloudformation/schemas/AWS_Cases_CaseRule.json -package cases ../aws/cases/case_rule_singular_data_source_gen.go ../aws/cases/case_rule_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source awscc_cases_domain -cfschema ../service/cloudformation/schemas/AWS_Cases_Domain.json -package cases ../aws/cases/domain_singular_data_source_gen.go ../aws/cases/domain_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source awscc_cases_field -cfschema ../service/cloudformation/schemas/AWS_Cases_Field.json -package cases ../aws/cases/field_singular_data_source_gen.go ../aws/cases/field_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source awscc_cases_layout -cfschema ../service/cloudformation/schemas/AWS_Cases_Layout.json -package cases ../aws/cases/layout_singular_data_source_gen.go ../aws/cases/layout_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source awscc_cases_template -cfschema ../service/cloudformation/schemas/AWS_Cases_Template.json -package cases ../aws/cases/template_singular_data_source_gen.go ../aws/cases/template_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_cassandra_keyspace -cfschema ../service/cloudformation/schemas/AWS_Cassandra_Keyspace.json -package cassandra ../aws/cassandra/keyspace_singular_data_source_gen.go ../aws/cassandra/keyspace_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_cassandra_table -cfschema ../service/cloudformation/schemas/AWS_Cassandra_Table.json -package cassandra ../aws/cassandra/table_singular_data_source_gen.go ../aws/cassandra/table_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_cassandra_type -cfschema ../service/cloudformation/schemas/AWS_Cassandra_Type.json -package cassandra ../aws/cassandra/type_singular_data_source_gen.go ../aws/cassandra/type_singular_data_source_gen_test.go
@@ -1317,6 +1322,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/billing"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/billingconductor"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/budgets"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cases"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cassandra"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ce"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/certificatemanager"

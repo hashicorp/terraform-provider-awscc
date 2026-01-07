@@ -1,0 +1,373 @@
+{
+  "typeName": "AWS::Cases::CaseRule",
+  "description": "A case rule. In the Amazon Connect admin website, case rules are known as case field conditions. Case rules are used to define the situations under which fields should have certain effects (such as required).",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "BooleanCondition": {
+      "description": "A boolean condition for a rule.",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "EqualTo",
+          "properties": {
+            "EqualTo": {
+              "$ref": "#/definitions/BooleanOperands"
+            }
+          },
+          "required": [
+            "EqualTo"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "NotEqualTo",
+          "properties": {
+            "NotEqualTo": {
+              "$ref": "#/definitions/BooleanOperands"
+            }
+          },
+          "required": [
+            "NotEqualTo"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "BooleanOperands": {
+      "type": "object",
+      "description": "Boolean operands for a condition.",
+      "properties": {
+        "OperandOne": {
+          "$ref": "#/definitions/OperandOne"
+        },
+        "OperandTwo": {
+          "$ref": "#/definitions/OperandTwo"
+        },
+        "Result": {
+          "type": "boolean",
+          "description": "The value of the outer rule if the condition evaluates to true."
+        }
+      },
+      "required": [
+        "OperandOne",
+        "OperandTwo",
+        "Result"
+      ],
+      "additionalProperties": false
+    },
+    "CaseRuleDetails": {
+      "description": "Defines the rule behavior and conditions. Specifies the rule type and the conditions under which it applies. In the Amazon Connect admin website, this corresponds to case field conditions.",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Required",
+          "properties": {
+            "Required": {
+              "$ref": "#/definitions/RequiredCaseRule"
+            }
+          },
+          "required": [
+            "Required"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Hidden",
+          "properties": {
+            "Hidden": {
+              "$ref": "#/definitions/HiddenCaseRule"
+            }
+          },
+          "required": [
+            "Hidden"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "EmptyOperandValue": {
+      "type": "object",
+      "description": "An empty operand value.",
+      "additionalProperties": false
+    },
+    "OperandOne": {
+      "description": "The left hand operand in the condition.",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "FieldId",
+          "properties": {
+            "FieldId": {
+              "type": "string",
+              "maxLength": 500,
+              "minLength": 1,
+              "description": "The field ID this operand should take the value of."
+            }
+          },
+          "required": [
+            "FieldId"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "OperandTwo": {
+      "description": "The right hand operand in the condition.",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "StringValue",
+          "properties": {
+            "StringValue": {
+              "type": "string",
+              "maxLength": 1500,
+              "minLength": 1,
+              "description": "A string value to compare against the field value in the condition evaluation."
+            }
+          },
+          "required": [
+            "StringValue"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "BooleanValue",
+          "properties": {
+            "BooleanValue": {
+              "type": "boolean",
+              "description": "A boolean value to compare against the field value in the condition evaluation."
+            }
+          },
+          "required": [
+            "BooleanValue"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "DoubleValue",
+          "properties": {
+            "DoubleValue": {
+              "type": "number",
+              "description": "A numeric value to compare against the field value in the condition evaluation."
+            }
+          },
+          "required": [
+            "DoubleValue"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "EmptyValue",
+          "properties": {
+            "EmptyValue": {
+              "$ref": "#/definitions/EmptyOperandValue"
+            }
+          },
+          "required": [
+            "EmptyValue"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "RequiredCaseRule": {
+      "type": "object",
+      "description": "A required rule type, used to indicate whether a field is required.",
+      "properties": {
+        "DefaultValue": {
+          "type": "boolean",
+          "description": "The default required state for the field when none of the specified conditions are met. If true, the field is required by default; if false, the field is optional by default."
+        },
+        "Conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BooleanCondition"
+          },
+          "maxItems": 100,
+          "description": "An ordered list of boolean conditions that determine when the field should be required. Conditions are evaluated in order, and the first condition that evaluates to true determines whether the field is required, overriding the default value."
+        }
+      },
+      "required": [
+        "Conditions",
+        "DefaultValue"
+      ],
+      "additionalProperties": false
+    },
+    "HiddenCaseRule": {
+      "type": "object",
+      "description": "Hidden rule type, used to indicate whether a field is hidden",
+      "properties": {
+        "DefaultValue": {
+          "type": "boolean",
+          "description": "The value of the rule (i.e. whether the field is hidden) should none of the conditions evaluate to true"
+        },
+        "Conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BooleanCondition"
+          },
+          "maxItems": 100,
+          "description": "List of conditions for the hidden rule; the first condition to evaluate to true dictates the value of the rule"
+        }
+      },
+      "required": [
+        "Conditions",
+        "DefaultValue"
+      ],
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": ""
+        },
+        "Value": {
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    }
+  },
+  "properties": {
+    "CaseRuleArn": {
+      "type": "string",
+      "maxLength": 500,
+      "minLength": 1,
+      "description": "The Amazon Resource Name (ARN) of a case rule."
+    },
+    "CaseRuleId": {
+      "type": "string",
+      "maxLength": 500,
+      "minLength": 1,
+      "description": "The unique identifier of a case rule."
+    },
+    "Description": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "A description explaining the purpose and behavior of this case rule. Helps administrators understand when and why this rule applies to case fields."
+    },
+    "DomainId": {
+      "type": "string",
+      "maxLength": 500,
+      "minLength": 1,
+      "description": "The unique identifier of the Cases domain."
+    },
+    "Name": {
+      "type": "string",
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": "^.*[\\S]$",
+      "description": "A descriptive name for the case rule. Must be unique within the domain and should clearly indicate the rule's purpose (e.g., 'Priority Field Required for Urgent Cases')."
+    },
+    "Rule": {
+      "$ref": "#/definitions/CaseRuleDetails"
+    },
+    "CreatedTime": {
+      "type": "string",
+      "description": "The time at which the case rule was created.",
+      "format": "date-time"
+    },
+    "LastModifiedTime": {
+      "type": "string",
+      "description": "The time at which the case rule was created or last modified.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags that you attach to this case rule.",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "required": [
+    "Name",
+    "Rule"
+  ],
+  "readOnlyProperties": [
+    "/properties/CaseRuleId",
+    "/properties/CreatedTime",
+    "/properties/LastModifiedTime",
+    "/properties/CaseRuleArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/DomainId"
+  ],
+  "primaryIdentifier": [
+    "/properties/CaseRuleArn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cases:CreateCaseRule",
+        "cases:BatchGetCaseRule",
+        "cases:TagResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cases:UpdateCaseRule",
+        "cases:BatchGetCaseRule",
+        "cases:TagResource",
+        "cases:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cases:DeleteCaseRule",
+        "cases:UntagResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cases:ListCaseRules"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "DomainId": {
+            "$ref": "resource-schema.json#/properties/DomainId"
+          }
+        },
+        "required": [
+          "DomainId"
+        ]
+      }
+    },
+    "read": {
+      "permissions": [
+        "cases:BatchGetCaseRule"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": false,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "cases:TagResource",
+      "cases:UntagResource"
+    ]
+  }
+}
