@@ -3,12 +3,12 @@
 page_title: "awscc_dax_subnet_group Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource type definition for AWS::DAX::SubnetGroup
+  Resource Type definition for AWS::DAX::SubnetGroup
 ---
 
 # awscc_dax_subnet_group (Resource)
 
-Resource type definition for AWS::DAX::SubnetGroup
+Resource Type definition for AWS::DAX::SubnetGroup
 
 
 
@@ -27,6 +27,7 @@ Resource type definition for AWS::DAX::SubnetGroup
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `subnet_group_id` (String)
 
 ## Import
 
@@ -38,7 +39,7 @@ In Terraform v1.12.0 and later, the [`import` block](https://developer.hashicorp
 import {
   to = awscc_dax_subnet_group.example
   identity = {
-    subnet_group_name = "subnet_group_name"
+    id = "id"
   }
 }
 ```
@@ -48,7 +49,7 @@ import {
 
 #### Required
 
-- `subnet_group_name` (String)
+- `id` (String)
 
 #### Optional
 
@@ -60,12 +61,12 @@ In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.
 ```terraform
 import {
   to = awscc_dax_subnet_group.example
-  id = "subnet_group_name"
+  id = "id"
 }
 ```
 
 The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
-$ terraform import awscc_dax_subnet_group.example "subnet_group_name"
+$ terraform import awscc_dax_subnet_group.example "id"
 ```

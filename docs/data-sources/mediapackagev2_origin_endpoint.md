@@ -345,6 +345,7 @@ Read-Only:
 Read-Only:
 
 - `scte_filter` (List of String) <p>The SCTE-35 message types that you want to be treated as ad markers in the output.</p>
+- `scte_in_segments` (String)
 
 
 

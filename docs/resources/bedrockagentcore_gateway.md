@@ -58,7 +58,37 @@ Optional:
 
 - `allowed_audience` (List of String)
 - `allowed_clients` (List of String)
+- `allowed_scopes` (List of String)
+- `custom_claims` (Attributes List) (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims))
 - `discovery_url` (String)
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.custom_claims`
+
+Optional:
+
+- `authorizing_claim_match_value` (Attributes) The value or values in the custom claim to match and relationship of match (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims--authorizing_claim_match_value))
+- `inbound_token_claim_name` (String) The name of the custom claim to validate
+- `inbound_token_claim_value_type` (String) Token claim data type
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims--authorizing_claim_match_value"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.custom_claims.authorizing_claim_match_value`
+
+Optional:
+
+- `claim_match_operator` (String) The relationship between the claim field value and the value or values being matched
+- `claim_match_value` (Attributes) The value or values in the custom claim to match for (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims--authorizing_claim_match_value--claim_match_value))
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims--authorizing_claim_match_value--claim_match_value"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.custom_claims.authorizing_claim_match_value.claim_match_value`
+
+Optional:
+
+- `match_value_string` (String) The string value to match for
+- `match_value_string_list` (List of String) The list of strings to check for a match
+
+
+
 
 
 

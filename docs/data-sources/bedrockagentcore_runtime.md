@@ -30,6 +30,7 @@ Data Source schema for AWS::BedrockAgentCore::Runtime
 - `created_at` (String) Timestamp when the Agent was created
 - `description` (String) Description of the resource
 - `environment_variables` (Map of String) Environment variables for the agent runtime
+- `failure_reason` (String) The reason for failure if the agent is in a failed state.
 - `last_updated_at` (String) When resource was last updated
 - `lifecycle_configuration` (Attributes) Lifecycle configuration for managing runtime sessions (see [below for nested schema](#nestedatt--lifecycle_configuration))
 - `network_configuration` (Attributes) Network access configuration for the Agent (see [below for nested schema](#nestedatt--network_configuration))

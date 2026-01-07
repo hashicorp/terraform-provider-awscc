@@ -81,6 +81,7 @@ resource "awscc_workspacesweb_user_settings" "example" {
 - `idle_disconnect_timeout_in_minutes` (Number)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `toolbar_configuration` (Attributes) (see [below for nested schema](#nestedatt--toolbar_configuration))
+- `web_authn_allowed` (String)
 
 ### Read-Only
 

@@ -128,6 +128,7 @@ resource "awscc_bedrockagentcore_runtime" "example" {
 - `agent_runtime_id` (String) Identifier for a resource
 - `agent_runtime_version` (String) Version of the Agent
 - `created_at` (String) Timestamp when the Agent was created
+- `failure_reason` (String) The reason for failure if the agent is in a failed state.
 - `id` (String) Uniquely identifies the resource.
 - `last_updated_at` (String) When resource was last updated
 - `status` (String) Current status of the agent

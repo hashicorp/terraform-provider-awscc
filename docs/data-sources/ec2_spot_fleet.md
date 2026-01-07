@@ -297,6 +297,7 @@ Read-Only:
 Read-Only:
 
 - `availability_zone` (String)
+- `availability_zone_id` (String)
 - `group_name` (String)
 - `tenancy` (String)
 
@@ -352,6 +353,7 @@ Read-Only:
 Read-Only:
 
 - `availability_zone` (String)
+- `availability_zone_id` (String)
 - `instance_requirements` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides--instance_requirements))
 - `instance_type` (String)
 - `priority` (Number)

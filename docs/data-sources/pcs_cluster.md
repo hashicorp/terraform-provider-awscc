@@ -91,7 +91,7 @@ Read-Only:
 Read-Only:
 
 - `default_purge_time_in_days` (Number) The default value for all purge settings for `slurmdbd.conf`. For more information, see the [slurmdbd.conf documentation at SchedMD](https://slurm.schedmd.com/slurmdbd.conf.html). The default value is `-1`. A value of `-1` means there is no purge time and records persist as long as the cluster exists.
-- `mode` (String) The default value is `STANDARD`. A value of `STANDARD` means that Slurm accounting is enabled.
+- `mode` (String) The default value is `NONE`. A value of `STANDARD` means that Slurm accounting is enabled.
 
 
 <a id="nestedatt--slurm_configuration--auth_key"></a>
@@ -134,4 +134,4 @@ Read-Only:
 
 Read-Only:
 
-- `mode` (String) The default value is `STANDARD`. A value of `STANDARD` means that Slurm Rest is enabled.
+- `mode` (String) The default value is `NONE`. A value of `STANDARD` means that Slurm Rest is enabled.

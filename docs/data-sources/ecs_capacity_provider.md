@@ -73,6 +73,7 @@ Read-Only:
 
 Read-Only:
 
+- `capacity_option_type` (String)
 - `ec_2_instance_profile_arn` (String)
 - `instance_requirements` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--instance_requirements))
 - `monitoring` (String)

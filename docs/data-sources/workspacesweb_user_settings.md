@@ -37,6 +37,7 @@ Data Source schema for AWS::WorkSpacesWeb::UserSettings
 - `toolbar_configuration` (Attributes) (see [below for nested schema](#nestedatt--toolbar_configuration))
 - `upload_allowed` (String)
 - `user_settings_arn` (String)
+- `web_authn_allowed` (String)
 
 <a id="nestedatt--branding_configuration"></a>
 ### Nested Schema for `branding_configuration`

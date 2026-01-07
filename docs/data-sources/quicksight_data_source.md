@@ -36,7 +36,7 @@ Data Source schema for AWS::QuickSight::DataSource
 - `credentials` (Attributes) <p>Data source credentials. This is a variant type structure. For this structure to be
             valid, only one of the attributes can be non-null.</p> (see [below for nested schema](#nestedatt--credentials))
 - `data_source_id` (String)
-- `data_source_parameters` (Attributes) <p>The parameters that Amazon QuickSight uses to connect to your underlying data source.
+- `data_source_parameters` (Attributes) <p>The parameters that Amazon Quick Suite uses to connect to your underlying data source.
             This is a variant type structure. For this structure to be valid, only one of the
             attributes can be non-null.</p> (see [below for nested schema](#nestedatt--data_source_parameters))
 - `error_info` (Attributes) <p>Error information for the data source creation or update.</p> (see [below for nested schema](#nestedatt--error_info))
@@ -44,7 +44,7 @@ Data Source schema for AWS::QuickSight::DataSource
 - `last_updated_time` (String) <p>The last time that this data source was updated.</p>
 - `name` (String)
 - `permissions` (Attributes List) (see [below for nested schema](#nestedatt--permissions))
-- `ssl_properties` (Attributes) <p>Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your
+- `ssl_properties` (Attributes) <p>Secure Socket Layer (SSL) properties that apply when Quick Suite connects to your
             underlying data source.</p> (see [below for nested schema](#nestedatt--ssl_properties))
 - `status` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
@@ -211,7 +211,7 @@ Read-Only:
             provided.</p>
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>
-- `iam_parameters` (Attributes) <p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href="https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html">
+- `iam_parameters` (Attributes) <p>A structure that grants Quick Suite access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href="https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html">
                <code>GetClusterCredentials</code>
             </a>.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--redshift_parameters--iam_parameters))
 - `identity_center_configuration` (Attributes) <p>The parameters for an IAM Identity Center configuration.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--redshift_parameters--identity_center_configuration))
@@ -222,10 +222,10 @@ Read-Only:
 
 Read-Only:
 
-- `auto_create_database_user` (Boolean) <p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>
-- `database_groups` (List of String) <p>A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>
-- `database_user` (String) <p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>
-- `role_arn` (String) <p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>
+- `auto_create_database_user` (Boolean) <p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon Quick Suite can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>
+- `database_groups` (List of String) <p>A list of groups whose permissions will be granted to Quick Suite to access the cluster. These permissions are combined with the permissions granted to Quick Suite by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>
+- `database_user` (String) <p>The user whose permissions and group memberships will be used by Quick Suite to access the cluster. If this user already exists in your database, Quick Suite is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>
+- `role_arn` (String) <p>Use the <code>RoleArn</code> structure to allow Quick Suite to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Quick Suite. The role's trust policy must allow the Quick Suite service principal to assume the role.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--redshift_parameters--identity_center_configuration"></a>
@@ -370,6 +370,7 @@ Read-Only:
             data source in the ARN is used as the credentials for the
             <code>DataSourceCredentials</code> structure.</p>
 - `credential_pair` (Attributes) <p>The combination of user name and password that are used as credentials.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair))
+- `key_pair_credentials` (Attributes) (see [below for nested schema](#nestedatt--credentials--key_pair_credentials))
 - `secret_arn` (String) <p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>
 
 <a id="nestedatt--credentials--credential_pair"></a>
@@ -549,7 +550,7 @@ Read-Only:
             provided.</p>
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>
-- `iam_parameters` (Attributes) <p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href="https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html">
+- `iam_parameters` (Attributes) <p>A structure that grants Quick Suite access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href="https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html">
                <code>GetClusterCredentials</code>
             </a>.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters--iam_parameters))
 - `identity_center_configuration` (Attributes) <p>The parameters for an IAM Identity Center configuration.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters--identity_center_configuration))
@@ -560,10 +561,10 @@ Read-Only:
 
 Read-Only:
 
-- `auto_create_database_user` (Boolean) <p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>
-- `database_groups` (List of String) <p>A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>
-- `database_user` (String) <p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>
-- `role_arn` (String) <p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>
+- `auto_create_database_user` (Boolean) <p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon Quick Suite can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>
+- `database_groups` (List of String) <p>A list of groups whose permissions will be granted to Quick Suite to access the cluster. These permissions are combined with the permissions granted to Quick Suite by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>
+- `database_user` (String) <p>The user whose permissions and group memberships will be used by Quick Suite to access the cluster. If this user already exists in your database, Quick Suite is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>
+- `role_arn` (String) <p>Use the <code>RoleArn</code> structure to allow Quick Suite to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Quick Suite. The role's trust policy must allow the Quick Suite service principal to assume the role.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters--identity_center_configuration"></a>
@@ -697,6 +698,16 @@ Read-Only:
 - `port` (Number) <p>The port for the Trino data source.</p>
 
 
+
+
+<a id="nestedatt--credentials--key_pair_credentials"></a>
+### Nested Schema for `credentials.key_pair_credentials`
+
+Read-Only:
+
+- `key_pair_username` (String)
+- `private_key` (String)
+- `private_key_passphrase` (String)
 
 
 
@@ -860,7 +871,7 @@ Read-Only:
             provided.</p>
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>
-- `iam_parameters` (Attributes) <p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href="https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html">
+- `iam_parameters` (Attributes) <p>A structure that grants Quick Suite access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href="https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html">
                <code>GetClusterCredentials</code>
             </a>.</p> (see [below for nested schema](#nestedatt--data_source_parameters--redshift_parameters--iam_parameters))
 - `identity_center_configuration` (Attributes) <p>The parameters for an IAM Identity Center configuration.</p> (see [below for nested schema](#nestedatt--data_source_parameters--redshift_parameters--identity_center_configuration))
@@ -871,10 +882,10 @@ Read-Only:
 
 Read-Only:
 
-- `auto_create_database_user` (Boolean) <p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>
-- `database_groups` (List of String) <p>A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>
-- `database_user` (String) <p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>
-- `role_arn` (String) <p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>
+- `auto_create_database_user` (Boolean) <p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon Quick Suite can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>
+- `database_groups` (List of String) <p>A list of groups whose permissions will be granted to Quick Suite to access the cluster. These permissions are combined with the permissions granted to Quick Suite by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>
+- `database_user` (String) <p>The user whose permissions and group memberships will be used by Quick Suite to access the cluster. If this user already exists in your database, Quick Suite is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>
+- `role_arn` (String) <p>Use the <code>RoleArn</code> structure to allow Quick Suite to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Quick Suite. The role's trust policy must allow the Quick Suite service principal to assume the role.</p>
 
 
 <a id="nestedatt--data_source_parameters--redshift_parameters--identity_center_configuration"></a>
@@ -1028,10 +1039,10 @@ Read-Only:
             following:</p>
          <ul>
             <li>
-               <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>
+               <p>The ARN of an Amazon Quick Suite user or group associated with a data source or dataset. (This is common.)</p>
             </li>
             <li>
-               <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>
+               <p>The ARN of an Amazon Quick Suite user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>
             </li>
             <li>
                <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight

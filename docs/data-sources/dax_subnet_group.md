@@ -22,5 +22,6 @@ Data Source schema for AWS::DAX::SubnetGroup
 ### Read-Only
 
 - `description` (String)
+- `subnet_group_id` (String)
 - `subnet_group_name` (String)
 - `subnet_ids` (List of String)
