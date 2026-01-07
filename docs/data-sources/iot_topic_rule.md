@@ -171,7 +171,9 @@ Read-Only:
 Read-Only:
 
 - `auth` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--http--auth))
+- `batch_config` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--http--batch_config))
 - `confirmation_url` (String)
+- `enable_batching` (Boolean)
 - `headers` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--http--headers))
 - `url` (String)
 
@@ -191,6 +193,16 @@ Read-Only:
 - `service_name` (String)
 - `signing_region` (String)
 
+
+
+<a id="nestedatt--topic_rule_payload--actions--http--batch_config"></a>
+### Nested Schema for `topic_rule_payload.actions.http.batch_config`
+
+Read-Only:
+
+- `max_batch_open_ms` (Number)
+- `max_batch_size` (Number)
+- `max_batch_size_bytes` (Number)
 
 
 <a id="nestedatt--topic_rule_payload--actions--http--headers"></a>
@@ -578,7 +590,9 @@ Read-Only:
 Read-Only:
 
 - `auth` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--http--auth))
+- `batch_config` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--http--batch_config))
 - `confirmation_url` (String)
+- `enable_batching` (Boolean)
 - `headers` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--http--headers))
 - `url` (String)
 
@@ -598,6 +612,16 @@ Read-Only:
 - `service_name` (String)
 - `signing_region` (String)
 
+
+
+<a id="nestedatt--topic_rule_payload--error_action--http--batch_config"></a>
+### Nested Schema for `topic_rule_payload.error_action.http.batch_config`
+
+Read-Only:
+
+- `max_batch_open_ms` (Number)
+- `max_batch_size` (Number)
+- `max_batch_size_bytes` (Number)
 
 
 <a id="nestedatt--topic_rule_payload--error_action--http--headers"></a>

@@ -59,6 +59,7 @@ Read-Only:
 Read-Only:
 
 - `availability_zone` (String)
+- `availability_zone_id` (String)
 - `block_device_mappings` (Attributes List) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--block_device_mappings))
 - `instance_requirements` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements))
 - `instance_type` (String)

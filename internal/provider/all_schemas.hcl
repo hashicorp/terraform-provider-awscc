@@ -769,6 +769,30 @@ resource_schema "aws_cur_report_definition" {
   cloudformation_type_name = "AWS::CUR::ReportDefinition"
 }
 
+resource_schema "aws_cases_case_rule" {
+  cloudformation_type_name               = "AWS::Cases::CaseRule"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_cases_domain" {
+  cloudformation_type_name = "AWS::Cases::Domain"
+}
+
+resource_schema "aws_cases_field" {
+  cloudformation_type_name               = "AWS::Cases::Field"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_cases_layout" {
+  cloudformation_type_name               = "AWS::Cases::Layout"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_cases_template" {
+  cloudformation_type_name               = "AWS::Cases::Template"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_cassandra_keyspace" {
   cloudformation_type_name = "AWS::Cassandra::Keyspace"
 }

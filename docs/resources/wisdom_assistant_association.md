@@ -49,9 +49,19 @@ resource "awscc_wisdom_assistant_association" "example" {
 <a id="nestedatt--association"></a>
 ### Nested Schema for `association`
 
-Required:
+Optional:
 
+- `external_bedrock_knowledge_base_config` (Attributes) (see [below for nested schema](#nestedatt--association--external_bedrock_knowledge_base_config))
 - `knowledge_base_id` (String)
+
+<a id="nestedatt--association--external_bedrock_knowledge_base_config"></a>
+### Nested Schema for `association.external_bedrock_knowledge_base_config`
+
+Optional:
+
+- `access_role_arn` (String)
+- `bedrock_knowledge_base_arn` (String)
+
 
 
 <a id="nestedatt--tags"></a>

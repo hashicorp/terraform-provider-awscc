@@ -61,8 +61,10 @@ resource "awscc_connect_hours_of_operation" "example" {
 
 ### Optional
 
+- `child_hours_of_operations` (Attributes List) List of child hours of operations. (see [below for nested schema](#nestedatt--child_hours_of_operations))
 - `description` (String) The description of the hours of operation.
 - `hours_of_operation_overrides` (Attributes List) One or more hours of operation overrides assigned to an hour of operation. (see [below for nested schema](#nestedatt--hours_of_operation_overrides))
+- `parent_hours_of_operations` (Attributes List) List of parent hours of operations. (see [below for nested schema](#nestedatt--parent_hours_of_operations))
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -98,6 +100,15 @@ Required:
 
 
 
+<a id="nestedatt--child_hours_of_operations"></a>
+### Nested Schema for `child_hours_of_operations`
+
+Optional:
+
+- `id` (String) The identifier for the hours of operation.
+- `name` (String) The name of the hours of operation.
+
+
 <a id="nestedatt--hours_of_operation_overrides"></a>
 ### Nested Schema for `hours_of_operation_overrides`
 
@@ -109,6 +120,8 @@ Optional:
 - `override_config` (Attributes Set) Configuration information for the hours of operation override: day, start time, and end time. (see [below for nested schema](#nestedatt--hours_of_operation_overrides--override_config))
 - `override_description` (String) The description of the hours of operation override.
 - `override_name` (String) The name of the hours of operation override.
+- `override_type` (String) The type of hours of operation override.
+- `recurrence_config` (Attributes) Configuration for recurring hours of operation overrides. (see [below for nested schema](#nestedatt--hours_of_operation_overrides--recurrence_config))
 
 <a id="nestedatt--hours_of_operation_overrides--override_config"></a>
 ### Nested Schema for `hours_of_operation_overrides.override_config`
@@ -137,6 +150,35 @@ Optional:
 - `minutes` (Number) The minutes.
 
 
+
+<a id="nestedatt--hours_of_operation_overrides--recurrence_config"></a>
+### Nested Schema for `hours_of_operation_overrides.recurrence_config`
+
+Optional:
+
+- `recurrence_pattern` (Attributes) Pattern for recurring hours of operation overrides. (see [below for nested schema](#nestedatt--hours_of_operation_overrides--recurrence_config--recurrence_pattern))
+
+<a id="nestedatt--hours_of_operation_overrides--recurrence_config--recurrence_pattern"></a>
+### Nested Schema for `hours_of_operation_overrides.recurrence_config.recurrence_pattern`
+
+Optional:
+
+- `by_month` (List of Number) List of months (1-12) for recurrence pattern.
+- `by_month_day` (List of Number) List of month days (-1 to 31) for recurrence pattern.
+- `by_weekday_occurrence` (List of Number)
+- `frequency` (String) The frequency of recurrence for hours of operation overrides.
+- `interval` (Number)
+
+
+
+
+<a id="nestedatt--parent_hours_of_operations"></a>
+### Nested Schema for `parent_hours_of_operations`
+
+Optional:
+
+- `id` (String) The identifier for the hours of operation.
+- `name` (String) The name of the hours of operation.
 
 
 <a id="nestedatt--tags"></a>

@@ -26,13 +26,13 @@ func pullTimeUpdateExclusionDataSource(ctx context.Context) (datasource.DataSour
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Principal arn that should not update image pull times.",
+		//	  "description": "The ARN of the IAM principal to remove from the pull time update exclusion list.",
 		//	  "maxLength": 200,
 		//	  "pattern": "^arn:aws(-[a-z]+)*:iam::[0-9]{12}:(role|user)/[\\w+=,.@-]+(/[\\w+=,.@-]+)*$",
 		//	  "type": "string"
 		//	}
 		"principal_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Principal arn that should not update image pull times.",
+			Description: "The ARN of the IAM principal to remove from the pull time update exclusion list.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

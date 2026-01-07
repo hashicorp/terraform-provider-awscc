@@ -40,7 +40,7 @@
       "description": "The Amazon Resource Name (ARN) for the FSx for Windows file system.",
       "type": "string",
       "maxLength": 128,
-      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$"
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$"
     },
     "Password": {
       "description": "The password of the user who has the permissions to access files and folders in the FSx for Windows file system.",
@@ -54,7 +54,7 @@
       "items": {
         "type": "string",
         "maxLength": 128,
-        "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$"
+        "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$"
       },
       "insertionOrder": false
     },
@@ -83,7 +83,7 @@
     "LocationArn": {
       "description": "The Amazon Resource Name (ARN) of the Amazon FSx for Windows file system location that is created.",
       "type": "string",
-      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
       "maxLength": 128
     },
     "LocationUri": {

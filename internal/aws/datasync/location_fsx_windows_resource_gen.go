@@ -62,7 +62,7 @@ func locationFSxWindowsResource(ctx context.Context) (resource.Resource, error) 
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) for the FSx for Windows file system.",
 		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$",
 		//	  "type": "string"
 		//	}
 		"fsx_filesystem_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -71,7 +71,7 @@ func locationFSxWindowsResource(ctx context.Context) (resource.Resource, error) 
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(128),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -85,7 +85,7 @@ func locationFSxWindowsResource(ctx context.Context) (resource.Resource, error) 
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the Amazon FSx for Windows file system location that is created.",
 		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
 		"location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -141,7 +141,7 @@ func locationFSxWindowsResource(ctx context.Context) (resource.Resource, error) 
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "maxLength": 128,
-		//	    "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$",
+		//	    "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$",
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array"
@@ -153,7 +153,7 @@ func locationFSxWindowsResource(ctx context.Context) (resource.Resource, error) 
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
 					stringvalidator.LengthAtMost(128),
-					stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$"), ""),
+					stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$"), ""),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

@@ -750,6 +750,27 @@
         "identifier": ["ReportName"]
     },
     {
+        "resource": "awscc_cases_case_rule",
+        "identifier": ["CaseRuleArn"]
+    },
+    {
+        "resource": "awscc_cases_domain",
+        "generateListResource": true,
+        "identifier": ["DomainArn"]
+    },
+    {
+        "resource": "awscc_cases_field",
+        "identifier": ["FieldArn"]
+    },
+    {
+        "resource": "awscc_cases_layout",
+        "identifier": ["LayoutArn"]
+    },
+    {
+        "resource": "awscc_cases_template",
+        "identifier": ["TemplateArn"]
+    },
+    {
         "resource": "awscc_cassandra_keyspace",
         "generateListResource": true,
         "identifier": ["KeyspaceName"]
@@ -1376,7 +1397,7 @@
     {
         "resource": "awscc_dax_subnet_group",
         "generateListResource": true,
-        "identifier": ["SubnetGroupName"]
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_dms_data_migration",

@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -31,6 +32,29 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::ODB::OdbPeeringConnection resource.
 func odbPeeringConnectionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AdditionalPeerNetworkCidrs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The additional CIDR blocks for the ODB peering connection.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"additional_peer_network_cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The additional CIDR blocks for the ODB peering connection.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// AdditionalPeerNetworkCidrs is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -50,7 +74,6 @@ func odbPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: OdbNetworkArn
@@ -131,6 +154,27 @@ func odbPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PeerNetworkCidrs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The CIDR blocks for the ODB peering connection.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"peer_network_cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The CIDR blocks for the ODB peering connection.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PeerNetworkId
@@ -255,21 +299,24 @@ func odbPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"display_name":               "DisplayName",
-		"key":                        "Key",
-		"odb_network_arn":            "OdbNetworkArn",
-		"odb_network_id":             "OdbNetworkId",
-		"odb_peering_connection_arn": "OdbPeeringConnectionArn",
-		"odb_peering_connection_id":  "OdbPeeringConnectionId",
-		"peer_network_arn":           "PeerNetworkArn",
-		"peer_network_id":            "PeerNetworkId",
-		"tags":                       "Tags",
-		"value":                      "Value",
+		"additional_peer_network_cidrs": "AdditionalPeerNetworkCidrs",
+		"display_name":                  "DisplayName",
+		"key":                           "Key",
+		"odb_network_arn":               "OdbNetworkArn",
+		"odb_network_id":                "OdbNetworkId",
+		"odb_peering_connection_arn":    "OdbPeeringConnectionArn",
+		"odb_peering_connection_id":     "OdbPeeringConnectionId",
+		"peer_network_arn":              "PeerNetworkArn",
+		"peer_network_cidrs":            "PeerNetworkCidrs",
+		"peer_network_id":               "PeerNetworkId",
+		"tags":                          "Tags",
+		"value":                         "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/OdbNetworkId",
 		"/properties/PeerNetworkId",
+		"/properties/AdditionalPeerNetworkCidrs",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -42,7 +42,7 @@ func locationNFSResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the NFS location.",
 		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
 		"location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -133,10 +133,10 @@ func locationNFSResource(ctx context.Context) (resource.Resource, error) {
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "maxLength": 128,
-		//	        "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
+		//	        "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
 		//	        "type": "string"
 		//	      },
-		//	      "maxItems": 4,
+		//	      "maxItems": 8,
 		//	      "minItems": 1,
 		//	      "type": "array"
 		//	    }
@@ -154,10 +154,10 @@ func locationNFSResource(ctx context.Context) (resource.Resource, error) {
 					Description: "ARN(s) of the agent(s) to use for an NFS location.",
 					Required:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(1, 4),
+						listvalidator.SizeBetween(1, 8),
 						listvalidator.ValueStringsAre(
 							stringvalidator.LengthAtMost(128),
-							stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$"), ""),
+							stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$"), ""),
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

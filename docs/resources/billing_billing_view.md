@@ -61,6 +61,7 @@ Optional:
 
 - `dimensions` (Attributes) (see [below for nested schema](#nestedatt--data_filter_expression--dimensions))
 - `tags` (Attributes) (see [below for nested schema](#nestedatt--data_filter_expression--tags))
+- `time_range` (Attributes) (see [below for nested schema](#nestedatt--data_filter_expression--time_range))
 
 <a id="nestedatt--data_filter_expression--dimensions"></a>
 ### Nested Schema for `data_filter_expression.dimensions`
@@ -78,6 +79,15 @@ Optional:
 
 - `key` (String)
 - `values` (List of String)
+
+
+<a id="nestedatt--data_filter_expression--time_range"></a>
+### Nested Schema for `data_filter_expression.time_range`
+
+Optional:
+
+- `begin_date_inclusive` (String) The time in ISO 8601 format, UTC time (YYYY-MM-DDTHH:MM:SSZ).
+- `end_date_inclusive` (String) The time in ISO 8601 format, UTC time (YYYY-MM-DDTHH:MM:SSZ).
 
 
 

@@ -93,6 +93,9 @@
     "VideoContentSourceUrl": {
       "description": "The URL prefix for the parent manifest for the stream, minus the asset ID. The maximum length is 512 characters.",
       "type": "string"
+    },
+    "AdDecisionServerConfiguration": {
+      "$ref": "#/definitions/AdDecisionServerConfiguration"
     }
   },
   "definitions": {
@@ -336,6 +339,59 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "AdDecisionServerConfiguration": {
+      "description": "The configuration for the request to the specified Ad Decision Server URL.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "HttpRequest": {
+          "$ref": "#/definitions/HttpRequest"
+        }
+      },
+      "required": [
+        "HttpRequest"
+      ]
+    },
+    "HttpRequest": {
+      "description": "The configuration for the request to the Ad Decision Server URL.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "HttpMethod": {
+          "description": "Supported HTTP Methods for the request to the Ad Decision Server URL.",
+          "type": "string",
+          "enum": [
+            "GET",
+            "POST"
+          ]
+        },
+        "Body": {
+          "description": "The body of the request to the Ad Decision Server URL. The maximum length is 100,000 characters.",
+          "type": "string"
+        },
+        "Headers": {
+          "$ref": "#/definitions/AdDecisionServerConfigurationHttpHeaders"
+        },
+        "CompressRequest": {
+          "description": "The compression type of the request sent to the Ad Decision Server URL. Only the POST HTTP Method permits compression other than NONE.",
+          "type": "string",
+          "enum": [
+            "NONE",
+            "GZIP"
+          ]
+        }
+      }
+    },
+    "AdDecisionServerConfigurationHttpHeaders": {
+      "description": "The headers in the request sent to the Ad Decision Server URL. The max length is 10,000 characters.",
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "": {
+          "type": "string"
         }
       }
     }

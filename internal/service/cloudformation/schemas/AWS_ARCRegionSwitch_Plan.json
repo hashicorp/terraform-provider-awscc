@@ -138,6 +138,75 @@
       ],
       "additionalProperties": false
     },
+    "DocumentDbConfiguration": {
+      "type": "object",
+      "properties": {
+        "TimeoutMinutes": {
+          "type": "number",
+          "default": 60,
+          "minimum": 1
+        },
+        "CrossAccountRole": {
+          "type": "string",
+          "pattern": "^arn:aws[a-zA-Z0-9-]*:iam::[0-9]{12}:role/.+$"
+        },
+        "ExternalId": {
+          "type": "string"
+        },
+        "Behavior": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DocumentDbDefaultBehavior"
+            },
+            {
+              "default": "switchoverOnly"
+            }
+          ]
+        },
+        "Ungraceful": {
+          "$ref": "#/definitions/DocumentDbUngraceful"
+        },
+        "GlobalClusterIdentifier": {
+          "type": "string",
+          "pattern": "^[A-Za-z][0-9A-Za-z-:._]*$"
+        },
+        "DatabaseClusterArns": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^arn:aws[a-zA-Z-]*:rds:[a-z0-9-]+:\\d{12}:cluster:[a-zA-Z0-9][a-zA-Z0-9-_]{0,99}$"
+          }
+        }
+      },
+      "required": [
+        "Behavior",
+        "DatabaseClusterArns",
+        "GlobalClusterIdentifier"
+      ],
+      "additionalProperties": false
+    },
+    "DocumentDbDefaultBehavior": {
+      "type": "string",
+      "enum": [
+        "switchoverOnly",
+        "failover"
+      ]
+    },
+    "DocumentDbUngraceful": {
+      "type": "object",
+      "properties": {
+        "Ungraceful": {
+          "$ref": "#/definitions/DocumentDbUngracefulBehavior"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DocumentDbUngracefulBehavior": {
+      "type": "string",
+      "enum": [
+        "failover"
+      ]
+    },
     "Ec2AsgCapacityIncreaseConfiguration": {
       "type": "object",
       "properties": {
@@ -495,6 +564,19 @@
             "Route53HealthCheckConfig"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "DocumentDbConfig",
+          "properties": {
+            "DocumentDbConfig": {
+              "$ref": "#/definitions/DocumentDbConfiguration"
+            }
+          },
+          "required": [
+            "DocumentDbConfig"
+          ],
+          "additionalProperties": false
         }
       ]
     },
@@ -510,7 +592,8 @@
         "Parallel",
         "ECSServiceScaling",
         "EKSResourceScaling",
-        "Route53HealthCheck"
+        "Route53HealthCheck",
+        "DocumentDb"
       ]
     },
     "GlobalAuroraConfiguration": {
@@ -733,6 +816,37 @@
       },
       "additionalProperties": false
     },
+    "ReportConfiguration": {
+      "type": "object",
+      "properties": {
+        "ReportOutput": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReportOutputConfiguration"
+          },
+          "maxItems": 1,
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "ReportOutputConfiguration": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "S3Configuration",
+          "properties": {
+            "S3Configuration": {
+              "$ref": "#/definitions/S3ReportOutputConfiguration"
+            }
+          },
+          "required": [
+            "S3Configuration"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
     "Route53HealthCheckConfiguration": {
       "type": "object",
       "properties": {
@@ -792,6 +906,22 @@
         "On",
         "Off"
       ]
+    },
+    "S3ReportOutputConfiguration": {
+      "type": "object",
+      "properties": {
+        "BucketPath": {
+          "type": "string",
+          "maxLength": 512,
+          "minLength": 3,
+          "pattern": "^(?:s3://)?[a-z0-9][a-z0-9-]{1,61}[a-z0-9](?:/[^/ ][^/]*)*/?$"
+        },
+        "BucketOwner": {
+          "type": "string",
+          "pattern": "^\\d{12}$"
+        }
+      },
+      "additionalProperties": false
     },
     "Service": {
       "type": "object",
@@ -1021,6 +1151,9 @@
       },
       "maxItems": 2,
       "minItems": 2
+    },
+    "ReportConfiguration": {
+      "$ref": "#/definitions/ReportConfiguration"
     },
     "Tags": {
       "$ref": "#/definitions/Tags"

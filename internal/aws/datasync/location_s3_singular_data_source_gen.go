@@ -28,7 +28,7 @@ func locationS3DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the Amazon S3 bucket location.",
 		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
 		"location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -54,7 +54,7 @@ func locationS3DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the Amazon S3 bucket.",
 		//	  "maxLength": 156,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):s3:[a-z\\-0-9]*:[0-9]*:.*$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):s3:[a-z\\-0-9]*:[0-9]*:.*$",
 		//	  "type": "string"
 		//	}
 		"s3_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -71,7 +71,7 @@ func locationS3DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "BucketAccessRoleArn": {
 		//	      "description": "The ARN of the IAM role of the Amazon S3 bucket.",
 		//	      "maxLength": 2048,
-		//	      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$",
+		//	      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$",
 		//	      "type": "string"
 		//	    }
 		//	  },

@@ -31,7 +31,7 @@ Data Source schema for AWS::SecurityHub::ConnectorV2
 - `last_updated_at` (String) The timestamp formatted in ISO8601
 - `message` (String) The message of the connector status change
 - `name` (String) The name of the connector
-- `provider_name` (Attributes) The provider configuration of the connector (see [below for nested schema](#nestedatt--provider_name))
+- `provider_name` (Attributes) The third-party provider configuration for the connector (see [below for nested schema](#nestedatt--provider_name))
 - `tags` (Map of String) A key-value pair to associate with a resource.
 
 <a id="nestedatt--provider_name"></a>
@@ -39,19 +39,15 @@ Data Source schema for AWS::SecurityHub::ConnectorV2
 
 Read-Only:
 
-- `jira_cloud` (Attributes) (see [below for nested schema](#nestedatt--provider_name--jira_cloud))
-- `service_now` (Attributes) (see [below for nested schema](#nestedatt--provider_name--service_now))
+- `jira_cloud` (Attributes) The initial configuration settings required to establish an integration between Security Hub and Jira Cloud (see [below for nested schema](#nestedatt--provider_name--jira_cloud))
+- `service_now` (Attributes) The initial configuration settings required to establish an integration between Security Hub and ServiceNow ITSM (see [below for nested schema](#nestedatt--provider_name--service_now))
 
 <a id="nestedatt--provider_name--jira_cloud"></a>
 ### Nested Schema for `provider_name.jira_cloud`
 
 Read-Only:
 
-- `auth_status` (String) The auth status of the connector
-- `auth_url` (String) The authUrl of the JiraCloud connector
-- `cloud_id` (String)
-- `domain` (String)
-- `project_key` (String)
+- `project_key` (String) The project key for a Jira Cloud instance
 
 
 <a id="nestedatt--provider_name--service_now"></a>
@@ -59,6 +55,5 @@ Read-Only:
 
 Read-Only:
 
-- `auth_status` (String) The auth status of the connector
-- `instance_name` (String)
-- `secret_arn` (String) The ARN of secrets manager containing ClientId and ClientSecret
+- `instance_name` (String) The instance name of ServiceNow ITSM
+- `secret_arn` (String) The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains the ServiceNow credentials

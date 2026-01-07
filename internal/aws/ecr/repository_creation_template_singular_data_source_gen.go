@@ -27,13 +27,14 @@ func repositoryCreationTemplateDataSource(ctx context.Context) (datasource.DataS
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A list of enumerable Strings representing the repository creation scenarios that this template will apply towards. The two supported scenarios are PULL_THROUGH_CACHE and REPLICATION",
+		//	  "description": "A list of enumerable Strings representing the repository creation scenarios that this template will apply towards. The supported scenarios are PULL_THROUGH_CACHE, REPLICATION, and CREATE_ON_PUSH",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "description": "Enumerable Strings representing the repository creation scenarios that the template will apply towards.",
 		//	    "enum": [
 		//	      "REPLICATION",
-		//	      "PULL_THROUGH_CACHE"
+		//	      "PULL_THROUGH_CACHE",
+		//	      "CREATE_ON_PUSH"
 		//	    ],
 		//	    "type": "string"
 		//	  },
@@ -42,7 +43,7 @@ func repositoryCreationTemplateDataSource(ctx context.Context) (datasource.DataS
 		//	}
 		"applied_for": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "A list of enumerable Strings representing the repository creation scenarios that this template will apply towards. The two supported scenarios are PULL_THROUGH_CACHE and REPLICATION",
+			Description: "A list of enumerable Strings representing the repository creation scenarios that this template will apply towards. The supported scenarios are PULL_THROUGH_CACHE, REPLICATION, and CREATE_ON_PUSH",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt

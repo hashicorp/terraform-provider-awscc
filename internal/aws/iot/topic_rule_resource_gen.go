@@ -342,8 +342,26 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	                },
 		//	                "type": "object"
 		//	              },
+		//	              "BatchConfig": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "MaxBatchOpenMs": {
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "MaxBatchSize": {
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "MaxBatchSizeBytes": {
+		//	                    "type": "integer"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
 		//	              "ConfirmationUrl": {
 		//	                "type": "string"
+		//	              },
+		//	              "EnableBatching": {
+		//	                "type": "boolean"
 		//	              },
 		//	              "Headers": {
 		//	                "items": {
@@ -1104,8 +1122,26 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	              },
 		//	              "type": "object"
 		//	            },
+		//	            "BatchConfig": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "MaxBatchOpenMs": {
+		//	                  "type": "integer"
+		//	                },
+		//	                "MaxBatchSize": {
+		//	                  "type": "integer"
+		//	                },
+		//	                "MaxBatchSizeBytes": {
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
 		//	            "ConfirmationUrl": {
 		//	              "type": "string"
+		//	            },
+		//	            "EnableBatching": {
+		//	              "type": "boolean"
 		//	            },
 		//	            "Headers": {
 		//	              "items": {
@@ -2130,12 +2166,54 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 											objectplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
+									// Property: BatchConfig
+									"batch_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: MaxBatchOpenMs
+											"max_batch_open_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: MaxBatchSize
+											"max_batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: MaxBatchSizeBytes
+											"max_batch_size_bytes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
 									// Property: ConfirmationUrl
 									"confirmation_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: EnableBatching
+									"enable_batching": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Headers
@@ -3698,12 +3776,54 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 										objectplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
+								// Property: BatchConfig
+								"batch_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: MaxBatchOpenMs
+										"max_batch_open_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: MaxBatchSize
+										"max_batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: MaxBatchSizeBytes
+										"max_batch_size_bytes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: ConfirmationUrl
 								"confirmation_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: EnableBatching
+								"enable_batching": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Headers
@@ -4830,6 +4950,7 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 		"asset_id":                         "AssetId",
 		"auth":                             "Auth",
 		"aws_iot_sql_version":              "AwsIotSqlVersion",
+		"batch_config":                     "BatchConfig",
 		"batch_mode":                       "BatchMode",
 		"boolean_value":                    "BooleanValue",
 		"bucket_name":                      "BucketName",
@@ -4852,6 +4973,7 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 		"dynamo_d_bv_2":                    "DynamoDBv2",
 		"dynamo_db":                        "DynamoDB",
 		"elasticsearch":                    "Elasticsearch",
+		"enable_batching":                  "EnableBatching",
 		"endpoint":                         "Endpoint",
 		"entry_id":                         "EntryId",
 		"error_action":                     "ErrorAction",
@@ -4878,6 +5000,9 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 		"location":                         "Location",
 		"log_group_name":                   "LogGroupName",
 		"longitude":                        "Longitude",
+		"max_batch_open_ms":                "MaxBatchOpenMs",
+		"max_batch_size":                   "MaxBatchSize",
+		"max_batch_size_bytes":             "MaxBatchSizeBytes",
 		"message_expiry":                   "MessageExpiry",
 		"message_format":                   "MessageFormat",
 		"message_id":                       "MessageId",

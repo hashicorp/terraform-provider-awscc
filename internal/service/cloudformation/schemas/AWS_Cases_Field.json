@@ -1,0 +1,186 @@
+{
+  "typeName": "AWS::Cases::Field",
+  "description": "A field in the Cases domain. This field is used to define the case object model (that is, defines what data can be captured on cases) in a Cases domain.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "FieldType": {
+      "type": "string",
+      "description": "The data type of the field, which determines validation rules, input constraints, and display format. Each type has specific constraints: Text (string input), Number (numeric values), Boolean (true/false), DateTime (date/time picker), SingleSelect (dropdown options), Url (URL validation), User (Amazon Connect user selection).",
+      "enum": [
+        "Text",
+        "Number",
+        "Boolean",
+        "DateTime",
+        "SingleSelect",
+        "Url",
+        "User"
+      ]
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags that you attach to this field.",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": ""
+        },
+        "Value": {
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    }
+  },
+  "properties": {
+    "Description": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "A description explaining the purpose and usage of this field in cases. Helps agents and administrators understand what information should be captured in this field."
+    },
+    "DomainId": {
+      "type": "string",
+      "maxLength": 500,
+      "minLength": 1,
+      "description": "The unique identifier of the Cases domain."
+    },
+    "FieldArn": {
+      "type": "string",
+      "maxLength": 500,
+      "minLength": 1,
+      "description": "The Amazon Resource Name (ARN) of the field."
+    },
+    "FieldId": {
+      "type": "string",
+      "maxLength": 500,
+      "minLength": 1,
+      "description": "The unique identifier of a field."
+    },
+    "Name": {
+      "type": "string",
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": "^.*[\\S]$",
+      "description": "The display name of the field as it appears to agents in the case interface. Should be descriptive and user-friendly (e.g., 'Customer Priority Level', 'Issue Category')."
+    },
+    "Namespace": {
+      "type": "string",
+      "description": "Indicates whether this is a System field (predefined by AWS) or a Custom field (created by your organization). System fields cannot be modified or deleted.",
+      "enum": [
+        "System",
+        "Custom"
+      ]
+    },
+    "CreatedTime": {
+      "type": "string",
+      "description": "The time at which the field was created.",
+      "format": "date-time"
+    },
+    "LastModifiedTime": {
+      "type": "string",
+      "description": "The time at which the field was created or last modified.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "$ref": "#/definitions/Tags"
+    },
+    "Type": {
+      "$ref": "#/definitions/FieldType"
+    }
+  },
+  "required": [
+    "Name",
+    "Type"
+  ],
+  "readOnlyProperties": [
+    "/properties/FieldArn",
+    "/properties/FieldId",
+    "/properties/Namespace",
+    "/properties/CreatedTime",
+    "/properties/LastModifiedTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/DomainId",
+    "/properties/Type"
+  ],
+  "primaryIdentifier": [
+    "/properties/FieldArn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cases:CreateField",
+        "cases:BatchGetField",
+        "cases:TagResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cases:UpdateField",
+        "cases:TagResource",
+        "cases:UntagResource",
+        "cases:BatchGetField"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cases:DeleteField",
+        "cases:UntagResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cases:ListFields"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "DomainId": {
+            "$ref": "resource-schema.json#/properties/DomainId"
+          }
+        },
+        "required": [
+          "DomainId"
+        ]
+      }
+    },
+    "read": {
+      "permissions": [
+        "cases:BatchGetField"
+      ]
+    }
+  },
+  "tagging": {
+    "cloudFormationSystemTags": true,
+    "permissions": [
+      "cases:TagResource",
+      "cases:UntagResource"
+    ],
+    "tagOnCreate": false,
+    "tagProperty": "/properties/Tags",
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "additionalIdentifiers": [
+    [
+      "/properties/DomainId"
+    ]
+  ],
+  "additionalProperties": false
+}

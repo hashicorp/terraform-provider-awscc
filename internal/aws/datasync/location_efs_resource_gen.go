@@ -41,7 +41,7 @@ func locationEFSResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) for the Amazon EFS Access point that DataSync uses when accessing the EFS file system.",
 		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]+:[0-9]{12}:access-point/fsap-[0-9a-f]{8,40}$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]+:[0-9]{12}:access-point/fsap-[0-9a-f]{8,40}$",
 		//	  "type": "string"
 		//	}
 		"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -50,7 +50,7 @@ func locationEFSResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(128),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]+:[0-9]{12}:access-point/fsap-[0-9a-f]{8,40}$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]+:[0-9]{12}:access-point/fsap-[0-9a-f]{8,40}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -68,7 +68,7 @@ func locationEFSResource(ctx context.Context) (resource.Resource, error) {
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "maxLength": 128,
-		//	        "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$",
+		//	        "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$",
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 5,
@@ -78,7 +78,7 @@ func locationEFSResource(ctx context.Context) (resource.Resource, error) {
 		//	    "SubnetArn": {
 		//	      "description": "The ARN of the subnet that DataSync uses to access the target EFS file system.",
 		//	      "maxLength": 128,
-		//	      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:subnet/.*$",
+		//	      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:subnet/.*$",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -99,7 +99,7 @@ func locationEFSResource(ctx context.Context) (resource.Resource, error) {
 						listvalidator.SizeBetween(1, 5),
 						listvalidator.ValueStringsAre(
 							stringvalidator.LengthAtMost(128),
-							stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$"), ""),
+							stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$"), ""),
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -112,7 +112,7 @@ func locationEFSResource(ctx context.Context) (resource.Resource, error) {
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthAtMost(128),
-						stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:subnet/.*$"), ""),
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:subnet/.*$"), ""),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -128,7 +128,7 @@ func locationEFSResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) for the Amazon EFS file system.",
 		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$",
 		//	  "type": "string"
 		//	}
 		"efs_filesystem_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -137,7 +137,7 @@ func locationEFSResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(128),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -151,7 +151,7 @@ func locationEFSResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the AWS IAM role that the DataSync will assume when mounting the EFS file system.",
 		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$",
 		//	  "type": "string"
 		//	}
 		"file_system_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -160,7 +160,7 @@ func locationEFSResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(128),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -197,7 +197,7 @@ func locationEFSResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the Amazon EFS file system location that is created.",
 		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
 		"location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

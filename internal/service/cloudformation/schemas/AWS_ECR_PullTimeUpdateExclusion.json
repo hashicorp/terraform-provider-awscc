@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::ECR::PullTimeUpdateExclusion",
-  "description": "Resource Type definition for AWS::ECR::PullTimeUpdateExclusion controls the exclusion configuration for ecr image pull time update.",
+  "description": "The ARN of the IAM principal to remove from the pull time update exclusion list.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ecr.git",
   "definitions": {
     "PrincipalArn": {
@@ -12,7 +12,8 @@
   },
   "properties": {
     "PrincipalArn": {
-      "$ref": "#/definitions/PrincipalArn"
+      "$ref": "#/definitions/PrincipalArn",
+      "description": "The ARN of the IAM principal to remove from the pull time update exclusion list."
     }
   },
   "required": [

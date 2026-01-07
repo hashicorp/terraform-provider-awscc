@@ -174,6 +174,80 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	          "Configuration": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
+		//	              "EpisodicOverride": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Consolidation": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "AppendToPrompt": {
+		//	                        "description": "Text prompt for model instructions",
+		//	                        "maxLength": 30000,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      },
+		//	                      "ModelId": {
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "AppendToPrompt",
+		//	                      "ModelId"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "Extraction": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "AppendToPrompt": {
+		//	                        "description": "Text prompt for model instructions",
+		//	                        "maxLength": 30000,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      },
+		//	                      "ModelId": {
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "AppendToPrompt",
+		//	                      "ModelId"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "Reflection": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "AppendToPrompt": {
+		//	                        "description": "Text prompt for model instructions",
+		//	                        "maxLength": 30000,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      },
+		//	                      "ModelId": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Namespaces": {
+		//	                        "description": "List of namespaces for memory strategy",
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "description": "Namespace for the memory strategy",
+		//	                          "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "minItems": 1,
+		//	                        "type": "array"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "AppendToPrompt",
+		//	                      "ModelId"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
 		//	              "SelfManagedConfiguration": {
 		//	                "additionalProperties": false,
 		//	                "properties": {
@@ -408,7 +482,94 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	              "SEMANTIC",
 		//	              "SUMMARIZATION",
 		//	              "USER_PREFERENCE",
-		//	              "CUSTOM"
+		//	              "CUSTOM",
+		//	              "EPISODIC"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "UpdatedAt": {
+		//	            "description": "Last update timestamp of the memory strategy",
+		//	            "format": "date-time",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Name"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "EpisodicMemoryStrategy": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "CreatedAt": {
+		//	            "description": "Creation timestamp of the memory strategy",
+		//	            "format": "date-time",
+		//	            "type": "string"
+		//	          },
+		//	          "Description": {
+		//	            "description": "Description of the Memory resource",
+		//	            "type": "string"
+		//	          },
+		//	          "Name": {
+		//	            "description": "Name of the Memory resource",
+		//	            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
+		//	            "type": "string"
+		//	          },
+		//	          "Namespaces": {
+		//	            "description": "List of namespaces for memory strategy",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "description": "Namespace for the memory strategy",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "type": "string"
+		//	            },
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          },
+		//	          "ReflectionConfiguration": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Namespaces": {
+		//	                "description": "List of namespaces for memory strategy",
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "description": "Namespace for the memory strategy",
+		//	                  "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	                  "type": "string"
+		//	                },
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Namespaces"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "Status": {
+		//	            "description": "Status of the memory strategy",
+		//	            "enum": [
+		//	              "CREATING",
+		//	              "ACTIVE",
+		//	              "DELETING",
+		//	              "FAILED"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "StrategyId": {
+		//	            "description": "Unique identifier for the memory strategy",
+		//	            "minLength": 12,
+		//	            "pattern": "^[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$",
+		//	            "type": "string"
+		//	          },
+		//	          "Type": {
+		//	            "description": "Type of memory strategy",
+		//	            "enum": [
+		//	              "SEMANTIC",
+		//	              "SUMMARIZATION",
+		//	              "USER_PREFERENCE",
+		//	              "CUSTOM",
+		//	              "EPISODIC"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -473,7 +634,8 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	              "SEMANTIC",
 		//	              "SUMMARIZATION",
 		//	              "USER_PREFERENCE",
-		//	              "CUSTOM"
+		//	              "CUSTOM",
+		//	              "EPISODIC"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -538,7 +700,8 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	              "SEMANTIC",
 		//	              "SUMMARIZATION",
 		//	              "USER_PREFERENCE",
-		//	              "CUSTOM"
+		//	              "CUSTOM",
+		//	              "EPISODIC"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -603,7 +766,8 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	              "SEMANTIC",
 		//	              "SUMMARIZATION",
 		//	              "USER_PREFERENCE",
-		//	              "CUSTOM"
+		//	              "CUSTOM",
+		//	              "EPISODIC"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -632,6 +796,135 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Configuration
 							"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EpisodicOverride
+									"episodic_override": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Consolidation
+											"consolidation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AppendToPrompt
+													"append_to_prompt": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Text prompt for model instructions",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 30000),
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: ModelId
+													"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Extraction
+											"extraction": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AppendToPrompt
+													"append_to_prompt": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Text prompt for model instructions",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 30000),
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: ModelId
+													"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Reflection
+											"reflection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AppendToPrompt
+													"append_to_prompt": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Text prompt for model instructions",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 30000),
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: ModelId
+													"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Namespaces
+													"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "List of namespaces for memory strategy",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.List{ /*START VALIDATORS*/
+															listvalidator.SizeAtLeast(1),
+															listvalidator.ValueStringsAre(
+																stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+															),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															generic.Multiset(),
+															listplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
 									// Property: SelfManagedConfiguration
 									"self_managed_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1059,6 +1352,152 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 										"SUMMARIZATION",
 										"USER_PREFERENCE",
 										"CUSTOM",
+										"EPISODIC",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: UpdatedAt
+							"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
+								Description: "Last update timestamp of the memory strategy",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: EpisodicMemoryStrategy
+					"episodic_memory_strategy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CreatedAt
+							"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
+								Description: "Creation timestamp of the memory strategy",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Description of the Memory resource",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Name of the Memory resource",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]{0,47}$"), ""),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Namespaces
+							"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of namespaces for memory strategy",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.SizeAtLeast(1),
+									listvalidator.ValueStringsAre(
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ReflectionConfiguration
+							"reflection_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Namespaces
+									"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "List of namespaces for memory strategy",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.SizeAtLeast(1),
+											listvalidator.ValueStringsAre(
+												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+											),
+											fwvalidators.NotNullList(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											generic.Multiset(),
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Status of the memory strategy",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"CREATING",
+										"ACTIVE",
+										"DELETING",
+										"FAILED",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: StrategyId
+							"strategy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Unique identifier for the memory strategy",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthAtLeast(12),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Type of memory strategy",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"SEMANTIC",
+										"SUMMARIZATION",
+										"USER_PREFERENCE",
+										"CUSTOM",
+										"EPISODIC",
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1175,6 +1614,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 										"SUMMARIZATION",
 										"USER_PREFERENCE",
 										"CUSTOM",
+										"EPISODIC",
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1291,6 +1731,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 										"SUMMARIZATION",
 										"USER_PREFERENCE",
 										"CUSTOM",
+										"EPISODIC",
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1407,6 +1848,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 										"SUMMARIZATION",
 										"USER_PREFERENCE",
 										"CUSTOM",
+										"EPISODIC",
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1555,6 +1997,8 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		"custom_memory_strategy":          "CustomMemoryStrategy",
 		"description":                     "Description",
 		"encryption_key_arn":              "EncryptionKeyArn",
+		"episodic_memory_strategy":        "EpisodicMemoryStrategy",
+		"episodic_override":               "EpisodicOverride",
 		"event_expiry_duration":           "EventExpiryDuration",
 		"extraction":                      "Extraction",
 		"failure_reason":                  "FailureReason",
@@ -1571,6 +2015,8 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		"name":                            "Name",
 		"namespaces":                      "Namespaces",
 		"payload_delivery_bucket_name":    "PayloadDeliveryBucketName",
+		"reflection":                      "Reflection",
+		"reflection_configuration":        "ReflectionConfiguration",
 		"self_managed_configuration":      "SelfManagedConfiguration",
 		"semantic_memory_strategy":        "SemanticMemoryStrategy",
 		"semantic_override":               "SemanticOverride",

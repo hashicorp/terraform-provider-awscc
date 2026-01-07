@@ -517,7 +517,6 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		//	          }
 		//	        },
 		//	        "required": [
-		//	          "MinSize",
 		//	          "MaxSize"
 		//	        ],
 		//	        "type": "object"
@@ -583,7 +582,6 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 								Computed:    true,
 								Validators: []validator.Int64{ /*START VALIDATORS*/
 									int64validator.AtLeast(0),
-									fwvalidators.NotNullInt64(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),

@@ -21,6 +21,7 @@ Data Source schema for AWS::RDS::DBInstance
 
 ### Read-Only
 
+- `additional_storage_volumes` (Attributes List) (see [below for nested schema](#nestedatt--additional_storage_volumes))
 - `allocated_storage` (String) The amount of storage in gibibytes (GiB) to be initially allocated for the database instance.
   If any value is set in the ``Iops`` parameter, ``AllocatedStorage`` must be at least 100 GiB, which corresponds to the minimum Iops value of 1,000. If you increase the ``Iops`` value (in 1,000 IOPS increments), then you must also increase the ``AllocatedStorage`` value (in 100-GiB increments). 
    *Amazon Aurora* 
@@ -590,6 +591,19 @@ Data Source schema for AWS::RDS::DBInstance
   To avoid this situation, migrate your DB instance to using VPC security groups only when that is the only change in your stack template. 
   *Amazon Aurora* 
  Not applicable. The associated list of EC2 VPC security groups is managed by the DB cluster. If specified, the setting must match the DB cluster setting.
+
+<a id="nestedatt--additional_storage_volumes"></a>
+### Nested Schema for `additional_storage_volumes`
+
+Read-Only:
+
+- `allocated_storage` (String) The amount of storage allocated for the additional storage volume, in gibibytes (GiB). The minimum is 20 GiB. The maximum is 65,536 GiB (64 TiB).
+- `iops` (Number) The number of I/O operations per second (IOPS) provisioned for the additional storage volume.
+- `max_allocated_storage` (Number) The upper limit in gibibytes (GiB) to which RDS can automatically scale the storage of the additional storage volume.
+- `storage_throughput` (Number) The storage throughput value for the additional storage volume, in mebibytes per second (MiBps). This setting applies only to the General Purpose SSD gp3 storage type.
+- `storage_type` (String) The storage type for the additional storage volume.
+- `volume_name` (String) The name of the additional storage volume.
+
 
 <a id="nestedatt--associated_roles"></a>
 ### Nested Schema for `associated_roles`

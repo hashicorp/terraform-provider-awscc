@@ -99,6 +99,46 @@
             "description": "The reason that the address was added to the suppression list for your account",
             "pattern": "BOUNCE|COMPLAINT"
           }
+        },
+        "ValidationOptions": {
+          "type": "object",
+          "description": "An object that contains information about the validation options for your account.",
+          "additionalProperties": false,
+          "properties": {
+            "ConditionThreshold": {
+              "type": "object",
+              "description": "The condition threshold settings for suppression validation.",
+              "additionalProperties": false,
+              "properties": {
+                "ConditionThresholdEnabled": {
+                  "type": "string",
+                  "description": "Whether the condition threshold is enabled or disabled.",
+                  "pattern": "ENABLED|DISABLED"
+                },
+                "OverallConfidenceThreshold": {
+                  "type": "object",
+                  "description": "The overall confidence threshold settings.",
+                  "additionalProperties": false,
+                  "properties": {
+                    "ConfidenceVerdictThreshold": {
+                      "type": "string",
+                      "description": "The confidence verdict threshold level.",
+                      "pattern": "MEDIUM|HIGH|MANAGED"
+                    }
+                  },
+                  "required": [
+                    "ConfidenceVerdictThreshold"
+                  ]
+                }
+              },
+              "required": [
+                "ConditionThresholdEnabled"
+              ]
+            }
+          },
+          "required": [
+            "ConditionThreshold"
+          ]
         }
       }
     },

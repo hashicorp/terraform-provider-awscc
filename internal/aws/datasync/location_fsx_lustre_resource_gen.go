@@ -41,7 +41,7 @@ func locationFSxLustreResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) for the FSx for Lustre file system.",
 		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]+:[0-9]{12}:file-system/fs-[0-9a-f]+$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]+:[0-9]{12}:file-system/fs-[0-9a-f]+$",
 		//	  "type": "string"
 		//	}
 		"fsx_filesystem_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -50,7 +50,7 @@ func locationFSxLustreResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(128),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]+:[0-9]{12}:file-system/fs-[0-9a-f]+$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]+:[0-9]{12}:file-system/fs-[0-9a-f]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -64,7 +64,7 @@ func locationFSxLustreResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the Amazon FSx for Lustre file system location that is created.",
 		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
 		"location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -98,7 +98,7 @@ func locationFSxLustreResource(ctx context.Context) (resource.Resource, error) {
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "maxLength": 128,
-		//	    "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/sg-[a-f0-9]+$",
+		//	    "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/sg-[a-f0-9]+$",
 		//	    "type": "string"
 		//	  },
 		//	  "maxItems": 5,
@@ -113,7 +113,7 @@ func locationFSxLustreResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.SizeBetween(1, 5),
 				listvalidator.ValueStringsAre(
 					stringvalidator.LengthAtMost(128),
-					stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/sg-[a-f0-9]+$"), ""),
+					stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/sg-[a-f0-9]+$"), ""),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

@@ -21,7 +21,7 @@ Data Source schema for AWS::ECR::RepositoryCreationTemplate
 
 ### Read-Only
 
-- `applied_for` (Set of String) A list of enumerable Strings representing the repository creation scenarios that this template will apply towards. The two supported scenarios are PULL_THROUGH_CACHE and REPLICATION
+- `applied_for` (Set of String) A list of enumerable Strings representing the repository creation scenarios that this template will apply towards. The supported scenarios are PULL_THROUGH_CACHE, REPLICATION, and CREATE_ON_PUSH
 - `created_at` (String)
 - `custom_role_arn` (String) The ARN of the role to be assumed by Amazon ECR. Amazon ECR will assume your supplied role when the customRoleArn is specified. When this field isn't specified, Amazon ECR will use the service-linked role for the repository creation template.
 - `description` (String) The description associated with the repository creation template.

@@ -352,6 +352,17 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Environment variables for the agent runtime",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: FailureReason
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The reason for failure if the agent is in a failed state.",
+		//	  "type": "string"
+		//	}
+		"failure_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The reason for failure if the agent is in a failed state.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -660,6 +671,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"discovery_url":                "DiscoveryUrl",
 		"entry_point":                  "EntryPoint",
 		"environment_variables":        "EnvironmentVariables",
+		"failure_reason":               "FailureReason",
 		"idle_runtime_session_timeout": "IdleRuntimeSessionTimeout",
 		"last_updated_at":              "LastUpdatedAt",
 		"lifecycle_configuration":      "LifecycleConfiguration",

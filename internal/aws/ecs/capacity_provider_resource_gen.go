@@ -238,6 +238,13 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	    "InstanceLaunchTemplate": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "CapacityOptionType": {
+		//	          "enum": [
+		//	            "ON_DEMAND",
+		//	            "SPOT"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "Ec2InstanceProfileArn": {
 		//	          "type": "string"
 		//	        },
@@ -603,6 +610,20 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 				// Property: InstanceLaunchTemplate
 				"instance_launch_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CapacityOptionType
+						"capacity_option_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"ON_DEMAND",
+									"SPOT",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: Ec2InstanceProfileArn
 						"ec_2_instance_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
@@ -1301,6 +1322,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		"bare_metal":                     "BareMetal",
 		"baseline_ebs_bandwidth_mbps":    "BaselineEbsBandwidthMbps",
 		"burstable_performance":          "BurstablePerformance",
+		"capacity_option_type":           "CapacityOptionType",
 		"cluster_name":                   "ClusterName",
 		"cpu_manufacturers":              "CpuManufacturers",
 		"ec_2_instance_profile_arn":      "Ec2InstanceProfileArn",

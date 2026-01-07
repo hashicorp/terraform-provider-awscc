@@ -26,6 +26,15 @@
     }
   },
   "properties": {
+    "AdditionalPeerNetworkCidrs": {
+      "description": "The additional CIDR blocks for the ODB peering connection.",
+      "type": "array",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
     "DisplayName": {
       "description": "The name of the ODB peering connection.",
       "type": "string",
@@ -56,6 +65,15 @@
       "description": "The Amazon Resource Name (ARN) of the peer network.",
       "type": "string"
     },
+    "PeerNetworkCidrs": {
+      "description": "The CIDR blocks for the ODB peering connection.",
+      "type": "array",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
     "PeerNetworkId": {
       "description": "The unique identifier of the peer network.",
       "type": "string",
@@ -81,16 +99,17 @@
     "/properties/OdbPeeringConnectionArn",
     "/properties/OdbPeeringConnectionId",
     "/properties/OdbNetworkArn",
-    "/properties/PeerNetworkArn"
+    "/properties/PeerNetworkArn",
+    "/properties/PeerNetworkCidrs"
   ],
   "createOnlyProperties": [
     "/properties/OdbNetworkId",
-    "/properties/PeerNetworkId",
-    "/properties/DisplayName"
+    "/properties/PeerNetworkId"
   ],
   "writeOnlyProperties": [
     "/properties/OdbNetworkId",
-    "/properties/PeerNetworkId"
+    "/properties/PeerNetworkId",
+    "/properties/AdditionalPeerNetworkCidrs"
   ],
   "handlers": {
     "create": {
@@ -100,6 +119,7 @@
         "iam:CreateServiceLinkedRole",
         "ec2:DescribeVpcs",
         "ec2:CreateOdbNetworkPeering",
+        "ec2:ModifyOdbNetworkPeering",
         "odb:GetOdbPeeringConnection",
         "odb:ListTagsForResource",
         "sts:GetCallerIdentity"
@@ -113,10 +133,14 @@
     },
     "update": {
       "permissions": [
+        "odb:UpdateOdbPeeringConnection",
         "odb:GetOdbPeeringConnection",
         "odb:TagResource",
         "odb:UntagResource",
-        "odb:ListTagsForResource"
+        "odb:ListTagsForResource",
+        "ec2:DescribeVpcs",
+        "ec2:ModifyOdbNetworkPeering",
+        "sts:GetCallerIdentity"
       ]
     },
     "delete": {

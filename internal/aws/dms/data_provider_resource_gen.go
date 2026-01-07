@@ -144,7 +144,8 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	    "mongodb",
 		//	    "docdb",
 		//	    "db2",
-		//	    "db2_zos"
+		//	    "db2_zos",
+		//	    "sybase"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -165,6 +166,7 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 					"docdb",
 					"db2",
 					"db2_zos",
+					"sybase",
 				),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -240,6 +242,11 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	    {
 		//	      "required": [
 		//	        "IbmDb2zOsSettings"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "SybaseAseSettings"
 		//	      ]
 		//	    }
 		//	  ],
@@ -585,6 +592,41 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	        "ServerName",
 		//	        "Port",
 		//	        "DatabaseName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SybaseAseSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "SybaseAseSettings property identifier.",
+		//	      "properties": {
+		//	        "CertificateArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "DatabaseName": {
+		//	          "type": "string"
+		//	        },
+		//	        "EncryptPassword": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "Port": {
+		//	          "type": "integer"
+		//	        },
+		//	        "ServerName": {
+		//	          "type": "string"
+		//	        },
+		//	        "SslMode": {
+		//	          "enum": [
+		//	            "none",
+		//	            "require",
+		//	            "verify-ca"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ServerName",
+		//	        "Port",
+		//	        "SslMode"
 		//	      ],
 		//	      "type": "object"
 		//	    }
@@ -1302,6 +1344,79 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: SybaseAseSettings
+				"sybase_ase_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CertificateArn
+						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseName
+						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EncryptPassword
+						"encrypt_password": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ServerName
+						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SslMode
+						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"none",
+									"require",
+									"verify-ca",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "SybaseAseSettings property identifier.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The property identifies the exact type of settings for the data provider.",
 			Optional:    true,
@@ -1421,6 +1536,7 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 		"database_name":                 "DatabaseName",
 		"description":                   "Description",
 		"doc_db_settings":               "DocDbSettings",
+		"encrypt_password":              "EncryptPassword",
 		"engine":                        "Engine",
 		"exact_settings":                "ExactSettings",
 		"ibm_db_2_luw_settings":         "IbmDb2LuwSettings",
@@ -1438,11 +1554,12 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 		"secrets_manager_oracle_asm_secret_id":                   "SecretsManagerOracleAsmSecretId",
 		"secrets_manager_security_db_encryption_access_role_arn": "SecretsManagerSecurityDbEncryptionAccessRoleArn",
 		"secrets_manager_security_db_encryption_secret_id":       "SecretsManagerSecurityDbEncryptionSecretId",
-		"server_name": "ServerName",
-		"settings":    "Settings",
-		"ssl_mode":    "SslMode",
-		"tags":        "Tags",
-		"value":       "Value",
+		"server_name":         "ServerName",
+		"settings":            "Settings",
+		"ssl_mode":            "SslMode",
+		"sybase_ase_settings": "SybaseAseSettings",
+		"tags":                "Tags",
+		"value":               "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

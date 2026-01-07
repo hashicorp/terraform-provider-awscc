@@ -229,6 +229,11 @@ resource "awscc_emr_step" "example" {
 - `job_flow_id` (String) A string that uniquely identifies the cluster (job flow).
 - `name` (String) The name of the cluster step.
 
+### Optional
+
+- `encryption_key_arn` (String) The KMS key ARN to encrypt the logs published to the given Amazon S3 destination. When omitted, EMR falls back to cluster-level logging behavior.
+- `log_uri` (String) The Amazon S3 destination URI for log publishing. When omitted, EMR falls back to cluster-level logging behavior.
+
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.

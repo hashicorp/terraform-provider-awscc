@@ -156,6 +156,13 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	    "InstanceLaunchTemplate": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "CapacityOptionType": {
+		//	          "enum": [
+		//	            "ON_DEMAND",
+		//	            "SPOT"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "Ec2InstanceProfileArn": {
 		//	          "type": "string"
 		//	        },
@@ -503,6 +510,10 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 				// Property: InstanceLaunchTemplate
 				"instance_launch_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CapacityOptionType
+						"capacity_option_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: Ec2InstanceProfileArn
 						"ec_2_instance_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
@@ -819,6 +830,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		"bare_metal":                     "BareMetal",
 		"baseline_ebs_bandwidth_mbps":    "BaselineEbsBandwidthMbps",
 		"burstable_performance":          "BurstablePerformance",
+		"capacity_option_type":           "CapacityOptionType",
 		"cluster_name":                   "ClusterName",
 		"cpu_manufacturers":              "CpuManufacturers",
 		"ec_2_instance_profile_arn":      "Ec2InstanceProfileArn",

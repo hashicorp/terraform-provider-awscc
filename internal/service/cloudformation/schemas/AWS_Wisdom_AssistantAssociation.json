@@ -4,22 +4,57 @@
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk",
   "definitions": {
     "AssociationData": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "KnowledgeBaseId": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+            }
+          },
+          "required": [
+            "KnowledgeBaseId"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "ExternalBedrockKnowledgeBaseConfig": {
+              "$ref": "#/definitions/ExternalBedrockKnowledgeBaseConfig"
+            }
+          },
+          "required": [
+            "ExternalBedrockKnowledgeBaseConfig"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ExternalBedrockKnowledgeBaseConfig": {
       "type": "object",
       "properties": {
-        "KnowledgeBaseId": {
+        "BedrockKnowledgeBaseArn": {
           "type": "string",
-          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+          "pattern": "^arn:aws(|-cn|-us-gov):bedrock:[a-zA-Z0-9-]*:[0-9]{12}:knowledge-base/[0-9a-zA-Z]+$"
+        },
+        "AccessRoleArn": {
+          "type": "string",
+          "pattern": "^arn:aws:iam::[0-9]{12}:role/(?:service-role/)?[a-zA-Z0-9_+=,.@-]{1,64}$"
         }
       },
       "required": [
-        "KnowledgeBaseId"
+        "BedrockKnowledgeBaseArn",
+        "AccessRoleArn"
       ],
       "additionalProperties": false
     },
     "AssociationType": {
       "type": "string",
       "enum": [
-        "KNOWLEDGE_BASE"
+        "KNOWLEDGE_BASE",
+        "EXTERNAL_BEDROCK_KNOWLEDGE_BASE"
       ]
     },
     "Tag": {
@@ -118,7 +153,8 @@
     "create": {
       "permissions": [
         "wisdom:CreateAssistantAssociation",
-        "wisdom:TagResource"
+        "wisdom:TagResource",
+        "iam:PassRole"
       ]
     },
     "update": {

@@ -105,7 +105,7 @@ resource "awscc_ecr_repository_creation_template" "example" {
 
 ### Required
 
-- `applied_for` (Set of String) A list of enumerable Strings representing the repository creation scenarios that this template will apply towards. The two supported scenarios are PULL_THROUGH_CACHE and REPLICATION
+- `applied_for` (Set of String) A list of enumerable Strings representing the repository creation scenarios that this template will apply towards. The supported scenarios are PULL_THROUGH_CACHE, REPLICATION, and CREATE_ON_PUSH
 - `prefix` (String) The repository namespace prefix associated with the repository creation template.
 
 ### Optional

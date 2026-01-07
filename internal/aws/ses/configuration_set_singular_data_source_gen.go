@@ -148,6 +148,46 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	      },
 		//	      "type": "array",
 		//	      "uniqueItems": false
+		//	    },
+		//	    "ValidationOptions": {
+		//	      "additionalProperties": false,
+		//	      "description": "An object that contains information about the validation options for your account.",
+		//	      "properties": {
+		//	        "ConditionThreshold": {
+		//	          "additionalProperties": false,
+		//	          "description": "The condition threshold settings for suppression validation.",
+		//	          "properties": {
+		//	            "ConditionThresholdEnabled": {
+		//	              "description": "Whether the condition threshold is enabled or disabled.",
+		//	              "pattern": "ENABLED|DISABLED",
+		//	              "type": "string"
+		//	            },
+		//	            "OverallConfidenceThreshold": {
+		//	              "additionalProperties": false,
+		//	              "description": "The overall confidence threshold settings.",
+		//	              "properties": {
+		//	                "ConfidenceVerdictThreshold": {
+		//	                  "description": "The confidence verdict threshold level.",
+		//	                  "pattern": "MEDIUM|HIGH|MANAGED",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ConfidenceVerdictThreshold"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ConditionThresholdEnabled"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ConditionThreshold"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -158,6 +198,37 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 				"suppressed_reasons": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
 					Description: "A list that contains the reasons that email addresses are automatically added to the suppression list for your account.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ValidationOptions
+				"validation_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ConditionThreshold
+						"condition_threshold": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ConditionThresholdEnabled
+								"condition_threshold_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Whether the condition threshold is enabled or disabled.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: OverallConfidenceThreshold
+								"overall_confidence_threshold": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ConfidenceVerdictThreshold
+										"confidence_verdict_threshold": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The confidence verdict threshold level.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The overall confidence threshold settings.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The condition threshold settings for suppression validation.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "An object that contains information about the validation options for your account.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -332,28 +403,33 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithCloudFormationTypeName("AWS::SES::ConfigurationSet").WithTerraformTypeName("awscc_ses_configuration_set")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"custom_redirect_domain":     "CustomRedirectDomain",
-		"dashboard_options":          "DashboardOptions",
-		"delivery_options":           "DeliveryOptions",
-		"engagement_metrics":         "EngagementMetrics",
-		"guardian_options":           "GuardianOptions",
-		"https_policy":               "HttpsPolicy",
-		"key":                        "Key",
-		"max_delivery_seconds":       "MaxDeliverySeconds",
-		"name":                       "Name",
-		"optimized_shared_delivery":  "OptimizedSharedDelivery",
-		"reputation_metrics_enabled": "ReputationMetricsEnabled",
-		"reputation_options":         "ReputationOptions",
-		"sending_enabled":            "SendingEnabled",
-		"sending_options":            "SendingOptions",
-		"sending_pool_name":          "SendingPoolName",
-		"suppressed_reasons":         "SuppressedReasons",
-		"suppression_options":        "SuppressionOptions",
-		"tags":                       "Tags",
-		"tls_policy":                 "TlsPolicy",
-		"tracking_options":           "TrackingOptions",
-		"value":                      "Value",
-		"vdm_options":                "VdmOptions",
+		"condition_threshold":          "ConditionThreshold",
+		"condition_threshold_enabled":  "ConditionThresholdEnabled",
+		"confidence_verdict_threshold": "ConfidenceVerdictThreshold",
+		"custom_redirect_domain":       "CustomRedirectDomain",
+		"dashboard_options":            "DashboardOptions",
+		"delivery_options":             "DeliveryOptions",
+		"engagement_metrics":           "EngagementMetrics",
+		"guardian_options":             "GuardianOptions",
+		"https_policy":                 "HttpsPolicy",
+		"key":                          "Key",
+		"max_delivery_seconds":         "MaxDeliverySeconds",
+		"name":                         "Name",
+		"optimized_shared_delivery":    "OptimizedSharedDelivery",
+		"overall_confidence_threshold": "OverallConfidenceThreshold",
+		"reputation_metrics_enabled":   "ReputationMetricsEnabled",
+		"reputation_options":           "ReputationOptions",
+		"sending_enabled":              "SendingEnabled",
+		"sending_options":              "SendingOptions",
+		"sending_pool_name":            "SendingPoolName",
+		"suppressed_reasons":           "SuppressedReasons",
+		"suppression_options":          "SuppressionOptions",
+		"tags":                         "Tags",
+		"tls_policy":                   "TlsPolicy",
+		"tracking_options":             "TrackingOptions",
+		"validation_options":           "ValidationOptions",
+		"value":                        "Value",
+		"vdm_options":                  "VdmOptions",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

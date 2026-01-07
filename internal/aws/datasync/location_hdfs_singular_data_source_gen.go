@@ -31,7 +31,7 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "maxLength": 128,
-		//	    "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
+		//	    "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
 		//	    "type": "string"
 		//	  },
 		//	  "maxItems": 4,
@@ -130,7 +130,7 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the HDFS location.",
 		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
 		"location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

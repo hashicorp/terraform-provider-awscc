@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_vpn_concentrator Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::EC2::VPNConcentrator
+  Describes a VPN concentrator.
 ---
 
 # awscc_ec2_vpn_concentrator (Resource)
 
-Resource Type definition for AWS::EC2::VPNConcentrator
+Describes a VPN concentrator.
 
 
 
@@ -17,8 +17,8 @@ Resource Type definition for AWS::EC2::VPNConcentrator
 
 ### Required
 
-- `transit_gateway_id` (String) The ID of the transit gateway
-- `type` (String) The type of VPN concentrator
+- `transit_gateway_id` (String) The ID of the transit gateway associated with the VPN concentrator.
+- `type` (String) The type of VPN concentrator.
 
 ### Optional
 
@@ -27,16 +27,18 @@ Resource Type definition for AWS::EC2::VPNConcentrator
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `transit_gateway_attachment_id` (String) The ID of the transit gateway attachment
-- `vpn_concentrator_id` (String) The provider-assigned unique ID for this managed resource
+- `transit_gateway_attachment_id` (String)
+- `vpn_concentrator_id` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Optional:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The key of the tag.
+ Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``.
+- `value` (String) The value of the tag.
+ Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.
 
 ## Import
 
@@ -58,7 +60,7 @@ import {
 
 #### Required
 
-- `vpn_concentrator_id` (String) The provider-assigned unique ID for this managed resource
+- `vpn_concentrator_id` (String)
 
 #### Optional
 

@@ -1,4 +1,27 @@
 {
+  "typeName": "AWS::DynamoDB::GlobalTable",
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/StreamArn",
+    "/properties/TableId"
+  ],
+  "description": "Version: None. Resource Type definition for AWS::DynamoDB::GlobalTable",
+  "createOnlyProperties": [
+    "/properties/LocalSecondaryIndexes",
+    "/properties/TableName",
+    "/properties/KeySchema"
+  ],
+  "primaryIdentifier": [
+    "/properties/TableName"
+  ],
+  "required": [
+    "KeySchema",
+    "AttributeDefinitions",
+    "Replicas"
+  ],
+  "propertyTransform": {
+    "/properties/Replicas/*/GlobalTableSettingsReplicationMode": "GlobalTableSettingsReplicationMode $OR ($exists(GlobalTableSettingsReplicationMode) ? null : \"DISABLED\") $OR ($exists(GlobalTableSettingsReplicationMode) ? null : \"ENABLED_WITH_OVERRIDES\")"
+  },
   "handlers": {
     "read": {
       "permissions": [
@@ -118,13 +141,6 @@
       ]
     }
   },
-  "typeName": "AWS::DynamoDB::GlobalTable",
-  "readOnlyProperties": [
-    "/properties/Arn",
-    "/properties/StreamArn",
-    "/properties/TableId"
-  ],
-  "description": "Version: None. Resource Type definition for AWS::DynamoDB::GlobalTable",
   "additionalIdentifiers": [
     [
       "/properties/Arn"
@@ -139,15 +155,7 @@
     "/properties/WriteProvisionedThroughputSettings/WriteCapacityAutoScalingSettings/SeedCapacity",
     "/properties/GlobalSecondaryIndexes/*/WriteProvisionedThroughputSettings/WriteCapacityAutoScalingSettings/SeedCapacity"
   ],
-  "createOnlyProperties": [
-    "/properties/LocalSecondaryIndexes",
-    "/properties/TableName",
-    "/properties/KeySchema"
-  ],
   "additionalProperties": false,
-  "primaryIdentifier": [
-    "/properties/TableName"
-  ],
   "definitions": {
     "LocalSecondaryIndex": {
       "additionalProperties": false,
@@ -647,11 +655,6 @@
       ]
     }
   },
-  "required": [
-    "KeySchema",
-    "AttributeDefinitions",
-    "Replicas"
-  ],
   "properties": {
     "MultiRegionConsistency": {
       "type": "string",

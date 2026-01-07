@@ -1,9 +1,12 @@
 {
   "typeName": "AWS::DAX::SubnetGroup",
-  "description": "Resource type definition for AWS::DAX::SubnetGroup",
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-dax",
+  "description": "Resource Type definition for AWS::DAX::SubnetGroup",
+  "additionalProperties": false,
   "properties": {
     "Description": {
+      "type": "string"
+    },
+    "Id": {
       "type": "string"
     },
     "SubnetIds": {
@@ -17,7 +20,6 @@
       "type": "string"
     }
   },
-  "additionalProperties": false,
   "required": [
     "SubnetIds"
   ],
@@ -25,40 +27,9 @@
     "/properties/SubnetGroupName"
   ],
   "primaryIdentifier": [
-    "/properties/SubnetGroupName"
+    "/properties/Id"
   ],
-  "propertyTransform": {
-    "/properties/SubnetGroupName": "$lowercase(SubnetGroupName)"
-  },
-  "tagging": {
-    "taggable": false
-  },
-  "handlers": {
-    "create": {
-      "permissions": [
-        "dax:CreateSubnetGroup",
-        "iam:CreateServiceLinkedRole"
-      ]
-    },
-    "read": {
-      "permissions": [
-        "dax:DescribeSubnetGroups"
-      ]
-    },
-    "update": {
-      "permissions": [
-        "dax:UpdateSubnetGroup"
-      ]
-    },
-    "delete": {
-      "permissions": [
-        "dax:DeleteSubnetGroup"
-      ]
-    },
-    "list": {
-      "permissions": [
-        "dax:DescribeSubnetGroups"
-      ]
-    }
-  }
+  "readOnlyProperties": [
+    "/properties/Id"
+  ]
 }

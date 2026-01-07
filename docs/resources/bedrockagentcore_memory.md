@@ -44,6 +44,7 @@ Resource Type definition for AWS::BedrockAgentCore::Memory
 Optional:
 
 - `custom_memory_strategy` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy))
+- `episodic_memory_strategy` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy))
 - `semantic_memory_strategy` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--semantic_memory_strategy))
 - `summary_memory_strategy` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--summary_memory_strategy))
 - `user_preference_memory_strategy` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--user_preference_memory_strategy))
@@ -68,10 +69,49 @@ Optional:
 
 Optional:
 
+- `episodic_override` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override))
 - `self_managed_configuration` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--self_managed_configuration))
 - `semantic_override` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--semantic_override))
 - `summary_override` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--summary_override))
 - `user_preference_override` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--user_preference_override))
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.episodic_override`
+
+Optional:
+
+- `consolidation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--consolidation))
+- `extraction` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--extraction))
+- `reflection` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--reflection))
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--consolidation"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.episodic_override.consolidation`
+
+Optional:
+
+- `append_to_prompt` (String) Text prompt for model instructions
+- `model_id` (String)
+
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--extraction"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.episodic_override.extraction`
+
+Optional:
+
+- `append_to_prompt` (String) Text prompt for model instructions
+- `model_id` (String)
+
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--reflection"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.episodic_override.reflection`
+
+Optional:
+
+- `append_to_prompt` (String) Text prompt for model instructions
+- `model_id` (String)
+- `namespaces` (List of String) List of namespaces for memory strategy
+
+
 
 <a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--self_managed_configuration"></a>
 ### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.self_managed_configuration`
@@ -196,6 +236,30 @@ Optional:
 - `model_id` (String)
 
 
+
+
+
+<a id="nestedatt--memory_strategies--episodic_memory_strategy"></a>
+### Nested Schema for `memory_strategies.episodic_memory_strategy`
+
+Optional:
+
+- `created_at` (String) Creation timestamp of the memory strategy
+- `description` (String) Description of the Memory resource
+- `name` (String) Name of the Memory resource
+- `namespaces` (List of String) List of namespaces for memory strategy
+- `reflection_configuration` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration))
+- `status` (String) Status of the memory strategy
+- `strategy_id` (String) Unique identifier for the memory strategy
+- `type` (String) Type of memory strategy
+- `updated_at` (String) Last update timestamp of the memory strategy
+
+<a id="nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration"></a>
+### Nested Schema for `memory_strategies.episodic_memory_strategy.reflection_configuration`
+
+Optional:
+
+- `namespaces` (List of String) List of namespaces for memory strategy
 
 
 

@@ -472,6 +472,13 @@
         "Ec2InstanceProfileArn": {
           "type": "string"
         },
+        "CapacityOptionType": {
+          "type": "string",
+          "enum": [
+            "ON_DEMAND",
+            "SPOT"
+          ]
+        },
         "StorageConfiguration": {
           "$ref": "#/definitions/ManagedInstancesStorageConfiguration"
         },

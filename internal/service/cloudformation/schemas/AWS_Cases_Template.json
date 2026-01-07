@@ -1,0 +1,232 @@
+{
+  "typeName": "AWS::Cases::Template",
+  "description": "A template in the Cases domain. This template is used to define the case object model (that is, to define what data can be captured on cases) in a Cases domain. A template must have a unique name within a domain, and it must reference existing field IDs and layout IDs.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "LayoutConfiguration": {
+      "type": "object",
+      "description": "Specifies the default layout to use when displaying cases created from this template. The layout determines which fields are visible and their arrangement in the agent interface.",
+      "properties": {
+        "DefaultLayout": {
+          "type": "string",
+          "maxLength": 500,
+          "minLength": 1,
+          "description": "The unique identifier of a layout."
+        }
+      },
+      "additionalProperties": false
+    },
+    "RequiredField": {
+      "type": "object",
+      "description": "Wrapper object containing a field identifier",
+      "properties": {
+        "FieldId": {
+          "type": "string",
+          "maxLength": 500,
+          "minLength": 1,
+          "description": "The unique identifier of a field."
+        }
+      },
+      "required": [
+        "FieldId"
+      ],
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": ""
+        },
+        "Value": {
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    },
+    "TemplateRule": {
+      "type": "object",
+      "description": "Links a case rule to a specific field within this template. When specified, the rule's conditions will be evaluated for the associated field, controlling behavior like required status, visibility, or available options.",
+      "properties": {
+        "CaseRuleId": {
+          "type": "string",
+          "maxLength": 500,
+          "minLength": 1,
+          "description": "The unique identifier of a case rule."
+        },
+        "FieldId": {
+          "type": "string",
+          "maxLength": 500,
+          "minLength": 1,
+          "description": "The ID of the field that this rule applies to."
+        }
+      },
+      "required": [
+        "CaseRuleId"
+      ],
+      "additionalProperties": false
+    },
+    "TemplateStatus": {
+      "type": "string",
+      "description": "The current status of the template. Active templates can be used to create new cases, while Inactive templates are disabled but preserved for existing cases.",
+      "enum": [
+        "Active",
+        "Inactive"
+      ]
+    }
+  },
+  "properties": {
+    "DomainId": {
+      "type": "string",
+      "maxLength": 500,
+      "minLength": 1,
+      "description": "The unique identifier of the Cases domain."
+    },
+    "TemplateArn": {
+      "type": "string",
+      "maxLength": 500,
+      "minLength": 1,
+      "description": "The Amazon Resource Name (ARN) of the template."
+    },
+    "TemplateId": {
+      "type": "string",
+      "maxLength": 500,
+      "minLength": 1,
+      "description": "The unique identifier of a template."
+    },
+    "Name": {
+      "type": "string",
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": "^.*[\\S]$",
+      "description": "A name for the template. It must be unique per domain."
+    },
+    "Description": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "A description explaining the purpose and use case for this template. Should indicate what types of cases this template is designed for and any specific workflow it supports."
+    },
+    "LayoutConfiguration": {
+      "$ref": "#/definitions/LayoutConfiguration"
+    },
+    "RequiredFields": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/RequiredField"
+      },
+      "maxItems": 100,
+      "description": "A list of fields that must contain a value for a case to be successfully created with this template."
+    },
+    "Rules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/TemplateRule"
+      },
+      "maxItems": 50,
+      "description": "A list of case rules (also known as case field conditions) on a template."
+    },
+    "Status": {
+      "$ref": "#/definitions/TemplateStatus"
+    },
+    "CreatedTime": {
+      "type": "string",
+      "description": "The time at which the template was created.",
+      "format": "date-time"
+    },
+    "LastModifiedTime": {
+      "type": "string",
+      "description": "The time at which the template was created or last modified.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags that you attach to this template.",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "required": [
+    "Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/CreatedTime",
+    "/properties/LastModifiedTime",
+    "/properties/TemplateArn",
+    "/properties/TemplateId"
+  ],
+  "createOnlyProperties": [
+    "/properties/DomainId"
+  ],
+  "primaryIdentifier": [
+    "/properties/TemplateArn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cases:GetTemplate",
+        "cases:CreateTemplate",
+        "cases:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cases:GetTemplate"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cases:GetTemplate",
+        "cases:UpdateTemplate",
+        "cases:TagResource",
+        "cases:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cases:DeleteTemplate",
+        "cases:UntagResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cases:ListTemplates"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "DomainId": {
+            "$ref": "resource-schema.json#/properties/DomainId"
+          }
+        },
+        "required": [
+          "DomainId"
+        ]
+      }
+    }
+  },
+  "additionalProperties": false,
+  "tagging": {
+    "cloudFormationSystemTags": true,
+    "permissions": [
+      "cases:TagResource",
+      "cases:UntagResource"
+    ],
+    "tagOnCreate": false,
+    "tagProperty": "/properties/Tags",
+    "tagUpdatable": true,
+    "taggable": true
+  }
+}

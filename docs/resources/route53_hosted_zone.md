@@ -88,7 +88,7 @@ resource "awscc_ec2_vpc" "main" {
 
 - `hosted_zone_config` (Attributes) A complex type that contains an optional comment.
  If you don't want to specify a comment, omit the ``HostedZoneConfig`` and ``Comment`` elements. (see [below for nested schema](#nestedatt--hosted_zone_config))
-- `hosted_zone_features` (Attributes) (see [below for nested schema](#nestedatt--hosted_zone_features))
+- `hosted_zone_features` (Attributes) The features configuration for the hosted zone, including accelerated recovery settings and status information. (see [below for nested schema](#nestedatt--hosted_zone_features))
 - `hosted_zone_tags` (Attributes Set) Adds, edits, or deletes tags for a health check or a hosted zone.
  For information about using tags for cost allocation, see [Using Cost Allocation Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in the *User Guide*. (see [below for nested schema](#nestedatt--hosted_zone_tags))
 - `name` (String) The name of the domain. Specify a fully qualified domain name, for example, *www.example.com*. The trailing dot is optional; Amazon Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats *www.example.com* (without a trailing dot) and *www.example.com.* (with a trailing dot) as identical.
@@ -123,7 +123,7 @@ Optional:
 
 Optional:
 
-- `enable_accelerated_recovery` (Boolean) Enable accelerated recovery on your public hosted zone to gain the ability to make changes to DNS records in the event of us-east-1 unavailability.
+- `enable_accelerated_recovery` (Boolean)
 
 
 <a id="nestedatt--hosted_zone_tags"></a>

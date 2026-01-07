@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::BedrockAgentCore::GatewayTarget",
-  "description": "Definition of AWS::BedrockAgentCore::GatewayTarget Resource Type",
+  "description": "Resource Type definition for AWS::BedrockAgentCore::GatewayTarget",
   "definitions": {
     "ApiKeyCredentialLocation": {
       "type": "string",
@@ -224,6 +224,16 @@
         },
         "CustomParameters": {
           "$ref": "#/definitions/OAuthCustomParameters"
+        },
+        "GrantType": {
+          "$ref": "#/definitions/OAuthGrantType"
+        },
+        "DefaultReturnUrl": {
+          "type": "string",
+          "pattern": "\\w+:(\\/?\\/?)[^\\s]+",
+          "maxLength": 2048,
+          "minLength": 1,
+          "description": "Return URL for OAuth callback."
         }
       },
       "required": [
@@ -244,6 +254,13 @@
         }
       },
       "additionalProperties": false
+    },
+    "OAuthGrantType": {
+      "type": "string",
+      "enum": [
+        "AUTHORIZATION_CODE",
+        "CLIENT_CREDENTIALS"
+      ]
     },
     "S3Configuration": {
       "type": "object",
@@ -391,6 +408,30 @@
           "additionalProperties": false
         }
       ]
+    },
+    "MetadataConfiguration": {
+      "type": "object",
+      "properties": {
+        "AllowedRequestHeaders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "AllowedQueryParameters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "AllowedResponseHeaders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -422,6 +463,9 @@
     "LastSynchronizedAt": {
       "type": "string",
       "format": "date-time"
+    },
+    "MetadataConfiguration": {
+      "$ref": "#/definitions/MetadataConfiguration"
     },
     "Name": {
       "type": "string",

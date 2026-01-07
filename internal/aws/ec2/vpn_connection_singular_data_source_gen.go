@@ -198,7 +198,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//
 		//	{
 		//	  "default": "standard",
-		//	  "description": "",
+		//	  "description": "The desired bandwidth specification for the VPN tunnel, used when creating or modifying VPN connection options to set the tunnel's throughput capacity. ``standard`` supports up to 1.25 Gbps per tunnel, while ``large`` supports up to 5 Gbps per tunnel. The default value is ``standard``. Existing VPN connections without a bandwidth setting will automatically default to ``standard``.",
 		//	  "enum": [
 		//	    "standard",
 		//	    "large"
@@ -206,7 +206,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "string"
 		//	}
 		"tunnel_bandwidth": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The desired bandwidth specification for the VPN tunnel, used when creating or modifying VPN connection options to set the tunnel's throughput capacity. ``standard`` supports up to 1.25 Gbps per tunnel, while ``large`` supports up to 5 Gbps per tunnel. The default value is ``standard``. Existing VPN connections without a bandwidth setting will automatically default to ``standard``.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TunnelInsideIpVersion
@@ -235,11 +235,11 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The ID of the VPN concentrator to associate with the VPN connection.",
 		//	  "type": "string"
 		//	}
 		"vpn_concentrator_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The ID of the VPN concentrator to associate with the VPN connection.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpnConnectionId
@@ -322,15 +322,15 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	            "description": "Options for sending VPN tunnel logs to CloudWatch.",
 		//	            "properties": {
 		//	              "BgpLogEnabled": {
-		//	                "description": "",
+		//	                "description": "Specifies whether to enable BGP logging for the VPN connection. Default value is ``False``.\n Valid values: ``True`` | ``False``",
 		//	                "type": "boolean"
 		//	              },
 		//	              "BgpLogGroupArn": {
-		//	                "description": "",
+		//	                "description": "The Amazon Resource Name (ARN) of the CloudWatch log group where BGP logs will be sent.",
 		//	                "type": "string"
 		//	              },
 		//	              "BgpLogOutputFormat": {
-		//	                "description": "",
+		//	                "description": "The desired output format for BGP logs to be sent to CloudWatch. Default format is ``json``.\n Valid values: ``json`` | ``text``",
 		//	                "enum": [
 		//	                  "json",
 		//	                  "text"
@@ -609,17 +609,17 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: BgpLogEnabled
 									"bgp_log_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Description: "",
+										Description: "Specifies whether to enable BGP logging for the VPN connection. Default value is ``False``.\n Valid values: ``True`` | ``False``",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: BgpLogGroupArn
 									"bgp_log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "",
+										Description: "The Amazon Resource Name (ARN) of the CloudWatch log group where BGP logs will be sent.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: BgpLogOutputFormat
 									"bgp_log_output_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "",
+										Description: "The desired output format for BGP logs to be sent to CloudWatch. Default format is ``json``.\n Valid values: ``json`` | ``text``",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: LogEnabled

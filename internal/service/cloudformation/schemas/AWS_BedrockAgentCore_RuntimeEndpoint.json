@@ -149,11 +149,7 @@
   ],
   "createOnlyProperties": [
     "/properties/AgentRuntimeId",
-    "/properties/Name",
-    "/properties/AgentRuntimeVersion"
-  ],
-  "writeOnlyProperties": [
-    "/properties/AgentRuntimeVersion"
+    "/properties/Name"
   ],
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
   "handlers": {

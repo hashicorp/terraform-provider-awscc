@@ -30,11 +30,14 @@ func vPNConcentratorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "Describes a tag.",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "The key of the tag.\n Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "The value of the tag.\n Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -52,11 +55,13 @@ func vPNConcentratorDataSource(ctx context.Context) (datasource.DataSource, erro
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The key of the tag.\n Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The value of the tag.\n Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -67,44 +72,44 @@ func vPNConcentratorDataSource(ctx context.Context) (datasource.DataSource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the transit gateway attachment",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the transit gateway attachment",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the transit gateway",
+		//	  "description": "The ID of the transit gateway associated with the VPN concentrator.",
 		//	  "type": "string"
 		//	}
 		"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the transit gateway",
+			Description: "The ID of the transit gateway associated with the VPN concentrator.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The type of VPN concentrator",
+		//	  "description": "The type of VPN concentrator.",
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of VPN concentrator",
+			Description: "The type of VPN concentrator.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpnConcentratorId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The provider-assigned unique ID for this managed resource",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"vpn_concentrator_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The provider-assigned unique ID for this managed resource",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

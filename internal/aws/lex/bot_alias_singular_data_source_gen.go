@@ -26,11 +26,13 @@ func botAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the bot alias.",
 		//	  "maxLength": 1000,
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The Amazon Resource Name (ARN) of the bot alias.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BotAliasId
 		// CloudFormation resource type schema:

@@ -184,6 +184,7 @@ data "aws_ami" "amazon_linux" {
  Only specify ``EC2`` if you must clear a value that was previously set.
 - `instance_id` (String) The ID of the instance used to base the launch configuration on. For more information, see [Create an Auto Scaling group using an EC2 instance](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-from-instance.html) in the *Amazon EC2 Auto Scaling User Guide*.
  If you specify ``LaunchTemplate``, ``MixedInstancesPolicy``, or ``LaunchConfigurationName``, don't specify ``InstanceId``.
+- `instance_lifecycle_policy` (Attributes) (see [below for nested schema](#nestedatt--instance_lifecycle_policy))
 - `instance_maintenance_policy` (Attributes) An instance maintenance policy. For more information, see [Set instance maintenance policy](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html) in the *Amazon EC2 Auto Scaling User Guide*. (see [below for nested schema](#nestedatt--instance_maintenance_policy))
 - `launch_configuration_name` (String) The name of the launch configuration to use to launch instances.
  Required only if you don't specify ``LaunchTemplate``, ``MixedInstancesPolicy``, or ``InstanceId``.
@@ -258,6 +259,22 @@ Optional:
 
 - `capacity_reservation_ids` (List of String) The Capacity Reservation IDs to launch instances into.
 - `capacity_reservation_resource_group_arns` (List of String) The resource group ARNs of the Capacity Reservation to launch instances into.
+
+
+
+<a id="nestedatt--instance_lifecycle_policy"></a>
+### Nested Schema for `instance_lifecycle_policy`
+
+Optional:
+
+- `retention_triggers` (Attributes) (see [below for nested schema](#nestedatt--instance_lifecycle_policy--retention_triggers))
+
+<a id="nestedatt--instance_lifecycle_policy--retention_triggers"></a>
+### Nested Schema for `instance_lifecycle_policy.retention_triggers`
+
+Optional:
+
+- `terminate_hook_abandon` (String)
 
 
 
@@ -396,6 +413,7 @@ Optional:
 
 Optional:
 
+- `image_id` (String)
 - `instance_requirements` (Attributes) The instance requirements. Amazon EC2 Auto Scaling uses your specified requirements to identify instance types. Then, it uses your On-Demand and Spot allocation strategies to launch instances from these instance types.
  You can specify up to four separate sets of instance requirements per Auto Scaling group. This is useful for provisioning instances from different Amazon Machine Images (AMIs) in the same Auto Scaling group. To do this, create the AMIs and create a new launch template for each AMI. Then, create a compatible set of instance requirements for each launch template. 
   If you specify ``InstanceRequirements``, you can't specify ``InstanceType``. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements))

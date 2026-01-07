@@ -47,7 +47,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "\u003cp\u003eA set of alternate data source parameters that you want to share for the credentials\n            stored with this data source. The credentials are applied in tandem with the data source\n            parameters when you copy a data source by using a create or update request. The API\n            operation compares the \u003ccode\u003eDataSourceParameters\u003c/code\u003e structure that's in the request\n            with the structures in the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e allow list. If the\n            structures are an exact match, the request is allowed to use the credentials from this\n            existing data source. If the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e list is null,\n            the \u003ccode\u003eCredentials\u003c/code\u003e originally used with this \u003ccode\u003eDataSourceParameters\u003c/code\u003e\n            are automatically allowed.\u003c/p\u003e",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "\u003cp\u003eThe parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
+		//	    "description": "\u003cp\u003eThe parameters that Amazon Quick Suite uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
 		//	    "properties": {
 		//	      "AmazonElasticsearchParameters": {
 		//	        "additionalProperties": false,
@@ -410,15 +410,15 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          },
 		//	          "IAMParameters": {
 		//	            "additionalProperties": false,
-		//	            "description": "\u003cp\u003eA structure that grants Amazon QuickSight access to your cluster and make a call to the \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e API. For more information on the \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e API, see \u003ca href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\"\u003e\n               \u003ccode\u003eGetClusterCredentials\u003c/code\u003e\n            \u003c/a\u003e.\u003c/p\u003e",
+		//	            "description": "\u003cp\u003eA structure that grants Quick Suite access to your cluster and make a call to the \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e API. For more information on the \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e API, see \u003ca href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\"\u003e\n               \u003ccode\u003eGetClusterCredentials\u003c/code\u003e\n            \u003c/a\u003e.\u003c/p\u003e",
 		//	            "properties": {
 		//	              "AutoCreateDatabaseUser": {
 		//	                "default": false,
-		//	                "description": "\u003cp\u003eAutomatically creates a database user. If your database doesn't have a \u003ccode\u003eDatabaseUser\u003c/code\u003e, set this parameter to \u003ccode\u003eTrue\u003c/code\u003e. If there is no \u003ccode\u003eDatabaseUser\u003c/code\u003e, Amazon QuickSight can't connect to your cluster. The \u003ccode\u003eRoleArn\u003c/code\u003e that you use for this operation must grant access to \u003ccode\u003eredshift:CreateClusterUser\u003c/code\u003e to successfully create the user.\u003c/p\u003e",
+		//	                "description": "\u003cp\u003eAutomatically creates a database user. If your database doesn't have a \u003ccode\u003eDatabaseUser\u003c/code\u003e, set this parameter to \u003ccode\u003eTrue\u003c/code\u003e. If there is no \u003ccode\u003eDatabaseUser\u003c/code\u003e, Amazon Quick Suite can't connect to your cluster. The \u003ccode\u003eRoleArn\u003c/code\u003e that you use for this operation must grant access to \u003ccode\u003eredshift:CreateClusterUser\u003c/code\u003e to successfully create the user.\u003c/p\u003e",
 		//	                "type": "boolean"
 		//	              },
 		//	              "DatabaseGroups": {
-		//	                "description": "\u003cp\u003eA list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the \u003ccode\u003eDatabaseUser\u003c/code\u003e. If you choose to include this parameter, the \u003ccode\u003eRoleArn\u003c/code\u003e must grant access to \u003ccode\u003eredshift:JoinGroup\u003c/code\u003e.\u003c/p\u003e",
+		//	                "description": "\u003cp\u003eA list of groups whose permissions will be granted to Quick Suite to access the cluster. These permissions are combined with the permissions granted to Quick Suite by the \u003ccode\u003eDatabaseUser\u003c/code\u003e. If you choose to include this parameter, the \u003ccode\u003eRoleArn\u003c/code\u003e must grant access to \u003ccode\u003eredshift:JoinGroup\u003c/code\u003e.\u003c/p\u003e",
 		//	                "items": {
 		//	                  "maxLength": 64,
 		//	                  "minLength": 1,
@@ -429,13 +429,13 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "array"
 		//	              },
 		//	              "DatabaseUser": {
-		//	                "description": "\u003cp\u003eThe user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of \u003ccode\u003eAutoCreateDatabaseUser\u003c/code\u003e to \u003ccode\u003eTrue\u003c/code\u003e to create a new user with PUBLIC permissions.\u003c/p\u003e",
+		//	                "description": "\u003cp\u003eThe user whose permissions and group memberships will be used by Quick Suite to access the cluster. If this user already exists in your database, Quick Suite is granted the same permissions that the user has. If the user doesn't exist, set the value of \u003ccode\u003eAutoCreateDatabaseUser\u003c/code\u003e to \u003ccode\u003eTrue\u003c/code\u003e to create a new user with PUBLIC permissions.\u003c/p\u003e",
 		//	                "maxLength": 64,
 		//	                "minLength": 1,
 		//	                "type": "string"
 		//	              },
 		//	              "RoleArn": {
-		//	                "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to allow Amazon QuickSight to call \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e on your cluster. The calling principal must have \u003ccode\u003eiam:PassRole\u003c/code\u003e access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.\u003c/p\u003e",
+		//	                "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to allow Quick Suite to call \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e on your cluster. The calling principal must have \u003ccode\u003eiam:PassRole\u003c/code\u003e access to pass the role to Quick Suite. The role's trust policy must allow the Quick Suite service principal to assume the role.\u003c/p\u003e",
 		//	                "maxLength": 2048,
 		//	                "minLength": 20,
 		//	                "type": "string"
@@ -517,7 +517,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	            "enum": [
 		//	              "PASSWORD",
 		//	              "TOKEN",
-		//	              "X509"
+		//	              "X509",
+		//	              "KEYPAIR"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -653,7 +654,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	            "enum": [
 		//	              "PASSWORD",
 		//	              "TOKEN",
-		//	              "X509"
+		//	              "X509",
+		//	              "KEYPAIR"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -1400,7 +1402,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: AutoCreateDatabaseUser
 									"auto_create_database_user": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Description: "<p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>",
+										Description: "<p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon Quick Suite can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>",
 										Optional:    true,
 										Computed:    true,
 										Default:     booldefault.StaticBool(false),
@@ -1411,7 +1413,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									// Property: DatabaseGroups
 									"database_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
 										ElementType: types.StringType,
-										Description: "<p>A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>",
+										Description: "<p>A list of groups whose permissions will be granted to Quick Suite to access the cluster. These permissions are combined with the permissions granted to Quick Suite by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>",
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.List{ /*START VALIDATORS*/
@@ -1426,7 +1428,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: DatabaseUser
 									"database_user": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "<p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>",
+										Description: "<p>The user whose permissions and group memberships will be used by Quick Suite to access the cluster. If this user already exists in your database, Quick Suite is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>",
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
@@ -1438,7 +1440,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: RoleArn
 									"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "<p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>",
+										Description: "<p>Use the <code>RoleArn</code> structure to allow Quick Suite to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Quick Suite. The role's trust policy must allow the Quick Suite service principal to assume the role.</p>",
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
@@ -1450,7 +1452,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "<p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\">\n               <code>GetClusterCredentials</code>\n            </a>.</p>",
+								Description: "<p>A structure that grants Quick Suite access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\">\n               <code>GetClusterCredentials</code>\n            </a>.</p>",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1573,6 +1575,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 										"PASSWORD",
 										"TOKEN",
 										"X509",
+										"KEYPAIR",
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1803,6 +1806,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 										"PASSWORD",
 										"TOKEN",
 										"X509",
+										"KEYPAIR",
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2131,7 +2135,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "\u003cp\u003eA set of alternate data source parameters that you want to share for these\n            credentials. The credentials are applied in tandem with the data source parameters when\n            you copy a data source by using a create or update request. The API operation compares\n            the \u003ccode\u003eDataSourceParameters\u003c/code\u003e structure that's in the request with the\n            structures in the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e allow list. If the\n            structures are an exact match, the request is allowed to use the new data source with\n            the existing credentials. If the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e list is\n            null, the \u003ccode\u003eDataSourceParameters\u003c/code\u003e originally used with these\n                \u003ccode\u003eCredentials\u003c/code\u003e is automatically allowed.\u003c/p\u003e",
 		//	          "items": {
 		//	            "additionalProperties": false,
-		//	            "description": "\u003cp\u003eThe parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
+		//	            "description": "\u003cp\u003eThe parameters that Amazon Quick Suite uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
 		//	            "properties": {
 		//	              "AmazonElasticsearchParameters": {
 		//	                "additionalProperties": false,
@@ -2494,15 +2498,15 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                  },
 		//	                  "IAMParameters": {
 		//	                    "additionalProperties": false,
-		//	                    "description": "\u003cp\u003eA structure that grants Amazon QuickSight access to your cluster and make a call to the \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e API. For more information on the \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e API, see \u003ca href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\"\u003e\n               \u003ccode\u003eGetClusterCredentials\u003c/code\u003e\n            \u003c/a\u003e.\u003c/p\u003e",
+		//	                    "description": "\u003cp\u003eA structure that grants Quick Suite access to your cluster and make a call to the \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e API. For more information on the \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e API, see \u003ca href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\"\u003e\n               \u003ccode\u003eGetClusterCredentials\u003c/code\u003e\n            \u003c/a\u003e.\u003c/p\u003e",
 		//	                    "properties": {
 		//	                      "AutoCreateDatabaseUser": {
 		//	                        "default": false,
-		//	                        "description": "\u003cp\u003eAutomatically creates a database user. If your database doesn't have a \u003ccode\u003eDatabaseUser\u003c/code\u003e, set this parameter to \u003ccode\u003eTrue\u003c/code\u003e. If there is no \u003ccode\u003eDatabaseUser\u003c/code\u003e, Amazon QuickSight can't connect to your cluster. The \u003ccode\u003eRoleArn\u003c/code\u003e that you use for this operation must grant access to \u003ccode\u003eredshift:CreateClusterUser\u003c/code\u003e to successfully create the user.\u003c/p\u003e",
+		//	                        "description": "\u003cp\u003eAutomatically creates a database user. If your database doesn't have a \u003ccode\u003eDatabaseUser\u003c/code\u003e, set this parameter to \u003ccode\u003eTrue\u003c/code\u003e. If there is no \u003ccode\u003eDatabaseUser\u003c/code\u003e, Amazon Quick Suite can't connect to your cluster. The \u003ccode\u003eRoleArn\u003c/code\u003e that you use for this operation must grant access to \u003ccode\u003eredshift:CreateClusterUser\u003c/code\u003e to successfully create the user.\u003c/p\u003e",
 		//	                        "type": "boolean"
 		//	                      },
 		//	                      "DatabaseGroups": {
-		//	                        "description": "\u003cp\u003eA list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the \u003ccode\u003eDatabaseUser\u003c/code\u003e. If you choose to include this parameter, the \u003ccode\u003eRoleArn\u003c/code\u003e must grant access to \u003ccode\u003eredshift:JoinGroup\u003c/code\u003e.\u003c/p\u003e",
+		//	                        "description": "\u003cp\u003eA list of groups whose permissions will be granted to Quick Suite to access the cluster. These permissions are combined with the permissions granted to Quick Suite by the \u003ccode\u003eDatabaseUser\u003c/code\u003e. If you choose to include this parameter, the \u003ccode\u003eRoleArn\u003c/code\u003e must grant access to \u003ccode\u003eredshift:JoinGroup\u003c/code\u003e.\u003c/p\u003e",
 		//	                        "items": {
 		//	                          "maxLength": 64,
 		//	                          "minLength": 1,
@@ -2513,13 +2517,13 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                        "type": "array"
 		//	                      },
 		//	                      "DatabaseUser": {
-		//	                        "description": "\u003cp\u003eThe user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of \u003ccode\u003eAutoCreateDatabaseUser\u003c/code\u003e to \u003ccode\u003eTrue\u003c/code\u003e to create a new user with PUBLIC permissions.\u003c/p\u003e",
+		//	                        "description": "\u003cp\u003eThe user whose permissions and group memberships will be used by Quick Suite to access the cluster. If this user already exists in your database, Quick Suite is granted the same permissions that the user has. If the user doesn't exist, set the value of \u003ccode\u003eAutoCreateDatabaseUser\u003c/code\u003e to \u003ccode\u003eTrue\u003c/code\u003e to create a new user with PUBLIC permissions.\u003c/p\u003e",
 		//	                        "maxLength": 64,
 		//	                        "minLength": 1,
 		//	                        "type": "string"
 		//	                      },
 		//	                      "RoleArn": {
-		//	                        "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to allow Amazon QuickSight to call \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e on your cluster. The calling principal must have \u003ccode\u003eiam:PassRole\u003c/code\u003e access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.\u003c/p\u003e",
+		//	                        "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to allow Quick Suite to call \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e on your cluster. The calling principal must have \u003ccode\u003eiam:PassRole\u003c/code\u003e access to pass the role to Quick Suite. The role's trust policy must allow the Quick Suite service principal to assume the role.\u003c/p\u003e",
 		//	                        "maxLength": 2048,
 		//	                        "minLength": 20,
 		//	                        "type": "string"
@@ -2601,7 +2605,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "enum": [
 		//	                      "PASSWORD",
 		//	                      "TOKEN",
-		//	                      "X509"
+		//	                      "X509",
+		//	                      "KEYPAIR"
 		//	                    ],
 		//	                    "type": "string"
 		//	                  },
@@ -2737,7 +2742,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "enum": [
 		//	                      "PASSWORD",
 		//	                      "TOKEN",
-		//	                      "X509"
+		//	                      "X509",
+		//	                      "KEYPAIR"
 		//	                    ],
 		//	                    "type": "string"
 		//	                  },
@@ -2903,6 +2909,32 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "required": [
 		//	        "Password",
 		//	        "Username"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "KeyPairCredentials": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "KeyPairUsername": {
+		//	          "maxLength": 64,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "PrivateKey": {
+		//	          "maxLength": 8000,
+		//	          "minLength": 1600,
+		//	          "pattern": "",
+		//	          "type": "string"
+		//	        },
+		//	        "PrivateKeyPassphrase": {
+		//	          "maxLength": 256,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "KeyPairUsername",
+		//	        "PrivateKey"
 		//	      ],
 		//	      "type": "object"
 		//	    },
@@ -3531,7 +3563,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 													// Property: AutoCreateDatabaseUser
 													"auto_create_database_user": schema.BoolAttribute{ /*START ATTRIBUTE*/
-														Description: "<p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>",
+														Description: "<p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon Quick Suite can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>",
 														Optional:    true,
 														Computed:    true,
 														Default:     booldefault.StaticBool(false),
@@ -3542,7 +3574,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 													// Property: DatabaseGroups
 													"database_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
 														ElementType: types.StringType,
-														Description: "<p>A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>",
+														Description: "<p>A list of groups whose permissions will be granted to Quick Suite to access the cluster. These permissions are combined with the permissions granted to Quick Suite by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>",
 														Optional:    true,
 														Computed:    true,
 														Validators: []validator.List{ /*START VALIDATORS*/
@@ -3557,7 +3589,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 													}, /*END ATTRIBUTE*/
 													// Property: DatabaseUser
 													"database_user": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "<p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>",
+														Description: "<p>The user whose permissions and group memberships will be used by Quick Suite to access the cluster. If this user already exists in your database, Quick Suite is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>",
 														Optional:    true,
 														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
@@ -3569,7 +3601,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 													}, /*END ATTRIBUTE*/
 													// Property: RoleArn
 													"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "<p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>",
+														Description: "<p>Use the <code>RoleArn</code> structure to allow Quick Suite to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Quick Suite. The role's trust policy must allow the Quick Suite service principal to assume the role.</p>",
 														Optional:    true,
 														Computed:    true,
 														Validators: []validator.String{ /*START VALIDATORS*/
@@ -3581,7 +3613,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
-												Description: "<p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\">\n               <code>GetClusterCredentials</code>\n            </a>.</p>",
+												Description: "<p>A structure that grants Quick Suite access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\">\n               <code>GetClusterCredentials</code>\n            </a>.</p>",
 												Optional:    true,
 												Computed:    true,
 												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -3704,6 +3736,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 														"PASSWORD",
 														"TOKEN",
 														"X509",
+														"KEYPAIR",
 													),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3934,6 +3967,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 														"PASSWORD",
 														"TOKEN",
 														"X509",
+														"KEYPAIR",
 													),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -4225,6 +4259,51 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: KeyPairCredentials
+				"key_pair_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: KeyPairUsername
+						"key_pair_username": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 64),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PrivateKey
+						"private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1600, 8000),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PrivateKeyPassphrase
+						"private_key_passphrase": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(0, 256),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: SecretArn
 				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>",
@@ -4266,7 +4345,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "\u003cp\u003eThe parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
+		//	  "description": "\u003cp\u003eThe parameters that Amazon Quick Suite uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
 		//	  "properties": {
 		//	    "AmazonElasticsearchParameters": {
 		//	      "additionalProperties": false,
@@ -4629,15 +4708,15 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "IAMParameters": {
 		//	          "additionalProperties": false,
-		//	          "description": "\u003cp\u003eA structure that grants Amazon QuickSight access to your cluster and make a call to the \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e API. For more information on the \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e API, see \u003ca href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\"\u003e\n               \u003ccode\u003eGetClusterCredentials\u003c/code\u003e\n            \u003c/a\u003e.\u003c/p\u003e",
+		//	          "description": "\u003cp\u003eA structure that grants Quick Suite access to your cluster and make a call to the \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e API. For more information on the \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e API, see \u003ca href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\"\u003e\n               \u003ccode\u003eGetClusterCredentials\u003c/code\u003e\n            \u003c/a\u003e.\u003c/p\u003e",
 		//	          "properties": {
 		//	            "AutoCreateDatabaseUser": {
 		//	              "default": false,
-		//	              "description": "\u003cp\u003eAutomatically creates a database user. If your database doesn't have a \u003ccode\u003eDatabaseUser\u003c/code\u003e, set this parameter to \u003ccode\u003eTrue\u003c/code\u003e. If there is no \u003ccode\u003eDatabaseUser\u003c/code\u003e, Amazon QuickSight can't connect to your cluster. The \u003ccode\u003eRoleArn\u003c/code\u003e that you use for this operation must grant access to \u003ccode\u003eredshift:CreateClusterUser\u003c/code\u003e to successfully create the user.\u003c/p\u003e",
+		//	              "description": "\u003cp\u003eAutomatically creates a database user. If your database doesn't have a \u003ccode\u003eDatabaseUser\u003c/code\u003e, set this parameter to \u003ccode\u003eTrue\u003c/code\u003e. If there is no \u003ccode\u003eDatabaseUser\u003c/code\u003e, Amazon Quick Suite can't connect to your cluster. The \u003ccode\u003eRoleArn\u003c/code\u003e that you use for this operation must grant access to \u003ccode\u003eredshift:CreateClusterUser\u003c/code\u003e to successfully create the user.\u003c/p\u003e",
 		//	              "type": "boolean"
 		//	            },
 		//	            "DatabaseGroups": {
-		//	              "description": "\u003cp\u003eA list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the \u003ccode\u003eDatabaseUser\u003c/code\u003e. If you choose to include this parameter, the \u003ccode\u003eRoleArn\u003c/code\u003e must grant access to \u003ccode\u003eredshift:JoinGroup\u003c/code\u003e.\u003c/p\u003e",
+		//	              "description": "\u003cp\u003eA list of groups whose permissions will be granted to Quick Suite to access the cluster. These permissions are combined with the permissions granted to Quick Suite by the \u003ccode\u003eDatabaseUser\u003c/code\u003e. If you choose to include this parameter, the \u003ccode\u003eRoleArn\u003c/code\u003e must grant access to \u003ccode\u003eredshift:JoinGroup\u003c/code\u003e.\u003c/p\u003e",
 		//	              "items": {
 		//	                "maxLength": 64,
 		//	                "minLength": 1,
@@ -4648,13 +4727,13 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	              "type": "array"
 		//	            },
 		//	            "DatabaseUser": {
-		//	              "description": "\u003cp\u003eThe user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of \u003ccode\u003eAutoCreateDatabaseUser\u003c/code\u003e to \u003ccode\u003eTrue\u003c/code\u003e to create a new user with PUBLIC permissions.\u003c/p\u003e",
+		//	              "description": "\u003cp\u003eThe user whose permissions and group memberships will be used by Quick Suite to access the cluster. If this user already exists in your database, Quick Suite is granted the same permissions that the user has. If the user doesn't exist, set the value of \u003ccode\u003eAutoCreateDatabaseUser\u003c/code\u003e to \u003ccode\u003eTrue\u003c/code\u003e to create a new user with PUBLIC permissions.\u003c/p\u003e",
 		//	              "maxLength": 64,
 		//	              "minLength": 1,
 		//	              "type": "string"
 		//	            },
 		//	            "RoleArn": {
-		//	              "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to allow Amazon QuickSight to call \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e on your cluster. The calling principal must have \u003ccode\u003eiam:PassRole\u003c/code\u003e access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.\u003c/p\u003e",
+		//	              "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to allow Quick Suite to call \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e on your cluster. The calling principal must have \u003ccode\u003eiam:PassRole\u003c/code\u003e access to pass the role to Quick Suite. The role's trust policy must allow the Quick Suite service principal to assume the role.\u003c/p\u003e",
 		//	              "maxLength": 2048,
 		//	              "minLength": 20,
 		//	              "type": "string"
@@ -4736,7 +4815,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "enum": [
 		//	            "PASSWORD",
 		//	            "TOKEN",
-		//	            "X509"
+		//	            "X509",
+		//	            "KEYPAIR"
 		//	          ],
 		//	          "type": "string"
 		//	        },
@@ -4872,7 +4952,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "enum": [
 		//	            "PASSWORD",
 		//	            "TOKEN",
-		//	            "X509"
+		//	            "X509",
+		//	            "KEYPAIR"
 		//	          ],
 		//	          "type": "string"
 		//	        },
@@ -5614,7 +5695,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: AutoCreateDatabaseUser
 								"auto_create_database_user": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "<p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>",
+									Description: "<p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon Quick Suite can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>",
 									Optional:    true,
 									Computed:    true,
 									Default:     booldefault.StaticBool(false),
@@ -5625,7 +5706,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								// Property: DatabaseGroups
 								"database_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
-									Description: "<p>A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>",
+									Description: "<p>A list of groups whose permissions will be granted to Quick Suite to access the cluster. These permissions are combined with the permissions granted to Quick Suite by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>",
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/
@@ -5640,7 +5721,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: DatabaseUser
 								"database_user": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "<p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>",
+									Description: "<p>The user whose permissions and group memberships will be used by Quick Suite to access the cluster. If this user already exists in your database, Quick Suite is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>",
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
@@ -5652,7 +5733,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: RoleArn
 								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "<p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>",
+									Description: "<p>Use the <code>RoleArn</code> structure to allow Quick Suite to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Quick Suite. The role's trust policy must allow the Quick Suite service principal to assume the role.</p>",
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
@@ -5664,7 +5745,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "<p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\">\n               <code>GetClusterCredentials</code>\n            </a>.</p>",
+							Description: "<p>A structure that grants Quick Suite access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\">\n               <code>GetClusterCredentials</code>\n            </a>.</p>",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -5787,6 +5868,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									"PASSWORD",
 									"TOKEN",
 									"X509",
+									"KEYPAIR",
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -6017,6 +6099,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									"PASSWORD",
 									"TOKEN",
 									"X509",
+									"KEYPAIR",
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -6263,7 +6346,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "<p>The parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.</p>",
+			Description: "<p>The parameters that Amazon Quick Suite uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.</p>",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -6407,7 +6490,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "array"
 		//	      },
 		//	      "Principal": {
-		//	        "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:\u003c/p\u003e\n         \u003cul\u003e\n            \u003cli\u003e\n               \u003cp\u003eThe ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n               \u003cp\u003eThe ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n               \u003cp\u003eThe ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) \u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
+		//	        "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:\u003c/p\u003e\n         \u003cul\u003e\n            \u003cli\u003e\n               \u003cp\u003eThe ARN of an Amazon Quick Suite user or group associated with a data source or dataset. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n               \u003cp\u003eThe ARN of an Amazon Quick Suite user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n               \u003cp\u003eThe ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) \u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
 		//	        "maxLength": 256,
 		//	        "minLength": 1,
 		//	        "type": "string"
@@ -6445,7 +6528,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Principal
 					"principal": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
+						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>The ARN of an Amazon Quick Suite user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon Quick Suite user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -6480,7 +6563,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "\u003cp\u003eSecure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your\n            underlying data source.\u003c/p\u003e",
+		//	  "description": "\u003cp\u003eSecure Socket Layer (SSL) properties that apply when Quick Suite connects to your\n            underlying data source.\u003c/p\u003e",
 		//	  "properties": {
 		//	    "DisableSsl": {
 		//	      "default": false,
@@ -6503,7 +6586,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "<p>Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your\n            underlying data source.</p>",
+			Description: "<p>Secure Socket Layer (SSL) properties that apply when Quick Suite connects to your\n            underlying data source.</p>",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -6833,6 +6916,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"identity_provider_vpc_connection_properties": "IdentityProviderVpcConnectionProperties",
 		"instance_id":               "InstanceId",
 		"key":                       "Key",
+		"key_pair_credentials":      "KeyPairCredentials",
+		"key_pair_username":         "KeyPairUsername",
 		"last_updated_time":         "LastUpdatedTime",
 		"manifest_file_location":    "ManifestFileLocation",
 		"maria_db_parameters":       "MariaDbParameters",
@@ -6848,6 +6933,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"postgre_sql_parameters":    "PostgreSqlParameters",
 		"presto_parameters":         "PrestoParameters",
 		"principal":                 "Principal",
+		"private_key":               "PrivateKey",
+		"private_key_passphrase":    "PrivateKeyPassphrase",
 		"product_type":              "ProductType",
 		"rds_parameters":            "RdsParameters",
 		"redshift_parameters":       "RedshiftParameters",

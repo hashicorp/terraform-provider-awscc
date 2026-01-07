@@ -305,6 +305,43 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "The ID of the instance used to base the launch configuration on. For more information, see [Create an Auto Scaling group using an EC2 instance](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-from-instance.html) in the *Amazon EC2 Auto Scaling User Guide*.\n If you specify ``LaunchTemplate``, ``MixedInstancesPolicy``, or ``LaunchConfigurationName``, don't specify ``InstanceId``.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: InstanceLifecyclePolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "RetentionTriggers": {
+		//	      "additionalProperties": false,
+		//	      "description": "",
+		//	      "properties": {
+		//	        "TerminateHookAbandon": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"instance_lifecycle_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RetentionTriggers
+				"retention_triggers": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TerminateHookAbandon
+						"terminate_hook_abandon": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceMaintenancePolicy
 		// CloudFormation resource type schema:
 		//
@@ -661,6 +698,10 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	            "additionalProperties": false,
 		//	            "description": "Use this structure to let Amazon EC2 Auto Scaling do the following when the Auto Scaling group has a mixed instances policy:\n  +  Override the instance type that is specified in the launch template.\n  +  Use multiple instance types.\n  \n Specify the instance types that you want, or define your instance requirements instead and let Amazon EC2 Auto Scaling provision the available instance types that meet your requirements. This can provide Amazon EC2 Auto Scaling with a larger selection of instance types to choose from when fulfilling Spot and On-Demand capacities. You can view which instance types are matched before you apply the instance requirements to your Auto Scaling group.\n After you define your instance requirements, you don't have to keep updating these settings to get new EC2 instance types automatically. Amazon EC2 Auto Scaling uses the instance requirements of the Auto Scaling group to determine whether a new EC2 instance type can be used.\n ``LaunchTemplateOverrides`` is a property of the [AWS::AutoScaling::AutoScalingGroup LaunchTemplate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplate.html) property type.",
 		//	            "properties": {
+		//	              "ImageId": {
+		//	                "description": "",
+		//	                "type": "string"
+		//	              },
 		//	              "InstanceRequirements": {
 		//	                "additionalProperties": false,
 		//	                "description": "The instance requirements. Amazon EC2 Auto Scaling uses your specified requirements to identify instance types. Then, it uses your On-Demand and Spot allocation strategies to launch instances from these instance types.\n You can specify up to four separate sets of instance requirements per Auto Scaling group. This is useful for provisioning instances from different Amazon Machine Images (AMIs) in the same Auto Scaling group. To do this, create the AMIs and create a new launch template for each AMI. Then, create a compatible set of instance requirements for each launch template. \n  If you specify ``InstanceRequirements``, you can't specify ``InstanceType``.",
@@ -1054,6 +1095,11 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 						"overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ImageId
+									"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
 									// Property: InstanceRequirements
 									"instance_requirements": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1719,10 +1765,12 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"health_check_type":                        "HealthCheckType",
 		"heartbeat_timeout":                        "HeartbeatTimeout",
 		"identifier":                               "Identifier",
+		"image_id":                                 "ImageId",
 		"impaired_zone_health_check_behavior":      "ImpairedZoneHealthCheckBehavior",
 		"instance_family":                          "InstanceFamily",
 		"instance_generations":                     "InstanceGenerations",
 		"instance_id":                              "InstanceId",
+		"instance_lifecycle_policy":                "InstanceLifecyclePolicy",
 		"instance_maintenance_policy":              "InstanceMaintenancePolicy",
 		"instance_requirements":                    "InstanceRequirements",
 		"instance_type":                            "InstanceType",
@@ -1769,6 +1817,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"propagate_at_launch":                                     "PropagateAtLaunch",
 		"references":                                              "References",
 		"require_hibernate_support":                               "RequireHibernateSupport",
+		"retention_triggers":                                      "RetentionTriggers",
 		"role_arn":                                                "RoleARN",
 		"service_linked_role_arn":                                 "ServiceLinkedRoleARN",
 		"skip_zonal_shift_validation":                             "SkipZonalShiftValidation",
@@ -1778,6 +1827,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"spot_max_price_percentage_over_lowest_price":             "SpotMaxPricePercentageOverLowestPrice",
 		"tags":                   "Tags",
 		"target_group_ar_ns":     "TargetGroupARNs",
+		"terminate_hook_abandon": "TerminateHookAbandon",
 		"termination_policies":   "TerminationPolicies",
 		"topic_arn":              "TopicARN",
 		"total_local_storage_gb": "TotalLocalStorageGB",

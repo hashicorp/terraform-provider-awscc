@@ -212,31 +212,14 @@ func connectorV2Resource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The provider configuration of the connector",
+		//	  "description": "The third-party provider configuration for the connector",
 		//	  "properties": {
 		//	    "JiraCloud": {
 		//	      "additionalProperties": false,
+		//	      "description": "The initial configuration settings required to establish an integration between Security Hub and Jira Cloud",
 		//	      "properties": {
-		//	        "AuthStatus": {
-		//	          "description": "The auth status of the connector",
-		//	          "enum": [
-		//	            "ACTIVE",
-		//	            "FAILED"
-		//	          ],
-		//	          "type": "string"
-		//	        },
-		//	        "AuthUrl": {
-		//	          "description": "The authUrl of the JiraCloud connector",
-		//	          "pattern": ".*\\S.*",
-		//	          "type": "string"
-		//	        },
-		//	        "CloudId": {
-		//	          "type": "string"
-		//	        },
-		//	        "Domain": {
-		//	          "type": "string"
-		//	        },
 		//	        "ProjectKey": {
+		//	          "description": "The project key for a Jira Cloud instance",
 		//	          "maxLength": 10,
 		//	          "minLength": 2,
 		//	          "type": "string"
@@ -249,22 +232,16 @@ func connectorV2Resource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "ServiceNow": {
 		//	      "additionalProperties": false,
+		//	      "description": "The initial configuration settings required to establish an integration between Security Hub and ServiceNow ITSM",
 		//	      "properties": {
-		//	        "AuthStatus": {
-		//	          "description": "The auth status of the connector",
-		//	          "enum": [
-		//	            "ACTIVE",
-		//	            "FAILED"
-		//	          ],
-		//	          "type": "string"
-		//	        },
 		//	        "InstanceName": {
+		//	          "description": "The instance name of ServiceNow ITSM",
 		//	          "maxLength": 128,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
 		//	        "SecretArn": {
-		//	          "description": "The ARN of secrets manager containing ClientId and ClientSecret",
+		//	          "description": "The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains the ServiceNow credentials",
 		//	          "maxLength": 2048,
 		//	          "minLength": 20,
 		//	          "pattern": ".*\\S.*",
@@ -285,40 +262,11 @@ func connectorV2Resource(ctx context.Context) (resource.Resource, error) {
 				// Property: JiraCloud
 				"jira_cloud": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AuthStatus
-						"auth_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The auth status of the connector",
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: AuthUrl
-						"auth_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The authUrl of the JiraCloud connector",
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: CloudId
-						"cloud_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Domain
-						"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
 						// Property: ProjectKey
 						"project_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "The project key for a Jira Cloud instance",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(2, 10),
 								fwvalidators.NotNullString(),
@@ -328,8 +276,9 @@ func connectorV2Resource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "The initial configuration settings required to establish an integration between Security Hub and Jira Cloud",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -337,18 +286,11 @@ func connectorV2Resource(ctx context.Context) (resource.Resource, error) {
 				// Property: ServiceNow
 				"service_now": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AuthStatus
-						"auth_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The auth status of the connector",
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
 						// Property: InstanceName
 						"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "The instance name of ServiceNow ITSM",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 128),
 								fwvalidators.NotNullString(),
@@ -360,7 +302,7 @@ func connectorV2Resource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: SecretArn
 						"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of secrets manager containing ClientId and ClientSecret",
+							Description: "The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains the ServiceNow credentials",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
@@ -373,14 +315,15 @@ func connectorV2Resource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "The initial configuration settings required to establish an integration between Security Hub and ServiceNow ITSM",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The provider configuration of the connector",
+			Description: "The third-party provider configuration for the connector",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -438,15 +381,11 @@ func connectorV2Resource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"auth_status":      "AuthStatus",
-		"auth_url":         "AuthUrl",
-		"cloud_id":         "CloudId",
 		"connector_arn":    "ConnectorArn",
 		"connector_id":     "ConnectorId",
 		"connector_status": "ConnectorStatus",
 		"created_at":       "CreatedAt",
 		"description":      "Description",
-		"domain":           "Domain",
 		"instance_name":    "InstanceName",
 		"jira_cloud":       "JiraCloud",
 		"kms_key_arn":      "KmsKeyArn",

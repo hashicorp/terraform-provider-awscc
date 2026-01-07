@@ -42,7 +42,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "The DataSync Agent ARN.",
 		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
 		"agent_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -87,7 +87,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "maxLength": 128,
-		//	    "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$",
+		//	    "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$",
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array"
@@ -105,7 +105,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "maxLength": 128,
-		//	    "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:subnet/.*$",
+		//	    "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:subnet/.*$",
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array"

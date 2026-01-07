@@ -29,7 +29,7 @@ func locationEFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) for the Amazon EFS Access point that DataSync uses when accessing the EFS file system.",
 		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]+:[0-9]{12}:access-point/fsap-[0-9a-f]{8,40}$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]+:[0-9]{12}:access-point/fsap-[0-9a-f]{8,40}$",
 		//	  "type": "string"
 		//	}
 		"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -48,7 +48,7 @@ func locationEFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "maxLength": 128,
-		//	        "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$",
+		//	        "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$",
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 5,
@@ -58,7 +58,7 @@ func locationEFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "SubnetArn": {
 		//	      "description": "The ARN of the subnet that DataSync uses to access the target EFS file system.",
 		//	      "maxLength": 128,
-		//	      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:subnet/.*$",
+		//	      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:subnet/.*$",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -91,7 +91,7 @@ func locationEFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) for the Amazon EFS file system.",
 		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$",
 		//	  "type": "string"
 		//	}
 		"efs_filesystem_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -104,7 +104,7 @@ func locationEFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the AWS IAM role that the DataSync will assume when mounting the EFS file system.",
 		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$",
 		//	  "type": "string"
 		//	}
 		"file_system_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -132,7 +132,7 @@ func locationEFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the Amazon EFS file system location that is created.",
 		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
 		"location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

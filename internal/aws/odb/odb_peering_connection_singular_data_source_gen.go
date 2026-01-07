@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -22,6 +23,23 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::ODB::OdbPeeringConnection resource.
 func odbPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AdditionalPeerNetworkCidrs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The additional CIDR blocks for the ODB peering connection.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"additional_peer_network_cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The additional CIDR blocks for the ODB peering connection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -92,6 +110,23 @@ func odbPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	}
 		"peer_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the peer network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PeerNetworkCidrs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The CIDR blocks for the ODB peering connection.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"peer_network_cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The CIDR blocks for the ODB peering connection.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PeerNetworkId
@@ -174,16 +209,18 @@ func odbPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 	opts = opts.WithCloudFormationTypeName("AWS::ODB::OdbPeeringConnection").WithTerraformTypeName("awscc_odb_odb_peering_connection")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"display_name":               "DisplayName",
-		"key":                        "Key",
-		"odb_network_arn":            "OdbNetworkArn",
-		"odb_network_id":             "OdbNetworkId",
-		"odb_peering_connection_arn": "OdbPeeringConnectionArn",
-		"odb_peering_connection_id":  "OdbPeeringConnectionId",
-		"peer_network_arn":           "PeerNetworkArn",
-		"peer_network_id":            "PeerNetworkId",
-		"tags":                       "Tags",
-		"value":                      "Value",
+		"additional_peer_network_cidrs": "AdditionalPeerNetworkCidrs",
+		"display_name":                  "DisplayName",
+		"key":                           "Key",
+		"odb_network_arn":               "OdbNetworkArn",
+		"odb_network_id":                "OdbNetworkId",
+		"odb_peering_connection_arn":    "OdbPeeringConnectionArn",
+		"odb_peering_connection_id":     "OdbPeeringConnectionId",
+		"peer_network_arn":              "PeerNetworkArn",
+		"peer_network_cidrs":            "PeerNetworkCidrs",
+		"peer_network_id":               "PeerNetworkId",
+		"tags":                          "Tags",
+		"value":                         "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

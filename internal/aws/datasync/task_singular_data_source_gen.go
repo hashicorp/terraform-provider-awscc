@@ -29,7 +29,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "The ARN of the Amazon CloudWatch log group that is used to monitor and log events in the task.",
 		//	  "maxLength": 562,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):logs:[a-z\\-0-9]*:[0-9]{12}:log-group:([^:\\*]*)(:\\*)?$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):logs:[a-z\\-0-9]*:[0-9]{12}:log-group:([^:\\*]*)(:\\*)?$",
 		//	  "type": "string"
 		//	}
 		"cloudwatch_log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -42,7 +42,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "The ARN of an AWS storage resource's location.",
 		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
 		"destination_location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -195,7 +195,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "BucketAccessRoleArn": {
 		//	              "description": "Specifies the AWS Identity and Access Management (IAM) role that allows DataSync to access your manifest.",
 		//	              "maxLength": 2048,
-		//	              "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$",
+		//	              "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$",
 		//	              "type": "string"
 		//	            },
 		//	            "ManifestObjectPath": {
@@ -213,7 +213,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "S3BucketArn": {
 		//	              "description": "Specifies the Amazon Resource Name (ARN) of the S3 bucket where you're hosting your manifest.",
 		//	              "maxLength": 156,
-		//	              "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):(s3|s3-outposts):[a-z\\-0-9]*:[0-9]*:.*$",
+		//	              "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):(s3|s3-outposts):[a-z\\-0-9]*:[0-9]*:.*$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -554,7 +554,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "The ARN of the source location for the task.",
 		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
 		"source_location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -656,7 +656,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "The ARN of the task.",
 		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}$",
 		//	  "type": "string"
 		//	}
 		"task_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -696,13 +696,13 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "BucketAccessRoleArn": {
 		//	              "description": "Specifies the Amazon Resource Name (ARN) of the IAM policy that allows Datasync to upload a task report to your S3 bucket.",
 		//	              "maxLength": 2048,
-		//	              "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$",
+		//	              "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$",
 		//	              "type": "string"
 		//	            },
 		//	            "S3BucketArn": {
 		//	              "description": "Specifies the ARN of the S3 bucket where Datasync uploads your report.",
 		//	              "maxLength": 156,
-		//	              "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):(s3|s3-outposts):[a-z\\-0-9]*:[0-9]*:.*$",
+		//	              "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):(s3|s3-outposts):[a-z\\-0-9]*:[0-9]*:.*$",
 		//	              "type": "string"
 		//	            },
 		//	            "Subdirectory": {

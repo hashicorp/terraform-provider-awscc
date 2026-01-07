@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -129,6 +130,22 @@ func billingViewResource(ctx context.Context) (resource.Resource, error) {
 		//	        }
 		//	      },
 		//	      "type": "object"
+		//	    },
+		//	    "TimeRange": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "BeginDateInclusive": {
+		//	          "description": "The time in ISO 8601 format, UTC time (YYYY-MM-DDTHH:MM:SSZ).",
+		//	          "format": "date-time",
+		//	          "type": "string"
+		//	        },
+		//	        "EndDateInclusive": {
+		//	          "description": "The time in ISO 8601 format, UTC time (YYYY-MM-DDTHH:MM:SSZ).",
+		//	          "format": "date-time",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -203,6 +220,36 @@ func billingViewResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TimeRange
+				"time_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BeginDateInclusive
+						"begin_date_inclusive": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType:  timetypes.RFC3339Type{},
+							Description: "The time in ISO 8601 format, UTC time (YYYY-MM-DDTHH:MM:SSZ).",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EndDateInclusive
+						"end_date_inclusive": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType:  timetypes.RFC3339Type{},
+							Description: "The time in ISO 8601 format, UTC time (YYYY-MM-DDTHH:MM:SSZ).",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -291,9 +338,6 @@ func billingViewResource(ctx context.Context) (resource.Resource, error) {
 					stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z-]*:(billing)::[0-9]{12}:billingview/[a-zA-Z0-9_+=.@-]{1,75}"), ""),
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -413,16 +457,19 @@ func billingViewResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.IsGlobalResourceType(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                    "Arn",
+		"begin_date_inclusive":   "BeginDateInclusive",
 		"billing_view_type":      "BillingViewType",
 		"created_at":             "CreatedAt",
 		"data_filter_expression": "DataFilterExpression",
 		"description":            "Description",
 		"dimensions":             "Dimensions",
+		"end_date_inclusive":     "EndDateInclusive",
 		"key":                    "Key",
 		"name":                   "Name",
 		"owner_account_id":       "OwnerAccountId",
 		"source_views":           "SourceViews",
 		"tags":                   "Tags",
+		"time_range":             "TimeRange",
 		"updated_at":             "UpdatedAt",
 		"value":                  "Value",
 		"values":                 "Values",

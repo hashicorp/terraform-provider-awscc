@@ -70,6 +70,12 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "Action": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "AddOrRunAnomalyDetectionForAnalyses": {
 		//	      "enum": [
 		//	        "DENY"
@@ -77,6 +83,18 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "Analysis": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Automate": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ChatAgent": {
 		//	      "enum": [
 		//	        "DENY"
 		//	      ],
@@ -107,6 +125,12 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateThresholdAlerts": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateChatAgents": {
 		//	      "enum": [
 		//	        "DENY"
 		//	      ],
@@ -166,7 +190,25 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "Flow": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "IncludeContentInScheduledReportsEmail": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "KnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "PerformFlowUiTask": {
 		//	      "enum": [
 		//	        "DENY"
 		//	      ],
@@ -178,7 +220,19 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "PublishWithoutApproval": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "RenameSharedFolders": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Research": {
 		//	      "enum": [
 		//	        "DENY"
 		//	      ],
@@ -208,7 +262,25 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "Space": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "SubscribeDashboardEmailReports": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseAgentWebSearch": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseBedrockModels": {
 		//	      "enum": [
 		//	        "DENY"
 		//	      ],
@@ -225,6 +297,19 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Action
+				"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: AddOrRunAnomalyDetectionForAnalyses
 				"add_or_run_anomaly_detection_for_analyses": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
@@ -240,6 +325,32 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Analysis
 				"analysis": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Automate
+				"automate": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ChatAgent
+				"chat_agent": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -305,6 +416,19 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: CreateAndUpdateThresholdAlerts
 				"create_and_update_threshold_alerts": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateChatAgents
+				"create_chat_agents": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -433,8 +557,47 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: Flow
+				"flow": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: IncludeContentInScheduledReportsEmail
 				"include_content_in_scheduled_reports_email": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: KnowledgeBase
+				"knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PerformFlowUiTask
+				"perform_flow_ui_task": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -459,8 +622,34 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: PublishWithoutApproval
+				"publish_without_approval": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: RenameSharedFolders
 				"rename_shared_folders": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Research
+				"research": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -524,8 +713,47 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: Space
+				"space": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: SubscribeDashboardEmailReports
 				"subscribe_dashboard_email_reports": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseAgentWebSearch
+				"use_agent_web_search": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseBedrockModels
+				"use_bedrock_models": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -679,16 +907,20 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"action": "Action",
 		"add_or_run_anomaly_detection_for_analyses": "AddOrRunAnomalyDetectionForAnalyses",
 		"analysis":       "Analysis",
 		"arn":            "Arn",
+		"automate":       "Automate",
 		"aws_account_id": "AwsAccountId",
 		"capabilities":   "Capabilities",
+		"chat_agent":     "ChatAgent",
 		"create_and_update_dashboard_email_reports":  "CreateAndUpdateDashboardEmailReports",
 		"create_and_update_data_sources":             "CreateAndUpdateDataSources",
 		"create_and_update_datasets":                 "CreateAndUpdateDatasets",
 		"create_and_update_themes":                   "CreateAndUpdateThemes",
 		"create_and_update_threshold_alerts":         "CreateAndUpdateThresholdAlerts",
+		"create_chat_agents":                         "CreateChatAgents",
 		"create_shared_folders":                      "CreateSharedFolders",
 		"create_spice_dataset":                       "CreateSPICEDataset",
 		"custom_permissions_name":                    "CustomPermissionsName",
@@ -699,16 +931,24 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		"export_to_excel_in_scheduled_reports":       "ExportToExcelInScheduledReports",
 		"export_to_pdf":                              "ExportToPdf",
 		"export_to_pdf_in_scheduled_reports":         "ExportToPdfInScheduledReports",
+		"flow":                                       "Flow",
 		"include_content_in_scheduled_reports_email": "IncludeContentInScheduledReportsEmail",
 		"key":                               "Key",
+		"knowledge_base":                    "KnowledgeBase",
+		"perform_flow_ui_task":              "PerformFlowUiTask",
 		"print_reports":                     "PrintReports",
+		"publish_without_approval":          "PublishWithoutApproval",
 		"rename_shared_folders":             "RenameSharedFolders",
+		"research":                          "Research",
 		"share_analyses":                    "ShareAnalyses",
 		"share_dashboards":                  "ShareDashboards",
 		"share_data_sources":                "ShareDataSources",
 		"share_datasets":                    "ShareDatasets",
+		"space":                             "Space",
 		"subscribe_dashboard_email_reports": "SubscribeDashboardEmailReports",
 		"tags":                              "Tags",
+		"use_agent_web_search":              "UseAgentWebSearch",
+		"use_bedrock_models":                "UseBedrockModels",
 		"value":                             "Value",
 		"view_account_spice_capacity":       "ViewAccountSPICECapacity",
 	})

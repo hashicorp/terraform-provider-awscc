@@ -331,6 +331,12 @@
         },
         "Auth": {
           "$ref": "#/definitions/HttpAuthorization"
+        },
+        "EnableBatching": {
+          "type": "boolean"
+        },
+        "BatchConfig": {
+          "$ref": "#/definitions/BatchConfig"
         }
       },
       "required": [
@@ -381,6 +387,21 @@
         "SigningRegion",
         "RoleArn"
       ]
+    },
+    "BatchConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MaxBatchOpenMs": {
+          "type": "integer"
+        },
+        "MaxBatchSize": {
+          "type": "integer"
+        },
+        "MaxBatchSizeBytes": {
+          "type": "integer"
+        }
+      }
     },
     "IotAnalyticsAction": {
       "type": "object",

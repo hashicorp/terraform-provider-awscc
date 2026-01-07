@@ -45,10 +45,10 @@ func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "maxLength": 128,
-		//	    "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
+		//	    "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
 		//	    "type": "string"
 		//	  },
-		//	  "maxItems": 4,
+		//	  "maxItems": 8,
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
@@ -57,10 +57,10 @@ func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(1, 4),
+				listvalidator.SizeBetween(1, 8),
 				listvalidator.ValueStringsAre(
 					stringvalidator.LengthAtMost(128),
-					stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$"), ""),
+					stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$"), ""),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -102,13 +102,13 @@ func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 		//	    "KmsKeyArn": {
 		//	      "description": "Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.",
 		//	      "maxLength": 2048,
-		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):kms:[a-z-0-9]+:[0-9]{12}:key/.*|)$",
+		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):kms:[a-z-0-9]+:[0-9]{12}:key/.*|)$",
 		//	      "type": "string"
 		//	    },
 		//	    "SecretArn": {
 		//	      "description": "Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.",
 		//	      "maxLength": 2048,
-		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$",
+		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -123,7 +123,7 @@ func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthAtMost(2048),
-						stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):kms:[a-z-0-9]+:[0-9]{12}:key/.*|)$"), ""),
+						stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):kms:[a-z-0-9]+:[0-9]{12}:key/.*|)$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -155,13 +155,13 @@ func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 		//	    "SecretAccessRoleArn": {
 		//	      "description": "Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.",
 		//	      "maxLength": 2048,
-		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*|)$",
+		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*|)$",
 		//	      "type": "string"
 		//	    },
 		//	    "SecretArn": {
 		//	      "description": "Specifies the ARN for a customer created AWS Secrets Manager secret.",
 		//	      "maxLength": 2048,
-		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$",
+		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -180,7 +180,7 @@ func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthAtMost(2048),
-						stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*|)$"), ""),
+						stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*|)$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -194,7 +194,7 @@ func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthAtMost(2048),
-						stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$"), ""),
+						stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -329,7 +329,7 @@ func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the SMB location that is created.",
 		//	  "maxLength": 128,
-		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
 		"location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -365,7 +365,7 @@ func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 		//	    "SecretArn": {
 		//	      "description": "Specifies the ARN for an AWS Secrets Manager secret.",
 		//	      "maxLength": 2048,
-		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$",
+		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$",
 		//	      "type": "string"
 		//	    }
 		//	  },

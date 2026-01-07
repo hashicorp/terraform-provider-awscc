@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -36,6 +37,71 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::Connect::HoursOfOperation resource.
 func hoursOfOperationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ChildHoursOfOperations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of child hours of operations.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Identifier for hours of operation.",
+		//	    "properties": {
+		//	      "Id": {
+		//	        "description": "The identifier for the hours of operation.",
+		//	        "type": "string"
+		//	      },
+		//	      "Name": {
+		//	        "description": "The name of the hours of operation.",
+		//	        "maxLength": 127,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Id"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"child_hours_of_operations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The identifier for the hours of operation.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the hours of operation.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 127),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of child hours of operations.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Config
 		// CloudFormation resource type schema:
 		//
@@ -339,6 +405,74 @@ func hoursOfOperationResource(ctx context.Context) (resource.Resource, error) {
 		//	        "maxLength": 127,
 		//	        "minLength": 1,
 		//	        "type": "string"
+		//	      },
+		//	      "OverrideType": {
+		//	        "description": "The type of hours of operation override.",
+		//	        "enum": [
+		//	          "STANDARD",
+		//	          "OPEN",
+		//	          "CLOSED"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "RecurrenceConfig": {
+		//	        "additionalProperties": false,
+		//	        "description": "Configuration for recurring hours of operation overrides.",
+		//	        "properties": {
+		//	          "RecurrencePattern": {
+		//	            "additionalProperties": false,
+		//	            "description": "Pattern for recurring hours of operation overrides.",
+		//	            "properties": {
+		//	              "ByMonth": {
+		//	                "description": "List of months (1-12) for recurrence pattern.",
+		//	                "items": {
+		//	                  "maximum": 12,
+		//	                  "minimum": 1,
+		//	                  "type": "integer"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "ByMonthDay": {
+		//	                "description": "List of month days (-1 to 31) for recurrence pattern.",
+		//	                "items": {
+		//	                  "maximum": 31,
+		//	                  "minimum": -1,
+		//	                  "type": "integer"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "ByWeekdayOccurrence": {
+		//	                "items": {
+		//	                  "maximum": 4,
+		//	                  "minimum": -1,
+		//	                  "type": "integer"
+		//	                },
+		//	                "maxItems": 1,
+		//	                "minItems": 0,
+		//	                "type": "array"
+		//	              },
+		//	              "Frequency": {
+		//	                "description": "The frequency of recurrence for hours of operation overrides.",
+		//	                "enum": [
+		//	                  "WEEKLY",
+		//	                  "MONTHLY",
+		//	                  "YEARLY"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Interval": {
+		//	                "maximum": 6,
+		//	                "minimum": 1,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "RecurrencePattern"
+		//	        ],
+		//	        "type": "object"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -536,6 +670,119 @@ func hoursOfOperationResource(ctx context.Context) (resource.Resource, error) {
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
+					// Property: OverrideType
+					"override_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of hours of operation override.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"STANDARD",
+								"OPEN",
+								"CLOSED",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: RecurrenceConfig
+					"recurrence_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: RecurrencePattern
+							"recurrence_pattern": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ByMonth
+									"by_month": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.Int64Type,
+										Description: "List of months (1-12) for recurrence pattern.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.ValueInt64sAre(
+												int64validator.Between(1, 12),
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ByMonthDay
+									"by_month_day": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.Int64Type,
+										Description: "List of month days (-1 to 31) for recurrence pattern.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.ValueInt64sAre(
+												int64validator.Between(-1, 31),
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ByWeekdayOccurrence
+									"by_weekday_occurrence": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.Int64Type,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.SizeBetween(0, 1),
+											listvalidator.ValueInt64sAre(
+												int64validator.Between(-1, 4),
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Frequency
+									"frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The frequency of recurrence for hours of operation overrides.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"WEEKLY",
+												"MONTHLY",
+												"YEARLY",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Interval
+									"interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											int64validator.Between(1, 6),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Pattern for recurring hours of operation overrides.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Object{ /*START VALIDATORS*/
+									fwvalidators.NotNullObject(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Configuration for recurring hours of operation overrides.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "One or more hours of operation overrides assigned to an hour of operation.",
@@ -579,6 +826,71 @@ func hoursOfOperationResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 127),
 			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ParentHoursOfOperations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of parent hours of operations.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Identifier for hours of operation.",
+		//	    "properties": {
+		//	      "Id": {
+		//	        "description": "The identifier for the hours of operation.",
+		//	        "type": "string"
+		//	      },
+		//	      "Name": {
+		//	        "description": "The name of the hours of operation.",
+		//	        "maxLength": 127,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Id"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"parent_hours_of_operations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The identifier for the hours of operation.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the hours of operation.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 127),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of parent hours of operations.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -694,23 +1006,34 @@ func hoursOfOperationResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"by_month":                       "ByMonth",
+		"by_month_day":                   "ByMonthDay",
+		"by_weekday_occurrence":          "ByWeekdayOccurrence",
+		"child_hours_of_operations":      "ChildHoursOfOperations",
 		"config":                         "Config",
 		"day":                            "Day",
 		"description":                    "Description",
 		"effective_from":                 "EffectiveFrom",
 		"effective_till":                 "EffectiveTill",
 		"end_time":                       "EndTime",
+		"frequency":                      "Frequency",
 		"hours":                          "Hours",
 		"hours_of_operation_arn":         "HoursOfOperationArn",
 		"hours_of_operation_override_id": "HoursOfOperationOverrideId",
 		"hours_of_operation_overrides":   "HoursOfOperationOverrides",
+		"id":                             "Id",
 		"instance_arn":                   "InstanceArn",
+		"interval":                       "Interval",
 		"key":                            "Key",
 		"minutes":                        "Minutes",
 		"name":                           "Name",
 		"override_config":                "OverrideConfig",
 		"override_description":           "OverrideDescription",
 		"override_name":                  "OverrideName",
+		"override_type":                  "OverrideType",
+		"parent_hours_of_operations":     "ParentHoursOfOperations",
+		"recurrence_config":              "RecurrenceConfig",
+		"recurrence_pattern":             "RecurrencePattern",
 		"start_time":                     "StartTime",
 		"tags":                           "Tags",
 		"time_zone":                      "TimeZone",

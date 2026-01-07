@@ -90,26 +90,78 @@ func assistantAssociationResource(ctx context.Context) (resource.Resource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "ExternalBedrockKnowledgeBaseConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AccessRoleArn": {
+		//	          "pattern": "^arn:aws:iam::[0-9]{12}:role/(?:service-role/)?[a-zA-Z0-9_+=,.@-]{1,64}$",
+		//	          "type": "string"
+		//	        },
+		//	        "BedrockKnowledgeBaseArn": {
+		//	          "pattern": "^arn:aws(|-cn|-us-gov):bedrock:[a-zA-Z0-9-]*:[0-9]{12}:knowledge-base/[0-9a-zA-Z]+$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "BedrockKnowledgeBaseArn",
+		//	        "AccessRoleArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "KnowledgeBaseId": {
 		//	      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	      "type": "string"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "KnowledgeBaseId"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"association": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExternalBedrockKnowledgeBaseConfig
+				"external_bedrock_knowledge_base_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AccessRoleArn
+						"access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws:iam::[0-9]{12}:role/(?:service-role/)?[a-zA-Z0-9_+=,.@-]{1,64}$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: BedrockKnowledgeBaseArn
+						"bedrock_knowledge_base_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(|-cn|-us-gov):bedrock:[a-zA-Z0-9-]*:[0-9]{12}:knowledge-base/[0-9a-zA-Z]+$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: KnowledgeBaseId
 				"knowledge_base_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.RegexMatches(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"), ""),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Required: true,
@@ -122,7 +174,8 @@ func assistantAssociationResource(ctx context.Context) (resource.Resource, error
 		//
 		//	{
 		//	  "enum": [
-		//	    "KNOWLEDGE_BASE"
+		//	    "KNOWLEDGE_BASE",
+		//	    "EXTERNAL_BEDROCK_KNOWLEDGE_BASE"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -131,6 +184,7 @@ func assistantAssociationResource(ctx context.Context) (resource.Resource, error
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"KNOWLEDGE_BASE",
+					"EXTERNAL_BEDROCK_KNOWLEDGE_BASE",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -234,16 +288,19 @@ func assistantAssociationResource(ctx context.Context) (resource.Resource, error
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"assistant_arn":             "AssistantArn",
-		"assistant_association_arn": "AssistantAssociationArn",
-		"assistant_association_id":  "AssistantAssociationId",
-		"assistant_id":              "AssistantId",
-		"association":               "Association",
-		"association_type":          "AssociationType",
-		"key":                       "Key",
-		"knowledge_base_id":         "KnowledgeBaseId",
-		"tags":                      "Tags",
-		"value":                     "Value",
+		"access_role_arn":                        "AccessRoleArn",
+		"assistant_arn":                          "AssistantArn",
+		"assistant_association_arn":              "AssistantAssociationArn",
+		"assistant_association_id":               "AssistantAssociationId",
+		"assistant_id":                           "AssistantId",
+		"association":                            "Association",
+		"association_type":                       "AssociationType",
+		"bedrock_knowledge_base_arn":             "BedrockKnowledgeBaseArn",
+		"external_bedrock_knowledge_base_config": "ExternalBedrockKnowledgeBaseConfig",
+		"key":                                    "Key",
+		"knowledge_base_id":                      "KnowledgeBaseId",
+		"tags":                                   "Tags",
+		"value":                                  "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

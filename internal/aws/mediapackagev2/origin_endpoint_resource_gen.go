@@ -2143,6 +2143,13 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	          "maxItems": 100,
 		//	          "minItems": 0,
 		//	          "type": "array"
+		//	        },
+		//	        "ScteInSegments": {
+		//	          "enum": [
+		//	            "NONE",
+		//	            "ALL"
+		//	          ],
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -2443,6 +2450,20 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: ScteInSegments
+						"scte_in_segments": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"NONE",
+									"ALL",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "<p>The SCTE configuration.</p>",
 					Optional:    true,
@@ -2667,6 +2688,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"scte_dash":                            "ScteDash",
 		"scte_filter":                          "ScteFilter",
 		"scte_hls":                             "ScteHls",
+		"scte_in_segments":                     "ScteInSegments",
 		"segment":                              "Segment",
 		"segment_duration_seconds":             "SegmentDurationSeconds",
 		"segment_name":                         "SegmentName",

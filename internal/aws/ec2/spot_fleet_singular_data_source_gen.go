@@ -538,6 +538,9 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "AvailabilityZone": {
 		//	                "type": "string"
 		//	              },
+		//	              "AvailabilityZoneId": {
+		//	                "type": "string"
+		//	              },
 		//	              "GroupName": {
 		//	                "type": "string"
 		//	              },
@@ -704,6 +707,9 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "additionalProperties": false,
 		//	              "properties": {
 		//	                "AvailabilityZone": {
+		//	                  "type": "string"
+		//	                },
+		//	                "AvailabilityZoneId": {
 		//	                  "type": "string"
 		//	                },
 		//	                "InstanceRequirements": {
@@ -1661,6 +1667,10 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 									"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Computed: true,
 									}, /*END ATTRIBUTE*/
+									// Property: AvailabilityZoneId
+									"availability_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
 									// Property: GroupName
 									"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Computed: true,
@@ -1764,6 +1774,10 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: AvailabilityZone
 										"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: AvailabilityZoneId
+										"availability_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Computed: true,
 										}, /*END ATTRIBUTE*/
 										// Property: InstanceRequirements
@@ -2230,6 +2244,7 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn":                                "Arn",
 		"associate_public_ip_address":        "AssociatePublicIpAddress",
 		"availability_zone":                  "AvailabilityZone",
+		"availability_zone_id":               "AvailabilityZoneId",
 		"bare_metal":                         "BareMetal",
 		"baseline_ebs_bandwidth_mbps":        "BaselineEbsBandwidthMbps",
 		"baseline_performance_factors":       "BaselinePerformanceFactors",

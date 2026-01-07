@@ -62,6 +62,32 @@ Read-Only:
 Read-Only:
 
 - `suppressed_reasons` (List of String) A list that contains the reasons that email addresses are automatically added to the suppression list for your account.
+- `validation_options` (Attributes) An object that contains information about the validation options for your account. (see [below for nested schema](#nestedatt--suppression_options--validation_options))
+
+<a id="nestedatt--suppression_options--validation_options"></a>
+### Nested Schema for `suppression_options.validation_options`
+
+Read-Only:
+
+- `condition_threshold` (Attributes) The condition threshold settings for suppression validation. (see [below for nested schema](#nestedatt--suppression_options--validation_options--condition_threshold))
+
+<a id="nestedatt--suppression_options--validation_options--condition_threshold"></a>
+### Nested Schema for `suppression_options.validation_options.condition_threshold`
+
+Read-Only:
+
+- `condition_threshold_enabled` (String) Whether the condition threshold is enabled or disabled.
+- `overall_confidence_threshold` (Attributes) The overall confidence threshold settings. (see [below for nested schema](#nestedatt--suppression_options--validation_options--condition_threshold--overall_confidence_threshold))
+
+<a id="nestedatt--suppression_options--validation_options--condition_threshold--overall_confidence_threshold"></a>
+### Nested Schema for `suppression_options.validation_options.condition_threshold.overall_confidence_threshold`
+
+Read-Only:
+
+- `confidence_verdict_threshold` (String) The confidence verdict threshold level.
+
+
+
 
 
 <a id="nestedatt--tags"></a>

@@ -38,7 +38,7 @@ func metricFilterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The list of system fields that are emitted as additional dimensions in the generated metrics. Returns the ``emitSystemFieldDimensions`` value if it was specified when the metric filter was created.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -47,20 +47,20 @@ func metricFilterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	}
 		"emit_system_field_dimensions": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "",
+			Description: "The list of system fields that are emitted as additional dimensions in the generated metrics. Returns the ``emitSystemFieldDimensions`` value if it was specified when the metric filter was created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FieldSelectionCriteria
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The filter expression that specifies which log events are processed by this metric filter based on system fields. Returns the ``fieldSelectionCriteria`` value if it was specified when the metric filter was created.",
 		//	  "maxLength": 2000,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"field_selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The filter expression that specifies which log events are processed by this metric filter based on system fields. Returns the ``fieldSelectionCriteria`` value if it was specified when the metric filter was created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FilterName

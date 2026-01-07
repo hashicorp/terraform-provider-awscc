@@ -792,6 +792,19 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	                "description": "Specifies how long, in seconds, CloudFront persists its connection to the origin. The minimum timeout is 1 second, the maximum is 120 seconds, and the default (if you don't specify otherwise) is 5 seconds.\n For more information, see [Keep-alive timeout (custom origins only)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginKeepaliveTimeout) in the *Amazon CloudFront Developer Guide*.",
 		//	                "type": "integer"
 		//	              },
+		//	              "OriginMtlsConfig": {
+		//	                "additionalProperties": false,
+		//	                "description": "",
+		//	                "properties": {
+		//	                  "ClientCertificateArn": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "ClientCertificateArn"
+		//	                ],
+		//	                "type": "object"
+		//	              },
 		//	              "OriginProtocolPolicy": {
 		//	                "description": "Specifies the protocol (HTTP or HTTPS) that CloudFront uses to connect to the origin. Valid values are:\n  +  ``http-only`` ? CloudFront always uses HTTP to connect to the origin.\n  +  ``match-viewer`` ? CloudFront connects to the origin using the same protocol that the viewer used to connect to CloudFront.\n  +  ``https-only`` ? CloudFront always uses HTTPS to connect to the origin.",
 		//	                "type": "string"
@@ -1776,6 +1789,17 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 										Description: "Specifies how long, in seconds, CloudFront persists its connection to the origin. The minimum timeout is 1 second, the maximum is 120 seconds, and the default (if you don't specify otherwise) is 5 seconds.\n For more information, see [Keep-alive timeout (custom origins only)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginKeepaliveTimeout) in the *Amazon CloudFront Developer Guide*.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
+									// Property: OriginMtlsConfig
+									"origin_mtls_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ClientCertificateArn
+											"client_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
 									// Property: OriginProtocolPolicy
 									"origin_protocol_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "Specifies the protocol (HTTP or HTTPS) that CloudFront uses to connect to the origin. Valid values are:\n  +  ``http-only`` ? CloudFront always uses HTTP to connect to the origin.\n  +  ``match-viewer`` ? CloudFront connects to the origin using the same protocol that the viewer used to connect to CloudFront.\n  +  ``https-only`` ? CloudFront always uses HTTPS to connect to the origin.",
@@ -2167,6 +2191,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"cache_behaviors":                 "CacheBehaviors",
 		"cache_policy_id":                 "CachePolicyId",
 		"cached_methods":                  "CachedMethods",
+		"client_certificate_arn":          "ClientCertificateArn",
 		"cloudfront_default_certificate":  "CloudFrontDefaultCertificate",
 		"cnames":                          "CNAMEs",
 		"comment":                         "Comment",
@@ -2232,6 +2257,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"origin_groups":                   "OriginGroups",
 		"origin_id":                       "OriginId",
 		"origin_keepalive_timeout":        "OriginKeepaliveTimeout",
+		"origin_mtls_config":              "OriginMtlsConfig",
 		"origin_path":                     "OriginPath",
 		"origin_protocol_policy":          "OriginProtocolPolicy",
 		"origin_read_timeout":             "OriginReadTimeout",
