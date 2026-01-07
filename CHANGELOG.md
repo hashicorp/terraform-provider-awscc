@@ -1,8 +1,22 @@
-## 1.68.0 (Unreleased)
+## 1.68.0 (January 7, 2026)
 
 BUG FIXES:
 
 * provider: Fix handling of `provider_meta` `user_agent` values where the product name contains a forward slash ([#2959](https://github.com/hashicorp/terraform-provider-awscc/issues/2959))
+
+FEATURES:
+
+* **New Data Source:** `awscc_cases_case_rule`
+* **New Data Source:** `awscc_cases_domain`
+* **New Data Source:** `awscc_cases_domains`
+* **New Data Source:** `awscc_cases_field`
+* **New Data Source:** `awscc_cases_layout`
+* **New Data Source:** `awscc_cases_template`
+* **New Resource:** `awscc_cases_case_rule`
+* **New Resource:** `awscc_cases_domain`
+* **New Resource:** `awscc_cases_field`
+* **New Resource:** `awscc_cases_layout`
+* **New Resource:** `awscc_cases_template`
 
 ## 1.67.0 (December 17, 2025)
 
