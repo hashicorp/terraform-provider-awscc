@@ -166,7 +166,7 @@
   "properties": {
     "FieldSelectionCriteria": {
       "minLength": 0,
-      "description": "",
+      "description": "The filter expression that specifies which log events are processed by this metric filter based on system fields. Returns the ``fieldSelectionCriteria`` value if it was specified when the metric filter was created.",
       "type": "string",
       "maxLength": 2000
     },
@@ -186,7 +186,7 @@
       "maxLength": 1024
     },
     "EmitSystemFieldDimensions": {
-      "description": "",
+      "description": "The list of system fields that are emitted as additional dimensions in the generated metrics. Returns the ``emitSystemFieldDimensions`` value if it was specified when the metric filter was created.",
       "insertionOrder": false,
       "type": "array",
       "items": {

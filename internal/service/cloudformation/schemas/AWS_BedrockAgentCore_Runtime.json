@@ -480,6 +480,10 @@
     },
     "Tags": {
       "$ref": "#/definitions/TagsMap"
+    },
+    "FailureReason": {
+      "type": "string",
+      "description": "The reason for failure if the agent is in a failed state."
     }
   },
   "primaryIdentifier": [
@@ -501,7 +505,8 @@
     "/properties/Status",
     "/properties/CreatedAt",
     "/properties/LastUpdatedAt",
-    "/properties/WorkloadIdentityDetails"
+    "/properties/WorkloadIdentityDetails",
+    "/properties/FailureReason"
   ],
   "replacementStrategy": "create_then_delete",
   "handlers": {

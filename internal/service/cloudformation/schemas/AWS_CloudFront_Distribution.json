@@ -238,6 +238,10 @@
             "dualstack"
           ],
           "description": "Specifies which IP protocol CloudFront uses when connecting to your origin. If your origin uses both IPv4 and IPv6 protocols, you can choose ``dualstack`` to help optimize reliability."
+        },
+        "OriginMtlsConfig": {
+          "$ref": "#/definitions/OriginMtlsConfig",
+          "description": ""
         }
       },
       "required": [
@@ -912,6 +916,19 @@
       ],
       "type": "object",
       "description": "A complex data type for the origin groups specified for a distribution."
+    },
+    "OriginMtlsConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "ClientCertificateArn": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ClientCertificateArn"
+      ],
+      "type": "object",
+      "description": ""
     },
     "OriginShield": {
       "additionalProperties": false,

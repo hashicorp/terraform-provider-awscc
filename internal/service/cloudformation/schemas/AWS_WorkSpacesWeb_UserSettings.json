@@ -371,6 +371,9 @@
     },
     "DeepLinkAllowed": {
       "$ref": "#/definitions/EnabledType"
+    },
+    "WebAuthnAllowed": {
+      "$ref": "#/definitions/EnabledType"
     }
   },
   "required": [

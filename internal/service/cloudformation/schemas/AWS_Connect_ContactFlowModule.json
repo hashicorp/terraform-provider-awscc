@@ -25,6 +25,10 @@
         "Key",
         "Value"
       ]
+    },
+    "Enabled": {
+      "description": "Specifies whether the flow module resource is enabled for external invocation",
+      "type": "boolean"
     }
   },
   "properties": {
@@ -80,6 +84,24 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "Settings": {
+      "description": "The schema of the settings for contact flow module in JSON Schema V4 format.",
+      "type": "string",
+      "maxLength": 256000
+    },
+    "ExternalInvocationConfiguration": {
+      "description": "Defines the external invocation configuration of the flow module resource",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "$ref": "#/definitions/Enabled"
+        }
+      },
+      "required": [
+        "Enabled"
+      ]
     }
   },
   "required": [

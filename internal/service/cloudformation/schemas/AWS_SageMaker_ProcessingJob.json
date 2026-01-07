@@ -928,6 +928,7 @@
         "ec2:DescribeSubnets",
         "ec2:DescribeSecurityGroups",
         "sagemaker:StopProcessingJob",
+        "sagemaker:DeleteProcessingJob",
         "sagemaker:DescribeProcessingJob",
         "sagemaker:ListTags",
         "sagemaker:DeleteTags"

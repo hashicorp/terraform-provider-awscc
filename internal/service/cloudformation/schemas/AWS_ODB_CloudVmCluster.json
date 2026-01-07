@@ -388,6 +388,7 @@
   "handlers": {
     "create": {
       "permissions": [
+        "iam:CreateServiceLinkedRole",
         "odb:CreateCloudVmCluster",
         "odb:TagResource",
         "odb:GetCloudVmCluster",

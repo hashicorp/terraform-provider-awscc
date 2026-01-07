@@ -361,7 +361,8 @@
     },
     "read": {
       "permissions": [
-        "mediaconnect:DescribeFlow"
+        "mediaconnect:DescribeFlow",
+        "mediaconnect:ListFlows"
       ]
     },
     "update": {
@@ -373,6 +374,7 @@
     "delete": {
       "permissions": [
         "mediaconnect:DescribeFlow",
+        "mediaconnect:ListFlows",
         "mediaconnect:RemoveFlowOutput"
       ]
     },

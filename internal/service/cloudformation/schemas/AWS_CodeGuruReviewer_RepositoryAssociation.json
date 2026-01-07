@@ -83,6 +83,17 @@
       "uniqueItems": false
     }
   },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "codeguru-reviewer:TagResource",
+      "codeguru-reviewer:UntagResource"
+    ]
+  },
   "additionalProperties": false,
   "required": [
     "Name",

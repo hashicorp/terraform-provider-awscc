@@ -43,6 +43,11 @@
     "Arn": {
       "type": "string",
       "pattern": "arn:aws[a-z-]*:(billing)::[0-9]{12}:billingview/[a-zA-Z0-9/:_\\+=\\.\\-@]{0,75}[a-zA-Z0-9]"
+    },
+    "Timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time in ISO 8601 format, UTC time (YYYY-MM-DDTHH:MM:SSZ)."
     }
   },
   "properties": {
@@ -93,6 +98,18 @@
               },
               "minItems": 1,
               "maxItems": 200
+            }
+          }
+        },
+        "TimeRange": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "BeginDateInclusive": {
+              "$ref": "#/definitions/Timestamp"
+            },
+            "EndDateInclusive": {
+              "$ref": "#/definitions/Timestamp"
             }
           }
         }
@@ -154,7 +171,6 @@
     "/properties/BillingViewType"
   ],
   "createOnlyProperties": [
-    "/properties/SourceViews",
     "/properties/Description",
     "/properties/Name"
   ],
@@ -177,10 +193,12 @@
     "create": {
       "permissions": [
         "billing:CreateBillingView",
+        "billing:AssociateSourceViews",
         "billing:TagResource",
         "billing:ListTagsForResource",
         "billing:GetBillingView",
-        "billing:ListSourceViewsForBillingView"
+        "billing:ListSourceViewsForBillingView",
+        "billing:UseSourceView"
       ]
     },
     "read": {
@@ -193,10 +211,13 @@
     "update": {
       "permissions": [
         "billing:UpdateBillingView",
+        "billing:DisassociateSourceViews",
+        "billing:AssociateSourceViews",
         "billing:GetBillingView",
         "billing:ListTagsForResource",
         "billing:TagResource",
         "billing:UntagResource",
+        "billing:UseSourceView",
         "billing:ListSourceViewsForBillingView"
       ]
     },

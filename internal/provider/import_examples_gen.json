@@ -1376,7 +1376,7 @@
     {
         "resource": "awscc_dax_subnet_group",
         "generateListResource": true,
-        "identifier": ["SubnetGroupName"]
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_dms_data_migration",

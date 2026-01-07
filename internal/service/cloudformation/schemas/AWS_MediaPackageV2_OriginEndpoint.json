@@ -657,6 +657,9 @@
           "maxItems": 100,
           "minItems": 0,
           "description": "<p>The SCTE-35 message types that you want to be treated as ad markers in the output.</p>"
+        },
+        "ScteInSegments": {
+          "$ref": "#/definitions/ScteInSegments"
         }
       },
       "additionalProperties": false
@@ -694,6 +697,13 @@
         }
       },
       "additionalProperties": false
+    },
+    "ScteInSegments": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "ALL"
+      ]
     },
     "Segment": {
       "type": "object",

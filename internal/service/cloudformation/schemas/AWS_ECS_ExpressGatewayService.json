@@ -39,8 +39,7 @@
     "/properties/ServiceName",
     "/properties/Cluster",
     "/properties/InfrastructureRoleArn",
-    "/properties/Tags",
-    "/properties/ScalingTarget"
+    "/properties/Tags"
   ],
   "primaryIdentifier": [
     "/properties/ServiceArn"
