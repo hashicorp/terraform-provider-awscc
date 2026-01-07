@@ -96,9 +96,7 @@ func runtimeEndpointResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// AgentRuntimeVersion is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
@@ -326,9 +324,6 @@ func runtimeEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"target_version":             "TargetVersion",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/AgentRuntimeVersion",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

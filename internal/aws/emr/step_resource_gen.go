@@ -44,6 +44,22 @@ func stepResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EncryptionKeyArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The KMS key ARN to encrypt the logs published to the given Amazon S3 destination. When omitted, EMR falls back to cluster-level logging behavior.",
+		//	  "type": "string"
+		//	}
+		"encryption_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The KMS key ARN to encrypt the logs published to the given Amazon S3 destination. When omitted, EMR falls back to cluster-level logging behavior.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: HadoopJarStep
 		// CloudFormation resource type schema:
 		//
@@ -175,6 +191,22 @@ func stepResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: LogUri
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon S3 destination URI for log publishing. When omitted, EMR falls back to cluster-level logging behavior.",
+		//	  "type": "string"
+		//	}
+		"log_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon S3 destination URI for log publishing. When omitted, EMR falls back to cluster-level logging behavior.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -218,17 +250,19 @@ func stepResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"action_on_failure": "ActionOnFailure",
-		"args":              "Args",
-		"hadoop_jar_step":   "HadoopJarStep",
-		"jar":               "Jar",
-		"job_flow_id":       "JobFlowId",
-		"key":               "Key",
-		"main_class":        "MainClass",
-		"name":              "Name",
-		"step_id":           "Id",
-		"step_properties":   "StepProperties",
-		"value":             "Value",
+		"action_on_failure":  "ActionOnFailure",
+		"args":               "Args",
+		"encryption_key_arn": "EncryptionKeyArn",
+		"hadoop_jar_step":    "HadoopJarStep",
+		"jar":                "Jar",
+		"job_flow_id":        "JobFlowId",
+		"key":                "Key",
+		"log_uri":            "LogUri",
+		"main_class":         "MainClass",
+		"name":               "Name",
+		"step_id":            "Id",
+		"step_properties":    "StepProperties",
+		"value":              "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

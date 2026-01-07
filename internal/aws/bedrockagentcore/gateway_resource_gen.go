@@ -59,6 +59,100 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	          "minItems": 1,
 		//	          "type": "array"
 		//	        },
+		//	        "AllowedScopes": {
+		//	          "items": {
+		//	            "description": "Allowed scope value",
+		//	            "pattern": "[\\x21\\x23-\\x5B\\x5D-\\x7E]+",
+		//	            "type": "string"
+		//	          },
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
+		//	        "CustomClaims": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "Required custom claim",
+		//	            "properties": {
+		//	              "AuthorizingClaimMatchValue": {
+		//	                "additionalProperties": false,
+		//	                "description": "The value or values in the custom claim to match and relationship of match",
+		//	                "properties": {
+		//	                  "ClaimMatchOperator": {
+		//	                    "description": "The relationship between the claim field value and the value or values being matched",
+		//	                    "enum": [
+		//	                      "EQUALS",
+		//	                      "CONTAINS",
+		//	                      "CONTAINS_ANY"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "ClaimMatchValue": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "The value or values in the custom claim to match for",
+		//	                    "oneOf": [
+		//	                      {
+		//	                        "required": [
+		//	                          "MatchValueString"
+		//	                        ]
+		//	                      },
+		//	                      {
+		//	                        "required": [
+		//	                          "MatchValueStringList"
+		//	                        ]
+		//	                      }
+		//	                    ],
+		//	                    "properties": {
+		//	                      "MatchValueString": {
+		//	                        "description": "The string value to match for",
+		//	                        "pattern": "[A-Za-z0-9_.-]+",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "MatchValueStringList": {
+		//	                        "description": "The list of strings to check for a match",
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "description": "The string value to match for",
+		//	                          "pattern": "[A-Za-z0-9_.-]+",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "maxItems": 255,
+		//	                        "minItems": 1,
+		//	                        "type": "array"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "ClaimMatchOperator",
+		//	                  "ClaimMatchValue"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "InboundTokenClaimName": {
+		//	                "description": "The name of the custom claim to validate",
+		//	                "pattern": "[A-Za-z0-9_.-:]+",
+		//	                "type": "string"
+		//	              },
+		//	              "InboundTokenClaimValueType": {
+		//	                "description": "Token claim data type",
+		//	                "enum": [
+		//	                  "STRING",
+		//	                  "STRING_ARRAY"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "AuthorizingClaimMatchValue",
+		//	              "InboundTokenClaimName",
+		//	              "InboundTokenClaimValueType"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
 		//	        "DiscoveryUrl": {
 		//	          "pattern": "^.+/\\.well-known/openid-configuration$",
 		//	          "type": "string"
@@ -94,6 +188,139 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 							ElementType: types.StringType,
 							Optional:    true,
 							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeAtLeast(1),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AllowedScopes
+						"allowed_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeAtLeast(1),
+								listvalidator.ValueStringsAre(
+									stringvalidator.RegexMatches(regexp.MustCompile("[\\x21\\x23-\\x5B\\x5D-\\x7E]+"), ""),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: CustomClaims
+						"custom_claims": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AuthorizingClaimMatchValue
+									"authorizing_claim_match_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ClaimMatchOperator
+											"claim_match_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The relationship between the claim field value and the value or values being matched",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"EQUALS",
+														"CONTAINS",
+														"CONTAINS_ANY",
+													),
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: ClaimMatchValue
+											"claim_match_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: MatchValueString
+													"match_value_string": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The string value to match for",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.RegexMatches(regexp.MustCompile("[A-Za-z0-9_.-]+"), ""),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: MatchValueStringList
+													"match_value_string_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "The list of strings to check for a match",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.List{ /*START VALIDATORS*/
+															listvalidator.SizeBetween(1, 255),
+															listvalidator.ValueStringsAre(
+																stringvalidator.RegexMatches(regexp.MustCompile("[A-Za-z0-9_.-]+"), ""),
+															),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															generic.Multiset(),
+															listplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "The value or values in the custom claim to match for",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Object{ /*START VALIDATORS*/
+													fwvalidators.NotNullObject(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The value or values in the custom claim to match and relationship of match",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Object{ /*START VALIDATORS*/
+											fwvalidators.NotNullObject(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: InboundTokenClaimName
+									"inbound_token_claim_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The name of the custom claim to validate",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.RegexMatches(regexp.MustCompile("[A-Za-z0-9_.-:]+"), ""),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: InboundTokenClaimValueType
+									"inbound_token_claim_value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Token claim data type",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"STRING",
+												"STRING_ARRAY",
+											),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeAtLeast(1),
 							}, /*END VALIDATORS*/
@@ -676,40 +903,49 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allowed_audience":           "AllowedAudience",
-		"allowed_clients":            "AllowedClients",
-		"arn":                        "Arn",
-		"authorizer_configuration":   "AuthorizerConfiguration",
-		"authorizer_type":            "AuthorizerType",
-		"created_at":                 "CreatedAt",
-		"custom_jwt_authorizer":      "CustomJWTAuthorizer",
-		"description":                "Description",
-		"discovery_url":              "DiscoveryUrl",
-		"exception_level":            "ExceptionLevel",
-		"gateway_arn":                "GatewayArn",
-		"gateway_identifier":         "GatewayIdentifier",
-		"gateway_url":                "GatewayUrl",
-		"input_configuration":        "InputConfiguration",
-		"instructions":               "Instructions",
-		"interception_points":        "InterceptionPoints",
-		"interceptor":                "Interceptor",
-		"interceptor_configurations": "InterceptorConfigurations",
-		"kms_key_arn":                "KmsKeyArn",
-		"lambda":                     "Lambda",
-		"mcp":                        "Mcp",
-		"name":                       "Name",
-		"pass_request_headers":       "PassRequestHeaders",
-		"protocol_configuration":     "ProtocolConfiguration",
-		"protocol_type":              "ProtocolType",
-		"role_arn":                   "RoleArn",
-		"search_type":                "SearchType",
-		"status":                     "Status",
-		"status_reasons":             "StatusReasons",
-		"supported_versions":         "SupportedVersions",
-		"tags":                       "Tags",
-		"updated_at":                 "UpdatedAt",
-		"workload_identity_arn":      "WorkloadIdentityArn",
-		"workload_identity_details":  "WorkloadIdentityDetails",
+		"allowed_audience":               "AllowedAudience",
+		"allowed_clients":                "AllowedClients",
+		"allowed_scopes":                 "AllowedScopes",
+		"arn":                            "Arn",
+		"authorizer_configuration":       "AuthorizerConfiguration",
+		"authorizer_type":                "AuthorizerType",
+		"authorizing_claim_match_value":  "AuthorizingClaimMatchValue",
+		"claim_match_operator":           "ClaimMatchOperator",
+		"claim_match_value":              "ClaimMatchValue",
+		"created_at":                     "CreatedAt",
+		"custom_claims":                  "CustomClaims",
+		"custom_jwt_authorizer":          "CustomJWTAuthorizer",
+		"description":                    "Description",
+		"discovery_url":                  "DiscoveryUrl",
+		"exception_level":                "ExceptionLevel",
+		"gateway_arn":                    "GatewayArn",
+		"gateway_identifier":             "GatewayIdentifier",
+		"gateway_url":                    "GatewayUrl",
+		"inbound_token_claim_name":       "InboundTokenClaimName",
+		"inbound_token_claim_value_type": "InboundTokenClaimValueType",
+		"input_configuration":            "InputConfiguration",
+		"instructions":                   "Instructions",
+		"interception_points":            "InterceptionPoints",
+		"interceptor":                    "Interceptor",
+		"interceptor_configurations":     "InterceptorConfigurations",
+		"kms_key_arn":                    "KmsKeyArn",
+		"lambda":                         "Lambda",
+		"match_value_string":             "MatchValueString",
+		"match_value_string_list":        "MatchValueStringList",
+		"mcp":                            "Mcp",
+		"name":                           "Name",
+		"pass_request_headers":           "PassRequestHeaders",
+		"protocol_configuration":         "ProtocolConfiguration",
+		"protocol_type":                  "ProtocolType",
+		"role_arn":                       "RoleArn",
+		"search_type":                    "SearchType",
+		"status":                         "Status",
+		"status_reasons":                 "StatusReasons",
+		"supported_versions":             "SupportedVersions",
+		"tags":                           "Tags",
+		"updated_at":                     "UpdatedAt",
+		"workload_identity_arn":          "WorkloadIdentityArn",
+		"workload_identity_details":      "WorkloadIdentityDetails",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

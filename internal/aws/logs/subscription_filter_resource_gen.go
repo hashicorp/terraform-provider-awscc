@@ -85,7 +85,7 @@ func subscriptionFilterResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The list of system fields that are included in the log events sent to the subscription destination. Returns the ``emitSystemFields`` value if it was specified when the subscription filter was created.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -94,7 +94,7 @@ func subscriptionFilterResource(ctx context.Context) (resource.Resource, error) 
 		//	}
 		"emit_system_fields": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "",
+			Description: "The list of system fields that are included in the log events sent to the subscription destination. Returns the ``emitSystemFields`` value if it was specified when the subscription filter was created.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -106,13 +106,13 @@ func subscriptionFilterResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The filter expression that specifies which log events are processed by this subscription filter based on system fields. Returns the ``fieldSelectionCriteria`` value if it was specified when the subscription filter was created.",
 		//	  "maxLength": 2000,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"field_selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The filter expression that specifies which log events are processed by this subscription filter based on system fields. Returns the ``fieldSelectionCriteria`` value if it was specified when the subscription filter was created.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/

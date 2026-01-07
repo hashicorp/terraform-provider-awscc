@@ -1055,6 +1055,29 @@ func userSettingsResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: WebAuthnAllowed
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "Disabled",
+		//	    "Enabled"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"web_authn_allowed": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"Disabled",
+					"Enabled",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -1129,6 +1152,7 @@ func userSettingsResource(ctx context.Context) (resource.Resource, error) {
 		"visual_mode":                          "VisualMode",
 		"wallpaper":                            "Wallpaper",
 		"wallpaper_metadata":                   "WallpaperMetadata",
+		"web_authn_allowed":                    "WebAuthnAllowed",
 		"welcome_text":                         "WelcomeText",
 	})
 

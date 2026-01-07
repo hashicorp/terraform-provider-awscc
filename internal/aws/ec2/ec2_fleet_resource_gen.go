@@ -120,6 +120,9 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	            "AvailabilityZone": {
 		//	              "type": "string"
 		//	            },
+		//	            "AvailabilityZoneId": {
+		//	              "type": "string"
+		//	            },
 		//	            "BlockDeviceMappings": {
 		//	              "items": {
 		//	                "additionalProperties": false,
@@ -571,6 +574,14 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: AvailabilityZone
 								"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: AvailabilityZoneId
+								"availability_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2056,6 +2067,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"allocation_strategy":                "AllocationStrategy",
 		"allowed_instance_types":             "AllowedInstanceTypes",
 		"availability_zone":                  "AvailabilityZone",
+		"availability_zone_id":               "AvailabilityZoneId",
 		"bare_metal":                         "BareMetal",
 		"baseline_ebs_bandwidth_mbps":        "BaselineEbsBandwidthMbps",
 		"baseline_performance_factors":       "BaselinePerformanceFactors",

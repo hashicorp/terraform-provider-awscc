@@ -386,7 +386,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "Mode": {
 		//	          "default": "NONE",
-		//	          "description": "The default value is `STANDARD`. A value of `STANDARD` means that Slurm accounting is enabled.",
+		//	          "description": "The default value is `NONE`. A value of `STANDARD` means that Slurm accounting is enabled.",
 		//	          "enum": [
 		//	            "STANDARD",
 		//	            "NONE"
@@ -479,7 +479,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	      "properties": {
 		//	        "Mode": {
 		//	          "default": "NONE",
-		//	          "description": "The default value is `STANDARD`. A value of `STANDARD` means that Slurm Rest is enabled.",
+		//	          "description": "The default value is `NONE`. A value of `STANDARD` means that Slurm Rest is enabled.",
 		//	          "enum": [
 		//	            "STANDARD",
 		//	            "NONE"
@@ -515,7 +515,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Mode
 						"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The default value is `STANDARD`. A value of `STANDARD` means that Slurm accounting is enabled.",
+							Description: "The default value is `NONE`. A value of `STANDARD` means that Slurm accounting is enabled.",
 							Optional:    true,
 							Computed:    true,
 							Default:     stringdefault.StaticString("NONE"),
@@ -673,7 +673,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Mode
 						"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The default value is `STANDARD`. A value of `STANDARD` means that Slurm Rest is enabled.",
+							Description: "The default value is `NONE`. A value of `STANDARD` means that Slurm Rest is enabled.",
 							Optional:    true,
 							Computed:    true,
 							Default:     stringdefault.StaticString("NONE"),

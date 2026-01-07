@@ -35,11 +35,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Indicates whether the volume is auto-enabled for I/O operations. By default, Amazon EBS disables I/O to the volume from attached EC2 instances when it determines that a volume's data is potentially inconsistent. If the consistency of the volume is not a concern, and you prefer that the volume be made available immediately if it's impaired, you can configure the volume to automatically enable I/O.",
+		//	  "description": "Indicates whether the volume is auto-enabled for I/O operations. By default, EBS disables I/O to the volume from attached EC2 instances when it determines that a volume's data is potentially inconsistent. If the consistency of the volume is not a concern, and you prefer that the volume be made available immediately if it's impaired, you can configure the volume to automatically enable I/O.",
 		//	  "type": "boolean"
 		//	}
 		"auto_enable_io": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the volume is auto-enabled for I/O operations. By default, Amazon EBS disables I/O to the volume from attached EC2 instances when it determines that a volume's data is potentially inconsistent. If the consistency of the volume is not a concern, and you prefer that the volume be made available immediately if it's impaired, you can configure the volume to automatically enable I/O.",
+			Description: "Indicates whether the volume is auto-enabled for I/O operations. By default, EBS disables I/O to the volume from attached EC2 instances when it determines that a volume's data is potentially inconsistent. If the consistency of the volume is not a concern, and you prefer that the volume be made available immediately if it's impaired, you can configure the volume to automatically enable I/O.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -50,11 +50,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the Availability Zone in which to create the volume. For example, ``us-east-1a``.\n Either ``AvailabilityZone`` or ``AvailabilityZoneId`` must be specified, but not both.",
+		//	  "description": "The ID of the Availability Zone in which to create the volume. For example, ``us-east-1a``.\n Either ``AvailabilityZone`` or ``AvailabilityZoneId`` must be specified, but not both.\n If you are creating a volume copy, omit this parameter. The volume copy is created in the same Availability Zone as the source volume.",
 		//	  "type": "string"
 		//	}
 		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Availability Zone in which to create the volume. For example, ``us-east-1a``.\n Either ``AvailabilityZone`` or ``AvailabilityZoneId`` must be specified, but not both.",
+			Description: "The ID of the Availability Zone in which to create the volume. For example, ``us-east-1a``.\n Either ``AvailabilityZone`` or ``AvailabilityZoneId`` must be specified, but not both.\n If you are creating a volume copy, omit this parameter. The volume copy is created in the same Availability Zone as the source volume.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -65,11 +65,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The ID of the Availability Zone in which to create the volume. For example, ``use1-az1``.\n Either ``AvailabilityZone`` or ``AvailabilityZoneId`` must be specified, but not both.\n If you are creating a volume copy, omit this parameter. The volume copy is created in the same Availability Zone as the source volume.",
 		//	  "type": "string"
 		//	}
 		"availability_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The ID of the Availability Zone in which to create the volume. For example, ``use1-az1``.\n Either ``AvailabilityZone`` or ``AvailabilityZoneId`` must be specified, but not both.\n If you are creating a volume copy, omit this parameter. The volume copy is created in the same Availability Zone as the source volume.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -80,11 +80,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Indicates whether the volume should be encrypted. The effect of setting the encryption state to ``true`` depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see [Encryption by default](https://docs.aws.amazon.com/ebs/latest/userguide/work-with-ebs-encr.html#encryption-by-default) in the *Amazon EBS User Guide*.\n Encrypted Amazon EBS volumes must be attached to instances that support Amazon EBS encryption. For more information, see [Supported instance types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption-requirements.html#ebs-encryption_supported_instances).",
+		//	  "description": "Indicates whether the volume should be encrypted. The effect of setting the encryption state to ``true`` depends on the volume origin (new, from a snapshot, or from an existing volume), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see [Encryption by default](https://docs.aws.amazon.com/ebs/latest/userguide/work-with-ebs-encr.html#encryption-by-default) in the *Amazon EBS User Guide*.\n If you are creating a volume copy, omit this parameter. The volume is automatically encrypted with the same KMS key as the source volume. You can't copy unencrypted volumes.",
 		//	  "type": "boolean"
 		//	}
 		"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the volume should be encrypted. The effect of setting the encryption state to ``true`` depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see [Encryption by default](https://docs.aws.amazon.com/ebs/latest/userguide/work-with-ebs-encr.html#encryption-by-default) in the *Amazon EBS User Guide*.\n Encrypted Amazon EBS volumes must be attached to instances that support Amazon EBS encryption. For more information, see [Supported instance types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption-requirements.html#ebs-encryption_supported_instances).",
+			Description: "Indicates whether the volume should be encrypted. The effect of setting the encryption state to ``true`` depends on the volume origin (new, from a snapshot, or from an existing volume), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see [Encryption by default](https://docs.aws.amazon.com/ebs/latest/userguide/work-with-ebs-encr.html#encryption-by-default) in the *Amazon EBS User Guide*.\n If you are creating a volume copy, omit this parameter. The volume is automatically encrypted with the same KMS key as the source volume. You can't copy unencrypted volumes.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -110,11 +110,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The identifier of the kms-key-long to use for Amazon EBS encryption. If ``KmsKeyId`` is specified, the encrypted state must be ``true``.\n If you omit this property and your account is enabled for encryption by default, or *Encrypted* is set to ``true``, then the volume is encrypted using the default key specified for your account. If your account does not have a default key, then the volume is encrypted using the aws-managed-key.\n Alternatively, if you want to specify a different key, you can specify one of the following:\n  +  Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.\n  +  Key alias. Specify the alias for the key, prefixed with ``alias/``. For example, for a key with the alias ``my_cmk``, use ``alias/my_cmk``. Or to specify the aws-managed-key, use ``alias/aws/ebs``.\n  +  Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.\n  +  Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.",
+		//	  "description": "The identifier of the kms-key-long to use for Amazon EBS encryption. If ``KmsKeyId`` is specified, the encrypted state must be ``true``.\n If you omit this property and your account is enabled for encryption by default, or *Encrypted* is set to ``true``, then the volume is encrypted using the default key specified for your account. If your account does not have a default key, then the volume is encrypted using the aws-managed-key.\n Alternatively, if you want to specify a different key, you can specify one of the following:\n  +  Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.\n  +  Key alias. Specify the alias for the key, prefixed with ``alias/``. For example, for a key with the alias ``my_cmk``, use ``alias/my_cmk``. Or to specify the aws-managed-key, use ``alias/aws/ebs``.\n  +  Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.\n  +  Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.\n  \n If you are creating a volume copy, omit this parameter. The volume is automatically encrypted with the same KMS key as the source volume. You can't copy unencrypted volumes.",
 		//	  "type": "string"
 		//	}
 		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the kms-key-long to use for Amazon EBS encryption. If ``KmsKeyId`` is specified, the encrypted state must be ``true``.\n If you omit this property and your account is enabled for encryption by default, or *Encrypted* is set to ``true``, then the volume is encrypted using the default key specified for your account. If your account does not have a default key, then the volume is encrypted using the aws-managed-key.\n Alternatively, if you want to specify a different key, you can specify one of the following:\n  +  Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.\n  +  Key alias. Specify the alias for the key, prefixed with ``alias/``. For example, for a key with the alias ``my_cmk``, use ``alias/my_cmk``. Or to specify the aws-managed-key, use ``alias/aws/ebs``.\n  +  Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.\n  +  Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.",
+			Description: "The identifier of the kms-key-long to use for Amazon EBS encryption. If ``KmsKeyId`` is specified, the encrypted state must be ``true``.\n If you omit this property and your account is enabled for encryption by default, or *Encrypted* is set to ``true``, then the volume is encrypted using the default key specified for your account. If your account does not have a default key, then the volume is encrypted using the aws-managed-key.\n Alternatively, if you want to specify a different key, you can specify one of the following:\n  +  Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.\n  +  Key alias. Specify the alias for the key, prefixed with ``alias/``. For example, for a key with the alias ``my_cmk``, use ``alias/my_cmk``. Or to specify the aws-managed-key, use ``alias/aws/ebs``.\n  +  Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.\n  +  Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.\n  \n If you are creating a volume copy, omit this parameter. The volume is automatically encrypted with the same KMS key as the source volume. You can't copy unencrypted volumes.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -140,11 +140,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the Outpost.",
+		//	  "description": "The Amazon Resource Name (ARN) of the Outpost on which to create the volume.\n If you intend to use a volume with an instance running on an outpost, then you must create the volume on the same outpost as the instance. You can't use a volume created in an AWS Region with an instance on an AWS outpost, or the other way around.",
 		//	  "type": "string"
 		//	}
 		"outpost_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the Outpost.",
+			Description: "The Amazon Resource Name (ARN) of the Outpost on which to create the volume.\n If you intend to use a volume with an instance running on an outpost, then you must create the volume on the same outpost as the instance. You can't use a volume created in an AWS Region with an instance on an AWS outpost, or the other way around.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -155,11 +155,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. If you specify a snapshot, the default is the snapshot size, and you can specify a volume size that is equal to or larger than the snapshot size.\n Valid sizes:\n  +  gp2: ``1 - 16,384`` GiB\n  +  gp3: ``1 - 65,536`` GiB\n  +  io1: ``4 - 16,384`` GiB\n  +  io2: ``4 - 65,536`` GiB\n  +  st1 and sc1: ``125 - 16,384`` GiB\n  +  standard: ``1 - 1024`` GiB",
+		//	  "description": "The size of the volume, in GiBs.\n  +  Required for new empty volumes.\n  +  Optional for volumes created from snapshots and volume copies. In this case, the size defaults to the size of the snapshot or source volume. You can optionally specify a size that is equal to or larger than the size of the source snapshot or volume.\n  \n Supported volume sizes:\n  +  gp2: ``1 - 16,384`` GiB\n  +  gp3: ``1 - 65,536`` GiB\n  +  io1: ``4 - 16,384`` GiB\n  +  io2: ``4 - 65,536`` GiB\n  +  st1 and sc1: ``125 - 16,384`` GiB\n  +  standard: ``1 - 1024`` GiB",
 		//	  "type": "integer"
 		//	}
 		"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. If you specify a snapshot, the default is the snapshot size, and you can specify a volume size that is equal to or larger than the snapshot size.\n Valid sizes:\n  +  gp2: ``1 - 16,384`` GiB\n  +  gp3: ``1 - 65,536`` GiB\n  +  io1: ``4 - 16,384`` GiB\n  +  io2: ``4 - 65,536`` GiB\n  +  st1 and sc1: ``125 - 16,384`` GiB\n  +  standard: ``1 - 1024`` GiB",
+			Description: "The size of the volume, in GiBs.\n  +  Required for new empty volumes.\n  +  Optional for volumes created from snapshots and volume copies. In this case, the size defaults to the size of the snapshot or source volume. You can optionally specify a size that is equal to or larger than the size of the source snapshot or volume.\n  \n Supported volume sizes:\n  +  gp2: ``1 - 16,384`` GiB\n  +  gp3: ``1 - 65,536`` GiB\n  +  io1: ``4 - 16,384`` GiB\n  +  io2: ``4 - 65,536`` GiB\n  +  st1 and sc1: ``125 - 16,384`` GiB\n  +  standard: ``1 - 1024`` GiB",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -170,11 +170,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The snapshot from which to create the volume. You must specify either a snapshot ID or a volume size.",
+		//	  "description": "The snapshot from which to create the volume. Only specify to create a volume from a snapshot. To create a new empty volume, omit this parameter and specify a value for ``Size`` instead. To create a volume copy, omit this parameter and specify ``SourceVolumeId`` instead.",
 		//	  "type": "string"
 		//	}
 		"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The snapshot from which to create the volume. You must specify either a snapshot ID or a volume size.",
+			Description: "The snapshot from which to create the volume. Only specify to create a volume from a snapshot. To create a new empty volume, omit this parameter and specify a value for ``Size`` instead. To create a volume copy, omit this parameter and specify ``SourceVolumeId`` instead.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -185,11 +185,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The ID of the source EBS volume to copy. When specified, the volume is created as an exact copy of the specified volume. Only specify to create a volume copy. To create a new empty volume or to create a volume from a snapshot, omit this parameter,",
 		//	  "type": "string"
 		//	}
 		"source_volume_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The ID of the source EBS volume to copy. When specified, the volume is created as an exact copy of the specified volume. Only specify to create a volume copy. To create a new empty volume or to create a volume from a snapshot, omit this parameter,",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -309,11 +309,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The volume type. This parameter can be one of the following values:\n  +  General Purpose SSD: ``gp2`` | ``gp3``\n  +  Provisioned IOPS SSD: ``io1`` | ``io2``\n  +  Throughput Optimized HDD: ``st1``\n  +  Cold HDD: ``sc1``\n  +  Magnetic: ``standard``\n  \n For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html).\n Default: ``gp2``",
+		//	  "description": "The volume type. This parameter can be one of the following values:\n  +  General Purpose SSD: ``gp2`` | ``gp3``\n  +  Provisioned IOPS SSD: ``io1`` | ``io2``\n  +  Throughput Optimized HDD: ``st1``\n  +  Cold HDD: ``sc1``\n  +  Magnetic: ``standard``\n  \n  Throughput Optimized HDD (``st1``) and Cold HDD (``sc1``) volumes can't be used as boot volumes.\n  For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html) in the *Amazon EBS User Guide*.\n Default: ``gp2``",
 		//	  "type": "string"
 		//	}
 		"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The volume type. This parameter can be one of the following values:\n  +  General Purpose SSD: ``gp2`` | ``gp3``\n  +  Provisioned IOPS SSD: ``io1`` | ``io2``\n  +  Throughput Optimized HDD: ``st1``\n  +  Cold HDD: ``sc1``\n  +  Magnetic: ``standard``\n  \n For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html).\n Default: ``gp2``",
+			Description: "The volume type. This parameter can be one of the following values:\n  +  General Purpose SSD: ``gp2`` | ``gp3``\n  +  Provisioned IOPS SSD: ``io1`` | ``io2``\n  +  Throughput Optimized HDD: ``st1``\n  +  Cold HDD: ``sc1``\n  +  Magnetic: ``standard``\n  \n  Throughput Optimized HDD (``st1``) and Cold HDD (``sc1``) volumes can't be used as boot volumes.\n  For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html) in the *Amazon EBS User Guide*.\n Default: ``gp2``",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -332,7 +332,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Specifies an Amazon Elastic Block Store (Amazon EBS) volume.\n When you use CFNlong to update an Amazon EBS volume that modifies ``Iops``, ``Size``, or ``VolumeType``, there is a cooldown period before another operation can occur. This can cause your stack to report being in ``UPDATE_IN_PROGRESS`` or ``UPDATE_ROLLBACK_IN_PROGRESS`` for long periods of time.\n Amazon EBS does not support sizing down an Amazon EBS volume. CFNlong does not attempt to modify an Amazon EBS volume to a smaller size on rollback.\n Some common scenarios when you might encounter a cooldown period for Amazon EBS include:\n  +  You successfully update an Amazon EBS volume and the update succeeds. When you attempt another update within the cooldown window, that update will be subject to a cooldown period.\n  +  You successfully update an Amazon EBS volume and the update succeeds but another change in your ``update-stack`` call fails. The rollback will be subject to a cooldown period.\n  \n For more information, see [Requirements for EBS volume modifications](https://docs.aws.amazon.com/ebs/latest/userguide/modify-volume-requirements.html).\n  *DeletionPolicy attribute* \n To control how CFNlong handles the volume when the stack is deleted, set a deletion policy for your volume. You can choose to retain the volume, to delete the volume, or to create a snapshot of the volume. For more information, see [DeletionPolicy attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html).\n  If you set a deletion policy that creates a snapshot, all tags on the volume are included in the snapshot.",
+		Description: "Specifies an Amazon Elastic Block Store (Amazon EBS) volume. You can create an empty volume, a volume from a snapshot, or a volume copy from an existing source volume.\n   +  When you use CFNlong to update an Amazon EBS volume that modifies ``Iops``, ``Size``, or ``VolumeType``, there is a cooldown period before another operation can occur. This can cause your stack to report being in ``UPDATE_IN_PROGRESS`` or ``UPDATE_ROLLBACK_IN_PROGRESS`` for long periods of time. Some common scenarios when you might encounter a cooldown period for Amazon EBS include:\n  +  You successfully update an Amazon EBS volume and the update succeeds. When you attempt another update within the cooldown window, that update will be subject to a cooldown period.\n  +  You successfully update an Amazon EBS volume and the update succeeds but another change in your ``update-stack`` call fails. The rollback will be subject to a cooldown period.\n  \n For more information, see [Requirements for EBS volume modifications](https://docs.aws.amazon.com/ebs/latest/userguide/modify-volume-requirements.html).\n  +  Amazon EBS does not support sizing down an Amazon EBS volume. CFNlong does not attempt to modify an Amazon EBS volume to a smaller size on rollback.\n  \n   *DeletionPolicy attribute* \n To control how CFNlong handles the volume when the stack is deleted, set a deletion policy for your volume. You can choose to retain the volume, to delete the volume, or to create a snapshot of the volume. For more information, see [DeletionPolicy attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html).\n  If you set a deletion policy that creates a snapshot, all tags on the volume are included in the snapshot.",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -289,7 +289,10 @@ func aIPromptResource(ctx context.Context) (resource.Resource, error) {
 		//	    "EMAIL_RESPONSE",
 		//	    "EMAIL_OVERVIEW",
 		//	    "EMAIL_GENERATIVE_ANSWER",
-		//	    "EMAIL_QUERY_REFORMULATION"
+		//	    "EMAIL_QUERY_REFORMULATION",
+		//	    "ORCHESTRATION",
+		//	    "NOTE_TAKING",
+		//	    "CASE_SUMMARIZATION"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -306,6 +309,9 @@ func aIPromptResource(ctx context.Context) (resource.Resource, error) {
 					"EMAIL_OVERVIEW",
 					"EMAIL_GENERATIVE_ANSWER",
 					"EMAIL_QUERY_REFORMULATION",
+					"ORCHESTRATION",
+					"NOTE_TAKING",
+					"CASE_SUMMARIZATION",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

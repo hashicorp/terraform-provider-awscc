@@ -809,6 +809,19 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	                "description": "Specifies how long, in seconds, CloudFront persists its connection to the origin. The minimum timeout is 1 second, the maximum is 120 seconds, and the default (if you don't specify otherwise) is 5 seconds.\n For more information, see [Keep-alive timeout (custom origins only)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginKeepaliveTimeout) in the *Amazon CloudFront Developer Guide*.",
 		//	                "type": "integer"
 		//	              },
+		//	              "OriginMtlsConfig": {
+		//	                "additionalProperties": false,
+		//	                "description": "",
+		//	                "properties": {
+		//	                  "ClientCertificateArn": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "ClientCertificateArn"
+		//	                ],
+		//	                "type": "object"
+		//	              },
 		//	              "OriginProtocolPolicy": {
 		//	                "description": "Specifies the protocol (HTTP or HTTPS) that CloudFront uses to connect to the origin. Valid values are:\n  +  ``http-only`` ? CloudFront always uses HTTP to connect to the origin.\n  +  ``match-viewer`` ? CloudFront connects to the origin using the same protocol that the viewer used to connect to CloudFront.\n  +  ``https-only`` ? CloudFront always uses HTTPS to connect to the origin.",
 		//	                "type": "string"
@@ -2369,6 +2382,28 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
+									// Property: OriginMtlsConfig
+									"origin_mtls_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ClientCertificateArn
+											"client_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
 									// Property: OriginProtocolPolicy
 									"origin_protocol_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "Specifies the protocol (HTTP or HTTPS) that CloudFront uses to connect to the origin. Valid values are:\n  +  ``http-only`` ? CloudFront always uses HTTP to connect to the origin.\n  +  ``match-viewer`` ? CloudFront connects to the origin using the same protocol that the viewer used to connect to CloudFront.\n  +  ``https-only`` ? CloudFront always uses HTTPS to connect to the origin.",
@@ -3080,6 +3115,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"cache_behaviors":                 "CacheBehaviors",
 		"cache_policy_id":                 "CachePolicyId",
 		"cached_methods":                  "CachedMethods",
+		"client_certificate_arn":          "ClientCertificateArn",
 		"cloudfront_default_certificate":  "CloudFrontDefaultCertificate",
 		"cnames":                          "CNAMEs",
 		"comment":                         "Comment",
@@ -3145,6 +3181,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"origin_groups":                   "OriginGroups",
 		"origin_id":                       "OriginId",
 		"origin_keepalive_timeout":        "OriginKeepaliveTimeout",
+		"origin_mtls_config":              "OriginMtlsConfig",
 		"origin_path":                     "OriginPath",
 		"origin_protocol_policy":          "OriginProtocolPolicy",
 		"origin_read_timeout":             "OriginReadTimeout",

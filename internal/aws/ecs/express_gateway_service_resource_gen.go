@@ -1018,7 +1018,6 @@ func expressGatewayServiceResource(ctx context.Context) (resource.Resource, erro
 			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// ScalingTarget is a write-only property.
 		}, /*END ATTRIBUTE*/

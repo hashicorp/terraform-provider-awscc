@@ -13,6 +13,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -85,6 +87,45 @@ func contactFlowModuleResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ExternalInvocationConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Defines the external invocation configuration of the flow module resource",
+		//	  "properties": {
+		//	    "Enabled": {
+		//	      "description": "Specifies whether the flow module resource is enabled for external invocation",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Enabled"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"external_invocation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether the flow module resource is enabled for external invocation",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Bool{ /*START VALIDATORS*/
+						fwvalidators.NotNullBool(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Defines the external invocation configuration of the flow module resource",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -120,6 +161,25 @@ func contactFlowModuleResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.LengthBetween(1, 127),
 				stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
 			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Settings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The schema of the settings for contact flow module in JSON Schema V4 format.",
+		//	  "maxLength": 256000,
+		//	  "type": "string"
+		//	}
+		"settings": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The schema of the settings for contact flow module in JSON Schema V4 format.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(256000),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
@@ -258,16 +318,19 @@ func contactFlowModuleResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"contact_flow_module_arn": "ContactFlowModuleArn",
-		"content":                 "Content",
-		"description":             "Description",
-		"instance_arn":            "InstanceArn",
-		"key":                     "Key",
-		"name":                    "Name",
-		"state":                   "State",
-		"status":                  "Status",
-		"tags":                    "Tags",
-		"value":                   "Value",
+		"contact_flow_module_arn":           "ContactFlowModuleArn",
+		"content":                           "Content",
+		"description":                       "Description",
+		"enabled":                           "Enabled",
+		"external_invocation_configuration": "ExternalInvocationConfiguration",
+		"instance_arn":                      "InstanceArn",
+		"key":                               "Key",
+		"name":                              "Name",
+		"settings":                          "Settings",
+		"state":                             "State",
+		"status":                            "Status",
+		"tags":                              "Tags",
+		"value":                             "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

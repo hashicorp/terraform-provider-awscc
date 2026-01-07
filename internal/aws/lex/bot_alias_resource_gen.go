@@ -38,11 +38,13 @@ func botAliasResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the bot alias.",
 		//	  "maxLength": 1000,
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The Amazon Resource Name (ARN) of the bot alias.",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -352,7 +354,6 @@ func botAliasResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// BotAliasTags is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: BotId
 		// CloudFormation resource type schema:
@@ -781,7 +782,7 @@ func botAliasResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "A Bot Alias enables you to change the version of a bot without updating applications that use the bot",
+		Description: "Resource Type definition for a Bot Alias, which enables you to change the version of a bot without updating applications that use the bot",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -835,9 +836,6 @@ func botAliasResource(ctx context.Context) (resource.Resource, error) {
 		"value":                       "Value",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/BotAliasTags",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

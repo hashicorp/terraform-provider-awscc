@@ -40,6 +40,18 @@ func subnetGroupResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"subnet_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetGroupName
 		// CloudFormation resource type schema:
 		//
@@ -80,7 +92,7 @@ func subnetGroupResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource type definition for AWS::DAX::SubnetGroup",
+		Description: "Resource Type definition for AWS::DAX::SubnetGroup",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -91,12 +103,13 @@ func subnetGroupResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
-			Name:              "subnet_group_name",
+			Name:              "id",
 			RequiredForImport: true,
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"description":       "Description",
+		"subnet_group_id":   "Id",
 		"subnet_group_name": "SubnetGroupName",
 		"subnet_ids":        "SubnetIds",
 	})
