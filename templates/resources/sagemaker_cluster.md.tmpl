@@ -21,6 +21,11 @@ To create a SageMaker HyperPod Cluster resource with an existing EKS cluster as 
 
 {{ tffile (printf "examples/resources/%s/sagemaker_cluster_eks.tf" .Name)}}
 
+### EKS with Karpenter Autoscaling
+To create a SageMaker HyperPod Cluster with EKS orchestration and Karpenter-based autoscaling enabled.
+
+{{ tffile (printf "examples/resources/%s/sagemaker_cluster_eks_autoscaling.tf" .Name)}}
+
 {{ .SchemaMarkdown | trimspace }}
 {{- if or .HasImport .HasImportIDConfig .HasImportIdentityConfig }}
 
