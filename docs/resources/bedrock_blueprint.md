@@ -11,8 +11,8 @@ Definition of AWS::Bedrock::Blueprint Resource Type
 
 ## Example Usage
 
-### Custom Blueprints for documents
-Create a custom blueprint for intelligent document processing with Bedrock Data Automation
+### Custom Blueprints for Documents
+Create a custom blueprint for intelligent document processing with Bedrock Data Automation.
 ```terraform
 resource "awscc_bedrock_blueprint" "example" {
   blueprint_name = "example-blueprint"

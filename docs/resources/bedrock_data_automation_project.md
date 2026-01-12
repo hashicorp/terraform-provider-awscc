@@ -11,8 +11,8 @@ Definition of AWS::Bedrock::DataAutomationProject Resource Type
 
 ## Example Usage
 
-### Standard output
-Create a Bedrock Data Automation project with standard output using the document modality
+### Standard Output
+Create a Bedrock Data Automation project with standard output using the document modality.
 ```terraform
 resource "awscc_bedrock_data_automation_project" "example" {
   project_name        = "example-project"
@@ -50,8 +50,8 @@ resource "awscc_bedrock_data_automation_project" "example" {
 }
 ```
 
-### Custom output
-Create a Bedrock Data Automation project with custom output using the document modality
+### Custom Output
+Create a Bedrock Data Automation project with custom output using the document modality.
 ```terraform
 resource "awscc_bedrock_data_automation_project" "example" {
   project_name        = "example-project"
