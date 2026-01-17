@@ -1,24 +1,44 @@
 ---
-page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
-subcategory: ""
+subcategory: "Cases"
+layout: "awscc"
+page_title: "AWS Cloud Control: awscc_cases_case_rule"
 description: |-
-{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+  Manages an AWS Cases cases case rule.
 ---
 
-# {{.Name}} ({{.Type}})
+# Resource: awscc_cases_case_rule
 
-{{ .Description | trimspace }}
+Manages an AWS Cases cases case rule.
 
 ## Example Usage
 
-### Basic Cases Case Rule
-
-{{ tffile (printf "examples/resources/%s/cases_case_rule.tf" .Name)}}
+{{ tffile (printf "examples/resources/%s/cases_case_rule.tf" .Name) }}
 
 {{ .SchemaMarkdown | trimspace }}
+{{- if or .HasImport .HasImportIDConfig .HasImportIdentityConfig }}
 
 ## Import
 
 Import is supported using the following syntax:
+{{- end }}
+{{- if .HasImportIdentityConfig }}
 
-{{ codefile "shell" (printf "examples/resources/%s/import.sh" .Name) }}
+In Terraform v1.12.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `identity` attribute, for example:
+
+{{tffile .ImportIdentityConfigFile }}
+
+{{ .IdentitySchemaMarkdown | trimspace }}
+{{- end }}
+{{- if .HasImportIDConfig }}
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+{{tffile .ImportIDConfigFile }}
+{{- end }}
+{{- if .HasImport }}
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
+{{codefile "shell" .ImportFile }}
+
+{{- end }}

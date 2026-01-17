@@ -1,24 +1,44 @@
 ---
-page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
-subcategory: ""
+subcategory: "SSM"
+layout: "awscc"
+page_title: "AWS Cloud Control: awscc_ssm_maintenance_window_task"
 description: |-
-{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+  Manages an AWS SSM ssm maintenance window task.
 ---
 
-# {{.Name}} ({{.Type}})
+# Resource: awscc_ssm_maintenance_window_task
 
-{{ .Description | trimspace }}
+Manages an AWS SSM ssm maintenance window task.
 
 ## Example Usage
 
-### Basic SSM Maintenance Window Task
-
-{{ tffile (printf "examples/resources/%s/ssm_maintenance_window_task.tf" .Name)}}
+{{ tffile (printf "examples/resources/%s/ssm_maintenance_window_task.tf" .Name) }}
 
 {{ .SchemaMarkdown | trimspace }}
+{{- if or .HasImport .HasImportIDConfig .HasImportIdentityConfig }}
 
 ## Import
 
 Import is supported using the following syntax:
+{{- end }}
+{{- if .HasImportIdentityConfig }}
 
-{{ codefile "shell" (printf "examples/resources/%s/import.sh" .Name) }}
+In Terraform v1.12.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `identity` attribute, for example:
+
+{{tffile .ImportIdentityConfigFile }}
+
+{{ .IdentitySchemaMarkdown | trimspace }}
+{{- end }}
+{{- if .HasImportIDConfig }}
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+{{tffile .ImportIDConfigFile }}
+{{- end }}
+{{- if .HasImport }}
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
+{{codefile "shell" .ImportFile }}
+
+{{- end }}
