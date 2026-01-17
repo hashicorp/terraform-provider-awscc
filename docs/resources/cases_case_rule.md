@@ -1,14 +1,13 @@
 ---
-subcategory: "Cases"
-layout: "awscc"
-page_title: "AWS Cloud Control: awscc_cases_case_rule"
+page_title: "awscc_cases_case_rule Resource - terraform-provider-awscc"
+subcategory: ""
 description: |-
-  Manages an AWS Cases cases case rule.
+  A case rule. In the Amazon Connect admin website, case rules are known as case field conditions. Case rules are used to define the situations under which fields should have certain effects (such as required).
 ---
 
-# Resource: awscc_cases_case_rule
+# awscc_cases_case_rule (Resource)
 
-Manages an AWS Cases cases case rule.
+A case rule. In the Amazon Connect admin website, case rules are known as case field conditions. Case rules are used to define the situations under which fields should have certain effects (such as required).
 
 ## Example Usage
 

@@ -1,14 +1,13 @@
 ---
-subcategory: "SSM"
-layout: "awscc"
-page_title: "AWS Cloud Control: awscc_ssm_maintenance_window_target"
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
 description: |-
-  Manages an AWS SSM ssm maintenance window target.
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
 ---
 
-# Resource: awscc_ssm_maintenance_window_target
+# {{.Name}} ({{.Type}})
 
-Manages an AWS SSM ssm maintenance window target.
+{{ .Description | trimspace }}
 
 ## Example Usage
 

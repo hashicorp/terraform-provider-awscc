@@ -1,14 +1,13 @@
 ---
-subcategory: "Lambda"
-layout: "awscc"
-page_title: "AWS Cloud Control: awscc_lambda_capacity_provider"
+page_title: "awscc_lambda_capacity_provider Resource - terraform-provider-awscc"
+subcategory: ""
 description: |-
-  Manages an AWS Lambda Capacity Provider.
+  Resource Type definition for AWS::Lambda::CapacityProvider
 ---
 
-# Resource: awscc_lambda_capacity_provider
+# awscc_lambda_capacity_provider (Resource)
 
-Manages an AWS Lambda Capacity Provider.
+Resource Type definition for AWS::Lambda::CapacityProvider
 
 ## Example Usage
 

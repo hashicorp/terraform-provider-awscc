@@ -1,14 +1,13 @@
 ---
-subcategory: "Observability Admin"
-layout: "awscc"
-page_title: "AWS Cloud Control: awscc_observabilityadmin_s3_table_integration"
+page_title: "awscc_observabilityadmin_s3_table_integration Resource - terraform-provider-awscc"
+subcategory: ""
 description: |-
-  Manages an AWS Observability Admin S3 Table Integration.
+  Resource Type definition for a CloudWatch Observability Admin S3 Table Integration.
 ---
 
-# Resource: awscc_observabilityadmin_s3_table_integration
+# awscc_observabilityadmin_s3_table_integration (Resource)
 
-Manages an AWS Observability Admin S3 Table Integration.
+Resource Type definition for a CloudWatch Observability Admin S3 Table Integration.
 
 ## Example Usage
 

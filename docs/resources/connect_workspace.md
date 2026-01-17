@@ -1,14 +1,13 @@
 ---
-subcategory: "Connect"
-layout: "awscc"
-page_title: "AWS Cloud Control: awscc_connect_workspace"
+page_title: "awscc_connect_workspace Resource - terraform-provider-awscc"
+subcategory: ""
 description: |-
-  Manages an AWS Connect connect workspace.
+  Resource Type definition for AWS::Connect::Workspace
 ---
 
-# Resource: awscc_connect_workspace
+# awscc_connect_workspace (Resource)
 
-Manages an AWS Connect connect workspace.
+Resource Type definition for AWS::Connect::Workspace
 
 ## Example Usage
 

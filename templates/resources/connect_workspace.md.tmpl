@@ -1,14 +1,13 @@
 ---
-subcategory: "Connect"
-layout: "awscc"
-page_title: "AWS Cloud Control: awscc_connect_workspace"
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
 description: |-
-  Manages an AWS Connect connect workspace.
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
 ---
 
-# Resource: awscc_connect_workspace
+# {{.Name}} ({{.Type}})
 
-Manages an AWS Connect connect workspace.
+{{ .Description | trimspace }}
 
 ## Example Usage
 

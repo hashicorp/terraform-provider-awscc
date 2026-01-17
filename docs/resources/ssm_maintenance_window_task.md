@@ -1,14 +1,13 @@
 ---
-subcategory: "SSM"
-layout: "awscc"
-page_title: "AWS Cloud Control: awscc_ssm_maintenance_window_task"
+page_title: "awscc_ssm_maintenance_window_task Resource - terraform-provider-awscc"
+subcategory: ""
 description: |-
-  Manages an AWS SSM ssm maintenance window task.
+  Resource Type definition for AWS::SSM::MaintenanceWindowTask
 ---
 
-# Resource: awscc_ssm_maintenance_window_task
+# awscc_ssm_maintenance_window_task (Resource)
 
-Manages an AWS SSM ssm maintenance window task.
+Resource Type definition for AWS::SSM::MaintenanceWindowTask
 
 ## Example Usage
 

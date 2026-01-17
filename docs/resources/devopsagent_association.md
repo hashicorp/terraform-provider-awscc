@@ -1,14 +1,13 @@
 ---
-subcategory: "DevOps Agent"
-layout: "awscc"
-page_title: "AWS Cloud Control: awscc_devopsagent_association"
+page_title: "awscc_devopsagent_association Resource - terraform-provider-awscc"
+subcategory: ""
 description: |-
-  Manages an AWS DevOps Agent Association.
+  Resource Type definition for AWS::DevOpsAgent::Association defining how the AgentSpace interacts with external services like GitHub, Slack, AWS accounts, and others.
 ---
 
-# Resource: awscc_devopsagent_association
+# awscc_devopsagent_association (Resource)
 
-Manages an AWS DevOps Agent Association.
+Resource Type definition for AWS::DevOpsAgent::Association defining how the AgentSpace interacts with external services like GitHub, Slack, AWS accounts, and others.
 
 ## Example Usage
 

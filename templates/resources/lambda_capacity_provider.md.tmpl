@@ -1,14 +1,13 @@
 ---
-subcategory: "Lambda"
-layout: "awscc"
-page_title: "AWS Cloud Control: awscc_lambda_capacity_provider"
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
 description: |-
-  Manages an AWS Lambda Capacity Provider.
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
 ---
 
-# Resource: awscc_lambda_capacity_provider
+# {{.Name}} ({{.Type}})
 
-Manages an AWS Lambda Capacity Provider.
+{{ .Description | trimspace }}
 
 ## Example Usage
 

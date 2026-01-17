@@ -1,14 +1,13 @@
 ---
-subcategory: "Cases"
-layout: "awscc"
-page_title: "AWS Cloud Control: awscc_cases_domain"
+page_title: "awscc_cases_domain Resource - terraform-provider-awscc"
+subcategory: ""
 description: |-
-  Manages an AWS Cases Domain.
+  A domain, which is a container for all case data, such as cases, fields, templates and layouts. Each Amazon Connect instance can be associated with only one Cases domain.
 ---
 
-# Resource: awscc_cases_domain
+# awscc_cases_domain (Resource)
 
-Manages an AWS Cases Domain.
+A domain, which is a container for all case data, such as cases, fields, templates and layouts. Each Amazon Connect instance can be associated with only one Cases domain.
 
 ## Example Usage
 

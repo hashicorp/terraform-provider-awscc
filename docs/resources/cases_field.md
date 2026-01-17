@@ -1,14 +1,13 @@
 ---
-subcategory: "Cases"
-layout: "awscc"
-page_title: "AWS Cloud Control: awscc_cases_field"
+page_title: "awscc_cases_field Resource - terraform-provider-awscc"
+subcategory: ""
 description: |-
-  Manages an AWS Cases cases field.
+  A field in the Cases domain. This field is used to define the case object model (that is, defines what data can be captured on cases) in a Cases domain.
 ---
 
-# Resource: awscc_cases_field
+# awscc_cases_field (Resource)
 
-Manages an AWS Cases cases field.
+A field in the Cases domain. This field is used to define the case object model (that is, defines what data can be captured on cases) in a Cases domain.
 
 ## Example Usage
 

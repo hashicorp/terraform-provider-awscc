@@ -1,14 +1,13 @@
 ---
-subcategory: "Observability Admin"
-layout: "awscc"
-page_title: "AWS Cloud Control: awscc_observabilityadmin_s3_table_integration"
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
 description: |-
-  Manages an AWS Observability Admin S3 Table Integration.
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
 ---
 
-# Resource: awscc_observabilityadmin_s3_table_integration
+# {{.Name}} ({{.Type}})
 
-Manages an AWS Observability Admin S3 Table Integration.
+{{ .Description | trimspace }}
 
 ## Example Usage
 

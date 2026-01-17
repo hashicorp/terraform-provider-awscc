@@ -1,14 +1,13 @@
 ---
-subcategory: "Cases"
-layout: "awscc"
-page_title: "AWS Cloud Control: awscc_cases_layout"
+page_title: "awscc_cases_layout Resource - terraform-provider-awscc"
+subcategory: ""
 description: |-
-  Manages an AWS Cases cases layout.
+  A layout in the Cases domain. Layouts define the following configuration in the top section and More Info tab of the Cases user interface: Fields to display to the users and Field ordering.
 ---
 
-# Resource: awscc_cases_layout
+# awscc_cases_layout (Resource)
 
-Manages an AWS Cases cases layout.
+A layout in the Cases domain. Layouts define the following configuration in the top section and More Info tab of the Cases user interface: Fields to display to the users and Field ordering.
 
 ## Example Usage
 

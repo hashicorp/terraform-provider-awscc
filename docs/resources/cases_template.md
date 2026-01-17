@@ -1,14 +1,13 @@
 ---
-subcategory: "Cases"
-layout: "awscc"
-page_title: "AWS Cloud Control: awscc_cases_template"
+page_title: "awscc_cases_template Resource - terraform-provider-awscc"
+subcategory: ""
 description: |-
-  Manages an AWS Cases cases template.
+  A template in the Cases domain. This template is used to define the case object model (that is, to define what data can be captured on cases) in a Cases domain. A template must have a unique name within a domain, and it must reference existing field IDs and layout IDs.
 ---
 
-# Resource: awscc_cases_template
+# awscc_cases_template (Resource)
 
-Manages an AWS Cases cases template.
+A template in the Cases domain. This template is used to define the case object model (that is, to define what data can be captured on cases) in a Cases domain. A template must have a unique name within a domain, and it must reference existing field IDs and layout IDs.
 
 ## Example Usage
 

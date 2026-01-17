@@ -1,14 +1,13 @@
 ---
-subcategory: "SSM"
-layout: "awscc"
-page_title: "AWS Cloud Control: awscc_ssm_maintenance_window_target"
+page_title: "awscc_ssm_maintenance_window_target Resource - terraform-provider-awscc"
+subcategory: ""
 description: |-
-  Manages an AWS SSM ssm maintenance window target.
+  Resource type definition for AWS::SSM::MaintenanceWindowTarget
 ---
 
-# Resource: awscc_ssm_maintenance_window_target
+# awscc_ssm_maintenance_window_target (Resource)
 
-Manages an AWS SSM ssm maintenance window target.
+Resource type definition for AWS::SSM::MaintenanceWindowTarget
 
 ## Example Usage
 

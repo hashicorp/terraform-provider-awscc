@@ -1,14 +1,13 @@
 ---
-subcategory: "SES"
-layout: "awscc"
-page_title: "AWS Cloud Control: awscc_ses_tenant"
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
 description: |-
-  Manages an AWS SES Tenant.
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
 ---
 
-# Resource: awscc_ses_tenant
+# {{.Name}} ({{.Type}})
 
-Manages an AWS SES Tenant.
+{{ .Description | trimspace }}
 
 ## Example Usage
 

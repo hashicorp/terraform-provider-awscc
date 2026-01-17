@@ -1,14 +1,13 @@
 ---
-subcategory: "DevOps Agent"
-layout: "awscc"
-page_title: "AWS Cloud Control: awscc_devopsagent_agent_space"
+page_title: "awscc_devopsagent_agent_space Resource - terraform-provider-awscc"
+subcategory: ""
 description: |-
-  Manages an AWS DevOps Agent Space.
+  Resource Type definition for AWS::DevOpsAgent::AgentSpace
 ---
 
-# Resource: awscc_devopsagent_agent_space
+# awscc_devopsagent_agent_space (Resource)
 
-Manages an AWS DevOps Agent Space.
+Resource Type definition for AWS::DevOpsAgent::AgentSpace
 
 ## Example Usage
 

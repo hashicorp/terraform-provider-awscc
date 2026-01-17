@@ -1,14 +1,13 @@
 ---
-subcategory: "Cases"
-layout: "awscc"
-page_title: "AWS Cloud Control: awscc_cases_layout"
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
 description: |-
-  Manages an AWS Cases cases layout.
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
 ---
 
-# Resource: awscc_cases_layout
+# {{.Name}} ({{.Type}})
 
-Manages an AWS Cases cases layout.
+{{ .Description | trimspace }}
 
 ## Example Usage
 

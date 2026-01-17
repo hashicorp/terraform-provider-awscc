@@ -1,14 +1,13 @@
 ---
-subcategory: "DevOps Agent"
-layout: "awscc"
-page_title: "AWS Cloud Control: awscc_devopsagent_agent_space"
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
 description: |-
-  Manages an AWS DevOps Agent Space.
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
 ---
 
-# Resource: awscc_devopsagent_agent_space
+# {{.Name}} ({{.Type}})
 
-Manages an AWS DevOps Agent Space.
+{{ .Description | trimspace }}
 
 ## Example Usage
 

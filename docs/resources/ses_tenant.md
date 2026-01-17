@@ -1,14 +1,13 @@
 ---
-subcategory: "SES"
-layout: "awscc"
-page_title: "AWS Cloud Control: awscc_ses_tenant"
+page_title: "awscc_ses_tenant Resource - terraform-provider-awscc"
+subcategory: ""
 description: |-
-  Manages an AWS SES Tenant.
+  Resource Type definition for AWS::SES::Tenant
 ---
 
-# Resource: awscc_ses_tenant
+# awscc_ses_tenant (Resource)
 
-Manages an AWS SES Tenant.
+Resource Type definition for AWS::SES::Tenant
 
 ## Example Usage
 
