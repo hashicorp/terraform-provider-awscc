@@ -1,0 +1,23 @@
+---
+subcategory: "DevOps Agent"
+layout: "awscc"
+page_title: "AWS Cloud Control: awscc_devopsagent_agent_space"
+description: |-
+  Manages an AWS DevOps Agent Space.
+---
+
+# Resource: awscc_devopsagent_agent_space
+
+Manages an AWS DevOps Agent Space.
+
+## Example Usage
+
+{{ tffile (printf "examples/resources/%s/devopsagent_agent_space.tf" .Name) }}
+
+{{ .SchemaMarkdown | trimspace }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" (printf "examples/resources/%s/import.sh" .Name) }}

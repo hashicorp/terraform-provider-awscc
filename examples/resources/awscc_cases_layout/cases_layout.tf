@@ -1,7 +1,7 @@
 resource "awscc_cases_layout" "example" {
   domain_id = awscc_cases_domain.example.domain_id
   name      = "example-layout"
-  
+
   content = {
     basic = {
       top_panel = {
@@ -16,7 +16,7 @@ resource "awscc_cases_layout" "example" {
       }
     }
   }
-  
+
   tags = [{
     key   = "Environment"
     value = "test"
@@ -25,7 +25,7 @@ resource "awscc_cases_layout" "example" {
 
 resource "awscc_cases_domain" "example" {
   name = "example-cases-domain-for-layout"
-  
+
   tags = [{
     key   = "Environment"
     value = "test"
@@ -36,7 +36,7 @@ resource "awscc_cases_field" "example" {
   domain_id = awscc_cases_domain.example.domain_id
   name      = "example-field-for-layout"
   type      = "Text"
-  
+
   tags = [{
     key   = "Environment"
     value = "test"

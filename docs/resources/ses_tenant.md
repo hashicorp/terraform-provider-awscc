@@ -16,7 +16,7 @@ Resource Type definition for AWS::SES::Tenant
 ```terraform
 resource "awscc_ses_tenant" "example" {
   tenant_name = "example-tenant"
-  
+
   tags = [{
     key   = "Environment"
     value = "test"

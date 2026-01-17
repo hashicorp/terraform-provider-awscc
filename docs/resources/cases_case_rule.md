@@ -17,7 +17,7 @@ A case rule. In the Amazon Connect admin website, case rules are known as case f
 # Create Cases domain first
 resource "awscc_cases_domain" "example" {
   name = "example-cases-domain-for-rule"
-  
+
   tags = [{
     key   = "Environment"
     value = "test"
@@ -29,7 +29,7 @@ resource "awscc_cases_field" "example" {
   domain_id = awscc_cases_domain.example.domain_id
   name      = "example-field-for-rule"
   type      = "Text"
-  
+
   tags = [{
     key   = "Environment"
     value = "test"
@@ -40,7 +40,7 @@ resource "awscc_cases_field" "example" {
 resource "awscc_cases_case_rule" "example" {
   domain_id = awscc_cases_domain.example.domain_id
   name      = "example-case-rule"
-  
+
   rule = {
     required = {
       default_value = false
@@ -57,7 +57,7 @@ resource "awscc_cases_case_rule" "example" {
       }]
     }
   }
-  
+
   tags = [{
     key   = "Environment"
     value = "test"

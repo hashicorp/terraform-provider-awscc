@@ -1,0 +1,23 @@
+---
+subcategory: "Lambda"
+layout: "awscc"
+page_title: "AWS Cloud Control: awscc_lambda_capacity_provider"
+description: |-
+  Manages an AWS Lambda Capacity Provider.
+---
+
+# Resource: awscc_lambda_capacity_provider
+
+Manages an AWS Lambda Capacity Provider.
+
+## Example Usage
+
+{{ tffile (printf "examples/resources/%s/lambda_capacity_provider.tf" .Name) }}
+
+{{ .SchemaMarkdown | trimspace }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" (printf "examples/resources/%s/import.sh" .Name) }}

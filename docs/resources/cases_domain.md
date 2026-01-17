@@ -16,7 +16,7 @@ A domain, which is a container for all case data, such as cases, fields, templat
 ```terraform
 resource "awscc_cases_domain" "example" {
   name = "example-cases-domain"
-  
+
   tags = [{
     key   = "Environment"
     value = "test"

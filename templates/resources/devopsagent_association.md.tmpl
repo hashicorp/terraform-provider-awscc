@@ -1,0 +1,23 @@
+---
+subcategory: "DevOps Agent"
+layout: "awscc"
+page_title: "AWS Cloud Control: awscc_devopsagent_association"
+description: |-
+  Manages an AWS DevOps Agent Association.
+---
+
+# Resource: awscc_devopsagent_association
+
+Manages an AWS DevOps Agent Association.
+
+## Example Usage
+
+{{ tffile (printf "examples/resources/%s/devopsagent_association.tf" .Name) }}
+
+{{ .SchemaMarkdown | trimspace }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" (printf "examples/resources/%s/import.sh" .Name) }}

@@ -1,0 +1,23 @@
+---
+subcategory: "Observability Admin"
+layout: "awscc"
+page_title: "AWS Cloud Control: awscc_observabilityadmin_s3_table_integration"
+description: |-
+  Manages an AWS Observability Admin S3 Table Integration.
+---
+
+# Resource: awscc_observabilityadmin_s3_table_integration
+
+Manages an AWS Observability Admin S3 Table Integration.
+
+## Example Usage
+
+{{ tffile (printf "examples/resources/%s/observabilityadmin_s3_table_integration.tf" .Name) }}
+
+{{ .SchemaMarkdown | trimspace }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" (printf "examples/resources/%s/import.sh" .Name) }}
