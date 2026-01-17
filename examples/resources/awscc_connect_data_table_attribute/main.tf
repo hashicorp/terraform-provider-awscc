@@ -1,22 +1,3 @@
-terraform {
-  required_providers {
-    awscc = {
-      source  = "hashicorp/awscc"
-      version = "~> 1.0"
-    }
-    random = {
-      source  = "hashicorp/random"
-      version = "~> 3.1"
-    }
-  }
-}
-
-provider "awscc" {
-  region = "us-east-1"
-}
-
-provider "random" {}
-
 # Create Connect instance first
 resource "random_id" "instance" {
   byte_length = 4
