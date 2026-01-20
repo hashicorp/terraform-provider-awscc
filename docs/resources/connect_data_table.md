@@ -12,7 +12,6 @@ Resource Type definition for AWS::Connect::DataTable
 ## Example Usage
 
 ```terraform
-# Create Connect instance first
 resource "random_id" "instance" {
   byte_length = 4
 }
@@ -32,7 +31,6 @@ resource "awscc_connect_instance" "example" {
   }]
 }
 
-# Create Connect data table with required properties
 resource "awscc_connect_data_table" "example" {
   instance_arn     = awscc_connect_instance.example.arn
   name             = "example-data-table"

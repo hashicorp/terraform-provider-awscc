@@ -12,7 +12,6 @@ Resource Type definition for AWS::Lambda::CapacityProvider
 ## Example Usage
 
 ```terraform
-# Create IAM role for Lambda capacity provider with all required permissions
 resource "awscc_iam_role" "lambda_capacity_provider" {
   role_name = "lambda-capacity-provider-role"
 
@@ -59,7 +58,6 @@ resource "awscc_iam_role" "lambda_capacity_provider" {
   }]
 }
 
-# Create VPC and subnets for Lambda capacity provider
 resource "awscc_ec2_vpc" "example" {
   cidr_block = "10.0.0.0/16"
 
@@ -91,7 +89,6 @@ resource "awscc_ec2_subnet" "example_2" {
   }]
 }
 
-# Create security group
 resource "awscc_ec2_security_group" "example" {
   vpc_id            = awscc_ec2_vpc.example.id
   group_name        = "lambda-capacity-provider-sg"
@@ -103,7 +100,6 @@ resource "awscc_ec2_security_group" "example" {
   }]
 }
 
-# Create Lambda capacity provider
 resource "awscc_lambda_capacity_provider" "example" {
   capacity_provider_name = "example-capacity-provider"
 

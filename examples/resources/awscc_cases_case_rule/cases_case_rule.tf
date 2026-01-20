@@ -1,4 +1,3 @@
-# Create Cases domain first
 resource "awscc_cases_domain" "example" {
   name = "example-cases-domain-for-rule"
 
@@ -8,7 +7,6 @@ resource "awscc_cases_domain" "example" {
   }]
 }
 
-# Create Cases field for the rule
 resource "awscc_cases_field" "example" {
   domain_id = awscc_cases_domain.example.domain_id
   name      = "example-field-for-rule"
@@ -20,7 +18,6 @@ resource "awscc_cases_field" "example" {
   }]
 }
 
-# Create Cases case rule
 resource "awscc_cases_case_rule" "example" {
   domain_id = awscc_cases_domain.example.domain_id
   name      = "example-case-rule"

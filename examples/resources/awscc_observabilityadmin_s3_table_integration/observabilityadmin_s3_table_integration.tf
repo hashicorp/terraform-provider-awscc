@@ -1,4 +1,3 @@
-# Create IAM role for observability admin
 resource "awscc_iam_role" "observability" {
   role_name = "observability-admin-role"
 

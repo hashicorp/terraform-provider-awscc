@@ -12,7 +12,6 @@ Resource Type definition for a CloudWatch Observability Admin S3 Table Integrati
 ## Example Usage
 
 ```terraform
-# Create IAM role for observability admin
 resource "awscc_iam_role" "observability" {
   role_name = "observability-admin-role"
 

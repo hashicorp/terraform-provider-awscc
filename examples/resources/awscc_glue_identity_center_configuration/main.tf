@@ -1,4 +1,3 @@
-# Get the SSO instance
 data "aws_ssoadmin_instances" "example" {}
 
 resource "awscc_glue_identity_center_configuration" "example" {

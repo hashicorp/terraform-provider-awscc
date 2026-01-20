@@ -12,7 +12,6 @@ Resource Type definition for AWS::SSM::MaintenanceWindowTask
 ## Example Usage
 
 ```terraform
-# Create maintenance window first
 resource "aws_ssm_maintenance_window" "example" {
   name     = "example-maintenance-window"
   schedule = "cron(0 2 ? * SUN *)"
@@ -24,7 +23,6 @@ resource "aws_ssm_maintenance_window" "example" {
   }
 }
 
-# Create maintenance window target
 resource "aws_ssm_maintenance_window_target" "example" {
   window_id     = aws_ssm_maintenance_window.example.id
   resource_type = "INSTANCE"
@@ -38,7 +36,6 @@ resource "aws_ssm_maintenance_window_target" "example" {
   description = "Example maintenance window target"
 }
 
-# Create maintenance window task
 resource "awscc_ssm_maintenance_window_task" "example" {
   window_id       = aws_ssm_maintenance_window.example.id
   task_type       = "RUN_COMMAND"
