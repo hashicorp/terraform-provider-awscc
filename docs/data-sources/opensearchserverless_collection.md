@@ -23,10 +23,12 @@ Data Source schema for AWS::OpenSearchServerless::Collection
 
 - `arn` (String) The Amazon Resource Name (ARN) of the collection.
 - `collection_endpoint` (String) The endpoint for the collection.
+- `collection_group_name` (String) The name of the collection group to associate with the collection.
 - `collection_id` (String) The identifier of the collection
 - `dashboard_endpoint` (String) The OpenSearch Dashboards endpoint for the collection.
 - `description` (String) The description of the collection
-- `kms_key_arn` (String) The ARN of the AWS KMS key used to encrypt the collection.
+- `encryption_config` (Attributes) Encryption settings for the collection (see [below for nested schema](#nestedatt--encryption_config))
+- `kms_key_arn` (String) Key Management Service key used to encrypt the collection.
 - `name` (String) The name of the collection.
 
 The name must meet the following criteria:
@@ -37,6 +39,15 @@ Contains between 3 and 32 characters
 - `standby_replicas` (String) The possible standby replicas for the collection
 - `tags` (Attributes List) List of tags to be added to the resource (see [below for nested schema](#nestedatt--tags))
 - `type` (String) The possible types for the collection
+
+<a id="nestedatt--encryption_config"></a>
+### Nested Schema for `encryption_config`
+
+Read-Only:
+
+- `aws_owned_key` (Boolean) Indicates whether to use an AWS owned key for encryption.
+- `kms_key_arn` (String) Key Management Service key used to encrypt the collection.
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

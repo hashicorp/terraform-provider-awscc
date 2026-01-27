@@ -46,6 +46,7 @@ resource "awscc_cloudfront_key_value_store" "example" {
 
 - `comment` (String) A comment for the key value store.
 - `import_source` (Attributes) The import source for the key value store. (see [below for nested schema](#nestedatt--import_source))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -61,6 +62,15 @@ Optional:
 
 - `source_arn` (String) The Amazon Resource Name (ARN) of the import source for the key value store.
 - `source_type` (String) The source type of the import source for the key value store.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

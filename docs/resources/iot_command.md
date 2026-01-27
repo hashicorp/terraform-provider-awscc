@@ -55,7 +55,9 @@ resource "awscc_iot_command" "example" {
 - `mandatory_parameters` (Attributes List) The list of mandatory parameters for the command. (see [below for nested schema](#nestedatt--mandatory_parameters))
 - `namespace` (String) The namespace to which the command belongs.
 - `payload` (Attributes) The payload associated with the command. (see [below for nested schema](#nestedatt--payload))
+- `payload_template` (String) The payload template associated with the command.
 - `pending_deletion` (Boolean) A flag indicating whether the command is pending deletion.
+- `preprocessor` (Attributes) The command preprocessor configuration. (see [below for nested schema](#nestedatt--preprocessor))
 - `role_arn` (String) The customer role associated with the command.
 - `tags` (Attributes List) The tags to be associated with the command. (see [below for nested schema](#nestedatt--tags))
 
@@ -72,7 +74,9 @@ Optional:
 - `default_value` (Attributes) (see [below for nested schema](#nestedatt--mandatory_parameters--default_value))
 - `description` (String)
 - `name` (String)
+- `type` (String)
 - `value` (Attributes) (see [below for nested schema](#nestedatt--mandatory_parameters--value))
+- `value_conditions` (Attributes List) (see [below for nested schema](#nestedatt--mandatory_parameters--value_conditions))
 
 <a id="nestedatt--mandatory_parameters--default_value"></a>
 ### Nested Schema for `mandatory_parameters.default_value`
@@ -102,6 +106,36 @@ Optional:
 - `ul` (String)
 
 
+<a id="nestedatt--mandatory_parameters--value_conditions"></a>
+### Nested Schema for `mandatory_parameters.value_conditions`
+
+Optional:
+
+- `comparison_operator` (String)
+- `operand` (Attributes) (see [below for nested schema](#nestedatt--mandatory_parameters--value_conditions--operand))
+
+<a id="nestedatt--mandatory_parameters--value_conditions--operand"></a>
+### Nested Schema for `mandatory_parameters.value_conditions.operand`
+
+Optional:
+
+- `number` (String)
+- `number_range` (Attributes) (see [below for nested schema](#nestedatt--mandatory_parameters--value_conditions--operand--number_range))
+- `numbers` (List of String)
+- `string` (String)
+- `strings` (List of String)
+
+<a id="nestedatt--mandatory_parameters--value_conditions--operand--number_range"></a>
+### Nested Schema for `mandatory_parameters.value_conditions.operand.number_range`
+
+Optional:
+
+- `max` (String)
+- `min` (String)
+
+
+
+
 
 <a id="nestedatt--payload"></a>
 ### Nested Schema for `payload`
@@ -110,6 +144,22 @@ Optional:
 
 - `content` (String)
 - `content_type` (String)
+
+
+<a id="nestedatt--preprocessor"></a>
+### Nested Schema for `preprocessor`
+
+Optional:
+
+- `aws_json_substitution` (Attributes) (see [below for nested schema](#nestedatt--preprocessor--aws_json_substitution))
+
+<a id="nestedatt--preprocessor--aws_json_substitution"></a>
+### Nested Schema for `preprocessor.aws_json_substitution`
+
+Optional:
+
+- `output_format` (String)
+
 
 
 <a id="nestedatt--tags"></a>

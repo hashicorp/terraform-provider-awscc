@@ -34,6 +34,7 @@ Data Source schema for AWS::DataZone::ProjectProfile
 - `name` (String)
 - `project_profile_id` (String)
 - `status` (String)
+- `use_default_configurations` (Boolean)
 
 <a id="nestedatt--environment_configurations"></a>
 ### Nested Schema for `environment_configurations`

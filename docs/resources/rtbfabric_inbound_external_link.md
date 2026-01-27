@@ -29,6 +29,7 @@ Resource Type definition for AWS::RTBFabric::InboundExternalLink Resource Type
 
 - `arn` (String)
 - `created_timestamp` (String)
+- `domain_name` (String)
 - `id` (String) Uniquely identifies the resource.
 - `link_id` (String)
 - `link_status` (String)

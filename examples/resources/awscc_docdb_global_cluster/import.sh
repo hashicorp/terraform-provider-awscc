@@ -1,0 +1,1 @@
+$ terraform import awscc_docdb_global_cluster.example "global_cluster_identifier"

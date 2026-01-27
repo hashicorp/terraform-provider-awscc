@@ -39,6 +39,7 @@ resource "awscc_datazone_environment_blueprint_configuration" "example" {
 ### Optional
 
 - `environment_role_permission_boundary` (String)
+- `global_parameters` (Map of String) Region-agnostic environment blueprint parameters.
 - `manage_access_role_arn` (String)
 - `provisioning_configurations` (Attributes List) (see [below for nested schema](#nestedatt--provisioning_configurations))
 - `provisioning_role_arn` (String)

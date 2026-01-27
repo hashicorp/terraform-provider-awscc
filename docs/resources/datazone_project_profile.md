@@ -26,6 +26,7 @@ Definition of AWS::DataZone::ProjectProfile Resource Type
 - `domain_unit_identifier` (String)
 - `environment_configurations` (Attributes List) (see [below for nested schema](#nestedatt--environment_configurations))
 - `status` (String)
+- `use_default_configurations` (Boolean)
 
 ### Read-Only
 

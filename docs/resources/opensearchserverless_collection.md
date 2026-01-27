@@ -55,7 +55,9 @@ Contains between 3 and 32 characters
 
 ### Optional
 
+- `collection_group_name` (String) The name of the collection group to associate with the collection.
 - `description` (String) The description of the collection
+- `encryption_config` (Attributes) Encryption settings for the collection (see [below for nested schema](#nestedatt--encryption_config))
 - `standby_replicas` (String) The possible standby replicas for the collection
 - `tags` (Attributes List) List of tags to be added to the resource (see [below for nested schema](#nestedatt--tags))
 - `type` (String) The possible types for the collection
@@ -67,7 +69,16 @@ Contains between 3 and 32 characters
 - `collection_id` (String) The identifier of the collection
 - `dashboard_endpoint` (String) The OpenSearch Dashboards endpoint for the collection.
 - `id` (String) Uniquely identifies the resource.
-- `kms_key_arn` (String) The ARN of the AWS KMS key used to encrypt the collection.
+- `kms_key_arn` (String) Key Management Service key used to encrypt the collection.
+
+<a id="nestedatt--encryption_config"></a>
+### Nested Schema for `encryption_config`
+
+Optional:
+
+- `aws_owned_key` (Boolean) Indicates whether to use an AWS owned key for encryption.
+- `kms_key_arn` (String) Key Management Service key used to encrypt the collection.
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
