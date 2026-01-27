@@ -96,6 +96,10 @@
     }
   },
   "additionalProperties": false,
+  "propertyTransform": {
+    "/properties/DBProxyName": "$lowercase(DBProxyName)",
+    "/properties/DBProxyEndpointName": "$lowercase(DBProxyEndpointName)"
+  },
   "required": [
     "DBProxyName",
     "DBProxyEndpointName",

@@ -115,7 +115,7 @@
         "PrivateDnsSpecifiedDomains": {
           "minItems": 1,
           "maxItems": 10,
-          "description": "",
+          "description": "Indicates which of the private domains to create private hosted zones for and associate with the specified VPC. Only supported when private DNS is enabled and the private DNS preference is ``VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS`` or ``SPECIFIED_DOMAINS_ONLY``.",
           "type": "array",
           "items": {
             "minLength": 1,
@@ -135,7 +135,7 @@
           ]
         },
         "PrivateDnsPreference": {
-          "description": "",
+          "description": "The preference for which private domains have a private hosted zone created for and associated with the specified VPC. Only supported when private DNS is enabled and when the VPC endpoint type is ServiceNetwork or Resource.",
           "type": "string",
           "enum": [
             "VERIFIED_DOMAINS_ONLY",

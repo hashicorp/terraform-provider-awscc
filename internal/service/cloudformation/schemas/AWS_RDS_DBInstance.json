@@ -142,11 +142,11 @@
       "properties": {
         "VolumeName": {
           "type": "string",
-          "description": "The name of the additional storage volume."
+          "description": "The name of the additional storage volume.\n Valid Values: ``RDSDBDATA2 | RDSDBDATA3 | RDSDBDATA4``"
         },
         "StorageType": {
           "type": "string",
-          "description": "The storage type for the additional storage volume."
+          "description": "The storage type for the additional storage volume.\n Valid Values: ``GP3 | IO2``"
         },
         "AllocatedStorage": {
           "type": "string",
@@ -163,10 +163,10 @@
         },
         "StorageThroughput": {
           "type": "integer",
-          "description": "The storage throughput value for the additional storage volume, in mebibytes per second (MiBps). This setting applies only to the General Purpose SSD gp3 storage type."
+          "description": "The storage throughput value for the additional storage volume, in mebibytes per second (MiBps). This setting applies only to the General Purpose SSD (``gp3``) storage type."
         }
       },
-      "description": ""
+      "description": "Contains details about an additional storage volume for a DB instance. RDS support additional storage volumes for RDS for Oracle and RDS for SQL Server."
     }
   },
   "properties": {
@@ -615,7 +615,7 @@
       "items": {
         "$ref": "#/definitions/AdditionalStorageVolume"
       },
-      "description": ""
+      "description": "The additional storage volumes associated with the DB instance. RDS supports additional storage volumes for RDS for Oracle and RDS for SQL Server."
     }
   },
   "additionalProperties": false,

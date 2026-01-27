@@ -75,6 +75,10 @@
     }
   },
   "additionalProperties": false,
+  "propertyTransform": {
+    "/properties/DBProxyName": "$lowercase(DBProxyName)",
+    "/properties/TargetGroupName": "$lowercase(TargetGroupName)"
+  },
   "required": [
     "DBProxyName",
     "TargetGroupName"

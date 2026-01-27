@@ -1,42 +1,20 @@
 {
-  "typeName": "AWS::CloudWatch::Dashboard",
-  "description": "Resource Type definition for AWS::CloudWatch::Dashboard",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-cloudwatch",
-  "additionalProperties": false,
-  "properties": {
-    "DashboardName": {
-      "type": "string",
-      "description": "The name of the dashboard. The name must be between 1 and 255 characters. If you do not specify a name, one will be generated automatically."
-    },
-    "DashboardBody": {
-      "type": "string",
-      "description": "The detailed information about the dashboard in JSON format, including the widgets to include and their location on the dashboard"
-    }
-  },
   "tagging": {
     "taggable": false,
     "tagOnCreate": false,
     "tagUpdatable": false,
     "cloudFormationSystemTags": false
   },
-  "required": [
-    "DashboardBody"
-  ],
-  "createOnlyProperties": [
-    "/properties/DashboardName"
-  ],
-  "primaryIdentifier": [
-    "/properties/DashboardName"
-  ],
   "handlers": {
-    "create": {
+    "read": {
       "permissions": [
-        "cloudwatch:PutDashboard",
         "cloudwatch:GetDashboard"
       ]
     },
-    "read": {
+    "create": {
       "permissions": [
+        "cloudwatch:PutDashboard",
         "cloudwatch:GetDashboard"
       ]
     },
@@ -45,16 +23,39 @@
         "cloudwatch:PutDashboard"
       ]
     },
+    "list": {
+      "permissions": [
+        "cloudwatch:ListDashboards"
+      ]
+    },
     "delete": {
       "permissions": [
         "cloudwatch:DeleteDashboards",
         "cloudwatch:GetDashboard"
       ]
+    }
+  },
+  "typeName": "AWS::CloudWatch::Dashboard",
+  "description": "Resource Type definition for AWS::CloudWatch::Dashboard",
+  "createOnlyProperties": [
+    "/properties/DashboardName"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/DashboardName"
+  ],
+  "definitions": {},
+  "required": [
+    "DashboardBody"
+  ],
+  "properties": {
+    "DashboardName": {
+      "description": "The name of the dashboard. The name must be between 1 and 255 characters. If you do not specify a name, one will be generated automatically.",
+      "type": "string"
     },
-    "list": {
-      "permissions": [
-        "cloudwatch:ListDashboards"
-      ]
+    "DashboardBody": {
+      "description": "The detailed information about the dashboard in JSON format, including the widgets to include and their location on the dashboard",
+      "type": "string"
     }
   }
 }

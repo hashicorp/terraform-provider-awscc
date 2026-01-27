@@ -3,7 +3,42 @@
   "description": "Logging Options enable you to configure your IoT V2 logging role and default logging level so that you can monitor progress events logs as it passes from your devices through Iot core service.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-iot.git",
   "documentationUrl": "https://docs.aws.amazon.com/iot/latest/developerguide/configure-logging.html",
-  "definitions": {},
+  "definitions": {
+    "EventConfiguration": {
+      "description": "Configuration for event-based logging that specifies which event types to log and their logging settings. Used for account-level logging overrides.",
+      "type": "object",
+      "properties": {
+        "EventType": {
+          "description": "The type of event to log. These include event types like Connect, Publish, and Disconnect.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "LogLevel": {
+          "description": "The logging level for the specified event type. Determines the verbosity of log messages generated for this event type.",
+          "type": "string",
+          "enum": [
+            "ERROR",
+            "WARN",
+            "INFO",
+            "DEBUG",
+            "DISABLED"
+          ]
+        },
+        "LogDestination": {
+          "description": "CloudWatch Log Group for event-based logging. Specifies where log events should be sent. The log destination for event-based logging overrides default Log Group for the specified event type and applies to all resources associated with that event.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": ""
+        }
+      },
+      "required": [
+        "EventType"
+      ],
+      "additionalProperties": false
+    }
+  },
   "properties": {
     "AccountId": {
       "description": "Your 12-digit account ID (used as the primary identifier for the CloudFormation resource).",
@@ -28,6 +63,14 @@
         "DEBUG",
         "DISABLED"
       ]
+    },
+    "EventConfigurations": {
+      "description": "Configurations for event-based logging that specifies which event types to log and their logging settings. Overrides account-level logging for the specified event",
+      "type": "array",
+      "insertionOrder": true,
+      "items": {
+        "$ref": "#/definitions/EventConfiguration"
+      }
     }
   },
   "additionalProperties": false,

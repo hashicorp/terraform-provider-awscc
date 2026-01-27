@@ -1016,8 +1016,11 @@
     "delete": {
       "permissions": [
         "ec2:DescribeSpotFleetRequests",
+        "ec2:DescribeSpotFleetInstances",
+        "ec2:DescribeInstanceStatus",
         "ec2:CancelSpotFleetRequests"
-      ]
+      ],
+      "timeoutInMinutes": 40
     },
     "list": {
       "permissions": [

@@ -340,6 +340,7 @@
         }
       },
       "required": [
+        "McuCount",
         "WorkerCount"
       ]
     },

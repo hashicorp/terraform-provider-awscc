@@ -150,6 +150,12 @@
         },
         "AllowedClients": {
           "$ref": "#/definitions/AllowedClientsList"
+        },
+        "AllowedScopes": {
+          "$ref": "#/definitions/AllowedScopesList"
+        },
+        "CustomClaims": {
+          "$ref": "#/definitions/CustomClaimsList"
         }
       },
       "required": [
@@ -187,6 +193,117 @@
     "AllowedClient": {
       "type": "string",
       "description": "Allowed client value"
+    },
+    "AllowedScopesList": {
+      "type": "array",
+      "description": "List of allowed scopes",
+      "minItems": 1,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AllowedScope"
+      }
+    },
+    "AllowedScope": {
+      "type": "string",
+      "pattern": "[\\x21\\x23-\\x5B\\x5D-\\x7E]+",
+      "description": "Allowed scope value"
+    },
+    "CustomClaimsList": {
+      "type": "array",
+      "description": "List of required custom claims",
+      "minItems": 1,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/CustomClaimValidationType"
+      }
+    },
+    "CustomClaimValidationType": {
+      "type": "object",
+      "description": "Required custom claim",
+      "properties": {
+        "AuthorizingClaimMatchValue": {
+          "$ref": "#/definitions/AuthorizingClaimMatchValueType"
+        },
+        "InboundTokenClaimName": {
+          "$ref": "#/definitions/InboundTokenClaimName"
+        },
+        "InboundTokenClaimValueType": {
+          "$ref": "#/definitions/InboundTokenClaimValueType"
+        }
+      },
+      "required": [
+        "AuthorizingClaimMatchValue",
+        "InboundTokenClaimName",
+        "InboundTokenClaimValueType"
+      ],
+      "additionalProperties": false
+    },
+    "InboundTokenClaimName": {
+      "type": "string",
+      "pattern": "[A-Za-z0-9_.-:]+",
+      "description": "The name of the custom claim to validate"
+    },
+    "InboundTokenClaimValueType": {
+      "type": "string",
+      "description": "Token claim data type",
+      "enum": [
+        "STRING",
+        "STRING_ARRAY"
+      ]
+    },
+    "AuthorizingClaimMatchValueType": {
+      "type": "object",
+      "description": "The value or values in the custom claim to match and relationship of match",
+      "properties": {
+        "ClaimMatchOperator": {
+          "$ref": "#/definitions/ClaimMatchOperator"
+        },
+        "ClaimMatchValue": {
+          "$ref": "#/definitions/ClaimMatchValueType"
+        }
+      },
+      "required": [
+        "ClaimMatchOperator",
+        "ClaimMatchValue"
+      ],
+      "additionalProperties": false
+    },
+    "ClaimMatchOperator": {
+      "type": "string",
+      "description": "The relationship between the claim field value and the value or values being matched",
+      "enum": [
+        "EQUALS",
+        "CONTAINS",
+        "CONTAINS_ANY"
+      ]
+    },
+    "ClaimMatchValueType": {
+      "type": "object",
+      "description": "The value or values in the custom claim to match for",
+      "properties": {
+        "MatchValueString": {
+          "$ref": "#/definitions/MatchValueString"
+        },
+        "MatchValueStringList": {
+          "$ref": "#/definitions/MatchValueStringList"
+        }
+      },
+      "additionalProperties": false
+    },
+    "MatchValueString": {
+      "type": "string",
+      "pattern": "[A-Za-z0-9_.-]+",
+      "description": "The string value to match for"
+    },
+    "MatchValueStringList": {
+      "type": "array",
+      "description": "The list of strings to check for a match",
+      "minItems": 1,
+      "maxItems": 255,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/MatchValueString"
+      }
     },
     "WorkloadIdentityDetails": {
       "type": "object",

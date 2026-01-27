@@ -221,6 +221,7 @@
   "tagging": {
     "cloudFormationSystemTags": true,
     "permissions": [
+      "cases:GetTemplate",
       "cases:TagResource",
       "cases:UntagResource"
     ],

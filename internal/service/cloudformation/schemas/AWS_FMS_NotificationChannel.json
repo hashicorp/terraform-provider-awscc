@@ -11,6 +11,9 @@
       "maxLength": 1024
     }
   },
+  "tagging": {
+    "taggable": false
+  },
   "properties": {
     "SnsRoleName": {
       "$ref": "#/definitions/ResourceArn"

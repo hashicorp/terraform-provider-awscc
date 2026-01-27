@@ -9,7 +9,7 @@
         "DefaultValue": {
           "type": "string",
           "minLength": 0,
-          "maxLength": 250
+          "maxLength": 1000
         },
         "Name": {
           "type": "string",
@@ -367,7 +367,7 @@
       },
       "type": "array",
       "minItems": 0,
-      "maxItems": 10
+      "maxItems": 50
     },
     "AnalysisTemplateIdentifier": {
       "type": "string",

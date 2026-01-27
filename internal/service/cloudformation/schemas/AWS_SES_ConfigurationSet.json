@@ -61,6 +61,17 @@
         }
       }
     },
+    "ArchivingOptions": {
+      "description": "An object that defines a MailManager archive that is used to preserve emails that you send using the configuration set.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ArchiveArn": {
+          "type": "string",
+          "description": "The ARN of the MailManager archive to associate with the configuration set."
+        }
+      }
+    },
     "ReputationOptions": {
       "description": "An object that defines whether or not Amazon SES collects reputation metrics for the emails that you send that use the configuration set.",
       "type": "object",
@@ -210,6 +221,9 @@
     "VdmOptions": {
       "$ref": "#/definitions/VdmOptions"
     },
+    "ArchivingOptions": {
+      "$ref": "#/definitions/ArchivingOptions"
+    },
     "Tags": {
       "description": "The tags (keys and values) associated with the contact list.",
       "type": "array",
@@ -264,6 +278,7 @@
         "ses:PutConfigurationSetSendingOptions",
         "ses:PutConfigurationSetSuppressionOptions",
         "ses:PutConfigurationSetVdmOptions",
+        "ses:PutConfigurationSetArchivingOptions",
         "ses:DescribeConfigurationSet",
         "ses:UntagResource",
         "ses:TagResource"

@@ -207,7 +207,7 @@
   "primaryIdentifier": [
     "/properties/Arn"
   ],
-  "replacementStrategy": "delete_then_create",
+  "replacementStrategy": "create_then_delete",
   "handlers": {
     "create": {
       "permissions": [

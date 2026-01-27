@@ -107,6 +107,10 @@
       "minLength": 20,
       "pattern": "^arn:aws:rtbfabric:[a-zA-Z0-9_-]+:[0-9]{12}:gateway/[a-zA-Z0-9-]+/link/[a-zA-Z0-9-]+$"
     },
+    "DomainName": {
+      "type": "string",
+      "pattern": "^(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)(?:\\.(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?))+$"
+    },
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
       "type": "object",
@@ -206,6 +210,9 @@
     },
     "Arn": {
       "$ref": "#/definitions/Arn"
+    },
+    "DomainName": {
+      "$ref": "#/definitions/DomainName"
     }
   },
   "required": [
@@ -215,6 +222,7 @@
   "readOnlyProperties": [
     "/properties/LinkId",
     "/properties/Arn",
+    "/properties/DomainName",
     "/properties/LinkStatus",
     "/properties/CreatedTimestamp",
     "/properties/UpdatedTimestamp"

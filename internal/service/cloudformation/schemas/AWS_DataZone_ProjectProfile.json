@@ -221,6 +221,9 @@
     },
     "Status": {
       "$ref": "#/definitions/Status"
+    },
+    "UseDefaultConfigurations": {
+      "type": "boolean"
     }
   },
   "required": [
@@ -238,10 +241,12 @@
     "/properties/EnvironmentConfigurations/*/ConfigurationParameters/ResolvedParameters"
   ],
   "writeOnlyProperties": [
-    "/properties/DomainUnitIdentifier"
+    "/properties/DomainUnitIdentifier",
+    "/properties/UseDefaultConfigurations"
   ],
   "createOnlyProperties": [
-    "/properties/DomainIdentifier"
+    "/properties/DomainIdentifier",
+    "/properties/UseDefaultConfigurations"
   ],
   "primaryIdentifier": [
     "/properties/DomainIdentifier",
@@ -258,6 +263,7 @@
       "permissions": [
         "datazone:CreateProjectProfile",
         "datazone:GetProjectProfile",
+        "datazone:ListEnvironmentBlueprints",
         "ssm:GetParameter"
       ]
     },
