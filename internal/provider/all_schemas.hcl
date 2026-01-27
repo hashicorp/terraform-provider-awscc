@@ -2256,6 +2256,13 @@ resource_schema "aws_ecs_primary_task_set" {
 
 resource_schema "aws_ecs_service" {
   cloudformation_type_name = "AWS::ECS::Service"
+
+  schema_patches {
+    operation {
+      action    = "remove"
+      json_path = "/properties/PlatformVersion/default"
+    }
+  }
 }
 
 resource_schema "aws_ecs_task_definition" {
