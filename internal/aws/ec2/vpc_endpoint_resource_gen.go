@@ -98,7 +98,7 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "PrivateDnsPreference": {
-		//	      "description": "",
+		//	      "description": "The preference for which private domains have a private hosted zone created for and associated with the specified VPC. Only supported when private DNS is enabled and when the VPC endpoint type is ServiceNetwork or Resource.",
 		//	      "enum": [
 		//	        "VERIFIED_DOMAINS_ONLY",
 		//	        "ALL_DOMAINS",
@@ -108,7 +108,7 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "PrivateDnsSpecifiedDomains": {
-		//	      "description": "",
+		//	      "description": "Indicates which of the private domains to create private hosted zones for and associate with the specified VPC. Only supported when private DNS is enabled and the private DNS preference is ``VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS`` or ``SPECIFIED_DOMAINS_ONLY``.",
 		//	      "items": {
 		//	        "maxLength": 255,
 		//	        "minLength": 1,
@@ -159,7 +159,7 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: PrivateDnsPreference
 				"private_dns_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
+					Description: "The preference for which private domains have a private hosted zone created for and associated with the specified VPC. Only supported when private DNS is enabled and when the VPC endpoint type is ServiceNetwork or Resource.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -178,7 +178,7 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 				// Property: PrivateDnsSpecifiedDomains
 				"private_dns_specified_domains": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "",
+					Description: "Indicates which of the private domains to create private hosted zones for and associate with the specified VPC. Only supported when private DNS is enabled and the private DNS preference is ``VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS`` or ``SPECIFIED_DOMAINS_ONLY``.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/

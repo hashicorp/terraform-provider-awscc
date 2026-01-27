@@ -155,6 +155,30 @@ func environmentBlueprintConfigurationResource(ctx context.Context) (resource.Re
 			}, /*END PLAN MODIFIERS*/
 			// EnvironmentRolePermissionBoundary is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: GlobalParameters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Region-agnostic environment blueprint parameters.",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"global_parameters": // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Region-agnostic environment blueprint parameters.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// GlobalParameters is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: ManageAccessRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -382,6 +406,7 @@ func environmentBlueprintConfigurationResource(ctx context.Context) (resource.Re
 		"environment_blueprint_id":                   "EnvironmentBlueprintId",
 		"environment_blueprint_identifier":           "EnvironmentBlueprintIdentifier",
 		"environment_role_permission_boundary":       "EnvironmentRolePermissionBoundary",
+		"global_parameters":                          "GlobalParameters",
 		"lake_formation_configuration":               "LakeFormationConfiguration",
 		"location_registration_exclude_s3_locations": "LocationRegistrationExcludeS3Locations",
 		"location_registration_role":                 "LocationRegistrationRole",
@@ -398,6 +423,7 @@ func environmentBlueprintConfigurationResource(ctx context.Context) (resource.Re
 		"/properties/DomainIdentifier",
 		"/properties/EnvironmentBlueprintIdentifier",
 		"/properties/EnvironmentRolePermissionBoundary",
+		"/properties/GlobalParameters",
 		"/properties/ProvisioningConfigurations",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

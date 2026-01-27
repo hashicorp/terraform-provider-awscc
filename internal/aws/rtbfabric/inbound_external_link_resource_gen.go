@@ -64,6 +64,19 @@ func inboundExternalLinkResource(ctx context.Context) (resource.Resource, error)
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DomainName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": "^(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)(?:\\.(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?))+$",
+		//	  "type": "string"
+		//	}
+		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: GatewayId
 		// CloudFormation resource type schema:
 		//
@@ -463,6 +476,7 @@ func inboundExternalLinkResource(ctx context.Context) (resource.Resource, error)
 		"arn":                           "Arn",
 		"created_timestamp":             "CreatedTimestamp",
 		"customer_provided_id":          "CustomerProvidedId",
+		"domain_name":                   "DomainName",
 		"error_log":                     "ErrorLog",
 		"filter_log":                    "FilterLog",
 		"gateway_id":                    "GatewayId",

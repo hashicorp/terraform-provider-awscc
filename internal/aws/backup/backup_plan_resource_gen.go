@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
@@ -155,6 +156,30 @@ func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 		//	          "RuleName": {
 		//	            "type": "string"
 		//	          },
+		//	          "ScanActions": {
+		//	            "insertionOrder": true,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "MalwareScanner": {
+		//	                  "enum": [
+		//	                    "GUARDDUTY"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "ScanMode": {
+		//	                  "enum": [
+		//	                    "FULL_SCAN",
+		//	                    "INCREMENTAL_SCAN"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
+		//	          },
 		//	          "ScheduleExpression": {
 		//	            "type": "string"
 		//	          },
@@ -175,6 +200,34 @@ func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 		//	          "TargetBackupVault",
 		//	          "RuleName"
 		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
+		//	    "ScanSettings": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "MalwareScanner": {
+		//	            "enum": [
+		//	              "GUARDDUTY"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "ResourceTypes": {
+		//	            "insertionOrder": true,
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "ScannerRoleArn": {
+		//	            "type": "string"
+		//	          }
+		//	        },
 		//	        "type": "object"
 		//	      },
 		//	      "type": "array",
@@ -377,6 +430,45 @@ func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 							"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Required: true,
 							}, /*END ATTRIBUTE*/
+							// Property: ScanActions
+							"scan_actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: MalwareScanner
+										"malware_scanner": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"GUARDDUTY",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ScanMode
+										"scan_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"FULL_SCAN",
+													"INCREMENTAL_SCAN",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: ScheduleExpression
 							"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Optional: true,
@@ -416,6 +508,51 @@ func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Required: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ScanSettings
+				"scan_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: MalwareScanner
+							"malware_scanner": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"GUARDDUTY",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ResourceTypes
+							"resource_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.UniqueValues(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ScannerRoleArn
+							"scanner_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Required: true,
@@ -520,12 +657,17 @@ func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 		"enable_continuous_backup":                     "EnableContinuousBackup",
 		"index_actions":                                "IndexActions",
 		"lifecycle":                                    "Lifecycle",
+		"malware_scanner":                              "MalwareScanner",
 		"move_to_cold_storage_after_days":              "MoveToColdStorageAfterDays",
 		"opt_in_to_archive_for_supported_resources":    "OptInToArchiveForSupportedResources",
 		"recovery_point_tags":                          "RecoveryPointTags",
 		"resource_type":                                "ResourceType",
 		"resource_types":                               "ResourceTypes",
 		"rule_name":                                    "RuleName",
+		"scan_actions":                                 "ScanActions",
+		"scan_mode":                                    "ScanMode",
+		"scan_settings":                                "ScanSettings",
+		"scanner_role_arn":                             "ScannerRoleArn",
 		"schedule_expression":                          "ScheduleExpression",
 		"schedule_expression_timezone":                 "ScheduleExpressionTimezone",
 		"start_window_minutes":                         "StartWindowMinutes",

@@ -7,6 +7,7 @@ package gamelift
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -94,6 +95,26 @@ func scriptResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NodeJsVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Node.js version used for execution of the Realtime script.",
+		//	  "pattern": "^\\d+\\.[x0-9]+$",
+		//	  "type": "string"
+		//	}
+		"node_js_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Node.js version used for execution of the Realtime script.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^\\d+\\.[x0-9]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SizeOnDisk
@@ -317,6 +338,7 @@ func scriptResource(ctx context.Context) (resource.Resource, error) {
 		"creation_time":    "CreationTime",
 		"key":              "Key",
 		"name":             "Name",
+		"node_js_version":  "NodeJsVersion",
 		"object_version":   "ObjectVersion",
 		"role_arn":         "RoleArn",
 		"script_id":        "Id",

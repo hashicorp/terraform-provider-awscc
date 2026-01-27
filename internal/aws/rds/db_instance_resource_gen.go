@@ -42,10 +42,10 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The additional storage volumes associated with the DB instance. RDS supports additional storage volumes for RDS for Oracle and RDS for SQL Server.",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "",
+		//	    "description": "Contains details about an additional storage volume for a DB instance. RDS support additional storage volumes for RDS for Oracle and RDS for SQL Server.",
 		//	    "properties": {
 		//	      "AllocatedStorage": {
 		//	        "description": "The amount of storage allocated for the additional storage volume, in gibibytes (GiB). The minimum is 20 GiB. The maximum is 65,536 GiB (64 TiB).",
@@ -61,15 +61,15 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "integer"
 		//	      },
 		//	      "StorageThroughput": {
-		//	        "description": "The storage throughput value for the additional storage volume, in mebibytes per second (MiBps). This setting applies only to the General Purpose SSD gp3 storage type.",
+		//	        "description": "The storage throughput value for the additional storage volume, in mebibytes per second (MiBps). This setting applies only to the General Purpose SSD (``gp3``) storage type.",
 		//	        "type": "integer"
 		//	      },
 		//	      "StorageType": {
-		//	        "description": "The storage type for the additional storage volume.",
+		//	        "description": "The storage type for the additional storage volume.\n Valid Values: ``GP3 | IO2``",
 		//	        "type": "string"
 		//	      },
 		//	      "VolumeName": {
-		//	        "description": "The name of the additional storage volume.",
+		//	        "description": "The name of the additional storage volume.\n Valid Values: ``RDSDBDATA2 | RDSDBDATA3 | RDSDBDATA4``",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -112,7 +112,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: StorageThroughput
 					"storage_throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The storage throughput value for the additional storage volume, in mebibytes per second (MiBps). This setting applies only to the General Purpose SSD gp3 storage type.",
+						Description: "The storage throughput value for the additional storage volume, in mebibytes per second (MiBps). This setting applies only to the General Purpose SSD (``gp3``) storage type.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -121,7 +121,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: StorageType
 					"storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The storage type for the additional storage volume.",
+						Description: "The storage type for the additional storage volume.\n Valid Values: ``GP3 | IO2``",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -130,7 +130,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: VolumeName
 					"volume_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the additional storage volume.",
+						Description: "The name of the additional storage volume.\n Valid Values: ``RDSDBDATA2 | RDSDBDATA3 | RDSDBDATA4``",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -139,7 +139,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "",
+			Description: "The additional storage volumes associated with the DB instance. RDS supports additional storage volumes for RDS for Oracle and RDS for SQL Server.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

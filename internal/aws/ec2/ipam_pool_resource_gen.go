@@ -197,7 +197,8 @@ func iPAMPoolResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "Limits which service in Amazon Web Services that the pool can be used in.",
 		//	  "enum": [
-		//	    "ec2"
+		//	    "ec2",
+		//	    "global-services"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -208,6 +209,7 @@ func iPAMPoolResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"ec2",
+					"global-services",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

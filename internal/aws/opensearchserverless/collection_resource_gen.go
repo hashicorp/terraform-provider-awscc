@@ -13,7 +13,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -60,6 +62,22 @@ func collectionResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: CollectionGroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the collection group to associate with the collection.",
+		//	  "type": "string"
+		//	}
+		"collection_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the collection group to associate with the collection.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DashboardEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -93,6 +111,54 @@ func collectionResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EncryptionConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Encryption settings for the collection",
+		//	  "properties": {
+		//	    "AWSOwnedKey": {
+		//	      "description": "Indicates whether to use an AWS owned key for encryption.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "KmsKeyArn": {
+		//	      "description": "Key Management Service key used to encrypt the collection.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"encryption_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AWSOwnedKey
+				"aws_owned_key": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether to use an AWS owned key for encryption.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Key Management Service key used to encrypt the collection.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Encryption settings for the collection",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// EncryptionConfig is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -113,11 +179,11 @@ func collectionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of the AWS KMS key used to encrypt the collection.",
+		//	  "description": "Key Management Service key used to encrypt the collection.",
 		//	  "type": "string"
 		//	}
 		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the AWS KMS key used to encrypt the collection.",
+			Description: "Key Management Service key used to encrypt the collection.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -304,22 +370,26 @@ func collectionResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                 "Arn",
-		"collection_endpoint": "CollectionEndpoint",
-		"collection_id":       "Id",
-		"dashboard_endpoint":  "DashboardEndpoint",
-		"description":         "Description",
-		"key":                 "Key",
-		"kms_key_arn":         "KmsKeyArn",
-		"name":                "Name",
-		"standby_replicas":    "StandbyReplicas",
-		"tags":                "Tags",
-		"type":                "Type",
-		"value":               "Value",
+		"arn":                   "Arn",
+		"aws_owned_key":         "AWSOwnedKey",
+		"collection_endpoint":   "CollectionEndpoint",
+		"collection_group_name": "CollectionGroupName",
+		"collection_id":         "Id",
+		"dashboard_endpoint":    "DashboardEndpoint",
+		"description":           "Description",
+		"encryption_config":     "EncryptionConfig",
+		"key":                   "Key",
+		"kms_key_arn":           "KmsKeyArn",
+		"name":                  "Name",
+		"standby_replicas":      "StandbyReplicas",
+		"tags":                  "Tags",
+		"type":                  "Type",
+		"value":                 "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Tags",
+		"/properties/EncryptionConfig",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

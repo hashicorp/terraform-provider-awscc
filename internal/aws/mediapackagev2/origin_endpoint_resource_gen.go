@@ -276,6 +276,12 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	            "format": "date-time",
 		//	            "type": "string"
 		//	          },
+		//	          "DrmSettings": {
+		//	            "description": "\u003cp\u003eOptionally specify one or more DRM settings for all of your manifest egress requests. When you include a DRM setting, note that you cannot use an identical DRM setting query parameter for this manifest's endpoint URL.\u003c/p\u003e",
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
 		//	          "End": {
 		//	            "description": "\u003cp\u003eOptionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.\u003c/p\u003e",
 		//	            "format": "date-time",
@@ -669,6 +675,18 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 								Description: "<p>Optionally specify the clip start time for all of your manifest egress requests. When you include clip start time, note that you cannot use clip start time query parameters for this manifest's endpoint URL.</p>",
 								Optional:    true,
 								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: DrmSettings
+							"drm_settings": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Optionally specify one or more DRM settings for all of your manifest egress requests. When you include a DRM setting, note that you cannot use an identical DRM setting query parameter for this manifest's endpoint URL.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -1124,6 +1142,12 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	            "format": "date-time",
 		//	            "type": "string"
 		//	          },
+		//	          "DrmSettings": {
+		//	            "description": "\u003cp\u003eOptionally specify one or more DRM settings for all of your manifest egress requests. When you include a DRM setting, note that you cannot use an identical DRM setting query parameter for this manifest's endpoint URL.\u003c/p\u003e",
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
 		//	          "End": {
 		//	            "description": "\u003cp\u003eOptionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.\u003c/p\u003e",
 		//	            "format": "date-time",
@@ -1237,6 +1261,18 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 								Description: "<p>Optionally specify the clip start time for all of your manifest egress requests. When you include clip start time, note that you cannot use clip start time query parameters for this manifest's endpoint URL.</p>",
 								Optional:    true,
 								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: DrmSettings
+							"drm_settings": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Optionally specify one or more DRM settings for all of your manifest egress requests. When you include a DRM setting, note that you cannot use an identical DRM setting query parameter for this manifest's endpoint URL.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -1450,6 +1486,12 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	            "format": "date-time",
 		//	            "type": "string"
 		//	          },
+		//	          "DrmSettings": {
+		//	            "description": "\u003cp\u003eOptionally specify one or more DRM settings for all of your manifest egress requests. When you include a DRM setting, note that you cannot use an identical DRM setting query parameter for this manifest's endpoint URL.\u003c/p\u003e",
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
 		//	          "End": {
 		//	            "description": "\u003cp\u003eOptionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.\u003c/p\u003e",
 		//	            "format": "date-time",
@@ -1563,6 +1605,18 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 								Description: "<p>Optionally specify the clip start time for all of your manifest egress requests. When you include clip start time, note that you cannot use clip start time query parameters for this manifest's endpoint URL.</p>",
 								Optional:    true,
 								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: DrmSettings
+							"drm_settings": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Optionally specify one or more DRM settings for all of your manifest egress requests. When you include a DRM setting, note that you cannot use an identical DRM setting query parameter for this manifest's endpoint URL.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -1785,6 +1839,12 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	            "format": "date-time",
 		//	            "type": "string"
 		//	          },
+		//	          "DrmSettings": {
+		//	            "description": "\u003cp\u003eOptionally specify one or more DRM settings for all of your manifest egress requests. When you include a DRM setting, note that you cannot use an identical DRM setting query parameter for this manifest's endpoint URL.\u003c/p\u003e",
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
 		//	          "End": {
 		//	            "description": "\u003cp\u003eOptionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.\u003c/p\u003e",
 		//	            "format": "date-time",
@@ -1848,6 +1908,18 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 								Description: "<p>Optionally specify the clip start time for all of your manifest egress requests. When you include clip start time, note that you cannot use clip start time query parameters for this manifest's endpoint URL.</p>",
 								Optional:    true,
 								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: DrmSettings
+							"drm_settings": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Optionally specify one or more DRM settings for all of your manifest egress requests. When you include a DRM setting, note that you cannot use an identical DRM setting query parameter for this manifest's endpoint URL.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -2028,6 +2100,13 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	          "additionalProperties": false,
 		//	          "description": "\u003cp\u003eThe parameters for the SPEKE key provider.\u003c/p\u003e",
 		//	          "properties": {
+		//	            "CertificateArn": {
+		//	              "description": "\u003cp\u003eThe ARN for the certificate that you imported to AWS Certificate Manager to add content key encryption to this endpoint. For this feature to work, your DRM key provider must support content key encryption.\u003c/p\u003e",
+		//	              "maxLength": 2048,
+		//	              "minLength": 20,
+		//	              "pattern": "^arn:([^:\\n]+):acm:([^:\\n]+):([0-9]+):certificate/[a-zA-Z0-9-_]+$",
+		//	              "type": "string"
+		//	            },
 		//	            "DrmSystems": {
 		//	              "description": "\u003cp\u003eThe DRM solution provider you're using to protect your content during distribution.\u003c/p\u003e",
 		//	              "items": {
@@ -2275,6 +2354,19 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 						// Property: SpekeKeyProvider
 						"speke_key_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CertificateArn
+								"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The ARN for the certificate that you imported to AWS Certificate Manager to add content key encryption to this endpoint. For this feature to work, your DRM key provider must support content key encryption.</p>",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(20, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:([^:\\n]+):acm:([^:\\n]+):([0-9]+):certificate/[a-zA-Z0-9-_]+$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: DrmSystems
 								"drm_systems": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
@@ -2623,6 +2715,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"ad_marker_hls":                        "AdMarkerHls",
 		"arn":                                  "Arn",
 		"base_urls":                            "BaseUrls",
+		"certificate_arn":                      "CertificateArn",
 		"channel_group_name":                   "ChannelGroupName",
 		"channel_name":                         "ChannelName",
 		"child_manifest_name":                  "ChildManifestName",
@@ -2637,6 +2730,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"dash_manifest_urls":                   "DashManifestUrls",
 		"dash_manifests":                       "DashManifests",
 		"description":                          "Description",
+		"drm_settings":                         "DrmSettings",
 		"drm_signaling":                        "DrmSignaling",
 		"drm_systems":                          "DrmSystems",
 		"dvb_priority":                         "DvbPriority",

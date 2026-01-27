@@ -21,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -204,6 +205,18 @@ func commandResource(ctx context.Context) (resource.Resource, error) {
 		//	        "pattern": "^[.$a-zA-Z0-9_-]+$",
 		//	        "type": "string"
 		//	      },
+		//	      "Type": {
+		//	        "enum": [
+		//	          "STRING",
+		//	          "INTEGER",
+		//	          "DOUBLE",
+		//	          "LONG",
+		//	          "UNSIGNEDLONG",
+		//	          "BOOLEAN",
+		//	          "BINARY"
+		//	        ],
+		//	        "type": "string"
+		//	      },
 		//	      "Value": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
@@ -237,6 +250,82 @@ func commandResource(ctx context.Context) (resource.Resource, error) {
 		//	          }
 		//	        },
 		//	        "type": "object"
+		//	      },
+		//	      "ValueConditions": {
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ComparisonOperator": {
+		//	              "enum": [
+		//	                "EQUALS",
+		//	                "NOT_EQUALS",
+		//	                "LESS_THAN",
+		//	                "LESS_THAN_EQUALS",
+		//	                "GREATER_THAN",
+		//	                "GREATER_THAN_EQUALS",
+		//	                "IN_SET",
+		//	                "NOT_IN_SET",
+		//	                "IN_RANGE",
+		//	                "NOT_IN_RANGE"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "Operand": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Number": {
+		//	                  "type": "string"
+		//	                },
+		//	                "NumberRange": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Max": {
+		//	                      "minLength": 1,
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Min": {
+		//	                      "minLength": 1,
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Min",
+		//	                    "Max"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "Numbers": {
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 10,
+		//	                  "minItems": 1,
+		//	                  "type": "array"
+		//	                },
+		//	                "String": {
+		//	                  "type": "string"
+		//	                },
+		//	                "Strings": {
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 10,
+		//	                  "minItems": 1,
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ComparisonOperator",
+		//	            "Operand"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "minItems": 1,
+		//	        "type": "array"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -354,6 +443,25 @@ func commandResource(ctx context.Context) (resource.Resource, error) {
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"STRING",
+								"INTEGER",
+								"DOUBLE",
+								"LONG",
+								"UNSIGNEDLONG",
+								"BOOLEAN",
+								"BINARY",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -432,6 +540,131 @@ func commandResource(ctx context.Context) (resource.Resource, error) {
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ValueConditions
+					"value_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ComparisonOperator
+								"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"EQUALS",
+											"NOT_EQUALS",
+											"LESS_THAN",
+											"LESS_THAN_EQUALS",
+											"GREATER_THAN",
+											"GREATER_THAN_EQUALS",
+											"IN_SET",
+											"NOT_IN_SET",
+											"IN_RANGE",
+											"NOT_IN_RANGE",
+										),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Operand
+								"operand": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Number
+										"number": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: NumberRange
+										"number_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Max
+												"max": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthAtLeast(1),
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Min
+												"min": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthAtLeast(1),
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Numbers
+										"numbers": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeBetween(1, 10),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: String
+										"string": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Strings
+										"strings": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeBetween(1, 10),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Object{ /*START VALIDATORS*/
+										fwvalidators.NotNullObject(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.SizeAtLeast(1),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -518,6 +751,26 @@ func commandResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: PayloadTemplate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The payload template associated with the command.",
+		//	  "maxLength": 32768,
+		//	  "type": "string"
+		//	}
+		"payload_template": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The payload template associated with the command.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(32768),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PendingDeletion
 		// CloudFormation resource type schema:
 		//
@@ -531,6 +784,68 @@ func commandResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Preprocessor
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The command preprocessor configuration.",
+		//	  "properties": {
+		//	    "AwsJsonSubstitution": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "OutputFormat": {
+		//	          "enum": [
+		//	            "JSON",
+		//	            "CBOR"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "OutputFormat"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"preprocessor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AwsJsonSubstitution
+				"aws_json_substitution": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: OutputFormat
+						"output_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"JSON",
+									"CBOR",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The command preprocessor configuration.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
@@ -651,32 +966,47 @@ func commandResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"b":                    "B",
-		"bin":                  "BIN",
-		"command_arn":          "CommandArn",
-		"command_id":           "CommandId",
-		"content":              "Content",
-		"content_type":         "ContentType",
-		"created_at":           "CreatedAt",
-		"d":                    "D",
-		"default_value":        "DefaultValue",
-		"deprecated":           "Deprecated",
-		"description":          "Description",
-		"display_name":         "DisplayName",
-		"i":                    "I",
-		"key":                  "Key",
-		"l":                    "L",
-		"last_updated_at":      "LastUpdatedAt",
-		"mandatory_parameters": "MandatoryParameters",
-		"name":                 "Name",
-		"namespace":            "Namespace",
-		"payload":              "Payload",
-		"pending_deletion":     "PendingDeletion",
-		"role_arn":             "RoleArn",
-		"s":                    "S",
-		"tags":                 "Tags",
-		"ul":                   "UL",
-		"value":                "Value",
+		"aws_json_substitution": "AwsJsonSubstitution",
+		"b":                     "B",
+		"bin":                   "BIN",
+		"command_arn":           "CommandArn",
+		"command_id":            "CommandId",
+		"comparison_operator":   "ComparisonOperator",
+		"content":               "Content",
+		"content_type":          "ContentType",
+		"created_at":            "CreatedAt",
+		"d":                     "D",
+		"default_value":         "DefaultValue",
+		"deprecated":            "Deprecated",
+		"description":           "Description",
+		"display_name":          "DisplayName",
+		"i":                     "I",
+		"key":                   "Key",
+		"l":                     "L",
+		"last_updated_at":       "LastUpdatedAt",
+		"mandatory_parameters":  "MandatoryParameters",
+		"max":                   "Max",
+		"min":                   "Min",
+		"name":                  "Name",
+		"namespace":             "Namespace",
+		"number":                "Number",
+		"number_range":          "NumberRange",
+		"numbers":               "Numbers",
+		"operand":               "Operand",
+		"output_format":         "OutputFormat",
+		"payload":               "Payload",
+		"payload_template":      "PayloadTemplate",
+		"pending_deletion":      "PendingDeletion",
+		"preprocessor":          "Preprocessor",
+		"role_arn":              "RoleArn",
+		"s":                     "S",
+		"string":                "String",
+		"strings":               "Strings",
+		"tags":                  "Tags",
+		"type":                  "Type",
+		"ul":                    "UL",
+		"value":                 "Value",
+		"value_conditions":      "ValueConditions",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

@@ -3660,7 +3660,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/SpotFleetRequestConfigData/TagSpecifications",
 		"/properties/SpotFleetRequestConfigData/LaunchSpecifications/*/NetworkInterfaces/*/Groups",
 	})
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(40)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 

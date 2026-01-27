@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -91,6 +92,23 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DeploymentOrder
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The deployment order for the environment.",
+		//	  "type": "integer"
+		//	}
+		"deployment_order": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The deployment order for the environment.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+				int64planmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// DeploymentOrder is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
@@ -202,6 +220,40 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EnvironmentBlueprintIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the environment blueprint.",
+		//	  "type": "string"
+		//	}
+		"environment_blueprint_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the environment blueprint.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// EnvironmentBlueprintIdentifier is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: EnvironmentConfigurationId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the environment configuration.",
+		//	  "type": "string"
+		//	}
+		"environment_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the environment configuration.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// EnvironmentConfigurationId is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentProfileId
 		// CloudFormation resource type schema:
 		//
@@ -306,7 +358,6 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the environment.",
 		//	  "maxLength": 64,
 		//	  "minLength": 1,
-		//	  "pattern": "^[\\w -]+$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -314,7 +365,6 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[\\w -]+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectId
@@ -499,29 +549,32 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"aws_account_id":                 "AwsAccountId",
-		"aws_account_region":             "AwsAccountRegion",
-		"created_at":                     "CreatedAt",
-		"created_by":                     "CreatedBy",
-		"description":                    "Description",
-		"domain_id":                      "DomainId",
-		"domain_identifier":              "DomainIdentifier",
-		"environment_account_identifier": "EnvironmentAccountIdentifier",
-		"environment_account_region":     "EnvironmentAccountRegion",
-		"environment_blueprint_id":       "EnvironmentBlueprintId",
-		"environment_id":                 "Id",
-		"environment_profile_id":         "EnvironmentProfileId",
-		"environment_profile_identifier": "EnvironmentProfileIdentifier",
-		"environment_role_arn":           "EnvironmentRoleArn",
-		"glossary_terms":                 "GlossaryTerms",
-		"name":                           "Name",
-		"project_id":                     "ProjectId",
-		"project_identifier":             "ProjectIdentifier",
-		"provider_name":                  "Provider",
-		"status":                         "Status",
-		"updated_at":                     "UpdatedAt",
-		"user_parameters":                "UserParameters",
-		"value":                          "Value",
+		"aws_account_id":                   "AwsAccountId",
+		"aws_account_region":               "AwsAccountRegion",
+		"created_at":                       "CreatedAt",
+		"created_by":                       "CreatedBy",
+		"deployment_order":                 "DeploymentOrder",
+		"description":                      "Description",
+		"domain_id":                        "DomainId",
+		"domain_identifier":                "DomainIdentifier",
+		"environment_account_identifier":   "EnvironmentAccountIdentifier",
+		"environment_account_region":       "EnvironmentAccountRegion",
+		"environment_blueprint_id":         "EnvironmentBlueprintId",
+		"environment_blueprint_identifier": "EnvironmentBlueprintIdentifier",
+		"environment_configuration_id":     "EnvironmentConfigurationId",
+		"environment_id":                   "Id",
+		"environment_profile_id":           "EnvironmentProfileId",
+		"environment_profile_identifier":   "EnvironmentProfileIdentifier",
+		"environment_role_arn":             "EnvironmentRoleArn",
+		"glossary_terms":                   "GlossaryTerms",
+		"name":                             "Name",
+		"project_id":                       "ProjectId",
+		"project_identifier":               "ProjectIdentifier",
+		"provider_name":                    "Provider",
+		"status":                           "Status",
+		"updated_at":                       "UpdatedAt",
+		"user_parameters":                  "UserParameters",
+		"value":                            "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
@@ -531,6 +584,9 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/EnvironmentAccountIdentifier",
 		"/properties/EnvironmentAccountRegion",
 		"/properties/EnvironmentRoleArn",
+		"/properties/EnvironmentBlueprintIdentifier",
+		"/properties/DeploymentOrder",
+		"/properties/EnvironmentConfigurationId",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

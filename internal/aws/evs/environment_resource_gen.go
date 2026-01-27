@@ -1165,7 +1165,8 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "enum": [
-		//	    "VCF-5.2.1"
+		//	    "VCF-5.2.1",
+		//	    "VCF-5.2.2"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -1174,6 +1175,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"VCF-5.2.1",
+					"VCF-5.2.2",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
