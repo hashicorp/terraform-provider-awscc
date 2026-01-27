@@ -24,7 +24,7 @@ resource "awscc_groundstation_dataflow_endpoint_group_v2" "example" {
         }
       }
     }
-  }, {
+    }, {
     uplink_aws_ground_station_agent_endpoint = {
       name = "example-uplink-endpoint"
       dataflow_details = {
@@ -57,7 +57,7 @@ resource "awscc_groundstation_dataflow_endpoint_group_v2" "example" {
   tags = [{
     key   = "Environment"
     value = "Example"
-  }, {
+    }, {
     key   = "Name"
     value = "example-dataflow-endpoint-group-v2"
   }]
