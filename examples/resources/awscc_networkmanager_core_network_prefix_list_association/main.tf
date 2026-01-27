@@ -5,7 +5,7 @@ resource "awscc_networkmanager_global_network" "example" {
   tags = [{
     key   = "Name"
     value = "example"
-  }, {
+    }, {
     key   = "Environment"
     value = "test"
   }]
@@ -33,7 +33,7 @@ resource "awscc_networkmanager_core_network" "example" {
   tags = [{
     key   = "Name"
     value = "example-core-network"
-  }, {
+    }, {
     key   = "Environment"
     value = "test"
   }]
