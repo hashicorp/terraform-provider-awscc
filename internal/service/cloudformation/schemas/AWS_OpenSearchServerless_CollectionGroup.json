@@ -1,0 +1,170 @@
+{
+  "typeName": "AWS::OpenSearchServerless::CollectionGroup",
+  "description": "Resource Type definition for AWS::OpenSearchServerless::CollectionGroup",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-opensearchserverless",
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "aoss:TagResource",
+      "aoss:UntagResource",
+      "aoss:ListTagsForResource"
+    ]
+  },
+  "definitions": {
+    "CapacityLimits": {
+      "type": "object",
+      "properties": {
+        "MaxSearchCapacityInOcu": {
+          "type": "number",
+          "multipleOf": 0.5,
+          "description": "The maximum search capacity for collections in the group."
+        },
+        "MaxIndexingCapacityInOcu": {
+          "type": "number",
+          "multipleOf": 0.5,
+          "description": "The maximum indexing capacity for collections in the group."
+        },
+        "MinSearchCapacityInOcu": {
+          "type": "number",
+          "multipleOf": 0.5,
+          "description": "The minimum search capacity for collections in the group."
+        },
+        "MinIndexingCapacityInOcu": {
+          "type": "number",
+          "multipleOf": 0.5,
+          "description": "The minimum indexing capacity for collections in the group."
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "description": "A map of key-value pairs associated with the collection group.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key in the key-value pair",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value in the key-value pair",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Name": {
+      "type": "string",
+      "maxLength": 32,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{2,31}$",
+      "description": "The name of the collection group."
+    },
+    "Id": {
+      "type": "string",
+      "maxLength": 40,
+      "minLength": 3,
+      "description": "The unique identifier of the collection group."
+    },
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) of the collection group.",
+      "type": "string"
+    },
+    "Description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "The description of the collection group."
+    },
+    "StandbyReplicas": {
+      "type": "string",
+      "description": "Indicates whether standby replicas are used for the collection group.",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "CapacityLimits": {
+      "$ref": "#/definitions/CapacityLimits"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "required": [
+    "Name",
+    "StandbyReplicas"
+  ],
+  "readOnlyProperties": [
+    "/properties/Id",
+    "/properties/Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/StandbyReplicas"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Name"
+    ],
+    [
+      "/properties/Arn"
+    ]
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "aoss:CreateCollectionGroup",
+        "aoss:BatchGetCollectionGroup",
+        "aoss:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "aoss:BatchGetCollectionGroup",
+        "aoss:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "aoss:UpdateCollectionGroup",
+        "aoss:BatchGetCollectionGroup",
+        "aoss:TagResource",
+        "aoss:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "aoss:DeleteCollectionGroup",
+        "aoss:BatchGetCollectionGroup"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "aoss:ListCollectionGroups"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
