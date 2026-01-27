@@ -70,6 +70,18 @@ func scriptDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A descriptive label that is associated with a script. Script names do not need to be unique.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: NodeJsVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Node.js version used for execution of the Realtime script.",
+		//	  "pattern": "^\\d+\\.[x0-9]+$",
+		//	  "type": "string"
+		//	}
+		"node_js_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Node.js version used for execution of the Realtime script.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SizeOnDisk
 		// CloudFormation resource type schema:
 		//
@@ -230,6 +242,7 @@ func scriptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"creation_time":    "CreationTime",
 		"key":              "Key",
 		"name":             "Name",
+		"node_js_version":  "NodeJsVersion",
 		"object_version":   "ObjectVersion",
 		"role_arn":         "RoleArn",
 		"script_id":        "Id",

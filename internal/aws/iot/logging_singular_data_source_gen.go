@@ -54,6 +54,71 @@ func loggingDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The log level to use. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EventConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Configurations for event-based logging that specifies which event types to log and their logging settings. Overrides account-level logging for the specified event",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Configuration for event-based logging that specifies which event types to log and their logging settings. Used for account-level logging overrides.",
+		//	    "properties": {
+		//	      "EventType": {
+		//	        "description": "The type of event to log. These include event types like Connect, Publish, and Disconnect.",
+		//	        "maxLength": 512,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "LogDestination": {
+		//	        "description": "CloudWatch Log Group for event-based logging. Specifies where log events should be sent. The log destination for event-based logging overrides default Log Group for the specified event type and applies to all resources associated with that event.",
+		//	        "maxLength": 512,
+		//	        "minLength": 1,
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      },
+		//	      "LogLevel": {
+		//	        "description": "The logging level for the specified event type. Determines the verbosity of log messages generated for this event type.",
+		//	        "enum": [
+		//	          "ERROR",
+		//	          "WARN",
+		//	          "INFO",
+		//	          "DEBUG",
+		//	          "DISABLED"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "EventType"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"event_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EventType
+					"event_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of event to log. These include event types like Connect, Publish, and Disconnect.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: LogDestination
+					"log_destination": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "CloudWatch Log Group for event-based logging. Specifies where log events should be sent. The log destination for event-based logging overrides default Log Group for the specified event type and applies to all resources associated with that event.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: LogLevel
+					"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The logging level for the specified event type. Determines the verbosity of log messages generated for this event type.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Configurations for event-based logging that specifies which event types to log and their logging settings. Overrides account-level logging for the specified event",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -84,9 +149,13 @@ func loggingDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::Logging").WithTerraformTypeName("awscc_iot_logging")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_id":        "AccountId",
-		"default_log_level": "DefaultLogLevel",
-		"role_arn":          "RoleArn",
+		"account_id":           "AccountId",
+		"default_log_level":    "DefaultLogLevel",
+		"event_configurations": "EventConfigurations",
+		"event_type":           "EventType",
+		"log_destination":      "LogDestination",
+		"log_level":            "LogLevel",
+		"role_arn":             "RoleArn",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

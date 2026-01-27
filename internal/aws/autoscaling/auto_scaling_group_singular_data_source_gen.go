@@ -50,7 +50,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The instance capacity distribution across Availability Zones.",
+		//	  "description": "The EC2 instance capacity distribution across Availability Zones for the Auto Scaling group.",
 		//	  "properties": {
 		//	    "CapacityDistributionStrategy": {
 		//	      "description": "If launches fail in an Availability Zone, the following strategies are available. The default is ``balanced-best-effort``. \n  +  ``balanced-only`` - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.\n  +  ``balanced-best-effort`` - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.",
@@ -71,7 +71,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The instance capacity distribution across Availability Zones.",
+			Description: "The EC2 instance capacity distribution across Availability Zones for the Auto Scaling group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZoneImpairmentPolicy
@@ -79,7 +79,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The Availability Zone impairment policy.",
+		//	  "description": "The Availability Zone impairment policy for the Auto Scaling group.",
 		//	  "properties": {
 		//	    "ImpairedZoneHealthCheckBehavior": {
 		//	      "description": "Specifies the health check behavior for the impaired Availability Zone in an active zonal shift. If you select ``Replace unhealthy``, instances that appear unhealthy will be replaced in all Availability Zones. If you select ``Ignore unhealthy``, instances will not be replaced in the Availability Zone with the active zonal shift. For more information, see [Auto Scaling group zonal shift](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-zonal-shift.html) in the *Amazon EC2 Auto Scaling User Guide*.",
@@ -113,7 +113,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The Availability Zone impairment policy.",
+			Description: "The Availability Zone impairment policy for the Auto Scaling group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZones
@@ -149,7 +149,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The capacity reservation specification.",
+		//	  "description": "The capacity reservation specification for the Auto Scaling group.",
 		//	  "properties": {
 		//	    "CapacityReservationPreference": {
 		//	      "description": "The capacity reservation preference. The following options are available: \n  +  ``capacity-reservations-only`` - Auto Scaling will only launch instances into a Capacity Reservation or Capacity Reservation resource group. If capacity isn't available, instances will fail to launch.\n  +  ``capacity-reservations-first`` - Auto Scaling will try to launch instances into a Capacity Reservation or Capacity Reservation resource group first. If capacity isn't available, instances will run in On-Demand capacity.\n  +  ``none`` - Auto Scaling will not launch instances into a Capacity Reservation. Instances will run in On-Demand capacity. \n  +  ``default`` - Auto Scaling uses the Capacity Reservation preference from your launch template or an open Capacity Reservation.",
@@ -213,7 +213,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The capacity reservation specification.",
+			Description: "The capacity reservation specification for the Auto Scaling group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Context
@@ -310,13 +310,14 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "The instance lifecycle policy for the Auto Scaling group.",
 		//	  "properties": {
 		//	    "RetentionTriggers": {
 		//	      "additionalProperties": false,
-		//	      "description": "",
+		//	      "description": "Specifies the conditions that trigger instance retention behavior. These triggers determine when instances should move to a ``Retained`` state instead of automatic termination. This allows you to maintain control over instance management when lifecycles transition and operations fail.",
 		//	      "properties": {
 		//	        "TerminateHookAbandon": {
+		//	          "description": "Specifies the action when a termination lifecycle hook is abandoned due to failure, timeout, or explicit abandonment (calling CompleteLifecycleAction). \n  Set to ``Retain`` to move instances to a ``Retained`` state. Set to ``Terminate`` for default termination behavior. \n  Retained instances don't count toward desired capacity and remain until you call ``TerminateInstanceInAutoScalingGroup``.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -332,14 +333,15 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: TerminateHookAbandon
 						"terminate_hook_abandon": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "Specifies the action when a termination lifecycle hook is abandoned due to failure, timeout, or explicit abandonment (calling CompleteLifecycleAction). \n  Set to ``Retain`` to move instances to a ``Retained`` state. Set to ``Terminate`` for default termination behavior. \n  Retained instances don't count toward desired capacity and remain until you call ``TerminateInstanceInAutoScalingGroup``.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "",
+					Description: "Specifies the conditions that trigger instance retention behavior. These triggers determine when instances should move to a ``Retained`` state instead of automatic termination. This allows you to maintain control over instance management when lifecycles transition and operations fail.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "The instance lifecycle policy for the Auto Scaling group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceMaintenancePolicy
@@ -699,7 +701,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	            "description": "Use this structure to let Amazon EC2 Auto Scaling do the following when the Auto Scaling group has a mixed instances policy:\n  +  Override the instance type that is specified in the launch template.\n  +  Use multiple instance types.\n  \n Specify the instance types that you want, or define your instance requirements instead and let Amazon EC2 Auto Scaling provision the available instance types that meet your requirements. This can provide Amazon EC2 Auto Scaling with a larger selection of instance types to choose from when fulfilling Spot and On-Demand capacities. You can view which instance types are matched before you apply the instance requirements to your Auto Scaling group.\n After you define your instance requirements, you don't have to keep updating these settings to get new EC2 instance types automatically. Amazon EC2 Auto Scaling uses the instance requirements of the Auto Scaling group to determine whether a new EC2 instance type can be used.\n ``LaunchTemplateOverrides`` is a property of the [AWS::AutoScaling::AutoScalingGroup LaunchTemplate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-launchtemplate.html) property type.",
 		//	            "properties": {
 		//	              "ImageId": {
-		//	                "description": "",
+		//	                "description": "The ID of the Amazon Machine Image (AMI) to use for instances launched with this override. When using Instance Refresh with ``ReplaceRootVolume`` strategy, this specifies the AMI for root volume replacement operations. \n  For ``ReplaceRootVolume`` operations: \n  +  All overrides in the ``MixedInstancesPolicy`` must specify an ImageId\n  +  The AMI must contain only a single root volume\n  +  Root volume replacement doesn't support multi-volume AMIs",
 		//	                "type": "string"
 		//	              },
 		//	              "InstanceRequirements": {
@@ -1097,7 +1099,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: ImageId
 									"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "",
+										Description: "The ID of the Amazon Machine Image (AMI) to use for instances launched with this override. When using Instance Refresh with ``ReplaceRootVolume`` strategy, this specifies the AMI for root volume replacement operations. \n  For ``ReplaceRootVolume`` operations: \n  +  All overrides in the ``MixedInstancesPolicy`` must specify an ImageId\n  +  The AMI must contain only a single root volume\n  +  Root volume replacement doesn't support multi-volume AMIs",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: InstanceRequirements

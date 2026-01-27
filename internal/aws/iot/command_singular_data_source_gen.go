@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -156,6 +157,18 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "pattern": "^[.$a-zA-Z0-9_-]+$",
 		//	        "type": "string"
 		//	      },
+		//	      "Type": {
+		//	        "enum": [
+		//	          "STRING",
+		//	          "INTEGER",
+		//	          "DOUBLE",
+		//	          "LONG",
+		//	          "UNSIGNEDLONG",
+		//	          "BOOLEAN",
+		//	          "BINARY"
+		//	        ],
+		//	        "type": "string"
+		//	      },
 		//	      "Value": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
@@ -189,6 +202,82 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          }
 		//	        },
 		//	        "type": "object"
+		//	      },
+		//	      "ValueConditions": {
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ComparisonOperator": {
+		//	              "enum": [
+		//	                "EQUALS",
+		//	                "NOT_EQUALS",
+		//	                "LESS_THAN",
+		//	                "LESS_THAN_EQUALS",
+		//	                "GREATER_THAN",
+		//	                "GREATER_THAN_EQUALS",
+		//	                "IN_SET",
+		//	                "NOT_IN_SET",
+		//	                "IN_RANGE",
+		//	                "NOT_IN_RANGE"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "Operand": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Number": {
+		//	                  "type": "string"
+		//	                },
+		//	                "NumberRange": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Max": {
+		//	                      "minLength": 1,
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Min": {
+		//	                      "minLength": 1,
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Min",
+		//	                    "Max"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "Numbers": {
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 10,
+		//	                  "minItems": 1,
+		//	                  "type": "array"
+		//	                },
+		//	                "String": {
+		//	                  "type": "string"
+		//	                },
+		//	                "Strings": {
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 10,
+		//	                  "minItems": 1,
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ComparisonOperator",
+		//	            "Operand"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "minItems": 1,
+		//	        "type": "array"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -244,6 +333,10 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -276,6 +369,56 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Computed: true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: ValueConditions
+					"value_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ComparisonOperator
+								"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Operand
+								"operand": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Number
+										"number": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: NumberRange
+										"number_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Max
+												"max": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Min
+												"min": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Numbers
+										"numbers": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: String
+										"string": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Strings
+										"strings": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -329,6 +472,18 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The payload associated with the command.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: PayloadTemplate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The payload template associated with the command.",
+		//	  "maxLength": 32768,
+		//	  "type": "string"
+		//	}
+		"payload_template": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The payload template associated with the command.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PendingDeletion
 		// CloudFormation resource type schema:
 		//
@@ -338,6 +493,48 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"pending_deletion": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A flag indicating whether the command is pending deletion.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Preprocessor
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The command preprocessor configuration.",
+		//	  "properties": {
+		//	    "AwsJsonSubstitution": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "OutputFormat": {
+		//	          "enum": [
+		//	            "JSON",
+		//	            "CBOR"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "OutputFormat"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"preprocessor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AwsJsonSubstitution
+				"aws_json_substitution": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: OutputFormat
+						"output_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The command preprocessor configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
@@ -419,32 +616,47 @@ func commandDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::Command").WithTerraformTypeName("awscc_iot_command")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"b":                    "B",
-		"bin":                  "BIN",
-		"command_arn":          "CommandArn",
-		"command_id":           "CommandId",
-		"content":              "Content",
-		"content_type":         "ContentType",
-		"created_at":           "CreatedAt",
-		"d":                    "D",
-		"default_value":        "DefaultValue",
-		"deprecated":           "Deprecated",
-		"description":          "Description",
-		"display_name":         "DisplayName",
-		"i":                    "I",
-		"key":                  "Key",
-		"l":                    "L",
-		"last_updated_at":      "LastUpdatedAt",
-		"mandatory_parameters": "MandatoryParameters",
-		"name":                 "Name",
-		"namespace":            "Namespace",
-		"payload":              "Payload",
-		"pending_deletion":     "PendingDeletion",
-		"role_arn":             "RoleArn",
-		"s":                    "S",
-		"tags":                 "Tags",
-		"ul":                   "UL",
-		"value":                "Value",
+		"aws_json_substitution": "AwsJsonSubstitution",
+		"b":                     "B",
+		"bin":                   "BIN",
+		"command_arn":           "CommandArn",
+		"command_id":            "CommandId",
+		"comparison_operator":   "ComparisonOperator",
+		"content":               "Content",
+		"content_type":          "ContentType",
+		"created_at":            "CreatedAt",
+		"d":                     "D",
+		"default_value":         "DefaultValue",
+		"deprecated":            "Deprecated",
+		"description":           "Description",
+		"display_name":          "DisplayName",
+		"i":                     "I",
+		"key":                   "Key",
+		"l":                     "L",
+		"last_updated_at":       "LastUpdatedAt",
+		"mandatory_parameters":  "MandatoryParameters",
+		"max":                   "Max",
+		"min":                   "Min",
+		"name":                  "Name",
+		"namespace":             "Namespace",
+		"number":                "Number",
+		"number_range":          "NumberRange",
+		"numbers":               "Numbers",
+		"operand":               "Operand",
+		"output_format":         "OutputFormat",
+		"payload":               "Payload",
+		"payload_template":      "PayloadTemplate",
+		"pending_deletion":      "PendingDeletion",
+		"preprocessor":          "Preprocessor",
+		"role_arn":              "RoleArn",
+		"s":                     "S",
+		"string":                "String",
+		"strings":               "Strings",
+		"tags":                  "Tags",
+		"type":                  "Type",
+		"ul":                    "UL",
+		"value":                 "Value",
+		"value_conditions":      "ValueConditions",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

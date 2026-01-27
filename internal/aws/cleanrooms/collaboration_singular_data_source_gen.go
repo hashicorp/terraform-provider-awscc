@@ -103,7 +103,9 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "enum": [
-		//	      "ADD_MEMBER"
+		//	      "ADD_MEMBER",
+		//	      "GRANT_RECEIVE_RESULTS_ABILITY",
+		//	      "REVOKE_RECEIVE_RESULTS_ABILITY"
 		//	    ],
 		//	    "type": "string"
 		//	  },

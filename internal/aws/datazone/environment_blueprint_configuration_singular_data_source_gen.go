@@ -103,6 +103,25 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 		"environment_role_permission_boundary": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: GlobalParameters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Region-agnostic environment blueprint parameters.",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"global_parameters": // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "Region-agnostic environment blueprint parameters.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManageAccessRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -256,6 +275,7 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 		"environment_blueprint_id":                   "EnvironmentBlueprintId",
 		"environment_blueprint_identifier":           "EnvironmentBlueprintIdentifier",
 		"environment_role_permission_boundary":       "EnvironmentRolePermissionBoundary",
+		"global_parameters":                          "GlobalParameters",
 		"lake_formation_configuration":               "LakeFormationConfiguration",
 		"location_registration_exclude_s3_locations": "LocationRegistrationExcludeS3Locations",
 		"location_registration_role":                 "LocationRegistrationRole",

@@ -44,6 +44,16 @@ func inboundExternalLinkDataSource(ctx context.Context) (datasource.DataSource, 
 		"created_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: DomainName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": "^(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)(?:\\.(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?))+$",
+		//	  "type": "string"
+		//	}
+		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: GatewayId
 		// CloudFormation resource type schema:
 		//
@@ -334,6 +344,7 @@ func inboundExternalLinkDataSource(ctx context.Context) (datasource.DataSource, 
 		"arn":                           "Arn",
 		"created_timestamp":             "CreatedTimestamp",
 		"customer_provided_id":          "CustomerProvidedId",
+		"domain_name":                   "DomainName",
 		"error_log":                     "ErrorLog",
 		"filter_log":                    "FilterLog",
 		"gateway_id":                    "GatewayId",

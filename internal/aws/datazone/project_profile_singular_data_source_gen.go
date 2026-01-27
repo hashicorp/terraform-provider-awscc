@@ -378,6 +378,15 @@ func projectProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: UseDefaultConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"use_default_configurations": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -421,6 +430,7 @@ func projectProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		"resolved_parameters":          "ResolvedParameters",
 		"ssm_path":                     "SsmPath",
 		"status":                       "Status",
+		"use_default_configurations":   "UseDefaultConfigurations",
 		"value":                        "Value",
 	})
 

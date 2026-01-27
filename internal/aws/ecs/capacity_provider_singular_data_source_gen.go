@@ -166,6 +166,9 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	        "Ec2InstanceProfileArn": {
 		//	          "type": "string"
 		//	        },
+		//	        "FipsEnabled": {
+		//	          "type": "boolean"
+		//	        },
 		//	        "InstanceRequirements": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
@@ -452,6 +455,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	            }
 		//	          },
 		//	          "required": [
+		//	            "SecurityGroups",
 		//	            "Subnets"
 		//	          ],
 		//	          "type": "object"
@@ -516,6 +520,10 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 						}, /*END ATTRIBUTE*/
 						// Property: Ec2InstanceProfileArn
 						"ec_2_instance_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: FipsEnabled
+						"fips_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: InstanceRequirements
@@ -835,6 +843,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		"cpu_manufacturers":              "CpuManufacturers",
 		"ec_2_instance_profile_arn":      "Ec2InstanceProfileArn",
 		"excluded_instance_types":        "ExcludedInstanceTypes",
+		"fips_enabled":                   "FipsEnabled",
 		"infrastructure_optimization":    "InfrastructureOptimization",
 		"infrastructure_role_arn":        "InfrastructureRoleArn",
 		"instance_generations":           "InstanceGenerations",

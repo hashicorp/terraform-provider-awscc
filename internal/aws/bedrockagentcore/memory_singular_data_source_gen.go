@@ -64,7 +64,7 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "Duration in days until memory events expire",
 		//	  "maximum": 365,
-		//	  "minimum": 7,
+		//	  "minimum": 3,
 		//	  "type": "integer"
 		//	}
 		"event_expiry_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/

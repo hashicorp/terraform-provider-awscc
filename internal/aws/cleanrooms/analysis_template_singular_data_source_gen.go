@@ -33,7 +33,7 @@ func analysisTemplateDataSource(ctx context.Context) (datasource.DataSource, err
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "DefaultValue": {
-		//	        "maxLength": 250,
+		//	        "maxLength": 1000,
 		//	        "minLength": 0,
 		//	        "type": "string"
 		//	      },
@@ -83,7 +83,7 @@ func analysisTemplateDataSource(ctx context.Context) (datasource.DataSource, err
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 10,
+		//	  "maxItems": 50,
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}

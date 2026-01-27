@@ -44,6 +44,17 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The endpoint for the collection.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CollectionGroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the collection group to associate with the collection.",
+		//	  "type": "string"
+		//	}
+		"collection_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the collection group to associate with the collection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DashboardEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -67,6 +78,40 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The description of the collection",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EncryptionConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Encryption settings for the collection",
+		//	  "properties": {
+		//	    "AWSOwnedKey": {
+		//	      "description": "Indicates whether to use an AWS owned key for encryption.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "KmsKeyArn": {
+		//	      "description": "Key Management Service key used to encrypt the collection.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"encryption_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AWSOwnedKey
+				"aws_owned_key": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether to use an AWS owned key for encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Key Management Service key used to encrypt the collection.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Encryption settings for the collection",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -84,11 +129,11 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of the AWS KMS key used to encrypt the collection.",
+		//	  "description": "Key Management Service key used to encrypt the collection.",
 		//	  "type": "string"
 		//	}
 		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the AWS KMS key used to encrypt the collection.",
+			Description: "Key Management Service key used to encrypt the collection.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -204,18 +249,21 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::OpenSearchServerless::Collection").WithTerraformTypeName("awscc_opensearchserverless_collection")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                 "Arn",
-		"collection_endpoint": "CollectionEndpoint",
-		"collection_id":       "Id",
-		"dashboard_endpoint":  "DashboardEndpoint",
-		"description":         "Description",
-		"key":                 "Key",
-		"kms_key_arn":         "KmsKeyArn",
-		"name":                "Name",
-		"standby_replicas":    "StandbyReplicas",
-		"tags":                "Tags",
-		"type":                "Type",
-		"value":               "Value",
+		"arn":                   "Arn",
+		"aws_owned_key":         "AWSOwnedKey",
+		"collection_endpoint":   "CollectionEndpoint",
+		"collection_group_name": "CollectionGroupName",
+		"collection_id":         "Id",
+		"dashboard_endpoint":    "DashboardEndpoint",
+		"description":           "Description",
+		"encryption_config":     "EncryptionConfig",
+		"key":                   "Key",
+		"kms_key_arn":           "KmsKeyArn",
+		"name":                  "Name",
+		"standby_replicas":      "StandbyReplicas",
+		"tags":                  "Tags",
+		"type":                  "Type",
+		"value":                 "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

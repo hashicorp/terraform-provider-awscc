@@ -144,7 +144,8 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "Limits which service in Amazon Web Services that the pool can be used in.",
 		//	  "enum": [
-		//	    "ec2"
+		//	    "ec2",
+		//	    "global-services"
 		//	  ],
 		//	  "type": "string"
 		//	}
