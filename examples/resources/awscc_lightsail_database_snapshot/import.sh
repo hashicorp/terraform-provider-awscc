@@ -1,0 +1,1 @@
+$ terraform import awscc_lightsail_database_snapshot.example "relational_database_snapshot_name"

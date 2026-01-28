@@ -2168,7 +2168,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/LaunchTemplateConfigs/*/Overrides/*/Placement/HostId",
 		"/properties/LaunchTemplateConfigs/*/Overrides/*/Placement/Tenancy",
 	})
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(40)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 

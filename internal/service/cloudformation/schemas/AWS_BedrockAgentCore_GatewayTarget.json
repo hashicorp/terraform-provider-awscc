@@ -65,6 +65,101 @@
         }
       ]
     },
+    "ApiGatewayTargetConfiguration": {
+      "type": "object",
+      "properties": {
+        "RestApiId": {
+          "type": "string"
+        },
+        "Stage": {
+          "type": "string"
+        },
+        "ApiGatewayToolConfiguration": {
+          "$ref": "#/definitions/ApiGatewayToolConfiguration"
+        }
+      },
+      "required": [
+        "RestApiId",
+        "Stage",
+        "ApiGatewayToolConfiguration"
+      ],
+      "additionalProperties": false
+    },
+    "ApiGatewayToolConfiguration": {
+      "type": "object",
+      "properties": {
+        "ToolOverrides": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiGatewayToolOverride"
+          }
+        },
+        "ToolFilters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiGatewayToolFilter"
+          }
+        }
+      },
+      "required": [
+        "ToolFilters"
+      ],
+      "additionalProperties": false
+    },
+    "ApiGatewayToolOverride": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "Path": {
+          "type": "string"
+        },
+        "Method": {
+          "$ref": "#/definitions/RestApiMethod"
+        }
+      },
+      "required": [
+        "Name",
+        "Path",
+        "Method"
+      ],
+      "additionalProperties": false
+    },
+    "ApiGatewayToolFilter": {
+      "type": "object",
+      "properties": {
+        "FilterPath": {
+          "type": "string"
+        },
+        "Methods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestApiMethod"
+          }
+        }
+      },
+      "required": [
+        "FilterPath",
+        "Methods"
+      ],
+      "additionalProperties": false
+    },
+    "RestApiMethod": {
+      "type": "string",
+      "enum": [
+        "GET",
+        "DELETE",
+        "HEAD",
+        "OPTIONS",
+        "PATCH",
+        "PUT",
+        "POST"
+      ]
+    },
     "CredentialProvider": {
       "oneOf": [
         {
@@ -201,6 +296,19 @@
           },
           "required": [
             "McpServer"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "ApiGateway",
+          "properties": {
+            "ApiGateway": {
+              "$ref": "#/definitions/ApiGatewayTargetConfiguration"
+            }
+          },
+          "required": [
+            "ApiGateway"
           ],
           "additionalProperties": false
         }
@@ -495,7 +603,6 @@
     }
   },
   "required": [
-    "CredentialProviderConfigurations",
     "Name",
     "TargetConfiguration"
   ],
@@ -518,6 +625,7 @@
   "handlers": {
     "create": {
       "permissions": [
+        "apigateway:GET",
         "bedrock-agentcore:CreateGatewayTarget",
         "bedrock-agentcore:GetGatewayTarget",
         "bedrock-agentcore:GetResourceOauth2Token",
@@ -537,6 +645,7 @@
     },
     "update": {
       "permissions": [
+        "apigateway:GET",
         "bedrock-agentcore:GetGatewayTarget",
         "bedrock-agentcore:GetResourceOauth2Token",
         "bedrock-agentcore:GetWorkloadAccessToken",

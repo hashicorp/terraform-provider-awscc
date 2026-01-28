@@ -242,7 +242,7 @@ func organizationConformancePackResource(ctx context.Context) (resource.Resource
 	}
 
 	schema := schema.Schema{
-		Description: "Resource schema for AWS::Config::OrganizationConformancePack.",
+		Description: "Resource Type definition for AWS::Config::OrganizationConformancePack.",
 		Version:     1,
 		Attributes:  attributes,
 	}

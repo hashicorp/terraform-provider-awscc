@@ -143,6 +143,30 @@ func backupPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "RuleName": {
 		//	            "type": "string"
 		//	          },
+		//	          "ScanActions": {
+		//	            "insertionOrder": true,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "MalwareScanner": {
+		//	                  "enum": [
+		//	                    "GUARDDUTY"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "ScanMode": {
+		//	                  "enum": [
+		//	                    "FULL_SCAN",
+		//	                    "INCREMENTAL_SCAN"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
+		//	          },
 		//	          "ScheduleExpression": {
 		//	            "type": "string"
 		//	          },
@@ -163,6 +187,34 @@ func backupPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "TargetBackupVault",
 		//	          "RuleName"
 		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
+		//	    "ScanSettings": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "MalwareScanner": {
+		//	            "enum": [
+		//	              "GUARDDUTY"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "ResourceTypes": {
+		//	            "insertionOrder": true,
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "ScannerRoleArn": {
+		//	            "type": "string"
+		//	          }
+		//	        },
 		//	        "type": "object"
 		//	      },
 		//	      "type": "array",
@@ -281,6 +333,22 @@ func backupPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 							"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
+							// Property: ScanActions
+							"scan_actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: MalwareScanner
+										"malware_scanner": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ScanMode
+										"scan_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
 							// Property: ScheduleExpression
 							"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Computed: true,
@@ -299,6 +367,27 @@ func backupPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: TargetLogicallyAirGappedBackupVaultArn
 							"target_logically_air_gapped_backup_vault_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ScanSettings
+				"scan_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: MalwareScanner
+							"malware_scanner": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ResourceTypes
+							"resource_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ScannerRoleArn
+							"scanner_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -384,12 +473,17 @@ func backupPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"enable_continuous_backup":                     "EnableContinuousBackup",
 		"index_actions":                                "IndexActions",
 		"lifecycle":                                    "Lifecycle",
+		"malware_scanner":                              "MalwareScanner",
 		"move_to_cold_storage_after_days":              "MoveToColdStorageAfterDays",
 		"opt_in_to_archive_for_supported_resources":    "OptInToArchiveForSupportedResources",
 		"recovery_point_tags":                          "RecoveryPointTags",
 		"resource_type":                                "ResourceType",
 		"resource_types":                               "ResourceTypes",
 		"rule_name":                                    "RuleName",
+		"scan_actions":                                 "ScanActions",
+		"scan_mode":                                    "ScanMode",
+		"scan_settings":                                "ScanSettings",
+		"scanner_role_arn":                             "ScannerRoleArn",
 		"schedule_expression":                          "ScheduleExpression",
 		"schedule_expression_timezone":                 "ScheduleExpressionTimezone",
 		"start_window_minutes":                         "StartWindowMinutes",

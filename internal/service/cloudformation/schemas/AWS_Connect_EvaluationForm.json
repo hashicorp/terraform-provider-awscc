@@ -76,6 +76,62 @@
         }
       }
     },
+    "EvaluationReviewNotificationRecipientValue": {
+      "description": "",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "UserId": {
+          "description": "The user identifier for the notification recipient.",
+          "type": "string"
+        }
+      }
+    },
+    "EvaluationReviewNotificationRecipient": {
+      "description": "",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Type": {
+          "description": "The type of notification recipient.",
+          "type": "string",
+          "enum": [
+            "USER_ID"
+          ]
+        },
+        "Value": {
+          "description": "The value associated with the notification recipient type.",
+          "$ref": "#/definitions/EvaluationReviewNotificationRecipientValue"
+        }
+      },
+      "required": [
+        "Type",
+        "Value"
+      ]
+    },
+    "EvaluationReviewConfiguration": {
+      "description": "",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ReviewNotificationRecipients": {
+          "description": "List of recipients who should be notified when a review is requested.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EvaluationReviewNotificationRecipient"
+          }
+        },
+        "EligibilityDays": {
+          "description": "Number of days during which a request for review can be submitted for evaluations created from this form.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 90
+        }
+      },
+      "required": [
+        "ReviewNotificationRecipients"
+      ]
+    },
     "EvaluationFormBaseItem": {
       "description": "An item at the root level. All items must be sections.",
       "type": "object",
@@ -893,6 +949,10 @@
     "LanguageConfiguration": {
       "description": "Configuration for language settings of this evaluation form.",
       "$ref": "#/definitions/EvaluationFormLanguageConfiguration"
+    },
+    "ReviewConfiguration": {
+      "description": "",
+      "$ref": "#/definitions/EvaluationReviewConfiguration"
     },
     "Tags": {
       "description": "The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.",

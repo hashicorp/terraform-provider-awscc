@@ -3,12 +3,12 @@
 page_title: "awscc_config_organization_conformance_pack Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource schema for AWS::Config::OrganizationConformancePack.
+  Resource Type definition for AWS::Config::OrganizationConformancePack.
 ---
 
 # awscc_config_organization_conformance_pack (Resource)
 
-Resource schema for AWS::Config::OrganizationConformancePack.
+Resource Type definition for AWS::Config::OrganizationConformancePack.
 
 
 

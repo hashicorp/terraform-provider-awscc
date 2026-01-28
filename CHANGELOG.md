@@ -1,5 +1,33 @@
 ## 1.69.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_backup_tiering_configuration`
+* **New Data Source:** `awscc_backup_tiering_configurations`
+* **New Data Source:** `awscc_docdb_global_cluster`
+* **New Data Source:** `awscc_docdb_global_clusters`
+* **New Data Source:** `awscc_emrcontainers_security_configurations`
+* **New Data Source:** `awscc_lightsail_database_snapshot`
+* **New Data Source:** `awscc_lightsail_database_snapshots`
+* **New Data Source:** `awscc_mwaaserverless_workflow`
+* **New Data Source:** `awscc_mwaaserverless_workflows`
+* **New Data Source:** `awscc_opensearchserverless_collection_group`
+* **New Data Source:** `awscc_opensearchserverless_collection_groups`
+* **New Data Source:** `awscc_quicksight_action_connector`
+* **New Data Source:** `awscc_quicksight_action_connectors`
+* **New List Resource:** `awscc_backup_tiering_configuration`
+* **New List Resource:** `awscc_docdb_global_cluster`
+* **New List Resource:** `awscc_lightsail_database_snapshot`
+* **New List Resource:** `awscc_mwaaserverless_workflow`
+* **New List Resource:** `awscc_opensearchserverless_collection_group`
+* **New List Resource:** `awscc_quicksight_action_connector`
+* **New Resource:** `awscc_backup_tiering_configuration`
+* **New Resource:** `awscc_docdb_global_cluster`
+* **New Resource:** `awscc_lightsail_database_snapshot`
+* **New Resource:** `awscc_mwaaserverless_workflow`
+* **New Resource:** `awscc_opensearchserverless_collection_group`
+* **New Resource:** `awscc_quicksight_action_connector`
+
 ## 1.68.0 (January 7, 2026)
 
 BUG FIXES:

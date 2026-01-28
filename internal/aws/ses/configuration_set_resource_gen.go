@@ -37,6 +37,39 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::SES::ConfigurationSet resource.
 func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ArchivingOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "An object that defines a MailManager archive that is used to preserve emails that you send using the configuration set.",
+		//	  "properties": {
+		//	    "ArchiveArn": {
+		//	      "description": "The ARN of the MailManager archive to associate with the configuration set.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"archiving_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ArchiveArn
+				"archive_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the MailManager archive to associate with the configuration set.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "An object that defines a MailManager archive that is used to preserve emails that you send using the configuration set.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DeliveryOptions
 		// CloudFormation resource type schema:
 		//
@@ -587,6 +620,8 @@ func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"archive_arn":                  "ArchiveArn",
+		"archiving_options":            "ArchivingOptions",
 		"condition_threshold":          "ConditionThreshold",
 		"condition_threshold_enabled":  "ConditionThresholdEnabled",
 		"confidence_verdict_threshold": "ConfidenceVerdictThreshold",

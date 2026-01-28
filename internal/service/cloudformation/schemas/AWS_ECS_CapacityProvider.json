@@ -59,6 +59,7 @@
   "description": "Resource Type definition for AWS::ECS::CapacityProvider.",
   "createOnlyProperties": [
     "/properties/AutoScalingGroupProvider/AutoScalingGroupArn",
+    "/properties/ManagedInstancesProvider/InstanceLaunchTemplate/FipsEnabled",
     "/properties/Name",
     "/properties/ClusterName"
   ],
@@ -138,6 +139,7 @@
         }
       },
       "required": [
+        "SecurityGroups",
         "Subnets"
       ]
     },
@@ -478,6 +480,9 @@
             "ON_DEMAND",
             "SPOT"
           ]
+        },
+        "FipsEnabled": {
+          "type": "boolean"
         },
         "StorageConfiguration": {
           "$ref": "#/definitions/ManagedInstancesStorageConfiguration"

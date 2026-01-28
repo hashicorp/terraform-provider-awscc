@@ -9,10 +9,12 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
@@ -257,6 +259,24 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "QueryReformulationAIPromptId": {
 		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "CaseSummarizationAIAgentConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CaseSummarizationAIGuardrailId": {
+		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
+		//	          "type": "string"
+		//	        },
+		//	        "CaseSummarizationAIPromptId": {
+		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
+		//	          "type": "string"
+		//	        },
+		//	        "Locale": {
+		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -753,6 +773,196 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "NoteTakingAIAgentConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Locale": {
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "NoteTakingAIGuardrailId": {
+		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
+		//	          "type": "string"
+		//	        },
+		//	        "NoteTakingAIPromptId": {
+		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "OrchestrationAIAgentConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ConnectInstanceArn": {
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "pattern": "^arn:[a-z-]+?:[a-z-]+?:[a-z0-9-]*?:([0-9]{12})?:[a-zA-Z0-9-:/]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "Locale": {
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "OrchestrationAIGuardrailId": {
+		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
+		//	          "type": "string"
+		//	        },
+		//	        "OrchestrationAIPromptId": {
+		//	          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
+		//	          "type": "string"
+		//	        },
+		//	        "ToolConfigurations": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Annotations": {
+		//	                "additionalProperties": false,
+		//	                "type": "object"
+		//	              },
+		//	              "Description": {
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "InputSchema": {
+		//	                "type": "object"
+		//	              },
+		//	              "Instruction": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Examples": {
+		//	                    "items": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "type": "array"
+		//	                  },
+		//	                  "Instruction": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "OutputFilters": {
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "JsonPath": {
+		//	                      "minLength": 1,
+		//	                      "type": "string"
+		//	                    },
+		//	                    "OutputConfiguration": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "OutputVariableNameOverride": {
+		//	                          "minLength": 1,
+		//	                          "type": "string"
+		//	                        },
+		//	                        "SessionDataNamespace": {
+		//	                          "minLength": 1,
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "JsonPath"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "OutputSchema": {
+		//	                "type": "object"
+		//	              },
+		//	              "OverrideInputValues": {
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "JsonPath": {
+		//	                      "minLength": 1,
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Value": {
+		//	                      "properties": {
+		//	                        "Constant": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "Type": {
+		//	                              "enum": [
+		//	                                "STRING",
+		//	                                "NUMBER",
+		//	                                "JSON_STRING"
+		//	                              ],
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Value": {
+		//	                              "minLength": 1,
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "Type",
+		//	                            "Value"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "JsonPath",
+		//	                    "Value"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "Title": {
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "ToolId": {
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "ToolName": {
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "ToolType": {
+		//	                "enum": [
+		//	                  "MODEL_CONTEXT_PROTOCOL",
+		//	                  "RETURN_TO_CONTROL",
+		//	                  "CONSTANT"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "UserInteractionConfiguration": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "IsUserConfirmationRequired": {
+		//	                    "type": "boolean"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "ToolName",
+		//	              "ToolType"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "OrchestrationAIPromptId"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "SelfServiceAIAgentConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -1209,6 +1419,49 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CaseSummarizationAIAgentConfiguration
+				"case_summarization_ai_agent_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CaseSummarizationAIGuardrailId
+						"case_summarization_ai_guardrail_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: CaseSummarizationAIPromptId
+						"case_summarization_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Locale
+						"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthAtLeast(1),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -2099,6 +2352,381 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: NoteTakingAIAgentConfiguration
+				"note_taking_ai_agent_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Locale
+						"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthAtLeast(1),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: NoteTakingAIGuardrailId
+						"note_taking_ai_guardrail_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: NoteTakingAIPromptId
+						"note_taking_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: OrchestrationAIAgentConfiguration
+				"orchestration_ai_agent_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ConnectInstanceArn
+						"connect_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z-]+?:[a-z-]+?:[a-z0-9-]*?:([0-9]{12})?:[a-zA-Z0-9-:/]+$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Locale
+						"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthAtLeast(1),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: OrchestrationAIGuardrailId
+						"orchestration_ai_guardrail_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: OrchestrationAIPromptId
+						"orchestration_ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ToolConfigurations
+						"tool_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Annotations
+									"annotations": schema.StringAttribute{ /*START ATTRIBUTE*/
+										CustomType: jsontypes.NormalizedType{},
+										Optional:   true,
+										Computed:   true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Description
+									"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthAtLeast(1),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: InputSchema
+									"input_schema": schema.StringAttribute{ /*START ATTRIBUTE*/
+										CustomType: jsontypes.NormalizedType{},
+										Optional:   true,
+										Computed:   true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Instruction
+									"instruction": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Examples
+											"examples": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Instruction
+											"instruction": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: OutputFilters
+									"output_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: JsonPath
+												"json_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthAtLeast(1),
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: OutputConfiguration
+												"output_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: OutputVariableNameOverride
+														"output_variable_name_override": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthAtLeast(1),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: SessionDataNamespace
+														"session_data_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthAtLeast(1),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Optional: true,
+													Computed: true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: OutputSchema
+									"output_schema": schema.StringAttribute{ /*START ATTRIBUTE*/
+										CustomType: jsontypes.NormalizedType{},
+										Optional:   true,
+										Computed:   true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: OverrideInputValues
+									"override_input_values": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: JsonPath
+												"json_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthAtLeast(1),
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Value
+												"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Constant
+														"constant": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Type
+																"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Optional: true,
+																	Computed: true,
+																	Validators: []validator.String{ /*START VALIDATORS*/
+																		stringvalidator.OneOf(
+																			"STRING",
+																			"NUMBER",
+																			"JSON_STRING",
+																		),
+																		fwvalidators.NotNullString(),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+																// Property: Value
+																"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Optional: true,
+																	Computed: true,
+																	Validators: []validator.String{ /*START VALIDATORS*/
+																		stringvalidator.LengthAtLeast(1),
+																		fwvalidators.NotNullString(),
+																	}, /*END VALIDATORS*/
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																objectplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.Object{ /*START VALIDATORS*/
+														fwvalidators.NotNullObject(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Title
+									"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthAtLeast(1),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ToolId
+									"tool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthAtLeast(1),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ToolName
+									"tool_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthAtLeast(1),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ToolType
+									"tool_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"MODEL_CONTEXT_PROTOCOL",
+												"RETURN_TO_CONTROL",
+												"CONSTANT",
+											),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: UserInteractionConfiguration
+									"user_interaction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: IsUserConfirmationRequired
+											"is_user_confirmation_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+													boolplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: SelfServiceAIAgentConfiguration
 				"self_service_ai_agent_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -2471,7 +3099,10 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 		//	    "SELF_SERVICE",
 		//	    "EMAIL_RESPONSE",
 		//	    "EMAIL_OVERVIEW",
-		//	    "EMAIL_GENERATIVE_ANSWER"
+		//	    "EMAIL_GENERATIVE_ANSWER",
+		//	    "ORCHESTRATION",
+		//	    "NOTE_TAKING",
+		//	    "CASE_SUMMARIZATION"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -2485,6 +3116,9 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 					"EMAIL_RESPONSE",
 					"EMAIL_OVERVIEW",
 					"EMAIL_GENERATIVE_ANSWER",
+					"ORCHESTRATION",
+					"NOTE_TAKING",
+					"CASE_SUMMARIZATION",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2526,6 +3160,7 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 		"ai_agent_arn":                                   "AIAgentArn",
 		"ai_agent_id":                                    "AIAgentId",
 		"and_conditions":                                 "AndConditions",
+		"annotations":                                    "Annotations",
 		"answer_generation_ai_guardrail_id":              "AnswerGenerationAIGuardrailId",
 		"answer_generation_ai_prompt_id":                 "AnswerGenerationAIPromptId",
 		"answer_recommendation_ai_agent_configuration":   "AnswerRecommendationAIAgentConfiguration",
@@ -2535,7 +3170,12 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 		"association_configurations":                     "AssociationConfigurations",
 		"association_id":                                 "AssociationId",
 		"association_type":                               "AssociationType",
+		"case_summarization_ai_agent_configuration":      "CaseSummarizationAIAgentConfiguration",
+		"case_summarization_ai_guardrail_id":             "CaseSummarizationAIGuardrailId",
+		"case_summarization_ai_prompt_id":                "CaseSummarizationAIPromptId",
 		"configuration":                                  "Configuration",
+		"connect_instance_arn":                           "ConnectInstanceArn",
+		"constant":                                       "Constant",
 		"content_tag_filter":                             "ContentTagFilter",
 		"description":                                    "Description",
 		"email_generative_answer_ai_agent_configuration": "EmailGenerativeAnswerAIAgentConfiguration",
@@ -2545,24 +3185,47 @@ func aIAgentResource(ctx context.Context) (resource.Resource, error) {
 		"email_query_reformulation_ai_prompt_id":         "EmailQueryReformulationAIPromptId",
 		"email_response_ai_agent_configuration":          "EmailResponseAIAgentConfiguration",
 		"email_response_ai_prompt_id":                    "EmailResponseAIPromptId",
+		"examples":                                       "Examples",
+		"input_schema":                                   "InputSchema",
+		"instruction":                                    "Instruction",
 		"intent_labeling_generation_ai_prompt_id":        "IntentLabelingGenerationAIPromptId",
-		"key": "Key",
-		"knowledge_base_association_configuration_data": "KnowledgeBaseAssociationConfigurationData",
+		"is_user_confirmation_required":                  "IsUserConfirmationRequired",
+		"json_path":                                      "JsonPath",
+		"key":                                            "Key",
+		"knowledge_base_association_configuration_data":  "KnowledgeBaseAssociationConfigurationData",
 		"locale":                                      "Locale",
 		"manual_search_ai_agent_configuration":        "ManualSearchAIAgentConfiguration",
 		"max_results":                                 "MaxResults",
 		"modified_time_seconds":                       "ModifiedTimeSeconds",
 		"name":                                        "Name",
+		"note_taking_ai_agent_configuration":          "NoteTakingAIAgentConfiguration",
+		"note_taking_ai_guardrail_id":                 "NoteTakingAIGuardrailId",
+		"note_taking_ai_prompt_id":                    "NoteTakingAIPromptId",
 		"or_conditions":                               "OrConditions",
+		"orchestration_ai_agent_configuration":        "OrchestrationAIAgentConfiguration",
+		"orchestration_ai_guardrail_id":               "OrchestrationAIGuardrailId",
+		"orchestration_ai_prompt_id":                  "OrchestrationAIPromptId",
+		"output_configuration":                        "OutputConfiguration",
+		"output_filters":                              "OutputFilters",
+		"output_schema":                               "OutputSchema",
+		"output_variable_name_override":               "OutputVariableNameOverride",
+		"override_input_values":                       "OverrideInputValues",
 		"override_knowledge_base_search_type":         "OverrideKnowledgeBaseSearchType",
 		"query_reformulation_ai_prompt_id":            "QueryReformulationAIPromptId",
 		"self_service_ai_agent_configuration":         "SelfServiceAIAgentConfiguration",
 		"self_service_ai_guardrail_id":                "SelfServiceAIGuardrailId",
 		"self_service_answer_generation_ai_prompt_id": "SelfServiceAnswerGenerationAIPromptId",
 		"self_service_pre_processing_ai_prompt_id":    "SelfServicePreProcessingAIPromptId",
+		"session_data_namespace":                      "SessionDataNamespace",
 		"tag_condition":                               "TagCondition",
 		"tags":                                        "Tags",
+		"title":                                       "Title",
+		"tool_configurations":                         "ToolConfigurations",
+		"tool_id":                                     "ToolId",
+		"tool_name":                                   "ToolName",
+		"tool_type":                                   "ToolType",
 		"type":                                        "Type",
+		"user_interaction_configuration":              "UserInteractionConfiguration",
 		"value":                                       "Value",
 	})
 

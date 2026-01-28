@@ -582,6 +582,10 @@ resource_schema "aws_backup_restore_testing_selection" {
   cloudformation_type_name = "AWS::Backup::RestoreTestingSelection"
 }
 
+resource_schema "aws_backup_tiering_configuration" {
+  cloudformation_type_name = "AWS::Backup::TieringConfiguration"
+}
+
 resource_schema "aws_backupgateway_hypervisor" {
   cloudformation_type_name = "AWS::BackupGateway::Hypervisor"
 }
@@ -1752,6 +1756,10 @@ resource_schema "aws_directoryservice_simple_ad" {
   cloudformation_type_name = "AWS::DirectoryService::SimpleAD"
 }
 
+resource_schema "aws_docdb_global_cluster" {
+  cloudformation_type_name = "AWS::DocDB::GlobalCluster"
+}
+
 resource_schema "aws_docdbelastic_cluster" {
   cloudformation_type_name = "AWS::DocDBElastic::Cluster"
 }
@@ -2338,6 +2346,17 @@ resource_schema "aws_emr_studio_session_mapping" {
 
 resource_schema "aws_emr_wal_workspace" {
   cloudformation_type_name = "AWS::EMR::WALWorkspace"
+}
+
+resource_schema "aws_emrcontainers_endpoint" {
+  cloudformation_type_name = "AWS::EMRContainers::Endpoint"
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_emrcontainers_security_configuration" {
+  cloudformation_type_name = "AWS::EMRContainers::SecurityConfiguration"
 }
 
 resource_schema "aws_emrcontainers_virtual_cluster" {
@@ -3468,6 +3487,10 @@ resource_schema "aws_lightsail_database" {
   cloudformation_type_name = "AWS::Lightsail::Database"
 }
 
+resource_schema "aws_lightsail_database_snapshot" {
+  cloudformation_type_name = "AWS::Lightsail::DatabaseSnapshot"
+}
+
 resource_schema "aws_lightsail_disk" {
   cloudformation_type_name = "AWS::Lightsail::Disk"
 }
@@ -3672,6 +3695,10 @@ resource_schema "aws_msk_vpc_connection" {
 
 resource_schema "aws_mwaa_environment" {
   cloudformation_type_name = "AWS::MWAA::Environment"
+}
+
+resource_schema "aws_mwaaserverless_workflow" {
+  cloudformation_type_name = "AWS::MWAAServerless::Workflow"
 }
 
 resource_schema "aws_macie_allow_list" {
@@ -4181,6 +4208,10 @@ resource_schema "aws_opensearchserverless_collection" {
   cloudformation_type_name = "AWS::OpenSearchServerless::Collection"
 }
 
+resource_schema "aws_opensearchserverless_collection_group" {
+  cloudformation_type_name = "AWS::OpenSearchServerless::CollectionGroup"
+}
+
 resource_schema "aws_opensearchserverless_lifecycle_policy" {
   cloudformation_type_name               = "AWS::OpenSearchServerless::LifecyclePolicy"
   suppress_plural_data_source_generation = true
@@ -4394,6 +4425,10 @@ resource_schema "aws_qbusiness_web_experience" {
 
 resource_schema "aws_qldb_stream" {
   cloudformation_type_name = "AWS::QLDB::Stream"
+}
+
+resource_schema "aws_quicksight_action_connector" {
+  cloudformation_type_name = "AWS::QuickSight::ActionConnector"
 }
 
 resource_schema "aws_quicksight_analysis" {

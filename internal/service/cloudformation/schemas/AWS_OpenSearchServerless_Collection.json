@@ -1,12 +1,132 @@
 {
+  "typeName": "AWS::OpenSearchServerless::Collection",
+  "description": "Amazon OpenSearchServerless collection resource",
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": false,
-    "tagProperty": "/properties/Tags",
-    "cloudFormationSystemTags": true
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags"
   },
-  "typeName": "AWS::OpenSearchServerless::Collection",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair metadata associated with resource",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1,
+          "description": "The key in the key-value pair"
+        },
+        "Value": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 0,
+          "description": "The value in the key-value pair"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "CollectionType": {
+      "type": "string",
+      "description": "The possible types for the collection",
+      "enum": [
+        "SEARCH",
+        "TIMESERIES",
+        "VECTORSEARCH"
+      ]
+    },
+    "StandbyReplicas": {
+      "type": "string",
+      "description": "The possible standby replicas for the collection",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "EncryptionConfig": {
+      "type": "object",
+      "description": "Encryption settings for the collection",
+      "properties": {
+        "AWSOwnedKey": {
+          "type": "boolean",
+          "description": "Indicates whether to use an AWS owned key for encryption."
+        },
+        "KmsKeyArn": {
+          "type": "string",
+          "description": "Key Management Service key used to encrypt the collection."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "The description of the collection"
+    },
+    "Id": {
+      "type": "string",
+      "maxLength": 40,
+      "minLength": 3,
+      "description": "The identifier of the collection"
+    },
+    "Name": {
+      "type": "string",
+      "maxLength": 32,
+      "minLength": 3,
+      "pattern": "^[a-z][a-z0-9-]{2,31}$",
+      "description": "The name of the collection.\n\nThe name must meet the following criteria:\nUnique to your account and AWS Region\nStarts with a lowercase letter\nContains only lowercase letters a-z, the numbers 0-9 and the hyphen (-)\nContains between 3 and 32 characters\n"
+    },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "minItems": 0,
+      "insertionOrder": false,
+      "description": "List of tags to be added to the resource"
+    },
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) of the collection.",
+      "type": "string"
+    },
+    "CollectionEndpoint": {
+      "description": "The endpoint for the collection.",
+      "type": "string"
+    },
+    "DashboardEndpoint": {
+      "description": "The OpenSearch Dashboards endpoint for the collection.",
+      "type": "string"
+    },
+    "Type": {
+      "$ref": "#/definitions/CollectionType"
+    },
+    "StandbyReplicas": {
+      "$ref": "#/definitions/StandbyReplicas"
+    },
+    "CollectionGroupName": {
+      "type": "string",
+      "description": "The name of the collection group to associate with the collection."
+    },
+    "EncryptionConfig": {
+      "$ref": "#/definitions/EncryptionConfig"
+    },
+    "KmsKeyArn": {
+      "type": "string",
+      "description": "Key Management Service key used to encrypt the collection."
+    }
+  },
+  "required": [
+    "Name"
+  ],
   "readOnlyProperties": [
     "/properties/Id",
     "/properties/Arn",
@@ -14,52 +134,20 @@
     "/properties/DashboardEndpoint",
     "/properties/KmsKeyArn"
   ],
-  "description": "Amazon OpenSearchServerless collection resource",
+  "writeOnlyProperties": [
+    "/properties/Tags",
+    "/properties/EncryptionConfig"
+  ],
   "createOnlyProperties": [
     "/properties/Name",
     "/properties/Tags",
     "/properties/Type",
-    "/properties/StandbyReplicas"
+    "/properties/StandbyReplicas",
+    "/properties/CollectionGroupName",
+    "/properties/EncryptionConfig"
   ],
   "primaryIdentifier": [
     "/properties/Id"
-  ],
-  "required": [
-    "Name"
-  ],
-  "handlers": {
-    "read": {
-      "permissions": [
-        "aoss:BatchGetCollection"
-      ]
-    },
-    "create": {
-      "permissions": [
-        "aoss:CreateCollection",
-        "aoss:BatchGetCollection",
-        "iam:CreateServiceLinkedRole"
-      ]
-    },
-    "update": {
-      "permissions": [
-        "aoss:UpdateCollection",
-        "aoss:BatchGetCollection"
-      ]
-    },
-    "list": {
-      "permissions": [
-        "aoss:ListCollections"
-      ]
-    },
-    "delete": {
-      "permissions": [
-        "aoss:DeleteCollection",
-        "aoss:BatchGetCollection"
-      ]
-    }
-  },
-  "writeOnlyProperties": [
-    "/properties/Tags"
   ],
   "additionalIdentifiers": [
     [
@@ -69,99 +157,39 @@
       "/properties/Arn"
     ]
   ],
-  "additionalProperties": false,
-  "definitions": {
-    "CollectionType": {
-      "description": "The possible types for the collection",
-      "type": "string",
-      "enum": [
-        "SEARCH",
-        "TIMESERIES",
-        "VECTORSEARCH"
+  "handlers": {
+    "create": {
+      "permissions": [
+        "aoss:CreateCollection",
+        "aoss:BatchGetCollection",
+        "aoss:AddCollectionToCollectionGroup",
+        "iam:CreateServiceLinkedRole",
+        "kms:CreateGrant",
+        "kms:DescribeKey"
       ]
     },
-    "StandbyReplicas": {
-      "description": "The possible standby replicas for the collection",
-      "type": "string",
-      "enum": [
-        "ENABLED",
-        "DISABLED"
+    "delete": {
+      "permissions": [
+        "aoss:DeleteCollection",
+        "aoss:BatchGetCollection"
       ]
     },
-    "Tag": {
-      "description": "A key-value pair metadata associated with resource",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "Value": {
-          "minLength": 0,
-          "description": "The value in the key-value pair",
-          "type": "string",
-          "maxLength": 256
-        },
-        "Key": {
-          "minLength": 1,
-          "description": "The key in the key-value pair",
-          "type": "string",
-          "maxLength": 128
-        }
-      },
-      "required": [
-        "Key",
-        "Value"
+    "list": {
+      "permissions": [
+        "aoss:ListCollections"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "aoss:BatchGetCollection"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "aoss:UpdateCollection",
+        "aoss:BatchGetCollection"
       ]
     }
   },
-  "properties": {
-    "Type": {
-      "$ref": "#/definitions/CollectionType"
-    },
-    "Description": {
-      "description": "The description of the collection",
-      "type": "string",
-      "maxLength": 1000
-    },
-    "KmsKeyArn": {
-      "description": "The ARN of the AWS KMS key used to encrypt the collection.",
-      "type": "string"
-    },
-    "StandbyReplicas": {
-      "$ref": "#/definitions/StandbyReplicas"
-    },
-    "CollectionEndpoint": {
-      "description": "The endpoint for the collection.",
-      "type": "string"
-    },
-    "Id": {
-      "minLength": 3,
-      "description": "The identifier of the collection",
-      "type": "string",
-      "maxLength": 40
-    },
-    "Arn": {
-      "description": "The Amazon Resource Name (ARN) of the collection.",
-      "type": "string"
-    },
-    "Tags": {
-      "minItems": 0,
-      "maxItems": 50,
-      "description": "List of tags to be added to the resource",
-      "insertionOrder": false,
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/Tag"
-      }
-    },
-    "Name": {
-      "minLength": 3,
-      "pattern": "^[a-z][a-z0-9-]{2,31}$",
-      "description": "The name of the collection.\n\nThe name must meet the following criteria:\nUnique to your account and AWS Region\nStarts with a lowercase letter\nContains only lowercase letters a-z, the numbers 0-9 and the hyphen (-)\nContains between 3 and 32 characters\n",
-      "type": "string",
-      "maxLength": 32
-    },
-    "DashboardEndpoint": {
-      "description": "The OpenSearch Dashboards endpoint for the collection.",
-      "type": "string"
-    }
-  }
+  "additionalProperties": false
 }

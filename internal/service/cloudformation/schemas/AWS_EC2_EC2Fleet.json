@@ -816,9 +816,12 @@
     "delete": {
       "permissions": [
         "ec2:DescribeFleets",
+        "ec2:DescribeFleetInstances",
+        "ec2:DescribeInstanceStatus",
         "ec2:DeleteFleets",
         "ec2:TerminateInstances"
-      ]
+      ],
+      "timeoutInMinutes": 40
     },
     "list": {
       "handlerSchema": {

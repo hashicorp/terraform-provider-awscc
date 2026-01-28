@@ -248,6 +248,9 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	        "Ec2InstanceProfileArn": {
 		//	          "type": "string"
 		//	        },
+		//	        "FipsEnabled": {
+		//	          "type": "boolean"
+		//	        },
 		//	        "InstanceRequirements": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
@@ -534,6 +537,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	            }
 		//	          },
 		//	          "required": [
+		//	            "SecurityGroups",
 		//	            "Subnets"
 		//	          ],
 		//	          "type": "object"
@@ -633,6 +637,15 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: FipsEnabled
+						"fips_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+								boolplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: InstanceRequirements
@@ -1138,6 +1151,9 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 									ElementType: types.StringType,
 									Optional:    true,
 									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										fwvalidators.NotNullList(),
+									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
@@ -1327,6 +1343,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		"cpu_manufacturers":              "CpuManufacturers",
 		"ec_2_instance_profile_arn":      "Ec2InstanceProfileArn",
 		"excluded_instance_types":        "ExcludedInstanceTypes",
+		"fips_enabled":                   "FipsEnabled",
 		"infrastructure_optimization":    "InfrastructureOptimization",
 		"infrastructure_role_arn":        "InfrastructureRoleArn",
 		"instance_generations":           "InstanceGenerations",

@@ -579,6 +579,21 @@ func projectProfileResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: UseDefaultConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"use_default_configurations": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// UseDefaultConfigurations is a write-only property.
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -637,11 +652,13 @@ func projectProfileResource(ctx context.Context) (resource.Resource, error) {
 		"resolved_parameters":          "ResolvedParameters",
 		"ssm_path":                     "SsmPath",
 		"status":                       "Status",
+		"use_default_configurations":   "UseDefaultConfigurations",
 		"value":                        "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/DomainUnitIdentifier",
+		"/properties/UseDefaultConfigurations",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

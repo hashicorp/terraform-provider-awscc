@@ -802,7 +802,8 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "enum": [
-		//	    "VCF-5.2.1"
+		//	    "VCF-5.2.1",
+		//	    "VCF-5.2.2"
 		//	  ],
 		//	  "type": "string"
 		//	}

@@ -88,6 +88,45 @@
             "EmailGenerativeAnswerAIAgentConfiguration"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "OrchestrationAIAgentConfiguration",
+          "properties": {
+            "OrchestrationAIAgentConfiguration": {
+              "$ref": "#/definitions/OrchestrationAIAgentConfiguration"
+            }
+          },
+          "required": [
+            "OrchestrationAIAgentConfiguration"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "NoteTakingAIAgentConfiguration",
+          "properties": {
+            "NoteTakingAIAgentConfiguration": {
+              "$ref": "#/definitions/NoteTakingAIAgentConfiguration"
+            }
+          },
+          "required": [
+            "NoteTakingAIAgentConfiguration"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "CaseSummarizationAIAgentConfiguration",
+          "properties": {
+            "CaseSummarizationAIAgentConfiguration": {
+              "$ref": "#/definitions/CaseSummarizationAIAgentConfiguration"
+            }
+          },
+          "required": [
+            "CaseSummarizationAIAgentConfiguration"
+          ],
+          "additionalProperties": false
         }
       ]
     },
@@ -99,7 +138,10 @@
         "SELF_SERVICE",
         "EMAIL_RESPONSE",
         "EMAIL_OVERVIEW",
-        "EMAIL_GENERATIVE_ANSWER"
+        "EMAIL_GENERATIVE_ANSWER",
+        "ORCHESTRATION",
+        "NOTE_TAKING",
+        "CASE_SUMMARIZATION"
       ]
     },
     "SelfServiceAIAgentConfiguration": {
@@ -403,6 +445,72 @@
       },
       "additionalProperties": false
     },
+    "OrchestrationAIAgentConfiguration": {
+      "type": "object",
+      "properties": {
+        "OrchestrationAIPromptId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"
+        },
+        "OrchestrationAIGuardrailId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"
+        },
+        "ConnectInstanceArn": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 1,
+          "pattern": "^arn:[a-z-]+?:[a-z-]+?:[a-z0-9-]*?:([0-9]{12})?:[a-zA-Z0-9-:/]+$"
+        },
+        "Locale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ToolConfigurations": {
+          "$ref": "#/definitions/ToolConfigurationList"
+        }
+      },
+      "required": [
+        "OrchestrationAIPromptId"
+      ],
+      "additionalProperties": false
+    },
+    "NoteTakingAIAgentConfiguration": {
+      "type": "object",
+      "properties": {
+        "NoteTakingAIPromptId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"
+        },
+        "NoteTakingAIGuardrailId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"
+        },
+        "Locale": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "CaseSummarizationAIAgentConfiguration": {
+      "type": "object",
+      "properties": {
+        "CaseSummarizationAIPromptId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"
+        },
+        "CaseSummarizationAIGuardrailId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"
+        },
+        "Locale": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
     "Tags": {
       "type": "object",
       "patternProperties": {
@@ -410,6 +518,202 @@
           "type": "string",
           "maxLength": 256,
           "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "ToolConfigurationList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ToolConfiguration"
+      }
+    },
+    "ToolConfiguration": {
+      "type": "object",
+      "properties": {
+        "ToolName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ToolType": {
+          "$ref": "#/definitions/ToolType"
+        },
+        "Title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ToolId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "Description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "Instruction": {
+          "$ref": "#/definitions/ToolInstruction"
+        },
+        "OverrideInputValues": {
+          "$ref": "#/definitions/ToolOverrideInputValueList"
+        },
+        "OutputFilters": {
+          "$ref": "#/definitions/ToolOutputFilterList"
+        },
+        "InputSchema": {
+          "type": "object"
+        },
+        "OutputSchema": {
+          "type": "object"
+        },
+        "Annotations": {
+          "$ref": "#/definitions/Annotation"
+        },
+        "UserInteractionConfiguration": {
+          "$ref": "#/definitions/UserInteractionConfiguration"
+        }
+      },
+      "required": [
+        "ToolName",
+        "ToolType"
+      ],
+      "additionalProperties": false
+    },
+    "ToolType": {
+      "type": "string",
+      "enum": [
+        "MODEL_CONTEXT_PROTOCOL",
+        "RETURN_TO_CONTROL",
+        "CONSTANT"
+      ]
+    },
+    "ToolExampleList": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ToolInstruction": {
+      "type": "object",
+      "properties": {
+        "Instruction": {
+          "type": "string"
+        },
+        "Examples": {
+          "$ref": "#/definitions/ToolExampleList"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ToolOverrideInputValueType": {
+      "type": "string",
+      "enum": [
+        "STRING",
+        "NUMBER",
+        "JSON_STRING"
+      ]
+    },
+    "ToolOverrideConstantInputValue": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "$ref": "#/definitions/ToolOverrideInputValueType"
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "Type",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "ToolOverrideInputValueConfiguration": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Constant",
+          "properties": {
+            "Constant": {
+              "$ref": "#/definitions/ToolOverrideConstantInputValue"
+            }
+          },
+          "required": [
+            "Constant"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ToolOverrideInputValueList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ToolOverrideInputValue"
+      }
+    },
+    "ToolOverrideInputValue": {
+      "type": "object",
+      "properties": {
+        "JsonPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "Value": {
+          "$ref": "#/definitions/ToolOverrideInputValueConfiguration"
+        }
+      },
+      "required": [
+        "JsonPath",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "ToolOutputConfiguration": {
+      "type": "object",
+      "properties": {
+        "OutputVariableNameOverride": {
+          "type": "string",
+          "minLength": 1
+        },
+        "SessionDataNamespace": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "ToolOutputFilterList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ToolOutputFilter"
+      }
+    },
+    "ToolOutputFilter": {
+      "type": "object",
+      "properties": {
+        "JsonPath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "OutputConfiguration": {
+          "$ref": "#/definitions/ToolOutputConfiguration"
+        }
+      },
+      "required": [
+        "JsonPath"
+      ],
+      "additionalProperties": false
+    },
+    "Annotation": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "UserInteractionConfiguration": {
+      "type": "object",
+      "properties": {
+        "IsUserConfirmationRequired": {
+          "type": "boolean"
         }
       },
       "additionalProperties": false
@@ -498,7 +802,8 @@
     "create": {
       "permissions": [
         "wisdom:CreateAIAgent",
-        "wisdom:TagResource"
+        "wisdom:TagResource",
+        "connect:ListIntegrationAssociations"
       ]
     },
     "read": {

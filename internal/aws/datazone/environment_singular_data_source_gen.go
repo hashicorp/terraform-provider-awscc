@@ -72,6 +72,17 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Amazon DataZone user who created the environment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DeploymentOrder
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The deployment order for the environment.",
+		//	  "type": "integer"
+		//	}
+		"deployment_order": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The deployment order for the environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -142,6 +153,28 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"environment_blueprint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the blueprint with which the Amazon DataZone environment was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EnvironmentBlueprintIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the environment blueprint.",
+		//	  "type": "string"
+		//	}
+		"environment_blueprint_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the environment blueprint.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EnvironmentConfigurationId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the environment configuration.",
+		//	  "type": "string"
+		//	}
+		"environment_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the environment configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentProfileId
@@ -217,7 +250,6 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the environment.",
 		//	  "maxLength": 64,
 		//	  "minLength": 1,
-		//	  "pattern": "^[\\w -]+$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -356,29 +388,32 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::Environment").WithTerraformTypeName("awscc_datazone_environment")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"aws_account_id":                 "AwsAccountId",
-		"aws_account_region":             "AwsAccountRegion",
-		"created_at":                     "CreatedAt",
-		"created_by":                     "CreatedBy",
-		"description":                    "Description",
-		"domain_id":                      "DomainId",
-		"domain_identifier":              "DomainIdentifier",
-		"environment_account_identifier": "EnvironmentAccountIdentifier",
-		"environment_account_region":     "EnvironmentAccountRegion",
-		"environment_blueprint_id":       "EnvironmentBlueprintId",
-		"environment_id":                 "Id",
-		"environment_profile_id":         "EnvironmentProfileId",
-		"environment_profile_identifier": "EnvironmentProfileIdentifier",
-		"environment_role_arn":           "EnvironmentRoleArn",
-		"glossary_terms":                 "GlossaryTerms",
-		"name":                           "Name",
-		"project_id":                     "ProjectId",
-		"project_identifier":             "ProjectIdentifier",
-		"provider_name":                  "Provider",
-		"status":                         "Status",
-		"updated_at":                     "UpdatedAt",
-		"user_parameters":                "UserParameters",
-		"value":                          "Value",
+		"aws_account_id":                   "AwsAccountId",
+		"aws_account_region":               "AwsAccountRegion",
+		"created_at":                       "CreatedAt",
+		"created_by":                       "CreatedBy",
+		"deployment_order":                 "DeploymentOrder",
+		"description":                      "Description",
+		"domain_id":                        "DomainId",
+		"domain_identifier":                "DomainIdentifier",
+		"environment_account_identifier":   "EnvironmentAccountIdentifier",
+		"environment_account_region":       "EnvironmentAccountRegion",
+		"environment_blueprint_id":         "EnvironmentBlueprintId",
+		"environment_blueprint_identifier": "EnvironmentBlueprintIdentifier",
+		"environment_configuration_id":     "EnvironmentConfigurationId",
+		"environment_id":                   "Id",
+		"environment_profile_id":           "EnvironmentProfileId",
+		"environment_profile_identifier":   "EnvironmentProfileIdentifier",
+		"environment_role_arn":             "EnvironmentRoleArn",
+		"glossary_terms":                   "GlossaryTerms",
+		"name":                             "Name",
+		"project_id":                       "ProjectId",
+		"project_identifier":               "ProjectIdentifier",
+		"provider_name":                    "Provider",
+		"status":                           "Status",
+		"updated_at":                       "UpdatedAt",
+		"user_parameters":                  "UserParameters",
+		"value":                            "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

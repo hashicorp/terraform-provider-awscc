@@ -174,7 +174,9 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "enum": [
-		//	      "ADD_MEMBER"
+		//	      "ADD_MEMBER",
+		//	      "GRANT_RECEIVE_RESULTS_ABILITY",
+		//	      "REVOKE_RECEIVE_RESULTS_ABILITY"
 		//	    ],
 		//	    "type": "string"
 		//	  },
@@ -189,6 +191,8 @@ func collaborationResource(ctx context.Context) (resource.Resource, error) {
 				setvalidator.ValueStringsAre(
 					stringvalidator.OneOf(
 						"ADD_MEMBER",
+						"GRANT_RECEIVE_RESULTS_ABILITY",
+						"REVOKE_RECEIVE_RESULTS_ABILITY",
 					),
 				),
 			}, /*END VALIDATORS*/

@@ -46,7 +46,7 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "DefaultValue": {
-		//	        "maxLength": 250,
+		//	        "maxLength": 1000,
 		//	        "minLength": 0,
 		//	        "type": "string"
 		//	      },
@@ -96,7 +96,7 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 10,
+		//	  "maxItems": 50,
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
@@ -108,7 +108,7 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 						Optional: true,
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 250),
+							stringvalidator.LengthBetween(0, 1000),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -174,7 +174,7 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(0, 10),
+				listvalidator.SizeBetween(0, 50),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),

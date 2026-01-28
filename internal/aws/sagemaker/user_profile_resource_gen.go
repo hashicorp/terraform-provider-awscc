@@ -165,9 +165,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: UserProfileArn
 		// CloudFormation resource type schema:
@@ -491,7 +489,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	            "SageMakerImageVersionArn": {
 		//	              "description": "The ARN of the image version created on the instance.",
 		//	              "maxLength": 256,
-		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "pattern": "^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -579,7 +577,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "type": "object"
 		//	      },
-		//	      "maxItems": 2,
+		//	      "maxItems": 10,
 		//	      "minItems": 0,
 		//	      "type": "array",
 		//	      "uniqueItems": true
@@ -909,7 +907,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	            "SageMakerImageVersionArn": {
 		//	              "description": "The ARN of the image version created on the instance.",
 		//	              "maxLength": 256,
-		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "pattern": "^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -1122,7 +1120,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	            "SageMakerImageVersionArn": {
 		//	              "description": "The ARN of the image version created on the instance.",
 		//	              "maxLength": 256,
-		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "pattern": "^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -1371,7 +1369,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	            "SageMakerImageVersionArn": {
 		//	              "description": "The ARN of the image version created on the instance.",
 		//	              "maxLength": 256,
-		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "pattern": "^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -2136,7 +2134,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -2287,7 +2285,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(0, 2),
+						listvalidator.SizeBetween(0, 10),
 						listvalidator.UniqueValues(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -2737,7 +2735,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -2991,7 +2989,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -3300,7 +3298,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -3923,10 +3921,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		"version_aliases":                         "VersionAliases",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/Tags",
-	})
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(30).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 

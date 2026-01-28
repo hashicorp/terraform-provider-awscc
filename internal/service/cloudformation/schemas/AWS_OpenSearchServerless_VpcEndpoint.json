@@ -76,6 +76,7 @@
       "/properties/Name"
     ]
   ],
+  "replacementStrategy": "delete_then_create",
   "handlers": {
     "create": {
       "permissions": [

@@ -115,7 +115,7 @@
           "type": "array",
           "uniqueItems": true,
           "minItems": 0,
-          "maxItems": 2,
+          "maxItems": 10,
           "items": {
             "$ref": "#/definitions/CustomFileSystemConfig"
           }
@@ -175,7 +175,7 @@
           "type": "string",
           "description": "The ARN of the image version created on the instance.",
           "maxLength": 256,
-          "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"
+          "pattern": "^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)"
         },
         "LifecycleConfigArn": {
           "type": "string",
@@ -893,14 +893,10 @@
   "createOnlyProperties": [
     "/properties/DomainId",
     "/properties/UserProfileName",
+    "/properties/UserSettings/RStudioServerProAppSettings/AccessStatus",
     "/properties/SingleSignOnUserIdentifier",
     "/properties/SingleSignOnUserValue",
-    "/properties/UserSettings/RStudioServerProAppSettings/AccessStatus",
-    "/properties/UserSettings/RStudioServerProAppSettings/UserGroup",
-    "/properties/Tags"
-  ],
-  "writeOnlyProperties": [
-    "/properties/Tags"
+    "/properties/UserSettings/RStudioServerProAppSettings/UserGroup"
   ],
   "primaryIdentifier": [
     "/properties/UserProfileName",
@@ -909,6 +905,18 @@
   "readOnlyProperties": [
     "/properties/UserProfileArn"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "sagemaker:AddTags",
+      "sagemaker:ListTags",
+      "sagemaker:DeleteTags"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -916,12 +924,16 @@
         "sagemaker:DescribeUserProfile",
         "sagemaker:DescribeImage",
         "sagemaker:DescribeImageVersion",
+        "sagemaker:AddTags",
+        "sagemaker:ListTags",
         "iam:PassRole"
-      ]
+      ],
+      "timeoutInMinutes": 30
     },
     "read": {
       "permissions": [
-        "sagemaker:DescribeUserProfile"
+        "sagemaker:DescribeUserProfile",
+        "sagemaker:ListTags"
       ]
     },
     "update": {
@@ -930,18 +942,25 @@
         "sagemaker:DescribeUserProfile",
         "sagemaker:DescribeImage",
         "sagemaker:DescribeImageVersion",
+        "sagemaker:AddTags",
+        "sagemaker:DeleteTags",
+        "sagemaker:ListTags",
         "iam:PassRole"
       ]
     },
     "delete": {
       "permissions": [
         "sagemaker:DeleteUserProfile",
-        "sagemaker:DescribeUserProfile"
+        "sagemaker:DescribeUserProfile",
+        "sagemaker:AddTags",
+        "sagemaker:ListTags",
+        "sagemaker:DeleteTags"
       ]
     },
     "list": {
       "permissions": [
-        "sagemaker:ListUserProfiles"
+        "sagemaker:ListUserProfiles",
+        "sagemaker:ListTags"
       ]
     }
   }

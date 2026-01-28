@@ -176,24 +176,18 @@
     },
     "read": {
       "permissions": [
-        "s3vectors:GetIndex",
-        "kms:GenerateDataKey",
-        "kms:Decrypt"
+        "s3vectors:GetIndex"
       ]
     },
     "delete": {
       "permissions": [
         "s3vectors:GetIndex",
-        "s3vectors:DeleteIndex",
-        "kms:GenerateDataKey",
-        "kms:Decrypt"
+        "s3vectors:DeleteIndex"
       ]
     },
     "list": {
       "permissions": [
-        "s3vectors:ListIndexes",
-        "kms:GenerateDataKey",
-        "kms:Decrypt"
+        "s3vectors:ListIndexes"
       ],
       "handlerSchema": {
         "properties": {

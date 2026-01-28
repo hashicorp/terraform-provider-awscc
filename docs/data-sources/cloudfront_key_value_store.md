@@ -27,6 +27,7 @@ Data Source schema for AWS::CloudFront::KeyValueStore
 - `key_value_store_id` (String)
 - `name` (String) The name of the key value store.
 - `status` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--import_source"></a>
 ### Nested Schema for `import_source`
@@ -35,3 +36,12 @@ Read-Only:
 
 - `source_arn` (String) The Amazon Resource Name (ARN) of the import source for the key value store.
 - `source_type` (String) The source type of the import source for the key value store.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)

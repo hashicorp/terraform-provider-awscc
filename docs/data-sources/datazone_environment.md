@@ -25,12 +25,15 @@ Data Source schema for AWS::DataZone::Environment
 - `aws_account_region` (String) The AWS region in which the Amazon DataZone environment is created.
 - `created_at` (String) The timestamp of when the environment was created.
 - `created_by` (String) The Amazon DataZone user who created the environment.
+- `deployment_order` (Number) The deployment order for the environment.
 - `description` (String) The description of the Amazon DataZone environment.
 - `domain_id` (String) The identifier of the Amazon DataZone domain in which the environment is created.
 - `domain_identifier` (String) The identifier of the Amazon DataZone domain in which the environment would be created.
 - `environment_account_identifier` (String) The AWS account in which the Amazon DataZone environment is created.
 - `environment_account_region` (String) The AWS region in which the Amazon DataZone environment is created.
 - `environment_blueprint_id` (String) The ID of the blueprint with which the Amazon DataZone environment was created.
+- `environment_blueprint_identifier` (String) The identifier of the environment blueprint.
+- `environment_configuration_id` (String) The identifier of the environment configuration.
 - `environment_id` (String) The ID of the Amazon DataZone environment.
 - `environment_profile_id` (String) The ID of the environment profile with which the Amazon DataZone environment was created.
 - `environment_profile_identifier` (String) The ID of the environment profile with which the Amazon DataZone environment would be created.

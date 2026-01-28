@@ -59,7 +59,10 @@
         "ec2:DescribeVerifiedAccessInstanceWebAclAssociations",
         "ec2:GetVerifiedAccessInstanceWebAcl",
         "amplify:AssociateWebACL",
-        "amplify:GetWebACLForResource"
+        "amplify:GetWebACLForResource",
+        "elasticloadbalancing:CreateWebACLAssociation",
+        "elasticloadbalancing:DeleteWebACLAssociation",
+        "elasticloadbalancing:GetLoadBalancerWebACL"
       ]
     },
     "delete": {
@@ -83,7 +86,10 @@
         "ec2:DescribeVerifiedAccessInstanceWebAclAssociations",
         "ec2:GetVerifiedAccessInstanceWebAcl",
         "amplify:DisassociateWebACL",
-        "amplify:GetWebACLForResource"
+        "amplify:GetWebACLForResource",
+        "elasticloadbalancing:CreateWebACLAssociation",
+        "elasticloadbalancing:DeleteWebACLAssociation",
+        "elasticloadbalancing:GetLoadBalancerWebACL"
       ]
     },
     "read": {
@@ -105,7 +111,10 @@
         "ec2:DisassociateVerifiedAccessInstanceWebAcl",
         "ec2:DescribeVerifiedAccessInstanceWebAclAssociations",
         "ec2:GetVerifiedAccessInstanceWebAcl",
-        "amplify:GetWebACLForResource"
+        "amplify:GetWebACLForResource",
+        "elasticloadbalancing:CreateWebACLAssociation",
+        "elasticloadbalancing:DeleteWebACLAssociation",
+        "elasticloadbalancing:GetLoadBalancerWebACL"
       ]
     },
     "update": {
@@ -126,7 +135,10 @@
         "ec2:AssociateVerifiedAccessInstanceWebAcl",
         "ec2:DisassociateVerifiedAccessInstanceWebAcl",
         "ec2:DescribeVerifiedAccessInstanceWebAclAssociations",
-        "ec2:GetVerifiedAccessInstanceWebAcl"
+        "ec2:GetVerifiedAccessInstanceWebAcl",
+        "elasticloadbalancing:CreateWebACLAssociation",
+        "elasticloadbalancing:DeleteWebACLAssociation",
+        "elasticloadbalancing:GetLoadBalancerWebACL"
       ]
     }
   }

@@ -1,0 +1,382 @@
+{
+  "typeName": "AWS::EMRContainers::SecurityConfiguration",
+  "description": "Resource Schema of AWS::EMRContainers::SecurityConfiguration Type",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "SecurityConfigurationData": {
+      "description": "Security configuration data containing encryption and authorization settings.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AuthorizationConfiguration": {
+          "$ref": "#/definitions/AuthorizationConfiguration"
+        },
+        "AuthenticationConfiguration": {
+          "$ref": "#/definitions/AuthenticationConfiguration"
+        },
+        "EncryptionConfiguration": {
+          "$ref": "#/definitions/EncryptionConfiguration"
+        }
+      }
+    },
+    "AuthorizationConfiguration": {
+      "description": "Authorization configuration for the security configuration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "LakeFormationConfiguration": {
+          "$ref": "#/definitions/LakeFormationConfiguration"
+        }
+      }
+    },
+    "AuthenticationConfiguration": {
+      "description": "Authentication configuration for the security configuration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "IdentityCenterConfiguration": {
+          "$ref": "#/definitions/IdentityCenterConfiguration"
+        },
+        "IAMConfiguration": {
+          "$ref": "#/definitions/IAMConfiguration"
+        }
+      }
+    },
+    "IdentityCenterConfiguration": {
+      "description": "Identity Center configuration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "EnableIdentityCenter": {
+          "description": "Whether to enable Identity Center integration.",
+          "type": "boolean"
+        },
+        "IdentityCenterApplicationAssignmentRequired": {
+          "description": "Whether Identity Center application assignment is required.",
+          "type": "boolean"
+        },
+        "IdentityCenterInstanceARN": {
+          "description": "The ARN of the Identity Center instance.",
+          "type": "string",
+          "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"
+        }
+      }
+    },
+    "IAMConfiguration": {
+      "description": "IAM configuration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SystemRole": {
+          "description": "The system role ARN.",
+          "type": "string",
+          "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::\\d{12}:role/.+$"
+        }
+      }
+    },
+    "LakeFormationConfiguration": {
+      "description": "Lake Formation configuration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AuthorizedSessionTagValue": {
+          "description": "The session tag to authorize Lake Formation access.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "SecureNamespaceInfo": {
+          "$ref": "#/definitions/SecureNamespaceInfo"
+        },
+        "QueryEngineRoleArn": {
+          "description": "The ARN of the query engine role.",
+          "type": "string",
+          "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::\\d{12}:role/.+$"
+        },
+        "QueryAccessControlEnabled": {
+          "description": "Whether query access control is enabled.",
+          "type": "boolean"
+        }
+      }
+    },
+    "SecureNamespaceInfo": {
+      "description": "Secure namespace information for Lake Formation.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ClusterId": {
+          "description": "The ID of the cluster.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "Namespace": {
+          "description": "The namespace.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63
+        }
+      }
+    },
+    "EncryptionConfiguration": {
+      "description": "Encryption configuration for the security configuration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "InTransitEncryptionConfiguration": {
+          "$ref": "#/definitions/InTransitEncryptionConfiguration"
+        },
+        "AtRestEncryptionConfiguration": {
+          "$ref": "#/definitions/AtRestEncryptionConfiguration"
+        }
+      }
+    },
+    "InTransitEncryptionConfiguration": {
+      "description": "In-transit encryption configuration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "TLSCertificateConfiguration": {
+          "$ref": "#/definitions/TLSCertificateConfiguration"
+        }
+      }
+    },
+    "AtRestEncryptionConfiguration": {
+      "description": "At-rest encryption configuration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "S3EncryptionConfiguration": {
+          "$ref": "#/definitions/S3EncryptionConfiguration"
+        },
+        "LocalDiskEncryptionConfiguration": {
+          "$ref": "#/definitions/LocalDiskEncryptionConfiguration"
+        }
+      }
+    },
+    "TLSCertificateConfiguration": {
+      "description": "TLS certificate configuration for in-transit encryption.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "CertificateProviderType": {
+          "description": "The certificate provider type.",
+          "type": "string",
+          "enum": [
+            "PEM"
+          ]
+        },
+        "PublicKeySecretArn": {
+          "description": "The ARN of the secret containing the public key.",
+          "type": "string"
+        },
+        "PrivateKeySecretArn": {
+          "description": "The ARN of the secret containing the private key.",
+          "type": "string"
+        }
+      }
+    },
+    "S3EncryptionConfiguration": {
+      "description": "S3 encryption configuration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "EncryptionOption": {
+          "description": "The S3 encryption option.",
+          "type": "string",
+          "enum": [
+            "SSE-S3",
+            "SSE-KMS",
+            "CSE-KMS"
+          ]
+        },
+        "KMSKeyId": {
+          "description": "The KMS key ID for encryption.",
+          "type": "string"
+        }
+      }
+    },
+    "LocalDiskEncryptionConfiguration": {
+      "description": "Local disk encryption configuration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "EncryptionKeyProviderType": {
+          "description": "The encryption key provider type.",
+          "type": "string",
+          "enum": [
+            "AwsKms"
+          ]
+        },
+        "AwsKmsKeyId": {
+          "description": "The AWS KMS key ID.",
+          "type": "string"
+        }
+      }
+    },
+    "ContainerProvider": {
+      "description": "Container provider information.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Type": {
+          "description": "The container provider type.",
+          "type": "string",
+          "enum": [
+            "EKS"
+          ]
+        },
+        "Id": {
+          "description": "The container provider ID.",
+          "type": "string"
+        },
+        "Info": {
+          "$ref": "#/definitions/ContainerInfo"
+        }
+      },
+      "required": [
+        "Type",
+        "Id"
+      ]
+    },
+    "ContainerInfo": {
+      "description": "Container information.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "EksInfo": {
+          "$ref": "#/definitions/EksInfo"
+        }
+      }
+    },
+    "EksInfo": {
+      "description": "EKS information.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Namespace": {
+          "description": "The EKS namespace.",
+          "type": "string"
+        }
+      }
+    },
+    "Tag": {
+      "description": "An arbitrary set of tags (key-value pairs) for this security configuration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "description": "The key name of the tag.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "The value for the tag.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "properties": {
+    "Arn": {
+      "description": "The ARN of the security configuration.",
+      "type": "string"
+    },
+    "Id": {
+      "description": "The ID of the security configuration.",
+      "type": "string"
+    },
+    "Name": {
+      "description": "The name of the security configuration.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-zA-Z0-9\\-_]+$"
+    },
+    "ContainerProvider": {
+      "description": "Container provider for the security configuration.",
+      "$ref": "#/definitions/ContainerProvider"
+    },
+    "SecurityConfigurationData": {
+      "description": "Security configuration input for the security configuration.",
+      "$ref": "#/definitions/SecurityConfigurationData"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this security configuration.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "SecurityConfigurationData"
+  ],
+  "createOnlyProperties": [
+    "/properties/SecurityConfigurationData",
+    "/properties/Name",
+    "/properties/ContainerProvider"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Id"
+  ],
+  "writeOnlyProperties": [
+    "/properties/SecurityConfigurationData/AuthenticationConfiguration/IdentityCenterConfiguration/IdentityCenterApplicationAssignmentRequired",
+    "/properties/SecurityConfigurationData/AuthenticationConfiguration/IdentityCenterConfiguration/IdentityCenterInstanceARN",
+    "/properties/SecurityConfigurationData/AuthorizationConfiguration/LakeFormationConfiguration/QueryAccessControlEnabled",
+    "/properties/SecurityConfigurationData/EncryptionConfiguration/AtRestEncryptionConfiguration"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "emr-containers:TagResource",
+      "emr-containers:UntagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "emr-containers:CreateSecurityConfiguration",
+        "emr-containers:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "emr-containers:DescribeSecurityConfiguration"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "emr-containers:DeleteSecurityConfiguration",
+        "emr-containers:DescribeSecurityConfiguration"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "emr-containers:ListSecurityConfigurations"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "emr-containers:DescribeSecurityConfiguration",
+        "emr-containers:ListTagsForResource",
+        "emr-containers:TagResource",
+        "emr-containers:UntagResource"
+      ]
+    }
+  }
+}

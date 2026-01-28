@@ -56,6 +56,7 @@ resource "awscc_ses_configuration_set" "example" {
 
 ### Optional
 
+- `archiving_options` (Attributes) An object that defines a MailManager archive that is used to preserve emails that you send using the configuration set. (see [below for nested schema](#nestedatt--archiving_options))
 - `delivery_options` (Attributes) An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set. (see [below for nested schema](#nestedatt--delivery_options))
 - `name` (String) The name of the configuration set.
 - `reputation_options` (Attributes) An object that defines whether or not Amazon SES collects reputation metrics for the emails that you send that use the configuration set. (see [below for nested schema](#nestedatt--reputation_options))
@@ -68,6 +69,14 @@ resource "awscc_ses_configuration_set" "example" {
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--archiving_options"></a>
+### Nested Schema for `archiving_options`
+
+Optional:
+
+- `archive_arn` (String) The ARN of the MailManager archive to associate with the configuration set.
+
 
 <a id="nestedatt--delivery_options"></a>
 ### Nested Schema for `delivery_options`

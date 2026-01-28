@@ -169,6 +169,7 @@
   "tagging": {
     "cloudFormationSystemTags": true,
     "permissions": [
+      "cases:BatchGetField",
       "cases:TagResource",
       "cases:UntagResource"
     ],

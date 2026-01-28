@@ -557,6 +557,11 @@
         "identifier": ["RestoreTestingPlanName","RestoreTestingSelectionName"]
     },
     {
+        "resource": "awscc_backup_tiering_configuration",
+        "generateListResource": true,
+        "identifier": ["TieringConfigurationName"]
+    },
+    {
         "resource": "awscc_backupgateway_hypervisor",
         "generateListResource": true,
         "identifier": ["HypervisorArn"]
@@ -1692,6 +1697,11 @@
         "identifier": ["DirectoryId"]
     },
     {
+        "resource": "awscc_docdb_global_cluster",
+        "generateListResource": true,
+        "identifier": ["GlobalClusterIdentifier"]
+    },
+    {
         "resource": "awscc_docdbelastic_cluster",
         "generateListResource": true,
         "identifier": ["ClusterArn"]
@@ -2363,6 +2373,11 @@
         "resource": "awscc_emr_wal_workspace",
         "generateListResource": true,
         "identifier": ["WALWorkspaceName"]
+    },
+    {
+        "resource": "awscc_emrcontainers_security_configuration",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_emrcontainers_virtual_cluster",
@@ -3609,6 +3624,11 @@
         "identifier": ["RelationalDatabaseName"]
     },
     {
+        "resource": "awscc_lightsail_database_snapshot",
+        "generateListResource": true,
+        "identifier": ["RelationalDatabaseSnapshotName"]
+    },
+    {
         "resource": "awscc_lightsail_disk",
         "generateListResource": true,
         "identifier": ["DiskName"]
@@ -3826,6 +3846,11 @@
         "resource": "awscc_mwaa_environment",
         "generateListResource": true,
         "identifier": ["Name"]
+    },
+    {
+        "resource": "awscc_mwaaserverless_workflow",
+        "generateListResource": true,
+        "identifier": ["WorkflowArn"]
     },
     {
         "resource": "awscc_macie_allow_list",
@@ -4362,6 +4387,11 @@
         "identifier": ["Id"]
     },
     {
+        "resource": "awscc_opensearchserverless_collection_group",
+        "generateListResource": true,
+        "identifier": ["Id"]
+    },
+    {
         "resource": "awscc_opensearchserverless_lifecycle_policy",
         "identifier": ["Type","Name"]
     },
@@ -4561,6 +4591,11 @@
         "resource": "awscc_qldb_stream",
         "generateListResource": true,
         "identifier": ["LedgerName","Id"]
+    },
+    {
+        "resource": "awscc_quicksight_action_connector",
+        "generateListResource": true,
+        "identifier": ["ActionConnectorId","AwsAccountId"]
     },
     {
         "resource": "awscc_quicksight_analysis",

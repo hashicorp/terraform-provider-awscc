@@ -426,7 +426,6 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          }
 		//	        },
 		//	        "required": [
-		//	          "MinSize",
 		//	          "MaxSize"
 		//	        ],
 		//	        "type": "object"

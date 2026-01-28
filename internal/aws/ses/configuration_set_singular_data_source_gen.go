@@ -23,6 +23,31 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::SES::ConfigurationSet resource.
 func configurationSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ArchivingOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "An object that defines a MailManager archive that is used to preserve emails that you send using the configuration set.",
+		//	  "properties": {
+		//	    "ArchiveArn": {
+		//	      "description": "The ARN of the MailManager archive to associate with the configuration set.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"archiving_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ArchiveArn
+				"archive_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the MailManager archive to associate with the configuration set.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "An object that defines a MailManager archive that is used to preserve emails that you send using the configuration set.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeliveryOptions
 		// CloudFormation resource type schema:
 		//
@@ -403,6 +428,8 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithCloudFormationTypeName("AWS::SES::ConfigurationSet").WithTerraformTypeName("awscc_ses_configuration_set")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"archive_arn":                  "ArchiveArn",
+		"archiving_options":            "ArchivingOptions",
 		"condition_threshold":          "ConditionThreshold",
 		"condition_threshold_enabled":  "ConditionThresholdEnabled",
 		"confidence_verdict_threshold": "ConfidenceVerdictThreshold",
