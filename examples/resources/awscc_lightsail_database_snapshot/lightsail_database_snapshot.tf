@@ -1,12 +1,10 @@
-# Generate a secure random password for the database
 # Password can include any printable ASCII character except "/", """, or "@"
 resource "random_password" "master" {
-  length  = 16
-  special = true
+  length           = 16
+  special          = true
   override_special = "!#$%&*()-_=+[]{}<>:?"
 }
 
-# Lightsail database (supplemental resource needed for snapshot)
 resource "awscc_lightsail_database" "example" {
   master_database_name             = "example"
   master_username                  = "pgadmin"
@@ -18,26 +16,7 @@ resource "awscc_lightsail_database" "example" {
   master_user_password             = random_password.master.result
 }
 
-# Lightsail database snapshot
 resource "awscc_lightsail_database_snapshot" "example" {
   source_database_name   = awscc_lightsail_database.example.relational_database_name
   database_snapshot_name = "example-snapshot"
-}
-
-# Output the snapshot name
-output "snapshot_name" {
-  description = "Name of the created database snapshot"
-  value       = awscc_lightsail_database_snapshot.example.database_snapshot_name
-}
-
-# Output the snapshot ARN
-output "snapshot_arn" {
-  description = "ARN of the created database snapshot"
-  value       = awscc_lightsail_database_snapshot.example.database_snapshot_arn
-}
-
-# Output the source database name
-output "source_database" {
-  description = "Name of the source database"
-  value       = awscc_lightsail_database_snapshot.example.source_database_name
 }
