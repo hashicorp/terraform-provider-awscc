@@ -12,7 +12,8 @@ Resource schema for AWS::SecurityHub::ConnectorV2
 ## Example Usage
 
 ### Create a Security Hub Connector V2
-Create a Security Hub Connector V2 for integrating AWS Security Hub with external security and incident response systems like Jira Cloud
+Create a Security Hub Connector V2 for integrating AWS Security Hub with external security and incident response systems like Jira Cloud.
+
 ```terraform
 resource "awscc_securityhub_connector_v2" "example" {
   name          = "example-jira-connector"
