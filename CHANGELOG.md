@@ -1,4 +1,9 @@
-## 1.70.0 (Unreleased)
+## 1.70.0 (February 4, 2026)
+
+FEATURES:
+
+* No new data sources, list resources, or resources.
+* Update attributes and documentation for data sources and resources in Connect, DynamoDB, EC2, GameLift, Lambda, License Manager, Notifications, OSS, PCS, SES, and Transfer.
 
 ## 1.69.0 (January 28, 2026)
 
