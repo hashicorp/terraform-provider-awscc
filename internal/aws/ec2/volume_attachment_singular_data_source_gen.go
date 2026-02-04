@@ -33,6 +33,17 @@ func volumeAttachmentDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "The device name (for example, ``/dev/sdh`` or ``xvdh``).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EbsCardIndex
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The index of the EBS card. Some instance types support multiple EBS cards. The default EBS card index is 0.",
+		//	  "type": "integer"
+		//	}
+		"ebs_card_index": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The index of the EBS card. Some instance types support multiple EBS cards. The default EBS card index is 0.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// CloudFormation resource type schema:
 		//
@@ -72,9 +83,10 @@ func volumeAttachmentDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VolumeAttachment").WithTerraformTypeName("awscc_ec2_volume_attachment")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"device":      "Device",
-		"instance_id": "InstanceId",
-		"volume_id":   "VolumeId",
+		"device":         "Device",
+		"ebs_card_index": "EbsCardIndex",
+		"instance_id":    "InstanceId",
+		"volume_id":      "VolumeId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

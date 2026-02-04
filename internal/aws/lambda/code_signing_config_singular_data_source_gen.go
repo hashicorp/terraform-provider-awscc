@@ -35,7 +35,7 @@ func codeSigningConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//	      "items": {
 		//	        "maxLength": 1024,
 		//	        "minLength": 12,
-		//	        "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
+		//	        "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 20,
@@ -65,7 +65,7 @@ func codeSigningConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//
 		//	{
 		//	  "description": "A unique Arn for CodeSigningConfig resource",
-		//	  "pattern": "arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:code-signing-config:csc-[a-z0-9]{17}",
+		//	  "pattern": "arn:(aws[a-zA-Z-]*)?:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:code-signing-config:csc-[a-z0-9]{17}",
 		//	  "type": "string"
 		//	}
 		"code_signing_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

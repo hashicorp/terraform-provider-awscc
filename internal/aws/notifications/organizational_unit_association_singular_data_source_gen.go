@@ -27,7 +27,7 @@ func organizationalUnitAssociationDataSource(ctx context.Context) (datasource.Da
 		//
 		//	{
 		//	  "description": "ARN identifier of the NotificationConfiguration.\nExample: arn:aws:notifications::123456789012:configuration/a01jes88qxwkbj05xv9c967pgm1",
-		//	  "pattern": "^arn:aws:notifications::[0-9]{12}:configuration\\/[a-z0-9]{27}$",
+		//	  "pattern": "^arn:[a-z-]{3,10}:notifications::[0-9]{12}:configuration/[a-z0-9]{27}$",
 		//	  "type": "string"
 		//	}
 		"notification_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
