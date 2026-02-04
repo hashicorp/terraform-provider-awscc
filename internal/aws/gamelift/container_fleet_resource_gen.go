@@ -604,6 +604,30 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	            "minimum": 0,
 		//	            "type": "integer"
 		//	          },
+		//	          "ManagedCapacityConfiguration": {
+		//	            "additionalProperties": false,
+		//	            "description": "Configuration options for Amazon GameLift Servers-managed capacity behavior.",
+		//	            "properties": {
+		//	              "ScaleInAfterInactivityMinutes": {
+		//	                "description": "Length of time, in minutes, that Amazon GameLift Servers will wait before scaling in your MinSize and DesiredInstances to 0 after a period with no game session activity.",
+		//	                "maximum": 1440,
+		//	                "minimum": 5,
+		//	                "type": "integer"
+		//	              },
+		//	              "ZeroCapacityStrategy": {
+		//	                "description": "The strategy Amazon GameLift Servers will use to automatically scale your capacity to and from zero in response to game session activity. Game session activity refers to any active running sessions or game session requests. When set to SCALE_TO_AND_FROM_ZERO, MinSize must not be specified and will be managed automatically. When set to MANUAL, MinSize is required.",
+		//	                "enum": [
+		//	                  "SCALE_TO_AND_FROM_ZERO",
+		//	                  "MANUAL"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "ZeroCapacityStrategy"
+		//	            ],
+		//	            "type": "object"
+		//	          },
 		//	          "MaxSize": {
 		//	            "description": "The maximum value that is allowed for the fleet's instance count for a location.",
 		//	            "minimum": 0,
@@ -670,6 +694,45 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ManagedCapacityConfiguration
+							"managed_capacity_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ScaleInAfterInactivityMinutes
+									"scale_in_after_inactivity_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Length of time, in minutes, that Amazon GameLift Servers will wait before scaling in your MinSize and DesiredInstances to 0 after a period with no game session activity.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											int64validator.Between(5, 1440),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ZeroCapacityStrategy
+									"zero_capacity_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The strategy Amazon GameLift Servers will use to automatically scale your capacity to and from zero in response to game session activity. Game session activity refers to any active running sessions or game session requests. When set to SCALE_TO_AND_FROM_ZERO, MinSize must not be specified and will be managed automatically. When set to MANUAL, MinSize is required.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"SCALE_TO_AND_FROM_ZERO",
+												"MANUAL",
+											),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Configuration options for Amazon GameLift Servers-managed capacity behavior.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: MaxSize
@@ -1333,6 +1396,7 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 		"log_configuration":                           "LogConfiguration",
 		"log_destination":                             "LogDestination",
 		"log_group_arn":                               "LogGroupArn",
+		"managed_capacity_configuration":              "ManagedCapacityConfiguration",
 		"max_size":                                    "MaxSize",
 		"maximum_game_server_container_groups_per_instance": "MaximumGameServerContainerGroupsPerInstance",
 		"metric_groups":                      "MetricGroups",
@@ -1349,6 +1413,7 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 		"protection_strategy":                          "ProtectionStrategy",
 		"protocol":                                     "Protocol",
 		"s3_bucket_name":                               "S3BucketName",
+		"scale_in_after_inactivity_minutes":            "ScaleInAfterInactivityMinutes",
 		"scaling_adjustment":                           "ScalingAdjustment",
 		"scaling_adjustment_type":                      "ScalingAdjustmentType",
 		"scaling_policies":                             "ScalingPolicies",
@@ -1360,6 +1425,7 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 		"threshold":                                    "Threshold",
 		"to_port":                                      "ToPort",
 		"value":                                        "Value",
+		"zero_capacity_strategy":                       "ZeroCapacityStrategy",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

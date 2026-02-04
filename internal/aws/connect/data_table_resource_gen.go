@@ -306,7 +306,11 @@ func dataTableResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The value lock level of the Data Table",
 		//	  "enum": [
-		//	    "NONE"
+		//	    "NONE",
+		//	    "DATA_TABLE",
+		//	    "PRIMARY_VALUE",
+		//	    "ATTRIBUTE",
+		//	    "VALUE"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -317,6 +321,10 @@ func dataTableResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"NONE",
+					"DATA_TABLE",
+					"PRIMARY_VALUE",
+					"ATTRIBUTE",
+					"VALUE",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

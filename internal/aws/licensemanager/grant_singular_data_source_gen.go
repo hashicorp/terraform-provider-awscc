@@ -107,6 +107,52 @@ func grantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of tags to attach.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag.",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of tags to attach.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -139,9 +185,12 @@ func grantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"grant_arn":          "GrantArn",
 		"grant_name":         "GrantName",
 		"home_region":        "HomeRegion",
+		"key":                "Key",
 		"license_arn":        "LicenseArn",
 		"principals":         "Principals",
 		"status":             "Status",
+		"tags":               "Tags",
+		"value":              "Value",
 		"version":            "Version",
 	})
 

@@ -139,6 +139,26 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "type": "object"
 		//	      },
+		//	      "ReadOnDemandThroughputSettings": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "MaxReadRequestUnits": {
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "ReadProvisionedThroughputSettings": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "ReadCapacityUnits": {
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
 		//	      "WarmThroughput": {
 		//	        "additionalProperties": false,
 		//	        "anyOf": [
@@ -277,6 +297,26 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END SCHEMA*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
+					// Property: ReadOnDemandThroughputSettings
+					"read_on_demand_throughput_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: MaxReadRequestUnits
+							"max_read_request_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: ReadProvisionedThroughputSettings
+					"read_provisioned_throughput_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ReadCapacityUnits
+							"read_capacity_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
 					// Property: WarmThroughput
 					"warm_throughput": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -349,6 +389,15 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: GlobalTableSourceArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"global_table_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: GlobalTableWitnesses
@@ -543,6 +592,50 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"multi_region_consistency": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ReadOnDemandThroughputSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "MaxReadRequestUnits": {
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"read_on_demand_throughput_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxReadRequestUnits
+				"max_read_request_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: ReadProvisionedThroughputSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ReadCapacityUnits": {
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"read_provisioned_throughput_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ReadCapacityUnits
+				"read_capacity_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Replicas
 		// CloudFormation resource type schema:
 		//
@@ -677,6 +770,13 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "type": "array",
 		//	        "uniqueItems": true
+		//	      },
+		//	      "GlobalTableSettingsReplicationMode": {
+		//	        "enum": [
+		//	          "ENABLED",
+		//	          "DISABLED"
+		//	        ],
+		//	        "type": "string"
 		//	      },
 		//	      "KinesisStreamSpecification": {
 		//	        "additionalProperties": false,
@@ -970,6 +1070,10 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: GlobalTableSettingsReplicationMode
+					"global_table_settings_replication_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: KinesisStreamSpecification
@@ -1422,59 +1526,61 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"approximate_creation_date_time_precision": "ApproximateCreationDateTimePrecision",
-		"arn":                                  "Arn",
-		"attribute_definitions":                "AttributeDefinitions",
-		"attribute_name":                       "AttributeName",
-		"attribute_type":                       "AttributeType",
-		"billing_mode":                         "BillingMode",
-		"contributor_insights_specification":   "ContributorInsightsSpecification",
-		"deletion_protection_enabled":          "DeletionProtectionEnabled",
-		"disable_scale_in":                     "DisableScaleIn",
-		"enabled":                              "Enabled",
-		"global_secondary_indexes":             "GlobalSecondaryIndexes",
-		"global_table_witnesses":               "GlobalTableWitnesses",
-		"index_name":                           "IndexName",
-		"key":                                  "Key",
-		"key_schema":                           "KeySchema",
-		"key_type":                             "KeyType",
-		"kinesis_stream_specification":         "KinesisStreamSpecification",
-		"kms_master_key_id":                    "KMSMasterKeyId",
-		"local_secondary_indexes":              "LocalSecondaryIndexes",
-		"max_capacity":                         "MaxCapacity",
-		"max_read_request_units":               "MaxReadRequestUnits",
-		"max_write_request_units":              "MaxWriteRequestUnits",
-		"min_capacity":                         "MinCapacity",
-		"mode":                                 "Mode",
-		"multi_region_consistency":             "MultiRegionConsistency",
-		"non_key_attributes":                   "NonKeyAttributes",
-		"point_in_time_recovery_enabled":       "PointInTimeRecoveryEnabled",
-		"point_in_time_recovery_specification": "PointInTimeRecoverySpecification",
-		"policy_document":                      "PolicyDocument",
-		"projection":                           "Projection",
-		"projection_type":                      "ProjectionType",
-		"read_capacity_auto_scaling_settings":  "ReadCapacityAutoScalingSettings",
-		"read_capacity_units":                  "ReadCapacityUnits",
-		"read_on_demand_throughput_settings":   "ReadOnDemandThroughputSettings",
-		"read_provisioned_throughput_settings": "ReadProvisionedThroughputSettings",
-		"read_units_per_second":                "ReadUnitsPerSecond",
-		"recovery_period_in_days":              "RecoveryPeriodInDays",
-		"region":                               "Region",
-		"replica_stream_specification":         "ReplicaStreamSpecification",
-		"replicas":                             "Replicas",
-		"resource_policy":                      "ResourcePolicy",
-		"scale_in_cooldown":                    "ScaleInCooldown",
-		"scale_out_cooldown":                   "ScaleOutCooldown",
-		"seed_capacity":                        "SeedCapacity",
-		"sse_enabled":                          "SSEEnabled",
-		"sse_specification":                    "SSESpecification",
-		"sse_type":                             "SSEType",
-		"stream_arn":                           "StreamArn",
-		"stream_specification":                 "StreamSpecification",
-		"stream_view_type":                     "StreamViewType",
-		"table_class":                          "TableClass",
-		"table_id":                             "TableId",
-		"table_name":                           "TableName",
-		"tags":                                 "Tags",
+		"arn":                                    "Arn",
+		"attribute_definitions":                  "AttributeDefinitions",
+		"attribute_name":                         "AttributeName",
+		"attribute_type":                         "AttributeType",
+		"billing_mode":                           "BillingMode",
+		"contributor_insights_specification":     "ContributorInsightsSpecification",
+		"deletion_protection_enabled":            "DeletionProtectionEnabled",
+		"disable_scale_in":                       "DisableScaleIn",
+		"enabled":                                "Enabled",
+		"global_secondary_indexes":               "GlobalSecondaryIndexes",
+		"global_table_settings_replication_mode": "GlobalTableSettingsReplicationMode",
+		"global_table_source_arn":                "GlobalTableSourceArn",
+		"global_table_witnesses":                 "GlobalTableWitnesses",
+		"index_name":                             "IndexName",
+		"key":                                    "Key",
+		"key_schema":                             "KeySchema",
+		"key_type":                               "KeyType",
+		"kinesis_stream_specification":           "KinesisStreamSpecification",
+		"kms_master_key_id":                      "KMSMasterKeyId",
+		"local_secondary_indexes":                "LocalSecondaryIndexes",
+		"max_capacity":                           "MaxCapacity",
+		"max_read_request_units":                 "MaxReadRequestUnits",
+		"max_write_request_units":                "MaxWriteRequestUnits",
+		"min_capacity":                           "MinCapacity",
+		"mode":                                   "Mode",
+		"multi_region_consistency":               "MultiRegionConsistency",
+		"non_key_attributes":                     "NonKeyAttributes",
+		"point_in_time_recovery_enabled":         "PointInTimeRecoveryEnabled",
+		"point_in_time_recovery_specification":   "PointInTimeRecoverySpecification",
+		"policy_document":                        "PolicyDocument",
+		"projection":                             "Projection",
+		"projection_type":                        "ProjectionType",
+		"read_capacity_auto_scaling_settings":    "ReadCapacityAutoScalingSettings",
+		"read_capacity_units":                    "ReadCapacityUnits",
+		"read_on_demand_throughput_settings":     "ReadOnDemandThroughputSettings",
+		"read_provisioned_throughput_settings":   "ReadProvisionedThroughputSettings",
+		"read_units_per_second":                  "ReadUnitsPerSecond",
+		"recovery_period_in_days":                "RecoveryPeriodInDays",
+		"region":                                 "Region",
+		"replica_stream_specification":           "ReplicaStreamSpecification",
+		"replicas":                               "Replicas",
+		"resource_policy":                        "ResourcePolicy",
+		"scale_in_cooldown":                      "ScaleInCooldown",
+		"scale_out_cooldown":                     "ScaleOutCooldown",
+		"seed_capacity":                          "SeedCapacity",
+		"sse_enabled":                            "SSEEnabled",
+		"sse_specification":                      "SSESpecification",
+		"sse_type":                               "SSEType",
+		"stream_arn":                             "StreamArn",
+		"stream_specification":                   "StreamSpecification",
+		"stream_view_type":                       "StreamViewType",
+		"table_class":                            "TableClass",
+		"table_id":                               "TableId",
+		"table_name":                             "TableName",
+		"tags":                                   "Tags",
 		"target_tracking_scaling_policy_configuration": "TargetTrackingScalingPolicyConfiguration",
 		"target_value":                          "TargetValue",
 		"time_to_live_specification":            "TimeToLiveSpecification",

@@ -7,7 +7,6 @@ package notifications
 
 import (
 	"context"
-	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -93,7 +92,6 @@ func notificationHubResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Region that NotificationHub is present in.",
 		//	  "maxLength": 25,
 		//	  "minLength": 2,
-		//	  "pattern": "^([a-z]{1,2})-([a-z]{1,15}-)+([0-9])$",
 		//	  "type": "string"
 		//	}
 		"region": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -101,7 +99,6 @@ func notificationHubResource(ctx context.Context) (resource.Resource, error) {
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(2, 25),
-				stringvalidator.RegexMatches(regexp.MustCompile("^([a-z]{1,2})-([a-z]{1,15}-)+([0-9])$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

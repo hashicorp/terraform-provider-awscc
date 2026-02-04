@@ -37,7 +37,7 @@ func eventRuleResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "pattern": "^arn:aws:notifications::[0-9]{12}:configuration/[a-z0-9]{27}/rule/[a-z0-9]{27}$",
+		//	  "pattern": "^arn:[a-z-]{3,10}:notifications::[0-9]{12}:configuration/[a-z0-9]{27}/rule/[a-z0-9]{27}$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -118,13 +118,13 @@ func eventRuleResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "pattern": "^arn:aws:notifications::[0-9]{12}:configuration/[a-z0-9]{27}$",
+		//	  "pattern": "^arn:[a-z-]{3,10}:notifications::[0-9]{12}:configuration/[a-z0-9]{27}$",
 		//	  "type": "string"
 		//	}
 		"notification_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws:notifications::[0-9]{12}:configuration/[a-z0-9]{27}$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z-]{3,10}:notifications::[0-9]{12}:configuration/[a-z0-9]{27}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -137,7 +137,6 @@ func eventRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	  "items": {
 		//	    "maxLength": 25,
 		//	    "minLength": 2,
-		//	    "pattern": "^([a-z]{1,2})-([a-z]{1,15}-)+([0-9])$",
 		//	    "type": "string"
 		//	  },
 		//	  "minItems": 1,
@@ -150,7 +149,6 @@ func eventRuleResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.SizeAtLeast(1),
 				listvalidator.ValueStringsAre(
 					stringvalidator.LengthBetween(2, 25),
-					stringvalidator.RegexMatches(regexp.MustCompile("^([a-z]{1,2})-([a-z]{1,15}-)+([0-9])$"), ""),
 				),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/

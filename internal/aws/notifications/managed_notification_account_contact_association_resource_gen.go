@@ -62,14 +62,14 @@ func managedNotificationAccountContactAssociationResource(ctx context.Context) (
 		//
 		//	{
 		//	  "description": "The managed notification configuration ARN, against which the account contact association will be created",
-		//	  "pattern": "^arn:[-.a-z0-9]{1,63}:notifications::[0-9]{12}:managed-notification-configuration/category/[a-zA-Z0-9-]{3,64}/sub-category/[a-zA-Z0-9-]{3,64}$",
+		//	  "pattern": "^arn:[a-z-]{3,10}:notifications::([0-9]{12}|):managed-notification-configuration/category/[a-zA-Z0-9\\-]{3,64}/sub-category/[a-zA-Z0-9\\-]{3,64}$",
 		//	  "type": "string"
 		//	}
 		"managed_notification_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The managed notification configuration ARN, against which the account contact association will be created",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:[-.a-z0-9]{1,63}:notifications::[0-9]{12}:managed-notification-configuration/category/[a-zA-Z0-9-]{3,64}/sub-category/[a-zA-Z0-9-]{3,64}$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z-]{3,10}:notifications::([0-9]{12}|):managed-notification-configuration/category/[a-zA-Z0-9\\-]{3,64}/sub-category/[a-zA-Z0-9\\-]{3,64}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

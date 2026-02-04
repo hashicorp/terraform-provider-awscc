@@ -23,12 +23,32 @@ Data Source schema for AWS::Transfer::WebApp
 
 - `access_endpoint` (String) The AccessEndpoint is the URL that you provide to your users for them to interact with the Transfer Family web app. You can specify a custom URL or use the default value.
 - `arn` (String) Specifies the unique Amazon Resource Name (ARN) for the web app.
+- `endpoint_details` (Attributes) (see [below for nested schema](#nestedatt--endpoint_details))
 - `identity_provider_details` (Attributes) You can provide a structure that contains the details for the identity provider to use with your web app. (see [below for nested schema](#nestedatt--identity_provider_details))
 - `tags` (Attributes List) Key-value pairs that can be used to group and search for web apps. (see [below for nested schema](#nestedatt--tags))
+- `vpc_endpoint_id` (String)
 - `web_app_customization` (Attributes) (see [below for nested schema](#nestedatt--web_app_customization))
 - `web_app_endpoint_policy` (String)
 - `web_app_id` (String) A unique identifier for the web app.
 - `web_app_units` (Attributes) (see [below for nested schema](#nestedatt--web_app_units))
+
+<a id="nestedatt--endpoint_details"></a>
+### Nested Schema for `endpoint_details`
+
+Read-Only:
+
+- `vpc` (Attributes) You can provide a structure that contains the details for the VPC endpoint to use with your web app. (see [below for nested schema](#nestedatt--endpoint_details--vpc))
+
+<a id="nestedatt--endpoint_details--vpc"></a>
+### Nested Schema for `endpoint_details.vpc`
+
+Read-Only:
+
+- `security_group_ids` (List of String)
+- `subnet_ids` (List of String)
+- `vpc_id` (String)
+
+
 
 <a id="nestedatt--identity_provider_details"></a>
 ### Nested Schema for `identity_provider_details`

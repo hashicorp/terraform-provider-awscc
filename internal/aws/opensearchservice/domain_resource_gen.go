@@ -55,6 +55,16 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	        "Enabled"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "ServerlessVectorAcceleration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "description": "Whether to enable serverless vector acceleration.",
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -72,6 +82,25 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.Bool{ /*START VALIDATORS*/
 								fwvalidators.NotNullBool(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ServerlessVectorAcceleration
+				"serverless_vector_acceleration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether to enable serverless vector acceleration.",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -1793,6 +1822,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"s3_vectors_engine":               "S3VectorsEngine",
 		"saml_options":                    "SAMLOptions",
 		"security_group_ids":              "SecurityGroupIds",
+		"serverless_vector_acceleration":  "ServerlessVectorAcceleration",
 		"service_software_options":        "ServiceSoftwareOptions",
 		"session_timeout_minutes":         "SessionTimeoutMinutes",
 		"skip_shard_migration_wait":       "SkipShardMigrationWait",

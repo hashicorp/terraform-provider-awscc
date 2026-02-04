@@ -23,12 +23,21 @@ An example resource schema demonstrating some basic constructs and validation ru
 - `license_arn` (String) License Arn for the grant.
 - `principals` (List of String)
 - `status` (String)
+- `tags` (Attributes List) A list of tags to attach. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `grant_arn` (String) Arn of the grant.
 - `id` (String) Uniquely identifies the resource.
 - `version` (String) The version of the grant.
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) The key name of the tag.
+- `value` (String) The value for the tag.
 
 ## Import
 

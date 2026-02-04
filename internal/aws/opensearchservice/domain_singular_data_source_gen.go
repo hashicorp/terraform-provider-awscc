@@ -42,6 +42,16 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "Enabled"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "ServerlessVectorAcceleration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "description": "Whether to enable serverless vector acceleration.",
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -54,6 +64,17 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 						// Property: Enabled
 						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "Whether to enable S3 vectors engine.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServerlessVectorAcceleration
+				"serverless_vector_acceleration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether to enable serverless vector acceleration.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1269,6 +1290,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"s3_vectors_engine":               "S3VectorsEngine",
 		"saml_options":                    "SAMLOptions",
 		"security_group_ids":              "SecurityGroupIds",
+		"serverless_vector_acceleration":  "ServerlessVectorAcceleration",
 		"service_software_options":        "ServiceSoftwareOptions",
 		"session_timeout_minutes":         "SessionTimeoutMinutes",
 		"skip_shard_migration_wait":       "SkipShardMigrationWait",

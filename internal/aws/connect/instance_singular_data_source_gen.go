@@ -74,6 +74,10 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "description": "Mandatory element which enables inbound calls on new instance.",
 		//	      "type": "boolean"
 		//	    },
+		//	    "MessageStreaming": {
+		//	      "description": "Boolean flag which enables MESSAGE_STREAMING on an instance.",
+		//	      "type": "boolean"
+		//	    },
 		//	    "MultiPartyChatConference": {
 		//	      "description": "Boolean flag which enables MULTI_PARTY_CHAT_CONFERENCE on an instance.",
 		//	      "type": "boolean"
@@ -137,6 +141,11 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: InboundCalls
 				"inbound_calls": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Mandatory element which enables inbound calls on new instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MessageStreaming
+				"message_streaming": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Boolean flag which enables MESSAGE_STREAMING on an instance.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: MultiPartyChatConference
@@ -342,6 +351,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"instance_id":                 "Id",
 		"instance_status":             "InstanceStatus",
 		"key":                         "Key",
+		"message_streaming":           "MessageStreaming",
 		"multi_party_chat_conference": "MultiPartyChatConference",
 		"multi_party_conference":      "MultiPartyConference",
 		"outbound_calls":              "OutboundCalls",
