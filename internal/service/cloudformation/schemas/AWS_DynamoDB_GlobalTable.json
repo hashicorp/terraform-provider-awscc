@@ -7,17 +7,18 @@
   ],
   "description": "Version: None. Resource Type definition for AWS::DynamoDB::GlobalTable",
   "createOnlyProperties": [
-    "/properties/LocalSecondaryIndexes",
-    "/properties/TableName",
-    "/properties/KeySchema"
+    "/properties/TableName"
   ],
   "primaryIdentifier": [
     "/properties/TableName"
   ],
   "required": [
-    "KeySchema",
-    "AttributeDefinitions",
     "Replicas"
+  ],
+  "conditionalCreateOnlyProperties": [
+    "/properties/LocalSecondaryIndexes",
+    "/properties/GlobalTableSourceArn",
+    "/properties/KeySchema"
   ],
   "propertyTransform": {
     "/properties/Replicas/*/GlobalTableSettingsReplicationMode": "GlobalTableSettingsReplicationMode $OR ($exists(GlobalTableSettingsReplicationMode) ? null : \"DISABLED\") $OR ($exists(GlobalTableSettingsReplicationMode) ? null : \"ENABLED_WITH_OVERRIDES\")"
@@ -153,7 +154,8 @@
     "/properties/Replicas/*/ReadProvisionedThroughputSettings/ReadCapacityAutoScalingSettings/SeedCapacity",
     "/properties/Replicas/*/GlobalSecondaryIndexes/*/ReadProvisionedThroughputSettings/ReadCapacityAutoScalingSettings/SeedCapacity",
     "/properties/WriteProvisionedThroughputSettings/WriteCapacityAutoScalingSettings/SeedCapacity",
-    "/properties/GlobalSecondaryIndexes/*/WriteProvisionedThroughputSettings/WriteCapacityAutoScalingSettings/SeedCapacity"
+    "/properties/GlobalSecondaryIndexes/*/WriteProvisionedThroughputSettings/WriteCapacityAutoScalingSettings/SeedCapacity",
+    "/properties/GlobalTableSourceArn"
   ],
   "additionalProperties": false,
   "definitions": {
@@ -196,6 +198,13 @@
         },
         "ContributorInsightsSpecification": {
           "$ref": "#/definitions/ContributorInsightsSpecification"
+        },
+        "GlobalTableSettingsReplicationMode": {
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "DISABLED"
+          ]
         },
         "PointInTimeRecoverySpecification": {
           "$ref": "#/definitions/PointInTimeRecoverySpecification"
@@ -344,8 +353,14 @@
         "WarmThroughput": {
           "$ref": "#/definitions/WarmThroughput"
         },
+        "ReadProvisionedThroughputSettings": {
+          "$ref": "#/definitions/GlobalReadProvisionedThroughputSettings"
+        },
         "WriteProvisionedThroughputSettings": {
           "$ref": "#/definitions/WriteProvisionedThroughputSettings"
+        },
+        "ReadOnDemandThroughputSettings": {
+          "$ref": "#/definitions/ReadOnDemandThroughputSettings"
         },
         "WriteOnDemandThroughputSettings": {
           "$ref": "#/definitions/WriteOnDemandThroughputSettings"
@@ -653,6 +668,16 @@
       "required": [
         "Enabled"
       ]
+    },
+    "GlobalReadProvisionedThroughputSettings": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ReadCapacityUnits": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
     }
   },
   "properties": {
@@ -686,6 +711,9 @@
     },
     "WriteProvisionedThroughputSettings": {
       "$ref": "#/definitions/WriteProvisionedThroughputSettings"
+    },
+    "GlobalTableSourceArn": {
+      "type": "string"
     },
     "WriteOnDemandThroughputSettings": {
       "$ref": "#/definitions/WriteOnDemandThroughputSettings"
@@ -745,6 +773,12 @@
     },
     "StreamArn": {
       "type": "string"
+    },
+    "ReadProvisionedThroughputSettings": {
+      "$ref": "#/definitions/GlobalReadProvisionedThroughputSettings"
+    },
+    "ReadOnDemandThroughputSettings": {
+      "$ref": "#/definitions/ReadOnDemandThroughputSettings"
     },
     "TimeToLiveSpecification": {
       "$ref": "#/definitions/TimeToLiveSpecification"

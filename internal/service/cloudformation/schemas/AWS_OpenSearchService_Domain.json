@@ -153,12 +153,25 @@
         "Enabled"
       ]
     },
+    "ServerlessVectorAcceleration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "type": "boolean",
+          "description": "Whether to enable serverless vector acceleration."
+        }
+      }
+    },
     "AIMLOptions": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "S3VectorsEngine": {
           "$ref": "#/definitions/S3VectorsEngine"
+        },
+        "ServerlessVectorAcceleration": {
+          "$ref": "#/definitions/ServerlessVectorAcceleration"
         }
       }
     },
