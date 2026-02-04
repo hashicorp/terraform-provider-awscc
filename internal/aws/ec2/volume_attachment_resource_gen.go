@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -40,6 +41,22 @@ func volumeAttachmentResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EbsCardIndex
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The index of the EBS card. Some instance types support multiple EBS cards. The default EBS card index is 0.",
+		//	  "type": "integer"
+		//	}
+		"ebs_card_index": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The index of the EBS card. Some instance types support multiple EBS cards. The default EBS card index is 0.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+				int64planmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
@@ -104,9 +121,10 @@ func volumeAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"device":      "Device",
-		"instance_id": "InstanceId",
-		"volume_id":   "VolumeId",
+		"device":         "Device",
+		"ebs_card_index": "EbsCardIndex",
+		"instance_id":    "InstanceId",
+		"volume_id":      "VolumeId",
 	})
 
 	opts = opts.IsImmutableType(true)

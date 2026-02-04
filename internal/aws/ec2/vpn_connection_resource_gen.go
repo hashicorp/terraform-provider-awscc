@@ -45,9 +45,6 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		"customer_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the customer gateway at your end of the VPN connection.",
 			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: EnableAcceleration
 		// CloudFormation resource type schema:
@@ -266,7 +263,6 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: TransportTransitGatewayAttachmentId
@@ -386,7 +382,6 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: VpnTunnelOptionsSpecifications
