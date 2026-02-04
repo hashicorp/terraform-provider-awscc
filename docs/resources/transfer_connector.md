@@ -128,6 +128,7 @@ resource "awscc_transfer_connector" "example" {
 
 Optional:
 
+- `async_mdn_config` (Attributes) Configuration for an AS2 connector with ASYNC MDN Response (see [below for nested schema](#nestedatt--as_2_config--async_mdn_config))
 - `basic_auth_secret_id` (String) ARN or name of the secret in AWS Secrets Manager which contains the credentials for Basic authentication. If empty, Basic authentication is disabled for the AS2 connector
 - `compression` (String) Compression setting for this AS2 connector configuration.
 - `encryption_algorithm` (String) Encryption algorithm for this AS2 connector configuration.
@@ -138,6 +139,15 @@ Optional:
 - `partner_profile_id` (String) A unique identifier for the partner profile.
 - `preserve_content_type` (String) Specifies whether to use the AWS S3 object content-type as the content-type for the AS2 message.
 - `signing_algorithm` (String) Signing algorithm for this AS2 connector configuration.
+
+<a id="nestedatt--as_2_config--async_mdn_config"></a>
+### Nested Schema for `as_2_config.async_mdn_config`
+
+Optional:
+
+- `server_ids` (Set of String)
+- `url` (String) URL of the server to receive the MDN response on
+
 
 
 <a id="nestedatt--egress_config"></a>

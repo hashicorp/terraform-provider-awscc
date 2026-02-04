@@ -90,17 +90,20 @@ resource "awscc_dynamodb_global_table" "example" {
 
 ### Required
 
-- `attribute_definitions` (Attributes Set) (see [below for nested schema](#nestedatt--attribute_definitions))
-- `key_schema` (Attributes List) (see [below for nested schema](#nestedatt--key_schema))
 - `replicas` (Attributes Set) (see [below for nested schema](#nestedatt--replicas))
 
 ### Optional
 
+- `attribute_definitions` (Attributes Set) (see [below for nested schema](#nestedatt--attribute_definitions))
 - `billing_mode` (String)
 - `global_secondary_indexes` (Attributes Set) (see [below for nested schema](#nestedatt--global_secondary_indexes))
+- `global_table_source_arn` (String)
 - `global_table_witnesses` (Attributes Set) (see [below for nested schema](#nestedatt--global_table_witnesses))
+- `key_schema` (Attributes List) (see [below for nested schema](#nestedatt--key_schema))
 - `local_secondary_indexes` (Attributes Set) (see [below for nested schema](#nestedatt--local_secondary_indexes))
 - `multi_region_consistency` (String)
+- `read_on_demand_throughput_settings` (Attributes) (see [below for nested schema](#nestedatt--read_on_demand_throughput_settings))
+- `read_provisioned_throughput_settings` (Attributes) (see [below for nested schema](#nestedatt--read_provisioned_throughput_settings))
 - `sse_specification` (Attributes) (see [below for nested schema](#nestedatt--sse_specification))
 - `stream_specification` (Attributes) (see [below for nested schema](#nestedatt--stream_specification))
 - `table_name` (String)
@@ -116,24 +119,6 @@ resource "awscc_dynamodb_global_table" "example" {
 - `stream_arn` (String)
 - `table_id` (String)
 
-<a id="nestedatt--attribute_definitions"></a>
-### Nested Schema for `attribute_definitions`
-
-Required:
-
-- `attribute_name` (String)
-- `attribute_type` (String)
-
-
-<a id="nestedatt--key_schema"></a>
-### Nested Schema for `key_schema`
-
-Required:
-
-- `attribute_name` (String)
-- `key_type` (String)
-
-
 <a id="nestedatt--replicas"></a>
 ### Nested Schema for `replicas`
 
@@ -146,6 +131,7 @@ Optional:
 - `contributor_insights_specification` (Attributes) (see [below for nested schema](#nestedatt--replicas--contributor_insights_specification))
 - `deletion_protection_enabled` (Boolean)
 - `global_secondary_indexes` (Attributes Set) (see [below for nested schema](#nestedatt--replicas--global_secondary_indexes))
+- `global_table_settings_replication_mode` (String)
 - `kinesis_stream_specification` (Attributes) (see [below for nested schema](#nestedatt--replicas--kinesis_stream_specification))
 - `point_in_time_recovery_specification` (Attributes) (see [below for nested schema](#nestedatt--replicas--point_in_time_recovery_specification))
 - `read_on_demand_throughput_settings` (Attributes) (see [below for nested schema](#nestedatt--replicas--read_on_demand_throughput_settings))
@@ -323,6 +309,15 @@ Optional:
 
 
 
+<a id="nestedatt--attribute_definitions"></a>
+### Nested Schema for `attribute_definitions`
+
+Optional:
+
+- `attribute_name` (String)
+- `attribute_type` (String)
+
+
 <a id="nestedatt--global_secondary_indexes"></a>
 ### Nested Schema for `global_secondary_indexes`
 
@@ -331,6 +326,8 @@ Optional:
 - `index_name` (String)
 - `key_schema` (Attributes List) (see [below for nested schema](#nestedatt--global_secondary_indexes--key_schema))
 - `projection` (Attributes) (see [below for nested schema](#nestedatt--global_secondary_indexes--projection))
+- `read_on_demand_throughput_settings` (Attributes) (see [below for nested schema](#nestedatt--global_secondary_indexes--read_on_demand_throughput_settings))
+- `read_provisioned_throughput_settings` (Attributes) (see [below for nested schema](#nestedatt--global_secondary_indexes--read_provisioned_throughput_settings))
 - `warm_throughput` (Attributes) (see [below for nested schema](#nestedatt--global_secondary_indexes--warm_throughput))
 - `write_on_demand_throughput_settings` (Attributes) (see [below for nested schema](#nestedatt--global_secondary_indexes--write_on_demand_throughput_settings))
 - `write_provisioned_throughput_settings` (Attributes) (see [below for nested schema](#nestedatt--global_secondary_indexes--write_provisioned_throughput_settings))
@@ -351,6 +348,22 @@ Optional:
 
 - `non_key_attributes` (Set of String)
 - `projection_type` (String)
+
+
+<a id="nestedatt--global_secondary_indexes--read_on_demand_throughput_settings"></a>
+### Nested Schema for `global_secondary_indexes.read_on_demand_throughput_settings`
+
+Optional:
+
+- `max_read_request_units` (Number)
+
+
+<a id="nestedatt--global_secondary_indexes--read_provisioned_throughput_settings"></a>
+### Nested Schema for `global_secondary_indexes.read_provisioned_throughput_settings`
+
+Optional:
+
+- `read_capacity_units` (Number)
 
 
 <a id="nestedatt--global_secondary_indexes--warm_throughput"></a>
@@ -409,6 +422,15 @@ Optional:
 - `region` (String)
 
 
+<a id="nestedatt--key_schema"></a>
+### Nested Schema for `key_schema`
+
+Optional:
+
+- `attribute_name` (String)
+- `key_type` (String)
+
+
 <a id="nestedatt--local_secondary_indexes"></a>
 ### Nested Schema for `local_secondary_indexes`
 
@@ -435,6 +457,22 @@ Optional:
 - `non_key_attributes` (Set of String)
 - `projection_type` (String)
 
+
+
+<a id="nestedatt--read_on_demand_throughput_settings"></a>
+### Nested Schema for `read_on_demand_throughput_settings`
+
+Optional:
+
+- `max_read_request_units` (Number)
+
+
+<a id="nestedatt--read_provisioned_throughput_settings"></a>
+### Nested Schema for `read_provisioned_throughput_settings`
+
+Optional:
+
+- `read_capacity_units` (Number)
 
 
 <a id="nestedatt--sse_specification"></a>

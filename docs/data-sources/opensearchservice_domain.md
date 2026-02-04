@@ -125,6 +125,7 @@ Read-Only:
 Read-Only:
 
 - `s3_vectors_engine` (Attributes) (see [below for nested schema](#nestedatt--aiml_options--s3_vectors_engine))
+- `serverless_vector_acceleration` (Attributes) (see [below for nested schema](#nestedatt--aiml_options--serverless_vector_acceleration))
 
 <a id="nestedatt--aiml_options--s3_vectors_engine"></a>
 ### Nested Schema for `aiml_options.s3_vectors_engine`
@@ -132,6 +133,14 @@ Read-Only:
 Read-Only:
 
 - `enabled` (Boolean) Whether to enable S3 vectors engine.
+
+
+<a id="nestedatt--aiml_options--serverless_vector_acceleration"></a>
+### Nested Schema for `aiml_options.serverless_vector_acceleration`
+
+Read-Only:
+
+- `enabled` (Boolean) Whether to enable serverless vector acceleration.
 
 
 

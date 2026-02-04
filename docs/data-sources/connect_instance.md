@@ -45,6 +45,7 @@ Read-Only:
 - `enhanced_contact_monitoring` (Boolean) Boolean flag which enables ENHANCED_CONTACT_MONITORING on an instance.
 - `high_volume_out_bound` (Boolean) Boolean flag which enables HIGH_VOLUME_OUTBOUND on an instance.
 - `inbound_calls` (Boolean) Mandatory element which enables inbound calls on new instance.
+- `message_streaming` (Boolean) Boolean flag which enables MESSAGE_STREAMING on an instance.
 - `multi_party_chat_conference` (Boolean) Boolean flag which enables MULTI_PARTY_CHAT_CONFERENCE on an instance.
 - `multi_party_conference` (Boolean) Boolean flag which enables MULTI_PARTY_CONFERENCE on an instance.
 - `outbound_calls` (Boolean) Mandatory element which enables outbound calls on new instance.

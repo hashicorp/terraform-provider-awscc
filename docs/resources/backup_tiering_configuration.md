@@ -54,8 +54,8 @@ resource "awscc_kms_key" "example" {
 
 # Backup Vault
 resource "awscc_backup_backup_vault" "example" {
-  backup_vault_name   = "example-backup-vault"
-  encryption_key_arn  = awscc_kms_key.example.arn
+  backup_vault_name  = "example-backup-vault"
+  encryption_key_arn = awscc_kms_key.example.arn
 }
 
 # Backup Tiering Configuration

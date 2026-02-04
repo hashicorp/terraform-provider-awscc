@@ -97,8 +97,18 @@ Read-Only:
 Read-Only:
 
 - `desired_ec2_instances` (Number) Defaults to MinSize if not defined. The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits.
+- `managed_capacity_configuration` (Attributes) Configuration options for Amazon GameLift Servers-managed capacity behavior. (see [below for nested schema](#nestedatt--locations--location_capacity--managed_capacity_configuration))
 - `max_size` (Number) The maximum value that is allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to "1". Once the fleet is active, you can change this value.
 - `min_size` (Number) The minimum value allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to "0". After the fleet is active, you can change this value.
+
+<a id="nestedatt--locations--location_capacity--managed_capacity_configuration"></a>
+### Nested Schema for `locations.location_capacity.managed_capacity_configuration`
+
+Read-Only:
+
+- `scale_in_after_inactivity_minutes` (Number) Length of time, in minutes, that Amazon GameLift Servers will wait before scaling in your MinSize and DesiredInstances to 0 after a period with no game session activity.
+- `zero_capacity_strategy` (String) The strategy Amazon GameLift Servers will use to automatically scale your capacity to and from zero in response to game session activity. Game session activity refers to any active running sessions or game session requests. When set to SCALE_TO_AND_FROM_ZERO, MinSize must not be specified and will be managed automatically. When set to MANUAL, MinSize is required.
+
 
 
 
