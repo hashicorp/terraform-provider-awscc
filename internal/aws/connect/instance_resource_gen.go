@@ -87,6 +87,10 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "Mandatory element which enables inbound calls on new instance.",
 		//	      "type": "boolean"
 		//	    },
+		//	    "MessageStreaming": {
+		//	      "description": "Boolean flag which enables MESSAGE_STREAMING on an instance.",
+		//	      "type": "boolean"
+		//	    },
 		//	    "MultiPartyChatConference": {
 		//	      "description": "Boolean flag which enables MULTI_PARTY_CHAT_CONFERENCE on an instance.",
 		//	      "type": "boolean"
@@ -179,6 +183,15 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				"inbound_calls": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Mandatory element which enables inbound calls on new instance.",
 					Required:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MessageStreaming
+				"message_streaming": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Boolean flag which enables MESSAGE_STREAMING on an instance.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MultiPartyChatConference
 				"multi_party_chat_conference": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -467,6 +480,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"instance_id":                 "Id",
 		"instance_status":             "InstanceStatus",
 		"key":                         "Key",
+		"message_streaming":           "MessageStreaming",
 		"multi_party_chat_conference": "MultiPartyChatConference",
 		"multi_party_conference":      "MultiPartyConference",
 		"outbound_calls":              "OutboundCalls",

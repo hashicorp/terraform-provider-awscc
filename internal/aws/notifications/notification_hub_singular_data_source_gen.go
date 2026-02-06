@@ -79,7 +79,6 @@ func notificationHubDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Region that NotificationHub is present in.",
 		//	  "maxLength": 25,
 		//	  "minLength": 2,
-		//	  "pattern": "^([a-z]{1,2})-([a-z]{1,15}-)+([0-9])$",
 		//	  "type": "string"
 		//	}
 		"region": schema.StringAttribute{ /*START ATTRIBUTE*/

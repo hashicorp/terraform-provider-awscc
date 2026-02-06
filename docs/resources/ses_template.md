@@ -54,12 +54,22 @@ EOF
 
 ### Optional
 
+- `tags` (Attributes List) The tags (keys and values) associated with the email template. (see [below for nested schema](#nestedatt--tags))
 - `template` (Attributes) The content of the email, composed of a subject line, an HTML part, and a text-only part (see [below for nested schema](#nestedatt--template))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
 - `template_id` (String)
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
+
 
 <a id="nestedatt--template"></a>
 ### Nested Schema for `template`

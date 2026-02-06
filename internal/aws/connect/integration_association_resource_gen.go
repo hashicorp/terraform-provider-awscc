@@ -73,7 +73,6 @@ func integrationAssociationResource(ctx context.Context) (resource.Resource, err
 		//
 		//	{
 		//	  "description": "Identifier of the association with Connect Instance",
-		//	  "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9])*$",
 		//	  "type": "string"
 		//	}
 		"integration_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -91,7 +90,8 @@ func integrationAssociationResource(ctx context.Context) (resource.Resource, err
 		//	  "enum": [
 		//	    "LEX_BOT",
 		//	    "LAMBDA_FUNCTION",
-		//	    "APPLICATION"
+		//	    "APPLICATION",
+		//	    "CASES_DOMAIN"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -103,6 +103,7 @@ func integrationAssociationResource(ctx context.Context) (resource.Resource, err
 					"LEX_BOT",
 					"LAMBDA_FUNCTION",
 					"APPLICATION",
+					"CASES_DOMAIN",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

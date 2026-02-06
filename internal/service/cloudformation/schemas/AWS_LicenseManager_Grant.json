@@ -6,6 +6,25 @@
     "Arn": {
       "type": "string",
       "maxLength": 2048
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag."
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag."
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -45,6 +64,15 @@
     },
     "Status": {
       "type": "string"
+    },
+    "Tags": {
+      "description": "A list of tags to attach.",
+      "type": "array",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     }
   },
   "additionalProperties": false,
@@ -64,22 +92,33 @@
   "handlers": {
     "create": {
       "permissions": [
-        "license-manager:CreateGrant"
+        "license-manager:CreateGrant",
+        "license-manager:CreateGrantVersion",
+        "license-manager:GetGrant",
+        "license-manager:TagResource",
+        "license-manager:ListTagsForResource"
       ]
     },
     "read": {
       "permissions": [
-        "license-manager:GetGrant"
+        "license-manager:GetGrant",
+        "license-manager:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
-        "license-manager:CreateGrantVersion"
+        "license-manager:CreateGrantVersion",
+        "license-manager:GetGrant",
+        "license-manager:TagResource",
+        "license-manager:UntagResource",
+        "license-manager:ListTagsForResource"
       ]
     },
     "delete": {
       "permissions": [
-        "license-manager:DeleteGrant"
+        "license-manager:DeleteGrant",
+        "license-manager:GetGrant",
+        "license-manager:ListTagsForResource"
       ]
     },
     "list": {
@@ -87,5 +126,17 @@
         "license-manager:ListDistributedGrants"
       ]
     }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "license-manager:TagResource",
+      "license-manager:UntagResource",
+      "license-manager:ListTagsForResource"
+    ]
   }
 }

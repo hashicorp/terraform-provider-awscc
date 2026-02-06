@@ -81,6 +81,35 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "Configuration for an AS2 connector.",
 		//	  "properties": {
+		//	    "AsyncMdnConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for an AS2 connector with ASYNC MDN Response",
+		//	      "properties": {
+		//	        "ServerIds": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "description": "A unique identifier for the server.",
+		//	            "maxLength": 19,
+		//	            "minLength": 19,
+		//	            "pattern": "^s-([0-9a-f]{17})$",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 10,
+		//	          "minItems": 1,
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        },
+		//	        "Url": {
+		//	          "description": "URL of the server to receive the MDN response on",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Url",
+		//	        "ServerIds"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "BasicAuthSecretId": {
 		//	      "description": "ARN or name of the secret in AWS Secrets Manager which contains the credentials for Basic authentication. If empty, Basic authentication is disabled for the AS2 connector",
 		//	      "maxLength": 2048,
@@ -117,6 +146,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "MDN Response setting for this AS2 connector configuration.",
 		//	      "enum": [
 		//	        "SYNC",
+		//	        "ASYNC",
 		//	        "NONE"
 		//	      ],
 		//	      "type": "string"
@@ -171,6 +201,46 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"as_2_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AsyncMdnConfig
+				"async_mdn_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ServerIds
+						"server_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Set{ /*START VALIDATORS*/
+								setvalidator.SizeBetween(1, 10),
+								setvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(19, 19),
+									stringvalidator.RegexMatches(regexp.MustCompile("^s-([0-9a-f]{17})$"), ""),
+								),
+								fwvalidators.NotNullSet(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Url
+						"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "URL of the server to receive the MDN response on",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for an AS2 connector with ASYNC MDN Response",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: BasicAuthSecretId
 				"basic_auth_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "ARN or name of the secret in AWS Secrets Manager which contains the credentials for Basic authentication. If empty, Basic authentication is disabled for the AS2 connector",
@@ -237,6 +307,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"SYNC",
+							"ASYNC",
 							"NONE",
 						),
 					}, /*END VALIDATORS*/
@@ -764,6 +835,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		"access_role":                         "AccessRole",
 		"arn":                                 "Arn",
 		"as_2_config":                         "As2Config",
+		"async_mdn_config":                    "AsyncMdnConfig",
 		"basic_auth_secret_id":                "BasicAuthSecretId",
 		"compression":                         "Compression",
 		"connector_id":                        "ConnectorId",
@@ -783,6 +855,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		"preserve_content_type":               "PreserveContentType",
 		"resource_configuration_arn":          "ResourceConfigurationArn",
 		"security_policy_name":                "SecurityPolicyName",
+		"server_ids":                          "ServerIds",
 		"service_managed_egress_ip_addresses": "ServiceManagedEgressIpAddresses",
 		"sftp_config":                         "SftpConfig",
 		"signing_algorithm":                   "SigningAlgorithm",

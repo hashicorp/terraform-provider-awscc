@@ -54,7 +54,6 @@ func integrationAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//
 		//	{
 		//	  "description": "Identifier of the association with Connect Instance",
-		//	  "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9])*$",
 		//	  "type": "string"
 		//	}
 		"integration_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -69,7 +68,8 @@ func integrationAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "enum": [
 		//	    "LEX_BOT",
 		//	    "LAMBDA_FUNCTION",
-		//	    "APPLICATION"
+		//	    "APPLICATION",
+		//	    "CASES_DOMAIN"
 		//	  ],
 		//	  "type": "string"
 		//	}
