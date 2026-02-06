@@ -1,4 +1,3 @@
-# Create an OpenSearch Serverless collection group
 resource "awscc_opensearchserverless_collection_group" "example" {
   name        = "example-collection-group"
   description = "Example OpenSearch Serverless collection group for demonstration"
