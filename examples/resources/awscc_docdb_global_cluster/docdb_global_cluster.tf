@@ -1,4 +1,3 @@
-# DocumentDB Global Cluster
 resource "awscc_docdb_global_cluster" "example" {
   global_cluster_identifier = "example-docdb-global-cluster"
   engine                   = "docdb"
