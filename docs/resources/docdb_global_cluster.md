@@ -14,7 +14,6 @@ The AWS::DocDB::GlobalCluster resource represents an Amazon DocumentDB Global Cl
 ### Create a DocumentDB Global Cluster
 Create a DocumentDB Global Cluster with encryption and tags
 ```terraform
-# DocumentDB Global Cluster
 resource "awscc_docdb_global_cluster" "example" {
   global_cluster_identifier = "example-docdb-global-cluster"
   engine                   = "docdb"
