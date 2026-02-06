@@ -28,7 +28,7 @@ func eventRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "pattern": "^arn:aws:notifications::[0-9]{12}:configuration/[a-z0-9]{27}/rule/[a-z0-9]{27}$",
+		//	  "pattern": "^arn:[a-z-]{3,10}:notifications::[0-9]{12}:configuration/[a-z0-9]{27}/rule/[a-z0-9]{27}$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -86,7 +86,7 @@ func eventRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "pattern": "^arn:aws:notifications::[0-9]{12}:configuration/[a-z0-9]{27}$",
+		//	  "pattern": "^arn:[a-z-]{3,10}:notifications::[0-9]{12}:configuration/[a-z0-9]{27}$",
 		//	  "type": "string"
 		//	}
 		"notification_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -99,7 +99,6 @@ func eventRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "items": {
 		//	    "maxLength": 25,
 		//	    "minLength": 2,
-		//	    "pattern": "^([a-z]{1,2})-([a-z]{1,15}-)+([0-9])$",
 		//	    "type": "string"
 		//	  },
 		//	  "minItems": 1,

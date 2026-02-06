@@ -244,6 +244,9 @@
         },
         "UriFragment": {
           "$ref": "#/definitions/UriFragment"
+        },
+        "HeaderOrder": {
+          "$ref": "#/definitions/HeaderOrder"
         }
       },
       "additionalProperties": false
@@ -2201,6 +2204,19 @@
           ]
         }
       },
+      "additionalProperties": false
+    },
+    "HeaderOrder": {
+      "description": "The string containing the list of a web request's header names, ordered as they appear in the web request, separated by colons.",
+      "type": "object",
+      "properties": {
+        "OversizeHandling": {
+          "$ref": "#/definitions/OversizeHandling"
+        }
+      },
+      "required": [
+        "OversizeHandling"
+      ],
       "additionalProperties": false
     },
     "OnSourceDDoSProtectionConfig": {

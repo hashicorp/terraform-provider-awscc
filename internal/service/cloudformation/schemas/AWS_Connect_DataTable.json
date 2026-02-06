@@ -71,7 +71,11 @@
       "description": "The value lock level of the Data Table",
       "type": "string",
       "enum": [
-        "NONE"
+        "NONE",
+        "DATA_TABLE",
+        "PRIMARY_VALUE",
+        "ATTRIBUTE",
+        "VALUE"
       ]
     },
     "LockVersion": {

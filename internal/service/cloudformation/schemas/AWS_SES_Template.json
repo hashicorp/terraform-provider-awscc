@@ -31,6 +31,26 @@
       "required": [
         "SubjectPart"
       ]
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -39,6 +59,16 @@
     },
     "Template": {
       "$ref": "#/definitions/Template"
+    },
+    "Tags": {
+      "description": "The tags (keys and values) associated with the email template.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 50
     }
   },
   "additionalProperties": false,
@@ -52,7 +82,16 @@
     "/properties/Template/TemplateName"
   ],
   "tagging": {
-    "taggable": false
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ses:TagResource",
+      "ses:UntagResource",
+      "ses:ListTagsForResource"
+    ]
   },
   "handlers": {
     "create": {
@@ -60,13 +99,15 @@
         "ses:CreateEmailTemplate",
         "ses:GetEmailTemplate",
         "ses:CreateTemplate",
-        "ses:GetTemplate"
+        "ses:GetTemplate",
+        "ses:TagResource"
       ]
     },
     "read": {
       "permissions": [
         "ses:GetEmailTemplate",
-        "ses:GetTemplate"
+        "ses:GetTemplate",
+        "ses:ListTagsForResource"
       ]
     },
     "delete": {
@@ -80,7 +121,9 @@
         "ses:GetEmailTemplate",
         "ses:UpdateEmailTemplate",
         "ses:GetTemplate",
-        "ses:UpdateTemplate"
+        "ses:UpdateTemplate",
+        "ses:TagResource",
+        "ses:UntagResource"
       ]
     },
     "list": {

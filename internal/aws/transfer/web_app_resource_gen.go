@@ -20,6 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -70,6 +71,118 @@ func webAppResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EndpointDetails
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Vpc": {
+		//	      "additionalProperties": false,
+		//	      "description": "You can provide a structure that contains the details for the VPC endpoint to use with your web app.",
+		//	      "properties": {
+		//	        "SecurityGroupIds": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "maxLength": 20,
+		//	            "minLength": 11,
+		//	            "pattern": "^sg-[0-9a-f]{8,17}$",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 10,
+		//	          "type": "array"
+		//	        },
+		//	        "SubnetIds": {
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "maxLength": 24,
+		//	            "minLength": 15,
+		//	            "pattern": "^subnet-[0-9a-f]{8,17}$",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 10,
+		//	          "type": "array"
+		//	        },
+		//	        "VpcId": {
+		//	          "maxLength": 21,
+		//	          "minLength": 12,
+		//	          "pattern": "^vpc-[0-9a-f]{8,17}$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"endpoint_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Vpc
+				"vpc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SecurityGroupIds
+						"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeAtMost(10),
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(11, 20),
+									stringvalidator.RegexMatches(regexp.MustCompile("^sg-[0-9a-f]{8,17}$"), ""),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+								listplanmodifier.RequiresReplaceIfConfigured(),
+							}, /*END PLAN MODIFIERS*/
+							// SecurityGroupIds is a write-only property.
+						}, /*END ATTRIBUTE*/
+						// Property: SubnetIds
+						"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeAtMost(10),
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(15, 24),
+									stringvalidator.RegexMatches(regexp.MustCompile("^subnet-[0-9a-f]{8,17}$"), ""),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: VpcId
+						"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(12, 21),
+								stringvalidator.RegexMatches(regexp.MustCompile("^vpc-[0-9a-f]{8,17}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplaceIfConfigured(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "You can provide a structure that contains the details for the VPC endpoint to use with your web app.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: IdentityProviderDetails
@@ -210,6 +323,21 @@ func webAppResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: VpcEndpointId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 22,
+		//	  "minLength": 13,
+		//	  "pattern": "^vpce-[0-9a-f]{8,17}$",
+		//	  "type": "string"
+		//	}
+		"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: WebAppCustomization
@@ -389,6 +517,7 @@ func webAppResource(ctx context.Context) (resource.Resource, error) {
 		"access_endpoint":           "AccessEndpoint",
 		"application_arn":           "ApplicationArn",
 		"arn":                       "Arn",
+		"endpoint_details":          "EndpointDetails",
 		"favicon_file":              "FaviconFile",
 		"identity_provider_details": "IdentityProviderDetails",
 		"instance_arn":              "InstanceArn",
@@ -396,15 +525,23 @@ func webAppResource(ctx context.Context) (resource.Resource, error) {
 		"logo_file":                 "LogoFile",
 		"provisioned":               "Provisioned",
 		"role":                      "Role",
+		"security_group_ids":        "SecurityGroupIds",
+		"subnet_ids":                "SubnetIds",
 		"tags":                      "Tags",
 		"title":                     "Title",
 		"value":                     "Value",
+		"vpc":                       "Vpc",
+		"vpc_endpoint_id":           "VpcEndpointId",
+		"vpc_id":                    "VpcId",
 		"web_app_customization":     "WebAppCustomization",
 		"web_app_endpoint_policy":   "WebAppEndpointPolicy",
 		"web_app_id":                "WebAppId",
 		"web_app_units":             "WebAppUnits",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/EndpointDetails/Vpc/SecurityGroupIds",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

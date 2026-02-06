@@ -22,6 +22,7 @@ Resource Type definition for AWS::Transfer::WebApp
 ### Optional
 
 - `access_endpoint` (String) The AccessEndpoint is the URL that you provide to your users for them to interact with the Transfer Family web app. You can specify a custom URL or use the default value.
+- `endpoint_details` (Attributes) (see [below for nested schema](#nestedatt--endpoint_details))
 - `tags` (Attributes List) Key-value pairs that can be used to group and search for web apps. (see [below for nested schema](#nestedatt--tags))
 - `web_app_customization` (Attributes) (see [below for nested schema](#nestedatt--web_app_customization))
 - `web_app_endpoint_policy` (String)
@@ -31,6 +32,7 @@ Resource Type definition for AWS::Transfer::WebApp
 
 - `arn` (String) Specifies the unique Amazon Resource Name (ARN) for the web app.
 - `id` (String) Uniquely identifies the resource.
+- `vpc_endpoint_id` (String)
 - `web_app_id` (String) A unique identifier for the web app.
 
 <a id="nestedatt--identity_provider_details"></a>
@@ -44,6 +46,24 @@ Optional:
 Read-Only:
 
 - `application_arn` (String)
+
+
+<a id="nestedatt--endpoint_details"></a>
+### Nested Schema for `endpoint_details`
+
+Optional:
+
+- `vpc` (Attributes) You can provide a structure that contains the details for the VPC endpoint to use with your web app. (see [below for nested schema](#nestedatt--endpoint_details--vpc))
+
+<a id="nestedatt--endpoint_details--vpc"></a>
+### Nested Schema for `endpoint_details.vpc`
+
+Optional:
+
+- `security_group_ids` (List of String)
+- `subnet_ids` (List of String)
+- `vpc_id` (String)
+
 
 
 <a id="nestedatt--tags"></a>

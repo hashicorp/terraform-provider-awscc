@@ -41,7 +41,7 @@ func notificationConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "pattern": "^arn:aws:notifications::[0-9]{12}:configuration/[a-z0-9]{27}$",
+		//	  "pattern": "^arn:[a-z-]{3,10}:notifications::[0-9]{12}:configuration/[a-z0-9]{27}$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/

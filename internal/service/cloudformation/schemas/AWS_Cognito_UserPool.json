@@ -189,6 +189,18 @@
       },
       "additionalProperties": false
     },
+    "InboundFederation": {
+      "type": "object",
+      "properties": {
+        "LambdaVersion": {
+          "type": "string"
+        },
+        "LambdaArn": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "LambdaConfig": {
       "type": "object",
       "properties": {
@@ -233,6 +245,9 @@
         },
         "PreTokenGenerationConfig": {
           "$ref": "#/definitions/PreTokenGenerationConfig"
+        },
+        "InboundFederation": {
+          "$ref": "#/definitions/InboundFederation"
         }
       },
       "additionalProperties": false

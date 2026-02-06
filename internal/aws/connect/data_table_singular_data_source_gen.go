@@ -218,7 +218,11 @@ func dataTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "The value lock level of the Data Table",
 		//	  "enum": [
-		//	    "NONE"
+		//	    "NONE",
+		//	    "DATA_TABLE",
+		//	    "PRIMARY_VALUE",
+		//	    "ATTRIBUTE",
+		//	    "VALUE"
 		//	  ],
 		//	  "type": "string"
 		//	}

@@ -15,7 +15,8 @@
       "enum": [
         "LEX_BOT",
         "LAMBDA_FUNCTION",
-        "APPLICATION"
+        "APPLICATION",
+        "CASES_DOMAIN"
       ]
     },
     "InstanceId": {
@@ -27,8 +28,7 @@
     },
     "IntegrationAssociationId": {
       "description": "Identifier of the association with Connect Instance",
-      "type": "string",
-      "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9])*$"
+      "type": "string"
     }
   },
   "properties": {

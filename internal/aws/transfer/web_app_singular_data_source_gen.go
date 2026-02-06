@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -48,6 +49,76 @@ func webAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the unique Amazon Resource Name (ARN) for the web app.",
 			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EndpointDetails
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Vpc": {
+		//	      "additionalProperties": false,
+		//	      "description": "You can provide a structure that contains the details for the VPC endpoint to use with your web app.",
+		//	      "properties": {
+		//	        "SecurityGroupIds": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "maxLength": 20,
+		//	            "minLength": 11,
+		//	            "pattern": "^sg-[0-9a-f]{8,17}$",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 10,
+		//	          "type": "array"
+		//	        },
+		//	        "SubnetIds": {
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "maxLength": 24,
+		//	            "minLength": 15,
+		//	            "pattern": "^subnet-[0-9a-f]{8,17}$",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 10,
+		//	          "type": "array"
+		//	        },
+		//	        "VpcId": {
+		//	          "maxLength": 21,
+		//	          "minLength": 12,
+		//	          "pattern": "^vpc-[0-9a-f]{8,17}$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"endpoint_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Vpc
+				"vpc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SecurityGroupIds
+						"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SubnetIds
+						"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: VpcId
+						"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "You can provide a structure that contains the details for the VPC endpoint to use with your web app.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: IdentityProviderDetails
 		// CloudFormation resource type schema:
@@ -144,6 +215,18 @@ func webAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END NESTED OBJECT*/
 			Description: "Key-value pairs that can be used to group and search for web apps.",
 			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: VpcEndpointId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 22,
+		//	  "minLength": 13,
+		//	  "pattern": "^vpce-[0-9a-f]{8,17}$",
+		//	  "type": "string"
+		//	}
+		"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: WebAppCustomization
 		// CloudFormation resource type schema:
@@ -260,6 +343,7 @@ func webAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"access_endpoint":           "AccessEndpoint",
 		"application_arn":           "ApplicationArn",
 		"arn":                       "Arn",
+		"endpoint_details":          "EndpointDetails",
 		"favicon_file":              "FaviconFile",
 		"identity_provider_details": "IdentityProviderDetails",
 		"instance_arn":              "InstanceArn",
@@ -267,9 +351,14 @@ func webAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"logo_file":                 "LogoFile",
 		"provisioned":               "Provisioned",
 		"role":                      "Role",
+		"security_group_ids":        "SecurityGroupIds",
+		"subnet_ids":                "SubnetIds",
 		"tags":                      "Tags",
 		"title":                     "Title",
 		"value":                     "Value",
+		"vpc":                       "Vpc",
+		"vpc_endpoint_id":           "VpcEndpointId",
+		"vpc_id":                    "VpcId",
 		"web_app_customization":     "WebAppCustomization",
 		"web_app_endpoint_policy":   "WebAppEndpointPolicy",
 		"web_app_id":                "WebAppId",
