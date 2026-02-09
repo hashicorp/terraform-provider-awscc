@@ -1,6 +1,6 @@
 resource "awscc_quicksight_action_connector" "example" {
   action_connector_name = "example-action-connector"
-  aws_account_id        = "204034886740"
+  aws_account_id        = "012345678901"
   
   action_connector_definition = {
     name        = "example-action-connector"
