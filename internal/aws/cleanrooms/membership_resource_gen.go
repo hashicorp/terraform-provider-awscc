@@ -735,6 +735,10 @@ func membershipResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
+	// Pre-delete hook: clean up analysis templates before membership deletion.
+	// Without this, Cloud Control API returns 409 if analysis templates exist.
+	opts = opts.WithPreDeleteFunc(preDeleteMembership)
+
 	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
