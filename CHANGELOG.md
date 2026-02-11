@@ -1,4 +1,17 @@
-## 1.71.0 (Unreleased)
+## 1.71.0 (Feburary 11, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_codedeploy_deployment_group`
+* **New Data Source:** `awscc_logs_scheduled_queries`
+* **New Data Source:** `awscc_logs_scheduled_query`
+* **New Data Source:** `awscc_msk_topic`
+* **New Data Source:** `awscc_msk_topics`
+* **New List Resource:** `awscc_logs_scheduled_query`
+* **New List Resource:** `awscc_msk_topic`
+* **New Resource:** `awscc_codedeploy_deployment_group`
+* **New Resource:** `awscc_logs_scheduled_query`
+* **New Resource:** `awscc_msk_topic`
 
 ## 1.70.0 (February 4, 2026)
 
