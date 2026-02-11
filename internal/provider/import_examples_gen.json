@@ -1086,6 +1086,10 @@
         "identifier": ["DeploymentConfigName"]
     },
     {
+        "resource": "awscc_codedeploy_deployment_group",
+        "identifier": ["ApplicationName","DeploymentGroupName"]
+    },
+    {
         "resource": "awscc_codeguruprofiler_profiling_group",
         "generateListResource": true,
         "identifier": ["ProfilingGroupName"]
@@ -3767,6 +3771,11 @@
         "identifier": ["PolicyName"]
     },
     {
+        "resource": "awscc_logs_scheduled_query",
+        "generateListResource": true,
+        "identifier": ["ScheduledQueryArn"]
+    },
+    {
         "resource": "awscc_logs_subscription_filter",
         "identifier": ["FilterName","LogGroupName"]
     },
@@ -3836,6 +3845,11 @@
         "resource": "awscc_msk_serverless_cluster",
         "generateListResource": true,
         "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_msk_topic",
+        "generateListResource": true,
+        "identifier": ["TopicArn"]
     },
     {
         "resource": "awscc_msk_vpc_connection",
