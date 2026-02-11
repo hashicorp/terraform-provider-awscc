@@ -295,6 +295,9 @@
     },
     "PaymentConfiguration": {
       "$ref": "#/definitions/MembershipPaymentConfiguration"
+    },
+    "IsMetricsEnabled": {
+      "type": "boolean"
     }
   },
   "required": [

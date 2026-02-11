@@ -589,10 +589,10 @@
           "$ref": "#/definitions/NonEmptyString"
         },
         "From": {
-          "$ref": "#/definitions/NonEmptyAndMaxLengthString"
+          "$ref": "#/definitions/MaxLengthString"
         },
         "To": {
-          "$ref": "#/definitions/NonEmptyAndMaxLengthString"
+          "$ref": "#/definitions/MaxLengthString"
         }
       },
       "required": [

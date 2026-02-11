@@ -40,7 +40,7 @@
     },
     "EbsCardIndex": {
       "$ref": "#/definitions/EbsCardIndex",
-      "description": ""
+      "description": "The index of the EBS card. Some instance types support multiple EBS cards. The default EBS card index is 0."
     }
   },
   "required": [

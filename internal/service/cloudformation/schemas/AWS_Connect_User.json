@@ -55,6 +55,15 @@
       "description": "The Persistent Connection setting.",
       "type": "boolean"
     },
+    "VoiceEnhancementMode": {
+      "description": "The Voice Enhancement Mode setting.",
+      "type": "string",
+      "enum": [
+        "NONE",
+        "VOICE_ISOLATION",
+        "NOISE_SUPPRESSION"
+      ]
+    },
     "UserIdentityInfo": {
       "description": "Contains information about the identity of a user.",
       "type": "object",
@@ -97,10 +106,7 @@
         "PersistentConnection": {
           "$ref": "#/definitions/PersistentConnection"
         }
-      },
-      "required": [
-        "PhoneType"
-      ]
+      }
     },
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
@@ -163,6 +169,124 @@
       "type": "number",
       "minimum": 1.0,
       "maximum": 5.0
+    },
+    "AutoAcceptConfig": {
+      "description": "Auto-accept configuration per channel.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Channel": {
+          "$ref": "#/definitions/Channel"
+        },
+        "AutoAccept": {
+          "$ref": "#/definitions/AutoAccept"
+        },
+        "AgentFirstCallbackAutoAccept": {
+          "$ref": "#/definitions/AgentFirstCallbackAutoAccept"
+        }
+      },
+      "required": [
+        "Channel",
+        "AutoAccept"
+      ]
+    },
+    "Channel": {
+      "description": "The channels that agents can handle in the Contact Control Panel (CCP).",
+      "type": "string",
+      "enum": [
+        "VOICE",
+        "CHAT",
+        "TASK",
+        "EMAIL"
+      ]
+    },
+    "AgentFirstCallbackAutoAccept": {
+      "description": "The agent first callback auto accept setting.",
+      "type": "boolean"
+    },
+    "AfterContactWorkConfigPerChannel": {
+      "description": "After Contact Work configuration per channel.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Channel": {
+          "$ref": "#/definitions/Channel"
+        },
+        "AfterContactWorkConfig": {
+          "$ref": "#/definitions/AfterContactWorkConfig"
+        },
+        "AgentFirstCallbackAfterContactWorkConfig": {
+          "$ref": "#/definitions/AfterContactWorkConfig"
+        }
+      },
+      "required": [
+        "Channel",
+        "AfterContactWorkConfig"
+      ]
+    },
+    "AfterContactWorkConfig": {
+      "description": "After Contact Work configuration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AfterContactWorkTimeLimit": {
+          "$ref": "#/definitions/AfterContactWorkTimeLimit"
+        }
+      }
+    },
+    "PhoneNumberConfig": {
+      "description": "Phone Number configuration per channel.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Channel": {
+          "$ref": "#/definitions/Channel"
+        },
+        "PhoneType": {
+          "$ref": "#/definitions/PhoneType"
+        },
+        "PhoneNumber": {
+          "$ref": "#/definitions/DeskPhoneNumber"
+        }
+      },
+      "required": [
+        "Channel",
+        "PhoneType"
+      ]
+    },
+    "PersistentConnectionConfig": {
+      "description": "Persistent Connection configuration per channel.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Channel": {
+          "$ref": "#/definitions/Channel"
+        },
+        "PersistentConnection": {
+          "$ref": "#/definitions/PersistentConnection"
+        }
+      },
+      "required": [
+        "Channel",
+        "PersistentConnection"
+      ]
+    },
+    "VoiceEnhancementConfig": {
+      "description": "Voice Enhancement configuration per channel.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Channel": {
+          "$ref": "#/definitions/Channel"
+        },
+        "VoiceEnhancementMode": {
+          "$ref": "#/definitions/VoiceEnhancementMode"
+        }
+      },
+      "required": [
+        "Channel",
+        "VoiceEnhancementMode"
+      ]
     }
   },
   "properties": {
@@ -238,11 +362,50 @@
       "items": {
         "$ref": "#/definitions/UserProficiency"
       }
+    },
+    "AutoAcceptConfigs": {
+      "description": "Auto-accept configurations of a user.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AutoAcceptConfig"
+      }
+    },
+    "AfterContactWorkConfigs": {
+      "description": "After Contact Work configurations of a user.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AfterContactWorkConfigPerChannel"
+      }
+    },
+    "PhoneNumberConfigs": {
+      "description": "Phone Number configurations of a user.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/PhoneNumberConfig"
+      }
+    },
+    "PersistentConnectionConfigs": {
+      "description": "Persistent Connection configurations of a user.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/PersistentConnectionConfig"
+      }
+    },
+    "VoiceEnhancementConfigs": {
+      "description": "Voice Enhancement configurations of a user.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/VoiceEnhancementConfig"
+      }
     }
   },
   "required": [
     "InstanceArn",
-    "PhoneConfig",
     "RoutingProfileArn",
     "SecurityProfileArns",
     "Username"
@@ -278,7 +441,8 @@
         "connect:UntagResource",
         "connect:AssociateUserProficiencies",
         "connect:DisassociateUserProficiencies",
-        "connect:UpdateUserProficiencies"
+        "connect:UpdateUserProficiencies",
+        "connect:UpdateUserConfig"
       ]
     },
     "list": {

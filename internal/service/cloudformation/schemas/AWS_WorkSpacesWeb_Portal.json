@@ -142,6 +142,12 @@
       "minLength": 1,
       "pattern": ""
     },
+    "PortalCustomDomain": {
+      "type": "string",
+      "maxLength": 128,
+      "minLength": 0,
+      "pattern": ""
+    },
     "PortalStatus": {
       "$ref": "#/definitions/PortalStatus"
     },
