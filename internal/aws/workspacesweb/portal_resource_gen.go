@@ -293,6 +293,25 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: PortalCustomDomain
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 128,
+		//	  "minLength": 0,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"portal_custom_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 128),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PortalEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -564,6 +583,7 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		"max_concurrent_sessions":          "MaxConcurrentSessions",
 		"network_settings_arn":             "NetworkSettingsArn",
 		"portal_arn":                       "PortalArn",
+		"portal_custom_domain":             "PortalCustomDomain",
 		"portal_endpoint":                  "PortalEndpoint",
 		"portal_status":                    "PortalStatus",
 		"renderer_type":                    "RendererType",

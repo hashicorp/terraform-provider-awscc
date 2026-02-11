@@ -45,7 +45,7 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The Amazon Resource Name(ARN) that uniquely identifies the Agent",
 		//	  "maxLength": 2048,
-		//	  "pattern": "arn:(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:agent/[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}:([0-9]{0,4}[1-9][0-9]{0,4})",
+		//	  "pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:runtime/[a-zA-Z][a-zA-Z0-9_]{0,99}-[a-zA-Z0-9]{10}$",
 		//	  "type": "string"
 		//	}
 		"agent_runtime_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

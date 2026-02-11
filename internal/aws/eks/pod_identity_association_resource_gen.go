@@ -122,6 +122,25 @@ func podIdentityAssociationResource(ctx context.Context) (resource.Resource, err
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Policy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The policy of the pod identity association.",
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The policy of the pod identity association.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtLeast(1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -272,6 +291,7 @@ func podIdentityAssociationResource(ctx context.Context) (resource.Resource, err
 		"external_id":          "ExternalId",
 		"key":                  "Key",
 		"namespace":            "Namespace",
+		"policy":               "Policy",
 		"role_arn":             "RoleArn",
 		"service_account":      "ServiceAccount",
 		"tags":                 "Tags",

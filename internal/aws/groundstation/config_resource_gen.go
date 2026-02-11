@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -263,6 +264,53 @@ func configResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        }
 		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "TelemetrySinkConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "TelemetrySinkData": {
+		//	          "additionalProperties": false,
+		//	          "oneOf": [
+		//	            {
+		//	              "required": [
+		//	                "KinesisDataStreamData"
+		//	              ]
+		//	            }
+		//	          ],
+		//	          "properties": {
+		//	            "KinesisDataStreamData": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "KinesisDataStreamArn": {
+		//	                  "pattern": "^arn:[a-z0-9-.]{1,63}:kinesis:[-a-z0-9]{1,50}:[0-9]{12}:stream/[a-zA-Z0-9_.-]{1,128}$",
+		//	                  "type": "string"
+		//	                },
+		//	                "KinesisRoleArn": {
+		//	                  "pattern": "^arn:[^:\\n]+:iam::[^:\\n]+:role\\/.+$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "KinesisRoleArn",
+		//	                "KinesisDataStreamArn"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "TelemetrySinkType": {
+		//	          "enum": [
+		//	            "KINESIS_DATA_STREAM"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TelemetrySinkType",
+		//	        "TelemetrySinkData"
+		//	      ],
 		//	      "type": "object"
 		//	    },
 		//	    "TrackingConfig": {
@@ -711,6 +759,77 @@ func configResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: TelemetrySinkConfig
+				"telemetry_sink_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TelemetrySinkData
+						"telemetry_sink_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: KinesisDataStreamData
+								"kinesis_data_stream_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: KinesisDataStreamArn
+										"kinesis_data_stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z0-9-.]{1,63}:kinesis:[-a-z0-9]{1,50}:[0-9]{12}:stream/[a-zA-Z0-9_.-]{1,128}$"), ""),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: KinesisRoleArn
+										"kinesis_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.RegexMatches(regexp.MustCompile("^arn:[^:\\n]+:iam::[^:\\n]+:role\\/.+$"), ""),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TelemetrySinkType
+						"telemetry_sink_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"KINESIS_DATA_STREAM",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: TrackingConfig
 				"tracking_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -904,6 +1023,9 @@ func configResource(ctx context.Context) (resource.Resource, error) {
 		"demodulation_config":                  "DemodulationConfig",
 		"enabled":                              "Enabled",
 		"key":                                  "Key",
+		"kinesis_data_stream_arn":              "KinesisDataStreamArn",
+		"kinesis_data_stream_data":             "KinesisDataStreamData",
+		"kinesis_role_arn":                     "KinesisRoleArn",
 		"name":                                 "Name",
 		"polarization":                         "Polarization",
 		"prefix":                               "Prefix",
@@ -912,6 +1034,9 @@ func configResource(ctx context.Context) (resource.Resource, error) {
 		"spectrum_config":                      "SpectrumConfig",
 		"tags":                                 "Tags",
 		"target_eirp":                          "TargetEirp",
+		"telemetry_sink_config":                "TelemetrySinkConfig",
+		"telemetry_sink_data":                  "TelemetrySinkData",
+		"telemetry_sink_type":                  "TelemetrySinkType",
 		"tracking_config":                      "TrackingConfig",
 		"transmit_disabled":                    "TransmitDisabled",
 		"type":                                 "Type",

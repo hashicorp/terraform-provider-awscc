@@ -330,6 +330,25 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TelemetrySinkConfigArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ARN of a Config resource of type TelemetrySinkConfig used for telemetry data sink configuration.",
+		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
+		//	  "type": "string"
+		//	}
+		"telemetry_sink_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN of a Config resource of type TelemetrySinkConfig used for telemetry data sink configuration.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TrackingConfigArn
 		// CloudFormation resource type schema:
 		//
@@ -392,6 +411,7 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 		"streams_kms_key":                         "StreamsKmsKey",
 		"streams_kms_role":                        "StreamsKmsRole",
 		"tags":                                    "Tags",
+		"telemetry_sink_config_arn":               "TelemetrySinkConfigArn",
 		"tracking_config_arn":                     "TrackingConfigArn",
 		"value":                                   "Value",
 	})

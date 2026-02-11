@@ -347,6 +347,19 @@ func membershipResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: IsMetricsEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"is_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: JobLogStatus
 		// CloudFormation resource type schema:
 		//
@@ -709,6 +722,7 @@ func membershipResource(ctx context.Context) (resource.Resource, error) {
 		"collaboration_identifier":         "CollaborationIdentifier",
 		"default_job_result_configuration": "DefaultJobResultConfiguration",
 		"default_result_configuration":     "DefaultResultConfiguration",
+		"is_metrics_enabled":               "IsMetricsEnabled",
 		"is_responsible":                   "IsResponsible",
 		"job_compute":                      "JobCompute",
 		"job_log_status":                   "JobLogStatus",
