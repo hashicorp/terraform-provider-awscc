@@ -238,6 +238,18 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 			}, /*END NESTED OBJECT*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: TelemetrySinkConfigArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ARN of a Config resource of type TelemetrySinkConfig used for telemetry data sink configuration.",
+		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
+		//	  "type": "string"
+		//	}
+		"telemetry_sink_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ARN of a Config resource of type TelemetrySinkConfig used for telemetry data sink configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TrackingConfigArn
 		// CloudFormation resource type schema:
 		//
@@ -282,6 +294,7 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		"streams_kms_key":                         "StreamsKmsKey",
 		"streams_kms_role":                        "StreamsKmsRole",
 		"tags":                                    "Tags",
+		"telemetry_sink_config_arn":               "TelemetrySinkConfigArn",
 		"tracking_config_arn":                     "TrackingConfigArn",
 		"value":                                   "Value",
 	})

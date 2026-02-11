@@ -393,6 +393,15 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: IsMetricsEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"is_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: JobLogStatus
 		// CloudFormation resource type schema:
 		//
@@ -743,6 +752,7 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		"data_encryption_metadata":                    "DataEncryptionMetadata",
 		"description":                                 "Description",
 		"display_name":                                "DisplayName",
+		"is_metrics_enabled":                          "IsMetricsEnabled",
 		"is_responsible":                              "IsResponsible",
 		"job_compute":                                 "JobCompute",
 		"job_log_status":                              "JobLogStatus",

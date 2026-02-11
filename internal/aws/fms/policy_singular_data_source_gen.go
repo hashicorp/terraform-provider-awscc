@@ -251,7 +251,7 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 8,
+		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
 		"resource_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/

@@ -249,6 +249,17 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "The amount of time, in seconds, until a new instance is considered to have finished initializing and resource consumption to become stable after it enters the ``InService`` state. \n During an instance refresh, Amazon EC2 Auto Scaling waits for the warm-up period after it replaces an instance before it moves on to replacing the next instance. Amazon EC2 Auto Scaling also waits for the warm-up period before aggregating the metrics for new instances with existing instances in the Amazon CloudWatch metrics that are used for scaling, resulting in more reliable usage data. For more information, see [Set the default instance warmup for an Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html) in the *Amazon EC2 Auto Scaling User Guide*.\n  To manage various warm-up settings at the group level, we recommend that you set the default instance warmup, *even if it is set to 0 seconds*. To remove a value that you previously set, include the property but specify ``-1`` for the value. However, we strongly recommend keeping the default instance warmup enabled by specifying a value of ``0`` or other nominal value.\n  Default: None",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DeletionProtection
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"deletion_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DesiredCapacity
 		// CloudFormation resource type schema:
 		//
@@ -317,7 +328,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	      "description": "Specifies the conditions that trigger instance retention behavior. These triggers determine when instances should move to a ``Retained`` state instead of automatic termination. This allows you to maintain control over instance management when lifecycles transition and operations fail.",
 		//	      "properties": {
 		//	        "TerminateHookAbandon": {
-		//	          "description": "Specifies the action when a termination lifecycle hook is abandoned due to failure, timeout, or explicit abandonment (calling CompleteLifecycleAction). \n  Set to ``Retain`` to move instances to a ``Retained`` state. Set to ``Terminate`` for default termination behavior. \n  Retained instances don't count toward desired capacity and remain until you call ``TerminateInstanceInAutoScalingGroup``.",
+		//	          "description": "Specifies the action when a termination lifecycle hook is abandoned due to failure, timeout, or explicit abandonment (calling CompleteLifecycleAction). \n  Set to ``retain`` to move instances to a retained state. Set to ``terminate`` for default termination behavior. \n  Retained instances don't count toward desired capacity and remain until you call ``TerminateInstanceInAutoScalingGroup``.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -333,7 +344,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: TerminateHookAbandon
 						"terminate_hook_abandon": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Specifies the action when a termination lifecycle hook is abandoned due to failure, timeout, or explicit abandonment (calling CompleteLifecycleAction). \n  Set to ``Retain`` to move instances to a ``Retained`` state. Set to ``Terminate`` for default termination behavior. \n  Retained instances don't count toward desired capacity and remain until you call ``TerminateInstanceInAutoScalingGroup``.",
+							Description: "Specifies the action when a termination lifecycle hook is abandoned due to failure, timeout, or explicit abandonment (calling CompleteLifecycleAction). \n  Set to ``retain`` to move instances to a retained state. Set to ``terminate`` for default termination behavior. \n  Retained instances don't count toward desired capacity and remain until you call ``TerminateInstanceInAutoScalingGroup``.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1759,6 +1770,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"cpu_manufacturers":                        "CpuManufacturers",
 		"default_instance_warmup":                  "DefaultInstanceWarmup",
 		"default_result":                           "DefaultResult",
+		"deletion_protection":                      "DeletionProtection",
 		"desired_capacity":                         "DesiredCapacity",
 		"desired_capacity_type":                    "DesiredCapacityType",
 		"excluded_instance_types":                  "ExcludedInstanceTypes",
