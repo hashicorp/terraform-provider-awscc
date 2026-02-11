@@ -26,6 +26,7 @@ Resource Type definition for AWS::S3Vectors::Index
 - `encryption_configuration` (Attributes) The encryption configuration for the index. (see [below for nested schema](#nestedatt--encryption_configuration))
 - `index_name` (String) The name of the vector index to create.
 - `metadata_configuration` (Attributes) The metadata configuration for the vector index. (see [below for nested schema](#nestedatt--metadata_configuration))
+- `tags` (Attributes Set) User tags (key-value pairs) to associate with the index. (see [below for nested schema](#nestedatt--tags))
 - `vector_bucket_arn` (String) The Amazon Resource Name (ARN) of the vector bucket.
 - `vector_bucket_name` (String) The name of the vector bucket that contains the vector index.
 
@@ -50,6 +51,15 @@ Optional:
 Optional:
 
 - `non_filterable_metadata_keys` (Set of String) Non-filterable metadata keys allow you to enrich vectors with additional context during storage and retrieval. Unlike default metadata keys, these keys cannot be used as query filters. Non-filterable metadata keys can be retrieved but cannot be searched, queried, or filtered. You can access non-filterable metadata keys of your vectors after finding the vectors.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) Tag key must be between 1 to 128 characters in length. Tag key cannot start with 'aws:' and can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.
+- `value` (String) Tag value must be between 0 to 256 characters in length. Tag value can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.
 
 ## Import
 

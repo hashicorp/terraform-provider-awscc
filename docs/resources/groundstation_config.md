@@ -116,6 +116,7 @@ Optional:
 - `antenna_uplink_config` (Attributes) (see [below for nested schema](#nestedatt--config_data--antenna_uplink_config))
 - `dataflow_endpoint_config` (Attributes) (see [below for nested schema](#nestedatt--config_data--dataflow_endpoint_config))
 - `s3_recording_config` (Attributes) (see [below for nested schema](#nestedatt--config_data--s3_recording_config))
+- `telemetry_sink_config` (Attributes) (see [below for nested schema](#nestedatt--config_data--telemetry_sink_config))
 - `tracking_config` (Attributes) (see [below for nested schema](#nestedatt--config_data--tracking_config))
 - `uplink_echo_config` (Attributes) (see [below for nested schema](#nestedatt--config_data--uplink_echo_config))
 
@@ -263,6 +264,32 @@ Optional:
 - `bucket_arn` (String)
 - `prefix` (String)
 - `role_arn` (String)
+
+
+<a id="nestedatt--config_data--telemetry_sink_config"></a>
+### Nested Schema for `config_data.telemetry_sink_config`
+
+Optional:
+
+- `telemetry_sink_data` (Attributes) (see [below for nested schema](#nestedatt--config_data--telemetry_sink_config--telemetry_sink_data))
+- `telemetry_sink_type` (String)
+
+<a id="nestedatt--config_data--telemetry_sink_config--telemetry_sink_data"></a>
+### Nested Schema for `config_data.telemetry_sink_config.telemetry_sink_data`
+
+Optional:
+
+- `kinesis_data_stream_data` (Attributes) (see [below for nested schema](#nestedatt--config_data--telemetry_sink_config--telemetry_sink_data--kinesis_data_stream_data))
+
+<a id="nestedatt--config_data--telemetry_sink_config--telemetry_sink_data--kinesis_data_stream_data"></a>
+### Nested Schema for `config_data.telemetry_sink_config.telemetry_sink_data.kinesis_data_stream_data`
+
+Optional:
+
+- `kinesis_data_stream_arn` (String)
+- `kinesis_role_arn` (String)
+
+
 
 
 <a id="nestedatt--config_data--tracking_config"></a>

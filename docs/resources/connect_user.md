@@ -235,38 +235,64 @@ resource "awscc_connect_user" "example" {
 ### Required
 
 - `instance_arn` (String) The identifier of the Amazon Connect instance.
-- `phone_config` (Attributes) The phone settings for the user. (see [below for nested schema](#nestedatt--phone_config))
 - `routing_profile_arn` (String) The identifier of the routing profile for the user.
 - `security_profile_arns` (Set of String) One or more security profile arns for the user
 - `username` (String) The user name for the account.
 
 ### Optional
 
+- `after_contact_work_configs` (Attributes List) After Contact Work configurations of a user. (see [below for nested schema](#nestedatt--after_contact_work_configs))
+- `auto_accept_configs` (Attributes List) Auto-accept configurations of a user. (see [below for nested schema](#nestedatt--auto_accept_configs))
 - `directory_user_id` (String) The identifier of the user account in the directory used for identity management.
 - `hierarchy_group_arn` (String) The identifier of the hierarchy group for the user.
 - `identity_info` (Attributes) The information about the identity of the user. (see [below for nested schema](#nestedatt--identity_info))
 - `password` (String) The password for the user account. A password is required if you are using Amazon Connect for identity management. Otherwise, it is an error to include a password.
+- `persistent_connection_configs` (Attributes List) Persistent Connection configurations of a user. (see [below for nested schema](#nestedatt--persistent_connection_configs))
+- `phone_config` (Attributes) The phone settings for the user. (see [below for nested schema](#nestedatt--phone_config))
+- `phone_number_configs` (Attributes List) Phone Number configurations of a user. (see [below for nested schema](#nestedatt--phone_number_configs))
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
 - `user_proficiencies` (Attributes List) One or more predefined attributes assigned to a user, with a level that indicates how skilled they are. (see [below for nested schema](#nestedatt--user_proficiencies))
+- `voice_enhancement_configs` (Attributes List) Voice Enhancement configurations of a user. (see [below for nested schema](#nestedatt--voice_enhancement_configs))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
 - `user_arn` (String) The Amazon Resource Name (ARN) for the user.
 
-<a id="nestedatt--phone_config"></a>
-### Nested Schema for `phone_config`
+<a id="nestedatt--after_contact_work_configs"></a>
+### Nested Schema for `after_contact_work_configs`
 
-Required:
+Optional:
 
-- `phone_type` (String) The phone type.
+- `after_contact_work_config` (Attributes) After Contact Work configuration. (see [below for nested schema](#nestedatt--after_contact_work_configs--after_contact_work_config))
+- `agent_first_callback_after_contact_work_config` (Attributes) After Contact Work configuration. (see [below for nested schema](#nestedatt--after_contact_work_configs--agent_first_callback_after_contact_work_config))
+- `channel` (String) The channels that agents can handle in the Contact Control Panel (CCP).
+
+<a id="nestedatt--after_contact_work_configs--after_contact_work_config"></a>
+### Nested Schema for `after_contact_work_configs.after_contact_work_config`
 
 Optional:
 
 - `after_contact_work_time_limit` (Number) The After Call Work (ACW) timeout setting, in seconds.
+
+
+<a id="nestedatt--after_contact_work_configs--agent_first_callback_after_contact_work_config"></a>
+### Nested Schema for `after_contact_work_configs.agent_first_callback_after_contact_work_config`
+
+Optional:
+
+- `after_contact_work_time_limit` (Number) The After Call Work (ACW) timeout setting, in seconds.
+
+
+
+<a id="nestedatt--auto_accept_configs"></a>
+### Nested Schema for `auto_accept_configs`
+
+Optional:
+
+- `agent_first_callback_auto_accept` (Boolean) The agent first callback auto accept setting.
 - `auto_accept` (Boolean) The Auto accept setting.
-- `desk_phone_number` (String) The phone number for the user's desk phone.
-- `persistent_connection` (Boolean) The Persistent Connection setting.
+- `channel` (String) The channels that agents can handle in the Contact Control Panel (CCP).
 
 
 <a id="nestedatt--identity_info"></a>
@@ -279,6 +305,37 @@ Optional:
 - `last_name` (String) The last name. This is required if you are using Amazon Connect or SAML for identity management.
 - `mobile` (String) The mobile phone number.
 - `secondary_email` (String) The secondary email address. If you provide a secondary email, the user receives email notifications -- other than password reset notifications -- to this email address instead of to their primary email address.
+
+
+<a id="nestedatt--persistent_connection_configs"></a>
+### Nested Schema for `persistent_connection_configs`
+
+Optional:
+
+- `channel` (String) The channels that agents can handle in the Contact Control Panel (CCP).
+- `persistent_connection` (Boolean) The Persistent Connection setting.
+
+
+<a id="nestedatt--phone_config"></a>
+### Nested Schema for `phone_config`
+
+Optional:
+
+- `after_contact_work_time_limit` (Number) The After Call Work (ACW) timeout setting, in seconds.
+- `auto_accept` (Boolean) The Auto accept setting.
+- `desk_phone_number` (String) The phone number for the user's desk phone.
+- `persistent_connection` (Boolean) The Persistent Connection setting.
+- `phone_type` (String) The phone type.
+
+
+<a id="nestedatt--phone_number_configs"></a>
+### Nested Schema for `phone_number_configs`
+
+Optional:
+
+- `channel` (String) The channels that agents can handle in the Contact Control Panel (CCP).
+- `phone_number` (String) The phone number for the user's desk phone.
+- `phone_type` (String) The phone type.
 
 
 <a id="nestedatt--tags"></a>
@@ -298,6 +355,15 @@ Optional:
 - `attribute_name` (String) The name of user's proficiency. You must use name of predefined attribute present in the Amazon Connect instance.
 - `attribute_value` (String) The value of user's proficiency. You must use value of predefined attribute present in the Amazon Connect instance.
 - `level` (Number) The level of the proficiency. The valid values are 1, 2, 3, 4 and 5.
+
+
+<a id="nestedatt--voice_enhancement_configs"></a>
+### Nested Schema for `voice_enhancement_configs`
+
+Optional:
+
+- `channel` (String) The channels that agents can handle in the Contact Control Panel (CCP).
+- `voice_enhancement_mode` (String) The Voice Enhancement Mode setting.
 
 ## Import
 

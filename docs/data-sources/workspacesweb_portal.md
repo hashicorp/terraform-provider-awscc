@@ -34,6 +34,7 @@ Data Source schema for AWS::WorkSpacesWeb::Portal
 - `max_concurrent_sessions` (Number)
 - `network_settings_arn` (String)
 - `portal_arn` (String)
+- `portal_custom_domain` (String)
 - `portal_endpoint` (String)
 - `portal_status` (String)
 - `renderer_type` (String)

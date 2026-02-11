@@ -27,6 +27,7 @@ Data Source schema for AWS::CleanRooms::Membership
 - `collaboration_identifier` (String)
 - `default_job_result_configuration` (Attributes) (see [below for nested schema](#nestedatt--default_job_result_configuration))
 - `default_result_configuration` (Attributes) (see [below for nested schema](#nestedatt--default_result_configuration))
+- `is_metrics_enabled` (Boolean)
 - `job_log_status` (String)
 - `membership_identifier` (String)
 - `payment_configuration` (Attributes) (see [below for nested schema](#nestedatt--payment_configuration))

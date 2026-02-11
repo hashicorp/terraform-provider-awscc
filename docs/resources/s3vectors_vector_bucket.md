@@ -18,6 +18,7 @@ Resource Type definition for AWS::S3Vectors::VectorBucket
 ### Optional
 
 - `encryption_configuration` (Attributes) The encryption configuration for the vector bucket. (see [below for nested schema](#nestedatt--encryption_configuration))
+- `tags` (Attributes Set) User tags (key-value pairs) to associate with the vector bucket. (see [below for nested schema](#nestedatt--tags))
 - `vector_bucket_name` (String) The name of the vector bucket.
 
 ### Read-Only
@@ -33,6 +34,15 @@ Optional:
 
 - `kms_key_arn` (String) AWS Key Management Service (KMS) customer managed key ID to use for the encryption configuration. This parameter is allowed if and only if sseType is set to aws:kms
 - `sse_type` (String) The server-side encryption type to use for the encryption configuration of the vector bucket. By default, if you don't specify, all new vectors in Amazon S3 vector buckets use server-side encryption with Amazon S3 managed keys (SSE-S3), specifically AES256.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) Tag key must be between 1 to 128 characters in length. Tag key cannot start with 'aws:' and can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.
+- `value` (String) Tag value must be between 0 to 256 characters in length. Tag value can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.
 
 ## Import
 

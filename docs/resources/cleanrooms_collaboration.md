@@ -63,6 +63,7 @@ resource "awscc_cleanrooms_collaboration" "example" {
 - `creator_ml_member_abilities` (Attributes) (see [below for nested schema](#nestedatt--creator_ml_member_abilities))
 - `creator_payment_configuration` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration))
 - `data_encryption_metadata` (Attributes) (see [below for nested schema](#nestedatt--data_encryption_metadata))
+- `is_metrics_enabled` (Boolean)
 - `job_log_status` (String)
 - `members` (Attributes List) (see [below for nested schema](#nestedatt--members))
 - `tags` (Attributes Set) An arbitrary set of tags (key-value pairs) for this cleanrooms collaboration. (see [below for nested schema](#nestedatt--tags))
