@@ -1,6 +1,6 @@
 resource "awscc_ec2_vpn_concentrator" "example" {
   transit_gateway_id = awscc_ec2_transit_gateway.example.transit_gateway_id
-  type              = "ipsec.1"
+  type               = "ipsec.1"
 
   tags = [
     {
