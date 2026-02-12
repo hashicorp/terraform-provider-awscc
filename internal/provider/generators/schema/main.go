@@ -45,13 +45,25 @@ type MetaSchema struct {
 }
 
 type ResourceSchema struct {
-	CloudFormationSchemaPath             string `hcl:"cloudformation_schema_path,optional"`
-	CloudFormationTypeName               string `hcl:"cloudformation_type_name"`
-	ResourceTypeName                     string `hcl:"resource_type_name,label"`
-	SuppressionReason                    string `hcl:"suppression_reason,optional"`
-	SuppressPluralDataSourceGeneration   bool   `hcl:"suppress_plural_data_source_generation,optional"`
-	SuppressResourceGeneration           bool   `hcl:"suppress_resource_generation,optional"`
-	SuppressSingularDataSourceGeneration bool   `hcl:"suppress_singular_data_source_generation,optional"`
+	CloudFormationSchemaPath             string        `hcl:"cloudformation_schema_path,optional"`
+	CloudFormationTypeName               string        `hcl:"cloudformation_type_name"`
+	ResourceTypeName                     string        `hcl:"resource_type_name,label"`
+	SuppressionReason                    string        `hcl:"suppression_reason,optional"`
+	SuppressPluralDataSourceGeneration   bool          `hcl:"suppress_plural_data_source_generation,optional"`
+	SuppressResourceGeneration           bool          `hcl:"suppress_resource_generation,optional"`
+	SuppressSingularDataSourceGeneration bool          `hcl:"suppress_singular_data_source_generation,optional"`
+	SchemaPatches                        *SchemaPatches `hcl:"schema_patches,block"`
+}
+
+// SchemaPatches contains patch operations to apply to the CloudFormation schema.
+type SchemaPatches struct {
+	Operations []PatchOperation `hcl:"operation,block"`
+}
+
+// PatchOperation defines a single patch operation to apply to the schema.
+type PatchOperation struct {
+	Action   string `hcl:"action"`    // RFC 6902 operation: "remove"
+	JSONPath string `hcl:"json_path"` // RFC 6902 JSON Pointer path, e.g., "/properties/PlatformVersion/default"
 }
 
 var (
@@ -362,13 +374,24 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema, timer int) (string, s
 			return "", "", fmt.Errorf("describing CloudFormation type: %w", err)
 		}
 
-		schema, err := cfschema.Sanitize(aws.ToString(output.Schema))
+		schemaStr, err := cfschema.Sanitize(aws.ToString(output.Schema))
 
 		if err != nil {
 			return "", "", fmt.Errorf("sanitizing schema: %w", err)
 		}
 
-		err = os.WriteFile(dst, []byte(schema), 0644) //nolint:mnd
+		// Apply schema patches if configured
+		if schema.SchemaPatches != nil && len(schema.SchemaPatches.Operations) > 0 {
+			d.infof("applying %d schema patch(es) to %s", len(schema.SchemaPatches.Operations), schema.CloudFormationTypeName)
+			patchedSchema, patchErr := ApplySchemaPatches(schemaStr, schema.SchemaPatches.Operations)
+			if patchErr != nil {
+				d.ui.Warn(fmt.Sprintf("failed to apply schema patches for %s: %s (continuing with unpatched schema)", schema.CloudFormationTypeName, patchErr))
+			} else {
+				schemaStr = patchedSchema
+			}
+		}
+
+		err = os.WriteFile(dst, []byte(schemaStr), 0644)
 
 		if err != nil {
 			return "", "", fmt.Errorf("writing schema to %q: %w", dst, err)
