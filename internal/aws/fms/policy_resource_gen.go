@@ -357,7 +357,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 8,
+		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
 		"resource_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -391,7 +391,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeAtMost(8),
+				listvalidator.SizeAtMost(50),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),

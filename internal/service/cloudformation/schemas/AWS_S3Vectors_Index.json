@@ -96,6 +96,27 @@
       "type": "string",
       "minLength": 3,
       "maxLength": 63
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "Tag key must be between 1 to 128 characters in length. Tag key cannot start with 'aws:' and can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "Tag value must be between 0 to 256 characters in length. Tag value can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -128,6 +149,15 @@
     },
     "VectorBucketName": {
       "$ref": "#/definitions/VectorBucketName"
+    },
+    "Tags": {
+      "description": "User tags (key-value pairs) to associate with the index.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     }
   },
   "additionalProperties": false,
@@ -160,23 +190,39 @@
     ]
   ],
   "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "s3vectors:TagResource",
+      "s3vectors:UntagResource",
+      "s3vectors:ListTagsForResource"
+    ]
   },
   "handlers": {
     "create": {
       "permissions": [
         "s3vectors:GetIndex",
         "s3vectors:CreateIndex",
+        "s3vectors:TagResource",
         "kms:GenerateDataKey",
         "kms:Decrypt"
       ]
     },
     "read": {
       "permissions": [
-        "s3vectors:GetIndex"
+        "s3vectors:GetIndex",
+        "s3vectors:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "s3vectors:GetIndex",
+        "s3vectors:TagResource",
+        "s3vectors:UntagResource",
+        "s3vectors:ListTagsForResource"
       ]
     },
     "delete": {

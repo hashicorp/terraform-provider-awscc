@@ -420,7 +420,7 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "SageMakerImageVersionArn": {
 		//	              "description": "The ARN of the image version created on the instance.",
 		//	              "maxLength": 256,
-		//	              "pattern": "^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)",
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -508,7 +508,7 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "type": "object"
 		//	      },
-		//	      "maxItems": 10,
+		//	      "maxItems": 2,
 		//	      "minItems": 0,
 		//	      "type": "array",
 		//	      "uniqueItems": true
@@ -838,7 +838,7 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "SageMakerImageVersionArn": {
 		//	              "description": "The ARN of the image version created on the instance.",
 		//	              "maxLength": 256,
-		//	              "pattern": "^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)",
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -1051,7 +1051,7 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "SageMakerImageVersionArn": {
 		//	              "description": "The ARN of the image version created on the instance.",
 		//	              "maxLength": 256,
-		//	              "pattern": "^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)",
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -1300,7 +1300,7 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "SageMakerImageVersionArn": {
 		//	              "description": "The ARN of the image version created on the instance.",
 		//	              "maxLength": 256,
-		//	              "pattern": "^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)",
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
 		//	              "type": "string"
 		//	            }
 		//	          },

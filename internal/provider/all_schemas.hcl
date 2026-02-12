@@ -1073,6 +1073,11 @@ resource_schema "aws_codedeploy_deployment_config" {
   cloudformation_type_name = "AWS::CodeDeploy::DeploymentConfig"
 }
 
+resource_schema "aws_codedeploy_deployment_group" {
+  cloudformation_type_name               = "AWS::CodeDeploy::DeploymentGroup"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_codeguruprofiler_profiling_group" {
   cloudformation_type_name = "AWS::CodeGuruProfiler::ProfilingGroup"
 }
@@ -3605,6 +3610,10 @@ resource_schema "aws_logs_resource_policy" {
   cloudformation_type_name = "AWS::Logs::ResourcePolicy"
 }
 
+resource_schema "aws_logs_scheduled_query" {
+  cloudformation_type_name = "AWS::Logs::ScheduledQuery"
+}
+
 resource_schema "aws_logs_subscription_filter" {
   cloudformation_type_name               = "AWS::Logs::SubscriptionFilter"
   suppress_plural_data_source_generation = true
@@ -3687,6 +3696,10 @@ resource_schema "aws_msk_replicator" {
 
 resource_schema "aws_msk_serverless_cluster" {
   cloudformation_type_name = "AWS::MSK::ServerlessCluster"
+}
+
+resource_schema "aws_msk_topic" {
+  cloudformation_type_name = "AWS::MSK::Topic"
 }
 
 resource_schema "aws_msk_vpc_connection" {

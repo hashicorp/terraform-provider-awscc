@@ -1,0 +1,215 @@
+{
+  "typeName": "AWS::Logs::ScheduledQuery",
+  "description": "Creates a new Scheduled Query that allows you to define a Logs Insights query that will run on a schedule and configure actions to take with the query results.",
+  "definitions": {
+    "ScheduledQueryState": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "S3Configuration": {
+      "type": "object",
+      "properties": {
+        "DestinationIdentifier": {
+          "type": "string",
+          "pattern": "^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?"
+        },
+        "RoleArn": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "DestinationIdentifier",
+        "RoleArn"
+      ],
+      "additionalProperties": false
+    },
+    "DestinationConfiguration": {
+      "type": "object",
+      "properties": {
+        "S3Configuration": {
+          "$ref": "#/definitions/S3Configuration"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "ScheduledQueryArn": {
+      "type": "string"
+    },
+    "Name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": "^[a-zA-Z0-9_\\-/.#]+$"
+    },
+    "Description": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "QueryLanguage": {
+      "type": "string"
+    },
+    "QueryString": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 10000
+    },
+    "LogGroupIdentifiers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "maxItems": 50
+    },
+    "ScheduleExpression": {
+      "type": "string",
+      "maxLength": 256
+    },
+    "Timezone": {
+      "type": "string",
+      "minLength": 1
+    },
+    "StartTimeOffset": {
+      "type": "integer"
+    },
+    "DestinationConfiguration": {
+      "$ref": "#/definitions/DestinationConfiguration"
+    },
+    "ScheduleStartTime": {
+      "type": "number"
+    },
+    "ScheduleEndTime": {
+      "type": "number"
+    },
+    "ExecutionRoleArn": {
+      "type": "string"
+    },
+    "State": {
+      "$ref": "#/definitions/ScheduledQueryState"
+    },
+    "LastTriggeredTime": {
+      "type": "number"
+    },
+    "LastExecutionStatus": {
+      "type": "string",
+      "enum": [
+        "InvalidQuery",
+        "Complete",
+        "Failed",
+        "Timeout"
+      ]
+    },
+    "CreationTime": {
+      "type": "number"
+    },
+    "LastUpdatedTime": {
+      "type": "number"
+    },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "Value": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256
+          }
+        },
+        "required": [
+          "Key",
+          "Value"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Name",
+    "QueryLanguage",
+    "QueryString",
+    "ScheduleExpression",
+    "ExecutionRoleArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/ScheduledQueryArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Name"
+    ]
+  ],
+  "readOnlyProperties": [
+    "/properties/ScheduledQueryArn",
+    "/properties/LastTriggeredTime",
+    "/properties/LastExecutionStatus",
+    "/properties/CreationTime",
+    "/properties/LastUpdatedTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "logs:TagResource",
+      "logs:UntagResource",
+      "logs:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "logs:CreateScheduledQuery",
+        "logs:GetScheduledQuery",
+        "logs:StartQuery",
+        "logs:TagResource",
+        "iam:PassRole",
+        "logs:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "logs:GetScheduledQuery",
+        "logs:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "logs:UpdateScheduledQuery",
+        "logs:GetScheduledQuery",
+        "logs:ListTagsForResource",
+        "logs:TagResource",
+        "logs:UntagResource",
+        "iam:PassRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "logs:DeleteScheduledQuery",
+        "logs:GetScheduledQuery",
+        "logs:UntagResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "logs:ListScheduledQueries"
+      ]
+    }
+  }
+}

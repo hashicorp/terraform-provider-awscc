@@ -380,6 +380,9 @@
     },
     "AllowedResultRegions": {
       "$ref": "#/definitions/AllowedResultRegions"
+    },
+    "IsMetricsEnabled": {
+      "type": "boolean"
     }
   },
   "required": [

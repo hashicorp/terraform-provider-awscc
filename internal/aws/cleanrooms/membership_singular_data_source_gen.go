@@ -230,6 +230,15 @@ func membershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: IsMetricsEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"is_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: JobLogStatus
 		// CloudFormation resource type schema:
 		//
@@ -476,6 +485,7 @@ func membershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"collaboration_identifier":         "CollaborationIdentifier",
 		"default_job_result_configuration": "DefaultJobResultConfiguration",
 		"default_result_configuration":     "DefaultResultConfiguration",
+		"is_metrics_enabled":               "IsMetricsEnabled",
 		"is_responsible":                   "IsResponsible",
 		"job_compute":                      "JobCompute",
 		"job_log_status":                   "JobLogStatus",

@@ -135,6 +135,7 @@ resource "awscc_groundstation_mission_profile" "example" {
 - `streams_kms_key` (Attributes) The ARN of a KMS Key used for encrypting data during transmission from the source to destination locations. (see [below for nested schema](#nestedatt--streams_kms_key))
 - `streams_kms_role` (String) The ARN of the KMS Key or Alias Key role used to define permissions on KMS Key usage.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `telemetry_sink_config_arn` (String) ARN of a Config resource of type TelemetrySinkConfig used for telemetry data sink configuration.
 
 ### Read-Only
 

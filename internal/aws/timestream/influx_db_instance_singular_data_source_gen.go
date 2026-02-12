@@ -339,9 +339,12 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	    "AVAILABLE",
 		//	    "DELETING",
 		//	    "MODIFYING",
+		//	    "MAINTENANCE",
 		//	    "UPDATING",
 		//	    "UPDATING_DEPLOYMENT_TYPE",
 		//	    "UPDATING_INSTANCE_TYPE",
+		//	    "REBOOTING",
+		//	    "REBOOT_FAILED",
 		//	    "DELETED",
 		//	    "FAILED"
 		//	  ],

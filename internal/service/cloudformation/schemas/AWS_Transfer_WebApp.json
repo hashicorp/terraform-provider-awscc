@@ -283,6 +283,7 @@
         "sso:UpdateApplication",
         "sso:DescribeApplication",
         "sso:ListApplications",
+        "ec2:DescribeVpcEndpoints",
         "ec2:ModifyVpcEndpoint"
       ]
     },

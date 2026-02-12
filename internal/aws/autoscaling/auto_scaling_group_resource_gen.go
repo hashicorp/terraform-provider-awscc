@@ -358,6 +358,21 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DeletionProtection
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"deletion_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DesiredCapacity
 		// CloudFormation resource type schema:
 		//
@@ -451,7 +466,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "Specifies the conditions that trigger instance retention behavior. These triggers determine when instances should move to a ``Retained`` state instead of automatic termination. This allows you to maintain control over instance management when lifecycles transition and operations fail.",
 		//	      "properties": {
 		//	        "TerminateHookAbandon": {
-		//	          "description": "Specifies the action when a termination lifecycle hook is abandoned due to failure, timeout, or explicit abandonment (calling CompleteLifecycleAction). \n  Set to ``Retain`` to move instances to a ``Retained`` state. Set to ``Terminate`` for default termination behavior. \n  Retained instances don't count toward desired capacity and remain until you call ``TerminateInstanceInAutoScalingGroup``.",
+		//	          "description": "Specifies the action when a termination lifecycle hook is abandoned due to failure, timeout, or explicit abandonment (calling CompleteLifecycleAction). \n  Set to ``retain`` to move instances to a retained state. Set to ``terminate`` for default termination behavior. \n  Retained instances don't count toward desired capacity and remain until you call ``TerminateInstanceInAutoScalingGroup``.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -467,7 +482,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: TerminateHookAbandon
 						"terminate_hook_abandon": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Specifies the action when a termination lifecycle hook is abandoned due to failure, timeout, or explicit abandonment (calling CompleteLifecycleAction). \n  Set to ``Retain`` to move instances to a ``Retained`` state. Set to ``Terminate`` for default termination behavior. \n  Retained instances don't count toward desired capacity and remain until you call ``TerminateInstanceInAutoScalingGroup``.",
+							Description: "Specifies the action when a termination lifecycle hook is abandoned due to failure, timeout, or explicit abandonment (calling CompleteLifecycleAction). \n  Set to ``retain`` to move instances to a retained state. Set to ``terminate`` for default termination behavior. \n  Retained instances don't count toward desired capacity and remain until you call ``TerminateInstanceInAutoScalingGroup``.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2427,6 +2442,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		"cpu_manufacturers":                        "CpuManufacturers",
 		"default_instance_warmup":                  "DefaultInstanceWarmup",
 		"default_result":                           "DefaultResult",
+		"deletion_protection":                      "DeletionProtection",
 		"desired_capacity":                         "DesiredCapacity",
 		"desired_capacity_type":                    "DesiredCapacityType",
 		"excluded_instance_types":                  "ExcludedInstanceTypes",

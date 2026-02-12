@@ -39,6 +39,228 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::Connect::User resource.
 func userResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AfterContactWorkConfigs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "After Contact Work configurations of a user.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "After Contact Work configuration per channel.",
+		//	    "properties": {
+		//	      "AfterContactWorkConfig": {
+		//	        "additionalProperties": false,
+		//	        "description": "After Contact Work configuration.",
+		//	        "properties": {
+		//	          "AfterContactWorkTimeLimit": {
+		//	            "description": "The After Call Work (ACW) timeout setting, in seconds.",
+		//	            "minimum": 0,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "AgentFirstCallbackAfterContactWorkConfig": {
+		//	        "additionalProperties": false,
+		//	        "description": "After Contact Work configuration.",
+		//	        "properties": {
+		//	          "AfterContactWorkTimeLimit": {
+		//	            "description": "The After Call Work (ACW) timeout setting, in seconds.",
+		//	            "minimum": 0,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "Channel": {
+		//	        "description": "The channels that agents can handle in the Contact Control Panel (CCP).",
+		//	        "enum": [
+		//	          "VOICE",
+		//	          "CHAT",
+		//	          "TASK",
+		//	          "EMAIL"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Channel",
+		//	      "AfterContactWorkConfig"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"after_contact_work_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AfterContactWorkConfig
+					"after_contact_work_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AfterContactWorkTimeLimit
+							"after_contact_work_time_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The After Call Work (ACW) timeout setting, in seconds.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.AtLeast(0),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "After Contact Work configuration.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Object{ /*START VALIDATORS*/
+							fwvalidators.NotNullObject(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: AgentFirstCallbackAfterContactWorkConfig
+					"agent_first_callback_after_contact_work_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AfterContactWorkTimeLimit
+							"after_contact_work_time_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The After Call Work (ACW) timeout setting, in seconds.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.AtLeast(0),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "After Contact Work configuration.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Channel
+					"channel": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The channels that agents can handle in the Contact Control Panel (CCP).",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"VOICE",
+								"CHAT",
+								"TASK",
+								"EMAIL",
+							),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "After Contact Work configurations of a user.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AutoAcceptConfigs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Auto-accept configurations of a user.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Auto-accept configuration per channel.",
+		//	    "properties": {
+		//	      "AgentFirstCallbackAutoAccept": {
+		//	        "description": "The agent first callback auto accept setting.",
+		//	        "type": "boolean"
+		//	      },
+		//	      "AutoAccept": {
+		//	        "description": "The Auto accept setting.",
+		//	        "type": "boolean"
+		//	      },
+		//	      "Channel": {
+		//	        "description": "The channels that agents can handle in the Contact Control Panel (CCP).",
+		//	        "enum": [
+		//	          "VOICE",
+		//	          "CHAT",
+		//	          "TASK",
+		//	          "EMAIL"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Channel",
+		//	      "AutoAccept"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"auto_accept_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AgentFirstCallbackAutoAccept
+					"agent_first_callback_auto_accept": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "The agent first callback auto accept setting.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+							boolplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: AutoAccept
+					"auto_accept": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "The Auto accept setting.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Bool{ /*START VALIDATORS*/
+							fwvalidators.NotNullBool(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+							boolplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Channel
+					"channel": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The channels that agents can handle in the Contact Control Panel (CCP).",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"VOICE",
+								"CHAT",
+								"TASK",
+								"EMAIL",
+							),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Auto-accept configurations of a user.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DirectoryUserId
 		// CloudFormation resource type schema:
 		//
@@ -195,6 +417,82 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// Password is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: PersistentConnectionConfigs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Persistent Connection configurations of a user.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Persistent Connection configuration per channel.",
+		//	    "properties": {
+		//	      "Channel": {
+		//	        "description": "The channels that agents can handle in the Contact Control Panel (CCP).",
+		//	        "enum": [
+		//	          "VOICE",
+		//	          "CHAT",
+		//	          "TASK",
+		//	          "EMAIL"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "PersistentConnection": {
+		//	        "description": "The Persistent Connection setting.",
+		//	        "type": "boolean"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Channel",
+		//	      "PersistentConnection"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"persistent_connection_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Channel
+					"channel": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The channels that agents can handle in the Contact Control Panel (CCP).",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"VOICE",
+								"CHAT",
+								"TASK",
+								"EMAIL",
+							),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: PersistentConnection
+					"persistent_connection": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "The Persistent Connection setting.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Bool{ /*START VALIDATORS*/
+							fwvalidators.NotNullBool(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+							boolplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Persistent Connection configurations of a user.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PhoneConfig
 		// CloudFormation resource type schema:
 		//
@@ -228,9 +526,6 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "PhoneType"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"phone_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -277,17 +572,122 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 				// Property: PhoneType
 				"phone_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The phone type.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"SOFT_PHONE",
 							"DESK_PHONE",
 						),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The phone settings for the user.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PhoneNumberConfigs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Phone Number configurations of a user.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Phone Number configuration per channel.",
+		//	    "properties": {
+		//	      "Channel": {
+		//	        "description": "The channels that agents can handle in the Contact Control Panel (CCP).",
+		//	        "enum": [
+		//	          "VOICE",
+		//	          "CHAT",
+		//	          "TASK",
+		//	          "EMAIL"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "PhoneNumber": {
+		//	        "description": "The phone number for the user's desk phone.",
+		//	        "type": "string"
+		//	      },
+		//	      "PhoneType": {
+		//	        "description": "The phone type.",
+		//	        "enum": [
+		//	          "SOFT_PHONE",
+		//	          "DESK_PHONE"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Channel",
+		//	      "PhoneType"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"phone_number_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Channel
+					"channel": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The channels that agents can handle in the Contact Control Panel (CCP).",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"VOICE",
+								"CHAT",
+								"TASK",
+								"EMAIL",
+							),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: PhoneNumber
+					"phone_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The phone number for the user's desk phone.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: PhoneType
+					"phone_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The phone type.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"SOFT_PHONE",
+								"DESK_PHONE",
+							),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Phone Number configurations of a user.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: RoutingProfileArn
 		// CloudFormation resource type schema:
@@ -528,6 +928,92 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9\\_\\-\\.\\@]+"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
+		// Property: VoiceEnhancementConfigs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Voice Enhancement configurations of a user.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Voice Enhancement configuration per channel.",
+		//	    "properties": {
+		//	      "Channel": {
+		//	        "description": "The channels that agents can handle in the Contact Control Panel (CCP).",
+		//	        "enum": [
+		//	          "VOICE",
+		//	          "CHAT",
+		//	          "TASK",
+		//	          "EMAIL"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "VoiceEnhancementMode": {
+		//	        "description": "The Voice Enhancement Mode setting.",
+		//	        "enum": [
+		//	          "NONE",
+		//	          "VOICE_ISOLATION",
+		//	          "NOISE_SUPPRESSION"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Channel",
+		//	      "VoiceEnhancementMode"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"voice_enhancement_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Channel
+					"channel": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The channels that agents can handle in the Contact Control Panel (CCP).",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"VOICE",
+								"CHAT",
+								"TASK",
+								"EMAIL",
+							),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: VoiceEnhancementMode
+					"voice_enhancement_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Voice Enhancement Mode setting.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"NONE",
+								"VOICE_ISOLATION",
+								"NOISE_SUPPRESSION",
+							),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Voice Enhancement configurations of a user.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -557,33 +1043,44 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"after_contact_work_time_limit": "AfterContactWorkTimeLimit",
-		"attribute_name":                "AttributeName",
-		"attribute_value":               "AttributeValue",
-		"auto_accept":                   "AutoAccept",
-		"desk_phone_number":             "DeskPhoneNumber",
-		"directory_user_id":             "DirectoryUserId",
-		"email":                         "Email",
-		"first_name":                    "FirstName",
-		"hierarchy_group_arn":           "HierarchyGroupArn",
-		"identity_info":                 "IdentityInfo",
-		"instance_arn":                  "InstanceArn",
-		"key":                           "Key",
-		"last_name":                     "LastName",
-		"level":                         "Level",
-		"mobile":                        "Mobile",
-		"password":                      "Password",
-		"persistent_connection":         "PersistentConnection",
-		"phone_config":                  "PhoneConfig",
-		"phone_type":                    "PhoneType",
-		"routing_profile_arn":           "RoutingProfileArn",
-		"secondary_email":               "SecondaryEmail",
-		"security_profile_arns":         "SecurityProfileArns",
-		"tags":                          "Tags",
-		"user_arn":                      "UserArn",
-		"user_proficiencies":            "UserProficiencies",
-		"username":                      "Username",
-		"value":                         "Value",
+		"after_contact_work_config":                      "AfterContactWorkConfig",
+		"after_contact_work_configs":                     "AfterContactWorkConfigs",
+		"after_contact_work_time_limit":                  "AfterContactWorkTimeLimit",
+		"agent_first_callback_after_contact_work_config": "AgentFirstCallbackAfterContactWorkConfig",
+		"agent_first_callback_auto_accept":               "AgentFirstCallbackAutoAccept",
+		"attribute_name":                                 "AttributeName",
+		"attribute_value":                                "AttributeValue",
+		"auto_accept":                                    "AutoAccept",
+		"auto_accept_configs":                            "AutoAcceptConfigs",
+		"channel":                                        "Channel",
+		"desk_phone_number":                              "DeskPhoneNumber",
+		"directory_user_id":                              "DirectoryUserId",
+		"email":                                          "Email",
+		"first_name":                                     "FirstName",
+		"hierarchy_group_arn":                            "HierarchyGroupArn",
+		"identity_info":                                  "IdentityInfo",
+		"instance_arn":                                   "InstanceArn",
+		"key":                                            "Key",
+		"last_name":                                      "LastName",
+		"level":                                          "Level",
+		"mobile":                                         "Mobile",
+		"password":                                       "Password",
+		"persistent_connection":                          "PersistentConnection",
+		"persistent_connection_configs":                  "PersistentConnectionConfigs",
+		"phone_config":                                   "PhoneConfig",
+		"phone_number":                                   "PhoneNumber",
+		"phone_number_configs":                           "PhoneNumberConfigs",
+		"phone_type":                                     "PhoneType",
+		"routing_profile_arn":                            "RoutingProfileArn",
+		"secondary_email":                                "SecondaryEmail",
+		"security_profile_arns":                          "SecurityProfileArns",
+		"tags":                                           "Tags",
+		"user_arn":                                       "UserArn",
+		"user_proficiencies":                             "UserProficiencies",
+		"username":                                       "Username",
+		"value":                                          "Value",
+		"voice_enhancement_configs":                      "VoiceEnhancementConfigs",
+		"voice_enhancement_mode":                         "VoiceEnhancementMode",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

@@ -132,6 +132,7 @@ resource "awscc_cleanrooms_membership" "example" {
 
 - `default_job_result_configuration` (Attributes) (see [below for nested schema](#nestedatt--default_job_result_configuration))
 - `default_result_configuration` (Attributes) (see [below for nested schema](#nestedatt--default_result_configuration))
+- `is_metrics_enabled` (Boolean)
 - `job_log_status` (String)
 - `payment_configuration` (Attributes) (see [below for nested schema](#nestedatt--payment_configuration))
 - `tags` (Attributes Set) An arbitrary set of tags (key-value pairs) for this cleanrooms membership. (see [below for nested schema](#nestedatt--tags))

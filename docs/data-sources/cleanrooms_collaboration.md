@@ -32,6 +32,7 @@ Data Source schema for AWS::CleanRooms::Collaboration
 - `creator_payment_configuration` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration))
 - `data_encryption_metadata` (Attributes) (see [below for nested schema](#nestedatt--data_encryption_metadata))
 - `description` (String)
+- `is_metrics_enabled` (Boolean)
 - `job_log_status` (String)
 - `members` (Attributes List) (see [below for nested schema](#nestedatt--members))
 - `name` (String)

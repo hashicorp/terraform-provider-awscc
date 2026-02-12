@@ -1,179 +1,55 @@
 {
-  "typeName": "AWS::EC2::CapacityReservation",
-  "description": "Resource Type definition for AWS::EC2::CapacityReservation",
-  "additionalProperties": false,
-  "properties": {
-    "Tenancy": {
-      "type": "string"
-    },
-    "EndDateType": {
-      "type": "string"
-    },
-    "TagSpecifications": {
-      "type": "array",
-      "insertionOrder": false,
-      "uniqueItems": false,
-      "items": {
-        "$ref": "#/definitions/TagSpecification"
-      }
-    },
-    "AvailabilityZone": {
-      "type": "string"
-    },
-    "TotalInstanceCount": {
-      "type": "integer"
-    },
-    "EndDate": {
-      "type": "string"
-    },
-    "EbsOptimized": {
-      "type": "boolean"
-    },
-    "OutPostArn": {
-      "type": "string"
-    },
-    "InstanceCount": {
-      "type": "integer"
-    },
-    "PlacementGroupArn": {
-      "type": "string"
-    },
-    "AvailableInstanceCount": {
-      "type": "integer"
-    },
-    "InstancePlatform": {
-      "type": "string"
-    },
-    "Id": {
-      "type": "string"
-    },
-    "InstanceType": {
-      "type": "string"
-    },
-    "EphemeralStorage": {
-      "type": "boolean"
-    },
-    "InstanceMatchCriteria": {
-      "type": "string"
-    },
-    "UnusedReservationBillingOwnerId": {
-      "type": "string"
-    },
-    "AvailabilityZoneId": {
-      "type": "string"
-    },
-    "StartDate": {
-      "type": "string"
-    },
-    "CapacityReservationArn": {
-      "type": "string"
-    },
-    "CreateDate": {
-      "type": "string"
-    },
-    "State": {
-      "type": "string"
-    },
-    "OwnerId": {
-      "type": "string"
-    },
-    "DeliveryPreference": {
-      "type": "string"
-    },
-    "CapacityReservationFleetId": {
-      "type": "string"
-    },
-    "ReservationType": {
-      "type": "string"
-    },
-    "CapacityAllocationSet": {
-      "type": "array",
-      "insertionOrder": false,
-      "uniqueItems": false,
-      "items": {
-        "$ref": "#/definitions/CapacityAllocation"
-      }
-    },
-    "CommitmentInfo": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "CommitmentEndDate": {
-          "type": "string"
-        },
-        "CommittedInstanceCount": {
-          "type": "integer"
-        }
-      }
-    }
+  "tagging": {
+    "permissions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags"
+    ],
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/TagSpecifications/*/Tags",
+    "cloudFormationSystemTags": true
   },
-  "definitions": {
-    "Tag": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "Value": {
-          "type": "string"
-        },
-        "Key": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "Value",
-        "Key"
+  "handlers": {
+    "read": {
+      "permissions": [
+        "ec2:DescribeCapacityReservations"
       ]
     },
-    "TagSpecification": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "ResourceType": {
-          "type": "string"
-        },
-        "Tags": {
-          "type": "array",
-          "insertionOrder": false,
-          "uniqueItems": false,
-          "items": {
-            "$ref": "#/definitions/Tag"
-          }
-        }
-      }
+    "create": {
+      "permissions": [
+        "ec2:CreateCapacityReservation",
+        "ec2:DescribeCapacityReservations",
+        "ec2:CancelCapacityReservation",
+        "ec2:CreateTags"
+      ]
     },
-    "CapacityAllocation": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "AllocationType": {
-          "type": "string"
-        },
-        "Count": {
-          "type": "integer"
-        }
-      }
+    "update": {
+      "permissions": [
+        "ec2:ModifyCapacityReservation",
+        "ec2:CreateCapacityReservation",
+        "ec2:DescribeCapacityReservations",
+        "ec2:CancelCapacityReservation",
+        "ec2:AssociateCapacityReservationBillingOwner",
+        "ec2:CreateTags",
+        "ec2:DeleteTags"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:DescribeCapacityReservations"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:CreateCapacityReservation",
+        "ec2:DescribeCapacityReservations",
+        "ec2:CancelCapacityReservation",
+        "ec2:DeleteTags"
+      ]
     }
   },
-  "required": [
-    "InstanceCount",
-    "InstancePlatform",
-    "InstanceType"
-  ],
-  "createOnlyProperties": [
-    "/properties/Tenancy",
-    "/properties/InstancePlatform",
-    "/properties/InstanceType",
-    "/properties/AvailabilityZone",
-    "/properties/TagSpecifications",
-    "/properties/OutPostArn",
-    "/properties/EphemeralStorage",
-    "/properties/EbsOptimized",
-    "/properties/PlacementGroupArn",
-    "/properties/AvailabilityZoneId"
-  ],
-  "primaryIdentifier": [
-    "/properties/Id"
-  ],
+  "typeName": "AWS::EC2::CapacityReservation",
   "readOnlyProperties": [
     "/properties/Id",
     "/properties/AvailableInstanceCount",
@@ -189,57 +65,181 @@
     "/properties/DeliveryPreference",
     "/properties/CapacityReservationFleetId"
   ],
+  "description": "Resource Type definition for AWS::EC2::CapacityReservation",
   "writeOnlyProperties": [
     "/properties/UnusedReservationBillingOwnerId"
   ],
-  "tagging": {
-    "taggable": true,
-    "tagOnCreate": true,
-    "tagUpdatable": true,
-    "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/TagSpecifications/*/Tags",
-    "permissions": [
-      "ec2:CreateTags",
-      "ec2:DeleteTags"
-    ]
+  "createOnlyProperties": [
+    "/properties/Tenancy",
+    "/properties/InstancePlatform",
+    "/properties/InstanceType",
+    "/properties/AvailabilityZone",
+    "/properties/TagSpecifications",
+    "/properties/OutPostArn",
+    "/properties/EphemeralStorage",
+    "/properties/EbsOptimized",
+    "/properties/PlacementGroupArn",
+    "/properties/AvailabilityZoneId"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "definitions": {
+    "CapacityAllocation": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "AllocationType": {
+          "type": "string"
+        },
+        "Count": {
+          "type": "integer"
+        }
+      }
+    },
+    "Tag": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "type": "string"
+        },
+        "Key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    },
+    "TagSpecification": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ResourceType": {
+          "type": "string"
+        },
+        "Tags": {
+          "uniqueItems": false,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          }
+        }
+      }
+    }
   },
-  "handlers": {
-    "create": {
-      "permissions": [
-        "ec2:CreateCapacityReservation",
-        "ec2:DescribeCapacityReservations",
-        "ec2:CancelCapacityReservation",
-        "ec2:CreateTags"
-      ]
+  "required": [
+    "InstanceCount",
+    "InstancePlatform",
+    "InstanceType"
+  ],
+  "properties": {
+    "Tenancy": {
+      "type": "string"
     },
-    "delete": {
-      "permissions": [
-        "ec2:CreateCapacityReservation",
-        "ec2:DescribeCapacityReservations",
-        "ec2:CancelCapacityReservation",
-        "ec2:DeleteTags"
-      ]
+    "EndDateType": {
+      "type": "string"
     },
-    "list": {
-      "permissions": [
-        "ec2:DescribeCapacityReservations"
-      ]
+    "TagSpecifications": {
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/TagSpecification"
+      }
     },
-    "read": {
-      "permissions": [
-        "ec2:DescribeCapacityReservations"
-      ]
+    "UnusedReservationBillingOwnerId": {
+      "type": "string"
     },
-    "update": {
-      "permissions": [
-        "ec2:ModifyCapacityReservation",
-        "ec2:CreateCapacityReservation",
-        "ec2:DescribeCapacityReservations",
-        "ec2:CancelCapacityReservation",
-        "ec2:AssociateCapacityReservationBillingOwner",
-        "ec2:CreateTags",
-        "ec2:DeleteTags"
-      ]
+    "TotalInstanceCount": {
+      "type": "integer"
+    },
+    "CreateDate": {
+      "type": "string"
+    },
+    "EbsOptimized": {
+      "type": "boolean"
+    },
+    "OutPostArn": {
+      "type": "string"
+    },
+    "StartDate": {
+      "type": "string"
+    },
+    "OwnerId": {
+      "type": "string"
+    },
+    "InstanceType": {
+      "type": "string"
+    },
+    "CapacityReservationFleetId": {
+      "type": "string"
+    },
+    "AvailabilityZoneId": {
+      "type": "string"
+    },
+    "AvailabilityZone": {
+      "type": "string"
+    },
+    "EndDate": {
+      "type": "string"
+    },
+    "InstanceCount": {
+      "type": "integer"
+    },
+    "CapacityReservationArn": {
+      "type": "string"
+    },
+    "PlacementGroupArn": {
+      "type": "string"
+    },
+    "DeliveryPreference": {
+      "type": "string"
+    },
+    "CommitmentInfo": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "CommittedInstanceCount": {
+          "type": "integer"
+        },
+        "CommitmentEndDate": {
+          "type": "string"
+        }
+      }
+    },
+    "State": {
+      "type": "string"
+    },
+    "AvailableInstanceCount": {
+      "type": "integer"
+    },
+    "ReservationType": {
+      "type": "string"
+    },
+    "InstancePlatform": {
+      "type": "string"
+    },
+    "Id": {
+      "type": "string"
+    },
+    "CapacityAllocationSet": {
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CapacityAllocation"
+      }
+    },
+    "EphemeralStorage": {
+      "type": "boolean"
+    },
+    "InstanceMatchCriteria": {
+      "type": "string"
     }
   }
 }

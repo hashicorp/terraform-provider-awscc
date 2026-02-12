@@ -54,9 +54,11 @@ Read-Only:
 
 Read-Only:
 
-- `destination` (String) Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. If you specify Evidently, you must also specify the ARN of the Evidently experiment that is to be the destination and an IAM role that has permission to write to the experiment.
-- `destination_arn` (String) Use this parameter only if Destination is Evidently. This parameter specifies the ARN of the Evidently experiment that will receive the extended metrics.
-- `iam_role_arn` (String) This parameter is required if Destination is Evidently. If Destination is CloudWatch, do not use this parameter.
+- `destination` (String) Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. Note: Evidently has been discontinued and is no longer supported - requests with Evidently will be rejected.
+- `destination_arn` (String) Evidently has been discontinued and therefore this is no longer an acceptable field. If Destination is CloudWatch, do not use this parameter. 
+
+This parameter specifies the ARN of the Evidently experiment that will receive the extended metrics.
+- `iam_role_arn` (String) Evidently has been discontinued and therefore this is no longer an acceptable field. If Destination is CloudWatch, do not use this parameter. 
 
 This parameter specifies the ARN of an IAM role that RUM will assume to write to the Evidently experiment that you are sending metrics to. This role must have permission to write to that experiment.
 - `metric_definitions` (Attributes Set) An array of structures which define the metrics that you want to send. (see [below for nested schema](#nestedatt--app_monitor_configuration--metric_destinations--metric_definitions))
@@ -171,7 +173,7 @@ LogEventPayloadSize
 
 If you omit this field, a hardcoded value of 1 is pushed as the metric value. This is useful if you just want to count the number of events that the filter catches.
 
-If this metric is sent to Evidently, this field will be passed to Evidently raw and Evidently will handle data extraction from the event.
+If this metric is sent to Evidently, this field will be passed to Evidently raw and Evidently will handle data extraction from the event. Note: Evidently has been discontinued.
 
 
 

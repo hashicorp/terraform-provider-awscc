@@ -92,6 +92,18 @@ func podIdentityAssociationDataSource(ctx context.Context) (datasource.DataSourc
 			Description: "The Kubernetes namespace that the pod identity association is created for.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Policy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The policy of the pod identity association.",
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The policy of the pod identity association.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -200,6 +212,7 @@ func podIdentityAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		"external_id":          "ExternalId",
 		"key":                  "Key",
 		"namespace":            "Namespace",
+		"policy":               "Policy",
 		"role_arn":             "RoleArn",
 		"service_account":      "ServiceAccount",
 		"tags":                 "Tags",

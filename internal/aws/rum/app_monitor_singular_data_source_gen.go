@@ -96,7 +96,7 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "description": "An structure which defines the destination and the metrics that you want to send.",
 		//	        "properties": {
 		//	          "Destination": {
-		//	            "description": "Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. If you specify Evidently, you must also specify the ARN of the Evidently experiment that is to be the destination and an IAM role that has permission to write to the experiment.",
+		//	            "description": "Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. Note: Evidently has been discontinued and is no longer supported - requests with Evidently will be rejected.",
 		//	            "enum": [
 		//	              "CloudWatch",
 		//	              "Evidently"
@@ -104,12 +104,12 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "DestinationArn": {
-		//	            "description": "Use this parameter only if Destination is Evidently. This parameter specifies the ARN of the Evidently experiment that will receive the extended metrics.",
+		//	            "description": "Evidently has been discontinued and therefore this is no longer an acceptable field. If Destination is CloudWatch, do not use this parameter. \n\nThis parameter specifies the ARN of the Evidently experiment that will receive the extended metrics.",
 		//	            "pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:.*",
 		//	            "type": "string"
 		//	          },
 		//	          "IamRoleArn": {
-		//	            "description": "This parameter is required if Destination is Evidently. If Destination is CloudWatch, do not use this parameter.\n\nThis parameter specifies the ARN of an IAM role that RUM will assume to write to the Evidently experiment that you are sending metrics to. This role must have permission to write to that experiment.",
+		//	            "description": "Evidently has been discontinued and therefore this is no longer an acceptable field. If Destination is CloudWatch, do not use this parameter. \n\nThis parameter specifies the ARN of an IAM role that RUM will assume to write to the Evidently experiment that you are sending metrics to. This role must have permission to write to that experiment.",
 		//	            "pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:.*",
 		//	            "type": "string"
 		//	          },
@@ -159,7 +159,7 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "type": "string"
 		//	                },
 		//	                "ValueKey": {
-		//	                  "description": "The field within the event object that the metric value is sourced from.\n\nIf you omit this field, a hardcoded value of 1 is pushed as the metric value. This is useful if you just want to count the number of events that the filter catches.\n\nIf this metric is sent to Evidently, this field will be passed to Evidently raw and Evidently will handle data extraction from the event.",
+		//	                  "description": "The field within the event object that the metric value is sourced from.\n\nIf you omit this field, a hardcoded value of 1 is pushed as the metric value. This is useful if you just want to count the number of events that the filter catches.\n\nIf this metric is sent to Evidently, this field will be passed to Evidently raw and Evidently will handle data extraction from the event. Note: Evidently has been discontinued.",
 		//	                  "maxLength": 256,
 		//	                  "minLength": 1,
 		//	                  "pattern": ".*",
@@ -255,17 +255,17 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Destination
 							"destination": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. If you specify Evidently, you must also specify the ARN of the Evidently experiment that is to be the destination and an IAM role that has permission to write to the experiment.",
+								Description: "Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. Note: Evidently has been discontinued and is no longer supported - requests with Evidently will be rejected.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: DestinationArn
 							"destination_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Use this parameter only if Destination is Evidently. This parameter specifies the ARN of the Evidently experiment that will receive the extended metrics.",
+								Description: "Evidently has been discontinued and therefore this is no longer an acceptable field. If Destination is CloudWatch, do not use this parameter. \n\nThis parameter specifies the ARN of the Evidently experiment that will receive the extended metrics.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: IamRoleArn
 							"iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "This parameter is required if Destination is Evidently. If Destination is CloudWatch, do not use this parameter.\n\nThis parameter specifies the ARN of an IAM role that RUM will assume to write to the Evidently experiment that you are sending metrics to. This role must have permission to write to that experiment.",
+								Description: "Evidently has been discontinued and therefore this is no longer an acceptable field. If Destination is CloudWatch, do not use this parameter. \n\nThis parameter specifies the ARN of an IAM role that RUM will assume to write to the Evidently experiment that you are sending metrics to. This role must have permission to write to that experiment.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: MetricDefinitions
@@ -301,7 +301,7 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 										}, /*END ATTRIBUTE*/
 										// Property: ValueKey
 										"value_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The field within the event object that the metric value is sourced from.\n\nIf you omit this field, a hardcoded value of 1 is pushed as the metric value. This is useful if you just want to count the number of events that the filter catches.\n\nIf this metric is sent to Evidently, this field will be passed to Evidently raw and Evidently will handle data extraction from the event.",
+											Description: "The field within the event object that the metric value is sourced from.\n\nIf you omit this field, a hardcoded value of 1 is pushed as the metric value. This is useful if you just want to count the number of events that the filter catches.\n\nIf this metric is sent to Evidently, this field will be passed to Evidently raw and Evidently will handle data extraction from the event. Note: Evidently has been discontinued.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
