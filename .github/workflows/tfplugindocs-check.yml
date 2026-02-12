@@ -18,6 +18,7 @@ on:
       - main.go
       - tools/**
       - docs/**
+      - examples/**
 
 jobs:
   tfplugindocs_check:
@@ -45,8 +46,14 @@ jobs:
         with:
           path: ~/go/pkg/mod
           key: ${{ runner.os }}-go-pkg-mod-${{ hashFiles('go.sum') }}
+
+      - uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd
+        with:
+          terraform_wrapper: false
+
       - run: |
           make tools
+          make docs-fmt
           make docs
           git add -N docs/
           git diff --exit-code
