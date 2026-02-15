@@ -31,7 +31,7 @@ func RetryGetResourceRequestStatus(pProgressEvent **types.ProgressEvent) func(co
 				}
 
 				// Retry on throttling errors
-				if progressEvent.ErrorCode == "Throttling" {
+				if progressEvent.ErrorCode == types.HandlerErrorCodeThrottling {
 					return true, err
 				}
 
