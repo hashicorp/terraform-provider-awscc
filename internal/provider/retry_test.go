@@ -13,9 +13,9 @@ import (
 
 func TestThrottlingRetry(t *testing.T) {
 	tests := []struct {
-		name          string
-		err           error
-		expectRetry   aws.Ternary
+		name        string
+		err         error
+		expectRetry aws.Ternary
 	}{
 		{
 			name:        "ThrottlingException should retry",
