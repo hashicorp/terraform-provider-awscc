@@ -1,4 +1,4 @@
-## 1.72.0 (Unreleased)
+## 1.72.0 (Feburary 18, 2026)
 
 FEATURES:
 
