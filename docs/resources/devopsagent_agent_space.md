@@ -28,6 +28,7 @@ resource "awscc_devopsagent_agent_space" "example" {
 ### Optional
 
 - `description` (String) The description of the AgentSpace.
+- `operator_app` (Attributes) (see [below for nested schema](#nestedatt--operator_app))
 
 ### Read-Only
 
@@ -36,6 +37,41 @@ resource "awscc_devopsagent_agent_space" "example" {
 - `created_at` (String) The timestamp when the resource was created.
 - `id` (String) Uniquely identifies the resource.
 - `updated_at` (String) The timestamp when the resource was last updated.
+
+<a id="nestedatt--operator_app"></a>
+### Nested Schema for `operator_app`
+
+Optional:
+
+- `iam` (Attributes) (see [below for nested schema](#nestedatt--operator_app--iam))
+- `idc` (Attributes) (see [below for nested schema](#nestedatt--operator_app--idc))
+
+<a id="nestedatt--operator_app--iam"></a>
+### Nested Schema for `operator_app.iam`
+
+Optional:
+
+- `operator_app_role_arn` (String)
+
+Read-Only:
+
+- `created_at` (String)
+- `updated_at` (String)
+
+
+<a id="nestedatt--operator_app--idc"></a>
+### Nested Schema for `operator_app.idc`
+
+Optional:
+
+- `idc_instance_arn` (String)
+- `operator_app_role_arn` (String)
+
+Read-Only:
+
+- `created_at` (String)
+- `idc_application_arn` (String)
+- `updated_at` (String)
 
 ## Import
 

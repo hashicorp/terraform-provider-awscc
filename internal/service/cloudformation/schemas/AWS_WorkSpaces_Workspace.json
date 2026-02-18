@@ -1,0 +1,157 @@
+{
+  "typeName": "AWS::WorkSpaces::Workspace",
+  "description": "Resource Type definition for AWS::WorkSpaces::Workspace",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-workspaces-workspace",
+  "additionalProperties": false,
+  "properties": {
+    "WorkspaceId": {
+      "type": "string"
+    },
+    "BundleId": {
+      "type": "string"
+    },
+    "DirectoryId": {
+      "type": "string"
+    },
+    "Id": {
+      "type": "string"
+    },
+    "RootVolumeEncryptionEnabled": {
+      "type": "boolean"
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "UserName": {
+      "type": "string"
+    },
+    "UserVolumeEncryptionEnabled": {
+      "type": "boolean"
+    },
+    "VolumeEncryptionKey": {
+      "type": "string"
+    },
+    "WorkspaceProperties": {
+      "$ref": "#/definitions/WorkspaceProperties"
+    }
+  },
+  "definitions": {
+    "WorkspaceProperties": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ComputeTypeName": {
+          "type": "string"
+        },
+        "RootVolumeSizeGib": {
+          "type": "integer"
+        },
+        "RunningMode": {
+          "type": "string"
+        },
+        "RunningModeAutoStopTimeoutInMinutes": {
+          "type": "integer"
+        },
+        "UserVolumeSizeGib": {
+          "type": "integer"
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/WorkspaceId"
+  ],
+  "readOnlyProperties": [
+    "/properties/WorkspaceId",
+    "/properties/Id"
+  ],
+  "required": [
+    "BundleId",
+    "DirectoryId",
+    "UserName"
+  ],
+  "createOnlyProperties": [
+    "/properties/UserName",
+    "/properties/DirectoryId"
+  ],
+  "conditionalCreateOnlyProperties": [
+    "/properties/BundleId",
+    "/properties/VolumeEncryptionKey",
+    "/properties/RootVolumeEncryptionEnabled",
+    "/properties/UserVolumeEncryptionEnabled"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "workspaces:CreateTags",
+      "workspaces:DeleteTags",
+      "workspaces:DescribeTags"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "workspaces:DescribeWorkspaces",
+        "workspaces:CreateWorkspaces",
+        "workspaces:CreateTags",
+        "kms:CreateGrant",
+        "kms:DescribeKey"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "workspaces:DescribeWorkspaces",
+        "workspaces:DescribeTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "workspaces:DescribeWorkspaces",
+        "workspaces:DescribeWorkspaceBundles",
+        "workspaces:ModifyWorkspaceProperties",
+        "workspaces:DescribeTags",
+        "workspaces:CreateTags",
+        "workspaces:DeleteTags",
+        "kms:CreateGrant",
+        "kms:DescribeKey"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "workspaces:DescribeWorkspaces",
+        "workspaces:TerminateWorkspaces"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "workspaces:DescribeWorkspaces",
+        "workspaces:DescribeTags"
+      ]
+    }
+  }
+}

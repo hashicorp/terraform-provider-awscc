@@ -86,6 +86,7 @@ resource "awscc_directoryservice_simple_ad" "example" {
 - `enable_sso` (Boolean) Whether to enable single sign-on for a Simple Active Directory in AWS.
 - `password` (String) The password for the default administrative user named Admin.
 - `short_name` (String) The NetBIOS name for your domain.
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -101,6 +102,15 @@ Required:
 
 - `subnet_ids` (Set of String) The identifiers of the subnets for the directory servers. The two subnets must be in different Availability Zones. AWS Directory Service specifies a directory server and a DNS server in each of these subnets.
 - `vpc_id` (String) The identifier of the VPC in which to create the directory.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) The key name of the tag
+- `value` (String) The value for the tag.
 
 ## Import
 

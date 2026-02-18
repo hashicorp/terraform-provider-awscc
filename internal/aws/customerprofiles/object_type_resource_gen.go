@@ -321,7 +321,9 @@ func objectTypeResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "HOTEL_RESERVATION",
 		//	                  "LOYALTY",
 		//	                  "LOYALTY_TRANSACTION",
-		//	                  "LOYALTY_PROMOTION"
+		//	                  "LOYALTY_PROMOTION",
+		//	                  "WEB_ANALYTICS",
+		//	                  "DEVICE"
 		//	                ],
 		//	                "type": "string"
 		//	              },
@@ -398,6 +400,8 @@ func objectTypeResource(ctx context.Context) (resource.Resource, error) {
 												"LOYALTY",
 												"LOYALTY_TRANSACTION",
 												"LOYALTY_PROMOTION",
+												"WEB_ANALYTICS",
+												"DEVICE",
 											),
 										),
 									}, /*END VALIDATORS*/

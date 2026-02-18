@@ -86,6 +86,115 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The name of the AgentSpace.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: OperatorApp
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Iam": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CreatedAt": {
+		//	          "format": "date-time",
+		//	          "type": "string"
+		//	        },
+		//	        "OperatorAppRoleArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "UpdatedAt": {
+		//	          "format": "date-time",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "OperatorAppRoleArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Idc": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CreatedAt": {
+		//	          "format": "date-time",
+		//	          "type": "string"
+		//	        },
+		//	        "IdcApplicationArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "IdcInstanceArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "OperatorAppRoleArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "UpdatedAt": {
+		//	          "format": "date-time",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "OperatorAppRoleArn",
+		//	        "IdcInstanceArn"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"operator_app": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Iam
+				"iam": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CreatedAt
+						"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType: timetypes.RFC3339Type{},
+							Computed:   true,
+						}, /*END ATTRIBUTE*/
+						// Property: OperatorAppRoleArn
+						"operator_app_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: UpdatedAt
+						"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType: timetypes.RFC3339Type{},
+							Computed:   true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Idc
+				"idc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CreatedAt
+						"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType: timetypes.RFC3339Type{},
+							Computed:   true,
+						}, /*END ATTRIBUTE*/
+						// Property: IdcApplicationArn
+						"idc_application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: IdcInstanceArn
+						"idc_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: OperatorAppRoleArn
+						"operator_app_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: UpdatedAt
+						"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType: timetypes.RFC3339Type{},
+							Computed:   true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -116,12 +225,18 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::DevOpsAgent::AgentSpace").WithTerraformTypeName("awscc_devopsagent_agent_space")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"agent_space_id": "AgentSpaceId",
-		"arn":            "Arn",
-		"created_at":     "CreatedAt",
-		"description":    "Description",
-		"name":           "Name",
-		"updated_at":     "UpdatedAt",
+		"agent_space_id":        "AgentSpaceId",
+		"arn":                   "Arn",
+		"created_at":            "CreatedAt",
+		"description":           "Description",
+		"iam":                   "Iam",
+		"idc":                   "Idc",
+		"idc_application_arn":   "IdcApplicationArn",
+		"idc_instance_arn":      "IdcInstanceArn",
+		"name":                  "Name",
+		"operator_app":          "OperatorApp",
+		"operator_app_role_arn": "OperatorAppRoleArn",
+		"updated_at":            "UpdatedAt",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

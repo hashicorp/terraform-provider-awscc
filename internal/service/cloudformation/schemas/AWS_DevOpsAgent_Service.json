@@ -1,0 +1,754 @@
+{
+  "typeName": "AWS::DevOpsAgent::Service",
+  "description": "The AWS::DevOpsAgent::Service resource registers external services (like Dynatrace, MCP servers, GitLab) for integration with DevOpsAgent.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "ServiceId": {
+      "description": "The unique identifier of the service",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "ServiceType": {
+      "description": "The type of service being registered",
+      "type": "string",
+      "enum": [
+        "dynatrace",
+        "mcpserver",
+        "mcpserversplunk",
+        "mcpservernewrelic",
+        "gitlab",
+        "servicenow"
+      ]
+    },
+    "ServiceDetails": {
+      "description": "Service-specific configuration details",
+      "type": "object",
+      "oneOf": [
+        {
+          "properties": {
+            "Dynatrace": {
+              "$ref": "#/definitions/DynatraceServiceDetails"
+            }
+          },
+          "required": [
+            "Dynatrace"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "MCPServer": {
+              "$ref": "#/definitions/MCPServerDetails"
+            }
+          },
+          "required": [
+            "MCPServer"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "MCPServerSplunk": {
+              "$ref": "#/definitions/MCPServerSplunkDetails"
+            }
+          },
+          "required": [
+            "MCPServerSplunk"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "MCPServerNewRelic": {
+              "$ref": "#/definitions/NewRelicServiceDetails"
+            }
+          },
+          "required": [
+            "MCPServerNewRelic"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "GitLab": {
+              "$ref": "#/definitions/GitLabDetails"
+            }
+          },
+          "required": [
+            "GitLab"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "ServiceNow": {
+              "$ref": "#/definitions/ServiceNowServiceDetails"
+            }
+          },
+          "required": [
+            "ServiceNow"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "DynatraceServiceDetails": {
+      "description": "Dynatrace service configuration",
+      "type": "object",
+      "properties": {
+        "AccountUrn": {
+          "description": "Dynatrace resource account URN",
+          "type": "string"
+        },
+        "AuthorizationConfig": {
+          "$ref": "#/definitions/DynatraceAuthorizationConfig"
+        }
+      },
+      "required": [
+        "AccountUrn"
+      ],
+      "additionalProperties": false
+    },
+    "DynatraceAuthorizationConfig": {
+      "description": "Dynatrace OAuth authorization configuration",
+      "type": "object",
+      "properties": {
+        "OAuthClientCredentials": {
+          "$ref": "#/definitions/OAuthClientDetails"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ServiceNowServiceDetails": {
+      "description": "ServiceNow service configuration",
+      "type": "object",
+      "properties": {
+        "InstanceUrl": {
+          "description": "ServiceNow instance URL",
+          "type": "string",
+          "pattern": "^https://[a-zA-Z0-9-]+\\.service-now\\.com/?$"
+        },
+        "AuthorizationConfig": {
+          "$ref": "#/definitions/ServiceNowAuthorizationConfig"
+        }
+      },
+      "required": [
+        "InstanceUrl"
+      ],
+      "additionalProperties": false
+    },
+    "ServiceNowAuthorizationConfig": {
+      "description": "ServiceNow OAuth authorization configuration",
+      "type": "object",
+      "properties": {
+        "OAuthClientCredentials": {
+          "$ref": "#/definitions/OAuthClientDetails"
+        }
+      },
+      "additionalProperties": false
+    },
+    "MCPServerDetails": {
+      "description": "MCP server configuration",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "MCP server name",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "Endpoint": {
+          "description": "MCP server endpoint URL",
+          "type": "string",
+          "pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$"
+        },
+        "Description": {
+          "description": "Optional description for the MCP server",
+          "type": "string",
+          "maxLength": 500
+        },
+        "AuthorizationConfig": {
+          "$ref": "#/definitions/MCPServerAuthorizationConfig"
+        }
+      },
+      "required": [
+        "Name",
+        "Endpoint",
+        "AuthorizationConfig"
+      ],
+      "additionalProperties": false
+    },
+    "MCPServerAuthorizationConfig": {
+      "description": "MCP server authorization configuration",
+      "type": "object",
+      "oneOf": [
+        {
+          "properties": {
+            "OAuthClientCredentials": {
+              "$ref": "#/definitions/MCPServerOAuthClientCredentialsConfig"
+            }
+          },
+          "required": [
+            "OAuthClientCredentials"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "ApiKey": {
+              "$ref": "#/definitions/ApiKeyDetails"
+            }
+          },
+          "required": [
+            "ApiKey"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "MCPServerSplunkAuthorizationConfig": {
+      "description": "MCP server splunk authorization configuration",
+      "type": "object",
+      "oneOf": [
+        {
+          "properties": {
+            "BearerToken": {
+              "$ref": "#/definitions/BearerTokenDetails"
+            }
+          },
+          "required": [
+            "BearerToken"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "MCPServerOAuthClientCredentialsConfig": {
+      "description": "MCP server OAuth client credentials configuration",
+      "type": "object",
+      "properties": {
+        "ClientName": {
+          "description": "User friendly OAuth client name",
+          "type": "string"
+        },
+        "ClientId": {
+          "description": "OAuth client ID",
+          "type": "string"
+        },
+        "ClientSecret": {
+          "description": "OAuth client secret",
+          "type": "string"
+        },
+        "ExchangeUrl": {
+          "description": "OAuth token exchange URL",
+          "type": "string",
+          "pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$"
+        },
+        "Scopes": {
+          "description": "OAuth scopes",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExchangeParameters": {
+          "description": "OAuth token exchange parameters",
+          "type": "object"
+        }
+      },
+      "required": [
+        "ClientId",
+        "ClientSecret",
+        "ExchangeUrl"
+      ],
+      "additionalProperties": false
+    },
+    "GitLabDetails": {
+      "description": "GitLab service configuration",
+      "type": "object",
+      "properties": {
+        "TargetUrl": {
+          "description": "GitLab instance URL",
+          "type": "string",
+          "pattern": "^https://[a-zA-Z0-9]([a-zA-Z0-9.-]*[a-zA-Z0-9])?(?::[0-9]{1,5})?/?$"
+        },
+        "TokenType": {
+          "description": "Type of GitLab access token",
+          "type": "string",
+          "enum": [
+            "personal",
+            "group"
+          ]
+        },
+        "TokenValue": {
+          "description": "GitLab access token value",
+          "type": "string",
+          "pattern": "^glpat-[a-zA-Z0-9._-]+$"
+        },
+        "GroupId": {
+          "description": "Optional GitLab group ID for group-level access tokens",
+          "type": "string"
+        }
+      },
+      "required": [
+        "TargetUrl",
+        "TokenType",
+        "TokenValue"
+      ],
+      "additionalProperties": false
+    },
+    "OAuthClientDetails": {
+      "description": "OAuth client credentials",
+      "type": "object",
+      "properties": {
+        "ClientName": {
+          "description": "User friendly OAuth client name",
+          "type": "string"
+        },
+        "ClientId": {
+          "description": "OAuth client ID",
+          "type": "string"
+        },
+        "ClientSecret": {
+          "description": "OAuth client secret",
+          "type": "string"
+        },
+        "ExchangeParameters": {
+          "description": "OAuth token exchange parameters",
+          "type": "object"
+        }
+      },
+      "required": [
+        "ClientId",
+        "ClientSecret"
+      ],
+      "additionalProperties": false
+    },
+    "ApiKeyDetails": {
+      "description": "API key authentication details",
+      "type": "object",
+      "properties": {
+        "ApiKeyName": {
+          "description": "User friendly API key name",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\s-]+$"
+        },
+        "ApiKeyValue": {
+          "description": "API key value",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9+/=._-]+$"
+        },
+        "ApiKeyHeader": {
+          "description": "HTTP header name to send the API key",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9-]+$"
+        }
+      },
+      "required": [
+        "ApiKeyName",
+        "ApiKeyValue",
+        "ApiKeyHeader"
+      ],
+      "additionalProperties": false
+    },
+    "BearerTokenDetails": {
+      "description": "Bearer token authentication details",
+      "type": "object",
+      "properties": {
+        "TokenName": {
+          "description": "User friendly bearer token name",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_\\s-]+$"
+        },
+        "TokenValue": {
+          "description": "Bearer token value",
+          "type": "string",
+          "pattern": "^[\\S]+$"
+        },
+        "AuthorizationHeader": {
+          "description": "HTTP header name to send the bearer token",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9-]+$",
+          "default": "Authorization"
+        }
+      },
+      "required": [
+        "TokenName",
+        "TokenValue"
+      ],
+      "additionalProperties": false
+    },
+    "MCPServerSplunkDetails": {
+      "description": "Splunk MCP server configuration",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "MCP server name",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "Endpoint": {
+          "description": "MCP server endpoint URL",
+          "type": "string",
+          "pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$"
+        },
+        "Description": {
+          "description": "Optional description for the MCP server",
+          "type": "string",
+          "maxLength": 500
+        },
+        "AuthorizationConfig": {
+          "$ref": "#/definitions/MCPServerSplunkAuthorizationConfig"
+        }
+      },
+      "required": [
+        "Name",
+        "Endpoint",
+        "AuthorizationConfig"
+      ],
+      "additionalProperties": false
+    },
+    "NewRelicServiceDetails": {
+      "description": "New Relic service configuration",
+      "type": "object",
+      "properties": {
+        "AuthorizationConfig": {
+          "$ref": "#/definitions/NewRelicAuthorizationConfig"
+        }
+      },
+      "required": [
+        "AuthorizationConfig"
+      ],
+      "additionalProperties": false
+    },
+    "NewRelicAuthorizationConfig": {
+      "description": "New Relic authorization configuration",
+      "type": "object",
+      "properties": {
+        "ApiKey": {
+          "$ref": "#/definitions/NewRelicApiKeyConfig"
+        }
+      },
+      "required": [
+        "ApiKey"
+      ],
+      "additionalProperties": false
+    },
+    "NewRelicApiKeyConfig": {
+      "description": "New Relic API key configuration",
+      "type": "object",
+      "properties": {
+        "ApiKey": {
+          "description": "New Relic User API Key",
+          "type": "string",
+          "pattern": "^NRAK-[A-Z0-9]+$"
+        },
+        "AccountId": {
+          "description": "New Relic Account ID",
+          "type": "string",
+          "pattern": "^[0-9]+$"
+        },
+        "Region": {
+          "description": "New Relic region",
+          "type": "string",
+          "enum": [
+            "US",
+            "EU"
+          ]
+        },
+        "ApplicationIds": {
+          "description": "List of monitored APM application IDs",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          }
+        },
+        "EntityGuids": {
+          "description": "List of globally unique IDs for New Relic resources",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]+$"
+          }
+        },
+        "AlertPolicyIds": {
+          "description": "List of alert policy IDs",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          }
+        }
+      },
+      "required": [
+        "ApiKey",
+        "AccountId",
+        "Region"
+      ],
+      "additionalProperties": false
+    },
+    "AdditionalServiceDetails": {
+      "description": "Additional details specific to the service type returned after registration",
+      "type": "object",
+      "oneOf": [
+        {
+          "properties": {
+            "MCPServer": {
+              "$ref": "#/definitions/RegisteredMCPServerDetails"
+            }
+          },
+          "required": [
+            "MCPServer"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "GitLab": {
+              "$ref": "#/definitions/RegisteredGitLabServiceDetails"
+            }
+          },
+          "required": [
+            "GitLab"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "MCPServerSplunk": {
+              "$ref": "#/definitions/RegisteredMCPServerDetails"
+            }
+          },
+          "required": [
+            "MCPServerSplunk"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "MCPServerNewRelic": {
+              "$ref": "#/definitions/RegisteredNewRelicDetails"
+            }
+          },
+          "required": [
+            "MCPServerNewRelic"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "Dynatrace": {
+              "$ref": "#/definitions/RegisteredDynatraceDetails"
+            }
+          },
+          "required": [
+            "Dynatrace"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "ServiceNow": {
+              "$ref": "#/definitions/RegisteredServiceNowDetails"
+            }
+          },
+          "required": [
+            "ServiceNow"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "RegisteredMCPServerDetails": {
+      "description": "MCP server details returned after registration",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "MCP server name",
+          "type": "string"
+        },
+        "Endpoint": {
+          "description": "MCP server endpoint URL",
+          "type": "string"
+        },
+        "AuthorizationMethod": {
+          "description": "MCP server authorization method",
+          "type": "string",
+          "enum": [
+            "oauth-client-credentials",
+            "api-key",
+            "bearer-token"
+          ]
+        },
+        "Description": {
+          "description": "Optional description for the MCP server",
+          "type": "string"
+        },
+        "ApiKeyHeader": {
+          "description": "API key header name if using API key authentication",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name",
+        "Endpoint",
+        "AuthorizationMethod"
+      ],
+      "additionalProperties": false
+    },
+    "RegisteredNewRelicDetails": {
+      "description": "New Relic service details returned after registration",
+      "type": "object",
+      "properties": {
+        "AccountId": {
+          "description": "New Relic account ID",
+          "type": "string"
+        },
+        "Region": {
+          "description": "New Relic region",
+          "type": "string",
+          "enum": [
+            "US",
+            "EU"
+          ]
+        },
+        "Description": {
+          "description": "Optional user description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "AccountId",
+        "Region"
+      ],
+      "additionalProperties": false
+    },
+    "RegisteredGitLabServiceDetails": {
+      "description": "GitLab service details returned after registration",
+      "type": "object",
+      "properties": {
+        "TargetUrl": {
+          "description": "GitLab instance URL",
+          "type": "string"
+        },
+        "TokenType": {
+          "description": "Type of GitLab access token",
+          "type": "string",
+          "enum": [
+            "personal",
+            "group"
+          ]
+        },
+        "GroupId": {
+          "description": "Optional GitLab group ID for group-level access tokens",
+          "type": "string"
+        }
+      },
+      "required": [
+        "TargetUrl",
+        "TokenType"
+      ],
+      "additionalProperties": false
+    },
+    "RegisteredDynatraceDetails": {
+      "description": "Dynatrace service details returned after registration",
+      "type": "object",
+      "properties": {
+        "AccountUrn": {
+          "description": "Dynatrace resource account URN",
+          "type": "string"
+        }
+      },
+      "required": [
+        "AccountUrn"
+      ],
+      "additionalProperties": false
+    },
+    "RegisteredServiceNowDetails": {
+      "description": "ServiceNow service details returned after registration",
+      "type": "object",
+      "properties": {
+        "InstanceUrl": {
+          "description": "ServiceNow instance URL",
+          "type": "string"
+        }
+      },
+      "required": [
+        "InstanceUrl"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "ServiceId": {
+      "description": "The unique identifier of the service",
+      "$ref": "#/definitions/ServiceId"
+    },
+    "ServiceType": {
+      "description": "The type of service being registered",
+      "$ref": "#/definitions/ServiceType"
+    },
+    "ServiceDetails": {
+      "description": "Service-specific configuration details for create operation",
+      "$ref": "#/definitions/ServiceDetails"
+    },
+    "AccessibleResources": {
+      "description": "List of accessible resources for this service",
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "AdditionalServiceDetails": {
+      "description": "Additional details specific to the service type",
+      "$ref": "#/definitions/AdditionalServiceDetails"
+    }
+  },
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": false
+  },
+  "required": [
+    "ServiceType"
+  ],
+  "readOnlyProperties": [
+    "/properties/ServiceId",
+    "/properties/AccessibleResources",
+    "/properties/AdditionalServiceDetails"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ServiceDetails"
+  ],
+  "createOnlyProperties": [
+    "/properties/ServiceType",
+    "/properties/ServiceDetails"
+  ],
+  "primaryIdentifier": [
+    "/properties/ServiceId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "aidevops:RegisterService",
+        "aidevops:GetService"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "aidevops:GetService"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "aidevops:DeregisterService",
+        "aidevops:GetService"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "aidevops:ListServices"
+      ]
+    }
+  }
+}

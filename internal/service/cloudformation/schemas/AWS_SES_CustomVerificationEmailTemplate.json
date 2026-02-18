@@ -1,0 +1,128 @@
+{
+  "typeName": "AWS::SES::CustomVerificationEmailTemplate",
+  "description": "Resource Type definition for AWS::SES::CustomVerificationEmailTemplate.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ses.git",
+  "definitions": {
+    "Tag": {
+      "description": "An object that defines the tags (keys and values) that you want to associate with the tenant.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "description": "The key of the key-value tag.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "description": "The value of the key-value tag.",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "TemplateName": {
+      "description": "The name of the custom verification email template.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "FromEmailAddress": {
+      "description": "The email address that the custom verification email is sent from.",
+      "type": "string"
+    },
+    "TemplateSubject": {
+      "description": "The subject line of the custom verification email.",
+      "type": "string"
+    },
+    "TemplateContent": {
+      "description": "The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations.",
+      "type": "string"
+    },
+    "SuccessRedirectionURL": {
+      "description": "The URL that the recipient of the verification email is sent to if his or her address is successfully verified.",
+      "type": "string"
+    },
+    "FailureRedirectionURL": {
+      "description": "The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "The tags (keys and values) associated with the tenant.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 50
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "TemplateName",
+    "FromEmailAddress",
+    "TemplateSubject",
+    "TemplateContent",
+    "SuccessRedirectionURL",
+    "FailureRedirectionURL"
+  ],
+  "createOnlyProperties": [
+    "/properties/TemplateName"
+  ],
+  "primaryIdentifier": [
+    "/properties/TemplateName"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ses:TagResource",
+      "ses:UntagResource",
+      "ses:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ses:CreateCustomVerificationEmailTemplate",
+        "ses:GetCustomVerificationEmailTemplate",
+        "ses:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ses:GetCustomVerificationEmailTemplate"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ses:UpdateCustomVerificationEmailTemplate",
+        "ses:GetCustomVerificationEmailTemplate",
+        "ses:TagResource",
+        "ses:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ses:DeleteCustomVerificationEmailTemplate",
+        "ses:GetCustomVerificationEmailTemplate"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ses:ListCustomVerificationEmailTemplates"
+      ]
+    }
+  }
+}

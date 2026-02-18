@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1280 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1320 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -1032,6 +1032,10 @@ resource_schema "aws_cloudwatch_alarm" {
   cloudformation_type_name = "AWS::CloudWatch::Alarm"
 }
 
+resource_schema "aws_cloudwatch_alarm_mute_rule" {
+  cloudformation_type_name = "AWS::CloudWatch::AlarmMuteRule"
+}
+
 resource_schema "aws_cloudwatch_composite_alarm" {
   cloudformation_type_name = "AWS::CloudWatch::CompositeAlarm"
 }
@@ -1300,6 +1304,11 @@ resource_schema "aws_connect_instance_storage_config" {
 
 resource_schema "aws_connect_integration_association" {
   cloudformation_type_name               = "AWS::Connect::IntegrationAssociation"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_notification" {
+  cloudformation_type_name               = "AWS::Connect::Notification"
   suppress_plural_data_source_generation = true
 }
 
@@ -1745,6 +1754,16 @@ resource_schema "aws_devopsagent_association" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_devopsagent_service" {
+  cloudformation_type_name = "AWS::DevOpsAgent::Service"
+
+  # Suppression Reason:
+  # AccessibleResources is of unsupported type: list of undefined schema https://github.com/hashicorp/terraform-provider-awscc/issues/3020
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_devopsguru_log_anomaly_detection_integration" {
   cloudformation_type_name = "AWS::DevOpsGuru::LogAnomalyDetectionIntegration"
 }
@@ -1854,6 +1873,10 @@ resource_schema "aws_ec2_ipam_pool" {
 resource_schema "aws_ec2_ipam_pool_cidr" {
   cloudformation_type_name               = "AWS::EC2::IPAMPoolCidr"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_ec2_ipam_prefix_list_resolver" {
+  cloudformation_type_name = "AWS::EC2::IPAMPrefixListResolver"
 }
 
 resource_schema "aws_ec2_ipam_resource_discovery" {
@@ -2354,7 +2377,7 @@ resource_schema "aws_emr_wal_workspace" {
 }
 
 resource_schema "aws_emrcontainers_endpoint" {
-  cloudformation_type_name = "AWS::EMRContainers::Endpoint"
+  cloudformation_type_name                 = "AWS::EMRContainers::Endpoint"
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
@@ -4999,6 +5022,10 @@ resource_schema "aws_ses_contact_list" {
   cloudformation_type_name = "AWS::SES::ContactList"
 }
 
+resource_schema "aws_ses_custom_verification_email_template" {
+  cloudformation_type_name = "AWS::SES::CustomVerificationEmailTemplate"
+}
+
 resource_schema "aws_ses_dedicated_ip_pool" {
   cloudformation_type_name = "AWS::SES::DedicatedIpPool"
 }
@@ -5596,6 +5623,10 @@ resource_schema "aws_timestream_database" {
   cloudformation_type_name = "AWS::Timestream::Database"
 }
 
+resource_schema "aws_timestream_influx_db_cluster" {
+  cloudformation_type_name = "AWS::Timestream::InfluxDBCluster"
+}
+
 resource_schema "aws_timestream_influx_db_instance" {
   cloudformation_type_name = "AWS::Timestream::InfluxDBInstance"
 }
@@ -5841,6 +5872,16 @@ resource_schema "aws_wisdom_quick_response" {
 resource_schema "aws_workspaces_connection_alias" {
   cloudformation_type_name               = "AWS::WorkSpaces::ConnectionAlias"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_workspaces_workspace" {
+  cloudformation_type_name = "AWS::WorkSpaces::Workspace"
+
+  # Suppression Reason:
+  # WorkspaceId overwrites Id for Terraform attribute workspace_id https://github.com/hashicorp/terraform-provider-awscc/issues/3021
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_workspaces_workspaces_pool" {

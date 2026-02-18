@@ -1,0 +1,1 @@
+$ terraform import awscc_ses_custom_verification_email_template.example "template_name"

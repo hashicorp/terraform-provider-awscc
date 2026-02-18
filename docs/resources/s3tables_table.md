@@ -102,7 +102,30 @@ Optional:
 
 Optional:
 
+- `iceberg_partition_spec` (Attributes) Partition specification for an Iceberg table (see [below for nested schema](#nestedatt--iceberg_metadata--iceberg_partition_spec))
 - `iceberg_schema` (Attributes) Contains details about the schema for an Iceberg table (see [below for nested schema](#nestedatt--iceberg_metadata--iceberg_schema))
+- `iceberg_sort_order` (Attributes) Sort order specification for an Iceberg table (see [below for nested schema](#nestedatt--iceberg_metadata--iceberg_sort_order))
+- `table_properties` (Map of String) Iceberg table properties (e.g., format-version, write.parquet.compression-codec)
+
+<a id="nestedatt--iceberg_metadata--iceberg_partition_spec"></a>
+### Nested Schema for `iceberg_metadata.iceberg_partition_spec`
+
+Optional:
+
+- `fields` (Attributes List) List of partition fields (see [below for nested schema](#nestedatt--iceberg_metadata--iceberg_partition_spec--fields))
+- `spec_id` (Number) The partition spec ID (defaults to 0 if not specified)
+
+<a id="nestedatt--iceberg_metadata--iceberg_partition_spec--fields"></a>
+### Nested Schema for `iceberg_metadata.iceberg_partition_spec.fields`
+
+Optional:
+
+- `field_id` (Number) The partition field ID (auto-assigned starting from 1000 if not specified)
+- `name` (String) The name of the partition field
+- `source_id` (Number) The source column ID to partition on
+- `transform` (String) The partition transform function (identity, bucket[N], truncate[N], year, month, day, hour)
+
+
 
 <a id="nestedatt--iceberg_metadata--iceberg_schema"></a>
 ### Nested Schema for `iceberg_metadata.iceberg_schema`
@@ -116,9 +139,30 @@ Optional:
 
 Optional:
 
+- `id` (Number) The unique identifier for the field
 - `name` (String) The name of the field
 - `required` (Boolean) A Boolean value that specifies whether values are required for each row in this field
 - `type` (String) The field type
+
+
+
+<a id="nestedatt--iceberg_metadata--iceberg_sort_order"></a>
+### Nested Schema for `iceberg_metadata.iceberg_sort_order`
+
+Optional:
+
+- `fields` (Attributes List) List of sort fields (see [below for nested schema](#nestedatt--iceberg_metadata--iceberg_sort_order--fields))
+- `order_id` (Number) The sort order ID (defaults to 1 if not specified, 0 is reserved for unsorted)
+
+<a id="nestedatt--iceberg_metadata--iceberg_sort_order--fields"></a>
+### Nested Schema for `iceberg_metadata.iceberg_sort_order.fields`
+
+Optional:
+
+- `direction` (String) Sort direction (asc or desc)
+- `null_order` (String) Null value ordering (nulls-first or nulls-last)
+- `source_id` (Number) The source column ID to sort on
+- `transform` (String) The sort transform function
 
 
 

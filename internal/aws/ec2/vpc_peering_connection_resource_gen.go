@@ -29,6 +29,23 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::EC2::VPCPeeringConnection resource.
 func vPCPeeringConnectionResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AssumeRoleRegion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Region code to use when calling Security Token Service (STS) to assume the PeerRoleArn, if provided.",
+		//	  "type": "string"
+		//	}
+		"assume_role_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Region code to use when calling Security Token Service (STS) to assume the PeerRoleArn, if provided.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// AssumeRoleRegion is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -209,6 +226,7 @@ func vPCPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"assume_role_region":        "AssumeRoleRegion",
 		"key":                       "Key",
 		"peer_owner_id":             "PeerOwnerId",
 		"peer_region":               "PeerRegion",
@@ -222,6 +240,7 @@ func vPCPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/PeerRoleArn",
+		"/properties/AssumeRoleRegion",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

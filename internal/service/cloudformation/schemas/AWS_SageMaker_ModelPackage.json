@@ -1161,6 +1161,7 @@
   "readOnlyProperties": [
     "/properties/ModelPackageArn",
     "/properties/CreationTime",
+    "/properties/LastModifiedTime",
     "/properties/ModelPackageStatus"
   ],
   "createOnlyProperties": [

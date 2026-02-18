@@ -8,8 +8,10 @@ package verifiedpermissions
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -72,6 +74,129 @@ func policyStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: EncryptionSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "properties": {
+		//	    "Default": {
+		//	      "additionalProperties": false,
+		//	      "type": "object"
+		//	    },
+		//	    "KmsEncryptionSettings": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "EncryptionContext": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "Key": {
+		//	          "pattern": "^[a-zA-Z0-9:/_-]+$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Key"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"encryption_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Default
+				"default": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: jsontypes.NormalizedType{},
+					Computed:   true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsEncryptionSettings
+				"kms_encryption_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EncryptionContext
+						"encryption_context": // Pattern: ""
+						schema.MapAttribute{  /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Key
+						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: EncryptionState
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "properties": {
+		//	    "Default": {
+		//	      "additionalProperties": false,
+		//	      "type": "object"
+		//	    },
+		//	    "KmsEncryptionState": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "EncryptionContext": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "Key": {
+		//	          "pattern": "^[a-zA-Z0-9:/_-]+$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Key",
+		//	        "EncryptionContext"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"encryption_state": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Default
+				"default": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: jsontypes.NormalizedType{},
+					Computed:   true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsEncryptionState
+				"kms_encryption_state": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EncryptionContext
+						"encryption_context": // Pattern: ""
+						schema.MapAttribute{  /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Key
+						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: PolicyStoreId
@@ -199,18 +324,24 @@ func policyStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::VerifiedPermissions::PolicyStore").WithTerraformTypeName("awscc_verifiedpermissions_policy_store")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                 "Arn",
-		"cedar_format":        "CedarFormat",
-		"cedar_json":          "CedarJson",
-		"deletion_protection": "DeletionProtection",
-		"description":         "Description",
-		"key":                 "Key",
-		"mode":                "Mode",
-		"policy_store_id":     "PolicyStoreId",
-		"schema":              "Schema",
-		"tags":                "Tags",
-		"validation_settings": "ValidationSettings",
-		"value":               "Value",
+		"arn":                     "Arn",
+		"cedar_format":            "CedarFormat",
+		"cedar_json":              "CedarJson",
+		"default":                 "Default",
+		"deletion_protection":     "DeletionProtection",
+		"description":             "Description",
+		"encryption_context":      "EncryptionContext",
+		"encryption_settings":     "EncryptionSettings",
+		"encryption_state":        "EncryptionState",
+		"key":                     "Key",
+		"kms_encryption_settings": "KmsEncryptionSettings",
+		"kms_encryption_state":    "KmsEncryptionState",
+		"mode":                    "Mode",
+		"policy_store_id":         "PolicyStoreId",
+		"schema":                  "Schema",
+		"tags":                    "Tags",
+		"validation_settings":     "ValidationSettings",
+		"value":                   "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

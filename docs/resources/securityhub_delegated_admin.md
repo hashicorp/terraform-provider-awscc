@@ -28,7 +28,7 @@ resource "awscc_securityhub_delegated_admin" "example" {
 
 ### Required
 
-- `admin_account_id` (String) The AWS-account identifier of the account to designate as the Security Hub administrator account.
+- `admin_account_id` (String) The AWS-account identifier of the account to designate as the Security Hub CSPM administrator account.
 
 ### Read-Only
 

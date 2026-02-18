@@ -26,12 +26,12 @@ func delegatedAdminDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The AWS-account identifier of the account to designate as the Security Hub administrator account.",
+		//	  "description": "The AWS-account identifier of the account to designate as the Security Hub CSPM administrator account.",
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
 		"admin_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS-account identifier of the account to designate as the Security Hub administrator account.",
+			Description: "The AWS-account identifier of the account to designate as the Security Hub CSPM administrator account.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DelegatedAdminIdentifier
