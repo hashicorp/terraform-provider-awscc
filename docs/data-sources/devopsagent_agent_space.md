@@ -26,4 +26,34 @@ Data Source schema for AWS::DevOpsAgent::AgentSpace
 - `created_at` (String) The timestamp when the resource was created.
 - `description` (String) The description of the AgentSpace.
 - `name` (String) The name of the AgentSpace.
+- `operator_app` (Attributes) (see [below for nested schema](#nestedatt--operator_app))
 - `updated_at` (String) The timestamp when the resource was last updated.
+
+<a id="nestedatt--operator_app"></a>
+### Nested Schema for `operator_app`
+
+Read-Only:
+
+- `iam` (Attributes) (see [below for nested schema](#nestedatt--operator_app--iam))
+- `idc` (Attributes) (see [below for nested schema](#nestedatt--operator_app--idc))
+
+<a id="nestedatt--operator_app--iam"></a>
+### Nested Schema for `operator_app.iam`
+
+Read-Only:
+
+- `created_at` (String)
+- `operator_app_role_arn` (String)
+- `updated_at` (String)
+
+
+<a id="nestedatt--operator_app--idc"></a>
+### Nested Schema for `operator_app.idc`
+
+Read-Only:
+
+- `created_at` (String)
+- `idc_application_arn` (String)
+- `idc_instance_arn` (String)
+- `operator_app_role_arn` (String)
+- `updated_at` (String)

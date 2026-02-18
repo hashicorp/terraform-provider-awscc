@@ -31,7 +31,17 @@ Data Source schema for AWS::DirectoryService::SimpleAD
 - `password` (String) The password for the default administrative user named Admin.
 - `short_name` (String) The NetBIOS name for your domain.
 - `size` (String) The size of the directory.
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `vpc_settings` (Attributes) VPC settings of the Simple AD directory server in AWS. (see [below for nested schema](#nestedatt--vpc_settings))
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) The key name of the tag
+- `value` (String) The value for the tag.
+
 
 <a id="nestedatt--vpc_settings"></a>
 ### Nested Schema for `vpc_settings`

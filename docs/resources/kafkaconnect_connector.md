@@ -53,6 +53,7 @@ Optional:
 
 Optional:
 
+- `max_autoscaling_task_count` (Number) The maximum number of tasks allocated to the connector during autoscaling operations.
 - `max_worker_count` (Number) The maximum number of workers for a connector.
 - `mcu_count` (Number) Specifies how many MSK Connect Units (MCU) as the minimum scaling unit.
 - `min_worker_count` (Number) The minimum number of workers for a connector.

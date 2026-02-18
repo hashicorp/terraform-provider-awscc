@@ -73,7 +73,6 @@ resource "awscc_sagemaker_model_package" "example" {
 - `domain` (String) The machine learning domain of the model package you specified.
 - `drift_check_baselines` (Attributes) Represents the drift check baselines that can be used when the model monitor is set using the model package. (see [below for nested schema](#nestedatt--drift_check_baselines))
 - `inference_specification` (Attributes) Details about inference jobs that can be run with models based on this model package. (see [below for nested schema](#nestedatt--inference_specification))
-- `last_modified_time` (String) The time at which the model package was last modified.
 - `metadata_properties` (Attributes) Metadata properties of the tracking entity, trial, or trial component. (see [below for nested schema](#nestedatt--metadata_properties))
 - `model_approval_status` (String) The approval status of the model package.
 - `model_card` (Attributes) The model card associated with the model package. (see [below for nested schema](#nestedatt--model_card))
@@ -96,6 +95,7 @@ resource "awscc_sagemaker_model_package" "example" {
 
 - `creation_time` (String) The time at which the model package was created.
 - `id` (String) Uniquely identifies the resource.
+- `last_modified_time` (String) The time at which the model package was last modified.
 - `model_package_arn` (String) The Amazon Resource Name (ARN) of the model package group.
 - `model_package_status` (String) The current status of the model package.
 

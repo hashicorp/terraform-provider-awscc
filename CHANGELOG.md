@@ -1,5 +1,22 @@
 ## 1.72.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_cloudwatch_alarm_mute_rule`
+* **New Data Source:** `awscc_cloudwatch_alarm_mute_rules`
+* **New Data Source:** `awscc_connect_notification`
+* **New Data Source:** `awscc_ec2_ipam_prefix_list_resolver`
+* **New Data Source:** `awscc_ec2_ipam_prefix_list_resolvers`
+* **New Data Source:** `awscc_ses_custom_verification_email_template`
+* **New Data Source:** `awscc_ses_custom_verification_email_templates`
+* **New Data Source:** `awscc_timestream_influx_db_cluster`
+* **New Data Source:** `awscc_timestream_influx_db_clusters`
+* **New Resource:** `awscc_cloudwatch_alarm_mute_rule`
+* **New Resource:** `awscc_connect_notification`
+* **New Resource:** `awscc_ec2_ipam_prefix_list_resolver`
+* **New Resource:** `awscc_ses_custom_verification_email_template`
+* **New Resource:** `awscc_timestream_influx_db_cluster`
+
 ## 1.71.0 (Feburary 11, 2026)
 
 FEATURES:

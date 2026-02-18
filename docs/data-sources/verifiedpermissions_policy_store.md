@@ -24,6 +24,8 @@ Data Source schema for AWS::VerifiedPermissions::PolicyStore
 - `arn` (String)
 - `deletion_protection` (Attributes) (see [below for nested schema](#nestedatt--deletion_protection))
 - `description` (String)
+- `encryption_settings` (Attributes) (see [below for nested schema](#nestedatt--encryption_settings))
+- `encryption_state` (Attributes) (see [below for nested schema](#nestedatt--encryption_state))
 - `policy_store_id` (String)
 - `schema` (Attributes) (see [below for nested schema](#nestedatt--schema))
 - `tags` (Attributes List) The tags to add to the policy store (see [below for nested schema](#nestedatt--tags))
@@ -35,6 +37,42 @@ Data Source schema for AWS::VerifiedPermissions::PolicyStore
 Read-Only:
 
 - `mode` (String)
+
+
+<a id="nestedatt--encryption_settings"></a>
+### Nested Schema for `encryption_settings`
+
+Read-Only:
+
+- `default` (String)
+- `kms_encryption_settings` (Attributes) (see [below for nested schema](#nestedatt--encryption_settings--kms_encryption_settings))
+
+<a id="nestedatt--encryption_settings--kms_encryption_settings"></a>
+### Nested Schema for `encryption_settings.kms_encryption_settings`
+
+Read-Only:
+
+- `encryption_context` (Map of String)
+- `key` (String)
+
+
+
+<a id="nestedatt--encryption_state"></a>
+### Nested Schema for `encryption_state`
+
+Read-Only:
+
+- `default` (String)
+- `kms_encryption_state` (Attributes) (see [below for nested schema](#nestedatt--encryption_state--kms_encryption_state))
+
+<a id="nestedatt--encryption_state--kms_encryption_state"></a>
+### Nested Schema for `encryption_state.kms_encryption_state`
+
+Read-Only:
+
+- `encryption_context` (Map of String)
+- `key` (String)
+
 
 
 <a id="nestedatt--schema"></a>

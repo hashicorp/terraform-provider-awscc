@@ -21,6 +21,6 @@ Data Source schema for AWS::SecurityHub::DelegatedAdmin
 
 ### Read-Only
 
-- `admin_account_id` (String) The AWS-account identifier of the account to designate as the Security Hub administrator account.
+- `admin_account_id` (String) The AWS-account identifier of the account to designate as the Security Hub CSPM administrator account.
 - `delegated_admin_identifier` (String)
 - `status` (String)
