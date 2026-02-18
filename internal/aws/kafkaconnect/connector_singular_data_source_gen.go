@@ -46,6 +46,10 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "Details about auto scaling of a connector.",
 		//	      "properties": {
+		//	        "MaxAutoscalingTaskCount": {
+		//	          "description": "The maximum number of tasks allocated to the connector during autoscaling operations.",
+		//	          "type": "integer"
+		//	        },
 		//	        "MaxWorkerCount": {
 		//	          "description": "The maximum number of workers for a connector.",
 		//	          "type": "integer"
@@ -139,6 +143,11 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: AutoScaling
 				"auto_scaling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MaxAutoscalingTaskCount
+						"max_autoscaling_task_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The maximum number of tasks allocated to the connector during autoscaling operations.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: MaxWorkerCount
 						"max_worker_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Description: "The maximum number of workers for a connector.",
@@ -797,6 +806,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key":                                 "Key",
 		"log_delivery":                        "LogDelivery",
 		"log_group":                           "LogGroup",
+		"max_autoscaling_task_count":          "MaxAutoscalingTaskCount",
 		"max_worker_count":                    "MaxWorkerCount",
 		"mcu_count":                           "McuCount",
 		"min_worker_count":                    "MinWorkerCount",

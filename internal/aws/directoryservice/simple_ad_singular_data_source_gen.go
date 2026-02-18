@@ -139,6 +139,54 @@ func simpleADDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The size of the directory.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag.",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcSettings
 		// CloudFormation resource type schema:
 		//
@@ -207,11 +255,14 @@ func simpleADDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"directory_id":     "DirectoryId",
 		"dns_ip_addresses": "DnsIpAddresses",
 		"enable_sso":       "EnableSso",
+		"key":              "Key",
 		"name":             "Name",
 		"password":         "Password",
 		"short_name":       "ShortName",
 		"size":             "Size",
 		"subnet_ids":       "SubnetIds",
+		"tags":             "Tags",
+		"value":            "Value",
 		"vpc_id":           "VpcId",
 		"vpc_settings":     "VpcSettings",
 	})

@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -68,6 +69,53 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "Contains details about the metadata for an Iceberg table.",
 		//	  "properties": {
+		//	    "IcebergPartitionSpec": {
+		//	      "additionalProperties": false,
+		//	      "description": "Partition specification for an Iceberg table",
+		//	      "properties": {
+		//	        "Fields": {
+		//	          "description": "List of partition fields",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "A partition field specification for an Iceberg table",
+		//	            "properties": {
+		//	              "FieldId": {
+		//	                "description": "The partition field ID (auto-assigned starting from 1000 if not specified)",
+		//	                "type": "integer"
+		//	              },
+		//	              "Name": {
+		//	                "description": "The name of the partition field",
+		//	                "type": "string"
+		//	              },
+		//	              "SourceId": {
+		//	                "description": "The source column ID to partition on",
+		//	                "type": "integer"
+		//	              },
+		//	              "Transform": {
+		//	                "description": "The partition transform function (identity, bucket[N], truncate[N], year, month, day, hour)",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "SourceId",
+		//	              "Transform",
+		//	              "Name"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "SpecId": {
+		//	          "description": "The partition spec ID (defaults to 0 if not specified)",
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Fields"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "IcebergSchema": {
 		//	      "additionalProperties": false,
 		//	      "description": "Contains details about the schema for an Iceberg table",
@@ -79,6 +127,10 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "additionalProperties": false,
 		//	            "description": "Contains details about the schema for an Iceberg table",
 		//	            "properties": {
+		//	              "Id": {
+		//	                "description": "The unique identifier for the field",
+		//	                "type": "integer"
+		//	              },
 		//	              "Name": {
 		//	                "description": "The name of the field",
 		//	                "type": "string"
@@ -105,6 +157,72 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "SchemaFieldList"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "IcebergSortOrder": {
+		//	      "additionalProperties": false,
+		//	      "description": "Sort order specification for an Iceberg table",
+		//	      "properties": {
+		//	        "Fields": {
+		//	          "description": "List of sort fields",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "A sort field specification for an Iceberg table",
+		//	            "properties": {
+		//	              "Direction": {
+		//	                "description": "Sort direction (asc or desc)",
+		//	                "enum": [
+		//	                  "asc",
+		//	                  "desc"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "NullOrder": {
+		//	                "description": "Null value ordering (nulls-first or nulls-last)",
+		//	                "enum": [
+		//	                  "nulls-first",
+		//	                  "nulls-last"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "SourceId": {
+		//	                "description": "The source column ID to sort on",
+		//	                "type": "integer"
+		//	              },
+		//	              "Transform": {
+		//	                "description": "The sort transform function",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "SourceId",
+		//	              "Transform",
+		//	              "Direction",
+		//	              "NullOrder"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "OrderId": {
+		//	          "description": "The sort order ID (defaults to 1 if not specified, 0 is reserved for unsorted)",
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Fields"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "TableProperties": {
+		//	      "additionalProperties": false,
+		//	      "description": "Iceberg table properties (e.g., format-version, write.parquet.compression-codec)",
+		//	      "patternProperties": {
+		//	        "": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -114,6 +232,47 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"iceberg_metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IcebergPartitionSpec
+				"iceberg_partition_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Fields
+						"fields": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: FieldId
+									"field_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The partition field ID (auto-assigned starting from 1000 if not specified)",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Name
+									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The name of the partition field",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: SourceId
+									"source_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The source column ID to partition on",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Transform
+									"transform": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The partition transform function (identity, bucket[N], truncate[N], year, month, day, hour)",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "List of partition fields",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SpecId
+						"spec_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The partition spec ID (defaults to 0 if not specified)",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Partition specification for an Iceberg table",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: IcebergSchema
 				"iceberg_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -121,6 +280,11 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 						"schema_field_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Id
+									"id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The unique identifier for the field",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
 									// Property: Name
 									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The name of the field",
@@ -143,6 +307,54 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Contains details about the schema for an Iceberg table",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IcebergSortOrder
+				"iceberg_sort_order": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Fields
+						"fields": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Direction
+									"direction": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Sort direction (asc or desc)",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: NullOrder
+									"null_order": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Null value ordering (nulls-first or nulls-last)",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: SourceId
+									"source_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The source column ID to sort on",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Transform
+									"transform": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The sort transform function",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "List of sort fields",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: OrderId
+						"order_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The sort order ID (defaults to 1 if not specified, 0 is reserved for unsorted)",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Sort order specification for an Iceberg table",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TableProperties
+				"table_properties":  // Pattern: ""
+				schema.MapAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Iceberg table properties (e.g., format-version, write.parquet.compression-codec)",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -393,25 +605,37 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"compaction":                  "Compaction",
+		"direction":                   "Direction",
+		"field_id":                    "FieldId",
+		"fields":                      "Fields",
 		"iceberg_metadata":            "IcebergMetadata",
+		"iceberg_partition_spec":      "IcebergPartitionSpec",
 		"iceberg_schema":              "IcebergSchema",
+		"iceberg_sort_order":          "IcebergSortOrder",
+		"id":                          "Id",
 		"key":                         "Key",
 		"max_snapshot_age_hours":      "MaxSnapshotAgeHours",
 		"min_snapshots_to_keep":       "MinSnapshotsToKeep",
 		"name":                        "Name",
 		"namespace":                   "Namespace",
+		"null_order":                  "NullOrder",
 		"open_table_format":           "OpenTableFormat",
+		"order_id":                    "OrderId",
 		"required":                    "Required",
 		"schema_field_list":           "SchemaFieldList",
 		"snapshot_management":         "SnapshotManagement",
+		"source_id":                   "SourceId",
+		"spec_id":                     "SpecId",
 		"status":                      "Status",
 		"storage_class":               "StorageClass",
 		"storage_class_configuration": "StorageClassConfiguration",
 		"table_arn":                   "TableARN",
 		"table_bucket_arn":            "TableBucketARN",
 		"table_name":                  "TableName",
+		"table_properties":            "TableProperties",
 		"tags":                        "Tags",
 		"target_file_size_mb":         "TargetFileSizeMB",
+		"transform":                   "Transform",
 		"type":                        "Type",
 		"value":                       "Value",
 		"version_token":               "VersionToken",

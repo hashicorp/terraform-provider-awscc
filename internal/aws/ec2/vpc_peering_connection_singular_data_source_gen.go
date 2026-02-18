@@ -22,6 +22,17 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::EC2::VPCPeeringConnection resource.
 func vPCPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AssumeRoleRegion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Region code to use when calling Security Token Service (STS) to assume the PeerRoleArn, if provided.",
+		//	  "type": "string"
+		//	}
+		"assume_role_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Region code to use when calling Security Token Service (STS) to assume the PeerRoleArn, if provided.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -147,6 +158,7 @@ func vPCPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPCPeeringConnection").WithTerraformTypeName("awscc_ec2_vpc_peering_connection")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"assume_role_region":        "AssumeRoleRegion",
 		"key":                       "Key",
 		"peer_owner_id":             "PeerOwnerId",
 		"peer_region":               "PeerRegion",

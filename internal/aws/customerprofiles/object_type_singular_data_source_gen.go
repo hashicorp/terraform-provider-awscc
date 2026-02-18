@@ -233,7 +233,9 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "HOTEL_RESERVATION",
 		//	                  "LOYALTY",
 		//	                  "LOYALTY_TRANSACTION",
-		//	                  "LOYALTY_PROMOTION"
+		//	                  "LOYALTY_PROMOTION",
+		//	                  "WEB_ANALYTICS",
+		//	                  "DEVICE"
 		//	                ],
 		//	                "type": "string"
 		//	              },
