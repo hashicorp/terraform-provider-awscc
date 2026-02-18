@@ -2570,7 +2570,6 @@ func modelPackageResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The time at which the model package was last modified.",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

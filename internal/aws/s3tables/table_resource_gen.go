@@ -15,11 +15,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -101,6 +103,53 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "Contains details about the metadata for an Iceberg table.",
 		//	  "properties": {
+		//	    "IcebergPartitionSpec": {
+		//	      "additionalProperties": false,
+		//	      "description": "Partition specification for an Iceberg table",
+		//	      "properties": {
+		//	        "Fields": {
+		//	          "description": "List of partition fields",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "A partition field specification for an Iceberg table",
+		//	            "properties": {
+		//	              "FieldId": {
+		//	                "description": "The partition field ID (auto-assigned starting from 1000 if not specified)",
+		//	                "type": "integer"
+		//	              },
+		//	              "Name": {
+		//	                "description": "The name of the partition field",
+		//	                "type": "string"
+		//	              },
+		//	              "SourceId": {
+		//	                "description": "The source column ID to partition on",
+		//	                "type": "integer"
+		//	              },
+		//	              "Transform": {
+		//	                "description": "The partition transform function (identity, bucket[N], truncate[N], year, month, day, hour)",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "SourceId",
+		//	              "Transform",
+		//	              "Name"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "SpecId": {
+		//	          "description": "The partition spec ID (defaults to 0 if not specified)",
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Fields"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "IcebergSchema": {
 		//	      "additionalProperties": false,
 		//	      "description": "Contains details about the schema for an Iceberg table",
@@ -112,6 +161,10 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	            "additionalProperties": false,
 		//	            "description": "Contains details about the schema for an Iceberg table",
 		//	            "properties": {
+		//	              "Id": {
+		//	                "description": "The unique identifier for the field",
+		//	                "type": "integer"
+		//	              },
 		//	              "Name": {
 		//	                "description": "The name of the field",
 		//	                "type": "string"
@@ -138,6 +191,72 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	        "SchemaFieldList"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "IcebergSortOrder": {
+		//	      "additionalProperties": false,
+		//	      "description": "Sort order specification for an Iceberg table",
+		//	      "properties": {
+		//	        "Fields": {
+		//	          "description": "List of sort fields",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "A sort field specification for an Iceberg table",
+		//	            "properties": {
+		//	              "Direction": {
+		//	                "description": "Sort direction (asc or desc)",
+		//	                "enum": [
+		//	                  "asc",
+		//	                  "desc"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "NullOrder": {
+		//	                "description": "Null value ordering (nulls-first or nulls-last)",
+		//	                "enum": [
+		//	                  "nulls-first",
+		//	                  "nulls-last"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "SourceId": {
+		//	                "description": "The source column ID to sort on",
+		//	                "type": "integer"
+		//	              },
+		//	              "Transform": {
+		//	                "description": "The sort transform function",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "SourceId",
+		//	              "Transform",
+		//	              "Direction",
+		//	              "NullOrder"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "OrderId": {
+		//	          "description": "The sort order ID (defaults to 1 if not specified, 0 is reserved for unsorted)",
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Fields"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "TableProperties": {
+		//	      "additionalProperties": false,
+		//	      "description": "Iceberg table properties (e.g., format-version, write.parquet.compression-codec)",
+		//	      "patternProperties": {
+		//	        "": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -147,6 +266,88 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"iceberg_metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IcebergPartitionSpec
+				"iceberg_partition_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Fields
+						"fields": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: FieldId
+									"field_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The partition field ID (auto-assigned starting from 1000 if not specified)",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Name
+									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The name of the partition field",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SourceId
+									"source_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The source column ID to partition on",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											fwvalidators.NotNullInt64(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Transform
+									"transform": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The partition transform function (identity, bucket[N], truncate[N], year, month, day, hour)",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "List of partition fields",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								fwvalidators.NotNullList(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SpecId
+						"spec_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The partition spec ID (defaults to 0 if not specified)",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Partition specification for an Iceberg table",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: IcebergSchema
 				"iceberg_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -154,6 +355,15 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 						"schema_field_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Id
+									"id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The unique identifier for the field",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
 									// Property: Name
 									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Description: "The name of the field",
@@ -209,6 +419,110 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: IcebergSortOrder
+				"iceberg_sort_order": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Fields
+						"fields": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Direction
+									"direction": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Sort direction (asc or desc)",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"asc",
+												"desc",
+											),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: NullOrder
+									"null_order": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Null value ordering (nulls-first or nulls-last)",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"nulls-first",
+												"nulls-last",
+											),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SourceId
+									"source_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The source column ID to sort on",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											fwvalidators.NotNullInt64(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Transform
+									"transform": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The sort transform function",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "List of sort fields",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								fwvalidators.NotNullList(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: OrderId
+						"order_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The sort order ID (defaults to 1 if not specified, 0 is reserved for unsorted)",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Sort order specification for an Iceberg table",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TableProperties
+				"table_properties":  // Pattern: ""
+				schema.MapAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Iceberg table properties (e.g., format-version, write.parquet.compression-codec)",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+						mapplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -571,25 +885,37 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"compaction":                  "Compaction",
+		"direction":                   "Direction",
+		"field_id":                    "FieldId",
+		"fields":                      "Fields",
 		"iceberg_metadata":            "IcebergMetadata",
+		"iceberg_partition_spec":      "IcebergPartitionSpec",
 		"iceberg_schema":              "IcebergSchema",
+		"iceberg_sort_order":          "IcebergSortOrder",
+		"id":                          "Id",
 		"key":                         "Key",
 		"max_snapshot_age_hours":      "MaxSnapshotAgeHours",
 		"min_snapshots_to_keep":       "MinSnapshotsToKeep",
 		"name":                        "Name",
 		"namespace":                   "Namespace",
+		"null_order":                  "NullOrder",
 		"open_table_format":           "OpenTableFormat",
+		"order_id":                    "OrderId",
 		"required":                    "Required",
 		"schema_field_list":           "SchemaFieldList",
 		"snapshot_management":         "SnapshotManagement",
+		"source_id":                   "SourceId",
+		"spec_id":                     "SpecId",
 		"status":                      "Status",
 		"storage_class":               "StorageClass",
 		"storage_class_configuration": "StorageClassConfiguration",
 		"table_arn":                   "TableARN",
 		"table_bucket_arn":            "TableBucketARN",
 		"table_name":                  "TableName",
+		"table_properties":            "TableProperties",
 		"tags":                        "Tags",
 		"target_file_size_mb":         "TargetFileSizeMB",
+		"transform":                   "Transform",
 		"type":                        "Type",
 		"value":                       "Value",
 		"version_token":               "VersionToken",

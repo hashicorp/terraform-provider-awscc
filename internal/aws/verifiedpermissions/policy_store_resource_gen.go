@@ -7,16 +7,20 @@ package verifiedpermissions
 
 import (
 	"context"
+	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -107,6 +111,157 @@ func policyStoreResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EncryptionSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "properties": {
+		//	    "Default": {
+		//	      "additionalProperties": false,
+		//	      "type": "object"
+		//	    },
+		//	    "KmsEncryptionSettings": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "EncryptionContext": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "Key": {
+		//	          "pattern": "^[a-zA-Z0-9:/_-]+$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Key"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"encryption_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Default
+				"default": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: jsontypes.NormalizedType{},
+					Optional:   true,
+					Computed:   true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: KmsEncryptionSettings
+				"kms_encryption_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EncryptionContext
+						"encryption_context": // Pattern: ""
+						schema.MapAttribute{  /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+								mapplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Key
+						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9:/_-]+$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// EncryptionSettings is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: EncryptionState
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "properties": {
+		//	    "Default": {
+		//	      "additionalProperties": false,
+		//	      "type": "object"
+		//	    },
+		//	    "KmsEncryptionState": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "EncryptionContext": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "Key": {
+		//	          "pattern": "^[a-zA-Z0-9:/_-]+$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Key",
+		//	        "EncryptionContext"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"encryption_state": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Default
+				"default": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: jsontypes.NormalizedType{},
+					Computed:   true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsEncryptionState
+				"kms_encryption_state": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EncryptionContext
+						"encryption_context": // Pattern: ""
+						schema.MapAttribute{  /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Key
+						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PolicyStoreId
@@ -285,20 +440,29 @@ func policyStoreResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                 "Arn",
-		"cedar_format":        "CedarFormat",
-		"cedar_json":          "CedarJson",
-		"deletion_protection": "DeletionProtection",
-		"description":         "Description",
-		"key":                 "Key",
-		"mode":                "Mode",
-		"policy_store_id":     "PolicyStoreId",
-		"schema":              "Schema",
-		"tags":                "Tags",
-		"validation_settings": "ValidationSettings",
-		"value":               "Value",
+		"arn":                     "Arn",
+		"cedar_format":            "CedarFormat",
+		"cedar_json":              "CedarJson",
+		"default":                 "Default",
+		"deletion_protection":     "DeletionProtection",
+		"description":             "Description",
+		"encryption_context":      "EncryptionContext",
+		"encryption_settings":     "EncryptionSettings",
+		"encryption_state":        "EncryptionState",
+		"key":                     "Key",
+		"kms_encryption_settings": "KmsEncryptionSettings",
+		"kms_encryption_state":    "KmsEncryptionState",
+		"mode":                    "Mode",
+		"policy_store_id":         "PolicyStoreId",
+		"schema":                  "Schema",
+		"tags":                    "Tags",
+		"validation_settings":     "ValidationSettings",
+		"value":                   "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/EncryptionSettings",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

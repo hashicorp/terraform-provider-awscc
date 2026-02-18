@@ -12,12 +12,14 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -111,6 +113,163 @@ func agentSpaceResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
+		// Property: OperatorApp
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Iam": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CreatedAt": {
+		//	          "format": "date-time",
+		//	          "type": "string"
+		//	        },
+		//	        "OperatorAppRoleArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "UpdatedAt": {
+		//	          "format": "date-time",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "OperatorAppRoleArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Idc": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CreatedAt": {
+		//	          "format": "date-time",
+		//	          "type": "string"
+		//	        },
+		//	        "IdcApplicationArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "IdcInstanceArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "OperatorAppRoleArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "UpdatedAt": {
+		//	          "format": "date-time",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "OperatorAppRoleArn",
+		//	        "IdcInstanceArn"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"operator_app": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Iam
+				"iam": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CreatedAt
+						"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType: timetypes.RFC3339Type{},
+							Computed:   true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: OperatorAppRoleArn
+						"operator_app_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: UpdatedAt
+						"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType: timetypes.RFC3339Type{},
+							Computed:   true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Idc
+				"idc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CreatedAt
+						"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType: timetypes.RFC3339Type{},
+							Computed:   true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: IdcApplicationArn
+						"idc_application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: IdcInstanceArn
+						"idc_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: OperatorAppRoleArn
+						"operator_app_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: UpdatedAt
+						"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType: timetypes.RFC3339Type{},
+							Computed:   true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -156,12 +315,18 @@ func agentSpaceResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"agent_space_id": "AgentSpaceId",
-		"arn":            "Arn",
-		"created_at":     "CreatedAt",
-		"description":    "Description",
-		"name":           "Name",
-		"updated_at":     "UpdatedAt",
+		"agent_space_id":        "AgentSpaceId",
+		"arn":                   "Arn",
+		"created_at":            "CreatedAt",
+		"description":           "Description",
+		"iam":                   "Iam",
+		"idc":                   "Idc",
+		"idc_application_arn":   "IdcApplicationArn",
+		"idc_instance_arn":      "IdcInstanceArn",
+		"name":                  "Name",
+		"operator_app":          "OperatorApp",
+		"operator_app_role_arn": "OperatorAppRoleArn",
+		"updated_at":            "UpdatedAt",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
