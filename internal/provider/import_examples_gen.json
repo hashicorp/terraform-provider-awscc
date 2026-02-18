@@ -1037,6 +1037,11 @@
         "identifier": ["AlarmName"]
     },
     {
+        "resource": "awscc_cloudwatch_alarm_mute_rule",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_cloudwatch_composite_alarm",
         "generateListResource": true,
         "identifier": ["AlarmName"]
@@ -1289,6 +1294,10 @@
     {
         "resource": "awscc_connect_integration_association",
         "identifier": ["InstanceId","IntegrationType","IntegrationArn"]
+    },
+    {
+        "resource": "awscc_connect_notification",
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_connect_phone_number",
@@ -1811,6 +1820,11 @@
     {
         "resource": "awscc_ec2_ipam_pool_cidr",
         "identifier": ["IpamPoolId","IpamPoolCidrId"]
+    },
+    {
+        "resource": "awscc_ec2_ipam_prefix_list_resolver",
+        "generateListResource": true,
+        "identifier": ["IpamPrefixListResolverId"]
     },
     {
         "resource": "awscc_ec2_ipam_resource_discovery",
@@ -5212,6 +5226,11 @@
         "identifier": ["ContactListName"]
     },
     {
+        "resource": "awscc_ses_custom_verification_email_template",
+        "generateListResource": true,
+        "identifier": ["TemplateName"]
+    },
+    {
         "resource": "awscc_ses_dedicated_ip_pool",
         "generateListResource": true,
         "identifier": ["PoolName"]
@@ -5856,6 +5875,11 @@
         "resource": "awscc_timestream_database",
         "generateListResource": true,
         "identifier": ["DatabaseName"]
+    },
+    {
+        "resource": "awscc_timestream_influx_db_cluster",
+        "generateListResource": true,
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_timestream_influx_db_instance",
