@@ -9,7 +9,7 @@
       "pattern": "^[0-9]{12}/[a-zA-Z0-9-]{1,32}$"
     },
     "AdminAccountId": {
-      "description": "The AWS-account identifier of the account to designate as the Security Hub administrator account.",
+      "description": "The AWS-account identifier of the account to designate as the Security Hub CSPM administrator account.",
       "type": "string",
       "pattern": "^[0-9]{12}$"
     },

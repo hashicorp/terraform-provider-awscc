@@ -92,6 +92,84 @@
         "Key",
         "Value"
       ]
+    },
+    "EncryptionSettings": {
+      "type": "object",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "KmsEncryptionSettings"
+          ],
+          "properties": {
+            "KmsEncryptionSettings": {
+              "$ref": "#/definitions/KmsEncryptionSettings"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Default"
+          ],
+          "properties": {
+            "Default": {
+              "$ref": "#/definitions/Default"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Default": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "KmsEncryptionState": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "$ref": "#/definitions/KmsKey"
+        },
+        "EncryptionContext": {
+          "$ref": "#/definitions/EncryptionContext"
+        }
+      },
+      "required": [
+        "Key",
+        "EncryptionContext"
+      ],
+      "additionalProperties": false
+    },
+    "KmsEncryptionSettings": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "$ref": "#/definitions/KmsKey"
+        },
+        "EncryptionContext": {
+          "$ref": "#/definitions/EncryptionContext"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "additionalProperties": false
+    },
+    "KmsKey": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9:/_-]+$"
+    },
+    "EncryptionContext": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -121,6 +199,9 @@
     "DeletionProtection": {
       "$ref": "#/definitions/DeletionProtection"
     },
+    "EncryptionSettings": {
+      "$ref": "#/definitions/EncryptionSettings"
+    },
     "Tags": {
       "description": "The tags to add to the policy store",
       "type": "array",
@@ -129,14 +210,47 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "EncryptionState": {
+      "type": "object",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "KmsEncryptionState"
+          ],
+          "properties": {
+            "KmsEncryptionState": {
+              "$ref": "#/definitions/KmsEncryptionState"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "Default"
+          ],
+          "properties": {
+            "Default": {
+              "$ref": "#/definitions/Default"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
     }
   },
   "required": [
     "ValidationSettings"
   ],
+  "writeOnlyProperties": [
+    "/properties/EncryptionSettings"
+  ],
   "readOnlyProperties": [
     "/properties/Arn",
-    "/properties/PolicyStoreId"
+    "/properties/PolicyStoreId",
+    "/properties/EncryptionState"
   ],
   "primaryIdentifier": [
     "/properties/PolicyStoreId"
@@ -163,7 +277,13 @@
         "verifiedpermissions:CreatePolicyStore",
         "verifiedpermissions:TagResource",
         "verifiedpermissions:GetPolicyStore",
-        "verifiedpermissions:PutSchema"
+        "verifiedpermissions:PutSchema",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo"
       ]
     },
     "read": {
@@ -180,7 +300,8 @@
         "verifiedpermissions:TagResource",
         "verifiedpermissions:UntagResource",
         "verifiedpermissions:GetSchema",
-        "verifiedpermissions:PutSchema"
+        "verifiedpermissions:PutSchema",
+        "kms:Decrypt"
       ]
     },
     "delete": {

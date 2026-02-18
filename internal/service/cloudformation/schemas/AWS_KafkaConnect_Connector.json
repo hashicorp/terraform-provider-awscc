@@ -145,6 +145,10 @@
             4,
             8
           ]
+        },
+        "MaxAutoscalingTaskCount": {
+          "description": "The maximum number of tasks allocated to the connector during autoscaling operations.",
+          "type": "integer"
         }
       },
       "required": [

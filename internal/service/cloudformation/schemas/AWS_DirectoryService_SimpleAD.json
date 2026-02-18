@@ -4,6 +4,29 @@
   "documentationUrl": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-directoryservice-simplead.html",
   "additionalProperties": false,
   "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "description": "The key name of the tag",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "description": "The value for the tag.",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
     "VpcSettings": {
       "$comment": "Contains VPC information",
       "type": "object",
@@ -78,6 +101,14 @@
     "VpcSettings": {
       "description": "VPC settings of the Simple AD directory server in AWS.",
       "$ref": "#/definitions/VpcSettings"
+    },
+    "Tags": {
+      "type": "array",
+      "insertionOrder": false,
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     }
   },
   "required": [
@@ -86,10 +117,16 @@
     "Name"
   ],
   "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ds:AddTagsToResource",
+      "ds:RemoveTagsFromResource",
+      "ds:ListTagsForResource"
+    ]
   },
   "readOnlyProperties": [
     "/properties/Alias",
@@ -118,6 +155,8 @@
         "ds:CreateAlias",
         "ds:EnableSso",
         "ds:DescribeDirectories",
+        "ds:AddTagsToResource",
+        "ds:ListTagsForResource",
         "ec2:DescribeSubnets",
         "ec2:DescribeVpcs",
         "ec2:CreateSecurityGroup",
@@ -126,6 +165,7 @@
         "ec2:AuthorizeSecurityGroupIngress",
         "ec2:AuthorizeSecurityGroupEgress",
         "ec2:CreateTags",
+        "ec2:DescribeTags",
         "ec2:RevokeSecurityGroupIngress",
         "ec2:RevokeSecurityGroupEgress"
       ],
@@ -133,14 +173,21 @@
     },
     "read": {
       "permissions": [
-        "ds:DescribeDirectories"
+        "ds:DescribeDirectories",
+        "ds:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
         "ds:EnableSso",
         "ds:DisableSso",
-        "ds:DescribeDirectories"
+        "ds:DescribeDirectories",
+        "ds:AddTagsToResource",
+        "ds:RemoveTagsFromResource",
+        "ds:ListTagsForResource",
+        "ec2:CreateTags",
+        "ec2:DeleteTags",
+        "ec2:DescribeTags"
       ]
     },
     "delete": {

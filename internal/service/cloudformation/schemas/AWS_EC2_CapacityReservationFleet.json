@@ -7,7 +7,7 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/TagSpecifications",
+    "tagProperty": "/properties/TagSpecifications/*/Tags",
     "permissions": [
       "ec2:CreateTags",
       "ec2:DeleteTags"
