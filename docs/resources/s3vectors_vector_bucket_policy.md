@@ -19,7 +19,7 @@ Create an S3 Vectors bucket policy with vector-specific permissions
 ```terraform
 resource "awscc_s3vectors_vector_bucket" "example" {
   vector_bucket_name = "example-vector-bucket"
-  
+
   tags = [
     {
       key   = "Name"
@@ -34,7 +34,7 @@ resource "awscc_s3vectors_vector_bucket" "example" {
 
 resource "awscc_s3vectors_vector_bucket_policy" "example" {
   vector_bucket_name = awscc_s3vectors_vector_bucket.example.vector_bucket_name
-  
+
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
