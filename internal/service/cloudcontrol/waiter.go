@@ -30,6 +30,11 @@ func RetryGetResourceRequestStatus(pProgressEvent **types.ProgressEvent) func(co
 					return false, nil
 				}
 
+				// Retry on throttling errors
+				if progressEvent.ErrorCode == types.HandlerErrorCodeThrottling {
+					return true, err
+				}
+
 				// Build enhanced error message with hook information
 				waiterErr := newWaiterErr(string(value), aws.ToString(progressEvent.StatusMessage))
 				waiterErr.withErrorCode(string(progressEvent.ErrorCode))
