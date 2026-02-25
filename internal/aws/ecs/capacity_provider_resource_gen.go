@@ -241,9 +241,27 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	        "CapacityOptionType": {
 		//	          "enum": [
 		//	            "ON_DEMAND",
-		//	            "SPOT"
+		//	            "SPOT",
+		//	            "RESERVED"
 		//	          ],
 		//	          "type": "string"
+		//	        },
+		//	        "CapacityReservations": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ReservationGroupArn": {
+		//	              "type": "string"
+		//	            },
+		//	            "ReservationPreference": {
+		//	              "enum": [
+		//	                "RESERVATIONS_ONLY",
+		//	                "RESERVATIONS_FIRST",
+		//	                "RESERVATIONS_EXCLUDED"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        },
 		//	        "Ec2InstanceProfileArn": {
 		//	          "type": "string"
@@ -622,10 +640,44 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 								stringvalidator.OneOf(
 									"ON_DEMAND",
 									"SPOT",
+									"RESERVED",
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: CapacityReservations
+						"capacity_reservations": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ReservationGroupArn
+								"reservation_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ReservationPreference
+								"reservation_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"RESERVATIONS_ONLY",
+											"RESERVATIONS_FIRST",
+											"RESERVATIONS_EXCLUDED",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Ec2InstanceProfileArn
@@ -1339,6 +1391,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		"baseline_ebs_bandwidth_mbps":    "BaselineEbsBandwidthMbps",
 		"burstable_performance":          "BurstablePerformance",
 		"capacity_option_type":           "CapacityOptionType",
+		"capacity_reservations":          "CapacityReservations",
 		"cluster_name":                   "ClusterName",
 		"cpu_manufacturers":              "CpuManufacturers",
 		"ec_2_instance_profile_arn":      "Ec2InstanceProfileArn",
@@ -1372,6 +1425,8 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		"on_demand_max_price_percentage_over_lowest_price": "OnDemandMaxPricePercentageOverLowestPrice",
 		"propagate_tags":                              "PropagateTags",
 		"require_hibernate_support":                   "RequireHibernateSupport",
+		"reservation_group_arn":                       "ReservationGroupArn",
+		"reservation_preference":                      "ReservationPreference",
 		"scale_in_after":                              "ScaleInAfter",
 		"security_groups":                             "SecurityGroups",
 		"spot_max_price_percentage_over_lowest_price": "SpotMaxPricePercentageOverLowestPrice",

@@ -144,7 +144,6 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "McuCount",
 		//	        "WorkerCount"
 		//	      ],
 		//	      "type": "object"
@@ -285,7 +284,6 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 									4,
 									8,
 								),
-								fwvalidators.NotNullInt64(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),

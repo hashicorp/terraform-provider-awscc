@@ -43,6 +43,7 @@ resource "awscc_cases_domain" "example" {
 
 ### Optional
 
+- `attributes` (Attributes) Field-type specific attributes that control rendering and validation behavior (see [below for nested schema](#nestedatt--attributes))
 - `description` (String) A description explaining the purpose and usage of this field in cases. Helps agents and administrators understand what information should be captured in this field.
 - `domain_id` (String) The unique identifier of the Cases domain.
 - `tags` (Attributes List) The tags that you attach to this field. (see [below for nested schema](#nestedatt--tags))
@@ -55,6 +56,22 @@ resource "awscc_cases_domain" "example" {
 - `id` (String) Uniquely identifies the resource.
 - `last_modified_time` (String) The time at which the field was created or last modified.
 - `namespace` (String) Indicates whether this is a System field (predefined by AWS) or a Custom field (created by your organization). System fields cannot be modified or deleted.
+
+<a id="nestedatt--attributes"></a>
+### Nested Schema for `attributes`
+
+Optional:
+
+- `text` (Attributes) Field attributes for Text field type (see [below for nested schema](#nestedatt--attributes--text))
+
+<a id="nestedatt--attributes--text"></a>
+### Nested Schema for `attributes.text`
+
+Optional:
+
+- `is_multiline` (Boolean) Attribute that defines rendering component and validation
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

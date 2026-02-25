@@ -34,6 +34,7 @@ Data Source schema for AWS::CustomerProfiles::ObjectType
 - `max_profile_object_count` (Number) The maximum number of profile objects for this object type
 - `object_type_name` (String) The name of the profile object type.
 - `source_last_updated_timestamp_format` (String) The format of your sourceLastUpdatedTimestamp that was previously set up.
+- `source_priority` (Number) Defines the priority order of object types. Lower value indicates higher priority.
 - `tags` (Attributes List) The tags (keys and values) associated with the integration. (see [below for nested schema](#nestedatt--tags))
 - `template_id` (String) A unique identifier for the object template.
 

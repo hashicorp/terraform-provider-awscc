@@ -28,6 +28,7 @@ Data Source schema for AWS::CustomerProfiles::Integration
 - `last_updated_at` (String) The time of this integration got last updated at
 - `object_type_name` (String) The name of the ObjectType defined for the 3rd party data in Profile Service
 - `object_type_names` (Attributes List) The mapping between 3rd party event types and ObjectType names (see [below for nested schema](#nestedatt--object_type_names))
+- `scope` (String) Scope of the integration, such as 'PROFILE' or 'DOMAIN'
 - `tags` (Attributes List) The tags (keys and values) associated with the integration (see [below for nested schema](#nestedatt--tags))
 - `uri` (String) The URI of the S3 bucket or any other type of data source.
 

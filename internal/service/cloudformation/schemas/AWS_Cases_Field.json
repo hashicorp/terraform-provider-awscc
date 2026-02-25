@@ -16,6 +16,30 @@
         "User"
       ]
     },
+    "TextAttributes": {
+      "type": "object",
+      "description": "Field attributes for Text field type",
+      "additionalProperties": false,
+      "properties": {
+        "IsMultiline": {
+          "type": "boolean",
+          "description": "Attribute that defines rendering component and validation"
+        }
+      },
+      "required": [
+        "IsMultiline"
+      ]
+    },
+    "FieldAttributes": {
+      "type": "object",
+      "description": "Union of field attributes",
+      "additionalProperties": false,
+      "properties": {
+        "Text": {
+          "$ref": "#/definitions/TextAttributes"
+        }
+      }
+    },
     "Tags": {
       "type": "array",
       "description": "The tags that you attach to this field.",
@@ -103,6 +127,10 @@
     },
     "Type": {
       "$ref": "#/definitions/FieldType"
+    },
+    "Attributes": {
+      "$ref": "#/definitions/FieldAttributes",
+      "description": "Field-type specific attributes that control rendering and validation behavior"
     }
   },
   "required": [

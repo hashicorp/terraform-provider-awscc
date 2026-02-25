@@ -68,6 +68,23 @@
     "/properties/Name"
   ],
   "definitions": {
+    "CapacityReservationRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ReservationGroupArn": {
+          "type": "string"
+        },
+        "ReservationPreference": {
+          "type": "string",
+          "enum": [
+            "RESERVATIONS_ONLY",
+            "RESERVATIONS_FIRST",
+            "RESERVATIONS_EXCLUDED"
+          ]
+        }
+      }
+    },
     "AutoScalingGroupProvider": {
       "additionalProperties": false,
       "type": "object",
@@ -478,7 +495,8 @@
           "type": "string",
           "enum": [
             "ON_DEMAND",
-            "SPOT"
+            "SPOT",
+            "RESERVED"
           ]
         },
         "FipsEnabled": {
@@ -492,6 +510,9 @@
         },
         "InstanceRequirements": {
           "$ref": "#/definitions/InstanceRequirementsRequest"
+        },
+        "CapacityReservations": {
+          "$ref": "#/definitions/CapacityReservationRequest"
         },
         "Monitoring": {
           "$ref": "#/definitions/ManagedInstancesMonitoringOptions"

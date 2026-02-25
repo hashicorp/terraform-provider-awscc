@@ -780,6 +780,24 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The mapping between 3rd party event types and ObjectType names",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Scope
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Scope of the integration, such as 'PROFILE' or 'DOMAIN'",
+		//	  "enum": [
+		//	    "PROFILE",
+		//	    "DOMAIN"
+		//	  ],
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z_][a-zA-Z_0-9-]*$",
+		//	  "type": "string"
+		//	}
+		"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Scope of the integration, such as 'PROFILE' or 'DOMAIN'",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -890,6 +908,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"schedule_offset":             "ScheduleOffset",
 		"schedule_start_time":         "ScheduleStartTime",
 		"scheduled":                   "Scheduled",
+		"scope":                       "Scope",
 		"service_now":                 "ServiceNow",
 		"source_connector_properties": "SourceConnectorProperties",
 		"source_fields":               "SourceFields",

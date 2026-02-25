@@ -29,8 +29,7 @@
     "/properties/TransportTransitGatewayAttachmentId",
     "/properties/TunnelInsideIpVersion",
     "/properties/PreSharedKeyStorage",
-    "/properties/TunnelBandwidth",
-    "/properties/VpnTunnelOptionsSpecifications"
+    "/properties/TunnelBandwidth"
   ],
   "primaryIdentifier": [
     "/properties/VpnConnectionId"
@@ -49,7 +48,15 @@
       "permissions": [
         "ec2:DescribeVpnConnections",
         "ec2:CreateVpnConnection",
-        "ec2:CreateTags"
+        "ec2:CreateTags",
+        "logs:CreateLogDelivery",
+        "logs:GetLogDelivery",
+        "logs:UpdateLogDelivery",
+        "logs:DeleteLogDelivery",
+        "logs:ListLogDeliveries",
+        "logs:PutResourcePolicy",
+        "logs:DescribeResourcePolicies",
+        "logs:DescribeLogGroups"
       ]
     },
     "update": {
@@ -59,7 +66,15 @@
         "ec2:ModifyVpnConnectionOptions",
         "ec2:ModifyVpnTunnelOptions",
         "ec2:CreateTags",
-        "ec2:DeleteTags"
+        "ec2:DeleteTags",
+        "logs:CreateLogDelivery",
+        "logs:GetLogDelivery",
+        "logs:UpdateLogDelivery",
+        "logs:DeleteLogDelivery",
+        "logs:ListLogDeliveries",
+        "logs:PutResourcePolicy",
+        "logs:DescribeResourcePolicies",
+        "logs:DescribeLogGroups"
       ]
     },
     "list": {

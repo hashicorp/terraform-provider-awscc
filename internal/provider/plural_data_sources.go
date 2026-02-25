@@ -181,6 +181,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cognito_identity_pools -cftype AWS::Cognito::IdentityPool -package cognito ../aws/cognito/identity_pool_plural_data_source_gen.go ../aws/cognito/identity_pool_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_comprehend_document_classifiers -cftype AWS::Comprehend::DocumentClassifier -package comprehend ../aws/comprehend/document_classifier_plural_data_source_gen.go ../aws/comprehend/document_classifier_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_comprehend_flywheels -cftype AWS::Comprehend::Flywheel -package comprehend ../aws/comprehend/flywheel_plural_data_source_gen.go ../aws/comprehend/flywheel_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_computeoptimizer_automation_rules -cftype AWS::ComputeOptimizer::AutomationRule -package computeoptimizer ../aws/computeoptimizer/automation_rule_plural_data_source_gen.go ../aws/computeoptimizer/automation_rule_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_config_aggregation_authorizations -cftype AWS::Config::AggregationAuthorization -package config ../aws/config/aggregation_authorization_plural_data_source_gen.go ../aws/config/aggregation_authorization_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_config_config_rules -cftype AWS::Config::ConfigRule -package config ../aws/config/config_rule_plural_data_source_gen.go ../aws/config/config_rule_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_config_configuration_aggregators -cftype AWS::Config::ConfigurationAggregator -package config ../aws/config/configuration_aggregator_plural_data_source_gen.go ../aws/config/configuration_aggregator_plural_data_source_gen_test.go
@@ -859,6 +860,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_sqs_queues -cftype AWS::SQS::Queue -package sqs ../aws/sqs/queue_plural_data_source_gen.go ../aws/sqs/queue_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssm_associations -cftype AWS::SSM::Association -package ssm ../aws/ssm/association_plural_data_source_gen.go ../aws/ssm/association_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssm_documents -cftype AWS::SSM::Document -package ssm ../aws/ssm/document_plural_data_source_gen.go ../aws/ssm/document_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_ssm_maintenance_windows -cftype AWS::SSM::MaintenanceWindow -package ssm ../aws/ssm/maintenance_window_plural_data_source_gen.go ../aws/ssm/maintenance_window_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssm_parameters -cftype AWS::SSM::Parameter -package ssm ../aws/ssm/parameter_plural_data_source_gen.go ../aws/ssm/parameter_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssm_patch_baselines -cftype AWS::SSM::PatchBaseline -package ssm ../aws/ssm/patch_baseline_plural_data_source_gen.go ../aws/ssm/patch_baseline_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssm_resource_data_syncs -cftype AWS::SSM::ResourceDataSync -package ssm ../aws/ssm/resource_data_sync_plural_data_source_gen.go ../aws/ssm/resource_data_sync_plural_data_source_gen_test.go
@@ -1042,6 +1044,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codestarnotifications"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cognito"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/comprehend"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/computeoptimizer"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/config"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/connect"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/connectcampaigns"

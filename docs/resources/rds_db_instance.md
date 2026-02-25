@@ -578,7 +578,14 @@ resource "awscc_rds_db_instance" "this" {
 - `performance_insights_kms_key_id` (String) The AWS KMS key identifier for encryption of Performance Insights data.
  The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
  If you do not specify a value for ``PerformanceInsightsKMSKeyId``, then Amazon RDS uses your default KMS key. There is a default KMS key for your AWS account. Your AWS account has a different default KMS key for each AWS Region.
- For information about enabling Performance Insights, see [EnablePerformanceInsights](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-enableperformanceinsights).
+  *Update behavior:* Once Performance Insights is enabled with a KMS key, you cannot change to a different physical KMS key without replacing the DB instance. However, the following updates do not require replacement:
+  +  Enabling or disabling Performance Insights using the ``EnablePerformanceInsights`` property
+  +  Changing between different identifier formats (key ARN, key ID, alias ARN, alias name) of the same physical KMS key
+  +  Removing the ``PerformanceInsightsKMSKeyId`` property from your template
+  
+   *Drift behavior:* If you specify ``PerformanceInsightsKMSKeyId`` while ``EnablePerformanceInsights`` is set to ``false``, CloudFormation will report drift. This occurs because the RDS API does not allow setting a KMS key when Performance Insights is disabled. CloudFormation ignores the ``PerformanceInsightsKMSKeyId`` value during instance creation to avoid API errors, resulting in a mismatch between your template and the actual instance configuration.
+ To avoid drift, omit both ``EnablePerformanceInsights`` and ``PerformanceInsightsKMSKeyId`` during initial instance creation, then set both properties together when you're ready to enable Performance Insights.
+  For information about enabling Performance Insights, see [EnablePerformanceInsights](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-enableperformanceinsights).
 - `performance_insights_retention_period` (Number) The number of days to retain Performance Insights data. When creating a DB instance without enabling Performance Insights, you can't specify the parameter ``PerformanceInsightsRetentionPeriod``.
  This setting doesn't apply to RDS Custom DB instances.
  Valid Values:

@@ -1211,6 +1211,10 @@ resource_schema "aws_comprehend_flywheel" {
   cloudformation_type_name = "AWS::Comprehend::Flywheel"
 }
 
+resource_schema "aws_computeoptimizer_automation_rule" {
+  cloudformation_type_name = "AWS::ComputeOptimizer::AutomationRule"
+}
+
 resource_schema "aws_config_aggregation_authorization" {
   cloudformation_type_name = "AWS::Config::AggregationAuthorization"
 }
@@ -5141,6 +5145,10 @@ resource_schema "aws_ssm_document" {
   cloudformation_type_name = "AWS::SSM::Document"
 }
 
+resource_schema "aws_ssm_maintenance_window" {
+  cloudformation_type_name = "AWS::SSM::MaintenanceWindow"
+}
+
 resource_schema "aws_ssm_maintenance_window_target" {
   cloudformation_type_name               = "AWS::SSM::MaintenanceWindowTarget"
   suppress_plural_data_source_generation = true
@@ -5481,6 +5489,11 @@ resource_schema "aws_servicecatalog_cloudformation_provisioned_product" {
 
 resource_schema "aws_servicecatalog_launch_notification_constraint" {
   cloudformation_type_name = "AWS::ServiceCatalog::LaunchNotificationConstraint"
+}
+
+resource_schema "aws_servicecatalog_launch_role_constraint" {
+  cloudformation_type_name               = "AWS::ServiceCatalog::LaunchRoleConstraint"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_servicecatalog_launch_template_constraint" {

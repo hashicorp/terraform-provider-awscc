@@ -1211,6 +1211,11 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_computeoptimizer_automation_rule",
+        "generateListResource": true,
+        "identifier": ["RuleArn"]
+    },
+    {
         "resource": "awscc_config_aggregation_authorization",
         "generateListResource": true,
         "identifier": ["AuthorizedAccountId","AuthorizedAwsRegion"]
@@ -5368,6 +5373,11 @@
         "identifier": ["Name"]
     },
     {
+        "resource": "awscc_ssm_maintenance_window",
+        "generateListResource": true,
+        "identifier": ["WindowId"]
+    },
+    {
         "resource": "awscc_ssm_maintenance_window_target",
         "identifier": ["WindowId","WindowTargetId"]
     },
@@ -5730,6 +5740,10 @@
     {
         "resource": "awscc_servicecatalog_launch_notification_constraint",
         "generateListResource": true,
+        "identifier": ["Id"]
+    },
+    {
+        "resource": "awscc_servicecatalog_launch_role_constraint",
         "identifier": ["Id"]
     },
     {

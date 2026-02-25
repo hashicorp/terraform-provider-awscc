@@ -2,12 +2,12 @@
 page_title: "awscc_lambda_capacity_provider Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::Lambda::CapacityProvider
+  Creates a capacity provider that manages compute resources for Lambda functions
 ---
 
 # awscc_lambda_capacity_provider (Resource)
 
-Resource Type definition for AWS::Lambda::CapacityProvider
+Creates a capacity provider that manages compute resources for Lambda functions
 
 ## Example Usage
 
@@ -124,29 +124,29 @@ resource "awscc_lambda_capacity_provider" "example" {
 
 ### Required
 
-- `permissions_config` (Attributes) IAM permissions configuration for the capacity provider. (see [below for nested schema](#nestedatt--permissions_config))
-- `vpc_config` (Attributes) VPC configuration for the capacity provider. (see [below for nested schema](#nestedatt--vpc_config))
+- `permissions_config` (Attributes) The permissions configuration for the capacity provider. (see [below for nested schema](#nestedatt--permissions_config))
+- `vpc_config` (Attributes) The VPC configuration for the capacity provider. (see [below for nested schema](#nestedatt--vpc_config))
 
 ### Optional
 
-- `capacity_provider_name` (String) The name of the capacity provider. The name must be unique within your AWS account and region. If you don't specify a name, CloudFormation generates one.
+- `capacity_provider_name` (String)
 - `capacity_provider_scaling_config` (Attributes) The scaling configuration for the capacity provider. (see [below for nested schema](#nestedatt--capacity_provider_scaling_config))
-- `instance_requirements` (Attributes) Specifications for the types of EC2 instances that the capacity provider can use. (see [below for nested schema](#nestedatt--instance_requirements))
-- `kms_key_arn` (String) The ARN of the AWS Key Management Service (KMS) key used by the capacity provider.
-- `tags` (Attributes Set) A list of tags to apply to the capacity provider. (see [below for nested schema](#nestedatt--tags))
+- `instance_requirements` (Attributes) The instance requirements for compute resources managed by the capacity provider. (see [below for nested schema](#nestedatt--instance_requirements))
+- `kms_key_arn` (String) The ARN of the KMS key used to encrypt the capacity provider's resources.
+- `tags` (Attributes Set) A key-value pair that provides metadata for the capacity provider. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `arn` (String) The Amazon Resource Name (ARN) of the capacity provider. This is a read-only property that is automatically generated when the capacity provider is created.
+- `arn` (String)
 - `id` (String) Uniquely identifies the resource.
-- `state` (String) The current state of the capacity provider.
+- `state` (String) The current state of the capacity provider. Indicates whether the provider is being created, is active and ready for use, has failed, or is being deleted.
 
 <a id="nestedatt--permissions_config"></a>
 ### Nested Schema for `permissions_config`
 
 Required:
 
-- `capacity_provider_operator_role_arn` (String) The ARN of the IAM role that Lambda assumes to manage the capacity provider.
+- `capacity_provider_operator_role_arn` (String) The ARN of the IAM role that the capacity provider uses to manage compute instances and other AWS resources.
 
 
 <a id="nestedatt--vpc_config"></a>
@@ -154,8 +154,8 @@ Required:
 
 Required:
 
-- `security_group_ids` (List of String) A list of security group IDs to associate with EC2 instances.
-- `subnet_ids` (List of String) A list of subnet IDs where the capacity provider can launch EC2 instances.
+- `security_group_ids` (List of String) A list of security group IDs that control network access for compute instances managed by the capacity provider.
+- `subnet_ids` (List of String) A list of subnet IDs where the capacity provider launches compute instances.
 
 
 <a id="nestedatt--capacity_provider_scaling_config"></a>
@@ -163,8 +163,8 @@ Required:
 
 Optional:
 
-- `max_v_cpu_count` (Number) The maximum number of EC2 instances that the capacity provider can scale up to.
-- `scaling_mode` (String) The scaling mode for the capacity provider.
+- `max_v_cpu_count` (Number) The maximum number of vCPUs that the capacity provider can provision across all compute instances.
+- `scaling_mode` (String) The scaling mode that determines how the capacity provider responds to changes in demand.
 - `scaling_policies` (Attributes List) A list of target tracking scaling policies for the capacity provider. (see [below for nested schema](#nestedatt--capacity_provider_scaling_config--scaling_policies))
 
 <a id="nestedatt--capacity_provider_scaling_config--scaling_policies"></a>
@@ -172,8 +172,8 @@ Optional:
 
 Optional:
 
-- `predefined_metric_type` (String) The predefined metric for target tracking.
-- `target_value` (Number) The target value for the metric as a percentage (for example, 70.0 for 70%).
+- `predefined_metric_type` (String) The predefined metric type to track for scaling decisions.
+- `target_value` (Number) The target value for the metric that the scaling policy attempts to maintain through scaling actions.
 
 
 
@@ -182,9 +182,9 @@ Optional:
 
 Optional:
 
-- `allowed_instance_types` (List of String) A list of instance types that the capacity provider can use. Supports wildcards (for example, m5.*).
-- `architectures` (List of String) The instruction set architecture for EC2 instances. Specify either x86_64 or arm64.
-- `excluded_instance_types` (List of String) A list of instance types that the capacity provider should not use. Takes precedence over AllowedInstanceTypes.
+- `allowed_instance_types` (List of String) A list of EC2 instance types that the capacity provider is allowed to use. If not specified, all compatible instance types are allowed.
+- `architectures` (List of String) A list of supported CPU architectures for compute instances. Valid values include ``x86_64`` and ``arm64``.
+- `excluded_instance_types` (List of String) A list of EC2 instance types that the capacity provider should not use, even if they meet other requirements.
 
 
 <a id="nestedatt--tags"></a>
@@ -215,7 +215,7 @@ import {
 
 #### Required
 
-- `capacity_provider_name` (String) The name of the capacity provider
+- `capacity_provider_name` (String)
 
 #### Optional
 

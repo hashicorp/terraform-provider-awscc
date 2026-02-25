@@ -27,28 +27,28 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the capacity provider. This is a read-only property that is automatically generated when the capacity provider is created.",
+		//	  "description": "",
 		//	  "maxLength": 140,
 		//	  "minLength": 1,
 		//	  "pattern": "^arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:capacity-provider:[a-zA-Z0-9-_]+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the capacity provider. This is a read-only property that is automatically generated when the capacity provider is created.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CapacityProviderName
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of the capacity provider. The name must be unique within your AWS account and region. If you don't specify a name, CloudFormation generates one.",
+		//	  "description": "",
 		//	  "maxLength": 140,
 		//	  "minLength": 1,
 		//	  "pattern": "^(arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:capacity-provider:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+$",
 		//	  "type": "string"
 		//	}
 		"capacity_provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the capacity provider. The name must be unique within your AWS account and region. If you don't specify a name, CloudFormation generates one.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CapacityProviderScalingConfig
@@ -59,13 +59,13 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The scaling configuration for the capacity provider.",
 		//	  "properties": {
 		//	    "MaxVCpuCount": {
-		//	      "description": "The maximum number of EC2 instances that the capacity provider can scale up to.",
+		//	      "description": "The maximum number of vCPUs that the capacity provider can provision across all compute instances.",
 		//	      "maximum": 15000,
 		//	      "minimum": 2,
 		//	      "type": "integer"
 		//	    },
 		//	    "ScalingMode": {
-		//	      "description": "The scaling mode for the capacity provider.",
+		//	      "description": "The scaling mode that determines how the capacity provider responds to changes in demand.",
 		//	      "enum": [
 		//	        "Auto",
 		//	        "Manual"
@@ -77,17 +77,17 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
-		//	        "description": "A target tracking scaling policy for the capacity provider.",
+		//	        "description": "A scaling policy for the capacity provider that automatically adjusts capacity to maintain a target value for a specific metric.",
 		//	        "properties": {
 		//	          "PredefinedMetricType": {
-		//	            "description": "The predefined metric for target tracking.",
+		//	            "description": "The predefined metric type to track for scaling decisions.",
 		//	            "enum": [
 		//	              "LambdaCapacityProviderAverageCPUUtilization"
 		//	            ],
 		//	            "type": "string"
 		//	          },
 		//	          "TargetValue": {
-		//	            "description": "The target value for the metric as a percentage (for example, 70.0 for 70%).",
+		//	            "description": "The target value for the metric that the scaling policy attempts to maintain through scaling actions.",
 		//	            "minimum": 0,
 		//	            "type": "number"
 		//	          }
@@ -109,12 +109,12 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: MaxVCpuCount
 				"max_v_cpu_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The maximum number of EC2 instances that the capacity provider can scale up to.",
+					Description: "The maximum number of vCPUs that the capacity provider can provision across all compute instances.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ScalingMode
 				"scaling_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The scaling mode for the capacity provider.",
+					Description: "The scaling mode that determines how the capacity provider responds to changes in demand.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ScalingPolicies
@@ -123,12 +123,12 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: PredefinedMetricType
 							"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The predefined metric for target tracking.",
+								Description: "The predefined metric type to track for scaling decisions.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: TargetValue
 							"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The target value for the metric as a percentage (for example, 70.0 for 70%).",
+								Description: "The target value for the metric that the scaling policy attempts to maintain through scaling actions.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -145,10 +145,10 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Specifications for the types of EC2 instances that the capacity provider can use.",
+		//	  "description": "The instance requirements for compute resources managed by the capacity provider.",
 		//	  "properties": {
 		//	    "AllowedInstanceTypes": {
-		//	      "description": "A list of instance types that the capacity provider can use. Supports wildcards (for example, m5.*).",
+		//	      "description": "A list of EC2 instance types that the capacity provider is allowed to use. If not specified, all compatible instance types are allowed.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "maxLength": 30,
@@ -161,7 +161,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	      "type": "array"
 		//	    },
 		//	    "Architectures": {
-		//	      "description": "The instruction set architecture for EC2 instances. Specify either x86_64 or arm64.",
+		//	      "description": "A list of supported CPU architectures for compute instances. Valid values include ``x86_64`` and ``arm64``.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "description": "Specifications for the types of EC2 instances that the capacity provider can use.",
@@ -176,7 +176,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	      "type": "array"
 		//	    },
 		//	    "ExcludedInstanceTypes": {
-		//	      "description": "A list of instance types that the capacity provider should not use. Takes precedence over AllowedInstanceTypes.",
+		//	      "description": "A list of EC2 instance types that the capacity provider should not use, even if they meet other requirements.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "maxLength": 30,
@@ -196,37 +196,37 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 				// Property: AllowedInstanceTypes
 				"allowed_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "A list of instance types that the capacity provider can use. Supports wildcards (for example, m5.*).",
+					Description: "A list of EC2 instance types that the capacity provider is allowed to use. If not specified, all compatible instance types are allowed.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Architectures
 				"architectures": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "The instruction set architecture for EC2 instances. Specify either x86_64 or arm64.",
+					Description: "A list of supported CPU architectures for compute instances. Valid values include ``x86_64`` and ``arm64``.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ExcludedInstanceTypes
 				"excluded_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "A list of instance types that the capacity provider should not use. Takes precedence over AllowedInstanceTypes.",
+					Description: "A list of EC2 instance types that the capacity provider should not use, even if they meet other requirements.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Specifications for the types of EC2 instances that the capacity provider can use.",
+			Description: "The instance requirements for compute resources managed by the capacity provider.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of the AWS Key Management Service (KMS) key used by the capacity provider.",
+		//	  "description": "The ARN of the KMS key used to encrypt the capacity provider's resources.",
 		//	  "maxLength": 10000,
 		//	  "minLength": 0,
 		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	  "type": "string"
 		//	}
 		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the AWS Key Management Service (KMS) key used by the capacity provider.",
+			Description: "The ARN of the KMS key used to encrypt the capacity provider's resources.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PermissionsConfig
@@ -234,10 +234,10 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "IAM permissions configuration for the capacity provider.",
+		//	  "description": "The permissions configuration for the capacity provider.",
 		//	  "properties": {
 		//	    "CapacityProviderOperatorRoleArn": {
-		//	      "description": "The ARN of the IAM role that Lambda assumes to manage the capacity provider.",
+		//	      "description": "The ARN of the IAM role that the capacity provider uses to manage compute instances and other AWS resources.",
 		//	      "maxLength": 10000,
 		//	      "minLength": 0,
 		//	      "pattern": "^arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
@@ -253,18 +253,18 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CapacityProviderOperatorRoleArn
 				"capacity_provider_operator_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the IAM role that Lambda assumes to manage the capacity provider.",
+					Description: "The ARN of the IAM role that the capacity provider uses to manage compute instances and other AWS resources.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "IAM permissions configuration for the capacity provider.",
+			Description: "The permissions configuration for the capacity provider.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The current state of the capacity provider.",
+		//	  "description": "The current state of the capacity provider. Indicates whether the provider is being created, is active and ready for use, has failed, or is being deleted.",
 		//	  "enum": [
 		//	    "Pending",
 		//	    "Active",
@@ -274,14 +274,14 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "string"
 		//	}
 		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current state of the capacity provider.",
+			Description: "The current state of the capacity provider. Indicates whether the provider is being created, is active and ready for use, has failed, or is being deleted.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A list of tags to apply to the capacity provider.",
+		//	  "description": "A key-value pair that provides metadata for the capacity provider.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -323,7 +323,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "A list of tags to apply to the capacity provider.",
+			Description: "A key-value pair that provides metadata for the capacity provider.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcConfig
@@ -331,10 +331,10 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "VPC configuration for the capacity provider.",
+		//	  "description": "The VPC configuration for the capacity provider.",
 		//	  "properties": {
 		//	    "SecurityGroupIds": {
-		//	      "description": "A list of security group IDs to associate with EC2 instances.",
+		//	      "description": "A list of security group IDs that control network access for compute instances managed by the capacity provider.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "maxLength": 1024,
@@ -347,7 +347,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	      "type": "array"
 		//	    },
 		//	    "SubnetIds": {
-		//	      "description": "A list of subnet IDs where the capacity provider can launch EC2 instances.",
+		//	      "description": "A list of subnet IDs where the capacity provider launches compute instances.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "maxLength": 1024,
@@ -371,17 +371,17 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "A list of security group IDs to associate with EC2 instances.",
+					Description: "A list of security group IDs that control network access for compute instances managed by the capacity provider.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SubnetIds
 				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "A list of subnet IDs where the capacity provider can launch EC2 instances.",
+					Description: "A list of subnet IDs where the capacity provider launches compute instances.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "VPC configuration for the capacity provider.",
+			Description: "The VPC configuration for the capacity provider.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

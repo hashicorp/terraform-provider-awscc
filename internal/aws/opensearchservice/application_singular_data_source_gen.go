@@ -195,6 +195,20 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The identifier of the application.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the KMS key used to encrypt the application.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "pattern": "^arn:aws(-[a-z]+)*:kms:[a-z0-9-]+:\\d{12}:key/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
+		//	  "type": "string"
+		//	}
+		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the KMS key used to encrypt the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -286,10 +300,11 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"iam_identity_center_instance_arn": "IamIdentityCenterInstanceArn",
 		"iam_identity_center_options":      "IamIdentityCenterOptions",
 		"iam_role_for_identity_center_application_arn": "IamRoleForIdentityCenterApplicationArn",
-		"key":   "Key",
-		"name":  "Name",
-		"tags":  "Tags",
-		"value": "Value",
+		"key":         "Key",
+		"kms_key_arn": "KmsKeyArn",
+		"name":        "Name",
+		"tags":        "Tags",
+		"value":       "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -21,6 +21,7 @@ Data Source schema for AWS::Cases::Field
 
 ### Read-Only
 
+- `attributes` (Attributes) Field-type specific attributes that control rendering and validation behavior (see [below for nested schema](#nestedatt--attributes))
 - `created_time` (String) The time at which the field was created.
 - `description` (String) A description explaining the purpose and usage of this field in cases. Helps agents and administrators understand what information should be captured in this field.
 - `domain_id` (String) The unique identifier of the Cases domain.
@@ -31,6 +32,22 @@ Data Source schema for AWS::Cases::Field
 - `namespace` (String) Indicates whether this is a System field (predefined by AWS) or a Custom field (created by your organization). System fields cannot be modified or deleted.
 - `tags` (Attributes List) The tags that you attach to this field. (see [below for nested schema](#nestedatt--tags))
 - `type` (String) The data type of the field, which determines validation rules, input constraints, and display format. Each type has specific constraints: Text (string input), Number (numeric values), Boolean (true/false), DateTime (date/time picker), SingleSelect (dropdown options), Url (URL validation), User (Amazon Connect user selection).
+
+<a id="nestedatt--attributes"></a>
+### Nested Schema for `attributes`
+
+Read-Only:
+
+- `text` (Attributes) Field attributes for Text field type (see [below for nested schema](#nestedatt--attributes--text))
+
+<a id="nestedatt--attributes--text"></a>
+### Nested Schema for `attributes.text`
+
+Read-Only:
+
+- `is_multiline` (Boolean) Attribute that defines rendering component and validation
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

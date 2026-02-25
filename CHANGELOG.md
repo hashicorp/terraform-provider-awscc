@@ -1,4 +1,17 @@
-## 1.73.0 (Unreleased)
+## 1.73.0 (Feburary 25, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_computeoptimizer_automation_rule`
+* **New Data Source:** `awscc_computeoptimizer_automation_rules`
+* **New Data Source:** `awscc_servicecatalog_launch_role_constraint`
+* **New Data Source:** `awscc_ssm_maintenance_window`
+* **New Data Source:** `awscc_ssm_maintenance_windows`
+* **New List Resource:** `awscc_computeoptimizer_automation_rule`
+* **New List Resource:** `awscc_ssm_maintenance_window`
+* **New Resource:** `awscc_computeoptimizer_automation_rule`
+* **New Resource:** `awscc_servicecatalog_launch_role_constraint`
+* **New Resource:** `awscc_ssm_maintenance_window`
 
 ## 1.72.0 (Feburary 18, 2026)
 

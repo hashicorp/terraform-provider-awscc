@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::Lambda::CapacityProvider",
-  "description": "Resource Type definition for AWS::Lambda::CapacityProvider",
+  "description": "Creates a capacity provider that manages compute resources for Lambda functions",
   "definitions": {
     "Architecture": {
       "description": "Specifications for the types of EC2 instances that the capacity provider can use.",
@@ -11,11 +11,11 @@
       ]
     },
     "CapacityProviderPermissionsConfig": {
-      "description": "IAM permissions configuration for the capacity provider.",
+      "description": "Configuration that specifies the permissions required for the capacity provider to manage compute resources.",
       "type": "object",
       "properties": {
         "CapacityProviderOperatorRoleArn": {
-          "description": "The ARN of the IAM role that Lambda assumes to manage the capacity provider.",
+          "description": "The ARN of the IAM role that the capacity provider uses to manage compute instances and other AWS resources.",
           "type": "string",
           "maxLength": 10000,
           "minLength": 0,
@@ -35,18 +35,19 @@
       ]
     },
     "CapacityProviderScalingConfig": {
-      "description": "The scaling configuration for the capacity provider.",
+      "description": "Configuration that defines how the capacity provider scales compute instances based on demand and policies.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "MaxVCpuCount": {
-          "description": "The maximum number of EC2 instances that the capacity provider can scale up to.",
+          "description": "The maximum number of vCPUs that the capacity provider can provision across all compute instances.",
           "type": "integer",
           "minimum": 2,
           "maximum": 15000
         },
         "ScalingMode": {
-          "$ref": "#/definitions/CapacityProviderScalingMode"
+          "$ref": "#/definitions/CapacityProviderScalingMode",
+          "description": "The scaling mode that determines how the capacity provider responds to changes in demand."
         },
         "ScalingPolicies": {
           "description": "A list of target tracking scaling policies for the capacity provider.",
@@ -79,11 +80,11 @@
       ]
     },
     "CapacityProviderVpcConfig": {
-      "description": "VPC configuration for the capacity provider.",
+      "description": "VPC configuration that specifies the network settings for compute instances managed by the capacity provider.",
       "type": "object",
       "properties": {
         "SubnetIds": {
-          "description": "A list of subnet IDs where the capacity provider can launch EC2 instances.",
+          "description": "A list of subnet IDs where the capacity provider launches compute instances.",
           "type": "array",
           "insertionOrder": false,
           "items": {
@@ -96,7 +97,7 @@
           "minItems": 1
         },
         "SecurityGroupIds": {
-          "description": "A list of security group IDs to associate with EC2 instances.",
+          "description": "A list of security group IDs that control network access for compute instances managed by the capacity provider.",
           "type": "array",
           "insertionOrder": false,
           "items": {
@@ -116,11 +117,11 @@
       "additionalProperties": false
     },
     "InstanceRequirements": {
-      "description": "Specifications for the types of EC2 instances that the capacity provider can use.",
+      "description": "Specifications that define the characteristics and constraints for compute instances used by the capacity provider.",
       "type": "object",
       "properties": {
         "Architectures": {
-          "description": "The instruction set architecture for EC2 instances. Specify either x86_64 or arm64.",
+          "description": "A list of supported CPU architectures for compute instances. Valid values include ``x86_64`` and ``arm64``.",
           "type": "array",
           "insertionOrder": false,
           "items": {
@@ -130,7 +131,7 @@
           "minItems": 1
         },
         "AllowedInstanceTypes": {
-          "description": "A list of instance types that the capacity provider can use. Supports wildcards (for example, m5.*).",
+          "description": "A list of EC2 instance types that the capacity provider is allowed to use. If not specified, all compatible instance types are allowed.",
           "type": "array",
           "insertionOrder": false,
           "items": {
@@ -143,7 +144,7 @@
           "minItems": 0
         },
         "ExcludedInstanceTypes": {
-          "description": "A list of instance types that the capacity provider should not use. Takes precedence over AllowedInstanceTypes.",
+          "description": "A list of EC2 instance types that the capacity provider should not use, even if they meet other requirements.",
           "type": "array",
           "insertionOrder": false,
           "items": {
@@ -181,14 +182,15 @@
       ]
     },
     "TargetTrackingScalingPolicy": {
-      "description": "A target tracking scaling policy for the capacity provider.",
+      "description": "A scaling policy for the capacity provider that automatically adjusts capacity to maintain a target value for a specific metric.",
       "type": "object",
       "properties": {
         "PredefinedMetricType": {
-          "$ref": "#/definitions/CapacityProviderPredefinedMetricType"
+          "$ref": "#/definitions/CapacityProviderPredefinedMetricType",
+          "description": "The predefined metric type to track for scaling decisions."
         },
         "TargetValue": {
-          "description": "The target value for the metric as a percentage (for example, 70.0 for 70%).",
+          "description": "The target value for the metric that the scaling policy attempts to maintain through scaling actions.",
           "type": "number",
           "minimum": 0
         }
@@ -202,14 +204,14 @@
   },
   "properties": {
     "Arn": {
-      "description": "The Amazon Resource Name (ARN) of the capacity provider. This is a read-only property that is automatically generated when the capacity provider is created.",
+      "description": "",
       "type": "string",
       "maxLength": 140,
       "minLength": 1,
       "pattern": "^arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:capacity-provider:[a-zA-Z0-9-_]+$"
     },
     "CapacityProviderName": {
-      "description": "The name of the capacity provider. The name must be unique within your AWS account and region. If you don't specify a name, CloudFormation generates one.",
+      "description": "",
       "type": "string",
       "maxLength": 140,
       "minLength": 1,
@@ -220,26 +222,26 @@
       "$ref": "#/definitions/CapacityProviderScalingConfig"
     },
     "InstanceRequirements": {
-      "description": "Specifications for the types of EC2 instances that the capacity provider can use.",
+      "description": "The instance requirements for compute resources managed by the capacity provider.",
       "$ref": "#/definitions/InstanceRequirements"
     },
     "KmsKeyArn": {
-      "description": "The ARN of the AWS Key Management Service (KMS) key used by the capacity provider.",
+      "description": "The ARN of the KMS key used to encrypt the capacity provider's resources.",
       "type": "string",
       "maxLength": 10000,
       "minLength": 0,
       "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$"
     },
     "PermissionsConfig": {
-      "description": "IAM permissions configuration for the capacity provider.",
+      "description": "The permissions configuration for the capacity provider.",
       "$ref": "#/definitions/CapacityProviderPermissionsConfig"
     },
     "State": {
-      "description": "The current state of the capacity provider.",
+      "description": "",
       "$ref": "#/definitions/CapacityProviderState"
     },
     "Tags": {
-      "description": "A list of tags to apply to the capacity provider.",
+      "description": "A key-value pair that provides metadata for the capacity provider.",
       "type": "array",
       "uniqueItems": true,
       "insertionOrder": false,
@@ -248,7 +250,7 @@
       }
     },
     "VpcConfig": {
-      "description": "VPC configuration for the capacity provider.",
+      "description": "The VPC configuration for the capacity provider.",
       "$ref": "#/definitions/CapacityProviderVpcConfig"
     }
   },

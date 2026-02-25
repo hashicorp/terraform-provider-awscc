@@ -74,12 +74,22 @@ Read-Only:
 Read-Only:
 
 - `capacity_option_type` (String)
+- `capacity_reservations` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--capacity_reservations))
 - `ec_2_instance_profile_arn` (String)
 - `fips_enabled` (Boolean)
 - `instance_requirements` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--instance_requirements))
 - `monitoring` (String)
 - `network_configuration` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--network_configuration))
 - `storage_configuration` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--storage_configuration))
+
+<a id="nestedatt--managed_instances_provider--instance_launch_template--capacity_reservations"></a>
+### Nested Schema for `managed_instances_provider.instance_launch_template.capacity_reservations`
+
+Read-Only:
+
+- `reservation_group_arn` (String)
+- `reservation_preference` (String)
+
 
 <a id="nestedatt--managed_instances_provider--instance_launch_template--instance_requirements"></a>
 ### Nested Schema for `managed_instances_provider.instance_launch_template.instance_requirements`
