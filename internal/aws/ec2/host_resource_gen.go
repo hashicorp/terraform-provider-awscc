@@ -8,10 +8,12 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -49,13 +51,25 @@ func hostResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "default": "on",
 		//	  "description": "Indicates whether the host accepts any untargeted instance launches that match its instance type configuration, or if it only accepts Host tenancy instance launches that specify its unique host ID.",
+		//	  "enum": [
+		//	    "on",
+		//	    "off"
+		//	  ],
 		//	  "type": "string"
 		//	}
 		"auto_placement": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates whether the host accepts any untargeted instance launches that match its instance type configuration, or if it only accepts Host tenancy instance launches that specify its unique host ID.",
 			Optional:    true,
 			Computed:    true,
+			Default:     stringdefault.StaticString("on"),
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"on",
+					"off",
+				),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -92,13 +106,25 @@ func hostResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "default": "off",
 		//	  "description": "Automatically allocates a new dedicated host and moves your instances on to it if a degradation is detected on your current host.",
+		//	  "enum": [
+		//	    "on",
+		//	    "off"
+		//	  ],
 		//	  "type": "string"
 		//	}
 		"host_maintenance": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Automatically allocates a new dedicated host and moves your instances on to it if a degradation is detected on your current host.",
 			Optional:    true,
 			Computed:    true,
+			Default:     stringdefault.StaticString("off"),
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"on",
+					"off",
+				),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -107,13 +133,25 @@ func hostResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "default": "off",
 		//	  "description": "Indicates whether to enable or disable host recovery for the Dedicated Host. Host recovery is disabled by default.",
+		//	  "enum": [
+		//	    "on",
+		//	    "off"
+		//	  ],
 		//	  "type": "string"
 		//	}
 		"host_recovery": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates whether to enable or disable host recovery for the Dedicated Host. Host recovery is disabled by default.",
 			Optional:    true,
 			Computed:    true,
+			Default:     stringdefault.StaticString("off"),
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"on",
+					"off",
+				),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/

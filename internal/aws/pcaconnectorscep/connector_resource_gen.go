@@ -232,6 +232,26 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: VpcEndpointId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 200,
+		//	  "minLength": 5,
+		//	  "type": "string"
+		//	}
+		"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(5, 200),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// VpcEndpointId is a write-only property.
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -273,8 +293,12 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		"subject":                   "Subject",
 		"tags":                      "Tags",
 		"type":                      "Type",
+		"vpc_endpoint_id":           "VpcEndpointId",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/VpcEndpointId",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

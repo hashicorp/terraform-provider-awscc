@@ -253,6 +253,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// DesiredState is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: EndpointMetadata
 		// CloudFormation resource type schema:
@@ -591,6 +592,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// Schedule is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ShadowModeConfig
 		// CloudFormation resource type schema:
@@ -753,6 +755,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// StatusReason is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -921,6 +924,11 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 		"variant_name":               "VariantName",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/StatusReason",
+		"/properties/DesiredState",
+		"/properties/Schedule",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

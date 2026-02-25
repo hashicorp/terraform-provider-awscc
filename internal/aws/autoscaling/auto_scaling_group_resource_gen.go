@@ -362,11 +362,11 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The deletion protection setting for the Auto Scaling group.",
 		//	  "type": "string"
 		//	}
 		"deletion_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The deletion protection setting for the Auto Scaling group.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
