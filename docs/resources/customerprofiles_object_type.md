@@ -106,6 +106,7 @@ resource "awscc_customerprofiles_object_type" "example" {
 - `keys` (Attributes List) A list of unique keys that can be used to map data to the profile. (see [below for nested schema](#nestedatt--keys))
 - `max_profile_object_count` (Number) The maximum number of profile objects for this object type
 - `source_last_updated_timestamp_format` (String) The format of your sourceLastUpdatedTimestamp that was previously set up.
+- `source_priority` (Number) Defines the priority order of object types. Lower value indicates higher priority.
 - `tags` (Attributes List) The tags (keys and values) associated with the integration. (see [below for nested schema](#nestedatt--tags))
 - `template_id` (String) A unique identifier for the object template.
 

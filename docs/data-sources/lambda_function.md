@@ -23,7 +23,7 @@ Data Source schema for AWS::Lambda::Function
 
 - `architectures` (List of String) The instruction set architecture that the function supports. Enter a string array with one of the valid values (arm64 or x86_64). The default value is ``x86_64``.
 - `arn` (String)
-- `capacity_provider_config` (Attributes) (see [below for nested schema](#nestedatt--capacity_provider_config))
+- `capacity_provider_config` (Attributes) Configuration for the capacity provider that manages compute resources for Lambda functions. (see [below for nested schema](#nestedatt--capacity_provider_config))
 - `code` (Attributes) The code for the function. You can define your function code in multiple ways:
   +  For .zip deployment packages, you can specify the S3 location of the .zip file in the ``S3Bucket``, ``S3Key``, and ``S3ObjectVersion`` properties.
   +  For .zip deployment packages, you can alternatively define the function code inline in the ``ZipFile`` property. This method works only for Node.js and Python functions.
@@ -31,14 +31,14 @@ Data Source schema for AWS::Lambda::Function
 - `code_signing_config_arn` (String) To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes a set of signing profiles, which define the trusted publishers for this function.
 - `dead_letter_config` (Attributes) A dead-letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see [Dead-letter queues](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-dlq). (see [below for nested schema](#nestedatt--dead_letter_config))
 - `description` (String) A description of the function.
-- `durable_config` (Attributes) (see [below for nested schema](#nestedatt--durable_config))
+- `durable_config` (Attributes) Configuration settings for [durable functions](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html), including execution timeout and retention period for execution history. (see [below for nested schema](#nestedatt--durable_config))
 - `environment` (Attributes) Environment variables that are accessible from function code during execution. (see [below for nested schema](#nestedatt--environment))
 - `ephemeral_storage` (Attributes) The size of the function's ``/tmp`` directory in MB. The default value is 512, but it can be any whole number between 512 and 10,240 MB. (see [below for nested schema](#nestedatt--ephemeral_storage))
 - `file_system_configs` (Attributes List) Connection settings for an Amazon EFS file system. To connect a function to a file system, a mount target must be available in every Availability Zone that your function connects to. If your template contains an [AWS::EFS::MountTarget](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-efs-mounttarget.html) resource, you must also specify a ``DependsOn`` attribute to ensure that the mount target is created or updated before the function.
  For more information about using the ``DependsOn`` attribute, see [DependsOn Attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-dependson.html). (see [below for nested schema](#nestedatt--file_system_configs))
 - `function_name` (String) The name of the Lambda function, up to 64 characters in length. If you don't specify a name, CFN generates one.
  If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.
-- `function_scaling_config` (Attributes) (see [below for nested schema](#nestedatt--function_scaling_config))
+- `function_scaling_config` (Attributes) Configuration that defines the scaling behavior for a Lambda Managed Instances function, including the minimum and maximum number of execution environments that can be provisioned. (see [below for nested schema](#nestedatt--function_scaling_config))
 - `handler` (String) The name of the method within your code that Lambda calls to run your function. Handler is required if the deployment package is a .zip file archive. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime. For more information, see [Lambda programming model](https://docs.aws.amazon.com/lambda/latest/dg/foundation-progmodel.html).
 - `image_config` (Attributes) Configuration values that override the container image Dockerfile settings. For more information, see [Container image settings](https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms). (see [below for nested schema](#nestedatt--image_config))
 - `kms_key_arn` (String) The ARN of the KMSlong (KMS) customer managed key that's used to encrypt the following resources:
@@ -66,7 +66,7 @@ Data Source schema for AWS::Lambda::Function
 - `snap_start_response` (Attributes) The function's [SnapStart](https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html) setting. (see [below for nested schema](#nestedatt--snap_start_response))
 - `tags` (Attributes Set) A list of [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) to apply to the function.
   You must have the ``lambda:TagResource``, ``lambda:UntagResource``, and ``lambda:ListTags`` permissions for your [principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html) to manage the CFN stack. If you don't have these permissions, there might be unexpected behavior with stack-level tags propagating to the resource during resource creation and update. (see [below for nested schema](#nestedatt--tags))
-- `tenancy_config` (Attributes) (see [below for nested schema](#nestedatt--tenancy_config))
+- `tenancy_config` (Attributes) The function's tenant isolation configuration settings. Determines whether the Lambda function runs on a shared or dedicated infrastructure per unique tenant. (see [below for nested schema](#nestedatt--tenancy_config))
 - `timeout` (Number) The amount of time (in seconds) that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds. For more information, see [Lambda execution environment](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html).
 - `tracing_config` (Attributes) Set ``Mode`` to ``Active`` to sample and trace a subset of incoming requests with [X-Ray](https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html). (see [below for nested schema](#nestedatt--tracing_config))
 - `vpc_config` (Attributes) For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can access resources and the internet only through that VPC. For more information, see [Configuring a Lambda function to access resources in a VPC](https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html). (see [below for nested schema](#nestedatt--vpc_config))
@@ -76,7 +76,7 @@ Data Source schema for AWS::Lambda::Function
 
 Read-Only:
 
-- `lambda_managed_instances_capacity_provider_config` (Attributes) (see [below for nested schema](#nestedatt--capacity_provider_config--lambda_managed_instances_capacity_provider_config))
+- `lambda_managed_instances_capacity_provider_config` (Attributes) Configuration for Lambda-managed instances used by the capacity provider. (see [below for nested schema](#nestedatt--capacity_provider_config--lambda_managed_instances_capacity_provider_config))
 
 <a id="nestedatt--capacity_provider_config--lambda_managed_instances_capacity_provider_config"></a>
 ### Nested Schema for `capacity_provider_config.lambda_managed_instances_capacity_provider_config`
@@ -85,7 +85,7 @@ Read-Only:
 
 - `capacity_provider_arn` (String) The Amazon Resource Name (ARN) of the capacity provider.
 - `execution_environment_memory_gi_b_per_v_cpu` (Number) The amount of memory in GiB allocated per vCPU for execution environments.
-- `per_execution_environment_max_concurrency` (Number) The maximum number of concurrent execution environments that can run on each compute instance.
+- `per_execution_environment_max_concurrency` (Number) The maximum number of concurrent executions that can run on each execution environment.
 
 
 
@@ -100,7 +100,8 @@ Read-Only:
 - `s3_object_version` (String) For versioned objects, the version of the deployment package object to use.
 - `source_kms_key_arn` (String) The ARN of the KMSlong (KMS) customer managed key that's used to encrypt your function's .zip deployment package. If you don't provide a customer managed key, Lambda uses an [owned key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk).
 - `zip_file` (String) (Node.js and Python) The source code of your Lambda function. If you include your function source inline with this parameter, CFN places it in a file named ``index`` and zips it to create a [deployment package](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html). This zip file cannot exceed 4MB. For the ``Handler`` property, the first part of the handler identifier must be ``index``. For example, ``index.handler``.
-  When you specify source code inline for a Node.js function, the ``index`` file that CFN creates uses the extension ``.js``. This means that LAM treats the file as a CommonJS module. ES modules aren't supported for inline functions.
+  When you specify source code inline for a Node.js function, the ``index`` file that CFN creates uses the extension ``.js``. This means that Node.js treats the file as a CommonJS module.
+ When using Node.js 24 or later, Node.js can automatically detect if a ``.js`` file should be treated as CommonJS or as an ES module. To enable auto-detection, add the ``--experimental-detect-module`` flag to the ``NODE_OPTIONS`` environment variable. For more information, see [Experimental Node.js features](https://docs.aws.amazon.com//lambda/latest/dg/lambda-nodejs.html#nodejs-experimental-features).
    For JSON, you must escape quotes and special characters such as newline (``\n``) with a backslash.
  If you specify a function that interacts with an AWS CloudFormation custom resource, you don't have to write your own functions to send responses to the custom resource that invoked the function. AWS CloudFormation provides a response module ([cfn-response](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-lambda-function-code-cfnresponsemodule.html)) that simplifies sending responses. See [Using Lambda with CloudFormation](https://docs.aws.amazon.com/lambda/latest/dg/services-cloudformation.html) for details.
 
@@ -118,8 +119,8 @@ Read-Only:
 
 Read-Only:
 
-- `execution_timeout` (Number) The amount of time (in seconds) that Lambda allows a durable function to run before stopping it. The maximum is one 366-day year or 31,622,400 seconds.
-- `retention_period_in_days` (Number) The number of days after a durable execution is closed that Lambda retains its history, from one to 90 days. The default is 14 days.
+- `execution_timeout` (Number) The maximum time (in seconds) that a durable execution can run before timing out. This timeout applies to the entire durable execution, not individual function invocations.
+- `retention_period_in_days` (Number) The number of days to retain execution history after a durable execution completes. After this period, execution history is no longer available through the GetDurableExecutionHistory API.
 
 
 <a id="nestedatt--environment"></a>
@@ -224,7 +225,7 @@ Read-Only:
 
 Read-Only:
 
-- `tenant_isolation_mode` (String) Determines how your Lambda function isolates execution environments between tenants.
+- `tenant_isolation_mode` (String) Tenant isolation mode allows for invocation to be sent to a corresponding execution environment dedicated to a specific tenant ID.
 
 
 <a id="nestedatt--tracing_config"></a>
