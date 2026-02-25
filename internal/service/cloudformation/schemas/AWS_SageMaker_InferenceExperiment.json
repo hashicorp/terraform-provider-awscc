@@ -380,7 +380,12 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "sagemaker:AddTags",
+      "sagemaker:DeleteTags",
+      "sagemaker:ListTags"
+    ]
   },
   "handlers": {
     "create": {
@@ -429,6 +434,11 @@
     "/properties/LastModifiedTime",
     "/properties/EndpointMetadata",
     "/properties/Status"
+  ],
+  "writeOnlyProperties": [
+    "/properties/StatusReason",
+    "/properties/DesiredState",
+    "/properties/Schedule"
   ],
   "createOnlyProperties": [
     "/properties/Name",

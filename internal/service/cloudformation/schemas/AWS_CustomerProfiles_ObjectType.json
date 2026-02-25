@@ -226,6 +226,11 @@
       "description": "The maximum available number of profile objects",
       "type": "integer",
       "minimum": 0
+    },
+    "SourcePriority": {
+      "description": "Defines the priority order of object types. Lower value indicates higher priority.",
+      "type": "integer",
+      "minimum": 1
     }
   },
   "additionalProperties": false,

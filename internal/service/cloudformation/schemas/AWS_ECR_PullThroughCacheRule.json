@@ -47,7 +47,7 @@
       "description": "The ECRRepositoryPrefix is a custom alias for upstream registry url.",
       "minLength": 2,
       "maxLength": 30,
-      "pattern": "^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$"
+      "pattern": "^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$"
     },
     "UpstreamRegistryUrl": {
       "type": "string",
@@ -74,7 +74,7 @@
       "description": "The repository name prefix of upstream registry to match with the upstream repository name. When this field isn't specified, Amazon ECR will use the `ROOT`.",
       "minLength": 2,
       "maxLength": 30,
-      "pattern": "^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$"
+      "pattern": "^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$"
     }
   },
   "properties": {

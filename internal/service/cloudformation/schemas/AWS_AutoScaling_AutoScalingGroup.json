@@ -89,6 +89,9 @@
         "autoscaling:DetachTrafficSources",
         "autoscaling:DeleteLifecycleHook",
         "autoscaling:PutLifecycleHook",
+        "autoscaling:StartInstanceRefresh",
+        "autoscaling:DescribeInstanceRefreshes",
+        "autoscaling:CancelInstanceRefresh",
         "cloudwatch:PutMetricAlarm",
         "ec2:Describe*",
         "ec2:Get*",
@@ -991,7 +994,7 @@
       }
     },
     "DeletionProtection": {
-      "description": "",
+      "description": "The deletion protection setting for the Auto Scaling group.",
       "type": "string"
     },
     "InstanceMaintenancePolicy": {
