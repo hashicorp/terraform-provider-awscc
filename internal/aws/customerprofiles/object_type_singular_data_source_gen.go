@@ -345,6 +345,18 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The format of your sourceLastUpdatedTimestamp that was previously set up.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SourcePriority
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Defines the priority order of object types. Lower value indicates higher priority.",
+		//	  "minimum": 1,
+		//	  "type": "integer"
+		//	}
+		"source_priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Defines the priority order of object types. Lower value indicates higher priority.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -442,6 +454,7 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"object_type_name":                     "ObjectTypeName",
 		"source":                               "Source",
 		"source_last_updated_timestamp_format": "SourceLastUpdatedTimestampFormat",
+		"source_priority":                      "SourcePriority",
 		"standard_identifiers":                 "StandardIdentifiers",
 		"tags":                                 "Tags",
 		"target":                               "Target",

@@ -37,7 +37,12 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "default": "on",
 		//	  "description": "Indicates whether the host accepts any untargeted instance launches that match its instance type configuration, or if it only accepts Host tenancy instance launches that specify its unique host ID.",
+		//	  "enum": [
+		//	    "on",
+		//	    "off"
+		//	  ],
 		//	  "type": "string"
 		//	}
 		"auto_placement": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -70,7 +75,12 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "default": "off",
 		//	  "description": "Automatically allocates a new dedicated host and moves your instances on to it if a degradation is detected on your current host.",
+		//	  "enum": [
+		//	    "on",
+		//	    "off"
+		//	  ],
 		//	  "type": "string"
 		//	}
 		"host_maintenance": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -81,7 +91,12 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "default": "off",
 		//	  "description": "Indicates whether to enable or disable host recovery for the Dedicated Host. Host recovery is disabled by default.",
+		//	  "enum": [
+		//	    "on",
+		//	    "off"
+		//	  ],
 		//	  "type": "string"
 		//	}
 		"host_recovery": schema.StringAttribute{ /*START ATTRIBUTE*/

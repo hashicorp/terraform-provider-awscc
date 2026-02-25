@@ -23,6 +23,48 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::Cases::Field resource.
 func fieldDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Attributes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Field-type specific attributes that control rendering and validation behavior",
+		//	  "properties": {
+		//	    "Text": {
+		//	      "additionalProperties": false,
+		//	      "description": "Field attributes for Text field type",
+		//	      "properties": {
+		//	        "IsMultiline": {
+		//	          "description": "Attribute that defines rendering component and validation",
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "IsMultiline"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Text
+				"text": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IsMultiline
+						"is_multiline": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Attribute that defines rendering component and validation",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Field attributes for Text field type",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Field-type specific attributes that control rendering and validation behavior",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -216,16 +258,19 @@ func fieldDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Cases::Field").WithTerraformTypeName("awscc_cases_field")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"attributes":         "Attributes",
 		"created_time":       "CreatedTime",
 		"description":        "Description",
 		"domain_id":          "DomainId",
 		"field_arn":          "FieldArn",
 		"field_id":           "FieldId",
+		"is_multiline":       "IsMultiline",
 		"key":                "Key",
 		"last_modified_time": "LastModifiedTime",
 		"name":               "Name",
 		"namespace":          "Namespace",
 		"tags":               "Tags",
+		"text":               "Text",
 		"type":               "Type",
 		"value":              "Value",
 	})

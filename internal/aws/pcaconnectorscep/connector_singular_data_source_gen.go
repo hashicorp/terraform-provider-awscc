@@ -172,6 +172,17 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: VpcEndpointId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 200,
+		//	  "minLength": 5,
+		//	  "type": "string"
+		//	}
+		"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -202,6 +213,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"subject":                   "Subject",
 		"tags":                      "Tags",
 		"type":                      "Type",
+		"vpc_endpoint_id":           "VpcEndpointId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

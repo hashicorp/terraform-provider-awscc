@@ -61,11 +61,11 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "Configuration for the capacity provider that manages compute resources for Lambda functions.",
 		//	  "properties": {
 		//	    "LambdaManagedInstancesCapacityProviderConfig": {
 		//	      "additionalProperties": false,
-		//	      "description": "",
+		//	      "description": "Configuration for Lambda-managed instances used by the capacity provider.",
 		//	      "properties": {
 		//	        "CapacityProviderArn": {
 		//	          "description": "The Amazon Resource Name (ARN) of the capacity provider.",
@@ -81,7 +81,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "type": "number"
 		//	        },
 		//	        "PerExecutionEnvironmentMaxConcurrency": {
-		//	          "description": "The maximum number of concurrent execution environments that can run on each compute instance.",
+		//	          "description": "The maximum number of concurrent executions that can run on each execution environment.",
 		//	          "maximum": 1600,
 		//	          "minimum": 1,
 		//	          "type": "integer"
@@ -115,15 +115,15 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: PerExecutionEnvironmentMaxConcurrency
 						"per_execution_environment_max_concurrency": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The maximum number of concurrent execution environments that can run on each compute instance.",
+							Description: "The maximum number of concurrent executions that can run on each execution environment.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "",
+					Description: "Configuration for Lambda-managed instances used by the capacity provider.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "Configuration for the capacity provider that manages compute resources for Lambda functions.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Code
@@ -162,7 +162,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "ZipFile": {
-		//	      "description": "(Node.js and Python) The source code of your Lambda function. If you include your function source inline with this parameter, CFN places it in a file named ``index`` and zips it to create a [deployment package](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html). This zip file cannot exceed 4MB. For the ``Handler`` property, the first part of the handler identifier must be ``index``. For example, ``index.handler``.\n  When you specify source code inline for a Node.js function, the ``index`` file that CFN creates uses the extension ``.js``. This means that LAM treats the file as a CommonJS module. ES modules aren't supported for inline functions.\n   For JSON, you must escape quotes and special characters such as newline (``\\n``) with a backslash.\n If you specify a function that interacts with an AWS CloudFormation custom resource, you don't have to write your own functions to send responses to the custom resource that invoked the function. AWS CloudFormation provides a response module ([cfn-response](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-lambda-function-code-cfnresponsemodule.html)) that simplifies sending responses. See [Using Lambda with CloudFormation](https://docs.aws.amazon.com/lambda/latest/dg/services-cloudformation.html) for details.",
+		//	      "description": "(Node.js and Python) The source code of your Lambda function. If you include your function source inline with this parameter, CFN places it in a file named ``index`` and zips it to create a [deployment package](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html). This zip file cannot exceed 4MB. For the ``Handler`` property, the first part of the handler identifier must be ``index``. For example, ``index.handler``.\n  When you specify source code inline for a Node.js function, the ``index`` file that CFN creates uses the extension ``.js``. This means that Node.js treats the file as a CommonJS module.\n When using Node.js 24 or later, Node.js can automatically detect if a ``.js`` file should be treated as CommonJS or as an ES module. To enable auto-detection, add the ``--experimental-detect-module`` flag to the ``NODE_OPTIONS`` environment variable. For more information, see [Experimental Node.js features](https://docs.aws.amazon.com//lambda/latest/dg/lambda-nodejs.html#nodejs-experimental-features).\n   For JSON, you must escape quotes and special characters such as newline (``\\n``) with a backslash.\n If you specify a function that interacts with an AWS CloudFormation custom resource, you don't have to write your own functions to send responses to the custom resource that invoked the function. AWS CloudFormation provides a response module ([cfn-response](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-lambda-function-code-cfnresponsemodule.html)) that simplifies sending responses. See [Using Lambda with CloudFormation](https://docs.aws.amazon.com/lambda/latest/dg/services-cloudformation.html) for details.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -197,7 +197,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ZipFile
 				"zip_file": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "(Node.js and Python) The source code of your Lambda function. If you include your function source inline with this parameter, CFN places it in a file named ``index`` and zips it to create a [deployment package](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html). This zip file cannot exceed 4MB. For the ``Handler`` property, the first part of the handler identifier must be ``index``. For example, ``index.handler``.\n  When you specify source code inline for a Node.js function, the ``index`` file that CFN creates uses the extension ``.js``. This means that LAM treats the file as a CommonJS module. ES modules aren't supported for inline functions.\n   For JSON, you must escape quotes and special characters such as newline (``\\n``) with a backslash.\n If you specify a function that interacts with an AWS CloudFormation custom resource, you don't have to write your own functions to send responses to the custom resource that invoked the function. AWS CloudFormation provides a response module ([cfn-response](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-lambda-function-code-cfnresponsemodule.html)) that simplifies sending responses. See [Using Lambda with CloudFormation](https://docs.aws.amazon.com/lambda/latest/dg/services-cloudformation.html) for details.",
+					Description: "(Node.js and Python) The source code of your Lambda function. If you include your function source inline with this parameter, CFN places it in a file named ``index`` and zips it to create a [deployment package](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html). This zip file cannot exceed 4MB. For the ``Handler`` property, the first part of the handler identifier must be ``index``. For example, ``index.handler``.\n  When you specify source code inline for a Node.js function, the ``index`` file that CFN creates uses the extension ``.js``. This means that Node.js treats the file as a CommonJS module.\n When using Node.js 24 or later, Node.js can automatically detect if a ``.js`` file should be treated as CommonJS or as an ES module. To enable auto-detection, add the ``--experimental-detect-module`` flag to the ``NODE_OPTIONS`` environment variable. For more information, see [Experimental Node.js features](https://docs.aws.amazon.com//lambda/latest/dg/lambda-nodejs.html#nodejs-experimental-features).\n   For JSON, you must escape quotes and special characters such as newline (``\\n``) with a backslash.\n If you specify a function that interacts with an AWS CloudFormation custom resource, you don't have to write your own functions to send responses to the custom resource that invoked the function. AWS CloudFormation provides a response module ([cfn-response](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-lambda-function-code-cfnresponsemodule.html)) that simplifies sending responses. See [Using Lambda with CloudFormation](https://docs.aws.amazon.com/lambda/latest/dg/services-cloudformation.html) for details.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -259,17 +259,17 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "Configuration settings for [durable functions](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html), including execution timeout and retention period for execution history.",
 		//	  "properties": {
 		//	    "ExecutionTimeout": {
-		//	      "description": "The amount of time (in seconds) that Lambda allows a durable function to run before stopping it. The maximum is one 366-day year or 31,622,400 seconds.",
+		//	      "description": "The maximum time (in seconds) that a durable execution can run before timing out. This timeout applies to the entire durable execution, not individual function invocations.",
 		//	      "maximum": 31622400,
 		//	      "minimum": 1,
 		//	      "type": "integer"
 		//	    },
 		//	    "RetentionPeriodInDays": {
 		//	      "default": 14,
-		//	      "description": "The number of days after a durable execution is closed that Lambda retains its history, from one to 90 days. The default is 14 days.",
+		//	      "description": "The number of days to retain execution history after a durable execution completes. After this period, execution history is no longer available through the GetDurableExecutionHistory API.",
 		//	      "maximum": 90,
 		//	      "minimum": 1,
 		//	      "type": "integer"
@@ -284,16 +284,16 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ExecutionTimeout
 				"execution_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The amount of time (in seconds) that Lambda allows a durable function to run before stopping it. The maximum is one 366-day year or 31,622,400 seconds.",
+					Description: "The maximum time (in seconds) that a durable execution can run before timing out. This timeout applies to the entire durable execution, not individual function invocations.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RetentionPeriodInDays
 				"retention_period_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The number of days after a durable execution is closed that Lambda retains its history, from one to 90 days. The default is 14 days.",
+					Description: "The number of days to retain execution history after a durable execution completes. After this period, execution history is no longer available through the GetDurableExecutionHistory API.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "Configuration settings for [durable functions](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html), including execution timeout and retention period for execution history.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Environment
@@ -425,7 +425,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "Configuration that defines the scaling behavior for a Lambda Managed Instances function, including the minimum and maximum number of execution environments that can be provisioned.",
 		//	  "properties": {
 		//	    "MaxExecutionEnvironments": {
 		//	      "description": "The maximum number of execution environments that can be provisioned for the function.",
@@ -455,7 +455,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "Configuration that defines the scaling behavior for a Lambda Managed Instances function, including the minimum and maximum number of execution environments that can be provisioned.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Handler
@@ -883,10 +883,10 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "The function's tenant isolation configuration settings. Determines whether the Lambda function runs on a shared or dedicated infrastructure per unique tenant.",
 		//	  "properties": {
 		//	    "TenantIsolationMode": {
-		//	      "description": "Determines how your Lambda function isolates execution environments between tenants.",
+		//	      "description": "Tenant isolation mode allows for invocation to be sent to a corresponding execution environment dedicated to a specific tenant ID.",
 		//	      "enum": [
 		//	        "PER_TENANT"
 		//	      ],
@@ -902,11 +902,11 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: TenantIsolationMode
 				"tenant_isolation_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Determines how your Lambda function isolates execution environments between tenants.",
+					Description: "Tenant isolation mode allows for invocation to be sent to a corresponding execution environment dedicated to a specific tenant ID.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "The function's tenant isolation configuration settings. Determines whether the Lambda function runs on a shared or dedicated infrastructure per unique tenant.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Timeout

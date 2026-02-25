@@ -55,7 +55,7 @@ func pullThroughCacheRuleDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The Amazon ECR repository prefix associated with the pull through cache rule.",
 		//	  "maxLength": 30,
 		//	  "minLength": 2,
-		//	  "pattern": "^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$",
+		//	  "pattern": "^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$",
 		//	  "type": "string"
 		//	}
 		"ecr_repository_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -91,7 +91,7 @@ func pullThroughCacheRuleDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The upstream repository prefix associated with the pull through cache rule.",
 		//	  "maxLength": 30,
 		//	  "minLength": 2,
-		//	  "pattern": "^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$",
+		//	  "pattern": "^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$",
 		//	  "type": "string"
 		//	}
 		"upstream_repository_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
