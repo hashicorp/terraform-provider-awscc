@@ -1,4 +1,4 @@
-resource "aws_iam_role" "example_glue_integration_role" {
+resource "aws_iam_role" "example" {
   name = "example-glue-integration-role"
 
   assume_role_policy = jsonencode({
