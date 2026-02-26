@@ -24,7 +24,7 @@ resource "aws_iam_role" "example" {
   }
 }
 
-resource "aws_glue_catalog_database" "example_database" {
+resource "aws_glue_catalog_database" "example" {
   name        = "example-integration-database"
   description = "Example database for Glue integration"
 
