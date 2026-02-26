@@ -34,7 +34,7 @@ resource "aws_glue_catalog_database" "example" {
   }
 }
 
-resource "aws_glue_connection" "example_connection" {
+resource "aws_glue_connection" "example" {
   name = "example-integration-connection"
 
   connection_properties = {
