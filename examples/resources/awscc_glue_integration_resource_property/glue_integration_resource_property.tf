@@ -52,11 +52,11 @@ resource "aws_glue_connection" "example_connection" {
 }
 
 resource "awscc_glue_integration_resource_property" "example" {
-  resource_arn = aws_glue_catalog_database.example_database.arn
+  resource_arn = aws_glue_catalog_database.example.arn
 
   target_processing_properties = {
-    connection_name = aws_glue_connection.example_connection.name
-    role_arn        = aws_iam_role.example_glue_integration_role.arn
+    connection_name = aws_glue_connection.example.name
+    role_arn        = aws_iam_role.example.arn
   }
 
   tags = [
