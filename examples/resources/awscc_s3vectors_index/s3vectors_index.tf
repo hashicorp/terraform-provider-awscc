@@ -34,6 +34,4 @@ resource "awscc_s3vectors_index" "example" {
       value = "example"
     }
   ]
-
-  depends_on = [awscc_s3vectors_vector_bucket.example]
 }
