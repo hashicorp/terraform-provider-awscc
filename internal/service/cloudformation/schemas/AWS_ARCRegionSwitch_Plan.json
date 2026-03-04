@@ -577,6 +577,32 @@
             "DocumentDbConfig"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "RdsPromoteReadReplicaConfig",
+          "properties": {
+            "RdsPromoteReadReplicaConfig": {
+              "$ref": "#/definitions/RdsPromoteReadReplicaConfiguration"
+            }
+          },
+          "required": [
+            "RdsPromoteReadReplicaConfig"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "RdsCreateCrossRegionReadReplicaConfig",
+          "properties": {
+            "RdsCreateCrossRegionReadReplicaConfig": {
+              "$ref": "#/definitions/RdsCreateCrossRegionReplicaConfiguration"
+            }
+          },
+          "required": [
+            "RdsCreateCrossRegionReadReplicaConfig"
+          ],
+          "additionalProperties": false
         }
       ]
     },
@@ -593,7 +619,9 @@
         "ECSServiceScaling",
         "EKSResourceScaling",
         "Route53HealthCheck",
-        "DocumentDb"
+        "DocumentDb",
+        "RdsPromoteReadReplica",
+        "RdsCreateCrossRegionReplica"
       ]
     },
     "GlobalAuroraConfiguration": {
@@ -761,6 +789,64 @@
       ],
       "additionalProperties": false
     },
+    "RdsCreateCrossRegionReplicaConfiguration": {
+      "type": "object",
+      "properties": {
+        "TimeoutMinutes": {
+          "type": "number",
+          "default": 60,
+          "minimum": 1
+        },
+        "CrossAccountRole": {
+          "type": "string",
+          "pattern": "^arn:aws[a-zA-Z0-9-]*:iam::[0-9]{12}:role/.+$"
+        },
+        "ExternalId": {
+          "type": "string"
+        },
+        "DbInstanceArnMap": {
+          "$ref": "#/definitions/RdsDbInstanceArnMap"
+        }
+      },
+      "required": [
+        "DbInstanceArnMap"
+      ],
+      "additionalProperties": false
+    },
+    "RdsDbInstanceArnMap": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "pattern": "^arn:aws[a-zA-Z-]*:rds:[a-z0-9-]+:\\d{12}:db:[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RdsPromoteReadReplicaConfiguration": {
+      "type": "object",
+      "properties": {
+        "TimeoutMinutes": {
+          "type": "number",
+          "default": 60,
+          "minimum": 1
+        },
+        "CrossAccountRole": {
+          "type": "string",
+          "pattern": "^arn:aws[a-zA-Z0-9-]*:iam::[0-9]{12}:role/.+$"
+        },
+        "ExternalId": {
+          "type": "string"
+        },
+        "DbInstanceArnMap": {
+          "$ref": "#/definitions/RdsDbInstanceArnMap"
+        }
+      },
+      "required": [
+        "DbInstanceArnMap"
+      ],
+      "additionalProperties": false
+    },
     "RecoveryApproach": {
       "type": "string",
       "enum": [
@@ -804,7 +890,9 @@
       "type": "string",
       "enum": [
         "activatingRegion",
-        "deactivatingRegion"
+        "deactivatingRegion",
+        "activeRegion",
+        "inactiveRegion"
       ]
     },
     "RegionalScalingResource": {
@@ -1058,7 +1146,8 @@
       "type": "string",
       "enum": [
         "activate",
-        "deactivate"
+        "deactivate",
+        "postRecovery"
       ]
     },
     "HealthCheckState": {
