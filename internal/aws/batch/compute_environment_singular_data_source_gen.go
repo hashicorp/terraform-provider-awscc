@@ -162,6 +162,15 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	    "PlacementGroup": {
 		//	      "type": "string"
 		//	    },
+		//	    "ScalingPolicy": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "MinScaleDownDelayMinutes": {
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "SecurityGroupIds": {
 		//	      "insertionOrder": false,
 		//	      "items": {
@@ -318,6 +327,16 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 				}, /*END ATTRIBUTE*/
 				// Property: PlacementGroup
 				"placement_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ScalingPolicy
+				"scaling_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MinScaleDownDelayMinutes
+						"min_scale_down_delay_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroupIds
@@ -530,10 +549,12 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		"launch_template_id":             "LaunchTemplateId",
 		"launch_template_name":           "LaunchTemplateName",
 		"maxv_cpus":                      "MaxvCpus",
+		"min_scale_down_delay_minutes":   "MinScaleDownDelayMinutes",
 		"minv_cpus":                      "MinvCpus",
 		"overrides":                      "Overrides",
 		"placement_group":                "PlacementGroup",
 		"replace_compute_environment":    "ReplaceComputeEnvironment",
+		"scaling_policy":                 "ScalingPolicy",
 		"security_group_ids":             "SecurityGroupIds",
 		"service_role":                   "ServiceRole",
 		"spot_iam_fleet_role":            "SpotIamFleetRole",

@@ -23,6 +23,86 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::DataSync::LocationFSxWindows resource.
 func locationFSxWindowsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CmkSecretConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key.",
+		//	  "properties": {
+		//	    "KmsKeyArn": {
+		//	      "description": "Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):kms:[a-z-0-9]+:[0-9]{12}:key/.*|)$",
+		//	      "type": "string"
+		//	    },
+		//	    "SecretArn": {
+		//	      "description": "Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"cmk_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: CustomSecretConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret.",
+		//	  "properties": {
+		//	    "SecretAccessRoleArn": {
+		//	      "description": "Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*|)$",
+		//	      "type": "string"
+		//	    },
+		//	    "SecretArn": {
+		//	      "description": "Specifies the ARN for a customer created AWS Secrets Manager secret.",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "SecretArn",
+		//	    "SecretAccessRoleArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"custom_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecretAccessRoleArn
+				"secret_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for a customer created AWS Secrets Manager secret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Domain
 		// CloudFormation resource type schema:
 		//
@@ -73,6 +153,36 @@ func locationFSxWindowsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	}
 		"location_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The URL of the FSx for Windows location that was described.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ManagedSecretConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager.",
+		//	  "properties": {
+		//	    "SecretArn": {
+		//	      "description": "Specifies the ARN for an AWS Secrets Manager secret.",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "SecretArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"managed_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for an AWS Secrets Manager secret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Password
@@ -202,17 +312,23 @@ func locationFSxWindowsDataSource(ctx context.Context) (datasource.DataSource, e
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationFSxWindows").WithTerraformTypeName("awscc_datasync_location_fsx_windows")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"domain":              "Domain",
-		"fsx_filesystem_arn":  "FsxFilesystemArn",
-		"key":                 "Key",
-		"location_arn":        "LocationArn",
-		"location_uri":        "LocationUri",
-		"password":            "Password",
-		"security_group_arns": "SecurityGroupArns",
-		"subdirectory":        "Subdirectory",
-		"tags":                "Tags",
-		"user":                "User",
-		"value":               "Value",
+		"cmk_secret_config":      "CmkSecretConfig",
+		"custom_secret_config":   "CustomSecretConfig",
+		"domain":                 "Domain",
+		"fsx_filesystem_arn":     "FsxFilesystemArn",
+		"key":                    "Key",
+		"kms_key_arn":            "KmsKeyArn",
+		"location_arn":           "LocationArn",
+		"location_uri":           "LocationUri",
+		"managed_secret_config":  "ManagedSecretConfig",
+		"password":               "Password",
+		"secret_access_role_arn": "SecretAccessRoleArn",
+		"secret_arn":             "SecretArn",
+		"security_group_arns":    "SecurityGroupArns",
+		"subdirectory":           "Subdirectory",
+		"tags":                   "Tags",
+		"user":                   "User",
+		"value":                  "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

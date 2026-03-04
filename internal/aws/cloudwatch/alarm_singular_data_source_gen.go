@@ -117,11 +117,11 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "description": "Dimension is an embedded property of the ``AWS::CloudWatch::Alarm`` type. Dimensions are name/value pairs that can be associated with a CW metric. You can specify a maximum of 30 dimensions for a given metric.",
 		//	    "properties": {
 		//	      "Name": {
-		//	        "description": "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
+		//	        "description": "The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "The value for the dimension, from 1?255 characters in length.",
+		//	        "description": "The value for the dimension, from 1–255 characters in length.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -139,12 +139,12 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
+						Description: "The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the dimension, from 1?255 characters in length.",
+						Description: "The value for the dimension, from 1–255 characters in length.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -253,11 +253,11 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "description": "Dimension is an embedded property of the ``AWS::CloudWatch::Alarm`` type. Dimensions are name/value pairs that can be associated with a CW metric. You can specify a maximum of 30 dimensions for a given metric.",
 		//	                  "properties": {
 		//	                    "Name": {
-		//	                      "description": "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
+		//	                      "description": "The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Value": {
-		//	                      "description": "The value for the dimension, from 1?255 characters in length.",
+		//	                      "description": "The value for the dimension, from 1–255 characters in length.",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -353,12 +353,12 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Name
 												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
+													Description: "The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Value
 												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The value for the dimension, from 1?255 characters in length.",
+													Description: "The value for the dimension, from 1–255 characters in length.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
