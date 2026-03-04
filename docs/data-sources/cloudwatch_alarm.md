@@ -64,8 +64,8 @@ Data Source schema for AWS::CloudWatch::Alarm
 
 Read-Only:
 
-- `name` (String) The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.
-- `value` (String) The value for the dimension, from 1?255 characters in length.
+- `name` (String) The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.
+- `value` (String) The value for the dimension, from 1–255 characters in length.
 
 
 <a id="nestedatt--metrics"></a>
@@ -114,8 +114,8 @@ Read-Only:
 
 Read-Only:
 
-- `name` (String) The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.
-- `value` (String) The value for the dimension, from 1?255 characters in length.
+- `name` (String) The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.
+- `value` (String) The value for the dimension, from 1–255 characters in length.
 
 
 

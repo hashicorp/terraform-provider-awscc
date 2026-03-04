@@ -325,7 +325,7 @@ func repositoryCreationTemplateResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The repository namespace prefix associated with the repository creation template.",
 		//	  "maxLength": 256,
 		//	  "minLength": 1,
-		//	  "pattern": "^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$",
+		//	  "pattern": "^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$",
 		//	  "type": "string"
 		//	}
 		"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -333,7 +333,7 @@ func repositoryCreationTemplateResource(ctx context.Context) (resource.Resource,
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 256),
-				stringvalidator.RegexMatches(regexp.MustCompile("^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

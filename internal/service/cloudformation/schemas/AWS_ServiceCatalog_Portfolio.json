@@ -1,0 +1,107 @@
+{
+  "typeName": "AWS::ServiceCatalog::Portfolio",
+  "description": "Resource type definition for AWS::ServiceCatalog::Portfolio",
+  "additionalProperties": false,
+  "properties": {
+    "Id": {
+      "type": "string"
+    },
+    "PortfolioName": {
+      "type": "string"
+    },
+    "ProviderName": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "string"
+    },
+    "DisplayName": {
+      "type": "string"
+    },
+    "AcceptLanguage": {
+      "type": "string"
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    }
+  },
+  "required": [
+    "DisplayName",
+    "ProviderName"
+  ],
+  "readOnlyProperties": [
+    "/properties/PortfolioName",
+    "/properties/Id"
+  ],
+  "writeOnlyProperties": [
+    "/properties/AcceptLanguage"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags"
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "servicecatalog:CreatePortfolio",
+        "servicecatalog:DescribePortfolio",
+        "servicecatalog:TagResource",
+        "servicecatalog:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "servicecatalog:DescribePortfolio",
+        "servicecatalog:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "servicecatalog:UpdatePortfolio",
+        "servicecatalog:DescribePortfolio",
+        "servicecatalog:TagResource",
+        "servicecatalog:UntagResource",
+        "servicecatalog:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "servicecatalog:DeletePortfolio",
+        "servicecatalog:DescribePortfolio"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "servicecatalog:ListPortfolios"
+      ]
+    }
+  }
+}

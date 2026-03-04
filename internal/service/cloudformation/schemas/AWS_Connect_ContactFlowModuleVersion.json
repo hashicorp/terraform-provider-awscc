@@ -1,0 +1,98 @@
+{
+  "typeName": "AWS::Connect::ContactFlowModuleVersion",
+  "description": "Resource Type definition for ContactFlowModuleVersion",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-connect",
+  "definitions": {},
+  "properties": {
+    "ContactFlowModuleVersionARN": {
+      "description": "The identifier of the contact flow module version (ARN).",
+      "type": "string",
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]+:[0-9]{12}:instance/[-a-zA-Z0-9]+/flow-module/[-a-zA-Z0-9]+:[0-9]+$",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "ContactFlowModuleId": {
+      "description": "The identifier of the contact flow module (ARN) this version is tied to.",
+      "type": "string",
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]+:[0-9]{12}:instance/[-a-zA-Z0-9]+/flow-module/[-a-zA-Z0-9]+$",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "Version": {
+      "description": "The version number of this revision",
+      "type": "integer"
+    },
+    "Description": {
+      "description": "The description of the version.",
+      "type": "string",
+      "maxLength": 500
+    },
+    "FlowModuleContentSha256": {
+      "description": "Indicates the checksum value of the latest published flow module content",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]{64}$",
+      "minLength": 1,
+      "maxLength": 64
+    }
+  },
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "required": [
+    "ContactFlowModuleId"
+  ],
+  "primaryIdentifier": [
+    "/properties/ContactFlowModuleVersionARN"
+  ],
+  "readOnlyProperties": [
+    "/properties/ContactFlowModuleVersionARN",
+    "/properties/Version",
+    "/properties/FlowModuleContentSha256"
+  ],
+  "createOnlyProperties": [
+    "/properties/ContactFlowModuleId",
+    "/properties/Description"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "connect:CreateContactFlowModuleVersion",
+        "connect:DescribeContactFlowModule"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "connect:DescribeContactFlowModule"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "ContactFlowModuleId": {
+            "$ref": "resource-schema.json#/properties/ContactFlowModuleId"
+          }
+        },
+        "required": [
+          "ContactFlowModuleId"
+        ]
+      },
+      "permissions": [
+        "connect:ListContactFlowModuleVersions"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "connect:DescribeContactFlowModule"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "connect:DeleteContactFlowModuleVersion"
+      ]
+    }
+  }
+}

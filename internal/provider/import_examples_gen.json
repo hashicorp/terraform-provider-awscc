@@ -676,9 +676,33 @@
         "identifier": ["BrowserId"]
     },
     {
+        "resource": "awscc_bedrockagentcore_browser_profile",
+        "generateListResource": true,
+        "identifier": ["ProfileId"]
+    },
+    {
         "resource": "awscc_bedrockagentcore_code_interpreter_custom",
         "generateListResource": true,
         "identifier": ["CodeInterpreterId"]
+    },
+    {
+        "resource": "awscc_bedrockagentcore_evaluator",
+        "generateListResource": true,
+        "identifier": ["EvaluatorArn"]
+    },
+    {
+        "resource": "awscc_bedrockagentcore_online_evaluation_config",
+        "generateListResource": true,
+        "identifier": ["OnlineEvaluationConfigArn"]
+    },
+    {
+        "resource": "awscc_bedrockagentcore_policy",
+        "identifier": ["PolicyArn"]
+    },
+    {
+        "resource": "awscc_bedrockagentcore_policy_engine",
+        "generateListResource": true,
+        "identifier": ["PolicyEngineArn"]
     },
     {
         "resource": "awscc_bedrockagentcore_gateway",
@@ -703,6 +727,11 @@
         "resource": "awscc_bedrockagentcore_workload_identity",
         "generateListResource": true,
         "identifier": ["Name"]
+    },
+    {
+        "resource": "awscc_bedrockmantle_project",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_billing_billing_view",
@@ -1261,6 +1290,15 @@
     {
         "resource": "awscc_connect_contact_flow_module",
         "identifier": ["ContactFlowModuleArn"]
+    },
+    {
+        "resource": "awscc_connect_contact_flow_module_alias",
+        "identifier": ["ContactFlowModuleAliasARN"]
+    },
+    {
+        "resource": "awscc_connect_contact_flow_module_version",
+        "generateListResource": true,
+        "identifier": ["ContactFlowModuleVersionARN"]
     },
     {
         "resource": "awscc_connect_contact_flow_version",
@@ -4222,6 +4260,40 @@
         "identifier": ["AttachmentId"]
     },
     {
+        "resource": "awscc_directconnect_connection",
+        "generateListResource": true,
+        "identifier": ["ConnectionArn"]
+    },
+    {
+        "resource": "awscc_directconnect_direct_connect_gateway",
+        "generateListResource": true,
+        "identifier": ["DirectConnectGatewayArn"]
+    },
+    {
+        "resource": "awscc_directconnect_direct_connect_gateway_association",
+        "identifier": ["AssociationId"]
+    },
+    {
+        "resource": "awscc_directconnect_lag",
+        "generateListResource": true,
+        "identifier": ["LagArn"]
+    },
+    {
+        "resource": "awscc_directconnect_private_virtual_interface",
+        "generateListResource": true,
+        "identifier": ["VirtualInterfaceArn"]
+    },
+    {
+        "resource": "awscc_directconnect_public_virtual_interface",
+        "generateListResource": true,
+        "identifier": ["VirtualInterfaceArn"]
+    },
+    {
+        "resource": "awscc_directconnect_transit_virtual_interface",
+        "generateListResource": true,
+        "identifier": ["VirtualInterfaceArn"]
+    },
+    {
         "resource": "awscc_networkmanager_global_network",
         "generateListResource": true,
         "identifier": ["Id"]
@@ -5748,6 +5820,11 @@
     },
     {
         "resource": "awscc_servicecatalog_launch_template_constraint",
+        "identifier": ["Id"]
+    },
+    {
+        "resource": "awscc_servicecatalog_portfolio",
+        "generateListResource": true,
         "identifier": ["Id"]
     },
     {

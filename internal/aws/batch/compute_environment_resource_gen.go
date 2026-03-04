@@ -185,6 +185,15 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		//	    "PlacementGroup": {
 		//	      "type": "string"
 		//	    },
+		//	    "ScalingPolicy": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "MinScaleDownDelayMinutes": {
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "SecurityGroupIds": {
 		//	      "insertionOrder": false,
 		//	      "items": {
@@ -463,6 +472,24 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ScalingPolicy
+				"scaling_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MinScaleDownDelayMinutes
+						"min_scale_down_delay_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroupIds
@@ -785,10 +812,12 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		"launch_template_id":             "LaunchTemplateId",
 		"launch_template_name":           "LaunchTemplateName",
 		"maxv_cpus":                      "MaxvCpus",
+		"min_scale_down_delay_minutes":   "MinScaleDownDelayMinutes",
 		"minv_cpus":                      "MinvCpus",
 		"overrides":                      "Overrides",
 		"placement_group":                "PlacementGroup",
 		"replace_compute_environment":    "ReplaceComputeEnvironment",
+		"scaling_policy":                 "ScalingPolicy",
 		"security_group_ids":             "SecurityGroupIds",
 		"service_role":                   "ServiceRole",
 		"spot_iam_fleet_role":            "SpotIamFleetRole",

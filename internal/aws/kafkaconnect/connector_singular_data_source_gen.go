@@ -130,6 +130,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        }
 		//	      },
 		//	      "required": [
+		//	        "McuCount",
 		//	        "WorkerCount"
 		//	      ],
 		//	      "type": "object"

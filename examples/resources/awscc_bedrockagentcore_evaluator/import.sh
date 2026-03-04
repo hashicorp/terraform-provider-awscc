@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrockagentcore_evaluator.example "evaluator_arn"

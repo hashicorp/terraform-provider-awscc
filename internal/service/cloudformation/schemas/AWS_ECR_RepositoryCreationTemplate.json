@@ -98,7 +98,7 @@
     "Prefix": {
       "description": "The repository namespace prefix associated with the repository creation template.",
       "type": "string",
-      "pattern": "^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$",
+      "pattern": "^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$",
       "minLength": 1,
       "maxLength": 256
     },

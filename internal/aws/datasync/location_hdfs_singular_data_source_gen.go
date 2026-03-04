@@ -72,6 +72,86 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Description: "Size of chunks (blocks) in bytes that the data is divided into when stored in the HDFS cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CmkSecretConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key.",
+		//	  "properties": {
+		//	    "KmsKeyArn": {
+		//	      "description": "Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):kms:[a-z-0-9]+:[0-9]{12}:key/.*|)$",
+		//	      "type": "string"
+		//	    },
+		//	    "SecretArn": {
+		//	      "description": "Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"cmk_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: CustomSecretConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret.",
+		//	  "properties": {
+		//	    "SecretAccessRoleArn": {
+		//	      "description": "Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*|)$",
+		//	      "type": "string"
+		//	    },
+		//	    "SecretArn": {
+		//	      "description": "Specifies the ARN for a customer created AWS Secrets Manager secret.",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "SecretArn",
+		//	    "SecretAccessRoleArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"custom_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecretAccessRoleArn
+				"secret_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for a customer created AWS Secrets Manager secret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KerberosKeytab
 		// CloudFormation resource type schema:
 		//
@@ -148,6 +228,36 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	}
 		"location_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The URL of the HDFS location that was described.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ManagedSecretConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager.",
+		//	  "properties": {
+		//	    "SecretArn": {
+		//	      "description": "Specifies the ARN for an AWS Secrets Manager secret.",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "SecretArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"managed_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ARN for an AWS Secrets Manager secret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NameNodes
@@ -361,20 +471,26 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"agent_arns":               "AgentArns",
 		"authentication_type":      "AuthenticationType",
 		"block_size":               "BlockSize",
+		"cmk_secret_config":        "CmkSecretConfig",
+		"custom_secret_config":     "CustomSecretConfig",
 		"data_transfer_protection": "DataTransferProtection",
 		"hostname":                 "Hostname",
 		"kerberos_keytab":          "KerberosKeytab",
 		"kerberos_krb_5_conf":      "KerberosKrb5Conf",
 		"kerberos_principal":       "KerberosPrincipal",
 		"key":                      "Key",
+		"kms_key_arn":              "KmsKeyArn",
 		"kms_key_provider_uri":     "KmsKeyProviderUri",
 		"location_arn":             "LocationArn",
 		"location_uri":             "LocationUri",
+		"managed_secret_config":    "ManagedSecretConfig",
 		"name_nodes":               "NameNodes",
 		"port":                     "Port",
 		"qop_configuration":        "QopConfiguration",
 		"replication_factor":       "ReplicationFactor",
 		"rpc_protection":           "RpcProtection",
+		"secret_access_role_arn":   "SecretAccessRoleArn",
+		"secret_arn":               "SecretArn",
 		"simple_user":              "SimpleUser",
 		"subdirectory":             "Subdirectory",
 		"tags":                     "Tags",

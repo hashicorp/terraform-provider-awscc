@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::DataSync::LocationHDFS",
-  "description": "Resource schema for AWS::DataSync::LocationHDFS.",
+  "description": "Resource Type definition for AWS::DataSync::LocationHDFS.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-datasync.git",
   "definitions": {
     "NameNode": {
@@ -77,6 +77,64 @@
           "default": "PRIVACY"
         }
       }
+    },
+    "CmkSecretConfig": {
+      "additionalProperties": false,
+      "description": "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key.",
+      "type": "object",
+      "properties": {
+        "SecretArn": {
+          "description": "Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.",
+          "type": "string",
+          "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$",
+          "maxLength": 2048
+        },
+        "KmsKeyArn": {
+          "description": "Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.",
+          "type": "string",
+          "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):kms:[a-z-0-9]+:[0-9]{12}:key/.*|)$",
+          "maxLength": 2048
+        }
+      }
+    },
+    "CustomSecretConfig": {
+      "additionalProperties": false,
+      "description": "Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret.",
+      "type": "object",
+      "properties": {
+        "SecretArn": {
+          "description": "Specifies the ARN for a customer created AWS Secrets Manager secret.",
+          "type": "string",
+          "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$",
+          "maxLength": 2048
+        },
+        "SecretAccessRoleArn": {
+          "description": "Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.",
+          "type": "string",
+          "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*|)$",
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "SecretArn",
+        "SecretAccessRoleArn"
+      ]
+    },
+    "ManagedSecretConfig": {
+      "additionalProperties": false,
+      "description": "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager.",
+      "type": "object",
+      "properties": {
+        "SecretArn": {
+          "description": "Specifies the ARN for an AWS Secrets Manager secret.",
+          "type": "string",
+          "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$",
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "SecretArn"
+      ]
     }
   },
   "properties": {
@@ -185,13 +243,22 @@
       "type": "string",
       "pattern": "^(efs|nfs|s3|smb|fsxw|hdfs)://[a-zA-Z0-9.:/\\-]+$",
       "maxLength": 4356
+    },
+    "CmkSecretConfig": {
+      "$ref": "#/definitions/CmkSecretConfig"
+    },
+    "CustomSecretConfig": {
+      "$ref": "#/definitions/CustomSecretConfig"
+    },
+    "ManagedSecretConfig": {
+      "$ref": "#/definitions/ManagedSecretConfig"
     }
   },
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": true,
+    "cloudFormationSystemTags": false,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "datasync:TagResource",
@@ -207,7 +274,9 @@
   ],
   "readOnlyProperties": [
     "/properties/LocationArn",
-    "/properties/LocationUri"
+    "/properties/LocationUri",
+    "/properties/ManagedSecretConfig",
+    "/properties/CmkSecretConfig/SecretArn"
   ],
   "primaryIdentifier": [
     "/properties/LocationArn"
@@ -223,7 +292,15 @@
         "datasync:CreateLocationHdfs",
         "datasync:DescribeLocationHdfs",
         "datasync:TagResource",
-        "datasync:ListTagsForResource"
+        "datasync:ListTagsForResource",
+        "secretsmanager:CreateSecret",
+        "secretsmanager:PutSecretValue",
+        "secretsmanager:DeleteSecret",
+        "iam:CreateServiceLinkedRole",
+        "iam:PassRole",
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:GenerateDataKey"
       ]
     },
     "read": {
@@ -238,12 +315,22 @@
         "datasync:DescribeLocationHdfs",
         "datasync:ListTagsForResource",
         "datasync:TagResource",
-        "datasync:UntagResource"
+        "datasync:UntagResource",
+        "secretsmanager:UpdateSecret",
+        "secretsmanager:DeleteSecret",
+        "secretsmanager:PutSecretValue",
+        "secretsmanager:CreateSecret",
+        "iam:CreateServiceLinkedRole",
+        "iam:PassRole",
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:GenerateDataKey"
       ]
     },
     "delete": {
       "permissions": [
-        "datasync:DeleteLocation"
+        "datasync:DeleteLocation",
+        "secretsmanager:DeleteSecret"
       ]
     },
     "list": {

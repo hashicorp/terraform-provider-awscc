@@ -265,11 +265,11 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The throughput to provision for a volume, with a maximum of 1,000 MiB/s.\n This parameter is valid only for ``gp3`` volumes. The default value is 125.\n Valid Range: Minimum value of 125. Maximum value of 1000.",
+		//	  "description": "The throughput to provision for a volume, with a maximum of 2,000 MiB/s.\n This parameter is valid only for ``gp3`` volumes. The default value is 125.\n Valid Range: Minimum value of 125. Maximum value of 2000.\n The maximum ratio of throughput to IOPS is 0.25 MiB/s per IOPS. For example, a volume with 3,000 IOPS can have a maximum throughput of 750 MiB/s (3,000 x 0.25).",
 		//	  "type": "integer"
 		//	}
 		"throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The throughput to provision for a volume, with a maximum of 1,000 MiB/s.\n This parameter is valid only for ``gp3`` volumes. The default value is 125.\n Valid Range: Minimum value of 125. Maximum value of 1000.",
+			Description: "The throughput to provision for a volume, with a maximum of 2,000 MiB/s.\n This parameter is valid only for ``gp3`` volumes. The default value is 125.\n Valid Range: Minimum value of 125. Maximum value of 2000.\n The maximum ratio of throughput to IOPS is 0.25 MiB/s per IOPS. For example, a volume with 3,000 IOPS can have a maximum throughput of 750 MiB/s (3,000 x 0.25).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/

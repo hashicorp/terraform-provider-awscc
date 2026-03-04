@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrockagentcore_browser_profile.example "profile_id"

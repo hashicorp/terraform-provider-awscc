@@ -217,7 +217,7 @@ func repositoryCreationTemplateDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The repository namespace prefix associated with the repository creation template.",
 		//	  "maxLength": 256,
 		//	  "minLength": 1,
-		//	  "pattern": "^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$",
+		//	  "pattern": "^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$",
 		//	  "type": "string"
 		//	}
 		"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/

@@ -698,8 +698,29 @@ resource_schema "aws_bedrockagentcore_browser_custom" {
   cloudformation_type_name = "AWS::BedrockAgentCore::BrowserCustom"
 }
 
+resource_schema "aws_bedrockagentcore_browser_profile" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::BrowserProfile"
+}
+
 resource_schema "aws_bedrockagentcore_code_interpreter_custom" {
   cloudformation_type_name = "AWS::BedrockAgentCore::CodeInterpreterCustom"
+}
+
+resource_schema "aws_bedrockagentcore_evaluator" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::Evaluator"
+}
+
+resource_schema "aws_bedrockagentcore_online_evaluation_config" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::OnlineEvaluationConfig"
+}
+
+resource_schema "aws_bedrockagentcore_policy" {
+  cloudformation_type_name               = "AWS::BedrockAgentCore::Policy"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_bedrockagentcore_policy_engine" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::PolicyEngine"
 }
 
 resource_schema "aws_bedrockagentcore_gateway" {
@@ -731,6 +752,10 @@ resource_schema "aws_bedrockagentcore_runtime_endpoint" {
 
 resource_schema "aws_bedrockagentcore_workload_identity" {
   cloudformation_type_name = "AWS::BedrockAgentCore::WorkloadIdentity"
+}
+
+resource_schema "aws_bedrockmantle_project" {
+  cloudformation_type_name = "AWS::BedrockMantle::Project"
 }
 
 resource_schema "aws_billing_billing_view" {
@@ -1256,6 +1281,15 @@ resource_schema "aws_connect_contact_flow" {
 resource_schema "aws_connect_contact_flow_module" {
   cloudformation_type_name               = "AWS::Connect::ContactFlowModule"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_contact_flow_module_alias" {
+  cloudformation_type_name               = "AWS::Connect::ContactFlowModuleAlias"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_contact_flow_module_version" {
+  cloudformation_type_name = "AWS::Connect::ContactFlowModuleVersion"
 }
 
 resource_schema "aws_connect_contact_flow_version" {
@@ -4045,6 +4079,35 @@ resource_schema "aws_networkmanager_direct_connect_gateway_attachment" {
   cloudformation_type_name = "AWS::NetworkManager::DirectConnectGatewayAttachment"
 }
 
+resource_schema "aws_directconnect_connection" {
+  cloudformation_type_name = "AWS::DirectConnect::Connection"
+}
+
+resource_schema "aws_directconnect_direct_connect_gateway" {
+  cloudformation_type_name = "AWS::DirectConnect::DirectConnectGateway"
+}
+
+resource_schema "aws_directconnect_direct_connect_gateway_association" {
+  cloudformation_type_name               = "AWS::DirectConnect::DirectConnectGatewayAssociation"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_directconnect_lag" {
+  cloudformation_type_name = "AWS::DirectConnect::Lag"
+}
+
+resource_schema "aws_directconnect_private_virtual_interface" {
+  cloudformation_type_name = "AWS::DirectConnect::PrivateVirtualInterface"
+}
+
+resource_schema "aws_directconnect_public_virtual_interface" {
+  cloudformation_type_name = "AWS::DirectConnect::PublicVirtualInterface"
+}
+
+resource_schema "aws_directconnect_transit_virtual_interface" {
+  cloudformation_type_name = "AWS::DirectConnect::TransitVirtualInterface"
+}
+
 resource_schema "aws_networkmanager_global_network" {
   cloudformation_type_name = "AWS::NetworkManager::GlobalNetwork"
 }
@@ -5499,6 +5562,10 @@ resource_schema "aws_servicecatalog_launch_role_constraint" {
 resource_schema "aws_servicecatalog_launch_template_constraint" {
   cloudformation_type_name               = "AWS::ServiceCatalog::LaunchTemplateConstraint"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_servicecatalog_portfolio" {
+  cloudformation_type_name = "AWS::ServiceCatalog::Portfolio"
 }
 
 resource_schema "aws_servicecatalog_portfolio_principal_association" {

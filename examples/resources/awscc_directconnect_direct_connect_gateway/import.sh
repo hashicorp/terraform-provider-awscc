@@ -1,0 +1,1 @@
+$ terraform import awscc_directconnect_direct_connect_gateway.example "direct_connect_gateway_arn"

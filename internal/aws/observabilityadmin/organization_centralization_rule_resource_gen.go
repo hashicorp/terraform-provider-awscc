@@ -71,6 +71,21 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 		//	              ],
 		//	              "type": "object"
 		//	            },
+		//	            "LogGroupNameConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "LogGroupNamePattern": {
+		//	                  "maxLength": 512,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^(?:[\\._\\-/#A-Za-z0-9]+|\\$\\{[A-Za-z]+(?:\\.[A-Za-z]+){1,2}\\})+$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "LogGroupNamePattern"
+		//	              ],
+		//	              "type": "object"
+		//	            },
 		//	            "LogsEncryptionConfiguration": {
 		//	              "additionalProperties": false,
 		//	              "properties": {
@@ -207,6 +222,29 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthAtLeast(1),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: LogGroupNameConfiguration
+								"log_group_name_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: LogGroupNamePattern
+										"log_group_name_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(1, 512),
+												stringvalidator.RegexMatches(regexp.MustCompile("^(?:[\\._\\-/#A-Za-z0-9]+|\\$\\{[A-Za-z]+(?:\\.[A-Za-z]+){1,2}\\})+$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -497,6 +535,8 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 		"encryption_strategy":                     "EncryptionStrategy",
 		"key":                                     "Key",
 		"kms_key_arn":                             "KmsKeyArn",
+		"log_group_name_configuration":            "LogGroupNameConfiguration",
+		"log_group_name_pattern":                  "LogGroupNamePattern",
 		"log_group_selection_criteria":            "LogGroupSelectionCriteria",
 		"logs_encryption_configuration":           "LogsEncryptionConfiguration",
 		"region":                                  "Region",

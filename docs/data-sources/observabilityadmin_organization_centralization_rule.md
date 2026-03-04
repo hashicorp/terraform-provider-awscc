@@ -49,6 +49,7 @@ Read-Only:
 Read-Only:
 
 - `backup_configuration` (Attributes) (see [below for nested schema](#nestedatt--rule--destination--destination_logs_configuration--backup_configuration))
+- `log_group_name_configuration` (Attributes) (see [below for nested schema](#nestedatt--rule--destination--destination_logs_configuration--log_group_name_configuration))
 - `logs_encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--rule--destination--destination_logs_configuration--logs_encryption_configuration))
 
 <a id="nestedatt--rule--destination--destination_logs_configuration--backup_configuration"></a>
@@ -58,6 +59,14 @@ Read-Only:
 
 - `kms_key_arn` (String)
 - `region` (String)
+
+
+<a id="nestedatt--rule--destination--destination_logs_configuration--log_group_name_configuration"></a>
+### Nested Schema for `rule.destination.destination_logs_configuration.log_group_name_configuration`
+
+Read-Only:
+
+- `log_group_name_pattern` (String)
 
 
 <a id="nestedatt--rule--destination--destination_logs_configuration--logs_encryption_configuration"></a>

@@ -1,0 +1,346 @@
+{
+  "typeName": "AWS::BedrockAgentCore::Evaluator",
+  "description": "Resource Type definition for AWS::BedrockAgentCore::Evaluator - Creates a custom evaluator for agent quality assessment using LLM-as-a-Judge configurations.",
+  "definitions": {
+    "EvaluatorStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "CREATING",
+        "CREATE_FAILED",
+        "UPDATING",
+        "UPDATE_FAILED",
+        "DELETING"
+      ]
+    },
+    "EvaluatorLevel": {
+      "type": "string",
+      "enum": [
+        "TOOL_CALL",
+        "TRACE",
+        "SESSION"
+      ]
+    },
+    "EvaluatorConfig": {
+      "type": "object",
+      "description": "The configuration that defines how an evaluator assesses agent performance.",
+      "properties": {
+        "LlmAsAJudge": {
+          "$ref": "#/definitions/LlmAsAJudgeEvaluatorConfig"
+        }
+      },
+      "required": [
+        "LlmAsAJudge"
+      ],
+      "additionalProperties": false
+    },
+    "LlmAsAJudgeEvaluatorConfig": {
+      "type": "object",
+      "description": "The configuration for LLM-as-a-Judge evaluation.",
+      "properties": {
+        "Instructions": {
+          "type": "string",
+          "description": "The evaluation instructions that guide the language model in assessing agent performance."
+        },
+        "RatingScale": {
+          "$ref": "#/definitions/RatingScale"
+        },
+        "ModelConfig": {
+          "$ref": "#/definitions/EvaluatorModelConfig"
+        }
+      },
+      "required": [
+        "Instructions",
+        "RatingScale",
+        "ModelConfig"
+      ],
+      "additionalProperties": false
+    },
+    "RatingScale": {
+      "type": "object",
+      "description": "The rating scale that defines how evaluators should score agent performance.",
+      "properties": {
+        "Numerical": {
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/NumericalScaleDefinition"
+          }
+        },
+        "Categorical": {
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/CategoricalScaleDefinition"
+          }
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "Numerical"
+          ]
+        },
+        {
+          "required": [
+            "Categorical"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "NumericalScaleDefinition": {
+      "type": "object",
+      "description": "A numerical rating scale option.",
+      "properties": {
+        "Value": {
+          "type": "number",
+          "description": "The numerical value for this rating scale option.",
+          "minimum": 0
+        },
+        "Label": {
+          "type": "string",
+          "description": "The label that describes this numerical rating option.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "Definition": {
+          "type": "string",
+          "description": "The description that explains what this numerical rating represents."
+        }
+      },
+      "required": [
+        "Value",
+        "Label",
+        "Definition"
+      ],
+      "additionalProperties": false
+    },
+    "CategoricalScaleDefinition": {
+      "type": "object",
+      "description": "A categorical rating scale option.",
+      "properties": {
+        "Label": {
+          "type": "string",
+          "description": "The label of this categorical rating option.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "Definition": {
+          "type": "string",
+          "description": "The description that explains what this categorical rating represents."
+        }
+      },
+      "required": [
+        "Label",
+        "Definition"
+      ],
+      "additionalProperties": false
+    },
+    "EvaluatorModelConfig": {
+      "type": "object",
+      "description": "The model configuration that specifies which foundation model to use for evaluation.",
+      "properties": {
+        "BedrockEvaluatorModelConfig": {
+          "$ref": "#/definitions/BedrockEvaluatorModelConfig"
+        }
+      },
+      "required": [
+        "BedrockEvaluatorModelConfig"
+      ],
+      "additionalProperties": false
+    },
+    "BedrockEvaluatorModelConfig": {
+      "type": "object",
+      "description": "The configuration for using Amazon Bedrock models in evaluator assessments.",
+      "properties": {
+        "ModelId": {
+          "type": "string",
+          "description": "The identifier of the Amazon Bedrock model to use for evaluation."
+        },
+        "InferenceConfig": {
+          "$ref": "#/definitions/InferenceConfiguration"
+        },
+        "AdditionalModelRequestFields": {
+          "type": "object",
+          "description": "Additional model-specific request fields."
+        }
+      },
+      "required": [
+        "ModelId"
+      ],
+      "additionalProperties": false
+    },
+    "InferenceConfiguration": {
+      "type": "object",
+      "description": "The inference configuration parameters that control model behavior during evaluation.",
+      "properties": {
+        "MaxTokens": {
+          "type": "integer",
+          "description": "The maximum number of tokens to generate in the model response.",
+          "minimum": 1
+        },
+        "Temperature": {
+          "type": "number",
+          "description": "The temperature value that controls randomness in the model's responses.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "TopP": {
+          "type": "number",
+          "description": "The top-p sampling parameter that controls the diversity of the model's responses.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "EvaluatorId": {
+      "type": "string",
+      "description": "The unique identifier of the evaluator.",
+      "pattern": "^(Builtin.[a-zA-Z0-9_-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10})$"
+    },
+    "EvaluatorArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the evaluator.",
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov):bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:evaluator/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$"
+    },
+    "EvaluatorName": {
+      "type": "string",
+      "description": "The name of the evaluator. Must be unique within your account.",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the evaluator.",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "EvaluatorConfig": {
+      "$ref": "#/definitions/EvaluatorConfig",
+      "description": "The configuration for the evaluator."
+    },
+    "Level": {
+      "$ref": "#/definitions/EvaluatorLevel",
+      "description": "The evaluation level that determines the scope of evaluation."
+    },
+    "Status": {
+      "$ref": "#/definitions/EvaluatorStatus",
+      "description": "The current status of the evaluator."
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp when the evaluator was created.",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The timestamp when the evaluator was last updated.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of tags to assign to the evaluator.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "EvaluatorName",
+    "EvaluatorConfig",
+    "Level"
+  ],
+  "readOnlyProperties": [
+    "/properties/EvaluatorId",
+    "/properties/EvaluatorArn",
+    "/properties/Status",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/EvaluatorName"
+  ],
+  "primaryIdentifier": [
+    "/properties/EvaluatorArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/EvaluatorId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": false,
+    "permissions": [
+      "bedrock-agentcore:TagResource",
+      "bedrock-agentcore:UntagResource",
+      "bedrock-agentcore:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bedrock-agentcore:CreateEvaluator",
+        "bedrock-agentcore:GetEvaluator",
+        "bedrock-agentcore:TagResource",
+        "bedrock:InvokeModel"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bedrock-agentcore:GetEvaluator",
+        "bedrock-agentcore:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bedrock-agentcore:UpdateEvaluator",
+        "bedrock-agentcore:GetEvaluator",
+        "bedrock-agentcore:TagResource",
+        "bedrock-agentcore:UntagResource",
+        "bedrock-agentcore:ListTagsForResource",
+        "bedrock:InvokeModel"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bedrock-agentcore:DeleteEvaluator",
+        "bedrock-agentcore:GetEvaluator"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bedrock-agentcore:ListEvaluators"
+      ]
+    }
+  }
+}

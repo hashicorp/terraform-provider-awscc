@@ -60,6 +60,21 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 		//	              ],
 		//	              "type": "object"
 		//	            },
+		//	            "LogGroupNameConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "LogGroupNamePattern": {
+		//	                  "maxLength": 512,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^(?:[\\._\\-/#A-Za-z0-9]+|\\$\\{[A-Za-z]+(?:\\.[A-Za-z]+){1,2}\\})+$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "LogGroupNamePattern"
+		//	              ],
+		//	              "type": "object"
+		//	            },
 		//	            "LogsEncryptionConfiguration": {
 		//	              "additionalProperties": false,
 		//	              "properties": {
@@ -176,6 +191,16 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 										}, /*END ATTRIBUTE*/
 										// Property: Region
 										"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogGroupNameConfiguration
+								"log_group_name_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: LogGroupNamePattern
+										"log_group_name_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Computed: true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -341,6 +366,8 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 		"encryption_strategy":                     "EncryptionStrategy",
 		"key":                                     "Key",
 		"kms_key_arn":                             "KmsKeyArn",
+		"log_group_name_configuration":            "LogGroupNameConfiguration",
+		"log_group_name_pattern":                  "LogGroupNamePattern",
 		"log_group_selection_criteria":            "LogGroupSelectionCriteria",
 		"logs_encryption_configuration":           "LogsEncryptionConfiguration",
 		"region":                                  "Region",

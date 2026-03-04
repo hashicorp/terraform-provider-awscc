@@ -1,0 +1,1 @@
+$ terraform import awscc_directconnect_lag.example "lag_arn"
