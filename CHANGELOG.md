@@ -1,4 +1,65 @@
-## 1.74.0 (Unreleased)
+## 1.74.0 (March 4, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_bedrockagentcore_browser_profile`
+* **New Data Source:** `awscc_bedrockagentcore_browser_profiles`
+* **New Data Source:** `awscc_bedrockagentcore_evaluator`
+* **New Data Source:** `awscc_bedrockagentcore_evaluators`
+* **New Data Source:** `awscc_bedrockagentcore_online_evaluation_config`
+* **New Data Source:** `awscc_bedrockagentcore_online_evaluation_configs`
+* **New Data Source:** `awscc_bedrockagentcore_policy`
+* **New Data Source:** `awscc_bedrockagentcore_policy_engine`
+* **New Data Source:** `awscc_bedrockagentcore_policy_engines`
+* **New Data Source:** `awscc_bedrockmantle_project`
+* **New Data Source:** `awscc_bedrockmantle_projects`
+* **New Data Source:** `awscc_connect_contact_flow_module_alias`
+* **New Data Source:** `awscc_connect_contact_flow_module_version`
+* **New Data Source:** `awscc_connect_contact_flow_module_versions`
+* **New Data Source:** `awscc_directconnect_connection`
+* **New Data Source:** `awscc_directconnect_connections`
+* **New Data Source:** `awscc_directconnect_direct_connect_gateway`
+* **New Data Source:** `awscc_directconnect_direct_connect_gateway_association`
+* **New Data Source:** `awscc_directconnect_direct_connect_gateways`
+* **New Data Source:** `awscc_directconnect_lag`
+* **New Data Source:** `awscc_directconnect_lags`
+* **New Data Source:** `awscc_directconnect_private_virtual_interface`
+* **New Data Source:** `awscc_directconnect_private_virtual_interfaces`
+* **New Data Source:** `awscc_directconnect_public_virtual_interface`
+* **New Data Source:** `awscc_directconnect_public_virtual_interfaces`
+* **New Data Source:** `awscc_directconnect_transit_virtual_interface`
+* **New Data Source:** `awscc_directconnect_transit_virtual_interfaces`
+* **New Data Source:** `awscc_servicecatalog_portfolio`
+* **New Data Source:** `awscc_servicecatalog_portfolios`
+* **New List Resource:** `awscc_bedrockagentcore_browser_profile`
+* **New List Resource:** `awscc_bedrockagentcore_evaluator`
+* **New List Resource:** `awscc_bedrockagentcore_online_evaluation_config`
+* **New List Resource:** `awscc_bedrockagentcore_policy_engine`
+* **New List Resource:** `awscc_bedrockmantle_project`
+* **New List Resource:** `awscc_connect_contact_flow_module_version`
+* **New List Resource:** `awscc_directconnect_connection`
+* **New List Resource:** `awscc_directconnect_direct_connect_gateway`
+* **New List Resource:** `awscc_directconnect_lag`
+* **New List Resource:** `awscc_directconnect_private_virtual_interface`
+* **New List Resource:** `awscc_directconnect_public_virtual_interface`
+* **New List Resource:** `awscc_directconnect_transit_virtual_interface`
+* **New List Resource:** `awscc_servicecatalog_portfolio`
+* **New Resource:** `awscc_bedrockagentcore_browser_profile`
+* **New Resource:** `awscc_bedrockagentcore_evaluator`
+* **New Resource:** `awscc_bedrockagentcore_online_evaluation_config`
+* **New Resource:** `awscc_bedrockagentcore_policy`
+* **New Resource:** `awscc_bedrockagentcore_policy_engine`
+* **New Resource:** `awscc_bedrockmantle_project`
+* **New Resource:** `awscc_connect_contact_flow_module_alias`
+* **New Resource:** `awscc_connect_contact_flow_module_version`
+* **New Resource:** `awscc_directconnect_connection`
+* **New Resource:** `awscc_directconnect_direct_connect_gateway`
+* **New Resource:** `awscc_directconnect_direct_connect_gateway_association`
+* **New Resource:** `awscc_directconnect_lag`
+* **New Resource:** `awscc_directconnect_private_virtual_interface`
+* **New Resource:** `awscc_directconnect_public_virtual_interface`
+* **New Resource:** `awscc_directconnect_transit_virtual_interface`
+* **New Resource:** `awscc_servicecatalog_portfolio`
 
 ## 1.73.0 (Feburary 25, 2026)
 
