@@ -122,11 +122,69 @@ func locationFSxONTAPResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "SMB protocol configuration for FSx ONTAP file system.",
 		//	      "properties": {
+		//	        "CmkSecretConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key.",
+		//	          "properties": {
+		//	            "KmsKeyArn": {
+		//	              "description": "Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.",
+		//	              "maxLength": 2048,
+		//	              "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):kms:[a-z-0-9]+:[0-9]{12}:key/.*|)$",
+		//	              "type": "string"
+		//	            },
+		//	            "SecretArn": {
+		//	              "description": "Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.",
+		//	              "maxLength": 2048,
+		//	              "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "CustomSecretConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret.",
+		//	          "properties": {
+		//	            "SecretAccessRoleArn": {
+		//	              "description": "Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.",
+		//	              "maxLength": 2048,
+		//	              "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*|)$",
+		//	              "type": "string"
+		//	            },
+		//	            "SecretArn": {
+		//	              "description": "Specifies the ARN for a customer created AWS Secrets Manager secret.",
+		//	              "maxLength": 2048,
+		//	              "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SecretArn",
+		//	            "SecretAccessRoleArn"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "Domain": {
 		//	          "description": "The name of the Windows domain that the SMB server belongs to.",
 		//	          "maxLength": 253,
 		//	          "pattern": "^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$",
 		//	          "type": "string"
+		//	        },
+		//	        "ManagedSecretConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager.",
+		//	          "properties": {
+		//	            "SecretArn": {
+		//	              "description": "Specifies the ARN for an AWS Secrets Manager secret.",
+		//	              "maxLength": 2048,
+		//	              "pattern": "^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SecretArn"
+		//	          ],
+		//	          "type": "object"
 		//	        },
 		//	        "MountOptions": {
 		//	          "additionalProperties": false,
@@ -159,7 +217,6 @@ func locationFSxONTAPResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "required": [
 		//	        "User",
-		//	        "Password",
 		//	        "MountOptions"
 		//	      ],
 		//	      "type": "object"
@@ -214,6 +271,77 @@ func locationFSxONTAPResource(ctx context.Context) (resource.Resource, error) {
 				// Property: SMB
 				"smb": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CmkSecretConfig
+						"cmk_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: KmsKeyArn
+								"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):kms:[a-z-0-9]+:[0-9]{12}:key/.*|)$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SecretArn
+								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.",
+									Computed:    true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: CustomSecretConfig
+						"custom_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SecretAccessRoleArn
+								"secret_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*|)$"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SecretArn
+								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the ARN for a customer created AWS Secrets Manager secret.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):secretsmanager:[a-z-0-9]+:[0-9]{12}:secret:.*|)$"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: Domain
 						"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The name of the Windows domain that the SMB server belongs to.",
@@ -225,6 +353,21 @@ func locationFSxONTAPResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ManagedSecretConfig
+						"managed_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SecretArn
+								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the ARN for an AWS Secrets Manager secret.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager.",
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: MountOptions
@@ -265,7 +408,6 @@ func locationFSxONTAPResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthAtMost(104),
 								stringvalidator.RegexMatches(regexp.MustCompile("^.{0,104}$"), ""),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -466,7 +608,7 @@ func locationFSxONTAPResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource schema for AWS::DataSync::LocationFSxONTAP.",
+		Description: "Resource Type definition for AWS::DataSync::LocationFSxONTAP.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -483,15 +625,21 @@ func locationFSxONTAPResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"cmk_secret_config":           "CmkSecretConfig",
+		"custom_secret_config":        "CustomSecretConfig",
 		"domain":                      "Domain",
 		"fsx_filesystem_arn":          "FsxFilesystemArn",
 		"key":                         "Key",
+		"kms_key_arn":                 "KmsKeyArn",
 		"location_arn":                "LocationArn",
 		"location_uri":                "LocationUri",
+		"managed_secret_config":       "ManagedSecretConfig",
 		"mount_options":               "MountOptions",
 		"nfs":                         "NFS",
 		"password":                    "Password",
 		"protocol":                    "Protocol",
+		"secret_access_role_arn":      "SecretAccessRoleArn",
+		"secret_arn":                  "SecretArn",
 		"security_group_arns":         "SecurityGroupArns",
 		"smb":                         "SMB",
 		"storage_virtual_machine_arn": "StorageVirtualMachineArn",

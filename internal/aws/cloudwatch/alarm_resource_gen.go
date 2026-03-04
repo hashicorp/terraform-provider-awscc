@@ -128,7 +128,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DatapointsToAlarm
 		// CloudFormation resource type schema:
@@ -156,11 +160,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	    "description": "Dimension is an embedded property of the ``AWS::CloudWatch::Alarm`` type. Dimensions are name/value pairs that can be associated with a CW metric. You can specify a maximum of 30 dimensions for a given metric.",
 		//	    "properties": {
 		//	      "Name": {
-		//	        "description": "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
+		//	        "description": "The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "The value for the dimension, from 1?255 characters in length.",
+		//	        "description": "The value for the dimension, from 1–255 characters in length.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -178,7 +182,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
+						Description: "The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -190,7 +194,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the dimension, from 1?255 characters in length.",
+						Description: "The value for the dimension, from 1–255 characters in length.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -234,7 +238,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"evaluation_periods": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The number of periods over which data is compared to the specified threshold. If you are setting an alarm that requires that a number of consecutive data points be breaching to trigger the alarm, this value specifies that number. If you are setting an \"M out of N\" alarm, this value is the N, and ``DatapointsToAlarm`` is the M.\n For more information, see [Evaluating an Alarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation) in the *User Guide*.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ExtendedStatistic
 		// CloudFormation resource type schema:
@@ -327,11 +335,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "description": "Dimension is an embedded property of the ``AWS::CloudWatch::Alarm`` type. Dimensions are name/value pairs that can be associated with a CW metric. You can specify a maximum of 30 dimensions for a given metric.",
 		//	                  "properties": {
 		//	                    "Name": {
-		//	                      "description": "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
+		//	                      "description": "The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Value": {
-		//	                      "description": "The value for the dimension, from 1?255 characters in length.",
+		//	                      "description": "The value for the dimension, from 1–255 characters in length.",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -446,7 +454,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Name
 												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
+													Description: "The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.",
 													Optional:    true,
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
@@ -458,7 +466,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END ATTRIBUTE*/
 												// Property: Value
 												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The value for the dimension, from 1?255 characters in length.",
+													Description: "The value for the dimension, from 1–255 characters in length.",
 													Optional:    true,
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
