@@ -1,0 +1,160 @@
+{
+  "tagging": {
+    "permissions": [
+      "directconnect:TagResource",
+      "directconnect:UntagResource"
+    ],
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": true
+  },
+  "typeName": "AWS::DirectConnect::Lag",
+  "readOnlyProperties": [
+    "/properties/LagArn",
+    "/properties/LagId",
+    "/properties/LagState"
+  ],
+  "description": "Resource Type definition for AWS::DirectConnect::Lag",
+  "createOnlyProperties": [
+    "/properties/ConnectionsBandwidth",
+    "/properties/Location",
+    "/properties/ProviderName",
+    "/properties/RequestMACSec"
+  ],
+  "primaryIdentifier": [
+    "/properties/LagArn"
+  ],
+  "required": [
+    "LagName",
+    "Location",
+    "ConnectionsBandwidth"
+  ],
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "propertyTransform": {
+    "/properties/Location": "\"^[a-zA-Z0-9-]+$\""
+  },
+  "handlers": {
+    "read": {
+      "permissions": [
+        "directconnect:DescribeLags"
+      ]
+    },
+    "create": {
+      "permissions": [
+        "directconnect:CreateLag",
+        "directconnect:DeleteConnection",
+        "directconnect:DescribeLags",
+        "directconnect:TagResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "directconnect:DescribeLags",
+        "directconnect:TagResource",
+        "directconnect:UntagResource",
+        "directconnect:UpdateLag"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "directconnect:DescribeLags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "directconnect:DeleteLag",
+        "directconnect:DescribeLags"
+      ]
+    }
+  },
+  "writeOnlyProperties": [
+    "/properties/RequestMACSec"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/LagId"
+    ]
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "minLength": 0,
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "type": "string",
+          "maxLength": 256
+        },
+        "Key": {
+          "minLength": 1,
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "replacementStrategy": "delete_then_create",
+  "properties": {
+    "LagId": {
+      "pattern": "^dxlag-[a-z0-9]{8,21}$",
+      "description": "The ID of the LAG.",
+      "type": "string"
+    },
+    "ProviderName": {
+      "description": "The name of the service provider associated with the requested LAG.",
+      "type": "string"
+    },
+    "RequestMACSec": {
+      "description": "Indicates whether you want the LAG to support MAC Security (MACsec).",
+      "type": "boolean"
+    },
+    "ConnectionsBandwidth": {
+      "pattern": "^[1-9][0-9]*(M|G)bps$",
+      "description": "The bandwidth of the individual physical dedicated connections bundled by the LAG.",
+      "type": "string"
+    },
+    "LagArn": {
+      "pattern": "^arn:aws[a-z-]*:directconnect:[a-z0-9-]+:[0-9]{12}:dxlag/dxlag-[a-z0-9]{8,21}$",
+      "description": "The ARN of the LAG.",
+      "type": "string"
+    },
+    "LagName": {
+      "pattern": "^[\\w \\-_,\\/]{1,200}$",
+      "description": "The name of the LAG.",
+      "type": "string"
+    },
+    "MinimumLinks": {
+      "description": "The minimum number of physical dedicated connections that must be operational for the LAG itself to be operational.",
+      "type": "integer"
+    },
+    "Tags": {
+      "uniqueItems": true,
+      "description": "The tags associated with the LAG.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "LagState": {
+      "pattern": "^(requested|pending|available|down|deleting|deleted|unknown)$",
+      "description": "The state of the LAG.",
+      "type": "string"
+    },
+    "Location": {
+      "pattern": "^[a-zA-Z0-9-]+$",
+      "description": "The location for the LAG.",
+      "type": "string"
+    }
+  }
+}

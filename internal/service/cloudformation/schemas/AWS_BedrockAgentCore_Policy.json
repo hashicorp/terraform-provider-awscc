@@ -1,0 +1,195 @@
+{
+  "typeName": "AWS::BedrockAgentCore::Policy",
+  "description": "Resource Type definition for AWS::BedrockAgentCore::Policy",
+  "definitions": {
+    "PolicyStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "ACTIVE",
+        "UPDATING",
+        "DELETING",
+        "CREATE_FAILED",
+        "UPDATE_FAILED",
+        "DELETE_FAILED"
+      ]
+    },
+    "PolicyDefinition": {
+      "type": "object",
+      "description": "The definition structure for policies. Encapsulates different policy formats.",
+      "properties": {
+        "Cedar": {
+          "$ref": "#/definitions/CedarPolicy"
+        }
+      },
+      "required": [
+        "Cedar"
+      ],
+      "additionalProperties": false
+    },
+    "CedarPolicy": {
+      "type": "object",
+      "description": "A Cedar policy statement within the AgentCore Policy system.",
+      "properties": {
+        "Statement": {
+          "type": "string",
+          "description": "The Cedar policy statement that defines the authorization logic.",
+          "minLength": 35,
+          "maxLength": 153600
+        }
+      },
+      "required": [
+        "Statement"
+      ],
+      "additionalProperties": false
+    },
+    "PolicyValidationMode": {
+      "type": "string",
+      "description": "The validation mode for the policy. Determines how Cedar analyzer validation results are handled.",
+      "enum": [
+        "FAIL_ON_ANY_FINDINGS",
+        "IGNORE_ALL_FINDINGS"
+      ]
+    }
+  },
+  "properties": {
+    "PolicyEngineId": {
+      "type": "string",
+      "description": "The identifier of the policy engine which contains this policy.",
+      "minLength": 12,
+      "maxLength": 59,
+      "pattern": "^[A-Za-z][A-Za-z0-9_]*-[a-z0-9_]{10}$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The customer-assigned immutable name for the policy. Must be unique within the policy engine.",
+      "minLength": 1,
+      "maxLength": 48,
+      "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+    },
+    "Definition": {
+      "$ref": "#/definitions/PolicyDefinition"
+    },
+    "Description": {
+      "type": "string",
+      "description": "A human-readable description of the policy's purpose and functionality.",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "ValidationMode": {
+      "$ref": "#/definitions/PolicyValidationMode"
+    },
+    "PolicyId": {
+      "type": "string",
+      "description": "The unique identifier for the policy.",
+      "minLength": 12,
+      "maxLength": 59,
+      "pattern": "^[A-Za-z][A-Za-z0-9_]*-[a-z0-9_]{10}$"
+    },
+    "PolicyArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the policy.",
+      "minLength": 96,
+      "maxLength": 203,
+      "pattern": "^arn:aws[-a-z]{0,7}:bedrock-agentcore:[a-z0-9-]{9,15}:[0-9]{12}:policy-engine/[a-zA-Z][a-zA-Z0-9-_]{0,47}-[a-zA-Z0-9_]{10}/policy/[a-zA-Z][a-zA-Z0-9-_]{0,47}-[a-zA-Z0-9_]{10}$"
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the policy was created."
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the policy was last updated."
+    },
+    "Status": {
+      "$ref": "#/definitions/PolicyStatus",
+      "description": "The current status of the policy."
+    },
+    "StatusReasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "insertionOrder": false,
+      "description": "Additional information about the policy status."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "PolicyEngineId",
+    "Name",
+    "Definition"
+  ],
+  "readOnlyProperties": [
+    "/properties/PolicyId",
+    "/properties/PolicyArn",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/Status",
+    "/properties/StatusReasons"
+  ],
+  "createOnlyProperties": [
+    "/properties/PolicyEngineId",
+    "/properties/Name"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ValidationMode"
+  ],
+  "primaryIdentifier": [
+    "/properties/PolicyArn"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bedrock-agentcore:CreatePolicy",
+        "bedrock-agentcore:GetPolicy",
+        "bedrock-agentcore:ManageAdminPolicy",
+        "bedrock-agentcore:ManageResourceScopedPolicy"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bedrock-agentcore:GetPolicy"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bedrock-agentcore:UpdatePolicy",
+        "bedrock-agentcore:GetPolicy",
+        "bedrock-agentcore:ManageAdminPolicy",
+        "bedrock-agentcore:ManageResourceScopedPolicy"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bedrock-agentcore:DeletePolicy",
+        "bedrock-agentcore:ManageAdminPolicy",
+        "bedrock-agentcore:ManageResourceScopedPolicy",
+        "bedrock-agentcore:GetPolicy"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bedrock-agentcore:ListPolicies"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "PolicyEngineId": {
+            "type": "string",
+            "minLength": 12,
+            "maxLength": 59,
+            "pattern": "^[A-Za-z][A-Za-z0-9_]*-[a-z0-9_]{10}$"
+          }
+        },
+        "required": [
+          "PolicyEngineId"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "typeName": "AWS::BedrockMantle::Project",
+  "description": "Resource type definition for AWS::BedrockMantle::Project",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Id"
+    ]
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/CreatedAt",
+    "/properties/Id"
+  ],
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "description": "The ARN of the project.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^arn:[a-zA-Z0-9_\\-]+:bedrock-mantle:[a-zA-Z0-9_\\-]+:[0-9]+:project/(default|proj_[a-z0-9]+)$"
+    },
+    "CreatedAt": {
+      "description": "The timestamp when the project was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "Id": {
+      "description": "The unique identifier of the project.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 25,
+      "pattern": "^(default|proj_[a-z0-9]+)$"
+    },
+    "Name": {
+      "description": "The name of the project.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 200
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Name"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bedrock-mantle:CreateProject",
+        "bedrock-mantle:GetProject",
+        "bedrock-mantle:ListTagsForResource",
+        "bedrock-mantle:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bedrock-mantle:GetProject",
+        "bedrock-mantle:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bedrock-mantle:UpdateProject",
+        "bedrock-mantle:GetProject",
+        "bedrock-mantle:ListTagsForResource",
+        "bedrock-mantle:TagResource",
+        "bedrock-mantle:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bedrock-mantle:ArchiveProject",
+        "bedrock-mantle:GetProject",
+        "bedrock-mantle:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bedrock-mantle:ListProjects",
+        "bedrock-mantle:ListTagsForResource"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "bedrock-mantle:TagResource",
+      "bedrock-mantle:UntagResource",
+      "bedrock-mantle:ListTagsForResource"
+    ]
+  }
+}

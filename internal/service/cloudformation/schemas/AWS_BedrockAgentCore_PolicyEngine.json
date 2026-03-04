@@ -1,0 +1,186 @@
+{
+  "typeName": "AWS::BedrockAgentCore::PolicyEngine",
+  "description": "Resource Type definition for AWS::BedrockAgentCore::PolicyEngine",
+  "definitions": {
+    "PolicyEngineStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "ACTIVE",
+        "UPDATING",
+        "DELETING",
+        "CREATE_FAILED",
+        "UPDATE_FAILED",
+        "DELETE_FAILED"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "PolicyEngineId": {
+      "type": "string",
+      "description": "The unique identifier for the policy engine",
+      "minLength": 12,
+      "maxLength": 59,
+      "pattern": "^[A-Za-z][A-Za-z0-9_]*-[a-z0-9_]{10}$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The customer-assigned immutable name for the policy engine",
+      "minLength": 1,
+      "maxLength": 48,
+      "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "A human-readable description of the policy engine's purpose and scope",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "EncryptionKeyArn": {
+      "type": "string",
+      "description": "The ARN of the KMS key used to encrypt the policy engine data",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the policy engine was created"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the policy engine was last updated"
+    },
+    "PolicyEngineArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the policy engine",
+      "minLength": 76,
+      "maxLength": 136,
+      "pattern": "^arn:aws[-a-z]{0,7}:bedrock-agentcore:[a-z0-9-]{9,15}:[0-9]{12}:policy-engine/[a-zA-Z][a-zA-Z0-9-_]{0,47}-[a-zA-Z0-9_]{10}$"
+    },
+    "Status": {
+      "$ref": "#/definitions/PolicyEngineStatus",
+      "description": "The current status of the policy engine"
+    },
+    "StatusReasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "insertionOrder": false,
+      "description": "Additional information about the policy engine status"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of tags to assign to the policy engine.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/PolicyEngineId",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/PolicyEngineArn",
+    "/properties/Status",
+    "/properties/StatusReasons"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/EncryptionKeyArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/PolicyEngineArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/PolicyEngineId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": false,
+    "permissions": [
+      "bedrock-agentcore:TagResource",
+      "bedrock-agentcore:UntagResource",
+      "bedrock-agentcore:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bedrock-agentcore:CreatePolicyEngine",
+        "bedrock-agentcore:GetPolicyEngine",
+        "bedrock-agentcore:TagResource",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey",
+        "kms:CreateGrant",
+        "kms:Decrypt"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bedrock-agentcore:GetPolicyEngine",
+        "bedrock-agentcore:ListTagsForResource",
+        "kms:Decrypt"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bedrock-agentcore:UpdatePolicyEngine",
+        "bedrock-agentcore:GetPolicyEngine",
+        "bedrock-agentcore:TagResource",
+        "bedrock-agentcore:UntagResource",
+        "bedrock-agentcore:ListTagsForResource",
+        "kms:Decrypt",
+        "kms:GenerateDataKey"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bedrock-agentcore:DeletePolicyEngine",
+        "bedrock-agentcore:GetPolicyEngine",
+        "kms:Decrypt",
+        "kms:GenerateDataKey"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bedrock-agentcore:ListPolicyEngines",
+        "kms:Decrypt"
+      ]
+    }
+  }
+}

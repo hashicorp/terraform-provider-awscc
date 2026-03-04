@@ -1,0 +1,236 @@
+{
+  "typeName": "AWS::BedrockAgentCore::BrowserProfile",
+  "description": "Resource definition for AWS::BedrockAgentCore::BrowserProfile",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "BrowserProfileId": {
+      "type": "string",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}$",
+      "description": "The id of the browser profile."
+    },
+    "BrowserProfileArn": {
+      "type": "string",
+      "pattern": "^arn:(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:browser-profile/[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}$",
+      "description": "The ARN of a BrowserProfile resource."
+    },
+    "BrowserProfileName": {
+      "type": "string",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
+      "description": "The name of the browser profile."
+    },
+    "BrowserProfileDescription": {
+      "type": "string",
+      "description": "The description of the browser profile."
+    },
+    "BrowserProfileStatus": {
+      "type": "string",
+      "enum": [
+        "READY",
+        "DELETING",
+        "DELETED",
+        "SAVING"
+      ],
+      "description": "Status of browser profile"
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the browser profile was created."
+    },
+    "LastUpdatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the browser profile was last updated."
+    },
+    "LastSavedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the browser profile was last saved."
+    },
+    "LastSavedBrowserSessionId": {
+      "type": "string",
+      "pattern": "^[0-9a-zA-Z]{1,40}$",
+      "description": "ID of the last saved browser session."
+    },
+    "LastSavedBrowserId": {
+      "type": "string",
+      "pattern": "^(aws\\.browser\\.v1|[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10})$",
+      "description": "ID of the last saved browser."
+    },
+    "BrowserProfileSummary": {
+      "type": "object",
+      "properties": {
+        "ProfileId": {
+          "$ref": "#/definitions/BrowserProfileId"
+        },
+        "ProfileArn": {
+          "$ref": "#/definitions/BrowserProfileArn"
+        },
+        "Name": {
+          "$ref": "#/definitions/BrowserProfileName"
+        },
+        "Description": {
+          "$ref": "#/definitions/BrowserProfileDescription"
+        },
+        "Status": {
+          "$ref": "#/definitions/BrowserProfileStatus"
+        },
+        "CreatedAt": {
+          "$ref": "#/definitions/CreatedAt"
+        },
+        "LastUpdatedAt": {
+          "$ref": "#/definitions/LastUpdatedAt"
+        },
+        "LastSavedAt": {
+          "$ref": "#/definitions/LastSavedAt"
+        },
+        "LastSavedBrowserSessionId": {
+          "$ref": "#/definitions/LastSavedBrowserSessionId"
+        },
+        "LastSavedBrowserId": {
+          "$ref": "#/definitions/LastSavedBrowserId"
+        }
+      },
+      "required": [
+        "ProfileId",
+        "ProfileArn",
+        "Name",
+        "Status",
+        "CreatedAt",
+        "LastUpdatedAt"
+      ],
+      "additionalProperties": false,
+      "description": "Browser Profile Summary"
+    },
+    "BrowserProfileSummaries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/BrowserProfileSummary"
+      },
+      "description": "List of browser profiles"
+    },
+    "TagsMap": {
+      "type": "object",
+      "description": "A map of tag keys and values",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 0,
+          "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+          "description": "Value of a tag"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "ProfileId": {
+      "$ref": "#/definitions/BrowserProfileId"
+    },
+    "ProfileArn": {
+      "$ref": "#/definitions/BrowserProfileArn"
+    },
+    "Name": {
+      "$ref": "#/definitions/BrowserProfileName"
+    },
+    "Description": {
+      "$ref": "#/definitions/BrowserProfileDescription"
+    },
+    "Status": {
+      "$ref": "#/definitions/BrowserProfileStatus"
+    },
+    "CreatedAt": {
+      "$ref": "#/definitions/CreatedAt"
+    },
+    "LastUpdatedAt": {
+      "$ref": "#/definitions/LastUpdatedAt"
+    },
+    "LastSavedAt": {
+      "$ref": "#/definitions/LastSavedAt"
+    },
+    "LastSavedBrowserSessionId": {
+      "$ref": "#/definitions/LastSavedBrowserSessionId"
+    },
+    "LastSavedBrowserId": {
+      "$ref": "#/definitions/LastSavedBrowserId"
+    },
+    "Tags": {
+      "$ref": "#/definitions/TagsMap",
+      "description": "A map of tag keys and values."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/ProfileId",
+    "/properties/ProfileArn",
+    "/properties/Status",
+    "/properties/CreatedAt",
+    "/properties/LastUpdatedAt",
+    "/properties/LastSavedAt",
+    "/properties/LastSavedBrowserSessionId",
+    "/properties/LastSavedBrowserId"
+  ],
+  "primaryIdentifier": [
+    "/properties/ProfileId"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ProfileArn"
+    ]
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/Description"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bedrock-agentcore:CreateBrowserProfile",
+        "bedrock-agentcore:GetBrowserProfile",
+        "bedrock-agentcore:TagResource",
+        "bedrock-agentcore:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bedrock-agentcore:GetBrowserProfile",
+        "bedrock-agentcore:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bedrock-agentcore:GetBrowserProfile",
+        "bedrock-agentcore:TagResource",
+        "bedrock-agentcore:UntagResource",
+        "bedrock-agentcore:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bedrock-agentcore:GetBrowserProfile",
+        "bedrock-agentcore:DeleteBrowserProfile"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bedrock-agentcore:ListBrowserProfiles"
+      ]
+    }
+  },
+  "tagging": {
+    "cloudFormationSystemTags": false,
+    "tagOnCreate": true,
+    "tagProperty": "/properties/Tags",
+    "tagUpdatable": true,
+    "taggable": true,
+    "permissions": [
+      "bedrock-agentcore:TagResource",
+      "bedrock-agentcore:UntagResource",
+      "bedrock-agentcore:ListTagsForResource"
+    ]
+  }
+}
