@@ -24,18 +24,47 @@ Data Source schema for AWS::DataSync::LocationHDFS
 - `agent_arns` (List of String) ARN(s) of the agent(s) to use for an HDFS location.
 - `authentication_type` (String) The authentication mode used to determine identity of user.
 - `block_size` (Number) Size of chunks (blocks) in bytes that the data is divided into when stored in the HDFS cluster.
+- `cmk_secret_config` (Attributes) Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key. (see [below for nested schema](#nestedatt--cmk_secret_config))
+- `custom_secret_config` (Attributes) Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret. (see [below for nested schema](#nestedatt--custom_secret_config))
 - `kerberos_keytab` (String) The Base64 string representation of the Keytab file.
 - `kerberos_krb_5_conf` (String) The string representation of the Krb5Conf file, or the presigned URL to access the Krb5.conf file within an S3 bucket.
 - `kerberos_principal` (String) The unique identity, or principal, to which Kerberos can assign tickets.
 - `kms_key_provider_uri` (String) The identifier for the Key Management Server where the encryption keys that encrypt data inside HDFS clusters are stored.
 - `location_arn` (String) The Amazon Resource Name (ARN) of the HDFS location.
 - `location_uri` (String) The URL of the HDFS location that was described.
+- `managed_secret_config` (Attributes) Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager. (see [below for nested schema](#nestedatt--managed_secret_config))
 - `name_nodes` (Attributes List) An array of Name Node(s) of the HDFS location. (see [below for nested schema](#nestedatt--name_nodes))
 - `qop_configuration` (Attributes) Configuration information for RPC Protection and Data Transfer Protection. These parameters can be set to AUTHENTICATION, INTEGRITY, or PRIVACY. The default value is PRIVACY. (see [below for nested schema](#nestedatt--qop_configuration))
 - `replication_factor` (Number) Number of copies of each block that exists inside the HDFS cluster.
 - `simple_user` (String) The user name that has read and write permissions on the specified HDFS cluster.
 - `subdirectory` (String) The subdirectory in HDFS that is used to read data from the HDFS source location or write data to the HDFS destination.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--cmk_secret_config"></a>
+### Nested Schema for `cmk_secret_config`
+
+Read-Only:
+
+- `kms_key_arn` (String) Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.
+- `secret_arn` (String) Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.
+
+
+<a id="nestedatt--custom_secret_config"></a>
+### Nested Schema for `custom_secret_config`
+
+Read-Only:
+
+- `secret_access_role_arn` (String) Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.
+- `secret_arn` (String) Specifies the ARN for a customer created AWS Secrets Manager secret.
+
+
+<a id="nestedatt--managed_secret_config"></a>
+### Nested Schema for `managed_secret_config`
+
+Read-Only:
+
+- `secret_arn` (String) Specifies the ARN for an AWS Secrets Manager secret.
+
 
 <a id="nestedatt--name_nodes"></a>
 ### Nested Schema for `name_nodes`

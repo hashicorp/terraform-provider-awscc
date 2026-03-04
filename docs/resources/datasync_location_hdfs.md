@@ -3,12 +3,12 @@
 page_title: "awscc_datasync_location_hdfs Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource schema for AWS::DataSync::LocationHDFS.
+  Resource Type definition for AWS::DataSync::LocationHDFS.
 ---
 
 # awscc_datasync_location_hdfs (Resource)
 
-Resource schema for AWS::DataSync::LocationHDFS.
+Resource Type definition for AWS::DataSync::LocationHDFS.
 
 
 
@@ -24,6 +24,8 @@ Resource schema for AWS::DataSync::LocationHDFS.
 ### Optional
 
 - `block_size` (Number) Size of chunks (blocks) in bytes that the data is divided into when stored in the HDFS cluster.
+- `cmk_secret_config` (Attributes) Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key. (see [below for nested schema](#nestedatt--cmk_secret_config))
+- `custom_secret_config` (Attributes) Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret. (see [below for nested schema](#nestedatt--custom_secret_config))
 - `kerberos_keytab` (String) The Base64 string representation of the Keytab file.
 - `kerberos_krb_5_conf` (String) The string representation of the Krb5Conf file, or the presigned URL to access the Krb5.conf file within an S3 bucket.
 - `kerberos_principal` (String) The unique identity, or principal, to which Kerberos can assign tickets.
@@ -39,6 +41,7 @@ Resource schema for AWS::DataSync::LocationHDFS.
 - `id` (String) Uniquely identifies the resource.
 - `location_arn` (String) The Amazon Resource Name (ARN) of the HDFS location.
 - `location_uri` (String) The URL of the HDFS location that was described.
+- `managed_secret_config` (Attributes) Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager. (see [below for nested schema](#nestedatt--managed_secret_config))
 
 <a id="nestedatt--name_nodes"></a>
 ### Nested Schema for `name_nodes`
@@ -47,6 +50,27 @@ Required:
 
 - `hostname` (String) The DNS name or IP address of the Name Node in the customer's on premises HDFS cluster.
 - `port` (Number) The port on which the Name Node is listening on for client requests.
+
+
+<a id="nestedatt--cmk_secret_config"></a>
+### Nested Schema for `cmk_secret_config`
+
+Optional:
+
+- `kms_key_arn` (String) Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.
+
+Read-Only:
+
+- `secret_arn` (String) Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.
+
+
+<a id="nestedatt--custom_secret_config"></a>
+### Nested Schema for `custom_secret_config`
+
+Optional:
+
+- `secret_access_role_arn` (String) Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.
+- `secret_arn` (String) Specifies the ARN for a customer created AWS Secrets Manager secret.
 
 
 <a id="nestedatt--qop_configuration"></a>
@@ -65,6 +89,14 @@ Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+
+<a id="nestedatt--managed_secret_config"></a>
+### Nested Schema for `managed_secret_config`
+
+Read-Only:
+
+- `secret_arn` (String) Specifies the ARN for an AWS Secrets Manager secret.
 
 ## Import
 

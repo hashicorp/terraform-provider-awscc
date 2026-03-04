@@ -51,6 +51,7 @@ Read-Only:
 - `maxv_cpus` (Number)
 - `minv_cpus` (Number)
 - `placement_group` (String)
+- `scaling_policy` (Attributes) (see [below for nested schema](#nestedatt--compute_resources--scaling_policy))
 - `security_group_ids` (List of String)
 - `spot_iam_fleet_role` (String)
 - `subnets` (List of String)
@@ -90,6 +91,14 @@ Read-Only:
 - `userdata_type` (String)
 - `version` (String)
 
+
+
+<a id="nestedatt--compute_resources--scaling_policy"></a>
+### Nested Schema for `compute_resources.scaling_policy`
+
+Read-Only:
+
+- `min_scale_down_delay_minutes` (Number)
 
 
 

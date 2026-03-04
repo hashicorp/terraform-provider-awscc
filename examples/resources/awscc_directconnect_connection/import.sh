@@ -1,0 +1,1 @@
+$ terraform import awscc_directconnect_connection.example "connection_arn"

@@ -1,0 +1,1 @@
+$ terraform import awscc_servicecatalog_portfolio.example "id"

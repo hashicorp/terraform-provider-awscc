@@ -1,0 +1,1 @@
+$ terraform import awscc_directconnect_public_virtual_interface.example "virtual_interface_arn"
