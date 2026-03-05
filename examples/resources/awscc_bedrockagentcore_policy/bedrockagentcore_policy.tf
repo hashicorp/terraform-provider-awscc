@@ -22,9 +22,9 @@ resource "awscc_bedrockagentcore_policy_engine" "example" {
 
 # Main resource: BedrockAgentCore Policy
 resource "awscc_bedrockagentcore_policy" "example" {
-  name                  = "ExamplePolicy"
-  description           = "Example BedrockAgentCore policy"
-  policy_engine_arn     = awscc_bedrockagentcore_policy_engine.example.policy_engine_arn
+  name              = "ExamplePolicy"
+  description       = "Example BedrockAgentCore policy"
+  policy_engine_arn = awscc_bedrockagentcore_policy_engine.example.policy_engine_arn
   policy_statements = {
     statements = [
       {
