@@ -9,6 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.18.19
 	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.29.11
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.71.7
+	github.com/evanphx/json-patch v0.5.2
 	github.com/google/go-cmp v0.7.0
 	github.com/google/go-github/v72 v72.0.0
 	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.23.0
@@ -95,6 +96,7 @@ require (
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/mitchellh/reflectwalk v1.0.2 // indirect
 	github.com/oklog/run v1.1.0 // indirect
+	github.com/pkg/errors v0.9.1 // indirect
 	github.com/posener/complete v1.2.3 // indirect
 	github.com/shopspring/decimal v1.2.0 // indirect
 	github.com/spf13/cast v1.3.1 // indirect
