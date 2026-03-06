@@ -71,7 +71,7 @@
   ],
   "additionalProperties": false,
   "primaryIdentifier": [
-    "/properties/StorageLensConfiguration/Id"
+    "/properties/Id"
   ],
   "definitions": {
     "PrefixLevel": {
