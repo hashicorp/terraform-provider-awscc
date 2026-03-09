@@ -538,7 +538,14 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 
 	translator := toTerraform{cfToTfNameMap: r.cfToTfNameMap}
 	schema := currentState.Schema
-	val, err := translator.FromString(ctx, schema, aws.ToString(description.Properties))
+	// Reorder key-value lists (Tags, LoadBalancerAttributes, etc.) to match prior state
+	// so plan shows no diff regardless of user config order.
+	var priorMap map[string]any
+	if !currentState.Raw.IsNull() && currentState.Raw.IsKnown() {
+		toCC := toCloudControl{tfToCfNameMap: r.tfToCfNameMap}
+		priorMap, _ = toCC.AsRaw(ctx, schema, currentState.Raw)
+	}
+	val, err := translator.FromString(ctx, schema, aws.ToString(description.Properties), priorMap)
 
 	if err != nil {
 		response.Diagnostics.AddError(
