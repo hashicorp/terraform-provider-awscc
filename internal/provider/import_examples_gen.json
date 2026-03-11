@@ -870,6 +870,16 @@
         "identifier": ["PrivacyBudgetTemplateIdentifier","MembershipIdentifier"]
     },
     {
+        "resource": "awscc_cleanroomsml_configured_model_algorithm",
+        "generateListResource": true,
+        "identifier": ["ConfiguredModelAlgorithmArn"]
+    },
+    {
+        "resource": "awscc_cleanroomsml_configured_model_algorithm_association",
+        "generateListResource": true,
+        "identifier": ["ConfiguredModelAlgorithmAssociationArn"]
+    },
+    {
         "resource": "awscc_cleanroomsml_training_dataset",
         "generateListResource": true,
         "identifier": ["TrainingDatasetArn"]
@@ -2459,6 +2469,11 @@
         "resource": "awscc_elasticache_parameter_group",
         "generateListResource": true,
         "identifier": ["CacheParameterGroupName"]
+    },
+    {
+        "resource": "awscc_elasticache_replication_group",
+        "generateListResource": true,
+        "identifier": ["ReplicationGroupId"]
     },
     {
         "resource": "awscc_elasticache_serverless_cache",
@@ -5028,6 +5043,36 @@
         "identifier": ["HostedZoneId","Name"]
     },
     {
+        "resource": "awscc_route53globalresolver_access_source",
+        "identifier": ["AccessSourceId"]
+    },
+    {
+        "resource": "awscc_route53globalresolver_access_token",
+        "identifier": ["AccessTokenId"]
+    },
+    {
+        "resource": "awscc_route53globalresolver_dns_view",
+        "identifier": ["DnsViewId"]
+    },
+    {
+        "resource": "awscc_route53globalresolver_firewall_domain_list",
+        "generateListResource": true,
+        "identifier": ["FirewallDomainListId"]
+    },
+    {
+        "resource": "awscc_route53globalresolver_firewall_rule",
+        "identifier": ["FirewallRuleId"]
+    },
+    {
+        "resource": "awscc_route53globalresolver_global_resolver",
+        "generateListResource": true,
+        "identifier": ["GlobalResolverId"]
+    },
+    {
+        "resource": "awscc_route53globalresolver_hosted_zone_association",
+        "identifier": ["HostedZoneAssociationId"]
+    },
+    {
         "resource": "awscc_route53_record_set",
         "identifier": ["Id"]
     },
@@ -5851,6 +5896,10 @@
     {
         "resource": "awscc_servicecatalog_service_action_association",
         "identifier": ["ProductId","ProvisioningArtifactId","ServiceActionId"]
+    },
+    {
+        "resource": "awscc_servicecatalog_stack_set_constraint",
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_servicecatalog_tag_option",

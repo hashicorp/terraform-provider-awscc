@@ -1,0 +1,202 @@
+{
+  "typeName": "AWS::Route53GlobalResolver::FirewallDomainList",
+  "description": "Resource schema for AWS::Route53GlobalResolver::FirewallDomainList",
+  "primaryIdentifier": [
+    "/properties/FirewallDomainListId"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Arn"
+    ]
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/FirewallDomainListId",
+    "/properties/DomainCount",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/Status",
+    "/properties/StatusMessage"
+  ],
+  "createOnlyProperties": [
+    "/properties/GlobalResolverId",
+    "/properties/Name",
+    "/properties/Description",
+    "/properties/ClientToken"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ClientToken",
+    "/properties/Domains",
+    "/properties/DomainFileUrl"
+  ],
+  "required": [
+    "GlobalResolverId",
+    "Name"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "ResourceName": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": ""
+    },
+    "ResourceDescription": {
+      "type": "string",
+      "maxLength": 256,
+      "minLength": 1
+    },
+    "CRResourceStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "OPERATIONAL",
+        "UPDATING",
+        "DELETING"
+      ]
+    },
+    "Domains": {
+      "description": "An inline list of domains to use for this domain list.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "description": "FirewallDomainName",
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 255
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "Value": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 0
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "FirewallDomainListId": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1
+    },
+    "Arn": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 1
+    },
+    "Name": {
+      "$ref": "#/definitions/ResourceName"
+    },
+    "Description": {
+      "$ref": "#/definitions/ResourceDescription"
+    },
+    "GlobalResolverId": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1
+    },
+    "DomainCount": {
+      "type": "integer"
+    },
+    "Status": {
+      "$ref": "#/definitions/CRResourceStatus"
+    },
+    "StatusMessage": {
+      "type": "string"
+    },
+    "CreatedAt": {
+      "type": "string"
+    },
+    "UpdatedAt": {
+      "type": "string"
+    },
+    "Domains": {
+      "$ref": "#/definitions/Domains"
+    },
+    "DomainFileUrl": {
+      "description": "S3 URL to import domains from.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "ClientToken": {
+      "type": "string",
+      "maxLength": 256,
+      "minLength": 1
+    },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50
+    }
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "route53globalresolver:CreateFirewallDomainList",
+        "route53globalresolver:GetFirewallDomainList",
+        "route53globalresolver:ImportFirewallDomains",
+        "route53globalresolver:UpdateFirewallDomains",
+        "route53globalresolver:TagResource",
+        "s3:GetObject"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "route53globalresolver:GetFirewallDomainList",
+        "route53globalresolver:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "route53globalresolver:GetFirewallDomainList",
+        "route53globalresolver:ImportFirewallDomains",
+        "route53globalresolver:UpdateFirewallDomains",
+        "route53globalresolver:TagResource",
+        "route53globalresolver:UntagResource",
+        "route53globalresolver:ListTagsForResource",
+        "s3:GetObject"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "route53globalresolver:DeleteFirewallDomainList",
+        "route53globalresolver:GetFirewallDomainList"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "route53globalresolver:ListFirewallDomainLists"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "route53globalresolver:TagResource",
+      "route53globalresolver:UntagResource",
+      "route53globalresolver:ListTagsForResource"
+    ]
+  }
+}

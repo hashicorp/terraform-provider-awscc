@@ -1,0 +1,209 @@
+{
+  "typeName": "AWS::Route53GlobalResolver::DnsView",
+  "description": "Resource schema for AWS::Route53GlobalResolver::DnsView",
+  "primaryIdentifier": [
+    "/properties/DnsViewId"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Arn"
+    ]
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/DnsViewId",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/Status"
+  ],
+  "createOnlyProperties": [
+    "/properties/GlobalResolverId",
+    "/properties/ClientToken"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ClientToken"
+  ],
+  "required": [
+    "GlobalResolverId",
+    "Name"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "ResourceName": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": ""
+    },
+    "ResourceDescription": {
+      "type": "string",
+      "maxLength": 256,
+      "minLength": 1
+    },
+    "DnsSecValidationType": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "EdnsClientSubnetType": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "FirewallRulesFailOpenType": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "ProfileResourceStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "OPERATIONAL",
+        "UPDATING",
+        "ENABLING",
+        "DISABLING",
+        "DISABLED",
+        "DELETING"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "Value": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 0
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "DnsViewId": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1
+    },
+    "Arn": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 1
+    },
+    "Name": {
+      "$ref": "#/definitions/ResourceName"
+    },
+    "Description": {
+      "$ref": "#/definitions/ResourceDescription"
+    },
+    "GlobalResolverId": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1
+    },
+    "DnssecValidation": {
+      "$ref": "#/definitions/DnsSecValidationType"
+    },
+    "EdnsClientSubnet": {
+      "$ref": "#/definitions/EdnsClientSubnetType"
+    },
+    "FirewallRulesFailOpen": {
+      "$ref": "#/definitions/FirewallRulesFailOpenType"
+    },
+    "Status": {
+      "$ref": "#/definitions/ProfileResourceStatus"
+    },
+    "CreatedAt": {
+      "type": "string"
+    },
+    "UpdatedAt": {
+      "type": "string"
+    },
+    "ClientToken": {
+      "type": "string",
+      "maxLength": 256,
+      "minLength": 1
+    },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50
+    }
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "route53globalresolver:CreateDNSView",
+        "route53globalresolver:GetDNSView",
+        "route53globalresolver:TagResource",
+        "route53globalresolver:UntagResource",
+        "route53globalresolver:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "route53globalresolver:GetDNSView",
+        "route53globalresolver:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "route53globalresolver:UpdateDNSView",
+        "route53globalresolver:GetDNSView",
+        "route53globalresolver:TagResource",
+        "route53globalresolver:UntagResource",
+        "route53globalresolver:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "route53globalresolver:DeleteDNSView",
+        "route53globalresolver:GetDNSView"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "route53globalresolver:ListDNSViews"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "GlobalResolverId": {
+            "$ref": "resource-schema.json#/properties/GlobalResolverId"
+          }
+        },
+        "required": [
+          "GlobalResolverId"
+        ]
+      }
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "route53globalresolver:TagResource",
+      "route53globalresolver:UntagResource",
+      "route53globalresolver:ListTagsForResource"
+    ]
+  }
+}
