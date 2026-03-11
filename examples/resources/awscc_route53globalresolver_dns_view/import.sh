@@ -1,0 +1,1 @@
+$ terraform import awscc_route53globalresolver_dns_view.example "dns_view_id"

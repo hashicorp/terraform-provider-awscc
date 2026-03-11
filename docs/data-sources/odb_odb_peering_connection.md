@@ -30,6 +30,7 @@ Data Source schema for AWS::ODB::OdbPeeringConnection
 - `peer_network_arn` (String) The Amazon Resource Name (ARN) of the peer network.
 - `peer_network_cidrs` (List of String) The CIDR blocks for the ODB peering connection.
 - `peer_network_id` (String) The unique identifier of the peer network.
+- `peer_network_route_table_ids` (List of String) The unique identifier of the VPC route table for which a route to the ODB network is automatically created during peering connection establishment.
 - `tags` (Attributes List) Tags to assign to the Odb peering connection. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>

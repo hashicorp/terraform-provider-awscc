@@ -80,7 +80,6 @@ Read-Only:
 
 Read-Only:
 
-- `cedar_format` (String)
 - `cedar_json` (String)
 
 

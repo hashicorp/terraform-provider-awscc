@@ -126,6 +126,8 @@ resource "aws_iam_policy" "example" {
 - `new_game_session_protection_policy` (String) A game session protection policy to apply to all game sessions hosted on instances in this fleet. When protected, active game sessions cannot be terminated during a scale-down event. If this parameter is not set, instances in this fleet default to no protection. You can change a fleet's protection policy to affect future game sessions on the fleet. You can also set protection for individual game sessions.
 - `peer_vpc_aws_account_id` (String) A unique identifier for the AWS account with the VPC that you want to peer your Amazon GameLift fleet with. You can find your account ID in the AWS Management Console under account settings.
 - `peer_vpc_id` (String) A unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The VPC must be in the same Region as your fleet. To look up a VPC ID, use the VPC Dashboard in the AWS Management Console.
+- `player_gateway_configuration` (Attributes) Configuration for player gateway. (see [below for nested schema](#nestedatt--player_gateway_configuration))
+- `player_gateway_mode` (String) The player gateway mode for the fleet.
 - `resource_creation_limit_policy` (Attributes) A policy that limits the number of game sessions an individual player can create over a span of time for this fleet. (see [below for nested schema](#nestedatt--resource_creation_limit_policy))
 - `runtime_configuration` (Attributes) Instructions for launching server processes on each instance in the fleet. Server processes run either a custom game build executable or a Realtime script. The runtime configuration defines the server executables or launch script file, launch parameters, and the number of processes to run concurrently on each instance. When creating a fleet, the runtime configuration must have at least one server process configuration; otherwise the request fails with an invalid request exception.
 
@@ -178,6 +180,7 @@ Optional:
 
 - `location` (String)
 - `location_capacity` (Attributes) Current resource capacity settings in a specified fleet or location. The location value might refer to a fleet's remote location or its home Region. (see [below for nested schema](#nestedatt--locations--location_capacity))
+- `player_gateway_status` (String) The player gateway status for the location.
 
 <a id="nestedatt--locations--location_capacity"></a>
 ### Nested Schema for `locations.location_capacity`
@@ -198,6 +201,14 @@ Optional:
 - `zero_capacity_strategy` (String) The strategy Amazon GameLift Servers will use to automatically scale your capacity to and from zero in response to game session activity. Game session activity refers to any active running sessions or game session requests. When set to SCALE_TO_AND_FROM_ZERO, MinSize must not be specified and will be managed automatically. When set to MANUAL, MinSize is required.
 
 
+
+
+<a id="nestedatt--player_gateway_configuration"></a>
+### Nested Schema for `player_gateway_configuration`
+
+Optional:
+
+- `game_server_ip_protocol_supported` (String) The IP protocol supported by the game server.
 
 
 <a id="nestedatt--resource_creation_limit_policy"></a>

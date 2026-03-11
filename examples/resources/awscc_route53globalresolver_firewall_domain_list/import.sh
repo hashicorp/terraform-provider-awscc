@@ -1,0 +1,1 @@
+$ terraform import awscc_route53globalresolver_firewall_domain_list.example "firewall_domain_list_id"

@@ -26,6 +26,7 @@ Resource Type definition for AWS::BedrockAgentCore::Memory
 - `encryption_key_arn` (String) ARN format
 - `memory_execution_role_arn` (String) ARN format
 - `memory_strategies` (Attributes List) List of memory strategies attached to this memory (see [below for nested schema](#nestedatt--memory_strategies))
+- `stream_delivery_resources` (Attributes) (see [below for nested schema](#nestedatt--stream_delivery_resources))
 - `tags` (Map of String) A map of tag keys and values
 
 ### Read-Only
@@ -306,6 +307,38 @@ Optional:
 - `strategy_id` (String) Unique identifier for the memory strategy
 - `type` (String) Type of memory strategy
 - `updated_at` (String) Last update timestamp of the memory strategy
+
+
+
+<a id="nestedatt--stream_delivery_resources"></a>
+### Nested Schema for `stream_delivery_resources`
+
+Optional:
+
+- `resources` (Attributes List) (see [below for nested schema](#nestedatt--stream_delivery_resources--resources))
+
+<a id="nestedatt--stream_delivery_resources--resources"></a>
+### Nested Schema for `stream_delivery_resources.resources`
+
+Optional:
+
+- `kinesis` (Attributes) (see [below for nested schema](#nestedatt--stream_delivery_resources--resources--kinesis))
+
+<a id="nestedatt--stream_delivery_resources--resources--kinesis"></a>
+### Nested Schema for `stream_delivery_resources.resources.kinesis`
+
+Optional:
+
+- `content_configurations` (Attributes List) (see [below for nested schema](#nestedatt--stream_delivery_resources--resources--kinesis--content_configurations))
+- `data_stream_arn` (String) ARN format
+
+<a id="nestedatt--stream_delivery_resources--resources--kinesis--content_configurations"></a>
+### Nested Schema for `stream_delivery_resources.resources.kinesis.content_configurations`
+
+Optional:
+
+- `level` (String) The level of content detail to deliver
+- `type` (String) The type of content to deliver
 
 ## Import
 
