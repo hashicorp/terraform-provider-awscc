@@ -1879,7 +1879,8 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	    "DefaultTargetCapacityType": {
 		//	      "enum": [
 		//	        "on-demand",
-		//	        "spot"
+		//	        "spot",
+		//	        "reserved-capacity"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -1916,6 +1917,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 						stringvalidator.OneOf(
 							"on-demand",
 							"spot",
+							"reserved-capacity",
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

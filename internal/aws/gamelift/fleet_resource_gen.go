@@ -544,6 +544,14 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		//	          "MaxSize"
 		//	        ],
 		//	        "type": "object"
+		//	      },
+		//	      "PlayerGatewayStatus": {
+		//	        "description": "The player gateway status for the location.",
+		//	        "enum": [
+		//	          "DISABLED",
+		//	          "ENABLED"
+		//	        ],
+		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -656,6 +664,21 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: PlayerGatewayStatus
+					"player_gateway_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The player gateway status for the location.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"DISABLED",
+								"ENABLED",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -836,6 +859,78 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 1024),
 				stringvalidator.RegexMatches(regexp.MustCompile("^vpc-\\S+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PlayerGatewayConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for player gateway.",
+		//	  "properties": {
+		//	    "GameServerIpProtocolSupported": {
+		//	      "description": "The IP protocol supported by the game server.",
+		//	      "enum": [
+		//	        "IPv4",
+		//	        "DUAL_STACK"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"player_gateway_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: GameServerIpProtocolSupported
+				"game_server_ip_protocol_supported": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The IP protocol supported by the game server.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"IPv4",
+							"DUAL_STACK",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for player gateway.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PlayerGatewayMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The player gateway mode for the fleet.",
+		//	  "enum": [
+		//	    "DISABLED",
+		//	    "ENABLED",
+		//	    "REQUIRED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"player_gateway_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The player gateway mode for the fleet.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"DISABLED",
+					"ENABLED",
+					"REQUIRED",
+				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -1534,24 +1629,25 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"anywhere_configuration":    "AnywhereConfiguration",
-		"apply_capacity":            "ApplyCapacity",
-		"build_id":                  "BuildId",
-		"certificate_configuration": "CertificateConfiguration",
-		"certificate_type":          "CertificateType",
-		"comparison_operator":       "ComparisonOperator",
-		"compute_type":              "ComputeType",
-		"concurrent_executions":     "ConcurrentExecutions",
-		"cost":                      "Cost",
-		"description":               "Description",
-		"desired_ec2_instances":     "DesiredEC2Instances",
-		"ec2_inbound_permissions":   "EC2InboundPermissions",
-		"ec2_instance_type":         "EC2InstanceType",
-		"evaluation_periods":        "EvaluationPeriods",
-		"fleet_arn":                 "FleetArn",
-		"fleet_id":                  "FleetId",
-		"fleet_type":                "FleetType",
-		"from_port":                 "FromPort",
+		"anywhere_configuration":            "AnywhereConfiguration",
+		"apply_capacity":                    "ApplyCapacity",
+		"build_id":                          "BuildId",
+		"certificate_configuration":         "CertificateConfiguration",
+		"certificate_type":                  "CertificateType",
+		"comparison_operator":               "ComparisonOperator",
+		"compute_type":                      "ComputeType",
+		"concurrent_executions":             "ConcurrentExecutions",
+		"cost":                              "Cost",
+		"description":                       "Description",
+		"desired_ec2_instances":             "DesiredEC2Instances",
+		"ec2_inbound_permissions":           "EC2InboundPermissions",
+		"ec2_instance_type":                 "EC2InstanceType",
+		"evaluation_periods":                "EvaluationPeriods",
+		"fleet_arn":                         "FleetArn",
+		"fleet_id":                          "FleetId",
+		"fleet_type":                        "FleetType",
+		"from_port":                         "FromPort",
+		"game_server_ip_protocol_supported": "GameServerIpProtocolSupported",
 		"game_session_activation_timeout_seconds": "GameSessionActivationTimeoutSeconds",
 		"instance_role_arn":                       "InstanceRoleARN",
 		"instance_role_credentials_provider":      "InstanceRoleCredentialsProvider",
@@ -1574,6 +1670,9 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		"parameters":                         "Parameters",
 		"peer_vpc_aws_account_id":            "PeerVpcAwsAccountId",
 		"peer_vpc_id":                        "PeerVpcId",
+		"player_gateway_configuration":       "PlayerGatewayConfiguration",
+		"player_gateway_mode":                "PlayerGatewayMode",
+		"player_gateway_status":              "PlayerGatewayStatus",
 		"policy_period_in_minutes":           "PolicyPeriodInMinutes",
 		"policy_type":                        "PolicyType",
 		"protocol":                           "Protocol",

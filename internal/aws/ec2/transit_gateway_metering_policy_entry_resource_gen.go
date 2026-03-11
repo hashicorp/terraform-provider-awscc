@@ -87,7 +87,8 @@ func transitGatewayMeteringPolicyEntryResource(ctx context.Context) (resource.Re
 		//	    "direct-connect-gateway",
 		//	    "peering",
 		//	    "network-function",
-		//	    "vpn-concentrator"
+		//	    "vpn-concentrator",
+		//	    "client-vpn"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -103,6 +104,7 @@ func transitGatewayMeteringPolicyEntryResource(ctx context.Context) (resource.Re
 					"peering",
 					"network-function",
 					"vpn-concentrator",
+					"client-vpn",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -225,7 +227,8 @@ func transitGatewayMeteringPolicyEntryResource(ctx context.Context) (resource.Re
 		//	    "direct-connect-gateway",
 		//	    "peering",
 		//	    "network-function",
-		//	    "vpn-concentrator"
+		//	    "vpn-concentrator",
+		//	    "client-vpn"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -241,6 +244,7 @@ func transitGatewayMeteringPolicyEntryResource(ctx context.Context) (resource.Re
 					"peering",
 					"network-function",
 					"vpn-concentrator",
+					"client-vpn",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

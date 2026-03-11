@@ -233,7 +233,9 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	        "standard",
 		//	        "tier-xl",
 		//	        "tier-2xl",
-		//	        "tier-4xl"
+		//	        "tier-4xl",
+		//	        "tier-8xl",
+		//	        "tier-ultra"
 		//	      ],
 		//	      "type": "string"
 		//	    }
@@ -253,6 +255,8 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							"tier-xl",
 							"tier-2xl",
 							"tier-4xl",
+							"tier-8xl",
+							"tier-ultra",
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -801,9 +805,6 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "array"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "RemoteNodeNetworks"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"remote_network_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -831,9 +832,6 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					Description: "Network configuration of nodes run on-premises with EKS Hybrid Nodes.",
 					Optional:    true,
 					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						fwvalidators.NotNullList(),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
