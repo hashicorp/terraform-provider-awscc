@@ -1,4 +1,39 @@
-## 1.75.0 (Unreleased)
+## 1.75.0 (March 11, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_cleanroomsml_configured_model_algorithm`
+* **New Data Source:** `awscc_cleanroomsml_configured_model_algorithm_association`
+* **New Data Source:** `awscc_cleanroomsml_configured_model_algorithm_associations`
+* **New Data Source:** `awscc_cleanroomsml_configured_model_algorithms`
+* **New Data Source:** `awscc_elasticache_replication_group`
+* **New Data Source:** `awscc_elasticache_replication_groups`
+* **New Data Source:** `awscc_route53globalresolver_access_source`
+* **New Data Source:** `awscc_route53globalresolver_access_token`
+* **New Data Source:** `awscc_route53globalresolver_dns_view`
+* **New Data Source:** `awscc_route53globalresolver_firewall_domain_list`
+* **New Data Source:** `awscc_route53globalresolver_firewall_domain_lists`
+* **New Data Source:** `awscc_route53globalresolver_firewall_rule`
+* **New Data Source:** `awscc_route53globalresolver_global_resolver`
+* **New Data Source:** `awscc_route53globalresolver_global_resolvers`
+* **New Data Source:** `awscc_route53globalresolver_hosted_zone_association`
+* **New Data Source:** `awscc_servicecatalog_stack_set_constraint`
+* **New List Resource:** `awscc_cleanroomsml_configured_model_algorithm`
+* **New List Resource:** `awscc_cleanroomsml_configured_model_algorithm_association`
+* **New List Resource:** `awscc_elasticache_replication_group`
+* **New List Resource:** `awscc_route53globalresolver_firewall_domain_list`
+* **New List Resource:** `awscc_route53globalresolver_global_resolver`
+* **New Resource:** `awscc_cleanroomsml_configured_model_algorithm`
+* **New Resource:** `awscc_cleanroomsml_configured_model_algorithm_association`
+* **New Resource:** `awscc_elasticache_replication_group`
+* **New Resource:** `awscc_route53globalresolver_access_source`
+* **New Resource:** `awscc_route53globalresolver_access_token`
+* **New Resource:** `awscc_route53globalresolver_dns_view`
+* **New Resource:** `awscc_route53globalresolver_firewall_domain_list`
+* **New Resource:** `awscc_route53globalresolver_firewall_rule`
+* **New Resource:** `awscc_route53globalresolver_global_resolver`
+* **New Resource:** `awscc_route53globalresolver_hosted_zone_association`
+* **New Resource:** `awscc_servicecatalog_stack_set_constraint`
 
 ## 1.74.0 (March 4, 2026)
 
