@@ -1,4 +1,3 @@
-# OpenSearch Serverless Collection Group
 resource "awscc_opensearchserverless_collection_group" "example" {
   name             = "example-collection-group"
   standby_replicas = "ENABLED"
@@ -23,12 +22,3 @@ resource "awscc_opensearchserverless_collection_group" "example" {
   ]
 }
 
-output "collection_group_arn" {
-  description = "ARN of the OpenSearch Serverless collection group"
-  value       = awscc_opensearchserverless_collection_group.example.arn
-}
-
-output "collection_group_id" {
-  description = "ID of the OpenSearch Serverless collection group"
-  value       = awscc_opensearchserverless_collection_group.example.collection_group_id
-}
