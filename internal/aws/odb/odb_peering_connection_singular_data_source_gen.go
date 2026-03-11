@@ -143,6 +143,23 @@ func odbPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 			Description: "The unique identifier of the peer network.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: PeerNetworkRouteTableIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique identifier of the VPC route table for which a route to the ODB network is automatically created during peering connection establishment.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"peer_network_route_table_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The unique identifier of the VPC route table for which a route to the ODB network is automatically created during peering connection establishment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -219,6 +236,7 @@ func odbPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		"peer_network_arn":              "PeerNetworkArn",
 		"peer_network_cidrs":            "PeerNetworkCidrs",
 		"peer_network_id":               "PeerNetworkId",
+		"peer_network_route_table_ids":  "PeerNetworkRouteTableIds",
 		"tags":                          "Tags",
 		"value":                         "Value",
 	})

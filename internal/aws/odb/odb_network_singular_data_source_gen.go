@@ -75,6 +75,23 @@ func odbNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The CIDR range of the client subnet in the ODB network.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CrossRegionS3RestoreSources
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The cross-Region Amazon S3 restore sources for the ODB network.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"cross_region_s3_restore_sources": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The cross-Region Amazon S3 restore sources for the ODB network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CustomDomainName
 		// CloudFormation resource type schema:
 		//
@@ -126,6 +143,32 @@ func odbNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The user-friendly name of the ODB network.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: KmsAccess
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS Key Management Service (KMS) access configuration for the ODB network.",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"kms_access": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS Key Management Service (KMS) access configuration for the ODB network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: KmsPolicyDocument
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS Key Management Service (KMS) policy document that defines permissions for key usage within the ODB network.",
+		//	  "type": "string"
+		//	}
+		"kms_policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS Key Management Service (KMS) policy document that defines permissions for key usage within the ODB network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ManagedServices
 		// CloudFormation resource type schema:
 		//
@@ -133,6 +176,76 @@ func odbNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "The managed services configuration for the ODB network.",
 		//	  "properties": {
+		//	    "CrossRegionS3RestoreSourcesAccess": {
+		//	      "description": "The access configuration for the cross-Region Amazon S3 database restore source.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "The configuration access for the cross-Region Amazon S3 database restore source for the ODB network.",
+		//	        "properties": {
+		//	          "Ipv4Addresses": {
+		//	            "description": "The IPv4 addresses allowed for cross-Region Amazon S3 restore access.",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
+		//	          },
+		//	          "Region": {
+		//	            "description": "The AWS-Region for cross-Region Amazon S3 restore access.",
+		//	            "type": "string"
+		//	          },
+		//	          "Status": {
+		//	            "description": "The current status of the cross-Region Amazon S3 restore access configuration.",
+		//	            "enum": [
+		//	              "ENABLED",
+		//	              "ENABLING",
+		//	              "DISABLED",
+		//	              "DISABLING"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "KmsAccess": {
+		//	      "additionalProperties": false,
+		//	      "description": "The AWS Key Management Service (KMS) access configuration.",
+		//	      "properties": {
+		//	        "DomainName": {
+		//	          "description": "The domain name for the AWS KMS access.",
+		//	          "type": "string"
+		//	        },
+		//	        "Ipv4Addresses": {
+		//	          "description": "The IPv4 addresses for the AWS KMS access.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "KmsPolicyDocument": {
+		//	          "description": "The endpoint policy for the AWS KMS access.",
+		//	          "type": "string"
+		//	        },
+		//	        "Status": {
+		//	          "description": "The status of the AWS KMS access.",
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "ENABLING",
+		//	            "DISABLED",
+		//	            "DISABLING"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "ManagedS3BackupAccess": {
 		//	      "additionalProperties": false,
 		//	      "description": "The managed Amazon S3 backup access configuration.",
@@ -228,6 +341,40 @@ func odbNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "StsAccess": {
+		//	      "additionalProperties": false,
+		//	      "description": "The AWS Security Token Service (STS) access configuration.",
+		//	      "properties": {
+		//	        "DomainName": {
+		//	          "description": "The domain name for the AWS STS access.",
+		//	          "type": "string"
+		//	        },
+		//	        "Ipv4Addresses": {
+		//	          "description": "The IPv4 addresses for the AWS STS access.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "Status": {
+		//	          "description": "The status of the AWS STS access.",
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "ENABLING",
+		//	            "DISABLED",
+		//	            "DISABLING"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "StsPolicyDocument": {
+		//	          "description": "The endpoint policy for the AWS STS access.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "ZeroEtlAccess": {
 		//	      "additionalProperties": false,
 		//	      "description": "The Zero-ETL access configuration.",
@@ -254,6 +401,59 @@ func odbNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"managed_services": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CrossRegionS3RestoreSourcesAccess
+				"cross_region_s3_restore_sources_access": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Ipv4Addresses
+							"ipv_4_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The IPv4 addresses allowed for cross-Region Amazon S3 restore access.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Region
+							"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The AWS-Region for cross-Region Amazon S3 restore access.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The current status of the cross-Region Amazon S3 restore access configuration.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The access configuration for the cross-Region Amazon S3 database restore source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsAccess
+				"kms_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DomainName
+						"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The domain name for the AWS KMS access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Ipv4Addresses
+						"ipv_4_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The IPv4 addresses for the AWS KMS access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: KmsPolicyDocument
+						"kms_policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The endpoint policy for the AWS KMS access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Status
+						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The status of the AWS KMS access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The AWS Key Management Service (KMS) access configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: ManagedS3BackupAccess
 				"managed_s3_backup_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -331,6 +531,34 @@ func odbNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The service network endpoint configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StsAccess
+				"sts_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DomainName
+						"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The domain name for the AWS STS access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Ipv4Addresses
+						"ipv_4_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The IPv4 addresses for the AWS STS access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Status
+						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The status of the AWS STS access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: StsPolicyDocument
+						"sts_policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The endpoint policy for the AWS STS access.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The AWS Security Token Service (STS) access configuration.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ZeroEtlAccess
@@ -437,6 +665,32 @@ func odbNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Specifies the endpoint policy for Amazon S3 access from the ODB network.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: StsAccess
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS Security Token Service (STS) access configuration for the ODB network.",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"sts_access": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS Security Token Service (STS) access configuration for the ODB network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: StsPolicyDocument
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS Security Token Service (STS) policy document that defines permissions for token service usage within the ODB network.",
+		//	  "type": "string"
+		//	}
+		"sts_policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS Security Token Service (STS) policy document that defines permissions for token service usage within the ODB network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -518,37 +772,44 @@ func odbNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::ODB::OdbNetwork").WithTerraformTypeName("awscc_odb_odb_network")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"availability_zone":            "AvailabilityZone",
-		"availability_zone_id":         "AvailabilityZoneId",
-		"backup_subnet_cidr":           "BackupSubnetCidr",
-		"cidr":                         "Cidr",
-		"client_subnet_cidr":           "ClientSubnetCidr",
-		"custom_domain_name":           "CustomDomainName",
-		"default_dns_prefix":           "DefaultDnsPrefix",
-		"delete_associated_resources":  "DeleteAssociatedResources",
-		"display_name":                 "DisplayName",
-		"domain_name":                  "DomainName",
-		"ipv_4_addresses":              "Ipv4Addresses",
-		"key":                          "Key",
-		"managed_s3_backup_access":     "ManagedS3BackupAccess",
-		"managed_services":             "ManagedServices",
-		"managed_services_ipv_4_cidrs": "ManagedServicesIpv4Cidrs",
-		"oci_network_anchor_id":        "OciNetworkAnchorId",
-		"oci_resource_anchor_name":     "OciResourceAnchorName",
-		"oci_vcn_url":                  "OciVcnUrl",
-		"odb_network_arn":              "OdbNetworkArn",
-		"odb_network_id":               "OdbNetworkId",
-		"resource_gateway_arn":         "ResourceGatewayArn",
-		"s3_access":                    "S3Access",
-		"s3_policy_document":           "S3PolicyDocument",
-		"service_network_arn":          "ServiceNetworkArn",
-		"service_network_endpoint":     "ServiceNetworkEndpoint",
-		"status":                       "Status",
-		"tags":                         "Tags",
-		"value":                        "Value",
-		"vpc_endpoint_id":              "VpcEndpointId",
-		"vpc_endpoint_type":            "VpcEndpointType",
-		"zero_etl_access":              "ZeroEtlAccess",
+		"availability_zone":                      "AvailabilityZone",
+		"availability_zone_id":                   "AvailabilityZoneId",
+		"backup_subnet_cidr":                     "BackupSubnetCidr",
+		"cidr":                                   "Cidr",
+		"client_subnet_cidr":                     "ClientSubnetCidr",
+		"cross_region_s3_restore_sources":        "CrossRegionS3RestoreSources",
+		"cross_region_s3_restore_sources_access": "CrossRegionS3RestoreSourcesAccess",
+		"custom_domain_name":                     "CustomDomainName",
+		"default_dns_prefix":                     "DefaultDnsPrefix",
+		"delete_associated_resources":            "DeleteAssociatedResources",
+		"display_name":                           "DisplayName",
+		"domain_name":                            "DomainName",
+		"ipv_4_addresses":                        "Ipv4Addresses",
+		"key":                                    "Key",
+		"kms_access":                             "KmsAccess",
+		"kms_policy_document":                    "KmsPolicyDocument",
+		"managed_s3_backup_access":               "ManagedS3BackupAccess",
+		"managed_services":                       "ManagedServices",
+		"managed_services_ipv_4_cidrs":           "ManagedServicesIpv4Cidrs",
+		"oci_network_anchor_id":                  "OciNetworkAnchorId",
+		"oci_resource_anchor_name":               "OciResourceAnchorName",
+		"oci_vcn_url":                            "OciVcnUrl",
+		"odb_network_arn":                        "OdbNetworkArn",
+		"odb_network_id":                         "OdbNetworkId",
+		"region":                                 "Region",
+		"resource_gateway_arn":                   "ResourceGatewayArn",
+		"s3_access":                              "S3Access",
+		"s3_policy_document":                     "S3PolicyDocument",
+		"service_network_arn":                    "ServiceNetworkArn",
+		"service_network_endpoint":               "ServiceNetworkEndpoint",
+		"status":                                 "Status",
+		"sts_access":                             "StsAccess",
+		"sts_policy_document":                    "StsPolicyDocument",
+		"tags":                                   "Tags",
+		"value":                                  "Value",
+		"vpc_endpoint_id":                        "VpcEndpointId",
+		"vpc_endpoint_type":                      "VpcEndpointType",
+		"zero_etl_access":                        "ZeroEtlAccess",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

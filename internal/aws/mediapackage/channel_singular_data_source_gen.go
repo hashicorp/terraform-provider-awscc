@@ -102,12 +102,6 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "string"
 		//	          }
 		//	        },
-		//	        "required": [
-		//	          "Id",
-		//	          "Username",
-		//	          "Password",
-		//	          "Url"
-		//	        ],
 		//	        "type": "object"
 		//	      },
 		//	      "type": "array"

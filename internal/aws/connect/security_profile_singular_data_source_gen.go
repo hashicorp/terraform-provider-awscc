@@ -89,6 +89,57 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 			Description: "The list of tags that a security profile uses to restrict access to resources in Amazon Connect.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: AllowedFlowModules
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The list of flow-module resources to be linked to a security profile in Amazon Connect.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A first-party application's metadata.",
+		//	    "properties": {
+		//	      "FlowModuleId": {
+		//	        "description": "The identifier of the application that you want to give access to.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Type": {
+		//	        "description": "The type of the first-party application",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Type",
+		//	      "FlowModuleId"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"allowed_flow_modules": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: FlowModuleId
+					"flow_module_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The identifier of the application that you want to give access to.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of the first-party application",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The list of flow-module resources to be linked to a security profile in Amazon Connect.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Applications
 		// CloudFormation resource type schema:
 		//
@@ -117,6 +168,14 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
+		//	      },
+		//	      "Type": {
+		//	        "description": "The type of the application.",
+		//	        "enum": [
+		//	          "MCP",
+		//	          "THIRD_PARTY_APPLICATION"
+		//	        ],
+		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -141,6 +200,11 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 					// Property: Namespace
 					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Namespace of the application that you want to give access to.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of the application.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -473,11 +537,13 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		"access_type": "AccessType",
 		"allowed_access_control_hierarchy_group_id":      "AllowedAccessControlHierarchyGroupId",
 		"allowed_access_control_tags":                    "AllowedAccessControlTags",
+		"allowed_flow_modules":                           "AllowedFlowModules",
 		"application_permissions":                        "ApplicationPermissions",
 		"applications":                                   "Applications",
 		"attribute_name":                                 "AttributeName",
 		"data_table_access_control_configuration":        "DataTableAccessControlConfiguration",
 		"description":                                    "Description",
+		"flow_module_id":                                 "FlowModuleId",
 		"granular_access_control_configuration":          "GranularAccessControlConfiguration",
 		"hierarchy_restricted_resources":                 "HierarchyRestrictedResources",
 		"instance_arn":                                   "InstanceArn",
@@ -492,6 +558,7 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		"security_profile_name":                          "SecurityProfileName",
 		"tag_restricted_resources":                       "TagRestrictedResources",
 		"tags":                                           "Tags",
+		"type":                                           "Type",
 		"value":                                          "Value",
 		"values":                                         "Values",
 	})
