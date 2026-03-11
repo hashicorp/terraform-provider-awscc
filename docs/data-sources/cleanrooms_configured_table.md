@@ -146,6 +146,7 @@ Read-Only:
 
 Read-Only:
 
+- `catalog_name` (String)
 - `database_name` (String)
 - `output_location` (String)
 - `region` (String)

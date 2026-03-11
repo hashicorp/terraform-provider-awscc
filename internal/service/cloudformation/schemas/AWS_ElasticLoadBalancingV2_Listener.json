@@ -41,7 +41,8 @@
         "elasticloadbalancing:ModifyListener",
         "elasticloadbalancing:DescribeListeners",
         "cognito-idp:DescribeUserPoolClient",
-        "elasticloadbalancing:ModifyListenerAttributes"
+        "elasticloadbalancing:ModifyListenerAttributes",
+        "elasticloadbalancing:DescribeListenerAttributes"
       ]
     },
     "list": {

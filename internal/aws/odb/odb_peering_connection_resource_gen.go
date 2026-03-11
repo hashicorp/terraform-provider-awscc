@@ -201,6 +201,30 @@ func odbPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 			}, /*END PLAN MODIFIERS*/
 			// PeerNetworkId is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: PeerNetworkRouteTableIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique identifier of the VPC route table for which a route to the ODB network is automatically created during peering connection establishment.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"peer_network_route_table_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The unique identifier of the VPC route table for which a route to the ODB network is automatically created during peering connection establishment.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// PeerNetworkRouteTableIds is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -309,6 +333,7 @@ func odbPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 		"peer_network_arn":              "PeerNetworkArn",
 		"peer_network_cidrs":            "PeerNetworkCidrs",
 		"peer_network_id":               "PeerNetworkId",
+		"peer_network_route_table_ids":  "PeerNetworkRouteTableIds",
 		"tags":                          "Tags",
 		"value":                         "Value",
 	})
@@ -317,6 +342,7 @@ func odbPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 		"/properties/OdbNetworkId",
 		"/properties/PeerNetworkId",
 		"/properties/AdditionalPeerNetworkCidrs",
+		"/properties/PeerNetworkRouteTableIds",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

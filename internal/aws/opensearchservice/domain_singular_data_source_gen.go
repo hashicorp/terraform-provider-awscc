@@ -577,6 +577,31 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: DeploymentStrategyOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "DeploymentStrategy": {
+		//	      "enum": [
+		//	        "Default",
+		//	        "CapacityOptimized"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"deployment_strategy_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DeploymentStrategy
+				"deployment_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainArn
 		// CloudFormation resource type schema:
 		//
@@ -1235,6 +1260,8 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"dedicated_master_count":          "DedicatedMasterCount",
 		"dedicated_master_enabled":        "DedicatedMasterEnabled",
 		"dedicated_master_type":           "DedicatedMasterType",
+		"deployment_strategy":             "DeploymentStrategy",
+		"deployment_strategy_options":     "DeploymentStrategyOptions",
 		"description":                     "Description",
 		"domain_arn":                      "DomainArn",
 		"domain_endpoint":                 "DomainEndpoint",

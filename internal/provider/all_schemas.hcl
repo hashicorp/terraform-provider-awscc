@@ -893,6 +893,14 @@ resource_schema "aws_cleanrooms_privacy_budget_template" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_cleanroomsml_configured_model_algorithm" {
+  cloudformation_type_name = "AWS::CleanRoomsML::ConfiguredModelAlgorithm"
+}
+
+resource_schema "aws_cleanroomsml_configured_model_algorithm_association" {
+  cloudformation_type_name = "AWS::CleanRoomsML::ConfiguredModelAlgorithmAssociation"
+}
+
 resource_schema "aws_cleanroomsml_training_dataset" {
   cloudformation_type_name = "AWS::CleanRoomsML::TrainingDataset"
 }
@@ -2444,6 +2452,10 @@ resource_schema "aws_elasticache_global_replication_group" {
 
 resource_schema "aws_elasticache_parameter_group" {
   cloudformation_type_name = "AWS::ElastiCache::ParameterGroup"
+}
+
+resource_schema "aws_elasticache_replication_group" {
+  cloudformation_type_name = "AWS::ElastiCache::ReplicationGroup"
 }
 
 resource_schema "aws_elasticache_serverless_cache" {
@@ -4842,6 +4854,39 @@ resource_schema "aws_route53_key_signing_key" {
   cloudformation_type_name = "AWS::Route53::KeySigningKey"
 }
 
+resource_schema "aws_route53globalresolver_access_source" {
+  cloudformation_type_name               = "AWS::Route53GlobalResolver::AccessSource"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_route53globalresolver_access_token" {
+  cloudformation_type_name               = "AWS::Route53GlobalResolver::AccessToken"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_route53globalresolver_dns_view" {
+  cloudformation_type_name               = "AWS::Route53GlobalResolver::DnsView"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_route53globalresolver_firewall_domain_list" {
+  cloudformation_type_name = "AWS::Route53GlobalResolver::FirewallDomainList"
+}
+
+resource_schema "aws_route53globalresolver_firewall_rule" {
+  cloudformation_type_name               = "AWS::Route53GlobalResolver::FirewallRule"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_route53globalresolver_global_resolver" {
+  cloudformation_type_name = "AWS::Route53GlobalResolver::GlobalResolver"
+}
+
+resource_schema "aws_route53globalresolver_hosted_zone_association" {
+  cloudformation_type_name               = "AWS::Route53GlobalResolver::HostedZoneAssociation"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_route53_record_set" {
   cloudformation_type_name               = "AWS::Route53::RecordSet"
   suppress_plural_data_source_generation = true
@@ -5594,6 +5639,11 @@ resource_schema "aws_servicecatalog_service_action" {
 
 resource_schema "aws_servicecatalog_service_action_association" {
   cloudformation_type_name               = "AWS::ServiceCatalog::ServiceActionAssociation"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_servicecatalog_stack_set_constraint" {
+  cloudformation_type_name               = "AWS::ServiceCatalog::StackSetConstraint"
   suppress_plural_data_source_generation = true
 }
 

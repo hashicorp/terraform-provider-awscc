@@ -106,6 +106,27 @@ func samplingRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    },
+		//	    "SamplingRateBoost": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CooldownWindowMinutes": {
+		//	          "description": "Time window (in minutes) in which only one sampling rate boost can be triggered. After a boost occurs, no further boosts are allowed until the next window.",
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "MaxRate": {
+		//	          "description": "The maximum sampling rate X-Ray will apply when it detects anomalies. X-Ray determines the appropriate rate between your baseline and the maximum, depending on anomaly activity.",
+		//	          "maximum": 1,
+		//	          "minimum": 0,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "MaxRate",
+		//	        "CooldownWindowMinutes"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "ServiceName": {
 		//	      "description": "Matches the name that the service uses to identify itself in segments.",
 		//	      "maxLength": 64,
@@ -188,6 +209,22 @@ func samplingRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 				"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SamplingRateBoost
+				"sampling_rate_boost": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CooldownWindowMinutes
+						"cooldown_window_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Time window (in minutes) in which only one sampling rate boost can be triggered. After a boost occurs, no further boosts are allowed until the next window.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaxRate
+						"max_rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "The maximum sampling rate X-Ray will apply when it detects anomalies. X-Ray determines the appropriate rate between your baseline and the maximum, depending on anomaly activity.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ServiceName
 				"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -281,6 +318,27 @@ func samplingRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	          "maxLength": 32,
 		//	          "minLength": 1,
 		//	          "type": "string"
+		//	        },
+		//	        "SamplingRateBoost": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "CooldownWindowMinutes": {
+		//	              "description": "Time window (in minutes) in which only one sampling rate boost can be triggered. After a boost occurs, no further boosts are allowed until the next window.",
+		//	              "minimum": 1,
+		//	              "type": "integer"
+		//	            },
+		//	            "MaxRate": {
+		//	              "description": "The maximum sampling rate X-Ray will apply when it detects anomalies. X-Ray determines the appropriate rate between your baseline and the maximum, depending on anomaly activity.",
+		//	              "maximum": 1,
+		//	              "minimum": 0,
+		//	              "type": "number"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "MaxRate",
+		//	            "CooldownWindowMinutes"
+		//	          ],
+		//	          "type": "object"
 		//	        },
 		//	        "ServiceName": {
 		//	          "description": "Matches the name that the service uses to identify itself in segments.",
@@ -381,6 +439,22 @@ func samplingRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 							Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: SamplingRateBoost
+						"sampling_rate_boost": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CooldownWindowMinutes
+								"cooldown_window_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Time window (in minutes) in which only one sampling rate boost can be triggered. After a boost occurs, no further boosts are allowed until the next window.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: MaxRate
+								"max_rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Description: "The maximum sampling rate X-Ray will apply when it detects anomalies. X-Ray determines the appropriate rate between your baseline and the maximum, depending on anomaly activity.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: ServiceName
 						"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Matches the name that the service uses to identify itself in segments.",
@@ -466,6 +540,27 @@ func samplingRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    },
+		//	    "SamplingRateBoost": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CooldownWindowMinutes": {
+		//	          "description": "Time window (in minutes) in which only one sampling rate boost can be triggered. After a boost occurs, no further boosts are allowed until the next window.",
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "MaxRate": {
+		//	          "description": "The maximum sampling rate X-Ray will apply when it detects anomalies. X-Ray determines the appropriate rate between your baseline and the maximum, depending on anomaly activity.",
+		//	          "maximum": 1,
+		//	          "minimum": 0,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "MaxRate",
+		//	        "CooldownWindowMinutes"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "ServiceName": {
 		//	      "description": "Matches the name that the service uses to identify itself in segments.",
 		//	      "maxLength": 64,
@@ -532,6 +627,22 @@ func samplingRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 				"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SamplingRateBoost
+				"sampling_rate_boost": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CooldownWindowMinutes
+						"cooldown_window_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Time window (in minutes) in which only one sampling rate boost can be triggered. After a boost occurs, no further boosts are allowed until the next window.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaxRate
+						"max_rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "The maximum sampling rate X-Ray will apply when it detects anomalies. X-Ray determines the appropriate rate between your baseline and the maximum, depending on anomaly activity.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ServiceName
 				"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -612,27 +723,30 @@ func samplingRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::XRay::SamplingRule").WithTerraformTypeName("awscc_xray_sampling_rule")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"attributes":           "Attributes",
-		"created_at":           "CreatedAt",
-		"fixed_rate":           "FixedRate",
-		"host":                 "Host",
-		"http_method":          "HTTPMethod",
-		"key":                  "Key",
-		"modified_at":          "ModifiedAt",
-		"priority":             "Priority",
-		"reservoir_size":       "ReservoirSize",
-		"resource_arn":         "ResourceARN",
-		"rule_arn":             "RuleARN",
-		"rule_name":            "RuleName",
-		"sampling_rule":        "SamplingRule",
-		"sampling_rule_record": "SamplingRuleRecord",
-		"sampling_rule_update": "SamplingRuleUpdate",
-		"service_name":         "ServiceName",
-		"service_type":         "ServiceType",
-		"tags":                 "Tags",
-		"url_path":             "URLPath",
-		"value":                "Value",
-		"version":              "Version",
+		"attributes":              "Attributes",
+		"cooldown_window_minutes": "CooldownWindowMinutes",
+		"created_at":              "CreatedAt",
+		"fixed_rate":              "FixedRate",
+		"host":                    "Host",
+		"http_method":             "HTTPMethod",
+		"key":                     "Key",
+		"max_rate":                "MaxRate",
+		"modified_at":             "ModifiedAt",
+		"priority":                "Priority",
+		"reservoir_size":          "ReservoirSize",
+		"resource_arn":            "ResourceARN",
+		"rule_arn":                "RuleARN",
+		"rule_name":               "RuleName",
+		"sampling_rate_boost":     "SamplingRateBoost",
+		"sampling_rule":           "SamplingRule",
+		"sampling_rule_record":    "SamplingRuleRecord",
+		"sampling_rule_update":    "SamplingRuleUpdate",
+		"service_name":            "ServiceName",
+		"service_type":            "ServiceType",
+		"tags":                    "Tags",
+		"url_path":                "URLPath",
+		"value":                   "Value",
+		"version":                 "Version",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

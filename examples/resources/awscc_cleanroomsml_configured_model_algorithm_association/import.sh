@@ -1,0 +1,1 @@
+$ terraform import awscc_cleanroomsml_configured_model_algorithm_association.example "configured_model_algorithm_association_arn"

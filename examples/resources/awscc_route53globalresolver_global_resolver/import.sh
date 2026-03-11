@@ -1,0 +1,1 @@
+$ terraform import awscc_route53globalresolver_global_resolver.example "global_resolver_id"

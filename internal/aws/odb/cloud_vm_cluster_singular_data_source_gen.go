@@ -446,6 +446,57 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "The host name for the VM cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: IamRoles
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS Identity and Access Management (IAM) service roles associated with the VM cluster.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "An AWS Identity and Access Management (IAM) service role associated with the VM cluster.",
+		//	    "properties": {
+		//	      "AwsIntegration": {
+		//	        "description": "The AWS integration configuration settings for the AWS Identity and Access Management (IAM) service role.",
+		//	        "type": "string"
+		//	      },
+		//	      "IamRoleArn": {
+		//	        "description": "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) service role.",
+		//	        "type": "string"
+		//	      },
+		//	      "Status": {
+		//	        "description": "The current status of the AWS Identity and Access Management (IAM) service role.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"iam_roles": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AwsIntegration
+					"aws_integration": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The AWS integration configuration settings for the AWS Identity and Access Management (IAM) service role.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: IamRoleArn
+					"iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) service role.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The current status of the AWS Identity and Access Management (IAM) service role.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The AWS Identity and Access Management (IAM) service roles associated with the VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IsLocalBackupEnabled
 		// CloudFormation resource type schema:
 		//
@@ -746,6 +797,7 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::ODB::CloudVmCluster").WithTerraformTypeName("awscc_odb_cloud_vm_cluster")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"aws_integration":                 "AwsIntegration",
 		"backup_ip_id":                    "BackupIpId",
 		"backup_vnic_2_id":                "BackupVnic2Id",
 		"cloud_exadata_infrastructure_id": "CloudExadataInfrastructureId",
@@ -769,6 +821,8 @@ func cloudVmClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		"gi_version":                      "GiVersion",
 		"host_ip_id":                      "HostIpId",
 		"hostname":                        "Hostname",
+		"iam_role_arn":                    "IamRoleArn",
+		"iam_roles":                       "IamRoles",
 		"is_diagnostics_events_enabled":   "IsDiagnosticsEventsEnabled",
 		"is_health_monitoring_enabled":    "IsHealthMonitoringEnabled",
 		"is_incident_logs_enabled":        "IsIncidentLogsEnabled",

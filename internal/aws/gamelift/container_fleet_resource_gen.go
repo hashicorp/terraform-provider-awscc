@@ -644,6 +644,14 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	        ],
 		//	        "type": "object"
 		//	      },
+		//	      "PlayerGatewayStatus": {
+		//	        "description": "The player gateway status for the location.",
+		//	        "enum": [
+		//	          "DISABLED",
+		//	          "ENABLED"
+		//	        ],
+		//	        "type": "string"
+		//	      },
 		//	      "StoppedActions": {
 		//	        "description": "A list of fleet actions that have been suspended in the fleet location.",
 		//	        "insertionOrder": false,
@@ -766,6 +774,21 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: PlayerGatewayStatus
+					"player_gateway_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The player gateway status for the location.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"DISABLED",
+								"ENABLED",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: StoppedActions
@@ -986,6 +1009,34 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// PerInstanceContainerGroupDefinitionName is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: PlayerGatewayMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The player gateway mode for the container fleet.",
+		//	  "enum": [
+		//	    "DISABLED",
+		//	    "ENABLED",
+		//	    "REQUIRED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"player_gateway_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The player gateway mode for the container fleet.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"DISABLED",
+					"ENABLED",
+					"REQUIRED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ScalingPolicies
 		// CloudFormation resource type schema:
@@ -1408,6 +1459,8 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 		"new_game_sessions_per_creator":      "NewGameSessionsPerCreator",
 		"per_instance_container_group_definition_arn":  "PerInstanceContainerGroupDefinitionArn",
 		"per_instance_container_group_definition_name": "PerInstanceContainerGroupDefinitionName",
+		"player_gateway_mode":                          "PlayerGatewayMode",
+		"player_gateway_status":                        "PlayerGatewayStatus",
 		"policy_period_in_minutes":                     "PolicyPeriodInMinutes",
 		"policy_type":                                  "PolicyType",
 		"protection_strategy":                          "ProtectionStrategy",

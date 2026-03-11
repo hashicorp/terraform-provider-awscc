@@ -1007,6 +1007,12 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 		//	    "Athena": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "CatalogName": {
+		//	          "maxLength": 64,
+		//	          "minLength": 1,
+		//	          "pattern": "^[a-zA-Z0-9_-]+$",
+		//	          "type": "string"
+		//	        },
 		//	        "DatabaseName": {
 		//	          "maxLength": 128,
 		//	          "type": "string"
@@ -1202,6 +1208,18 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Athena
 				"athena": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CatalogName
+						"catalog_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 64),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: DatabaseName
 						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
@@ -1611,6 +1629,7 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 		"analysis_rules":              "AnalysisRules",
 		"arn":                         "Arn",
 		"athena":                      "Athena",
+		"catalog_name":                "CatalogName",
 		"column_name":                 "ColumnName",
 		"column_names":                "ColumnNames",
 		"column_type":                 "ColumnType",

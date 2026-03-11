@@ -215,7 +215,6 @@ Optional:
 
 Optional:
 
-- `cedar_format` (String)
 - `cedar_json` (String)
 
 

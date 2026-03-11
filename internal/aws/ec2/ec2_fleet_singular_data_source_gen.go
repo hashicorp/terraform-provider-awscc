@@ -1196,7 +1196,8 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "DefaultTargetCapacityType": {
 		//	      "enum": [
 		//	        "on-demand",
-		//	        "spot"
+		//	        "spot",
+		//	        "reserved-capacity"
 		//	      ],
 		//	      "type": "string"
 		//	    },

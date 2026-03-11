@@ -77,7 +77,7 @@
       }
     },
     "EvaluationReviewNotificationRecipientValue": {
-      "description": "",
+      "description": "The value information for an evaluation review notification recipient.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -88,7 +88,7 @@
       }
     },
     "EvaluationReviewNotificationRecipient": {
-      "description": "",
+      "description": "Information about a recipient who should be notified when an evaluation review is requested.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -110,7 +110,7 @@
       ]
     },
     "EvaluationReviewConfiguration": {
-      "description": "",
+      "description": "Configuration settings for evaluation reviews.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -951,7 +951,7 @@
       "$ref": "#/definitions/EvaluationFormLanguageConfiguration"
     },
     "ReviewConfiguration": {
-      "description": "",
+      "description": "Configuration for evaluation review settings of this evaluation form.",
       "$ref": "#/definitions/EvaluationReviewConfiguration"
     },
     "Tags": {
@@ -982,7 +982,7 @@
     "taggable": true,
     "tagOnCreate": false,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": true,
+    "cloudFormationSystemTags": false,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "connect:ListTagsForResource",

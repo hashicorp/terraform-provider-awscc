@@ -617,6 +617,12 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	    "Athena": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "CatalogName": {
+		//	          "maxLength": 64,
+		//	          "minLength": 1,
+		//	          "pattern": "^[a-zA-Z0-9_-]+$",
+		//	          "type": "string"
+		//	        },
 		//	        "DatabaseName": {
 		//	          "maxLength": 128,
 		//	          "type": "string"
@@ -812,6 +818,10 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 				// Property: Athena
 				"athena": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CatalogName
+						"catalog_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: DatabaseName
 						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
@@ -978,6 +988,7 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		"analysis_rules":              "AnalysisRules",
 		"arn":                         "Arn",
 		"athena":                      "Athena",
+		"catalog_name":                "CatalogName",
 		"column_name":                 "ColumnName",
 		"column_names":                "ColumnNames",
 		"column_type":                 "ColumnType",

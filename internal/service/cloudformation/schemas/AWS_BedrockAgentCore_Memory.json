@@ -820,6 +820,80 @@
       ],
       "additionalProperties": false
     },
+    "ContentConfiguration": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "type": "string",
+          "enum": [
+            "MEMORY_RECORDS"
+          ],
+          "description": "The type of content to deliver"
+        },
+        "Level": {
+          "type": "string",
+          "enum": [
+            "METADATA_ONLY",
+            "FULL_CONTENT"
+          ],
+          "description": "The level of content detail to deliver"
+        }
+      },
+      "required": [
+        "Type"
+      ],
+      "additionalProperties": false
+    },
+    "KinesisResource": {
+      "type": "object",
+      "properties": {
+        "DataStreamArn": {
+          "$ref": "#/definitions/Arn"
+        },
+        "ContentConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentConfiguration"
+          },
+          "minItems": 1,
+          "maxItems": 1,
+          "insertionOrder": false
+        }
+      },
+      "required": [
+        "DataStreamArn",
+        "ContentConfigurations"
+      ],
+      "additionalProperties": false
+    },
+    "StreamDeliveryResource": {
+      "type": "object",
+      "properties": {
+        "Kinesis": {
+          "$ref": "#/definitions/KinesisResource"
+        }
+      },
+      "additionalProperties": false,
+      "maxProperties": 1,
+      "minProperties": 1
+    },
+    "StreamDeliveryResources": {
+      "type": "object",
+      "properties": {
+        "Resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StreamDeliveryResource"
+          },
+          "maxItems": 1,
+          "insertionOrder": false
+        }
+      },
+      "required": [
+        "Resources"
+      ],
+      "additionalProperties": false
+    },
     "TagsMap": {
       "type": "object",
       "description": "A map of tag keys and values",
@@ -878,6 +952,9 @@
     },
     "MemoryStrategies": {
       "$ref": "#/definitions/MemoryStrategies"
+    },
+    "StreamDeliveryResources": {
+      "$ref": "#/definitions/StreamDeliveryResources"
     },
     "Tags": {
       "$ref": "#/definitions/TagsMap"

@@ -1,0 +1,1 @@
+$ terraform import awscc_route53globalresolver_firewall_rule.example "firewall_rule_id"

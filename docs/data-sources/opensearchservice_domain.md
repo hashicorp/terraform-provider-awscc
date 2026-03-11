@@ -28,6 +28,7 @@ Data Source schema for AWS::OpenSearchService::Domain
 - `arn` (String)
 - `cluster_config` (Attributes) (see [below for nested schema](#nestedatt--cluster_config))
 - `cognito_options` (Attributes) (see [below for nested schema](#nestedatt--cognito_options))
+- `deployment_strategy_options` (Attributes) (see [below for nested schema](#nestedatt--deployment_strategy_options))
 - `domain_arn` (String)
 - `domain_endpoint` (String)
 - `domain_endpoint_options` (Attributes) (see [below for nested schema](#nestedatt--domain_endpoint_options))
@@ -208,6 +209,14 @@ Read-Only:
 - `identity_pool_id` (String)
 - `role_arn` (String)
 - `user_pool_id` (String)
+
+
+<a id="nestedatt--deployment_strategy_options"></a>
+### Nested Schema for `deployment_strategy_options`
+
+Read-Only:
+
+- `deployment_strategy` (String)
 
 
 <a id="nestedatt--domain_endpoint_options"></a>

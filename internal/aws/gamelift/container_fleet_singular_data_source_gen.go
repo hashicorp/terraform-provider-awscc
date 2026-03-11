@@ -454,6 +454,14 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        ],
 		//	        "type": "object"
 		//	      },
+		//	      "PlayerGatewayStatus": {
+		//	        "description": "The player gateway status for the location.",
+		//	        "enum": [
+		//	          "DISABLED",
+		//	          "ENABLED"
+		//	        ],
+		//	        "type": "string"
+		//	      },
 		//	      "StoppedActions": {
 		//	        "description": "A list of fleet actions that have been suspended in the fleet location.",
 		//	        "insertionOrder": false,
@@ -519,6 +527,11 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Current resource capacity settings in a specified fleet or location. The location value might refer to a fleet's remote location or its home Region.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: PlayerGatewayStatus
+					"player_gateway_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The player gateway status for the location.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: StoppedActions
@@ -654,6 +667,22 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	}
 		"per_instance_container_group_definition_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the container group definition that will be created per instance. This field is optional if you specify GameServerContainerGroupDefinitionName.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PlayerGatewayMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The player gateway mode for the container fleet.",
+		//	  "enum": [
+		//	    "DISABLED",
+		//	    "ENABLED",
+		//	    "REQUIRED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"player_gateway_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The player gateway mode for the container fleet.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ScalingPolicies
@@ -943,6 +972,8 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		"new_game_sessions_per_creator":      "NewGameSessionsPerCreator",
 		"per_instance_container_group_definition_arn":  "PerInstanceContainerGroupDefinitionArn",
 		"per_instance_container_group_definition_name": "PerInstanceContainerGroupDefinitionName",
+		"player_gateway_mode":                          "PlayerGatewayMode",
+		"player_gateway_status":                        "PlayerGatewayStatus",
 		"policy_period_in_minutes":                     "PolicyPeriodInMinutes",
 		"policy_type":                                  "PolicyType",
 		"protection_strategy":                          "ProtectionStrategy",
