@@ -95,6 +95,9 @@
           "description": "The version of the sampling rule format (1)",
           "type": "integer",
           "minimum": 1
+        },
+        "SamplingRateBoost": {
+          "$ref": "#/definitions/SamplingRateBoost"
         }
       },
       "required": [
@@ -193,8 +196,32 @@
           "description": "Matches the path from a request URL.",
           "type": "string",
           "maxLength": 128
+        },
+        "SamplingRateBoost": {
+          "$ref": "#/definitions/SamplingRateBoost"
         }
       }
+    },
+    "SamplingRateBoost": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MaxRate": {
+          "description": "The maximum sampling rate X-Ray will apply when it detects anomalies. X-Ray determines the appropriate rate between your baseline and the maximum, depending on anomaly activity.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "CooldownWindowMinutes": {
+          "description": "Time window (in minutes) in which only one sampling rate boost can be triggered. After a boost occurs, no further boosts are allowed until the next window.",
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "MaxRate",
+        "CooldownWindowMinutes"
+      ]
     },
     "RuleName": {
       "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
