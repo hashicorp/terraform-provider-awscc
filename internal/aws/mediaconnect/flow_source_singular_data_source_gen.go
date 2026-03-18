@@ -66,10 +66,12 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "RoleArn": {
 		//	      "description": "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
+		//	      "pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$",
 		//	      "type": "string"
 		//	    },
 		//	    "SecretArn": {
 		//	      "description": " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
+		//	      "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
 		//	      "type": "string"
 		//	    },
 		//	    "Url": {
@@ -149,6 +151,7 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.",
+		//	  "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:entitlement:[a-zA-Z0-9-]+:[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
 		"entitlement_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -160,6 +163,7 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The ARN of the flow.",
+		//	  "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:flow:[a-zA-Z0-9-]+:[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
 		"flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -175,6 +179,7 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "properties": {
 		//	    "BridgeArn": {
 		//	      "description": "The ARN of the bridge feeding this flow.",
+		//	      "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:bridge:[a-zA-Z0-9-]+:[a-zA-Z0-9_-]+$",
 		//	      "type": "string"
 		//	    },
 		//	    "VpcInterfaceAttachment": {
@@ -329,6 +334,7 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The ARN of the source.",
+		//	  "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:source:[a-zA-Z0-9-]+:[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
 		"source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -377,6 +383,46 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"stream_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Key-value pairs that can be used to tag and organize this flow source.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Key-value pairs that can be used to tag and organize this flow source.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcInterfaceName
@@ -429,6 +475,7 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"gateway_bridge_source":          "GatewayBridgeSource",
 		"ingest_ip":                      "IngestIp",
 		"ingest_port":                    "IngestPort",
+		"key":                            "Key",
 		"key_type":                       "KeyType",
 		"max_bitrate":                    "MaxBitrate",
 		"max_latency":                    "MaxLatency",
@@ -446,7 +493,9 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"source_listener_address":        "SourceListenerAddress",
 		"source_listener_port":           "SourceListenerPort",
 		"stream_id":                      "StreamId",
+		"tags":                           "Tags",
 		"url":                            "Url",
+		"value":                          "Value",
 		"vpc_interface_attachment":       "VpcInterfaceAttachment",
 		"vpc_interface_name":             "VpcInterfaceName",
 		"whitelist_cidr":                 "WhitelistCidr",

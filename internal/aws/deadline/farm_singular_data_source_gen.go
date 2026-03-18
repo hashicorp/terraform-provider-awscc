@@ -32,6 +32,18 @@ func farmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: CostScaleFactor
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": 1,
+		//	  "maximum": 100,
+		//	  "minimum": 0,
+		//	  "type": "number"
+		//	}
+		"cost_scale_factor": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -143,14 +155,15 @@ func farmDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Deadline::Farm").WithTerraformTypeName("awscc_deadline_farm")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":          "Arn",
-		"description":  "Description",
-		"display_name": "DisplayName",
-		"farm_id":      "FarmId",
-		"key":          "Key",
-		"kms_key_arn":  "KmsKeyArn",
-		"tags":         "Tags",
-		"value":        "Value",
+		"arn":               "Arn",
+		"cost_scale_factor": "CostScaleFactor",
+		"description":       "Description",
+		"display_name":      "DisplayName",
+		"farm_id":           "FarmId",
+		"key":               "Key",
+		"kms_key_arn":       "KmsKeyArn",
+		"tags":              "Tags",
+		"value":             "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

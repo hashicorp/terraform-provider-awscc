@@ -209,47 +209,6 @@ func workspaceInstanceDataSource(ctx context.Context) (datasource.DataSource, er
 		//	      "pattern": "^ami-[0-9a-zA-Z]{1,63}$",
 		//	      "type": "string"
 		//	    },
-		//	    "InstanceMarketOptions": {
-		//	      "additionalProperties": false,
-		//	      "properties": {
-		//	        "MarketType": {
-		//	          "enum": [
-		//	            "spot",
-		//	            "capacity-block"
-		//	          ],
-		//	          "type": "string"
-		//	        },
-		//	        "SpotOptions": {
-		//	          "additionalProperties": false,
-		//	          "properties": {
-		//	            "InstanceInterruptionBehavior": {
-		//	              "enum": [
-		//	                "hibernate",
-		//	                "stop"
-		//	              ],
-		//	              "type": "string"
-		//	            },
-		//	            "MaxPrice": {
-		//	              "maxLength": 64,
-		//	              "type": "string"
-		//	            },
-		//	            "SpotInstanceType": {
-		//	              "enum": [
-		//	                "one-time",
-		//	                "persistent"
-		//	              ],
-		//	              "type": "string"
-		//	            },
-		//	            "ValidUntilUtc": {
-		//	              "maxLength": 64,
-		//	              "type": "string"
-		//	            }
-		//	          },
-		//	          "type": "object"
-		//	        }
-		//	      },
-		//	      "type": "object"
-		//	    },
 		//	    "InstanceType": {
 		//	      "pattern": "^([a-z0-9-]+)\\.([a-z0-9]+)$",
 		//	      "type": "string"
@@ -633,38 +592,6 @@ func workspaceInstanceDataSource(ctx context.Context) (datasource.DataSource, er
 				"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
-				// Property: InstanceMarketOptions
-				"instance_market_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: MarketType
-						"market_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SpotOptions
-						"spot_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: InstanceInterruptionBehavior
-								"instance_interruption_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: MaxPrice
-								"max_price": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: SpotInstanceType
-								"spot_instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: ValidUntilUtc
-								"valid_until_utc": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
 				// Property: InstanceType
 				"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -981,8 +908,6 @@ func workspaceInstanceDataSource(ctx context.Context) (datasource.DataSource, er
 		"iam_instance_profile":                    "IamInstanceProfile",
 		"image_id":                                "ImageId",
 		"instance_id":                             "InstanceId",
-		"instance_interruption_behavior":          "InstanceInterruptionBehavior",
-		"instance_market_options":                 "InstanceMarketOptions",
 		"instance_metadata_tags":                  "InstanceMetadataTags",
 		"instance_type":                           "InstanceType",
 		"iops":                                    "Iops",
@@ -994,8 +919,6 @@ func workspaceInstanceDataSource(ctx context.Context) (datasource.DataSource, er
 		"license_specifications":                  "LicenseSpecifications",
 		"maintenance_options":                     "MaintenanceOptions",
 		"managed_instance":                        "ManagedInstance",
-		"market_type":                             "MarketType",
-		"max_price":                               "MaxPrice",
 		"metadata_options":                        "MetadataOptions",
 		"monitoring":                              "Monitoring",
 		"name":                                    "Name",
@@ -1007,8 +930,6 @@ func workspaceInstanceDataSource(ctx context.Context) (datasource.DataSource, er
 		"private_dns_name_options":                "PrivateDnsNameOptions",
 		"provision_state":                         "ProvisionState",
 		"resource_type":                           "ResourceType",
-		"spot_instance_type":                      "SpotInstanceType",
-		"spot_options":                            "SpotOptions",
 		"subnet_id":                               "SubnetId",
 		"tag_specifications":                      "TagSpecifications",
 		"tags":                                    "Tags",
@@ -1016,7 +937,6 @@ func workspaceInstanceDataSource(ctx context.Context) (datasource.DataSource, er
 		"threads_per_core":                        "ThreadsPerCore",
 		"throughput":                              "Throughput",
 		"user_data":                               "UserData",
-		"valid_until_utc":                         "ValidUntilUtc",
 		"value":                                   "Value",
 		"virtual_name":                            "VirtualName",
 		"volume_size":                             "VolumeSize",
