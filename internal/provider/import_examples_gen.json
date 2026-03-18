@@ -2545,6 +2545,11 @@
         "identifier": ["RevocationId","TrustStoreArn"]
     },
     {
+        "resource": "awscc_elementalinference_feed",
+        "generateListResource": true,
+        "identifier": ["Id"]
+    },
+    {
         "resource": "awscc_entityresolution_id_mapping_workflow",
         "generateListResource": true,
         "identifier": ["WorkflowName"]
@@ -2805,6 +2810,11 @@
         "resource": "awscc_globalaccelerator_listener",
         "generateListResource": true,
         "identifier": ["ListenerArn"]
+    },
+    {
+        "resource": "awscc_glue_catalog",
+        "generateListResource": true,
+        "identifier": ["ResourceArn"]
     },
     {
         "resource": "awscc_glue_crawler",
@@ -4416,6 +4426,11 @@
         "resource": "awscc_observabilityadmin_s3_table_integration",
         "generateListResource": true,
         "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_observabilityadmin_telemetry_enrichment",
+        "generateListResource": true,
+        "identifier": ["Scope"]
     },
     {
         "resource": "awscc_observabilityadmin_telemetry_rule",
