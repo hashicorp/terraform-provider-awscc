@@ -9,6 +9,7 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
@@ -168,6 +169,45 @@ func schedulingPolicyResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: QuotaSharePolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Quota Share Policy for the Job Queue.",
+		//	  "properties": {
+		//	    "IdleResourceAssignmentStrategy": {
+		//	      "enum": [
+		//	        "FIFO"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"quota_share_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IdleResourceAssignmentStrategy
+				"idle_resource_assignment_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"FIFO",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Quota Share Policy for the Job Queue.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -221,15 +261,17 @@ func schedulingPolicyResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                 "Arn",
-		"compute_reservation": "ComputeReservation",
-		"fairshare_policy":    "FairsharePolicy",
-		"name":                "Name",
-		"share_decay_seconds": "ShareDecaySeconds",
-		"share_distribution":  "ShareDistribution",
-		"share_identifier":    "ShareIdentifier",
-		"tags":                "Tags",
-		"weight_factor":       "WeightFactor",
+		"arn":                               "Arn",
+		"compute_reservation":               "ComputeReservation",
+		"fairshare_policy":                  "FairsharePolicy",
+		"idle_resource_assignment_strategy": "IdleResourceAssignmentStrategy",
+		"name":                              "Name",
+		"quota_share_policy":                "QuotaSharePolicy",
+		"share_decay_seconds":               "ShareDecaySeconds",
+		"share_distribution":                "ShareDistribution",
+		"share_identifier":                  "ShareIdentifier",
+		"tags":                              "Tags",
+		"weight_factor":                     "WeightFactor",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
