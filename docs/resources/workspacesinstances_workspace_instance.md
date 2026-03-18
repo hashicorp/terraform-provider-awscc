@@ -43,7 +43,6 @@ Optional:
 - `hibernation_options` (Attributes) (see [below for nested schema](#nestedatt--managed_instance--hibernation_options))
 - `iam_instance_profile` (Attributes) (see [below for nested schema](#nestedatt--managed_instance--iam_instance_profile))
 - `image_id` (String)
-- `instance_market_options` (Attributes) (see [below for nested schema](#nestedatt--managed_instance--instance_market_options))
 - `instance_type` (String)
 - `ipv_6_address_count` (Number)
 - `key_name` (String)
@@ -141,26 +140,6 @@ Optional:
 
 - `arn` (String)
 - `name` (String)
-
-
-<a id="nestedatt--managed_instance--instance_market_options"></a>
-### Nested Schema for `managed_instance.instance_market_options`
-
-Optional:
-
-- `market_type` (String)
-- `spot_options` (Attributes) (see [below for nested schema](#nestedatt--managed_instance--instance_market_options--spot_options))
-
-<a id="nestedatt--managed_instance--instance_market_options--spot_options"></a>
-### Nested Schema for `managed_instance.instance_market_options.spot_options`
-
-Optional:
-
-- `instance_interruption_behavior` (String)
-- `max_price` (String)
-- `spot_instance_type` (String)
-- `valid_until_utc` (String)
-
 
 
 <a id="nestedatt--managed_instance--license_specifications"></a>

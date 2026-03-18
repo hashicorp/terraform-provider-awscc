@@ -3,12 +3,12 @@
 page_title: "awscc_mediaconnect_flow_source Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource schema for AWS::MediaConnect::FlowSource
+  Resource Type definition for AWS::MediaConnect::FlowSource
 ---
 
 # awscc_mediaconnect_flow_source (Resource)
 
-Resource schema for AWS::MediaConnect::FlowSource
+Resource Type definition for AWS::MediaConnect::FlowSource
 
 ## Example Usage
 
@@ -63,13 +63,13 @@ resource "awscc_mediaconnect_flow_source" "example" {
 ### Required
 
 - `description` (String) A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
+- `flow_arn` (String) The ARN of the flow.
 - `name` (String) The name of the source.
 
 ### Optional
 
 - `decryption` (Attributes) The type of encryption that is used on the content ingested from this source. (see [below for nested schema](#nestedatt--decryption))
 - `entitlement_arn` (String) The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.
-- `flow_arn` (String) The ARN of the flow.
 - `gateway_bridge_source` (Attributes) The source configuration for cloud flows receiving a stream from a bridge. (see [below for nested schema](#nestedatt--gateway_bridge_source))
 - `ingest_port` (Number) The port that the flow will be listening on for incoming content.
 - `max_bitrate` (Number) The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
@@ -81,6 +81,7 @@ resource "awscc_mediaconnect_flow_source" "example" {
 - `source_listener_address` (String) Source IP or domain name for SRT-caller protocol.
 - `source_listener_port` (Number) Source port for SRT-caller protocol.
 - `stream_id` (String) The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+- `tags` (Attributes List) Key-value pairs that can be used to tag and organize this flow source. (see [below for nested schema](#nestedatt--tags))
 - `vpc_interface_name` (String) The name of the VPC Interface this Source is configured with.
 - `whitelist_cidr` (String) The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
 
@@ -121,6 +122,16 @@ Optional:
 Optional:
 
 - `vpc_interface_name` (String) The name of the VPC interface to use for this resource.
+
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

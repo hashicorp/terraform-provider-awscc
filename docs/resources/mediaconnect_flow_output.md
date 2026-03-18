@@ -39,6 +39,7 @@ Resource schema for AWS::MediaConnect::FlowOutput
 - `router_integration_transit_encryption` (Attributes) The configuration that defines how content is encrypted during transit between the MediaConnect router and a MediaConnect flow. (see [below for nested schema](#nestedatt--router_integration_transit_encryption))
 - `smoothing_latency` (Number) The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
 - `stream_id` (String) The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+- `tags` (Attributes Set) Key-value pairs that can be used to tag and organize this flow output. (see [below for nested schema](#nestedatt--tags))
 - `vpc_interface_attachment` (Attributes) The name of the VPC interface attachment to use for this output. (see [below for nested schema](#nestedatt--vpc_interface_attachment))
 
 ### Read-Only
@@ -120,6 +121,15 @@ Optional:
 - `secret_arn` (String) The ARN of the AWS Secrets Manager secret used for transit encryption to the router input.
 
 
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--vpc_interface_attachment"></a>
