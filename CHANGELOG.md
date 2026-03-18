@@ -1,4 +1,19 @@
-## 1.76.0 (Unreleased)
+## 1.76.0 (March 18, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_elementalinference_feed`
+* **New Data Source:** `awscc_elementalinference_feeds`
+* **New Data Source:** `awscc_glue_catalog`
+* **New Data Source:** `awscc_glue_catalogs`
+* **New Data Source:** `awscc_observabilityadmin_telemetry_enrichment`
+* **New Data Source:** `awscc_observabilityadmin_telemetry_enrichments`
+* **New List Resource:** `awscc_elementalinference_feed`
+* **New List Resource:** `awscc_glue_catalog`
+* **New List Resource:** `awscc_observabilityadmin_telemetry_enrichment`
+* **New Resource:** `awscc_elementalinference_feed`
+* **New Resource:** `awscc_glue_catalog`
+* **New Resource:** `awscc_observabilityadmin_telemetry_enrichment`
 
 ## 1.75.0 (March 11, 2026)
 

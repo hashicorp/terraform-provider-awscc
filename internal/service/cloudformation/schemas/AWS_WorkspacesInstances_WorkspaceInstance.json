@@ -170,50 +170,6 @@
       },
       "additionalProperties": false
     },
-    "InstanceMarketOptionsRequest": {
-      "type": "object",
-      "properties": {
-        "MarketType": {
-          "type": "string",
-          "enum": [
-            "spot",
-            "capacity-block"
-          ]
-        },
-        "SpotOptions": {
-          "$ref": "#/definitions/SpotMarketOptions"
-        }
-      },
-      "additionalProperties": false
-    },
-    "SpotMarketOptions": {
-      "type": "object",
-      "properties": {
-        "InstanceInterruptionBehavior": {
-          "type": "string",
-          "enum": [
-            "hibernate",
-            "stop"
-          ]
-        },
-        "MaxPrice": {
-          "type": "string",
-          "maxLength": 64
-        },
-        "SpotInstanceType": {
-          "type": "string",
-          "enum": [
-            "one-time",
-            "persistent"
-          ]
-        },
-        "ValidUntilUtc": {
-          "type": "string",
-          "maxLength": 64
-        }
-      },
-      "additionalProperties": false
-    },
     "ConnectionTrackingSpecificationRequest": {
       "type": "object",
       "properties": {
@@ -528,9 +484,6 @@
           "type": "string",
           "pattern": "^ami-[0-9a-zA-Z]{1,63}$"
         },
-        "InstanceMarketOptions": {
-          "$ref": "#/definitions/InstanceMarketOptionsRequest"
-        },
         "InstanceType": {
           "type": "string",
           "pattern": "^([a-z0-9-]+)\\.([a-z0-9]+)$"
@@ -651,6 +604,7 @@
         "ec2:RunInstances",
         "ec2:DescribeInstances",
         "ec2:DescribeInstanceStatus",
+        "ec2:DescribeImages",
         "ec2:CreateTags",
         "iam:PassRole"
       ]

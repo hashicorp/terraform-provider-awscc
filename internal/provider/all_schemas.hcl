@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1320 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1353 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -2520,6 +2520,10 @@ resource_schema "aws_elasticloadbalancingv2_trust_store_revocation" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_elementalinference_feed" {
+  cloudformation_type_name = "AWS::ElementalInference::Feed"
+}
+
 resource_schema "aws_entityresolution_id_mapping_workflow" {
   cloudformation_type_name = "AWS::EntityResolution::IdMappingWorkflow"
 }
@@ -2745,6 +2749,10 @@ resource_schema "aws_globalaccelerator_endpoint_group" {
 
 resource_schema "aws_globalaccelerator_listener" {
   cloudformation_type_name = "AWS::GlobalAccelerator::Listener"
+}
+
+resource_schema "aws_glue_catalog" {
+  cloudformation_type_name = "AWS::Glue::Catalog"
 }
 
 resource_schema "aws_glue_crawler" {
@@ -4241,6 +4249,10 @@ resource_schema "aws_observabilityadmin_organization_telemetry_rule" {
 
 resource_schema "aws_observabilityadmin_s3_table_integration" {
   cloudformation_type_name = "AWS::ObservabilityAdmin::S3TableIntegration"
+}
+
+resource_schema "aws_observabilityadmin_telemetry_enrichment" {
+  cloudformation_type_name = "AWS::ObservabilityAdmin::TelemetryEnrichment"
 }
 
 resource_schema "aws_observabilityadmin_telemetry_pipelines" {

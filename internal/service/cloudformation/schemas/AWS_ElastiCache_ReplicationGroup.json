@@ -323,7 +323,7 @@
         "ReplicaAvailabilityZones": {
           "description": "A list of Availability Zones to be used for the read replicas. The number of Availability Zones in this list must match the value of ReplicaCount or ReplicasPerNodeGroup if not specified.",
           "type": "array",
-          "uniqueItems": true,
+          "uniqueItems": false,
           "items": {
             "type": "string"
           }
@@ -468,7 +468,8 @@
         "kms:CreateGrant",
         "kms:DescribeKey",
         "s3:GetObject"
-      ]
+      ],
+      "timeoutInMinutes": 300
     },
     "read": {
       "permissions": [
@@ -504,13 +505,15 @@
         "kms:CreateGrant",
         "kms:DescribeKey",
         "iam:CreateServiceLinkedRole"
-      ]
+      ],
+      "timeoutInMinutes": 1440
     },
     "delete": {
       "permissions": [
         "elasticache:DeleteReplicationGroup",
         "elasticache:DescribeReplicationGroups"
-      ]
+      ],
+      "timeoutInMinutes": 300
     },
     "list": {
       "permissions": [

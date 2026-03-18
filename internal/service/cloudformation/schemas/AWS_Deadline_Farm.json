@@ -42,6 +42,12 @@
       "type": "string",
       "pattern": "^farm-[0-9a-f]{32}$"
     },
+    "CostScaleFactor": {
+      "type": "number",
+      "default": 1,
+      "minimum": 0,
+      "maximum": 100
+    },
     "KmsKeyArn": {
       "type": "string",
       "pattern": "^arn:aws[-a-z]*:kms:.*:key\/.*"

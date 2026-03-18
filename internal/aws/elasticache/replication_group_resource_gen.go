@@ -548,7 +548,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "type": "array",
-		//	        "uniqueItems": true
+		//	        "uniqueItems": false
 		//	      },
 		//	      "ReplicaCount": {
 		//	        "description": "The number of read replica nodes in this node group (shard).",
@@ -591,9 +591,6 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 						Description: "A list of Availability Zones to be used for the read replicas. The number of Availability Zones in this list must match the value of ReplicaCount or ReplicasPerNodeGroup if not specified.",
 						Optional:    true,
 						Computed:    true,
-						Validators: []validator.List{ /*START VALIDATORS*/
-							listvalidator.UniqueValues(),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							listplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -1268,9 +1265,9 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/PrimaryClusterId",
 		"/properties/PreferredCacheClusterAZs",
 	})
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(300).WithDeleteTimeoutInMinutes(300)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithUpdateTimeoutInMinutes(1440)
 
 	v, err := generic.NewResource(ctx, opts...)
 

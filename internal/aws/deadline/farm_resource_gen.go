@@ -9,10 +9,13 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64default"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
@@ -44,6 +47,26 @@ func farmResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CostScaleFactor
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": 1,
+		//	  "maximum": 100,
+		//	  "minimum": 0,
+		//	  "type": "number"
+		//	}
+		"cost_scale_factor": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Default:  float64default.StaticFloat64(1.000000),
+			Validators: []validator.Float64{ /*START VALIDATORS*/
+				float64validator.Between(0.000000, 100.000000),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+				float64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Description
@@ -213,14 +236,15 @@ func farmResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":          "Arn",
-		"description":  "Description",
-		"display_name": "DisplayName",
-		"farm_id":      "FarmId",
-		"key":          "Key",
-		"kms_key_arn":  "KmsKeyArn",
-		"tags":         "Tags",
-		"value":        "Value",
+		"arn":               "Arn",
+		"cost_scale_factor": "CostScaleFactor",
+		"description":       "Description",
+		"display_name":      "DisplayName",
+		"farm_id":           "FarmId",
+		"key":               "Key",
+		"kms_key_arn":       "KmsKeyArn",
+		"tags":              "Tags",
+		"value":             "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

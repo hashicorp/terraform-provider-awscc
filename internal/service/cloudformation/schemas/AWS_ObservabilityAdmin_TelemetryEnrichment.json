@@ -1,0 +1,89 @@
+{
+  "typeName": "AWS::ObservabilityAdmin::TelemetryEnrichment",
+  "description": "AWS::ObservabilityAdmin::TelemetryEnrichment cloudformation resource enables the resource tags for telemetry feature in CloudWatch to enrich infrastructure metrics with AWS resource tags. For more details: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/resource-tags-for-telemetry.html",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "Scope": {
+      "description": "Scope of the Telemetry Enrichment",
+      "type": "string",
+      "enum": [
+        "ACCOUNT"
+      ]
+    },
+    "Status": {
+      "description": "Current status of the resource tags for telemetry feature (Running, Stopped, or Impaired).",
+      "type": "string",
+      "enum": [
+        "RUNNING",
+        "STOPPED",
+        "IMPAIRED"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": false
+  },
+  "properties": {
+    "Scope": {
+      "$ref": "#/definitions/Scope"
+    },
+    "Status": {
+      "$ref": "#/definitions/Status"
+    }
+  },
+  "additionalProperties": false,
+  "required": [],
+  "createOnlyProperties": [
+    "/properties/Scope"
+  ],
+  "readOnlyProperties": [
+    "/properties/Status"
+  ],
+  "primaryIdentifier": [
+    "/properties/Scope"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "observabilityadmin:StartTelemetryEnrichment",
+        "observabilityadmin:GetTelemetryEnrichmentStatus",
+        "iam:CreateServiceLinkedRole",
+        "resource-explorer-2:CreateManagedView",
+        "resource-explorer-2:CreateStreamingAccessForService",
+        "resource-explorer-2:CreateIndex",
+        "resource-explorer-2:DeleteStreamingAccessForService"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "observabilityadmin:GetTelemetryEnrichmentStatus"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "observabilityadmin:StartTelemetryEnrichment",
+        "observabilityadmin:GetTelemetryEnrichmentStatus",
+        "iam:CreateServiceLinkedRole",
+        "resource-explorer-2:CreateManagedView",
+        "resource-explorer-2:CreateStreamingAccessForService",
+        "resource-explorer-2:CreateIndex",
+        "resource-explorer-2:DeleteStreamingAccessForService"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "observabilityadmin:StopTelemetryEnrichment",
+        "observabilityadmin:GetTelemetryEnrichmentStatus",
+        "resource-explorer-2:CreateManagedView",
+        "resource-explorer-2:CreateStreamingAccessForService",
+        "resource-explorer-2:CreateIndex",
+        "resource-explorer-2:DeleteStreamingAccessForService"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "observabilityadmin:GetTelemetryEnrichmentStatus"
+      ]
+    }
+  }
+}

@@ -393,7 +393,7 @@ func replicationGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	          "type": "string"
 		//	        },
 		//	        "type": "array",
-		//	        "uniqueItems": true
+		//	        "uniqueItems": false
 		//	      },
 		//	      "ReplicaCount": {
 		//	        "description": "The number of read replica nodes in this node group (shard).",
