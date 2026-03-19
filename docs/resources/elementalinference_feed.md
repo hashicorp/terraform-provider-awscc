@@ -30,7 +30,7 @@ resource "awscc_elementalinference_feed" "example" {
           hls_settings = {
             rendition_groups = [
               {
-                name           = "example-group"
+                name                = "example-group"
                 rendition_selection = "ALL"
               }
             ]
