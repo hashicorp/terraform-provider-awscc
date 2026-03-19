@@ -83,17 +83,17 @@ resource "awscc_ec2_security_group_egress" "all_outbound" {
 
 # InfluxDB Cluster
 resource "awscc_timestream_influx_db_cluster" "example" {
-  name                 = "example-influx-cluster"
-  username             = "admin"
-  password             = "ExamplePassword123"
-  organization         = "example-org"
-  bucket               = "example-bucket"
-  db_instance_type     = "db.influx.medium"
-  db_storage_type      = "InfluxIOIncludedT1"
-  allocated_storage    = 200
-  deployment_type      = "MULTI_NODE_READ_REPLICAS"
+  name                = "example-influx-cluster"
+  username            = "admin"
+  password            = "ExamplePassword123"
+  organization        = "example-org"
+  bucket              = "example-bucket"
+  db_instance_type    = "db.influx.medium"
+  db_storage_type     = "InfluxIOIncludedT1"
+  allocated_storage   = 200
+  deployment_type     = "MULTI_NODE_READ_REPLICAS"
   publicly_accessible = false
-  network_type         = "IPV4"
+  network_type        = "IPV4"
 
   vpc_subnet_ids = [
     awscc_ec2_subnet.example_1.id,
