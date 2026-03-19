@@ -40,8 +40,8 @@ resource "aws_iam_role" "example" {
 }
 
 resource "aws_servicecatalog_portfolio" "example" {
-  name         = "example-portfolio"
-  description  = "Example Service Catalog portfolio"
+  name          = "example-portfolio"
+  description   = "Example Service Catalog portfolio"
   provider_name = "example-provider"
 
   tags = {
