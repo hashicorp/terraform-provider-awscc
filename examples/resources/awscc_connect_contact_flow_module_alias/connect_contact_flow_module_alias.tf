@@ -9,7 +9,7 @@ resource "awscc_connect_instance" "example" {
   tags = [{
     key   = "Environment"
     value = "Example"
-  }, {
+    }, {
     key   = "Name"
     value = "example-connect-instance"
   }]
@@ -67,7 +67,7 @@ resource "awscc_connect_contact_flow_module" "example" {
   tags = [{
     key   = "Environment"
     value = "Example"
-  }, {
+    }, {
     key   = "Name"
     value = "example-contact-flow-module"
   }]
@@ -75,12 +75,12 @@ resource "awscc_connect_contact_flow_module" "example" {
 
 resource "awscc_connect_contact_flow_module_version" "example" {
   contact_flow_module_id = awscc_connect_contact_flow_module.example.contact_flow_module_arn
-  description           = "Example contact flow module version"
+  description            = "Example contact flow module version"
 }
 
 resource "awscc_connect_contact_flow_module_alias" "example" {
   contact_flow_module_id      = awscc_connect_contact_flow_module.example.contact_flow_module_arn
   contact_flow_module_version = awscc_connect_contact_flow_module_version.example.version
-  name                       = "example-alias"
-  description               = "Example contact flow module alias"
+  name                        = "example-alias"
+  description                 = "Example contact flow module alias"
 }
