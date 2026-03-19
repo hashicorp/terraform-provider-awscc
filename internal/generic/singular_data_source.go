@@ -96,7 +96,7 @@ func (sd *genericSingularDataSource) Read(ctx context.Context, request datasourc
 
 	translator := toTerraform{cfToTfNameMap: sd.cfToTfNameMap}
 	schema := currentConfig.Schema
-	val, err := translator.FromString(ctx, schema, aws.ToString(description.Properties))
+	val, err := translator.FromString(ctx, schema, aws.ToString(description.Properties), nil)
 
 	if err != nil {
 		response.Diagnostics.AddError(

@@ -13,13 +13,23 @@ import (
 	"github.com/mattbaird/jsonpatch"
 )
 
+// tagsPathPrefix is the JSON Pointer path for the Tags property in Cloud Control desired state.
+// CloudFormation does not preserve tag array ordering, so index-based patch operations
+// (e.g. replace /Tags/5) target the wrong tag. We replace any Tags-related operations
+// with a single full replacement of the entire Tags array.
+const tagsPathPrefix = "/Tags"
+
 // patchDocument returns a JSON Patch document describing the difference between `old` and `new`.
 // It sorts remove operations to ensure they are applied in reverse order to avoid index out of bounds errors.
+// For the Tags property, it uses full-array replacement instead of index-based patches to avoid
+// tag corruption when CloudFormation returns tags in a different order than Terraform state.
 func patchDocument(old, new string) (string, error) {
 	patch, err := jsonpatch.CreatePatch([]byte(old), []byte(new))
 	if err != nil {
 		return "", err
 	}
+
+	patch = replaceTagsPatchWithFullReplace(patch, new)
 
 	// Sort the patch operations to ensure remove operations are applied in reverse order
 	sortedPatch := sortPatchOperations(patch)
@@ -41,6 +51,36 @@ func patchDocument(old, new string) (string, error) {
 	}
 
 	return result, nil
+}
+
+// replaceTagsPatchWithFullReplace replaces any index-based patch operations targeting the Tags
+// array with a single full replacement (or remove). This avoids tag corruption because
+// CloudFormation does not preserve tag array ordering, so positional patches target wrong keys.
+func replaceTagsPatchWithFullReplace(patch []jsonpatch.JsonPatchOperation, newState string) []jsonpatch.JsonPatchOperation {
+	var filtered []jsonpatch.JsonPatchOperation
+	var hasTagsOps bool
+	for _, op := range patch {
+		if op.Path == tagsPathPrefix || strings.HasPrefix(op.Path, tagsPathPrefix+"/") {
+			hasTagsOps = true
+			continue
+		}
+		filtered = append(filtered, op)
+	}
+	if !hasTagsOps {
+		return patch
+	}
+
+	var newDoc map[string]any
+	if err := json.Unmarshal([]byte(newState), &newDoc); err != nil {
+		// If we can't parse new state, return filtered patch (Tags ops already removed)
+		return filtered
+	}
+	if tagsVal, ok := newDoc["Tags"]; ok {
+		filtered = append(filtered, jsonpatch.NewPatch("replace", tagsPathPrefix, tagsVal))
+	} else {
+		filtered = append(filtered, jsonpatch.NewPatch("remove", tagsPathPrefix, nil))
+	}
+	return filtered
 }
 
 // sortPatchOperations sorts the patch operations to ensure that remove operations
