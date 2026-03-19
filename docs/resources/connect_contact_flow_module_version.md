@@ -19,7 +19,7 @@ Create a version of a Connect contact flow module with specified configuration a
 ```terraform
 resource "awscc_connect_contact_flow_module_version" "example" {
   contact_flow_module_arn = aws_connect_contact_flow_module.example.arn
-  description            = "Example contact flow module version"
+  description             = "Example contact flow module version"
 }
 ```
 
