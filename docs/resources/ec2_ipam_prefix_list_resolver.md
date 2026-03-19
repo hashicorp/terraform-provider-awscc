@@ -32,7 +32,7 @@ resource "awscc_ec2_ipam" "example" {
   tags = [{
     key   = "Name"
     value = "example-ipam"
-  }, {
+    }, {
     key   = "Environment"
     value = "example"
   }]
@@ -45,7 +45,7 @@ resource "awscc_ec2_ipam_scope" "example" {
   tags = [{
     key   = "Name"
     value = "example-ipam-scope"
-  }, {
+    }, {
     key   = "Environment"
     value = "example"
   }]
@@ -64,7 +64,7 @@ resource "awscc_ec2_ipam_prefix_list_resolver" "example" {
   tags = [{
     key   = "Name"
     value = "example-prefix-list-resolver"
-  }, {
+    }, {
     key   = "Environment"
     value = "example"
   }]
