@@ -35,16 +35,16 @@ resource "awscc_connect_instance" "example" {
 
 resource "awscc_connect_data_table_record" "example" {
   instance_id = awscc_connect_instance.example.id
-  
+
   contact_id = "12345678-1234-1234-1234-123456789012"
-  
+
   data = {
-    customer_name = "John Doe"
-    phone_number = "+1234567890"
-    email = "john.doe@example.com"
+    customer_name    = "John Doe"
+    phone_number     = "+1234567890"
+    email            = "john.doe@example.com"
     product_interest = "Premium Service"
-    call_reason = "Product Inquiry"
-    notes = "Customer interested in upgrading to premium service package"
+    call_reason      = "Product Inquiry"
+    notes            = "Customer interested in upgrading to premium service package"
   }
 
   tags = [{
