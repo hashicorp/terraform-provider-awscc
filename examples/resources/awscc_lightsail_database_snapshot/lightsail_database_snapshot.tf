@@ -1,22 +1,33 @@
-# Password can include any printable ASCII character except "/", """, or "@"
-resource "random_password" "master" {
-  length           = 16
-  special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
-}
-
-resource "awscc_lightsail_database" "example" {
-  master_database_name             = "example"
-  master_username                  = "pgadmin"
-  relational_database_blueprint_id = "postgres_16"
-  relational_database_bundle_id    = "small_2_0"
-  relational_database_name         = "example-db"
-  availability_zone                = "us-west-2a"
-  backup_retention                 = true
-  master_user_password             = random_password.master.result
+resource "aws_lightsail_database" "example" {
+  relational_database_name = "example-database"
+  availability_zone        = "us-west-2a"
+  blueprint_id            = "mysql_8_0"
+  bundle_id              = "micro_2_0"
+  
+  master_database_name = "exampledb"
+  master_username      = "exampleuser"
+  master_password      = "ExamplePassword123!"  
+  
+  tags = {
+    Environment = "example"
+    Name        = "example-database"
+  }
 }
 
 resource "awscc_lightsail_database_snapshot" "example" {
-  source_database_name   = awscc_lightsail_database.example.relational_database_name
-  database_snapshot_name = "example-snapshot"
+  relational_database_name          = aws_lightsail_database.example.relational_database_name
+  relational_database_snapshot_name = "example-database-snapshot"
+  
+  tags = [
+    {
+      key   = "Environment"
+      value = "example"
+    },
+    {
+      key   = "Name" 
+      value = "example-database-snapshot"
+    }
+  ]
+  
+  depends_on = [aws_lightsail_database.example]
 }
