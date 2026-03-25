@@ -239,6 +239,7 @@ Optional:
 - `capacity_reservations` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--capacity_reservations))
 - `ec_2_instance_profile_arn` (String)
 - `fips_enabled` (Boolean)
+- `instance_metadata_tags_propagation` (Boolean)
 - `instance_requirements` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--instance_requirements))
 - `monitoring` (String)
 - `network_configuration` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--network_configuration))

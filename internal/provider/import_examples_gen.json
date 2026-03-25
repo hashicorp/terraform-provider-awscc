@@ -587,6 +587,11 @@
         "identifier": ["JobQueueArn"]
     },
     {
+        "resource": "awscc_batch_quota_share",
+        "generateListResource": true,
+        "identifier": ["QuotaShareArn"]
+    },
+    {
         "resource": "awscc_batch_scheduling_policy",
         "generateListResource": true,
         "identifier": ["Arn"]
@@ -1880,6 +1885,11 @@
         "identifier": ["IpamPrefixListResolverId"]
     },
     {
+        "resource": "awscc_ec2_ipam_prefix_list_resolver_target",
+        "generateListResource": true,
+        "identifier": ["IpamPrefixListResolverTargetId"]
+    },
+    {
         "resource": "awscc_ec2_ipam_resource_discovery",
         "generateListResource": true,
         "identifier": ["IpamResourceDiscoveryId"]
@@ -2067,6 +2077,11 @@
         "resource": "awscc_ec2_spot_fleet",
         "generateListResource": true,
         "identifier": ["Id"]
+    },
+    {
+        "resource": "awscc_ec2_sql_ha_standby_detected_instance",
+        "generateListResource": true,
+        "identifier": ["InstanceId"]
     },
     {
         "resource": "awscc_ec2_subnet",
@@ -3175,6 +3190,11 @@
         "resource": "awscc_invoicing_invoice_unit",
         "generateListResource": true,
         "identifier": ["InvoiceUnitArn"]
+    },
+    {
+        "resource": "awscc_interconnect_connection",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_iot_account_audit_configuration",
@@ -6084,6 +6104,10 @@
         "resource": "awscc_transfer_workflow",
         "generateListResource": true,
         "identifier": ["WorkflowId"]
+    },
+    {
+        "resource": "awscc_uxc_account_customization",
+        "identifier": ["AccountId"]
     },
     {
         "resource": "awscc_verifiedpermissions_identity_source",

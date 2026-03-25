@@ -1,4 +1,25 @@
-## 1.77.0 (Unreleased)
+## 1.77.0 (March 25, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_batch_quota_share`
+* **New Data Source:** `awscc_batch_quota_shares`
+* **New Data Source:** `awscc_ec2_ipam_prefix_list_resolver_target`
+* **New Data Source:** `awscc_ec2_ipam_prefix_list_resolver_targets`
+* **New Data Source:** `awscc_ec2_sql_ha_standby_detected_instance`
+* **New Data Source:** `awscc_ec2_sql_ha_standby_detected_instances`
+* **New Data Source:** `awscc_interconnect_connection`
+* **New Data Source:** `awscc_interconnect_connections`
+* **New Data Source:** `awscc_uxc_account_customization`
+* **New List Resource:** `awscc_batch_quota_share`
+* **New List Resource:** `awscc_ec2_ipam_prefix_list_resolver_target`
+* **New List Resource:** `awscc_ec2_sql_ha_standby_detected_instance`
+* **New List Resource:** `awscc_interconnect_connection`
+* **New Resource:** `awscc_batch_quota_share`
+* **New Resource:** `awscc_ec2_ipam_prefix_list_resolver_target`
+* **New Resource:** `awscc_ec2_sql_ha_standby_detected_instance`
+* **New Resource:** `awscc_interconnect_connection`
+* **New Resource:** `awscc_uxc_account_customization`
 
 ## 1.76.0 (March 18, 2026)
 

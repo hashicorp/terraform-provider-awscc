@@ -7,6 +7,7 @@ package cloudfront
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
@@ -39,12 +40,14 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 		//
 		//	{
 		//	  "default": false,
+		//	  "description": "A flag that determines whether to automatically publish the function to the ``LIVE`` stage when it?s created. To automatically publish to the ``LIVE`` stage, set this property to ``true``.",
 		//	  "type": "boolean"
 		//	}
 		"auto_publish": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			Default:  booldefault.StaticBool(false),
+			Description: "A flag that determines whether to automatically publish the function to the ``LIVE`` stage when it?s created. To automatically publish to the ``LIVE`` stage, set this property to ``true``.",
+			Optional:    true,
+			Computed:    true,
+			Default:     booldefault.StaticBool(false),
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -54,10 +57,12 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"connection_function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -66,25 +71,32 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The code for the connection function.",
 		//	  "type": "string"
 		//	}
 		"connection_function_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "The code for the connection function.",
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConnectionFunctionConfig
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "Contains configuration information about a CloudFront function.",
 		//	  "properties": {
 		//	    "Comment": {
+		//	      "description": "A comment to describe the function.",
 		//	      "type": "string"
 		//	    },
 		//	    "KeyValueStoreAssociations": {
+		//	      "description": "The configuration for the key value store associations.",
 		//	      "items": {
 		//	        "additionalProperties": false,
+		//	        "description": "The key value store association.",
 		//	        "properties": {
 		//	          "KeyValueStoreARN": {
+		//	            "description": "The Amazon Resource Name (ARN) of the key value store association.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -97,6 +109,7 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Runtime": {
+		//	      "description": "The function's runtime environment version.",
 		//	      "enum": [
 		//	        "cloudfront-js-2.0"
 		//	      ],
@@ -113,7 +126,8 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Comment
 				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Description: "A comment to describe the function.",
+					Required:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: KeyValueStoreAssociations
 				"key_value_store_associations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -121,8 +135,9 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: KeyValueStoreARN
 							"key_value_store_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Description: "The Amazon Resource Name (ARN) of the key value store association.",
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/
@@ -132,8 +147,9 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Optional: true,
-					Computed: true,
+					Description: "The configuration for the key value store associations.",
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.UniqueValues(),
 					}, /*END VALIDATORS*/
@@ -143,7 +159,8 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 				}, /*END ATTRIBUTE*/
 				// Property: Runtime
 				"runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Description: "The function's runtime environment version.",
+					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"cloudfront-js-2.0",
@@ -154,18 +171,21 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Required: true,
+			Description: "Contains configuration information about a CloudFront function.",
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -174,10 +194,12 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"e_tag": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -186,10 +208,12 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"connection_function_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -198,12 +222,14 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -212,10 +238,12 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The connection function name.",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "The connection function name.",
+			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -224,6 +252,7 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "enum": [
 		//	    "DEVELOPMENT",
 		//	    "LIVE"
@@ -231,7 +260,8 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 		//	  "type": "string"
 		//	}
 		"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -240,6 +270,7 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "enum": [
 		//	    "UNPUBLISHED",
 		//	    "DEPLOYED",
@@ -250,7 +281,8 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -259,19 +291,23 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A complex type that contains zero or more ``Tag`` elements.",
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "A complex type that contains ``Tag`` key and ``Tag`` value.",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
-		//	        "pattern": "",
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
-		//	        "pattern": "",
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -288,10 +324,12 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -300,10 +338,12 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -312,8 +352,9 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			Description: "A complex type that contains zero or more ``Tag`` elements.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -330,7 +371,7 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::CloudFront::ConnectionFunction",
+		Description: "A connection function.",
 		Version:     1,
 		Attributes:  attributes,
 	}

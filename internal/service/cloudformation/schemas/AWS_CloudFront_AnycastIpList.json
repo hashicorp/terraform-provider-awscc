@@ -25,11 +25,11 @@
         },
         "IpAddressType": {
           "$ref": "#/definitions/IpAddressType",
-          "description": ""
+          "description": "The IP address type for the Anycast static IP list."
         },
         "IpamCidrConfigResults": {
           "$ref": "#/definitions/IpamCidrConfigResults",
-          "description": ""
+          "description": "The results for the IPAM CIDRs that defines a specific IP address range, IPAM pool, and associated Anycast IP address."
         },
         "LastModifiedTime": {
           "format": "date-time",
@@ -109,20 +109,24 @@
       "additionalProperties": false,
       "properties": {
         "Cidr": {
-          "type": "string"
+          "type": "string",
+          "description": "The CIDR that specifies the IP address range for this IPAM configuration."
         },
         "IpamPoolArn": {
-          "type": "string"
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the IPAM pool that the CIDR block is assigned to."
         },
         "AnycastIp": {
-          "type": "string"
+          "type": "string",
+          "description": "The specified Anycast IP address allocated from the IPAM pool for this CIDR configuration."
         },
         "Status": {
-          "type": "string"
+          "type": "string",
+          "description": "The current status of the IPAM CIDR configuration."
         }
       },
       "type": "object",
-      "description": ""
+      "description": "The result for the IPAM CIDR that defines a specific IP address range, IPAM pool, and associated Anycast IP address."
     },
     "IpamCidrConfigResults": {
       "additionalProperties": false,
@@ -136,10 +140,12 @@
       "additionalProperties": false,
       "properties": {
         "Cidr": {
-          "type": "string"
+          "type": "string",
+          "description": "The CIDR that specifies the IP address range for this IPAM configuration."
         },
         "IpamPoolArn": {
-          "type": "string"
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the IPAM pool that the CIDR block is assigned to."
         }
       },
       "required": [
@@ -147,7 +153,7 @@
         "IpamPoolArn"
       ],
       "type": "object",
-      "description": ""
+      "description": "Configuration for an IPAM CIDR that defines a specific IP address range, IPAM pool, and associated Anycast IP address."
     },
     "IpamCidrConfigs": {
       "additionalProperties": false,
@@ -215,11 +221,11 @@
     },
     "IpAddressType": {
       "$ref": "#/definitions/IpAddressType",
-      "description": ""
+      "description": "The IP address type for the Anycast static IP list."
     },
     "IpamCidrConfigs": {
       "$ref": "#/definitions/IpamCidrConfigs",
-      "description": ""
+      "description": "A list of IPAM CIDR configurations that define the IP address ranges, IPAM pools, and associated Anycast IP addresses."
     },
     "IpamCidrConfigResults": {
       "$ref": "#/definitions/IpamCidrConfigResults",

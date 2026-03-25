@@ -1,0 +1,229 @@
+{
+  "typeName": "AWS::Interconnect::Connection",
+  "description": "Resource Type definition for AWS::Interconnect::Connection. Creates a managed network connection between AWS and a partner cloud service provider.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "AttachPoint": {
+      "description": "The logical attachment point in your AWS network where the managed connection will be connected.",
+      "type": "object",
+      "properties": {
+        "DirectConnectGateway": {
+          "type": "string",
+          "description": "The ID of the Direct Connect Gateway to attach to.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        },
+        "Arn": {
+          "type": "string",
+          "description": "The ARN of the resource to attach to."
+        }
+      },
+      "additionalProperties": false
+    },
+    "Provider": {
+      "description": "The partner cloud service provider.",
+      "type": "object",
+      "properties": {
+        "CloudServiceProvider": {
+          "type": "string",
+          "description": "The name of the cloud service provider.",
+          "maxLength": 32
+        },
+        "LastMileProvider": {
+          "type": "string",
+          "description": "The name of the last mile provider.",
+          "maxLength": 32
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "ConnectionId": {
+      "description": "The unique identifier for the connection.",
+      "type": "string",
+      "pattern": "^mcc-[a-z0-9]{8}$"
+    },
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) of the connection.",
+      "type": "string",
+      "pattern": "^arn:aws[a-z-]*:interconnect:[^:]+:[0-9]{12}:connection/mcc-[a-z0-9]{8}$"
+    },
+    "Description": {
+      "description": "A description of the connection.",
+      "type": "string",
+      "maxLength": 255,
+      "pattern": "^[-a-zA-Z0-9_ ]+$"
+    },
+    "Bandwidth": {
+      "description": "The bandwidth of the connection (e.g., 50Mbps, 1Gbps). Required when creating a connection through AWS.",
+      "type": "string",
+      "pattern": "^\\d+[MG]bps$"
+    },
+    "AttachPoint": {
+      "description": "The logical attachment point in your AWS network where the managed connection will be connected.",
+      "$ref": "#/definitions/AttachPoint"
+    },
+    "EnvironmentId": {
+      "description": "The ID of the environment for the connection. Required when creating a connection through AWS. Mutually exclusive with ActivationKey.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32
+    },
+    "RemoteOwnerAccount": {
+      "description": "The account ID of the remote owner. Required when creating a connection through AWS.",
+      "type": "string",
+      "maxLength": 255,
+      "pattern": "^[-a-zA-Z0-9_@\\.]+$"
+    },
+    "ActivationKey": {
+      "description": "The activation key for accepting a connection proposal from a partner CSP. Mutually exclusive with EnvironmentId.",
+      "type": "string"
+    },
+    "Provider": {
+      "description": "The partner cloud service provider.",
+      "$ref": "#/definitions/Provider"
+    },
+    "Type": {
+      "description": "The type of managed connection.",
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 32
+    },
+    "State": {
+      "description": "The current state of the connection.",
+      "type": "string",
+      "enum": [
+        "available",
+        "requested",
+        "pending",
+        "down",
+        "deleting",
+        "deleted",
+        "failed"
+      ]
+    },
+    "SharedId": {
+      "description": "The shared identifier for the connection pairing.",
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    },
+    "OwnerAccount": {
+      "description": "The AWS account ID of the connection owner.",
+      "type": "string"
+    },
+    "BillingTier": {
+      "description": "The billing tier for the connection.",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "AttachPoint"
+  ],
+  "createOnlyProperties": [
+    "/properties/AttachPoint",
+    "/properties/EnvironmentId",
+    "/properties/ActivationKey"
+  ],
+  "readOnlyProperties": [
+    "/properties/ConnectionId",
+    "/properties/Arn",
+    "/properties/Provider",
+    "/properties/Type",
+    "/properties/State",
+    "/properties/SharedId",
+    "/properties/OwnerAccount",
+    "/properties/BillingTier"
+  ],
+  "writeOnlyProperties": [
+    "/properties/RemoteOwnerAccount"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ConnectionId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "interconnect:TagResource",
+      "interconnect:UntagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "interconnect:CreateConnection",
+        "interconnect:AcceptConnectionProposal",
+        "interconnect:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "interconnect:GetConnection",
+        "interconnect:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "interconnect:UpdateConnection",
+        "interconnect:GetConnection",
+        "interconnect:TagResource",
+        "interconnect:UntagResource",
+        "interconnect:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "interconnect:GetConnection",
+        "interconnect:DeleteConnection"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "interconnect:ListConnections"
+      ]
+    }
+  }
+}

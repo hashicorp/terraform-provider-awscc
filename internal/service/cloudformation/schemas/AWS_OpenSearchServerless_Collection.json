@@ -49,6 +49,25 @@
         "DISABLED"
       ]
     },
+    "ServerlessVectorAcceleration": {
+      "type": "string",
+      "description": "Indicates whether GPU acceleration is enabled for vector indexing",
+      "enum": [
+        "ENABLED",
+        "DISABLED",
+        "ALLOWED"
+      ]
+    },
+    "VectorOptions": {
+      "type": "object",
+      "description": "Vector search configuration options for the collection",
+      "properties": {
+        "ServerlessVectorAcceleration": {
+          "$ref": "#/definitions/ServerlessVectorAcceleration"
+        }
+      },
+      "additionalProperties": false
+    },
     "EncryptionConfig": {
       "type": "object",
       "description": "Encryption settings for the collection",
@@ -119,6 +138,9 @@
     "EncryptionConfig": {
       "$ref": "#/definitions/EncryptionConfig"
     },
+    "VectorOptions": {
+      "$ref": "#/definitions/VectorOptions"
+    },
     "KmsKeyArn": {
       "type": "string",
       "description": "Key Management Service key used to encrypt the collection."
@@ -144,7 +166,9 @@
     "/properties/Type",
     "/properties/StandbyReplicas",
     "/properties/CollectionGroupName",
-    "/properties/EncryptionConfig"
+    "/properties/EncryptionConfig",
+    "/properties/VectorOptions",
+    "/properties/VectorOptions/ServerlessVectorAcceleration"
   ],
   "primaryIdentifier": [
     "/properties/Id"

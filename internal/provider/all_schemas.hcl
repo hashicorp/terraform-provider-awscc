@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1353 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1359 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -604,6 +604,10 @@ resource_schema "aws_batch_job_definition" {
 
 resource_schema "aws_batch_job_queue" {
   cloudformation_type_name = "AWS::Batch::JobQueue"
+}
+
+resource_schema "aws_batch_quota_share" {
+  cloudformation_type_name = "AWS::Batch::QuotaShare"
 }
 
 resource_schema "aws_batch_scheduling_policy" {
@@ -1925,6 +1929,10 @@ resource_schema "aws_ec2_ipam_prefix_list_resolver" {
   cloudformation_type_name = "AWS::EC2::IPAMPrefixListResolver"
 }
 
+resource_schema "aws_ec2_ipam_prefix_list_resolver_target" {
+  cloudformation_type_name = "AWS::EC2::IPAMPrefixListResolverTarget"
+}
+
 resource_schema "aws_ec2_ipam_resource_discovery" {
   cloudformation_type_name = "AWS::EC2::IPAMResourceDiscovery"
 }
@@ -2086,6 +2094,10 @@ resource_schema "aws_ec2_snapshot_block_public_access" {
 
 resource_schema "aws_ec2_spot_fleet" {
   cloudformation_type_name = "AWS::EC2::SpotFleet"
+}
+
+resource_schema "aws_ec2_sql_ha_standby_detected_instance" {
+  cloudformation_type_name = "AWS::EC2::SqlHaStandbyDetectedInstance"
 }
 
 resource_schema "aws_ec2_subnet" {
@@ -2399,6 +2411,16 @@ resource_schema "aws_eks_nodegroup" {
 resource_schema "aws_eks_pod_identity_association" {
   cloudformation_type_name               = "AWS::EKS::PodIdentityAssociation"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_emr_cluster" {
+  cloudformation_type_name = "AWS::EMR::Cluster"
+
+  # Suppression Reason:
+  # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/3100
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_emr_security_configuration" {
@@ -3078,6 +3100,10 @@ resource_schema "aws_internetmonitor_monitor" {
 
 resource_schema "aws_invoicing_invoice_unit" {
   cloudformation_type_name = "AWS::Invoicing::InvoiceUnit"
+}
+
+resource_schema "aws_interconnect_connection" {
+  cloudformation_type_name = "AWS::Interconnect::Connection"
 }
 
 resource_schema "aws_iot_account_audit_configuration" {
@@ -5819,6 +5845,11 @@ resource_schema "aws_transfer_web_app" {
 
 resource_schema "aws_transfer_workflow" {
   cloudformation_type_name = "AWS::Transfer::Workflow"
+}
+
+resource_schema "aws_uxc_account_customization" {
+  cloudformation_type_name               = "AWS::UXC::AccountCustomization"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_verifiedpermissions_identity_source" {
