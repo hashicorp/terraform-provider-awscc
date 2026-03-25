@@ -432,6 +432,51 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: PolicyEngineConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The configuration for a policy engine associated with a gateway. A policy engine is a collection of policies that evaluates and authorizes agent tool calls. When associated with a gateway, the policy engine intercepts all agent requests and determines whether to allow or deny each action based on the defined policies.",
+		//	  "properties": {
+		//	    "Arn": {
+		//	      "description": "The ARN of the policy engine. The policy engine contains Cedar policies that define fine-grained authorization rules specifying who can perform what actions on which resources as agents interact through the gateway.",
+		//	      "maxLength": 170,
+		//	      "minLength": 1,
+		//	      "pattern": "^arn:aws:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:policy-engine/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9_]{10}$",
+		//	      "type": "string"
+		//	    },
+		//	    "Mode": {
+		//	      "description": "The enforcement mode for the policy engine. LOG_ONLY - The policy engine evaluates each action against your policies and adds traces on whether tool calls would be allowed or denied, but does not enforce the decision. Use this mode to test and validate policies before enabling enforcement. ENFORCE - The policy engine evaluates actions against your policies and enforces decisions by allowing or denying agent operations. Test and validate policies in LOG_ONLY mode before enabling enforcement to avoid unintended denials or adversely affecting production traffic.",
+		//	      "enum": [
+		//	        "LOG_ONLY",
+		//	        "ENFORCE"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Arn",
+		//	    "Mode"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"policy_engine_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Arn
+				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the policy engine. The policy engine contains Cedar policies that define fine-grained authorization rules specifying who can perform what actions on which resources as agents interact through the gateway.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Mode
+				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The enforcement mode for the policy engine. LOG_ONLY - The policy engine evaluates each action against your policies and adds traces on whether tool calls would be allowed or denied, but does not enforce the decision. Use this mode to test and validate policies before enabling enforcement. ENFORCE - The policy engine evaluates actions against your policies and enforces decisions by allowing or denying agent operations. Test and validate policies in LOG_ONLY mode before enabling enforcement to avoid unintended denials or adversely affecting production traffic.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration for a policy engine associated with a gateway. A policy engine is a collection of policies that evaluates and authorizes agent tool calls. When associated with a gateway, the policy engine intercepts all agent requests and determines whether to allow or deny each action based on the defined policies.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProtocolConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -648,8 +693,10 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"match_value_string":             "MatchValueString",
 		"match_value_string_list":        "MatchValueStringList",
 		"mcp":                            "Mcp",
+		"mode":                           "Mode",
 		"name":                           "Name",
 		"pass_request_headers":           "PassRequestHeaders",
+		"policy_engine_configuration":    "PolicyEngineConfiguration",
 		"protocol_configuration":         "ProtocolConfiguration",
 		"protocol_type":                  "ProtocolType",
 		"role_arn":                       "RoleArn",

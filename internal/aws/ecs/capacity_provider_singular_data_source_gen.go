@@ -187,6 +187,9 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	        "FipsEnabled": {
 		//	          "type": "boolean"
 		//	        },
+		//	        "InstanceMetadataTagsPropagation": {
+		//	          "type": "boolean"
+		//	        },
 		//	        "InstanceRequirements": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
@@ -558,6 +561,10 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 						"fips_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
+						// Property: InstanceMetadataTagsPropagation
+						"instance_metadata_tags_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: InstanceRequirements
 						"instance_requirements": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -859,38 +866,39 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithCloudFormationTypeName("AWS::ECS::CapacityProvider").WithTerraformTypeName("awscc_ecs_capacity_provider")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"accelerator_count":              "AcceleratorCount",
-		"accelerator_manufacturers":      "AcceleratorManufacturers",
-		"accelerator_names":              "AcceleratorNames",
-		"accelerator_total_memory_mi_b":  "AcceleratorTotalMemoryMiB",
-		"accelerator_types":              "AcceleratorTypes",
-		"allowed_instance_types":         "AllowedInstanceTypes",
-		"auto_scaling_group_arn":         "AutoScalingGroupArn",
-		"auto_scaling_group_provider":    "AutoScalingGroupProvider",
-		"bare_metal":                     "BareMetal",
-		"baseline_ebs_bandwidth_mbps":    "BaselineEbsBandwidthMbps",
-		"burstable_performance":          "BurstablePerformance",
-		"capacity_option_type":           "CapacityOptionType",
-		"capacity_reservations":          "CapacityReservations",
-		"cluster_name":                   "ClusterName",
-		"cpu_manufacturers":              "CpuManufacturers",
-		"ec_2_instance_profile_arn":      "Ec2InstanceProfileArn",
-		"excluded_instance_types":        "ExcludedInstanceTypes",
-		"fips_enabled":                   "FipsEnabled",
-		"infrastructure_optimization":    "InfrastructureOptimization",
-		"infrastructure_role_arn":        "InfrastructureRoleArn",
-		"instance_generations":           "InstanceGenerations",
-		"instance_launch_template":       "InstanceLaunchTemplate",
-		"instance_requirements":          "InstanceRequirements",
-		"instance_warmup_period":         "InstanceWarmupPeriod",
-		"key":                            "Key",
-		"local_storage":                  "LocalStorage",
-		"local_storage_types":            "LocalStorageTypes",
-		"managed_draining":               "ManagedDraining",
-		"managed_instances_provider":     "ManagedInstancesProvider",
-		"managed_scaling":                "ManagedScaling",
-		"managed_termination_protection": "ManagedTerminationProtection",
-		"max":                            "Max",
+		"accelerator_count":                  "AcceleratorCount",
+		"accelerator_manufacturers":          "AcceleratorManufacturers",
+		"accelerator_names":                  "AcceleratorNames",
+		"accelerator_total_memory_mi_b":      "AcceleratorTotalMemoryMiB",
+		"accelerator_types":                  "AcceleratorTypes",
+		"allowed_instance_types":             "AllowedInstanceTypes",
+		"auto_scaling_group_arn":             "AutoScalingGroupArn",
+		"auto_scaling_group_provider":        "AutoScalingGroupProvider",
+		"bare_metal":                         "BareMetal",
+		"baseline_ebs_bandwidth_mbps":        "BaselineEbsBandwidthMbps",
+		"burstable_performance":              "BurstablePerformance",
+		"capacity_option_type":               "CapacityOptionType",
+		"capacity_reservations":              "CapacityReservations",
+		"cluster_name":                       "ClusterName",
+		"cpu_manufacturers":                  "CpuManufacturers",
+		"ec_2_instance_profile_arn":          "Ec2InstanceProfileArn",
+		"excluded_instance_types":            "ExcludedInstanceTypes",
+		"fips_enabled":                       "FipsEnabled",
+		"infrastructure_optimization":        "InfrastructureOptimization",
+		"infrastructure_role_arn":            "InfrastructureRoleArn",
+		"instance_generations":               "InstanceGenerations",
+		"instance_launch_template":           "InstanceLaunchTemplate",
+		"instance_metadata_tags_propagation": "InstanceMetadataTagsPropagation",
+		"instance_requirements":              "InstanceRequirements",
+		"instance_warmup_period":             "InstanceWarmupPeriod",
+		"key":                                "Key",
+		"local_storage":                      "LocalStorage",
+		"local_storage_types":                "LocalStorageTypes",
+		"managed_draining":                   "ManagedDraining",
+		"managed_instances_provider":         "ManagedInstancesProvider",
+		"managed_scaling":                    "ManagedScaling",
+		"managed_termination_protection":     "ManagedTerminationProtection",
+		"max":                                "Max",
 		"max_spot_price_as_percentage_of_optimal_on_demand_price": "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice",
 		"maximum_scaling_step_size":                               "MaximumScalingStepSize",
 		"memory_gi_b_per_v_cpu":                                   "MemoryGiBPerVCpu",
