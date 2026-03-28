@@ -235,6 +235,8 @@ func TestTranslateToTerraform(t *testing.T) {
 				"Number": float64(42),
 				"Ports":  []any{},
 			},
+			// Empty lists from AWS should be preserved as empty lists (not nil)
+			// to prevent perpetual diffs when config has [] but AWS returns []
 			ExpectedValue: tftypes.NewValue(tftypes.Object{
 				AttributeTypes: map[string]tftypes.Type{
 					"arn":        tftypes.String,
@@ -248,7 +250,7 @@ func TestTranslateToTerraform(t *testing.T) {
 				"identifier": tftypes.NewValue(tftypes.String, nil),
 				"name":       tftypes.NewValue(tftypes.String, "testing"),
 				"number":     tftypes.NewValue(tftypes.Number, 42),
-				"ports":      tftypes.NewValue(tftypes.List{ElementType: tftypes.Number}, nil),
+				"ports":      tftypes.NewValue(tftypes.List{ElementType: tftypes.Number}, []tftypes.Value{}),
 			}),
 		},
 		{
@@ -260,6 +262,8 @@ func TestTranslateToTerraform(t *testing.T) {
 				"Name":   "testing",
 				"Number": float64(42),
 			},
+			// Missing list fields from AWS should be set to empty list (not null)
+			// to prevent perpetual diffs when config has [] but AWS omits the field
 			ExpectedValue: tftypes.NewValue(tftypes.Object{
 				AttributeTypes: map[string]tftypes.Type{
 					"arn":        tftypes.String,
@@ -273,7 +277,7 @@ func TestTranslateToTerraform(t *testing.T) {
 				"identifier": tftypes.NewValue(tftypes.String, nil),
 				"name":       tftypes.NewValue(tftypes.String, "testing"),
 				"number":     tftypes.NewValue(tftypes.Number, 42),
-				"ports":      tftypes.NewValue(tftypes.List{ElementType: tftypes.Number}, nil),
+				"ports":      tftypes.NewValue(tftypes.List{ElementType: tftypes.Number}, []tftypes.Value{}),
 			}),
 		},
 		{
