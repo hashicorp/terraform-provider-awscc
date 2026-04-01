@@ -332,7 +332,6 @@
     "/properties/OnlineEvaluationConfigId",
     "/properties/OnlineEvaluationConfigArn",
     "/properties/Status",
-    "/properties/ExecutionStatus",
     "/properties/OutputConfig",
     "/properties/CreatedAt",
     "/properties/UpdatedAt"
@@ -342,6 +341,11 @@
   ],
   "primaryIdentifier": [
     "/properties/OnlineEvaluationConfigArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/OnlineEvaluationConfigId"
+    ]
   ],
   "tagging": {
     "taggable": true,

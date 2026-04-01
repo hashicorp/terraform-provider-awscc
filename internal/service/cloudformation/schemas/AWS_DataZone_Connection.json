@@ -259,6 +259,32 @@
             "MlflowProperties"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "WorkflowsMwaaProperties",
+          "properties": {
+            "WorkflowsMwaaProperties": {
+              "$ref": "#/definitions/WorkflowsMwaaPropertiesInput"
+            }
+          },
+          "required": [
+            "WorkflowsMwaaProperties"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "WorkflowsServerlessProperties",
+          "properties": {
+            "WorkflowsServerlessProperties": {
+              "$ref": "#/definitions/WorkflowsServerlessPropertiesInput"
+            }
+          },
+          "required": [
+            "WorkflowsServerlessProperties"
+          ],
+          "additionalProperties": false
         }
       ]
     },
@@ -838,6 +864,22 @@
           "description": "The ARN of the MLflow tracking server"
         }
       },
+      "additionalProperties": false
+    },
+    "WorkflowsMwaaPropertiesInput": {
+      "type": "object",
+      "description": "Workflows MWAA Properties Input",
+      "properties": {
+        "MwaaEnvironmentName": {
+          "type": "string",
+          "description": "The name of the MWAA environment."
+        }
+      },
+      "additionalProperties": false
+    },
+    "WorkflowsServerlessPropertiesInput": {
+      "type": "object",
+      "description": "Workflows Serverless Properties Input",
       "additionalProperties": false
     }
   },
