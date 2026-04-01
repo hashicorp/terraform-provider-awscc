@@ -1,3 +1,5 @@
+## 1.79.0 (Unreleased)
+
 ## 1.78.0 (April 1, 2026)
 
 FEATURES:
