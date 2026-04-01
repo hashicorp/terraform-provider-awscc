@@ -452,6 +452,15 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	          ],
 		//	          "type": "object"
 		//	        },
+		//	        "LocalStorageConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "UseLocalStorage": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "Monitoring": {
 		//	          "enum": [
 		//	            "BASIC",
@@ -765,6 +774,16 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 							}, /*END SCHEMA*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
+						// Property: LocalStorageConfiguration
+						"local_storage_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: UseLocalStorage
+								"use_local_storage": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: Monitoring
 						"monitoring": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
@@ -893,6 +912,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		"instance_warmup_period":             "InstanceWarmupPeriod",
 		"key":                                "Key",
 		"local_storage":                      "LocalStorage",
+		"local_storage_configuration":        "LocalStorageConfiguration",
 		"local_storage_types":                "LocalStorageTypes",
 		"managed_draining":                   "ManagedDraining",
 		"managed_instances_provider":         "ManagedInstancesProvider",
@@ -925,6 +945,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		"tags":                   "Tags",
 		"target_capacity":        "TargetCapacity",
 		"total_local_storage_gb": "TotalLocalStorageGB",
+		"use_local_storage":      "UseLocalStorage",
 		"v_cpu_count":            "VCpuCount",
 		"value":                  "Value",
 	})

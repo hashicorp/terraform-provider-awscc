@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -904,6 +905,22 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        }
 		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "WorkflowsMwaaProperties": {
+		//	      "additionalProperties": false,
+		//	      "description": "Workflows MWAA Properties Input",
+		//	      "properties": {
+		//	        "MwaaEnvironmentName": {
+		//	          "description": "The name of the MWAA environment.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "WorkflowsServerlessProperties": {
+		//	      "additionalProperties": false,
+		//	      "description": "Workflows Serverless Properties Input",
 		//	      "type": "object"
 		//	    }
 		//	  },
@@ -1950,6 +1967,36 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: WorkflowsMwaaProperties
+				"workflows_mwaa_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MwaaEnvironmentName
+						"mwaa_environment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the MWAA environment.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Workflows MWAA Properties Input",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: WorkflowsServerlessProperties
+				"workflows_serverless_properties": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  jsontypes.NormalizedType{},
+					Description: "Workflows Serverless Properties Input",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
 			Computed: true,
@@ -2087,6 +2134,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"managed_endpoint_arn":                     "ManagedEndpointArn",
 		"match_criteria":                           "MatchCriteria",
 		"mlflow_properties":                        "MlflowProperties",
+		"mwaa_environment_name":                    "MwaaEnvironmentName",
 		"name":                                     "Name",
 		"number_of_workers":                        "NumberOfWorkers",
 		"o_auth_2_client_application":              "OAuth2ClientApplication",
@@ -2132,6 +2180,8 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"validate_credentials":              "ValidateCredentials",
 		"validate_for_compute_environments": "ValidateForComputeEnvironments",
 		"worker_type":                       "WorkerType",
+		"workflows_mwaa_properties":         "WorkflowsMwaaProperties",
+		"workflows_serverless_properties":   "WorkflowsServerlessProperties",
 		"workgroup_name":                    "WorkgroupName",
 	})
 

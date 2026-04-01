@@ -1,4 +1,7 @@
 {
+  "propertyTransform": {
+    "/properties/AutoScalingGroupProvider/AutoScalingGroupArn": "$split(AutoScalingGroupProvider.AutoScalingGroupArn, \"autoScalingGroupName/\")[-1] $OR $split(AutoScalingGroupArn, \"autoScalingGroupName/\")[-1]"
+  },
   "tagging": {
     "permissions": [
       "ecs:TagResource",
@@ -10,9 +13,6 @@
     "tagUpdatable": true,
     "tagProperty": "/properties/Tags",
     "cloudFormationSystemTags": true
-  },
-  "propertyTransform": {
-    "/properties/AutoScalingGroupProvider/AutoScalingGroupArn": "$split(AutoScalingGroupProvider.AutoScalingGroupArn, \"autoScalingGroupName/\")[-1] $OR $split(AutoScalingGroupArn, \"autoScalingGroupName/\")[-1]"
   },
   "handlers": {
     "read": {
@@ -446,6 +446,15 @@
         }
       }
     },
+    "ManagedInstancesLocalStorageConfiguration": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "UseLocalStorage": {
+          "type": "boolean"
+        }
+      }
+    },
     "ManagedInstancesStorageConfiguration": {
       "additionalProperties": false,
       "type": "object",
@@ -517,6 +526,9 @@
         "CapacityReservations": {
           "$ref": "#/definitions/CapacityReservationRequest"
         },
+        "LocalStorageConfiguration": {
+          "$ref": "#/definitions/ManagedInstancesLocalStorageConfiguration"
+        },
         "Monitoring": {
           "$ref": "#/definitions/ManagedInstancesMonitoringOptions"
         }
@@ -563,9 +575,6 @@
       ]
     }
   },
-  "conditionalCreateOnlyProperties": [
-    "/properties/ManagedInstancesProvider/InstanceLaunchTemplate/CapacityOptionType"
-  ],
   "properties": {
     "AutoScalingGroupProvider": {
       "$ref": "#/definitions/AutoScalingGroupProvider"
@@ -585,5 +594,8 @@
     "ManagedInstancesProvider": {
       "$ref": "#/definitions/ManagedInstancesProvider"
     }
-  }
+  },
+  "conditionalCreateOnlyProperties": [
+    "/properties/ManagedInstancesProvider/InstanceLaunchTemplate/CapacityOptionType"
+  ]
 }

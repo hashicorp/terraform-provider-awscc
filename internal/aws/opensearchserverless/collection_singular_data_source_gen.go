@@ -112,6 +112,34 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Encryption settings for the collection",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: FipsEndpoints
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "CollectionEndpoint": {
+		//	      "type": "string"
+		//	    },
+		//	    "DashboardEndpoint": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"fips_endpoints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CollectionEndpoint
+				"collection_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DashboardEndpoint
+				"dashboard_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -287,6 +315,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"dashboard_endpoint":             "DashboardEndpoint",
 		"description":                    "Description",
 		"encryption_config":              "EncryptionConfig",
+		"fips_endpoints":                 "FipsEndpoints",
 		"key":                            "Key",
 		"kms_key_arn":                    "KmsKeyArn",
 		"name":                           "Name",

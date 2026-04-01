@@ -241,6 +241,7 @@ Optional:
 - `fips_enabled` (Boolean)
 - `instance_metadata_tags_propagation` (Boolean)
 - `instance_requirements` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--instance_requirements))
+- `local_storage_configuration` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--local_storage_configuration))
 - `monitoring` (String)
 - `network_configuration` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--network_configuration))
 - `storage_configuration` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--storage_configuration))
@@ -364,6 +365,14 @@ Optional:
 - `max` (Number)
 - `min` (Number)
 
+
+
+<a id="nestedatt--managed_instances_provider--instance_launch_template--local_storage_configuration"></a>
+### Nested Schema for `managed_instances_provider.instance_launch_template.local_storage_configuration`
+
+Optional:
+
+- `use_local_storage` (Boolean)
 
 
 <a id="nestedatt--managed_instances_provider--instance_launch_template--network_configuration"></a>

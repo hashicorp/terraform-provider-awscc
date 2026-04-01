@@ -1,0 +1,203 @@
+{
+  "typeName": "AWS::SecurityAgent::TargetDomain",
+  "description": "Resource Type definition for AWS::SecurityAgent::TargetDomain",
+  "additionalProperties": false,
+  "properties": {
+    "TargetDomainId": {
+      "type": "string",
+      "description": "Unique identifier of the target domain"
+    },
+    "TargetDomainName": {
+      "type": "string",
+      "description": "Domain name of the target domain"
+    },
+    "VerificationMethod": {
+      "type": "string",
+      "description": "Verification method for the target domain",
+      "enum": [
+        "DNS_TXT",
+        "HTTP_ROUTE"
+      ]
+    },
+    "VerificationStatus": {
+      "type": "string",
+      "description": "Current verification status of the registered target domain",
+      "enum": [
+        "PENDING",
+        "VERIFIED",
+        "FAILED",
+        "UNREACHABLE"
+      ]
+    },
+    "VerificationDetails": {
+      "$ref": "#/definitions/VerificationDetails"
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "Timestamp when the target domain was registered",
+      "format": "date-time"
+    },
+    "VerifiedAt": {
+      "type": "string",
+      "description": "Timestamp when the target domain was last successfully verified",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags for the target domain",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
+    "VerificationDetails": {
+      "type": "object",
+      "description": "Verification details to verify registered target domain",
+      "additionalProperties": false,
+      "properties": {
+        "Method": {
+          "type": "string",
+          "description": "Type of domain ownership verification method",
+          "enum": [
+            "DNS_TXT",
+            "HTTP_ROUTE"
+          ]
+        },
+        "DnsTxt": {
+          "$ref": "#/definitions/DnsVerification"
+        },
+        "HttpRoute": {
+          "$ref": "#/definitions/HttpVerification"
+        }
+      }
+    },
+    "DnsVerification": {
+      "type": "object",
+      "description": "Represents DNS TXT verification details",
+      "additionalProperties": false,
+      "properties": {
+        "Token": {
+          "type": "string",
+          "description": "Token used to verify domain ownership"
+        },
+        "DnsRecordName": {
+          "type": "string",
+          "description": "Record name to be added in DNS for target domain"
+        },
+        "DnsRecordType": {
+          "type": "string",
+          "description": "Type of record to be added in DNS for target domain",
+          "enum": [
+            "TXT"
+          ]
+        }
+      }
+    },
+    "HttpVerification": {
+      "type": "object",
+      "description": "Represents HTTP route verification details",
+      "additionalProperties": false,
+      "properties": {
+        "Token": {
+          "type": "string",
+          "description": "Token used to verify domain ownership"
+        },
+        "RoutePath": {
+          "type": "string",
+          "description": "Route path where verification token should be placed"
+        }
+      }
+    }
+  },
+  "required": [
+    "TargetDomainName",
+    "VerificationMethod"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "securityagent:TagResource",
+      "securityagent:UntagResource",
+      "securityagent:ListTagsForResource"
+    ]
+  },
+  "primaryIdentifier": [
+    "/properties/TargetDomainId"
+  ],
+  "readOnlyProperties": [
+    "/properties/TargetDomainId",
+    "/properties/VerificationStatus",
+    "/properties/VerificationDetails",
+    "/properties/CreatedAt",
+    "/properties/VerifiedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/TargetDomainName"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "securityagent:CreateTargetDomain",
+        "securityagent:BatchGetTargetDomains",
+        "securityagent:TagResource",
+        "securityagent:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "securityagent:BatchGetTargetDomains",
+        "securityagent:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "securityagent:UpdateTargetDomain",
+        "securityagent:BatchGetTargetDomains",
+        "securityagent:TagResource",
+        "securityagent:UntagResource",
+        "securityagent:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "securityagent:DeleteTargetDomain",
+        "securityagent:BatchGetTargetDomains"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "securityagent:ListTargetDomains"
+      ]
+    }
+  }
+}

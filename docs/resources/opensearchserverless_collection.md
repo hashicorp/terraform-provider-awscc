@@ -69,6 +69,7 @@ Contains between 3 and 32 characters
 - `collection_endpoint` (String) The endpoint for the collection.
 - `collection_id` (String) The identifier of the collection
 - `dashboard_endpoint` (String) The OpenSearch Dashboards endpoint for the collection.
+- `fips_endpoints` (Attributes) (see [below for nested schema](#nestedatt--fips_endpoints))
 - `id` (String) Uniquely identifies the resource.
 - `kms_key_arn` (String) Key Management Service key used to encrypt the collection.
 
@@ -96,6 +97,15 @@ Optional:
 Optional:
 
 - `serverless_vector_acceleration` (String) Indicates whether GPU acceleration is enabled for vector indexing
+
+
+<a id="nestedatt--fips_endpoints"></a>
+### Nested Schema for `fips_endpoints`
+
+Read-Only:
+
+- `collection_endpoint` (String)
+- `dashboard_endpoint` (String)
 
 ## Import
 

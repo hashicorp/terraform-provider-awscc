@@ -82,6 +82,18 @@
         }
       },
       "additionalProperties": false
+    },
+    "FipsEndpoints": {
+      "type": "object",
+      "properties": {
+        "CollectionEndpoint": {
+          "type": "string"
+        },
+        "DashboardEndpoint": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -144,6 +156,9 @@
     "KmsKeyArn": {
       "type": "string",
       "description": "Key Management Service key used to encrypt the collection."
+    },
+    "FipsEndpoints": {
+      "$ref": "#/definitions/FipsEndpoints"
     }
   },
   "required": [
@@ -154,6 +169,7 @@
     "/properties/Arn",
     "/properties/CollectionEndpoint",
     "/properties/DashboardEndpoint",
+    "/properties/FipsEndpoints",
     "/properties/KmsKeyArn"
   ],
   "writeOnlyProperties": [

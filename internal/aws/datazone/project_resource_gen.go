@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -272,6 +273,73 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ResourceTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The resource tags of the project.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "^[\\w \\.:/=+@-]+$",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "pattern": "^[\\w \\.:/=+@-]*$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"resource_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[\\w \\.:/=+@-]+$"), ""),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[\\w \\.:/=+@-]*$"), ""),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The resource tags of the project.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: UserParameters
 		// CloudFormation resource type schema:
 		//
@@ -386,7 +454,7 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Amazon DataZone projects are business use case?based groupings of people, assets (data), and tools used to simplify access to the AWS analytics.",
+		Description: "Amazon DataZone projects are business use case–based groupings of people, assets (data), and tools used to simplify access to the AWS analytics.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -418,12 +486,14 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		"environment_id":                 "EnvironmentId",
 		"environment_parameters":         "EnvironmentParameters",
 		"glossary_terms":                 "GlossaryTerms",
+		"key":                            "Key",
 		"last_updated_at":                "LastUpdatedAt",
 		"name":                           "Name",
 		"project_id":                     "Id",
 		"project_profile_id":             "ProjectProfileId",
 		"project_profile_version":        "ProjectProfileVersion",
 		"project_status":                 "ProjectStatus",
+		"resource_tags":                  "ResourceTags",
 		"user_parameters":                "UserParameters",
 		"value":                          "Value",
 	})

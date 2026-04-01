@@ -28,6 +28,7 @@ Data Source schema for AWS::OpenSearchServerless::Collection
 - `dashboard_endpoint` (String) The OpenSearch Dashboards endpoint for the collection.
 - `description` (String) The description of the collection
 - `encryption_config` (Attributes) Encryption settings for the collection (see [below for nested schema](#nestedatt--encryption_config))
+- `fips_endpoints` (Attributes) (see [below for nested schema](#nestedatt--fips_endpoints))
 - `kms_key_arn` (String) Key Management Service key used to encrypt the collection.
 - `name` (String) The name of the collection.
 
@@ -48,6 +49,15 @@ Read-Only:
 
 - `aws_owned_key` (Boolean) Indicates whether to use an AWS owned key for encryption.
 - `kms_key_arn` (String) Key Management Service key used to encrypt the collection.
+
+
+<a id="nestedatt--fips_endpoints"></a>
+### Nested Schema for `fips_endpoints`
+
+Read-Only:
+
+- `collection_endpoint` (String)
+- `dashboard_endpoint` (String)
 
 
 <a id="nestedatt--tags"></a>

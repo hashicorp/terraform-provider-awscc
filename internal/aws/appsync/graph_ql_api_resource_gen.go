@@ -296,6 +296,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the API key",
+		//	  "pattern": "^arn:.*",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -548,6 +549,10 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    }
 		//	  },
+		//	  "required": [
+		//	    "FieldLogLevel",
+		//	    "CloudWatchLogsRoleArn"
+		//	  ],
 		//	  "type": "object"
 		//	}
 		"log_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -557,6 +562,9 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The service role that AWS AppSync will assume to publish to Amazon CloudWatch Logs in your account.",
 					Optional:    true,
 					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -575,6 +583,9 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The field logging level. Values can be NONE, ERROR, INFO, DEBUG, or ALL.",
 					Optional:    true,
 					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
