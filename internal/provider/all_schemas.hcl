@@ -5565,7 +5565,7 @@ resource_schema "aws_securityagent_agent_space" {
 }
 
 resource_schema "aws_securityagent_application" {
-  cloudformation_type_name = "AWS::SecurityAgent::AgentSpace"
+  cloudformation_type_name = "AWS::SecurityAgent::Application"
 }
 
 resource_schema "aws_securityagent_pentest" {
