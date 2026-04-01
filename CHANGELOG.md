@@ -1,4 +1,42 @@
-## 1.78.0 (Unreleased)
+## 1.78.0 (April 1, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_apigatewayv2_stage`
+* **New Data Source:** `awscc_apigatewayv2_stages`
+* **New Data Source:** `awscc_appstream_stack`
+* **New Data Source:** `awscc_appstream_stacks`
+* **New Data Source:** `awscc_customerprofiles_recommender`
+* **New Data Source:** `awscc_customerprofiles_recommenders`
+* **New Data Source:** `awscc_novaact_workflow_definition`
+* **New Data Source:** `awscc_omics_configuration`
+* **New Data Source:** `awscc_omics_configurations`
+* **New Data Source:** `awscc_sagemaker_model`
+* **New Data Source:** `awscc_sagemaker_models`
+* **New Data Source:** `awscc_securityagent_agent_space`
+* **New Data Source:** `awscc_securityagent_agent_spaces`
+* **New Data Source:** `awscc_securityagent_application`
+* **New Data Source:** `awscc_securityagent_applications`
+* **New Data Source:** `awscc_securityagent_pentest`
+* **New Data Source:** `awscc_securityagent_target_domain`
+* **New Data Source:** `awscc_securityagent_target_domains`
+* **New List Resource:** `awscc_apigatewayv2_stage`
+* **New List Resource:** `awscc_appstream_stack`
+* **New List Resource:** `awscc_customerprofiles_recommender`
+* **New List Resource:** `awscc_omics_configuration`
+* **New List Resource:** `awscc_sagemaker_model`
+* **New List Resource:** `awscc_securityagent_agent_space`
+* **New List Resource:** `awscc_securityagent_application`
+* **New List Resource:** `awscc_securityagent_target_domain`
+* **New Resource:** `awscc_apigatewayv2_stage`
+* **New Resource:** `awscc_appstream_stack`
+* **New Resource:** `awscc_customerprofiles_recommender`
+* **New Resource:** `awscc_omics_configuration`
+* **New Resource:** `awscc_sagemaker_model`
+* **New Resource:** `awscc_securityagent_agent_space`
+* **New Resource:** `awscc_securityagent_application`
+* **New Resource:** `awscc_securityagent_pentest`
+* **New Resource:** `awscc_securityagent_target_domain`
 
 ## 1.77.0 (March 25, 2026)
 

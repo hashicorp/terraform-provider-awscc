@@ -1,0 +1,1 @@
+$ terraform import awscc_omics_configuration.example "name"

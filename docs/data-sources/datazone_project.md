@@ -34,7 +34,17 @@ Data Source schema for AWS::DataZone::Project
 - `project_profile_id` (String) The project profile ID.
 - `project_profile_version` (String) The project profile version to which the project should be updated. You can only specify the following string for this parameter: latest.
 - `project_status` (String) The status of the project.
+- `resource_tags` (Attributes List) The resource tags of the project. (see [below for nested schema](#nestedatt--resource_tags))
 - `user_parameters` (Attributes List) The user parameters of the project. (see [below for nested schema](#nestedatt--user_parameters))
+
+<a id="nestedatt--resource_tags"></a>
+### Nested Schema for `resource_tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
+
 
 <a id="nestedatt--user_parameters"></a>
 ### Nested Schema for `user_parameters`
