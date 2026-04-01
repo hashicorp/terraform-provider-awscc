@@ -4280,7 +4280,7 @@ resource_schema "aws_novaact_workflow_definition" {
   # Suppression Reason: TypeNotFoundException: The type 'AWS::NovaAct::WorkflowDefinition' cannot be found
   # https://github.com/hashicorp/terraform-provider-awscc/issues/3105
   suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
+  suppress_singular_data_source_generation = false
   suppress_plural_data_source_generation   = true
 }
 
