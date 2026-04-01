@@ -68,7 +68,50 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "description": "The configuration for the evaluator.",
+		//	  "oneOf": [
+		//	    {
+		//	      "required": [
+		//	        "LlmAsAJudge"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "CodeBased"
+		//	      ]
+		//	    }
+		//	  ],
 		//	  "properties": {
+		//	    "CodeBased": {
+		//	      "additionalProperties": false,
+		//	      "description": "The configuration for code-based evaluation using a Lambda function.",
+		//	      "properties": {
+		//	        "LambdaConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "The Lambda function configuration for code-based evaluation.",
+		//	          "properties": {
+		//	            "LambdaArn": {
+		//	              "description": "The ARN of the Lambda function used for evaluation.",
+		//	              "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:([a-z]{2}(-gov)?-[a-z]+-\\d{1}):(\\d{12}):function:([a-zA-Z0-9-_.]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
+		//	              "type": "string"
+		//	            },
+		//	            "LambdaTimeoutInSeconds": {
+		//	              "description": "The timeout in seconds for the Lambda function invocation.",
+		//	              "maximum": 300,
+		//	              "minimum": 1,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "LambdaArn"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "LambdaConfig"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "LlmAsAJudge": {
 		//	      "additionalProperties": false,
 		//	      "description": "The configuration for LLM-as-a-Judge evaluation.",
@@ -213,13 +256,34 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "LlmAsAJudge"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"evaluator_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CodeBased
+				"code_based": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LambdaConfig
+						"lambda_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: LambdaArn
+								"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the Lambda function used for evaluation.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LambdaTimeoutInSeconds
+								"lambda_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The timeout in seconds for the Lambda function invocation.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The Lambda function configuration for code-based evaluation.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for code-based evaluation using a Lambda function.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: LlmAsAJudge
 				"llm_as_a_judge": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -468,6 +532,7 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"additional_model_request_fields": "AdditionalModelRequestFields",
 		"bedrock_evaluator_model_config":  "BedrockEvaluatorModelConfig",
 		"categorical":                     "Categorical",
+		"code_based":                      "CodeBased",
 		"created_at":                      "CreatedAt",
 		"definition":                      "Definition",
 		"description":                     "Description",
@@ -479,6 +544,9 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"instructions":                    "Instructions",
 		"key":                             "Key",
 		"label":                           "Label",
+		"lambda_arn":                      "LambdaArn",
+		"lambda_config":                   "LambdaConfig",
+		"lambda_timeout_in_seconds":       "LambdaTimeoutInSeconds",
 		"level":                           "Level",
 		"llm_as_a_judge":                  "LlmAsAJudge",
 		"max_tokens":                      "MaxTokens",

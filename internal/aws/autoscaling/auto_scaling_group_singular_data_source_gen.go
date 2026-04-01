@@ -74,6 +74,23 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "The EC2 instance capacity distribution across Availability Zones for the Auto Scaling group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: AvailabilityZoneIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"availability_zone_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZoneImpairmentPolicy
 		// CloudFormation resource type schema:
 		//
@@ -1751,6 +1768,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"auto_scaling_group_arn":                   "AutoScalingGroupARN",
 		"auto_scaling_group_name":                  "AutoScalingGroupName",
 		"availability_zone_distribution":           "AvailabilityZoneDistribution",
+		"availability_zone_ids":                    "AvailabilityZoneIds",
 		"availability_zone_impairment_policy":      "AvailabilityZoneImpairmentPolicy",
 		"availability_zones":                       "AvailabilityZones",
 		"bare_metal":                               "BareMetal",
