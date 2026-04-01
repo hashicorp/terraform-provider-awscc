@@ -159,6 +159,37 @@ func collectionResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// EncryptionConfig is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: FipsEndpoints
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "CollectionEndpoint": {
+		//	      "type": "string"
+		//	    },
+		//	    "DashboardEndpoint": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"fips_endpoints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CollectionEndpoint
+				"collection_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DashboardEndpoint
+				"dashboard_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -425,6 +456,7 @@ func collectionResource(ctx context.Context) (resource.Resource, error) {
 		"dashboard_endpoint":             "DashboardEndpoint",
 		"description":                    "Description",
 		"encryption_config":              "EncryptionConfig",
+		"fips_endpoints":                 "FipsEndpoints",
 		"key":                            "Key",
 		"kms_key_arn":                    "KmsKeyArn",
 		"name":                           "Name",

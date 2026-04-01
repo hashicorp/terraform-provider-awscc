@@ -534,6 +534,15 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	          ],
 		//	          "type": "object"
 		//	        },
+		//	        "LocalStorageConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "UseLocalStorage": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "Monitoring": {
 		//	          "enum": [
 		//	            "BASIC",
@@ -1192,6 +1201,24 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: LocalStorageConfiguration
+						"local_storage_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: UseLocalStorage
+								"use_local_storage": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: Monitoring
 						"monitoring": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
@@ -1417,6 +1444,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		"instance_warmup_period":             "InstanceWarmupPeriod",
 		"key":                                "Key",
 		"local_storage":                      "LocalStorage",
+		"local_storage_configuration":        "LocalStorageConfiguration",
 		"local_storage_types":                "LocalStorageTypes",
 		"managed_draining":                   "ManagedDraining",
 		"managed_instances_provider":         "ManagedInstancesProvider",
@@ -1449,6 +1477,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                   "Tags",
 		"target_capacity":        "TargetCapacity",
 		"total_local_storage_gb": "TotalLocalStorageGB",
+		"use_local_storage":      "UseLocalStorage",
 		"v_cpu_count":            "VCpuCount",
 		"value":                  "Value",
 	})
