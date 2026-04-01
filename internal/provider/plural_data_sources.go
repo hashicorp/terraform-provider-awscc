@@ -710,7 +710,6 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_notifications_managed_notification_account_contact_associations -cftype AWS::Notifications::ManagedNotificationAccountContactAssociation -package notifications ../aws/notifications/managed_notification_account_contact_association_plural_data_source_gen.go ../aws/notifications/managed_notification_account_contact_association_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_notifications_notification_configurations -cftype AWS::Notifications::NotificationConfiguration -package notifications ../aws/notifications/notification_configuration_plural_data_source_gen.go ../aws/notifications/notification_configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_notifications_notification_hubs -cftype AWS::Notifications::NotificationHub -package notifications ../aws/notifications/notification_hub_plural_data_source_gen.go ../aws/notifications/notification_hub_plural_data_source_gen_test.go
-//go:generate go run generators/plural-data-source/main.go -data-source awscc_novaact_workflow_definitions -cftype AWS::NovaAct::WorkflowDefinition -package novaact ../aws/novaact/workflow_definition_plural_data_source_gen.go ../aws/novaact/workflow_definition_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_notificationscontacts_email_contacts -cftype AWS::NotificationsContacts::EmailContact -package notificationscontacts ../aws/notificationscontacts/email_contact_plural_data_source_gen.go ../aws/notificationscontacts/email_contact_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_observabilityadmin_organization_centralization_rules -cftype AWS::ObservabilityAdmin::OrganizationCentralizationRule -package observabilityadmin ../aws/observabilityadmin/organization_centralization_rule_plural_data_source_gen.go ../aws/observabilityadmin/organization_centralization_rule_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_observabilityadmin_organization_telemetry_rules -cftype AWS::ObservabilityAdmin::OrganizationTelemetryRule -package observabilityadmin ../aws/observabilityadmin/organization_telemetry_rule_plural_data_source_gen.go ../aws/observabilityadmin/organization_telemetry_rule_plural_data_source_gen_test.go
@@ -1190,7 +1189,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/nimblestudio"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/notifications"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/notificationscontacts"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/novaact"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/oam"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/observabilityadmin"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/odb"

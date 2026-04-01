@@ -1,4 +1,4 @@
-# 1368 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1369 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -2253,6 +2253,10 @@ resource_schema "aws_ecs_cluster_capacity_provider_associations" {
   cloudformation_type_name = "AWS::ECS::ClusterCapacityProviderAssociations"
 }
 
+resource_schema "aws_ecs_daemon_task_definition" {
+  cloudformation_type_name = "AWS::ECS::DaemonTaskDefinition"
+}
+
 resource_schema "aws_ecs_express_gateway_service" {
   cloudformation_type_name               = "AWS::ECS::ExpressGatewayService"
   suppress_plural_data_source_generation = true
@@ -4029,9 +4033,11 @@ resource_schema "aws_notifications_organizational_unit_association" {
 resource_schema "aws_notificationscontacts_email_contact" {
   cloudformation_type_name = "AWS::NotificationsContacts::EmailContact"
 }
+describing CloudFormation type (AWS::NovaAct::WorkflowDefinition): operation error CloudFormation: DescribeType, https response error StatusCode: 404, RequestID: e18da2bb-15ac-4a91-83ee-7e6aa7ced54a, TypeNotFoundException: The type 'AWS::NovaAct::WorkflowDefinition' cannot be found.
 
 resource_schema "aws_novaact_workflow_definition" {
-  cloudformation_type_name = "AWS::NovaAct::WorkflowDefinition"
+  cloudformation_type_name               = "AWS::NovaAct::WorkflowDefinition"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_odb_cloud_autonomous_vm_cluster" {

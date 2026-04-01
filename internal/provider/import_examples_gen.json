@@ -4443,11 +4443,6 @@
         "identifier": ["NotificationConfigurationArn","OrganizationalUnitId"]
     },
     {
-        "resource": "awscc_novaact_workflow_definition",
-        "generateListResource": true,
-        "identifier": ["Arn"]
-    },
-    {
         "resource": "awscc_notificationscontacts_email_contact",
         "generateListResource": true,
         "identifier": ["Arn"]

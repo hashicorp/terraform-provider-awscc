@@ -4276,6 +4276,11 @@ resource_schema "aws_notifications_organizational_unit_association" {
 
 resource_schema "aws_novaact_workflow_definition" {
   cloudformation_type_name = "AWS::NovaAct::WorkflowDefinition"
+
+  # Suppression Reason: TypeNotFoundException: The type 'AWS::NovaAct::WorkflowDefinition' cannot be found
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_notificationscontacts_email_contact" {

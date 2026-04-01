@@ -936,7 +936,6 @@
 //go:generate go run generators/resource/main.go -resource awscc_notifications_notification_configuration -listresource -cfschema ../service/cloudformation/schemas/AWS_Notifications_NotificationConfiguration.json -package notifications -- ../aws/notifications/notification_configuration_resource_gen.go ../aws/notifications/notification_configuration_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_notifications_notification_hub -listresource -cfschema ../service/cloudformation/schemas/AWS_Notifications_NotificationHub.json -package notifications -- ../aws/notifications/notification_hub_resource_gen.go ../aws/notifications/notification_hub_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_notifications_organizational_unit_association -cfschema ../service/cloudformation/schemas/AWS_Notifications_OrganizationalUnitAssociation.json -package notifications -- ../aws/notifications/organizational_unit_association_resource_gen.go ../aws/notifications/organizational_unit_association_resource_gen_test.go
-//go:generate go run generators/resource/main.go -resource awscc_novaact_workflow_definition -listresource -cfschema ../service/cloudformation/schemas/AWS_NovaAct_WorkflowDefinition.json -package novaact -- ../aws/novaact/workflow_definition_resource_gen.go ../aws/novaact/workflow_definition_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_notificationscontacts_email_contact -listresource -cfschema ../service/cloudformation/schemas/AWS_NotificationsContacts_EmailContact.json -package notificationscontacts -- ../aws/notificationscontacts/email_contact_resource_gen.go ../aws/notificationscontacts/email_contact_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_observabilityadmin_organization_centralization_rule -listresource -cfschema ../service/cloudformation/schemas/AWS_ObservabilityAdmin_OrganizationCentralizationRule.json -package observabilityadmin -- ../aws/observabilityadmin/organization_centralization_rule_resource_gen.go ../aws/observabilityadmin/organization_centralization_rule_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_observabilityadmin_organization_telemetry_rule -listresource -cfschema ../service/cloudformation/schemas/AWS_ObservabilityAdmin_OrganizationTelemetryRule.json -package observabilityadmin -- ../aws/observabilityadmin/organization_telemetry_rule_resource_gen.go ../aws/observabilityadmin/organization_telemetry_rule_resource_gen_test.go
@@ -1522,7 +1521,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/nimblestudio"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/notifications"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/notificationscontacts"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/novaact"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/oam"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/observabilityadmin"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/odb"
