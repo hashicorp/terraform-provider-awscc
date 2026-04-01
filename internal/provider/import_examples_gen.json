@@ -5833,7 +5833,7 @@
     {
         "resource": "awscc_securityagent_application",
         "generateListResource": true,
-        "identifier": ["AgentSpaceId"]
+        "identifier": ["ApplicationId"]
     },
     {
         "resource": "awscc_securityagent_pentest",
