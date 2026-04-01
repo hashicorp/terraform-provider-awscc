@@ -230,6 +230,11 @@
         "identifier": ["ApiId","RouteId","RouteResponseId"]
     },
     {
+        "resource": "awscc_apigatewayv2_stage",
+        "generateListResource": true,
+        "identifier": ["ApiId","StageName"]
+    },
+    {
         "resource": "awscc_apigatewayv2_vpc_link",
         "generateListResource": true,
         "identifier": ["VpcLinkId"]
@@ -357,6 +362,11 @@
     },
     {
         "resource": "awscc_appstream_image_builder",
+        "generateListResource": true,
+        "identifier": ["Name"]
+    },
+    {
+        "resource": "awscc_appstream_stack",
         "generateListResource": true,
         "identifier": ["Name"]
     },
@@ -1469,6 +1479,11 @@
     {
         "resource": "awscc_customerprofiles_segment_definition",
         "identifier": ["DomainName","SegmentDefinitionName"]
+    },
+    {
+        "resource": "awscc_customerprofiles_recommender",
+        "generateListResource": true,
+        "identifier": ["DomainName","RecommenderName"]
     },
     {
         "resource": "awscc_dax_subnet_group",
@@ -4428,6 +4443,11 @@
         "identifier": ["NotificationConfigurationArn","OrganizationalUnitId"]
     },
     {
+        "resource": "awscc_novaact_workflow_definition",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_notificationscontacts_email_contact",
         "generateListResource": true,
         "identifier": ["Arn"]
@@ -4499,6 +4519,11 @@
     },
     {
         "resource": "awscc_omics_annotation_store",
+        "generateListResource": true,
+        "identifier": ["Name"]
+    },
+    {
+        "resource": "awscc_omics_configuration",
         "generateListResource": true,
         "identifier": ["Name"]
     },
@@ -5701,6 +5726,11 @@
         "identifier": ["TrackingServerName"]
     },
     {
+        "resource": "awscc_sagemaker_model",
+        "generateListResource": true,
+        "identifier": ["ModelArn"]
+    },
+    {
         "resource": "awscc_sagemaker_model_bias_job_definition",
         "generateListResource": true,
         "identifier": ["JobDefinitionArn"]
@@ -5794,6 +5824,25 @@
         "resource": "awscc_secretsmanager_secret_target_attachment",
         "generateListResource": true,
         "identifier": ["Id"]
+    },
+    {
+        "resource": "awscc_securityagent_agent_space",
+        "generateListResource": true,
+        "identifier": ["AgentSpaceId"]
+    },
+    {
+        "resource": "awscc_securityagent_application",
+        "generateListResource": true,
+        "identifier": ["AgentSpaceId"]
+    },
+    {
+        "resource": "awscc_securityagent_pentest",
+        "identifier": ["PentestId","AgentSpaceId"]
+    },
+    {
+        "resource": "awscc_securityagent_target_domain",
+        "generateListResource": true,
+        "identifier": ["TargetDomainId"]
     },
     {
         "resource": "awscc_securityhub_aggregator_v2",
