@@ -7,6 +7,7 @@ package cloudfront
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -36,12 +37,12 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the trust store",
+		//	  "description": "",
 		//	  "pattern": "^arn:aws:cloudfront::[0-9]{12}:trust-store/[A-Za-z0-9_]+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the trust store",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -52,24 +53,26 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "A CA certificates bundle source.",
 		//	  "properties": {
 		//	    "CaCertificatesBundleS3Location": {
 		//	      "additionalProperties": false,
+		//	      "description": "The CA certificates bundle location in Amazon S3.",
 		//	      "properties": {
 		//	        "Bucket": {
-		//	          "description": "The S3 bucket containing the CA certificates bundle PEM file",
+		//	          "description": "The S3 bucket.",
 		//	          "type": "string"
 		//	        },
 		//	        "Key": {
-		//	          "description": "The S3 object key of the CA certificates bundle PEM file",
+		//	          "description": "The location's key.",
 		//	          "type": "string"
 		//	        },
 		//	        "Region": {
-		//	          "description": "The S3 bucket region",
+		//	          "description": "The location's Region.",
 		//	          "type": "string"
 		//	        },
 		//	        "Version": {
-		//	          "description": "The S3 object version of the CA certificates bundle PEM file",
+		//	          "description": "The location's version.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -93,7 +96,7 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Bucket
 						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The S3 bucket containing the CA certificates bundle PEM file",
+							Description: "The S3 bucket.",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
@@ -105,7 +108,7 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Key
 						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The S3 object key of the CA certificates bundle PEM file",
+							Description: "The location's key.",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
@@ -117,7 +120,7 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Region
 						"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The S3 bucket region",
+							Description: "The location's Region.",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
@@ -129,7 +132,7 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Version
 						"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The S3 object version of the CA certificates bundle PEM file",
+							Description: "The location's version.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -137,8 +140,9 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "The CA certificates bundle location in Amazon S3.",
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.Object{ /*START VALIDATORS*/
 						fwvalidators.NotNullObject(),
 					}, /*END VALIDATORS*/
@@ -147,8 +151,9 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
+			Description: "A CA certificates bundle source.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -158,10 +163,12 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"e_tag": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -170,11 +177,11 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The unique identifier for the trust store",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"trust_store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier for the trust store",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -184,11 +191,11 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The last modification timestamp of the trust store PEM file",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The last modification timestamp of the trust store PEM file",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -198,11 +205,11 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A unique name to identify the trust store",
+		//	  "description": "The trust store's name.",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique name to identify the trust store",
+			Description: "The trust store's name.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -212,11 +219,11 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The number of CA certificates in the trust store PEM file",
+		//	  "description": "",
 		//	  "type": "integer"
 		//	}
 		"number_of_ca_certificates": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of CA certificates in the trust store PEM file",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -226,7 +233,7 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Current status of the trust store",
+		//	  "description": "",
 		//	  "enum": [
 		//	    "PENDING",
 		//	    "ACTIVE",
@@ -235,7 +242,7 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Current status of the trust store",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -245,21 +252,24 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Key-value pairs for resource tagging",
+		//	  "description": "A complex type that contains zero or more ``Tag`` elements.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "A complex type that contains ``Tag`` key and ``Tag`` value.",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
-		//	        "pattern": "",
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
-		//	        "pattern": "",
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -276,10 +286,12 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -288,10 +300,12 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -300,7 +314,7 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Key-value pairs for resource tagging",
+			Description: "A complex type that contains zero or more ``Tag`` elements.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -320,7 +334,7 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::CloudFront::TrustStore. TrustStores contain CA certificates for mTLS authentication and can be associated with CloudFront distributions.",
+		Description: "A trust store.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -332,7 +346,6 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
 			Name:              "id",
-			Description:       "The unique identifier for the trust store",
 			RequiredForImport: true,
 		})
 

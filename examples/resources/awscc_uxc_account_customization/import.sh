@@ -1,0 +1,1 @@
+$ terraform import awscc_uxc_account_customization.example "account_id"

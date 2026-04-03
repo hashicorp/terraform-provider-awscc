@@ -1,0 +1,1 @@
+$ terraform import awscc_securityagent_agent_space.example "agent_space_id"

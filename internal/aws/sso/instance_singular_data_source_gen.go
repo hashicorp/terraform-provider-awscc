@@ -43,7 +43,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The SSO Instance ARN that is returned upon creation of the Identity Center (SSO) Instance",
 		//	  "maxLength": 1224,
 		//	  "minLength": 10,
-		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$",
+		//	  "pattern": "^arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$",
 		//	  "type": "string"
 		//	}
 		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

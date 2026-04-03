@@ -149,6 +149,11 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 		//	        "SourceLogsConfiguration": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
+		//	            "DataSourceSelectionCriteria": {
+		//	              "maxLength": 2000,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
 		//	            "EncryptedLogGroupStrategy": {
 		//	              "enum": [
 		//	                "ALLOW",
@@ -163,7 +168,6 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 		//	            }
 		//	          },
 		//	          "required": [
-		//	            "LogGroupSelectionCriteria",
 		//	            "EncryptedLogGroupStrategy"
 		//	          ],
 		//	          "type": "object"
@@ -354,6 +358,17 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 						// Property: SourceLogsConfiguration
 						"source_logs_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DataSourceSelectionCriteria
+								"data_source_selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2000),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: EncryptedLogGroupStrategy
 								"encrypted_log_group_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
@@ -375,7 +390,6 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 2000),
-										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -528,6 +542,7 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account":                                 "Account",
 		"backup_configuration":                    "BackupConfiguration",
+		"data_source_selection_criteria":          "DataSourceSelectionCriteria",
 		"destination":                             "Destination",
 		"destination_logs_configuration":          "DestinationLogsConfiguration",
 		"encrypted_log_group_strategy":            "EncryptedLogGroupStrategy",
