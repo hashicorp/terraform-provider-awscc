@@ -446,6 +446,15 @@
         }
       }
     },
+    "ManagedInstancesLocalStorageConfiguration": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "UseLocalStorage": {
+          "type": "boolean"
+        }
+      }
+    },
     "ManagedInstancesStorageConfiguration": {
       "additionalProperties": false,
       "type": "object",
@@ -502,6 +511,9 @@
         "FipsEnabled": {
           "type": "boolean"
         },
+        "InstanceMetadataTagsPropagation": {
+          "type": "boolean"
+        },
         "StorageConfiguration": {
           "$ref": "#/definitions/ManagedInstancesStorageConfiguration"
         },
@@ -513,6 +525,9 @@
         },
         "CapacityReservations": {
           "$ref": "#/definitions/CapacityReservationRequest"
+        },
+        "LocalStorageConfiguration": {
+          "$ref": "#/definitions/ManagedInstancesLocalStorageConfiguration"
         },
         "Monitoring": {
           "$ref": "#/definitions/ManagedInstancesMonitoringOptions"

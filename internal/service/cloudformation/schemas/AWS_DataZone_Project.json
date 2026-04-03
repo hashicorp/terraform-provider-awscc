@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::DataZone::Project",
-  "description": "Amazon DataZone projects are business use case?based groupings of people, assets (data), and tools used to simplify access to the AWS analytics.",
+  "description": "Amazon DataZone projects are business use case\u2013based groupings of people, assets (data), and tools used to simplify access to the AWS analytics.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-datazone",
   "definitions": {
     "EnvironmentConfigurationUserParameter": {
@@ -145,6 +145,28 @@
         }
       },
       "additionalProperties": false
+    },
+    "ResourceTag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "pattern": "^[\\w \\.:/=+@-]+$",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "Value": {
+          "type": "string",
+          "pattern": "^[\\w \\.:/=+@-]*$",
+          "maxLength": 256,
+          "minLength": 0
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -223,6 +245,13 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/EnvironmentConfigurationUserParameter"
+      }
+    },
+    "ResourceTags": {
+      "description": "The resource tags of the project.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ResourceTag"
       }
     }
   },

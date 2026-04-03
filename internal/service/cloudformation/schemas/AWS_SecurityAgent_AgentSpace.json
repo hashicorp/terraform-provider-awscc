@@ -1,0 +1,366 @@
+{
+  "typeName": "AWS::SecurityAgent::AgentSpace",
+  "description": "Resource Type definition for AWS::SecurityAgent::AgentSpace",
+  "additionalProperties": false,
+  "properties": {
+    "AgentSpaceId": {
+      "type": "string",
+      "description": "Unique identifier of the agent space"
+    },
+    "Name": {
+      "type": "string",
+      "description": "Name of the agent space"
+    },
+    "Description": {
+      "type": "string",
+      "description": "Description of the agent space"
+    },
+    "AwsResources": {
+      "$ref": "#/definitions/AWSResources"
+    },
+    "CodeReviewSettings": {
+      "$ref": "#/definitions/CodeReviewSettings"
+    },
+    "KmsKeyId": {
+      "type": "string",
+      "description": "Identifier of the KMS key used to encrypt data. Can be a key ID, key ARN, alias name, or alias ARN. If not specified, an AWS managed key is used.",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "IntegratedResources": {
+      "$ref": "#/definitions/IntegratedResources"
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "Timestamp when the agent space was created",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "Timestamp when the agent space was last updated",
+      "format": "date-time"
+    },
+    "TargetDomainIds": {
+      "type": "array",
+      "description": "List of target domain identifiers registered with the agent space",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags for the agent space",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
+    "AWSResources": {
+      "type": "object",
+      "description": "AWS resource configuration",
+      "additionalProperties": false,
+      "properties": {
+        "Vpcs": {
+          "type": "array",
+          "description": "VPC configurations",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/VpcConfig"
+          }
+        },
+        "LogGroups": {
+          "type": "array",
+          "description": "CloudWatch log group ARNs",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "S3Buckets": {
+          "type": "array",
+          "description": "S3 bucket ARNs",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "SecretArns": {
+          "type": "array",
+          "description": "SecretsManager secret ARNs used to store tester credentials for pentests",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "LambdaFunctionArns": {
+          "type": "array",
+          "description": "Lambda function ARNs used to retrieve tester credentials for pentests",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "IamRoles": {
+          "type": "array",
+          "description": "IAM role ARNs",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VpcConfig": {
+      "type": "object",
+      "description": "Customer VPC configuration that the security testing environment accesses",
+      "additionalProperties": false,
+      "properties": {
+        "VpcArn": {
+          "type": "string",
+          "description": "ARN of the customer VPC"
+        },
+        "SecurityGroupArns": {
+          "type": "array",
+          "description": "List of security group ARNs in the customer VPC",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "SubnetArns": {
+          "type": "array",
+          "description": "List of subnet ARNs in the customer VPC",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CodeReviewSettings": {
+      "type": "object",
+      "description": "Details of code review settings",
+      "additionalProperties": false,
+      "properties": {
+        "ControlsScanning": {
+          "type": "boolean",
+          "description": "Whether Controls are utilized for code review analysis"
+        },
+        "GeneralPurposeScanning": {
+          "type": "boolean",
+          "description": "Whether general purpose analysis is performed for code review"
+        }
+      },
+      "required": [
+        "ControlsScanning",
+        "GeneralPurposeScanning"
+      ]
+    },
+    "IntegratedResources": {
+      "type": "array",
+      "description": "Integrated Resources configuration",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/IntegratedResource"
+      }
+    },
+    "IntegratedResource": {
+      "type": "object",
+      "description": "Integrated Resource details",
+      "additionalProperties": false,
+      "properties": {
+        "Integration": {
+          "type": "string",
+          "description": "Unique identifier of the Provider Integration"
+        },
+        "ProviderResources": {
+          "type": "array",
+          "description": "List of selected Resources from the Integration",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/ProviderResource"
+          }
+        }
+      },
+      "required": [
+        "Integration",
+        "ProviderResources"
+      ]
+    },
+    "ProviderResource": {
+      "type": "object",
+      "description": "Selected Resource (eg: Code Repository) from an Integration",
+      "additionalProperties": false,
+      "properties": {
+        "GitHubRepository": {
+          "$ref": "#/definitions/GitHubRepositoryResource"
+        },
+        "GitHubCapabilities": {
+          "$ref": "#/definitions/GitHubCapabilitiesResource"
+        }
+      },
+      "allOf": [
+        {
+          "oneOf": [
+            {
+              "required": [
+                "GitHubRepository"
+              ]
+            }
+          ]
+        },
+        {
+          "oneOf": [
+            {
+              "required": [
+                "GitHubCapabilities"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "GitHubRepositoryResource": {
+      "type": "object",
+      "description": "GitHub repository details",
+      "additionalProperties": false,
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "GitHub repository name"
+        },
+        "Owner": {
+          "type": "string",
+          "description": "GitHub repository owner (user or organization)"
+        }
+      },
+      "required": [
+        "Name",
+        "Owner"
+      ]
+    },
+    "GitHubCapabilitiesResource": {
+      "type": "object",
+      "description": "GitHub repository capabilities",
+      "additionalProperties": false,
+      "properties": {
+        "LeaveComments": {
+          "type": "boolean",
+          "description": "Enables Code Review in the repository"
+        },
+        "RemediateCode": {
+          "type": "boolean",
+          "description": "Enables creation of pull requests with automated fixes"
+        }
+      },
+      "required": [
+        "LeaveComments",
+        "RemediateCode"
+      ]
+    }
+  },
+  "required": [
+    "Name"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "securityagent:TagResource",
+      "securityagent:UntagResource",
+      "securityagent:ListTagsForResource"
+    ]
+  },
+  "primaryIdentifier": [
+    "/properties/AgentSpaceId"
+  ],
+  "createOnlyProperties": [
+    "/properties/KmsKeyId"
+  ],
+  "readOnlyProperties": [
+    "/properties/AgentSpaceId",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "securityagent:CreateAgentSpace",
+        "securityagent:BatchGetAgentSpaces",
+        "securityagent:TagResource",
+        "securityagent:ListTagsForResource",
+        "securityagent:UpdateIntegratedResources",
+        "securityagent:ListIntegratedResources",
+        "iam:PassRole",
+        "kms:DescribeKey",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:Decrypt",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "securityagent:BatchGetAgentSpaces",
+        "securityagent:ListTagsForResource",
+        "kms:Decrypt",
+        "securityagent:ListIntegratedResources"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "securityagent:UpdateAgentSpace",
+        "securityagent:BatchGetAgentSpaces",
+        "securityagent:TagResource",
+        "securityagent:UntagResource",
+        "securityagent:ListTagsForResource",
+        "securityagent:UpdateIntegratedResources",
+        "securityagent:ListIntegratedResources",
+        "iam:PassRole",
+        "kms:Decrypt"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "securityagent:DeleteAgentSpace",
+        "securityagent:BatchGetAgentSpaces",
+        "kms:Decrypt"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "securityagent:ListAgentSpaces"
+      ]
+    }
+  }
+}

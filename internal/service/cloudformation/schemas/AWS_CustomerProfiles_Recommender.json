@@ -1,0 +1,322 @@
+{
+  "typeName": "AWS::CustomerProfiles::Recommender",
+  "description": "Resource Type definition for AWS::CustomerProfiles::Recommender",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-customer-profiles.git",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "pattern": "",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "DomainName": {
+      "description": "The name of the domain for which the recommender will be created",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]+$",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "RecommenderRecipeName": {
+      "description": "The name of the recommender recipe.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "RecommenderConfig": {
+      "type": "object",
+      "description": "Configuration for the recommender",
+      "properties": {
+        "EventsConfig": {
+          "$ref": "#/definitions/EventsConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "EventsConfig": {
+      "type": "object",
+      "description": "Configuration for events used in the recommender",
+      "properties": {
+        "EventParametersList": {
+          "type": "array",
+          "description": "List of event parameters with their value thresholds",
+          "items": {
+            "$ref": "#/definitions/EventParameters"
+          },
+          "minItems": 1,
+          "maxItems": 10
+        }
+      },
+      "required": [
+        "EventParametersList"
+      ],
+      "additionalProperties": false
+    },
+    "EventParameters": {
+      "type": "object",
+      "description": "Event parameters with type and value threshold",
+      "properties": {
+        "EventType": {
+          "type": "string",
+          "description": "The type of event",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "EventValueThreshold": {
+          "type": "number",
+          "description": "The threshold of the event type. Only events with a value greater or equal to this threshold will be considered for solution creation."
+        }
+      },
+      "required": [
+        "EventType"
+      ],
+      "additionalProperties": false
+    },
+    "RecommenderName": {
+      "description": "The name of the recommender",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]+$",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "RecommenderStatus": {
+      "description": "The status of the recommender",
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "IN_PROGRESS",
+        "STOPPING",
+        "STARTING",
+        "ACTIVE",
+        "INACTIVE",
+        "FAILED",
+        "DELETING"
+      ]
+    },
+    "RecommenderUpdate": {
+      "type": "object",
+      "description": "Information about the latest recommender update",
+      "properties": {
+        "RecommenderConfig": {
+          "$ref": "#/definitions/RecommenderConfig"
+        },
+        "Status": {
+          "$ref": "#/definitions/RecommenderStatus"
+        },
+        "CreationDateTime": {
+          "type": "string",
+          "description": "The timestamp of when the update was created"
+        },
+        "LastUpdatedDateTime": {
+          "type": "string",
+          "description": "The timestamp of when the update was last modified"
+        },
+        "FailureReason": {
+          "type": "string",
+          "description": "The reason for update failure"
+        }
+      },
+      "additionalProperties": false
+    },
+    "TrainingMetrics": {
+      "type": "object",
+      "properties": {
+        "Time": {
+          "type": "string",
+          "description": "Timestamp of the training metrics"
+        },
+        "Metrics": {
+          "type": "object",
+          "description": "Training metrics by type",
+          "properties": {
+            "hit": {
+              "type": "number"
+            },
+            "coverage": {
+              "type": "number"
+            },
+            "recall": {
+              "type": "number"
+            },
+            "popularity": {
+              "type": "number"
+            },
+            "freshness": {
+              "type": "number"
+            },
+            "similarity": {
+              "type": "number"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "Description": {
+      "description": "The description of the recommender.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    }
+  },
+  "properties": {
+    "DomainName": {
+      "$ref": "#/definitions/DomainName"
+    },
+    "RecommenderName": {
+      "$ref": "#/definitions/RecommenderName"
+    },
+    "RecommenderRecipeName": {
+      "$ref": "#/definitions/RecommenderRecipeName"
+    },
+    "RecommenderConfig": {
+      "$ref": "#/definitions/RecommenderConfig"
+    },
+    "Description": {
+      "$ref": "#/definitions/Description"
+    },
+    "RecommenderArn": {
+      "description": "The Amazon Resource Name (ARN) of the recommender.",
+      "type": "string",
+      "pattern": "^arn:([a-z\\d-]+):profile:.*:.*:.+$",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "Status": {
+      "$ref": "#/definitions/RecommenderStatus"
+    },
+    "CreatedAt": {
+      "description": "The timestamp of when the recommender was created.",
+      "type": "string"
+    },
+    "LastUpdatedAt": {
+      "description": "The timestamp of when the recommender was last updated.",
+      "type": "string"
+    },
+    "FailureReason": {
+      "description": "The reason for recommender failure.",
+      "type": "string"
+    },
+    "LatestRecommenderUpdate": {
+      "$ref": "#/definitions/RecommenderUpdate"
+    },
+    "TrainingMetrics": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/TrainingMetrics"
+      },
+      "maxItems": 5
+    },
+    "Tags": {
+      "description": "The tags used to organize, track, or control access for this resource.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 50
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "DomainName",
+    "RecommenderName",
+    "RecommenderRecipeName"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "profile:TagResource",
+      "profile:UntagResource",
+      "profile:ListTagsForResource"
+    ]
+  },
+  "createOnlyProperties": [
+    "/properties/DomainName",
+    "/properties/RecommenderName",
+    "/properties/RecommenderRecipeName"
+  ],
+  "readOnlyProperties": [
+    "/properties/RecommenderArn",
+    "/properties/Status",
+    "/properties/CreatedAt",
+    "/properties/LastUpdatedAt",
+    "/properties/FailureReason",
+    "/properties/LatestRecommenderUpdate",
+    "/properties/TrainingMetrics"
+  ],
+  "primaryIdentifier": [
+    "/properties/DomainName",
+    "/properties/RecommenderName"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "profile:CreateRecommender",
+        "profile:GetRecommender",
+        "profile:TagResource",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "profile:GetRecommender",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "profile:GetRecommender",
+        "profile:UpdateRecommender",
+        "profile:UntagResource",
+        "profile:TagResource",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "profile:DeleteRecommender",
+        "profile:GetRecommender"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "DomainName": {
+            "$ref": "resource-schema.json#/properties/DomainName"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "permissions": [
+        "profile:ListRecommenders",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
+      ]
+    }
+  }
+}
