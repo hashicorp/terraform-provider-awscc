@@ -41,7 +41,7 @@ auto - Amazon Redshift determines whether to use AQUA.
 - `cluster_version` (String) The version of the Amazon Redshift engine software that you want to deploy on the cluster.The version selected runs on all the nodes in the cluster.
 - `db_name` (String) The name of the first database to be created when the cluster is created. To create additional databases after the cluster is created, connect to the cluster with a SQL client and use SQL commands to create a database.
 - `defer_maintenance` (Boolean) A boolean indicating whether to enable the deferred maintenance window.
-- `defer_maintenance_duration` (Number) An integer indicating the duration of the maintenance window in days. If you specify a duration, you can't specify an end time. The duration must be 45 days or less.
+- `defer_maintenance_duration` (Number) An integer indicating the duration of the maintenance window in days. If you specify a duration, you can't specify an end time. The duration must be 60 days or less.
 - `defer_maintenance_end_time` (String) A timestamp indicating end time for the deferred maintenance window. If you specify an end time, you can't specify a duration.
 - `defer_maintenance_identifier` (String) A unique identifier for the deferred maintenance window.
 - `defer_maintenance_start_time` (String) A timestamp indicating the start time for the deferred maintenance window.

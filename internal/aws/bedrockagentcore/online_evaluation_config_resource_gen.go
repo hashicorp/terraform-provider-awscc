@@ -249,7 +249,14 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 		//	}
 		"execution_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The execution status indicating whether the online evaluation is currently running.",
+			Optional:    true,
 			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/

@@ -116,6 +116,32 @@ func schedulingPolicyDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "Name of Scheduling Policy.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: QuotaSharePolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Quota Share Policy for the Job Queue.",
+		//	  "properties": {
+		//	    "IdleResourceAssignmentStrategy": {
+		//	      "enum": [
+		//	        "FIFO"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"quota_share_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IdleResourceAssignmentStrategy
+				"idle_resource_assignment_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Quota Share Policy for the Job Queue.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -152,15 +178,17 @@ func schedulingPolicyDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithCloudFormationTypeName("AWS::Batch::SchedulingPolicy").WithTerraformTypeName("awscc_batch_scheduling_policy")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                 "Arn",
-		"compute_reservation": "ComputeReservation",
-		"fairshare_policy":    "FairsharePolicy",
-		"name":                "Name",
-		"share_decay_seconds": "ShareDecaySeconds",
-		"share_distribution":  "ShareDistribution",
-		"share_identifier":    "ShareIdentifier",
-		"tags":                "Tags",
-		"weight_factor":       "WeightFactor",
+		"arn":                               "Arn",
+		"compute_reservation":               "ComputeReservation",
+		"fairshare_policy":                  "FairsharePolicy",
+		"idle_resource_assignment_strategy": "IdleResourceAssignmentStrategy",
+		"name":                              "Name",
+		"quota_share_policy":                "QuotaSharePolicy",
+		"share_decay_seconds":               "ShareDecaySeconds",
+		"share_distribution":                "ShareDistribution",
+		"share_identifier":                  "ShareIdentifier",
+		"tags":                              "Tags",
+		"weight_factor":                     "WeightFactor",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -8,6 +8,7 @@ package datazone
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -798,6 +799,22 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        }
 		//	      },
 		//	      "type": "object"
+		//	    },
+		//	    "WorkflowsMwaaProperties": {
+		//	      "additionalProperties": false,
+		//	      "description": "Workflows MWAA Properties Input",
+		//	      "properties": {
+		//	        "MwaaEnvironmentName": {
+		//	          "description": "The name of the MWAA environment.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "WorkflowsServerlessProperties": {
+		//	      "additionalProperties": false,
+		//	      "description": "Workflows Serverless Properties Input",
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -1263,6 +1280,24 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "Spark Glue Properties Input.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: WorkflowsMwaaProperties
+				"workflows_mwaa_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MwaaEnvironmentName
+						"mwaa_environment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the MWAA environment.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Workflows MWAA Properties Input",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: WorkflowsServerlessProperties
+				"workflows_serverless_properties": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  jsontypes.NormalizedType{},
+					Description: "Workflows Serverless Properties Input",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
@@ -1363,6 +1398,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"managed_endpoint_arn":                     "ManagedEndpointArn",
 		"match_criteria":                           "MatchCriteria",
 		"mlflow_properties":                        "MlflowProperties",
+		"mwaa_environment_name":                    "MwaaEnvironmentName",
 		"name":                                     "Name",
 		"number_of_workers":                        "NumberOfWorkers",
 		"o_auth_2_client_application":              "OAuth2ClientApplication",
@@ -1408,6 +1444,8 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"validate_credentials":              "ValidateCredentials",
 		"validate_for_compute_environments": "ValidateForComputeEnvironments",
 		"worker_type":                       "WorkerType",
+		"workflows_mwaa_properties":         "WorkflowsMwaaProperties",
+		"workflows_serverless_properties":   "WorkflowsServerlessProperties",
 		"workgroup_name":                    "WorkgroupName",
 	})
 

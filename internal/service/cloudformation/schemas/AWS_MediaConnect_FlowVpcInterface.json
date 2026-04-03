@@ -5,6 +5,7 @@
   "properties": {
     "FlowArn": {
       "type": "string",
+      "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:flow:[a-zA-Z0-9-]+:[a-zA-Z0-9_-]+$",
       "description": "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow."
     },
     "Name": {
@@ -13,6 +14,7 @@
     },
     "RoleArn": {
       "type": "string",
+      "pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$",
       "description": "Role Arn MediaConnect can assume to create ENIs in customer's account."
     },
     "SecurityGroupIds": {

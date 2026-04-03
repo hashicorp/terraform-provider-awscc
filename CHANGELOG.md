@@ -1,4 +1,84 @@
-## 1.76.0 (Unreleased)
+## 1.79.0 (Unreleased)
+
+## 1.78.0 (April 1, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_apigatewayv2_stage`
+* **New Data Source:** `awscc_apigatewayv2_stages`
+* **New Data Source:** `awscc_appstream_stack`
+* **New Data Source:** `awscc_appstream_stacks`
+* **New Data Source:** `awscc_customerprofiles_recommender`
+* **New Data Source:** `awscc_customerprofiles_recommenders`
+* **New Data Source:** `awscc_novaact_workflow_definition`
+* **New Data Source:** `awscc_omics_configuration`
+* **New Data Source:** `awscc_omics_configurations`
+* **New Data Source:** `awscc_sagemaker_model`
+* **New Data Source:** `awscc_sagemaker_models`
+* **New Data Source:** `awscc_securityagent_agent_space`
+* **New Data Source:** `awscc_securityagent_agent_spaces`
+* **New Data Source:** `awscc_securityagent_application`
+* **New Data Source:** `awscc_securityagent_applications`
+* **New Data Source:** `awscc_securityagent_pentest`
+* **New Data Source:** `awscc_securityagent_target_domain`
+* **New Data Source:** `awscc_securityagent_target_domains`
+* **New List Resource:** `awscc_apigatewayv2_stage`
+* **New List Resource:** `awscc_appstream_stack`
+* **New List Resource:** `awscc_customerprofiles_recommender`
+* **New List Resource:** `awscc_omics_configuration`
+* **New List Resource:** `awscc_sagemaker_model`
+* **New List Resource:** `awscc_securityagent_agent_space`
+* **New List Resource:** `awscc_securityagent_application`
+* **New List Resource:** `awscc_securityagent_target_domain`
+* **New Resource:** `awscc_apigatewayv2_stage`
+* **New Resource:** `awscc_appstream_stack`
+* **New Resource:** `awscc_customerprofiles_recommender`
+* **New Resource:** `awscc_omics_configuration`
+* **New Resource:** `awscc_sagemaker_model`
+* **New Resource:** `awscc_securityagent_agent_space`
+* **New Resource:** `awscc_securityagent_application`
+* **New Resource:** `awscc_securityagent_pentest`
+* **New Resource:** `awscc_securityagent_target_domain`
+
+## 1.77.0 (March 25, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_batch_quota_share`
+* **New Data Source:** `awscc_batch_quota_shares`
+* **New Data Source:** `awscc_ec2_ipam_prefix_list_resolver_target`
+* **New Data Source:** `awscc_ec2_ipam_prefix_list_resolver_targets`
+* **New Data Source:** `awscc_ec2_sql_ha_standby_detected_instance`
+* **New Data Source:** `awscc_ec2_sql_ha_standby_detected_instances`
+* **New Data Source:** `awscc_interconnect_connection`
+* **New Data Source:** `awscc_interconnect_connections`
+* **New Data Source:** `awscc_uxc_account_customization`
+* **New List Resource:** `awscc_batch_quota_share`
+* **New List Resource:** `awscc_ec2_ipam_prefix_list_resolver_target`
+* **New List Resource:** `awscc_ec2_sql_ha_standby_detected_instance`
+* **New List Resource:** `awscc_interconnect_connection`
+* **New Resource:** `awscc_batch_quota_share`
+* **New Resource:** `awscc_ec2_ipam_prefix_list_resolver_target`
+* **New Resource:** `awscc_ec2_sql_ha_standby_detected_instance`
+* **New Resource:** `awscc_interconnect_connection`
+* **New Resource:** `awscc_uxc_account_customization`
+
+## 1.76.0 (March 18, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_elementalinference_feed`
+* **New Data Source:** `awscc_elementalinference_feeds`
+* **New Data Source:** `awscc_glue_catalog`
+* **New Data Source:** `awscc_glue_catalogs`
+* **New Data Source:** `awscc_observabilityadmin_telemetry_enrichment`
+* **New Data Source:** `awscc_observabilityadmin_telemetry_enrichments`
+* **New List Resource:** `awscc_elementalinference_feed`
+* **New List Resource:** `awscc_glue_catalog`
+* **New List Resource:** `awscc_observabilityadmin_telemetry_enrichment`
+* **New Resource:** `awscc_elementalinference_feed`
+* **New Resource:** `awscc_glue_catalog`
+* **New Resource:** `awscc_observabilityadmin_telemetry_enrichment`
 
 ## 1.75.0 (March 11, 2026)
 

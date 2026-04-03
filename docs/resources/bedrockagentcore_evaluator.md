@@ -38,14 +38,32 @@ Resource Type definition for AWS::BedrockAgentCore::Evaluator - Creates a custom
 <a id="nestedatt--evaluator_config"></a>
 ### Nested Schema for `evaluator_config`
 
-Required:
+Optional:
 
+- `code_based` (Attributes) The configuration for code-based evaluation using a Lambda function. (see [below for nested schema](#nestedatt--evaluator_config--code_based))
 - `llm_as_a_judge` (Attributes) The configuration for LLM-as-a-Judge evaluation. (see [below for nested schema](#nestedatt--evaluator_config--llm_as_a_judge))
+
+<a id="nestedatt--evaluator_config--code_based"></a>
+### Nested Schema for `evaluator_config.code_based`
+
+Optional:
+
+- `lambda_config` (Attributes) The Lambda function configuration for code-based evaluation. (see [below for nested schema](#nestedatt--evaluator_config--code_based--lambda_config))
+
+<a id="nestedatt--evaluator_config--code_based--lambda_config"></a>
+### Nested Schema for `evaluator_config.code_based.lambda_config`
+
+Optional:
+
+- `lambda_arn` (String) The ARN of the Lambda function used for evaluation.
+- `lambda_timeout_in_seconds` (Number) The timeout in seconds for the Lambda function invocation.
+
+
 
 <a id="nestedatt--evaluator_config--llm_as_a_judge"></a>
 ### Nested Schema for `evaluator_config.llm_as_a_judge`
 
-Required:
+Optional:
 
 - `instructions` (String) The evaluation instructions that guide the language model in assessing agent performance.
 - `model_config` (Attributes) The model configuration that specifies which foundation model to use for evaluation. (see [below for nested schema](#nestedatt--evaluator_config--llm_as_a_judge--model_config))
@@ -54,21 +72,18 @@ Required:
 <a id="nestedatt--evaluator_config--llm_as_a_judge--model_config"></a>
 ### Nested Schema for `evaluator_config.llm_as_a_judge.model_config`
 
-Required:
+Optional:
 
 - `bedrock_evaluator_model_config` (Attributes) The configuration for using Amazon Bedrock models in evaluator assessments. (see [below for nested schema](#nestedatt--evaluator_config--llm_as_a_judge--model_config--bedrock_evaluator_model_config))
 
 <a id="nestedatt--evaluator_config--llm_as_a_judge--model_config--bedrock_evaluator_model_config"></a>
 ### Nested Schema for `evaluator_config.llm_as_a_judge.model_config.bedrock_evaluator_model_config`
 
-Required:
-
-- `model_id` (String) The identifier of the Amazon Bedrock model to use for evaluation.
-
 Optional:
 
 - `additional_model_request_fields` (String) Additional model-specific request fields.
 - `inference_config` (Attributes) The inference configuration parameters that control model behavior during evaluation. (see [below for nested schema](#nestedatt--evaluator_config--llm_as_a_judge--model_config--bedrock_evaluator_model_config--inference_config))
+- `model_id` (String) The identifier of the Amazon Bedrock model to use for evaluation.
 
 <a id="nestedatt--evaluator_config--llm_as_a_judge--model_config--bedrock_evaluator_model_config--inference_config"></a>
 ### Nested Schema for `evaluator_config.llm_as_a_judge.model_config.bedrock_evaluator_model_config.inference_config`

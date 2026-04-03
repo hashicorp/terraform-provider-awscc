@@ -1,0 +1,1 @@
+$ terraform import awscc_observabilityadmin_telemetry_enrichment.example "scope"

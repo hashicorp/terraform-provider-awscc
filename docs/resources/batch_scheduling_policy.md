@@ -49,6 +49,7 @@ output "scheduling_policy_arn" {
 
 - `fairshare_policy` (Attributes) Fair Share Policy for the Job Queue. (see [below for nested schema](#nestedatt--fairshare_policy))
 - `name` (String) Name of Scheduling Policy.
+- `quota_share_policy` (Attributes) Quota Share Policy for the Job Queue. (see [below for nested schema](#nestedatt--quota_share_policy))
 - `tags` (Map of String) A key-value pair to associate with a resource.
 
 ### Read-Only
@@ -72,6 +73,15 @@ Optional:
 
 - `share_identifier` (String)
 - `weight_factor` (Number)
+
+
+
+<a id="nestedatt--quota_share_policy"></a>
+### Nested Schema for `quota_share_policy`
+
+Optional:
+
+- `idle_resource_assignment_strategy` (String)
 
 ## Import
 

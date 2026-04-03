@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::MediaConnect::FlowSource",
-  "description": "Resource schema for AWS::MediaConnect::FlowSource",
+  "description": "Resource Type definition for AWS::MediaConnect::FlowSource",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-mediaconnect.git",
   "definitions": {
     "Encryption": {
@@ -44,10 +44,12 @@
         },
         "RoleArn": {
           "type": "string",
+          "pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$",
           "description": "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity)."
         },
         "SecretArn": {
           "type": "string",
+          "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
           "description": " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption."
         },
         "Url": {
@@ -66,6 +68,7 @@
       "properties": {
         "BridgeArn": {
           "type": "string",
+          "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:bridge:[a-zA-Z0-9-]+:[a-zA-Z0-9_-]+$",
           "description": "The ARN of the bridge feeding this flow."
         },
         "VpcInterfaceAttachment": {
@@ -88,28 +91,47 @@
         }
       },
       "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
     "FlowArn": {
       "type": "string",
+      "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:flow:[a-zA-Z0-9-]+:[a-zA-Z0-9_-]+$",
       "description": "The ARN of the flow."
     },
     "SourceArn": {
       "type": "string",
+      "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:source:[a-zA-Z0-9-]+:[a-zA-Z0-9_-]+$",
       "description": "The ARN of the source."
     },
     "Decryption": {
       "$ref": "#/definitions/Encryption",
       "description": "The type of encryption that is used on the content ingested from this source."
     },
+    "EntitlementArn": {
+      "type": "string",
+      "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:entitlement:[a-zA-Z0-9-]+:[a-zA-Z0-9_-]+$",
+      "description": "The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow."
+    },
     "Description": {
       "type": "string",
       "description": "A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account."
-    },
-    "EntitlementArn": {
-      "type": "string",
-      "description": "The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow."
     },
     "GatewayBridgeSource": {
       "$ref": "#/definitions/GatewayBridgeSource",
@@ -175,6 +197,14 @@
       "type": "integer",
       "description": "Source port for SRT-caller protocol."
     },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "description": "Key-value pairs that can be used to tag and organize this flow source.",
+      "insertionOrder": false
+    },
     "VpcInterfaceName": {
       "type": "string",
       "description": "The name of the VPC Interface this Source is configured with."
@@ -186,6 +216,7 @@
   },
   "additionalProperties": false,
   "required": [
+    "FlowArn",
     "Name",
     "Description"
   ],
@@ -195,30 +226,61 @@
     "/properties/SourceIngestPort"
   ],
   "createOnlyProperties": [
-    "/properties/Name"
+    "/properties/FlowArn",
+    "/properties/Name",
+    "/properties/Protocol"
+  ],
+  "deprecatedProperties": [
+    "/properties/EntitlementArn",
+    "/properties/SenderIpAddress",
+    "/properties/SenderControlPort",
+    "/properties/Decryption/ResourceId",
+    "/properties/Decryption/ConstantInitializationVector",
+    "/properties/Decryption/DeviceId",
+    "/properties/Decryption/Region",
+    "/properties/Decryption/Url"
   ],
   "primaryIdentifier": [
     "/properties/SourceArn"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "mediaconnect:TagResource",
+      "mediaconnect:UntagResource",
+      "mediaconnect:ListTagsForResource"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
         "mediaconnect:CreateFlow",
         "mediaconnect:DescribeFlow",
         "mediaconnect:AddFlowSources",
+        "mediaconnect:TagResource",
+        "mediaconnect:ListTagsForResource",
         "iam:PassRole"
       ]
     },
     "read": {
       "permissions": [
         "mediaconnect:DescribeFlow",
-        "mediaconnect:ListFlows"
+        "mediaconnect:ListFlows",
+        "mediaconnect:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
         "mediaconnect:DescribeFlow",
-        "mediaconnect:UpdateFlowSource"
+        "mediaconnect:UpdateFlowSource",
+        "mediaconnect:TagResource",
+        "mediaconnect:UntagResource",
+        "mediaconnect:ListTagsForResource",
+        "iam:PassRole"
       ]
     },
     "delete": {
@@ -232,7 +294,17 @@
       "permissions": [
         "mediaconnect:DescribeFlow",
         "mediaconnect:ListFlows"
-      ]
+      ],
+      "handlerSchema": {
+        "properties": {
+          "FlowArn": {
+            "$ref": "resource-schema.json#/properties/FlowArn"
+          }
+        },
+        "required": [
+          "FlowArn"
+        ]
+      }
     }
   }
 }

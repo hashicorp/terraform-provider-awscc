@@ -2,12 +2,12 @@
 page_title: "awscc_datazone_project Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Amazon DataZone projects are business use case?based groupings of people, assets (data), and tools used to simplify access to the AWS analytics.
+  Amazon DataZone projects are business use case–based groupings of people, assets (data), and tools used to simplify access to the AWS analytics.
 ---
 
 # awscc_datazone_project (Resource)
 
-Amazon DataZone projects are business use case?based groupings of people, assets (data), and tools used to simplify access to the AWS analytics.
+Amazon DataZone projects are business use case–based groupings of people, assets (data), and tools used to simplify access to the AWS analytics.
 
 ## Example Usage
 
@@ -46,6 +46,7 @@ resource "awscc_datazone_domain" "example" {
 - `glossary_terms` (List of String) The glossary terms that can be used in this Amazon DataZone project.
 - `project_profile_id` (String) The project profile ID.
 - `project_profile_version` (String) The project profile version to which the project should be updated. You can only specify the following string for this parameter: latest.
+- `resource_tags` (Attributes List) The resource tags of the project. (see [below for nested schema](#nestedatt--resource_tags))
 - `user_parameters` (Attributes List) The user parameters of the project. (see [below for nested schema](#nestedatt--user_parameters))
 
 ### Read-Only
@@ -57,6 +58,15 @@ resource "awscc_datazone_domain" "example" {
 - `last_updated_at` (String) The timestamp of when the project was last updated.
 - `project_id` (String) The ID of the Amazon DataZone project.
 - `project_status` (String) The status of the project.
+
+<a id="nestedatt--resource_tags"></a>
+### Nested Schema for `resource_tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
+
 
 <a id="nestedatt--user_parameters"></a>
 ### Nested Schema for `user_parameters`

@@ -1,0 +1,1 @@
+$ terraform import awscc_elementalinference_feed.example "id"

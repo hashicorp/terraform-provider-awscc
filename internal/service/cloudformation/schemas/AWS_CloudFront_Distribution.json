@@ -241,7 +241,7 @@
         },
         "OriginMtlsConfig": {
           "$ref": "#/definitions/OriginMtlsConfig",
-          "description": ""
+          "description": "Configures mutual TLS authentication between CloudFront and your origin server."
         }
       },
       "required": [
@@ -425,7 +425,7 @@
         },
         "ConnectionFunctionAssociation": {
           "$ref": "#/definitions/ConnectionFunctionAssociation",
-          "description": ""
+          "description": "The distribution's connection function association."
         },
         "ContinuousDeploymentPolicyId": {
           "type": "string",
@@ -519,7 +519,7 @@
         },
         "ViewerMtlsConfig": {
           "$ref": "#/definitions/ViewerMtlsConfig",
-          "description": ""
+          "description": "The distribution's viewer mTLS configuration."
         },
         "ViewerCertificate": {
           "$ref": "#/definitions/ViewerCertificate",
@@ -921,14 +921,15 @@
       "additionalProperties": false,
       "properties": {
         "ClientCertificateArn": {
-          "type": "string"
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the client certificate stored in AWS Certificate Manager (ACM) that CloudFront uses to authenticate with your origin using Mutual TLS."
         }
       },
       "required": [
         "ClientCertificateArn"
       ],
       "type": "object",
-      "description": ""
+      "description": "Configures mutual TLS authentication between CloudFront and your origin server."
     },
     "OriginShield": {
       "additionalProperties": false,
@@ -1062,33 +1063,37 @@
       "additionalProperties": false,
       "properties": {
         "Id": {
-          "type": "string"
+          "type": "string",
+          "description": "The association's ID."
         }
       },
       "required": [
         "Id"
       ],
       "type": "object",
-      "description": ""
+      "description": "A connection function association."
     },
     "TrustStoreConfig": {
       "additionalProperties": false,
       "properties": {
         "TrustStoreId": {
-          "type": "string"
+          "type": "string",
+          "description": "The trust store ID."
         },
         "AdvertiseTrustStoreCaNames": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "The configuration to use to advertise trust store CA names."
         },
         "IgnoreCertificateExpiry": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "The configuration to use to ignore certificate expiration."
         }
       },
       "required": [
         "TrustStoreId"
       ],
       "type": "object",
-      "description": ""
+      "description": "A trust store configuration."
     },
     "ViewerCertificate": {
       "additionalProperties": false,
@@ -1122,14 +1127,16 @@
       "properties": {
         "Mode": {
           "$ref": "#/definitions/ViewerMtlsMode",
-          "default": "required"
+          "default": "required",
+          "description": "The viewer mTLS mode."
         },
         "TrustStoreConfig": {
-          "$ref": "#/definitions/TrustStoreConfig"
+          "$ref": "#/definitions/TrustStoreConfig",
+          "description": "The trust store configuration associated with the viewer mTLS configuration."
         }
       },
       "type": "object",
-      "description": ""
+      "description": "A viewer mTLS configuration."
     },
     "ViewerMtlsMode": {
       "enum": [
@@ -1153,7 +1160,7 @@
         },
         "OwnerAccountId": {
           "type": "string",
-          "description": ""
+          "description": "The account ID of the AWS-account that owns the VPC origin."
         },
         "VpcOriginId": {
           "type": "string",

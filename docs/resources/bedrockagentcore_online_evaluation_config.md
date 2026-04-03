@@ -26,12 +26,12 @@ Resource Type definition for AWS::BedrockAgentCore::OnlineEvaluationConfig - Cre
 ### Optional
 
 - `description` (String) The description of the online evaluation configuration.
+- `execution_status` (String) The execution status indicating whether the online evaluation is currently running.
 - `tags` (Attributes List) A list of tags to assign to the online evaluation configuration. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `created_at` (String) The timestamp when the online evaluation configuration was created.
-- `execution_status` (String) The execution status indicating whether the online evaluation is currently running.
 - `id` (String) Uniquely identifies the resource.
 - `online_evaluation_config_arn` (String) The Amazon Resource Name (ARN) of the online evaluation configuration.
 - `online_evaluation_config_id` (String) The unique identifier of the online evaluation configuration.
