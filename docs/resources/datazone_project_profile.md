@@ -21,10 +21,13 @@ Definition of AWS::DataZone::ProjectProfile Resource Type
 
 ### Optional
 
+- `allow_custom_project_resource_tags` (Boolean)
 - `description` (String)
 - `domain_identifier` (String)
 - `domain_unit_identifier` (String)
 - `environment_configurations` (Attributes List) (see [below for nested schema](#nestedatt--environment_configurations))
+- `project_resource_tags` (Attributes List) (see [below for nested schema](#nestedatt--project_resource_tags))
+- `project_resource_tags_description` (String)
 - `status` (String)
 - `use_default_configurations` (Boolean)
 
@@ -96,6 +99,18 @@ Optional:
 
 - `is_editable` (Boolean)
 - `name` (String)
+- `value` (String)
+
+
+
+
+<a id="nestedatt--project_resource_tags"></a>
+### Nested Schema for `project_resource_tags`
+
+Optional:
+
+- `is_value_editable` (Boolean)
+- `key` (String)
 - `value` (String)
 
 ## Import

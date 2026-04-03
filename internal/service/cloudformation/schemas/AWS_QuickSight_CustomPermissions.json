@@ -1,27 +1,747 @@
 {
-  "tagging": {
-    "permissions": [
-      "quicksight:TagResource",
-      "quicksight:UntagResource",
-      "quicksight:ListTagsForResource"
-    ],
-    "taggable": true,
-    "tagOnCreate": true,
-    "tagUpdatable": true,
-    "tagProperty": "/properties/Tags",
-    "cloudFormationSystemTags": false
-  },
-  "handlers": {
-    "read": {
-      "permissions": [
-        "quicksight:DescribeCustomPermissions",
-        "quicksight:ListTagsForResource"
+  "typeName": "AWS::QuickSight::CustomPermissions",
+  "description": "Definition of the AWS::QuickSight::CustomPermissions Resource Type.",
+  "definitions": {
+    "Capabilities": {
+      "type": "object",
+      "properties": {
+        "ExportToCsv": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ExportToExcel": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ExportToPdf": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "PrintReports": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateThemes": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "AddOrRunAnomalyDetectionForAnalyses": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareAnalyses": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateDatasets": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareDatasets": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "SubscribeDashboardEmailReports": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateDashboardEmailReports": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareDashboards": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateThresholdAlerts": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "RenameSharedFolders": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateSharedFolders": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateDataSources": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareDataSources": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ViewAccountSPICECapacity": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateSPICEDataset": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ExportToPdfInScheduledReports": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ExportToCsvInScheduledReports": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ExportToExcelInScheduledReports": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "IncludeContentInScheduledReportsEmail": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "Dashboard": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "Analysis": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "Automate": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "Flow": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "PublishWithoutApproval": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseBedrockModels": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "PerformFlowUiTask": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ApproveFlowShareRequests": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseAgentWebSearch": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "KnowledgeBase": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateKnowledgeBases": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareKnowledgeBases": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "Action": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "GenericHTTPAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateGenericHTTPAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareGenericHTTPAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseGenericHTTPAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "AsanaAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateAsanaAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareAsanaAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseAsanaAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "SlackAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateSlackAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareSlackAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseSlackAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ServiceNowAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateServiceNowAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareServiceNowAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseServiceNowAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "SalesforceAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateSalesforceAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareSalesforceAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseSalesforceAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "MSExchangeAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateMSExchangeAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareMSExchangeAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseMSExchangeAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "PagerDutyAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdatePagerDutyAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "SharePagerDutyAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UsePagerDutyAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "JiraAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateJiraAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareJiraAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseJiraAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ConfluenceAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateConfluenceAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareConfluenceAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseConfluenceAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "OneDriveAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateOneDriveAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareOneDriveAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseOneDriveAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "SharePointAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateSharePointAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareSharePointAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseSharePointAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "MSTeamsAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateMSTeamsAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareMSTeamsAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseMSTeamsAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "GoogleCalendarAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateGoogleCalendarAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareGoogleCalendarAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseGoogleCalendarAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ZendeskAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateZendeskAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareZendeskAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseZendeskAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "SmartsheetAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateSmartsheetAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareSmartsheetAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseSmartsheetAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "SAPBusinessPartnerAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateSAPBusinessPartnerAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareSAPBusinessPartnerAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseSAPBusinessPartnerAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "SAPProductMasterDataAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateSAPProductMasterDataAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareSAPProductMasterDataAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseSAPProductMasterDataAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "SAPPhysicalInventoryAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateSAPPhysicalInventoryAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareSAPPhysicalInventoryAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseSAPPhysicalInventoryAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "SAPBillOfMaterialAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateSAPBillOfMaterialAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareSAPBillOfMaterialAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseSAPBillOfMaterialAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "SAPMaterialStockAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateSAPMaterialStockAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareSAPMaterialStockAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseSAPMaterialStockAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "FactSetAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateFactSetAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareFactSetAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseFactSetAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "AmazonSThreeAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateAmazonSThreeAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareAmazonSThreeAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseAmazonSThreeAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "TextractAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateTextractAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareTextractAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseTextractAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ComprehendAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateComprehendAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareComprehendAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseComprehendAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ComprehendMedicalAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateComprehendMedicalAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareComprehendMedicalAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseComprehendMedicalAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "AmazonBedrockARSAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateAmazonBedrockARSAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareAmazonBedrockARSAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseAmazonBedrockARSAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "AmazonBedrockFSAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateAmazonBedrockFSAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareAmazonBedrockFSAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseAmazonBedrockFSAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "AmazonBedrockKRSAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateAmazonBedrockKRSAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareAmazonBedrockKRSAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseAmazonBedrockKRSAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "MCPAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateMCPAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareMCPAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseMCPAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "OpenAPIAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateOpenAPIAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareOpenAPIAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseOpenAPIAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "SandPGMIAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateSandPGMIAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareSandPGMIAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseSandPGMIAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "SandPGlobalEnergyAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateSandPGlobalEnergyAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareSandPGlobalEnergyAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseSandPGlobalEnergyAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "BambooHRAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateBambooHRAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareBambooHRAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseBambooHRAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "BoxAgentAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateBoxAgentAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareBoxAgentAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseBoxAgentAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CanvaAgentAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateCanvaAgentAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareCanvaAgentAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseCanvaAgentAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "GithubAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateGithubAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareGithubAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseGithubAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "NotionAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateNotionAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareNotionAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseNotionAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "LinearAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateLinearAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareLinearAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseLinearAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "HuggingFaceAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateHuggingFaceAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareHuggingFaceAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseHuggingFaceAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "MondayAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateMondayAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareMondayAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseMondayAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "HubspotAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateHubspotAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareHubspotAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseHubspotAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "IntercomAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateIntercomAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareIntercomAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseIntercomAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "NewRelicAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateNewRelicAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareNewRelicAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "UseNewRelicAction": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "Space": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ChatAgent": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateChatAgents": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "Research": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "Extension": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ManageSharedFolders": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "EditVisualWithQ": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "BuildCalculatedFieldWithQ": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateDashboardExecutiveSummaryWithQ": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "Topic": {
+          "$ref": "#/definitions/CapabilityState"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CapabilityState": {
+      "type": "string",
+      "enum": [
+        "DENY"
       ]
     },
+    "Tag": {
+      "type": "object",
+      "description": "<p>The key or keys of the key-value pairs for the resource tag or tags assigned to the\n            resource.</p>",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1,
+          "description": "<p>Tag key.</p>"
+        },
+        "Value": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1,
+          "description": "<p>Tag value.</p>"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string"
+    },
+    "AwsAccountId": {
+      "type": "string",
+      "maxLength": 12,
+      "minLength": 12,
+      "pattern": "^[0-9]{12}$"
+    },
+    "Capabilities": {
+      "$ref": "#/definitions/Capabilities"
+    },
+    "CustomPermissionsName": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9+=,.@_-]+$"
+    },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 200,
+      "minItems": 1
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/AwsAccountId",
+    "/properties/CustomPermissionsName"
+  ],
+  "primaryIdentifier": [
+    "/properties/AwsAccountId",
+    "/properties/CustomPermissionsName"
+  ],
+  "handlers": {
     "create": {
       "permissions": [
         "quicksight:CreateCustomPermissions",
         "quicksight:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "quicksight:DescribeCustomPermissions",
+        "quicksight:ListTagsForResource"
       ]
     },
     "update": {
@@ -32,209 +752,32 @@
         "quicksight:ListTagsForResource"
       ]
     },
-    "list": {
-      "permissions": [
-        "quicksight:ListCustomPermissions"
-      ]
-    },
     "delete": {
       "permissions": [
         "quicksight:DeleteCustomPermissions"
       ]
+    },
+    "list": {
+      "permissions": [
+        "quicksight:ListCustomPermissions"
+      ]
     }
   },
-  "typeName": "AWS::QuickSight::CustomPermissions",
-  "readOnlyProperties": [
-    "/properties/Arn"
-  ],
-  "description": "Definition of the AWS::QuickSight::CustomPermissions Resource Type.",
-  "createOnlyProperties": [
-    "/properties/AwsAccountId",
-    "/properties/CustomPermissionsName"
-  ],
   "additionalProperties": false,
-  "primaryIdentifier": [
-    "/properties/AwsAccountId",
-    "/properties/CustomPermissionsName"
-  ],
-  "definitions": {
-    "Capabilities": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "PublishWithoutApproval": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "UseAgentWebSearch": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "Space": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "Analysis": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "ChatAgent": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "CreateAndUpdateDataSources": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "CreateSPICEDataset": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "KnowledgeBase": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "ShareDatasets": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "IncludeContentInScheduledReportsEmail": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "Dashboard": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "ExportToPdfInScheduledReports": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "CreateAndUpdateDatasets": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "CreateAndUpdateDashboardEmailReports": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "ShareDashboards": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "SubscribeDashboardEmailReports": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "Action": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "ExportToCsvInScheduledReports": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "CreateSharedFolders": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "AddOrRunAnomalyDetectionForAnalyses": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "Automate": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "ExportToPdf": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "ShareAnalyses": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "PrintReports": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "ExportToExcelInScheduledReports": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "RenameSharedFolders": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "Research": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "UseBedrockModels": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "CreateAndUpdateThresholdAlerts": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "Flow": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "ExportToExcel": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "PerformFlowUiTask": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "CreateAndUpdateThemes": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "ViewAccountSPICECapacity": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "ShareDataSources": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "CreateChatAgents": {
-          "$ref": "#/definitions/CapabilityState"
-        },
-        "ExportToCsv": {
-          "$ref": "#/definitions/CapabilityState"
-        }
-      }
-    },
-    "CapabilityState": {
-      "type": "string",
-      "enum": [
-        "DENY"
-      ]
-    },
-    "Tag": {
-      "description": "<p>The key or keys of the key-value pairs for the resource tag or tags assigned to the\n            resource.<\/p>",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "Value": {
-          "minLength": 1,
-          "description": "<p>Tag value.<\/p>",
-          "type": "string",
-          "maxLength": 256
-        },
-        "Key": {
-          "minLength": 1,
-          "description": "<p>Tag key.<\/p>",
-          "type": "string",
-          "maxLength": 128
-        }
-      },
-      "required": [
-        "Key",
-        "Value"
-      ]
-    }
-  },
-  "properties": {
-    "CustomPermissionsName": {
-      "minLength": 1,
-      "pattern": "^[a-zA-Z0-9+=,.@_-]+$",
-      "type": "string",
-      "maxLength": 64
-    },
-    "Capabilities": {
-      "$ref": "#/definitions/Capabilities"
-    },
-    "AwsAccountId": {
-      "minLength": 12,
-      "pattern": "^[0-9]{12}$",
-      "type": "string",
-      "maxLength": 12
-    },
-    "Arn": {
-      "type": "string"
-    },
-    "Tags": {
-      "minItems": 1,
-      "maxItems": 200,
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/Tag"
-      }
-    }
-  },
   "required": [
     "AwsAccountId",
     "CustomPermissionsName"
-  ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "quicksight:TagResource",
+      "quicksight:UntagResource",
+      "quicksight:ListTagsForResource"
+    ]
+  }
 }

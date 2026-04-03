@@ -3,12 +3,12 @@
 page_title: "awscc_cloudfront_trust_store Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::CloudFront::TrustStore. TrustStores contain CA certificates for mTLS authentication and can be associated with CloudFront distributions.
+  A trust store.
 ---
 
 # awscc_cloudfront_trust_store (Resource)
 
-Resource Type definition for AWS::CloudFront::TrustStore. TrustStores contain CA certificates for mTLS authentication and can be associated with CloudFront distributions.
+A trust store.
 
 
 
@@ -17,39 +17,39 @@ Resource Type definition for AWS::CloudFront::TrustStore. TrustStores contain CA
 
 ### Required
 
-- `name` (String) A unique name to identify the trust store
+- `name` (String) The trust store's name.
 
 ### Optional
 
-- `ca_certificates_bundle_source` (Attributes) (see [below for nested schema](#nestedatt--ca_certificates_bundle_source))
-- `tags` (Attributes List) Key-value pairs for resource tagging (see [below for nested schema](#nestedatt--tags))
+- `ca_certificates_bundle_source` (Attributes) A CA certificates bundle source. (see [below for nested schema](#nestedatt--ca_certificates_bundle_source))
+- `tags` (Attributes List) A complex type that contains zero or more ``Tag`` elements. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `arn` (String) The Amazon Resource Name (ARN) of the trust store
+- `arn` (String)
 - `e_tag` (String)
 - `id` (String) Uniquely identifies the resource.
-- `last_modified_time` (String) The last modification timestamp of the trust store PEM file
-- `number_of_ca_certificates` (Number) The number of CA certificates in the trust store PEM file
-- `status` (String) Current status of the trust store
-- `trust_store_id` (String) The unique identifier for the trust store
+- `last_modified_time` (String)
+- `number_of_ca_certificates` (Number)
+- `status` (String)
+- `trust_store_id` (String)
 
 <a id="nestedatt--ca_certificates_bundle_source"></a>
 ### Nested Schema for `ca_certificates_bundle_source`
 
 Optional:
 
-- `ca_certificates_bundle_s3_location` (Attributes) (see [below for nested schema](#nestedatt--ca_certificates_bundle_source--ca_certificates_bundle_s3_location))
+- `ca_certificates_bundle_s3_location` (Attributes) The CA certificates bundle location in Amazon S3. (see [below for nested schema](#nestedatt--ca_certificates_bundle_source--ca_certificates_bundle_s3_location))
 
 <a id="nestedatt--ca_certificates_bundle_source--ca_certificates_bundle_s3_location"></a>
 ### Nested Schema for `ca_certificates_bundle_source.ca_certificates_bundle_s3_location`
 
 Optional:
 
-- `bucket` (String) The S3 bucket containing the CA certificates bundle PEM file
-- `key` (String) The S3 object key of the CA certificates bundle PEM file
-- `region` (String) The S3 bucket region
-- `version` (String) The S3 object version of the CA certificates bundle PEM file
+- `bucket` (String) The S3 bucket.
+- `key` (String) The location's key.
+- `region` (String) The location's Region.
+- `version` (String) The location's version.
 
 
 
@@ -58,8 +58,10 @@ Optional:
 
 Optional:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) A string that contains ``Tag`` key.
+ The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.
+- `value` (String) A string that contains an optional ``Tag`` value.
+ The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.
 
 ## Import
 
@@ -81,7 +83,7 @@ import {
 
 #### Required
 
-- `id` (String) The unique identifier for the trust store
+- `id` (String)
 
 #### Optional
 

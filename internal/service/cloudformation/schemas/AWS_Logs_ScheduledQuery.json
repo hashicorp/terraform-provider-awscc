@@ -98,6 +98,7 @@
     "LastExecutionStatus": {
       "type": "string",
       "enum": [
+        "Pending",
         "InvalidQuery",
         "Complete",
         "Failed",

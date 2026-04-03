@@ -159,6 +159,37 @@ func collectionResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// EncryptionConfig is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: FipsEndpoints
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "CollectionEndpoint": {
+		//	      "type": "string"
+		//	    },
+		//	    "DashboardEndpoint": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"fips_endpoints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CollectionEndpoint
+				"collection_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DashboardEndpoint
+				"dashboard_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -341,6 +372,53 @@ func collectionResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: VectorOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Vector search configuration options for the collection",
+		//	  "properties": {
+		//	    "ServerlessVectorAcceleration": {
+		//	      "description": "Indicates whether GPU acceleration is enabled for vector indexing",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED",
+		//	        "ALLOWED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"vector_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ServerlessVectorAcceleration
+				"serverless_vector_acceleration": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether GPU acceleration is enabled for vector indexing",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ENABLED",
+							"DISABLED",
+							"ALLOWED",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Vector search configuration options for the collection",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -370,21 +448,24 @@ func collectionResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                   "Arn",
-		"aws_owned_key":         "AWSOwnedKey",
-		"collection_endpoint":   "CollectionEndpoint",
-		"collection_group_name": "CollectionGroupName",
-		"collection_id":         "Id",
-		"dashboard_endpoint":    "DashboardEndpoint",
-		"description":           "Description",
-		"encryption_config":     "EncryptionConfig",
-		"key":                   "Key",
-		"kms_key_arn":           "KmsKeyArn",
-		"name":                  "Name",
-		"standby_replicas":      "StandbyReplicas",
-		"tags":                  "Tags",
-		"type":                  "Type",
-		"value":                 "Value",
+		"arn":                            "Arn",
+		"aws_owned_key":                  "AWSOwnedKey",
+		"collection_endpoint":            "CollectionEndpoint",
+		"collection_group_name":          "CollectionGroupName",
+		"collection_id":                  "Id",
+		"dashboard_endpoint":             "DashboardEndpoint",
+		"description":                    "Description",
+		"encryption_config":              "EncryptionConfig",
+		"fips_endpoints":                 "FipsEndpoints",
+		"key":                            "Key",
+		"kms_key_arn":                    "KmsKeyArn",
+		"name":                           "Name",
+		"serverless_vector_acceleration": "ServerlessVectorAcceleration",
+		"standby_replicas":               "StandbyReplicas",
+		"tags":                           "Tags",
+		"type":                           "Type",
+		"value":                          "Value",
+		"vector_options":                 "VectorOptions",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

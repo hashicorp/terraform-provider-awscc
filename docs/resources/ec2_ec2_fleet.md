@@ -43,6 +43,7 @@ resource "awscc_ec2_ec2_fleet" "example_fleet" {
 - `excess_capacity_termination_policy` (String)
 - `on_demand_options` (Attributes) (see [below for nested schema](#nestedatt--on_demand_options))
 - `replace_unhealthy_instances` (Boolean)
+- `reserved_capacity_options` (Attributes) (see [below for nested schema](#nestedatt--reserved_capacity_options))
 - `spot_options` (Attributes) (see [below for nested schema](#nestedatt--spot_options))
 - `tag_specifications` (Attributes List) (see [below for nested schema](#nestedatt--tag_specifications))
 - `terminate_instances_with_expiration` (Boolean)
@@ -303,6 +304,14 @@ Optional:
 
 - `usage_strategy` (String)
 
+
+
+<a id="nestedatt--reserved_capacity_options"></a>
+### Nested Schema for `reserved_capacity_options`
+
+Optional:
+
+- `reservation_types` (List of String)
 
 
 <a id="nestedatt--spot_options"></a>

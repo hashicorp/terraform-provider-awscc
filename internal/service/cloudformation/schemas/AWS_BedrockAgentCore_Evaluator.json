@@ -27,10 +27,56 @@
       "properties": {
         "LlmAsAJudge": {
           "$ref": "#/definitions/LlmAsAJudgeEvaluatorConfig"
+        },
+        "CodeBased": {
+          "$ref": "#/definitions/CodeBasedEvaluatorConfig"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "LlmAsAJudge"
+          ]
+        },
+        {
+          "required": [
+            "CodeBased"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "CodeBasedEvaluatorConfig": {
+      "type": "object",
+      "description": "The configuration for code-based evaluation using a Lambda function.",
+      "properties": {
+        "LambdaConfig": {
+          "$ref": "#/definitions/LambdaEvaluatorConfig"
         }
       },
       "required": [
-        "LlmAsAJudge"
+        "LambdaConfig"
+      ],
+      "additionalProperties": false
+    },
+    "LambdaEvaluatorConfig": {
+      "type": "object",
+      "description": "The Lambda function configuration for code-based evaluation.",
+      "properties": {
+        "LambdaArn": {
+          "type": "string",
+          "description": "The ARN of the Lambda function used for evaluation.",
+          "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:([a-z]{2}(-gov)?-[a-z]+-\\d{1}):(\\d{12}):function:([a-zA-Z0-9-_.]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"
+        },
+        "LambdaTimeoutInSeconds": {
+          "type": "integer",
+          "description": "The timeout in seconds for the Lambda function invocation.",
+          "minimum": 1,
+          "maximum": 300
+        }
+      },
+      "required": [
+        "LambdaArn"
       ],
       "additionalProperties": false
     },
@@ -312,7 +358,9 @@
         "bedrock-agentcore:CreateEvaluator",
         "bedrock-agentcore:GetEvaluator",
         "bedrock-agentcore:TagResource",
-        "bedrock:InvokeModel"
+        "bedrock:InvokeModel",
+        "lambda:GetFunction",
+        "lambda:InvokeFunction"
       ]
     },
     "read": {
@@ -328,7 +376,9 @@
         "bedrock-agentcore:TagResource",
         "bedrock-agentcore:UntagResource",
         "bedrock-agentcore:ListTagsForResource",
-        "bedrock:InvokeModel"
+        "bedrock:InvokeModel",
+        "lambda:GetFunction",
+        "lambda:InvokeFunction"
       ]
     },
     "delete": {

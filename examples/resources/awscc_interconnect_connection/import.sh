@@ -1,0 +1,1 @@
+$ terraform import awscc_interconnect_connection.example "arn"

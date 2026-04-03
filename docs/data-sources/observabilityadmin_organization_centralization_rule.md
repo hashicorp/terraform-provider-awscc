@@ -95,6 +95,7 @@ Read-Only:
 
 Read-Only:
 
+- `data_source_selection_criteria` (String)
 - `encrypted_log_group_strategy` (String)
 - `log_group_selection_criteria` (String)
 

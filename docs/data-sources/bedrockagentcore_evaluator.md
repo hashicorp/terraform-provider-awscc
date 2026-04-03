@@ -37,7 +37,25 @@ Data Source schema for AWS::BedrockAgentCore::Evaluator
 
 Read-Only:
 
+- `code_based` (Attributes) The configuration for code-based evaluation using a Lambda function. (see [below for nested schema](#nestedatt--evaluator_config--code_based))
 - `llm_as_a_judge` (Attributes) The configuration for LLM-as-a-Judge evaluation. (see [below for nested schema](#nestedatt--evaluator_config--llm_as_a_judge))
+
+<a id="nestedatt--evaluator_config--code_based"></a>
+### Nested Schema for `evaluator_config.code_based`
+
+Read-Only:
+
+- `lambda_config` (Attributes) The Lambda function configuration for code-based evaluation. (see [below for nested schema](#nestedatt--evaluator_config--code_based--lambda_config))
+
+<a id="nestedatt--evaluator_config--code_based--lambda_config"></a>
+### Nested Schema for `evaluator_config.code_based.lambda_config`
+
+Read-Only:
+
+- `lambda_arn` (String) The ARN of the Lambda function used for evaluation.
+- `lambda_timeout_in_seconds` (Number) The timeout in seconds for the Lambda function invocation.
+
+
 
 <a id="nestedatt--evaluator_config--llm_as_a_judge"></a>
 ### Nested Schema for `evaluator_config.llm_as_a_judge`

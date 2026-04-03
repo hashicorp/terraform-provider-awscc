@@ -888,6 +888,15 @@
         "type": "string"
       }
     },
+    "AvailabilityZoneIds": {
+      "uniqueItems": true,
+      "description": "",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "Cooldown": {
       "description": "*Only needed if you use simple scaling policies.* \n The amount of time, in seconds, between one scaling activity ending and another one starting due to simple scaling policies. For more information, see [Scaling cooldowns for Amazon EC2 Auto Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-cooldowns.html) in the *Amazon EC2 Auto Scaling User Guide*.\n Default: ``300`` seconds",
       "type": "string"

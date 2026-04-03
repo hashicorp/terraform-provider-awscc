@@ -28,6 +28,7 @@ Data Source schema for AWS::OpenSearchServerless::Collection
 - `dashboard_endpoint` (String) The OpenSearch Dashboards endpoint for the collection.
 - `description` (String) The description of the collection
 - `encryption_config` (Attributes) Encryption settings for the collection (see [below for nested schema](#nestedatt--encryption_config))
+- `fips_endpoints` (Attributes) (see [below for nested schema](#nestedatt--fips_endpoints))
 - `kms_key_arn` (String) Key Management Service key used to encrypt the collection.
 - `name` (String) The name of the collection.
 
@@ -39,6 +40,7 @@ Contains between 3 and 32 characters
 - `standby_replicas` (String) The possible standby replicas for the collection
 - `tags` (Attributes List) List of tags to be added to the resource (see [below for nested schema](#nestedatt--tags))
 - `type` (String) The possible types for the collection
+- `vector_options` (Attributes) Vector search configuration options for the collection (see [below for nested schema](#nestedatt--vector_options))
 
 <a id="nestedatt--encryption_config"></a>
 ### Nested Schema for `encryption_config`
@@ -49,6 +51,15 @@ Read-Only:
 - `kms_key_arn` (String) Key Management Service key used to encrypt the collection.
 
 
+<a id="nestedatt--fips_endpoints"></a>
+### Nested Schema for `fips_endpoints`
+
+Read-Only:
+
+- `collection_endpoint` (String)
+- `dashboard_endpoint` (String)
+
+
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
@@ -56,3 +67,11 @@ Read-Only:
 
 - `key` (String) The key in the key-value pair
 - `value` (String) The value in the key-value pair
+
+
+<a id="nestedatt--vector_options"></a>
+### Nested Schema for `vector_options`
+
+Read-Only:
+
+- `serverless_vector_acceleration` (String) Indicates whether GPU acceleration is enabled for vector indexing

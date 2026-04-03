@@ -101,6 +101,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//
 		//	{
 		//	  "enum": [
+		//	    "Pending",
 		//	    "InvalidQuery",
 		//	    "Complete",
 		//	    "Failed",
