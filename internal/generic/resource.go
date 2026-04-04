@@ -28,6 +28,11 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
+// PreDeleteFunc is a function that runs before a resource is deleted via Cloud Control API.
+// It receives the context, the provider (for creating native SDK clients), and the resource identifier.
+// It should return an error if pre-delete cleanup fails.
+type PreDeleteFunc func(ctx context.Context, provider tfcloudcontrol.Provider, id string) error
+
 // ResourceOptionsFunc is a type alias for a resource type functional option.
 type ResourceOptionsFunc func(*genericResource) error
 
@@ -222,6 +227,16 @@ func resourceWithPrimaryIdentifier(vs ...identity.Identifier) ResourceOptionsFun
 	}
 }
 
+// resourceWithPreDeleteFunc is a helper function to construct functional options
+// that set a resource type's pre-delete cleanup function.
+func resourceWithPreDeleteFunc(fn PreDeleteFunc) ResourceOptionsFunc {
+	return func(o *genericResource) error {
+		o.preDeleteFunc = fn
+
+		return nil
+	}
+}
+
 // ResourceOptions is a type alias for a slice of resource type functional options.
 type ResourceOptions []ResourceOptionsFunc
 
@@ -319,6 +334,14 @@ func (opts ResourceOptions) WithPrimaryIdentifier(v ...identity.Identifier) Reso
 	return append(opts, resourceWithPrimaryIdentifier(v...))
 }
 
+// WithPreDeleteFunc is a helper function to construct functional options
+// that set a resource type's pre-delete cleanup function, append that function to the
+// current slice of functional options and return the new slice of options.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceOptions) WithPreDeleteFunc(fn PreDeleteFunc) ResourceOptions {
+	return append(opts, resourceWithPreDeleteFunc(fn))
+}
+
 // NewResource returns a new Resource from the specified varidaic list of functional options.
 // It's public as it's called from generated code.
 func NewResource(_ context.Context, optFns ...ResourceOptionsFunc) (resource.Resource, error) {
@@ -355,6 +378,7 @@ type genericResource struct {
 	updateTimeout           time.Duration              // Maximum wait time for resource update
 	deleteTimeout           time.Duration              // Maximum wait time for resource deletion
 	configValidators        []resource.ConfigValidator // Required attributes validators
+	preDeleteFunc           PreDeleteFunc              // Optional pre-delete cleanup hook
 	provider                tfcloudcontrol.Provider
 	primaryIdentifier       identity.Identifiers
 
@@ -742,6 +766,15 @@ func (r *genericResource) Delete(ctx context.Context, request resource.DeleteReq
 		response.Diagnostics.Append(ResourceIdentifierNotFoundDiag(err))
 
 		return
+	}
+
+	// Run pre-delete hook if registered (e.g., to clean up child resources).
+	if r.preDeleteFunc != nil {
+		if err := r.preDeleteFunc(ctx, r.provider, id); err != nil {
+			response.Diagnostics.Append(ServiceOperationErrorDiag("Pre-Delete Cleanup", r.cfTypeName, err))
+
+			return
+		}
 	}
 
 	err = tfcloudcontrol.DeleteResource(ctx, conn, r.provider.RoleARN(ctx), r.cfTypeName, id, r.deleteTimeout)
