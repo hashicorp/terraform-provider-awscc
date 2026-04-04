@@ -80,7 +80,7 @@ func (r *genericResource) List(ctx context.Context, request list.ListRequest, st
 
 			translator := toTerraform{cfToTfNameMap: r.cfToTfNameMap}
 			schema := request.ResourceSchema
-			val, err := translator.FromString(ctx, schema, aws.ToString(description.Properties))
+			val, err := translator.FromString(ctx, schema, aws.ToString(description.Properties), nil)
 			if err != nil {
 				result = list.ListResult{
 					Diagnostics: diag.Diagnostics{

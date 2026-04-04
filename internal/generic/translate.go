@@ -8,6 +8,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"math/big"
+	"sort"
+	"strconv"
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
@@ -185,18 +187,238 @@ func (t toTerraform) FromRaw(ctx context.Context, schema typeAtTerraformPather, 
 }
 
 // FromString returns the Terraform Value for the specified Cloud Control Properties (string).
-func (t toTerraform) FromString(ctx context.Context, schema typeAtTerraformPather, resourceModel string) (tftypes.Value, error) {
+// If priorStateMap is non-nil (e.g. from a previous Read), key-value list attributes
+// (Tags, TargetGroupAttributes, LoadBalancerAttributes, etc.) in the resource model
+// are reordered to match prior state so plan shows no diff regardless of user config order.
+func (t toTerraform) FromString(ctx context.Context, schema typeAtTerraformPather, resourceModel string, priorStateMap map[string]any) (tftypes.Value, error) {
 	var v any
 
 	if err := json.Unmarshal([]byte(resourceModel), &v); err != nil {
 		return tftypes.Value{}, err
 	}
 
-	if v, ok := v.(map[string]any); ok {
-		return t.FromRaw(ctx, schema, v)
+	if m, ok := v.(map[string]any); ok {
+		if priorStateMap != nil {
+			reorderKeyValueSlicesToMatchPrior(m, priorStateMap)
+		} else {
+			normalizeKeyValueSlices(m)
+		}
+		return t.FromRaw(ctx, schema, m)
 	}
 
 	return tftypes.Value{}, fmt.Errorf("unexpected raw type: %T", v)
+}
+
+// reorderKeyValueSlicesToMatchPrior reorders list values in m to match prior (key-value
+// lists by key, primitive lists by value). Recurses into nested objects (e.g. VpcConfig).
+// Preserves the user's order from the last apply so plan shows no diff.
+func reorderKeyValueSlicesToMatchPrior(m, prior map[string]any) {
+	for key, val := range m {
+		switch v := val.(type) {
+		case map[string]any:
+			priorMap, _ := prior[key].(map[string]any)
+			if priorMap != nil {
+				reorderKeyValueSlicesToMatchPrior(v, priorMap)
+			}
+		case []any:
+			if len(v) == 0 {
+				continue
+			}
+			priorSlice, _ := prior[key].([]any)
+			reordered := reorderKeyValueSliceToMatch(v, priorSlice)
+			if reordered != nil {
+				m[key] = reordered
+			} else if reorderedPrim := reorderPrimitiveSliceToMatch(v, priorSlice); reorderedPrim != nil {
+				m[key] = reorderedPrim
+			} else {
+				sortSliceByKey(v)
+			}
+		}
+	}
+}
+
+// reorderPrimitiveSliceToMatch reorders current to match the element order in prior.
+// Elements in current that are not in prior are appended at the end (sorted).
+// Returns the reordered slice, or nil if current is not a primitive slice (all string or all number).
+func reorderPrimitiveSliceToMatch(current, prior []any) []any {
+	if len(current) == 0 {
+		return current
+	}
+	// Check all elements are primitive (string or float64)
+	prim := primitiveKind(current[0])
+	if prim == primKindOther {
+		return nil
+	}
+	for i := 1; i < len(current); i++ {
+		if primitiveKind(current[i]) != prim {
+			return nil
+		}
+	}
+	// Build set of current elements for lookup
+	currentSet := make(map[string]any)
+	keyOf := func(a any) string {
+		switch x := a.(type) {
+		case string:
+			return x
+		case float64:
+			return strconv.FormatFloat(x, 'g', -1, 64)
+		default:
+			return fmt.Sprint(a)
+		}
+	}
+	for _, el := range current {
+		currentSet[keyOf(el)] = el
+	}
+	// Build result: prior order first, then current-only (sorted)
+	seen := make(map[string]bool)
+	var result []any
+	if len(prior) > 0 {
+		for _, el := range prior {
+			k := keyOf(el)
+			if cur, exists := currentSet[k]; exists {
+				result = append(result, cur)
+				seen[k] = true
+			}
+		}
+	}
+	var extra []string
+	for k := range currentSet {
+		if !seen[k] {
+			extra = append(extra, k)
+		}
+	}
+	sort.Strings(extra)
+	for _, k := range extra {
+		result = append(result, currentSet[k])
+	}
+	return result
+}
+
+// primitive kind constants for primitiveKind return value.
+const (
+	primKindOther = iota
+	primKindString
+	primKindFloat64
+)
+
+// primitiveKind returns primKindString for string, primKindFloat64 for float64, primKindOther for other.
+func primitiveKind(a any) int {
+	switch a.(type) {
+	case string:
+		return primKindString
+	case float64:
+		return primKindFloat64
+	default:
+		return primKindOther
+	}
+}
+
+// reorderKeyValueSliceToMatch reorders current to match the key order in prior.
+// Keys in current that are not in prior are appended at the end in sorted order.
+// Returns the reordered slice, or nil if current is not a key-value slice.
+func reorderKeyValueSliceToMatch(current, prior []any) []any {
+	if len(current) == 0 {
+		return current
+	}
+	// Build current by key
+	byKey := make(map[string]map[string]any)
+	for _, el := range current {
+		m, ok := el.(map[string]any)
+		if !ok || (m["Key"] == nil && m["key"] == nil) {
+			return nil
+		}
+		k := keyFromMap(m)
+		byKey[k] = m
+	}
+	// Build result: first in prior order, then any keys only in current (sorted)
+	seen := make(map[string]bool)
+	var result []any
+	if len(prior) > 0 {
+		for _, el := range prior {
+			p, ok := el.(map[string]any)
+			if !ok {
+				continue
+			}
+			k := keyFromMap(p)
+			if k == "" {
+				continue
+			}
+			if cur, exists := byKey[k]; exists {
+				result = append(result, cur)
+				seen[k] = true
+			}
+		}
+	}
+	var extra []string
+	for k := range byKey {
+		if !seen[k] {
+			extra = append(extra, k)
+		}
+	}
+	sort.Strings(extra)
+	for _, k := range extra {
+		result = append(result, byKey[k])
+	}
+	return result
+}
+
+// normalizeKeyValueSlices recursively walks the resource model and sorts any
+// list of objects that have a "Key" field (Cloud Control API PascalCase) by
+// that key. Used when there is no prior state (e.g. first Read after import).
+func normalizeKeyValueSlices(v any) {
+	switch x := v.(type) {
+	case map[string]any:
+		for _, val := range x {
+			normalizeKeyValueSlices(val)
+		}
+	case []any:
+		if len(x) == 0 {
+			return
+		}
+		if sortSliceByKey(x) {
+			return
+		}
+		for _, el := range x {
+			normalizeKeyValueSlices(el)
+		}
+	}
+}
+
+// sortSliceByKey sorts slice in place by each element's "Key" or "key" field
+// (Cloud Control API may use PascalCase or lowercase). Returns true if the
+// slice was sorted (all elements were key-value maps), false otherwise.
+func sortSliceByKey(slice []any) bool {
+	for _, el := range slice {
+		m, ok := el.(map[string]any)
+		if !ok {
+			return false
+		}
+		// Must have either "Key" or "key" so we can sort
+		if _, hasKey := m["Key"]; hasKey {
+			continue
+		}
+		if _, hasKey := m["key"]; hasKey {
+			continue
+		}
+		return false
+	}
+	sort.Slice(slice, func(i, j int) bool {
+		mi := slice[i].(map[string]any)
+		mj := slice[j].(map[string]any)
+		return keyFromMap(mi) < keyFromMap(mj)
+	})
+	return true
+}
+
+// keyFromMap returns the sort key from a key-value object (Cloud Control "Key" or "key").
+func keyFromMap(m map[string]any) string {
+	if k, ok := m["Key"].(string); ok {
+		return k
+	}
+	if k, ok := m["key"].(string); ok {
+		return k
+	}
+	return ""
 }
 
 func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPather, path *tftypes.AttributePath, v any) (tftypes.Value, error) {
