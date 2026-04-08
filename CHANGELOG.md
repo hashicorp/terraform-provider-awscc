@@ -1,5 +1,50 @@
 ## 1.79.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_bcmpricingcalculator_bill_scenario`
+* **New Data Source:** `awscc_bcmpricingcalculator_bill_scenarios`
+* **New Data Source:** `awscc_bedrock_data_automation_libraries`
+* **New Data Source:** `awscc_bedrock_data_automation_library`
+* **New Data Source:** `awscc_bedrock_enforced_guardrail_configuration`
+* **New Data Source:** `awscc_bedrock_enforced_guardrail_configurations`
+* **New Data Source:** `awscc_bedrock_resource_policy`
+* **New Data Source:** `awscc_bedrockagentcore_api_key_credential_provider`
+* **New Data Source:** `awscc_bedrockagentcore_api_key_credential_providers`
+* **New Data Source:** `awscc_bedrockagentcore_o_auth_2_credential_provider`
+* **New Data Source:** `awscc_bedrockagentcore_o_auth_2_credential_providers`
+* **New Data Source:** `awscc_braket_spending_limit`
+* **New Data Source:** `awscc_braket_spending_limits`
+* **New Data Source:** `awscc_ecs_daemon`
+* **New Data Source:** `awscc_ecs_daemons`
+* **New Data Source:** `awscc_s3files_access_point`
+* **New Data Source:** `awscc_s3files_file_system`
+* **New Data Source:** `awscc_s3files_file_system_policies`
+* **New Data Source:** `awscc_s3files_file_system_policy`
+* **New Data Source:** `awscc_s3files_file_systems`
+* **New Data Source:** `awscc_s3files_mount_target`
+* **New List Resource:** `awscc_bcmpricingcalculator_bill_scenario`
+* **New List Resource:** `awscc_bedrock_data_automation_library`
+* **New List Resource:** `awscc_bedrock_enforced_guardrail_configuration`
+* **New List Resource:** `awscc_bedrockagentcore_api_key_credential_provider`
+* **New List Resource:** `awscc_bedrockagentcore_o_auth_2_credential_provider`
+* **New List Resource:** `awscc_braket_spending_limit`
+* **New List Resource:** `awscc_ecs_daemon`
+* **New List Resource:** `awscc_s3files_file_system`
+* **New List Resource:** `awscc_s3files_file_system_policy`
+* **New Resource:** `awscc_bcmpricingcalculator_bill_scenario`
+* **New Resource:** `awscc_bedrock_data_automation_library`
+* **New Resource:** `awscc_bedrock_enforced_guardrail_configuration`
+* **New Resource:** `awscc_bedrock_resource_policy`
+* **New Resource:** `awscc_bedrockagentcore_api_key_credential_provider`
+* **New Resource:** `awscc_bedrockagentcore_o_auth_2_credential_provider`
+* **New Resource:** `awscc_braket_spending_limit`
+* **New Resource:** `awscc_ecs_daemon`
+* **New Resource:** `awscc_s3files_access_point`
+* **New Resource:** `awscc_s3files_file_system`
+* **New Resource:** `awscc_s3files_file_system_policy`
+* **New Resource:** `awscc_s3files_mount_target`
+
 ## 1.78.0 (April 1, 2026)
 
 FEATURES:
