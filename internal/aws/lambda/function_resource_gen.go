@@ -220,6 +220,14 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    },
+		//	    "S3ObjectStorageMode": {
+		//	      "description": "",
+		//	      "enum": [
+		//	        "COPY",
+		//	        "REFERENCE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "S3ObjectVersion": {
 		//	      "description": "For versioned objects, the version of the deployment package object to use.",
 		//	      "maxLength": 1024,
@@ -275,6 +283,21 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 					// S3Key is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: S3ObjectStorageMode
+				"s3_object_storage_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"COPY",
+							"REFERENCE",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: S3ObjectVersion
 				"s3_object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -548,7 +571,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "Arn": {
 		//	        "description": "The Amazon Resource Name (ARN) of the Amazon EFS access point that provides access to the file system.",
 		//	        "maxLength": 200,
-		//	        "pattern": "^arn:aws[a-zA-Z-]*:elasticfilesystem:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:access-point/fsap-[a-f0-9]{17}$",
+		//	        "pattern": "^arn:aws[a-zA-Z-]*:elasticfilesystem:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:access-point/fsap-[a-f0-9]{17}$|^arn:aws[-a-z]*:s3files:[0-9a-z-:]+:file-system/fs-[0-9a-f]{17,40}/access-point/fsap-[0-9a-f]{17,40}$",
 		//	        "type": "string"
 		//	      },
 		//	      "LocalMountPath": {
@@ -577,7 +600,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthAtMost(200),
-							stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-zA-Z-]*:elasticfilesystem:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:access-point/fsap-[a-f0-9]{17}$"), ""),
+							stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-zA-Z-]*:elasticfilesystem:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:access-point/fsap-[a-f0-9]{17}$|^arn:aws[-a-z]*:s3files:[0-9a-z-:]+:file-system/fs-[0-9a-f]{17,40}/access-point/fsap-[0-9a-f]{17,40}$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1562,6 +1585,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"runtime_version_arn":                       "RuntimeVersionArn",
 		"s3_bucket":                                 "S3Bucket",
 		"s3_key":                                    "S3Key",
+		"s3_object_storage_mode":                    "S3ObjectStorageMode",
 		"s3_object_version":                         "S3ObjectVersion",
 		"security_group_ids":                        "SecurityGroupIds",
 		"size":                                      "Size",

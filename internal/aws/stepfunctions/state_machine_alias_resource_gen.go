@@ -298,6 +298,24 @@ func stateMachineAliasResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: StateMachineArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"state_machine_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 2048),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -335,6 +353,7 @@ func stateMachineAliasResource(ctx context.Context) (resource.Resource, error) {
 		"name":                      "Name",
 		"percentage":                "Percentage",
 		"routing_configuration":     "RoutingConfiguration",
+		"state_machine_arn":         "StateMachineArn",
 		"state_machine_version_arn": "StateMachineVersionArn",
 		"type":                      "Type",
 		"weight":                    "Weight",
