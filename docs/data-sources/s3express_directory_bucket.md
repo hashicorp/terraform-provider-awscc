@@ -28,6 +28,7 @@ Data Source schema for AWS::S3Express::DirectoryBucket
 - `data_redundancy` (String) Specifies the number of Availability Zone or Local Zone that's used for redundancy for the bucket.
 - `lifecycle_configuration` (Attributes) Lifecycle rules that define how Amazon S3 Express manages objects during their lifetime. (see [below for nested schema](#nestedatt--lifecycle_configuration))
 - `location_name` (String) Specifies the Zone ID of the Availability Zone or Local Zone where the directory bucket will be created. An example Availability Zone ID value is 'use1-az5'.
+- `metrics_configurations` (Attributes List) Specifies the metrics configurations for the Amazon S3 Express bucket. (see [below for nested schema](#nestedatt--metrics_configurations))
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--bucket_encryption"></a>
@@ -84,6 +85,16 @@ Read-Only:
 - `days_after_initiation` (Number) Specifies the number of days after which Amazon S3 aborts an incomplete multipart upload.
 
 
+
+
+<a id="nestedatt--metrics_configurations"></a>
+### Nested Schema for `metrics_configurations`
+
+Read-Only:
+
+- `access_point_arn` (String) The access point ARN used when evaluating a metrics filter.
+- `id` (String) The ID used to identify the metrics configuration.
+- `prefix` (String) The prefix used when evaluating a metrics filter.
 
 
 <a id="nestedatt--tags"></a>

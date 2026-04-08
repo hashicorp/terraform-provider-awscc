@@ -78,10 +78,21 @@ Read-Only:
 
 Read-Only:
 
+- `auto_scaling_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--customer_managed--auto_scaling_configuration))
 - `mode` (String)
 - `storage_profile_id` (String)
 - `tag_propagation_mode` (String)
 - `worker_capabilities` (Attributes) (see [below for nested schema](#nestedatt--configuration--customer_managed--worker_capabilities))
+
+<a id="nestedatt--configuration--customer_managed--auto_scaling_configuration"></a>
+### Nested Schema for `configuration.customer_managed.auto_scaling_configuration`
+
+Read-Only:
+
+- `scale_out_workers_per_minute` (Number)
+- `standby_worker_count` (Number)
+- `worker_idle_duration_seconds` (Number)
+
 
 <a id="nestedatt--configuration--customer_managed--worker_capabilities"></a>
 ### Nested Schema for `configuration.customer_managed.worker_capabilities`
@@ -160,10 +171,21 @@ Read-Only:
 
 Read-Only:
 
+- `auto_scaling_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--auto_scaling_configuration))
 - `instance_capabilities` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities))
 - `instance_market_options` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_market_options))
 - `storage_profile_id` (String)
 - `vpc_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--vpc_configuration))
+
+<a id="nestedatt--configuration--service_managed_ec_2--auto_scaling_configuration"></a>
+### Nested Schema for `configuration.service_managed_ec_2.auto_scaling_configuration`
+
+Read-Only:
+
+- `scale_out_workers_per_minute` (Number)
+- `standby_worker_count` (Number)
+- `worker_idle_duration_seconds` (Number)
+
 
 <a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities"></a>
 ### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities`

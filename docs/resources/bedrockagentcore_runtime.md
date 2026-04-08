@@ -117,6 +117,7 @@ resource "awscc_bedrockagentcore_runtime" "example" {
 - `authorizer_configuration` (Attributes) Authorizer configuration for the agent runtime (see [below for nested schema](#nestedatt--authorizer_configuration))
 - `description` (String) Description of the resource
 - `environment_variables` (Map of String) Environment variables for the agent runtime
+- `filesystem_configurations` (Attributes List) Filesystem configurations for the agent runtime (see [below for nested schema](#nestedatt--filesystem_configurations))
 - `lifecycle_configuration` (Attributes) Lifecycle configuration for managing runtime sessions (see [below for nested schema](#nestedatt--lifecycle_configuration))
 - `protocol_configuration` (String) Protocol configuration for the agent runtime
 - `request_header_configuration` (Attributes) Configuration for HTTP request headers (see [below for nested schema](#nestedatt--request_header_configuration))
@@ -245,6 +246,22 @@ Optional:
 
 
 
+
+
+
+<a id="nestedatt--filesystem_configurations"></a>
+### Nested Schema for `filesystem_configurations`
+
+Optional:
+
+- `session_storage` (Attributes) Configuration for session storage (see [below for nested schema](#nestedatt--filesystem_configurations--session_storage))
+
+<a id="nestedatt--filesystem_configurations--session_storage"></a>
+### Nested Schema for `filesystem_configurations.session_storage`
+
+Optional:
+
+- `mount_path` (String) Mount path for session storage
 
 
 
