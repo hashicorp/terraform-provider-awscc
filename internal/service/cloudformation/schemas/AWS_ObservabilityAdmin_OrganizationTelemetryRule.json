@@ -23,14 +23,16 @@
         "AWS::WAFv2::WebACL",
         "AWS::CloudTrail",
         "AWS::EKS::Cluster",
-        "AWS::ElasticLoadBalancingV2::LoadBalancer"
+        "AWS::ElasticLoadBalancingV2::LoadBalancer",
+        "AWS::EC2::Instance"
       ]
     },
     "TelemetryType": {
       "description": "Telemetry Type associated with the Organization Telemetry Rule",
       "type": "string",
       "enum": [
-        "Logs"
+        "Logs",
+        "Metrics"
       ]
     },
     "Scope": {

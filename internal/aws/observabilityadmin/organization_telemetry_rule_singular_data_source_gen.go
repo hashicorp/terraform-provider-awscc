@@ -338,7 +338,8 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 		//	        "AWS::WAFv2::WebACL",
 		//	        "AWS::CloudTrail",
 		//	        "AWS::EKS::Cluster",
-		//	        "AWS::ElasticLoadBalancingV2::LoadBalancer"
+		//	        "AWS::ElasticLoadBalancingV2::LoadBalancer",
+		//	        "AWS::EC2::Instance"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -372,7 +373,8 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 		//	    "TelemetryType": {
 		//	      "description": "Telemetry Type associated with the Organization Telemetry Rule",
 		//	      "enum": [
-		//	        "Logs"
+		//	        "Logs",
+		//	        "Metrics"
 		//	      ],
 		//	      "type": "string"
 		//	    }

@@ -626,6 +626,10 @@ resource_schema "aws_batch_service_environment" {
   cloudformation_type_name = "AWS::Batch::ServiceEnvironment"
 }
 
+resource_schema "aws_bcmpricingcalculator_bill_scenario" {
+  cloudformation_type_name = "AWS::BcmPricingCalculator::BillScenario"
+}
+
 resource_schema "aws_bedrock_agent" {
   cloudformation_type_name = "AWS::Bedrock::Agent"
 }
@@ -651,6 +655,10 @@ resource_schema "aws_bedrock_blueprint" {
   cloudformation_type_name = "AWS::Bedrock::Blueprint"
 }
 
+resource_schema "aws_bedrock_data_automation_library" {
+  cloudformation_type_name = "AWS::Bedrock::DataAutomationLibrary"
+}
+
 resource_schema "aws_bedrock_data_automation_project" {
   cloudformation_type_name = "AWS::Bedrock::DataAutomationProject"
 }
@@ -658,6 +666,10 @@ resource_schema "aws_bedrock_data_automation_project" {
 resource_schema "aws_bedrock_data_source" {
   cloudformation_type_name               = "AWS::Bedrock::DataSource"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_bedrock_enforced_guardrail_configuration" {
+  cloudformation_type_name = "AWS::Bedrock::EnforcedGuardrailConfiguration"
 }
 
 resource_schema "aws_bedrock_flow" {
@@ -706,6 +718,15 @@ resource_schema "aws_bedrock_prompt_version" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_bedrock_resource_policy" {
+  cloudformation_type_name               = "AWS::Bedrock::ResourcePolicy"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_bedrockagentcore_api_key_credential_provider" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::ApiKeyCredentialProvider"
+}
+
 resource_schema "aws_bedrockagentcore_browser_custom" {
   cloudformation_type_name = "AWS::BedrockAgentCore::BrowserCustom"
 }
@@ -724,6 +745,10 @@ resource_schema "aws_bedrockagentcore_evaluator" {
 
 resource_schema "aws_bedrockagentcore_online_evaluation_config" {
   cloudformation_type_name = "AWS::BedrockAgentCore::OnlineEvaluationConfig"
+}
+
+resource_schema "aws_bedrockagentcore_o_auth_2_credential_provider" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::OAuth2CredentialProvider"
 }
 
 resource_schema "aws_bedrockagentcore_policy" {
@@ -788,6 +813,10 @@ resource_schema "aws_billingconductor_pricing_plan" {
 
 resource_schema "aws_billingconductor_pricing_rule" {
   cloudformation_type_name = "AWS::BillingConductor::PricingRule"
+}
+
+resource_schema "aws_braket_spending_limit" {
+  cloudformation_type_name = "AWS::Braket::SpendingLimit"
 }
 
 resource_schema "aws_budgets_budgets_action" {
@@ -2348,6 +2377,10 @@ resource_schema "aws_ecs_cluster" {
 
 resource_schema "aws_ecs_cluster_capacity_provider_associations" {
   cloudformation_type_name = "AWS::ECS::ClusterCapacityProviderAssociations"
+}
+
+resource_schema "aws_ecs_daemon" {
+  cloudformation_type_name = "AWS::ECS::Daemon"
 }
 
 resource_schema "aws_ecs_express_gateway_service" {
@@ -5121,6 +5154,24 @@ resource_schema "aws_s3express_bucket_policy" {
 
 resource_schema "aws_s3express_directory_bucket" {
   cloudformation_type_name = "AWS::S3Express::DirectoryBucket"
+}
+
+resource_schema "aws_s3files_access_point" {
+  cloudformation_type_name               = "AWS::S3Files::AccessPoint"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_s3files_file_system" {
+  cloudformation_type_name = "AWS::S3Files::FileSystem"
+}
+
+resource_schema "aws_s3files_file_system_policy" {
+  cloudformation_type_name = "AWS::S3Files::FileSystemPolicy"
+}
+
+resource_schema "aws_s3files_mount_target" {
+  cloudformation_type_name               = "AWS::S3Files::MountTarget"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_s3objectlambda_access_point" {

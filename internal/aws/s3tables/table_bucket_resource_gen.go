@@ -9,10 +9,12 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -129,6 +131,128 @@ func tableBucketResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Settings governing the Metric configuration for the table bucket.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ReplicationConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies replication configuration for the table bucket",
+		//	  "properties": {
+		//	    "Role": {
+		//	      "description": "The ARN of the IAM role to use for replication",
+		//	      "type": "string"
+		//	    },
+		//	    "Rules": {
+		//	      "description": "List of replication rules",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A replication rule for the table bucket",
+		//	        "properties": {
+		//	          "Destinations": {
+		//	            "description": "List of replication destinations",
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "A replication destination",
+		//	              "properties": {
+		//	                "DestinationTableBucketARN": {
+		//	                  "description": "The ARN of the destination table bucket",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "DestinationTableBucketARN"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "maxItems": 5,
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Destinations"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 1,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Role",
+		//	    "Rules"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"replication_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Role
+				"role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the IAM role to use for replication",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Rules
+				"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Destinations
+							"destinations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DestinationTableBucketARN
+										"destination_table_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The ARN of the destination table bucket",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "List of replication destinations",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.SizeBetween(1, 5),
+									fwvalidators.NotNullList(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "List of replication rules",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 1),
+						fwvalidators.NotNullList(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies replication configuration for the table bucket",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -388,21 +512,26 @@ func tableBucketResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"encryption_configuration":    "EncryptionConfiguration",
-		"key":                         "Key",
-		"kms_key_arn":                 "KMSKeyArn",
-		"metrics_configuration":       "MetricsConfiguration",
-		"noncurrent_days":             "NoncurrentDays",
-		"sse_algorithm":               "SSEAlgorithm",
-		"status":                      "Status",
-		"storage_class":               "StorageClass",
-		"storage_class_configuration": "StorageClassConfiguration",
-		"table_bucket_arn":            "TableBucketARN",
-		"table_bucket_name":           "TableBucketName",
-		"tags":                        "Tags",
-		"unreferenced_days":           "UnreferencedDays",
-		"unreferenced_file_removal":   "UnreferencedFileRemoval",
-		"value":                       "Value",
+		"destination_table_bucket_arn": "DestinationTableBucketARN",
+		"destinations":                 "Destinations",
+		"encryption_configuration":     "EncryptionConfiguration",
+		"key":                          "Key",
+		"kms_key_arn":                  "KMSKeyArn",
+		"metrics_configuration":        "MetricsConfiguration",
+		"noncurrent_days":              "NoncurrentDays",
+		"replication_configuration":    "ReplicationConfiguration",
+		"role":                         "Role",
+		"rules":                        "Rules",
+		"sse_algorithm":                "SSEAlgorithm",
+		"status":                       "Status",
+		"storage_class":                "StorageClass",
+		"storage_class_configuration":  "StorageClassConfiguration",
+		"table_bucket_arn":             "TableBucketARN",
+		"table_bucket_name":            "TableBucketName",
+		"tags":                         "Tags",
+		"unreferenced_days":            "UnreferencedDays",
+		"unreferenced_file_removal":    "UnreferencedFileRemoval",
+		"value":                        "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

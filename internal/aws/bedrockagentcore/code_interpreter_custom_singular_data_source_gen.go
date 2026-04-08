@@ -29,7 +29,7 @@ func codeInterpreterCustomDataSource(ctx context.Context) (datasource.DataSource
 		//
 		//	{
 		//	  "description": "The ARN of a CodeInterpreter resource.",
-		//	  "pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:(aws|[0-9]{12}):code-interpreter(-custom)?\\/(aws\\.codeinterpreter\\.v1|[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10})$",
+		//	  "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):bedrock-agentcore:[a-z0-9-]+:(aws|[0-9]{12}):code-interpreter(-custom)?\\/(aws\\.codeinterpreter\\.v1|[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10})$",
 		//	  "type": "string"
 		//	}
 		"code_interpreter_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -77,7 +77,7 @@ func codeInterpreterCustomDataSource(ctx context.Context) (datasource.DataSource
 		//
 		//	{
 		//	  "description": "The ARN of the IAM role that the code interpreter uses to access resources.",
-		//	  "pattern": "^arn:aws(-[a-z]+)*:iam::[0-9]{12}:role/.+$",
+		//	  "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):iam::[0-9]{12}:role/.+$",
 		//	  "type": "string"
 		//	}
 		"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

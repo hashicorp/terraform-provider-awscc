@@ -151,6 +151,27 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "CustomerManaged": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "AutoScalingConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ScaleOutWorkersPerMinute": {
+		//	              "maximum": 2147483647,
+		//	              "minimum": 1,
+		//	              "type": "integer"
+		//	            },
+		//	            "StandbyWorkerCount": {
+		//	              "maximum": 2147483647,
+		//	              "minimum": 0,
+		//	              "type": "integer"
+		//	            },
+		//	            "WorkerIdleDurationSeconds": {
+		//	              "maximum": 2147483647,
+		//	              "minimum": 0,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "Mode": {
 		//	          "enum": [
 		//	            "NO_SCALING",
@@ -350,6 +371,27 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "ServiceManagedEc2": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "AutoScalingConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ScaleOutWorkersPerMinute": {
+		//	              "maximum": 2147483647,
+		//	              "minimum": 1,
+		//	              "type": "integer"
+		//	            },
+		//	            "StandbyWorkerCount": {
+		//	              "maximum": 2147483647,
+		//	              "minimum": 0,
+		//	              "type": "integer"
+		//	            },
+		//	            "WorkerIdleDurationSeconds": {
+		//	              "maximum": 86400,
+		//	              "minimum": 0,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "InstanceCapabilities": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
@@ -620,6 +662,24 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: CustomerManaged
 				"customer_managed": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AutoScalingConfiguration
+						"auto_scaling_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ScaleOutWorkersPerMinute
+								"scale_out_workers_per_minute": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: StandbyWorkerCount
+								"standby_worker_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: WorkerIdleDurationSeconds
+								"worker_idle_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: Mode
 						"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
@@ -750,6 +810,24 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: ServiceManagedEc2
 				"service_managed_ec_2": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AutoScalingConfiguration
+						"auto_scaling_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ScaleOutWorkersPerMinute
+								"scale_out_workers_per_minute": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: StandbyWorkerCount
+								"standby_worker_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: WorkerIdleDurationSeconds
+								"worker_idle_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: InstanceCapabilities
 						"instance_capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1147,6 +1225,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"amounts":                       "Amounts",
 		"arn":                           "Arn",
 		"attributes":                    "Attributes",
+		"auto_scaling_configuration":    "AutoScalingConfiguration",
 		"capabilities":                  "Capabilities",
 		"configuration":                 "Configuration",
 		"count":                         "Count",
@@ -1176,11 +1255,13 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"role_arn":                      "RoleArn",
 		"root_ebs_volume":               "RootEbsVolume",
 		"runtime":                       "Runtime",
+		"scale_out_workers_per_minute":  "ScaleOutWorkersPerMinute",
 		"script_body":                   "ScriptBody",
 		"script_timeout_seconds":        "ScriptTimeoutSeconds",
 		"selections":                    "Selections",
 		"service_managed_ec_2":          "ServiceManagedEc2",
 		"size_gi_b":                     "SizeGiB",
+		"standby_worker_count":          "StandbyWorkerCount",
 		"status":                        "Status",
 		"status_message":                "StatusMessage",
 		"storage_profile_id":            "StorageProfileId",
@@ -1194,6 +1275,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"vpc_configuration":             "VpcConfiguration",
 		"worker_capabilities":           "WorkerCapabilities",
 		"worker_count":                  "WorkerCount",
+		"worker_idle_duration_seconds":  "WorkerIdleDurationSeconds",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

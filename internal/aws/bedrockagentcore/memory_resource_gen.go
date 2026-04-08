@@ -117,7 +117,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "ARN of the Memory resource",
-		//	  "pattern": "^arn:aws:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:memory/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$",
+		//	  "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:memory/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$",
 		//	  "type": "string"
 		//	}
 		"memory_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -226,6 +226,17 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	                      },
 		//	                      "ModelId": {
 		//	                        "type": "string"
+		//	                      },
+		//	                      "NamespaceTemplates": {
+		//	                        "description": "List of namespaces for memory strategy",
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "description": "Namespace for the memory strategy",
+		//	                          "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "minItems": 1,
+		//	                        "type": "array"
 		//	                      },
 		//	                      "Namespaces": {
 		//	                        "description": "List of namespaces for memory strategy",
@@ -449,6 +460,17 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
 		//	            "type": "string"
 		//	          },
+		//	          "NamespaceTemplates": {
+		//	            "description": "List of namespaces for memory strategy",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "description": "Namespace for the memory strategy",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "type": "string"
+		//	            },
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          },
 		//	          "Namespaces": {
 		//	            "description": "List of namespaces for memory strategy",
 		//	            "insertionOrder": false,
@@ -515,6 +537,17 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
 		//	            "type": "string"
 		//	          },
+		//	          "NamespaceTemplates": {
+		//	            "description": "List of namespaces for memory strategy",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "description": "Namespace for the memory strategy",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "type": "string"
+		//	            },
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          },
 		//	          "Namespaces": {
 		//	            "description": "List of namespaces for memory strategy",
 		//	            "insertionOrder": false,
@@ -529,6 +562,17 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	          "ReflectionConfiguration": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
+		//	              "NamespaceTemplates": {
+		//	                "description": "List of namespaces for memory strategy",
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "description": "Namespace for the memory strategy",
+		//	                  "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	                  "type": "string"
+		//	                },
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              },
 		//	              "Namespaces": {
 		//	                "description": "List of namespaces for memory strategy",
 		//	                "insertionOrder": false,
@@ -541,9 +585,6 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "array"
 		//	              }
 		//	            },
-		//	            "required": [
-		//	              "Namespaces"
-		//	            ],
 		//	            "type": "object"
 		//	          },
 		//	          "Status": {
@@ -600,6 +641,17 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	            "description": "Name of the Memory resource",
 		//	            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
 		//	            "type": "string"
+		//	          },
+		//	          "NamespaceTemplates": {
+		//	            "description": "List of namespaces for memory strategy",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "description": "Namespace for the memory strategy",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "type": "string"
+		//	            },
+		//	            "minItems": 1,
+		//	            "type": "array"
 		//	          },
 		//	          "Namespaces": {
 		//	            "description": "List of namespaces for memory strategy",
@@ -667,6 +719,17 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
 		//	            "type": "string"
 		//	          },
+		//	          "NamespaceTemplates": {
+		//	            "description": "List of namespaces for memory strategy",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "description": "Namespace for the memory strategy",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "type": "string"
+		//	            },
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          },
 		//	          "Namespaces": {
 		//	            "description": "List of namespaces for memory strategy",
 		//	            "insertionOrder": false,
@@ -732,6 +795,17 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	            "description": "Name of the Memory resource",
 		//	            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
 		//	            "type": "string"
+		//	          },
+		//	          "NamespaceTemplates": {
+		//	            "description": "List of namespaces for memory strategy",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "description": "Namespace for the memory strategy",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "type": "string"
+		//	            },
+		//	            "minItems": 1,
+		//	            "type": "array"
 		//	          },
 		//	          "Namespaces": {
 		//	            "description": "List of namespaces for memory strategy",
@@ -892,6 +966,23 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: NamespaceTemplates
+													"namespace_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "List of namespaces for memory strategy",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.List{ /*START VALIDATORS*/
+															listvalidator.SizeAtLeast(1),
+															listvalidator.ValueStringsAre(
+																stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+															),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															generic.Multiset(),
+															listplanmodifier.UseStateForUnknown(),
 														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 													// Property: Namespaces
@@ -1294,6 +1385,23 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
+							// Property: NamespaceTemplates
+							"namespace_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of namespaces for memory strategy",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.SizeAtLeast(1),
+									listvalidator.ValueStringsAre(
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Namespaces
 							"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
@@ -1411,6 +1519,23 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
+							// Property: NamespaceTemplates
+							"namespace_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of namespaces for memory strategy",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.SizeAtLeast(1),
+									listvalidator.ValueStringsAre(
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Namespaces
 							"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
@@ -1431,6 +1556,23 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 							// Property: ReflectionConfiguration
 							"reflection_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: NamespaceTemplates
+									"namespace_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "List of namespaces for memory strategy",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.SizeAtLeast(1),
+											listvalidator.ValueStringsAre(
+												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											generic.Multiset(),
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
 									// Property: Namespaces
 									"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
 										ElementType: types.StringType,
@@ -1442,7 +1584,6 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 											listvalidator.ValueStringsAre(
 												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
 											),
-											fwvalidators.NotNullList(),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											generic.Multiset(),
@@ -1554,6 +1695,23 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: NamespaceTemplates
+							"namespace_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of namespaces for memory strategy",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.SizeAtLeast(1),
+									listvalidator.ValueStringsAre(
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
+									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Namespaces
@@ -1673,6 +1831,23 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
+							// Property: NamespaceTemplates
+							"namespace_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of namespaces for memory strategy",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.SizeAtLeast(1),
+									listvalidator.ValueStringsAre(
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Namespaces
 							"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
@@ -1788,6 +1963,23 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: NamespaceTemplates
+							"namespace_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of namespaces for memory strategy",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.SizeAtLeast(1),
+									listvalidator.ValueStringsAre(
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$"), ""),
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
+									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Namespaces
@@ -2180,6 +2372,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		"message_count":                   "MessageCount",
 		"model_id":                        "ModelId",
 		"name":                            "Name",
+		"namespace_templates":             "NamespaceTemplates",
 		"namespaces":                      "Namespaces",
 		"payload_delivery_bucket_name":    "PayloadDeliveryBucketName",
 		"reflection":                      "Reflection",

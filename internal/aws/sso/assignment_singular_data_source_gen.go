@@ -29,7 +29,7 @@ func assignmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The sso instance that the permission set is owned.",
 		//	  "maxLength": 1224,
 		//	  "minLength": 10,
-		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
+		//	  "pattern": "arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
 		//	  "type": "string"
 		//	}
 		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -43,7 +43,7 @@ func assignmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The permission set that the assignment will be assigned",
 		//	  "maxLength": 1224,
 		//	  "minLength": 10,
-		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
+		//	  "pattern": "arn:aws(-[a-z]{1,5}){0,3}:sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
 		//	  "type": "string"
 		//	}
 		"permission_set_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

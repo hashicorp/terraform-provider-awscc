@@ -31,6 +31,7 @@ Data Source schema for AWS::BedrockAgentCore::Runtime
 - `description` (String) Description of the resource
 - `environment_variables` (Map of String) Environment variables for the agent runtime
 - `failure_reason` (String) The reason for failure if the agent is in a failed state.
+- `filesystem_configurations` (Attributes List) Filesystem configurations for the agent runtime (see [below for nested schema](#nestedatt--filesystem_configurations))
 - `last_updated_at` (String) When resource was last updated
 - `lifecycle_configuration` (Attributes) Lifecycle configuration for managing runtime sessions (see [below for nested schema](#nestedatt--lifecycle_configuration))
 - `network_configuration` (Attributes) Network access configuration for the Agent (see [below for nested schema](#nestedatt--network_configuration))
@@ -131,6 +132,22 @@ Read-Only:
 
 
 
+
+
+
+<a id="nestedatt--filesystem_configurations"></a>
+### Nested Schema for `filesystem_configurations`
+
+Read-Only:
+
+- `session_storage` (Attributes) Configuration for session storage (see [below for nested schema](#nestedatt--filesystem_configurations--session_storage))
+
+<a id="nestedatt--filesystem_configurations--session_storage"></a>
+### Nested Schema for `filesystem_configurations.session_storage`
+
+Read-Only:
+
+- `mount_path` (String) Mount path for session storage
 
 
 

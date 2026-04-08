@@ -44,7 +44,7 @@ func browserCustomResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The ARN of a Browser resource.",
-		//	  "pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:(aws|[0-9]{12}):browser(-custom)?\\/(aws\\.browser\\.v1|[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10})$",
+		//	  "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):bedrock-agentcore:[a-z0-9-]+:(aws|[0-9]{12}):browser(-custom)?\\/(aws\\.browser\\.v1|[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10})$",
 		//	  "type": "string"
 		//	}
 		"browser_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -140,7 +140,7 @@ func browserCustomResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the IAM role that the browser uses to access resources.",
-		//	  "pattern": "^arn:aws(-[a-z]+)*:iam::[0-9]{12}:role/.+$",
+		//	  "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):iam::[0-9]{12}:role/.+$",
 		//	  "type": "string"
 		//	}
 		"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -148,7 +148,7 @@ func browserCustomResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[a-z]+)*:iam::[0-9]{12}:role/.+$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):iam::[0-9]{12}:role/.+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

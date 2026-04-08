@@ -612,6 +612,11 @@
         "identifier": ["ServiceEnvironmentArn"]
     },
     {
+        "resource": "awscc_bcmpricingcalculator_bill_scenario",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_bedrock_agent",
         "generateListResource": true,
         "identifier": ["AgentId"]
@@ -641,6 +646,11 @@
         "identifier": ["BlueprintArn"]
     },
     {
+        "resource": "awscc_bedrock_data_automation_library",
+        "generateListResource": true,
+        "identifier": ["LibraryArn"]
+    },
+    {
         "resource": "awscc_bedrock_data_automation_project",
         "generateListResource": true,
         "identifier": ["ProjectArn"]
@@ -648,6 +658,11 @@
     {
         "resource": "awscc_bedrock_data_source",
         "identifier": ["KnowledgeBaseId","DataSourceId"]
+    },
+    {
+        "resource": "awscc_bedrock_enforced_guardrail_configuration",
+        "generateListResource": true,
+        "identifier": ["ConfigId"]
     },
     {
         "resource": "awscc_bedrock_flow_alias",
@@ -686,6 +701,15 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_bedrock_resource_policy",
+        "identifier": ["ResourceArn"]
+    },
+    {
+        "resource": "awscc_bedrockagentcore_api_key_credential_provider",
+        "generateListResource": true,
+        "identifier": ["CredentialProviderArn"]
+    },
+    {
         "resource": "awscc_bedrockagentcore_browser_custom",
         "generateListResource": true,
         "identifier": ["BrowserId"]
@@ -709,6 +733,11 @@
         "resource": "awscc_bedrockagentcore_online_evaluation_config",
         "generateListResource": true,
         "identifier": ["OnlineEvaluationConfigArn"]
+    },
+    {
+        "resource": "awscc_bedrockagentcore_o_auth_2_credential_provider",
+        "generateListResource": true,
+        "identifier": ["CredentialProviderArn"]
     },
     {
         "resource": "awscc_bedrockagentcore_policy",
@@ -772,6 +801,11 @@
         "resource": "awscc_billingconductor_pricing_rule",
         "generateListResource": true,
         "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_braket_spending_limit",
+        "generateListResource": true,
+        "identifier": ["SpendingLimitArn"]
     },
     {
         "resource": "awscc_budgets_budgets_action",
@@ -2381,6 +2415,11 @@
         "resource": "awscc_ecs_cluster_capacity_provider_associations",
         "generateListResource": true,
         "identifier": ["Cluster"]
+    },
+    {
+        "resource": "awscc_ecs_daemon",
+        "generateListResource": true,
+        "identifier": ["DaemonArn"]
     },
     {
         "resource": "awscc_ecs_express_gateway_service",
@@ -5324,6 +5363,24 @@
         "resource": "awscc_s3express_directory_bucket",
         "generateListResource": true,
         "identifier": ["BucketName"]
+    },
+    {
+        "resource": "awscc_s3files_access_point",
+        "identifier": ["AccessPointId"]
+    },
+    {
+        "resource": "awscc_s3files_file_system",
+        "generateListResource": true,
+        "identifier": ["FileSystemArn"]
+    },
+    {
+        "resource": "awscc_s3files_file_system_policy",
+        "generateListResource": true,
+        "identifier": ["FileSystemId"]
+    },
+    {
+        "resource": "awscc_s3files_mount_target",
+        "identifier": ["MountTargetId"]
     },
     {
         "resource": "awscc_s3objectlambda_access_point",

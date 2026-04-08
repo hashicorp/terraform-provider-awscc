@@ -336,7 +336,7 @@
         "ApiKeyValue": {
           "description": "API key value",
           "type": "string",
-          "pattern": "^[a-zA-Z0-9+/=._-]+$"
+          "pattern": "^[!-~]([ \\t]*[!-~])*$"
         },
         "ApiKeyHeader": {
           "description": "HTTP header name to send the API key",
