@@ -140,6 +140,22 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Application source config",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ApplicationType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of application",
+		//	  "enum": [
+		//	    "STANDARD",
+		//	    "SERVICE",
+		//	    "MCP_SERVER"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"application_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of application",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -353,6 +369,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"application_config":        "ApplicationConfig",
 		"application_id":            "Id",
 		"application_source_config": "ApplicationSourceConfig",
+		"application_type":          "ApplicationType",
 		"approved_origins":          "ApprovedOrigins",
 		"contact_handling":          "ContactHandling",
 		"description":               "Description",

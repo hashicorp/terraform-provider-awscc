@@ -557,6 +557,69 @@ func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Kubernetes version to use for your managed nodes.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: WarmPoolConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The warm pool configuration details for the Auto Scaling group that is created for the node group.",
+		//	  "properties": {
+		//	    "Enabled": {
+		//	      "description": "Enable or disable warm pool for the node group.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "MaxGroupPreparedCapacity": {
+		//	      "description": "The maximum number of instances that are allowed to be in the warm pool.",
+		//	      "minimum": -1,
+		//	      "type": "integer"
+		//	    },
+		//	    "MinSize": {
+		//	      "description": "The minimum number of instances to maintain in the warm pool.",
+		//	      "minimum": 0,
+		//	      "type": "integer"
+		//	    },
+		//	    "PoolState": {
+		//	      "description": "The desired state of warm pool instances.",
+		//	      "type": "string"
+		//	    },
+		//	    "ReuseOnScaleIn": {
+		//	      "description": "Whether to return instances to the warm pool during scale-in instead of terminating them.",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"warm_pool_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Enable or disable warm pool for the node group.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxGroupPreparedCapacity
+				"max_group_prepared_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum number of instances that are allowed to be in the warm pool.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinSize
+				"min_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The minimum number of instances to maintain in the warm pool.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PoolState
+				"pool_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The desired state of warm pool instances.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ReuseOnScaleIn
+				"reuse_on_scale_in": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether to return instances to the warm pool during scale-in instead of terminating them.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The warm pool configuration details for the Auto Scaling group that is created for the node group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -589,6 +652,7 @@ func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key":                                    "Key",
 		"labels":                                 "Labels",
 		"launch_template":                        "LaunchTemplate",
+		"max_group_prepared_capacity":            "MaxGroupPreparedCapacity",
 		"max_parallel_nodes_repaired_count":      "MaxParallelNodesRepairedCount",
 		"max_parallel_nodes_repaired_percentage": "MaxParallelNodesRepairedPercentage",
 		"max_size":                               "MaxSize",
@@ -606,9 +670,11 @@ func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"node_unhealthy_reason":                   "NodeUnhealthyReason",
 		"nodegroup_id":                            "Id",
 		"nodegroup_name":                          "NodegroupName",
+		"pool_state":                              "PoolState",
 		"release_version":                         "ReleaseVersion",
 		"remote_access":                           "RemoteAccess",
 		"repair_action":                           "RepairAction",
+		"reuse_on_scale_in":                       "ReuseOnScaleIn",
 		"scaling_config":                          "ScalingConfig",
 		"source_security_groups":                  "SourceSecurityGroups",
 		"subnets":                                 "Subnets",
@@ -618,6 +684,7 @@ func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"update_strategy":                         "UpdateStrategy",
 		"value":                                   "Value",
 		"version":                                 "Version",
+		"warm_pool_config":                        "WarmPoolConfig",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -359,6 +359,7 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        "AWS::CloudTrail",
 		//	        "AWS::EKS::Cluster",
 		//	        "AWS::ElasticLoadBalancingV2::LoadBalancer",
+		//	        "AWS::EC2::Instance",
 		//	        "AWS::BedrockAgentCore::Runtime",
 		//	        "AWS::BedrockAgentCore::Browser",
 		//	        "AWS::BedrockAgentCore::CodeInterpreter"
@@ -392,7 +393,8 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	      "description": "Telemetry Type associated with the Telemetry Rule",
 		//	      "enum": [
 		//	        "Logs",
-		//	        "Traces"
+		//	        "Traces",
+		//	        "Metrics"
 		//	      ],
 		//	      "type": "string"
 		//	    }
