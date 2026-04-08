@@ -61,11 +61,35 @@
         "arm64"
       ]
     },
+    "CustomerManagedAutoScalingConfiguration": {
+      "type": "object",
+      "properties": {
+        "StandbyWorkerCount": {
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": 0
+        },
+        "WorkerIdleDurationSeconds": {
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": 0
+        },
+        "ScaleOutWorkersPerMinute": {
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    },
     "CustomerManagedFleetConfiguration": {
       "type": "object",
       "properties": {
         "Mode": {
           "$ref": "#/definitions/AutoScalingMode"
+        },
+        "AutoScalingConfiguration": {
+          "$ref": "#/definitions/CustomerManagedAutoScalingConfiguration"
         },
         "WorkerCapabilities": {
           "$ref": "#/definitions/CustomerManagedWorkerCapabilities"
@@ -367,6 +391,27 @@
       ],
       "additionalProperties": false
     },
+    "ServiceManagedEc2AutoScalingConfiguration": {
+      "type": "object",
+      "properties": {
+        "StandbyWorkerCount": {
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": 0
+        },
+        "WorkerIdleDurationSeconds": {
+          "type": "integer",
+          "maximum": 86400,
+          "minimum": 0
+        },
+        "ScaleOutWorkersPerMinute": {
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    },
     "ServiceManagedEc2FleetConfiguration": {
       "type": "object",
       "properties": {
@@ -382,6 +427,9 @@
         "StorageProfileId": {
           "type": "string",
           "pattern": "^sp-[0-9a-f]{32}$"
+        },
+        "AutoScalingConfiguration": {
+          "$ref": "#/definitions/ServiceManagedEc2AutoScalingConfiguration"
         }
       },
       "required": [
