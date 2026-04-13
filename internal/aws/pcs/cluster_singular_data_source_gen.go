@@ -344,6 +344,30 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "CgroupCustomSettings": {
+		//	      "description": "Additional cgroup-specific configuration that directly maps to cgroup.conf settings.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Additional cgroup configuration settings.",
+		//	        "properties": {
+		//	          "ParameterName": {
+		//	            "description": "The cgroup.conf parameter name.",
+		//	            "type": "string"
+		//	          },
+		//	          "ParameterValue": {
+		//	            "description": "The value for the cgroup.conf parameter.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "ParameterName",
+		//	          "ParameterValue"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    },
 		//	    "JwtAuth": {
 		//	      "additionalProperties": false,
 		//	      "description": "JWT authentication configuration for Slurm.",
@@ -417,6 +441,30 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "Mode"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "SlurmdbdCustomSettings": {
+		//	      "description": "Additional slurmdbd-specific configuration that directly maps to slurmdbd.conf settings.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Additional slurmdbd configuration settings.",
+		//	        "properties": {
+		//	          "ParameterName": {
+		//	            "description": "The slurmdbd.conf parameter name.",
+		//	            "type": "string"
+		//	          },
+		//	          "ParameterValue": {
+		//	            "description": "The value for the slurmdbd.conf parameter.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "ParameterName",
+		//	          "ParameterValue"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -455,6 +503,25 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The shared Slurm key for authentication, also known as the cluster secret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CgroupCustomSettings
+				"cgroup_custom_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ParameterName
+							"parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The cgroup.conf parameter name.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ParameterValue
+							"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The value for the cgroup.conf parameter.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Additional cgroup-specific configuration that directly maps to cgroup.conf settings.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: JwtAuth
@@ -515,6 +582,25 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The SlurmRest configuration includes configurable settings for Slurm Rest.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SlurmdbdCustomSettings
+				"slurmdbd_custom_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ParameterName
+							"parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The slurmdbd.conf parameter name.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ParameterValue
+							"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The value for the slurmdbd.conf parameter.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Additional slurmdbd-specific configuration that directly maps to slurmdbd.conf settings.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -579,6 +665,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"accounting":                      "Accounting",
 		"arn":                             "Arn",
 		"auth_key":                        "AuthKey",
+		"cgroup_custom_settings":          "CgroupCustomSettings",
 		"cluster_id":                      "Id",
 		"code":                            "Code",
 		"default_purge_time_in_days":      "DefaultPurgeTimeInDays",
@@ -606,6 +693,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"slurm_configuration":             "SlurmConfiguration",
 		"slurm_custom_settings":           "SlurmCustomSettings",
 		"slurm_rest":                      "SlurmRest",
+		"slurmdbd_custom_settings":        "SlurmdbdCustomSettings",
 		"status":                          "Status",
 		"subnet_ids":                      "SubnetIds",
 		"tags":                            "Tags",

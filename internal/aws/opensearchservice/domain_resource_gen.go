@@ -855,6 +855,45 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DeploymentStrategyOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "DeploymentStrategy": {
+		//	      "enum": [
+		//	        "Default",
+		//	        "CapacityOptimized"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"deployment_strategy_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DeploymentStrategy
+				"deployment_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"Default",
+							"CapacityOptimized",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DomainArn
 		// CloudFormation resource type schema:
 		//
@@ -1767,6 +1806,8 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"dedicated_master_count":          "DedicatedMasterCount",
 		"dedicated_master_enabled":        "DedicatedMasterEnabled",
 		"dedicated_master_type":           "DedicatedMasterType",
+		"deployment_strategy":             "DeploymentStrategy",
+		"deployment_strategy_options":     "DeploymentStrategyOptions",
 		"description":                     "Description",
 		"domain_arn":                      "DomainArn",
 		"domain_endpoint":                 "DomainEndpoint",

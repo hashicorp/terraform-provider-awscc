@@ -367,6 +367,14 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "MaxSize"
 		//	        ],
 		//	        "type": "object"
+		//	      },
+		//	      "PlayerGatewayStatus": {
+		//	        "description": "The player gateway status for the location.",
+		//	        "enum": [
+		//	          "DISABLED",
+		//	          "ENABLED"
+		//	        ],
+		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -422,6 +430,11 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Current resource capacity settings in a specified fleet or location. The location value might refer to a fleet's remote location or its home Region.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: PlayerGatewayStatus
+					"player_gateway_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The player gateway status for the location.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -539,6 +552,51 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"peer_vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The VPC must be in the same Region as your fleet. To look up a VPC ID, use the VPC Dashboard in the AWS Management Console.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PlayerGatewayConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for player gateway.",
+		//	  "properties": {
+		//	    "GameServerIpProtocolSupported": {
+		//	      "description": "The IP protocol supported by the game server.",
+		//	      "enum": [
+		//	        "IPv4",
+		//	        "DUAL_STACK"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"player_gateway_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: GameServerIpProtocolSupported
+				"game_server_ip_protocol_supported": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The IP protocol supported by the game server.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for player gateway.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PlayerGatewayMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The player gateway mode for the fleet.",
+		//	  "enum": [
+		//	    "DISABLED",
+		//	    "ENABLED",
+		//	    "REQUIRED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"player_gateway_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The player gateway mode for the fleet.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceCreationLimitPolicy
@@ -978,24 +1036,25 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::GameLift::Fleet").WithTerraformTypeName("awscc_gamelift_fleet")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"anywhere_configuration":    "AnywhereConfiguration",
-		"apply_capacity":            "ApplyCapacity",
-		"build_id":                  "BuildId",
-		"certificate_configuration": "CertificateConfiguration",
-		"certificate_type":          "CertificateType",
-		"comparison_operator":       "ComparisonOperator",
-		"compute_type":              "ComputeType",
-		"concurrent_executions":     "ConcurrentExecutions",
-		"cost":                      "Cost",
-		"description":               "Description",
-		"desired_ec2_instances":     "DesiredEC2Instances",
-		"ec2_inbound_permissions":   "EC2InboundPermissions",
-		"ec2_instance_type":         "EC2InstanceType",
-		"evaluation_periods":        "EvaluationPeriods",
-		"fleet_arn":                 "FleetArn",
-		"fleet_id":                  "FleetId",
-		"fleet_type":                "FleetType",
-		"from_port":                 "FromPort",
+		"anywhere_configuration":            "AnywhereConfiguration",
+		"apply_capacity":                    "ApplyCapacity",
+		"build_id":                          "BuildId",
+		"certificate_configuration":         "CertificateConfiguration",
+		"certificate_type":                  "CertificateType",
+		"comparison_operator":               "ComparisonOperator",
+		"compute_type":                      "ComputeType",
+		"concurrent_executions":             "ConcurrentExecutions",
+		"cost":                              "Cost",
+		"description":                       "Description",
+		"desired_ec2_instances":             "DesiredEC2Instances",
+		"ec2_inbound_permissions":           "EC2InboundPermissions",
+		"ec2_instance_type":                 "EC2InstanceType",
+		"evaluation_periods":                "EvaluationPeriods",
+		"fleet_arn":                         "FleetArn",
+		"fleet_id":                          "FleetId",
+		"fleet_type":                        "FleetType",
+		"from_port":                         "FromPort",
+		"game_server_ip_protocol_supported": "GameServerIpProtocolSupported",
 		"game_session_activation_timeout_seconds": "GameSessionActivationTimeoutSeconds",
 		"instance_role_arn":                       "InstanceRoleARN",
 		"instance_role_credentials_provider":      "InstanceRoleCredentialsProvider",
@@ -1018,6 +1077,9 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"parameters":                         "Parameters",
 		"peer_vpc_aws_account_id":            "PeerVpcAwsAccountId",
 		"peer_vpc_id":                        "PeerVpcId",
+		"player_gateway_configuration":       "PlayerGatewayConfiguration",
+		"player_gateway_mode":                "PlayerGatewayMode",
+		"player_gateway_status":              "PlayerGatewayStatus",
 		"policy_period_in_minutes":           "PolicyPeriodInMinutes",
 		"policy_type":                        "PolicyType",
 		"protocol":                           "Protocol",

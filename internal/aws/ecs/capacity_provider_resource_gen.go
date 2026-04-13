@@ -269,6 +269,9 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	        "FipsEnabled": {
 		//	          "type": "boolean"
 		//	        },
+		//	        "InstanceMetadataTagsPropagation": {
+		//	          "type": "boolean"
+		//	        },
 		//	        "InstanceRequirements": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
@@ -531,6 +534,15 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	          ],
 		//	          "type": "object"
 		//	        },
+		//	        "LocalStorageConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "UseLocalStorage": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "Monitoring": {
 		//	          "enum": [
 		//	            "BASIC",
@@ -698,6 +710,14 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
 								boolplanmodifier.RequiresReplaceIfConfigured(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: InstanceMetadataTagsPropagation
+						"instance_metadata_tags_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: InstanceRequirements
@@ -1181,6 +1201,24 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: LocalStorageConfiguration
+						"local_storage_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: UseLocalStorage
+								"use_local_storage": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: Monitoring
 						"monitoring": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
@@ -1379,38 +1417,40 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"accelerator_count":              "AcceleratorCount",
-		"accelerator_manufacturers":      "AcceleratorManufacturers",
-		"accelerator_names":              "AcceleratorNames",
-		"accelerator_total_memory_mi_b":  "AcceleratorTotalMemoryMiB",
-		"accelerator_types":              "AcceleratorTypes",
-		"allowed_instance_types":         "AllowedInstanceTypes",
-		"auto_scaling_group_arn":         "AutoScalingGroupArn",
-		"auto_scaling_group_provider":    "AutoScalingGroupProvider",
-		"bare_metal":                     "BareMetal",
-		"baseline_ebs_bandwidth_mbps":    "BaselineEbsBandwidthMbps",
-		"burstable_performance":          "BurstablePerformance",
-		"capacity_option_type":           "CapacityOptionType",
-		"capacity_reservations":          "CapacityReservations",
-		"cluster_name":                   "ClusterName",
-		"cpu_manufacturers":              "CpuManufacturers",
-		"ec_2_instance_profile_arn":      "Ec2InstanceProfileArn",
-		"excluded_instance_types":        "ExcludedInstanceTypes",
-		"fips_enabled":                   "FipsEnabled",
-		"infrastructure_optimization":    "InfrastructureOptimization",
-		"infrastructure_role_arn":        "InfrastructureRoleArn",
-		"instance_generations":           "InstanceGenerations",
-		"instance_launch_template":       "InstanceLaunchTemplate",
-		"instance_requirements":          "InstanceRequirements",
-		"instance_warmup_period":         "InstanceWarmupPeriod",
-		"key":                            "Key",
-		"local_storage":                  "LocalStorage",
-		"local_storage_types":            "LocalStorageTypes",
-		"managed_draining":               "ManagedDraining",
-		"managed_instances_provider":     "ManagedInstancesProvider",
-		"managed_scaling":                "ManagedScaling",
-		"managed_termination_protection": "ManagedTerminationProtection",
-		"max":                            "Max",
+		"accelerator_count":                  "AcceleratorCount",
+		"accelerator_manufacturers":          "AcceleratorManufacturers",
+		"accelerator_names":                  "AcceleratorNames",
+		"accelerator_total_memory_mi_b":      "AcceleratorTotalMemoryMiB",
+		"accelerator_types":                  "AcceleratorTypes",
+		"allowed_instance_types":             "AllowedInstanceTypes",
+		"auto_scaling_group_arn":             "AutoScalingGroupArn",
+		"auto_scaling_group_provider":        "AutoScalingGroupProvider",
+		"bare_metal":                         "BareMetal",
+		"baseline_ebs_bandwidth_mbps":        "BaselineEbsBandwidthMbps",
+		"burstable_performance":              "BurstablePerformance",
+		"capacity_option_type":               "CapacityOptionType",
+		"capacity_reservations":              "CapacityReservations",
+		"cluster_name":                       "ClusterName",
+		"cpu_manufacturers":                  "CpuManufacturers",
+		"ec_2_instance_profile_arn":          "Ec2InstanceProfileArn",
+		"excluded_instance_types":            "ExcludedInstanceTypes",
+		"fips_enabled":                       "FipsEnabled",
+		"infrastructure_optimization":        "InfrastructureOptimization",
+		"infrastructure_role_arn":            "InfrastructureRoleArn",
+		"instance_generations":               "InstanceGenerations",
+		"instance_launch_template":           "InstanceLaunchTemplate",
+		"instance_metadata_tags_propagation": "InstanceMetadataTagsPropagation",
+		"instance_requirements":              "InstanceRequirements",
+		"instance_warmup_period":             "InstanceWarmupPeriod",
+		"key":                                "Key",
+		"local_storage":                      "LocalStorage",
+		"local_storage_configuration":        "LocalStorageConfiguration",
+		"local_storage_types":                "LocalStorageTypes",
+		"managed_draining":                   "ManagedDraining",
+		"managed_instances_provider":         "ManagedInstancesProvider",
+		"managed_scaling":                    "ManagedScaling",
+		"managed_termination_protection":     "ManagedTerminationProtection",
+		"max":                                "Max",
 		"max_spot_price_as_percentage_of_optimal_on_demand_price": "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice",
 		"maximum_scaling_step_size":                               "MaximumScalingStepSize",
 		"memory_gi_b_per_v_cpu":                                   "MemoryGiBPerVCpu",
@@ -1437,6 +1477,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                   "Tags",
 		"target_capacity":        "TargetCapacity",
 		"total_local_storage_gb": "TotalLocalStorageGB",
+		"use_local_storage":      "UseLocalStorage",
 		"v_cpu_count":            "VCpuCount",
 		"value":                  "Value",
 	})

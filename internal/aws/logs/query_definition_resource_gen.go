@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -79,6 +80,95 @@ func queryDefinitionResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Parameters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Use this parameter to include specific query parameters as part of your query definition. Query parameters are supported only for Logs Insights QL queries. Query parameters allow you to use placeholder variables in your query string that are substituted with values at execution time. Use the {{parameterName}} syntax in your query string to reference a parameter.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "This structure defines a query parameter for a saved CloudWatch Logs Insights query definition. Query parameters are supported only for Logs Insights QL queries. They are placeholder variables that you can reference in a query string using the {{parameterName}} syntax. Each parameter can include a default value and a description.",
+		//	    "properties": {
+		//	      "DefaultValue": {
+		//	        "description": "The default value to use for this query parameter if no value is supplied at execution time.",
+		//	        "maxLength": 1024,
+		//	        "type": "string"
+		//	      },
+		//	      "Description": {
+		//	        "description": "A description of the query parameter that explains its purpose or expected values.",
+		//	        "maxLength": 512,
+		//	        "type": "string"
+		//	      },
+		//	      "Name": {
+		//	        "description": "The name of the query parameter. A query parameter name must start with a letter or underscore, and contain only letters, digits, and underscores.",
+		//	        "maxLength": 128,
+		//	        "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Name"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 20,
+		//	  "type": "array"
+		//	}
+		"parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DefaultValue
+					"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The default value to use for this query parameter if no value is supplied at execution time.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(1024),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A description of the query parameter that explains its purpose or expected values.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(512),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the query parameter. A query parameter name must start with a letter or underscore, and contain only letters, digits, and underscores.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(128),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z_][a-zA-Z0-9_]*$"), ""),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Use this parameter to include specific query parameters as part of your query definition. Query parameters are supported only for Logs Insights QL queries. Query parameters allow you to use placeholder variables in your query string that are substituted with values at execution time. Use the {{parameterName}} syntax in your query string to reference a parameter.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(20),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: QueryDefinitionId
 		// CloudFormation resource type schema:
@@ -170,8 +260,11 @@ func queryDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"default_value":       "DefaultValue",
+		"description":         "Description",
 		"log_group_names":     "LogGroupNames",
 		"name":                "Name",
+		"parameters":          "Parameters",
 		"query_definition_id": "QueryDefinitionId",
 		"query_language":      "QueryLanguage",
 		"query_string":        "QueryString",

@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrockagentcore_o_auth_2_credential_provider.example "credential_provider_arn"

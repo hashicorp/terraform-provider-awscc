@@ -230,6 +230,11 @@
         "identifier": ["ApiId","RouteId","RouteResponseId"]
     },
     {
+        "resource": "awscc_apigatewayv2_stage",
+        "generateListResource": true,
+        "identifier": ["ApiId","StageName"]
+    },
+    {
         "resource": "awscc_apigatewayv2_vpc_link",
         "generateListResource": true,
         "identifier": ["VpcLinkId"]
@@ -357,6 +362,11 @@
     },
     {
         "resource": "awscc_appstream_image_builder",
+        "generateListResource": true,
+        "identifier": ["Name"]
+    },
+    {
+        "resource": "awscc_appstream_stack",
         "generateListResource": true,
         "identifier": ["Name"]
     },
@@ -587,6 +597,11 @@
         "identifier": ["JobQueueArn"]
     },
     {
+        "resource": "awscc_batch_quota_share",
+        "generateListResource": true,
+        "identifier": ["QuotaShareArn"]
+    },
+    {
         "resource": "awscc_batch_scheduling_policy",
         "generateListResource": true,
         "identifier": ["Arn"]
@@ -595,6 +610,11 @@
         "resource": "awscc_batch_service_environment",
         "generateListResource": true,
         "identifier": ["ServiceEnvironmentArn"]
+    },
+    {
+        "resource": "awscc_bcmpricingcalculator_bill_scenario",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_bedrock_agent",
@@ -626,6 +646,11 @@
         "identifier": ["BlueprintArn"]
     },
     {
+        "resource": "awscc_bedrock_data_automation_library",
+        "generateListResource": true,
+        "identifier": ["LibraryArn"]
+    },
+    {
         "resource": "awscc_bedrock_data_automation_project",
         "generateListResource": true,
         "identifier": ["ProjectArn"]
@@ -633,6 +658,11 @@
     {
         "resource": "awscc_bedrock_data_source",
         "identifier": ["KnowledgeBaseId","DataSourceId"]
+    },
+    {
+        "resource": "awscc_bedrock_enforced_guardrail_configuration",
+        "generateListResource": true,
+        "identifier": ["ConfigId"]
     },
     {
         "resource": "awscc_bedrock_flow_alias",
@@ -671,6 +701,15 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_bedrock_resource_policy",
+        "identifier": ["ResourceArn"]
+    },
+    {
+        "resource": "awscc_bedrockagentcore_api_key_credential_provider",
+        "generateListResource": true,
+        "identifier": ["CredentialProviderArn"]
+    },
+    {
         "resource": "awscc_bedrockagentcore_browser_custom",
         "generateListResource": true,
         "identifier": ["BrowserId"]
@@ -694,6 +733,11 @@
         "resource": "awscc_bedrockagentcore_online_evaluation_config",
         "generateListResource": true,
         "identifier": ["OnlineEvaluationConfigArn"]
+    },
+    {
+        "resource": "awscc_bedrockagentcore_o_auth_2_credential_provider",
+        "generateListResource": true,
+        "identifier": ["CredentialProviderArn"]
     },
     {
         "resource": "awscc_bedrockagentcore_policy",
@@ -757,6 +801,11 @@
         "resource": "awscc_billingconductor_pricing_rule",
         "generateListResource": true,
         "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_braket_spending_limit",
+        "generateListResource": true,
+        "identifier": ["SpendingLimitArn"]
     },
     {
         "resource": "awscc_budgets_budgets_action",
@@ -868,6 +917,16 @@
     {
         "resource": "awscc_cleanrooms_privacy_budget_template",
         "identifier": ["PrivacyBudgetTemplateIdentifier","MembershipIdentifier"]
+    },
+    {
+        "resource": "awscc_cleanroomsml_configured_model_algorithm",
+        "generateListResource": true,
+        "identifier": ["ConfiguredModelAlgorithmArn"]
+    },
+    {
+        "resource": "awscc_cleanroomsml_configured_model_algorithm_association",
+        "generateListResource": true,
+        "identifier": ["ConfiguredModelAlgorithmAssociationArn"]
     },
     {
         "resource": "awscc_cleanroomsml_training_dataset",
@@ -1456,6 +1515,11 @@
         "identifier": ["DomainName","SegmentDefinitionName"]
     },
     {
+        "resource": "awscc_customerprofiles_recommender",
+        "generateListResource": true,
+        "identifier": ["DomainName","RecommenderName"]
+    },
+    {
         "resource": "awscc_dax_subnet_group",
         "generateListResource": true,
         "identifier": ["Id"]
@@ -1870,6 +1934,11 @@
         "identifier": ["IpamPrefixListResolverId"]
     },
     {
+        "resource": "awscc_ec2_ipam_prefix_list_resolver_target",
+        "generateListResource": true,
+        "identifier": ["IpamPrefixListResolverTargetId"]
+    },
+    {
         "resource": "awscc_ec2_ipam_resource_discovery",
         "generateListResource": true,
         "identifier": ["IpamResourceDiscoveryId"]
@@ -2057,6 +2126,11 @@
         "resource": "awscc_ec2_spot_fleet",
         "generateListResource": true,
         "identifier": ["Id"]
+    },
+    {
+        "resource": "awscc_ec2_sql_ha_standby_detected_instance",
+        "generateListResource": true,
+        "identifier": ["InstanceId"]
     },
     {
         "resource": "awscc_ec2_subnet",
@@ -2343,6 +2417,11 @@
         "identifier": ["Cluster"]
     },
     {
+        "resource": "awscc_ecs_daemon",
+        "generateListResource": true,
+        "identifier": ["DaemonArn"]
+    },
+    {
         "resource": "awscc_ecs_express_gateway_service",
         "identifier": ["ServiceArn"]
     },
@@ -2461,6 +2540,11 @@
         "identifier": ["CacheParameterGroupName"]
     },
     {
+        "resource": "awscc_elasticache_replication_group",
+        "generateListResource": true,
+        "identifier": ["ReplicationGroupId"]
+    },
+    {
         "resource": "awscc_elasticache_serverless_cache",
         "generateListResource": true,
         "identifier": ["ServerlessCacheName"]
@@ -2528,6 +2612,11 @@
     {
         "resource": "awscc_elasticloadbalancingv2_trust_store_revocation",
         "identifier": ["RevocationId","TrustStoreArn"]
+    },
+    {
+        "resource": "awscc_elementalinference_feed",
+        "generateListResource": true,
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_entityresolution_id_mapping_workflow",
@@ -2790,6 +2879,11 @@
         "resource": "awscc_globalaccelerator_listener",
         "generateListResource": true,
         "identifier": ["ListenerArn"]
+    },
+    {
+        "resource": "awscc_glue_catalog",
+        "generateListResource": true,
+        "identifier": ["ResourceArn"]
     },
     {
         "resource": "awscc_glue_crawler",
@@ -3150,6 +3244,11 @@
         "resource": "awscc_invoicing_invoice_unit",
         "generateListResource": true,
         "identifier": ["InvoiceUnitArn"]
+    },
+    {
+        "resource": "awscc_interconnect_connection",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_iot_account_audit_configuration",
@@ -4403,6 +4502,11 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_observabilityadmin_telemetry_enrichment",
+        "generateListResource": true,
+        "identifier": ["Scope"]
+    },
+    {
         "resource": "awscc_observabilityadmin_telemetry_rule",
         "generateListResource": true,
         "identifier": ["RuleArn"]
@@ -4449,6 +4553,11 @@
     },
     {
         "resource": "awscc_omics_annotation_store",
+        "generateListResource": true,
+        "identifier": ["Name"]
+    },
+    {
+        "resource": "awscc_omics_configuration",
         "generateListResource": true,
         "identifier": ["Name"]
     },
@@ -5028,6 +5137,36 @@
         "identifier": ["HostedZoneId","Name"]
     },
     {
+        "resource": "awscc_route53globalresolver_access_source",
+        "identifier": ["AccessSourceId"]
+    },
+    {
+        "resource": "awscc_route53globalresolver_access_token",
+        "identifier": ["AccessTokenId"]
+    },
+    {
+        "resource": "awscc_route53globalresolver_dns_view",
+        "identifier": ["DnsViewId"]
+    },
+    {
+        "resource": "awscc_route53globalresolver_firewall_domain_list",
+        "generateListResource": true,
+        "identifier": ["FirewallDomainListId"]
+    },
+    {
+        "resource": "awscc_route53globalresolver_firewall_rule",
+        "identifier": ["FirewallRuleId"]
+    },
+    {
+        "resource": "awscc_route53globalresolver_global_resolver",
+        "generateListResource": true,
+        "identifier": ["GlobalResolverId"]
+    },
+    {
+        "resource": "awscc_route53globalresolver_hosted_zone_association",
+        "identifier": ["HostedZoneAssociationId"]
+    },
+    {
         "resource": "awscc_route53_record_set",
         "identifier": ["Id"]
     },
@@ -5224,6 +5363,24 @@
         "resource": "awscc_s3express_directory_bucket",
         "generateListResource": true,
         "identifier": ["BucketName"]
+    },
+    {
+        "resource": "awscc_s3files_access_point",
+        "identifier": ["AccessPointId"]
+    },
+    {
+        "resource": "awscc_s3files_file_system",
+        "generateListResource": true,
+        "identifier": ["FileSystemArn"]
+    },
+    {
+        "resource": "awscc_s3files_file_system_policy",
+        "generateListResource": true,
+        "identifier": ["FileSystemId"]
+    },
+    {
+        "resource": "awscc_s3files_mount_target",
+        "identifier": ["MountTargetId"]
     },
     {
         "resource": "awscc_s3objectlambda_access_point",
@@ -5621,6 +5778,11 @@
         "identifier": ["TrackingServerName"]
     },
     {
+        "resource": "awscc_sagemaker_model",
+        "generateListResource": true,
+        "identifier": ["ModelArn"]
+    },
+    {
         "resource": "awscc_sagemaker_model_bias_job_definition",
         "generateListResource": true,
         "identifier": ["JobDefinitionArn"]
@@ -5714,6 +5876,25 @@
         "resource": "awscc_secretsmanager_secret_target_attachment",
         "generateListResource": true,
         "identifier": ["Id"]
+    },
+    {
+        "resource": "awscc_securityagent_agent_space",
+        "generateListResource": true,
+        "identifier": ["AgentSpaceId"]
+    },
+    {
+        "resource": "awscc_securityagent_application",
+        "generateListResource": true,
+        "identifier": ["ApplicationId"]
+    },
+    {
+        "resource": "awscc_securityagent_pentest",
+        "identifier": ["PentestId","AgentSpaceId"]
+    },
+    {
+        "resource": "awscc_securityagent_target_domain",
+        "generateListResource": true,
+        "identifier": ["TargetDomainId"]
     },
     {
         "resource": "awscc_securityhub_aggregator_v2",
@@ -5851,6 +6032,10 @@
     {
         "resource": "awscc_servicecatalog_service_action_association",
         "identifier": ["ProductId","ProvisioningArtifactId","ServiceActionId"]
+    },
+    {
+        "resource": "awscc_servicecatalog_stack_set_constraint",
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_servicecatalog_tag_option",
@@ -6020,6 +6205,10 @@
         "resource": "awscc_transfer_workflow",
         "generateListResource": true,
         "identifier": ["WorkflowId"]
+    },
+    {
+        "resource": "awscc_uxc_account_customization",
+        "identifier": ["AccountId"]
     },
     {
         "resource": "awscc_verifiedpermissions_identity_source",

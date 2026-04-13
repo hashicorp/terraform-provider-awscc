@@ -26,6 +26,9 @@ updates:
         patterns:
           - "github.com/hashicorp/aws-sdk-go-base/v2"
           - "github.com/hashicorp/aws-sdk-go-base/v2/*"
+      terraform-devex:
+        patterns:
+          - "github.com/hashicorp/terraform-plugin-*"
     ignore:
       # terraform-plugin-go should only be updated via terraform-plugin-framework
       - dependency-name: "github.com/hashicorp/terraform-plugin-go"

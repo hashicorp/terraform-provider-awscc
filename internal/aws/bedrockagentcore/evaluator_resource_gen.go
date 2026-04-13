@@ -96,7 +96,50 @@ func evaluatorResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "description": "The configuration for the evaluator.",
+		//	  "oneOf": [
+		//	    {
+		//	      "required": [
+		//	        "LlmAsAJudge"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "CodeBased"
+		//	      ]
+		//	    }
+		//	  ],
 		//	  "properties": {
+		//	    "CodeBased": {
+		//	      "additionalProperties": false,
+		//	      "description": "The configuration for code-based evaluation using a Lambda function.",
+		//	      "properties": {
+		//	        "LambdaConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "The Lambda function configuration for code-based evaluation.",
+		//	          "properties": {
+		//	            "LambdaArn": {
+		//	              "description": "The ARN of the Lambda function used for evaluation.",
+		//	              "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:([a-z]{2}(-gov)?-[a-z]+-\\d{1}):(\\d{12}):function:([a-zA-Z0-9-_.]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
+		//	              "type": "string"
+		//	            },
+		//	            "LambdaTimeoutInSeconds": {
+		//	              "description": "The timeout in seconds for the Lambda function invocation.",
+		//	              "maximum": 300,
+		//	              "minimum": 1,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "LambdaArn"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "LambdaConfig"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "LlmAsAJudge": {
 		//	      "additionalProperties": false,
 		//	      "description": "The configuration for LLM-as-a-Judge evaluation.",
@@ -241,20 +284,74 @@ func evaluatorResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "LlmAsAJudge"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"evaluator_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CodeBased
+				"code_based": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LambdaConfig
+						"lambda_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: LambdaArn
+								"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the Lambda function used for evaluation.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*)?:lambda:([a-z]{2}(-gov)?-[a-z]+-\\d{1}):(\\d{12}):function:([a-zA-Z0-9-_.]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: LambdaTimeoutInSeconds
+								"lambda_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The timeout in seconds for the Lambda function invocation.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(1, 300),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The Lambda function configuration for code-based evaluation.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration for code-based evaluation using a Lambda function.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: LlmAsAJudge
 				"llm_as_a_judge": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Instructions
 						"instructions": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The evaluation instructions that guide the language model in assessing agent performance.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ModelConfig
 						"model_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -322,15 +419,36 @@ func evaluatorResource(ctx context.Context) (resource.Resource, error) {
 										// Property: ModelId
 										"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "The identifier of the Amazon Bedrock model to use for evaluation.",
-											Required:    true,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "The configuration for using Amazon Bedrock models in evaluator assessments.",
-									Required:    true,
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Object{ /*START VALIDATORS*/
+										fwvalidators.NotNullObject(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "The model configuration that specifies which foundation model to use for evaluation.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: RatingScale
 						"rating_scale": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -426,11 +544,22 @@ func evaluatorResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "The rating scale that defines how evaluators should score agent performance.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The configuration for LLM-as-a-Judge evaluation.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The configuration for the evaluator.",
@@ -631,6 +760,7 @@ func evaluatorResource(ctx context.Context) (resource.Resource, error) {
 		"additional_model_request_fields": "AdditionalModelRequestFields",
 		"bedrock_evaluator_model_config":  "BedrockEvaluatorModelConfig",
 		"categorical":                     "Categorical",
+		"code_based":                      "CodeBased",
 		"created_at":                      "CreatedAt",
 		"definition":                      "Definition",
 		"description":                     "Description",
@@ -642,6 +772,9 @@ func evaluatorResource(ctx context.Context) (resource.Resource, error) {
 		"instructions":                    "Instructions",
 		"key":                             "Key",
 		"label":                           "Label",
+		"lambda_arn":                      "LambdaArn",
+		"lambda_config":                   "LambdaConfig",
+		"lambda_timeout_in_seconds":       "LambdaTimeoutInSeconds",
 		"level":                           "Level",
 		"llm_as_a_judge":                  "LlmAsAJudge",
 		"max_tokens":                      "MaxTokens",

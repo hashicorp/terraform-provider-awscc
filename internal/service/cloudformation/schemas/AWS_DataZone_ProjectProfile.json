@@ -161,6 +161,32 @@
         "ENABLED",
         "DISABLED"
       ]
+    },
+    "ResourceTagParameter": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "pattern": "^[\\w \\.:/=+@-]+$",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "Value": {
+          "type": "string",
+          "pattern": "^[\\w \\.:/=+@-]*$",
+          "maxLength": 256,
+          "minLength": 0
+        },
+        "IsValueEditable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Key",
+        "Value",
+        "IsValueEditable"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -224,6 +250,19 @@
     },
     "UseDefaultConfigurations": {
       "type": "boolean"
+    },
+    "ProjectResourceTags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ResourceTagParameter"
+      }
+    },
+    "AllowCustomProjectResourceTags": {
+      "type": "boolean"
+    },
+    "ProjectResourceTagsDescription": {
+      "type": "string",
+      "maxLength": 2048
     }
   },
   "required": [

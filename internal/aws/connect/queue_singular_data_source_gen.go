@@ -23,6 +23,44 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::Connect::Queue resource.
 func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AdditionalEmailAddresses
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The email addresses that agents can use when replying to or initiating email contacts",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "An email address configuration for the queue",
+		//	    "properties": {
+		//	      "EmailAddressArn": {
+		//	        "description": "The Amazon Resource Name (ARN) of the email address",
+		//	        "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-f0-9]{8}-[-a-f0-9]{4}-[-a-f0-9]{4}-[-a-f0-9]{4}-[-a-f0-9]{12}/email-address/[-a-f0-9]{8}-[-a-f0-9]{4}-[-a-f0-9]{4}-[-a-f0-9]{4}-[-a-f0-9]{12}$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "EmailAddressArn"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"additional_email_addresses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EmailAddressArn
+					"email_address_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the email address",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The email addresses that agents can use when replying to or initiating email contacts",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -290,7 +328,9 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::Queue").WithTerraformTypeName("awscc_connect_queue")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"additional_email_addresses":    "AdditionalEmailAddresses",
 		"description":                   "Description",
+		"email_address_arn":             "EmailAddressArn",
 		"hours_of_operation_arn":        "HoursOfOperationArn",
 		"instance_arn":                  "InstanceArn",
 		"key":                           "Key",

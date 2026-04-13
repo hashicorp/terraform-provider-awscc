@@ -130,6 +130,27 @@ func samplingRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    },
+		//	    "SamplingRateBoost": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CooldownWindowMinutes": {
+		//	          "description": "Time window (in minutes) in which only one sampling rate boost can be triggered. After a boost occurs, no further boosts are allowed until the next window.",
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "MaxRate": {
+		//	          "description": "The maximum sampling rate X-Ray will apply when it detects anomalies. X-Ray determines the appropriate rate between your baseline and the maximum, depending on anomaly activity.",
+		//	          "maximum": 1,
+		//	          "minimum": 0,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "MaxRate",
+		//	        "CooldownWindowMinutes"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "ServiceName": {
 		//	      "description": "Matches the name that the service uses to identify itself in segments.",
 		//	      "maxLength": 64,
@@ -276,6 +297,42 @@ func samplingRuleResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: SamplingRateBoost
+				"sampling_rate_boost": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CooldownWindowMinutes
+						"cooldown_window_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Time window (in minutes) in which only one sampling rate boost can be triggered. After a boost occurs, no further boosts are allowed until the next window.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.AtLeast(1),
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MaxRate
+						"max_rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "The maximum sampling rate X-Ray will apply when it detects anomalies. X-Ray determines the appropriate rate between your baseline and the maximum, depending on anomaly activity.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(0.000000, 1.000000),
+								fwvalidators.NotNullFloat64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: ServiceName
 				"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Matches the name that the service uses to identify itself in segments.",
@@ -404,6 +461,27 @@ func samplingRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	          "maxLength": 32,
 		//	          "minLength": 1,
 		//	          "type": "string"
+		//	        },
+		//	        "SamplingRateBoost": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "CooldownWindowMinutes": {
+		//	              "description": "Time window (in minutes) in which only one sampling rate boost can be triggered. After a boost occurs, no further boosts are allowed until the next window.",
+		//	              "minimum": 1,
+		//	              "type": "integer"
+		//	            },
+		//	            "MaxRate": {
+		//	              "description": "The maximum sampling rate X-Ray will apply when it detects anomalies. X-Ray determines the appropriate rate between your baseline and the maximum, depending on anomaly activity.",
+		//	              "maximum": 1,
+		//	              "minimum": 0,
+		//	              "type": "number"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "MaxRate",
+		//	            "CooldownWindowMinutes"
+		//	          ],
+		//	          "type": "object"
 		//	        },
 		//	        "ServiceName": {
 		//	          "description": "Matches the name that the service uses to identify itself in segments.",
@@ -575,6 +653,42 @@ func samplingRuleResource(ctx context.Context) (resource.Resource, error) {
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: SamplingRateBoost
+						"sampling_rate_boost": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CooldownWindowMinutes
+								"cooldown_window_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Time window (in minutes) in which only one sampling rate boost can be triggered. After a boost occurs, no further boosts are allowed until the next window.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.AtLeast(1),
+										fwvalidators.NotNullInt64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: MaxRate
+								"max_rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Description: "The maximum sampling rate X-Ray will apply when it detects anomalies. X-Ray determines the appropriate rate between your baseline and the maximum, depending on anomaly activity.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Float64{ /*START VALIDATORS*/
+										float64validator.Between(0.000000, 1.000000),
+										fwvalidators.NotNullFloat64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+										float64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: ServiceName
 						"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Matches the name that the service uses to identify itself in segments.",
@@ -699,6 +813,27 @@ func samplingRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    },
+		//	    "SamplingRateBoost": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CooldownWindowMinutes": {
+		//	          "description": "Time window (in minutes) in which only one sampling rate boost can be triggered. After a boost occurs, no further boosts are allowed until the next window.",
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "MaxRate": {
+		//	          "description": "The maximum sampling rate X-Ray will apply when it detects anomalies. X-Ray determines the appropriate rate between your baseline and the maximum, depending on anomaly activity.",
+		//	          "maximum": 1,
+		//	          "minimum": 0,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "MaxRate",
+		//	        "CooldownWindowMinutes"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "ServiceName": {
 		//	      "description": "Matches the name that the service uses to identify itself in segments.",
 		//	      "maxLength": 64,
@@ -821,6 +956,42 @@ func samplingRuleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SamplingRateBoost
+				"sampling_rate_boost": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CooldownWindowMinutes
+						"cooldown_window_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Time window (in minutes) in which only one sampling rate boost can be triggered. After a boost occurs, no further boosts are allowed until the next window.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.AtLeast(1),
+								fwvalidators.NotNullInt64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MaxRate
+						"max_rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "The maximum sampling rate X-Ray will apply when it detects anomalies. X-Ray determines the appropriate rate between your baseline and the maximum, depending on anomaly activity.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(0.000000, 1.000000),
+								fwvalidators.NotNullFloat64(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ServiceName
@@ -958,27 +1129,30 @@ func samplingRuleResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"attributes":           "Attributes",
-		"created_at":           "CreatedAt",
-		"fixed_rate":           "FixedRate",
-		"host":                 "Host",
-		"http_method":          "HTTPMethod",
-		"key":                  "Key",
-		"modified_at":          "ModifiedAt",
-		"priority":             "Priority",
-		"reservoir_size":       "ReservoirSize",
-		"resource_arn":         "ResourceARN",
-		"rule_arn":             "RuleARN",
-		"rule_name":            "RuleName",
-		"sampling_rule":        "SamplingRule",
-		"sampling_rule_record": "SamplingRuleRecord",
-		"sampling_rule_update": "SamplingRuleUpdate",
-		"service_name":         "ServiceName",
-		"service_type":         "ServiceType",
-		"tags":                 "Tags",
-		"url_path":             "URLPath",
-		"value":                "Value",
-		"version":              "Version",
+		"attributes":              "Attributes",
+		"cooldown_window_minutes": "CooldownWindowMinutes",
+		"created_at":              "CreatedAt",
+		"fixed_rate":              "FixedRate",
+		"host":                    "Host",
+		"http_method":             "HTTPMethod",
+		"key":                     "Key",
+		"max_rate":                "MaxRate",
+		"modified_at":             "ModifiedAt",
+		"priority":                "Priority",
+		"reservoir_size":          "ReservoirSize",
+		"resource_arn":            "ResourceARN",
+		"rule_arn":                "RuleARN",
+		"rule_name":               "RuleName",
+		"sampling_rate_boost":     "SamplingRateBoost",
+		"sampling_rule":           "SamplingRule",
+		"sampling_rule_record":    "SamplingRuleRecord",
+		"sampling_rule_update":    "SamplingRuleUpdate",
+		"service_name":            "ServiceName",
+		"service_type":            "ServiceType",
+		"tags":                    "Tags",
+		"url_path":                "URLPath",
+		"value":                   "Value",
+		"version":                 "Version",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

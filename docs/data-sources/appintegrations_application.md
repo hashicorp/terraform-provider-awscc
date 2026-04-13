@@ -25,6 +25,7 @@ Data Source schema for AWS::AppIntegrations::Application
 - `application_config` (Attributes) The application configuration. Cannot be used when IsService is true. (see [below for nested schema](#nestedatt--application_config))
 - `application_id` (String) The id of the application.
 - `application_source_config` (Attributes) Application source config (see [below for nested schema](#nestedatt--application_source_config))
+- `application_type` (String) The type of application
 - `description` (String) The application description.
 - `iframe_config` (Attributes) The iframe configuration (see [below for nested schema](#nestedatt--iframe_config))
 - `initialization_timeout` (Number) The initialization timeout in milliseconds. Required when IsService is true.

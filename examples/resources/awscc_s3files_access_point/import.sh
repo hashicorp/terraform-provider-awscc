@@ -1,0 +1,1 @@
+$ terraform import awscc_s3files_access_point.example "access_point_id"

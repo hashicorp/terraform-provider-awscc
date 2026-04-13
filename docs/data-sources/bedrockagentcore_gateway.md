@@ -32,6 +32,7 @@ Data Source schema for AWS::BedrockAgentCore::Gateway
 - `interceptor_configurations` (Attributes List) (see [below for nested schema](#nestedatt--interceptor_configurations))
 - `kms_key_arn` (String)
 - `name` (String)
+- `policy_engine_configuration` (Attributes) The configuration for a policy engine associated with a gateway. A policy engine is a collection of policies that evaluates and authorizes agent tool calls. When associated with a gateway, the policy engine intercepts all agent requests and determines whether to allow or deny each action based on the defined policies. (see [below for nested schema](#nestedatt--policy_engine_configuration))
 - `protocol_configuration` (Attributes) (see [below for nested schema](#nestedatt--protocol_configuration))
 - `protocol_type` (String)
 - `role_arn` (String)
@@ -121,6 +122,15 @@ Read-Only:
 - `arn` (String)
 
 
+
+
+<a id="nestedatt--policy_engine_configuration"></a>
+### Nested Schema for `policy_engine_configuration`
+
+Read-Only:
+
+- `arn` (String) The ARN of the policy engine. The policy engine contains Cedar policies that define fine-grained authorization rules specifying who can perform what actions on which resources as agents interact through the gateway.
+- `mode` (String) The enforcement mode for the policy engine. LOG_ONLY - The policy engine evaluates each action against your policies and adds traces on whether tool calls would be allowed or denied, but does not enforce the decision. Use this mode to test and validate policies before enabling enforcement. ENFORCE - The policy engine evaluates actions against your policies and enforces decisions by allowing or denying agent operations. Test and validate policies in LOG_ONLY mode before enabling enforcement to avoid unintended denials or adversely affecting production traffic.
 
 
 <a id="nestedatt--protocol_configuration"></a>

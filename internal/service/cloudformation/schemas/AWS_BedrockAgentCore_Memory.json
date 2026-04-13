@@ -9,7 +9,7 @@
     },
     "MemoryArn": {
       "type": "string",
-      "pattern": "^arn:aws:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:memory/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$",
+      "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:memory/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$",
       "description": "ARN of the Memory resource"
     },
     "MemoryId": {
@@ -47,6 +47,9 @@
           "$ref": "#/definitions/Description"
         },
         "Namespaces": {
+          "$ref": "#/definitions/NamespacesList"
+        },
+        "NamespaceTemplates": {
           "$ref": "#/definitions/NamespacesList"
         },
         "StrategyId": {
@@ -104,6 +107,9 @@
         "Namespaces": {
           "$ref": "#/definitions/NamespacesList"
         },
+        "NamespaceTemplates": {
+          "$ref": "#/definitions/NamespacesList"
+        },
         "StrategyId": {
           "type": "string",
           "minLength": 12,
@@ -159,6 +165,9 @@
         "Namespaces": {
           "$ref": "#/definitions/NamespacesList"
         },
+        "NamespaceTemplates": {
+          "$ref": "#/definitions/NamespacesList"
+        },
         "StrategyId": {
           "type": "string",
           "minLength": 12,
@@ -212,6 +221,9 @@
           "$ref": "#/definitions/Description"
         },
         "Namespaces": {
+          "$ref": "#/definitions/NamespacesList"
+        },
+        "NamespaceTemplates": {
           "$ref": "#/definitions/NamespacesList"
         },
         "Configuration": {
@@ -270,6 +282,9 @@
           "$ref": "#/definitions/Description"
         },
         "Namespaces": {
+          "$ref": "#/definitions/NamespacesList"
+        },
+        "NamespaceTemplates": {
           "$ref": "#/definitions/NamespacesList"
         },
         "ReflectionConfiguration": {
@@ -502,11 +517,11 @@
       "properties": {
         "Namespaces": {
           "$ref": "#/definitions/NamespacesList"
+        },
+        "NamespaceTemplates": {
+          "$ref": "#/definitions/NamespacesList"
         }
       },
-      "required": [
-        "Namespaces"
-      ],
       "additionalProperties": false
     },
     "Namespace": {
@@ -812,11 +827,88 @@
         },
         "Namespaces": {
           "$ref": "#/definitions/NamespacesList"
+        },
+        "NamespaceTemplates": {
+          "$ref": "#/definitions/NamespacesList"
         }
       },
       "required": [
         "AppendToPrompt",
         "ModelId"
+      ],
+      "additionalProperties": false
+    },
+    "ContentConfiguration": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "type": "string",
+          "enum": [
+            "MEMORY_RECORDS"
+          ],
+          "description": "The type of content to deliver"
+        },
+        "Level": {
+          "type": "string",
+          "enum": [
+            "METADATA_ONLY",
+            "FULL_CONTENT"
+          ],
+          "description": "The level of content detail to deliver"
+        }
+      },
+      "required": [
+        "Type"
+      ],
+      "additionalProperties": false
+    },
+    "KinesisResource": {
+      "type": "object",
+      "properties": {
+        "DataStreamArn": {
+          "$ref": "#/definitions/Arn"
+        },
+        "ContentConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentConfiguration"
+          },
+          "minItems": 1,
+          "maxItems": 1,
+          "insertionOrder": false
+        }
+      },
+      "required": [
+        "DataStreamArn",
+        "ContentConfigurations"
+      ],
+      "additionalProperties": false
+    },
+    "StreamDeliveryResource": {
+      "type": "object",
+      "properties": {
+        "Kinesis": {
+          "$ref": "#/definitions/KinesisResource"
+        }
+      },
+      "additionalProperties": false,
+      "maxProperties": 1,
+      "minProperties": 1
+    },
+    "StreamDeliveryResources": {
+      "type": "object",
+      "properties": {
+        "Resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StreamDeliveryResource"
+          },
+          "maxItems": 1,
+          "insertionOrder": false
+        }
+      },
+      "required": [
+        "Resources"
       ],
       "additionalProperties": false
     },
@@ -878,6 +970,9 @@
     },
     "MemoryStrategies": {
       "$ref": "#/definitions/MemoryStrategies"
+    },
+    "StreamDeliveryResources": {
+      "$ref": "#/definitions/StreamDeliveryResources"
     },
     "Tags": {
       "$ref": "#/definitions/TagsMap"

@@ -37,6 +37,7 @@ Data Source schema for AWS::ODB::CloudVmCluster
 - `domain` (String) The domain of the VM cluster.
 - `gi_version` (String) The software version of the Oracle Grid Infrastructure (GI) for the VM cluster.
 - `hostname` (String) The host name for the VM cluster.
+- `iam_roles` (Attributes Set) The AWS Identity and Access Management (IAM) service roles associated with the VM cluster. (see [below for nested schema](#nestedatt--iam_roles))
 - `is_local_backup_enabled` (Boolean) Indicates whether database backups to local Exadata storage is enabled for the VM cluster.
 - `is_sparse_diskgroup_enabled` (Boolean) Indicates whether the VM cluster is configured with a sparse disk group.
 - `license_model` (String) The Oracle license model applied to the VM cluster.
@@ -98,6 +99,16 @@ Read-Only:
 - `key` (String) The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and ".
 - `value` (String) The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
+
+
+<a id="nestedatt--iam_roles"></a>
+### Nested Schema for `iam_roles`
+
+Read-Only:
+
+- `aws_integration` (String) The AWS integration configuration settings for the AWS Identity and Access Management (IAM) service role.
+- `iam_role_arn` (String) The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) service role.
+- `status` (String) The current status of the AWS Identity and Access Management (IAM) service role.
 
 
 <a id="nestedatt--tags"></a>

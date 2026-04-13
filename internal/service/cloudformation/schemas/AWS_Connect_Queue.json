@@ -86,6 +86,21 @@
       "description": "The Amazon Resource Name (ARN) for the quick connect.",
       "type": "string",
       "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/transfer-destination/[-a-zA-Z0-9]*$"
+    },
+    "EmailAddress": {
+      "description": "An email address configuration for the queue",
+      "type": "object",
+      "properties": {
+        "EmailAddressArn": {
+          "description": "The Amazon Resource Name (ARN) of the email address",
+          "type": "string",
+          "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-f0-9]{8}-[-a-f0-9]{4}-[-a-f0-9]{4}-[-a-f0-9]{4}-[-a-f0-9]{12}/email-address/[-a-f0-9]{8}-[-a-f0-9]{4}-[-a-f0-9]{4}-[-a-f0-9]{4}-[-a-f0-9]{12}$"
+        }
+      },
+      "required": [
+        "EmailAddressArn"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -163,25 +178,39 @@
         "STANDARD",
         "AGENT"
       ]
+    },
+    "AdditionalEmailAddresses": {
+      "description": "The email addresses that agents can use when replying to or initiating email contacts",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/EmailAddress"
+      },
+      "minItems": 0,
+      "maxItems": 50,
+      "insertionOrder": false
     }
   },
   "handlers": {
     "create": {
       "permissions": [
         "connect:CreateQueue",
-        "connect:TagResource"
+        "connect:TagResource",
+        "connect:AssociateQueueEmailAddresses"
       ]
     },
     "read": {
       "permissions": [
         "connect:DescribeQueue",
-        "connect:ListQueueQuickConnects"
+        "connect:ListQueueQuickConnects",
+        "connect:ListQueueEmailAddresses"
       ]
     },
     "delete": {
       "permissions": [
         "connect:DeleteQueue",
-        "connect:UntagResource"
+        "connect:UntagResource",
+        "connect:ListQueueEmailAddresses",
+        "connect:DisassociateQueueEmailAddresses"
       ]
     },
     "update": {
@@ -194,6 +223,8 @@
         "connect:UpdateQueueStatus",
         "connect:AssociateQueueQuickConnects",
         "connect:DisassociateQueueQuickConnects",
+        "connect:AssociateQueueEmailAddresses",
+        "connect:DisassociateQueueEmailAddresses",
         "connect:TagResource",
         "connect:UntagResource"
       ]

@@ -25,8 +25,10 @@ Data Source schema for AWS::DevOpsAgent::AgentSpace
 - `arn` (String) The Amazon Resource Name (ARN) of the AgentSpace.
 - `created_at` (String) The timestamp when the resource was created.
 - `description` (String) The description of the AgentSpace.
+- `kms_key_arn` (String) The ARN of the KMS key to use for encryption.
 - `name` (String) The name of the AgentSpace.
 - `operator_app` (Attributes) (see [below for nested schema](#nestedatt--operator_app))
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `updated_at` (String) The timestamp when the resource was last updated.
 
 <a id="nestedatt--operator_app"></a>
@@ -57,3 +59,13 @@ Read-Only:
 - `idc_instance_arn` (String)
 - `operator_app_role_arn` (String)
 - `updated_at` (String)
+
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) The key name of the tag.
+- `value` (String) The value for the tag.

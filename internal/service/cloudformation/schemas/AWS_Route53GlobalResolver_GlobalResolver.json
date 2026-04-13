@@ -1,0 +1,217 @@
+{
+  "typeName": "AWS::Route53GlobalResolver::GlobalResolver",
+  "description": "Resource schema for AWS::Route53GlobalResolver::GlobalResolver",
+  "primaryIdentifier": [
+    "/properties/GlobalResolverId"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Arn"
+    ]
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/GlobalResolverId",
+    "/properties/DnsName",
+    "/properties/IPv4Addresses",
+    "/properties/IPv6Addresses",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/Status"
+  ],
+  "createOnlyProperties": [
+    "/properties/Regions",
+    "/properties/ClientToken"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ClientToken"
+  ],
+  "required": [
+    "Name",
+    "Regions"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "Region": {
+      "type": "string",
+      "maxLength": 32,
+      "minLength": 1
+    },
+    "ResourceName": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": ""
+    },
+    "ResourceDescription": {
+      "type": "string",
+      "maxLength": 256,
+      "minLength": 1
+    },
+    "IPv4Address": {
+      "type": "string",
+      "maxLength": 15,
+      "minLength": 1,
+      "pattern": "((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}"
+    },
+    "IPv6Address": {
+      "type": "string",
+      "maxLength": 39,
+      "minLength": 1,
+      "pattern": "(?:[A-F0-9]{1,4}:){7}[A-F0-9]{1,4}"
+    },
+    "GlobalResolverIpAddressType": {
+      "type": "string",
+      "enum": [
+        "IPV4",
+        "DUAL_STACK"
+      ]
+    },
+    "CRResourceStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "OPERATIONAL",
+        "UPDATING",
+        "DELETING"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "Value": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 0
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "GlobalResolverId": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1
+    },
+    "Arn": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 1
+    },
+    "Name": {
+      "$ref": "#/definitions/ResourceName"
+    },
+    "Description": {
+      "$ref": "#/definitions/ResourceDescription"
+    },
+    "Regions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Region"
+      }
+    },
+    "ObservabilityRegion": {
+      "$ref": "#/definitions/Region"
+    },
+    "DnsName": {
+      "type": "string",
+      "maxLength": 128,
+      "minLength": 1
+    },
+    "IPv4Addresses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/IPv4Address"
+      }
+    },
+    "IPv6Addresses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/IPv6Address"
+      }
+    },
+    "IpAddressType": {
+      "$ref": "#/definitions/GlobalResolverIpAddressType"
+    },
+    "Status": {
+      "$ref": "#/definitions/CRResourceStatus"
+    },
+    "CreatedAt": {
+      "type": "string"
+    },
+    "UpdatedAt": {
+      "type": "string"
+    },
+    "ClientToken": {
+      "type": "string",
+      "maxLength": 256,
+      "minLength": 1
+    },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50
+    }
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "route53globalresolver:CreateGlobalResolver",
+        "route53globalresolver:GetGlobalResolver",
+        "route53globalresolver:UntagResource",
+        "route53globalresolver:ListTagsForResource",
+        "route53globalresolver:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "route53globalresolver:GetGlobalResolver",
+        "route53globalresolver:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "route53globalresolver:UpdateGlobalResolver",
+        "route53globalresolver:GetGlobalResolver",
+        "route53globalresolver:TagResource",
+        "route53globalresolver:UntagResource",
+        "route53globalresolver:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "route53globalresolver:DeleteGlobalResolver",
+        "route53globalresolver:GetGlobalResolver"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "route53globalresolver:ListGlobalResolvers"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "route53globalresolver:TagResource",
+      "route53globalresolver:UntagResource",
+      "route53globalresolver:ListTagsForResource"
+    ]
+  }
+}

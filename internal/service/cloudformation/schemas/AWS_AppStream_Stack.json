@@ -1,0 +1,265 @@
+{
+  "typeName": "AWS::AppStream::Stack",
+  "description": "Resource Type definition for AWS::AppStream::Stack",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-appstream.git",
+  "additionalProperties": false,
+  "properties": {
+    "Description": {
+      "type": "string",
+      "description": "The description to display."
+    },
+    "StorageConnectors": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/StorageConnector"
+      },
+      "description": "The storage connectors to enable."
+    },
+    "DeleteStorageConnectors": {
+      "type": "boolean",
+      "description": "This parameter has been deprecated. Deletes the storage connectors currently enabled for the stack."
+    },
+    "EmbedHostDomains": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      },
+      "description": "The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions."
+    },
+    "UserSettings": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/UserSetting"
+      },
+      "description": "The actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled."
+    },
+    "AttributesToDelete": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      },
+      "description": "The stack attributes to delete."
+    },
+    "RedirectURL": {
+      "type": "string",
+      "description": "The URL that users are redirected to after their streaming session ends."
+    },
+    "StreamingExperienceSettings": {
+      "$ref": "#/definitions/StreamingExperienceSettings",
+      "description": "The streaming protocol that you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client."
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the stack."
+    },
+    "FeedbackURL": {
+      "type": "string",
+      "description": "The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed."
+    },
+    "ApplicationSettings": {
+      "$ref": "#/definitions/ApplicationSettings",
+      "description": "The persistent application settings for users of the stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session."
+    },
+    "DisplayName": {
+      "type": "string",
+      "description": "The stack name to display."
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "description": "An array of key-value pairs."
+    },
+    "AccessEndpoints": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/AccessEndpoint"
+      },
+      "description": "The list of virtual private cloud (VPC) interface endpoint objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints."
+    }
+  },
+  "definitions": {
+    "StorageConnector": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "A connector that enables persistent storage for users.",
+      "properties": {
+        "Domains": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string"
+          },
+          "description": "The names of the domains for the account."
+        },
+        "ResourceIdentifier": {
+          "type": "string",
+          "description": "The ARN of the storage connector."
+        },
+        "ConnectorType": {
+          "type": "string",
+          "description": "The type of storage connector."
+        }
+      },
+      "required": [
+        "ConnectorType"
+      ]
+    },
+    "ApplicationSettings": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The persistent application settings for users of a stack.",
+      "properties": {
+        "SettingsGroup": {
+          "type": "string",
+          "description": "The path prefix for the S3 bucket where users? persistent application settings are stored. You can allow the same persistent application settings to be used across multiple stacks by specifying the same settings group for each stack."
+        },
+        "Enabled": {
+          "type": "boolean",
+          "description": "Enables or disables persistent application settings for users during their streaming sessions."
+        }
+      },
+      "required": [
+        "Enabled"
+      ]
+    },
+    "StreamingExperienceSettings": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The streaming protocol that you want your stack to prefer. This can be UDP or TCP. Currently, UDP is only supported in the Windows native client.",
+      "properties": {
+        "PreferredProtocol": {
+          "type": "string",
+          "description": "The preferred protocol that you want to use while streaming your application."
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The tag of the stack.",
+      "properties": {
+        "Value": {
+          "type": "string",
+          "description": "The value of the tag."
+        },
+        "Key": {
+          "type": "string",
+          "description": "The key of the tag."
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    },
+    "AccessEndpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Describes an interface VPC endpoint (interface endpoint) that lets you create a private connection between the virtual private cloud (VPC) that you specify and AppStream 2.0. When you specify an interface endpoint for a stack, users of the stack can connect to AppStream 2.0 only through that endpoint. When you specify an interface endpoint for an image builder, administrators can connect to the image builder only through that endpoint.",
+      "properties": {
+        "EndpointType": {
+          "type": "string",
+          "description": "The type of interface endpoint."
+        },
+        "VpceId": {
+          "type": "string",
+          "description": "The identifier (ID) of the VPC in which the interface endpoint is used."
+        }
+      },
+      "required": [
+        "EndpointType",
+        "VpceId"
+      ]
+    },
+    "UserSetting": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Specifies an action and whether the action is enabled or disabled for users during their streaming sessions.",
+      "properties": {
+        "Permission": {
+          "type": "string",
+          "description": "Indicates whether the action is enabled or disabled."
+        },
+        "Action": {
+          "type": "string",
+          "description": "The action that is enabled or disabled."
+        },
+        "MaximumLength": {
+          "type": "integer",
+          "description": "Specifies the number of characters that can be copied by end users from the local device to the remote session, and to the local device from the remote session. This can be specified only for the CLIPBOARD_COPY_FROM_LOCAL_DEVICE and CLIPBOARD_COPY_TO_LOCAL_DEVICE actions. This defaults to 20,971,520 (20 MB) when unspecified and the permission is ENABLED. This can't be specified when the permission is DISABLED. The value can be between 1 and 20,971,520 (20 MB)."
+        }
+      },
+      "required": [
+        "Action",
+        "Permission"
+      ]
+    }
+  },
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
+  "primaryIdentifier": [
+    "/properties/Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/StorageConnectors/*/ResourceIdentifier"
+  ],
+  "writeOnlyProperties": [
+    "/properties/AttributesToDelete",
+    "/properties/DeleteStorageConnectors"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "appstream:ListTagsForResource",
+      "appstream:TagResource",
+      "appstream:UntagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "appstream:CreateStack",
+        "appstream:TagResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "appstream:UpdateStack",
+        "appstream:DescribeStacks",
+        "appstream:ListTagsForResource",
+        "appstream:TagResource",
+        "appstream:UntagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "appstream:DescribeStacks",
+        "appstream:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "appstream:DeleteStack"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "appstream:DescribeStacks",
+        "appstream:ListTagsForResource"
+      ]
+    }
+  }
+}

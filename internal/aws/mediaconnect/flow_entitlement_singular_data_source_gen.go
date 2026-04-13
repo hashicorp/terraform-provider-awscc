@@ -89,10 +89,12 @@ func flowEntitlementDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	    },
 		//	    "RoleArn": {
 		//	      "description": "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
+		//	      "pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$",
 		//	      "type": "string"
 		//	    },
 		//	    "SecretArn": {
 		//	      "description": " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
+		//	      "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
 		//	      "type": "string"
 		//	    },
 		//	    "Url": {
@@ -162,6 +164,7 @@ func flowEntitlementDataSource(ctx context.Context) (datasource.DataSource, erro
 		//
 		//	{
 		//	  "description": "The ARN of the entitlement.",
+		//	  "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:entitlement:[a-zA-Z0-9-]+:[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
 		"entitlement_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -220,6 +223,47 @@ func flowEntitlementDataSource(ctx context.Context) (datasource.DataSource, erro
 			Description: "The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Key-value pairs that can be used to tag and organize this flow entitlement.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Key-value pairs that can be used to tag and organize this flow entitlement.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -246,6 +290,7 @@ func flowEntitlementDataSource(ctx context.Context) (datasource.DataSource, erro
 		"entitlement_arn":                      "EntitlementArn",
 		"entitlement_status":                   "EntitlementStatus",
 		"flow_arn":                             "FlowArn",
+		"key":                                  "Key",
 		"key_type":                             "KeyType",
 		"name":                                 "Name",
 		"region":                               "Region",
@@ -253,7 +298,9 @@ func flowEntitlementDataSource(ctx context.Context) (datasource.DataSource, erro
 		"role_arn":                             "RoleArn",
 		"secret_arn":                           "SecretArn",
 		"subscribers":                          "Subscribers",
+		"tags":                                 "Tags",
 		"url":                                  "Url",
+		"value":                                "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

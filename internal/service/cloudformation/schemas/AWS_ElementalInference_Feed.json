@@ -1,0 +1,185 @@
+{
+  "typeName": "AWS::ElementalInference::Feed",
+  "description": "Represents a feed that receives media for inference processing",
+  "definitions": {
+    "ClippingConfig": {
+      "type": "object",
+      "properties": {
+        "CallbackMetadata": {
+          "type": "string",
+          "maxLength": 1024,
+          "pattern": "^[\\w \\-\\.',@:;]*$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CroppingConfig": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "GetOutput": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_]{0,126}[a-zA-Z0-9])?$"
+        },
+        "OutputConfig": {
+          "$ref": "#/definitions/OutputConfig"
+        },
+        "Status": {
+          "$ref": "#/definitions/OutputStatus"
+        },
+        "Description": {
+          "type": "string",
+          "maxLength": 1024,
+          "pattern": "^[\\w \\-\\.',@:;]*$"
+        }
+      },
+      "required": [
+        "Name",
+        "OutputConfig",
+        "Status"
+      ],
+      "additionalProperties": false
+    },
+    "OutputConfig": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Cropping",
+          "properties": {
+            "Cropping": {
+              "$ref": "#/definitions/CroppingConfig"
+            }
+          },
+          "required": [
+            "Cropping"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Clipping",
+          "properties": {
+            "Clipping": {
+              "$ref": "#/definitions/ClippingConfig"
+            }
+          },
+          "required": [
+            "Clipping"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "OutputStatus": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "TagMap": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 256
+        }
+      },
+      "additionalProperties": false
+    },
+    "Unit": {
+      "type": "object",
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string"
+    },
+    "DataEndpoints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "Id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]{19}$"
+    },
+    "Name": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_]{0,126}[a-zA-Z0-9])?$"
+    },
+    "Outputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/GetOutput"
+      }
+    },
+    "Tags": {
+      "$ref": "#/definitions/TagMap"
+    }
+  },
+  "required": [
+    "Name",
+    "Outputs"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/DataEndpoints",
+    "/properties/Id"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "tagging": {
+    "cloudFormationSystemTags": true,
+    "permissions": [
+      "elemental-inference:ListTagsForResource",
+      "elemental-inference:TagResource",
+      "elemental-inference:UntagResource"
+    ],
+    "tagOnCreate": true,
+    "tagProperty": "/properties/Tags",
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "elemental-inference:CreateFeed",
+        "elemental-inference:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "elemental-inference:GetFeed",
+        "elemental-inference:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "elemental-inference:UpdateFeed",
+        "elemental-inference:GetFeed",
+        "elemental-inference:TagResource",
+        "elemental-inference:UntagResource",
+        "elemental-inference:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "elemental-inference:DeleteFeed",
+        "elemental-inference:GetFeed"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "elemental-inference:ListFeeds"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

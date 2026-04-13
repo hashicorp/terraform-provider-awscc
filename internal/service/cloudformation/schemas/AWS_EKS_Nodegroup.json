@@ -172,6 +172,35 @@
           "maximum": 100
         }
       }
+    },
+    "WarmPoolConfig": {
+      "description": "The warm pool configuration for the node group.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "description": "Enable or disable warm pool for the node group.",
+          "type": "boolean"
+        },
+        "MaxGroupPreparedCapacity": {
+          "description": "The maximum number of instances that are allowed to be in the warm pool.",
+          "type": "integer",
+          "minimum": -1
+        },
+        "MinSize": {
+          "description": "The minimum number of instances to maintain in the warm pool.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "PoolState": {
+          "description": "The desired state of warm pool instances.",
+          "type": "string"
+        },
+        "ReuseOnScaleIn": {
+          "description": "Whether to return instances to the warm pool during scale-in instead of terminating them.",
+          "type": "boolean"
+        }
+      }
     }
   },
   "properties": {
@@ -275,6 +304,10 @@
     "NodeRepairConfig": {
       "description": "The node auto repair configuration for node group.",
       "$ref": "#/definitions/NodeRepairConfig"
+    },
+    "WarmPoolConfig": {
+      "description": "The warm pool configuration details for the Auto Scaling group that is created for the node group.",
+      "$ref": "#/definitions/WarmPoolConfig"
     },
     "Version": {
       "description": "The Kubernetes version to use for your managed nodes.",

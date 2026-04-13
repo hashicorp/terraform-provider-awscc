@@ -1,0 +1,214 @@
+{
+  "typeName": "AWS::Route53GlobalResolver::FirewallRule",
+  "description": "Resource schema for AWS::Route53GlobalResolver::FirewallRule",
+  "primaryIdentifier": [
+    "/properties/FirewallRuleId"
+  ],
+  "readOnlyProperties": [
+    "/properties/FirewallRuleId",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/Status",
+    "/properties/QueryType"
+  ],
+  "createOnlyProperties": [
+    "/properties/DnsViewId",
+    "/properties/ClientToken",
+    "/properties/FirewallDomainListId",
+    "/properties/QType"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ClientToken",
+    "/properties/QType"
+  ],
+  "required": [
+    "Action",
+    "Name",
+    "DnsViewId"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "FirewallRuleAction": {
+      "type": "string",
+      "enum": [
+        "ALLOW",
+        "ALERT",
+        "BLOCK"
+      ]
+    },
+    "FirewallBlockResponse": {
+      "type": "string",
+      "enum": [
+        "NODATA",
+        "NXDOMAIN",
+        "OVERRIDE"
+      ]
+    },
+    "BlockOverrideDnsQueryType": {
+      "type": "string",
+      "enum": [
+        "CNAME"
+      ]
+    },
+    "ConfidenceThreshold": {
+      "type": "string",
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH"
+      ]
+    },
+    "DnsAdvancedProtection": {
+      "type": "string",
+      "enum": [
+        "DGA",
+        "DNS_TUNNELING",
+        "DICTIONARY_DGA"
+      ]
+    },
+    "ResourceName": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": ""
+    },
+    "ResourceDescription": {
+      "type": "string",
+      "maxLength": 256,
+      "minLength": 1
+    },
+    "Domain": {
+      "type": "string",
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "\\*?[-a-zA-Z0-9.]+"
+    },
+    "CRResourceStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "OPERATIONAL",
+        "UPDATING",
+        "DELETING"
+      ]
+    }
+  },
+  "properties": {
+    "FirewallRuleId": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1
+    },
+    "Name": {
+      "$ref": "#/definitions/ResourceName"
+    },
+    "Description": {
+      "$ref": "#/definitions/ResourceDescription"
+    },
+    "Action": {
+      "$ref": "#/definitions/FirewallRuleAction"
+    },
+    "BlockResponse": {
+      "$ref": "#/definitions/FirewallBlockResponse"
+    },
+    "BlockOverrideDnsType": {
+      "$ref": "#/definitions/BlockOverrideDnsQueryType"
+    },
+    "BlockOverrideDomain": {
+      "$ref": "#/definitions/Domain"
+    },
+    "BlockOverrideTtl": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 604800
+    },
+    "ConfidenceThreshold": {
+      "$ref": "#/definitions/ConfidenceThreshold"
+    },
+    "DnsAdvancedProtection": {
+      "$ref": "#/definitions/DnsAdvancedProtection"
+    },
+    "FirewallDomainListId": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1
+    },
+    "Priority": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10000
+    },
+    "DnsViewId": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1
+    },
+    "QType": {
+      "type": "string",
+      "maxLength": 16,
+      "minLength": 0
+    },
+    "QueryType": {
+      "type": "string",
+      "maxLength": 16,
+      "minLength": 0
+    },
+    "Status": {
+      "$ref": "#/definitions/CRResourceStatus"
+    },
+    "CreatedAt": {
+      "type": "string"
+    },
+    "UpdatedAt": {
+      "type": "string"
+    },
+    "ClientToken": {
+      "type": "string",
+      "maxLength": 256,
+      "minLength": 1
+    }
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "route53globalresolver:CreateFirewallRule",
+        "route53globalresolver:GetFirewallRule"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "route53globalresolver:GetFirewallRule"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "route53globalresolver:UpdateFirewallRule",
+        "route53globalresolver:GetFirewallRule"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "route53globalresolver:DeleteFirewallRule",
+        "route53globalresolver:GetFirewallRule"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "route53globalresolver:ListFirewallRules"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "DnsViewId": {
+            "$ref": "resource-schema.json#/properties/DnsViewId"
+          }
+        },
+        "required": [
+          "DnsViewId"
+        ]
+      }
+    }
+  },
+  "tagging": {
+    "taggable": false
+  }
+}

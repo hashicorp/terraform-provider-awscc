@@ -1,0 +1,1 @@
+$ terraform import awscc_route53globalresolver_hosted_zone_association.example "hosted_zone_association_id"

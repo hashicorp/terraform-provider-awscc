@@ -1,0 +1,196 @@
+{
+  "typeName": "AWS::Batch::QuotaShare",
+  "description": "Resource Type definition for AWS::Batch::QuotaShare",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-batch",
+  "additionalProperties": false,
+  "definitions": {
+    "ResourceArn": {
+      "type": "string",
+      "pattern": "^arn:aws[a-z\\-]*:batch:[a-z0-9\\-]+:[0-9]{12}:job-queue/[a-zA-Z0-9_\\-]{1,128}/quota-share/[a-zA-Z0-9_\\-]{1,128}$"
+    },
+    "QuotaShareCapacityLimit": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MaxCapacity": {
+          "type": "integer",
+          "description": "The maximum capacity available for the quota share. This value represents the maximum amount of resources that can be allocated to jobs in the quota share without borrowing",
+          "minimum": 1
+        },
+        "CapacityUnit": {
+          "type": "string",
+          "description": "The unit of compute capacity for the capacityLimit."
+        }
+      },
+      "required": [
+        "MaxCapacity",
+        "CapacityUnit"
+      ]
+    },
+    "QuotaShareResourceSharingConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Strategy": {
+          "type": "string",
+          "description": "The resource sharing strategy.",
+          "enum": [
+            "RESERVE",
+            "LEND",
+            "LEND_AND_BORROW"
+          ]
+        },
+        "BorrowLimit": {
+          "type": "integer",
+          "description": "The maximum amount of compute capacity that can be borrowed. Use -1 for unlimited borrowing.",
+          "minimum": -1
+        }
+      },
+      "required": [
+        "Strategy"
+      ]
+    },
+    "QuotaSharePreemptionConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "InSharePreemption": {
+          "type": "string",
+          "description": "Whether preemption is enabled within the quota share.",
+          "enum": [
+            "ENABLED",
+            "DISABLED"
+          ]
+        }
+      },
+      "required": [
+        "InSharePreemption"
+      ]
+    }
+  },
+  "properties": {
+    "QuotaShareName": {
+      "type": "string",
+      "description": "The name of the quota share.",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "QuotaShareArn": {
+      "description": "The Amazon Resource Name (ARN) of the quota share.",
+      "$ref": "#/definitions/ResourceArn"
+    },
+    "JobQueue": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) or name of the job queue."
+    },
+    "CapacityLimits": {
+      "type": "array",
+      "description": "The capacity limits for the quota share.",
+      "insertionOrder": true,
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/QuotaShareCapacityLimit"
+      }
+    },
+    "ResourceSharingConfiguration": {
+      "description": "The resource sharing configuration for the quota share.",
+      "$ref": "#/definitions/QuotaShareResourceSharingConfiguration"
+    },
+    "PreemptionConfiguration": {
+      "description": "The preemption configuration for the quota share.",
+      "$ref": "#/definitions/QuotaSharePreemptionConfiguration"
+    },
+    "State": {
+      "type": "string",
+      "description": "The state of the quota share.",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "Tags": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "Batch:TagResource",
+      "Batch:UntagResource"
+    ]
+  },
+  "required": [
+    "QuotaShareName",
+    "JobQueue",
+    "CapacityLimits",
+    "ResourceSharingConfiguration",
+    "PreemptionConfiguration"
+  ],
+  "primaryIdentifier": [
+    "/properties/QuotaShareArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/QuotaShareName"
+    ]
+  ],
+  "createOnlyProperties": [
+    "/properties/QuotaShareName",
+    "/properties/JobQueue"
+  ],
+  "readOnlyProperties": [
+    "/properties/QuotaShareArn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "Batch:CreateQuotaShare",
+        "Batch:TagResource",
+        "Batch:DescribeQuotaShare"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "Batch:DescribeQuotaShare"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "Batch:DescribeQuotaShare",
+        "Batch:UpdateQuotaShare",
+        "Batch:TagResource",
+        "Batch:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "Batch:UpdateQuotaShare",
+        "Batch:DescribeQuotaShare",
+        "Batch:DeleteQuotaShare"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "Batch:ListQuotaShares"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "JobQueue": {
+            "$ref": "resource-schema.json#/properties/JobQueue"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+$ terraform import awscc_route53globalresolver_access_source.example "access_source_id"

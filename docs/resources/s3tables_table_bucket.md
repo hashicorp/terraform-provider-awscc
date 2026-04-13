@@ -44,6 +44,7 @@ resource "awscc_s3tables_table_bucket" "example" {
 
 - `encryption_configuration` (Attributes) Specifies encryption settings for the table bucket (see [below for nested schema](#nestedatt--encryption_configuration))
 - `metrics_configuration` (Attributes) Settings governing the Metric configuration for the table bucket. (see [below for nested schema](#nestedatt--metrics_configuration))
+- `replication_configuration` (Attributes) Specifies replication configuration for the table bucket (see [below for nested schema](#nestedatt--replication_configuration))
 - `storage_class_configuration` (Attributes) Specifies storage class settings for the table bucket (see [below for nested schema](#nestedatt--storage_class_configuration))
 - `tags` (Attributes Set) User tags (key-value pairs) to associate with the table bucket. (see [below for nested schema](#nestedatt--tags))
 - `unreferenced_file_removal` (Attributes) Settings governing the Unreferenced File Removal maintenance action. Unreferenced file removal identifies and deletes all objects that are not referenced by any table snapshots. (see [below for nested schema](#nestedatt--unreferenced_file_removal))
@@ -68,6 +69,31 @@ Optional:
 Optional:
 
 - `status` (String) Indicates whether Metrics are enabled.
+
+
+<a id="nestedatt--replication_configuration"></a>
+### Nested Schema for `replication_configuration`
+
+Optional:
+
+- `role` (String) The ARN of the IAM role to use for replication
+- `rules` (Attributes List) List of replication rules (see [below for nested schema](#nestedatt--replication_configuration--rules))
+
+<a id="nestedatt--replication_configuration--rules"></a>
+### Nested Schema for `replication_configuration.rules`
+
+Optional:
+
+- `destinations` (Attributes List) List of replication destinations (see [below for nested schema](#nestedatt--replication_configuration--rules--destinations))
+
+<a id="nestedatt--replication_configuration--rules--destinations"></a>
+### Nested Schema for `replication_configuration.rules.destinations`
+
+Optional:
+
+- `destination_table_bucket_arn` (String) The ARN of the destination table bucket
+
+
 
 
 <a id="nestedatt--storage_class_configuration"></a>

@@ -13,6 +13,7 @@ internal/service/cloudformation/schemas/AWS_DataSync_StorageSystem.json
 internal/service/cloudformation/schemas/AWS_EC2_LaunchTemplate.json
 internal/service/cloudformation/schemas/AWS_EC2_NetworkInsightsAnalysis.json
 internal/service/cloudformation/schemas/AWS_EMRServerless_Application.json
+internal/service/cloudformation/schemas/AWS_FSx_S3AccessPointAttachment.json
 internal/service/cloudformation/schemas/AWS_IoTFleetHub_Application.json
 internal/service/cloudformation/schemas/AWS_IoTFleetWise_DecoderManifest.json
 internal/service/cloudformation/schemas/AWS_Lex_Bot.json

@@ -28,43 +28,54 @@ func connectionFunctionDataSource(ctx context.Context) (datasource.DataSource, e
 		//
 		//	{
 		//	  "default": false,
+		//	  "description": "A flag that determines whether to automatically publish the function to the ``LIVE`` stage when it?s created. To automatically publish to the ``LIVE`` stage, set this property to ``true``.",
 		//	  "type": "boolean"
 		//	}
 		"auto_publish": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "A flag that determines whether to automatically publish the function to the ``LIVE`` stage when it?s created. To automatically publish to the ``LIVE`` stage, set this property to ``true``.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConnectionFunctionArn
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"connection_function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConnectionFunctionCode
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The code for the connection function.",
 		//	  "type": "string"
 		//	}
 		"connection_function_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The code for the connection function.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConnectionFunctionConfig
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "Contains configuration information about a CloudFront function.",
 		//	  "properties": {
 		//	    "Comment": {
+		//	      "description": "A comment to describe the function.",
 		//	      "type": "string"
 		//	    },
 		//	    "KeyValueStoreAssociations": {
+		//	      "description": "The configuration for the key value store associations.",
 		//	      "items": {
 		//	        "additionalProperties": false,
+		//	        "description": "The key value store association.",
 		//	        "properties": {
 		//	          "KeyValueStoreARN": {
+		//	            "description": "The Amazon Resource Name (ARN) of the key value store association.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -77,6 +88,7 @@ func connectionFunctionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Runtime": {
+		//	      "description": "The function's runtime environment version.",
 		//	      "enum": [
 		//	        "cloudfront-js-2.0"
 		//	      ],
@@ -93,7 +105,8 @@ func connectionFunctionDataSource(ctx context.Context) (datasource.DataSource, e
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Comment
 				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "A comment to describe the function.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: KeyValueStoreAssociations
 				"key_value_store_associations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -101,72 +114,87 @@ func connectionFunctionDataSource(ctx context.Context) (datasource.DataSource, e
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: KeyValueStoreARN
 							"key_value_store_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The Amazon Resource Name (ARN) of the key value store association.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Computed: true,
+					Description: "The configuration for the key value store associations.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Runtime
 				"runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The function's runtime environment version.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "Contains configuration information about a CloudFront function.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ETag
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"e_tag": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"connection_function_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The connection function name.",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The connection function name.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Stage
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "enum": [
 		//	    "DEVELOPMENT",
 		//	    "LIVE"
@@ -174,12 +202,14 @@ func connectionFunctionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "string"
 		//	}
 		"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "enum": [
 		//	    "UNPUBLISHED",
 		//	    "DEPLOYED",
@@ -190,25 +220,30 @@ func connectionFunctionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A complex type that contains zero or more ``Tag`` elements.",
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "A complex type that contains ``Tag`` key and ``Tag`` value.",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
-		//	        "pattern": "",
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
-		//	        "pattern": "",
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -225,15 +260,18 @@ func connectionFunctionDataSource(ctx context.Context) (datasource.DataSource, e
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			Description: "A complex type that contains zero or more ``Tag`` elements.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

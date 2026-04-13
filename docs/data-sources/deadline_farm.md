@@ -22,6 +22,7 @@ Data Source schema for AWS::Deadline::Farm
 ### Read-Only
 
 - `arn` (String)
+- `cost_scale_factor` (Number)
 - `description` (String)
 - `display_name` (String)
 - `farm_id` (String)

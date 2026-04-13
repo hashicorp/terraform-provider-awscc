@@ -167,7 +167,9 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "standard",
 		//	        "tier-xl",
 		//	        "tier-2xl",
-		//	        "tier-4xl"
+		//	        "tier-4xl",
+		//	        "tier-8xl",
+		//	        "tier-ultra"
 		//	      ],
 		//	      "type": "string"
 		//	    }
@@ -584,9 +586,6 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "array"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "RemoteNodeNetworks"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"remote_network_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/

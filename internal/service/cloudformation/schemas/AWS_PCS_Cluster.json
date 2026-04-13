@@ -151,6 +151,44 @@
       "type": "string",
       "description": "A VPC security group ID."
     },
+    "CgroupCustomSetting": {
+      "type": "object",
+      "description": "Additional cgroup configuration settings.",
+      "properties": {
+        "ParameterName": {
+          "type": "string",
+          "description": "The cgroup.conf parameter name."
+        },
+        "ParameterValue": {
+          "type": "string",
+          "description": "The value for the cgroup.conf parameter."
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "ParameterName",
+        "ParameterValue"
+      ]
+    },
+    "SlurmdbdCustomSetting": {
+      "type": "object",
+      "description": "Additional slurmdbd configuration settings.",
+      "properties": {
+        "ParameterName": {
+          "type": "string",
+          "description": "The slurmdbd.conf parameter name."
+        },
+        "ParameterValue": {
+          "type": "string",
+          "description": "The value for the slurmdbd.conf parameter."
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "ParameterName",
+        "ParameterValue"
+      ]
+    },
     "SlurmCustomSetting": {
       "type": "object",
       "description": "Additional settings that directly map to Slurm settings.",
@@ -317,6 +355,22 @@
           "insertionOrder": false,
           "items": {
             "$ref": "#/definitions/SlurmCustomSetting"
+          }
+        },
+        "CgroupCustomSettings": {
+          "type": "array",
+          "description": "Additional cgroup-specific configuration that directly maps to cgroup.conf settings.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/CgroupCustomSetting"
+          }
+        },
+        "SlurmdbdCustomSettings": {
+          "type": "array",
+          "description": "Additional slurmdbd-specific configuration that directly maps to slurmdbd.conf settings.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/SlurmdbdCustomSetting"
           }
         }
       },
