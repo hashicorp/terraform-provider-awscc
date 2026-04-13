@@ -149,7 +149,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The sso instance arn that the permission set is owned.",
 		//	  "maxLength": 1224,
 		//	  "minLength": 10,
-		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
+		//	  "pattern": "arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
 		//	  "type": "string"
 		//	}
 		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -157,7 +157,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(10, 1224),
-				stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -222,7 +222,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The permission set that the policy will be attached to",
 		//	  "maxLength": 1224,
 		//	  "minLength": 10,
-		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
+		//	  "pattern": "arn:aws(-[a-z]{1,5}){0,3}:sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
 		//	  "type": "string"
 		//	}
 		"permission_set_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

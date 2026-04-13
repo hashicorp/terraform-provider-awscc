@@ -1,0 +1,1 @@
+$ terraform import awscc_bcmpricingcalculator_bill_scenario.example "arn"

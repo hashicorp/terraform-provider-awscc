@@ -2549,6 +2549,103 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 			Description: "An array that defines the set of segment criteria to evaluate when handling segment groups for the segment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SegmentSort
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The segment sort configuration for ordering segment results.",
+		//	  "properties": {
+		//	    "Attributes": {
+		//	      "description": "A list of attributes used to sort the segments and their ordering preferences.",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Defines the characteristics and rules for sorting by a specific attribute.",
+		//	        "properties": {
+		//	          "DataType": {
+		//	            "description": "The data type of the sort attribute (e.g., string, number, date).",
+		//	            "enum": [
+		//	              "STRING",
+		//	              "NUMBER",
+		//	              "DATE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Name": {
+		//	            "description": "The name of the attribute to sort by.",
+		//	            "maxLength": 255,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Order": {
+		//	            "description": "The sort order for the attribute (ascending or descending).",
+		//	            "enum": [
+		//	              "ASC",
+		//	              "DESC"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Type": {
+		//	            "default": "PROFILE",
+		//	            "description": "The type of attribute (e.g., profile, calculated).",
+		//	            "enum": [
+		//	              "PROFILE",
+		//	              "CALCULATED"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Name",
+		//	          "Order"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Attributes"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"segment_sort": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Attributes
+				"attributes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DataType
+							"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The data type of the sort attribute (e.g., string, number, date).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the attribute to sort by.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Order
+							"order": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The sort order for the attribute (ascending or descending).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The type of attribute (e.g., profile, calculated).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of attributes used to sort the segments and their ordering preferences.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The segment sort configuration for ordering segment results.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SegmentSqlQuery
 		// CloudFormation resource type schema:
 		//
@@ -2662,6 +2759,7 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 		"country":                 "Country",
 		"county":                  "County",
 		"created_at":              "CreatedAt",
+		"data_type":               "DataType",
 		"description":             "Description",
 		"dimension_type":          "DimensionType",
 		"dimensions":              "Dimensions",
@@ -2679,6 +2777,8 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 		"mailing_address":         "MailingAddress",
 		"middle_name":             "MiddleName",
 		"mobile_phone_number":     "MobilePhoneNumber",
+		"name":                    "Name",
+		"order":                   "Order",
 		"party_type_string":       "PartyTypeString",
 		"personal_email_address":  "PersonalEmailAddress",
 		"phone_number":            "PhoneNumber",
@@ -2690,6 +2790,7 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 		"segment_definition_arn":  "SegmentDefinitionArn",
 		"segment_definition_name": "SegmentDefinitionName",
 		"segment_groups":          "SegmentGroups",
+		"segment_sort":            "SegmentSort",
 		"segment_sql_query":       "SegmentSqlQuery",
 		"segment_type":            "SegmentType",
 		"shipping_address":        "ShippingAddress",

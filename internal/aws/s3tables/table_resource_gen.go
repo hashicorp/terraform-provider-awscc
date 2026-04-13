@@ -8,6 +8,7 @@ package s3tables
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -101,7 +102,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Contains details about the metadata for an Iceberg table.",
+		//	  "description": "Contains details about the metadata for an Iceberg table. Specify either IcebergSchema (for simple flat schemas with primitive types only) or IcebergSchemaV2 (for schemas with nested types like struct, list, map), but not both.",
 		//	  "properties": {
 		//	    "IcebergPartitionSpec": {
 		//	      "additionalProperties": false,
@@ -152,7 +153,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "IcebergSchema": {
 		//	      "additionalProperties": false,
-		//	      "description": "Contains details about the schema for an Iceberg table",
+		//	      "description": "Schema definition for flat tables with primitive types only. Mutually exclusive with IcebergSchemaV2.",
 		//	      "properties": {
 		//	        "SchemaFieldList": {
 		//	          "description": "Contains details about the schema for an Iceberg table",
@@ -189,6 +190,74 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "required": [
 		//	        "SchemaFieldList"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "IcebergSchemaV2": {
+		//	      "additionalProperties": false,
+		//	      "description": "Schema definition that supports Apache Iceberg nested types (struct, list, map) and primitive types. Mutually exclusive with IcebergSchema.",
+		//	      "properties": {
+		//	        "IdentifierFieldIds": {
+		//	          "description": "A list of field IDs that are used as the identifier fields for the table. Identifier fields uniquely identify a row in the table.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "type": "integer"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "SchemaId": {
+		//	          "description": "An optional unique identifier for the schema",
+		//	          "type": "integer"
+		//	        },
+		//	        "SchemaV2FieldList": {
+		//	          "description": "The schema fields for the table",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "Contains details about a schema field for an Iceberg table that supports nested types (struct, list, map)",
+		//	            "properties": {
+		//	              "Doc": {
+		//	                "description": "Optional documentation for the field",
+		//	                "type": "string"
+		//	              },
+		//	              "Id": {
+		//	                "description": "The unique identifier for the field",
+		//	                "type": "integer"
+		//	              },
+		//	              "Name": {
+		//	                "description": "The name of the field",
+		//	                "type": "string"
+		//	              },
+		//	              "Required": {
+		//	                "description": "A Boolean value that specifies whether values are required for each row in this field",
+		//	                "type": "boolean"
+		//	              },
+		//	              "Type": {
+		//	                "description": "The field type. For primitive types, use a string (e.g., 'int', 'string', 'long'). For nested types, use an object (e.g., {'type': 'struct', 'fields': [...]} for struct, {'type': 'list', 'element-id': N, 'element': 'type'} for list, {'type': 'map', 'key-id': N, 'key': 'type', 'value-id': N, 'value': 'type'} for map).",
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Id",
+		//	              "Name",
+		//	              "Type",
+		//	              "Required"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "SchemaV2FieldType": {
+		//	          "description": "The type of the top-level schema, which is always 'struct'",
+		//	          "enum": [
+		//	            "struct"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SchemaV2FieldList",
+		//	        "SchemaV2FieldType"
 		//	      ],
 		//	      "type": "object"
 		//	    },
@@ -259,9 +328,6 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "IcebergSchema"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"iceberg_metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -411,12 +477,130 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Contains details about the schema for an Iceberg table",
+					Description: "Schema definition for flat tables with primitive types only. Mutually exclusive with IcebergSchemaV2.",
 					Optional:    true,
 					Computed:    true,
-					Validators: []validator.Object{ /*START VALIDATORS*/
-						fwvalidators.NotNullObject(),
-					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: IcebergSchemaV2
+				"iceberg_schema_v2": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IdentifierFieldIds
+						"identifier_field_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.Int64Type,
+							Description: "A list of field IDs that are used as the identifier fields for the table. Identifier fields uniquely identify a row in the table.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SchemaId
+						"schema_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "An optional unique identifier for the schema",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SchemaV2FieldList
+						"schema_v2_field_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Doc
+									"doc": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Optional documentation for the field",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Id
+									"id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The unique identifier for the field",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											fwvalidators.NotNullInt64(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Name
+									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The name of the field",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Required
+									"required": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "A Boolean value that specifies whether values are required for each row in this field",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Bool{ /*START VALIDATORS*/
+											fwvalidators.NotNullBool(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Type
+									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										CustomType:  jsontypes.NormalizedType{},
+										Description: "The field type. For primitive types, use a string (e.g., 'int', 'string', 'long'). For nested types, use an object (e.g., {'type': 'struct', 'fields': [...]} for struct, {'type': 'list', 'element-id': N, 'element': 'type'} for list, {'type': 'map', 'key-id': N, 'key': 'type', 'value-id': N, 'value': 'type'} for map).",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "The schema fields for the table",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								fwvalidators.NotNullList(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SchemaV2FieldType
+						"schema_v2_field_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The type of the top-level schema, which is always 'struct'",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"struct",
+								),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Schema definition that supports Apache Iceberg nested types (struct, list, map) and primitive types. Mutually exclusive with IcebergSchema.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -526,7 +710,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Contains details about the metadata for an Iceberg table.",
+			Description: "Contains details about the metadata for an Iceberg table. Specify either IcebergSchema (for simple flat schemas with primitive types only) or IcebergSchemaV2 (for schemas with nested types like struct, list, map), but not both.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -886,13 +1070,16 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"compaction":                  "Compaction",
 		"direction":                   "Direction",
+		"doc":                         "Doc",
 		"field_id":                    "FieldId",
 		"fields":                      "Fields",
 		"iceberg_metadata":            "IcebergMetadata",
 		"iceberg_partition_spec":      "IcebergPartitionSpec",
 		"iceberg_schema":              "IcebergSchema",
+		"iceberg_schema_v2":           "IcebergSchemaV2",
 		"iceberg_sort_order":          "IcebergSortOrder",
 		"id":                          "Id",
+		"identifier_field_ids":        "IdentifierFieldIds",
 		"key":                         "Key",
 		"max_snapshot_age_hours":      "MaxSnapshotAgeHours",
 		"min_snapshots_to_keep":       "MinSnapshotsToKeep",
@@ -903,6 +1090,9 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		"order_id":                    "OrderId",
 		"required":                    "Required",
 		"schema_field_list":           "SchemaFieldList",
+		"schema_id":                   "SchemaId",
+		"schema_v2_field_list":        "SchemaV2FieldList",
+		"schema_v2_field_type":        "SchemaV2FieldType",
 		"snapshot_management":         "SnapshotManagement",
 		"source_id":                   "SourceId",
 		"spec_id":                     "SpecId",

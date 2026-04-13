@@ -112,6 +112,34 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Encryption settings for the collection",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: FipsEndpoints
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "CollectionEndpoint": {
+		//	      "type": "string"
+		//	    },
+		//	    "DashboardEndpoint": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"fips_endpoints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CollectionEndpoint
+				"collection_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DashboardEndpoint
+				"dashboard_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -232,6 +260,36 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The possible types for the collection",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: VectorOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Vector search configuration options for the collection",
+		//	  "properties": {
+		//	    "ServerlessVectorAcceleration": {
+		//	      "description": "Indicates whether GPU acceleration is enabled for vector indexing",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED",
+		//	        "ALLOWED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"vector_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ServerlessVectorAcceleration
+				"serverless_vector_acceleration": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether GPU acceleration is enabled for vector indexing",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Vector search configuration options for the collection",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -249,21 +307,24 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::OpenSearchServerless::Collection").WithTerraformTypeName("awscc_opensearchserverless_collection")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                   "Arn",
-		"aws_owned_key":         "AWSOwnedKey",
-		"collection_endpoint":   "CollectionEndpoint",
-		"collection_group_name": "CollectionGroupName",
-		"collection_id":         "Id",
-		"dashboard_endpoint":    "DashboardEndpoint",
-		"description":           "Description",
-		"encryption_config":     "EncryptionConfig",
-		"key":                   "Key",
-		"kms_key_arn":           "KmsKeyArn",
-		"name":                  "Name",
-		"standby_replicas":      "StandbyReplicas",
-		"tags":                  "Tags",
-		"type":                  "Type",
-		"value":                 "Value",
+		"arn":                            "Arn",
+		"aws_owned_key":                  "AWSOwnedKey",
+		"collection_endpoint":            "CollectionEndpoint",
+		"collection_group_name":          "CollectionGroupName",
+		"collection_id":                  "Id",
+		"dashboard_endpoint":             "DashboardEndpoint",
+		"description":                    "Description",
+		"encryption_config":              "EncryptionConfig",
+		"fips_endpoints":                 "FipsEndpoints",
+		"key":                            "Key",
+		"kms_key_arn":                    "KmsKeyArn",
+		"name":                           "Name",
+		"serverless_vector_acceleration": "ServerlessVectorAcceleration",
+		"standby_replicas":               "StandbyReplicas",
+		"tags":                           "Tags",
+		"type":                           "Type",
+		"value":                          "Value",
+		"vector_options":                 "VectorOptions",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

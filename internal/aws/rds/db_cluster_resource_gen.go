@@ -1266,6 +1266,20 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 				boolplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: StorageEncryptionType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"storage_encryption_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: StorageThroughput
 		// CloudFormation resource type schema:
 		//
@@ -1507,6 +1521,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		"source_db_cluster_resource_id":         "SourceDbClusterResourceId",
 		"source_region":                         "SourceRegion",
 		"storage_encrypted":                     "StorageEncrypted",
+		"storage_encryption_type":               "StorageEncryptionType",
 		"storage_throughput":                    "StorageThroughput",
 		"storage_type":                          "StorageType",
 		"tags":                                  "Tags",

@@ -64,6 +64,8 @@ Read-Only:
 - `s3_properties` (Attributes) S3 Properties Input (see [below for nested schema](#nestedatt--props--s3_properties))
 - `spark_emr_properties` (Attributes) Spark EMR Properties Input. (see [below for nested schema](#nestedatt--props--spark_emr_properties))
 - `spark_glue_properties` (Attributes) Spark Glue Properties Input. (see [below for nested schema](#nestedatt--props--spark_glue_properties))
+- `workflows_mwaa_properties` (Attributes) Workflows MWAA Properties Input (see [below for nested schema](#nestedatt--props--workflows_mwaa_properties))
+- `workflows_serverless_properties` (String) Workflows Serverless Properties Input
 
 <a id="nestedatt--props--amazon_q_properties"></a>
 ### Nested Schema for `props.amazon_q_properties`
@@ -310,3 +312,12 @@ Read-Only:
 Read-Only:
 
 - `connection` (String)
+
+
+
+<a id="nestedatt--props--workflows_mwaa_properties"></a>
+### Nested Schema for `props.workflows_mwaa_properties`
+
+Read-Only:
+
+- `mwaa_environment_name` (String) The name of the MWAA environment.

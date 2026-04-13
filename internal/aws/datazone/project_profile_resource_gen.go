@@ -36,6 +36,19 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::DataZone::ProjectProfile resource.
 func projectProfileResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AllowCustomProjectResourceTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"allow_custom_project_resource_tags": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -556,6 +569,103 @@ func projectProfileResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.RegexMatches(regexp.MustCompile("^[\\w -]+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ProjectResourceTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "IsValueEditable": {
+		//	        "type": "boolean"
+		//	      },
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "^[\\w \\.:/=+@-]+$",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "pattern": "^[\\w \\.:/=+@-]*$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value",
+		//	      "IsValueEditable"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"project_resource_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: IsValueEditable
+					"is_value_editable": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.Bool{ /*START VALIDATORS*/
+							fwvalidators.NotNullBool(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+							boolplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[\\w \\.:/=+@-]+$"), ""),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[\\w \\.:/=+@-]*$"), ""),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ProjectResourceTagsDescription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 2048,
+		//	  "type": "string"
+		//	}
+		"project_resource_tags_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(2048),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -626,34 +736,39 @@ func projectProfileResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"aws_account":                  "AwsAccount",
-		"aws_account_id":               "AwsAccountId",
-		"aws_region":                   "AwsRegion",
-		"configuration_parameters":     "ConfigurationParameters",
-		"created_at":                   "CreatedAt",
-		"created_by":                   "CreatedBy",
-		"deployment_mode":              "DeploymentMode",
-		"deployment_order":             "DeploymentOrder",
-		"description":                  "Description",
-		"domain_id":                    "DomainId",
-		"domain_identifier":            "DomainIdentifier",
-		"domain_unit_id":               "DomainUnitId",
-		"domain_unit_identifier":       "DomainUnitIdentifier",
-		"environment_blueprint_id":     "EnvironmentBlueprintId",
-		"environment_configuration_id": "EnvironmentConfigurationId",
-		"environment_configurations":   "EnvironmentConfigurations",
-		"identifier":                   "Identifier",
-		"is_editable":                  "IsEditable",
-		"last_updated_at":              "LastUpdatedAt",
-		"name":                         "Name",
-		"parameter_overrides":          "ParameterOverrides",
-		"project_profile_id":           "Id",
-		"region_name":                  "RegionName",
-		"resolved_parameters":          "ResolvedParameters",
-		"ssm_path":                     "SsmPath",
-		"status":                       "Status",
-		"use_default_configurations":   "UseDefaultConfigurations",
-		"value":                        "Value",
+		"allow_custom_project_resource_tags": "AllowCustomProjectResourceTags",
+		"aws_account":                        "AwsAccount",
+		"aws_account_id":                     "AwsAccountId",
+		"aws_region":                         "AwsRegion",
+		"configuration_parameters":           "ConfigurationParameters",
+		"created_at":                         "CreatedAt",
+		"created_by":                         "CreatedBy",
+		"deployment_mode":                    "DeploymentMode",
+		"deployment_order":                   "DeploymentOrder",
+		"description":                        "Description",
+		"domain_id":                          "DomainId",
+		"domain_identifier":                  "DomainIdentifier",
+		"domain_unit_id":                     "DomainUnitId",
+		"domain_unit_identifier":             "DomainUnitIdentifier",
+		"environment_blueprint_id":           "EnvironmentBlueprintId",
+		"environment_configuration_id":       "EnvironmentConfigurationId",
+		"environment_configurations":         "EnvironmentConfigurations",
+		"identifier":                         "Identifier",
+		"is_editable":                        "IsEditable",
+		"is_value_editable":                  "IsValueEditable",
+		"key":                                "Key",
+		"last_updated_at":                    "LastUpdatedAt",
+		"name":                               "Name",
+		"parameter_overrides":                "ParameterOverrides",
+		"project_profile_id":                 "Id",
+		"project_resource_tags":              "ProjectResourceTags",
+		"project_resource_tags_description":  "ProjectResourceTagsDescription",
+		"region_name":                        "RegionName",
+		"resolved_parameters":                "ResolvedParameters",
+		"ssm_path":                           "SsmPath",
+		"status":                             "Status",
+		"use_default_configurations":         "UseDefaultConfigurations",
+		"value":                              "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

@@ -196,6 +196,51 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The status of the project.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ResourceTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The resource tags of the project.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "^[\\w \\.:/=+@-]+$",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "pattern": "^[\\w \\.:/=+@-]*$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"resource_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The resource tags of the project.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserParameters
 		// CloudFormation resource type schema:
 		//
@@ -293,12 +338,14 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"environment_id":                 "EnvironmentId",
 		"environment_parameters":         "EnvironmentParameters",
 		"glossary_terms":                 "GlossaryTerms",
+		"key":                            "Key",
 		"last_updated_at":                "LastUpdatedAt",
 		"name":                           "Name",
 		"project_id":                     "Id",
 		"project_profile_id":             "ProjectProfileId",
 		"project_profile_version":        "ProjectProfileVersion",
 		"project_status":                 "ProjectStatus",
+		"resource_tags":                  "ResourceTags",
 		"user_parameters":                "UserParameters",
 		"value":                          "Value",
 	})

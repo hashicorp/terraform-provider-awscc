@@ -1622,9 +1622,9 @@ func deploymentGroupResource(ctx context.Context) (resource.Resource, error) {
 		"wait_time_in_minutes":                           "WaitTimeInMinutes",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(510).WithDeleteTimeoutInMinutes(0)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithUpdateTimeoutInMinutes(990)
 
 	v, err := generic.NewResource(ctx, opts...)
 

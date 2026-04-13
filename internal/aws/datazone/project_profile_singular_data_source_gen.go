@@ -23,6 +23,15 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::DataZone::ProjectProfile resource.
 func projectProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AllowCustomProjectResourceTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"allow_custom_project_resource_tags": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -365,6 +374,67 @@ func projectProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ProjectResourceTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "IsValueEditable": {
+		//	        "type": "boolean"
+		//	      },
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "^[\\w \\.:/=+@-]+$",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "pattern": "^[\\w \\.:/=+@-]*$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value",
+		//	      "IsValueEditable"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"project_resource_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: IsValueEditable
+					"is_value_editable": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: ProjectResourceTagsDescription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 2048,
+		//	  "type": "string"
+		//	}
+		"project_resource_tags_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -404,34 +474,39 @@ func projectProfileDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::ProjectProfile").WithTerraformTypeName("awscc_datazone_project_profile")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"aws_account":                  "AwsAccount",
-		"aws_account_id":               "AwsAccountId",
-		"aws_region":                   "AwsRegion",
-		"configuration_parameters":     "ConfigurationParameters",
-		"created_at":                   "CreatedAt",
-		"created_by":                   "CreatedBy",
-		"deployment_mode":              "DeploymentMode",
-		"deployment_order":             "DeploymentOrder",
-		"description":                  "Description",
-		"domain_id":                    "DomainId",
-		"domain_identifier":            "DomainIdentifier",
-		"domain_unit_id":               "DomainUnitId",
-		"domain_unit_identifier":       "DomainUnitIdentifier",
-		"environment_blueprint_id":     "EnvironmentBlueprintId",
-		"environment_configuration_id": "EnvironmentConfigurationId",
-		"environment_configurations":   "EnvironmentConfigurations",
-		"identifier":                   "Identifier",
-		"is_editable":                  "IsEditable",
-		"last_updated_at":              "LastUpdatedAt",
-		"name":                         "Name",
-		"parameter_overrides":          "ParameterOverrides",
-		"project_profile_id":           "Id",
-		"region_name":                  "RegionName",
-		"resolved_parameters":          "ResolvedParameters",
-		"ssm_path":                     "SsmPath",
-		"status":                       "Status",
-		"use_default_configurations":   "UseDefaultConfigurations",
-		"value":                        "Value",
+		"allow_custom_project_resource_tags": "AllowCustomProjectResourceTags",
+		"aws_account":                        "AwsAccount",
+		"aws_account_id":                     "AwsAccountId",
+		"aws_region":                         "AwsRegion",
+		"configuration_parameters":           "ConfigurationParameters",
+		"created_at":                         "CreatedAt",
+		"created_by":                         "CreatedBy",
+		"deployment_mode":                    "DeploymentMode",
+		"deployment_order":                   "DeploymentOrder",
+		"description":                        "Description",
+		"domain_id":                          "DomainId",
+		"domain_identifier":                  "DomainIdentifier",
+		"domain_unit_id":                     "DomainUnitId",
+		"domain_unit_identifier":             "DomainUnitIdentifier",
+		"environment_blueprint_id":           "EnvironmentBlueprintId",
+		"environment_configuration_id":       "EnvironmentConfigurationId",
+		"environment_configurations":         "EnvironmentConfigurations",
+		"identifier":                         "Identifier",
+		"is_editable":                        "IsEditable",
+		"is_value_editable":                  "IsValueEditable",
+		"key":                                "Key",
+		"last_updated_at":                    "LastUpdatedAt",
+		"name":                               "Name",
+		"parameter_overrides":                "ParameterOverrides",
+		"project_profile_id":                 "Id",
+		"project_resource_tags":              "ProjectResourceTags",
+		"project_resource_tags_description":  "ProjectResourceTagsDescription",
+		"region_name":                        "RegionName",
+		"resolved_parameters":                "ResolvedParameters",
+		"ssm_path":                           "SsmPath",
+		"status":                             "Status",
+		"use_default_configurations":         "UseDefaultConfigurations",
+		"value":                              "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

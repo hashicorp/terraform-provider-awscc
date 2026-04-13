@@ -28,7 +28,9 @@ resource "awscc_devopsagent_agent_space" "example" {
 ### Optional
 
 - `description` (String) The description of the AgentSpace.
+- `kms_key_arn` (String) The ARN of the KMS key to use for encryption.
 - `operator_app` (Attributes) (see [below for nested schema](#nestedatt--operator_app))
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -72,6 +74,16 @@ Read-Only:
 - `created_at` (String)
 - `idc_application_arn` (String)
 - `updated_at` (String)
+
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) The key name of the tag.
+- `value` (String) The value for the tag.
 
 ## Import
 

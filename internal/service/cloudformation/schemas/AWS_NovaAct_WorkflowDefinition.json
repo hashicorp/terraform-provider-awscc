@@ -1,0 +1,117 @@
+{
+  "typeName": "AWS::NovaAct::WorkflowDefinition",
+  "description": "Definition of AWS::NovaAct::WorkflowDefinition Resource Type",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the workflow definition.",
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov):nova-act:[a-z0-9-]+:[0-9]{12}:workflow-definition/[a-zA-Z0-9_-]{1,40}$"
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp when the workflow definition was created.",
+      "format": "date-time"
+    },
+    "Description": {
+      "type": "string",
+      "description": "An optional description of the workflow definition's purpose and functionality.",
+      "minLength": 1,
+      "maxLength": 4000
+    },
+    "ExportConfig": {
+      "$ref": "#/definitions/WorkflowExportConfig"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the workflow definition. Must be unique within your account and region.",
+      "minLength": 1,
+      "maxLength": 40,
+      "pattern": "^[a-zA-Z0-9_-]{1,40}$"
+    },
+    "Status": {
+      "type": "string",
+      "description": "The current status of the workflow definition.",
+      "enum": [
+        "ACTIVE",
+        "DELETING"
+      ]
+    }
+  },
+  "definitions": {
+    "WorkflowExportConfig": {
+      "type": "object",
+      "description": "Configuration settings for exporting workflow execution data and logs to Amazon S3.",
+      "properties": {
+        "S3BucketName": {
+          "type": "string",
+          "description": "The name of the Amazon S3 bucket for exporting workflow data.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-z0-9][a-z0-9.-]*[a-z0-9]$"
+        },
+        "S3KeyPrefix": {
+          "type": "string",
+          "description": "An optional prefix for Amazon S3 object keys to organize exported data.",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[a-zA-Z0-9!\\-_.*'()]+(?:/[a-zA-Z0-9!\\-_.*'()]+)*$"
+        }
+      },
+      "required": [
+        "S3BucketName"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/CreatedAt",
+    "/properties/Status"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/Description",
+    "/properties/ExportConfig"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Name"
+    ]
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "nova-act:CreateWorkflowDefinition",
+        "nova-act:GetWorkflowDefinition",
+        "iam:CreateServiceLinkedRole",
+        "s3:ListBucket"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "nova-act:GetWorkflowDefinition"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "nova-act:DeleteWorkflowDefinition",
+        "nova-act:GetWorkflowDefinition"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "nova-act:ListWorkflowDefinitions"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

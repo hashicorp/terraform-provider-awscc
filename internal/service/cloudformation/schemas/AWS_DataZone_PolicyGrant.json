@@ -602,7 +602,9 @@
     "create": {
       "permissions": [
         "datazone:AddPolicyGrant",
-        "datazone:ListPolicyGrants"
+        "datazone:GetUserProfile",
+        "datazone:ListPolicyGrants",
+        "iam:GetUser"
       ]
     },
     "read": {

@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrockagentcore_api_key_credential_provider.example "credential_provider_arn"

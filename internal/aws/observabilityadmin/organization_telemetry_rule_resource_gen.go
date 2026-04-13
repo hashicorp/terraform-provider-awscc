@@ -350,7 +350,8 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 		//	        "AWS::WAFv2::WebACL",
 		//	        "AWS::CloudTrail",
 		//	        "AWS::EKS::Cluster",
-		//	        "AWS::ElasticLoadBalancingV2::LoadBalancer"
+		//	        "AWS::ElasticLoadBalancingV2::LoadBalancer",
+		//	        "AWS::EC2::Instance"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -384,7 +385,8 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 		//	    "TelemetryType": {
 		//	      "description": "Telemetry Type associated with the Organization Telemetry Rule",
 		//	      "enum": [
-		//	        "Logs"
+		//	        "Logs",
+		//	        "Metrics"
 		//	      ],
 		//	      "type": "string"
 		//	    }
@@ -875,6 +877,7 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 							"AWS::CloudTrail",
 							"AWS::EKS::Cluster",
 							"AWS::ElasticLoadBalancingV2::LoadBalancer",
+							"AWS::EC2::Instance",
 						),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
@@ -926,6 +929,7 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"Logs",
+							"Metrics",
 						),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/

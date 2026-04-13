@@ -29,7 +29,7 @@ func runtimeEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//
 		//	{
 		//	  "description": "The ARN of the Agent Runtime",
-		//	  "pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:runtime/[a-zA-Z][a-zA-Z0-9_]{0,99}-[a-zA-Z0-9]{10}$",
+		//	  "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:runtime/[a-zA-Z][a-zA-Z0-9_]{0,99}-[a-zA-Z0-9]{10}$",
 		//	  "type": "string"
 		//	}
 		"agent_runtime_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -41,7 +41,7 @@ func runtimeEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the AgentCore Runtime.",
-		//	  "pattern": "^arn:aws:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:runtime/[a-zA-Z0-9_-]+/runtime-endpoint/[a-zA-Z0-9_-]+$",
+		//	  "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:runtime/[a-zA-Z0-9_-]+/runtime-endpoint/[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
 		"agent_runtime_endpoint_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

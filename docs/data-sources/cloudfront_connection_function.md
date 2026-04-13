@@ -21,34 +21,34 @@ Data Source schema for AWS::CloudFront::ConnectionFunction
 
 ### Read-Only
 
-- `auto_publish` (Boolean)
+- `auto_publish` (Boolean) A flag that determines whether to automatically publish the function to the ``LIVE`` stage when it?s created. To automatically publish to the ``LIVE`` stage, set this property to ``true``.
 - `connection_function_arn` (String)
-- `connection_function_code` (String)
-- `connection_function_config` (Attributes) (see [below for nested schema](#nestedatt--connection_function_config))
+- `connection_function_code` (String) The code for the connection function.
+- `connection_function_config` (Attributes) Contains configuration information about a CloudFront function. (see [below for nested schema](#nestedatt--connection_function_config))
 - `connection_function_id` (String)
 - `created_time` (String)
 - `e_tag` (String)
 - `last_modified_time` (String)
-- `name` (String)
+- `name` (String) The connection function name.
 - `stage` (String)
 - `status` (String)
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) A complex type that contains zero or more ``Tag`` elements. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--connection_function_config"></a>
 ### Nested Schema for `connection_function_config`
 
 Read-Only:
 
-- `comment` (String)
-- `key_value_store_associations` (Attributes List) (see [below for nested schema](#nestedatt--connection_function_config--key_value_store_associations))
-- `runtime` (String)
+- `comment` (String) A comment to describe the function.
+- `key_value_store_associations` (Attributes List) The configuration for the key value store associations. (see [below for nested schema](#nestedatt--connection_function_config--key_value_store_associations))
+- `runtime` (String) The function's runtime environment version.
 
 <a id="nestedatt--connection_function_config--key_value_store_associations"></a>
 ### Nested Schema for `connection_function_config.key_value_store_associations`
 
 Read-Only:
 
-- `key_value_store_arn` (String)
+- `key_value_store_arn` (String) The Amazon Resource Name (ARN) of the key value store association.
 
 
 
@@ -57,5 +57,7 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) A string that contains ``Tag`` key.
+ The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.
+- `value` (String) A string that contains an optional ``Tag`` value.
+ The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.

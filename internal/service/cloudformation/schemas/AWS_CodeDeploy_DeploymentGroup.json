@@ -612,6 +612,7 @@
         "codedeploy:CreateDeployment",
         "codedeploy:GetDeployment",
         "codedeploy:GetDeploymentConfig",
+        "codedeploy:GetDeploymentGroup",
         "codedeploy:GetApplicationRevision",
         "codedeploy:ListDeployments",
         "codedeploy:RegisterApplicationRevision",
@@ -619,7 +620,8 @@
         "codedeploy:TagResource",
         "codedeploy:UntagResource",
         "iam:PassRole"
-      ]
+      ],
+      "timeoutInMinutes": 510
     },
     "read": {
       "permissions": [
@@ -643,7 +645,8 @@
         "codedeploy:RegisterApplicationRevision",
         "codedeploy:RegisterOnPremisesInstance",
         "iam:PassRole"
-      ]
+      ],
+      "timeoutInMinutes": 990
     },
     "delete": {
       "permissions": [

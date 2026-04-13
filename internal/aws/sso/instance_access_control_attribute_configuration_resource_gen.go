@@ -267,7 +267,7 @@ func instanceAccessControlAttributeConfigurationResource(ctx context.Context) (r
 		//	  "description": "The ARN of the AWS SSO instance under which the operation will be executed.",
 		//	  "maxLength": 1224,
 		//	  "minLength": 10,
-		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
+		//	  "pattern": "arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
 		//	  "type": "string"
 		//	}
 		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -275,7 +275,7 @@ func instanceAccessControlAttributeConfigurationResource(ctx context.Context) (r
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(10, 1224),
-				stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
