@@ -111,6 +111,27 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: AvailabilityZoneIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"availability_zone_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZoneImpairmentPolicy
 		// CloudFormation resource type schema:
 		//
@@ -2423,6 +2444,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		"auto_scaling_group_arn":                   "AutoScalingGroupARN",
 		"auto_scaling_group_name":                  "AutoScalingGroupName",
 		"availability_zone_distribution":           "AvailabilityZoneDistribution",
+		"availability_zone_ids":                    "AvailabilityZoneIds",
 		"availability_zone_impairment_policy":      "AvailabilityZoneImpairmentPolicy",
 		"availability_zones":                       "AvailabilityZones",
 		"bare_metal":                               "BareMetal",

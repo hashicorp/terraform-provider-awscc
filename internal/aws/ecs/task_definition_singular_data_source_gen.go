@@ -1832,6 +1832,28 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "Name": {
 		//	        "description": "The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed.\n When using a volume configured at launch, the ``name`` is required and must also be specified as the volume name in the ``ServiceVolumeConfiguration`` or ``TaskVolumeConfiguration`` parameter when creating your service or standalone task.\n For all other types of volumes, this name is referenced in the ``sourceVolume`` parameter of the ``mountPoints`` object in the container definition.\n When a volume is using the ``efsVolumeConfiguration``, the name is required.",
 		//	        "type": "string"
+		//	      },
+		//	      "S3FilesVolumeConfiguration": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "AccessPointArn": {
+		//	            "type": "string"
+		//	          },
+		//	          "FileSystemArn": {
+		//	            "type": "string"
+		//	          },
+		//	          "RootDirectory": {
+		//	            "type": "string"
+		//	          },
+		//	          "TransitEncryptionPort": {
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "FileSystemArn"
+		//	        ],
+		//	        "type": "object"
 		//	      }
 		//	    },
 		//	    "type": "object"
@@ -1978,6 +2000,29 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 						Description: "The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed.\n When using a volume configured at launch, the ``name`` is required and must also be specified as the volume name in the ``ServiceVolumeConfiguration`` or ``TaskVolumeConfiguration`` parameter when creating your service or standalone task.\n For all other types of volumes, this name is referenced in the ``sourceVolume`` parameter of the ``mountPoints`` object in the container definition.\n When a volume is using the ``efsVolumeConfiguration``, the name is required.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: S3FilesVolumeConfiguration
+					"s3_files_volume_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AccessPointArn
+							"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: FileSystemArn
+							"file_system_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: RootDirectory
+							"root_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: TransitEncryptionPort
+							"transit_encryption_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "The list of data volume definitions for the task. For more information, see [Using data volumes in tasks](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html) in the *Amazon Elastic Container Service Developer Guide*.\n  The ``host`` and ``sourcePath`` parameters aren't supported for tasks run on FARGATElong.",
@@ -2000,6 +2045,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::ECS::TaskDefinition").WithTerraformTypeName("awscc_ecs_task_definition")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_point_arn":            "AccessPointArn",
 		"access_point_id":             "AccessPointId",
 		"add":                         "Add",
 		"app_protocol":                "AppProtocol",
@@ -2044,6 +2090,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"expression":                  "Expression",
 		"extra_hosts":                 "ExtraHosts",
 		"family":                      "Family",
+		"file_system_arn":             "FileSystemArn",
 		"file_system_id":              "FileSystemId",
 		"filesystem_id":               "FilesystemId",
 		"firelens_configuration":      "FirelensConfiguration",
@@ -2098,6 +2145,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"retries":                        "Retries",
 		"root_directory":                 "RootDirectory",
 		"runtime_platform":               "RuntimePlatform",
+		"s3_files_volume_configuration":  "S3FilesVolumeConfiguration",
 		"scope":                          "Scope",
 		"secret_options":                 "SecretOptions",
 		"secrets":                        "Secrets",

@@ -140,6 +140,12 @@
   "primaryIdentifier": [
     "/properties/PolicyArn"
   ],
+  "additionalIdentifiers": [
+    [
+      "/properties/PolicyEngineId",
+      "/properties/PolicyId"
+    ]
+  ],
   "tagging": {
     "taggable": false
   },

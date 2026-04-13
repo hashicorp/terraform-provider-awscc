@@ -45,7 +45,7 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The Amazon Resource Name(ARN) that uniquely identifies the Agent",
 		//	  "maxLength": 2048,
-		//	  "pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:runtime/[a-zA-Z][a-zA-Z0-9_]{0,99}-[a-zA-Z0-9]{10}$",
+		//	  "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:runtime/[a-zA-Z][a-zA-Z0-9_]{0,99}-[a-zA-Z0-9]{10}$",
 		//	  "type": "string"
 		//	}
 		"agent_runtime_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -118,7 +118,8 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		//	            "PYTHON_3_10",
 		//	            "PYTHON_3_11",
 		//	            "PYTHON_3_12",
-		//	            "PYTHON_3_13"
+		//	            "PYTHON_3_13",
+		//	            "PYTHON_3_14"
 		//	          ],
 		//	          "type": "string"
 		//	        }
@@ -242,6 +243,7 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 									"PYTHON_3_11",
 									"PYTHON_3_12",
 									"PYTHON_3_13",
+									"PYTHON_3_14",
 								),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -738,6 +740,81 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: FilesystemConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Filesystem configurations for the agent runtime",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Filesystem configuration for the runtime",
+		//	    "properties": {
+		//	      "SessionStorage": {
+		//	        "additionalProperties": false,
+		//	        "description": "Configuration for session storage",
+		//	        "properties": {
+		//	          "MountPath": {
+		//	            "description": "Mount path for session storage",
+		//	            "maxLength": 200,
+		//	            "minLength": 6,
+		//	            "pattern": "^/mnt/[a-zA-Z0-9._-]+/?$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "MountPath"
+		//	        ],
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 1,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"filesystem_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: SessionStorage
+					"session_storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: MountPath
+							"mount_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Mount path for session storage",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(6, 200),
+									stringvalidator.RegexMatches(regexp.MustCompile("^/mnt/[a-zA-Z0-9._-]+/?$"), ""),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Configuration for session storage",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Filesystem configurations for the agent runtime",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(0, 1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -936,7 +1013,8 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		//	  "enum": [
 		//	    "MCP",
 		//	    "HTTP",
-		//	    "A2A"
+		//	    "A2A",
+		//	    "AGUI"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -949,6 +1027,7 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 					"MCP",
 					"HTTP",
 					"A2A",
+					"AGUI",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1158,6 +1237,7 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		"entry_point":                    "EntryPoint",
 		"environment_variables":          "EnvironmentVariables",
 		"failure_reason":                 "FailureReason",
+		"filesystem_configurations":      "FilesystemConfigurations",
 		"idle_runtime_session_timeout":   "IdleRuntimeSessionTimeout",
 		"inbound_token_claim_name":       "InboundTokenClaimName",
 		"inbound_token_claim_value_type": "InboundTokenClaimValueType",
@@ -1166,6 +1246,7 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		"match_value_string":             "MatchValueString",
 		"match_value_string_list":        "MatchValueStringList",
 		"max_lifetime":                   "MaxLifetime",
+		"mount_path":                     "MountPath",
 		"network_configuration":          "NetworkConfiguration",
 		"network_mode":                   "NetworkMode",
 		"network_mode_config":            "NetworkModeConfig",
@@ -1177,6 +1258,7 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		"runtime":                        "Runtime",
 		"s3":                             "S3",
 		"security_groups":                "SecurityGroups",
+		"session_storage":                "SessionStorage",
 		"status":                         "Status",
 		"subnets":                        "Subnets",
 		"tags":                           "Tags",

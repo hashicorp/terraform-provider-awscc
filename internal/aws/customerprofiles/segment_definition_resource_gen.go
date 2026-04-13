@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -4011,6 +4012,156 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: SegmentSort
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The segment sort configuration for ordering segment results.",
+		//	  "properties": {
+		//	    "Attributes": {
+		//	      "description": "A list of attributes used to sort the segments and their ordering preferences.",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Defines the characteristics and rules for sorting by a specific attribute.",
+		//	        "properties": {
+		//	          "DataType": {
+		//	            "description": "The data type of the sort attribute (e.g., string, number, date).",
+		//	            "enum": [
+		//	              "STRING",
+		//	              "NUMBER",
+		//	              "DATE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Name": {
+		//	            "description": "The name of the attribute to sort by.",
+		//	            "maxLength": 255,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Order": {
+		//	            "description": "The sort order for the attribute (ascending or descending).",
+		//	            "enum": [
+		//	              "ASC",
+		//	              "DESC"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Type": {
+		//	            "default": "PROFILE",
+		//	            "description": "The type of attribute (e.g., profile, calculated).",
+		//	            "enum": [
+		//	              "PROFILE",
+		//	              "CALCULATED"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Name",
+		//	          "Order"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Attributes"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"segment_sort": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Attributes
+				"attributes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DataType
+							"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The data type of the sort attribute (e.g., string, number, date).",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"STRING",
+										"NUMBER",
+										"DATE",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the attribute to sort by.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 255),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Order
+							"order": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The sort order for the attribute (ascending or descending).",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"ASC",
+										"DESC",
+									),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The type of attribute (e.g., profile, calculated).",
+								Optional:    true,
+								Computed:    true,
+								Default:     stringdefault.StaticString("PROFILE"),
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"PROFILE",
+										"CALCULATED",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of attributes used to sort the segments and their ordering preferences.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+						fwvalidators.NotNullList(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The segment sort configuration for ordering segment results.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SegmentSqlQuery
 		// CloudFormation resource type schema:
 		//
@@ -4175,6 +4326,7 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"country":                 "Country",
 		"county":                  "County",
 		"created_at":              "CreatedAt",
+		"data_type":               "DataType",
 		"description":             "Description",
 		"dimension_type":          "DimensionType",
 		"dimensions":              "Dimensions",
@@ -4192,6 +4344,8 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"mailing_address":         "MailingAddress",
 		"middle_name":             "MiddleName",
 		"mobile_phone_number":     "MobilePhoneNumber",
+		"name":                    "Name",
+		"order":                   "Order",
 		"party_type_string":       "PartyTypeString",
 		"personal_email_address":  "PersonalEmailAddress",
 		"phone_number":            "PhoneNumber",
@@ -4203,6 +4357,7 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"segment_definition_arn":  "SegmentDefinitionArn",
 		"segment_definition_name": "SegmentDefinitionName",
 		"segment_groups":          "SegmentGroups",
+		"segment_sort":            "SegmentSort",
 		"segment_sql_query":       "SegmentSqlQuery",
 		"segment_type":            "SegmentType",
 		"shipping_address":        "ShippingAddress",

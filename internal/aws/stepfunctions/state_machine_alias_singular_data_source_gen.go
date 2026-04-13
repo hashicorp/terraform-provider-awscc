@@ -197,6 +197,17 @@ func stateMachineAliasDataSource(ctx context.Context) (datasource.DataSource, er
 			Description: "The routing configuration of the alias. One or two versions can be mapped to an alias to split StartExecution requests of the same state machine.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: StateMachineArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"state_machine_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -222,6 +233,7 @@ func stateMachineAliasDataSource(ctx context.Context) (datasource.DataSource, er
 		"name":                      "Name",
 		"percentage":                "Percentage",
 		"routing_configuration":     "RoutingConfiguration",
+		"state_machine_arn":         "StateMachineArn",
 		"state_machine_version_arn": "StateMachineVersionArn",
 		"type":                      "Type",
 		"weight":                    "Weight",

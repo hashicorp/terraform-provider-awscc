@@ -39,7 +39,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Application ARN that is returned upon creation of the Identity Center (SSO) Application",
 		//	  "maxLength": 1224,
 		//	  "minLength": 10,
-		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$",
+		//	  "pattern": "^arn:aws(-[a-z]{1,5}){0,3}:sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$",
 		//	  "type": "string"
 		//	}
 		"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -56,7 +56,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ARN of the application provider under which the operation will run",
 		//	  "maxLength": 1224,
 		//	  "minLength": 10,
-		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::aws:applicationProvider/[a-zA-Z0-9-/]+$",
+		//	  "pattern": "^arn:aws(-[a-z]{1,5}){0,3}:sso::aws:applicationProvider/[a-zA-Z0-9-/]+$",
 		//	  "type": "string"
 		//	}
 		"application_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -64,7 +64,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(10, 1224),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::aws:applicationProvider/[a-zA-Z0-9-/]+$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[a-z]{1,5}){0,3}:sso::aws:applicationProvider/[a-zA-Z0-9-/]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -97,7 +97,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ARN of the instance of IAM Identity Center under which the operation will run",
 		//	  "maxLength": 1224,
 		//	  "minLength": 10,
-		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$",
+		//	  "pattern": "^arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$",
 		//	  "type": "string"
 		//	}
 		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -105,7 +105,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(10, 1224),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

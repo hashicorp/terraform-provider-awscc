@@ -61,6 +61,7 @@ Contains between 3 and 32 characters
 - `standby_replicas` (String) The possible standby replicas for the collection
 - `tags` (Attributes List) List of tags to be added to the resource (see [below for nested schema](#nestedatt--tags))
 - `type` (String) The possible types for the collection
+- `vector_options` (Attributes) Vector search configuration options for the collection (see [below for nested schema](#nestedatt--vector_options))
 
 ### Read-Only
 
@@ -68,6 +69,7 @@ Contains between 3 and 32 characters
 - `collection_endpoint` (String) The endpoint for the collection.
 - `collection_id` (String) The identifier of the collection
 - `dashboard_endpoint` (String) The OpenSearch Dashboards endpoint for the collection.
+- `fips_endpoints` (Attributes) (see [below for nested schema](#nestedatt--fips_endpoints))
 - `id` (String) Uniquely identifies the resource.
 - `kms_key_arn` (String) Key Management Service key used to encrypt the collection.
 
@@ -87,6 +89,23 @@ Optional:
 
 - `key` (String) The key in the key-value pair
 - `value` (String) The value in the key-value pair
+
+
+<a id="nestedatt--vector_options"></a>
+### Nested Schema for `vector_options`
+
+Optional:
+
+- `serverless_vector_acceleration` (String) Indicates whether GPU acceleration is enabled for vector indexing
+
+
+<a id="nestedatt--fips_endpoints"></a>
+### Nested Schema for `fips_endpoints`
+
+Read-Only:
+
+- `collection_endpoint` (String)
+- `dashboard_endpoint` (String)
 
 ## Import
 

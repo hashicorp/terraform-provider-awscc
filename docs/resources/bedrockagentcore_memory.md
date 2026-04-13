@@ -59,6 +59,7 @@ Optional:
 - `created_at` (String) Creation timestamp of the memory strategy
 - `description` (String) Description of the Memory resource
 - `name` (String) Name of the Memory resource
+- `namespace_templates` (List of String) List of namespaces for memory strategy
 - `namespaces` (List of String) List of namespaces for memory strategy
 - `status` (String) Status of the memory strategy
 - `strategy_id` (String) Unique identifier for the memory strategy
@@ -110,6 +111,7 @@ Optional:
 
 - `append_to_prompt` (String) Text prompt for model instructions
 - `model_id` (String)
+- `namespace_templates` (List of String) List of namespaces for memory strategy
 - `namespaces` (List of String) List of namespaces for memory strategy
 
 
@@ -248,6 +250,7 @@ Optional:
 - `created_at` (String) Creation timestamp of the memory strategy
 - `description` (String) Description of the Memory resource
 - `name` (String) Name of the Memory resource
+- `namespace_templates` (List of String) List of namespaces for memory strategy
 - `namespaces` (List of String) List of namespaces for memory strategy
 - `reflection_configuration` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration))
 - `status` (String) Status of the memory strategy
@@ -260,6 +263,7 @@ Optional:
 
 Optional:
 
+- `namespace_templates` (List of String) List of namespaces for memory strategy
 - `namespaces` (List of String) List of namespaces for memory strategy
 
 
@@ -272,6 +276,7 @@ Optional:
 - `created_at` (String) Creation timestamp of the memory strategy
 - `description` (String) Description of the Memory resource
 - `name` (String) Name of the Memory resource
+- `namespace_templates` (List of String) List of namespaces for memory strategy
 - `namespaces` (List of String) List of namespaces for memory strategy
 - `status` (String) Status of the memory strategy
 - `strategy_id` (String) Unique identifier for the memory strategy
@@ -287,6 +292,7 @@ Optional:
 - `created_at` (String) Creation timestamp of the memory strategy
 - `description` (String) Description of the Memory resource
 - `name` (String) Name of the Memory resource
+- `namespace_templates` (List of String) List of namespaces for memory strategy
 - `namespaces` (List of String) List of namespaces for memory strategy
 - `status` (String) Status of the memory strategy
 - `strategy_id` (String) Unique identifier for the memory strategy
@@ -302,6 +308,7 @@ Optional:
 - `created_at` (String) Creation timestamp of the memory strategy
 - `description` (String) Description of the Memory resource
 - `name` (String) Name of the Memory resource
+- `namespace_templates` (List of String) List of namespaces for memory strategy
 - `namespaces` (List of String) List of namespaces for memory strategy
 - `status` (String) Status of the memory strategy
 - `strategy_id` (String) Unique identifier for the memory strategy

@@ -210,6 +210,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the API key",
+		//	  "pattern": "^arn:.*",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -401,6 +402,10 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    }
 		//	  },
+		//	  "required": [
+		//	    "FieldLogLevel",
+		//	    "CloudWatchLogsRoleArn"
+		//	  ],
 		//	  "type": "object"
 		//	}
 		"log_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/

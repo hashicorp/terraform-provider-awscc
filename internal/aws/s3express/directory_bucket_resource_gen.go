@@ -442,6 +442,76 @@ func directoryBucketResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: MetricsConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the metrics configurations for the Amazon S3 Express bucket.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Specifies a metrics configuration for the CloudWatch request metrics from an Amazon S3 Express bucket.",
+		//	    "properties": {
+		//	      "AccessPointArn": {
+		//	        "description": "The access point ARN used when evaluating a metrics filter.",
+		//	        "type": "string"
+		//	      },
+		//	      "Id": {
+		//	        "description": "The ID used to identify the metrics configuration.",
+		//	        "type": "string"
+		//	      },
+		//	      "Prefix": {
+		//	        "description": "The prefix used when evaluating a metrics filter.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"metrics_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AccessPointArn
+					"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The access point ARN used when evaluating a metrics filter.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID used to identify the metrics configuration.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Prefix
+					"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The prefix used when evaluating a metrics filter.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies the metrics configurations for the Amazon S3 Express bucket.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -538,6 +608,7 @@ func directoryBucketResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"abort_incomplete_multipart_upload":    "AbortIncompleteMultipartUpload",
+		"access_point_arn":                     "AccessPointArn",
 		"arn":                                  "Arn",
 		"availability_zone_name":               "AvailabilityZoneName",
 		"bucket_encryption":                    "BucketEncryption",
@@ -551,6 +622,7 @@ func directoryBucketResource(ctx context.Context) (resource.Resource, error) {
 		"kms_master_key_id":                    "KMSMasterKeyID",
 		"lifecycle_configuration":              "LifecycleConfiguration",
 		"location_name":                        "LocationName",
+		"metrics_configurations":               "MetricsConfigurations",
 		"object_size_greater_than":             "ObjectSizeGreaterThan",
 		"object_size_less_than":                "ObjectSizeLessThan",
 		"prefix":                               "Prefix",

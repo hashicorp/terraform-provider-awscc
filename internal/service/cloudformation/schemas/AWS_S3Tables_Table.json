@@ -148,6 +148,40 @@
         "$ref": "#/definitions/IcebergPartitionField"
       }
     },
+    "IcebergSchemaV2": {
+      "description": "Contains details about the schema version 2 (V2) for an Iceberg table that supports Apache Iceberg Nested Types (struct, list, map). Primitive types are also supported.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "SchemaV2FieldList": {
+          "description": "The schema fields for the table",
+          "$ref": "#/definitions/SchemaV2FieldList"
+        },
+        "SchemaV2FieldType": {
+          "description": "The type of the top-level schema, which is always 'struct'",
+          "type": "string",
+          "enum": [
+            "struct"
+          ]
+        },
+        "SchemaId": {
+          "description": "An optional unique identifier for the schema",
+          "type": "integer"
+        },
+        "IdentifierFieldIds": {
+          "description": "A list of field IDs that are used as the identifier fields for the table. Identifier fields uniquely identify a row in the table.",
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      },
+      "required": [
+        "SchemaV2FieldList",
+        "SchemaV2FieldType"
+      ]
+    },
     "IcebergPartitionSpec": {
       "description": "Partition specification for an Iceberg table",
       "additionalProperties": false,
@@ -228,6 +262,54 @@
       "enum": [
         "Yes"
       ]
+    },
+    "SchemaV2Field": {
+      "description": "Contains details about a schema field for an Iceberg table that supports nested types (struct, list, map)",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Type": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object"
+            }
+          ],
+          "description": "The field type. For primitive types, use a string (e.g., 'int', 'string', 'long'). For nested types, use an object (e.g., {'type': 'struct', 'fields': [...]} for struct, {'type': 'list', 'element-id': N, 'element': 'type'} for list, {'type': 'map', 'key-id': N, 'key': 'type', 'value-id': N, 'value': 'type'} for map)."
+        },
+        "Required": {
+          "description": "A Boolean value that specifies whether values are required for each row in this field",
+          "type": "boolean"
+        },
+        "Doc": {
+          "description": "Optional documentation for the field",
+          "type": "string"
+        },
+        "Id": {
+          "description": "The unique identifier for the field",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "The name of the field",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Id",
+        "Name",
+        "Type",
+        "Required"
+      ]
+    },
+    "SchemaV2FieldList": {
+      "description": "List of schema fields that support nested types",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/SchemaV2Field"
+      }
     },
     "Namespace": {
       "description": "The namespace that the table belongs to.",
@@ -341,15 +423,20 @@
       ]
     },
     "IcebergMetadata": {
-      "description": "Contains details about the metadata for an Iceberg table.",
+      "description": "Contains details about the metadata for an Iceberg table. Specify either IcebergSchema (for simple flat schemas with primitive types only) or IcebergSchemaV2 (for schemas with nested types like struct, list, map), but not both.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "IcebergSchema": {
+          "description": "Schema definition for flat tables with primitive types only. Mutually exclusive with IcebergSchemaV2.",
           "$ref": "#/definitions/IcebergSchema"
         },
         "IcebergSortOrder": {
           "$ref": "#/definitions/IcebergSortOrder"
+        },
+        "IcebergSchemaV2": {
+          "description": "Schema definition that supports Apache Iceberg nested types (struct, list, map) and primitive types. Mutually exclusive with IcebergSchema.",
+          "$ref": "#/definitions/IcebergSchemaV2"
         },
         "IcebergPartitionSpec": {
           "$ref": "#/definitions/IcebergPartitionSpec"
@@ -357,10 +444,7 @@
         "TableProperties": {
           "$ref": "#/definitions/TableProperties"
         }
-      },
-      "required": [
-        "IcebergSchema"
-      ]
+      }
     },
     "IcebergPartitionField": {
       "description": "A partition field specification for an Iceberg table",

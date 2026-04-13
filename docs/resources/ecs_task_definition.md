@@ -724,6 +724,7 @@ Optional:
  When using a volume configured at launch, the ``name`` is required and must also be specified as the volume name in the ``ServiceVolumeConfiguration`` or ``TaskVolumeConfiguration`` parameter when creating your service or standalone task.
  For all other types of volumes, this name is referenced in the ``sourceVolume`` parameter of the ``mountPoints`` object in the container definition.
  When a volume is using the ``efsVolumeConfiguration``, the name is required.
+- `s3_files_volume_configuration` (Attributes) (see [below for nested schema](#nestedatt--volumes--s3_files_volume_configuration))
 
 <a id="nestedatt--volumes--docker_volume_configuration"></a>
 ### Nested Schema for `volumes.docker_volume_configuration`
@@ -786,6 +787,17 @@ Optional:
 
 - `source_path` (String) When the ``host`` parameter is used, specify a ``sourcePath`` to declare the path on the host container instance that's presented to the container. If this parameter is empty, then the Docker daemon has assigned a host path for you. If the ``host`` parameter contains a ``sourcePath`` file location, then the data volume persists at the specified location on the host container instance until you delete it manually. If the ``sourcePath`` value doesn't exist on the host container instance, the Docker daemon creates it. If the location does exist, the contents of the source path folder are exported.
  If you're using the Fargate launch type, the ``sourcePath`` parameter is not supported.
+
+
+<a id="nestedatt--volumes--s3_files_volume_configuration"></a>
+### Nested Schema for `volumes.s3_files_volume_configuration`
+
+Optional:
+
+- `access_point_arn` (String)
+- `file_system_arn` (String)
+- `root_directory` (String)
+- `transit_encryption_port` (Number)
 
 ## Import
 

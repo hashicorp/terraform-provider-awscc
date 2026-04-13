@@ -1,0 +1,164 @@
+{
+  "typeName": "AWS::Omics::Configuration",
+  "description": "Resource schema for AWS::Omics::Configuration",
+  "definitions": {
+    "TagMap": {
+      "type": "object",
+      "description": "A map of resource tags",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 0,
+          "description": "Resource tag value"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RunConfigurations": {
+      "type": "object",
+      "properties": {
+        "VpcConfig": {
+          "$ref": "#/definitions/VpcConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "VpcConfig": {
+      "type": "object",
+      "properties": {
+        "SecurityGroupIds": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "type": "string",
+            "pattern": "^sg-[0-9a-f]+$"
+          }
+        },
+        "SubnetIds": {
+          "type": "array",
+          "maxItems": 16,
+          "items": {
+            "type": "string",
+            "pattern": "^subnet-[0-9a-f]+$"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Name": {
+      "description": "User-friendly name for the configuration.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9\\-\\._]*$",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "Description": {
+      "description": "Optional description for the configuration.",
+      "type": "string",
+      "pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "RunConfigurations": {
+      "description": "Required run-specific configurations.",
+      "$ref": "#/definitions/RunConfigurations"
+    },
+    "Tags": {
+      "description": "Tags for the configuration.",
+      "$ref": "#/definitions/TagMap"
+    },
+    "Arn": {
+      "description": "Unique resource identifier for the configuration.",
+      "type": "string",
+      "pattern": "^arn:.+$",
+      "minLength": 1,
+      "maxLength": 190
+    },
+    "Uuid": {
+      "description": "Unique identifier for the configuration.",
+      "type": "string",
+      "pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "Status": {
+      "description": "Current configuration status.",
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "ACTIVE",
+        "UPDATING",
+        "DELETING",
+        "DELETED",
+        "FAILED"
+      ]
+    },
+    "CreationTime": {
+      "description": "Configuration creation timestamp.",
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Name",
+    "RunConfigurations"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Uuid",
+    "/properties/Status",
+    "/properties/CreationTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/RunConfigurations"
+  ],
+  "primaryIdentifier": [
+    "/properties/Name"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "omics:TagResource",
+      "omics:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "omics:CreateConfiguration",
+        "omics:GetConfiguration",
+        "omics:TagResource",
+        "iam:CreateServiceLinkedRole",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "omics:GetConfiguration",
+        "omics:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "omics:DeleteConfiguration",
+        "omics:GetConfiguration"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "omics:ListConfigurations"
+      ]
+    }
+  }
+}

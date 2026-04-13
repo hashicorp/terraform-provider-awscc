@@ -1,0 +1,203 @@
+{
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "tagging": {
+    "permissions": [
+      "ecs:TagResource",
+      "ecs:UntagResource",
+      "ecs:ListTagsForResource"
+    ],
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": true
+  },
+  "handlers": {
+    "read": {
+      "permissions": [
+        "ecs:DescribeDaemon",
+        "ecs:ListTagsForResource"
+      ]
+    },
+    "create": {
+      "permissions": [
+        "ecs:CreateDaemon",
+        "ecs:DescribeDaemon",
+        "ecs:DescribeDaemonDeployments",
+        "ecs:ListDaemonDeployments",
+        "ecs:ListTagsForResource",
+        "ecs:TagResource",
+        "iam:PassRole"
+      ],
+      "timeoutInMinutes": 2160
+    },
+    "update": {
+      "permissions": [
+        "ecs:UpdateDaemon",
+        "ecs:DescribeDaemon",
+        "ecs:DescribeDaemonDeployments",
+        "ecs:ListDaemonDeployments",
+        "ecs:TagResource",
+        "ecs:UntagResource",
+        "ecs:ListTagsForResource",
+        "iam:PassRole"
+      ],
+      "timeoutInMinutes": 2160
+    },
+    "list": {
+      "permissions": [
+        "ecs:DescribeDaemon",
+        "ecs:ListDaemons"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ecs:DeleteDaemon",
+        "ecs:DescribeDaemon"
+      ],
+      "timeoutInMinutes": 30
+    }
+  },
+  "typeName": "AWS::ECS::Daemon",
+  "readOnlyProperties": [
+    "/properties/DaemonArn",
+    "/properties/DeploymentArn",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/DaemonStatus"
+  ],
+  "description": "Resource schema for AWS ECS Daemon",
+  "writeOnlyProperties": [
+    "/properties/CapacityProviderArns",
+    "/properties/DaemonName",
+    "/properties/DaemonTaskDefinitionArn",
+    "/properties/DeploymentConfiguration",
+    "/properties/EnableECSManagedTags",
+    "/properties/EnableExecuteCommand",
+    "/properties/PropagateTags"
+  ],
+  "createOnlyProperties": [
+    "/properties/DaemonName",
+    "/properties/ClusterArn"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/DaemonArn"
+  ],
+  "definitions": {
+    "DaemonStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "DELETE_IN_PROGRESS"
+      ]
+    },
+    "DaemonDeploymentConfiguration": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "DrainPercent": {
+          "maximum": 100,
+          "type": "number",
+          "minimum": 0
+        },
+        "BakeTimeInMinutes": {
+          "maximum": 1440,
+          "type": "integer",
+          "minimum": 0
+        },
+        "Alarms": {
+          "$ref": "#/definitions/DaemonAlarmConfiguration"
+        }
+      }
+    },
+    "DaemonAlarmConfiguration": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "AlarmNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Enable": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Tag": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "type": "string"
+        },
+        "Key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key"
+      ]
+    }
+  },
+  "properties": {
+    "ClusterArn": {
+      "type": "string"
+    },
+    "DaemonStatus": {
+      "$ref": "#/definitions/DaemonStatus"
+    },
+    "DaemonTaskDefinitionArn": {
+      "type": "string"
+    },
+    "DaemonName": {
+      "type": "string"
+    },
+    "EnableECSManagedTags": {
+      "type": "boolean"
+    },
+    "EnableExecuteCommand": {
+      "type": "boolean"
+    },
+    "PropagateTags": {
+      "type": "string",
+      "enum": [
+        "DAEMON",
+        "NONE"
+      ]
+    },
+    "CreatedAt": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "UpdatedAt": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "DeploymentArn": {
+      "type": "string"
+    },
+    "CapacityProviderArns": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "DaemonArn": {
+      "type": "string"
+    },
+    "DeploymentConfiguration": {
+      "$ref": "#/definitions/DaemonDeploymentConfiguration"
+    },
+    "Tags": {
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  }
+}

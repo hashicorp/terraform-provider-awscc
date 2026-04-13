@@ -285,9 +285,10 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	    },
 		//	    "ConnectionFunctionAssociation": {
 		//	      "additionalProperties": false,
-		//	      "description": "",
+		//	      "description": "The distribution's connection function association.",
 		//	      "properties": {
 		//	        "Id": {
+		//	          "description": "The association's ID.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -794,9 +795,10 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	              },
 		//	              "OriginMtlsConfig": {
 		//	                "additionalProperties": false,
-		//	                "description": "",
+		//	                "description": "Configures mutual TLS authentication between CloudFront and your origin server.",
 		//	                "properties": {
 		//	                  "ClientCertificateArn": {
+		//	                    "description": "The Amazon Resource Name (ARN) of the client certificate stored in AWS Certificate Manager (ACM) that CloudFront uses to authenticate with your origin using Mutual TLS.",
 		//	                    "type": "string"
 		//	                  }
 		//	                },
@@ -924,7 +926,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	                "type": "integer"
 		//	              },
 		//	              "OwnerAccountId": {
-		//	                "description": "",
+		//	                "description": "The account ID of the AWS-account that owns the VPC origin.",
 		//	                "type": "string"
 		//	              },
 		//	              "VpcOriginId": {
@@ -1094,10 +1096,11 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	    },
 		//	    "ViewerMtlsConfig": {
 		//	      "additionalProperties": false,
-		//	      "description": "",
+		//	      "description": "The distribution's viewer mTLS configuration.",
 		//	      "properties": {
 		//	        "Mode": {
 		//	          "default": "required",
+		//	          "description": "The viewer mTLS mode.",
 		//	          "enum": [
 		//	            "required",
 		//	            "optional"
@@ -1106,15 +1109,18 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	        },
 		//	        "TrustStoreConfig": {
 		//	          "additionalProperties": false,
-		//	          "description": "",
+		//	          "description": "The trust store configuration associated with the viewer mTLS configuration.",
 		//	          "properties": {
 		//	            "AdvertiseTrustStoreCaNames": {
+		//	              "description": "The configuration to use to advertise trust store CA names.",
 		//	              "type": "boolean"
 		//	            },
 		//	            "IgnoreCertificateExpiry": {
+		//	              "description": "The configuration to use to ignore certificate expiration.",
 		//	              "type": "boolean"
 		//	            },
 		//	            "TrustStoreId": {
+		//	              "description": "The trust store ID.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -1362,10 +1368,11 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Id
 						"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "The association's ID.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "",
+					Description: "The distribution's connection function association.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ConnectionMode
@@ -1794,10 +1801,11 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: ClientCertificateArn
 											"client_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
+												Description: "The Amazon Resource Name (ARN) of the client certificate stored in AWS Certificate Manager (ACM) that CloudFront uses to authenticate with your origin using Mutual TLS.",
+												Computed:    true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "",
+										Description: "Configures mutual TLS authentication between CloudFront and your origin server.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: OriginProtocolPolicy
@@ -1913,7 +1921,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 									}, /*END ATTRIBUTE*/
 									// Property: OwnerAccountId
 									"owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "",
+										Description: "The account ID of the AWS-account that owns the VPC origin.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: VpcOriginId
@@ -2064,29 +2072,33 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Mode
 						"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "The viewer mTLS mode.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: TrustStoreConfig
 						"trust_store_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: AdvertiseTrustStoreCaNames
 								"advertise_trust_store_ca_names": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
+									Description: "The configuration to use to advertise trust store CA names.",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: IgnoreCertificateExpiry
 								"ignore_certificate_expiry": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
+									Description: "The configuration to use to ignore certificate expiration.",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: TrustStoreId
 								"trust_store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
+									Description: "The trust store ID.",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "",
+							Description: "The trust store configuration associated with the viewer mTLS configuration.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "",
+					Description: "The distribution's viewer mTLS configuration.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: WebACLId
