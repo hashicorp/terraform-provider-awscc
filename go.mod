@@ -1,6 +1,6 @@
 module github.com/hashicorp/terraform-provider-awscc
 
-go 1.25.8
+go 1.25.9
 
 require (
 	github.com/YakDriver/regexache v0.25.0
