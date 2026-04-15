@@ -237,7 +237,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 		//	                "TopicArn": {
 		//	                  "maxLength": 2048,
 		//	                  "minLength": 20,
-		//	                  "pattern": "^arn:(aws|aws-cn|aws-us-gov):sns:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:[\\w\\-]{1,256}$",
+		//	                  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc):sns:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:[\\w\\-]{1,256}$",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -1311,7 +1311,7 @@ func mailManagerRuleSetResource(ctx context.Context) (resource.Resource, error) 
 											Computed: true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(20, 2048),
-												stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov):sns:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:[\\w\\-]{1,256}$"), ""),
+												stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-eusc):sns:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:[\\w\\-]{1,256}$"), ""),
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
