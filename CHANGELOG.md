@@ -1,4 +1,11 @@
-## 1.80.0 (Unreleased)
+## 1.80.0 (April 15, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_neptunegraph_graph_snapshot`
+* **New Data Source:** `awscc_neptunegraph_graph_snapshots`
+* **New List Resource:** `awscc_neptunegraph_graph_snapshot`
+* **New Resource:** `awscc_neptunegraph_graph_snapshot`
 
 ## 1.79.0 (April 8, 2026)
 
