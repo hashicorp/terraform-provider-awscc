@@ -134,7 +134,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "BakeTimeInMinutes": {
-		//	      "description": "The duration when both blue and green service revisions are running simultaneously after the production traffic has shifted.\n The following rules apply when you don't specify a value:\n  +  For rolling deployments, the value is set to 3 hours (180 minutes).\n  +  When you use an external deployment controller (``EXTERNAL``), or the ACD blue/green deployment controller (``CODE_DEPLOY``), the value is set to 3 hours (180 minutes).\n  +  For all other cases, the value is set to 36 hours (2160 minutes).",
+		//	      "description": "The duration waiting before terminating the previous service revision and marking a deployment complete.\n The following rules apply when you don't specify a value:\n  +  For blue/green, linear, and canary deployments, the value is set to 15 minutes.\n  +  For rolling deployments, there is no bake time set by default.\n  +  The external deployment controller (``EXTERNAL``) and the ACD blue/green deployment controller (``CODE_DEPLOY``) do not support the ``BakeTimeInMinutes`` parameter.\n  \n  If you provide a bake time for a rolling deployment, the CloudFormation handler timeout is increased to the maximum of 36 hours, matching the timeout for blue/green, linear, and canary deployments.",
 		//	      "maximum": 1440,
 		//	      "minimum": 0,
 		//	      "type": "integer"
@@ -289,7 +289,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: BakeTimeInMinutes
 				"bake_time_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The duration when both blue and green service revisions are running simultaneously after the production traffic has shifted.\n The following rules apply when you don't specify a value:\n  +  For rolling deployments, the value is set to 3 hours (180 minutes).\n  +  When you use an external deployment controller (``EXTERNAL``), or the ACD blue/green deployment controller (``CODE_DEPLOY``), the value is set to 3 hours (180 minutes).\n  +  For all other cases, the value is set to 36 hours (2160 minutes).",
+					Description: "The duration waiting before terminating the previous service revision and marking a deployment complete.\n The following rules apply when you don't specify a value:\n  +  For blue/green, linear, and canary deployments, the value is set to 15 minutes.\n  +  For rolling deployments, there is no bake time set by default.\n  +  The external deployment controller (``EXTERNAL``) and the ACD blue/green deployment controller (``CODE_DEPLOY``) do not support the ``BakeTimeInMinutes`` parameter.\n  \n  If you provide a bake time for a rolling deployment, the CloudFormation handler timeout is increased to the maximum of 36 hours, matching the timeout for blue/green, linear, and canary deployments.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: CanaryConfiguration

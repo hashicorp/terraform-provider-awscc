@@ -211,7 +211,7 @@ func mailManagerRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	                "TopicArn": {
 		//	                  "maxLength": 2048,
 		//	                  "minLength": 20,
-		//	                  "pattern": "^arn:(aws|aws-cn|aws-us-gov):sns:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:[\\w\\-]{1,256}$",
+		//	                  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc):sns:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:[\\w\\-]{1,256}$",
 		//	                  "type": "string"
 		//	                }
 		//	              },

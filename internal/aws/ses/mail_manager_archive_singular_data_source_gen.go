@@ -71,7 +71,7 @@ func mailManagerArchiveDataSource(ctx context.Context) (datasource.DataSource, e
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "pattern": "^arn:aws(|-cn|-us-gov):kms:[a-z0-9-]{1,20}:[0-9]{12}:(key|alias)/.+$",
+		//	  "pattern": "^arn:aws(|-cn|-us-gov|-eusc):kms:[a-z0-9-]{1,20}:[0-9]{12}:(key|alias)/.+$",
 		//	  "type": "string"
 		//	}
 		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

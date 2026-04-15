@@ -24,7 +24,6 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_apigatewayv2_stage", stageResource)
-	registry.AddListResourceFactory("awscc_apigatewayv2_stage", generic.NewListResource(stageResource))
 }
 
 // stageResource returns the Terraform awscc_apigatewayv2_stage resource.
@@ -36,7 +35,6 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Settings for logging access in this stage.",
 		//	  "properties": {
 		//	    "DestinationArn": {
 		//	      "type": "string"
@@ -66,9 +64,8 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Settings for logging access in this stage.",
-			Optional:    true,
-			Computed:    true,
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -77,12 +74,10 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The API identifier.",
 		//	  "type": "string"
 		//	}
 		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The API identifier.",
-			Required:    true,
+			Required: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -91,13 +86,11 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies whether updates to an API automatically trigger a new deployment. The default value is false.",
 		//	  "type": "boolean"
 		//	}
 		"auto_deploy": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether updates to an API automatically trigger a new deployment. The default value is false.",
-			Optional:    true,
-			Computed:    true,
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -106,13 +99,11 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The identifier of a client certificate for a Stage. Supported only for WebSocket APIs.",
 		//	  "type": "string"
 		//	}
 		"client_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of a client certificate for a Stage. Supported only for WebSocket APIs.",
-			Optional:    true,
-			Computed:    true,
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -122,7 +113,6 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The default route settings for the stage.",
 		//	  "properties": {
 		//	    "DataTraceEnabled": {
 		//	      "type": "boolean"
@@ -185,9 +175,8 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The default route settings for the stage.",
-			Optional:    true,
-			Computed:    true,
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -196,13 +185,11 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The deployment identifier for the API stage. Can't be updated if autoDeploy is enabled.",
 		//	  "type": "string"
 		//	}
 		"deployment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The deployment identifier for the API stage. Can't be updated if autoDeploy is enabled.",
-			Optional:    true,
-			Computed:    true,
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -211,13 +198,23 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The description for the API stage.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description for the API stage.",
-			Optional:    true,
-			Computed:    true,
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"stage_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -226,14 +223,12 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Route settings for the stage.",
 		//	  "type": "object"
 		//	}
 		"route_settings": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "Route settings for the stage.",
-			Optional:    true,
-			Computed:    true,
+			CustomType: jsontypes.NormalizedType{},
+			Optional:   true,
+			Computed:   true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -242,12 +237,10 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The stage name. Stage names can contain only alphanumeric characters, hyphens, and underscores, or be $default. Maximum length is 128 characters.",
 		//	  "type": "string"
 		//	}
 		"stage_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The stage name. Stage names can contain only alphanumeric characters, hyphens, and underscores, or be $default. Maximum length is 128 characters.",
-			Required:    true,
+			Required: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -256,14 +249,12 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#\u0026=,]+.",
 		//	  "type": "object"
 		//	}
 		"stage_variables": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.",
-			Optional:    true,
-			Computed:    true,
+			CustomType: jsontypes.NormalizedType{},
+			Optional:   true,
+			Computed:   true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -272,14 +263,12 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The collection of tags. Each tag element is associated with a given resource.",
 		//	  "type": "object"
 		//	}
 		"tags": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "The collection of tags. Each tag element is associated with a given resource.",
-			Optional:    true,
-			Computed:    true,
+			CustomType: jsontypes.NormalizedType{},
+			Optional:   true,
+			Computed:   true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -307,13 +296,7 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
-			Name:              "api_id",
-			Description:       "The API identifier",
-			RequiredForImport: true,
-		},
-		identity.Identifier{
-			Name:              "stage_name",
-			Description:       "The stage name",
+			Name:              "id",
 			RequiredForImport: true,
 		})
 
@@ -331,6 +314,7 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 		"format":                   "Format",
 		"logging_level":            "LoggingLevel",
 		"route_settings":           "RouteSettings",
+		"stage_id":                 "Id",
 		"stage_name":               "StageName",
 		"stage_variables":          "StageVariables",
 		"tags":                     "Tags",

@@ -269,7 +269,6 @@ biglister: prereq-go ## List all resources and data sources
 			MINS=$$((SECONDS / 60)); \
 			SECS=$$((SECONDS % 60)); \
 			printf "\r==> Elapsed time: %02d:%02d " $$MINS $$SECS; \
-			SECONDS=$$((SECONDS + 1)); \
 		done \
 	) & TIMER_PID=$$!; \
 	$(GO_VER) run internal/provider/generators/allschemas/manual_allschemas/main.go > $$OUTPUT_FILE 2>&1; \

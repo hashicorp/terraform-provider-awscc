@@ -219,11 +219,13 @@ Optional:
 Optional:
 
 - `alarms` (Attributes) Information about the CloudWatch alarms. (see [below for nested schema](#nestedatt--deployment_configuration--alarms))
-- `bake_time_in_minutes` (Number) The duration when both blue and green service revisions are running simultaneously after the production traffic has shifted.
+- `bake_time_in_minutes` (Number) The duration waiting before terminating the previous service revision and marking a deployment complete.
  The following rules apply when you don't specify a value:
-  +  For rolling deployments, the value is set to 3 hours (180 minutes).
-  +  When you use an external deployment controller (``EXTERNAL``), or the ACD blue/green deployment controller (``CODE_DEPLOY``), the value is set to 3 hours (180 minutes).
-  +  For all other cases, the value is set to 36 hours (2160 minutes).
+  +  For blue/green, linear, and canary deployments, the value is set to 15 minutes.
+  +  For rolling deployments, there is no bake time set by default.
+  +  The external deployment controller (``EXTERNAL``) and the ACD blue/green deployment controller (``CODE_DEPLOY``) do not support the ``BakeTimeInMinutes`` parameter.
+  
+  If you provide a bake time for a rolling deployment, the CloudFormation handler timeout is increased to the maximum of 36 hours, matching the timeout for blue/green, linear, and canary deployments.
 - `canary_configuration` (Attributes) Configuration for canary deployment strategy. Only valid when the deployment strategy is ``CANARY``. This configuration enables shifting a fixed percentage of traffic for testing, followed by shifting the remaining traffic after a bake period. (see [below for nested schema](#nestedatt--deployment_configuration--canary_configuration))
 - `deployment_circuit_breaker` (Attributes) The deployment circuit breaker can only be used for services using the rolling update (``ECS``) deployment type.
   The *deployment circuit breaker* determines whether a service deployment will fail if the service can't reach a steady state. If you use the deployment circuit breaker, a service deployment will transition to a failed state and stop launching new tasks. If you use the rollback option, when a service deployment fails, the service is rolled back to the last deployment that completed successfully. For more information, see [Rolling update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html) in the *Amazon Elastic Container Service Developer Guide* (see [below for nested schema](#nestedatt--deployment_configuration--deployment_circuit_breaker))

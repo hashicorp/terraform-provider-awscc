@@ -231,8 +231,7 @@
     },
     {
         "resource": "awscc_apigatewayv2_stage",
-        "generateListResource": true,
-        "identifier": ["ApiId","StageName"]
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_apigatewayv2_vpc_link",
@@ -4290,6 +4289,11 @@
         "resource": "awscc_neptunegraph_graph",
         "generateListResource": true,
         "identifier": ["GraphId"]
+    },
+    {
+        "resource": "awscc_neptunegraph_graph_snapshot",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_neptunegraph_private_graph_endpoint",

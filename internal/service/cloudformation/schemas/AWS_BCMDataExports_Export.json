@@ -139,6 +139,12 @@
           "minLength": 0,
           "pattern": "^[\\S\\s]*$"
         },
+        "S3BucketOwner": {
+          "type": "string",
+          "maxLength": 12,
+          "minLength": 12,
+          "pattern": "^[0-9]{12}$"
+        },
         "S3Prefix": {
           "type": "string",
           "maxLength": 1024,

@@ -94,7 +94,7 @@
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagUpdatable": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
