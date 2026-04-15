@@ -33,7 +33,7 @@ func mailManagerRelayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	      "type": "object"
 		//	    },
 		//	    "SecretArn": {
-		//	      "pattern": "^arn:(aws|aws-cn|aws-us-gov):secretsmanager:[a-z0-9-]+:\\d{12}:secret:[a-zA-Z0-9/_+=,.@-]+$",
+		//	      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc):secretsmanager:[a-z0-9-]+:\\d{12}:secret:[a-zA-Z0-9/_+=,.@-]+$",
 		//	      "type": "string"
 		//	    }
 		//	  },

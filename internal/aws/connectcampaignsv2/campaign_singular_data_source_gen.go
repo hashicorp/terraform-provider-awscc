@@ -1637,6 +1637,48 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Amazon Connect Instance Id",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EntryLimitsConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Entry limits config for a campaign",
+		//	  "properties": {
+		//	    "MaxEntryCount": {
+		//	      "description": "Maximum number of entries per participant. 0 indicates unlimited entries.",
+		//	      "minimum": 0,
+		//	      "type": "integer"
+		//	    },
+		//	    "MinEntryInterval": {
+		//	      "description": "Minimum time interval between entries for the same participant in ISO 8601 duration format",
+		//	      "maxLength": 50,
+		//	      "minLength": 0,
+		//	      "pattern": "^[a-zA-Z0-9.]*$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "MaxEntryCount",
+		//	    "MinEntryInterval"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"entry_limits_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxEntryCount
+				"max_entry_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Maximum number of entries per participant. 0 indicates unlimited entries.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinEntryInterval
+				"min_entry_interval": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Minimum time interval between entries for the same participant in ISO 8601 duration format",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Entry limits config for a campaign",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -1875,6 +1917,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"enable_answer_machine_detection":   "EnableAnswerMachineDetection",
 		"end_date":                          "EndDate",
 		"end_time":                          "EndTime",
+		"entry_limits_config":               "EntryLimitsConfig",
 		"event_trigger":                     "EventTrigger",
 		"frequency":                         "Frequency",
 		"instance_limits_handling":          "InstanceLimitsHandling",
@@ -1882,6 +1925,8 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"local_time_zone_config":            "LocalTimeZoneConfig",
 		"local_time_zone_detection":         "LocalTimeZoneDetection",
 		"max_count_per_recipient":           "MaxCountPerRecipient",
+		"max_entry_count":                   "MaxEntryCount",
+		"min_entry_interval":                "MinEntryInterval",
 		"name":                              "Name",
 		"open_hours":                        "OpenHours",
 		"outbound_mode":                     "OutboundMode",

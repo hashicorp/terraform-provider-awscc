@@ -80,6 +80,12 @@ func exportDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "pattern": "^[\\S\\s]*$",
 		//	              "type": "string"
 		//	            },
+		//	            "S3BucketOwner": {
+		//	              "maxLength": 12,
+		//	              "minLength": 12,
+		//	              "pattern": "^[0-9]{12}$",
+		//	              "type": "string"
+		//	            },
 		//	            "S3OutputConfigurations": {
 		//	              "additionalProperties": false,
 		//	              "properties": {
@@ -212,6 +218,10 @@ func exportDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: S3Bucket
 								"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3BucketOwner
+								"s3_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
 								// Property: S3OutputConfigurations
@@ -358,6 +368,7 @@ func exportDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"query_statement":            "QueryStatement",
 		"refresh_cadence":            "RefreshCadence",
 		"s3_bucket":                  "S3Bucket",
+		"s3_bucket_owner":            "S3BucketOwner",
 		"s3_destination":             "S3Destination",
 		"s3_output_configurations":   "S3OutputConfigurations",
 		"s3_prefix":                  "S3Prefix",
