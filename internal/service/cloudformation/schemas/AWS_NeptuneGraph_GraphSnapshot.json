@@ -1,0 +1,157 @@
+{
+  "typeName": "AWS::NeptuneGraph::GraphSnapshot",
+  "description": "Resource Type definition for AWS::NeptuneGraph::GraphSnapshot",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-neptunegraph",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Id": {
+      "type": "string",
+      "description": "The unique identifier of the graph snapshot.",
+      "pattern": "^gs-[a-z0-9]{10}$"
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The ARN of the graph snapshot.",
+      "pattern": "^arn:.+$",
+      "minLength": 1,
+      "maxLength": 1011
+    },
+    "GraphIdentifier": {
+      "type": "string",
+      "description": "The unique identifier of the Neptune Analytics graph to create the snapshot from.",
+      "pattern": "^g-[a-z0-9]{10}$"
+    },
+    "SnapshotName": {
+      "type": "string",
+      "description": "The snapshot name.",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": ""
+    },
+    "SnapshotCreateTime": {
+      "type": "string",
+      "description": "The time when the snapshot was created.",
+      "format": "date-time"
+    },
+    "Status": {
+      "type": "string",
+      "description": "The current status of the graph snapshot.",
+      "enum": [
+        "CREATING",
+        "AVAILABLE",
+        "DELETING",
+        "FAILED"
+      ]
+    },
+    "KmsKeyIdentifier": {
+      "type": "string",
+      "description": "The ID of the KMS key used to encrypt and decrypt the snapshot.",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "Tags": {
+      "type": "array",
+      "description": "An array of key-value pairs to apply to this resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "uniqueItems": true,
+      "insertionOrder": false
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "SnapshotName"
+  ],
+  "readOnlyProperties": [
+    "/properties/Id",
+    "/properties/Arn",
+    "/properties/SnapshotCreateTime",
+    "/properties/Status",
+    "/properties/KmsKeyIdentifier"
+  ],
+  "createOnlyProperties": [
+    "/properties/SnapshotName",
+    "/properties/GraphIdentifier"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Id"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "neptune-graph:TagResource",
+      "neptune-graph:UntagResource",
+      "neptune-graph:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "neptune-graph:CreateGraphSnapshot",
+        "neptune-graph:GetGraphSnapshot",
+        "neptune-graph:TagResource",
+        "neptune-graph:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "neptune-graph:GetGraphSnapshot",
+        "neptune-graph:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "neptune-graph:GetGraphSnapshot",
+        "neptune-graph:TagResource",
+        "neptune-graph:UntagResource",
+        "neptune-graph:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "neptune-graph:DeleteGraphSnapshot",
+        "neptune-graph:GetGraphSnapshot"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "neptune-graph:ListGraphSnapshots"
+      ]
+    }
+  }
+}
