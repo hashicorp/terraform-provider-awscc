@@ -938,14 +938,13 @@ func TestKeyFromMap(t *testing.T) {
 func BenchmarkReorderKeyValueSliceToMatch(b *testing.B) {
 	current := make([]any, 50)
 	prior := make([]any, 50)
-	for i := 0; i < 50; i++ {
+	for i := range 50 {
 		key := fmt.Sprintf("Key%02d", i)
 		current[49-i] = map[string]any{"Key": key, "Value": fmt.Sprintf("val%d", i)}
 		prior[i] = map[string]any{"Key": key, "Value": fmt.Sprintf("old%d", i)}
 	}
 
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		_ = reorderKeyValueSliceToMatch(current, prior)
 	}
 }
@@ -953,13 +952,12 @@ func BenchmarkReorderKeyValueSliceToMatch(b *testing.B) {
 func BenchmarkReorderPrimitiveSliceToMatch(b *testing.B) {
 	current := make([]any, 50)
 	prior := make([]any, 50)
-	for i := 0; i < 50; i++ {
+	for i := range 50 {
 		current[49-i] = fmt.Sprintf("subnet-%02d", i)
 		prior[i] = fmt.Sprintf("subnet-%02d", i)
 	}
 
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		_ = reorderPrimitiveSliceToMatch(current, prior)
 	}
 }
@@ -978,18 +976,17 @@ func BenchmarkReorderKeyValueSlicesToMatchPrior(b *testing.B) {
 		},
 	}
 
-	for i := 0; i < 20; i++ {
+	for i := range 20 {
 		key := fmt.Sprintf("Tag%02d", i)
 		current["Tags"].([]any)[19-i] = map[string]any{"Key": key, "Value": "v"}
 		prior["Tags"].([]any)[i] = map[string]any{"Key": key, "Value": "v"}
 	}
-	for i := 0; i < 10; i++ {
+	for i := range 10 {
 		current["VpcConfig"].(map[string]any)["SubnetIds"].([]any)[9-i] = fmt.Sprintf("subnet-%02d", i)
 		prior["VpcConfig"].(map[string]any)["SubnetIds"].([]any)[i] = fmt.Sprintf("subnet-%02d", i)
 	}
 
-	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		reorderKeyValueSlicesToMatchPrior(current, prior)
 	}
 }
