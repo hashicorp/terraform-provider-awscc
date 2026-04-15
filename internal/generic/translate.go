@@ -254,44 +254,47 @@ func reorderPrimitiveSliceToMatch(current, prior []any) []any {
 			return nil
 		}
 	}
-	// Build set of current elements for lookup
-	currentSet := make(map[string]any)
-	keyOf := func(a any) string {
-		switch x := a.(type) {
-		case string:
-			return x
-		case float64:
-			return strconv.FormatFloat(x, 'g', -1, 64)
-		default:
-			return fmt.Sprint(a)
-		}
-	}
+	// Build set of current elements for lookup, using seen map to track both
+	currentSet := make(map[string]any, len(current))
 	for _, el := range current {
-		currentSet[keyOf(el)] = el
+		k := primitiveKey(el)
+		currentSet[k] = el
 	}
 	// Build result: prior order first, then current-only (sorted)
-	seen := make(map[string]bool)
-	var result []any
+	result := make([]any, 0, len(current))
 	if len(prior) > 0 {
 		for _, el := range prior {
-			k := keyOf(el)
+			k := primitiveKey(el)
 			if cur, exists := currentSet[k]; exists {
 				result = append(result, cur)
-				seen[k] = true
+				delete(currentSet, k) // reuse map to track unseen
 			}
 		}
 	}
-	var extra []string
-	for k := range currentSet {
-		if !seen[k] {
+	// Remaining items in currentSet are extras
+	if len(currentSet) > 0 {
+		extra := make([]string, 0, len(currentSet))
+		for k := range currentSet {
 			extra = append(extra, k)
 		}
-	}
-	sort.Strings(extra)
-	for _, k := range extra {
-		result = append(result, currentSet[k])
+		sort.Strings(extra)
+		for _, k := range extra {
+			result = append(result, currentSet[k])
+		}
 	}
 	return result
+}
+
+// primitiveKey returns the string key for a primitive value.
+func primitiveKey(a any) string {
+	switch x := a.(type) {
+	case string:
+		return x
+	case float64:
+		return strconv.FormatFloat(x, 'g', -1, 64)
+	default:
+		return fmt.Sprint(a)
+	}
 }
 
 // primitive kind constants for primitiveKind return value.
@@ -321,7 +324,7 @@ func reorderKeyValueSliceToMatch(current, prior []any) []any {
 		return current
 	}
 	// Build current by key
-	byKey := make(map[string]map[string]any)
+	byKey := make(map[string]map[string]any, len(current))
 	for _, el := range current {
 		m, ok := el.(map[string]any)
 		if !ok || (m["Key"] == nil && m["key"] == nil) {
@@ -331,8 +334,7 @@ func reorderKeyValueSliceToMatch(current, prior []any) []any {
 		byKey[k] = m
 	}
 	// Build result: first in prior order, then any keys only in current (sorted)
-	seen := make(map[string]bool)
-	var result []any
+	result := make([]any, 0, len(current))
 	if len(prior) > 0 {
 		for _, el := range prior {
 			p, ok := el.(map[string]any)
@@ -345,19 +347,20 @@ func reorderKeyValueSliceToMatch(current, prior []any) []any {
 			}
 			if cur, exists := byKey[k]; exists {
 				result = append(result, cur)
-				seen[k] = true
+				delete(byKey, k) // reuse map to track unseen
 			}
 		}
 	}
-	var extra []string
-	for k := range byKey {
-		if !seen[k] {
+	// Remaining items in byKey are extras
+	if len(byKey) > 0 {
+		extra := make([]string, 0, len(byKey))
+		for k := range byKey {
 			extra = append(extra, k)
 		}
-	}
-	sort.Strings(extra)
-	for _, k := range extra {
-		result = append(result, byKey[k])
+		sort.Strings(extra)
+		for _, k := range extra {
+			result = append(result, byKey[k])
+		}
 	}
 	return result
 }
