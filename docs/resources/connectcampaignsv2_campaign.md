@@ -26,6 +26,7 @@ Definition of AWS::ConnectCampaignsV2::Campaign Resource Type
 - `communication_limits_override` (Attributes) Communication limits config (see [below for nested schema](#nestedatt--communication_limits_override))
 - `communication_time_config` (Attributes) Campaign communication time config (see [below for nested schema](#nestedatt--communication_time_config))
 - `connect_campaign_flow_arn` (String) Arn
+- `entry_limits_config` (Attributes) Entry limits config for a campaign (see [below for nested schema](#nestedatt--entry_limits_config))
 - `schedule` (Attributes) Campaign schedule (see [below for nested schema](#nestedatt--schedule))
 - `source` (Attributes) The possible source of the campaign (see [below for nested schema](#nestedatt--source))
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
@@ -463,6 +464,15 @@ Optional:
 
 
 
+
+
+<a id="nestedatt--entry_limits_config"></a>
+### Nested Schema for `entry_limits_config`
+
+Optional:
+
+- `max_entry_count` (Number) Maximum number of entries per participant. 0 indicates unlimited entries.
+- `min_entry_interval` (String) Minimum time interval between entries for the same participant in ISO 8601 duration format
 
 
 <a id="nestedatt--schedule"></a>
