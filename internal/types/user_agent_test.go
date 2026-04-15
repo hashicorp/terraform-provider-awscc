@@ -48,7 +48,6 @@ func TestUserAgentProducts(t *testing.T) {
 	}
 
 	for name, testcase := range testcases {
-
 		t.Run(name, func(t *testing.T) {
 			actual := testcase.add.UserAgentProducts()
 			if !cmp.Equal(testcase.expected, actual) {
