@@ -805,6 +805,26 @@
         "Value"
       ],
       "additionalProperties": false
+    },
+    "EntryLimitsConfig": {
+      "type": "object",
+      "description": "Entry limits config for a campaign",
+      "properties": {
+        "MaxEntryCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum number of entries per participant. 0 indicates unlimited entries."
+        },
+        "MinEntryInterval": {
+          "$ref": "#/definitions/Iso8601Duration",
+          "description": "Minimum time interval between entries for the same participant in ISO 8601 duration format"
+        }
+      },
+      "required": [
+        "MaxEntryCount",
+        "MinEntryInterval"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -841,6 +861,9 @@
     },
     "CommunicationLimitsOverride": {
       "$ref": "#/definitions/CommunicationLimitsConfig"
+    },
+    "EntryLimitsConfig": {
+      "$ref": "#/definitions/EntryLimitsConfig"
     },
     "Tags": {
       "type": "array",
@@ -902,7 +925,8 @@
         "connect-campaigns:DeleteCampaign",
         "connect-campaigns:DeleteCampaignChannelSubtypeConfig",
         "connect-campaigns:DeleteCampaignCommunicationLimits",
-        "connect-campaigns:DeleteCampaignCommunicationTime"
+        "connect-campaigns:DeleteCampaignCommunicationTime",
+        "connect-campaigns:DeleteCampaignEntryLimits"
       ]
     },
     "list": {
@@ -925,9 +949,11 @@
         "connect-campaigns:DeleteCampaignChannelSubtypeConfig",
         "connect-campaigns:DeleteCampaignCommunicationLimits",
         "connect-campaigns:DeleteCampaignCommunicationTime",
+        "connect-campaigns:DeleteCampaignEntryLimits",
         "connect-campaigns:UpdateCampaignChannelSubtypeConfig",
         "connect-campaigns:UpdateCampaignCommunicationLimits",
         "connect-campaigns:UpdateCampaignCommunicationTime",
+        "connect-campaigns:UpdateCampaignEntryLimits",
         "connect-campaigns:UpdateCampaignName",
         "connect-campaigns:UpdateCampaignFlowAssociation",
         "connect-campaigns:UpdateCampaignSchedule",

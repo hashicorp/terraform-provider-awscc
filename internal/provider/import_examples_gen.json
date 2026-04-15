@@ -232,7 +232,7 @@
     {
         "resource": "awscc_apigatewayv2_stage",
         "generateListResource": true,
-        "identifier": ["ApiId","StageName"]
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_apigatewayv2_vpc_link",

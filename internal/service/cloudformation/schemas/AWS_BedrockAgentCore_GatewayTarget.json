@@ -187,8 +187,42 @@
             "ApiKeyCredentialProvider"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "IamCredentialProvider",
+          "properties": {
+            "IamCredentialProvider": {
+              "$ref": "#/definitions/IamCredentialProvider"
+            }
+          },
+          "required": [
+            "IamCredentialProvider"
+          ],
+          "additionalProperties": false
         }
       ]
+    },
+    "IamCredentialProvider": {
+      "type": "object",
+      "properties": {
+        "Service": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9._-]+$"
+        },
+        "Region": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32,
+          "pattern": "^[a-zA-Z0-9-]+$"
+        }
+      },
+      "required": [
+        "Service"
+      ],
+      "additionalProperties": false
     },
     "CredentialProviderConfiguration": {
       "type": "object",
