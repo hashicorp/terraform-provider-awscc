@@ -543,7 +543,11 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 	var priorMap map[string]any
 	if !currentState.Raw.IsNull() && currentState.Raw.IsKnown() {
 		toCC := toCloudControl{tfToCfNameMap: r.tfToCfNameMap}
-		priorMap, _ = toCC.AsRaw(ctx, schema, currentState.Raw)
+		var err error
+		priorMap, err = toCC.AsRaw(ctx, schema, currentState.Raw)
+		if err != nil {
+			tflog.Warn(ctx, "Failed to extract prior state for list ordering", map[string]any{"error": err.Error()})
+		}
 	}
 	val, err := translator.FromString(ctx, schema, aws.ToString(description.Properties), priorMap)
 
