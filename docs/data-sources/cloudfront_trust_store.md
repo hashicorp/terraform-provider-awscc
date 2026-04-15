@@ -21,32 +21,32 @@ Data Source schema for AWS::CloudFront::TrustStore
 
 ### Read-Only
 
-- `arn` (String) The Amazon Resource Name (ARN) of the trust store
-- `ca_certificates_bundle_source` (Attributes) (see [below for nested schema](#nestedatt--ca_certificates_bundle_source))
+- `arn` (String)
+- `ca_certificates_bundle_source` (Attributes) A CA certificates bundle source. (see [below for nested schema](#nestedatt--ca_certificates_bundle_source))
 - `e_tag` (String)
-- `last_modified_time` (String) The last modification timestamp of the trust store PEM file
-- `name` (String) A unique name to identify the trust store
-- `number_of_ca_certificates` (Number) The number of CA certificates in the trust store PEM file
-- `status` (String) Current status of the trust store
-- `tags` (Attributes List) Key-value pairs for resource tagging (see [below for nested schema](#nestedatt--tags))
-- `trust_store_id` (String) The unique identifier for the trust store
+- `last_modified_time` (String)
+- `name` (String) The trust store's name.
+- `number_of_ca_certificates` (Number)
+- `status` (String)
+- `tags` (Attributes List) A complex type that contains zero or more ``Tag`` elements. (see [below for nested schema](#nestedatt--tags))
+- `trust_store_id` (String)
 
 <a id="nestedatt--ca_certificates_bundle_source"></a>
 ### Nested Schema for `ca_certificates_bundle_source`
 
 Read-Only:
 
-- `ca_certificates_bundle_s3_location` (Attributes) (see [below for nested schema](#nestedatt--ca_certificates_bundle_source--ca_certificates_bundle_s3_location))
+- `ca_certificates_bundle_s3_location` (Attributes) The CA certificates bundle location in Amazon S3. (see [below for nested schema](#nestedatt--ca_certificates_bundle_source--ca_certificates_bundle_s3_location))
 
 <a id="nestedatt--ca_certificates_bundle_source--ca_certificates_bundle_s3_location"></a>
 ### Nested Schema for `ca_certificates_bundle_source.ca_certificates_bundle_s3_location`
 
 Read-Only:
 
-- `bucket` (String) The S3 bucket containing the CA certificates bundle PEM file
-- `key` (String) The S3 object key of the CA certificates bundle PEM file
-- `region` (String) The S3 bucket region
-- `version` (String) The S3 object version of the CA certificates bundle PEM file
+- `bucket` (String) The S3 bucket.
+- `key` (String) The location's key.
+- `region` (String) The location's Region.
+- `version` (String) The location's version.
 
 
 
@@ -55,5 +55,7 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) A string that contains ``Tag`` key.
+ The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.
+- `value` (String) A string that contains an optional ``Tag`` value.
+ The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.

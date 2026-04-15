@@ -21,6 +21,7 @@ Resource Type definition for AWS::ODB::OdbPeeringConnection.
 - `display_name` (String) The name of the ODB peering connection.
 - `odb_network_id` (String) The unique identifier of the ODB network.
 - `peer_network_id` (String) The unique identifier of the peer network.
+- `peer_network_route_table_ids` (List of String) The unique identifier of the VPC route table for which a route to the ODB network is automatically created during peering connection establishment.
 - `tags` (Attributes List) Tags to assign to the Odb peering connection. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

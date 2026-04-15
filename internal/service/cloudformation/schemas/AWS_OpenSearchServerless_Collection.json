@@ -49,6 +49,25 @@
         "DISABLED"
       ]
     },
+    "ServerlessVectorAcceleration": {
+      "type": "string",
+      "description": "Indicates whether GPU acceleration is enabled for vector indexing",
+      "enum": [
+        "ENABLED",
+        "DISABLED",
+        "ALLOWED"
+      ]
+    },
+    "VectorOptions": {
+      "type": "object",
+      "description": "Vector search configuration options for the collection",
+      "properties": {
+        "ServerlessVectorAcceleration": {
+          "$ref": "#/definitions/ServerlessVectorAcceleration"
+        }
+      },
+      "additionalProperties": false
+    },
     "EncryptionConfig": {
       "type": "object",
       "description": "Encryption settings for the collection",
@@ -60,6 +79,18 @@
         "KmsKeyArn": {
           "type": "string",
           "description": "Key Management Service key used to encrypt the collection."
+        }
+      },
+      "additionalProperties": false
+    },
+    "FipsEndpoints": {
+      "type": "object",
+      "properties": {
+        "CollectionEndpoint": {
+          "type": "string"
+        },
+        "DashboardEndpoint": {
+          "type": "string"
         }
       },
       "additionalProperties": false
@@ -119,9 +150,15 @@
     "EncryptionConfig": {
       "$ref": "#/definitions/EncryptionConfig"
     },
+    "VectorOptions": {
+      "$ref": "#/definitions/VectorOptions"
+    },
     "KmsKeyArn": {
       "type": "string",
       "description": "Key Management Service key used to encrypt the collection."
+    },
+    "FipsEndpoints": {
+      "$ref": "#/definitions/FipsEndpoints"
     }
   },
   "required": [
@@ -132,6 +169,7 @@
     "/properties/Arn",
     "/properties/CollectionEndpoint",
     "/properties/DashboardEndpoint",
+    "/properties/FipsEndpoints",
     "/properties/KmsKeyArn"
   ],
   "writeOnlyProperties": [
@@ -144,7 +182,9 @@
     "/properties/Type",
     "/properties/StandbyReplicas",
     "/properties/CollectionGroupName",
-    "/properties/EncryptionConfig"
+    "/properties/EncryptionConfig",
+    "/properties/VectorOptions",
+    "/properties/VectorOptions/ServerlessVectorAcceleration"
   ],
   "primaryIdentifier": [
     "/properties/Id"

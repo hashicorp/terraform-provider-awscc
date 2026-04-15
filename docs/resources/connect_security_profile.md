@@ -68,6 +68,7 @@ resource "awscc_connect_security_profile" "example" {
 
 - `allowed_access_control_hierarchy_group_id` (String) The identifier of the hierarchy group that a security profile uses to restrict access to resources in Amazon Connect.
 - `allowed_access_control_tags` (Attributes Set) The list of tags that a security profile uses to restrict access to resources in Amazon Connect. (see [below for nested schema](#nestedatt--allowed_access_control_tags))
+- `allowed_flow_modules` (Attributes Set) The list of flow-module resources to be linked to a security profile in Amazon Connect. (see [below for nested schema](#nestedatt--allowed_flow_modules))
 - `applications` (Attributes Set) A list of third-party applications that the security profile will give access to. (see [below for nested schema](#nestedatt--applications))
 - `description` (String) The description of the security profile.
 - `granular_access_control_configuration` (Attributes) (see [below for nested schema](#nestedatt--granular_access_control_configuration))
@@ -92,6 +93,15 @@ Optional:
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 
+<a id="nestedatt--allowed_flow_modules"></a>
+### Nested Schema for `allowed_flow_modules`
+
+Optional:
+
+- `flow_module_id` (String) The identifier of the application that you want to give access to.
+- `type` (String) The type of the first-party application
+
+
 <a id="nestedatt--applications"></a>
 ### Nested Schema for `applications`
 
@@ -99,6 +109,7 @@ Optional:
 
 - `application_permissions` (Set of String) The permissions that the agent is granted on the application
 - `namespace` (String) Namespace of the application that you want to give access to.
+- `type` (String) The type of the application.
 
 
 <a id="nestedatt--granular_access_control_configuration"></a>

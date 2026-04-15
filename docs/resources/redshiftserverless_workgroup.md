@@ -115,13 +115,13 @@ Optional:
 
 Optional:
 
-- `config_parameters` (Attributes Set) (see [below for nested schema](#nestedatt--workgroup--config_parameters))
 - `endpoint` (Attributes) (see [below for nested schema](#nestedatt--workgroup--endpoint))
 - `price_performance_target` (Attributes) (see [below for nested schema](#nestedatt--workgroup--price_performance_target))
 
 Read-Only:
 
 - `base_capacity` (Number)
+- `config_parameters` (Attributes Set) (see [below for nested schema](#nestedatt--workgroup--config_parameters))
 - `creation_date` (String)
 - `enhanced_vpc_routing` (Boolean)
 - `max_capacity` (Number)
@@ -134,15 +134,6 @@ Read-Only:
 - `workgroup_arn` (String)
 - `workgroup_id` (String)
 - `workgroup_name` (String)
-
-<a id="nestedatt--workgroup--config_parameters"></a>
-### Nested Schema for `workgroup.config_parameters`
-
-Optional:
-
-- `parameter_key` (String)
-- `parameter_value` (String)
-
 
 <a id="nestedatt--workgroup--endpoint"></a>
 ### Nested Schema for `workgroup.endpoint`
@@ -185,6 +176,15 @@ Optional:
 
 - `level` (Number)
 - `status` (String)
+
+
+<a id="nestedatt--workgroup--config_parameters"></a>
+### Nested Schema for `workgroup.config_parameters`
+
+Read-Only:
+
+- `parameter_key` (String)
+- `parameter_value` (String)
 
 ## Import
 

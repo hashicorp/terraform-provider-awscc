@@ -43,6 +43,7 @@ Data Source schema for AWS::GameLift::ContainerFleet
 - `new_game_session_protection_policy` (String) A game session protection policy to apply to all game sessions hosted on instances in this fleet. When protected, active game sessions cannot be terminated during a scale-down event. If this parameter is not set, instances in this fleet default to no protection. You can change a fleet's protection policy to affect future game sessions on the fleet. You can also set protection for individual game sessions.
 - `per_instance_container_group_definition_arn` (String) The Amazon Resource Name (ARN) of the per instance container group definition. This field will be empty if PerInstanceContainerGroupDefinitionName is not specified.
 - `per_instance_container_group_definition_name` (String) The name of the container group definition that will be created per instance. This field is optional if you specify GameServerContainerGroupDefinitionName.
+- `player_gateway_mode` (String) The player gateway mode for the container fleet.
 - `scaling_policies` (Attributes List) A list of rules that control how a fleet is scaled. (see [below for nested schema](#nestedatt--scaling_policies))
 - `status` (String) The current status of the container fleet.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
@@ -101,6 +102,7 @@ Read-Only:
 
 - `location` (String)
 - `location_capacity` (Attributes) Current resource capacity settings in a specified fleet or location. The location value might refer to a fleet's remote location or its home Region. (see [below for nested schema](#nestedatt--locations--location_capacity))
+- `player_gateway_status` (String) The player gateway status for the location.
 - `stopped_actions` (List of String) A list of fleet actions that have been suspended in the fleet location.
 
 <a id="nestedatt--locations--location_capacity"></a>

@@ -28,6 +28,7 @@ func flowVpcInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.",
+		//	  "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:flow:[a-zA-Z0-9-]+:[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
 		"flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -65,6 +66,7 @@ func flowVpcInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//
 		//	{
 		//	  "description": "Role Arn MediaConnect can assume to create ENIs in customer's account.",
+		//	  "pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$",
 		//	  "type": "string"
 		//	}
 		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

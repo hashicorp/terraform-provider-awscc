@@ -27,6 +27,7 @@ Data Source schema for AWS::EC2::EC2Fleet
 - `launch_template_configs` (Attributes List) (see [below for nested schema](#nestedatt--launch_template_configs))
 - `on_demand_options` (Attributes) (see [below for nested schema](#nestedatt--on_demand_options))
 - `replace_unhealthy_instances` (Boolean)
+- `reserved_capacity_options` (Attributes) (see [below for nested schema](#nestedatt--reserved_capacity_options))
 - `spot_options` (Attributes) (see [below for nested schema](#nestedatt--spot_options))
 - `tag_specifications` (Attributes List) (see [below for nested schema](#nestedatt--tag_specifications))
 - `target_capacity_specification` (Attributes) (see [below for nested schema](#nestedatt--target_capacity_specification))
@@ -268,6 +269,14 @@ Read-Only:
 
 - `usage_strategy` (String)
 
+
+
+<a id="nestedatt--reserved_capacity_options"></a>
+### Nested Schema for `reserved_capacity_options`
+
+Read-Only:
+
+- `reservation_types` (List of String)
 
 
 <a id="nestedatt--spot_options"></a>

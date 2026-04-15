@@ -90,6 +90,94 @@ func tableBucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Settings governing the Metric configuration for the table bucket.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ReplicationConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies replication configuration for the table bucket",
+		//	  "properties": {
+		//	    "Role": {
+		//	      "description": "The ARN of the IAM role to use for replication",
+		//	      "type": "string"
+		//	    },
+		//	    "Rules": {
+		//	      "description": "List of replication rules",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A replication rule for the table bucket",
+		//	        "properties": {
+		//	          "Destinations": {
+		//	            "description": "List of replication destinations",
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "A replication destination",
+		//	              "properties": {
+		//	                "DestinationTableBucketARN": {
+		//	                  "description": "The ARN of the destination table bucket",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "DestinationTableBucketARN"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "maxItems": 5,
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Destinations"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 1,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Role",
+		//	    "Rules"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"replication_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Role
+				"role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the IAM role to use for replication",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Rules
+				"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Destinations
+							"destinations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DestinationTableBucketARN
+										"destination_table_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The ARN of the destination table bucket",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "List of replication destinations",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "List of replication rules",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies replication configuration for the table bucket",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StorageClassConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -260,21 +348,26 @@ func tableBucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::S3Tables::TableBucket").WithTerraformTypeName("awscc_s3tables_table_bucket")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"encryption_configuration":    "EncryptionConfiguration",
-		"key":                         "Key",
-		"kms_key_arn":                 "KMSKeyArn",
-		"metrics_configuration":       "MetricsConfiguration",
-		"noncurrent_days":             "NoncurrentDays",
-		"sse_algorithm":               "SSEAlgorithm",
-		"status":                      "Status",
-		"storage_class":               "StorageClass",
-		"storage_class_configuration": "StorageClassConfiguration",
-		"table_bucket_arn":            "TableBucketARN",
-		"table_bucket_name":           "TableBucketName",
-		"tags":                        "Tags",
-		"unreferenced_days":           "UnreferencedDays",
-		"unreferenced_file_removal":   "UnreferencedFileRemoval",
-		"value":                       "Value",
+		"destination_table_bucket_arn": "DestinationTableBucketARN",
+		"destinations":                 "Destinations",
+		"encryption_configuration":     "EncryptionConfiguration",
+		"key":                          "Key",
+		"kms_key_arn":                  "KMSKeyArn",
+		"metrics_configuration":        "MetricsConfiguration",
+		"noncurrent_days":              "NoncurrentDays",
+		"replication_configuration":    "ReplicationConfiguration",
+		"role":                         "Role",
+		"rules":                        "Rules",
+		"sse_algorithm":                "SSEAlgorithm",
+		"status":                       "Status",
+		"storage_class":                "StorageClass",
+		"storage_class_configuration":  "StorageClassConfiguration",
+		"table_bucket_arn":             "TableBucketARN",
+		"table_bucket_name":            "TableBucketName",
+		"tags":                         "Tags",
+		"unreferenced_days":            "UnreferencedDays",
+		"unreferenced_file_removal":    "UnreferencedFileRemoval",
+		"value":                        "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

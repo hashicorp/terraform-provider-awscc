@@ -75,7 +75,7 @@ resource "awscc_s3tables_table" "example" {
 ### Optional
 
 - `compaction` (Attributes) Settings governing the Compaction maintenance action. Contains details about the compaction settings for an Iceberg table. (see [below for nested schema](#nestedatt--compaction))
-- `iceberg_metadata` (Attributes) Contains details about the metadata for an Iceberg table. (see [below for nested schema](#nestedatt--iceberg_metadata))
+- `iceberg_metadata` (Attributes) Contains details about the metadata for an Iceberg table. Specify either IcebergSchema (for simple flat schemas with primitive types only) or IcebergSchemaV2 (for schemas with nested types like struct, list, map), but not both. (see [below for nested schema](#nestedatt--iceberg_metadata))
 - `snapshot_management` (Attributes) Contains details about the snapshot management settings for an Iceberg table. A snapshot is expired when it exceeds MinSnapshotsToKeep and MaxSnapshotAgeHours. (see [below for nested schema](#nestedatt--snapshot_management))
 - `storage_class_configuration` (Attributes) Specifies storage class settings for the table (see [below for nested schema](#nestedatt--storage_class_configuration))
 - `tags` (Attributes Set) User tags (key-value pairs) to associate with the table. (see [below for nested schema](#nestedatt--tags))
@@ -103,7 +103,8 @@ Optional:
 Optional:
 
 - `iceberg_partition_spec` (Attributes) Partition specification for an Iceberg table (see [below for nested schema](#nestedatt--iceberg_metadata--iceberg_partition_spec))
-- `iceberg_schema` (Attributes) Contains details about the schema for an Iceberg table (see [below for nested schema](#nestedatt--iceberg_metadata--iceberg_schema))
+- `iceberg_schema` (Attributes) Schema definition for flat tables with primitive types only. Mutually exclusive with IcebergSchemaV2. (see [below for nested schema](#nestedatt--iceberg_metadata--iceberg_schema))
+- `iceberg_schema_v2` (Attributes) Schema definition that supports Apache Iceberg nested types (struct, list, map) and primitive types. Mutually exclusive with IcebergSchema. (see [below for nested schema](#nestedatt--iceberg_metadata--iceberg_schema_v2))
 - `iceberg_sort_order` (Attributes) Sort order specification for an Iceberg table (see [below for nested schema](#nestedatt--iceberg_metadata--iceberg_sort_order))
 - `table_properties` (Map of String) Iceberg table properties (e.g., format-version, write.parquet.compression-codec)
 
@@ -143,6 +144,29 @@ Optional:
 - `name` (String) The name of the field
 - `required` (Boolean) A Boolean value that specifies whether values are required for each row in this field
 - `type` (String) The field type
+
+
+
+<a id="nestedatt--iceberg_metadata--iceberg_schema_v2"></a>
+### Nested Schema for `iceberg_metadata.iceberg_schema_v2`
+
+Optional:
+
+- `identifier_field_ids` (List of Number) A list of field IDs that are used as the identifier fields for the table. Identifier fields uniquely identify a row in the table.
+- `schema_id` (Number) An optional unique identifier for the schema
+- `schema_v2_field_list` (Attributes List) The schema fields for the table (see [below for nested schema](#nestedatt--iceberg_metadata--iceberg_schema_v2--schema_v2_field_list))
+- `schema_v2_field_type` (String) The type of the top-level schema, which is always 'struct'
+
+<a id="nestedatt--iceberg_metadata--iceberg_schema_v2--schema_v2_field_list"></a>
+### Nested Schema for `iceberg_metadata.iceberg_schema_v2.schema_v2_field_list`
+
+Optional:
+
+- `doc` (String) Optional documentation for the field
+- `id` (Number) The unique identifier for the field
+- `name` (String) The name of the field
+- `required` (Boolean) A Boolean value that specifies whether values are required for each row in this field
+- `type` (String) The field type. For primitive types, use a string (e.g., 'int', 'string', 'long'). For nested types, use an object (e.g., {'type': 'struct', 'fields': [...]} for struct, {'type': 'list', 'element-id': N, 'element': 'type'} for list, {'type': 'map', 'key-id': N, 'key': 'type', 'value-id': N, 'value': 'type'} for map).
 
 
 

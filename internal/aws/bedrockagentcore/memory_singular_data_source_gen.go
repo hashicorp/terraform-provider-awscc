@@ -85,7 +85,7 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "ARN of the Memory resource",
-		//	  "pattern": "^arn:aws:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:memory/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$",
+		//	  "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:memory/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$",
 		//	  "type": "string"
 		//	}
 		"memory_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -184,6 +184,17 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                      },
 		//	                      "ModelId": {
 		//	                        "type": "string"
+		//	                      },
+		//	                      "NamespaceTemplates": {
+		//	                        "description": "List of namespaces for memory strategy",
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "description": "Namespace for the memory strategy",
+		//	                          "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "minItems": 1,
+		//	                        "type": "array"
 		//	                      },
 		//	                      "Namespaces": {
 		//	                        "description": "List of namespaces for memory strategy",
@@ -407,6 +418,17 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
 		//	            "type": "string"
 		//	          },
+		//	          "NamespaceTemplates": {
+		//	            "description": "List of namespaces for memory strategy",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "description": "Namespace for the memory strategy",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "type": "string"
+		//	            },
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          },
 		//	          "Namespaces": {
 		//	            "description": "List of namespaces for memory strategy",
 		//	            "insertionOrder": false,
@@ -473,6 +495,17 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
 		//	            "type": "string"
 		//	          },
+		//	          "NamespaceTemplates": {
+		//	            "description": "List of namespaces for memory strategy",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "description": "Namespace for the memory strategy",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "type": "string"
+		//	            },
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          },
 		//	          "Namespaces": {
 		//	            "description": "List of namespaces for memory strategy",
 		//	            "insertionOrder": false,
@@ -487,6 +520,17 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "ReflectionConfiguration": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
+		//	              "NamespaceTemplates": {
+		//	                "description": "List of namespaces for memory strategy",
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "description": "Namespace for the memory strategy",
+		//	                  "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	                  "type": "string"
+		//	                },
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              },
 		//	              "Namespaces": {
 		//	                "description": "List of namespaces for memory strategy",
 		//	                "insertionOrder": false,
@@ -499,9 +543,6 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "type": "array"
 		//	              }
 		//	            },
-		//	            "required": [
-		//	              "Namespaces"
-		//	            ],
 		//	            "type": "object"
 		//	          },
 		//	          "Status": {
@@ -558,6 +599,17 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "description": "Name of the Memory resource",
 		//	            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
 		//	            "type": "string"
+		//	          },
+		//	          "NamespaceTemplates": {
+		//	            "description": "List of namespaces for memory strategy",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "description": "Namespace for the memory strategy",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "type": "string"
+		//	            },
+		//	            "minItems": 1,
+		//	            "type": "array"
 		//	          },
 		//	          "Namespaces": {
 		//	            "description": "List of namespaces for memory strategy",
@@ -625,6 +677,17 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
 		//	            "type": "string"
 		//	          },
+		//	          "NamespaceTemplates": {
+		//	            "description": "List of namespaces for memory strategy",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "description": "Namespace for the memory strategy",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "type": "string"
+		//	            },
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          },
 		//	          "Namespaces": {
 		//	            "description": "List of namespaces for memory strategy",
 		//	            "insertionOrder": false,
@@ -690,6 +753,17 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "description": "Name of the Memory resource",
 		//	            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
 		//	            "type": "string"
+		//	          },
+		//	          "NamespaceTemplates": {
+		//	            "description": "List of namespaces for memory strategy",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "description": "Namespace for the memory strategy",
+		//	              "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
+		//	              "type": "string"
+		//	            },
+		//	            "minItems": 1,
+		//	            "type": "array"
 		//	          },
 		//	          "Namespaces": {
 		//	            "description": "List of namespaces for memory strategy",
@@ -798,6 +872,12 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 													// Property: ModelId
 													"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: NamespaceTemplates
+													"namespace_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "List of namespaces for memory strategy",
+														Computed:    true,
 													}, /*END ATTRIBUTE*/
 													// Property: Namespaces
 													"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -986,6 +1066,12 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Description: "Name of the Memory resource",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
+							// Property: NamespaceTemplates
+							"namespace_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of namespaces for memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 							// Property: Namespaces
 							"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
@@ -1035,6 +1121,12 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Description: "Name of the Memory resource",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
+							// Property: NamespaceTemplates
+							"namespace_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of namespaces for memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 							// Property: Namespaces
 							"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
@@ -1044,6 +1136,12 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 							// Property: ReflectionConfiguration
 							"reflection_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: NamespaceTemplates
+									"namespace_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "List of namespaces for memory strategy",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
 									// Property: Namespaces
 									"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
 										ElementType: types.StringType,
@@ -1096,6 +1194,12 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Description: "Name of the Memory resource",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
+							// Property: NamespaceTemplates
+							"namespace_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of namespaces for memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 							// Property: Namespaces
 							"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
@@ -1145,6 +1249,12 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Description: "Name of the Memory resource",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
+							// Property: NamespaceTemplates
+							"namespace_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of namespaces for memory strategy",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 							// Property: Namespaces
 							"namespaces": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
@@ -1192,6 +1302,12 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Name of the Memory resource",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: NamespaceTemplates
+							"namespace_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "List of namespaces for memory strategy",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Namespaces
@@ -1258,6 +1374,116 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Status of the Memory resource",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: StreamDeliveryResources
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Resources": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Kinesis": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ContentConfigurations": {
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Level": {
+		//	                      "description": "The level of content detail to deliver",
+		//	                      "enum": [
+		//	                        "METADATA_ONLY",
+		//	                        "FULL_CONTENT"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Type": {
+		//	                      "description": "The type of content to deliver",
+		//	                      "enum": [
+		//	                        "MEMORY_RECORDS"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Type"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "maxItems": 1,
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              },
+		//	              "DataStreamArn": {
+		//	                "description": "ARN format",
+		//	                "pattern": "",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "DataStreamArn",
+		//	              "ContentConfigurations"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Resources"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"stream_delivery_resources": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Resources
+				"resources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Kinesis
+							"kinesis": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ContentConfigurations
+									"content_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Level
+												"level": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The level of content detail to deliver",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Type
+												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The type of content to deliver",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: DataStreamArn
+									"data_stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "ARN format",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1312,8 +1538,10 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"append_to_prompt":                "AppendToPrompt",
 		"configuration":                   "Configuration",
 		"consolidation":                   "Consolidation",
+		"content_configurations":          "ContentConfigurations",
 		"created_at":                      "CreatedAt",
 		"custom_memory_strategy":          "CustomMemoryStrategy",
+		"data_stream_arn":                 "DataStreamArn",
 		"description":                     "Description",
 		"encryption_key_arn":              "EncryptionKeyArn",
 		"episodic_memory_strategy":        "EpisodicMemoryStrategy",
@@ -1324,6 +1552,8 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"historical_context_window_size":  "HistoricalContextWindowSize",
 		"idle_session_timeout":            "IdleSessionTimeout",
 		"invocation_configuration":        "InvocationConfiguration",
+		"kinesis":                         "Kinesis",
+		"level":                           "Level",
 		"memory_arn":                      "MemoryArn",
 		"memory_execution_role_arn":       "MemoryExecutionRoleArn",
 		"memory_id":                       "MemoryId",
@@ -1332,15 +1562,18 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"message_count":                   "MessageCount",
 		"model_id":                        "ModelId",
 		"name":                            "Name",
+		"namespace_templates":             "NamespaceTemplates",
 		"namespaces":                      "Namespaces",
 		"payload_delivery_bucket_name":    "PayloadDeliveryBucketName",
 		"reflection":                      "Reflection",
 		"reflection_configuration":        "ReflectionConfiguration",
+		"resources":                       "Resources",
 		"self_managed_configuration":      "SelfManagedConfiguration",
 		"semantic_memory_strategy":        "SemanticMemoryStrategy",
 		"semantic_override":               "SemanticOverride",
 		"status":                          "Status",
 		"strategy_id":                     "StrategyId",
+		"stream_delivery_resources":       "StreamDeliveryResources",
 		"summary_memory_strategy":         "SummaryMemoryStrategy",
 		"summary_override":                "SummaryOverride",
 		"tags":                            "Tags",

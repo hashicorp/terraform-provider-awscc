@@ -266,6 +266,57 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 			Description: "The hostname for the Autonomous VM cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: IamRoles
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS Identity and Access Management (IAM) service roles associated with the Autonomous VM cluster.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "An AWS Identity and Access Management (IAM) service role associated with the Autonomous VM cluster.",
+		//	    "properties": {
+		//	      "AwsIntegration": {
+		//	        "description": "The AWS integration configuration settings for the AWS Identity and Access Management (IAM) service role.",
+		//	        "type": "string"
+		//	      },
+		//	      "IamRoleArn": {
+		//	        "description": "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) service role.",
+		//	        "type": "string"
+		//	      },
+		//	      "Status": {
+		//	        "description": "The current status of the AWS Identity and Access Management (IAM) service role.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"iam_roles": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AwsIntegration
+					"aws_integration": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The AWS integration configuration settings for the AWS Identity and Access Management (IAM) service role.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: IamRoleArn
+					"iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) service role.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The current status of the AWS Identity and Access Management (IAM) service role.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The AWS Identity and Access Management (IAM) service roles associated with the Autonomous VM cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IsMtlsEnabledVmCluster
 		// CloudFormation resource type schema:
 		//
@@ -697,6 +748,7 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		"available_autonomous_data_storage_size_in_t_bs": "AvailableAutonomousDataStorageSizeInTBs",
 		"available_container_databases":                  "AvailableContainerDatabases",
 		"available_cpus":                                 "AvailableCpus",
+		"aws_integration":                                "AwsIntegration",
 		"cloud_autonomous_vm_cluster_arn":                "CloudAutonomousVmClusterArn",
 		"cloud_autonomous_vm_cluster_id":                 "CloudAutonomousVmClusterId",
 		"cloud_exadata_infrastructure_id":                "CloudExadataInfrastructureId",
@@ -715,6 +767,8 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		"exadata_storage_in_t_bs_lowest_scaled_value":    "ExadataStorageInTBsLowestScaledValue",
 		"hostname":                                       "Hostname",
 		"hours_of_day":                                   "HoursOfDay",
+		"iam_role_arn":                                   "IamRoleArn",
+		"iam_roles":                                      "IamRoles",
 		"is_mtls_enabled_vm_cluster":                     "IsMtlsEnabledVmCluster",
 		"key":                                            "Key",
 		"lead_time_in_weeks":                             "LeadTimeInWeeks",
@@ -739,6 +793,7 @@ func cloudAutonomousVmClusterDataSource(ctx context.Context) (datasource.DataSou
 		"scan_listener_port_non_tls":                   "ScanListenerPortNonTls",
 		"scan_listener_port_tls":                       "ScanListenerPortTls",
 		"shape":                                        "Shape",
+		"status":                                       "Status",
 		"tags":                                         "Tags",
 		"time_zone":                                    "TimeZone",
 		"total_container_databases":                    "TotalContainerDatabases",

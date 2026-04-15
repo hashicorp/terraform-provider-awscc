@@ -32,6 +32,7 @@ Data Source schema for AWS::BedrockAgentCore::Memory
 - `memory_strategies` (Attributes List) List of memory strategies attached to this memory (see [below for nested schema](#nestedatt--memory_strategies))
 - `name` (String) Name of the Memory resource
 - `status` (String) Status of the Memory resource
+- `stream_delivery_resources` (Attributes) (see [below for nested schema](#nestedatt--stream_delivery_resources))
 - `tags` (Map of String) A map of tag keys and values
 - `updated_at` (String)
 
@@ -55,6 +56,7 @@ Read-Only:
 - `created_at` (String) Creation timestamp of the memory strategy
 - `description` (String) Description of the Memory resource
 - `name` (String) Name of the Memory resource
+- `namespace_templates` (List of String) List of namespaces for memory strategy
 - `namespaces` (List of String) List of namespaces for memory strategy
 - `status` (String) Status of the memory strategy
 - `strategy_id` (String) Unique identifier for the memory strategy
@@ -106,6 +108,7 @@ Read-Only:
 
 - `append_to_prompt` (String) Text prompt for model instructions
 - `model_id` (String)
+- `namespace_templates` (List of String) List of namespaces for memory strategy
 - `namespaces` (List of String) List of namespaces for memory strategy
 
 
@@ -244,6 +247,7 @@ Read-Only:
 - `created_at` (String) Creation timestamp of the memory strategy
 - `description` (String) Description of the Memory resource
 - `name` (String) Name of the Memory resource
+- `namespace_templates` (List of String) List of namespaces for memory strategy
 - `namespaces` (List of String) List of namespaces for memory strategy
 - `reflection_configuration` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration))
 - `status` (String) Status of the memory strategy
@@ -256,6 +260,7 @@ Read-Only:
 
 Read-Only:
 
+- `namespace_templates` (List of String) List of namespaces for memory strategy
 - `namespaces` (List of String) List of namespaces for memory strategy
 
 
@@ -268,6 +273,7 @@ Read-Only:
 - `created_at` (String) Creation timestamp of the memory strategy
 - `description` (String) Description of the Memory resource
 - `name` (String) Name of the Memory resource
+- `namespace_templates` (List of String) List of namespaces for memory strategy
 - `namespaces` (List of String) List of namespaces for memory strategy
 - `status` (String) Status of the memory strategy
 - `strategy_id` (String) Unique identifier for the memory strategy
@@ -283,6 +289,7 @@ Read-Only:
 - `created_at` (String) Creation timestamp of the memory strategy
 - `description` (String) Description of the Memory resource
 - `name` (String) Name of the Memory resource
+- `namespace_templates` (List of String) List of namespaces for memory strategy
 - `namespaces` (List of String) List of namespaces for memory strategy
 - `status` (String) Status of the memory strategy
 - `strategy_id` (String) Unique identifier for the memory strategy
@@ -298,8 +305,41 @@ Read-Only:
 - `created_at` (String) Creation timestamp of the memory strategy
 - `description` (String) Description of the Memory resource
 - `name` (String) Name of the Memory resource
+- `namespace_templates` (List of String) List of namespaces for memory strategy
 - `namespaces` (List of String) List of namespaces for memory strategy
 - `status` (String) Status of the memory strategy
 - `strategy_id` (String) Unique identifier for the memory strategy
 - `type` (String) Type of memory strategy
 - `updated_at` (String) Last update timestamp of the memory strategy
+
+
+
+<a id="nestedatt--stream_delivery_resources"></a>
+### Nested Schema for `stream_delivery_resources`
+
+Read-Only:
+
+- `resources` (Attributes List) (see [below for nested schema](#nestedatt--stream_delivery_resources--resources))
+
+<a id="nestedatt--stream_delivery_resources--resources"></a>
+### Nested Schema for `stream_delivery_resources.resources`
+
+Read-Only:
+
+- `kinesis` (Attributes) (see [below for nested schema](#nestedatt--stream_delivery_resources--resources--kinesis))
+
+<a id="nestedatt--stream_delivery_resources--resources--kinesis"></a>
+### Nested Schema for `stream_delivery_resources.resources.kinesis`
+
+Read-Only:
+
+- `content_configurations` (Attributes List) (see [below for nested schema](#nestedatt--stream_delivery_resources--resources--kinesis--content_configurations))
+- `data_stream_arn` (String) ARN format
+
+<a id="nestedatt--stream_delivery_resources--resources--kinesis--content_configurations"></a>
+### Nested Schema for `stream_delivery_resources.resources.kinesis.content_configurations`
+
+Read-Only:
+
+- `level` (String) The level of content detail to deliver
+- `type` (String) The type of content to deliver

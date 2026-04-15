@@ -21,6 +21,7 @@ Data Source schema for AWS::DataZone::ProjectProfile
 
 ### Read-Only
 
+- `allow_custom_project_resource_tags` (Boolean)
 - `created_at` (String)
 - `created_by` (String)
 - `description` (String)
@@ -33,6 +34,8 @@ Data Source schema for AWS::DataZone::ProjectProfile
 - `last_updated_at` (String)
 - `name` (String)
 - `project_profile_id` (String)
+- `project_resource_tags` (Attributes List) (see [below for nested schema](#nestedatt--project_resource_tags))
+- `project_resource_tags_description` (String)
 - `status` (String)
 - `use_default_configurations` (Boolean)
 
@@ -93,4 +96,16 @@ Read-Only:
 
 - `is_editable` (Boolean)
 - `name` (String)
+- `value` (String)
+
+
+
+
+<a id="nestedatt--project_resource_tags"></a>
+### Nested Schema for `project_resource_tags`
+
+Read-Only:
+
+- `is_value_editable` (Boolean)
+- `key` (String)
 - `value` (String)

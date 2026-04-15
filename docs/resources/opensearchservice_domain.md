@@ -23,6 +23,7 @@ An example resource schema demonstrating some basic constructs and validation ru
 - `aiml_options` (Attributes) (see [below for nested schema](#nestedatt--aiml_options))
 - `cluster_config` (Attributes) (see [below for nested schema](#nestedatt--cluster_config))
 - `cognito_options` (Attributes) (see [below for nested schema](#nestedatt--cognito_options))
+- `deployment_strategy_options` (Attributes) (see [below for nested schema](#nestedatt--deployment_strategy_options))
 - `domain_endpoint_options` (Attributes) (see [below for nested schema](#nestedatt--domain_endpoint_options))
 - `domain_name` (String)
 - `ebs_options` (Attributes) (see [below for nested schema](#nestedatt--ebs_options))
@@ -211,6 +212,14 @@ Optional:
 - `identity_pool_id` (String)
 - `role_arn` (String)
 - `user_pool_id` (String)
+
+
+<a id="nestedatt--deployment_strategy_options"></a>
+### Nested Schema for `deployment_strategy_options`
+
+Optional:
+
+- `deployment_strategy` (String)
 
 
 <a id="nestedatt--domain_endpoint_options"></a>

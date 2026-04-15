@@ -1,0 +1,129 @@
+{
+  "typeName": "AWS::Route53GlobalResolver::HostedZoneAssociation",
+  "description": "Resource schema for AWS::Route53GlobalResolver::HostedZoneAssociation",
+  "primaryIdentifier": [
+    "/properties/HostedZoneAssociationId"
+  ],
+  "readOnlyProperties": [
+    "/properties/HostedZoneAssociationId",
+    "/properties/HostedZoneName",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/Status"
+  ],
+  "createOnlyProperties": [
+    "/properties/HostedZoneId",
+    "/properties/ResourceArn"
+  ],
+  "required": [
+    "HostedZoneId",
+    "ResourceArn",
+    "Name"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "ResourceName": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": ""
+    },
+    "HostedZoneAssociationStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "OPERATIONAL",
+        "DELETING"
+      ]
+    },
+    "HostedZoneId": {
+      "type": "string",
+      "maxLength": 32,
+      "minLength": 1
+    },
+    "ResourceArn": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 1,
+      "pattern": ""
+    }
+  },
+  "properties": {
+    "HostedZoneAssociationId": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1
+    },
+    "Name": {
+      "$ref": "#/definitions/ResourceName"
+    },
+    "HostedZoneId": {
+      "$ref": "#/definitions/HostedZoneId"
+    },
+    "HostedZoneName": {
+      "type": "string",
+      "maxLength": 1024,
+      "minLength": 1
+    },
+    "ResourceArn": {
+      "$ref": "#/definitions/ResourceArn"
+    },
+    "Status": {
+      "$ref": "#/definitions/HostedZoneAssociationStatus"
+    },
+    "CreatedAt": {
+      "type": "string"
+    },
+    "UpdatedAt": {
+      "type": "string"
+    }
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "route53globalresolver:AssociateHostedZone",
+        "route53globalresolver:GetHostedZoneAssociation",
+        "route53:GetHostedZone"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "route53globalresolver:GetHostedZoneAssociation",
+        "route53:GetHostedZone"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "route53globalresolver:UpdateHostedZoneAssociation",
+        "route53globalresolver:GetHostedZoneAssociation",
+        "route53:GetHostedZone"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "route53globalresolver:DisassociateHostedZone",
+        "route53globalresolver:GetHostedZoneAssociation",
+        "route53:GetHostedZone"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "route53globalresolver:ListHostedZoneAssociations",
+        "route53:GetHostedZone"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "ResourceArn": {
+            "$ref": "resource-schema.json#/properties/ResourceArn"
+          }
+        },
+        "required": [
+          "ResourceArn"
+        ]
+      }
+    }
+  },
+  "tagging": {
+    "taggable": false
+  }
+}

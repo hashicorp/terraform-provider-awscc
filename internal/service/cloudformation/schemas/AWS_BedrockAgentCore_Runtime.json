@@ -6,7 +6,7 @@
     "AgentRuntimeArn": {
       "type": "string",
       "maxLength": 2048,
-      "pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:runtime/[a-zA-Z][a-zA-Z0-9_]{0,99}-[a-zA-Z0-9]{10}$"
+      "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:runtime/[a-zA-Z][a-zA-Z0-9_]{0,99}-[a-zA-Z0-9]{10}$"
     },
     "AgentRuntimeId": {
       "type": "string",
@@ -125,7 +125,8 @@
       "enum": [
         "MCP",
         "HTTP",
-        "A2A"
+        "A2A",
+        "AGUI"
       ]
     },
     "AuthorizerConfiguration": {
@@ -402,7 +403,8 @@
         "PYTHON_3_10",
         "PYTHON_3_11",
         "PYTHON_3_12",
-        "PYTHON_3_13"
+        "PYTHON_3_13",
+        "PYTHON_3_14"
       ]
     },
     "EntryPoints": {
@@ -524,6 +526,46 @@
       "minLength": 1,
       "maxLength": 256,
       "pattern": "^(Authorization|X-Amzn-Bedrock-AgentCore-Runtime-Custom-[a-zA-Z0-9_-]+)$"
+    },
+    "MountPath": {
+      "type": "string",
+      "description": "Mount path for session storage",
+      "minLength": 6,
+      "maxLength": 200,
+      "pattern": "^/mnt/[a-zA-Z0-9._-]+/?$"
+    },
+    "SessionStorageConfiguration": {
+      "type": "object",
+      "description": "Configuration for session storage",
+      "properties": {
+        "MountPath": {
+          "$ref": "#/definitions/MountPath"
+        }
+      },
+      "required": [
+        "MountPath"
+      ],
+      "additionalProperties": false
+    },
+    "FilesystemConfiguration": {
+      "type": "object",
+      "description": "Filesystem configuration for the runtime",
+      "properties": {
+        "SessionStorage": {
+          "$ref": "#/definitions/SessionStorageConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "FilesystemConfigurations": {
+      "type": "array",
+      "description": "List of filesystem configurations",
+      "items": {
+        "$ref": "#/definitions/FilesystemConfiguration"
+      },
+      "minItems": 0,
+      "maxItems": 1,
+      "insertionOrder": false
     }
   },
   "properties": {
@@ -574,6 +616,10 @@
     "RequestHeaderConfiguration": {
       "$ref": "#/definitions/RequestHeaderConfiguration",
       "description": "Configuration for HTTP request headers"
+    },
+    "FilesystemConfigurations": {
+      "$ref": "#/definitions/FilesystemConfigurations",
+      "description": "Filesystem configurations for the agent runtime"
     },
     "AgentRuntimeVersion": {
       "$ref": "#/definitions/AgentRuntimeVersion",

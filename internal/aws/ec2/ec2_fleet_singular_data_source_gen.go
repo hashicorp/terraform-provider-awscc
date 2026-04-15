@@ -954,6 +954,35 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"replace_unhealthy_instances": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ReservedCapacityOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ReservationTypes": {
+		//	      "items": {
+		//	        "enum": [
+		//	          "interruptible-capacity-reservation"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"reserved_capacity_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ReservationTypes
+				"reservation_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SpotOptions
 		// CloudFormation resource type schema:
 		//
@@ -1196,7 +1225,8 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "DefaultTargetCapacityType": {
 		//	      "enum": [
 		//	        "on-demand",
-		//	        "spot"
+		//	        "spot",
+		//	        "reserved-capacity"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -1376,6 +1406,8 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"replacement_strategy":                        "ReplacementStrategy",
 		"require_encryption_in_transit":               "RequireEncryptionInTransit",
 		"require_hibernate_support":                   "RequireHibernateSupport",
+		"reservation_types":                           "ReservationTypes",
+		"reserved_capacity_options":                   "ReservedCapacityOptions",
 		"resource_type":                               "ResourceType",
 		"single_availability_zone":                    "SingleAvailabilityZone",
 		"single_instance_type":                        "SingleInstanceType",

@@ -170,6 +170,53 @@ func imageBuilderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: RootVolumeConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "VolumeSizeInGb": {
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"root_volume_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: VolumeSizeInGb
+				"volume_size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: SoftwaresToInstall
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"softwares_to_install": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SoftwaresToUninstall
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"softwares_to_uninstall": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StreamingUrl
 		// CloudFormation resource type schema:
 		//
@@ -287,11 +334,15 @@ func imageBuilderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"key":                                    "Key",
 		"name":                                   "Name",
 		"organizational_unit_distinguished_name": "OrganizationalUnitDistinguishedName",
+		"root_volume_config":                     "RootVolumeConfig",
 		"security_group_ids":                     "SecurityGroupIds",
+		"softwares_to_install":                   "SoftwaresToInstall",
+		"softwares_to_uninstall":                 "SoftwaresToUninstall",
 		"streaming_url":                          "StreamingUrl",
 		"subnet_ids":                             "SubnetIds",
 		"tags":                                   "Tags",
 		"value":                                  "Value",
+		"volume_size_in_gb":                      "VolumeSizeInGb",
 		"vpc_config":                             "VpcConfig",
 		"vpce_id":                                "VpceId",
 	})

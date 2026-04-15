@@ -130,12 +130,6 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          }
 		//	        },
-		//	        "required": [
-		//	          "Id",
-		//	          "Username",
-		//	          "Password",
-		//	          "Url"
-		//	        ],
 		//	        "type": "object"
 		//	      },
 		//	      "type": "array"
@@ -154,9 +148,6 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 								Description: "The system generated unique identifier for the IngestEndpoint",
 								Optional:    true,
 								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -166,9 +157,6 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 								Description: "The system generated password for ingest authentication.",
 								Optional:    true,
 								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -178,9 +166,6 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 								Description: "The ingest URL to which the source stream should be sent.",
 								Optional:    true,
 								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -190,9 +175,6 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 								Description: "The system generated username for ingest authentication.",
 								Optional:    true,
 								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/

@@ -24,6 +24,7 @@
         "AWS::CloudTrail",
         "AWS::EKS::Cluster",
         "AWS::ElasticLoadBalancingV2::LoadBalancer",
+        "AWS::EC2::Instance",
         "AWS::BedrockAgentCore::Runtime",
         "AWS::BedrockAgentCore::Browser",
         "AWS::BedrockAgentCore::CodeInterpreter"
@@ -34,7 +35,8 @@
       "type": "string",
       "enum": [
         "Logs",
-        "Traces"
+        "Traces",
+        "Metrics"
       ]
     },
     "Scope": {

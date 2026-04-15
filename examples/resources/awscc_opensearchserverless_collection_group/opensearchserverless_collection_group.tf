@@ -1,13 +1,14 @@
 resource "awscc_opensearchserverless_collection_group" "example" {
-  name        = "example-collection-group"
-  description = "Example OpenSearch Serverless collection group for demonstration"
+  name             = "example-collection-group"
+  standby_replicas = "ENABLED"
+  description      = "Example OpenSearch Serverless collection group"
 
   capacity_limits = {
-    max_indexing_capacity_in_ocu = 8
-    max_search_capacity_in_ocu   = 8
+    max_indexing_capacity_in_ocu = 16
+    max_search_capacity_in_ocu   = 16
+    min_indexing_capacity_in_ocu = 2
+    min_search_capacity_in_ocu   = 2
   }
-
-  standby_replicas = "ENABLED"
 
   tags = [
     {
@@ -20,3 +21,4 @@ resource "awscc_opensearchserverless_collection_group" "example" {
     }
   ]
 }
+

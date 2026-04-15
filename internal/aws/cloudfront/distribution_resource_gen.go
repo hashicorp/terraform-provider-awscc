@@ -302,9 +302,10 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "ConnectionFunctionAssociation": {
 		//	      "additionalProperties": false,
-		//	      "description": "",
+		//	      "description": "The distribution's connection function association.",
 		//	      "properties": {
 		//	        "Id": {
+		//	          "description": "The association's ID.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -811,9 +812,10 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	              },
 		//	              "OriginMtlsConfig": {
 		//	                "additionalProperties": false,
-		//	                "description": "",
+		//	                "description": "Configures mutual TLS authentication between CloudFront and your origin server.",
 		//	                "properties": {
 		//	                  "ClientCertificateArn": {
+		//	                    "description": "The Amazon Resource Name (ARN) of the client certificate stored in AWS Certificate Manager (ACM) that CloudFront uses to authenticate with your origin using Mutual TLS.",
 		//	                    "type": "string"
 		//	                  }
 		//	                },
@@ -941,7 +943,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "integer"
 		//	              },
 		//	              "OwnerAccountId": {
-		//	                "description": "",
+		//	                "description": "The account ID of the AWS-account that owns the VPC origin.",
 		//	                "type": "string"
 		//	              },
 		//	              "VpcOriginId": {
@@ -1111,10 +1113,11 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "ViewerMtlsConfig": {
 		//	      "additionalProperties": false,
-		//	      "description": "",
+		//	      "description": "The distribution's viewer mTLS configuration.",
 		//	      "properties": {
 		//	        "Mode": {
 		//	          "default": "required",
+		//	          "description": "The viewer mTLS mode.",
 		//	          "enum": [
 		//	            "required",
 		//	            "optional"
@@ -1123,15 +1126,18 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "TrustStoreConfig": {
 		//	          "additionalProperties": false,
-		//	          "description": "",
+		//	          "description": "The trust store configuration associated with the viewer mTLS configuration.",
 		//	          "properties": {
 		//	            "AdvertiseTrustStoreCaNames": {
+		//	              "description": "The configuration to use to advertise trust store CA names.",
 		//	              "type": "boolean"
 		//	            },
 		//	            "IgnoreCertificateExpiry": {
+		//	              "description": "The configuration to use to ignore certificate expiration.",
 		//	              "type": "boolean"
 		//	            },
 		//	            "TrustStoreId": {
+		//	              "description": "The trust store ID.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -1567,8 +1573,9 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Id
 						"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "The association's ID.",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -1577,7 +1584,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "",
+					Description: "The distribution's connection function association.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2387,8 +2394,9 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: ClientCertificateArn
 											"client_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
+												Description: "The Amazon Resource Name (ARN) of the client certificate stored in AWS Certificate Manager (ACM) that CloudFront uses to authenticate with your origin using Mutual TLS.",
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
@@ -2397,7 +2405,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "",
+										Description: "Configures mutual TLS authentication between CloudFront and your origin server.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2622,7 +2630,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: OwnerAccountId
 									"owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "",
+										Description: "The account ID of the AWS-account that owns the VPC origin.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2913,9 +2921,10 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Mode
 						"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Default:  stringdefault.StaticString("required"),
+							Description: "The viewer mTLS mode.",
+							Optional:    true,
+							Computed:    true,
+							Default:     stringdefault.StaticString("required"),
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"required",
@@ -2931,24 +2940,27 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: AdvertiseTrustStoreCaNames
 								"advertise_trust_store_ca_names": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The configuration to use to advertise trust store CA names.",
+									Optional:    true,
+									Computed:    true,
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: IgnoreCertificateExpiry
 								"ignore_certificate_expiry": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The configuration to use to ignore certificate expiration.",
+									Optional:    true,
+									Computed:    true,
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: TrustStoreId
 								"trust_store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The trust store ID.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -2957,7 +2969,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "",
+							Description: "The trust store configuration associated with the viewer mTLS configuration.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2965,7 +2977,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "",
+					Description: "The distribution's viewer mTLS configuration.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/

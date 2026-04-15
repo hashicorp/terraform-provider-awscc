@@ -58,6 +58,7 @@ func anycastIpListResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "IpAddressType": {
+		//	      "description": "The IP address type for the Anycast static IP list.",
 		//	      "enum": [
 		//	        "ipv4",
 		//	        "dualstack"
@@ -70,20 +71,25 @@ func anycastIpListResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "IpamCidrConfigResults": {
 		//	      "additionalProperties": false,
+		//	      "description": "The results for the IPAM CIDRs that defines a specific IP address range, IPAM pool, and associated Anycast IP address.",
 		//	      "items": {
 		//	        "additionalProperties": false,
-		//	        "description": "",
+		//	        "description": "The result for the IPAM CIDR that defines a specific IP address range, IPAM pool, and associated Anycast IP address.",
 		//	        "properties": {
 		//	          "AnycastIp": {
+		//	            "description": "The specified Anycast IP address allocated from the IPAM pool for this CIDR configuration.",
 		//	            "type": "string"
 		//	          },
 		//	          "Cidr": {
+		//	            "description": "The CIDR that specifies the IP address range for this IPAM configuration.",
 		//	            "type": "string"
 		//	          },
 		//	          "IpamPoolArn": {
+		//	            "description": "The Amazon Resource Name (ARN) of the IPAM pool that the CIDR block is assigned to.",
 		//	            "type": "string"
 		//	          },
 		//	          "Status": {
+		//	            "description": "The current status of the IPAM CIDR configuration.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -140,7 +146,8 @@ func anycastIpListResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: IpAddressType
 				"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The IP address type for the Anycast static IP list.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: IpCount
 				"ip_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -153,23 +160,28 @@ func anycastIpListResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: AnycastIp
 							"anycast_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The specified Anycast IP address allocated from the IPAM pool for this CIDR configuration.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Cidr
 							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The CIDR that specifies the IP address range for this IPAM configuration.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: IpamPoolArn
 							"ipam_pool_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The Amazon Resource Name (ARN) of the IPAM pool that the CIDR block is assigned to.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Status
 							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The current status of the IPAM CIDR configuration.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Computed: true,
+					Description: "The results for the IPAM CIDRs that defines a specific IP address range, IPAM pool, and associated Anycast IP address.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: LastModifiedTime
 				"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -226,6 +238,7 @@ func anycastIpListResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The IP address type for the Anycast static IP list.",
 		//	  "enum": [
 		//	    "ipv4",
 		//	    "dualstack"
@@ -233,8 +246,9 @@ func anycastIpListResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The IP address type for the Anycast static IP list.",
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"ipv4",
@@ -266,18 +280,22 @@ func anycastIpListResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "",
+		//	    "description": "The result for the IPAM CIDR that defines a specific IP address range, IPAM pool, and associated Anycast IP address.",
 		//	    "properties": {
 		//	      "AnycastIp": {
+		//	        "description": "The specified Anycast IP address allocated from the IPAM pool for this CIDR configuration.",
 		//	        "type": "string"
 		//	      },
 		//	      "Cidr": {
+		//	        "description": "The CIDR that specifies the IP address range for this IPAM configuration.",
 		//	        "type": "string"
 		//	      },
 		//	      "IpamPoolArn": {
+		//	        "description": "The Amazon Resource Name (ARN) of the IPAM pool that the CIDR block is assigned to.",
 		//	        "type": "string"
 		//	      },
 		//	      "Status": {
+		//	        "description": "The current status of the IPAM CIDR configuration.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -291,19 +309,23 @@ func anycastIpListResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AnycastIp
 					"anycast_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The specified Anycast IP address allocated from the IPAM pool for this CIDR configuration.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Cidr
 					"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The CIDR that specifies the IP address range for this IPAM configuration.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: IpamPoolArn
 					"ipam_pool_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The Amazon Resource Name (ARN) of the IPAM pool that the CIDR block is assigned to.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The current status of the IPAM CIDR configuration.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -317,14 +339,17 @@ func anycastIpListResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "A list of IPAM CIDR configurations that define the IP address ranges, IPAM pools, and associated Anycast IP addresses.",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "",
+		//	    "description": "Configuration for an IPAM CIDR that defines a specific IP address range, IPAM pool, and associated Anycast IP address.",
 		//	    "properties": {
 		//	      "Cidr": {
+		//	        "description": "The CIDR that specifies the IP address range for this IPAM configuration.",
 		//	        "type": "string"
 		//	      },
 		//	      "IpamPoolArn": {
+		//	        "description": "The Amazon Resource Name (ARN) of the IPAM pool that the CIDR block is assigned to.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -342,8 +367,9 @@ func anycastIpListResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Cidr
 					"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "The CIDR that specifies the IP address range for this IPAM configuration.",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -353,8 +379,9 @@ func anycastIpListResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: IpamPoolArn
 					"ipam_pool_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "The Amazon Resource Name (ARN) of the IPAM pool that the CIDR block is assigned to.",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -364,8 +391,9 @@ func anycastIpListResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			Description: "A list of IPAM CIDR configurations that define the IP address ranges, IPAM pools, and associated Anycast IP addresses.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/

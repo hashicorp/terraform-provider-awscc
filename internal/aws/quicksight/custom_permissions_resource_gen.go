@@ -82,7 +82,43 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "AmazonBedrockARSAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "AmazonBedrockFSAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "AmazonBedrockKRSAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "AmazonSThreeAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "Analysis": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ApproveFlowShareRequests": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "AsanaAction": {
 		//	      "enum": [
 		//	        "DENY"
 		//	      ],
@@ -94,7 +130,115 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "BambooHRAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "BoxAgentAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "BuildCalculatedFieldWithQ": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CanvaAgentAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "ChatAgent": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ComprehendAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ComprehendMedicalAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ConfluenceAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateAmazonBedrockARSAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateAmazonBedrockFSAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateAmazonBedrockKRSAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateAmazonSThreeAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateAsanaAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateBambooHRAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateBoxAgentAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateCanvaAgentAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateComprehendAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateComprehendMedicalAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateConfluenceAction": {
 		//	      "enum": [
 		//	        "DENY"
 		//	      ],
@@ -118,6 +262,198 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "CreateAndUpdateFactSetAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateGenericHTTPAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateGithubAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateGoogleCalendarAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateHubspotAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateHuggingFaceAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateIntercomAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateJiraAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateKnowledgeBases": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateLinearAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateMCPAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateMSExchangeAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateMSTeamsAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateMondayAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateNewRelicAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateNotionAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateOneDriveAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateOpenAPIAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdatePagerDutyAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateSAPBillOfMaterialAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateSAPBusinessPartnerAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateSAPMaterialStockAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateSAPPhysicalInventoryAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateSAPProductMasterDataAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateSalesforceAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateSandPGMIAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateSandPGlobalEnergyAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateServiceNowAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateSharePointAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateSlackAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateSmartsheetAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateTextractAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "CreateAndUpdateThemes": {
 		//	      "enum": [
 		//	        "DENY"
@@ -130,7 +466,19 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "CreateAndUpdateZendeskAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "CreateChatAgents": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateDashboardExecutiveSummaryWithQ": {
 		//	      "enum": [
 		//	        "DENY"
 		//	      ],
@@ -149,6 +497,12 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "Dashboard": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "EditVisualWithQ": {
 		//	      "enum": [
 		//	        "DENY"
 		//	      ],
@@ -190,7 +544,49 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "Extension": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "FactSetAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "Flow": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "GenericHTTPAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "GithubAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "GoogleCalendarAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "HubspotAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "HuggingFaceAction": {
 		//	      "enum": [
 		//	        "DENY"
 		//	      ],
@@ -202,7 +598,85 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "IntercomAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "JiraAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "KnowledgeBase": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "LinearAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "MCPAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "MSExchangeAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "MSTeamsAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ManageSharedFolders": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "MondayAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "NewRelicAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "NotionAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "OneDriveAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "OpenAPIAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "PagerDutyAction": {
 		//	      "enum": [
 		//	        "DENY"
 		//	      ],
@@ -238,7 +712,127 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "SAPBillOfMaterialAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SAPBusinessPartnerAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SAPMaterialStockAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SAPPhysicalInventoryAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SAPProductMasterDataAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SalesforceAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SandPGMIAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SandPGlobalEnergyAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ServiceNowAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareAmazonBedrockARSAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareAmazonBedrockFSAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareAmazonBedrockKRSAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareAmazonSThreeAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "ShareAnalyses": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareAsanaAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareBambooHRAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareBoxAgentAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareCanvaAgentAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareComprehendAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareComprehendMedicalAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareConfluenceAction": {
 		//	      "enum": [
 		//	        "DENY"
 		//	      ],
@@ -262,6 +856,222 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "ShareFactSetAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareGenericHTTPAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareGithubAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareGoogleCalendarAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareHubspotAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareHuggingFaceAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareIntercomAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareJiraAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareKnowledgeBases": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareLinearAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareMCPAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareMSExchangeAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareMSTeamsAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareMondayAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareNewRelicAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareNotionAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareOneDriveAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareOpenAPIAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SharePagerDutyAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SharePointAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareSAPBillOfMaterialAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareSAPBusinessPartnerAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareSAPMaterialStockAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareSAPPhysicalInventoryAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareSAPProductMasterDataAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareSalesforceAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareSandPGMIAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareSandPGlobalEnergyAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareServiceNowAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareSharePointAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareSlackAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareSmartsheetAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareTextractAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareZendeskAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SlackAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SmartsheetAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "Space": {
 		//	      "enum": [
 		//	        "DENY"
@@ -274,7 +1084,55 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "TextractAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Topic": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "UseAgentWebSearch": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseAmazonBedrockARSAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseAmazonBedrockFSAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseAmazonBedrockKRSAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseAmazonSThreeAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseAsanaAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseBambooHRAction": {
 		//	      "enum": [
 		//	        "DENY"
 		//	      ],
@@ -286,7 +1144,235 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "UseBoxAgentAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseCanvaAgentAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseComprehendAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseComprehendMedicalAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseConfluenceAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseFactSetAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseGenericHTTPAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseGithubAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseGoogleCalendarAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseHubspotAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseHuggingFaceAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseIntercomAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseJiraAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseLinearAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseMCPAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseMSExchangeAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseMSTeamsAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseMondayAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseNewRelicAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseNotionAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseOneDriveAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseOpenAPIAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UsePagerDutyAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseSAPBillOfMaterialAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseSAPBusinessPartnerAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseSAPMaterialStockAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseSAPPhysicalInventoryAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseSAPProductMasterDataAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseSalesforceAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseSandPGMIAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseSandPGlobalEnergyAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseServiceNowAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseSharePointAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseSlackAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseSmartsheetAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseTextractAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UseZendeskAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "ViewAccountSPICECapacity": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ZendeskAction": {
 		//	      "enum": [
 		//	        "DENY"
 		//	      ],
@@ -323,8 +1409,86 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: AmazonBedrockARSAction
+				"amazon_bedrock_ars_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AmazonBedrockFSAction
+				"amazon_bedrock_fs_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AmazonBedrockKRSAction
+				"amazon_bedrock_krs_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AmazonSThreeAction
+				"amazon_s_three_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: Analysis
 				"analysis": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ApproveFlowShareRequests
+				"approve_flow_share_requests": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AsanaAction
+				"asana_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -349,8 +1513,242 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: BambooHRAction
+				"bamboo_hr_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: BoxAgentAction
+				"box_agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: BuildCalculatedFieldWithQ
+				"build_calculated_field_with_q": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CanvaAgentAction
+				"canva_agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: ChatAgent
 				"chat_agent": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ComprehendAction
+				"comprehend_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ComprehendMedicalAction
+				"comprehend_medical_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ConfluenceAction
+				"confluence_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateAmazonBedrockARSAction
+				"create_and_update_amazon_bedrock_ars_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateAmazonBedrockFSAction
+				"create_and_update_amazon_bedrock_fs_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateAmazonBedrockKRSAction
+				"create_and_update_amazon_bedrock_krs_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateAmazonSThreeAction
+				"create_and_update_amazon_s_three_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateAsanaAction
+				"create_and_update_asana_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateBambooHRAction
+				"create_and_update_bamboo_hr_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateBoxAgentAction
+				"create_and_update_box_agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateCanvaAgentAction
+				"create_and_update_canva_agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateComprehendAction
+				"create_and_update_comprehend_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateComprehendMedicalAction
+				"create_and_update_comprehend_medical_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateConfluenceAction
+				"create_and_update_confluence_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -401,6 +1799,422 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateFactSetAction
+				"create_and_update_fact_set_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateGenericHTTPAction
+				"create_and_update_generic_http_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateGithubAction
+				"create_and_update_github_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateGoogleCalendarAction
+				"create_and_update_google_calendar_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateHubspotAction
+				"create_and_update_hubspot_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateHuggingFaceAction
+				"create_and_update_hugging_face_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateIntercomAction
+				"create_and_update_intercom_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateJiraAction
+				"create_and_update_jira_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateKnowledgeBases
+				"create_and_update_knowledge_bases": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateLinearAction
+				"create_and_update_linear_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateMCPAction
+				"create_and_update_mcp_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateMSExchangeAction
+				"create_and_update_ms_exchange_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateMSTeamsAction
+				"create_and_update_ms_teams_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateMondayAction
+				"create_and_update_monday_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateNewRelicAction
+				"create_and_update_new_relic_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateNotionAction
+				"create_and_update_notion_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateOneDriveAction
+				"create_and_update_one_drive_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateOpenAPIAction
+				"create_and_update_open_api_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdatePagerDutyAction
+				"create_and_update_pager_duty_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateSAPBillOfMaterialAction
+				"create_and_update_sap_bill_of_material_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateSAPBusinessPartnerAction
+				"create_and_update_sap_business_partner_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateSAPMaterialStockAction
+				"create_and_update_sap_material_stock_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateSAPPhysicalInventoryAction
+				"create_and_update_sap_physical_inventory_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateSAPProductMasterDataAction
+				"create_and_update_sap_product_master_data_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateSalesforceAction
+				"create_and_update_salesforce_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateSandPGMIAction
+				"create_and_update_sand_pgmi_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateSandPGlobalEnergyAction
+				"create_and_update_sand_p_global_energy_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateServiceNowAction
+				"create_and_update_service_now_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateSharePointAction
+				"create_and_update_share_point_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateSlackAction
+				"create_and_update_slack_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateSmartsheetAction
+				"create_and_update_smartsheet_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateTextractAction
+				"create_and_update_textract_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: CreateAndUpdateThemes
 				"create_and_update_themes": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
@@ -427,8 +2241,34 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateZendeskAction
+				"create_and_update_zendesk_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: CreateChatAgents
 				"create_chat_agents": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CreateDashboardExecutiveSummaryWithQ
+				"create_dashboard_executive_summary_with_q": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -468,6 +2308,19 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Dashboard
 				"dashboard": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EditVisualWithQ
+				"edit_visual_with_q": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -557,8 +2410,99 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: Extension
+				"extension": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: FactSetAction
+				"fact_set_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: Flow
 				"flow": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: GenericHTTPAction
+				"generic_http_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: GithubAction
+				"github_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: GoogleCalendarAction
+				"google_calendar_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: HubspotAction
+				"hubspot_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: HuggingFaceAction
+				"hugging_face_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -583,8 +2527,177 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: IntercomAction
+				"intercom_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: JiraAction
+				"jira_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: KnowledgeBase
 				"knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: LinearAction
+				"linear_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MCPAction
+				"mcp_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MSExchangeAction
+				"ms_exchange_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MSTeamsAction
+				"ms_teams_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ManageSharedFolders
+				"manage_shared_folders": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MondayAction
+				"monday_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: NewRelicAction
+				"new_relic_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: NotionAction
+				"notion_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: OneDriveAction
+				"one_drive_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: OpenAPIAction
+				"open_api_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PagerDutyAction
+				"pager_duty_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -661,8 +2774,268 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: SAPBillOfMaterialAction
+				"sap_bill_of_material_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SAPBusinessPartnerAction
+				"sap_business_partner_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SAPMaterialStockAction
+				"sap_material_stock_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SAPPhysicalInventoryAction
+				"sap_physical_inventory_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SAPProductMasterDataAction
+				"sap_product_master_data_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SalesforceAction
+				"salesforce_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SandPGMIAction
+				"sand_pgmi_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SandPGlobalEnergyAction
+				"sand_p_global_energy_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ServiceNowAction
+				"service_now_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareAmazonBedrockARSAction
+				"share_amazon_bedrock_ars_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareAmazonBedrockFSAction
+				"share_amazon_bedrock_fs_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareAmazonBedrockKRSAction
+				"share_amazon_bedrock_krs_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareAmazonSThreeAction
+				"share_amazon_s_three_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: ShareAnalyses
 				"share_analyses": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareAsanaAction
+				"share_asana_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareBambooHRAction
+				"share_bamboo_hr_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareBoxAgentAction
+				"share_box_agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareCanvaAgentAction
+				"share_canva_agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareComprehendAction
+				"share_comprehend_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareComprehendMedicalAction
+				"share_comprehend_medical_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareConfluenceAction
+				"share_confluence_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -713,6 +3086,474 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: ShareFactSetAction
+				"share_fact_set_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareGenericHTTPAction
+				"share_generic_http_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareGithubAction
+				"share_github_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareGoogleCalendarAction
+				"share_google_calendar_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareHubspotAction
+				"share_hubspot_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareHuggingFaceAction
+				"share_hugging_face_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareIntercomAction
+				"share_intercom_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareJiraAction
+				"share_jira_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareKnowledgeBases
+				"share_knowledge_bases": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareLinearAction
+				"share_linear_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareMCPAction
+				"share_mcp_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareMSExchangeAction
+				"share_ms_exchange_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareMSTeamsAction
+				"share_ms_teams_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareMondayAction
+				"share_monday_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareNewRelicAction
+				"share_new_relic_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareNotionAction
+				"share_notion_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareOneDriveAction
+				"share_one_drive_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareOpenAPIAction
+				"share_open_api_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SharePagerDutyAction
+				"share_pager_duty_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SharePointAction
+				"share_point_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareSAPBillOfMaterialAction
+				"share_sap_bill_of_material_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareSAPBusinessPartnerAction
+				"share_sap_business_partner_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareSAPMaterialStockAction
+				"share_sap_material_stock_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareSAPPhysicalInventoryAction
+				"share_sap_physical_inventory_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareSAPProductMasterDataAction
+				"share_sap_product_master_data_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareSalesforceAction
+				"share_salesforce_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareSandPGMIAction
+				"share_sand_pgmi_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareSandPGlobalEnergyAction
+				"share_sand_p_global_energy_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareServiceNowAction
+				"share_service_now_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareSharePointAction
+				"share_share_point_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareSlackAction
+				"share_slack_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareSmartsheetAction
+				"share_smartsheet_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareTextractAction
+				"share_textract_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ShareZendeskAction
+				"share_zendesk_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SlackAction
+				"slack_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SmartsheetAction
+				"smartsheet_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: Space
 				"space": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
@@ -739,8 +3580,112 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: TextractAction
+				"textract_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Topic
+				"topic": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: UseAgentWebSearch
 				"use_agent_web_search": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseAmazonBedrockARSAction
+				"use_amazon_bedrock_ars_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseAmazonBedrockFSAction
+				"use_amazon_bedrock_fs_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseAmazonBedrockKRSAction
+				"use_amazon_bedrock_krs_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseAmazonSThreeAction
+				"use_amazon_s_three_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseAsanaAction
+				"use_asana_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseBambooHRAction
+				"use_bamboo_hr_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -765,8 +3710,502 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: UseBoxAgentAction
+				"use_box_agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseCanvaAgentAction
+				"use_canva_agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseComprehendAction
+				"use_comprehend_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseComprehendMedicalAction
+				"use_comprehend_medical_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseConfluenceAction
+				"use_confluence_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseFactSetAction
+				"use_fact_set_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseGenericHTTPAction
+				"use_generic_http_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseGithubAction
+				"use_github_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseGoogleCalendarAction
+				"use_google_calendar_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseHubspotAction
+				"use_hubspot_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseHuggingFaceAction
+				"use_hugging_face_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseIntercomAction
+				"use_intercom_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseJiraAction
+				"use_jira_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseLinearAction
+				"use_linear_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseMCPAction
+				"use_mcp_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseMSExchangeAction
+				"use_ms_exchange_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseMSTeamsAction
+				"use_ms_teams_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseMondayAction
+				"use_monday_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseNewRelicAction
+				"use_new_relic_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseNotionAction
+				"use_notion_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseOneDriveAction
+				"use_one_drive_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseOpenAPIAction
+				"use_open_api_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UsePagerDutyAction
+				"use_pager_duty_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseSAPBillOfMaterialAction
+				"use_sap_bill_of_material_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseSAPBusinessPartnerAction
+				"use_sap_business_partner_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseSAPMaterialStockAction
+				"use_sap_material_stock_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseSAPPhysicalInventoryAction
+				"use_sap_physical_inventory_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseSAPProductMasterDataAction
+				"use_sap_product_master_data_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseSalesforceAction
+				"use_salesforce_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseSandPGMIAction
+				"use_sand_pgmi_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseSandPGlobalEnergyAction
+				"use_sand_p_global_energy_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseServiceNowAction
+				"use_service_now_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseSharePointAction
+				"use_share_point_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseSlackAction
+				"use_slack_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseSmartsheetAction
+				"use_smartsheet_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseTextractAction
+				"use_textract_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseZendeskAction
+				"use_zendesk_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: ViewAccountSPICECapacity
 				"view_account_spice_capacity": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DENY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ZendeskAction
+				"zendesk_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -908,49 +4347,230 @@ func customPermissionsResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"action": "Action",
-		"add_or_run_anomaly_detection_for_analyses": "AddOrRunAnomalyDetectionForAnalyses",
-		"analysis":       "Analysis",
-		"arn":            "Arn",
-		"automate":       "Automate",
-		"aws_account_id": "AwsAccountId",
-		"capabilities":   "Capabilities",
-		"chat_agent":     "ChatAgent",
-		"create_and_update_dashboard_email_reports":  "CreateAndUpdateDashboardEmailReports",
-		"create_and_update_data_sources":             "CreateAndUpdateDataSources",
-		"create_and_update_datasets":                 "CreateAndUpdateDatasets",
-		"create_and_update_themes":                   "CreateAndUpdateThemes",
-		"create_and_update_threshold_alerts":         "CreateAndUpdateThresholdAlerts",
-		"create_chat_agents":                         "CreateChatAgents",
-		"create_shared_folders":                      "CreateSharedFolders",
-		"create_spice_dataset":                       "CreateSPICEDataset",
-		"custom_permissions_name":                    "CustomPermissionsName",
-		"dashboard":                                  "Dashboard",
-		"export_to_csv":                              "ExportToCsv",
-		"export_to_csv_in_scheduled_reports":         "ExportToCsvInScheduledReports",
-		"export_to_excel":                            "ExportToExcel",
-		"export_to_excel_in_scheduled_reports":       "ExportToExcelInScheduledReports",
-		"export_to_pdf":                              "ExportToPdf",
-		"export_to_pdf_in_scheduled_reports":         "ExportToPdfInScheduledReports",
-		"flow":                                       "Flow",
-		"include_content_in_scheduled_reports_email": "IncludeContentInScheduledReportsEmail",
-		"key":                               "Key",
-		"knowledge_base":                    "KnowledgeBase",
-		"perform_flow_ui_task":              "PerformFlowUiTask",
-		"print_reports":                     "PrintReports",
-		"publish_without_approval":          "PublishWithoutApproval",
-		"rename_shared_folders":             "RenameSharedFolders",
-		"research":                          "Research",
-		"share_analyses":                    "ShareAnalyses",
-		"share_dashboards":                  "ShareDashboards",
-		"share_data_sources":                "ShareDataSources",
-		"share_datasets":                    "ShareDatasets",
-		"space":                             "Space",
-		"subscribe_dashboard_email_reports": "SubscribeDashboardEmailReports",
-		"tags":                              "Tags",
-		"use_agent_web_search":              "UseAgentWebSearch",
-		"use_bedrock_models":                "UseBedrockModels",
-		"value":                             "Value",
-		"view_account_spice_capacity":       "ViewAccountSPICECapacity",
+		"add_or_run_anomaly_detection_for_analyses":        "AddOrRunAnomalyDetectionForAnalyses",
+		"amazon_bedrock_ars_action":                        "AmazonBedrockARSAction",
+		"amazon_bedrock_fs_action":                         "AmazonBedrockFSAction",
+		"amazon_bedrock_krs_action":                        "AmazonBedrockKRSAction",
+		"amazon_s_three_action":                            "AmazonSThreeAction",
+		"analysis":                                         "Analysis",
+		"approve_flow_share_requests":                      "ApproveFlowShareRequests",
+		"arn":                                              "Arn",
+		"asana_action":                                     "AsanaAction",
+		"automate":                                         "Automate",
+		"aws_account_id":                                   "AwsAccountId",
+		"bamboo_hr_action":                                 "BambooHRAction",
+		"box_agent_action":                                 "BoxAgentAction",
+		"build_calculated_field_with_q":                    "BuildCalculatedFieldWithQ",
+		"canva_agent_action":                               "CanvaAgentAction",
+		"capabilities":                                     "Capabilities",
+		"chat_agent":                                       "ChatAgent",
+		"comprehend_action":                                "ComprehendAction",
+		"comprehend_medical_action":                        "ComprehendMedicalAction",
+		"confluence_action":                                "ConfluenceAction",
+		"create_and_update_amazon_bedrock_ars_action":      "CreateAndUpdateAmazonBedrockARSAction",
+		"create_and_update_amazon_bedrock_fs_action":       "CreateAndUpdateAmazonBedrockFSAction",
+		"create_and_update_amazon_bedrock_krs_action":      "CreateAndUpdateAmazonBedrockKRSAction",
+		"create_and_update_amazon_s_three_action":          "CreateAndUpdateAmazonSThreeAction",
+		"create_and_update_asana_action":                   "CreateAndUpdateAsanaAction",
+		"create_and_update_bamboo_hr_action":               "CreateAndUpdateBambooHRAction",
+		"create_and_update_box_agent_action":               "CreateAndUpdateBoxAgentAction",
+		"create_and_update_canva_agent_action":             "CreateAndUpdateCanvaAgentAction",
+		"create_and_update_comprehend_action":              "CreateAndUpdateComprehendAction",
+		"create_and_update_comprehend_medical_action":      "CreateAndUpdateComprehendMedicalAction",
+		"create_and_update_confluence_action":              "CreateAndUpdateConfluenceAction",
+		"create_and_update_dashboard_email_reports":        "CreateAndUpdateDashboardEmailReports",
+		"create_and_update_data_sources":                   "CreateAndUpdateDataSources",
+		"create_and_update_datasets":                       "CreateAndUpdateDatasets",
+		"create_and_update_fact_set_action":                "CreateAndUpdateFactSetAction",
+		"create_and_update_generic_http_action":            "CreateAndUpdateGenericHTTPAction",
+		"create_and_update_github_action":                  "CreateAndUpdateGithubAction",
+		"create_and_update_google_calendar_action":         "CreateAndUpdateGoogleCalendarAction",
+		"create_and_update_hubspot_action":                 "CreateAndUpdateHubspotAction",
+		"create_and_update_hugging_face_action":            "CreateAndUpdateHuggingFaceAction",
+		"create_and_update_intercom_action":                "CreateAndUpdateIntercomAction",
+		"create_and_update_jira_action":                    "CreateAndUpdateJiraAction",
+		"create_and_update_knowledge_bases":                "CreateAndUpdateKnowledgeBases",
+		"create_and_update_linear_action":                  "CreateAndUpdateLinearAction",
+		"create_and_update_mcp_action":                     "CreateAndUpdateMCPAction",
+		"create_and_update_monday_action":                  "CreateAndUpdateMondayAction",
+		"create_and_update_ms_exchange_action":             "CreateAndUpdateMSExchangeAction",
+		"create_and_update_ms_teams_action":                "CreateAndUpdateMSTeamsAction",
+		"create_and_update_new_relic_action":               "CreateAndUpdateNewRelicAction",
+		"create_and_update_notion_action":                  "CreateAndUpdateNotionAction",
+		"create_and_update_one_drive_action":               "CreateAndUpdateOneDriveAction",
+		"create_and_update_open_api_action":                "CreateAndUpdateOpenAPIAction",
+		"create_and_update_pager_duty_action":              "CreateAndUpdatePagerDutyAction",
+		"create_and_update_salesforce_action":              "CreateAndUpdateSalesforceAction",
+		"create_and_update_sand_p_global_energy_action":    "CreateAndUpdateSandPGlobalEnergyAction",
+		"create_and_update_sand_pgmi_action":               "CreateAndUpdateSandPGMIAction",
+		"create_and_update_sap_bill_of_material_action":    "CreateAndUpdateSAPBillOfMaterialAction",
+		"create_and_update_sap_business_partner_action":    "CreateAndUpdateSAPBusinessPartnerAction",
+		"create_and_update_sap_material_stock_action":      "CreateAndUpdateSAPMaterialStockAction",
+		"create_and_update_sap_physical_inventory_action":  "CreateAndUpdateSAPPhysicalInventoryAction",
+		"create_and_update_sap_product_master_data_action": "CreateAndUpdateSAPProductMasterDataAction",
+		"create_and_update_service_now_action":             "CreateAndUpdateServiceNowAction",
+		"create_and_update_share_point_action":             "CreateAndUpdateSharePointAction",
+		"create_and_update_slack_action":                   "CreateAndUpdateSlackAction",
+		"create_and_update_smartsheet_action":              "CreateAndUpdateSmartsheetAction",
+		"create_and_update_textract_action":                "CreateAndUpdateTextractAction",
+		"create_and_update_themes":                         "CreateAndUpdateThemes",
+		"create_and_update_threshold_alerts":               "CreateAndUpdateThresholdAlerts",
+		"create_and_update_zendesk_action":                 "CreateAndUpdateZendeskAction",
+		"create_chat_agents":                               "CreateChatAgents",
+		"create_dashboard_executive_summary_with_q":        "CreateDashboardExecutiveSummaryWithQ",
+		"create_shared_folders":                            "CreateSharedFolders",
+		"create_spice_dataset":                             "CreateSPICEDataset",
+		"custom_permissions_name":                          "CustomPermissionsName",
+		"dashboard":                                        "Dashboard",
+		"edit_visual_with_q":                               "EditVisualWithQ",
+		"export_to_csv":                                    "ExportToCsv",
+		"export_to_csv_in_scheduled_reports":               "ExportToCsvInScheduledReports",
+		"export_to_excel":                                  "ExportToExcel",
+		"export_to_excel_in_scheduled_reports":             "ExportToExcelInScheduledReports",
+		"export_to_pdf":                                    "ExportToPdf",
+		"export_to_pdf_in_scheduled_reports":               "ExportToPdfInScheduledReports",
+		"extension":                                        "Extension",
+		"fact_set_action":                                  "FactSetAction",
+		"flow":                                             "Flow",
+		"generic_http_action":                              "GenericHTTPAction",
+		"github_action":                                    "GithubAction",
+		"google_calendar_action":                           "GoogleCalendarAction",
+		"hubspot_action":                                   "HubspotAction",
+		"hugging_face_action":                              "HuggingFaceAction",
+		"include_content_in_scheduled_reports_email":       "IncludeContentInScheduledReportsEmail",
+		"intercom_action":                                  "IntercomAction",
+		"jira_action":                                      "JiraAction",
+		"key":                                              "Key",
+		"knowledge_base":                                   "KnowledgeBase",
+		"linear_action":                                    "LinearAction",
+		"manage_shared_folders":                            "ManageSharedFolders",
+		"mcp_action":                                       "MCPAction",
+		"monday_action":                                    "MondayAction",
+		"ms_exchange_action":                               "MSExchangeAction",
+		"ms_teams_action":                                  "MSTeamsAction",
+		"new_relic_action":                                 "NewRelicAction",
+		"notion_action":                                    "NotionAction",
+		"one_drive_action":                                 "OneDriveAction",
+		"open_api_action":                                  "OpenAPIAction",
+		"pager_duty_action":                                "PagerDutyAction",
+		"perform_flow_ui_task":                             "PerformFlowUiTask",
+		"print_reports":                                    "PrintReports",
+		"publish_without_approval":                         "PublishWithoutApproval",
+		"rename_shared_folders":                            "RenameSharedFolders",
+		"research":                                         "Research",
+		"salesforce_action":                                "SalesforceAction",
+		"sand_p_global_energy_action":                      "SandPGlobalEnergyAction",
+		"sand_pgmi_action":                                 "SandPGMIAction",
+		"sap_bill_of_material_action":                      "SAPBillOfMaterialAction",
+		"sap_business_partner_action":                      "SAPBusinessPartnerAction",
+		"sap_material_stock_action":                        "SAPMaterialStockAction",
+		"sap_physical_inventory_action":                    "SAPPhysicalInventoryAction",
+		"sap_product_master_data_action":                   "SAPProductMasterDataAction",
+		"service_now_action":                               "ServiceNowAction",
+		"share_amazon_bedrock_ars_action":                  "ShareAmazonBedrockARSAction",
+		"share_amazon_bedrock_fs_action":                   "ShareAmazonBedrockFSAction",
+		"share_amazon_bedrock_krs_action":                  "ShareAmazonBedrockKRSAction",
+		"share_amazon_s_three_action":                      "ShareAmazonSThreeAction",
+		"share_analyses":                                   "ShareAnalyses",
+		"share_asana_action":                               "ShareAsanaAction",
+		"share_bamboo_hr_action":                           "ShareBambooHRAction",
+		"share_box_agent_action":                           "ShareBoxAgentAction",
+		"share_canva_agent_action":                         "ShareCanvaAgentAction",
+		"share_comprehend_action":                          "ShareComprehendAction",
+		"share_comprehend_medical_action":                  "ShareComprehendMedicalAction",
+		"share_confluence_action":                          "ShareConfluenceAction",
+		"share_dashboards":                                 "ShareDashboards",
+		"share_data_sources":                               "ShareDataSources",
+		"share_datasets":                                   "ShareDatasets",
+		"share_fact_set_action":                            "ShareFactSetAction",
+		"share_generic_http_action":                        "ShareGenericHTTPAction",
+		"share_github_action":                              "ShareGithubAction",
+		"share_google_calendar_action":                     "ShareGoogleCalendarAction",
+		"share_hubspot_action":                             "ShareHubspotAction",
+		"share_hugging_face_action":                        "ShareHuggingFaceAction",
+		"share_intercom_action":                            "ShareIntercomAction",
+		"share_jira_action":                                "ShareJiraAction",
+		"share_knowledge_bases":                            "ShareKnowledgeBases",
+		"share_linear_action":                              "ShareLinearAction",
+		"share_mcp_action":                                 "ShareMCPAction",
+		"share_monday_action":                              "ShareMondayAction",
+		"share_ms_exchange_action":                         "ShareMSExchangeAction",
+		"share_ms_teams_action":                            "ShareMSTeamsAction",
+		"share_new_relic_action":                           "ShareNewRelicAction",
+		"share_notion_action":                              "ShareNotionAction",
+		"share_one_drive_action":                           "ShareOneDriveAction",
+		"share_open_api_action":                            "ShareOpenAPIAction",
+		"share_pager_duty_action":                          "SharePagerDutyAction",
+		"share_point_action":                               "SharePointAction",
+		"share_salesforce_action":                          "ShareSalesforceAction",
+		"share_sand_p_global_energy_action":                "ShareSandPGlobalEnergyAction",
+		"share_sand_pgmi_action":                           "ShareSandPGMIAction",
+		"share_sap_bill_of_material_action":                "ShareSAPBillOfMaterialAction",
+		"share_sap_business_partner_action":                "ShareSAPBusinessPartnerAction",
+		"share_sap_material_stock_action":                  "ShareSAPMaterialStockAction",
+		"share_sap_physical_inventory_action":              "ShareSAPPhysicalInventoryAction",
+		"share_sap_product_master_data_action":             "ShareSAPProductMasterDataAction",
+		"share_service_now_action":                         "ShareServiceNowAction",
+		"share_share_point_action":                         "ShareSharePointAction",
+		"share_slack_action":                               "ShareSlackAction",
+		"share_smartsheet_action":                          "ShareSmartsheetAction",
+		"share_textract_action":                            "ShareTextractAction",
+		"share_zendesk_action":                             "ShareZendeskAction",
+		"slack_action":                                     "SlackAction",
+		"smartsheet_action":                                "SmartsheetAction",
+		"space":                                            "Space",
+		"subscribe_dashboard_email_reports":                "SubscribeDashboardEmailReports",
+		"tags":                                             "Tags",
+		"textract_action":                                  "TextractAction",
+		"topic":                                            "Topic",
+		"use_agent_web_search":                             "UseAgentWebSearch",
+		"use_amazon_bedrock_ars_action":                    "UseAmazonBedrockARSAction",
+		"use_amazon_bedrock_fs_action":                     "UseAmazonBedrockFSAction",
+		"use_amazon_bedrock_krs_action":                    "UseAmazonBedrockKRSAction",
+		"use_amazon_s_three_action":                        "UseAmazonSThreeAction",
+		"use_asana_action":                                 "UseAsanaAction",
+		"use_bamboo_hr_action":                             "UseBambooHRAction",
+		"use_bedrock_models":                               "UseBedrockModels",
+		"use_box_agent_action":                             "UseBoxAgentAction",
+		"use_canva_agent_action":                           "UseCanvaAgentAction",
+		"use_comprehend_action":                            "UseComprehendAction",
+		"use_comprehend_medical_action":                    "UseComprehendMedicalAction",
+		"use_confluence_action":                            "UseConfluenceAction",
+		"use_fact_set_action":                              "UseFactSetAction",
+		"use_generic_http_action":                          "UseGenericHTTPAction",
+		"use_github_action":                                "UseGithubAction",
+		"use_google_calendar_action":                       "UseGoogleCalendarAction",
+		"use_hubspot_action":                               "UseHubspotAction",
+		"use_hugging_face_action":                          "UseHuggingFaceAction",
+		"use_intercom_action":                              "UseIntercomAction",
+		"use_jira_action":                                  "UseJiraAction",
+		"use_linear_action":                                "UseLinearAction",
+		"use_mcp_action":                                   "UseMCPAction",
+		"use_monday_action":                                "UseMondayAction",
+		"use_ms_exchange_action":                           "UseMSExchangeAction",
+		"use_ms_teams_action":                              "UseMSTeamsAction",
+		"use_new_relic_action":                             "UseNewRelicAction",
+		"use_notion_action":                                "UseNotionAction",
+		"use_one_drive_action":                             "UseOneDriveAction",
+		"use_open_api_action":                              "UseOpenAPIAction",
+		"use_pager_duty_action":                            "UsePagerDutyAction",
+		"use_salesforce_action":                            "UseSalesforceAction",
+		"use_sand_p_global_energy_action":                  "UseSandPGlobalEnergyAction",
+		"use_sand_pgmi_action":                             "UseSandPGMIAction",
+		"use_sap_bill_of_material_action":                  "UseSAPBillOfMaterialAction",
+		"use_sap_business_partner_action":                  "UseSAPBusinessPartnerAction",
+		"use_sap_material_stock_action":                    "UseSAPMaterialStockAction",
+		"use_sap_physical_inventory_action":                "UseSAPPhysicalInventoryAction",
+		"use_sap_product_master_data_action":               "UseSAPProductMasterDataAction",
+		"use_service_now_action":                           "UseServiceNowAction",
+		"use_share_point_action":                           "UseSharePointAction",
+		"use_slack_action":                                 "UseSlackAction",
+		"use_smartsheet_action":                            "UseSmartsheetAction",
+		"use_textract_action":                              "UseTextractAction",
+		"use_zendesk_action":                               "UseZendeskAction",
+		"value":                                            "Value",
+		"view_account_spice_capacity":                      "ViewAccountSPICECapacity",
+		"zendesk_action":                                   "ZendeskAction",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

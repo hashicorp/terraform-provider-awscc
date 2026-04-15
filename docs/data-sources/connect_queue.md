@@ -21,6 +21,7 @@ Data Source schema for AWS::Connect::Queue
 
 ### Read-Only
 
+- `additional_email_addresses` (Attributes List) The email addresses that agents can use when replying to or initiating email contacts (see [below for nested schema](#nestedatt--additional_email_addresses))
 - `description` (String) The description of the queue.
 - `hours_of_operation_arn` (String) The identifier for the hours of operation.
 - `instance_arn` (String) The identifier of the Amazon Connect instance.
@@ -33,6 +34,14 @@ Data Source schema for AWS::Connect::Queue
 - `status` (String) The status of the queue.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `type` (String) The type of queue.
+
+<a id="nestedatt--additional_email_addresses"></a>
+### Nested Schema for `additional_email_addresses`
+
+Read-Only:
+
+- `email_address_arn` (String) The Amazon Resource Name (ARN) of the email address
+
 
 <a id="nestedatt--outbound_caller_config"></a>
 ### Nested Schema for `outbound_caller_config`

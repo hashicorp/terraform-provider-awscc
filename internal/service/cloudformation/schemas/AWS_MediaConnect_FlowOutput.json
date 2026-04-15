@@ -3,6 +3,22 @@
   "description": "Resource schema for AWS::MediaConnect::FlowOutput",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-mediaconnect.git",
   "definitions": {
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
     "Encryption": {
       "type": "object",
       "description": "Information about the encryption of the flow.",
@@ -27,10 +43,12 @@
         },
         "RoleArn": {
           "type": "string",
+          "pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$",
           "description": "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity)."
         },
         "SecretArn": {
           "type": "string",
+          "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
           "description": " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption."
         }
       },
@@ -231,10 +249,12 @@
   "properties": {
     "FlowArn": {
       "description": "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.",
+      "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:flow:[a-zA-Z0-9-]+:[a-zA-Z0-9_-]+$",
       "type": "string"
     },
     "OutputArn": {
       "description": "The ARN of the output.",
+      "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:output:[a-zA-Z0-9-]+:[a-zA-Z0-9_-]+$",
       "type": "string"
     },
     "CidrAllowList": {
@@ -280,7 +300,6 @@
         "rtp",
         "zixi-pull",
         "rist",
-        "fujitsu-qos",
         "srt-listener",
         "srt-caller",
         "st2110-jpegxs",
@@ -337,6 +356,15 @@
     },
     "RouterIntegrationTransitEncryption": {
       "$ref": "#/definitions/FlowTransitEncryption"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Key-value pairs that can be used to tag and organize this flow output.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     }
   },
   "additionalProperties": false,
@@ -344,7 +372,8 @@
     "FlowArn"
   ],
   "createOnlyProperties": [
-    "/properties/Name"
+    "/properties/Name",
+    "/properties/FlowArn"
   ],
   "readOnlyProperties": [
     "/properties/OutputArn"
@@ -352,23 +381,43 @@
   "primaryIdentifier": [
     "/properties/OutputArn"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "mediaconnect:TagResource",
+      "mediaconnect:UntagResource",
+      "mediaconnect:ListTagsForResource"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
         "iam:PassRole",
-        "mediaconnect:AddFlowOutputs"
+        "mediaconnect:AddFlowOutputs",
+        "mediaconnect:DescribeFlow",
+        "mediaconnect:TagResource",
+        "mediaconnect:ListTagsForResource"
       ]
     },
     "read": {
       "permissions": [
         "mediaconnect:DescribeFlow",
-        "mediaconnect:ListFlows"
+        "mediaconnect:ListFlows",
+        "mediaconnect:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
+        "iam:PassRole",
         "mediaconnect:DescribeFlow",
-        "mediaconnect:UpdateFlowOutput"
+        "mediaconnect:UpdateFlowOutput",
+        "mediaconnect:TagResource",
+        "mediaconnect:UntagResource",
+        "mediaconnect:ListTagsForResource"
       ]
     },
     "delete": {
@@ -382,7 +431,17 @@
       "permissions": [
         "mediaconnect:DescribeFlow",
         "mediaconnect:ListFlows"
-      ]
+      ],
+      "handlerSchema": {
+        "properties": {
+          "FlowArn": {
+            "$ref": "resource-schema.json#/properties/FlowArn"
+          }
+        },
+        "required": [
+          "FlowArn"
+        ]
+      }
     }
   }
 }

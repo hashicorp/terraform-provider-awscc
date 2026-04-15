@@ -40,6 +40,7 @@ resource "awscc_deadline_farm" "example" {
 
 ### Optional
 
+- `cost_scale_factor` (Number)
 - `description` (String)
 - `kms_key_arn` (String)
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))

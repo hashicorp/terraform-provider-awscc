@@ -192,6 +192,33 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Application source config",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ApplicationType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of application",
+		//	  "enum": [
+		//	    "STANDARD",
+		//	    "SERVICE",
+		//	    "MCP_SERVER"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"application_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of application",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"STANDARD",
+					"SERVICE",
+					"MCP_SERVER",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -203,10 +230,14 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The application description.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 1000),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
@@ -489,6 +520,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"application_config":        "ApplicationConfig",
 		"application_id":            "Id",
 		"application_source_config": "ApplicationSourceConfig",
+		"application_type":          "ApplicationType",
 		"approved_origins":          "ApprovedOrigins",
 		"contact_handling":          "ContactHandling",
 		"description":               "Description",

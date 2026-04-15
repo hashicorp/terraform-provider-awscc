@@ -66,7 +66,8 @@ func transitGatewayMeteringPolicyEntryDataSource(ctx context.Context) (datasourc
 		//	    "direct-connect-gateway",
 		//	    "peering",
 		//	    "network-function",
-		//	    "vpn-concentrator"
+		//	    "vpn-concentrator",
+		//	    "client-vpn"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -156,7 +157,8 @@ func transitGatewayMeteringPolicyEntryDataSource(ctx context.Context) (datasourc
 		//	    "direct-connect-gateway",
 		//	    "peering",
 		//	    "network-function",
-		//	    "vpn-concentrator"
+		//	    "vpn-concentrator",
+		//	    "client-vpn"
 		//	  ],
 		//	  "type": "string"
 		//	}

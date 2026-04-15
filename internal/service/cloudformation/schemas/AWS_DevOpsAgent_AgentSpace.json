@@ -3,6 +3,29 @@
   "description": "Resource Type definition for AWS::DevOpsAgent::AgentSpace",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
   "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
     "OperatorApp": {
       "type": "object",
       "additionalProperties": false,
@@ -82,8 +105,23 @@
       "minLength": 1,
       "maxLength": 1000
     },
+    "KmsKeyArn": {
+      "description": "The ARN of the KMS key to use for encryption.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
     "OperatorApp": {
       "$ref": "#/definitions/OperatorApp"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     },
     "CreatedAt": {
       "description": "The timestamp when the resource was created.",
@@ -102,7 +140,16 @@
   },
   "additionalProperties": false,
   "tagging": {
-    "taggable": false
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "aidevops:TagResource",
+      "aidevops:UntagResource",
+      "aidevops:ListTagsForResource"
+    ]
   },
   "required": [
     "Name"
@@ -118,6 +165,9 @@
     "/properties/OperatorApp/Idc/CreatedAt",
     "/properties/OperatorApp/Idc/UpdatedAt"
   ],
+  "createOnlyProperties": [
+    "/properties/KmsKeyArn"
+  ],
   "primaryIdentifier": [
     "/properties/AgentSpaceId"
   ],
@@ -128,7 +178,21 @@
         "aidevops:GetAgentSpace",
         "aidevops:EnableOperatorApp",
         "aidevops:GetOperatorAppTeams",
+        "aidevops:TagResource",
+        "aidevops:ListTagsForResource",
+        "iam:CreateServiceLinkedRole",
         "iam:PassRole",
+        "kms:CreateGrant",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:GenerateDataKey",
+        "kms:GenerateDataKeyPair",
+        "kms:GenerateDataKeyPairWithoutPlaintext",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo",
+        "kms:RetireGrant",
         "sso:CreateApplication",
         "sso:DeleteApplication",
         "sso:PutApplicationAccessScope",
@@ -143,7 +207,9 @@
     "read": {
       "permissions": [
         "aidevops:GetAgentSpace",
-        "aidevops:GetOperatorAppTeams"
+        "aidevops:GetOperatorAppTeams",
+        "aidevops:ListTagsForResource",
+        "kms:Decrypt"
       ]
     },
     "update": {
@@ -153,7 +219,21 @@
         "aidevops:EnableOperatorApp",
         "aidevops:DisableOperatorApp",
         "aidevops:GetOperatorAppTeams",
+        "aidevops:TagResource",
+        "aidevops:UntagResource",
+        "aidevops:ListTagsForResource",
         "iam:PassRole",
+        "kms:CreateGrant",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:GenerateDataKey",
+        "kms:GenerateDataKeyPair",
+        "kms:GenerateDataKeyPairWithoutPlaintext",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo",
+        "kms:RetireGrant",
         "sso:CreateApplication",
         "sso:DeleteApplication",
         "sso:PutApplicationAccessScope",
@@ -178,7 +258,8 @@
     },
     "list": {
       "permissions": [
-        "aidevops:ListAgentSpaces"
+        "aidevops:ListAgentSpaces",
+        "kms:Decrypt"
       ]
     }
   }

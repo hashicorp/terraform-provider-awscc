@@ -97,6 +97,7 @@ Read-Only:
 - `image_uri` (String) URI of a [container image](https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html) in the Amazon ECR registry.
 - `s3_bucket` (String) An Amazon S3 bucket in the same AWS-Region as your function. The bucket can be in a different AWS-account.
 - `s3_key` (String) The Amazon S3 key of the deployment package.
+- `s3_object_storage_mode` (String)
 - `s3_object_version` (String) For versioned objects, the version of the deployment package object to use.
 - `source_kms_key_arn` (String) The ARN of the KMSlong (KMS) customer managed key that's used to encrypt your function's .zip deployment package. If you don't provide a customer managed key, Lambda uses an [owned key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk).
 - `zip_file` (String) (Node.js and Python) The source code of your Lambda function. If you include your function source inline with this parameter, CFN places it in a file named ``index`` and zips it to create a [deployment package](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html). This zip file cannot exceed 4MB. For the ``Handler`` property, the first part of the handler identifier must be ``index``. For example, ``index.handler``.

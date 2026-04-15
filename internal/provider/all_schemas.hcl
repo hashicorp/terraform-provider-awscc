@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1320 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1359 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -283,6 +283,10 @@ resource_schema "aws_apigatewayv2_route_response" {
   cloudformation_type_name = "AWS::ApiGatewayV2::RouteResponse"
 }
 
+resource_schema "aws_apigatewayv2_stage" {
+  cloudformation_type_name = "AWS::ApiGatewayV2::Stage"
+}
+
 resource_schema "aws_apigatewayv2_vpc_link" {
   cloudformation_type_name = "AWS::ApiGatewayV2::VpcLink"
 }
@@ -407,6 +411,10 @@ resource_schema "aws_appstream_entitlement" {
 
 resource_schema "aws_appstream_image_builder" {
   cloudformation_type_name = "AWS::AppStream::ImageBuilder"
+}
+
+resource_schema "aws_appstream_stack" {
+  cloudformation_type_name = "AWS::AppStream::Stack"
 }
 
 resource_schema "aws_appsync_api" {
@@ -606,12 +614,20 @@ resource_schema "aws_batch_job_queue" {
   cloudformation_type_name = "AWS::Batch::JobQueue"
 }
 
+resource_schema "aws_batch_quota_share" {
+  cloudformation_type_name = "AWS::Batch::QuotaShare"
+}
+
 resource_schema "aws_batch_scheduling_policy" {
   cloudformation_type_name = "AWS::Batch::SchedulingPolicy"
 }
 
 resource_schema "aws_batch_service_environment" {
   cloudformation_type_name = "AWS::Batch::ServiceEnvironment"
+}
+
+resource_schema "aws_bcmpricingcalculator_bill_scenario" {
+  cloudformation_type_name = "AWS::BcmPricingCalculator::BillScenario"
 }
 
 resource_schema "aws_bedrock_agent" {
@@ -639,6 +655,10 @@ resource_schema "aws_bedrock_blueprint" {
   cloudformation_type_name = "AWS::Bedrock::Blueprint"
 }
 
+resource_schema "aws_bedrock_data_automation_library" {
+  cloudformation_type_name = "AWS::Bedrock::DataAutomationLibrary"
+}
+
 resource_schema "aws_bedrock_data_automation_project" {
   cloudformation_type_name = "AWS::Bedrock::DataAutomationProject"
 }
@@ -646,6 +666,10 @@ resource_schema "aws_bedrock_data_automation_project" {
 resource_schema "aws_bedrock_data_source" {
   cloudformation_type_name               = "AWS::Bedrock::DataSource"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_bedrock_enforced_guardrail_configuration" {
+  cloudformation_type_name = "AWS::Bedrock::EnforcedGuardrailConfiguration"
 }
 
 resource_schema "aws_bedrock_flow" {
@@ -694,6 +718,15 @@ resource_schema "aws_bedrock_prompt_version" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_bedrock_resource_policy" {
+  cloudformation_type_name               = "AWS::Bedrock::ResourcePolicy"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_bedrockagentcore_api_key_credential_provider" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::ApiKeyCredentialProvider"
+}
+
 resource_schema "aws_bedrockagentcore_browser_custom" {
   cloudformation_type_name = "AWS::BedrockAgentCore::BrowserCustom"
 }
@@ -712,6 +745,10 @@ resource_schema "aws_bedrockagentcore_evaluator" {
 
 resource_schema "aws_bedrockagentcore_online_evaluation_config" {
   cloudformation_type_name = "AWS::BedrockAgentCore::OnlineEvaluationConfig"
+}
+
+resource_schema "aws_bedrockagentcore_o_auth_2_credential_provider" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::OAuth2CredentialProvider"
 }
 
 resource_schema "aws_bedrockagentcore_policy" {
@@ -776,6 +813,10 @@ resource_schema "aws_billingconductor_pricing_plan" {
 
 resource_schema "aws_billingconductor_pricing_rule" {
   cloudformation_type_name = "AWS::BillingConductor::PricingRule"
+}
+
+resource_schema "aws_braket_spending_limit" {
+  cloudformation_type_name = "AWS::Braket::SpendingLimit"
 }
 
 resource_schema "aws_budgets_budgets_action" {
@@ -891,6 +932,14 @@ resource_schema "aws_cleanrooms_membership" {
 resource_schema "aws_cleanrooms_privacy_budget_template" {
   cloudformation_type_name               = "AWS::CleanRooms::PrivacyBudgetTemplate"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_cleanroomsml_configured_model_algorithm" {
+  cloudformation_type_name = "AWS::CleanRoomsML::ConfiguredModelAlgorithm"
+}
+
+resource_schema "aws_cleanroomsml_configured_model_algorithm_association" {
+  cloudformation_type_name = "AWS::CleanRoomsML::ConfiguredModelAlgorithmAssociation"
 }
 
 resource_schema "aws_cleanroomsml_training_dataset" {
@@ -1518,6 +1567,10 @@ resource_schema "aws_customerprofiles_segment_definition" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_customerprofiles_recommender" {
+  cloudformation_type_name = "AWS::CustomerProfiles::Recommender"
+}
+
 resource_schema "aws_dax_subnet_group" {
   cloudformation_type_name = "AWS::DAX::SubnetGroup"
 }
@@ -1917,6 +1970,10 @@ resource_schema "aws_ec2_ipam_prefix_list_resolver" {
   cloudformation_type_name = "AWS::EC2::IPAMPrefixListResolver"
 }
 
+resource_schema "aws_ec2_ipam_prefix_list_resolver_target" {
+  cloudformation_type_name = "AWS::EC2::IPAMPrefixListResolverTarget"
+}
+
 resource_schema "aws_ec2_ipam_resource_discovery" {
   cloudformation_type_name = "AWS::EC2::IPAMResourceDiscovery"
 }
@@ -2078,6 +2135,10 @@ resource_schema "aws_ec2_snapshot_block_public_access" {
 
 resource_schema "aws_ec2_spot_fleet" {
   cloudformation_type_name = "AWS::EC2::SpotFleet"
+}
+
+resource_schema "aws_ec2_sql_ha_standby_detected_instance" {
+  cloudformation_type_name = "AWS::EC2::SqlHaStandbyDetectedInstance"
 }
 
 resource_schema "aws_ec2_subnet" {
@@ -2318,6 +2379,10 @@ resource_schema "aws_ecs_cluster_capacity_provider_associations" {
   cloudformation_type_name = "AWS::ECS::ClusterCapacityProviderAssociations"
 }
 
+resource_schema "aws_ecs_daemon" {
+  cloudformation_type_name = "AWS::ECS::Daemon"
+}
+
 resource_schema "aws_ecs_express_gateway_service" {
   cloudformation_type_name               = "AWS::ECS::ExpressGatewayService"
   suppress_plural_data_source_generation = true
@@ -2393,6 +2458,17 @@ resource_schema "aws_eks_pod_identity_association" {
   suppress_plural_data_source_generation = true
 }
 
+# This resource was not present in the 04/01/2026 refresh
+#resource_schema "aws_emr_cluster" {
+#  cloudformation_type_name = "AWS::EMR::Cluster"
+#
+#  # Suppression Reason:
+#  # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/3100
+#  suppress_resource_generation             = true
+#  suppress_singular_data_source_generation = true
+#  suppress_plural_data_source_generation   = true
+#}
+
 resource_schema "aws_emr_security_configuration" {
   cloudformation_type_name = "AWS::EMR::SecurityConfiguration"
 }
@@ -2444,6 +2520,10 @@ resource_schema "aws_elasticache_global_replication_group" {
 
 resource_schema "aws_elasticache_parameter_group" {
   cloudformation_type_name = "AWS::ElastiCache::ParameterGroup"
+}
+
+resource_schema "aws_elasticache_replication_group" {
+  cloudformation_type_name = "AWS::ElastiCache::ReplicationGroup"
 }
 
 resource_schema "aws_elasticache_serverless_cache" {
@@ -2506,6 +2586,10 @@ resource_schema "aws_elasticloadbalancingv2_trust_store" {
 resource_schema "aws_elasticloadbalancingv2_trust_store_revocation" {
   cloudformation_type_name               = "AWS::ElasticLoadBalancingV2::TrustStoreRevocation"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_elementalinference_feed" {
+  cloudformation_type_name = "AWS::ElementalInference::Feed"
 }
 
 resource_schema "aws_entityresolution_id_mapping_workflow" {
@@ -2733,6 +2817,10 @@ resource_schema "aws_globalaccelerator_endpoint_group" {
 
 resource_schema "aws_globalaccelerator_listener" {
   cloudformation_type_name = "AWS::GlobalAccelerator::Listener"
+}
+
+resource_schema "aws_glue_catalog" {
+  cloudformation_type_name = "AWS::Glue::Catalog"
 }
 
 resource_schema "aws_glue_crawler" {
@@ -3058,6 +3146,10 @@ resource_schema "aws_internetmonitor_monitor" {
 
 resource_schema "aws_invoicing_invoice_unit" {
   cloudformation_type_name = "AWS::Invoicing::InvoiceUnit"
+}
+
+resource_schema "aws_interconnect_connection" {
+  cloudformation_type_name = "AWS::Interconnect::Connection"
 }
 
 resource_schema "aws_iot_account_audit_configuration" {
@@ -4215,6 +4307,16 @@ resource_schema "aws_notifications_organizational_unit_association" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_novaact_workflow_definition" {
+  cloudformation_type_name = "AWS::NovaAct::WorkflowDefinition"
+
+  # Suppression Reason: TypeNotFoundException: The type 'AWS::NovaAct::WorkflowDefinition' cannot be found
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/3105
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = false
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_notificationscontacts_email_contact" {
   cloudformation_type_name = "AWS::NotificationsContacts::EmailContact"
 }
@@ -4229,6 +4331,10 @@ resource_schema "aws_observabilityadmin_organization_telemetry_rule" {
 
 resource_schema "aws_observabilityadmin_s3_table_integration" {
   cloudformation_type_name = "AWS::ObservabilityAdmin::S3TableIntegration"
+}
+
+resource_schema "aws_observabilityadmin_telemetry_enrichment" {
+  cloudformation_type_name = "AWS::ObservabilityAdmin::TelemetryEnrichment"
 }
 
 resource_schema "aws_observabilityadmin_telemetry_pipelines" {
@@ -4276,6 +4382,10 @@ resource_schema "aws_oam_sink" {
 
 resource_schema "aws_omics_annotation_store" {
   cloudformation_type_name = "AWS::Omics::AnnotationStore"
+}
+
+resource_schema "aws_omics_configuration" {
+  cloudformation_type_name = "AWS::Omics::Configuration"
 }
 
 resource_schema "aws_omics_reference_store" {
@@ -4842,6 +4952,39 @@ resource_schema "aws_route53_key_signing_key" {
   cloudformation_type_name = "AWS::Route53::KeySigningKey"
 }
 
+resource_schema "aws_route53globalresolver_access_source" {
+  cloudformation_type_name               = "AWS::Route53GlobalResolver::AccessSource"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_route53globalresolver_access_token" {
+  cloudformation_type_name               = "AWS::Route53GlobalResolver::AccessToken"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_route53globalresolver_dns_view" {
+  cloudformation_type_name               = "AWS::Route53GlobalResolver::DnsView"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_route53globalresolver_firewall_domain_list" {
+  cloudformation_type_name = "AWS::Route53GlobalResolver::FirewallDomainList"
+}
+
+resource_schema "aws_route53globalresolver_firewall_rule" {
+  cloudformation_type_name               = "AWS::Route53GlobalResolver::FirewallRule"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_route53globalresolver_global_resolver" {
+  cloudformation_type_name = "AWS::Route53GlobalResolver::GlobalResolver"
+}
+
+resource_schema "aws_route53globalresolver_hosted_zone_association" {
+  cloudformation_type_name               = "AWS::Route53GlobalResolver::HostedZoneAssociation"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_route53_record_set" {
   cloudformation_type_name               = "AWS::Route53::RecordSet"
   suppress_plural_data_source_generation = true
@@ -5011,6 +5154,24 @@ resource_schema "aws_s3express_bucket_policy" {
 
 resource_schema "aws_s3express_directory_bucket" {
   cloudformation_type_name = "AWS::S3Express::DirectoryBucket"
+}
+
+resource_schema "aws_s3files_access_point" {
+  cloudformation_type_name               = "AWS::S3Files::AccessPoint"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_s3files_file_system" {
+  cloudformation_type_name = "AWS::S3Files::FileSystem"
+}
+
+resource_schema "aws_s3files_file_system_policy" {
+  cloudformation_type_name = "AWS::S3Files::FileSystemPolicy"
+}
+
+resource_schema "aws_s3files_mount_target" {
+  cloudformation_type_name               = "AWS::S3Files::MountTarget"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_s3objectlambda_access_point" {
@@ -5365,6 +5526,10 @@ resource_schema "aws_sagemaker_mlflow_tracking_server" {
   cloudformation_type_name = "AWS::SageMaker::MlflowTrackingServer"
 }
 
+resource_schema "aws_sagemaker_model" {
+  cloudformation_type_name = "AWS::SageMaker::Model"
+}
+
 resource_schema "aws_sagemaker_model_bias_job_definition" {
   cloudformation_type_name = "AWS::SageMaker::ModelBiasJobDefinition"
 }
@@ -5450,6 +5615,23 @@ resource_schema "aws_secretsmanager_secret" {
 
 resource_schema "aws_secretsmanager_secret_target_attachment" {
   cloudformation_type_name = "AWS::SecretsManager::SecretTargetAttachment"
+}
+
+resource_schema "aws_securityagent_agent_space" {
+  cloudformation_type_name = "AWS::SecurityAgent::AgentSpace"
+}
+
+resource_schema "aws_securityagent_application" {
+  cloudformation_type_name = "AWS::SecurityAgent::Application"
+}
+
+resource_schema "aws_securityagent_pentest" {
+  cloudformation_type_name               = "AWS::SecurityAgent::Pentest"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_securityagent_target_domain" {
+  cloudformation_type_name = "AWS::SecurityAgent::TargetDomain"
 }
 
 resource_schema "aws_securityhub_aggregator_v2" {
@@ -5594,6 +5776,11 @@ resource_schema "aws_servicecatalog_service_action" {
 
 resource_schema "aws_servicecatalog_service_action_association" {
   cloudformation_type_name               = "AWS::ServiceCatalog::ServiceActionAssociation"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_servicecatalog_stack_set_constraint" {
+  cloudformation_type_name               = "AWS::ServiceCatalog::StackSetConstraint"
   suppress_plural_data_source_generation = true
 }
 
@@ -5759,6 +5946,11 @@ resource_schema "aws_transfer_workflow" {
   cloudformation_type_name = "AWS::Transfer::Workflow"
 }
 
+resource_schema "aws_uxc_account_customization" {
+  cloudformation_type_name               = "AWS::UXC::AccountCustomization"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_verifiedpermissions_identity_source" {
   cloudformation_type_name               = "AWS::VerifiedPermissions::IdentitySource"
   suppress_plural_data_source_generation = true
@@ -5796,9 +5988,9 @@ resource_schema "aws_vpclattice_domain_verification" {
   cloudformation_type_name = "AWS::VpcLattice::DomainVerification"
 
   # Suppression Reason:
-  # error generating Terraform resource import examples generation instructions: ../service/cloudformation/schemas/AWS_VpcLattice_DomainVerification.json: 
+  # error generating Terraform resource import examples generation instructions: ../service/cloudformation/schemas/AWS_VpcLattice_DomainVerification.json:
   # emitting schema code: value overwrites Value for Terraform attribute value
-  # 
+  #
   # Ref: https://github.com/hashicorp/terraform-provider-awscc/issues/2901
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true

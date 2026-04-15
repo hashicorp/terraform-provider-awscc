@@ -147,6 +147,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "enum": [
+		//	    "Pending",
 		//	    "InvalidQuery",
 		//	    "Complete",
 		//	    "Failed",

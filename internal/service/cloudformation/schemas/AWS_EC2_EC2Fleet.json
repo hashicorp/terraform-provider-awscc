@@ -10,6 +10,9 @@
     "OnDemandOptions": {
       "$ref": "#/definitions/OnDemandOptionsRequest"
     },
+    "ReservedCapacityOptions": {
+      "$ref": "#/definitions/ReservedCapacityOptionsRequest"
+    },
     "Type": {
       "type": "string",
       "enum": [
@@ -141,7 +144,8 @@
           "type": "string",
           "enum": [
             "on-demand",
-            "spot"
+            "spot",
+            "reserved-capacity"
           ]
         },
         "TargetCapacityUnitType": {
@@ -296,6 +300,22 @@
           "enum": [
             "use-capacity-reservations-first"
           ]
+        }
+      }
+    },
+    "ReservedCapacityOptionsRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ReservationTypes": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string",
+            "enum": [
+              "interruptible-capacity-reservation"
+            ]
+          }
         }
       }
     },
@@ -777,6 +797,7 @@
   "createOnlyProperties": [
     "/properties/LaunchTemplateConfigs",
     "/properties/OnDemandOptions",
+    "/properties/ReservedCapacityOptions",
     "/properties/ReplaceUnhealthyInstances",
     "/properties/SpotOptions",
     "/properties/TagSpecifications",

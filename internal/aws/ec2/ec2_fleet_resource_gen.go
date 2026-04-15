@@ -1484,6 +1484,51 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 				boolplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ReservedCapacityOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ReservationTypes": {
+		//	      "items": {
+		//	        "enum": [
+		//	          "interruptible-capacity-reservation"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"reserved_capacity_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ReservationTypes
+				"reservation_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
+								"interruptible-capacity-reservation",
+							),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SpotOptions
 		// CloudFormation resource type schema:
 		//
@@ -1879,7 +1924,8 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	    "DefaultTargetCapacityType": {
 		//	      "enum": [
 		//	        "on-demand",
-		//	        "spot"
+		//	        "spot",
+		//	        "reserved-capacity"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -1916,6 +1962,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 						stringvalidator.OneOf(
 							"on-demand",
 							"spot",
+							"reserved-capacity",
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2128,6 +2175,8 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"replacement_strategy":                        "ReplacementStrategy",
 		"require_encryption_in_transit":               "RequireEncryptionInTransit",
 		"require_hibernate_support":                   "RequireHibernateSupport",
+		"reservation_types":                           "ReservationTypes",
+		"reserved_capacity_options":                   "ReservedCapacityOptions",
 		"resource_type":                               "ResourceType",
 		"single_availability_zone":                    "SingleAvailabilityZone",
 		"single_instance_type":                        "SingleInstanceType",

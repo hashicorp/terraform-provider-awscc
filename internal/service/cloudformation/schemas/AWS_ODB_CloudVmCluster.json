@@ -120,6 +120,25 @@
       "required": [
         "DbServerId"
       ]
+    },
+    "IamRole": {
+      "description": "An AWS Identity and Access Management (IAM) service role associated with the VM cluster.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AwsIntegration": {
+          "description": "The AWS integration configuration settings for the AWS Identity and Access Management (IAM) service role.",
+          "type": "string"
+        },
+        "IamRoleArn": {
+          "description": "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) service role.",
+          "type": "string"
+        },
+        "Status": {
+          "description": "The current status of the AWS Identity and Access Management (IAM) service role.",
+          "type": "string"
+        }
+      }
     }
   },
   "properties": {
@@ -316,6 +335,15 @@
       "items": {
         "$ref": "#/definitions/DbNode"
       }
+    },
+    "IamRoles": {
+      "type": "array",
+      "description": "The AWS Identity and Access Management (IAM) service roles associated with the VM cluster.",
+      "insertionOrder": false,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/IamRole"
+      }
     }
   },
   "additionalProperties": false,
@@ -373,7 +401,8 @@
     "/properties/DbNodes/*/BackupVnic2Id",
     "/properties/DbNodes/*/VnicId",
     "/properties/DbNodes/*/Vnic2Id",
-    "/properties/DbNodes/*/HostIpId"
+    "/properties/DbNodes/*/HostIpId",
+    "/properties/IamRoles/*/Status"
   ],
   "writeOnlyProperties": [
     "/properties/ScanListenerPortTcp"
@@ -389,6 +418,7 @@
     "create": {
       "permissions": [
         "iam:CreateServiceLinkedRole",
+        "iam:PassRole",
         "odb:CreateCloudVmCluster",
         "odb:TagResource",
         "odb:GetCloudVmCluster",
@@ -398,7 +428,8 @@
         "ec2:DescribeAvailabilityZones",
         "odb:ListDbNodes",
         "odb:GetDbNode",
-        "odb:CreateDbNode"
+        "odb:CreateDbNode",
+        "odb:AssociateIamRoleToResource"
       ],
       "timeoutInMinutes": 2160
     },
@@ -413,6 +444,7 @@
     },
     "update": {
       "permissions": [
+        "iam:PassRole",
         "odb:TagResource",
         "odb:UntagResource",
         "odb:GetCloudVmCluster",
@@ -420,7 +452,9 @@
         "odb:ListTagsForResource",
         "odb:ListDbNodes",
         "odb:GetDbNode",
-        "sts:GetCallerIdentity"
+        "sts:GetCallerIdentity",
+        "odb:AssociateIamRoleToResource",
+        "odb:DisassociateIamRoleFromResource"
       ]
     },
     "delete": {

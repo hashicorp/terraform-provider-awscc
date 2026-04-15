@@ -20,6 +20,9 @@
     "StorageClassConfiguration": {
       "$ref": "#/definitions/StorageClassConfiguration"
     },
+    "ReplicationConfiguration": {
+      "$ref": "#/definitions/ReplicationConfiguration"
+    },
     "Tags": {
       "description": "User tags (key-value pairs) to associate with the table bucket.",
       "type": "array",
@@ -119,6 +122,63 @@
       },
       "additionalProperties": false
     },
+    "ReplicationConfiguration": {
+      "type": "object",
+      "description": "Specifies replication configuration for the table bucket",
+      "properties": {
+        "Role": {
+          "type": "string",
+          "description": "The ARN of the IAM role to use for replication"
+        },
+        "Rules": {
+          "type": "array",
+          "description": "List of replication rules",
+          "items": {
+            "$ref": "#/definitions/ReplicationRule"
+          },
+          "minItems": 1,
+          "maxItems": 1
+        }
+      },
+      "required": [
+        "Role",
+        "Rules"
+      ],
+      "additionalProperties": false
+    },
+    "ReplicationRule": {
+      "type": "object",
+      "description": "A replication rule for the table bucket",
+      "properties": {
+        "Destinations": {
+          "type": "array",
+          "description": "List of replication destinations",
+          "items": {
+            "$ref": "#/definitions/ReplicationDestination"
+          },
+          "minItems": 1,
+          "maxItems": 5
+        }
+      },
+      "required": [
+        "Destinations"
+      ],
+      "additionalProperties": false
+    },
+    "ReplicationDestination": {
+      "type": "object",
+      "description": "A replication destination",
+      "properties": {
+        "DestinationTableBucketARN": {
+          "type": "string",
+          "description": "The ARN of the destination table bucket"
+        }
+      },
+      "required": [
+        "DestinationTableBucketARN"
+      ],
+      "additionalProperties": false
+    },
     "Tag": {
       "type": "object",
       "additionalProperties": false,
@@ -174,14 +234,17 @@
         "s3tables:PutTableBucketMetricsConfiguration",
         "s3tables:PutTableBucketEncryption",
         "s3tables:PutTableBucketStorageClass",
+        "s3tables:PutTableBucketReplication",
         "s3tables:GetTableBucket",
         "s3tables:GetTableBucketMaintenanceConfiguration",
         "s3tables:GetTableBucketMetricsConfiguration",
         "s3tables:GetTableBucketEncryption",
         "s3tables:GetTableBucketStorageClass",
+        "s3tables:GetTableBucketReplication",
         "kms:DescribeKey",
         "s3tables:TagResource",
-        "s3tables:ListTagsForResource"
+        "s3tables:ListTagsForResource",
+        "iam:PassRole"
       ]
     },
     "read": {
@@ -191,6 +254,7 @@
         "s3tables:GetTableBucketMetricsConfiguration",
         "s3tables:GetTableBucketEncryption",
         "s3tables:GetTableBucketStorageClass",
+        "s3tables:GetTableBucketReplication",
         "s3tables:ListTagsForResource"
       ]
     },
@@ -201,16 +265,20 @@
         "s3tables:PutTableBucketMetricsConfiguration",
         "s3tables:PutTableBucketEncryption",
         "s3tables:PutTableBucketStorageClass",
+        "s3tables:PutTableBucketReplication",
+        "s3tables:DeleteTableBucketReplication",
         "s3tables:GetTableBucketMaintenanceConfiguration",
         "s3tables:GetTableBucketMetricsConfiguration",
         "s3tables:GetTableBucketEncryption",
         "s3tables:GetTableBucketStorageClass",
+        "s3tables:GetTableBucketReplication",
         "s3tables:DeleteTableBucketEncryption",
         "s3tables:GetTableBucket",
         "kms:DescribeKey",
         "s3tables:TagResource",
         "s3tables:UntagResource",
-        "s3tables:ListTagsForResource"
+        "s3tables:ListTagsForResource",
+        "iam:PassRole"
       ]
     },
     "delete": {

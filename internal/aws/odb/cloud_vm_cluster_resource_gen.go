@@ -20,6 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -645,6 +646,73 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: IamRoles
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS Identity and Access Management (IAM) service roles associated with the VM cluster.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "An AWS Identity and Access Management (IAM) service role associated with the VM cluster.",
+		//	    "properties": {
+		//	      "AwsIntegration": {
+		//	        "description": "The AWS integration configuration settings for the AWS Identity and Access Management (IAM) service role.",
+		//	        "type": "string"
+		//	      },
+		//	      "IamRoleArn": {
+		//	        "description": "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) service role.",
+		//	        "type": "string"
+		//	      },
+		//	      "Status": {
+		//	        "description": "The current status of the AWS Identity and Access Management (IAM) service role.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"iam_roles": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AwsIntegration
+					"aws_integration": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The AWS integration configuration settings for the AWS Identity and Access Management (IAM) service role.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: IamRoleArn
+					"iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) service role.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The current status of the AWS Identity and Access Management (IAM) service role.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The AWS Identity and Access Management (IAM) service roles associated with the VM cluster.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IsLocalBackupEnabled
 		// CloudFormation resource type schema:
 		//
@@ -1068,6 +1136,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"aws_integration":                 "AwsIntegration",
 		"backup_ip_id":                    "BackupIpId",
 		"backup_vnic_2_id":                "BackupVnic2Id",
 		"cloud_exadata_infrastructure_id": "CloudExadataInfrastructureId",
@@ -1091,6 +1160,8 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		"gi_version":                      "GiVersion",
 		"host_ip_id":                      "HostIpId",
 		"hostname":                        "Hostname",
+		"iam_role_arn":                    "IamRoleArn",
+		"iam_roles":                       "IamRoles",
 		"is_diagnostics_events_enabled":   "IsDiagnosticsEventsEnabled",
 		"is_health_monitoring_enabled":    "IsHealthMonitoringEnabled",
 		"is_incident_logs_enabled":        "IsIncidentLogsEnabled",
