@@ -99,7 +99,7 @@ func Test_comparePathsNumerically(t *testing.T) {
 	}
 }
 
-func Test_replaceTagsPatchWithFullReplace(t *testing.T) {
+func Test_replaceKeyValueArrayPatchesWithFullReplace(t *testing.T) {
 	tests := []struct {
 		name     string
 		patch    []jsonpatch.JsonPatchOperation
@@ -123,6 +123,32 @@ func Test_replaceTagsPatchWithFullReplace(t *testing.T) {
 			},
 		},
 		{
+			name: "handles LoadBalancerAttributes key-value array",
+			patch: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/LoadBalancerAttributes/0", Value: map[string]any{"Key": "idle_timeout", "Value": "60"}},
+				{Operation: "replace", Path: "/LoadBalancerAttributes/1", Value: map[string]any{"Key": "deletion_protection", "Value": "true"}},
+			},
+			newState: `{"LoadBalancerAttributes":[{"Key":"idle_timeout","Value":"60"},{"Key":"deletion_protection","Value":"true"}]}`,
+			want: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/LoadBalancerAttributes", Value: []any{
+					map[string]any{"Key": "idle_timeout", "Value": "60"},
+					map[string]any{"Key": "deletion_protection", "Value": "true"},
+				}},
+			},
+		},
+		{
+			name: "leaves primitive arrays unchanged",
+			patch: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Ports/0", Value: float64(80)},
+				{Operation: "replace", Path: "/Ports/1", Value: float64(443)},
+			},
+			newState: `{"Ports":[80,443]}`,
+			want: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Ports/0", Value: float64(80)},
+				{Operation: "replace", Path: "/Ports/1", Value: float64(443)},
+			},
+		},
+		{
 			name: "removes Tags when not in new state",
 			patch: []jsonpatch.JsonPatchOperation{
 				{Operation: "remove", Path: "/Tags/0"},
@@ -134,7 +160,7 @@ func Test_replaceTagsPatchWithFullReplace(t *testing.T) {
 			},
 		},
 		{
-			name: "no-op when no Tags operations",
+			name: "no-op when no key-value array operations",
 			patch: []jsonpatch.JsonPatchOperation{
 				{Operation: "replace", Path: "/Name", Value: "test"},
 				{Operation: "replace", Path: "/Number", Value: float64(42)},
@@ -156,17 +182,21 @@ func Test_replaceTagsPatchWithFullReplace(t *testing.T) {
 			},
 		},
 		{
-			name: "mixed operations with Tags",
+			name: "mixed operations with multiple key-value arrays",
 			patch: []jsonpatch.JsonPatchOperation{
 				{Operation: "replace", Path: "/Name", Value: "test"},
 				{Operation: "add", Path: "/Tags/0", Value: map[string]any{"Key": "New", "Value": "n"}},
 				{Operation: "replace", Path: "/Tags/1", Value: map[string]any{"Key": "Old", "Value": "o"}},
+				{Operation: "replace", Path: "/Attributes/0", Value: map[string]any{"Key": "attr1", "Value": "val1"}},
 				{Operation: "replace", Path: "/Number", Value: float64(42)},
 			},
-			newState: `{"Name":"test","Tags":[{"Key":"New","Value":"n"},{"Key":"Old","Value":"o"}],"Number":42}`,
+			newState: `{"Name":"test","Tags":[{"Key":"New","Value":"n"},{"Key":"Old","Value":"o"}],"Attributes":[{"Key":"attr1","Value":"val1"}],"Number":42}`,
 			want: []jsonpatch.JsonPatchOperation{
 				{Operation: "replace", Path: "/Name", Value: "test"},
 				{Operation: "replace", Path: "/Number", Value: float64(42)},
+				{Operation: "replace", Path: "/Attributes", Value: []any{
+					map[string]any{"Key": "attr1", "Value": "val1"},
+				}},
 				{Operation: "replace", Path: "/Tags", Value: []any{
 					map[string]any{"Key": "New", "Value": "n"},
 					map[string]any{"Key": "Old", "Value": "o"},
@@ -182,15 +212,16 @@ func Test_replaceTagsPatchWithFullReplace(t *testing.T) {
 			newState: `{invalid json`,
 			want: []jsonpatch.JsonPatchOperation{
 				{Operation: "replace", Path: "/Name", Value: "test"},
+				{Operation: "replace", Path: "/Tags/0", Value: map[string]any{"Key": "a", "Value": "1"}},
 			},
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := replaceTagsPatchWithFullReplace(tt.patch, tt.newState)
+			got := replaceKeyValueArrayPatchesWithFullReplace(tt.patch, tt.newState)
 			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("replaceTagsPatchWithFullReplace() = %v, want %v", got, tt.want)
+				t.Errorf("replaceKeyValueArrayPatchesWithFullReplace() = %v, want %v", got, tt.want)
 			}
 		})
 	}
