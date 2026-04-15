@@ -98,3 +98,100 @@ func Test_comparePathsNumerically(t *testing.T) {
 		})
 	}
 }
+
+func Test_replaceTagsPatchWithFullReplace(t *testing.T) {
+	tests := []struct {
+		name     string
+		patch    []jsonpatch.JsonPatchOperation
+		newState string
+		want     []jsonpatch.JsonPatchOperation
+	}{
+		{
+			name: "replaces index-based tag operations with full replace",
+			patch: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Tags/0", Value: map[string]any{"Key": "Apple", "Value": "a"}},
+				{Operation: "replace", Path: "/Tags/1", Value: map[string]any{"Key": "Zebra", "Value": "z"}},
+				{Operation: "replace", Path: "/Name", Value: "test"},
+			},
+			newState: `{"Name":"test","Tags":[{"Key":"Apple","Value":"a"},{"Key":"Zebra","Value":"z"}]}`,
+			want: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Name", Value: "test"},
+				{Operation: "replace", Path: "/Tags", Value: []any{
+					map[string]any{"Key": "Apple", "Value": "a"},
+					map[string]any{"Key": "Zebra", "Value": "z"},
+				}},
+			},
+		},
+		{
+			name: "removes Tags when not in new state",
+			patch: []jsonpatch.JsonPatchOperation{
+				{Operation: "remove", Path: "/Tags/0"},
+				{Operation: "remove", Path: "/Tags/1"},
+			},
+			newState: `{"Name":"test"}`,
+			want: []jsonpatch.JsonPatchOperation{
+				{Operation: "remove", Path: "/Tags", Value: nil},
+			},
+		},
+		{
+			name: "no-op when no Tags operations",
+			patch: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Name", Value: "test"},
+				{Operation: "replace", Path: "/Number", Value: float64(42)},
+			},
+			newState: `{"Name":"test","Number":42}`,
+			want: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Name", Value: "test"},
+				{Operation: "replace", Path: "/Number", Value: float64(42)},
+			},
+		},
+		{
+			name: "handles /Tags path exactly",
+			patch: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Tags", Value: []any{map[string]any{"Key": "a", "Value": "1"}}},
+			},
+			newState: `{"Tags":[{"Key":"a","Value":"1"}]}`,
+			want: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Tags", Value: []any{map[string]any{"Key": "a", "Value": "1"}}},
+			},
+		},
+		{
+			name: "mixed operations with Tags",
+			patch: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Name", Value: "test"},
+				{Operation: "add", Path: "/Tags/0", Value: map[string]any{"Key": "New", "Value": "n"}},
+				{Operation: "replace", Path: "/Tags/1", Value: map[string]any{"Key": "Old", "Value": "o"}},
+				{Operation: "replace", Path: "/Number", Value: float64(42)},
+			},
+			newState: `{"Name":"test","Tags":[{"Key":"New","Value":"n"},{"Key":"Old","Value":"o"}],"Number":42}`,
+			want: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Name", Value: "test"},
+				{Operation: "replace", Path: "/Number", Value: float64(42)},
+				{Operation: "replace", Path: "/Tags", Value: []any{
+					map[string]any{"Key": "New", "Value": "n"},
+					map[string]any{"Key": "Old", "Value": "o"},
+				}},
+			},
+		},
+		{
+			name: "handles invalid JSON gracefully",
+			patch: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Name", Value: "test"},
+				{Operation: "replace", Path: "/Tags/0", Value: map[string]any{"Key": "a", "Value": "1"}},
+			},
+			newState: `{invalid json`,
+			want: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Name", Value: "test"},
+			},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := replaceTagsPatchWithFullReplace(tt.patch, tt.newState)
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("replaceTagsPatchWithFullReplace() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
