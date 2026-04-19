@@ -228,10 +228,24 @@ func reorderKeyValueSlicesToMatchPrior(m, prior map[string]any) {
 			reordered := reorderKeyValueSliceToMatch(v, priorSlice)
 			if reordered != nil {
 				m[key] = reordered
+				for i, el := range reordered {
+					if elMap, ok := el.(map[string]any); ok {
+						var priorElMap map[string]any
+						if i < len(priorSlice) {
+							priorElMap, _ = priorSlice[i].(map[string]any)
+						}
+						reorderKeyValueSlicesToMatchPrior(elMap, priorElMap)
+					}
+				}
 			} else if reorderedPrim := reorderPrimitiveSliceToMatch(v, priorSlice); reorderedPrim != nil {
 				m[key] = reorderedPrim
 			} else {
 				sortSliceByKey(v)
+				for _, el := range v {
+					if elMap, ok := el.(map[string]any); ok {
+						reorderKeyValueSlicesToMatchPrior(elMap, nil)
+					}
+				}
 			}
 		}
 	}

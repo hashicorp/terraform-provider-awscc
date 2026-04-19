@@ -552,6 +552,25 @@ func TestReorderKeyValueSliceToMatch(t *testing.T) {
 			},
 		},
 		{
+			name: "multiple new keys appended in sorted order",
+			current: []any{
+				map[string]any{"Key": "Mango", "Value": "m"},
+				map[string]any{"Key": "Apple", "Value": "a"},
+				map[string]any{"Key": "Cherry", "Value": "c"},
+				map[string]any{"Key": "Banana", "Value": "b"},
+			},
+			prior: []any{
+				map[string]any{"Key": "Apple", "Value": "old-a"},
+				map[string]any{"Key": "Mango", "Value": "old-m"},
+			},
+			expected: []any{
+				map[string]any{"Key": "Apple", "Value": "a"},
+				map[string]any{"Key": "Mango", "Value": "m"},
+				map[string]any{"Key": "Banana", "Value": "b"},
+				map[string]any{"Key": "Cherry", "Value": "c"},
+			},
+		},
+		{
 			name: "not key-value slice returns nil",
 			current: []any{
 				map[string]any{"NotKey": "a", "Value": "1"},
@@ -827,6 +846,42 @@ func TestReorderKeyValueSlicesToMatchPrior(t *testing.T) {
 					"Tags": []any{
 						map[string]any{"Key": "a", "Value": "first"},
 						map[string]any{"Key": "z", "Value": "last"},
+					},
+				},
+			},
+		},
+		{
+			name: "reorders tags nested inside list elements (map-inside-a-list)",
+			current: map[string]any{
+				"Listeners": []any{
+					map[string]any{
+						"Port": "443",
+						"Tags": []any{
+							map[string]any{"Key": "Env", "Value": "prod"},
+							map[string]any{"Key": "App", "Value": "web"},
+						},
+					},
+				},
+			},
+			prior: map[string]any{
+				"Listeners": []any{
+					map[string]any{
+						"Port": "443",
+						"Tags": []any{
+							map[string]any{"Key": "App", "Value": "web"},
+							map[string]any{"Key": "Env", "Value": "prod"},
+						},
+					},
+				},
+			},
+			expected: map[string]any{
+				"Listeners": []any{
+					map[string]any{
+						"Port": "443",
+						"Tags": []any{
+							map[string]any{"Key": "App", "Value": "web"},
+							map[string]any{"Key": "Env", "Value": "prod"},
+						},
 					},
 				},
 			},
