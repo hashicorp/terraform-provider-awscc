@@ -645,7 +645,7 @@ Optional:
 
 - `encrypted` (Boolean) Indicates whether the volume should be encrypted. If you turn on Region-level Amazon EBS encryption by default but set this value as ``false``, the setting is overridden and the volume is encrypted with the KMS key specified for Amazon EBS encryption by default. This parameter maps 1:1 with the ``Encrypted`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.
 - `filesystem_type` (String) The filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the tasks will fail to start.
- The available Linux filesystem types are  ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.
+ The available Linux filesystem types are ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.
  The available Windows filesystem types are ``NTFS``.
 - `iops` (Number) The number of I/O operations per second (IOPS). For ``gp3``, ``io1``, and ``io2`` volumes, this represents the number of IOPS that are provisioned for the volume. For ``gp2`` volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.
  The following are the supported values for each volume type.
@@ -683,7 +683,7 @@ Optional:
 
 Optional:
 
-- `propagate_tags` (String) Determines whether to propagate the tags from the task definition to  the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in  ``ServiceVolumeConfiguration``. If no value is specified, the tags aren't  propagated.
+- `propagate_tags` (String) Determines whether to propagate the tags from the task definition to the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in ``ServiceVolumeConfiguration``. If no value is specified, the tags aren't propagated.
 - `resource_type` (String) The type of volume resource.
 - `tags` (Attributes List) The tags applied to this Amazon EBS volume. ``AmazonECSCreated`` and ``AmazonECSManaged`` are reserved tags that can't be used. (see [below for nested schema](#nestedatt--volume_configurations--managed_ebs_volume--tag_specifications--tags))
 
@@ -705,7 +705,7 @@ Optional:
 Optional:
 
 - `port_name` (String) The name of the port mapping to register in the VPC Lattice target group. This is the name of the ``portMapping`` you defined in your task definition.
-- `role_arn` (String) The ARN of the IAM role to associate with this VPC Lattice configuration. This is the Amazon ECS  infrastructure IAM role that is used to manage your VPC Lattice infrastructure.
+- `role_arn` (String) The ARN of the IAM role to associate with this VPC Lattice configuration. This is the Amazon ECS infrastructure IAM role that is used to manage your VPC Lattice infrastructure.
 - `target_group_arn` (String) The full Amazon Resource Name (ARN) of the target group or groups associated with the VPC Lattice configuration that the Amazon ECS tasks will be registered to.
 
 ## Import

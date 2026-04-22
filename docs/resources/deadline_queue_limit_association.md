@@ -2,12 +2,12 @@
 page_title: "awscc_deadline_queue_limit_association Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Definition of AWS::Deadline::QueueLimitAssociation Resource Type
+  Resource Type definition for AWS::Deadline::QueueLimitAssociation
 ---
 
 # awscc_deadline_queue_limit_association (Resource)
 
-Definition of AWS::Deadline::QueueLimitAssociation Resource Type
+Resource Type definition for AWS::Deadline::QueueLimitAssociation
 
 ## Example Usage
 

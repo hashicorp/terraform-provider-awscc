@@ -3,12 +3,12 @@
 page_title: "awscc_deadline_monitor Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Definition of AWS::Deadline::Monitor Resource Type
+  Resource Type definition for AWS::Deadline::Monitor
 ---
 
 # awscc_deadline_monitor (Resource)
 
-Definition of AWS::Deadline::Monitor Resource Type
+Resource Type definition for AWS::Deadline::Monitor
 
 
 
@@ -24,6 +24,7 @@ Definition of AWS::Deadline::Monitor Resource Type
 
 ### Optional
 
+- `identity_center_region` (String) The AWS region where IAM Identity Center is enabled. Required when Identity Center is in a different region than the monitor.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
