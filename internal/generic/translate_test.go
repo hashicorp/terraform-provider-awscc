@@ -5,6 +5,7 @@ package generic
 
 import (
 	"context"
+	"fmt"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -484,5 +485,563 @@ func TestTranslateToTerraform(t *testing.T) {
 				}
 			}
 		})
+	}
+}
+
+func TestReorderKeyValueSliceToMatch(t *testing.T) {
+	testCases := []struct {
+		name     string
+		current  []any
+		prior    []any
+		expected []any
+	}{
+		{
+			name:     "empty current",
+			current:  []any{},
+			prior:    []any{map[string]any{"Key": "a", "Value": "1"}},
+			expected: []any{},
+		},
+		{
+			name: "reorder to match prior",
+			current: []any{
+				map[string]any{"Key": "Zebra", "Value": "last"},
+				map[string]any{"Key": "Apple", "Value": "first"},
+				map[string]any{"Key": "Mango", "Value": "middle"},
+			},
+			prior: []any{
+				map[string]any{"Key": "Apple", "Value": "old-first"},
+				map[string]any{"Key": "Mango", "Value": "old-middle"},
+				map[string]any{"Key": "Zebra", "Value": "old-last"},
+			},
+			expected: []any{
+				map[string]any{"Key": "Apple", "Value": "first"},
+				map[string]any{"Key": "Mango", "Value": "middle"},
+				map[string]any{"Key": "Zebra", "Value": "last"},
+			},
+		},
+		{
+			name: "new keys appended sorted",
+			current: []any{
+				map[string]any{"Key": "Zebra", "Value": "z"},
+				map[string]any{"Key": "Apple", "Value": "a"},
+				map[string]any{"Key": "New", "Value": "n"},
+			},
+			prior: []any{
+				map[string]any{"Key": "Apple", "Value": "old-a"},
+				map[string]any{"Key": "Zebra", "Value": "old-z"},
+			},
+			expected: []any{
+				map[string]any{"Key": "Apple", "Value": "a"},
+				map[string]any{"Key": "Zebra", "Value": "z"},
+				map[string]any{"Key": "New", "Value": "n"},
+			},
+		},
+		{
+			name: "lowercase key field",
+			current: []any{
+				map[string]any{"key": "b", "value": "2"},
+				map[string]any{"key": "a", "value": "1"},
+			},
+			prior: []any{
+				map[string]any{"key": "a", "value": "old-1"},
+				map[string]any{"key": "b", "value": "old-2"},
+			},
+			expected: []any{
+				map[string]any{"key": "a", "value": "1"},
+				map[string]any{"key": "b", "value": "2"},
+			},
+		},
+		{
+			name: "multiple new keys appended in sorted order",
+			current: []any{
+				map[string]any{"Key": "Mango", "Value": "m"},
+				map[string]any{"Key": "Apple", "Value": "a"},
+				map[string]any{"Key": "Cherry", "Value": "c"},
+				map[string]any{"Key": "Banana", "Value": "b"},
+			},
+			prior: []any{
+				map[string]any{"Key": "Apple", "Value": "old-a"},
+				map[string]any{"Key": "Mango", "Value": "old-m"},
+			},
+			expected: []any{
+				map[string]any{"Key": "Apple", "Value": "a"},
+				map[string]any{"Key": "Mango", "Value": "m"},
+				map[string]any{"Key": "Banana", "Value": "b"},
+				map[string]any{"Key": "Cherry", "Value": "c"},
+			},
+		},
+		{
+			name: "not key-value slice returns nil",
+			current: []any{
+				map[string]any{"NotKey": "a", "Value": "1"},
+			},
+			prior:    []any{},
+			expected: nil,
+		},
+		{
+			name:     "non-map element returns nil",
+			current:  []any{"string"},
+			prior:    []any{},
+			expected: nil,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			got := reorderKeyValueSliceToMatch(tc.current, tc.prior)
+			if diff := cmp.Diff(got, tc.expected); diff != "" {
+				t.Errorf("unexpected diff (+wanted, -got): %s", diff)
+			}
+		})
+	}
+}
+
+func TestReorderPrimitiveSliceToMatch(t *testing.T) {
+	testCases := []struct {
+		name     string
+		current  []any
+		prior    []any
+		expected []any
+	}{
+		{
+			name:     "empty current",
+			current:  []any{},
+			prior:    []any{"a", "b"},
+			expected: []any{},
+		},
+		{
+			name:     "reorder strings to match prior",
+			current:  []any{"subnet-03", "subnet-01", "subnet-02"},
+			prior:    []any{"subnet-01", "subnet-02", "subnet-03"},
+			expected: []any{"subnet-01", "subnet-02", "subnet-03"},
+		},
+		{
+			name:     "new strings appended sorted",
+			current:  []any{"subnet-03", "subnet-01", "subnet-04"},
+			prior:    []any{"subnet-01", "subnet-03"},
+			expected: []any{"subnet-01", "subnet-03", "subnet-04"},
+		},
+		{
+			name:     "reorder numbers to match prior",
+			current:  []any{float64(443), float64(80), float64(8080)},
+			prior:    []any{float64(80), float64(443), float64(8080)},
+			expected: []any{float64(80), float64(443), float64(8080)},
+		},
+		{
+			name:     "mixed types returns nil",
+			current:  []any{"string", float64(42)},
+			prior:    []any{},
+			expected: nil,
+		},
+		{
+			name:     "non-primitive returns nil",
+			current:  []any{map[string]any{"key": "val"}},
+			prior:    []any{},
+			expected: nil,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			got := reorderPrimitiveSliceToMatch(tc.current, tc.prior)
+			if diff := cmp.Diff(got, tc.expected); diff != "" {
+				t.Errorf("unexpected diff (+wanted, -got): %s", diff)
+			}
+		})
+	}
+}
+
+func TestSortSliceByKey(t *testing.T) {
+	testCases := []struct {
+		name     string
+		input    []any
+		expected []any
+		sorted   bool
+	}{
+		{
+			name: "sorts by Key field",
+			input: []any{
+				map[string]any{"Key": "Zebra", "Value": "z"},
+				map[string]any{"Key": "Apple", "Value": "a"},
+				map[string]any{"Key": "Mango", "Value": "m"},
+			},
+			expected: []any{
+				map[string]any{"Key": "Apple", "Value": "a"},
+				map[string]any{"Key": "Mango", "Value": "m"},
+				map[string]any{"Key": "Zebra", "Value": "z"},
+			},
+			sorted: true,
+		},
+		{
+			name: "sorts by key field lowercase",
+			input: []any{
+				map[string]any{"key": "z", "value": "last"},
+				map[string]any{"key": "a", "value": "first"},
+			},
+			expected: []any{
+				map[string]any{"key": "a", "value": "first"},
+				map[string]any{"key": "z", "value": "last"},
+			},
+			sorted: true,
+		},
+		{
+			name: "non-map returns false",
+			input: []any{
+				"string",
+			},
+			expected: []any{
+				"string",
+			},
+			sorted: false,
+		},
+		{
+			name: "missing key field returns false",
+			input: []any{
+				map[string]any{"NotKey": "a", "Value": "1"},
+			},
+			expected: []any{
+				map[string]any{"NotKey": "a", "Value": "1"},
+			},
+			sorted: false,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			got := sortSliceByKey(tc.input)
+			if got != tc.sorted {
+				t.Errorf("expected sorted=%v, got %v", tc.sorted, got)
+			}
+			if diff := cmp.Diff(tc.input, tc.expected); diff != "" {
+				t.Errorf("unexpected diff (+wanted, -got): %s", diff)
+			}
+		})
+	}
+}
+
+func TestNormalizeKeyValueSlices(t *testing.T) {
+	testCases := []struct {
+		name     string
+		input    any
+		expected any
+	}{
+		{
+			name: "sorts tags by key",
+			input: map[string]any{
+				"Tags": []any{
+					map[string]any{"Key": "Zebra", "Value": "z"},
+					map[string]any{"Key": "Apple", "Value": "a"},
+				},
+			},
+			expected: map[string]any{
+				"Tags": []any{
+					map[string]any{"Key": "Apple", "Value": "a"},
+					map[string]any{"Key": "Zebra", "Value": "z"},
+				},
+			},
+		},
+		{
+			name: "recursively sorts nested structures",
+			input: map[string]any{
+				"VpcConfig": map[string]any{
+					"Tags": []any{
+						map[string]any{"Key": "z", "Value": "last"},
+						map[string]any{"Key": "a", "Value": "first"},
+					},
+				},
+			},
+			expected: map[string]any{
+				"VpcConfig": map[string]any{
+					"Tags": []any{
+						map[string]any{"Key": "a", "Value": "first"},
+						map[string]any{"Key": "z", "Value": "last"},
+					},
+				},
+			},
+		},
+		{
+			name: "leaves non-key-value slices unchanged",
+			input: map[string]any{
+				"Ports": []any{float64(443), float64(80)},
+			},
+			expected: map[string]any{
+				"Ports": []any{float64(443), float64(80)},
+			},
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			normalizeKeyValueSlices(tc.input)
+			if diff := cmp.Diff(tc.input, tc.expected); diff != "" {
+				t.Errorf("unexpected diff (+wanted, -got): %s", diff)
+			}
+		})
+	}
+}
+
+func TestReorderKeyValueSlicesToMatchPrior(t *testing.T) {
+	testCases := []struct {
+		name     string
+		current  map[string]any
+		prior    map[string]any
+		expected map[string]any
+	}{
+		{
+			name: "reorders tags to match prior",
+			current: map[string]any{
+				"Tags": []any{
+					map[string]any{"Key": "Zebra", "Value": "z"},
+					map[string]any{"Key": "Apple", "Value": "a"},
+				},
+			},
+			prior: map[string]any{
+				"Tags": []any{
+					map[string]any{"Key": "Apple", "Value": "old-a"},
+					map[string]any{"Key": "Zebra", "Value": "old-z"},
+				},
+			},
+			expected: map[string]any{
+				"Tags": []any{
+					map[string]any{"Key": "Apple", "Value": "a"},
+					map[string]any{"Key": "Zebra", "Value": "z"},
+				},
+			},
+		},
+		{
+			name: "reorders primitive slices",
+			current: map[string]any{
+				"SubnetIds": []any{"subnet-03", "subnet-01", "subnet-02"},
+			},
+			prior: map[string]any{
+				"SubnetIds": []any{"subnet-01", "subnet-02", "subnet-03"},
+			},
+			expected: map[string]any{
+				"SubnetIds": []any{"subnet-01", "subnet-02", "subnet-03"},
+			},
+		},
+		{
+			name: "recursively reorders nested structures",
+			current: map[string]any{
+				"VpcConfig": map[string]any{
+					"SubnetIds": []any{"subnet-02", "subnet-01"},
+					"Tags": []any{
+						map[string]any{"Key": "z", "Value": "last"},
+						map[string]any{"Key": "a", "Value": "first"},
+					},
+				},
+			},
+			prior: map[string]any{
+				"VpcConfig": map[string]any{
+					"SubnetIds": []any{"subnet-01", "subnet-02"},
+					"Tags": []any{
+						map[string]any{"Key": "a", "Value": "old-first"},
+						map[string]any{"Key": "z", "Value": "old-last"},
+					},
+				},
+			},
+			expected: map[string]any{
+				"VpcConfig": map[string]any{
+					"SubnetIds": []any{"subnet-01", "subnet-02"},
+					"Tags": []any{
+						map[string]any{"Key": "a", "Value": "first"},
+						map[string]any{"Key": "z", "Value": "last"},
+					},
+				},
+			},
+		},
+		{
+			name: "reorders tags nested inside list elements (map-inside-a-list)",
+			current: map[string]any{
+				"Listeners": []any{
+					map[string]any{
+						"Port": "443",
+						"Tags": []any{
+							map[string]any{"Key": "Env", "Value": "prod"},
+							map[string]any{"Key": "App", "Value": "web"},
+						},
+					},
+				},
+			},
+			prior: map[string]any{
+				"Listeners": []any{
+					map[string]any{
+						"Port": "443",
+						"Tags": []any{
+							map[string]any{"Key": "App", "Value": "web"},
+							map[string]any{"Key": "Env", "Value": "prod"},
+						},
+					},
+				},
+			},
+			expected: map[string]any{
+				"Listeners": []any{
+					map[string]any{
+						"Port": "443",
+						"Tags": []any{
+							map[string]any{"Key": "App", "Value": "web"},
+							map[string]any{"Key": "Env", "Value": "prod"},
+						},
+					},
+				},
+			},
+		},
+		{
+			name: "handles missing prior gracefully",
+			current: map[string]any{
+				"Tags": []any{
+					map[string]any{"Key": "b", "Value": "2"},
+					map[string]any{"Key": "a", "Value": "1"},
+				},
+			},
+			prior: map[string]any{},
+			expected: map[string]any{
+				"Tags": []any{
+					map[string]any{"Key": "a", "Value": "1"},
+					map[string]any{"Key": "b", "Value": "2"},
+				},
+			},
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			reorderKeyValueSlicesToMatchPrior(tc.current, tc.prior)
+			if diff := cmp.Diff(tc.current, tc.expected); diff != "" {
+				t.Errorf("unexpected diff (+wanted, -got): %s", diff)
+			}
+		})
+	}
+}
+
+func TestPrimitiveKind(t *testing.T) {
+	testCases := []struct {
+		name     string
+		input    any
+		expected int
+	}{
+		{
+			name:     "string",
+			input:    "test",
+			expected: primKindString,
+		},
+		{
+			name:     "float64",
+			input:    float64(42),
+			expected: primKindFloat64,
+		},
+		{
+			name:     "map",
+			input:    map[string]any{"key": "val"},
+			expected: primKindOther,
+		},
+		{
+			name:     "int",
+			input:    42,
+			expected: primKindOther,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			got := primitiveKind(tc.input)
+			if got != tc.expected {
+				t.Errorf("expected %d, got %d", tc.expected, got)
+			}
+		})
+	}
+}
+
+func TestKeyFromMap(t *testing.T) {
+	testCases := []struct {
+		name     string
+		input    map[string]any
+		expected string
+	}{
+		{
+			name:     "Key field",
+			input:    map[string]any{"Key": "test", "Value": "val"},
+			expected: "test",
+		},
+		{
+			name:     "key field lowercase",
+			input:    map[string]any{"key": "test", "value": "val"},
+			expected: "test",
+		},
+		{
+			name:     "no key field",
+			input:    map[string]any{"NotKey": "test"},
+			expected: "",
+		},
+		{
+			name:     "non-string key",
+			input:    map[string]any{"Key": 42},
+			expected: "",
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			got := keyFromMap(tc.input)
+			if got != tc.expected {
+				t.Errorf("expected %q, got %q", tc.expected, got)
+			}
+		})
+	}
+}
+
+func BenchmarkReorderKeyValueSliceToMatch(b *testing.B) {
+	current := make([]any, 50)
+	prior := make([]any, 50)
+	for i := range 50 {
+		key := fmt.Sprintf("Key%02d", i)
+		current[49-i] = map[string]any{"Key": key, "Value": fmt.Sprintf("val%d", i)}
+		prior[i] = map[string]any{"Key": key, "Value": fmt.Sprintf("old%d", i)}
+	}
+
+	for b.Loop() {
+		_ = reorderKeyValueSliceToMatch(current, prior)
+	}
+}
+
+func BenchmarkReorderPrimitiveSliceToMatch(b *testing.B) {
+	current := make([]any, 50)
+	prior := make([]any, 50)
+	for i := range 50 {
+		current[49-i] = fmt.Sprintf("subnet-%02d", i)
+		prior[i] = fmt.Sprintf("subnet-%02d", i)
+	}
+
+	for b.Loop() {
+		_ = reorderPrimitiveSliceToMatch(current, prior)
+	}
+}
+
+func BenchmarkReorderKeyValueSlicesToMatchPrior(b *testing.B) {
+	current := map[string]any{
+		"Tags": make([]any, 20),
+		"VpcConfig": map[string]any{
+			"SubnetIds": make([]any, 10),
+		},
+	}
+	prior := map[string]any{
+		"Tags": make([]any, 20),
+		"VpcConfig": map[string]any{
+			"SubnetIds": make([]any, 10),
+		},
+	}
+
+	for i := range 20 {
+		key := fmt.Sprintf("Tag%02d", i)
+		current["Tags"].([]any)[19-i] = map[string]any{"Key": key, "Value": "v"}
+		prior["Tags"].([]any)[i] = map[string]any{"Key": key, "Value": "v"}
+	}
+	for i := range 10 {
+		current["VpcConfig"].(map[string]any)["SubnetIds"].([]any)[9-i] = fmt.Sprintf("subnet-%02d", i)
+		prior["VpcConfig"].(map[string]any)["SubnetIds"].([]any)[i] = fmt.Sprintf("subnet-%02d", i)
+	}
+
+	for b.Loop() {
+		reorderKeyValueSlicesToMatchPrior(current, prior)
 	}
 }

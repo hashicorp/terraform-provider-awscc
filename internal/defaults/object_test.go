@@ -54,7 +54,6 @@ func TestStaticPartialObject_simple(t *testing.T) {
 	}
 
 	for name, test := range tests {
-		name, test := name, test
 		t.Run(name, func(t *testing.T) {
 			ctx := context.TODO()
 			request := planmodifier.ObjectRequest{
@@ -126,7 +125,6 @@ func TestStaticPartialObject_complex(t *testing.T) {
 	}
 
 	for name, test := range tests {
-		name, test := name, test
 		t.Run(name, func(t *testing.T) {
 			ctx := context.TODO()
 			request := planmodifier.ObjectRequest{
