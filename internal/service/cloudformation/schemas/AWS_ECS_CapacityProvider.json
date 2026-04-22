@@ -1,7 +1,4 @@
 {
-  "propertyTransform": {
-    "/properties/AutoScalingGroupProvider/AutoScalingGroupArn": "$split(AutoScalingGroupProvider.AutoScalingGroupArn, \"autoScalingGroupName/\")[-1] $OR $split(AutoScalingGroupArn, \"autoScalingGroupName/\")[-1]"
-  },
   "tagging": {
     "permissions": [
       "ecs:TagResource",
@@ -13,6 +10,9 @@
     "tagUpdatable": true,
     "tagProperty": "/properties/Tags",
     "cloudFormationSystemTags": true
+  },
+  "propertyTransform": {
+    "/properties/AutoScalingGroupProvider/AutoScalingGroupArn": "$split(AutoScalingGroupProvider.AutoScalingGroupArn, \"autoScalingGroupName/\")[-1] $OR $split(AutoScalingGroupArn, \"autoScalingGroupName/\")[-1]"
   },
   "handlers": {
     "read": {
@@ -575,6 +575,9 @@
       ]
     }
   },
+  "conditionalCreateOnlyProperties": [
+    "/properties/ManagedInstancesProvider/InstanceLaunchTemplate/CapacityOptionType"
+  ],
   "properties": {
     "AutoScalingGroupProvider": {
       "$ref": "#/definitions/AutoScalingGroupProvider"
@@ -594,8 +597,5 @@
     "ManagedInstancesProvider": {
       "$ref": "#/definitions/ManagedInstancesProvider"
     }
-  },
-  "conditionalCreateOnlyProperties": [
-    "/properties/ManagedInstancesProvider/InstanceLaunchTemplate/CapacityOptionType"
-  ]
+  }
 }

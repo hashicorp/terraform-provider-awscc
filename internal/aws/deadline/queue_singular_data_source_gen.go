@@ -8,6 +8,7 @@ package deadline
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -274,6 +275,152 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: SchedulingConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "properties": {
+		//	    "PriorityBalanced": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "RenderingTaskBuffer": {
+		//	          "default": 1,
+		//	          "maximum": 1000,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "PriorityFifo": {
+		//	      "additionalProperties": false,
+		//	      "type": "object"
+		//	    },
+		//	    "WeightedBalanced": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ErrorWeight": {
+		//	          "default": -10,
+		//	          "maximum": 10000,
+		//	          "minimum": -10000,
+		//	          "type": "number"
+		//	        },
+		//	        "MaxPriorityOverride": {
+		//	          "properties": {
+		//	            "AlwaysScheduleFirst": {
+		//	              "additionalProperties": false,
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "MinPriorityOverride": {
+		//	          "properties": {
+		//	            "AlwaysScheduleLast": {
+		//	              "additionalProperties": false,
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "PriorityWeight": {
+		//	          "default": 100,
+		//	          "maximum": 10000,
+		//	          "minimum": 0,
+		//	          "type": "number"
+		//	        },
+		//	        "RenderingTaskBuffer": {
+		//	          "default": 1,
+		//	          "maximum": 1000,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        },
+		//	        "RenderingTaskWeight": {
+		//	          "default": -100,
+		//	          "maximum": 10000,
+		//	          "minimum": -10000,
+		//	          "type": "number"
+		//	        },
+		//	        "SubmissionTimeWeight": {
+		//	          "default": 3,
+		//	          "maximum": 10000,
+		//	          "minimum": 0,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"scheduling_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PriorityBalanced
+				"priority_balanced": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RenderingTaskBuffer
+						"rendering_task_buffer": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PriorityFifo
+				"priority_fifo": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: jsontypes.NormalizedType{},
+					Computed:   true,
+				}, /*END ATTRIBUTE*/
+				// Property: WeightedBalanced
+				"weighted_balanced": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ErrorWeight
+						"error_weight": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaxPriorityOverride
+						"max_priority_override": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AlwaysScheduleFirst
+								"always_schedule_first": schema.StringAttribute{ /*START ATTRIBUTE*/
+									CustomType: jsontypes.NormalizedType{},
+									Computed:   true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MinPriorityOverride
+						"min_priority_override": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AlwaysScheduleLast
+								"always_schedule_last": schema.StringAttribute{ /*START ATTRIBUTE*/
+									CustomType: jsontypes.NormalizedType{},
+									Computed:   true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: PriorityWeight
+						"priority_weight": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RenderingTaskBuffer
+						"rendering_task_buffer": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RenderingTaskWeight
+						"rendering_task_weight": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SubmissionTimeWeight
+						"submission_time_weight": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -343,26 +490,39 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allowed_storage_profile_ids":         "AllowedStorageProfileIds",
+		"always_schedule_first":               "AlwaysScheduleFirst",
+		"always_schedule_last":                "AlwaysScheduleLast",
 		"arn":                                 "Arn",
 		"default_budget_action":               "DefaultBudgetAction",
 		"description":                         "Description",
 		"display_name":                        "DisplayName",
+		"error_weight":                        "ErrorWeight",
 		"farm_id":                             "FarmId",
 		"group":                               "Group",
 		"job_attachment_settings":             "JobAttachmentSettings",
 		"job_run_as_user":                     "JobRunAsUser",
 		"key":                                 "Key",
+		"max_priority_override":               "MaxPriorityOverride",
+		"min_priority_override":               "MinPriorityOverride",
 		"password_arn":                        "PasswordArn",
 		"posix":                               "Posix",
+		"priority_balanced":                   "PriorityBalanced",
+		"priority_fifo":                       "PriorityFifo",
+		"priority_weight":                     "PriorityWeight",
 		"queue_id":                            "QueueId",
+		"rendering_task_buffer":               "RenderingTaskBuffer",
+		"rendering_task_weight":               "RenderingTaskWeight",
 		"required_file_system_location_names": "RequiredFileSystemLocationNames",
 		"role_arn":                            "RoleArn",
 		"root_prefix":                         "RootPrefix",
 		"run_as":                              "RunAs",
 		"s3_bucket_name":                      "S3BucketName",
+		"scheduling_configuration":            "SchedulingConfiguration",
+		"submission_time_weight":              "SubmissionTimeWeight",
 		"tags":                                "Tags",
 		"user":                                "User",
 		"value":                               "Value",
+		"weighted_balanced":                   "WeightedBalanced",
 		"windows":                             "Windows",
 	})
 

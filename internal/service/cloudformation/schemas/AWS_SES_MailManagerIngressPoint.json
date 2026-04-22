@@ -34,7 +34,65 @@
             "SecretArn"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "TlsAuthConfiguration",
+          "properties": {
+            "TlsAuthConfiguration": {
+              "$ref": "#/definitions/TlsAuthConfiguration"
+            }
+          },
+          "required": [
+            "TlsAuthConfiguration"
+          ],
+          "additionalProperties": false
         }
+      ]
+    },
+    "TlsAuthConfiguration": {
+      "type": "object",
+      "properties": {
+        "TrustStore": {
+          "$ref": "#/definitions/TrustStore"
+        }
+      },
+      "required": [
+        "TrustStore"
+      ],
+      "additionalProperties": false
+    },
+    "TrustStore": {
+      "type": "object",
+      "properties": {
+        "CAContent": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500000,
+          "pattern": "^[\\P{C}\\s]*$"
+        },
+        "CrlContent": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500000,
+          "pattern": "^[\\P{C}\\s]*$"
+        },
+        "KmsKeyArn": {
+          "type": "string",
+          "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc):kms:[a-z0-9-]+:\\d{12}:(key|alias)/[a-zA-Z0-9/_-]+$"
+        }
+      },
+      "required": [
+        "CAContent"
+      ],
+      "additionalProperties": false
+    },
+    "TlsPolicy": {
+      "type": "string",
+      "enum": [
+        "REQUIRED",
+        "OPTIONAL",
+        "FIPS"
       ]
     },
     "IngressPointStatus": {
@@ -59,7 +117,8 @@
       "type": "string",
       "enum": [
         "OPEN",
-        "AUTH"
+        "AUTH",
+        "MTLS"
       ]
     },
     "IpType": {
@@ -201,6 +260,9 @@
       },
       "maxItems": 200,
       "minItems": 0
+    },
+    "TlsPolicy": {
+      "$ref": "#/definitions/TlsPolicy"
     },
     "Type": {
       "$ref": "#/definitions/IngressPointType"

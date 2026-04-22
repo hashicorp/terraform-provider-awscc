@@ -61,6 +61,9 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	      "items": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
+		//	          "BatchImageStatus": {
+		//	            "type": "string"
+		//	          },
 		//	          "ImageIdOverride": {
 		//	            "type": "string"
 		//	          },
@@ -233,6 +236,10 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 				"ec_2_configuration": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BatchImageStatus
+							"batch_image_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
 							// Property: ImageIdOverride
 							"image_id_override": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Computed: true,
@@ -527,6 +534,7 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allocation_strategy":            "AllocationStrategy",
+		"batch_image_status":             "BatchImageStatus",
 		"bid_percentage":                 "BidPercentage",
 		"compute_environment_arn":        "ComputeEnvironmentArn",
 		"compute_environment_name":       "ComputeEnvironmentName",

@@ -1226,6 +1226,7 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "enum": [
 		//	        "on-demand",
 		//	        "spot",
+		//	        "capacity-block",
 		//	        "reserved-capacity"
 		//	      ],
 		//	      "type": "string"

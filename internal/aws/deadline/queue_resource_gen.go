@@ -9,11 +9,18 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64default"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -430,6 +437,232 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: SchedulingConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "properties": {
+		//	    "PriorityBalanced": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "RenderingTaskBuffer": {
+		//	          "default": 1,
+		//	          "maximum": 1000,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "PriorityFifo": {
+		//	      "additionalProperties": false,
+		//	      "type": "object"
+		//	    },
+		//	    "WeightedBalanced": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ErrorWeight": {
+		//	          "default": -10,
+		//	          "maximum": 10000,
+		//	          "minimum": -10000,
+		//	          "type": "number"
+		//	        },
+		//	        "MaxPriorityOverride": {
+		//	          "properties": {
+		//	            "AlwaysScheduleFirst": {
+		//	              "additionalProperties": false,
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "MinPriorityOverride": {
+		//	          "properties": {
+		//	            "AlwaysScheduleLast": {
+		//	              "additionalProperties": false,
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "PriorityWeight": {
+		//	          "default": 100,
+		//	          "maximum": 10000,
+		//	          "minimum": 0,
+		//	          "type": "number"
+		//	        },
+		//	        "RenderingTaskBuffer": {
+		//	          "default": 1,
+		//	          "maximum": 1000,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        },
+		//	        "RenderingTaskWeight": {
+		//	          "default": -100,
+		//	          "maximum": 10000,
+		//	          "minimum": -10000,
+		//	          "type": "number"
+		//	        },
+		//	        "SubmissionTimeWeight": {
+		//	          "default": 3,
+		//	          "maximum": 10000,
+		//	          "minimum": 0,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"scheduling_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PriorityBalanced
+				"priority_balanced": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RenderingTaskBuffer
+						"rendering_task_buffer": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Default:  int64default.StaticInt64(1),
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(0, 1000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PriorityFifo
+				"priority_fifo": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: jsontypes.NormalizedType{},
+					Optional:   true,
+					Computed:   true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: WeightedBalanced
+				"weighted_balanced": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ErrorWeight
+						"error_weight": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Default:  float64default.StaticFloat64(-10.000000),
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(-10000.000000, 10000.000000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MaxPriorityOverride
+						"max_priority_override": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AlwaysScheduleFirst
+								"always_schedule_first": schema.StringAttribute{ /*START ATTRIBUTE*/
+									CustomType: jsontypes.NormalizedType{},
+									Optional:   true,
+									Computed:   true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MinPriorityOverride
+						"min_priority_override": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AlwaysScheduleLast
+								"always_schedule_last": schema.StringAttribute{ /*START ATTRIBUTE*/
+									CustomType: jsontypes.NormalizedType{},
+									Optional:   true,
+									Computed:   true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PriorityWeight
+						"priority_weight": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Default:  float64default.StaticFloat64(100.000000),
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(0.000000, 10000.000000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: RenderingTaskBuffer
+						"rendering_task_buffer": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Default:  int64default.StaticInt64(1),
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(0, 1000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: RenderingTaskWeight
+						"rendering_task_weight": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Default:  float64default.StaticFloat64(-100.000000),
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(-10000.000000, 10000.000000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SubmissionTimeWeight
+						"submission_time_weight": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Default:  float64default.StaticFloat64(3.000000),
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(0.000000, 10000.000000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -516,7 +749,7 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Definition of AWS::Deadline::Queue Resource Type",
+		Description: "Resource Type definition for AWS::Deadline::Queue",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -533,26 +766,39 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allowed_storage_profile_ids":         "AllowedStorageProfileIds",
+		"always_schedule_first":               "AlwaysScheduleFirst",
+		"always_schedule_last":                "AlwaysScheduleLast",
 		"arn":                                 "Arn",
 		"default_budget_action":               "DefaultBudgetAction",
 		"description":                         "Description",
 		"display_name":                        "DisplayName",
+		"error_weight":                        "ErrorWeight",
 		"farm_id":                             "FarmId",
 		"group":                               "Group",
 		"job_attachment_settings":             "JobAttachmentSettings",
 		"job_run_as_user":                     "JobRunAsUser",
 		"key":                                 "Key",
+		"max_priority_override":               "MaxPriorityOverride",
+		"min_priority_override":               "MinPriorityOverride",
 		"password_arn":                        "PasswordArn",
 		"posix":                               "Posix",
+		"priority_balanced":                   "PriorityBalanced",
+		"priority_fifo":                       "PriorityFifo",
+		"priority_weight":                     "PriorityWeight",
 		"queue_id":                            "QueueId",
+		"rendering_task_buffer":               "RenderingTaskBuffer",
+		"rendering_task_weight":               "RenderingTaskWeight",
 		"required_file_system_location_names": "RequiredFileSystemLocationNames",
 		"role_arn":                            "RoleArn",
 		"root_prefix":                         "RootPrefix",
 		"run_as":                              "RunAs",
 		"s3_bucket_name":                      "S3BucketName",
+		"scheduling_configuration":            "SchedulingConfiguration",
+		"submission_time_weight":              "SubmissionTimeWeight",
 		"tags":                                "Tags",
 		"user":                                "User",
 		"value":                               "Value",
+		"weighted_balanced":                   "WeightedBalanced",
 		"windows":                             "Windows",
 	})
 

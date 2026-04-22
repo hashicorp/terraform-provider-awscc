@@ -1,4 +1,9 @@
-## 1.81.0 (Unreleased)
+## 1.81.0 (April 22, 2026)
+
+FEATURES:
+
+* No new data sources, list resources, or resources.
+* Updated schemas.
 
 ## 1.80.0 (April 15, 2026)
 

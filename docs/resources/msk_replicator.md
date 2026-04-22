@@ -25,6 +25,7 @@ Resource Type definition for AWS::MSK::Replicator
 ### Optional
 
 - `description` (String) A summary description of the replicator.
+- `log_delivery` (Attributes) Configuration for log delivery for the replicator. (see [below for nested schema](#nestedatt--log_delivery))
 - `tags` (Attributes Set) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -36,29 +37,64 @@ Resource Type definition for AWS::MSK::Replicator
 <a id="nestedatt--kafka_clusters"></a>
 ### Nested Schema for `kafka_clusters`
 
-Required:
+Optional:
 
-- `amazon_msk_cluster` (Attributes) Details of an Amazon MSK cluster. Exactly one of AmazonMskCluster is required. (see [below for nested schema](#nestedatt--kafka_clusters--amazon_msk_cluster))
+- `amazon_msk_cluster` (Attributes) Details of an Amazon MSK cluster. (see [below for nested schema](#nestedatt--kafka_clusters--amazon_msk_cluster))
+- `apache_kafka_cluster` (Attributes) Details of an Apache Kafka cluster. (see [below for nested schema](#nestedatt--kafka_clusters--apache_kafka_cluster))
+- `client_authentication` (Attributes) Details of the client authentication used by the Apache Kafka cluster. (see [below for nested schema](#nestedatt--kafka_clusters--client_authentication))
+- `encryption_in_transit` (Attributes) Details of encryption in transit to the Apache Kafka cluster. (see [below for nested schema](#nestedatt--kafka_clusters--encryption_in_transit))
 - `vpc_config` (Attributes) Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster. (see [below for nested schema](#nestedatt--kafka_clusters--vpc_config))
 
 <a id="nestedatt--kafka_clusters--amazon_msk_cluster"></a>
 ### Nested Schema for `kafka_clusters.amazon_msk_cluster`
 
-Required:
+Optional:
 
 - `msk_cluster_arn` (String) The ARN of an Amazon MSK cluster.
+
+
+<a id="nestedatt--kafka_clusters--apache_kafka_cluster"></a>
+### Nested Schema for `kafka_clusters.apache_kafka_cluster`
+
+Optional:
+
+- `apache_kafka_cluster_id` (String) The ID of the Apache Kafka cluster.
+- `bootstrap_broker_string` (String) The bootstrap broker string of the Apache Kafka cluster.
+
+
+<a id="nestedatt--kafka_clusters--client_authentication"></a>
+### Nested Schema for `kafka_clusters.client_authentication`
+
+Optional:
+
+- `sasl_scram` (Attributes) Details for SASL/SCRAM client authentication. (see [below for nested schema](#nestedatt--kafka_clusters--client_authentication--sasl_scram))
+
+<a id="nestedatt--kafka_clusters--client_authentication--sasl_scram"></a>
+### Nested Schema for `kafka_clusters.client_authentication.sasl_scram`
+
+Optional:
+
+- `mechanism` (String) The SASL/SCRAM authentication mechanism.
+- `secret_arn` (String) The Amazon Resource Name (ARN) of the Secrets Manager secret.
+
+
+
+<a id="nestedatt--kafka_clusters--encryption_in_transit"></a>
+### Nested Schema for `kafka_clusters.encryption_in_transit`
+
+Optional:
+
+- `encryption_type` (String) The type of encryption in transit to the Apache Kafka cluster.
+- `root_ca_certificate` (String) The root CA certificate.
 
 
 <a id="nestedatt--kafka_clusters--vpc_config"></a>
 ### Nested Schema for `kafka_clusters.vpc_config`
 
-Required:
-
-- `subnet_ids` (Set of String) The list of subnets to connect to in the virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets.
-
 Optional:
 
 - `security_group_ids` (Set of String) The AWS security groups to associate with the elastic network interfaces in order to specify what the replicator has access to. If a security group is not specified, the default security group associated with the VPC is used.
+- `subnet_ids` (Set of String) The list of subnets to connect to in the virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets.
 
 
 
@@ -68,10 +104,15 @@ Optional:
 Required:
 
 - `consumer_group_replication` (Attributes) Configuration relating to consumer group replication. (see [below for nested schema](#nestedatt--replication_info_list--consumer_group_replication))
-- `source_kafka_cluster_arn` (String) Amazon Resource Name of the source Kafka cluster.
 - `target_compression_type` (String) The type of compression to use writing records to target Kafka cluster.
-- `target_kafka_cluster_arn` (String) Amazon Resource Name of the target Kafka cluster.
 - `topic_replication` (Attributes) Configuration relating to topic replication. (see [below for nested schema](#nestedatt--replication_info_list--topic_replication))
+
+Optional:
+
+- `source_kafka_cluster_arn` (String) Amazon Resource Name of the source Kafka cluster.
+- `source_kafka_cluster_id` (String) The ID of the source Kafka cluster.
+- `target_kafka_cluster_arn` (String) Amazon Resource Name of the target Kafka cluster.
+- `target_kafka_cluster_id` (String) The ID of the target Kafka cluster.
 
 <a id="nestedatt--replication_info_list--consumer_group_replication"></a>
 ### Nested Schema for `replication_info_list.consumer_group_replication`
@@ -82,6 +123,7 @@ Required:
 
 Optional:
 
+- `consumer_group_offset_sync_mode` (String) The consumer group offset synchronization mode.
 - `consumer_groups_to_exclude` (Set of String) List of regular expression patterns indicating the consumer groups that should not be replicated.
 - `detect_and_copy_new_consumer_groups` (Boolean) Whether to periodically check for new consumer groups.
 - `synchronise_consumer_group_offsets` (Boolean) Whether to periodically write the translated offsets to __consumer_offsets topic in target cluster.
@@ -117,6 +159,52 @@ Optional:
 Optional:
 
 - `type` (String) The type of replicated topic name.
+
+
+
+
+<a id="nestedatt--log_delivery"></a>
+### Nested Schema for `log_delivery`
+
+Optional:
+
+- `replicator_log_delivery` (Attributes) The replicator logs configuration. (see [below for nested schema](#nestedatt--log_delivery--replicator_log_delivery))
+
+<a id="nestedatt--log_delivery--replicator_log_delivery"></a>
+### Nested Schema for `log_delivery.replicator_log_delivery`
+
+Optional:
+
+- `cloudwatch_logs` (Attributes) Details of the CloudWatch Logs destination for replicator logs. (see [below for nested schema](#nestedatt--log_delivery--replicator_log_delivery--cloudwatch_logs))
+- `firehose` (Attributes) Details of the Kinesis Data Firehose delivery stream that is the destination for replicator logs. (see [below for nested schema](#nestedatt--log_delivery--replicator_log_delivery--firehose))
+- `s3` (Attributes) Details of the Amazon S3 destination for replicator logs. (see [below for nested schema](#nestedatt--log_delivery--replicator_log_delivery--s3))
+
+<a id="nestedatt--log_delivery--replicator_log_delivery--cloudwatch_logs"></a>
+### Nested Schema for `log_delivery.replicator_log_delivery.cloudwatch_logs`
+
+Optional:
+
+- `enabled` (Boolean) Whether log delivery to CloudWatch Logs is enabled.
+- `log_group` (String) The CloudWatch log group that is the destination for log delivery.
+
+
+<a id="nestedatt--log_delivery--replicator_log_delivery--firehose"></a>
+### Nested Schema for `log_delivery.replicator_log_delivery.firehose`
+
+Optional:
+
+- `delivery_stream` (String) The Firehose delivery stream that is the destination for log delivery.
+- `enabled` (Boolean) Whether log delivery to Firehose is enabled.
+
+
+<a id="nestedatt--log_delivery--replicator_log_delivery--s3"></a>
+### Nested Schema for `log_delivery.replicator_log_delivery.s3`
+
+Optional:
+
+- `bucket` (String) The S3 bucket that is the destination for log delivery.
+- `enabled` (Boolean) Whether log delivery to S3 is enabled.
+- `prefix` (String) The S3 prefix that is the destination for log delivery.
 
 
 

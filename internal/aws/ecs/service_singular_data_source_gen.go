@@ -1425,7 +1425,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "boolean"
 		//	          },
 		//	          "FilesystemType": {
-		//	            "description": "The filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the tasks will fail to start.\n The available Linux filesystem types are\u2028 ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.\n The available Windows filesystem types are ``NTFS``.",
+		//	            "description": "The filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the tasks will fail to start.\n The available Linux filesystem types are ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.\n The available Windows filesystem types are ``NTFS``.",
 		//	            "type": "string"
 		//	          },
 		//	          "Iops": {
@@ -1455,7 +1455,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "description": "The tag specifications of an Amazon EBS volume.",
 		//	              "properties": {
 		//	                "PropagateTags": {
-		//	                  "description": "Determines whether to propagate the tags from the task definition to \u2028the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in \u2028``ServiceVolumeConfiguration``. If no value is specified, the tags aren't \u2028propagated.",
+		//	                  "description": "Determines whether to propagate the tags from the task definition to the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in ``ServiceVolumeConfiguration``. If no value is specified, the tags aren't propagated.",
 		//	                  "enum": [
 		//	                    "SERVICE",
 		//	                    "TASK_DEFINITION"
@@ -1536,7 +1536,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: FilesystemType
 							"filesystem_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the tasks will fail to start.\n The available Linux filesystem types are\u2028 ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.\n The available Windows filesystem types are ``NTFS``.",
+								Description: "The filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the tasks will fail to start.\n The available Linux filesystem types are ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.\n The available Windows filesystem types are ``NTFS``.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Iops
@@ -1570,7 +1570,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: PropagateTags
 										"propagate_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Determines whether to propagate the tags from the task definition to \u2028the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in \u2028``ServiceVolumeConfiguration``. If no value is specified, the tags aren't \u2028propagated.",
+											Description: "Determines whether to propagate the tags from the task definition to the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in ``ServiceVolumeConfiguration``. If no value is specified, the tags aren't propagated.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: ResourceType
@@ -1645,7 +1645,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "RoleArn": {
-		//	        "description": "The ARN of the IAM role to associate with this VPC Lattice configuration. This is the Amazon ECS\u2028 infrastructure IAM role that is used to manage your VPC Lattice infrastructure.",
+		//	        "description": "The ARN of the IAM role to associate with this VPC Lattice configuration. This is the Amazon ECS infrastructure IAM role that is used to manage your VPC Lattice infrastructure.",
 		//	        "type": "string"
 		//	      },
 		//	      "TargetGroupArn": {
@@ -1672,7 +1672,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: RoleArn
 					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ARN of the IAM role to associate with this VPC Lattice configuration. This is the Amazon ECS\u2028 infrastructure IAM role that is used to manage your VPC Lattice infrastructure.",
+						Description: "The ARN of the IAM role to associate with this VPC Lattice configuration. This is the Amazon ECS infrastructure IAM role that is used to manage your VPC Lattice infrastructure.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TargetGroupArn

@@ -213,5 +213,5 @@ Read-Only:
 
 - `advertise_trust_store_ca_names` (String) Indicates whether trust store CA certificate names are advertised.
 - `ignore_client_certificate_expiry` (Boolean) Indicates whether expired client certificates are ignored.
-- `mode` (String) The client certificate handling method. Options are ``off``, ``passthrough`` or ``verify``. The default value is ``off``.
+- `mode` (String) The client certificate handling method. Options are ``off``, ``passthrough`` or ``verify``. The default value on initial resource creation is ``off``. After mutual authentication is turned on, you must explicitly set the ``Mode`` to ``off`` to turn it off; removing the property from your template will not turn it off.
 - `trust_store_arn` (String) The Amazon Resource Name (ARN) of the trust store.

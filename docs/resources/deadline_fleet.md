@@ -3,12 +3,12 @@
 page_title: "awscc_deadline_fleet Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Definition of AWS::Deadline::Fleet Resource Type
+  Resource Type definition for AWS::Deadline::Fleet
 ---
 
 # awscc_deadline_fleet (Resource)
 
-Definition of AWS::Deadline::Fleet Resource Type
+Resource Type definition for AWS::Deadline::Fleet
 
 ## Example Usage
 

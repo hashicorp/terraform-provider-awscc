@@ -541,6 +541,31 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: IpAddressType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "IP address type for Connector",
+		//	  "enum": [
+		//	    "IPV4",
+		//	    "DUALSTACK"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "IP address type for Connector",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"IPV4",
+					"DUALSTACK",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LoggingRole
 		// CloudFormation resource type schema:
 		//
@@ -843,6 +868,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		"egress_type":                         "EgressType",
 		"encryption_algorithm":                "EncryptionAlgorithm",
 		"error_message":                       "ErrorMessage",
+		"ip_address_type":                     "IpAddressType",
 		"key":                                 "Key",
 		"local_profile_id":                    "LocalProfileId",
 		"logging_role":                        "LoggingRole",

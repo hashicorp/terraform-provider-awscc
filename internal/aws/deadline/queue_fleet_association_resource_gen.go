@@ -88,7 +88,7 @@ func queueFleetAssociationResource(ctx context.Context) (resource.Resource, erro
 	}
 
 	schema := schema.Schema{
-		Description: "Definition of AWS::Deadline::QueueFleetAssociation Resource Type",
+		Description: "Resource Type definition for AWS::Deadline::QueueFleetAssociation",
 		Version:     1,
 		Attributes:  attributes,
 	}

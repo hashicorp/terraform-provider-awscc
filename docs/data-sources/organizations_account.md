@@ -28,6 +28,7 @@ Data Source schema for AWS::Organizations::Account
 - `joined_method` (String) The method by which the account joined the organization.
 - `joined_timestamp` (String) The date the account became a part of the organization.
 - `parent_ids` (Set of String) List of parent nodes for the member account. Currently only one parent at a time is supported. Default is root.
+- `paths` (List of String) The paths in the organization where the account exists.
 - `role_name` (String) The name of an IAM role that AWS Organizations automatically preconfigures in the new member account. Default name is OrganizationAccountAccessRole if not specified.
 - `state` (String) The state of the account in the organization.
 - `status` (String) The status of the account in the organization.

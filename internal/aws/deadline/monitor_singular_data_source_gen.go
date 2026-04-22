@@ -62,6 +62,20 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"identity_center_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: IdentityCenterRegion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS region where IAM Identity Center is enabled. Required when Identity Center is in a different region than the monitor.",
+		//	  "maxLength": 25,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-z0-9-]+$",
+		//	  "type": "string"
+		//	}
+		"identity_center_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS region where IAM Identity Center is enabled. Required when Identity Center is in a different region than the monitor.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MonitorId
 		// CloudFormation resource type schema:
 		//
@@ -173,6 +187,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"display_name":                    "DisplayName",
 		"identity_center_application_arn": "IdentityCenterApplicationArn",
 		"identity_center_instance_arn":    "IdentityCenterInstanceArn",
+		"identity_center_region":          "IdentityCenterRegion",
 		"key":                             "Key",
 		"monitor_id":                      "MonitorId",
 		"role_arn":                        "RoleArn",

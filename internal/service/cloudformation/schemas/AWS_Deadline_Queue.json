@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::Deadline::Queue",
-  "description": "Definition of AWS::Deadline::Queue Resource Type",
+  "description": "Resource Type definition for AWS::Deadline::Queue",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-deadline",
   "definitions": {
     "DefaultQueueBudgetAction": {
@@ -73,12 +73,156 @@
       ],
       "additionalProperties": false
     },
+    "PriorityBalancedSchedulingConfiguration": {
+      "type": "object",
+      "properties": {
+        "RenderingTaskBuffer": {
+          "type": "integer",
+          "default": 1,
+          "maximum": 1000,
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "PriorityFifoSchedulingConfiguration": {
+      "type": "object",
+      "additionalProperties": false
+    },
     "RunAs": {
       "type": "string",
       "enum": [
         "QUEUE_CONFIGURED_USER",
         "WORKER_AGENT_USER"
       ]
+    },
+    "SchedulingConfiguration": {
+      "type": "object",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "PriorityFifo",
+          "properties": {
+            "PriorityFifo": {
+              "$ref": "#/definitions/PriorityFifoSchedulingConfiguration"
+            }
+          },
+          "required": [
+            "PriorityFifo"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "PriorityBalanced",
+          "properties": {
+            "PriorityBalanced": {
+              "$ref": "#/definitions/PriorityBalancedSchedulingConfiguration"
+            }
+          },
+          "required": [
+            "PriorityBalanced"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "WeightedBalanced",
+          "properties": {
+            "WeightedBalanced": {
+              "$ref": "#/definitions/WeightedBalancedSchedulingConfiguration"
+            }
+          },
+          "required": [
+            "WeightedBalanced"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "SchedulingMaxPriorityOverride": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "AlwaysScheduleFirst",
+          "properties": {
+            "AlwaysScheduleFirst": {
+              "$ref": "#/definitions/SchedulingMaxPriorityOverrideAlwaysScheduleFirst"
+            }
+          },
+          "required": [
+            "AlwaysScheduleFirst"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "SchedulingMaxPriorityOverrideAlwaysScheduleFirst": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "SchedulingMinPriorityOverride": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "AlwaysScheduleLast",
+          "properties": {
+            "AlwaysScheduleLast": {
+              "$ref": "#/definitions/SchedulingMinPriorityOverrideAlwaysScheduleLast"
+            }
+          },
+          "required": [
+            "AlwaysScheduleLast"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "SchedulingMinPriorityOverrideAlwaysScheduleLast": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "WeightedBalancedSchedulingConfiguration": {
+      "type": "object",
+      "properties": {
+        "PriorityWeight": {
+          "type": "number",
+          "default": 100.0,
+          "maximum": 10000,
+          "minimum": 0
+        },
+        "ErrorWeight": {
+          "type": "number",
+          "default": -10.0,
+          "maximum": 10000,
+          "minimum": -10000
+        },
+        "SubmissionTimeWeight": {
+          "type": "number",
+          "default": 3.0,
+          "maximum": 10000,
+          "minimum": 0
+        },
+        "RenderingTaskWeight": {
+          "type": "number",
+          "default": -100.0,
+          "maximum": 10000,
+          "minimum": -10000
+        },
+        "RenderingTaskBuffer": {
+          "type": "integer",
+          "default": 1,
+          "maximum": 1000,
+          "minimum": 0
+        },
+        "MaxPriorityOverride": {
+          "$ref": "#/definitions/SchedulingMaxPriorityOverride"
+        },
+        "MinPriorityOverride": {
+          "$ref": "#/definitions/SchedulingMinPriorityOverride"
+        }
+      },
+      "additionalProperties": false
     },
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
@@ -184,6 +328,9 @@
     "Arn": {
       "type": "string",
       "pattern": "^arn:*"
+    },
+    "SchedulingConfiguration": {
+      "$ref": "#/definitions/SchedulingConfiguration"
     },
     "Tags": {
       "type": "array",

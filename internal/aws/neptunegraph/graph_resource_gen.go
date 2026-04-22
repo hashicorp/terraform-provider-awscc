@@ -115,6 +115,29 @@ func graphResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the KMS key used to encrypt data in the Neptune Analytics graph. If not specified, the graph is encrypted with an AWS managed key.",
+		//	  "maxLength": 1024,
+		//	  "minLength": 1,
+		//	  "pattern": "arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}",
+		//	  "type": "string"
+		//	}
+		"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the KMS key used to encrypt data in the Neptune Analytics graph. If not specified, the graph is encrypted with an AWS managed key.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 1024),
+				stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ProvisionedMemory
 		// CloudFormation resource type schema:
 		//
@@ -304,6 +327,7 @@ func graphResource(ctx context.Context) (resource.Resource, error) {
 		"graph_id":                    "GraphId",
 		"graph_name":                  "GraphName",
 		"key":                         "Key",
+		"kms_key_identifier":          "KmsKeyIdentifier",
 		"provisioned_memory":          "ProvisionedMemory",
 		"public_connectivity":         "PublicConnectivity",
 		"replica_count":               "ReplicaCount",

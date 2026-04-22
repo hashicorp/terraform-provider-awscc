@@ -145,6 +145,7 @@
           "enum": [
             "on-demand",
             "spot",
+            "capacity-block",
             "reserved-capacity"
           ]
         },

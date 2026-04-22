@@ -28,6 +28,7 @@
     },
     "InitialVlanInfo": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "Cidr": {
           "type": "string",
@@ -44,6 +45,7 @@
     },
     "HostInfoForCreate": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "HostName": {
           "$ref": "#/definitions/HostName"
@@ -116,6 +118,7 @@
     },
     "Check": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "Type": {
           "type": "string",
@@ -141,6 +144,7 @@
     },
     "Secret": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "SecretArn": {
           "type": "string"
@@ -214,6 +218,7 @@
     "InitialVlans": {
       "description": "The initial Vlan configuration only required upon creation. Modification after creation will have no effect",
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "VmkManagement": {
           "$ref": "#/definitions/InitialVlanInfo"
@@ -277,9 +282,11 @@
     },
     "ConnectivityInfo": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "PrivateRouteServerPeerings": {
           "type": "array",
+          "insertionOrder": false,
           "items": {
             "$ref": "#/definitions/RouteServerPeering"
           },
@@ -293,6 +300,7 @@
     },
     "VcfHostnames": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "VCenter": {
           "$ref": "#/definitions/HostName"
@@ -343,7 +351,7 @@
     },
     "EnvironmentArn": {
       "type": "string",
-      "pattern": "^arn:aws:evs:[a-z]{2}-[a-z]+-[0-9]:[0-9]{12}:environment/[a-zA-Z0-9_-]+$",
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov):evs:[a-z]{2}-[a-z]+-[0-9]:[0-9]{12}:environment/[a-zA-Z0-9_-]+$",
       "minLength": 1,
       "maxLength": 1011
     },
@@ -355,21 +363,25 @@
     },
     "Checks": {
       "type": "array",
+      "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Check"
       }
     },
     "Credentials": {
       "type": "array",
+      "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Secret"
       }
     },
     "ServiceAccessSecurityGroups": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "SecurityGroups": {
           "type": "array",
+          "insertionOrder": false,
           "items": {
             "$ref": "#/definitions/SecurityGroupId"
           }

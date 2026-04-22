@@ -66,7 +66,7 @@
     "/properties/UpdatedAt",
     "/properties/DaemonStatus"
   ],
-  "description": "Resource schema for AWS ECS Daemon",
+  "description": "Information about a daemon resource.",
   "writeOnlyProperties": [
     "/properties/CapacityProviderArns",
     "/properties/DaemonName",
@@ -93,47 +93,57 @@
       ]
     },
     "DaemonDeploymentConfiguration": {
+      "description": "Optional deployment parameters that control how a daemon rolls out updates across container instances.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "DrainPercent": {
           "maximum": 100,
+          "description": "The percentage of container instances to drain simultaneously during a daemon deployment. Valid values are between 0.0 and 100.0.",
           "type": "number",
           "minimum": 0
         },
         "BakeTimeInMinutes": {
           "maximum": 1440,
+          "description": "The amount of time (in minutes) to wait after a successful deployment step before proceeding. This allows time to monitor for issues before continuing. The default value is 0.",
           "type": "integer",
           "minimum": 0
         },
         "Alarms": {
+          "description": "The CloudWatch alarm configuration for the daemon deployment. When alarms are triggered during a deployment, the deployment can be automatically rolled back.",
           "$ref": "#/definitions/DaemonAlarmConfiguration"
         }
       }
     },
     "DaemonAlarmConfiguration": {
+      "description": "The CloudWatch alarm configuration for a daemon. When enabled, CloudWatch alarms determine whether a daemon deployment has failed.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "AlarmNames": {
+          "description": "The CloudWatch alarm names to monitor during a daemon deployment.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "Enable": {
+          "description": "Determines whether to use the CloudWatch alarm option in the daemon deployment process. The default value is ``false``.",
           "type": "boolean"
         }
       }
     },
     "Tag": {
+      "description": "The metadata that you apply to a resource to help you categorize and organize them. Each tag consists of a key and an optional value. You define them.\n The following basic restrictions apply to tags:\n  +  Maximum number of tags per resource - 50\n  +  For each resource, each tag key must be unique, and each tag key can have only one value.\n  +  Maximum key length - 128 Unicode characters in UTF-8\n  +  Maximum value length - 256 Unicode characters in UTF-8\n  +  If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.\n  +  Tag keys and values are case-sensitive.\n  +  Do not use ``aws:``, ``AWS:``, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "Value": {
+          "description": "The optional part of a key-value pair that make up a tag. A ``value`` acts as a descriptor within a tag category (key).",
           "type": "string"
         },
         "Key": {
+          "description": "One part of a key-value pair that make up a tag. A ``key`` is a general label that acts like a category for more specific tag values.",
           "type": "string"
         }
       },
@@ -144,24 +154,31 @@
   },
   "properties": {
     "ClusterArn": {
+      "description": "The Amazon Resource Name (ARN) of the cluster that the daemon is running in.",
       "type": "string"
     },
     "DaemonStatus": {
+      "description": "",
       "$ref": "#/definitions/DaemonStatus"
     },
     "DaemonTaskDefinitionArn": {
+      "description": "The Amazon Resource Name (ARN) of the daemon task definition used by this revision.",
       "type": "string"
     },
     "DaemonName": {
+      "description": "",
       "type": "string"
     },
     "EnableECSManagedTags": {
+      "description": "Specifies whether Amazon ECS managed tags are turned on for the daemon tasks.",
       "type": "boolean"
     },
     "EnableExecuteCommand": {
+      "description": "Specifies whether the execute command functionality is turned on for the daemon tasks.",
       "type": "boolean"
     },
     "PropagateTags": {
+      "description": "Specifies whether tags are propagated from the daemon to the daemon tasks.",
       "type": "string",
       "enum": [
         "DAEMON",
@@ -170,29 +187,36 @@
     },
     "CreatedAt": {
       "format": "date-time",
+      "description": "",
       "type": "string"
     },
     "UpdatedAt": {
       "format": "date-time",
+      "description": "",
       "type": "string"
     },
     "DeploymentArn": {
+      "description": "",
       "type": "string"
     },
     "CapacityProviderArns": {
       "minItems": 1,
+      "description": "The Amazon Resource Names (ARNs) of the capacity providers associated with the daemon.",
       "type": "array",
       "items": {
         "type": "string"
       }
     },
     "DaemonArn": {
+      "description": "",
       "type": "string"
     },
     "DeploymentConfiguration": {
+      "description": "The deployment configuration used for this daemon deployment.",
       "$ref": "#/definitions/DaemonDeploymentConfiguration"
     },
     "Tags": {
+      "description": "",
       "insertionOrder": false,
       "type": "array",
       "items": {

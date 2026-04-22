@@ -132,7 +132,7 @@ func meteredProductResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Definition of AWS::Deadline::MeteredProduct Resource Type",
+		Description: "Resource Type definition for AWS::Deadline::MeteredProduct",
 		Version:     1,
 		Attributes:  attributes,
 	}

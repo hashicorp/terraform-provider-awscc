@@ -254,7 +254,7 @@ func licenseEndpointResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Definition of AWS::Deadline::LicenseEndpoint Resource Type",
+		Description: "Resource Type definition for AWS::Deadline::LicenseEndpoint",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -1925,6 +1925,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	      "enum": [
 		//	        "on-demand",
 		//	        "spot",
+		//	        "capacity-block",
 		//	        "reserved-capacity"
 		//	      ],
 		//	      "type": "string"
@@ -1962,6 +1963,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 						stringvalidator.OneOf(
 							"on-demand",
 							"spot",
+							"capacity-block",
 							"reserved-capacity",
 						),
 					}, /*END VALIDATORS*/

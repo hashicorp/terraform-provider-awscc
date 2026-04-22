@@ -32,6 +32,7 @@ Data Source schema for AWS::Deadline::Queue
 - `queue_id` (String)
 - `required_file_system_location_names` (List of String)
 - `role_arn` (String)
+- `scheduling_configuration` (Attributes) (see [below for nested schema](#nestedatt--scheduling_configuration))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--job_attachment_settings"></a>
@@ -68,6 +69,54 @@ Read-Only:
 
 - `password_arn` (String)
 - `user` (String)
+
+
+
+<a id="nestedatt--scheduling_configuration"></a>
+### Nested Schema for `scheduling_configuration`
+
+Read-Only:
+
+- `priority_balanced` (Attributes) (see [below for nested schema](#nestedatt--scheduling_configuration--priority_balanced))
+- `priority_fifo` (String)
+- `weighted_balanced` (Attributes) (see [below for nested schema](#nestedatt--scheduling_configuration--weighted_balanced))
+
+<a id="nestedatt--scheduling_configuration--priority_balanced"></a>
+### Nested Schema for `scheduling_configuration.priority_balanced`
+
+Read-Only:
+
+- `rendering_task_buffer` (Number)
+
+
+<a id="nestedatt--scheduling_configuration--weighted_balanced"></a>
+### Nested Schema for `scheduling_configuration.weighted_balanced`
+
+Read-Only:
+
+- `error_weight` (Number)
+- `max_priority_override` (Attributes) (see [below for nested schema](#nestedatt--scheduling_configuration--weighted_balanced--max_priority_override))
+- `min_priority_override` (Attributes) (see [below for nested schema](#nestedatt--scheduling_configuration--weighted_balanced--min_priority_override))
+- `priority_weight` (Number)
+- `rendering_task_buffer` (Number)
+- `rendering_task_weight` (Number)
+- `submission_time_weight` (Number)
+
+<a id="nestedatt--scheduling_configuration--weighted_balanced--max_priority_override"></a>
+### Nested Schema for `scheduling_configuration.weighted_balanced.max_priority_override`
+
+Read-Only:
+
+- `always_schedule_first` (String)
+
+
+<a id="nestedatt--scheduling_configuration--weighted_balanced--min_priority_override"></a>
+### Nested Schema for `scheduling_configuration.weighted_balanced.min_priority_override`
+
+Read-Only:
+
+- `always_schedule_last` (String)
+
 
 
 
