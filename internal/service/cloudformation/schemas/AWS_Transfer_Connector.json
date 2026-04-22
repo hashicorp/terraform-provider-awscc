@@ -110,6 +110,14 @@
         "ServerIds"
       ],
       "additionalProperties": false
+    },
+    "IpAddressType": {
+      "type": "string",
+      "description": "IP address type for Connector",
+      "enum": [
+        "IPV4",
+        "DUALSTACK"
+      ]
     }
   },
   "properties": {
@@ -313,6 +321,9 @@
       "description": "Detailed error message when Connector in ERRORED status",
       "type": "string",
       "maxLength": 2048
+    },
+    "IpAddressType": {
+      "$ref": "#/definitions/IpAddressType"
     }
   },
   "additionalProperties": false,

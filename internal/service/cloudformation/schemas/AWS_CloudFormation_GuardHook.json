@@ -296,7 +296,19 @@
     "Options": {
       "properties": {
         "InputParams": {
-          "$ref": "#/definitions/S3Location"
+          "oneOf": [
+            {
+              "$ref": "#/definitions/S3Location"
+            },
+            {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 10,
+              "items": {
+                "$ref": "#/definitions/S3Location"
+              }
+            }
+          ]
         }
       },
       "required": [],

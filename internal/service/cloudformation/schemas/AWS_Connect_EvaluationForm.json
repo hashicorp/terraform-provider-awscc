@@ -49,7 +49,8 @@
           "type": "string",
           "enum": [
             "AGENT",
-            "AUTOMATED"
+            "AUTOMATED",
+            "CUSTOMER"
           ]
         }
       },
@@ -71,7 +72,10 @@
             "es-ES",
             "fr-FR",
             "it-IT",
-            "pt-BR"
+            "pt-BR",
+            "ja-JP",
+            "ko-KR",
+            "zh-CN"
           ]
         }
       }

@@ -67,6 +67,14 @@
       "description": "The date the account became a part of the organization.",
       "type": "string"
     },
+    "Paths": {
+      "description": "The paths in the organization where the account exists.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(o-[a-z0-9]{10,32}/r-[0-9a-z]{4,32}(/ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})*(/\\d{12})*)/"
+      }
+    },
     "Status": {
       "description": "The status of the account in the organization.",
       "type": "string",
@@ -138,7 +146,8 @@
     "/properties/State",
     "/properties/JoinedTimestamp",
     "/properties/JoinedMethod",
-    "/properties/Arn"
+    "/properties/Arn",
+    "/properties/Paths"
   ],
   "writeOnlyProperties": [
     "/properties/RoleName"
