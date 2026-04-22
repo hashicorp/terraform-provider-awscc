@@ -347,6 +347,21 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Detailed error message when Connector in ERRORED status",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: IpAddressType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "IP address type for Connector",
+		//	  "enum": [
+		//	    "IPV4",
+		//	    "DUALSTACK"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "IP address type for Connector",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LoggingRole
 		// CloudFormation resource type schema:
 		//
@@ -554,6 +569,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"egress_type":                         "EgressType",
 		"encryption_algorithm":                "EncryptionAlgorithm",
 		"error_message":                       "ErrorMessage",
+		"ip_address_type":                     "IpAddressType",
 		"key":                                 "Key",
 		"local_profile_id":                    "LocalProfileId",
 		"logging_role":                        "LoggingRole",

@@ -55,6 +55,40 @@ func mailManagerIngressPointDataSource(ctx context.Context) (datasource.DataSour
 		//	      "minLength": 8,
 		//	      "pattern": "^[A-Za-z0-9!@#$%^\u0026*()_+\\-=\\[\\]{}|.,?]+$",
 		//	      "type": "string"
+		//	    },
+		//	    "TlsAuthConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "TrustStore": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "CAContent": {
+		//	              "maxLength": 500000,
+		//	              "minLength": 1,
+		//	              "pattern": "^[\\P{C}\\s]*$",
+		//	              "type": "string"
+		//	            },
+		//	            "CrlContent": {
+		//	              "maxLength": 500000,
+		//	              "minLength": 1,
+		//	              "pattern": "^[\\P{C}\\s]*$",
+		//	              "type": "string"
+		//	            },
+		//	            "KmsKeyArn": {
+		//	              "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc):kms:[a-z0-9-]+:\\d{12}:(key|alias)/[a-zA-Z0-9/_-]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "CAContent"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TrustStore"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -67,6 +101,30 @@ func mailManagerIngressPointDataSource(ctx context.Context) (datasource.DataSour
 				}, /*END ATTRIBUTE*/
 				// Property: SmtpPassword
 				"smtp_password": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TlsAuthConfiguration
+				"tls_auth_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TrustStore
+						"trust_store": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CAContent
+								"ca_content": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: CrlContent
+								"crl_content": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: KmsKeyArn
+								"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -243,6 +301,20 @@ func mailManagerIngressPointDataSource(ctx context.Context) (datasource.DataSour
 			}, /*END NESTED OBJECT*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: TlsPolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "REQUIRED",
+		//	    "OPTIONAL",
+		//	    "FIPS"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"tls_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TrafficPolicyId
 		// CloudFormation resource type schema:
 		//
@@ -260,7 +332,8 @@ func mailManagerIngressPointDataSource(ctx context.Context) (datasource.DataSour
 		//	{
 		//	  "enum": [
 		//	    "OPEN",
-		//	    "AUTH"
+		//	    "AUTH",
+		//	    "MTLS"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -285,12 +358,15 @@ func mailManagerIngressPointDataSource(ctx context.Context) (datasource.DataSour
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"a_record":                      "ARecord",
+		"ca_content":                    "CAContent",
+		"crl_content":                   "CrlContent",
 		"ingress_point_arn":             "IngressPointArn",
 		"ingress_point_configuration":   "IngressPointConfiguration",
 		"ingress_point_id":              "IngressPointId",
 		"ingress_point_name":            "IngressPointName",
 		"ip_type":                       "IpType",
 		"key":                           "Key",
+		"kms_key_arn":                   "KmsKeyArn",
 		"network_configuration":         "NetworkConfiguration",
 		"private_network_configuration": "PrivateNetworkConfiguration",
 		"public_network_configuration":  "PublicNetworkConfiguration",
@@ -300,7 +376,10 @@ func mailManagerIngressPointDataSource(ctx context.Context) (datasource.DataSour
 		"status":                        "Status",
 		"status_to_update":              "StatusToUpdate",
 		"tags":                          "Tags",
+		"tls_auth_configuration":        "TlsAuthConfiguration",
+		"tls_policy":                    "TlsPolicy",
 		"traffic_policy_id":             "TrafficPolicyId",
+		"trust_store":                   "TrustStore",
 		"type":                          "Type",
 		"value":                         "Value",
 		"vpc_endpoint_id":               "VpcEndpointId",

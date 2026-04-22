@@ -80,6 +80,20 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Contains a user-supplied name for the Graph. \n\nIf you don't specify a name, we generate a unique Graph Name using a combination of Stack Name and a UUID comprising of 4 characters.\n\n_Important_: If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the KMS key used to encrypt data in the Neptune Analytics graph. If not specified, the graph is encrypted with an AWS managed key.",
+		//	  "maxLength": 1024,
+		//	  "minLength": 1,
+		//	  "pattern": "arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}",
+		//	  "type": "string"
+		//	}
+		"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the KMS key used to encrypt data in the Neptune Analytics graph. If not specified, the graph is encrypted with an AWS managed key.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ProvisionedMemory
 		// CloudFormation resource type schema:
 		//
@@ -214,6 +228,7 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"graph_id":                    "GraphId",
 		"graph_name":                  "GraphName",
 		"key":                         "Key",
+		"kms_key_identifier":          "KmsKeyIdentifier",
 		"provisioned_memory":          "ProvisionedMemory",
 		"public_connectivity":         "PublicConnectivity",
 		"replica_count":               "ReplicaCount",

@@ -74,6 +74,18 @@ func organizationalUnitDataSource(ctx context.Context) (datasource.DataSource, e
 			Description: "The unique identifier (ID) of the parent root or OU that you want to create the new OU in.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Path
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The path in the organization where this OU exists.",
+		//	  "pattern": "^(o-[a-z0-9]{10,32}/r-[0-9a-z]{4,32}(/ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})*(/\\d{12})*)/",
+		//	  "type": "string"
+		//	}
+		"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The path in the organization where this OU exists.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -146,6 +158,7 @@ func organizationalUnitDataSource(ctx context.Context) (datasource.DataSource, e
 		"name":                   "Name",
 		"organizational_unit_id": "Id",
 		"parent_id":              "ParentId",
+		"path":                   "Path",
 		"tags":                   "Tags",
 		"value":                  "Value",
 	})
