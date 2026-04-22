@@ -88,7 +88,7 @@ func queueLimitAssociationResource(ctx context.Context) (resource.Resource, erro
 	}
 
 	schema := schema.Schema{
-		Description: "Definition of AWS::Deadline::QueueLimitAssociation Resource Type",
+		Description: "Resource Type definition for AWS::Deadline::QueueLimitAssociation",
 		Version:     1,
 		Attributes:  attributes,
 	}

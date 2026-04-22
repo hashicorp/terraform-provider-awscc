@@ -72,6 +72,40 @@ func mailManagerIngressPointResource(ctx context.Context) (resource.Resource, er
 		//	      "minLength": 8,
 		//	      "pattern": "^[A-Za-z0-9!@#$%^\u0026*()_+\\-=\\[\\]{}|.,?]+$",
 		//	      "type": "string"
+		//	    },
+		//	    "TlsAuthConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "TrustStore": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "CAContent": {
+		//	              "maxLength": 500000,
+		//	              "minLength": 1,
+		//	              "pattern": "^[\\P{C}\\s]*$",
+		//	              "type": "string"
+		//	            },
+		//	            "CrlContent": {
+		//	              "maxLength": 500000,
+		//	              "minLength": 1,
+		//	              "pattern": "^[\\P{C}\\s]*$",
+		//	              "type": "string"
+		//	            },
+		//	            "KmsKeyArn": {
+		//	              "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc):kms:[a-z0-9-]+:\\d{12}:(key|alias)/[a-zA-Z0-9/_-]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "CAContent"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TrustStore"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -99,6 +133,65 @@ func mailManagerIngressPointResource(ctx context.Context) (resource.Resource, er
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TlsAuthConfiguration
+				"tls_auth_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TrustStore
+						"trust_store": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CAContent
+								"ca_content": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 500000),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[\\P{C}\\s]*$"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: CrlContent
+								"crl_content": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 500000),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[\\P{C}\\s]*$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: KmsKeyArn
+								"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-eusc):kms:[a-z0-9-]+:\\d{12}:(key|alias)/[a-zA-Z0-9/_-]+$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -360,6 +453,31 @@ func mailManagerIngressPointResource(ctx context.Context) (resource.Resource, er
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TlsPolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "REQUIRED",
+		//	    "OPTIONAL",
+		//	    "FIPS"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"tls_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"REQUIRED",
+					"OPTIONAL",
+					"FIPS",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TrafficPolicyId
 		// CloudFormation resource type schema:
 		//
@@ -380,7 +498,8 @@ func mailManagerIngressPointResource(ctx context.Context) (resource.Resource, er
 		//	{
 		//	  "enum": [
 		//	    "OPEN",
-		//	    "AUTH"
+		//	    "AUTH",
+		//	    "MTLS"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -390,6 +509,7 @@ func mailManagerIngressPointResource(ctx context.Context) (resource.Resource, er
 				stringvalidator.OneOf(
 					"OPEN",
 					"AUTH",
+					"MTLS",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -425,12 +545,15 @@ func mailManagerIngressPointResource(ctx context.Context) (resource.Resource, er
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"a_record":                      "ARecord",
+		"ca_content":                    "CAContent",
+		"crl_content":                   "CrlContent",
 		"ingress_point_arn":             "IngressPointArn",
 		"ingress_point_configuration":   "IngressPointConfiguration",
 		"ingress_point_id":              "IngressPointId",
 		"ingress_point_name":            "IngressPointName",
 		"ip_type":                       "IpType",
 		"key":                           "Key",
+		"kms_key_arn":                   "KmsKeyArn",
 		"network_configuration":         "NetworkConfiguration",
 		"private_network_configuration": "PrivateNetworkConfiguration",
 		"public_network_configuration":  "PublicNetworkConfiguration",
@@ -440,7 +563,10 @@ func mailManagerIngressPointResource(ctx context.Context) (resource.Resource, er
 		"status":                        "Status",
 		"status_to_update":              "StatusToUpdate",
 		"tags":                          "Tags",
+		"tls_auth_configuration":        "TlsAuthConfiguration",
+		"tls_policy":                    "TlsPolicy",
 		"traffic_policy_id":             "TrafficPolicyId",
+		"trust_store":                   "TrustStore",
 		"type":                          "Type",
 		"value":                         "Value",
 		"vpc_endpoint_id":               "VpcEndpointId",

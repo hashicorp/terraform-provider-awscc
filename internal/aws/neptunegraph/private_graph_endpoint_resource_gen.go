@@ -41,7 +41,6 @@ func privateGraphEndpointResource(ctx context.Context) (resource.Resource, error
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
-			// GraphIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: PrivateGraphEndpointIdentifier
 		// CloudFormation resource type schema:
@@ -170,7 +169,6 @@ func privateGraphEndpointResource(ctx context.Context) (resource.Resource, error
 	opts = opts.IsImmutableType(true)
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/GraphIdentifier",
 		"/properties/SecurityGroupIds",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(2160).WithDeleteTimeoutInMinutes(2160)
