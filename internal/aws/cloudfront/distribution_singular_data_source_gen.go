@@ -278,6 +278,19 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      "type": "array",
 		//	      "uniqueItems": false
 		//	    },
+		//	    "CacheTagConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "",
+		//	      "properties": {
+		//	        "HeaderName": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "HeaderName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "Comment": {
 		//	      "default": "",
 		//	      "description": "A comment to describe the distribution. The comment cannot be longer than 128 characters.",
@@ -1358,6 +1371,17 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 					Description: "A complex type that contains zero or more ``CacheBehavior`` elements.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: CacheTagConfig
+				"cache_tag_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: HeaderName
+						"header_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: Comment
 				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "A comment to describe the distribution. The comment cannot be longer than 128 characters.",
@@ -2202,6 +2226,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"bucket":                          "Bucket",
 		"cache_behaviors":                 "CacheBehaviors",
 		"cache_policy_id":                 "CachePolicyId",
+		"cache_tag_config":                "CacheTagConfig",
 		"cached_methods":                  "CachedMethods",
 		"client_certificate_arn":          "ClientCertificateArn",
 		"cloudfront_default_certificate":  "CloudFrontDefaultCertificate",

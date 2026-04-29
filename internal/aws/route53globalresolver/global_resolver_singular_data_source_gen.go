@@ -110,7 +110,7 @@ func globalResolverDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "items": {
 		//	    "maxLength": 39,
 		//	    "minLength": 1,
-		//	    "pattern": "(?:[A-F0-9]{1,4}:){7}[A-F0-9]{1,4}",
+		//	    "pattern": "(?:[A-Fa-f0-9]{1,4}:){7}[A-Fa-f0-9]{1,4}",
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array"
@@ -159,6 +159,7 @@ func globalResolverDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A list of regions the Global Resolver will exist in. This list cannot be updated and will stay fixed for the duration of the Global Resolver.",
 		//	  "items": {
 		//	    "maxLength": 32,
 		//	    "minLength": 1,
@@ -168,6 +169,7 @@ func globalResolverDataSource(ctx context.Context) (datasource.DataSource, error
 		//	}
 		"regions": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Description: "A list of regions the Global Resolver will exist in. This list cannot be updated and will stay fixed for the duration of the Global Resolver.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status

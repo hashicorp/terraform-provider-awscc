@@ -99,6 +99,47 @@ func flowVpcInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "Subnet must be in the AZ of the Flow",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Key-value pairs that can be used to tag and organize this VPC network interface.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Key-value pairs that can be used to tag and organize this VPC network interface.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -117,11 +158,14 @@ func flowVpcInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"flow_arn":              "FlowArn",
+		"key":                   "Key",
 		"name":                  "Name",
 		"network_interface_ids": "NetworkInterfaceIds",
 		"role_arn":              "RoleArn",
 		"security_group_ids":    "SecurityGroupIds",
 		"subnet_id":             "SubnetId",
+		"tags":                  "Tags",
+		"value":                 "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

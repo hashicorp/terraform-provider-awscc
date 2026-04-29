@@ -85,7 +85,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                                "type": "string"
 		//	                              },
 		//	                              "HashKeyType": {
-		//	                                "description": "The data type for the hash key (also called the partition key). You can specify the following values:\n  +   ``'STRING'`` - The hash key is a string.\n  +   ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
+		//	                                "description": "The data type for the hash key (also called the partition key). You can specify the following values:\n  +  ``'STRING'`` - The hash key is a string.\n  +  ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
 		//	                                "type": "string"
 		//	                              },
 		//	                              "HashKeyValue": {
@@ -93,7 +93,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                                "type": "string"
 		//	                              },
 		//	                              "Operation": {
-		//	                                "description": "The type of operation to perform. You can specify the following values: \n  +   ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +   ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +   ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
+		//	                                "description": "The type of operation to perform. You can specify the following values: \n  +  ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +  ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +  ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
 		//	                                "type": "string"
 		//	                              },
 		//	                              "Payload": {
@@ -125,7 +125,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                                "type": "string"
 		//	                              },
 		//	                              "RangeKeyType": {
-		//	                                "description": "The data type for the range key (also called the sort key), You can specify the following values:\n  +   ``'STRING'`` - The range key is a string.\n  +   ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
+		//	                                "description": "The data type for the range key (also called the sort key), You can specify the following values:\n  +  ``'STRING'`` - The range key is a string.\n  +  ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
 		//	                                "type": "string"
 		//	                              },
 		//	                              "RangeKeyValue": {
@@ -620,7 +620,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                                "type": "string"
 		//	                              },
 		//	                              "HashKeyType": {
-		//	                                "description": "The data type for the hash key (also called the partition key). You can specify the following values:\n  +   ``'STRING'`` - The hash key is a string.\n  +   ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
+		//	                                "description": "The data type for the hash key (also called the partition key). You can specify the following values:\n  +  ``'STRING'`` - The hash key is a string.\n  +  ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
 		//	                                "type": "string"
 		//	                              },
 		//	                              "HashKeyValue": {
@@ -628,7 +628,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                                "type": "string"
 		//	                              },
 		//	                              "Operation": {
-		//	                                "description": "The type of operation to perform. You can specify the following values: \n  +   ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +   ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +   ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
+		//	                                "description": "The type of operation to perform. You can specify the following values: \n  +  ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +  ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +  ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
 		//	                                "type": "string"
 		//	                              },
 		//	                              "Payload": {
@@ -660,7 +660,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                                "type": "string"
 		//	                              },
 		//	                              "RangeKeyType": {
-		//	                                "description": "The data type for the range key (also called the sort key), You can specify the following values:\n  +   ``'STRING'`` - The range key is a string.\n  +   ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
+		//	                                "description": "The data type for the range key (also called the sort key), You can specify the following values:\n  +  ``'STRING'`` - The range key is a string.\n  +  ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
 		//	                                "type": "string"
 		//	                              },
 		//	                              "RangeKeyValue": {
@@ -1155,7 +1155,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                                "type": "string"
 		//	                              },
 		//	                              "HashKeyType": {
-		//	                                "description": "The data type for the hash key (also called the partition key). You can specify the following values:\n  +   ``'STRING'`` - The hash key is a string.\n  +   ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
+		//	                                "description": "The data type for the hash key (also called the partition key). You can specify the following values:\n  +  ``'STRING'`` - The hash key is a string.\n  +  ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
 		//	                                "type": "string"
 		//	                              },
 		//	                              "HashKeyValue": {
@@ -1163,7 +1163,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                                "type": "string"
 		//	                              },
 		//	                              "Operation": {
-		//	                                "description": "The type of operation to perform. You can specify the following values: \n  +   ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +   ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +   ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
+		//	                                "description": "The type of operation to perform. You can specify the following values: \n  +  ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +  ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +  ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
 		//	                                "type": "string"
 		//	                              },
 		//	                              "Payload": {
@@ -1195,7 +1195,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                                "type": "string"
 		//	                              },
 		//	                              "RangeKeyType": {
-		//	                                "description": "The data type for the range key (also called the sort key), You can specify the following values:\n  +   ``'STRING'`` - The range key is a string.\n  +   ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
+		//	                                "description": "The data type for the range key (also called the sort key), You can specify the following values:\n  +  ``'STRING'`` - The range key is a string.\n  +  ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
 		//	                                "type": "string"
 		//	                              },
 		//	                              "RangeKeyValue": {
@@ -1683,7 +1683,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                                "type": "string"
 		//	                              },
 		//	                              "HashKeyType": {
-		//	                                "description": "The data type for the hash key (also called the partition key). You can specify the following values:\n  +   ``'STRING'`` - The hash key is a string.\n  +   ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
+		//	                                "description": "The data type for the hash key (also called the partition key). You can specify the following values:\n  +  ``'STRING'`` - The hash key is a string.\n  +  ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
 		//	                                "type": "string"
 		//	                              },
 		//	                              "HashKeyValue": {
@@ -1691,7 +1691,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                                "type": "string"
 		//	                              },
 		//	                              "Operation": {
-		//	                                "description": "The type of operation to perform. You can specify the following values: \n  +   ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +   ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +   ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
+		//	                                "description": "The type of operation to perform. You can specify the following values: \n  +  ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +  ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +  ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
 		//	                                "type": "string"
 		//	                              },
 		//	                              "Payload": {
@@ -1723,7 +1723,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                                "type": "string"
 		//	                              },
 		//	                              "RangeKeyType": {
-		//	                                "description": "The data type for the range key (also called the sort key), You can specify the following values:\n  +   ``'STRING'`` - The range key is a string.\n  +   ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
+		//	                                "description": "The data type for the range key (also called the sort key), You can specify the following values:\n  +  ``'STRING'`` - The range key is a string.\n  +  ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
 		//	                                "type": "string"
 		//	                              },
 		//	                              "RangeKeyValue": {
@@ -2251,7 +2251,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 																	}, /*END ATTRIBUTE*/
 																	// Property: HashKeyType
 																	"hash_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The data type for the hash key (also called the partition key). You can specify the following values:\n  +   ``'STRING'`` - The hash key is a string.\n  +   ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
+																		Description: "The data type for the hash key (also called the partition key). You can specify the following values:\n  +  ``'STRING'`` - The hash key is a string.\n  +  ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
 																		Computed:    true,
 																	}, /*END ATTRIBUTE*/
 																	// Property: HashKeyValue
@@ -2261,7 +2261,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 																	}, /*END ATTRIBUTE*/
 																	// Property: Operation
 																	"operation": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The type of operation to perform. You can specify the following values: \n  +   ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +   ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +   ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
+																		Description: "The type of operation to perform. You can specify the following values: \n  +  ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +  ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +  ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
 																		Computed:    true,
 																	}, /*END ATTRIBUTE*/
 																	// Property: Payload
@@ -2293,7 +2293,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 																	}, /*END ATTRIBUTE*/
 																	// Property: RangeKeyType
 																	"range_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The data type for the range key (also called the sort key), You can specify the following values:\n  +   ``'STRING'`` - The range key is a string.\n  +   ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
+																		Description: "The data type for the range key (also called the sort key), You can specify the following values:\n  +  ``'STRING'`` - The range key is a string.\n  +  ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
 																		Computed:    true,
 																	}, /*END ATTRIBUTE*/
 																	// Property: RangeKeyValue
@@ -2714,7 +2714,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 																	}, /*END ATTRIBUTE*/
 																	// Property: HashKeyType
 																	"hash_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The data type for the hash key (also called the partition key). You can specify the following values:\n  +   ``'STRING'`` - The hash key is a string.\n  +   ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
+																		Description: "The data type for the hash key (also called the partition key). You can specify the following values:\n  +  ``'STRING'`` - The hash key is a string.\n  +  ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
 																		Computed:    true,
 																	}, /*END ATTRIBUTE*/
 																	// Property: HashKeyValue
@@ -2724,7 +2724,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 																	}, /*END ATTRIBUTE*/
 																	// Property: Operation
 																	"operation": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The type of operation to perform. You can specify the following values: \n  +   ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +   ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +   ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
+																		Description: "The type of operation to perform. You can specify the following values: \n  +  ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +  ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +  ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
 																		Computed:    true,
 																	}, /*END ATTRIBUTE*/
 																	// Property: Payload
@@ -2756,7 +2756,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 																	}, /*END ATTRIBUTE*/
 																	// Property: RangeKeyType
 																	"range_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The data type for the range key (also called the sort key), You can specify the following values:\n  +   ``'STRING'`` - The range key is a string.\n  +   ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
+																		Description: "The data type for the range key (also called the sort key), You can specify the following values:\n  +  ``'STRING'`` - The range key is a string.\n  +  ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
 																		Computed:    true,
 																	}, /*END ATTRIBUTE*/
 																	// Property: RangeKeyValue
@@ -3177,7 +3177,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 																	}, /*END ATTRIBUTE*/
 																	// Property: HashKeyType
 																	"hash_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The data type for the hash key (also called the partition key). You can specify the following values:\n  +   ``'STRING'`` - The hash key is a string.\n  +   ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
+																		Description: "The data type for the hash key (also called the partition key). You can specify the following values:\n  +  ``'STRING'`` - The hash key is a string.\n  +  ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
 																		Computed:    true,
 																	}, /*END ATTRIBUTE*/
 																	// Property: HashKeyValue
@@ -3187,7 +3187,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 																	}, /*END ATTRIBUTE*/
 																	// Property: Operation
 																	"operation": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The type of operation to perform. You can specify the following values: \n  +   ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +   ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +   ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
+																		Description: "The type of operation to perform. You can specify the following values: \n  +  ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +  ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +  ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
 																		Computed:    true,
 																	}, /*END ATTRIBUTE*/
 																	// Property: Payload
@@ -3219,7 +3219,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 																	}, /*END ATTRIBUTE*/
 																	// Property: RangeKeyType
 																	"range_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The data type for the range key (also called the sort key), You can specify the following values:\n  +   ``'STRING'`` - The range key is a string.\n  +   ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
+																		Description: "The data type for the range key (also called the sort key), You can specify the following values:\n  +  ``'STRING'`` - The range key is a string.\n  +  ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
 																		Computed:    true,
 																	}, /*END ATTRIBUTE*/
 																	// Property: RangeKeyValue
@@ -3633,7 +3633,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 																	}, /*END ATTRIBUTE*/
 																	// Property: HashKeyType
 																	"hash_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The data type for the hash key (also called the partition key). You can specify the following values:\n  +   ``'STRING'`` - The hash key is a string.\n  +   ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
+																		Description: "The data type for the hash key (also called the partition key). You can specify the following values:\n  +  ``'STRING'`` - The hash key is a string.\n  +  ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
 																		Computed:    true,
 																	}, /*END ATTRIBUTE*/
 																	// Property: HashKeyValue
@@ -3643,7 +3643,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 																	}, /*END ATTRIBUTE*/
 																	// Property: Operation
 																	"operation": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The type of operation to perform. You can specify the following values: \n  +   ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +   ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +   ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
+																		Description: "The type of operation to perform. You can specify the following values: \n  +  ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +  ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +  ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
 																		Computed:    true,
 																	}, /*END ATTRIBUTE*/
 																	// Property: Payload
@@ -3675,7 +3675,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 																	}, /*END ATTRIBUTE*/
 																	// Property: RangeKeyType
 																	"range_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The data type for the range key (also called the sort key), You can specify the following values:\n  +   ``'STRING'`` - The range key is a string.\n  +   ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
+																		Description: "The data type for the range key (also called the sort key), You can specify the following values:\n  +  ``'STRING'`` - The range key is a string.\n  +  ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
 																		Computed:    true,
 																	}, /*END ATTRIBUTE*/
 																	// Property: RangeKeyValue

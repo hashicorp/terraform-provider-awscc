@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -164,6 +165,175 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	}
 		"data_redundancy": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the number of Availability Zone or Local Zone that's used for redundancy for the bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: InventoryConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The inventory configuration for an Amazon S3 Express bucket.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Specifies an inventory configuration for an Amazon S3 Express bucket",
+		//	    "properties": {
+		//	      "Destination": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specifies information about where to publish inventory reports for an Amazon S3 Express bucket.",
+		//	        "properties": {
+		//	          "BucketAccountId": {
+		//	            "description": "The account ID that owns the destination S3 bucket. ",
+		//	            "type": "string"
+		//	          },
+		//	          "BucketArn": {
+		//	            "description": "The Amazon Resource Name (ARN) of the destination Amazon S3 bucket to which data is exported.",
+		//	            "type": "string"
+		//	          },
+		//	          "Format": {
+		//	            "description": "Specifies the file format used when exporting data to Amazon S3.",
+		//	            "enum": [
+		//	              "CSV",
+		//	              "ORC",
+		//	              "Parquet"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Prefix": {
+		//	            "description": "The prefix to use when exporting data. The prefix is prepended to all results.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "BucketArn",
+		//	          "Format"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "Enabled": {
+		//	        "description": "Specifies whether the inventory is enabled or disabled.",
+		//	        "type": "boolean"
+		//	      },
+		//	      "Id": {
+		//	        "description": "The ID used to identify the inventory configuration.",
+		//	        "type": "string"
+		//	      },
+		//	      "IncludedObjectVersions": {
+		//	        "description": "Object versions to include in the inventory list.",
+		//	        "enum": [
+		//	          "All",
+		//	          "Current"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "OptionalFields": {
+		//	        "description": "Contains the optional fields that are included in the inventory results.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "enum": [
+		//	            "Size",
+		//	            "LastModifiedDate",
+		//	            "StorageClass",
+		//	            "ETag",
+		//	            "IsMultipartUploaded",
+		//	            "EncryptionStatus",
+		//	            "BucketKeyStatus",
+		//	            "ChecksumAlgorithm",
+		//	            "LifecycleExpirationDate"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "Prefix": {
+		//	        "description": "The prefix that is prepended to all inventory results.",
+		//	        "type": "string"
+		//	      },
+		//	      "ScheduleFrequency": {
+		//	        "description": "Specifies the schedule for generating inventory results.",
+		//	        "enum": [
+		//	          "Daily",
+		//	          "Weekly"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Destination",
+		//	      "Enabled",
+		//	      "Id",
+		//	      "IncludedObjectVersions",
+		//	      "ScheduleFrequency"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"inventory_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Destination
+					"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BucketAccountId
+							"bucket_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The account ID that owns the destination S3 bucket. ",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: BucketArn
+							"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) of the destination Amazon S3 bucket to which data is exported.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Format
+							"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies the file format used when exporting data to Amazon S3.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Prefix
+							"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The prefix to use when exporting data. The prefix is prepended to all results.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Specifies information about where to publish inventory reports for an Amazon S3 Express bucket.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Enabled
+					"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies whether the inventory is enabled or disabled.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID used to identify the inventory configuration.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: IncludedObjectVersions
+					"included_object_versions": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Object versions to include in the inventory list.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: OptionalFields
+					"optional_fields": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "Contains the optional fields that are included in the inventory results.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Prefix
+					"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The prefix that is prepended to all inventory results.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ScheduleFrequency
+					"schedule_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies the schedule for generating inventory results.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The inventory configuration for an Amazon S3 Express bucket.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LifecycleConfiguration
@@ -416,13 +586,20 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		"access_point_arn":                     "AccessPointArn",
 		"arn":                                  "Arn",
 		"availability_zone_name":               "AvailabilityZoneName",
+		"bucket_account_id":                    "BucketAccountId",
+		"bucket_arn":                           "BucketArn",
 		"bucket_encryption":                    "BucketEncryption",
 		"bucket_key_enabled":                   "BucketKeyEnabled",
 		"bucket_name":                          "BucketName",
 		"data_redundancy":                      "DataRedundancy",
 		"days_after_initiation":                "DaysAfterInitiation",
+		"destination":                          "Destination",
+		"enabled":                              "Enabled",
 		"expiration_in_days":                   "ExpirationInDays",
+		"format":                               "Format",
 		"id":                                   "Id",
+		"included_object_versions":             "IncludedObjectVersions",
+		"inventory_configurations":             "InventoryConfigurations",
 		"key":                                  "Key",
 		"kms_master_key_id":                    "KMSMasterKeyID",
 		"lifecycle_configuration":              "LifecycleConfiguration",
@@ -430,8 +607,10 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		"metrics_configurations":               "MetricsConfigurations",
 		"object_size_greater_than":             "ObjectSizeGreaterThan",
 		"object_size_less_than":                "ObjectSizeLessThan",
+		"optional_fields":                      "OptionalFields",
 		"prefix":                               "Prefix",
 		"rules":                                "Rules",
+		"schedule_frequency":                   "ScheduleFrequency",
 		"server_side_encryption_by_default":    "ServerSideEncryptionByDefault",
 		"server_side_encryption_configuration": "ServerSideEncryptionConfiguration",
 		"sse_algorithm":                        "SSEAlgorithm",
