@@ -479,6 +479,27 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	          },
 		//	          "Name": {
 		//	            "type": "string"
+		//	          },
+		//	          "S3FilesVolumeConfiguration": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "AccessPointArn": {
+		//	                "type": "string"
+		//	              },
+		//	              "FileSystemArn": {
+		//	                "type": "string"
+		//	              },
+		//	              "RootDirectory": {
+		//	                "type": "string"
+		//	              },
+		//	              "TransitEncryptionPort": {
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "FileSystemArn"
+		//	            ],
+		//	            "type": "object"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -1150,6 +1171,51 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
+							// Property: S3FilesVolumeConfiguration
+							"s3_files_volume_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AccessPointArn
+									"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: FileSystemArn
+									"file_system_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: RootDirectory
+									"root_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: TransitEncryptionPort
+									"transit_encryption_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Optional: true,
@@ -1448,6 +1514,12 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "type": "array",
 		//	                  "uniqueItems": false
 		//	                },
+		//	                "StartTimeout": {
+		//	                  "type": "integer"
+		//	                },
+		//	                "StopTimeout": {
+		//	                  "type": "integer"
+		//	                },
 		//	                "Ulimits": {
 		//	                  "insertionOrder": false,
 		//	                  "items": {
@@ -1585,6 +1657,27 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	                },
 		//	                "Name": {
 		//	                  "type": "string"
+		//	                },
+		//	                "S3FilesVolumeConfiguration": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "AccessPointArn": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "FileSystemArn": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "RootDirectory": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "TransitEncryptionPort": {
+		//	                      "type": "integer"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "FileSystemArn"
+		//	                  ],
+		//	                  "type": "object"
 		//	                }
 		//	              },
 		//	              "type": "object"
@@ -2074,6 +2167,22 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 												listplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
+										// Property: StartTimeout
+										"start_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: StopTimeout
+										"stop_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
 										// Property: Ulimits
 										"ulimits": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -2349,6 +2458,51 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 											Computed: true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: S3FilesVolumeConfiguration
+										"s3_files_volume_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AccessPointArn
+												"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: FileSystemArn
+												"file_system_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														fwvalidators.NotNullString(),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: RootDirectory
+												"root_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: TransitEncryptionPort
+												"transit_encryption_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+														int64planmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -3874,6 +4028,27 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	                    },
 		//	                    "Name": {
 		//	                      "type": "string"
+		//	                    },
+		//	                    "S3FilesVolumeConfiguration": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "AccessPointArn": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "FileSystemArn": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "RootDirectory": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "TransitEncryptionPort": {
+		//	                          "type": "integer"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "FileSystemArn"
+		//	                      ],
+		//	                      "type": "object"
 		//	                    }
 		//	                  },
 		//	                  "type": "object"
@@ -4166,6 +4341,12 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	                            "type": "array",
 		//	                            "uniqueItems": false
 		//	                          },
+		//	                          "StartTimeout": {
+		//	                            "type": "integer"
+		//	                          },
+		//	                          "StopTimeout": {
+		//	                            "type": "integer"
+		//	                          },
 		//	                          "Ulimits": {
 		//	                            "insertionOrder": false,
 		//	                            "items": {
@@ -4267,6 +4448,27 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	                          },
 		//	                          "Name": {
 		//	                            "type": "string"
+		//	                          },
+		//	                          "S3FilesVolumeConfiguration": {
+		//	                            "additionalProperties": false,
+		//	                            "properties": {
+		//	                              "AccessPointArn": {
+		//	                                "type": "string"
+		//	                              },
+		//	                              "FileSystemArn": {
+		//	                                "type": "string"
+		//	                              },
+		//	                              "RootDirectory": {
+		//	                                "type": "string"
+		//	                              },
+		//	                              "TransitEncryptionPort": {
+		//	                                "type": "integer"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "FileSystemArn"
+		//	                            ],
+		//	                            "type": "object"
 		//	                          }
 		//	                        },
 		//	                        "type": "object"
@@ -5407,6 +5609,51 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 														stringplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
+												// Property: S3FilesVolumeConfiguration
+												"s3_files_volume_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AccessPointArn
+														"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: FileSystemArn
+														"file_system_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																fwvalidators.NotNullString(),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: RootDirectory
+														"root_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: TransitEncryptionPort
+														"transit_encryption_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																int64planmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Optional: true,
+													Computed: true,
+													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
 										Optional: true,
@@ -5894,6 +6141,22 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 																	listplanmodifier.UseStateForUnknown(),
 																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
+															// Property: StartTimeout
+															"start_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Optional: true,
+																Computed: true,
+																PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																	int64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: StopTimeout
+															"stop_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Optional: true,
+																Computed: true,
+																PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																	int64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
 															// Property: Ulimits
 															"ulimits": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -6096,6 +6359,51 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 																Computed: true,
 																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: S3FilesVolumeConfiguration
+															"s3_files_volume_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: AccessPointArn
+																	"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: FileSystemArn
+																	"file_system_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Optional: true,
+																		Computed: true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			fwvalidators.NotNullString(),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: RootDirectory
+																	"root_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: TransitEncryptionPort
+																	"transit_encryption_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Optional: true,
+																		Computed: true,
+																		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																			int64planmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Optional: true,
+																Computed: true,
+																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																	objectplanmodifier.UseStateForUnknown(),
 																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
@@ -7151,6 +7459,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_point_arn":               "AccessPointArn",
 		"access_point_id":                "AccessPointId",
 		"action":                         "Action",
 		"allow_privilege_escalation":     "AllowPrivilegeEscalation",
@@ -7188,6 +7497,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"evaluate_on_exit":               "EvaluateOnExit",
 		"execution_role_arn":             "ExecutionRoleArn",
 		"fargate_platform_configuration": "FargatePlatformConfiguration",
+		"file_system_arn":                "FileSystemArn",
 		"file_system_id":                 "FileSystemId",
 		"firelens_configuration":         "FirelensConfiguration",
 		"hard_limit":                     "HardLimit",
@@ -7256,6 +7566,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"run_as_non_root":                "RunAsNonRoot",
 		"run_as_user":                    "RunAsUser",
 		"runtime_platform":               "RuntimePlatform",
+		"s3_files_volume_configuration":  "S3FilesVolumeConfiguration",
 		"scheduling_priority":            "SchedulingPriority",
 		"secret":                         "Secret",
 		"secret_name":                    "SecretName",
@@ -7272,6 +7583,8 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"soft_limit":                     "SoftLimit",
 		"source_path":                    "SourcePath",
 		"source_volume":                  "SourceVolume",
+		"start_timeout":                  "StartTimeout",
+		"stop_timeout":                   "StopTimeout",
 		"sub_path":                       "SubPath",
 		"swappiness":                     "Swappiness",
 		"tags":                           "Tags",

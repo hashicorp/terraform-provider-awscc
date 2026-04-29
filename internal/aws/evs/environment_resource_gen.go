@@ -273,7 +273,8 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "InstanceType": {
 		//	        "enum": [
-		//	          "i4i.metal"
+		//	          "i4i.metal",
+		//	          "i7i.metal-24xl"
 		//	        ],
 		//	        "type": "string"
 		//	      },
@@ -335,6 +336,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"i4i.metal",
+								"i7i.metal-24xl",
 							),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
