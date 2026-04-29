@@ -887,6 +887,11 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_chime_app_instance",
+        "generateListResource": true,
+        "identifier": ["AppInstanceArn"]
+    },
+    {
         "resource": "awscc_cleanrooms_analysis_template",
         "identifier": ["AnalysisTemplateIdentifier","MembershipIdentifier"]
     },
@@ -1142,6 +1147,11 @@
         "resource": "awscc_cloudwatch_metric_stream",
         "generateListResource": true,
         "identifier": ["Name"]
+    },
+    {
+        "resource": "awscc_cloudwatch_otel_enrichment",
+        "generateListResource": true,
+        "identifier": ["AccountId"]
     },
     {
         "resource": "awscc_codeartifact_domain",
@@ -1794,6 +1804,11 @@
     {
         "resource": "awscc_devopsagent_association",
         "identifier": ["AgentSpaceId","AssociationId"]
+    },
+    {
+        "resource": "awscc_devopsagent_private_connection",
+        "generateListResource": true,
+        "identifier": ["Name"]
     },
     {
         "resource": "awscc_devopsguru_log_anomaly_detection_integration",
@@ -4081,7 +4096,6 @@
     },
     {
         "resource": "awscc_mediaconnect_flow_vpc_interface",
-        "generateListResource": true,
         "identifier": ["FlowArn","Name"]
     },
     {
@@ -6365,6 +6379,7 @@
     },
     {
         "resource": "awscc_workspaces_connection_alias",
+        "generateListResource": true,
         "identifier": ["AliasId"]
     },
     {
