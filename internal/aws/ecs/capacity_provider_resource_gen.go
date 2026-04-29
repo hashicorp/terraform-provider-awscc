@@ -219,6 +219,19 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "AutoRepairConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ActionsStatus": {
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "DISABLED"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "InfrastructureOptimization": {
 		//	      "additionalProperties": false,
 		//	      "description": "Defines how Amazon ECS Managed Instances optimizes the infrastructure in your capacity provider. Configure it to turn on or off the infrastructure optimization in your capacity provider, and to control the idle EC2 instances optimization delay.",
@@ -607,6 +620,30 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"managed_instances_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoRepairConfiguration
+				"auto_repair_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ActionsStatus
+						"actions_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"ENABLED",
+									"DISABLED",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: InfrastructureOptimization
 				"infrastructure_optimization": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1422,7 +1459,9 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		"accelerator_names":                  "AcceleratorNames",
 		"accelerator_total_memory_mi_b":      "AcceleratorTotalMemoryMiB",
 		"accelerator_types":                  "AcceleratorTypes",
+		"actions_status":                     "ActionsStatus",
 		"allowed_instance_types":             "AllowedInstanceTypes",
+		"auto_repair_configuration":          "AutoRepairConfiguration",
 		"auto_scaling_group_arn":             "AutoScalingGroupArn",
 		"auto_scaling_group_provider":        "AutoScalingGroupProvider",
 		"bare_metal":                         "BareMetal",

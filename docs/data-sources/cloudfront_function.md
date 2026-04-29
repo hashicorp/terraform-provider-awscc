@@ -28,6 +28,7 @@ Data Source schema for AWS::CloudFront::Function
 - `function_metadata` (Attributes) Contains metadata about a CloudFront function. (see [below for nested schema](#nestedatt--function_metadata))
 - `name` (String) A name to identify the function.
 - `stage` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--function_config"></a>
 ### Nested Schema for `function_config`
@@ -53,3 +54,12 @@ Read-Only:
 Read-Only:
 
 - `function_arn` (String) The Amazon Resource Name (ARN) of the function. The ARN uniquely identifies the function.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)

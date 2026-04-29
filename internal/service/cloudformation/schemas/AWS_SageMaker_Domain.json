@@ -99,7 +99,7 @@
     "SingleSignOnApplicationArn": {
       "type": "string",
       "description": "The ARN of the application managed by SageMaker in IAM Identity Center. This value is only returned for domains created after October 1, 2023.",
-      "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::[0-9]+:application\/[a-zA-Z0-9-_.]+\/apl-[a-zA-Z0-9]+$"
+      "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::[0-9]+:application/[a-zA-Z0-9-_.]+/apl-[a-zA-Z0-9]+$"
     },
     "DomainSettings": {
       "$ref": "#/definitions/DomainSettings"
@@ -737,7 +737,7 @@
           "description": "The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.",
           "uniqueItems": false,
           "insertionOrder": false,
-          "minItems": 1,
+          "minItems": 0,
           "maxItems": 3,
           "items": {
             "type": "string",
@@ -1220,14 +1220,10 @@
     "/properties/AuthMode",
     "/properties/DomainName",
     "/properties/DomainSettings/RStudioServerProDomainSettings/DefaultResourceSpec",
-    "/properties/KmsKeyId",
-    "/properties/Tags"
+    "/properties/KmsKeyId"
   ],
   "conditionalCreateOnlyProperties": [
     "/properties/VpcId"
-  ],
-  "writeOnlyProperties": [
-    "/properties/Tags"
   ],
   "primaryIdentifier": [
     "/properties/DomainId"
@@ -1241,6 +1237,18 @@
     "/properties/SingleSignOnManagedApplicationInstanceId",
     "/properties/SingleSignOnApplicationArn"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "sagemaker:AddTags",
+      "sagemaker:ListTags",
+      "sagemaker:DeleteTags"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -1255,12 +1263,20 @@
         "kms:CreateGrant",
         "kms:Decrypt",
         "kms:DescribeKey",
-        "kms:GenerateDataKeyWithoutPlainText"
+        "kms:GenerateDataKeyWithoutPlainText",
+        "sagemaker:AddTags",
+        "sagemaker:DeleteTags",
+        "sagemaker:ListTags"
       ]
     },
     "read": {
       "permissions": [
-        "sagemaker:DescribeDomain"
+        "sagemaker:DescribeDomain",
+        "sagemaker:DescribeApp",
+        "sagemaker:DescribeUserProfile",
+        "sagemaker:DescribeImage",
+        "sagemaker:DescribeImageVersion",
+        "sagemaker:ListTags"
       ]
     },
     "update": {
@@ -1270,19 +1286,29 @@
         "sagemaker:DescribeDomain",
         "sagemaker:DescribeImage",
         "sagemaker:DescribeImageVersion",
-        "iam:PassRole"
+        "iam:PassRole",
+        "sagemaker:AddTags",
+        "sagemaker:DeleteTags",
+        "sagemaker:ListTags"
       ]
     },
     "delete": {
       "permissions": [
         "sagemaker:DeleteApp",
         "sagemaker:DeleteDomain",
-        "sagemaker:DescribeDomain"
+        "sagemaker:DescribeDomain",
+        "sagemaker:AddTags",
+        "sagemaker:DeleteTags",
+        "sagemaker:ListTags",
+        "efs:DescribeMountTargets",
+        "efs:DeleteMountTarget",
+        "efs:DeleteFileSystem"
       ]
     },
     "list": {
       "permissions": [
-        "sagemaker:ListDomains"
+        "sagemaker:ListDomains",
+        "sagemaker:ListTags"
       ]
     }
   }

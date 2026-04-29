@@ -18,7 +18,7 @@ Resource schema for AWS::Route53GlobalResolver::GlobalResolver
 ### Required
 
 - `name` (String)
-- `regions` (List of String)
+- `regions` (List of String) A list of regions the Global Resolver will exist in. This list cannot be updated and will stay fixed for the duration of the Global Resolver.
 
 ### Optional
 

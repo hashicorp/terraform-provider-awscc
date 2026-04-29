@@ -137,6 +137,19 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "AutoRepairConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ActionsStatus": {
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "DISABLED"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "InfrastructureOptimization": {
 		//	      "additionalProperties": false,
 		//	      "description": "Defines how Amazon ECS Managed Instances optimizes the infrastructure in your capacity provider. Configure it to turn on or off the infrastructure optimization in your capacity provider, and to control the idle EC2 instances optimization delay.",
@@ -525,6 +538,16 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	}
 		"managed_instances_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoRepairConfiguration
+				"auto_repair_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ActionsStatus
+						"actions_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: InfrastructureOptimization
 				"infrastructure_optimization": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -890,7 +913,9 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		"accelerator_names":                  "AcceleratorNames",
 		"accelerator_total_memory_mi_b":      "AcceleratorTotalMemoryMiB",
 		"accelerator_types":                  "AcceleratorTypes",
+		"actions_status":                     "ActionsStatus",
 		"allowed_instance_types":             "AllowedInstanceTypes",
+		"auto_repair_configuration":          "AutoRepairConfiguration",
 		"auto_scaling_group_arn":             "AutoScalingGroupArn",
 		"auto_scaling_group_provider":        "AutoScalingGroupProvider",
 		"bare_metal":                         "BareMetal",

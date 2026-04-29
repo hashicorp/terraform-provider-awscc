@@ -18,6 +18,7 @@ var (
 		"CloudWatch":     "Cloudwatch",
 		"CNAMEs":         "Cnames",
 		"FSx":            "Fsx",
+		"OTel":           "Otel",
 	}
 )
 

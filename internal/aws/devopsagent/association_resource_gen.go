@@ -164,6 +164,20 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "Azure": {
+		//	      "additionalProperties": false,
+		//	      "description": "Azure subscription integration configuration",
+		//	      "properties": {
+		//	        "SubscriptionId": {
+		//	          "description": "Azure subscription ID corresponding to provided resources",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SubscriptionId"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "Dynatrace": {
 		//	      "additionalProperties": false,
 		//	      "description": "Dynatrace monitoring configuration",
@@ -349,6 +363,24 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "MCPServerSigV4": {
+		//	      "additionalProperties": false,
+		//	      "description": "SigV4-authenticated MCP server configuration",
+		//	      "properties": {
+		//	        "Tools": {
+		//	          "description": "List of MCP tools available for the association",
+		//	          "items": {
+		//	            "pattern": "^[a-zA-Z0-9_-]+$",
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Tools"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "MCPServerSplunk": {
 		//	      "additionalProperties": false,
 		//	      "description": "Splunk MCP server configuration",
@@ -375,6 +407,32 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		//	      "required": [
 		//	        "Name",
 		//	        "Endpoint"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "PagerDuty": {
+		//	      "additionalProperties": false,
+		//	      "description": "PagerDuty integration configuration",
+		//	      "properties": {
+		//	        "CustomerEmail": {
+		//	          "description": "Email to be used in PagerDuty API header",
+		//	          "type": "string"
+		//	        },
+		//	        "EnableWebhookUpdates": {
+		//	          "description": "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
+		//	          "type": "boolean"
+		//	        },
+		//	        "Services": {
+		//	          "description": "List of PagerDuty service IDs available for the association",
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Services",
+		//	        "CustomerEmail"
 		//	      ],
 		//	      "type": "object"
 		//	    },
@@ -673,6 +731,29 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "AWS association for 'monitor' account",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Azure
+				"azure": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SubscriptionId
+						"subscription_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Azure subscription ID corresponding to provided resources",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Azure subscription integration configuration",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1026,6 +1107,33 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: MCPServerSigV4
+				"mcp_server_sig_v4": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Tools
+						"tools": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of MCP tools available for the association",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.ValueStringsAre(
+									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
+								),
+								fwvalidators.NotNullList(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "SigV4-authenticated MCP server configuration",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: MCPServerSplunk
 				"mcp_server_splunk": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1076,6 +1184,52 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Splunk MCP server configuration",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PagerDuty
+				"pager_duty": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CustomerEmail
+						"customer_email": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Email to be used in PagerDuty API header",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EnableWebhookUpdates
+						"enable_webhook_updates": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+							// EnableWebhookUpdates is a write-only property.
+						}, /*END ATTRIBUTE*/
+						// Property: Services
+						"services": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of PagerDuty service IDs available for the association",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								fwvalidators.NotNullList(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "PagerDuty integration configuration",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1461,10 +1615,12 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		"association_id":           "AssociationId",
 		"assumable_role_arn":       "AssumableRoleArn",
 		"aws":                      "Aws",
+		"azure":                    "Azure",
 		"channel_id":               "ChannelId",
 		"channel_name":             "ChannelName",
 		"configuration":            "Configuration",
 		"created_at":               "CreatedAt",
+		"customer_email":           "CustomerEmail",
 		"description":              "Description",
 		"dynatrace":                "Dynatrace",
 		"enable_webhook_updates":   "EnableWebhookUpdates",
@@ -1481,10 +1637,12 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		"mcp_server":               "MCPServer",
 		"mcp_server_datadog":       "MCPServerDatadog",
 		"mcp_server_new_relic":     "MCPServerNewRelic",
+		"mcp_server_sig_v4":        "MCPServerSigV4",
 		"mcp_server_splunk":        "MCPServerSplunk",
 		"name":                     "Name",
 		"owner":                    "Owner",
 		"owner_type":               "OwnerType",
+		"pager_duty":               "PagerDuty",
 		"project_id":               "ProjectId",
 		"project_path":             "ProjectPath",
 		"repo_id":                  "RepoId",
@@ -1495,8 +1653,10 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		"resources":                "Resources",
 		"service_id":               "ServiceId",
 		"service_now":              "ServiceNow",
+		"services":                 "Services",
 		"slack":                    "Slack",
 		"source_aws":               "SourceAws",
+		"subscription_id":          "SubscriptionId",
 		"tags":                     "Tags",
 		"tools":                    "Tools",
 		"transmission_target":      "TransmissionTarget",
@@ -1513,6 +1673,7 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Configuration/MCPServerDatadog/EnableWebhookUpdates",
 		"/properties/Configuration/MCPServerSplunk/EnableWebhookUpdates",
 		"/properties/Configuration/GitLab/EnableWebhookUpdates",
+		"/properties/Configuration/PagerDuty/EnableWebhookUpdates",
 		"/properties/Configuration/EventChannel/EnableWebhookUpdates",
 		"/properties/LinkedAssociationIds",
 	})

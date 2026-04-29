@@ -24,6 +24,7 @@ import (
 
 func init() {
 	registry.AddResourceFactory("awscc_workspaces_connection_alias", connectionAliasResource)
+	registry.AddListResourceFactory("awscc_workspaces_connection_alias", generic.NewListResource(connectionAliasResource))
 }
 
 // connectionAliasResource returns the Terraform awscc_workspaces_connection_alias resource.

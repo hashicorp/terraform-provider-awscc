@@ -292,6 +292,7 @@
         "imagebuilder:TagResource",
         "imagebuilder:GetImagePipeline",
         "imagebuilder:GetImageRecipe",
+        "imagebuilder:GetContainerRecipe",
         "imagebuilder:GetInfrastructureConfiguration",
         "imagebuilder:GetDistributionConfiguration",
         "imagebuilder:CreateImagePipeline",
@@ -304,6 +305,10 @@
         "iam:PassRole",
         "imagebuilder:GetImagePipeline",
         "imagebuilder:UpdateImagePipeline",
+        "imagebuilder:GetImageRecipe",
+        "imagebuilder:GetContainerRecipe",
+        "imagebuilder:GetInfrastructureConfiguration",
+        "imagebuilder:GetDistributionConfiguration",
         "imagebuilder:GetWorkflow",
         "imagebuilder:TagResource",
         "imagebuilder:UntagResource"

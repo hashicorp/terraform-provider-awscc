@@ -893,6 +893,10 @@ resource_schema "aws_chatbot_slack_channel_configuration" {
   cloudformation_type_name = "AWS::Chatbot::SlackChannelConfiguration"
 }
 
+resource_schema "aws_chime_app_instance" {
+  cloudformation_type_name = "AWS::Chime::AppInstance"
+}
+
 resource_schema "aws_cleanrooms_analysis_template" {
   cloudformation_type_name               = "AWS::CleanRooms::AnalysisTemplate"
   suppress_plural_data_source_generation = true
@@ -1121,6 +1125,10 @@ resource_schema "aws_cloudwatch_dashboard" {
 
 resource_schema "aws_cloudwatch_metric_stream" {
   cloudformation_type_name = "AWS::CloudWatch::MetricStream"
+}
+
+resource_schema "aws_cloudwatch_otel_enrichment" {
+  cloudformation_type_name = "AWS::CloudWatch::OTelEnrichment"
 }
 
 resource_schema "aws_codeartifact_domain" {
@@ -1844,6 +1852,10 @@ resource_schema "aws_devopsagent_agent_space" {
 resource_schema "aws_devopsagent_association" {
   cloudformation_type_name               = "AWS::DevOpsAgent::Association"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_devopsagent_private_connection" {
+  cloudformation_type_name = "AWS::DevOpsAgent::PrivateConnection"
 }
 
 resource_schema "aws_devopsagent_service" {
@@ -3919,7 +3931,8 @@ resource_schema "aws_mediaconnect_flow_source" {
 }
 
 resource_schema "aws_mediaconnect_flow_vpc_interface" {
-  cloudformation_type_name = "AWS::MediaConnect::FlowVpcInterface"
+  cloudformation_type_name               = "AWS::MediaConnect::FlowVpcInterface"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_mediaconnect_gateway" {
@@ -6147,8 +6160,7 @@ resource_schema "aws_wisdom_quick_response" {
 }
 
 resource_schema "aws_workspaces_connection_alias" {
-  cloudformation_type_name               = "AWS::WorkSpaces::ConnectionAlias"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::WorkSpaces::ConnectionAlias"
 }
 
 resource_schema "aws_workspaces_workspace" {

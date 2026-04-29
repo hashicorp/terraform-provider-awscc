@@ -32,7 +32,7 @@ Data Source schema for AWS::Route53GlobalResolver::GlobalResolver
 - `ip_address_type` (String)
 - `name` (String)
 - `observability_region` (String)
-- `regions` (List of String)
+- `regions` (List of String) A list of regions the Global Resolver will exist in. This list cannot be updated and will stay fixed for the duration of the Global Resolver.
 - `status` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `updated_at` (String)

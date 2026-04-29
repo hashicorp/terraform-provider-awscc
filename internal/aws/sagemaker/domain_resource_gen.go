@@ -6752,7 +6752,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 3,
-		//	      "minItems": 1,
+		//	      "minItems": 0,
 		//	      "type": "array",
 		//	      "uniqueItems": false
 		//	    },
@@ -7170,7 +7170,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(1, 3),
+						listvalidator.SizeBetween(0, 3),
 						listvalidator.ValueStringsAre(
 							stringvalidator.LengthAtMost(32),
 							stringvalidator.RegexMatches(regexp.MustCompile("[-0-9a-zA-Z]+"), ""),
@@ -7501,9 +7501,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Url
 		// CloudFormation resource type schema:
@@ -7668,9 +7666,6 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_only_trusted_accounts":                      "VpcOnlyTrustedAccounts",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/Tags",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

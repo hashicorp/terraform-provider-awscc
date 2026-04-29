@@ -439,6 +439,27 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	          },
 		//	          "Name": {
 		//	            "type": "string"
+		//	          },
+		//	          "S3FilesVolumeConfiguration": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "AccessPointArn": {
+		//	                "type": "string"
+		//	              },
+		//	              "FileSystemArn": {
+		//	                "type": "string"
+		//	              },
+		//	              "RootDirectory": {
+		//	                "type": "string"
+		//	              },
+		//	              "TransitEncryptionPort": {
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "FileSystemArn"
+		//	            ],
+		//	            "type": "object"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -787,6 +808,28 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
+							// Property: S3FilesVolumeConfiguration
+							"s3_files_volume_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AccessPointArn
+									"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: FileSystemArn
+									"file_system_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: RootDirectory
+									"root_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: TransitEncryptionPort
+									"transit_encryption_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Computed: true,
@@ -1076,6 +1119,12 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                  "type": "array",
 		//	                  "uniqueItems": false
 		//	                },
+		//	                "StartTimeout": {
+		//	                  "type": "integer"
+		//	                },
+		//	                "StopTimeout": {
+		//	                  "type": "integer"
+		//	                },
 		//	                "Ulimits": {
 		//	                  "insertionOrder": false,
 		//	                  "items": {
@@ -1213,6 +1262,27 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                },
 		//	                "Name": {
 		//	                  "type": "string"
+		//	                },
+		//	                "S3FilesVolumeConfiguration": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "AccessPointArn": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "FileSystemArn": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "RootDirectory": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "TransitEncryptionPort": {
+		//	                      "type": "integer"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "FileSystemArn"
+		//	                  ],
+		//	                  "type": "object"
 		//	                }
 		//	              },
 		//	              "type": "object"
@@ -1473,6 +1543,14 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 											}, /*END NESTED OBJECT*/
 											Computed: true,
 										}, /*END ATTRIBUTE*/
+										// Property: StartTimeout
+										"start_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: StopTimeout
+										"stop_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
 										// Property: Ulimits
 										"ulimits": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -1611,6 +1689,28 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 										}, /*END ATTRIBUTE*/
 										// Property: Name
 										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: S3FilesVolumeConfiguration
+										"s3_files_volume_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AccessPointArn
+												"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: FileSystemArn
+												"file_system_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: RootDirectory
+												"root_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: TransitEncryptionPort
+												"transit_encryption_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
 											Computed: true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -2787,6 +2887,27 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                    },
 		//	                    "Name": {
 		//	                      "type": "string"
+		//	                    },
+		//	                    "S3FilesVolumeConfiguration": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "AccessPointArn": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "FileSystemArn": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "RootDirectory": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "TransitEncryptionPort": {
+		//	                          "type": "integer"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "FileSystemArn"
+		//	                      ],
+		//	                      "type": "object"
 		//	                    }
 		//	                  },
 		//	                  "type": "object"
@@ -3079,6 +3200,12 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                            "type": "array",
 		//	                            "uniqueItems": false
 		//	                          },
+		//	                          "StartTimeout": {
+		//	                            "type": "integer"
+		//	                          },
+		//	                          "StopTimeout": {
+		//	                            "type": "integer"
+		//	                          },
 		//	                          "Ulimits": {
 		//	                            "insertionOrder": false,
 		//	                            "items": {
@@ -3180,6 +3307,27 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	                          },
 		//	                          "Name": {
 		//	                            "type": "string"
+		//	                          },
+		//	                          "S3FilesVolumeConfiguration": {
+		//	                            "additionalProperties": false,
+		//	                            "properties": {
+		//	                              "AccessPointArn": {
+		//	                                "type": "string"
+		//	                              },
+		//	                              "FileSystemArn": {
+		//	                                "type": "string"
+		//	                              },
+		//	                              "RootDirectory": {
+		//	                                "type": "string"
+		//	                              },
+		//	                              "TransitEncryptionPort": {
+		//	                                "type": "integer"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "FileSystemArn"
+		//	                            ],
+		//	                            "type": "object"
 		//	                          }
 		//	                        },
 		//	                        "type": "object"
@@ -3976,6 +4124,28 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Computed: true,
 												}, /*END ATTRIBUTE*/
+												// Property: S3FilesVolumeConfiguration
+												"s3_files_volume_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AccessPointArn
+														"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: FileSystemArn
+														"file_system_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: RootDirectory
+														"root_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: TransitEncryptionPort
+														"transit_encryption_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
 										Computed: true,
@@ -4225,6 +4395,14 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 																}, /*END NESTED OBJECT*/
 																Computed: true,
 															}, /*END ATTRIBUTE*/
+															// Property: StartTimeout
+															"start_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: StopTimeout
+															"stop_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
 															// Property: Ulimits
 															"ulimits": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -4325,6 +4503,28 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 															}, /*END ATTRIBUTE*/
 															// Property: Name
 															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: S3FilesVolumeConfiguration
+															"s3_files_volume_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: AccessPointArn
+																	"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: FileSystemArn
+																	"file_system_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: RootDirectory
+																	"root_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TransitEncryptionPort
+																	"transit_encryption_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
 																Computed: true,
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
@@ -4929,6 +5129,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithCloudFormationTypeName("AWS::Batch::JobDefinition").WithTerraformTypeName("awscc_batch_job_definition")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_point_arn":               "AccessPointArn",
 		"access_point_id":                "AccessPointId",
 		"action":                         "Action",
 		"allow_privilege_escalation":     "AllowPrivilegeEscalation",
@@ -4966,6 +5167,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"evaluate_on_exit":               "EvaluateOnExit",
 		"execution_role_arn":             "ExecutionRoleArn",
 		"fargate_platform_configuration": "FargatePlatformConfiguration",
+		"file_system_arn":                "FileSystemArn",
 		"file_system_id":                 "FileSystemId",
 		"firelens_configuration":         "FirelensConfiguration",
 		"hard_limit":                     "HardLimit",
@@ -5034,6 +5236,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"run_as_non_root":                "RunAsNonRoot",
 		"run_as_user":                    "RunAsUser",
 		"runtime_platform":               "RuntimePlatform",
+		"s3_files_volume_configuration":  "S3FilesVolumeConfiguration",
 		"scheduling_priority":            "SchedulingPriority",
 		"secret":                         "Secret",
 		"secret_name":                    "SecretName",
@@ -5050,6 +5253,8 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"soft_limit":                     "SoftLimit",
 		"source_path":                    "SourcePath",
 		"source_volume":                  "SourceVolume",
+		"start_timeout":                  "StartTimeout",
+		"stop_timeout":                   "StopTimeout",
 		"sub_path":                       "SubPath",
 		"swappiness":                     "Swappiness",
 		"tags":                           "Tags",

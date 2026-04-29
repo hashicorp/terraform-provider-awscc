@@ -59,7 +59,8 @@
         "InstanceType": {
           "type": "string",
           "enum": [
-            "i4i.metal"
+            "i4i.metal",
+            "i7i.metal-24xl"
           ]
         },
         "PlacementGroupId": {
