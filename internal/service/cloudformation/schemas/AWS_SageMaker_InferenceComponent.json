@@ -425,7 +425,8 @@
         "sagemaker:AddTags",
         "sagemaker:ListTags",
         "sagemaker:DeleteTags"
-      ]
+      ],
+      "timeoutInMinutes": 490
     },
     "delete": {
       "permissions": [

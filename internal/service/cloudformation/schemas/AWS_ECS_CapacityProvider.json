@@ -126,6 +126,19 @@
         }
       }
     },
+    "AutoRepairConfiguration": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ActionsStatus": {
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "DISABLED"
+          ]
+        }
+      }
+    },
     "MemoryGiBPerVCpuRequest": {
       "additionalProperties": false,
       "type": "object",
@@ -544,6 +557,9 @@
       "properties": {
         "InfrastructureRoleArn": {
           "type": "string"
+        },
+        "AutoRepairConfiguration": {
+          "$ref": "#/definitions/AutoRepairConfiguration"
         },
         "PropagateTags": {
           "type": "string",

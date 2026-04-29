@@ -266,12 +266,22 @@
       ],
       "additionalProperties": false
     },
+    "McpServerListingMode": {
+      "type": "string",
+      "enum": [
+        "DEFAULT",
+        "DYNAMIC"
+      ]
+    },
     "McpServerTargetConfiguration": {
       "type": "object",
       "properties": {
         "Endpoint": {
           "type": "string",
           "pattern": "^https://.*"
+        },
+        "ListingMode": {
+          "$ref": "#/definitions/McpServerListingMode"
         }
       },
       "required": [

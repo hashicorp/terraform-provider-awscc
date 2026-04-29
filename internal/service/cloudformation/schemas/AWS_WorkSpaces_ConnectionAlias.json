@@ -138,6 +138,11 @@
         "workspaces:DescribeTags",
         "workspaces:DescribeConnectionAliases"
       ]
+    },
+    "list": {
+      "permissions": [
+        "workspaces:DescribeConnectionAliases"
+      ]
     }
   }
 }

@@ -159,7 +159,8 @@
     "tagProperty": "/properties/Tags",
     "permissions": [
       "sso:TagResource",
-      "sso:UntagResource"
+      "sso:UntagResource",
+      "sso:ListTagsForResource"
     ]
   },
   "createOnlyProperties": [
@@ -233,18 +234,14 @@
         "properties": {
           "InstanceArn": {
             "$ref": "resource-schema.json#/properties/InstanceArn"
-          },
-          "PermissionSetArn": {
-            "$ref": "resource-schema.json#/properties/PermissionSetArn"
           }
         },
         "required": [
-          "InstanceArn",
-          "PermissionSetArn"
+          "InstanceArn"
         ]
       },
       "permissions": [
-        "sso:DescribePermissionSet"
+        "sso:ListPermissionSets"
       ]
     }
   }

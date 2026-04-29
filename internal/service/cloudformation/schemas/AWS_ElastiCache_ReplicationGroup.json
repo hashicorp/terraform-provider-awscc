@@ -511,7 +511,8 @@
     "delete": {
       "permissions": [
         "elasticache:DeleteReplicationGroup",
-        "elasticache:DescribeReplicationGroups"
+        "elasticache:DescribeReplicationGroups",
+        "elasticache:CreateSnapshot"
       ],
       "timeoutInMinutes": 300
     },
