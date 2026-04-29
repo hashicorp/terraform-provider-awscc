@@ -55,10 +55,19 @@ Read-Only:
 
 Read-Only:
 
+- `auto_repair_configuration` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--auto_repair_configuration))
 - `infrastructure_optimization` (Attributes) Defines how Amazon ECS Managed Instances optimizes the infrastructure in your capacity provider. Configure it to turn on or off the infrastructure optimization in your capacity provider, and to control the idle EC2 instances optimization delay. (see [below for nested schema](#nestedatt--managed_instances_provider--infrastructure_optimization))
 - `infrastructure_role_arn` (String)
 - `instance_launch_template` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template))
 - `propagate_tags` (String)
+
+<a id="nestedatt--managed_instances_provider--auto_repair_configuration"></a>
+### Nested Schema for `managed_instances_provider.auto_repair_configuration`
+
+Read-Only:
+
+- `actions_status` (String)
+
 
 <a id="nestedatt--managed_instances_provider--infrastructure_optimization"></a>
 ### Nested Schema for `managed_instances_provider.infrastructure_optimization`

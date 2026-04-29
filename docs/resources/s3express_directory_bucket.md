@@ -33,6 +33,7 @@ resource "awscc_s3express_directory_bucket" "example" {
 
 - `bucket_encryption` (Attributes) Specifies default encryption for a bucket using server-side encryption with Amazon S3 managed keys (SSE-S3) or AWS KMS keys (SSE-KMS). (see [below for nested schema](#nestedatt--bucket_encryption))
 - `bucket_name` (String) Specifies a name for the bucket. The bucket name must contain only lowercase letters, numbers, and hyphens (-). A directory bucket name must be unique in the chosen Availability Zone or Local Zone. The bucket name must also follow the format 'bucket_base_name--zone_id--x-s3'. The zone_id can be the ID of an Availability Zone or a Local Zone. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.
+- `inventory_configurations` (Attributes List) The inventory configuration for an Amazon S3 Express bucket. (see [below for nested schema](#nestedatt--inventory_configurations))
 - `lifecycle_configuration` (Attributes) Lifecycle rules that define how Amazon S3 Express manages objects during their lifetime. (see [below for nested schema](#nestedatt--lifecycle_configuration))
 - `metrics_configurations` (Attributes List) Specifies the metrics configurations for the Amazon S3 Express bucket. (see [below for nested schema](#nestedatt--metrics_configurations))
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
@@ -66,6 +67,31 @@ Optional:
 - `kms_master_key_id` (String) AWS Key Management Service (KMS) customer managed key ID to use for the default encryption. This parameter is allowed only if SSEAlgorithm is set to aws:kms. You can specify this parameter with the key ID or the Amazon Resource Name (ARN) of the KMS key
 - `sse_algorithm` (String)
 
+
+
+
+<a id="nestedatt--inventory_configurations"></a>
+### Nested Schema for `inventory_configurations`
+
+Optional:
+
+- `destination` (Attributes) Specifies information about where to publish inventory reports for an Amazon S3 Express bucket. (see [below for nested schema](#nestedatt--inventory_configurations--destination))
+- `enabled` (Boolean) Specifies whether the inventory is enabled or disabled.
+- `id` (String) The ID used to identify the inventory configuration.
+- `included_object_versions` (String) Object versions to include in the inventory list.
+- `optional_fields` (List of String) Contains the optional fields that are included in the inventory results.
+- `prefix` (String) The prefix that is prepended to all inventory results.
+- `schedule_frequency` (String) Specifies the schedule for generating inventory results.
+
+<a id="nestedatt--inventory_configurations--destination"></a>
+### Nested Schema for `inventory_configurations.destination`
+
+Optional:
+
+- `bucket_account_id` (String) The account ID that owns the destination S3 bucket.
+- `bucket_arn` (String) The Amazon Resource Name (ARN) of the destination Amazon S3 bucket to which data is exported.
+- `format` (String) Specifies the file format used when exporting data to Amazon S3.
+- `prefix` (String) The prefix to use when exporting data. The prefix is prepended to all results.
 
 
 

@@ -68,6 +68,7 @@ variable "key_store_arn" {
 
 - `auto_publish` (Boolean) A flag that determines whether to automatically publish the function to the ``LIVE`` stage when it?s created. To automatically publish to the ``LIVE`` stage, set this property to ``true``.
 - `function_metadata` (Attributes) Contains metadata about a CloudFront function. (see [below for nested schema](#nestedatt--function_metadata))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -102,6 +103,15 @@ Optional:
 Read-Only:
 
 - `function_arn` (String) The Amazon Resource Name (ARN) of the function. The ARN uniquely identifies the function.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 
