@@ -1,3 +1,23 @@
+## 1.82.0 (April 29, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_chime_app_instance`
+* **New Data Source:** `awscc_chime_app_instances`
+* **New Data Source:** `awscc_cloudwatch_otel_enrichment`
+* **New Data Source:** `awscc_cloudwatch_otel_enrichments`
+* **New Data Source:** `awscc_devopsagent_private_connection`
+* **New Data Source:** `awscc_devopsagent_private_connections`
+* **New Data Source:** `awscc_workspaces_connection_aliases`
+* **New List Resource:** `awscc_chime_app_instance`
+* **New List Resource:** `awscc_cloudwatch_otel_enrichment`
+* **New List Resource:** `awscc_devopsagent_private_connection`
+* **New List Resource:** `awscc_mediaconnect_flow_vpc_interface`
+* **New List Resource:** `awscc_workspaces_connection_alias`
+* **New Resource:** `awscc_chime_app_instance`
+* **New Resource:** `awscc_cloudwatch_otel_enrichment`
+* **New Resource:** `awscc_devopsagent_private_connection`
+
 ## 1.81.0 (April 22, 2026)
 
 FEATURES:
