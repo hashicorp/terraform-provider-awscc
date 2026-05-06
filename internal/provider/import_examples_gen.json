@@ -892,6 +892,11 @@
         "identifier": ["AppInstanceArn"]
     },
     {
+        "resource": "awscc_chime_app_instance_bot",
+        "generateListResource": true,
+        "identifier": ["AppInstanceBotArn"]
+    },
+    {
         "resource": "awscc_cleanrooms_analysis_template",
         "identifier": ["AnalysisTemplateIdentifier","MembershipIdentifier"]
     },
@@ -2542,6 +2547,11 @@
         "resource": "awscc_emrserverless_application",
         "generateListResource": true,
         "identifier": ["ApplicationId"]
+    },
+    {
+        "resource": "awscc_elasticache_cache_cluster",
+        "generateListResource": true,
+        "identifier": ["ClusterName"]
     },
     {
         "resource": "awscc_elasticache_global_replication_group",
