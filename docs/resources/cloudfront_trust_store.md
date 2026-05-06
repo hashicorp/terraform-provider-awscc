@@ -23,6 +23,7 @@ A trust store.
 
 - `ca_certificates_bundle_source` (Attributes) A CA certificates bundle source. (see [below for nested schema](#nestedatt--ca_certificates_bundle_source))
 - `tags` (Attributes List) A complex type that contains zero or more ``Tag`` elements. (see [below for nested schema](#nestedatt--tags))
+- `use_client_certificate_ocsp_endpoint` (Boolean)
 
 ### Read-Only
 

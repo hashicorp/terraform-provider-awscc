@@ -65,6 +65,7 @@ resource "awscc_bedrockagentcore_code_interpreter_custom" "example" {
 
 ### Optional
 
+- `certificates` (Attributes List) List of root CA certificates in PEM format. (see [below for nested schema](#nestedatt--certificates))
 - `description` (String) The description of the code interpreter.
 - `execution_role_arn` (String) The ARN of the IAM role that the code interpreter uses to access resources.
 - `tags` (Map of String) A map of tag keys and values
@@ -94,6 +95,22 @@ Optional:
 
 - `security_groups` (List of String) Security groups for VPC
 - `subnets` (List of String) Subnets for VPC
+
+
+
+<a id="nestedatt--certificates"></a>
+### Nested Schema for `certificates`
+
+Optional:
+
+- `certificate_location` (Attributes) Certificate location in Secrets Manager. (see [below for nested schema](#nestedatt--certificates--certificate_location))
+
+<a id="nestedatt--certificates--certificate_location"></a>
+### Nested Schema for `certificates.certificate_location`
+
+Optional:
+
+- `secret_arn` (String) Secrets Manager secret ARN.
 
 ## Import
 

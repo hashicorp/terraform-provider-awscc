@@ -200,6 +200,7 @@ Read-Only:
 
 Read-Only:
 
+- `batch_across_topics` (Boolean)
 - `max_batch_open_ms` (Number)
 - `max_batch_size` (Number)
 - `max_batch_size_bytes` (Number)
@@ -619,6 +620,7 @@ Read-Only:
 
 Read-Only:
 
+- `batch_across_topics` (Boolean)
 - `max_batch_open_ms` (Number)
 - `max_batch_size` (Number)
 - `max_batch_size_bytes` (Number)

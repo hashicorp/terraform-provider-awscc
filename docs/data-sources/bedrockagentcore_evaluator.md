@@ -27,6 +27,7 @@ Data Source schema for AWS::BedrockAgentCore::Evaluator
 - `evaluator_config` (Attributes) The configuration for the evaluator. (see [below for nested schema](#nestedatt--evaluator_config))
 - `evaluator_id` (String) The unique identifier of the evaluator.
 - `evaluator_name` (String) The name of the evaluator. Must be unique within your account.
+- `kms_key_arn` (String) The ARN of the KMS key used to encrypt evaluator data.
 - `level` (String) The evaluation level that determines the scope of evaluation.
 - `status` (String) The current status of the evaluator.
 - `tags` (Attributes List) A list of tags to assign to the evaluator. (see [below for nested schema](#nestedatt--tags))

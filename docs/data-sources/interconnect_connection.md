@@ -31,7 +31,8 @@ Data Source schema for AWS::Interconnect::Connection
 - `environment_id` (String) The ID of the environment for the connection. Required when creating a connection through AWS. Mutually exclusive with ActivationKey.
 - `owner_account` (String) The AWS account ID of the connection owner.
 - `provider_name` (Attributes) The partner cloud service provider. (see [below for nested schema](#nestedatt--provider_name))
-- `remote_owner_account` (String) The account ID of the remote owner. Required when creating a connection through AWS.
+- `remote_account` (Attributes) The remote account identifier for the connection. Required when creating a connection through AWS. Replaces RemoteOwnerAccount. (see [below for nested schema](#nestedatt--remote_account))
+- `remote_owner_account` (String) Deprecated. Use RemoteAccount instead. The account ID of the remote owner. Required when creating a connection through AWS.
 - `shared_id` (String) The shared identifier for the connection pairing.
 - `state` (String) The current state of the connection.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
@@ -53,6 +54,14 @@ Read-Only:
 
 - `cloud_service_provider` (String) The name of the cloud service provider.
 - `last_mile_provider` (String) The name of the last mile provider.
+
+
+<a id="nestedatt--remote_account"></a>
+### Nested Schema for `remote_account`
+
+Read-Only:
+
+- `identifier` (String) The identifier of the remote account.
 
 
 <a id="nestedatt--tags"></a>
