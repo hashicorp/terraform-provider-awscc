@@ -107,7 +107,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "type": "string"
 		//	  },
 		//	  "maxItems": 20,
-		//	  "minItems": 1,
+		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
 		"glossary_terms": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -140,6 +140,71 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The timestamp of when the project was last updated.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: MembershipAssignments
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The project membership assignments.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "The project membership assignment.",
+		//	    "properties": {
+		//	      "Designation": {
+		//	        "enum": [
+		//	          "PROJECT_OWNER",
+		//	          "PROJECT_CONTRIBUTOR"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "Member": {
+		//	        "additionalProperties": false,
+		//	        "description": "The member of the project.",
+		//	        "properties": {
+		//	          "GroupIdentifier": {
+		//	            "type": "string"
+		//	          },
+		//	          "UserIdentifier": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Member",
+		//	      "Designation"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"membership_assignments": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Designation
+					"designation": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Member
+					"member": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: GroupIdentifier
+							"group_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: UserIdentifier
+							"user_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The member of the project.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The project membership assignments.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -152,6 +217,29 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the Amazon DataZone project.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ProjectCategory
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The project category.",
+		//	  "type": "string"
+		//	}
+		"project_category": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The project category.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ProjectExecutionRole
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The project execution role ARN.",
+		//	  "pattern": "^arn:aws[^:]*:iam::\\d{12}:role/[\\w+=,.@/-]+$",
+		//	  "type": "string"
+		//	}
+		"project_execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The project execution role ARN.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectProfileId
@@ -331,6 +419,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"created_at":                     "CreatedAt",
 		"created_by":                     "CreatedBy",
 		"description":                    "Description",
+		"designation":                    "Designation",
 		"domain_id":                      "DomainId",
 		"domain_identifier":              "DomainIdentifier",
 		"domain_unit_id":                 "DomainUnitId",
@@ -338,14 +427,20 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"environment_id":                 "EnvironmentId",
 		"environment_parameters":         "EnvironmentParameters",
 		"glossary_terms":                 "GlossaryTerms",
+		"group_identifier":               "GroupIdentifier",
 		"key":                            "Key",
 		"last_updated_at":                "LastUpdatedAt",
+		"member":                         "Member",
+		"membership_assignments":         "MembershipAssignments",
 		"name":                           "Name",
+		"project_category":               "ProjectCategory",
+		"project_execution_role":         "ProjectExecutionRole",
 		"project_id":                     "Id",
 		"project_profile_id":             "ProjectProfileId",
 		"project_profile_version":        "ProjectProfileVersion",
 		"project_status":                 "ProjectStatus",
 		"resource_tags":                  "ResourceTags",
+		"user_identifier":                "UserIdentifier",
 		"user_parameters":                "UserParameters",
 		"value":                          "Value",
 	})

@@ -84,6 +84,19 @@ func resourceGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ResourceConfigDnsResolution
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "IN_VPC",
+		//	    "PUBLIC"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"resource_config_dns_resolution": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -199,17 +212,18 @@ func resourceGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithCloudFormationTypeName("AWS::VpcLattice::ResourceGateway").WithTerraformTypeName("awscc_vpclattice_resource_gateway")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                     "Arn",
-		"ip_address_type":         "IpAddressType",
-		"ipv_4_addresses_per_eni": "Ipv4AddressesPerEni",
-		"key":                     "Key",
-		"name":                    "Name",
-		"resource_gateway_id":     "Id",
-		"security_group_ids":      "SecurityGroupIds",
-		"subnet_ids":              "SubnetIds",
-		"tags":                    "Tags",
-		"value":                   "Value",
-		"vpc_identifier":          "VpcIdentifier",
+		"arn":                            "Arn",
+		"ip_address_type":                "IpAddressType",
+		"ipv_4_addresses_per_eni":        "Ipv4AddressesPerEni",
+		"key":                            "Key",
+		"name":                           "Name",
+		"resource_config_dns_resolution": "ResourceConfigDnsResolution",
+		"resource_gateway_id":            "Id",
+		"security_group_ids":             "SecurityGroupIds",
+		"subnet_ids":                     "SubnetIds",
+		"tags":                           "Tags",
+		"value":                          "Value",
+		"vpc_identifier":                 "VpcIdentifier",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

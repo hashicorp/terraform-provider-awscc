@@ -34,6 +34,14 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "Arn": {
 		//	          "description": "The ARN of the IAM User Profile.",
 		//	          "type": "string"
+		//	        },
+		//	        "GroupProfileId": {
+		//	          "description": "The group profile ID of the IAM User Profile.",
+		//	          "type": "string"
+		//	        },
+		//	        "SessionName": {
+		//	          "description": "The session name of the IAM User Profile.",
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -71,6 +79,16 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 						// Property: Arn
 						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The ARN of the IAM User Profile.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: GroupProfileId
+						"group_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The group profile ID of the IAM User Profile.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SessionName
+						"session_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The session name of the IAM User Profile.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -137,6 +155,19 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The ID of the Amazon DataZone user profile.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SessionName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The session name of the user profile.",
+		//	  "maxLength": 64,
+		//	  "minLength": 2,
+		//	  "type": "string"
+		//	}
+		"session_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The session name of the user profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -189,7 +220,8 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "enum": [
 		//	    "IAM_USER",
 		//	    "IAM_ROLE",
-		//	    "SSO_USER"
+		//	    "SSO_USER",
+		//	    "IAM_ROLE_SESSION"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -219,8 +251,10 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"domain_id":         "DomainId",
 		"domain_identifier": "DomainIdentifier",
 		"first_name":        "FirstName",
+		"group_profile_id":  "GroupProfileId",
 		"iam":               "Iam",
 		"last_name":         "LastName",
+		"session_name":      "SessionName",
 		"sso":               "Sso",
 		"status":            "Status",
 		"type":              "Type",

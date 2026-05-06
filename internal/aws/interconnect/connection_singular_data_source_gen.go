@@ -190,17 +190,47 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The partner cloud service provider.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RemoteAccount
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The remote account identifier for the connection. Required when creating a connection through AWS. Replaces RemoteOwnerAccount.",
+		//	  "properties": {
+		//	    "Identifier": {
+		//	      "description": "The identifier of the remote account.",
+		//	      "maxLength": 255,
+		//	      "pattern": "^[-a-zA-Z0-9_@\\.]+$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Identifier"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"remote_account": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Identifier
+				"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The identifier of the remote account.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The remote account identifier for the connection. Required when creating a connection through AWS. Replaces RemoteOwnerAccount.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RemoteOwnerAccount
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The account ID of the remote owner. Required when creating a connection through AWS.",
+		//	  "description": "Deprecated. Use RemoteAccount instead. The account ID of the remote owner. Required when creating a connection through AWS.",
 		//	  "maxLength": 255,
 		//	  "pattern": "^[-a-zA-Z0-9_@\\.]+$",
 		//	  "type": "string"
 		//	}
 		"remote_owner_account": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The account ID of the remote owner. Required when creating a connection through AWS.",
+			Description: "Deprecated. Use RemoteAccount instead. The account ID of the remote owner. Required when creating a connection through AWS.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SharedId
@@ -325,10 +355,12 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description":            "Description",
 		"direct_connect_gateway": "DirectConnectGateway",
 		"environment_id":         "EnvironmentId",
+		"identifier":             "Identifier",
 		"key":                    "Key",
 		"last_mile_provider":     "LastMileProvider",
 		"owner_account":          "OwnerAccount",
 		"provider_name":          "Provider",
+		"remote_account":         "RemoteAccount",
 		"remote_owner_account":   "RemoteOwnerAccount",
 		"shared_id":              "SharedId",
 		"state":                  "State",

@@ -80,6 +80,60 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"failure_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: IndexedKeys
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of indexed keys for the memory",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "Key name for metadata fields",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+		//	        "type": "string"
+		//	      },
+		//	      "Type": {
+		//	        "description": "Supported data types for metadata values",
+		//	        "enum": [
+		//	          "STRING",
+		//	          "STRINGLIST",
+		//	          "NUMBER"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Type"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"indexed_keys": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Key name for metadata fields",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Supported data types for metadata values",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of indexed keys for the memory",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MemoryArn
 		// CloudFormation resource type schema:
 		//
@@ -181,6 +235,127 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                        "maxLength": 30000,
 		//	                        "minLength": 1,
 		//	                        "type": "string"
+		//	                      },
+		//	                      "MemoryRecordSchema": {
+		//	                        "additionalProperties": false,
+		//	                        "properties": {
+		//	                          "MetadataSchema": {
+		//	                            "description": "List of metadata schema entries",
+		//	                            "insertionOrder": false,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "ExtractionConfig": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "LlmExtractionConfig": {
+		//	                                      "additionalProperties": false,
+		//	                                      "properties": {
+		//	                                        "Definition": {
+		//	                                          "description": "Definition for the metadata schema entry",
+		//	                                          "maxLength": 1000,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        },
+		//	                                        "LlmExtractionInstruction": {
+		//	                                          "description": "LLM extraction instruction",
+		//	                                          "maxLength": 1000,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        },
+		//	                                        "Validation": {
+		//	                                          "additionalProperties": false,
+		//	                                          "properties": {
+		//	                                            "NumberValidation": {
+		//	                                              "additionalProperties": false,
+		//	                                              "properties": {
+		//	                                                "MaxValue": {
+		//	                                                  "type": "number"
+		//	                                                },
+		//	                                                "MinValue": {
+		//	                                                  "type": "number"
+		//	                                                }
+		//	                                              },
+		//	                                              "type": "object"
+		//	                                            },
+		//	                                            "StringListValidation": {
+		//	                                              "additionalProperties": false,
+		//	                                              "properties": {
+		//	                                                "AllowedValues": {
+		//	                                                  "insertionOrder": false,
+		//	                                                  "items": {
+		//	                                                    "type": "string"
+		//	                                                  },
+		//	                                                  "maxItems": 10,
+		//	                                                  "minItems": 1,
+		//	                                                  "type": "array"
+		//	                                                },
+		//	                                                "MaxItems": {
+		//	                                                  "maximum": 5,
+		//	                                                  "minimum": 1,
+		//	                                                  "type": "integer"
+		//	                                                }
+		//	                                              },
+		//	                                              "type": "object"
+		//	                                            },
+		//	                                            "StringValidation": {
+		//	                                              "additionalProperties": false,
+		//	                                              "properties": {
+		//	                                                "AllowedValues": {
+		//	                                                  "insertionOrder": false,
+		//	                                                  "items": {
+		//	                                                    "type": "string"
+		//	                                                  },
+		//	                                                  "maxItems": 10,
+		//	                                                  "minItems": 1,
+		//	                                                  "type": "array"
+		//	                                                }
+		//	                                              },
+		//	                                              "required": [
+		//	                                                "AllowedValues"
+		//	                                              ],
+		//	                                              "type": "object"
+		//	                                            }
+		//	                                          },
+		//	                                          "type": "object"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Definition"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    }
+		//	                                  },
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "Key": {
+		//	                                  "description": "Key name for metadata fields",
+		//	                                  "maxLength": 128,
+		//	                                  "minLength": 1,
+		//	                                  "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+		//	                                  "type": "string"
+		//	                                },
+		//	                                "Type": {
+		//	                                  "description": "Supported data types for metadata values",
+		//	                                  "enum": [
+		//	                                    "STRING",
+		//	                                    "STRINGLIST",
+		//	                                    "NUMBER"
+		//	                                  ],
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "Key"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "maxItems": 20,
+		//	                            "minItems": 1,
+		//	                            "type": "array"
+		//	                          }
+		//	                        },
+		//	                        "type": "object"
 		//	                      },
 		//	                      "ModelId": {
 		//	                        "type": "string"
@@ -413,6 +588,127 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "description": "Description of the Memory resource",
 		//	            "type": "string"
 		//	          },
+		//	          "MemoryRecordSchema": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "MetadataSchema": {
+		//	                "description": "List of metadata schema entries",
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "ExtractionConfig": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "LlmExtractionConfig": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "Definition": {
+		//	                              "description": "Definition for the metadata schema entry",
+		//	                              "maxLength": 1000,
+		//	                              "minLength": 1,
+		//	                              "type": "string"
+		//	                            },
+		//	                            "LlmExtractionInstruction": {
+		//	                              "description": "LLM extraction instruction",
+		//	                              "maxLength": 1000,
+		//	                              "minLength": 1,
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Validation": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "NumberValidation": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "MaxValue": {
+		//	                                      "type": "number"
+		//	                                    },
+		//	                                    "MinValue": {
+		//	                                      "type": "number"
+		//	                                    }
+		//	                                  },
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "StringListValidation": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "AllowedValues": {
+		//	                                      "insertionOrder": false,
+		//	                                      "items": {
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "maxItems": 10,
+		//	                                      "minItems": 1,
+		//	                                      "type": "array"
+		//	                                    },
+		//	                                    "MaxItems": {
+		//	                                      "maximum": 5,
+		//	                                      "minimum": 1,
+		//	                                      "type": "integer"
+		//	                                    }
+		//	                                  },
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "StringValidation": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "AllowedValues": {
+		//	                                      "insertionOrder": false,
+		//	                                      "items": {
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "maxItems": 10,
+		//	                                      "minItems": 1,
+		//	                                      "type": "array"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "AllowedValues"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "Definition"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "Key": {
+		//	                      "description": "Key name for metadata fields",
+		//	                      "maxLength": 128,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Type": {
+		//	                      "description": "Supported data types for metadata values",
+		//	                      "enum": [
+		//	                        "STRING",
+		//	                        "STRINGLIST",
+		//	                        "NUMBER"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Key"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "maxItems": 20,
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
 		//	          "Name": {
 		//	            "description": "Name of the Memory resource",
 		//	            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
@@ -490,6 +786,127 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "description": "Description of the Memory resource",
 		//	            "type": "string"
 		//	          },
+		//	          "MemoryRecordSchema": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "MetadataSchema": {
+		//	                "description": "List of metadata schema entries",
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "ExtractionConfig": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "LlmExtractionConfig": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "Definition": {
+		//	                              "description": "Definition for the metadata schema entry",
+		//	                              "maxLength": 1000,
+		//	                              "minLength": 1,
+		//	                              "type": "string"
+		//	                            },
+		//	                            "LlmExtractionInstruction": {
+		//	                              "description": "LLM extraction instruction",
+		//	                              "maxLength": 1000,
+		//	                              "minLength": 1,
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Validation": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "NumberValidation": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "MaxValue": {
+		//	                                      "type": "number"
+		//	                                    },
+		//	                                    "MinValue": {
+		//	                                      "type": "number"
+		//	                                    }
+		//	                                  },
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "StringListValidation": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "AllowedValues": {
+		//	                                      "insertionOrder": false,
+		//	                                      "items": {
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "maxItems": 10,
+		//	                                      "minItems": 1,
+		//	                                      "type": "array"
+		//	                                    },
+		//	                                    "MaxItems": {
+		//	                                      "maximum": 5,
+		//	                                      "minimum": 1,
+		//	                                      "type": "integer"
+		//	                                    }
+		//	                                  },
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "StringValidation": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "AllowedValues": {
+		//	                                      "insertionOrder": false,
+		//	                                      "items": {
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "maxItems": 10,
+		//	                                      "minItems": 1,
+		//	                                      "type": "array"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "AllowedValues"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "Definition"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "Key": {
+		//	                      "description": "Key name for metadata fields",
+		//	                      "maxLength": 128,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Type": {
+		//	                      "description": "Supported data types for metadata values",
+		//	                      "enum": [
+		//	                        "STRING",
+		//	                        "STRINGLIST",
+		//	                        "NUMBER"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Key"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "maxItems": 20,
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
 		//	          "Name": {
 		//	            "description": "Name of the Memory resource",
 		//	            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
@@ -520,6 +937,127 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "ReflectionConfiguration": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
+		//	              "MemoryRecordSchema": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "MetadataSchema": {
+		//	                    "description": "List of metadata schema entries",
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "ExtractionConfig": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "LlmExtractionConfig": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "Definition": {
+		//	                                  "description": "Definition for the metadata schema entry",
+		//	                                  "maxLength": 1000,
+		//	                                  "minLength": 1,
+		//	                                  "type": "string"
+		//	                                },
+		//	                                "LlmExtractionInstruction": {
+		//	                                  "description": "LLM extraction instruction",
+		//	                                  "maxLength": 1000,
+		//	                                  "minLength": 1,
+		//	                                  "type": "string"
+		//	                                },
+		//	                                "Validation": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "NumberValidation": {
+		//	                                      "additionalProperties": false,
+		//	                                      "properties": {
+		//	                                        "MaxValue": {
+		//	                                          "type": "number"
+		//	                                        },
+		//	                                        "MinValue": {
+		//	                                          "type": "number"
+		//	                                        }
+		//	                                      },
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "StringListValidation": {
+		//	                                      "additionalProperties": false,
+		//	                                      "properties": {
+		//	                                        "AllowedValues": {
+		//	                                          "insertionOrder": false,
+		//	                                          "items": {
+		//	                                            "type": "string"
+		//	                                          },
+		//	                                          "maxItems": 10,
+		//	                                          "minItems": 1,
+		//	                                          "type": "array"
+		//	                                        },
+		//	                                        "MaxItems": {
+		//	                                          "maximum": 5,
+		//	                                          "minimum": 1,
+		//	                                          "type": "integer"
+		//	                                        }
+		//	                                      },
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "StringValidation": {
+		//	                                      "additionalProperties": false,
+		//	                                      "properties": {
+		//	                                        "AllowedValues": {
+		//	                                          "insertionOrder": false,
+		//	                                          "items": {
+		//	                                            "type": "string"
+		//	                                          },
+		//	                                          "maxItems": 10,
+		//	                                          "minItems": 1,
+		//	                                          "type": "array"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "AllowedValues"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    }
+		//	                                  },
+		//	                                  "type": "object"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "Definition"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            }
+		//	                          },
+		//	                          "type": "object"
+		//	                        },
+		//	                        "Key": {
+		//	                          "description": "Key name for metadata fields",
+		//	                          "maxLength": 128,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Type": {
+		//	                          "description": "Supported data types for metadata values",
+		//	                          "enum": [
+		//	                            "STRING",
+		//	                            "STRINGLIST",
+		//	                            "NUMBER"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Key"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "maxItems": 20,
+		//	                    "minItems": 1,
+		//	                    "type": "array"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
 		//	              "NamespaceTemplates": {
 		//	                "description": "List of namespaces for memory strategy",
 		//	                "insertionOrder": false,
@@ -594,6 +1132,127 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "Description": {
 		//	            "description": "Description of the Memory resource",
 		//	            "type": "string"
+		//	          },
+		//	          "MemoryRecordSchema": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "MetadataSchema": {
+		//	                "description": "List of metadata schema entries",
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "ExtractionConfig": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "LlmExtractionConfig": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "Definition": {
+		//	                              "description": "Definition for the metadata schema entry",
+		//	                              "maxLength": 1000,
+		//	                              "minLength": 1,
+		//	                              "type": "string"
+		//	                            },
+		//	                            "LlmExtractionInstruction": {
+		//	                              "description": "LLM extraction instruction",
+		//	                              "maxLength": 1000,
+		//	                              "minLength": 1,
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Validation": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "NumberValidation": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "MaxValue": {
+		//	                                      "type": "number"
+		//	                                    },
+		//	                                    "MinValue": {
+		//	                                      "type": "number"
+		//	                                    }
+		//	                                  },
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "StringListValidation": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "AllowedValues": {
+		//	                                      "insertionOrder": false,
+		//	                                      "items": {
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "maxItems": 10,
+		//	                                      "minItems": 1,
+		//	                                      "type": "array"
+		//	                                    },
+		//	                                    "MaxItems": {
+		//	                                      "maximum": 5,
+		//	                                      "minimum": 1,
+		//	                                      "type": "integer"
+		//	                                    }
+		//	                                  },
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "StringValidation": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "AllowedValues": {
+		//	                                      "insertionOrder": false,
+		//	                                      "items": {
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "maxItems": 10,
+		//	                                      "minItems": 1,
+		//	                                      "type": "array"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "AllowedValues"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "Definition"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "Key": {
+		//	                      "description": "Key name for metadata fields",
+		//	                      "maxLength": 128,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Type": {
+		//	                      "description": "Supported data types for metadata values",
+		//	                      "enum": [
+		//	                        "STRING",
+		//	                        "STRINGLIST",
+		//	                        "NUMBER"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Key"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "maxItems": 20,
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "type": "object"
 		//	          },
 		//	          "Name": {
 		//	            "description": "Name of the Memory resource",
@@ -672,6 +1331,127 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "description": "Description of the Memory resource",
 		//	            "type": "string"
 		//	          },
+		//	          "MemoryRecordSchema": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "MetadataSchema": {
+		//	                "description": "List of metadata schema entries",
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "ExtractionConfig": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "LlmExtractionConfig": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "Definition": {
+		//	                              "description": "Definition for the metadata schema entry",
+		//	                              "maxLength": 1000,
+		//	                              "minLength": 1,
+		//	                              "type": "string"
+		//	                            },
+		//	                            "LlmExtractionInstruction": {
+		//	                              "description": "LLM extraction instruction",
+		//	                              "maxLength": 1000,
+		//	                              "minLength": 1,
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Validation": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "NumberValidation": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "MaxValue": {
+		//	                                      "type": "number"
+		//	                                    },
+		//	                                    "MinValue": {
+		//	                                      "type": "number"
+		//	                                    }
+		//	                                  },
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "StringListValidation": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "AllowedValues": {
+		//	                                      "insertionOrder": false,
+		//	                                      "items": {
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "maxItems": 10,
+		//	                                      "minItems": 1,
+		//	                                      "type": "array"
+		//	                                    },
+		//	                                    "MaxItems": {
+		//	                                      "maximum": 5,
+		//	                                      "minimum": 1,
+		//	                                      "type": "integer"
+		//	                                    }
+		//	                                  },
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "StringValidation": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "AllowedValues": {
+		//	                                      "insertionOrder": false,
+		//	                                      "items": {
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "maxItems": 10,
+		//	                                      "minItems": 1,
+		//	                                      "type": "array"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "AllowedValues"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "Definition"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "Key": {
+		//	                      "description": "Key name for metadata fields",
+		//	                      "maxLength": 128,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Type": {
+		//	                      "description": "Supported data types for metadata values",
+		//	                      "enum": [
+		//	                        "STRING",
+		//	                        "STRINGLIST",
+		//	                        "NUMBER"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Key"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "maxItems": 20,
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
 		//	          "Name": {
 		//	            "description": "Name of the Memory resource",
 		//	            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
@@ -748,6 +1528,127 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "Description": {
 		//	            "description": "Description of the Memory resource",
 		//	            "type": "string"
+		//	          },
+		//	          "MemoryRecordSchema": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "MetadataSchema": {
+		//	                "description": "List of metadata schema entries",
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "ExtractionConfig": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "LlmExtractionConfig": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "Definition": {
+		//	                              "description": "Definition for the metadata schema entry",
+		//	                              "maxLength": 1000,
+		//	                              "minLength": 1,
+		//	                              "type": "string"
+		//	                            },
+		//	                            "LlmExtractionInstruction": {
+		//	                              "description": "LLM extraction instruction",
+		//	                              "maxLength": 1000,
+		//	                              "minLength": 1,
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Validation": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "NumberValidation": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "MaxValue": {
+		//	                                      "type": "number"
+		//	                                    },
+		//	                                    "MinValue": {
+		//	                                      "type": "number"
+		//	                                    }
+		//	                                  },
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "StringListValidation": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "AllowedValues": {
+		//	                                      "insertionOrder": false,
+		//	                                      "items": {
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "maxItems": 10,
+		//	                                      "minItems": 1,
+		//	                                      "type": "array"
+		//	                                    },
+		//	                                    "MaxItems": {
+		//	                                      "maximum": 5,
+		//	                                      "minimum": 1,
+		//	                                      "type": "integer"
+		//	                                    }
+		//	                                  },
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "StringValidation": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "AllowedValues": {
+		//	                                      "insertionOrder": false,
+		//	                                      "items": {
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "maxItems": 10,
+		//	                                      "minItems": 1,
+		//	                                      "type": "array"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "AllowedValues"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "Definition"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "Key": {
+		//	                      "description": "Key name for metadata fields",
+		//	                      "maxLength": 128,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Type": {
+		//	                      "description": "Supported data types for metadata values",
+		//	                      "enum": [
+		//	                        "STRING",
+		//	                        "STRINGLIST",
+		//	                        "NUMBER"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Key"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "maxItems": 20,
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "type": "object"
 		//	          },
 		//	          "Name": {
 		//	            "description": "Name of the Memory resource",
@@ -868,6 +1769,99 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 													"append_to_prompt": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "Text prompt for model instructions",
 														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: MemoryRecordSchema
+													"memory_record_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: MetadataSchema
+															"metadata_schema": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: ExtractionConfig
+																		"extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: LlmExtractionConfig
+																				"llm_extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Definition
+																						"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "Definition for the metadata schema entry",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: LlmExtractionInstruction
+																						"llm_extraction_instruction": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "LLM extraction instruction",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Validation
+																						"validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: NumberValidation
+																								"number_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																										// Property: MaxValue
+																										"max_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																											Computed: true,
+																										}, /*END ATTRIBUTE*/
+																										// Property: MinValue
+																										"min_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																											Computed: true,
+																										}, /*END ATTRIBUTE*/
+																									}, /*END SCHEMA*/
+																									Computed: true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: StringListValidation
+																								"string_list_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																										// Property: AllowedValues
+																										"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																											ElementType: types.StringType,
+																											Computed:    true,
+																										}, /*END ATTRIBUTE*/
+																										// Property: MaxItems
+																										"max_items": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																											Computed: true,
+																										}, /*END ATTRIBUTE*/
+																									}, /*END SCHEMA*/
+																									Computed: true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: StringValidation
+																								"string_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																										// Property: AllowedValues
+																										"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																											ElementType: types.StringType,
+																											Computed:    true,
+																										}, /*END ATTRIBUTE*/
+																									}, /*END SCHEMA*/
+																									Computed: true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Computed: true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Key
+																		"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "Key name for metadata fields",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Type
+																		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "Supported data types for metadata values",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "List of metadata schema entries",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Computed: true,
 													}, /*END ATTRIBUTE*/
 													// Property: ModelId
 													"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1061,6 +2055,99 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Description: "Description of the Memory resource",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
+							// Property: MemoryRecordSchema
+							"memory_record_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MetadataSchema
+									"metadata_schema": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ExtractionConfig
+												"extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: LlmExtractionConfig
+														"llm_extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Definition
+																"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "Definition for the metadata schema entry",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: LlmExtractionInstruction
+																"llm_extraction_instruction": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "LLM extraction instruction",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: Validation
+																"validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: NumberValidation
+																		"number_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: MaxValue
+																				"max_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: MinValue
+																				"min_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: StringListValidation
+																		"string_list_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowedValues
+																				"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																					ElementType: types.StringType,
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: MaxItems
+																				"max_items": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: StringValidation
+																		"string_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowedValues
+																				"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																					ElementType: types.StringType,
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Key
+												"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Key name for metadata fields",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Type
+												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Supported data types for metadata values",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "List of metadata schema entries",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Name of the Memory resource",
@@ -1116,6 +2203,99 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Description: "Description of the Memory resource",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
+							// Property: MemoryRecordSchema
+							"memory_record_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MetadataSchema
+									"metadata_schema": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ExtractionConfig
+												"extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: LlmExtractionConfig
+														"llm_extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Definition
+																"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "Definition for the metadata schema entry",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: LlmExtractionInstruction
+																"llm_extraction_instruction": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "LLM extraction instruction",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: Validation
+																"validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: NumberValidation
+																		"number_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: MaxValue
+																				"max_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: MinValue
+																				"min_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: StringListValidation
+																		"string_list_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowedValues
+																				"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																					ElementType: types.StringType,
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: MaxItems
+																				"max_items": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: StringValidation
+																		"string_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowedValues
+																				"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																					ElementType: types.StringType,
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Key
+												"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Key name for metadata fields",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Type
+												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Supported data types for metadata values",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "List of metadata schema entries",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Name of the Memory resource",
@@ -1136,6 +2316,99 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 							// Property: ReflectionConfiguration
 							"reflection_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MemoryRecordSchema
+									"memory_record_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: MetadataSchema
+											"metadata_schema": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: ExtractionConfig
+														"extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: LlmExtractionConfig
+																"llm_extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Definition
+																		"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "Definition for the metadata schema entry",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: LlmExtractionInstruction
+																		"llm_extraction_instruction": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "LLM extraction instruction",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Validation
+																		"validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: NumberValidation
+																				"number_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: MaxValue
+																						"max_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																							Computed: true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: MinValue
+																						"min_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																							Computed: true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: StringListValidation
+																				"string_list_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: AllowedValues
+																						"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																							ElementType: types.StringType,
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: MaxItems
+																						"max_items": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																							Computed: true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: StringValidation
+																				"string_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: AllowedValues
+																						"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																							ElementType: types.StringType,
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: Key
+														"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Key name for metadata fields",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: Type
+														"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Supported data types for metadata values",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Description: "List of metadata schema entries",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
 									// Property: NamespaceTemplates
 									"namespace_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
 										ElementType: types.StringType,
@@ -1188,6 +2461,99 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Description of the Memory resource",
 								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MemoryRecordSchema
+							"memory_record_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MetadataSchema
+									"metadata_schema": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ExtractionConfig
+												"extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: LlmExtractionConfig
+														"llm_extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Definition
+																"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "Definition for the metadata schema entry",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: LlmExtractionInstruction
+																"llm_extraction_instruction": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "LLM extraction instruction",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: Validation
+																"validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: NumberValidation
+																		"number_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: MaxValue
+																				"max_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: MinValue
+																				"min_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: StringListValidation
+																		"string_list_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowedValues
+																				"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																					ElementType: types.StringType,
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: MaxItems
+																				"max_items": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: StringValidation
+																		"string_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowedValues
+																				"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																					ElementType: types.StringType,
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Key
+												"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Key name for metadata fields",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Type
+												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Supported data types for metadata values",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "List of metadata schema entries",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
 							}, /*END ATTRIBUTE*/
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1244,6 +2610,99 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Description: "Description of the Memory resource",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
+							// Property: MemoryRecordSchema
+							"memory_record_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MetadataSchema
+									"metadata_schema": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ExtractionConfig
+												"extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: LlmExtractionConfig
+														"llm_extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Definition
+																"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "Definition for the metadata schema entry",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: LlmExtractionInstruction
+																"llm_extraction_instruction": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "LLM extraction instruction",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: Validation
+																"validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: NumberValidation
+																		"number_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: MaxValue
+																				"max_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: MinValue
+																				"min_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: StringListValidation
+																		"string_list_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowedValues
+																				"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																					ElementType: types.StringType,
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: MaxItems
+																				"max_items": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: StringValidation
+																		"string_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowedValues
+																				"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																					ElementType: types.StringType,
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Key
+												"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Key name for metadata fields",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Type
+												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Supported data types for metadata values",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "List of metadata schema entries",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Name of the Memory resource",
@@ -1298,6 +2757,99 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Description of the Memory resource",
 								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MemoryRecordSchema
+							"memory_record_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MetadataSchema
+									"metadata_schema": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ExtractionConfig
+												"extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: LlmExtractionConfig
+														"llm_extraction_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Definition
+																"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "Definition for the metadata schema entry",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: LlmExtractionInstruction
+																"llm_extraction_instruction": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "LLM extraction instruction",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: Validation
+																"validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: NumberValidation
+																		"number_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: MaxValue
+																				"max_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: MinValue
+																				"min_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: StringListValidation
+																		"string_list_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowedValues
+																				"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																					ElementType: types.StringType,
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: MaxItems
+																				"max_items": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: StringValidation
+																		"string_validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowedValues
+																				"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+																					ElementType: types.StringType,
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Key
+												"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Key name for metadata fields",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Type
+												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Supported data types for metadata values",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "List of metadata schema entries",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
 							}, /*END ATTRIBUTE*/
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1535,6 +3087,7 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::BedrockAgentCore::Memory").WithTerraformTypeName("awscc_bedrockagentcore_memory")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"allowed_values":                  "AllowedValues",
 		"append_to_prompt":                "AppendToPrompt",
 		"configuration":                   "Configuration",
 		"consolidation":                   "Consolidation",
@@ -1542,28 +3095,40 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"created_at":                      "CreatedAt",
 		"custom_memory_strategy":          "CustomMemoryStrategy",
 		"data_stream_arn":                 "DataStreamArn",
+		"definition":                      "Definition",
 		"description":                     "Description",
 		"encryption_key_arn":              "EncryptionKeyArn",
 		"episodic_memory_strategy":        "EpisodicMemoryStrategy",
 		"episodic_override":               "EpisodicOverride",
 		"event_expiry_duration":           "EventExpiryDuration",
 		"extraction":                      "Extraction",
+		"extraction_config":               "ExtractionConfig",
 		"failure_reason":                  "FailureReason",
 		"historical_context_window_size":  "HistoricalContextWindowSize",
 		"idle_session_timeout":            "IdleSessionTimeout",
+		"indexed_keys":                    "IndexedKeys",
 		"invocation_configuration":        "InvocationConfiguration",
+		"key":                             "Key",
 		"kinesis":                         "Kinesis",
 		"level":                           "Level",
+		"llm_extraction_config":           "LlmExtractionConfig",
+		"llm_extraction_instruction":      "LlmExtractionInstruction",
+		"max_items":                       "MaxItems",
+		"max_value":                       "MaxValue",
 		"memory_arn":                      "MemoryArn",
 		"memory_execution_role_arn":       "MemoryExecutionRoleArn",
 		"memory_id":                       "MemoryId",
+		"memory_record_schema":            "MemoryRecordSchema",
 		"memory_strategies":               "MemoryStrategies",
 		"message_based_trigger":           "MessageBasedTrigger",
 		"message_count":                   "MessageCount",
+		"metadata_schema":                 "MetadataSchema",
+		"min_value":                       "MinValue",
 		"model_id":                        "ModelId",
 		"name":                            "Name",
 		"namespace_templates":             "NamespaceTemplates",
 		"namespaces":                      "Namespaces",
+		"number_validation":               "NumberValidation",
 		"payload_delivery_bucket_name":    "PayloadDeliveryBucketName",
 		"reflection":                      "Reflection",
 		"reflection_configuration":        "ReflectionConfiguration",
@@ -1574,6 +3139,8 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"status":                          "Status",
 		"strategy_id":                     "StrategyId",
 		"stream_delivery_resources":       "StreamDeliveryResources",
+		"string_list_validation":          "StringListValidation",
+		"string_validation":               "StringValidation",
 		"summary_memory_strategy":         "SummaryMemoryStrategy",
 		"summary_override":                "SummaryOverride",
 		"tags":                            "Tags",
@@ -1586,6 +3153,7 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"updated_at":                      "UpdatedAt",
 		"user_preference_memory_strategy": "UserPreferenceMemoryStrategy",
 		"user_preference_override":        "UserPreferenceOverride",
+		"validation":                      "Validation",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

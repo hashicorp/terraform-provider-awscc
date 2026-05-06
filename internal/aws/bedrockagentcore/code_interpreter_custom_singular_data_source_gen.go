@@ -24,6 +24,61 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::BedrockAgentCore::CodeInterpreterCustom resource.
 func codeInterpreterCustomDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Certificates
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of root CA certificates in PEM format.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A root CA certificate configuration.",
+		//	    "properties": {
+		//	      "CertificateLocation": {
+		//	        "additionalProperties": false,
+		//	        "description": "Certificate location in Secrets Manager.",
+		//	        "properties": {
+		//	          "SecretArn": {
+		//	            "description": "Secrets Manager secret ARN.",
+		//	            "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):secretsmanager:[a-z0-9-]+:\\d{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "SecretArn"
+		//	        ],
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "CertificateLocation"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"certificates": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CertificateLocation
+					"certificate_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: SecretArn
+							"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Secrets Manager secret ARN.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Certificate location in Secrets Manager.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of root CA certificates in PEM format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CodeInterpreterArn
 		// CloudFormation resource type schema:
 		//
@@ -266,6 +321,8 @@ func codeInterpreterCustomDataSource(ctx context.Context) (datasource.DataSource
 	opts = opts.WithCloudFormationTypeName("AWS::BedrockAgentCore::CodeInterpreterCustom").WithTerraformTypeName("awscc_bedrockagentcore_code_interpreter_custom")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"certificate_location":  "CertificateLocation",
+		"certificates":          "Certificates",
 		"code_interpreter_arn":  "CodeInterpreterArn",
 		"code_interpreter_id":   "CodeInterpreterId",
 		"created_at":            "CreatedAt",
@@ -276,6 +333,7 @@ func codeInterpreterCustomDataSource(ctx context.Context) (datasource.DataSource
 		"name":                  "Name",
 		"network_configuration": "NetworkConfiguration",
 		"network_mode":          "NetworkMode",
+		"secret_arn":            "SecretArn",
 		"security_groups":       "SecurityGroups",
 		"status":                "Status",
 		"subnets":               "Subnets",

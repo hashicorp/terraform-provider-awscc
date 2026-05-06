@@ -72,6 +72,61 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "Browser signing configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Certificates
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of root CA certificates in PEM format.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A root CA certificate configuration.",
+		//	    "properties": {
+		//	      "CertificateLocation": {
+		//	        "additionalProperties": false,
+		//	        "description": "Certificate location in Secrets Manager.",
+		//	        "properties": {
+		//	          "SecretArn": {
+		//	            "description": "Secrets Manager secret ARN.",
+		//	            "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):secretsmanager:[a-z0-9-]+:\\d{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "SecretArn"
+		//	        ],
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "CertificateLocation"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"certificates": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CertificateLocation
+					"certificate_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: SecretArn
+							"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Secrets Manager secret ARN.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Certificate location in Secrets Manager.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of root CA certificates in PEM format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -94,6 +149,82 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The description of the browser.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EnterprisePolicies
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of enterprise policy files for the browser.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Browser enterprise policy configuration.",
+		//	    "properties": {
+		//	      "Location": {
+		//	        "additionalProperties": false,
+		//	        "description": "The S3 location of the enterprise policy file.",
+		//	        "properties": {
+		//	          "Bucket": {
+		//	            "pattern": "^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$",
+		//	            "type": "string"
+		//	          },
+		//	          "Prefix": {
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Bucket",
+		//	          "Prefix"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "Type": {
+		//	        "description": "The type of browser enterprise policy.",
+		//	        "enum": [
+		//	          "MANAGED",
+		//	          "RECOMMENDED"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Location",
+		//	      "Type"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"enterprise_policies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Location
+					"location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Bucket
+							"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Prefix
+							"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The S3 location of the enterprise policy file.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of browser enterprise policy.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of enterprise policy files for the browser.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ExecutionRoleArn
@@ -351,22 +482,28 @@ func browserCustomDataSource(ctx context.Context) (datasource.DataSource, error)
 		"browser_id":            "BrowserId",
 		"browser_signing":       "BrowserSigning",
 		"bucket":                "Bucket",
+		"certificate_location":  "CertificateLocation",
+		"certificates":          "Certificates",
 		"created_at":            "CreatedAt",
 		"description":           "Description",
 		"enabled":               "Enabled",
+		"enterprise_policies":   "EnterprisePolicies",
 		"execution_role_arn":    "ExecutionRoleArn",
 		"failure_reason":        "FailureReason",
 		"last_updated_at":       "LastUpdatedAt",
+		"location":              "Location",
 		"name":                  "Name",
 		"network_configuration": "NetworkConfiguration",
 		"network_mode":          "NetworkMode",
 		"prefix":                "Prefix",
 		"recording_config":      "RecordingConfig",
 		"s3_location":           "S3Location",
+		"secret_arn":            "SecretArn",
 		"security_groups":       "SecurityGroups",
 		"status":                "Status",
 		"subnets":               "Subnets",
 		"tags":                  "Tags",
+		"type":                  "Type",
 		"vpc_config":            "VpcConfig",
 	})
 
