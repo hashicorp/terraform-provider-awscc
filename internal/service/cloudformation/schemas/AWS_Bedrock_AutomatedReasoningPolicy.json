@@ -20,7 +20,8 @@
   ],
   "writeOnlyProperties": [
     "/properties/KmsKeyId",
-    "/properties/ForceDelete"
+    "/properties/ForceDelete",
+    "/properties/PolicyDefinition"
   ],
   "definitions": {
     "Name": {
@@ -334,7 +335,6 @@
       "permissions": [
         "bedrock:CreateAutomatedReasoningPolicy",
         "bedrock:GetAutomatedReasoningPolicy",
-        "bedrock:ExportAutomatedReasoningPolicyVersion",
         "bedrock:TagResource",
         "bedrock:ListTagsForResource",
         "kms:DescribeKey",
@@ -345,11 +345,7 @@
     "read": {
       "permissions": [
         "bedrock:GetAutomatedReasoningPolicy",
-        "bedrock:ExportAutomatedReasoningPolicyVersion",
-        "bedrock:ListTagsForResource",
-        "kms:Decrypt",
-        "kms:DescribeKey",
-        "kms:GenerateDataKey"
+        "bedrock:ListTagsForResource"
       ]
     },
     "update": {

@@ -167,6 +167,45 @@
         }
       },
       "additionalProperties": false
+    },
+    "CertificateLocation": {
+      "type": "object",
+      "properties": {
+        "SecretArn": {
+          "type": "string",
+          "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):secretsmanager:[a-z0-9-]+:\\d{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
+          "description": "Secrets Manager secret ARN."
+        }
+      },
+      "required": [
+        "SecretArn"
+      ],
+      "additionalProperties": false,
+      "description": "Certificate location in Secrets Manager."
+    },
+    "Certificate": {
+      "type": "object",
+      "properties": {
+        "CertificateLocation": {
+          "$ref": "#/definitions/CertificateLocation",
+          "description": "Certificate location in Secrets Manager."
+        }
+      },
+      "required": [
+        "CertificateLocation"
+      ],
+      "additionalProperties": false,
+      "description": "A root CA certificate configuration."
+    },
+    "CertificateList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Certificate"
+      },
+      "insertionOrder": false,
+      "minItems": 0,
+      "maxItems": 10,
+      "description": "List of root CA certificates."
     }
   },
   "properties": {
@@ -193,6 +232,10 @@
     "NetworkConfiguration": {
       "$ref": "#/definitions/CodeInterpreterNetworkConfiguration",
       "description": "Network configuration for code interpreter."
+    },
+    "Certificates": {
+      "$ref": "#/definitions/CertificateList",
+      "description": "List of root CA certificates in PEM format."
     },
     "Status": {
       "$ref": "#/definitions/CodeInterpreterStatus",
@@ -241,6 +284,7 @@
     "/properties/Name",
     "/properties/Description",
     "/properties/NetworkConfiguration",
+    "/properties/Certificates",
     "/properties/ExecutionRoleArn"
   ],
   "handlers": {
@@ -251,7 +295,8 @@
         "bedrock-agentcore:TagResource",
         "bedrock-agentcore:ListTagsForResource",
         "iam:CreateServiceLinkedRole",
-        "iam:PassRole"
+        "iam:PassRole",
+        "secretsmanager:GetSecretValue"
       ]
     },
     "read": {

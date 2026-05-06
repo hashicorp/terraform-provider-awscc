@@ -10,6 +10,14 @@
         "Arn": {
           "type": "string",
           "description": "The ARN of the IAM User Profile."
+        },
+        "SessionName": {
+          "type": "string",
+          "description": "The session name of the IAM User Profile."
+        },
+        "GroupProfileId": {
+          "type": "string",
+          "description": "The group profile ID of the IAM User Profile."
         }
       },
       "additionalProperties": false
@@ -90,7 +98,8 @@
       "enum": [
         "IAM_USER",
         "IAM_ROLE",
-        "SSO_USER"
+        "SSO_USER",
+        "IAM_ROLE_SESSION"
       ]
     }
   },
@@ -125,6 +134,12 @@
     },
     "UserType": {
       "$ref": "#/definitions/UserType"
+    },
+    "SessionName": {
+      "type": "string",
+      "description": "The session name of the user profile.",
+      "minLength": 2,
+      "maxLength": 64
     }
   },
   "required": [
@@ -140,7 +155,8 @@
   "writeOnlyProperties": [
     "/properties/DomainIdentifier",
     "/properties/UserIdentifier",
-    "/properties/UserType"
+    "/properties/UserType",
+    "/properties/SessionName"
   ],
   "createOnlyProperties": [
     "/properties/DomainIdentifier",

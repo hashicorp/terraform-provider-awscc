@@ -63,6 +63,82 @@
       "additionalProperties": false,
       "description": "Browser signing configuration"
     },
+    "CertificateLocation": {
+      "type": "object",
+      "properties": {
+        "SecretArn": {
+          "type": "string",
+          "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):secretsmanager:[a-z0-9-]+:\\d{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
+          "description": "Secrets Manager secret ARN."
+        }
+      },
+      "required": [
+        "SecretArn"
+      ],
+      "additionalProperties": false,
+      "description": "Certificate location in Secrets Manager."
+    },
+    "Certificate": {
+      "type": "object",
+      "properties": {
+        "CertificateLocation": {
+          "$ref": "#/definitions/CertificateLocation",
+          "description": "Certificate location in Secrets Manager."
+        }
+      },
+      "required": [
+        "CertificateLocation"
+      ],
+      "additionalProperties": false,
+      "description": "A root CA certificate configuration."
+    },
+    "CertificateList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Certificate"
+      },
+      "insertionOrder": false,
+      "minItems": 0,
+      "maxItems": 10,
+      "description": "List of root CA certificates."
+    },
+    "BrowserEnterprisePolicyType": {
+      "type": "string",
+      "enum": [
+        "MANAGED",
+        "RECOMMENDED"
+      ],
+      "description": "The type of browser enterprise policy."
+    },
+    "BrowserEnterprisePolicy": {
+      "type": "object",
+      "properties": {
+        "Location": {
+          "$ref": "#/definitions/S3Location",
+          "description": "The S3 location of the enterprise policy file."
+        },
+        "Type": {
+          "$ref": "#/definitions/BrowserEnterprisePolicyType",
+          "description": "The type of browser enterprise policy."
+        }
+      },
+      "required": [
+        "Location",
+        "Type"
+      ],
+      "additionalProperties": false,
+      "description": "Browser enterprise policy configuration."
+    },
+    "BrowserEnterprisePolicies": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/BrowserEnterprisePolicy"
+      },
+      "insertionOrder": false,
+      "minItems": 0,
+      "maxItems": 10,
+      "description": "List of browser enterprise policies."
+    },
     "S3Location": {
       "type": "object",
       "properties": {
@@ -233,6 +309,14 @@
       "$ref": "#/definitions/BrowserSigning",
       "description": "Browser signing configuration."
     },
+    "Certificates": {
+      "$ref": "#/definitions/CertificateList",
+      "description": "List of root CA certificates in PEM format."
+    },
+    "EnterprisePolicies": {
+      "$ref": "#/definitions/BrowserEnterprisePolicies",
+      "description": "A list of enterprise policy files for the browser."
+    },
     "ExecutionRoleArn": {
       "$ref": "#/definitions/RoleArn",
       "description": "The Amazon Resource Name (ARN) of the IAM role that the browser uses to access resources."
@@ -286,6 +370,8 @@
     "/properties/NetworkConfiguration",
     "/properties/RecordingConfig",
     "/properties/BrowserSigning",
+    "/properties/Certificates",
+    "/properties/EnterprisePolicies",
     "/properties/ExecutionRoleArn"
   ],
   "handlers": {
@@ -296,7 +382,8 @@
         "bedrock-agentcore:TagResource",
         "bedrock-agentcore:ListTagsForResource",
         "iam:CreateServiceLinkedRole",
-        "iam:PassRole"
+        "iam:PassRole",
+        "secretsmanager:GetSecretValue"
       ]
     },
     "read": {

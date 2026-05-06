@@ -890,7 +890,7 @@
     },
     "AvailabilityZoneIds": {
       "uniqueItems": true,
-      "description": "",
+      "description": "The Availability Zone IDs where the Auto Scaling group can launch instances.",
       "insertionOrder": false,
       "type": "array",
       "items": {

@@ -1158,7 +1158,8 @@
     "ViewerMtlsMode": {
       "enum": [
         "required",
-        "optional"
+        "optional",
+        "passthrough"
       ],
       "type": "string"
     },
@@ -1226,7 +1227,8 @@
     "read": {
       "permissions": [
         "cloudfront:GetDistribution",
-        "cloudfront:GetDistributionConfig"
+        "cloudfront:GetDistributionConfig",
+        "cloudfront:ListTagsForResource"
       ]
     },
     "update": {
