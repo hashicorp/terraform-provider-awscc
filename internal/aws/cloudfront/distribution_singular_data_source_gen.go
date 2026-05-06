@@ -1116,7 +1116,8 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	          "description": "The viewer mTLS mode.",
 		//	          "enum": [
 		//	            "required",
-		//	            "optional"
+		//	            "optional",
+		//	            "passthrough"
 		//	          ],
 		//	          "type": "string"
 		//	        },

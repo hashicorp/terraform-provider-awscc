@@ -897,6 +897,10 @@ resource_schema "aws_chime_app_instance" {
   cloudformation_type_name = "AWS::Chime::AppInstance"
 }
 
+resource_schema "aws_chime_app_instance_bot" {
+  cloudformation_type_name = "AWS::Chime::AppInstanceBot"
+}
+
 resource_schema "aws_cleanrooms_analysis_template" {
   cloudformation_type_name               = "AWS::CleanRooms::AnalysisTemplate"
   suppress_plural_data_source_generation = true
@@ -2525,6 +2529,10 @@ resource_schema "aws_emrserverless_application" {
   # git checkout internal/service/cloudformation/schemas/AWS_EC2_NetworkInsightsAnalysis.json
   # Suppression Reason:
   # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
+}
+
+resource_schema "aws_elasticache_cache_cluster" {
+  cloudformation_type_name = "AWS::ElastiCache::CacheCluster"
 }
 
 resource_schema "aws_elasticache_global_replication_group" {

@@ -25,7 +25,8 @@ Resource Type definition for AWS::Interconnect::Connection. Creates a managed ne
 - `bandwidth` (String) The bandwidth of the connection (e.g., 50Mbps, 1Gbps). Required when creating a connection through AWS.
 - `description` (String) A description of the connection.
 - `environment_id` (String) The ID of the environment for the connection. Required when creating a connection through AWS. Mutually exclusive with ActivationKey.
-- `remote_owner_account` (String) The account ID of the remote owner. Required when creating a connection through AWS.
+- `remote_account` (Attributes) The remote account identifier for the connection. Required when creating a connection through AWS. Replaces RemoteOwnerAccount. (see [below for nested schema](#nestedatt--remote_account))
+- `remote_owner_account` (String) Deprecated. Use RemoteAccount instead. The account ID of the remote owner. Required when creating a connection through AWS.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -47,6 +48,14 @@ Optional:
 
 - `arn` (String) The ARN of the resource to attach to.
 - `direct_connect_gateway` (String) The ID of the Direct Connect Gateway to attach to.
+
+
+<a id="nestedatt--remote_account"></a>
+### Nested Schema for `remote_account`
+
+Optional:
+
+- `identifier` (String) The identifier of the remote account.
 
 
 <a id="nestedatt--tags"></a>

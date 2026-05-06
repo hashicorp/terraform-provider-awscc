@@ -37,7 +37,7 @@
         },
         "RoleArn": {
           "type": "string",
-          "pattern": "^arn:aws(-cn|-us-gov|-iso(-[a-z])?)?:iam::\\d{12}:(role)\\/*",
+          "pattern": "^arn:aws[a-zA-Z-]*:iam::\\d{12}:(role)\\/*",
           "description": "The IAM role ARN that the pod identity association is created for."
         }
       },
@@ -157,6 +157,9 @@
     "/properties/PreserveOnDelete",
     "/properties/PodIdentityAssociations"
   ],
+  "propertyTransform": {
+    "/properties/ConfigurationValues": "$replace(ConfigurationValues, /\n$/, '')"
+  },
   "handlers": {
     "create": {
       "permissions": [

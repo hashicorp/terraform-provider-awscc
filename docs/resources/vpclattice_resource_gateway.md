@@ -100,6 +100,7 @@ resource "awscc_vpclattice_resource_gateway" "example" {
 
 - `ip_address_type` (String)
 - `ipv_4_addresses_per_eni` (Number) The number of IPv4 addresses to allocate per ENI for the resource gateway
+- `resource_config_dns_resolution` (String)
 - `security_group_ids` (Set of String) The ID of one or more security groups to associate with the endpoint network interface.
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 

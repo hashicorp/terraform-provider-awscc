@@ -133,6 +133,7 @@ resource "awscc_msk_cluster" "example" {
 - `rebalancing` (Attributes) (see [below for nested schema](#nestedatt--rebalancing))
 - `storage_mode` (String)
 - `tags` (Map of String) A key-value pair to associate with a resource.
+- `zookeeper_access` (Attributes) (see [below for nested schema](#nestedatt--zookeeper_access))
 
 ### Read-Only
 
@@ -422,6 +423,14 @@ Optional:
 Optional:
 
 - `status` (String)
+
+
+<a id="nestedatt--zookeeper_access"></a>
+### Nested Schema for `zookeeper_access`
+
+Optional:
+
+- `enabled` (Boolean)
 
 ## Import
 

@@ -121,7 +121,7 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "properties": {
 		//	      "RoleArn": {
 		//	        "description": "The IAM role ARN that the pod identity association is created for.",
-		//	        "pattern": "^arn:aws(-cn|-us-gov|-iso(-[a-z])?)?:iam::\\d{12}:(role)\\/*",
+		//	        "pattern": "^arn:aws[a-zA-Z-]*:iam::\\d{12}:(role)\\/*",
 		//	        "type": "string"
 		//	      },
 		//	      "ServiceAccount": {

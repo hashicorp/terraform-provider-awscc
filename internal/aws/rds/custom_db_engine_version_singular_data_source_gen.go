@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -30,6 +31,22 @@ func customDBEngineVersionDataSource(ctx context.Context) (datasource.DataSource
 		//	  "type": "string"
 		//	}
 		"db_engine_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: DatabaseInstallationFiles
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"database_installation_files": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -240,6 +257,7 @@ func customDBEngineVersionDataSource(ctx context.Context) (datasource.DataSource
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::CustomDBEngineVersion").WithTerraformTypeName("awscc_rds_custom_db_engine_version")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"database_installation_files":                "DatabaseInstallationFiles",
 		"database_installation_files_s3_bucket_name": "DatabaseInstallationFilesS3BucketName",
 		"database_installation_files_s3_prefix":      "DatabaseInstallationFilesS3Prefix",
 		"db_engine_version_arn":                      "DBEngineVersionArn",

@@ -196,7 +196,9 @@
         "resource-groups:GetGroupConfiguration",
         "resource-groups:ListGroupResources",
         "resource-groups:GroupResources",
-        "resource-groups:UnGroupResources"
+        "resource-groups:UnGroupResources",
+        "cloudformation:DescribeStacks",
+        "cloudformation:ListStackResources"
       ]
     },
     "delete": {

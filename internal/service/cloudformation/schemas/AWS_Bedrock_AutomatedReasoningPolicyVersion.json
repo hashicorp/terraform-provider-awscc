@@ -158,11 +158,7 @@
     "read": {
       "permissions": [
         "bedrock:GetAutomatedReasoningPolicy",
-        "bedrock:ExportAutomatedReasoningPolicyVersion",
-        "bedrock:ListTagsForResource",
-        "kms:DescribeKey",
-        "kms:GenerateDataKey",
-        "kms:Decrypt"
+        "bedrock:ListTagsForResource"
       ]
     },
     "delete": {

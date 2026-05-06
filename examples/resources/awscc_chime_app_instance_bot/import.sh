@@ -1,0 +1,1 @@
+$ terraform import awscc_chime_app_instance_bot.example "app_instance_bot_arn"

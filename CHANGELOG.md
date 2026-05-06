@@ -1,4 +1,15 @@
-## 1.83.0 (Unreleased)
+## 1.83.0 (May 6, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_chime_app_instance_bot`
+* **New Data Source:** `awscc_chime_app_instance_bots`
+* **New Data Source:** `awscc_elasticache_cache_cluster`
+* **New Data Source:** `awscc_elasticache_cache_clusters`
+* **New List Resource:** `awscc_chime_app_instance_bot`
+* **New List Resource:** `awscc_elasticache_cache_cluster`
+* **New Resource:** `awscc_chime_app_instance_bot`
+* **New Resource:** `awscc_elasticache_cache_cluster`
 
 ## 1.82.0 (April 29, 2026)
 

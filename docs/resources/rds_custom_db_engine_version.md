@@ -27,6 +27,7 @@ Creates a custom DB engine version (CEV).
 
 ### Optional
 
+- `database_installation_files` (List of String)
 - `database_installation_files_s3_bucket_name` (String) The name of an Amazon S3 bucket that contains database installation files for your CEV. For example, a valid bucket name is ``my-custom-installation-files``.
 - `database_installation_files_s3_prefix` (String) The Amazon S3 directory that contains the database installation files for your CEV. For example, a valid bucket name is ``123456789012/cev1``. If this setting isn't specified, no prefix is assumed.
 - `description` (String) An optional description of your CEV.

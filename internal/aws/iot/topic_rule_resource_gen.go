@@ -345,6 +345,9 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	              "BatchConfig": {
 		//	                "additionalProperties": false,
 		//	                "properties": {
+		//	                  "BatchAcrossTopics": {
+		//	                    "type": "boolean"
+		//	                  },
 		//	                  "MaxBatchOpenMs": {
 		//	                    "type": "integer"
 		//	                  },
@@ -1125,6 +1128,9 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	            "BatchConfig": {
 		//	              "additionalProperties": false,
 		//	              "properties": {
+		//	                "BatchAcrossTopics": {
+		//	                  "type": "boolean"
+		//	                },
 		//	                "MaxBatchOpenMs": {
 		//	                  "type": "integer"
 		//	                },
@@ -2169,6 +2175,14 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 									// Property: BatchConfig
 									"batch_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: BatchAcrossTopics
+											"batch_across_topics": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+													boolplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
 											// Property: MaxBatchOpenMs
 											"max_batch_open_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Optional: true,
@@ -3779,6 +3793,14 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 								// Property: BatchConfig
 								"batch_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: BatchAcrossTopics
+										"batch_across_topics": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
 										// Property: MaxBatchOpenMs
 										"max_batch_open_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Optional: true,
@@ -4950,6 +4972,7 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 		"asset_id":                         "AssetId",
 		"auth":                             "Auth",
 		"aws_iot_sql_version":              "AwsIotSqlVersion",
+		"batch_across_topics":              "BatchAcrossTopics",
 		"batch_config":                     "BatchConfig",
 		"batch_mode":                       "BatchMode",
 		"boolean_value":                    "BooleanValue",

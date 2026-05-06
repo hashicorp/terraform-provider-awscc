@@ -79,7 +79,9 @@
     "RoleArn",
     "DefaultLogLevel"
   ],
-  "taggable": false,
+  "tagging": {
+    "taggable": false
+  },
   "primaryIdentifier": [
     "/properties/AccountId"
   ],

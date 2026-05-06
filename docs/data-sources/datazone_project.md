@@ -29,13 +29,34 @@ Data Source schema for AWS::DataZone::Project
 - `domain_unit_id` (String) The ID of the domain unit.
 - `glossary_terms` (List of String) The glossary terms that can be used in this Amazon DataZone project.
 - `last_updated_at` (String) The timestamp of when the project was last updated.
+- `membership_assignments` (Attributes List) The project membership assignments. (see [below for nested schema](#nestedatt--membership_assignments))
 - `name` (String) The name of the Amazon DataZone project.
+- `project_category` (String) The project category.
+- `project_execution_role` (String) The project execution role ARN.
 - `project_id` (String) The ID of the Amazon DataZone project.
 - `project_profile_id` (String) The project profile ID.
 - `project_profile_version` (String) The project profile version to which the project should be updated. You can only specify the following string for this parameter: latest.
 - `project_status` (String) The status of the project.
 - `resource_tags` (Attributes List) The resource tags of the project. (see [below for nested schema](#nestedatt--resource_tags))
 - `user_parameters` (Attributes List) The user parameters of the project. (see [below for nested schema](#nestedatt--user_parameters))
+
+<a id="nestedatt--membership_assignments"></a>
+### Nested Schema for `membership_assignments`
+
+Read-Only:
+
+- `designation` (String)
+- `member` (Attributes) The member of the project. (see [below for nested schema](#nestedatt--membership_assignments--member))
+
+<a id="nestedatt--membership_assignments--member"></a>
+### Nested Schema for `membership_assignments.member`
+
+Read-Only:
+
+- `group_identifier` (String)
+- `user_identifier` (String)
+
+
 
 <a id="nestedatt--resource_tags"></a>
 ### Nested Schema for `resource_tags`

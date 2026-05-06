@@ -545,6 +545,7 @@ func automatedReasoningPolicyResource(ctx context.Context) (resource.Resource, e
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// PolicyDefinition is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: PolicyId
 		// CloudFormation resource type schema:
@@ -722,6 +723,7 @@ func automatedReasoningPolicyResource(ctx context.Context) (resource.Resource, e
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/KmsKeyId",
 		"/properties/ForceDelete",
+		"/properties/PolicyDefinition",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

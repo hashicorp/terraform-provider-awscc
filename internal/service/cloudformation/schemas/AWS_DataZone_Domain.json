@@ -165,7 +165,6 @@
     }
   },
   "required": [
-    "DomainExecutionRole",
     "Name"
   ],
   "readOnlyProperties": [
@@ -197,7 +196,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "datazone:TagResource",

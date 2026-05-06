@@ -30,6 +30,7 @@ Data Source schema for AWS::CloudFront::TrustStore
 - `status` (String)
 - `tags` (Attributes List) A complex type that contains zero or more ``Tag`` elements. (see [below for nested schema](#nestedatt--tags))
 - `trust_store_id` (String)
+- `use_client_certificate_ocsp_endpoint` (Boolean)
 
 <a id="nestedatt--ca_certificates_bundle_source"></a>
 ### Nested Schema for `ca_certificates_bundle_source`

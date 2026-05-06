@@ -258,17 +258,62 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: RemoteAccount
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The remote account identifier for the connection. Required when creating a connection through AWS. Replaces RemoteOwnerAccount.",
+		//	  "properties": {
+		//	    "Identifier": {
+		//	      "description": "The identifier of the remote account.",
+		//	      "maxLength": 255,
+		//	      "pattern": "^[-a-zA-Z0-9_@\\.]+$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Identifier"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"remote_account": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Identifier
+				"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The identifier of the remote account.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(255),
+						stringvalidator.RegexMatches(regexp.MustCompile("^[-a-zA-Z0-9_@\\.]+$"), ""),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The remote account identifier for the connection. Required when creating a connection through AWS. Replaces RemoteOwnerAccount.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// RemoteAccount is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: RemoteOwnerAccount
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The account ID of the remote owner. Required when creating a connection through AWS.",
+		//	  "description": "Deprecated. Use RemoteAccount instead. The account ID of the remote owner. Required when creating a connection through AWS.",
 		//	  "maxLength": 255,
 		//	  "pattern": "^[-a-zA-Z0-9_@\\.]+$",
 		//	  "type": "string"
 		//	}
 		"remote_owner_account": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The account ID of the remote owner. Required when creating a connection through AWS.",
+			Description: "Deprecated. Use RemoteAccount instead. The account ID of the remote owner. Required when creating a connection through AWS.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -443,10 +488,12 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"description":            "Description",
 		"direct_connect_gateway": "DirectConnectGateway",
 		"environment_id":         "EnvironmentId",
+		"identifier":             "Identifier",
 		"key":                    "Key",
 		"last_mile_provider":     "LastMileProvider",
 		"owner_account":          "OwnerAccount",
 		"provider_name":          "Provider",
+		"remote_account":         "RemoteAccount",
 		"remote_owner_account":   "RemoteOwnerAccount",
 		"shared_id":              "SharedId",
 		"state":                  "State",
@@ -457,6 +504,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/RemoteOwnerAccount",
+		"/properties/RemoteAccount",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

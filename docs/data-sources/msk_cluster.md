@@ -36,6 +36,7 @@ Data Source schema for AWS::MSK::Cluster
 - `rebalancing` (Attributes) (see [below for nested schema](#nestedatt--rebalancing))
 - `storage_mode` (String)
 - `tags` (Map of String) A key-value pair to associate with a resource.
+- `zookeeper_access` (Attributes) (see [below for nested schema](#nestedatt--zookeeper_access))
 
 <a id="nestedatt--broker_node_group_info"></a>
 ### Nested Schema for `broker_node_group_info`
@@ -316,3 +317,11 @@ Read-Only:
 Read-Only:
 
 - `status` (String)
+
+
+<a id="nestedatt--zookeeper_access"></a>
+### Nested Schema for `zookeeper_access`
+
+Read-Only:
+
+- `enabled` (Boolean)

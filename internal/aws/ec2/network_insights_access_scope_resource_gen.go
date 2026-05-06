@@ -547,7 +547,6 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// ExcludePaths is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: MatchPaths
 		// CloudFormation resource type schema:
@@ -1051,7 +1050,6 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// MatchPaths is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkInsightsAccessScopeArn
 		// CloudFormation resource type schema:
@@ -1195,10 +1193,6 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 		"value":                             "Value",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/MatchPaths",
-		"/properties/ExcludePaths",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

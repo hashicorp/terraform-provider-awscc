@@ -73,6 +73,9 @@
     },
     "Rebalancing": {
       "$ref": "#/definitions/Rebalancing"
+    },
+    "ZookeeperAccess": {
+      "$ref": "#/definitions/ZookeeperAccess"
     }
   },
   "definitions": {
@@ -530,6 +533,15 @@
           ]
         }
       }
+    },
+    "ZookeeperAccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        }
+      }
     }
   },
   "required": [
@@ -552,6 +564,9 @@
   "readOnlyProperties": [
     "/properties/Arn",
     "/properties/CurrentVersion"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ZookeeperAccess"
   ],
   "tagging": {
     "taggable": true,
