@@ -63,8 +63,8 @@ func authPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "enum": [
-		//	    "ACTIVE",
-		//	    "INACTIVE"
+		//	    "Active",
+		//	    "Inactive"
 		//	  ],
 		//	  "type": "string"
 		//	}

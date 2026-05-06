@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -146,7 +147,7 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		//	    "type": "string"
 		//	  },
 		//	  "maxItems": 20,
-		//	  "minItems": 1,
+		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
 		"glossary_terms": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -155,7 +156,7 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(1, 20),
+				listvalidator.SizeBetween(0, 20),
 				listvalidator.ValueStringsAre(
 					stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]{1,36}$"), ""),
 				),
@@ -196,6 +197,103 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: MembershipAssignments
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The project membership assignments.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "The project membership assignment.",
+		//	    "properties": {
+		//	      "Designation": {
+		//	        "enum": [
+		//	          "PROJECT_OWNER",
+		//	          "PROJECT_CONTRIBUTOR"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "Member": {
+		//	        "additionalProperties": false,
+		//	        "description": "The member of the project.",
+		//	        "properties": {
+		//	          "GroupIdentifier": {
+		//	            "type": "string"
+		//	          },
+		//	          "UserIdentifier": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Member",
+		//	      "Designation"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"membership_assignments": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Designation
+					"designation": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"PROJECT_OWNER",
+								"PROJECT_CONTRIBUTOR",
+							),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Member
+					"member": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: GroupIdentifier
+							"group_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: UserIdentifier
+							"user_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The member of the project.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Object{ /*START VALIDATORS*/
+							fwvalidators.NotNullObject(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The project membership assignments.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// MembershipAssignments is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -213,6 +311,43 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.LengthBetween(1, 64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[\\w -]+$"), ""),
 			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ProjectCategory
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The project category.",
+		//	  "type": "string"
+		//	}
+		"project_category": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The project category.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ProjectExecutionRole
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The project execution role ARN.",
+		//	  "pattern": "^arn:aws[^:]*:iam::\\d{12}:role/[\\w+=,.@/-]+$",
+		//	  "type": "string"
+		//	}
+		"project_execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The project execution role ARN.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[^:]*:iam::\\d{12}:role/[\\w+=,.@/-]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// ProjectExecutionRole is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ProjectProfileId
 		// CloudFormation resource type schema:
@@ -479,6 +614,7 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		"created_at":                     "CreatedAt",
 		"created_by":                     "CreatedBy",
 		"description":                    "Description",
+		"designation":                    "Designation",
 		"domain_id":                      "DomainId",
 		"domain_identifier":              "DomainIdentifier",
 		"domain_unit_id":                 "DomainUnitId",
@@ -486,14 +622,20 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		"environment_id":                 "EnvironmentId",
 		"environment_parameters":         "EnvironmentParameters",
 		"glossary_terms":                 "GlossaryTerms",
+		"group_identifier":               "GroupIdentifier",
 		"key":                            "Key",
 		"last_updated_at":                "LastUpdatedAt",
+		"member":                         "Member",
+		"membership_assignments":         "MembershipAssignments",
 		"name":                           "Name",
+		"project_category":               "ProjectCategory",
+		"project_execution_role":         "ProjectExecutionRole",
 		"project_id":                     "Id",
 		"project_profile_id":             "ProjectProfileId",
 		"project_profile_version":        "ProjectProfileVersion",
 		"project_status":                 "ProjectStatus",
 		"resource_tags":                  "ResourceTags",
+		"user_identifier":                "UserIdentifier",
 		"user_parameters":                "UserParameters",
 		"value":                          "Value",
 	})
@@ -503,6 +645,8 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/ProjectProfileVersion",
 		"/properties/ProjectProfileId",
 		"/properties/UserParameters",
+		"/properties/MembershipAssignments",
+		"/properties/ProjectExecutionRole",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

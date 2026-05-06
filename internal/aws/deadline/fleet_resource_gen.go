@@ -449,7 +449,8 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		//	                          "t4",
 		//	                          "a10g",
 		//	                          "l4",
-		//	                          "l40s"
+		//	                          "l40s",
+		//	                          "rtx-pro-server-6000"
 		//	                        ],
 		//	                        "type": "string"
 		//	                      },
@@ -1164,6 +1165,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 																"a10g",
 																"l4",
 																"l40s",
+																"rtx-pro-server-6000",
 															),
 															fwvalidators.NotNullString(),
 														}, /*END VALIDATORS*/

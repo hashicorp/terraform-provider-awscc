@@ -172,7 +172,7 @@ func addonResource(ctx context.Context) (resource.Resource, error) {
 		//	    "properties": {
 		//	      "RoleArn": {
 		//	        "description": "The IAM role ARN that the pod identity association is created for.",
-		//	        "pattern": "^arn:aws(-cn|-us-gov|-iso(-[a-z])?)?:iam::\\d{12}:(role)\\/*",
+		//	        "pattern": "^arn:aws[a-zA-Z-]*:iam::\\d{12}:(role)\\/*",
 		//	        "type": "string"
 		//	      },
 		//	      "ServiceAccount": {
@@ -198,7 +198,7 @@ func addonResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-cn|-us-gov|-iso(-[a-z])?)?:iam::\\d{12}:(role)\\/*"), ""),
+							stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-zA-Z-]*:iam::\\d{12}:(role)\\/*"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

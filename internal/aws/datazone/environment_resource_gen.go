@@ -317,7 +317,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		//	    "type": "string"
 		//	  },
 		//	  "maxItems": 20,
-		//	  "minItems": 1,
+		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
 		"glossary_terms": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -326,7 +326,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(1, 20),
+				listvalidator.SizeBetween(0, 20),
 				listvalidator.ValueStringsAre(
 					stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]{1,36}$"), ""),
 				),

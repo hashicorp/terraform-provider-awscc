@@ -598,6 +598,28 @@ func evaluatorResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the KMS key used to encrypt evaluator data.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]+:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
+		//	  "type": "string"
+		//	}
+		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the KMS key used to encrypt evaluator data.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]+:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Level
 		// CloudFormation resource type schema:
 		//
@@ -771,6 +793,7 @@ func evaluatorResource(ctx context.Context) (resource.Resource, error) {
 		"inference_config":                "InferenceConfig",
 		"instructions":                    "Instructions",
 		"key":                             "Key",
+		"kms_key_arn":                     "KmsKeyArn",
 		"label":                           "Label",
 		"lambda_arn":                      "LambdaArn",
 		"lambda_config":                   "LambdaConfig",

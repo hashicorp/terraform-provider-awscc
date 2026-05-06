@@ -1133,7 +1133,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "The viewer mTLS mode.",
 		//	          "enum": [
 		//	            "required",
-		//	            "optional"
+		//	            "optional",
+		//	            "passthrough"
 		//	          ],
 		//	          "type": "string"
 		//	        },
@@ -2964,6 +2965,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								stringvalidator.OneOf(
 									"required",
 									"optional",
+									"passthrough",
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -1229,6 +1229,36 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				mapplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ZookeeperAccess
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Enabled": {
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"zookeeper_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ZookeeperAccess is a write-only property.
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -1312,8 +1342,12 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"volume_size":                    "VolumeSize",
 		"volume_throughput":              "VolumeThroughput",
 		"vpc_connectivity":               "VpcConnectivity",
+		"zookeeper_access":               "ZookeeperAccess",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/ZookeeperAccess",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(120).WithDeleteTimeoutInMinutes(30)
 
 	opts = opts.WithUpdateTimeoutInMinutes(720)
