@@ -1,3 +1,6 @@
+# Copyright IBM Corp. 2021, 2026
+# SPDX-License-Identifier: MPL-2.0
+
 list "awscc_iotfleetwise_signal_catalog" "example" {
   provider = awscc
 }
