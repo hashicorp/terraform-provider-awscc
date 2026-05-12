@@ -12,6 +12,7 @@ project {
   header_ignore = [
     "internal/provider/generators/allschemas/*.hcl",
     "internal/provider/import_examples_gen.json",
+    "examples/list-resources/*/*.tfquery.hcl",
     "examples/resources/*/import.sh",
     "examples/resources/*/*.tf",
     "examples/data-sources/*/*.tf",
