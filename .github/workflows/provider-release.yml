@@ -42,6 +42,10 @@ env:
   repo_name: "terraform-provider-awscc"
   deployment_environment_name: "tf-provider-awscc-oss"
 
+# bob trigger-promotion uses BOB_GITHUB_TOKEN; the default GITHUB_TOKEN is
+# unused.
+permissions: {}
+
 jobs:
   release:
     runs-on: ubuntu-latest

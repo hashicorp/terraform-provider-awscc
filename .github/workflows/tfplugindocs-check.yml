@@ -20,6 +20,9 @@ on:
       - docs/**
       - examples/**
 
+permissions:
+  contents: read
+
 jobs:
   tfplugindocs_check:
     name: tfplugindocs check

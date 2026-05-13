@@ -11,6 +11,12 @@ on:
         required: true
         type: string
 
+# Creates a new branch and opens the changelog PR via gh CLI using
+# secrets.GITHUB_TOKEN.
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   update-changelog:
     runs-on: ubuntu-latest

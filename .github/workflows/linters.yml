@@ -18,6 +18,9 @@ on:
       - main.go
       - tools/**
 
+permissions:
+  contents: read
+
 jobs:
   go_mod_download:
     name: go mod download
