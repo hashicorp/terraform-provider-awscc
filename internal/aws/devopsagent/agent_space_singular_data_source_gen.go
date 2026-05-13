@@ -86,6 +86,20 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The ARN of the KMS key to use for encryption.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Locale
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The locale for the AgentSpace, which determines the language used in agent responses.",
+		//	  "maxLength": 35,
+		//	  "minLength": 2,
+		//	  "pattern": "^[a-zA-Z]{2,3}(-[a-zA-Z0-9]{2,8})*$",
+		//	  "type": "string"
+		//	}
+		"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The locale for the AgentSpace, which determines the language used in agent responses.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -298,6 +312,7 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"idc_instance_arn":      "IdcInstanceArn",
 		"key":                   "Key",
 		"kms_key_arn":           "KmsKeyArn",
+		"locale":                "Locale",
 		"name":                  "Name",
 		"operator_app":          "OperatorApp",
 		"operator_app_role_arn": "OperatorAppRoleArn",

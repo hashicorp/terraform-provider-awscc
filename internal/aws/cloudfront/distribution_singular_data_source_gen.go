@@ -280,9 +280,10 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	    },
 		//	    "CacheTagConfig": {
 		//	      "additionalProperties": false,
-		//	      "description": "",
+		//	      "description": "Configuration for cache tag extraction from origin responses. When specified, CloudFront reads the header named in ``HeaderName`` from origin responses and stores the comma-separated values as cache tags on the object.\n Distributions without ``CacheTagConfig`` do not extract tags. When ``CacheTagConfig`` is removed from a distribution via ``UpdateDistribution``, CloudFront stops extracting tags from origin responses.\n  Changing the ``HeaderName`` on an existing distribution does not retroactively affect previously cached objects. Tag-based invalidations will not apply to objects already cached using a previous header. To ensure tag invalidations function after updating the header name, use path-based invalidations to recache all objects that use cache tags.",
 		//	      "properties": {
 		//	        "HeaderName": {
+		//	          "description": "The name of the HTTP header that your origin includes in responses. CloudFront uses this header to extract cache tags. The header value must contain comma-separated tag values (for example, ``product:electronics, category:tv, brand:example``).",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -1377,10 +1378,11 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: HeaderName
 						"header_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "The name of the HTTP header that your origin includes in responses. CloudFront uses this header to extract cache tags. The header value must contain comma-separated tag values (for example, ``product:electronics, category:tv, brand:example``).",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "",
+					Description: "Configuration for cache tag extraction from origin responses. When specified, CloudFront reads the header named in ``HeaderName`` from origin responses and stores the comma-separated values as cache tags on the object.\n Distributions without ``CacheTagConfig`` do not extract tags. When ``CacheTagConfig`` is removed from a distribution via ``UpdateDistribution``, CloudFront stops extracting tags from origin responses.\n  Changing the ``HeaderName`` on an existing distribution does not retroactively affect previously cached objects. Tag-based invalidations will not apply to objects already cached using a previous header. To ensure tag invalidations function after updating the header name, use path-based invalidations to recache all objects that use cache tags.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Comment
