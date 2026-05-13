@@ -1,7 +1,7 @@
 resource "awscc_rtbfabric_responder_gateway" "example" {
-  domain_name = "example.rtbfabric.local"
+  domain_name     = "example.rtbfabric.local"
   security_groups = [aws_security_group.example.id]
-  subnet_ids = [aws_subnet.example.id]
+  subnet_ids      = [aws_subnet.example.id]
 }
 
 resource "aws_vpc" "example" {
