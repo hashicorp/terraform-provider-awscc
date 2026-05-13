@@ -187,7 +187,6 @@ func ipAccessSettingsResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "IpRange": {
 		//	        "description": "A single IP address or an IP address range in CIDR notation",
-		//	        "pattern": "^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}(?:/([0-9]|[12][0-9]|3[0-2])|)$",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -219,9 +218,6 @@ func ipAccessSettingsResource(ctx context.Context) (resource.Resource, error) {
 					"ip_range": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A single IP address or an IP address range in CIDR notation",
 						Required:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.RegexMatches(regexp.MustCompile("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}(?:/([0-9]|[12][0-9]|3[0-2])|)$"), ""),
-						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

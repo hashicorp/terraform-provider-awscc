@@ -7,6 +7,7 @@ package devopsagent
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -117,6 +118,28 @@ func agentSpaceResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Locale
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The locale for the AgentSpace, which determines the language used in agent responses.",
+		//	  "maxLength": 35,
+		//	  "minLength": 2,
+		//	  "pattern": "^[a-zA-Z]{2,3}(-[a-zA-Z0-9]{2,8})*$",
+		//	  "type": "string"
+		//	}
+		"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The locale for the AgentSpace, which determines the language used in agent responses.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(2, 35),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z]{2,3}(-[a-zA-Z0-9]{2,8})*$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -417,6 +440,7 @@ func agentSpaceResource(ctx context.Context) (resource.Resource, error) {
 		"idc_instance_arn":      "IdcInstanceArn",
 		"key":                   "Key",
 		"kms_key_arn":           "KmsKeyArn",
+		"locale":                "Locale",
 		"name":                  "Name",
 		"operator_app":          "OperatorApp",
 		"operator_app_role_arn": "OperatorAppRoleArn",
