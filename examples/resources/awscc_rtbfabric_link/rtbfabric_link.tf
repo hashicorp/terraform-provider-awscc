@@ -10,7 +10,7 @@ terraform {
 
 resource "awscc_rtbfabric_link" "example" {
   link_name = "example-rtb-fabric-link"
-  
+
   tags = {
     Name        = "example-rtb-fabric-link"
     Environment = "test"
