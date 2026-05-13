@@ -416,6 +416,26 @@
       ],
       "additionalProperties": false
     },
+    "EventSourceMapping": {
+      "type": "object",
+      "properties": {
+        "Arn": {
+          "type": "string",
+          "pattern": "^arn:aws[a-zA-Z-]*:lambda:[a-z0-9-]+:\\d{12}:event-source-mapping:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        },
+        "CrossAccountRole": {
+          "type": "string",
+          "pattern": "^arn:aws[a-zA-Z0-9-]*:iam::[0-9]{12}:role/.+$"
+        },
+        "ExternalId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Arn"
+      ],
+      "additionalProperties": false
+    },
     "ExecutionApprovalConfiguration": {
       "type": "object",
       "properties": {
@@ -603,25 +623,39 @@
             "RdsCreateCrossRegionReadReplicaConfig"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "LambdaEventSourceMappingConfig",
+          "properties": {
+            "LambdaEventSourceMappingConfig": {
+              "$ref": "#/definitions/LambdaEventSourceMappingConfiguration"
+            }
+          },
+          "required": [
+            "LambdaEventSourceMappingConfig"
+          ],
+          "additionalProperties": false
         }
       ]
     },
     "ExecutionBlockType": {
       "type": "string",
       "enum": [
-        "CustomActionLambda",
-        "ManualApproval",
-        "AuroraGlobalDatabase",
-        "EC2AutoScaling",
-        "ARCRoutingControl",
         "ARCRegionSwitchPlan",
-        "Parallel",
+        "ARCRoutingControl",
+        "AuroraGlobalDatabase",
+        "CustomActionLambda",
+        "DocumentDb",
+        "EC2AutoScaling",
         "ECSServiceScaling",
         "EKSResourceScaling",
-        "Route53HealthCheck",
-        "DocumentDb",
+        "LambdaEventSourceMapping",
+        "ManualApproval",
+        "Parallel",
+        "RdsCreateCrossRegionReplica",
         "RdsPromoteReadReplica",
-        "RdsCreateCrossRegionReplica"
+        "Route53HealthCheck"
       ]
     },
     "GlobalAuroraConfiguration": {
@@ -734,6 +768,47 @@
         "Name",
         "Namespace"
       ],
+      "additionalProperties": false
+    },
+    "LambdaEventSourceMappingConfiguration": {
+      "type": "object",
+      "properties": {
+        "TimeoutMinutes": {
+          "type": "number",
+          "default": 60,
+          "minimum": 1
+        },
+        "Action": {
+          "type": "string",
+          "enum": [
+            "enable",
+            "disable"
+          ]
+        },
+        "RegionEventSourceMappings": {
+          "$ref": "#/definitions/RegionEventSourceMappingMap"
+        },
+        "Ungraceful": {
+          "$ref": "#/definitions/LambdaEventSourceMappingUngraceful"
+        }
+      },
+      "required": [
+        "Action",
+        "RegionEventSourceMappings"
+      ],
+      "additionalProperties": false
+    },
+    "LambdaEventSourceMappingUngraceful": {
+      "type": "object",
+      "properties": {
+        "Behavior": {
+          "type": "string",
+          "default": "skip",
+          "enum": [
+            "skip"
+          ]
+        }
+      },
       "additionalProperties": false
     },
     "LambdaUngraceful": {
@@ -862,6 +937,15 @@
           "items": {
             "$ref": "#/definitions/ArcRoutingControlState"
           }
+        }
+      },
+      "additionalProperties": false
+    },
+    "RegionEventSourceMappingMap": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/EventSourceMapping"
         }
       },
       "additionalProperties": false

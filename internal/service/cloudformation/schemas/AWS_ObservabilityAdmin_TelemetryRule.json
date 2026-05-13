@@ -47,6 +47,11 @@
       "description": "Selection Criteria on resource level for rule application",
       "type": "string"
     },
+    "AllowFieldUpdates": {
+      "description": "When true, configuration drift in managed telemetry resources will be detected and remediated for resource-level fields.",
+      "type": "boolean",
+      "default": false
+    },
     "DestinationType": {
       "description": "Type of telemetry destination",
       "type": "string",
@@ -224,6 +229,22 @@
         },
         "SelectionCriteria": {
           "$ref": "#/definitions/SelectionCriteria"
+        },
+        "AllowFieldUpdates": {
+          "$ref": "#/definitions/AllowFieldUpdates"
+        },
+        "Regions": {
+          "description": "List of AWS region codes where the rule should be replicated",
+          "type": "array",
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "AllRegions": {
+          "description": "When true, the rule is replicated to all supported regions",
+          "type": "boolean"
         }
       },
       "required": [
@@ -505,6 +526,25 @@
         "EKS_SCHEDULER_LOGS",
         "EKS_API_LOGS"
       ]
+    },
+    "RegionStatus": {
+      "description": "Status of a telemetry rule in a specific region",
+      "type": "object",
+      "properties": {
+        "Region": {
+          "description": "The AWS region code",
+          "type": "string"
+        },
+        "Status": {
+          "description": "The replication status of the rule in this region",
+          "type": "string"
+        },
+        "RuleArn": {
+          "description": "The ARN of the rule in this region",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -533,6 +573,14 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "RegionStatuses": {
+      "description": "Per-region replication status of the rule",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/RegionStatus"
+      }
     }
   },
   "additionalProperties": false,
@@ -541,10 +589,12 @@
     "Rule"
   ],
   "createOnlyProperties": [
-    "/properties/RuleName"
+    "/properties/RuleName",
+    "/properties/Rule/AllRegions"
   ],
   "readOnlyProperties": [
-    "/properties/RuleArn"
+    "/properties/RuleArn",
+    "/properties/RegionStatuses"
   ],
   "primaryIdentifier": [
     "/properties/RuleArn"

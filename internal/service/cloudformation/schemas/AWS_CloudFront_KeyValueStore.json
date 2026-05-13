@@ -27,13 +27,15 @@
           "type": "string",
           "maxLength": 128,
           "minLength": 1,
-          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+          "description": "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``."
         },
         "Value": {
           "type": "string",
           "maxLength": 256,
           "minLength": 0,
-          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+          "description": "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``."
         }
       },
       "required": [
@@ -41,7 +43,7 @@
         "Value"
       ],
       "type": "object",
-      "description": ""
+      "description": "A complex type that contains ``Tag`` key and ``Tag`` value."
     }
   },
   "description": "The key value store. Use this to separate data from function code, allowing you to update data without having to publish a new version of a function. The key value store holds keys and their corresponding values.",
@@ -101,7 +103,7 @@
     },
     "Comment": {
       "type": "string",
-      "description": "A comment for the key value store."
+      "description": "A comment to describe the Key Value Store. Omitting ``Comment`` from the template during updates will clear the existing comment (set to empty string). To preserve an existing comment, you must explicitly include it in the template."
     },
     "ImportSource": {
       "$ref": "#/definitions/ImportSource",
@@ -113,7 +115,7 @@
       "items": {
         "$ref": "#/definitions/Tag"
       },
-      "description": ""
+      "description": "A complex type that contains zero or more ``Tag`` elements."
     }
   },
   "primaryIdentifier": [
