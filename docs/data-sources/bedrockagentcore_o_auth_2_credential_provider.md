@@ -72,6 +72,7 @@ Read-Only:
 - `client_id` (String) The client ID for the custom OAuth2 provider
 - `client_secret` (String) The client secret for the custom OAuth2 provider
 - `oauth_discovery` (Attributes) Discovery information for an OAuth2 provider (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--oauth_discovery))
+- `on_behalf_of_token_exchange_config` (Attributes) Configuration for on-behalf-of token exchange (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--on_behalf_of_token_exchange_config))
 
 <a id="nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--oauth_discovery"></a>
 ### Nested Schema for `oauth_2_provider_config_input.custom_oauth_2_provider_config.oauth_discovery`
@@ -90,6 +91,24 @@ Read-Only:
 - `issuer` (String) The issuer URL for the OAuth2 authorization server
 - `response_types` (List of String) The supported response types
 - `token_endpoint` (String) The token endpoint URL
+
+
+
+<a id="nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--on_behalf_of_token_exchange_config"></a>
+### Nested Schema for `oauth_2_provider_config_input.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config`
+
+Read-Only:
+
+- `grant_type` (String) The grant type for on-behalf-of token exchange
+- `token_exchange_grant_type_config` (Attributes) Configuration for RFC 8693 Token Exchange (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--on_behalf_of_token_exchange_config--token_exchange_grant_type_config))
+
+<a id="nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--on_behalf_of_token_exchange_config--token_exchange_grant_type_config"></a>
+### Nested Schema for `oauth_2_provider_config_input.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config`
+
+Read-Only:
+
+- `actor_token_content` (String) The actor token content type
+- `actor_token_scopes` (List of String) The actor token scopes. Only valid when ActorTokenContent is M2M.
 
 
 
@@ -169,6 +188,7 @@ Read-Only:
 
 - `client_id` (String)
 - `oauth_discovery` (Attributes) Discovery information for an OAuth2 provider (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--oauth_discovery))
+- `on_behalf_of_token_exchange_config` (Attributes) Configuration for on-behalf-of token exchange (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--on_behalf_of_token_exchange_config))
 
 <a id="nestedatt--oauth_2_provider_config_output--oauth_discovery"></a>
 ### Nested Schema for `oauth_2_provider_config_output.oauth_discovery`
@@ -187,6 +207,24 @@ Read-Only:
 - `issuer` (String) The issuer URL for the OAuth2 authorization server
 - `response_types` (List of String) The supported response types
 - `token_endpoint` (String) The token endpoint URL
+
+
+
+<a id="nestedatt--oauth_2_provider_config_output--on_behalf_of_token_exchange_config"></a>
+### Nested Schema for `oauth_2_provider_config_output.on_behalf_of_token_exchange_config`
+
+Read-Only:
+
+- `grant_type` (String) The grant type for on-behalf-of token exchange
+- `token_exchange_grant_type_config` (Attributes) Configuration for RFC 8693 Token Exchange (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--on_behalf_of_token_exchange_config--token_exchange_grant_type_config))
+
+<a id="nestedatt--oauth_2_provider_config_output--on_behalf_of_token_exchange_config--token_exchange_grant_type_config"></a>
+### Nested Schema for `oauth_2_provider_config_output.on_behalf_of_token_exchange_config.token_exchange_grant_type_config`
+
+Read-Only:
+
+- `actor_token_content` (String) The actor token content type
+- `actor_token_scopes` (List of String) The actor token scopes. Only valid when ActorTokenContent is M2M.
 
 
 

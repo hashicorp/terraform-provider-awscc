@@ -29,6 +29,7 @@ resource "awscc_devopsagent_agent_space" "example" {
 
 - `description` (String) The description of the AgentSpace.
 - `kms_key_arn` (String) The ARN of the KMS key to use for encryption.
+- `locale` (String) The locale for the AgentSpace, which determines the language used in agent responses.
 - `operator_app` (Attributes) (see [below for nested schema](#nestedatt--operator_app))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
