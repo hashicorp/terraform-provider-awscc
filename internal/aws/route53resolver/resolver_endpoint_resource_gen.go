@@ -60,6 +60,21 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Dns64Enabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether DNS64 is enabled for the Inbound Resolver Endpoint. When set to true, if a DNS AAAA query is made for a domain that has only an A (IPv4) record, the resolver automatically synthesizes an AAAA (IPv6) response by embedding the IPv4 address into the well-known prefix 64:ff9b::/96. Default is false.",
+		//	  "type": "boolean"
+		//	}
+		"dns_64_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether DNS64 is enabled for the Inbound Resolver Endpoint. When set to true, if a DNS AAAA query is made for a domain that has only an A (IPv4) record, the resolver automatically synthesizes an AAAA (IPv6) response by embedding the IPv4 address into the well-known prefix 64:ff9b::/96. Default is false.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: HostVPCId
 		// CloudFormation resource type schema:
 		//
@@ -150,6 +165,21 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 			Required:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Ipv6InternetAccessEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether IPv6 Internet Gateway access is enabled through the Outbound Resolver Endpoint. When set to true, this property allows your Endpoint ENIs to reach public IPv6 target nameservers through an internet gateway. Default is false.",
+		//	  "type": "boolean"
+		//	}
+		"ipv_6_internet_access_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether IPv6 Internet Gateway access is enabled through the Outbound Resolver Endpoint. When set to true, this property allows your Endpoint ENIs to reach public IPv6 target nameservers through an internet gateway. Default is false.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -408,11 +438,13 @@ func resolverEndpointResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                                "Arn",
 		"direction":                          "Direction",
+		"dns_64_enabled":                     "Dns64Enabled",
 		"host_vpc_id":                        "HostVPCId",
 		"ip":                                 "Ip",
 		"ip_address_count":                   "IpAddressCount",
 		"ip_addresses":                       "IpAddresses",
 		"ipv_6":                              "Ipv6",
+		"ipv_6_internet_access_enabled":      "Ipv6InternetAccessEnabled",
 		"key":                                "Key",
 		"name":                               "Name",
 		"outpost_arn":                        "OutpostArn",

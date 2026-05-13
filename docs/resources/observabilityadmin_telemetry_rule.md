@@ -27,6 +27,7 @@ The AWS::ObservabilityAdmin::TelemetryRule resource defines a CloudWatch Observa
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `region_statuses` (Attributes List) Per-region replication status of the rule (see [below for nested schema](#nestedatt--region_statuses))
 - `rule_arn` (String) The arn of the telemetry rule
 
 <a id="nestedatt--rule"></a>
@@ -39,7 +40,10 @@ Required:
 
 Optional:
 
+- `all_regions` (Boolean) When true, the rule is replicated to all supported regions
+- `allow_field_updates` (Boolean) When true, configuration drift in managed telemetry resources will be detected and remediated for resource-level fields.
 - `destination_configuration` (Attributes) The destination configuration for telemetry data (see [below for nested schema](#nestedatt--rule--destination_configuration))
+- `regions` (Set of String) List of AWS region codes where the rule should be replicated
 - `selection_criteria` (String) Selection Criteria on resource level for rule application
 - `telemetry_source_types` (Set of String) The telemetry source types for a telemetry rule.
 
@@ -197,6 +201,16 @@ Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+
+<a id="nestedatt--region_statuses"></a>
+### Nested Schema for `region_statuses`
+
+Read-Only:
+
+- `region` (String) The AWS region code
+- `rule_arn` (String) The ARN of the rule in this region
+- `status` (String) The replication status of the rule in this region
 
 ## Import
 

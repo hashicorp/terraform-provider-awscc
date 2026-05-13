@@ -22,6 +22,7 @@ Data Source schema for AWS::DataZone::Connection
 ### Read-Only
 
 - `aws_location` (Attributes) AWS Location of project (see [below for nested schema](#nestedatt--aws_location))
+- `configurations` (Attributes List) The configurations of the connection. (see [below for nested schema](#nestedatt--configurations))
 - `connection_id` (String) The ID of the connection.
 - `description` (String) The description of the connection.
 - `domain_id` (String) The ID of the domain in which the connection is created.
@@ -49,6 +50,15 @@ Read-Only:
 - `iam_connection_id` (String)
 
 
+<a id="nestedatt--configurations"></a>
+### Nested Schema for `configurations`
+
+Read-Only:
+
+- `classification` (String) The classification of the connection configuration.
+- `properties` (Map of String) Property Map
+
+
 <a id="nestedatt--props"></a>
 ### Nested Schema for `props`
 
@@ -59,6 +69,7 @@ Read-Only:
 - `glue_properties` (Attributes) Glue Properties Input (see [below for nested schema](#nestedatt--props--glue_properties))
 - `hyper_pod_properties` (Attributes) HyperPod Properties Input (see [below for nested schema](#nestedatt--props--hyper_pod_properties))
 - `iam_properties` (Attributes) IAM Properties Input (see [below for nested schema](#nestedatt--props--iam_properties))
+- `lakehouse_properties` (Attributes) Lakehouse Properties Input (see [below for nested schema](#nestedatt--props--lakehouse_properties))
 - `mlflow_properties` (Attributes) MLflow Properties Input (see [below for nested schema](#nestedatt--props--mlflow_properties))
 - `redshift_properties` (Attributes) Redshift Properties Input (see [below for nested schema](#nestedatt--props--redshift_properties))
 - `s3_properties` (Attributes) S3 Properties Input (see [below for nested schema](#nestedatt--props--s3_properties))
@@ -203,6 +214,14 @@ Read-Only:
 - `glue_lineage_sync_enabled` (Boolean)
 
 
+<a id="nestedatt--props--lakehouse_properties"></a>
+### Nested Schema for `props.lakehouse_properties`
+
+Read-Only:
+
+- `glue_lineage_sync_enabled` (Boolean) Specifies whether Glue lineage sync is enabled for the lakehouse connection.
+
+
 <a id="nestedatt--props--mlflow_properties"></a>
 ### Nested Schema for `props.mlflow_properties`
 
@@ -273,6 +292,7 @@ Read-Only:
 
 Read-Only:
 
+- `register_s3_access_grant_location` (Boolean) Specifies whether to register the S3 Access Grant location.
 - `s3_access_grant_location_id` (String) The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties of a connection.
 - `s3_uri` (String) The Amazon S3 URI that's part of the Amazon S3 properties of a connection.
 

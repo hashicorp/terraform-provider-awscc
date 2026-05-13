@@ -85,13 +85,39 @@ Optional:
 - `block_override_domain` (String) BlockOverrideDomain
 - `block_override_ttl` (Number) BlockOverrideTtl
 - `block_response` (String) BlockResponse
-- `confidence_threshold` (String) FirewallDomainRedirectionAction
-- `dns_threat_protection` (String) FirewallDomainRedirectionAction
+- `confidence_threshold` (String) ConfidenceThreshold
+- `dns_threat_protection` (String) DnsThreatProtection
 - `firewall_domain_list_id` (String) ResourceId
 - `firewall_domain_redirection_action` (String) FirewallDomainRedirectionAction
+- `firewall_rule_type` (Attributes) Advanced firewall rule type. Mutually exclusive with FirewallDomainListId and DnsThreatProtection/ConfidenceThreshold. (see [below for nested schema](#nestedatt--firewall_rules--firewall_rule_type))
 - `firewall_threat_protection_id` (String) ResourceId
 - `priority` (Number) Rule Priority
 - `qtype` (String) Qtype
+
+<a id="nestedatt--firewall_rules--firewall_rule_type"></a>
+### Nested Schema for `firewall_rules.firewall_rule_type`
+
+Optional:
+
+- `firewall_advanced_content_category` (Attributes) Configuration for an advanced content category rule type. (see [below for nested schema](#nestedatt--firewall_rules--firewall_rule_type--firewall_advanced_content_category))
+- `firewall_advanced_threat_category` (Attributes) Configuration for an advanced threat category rule type. (see [below for nested schema](#nestedatt--firewall_rules--firewall_rule_type--firewall_advanced_threat_category))
+
+<a id="nestedatt--firewall_rules--firewall_rule_type--firewall_advanced_content_category"></a>
+### Nested Schema for `firewall_rules.firewall_rule_type.firewall_advanced_content_category`
+
+Optional:
+
+- `category` (String) The content category value.
+
+
+<a id="nestedatt--firewall_rules--firewall_rule_type--firewall_advanced_threat_category"></a>
+### Nested Schema for `firewall_rules.firewall_rule_type.firewall_advanced_threat_category`
+
+Optional:
+
+- `category` (String) The threat category value.
+
+
 
 
 <a id="nestedatt--tags"></a>

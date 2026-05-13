@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -88,7 +89,7 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "Firewall Rule associating the Rule Group to a Domain List",
+		//	    "description": "Firewall Rule associating the Rule Group to a Domain List or advanced rule type",
 		//	    "properties": {
 		//	      "Action": {
 		//	        "description": "Rule Action",
@@ -128,7 +129,7 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "ConfidenceThreshold": {
-		//	        "description": "FirewallDomainRedirectionAction",
+		//	        "description": "ConfidenceThreshold",
 		//	        "enum": [
 		//	          "LOW",
 		//	          "MEDIUM",
@@ -137,7 +138,7 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "DnsThreatProtection": {
-		//	        "description": "FirewallDomainRedirectionAction",
+		//	        "description": "DnsThreatProtection",
 		//	        "enum": [
 		//	          "DGA",
 		//	          "DNS_TUNNELING",
@@ -158,6 +159,57 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	          "TRUST_REDIRECTION_DOMAIN"
 		//	        ],
 		//	        "type": "string"
+		//	      },
+		//	      "FirewallRuleType": {
+		//	        "additionalProperties": false,
+		//	        "description": "Advanced firewall rule type. Mutually exclusive with FirewallDomainListId and DnsThreatProtection/ConfidenceThreshold.",
+		//	        "oneOf": [
+		//	          {
+		//	            "required": [
+		//	              "FirewallAdvancedContentCategory"
+		//	            ]
+		//	          },
+		//	          {
+		//	            "required": [
+		//	              "FirewallAdvancedThreatCategory"
+		//	            ]
+		//	          }
+		//	        ],
+		//	        "properties": {
+		//	          "FirewallAdvancedContentCategory": {
+		//	            "additionalProperties": false,
+		//	            "description": "Configuration for an advanced content category rule type.",
+		//	            "properties": {
+		//	              "Category": {
+		//	                "description": "The content category value.",
+		//	                "maxLength": 128,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Category"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "FirewallAdvancedThreatCategory": {
+		//	            "additionalProperties": false,
+		//	            "description": "Configuration for an advanced threat category rule type.",
+		//	            "properties": {
+		//	              "Category": {
+		//	                "description": "The threat category value.",
+		//	                "maxLength": 128,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Category"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
 		//	      },
 		//	      "FirewallThreatProtectionId": {
 		//	        "description": "ResourceId",
@@ -261,7 +313,7 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ConfidenceThreshold
 					"confidence_threshold": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "FirewallDomainRedirectionAction",
+						Description: "ConfidenceThreshold",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -277,7 +329,7 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: DnsThreatProtection
 					"dns_threat_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "FirewallDomainRedirectionAction",
+						Description: "DnsThreatProtection",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -316,6 +368,65 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: FirewallRuleType
+					"firewall_rule_type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: FirewallAdvancedContentCategory
+							"firewall_advanced_content_category": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Category
+									"category": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The content category value.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 128),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Configuration for an advanced content category rule type.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: FirewallAdvancedThreatCategory
+							"firewall_advanced_threat_category": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Category
+									"category": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The threat category value.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 128),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Configuration for an advanced threat category rule type.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Advanced firewall rule type. Mutually exclusive with FirewallDomainListId and DnsThreatProtection/ConfidenceThreshold.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: FirewallThreatProtectionId
@@ -605,13 +716,17 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		"block_override_domain":              "BlockOverrideDomain",
 		"block_override_ttl":                 "BlockOverrideTtl",
 		"block_response":                     "BlockResponse",
+		"category":                           "Category",
 		"confidence_threshold":               "ConfidenceThreshold",
 		"creation_time":                      "CreationTime",
 		"creator_request_id":                 "CreatorRequestId",
 		"dns_threat_protection":              "DnsThreatProtection",
+		"firewall_advanced_content_category": "FirewallAdvancedContentCategory",
+		"firewall_advanced_threat_category":  "FirewallAdvancedThreatCategory",
 		"firewall_domain_list_id":            "FirewallDomainListId",
 		"firewall_domain_redirection_action": "FirewallDomainRedirectionAction",
 		"firewall_rule_group_id":             "Id",
+		"firewall_rule_type":                 "FirewallRuleType",
 		"firewall_rules":                     "FirewallRules",
 		"firewall_threat_protection_id":      "FirewallThreatProtectionId",
 		"key":                                "Key",

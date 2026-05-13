@@ -249,6 +249,7 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// ClassicLinkVPCId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ClassicLinkVPCSecurityGroups
 		// CloudFormation resource type schema:
@@ -271,6 +272,7 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// ClassicLinkVPCSecurityGroups is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: EbsOptimized
 		// CloudFormation resource type schema:
@@ -638,6 +640,8 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/InstanceId",
+		"/properties/ClassicLinkVPCId",
+		"/properties/ClassicLinkVPCSecurityGroups",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

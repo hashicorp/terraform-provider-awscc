@@ -220,6 +220,27 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Ec2PlacementGroupIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The list of EC2 placement group IDs associated with your ODB network.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"ec_2_placement_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The list of EC2 placement group IDs associated with your ODB network.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: KmsAccess
 		// CloudFormation resource type schema:
 		//
@@ -988,6 +1009,7 @@ func odbNetworkResource(ctx context.Context) (resource.Resource, error) {
 		"delete_associated_resources":            "DeleteAssociatedResources",
 		"display_name":                           "DisplayName",
 		"domain_name":                            "DomainName",
+		"ec_2_placement_group_ids":               "Ec2PlacementGroupIds",
 		"ipv_4_addresses":                        "Ipv4Addresses",
 		"key":                                    "Key",
 		"kms_access":                             "KmsAccess",

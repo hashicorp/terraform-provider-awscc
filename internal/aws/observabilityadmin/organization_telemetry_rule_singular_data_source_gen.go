@@ -23,6 +23,56 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::ObservabilityAdmin::OrganizationTelemetryRule resource.
 func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: RegionStatuses
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Per-region replication status of the rule",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Status of a telemetry rule in a specific region",
+		//	    "properties": {
+		//	      "Region": {
+		//	        "description": "The AWS region code",
+		//	        "type": "string"
+		//	      },
+		//	      "RuleArn": {
+		//	        "description": "The ARN of the rule in this region",
+		//	        "type": "string"
+		//	      },
+		//	      "Status": {
+		//	        "description": "The replication status of the rule in this region",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"region_statuses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Region
+					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The AWS region code",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RuleArn
+					"rule_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ARN of the rule in this region",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The replication status of the rule in this region",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Per-region replication status of the rule",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Rule
 		// CloudFormation resource type schema:
 		//
@@ -30,6 +80,15 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 		//	  "additionalProperties": false,
 		//	  "description": "The telemetry rule",
 		//	  "properties": {
+		//	    "AllRegions": {
+		//	      "description": "When true, the rule is replicated to all supported regions",
+		//	      "type": "boolean"
+		//	    },
+		//	    "AllowFieldUpdates": {
+		//	      "default": false,
+		//	      "description": "When true, configuration drift in managed telemetry resources will be detected and remediated for resource-level fields.",
+		//	      "type": "boolean"
+		//	    },
 		//	    "DestinationConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "description": "The destination configuration for telemetry data",
@@ -331,6 +390,15 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "Regions": {
+		//	      "description": "List of AWS region codes where the rule should be replicated",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
 		//	    "ResourceType": {
 		//	      "description": "Resource Type associated with the Organization Telemetry Rule",
 		//	      "enum": [
@@ -387,6 +455,16 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 		//	}
 		"rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllRegions
+				"all_regions": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When true, the rule is replicated to all supported regions",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AllowFieldUpdates
+				"allow_field_updates": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When true, configuration drift in managed telemetry resources will be detected and remediated for resource-level fields.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: DestinationConfiguration
 				"destination_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -630,6 +708,12 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 					Description: "The destination configuration for telemetry data",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: Regions
+				"regions": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "List of AWS region codes where the rule should be replicated",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: ResourceType
 				"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Resource Type associated with the Organization Telemetry Rule",
@@ -758,6 +842,8 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 		"action":                               "Action",
 		"action_condition":                     "ActionCondition",
 		"advanced_event_selectors":             "AdvancedEventSelectors",
+		"all_regions":                          "AllRegions",
+		"allow_field_updates":                  "AllowFieldUpdates",
 		"behavior":                             "Behavior",
 		"cloudtrail_parameters":                "CloudtrailParameters",
 		"conditions":                           "Conditions",
@@ -787,6 +873,9 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 		"output_format":                        "OutputFormat",
 		"query_string":                         "QueryString",
 		"redacted_fields":                      "RedactedFields",
+		"region":                               "Region",
+		"region_statuses":                      "RegionStatuses",
+		"regions":                              "Regions",
 		"requirement":                          "Requirement",
 		"resource_type":                        "ResourceType",
 		"retention_in_days":                    "RetentionInDays",
@@ -797,6 +886,7 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 		"selection_criteria":                   "SelectionCriteria",
 		"single_header":                        "SingleHeader",
 		"starts_with":                          "StartsWith",
+		"status":                               "Status",
 		"tags":                                 "Tags",
 		"telemetry_source_types":               "TelemetrySourceTypes",
 		"telemetry_type":                       "TelemetryType",

@@ -53,11 +53,8 @@
       "patternProperties": {
         "": {
           "type": "string",
-          "maxLength": 256
-        },
-        "[\\S\\s]*": {
-          "type": "string",
-          "maxLength": 256
+          "maxLength": 256,
+          "pattern": "[\\S\\s]*"
         }
       },
       "additionalProperties": false

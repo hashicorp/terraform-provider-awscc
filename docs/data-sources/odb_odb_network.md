@@ -30,6 +30,7 @@ Data Source schema for AWS::ODB::OdbNetwork
 - `default_dns_prefix` (String) The DNS prefix to the default DNS domain name. The default DNS domain name is oraclevcn.com.
 - `delete_associated_resources` (Boolean) Specifies whether to delete associated OCI networking resources along with the ODB network.
 - `display_name` (String) The user-friendly name of the ODB network.
+- `ec_2_placement_group_ids` (List of String) The list of EC2 placement group IDs associated with your ODB network.
 - `kms_access` (String) The AWS Key Management Service (KMS) access configuration for the ODB network.
 - `kms_policy_document` (String) The AWS Key Management Service (KMS) policy document that defines permissions for key usage within the ODB network.
 - `managed_services` (Attributes) The managed services configuration for the ODB network. (see [below for nested schema](#nestedatt--managed_services))

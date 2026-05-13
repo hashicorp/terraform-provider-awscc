@@ -68,7 +68,7 @@ variable "key_store_arn" {
 
 - `auto_publish` (Boolean) A flag that determines whether to automatically publish the function to the ``LIVE`` stage when it?s created. To automatically publish to the ``LIVE`` stage, set this property to ``true``.
 - `function_metadata` (Attributes) Contains metadata about a CloudFront function. (see [below for nested schema](#nestedatt--function_metadata))
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) A complex type that contains zero or more ``Tag`` elements. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -110,8 +110,10 @@ Read-Only:
 
 Optional:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) A string that contains ``Tag`` key.
+ The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.
+- `value` (String) A string that contains an optional ``Tag`` value.
+ The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.
 
 ## Import
 
