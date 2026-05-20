@@ -59,7 +59,7 @@ Required:
 Optional:
 
 - `apply_normalization` (Boolean)
-- `customer_profiles_integration_config` (Attributes) (see [below for nested schema](#nestedatt--output_source_config--customer_profiles_integration_config))
+- `customer_profiles_integration_config` (Attributes) The Customer Profiles integration configuration for the output source (see [below for nested schema](#nestedatt--output_source_config--customer_profiles_integration_config))
 - `kms_arn` (String)
 - `output_s3_path` (String) The S3 path to which Entity Resolution will write the output table
 
@@ -80,8 +80,8 @@ Optional:
 
 Optional:
 
-- `domain_arn` (String)
-- `object_type_arn` (String)
+- `domain_arn` (String) The Amazon Resource Name (ARN) of the Customer Profiles domain
+- `object_type_arn` (String) The Amazon Resource Name (ARN) of the Customer Profiles object type
 
 
 
@@ -137,7 +137,16 @@ Optional:
 
 Optional:
 
+- `matching_config` (Attributes) Configuration for matching behavior within rule condition properties (see [below for nested schema](#nestedatt--resolution_techniques--rule_condition_properties--matching_config))
 - `rules` (Attributes List) (see [below for nested schema](#nestedatt--resolution_techniques--rule_condition_properties--rules))
+
+<a id="nestedatt--resolution_techniques--rule_condition_properties--matching_config"></a>
+### Nested Schema for `resolution_techniques.rule_condition_properties.matching_config`
+
+Optional:
+
+- `enable_transitive_matching` (Boolean) Enables transitive matching to process records across all rule levels and connect unmatched records to existing match groups
+
 
 <a id="nestedatt--resolution_techniques--rule_condition_properties--rules"></a>
 ### Nested Schema for `resolution_techniques.rule_condition_properties.rules`

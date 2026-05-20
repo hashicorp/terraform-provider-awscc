@@ -59,6 +59,7 @@ Optional:
 - `git_lab` (Attributes) GitLab project integration configuration (see [below for nested schema](#nestedatt--configuration--git_lab))
 - `mcp_server` (Attributes) MCP server configuration (see [below for nested schema](#nestedatt--configuration--mcp_server))
 - `mcp_server_datadog` (Attributes) Datadog MCP server configuration (see [below for nested schema](#nestedatt--configuration--mcp_server_datadog))
+- `mcp_server_grafana` (Attributes) Grafana MCP server configuration (see [below for nested schema](#nestedatt--configuration--mcp_server_grafana))
 - `mcp_server_new_relic` (Attributes) NewRelic MCP server configuration (see [below for nested schema](#nestedatt--configuration--mcp_server_new_relic))
 - `mcp_server_sig_v4` (Attributes) SigV4-authenticated MCP server configuration (see [below for nested schema](#nestedatt--configuration--mcp_server_sig_v4))
 - `mcp_server_splunk` (Attributes) Splunk MCP server configuration (see [below for nested schema](#nestedatt--configuration--mcp_server_splunk))
@@ -167,6 +168,16 @@ Optional:
 - `enable_webhook_updates` (Boolean) When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service
 - `endpoint` (String) MCP server endpoint URL
 - `name` (String) The name of the MCP server
+
+
+<a id="nestedatt--configuration--mcp_server_grafana"></a>
+### Nested Schema for `configuration.mcp_server_grafana`
+
+Optional:
+
+- `enable_webhook_updates` (Boolean) When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service
+- `endpoint` (String) MCP server endpoint URL
+- `tools` (List of String) List of tool categories to enable for the Grafana MCP server
 
 
 <a id="nestedatt--configuration--mcp_server_new_relic"></a>
