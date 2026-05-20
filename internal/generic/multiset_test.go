@@ -113,7 +113,6 @@ func TestMultiset(t *testing.T) {
 	}
 
 	for name, test := range tests {
-		name, test := name, test
 		t.Run(name, func(t *testing.T) {
 			ctx := context.TODO()
 			request := planmodifier.ListRequest{

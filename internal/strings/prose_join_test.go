@@ -31,8 +31,6 @@ func TestProseJoin(t *testing.T) {
 	}
 
 	for name, testcase := range testcases {
-		name, testcase := name, testcase
-
 		t.Run(name, func(t *testing.T) {
 			actual := ProseJoin(testcase.values)
 
