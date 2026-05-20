@@ -739,6 +739,11 @@
         "identifier": ["CredentialProviderArn"]
     },
     {
+        "resource": "awscc_bedrockagentcore_payment_credential_provider",
+        "generateListResource": true,
+        "identifier": ["CredentialProviderArn"]
+    },
+    {
         "resource": "awscc_bedrockagentcore_policy",
         "identifier": ["PolicyArn"]
     },
