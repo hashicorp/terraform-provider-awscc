@@ -21,7 +21,8 @@
     "/properties/KeySchema"
   ],
   "propertyTransform": {
-    "/properties/Replicas/*/GlobalTableSettingsReplicationMode": "GlobalTableSettingsReplicationMode $OR ($exists(GlobalTableSettingsReplicationMode) ? null : \"DISABLED\") $OR ($exists(GlobalTableSettingsReplicationMode) ? null : \"ENABLED_WITH_OVERRIDES\")"
+    "/properties/Replicas/*/GlobalTableSettingsReplicationMode": "GlobalTableSettingsReplicationMode $OR ($exists(GlobalTableSettingsReplicationMode) ? null : \"DISABLED\") $OR ($exists(GlobalTableSettingsReplicationMode) ? null : \"ENABLED_WITH_OVERRIDES\")",
+    "/properties/Replicas/*/SSESpecification/KMSMasterKeyId": "$split(KMSMasterKeyId, '/')[-1]"
   },
   "handlers": {
     "read": {

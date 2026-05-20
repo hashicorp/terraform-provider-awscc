@@ -526,14 +526,26 @@
       "description": "HTTP header name",
       "minLength": 1,
       "maxLength": 256,
-      "pattern": "^(Authorization|X-Amzn-Bedrock-AgentCore-Runtime-Custom-[a-zA-Z0-9_-]+)$"
+      "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,255}$"
     },
     "MountPath": {
       "type": "string",
-      "description": "Mount path for session storage",
+      "description": "Mount path for filesystem configuration",
       "minLength": 6,
       "maxLength": 200,
       "pattern": "^/mnt/[a-zA-Z0-9._-]+/?$"
+    },
+    "EfsAccessPointArn": {
+      "type": "string",
+      "description": "ARN of the EFS access point",
+      "maxLength": 128,
+      "pattern": "^arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:access-point/fsap-[0-9a-f]{8,40}$"
+    },
+    "S3FilesAccessPointArn": {
+      "type": "string",
+      "description": "ARN of the S3 Files access point",
+      "maxLength": 256,
+      "pattern": "^arn:aws[-a-z]*:s3files:[0-9a-z-:]+:file-system/fs-[0-9a-f]{17,40}/access-point/fsap-[0-9a-f]{17,40}$"
     },
     "SessionStorageConfiguration": {
       "type": "object",
@@ -548,12 +560,52 @@
       ],
       "additionalProperties": false
     },
+    "EfsAccessPointConfiguration": {
+      "type": "object",
+      "description": "Configuration for EFS access point filesystem",
+      "properties": {
+        "AccessPointArn": {
+          "$ref": "#/definitions/EfsAccessPointArn"
+        },
+        "MountPath": {
+          "$ref": "#/definitions/MountPath"
+        }
+      },
+      "required": [
+        "AccessPointArn",
+        "MountPath"
+      ],
+      "additionalProperties": false
+    },
+    "S3FilesAccessPointConfiguration": {
+      "type": "object",
+      "description": "Configuration for S3 Files access point filesystem",
+      "properties": {
+        "AccessPointArn": {
+          "$ref": "#/definitions/S3FilesAccessPointArn"
+        },
+        "MountPath": {
+          "$ref": "#/definitions/MountPath"
+        }
+      },
+      "required": [
+        "AccessPointArn",
+        "MountPath"
+      ],
+      "additionalProperties": false
+    },
     "FilesystemConfiguration": {
       "type": "object",
       "description": "Filesystem configuration for the runtime",
       "properties": {
         "SessionStorage": {
           "$ref": "#/definitions/SessionStorageConfiguration"
+        },
+        "EfsAccessPoint": {
+          "$ref": "#/definitions/EfsAccessPointConfiguration"
+        },
+        "S3FilesAccessPoint": {
+          "$ref": "#/definitions/S3FilesAccessPointConfiguration"
         }
       },
       "additionalProperties": false
@@ -565,7 +617,7 @@
         "$ref": "#/definitions/FilesystemConfiguration"
       },
       "minItems": 0,
-      "maxItems": 1,
+      "maxItems": 5,
       "insertionOrder": false
     }
   },
