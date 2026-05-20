@@ -249,6 +249,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "POST_SCALE_UP",
 		//	                "TEST_TRAFFIC_SHIFT",
 		//	                "POST_TEST_TRAFFIC_SHIFT",
+		//	                "PRE_PRODUCTION_TRAFFIC_SHIFT",
 		//	                "PRODUCTION_TRAFFIC_SHIFT",
 		//	                "POST_PRODUCTION_TRAFFIC_SHIFT"
 		//	              ],
@@ -260,11 +261,36 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "RoleArn": {
 		//	            "description": "The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS permission to call Lambda functions on your behalf.\n For more information, see [Permissions required for Lambda functions in Amazon ECS blue/green deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-permissions.html) in the *Amazon Elastic Container Service Developer Guide*.",
 		//	            "type": "string"
+		//	          },
+		//	          "TargetType": {
+		//	            "description": "",
+		//	            "enum": [
+		//	              "AWS_LAMBDA",
+		//	              "PAUSE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "TimeoutConfiguration": {
+		//	            "additionalProperties": false,
+		//	            "description": "",
+		//	            "properties": {
+		//	              "Action": {
+		//	                "enum": [
+		//	                  "ROLLBACK",
+		//	                  "CONTINUE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "TimeoutInMinutes": {
+		//	                "maximum": 20160,
+		//	                "minimum": 1,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "type": "object"
 		//	          }
 		//	        },
 		//	        "required": [
-		//	          "HookTargetArn",
-		//	          "RoleArn",
 		//	          "LifecycleStages"
 		//	        ],
 		//	        "type": "object"
@@ -461,9 +487,6 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 								Description: "The Amazon Resource Name (ARN) of the hook target. Currently, only Lambda function ARNs are supported.\n You must provide this parameter when configuring a deployment lifecycle hook.",
 								Optional:    true,
 								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -483,6 +506,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 											"POST_SCALE_UP",
 											"TEST_TRAFFIC_SHIFT",
 											"POST_TEST_TRAFFIC_SHIFT",
+											"PRE_PRODUCTION_TRAFFIC_SHIFT",
 											"PRODUCTION_TRAFFIC_SHIFT",
 											"POST_PRODUCTION_TRAFFIC_SHIFT",
 										),
@@ -498,11 +522,59 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 								Description: "The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS permission to call Lambda functions on your behalf.\n For more information, see [Permissions required for Lambda functions in Amazon ECS blue/green deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-permissions.html) in the *Amazon Elastic Container Service Developer Guide*.",
 								Optional:    true,
 								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: TargetType
+							"target_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									fwvalidators.NotNullString(),
+									stringvalidator.OneOf(
+										"AWS_LAMBDA",
+										"PAUSE",
+									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: TimeoutConfiguration
+							"timeout_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Action
+									"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"ROLLBACK",
+												"CONTINUE",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: TimeoutInMinutes
+									"timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											int64validator.Between(1, 20160),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -2455,6 +2527,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_log_configuration":          "AccessLogConfiguration",
+		"action":                            "Action",
 		"advanced_configuration":            "AdvancedConfiguration",
 		"alarm_names":                       "AlarmNames",
 		"alarms":                            "Alarms",
@@ -2550,11 +2623,14 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"tag_specifications":                "TagSpecifications",
 		"tags":                              "Tags",
 		"target_group_arn":                  "TargetGroupArn",
+		"target_type":                       "TargetType",
 		"task_definition":                   "TaskDefinition",
 		"test_listener_rule":                "TestListenerRule",
 		"test_traffic_rules":                "TestTrafficRules",
 		"throughput":                        "Throughput",
 		"timeout":                           "Timeout",
+		"timeout_configuration":             "TimeoutConfiguration",
+		"timeout_in_minutes":                "TimeoutInMinutes",
 		"tls":                               "Tls",
 		"type":                              "Type",
 		"value":                             "Value",

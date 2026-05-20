@@ -117,7 +117,9 @@ func exportResource(ctx context.Context) (resource.Resource, error) {
 		//	                },
 		//	                "OutputType": {
 		//	                  "enum": [
-		//	                    "CUSTOM"
+		//	                    "CUSTOM",
+		//	                    "ATHENA",
+		//	                    "REDSHIFT"
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
@@ -221,7 +223,6 @@ func exportResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 								mapplanmodifier.UseStateForUnknown(),
-								mapplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -294,6 +295,8 @@ func exportResource(ctx context.Context) (resource.Resource, error) {
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"CUSTOM",
+													"ATHENA",
+													"REDSHIFT",
 												),
 											}, /*END VALIDATORS*/
 										}, /*END ATTRIBUTE*/

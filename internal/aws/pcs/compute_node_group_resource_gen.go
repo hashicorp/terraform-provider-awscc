@@ -256,16 +256,17 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies how EC2 instances are purchased on your behalf. AWS PCS supports On-Demand, Spot and Capacity Block instances. For more information, see Instance purchasing options in the Amazon Elastic Compute Cloud User Guide. If you don't provide this option, it defaults to On-Demand.",
+		//	  "description": "Specifies how EC2 instances are purchased on your behalf. AWS PCS supports On-Demand, Spot, Capacity Block, and Interruptible Capacity Reservation instances. For more information, see Instance purchasing options in the Amazon Elastic Compute Cloud User Guide. If you don't provide this option, it defaults to On-Demand.",
 		//	  "enum": [
 		//	    "ONDEMAND",
 		//	    "SPOT",
-		//	    "CAPACITY_BLOCK"
+		//	    "CAPACITY_BLOCK",
+		//	    "INTERRUPTIBLE_CAPACITY_RESERVATION"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"purchase_option": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies how EC2 instances are purchased on your behalf. AWS PCS supports On-Demand, Spot and Capacity Block instances. For more information, see Instance purchasing options in the Amazon Elastic Compute Cloud User Guide. If you don't provide this option, it defaults to On-Demand.",
+			Description: "Specifies how EC2 instances are purchased on your behalf. AWS PCS supports On-Demand, Spot, Capacity Block, and Interruptible Capacity Reservation instances. For more information, see Instance purchasing options in the Amazon Elastic Compute Cloud User Guide. If you don't provide this option, it defaults to On-Demand.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -273,6 +274,7 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 					"ONDEMAND",
 					"SPOT",
 					"CAPACITY_BLOCK",
+					"INTERRUPTIBLE_CAPACITY_RESERVATION",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -70,7 +70,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The value of the AWS application tag, which is the identifier of an associated resource. Applications created before 11/13/2023 or applications without the AWS application tag resource group return no value. ",
 		//	  "maxLength": 256,
-		//	  "pattern": "\\[a-zA-Z0-9_-:/]+",
+		//	  "pattern": "[a-zA-Z0-9_\\-:/]+",
 		//	  "type": "string"
 		//	}
 		"application_tag_value": schema.StringAttribute{ /*START ATTRIBUTE*/

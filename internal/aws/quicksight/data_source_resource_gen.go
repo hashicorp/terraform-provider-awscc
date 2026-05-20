@@ -6578,7 +6578,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "items": {
 		//	          "type": "string"
 		//	        },
-		//	        "maxItems": 20,
+		//	        "maxItems": 30,
 		//	        "minItems": 1,
 		//	        "type": "array"
 		//	      },
@@ -6612,7 +6612,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.List{ /*START VALIDATORS*/
-							listvalidator.SizeBetween(1, 20),
+							listvalidator.SizeBetween(1, 30),
 							fwvalidators.NotNullList(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -6799,6 +6799,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "DB2_AS400",
 		//	    "EXASOL",
 		//	    "FILE",
+		//	    "FULLY_MANAGED_KNOWLEDGE_BASE",
 		//	    "GITHUB",
 		//	    "INTERNATIONAL_DATA_CORPORATION",
 		//	    "JIRA",
@@ -6836,7 +6837,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "SHAREPOINT",
 		//	    "ONE_DRIVE",
 		//	    "WEB_CRAWLER",
-		//	    "BOX"
+		//	    "BOX",
+		//	    "GOOGLESHEETS"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -6859,6 +6861,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					"DB2_AS400",
 					"EXASOL",
 					"FILE",
+					"FULLY_MANAGED_KNOWLEDGE_BASE",
 					"GITHUB",
 					"INTERNATIONAL_DATA_CORPORATION",
 					"JIRA",
@@ -6897,6 +6900,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					"ONE_DRIVE",
 					"WEB_CRAWLER",
 					"BOX",
+					"GOOGLESHEETS",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
