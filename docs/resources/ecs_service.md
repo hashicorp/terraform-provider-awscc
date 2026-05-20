@@ -321,6 +321,17 @@ Optional:
  You must provide this parameter when configuring a deployment lifecycle hook.
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS permission to call Lambda functions on your behalf.
  For more information, see [Permissions required for Lambda functions in Amazon ECS blue/green deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-permissions.html) in the *Amazon Elastic Container Service Developer Guide*.
+- `target_type` (String)
+- `timeout_configuration` (Attributes) (see [below for nested schema](#nestedatt--deployment_configuration--lifecycle_hooks--timeout_configuration))
+
+<a id="nestedatt--deployment_configuration--lifecycle_hooks--timeout_configuration"></a>
+### Nested Schema for `deployment_configuration.lifecycle_hooks.timeout_configuration`
+
+Optional:
+
+- `action` (String)
+- `timeout_in_minutes` (Number)
+
 
 
 <a id="nestedatt--deployment_configuration--linear_configuration"></a>

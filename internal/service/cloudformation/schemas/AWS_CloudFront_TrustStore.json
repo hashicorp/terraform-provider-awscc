@@ -142,7 +142,7 @@
     },
     "UseClientCertificateOCSPEndpoint": {
       "type": "boolean",
-      "description": ""
+      "description": "A boolean. When true, performs real-time certificate revocation checks by querying the OCSP endpoint specified within the client certificate."
     },
     "Status": {
       "type": "string",

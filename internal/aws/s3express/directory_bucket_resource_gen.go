@@ -736,6 +736,9 @@ func directoryBucketResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      }
 		//	    },
+		//	    "required": [
+		//	      "Id"
+		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array",
@@ -758,6 +761,9 @@ func directoryBucketResource(ctx context.Context) (resource.Resource, error) {
 						Description: "The ID used to identify the metrics configuration.",
 						Optional:    true,
 						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/

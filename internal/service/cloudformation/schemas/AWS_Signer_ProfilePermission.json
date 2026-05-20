@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::Signer::ProfilePermission",
-  "description": "An example resource schema demonstrating some basic constructs and validation rules.",
+  "description": "Resource Type definition for AWS::Signer::ProfilePermission",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
   "properties": {
     "ProfileName": {

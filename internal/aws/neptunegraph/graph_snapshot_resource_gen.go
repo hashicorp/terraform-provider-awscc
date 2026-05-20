@@ -60,14 +60,12 @@ func graphSnapshotResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"graph_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique identifier of the Neptune Analytics graph to create the snapshot from.",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.RegexMatches(regexp.MustCompile("^g-[a-z0-9]{10}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
+				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Id

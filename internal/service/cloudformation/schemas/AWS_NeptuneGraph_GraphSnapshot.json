@@ -86,6 +86,7 @@
   },
   "additionalProperties": false,
   "required": [
+    "GraphIdentifier",
     "SnapshotName"
   ],
   "readOnlyProperties": [

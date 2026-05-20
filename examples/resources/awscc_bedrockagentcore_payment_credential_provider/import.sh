@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrockagentcore_payment_credential_provider.example "credential_provider_arn"

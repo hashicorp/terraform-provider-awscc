@@ -105,7 +105,9 @@ func exportDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                },
 		//	                "OutputType": {
 		//	                  "enum": [
-		//	                    "CUSTOM"
+		//	                    "CUSTOM",
+		//	                    "ATHENA",
+		//	                    "REDSHIFT"
 		//	                  ],
 		//	                  "type": "string"
 		//	                },

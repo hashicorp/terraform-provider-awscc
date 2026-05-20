@@ -10,6 +10,7 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -623,6 +624,53 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		//	      "additionalProperties": false,
 		//	      "description": "This structure contains the information about the metric that is used for a request-based SLO.",
 		//	      "properties": {
+		//	        "CompositeSliConfig": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "CompositeSliComponents": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "OperationName": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "OperationName"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 20,
+		//	              "minItems": 2,
+		//	              "type": "array"
+		//	            },
+		//	            "SelectionConfig": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Pattern": {
+		//	                  "pattern": "^.+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "Type": {
+		//	                  "enum": [
+		//	                    "EXPLICIT",
+		//	                    "PREFIX",
+		//	                    "REGEX"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Type"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SelectionConfig"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "DependencyConfig": {
 		//	          "additionalProperties": false,
 		//	          "description": "Configuration for identifying a dependency and its operation",
@@ -657,6 +705,40 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		//	              "type": "string"
 		//	            }
 		//	          }
+		//	        },
+		//	        "MetricName": {
+		//	          "description": "The name of the metric for non-Application Signals services",
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "MetricSource": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for identifying the source of metrics for non-Application Signals services",
+		//	          "properties": {
+		//	            "MetricSourceAttributes": {
+		//	              "additionalProperties": false,
+		//	              "description": "Optional additional attributes for the metric source",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "type": "string"
+		//	                }
+		//	              }
+		//	            },
+		//	            "MetricSourceKeyAttributes": {
+		//	              "additionalProperties": false,
+		//	              "description": "Required attributes that identify the metric source",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "type": "string"
+		//	                }
+		//	              }
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "MetricSourceKeyAttributes"
+		//	          ],
+		//	          "type": "object"
 		//	        },
 		//	        "MetricType": {
 		//	          "description": "If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.",
@@ -1007,6 +1089,82 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 				// Property: RequestBasedSliMetric
 				"request_based_sli_metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CompositeSliConfig
+						"composite_sli_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CompositeSliComponents
+								"composite_sli_components": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: OperationName
+											"operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(2, 20),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SelectionConfig
+								"selection_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Pattern
+										"pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Type
+										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"EXPLICIT",
+													"PREFIX",
+													"REGEX",
+												),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Object{ /*START VALIDATORS*/
+										fwvalidators.NotNullObject(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: DependencyConfig
 						"dependency_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1054,6 +1212,54 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 							Computed:    true,
 							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 								mapplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MetricName
+						"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the metric for non-Application Signals services",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 255),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MetricSource
+						"metric_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: MetricSourceAttributes
+								"metric_source_attributes": // Pattern: ""
+								schema.MapAttribute{        /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Optional additional attributes for the metric source",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+										mapplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: MetricSourceKeyAttributes
+								"metric_source_key_attributes": // Pattern: ""
+								schema.MapAttribute{            /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Required attributes that identify the metric source",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Map{ /*START VALIDATORS*/
+										fwvalidators.NotNullMap(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+										mapplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for identifying the source of metrics for non-Application Signals services",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: MetricType
@@ -1636,6 +1842,53 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		//	      "additionalProperties": false,
 		//	      "description": "A structure that contains information about the metric that the SLO monitors.",
 		//	      "properties": {
+		//	        "CompositeSliConfig": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "CompositeSliComponents": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "OperationName": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "OperationName"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 20,
+		//	              "minItems": 2,
+		//	              "type": "array"
+		//	            },
+		//	            "SelectionConfig": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Pattern": {
+		//	                  "pattern": "^.+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "Type": {
+		//	                  "enum": [
+		//	                    "EXPLICIT",
+		//	                    "PREFIX",
+		//	                    "REGEX"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Type"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SelectionConfig"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "DependencyConfig": {
 		//	          "additionalProperties": false,
 		//	          "description": "Configuration for identifying a dependency and its operation",
@@ -1767,6 +2020,40 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		//	          "type": "array",
 		//	          "uniqueItems": false
 		//	        },
+		//	        "MetricName": {
+		//	          "description": "The name of the metric for non-Application Signals services",
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "MetricSource": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for identifying the source of metrics for non-Application Signals services",
+		//	          "properties": {
+		//	            "MetricSourceAttributes": {
+		//	              "additionalProperties": false,
+		//	              "description": "Optional additional attributes for the metric source",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "type": "string"
+		//	                }
+		//	              }
+		//	            },
+		//	            "MetricSourceKeyAttributes": {
+		//	              "additionalProperties": false,
+		//	              "description": "Required attributes that identify the metric source",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "type": "string"
+		//	                }
+		//	              }
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "MetricSourceKeyAttributes"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "MetricType": {
 		//	          "description": "If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.",
 		//	          "enum": [
@@ -1839,6 +2126,82 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 				// Property: SliMetric
 				"sli_metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CompositeSliConfig
+						"composite_sli_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CompositeSliComponents
+								"composite_sli_components": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: OperationName
+											"operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(2, 20),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SelectionConfig
+								"selection_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Pattern
+										"pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Type
+										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"EXPLICIT",
+													"PREFIX",
+													"REGEX",
+												),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Object{ /*START VALIDATORS*/
+										fwvalidators.NotNullObject(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: DependencyConfig
 						"dependency_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -2054,6 +2417,54 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: MetricName
+						"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the metric for non-Application Signals services",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 255),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MetricSource
+						"metric_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: MetricSourceAttributes
+								"metric_source_attributes": // Pattern: ""
+								schema.MapAttribute{        /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Optional additional attributes for the metric source",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+										mapplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: MetricSourceKeyAttributes
+								"metric_source_key_attributes": // Pattern: ""
+								schema.MapAttribute{            /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Required attributes that identify the metric source",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Map{ /*START VALIDATORS*/
+										fwvalidators.NotNullMap(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+										mapplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for identifying the source of metrics for non-Application Signals services",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: MetricType
 						"metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.",
@@ -2235,6 +2646,8 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		"burn_rate_configurations":       "BurnRateConfigurations",
 		"calendar_interval":              "CalendarInterval",
 		"comparison_operator":            "ComparisonOperator",
+		"composite_sli_components":       "CompositeSliComponents",
+		"composite_sli_config":           "CompositeSliConfig",
 		"created_time":                   "CreatedTime",
 		"dependency_config":              "DependencyConfig",
 		"dependency_key_attributes":      "DependencyKeyAttributes",
@@ -2257,6 +2670,9 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		"metric":                         "Metric",
 		"metric_data_queries":            "MetricDataQueries",
 		"metric_name":                    "MetricName",
+		"metric_source":                  "MetricSource",
+		"metric_source_attributes":       "MetricSourceAttributes",
+		"metric_source_key_attributes":   "MetricSourceKeyAttributes",
 		"metric_stat":                    "MetricStat",
 		"metric_threshold":               "MetricThreshold",
 		"metric_type":                    "MetricType",
@@ -2264,6 +2680,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		"name":                           "Name",
 		"namespace":                      "Namespace",
 		"operation_name":                 "OperationName",
+		"pattern":                        "Pattern",
 		"period":                         "Period",
 		"period_seconds":                 "PeriodSeconds",
 		"reason":                         "Reason",
@@ -2272,6 +2689,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		"request_based_sli_metric":       "RequestBasedSliMetric",
 		"return_data":                    "ReturnData",
 		"rolling_interval":               "RollingInterval",
+		"selection_config":               "SelectionConfig",
 		"sli":                            "Sli",
 		"sli_metric":                     "SliMetric",
 		"start_time":                     "StartTime",
@@ -2279,6 +2697,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		"statistic":                      "Statistic",
 		"tags":                           "Tags",
 		"total_request_count_metric":     "TotalRequestCountMetric",
+		"type":                           "Type",
 		"unit":                           "Unit",
 		"value":                          "Value",
 		"warning_threshold":              "WarningThreshold",

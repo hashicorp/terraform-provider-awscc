@@ -389,6 +389,7 @@
         "DB2_AS400",
         "EXASOL",
         "FILE",
+        "FULLY_MANAGED_KNOWLEDGE_BASE",
         "GITHUB",
         "INTERNATIONAL_DATA_CORPORATION",
         "JIRA",
@@ -426,7 +427,8 @@
         "SHAREPOINT",
         "ONE_DRIVE",
         "WEB_CRAWLER",
-        "BOX"
+        "BOX",
+        "GOOGLESHEETS"
       ]
     },
     "OAuthParameters": {
@@ -595,7 +597,7 @@
       "properties": {
         "Actions": {
           "minItems": 1,
-          "maxItems": 20,
+          "maxItems": 30,
           "description": "<p>The IAM action to grant or revoke permissions on.<\/p>",
           "type": "array",
           "items": {

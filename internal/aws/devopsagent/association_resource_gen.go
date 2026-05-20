@@ -306,8 +306,6 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "Name",
-		//	        "Endpoint",
 		//	        "Tools"
 		//	      ],
 		//	      "type": "object"
@@ -335,8 +333,51 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        }
 		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "MCPServerGrafana": {
+		//	      "additionalProperties": false,
+		//	      "description": "Grafana MCP server configuration",
+		//	      "properties": {
+		//	        "EnableWebhookUpdates": {
+		//	          "description": "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
+		//	          "type": "boolean"
+		//	        },
+		//	        "Endpoint": {
+		//	          "description": "MCP server endpoint URL",
+		//	          "pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$",
+		//	          "type": "string"
+		//	        },
+		//	        "Tools": {
+		//	          "description": "List of tool categories to enable for the Grafana MCP server",
+		//	          "items": {
+		//	            "enum": [
+		//	              "alerting",
+		//	              "annotations",
+		//	              "asserts",
+		//	              "cloudwatch",
+		//	              "dashboard",
+		//	              "datasource",
+		//	              "elasticsearch",
+		//	              "examples",
+		//	              "incident",
+		//	              "loki",
+		//	              "navigation",
+		//	              "oncall",
+		//	              "prometheus",
+		//	              "pyroscope",
+		//	              "rendering",
+		//	              "runpanelquery",
+		//	              "search",
+		//	              "searchlogs",
+		//	              "sift"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        }
+		//	      },
 		//	      "required": [
-		//	        "Name",
 		//	        "Endpoint"
 		//	      ],
 		//	      "type": "object"
@@ -404,10 +445,6 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        }
 		//	      },
-		//	      "required": [
-		//	        "Name",
-		//	        "Endpoint"
-		//	      ],
 		//	      "type": "object"
 		//	    },
 		//	    "PagerDuty": {
@@ -970,7 +1007,6 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$"), ""),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -983,7 +1019,6 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -1042,7 +1077,6 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$"), ""),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -1055,7 +1089,6 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -1063,6 +1096,75 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Datadog MCP server configuration",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MCPServerGrafana
+				"mcp_server_grafana": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EnableWebhookUpdates
+						"enable_webhook_updates": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+							// EnableWebhookUpdates is a write-only property.
+						}, /*END ATTRIBUTE*/
+						// Property: Endpoint
+						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "MCP server endpoint URL",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Tools
+						"tools": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of tool categories to enable for the Grafana MCP server",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.ValueStringsAre(
+									stringvalidator.OneOf(
+										"alerting",
+										"annotations",
+										"asserts",
+										"cloudwatch",
+										"dashboard",
+										"datasource",
+										"elasticsearch",
+										"examples",
+										"incident",
+										"loki",
+										"navigation",
+										"oncall",
+										"prometheus",
+										"pyroscope",
+										"rendering",
+										"runpanelquery",
+										"search",
+										"searchlogs",
+										"sift",
+									),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Grafana MCP server configuration",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1163,7 +1265,6 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$"), ""),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -1176,7 +1277,6 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -1636,6 +1736,7 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		"linked_association_ids":   "LinkedAssociationIds",
 		"mcp_server":               "MCPServer",
 		"mcp_server_datadog":       "MCPServerDatadog",
+		"mcp_server_grafana":       "MCPServerGrafana",
 		"mcp_server_new_relic":     "MCPServerNewRelic",
 		"mcp_server_sig_v4":        "MCPServerSigV4",
 		"mcp_server_splunk":        "MCPServerSplunk",
@@ -1672,6 +1773,7 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Configuration/MCPServer/EnableWebhookUpdates",
 		"/properties/Configuration/MCPServerDatadog/EnableWebhookUpdates",
 		"/properties/Configuration/MCPServerSplunk/EnableWebhookUpdates",
+		"/properties/Configuration/MCPServerGrafana/EnableWebhookUpdates",
 		"/properties/Configuration/GitLab/EnableWebhookUpdates",
 		"/properties/Configuration/PagerDuty/EnableWebhookUpdates",
 		"/properties/Configuration/EventChannel/EnableWebhookUpdates",

@@ -254,7 +254,10 @@
           "description": "The access point ARN used when evaluating a metrics filter.",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "Id"
+      ]
     },
     "InventoryConfiguration": {
       "description": "Specifies an inventory configuration for an Amazon S3 Express bucket",

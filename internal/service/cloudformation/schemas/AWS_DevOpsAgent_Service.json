@@ -25,7 +25,7 @@
       ]
     },
     "ServiceDetails": {
-      "description": "Service-specific configuration details",
+      "description": "Service-specific configuration details - only MCPServerSigV4 supports in-place updates, all other service types require replacement when modified",
       "type": "object",
       "oneOf": [
         {
@@ -1079,7 +1079,14 @@
   ],
   "createOnlyProperties": [
     "/properties/ServiceType",
-    "/properties/ServiceDetails",
+    "/properties/ServiceDetails/Dynatrace",
+    "/properties/ServiceDetails/MCPServer",
+    "/properties/ServiceDetails/MCPServerSplunk",
+    "/properties/ServiceDetails/MCPServerNewRelic",
+    "/properties/ServiceDetails/GitLab",
+    "/properties/ServiceDetails/ServiceNow",
+    "/properties/ServiceDetails/PagerDuty",
+    "/properties/ServiceDetails/AzureIdentity",
     "/properties/KmsKeyArn"
   ],
   "primaryIdentifier": [
@@ -1113,6 +1120,7 @@
     },
     "update": {
       "permissions": [
+        "aidevops:UpdateService",
         "aidevops:GetService",
         "aidevops:TagResource",
         "aidevops:UntagResource",

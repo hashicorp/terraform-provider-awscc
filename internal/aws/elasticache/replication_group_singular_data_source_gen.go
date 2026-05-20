@@ -658,11 +658,11 @@ func replicationGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An optional parameter that specifies the number of replica nodes in each node group (shard). Valid values are 0 to 5.",
+		//	  "description": "An optional parameter that specifies the number of replica nodes in each node group (shard). Valid values are 0 to 5.\n\n**Note:** Using ReplicasPerNodeGroup with NodeGroupConfiguration results in resource replacement. For online scaling, use ReplicasPerNodeGroup alone.",
 		//	  "type": "integer"
 		//	}
 		"replicas_per_node_group": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "An optional parameter that specifies the number of replica nodes in each node group (shard). Valid values are 0 to 5.",
+			Description: "An optional parameter that specifies the number of replica nodes in each node group (shard). Valid values are 0 to 5.\n\n**Note:** Using ReplicasPerNodeGroup with NodeGroupConfiguration results in resource replacement. For online scaling, use ReplicasPerNodeGroup alone.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ReplicationGroupDescription

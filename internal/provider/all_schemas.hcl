@@ -752,6 +752,10 @@ resource_schema "aws_bedrockagentcore_o_auth_2_credential_provider" {
   cloudformation_type_name = "AWS::BedrockAgentCore::OAuth2CredentialProvider"
 }
 
+resource_schema "aws_bedrockagentcore_payment_credential_provider" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::PaymentCredentialProvider"
+}
+
 resource_schema "aws_bedrockagentcore_policy" {
   cloudformation_type_name               = "AWS::BedrockAgentCore::Policy"
   suppress_plural_data_source_generation = true

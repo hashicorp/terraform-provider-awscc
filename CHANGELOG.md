@@ -1,4 +1,15 @@
-## 1.85.0 (Unreleased)
+## 1.85.0 (May 20, 2026)
+
+BUG FIXES:
+
+* provider: Fix diff showing after upgrade for resources whose list-type attributes (e.g. `tags`, `vpc_config.subnet_ids`, `load_balancer_attributes`) were stored in a different order than CloudFormation returns them. ([#3059](https://github.com/hashicorp/terraform-provider-awscc/issues/3059))
+
+FEATURES:
+
+* **New Data Source:** `awscc_bedrockagentcore_payment_credential_provider`
+* **New Data Source:** `awscc_bedrockagentcore_payment_credential_providers`
+* **New List Resource:** `awscc_bedrockagentcore_payment_credential_provider`
+* **New Resource:** `awscc_bedrockagentcore_payment_credential_provider`
 
 ## 1.84.0 (May 13, 2026)
 

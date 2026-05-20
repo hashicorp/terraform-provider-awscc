@@ -60,11 +60,11 @@ output "snapshot_arn" {
 
 ### Required
 
+- `graph_identifier` (String) The unique identifier of the Neptune Analytics graph to create the snapshot from.
 - `snapshot_name` (String) The snapshot name.
 
 ### Optional
 
-- `graph_identifier` (String) The unique identifier of the Neptune Analytics graph to create the snapshot from.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

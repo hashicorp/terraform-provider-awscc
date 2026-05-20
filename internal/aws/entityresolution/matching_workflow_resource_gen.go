@@ -195,12 +195,15 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "CustomerProfilesIntegrationConfig": {
 		//	        "additionalProperties": false,
+		//	        "description": "The Customer Profiles integration configuration for the output source",
 		//	        "properties": {
 		//	          "DomainArn": {
+		//	            "description": "The Amazon Resource Name (ARN) of the Customer Profiles domain",
 		//	            "pattern": "^arn:(aws|aws-us-gov|aws-cn):profile:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(domains/[a-zA-Z_0-9-]{1,255})$",
 		//	            "type": "string"
 		//	          },
 		//	          "ObjectTypeArn": {
+		//	            "description": "The Amazon Resource Name (ARN) of the Customer Profiles object type",
 		//	            "pattern": "^arn:(aws|aws-us-gov|aws-cn):profile:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(domains/[a-zA-Z_0-9-]{1,255}/object-types/[a-zA-Z_0-9-]{1,255})$",
 		//	            "type": "string"
 		//	          }
@@ -270,8 +273,9 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: DomainArn
 							"domain_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Description: "The Amazon Resource Name (ARN) of the Customer Profiles domain",
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn):profile:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(domains/[a-zA-Z_0-9-]{1,255})$"), ""),
 									fwvalidators.NotNullString(),
@@ -282,8 +286,9 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: ObjectTypeArn
 							"object_type_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Description: "The Amazon Resource Name (ARN) of the Customer Profiles object type",
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn):profile:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(domains/[a-zA-Z_0-9-]{1,255}/object-types/[a-zA-Z_0-9-]{1,255})$"), ""),
 									fwvalidators.NotNullString(),
@@ -293,8 +298,9 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
-						Computed: true,
+						Description: "The Customer Profiles integration configuration for the output source",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -473,6 +479,17 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		//	    "RuleConditionProperties": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "MatchingConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for matching behavior within rule condition properties",
+		//	          "properties": {
+		//	            "EnableTransitiveMatching": {
+		//	              "description": "Enables transitive matching to process records across all rule levels and connect unmatched records to existing match groups",
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "Rules": {
 		//	          "insertionOrder": false,
 		//	          "items": {
@@ -665,6 +682,26 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 				// Property: RuleConditionProperties
 				"rule_condition_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MatchingConfig
+						"matching_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EnableTransitiveMatching
+								"enable_transitive_matching": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Enables transitive matching to process records across all rule levels and connect unmatched records to existing match groups",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for matching behavior within rule condition properties",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: Rules
 						"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -884,6 +921,7 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		"customer_profiles_integration_config": "CustomerProfilesIntegrationConfig",
 		"description":                          "Description",
 		"domain_arn":                           "DomainArn",
+		"enable_transitive_matching":           "EnableTransitiveMatching",
 		"hashed":                               "Hashed",
 		"incremental_run_config":               "IncrementalRunConfig",
 		"incremental_run_type":                 "IncrementalRunType",
@@ -894,6 +932,7 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		"key":                                  "Key",
 		"kms_arn":                              "KMSArn",
 		"match_purpose":                        "MatchPurpose",
+		"matching_config":                      "MatchingConfig",
 		"matching_keys":                        "MatchingKeys",
 		"name":                                 "Name",
 		"object_type_arn":                      "ObjectTypeArn",
