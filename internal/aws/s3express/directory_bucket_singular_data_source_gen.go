@@ -492,6 +492,9 @@ func directoryBucketDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	        "type": "string"
 		//	      }
 		//	    },
+		//	    "required": [
+		//	      "Id"
+		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array",

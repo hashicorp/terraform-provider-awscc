@@ -200,6 +200,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "POST_SCALE_UP",
 		//	                "TEST_TRAFFIC_SHIFT",
 		//	                "POST_TEST_TRAFFIC_SHIFT",
+		//	                "PRE_PRODUCTION_TRAFFIC_SHIFT",
 		//	                "PRODUCTION_TRAFFIC_SHIFT",
 		//	                "POST_PRODUCTION_TRAFFIC_SHIFT"
 		//	              ],
@@ -211,11 +212,36 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "RoleArn": {
 		//	            "description": "The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS permission to call Lambda functions on your behalf.\n For more information, see [Permissions required for Lambda functions in Amazon ECS blue/green deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-permissions.html) in the *Amazon Elastic Container Service Developer Guide*.",
 		//	            "type": "string"
+		//	          },
+		//	          "TargetType": {
+		//	            "description": "",
+		//	            "enum": [
+		//	              "AWS_LAMBDA",
+		//	              "PAUSE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "TimeoutConfiguration": {
+		//	            "additionalProperties": false,
+		//	            "description": "",
+		//	            "properties": {
+		//	              "Action": {
+		//	                "enum": [
+		//	                  "ROLLBACK",
+		//	                  "CONTINUE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "TimeoutInMinutes": {
+		//	                "maximum": 20160,
+		//	                "minimum": 1,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "type": "object"
 		//	          }
 		//	        },
 		//	        "required": [
-		//	          "HookTargetArn",
-		//	          "RoleArn",
 		//	          "LifecycleStages"
 		//	        ],
 		//	        "type": "object"
@@ -349,6 +375,26 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 							// Property: RoleArn
 							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS permission to call Lambda functions on your behalf.\n For more information, see [Permissions required for Lambda functions in Amazon ECS blue/green deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-permissions.html) in the *Amazon Elastic Container Service Developer Guide*.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TargetType
+							"target_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TimeoutConfiguration
+							"timeout_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Action
+									"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: TimeoutInMinutes
+									"timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -1703,6 +1749,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_log_configuration":          "AccessLogConfiguration",
+		"action":                            "Action",
 		"advanced_configuration":            "AdvancedConfiguration",
 		"alarm_names":                       "AlarmNames",
 		"alarms":                            "Alarms",
@@ -1798,11 +1845,14 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tag_specifications":                "TagSpecifications",
 		"tags":                              "Tags",
 		"target_group_arn":                  "TargetGroupArn",
+		"target_type":                       "TargetType",
 		"task_definition":                   "TaskDefinition",
 		"test_listener_rule":                "TestListenerRule",
 		"test_traffic_rules":                "TestTrafficRules",
 		"throughput":                        "Throughput",
 		"timeout":                           "Timeout",
+		"timeout_configuration":             "TimeoutConfiguration",
+		"timeout_in_minutes":                "TimeoutInMinutes",
 		"tls":                               "Tls",
 		"type":                              "Type",
 		"value":                             "Value",

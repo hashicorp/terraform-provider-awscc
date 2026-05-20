@@ -431,6 +431,53 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		//	      "additionalProperties": false,
 		//	      "description": "This structure contains the information about the metric that is used for a request-based SLO.",
 		//	      "properties": {
+		//	        "CompositeSliConfig": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "CompositeSliComponents": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "OperationName": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "OperationName"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 20,
+		//	              "minItems": 2,
+		//	              "type": "array"
+		//	            },
+		//	            "SelectionConfig": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Pattern": {
+		//	                  "pattern": "^.+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "Type": {
+		//	                  "enum": [
+		//	                    "EXPLICIT",
+		//	                    "PREFIX",
+		//	                    "REGEX"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Type"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SelectionConfig"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "DependencyConfig": {
 		//	          "additionalProperties": false,
 		//	          "description": "Configuration for identifying a dependency and its operation",
@@ -465,6 +512,40 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		//	              "type": "string"
 		//	            }
 		//	          }
+		//	        },
+		//	        "MetricName": {
+		//	          "description": "The name of the metric for non-Application Signals services",
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "MetricSource": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for identifying the source of metrics for non-Application Signals services",
+		//	          "properties": {
+		//	            "MetricSourceAttributes": {
+		//	              "additionalProperties": false,
+		//	              "description": "Optional additional attributes for the metric source",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "type": "string"
+		//	                }
+		//	              }
+		//	            },
+		//	            "MetricSourceKeyAttributes": {
+		//	              "additionalProperties": false,
+		//	              "description": "Required attributes that identify the metric source",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "type": "string"
+		//	                }
+		//	              }
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "MetricSourceKeyAttributes"
+		//	          ],
+		//	          "type": "object"
 		//	        },
 		//	        "MetricType": {
 		//	          "description": "If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.",
@@ -799,6 +880,38 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 				// Property: RequestBasedSliMetric
 				"request_based_sli_metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CompositeSliConfig
+						"composite_sli_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CompositeSliComponents
+								"composite_sli_components": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: OperationName
+											"operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: SelectionConfig
+								"selection_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Pattern
+										"pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Type
+										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: DependencyConfig
 						"dependency_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -823,6 +936,32 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 						schema.MapAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Description: "This is a string-to-string map that contains information about the type of object that this SLO is related to.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MetricName
+						"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the metric for non-Application Signals services",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MetricSource
+						"metric_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: MetricSourceAttributes
+								"metric_source_attributes": // Pattern: ""
+								schema.MapAttribute{        /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Optional additional attributes for the metric source",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: MetricSourceKeyAttributes
+								"metric_source_key_attributes": // Pattern: ""
+								schema.MapAttribute{            /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Required attributes that identify the metric source",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for identifying the source of metrics for non-Application Signals services",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: MetricType
@@ -1136,6 +1275,53 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		//	      "additionalProperties": false,
 		//	      "description": "A structure that contains information about the metric that the SLO monitors.",
 		//	      "properties": {
+		//	        "CompositeSliConfig": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "CompositeSliComponents": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "OperationName": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "OperationName"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 20,
+		//	              "minItems": 2,
+		//	              "type": "array"
+		//	            },
+		//	            "SelectionConfig": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Pattern": {
+		//	                  "pattern": "^.+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "Type": {
+		//	                  "enum": [
+		//	                    "EXPLICIT",
+		//	                    "PREFIX",
+		//	                    "REGEX"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Type"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SelectionConfig"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "DependencyConfig": {
 		//	          "additionalProperties": false,
 		//	          "description": "Configuration for identifying a dependency and its operation",
@@ -1267,6 +1453,40 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		//	          "type": "array",
 		//	          "uniqueItems": false
 		//	        },
+		//	        "MetricName": {
+		//	          "description": "The name of the metric for non-Application Signals services",
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "MetricSource": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for identifying the source of metrics for non-Application Signals services",
+		//	          "properties": {
+		//	            "MetricSourceAttributes": {
+		//	              "additionalProperties": false,
+		//	              "description": "Optional additional attributes for the metric source",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "type": "string"
+		//	                }
+		//	              }
+		//	            },
+		//	            "MetricSourceKeyAttributes": {
+		//	              "additionalProperties": false,
+		//	              "description": "Required attributes that identify the metric source",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "type": "string"
+		//	                }
+		//	              }
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "MetricSourceKeyAttributes"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "MetricType": {
 		//	          "description": "If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.",
 		//	          "enum": [
@@ -1319,6 +1539,38 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 				// Property: SliMetric
 				"sli_metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CompositeSliConfig
+						"composite_sli_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CompositeSliComponents
+								"composite_sli_components": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: OperationName
+											"operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: SelectionConfig
+								"selection_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Pattern
+										"pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Type
+										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: DependencyConfig
 						"dependency_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1432,6 +1684,32 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 							Description: "If this SLO monitors a CloudWatch metric or the result of a CloudWatch metric math expression, this structure includes the information about that metric or expression.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: MetricName
+						"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the metric for non-Application Signals services",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MetricSource
+						"metric_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: MetricSourceAttributes
+								"metric_source_attributes": // Pattern: ""
+								schema.MapAttribute{        /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Optional additional attributes for the metric source",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: MetricSourceKeyAttributes
+								"metric_source_key_attributes": // Pattern: ""
+								schema.MapAttribute{            /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Required attributes that identify the metric source",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for identifying the source of metrics for non-Application Signals services",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: MetricType
 						"metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.",
@@ -1536,6 +1814,8 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		"burn_rate_configurations":       "BurnRateConfigurations",
 		"calendar_interval":              "CalendarInterval",
 		"comparison_operator":            "ComparisonOperator",
+		"composite_sli_components":       "CompositeSliComponents",
+		"composite_sli_config":           "CompositeSliConfig",
 		"created_time":                   "CreatedTime",
 		"dependency_config":              "DependencyConfig",
 		"dependency_key_attributes":      "DependencyKeyAttributes",
@@ -1558,6 +1838,9 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		"metric":                         "Metric",
 		"metric_data_queries":            "MetricDataQueries",
 		"metric_name":                    "MetricName",
+		"metric_source":                  "MetricSource",
+		"metric_source_attributes":       "MetricSourceAttributes",
+		"metric_source_key_attributes":   "MetricSourceKeyAttributes",
 		"metric_stat":                    "MetricStat",
 		"metric_threshold":               "MetricThreshold",
 		"metric_type":                    "MetricType",
@@ -1565,6 +1848,7 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		"name":                           "Name",
 		"namespace":                      "Namespace",
 		"operation_name":                 "OperationName",
+		"pattern":                        "Pattern",
 		"period":                         "Period",
 		"period_seconds":                 "PeriodSeconds",
 		"reason":                         "Reason",
@@ -1573,6 +1857,7 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		"request_based_sli_metric":       "RequestBasedSliMetric",
 		"return_data":                    "ReturnData",
 		"rolling_interval":               "RollingInterval",
+		"selection_config":               "SelectionConfig",
 		"sli":                            "Sli",
 		"sli_metric":                     "SliMetric",
 		"start_time":                     "StartTime",
@@ -1580,6 +1865,7 @@ func serviceLevelObjectiveDataSource(ctx context.Context) (datasource.DataSource
 		"statistic":                      "Statistic",
 		"tags":                           "Tags",
 		"total_request_count_metric":     "TotalRequestCountMetric",
+		"type":                           "Type",
 		"unit":                           "Unit",
 		"value":                          "Value",
 		"warning_threshold":              "WarningThreshold",

@@ -516,12 +516,60 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "additionalProperties": false,
 		//	    "description": "Filesystem configuration for the runtime",
 		//	    "properties": {
+		//	      "EfsAccessPoint": {
+		//	        "additionalProperties": false,
+		//	        "description": "Configuration for EFS access point filesystem",
+		//	        "properties": {
+		//	          "AccessPointArn": {
+		//	            "description": "ARN of the EFS access point",
+		//	            "maxLength": 128,
+		//	            "pattern": "^arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:access-point/fsap-[0-9a-f]{8,40}$",
+		//	            "type": "string"
+		//	          },
+		//	          "MountPath": {
+		//	            "description": "Mount path for filesystem configuration",
+		//	            "maxLength": 200,
+		//	            "minLength": 6,
+		//	            "pattern": "^/mnt/[a-zA-Z0-9._-]+/?$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "AccessPointArn",
+		//	          "MountPath"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "S3FilesAccessPoint": {
+		//	        "additionalProperties": false,
+		//	        "description": "Configuration for S3 Files access point filesystem",
+		//	        "properties": {
+		//	          "AccessPointArn": {
+		//	            "description": "ARN of the S3 Files access point",
+		//	            "maxLength": 256,
+		//	            "pattern": "^arn:aws[-a-z]*:s3files:[0-9a-z-:]+:file-system/fs-[0-9a-f]{17,40}/access-point/fsap-[0-9a-f]{17,40}$",
+		//	            "type": "string"
+		//	          },
+		//	          "MountPath": {
+		//	            "description": "Mount path for filesystem configuration",
+		//	            "maxLength": 200,
+		//	            "minLength": 6,
+		//	            "pattern": "^/mnt/[a-zA-Z0-9._-]+/?$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "AccessPointArn",
+		//	          "MountPath"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "SessionStorage": {
 		//	        "additionalProperties": false,
 		//	        "description": "Configuration for session storage",
 		//	        "properties": {
 		//	          "MountPath": {
-		//	            "description": "Mount path for session storage",
+		//	            "description": "Mount path for filesystem configuration",
 		//	            "maxLength": 200,
 		//	            "minLength": 6,
 		//	            "pattern": "^/mnt/[a-zA-Z0-9._-]+/?$",
@@ -536,19 +584,53 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 1,
+		//	  "maxItems": 5,
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
 		"filesystem_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EfsAccessPoint
+					"efs_access_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AccessPointArn
+							"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "ARN of the EFS access point",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MountPath
+							"mount_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Mount path for filesystem configuration",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Configuration for EFS access point filesystem",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: S3FilesAccessPoint
+					"s3_files_access_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AccessPointArn
+							"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "ARN of the S3 Files access point",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MountPath
+							"mount_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Mount path for filesystem configuration",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Configuration for S3 Files access point filesystem",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: SessionStorage
 					"session_storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: MountPath
 							"mount_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Mount path for session storage",
+								Description: "Mount path for filesystem configuration",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -726,7 +808,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "description": "HTTP header name",
 		//	        "maxLength": 256,
 		//	        "minLength": 1,
-		//	        "pattern": "^(Authorization|X-Amzn-Bedrock-AgentCore-Runtime-Custom-[a-zA-Z0-9_-]+)$",
+		//	        "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,255}$",
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 20,
@@ -850,6 +932,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::BedrockAgentCore::Runtime").WithTerraformTypeName("awscc_bedrockagentcore_runtime")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_point_arn":               "AccessPointArn",
 		"agent_runtime_arn":              "AgentRuntimeArn",
 		"agent_runtime_artifact":         "AgentRuntimeArtifact",
 		"agent_runtime_id":               "AgentRuntimeId",
@@ -872,6 +955,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"custom_jwt_authorizer":          "CustomJWTAuthorizer",
 		"description":                    "Description",
 		"discovery_url":                  "DiscoveryUrl",
+		"efs_access_point":               "EfsAccessPoint",
 		"entry_point":                    "EntryPoint",
 		"environment_variables":          "EnvironmentVariables",
 		"failure_reason":                 "FailureReason",
@@ -895,6 +979,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"role_arn":                       "RoleArn",
 		"runtime":                        "Runtime",
 		"s3":                             "S3",
+		"s3_files_access_point":          "S3FilesAccessPoint",
 		"security_groups":                "SecurityGroups",
 		"session_storage":                "SessionStorage",
 		"status":                         "Status",

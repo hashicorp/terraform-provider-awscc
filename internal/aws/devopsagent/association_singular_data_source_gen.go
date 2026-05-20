@@ -286,8 +286,6 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "Name",
-		//	        "Endpoint",
 		//	        "Tools"
 		//	      ],
 		//	      "type": "object"
@@ -315,8 +313,51 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "type": "string"
 		//	        }
 		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "MCPServerGrafana": {
+		//	      "additionalProperties": false,
+		//	      "description": "Grafana MCP server configuration",
+		//	      "properties": {
+		//	        "EnableWebhookUpdates": {
+		//	          "description": "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
+		//	          "type": "boolean"
+		//	        },
+		//	        "Endpoint": {
+		//	          "description": "MCP server endpoint URL",
+		//	          "pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$",
+		//	          "type": "string"
+		//	        },
+		//	        "Tools": {
+		//	          "description": "List of tool categories to enable for the Grafana MCP server",
+		//	          "items": {
+		//	            "enum": [
+		//	              "alerting",
+		//	              "annotations",
+		//	              "asserts",
+		//	              "cloudwatch",
+		//	              "dashboard",
+		//	              "datasource",
+		//	              "elasticsearch",
+		//	              "examples",
+		//	              "incident",
+		//	              "loki",
+		//	              "navigation",
+		//	              "oncall",
+		//	              "prometheus",
+		//	              "pyroscope",
+		//	              "rendering",
+		//	              "runpanelquery",
+		//	              "search",
+		//	              "searchlogs",
+		//	              "sift"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        }
+		//	      },
 		//	      "required": [
-		//	        "Name",
 		//	        "Endpoint"
 		//	      ],
 		//	      "type": "object"
@@ -384,10 +425,6 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "type": "string"
 		//	        }
 		//	      },
-		//	      "required": [
-		//	        "Name",
-		//	        "Endpoint"
-		//	      ],
 		//	      "type": "object"
 		//	    },
 		//	    "PagerDuty": {
@@ -800,6 +837,29 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "Datadog MCP server configuration",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: MCPServerGrafana
+				"mcp_server_grafana": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EnableWebhookUpdates
+						"enable_webhook_updates": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Endpoint
+						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "MCP server endpoint URL",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Tools
+						"tools": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "List of tool categories to enable for the Grafana MCP server",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Grafana MCP server configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: MCPServerNewRelic
 				"mcp_server_new_relic": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1107,6 +1167,7 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"linked_association_ids":   "LinkedAssociationIds",
 		"mcp_server":               "MCPServer",
 		"mcp_server_datadog":       "MCPServerDatadog",
+		"mcp_server_grafana":       "MCPServerGrafana",
 		"mcp_server_new_relic":     "MCPServerNewRelic",
 		"mcp_server_sig_v4":        "MCPServerSigV4",
 		"mcp_server_splunk":        "MCPServerSplunk",

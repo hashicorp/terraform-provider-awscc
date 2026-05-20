@@ -234,11 +234,11 @@ func trustStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "A boolean. When true, performs real-time certificate revocation checks by querying the OCSP endpoint specified within the client certificate.",
 		//	  "type": "boolean"
 		//	}
 		"use_client_certificate_ocsp_endpoint": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "A boolean. When true, performs real-time certificate revocation checks by querying the OCSP endpoint specified within the client certificate.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
